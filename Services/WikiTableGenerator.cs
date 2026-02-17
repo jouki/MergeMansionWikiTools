@@ -58,13 +58,18 @@ public class WikiTableGenerator
 
         // Header
         sb.AppendLine("{| class=\"article-table\"");
-        sb.AppendLine($"|+ <u>{{{{PAGENAME}}}}</u>");
+        // If tableName contains brackets, use text before the bracket; otherwise use {{PAGENAME}}
+        var bracketIdx = tableName.IndexOf('(');
+        var captionName = bracketIdx >= 0
+            ? tableName[..bracketIdx].Trim()
+            : "{{PAGENAME}}";
+        sb.AppendLine($"|+ <u>{captionName}</u>");
         sb.AppendLine("! Lvl");
         sb.AppendLine("! Image");
         sb.AppendLine("! Item");
 
         if (showSellsFor)
-            sb.AppendLine("! [[Coins|Sells for]]");
+            sb.AppendLine("! {{Coins}} [[Coins|Sells for]]");
 
         if (showDrops)
             sb.AppendLine("! Drops");
@@ -72,14 +77,14 @@ public class WikiTableGenerator
         if (showDropValues)
             sb.AppendLine("! Drops Values");
 
+        if (showDecaysInto)
+            sb.AppendLine("! Decays Into");
+
         if (showChargeTime)
             sb.AppendLine("! {{Time}} Charge Time");
 
         if (showRechargeTime)
             sb.AppendLine("! {{Time}} Recharge [[Time]]");
-
-        if (showDecaysInto)
-            sb.AppendLine("! Decays Into");
 
         if (showSpeedUpCost)
             sb.AppendLine("! Speed Up Cost");
@@ -125,6 +130,10 @@ public class WikiTableGenerator
             if (showDropValues)
                 sb.AppendLine($"| {BuildDropValuesCell(item)}");
 
+            // Decays Into
+            if (showDecaysInto)
+                sb.AppendLine($"| {BuildDecaysIntoCell(item)}");
+
             // Charge Time (FirstCycleStartDelay)
             if (showChargeTime)
                 sb.AppendLine($"| {BuildChargeTimeCell(item)}");
@@ -132,10 +141,6 @@ public class WikiTableGenerator
             // Recharge Time
             if (showRechargeTime)
                 sb.AppendLine($"| {BuildRechargeTimeCell(item)}");
-
-            // Decays Into
-            if (showDecaysInto)
-                sb.AppendLine($"| {BuildDecaysIntoCell(item)}");
 
             // Speed Up Cost
             if (showSpeedUpCost)

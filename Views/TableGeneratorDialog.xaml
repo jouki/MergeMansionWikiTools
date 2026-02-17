@@ -60,12 +60,12 @@
                         </StackPanel>
 
                         <StackPanel Grid.Column="1">
-                            <CheckBox x:Name="chkLowPrices">
-                                <CheckBox.Content>
-                                    <TextBlock Text="Low Prices"
-                                               ToolTip="Low Prices sets all prices in chain to 1 Coin (Event Items)" />
-                                </CheckBox.Content>
-                            </CheckBox>
+                            <CheckBox x:Name="chkLowPrices" Content="Low Prices"
+                                      ToolTip="Sets all item prices in chain to 1 Coin (for Event Items)"
+                                      ToolTipService.InitialShowDelay="150" />
+                            <CheckBox x:Name="chkIncludeHeading" Content="Include wiki heading"
+                                      Margin="0,4,0,0"
+                                      ToolTip="Prepends == Statistics == and === Merge Stages === above the table" />
                         </StackPanel>
                     </Grid>
                 </StackPanel>
@@ -82,8 +82,8 @@
                             Margin="0,8,0,0" />
             </Expander>
 
-            <!-- Generate button -->
-            <ui:Button Grid.Row="3" Content="Generate Table"
+            <!-- Refresh button -->
+            <ui:Button Grid.Row="3" x:Name="btnRefresh" Content="Refresh Table"
                        Appearance="Primary" Height="42"
                        HorizontalAlignment="Stretch"
                        Click="BtnGenerate_Click" Margin="0,0,0,12" />
@@ -111,24 +111,27 @@
                 </Grid>
             </Border>
 
-            <!-- Warnings -->
-            <ui:InfoBar x:Name="warningBar" Grid.Row="5" IsOpen="False"
-                        IsClosable="True" Margin="0,8,0,0" />
-
-            <!-- Bottom buttons -->
-            <Grid Grid.Row="6" Margin="0,12,0,0">
+            <!-- Bottom buttons + status -->
+            <Grid Grid.Row="5" Margin="0,12,0,0" MinHeight="50">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
+                <ui:InfoBar x:Name="warningBar" Grid.Column="0" IsOpen="False"
+                            IsClosable="True" VerticalAlignment="Stretch"
+                            Margin="0,0,12,0" />
+
                 <ui:Button Grid.Column="1" Content="Copy to Clipboard"
                            x:Name="btnCopy"
                            Appearance="Secondary" Click="BtnCopy_Click"
-                           Margin="0,0,8,0" Height="38" IsEnabled="False" />
+                           VerticalAlignment="Stretch"
+                           Margin="0,1,8,2" IsEnabled="False" />
                 <ui:Button Grid.Column="2" Content="Close"
-                           Appearance="Secondary" Click="BtnClose_Click" Height="38" />
+                           Appearance="Secondary" Click="BtnClose_Click"
+                           VerticalAlignment="Stretch"
+                           Margin="0,1,0,2" />
             </Grid>
         </Grid>
     </Grid>

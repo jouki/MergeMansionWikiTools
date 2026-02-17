@@ -88,7 +88,7 @@ public partial class ChainBrowserPage : UserControl
     }
 
     private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e) => ApplyFilter();
-    private void CmbFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) => ApplyFilter();
+    private void ChkFilter_Changed(object sender, RoutedEventArgs e) => ApplyFilter();
 
     private void ApplyFilter()
     {
@@ -96,7 +96,6 @@ public partial class ChainBrowserPage : UserControl
 
         var search = txtSearch?.Text?.Trim() ?? "";
         _currentSearch = search;
-        var filterIndex = cmbFilter?.SelectedIndex ?? 0;
 
         IEnumerable<ChainViewModel> filtered = _allChains;
 
@@ -109,16 +108,22 @@ public partial class ChainBrowserPage : UserControl
                 c.Items.Any(i => i.Name.Contains(search, StringComparison.OrdinalIgnoreCase)));
         }
 
-        // Category filter
-        filtered = filterIndex switch
+        // Category filters (combinable — if none checked, show all)
+        bool fGen = chkGenerators?.IsChecked == true;
+        bool fSpawn = chkSpawners?.IsChecked == true;
+        bool fProd = chkProducts?.IsChecked == true;
+        bool fEvent = chkEvent?.IsChecked == true;
+        bool fNamed = chkNamed?.IsChecked == true;
+        bool anyFilter = fGen || fSpawn || fProd || fEvent || fNamed;
+
+        if (anyFilter)
         {
-            1 => filtered.Where(c => c.Source.HasGenerators),
-            2 => filtered.Where(c => c.Source.HasSpawners && !c.Source.HasGenerators),
-            3 => filtered.Where(c => !c.Source.HasGenerators && !c.Source.HasSpawners),
-            4 => filtered.Where(c => c.Source.IsEventChain),
-            5 => filtered.Where(c => c.Source.HasHumanReadableName),
-            _ => filtered
-        };
+            if (fGen) filtered = filtered.Where(c => c.Source.HasGenerators);
+            if (fSpawn) filtered = filtered.Where(c => c.Source.HasSpawners);
+            if (fProd) filtered = filtered.Where(c => !c.Source.HasGenerators && !c.Source.HasSpawners);
+            if (fEvent) filtered = filtered.Where(c => c.Source.IsEventChain);
+            if (fNamed) filtered = filtered.Where(c => c.Source.HasHumanReadableName);
+        }
 
         var result = filtered.ToList();
         lvChains.ItemsSource = result;
@@ -136,17 +141,16 @@ public partial class ChainBrowserPage : UserControl
 
         var search = _currentSearch;
 
-        // No active search — just show plain text
-        if (string.IsNullOrEmpty(search))
-        {
-            tb.Inlines.Clear();
-            tb.Text = vm.DisplayName;
-            return;
-        }
-
         var displayName = vm.DisplayName;
         tb.Text = null; // Clear Text so Inlines take over
         tb.Inlines.Clear();
+
+        // No active search — use single Run for consistent rendering height
+        if (string.IsNullOrEmpty(search))
+        {
+            tb.Inlines.Add(new Run(displayName));
+            return;
+        }
 
         int searchLen = search.Length;
         int pos = 0;
@@ -166,6 +170,51 @@ public partial class ChainBrowserPage : UserControl
 
             // Highlighted match
             tb.Inlines.Add(new Run(displayName[matchIdx..(matchIdx + searchLen)])
+            {
+                FontWeight = FontWeights.ExtraBold,
+                Foreground = HighlightBrush
+            });
+
+            pos = matchIdx + searchLen;
+        }
+    }
+
+    /// <summary>
+    /// Called when each item Name TextBlock is loaded/recycled.
+    /// Applies search highlighting using Inlines if there's an active search.
+    /// </summary>
+    private void TxtItemName_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is not TextBlock tb) return;
+        if (tb.Tag is not ItemViewModel vm) return;
+
+        var search = _currentSearch;
+        var name = vm.Name;
+        tb.Text = null;
+        tb.Inlines.Clear();
+
+        if (string.IsNullOrEmpty(search))
+        {
+            tb.Inlines.Add(new Run(name));
+            return;
+        }
+
+        int searchLen = search.Length;
+        int pos = 0;
+
+        while (pos < name.Length)
+        {
+            int matchIdx = name.IndexOf(search, pos, StringComparison.OrdinalIgnoreCase);
+            if (matchIdx < 0)
+            {
+                tb.Inlines.Add(new Run(name[pos..]));
+                break;
+            }
+
+            if (matchIdx > pos)
+                tb.Inlines.Add(new Run(name[pos..matchIdx]));
+
+            tb.Inlines.Add(new Run(name[matchIdx..(matchIdx + searchLen)])
             {
                 FontWeight = FontWeights.ExtraBold,
                 Foreground = HighlightBrush

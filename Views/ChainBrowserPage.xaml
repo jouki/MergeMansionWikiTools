@@ -34,17 +34,21 @@
             <ui:TextBox x:Name="txtSearch" Grid.Column="0"
                         PlaceholderText="Search chains..."
                         TextChanged="TxtSearch_TextChanged"
-                        Margin="0,0,10,0" />
+                        Margin="0,0,10,0"
+                        Icon="{ui:SymbolIcon Search24}" />
 
-            <ComboBox x:Name="cmbFilter" Grid.Column="1" Width="170" Height="38"
-                      SelectionChanged="CmbFilter_SelectionChanged">
-                <ComboBoxItem Content="All" IsSelected="True" />
-                <ComboBoxItem Content="Generators" />
-                <ComboBoxItem Content="Spawners" />
-                <ComboBoxItem Content="Products" />
-                <ComboBoxItem Content="Event Chains" />
-                <ComboBoxItem Content="Named Chains" />
-            </ComboBox>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <CheckBox x:Name="chkGenerators" Content="Generators"
+                          Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed" Margin="0,0,8,0" />
+                <CheckBox x:Name="chkSpawners" Content="Spawners"
+                          Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed" Margin="0,0,8,0" />
+                <CheckBox x:Name="chkProducts" Content="Products"
+                          Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed" Margin="0,0,8,0" />
+                <CheckBox x:Name="chkEvent" Content="Event"
+                          Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed" Margin="0,0,8,0" />
+                <CheckBox x:Name="chkNamed" Content="Named"
+                          Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed" />
+            </StackPanel>
         </Grid>
 
         <!-- Chain list -->
@@ -86,7 +90,7 @@
                     <DataTemplate>
                         <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
                                 CornerRadius="4"
-                                Margin="0,0,0,3" Padding="0,0,8,0"
+                                Margin="0,0,12,3" Padding="10,0,16,0"
                                 BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
                                 BorderThickness="1">
                             <Expander IsExpanded="False" Background="Transparent"
@@ -95,7 +99,7 @@
                                       HorizontalAlignment="Stretch">
                                 <Expander.Header>
                                     <Grid HorizontalAlignment="Stretch"
-                                          Margin="6,6,40,6">
+                                          Margin="0,6,10,6">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
@@ -155,7 +159,9 @@
                                                     <TextBlock Grid.Column="1"
                                                                Text="{Binding Name}"
                                                                Foreground="#BBBBBB" FontSize="12"
-                                                               VerticalAlignment="Center" />
+                                                               VerticalAlignment="Center"
+                                                               Tag="{Binding}"
+                                                               Loaded="TxtItemName_Loaded" />
                                                     <TextBlock Grid.Column="2"
                                                                Text="{Binding TypeBadge}"
                                                                Foreground="#B0B0B0" FontSize="9"

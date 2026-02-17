@@ -29,6 +29,8 @@ public partial class TableGeneratorDialog : FluentWindow
         chkShowNamePrompt.IsChecked = main.Settings.ShowCustomNamePrompt;
         chkForceNamePrompt.IsChecked = main.Settings.ForceCustomNamePrompt;
         chkLowPrices.IsChecked = chain.IsEventChain ? true : main.Settings.LowPrices;
+
+        Loaded += (_, _) => GenerateTable();
     }
 
     private void ChkShowNamePrompt_Changed(object sender, RoutedEventArgs e)
@@ -53,12 +55,10 @@ public partial class TableGeneratorDialog : FluentWindow
         {
             if (chkForceNamePrompt.IsChecked == true)
             {
-                // Force: always show
                 showPrompt = true;
             }
             else
             {
-                // Show only if name is non-natural or missing
                 showPrompt = !_chain.HasNaturalName || string.IsNullOrEmpty(_chain.OriginalName);
             }
         }
@@ -76,10 +76,13 @@ public partial class TableGeneratorDialog : FluentWindow
                 _tableName = nameDialog.ChosenName;
                 _main.ChainNameService.SetCustomName(_chain.ConfigKey, _tableName);
             }
-            // If skipped, keep current display name
         }
 
-        // ── Generate table ──
+        GenerateTable(showNotification: true);
+    }
+
+    private void GenerateTable(bool showNotification = false)
+    {
         try
         {
             var generator = new WikiTableGenerator(_main.DataService!);
@@ -92,6 +95,10 @@ public partial class TableGeneratorDialog : FluentWindow
 
             var result = generator.Generate(_chain, _tableName, lowPrices, existingTable);
 
+            // Prepend wiki heading if checked
+            if (chkIncludeHeading.IsChecked == true)
+                result = "== Statistics ==\n=== Merge Stages ===\n" + result;
+
             txtOutput.Text = result;
             txtOutput.Visibility = Visibility.Visible;
             txtOutputPlaceholder.Visibility = Visibility.Collapsed;
@@ -103,6 +110,10 @@ public partial class TableGeneratorDialog : FluentWindow
                 warningBar.Message = string.Join("\n", generator.Warnings);
                 warningBar.Severity = InfoBarSeverity.Warning;
                 warningBar.IsOpen = true;
+            }
+            else if (showNotification)
+            {
+                _ = ShowRefreshNotification();
             }
             else
             {
@@ -117,25 +128,39 @@ public partial class TableGeneratorDialog : FluentWindow
         }
     }
 
-    private void BtnCopy_Click(object sender, RoutedEventArgs e)
+    private async Task ShowRefreshNotification()
+    {
+        warningBar.Message = "Table refreshed.";
+        warningBar.Severity = InfoBarSeverity.Informational;
+        warningBar.IsOpen = true;
+
+        await Task.Delay(2000);
+        if (warningBar.Message == "Table refreshed.")
+            warningBar.IsOpen = false;
+    }
+
+    private async void BtnCopy_Click(object sender, RoutedEventArgs e)
     {
         if (!string.IsNullOrEmpty(txtOutput.Text))
         {
-            // Retry clipboard access — sometimes locked by other apps
-            for (int i = 0; i < 10; i++)
+            // SetDataObject with copy=false is fast (no OLE flush).
+            // Data stays on clipboard while the app is running.
+            bool success = false;
+            for (int i = 0; i < 3; i++)
             {
                 try
                 {
-                    Clipboard.SetDataObject(txtOutput.Text, true);
+                    Clipboard.SetDataObject(txtOutput.Text, false);
+                    success = true;
                     break;
                 }
                 catch (System.Runtime.InteropServices.COMException)
                 {
-                    System.Threading.Thread.Sleep(50);
+                    await Task.Delay(100);
                 }
             }
 
-            btnCopy.Content = "Copied!";
+            btnCopy.Content = success ? "Copied!" : "Failed!";
             _ = ResetCopyButton();
         }
     }
