@@ -5,6 +5,7 @@
         xmlns:local="clr-namespace:MergeMansionWikiTools.Views"
         Title="Merge Mansion Wiki Tools" Height="943" Width="1380"
         WindowStartupLocation="CenterScreen"
+        Icon="/Assets/AppLogo.ico"
         ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica">
 
     <Grid>
@@ -31,13 +32,23 @@
                     </Grid.RowDefinitions>
 
                     <!-- App title in sidebar -->
-                    <StackPanel Grid.Row="0" Margin="8,4,8,16">
-                        <TextBlock Text="MM Wiki Tools" FontSize="18" FontWeight="SemiBold"
-                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                        <TextBlock x:Name="txtDataStatus" Text="No data loaded"
-                                   FontSize="11" Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                                   Margin="0,2,0,0" />
-                    </StackPanel>
+                    <Grid Grid.Row="0" Margin="8,4,8,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Source="/Assets/AppLogo.ico"
+                               Width="42" Height="42" Margin="0,0,10,0"
+                               RenderOptions.BitmapScalingMode="HighQuality"
+                               VerticalAlignment="Center" />
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="MM Wiki Tools" FontSize="18" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            <TextBlock x:Name="txtDataStatus" Text="No data loaded"
+                                       FontSize="11" Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                       Margin="0,2,0,0" />
+                        </StackPanel>
+                    </Grid>
 
                     <!-- Nav buttons - Windows Settings style (ListBox with custom template) -->
                     <ListBox x:Name="navList" Grid.Row="1"
@@ -47,14 +58,14 @@
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                <Setter Property="Padding" Value="0" />
+                                <Setter Property="Padding" Value="12,12" />
                                 <Setter Property="Margin" Value="0,3" />
                                 <Setter Property="Cursor" Value="Hand" />
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="ListBoxItem">
                                             <Border x:Name="Bd" CornerRadius="4"
-                                                    Padding="12,12" Background="Transparent">
+                                                    Padding="{TemplateBinding Padding}" Background="Transparent">
                                                 <ContentPresenter />
                                             </Border>
                                             <ControlTemplate.Triggers>
@@ -81,6 +92,43 @@
                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                             </StackPanel>
                         </ListBoxItem>
+                        <ListBoxItem Padding="12,4">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/Assets/ImageSplitterIcon.ico" Width="42" Height="42" Margin="0,0,12,0"
+                                       RenderOptions.BitmapScalingMode="HighQuality"/>
+                                <TextBlock Text="Image Splitter" FontSize="14" VerticalAlignment="Center"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Symbol="DocumentTable24" FontSize="22" Margin="0,0,12,0"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                <TextBlock Text="Wiki Data Parser" FontSize="14" VerticalAlignment="Center"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Symbol="ImageMultiple24" FontSize="22" Margin="0,0,12,0"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                <TextBlock Text="Image Extractor" FontSize="14" VerticalAlignment="Center"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Symbol="ArchiveArrowBack24" FontSize="22" Margin="0,0,12,0"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="Asset Ripper" FontSize="14"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                    <TextBlock Text="experimental" FontSize="10"
+                                               Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                               Margin="0,1,0,0" />
+                                </StackPanel>
+                            </StackPanel>
+                        </ListBoxItem>
                         <ListBoxItem>
                             <StackPanel Orientation="Horizontal">
                                 <ui:SymbolIcon Symbol="Settings24" FontSize="22" Margin="0,0,12,0"
@@ -89,11 +137,19 @@
                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                             </StackPanel>
                         </ListBoxItem>
+                        <ListBoxItem>
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Symbol="Info24" FontSize="22" Margin="0,0,12,0"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                <TextBlock Text="About" FontSize="14" VerticalAlignment="Center"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            </StackPanel>
+                        </ListBoxItem>
                     </ListBox>
 
                     <!-- Version info -->
                     <StackPanel Grid.Row="2" HorizontalAlignment="Center" Margin="0,0,0,6">
-                        <TextBlock Text="v0.5.1" FontSize="10"
+                        <TextBlock Text="v0.7.0" FontSize="10"
                                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                                    HorizontalAlignment="Center" />
                         <TextBlock Text="by Jouki" FontSize="10"

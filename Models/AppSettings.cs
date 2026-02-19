@@ -10,4 +10,19 @@ public class AppSettings
     public bool ShowCustomNamePrompt { get; set; } = true;
     public bool ForceCustomNamePrompt { get; set; } = false;
     public bool LowPrices { get; set; } = false;
+
+    // Image Splitter
+    public string TinifyApiKey { get; set; } = "";
+    public string TinifyApiKey2 { get; set; } = "";
+
+    // Wiki Data Parser — area chunk sizes (default: one chunk of 40)
+    public List<int> AreaChunkSizes { get; set; } = new() { 40 };
+
+    // Image Extractor
+    public string ImageExporterBasePath { get; set; } = "";
+    public string ImageExporterCustomOutputPath { get; set; } = "";
+    public string BundleDownloaderCustomOutputPath { get; set; } = "";
+
+    // Asset Ripper (experimental)
+    public string AssetRipperPath { get; set; } = "";
 }

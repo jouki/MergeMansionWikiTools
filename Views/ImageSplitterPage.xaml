@@ -1,0 +1,53 @@
+<UserControl x:Class="MergeMansionWikiTools.Views.ImageSplitterPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             AllowDrop="True" DragOver="Page_DragOver" Drop="Page_Drop">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#1e1e1e" CornerRadius="8" Margin="0,0,0,15"
+                BorderBrush="#333" BorderThickness="1">
+            <Grid>
+                <Image x:Name="imgPreview" Margin="15"/>
+                <ui:TextBlock x:Name="txtPlaceholder" Text="Drag your source image here"
+                              HorizontalAlignment="Center" VerticalAlignment="Center" Appearance="Tertiary"/>
+            </Grid>
+        </Border>
+
+        <ui:TextBox x:Name="inputIndices" Grid.Row="1"
+                    PlaceholderText="Insert Indexes (ex. 4 5 2 3 1)..."
+                    AcceptsReturn="True"
+                    MinHeight="80"
+                    VerticalContentAlignment="Top"
+                    TextWrapping="Wrap"
+                    Margin="0,0,0,10"
+                    PreviewKeyDown="InputIndices_PreviewKeyDown"/>
+
+        <Grid Grid.Row="2" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <ui:Button x:Name="btnOpenOptimize" Grid.Column="0"
+                       Content="Optimise generated PNGs (TinyPNG)"
+                       Icon="ArrowDownload24" Appearance="Secondary"
+                       Visibility="Collapsed" Click="BtnOpenOptimize_Click"
+                       Height="45" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
+
+            <ui:Button Grid.Column="1" Content="Split Images"
+                       Icon="Play24" Appearance="Primary"
+                       Width="180" Height="45" Click="BtnProcess_Click"
+                       Margin="10,0,0,0" VerticalAlignment="Bottom"/>
+        </Grid>
+
+        <ui:InfoBar x:Name="infoBar" Grid.Row="3" IsOpen="True" IsClosable="True" Title="Status"/>
+    </Grid>
+</UserControl>

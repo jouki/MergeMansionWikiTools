@@ -9,6 +9,7 @@
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <SelfContained>true</SelfContained>
     <PublishSingleFile>true</PublishSingleFile>
+    <ApplicationIcon>Assets\AppLogo.ico</ApplicationIcon>
     <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
     <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
@@ -16,7 +17,15 @@
 
   <ItemGroup>
     <PackageReference Include="WPF-UI" Version="4.2.0" />
-    <PackageReference Include="System.Text.Json" Version="9.0.1" />
+    <PackageReference Include="System.Text.Json" Version="9.0.3" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
+    <PackageReference Include="Tinify" Version="1.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\ImageSplitterIcon.ico" />
+    <Resource Include="Assets\AppLogo.ico" />
+    <Resource Include="Assets\AppAboutLogo.jpg" />
   </ItemGroup>
 
 </Project>

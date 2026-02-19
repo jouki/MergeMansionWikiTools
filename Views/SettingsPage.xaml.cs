@@ -1,5 +1,9 @@
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Navigation;
 using Microsoft.Win32;
 
 namespace MergeMansionWikiTools.Views;
@@ -17,6 +21,12 @@ public partial class SettingsPage : UserControl
         txtChainPath.Text = _main.Settings.ChainItemOddsPath;
         txtAreasPath.Text = _main.Settings.AreasJsonPath;
         txtEventsPath.Text = _main.Settings.EventsJsonPath;
+        txtTinifyKey.Text = _main.Settings.TinifyApiKey;
+        txtTinifyKey2.Text = _main.Settings.TinifyApiKey2;
+        txtImageBasePath.Text = _main.Settings.ImageExporterBasePath;
+
+        // Build chunk size rows
+        BuildChunkRows();
     }
 
     // ── Drag & Drop ──
@@ -114,6 +124,171 @@ public partial class SettingsPage : UserControl
         {
             _main.ShowStatus("File not found. Please select a valid JSON file.", Wpf.Ui.Controls.InfoBarSeverity.Error);
         }
+    }
+
+    // ── TinyPNG API Keys ──
+
+    private void SaveTinifyKey_Click(object sender, RoutedEventArgs e)
+    {
+        _main.Settings.TinifyApiKey = txtTinifyKey.Text.Trim();
+        _main.SaveSettings();
+        _main.ShowStatus("Primary TinyPNG API key saved.", Wpf.Ui.Controls.InfoBarSeverity.Success);
+    }
+
+    private void SaveTinifyKey2_Click(object sender, RoutedEventArgs e)
+    {
+        _main.Settings.TinifyApiKey2 = txtTinifyKey2.Text.Trim();
+        _main.SaveSettings();
+        _main.ShowStatus("Secondary TinyPNG API key saved.", Wpf.Ui.Controls.InfoBarSeverity.Success);
+    }
+
+    // ── Hyperlink ──
+
+    private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+    {
+        Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
+        e.Handled = true;
+    }
+
+    // ── Section highlights (called from WikiDataParserPage links) ──
+
+    public void HighlightChainSection() => HighlightBorder(chainSectionBorder);
+    public void HighlightAreasSection() => HighlightBorder(areasSectionBorder);
+    public void HighlightChunkSizes() => HighlightBorder(expertChunkCard);
+
+    private static void HighlightBorder(Border border)
+    {
+        border.BringIntoView();
+
+        // Initialize to the same color as To= so FillBehavior.Stop has no visual snap
+        var brush = new SolidColorBrush(Color.FromArgb(0, 255, 180, 0));
+        border.Background = brush;
+
+        var anim = new ColorAnimation
+        {
+            From = Color.FromArgb(70, 255, 180, 0),
+            To = Color.FromArgb(0, 255, 180, 0),
+            Duration = new Duration(TimeSpan.FromSeconds(2)),
+            AutoReverse = false,
+            FillBehavior = System.Windows.Media.Animation.FillBehavior.Stop
+        };
+        // Re-apply the DynamicResource binding after animation ends so card background is restored
+        anim.Completed += (_, _) =>
+            border.SetResourceReference(Border.BackgroundProperty, "CardBackgroundFillColorDefaultBrush");
+
+        brush.BeginAnimation(SolidColorBrush.ColorProperty, anim);
+    }
+
+    // ── Image Extractor — base path ──
+
+    private void BrowseImageBasePath_Click(object sender, RoutedEventArgs e)
+    {
+        var dlg = new OpenFolderDialog { Title = "Select PNG source base path" };
+        if (!string.IsNullOrEmpty(_main.Settings.ImageExporterBasePath) &&
+            System.IO.Directory.Exists(_main.Settings.ImageExporterBasePath))
+            dlg.InitialDirectory = _main.Settings.ImageExporterBasePath;
+
+        if (dlg.ShowDialog() == true)
+        {
+            txtImageBasePath.Text = dlg.FolderName;
+            _main.Settings.ImageExporterBasePath = dlg.FolderName;
+            _main.SaveSettings();
+        }
+    }
+
+    private void ClearImageBasePath_Click(object sender, RoutedEventArgs e)
+    {
+        txtImageBasePath.Text = "";
+        _main.Settings.ImageExporterBasePath = "";
+        _main.SaveSettings();
+    }
+
+    // ── Expert — chunk sizes ──
+
+    private void BuildChunkRows()
+    {
+        chunksPanel.Children.Clear();
+        var sizes = _main.Settings.AreaChunkSizes;
+        if (sizes == null || sizes.Count == 0) sizes = new List<int> { 40 };
+
+        foreach (var size in sizes)
+            AddChunkRow(size);
+
+        UpdateRemoveButtons();
+    }
+
+    private void AddChunkRow(int value = 40)
+    {
+        var row = new Grid { Margin = new Thickness(0, 0, 0, 6) };
+        row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(90) });
+        row.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+
+        var tb = new Wpf.Ui.Controls.TextBox
+        {
+            Text = value.ToString(),
+            PlaceholderText = "40",
+            Height = 34
+        };
+        tb.TextChanged += (_, _) => SaveChunkSizesAuto();
+        Grid.SetColumn(tb, 0);
+
+        var removeBtn = new Wpf.Ui.Controls.Button
+        {
+            Content = "×",
+            Appearance = Wpf.Ui.Controls.ControlAppearance.Secondary,
+            Height = 34,
+            Width = 34,
+            Padding = new Thickness(0),
+            Margin = new Thickness(8, 0, 0, 0),
+            Visibility = Visibility.Collapsed
+        };
+        removeBtn.Click += (_, _) =>
+        {
+            chunksPanel.Children.Remove(row);
+            UpdateRemoveButtons();
+            SaveChunkSizesAuto();
+        };
+        Grid.SetColumn(removeBtn, 1);
+
+        row.Children.Add(tb);
+        row.Children.Add(removeBtn);
+        chunksPanel.Children.Add(row);
+    }
+
+    private void BtnAddChunk_Click(object sender, RoutedEventArgs e)
+    {
+        AddChunkRow();
+        UpdateRemoveButtons();
+        SaveChunkSizesAuto();
+    }
+
+    private void UpdateRemoveButtons()
+    {
+        for (int i = 0; i < chunksPanel.Children.Count; i++)
+        {
+            if (chunksPanel.Children[i] is Grid row)
+            {
+                var btn = row.Children.OfType<Wpf.Ui.Controls.Button>().FirstOrDefault();
+                if (btn != null)
+                    btn.Visibility = i == 0 ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+    }
+
+    private void SaveChunkSizesAuto()
+    {
+        var sizes = new List<int>();
+        foreach (Grid row in chunksPanel.Children)
+        {
+            var tb = row.Children.OfType<Wpf.Ui.Controls.TextBox>().FirstOrDefault();
+            if (tb != null && int.TryParse(tb.Text.Trim(), out var n) && n > 0)
+                sizes.Add(n);
+        }
+
+        if (sizes.Count == 0) sizes.Add(40);
+
+        _main.Settings.AreaChunkSizes = sizes;
+        _main.SaveSettings();
     }
 
     // ── Helpers ──

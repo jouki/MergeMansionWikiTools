@@ -239,4 +239,20 @@ public partial class ChainBrowserPage : UserControl
         dialog.Owner = Window.GetWindow(this);
         dialog.ShowDialog();
     }
+
+    private void GenerateInfobox_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Wpf.Ui.Controls.Button btn || btn.Tag is not ChainViewModel vm)
+            return;
+
+        if (_main.DataService == null)
+        {
+            _main.ShowStatus("No data loaded.", InfoBarSeverity.Error);
+            return;
+        }
+
+        var dialog = new InfoboxGeneratorDialog(_main, vm.Source);
+        dialog.Owner = Window.GetWindow(this);
+        dialog.ShowDialog();
+    }
 }

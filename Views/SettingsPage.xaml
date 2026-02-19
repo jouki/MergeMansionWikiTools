@@ -3,6 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
 
+    <UserControl.Resources>
+        <Style TargetType="Hyperlink">
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+            <Setter Property="TextDecorations" Value="Underline" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#CB9CFD" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
     <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="24,16">
         <StackPanel MaxWidth="700">
 
@@ -10,95 +22,243 @@
                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                        Margin="4,0,0,24" />
 
-            <!-- chain_item_odds.json -->
-            <TextBlock Text="Item Data (chain_item_odds.json)" FontSize="14" FontWeight="SemiBold"
+            <!-- ══════════════════════════════════════════════════
+                 DUMP FILES
+                 ══════════════════════════════════════════════════ -->
+            <TextBlock Text="Dump Files" FontSize="16" FontWeight="SemiBold"
                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                       Margin="4,0,0,8" />
-            <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    CornerRadius="4" Padding="12"
-                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
+                       Margin="4,0,0,10" />
 
-                    <Border Grid.Column="0" AllowDrop="True" DragOver="FileDragOver" Drop="ChainFileDrop"
-                            Background="Transparent" Margin="0,0,8,0">
-                        <ui:TextBox x:Name="txtChainPath"
-                                    PlaceholderText="Drag file here or browse..."
-                                    IsReadOnly="True"
-                                    AllowDrop="False" IsHitTestVisible="False" />
+            <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    CornerRadius="8"
+                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                <StackPanel>
+
+                    <!-- chain_item_odds.json -->
+                    <Border x:Name="chainSectionBorder" CornerRadius="4">
+                    <StackPanel Margin="16,14,16,12">
+                        <TextBlock Text="chain_item_odds.json" FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                   Margin="0,0,0,8" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" AllowDrop="True" DragOver="FileDragOver" Drop="ChainFileDrop"
+                                    Background="Transparent" Margin="0,0,8,0">
+                                <ui:TextBox x:Name="txtChainPath"
+                                            PlaceholderText="Drag file here or browse..."
+                                            IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False" />
+                            </Border>
+                            <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
+                                       Click="BrowseChainFile_Click" Margin="0,0,8,0" Height="36" />
+                            <ui:Button Grid.Column="2" Content="Load" Appearance="Primary"
+                                       Click="LoadChainFile_Click" Height="36" />
+                        </Grid>
+                    </StackPanel>
                     </Border>
-                    <ui:Button Grid.Column="1" Content="Browse"
-                               Appearance="Secondary" Click="BrowseChainFile_Click"
-                               Margin="0,0,8,0" Height="36" />
-                    <ui:Button Grid.Column="2" Content="Load"
-                               Appearance="Primary" Click="LoadChainFile_Click" Height="36" />
-                </Grid>
+
+                    <Separator Opacity="0.15" Margin="0" />
+
+                    <!-- areas.json — wrapped for Settings highlight animation -->
+                    <Border x:Name="areasSectionBorder" CornerRadius="4">
+                        <StackPanel Margin="16,14,16,12">
+                            <TextBlock Text="areas.json" FontSize="13" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                       Margin="0,0,0,8" />
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" AllowDrop="True" DragOver="FileDragOver" Drop="AreasFileDrop"
+                                        Background="Transparent" Margin="0,0,8,0">
+                                    <ui:TextBox x:Name="txtAreasPath"
+                                                PlaceholderText="Drag file here or browse..."
+                                                IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False" />
+                                </Border>
+                                <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
+                                           Click="BrowseAreasFile_Click" Height="36" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <Separator Opacity="0.15" Margin="0" />
+
+                    <!-- events.json -->
+                    <StackPanel Margin="16,14,16,12">
+                        <TextBlock Text="events.json" FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                   Margin="0,0,0,8" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" AllowDrop="True" DragOver="FileDragOver" Drop="EventsFileDrop"
+                                    Background="Transparent" Margin="0,0,8,0">
+                                <ui:TextBox x:Name="txtEventsPath"
+                                            PlaceholderText="Drag file here or browse..."
+                                            IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False" />
+                            </Border>
+                            <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
+                                       Click="BrowseEventsFile_Click" Height="36" />
+                        </Grid>
+                    </StackPanel>
+
+                </StackPanel>
             </Border>
 
-            <Separator Margin="0,20,0,20" Opacity="0.2" />
+            <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
+                       Margin="4,6,0,0">
+                <Run Text="File paths are saved automatically and persist between sessions." />
+            </TextBlock>
 
-            <!-- areas.json -->
-            <TextBlock Text="Areas Data (areas.json)" FontSize="14" FontWeight="SemiBold"
+            <!-- ══════════════════════════════════════════════════
+                 IMAGE SPLITTER
+                 ══════════════════════════════════════════════════ -->
+            <TextBlock Text="Image Splitter" FontSize="16" FontWeight="SemiBold"
                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                       Margin="4,0,0,8" />
-            <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    CornerRadius="4" Padding="12"
-                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
+                       Margin="4,28,0,10" />
 
-                    <Border Grid.Column="0" AllowDrop="True" DragOver="FileDragOver" Drop="AreasFileDrop"
-                            Background="Transparent" Margin="0,0,8,0">
-                        <ui:TextBox x:Name="txtAreasPath"
-                                    PlaceholderText="Drag file here or browse..."
-                                    IsReadOnly="True"
-                                    AllowDrop="False" IsHitTestVisible="False" />
-                    </Border>
-                    <ui:Button Grid.Column="1" Content="Browse"
-                               Appearance="Secondary" Click="BrowseAreasFile_Click" Height="36" />
-                </Grid>
+            <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    CornerRadius="8"
+                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                <StackPanel>
+
+                    <!-- Primary TinyPNG API Key -->
+                    <StackPanel Margin="16,14,16,12">
+                        <TextBlock Text="Primary TinyPNG API Key" FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                   Margin="0,0,0,8" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ui:TextBox x:Name="txtTinifyKey"
+                                        PlaceholderText="Enter your primary TinyPNG API key..."
+                                        Margin="0,0,8,0" />
+                            <ui:Button Grid.Column="1" Content="Save" Appearance="Primary"
+                                       Click="SaveTinifyKey_Click" Height="36" />
+                        </Grid>
+                    </StackPanel>
+
+                    <Separator Opacity="0.15" Margin="0" />
+
+                    <!-- Secondary TinyPNG API Key -->
+                    <StackPanel Margin="16,14,16,12">
+                        <TextBlock Text="Secondary TinyPNG API Key" FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                   Margin="0,0,0,4" />
+                        <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                   Margin="0,0,0,8">
+                            <Run Text="Used as fallback if the primary key fails or runs out of credits." />
+                        </TextBlock>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ui:TextBox x:Name="txtTinifyKey2"
+                                        PlaceholderText="Optional — leave empty to skip fallback..."
+                                        Margin="0,0,8,0" />
+                            <ui:Button Grid.Column="1" Content="Save" Appearance="Secondary"
+                                       Click="SaveTinifyKey2_Click" Height="36" />
+                        </Grid>
+                    </StackPanel>
+
+                </StackPanel>
             </Border>
 
-            <Separator Margin="0,20,0,20" Opacity="0.2" />
+            <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
+                       Margin="4,6,0,16"><Run Text="Get your free key at " /><Hyperlink NavigateUri="https://tinify.com/developers" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="tinypng.com (tinify.com)" /></Hyperlink><Run Text="." /></TextBlock>
 
-            <!-- events.json -->
-            <TextBlock Text="Events Data (events.json)" FontSize="14" FontWeight="SemiBold"
+            <!-- ══════════════════════════════════════════════════
+                 IMAGE EXTRACTOR
+                 ══════════════════════════════════════════════════ -->
+            <TextBlock Text="Image Extractor" FontSize="16" FontWeight="SemiBold"
                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                       Margin="4,0,0,8" />
-            <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    CornerRadius="4" Padding="12"
-                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
+                       Margin="4,12,0,10" />
 
-                    <Border Grid.Column="0" AllowDrop="True" DragOver="FileDragOver" Drop="EventsFileDrop"
-                            Background="Transparent" Margin="0,0,8,0">
-                        <ui:TextBox x:Name="txtEventsPath"
-                                    PlaceholderText="Drag file here or browse..."
-                                    IsReadOnly="True"
-                                    AllowDrop="False" IsHitTestVisible="False" />
-                    </Border>
-                    <ui:Button Grid.Column="1" Content="Browse"
-                               Appearance="Secondary" Click="BrowseEventsFile_Click" Height="36" />
-                </Grid>
+            <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    CornerRadius="8"
+                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                <StackPanel>
+
+                    <!-- PNG Source base path -->
+                    <StackPanel Margin="16,14,16,12">
+                        <TextBlock Text="PNG Source Base Path" FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                   Margin="0,0,0,4" />
+                        <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                   TextWrapping="Wrap" Margin="0,0,0,8">
+                            <Run Text="Starting directory for the PNG source folder browser." />
+                        </TextBlock>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ui:TextBox x:Name="txtImageBasePath"
+                                        PlaceholderText="Optional — leave empty to start from default location..."
+                                        IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False"
+                                        Margin="0,0,8,0" />
+                            <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
+                                       Click="BrowseImageBasePath_Click" Margin="0,0,8,0" Height="36" />
+                            <ui:Button Grid.Column="2" Content="Clear" Appearance="Secondary"
+                                       Click="ClearImageBasePath_Click" Height="36" />
+                        </Grid>
+                    </StackPanel>
+
+                </StackPanel>
             </Border>
 
-            <Separator Margin="0,20,0,20" Opacity="0.2" />
+            <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
+                       Margin="4,6,0,24">
+                <Run Text="Path is saved automatically." />
+            </TextBlock>
 
-            <!-- Info -->
-            <TextBlock Text="File paths are saved automatically and persist between sessions."
-                       Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
-                       Margin="4,0,0,0" />
+            <!-- ══════════════════════════════════════════════════
+                 EXPERT SETTINGS
+                 ══════════════════════════════════════════════════ -->
+            <TextBlock Text="Expert Settings" FontSize="20" FontWeight="SemiBold"
+                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                       Margin="4,28,0,16" />
+
+            <TextBlock Text="Wiki Data Parser" FontSize="16" FontWeight="SemiBold"
+                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                       Margin="4,0,0,10" />
+
+            <Border x:Name="expertChunkCard"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    CornerRadius="8"
+                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                <StackPanel>
+
+                    <StackPanel Margin="16,14,16,14">
+                        <TextBlock Text="Area chunk sizes" FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                   Margin="0,0,0,4" />
+                        <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                   TextWrapping="Wrap" Margin="0,0,0,10">
+                            <Run Text="Define how many areas go into each Lua chunk. Areas beyond the defined chunks use 40 as default." />
+                        </TextBlock>
+
+                        <!-- Dynamic chunk rows — built in code-behind -->
+                        <StackPanel x:Name="chunksPanel" Margin="0,0,0,8" />
+
+                        <!-- Add row -->
+                        <ui:Button x:Name="btnAddChunk" Content="+ Add chunk"
+                                   Appearance="Secondary" Height="32"
+                                   Click="BtnAddChunk_Click" HorizontalAlignment="Left" />
+                    </StackPanel>
+
+                </StackPanel>
+            </Border>
 
         </StackPanel>
     </ScrollViewer>

@@ -226,6 +226,17 @@ public class ParsedItem
     public string? DecayIntoItemType { get; set; }
     public string? SpawnDecayIntoItemType { get; set; }
 
+    // Lua generation extras
+    public string Description { get; set; } = "";
+    public bool IsTemporary { get; set; }
+
+    // Sink (Transformative Item)
+    public bool IsSink { get; set; }
+    public List<string>? SinkRequirementItemTypes { get; set; }
+
+    // Depleting spawner
+    public bool DecaysWhenCyclesAreDone { get; set; }
+
     // Original definition reference
     public ItemDefinition? Source { get; set; }
 }

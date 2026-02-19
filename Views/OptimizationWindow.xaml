@@ -1,0 +1,68 @@
+<ui:FluentWindow x:Class="MergeMansionWikiTools.Views.OptimizationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        Title="Sprite Optimisation" Height="650" Width="800"
+        WindowStartupLocation="CenterOwner" ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ui:TitleBar Grid.Row="0" Title="TinyPNG Optimisation" Height="32"/>
+
+        <ui:TextBlock Grid.Row="1" Text="File selection for optimisation" FontTypography="Subtitle" Margin="20,15,20,5"/>
+
+        <ListView x:Name="lvFiles" Grid.Row="2" Background="Transparent" BorderThickness="0" Margin="10,0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="5" Background="Transparent" MouseLeftButtonUp="Grid_MouseLeftButtonUp">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" VerticalAlignment="Center" IsHitTestVisible="False"/>
+
+                        <Image Grid.Column="1" Source="{Binding Thumbnail}" Height="40" Width="40" Margin="10,0"/>
+
+                        <ui:TextBlock Grid.Column="2" Text="{Binding Name}" VerticalAlignment="Center"
+                                      Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+
+                        <StackPanel Grid.Column="3" VerticalAlignment="Center" Margin="20,0">
+                            <ui:TextBlock Text="{Binding OriginalSizeText}" Appearance="Secondary" FontSize="11"/>
+                            <ui:TextBlock Text="{Binding NewSizeText}" FontWeight="Bold" Foreground="#4CAF50"/>
+                        </StackPanel>
+
+                        <ui:TextBlock Grid.Column="4" Text="{Binding SavingsText}" VerticalAlignment="Center"
+                                      Width="60" TextAlignment="Right" Foreground="#4CAF50" FontWeight="SemiBold"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ui:InfoBar x:Name="statusInfo" Grid.Row="3" Margin="20,10" IsClosable="False"/>
+
+        <Grid Grid.Row="4" Margin="20,0,20,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <ProgressBar x:Name="progressBar" VerticalAlignment="Center" Margin="0,0,20,0" Visibility="Collapsed" Height="4"/>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <ui:Button Content="Close" Icon="Dismiss24" Appearance="Secondary" Margin="0,0,10,0" Width="120" Click="BtnClose_Click"/>
+                <ui:Button x:Name="btnRun" Content="Optimise" Icon="ArrowDownload24" Appearance="Primary" Width="160" Click="BtnOptimize_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</ui:FluentWindow>

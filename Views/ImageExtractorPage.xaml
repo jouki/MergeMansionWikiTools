@@ -1,0 +1,200 @@
+<UserControl x:Class="MergeMansionWikiTools.Views.ImageExtractorPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="24,16">
+        <StackPanel MaxWidth="900">
+
+            <TextBlock Text="Image Extractor" FontSize="28" FontWeight="SemiBold"
+                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                       Margin="4,0,0,24" />
+
+            <!-- ══ BUNDLE DOWNLOADER ══════════════════════════════════════ -->
+            <TextBlock Text="Bundle Downloader" FontSize="16" FontWeight="SemiBold"
+                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                       Margin="4,0,0,10" />
+
+            <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    CornerRadius="8"
+                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1"
+                    Margin="0,0,0,8">
+                <StackPanel>
+
+                    <!-- URL list file -->
+                    <StackPanel Margin="16,14,16,12">
+                        <TextBlock Text="URL list file (.txt)" FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                   Margin="0,0,0,8" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" AllowDrop="True"
+                                    DragOver="FileDragOver" Drop="FileApproachDrop"
+                                    Background="Transparent" Margin="0,0,8,0">
+                                <ui:TextBox x:Name="txtFileApproach"
+                                            PlaceholderText="Drag .txt file here or browse..."
+                                            IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False" />
+                            </Border>
+                            <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
+                                       Height="36" Click="BrowseFileApproach_Click" />
+                        </Grid>
+                    </StackPanel>
+
+                    <Separator Opacity="0.15" Margin="0" />
+
+                    <!-- Output folder -->
+                    <StackPanel Margin="16,12">
+                        <TextBlock Text="Output folder" FontSize="12" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                   Margin="0,0,0,6" />
+                        <RadioButton x:Name="rbDlAuto" Content="Auto (next to .txt file)"
+                                     GroupName="DlOutput" IsChecked="True"
+                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                     Checked="DlOutputMode_Changed" />
+                        <TextBlock x:Name="txtDlAutoPath" FontSize="11"
+                                   Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                   Margin="20,2,0,6" TextWrapping="Wrap" />
+                        <RadioButton x:Name="rbDlCustom" Content="Custom..."
+                                     GroupName="DlOutput"
+                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                     Checked="DlOutputMode_Changed" Margin="0,0,0,6" />
+                        <Grid x:Name="dlCustomOutputRow" Visibility="Collapsed">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" AllowDrop="True"
+                                    DragOver="FileDragOver" Drop="DlCustomOutputDrop"
+                                    Background="Transparent" Margin="0,0,8,0">
+                                <ui:TextBox x:Name="txtDlCustomOutput"
+                                            PlaceholderText="Custom output folder..."
+                                            IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False" />
+                            </Border>
+                            <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
+                                       Height="36" Click="BrowseDlCustomOutput_Click" />
+                        </Grid>
+                    </StackPanel>
+
+                    <Separator Opacity="0.15" Margin="0" />
+
+                    <!-- Download action -->
+                    <Grid Margin="16,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <ui:Button x:Name="btnDownload" Grid.Column="0"
+                                   Content="Download" Appearance="Primary"
+                                   Height="38" Padding="20,0"
+                                   Click="BtnDownload_Click" />
+                        <TextBlock x:Name="txtDlProgress" Grid.Column="1"
+                                   FontSize="12" VerticalAlignment="Center"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                   Margin="12,0,0,0" TextWrapping="Wrap" />
+                    </Grid>
+
+                    <ui:InfoBar x:Name="dlInfoBar" IsOpen="False" IsClosable="True"
+                                Margin="16,0,16,12" />
+
+                </StackPanel>
+            </Border>
+
+            <!-- ══ IMAGE EXPORTER ═════════════════════════════════════════ -->
+            <TextBlock Text="Image Exporter" FontSize="16" FontWeight="SemiBold"
+                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                       Margin="4,24,0,10" />
+
+            <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    CornerRadius="8"
+                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1"
+                    Margin="0,0,0,16">
+                <StackPanel>
+
+                    <!-- Source folder -->
+                    <StackPanel Margin="16,14,16,12">
+                        <TextBlock Text="Source folder" FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                   Margin="0,0,0,8" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" AllowDrop="True"
+                                    DragOver="FileDragOver" Drop="ExpSourceDrop"
+                                    Background="Transparent" Margin="0,0,8,0">
+                                <ui:TextBox x:Name="txtExpSource"
+                                            PlaceholderText="Drag folder here or browse..."
+                                            IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False" />
+                            </Border>
+                            <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
+                                       Height="36" Click="BrowseExpSource_Click" />
+                        </Grid>
+                    </StackPanel>
+
+                    <Separator Opacity="0.15" Margin="0" />
+
+                    <!-- Output folder -->
+                    <StackPanel Margin="16,12">
+                        <TextBlock Text="Output folder" FontSize="12" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                   Margin="0,0,0,6" />
+                        <RadioButton x:Name="rbExpAuto"
+                                     GroupName="ExpOutput" IsChecked="True"
+                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                     Checked="ExpOutputMode_Changed">
+                            <TextBlock>
+                                <Run Text='Auto: "' /><Run x:Name="runExpAutoPath" Text="{}{source}" /><Run Text=' - PNGs"' />
+                            </TextBlock>
+                        </RadioButton>
+                        <RadioButton x:Name="rbExpCustom" Content="Custom..."
+                                     GroupName="ExpOutput"
+                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                     Checked="ExpOutputMode_Changed" Margin="0,6,0,6" />
+                        <Grid x:Name="expCustomOutputRow" Visibility="Collapsed">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" AllowDrop="True"
+                                    DragOver="FileDragOver" Drop="ExpCustomOutputDrop"
+                                    Background="Transparent" Margin="0,0,8,0">
+                                <ui:TextBox x:Name="txtExpCustomOutput"
+                                            PlaceholderText="Custom output folder..."
+                                            IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False" />
+                            </Border>
+                            <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
+                                       Height="36" Click="BrowseExpCustomOutput_Click" />
+                        </Grid>
+                    </StackPanel>
+
+                    <Separator Opacity="0.15" Margin="0" />
+
+                    <!-- Export action -->
+                    <Grid Margin="16,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <ui:Button x:Name="btnExport" Grid.Column="0"
+                                   Content="Export" Appearance="Primary"
+                                   Height="38" Padding="20,0"
+                                   Click="BtnExport_Click" />
+                        <TextBlock x:Name="txtExpProgress" Grid.Column="1"
+                                   FontSize="12" VerticalAlignment="Center"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                   Margin="12,0,0,0" TextWrapping="Wrap" />
+                    </Grid>
+
+                    <ui:InfoBar x:Name="expInfoBar" IsOpen="False" IsClosable="True"
+                                Margin="16,0,16,12" />
+
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

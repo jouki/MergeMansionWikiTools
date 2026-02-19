@@ -3,6 +3,7 @@ using MergeMansionWikiTools.Models;
 using MergeMansionWikiTools.Services;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
+using static MergeMansionWikiTools.Services.UserStatsService;
 
 namespace MergeMansionWikiTools.Views;
 
@@ -152,6 +153,7 @@ public partial class TableGeneratorDialog : FluentWindow
                 {
                     Clipboard.SetDataObject(txtOutput.Text, false);
                     success = true;
+                    Increment(s => s.TablesGenerated++);
                     break;
                 }
                 catch (System.Runtime.InteropServices.COMException)

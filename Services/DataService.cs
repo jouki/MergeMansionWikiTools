@@ -133,7 +133,11 @@ public class DataService
             ItemType = GetString(item, "ItemType"),
             SellCoins = GetInt(item, "SellCoins"),
             Unsellable = GetBool(item, "Unsellable"),
+            Description = GetString(item, "Description"),
         };
+
+        if (item.TryGetProperty("Tags", out var tagsEl) && tagsEl.ValueKind == JsonValueKind.Array)
+            pi.IsTemporary = tagsEl.EnumerateArray().Any(t => t.GetString()?.StartsWith("Temp") == true);
 
         // ── ActivationFeatures (generator) ──
         if (item.TryGetProperty("ActivationFeatures", out var af))
@@ -233,6 +237,25 @@ public class DataService
                     else if (ip.ValueKind == JsonValueKind.Object)
                         pi.DecayIntoItemType = GetString(ip, "Constant");
                 }
+            }
+        }
+
+        // ── DecaysWhenCyclesAreDone (on SpawnFeatures) ──
+        if (item.TryGetProperty("SpawnFeatures", out var sfDecay))
+            pi.DecaysWhenCyclesAreDone = GetBool(sfDecay, "DecaysWhenCyclesAreDone");
+
+        // ── SinkFeatures (Transformative Item) ──
+        if (item.TryGetProperty("SinkFeatures", out var sink) && GetBool(sink, "IsSink"))
+        {
+            pi.IsSink = true;
+            if (sink.TryGetProperty("Factory", out var factory) &&
+                factory.TryGetProperty("ScoreTargets", out var targets) &&
+                targets.ValueKind == JsonValueKind.Object)
+            {
+                pi.SinkRequirementItemTypes = targets.EnumerateObject()
+                    .Select(p => p.Name)
+                    .Where(k => !string.IsNullOrEmpty(k))
+                    .ToList();
             }
         }
 
