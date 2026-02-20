@@ -11,6 +11,21 @@
                 <ui:ControlsDictionary />
             </ResourceDictionary.MergedDictionaries>
             <helpers:BoolToVisibilityConverter x:Key="BoolToVis" />
+
+            <!-- Theme-aware custom brushes (updated in App.xaml.cs ApplyTheme) -->
+            <SolidColorBrush x:Key="ChainExpandedContentBackground" Color="#18FFFFFF" />
+            <SolidColorBrush x:Key="SidebarItemSelectedBackground" Color="#15FFFFFF" />
+
+            <!-- Global Hyperlink style — uses system accent color for hover -->
+            <Style TargetType="Hyperlink">
+                <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                <Setter Property="TextDecorations" Value="Underline" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="{DynamicResource AccentTextFillColorPrimaryBrush}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

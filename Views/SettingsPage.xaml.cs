@@ -27,6 +27,14 @@ public partial class SettingsPage : UserControl
 
         // Build chunk size rows
         BuildChunkRows();
+
+        // Set theme ComboBox to match saved preference
+        cmbTheme.SelectedIndex = _main.Settings.ThemePreference switch
+        {
+            "Light" => 1,
+            "Dark" => 2,
+            _ => 0 // System
+        };
     }
 
     // ── Drag & Drop ──
@@ -126,20 +134,36 @@ public partial class SettingsPage : UserControl
         }
     }
 
-    // ── TinyPNG API Keys ──
+    // ── TinyPNG API Keys (auto-save on change) ──
 
-    private void SaveTinifyKey_Click(object sender, RoutedEventArgs e)
+    private void TinifyKey_TextChanged(object sender, TextChangedEventArgs e)
     {
         _main.Settings.TinifyApiKey = txtTinifyKey.Text.Trim();
         _main.SaveSettings();
-        _main.ShowStatus("Primary TinyPNG API key saved.", Wpf.Ui.Controls.InfoBarSeverity.Success);
     }
 
-    private void SaveTinifyKey2_Click(object sender, RoutedEventArgs e)
+    private void TinifyKey2_TextChanged(object sender, TextChangedEventArgs e)
     {
         _main.Settings.TinifyApiKey2 = txtTinifyKey2.Text.Trim();
         _main.SaveSettings();
-        _main.ShowStatus("Secondary TinyPNG API key saved.", Wpf.Ui.Controls.InfoBarSeverity.Success);
+    }
+
+    // ── Theme ──
+
+    private void CmbTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!IsLoaded) return; // skip during constructor init
+
+        var pref = cmbTheme.SelectedIndex switch
+        {
+            1 => "Light",
+            2 => "Dark",
+            _ => "System"
+        };
+
+        _main.Settings.ThemePreference = pref;
+        _main.SaveSettings();
+        App.ApplyTheme(pref);
     }
 
     // ── Hyperlink ──
@@ -154,13 +178,17 @@ public partial class SettingsPage : UserControl
 
     public void HighlightChainSection() => HighlightBorder(chainSectionBorder);
     public void HighlightAreasSection() => HighlightBorder(areasSectionBorder);
-    public void HighlightChunkSizes() => HighlightBorder(expertChunkCard);
+    public void HighlightChunkSizes() => HighlightBorder(expertChunkHighlight);
 
+    /// <summary>
+    /// Animates a yellow highlight fade on a border overlay.
+    /// The target border must be an inner overlay (no own background) inside a card —
+    /// after animation we simply clear its Background so the parent card shows through.
+    /// </summary>
     private static void HighlightBorder(Border border)
     {
         border.BringIntoView();
 
-        // Initialize to the same color as To= so FillBehavior.Stop has no visual snap
         var brush = new SolidColorBrush(Color.FromArgb(0, 255, 180, 0));
         border.Background = brush;
 
@@ -172,9 +200,8 @@ public partial class SettingsPage : UserControl
             AutoReverse = false,
             FillBehavior = System.Windows.Media.Animation.FillBehavior.Stop
         };
-        // Re-apply the DynamicResource binding after animation ends so card background is restored
-        anim.Completed += (_, _) =>
-            border.SetResourceReference(Border.BackgroundProperty, "CardBackgroundFillColorDefaultBrush");
+        // Clear the overlay background — parent card's DynamicResource background is untouched
+        anim.Completed += (_, _) => border.ClearValue(Border.BackgroundProperty);
 
         brush.BeginAnimation(SolidColorBrush.ColorProperty, anim);
     }

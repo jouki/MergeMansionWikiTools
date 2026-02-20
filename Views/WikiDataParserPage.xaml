@@ -91,7 +91,7 @@
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,16,0">
                                 <TextBlock x:Name="txtAreasStatus" FontSize="13"
-                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                                 <Button x:Name="btnAreasPath"
                                         Style="{StaticResource LinkStyle}"
                                         Visibility="Collapsed"
@@ -117,7 +117,7 @@
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,16,0">
                                 <TextBlock x:Name="txtItemsStatus" FontSize="13"
-                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                                 <Button x:Name="btnItemsPath"
                                         Style="{StaticResource LinkStyle}"
                                         Visibility="Collapsed"

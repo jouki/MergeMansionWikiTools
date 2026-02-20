@@ -51,105 +51,106 @@
                     </Grid>
 
                     <!-- Nav buttons - Windows Settings style (ListBox with custom template) -->
-                    <ListBox x:Name="navList" Grid.Row="1"
-                             Background="Transparent" BorderThickness="0"
-                             SelectionChanged="NavList_SelectionChanged"
-                             SelectedIndex="0">
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                <Setter Property="Padding" Value="12,12" />
-                                <Setter Property="Margin" Value="0,3" />
-                                <Setter Property="Cursor" Value="Hand" />
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="ListBoxItem">
-                                            <Border x:Name="Bd" CornerRadius="4"
-                                                    Padding="{TemplateBinding Padding}" Background="Transparent">
-                                                <ContentPresenter />
-                                            </Border>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="Bd" Property="Background"
-                                                            Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
-                                                </Trigger>
-                                                <Trigger Property="IsSelected" Value="True">
-                                                    <Setter TargetName="Bd" Property="Background"
-                                                            Value="{DynamicResource SubtleFillColorTertiaryBrush}" />
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ListBox.ItemContainerStyle>
+                    <Grid Grid.Row="1">
+                        <ListBox x:Name="navList"
+                                 Background="Transparent" BorderThickness="0"
+                                 SelectionChanged="NavList_SelectionChanged"
+                                 SelectedIndex="0">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                    <Setter Property="Padding" Value="12,12" />
+                                    <Setter Property="Margin" Value="0,3" />
+                                    <Setter Property="Cursor" Value="Hand" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListBoxItem">
+                                                <Border x:Name="Bd" CornerRadius="4"
+                                                        Padding="{TemplateBinding Padding}" Background="Transparent">
+                                                    <ContentPresenter />
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="Bd" Property="Background"
+                                                                Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Setter TargetName="Bd" Property="Background"
+                                                                Value="{DynamicResource SidebarItemSelectedBackground}" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
 
-                        <ListBoxItem>
-                            <StackPanel Orientation="Horizontal">
-                                <ui:SymbolIcon Symbol="List24" FontSize="22" Margin="0,0,12,0"
+                            <ListBoxItem>
+                                <StackPanel Orientation="Horizontal">
+                                    <ui:SymbolIcon Symbol="List24" FontSize="22" Margin="0,0,12,0"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                    <TextBlock Text="Item Chains" FontSize="14" VerticalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                                <TextBlock Text="Item Chains" FontSize="14" VerticalAlignment="Center"
-                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                            </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem Padding="12,4">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="/Assets/ImageSplitterIcon.ico" Width="42" Height="42" Margin="0,0,12,0"
-                                       RenderOptions.BitmapScalingMode="HighQuality"/>
-                                <TextBlock Text="Image Splitter" FontSize="14" VerticalAlignment="Center"
-                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                            </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <StackPanel Orientation="Horizontal">
-                                <ui:SymbolIcon Symbol="DocumentTable24" FontSize="22" Margin="0,0,12,0"
-                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                                <TextBlock Text="Wiki Data Parser" FontSize="14" VerticalAlignment="Center"
-                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                            </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <StackPanel Orientation="Horizontal">
-                                <ui:SymbolIcon Symbol="ImageMultiple24" FontSize="22" Margin="0,0,12,0"
-                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                                <TextBlock Text="Image Extractor" FontSize="14" VerticalAlignment="Center"
-                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                            </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <StackPanel Orientation="Horizontal">
-                                <ui:SymbolIcon Symbol="ArchiveArrowBack24" FontSize="22" Margin="0,0,12,0"
-                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                                <StackPanel VerticalAlignment="Center">
-                                    <TextBlock Text="Asset Ripper" FontSize="14"
-                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                                    <TextBlock Text="experimental" FontSize="10"
-                                               Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                                               Margin="0,1,0,0" />
                                 </StackPanel>
-                            </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <StackPanel Orientation="Horizontal">
-                                <ui:SymbolIcon Symbol="Settings24" FontSize="22" Margin="0,0,12,0"
+                            </ListBoxItem>
+                            <ListBoxItem Padding="12,4">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/Assets/ImageSplitterIcon.ico" Width="42" Height="42" Margin="0,0,12,0"
+                                           RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    <TextBlock Text="Image Splitter" FontSize="14" VerticalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                                <TextBlock Text="Settings" FontSize="14" VerticalAlignment="Center"
-                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                            </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <StackPanel Orientation="Horizontal">
-                                <ui:SymbolIcon Symbol="Info24" FontSize="22" Margin="0,0,12,0"
+                                </StackPanel>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <StackPanel Orientation="Horizontal">
+                                    <ui:SymbolIcon Symbol="DocumentTable24" FontSize="22" Margin="0,0,12,0"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                    <TextBlock Text="Wiki Data Parser" FontSize="14" VerticalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                                <TextBlock Text="About" FontSize="14" VerticalAlignment="Center"
-                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                            </StackPanel>
-                        </ListBoxItem>
-                    </ListBox>
+                                </StackPanel>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <StackPanel Orientation="Horizontal">
+                                    <ui:SymbolIcon Symbol="ImageMultiple24" FontSize="22" Margin="0,0,12,0"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                    <TextBlock Text="Image Extractor" FontSize="14" VerticalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                </StackPanel>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <StackPanel Orientation="Horizontal">
+                                    <ui:SymbolIcon Symbol="Settings24" FontSize="22" Margin="0,0,12,0"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                    <TextBlock Text="Settings" FontSize="14" VerticalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                </StackPanel>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <StackPanel Orientation="Horizontal">
+                                    <ui:SymbolIcon Symbol="Info24" FontSize="22" Margin="0,0,12,0"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                    <TextBlock Text="About" FontSize="14" VerticalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                </StackPanel>
+                            </ListBoxItem>
+                        </ListBox>
+
+                        <!-- Selection accent indicator (animated) -->
+                        <Border x:Name="navIndicator"
+                                Width="3" Height="16"
+                                Background="{DynamicResource AccentFillColorDefaultBrush}"
+                                HorizontalAlignment="Left" VerticalAlignment="Top"
+                                CornerRadius="1.5"
+                                IsHitTestVisible="False">
+                            <Border.RenderTransform>
+                                <TranslateTransform x:Name="navIndicatorTransform" />
+                            </Border.RenderTransform>
+                        </Border>
+                    </Grid>
 
                     <!-- Version info -->
                     <StackPanel Grid.Row="2" HorizontalAlignment="Center" Margin="0,0,0,6">
-                        <TextBlock Text="v0.7.0" FontSize="10"
+                        <TextBlock Text="v0.8.0" FontSize="10"
                                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                                    HorizontalAlignment="Center" />
                         <TextBlock Text="by Jouki" FontSize="10"

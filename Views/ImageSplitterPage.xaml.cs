@@ -58,6 +58,7 @@ public partial class ImageSplitterPage : UserControl
 
             infoBar.Message = $"Loaded: {System.IO.Path.GetFileName(path)}";
             infoBar.Severity = InfoBarSeverity.Informational;
+            infoBar.IsOpen = true;
 
             btnOpenOptimize.Visibility = Visibility.Collapsed;
         }
@@ -65,6 +66,7 @@ public partial class ImageSplitterPage : UserControl
         {
             infoBar.Message = $"Error loading image: {ex.Message}";
             infoBar.Severity = InfoBarSeverity.Error;
+            infoBar.IsOpen = true;
         }
     }
 
@@ -88,6 +90,7 @@ public partial class ImageSplitterPage : UserControl
 
         infoBar.Message = "Processing...";
         infoBar.Severity = InfoBarSeverity.Informational;
+        infoBar.IsOpen = true;
         btnOpenOptimize.Visibility = Visibility.Collapsed;
         Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Background, new Action(() => { }));
 

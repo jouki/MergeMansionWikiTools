@@ -26,13 +26,13 @@
 
             <!-- Info -->
             <StackPanel Grid.Row="0" Margin="0,0,0,15">
-                <TextBlock x:Name="txtConfigKey" FontSize="12" Foreground="#888888" />
-                <TextBlock x:Name="txtCurrentName" FontSize="12" Foreground="#666666"
+                <TextBlock x:Name="txtConfigKey" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                <TextBlock x:Name="txtCurrentName" FontSize="12" Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                            Margin="0,3,0,0" />
             </StackPanel>
 
             <!-- Name input -->
-            <ui:TextBlock Grid.Row="1" Text="Chain name:" Foreground="#CCCCCC"
+            <ui:TextBlock Grid.Row="1" Text="Chain name:" Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                           FontSize="13" Margin="0,0,0,5" />
             <ui:TextBox x:Name="txtName" Grid.Row="2"
                         PlaceholderText="Enter display name..."
@@ -40,11 +40,11 @@
                         KeyDown="TxtName_KeyDown" />
 
             <!-- Existing names list -->
-            <Border Grid.Row="3" Background="#0F0F0F" CornerRadius="6"
-                    BorderBrush="#252525" BorderThickness="1">
+            <Border Grid.Row="3" Background="{DynamicResource CardBackgroundFillColorDefaultBrush}" CornerRadius="6"
+                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
                 <Grid>
                     <TextBlock Text="Previously used names (click to select)"
-                               Foreground="#555555" FontSize="11"
+                               Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="11"
                                HorizontalAlignment="Center" VerticalAlignment="Top"
                                Margin="0,8,0,0" />
 
@@ -53,7 +53,7 @@
                               SelectionChanged="LvExistingNames_SelectionChanged">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}" Foreground="#AAAAAA"
+                                <TextBlock Text="{Binding}" Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                            FontSize="12" Padding="6,3" />
                             </DataTemplate>
                         </ListView.ItemTemplate>

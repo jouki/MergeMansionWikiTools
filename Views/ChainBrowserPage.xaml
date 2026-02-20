@@ -90,16 +90,22 @@
                     <DataTemplate>
                         <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
                                 CornerRadius="4"
-                                Margin="0,0,12,3" Padding="10,0,16,0"
-                                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
-                                BorderThickness="1">
+                                Margin="0,0,12,3"
+                                BorderThickness="0">
+                            <Border.Resources>
+                                <SolidColorBrush x:Key="ExpanderHeaderBackground" Color="Transparent" />
+                                <SolidColorBrush x:Key="ExpanderContentBackground" Color="Transparent" />
+                                <SolidColorBrush x:Key="ExpanderHeaderBorderBrush" Color="Transparent" />
+                                <SolidColorBrush x:Key="ExpanderHeaderBorderPointerOverBrush" Color="Transparent" />
+                                <SolidColorBrush x:Key="ExpanderHeaderBorderPressedBrush" Color="Transparent" />
+                            </Border.Resources>
                             <Expander IsExpanded="False" Background="Transparent"
-                                      BorderThickness="0" Padding="0"
+                                      BorderThickness="0" Padding="16,8,12,8"
                                       HorizontalContentAlignment="Stretch"
                                       HorizontalAlignment="Stretch">
                                 <Expander.Header>
                                     <Grid HorizontalAlignment="Stretch"
-                                          Margin="0,6,10,6">
+                                          Margin="0,0,10,0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
@@ -112,23 +118,23 @@
                                             <!-- DisplayName with search highlighting via Loaded event -->
                                             <TextBlock x:Name="txtDisplayName"
                                                        Text="{Binding DisplayName}"
-                                                       Foreground="#EEEEEE" FontSize="14"
+                                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontSize="14"
                                                        FontWeight="SemiBold"
                                                        TextTrimming="CharacterEllipsis"
                                                        Tag="{Binding}"
                                                        Loaded="TxtDisplayName_Loaded" />
                                             <TextBlock Text="{Binding ConfigKey}"
-                                                       Foreground="#666666" FontSize="11"
+                                                       Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="11"
                                                        Visibility="{Binding ShowConfigKey,
                                                            Converter={StaticResource BoolToVis}}" />
                                         </StackPanel>
 
                                         <!-- Summary badge -->
-                                        <Border Grid.Column="1" Background="#1E1E1E"
+                                        <Border Grid.Column="1" Background="{DynamicResource SubtleFillColorSecondaryBrush}"
                                                 CornerRadius="4" Padding="8,3"
                                                 VerticalAlignment="Center" Margin="10,0">
                                             <TextBlock Text="{Binding Summary}"
-                                                       Foreground="#999999" FontSize="11" />
+                                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="11" />
                                         </Border>
 
                                         <!-- Action buttons -->
@@ -146,8 +152,10 @@
                                 </Expander.Header>
 
                                 <!-- Expanded: item list -->
-                                <Border Background="{DynamicResource SubtleFillColorSecondaryBrush}"
-                                        Padding="16,8,16,12">
+                                <Border Background="{DynamicResource ChainExpandedContentBackground}"
+                                        Margin="-17,-8,-13,-9"
+                                        Padding="16,8,16,12"
+                                        CornerRadius="0,0,4,4">
                                     <ItemsControl ItemsSource="{Binding Items}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
@@ -159,18 +167,18 @@
                                                     </Grid.ColumnDefinitions>
 
                                                     <TextBlock Text="{Binding Level, StringFormat='Lv{0}'}"
-                                                               Foreground="#777777" FontSize="12"
+                                                               Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
                                                                FontFamily="Consolas"
                                                                VerticalAlignment="Center" />
                                                     <TextBlock Grid.Column="1"
                                                                Text="{Binding Name}"
-                                                               Foreground="#BBBBBB" FontSize="12"
+                                                               Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
                                                                VerticalAlignment="Center"
                                                                Tag="{Binding}"
                                                                Loaded="TxtItemName_Loaded" />
                                                     <TextBlock Grid.Column="2"
                                                                Text="{Binding TypeBadge}"
-                                                               Foreground="#B0B0B0" FontSize="9"
+                                                               Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="9"
                                                                FontWeight="SemiBold"
                                                                VerticalAlignment="Center"
                                                                Padding="0,0,4,0" />

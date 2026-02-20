@@ -23,6 +23,6 @@ public class AppSettings
     public string ImageExporterCustomOutputPath { get; set; } = "";
     public string BundleDownloaderCustomOutputPath { get; set; } = "";
 
-    // Asset Ripper (experimental)
-    public string AssetRipperPath { get; set; } = "";
+    // Appearance
+    public string ThemePreference { get; set; } = "System"; // "System", "Light", "Dark"
 }

@@ -10,38 +10,99 @@
                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                        Margin="4,0,0,24" />
 
-            <!-- ── Identity card ── -->
-            <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    CornerRadius="8"
-                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1"
-                    Margin="0,0,0,16">
-                <Grid Margin="20,20,20,20">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+            <!-- ── Identity + Authors (side by side) ── -->
+            <Grid Margin="0,0,0,16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-                    <Border Grid.Column="0" CornerRadius="12" Width="96" Height="96"
-                            ClipToBounds="True" Margin="0,0,20,0" VerticalAlignment="Center">
-                        <Image Source="/Assets/AppAboutLogo.jpg"
-                               RenderOptions.BitmapScalingMode="HighQuality"
-                               Stretch="UniformToFill" />
-                    </Border>
+                <!-- Identity card -->
+                <Border Grid.Column="0" Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                        CornerRadius="8"
+                        BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1"
+                        Margin="0,0,12,0">
+                    <Grid Margin="20,20,20,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock Text="Merge Mansion Wiki Tools"
-                                   FontSize="20" FontWeight="SemiBold"
-                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                        <TextBlock x:Name="txtVersion" FontSize="13"
-                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                   Margin="0,4,0,0" />
-                        <TextBlock Text="by Jouki"
-                                   FontSize="12"
-                                   Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                                   Margin="0,6,0,0" />
+                        <Border Grid.Column="0" CornerRadius="12" Width="72" Height="72"
+                                ClipToBounds="True" Margin="0,0,16,0" VerticalAlignment="Center">
+                            <Image Source="/Assets/AppLogo.ico"
+                                   RenderOptions.BitmapScalingMode="HighQuality"
+                                   Stretch="UniformToFill" />
+                        </Border>
+
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="MM Wiki Tools"
+                                       FontSize="18" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            <TextBlock x:Name="txtVersion" FontSize="13"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                       Margin="0,4,0,0" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- Authors card -->
+                <Border Grid.Column="1" Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                        CornerRadius="8"
+                        BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1"
+                        Width="220">
+                    <StackPanel>
+                        <!-- Jouki -->
+                        <Grid Margin="16,14,16,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" CornerRadius="5" Width="36" Height="36"
+                                    Margin="0,0,12,0" VerticalAlignment="Center"
+                                    RenderOptions.BitmapScalingMode="HighQuality">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="/Assets/AppAboutLogo.jpg" Stretch="UniformToFill" />
+                                </Border.Background>
+                            </Border>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="Jouki"
+                                           FontSize="13" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                <TextBlock Text="Developer"
+                                           FontSize="11"
+                                           Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                           Margin="0,1,0,0"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <Separator Opacity="0.15" Margin="0"/>
+
+                        <!-- Claude -->
+                        <Grid Margin="16,12,16,14">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" CornerRadius="5" Width="36" Height="36"
+                                    ClipToBounds="True" Margin="0,0,12,0" VerticalAlignment="Center">
+                                <Image Source="/Assets/ClaudeIcon.png"
+                                       RenderOptions.BitmapScalingMode="HighQuality"
+                                       Stretch="UniformToFill" />
+                            </Border>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="Claude"
+                                           FontSize="13" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                <TextBlock Text="AI by Anthropic"
+                                           FontSize="11"
+                                           Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                           Margin="0,1,0,0"/>
+                            </StackPanel>
+                        </Grid>
                     </StackPanel>
-                </Grid>
-            </Border>
+                </Border>
+            </Grid>
 
             <!-- ── Loaded data stats ── -->
             <TextBlock Text="Loaded Data" FontSize="16" FontWeight="SemiBold"
@@ -137,33 +198,8 @@
                 </StackPanel>
             </Border>
 
-            <!-- ── Built with Claude ── -->
-            <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    CornerRadius="8"
-                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1"
-                    Margin="0,0,0,24">
-                <Grid Margin="16,14,16,14">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <!-- Claude "logo" — styled text badge -->
-                    <Border Grid.Column="0" Background="#D97706" CornerRadius="6"
-                            Padding="10,6" Margin="0,0,14,0" VerticalAlignment="Center">
-                        <TextBlock Text="Claude" FontSize="14" FontWeight="Bold"
-                                   Foreground="White" VerticalAlignment="Center"/>
-                    </Border>
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock Text="Built with Claude Code"
-                                   FontSize="13" FontWeight="SemiBold"
-                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-                        <TextBlock Text="AI pair programming by Anthropic"
-                                   FontSize="12"
-                                   Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                                   Margin="0,2,0,0"/>
-                    </StackPanel>
-                </Grid>
-            </Border>
+            <!-- Bottom spacing -->
+            <Border Height="24" />
 
         </StackPanel>
     </ScrollViewer>

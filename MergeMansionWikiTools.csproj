@@ -26,6 +26,7 @@
     <Resource Include="Assets\ImageSplitterIcon.ico" />
     <Resource Include="Assets\AppLogo.ico" />
     <Resource Include="Assets\AppAboutLogo.jpg" />
+    <Resource Include="Assets\ClaudeIcon.png" />
   </ItemGroup>
 
 </Project>

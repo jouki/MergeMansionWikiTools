@@ -31,6 +31,10 @@ public partial class WikiDataParserPage : UserControl
     private bool _areasCollapsed;
     private bool _itemsCollapsed;
 
+    // Cancellation for ongoing chunked text loads
+    private CancellationTokenSource? _chunkLoadCts;
+    private CancellationTokenSource? _combinedLoadCts;
+
     // Per-card references for lazy-loading and re-navigation reset
     private sealed record ChunkCardData(WpfTextBox TextBox, UIElement MiniLoading, StackPanel WarnPanel, WpfTextBlock WarnText);
     private List<ChunkCardData> _chunkCardData = new();
@@ -126,41 +130,51 @@ public partial class WikiDataParserPage : UserControl
 
     /// <summary>
     /// Called BEFORE this page becomes visible on re-navigation.
-    /// Resets TextBoxes to 150-line preview (fast layout) and shows loading spinners.
+    /// Cancels any in-flight text loads, resets TextBoxes to 150-line preview
+    /// (fast layout) and shows loading spinners where needed.
     /// </summary>
     public void PrepareForShow()
     {
+        // Cancel any ongoing chunked appends before resetting text
+        _chunkLoadCts?.Cancel(); _chunkLoadCts?.Dispose();
+        _chunkLoadCts = new CancellationTokenSource();
+        _combinedLoadCts?.Cancel(); _combinedLoadCts?.Dispose();
+        _combinedLoadCts = new CancellationTokenSource();
+
         for (int i = 0; i < _chunkCardData.Count && i < _lastChunks.Count; i++)
         {
-            _chunkCardData[i].TextBox.Text = BuildPreview(_lastChunks[i].Lua);
-            _chunkCardData[i].MiniLoading.Visibility = Visibility.Visible;
+            var (preview, remaining) = SplitForPreview(_lastChunks[i].Lua);
+            _chunkCardData[i].TextBox.Text = preview;
+            _chunkCardData[i].MiniLoading.Visibility = remaining != null ? Visibility.Visible : Visibility.Collapsed;
         }
 
         if (!string.IsNullOrEmpty(_lastCombined))
         {
-            txtCombined.Text = BuildPreview(_lastCombined);
-            combinedMiniLoading.Visibility = Visibility.Visible;
+            var (preview, remaining) = SplitForPreview(_lastCombined);
+            txtCombined.Text = preview;
+            combinedMiniLoading.Visibility = remaining != null ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 
     /// <summary>
     /// Called AFTER this page is set as ContentArea content.
-    /// Refreshes status and fires lazy full-text loading for all cards.
-    /// The 150ms delay lets the loading animation render before the brief text-set freeze.
+    /// Refreshes status and fires chunked full-text loading for all cards.
     /// </summary>
     public void OnPageShown()
     {
         RefreshStatus();
 
+        var chunkCt = _chunkLoadCts?.Token ?? CancellationToken.None;
         for (int i = 0; i < _chunkCardData.Count && i < _lastChunks.Count; i++)
         {
             var card = _chunkCardData[i];
             _ = LazySetChunkFullTextAsync(card.TextBox, _lastChunks[i].Lua,
-                card.MiniLoading, card.WarnPanel, card.WarnText, _lastChunks[i].Label);
+                card.MiniLoading, card.WarnPanel, card.WarnText, _lastChunks[i].Label, chunkCt);
         }
 
+        var combinedCt = _combinedLoadCts?.Token ?? CancellationToken.None;
         if (!string.IsNullOrEmpty(_lastCombined))
-            _ = LazySetCombinedFullTextAsync(_lastCombined);
+            _ = LazySetCombinedFullTextAsync(_lastCombined, combinedCt);
     }
 
     // ── Generate Areas ───────────────────────────────────────────────
@@ -190,6 +204,11 @@ public partial class WikiDataParserPage : UserControl
                 _luaGen.GenerateAreaChunks(areasService.Areas, chunkSizes));
 
             txtAreasHeader.Text = $"Areas — {areasService.Areas.Count} areas · {_lastChunks.Count} chunk(s)";
+
+            // Cancel any ongoing chunk loads before building new cards
+            _chunkLoadCts?.Cancel(); _chunkLoadCts?.Dispose();
+            _chunkLoadCts = new CancellationTokenSource();
+
             BuildChunkCards(_lastChunks);
 
             areasSection.Visibility = Visibility.Visible;
@@ -247,12 +266,17 @@ public partial class WikiDataParserPage : UserControl
 
             txtCombinedHeader.Text = $"p.items + p.chainNames — {chains.Count} chains · {lineCount} lines";
 
-            // Show 150-line preview immediately (fast), then lazy-load full text
-            txtCombined.Text = BuildPreview(lua);
-            txtCombinedSizeWarning.Visibility = Visibility.Collapsed;
-            combinedMiniLoading.Visibility = Visibility.Visible;
+            // Cancel any ongoing combined load
+            _combinedLoadCts?.Cancel(); _combinedLoadCts?.Dispose();
+            _combinedLoadCts = new CancellationTokenSource();
 
-            _ = LazySetCombinedFullTextAsync(lua);
+            // Show 150-line preview immediately (fast), then chunked-load full text
+            var (preview, remaining) = SplitForPreview(lua);
+            txtCombined.Text = preview;
+            txtCombinedSizeWarning.Visibility = Visibility.Collapsed;
+            combinedMiniLoading.Visibility = remaining != null ? Visibility.Visible : Visibility.Collapsed;
+
+            _ = LazySetCombinedFullTextAsync(lua, _combinedLoadCts.Token);
 
             Increment(s => s.LuaItemsGenerated++);
             ShowInfo("Items + Chain Names generated.", InfoBarSeverity.Success);
@@ -267,11 +291,15 @@ public partial class WikiDataParserPage : UserControl
         }
     }
 
-    private async Task LazySetCombinedFullTextAsync(string lua)
+    private async Task LazySetCombinedFullTextAsync(string lua, CancellationToken ct)
     {
-        // Let the UI render the preview before loading the full (large) string
+        var (_, remaining) = SplitForPreview(lua);
+        if (remaining == null) { combinedMiniLoading.Visibility = Visibility.Collapsed; return; }
+
+        // Let the UI render the preview + spinner before starting chunked append
         await Dispatcher.InvokeAsync(() => { }, DispatcherPriority.ApplicationIdle);
         await Task.Delay(30);
+        if (ct.IsCancellationRequested) return;
 
         var bytes = Encoding.UTF8.GetByteCount(lua);
         if (bytes > MaxWikiBytes)
@@ -282,8 +310,7 @@ public partial class WikiDataParserPage : UserControl
             txtCombinedSizeWarning.Visibility = Visibility.Visible;
         }
 
-        txtCombined.Text = lua;
-        combinedMiniLoading.Visibility = Visibility.Collapsed;
+        await AppendChunkedAsync(txtCombined, remaining, combinedMiniLoading, ct);
     }
 
     // ── Collapse / expand ────────────────────────────────────────────
@@ -435,7 +462,7 @@ public partial class WikiDataParserPage : UserControl
             VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
             HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
             // Show 150-line preview immediately — fast, no UI freeze
-            Text = BuildPreview(lua)
+            Text = SplitForPreview(lua).Preview
         };
         sp.Children.Add(tb);
         border.Child = sp;
@@ -443,19 +470,25 @@ public partial class WikiDataParserPage : UserControl
         // Track for re-navigation reset
         _chunkCardData.Add(new ChunkCardData(tb, miniLoading, warnPanel, warnText));
 
-        // Async: wait for UI to render, then load full text
-        _ = LazySetChunkFullTextAsync(tb, lua, miniLoading, warnPanel, warnText, label);
+        // Async: wait for UI to render, then chunked-load full text
+        _ = LazySetChunkFullTextAsync(tb, lua, miniLoading, warnPanel, warnText, label,
+            _chunkLoadCts?.Token ?? CancellationToken.None);
 
         return border;
     }
 
     private async Task LazySetChunkFullTextAsync(
         WpfTextBox tb, string lua,
-        UIElement miniLoading, StackPanel warnPanel, WpfTextBlock warnText, string label)
+        UIElement miniLoading, StackPanel warnPanel, WpfTextBlock warnText, string label,
+        CancellationToken ct)
     {
-        // Let the UI render the preview before loading the full (potentially large) string
+        var (_, remaining) = SplitForPreview(lua);
+        if (remaining == null) { miniLoading.Visibility = Visibility.Collapsed; return; }
+
+        // Let the UI render the preview + spinner before starting chunked append
         await Dispatcher.InvokeAsync(() => { }, DispatcherPriority.ApplicationIdle);
         await Task.Delay(30);
+        if (ct.IsCancellationRequested) return;
 
         var bytes = Encoding.UTF8.GetByteCount(lua);
         if (bytes > MaxWikiBytes)
@@ -467,27 +500,65 @@ public partial class WikiDataParserPage : UserControl
             warnPanel.Visibility = Visibility.Visible;
         }
 
-        tb.Text = lua;
-        miniLoading.Visibility = Visibility.Collapsed;
+        await AppendChunkedAsync(tb, remaining, miniLoading, ct);
     }
 
-    /// <summary>Returns first 150 lines; if shorter, returns the whole string.</summary>
-    private static string BuildPreview(string lua)
+    /// <summary>
+    /// Splits text into a 150-line preview and the remaining text.
+    /// If the text has ≤150 lines, Remaining is null (no chunked load needed).
+    /// Preview + Remaining == original text (no data lost, no suffix added).
+    /// </summary>
+    private static (string Preview, string? Remaining) SplitForPreview(string lua)
     {
         const int maxLines = 150;
         int lineCount = 0;
         int pos = 0;
         while (pos < lua.Length && lineCount < maxLines)
         {
-            pos = lua.IndexOf('\n', pos) + 1;
-            if (pos == 0) break;
+            int next = lua.IndexOf('\n', pos);
+            if (next < 0) { pos = lua.Length; break; }
+            pos = next + 1;
             lineCount++;
         }
 
-        if (lineCount < maxLines) return lua;
+        if (lineCount < maxLines || pos >= lua.Length) return (lua, null);
+        return (lua[..pos], lua[pos..]);
+    }
 
-        var preview = lua[..pos].TrimEnd('\n');
-        return preview + "\n\n--- Preview (first 150 lines) — use the Copy button for the full output ---";
+    /// <summary>
+    /// Appends text to a TextBox in chunks of ~200 lines, yielding to the dispatcher
+    /// between chunks so that UI stays responsive and loading animations keep spinning.
+    /// </summary>
+    private async Task AppendChunkedAsync(WpfTextBox tb, string remaining, UIElement loading, CancellationToken ct)
+    {
+        const int linesPerChunk = 200;
+        int start = 0;
+
+        while (start < remaining.Length)
+        {
+            if (ct.IsCancellationRequested) return;
+
+            int lineCount = 0;
+            int pos = start;
+            while (pos < remaining.Length && lineCount < linesPerChunk)
+            {
+                int next = remaining.IndexOf('\n', pos);
+                if (next < 0) { pos = remaining.Length; break; }
+                pos = next + 1;
+                lineCount++;
+            }
+            // Safety: if no progress was made, take the rest
+            if (pos == start) pos = remaining.Length;
+
+            tb.AppendText(remaining[start..pos]);
+            start = pos;
+
+            // Yield to dispatcher — lets UI process input, render spinner, etc.
+            await Dispatcher.InvokeAsync(() => { }, DispatcherPriority.Background);
+        }
+
+        if (!ct.IsCancellationRequested)
+            loading.Visibility = Visibility.Collapsed;
     }
 
     // ── Copy ─────────────────────────────────────────────────────────

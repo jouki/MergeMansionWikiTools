@@ -60,8 +60,9 @@ public partial class ChainBrowserPage : UserControl
     private List<ChainViewModel> _allChains = new();
     private string _currentSearch = "";
 
-    private static readonly SolidColorBrush HighlightBrush =
-        new(Color.FromRgb(0xCB, 0x9C, 0xFD));
+    private static Brush HighlightBrush =>
+        Application.Current.TryFindResource("AccentTextFillColorPrimaryBrush") as Brush
+        ?? new SolidColorBrush(Color.FromRgb(0xCB, 0x9C, 0xFD));
 
     public ChainBrowserPage(MainWindow main)
     {

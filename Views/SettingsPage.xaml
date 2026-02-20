@@ -3,18 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
 
-    <UserControl.Resources>
-        <Style TargetType="Hyperlink">
-            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-            <Setter Property="TextDecorations" Value="Underline" />
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="#CB9CFD" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </UserControl.Resources>
-
     <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="24,16">
         <StackPanel MaxWidth="700">
 
@@ -133,17 +121,9 @@
                         <TextBlock Text="Primary TinyPNG API Key" FontSize="13" FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                    Margin="0,0,0,8" />
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <ui:TextBox x:Name="txtTinifyKey"
-                                        PlaceholderText="Enter your primary TinyPNG API key..."
-                                        Margin="0,0,8,0" />
-                            <ui:Button Grid.Column="1" Content="Save" Appearance="Primary"
-                                       Click="SaveTinifyKey_Click" Height="36" />
-                        </Grid>
+                        <ui:TextBox x:Name="txtTinifyKey"
+                                    PlaceholderText="Enter your primary TinyPNG API key..."
+                                    TextChanged="TinifyKey_TextChanged" />
                     </StackPanel>
 
                     <Separator Opacity="0.15" Margin="0" />
@@ -157,17 +137,9 @@
                                    Margin="0,0,0,8">
                             <Run Text="Used as fallback if the primary key fails or runs out of credits." />
                         </TextBlock>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <ui:TextBox x:Name="txtTinifyKey2"
-                                        PlaceholderText="Optional — leave empty to skip fallback..."
-                                        Margin="0,0,8,0" />
-                            <ui:Button Grid.Column="1" Content="Save" Appearance="Secondary"
-                                       Click="SaveTinifyKey2_Click" Height="36" />
-                        </Grid>
+                        <ui:TextBox x:Name="txtTinifyKey2"
+                                    PlaceholderText="Optional — leave empty to skip fallback..."
+                                    TextChanged="TinifyKey2_TextChanged" />
                     </StackPanel>
 
                 </StackPanel>
@@ -237,6 +209,7 @@
                     Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
                     CornerRadius="8"
                     BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                <Border x:Name="expertChunkHighlight" CornerRadius="4">
                 <StackPanel>
 
                     <StackPanel Margin="16,14,16,14">
@@ -257,6 +230,34 @@
                                    Click="BtnAddChunk_Click" HorizontalAlignment="Left" />
                     </StackPanel>
 
+                </StackPanel>
+                </Border>
+            </Border>
+
+            <!-- ══════════════════════════════════════════════════
+                 APPEARANCE
+                 ══════════════════════════════════════════════════ -->
+            <TextBlock Text="Appearance" FontSize="16" FontWeight="SemiBold"
+                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                       Margin="4,28,0,10" />
+
+            <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    CornerRadius="8"
+                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                <StackPanel Margin="16,14,16,12">
+                    <TextBlock Text="Theme" FontSize="13" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                               Margin="0,0,0,4" />
+                    <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                               Margin="0,0,0,8">
+                        <Run Text="Choose the application color theme. System follows your Windows setting." />
+                    </TextBlock>
+                    <ComboBox x:Name="cmbTheme" Width="200" HorizontalAlignment="Left"
+                              SelectionChanged="CmbTheme_SelectionChanged">
+                        <ComboBoxItem Content="System default" />
+                        <ComboBoxItem Content="Light" />
+                        <ComboBoxItem Content="Dark" />
+                    </ComboBox>
                 </StackPanel>
             </Border>
 

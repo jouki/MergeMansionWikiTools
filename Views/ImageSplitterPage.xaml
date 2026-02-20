@@ -12,8 +12,8 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" Background="#1e1e1e" CornerRadius="8" Margin="0,0,0,15"
-                BorderBrush="#333" BorderThickness="1">
+        <Border Grid.Row="0" Background="{DynamicResource CardBackgroundFillColorDefaultBrush}" CornerRadius="8" Margin="0,0,0,15"
+                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
             <Grid>
                 <Image x:Name="imgPreview" Margin="15"/>
                 <ui:TextBlock x:Name="txtPlaceholder" Text="Drag your source image here"
@@ -48,6 +48,8 @@
                        Margin="10,0,0,0" VerticalAlignment="Bottom"/>
         </Grid>
 
-        <ui:InfoBar x:Name="infoBar" Grid.Row="3" IsOpen="True" IsClosable="True" Title="Status"/>
+        <Border Grid.Row="3" MinHeight="48">
+            <ui:InfoBar x:Name="infoBar" IsOpen="False" IsClosable="True"/>
+        </Border>
     </Grid>
 </UserControl>
