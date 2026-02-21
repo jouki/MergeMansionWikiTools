@@ -53,6 +53,7 @@ public partial class AboutPage : UserControl
         txtUserInfoboxes.Text   = stats.InfoboxesGenerated.ToString("N0");
         txtUserLuaChunks.Text   = stats.LuaAreaChunksGenerated.ToString("N0");
         txtUserLuaItems.Text    = stats.LuaItemsGenerated.ToString("N0");
+        txtUserDialogues.Text   = stats.DialoguesExtracted.ToString("N0");
         txtUserFirstLaunch.Text = stats.FirstLaunch == default
             ? "—"
             : stats.FirstLaunch.ToLocalTime().ToString("d MMM yyyy");

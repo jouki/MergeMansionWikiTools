@@ -192,6 +192,12 @@
                     <Separator Opacity="0.15" Margin="0"/>
                     <Grid Margin="16,12,16,12">
                         <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                        <TextBlock Text="Dialogues extracted" FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="txtUserDialogues" Grid.Column="1" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Separator Opacity="0.15" Margin="0"/>
+                    <Grid Margin="16,12,16,12">
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
                         <TextBlock Text="First launch" FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}" VerticalAlignment="Center"/>
                         <TextBlock x:Name="txtUserFirstLaunch" Grid.Column="1" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" VerticalAlignment="Center"/>
                     </Grid>

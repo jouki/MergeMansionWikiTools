@@ -10,5 +10,6 @@ public class UserStats
     public int LuaItemsGenerated { get; set; }
     public int ImagesOptimized { get; set; }
     public int ImagesExtracted { get; set; }
+    public int DialoguesExtracted { get; set; }
     public DateTime FirstLaunch { get; set; } = DateTime.UtcNow;
 }

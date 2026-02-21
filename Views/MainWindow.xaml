@@ -103,6 +103,14 @@
                             </ListBoxItem>
                             <ListBoxItem>
                                 <StackPanel Orientation="Horizontal">
+                                    <ui:SymbolIcon Symbol="ChatMultiple24" FontSize="22" Margin="0,0,12,0"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                    <TextBlock Text="Dialogue Maker" FontSize="14" VerticalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                </StackPanel>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <StackPanel Orientation="Horizontal">
                                     <ui:SymbolIcon Symbol="DocumentTable24" FontSize="22" Margin="0,0,12,0"
                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                                     <TextBlock Text="Wiki Data Parser" FontSize="14" VerticalAlignment="Center"
@@ -150,7 +158,7 @@
 
                     <!-- Version info -->
                     <StackPanel Grid.Row="2" HorizontalAlignment="Center" Margin="0,0,0,6">
-                        <TextBlock Text="v0.8.0" FontSize="10"
+                        <TextBlock Text="v0.9.0" FontSize="10"
                                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                                    HorizontalAlignment="Center" />
                         <TextBlock Text="by Jouki" FontSize="10"
@@ -173,6 +181,16 @@
                 <ui:InfoBar x:Name="statusBar" Grid.Row="1" IsOpen="False"
                             IsClosable="True" Margin="10,0,10,10" />
             </Grid>
+        </Grid>
+
+        <!-- Image overlay (covers entire window) -->
+        <Grid x:Name="imageOverlay" Grid.Row="0" Grid.RowSpan="2"
+              Panel.ZIndex="100" Visibility="Collapsed"
+              Background="#DD000000" Cursor="Hand"
+              MouseLeftButtonUp="ImageOverlay_Close">
+            <Image x:Name="overlayImage" Stretch="Uniform"
+                   Margin="40" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   IsHitTestVisible="False" />
         </Grid>
     </Grid>
 </ui:FluentWindow>

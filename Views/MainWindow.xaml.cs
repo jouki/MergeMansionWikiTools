@@ -25,6 +25,7 @@ public partial class MainWindow : FluentWindow
     private ImageSplitterPage? _imageSplitterPage;
     private WikiDataParserPage? _wikiDataParserPage;
     private ImageExtractorPage? _imageExtractorPage;
+    private DialogueMakerPage? _dialogueMakerPage;
     private SettingsPage? _settingsPage;
     private AboutPage? _aboutPage;
 
@@ -144,10 +145,11 @@ public partial class MainWindow : FluentWindow
         {
             case 0: ShowChainsPage(); break;
             case 1: ShowImageSplitterPage(); break;
-            case 2: ShowWikiDataParserPage(); break;
-            case 3: ShowImageExtractorPage(); break;
-            case 4: ShowSettingsPage(); break;
-            case 5: ShowAboutPage(); break;
+            case 2: ShowDialogueMakerPage(); break;
+            case 3: ShowWikiDataParserPage(); break;
+            case 4: ShowImageExtractorPage(); break;
+            case 5: ShowSettingsPage(); break;
+            case 6: ShowAboutPage(); break;
         }
 
         UpdateNavIndicator();
@@ -185,6 +187,12 @@ public partial class MainWindow : FluentWindow
     {
         _imageExtractorPage ??= new ImageExtractorPage(this);
         contentArea.Content = _imageExtractorPage;
+    }
+
+    private void ShowDialogueMakerPage()
+    {
+        _dialogueMakerPage ??= new DialogueMakerPage(this);
+        contentArea.Content = _dialogueMakerPage;
     }
 
     private void ShowSettingsPage()
@@ -304,7 +312,7 @@ public partial class MainWindow : FluentWindow
     /// </summary>
     public void NavigateToSettingsHighlightChainFile()
     {
-        navList.SelectedIndex = 4;
+        navList.SelectedIndex = 5;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightChainSection(),
             System.Windows.Threading.DispatcherPriority.Input);
@@ -312,7 +320,7 @@ public partial class MainWindow : FluentWindow
 
     public void NavigateToSettingsHighlightAreas()
     {
-        navList.SelectedIndex = 4;
+        navList.SelectedIndex = 5;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightAreasSection(),
             System.Windows.Threading.DispatcherPriority.Input);
@@ -320,10 +328,44 @@ public partial class MainWindow : FluentWindow
 
     public void NavigateToSettingsHighlightChunkSizes()
     {
-        navList.SelectedIndex = 4;
+        navList.SelectedIndex = 5;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightChunkSizes(),
             System.Windows.Threading.DispatcherPriority.Input);
+    }
+
+    // ── Image overlay ──
+
+    public void ShowImageOverlay(byte[] imageData)
+    {
+        var bi = new System.Windows.Media.Imaging.BitmapImage();
+        bi.BeginInit();
+        bi.StreamSource = new MemoryStream(imageData);
+        bi.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad;
+        bi.EndInit();
+        bi.Freeze();
+
+        overlayImage.Source = bi;
+        imageOverlay.Visibility = Visibility.Visible;
+        imageOverlay.Focus();
+    }
+
+    private void ImageOverlay_Close(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        imageOverlay.Visibility = Visibility.Collapsed;
+        overlayImage.Source = null;
+    }
+
+    protected override void OnPreviewKeyDown(System.Windows.Input.KeyEventArgs e)
+    {
+        if (e.Key == System.Windows.Input.Key.Escape && imageOverlay.Visibility == Visibility.Visible)
+        {
+            imageOverlay.Visibility = Visibility.Collapsed;
+            overlayImage.Source = null;
+            e.Handled = true;
+            return;
+        }
+        base.OnPreviewKeyDown(e);
     }
 
     // ── Theme change handler ──
