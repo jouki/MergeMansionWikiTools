@@ -23,6 +23,11 @@ public class AppSettings
     public string ImageExporterCustomOutputPath { get; set; } = "";
     public string BundleDownloaderCustomOutputPath { get; set; } = "";
 
+    // Area Flowcharts
+    public string FlowchartOutputPath { get; set; } = "";
+    public bool FlowchartRememberFolderChoice { get; set; } = false;
+    public bool FlowchartAutoUpdateFolder { get; set; } = false;
+
     // Appearance
     public string ThemePreference { get; set; } = "System"; // "System", "Light", "Dark"
 }

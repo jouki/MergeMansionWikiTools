@@ -24,6 +24,10 @@ public partial class SettingsPage : UserControl
         txtTinifyKey.Text = _main.Settings.TinifyApiKey;
         txtTinifyKey2.Text = _main.Settings.TinifyApiKey2;
         txtImageBasePath.Text = _main.Settings.ImageExporterBasePath;
+        txtFlowchartPath.Text = _main.Settings.FlowchartOutputPath;
+
+        // Show reset button if "don't ask again" is active
+        UpdateResetFolderPrefVisibility();
 
         // Build chunk size rows
         BuildChunkRows();
@@ -47,13 +51,14 @@ public partial class SettingsPage : UserControl
         e.Handled = true;
     }
 
-    private void ChainFileDrop(object sender, DragEventArgs e)
+    private async void ChainFileDrop(object sender, DragEventArgs e)
     {
         var path = GetDroppedFilePath(e);
         if (path != null)
         {
             txtChainPath.Text = path;
             SaveChainPath(path);
+            await _main.LoadDataAsync(path);
         }
     }
 
@@ -63,8 +68,7 @@ public partial class SettingsPage : UserControl
         if (path != null)
         {
             txtAreasPath.Text = path;
-            _main.Settings.AreasJsonPath = path;
-            _main.SaveSettings();
+            _main.SetAreasPath(path);
         }
     }
 
@@ -87,13 +91,14 @@ public partial class SettingsPage : UserControl
 
     // ── Browse buttons ──
 
-    private void BrowseChainFile_Click(object sender, RoutedEventArgs e)
+    private async void BrowseChainFile_Click(object sender, RoutedEventArgs e)
     {
         var path = BrowseJsonFile("Select chain_item_odds.json");
         if (path != null)
         {
             txtChainPath.Text = path;
             SaveChainPath(path);
+            await _main.LoadDataAsync(path);
         }
     }
 
@@ -103,8 +108,7 @@ public partial class SettingsPage : UserControl
         if (path != null)
         {
             txtAreasPath.Text = path;
-            _main.Settings.AreasJsonPath = path;
-            _main.SaveSettings();
+            _main.SetAreasPath(path);
         }
     }
 
@@ -116,21 +120,6 @@ public partial class SettingsPage : UserControl
             txtEventsPath.Text = path;
             _main.Settings.EventsJsonPath = path;
             _main.SaveSettings();
-        }
-    }
-
-    // ── Load button ──
-
-    private async void LoadChainFile_Click(object sender, RoutedEventArgs e)
-    {
-        var path = txtChainPath.Text;
-        if (!string.IsNullOrEmpty(path) && System.IO.File.Exists(path))
-        {
-            await _main.LoadDataAsync(path);
-        }
-        else
-        {
-            _main.ShowStatus("File not found. Please select a valid JSON file.", Wpf.Ui.Controls.InfoBarSeverity.Error);
         }
     }
 
@@ -228,6 +217,48 @@ public partial class SettingsPage : UserControl
         txtImageBasePath.Text = "";
         _main.Settings.ImageExporterBasePath = "";
         _main.SaveSettings();
+    }
+
+    // ── Area Flowcharts — output folder ──
+
+    private void BrowseFlowchartPath_Click(object sender, RoutedEventArgs e)
+    {
+        var dlg = new OpenFolderDialog { Title = "Select flowchart output folder" };
+        if (!string.IsNullOrEmpty(_main.Settings.FlowchartOutputPath) &&
+            System.IO.Directory.Exists(_main.Settings.FlowchartOutputPath))
+            dlg.InitialDirectory = _main.Settings.FlowchartOutputPath;
+
+        if (dlg.ShowDialog() == true)
+        {
+            txtFlowchartPath.Text = dlg.FolderName;
+            _main.Settings.FlowchartOutputPath = dlg.FolderName;
+            _main.SaveSettings();
+        }
+    }
+
+    private void ClearFlowchartPath_Click(object sender, RoutedEventArgs e)
+    {
+        txtFlowchartPath.Text = "";
+        _main.Settings.FlowchartOutputPath = "";
+        _main.SaveSettings();
+    }
+
+    public void HighlightFlowchartSection() => HighlightBorder(flowchartSectionBorder);
+
+    private void ResetFolderPreference_Click(object sender, RoutedEventArgs e)
+    {
+        _main.Settings.FlowchartRememberFolderChoice = false;
+        _main.Settings.FlowchartAutoUpdateFolder = false;
+        _main.SaveSettings();
+        UpdateResetFolderPrefVisibility();
+        _main.ShowStatus("'Save to' preference reset.", Wpf.Ui.Controls.InfoBarSeverity.Success);
+    }
+
+    public void UpdateResetFolderPrefVisibility()
+    {
+        btnResetFolderPref.Visibility = _main.Settings.FlowchartRememberFolderChoice
+            ? Visibility.Visible
+            : Visibility.Collapsed;
     }
 
     // ── Expert — chunk sizes ──

@@ -21,11 +21,18 @@ public partial class MainWindow : FluentWindow
     public ChainNameService ChainNameService { get; } = new();
     public DataService? DataService { get; private set; }
 
+    // ── Data file change events ──
+    /// <summary>Fired after chain_item_odds.json is successfully loaded.</summary>
+    public event Action? ChainDataLoaded;
+    /// <summary>Fired when areas.json path changes (set or cleared).</summary>
+    public event Action? AreasFileChanged;
+
     private ChainBrowserPage? _chainPage;
     private ImageSplitterPage? _imageSplitterPage;
     private WikiDataParserPage? _wikiDataParserPage;
     private ImageExtractorPage? _imageExtractorPage;
     private DialogueMakerPage? _dialogueMakerPage;
+    private AreaFlowchartsPage? _areaFlowchartsPage;
     private SettingsPage? _settingsPage;
     private AboutPage? _aboutPage;
 
@@ -148,8 +155,9 @@ public partial class MainWindow : FluentWindow
             case 2: ShowDialogueMakerPage(); break;
             case 3: ShowWikiDataParserPage(); break;
             case 4: ShowImageExtractorPage(); break;
-            case 5: ShowSettingsPage(); break;
-            case 6: ShowAboutPage(); break;
+            case 5: ShowAreaFlowchartsPage(); break;
+            case 6: ShowSettingsPage(); break;
+            case 7: ShowAboutPage(); break;
         }
 
         UpdateNavIndicator();
@@ -193,6 +201,12 @@ public partial class MainWindow : FluentWindow
     {
         _dialogueMakerPage ??= new DialogueMakerPage(this);
         contentArea.Content = _dialogueMakerPage;
+    }
+
+    private void ShowAreaFlowchartsPage()
+    {
+        _areaFlowchartsPage ??= new AreaFlowchartsPage(this);
+        contentArea.Content = _areaFlowchartsPage;
     }
 
     private void ShowSettingsPage()
@@ -258,8 +272,9 @@ public partial class MainWindow : FluentWindow
             ShowStatus($"Loaded {chainCount} chains from {Path.GetFileName(path)}", InfoBarSeverity.Success);
             Increment(s => s.DataLoads++);
 
-            // Notify chain page
+            // Notify subscribers
             _chainPage?.OnDataLoaded();
+            ChainDataLoaded?.Invoke();
 
             // Show warnings
             if (DataService.Warnings.Count > 0)
@@ -307,12 +322,22 @@ public partial class MainWindow : FluentWindow
     }
 
     /// <summary>
+    /// Updates areas.json path, saves settings, and notifies subscribers.
+    /// </summary>
+    public void SetAreasPath(string path)
+    {
+        Settings.AreasJsonPath = path;
+        SaveSettings();
+        AreasFileChanged?.Invoke();
+    }
+
+    /// <summary>
     /// Navigates to Settings page and highlights the chain_item_odds.json section.
     /// Called from WikiDataParserPage when user clicks the items file path link.
     /// </summary>
     public void NavigateToSettingsHighlightChainFile()
     {
-        navList.SelectedIndex = 5;
+        navList.SelectedIndex = 6;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightChainSection(),
             System.Windows.Threading.DispatcherPriority.Input);
@@ -320,7 +345,7 @@ public partial class MainWindow : FluentWindow
 
     public void NavigateToSettingsHighlightAreas()
     {
-        navList.SelectedIndex = 5;
+        navList.SelectedIndex = 6;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightAreasSection(),
             System.Windows.Threading.DispatcherPriority.Input);
@@ -328,7 +353,7 @@ public partial class MainWindow : FluentWindow
 
     public void NavigateToSettingsHighlightChunkSizes()
     {
-        navList.SelectedIndex = 5;
+        navList.SelectedIndex = 6;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightChunkSizes(),
             System.Windows.Threading.DispatcherPriority.Input);
