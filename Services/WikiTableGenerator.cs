@@ -10,10 +10,12 @@ namespace MergeMansionWikiTools.Services;
 public class WikiTableGenerator
 {
     private readonly DataService _data;
+    private readonly WikiMappingCache? _wikiMapping;
 
-    public WikiTableGenerator(DataService data)
+    public WikiTableGenerator(DataService data, WikiMappingCache? wikiMapping = null)
     {
         _data = data;
+        _wikiMapping = wikiMapping;
     }
 
     /// <summary>Warnings encountered during generation.</summary>
@@ -48,6 +50,14 @@ public class WikiTableGenerator
             || !string.IsNullOrEmpty(i.DecayAfterLastCycleItemType)
             || (i.HasDecay && !string.IsNullOrEmpty(i.DecayIntoItemType)));
 
+        // Fuel For — build lookup: NumericConfigKey → list of (sinkChain, sinkItem)
+        var fuelForMap = BuildFuelForMap(items);
+        bool showFuelFor = fuelForMap.Count > 0;
+
+        // Fuel — this chain has sink items that require fuel
+        var fuelMap = BuildFuelMap(items);
+        bool showFuel = fuelMap.Count > 0;
+
         // ── Extract Speed Up Cost from existing table if provided ──
         var speedUpCosts = new Dictionary<int, string>();
         if (!string.IsNullOrEmpty(existingTable))
@@ -71,11 +81,17 @@ public class WikiTableGenerator
         if (showSellsFor)
             sb.AppendLine("! {{Coins}} [[Coins|Sells for]]");
 
+        if (showFuel)
+            sb.AppendLine("! Fuel");
+
         if (showDrops)
             sb.AppendLine("! Drops");
 
         if (showDropValues)
             sb.AppendLine("! Drops Values");
+
+        if (showFuelFor)
+            sb.AppendLine("! Fuel For");
 
         if (showDecaysInto)
             sb.AppendLine("! Decays Into");
@@ -122,6 +138,10 @@ public class WikiTableGenerator
                     sb.AppendLine("| {{#Invoke:Items|GetItemPriceByLevel|{{#var:Level}}}}");
             }
 
+            // Fuel (what this sink item needs)
+            if (showFuel)
+                sb.AppendLine($"| {BuildFuelCell(item, fuelMap)}");
+
             // Drops
             if (showDrops)
                 sb.AppendLine($"| {BuildDropsCell(item)}");
@@ -129,6 +149,10 @@ public class WikiTableGenerator
             // Drop Values
             if (showDropValues)
                 sb.AppendLine($"| {BuildDropValuesCell(item)}");
+
+            // Fuel For (which sinks consume this item)
+            if (showFuelFor)
+                sb.AppendLine($"| {BuildFuelForCell(item, fuelForMap)}");
 
             // Decays Into
             if (showDecaysInto)
@@ -196,7 +220,7 @@ public class WikiTableGenerator
             {
                 // Constant spawn
                 var spawnName = ResolveChainName(item.SpawnItemType);
-                var spawnLevel = DataService.GetLevelFromItemType(item.SpawnItemType);
+                var spawnLevel = _data.ResolveLevel(item.SpawnItemType, _wikiMapping);
 
                 if (item.SpawnHowManyCycles > 0 && item.SpawnHowManyCycles != -1)
                 {
@@ -228,7 +252,7 @@ public class WikiTableGenerator
         foreach (var (itemRef, chance) in odds)
         {
             var chainKey = DataService.GetChainKeyFromItemType(itemRef);
-            var level = DataService.GetLevelFromItemType(itemRef);
+            var level = _data.ResolveLevel(itemRef, _wikiMapping);
 
             if (!groups.TryGetValue(chainKey, out var group))
             {
@@ -318,7 +342,7 @@ public class WikiTableGenerator
         if (!string.IsNullOrEmpty(item.DecayAfterLastCycleItemType))
         {
             var name = ResolveChainName(item.DecayAfterLastCycleItemType);
-            var level = DataService.GetLevelFromItemType(item.DecayAfterLastCycleItemType);
+            var level = _data.ResolveLevel(item.DecayAfterLastCycleItemType, _wikiMapping);
             return $"{{{{Item|{name}|{level}}}}}";
         }
 
@@ -326,7 +350,7 @@ public class WikiTableGenerator
         if (!string.IsNullOrEmpty(item.SpawnDecayIntoItemType))
         {
             var name = ResolveChainName(item.SpawnDecayIntoItemType);
-            var level = DataService.GetLevelFromItemType(item.SpawnDecayIntoItemType);
+            var level = _data.ResolveLevel(item.SpawnDecayIntoItemType, _wikiMapping);
             return $"{{{{Item|{name}|{level}}}}}";
         }
 
@@ -334,7 +358,7 @@ public class WikiTableGenerator
         if (item.HasDecay && !string.IsNullOrEmpty(item.DecayIntoItemType))
         {
             var name = ResolveChainName(item.DecayIntoItemType);
-            var level = DataService.GetLevelFromItemType(item.DecayIntoItemType);
+            var level = _data.ResolveLevel(item.DecayIntoItemType, _wikiMapping);
             return $"{{{{Item|{name}|{level}}}}}";
         }
 
@@ -348,17 +372,115 @@ public class WikiTableGenerator
         return "{{Dash}}";
     }
 
+    // ── Fuel (what sink items in this chain require) ──────────────────
+
+    /// <summary>
+    /// Builds a map: item Level → list of required (chain, item) for sink items in this chain.
+    /// </summary>
+    private Dictionary<int, List<(ParsedChain Chain, ParsedItem Item)>> BuildFuelMap(List<ParsedItem> chainItems)
+    {
+        var sinkItems = chainItems.Where(i => i.IsSink && i.SinkRequirementConfigKeys != null).ToList();
+        if (sinkItems.Count == 0) return new();
+
+        // Build ConfigKey → (chain, item) lookup
+        var configKeyToItem = new Dictionary<string, (ParsedChain Chain, ParsedItem Item)>(StringComparer.OrdinalIgnoreCase);
+        foreach (var chain in _data.Chains)
+            foreach (var item in chain.Items)
+                if (!string.IsNullOrEmpty(item.NumericConfigKey))
+                    configKeyToItem.TryAdd(item.NumericConfigKey, (chain, item));
+
+        var map = new Dictionary<int, List<(ParsedChain, ParsedItem)>>();
+
+        foreach (var sinkItem in sinkItems)
+        {
+            var list = new List<(ParsedChain, ParsedItem)>();
+            foreach (var reqKey in sinkItem.SinkRequirementConfigKeys!)
+            {
+                if (configKeyToItem.TryGetValue(reqKey, out var match))
+                    list.Add(match);
+            }
+            if (list.Count > 0)
+                map[sinkItem.Level] = list;
+        }
+
+        return map;
+    }
+
+    private string BuildFuelCell(ParsedItem item, Dictionary<int, List<(ParsedChain Chain, ParsedItem Item)>> fuelMap)
+    {
+        if (!fuelMap.TryGetValue(item.Level, out var requirements)) return "{{Dash}}";
+
+        var parts = new List<string>();
+        foreach (var (reqChain, reqItem) in requirements)
+            parts.Add($"{{{{Item|{reqChain.DisplayName}|{reqItem.Level}}}}}");
+
+        return parts.Count > 0 ? string.Join("<br>", parts) : "{{Dash}}";
+    }
+
+    // ── Fuel For ─────────────────────────────────────────────────────
+
+    /// <summary>
+    /// Builds a map: NumericConfigKey → list of (sinkChain, sinkItem) for all sinks
+    /// that require any item from this chain.
+    /// </summary>
+    private Dictionary<string, List<(ParsedChain Chain, ParsedItem Item)>> BuildFuelForMap(List<ParsedItem> chainItems)
+    {
+        var myConfigKeys = chainItems
+            .Where(i => !string.IsNullOrEmpty(i.NumericConfigKey))
+            .Select(i => i.NumericConfigKey)
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+        if (myConfigKeys.Count == 0) return new();
+
+        var map = new Dictionary<string, List<(ParsedChain, ParsedItem)>>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var otherChain in _data.Chains)
+        {
+            foreach (var item in otherChain.Items)
+            {
+                if (!item.IsSink || item.SinkRequirementConfigKeys == null) continue;
+
+                foreach (var reqKey in item.SinkRequirementConfigKeys)
+                {
+                    if (!myConfigKeys.Contains(reqKey)) continue;
+
+                    if (!map.TryGetValue(reqKey, out var list))
+                    {
+                        list = new();
+                        map[reqKey] = list;
+                    }
+                    list.Add((otherChain, item));
+                }
+            }
+        }
+
+        return map;
+    }
+
+    private string BuildFuelForCell(ParsedItem item, Dictionary<string, List<(ParsedChain Chain, ParsedItem Item)>> fuelForMap)
+    {
+        if (string.IsNullOrEmpty(item.NumericConfigKey)) return "{{Dash}}";
+        if (!fuelForMap.TryGetValue(item.NumericConfigKey, out var sinks)) return "{{Dash}}";
+
+        var parts = new List<string>();
+        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var (sinkChain, sinkItem) in sinks)
+        {
+            if (!seen.Add(sinkChain.ConfigKey)) continue;
+            parts.Add($"{{{{Item|{sinkChain.DisplayName}|{sinkItem.Level}}}}}");
+        }
+
+        return parts.Count > 0 ? string.Join("<br>", parts) : "{{Dash}}";
+    }
+
     // ── Helpers ─────────────────────────────────────────────────────
 
     private string ResolveChainName(string itemTypeOrChainKey)
     {
-        // Try as full ItemType first
-        if (_data.ItemNames.TryGetValue(itemTypeOrChainKey, out var fullName))
-        {
-            // Return the chain display name, not the individual item name
-            var ck = DataService.GetChainKeyFromItemType(itemTypeOrChainKey);
-            return _data.ResolveChainDisplayName(ck);
-        }
+        // Try as full ItemType — wiki mapping has priority
+        if (_data.ItemNames.ContainsKey(itemTypeOrChainKey))
+            return _data.ResolveChainDisplayNameFromItemType(itemTypeOrChainKey, _wikiMapping);
 
         // Try as chain key
         return _data.ResolveChainDisplayName(itemTypeOrChainKey);

@@ -14,6 +14,7 @@ public partial class InfoboxGeneratorDialog : FluentWindow
     private readonly ParsedChain _chain;
     private readonly InfoboxGeneratorService _service = new();
     private bool _suppressRegenerate;
+    private string? _wikiNameWarning;
 
     public InfoboxGeneratorDialog(MainWindow main, ParsedChain chain)
     {
@@ -33,7 +34,27 @@ public partial class InfoboxGeneratorDialog : FluentWindow
         txtSources.Text = string.Join("\n", autoSources);
         _suppressRegenerate = false;
 
+        // Check for missing wiki name
+        _wikiNameWarning = CheckWikiNameMissing(chain, main);
+
         Loaded += (_, _) => RegeneratePreview();
+    }
+
+    private static string? CheckWikiNameMissing(ParsedChain chain, MainWindow main)
+    {
+        if (chain.HasHumanReadableName) return null;
+
+        var mapping = main.WikiMapping;
+        if (mapping == null || mapping.Mappings.Count == 0) return null;
+
+        bool hasWikiEntry = chain.Items.Any(i =>
+            !string.IsNullOrEmpty(i.ItemType) && mapping.Mappings.ContainsKey(i.ItemType));
+
+        if (hasWikiEntry) return null;
+
+        return $"Chain \"{chain.DisplayName}\" has no human-readable name and is not mapped on the wiki. " +
+               "The generated {{Item}} templates may reference a non-existent page. " +
+               "Consider adding a name to Module:Datatable/Items/Mapping first.";
     }
 
     private void ChkOption_Changed(object sender, RoutedEventArgs e)
@@ -72,6 +93,17 @@ public partial class InfoboxGeneratorDialog : FluentWindow
             txtOutput.Visibility = Visibility.Visible;
             txtOutputPlaceholder.Visibility = Visibility.Collapsed;
             btnCopy.IsEnabled = true;
+
+            if (_wikiNameWarning != null)
+            {
+                infoBar.Message = _wikiNameWarning;
+                infoBar.Severity = InfoBarSeverity.Warning;
+                infoBar.IsOpen = true;
+            }
+            else
+            {
+                infoBar.IsOpen = false;
+            }
         }
         catch (Exception ex)
         {

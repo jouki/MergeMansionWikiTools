@@ -3,338 +3,610 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="24,16">
-        <StackPanel MaxWidth="700">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-            <TextBlock Text="Settings" FontSize="28" FontWeight="SemiBold"
-                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                       Margin="4,0,0,24" />
+        <TextBlock Text="Settings" FontSize="28" FontWeight="SemiBold"
+                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                   Margin="28,16,0,8" />
 
-            <!-- ══════════════════════════════════════════════════
-                 DUMP FILES
-                 ══════════════════════════════════════════════════ -->
-            <StackPanel Orientation="Horizontal" Margin="4,0,0,10">
-                <ui:SymbolIcon Symbol="Database24" FontSize="20" Margin="0,0,8,0"
-                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                <TextBlock Text="Dump Files" FontSize="16" FontWeight="SemiBold"
-                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-            </StackPanel>
+        <!-- ══════════════════════════════════════════════════════════
+             SEGMENTED TAB BAR
+             ══════════════════════════════════════════════════════════ -->
+        <Grid x:Name="tabBarContainer" Grid.Row="1" Margin="24,0,24,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="3" />
+            </Grid.RowDefinitions>
 
-            <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    CornerRadius="8"
-                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
-                <StackPanel>
+            <ListBox x:Name="tabBar" Grid.Row="0" Background="Transparent" BorderThickness="0"
+                     Margin="4,0,0,4" SelectedIndex="0" SelectionChanged="TabBar_SelectionChanged">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Padding" Value="14,10" />
+                        <Setter Property="Margin" Value="0,0,4,0" />
+                        <Setter Property="Cursor" Value="Hand" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border x:Name="Bd" CornerRadius="6"
+                                            Padding="{TemplateBinding Padding}" Background="Transparent">
+                                        <ContentPresenter />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Bd" Property="Background"
+                                                    Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="Bd" Property="Background"
+                                                    Value="{DynamicResource SubtleFillColorTertiaryBrush}" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
 
-                    <!-- chain_item_odds.json -->
-                    <Border x:Name="chainSectionBorder" CornerRadius="4"
-                            AllowDrop="True" DragOver="FileDragOver" Drop="ChainFileDrop"
-                            Background="Transparent">
-                    <StackPanel Margin="16,14,16,12">
-                        <TextBlock Text="chain_item_odds.json" FontSize="13" FontWeight="SemiBold"
-                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                   Margin="0,0,0,8" />
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <ui:TextBox x:Name="txtChainPath" Grid.Column="0"
-                                        PlaceholderText="Drag file here or browse..."
-                                        IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False"
-                                        Margin="0,0,8,0" />
-                            <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
-                                       Click="BrowseChainFile_Click" Height="36" />
-                        </Grid>
+                <ListBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <ui:SymbolIcon Symbol="Home24" FontSize="16" Margin="0,0,8,0"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        <TextBlock Text="General" FontSize="13" VerticalAlignment="Center"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                     </StackPanel>
-                    </Border>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <ui:SymbolIcon Symbol="Wrench24" FontSize="16" Margin="0,0,8,0"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        <TextBlock Text="Tools" FontSize="13" VerticalAlignment="Center"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <ui:SymbolIcon Symbol="Globe24" FontSize="16" Margin="0,0,8,0"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        <TextBlock Text="Wiki" FontSize="13" VerticalAlignment="Center"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <ui:SymbolIcon Symbol="Settings24" FontSize="16" Margin="0,0,8,0"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        <TextBlock Text="Advanced" FontSize="13" VerticalAlignment="Center"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                    </StackPanel>
+                </ListBoxItem>
+            </ListBox>
 
-                    <Separator Opacity="0.15" Margin="0" />
+            <!-- Sliding accent indicator -->
+            <Border x:Name="tabIndicator" Grid.Row="1" HorizontalAlignment="Left"
+                    Height="3" CornerRadius="1.5"
+                    Background="{DynamicResource AccentFillColorDefaultBrush}">
+                <Border.RenderTransform>
+                    <TranslateTransform x:Name="tabIndicatorTransform" />
+                </Border.RenderTransform>
+            </Border>
+        </Grid>
 
-                    <!-- areas.json — wrapped for Settings highlight animation -->
-                    <Border x:Name="areasSectionBorder" CornerRadius="4"
-                            AllowDrop="True" DragOver="FileDragOver" Drop="AreasFileDrop"
-                            Background="Transparent">
-                        <StackPanel Margin="16,14,16,12">
-                            <TextBlock Text="areas.json" FontSize="13" FontWeight="SemiBold"
-                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                       Margin="0,0,0,8" />
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <ui:TextBox x:Name="txtAreasPath" Grid.Column="0"
-                                            PlaceholderText="Drag file here or browse..."
-                                            IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False"
-                                            Margin="0,0,8,0" />
-                                <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
-                                           Click="BrowseAreasFile_Click" Height="36" />
-                            </Grid>
+        <!-- ══════════════════════════════════════════════════════════
+             CONTENT PANELS
+             ══════════════════════════════════════════════════════════ -->
+        <Grid Grid.Row="2">
+
+            <!-- ── TAB: GENERAL ── -->
+            <ScrollViewer x:Name="panelGeneral" VerticalScrollBarVisibility="Auto">
+                <StackPanel MaxWidth="700" Margin="24,16">
+
+                    <!-- DUMP FILES -->
+                    <StackPanel Orientation="Horizontal" Margin="4,0,0,10">
+                        <ui:SymbolIcon Symbol="Database24" FontSize="20" Margin="0,0,8,0"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        <TextBlock Text="Dump Files" FontSize="16" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                    </StackPanel>
+
+                    <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                            CornerRadius="8"
+                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                        <StackPanel>
+
+                            <!-- chain_item_odds.json -->
+                            <Border x:Name="chainSectionBorder" CornerRadius="4"
+                                    AllowDrop="True" DragOver="FileDragOver" Drop="ChainFileDrop"
+                                    Background="Transparent">
+                            <StackPanel Margin="16,14,16,12">
+                                <TextBlock Text="chain_item_odds.json" FontSize="13" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                           Margin="0,0,0,8" />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <ui:TextBox x:Name="txtChainPath" Grid.Column="0"
+                                                PlaceholderText="Drag file here or browse..."
+                                                IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False"
+                                                Margin="0,0,8,0" />
+                                    <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
+                                               Click="BrowseChainFile_Click" Height="36" />
+                                </Grid>
+                            </StackPanel>
+                            </Border>
+
+                            <Separator Opacity="0.15" Margin="0" />
+
+                            <!-- areas.json -->
+                            <Border x:Name="areasSectionBorder" CornerRadius="4"
+                                    AllowDrop="True" DragOver="FileDragOver" Drop="AreasFileDrop"
+                                    Background="Transparent">
+                                <StackPanel Margin="16,14,16,12">
+                                    <TextBlock Text="areas.json" FontSize="13" FontWeight="SemiBold"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                               Margin="0,0,0,8" />
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <ui:TextBox x:Name="txtAreasPath" Grid.Column="0"
+                                                    PlaceholderText="Drag file here or browse..."
+                                                    IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False"
+                                                    Margin="0,0,8,0" />
+                                        <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
+                                                   Click="BrowseAreasFile_Click" Height="36" />
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+
+                            <Separator Opacity="0.15" Margin="0" />
+
+                            <!-- events.json -->
+                            <Border x:Name="eventsSectionBorder" CornerRadius="4"
+                                    AllowDrop="True" DragOver="FileDragOver" Drop="EventsFileDrop"
+                                    Background="Transparent">
+                                <StackPanel Margin="16,14,16,12">
+                                    <TextBlock Text="events.json" FontSize="13" FontWeight="SemiBold"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                               Margin="0,0,0,8" />
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <ui:TextBox x:Name="txtEventsPath" Grid.Column="0"
+                                                    PlaceholderText="Drag file here or browse..."
+                                                    IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False"
+                                                    Margin="0,0,8,0" />
+                                        <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
+                                                   Click="BrowseEventsFile_Click" Height="36" />
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+
                         </StackPanel>
                     </Border>
 
-                    <Separator Opacity="0.15" Margin="0" />
-
-                    <!-- events.json -->
-                    <Border CornerRadius="4"
-                            AllowDrop="True" DragOver="FileDragOver" Drop="EventsFileDrop"
-                            Background="Transparent">
-                        <StackPanel Margin="16,14,16,12">
-                            <TextBlock Text="events.json" FontSize="13" FontWeight="SemiBold"
-                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                       Margin="0,0,0,8" />
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <ui:TextBox x:Name="txtEventsPath" Grid.Column="0"
-                                            PlaceholderText="Drag file here or browse..."
-                                            IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False"
-                                            Margin="0,0,8,0" />
-                                <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
-                                           Click="BrowseEventsFile_Click" Height="36" />
-                            </Grid>
-                        </StackPanel>
-                    </Border>
-
-                </StackPanel>
-            </Border>
-
-            <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
-                       Margin="4,6,0,0">
-                <Run Text="File paths are saved automatically and persist between sessions." />
-            </TextBlock>
-
-            <!-- ══════════════════════════════════════════════════
-                 IMAGE SPLITTER
-                 ══════════════════════════════════════════════════ -->
-            <StackPanel Orientation="Horizontal" Margin="4,28,0,10">
-                <ui:SymbolIcon Symbol="ImageEdit24" FontSize="20" Margin="0,0,8,0"
-                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                <TextBlock Text="Image Splitter" FontSize="16" FontWeight="SemiBold"
-                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-            </StackPanel>
-
-            <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    CornerRadius="8"
-                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
-                <StackPanel>
-
-                    <!-- Primary TinyPNG API Key -->
-                    <StackPanel Margin="16,14,16,12">
-                        <TextBlock Text="Primary TinyPNG API Key" FontSize="13" FontWeight="SemiBold"
-                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                   Margin="0,0,0,8" />
-                        <ui:TextBox x:Name="txtTinifyKey"
-                                    PlaceholderText="Enter your primary TinyPNG API key..."
-                                    TextChanged="TinifyKey_TextChanged" />
-                    </StackPanel>
-
-                    <Separator Opacity="0.15" Margin="0" />
-
-                    <!-- Secondary TinyPNG API Key -->
-                    <StackPanel Margin="16,14,16,12">
-                        <TextBlock Text="Secondary TinyPNG API Key" FontSize="13" FontWeight="SemiBold"
-                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                   Margin="0,0,0,4" />
-                        <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
-                                   Margin="0,0,0,8">
-                            <Run Text="Used as fallback if the primary key fails or runs out of credits." />
-                        </TextBlock>
-                        <ui:TextBox x:Name="txtTinifyKey2"
-                                    PlaceholderText="Optional — leave empty to skip fallback..."
-                                    TextChanged="TinifyKey2_TextChanged" />
-                    </StackPanel>
-
-                </StackPanel>
-            </Border>
-
-            <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
-                       Margin="4,6,0,16"><Run Text="Get your free key at " /><Hyperlink NavigateUri="https://tinify.com/developers" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="tinypng.com (tinify.com)" /></Hyperlink><Run Text="." /></TextBlock>
-
-            <!-- ══════════════════════════════════════════════════
-                 IMAGE EXTRACTOR
-                 ══════════════════════════════════════════════════ -->
-            <StackPanel Orientation="Horizontal" Margin="4,12,0,10">
-                <ui:SymbolIcon Symbol="ImageMultiple24" FontSize="20" Margin="0,0,8,0"
-                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                <TextBlock Text="Image Extractor" FontSize="16" FontWeight="SemiBold"
-                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-            </StackPanel>
-
-            <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    CornerRadius="8"
-                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
-                <StackPanel>
-
-                    <!-- PNG Source base path -->
-                    <StackPanel Margin="16,14,16,12">
-                        <TextBlock Text="PNG Source Base Path" FontSize="13" FontWeight="SemiBold"
-                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                   Margin="0,0,0,4" />
-                        <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
-                                   TextWrapping="Wrap" Margin="0,0,0,8">
-                            <Run Text="Starting directory for the PNG source folder browser." />
-                        </TextBlock>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <ui:TextBox x:Name="txtImageBasePath"
-                                        PlaceholderText="Optional — leave empty to start from default location..."
-                                        IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False"
-                                        Margin="0,0,8,0" />
-                            <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
-                                       Click="BrowseImageBasePath_Click" Margin="0,0,8,0" Height="36" />
-                            <ui:Button Grid.Column="2" Content="Clear" Appearance="Secondary"
-                                       Click="ClearImageBasePath_Click" Height="36" />
-                        </Grid>
-                    </StackPanel>
-
-                </StackPanel>
-            </Border>
-
-            <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
-                       Margin="4,6,0,16">
-                <Run Text="Path is saved automatically." />
-            </TextBlock>
-
-            <!-- ══════════════════════════════════════════════════
-                 AREA FLOWCHARTS
-                 ══════════════════════════════════════════════════ -->
-            <StackPanel Orientation="Horizontal" Margin="4,12,0,10">
-                <ui:SymbolIcon Symbol="Flow24" FontSize="20" Margin="0,0,8,0"
-                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                <TextBlock Text="Area Flowcharts" FontSize="16" FontWeight="SemiBold"
-                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-            </StackPanel>
-
-            <Border x:Name="flowchartSectionBorder"
-                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    CornerRadius="8"
-                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
-                <StackPanel>
-
-                    <!-- Flowchart output folder -->
-                    <StackPanel Margin="16,14,16,12">
-                        <TextBlock Text="Flowchart Output Folder" FontSize="13" FontWeight="SemiBold"
-                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                   Margin="0,0,0,4" />
-                        <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
-                                   TextWrapping="Wrap" Margin="0,0,0,8">
-                            <Run Text="Directory where generated SVG flowcharts will be saved." />
-                        </TextBlock>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <ui:TextBox x:Name="txtFlowchartPath"
-                                        PlaceholderText="Select output folder..."
-                                        IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False"
-                                        Margin="0,0,8,0" />
-                            <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
-                                       Click="BrowseFlowchartPath_Click" Margin="0,0,8,0" Height="36" />
-                            <ui:Button Grid.Column="2" Content="Clear" Appearance="Secondary"
-                                       Click="ClearFlowchartPath_Click" Height="36" />
-                        </Grid>
-                    </StackPanel>
-
-                </StackPanel>
-            </Border>
-
-            <StackPanel Orientation="Horizontal" Margin="4,6,0,24">
-                <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
-                           VerticalAlignment="Center">
-                    <Run Text="Path is saved automatically." />
-                </TextBlock>
-                <ui:Button x:Name="btnResetFolderPref" Content="Reset 'Save to' preference"
-                           Appearance="Secondary" FontSize="11" Height="26"
-                           Margin="16,0,0,0" Padding="10,0"
-                           Click="ResetFolderPreference_Click"
-                           Visibility="Collapsed" />
-            </StackPanel>
-
-            <!-- ══════════════════════════════════════════════════
-                 EXPERT SETTINGS
-                 ══════════════════════════════════════════════════ -->
-            <StackPanel Orientation="Horizontal" Margin="4,28,0,16">
-                <ui:SymbolIcon Symbol="Settings24" FontSize="24" Margin="0,0,8,0"
-                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                <TextBlock Text="Expert Settings" FontSize="20" FontWeight="SemiBold"
-                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Margin="4,0,0,10">
-                <ui:SymbolIcon Symbol="DocumentTable24" FontSize="20" Margin="0,0,8,0"
-                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                <TextBlock Text="Wiki Data Parser" FontSize="16" FontWeight="SemiBold"
-                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-            </StackPanel>
-
-            <Border x:Name="expertChunkCard"
-                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    CornerRadius="8"
-                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
-                <Border x:Name="expertChunkHighlight" CornerRadius="4">
-                <StackPanel>
-
-                    <StackPanel Margin="16,14,16,14">
-                        <TextBlock Text="Area chunk sizes" FontSize="13" FontWeight="SemiBold"
-                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                   Margin="0,0,0,4" />
-                        <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
-                                   TextWrapping="Wrap" Margin="0,0,0,10">
-                            <Run Text="Define how many areas go into each Lua chunk. Areas beyond the defined chunks use 40 as default." />
-                        </TextBlock>
-
-                        <!-- Dynamic chunk rows — built in code-behind -->
-                        <StackPanel x:Name="chunksPanel" Margin="0,0,0,8" />
-
-                        <!-- Add row -->
-                        <ui:Button x:Name="btnAddChunk" Content="+ Add chunk"
-                                   Appearance="Secondary" Height="32"
-                                   Click="BtnAddChunk_Click" HorizontalAlignment="Left" />
-                    </StackPanel>
-
-                </StackPanel>
-                </Border>
-            </Border>
-
-            <!-- ══════════════════════════════════════════════════
-                 APPEARANCE
-                 ══════════════════════════════════════════════════ -->
-            <StackPanel Orientation="Horizontal" Margin="4,28,0,10">
-                <ui:SymbolIcon Symbol="PaintBrush24" FontSize="20" Margin="0,0,8,0"
-                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                <TextBlock Text="Appearance" FontSize="16" FontWeight="SemiBold"
-                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-            </StackPanel>
-
-            <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    CornerRadius="8"
-                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
-                <StackPanel Margin="16,14,16,12">
-                    <TextBlock Text="Theme" FontSize="13" FontWeight="SemiBold"
-                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                               Margin="0,0,0,4" />
-                    <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
-                               Margin="0,0,0,8">
-                        <Run Text="Choose the application color theme. System follows your Windows setting." />
+                    <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
+                               Margin="4,6,0,0">
+                        <Run Text="File paths are saved automatically and persist between sessions." />
                     </TextBlock>
-                    <ComboBox x:Name="cmbTheme" Width="200" HorizontalAlignment="Left"
-                              SelectionChanged="CmbTheme_SelectionChanged">
-                        <ComboBoxItem Content="System default" />
-                        <ComboBoxItem Content="Light" />
-                        <ComboBoxItem Content="Dark" />
-                    </ComboBox>
-                </StackPanel>
-            </Border>
 
-        </StackPanel>
-    </ScrollViewer>
+                    <!-- APPEARANCE -->
+                    <StackPanel Orientation="Horizontal" Margin="4,28,0,10">
+                        <ui:SymbolIcon Symbol="PaintBrush24" FontSize="20" Margin="0,0,8,0"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        <TextBlock Text="Appearance" FontSize="16" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                    </StackPanel>
+
+                    <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                            CornerRadius="8"
+                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                        <StackPanel Margin="16,14,16,12">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                    <TextBlock Text="Theme" FontSize="13" FontWeight="SemiBold"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                               Margin="0,0,0,4" />
+                                    <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12">
+                                        <Run Text="Choose the application color theme. System follows your Windows setting." />
+                                    </TextBlock>
+                                </StackPanel>
+                                <ComboBox x:Name="cmbTheme" Grid.Column="1" Width="200"
+                                          VerticalAlignment="Center" Margin="16,0,0,0"
+                                          SelectionChanged="CmbTheme_SelectionChanged">
+                                    <ComboBoxItem Content="System default" />
+                                    <ComboBoxItem Content="Light" />
+                                    <ComboBoxItem Content="Dark" />
+                                </ComboBox>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- WORKSPACE -->
+                    <StackPanel Orientation="Horizontal" Margin="4,28,0,10">
+                        <ui:SymbolIcon Symbol="FolderOpen24" FontSize="20" Margin="0,0,8,0"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        <TextBlock Text="Workspace" FontSize="16" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                    </StackPanel>
+
+                    <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                            CornerRadius="8"
+                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                        <StackPanel Margin="16,14,16,12">
+                            <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                       TextWrapping="Wrap" Margin="0,0,0,8">
+                                <Run Text="Default folder for saving and browsing files. The app will start here when opening file dialogs." />
+                            </TextBlock>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <ui:TextBox x:Name="txtImageBasePath"
+                                            PlaceholderText="Optional — leave empty to start from default location..."
+                                            IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False"
+                                            Margin="0,0,8,0" />
+                                <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
+                                           Click="BrowseImageBasePath_Click" Margin="0,0,8,0" Height="36" />
+                                <ui:Button Grid.Column="2" Content="Clear" Appearance="Secondary"
+                                           Click="ClearImageBasePath_Click" Height="36" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
+                               Margin="4,6,0,0">
+                        <Run Text="Path is saved automatically." />
+                    </TextBlock>
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- ── TAB: TOOLS ── -->
+            <ScrollViewer x:Name="panelTools" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+                <StackPanel MaxWidth="700" Margin="24,16">
+
+                    <!-- IMAGE SPLITTER -->
+                    <StackPanel Orientation="Horizontal" Margin="4,0,0,10">
+                        <ui:SymbolIcon Symbol="ImageEdit24" FontSize="20" Margin="0,0,8,0"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        <TextBlock Text="Image Splitter" FontSize="16" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                    </StackPanel>
+
+                    <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                            CornerRadius="8"
+                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                        <StackPanel>
+
+                            <!-- Primary TinyPNG API Key -->
+                            <StackPanel Margin="16,14,16,12">
+                                <TextBlock Text="Primary TinyPNG API Key" FontSize="13" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                           Margin="0,0,0,8" />
+                                <ui:TextBox x:Name="txtTinifyKey"
+                                            PlaceholderText="Enter your primary TinyPNG API key..."
+                                            TextChanged="TinifyKey_TextChanged" />
+                            </StackPanel>
+
+                            <Separator Opacity="0.15" Margin="0" />
+
+                            <!-- Secondary TinyPNG API Key -->
+                            <StackPanel Margin="16,14,16,12">
+                                <TextBlock Text="Secondary TinyPNG API Key" FontSize="13" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                           Margin="0,0,0,4" />
+                                <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                           Margin="0,0,0,8">
+                                    <Run Text="Used as fallback if the primary key fails or runs out of credits." />
+                                </TextBlock>
+                                <ui:TextBox x:Name="txtTinifyKey2"
+                                            PlaceholderText="Optional — leave empty to skip fallback..."
+                                            TextChanged="TinifyKey2_TextChanged" />
+                            </StackPanel>
+
+                            <Separator Opacity="0.15" Margin="0" />
+
+                            <!-- Clipboard Settings -->
+                            <StackPanel Margin="16,14,16,12">
+                                <Grid Margin="0,0,0,12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                        <TextBlock Text="Auto-add clipboard images" FontSize="13" FontWeight="SemiBold"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                   Margin="0,0,0,4" />
+                                        <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                                   TextWrapping="Wrap">
+                                            <Run Text="Automatically add images detected in the clipboard to the Image Splitter." />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <ui:ToggleSwitch x:Name="toggleClipboardAutoAdd" Grid.Column="1"
+                                                     VerticalAlignment="Center"
+                                                     Checked="ToggleClipboardAutoAdd_Changed"
+                                                     Unchecked="ToggleClipboardAutoAdd_Changed" />
+                                </Grid>
+                                <Grid x:Name="gridClipboardGlobal" Visibility="Collapsed">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                        <TextBlock Text="Monitor clipboard on all pages" FontSize="13" FontWeight="SemiBold"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                   Margin="0,0,0,4" />
+                                        <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                                   TextWrapping="Wrap">
+                                            <Run Text="When off, clipboard is only monitored while the Image Splitter page is active." />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <ui:ToggleSwitch x:Name="toggleClipboardGlobal" Grid.Column="1"
+                                                     VerticalAlignment="Center"
+                                                     Checked="ToggleClipboardGlobal_Changed"
+                                                     Unchecked="ToggleClipboardGlobal_Changed" />
+                                </Grid>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </Border>
+
+                    <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
+                               Margin="4,6,0,16"><Run Text="Get your free key at " /><Hyperlink NavigateUri="https://tinify.com/developers" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="tinypng.com (tinify.com)" /></Hyperlink><Run Text="." /></TextBlock>
+
+                    <!-- AREA FLOWCHARTS -->
+                    <StackPanel Orientation="Horizontal" Margin="4,12,0,10">
+                        <ui:SymbolIcon Symbol="Flow24" FontSize="20" Margin="0,0,8,0"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        <TextBlock Text="Area Flowcharts" FontSize="16" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                    </StackPanel>
+
+                    <Border x:Name="flowchartSectionBorder"
+                            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                            CornerRadius="8"
+                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                        <StackPanel>
+                            <StackPanel Margin="16,14,16,12">
+                                <TextBlock Text="Flowchart Output Folder" FontSize="13" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                           Margin="0,0,0,4" />
+                                <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                           TextWrapping="Wrap" Margin="0,0,0,8">
+                                    <Run Text="Directory where generated SVG flowcharts will be saved." />
+                                </TextBlock>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <ui:TextBox x:Name="txtFlowchartPath"
+                                                PlaceholderText="Select output folder..."
+                                                IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False"
+                                                Margin="0,0,8,0" />
+                                    <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
+                                               Click="BrowseFlowchartPath_Click" Margin="0,0,8,0" Height="36" />
+                                    <ui:Button Grid.Column="2" Content="Clear" Appearance="Secondary"
+                                               Click="ClearFlowchartPath_Click" Height="36" />
+                                </Grid>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <StackPanel Orientation="Horizontal" Margin="4,6,0,0">
+                        <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
+                                   VerticalAlignment="Center">
+                            <Run Text="Path is saved automatically." />
+                        </TextBlock>
+                        <ui:Button x:Name="btnResetFolderPref" Content="Reset 'Save to' preference"
+                                   Appearance="Secondary" FontSize="11" Height="26"
+                                   Margin="16,0,0,0" Padding="10,0"
+                                   Click="ResetFolderPreference_Click"
+                                   Visibility="Collapsed" />
+                    </StackPanel>
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- ── TAB: WIKI ── -->
+            <ScrollViewer x:Name="panelWiki" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+                <StackPanel MaxWidth="700" Margin="24,16">
+
+                    <!-- WIKI MAPPING -->
+                    <StackPanel Orientation="Horizontal" Margin="4,0,0,10">
+                        <ui:SymbolIcon Symbol="Globe24" FontSize="20" Margin="0,0,8,0"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        <TextBlock Text="Wiki Mapping" FontSize="16" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                    </StackPanel>
+
+                    <Border x:Name="wikiMappingSectionBorder"
+                            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                            CornerRadius="8"
+                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                        <StackPanel Margin="16,14,16,12">
+                            <TextBlock Text="Item Name Mapping Cache" FontSize="13" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                       Margin="0,0,0,4" />
+                            <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                       TextWrapping="Wrap" Margin="0,0,0,10">
+                                <Run Text="Fetches item name overrides from the Fandom wiki module. Cache refreshes automatically once per day at startup." />
+                            </TextBlock>
+
+                            <Grid Margin="0,0,0,4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock x:Name="txtWikiMappingStatus" Grid.Column="0"
+                                           VerticalAlignment="Center"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12" />
+                                <ui:Button x:Name="btnRefreshMapping" Grid.Column="1"
+                                           Content="Refresh Now" Appearance="Secondary" Height="36"
+                                           Click="BtnRefreshMapping_Click" />
+                            </Grid>
+
+                            <!-- Source link (belongs to cache section) -->
+                            <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
+                                       Margin="0,2,0,12">
+                                <Run Text="Source: " /><Hyperlink NavigateUri="https://merge-mansion.fandom.com/wiki/Module:Datatable/Items/Mapping" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="Module:Datatable/Items/Mapping" /></Hyperlink>
+                            </TextBlock>
+
+                            <Separator Opacity="0.15" Margin="-16,0,-16,12" />
+
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                                <TextBlock Text="Your Fandom Account" FontSize="13" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                <TextBlock Margin="8,0,0,0" FontSize="12" VerticalAlignment="Center">
+                                    <Hyperlink Click="BtnBotGuide_Click"><Run Text="How to set up" /></Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                            <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                       TextWrapping="Wrap" Margin="0,0,0,10">
+                                <Run Text="Log in with your bot password to unlock wiki editing." />
+                                <Run Text=" Do not use your regular Fandom password" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" /><Run Text=" — it won't work via the API. Create a bot password first (see guide above)." />
+                            </TextBlock>
+                            <Grid Margin="0,0,0,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Username:" FontSize="12" VerticalAlignment="Center"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                           Width="80" />
+                                <ui:TextBox x:Name="txtWikiBotUsername" Grid.Column="1"
+                                            PlaceholderText="YourName@BotPasswordName"
+                                            TextChanged="WikiBotCredentials_TextChanged" />
+                            </Grid>
+                            <Grid Margin="0,0,0,12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Password:" FontSize="12" VerticalAlignment="Center"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                           Width="80" />
+                                <ui:PasswordBox x:Name="txtWikiBotPassword" Grid.Column="1"
+                                                PlaceholderText="Generated bot password"
+                                                PasswordChanged="WikiBotPassword_Changed" />
+                            </Grid>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock x:Name="txtWikiBotStatus" Grid.Column="0"
+                                           VerticalAlignment="Center"
+                                           Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12" />
+                                <ui:Button x:Name="btnVerifyBot" Grid.Column="1"
+                                           Content="Log In" Appearance="Primary" Height="36"
+                                           Click="BtnVerifyBot_Click" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- ── TAB: ADVANCED ── -->
+            <ScrollViewer x:Name="panelAdvanced" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+                <StackPanel MaxWidth="700" Margin="24,16">
+
+                    <!-- WIKI DATA PARSER -->
+                    <StackPanel Orientation="Horizontal" Margin="4,0,0,10">
+                        <ui:SymbolIcon Symbol="DocumentTable24" FontSize="20" Margin="0,0,8,0"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        <TextBlock Text="Wiki Data Parser" FontSize="16" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                    </StackPanel>
+
+                    <Border x:Name="expertChunkCard"
+                            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                            CornerRadius="8"
+                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                        <Border x:Name="expertChunkHighlight" CornerRadius="4">
+                        <StackPanel>
+                            <StackPanel Margin="16,14,16,14">
+                                <TextBlock Text="Area chunk sizes" FontSize="13" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                           Margin="0,0,0,4" />
+                                <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                           TextWrapping="Wrap" Margin="0,0,0,10">
+                                    <Run Text="Define how many areas go into each Lua chunk. Areas beyond the defined chunks use 40 as default." />
+                                </TextBlock>
+
+                                <!-- Dynamic chunk rows — built in code-behind -->
+                                <StackPanel x:Name="chunksPanel" Margin="0,0,0,8" />
+
+                                <!-- Add row -->
+                                <ui:Button x:Name="btnAddChunk" Content="+ Add chunk"
+                                           Appearance="Secondary" Height="32"
+                                           Click="BtnAddChunk_Click" HorizontalAlignment="Left" />
+                            </StackPanel>
+                        </StackPanel>
+                        </Border>
+                    </Border>
+
+                    <!-- DEBUG MODE -->
+                    <StackPanel Orientation="Horizontal" Margin="4,28,0,10">
+                        <ui:SymbolIcon Symbol="Bug24" FontSize="20" Margin="0,0,8,0"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        <TextBlock Text="Debug Mode" FontSize="16" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                    </StackPanel>
+
+                    <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                            CornerRadius="8"
+                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                        <StackPanel Margin="16,14,16,12">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                    <TextBlock Text="Enable Debug Mode" FontSize="13" FontWeight="SemiBold"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                    <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                               TextWrapping="Wrap" Margin="0,4,16,0">
+                                        <Run Text="When enabled, generated flowcharts are also saved to a 'FlowCharts' folder next to the .exe file. This allows external tools (e.g. Claude) to access SVG outputs directly." />
+                                    </TextBlock>
+                                </StackPanel>
+                                <ui:ToggleSwitch x:Name="toggleDebugMode" Grid.Column="1"
+                                                 VerticalAlignment="Center"
+                                                 Checked="ToggleDebugMode_Changed"
+                                                 Unchecked="ToggleDebugMode_Changed" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                </StackPanel>
+            </ScrollViewer>
+
+        </Grid>
+    </Grid>
 </UserControl>

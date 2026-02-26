@@ -6,22 +6,103 @@
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" Background="{DynamicResource CardBackgroundFillColorDefaultBrush}" CornerRadius="8" Margin="0,0,0,15"
+        <!-- Row 0: Chain mode banner (collapsed by default) -->
+        <Border x:Name="chainModeBanner" Grid.Row="0" Visibility="Collapsed"
+                Background="{DynamicResource AccentFillColorDefaultBrush}"
+                CornerRadius="6" Padding="14,8" Margin="0,0,0,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <ui:SymbolIcon Symbol="Link24"
+                               Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}" />
+                <StackPanel Grid.Column="1" Margin="10,0">
+                    <TextBlock x:Name="txtChainName" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
+                    <TextBlock x:Name="txtChainItemCount" FontSize="11"
+                               Foreground="{DynamicResource TextOnAccentFillColorSecondaryBrush}"/>
+                </StackPanel>
+                <ui:Button Grid.Column="2" Content="Exit" Icon="{ui:SymbolIcon Dismiss24}"
+                           Click="BtnExitChainMode_Click"
+                           Background="#20000000" BorderThickness="0"
+                           Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
+                           MouseOverBackground="#30000000" PressedBackground="#40000000"
+                           Padding="12,6"/>
+            </Grid>
+        </Border>
+
+        <!-- Chain suggestion banner (collapsed by default) -->
+        <Border x:Name="chainSuggestionBanner" Grid.Row="0" Visibility="Collapsed"
+                Background="{DynamicResource SubtleFillColorTertiaryBrush}"
+                CornerRadius="6" Padding="0" Margin="0,0,0,12"
+                BorderBrush="{DynamicResource AccentFillColorDefaultBrush}" BorderThickness="3,0,0,0">
+            <Grid Margin="12,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <ui:SymbolIcon Symbol="Lightbulb24" FontSize="18" VerticalAlignment="Center"/>
+                <TextBlock x:Name="txtSuggestionMessage" Grid.Column="1" Margin="10,0"
+                           VerticalAlignment="Center" TextWrapping="Wrap"/>
+                <ui:Button x:Name="btnLinkSuggested" Grid.Column="2" Content="Link to Chain"
+                           Icon="{ui:SymbolIcon Link24}" Appearance="Primary"
+                           Padding="12,6" Margin="0,0,6,0" VerticalAlignment="Center"
+                           Click="BtnLinkSuggested_Click"/>
+                <ui:Button Grid.Column="3" Padding="6" VerticalAlignment="Center"
+                           Appearance="Secondary" Click="BtnDismissSuggestion_Click"
+                           ToolTip="Dismiss" ToolTipService.InitialShowDelay="0">
+                    <ui:SymbolIcon Symbol="Dismiss24" FontSize="14"/>
+                </ui:Button>
+            </Grid>
+        </Border>
+
+        <!-- Row 1: Thumbnail strip (collapsed when no images) -->
+        <Border x:Name="thumbnailStripBorder" Grid.Row="1" Visibility="Collapsed"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                CornerRadius="8" Margin="0,0,0,10"
+                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled"
+                              Padding="6,6,0,6">
+                    <StackPanel x:Name="thumbnailPanel" Orientation="Horizontal"/>
+                </ScrollViewer>
+                <ui:Button x:Name="btnClearAll" Grid.Column="1" ToolTip="Clear all images"
+                           ToolTipService.InitialShowDelay="0"
+                           Appearance="Secondary" Padding="6" Margin="4,0,6,0"
+                           VerticalAlignment="Center" Click="BtnClearAll_Click">
+                    <ui:SymbolIcon Symbol="Delete24" FontSize="16"/>
+                </ui:Button>
+            </Grid>
+        </Border>
+
+        <!-- Row 2: Preview / Drop zone -->
+        <Border Grid.Row="2" Background="{DynamicResource CardBackgroundFillColorDefaultBrush}" CornerRadius="8" Margin="0,0,0,15"
                 BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
             <Grid>
                 <Image x:Name="imgPreview" Margin="15"/>
-                <ui:TextBlock x:Name="txtPlaceholder" Text="Drag your source image here"
+                <ui:TextBlock x:Name="txtPlaceholder" Text="Drag your source images here"
                               HorizontalAlignment="Center" VerticalAlignment="Center" Appearance="Tertiary"/>
             </Grid>
         </Border>
 
-        <ui:TextBox x:Name="inputIndices" Grid.Row="1"
+        <!-- Row 3: Index input TextBox -->
+        <ui:TextBox x:Name="inputIndices" Grid.Row="3"
                     PlaceholderText="Insert Indexes (ex. 4 5 2 3 1)..."
                     AcceptsReturn="True"
                     MinHeight="80"
@@ -30,26 +111,53 @@
                     Margin="0,0,0,10"
                     PreviewKeyDown="InputIndices_PreviewKeyDown"/>
 
-        <Grid Grid.Row="2" Margin="0,0,0,10">
+        <!-- Row 4: Button bar -->
+        <Grid Grid.Row="4" Margin="0,0,0,10">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <ui:Button x:Name="btnOpenOptimize" Grid.Column="0"
+            <ui:Button x:Name="btnUploadWiki" Grid.Column="0"
+                       Content="Upload to Wiki" Icon="{ui:SymbolIcon ArrowUpload24}"
+                       Appearance="Primary" Visibility="Collapsed"
+                       IsEnabled="False" Click="BtnUploadWiki_Click"
+                       Height="45" HorizontalAlignment="Left" Margin="0,0,10,0"
+                       ToolTip="Images must be optimized first"
+                       ToolTipService.ShowOnDisabled="True"/>
+
+            <ui:Button x:Name="btnOpenOptimize" Grid.Column="1"
                        Content="Optimise generated PNGs (TinyPNG)"
-                       Icon="ArrowDownload24" Appearance="Secondary"
+                       Icon="{ui:SymbolIcon ArrowDownload24}" Appearance="Secondary"
                        Visibility="Collapsed" Click="BtnOpenOptimize_Click"
                        Height="45" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
 
-            <ui:Button Grid.Column="1" Content="Split Images"
-                       Icon="Play24" Appearance="Primary"
+            <!-- Name source dropdown (visible for multi-image clusters) -->
+            <ComboBox x:Name="cmbNameSource" Grid.Column="2"
+                      Visibility="Collapsed" Height="45" MinWidth="180"
+                      Margin="10,0,0,0" VerticalAlignment="Bottom"
+                      SelectionChanged="CmbNameSource_SelectionChanged"/>
+
+            <ui:Button Grid.Column="3" Content="Split Images"
+                       Icon="{ui:SymbolIcon Play24}" Appearance="Primary"
                        Width="180" Height="45" Click="BtnProcess_Click"
                        Margin="10,0,0,0" VerticalAlignment="Bottom"/>
         </Grid>
 
-        <Border Grid.Row="3" MinHeight="48">
+        <!-- Row 5: InfoBar + clipboard Add button -->
+        <Grid Grid.Row="5" MinHeight="48">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
             <ui:InfoBar x:Name="infoBar" IsOpen="False" IsClosable="True"/>
-        </Border>
+            <ui:Button x:Name="btnClipboardAdd" Grid.Column="1"
+                       Content="Add" Icon="{ui:SymbolIcon ClipboardPaste24}"
+                       Appearance="Primary" Height="36" Padding="14,0"
+                       Margin="8,0,0,0" VerticalAlignment="Center"
+                       Visibility="Collapsed" Click="BtnClipboardAdd_Click"/>
+        </Grid>
     </Grid>
 </UserControl>

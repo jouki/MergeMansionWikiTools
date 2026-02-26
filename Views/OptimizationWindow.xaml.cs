@@ -65,7 +65,10 @@ public partial class OptimizationWindow : FluentWindow
 {
     private readonly string _apiKey;
     private readonly string _apiKey2;
+    private bool _startedFired;
     public ObservableCollection<FileInfoItem> Files { get; set; } = new();
+    public event Action? OptimizationStarted;
+    public bool AllOptimized => Files.All(f => !f.IsSelected || f.IsOptimized);
 
     public OptimizationWindow(List<string> filePaths, string apiKey, string apiKey2)
     {
@@ -154,6 +157,12 @@ public partial class OptimizationWindow : FluentWindow
     {
         var toProcess = Files.Where(f => f.IsSelected && !f.IsOptimized).ToList();
         if (!toProcess.Any()) return;
+
+        if (!_startedFired)
+        {
+            _startedFired = true;
+            OptimizationStarted?.Invoke();
+        }
 
         btnRun.IsEnabled = false;
         progressBar.Visibility = Visibility.Visible;

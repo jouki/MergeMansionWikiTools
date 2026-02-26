@@ -11,5 +11,8 @@ public class UserStats
     public int ImagesOptimized { get; set; }
     public int ImagesExtracted { get; set; }
     public int DialoguesExtracted { get; set; }
+    public int MysteryTemplatesGenerated { get; set; }
+    public int MysteryPagesPublished { get; set; }
+    public int WikiImagesUploaded { get; set; }
     public DateTime FirstLaunch { get; set; } = DateTime.UtcNow;
 }

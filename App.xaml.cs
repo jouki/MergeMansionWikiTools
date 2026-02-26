@@ -2,6 +2,7 @@ using System;
 using System.Windows;
 using System.Windows.Media;
 using MergeMansionWikiTools.Services;
+using MergeMansionWikiTools.Views;
 using Microsoft.Win32;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
@@ -17,6 +18,28 @@ namespace MergeMansionWikiTools
             // Apply theme early (before MainWindow renders) based on saved preference
             var settings = SettingsService.Load();
             ApplyTheme(settings.ThemePreference);
+
+            // Splash: fade in 1s (smooth) → load app behind splash → fade out 0.2s
+            var splash = new SplashWindow();
+            MainWindow = splash;
+            splash.Show();
+
+            splash.RunFadeSequence(
+                startFadeOut =>
+                {
+                    // Fade-in done — splash is static, safe to load MainWindow
+                    var main = new MainWindow();
+                    main.Show();
+                    MainWindow = main;
+
+                    // Start fade-out once MainWindow is fully loaded
+                    if (main.IsLoaded)
+                        startFadeOut();
+                    else
+                        main.Loaded += (_, _) => startFadeOut();
+                },
+                () => splash.Close()
+            );
         }
 
         public static void ApplyTheme(string preference)

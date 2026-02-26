@@ -63,6 +63,6 @@
 #*.RTF   diff=astextplain
 
 ###############################################################################
-# git-crypt: encrypt Claude Context folder
+# git-crypt: encrypt _CONTEXT folder
 ###############################################################################
-Claude[[:space:]]Context/** filter=git-crypt diff=git-crypt
+_CONTEXT/** filter=git-crypt diff=git-crypt

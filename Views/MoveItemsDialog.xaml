@@ -1,0 +1,332 @@
+<ui:FluentWindow x:Class="MergeMansionWikiTools.Views.MoveItemsDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="Move Items" MinHeight="300" Width="960"
+    SizeToContent="Height"
+    WindowStartupLocation="CenterOwner"
+    ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica"
+    ResizeMode="NoResize">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <ui:TitleBar Grid.Row="0" Title="Move Items" Height="36" />
+
+        <Grid Grid.Row="1" Margin="24,10,24,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Two-column content area -->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="490" />
+                    <ColumnDefinition Width="16" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- ── Left column: existing move items content ── -->
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Header: Moving X items from "ChainName" -->
+                    <TextBlock x:Name="txtHeader" Grid.Row="0" FontSize="15" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                               Margin="0,0,0,10" />
+
+                    <!-- Item list -->
+                    <ItemsControl x:Name="itemsList" Grid.Row="1" Margin="0,0,0,14">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="8,2">
+                                    <TextBlock Text="{Binding Level, StringFormat='Lv{0}'}"
+                                               Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                               FontSize="12" FontFamily="Consolas" Width="35" />
+                                    <TextBlock Text="{Binding Name}"
+                                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                               FontSize="12" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- New chain name -->
+                    <TextBlock Grid.Row="2" Text="New chain name:" FontSize="13"
+                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                               Margin="0,0,0,5" />
+
+                    <!-- Custom autocomplete: TextBox + Popup + ListBox -->
+                    <Grid Grid.Row="3" Margin="0,0,0,12">
+                        <ui:TextBox x:Name="txtChainName"
+                                    PlaceholderText="Type to search..."
+                                    TextChanged="TxtChainName_TextChanged"
+                                    PreviewKeyDown="TxtChainName_PreviewKeyDown" />
+                        <Popup x:Name="suggestPopup"
+                               PlacementTarget="{Binding ElementName=txtChainName}"
+                               Placement="Bottom" StaysOpen="False"
+                               AllowsTransparency="True" PopupAnimation="Fade"
+                               Width="{Binding ActualWidth, ElementName=txtChainName}">
+                            <Border Background="{DynamicResource SolidBackgroundFillColorBaseBrush}"
+                                    CornerRadius="6" Margin="0,2,0,0">
+                                <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                        BorderThickness="1" CornerRadius="6" Padding="0,4">
+                                    <Border.Effect>
+                                        <DropShadowEffect BlurRadius="12" ShadowDepth="3" Opacity="0.18"
+                                                          Direction="270" Color="Black" />
+                                    </Border.Effect>
+                                    <ListBox x:Name="suggestList" Background="Transparent"
+                                             BorderThickness="0" MaxHeight="200"
+                                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                             PreviewMouseLeftButtonUp="SuggestList_MouseUp">
+                                        <ListBox.ItemContainerStyle>
+                                            <Style TargetType="ListBoxItem">
+                                                <Setter Property="Padding" Value="10,6" />
+                                                <Setter Property="Cursor" Value="Hand" />
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ListBoxItem">
+                                                            <Border x:Name="Bd" Padding="{TemplateBinding Padding}"
+                                                                    Background="Transparent" CornerRadius="3"
+                                                                    Margin="3,0">
+                                                                <ContentPresenter />
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="Bd" Property="Background"
+                                                                            Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
+                                                                </Trigger>
+                                                                <Trigger Property="IsSelected" Value="True">
+                                                                    <Setter TargetName="Bd" Property="Background"
+                                                                            Value="{DynamicResource SubtleFillColorTertiaryBrush}" />
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ListBox.ItemContainerStyle>
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding}"
+                                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                           FontSize="13" />
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </Border>
+                            </Border>
+                        </Popup>
+                    </Grid>
+
+                    <!-- Level field (single-item mode only) -->
+                    <Grid x:Name="levelPanel" Grid.Row="4" Visibility="Collapsed" Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="Level:" FontSize="13" VerticalAlignment="Center"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                   Margin="0,0,10,0" />
+                        <ui:NumberBox x:Name="nbLevel" Grid.Column="1"
+                                      Minimum="1" Maximum="99" SmallChange="1"
+                                      SpinButtonPlacementMode="Compact"
+                                      ValueChanged="NbLevel_ValueChanged" />
+                    </Grid>
+
+                    <!-- Move wiki page checkbox -->
+                    <CheckBox x:Name="chkMovePage" Grid.Row="5"
+                              FontSize="12" Margin="0,0,0,10"
+                              IsEnabled="False"
+                              ToolTipService.ShowOnDisabled="True"
+                              ToolTipService.InitialShowDelay="0"
+                              ToolTip="Page does not exist on wiki"
+                              Checked="ChkMovePage_Changed"
+                              Unchecked="ChkMovePage_Changed" />
+
+                    <!-- Conflict panel -->
+                    <Border x:Name="conflictPanel" Grid.Row="6" Visibility="Collapsed"
+                            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                            CornerRadius="6" Padding="14,10" Margin="0,0,0,10"
+                            BorderBrush="{DynamicResource SystemFillColorCautionBrush}" BorderThickness="1">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                                <TextBlock Text="&#x26A0;" Foreground="#FFB900" FontSize="14"
+                                           VerticalAlignment="Center" Margin="0,0,6,0" />
+                                <TextBlock x:Name="txtConflictTitle" FontSize="13" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            </StackPanel>
+                            <TextBlock x:Name="txtConflictDetail" FontSize="11"
+                                       Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                       Margin="0,0,0,8" />
+
+                            <!-- Conflict chain images -->
+                            <WrapPanel x:Name="conflictImages" Margin="0,0,0,8" />
+
+                            <!-- Conflict resolution buttons -->
+                            <StackPanel Orientation="Horizontal">
+                                <ui:Button x:Name="btnMoveConflictFirst" Content="Move first"
+                                           Appearance="Primary" Padding="12,6" Margin="0,0,8,0"
+                                           Click="BtnMoveConflictFirst_Click" />
+                                <ui:Button Content="Choose other name"
+                                           Appearance="Secondary" Padding="12,6"
+                                           Click="BtnChooseOtherName_Click" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Level collision warning -->
+                    <Border x:Name="levelWarning" Grid.Row="7" Visibility="Collapsed"
+                            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                            CornerRadius="6" Padding="14,8" Margin="0,0,0,8"
+                            BorderBrush="{DynamicResource SystemFillColorCautionBrush}" BorderThickness="1">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#x26A0;" Foreground="#FFB900" FontSize="14"
+                                       VerticalAlignment="Center" Margin="0,0,6,0" />
+                            <TextBlock x:Name="txtLevelWarning" FontSize="12"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <!-- ── Right column: backlinks panel ── -->
+                <Border x:Name="backlinksPanel" Grid.Column="2"
+                        IsEnabled="False" Opacity="0.4"
+                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                        CornerRadius="6" Padding="14,10" BorderThickness="1"
+                        BorderBrush="{DynamicResource ControlElevationBorderBrush}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <!-- Header -->
+                        <TextBlock x:Name="txtBacklinksHeader" Grid.Row="0"
+                                   Text="Pages referencing this chain"
+                                   FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                   Margin="0,0,0,10" />
+
+                        <!-- ProgressRing (centered) -->
+                        <ui:ProgressRing x:Name="backlinksProgress" Grid.Row="1"
+                                         Width="28" Height="28"
+                                         Visibility="Collapsed"
+                                         HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                        <!-- Empty message -->
+                        <TextBlock x:Name="txtBacklinksEmpty" Grid.Row="1"
+                                   Visibility="Collapsed"
+                                   Text="No pages reference this chain name"
+                                   FontSize="12" FontStyle="Italic"
+                                   Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                        <!-- Checkbox list -->
+                        <ListBox x:Name="backlinksList" Grid.Row="1"
+                                 Visibility="Collapsed"
+                                 Background="Transparent" BorderThickness="0"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Padding" Value="0" />
+                                    <Setter Property="Margin" Value="0" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                    <Setter Property="Focusable" Value="False" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListBoxItem">
+                                                <ContentPresenter />
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}"
+                                              Margin="0,1" Padding="4,0">
+                                        <TextBlock Text="{Binding Title}" FontSize="12"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                   TextTrimming="CharacterEllipsis" />
+                                    </CheckBox>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <!-- Select All / Deselect All -->
+                        <StackPanel x:Name="backlinksActions" Grid.Row="2"
+                                    Visibility="Collapsed" Orientation="Horizontal"
+                                    Margin="0,8,0,0">
+                            <ui:Button Content="Select All" FontSize="11"
+                                       Appearance="Secondary" Padding="10,4"
+                                       Margin="0,0,6,0"
+                                       Click="BtnBacklinksSelectAll_Click" />
+                            <ui:Button Content="Deselect All" FontSize="11"
+                                       Appearance="Secondary" Padding="10,4"
+                                       Click="BtnBacklinksDeselectAll_Click" />
+                        </StackPanel>
+
+                        <!-- Pagination -->
+                        <StackPanel x:Name="backlinksPagination" Grid.Row="3"
+                                    Visibility="Collapsed" Orientation="Horizontal"
+                                    HorizontalAlignment="Right" Margin="0,6,0,0">
+                            <TextBlock x:Name="txtBacklinksPageInfo" FontSize="11"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                       VerticalAlignment="Center" Margin="0,0,8,0" />
+                            <ui:Button x:Name="btnBacklinksPrev" Content="&#x25C4;"
+                                       FontSize="10" Padding="6,2"
+                                       Appearance="Secondary"
+                                       Click="BtnBacklinksPrev_Click" />
+                            <ui:Button x:Name="btnBacklinksNext" Content="&#x25BA;"
+                                       FontSize="10" Padding="6,2" Margin="4,0,0,0"
+                                       Appearance="Secondary"
+                                       Click="BtnBacklinksNext_Click" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!-- Bottom bar: InfoBar + buttons (spans both columns) -->
+            <Grid Grid.Row="1" Margin="0,8,0,0" MinHeight="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <ui:InfoBar x:Name="statusBar" Grid.Column="0" IsOpen="False"
+                            IsClosable="True" VerticalAlignment="Stretch"
+                            Margin="0,0,12,0" />
+
+                <ui:Button Grid.Column="1" Content="Cancel"
+                           Appearance="Secondary" Click="BtnCancel_Click"
+                           VerticalAlignment="Stretch"
+                           Margin="0,1,8,2" />
+                <ui:Button x:Name="btnConfirm" Grid.Column="2" Content="Confirm"
+                           Appearance="Primary" Click="BtnConfirm_Click"
+                           VerticalAlignment="Stretch"
+                           Margin="0,1,0,2" />
+            </Grid>
+        </Grid>
+    </Grid>
+</ui:FluentWindow>

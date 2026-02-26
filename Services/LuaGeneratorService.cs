@@ -272,6 +272,6 @@ public class LuaGeneratorService
     private static string Esc(string? s)
     {
         if (string.IsNullOrEmpty(s)) return "";
-        return s.Replace("\\", "\\\\").Replace("\"", "\\\"");
+        return s.Trim().Replace("\\", "\\\\").Replace("\"", "\\\"");
     }
 }

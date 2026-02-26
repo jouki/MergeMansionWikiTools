@@ -20,19 +20,27 @@ public partial class MainWindow : FluentWindow
     public AppSettings Settings { get; private set; }
     public ChainNameService ChainNameService { get; } = new();
     public DataService? DataService { get; private set; }
+    public WikiMappingCache? WikiMapping { get; set; }
+    public MysteryService? MysteryService { get; set; }
 
     // ── Data file change events ──
     /// <summary>Fired after chain_item_odds.json is successfully loaded.</summary>
     public event Action? ChainDataLoaded;
     /// <summary>Fired when areas.json path changes (set or cleared).</summary>
     public event Action? AreasFileChanged;
+    /// <summary>Fired when events.json path changes (set or cleared).</summary>
+    public event Action? EventsFileChanged;
+
+    private bool _wikiMappingApplied;
 
     private ChainBrowserPage? _chainPage;
     private ImageSplitterPage? _imageSplitterPage;
     private WikiDataParserPage? _wikiDataParserPage;
     private ImageExtractorPage? _imageExtractorPage;
     private DialogueMakerPage? _dialogueMakerPage;
+    private MysteriesPage? _mysteriesPage;
     private AreaFlowchartsPage? _areaFlowchartsPage;
+    private AreaFlowchartsPage2? _areaFlowchartsPage2;
     private SettingsPage? _settingsPage;
     private AboutPage? _aboutPage;
 
@@ -57,6 +65,12 @@ public partial class MainWindow : FluentWindow
         {
             _ = LoadDataAsync(Settings.ChainItemOddsPath);
         }
+
+        // Load wiki mapping cache (auto-refresh if stale)
+        _ = LoadWikiMappingAsync();
+
+        // Pre-load mysteries + wiki status check (runs during splash screen)
+        _ = LoadMysteriesAsync();
 
         // Show chains page by default (navList SelectedIndex=0 triggers this)
         ShowChainsPage();
@@ -142,11 +156,28 @@ public partial class MainWindow : FluentWindow
             source.CompositionTarget.BackgroundColor = Colors.Transparent;
     }
 
+    // ── Global keyboard shortcuts ──
+
+    private void Window_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    {
+        if (e.Key == System.Windows.Input.Key.V &&
+            System.Windows.Input.Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control &&
+            contentArea.Content is ImageSplitterPage isPage)
+        {
+            if (isPage.HandleCtrlV())
+                e.Handled = true;
+        }
+    }
+
     // ── Navigation ──
 
     private void NavList_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (contentArea == null) return;
+
+        // Stop clipboard monitor when leaving IS page (unless global)
+        if (navList.SelectedIndex != 1 && _imageSplitterPage != null && !Settings.ClipboardMonitorGlobal)
+            _imageSplitterPage.StopClipboardMonitor();
 
         switch (navList.SelectedIndex)
         {
@@ -155,9 +186,11 @@ public partial class MainWindow : FluentWindow
             case 2: ShowDialogueMakerPage(); break;
             case 3: ShowWikiDataParserPage(); break;
             case 4: ShowImageExtractorPage(); break;
-            case 5: ShowAreaFlowchartsPage(); break;
-            case 6: ShowSettingsPage(); break;
-            case 7: ShowAboutPage(); break;
+            case 5: ShowMysteriesPage(); break;
+            case 6: ShowAreaFlowchartsPage(); break;
+            case 7: ShowAreaFlowchartsPage2(); break;
+            case 8: ShowSettingsPage(); break;
+            case 9: ShowAboutPage(); break;
         }
 
         UpdateNavIndicator();
@@ -172,7 +205,10 @@ public partial class MainWindow : FluentWindow
     private void ShowImageSplitterPage()
     {
         _imageSplitterPage ??= new ImageSplitterPage(this);
-        contentArea.Content = _imageSplitterPage;
+        // If already showing chain mode content, don't reset it
+        if (contentArea.Content != _imageSplitterPage)
+            contentArea.Content = _imageSplitterPage;
+        _imageSplitterPage.StartClipboardMonitor();
     }
 
     private void ShowWikiDataParserPage()
@@ -203,10 +239,22 @@ public partial class MainWindow : FluentWindow
         contentArea.Content = _dialogueMakerPage;
     }
 
+    private void ShowMysteriesPage()
+    {
+        _mysteriesPage ??= new MysteriesPage(this);
+        contentArea.Content = _mysteriesPage;
+    }
+
     private void ShowAreaFlowchartsPage()
     {
         _areaFlowchartsPage ??= new AreaFlowchartsPage(this);
         contentArea.Content = _areaFlowchartsPage;
+    }
+
+    private void ShowAreaFlowchartsPage2()
+    {
+        _areaFlowchartsPage2 ??= new AreaFlowchartsPage2(this);
+        contentArea.Content = _areaFlowchartsPage2;
     }
 
     private void ShowSettingsPage()
@@ -265,12 +313,18 @@ public partial class MainWindow : FluentWindow
             DataService = new DataService(ChainNameService);
             await DataService.LoadAsync(path);
 
-            var chainCount = DataService.Chains.Count;
-            var itemCount = DataService.ItemNames.Count;
-            txtDataStatus.Text = $"{chainCount} chains · {itemCount} items · ? events";
-
-            ShowStatus($"Loaded {chainCount} chains from {Path.GetFileName(path)}", InfoBarSeverity.Success);
+            ShowStatus($"Loaded {DataService.Chains.Count} chains from {Path.GetFileName(path)}", InfoBarSeverity.Success);
             Increment(s => s.DataLoads++);
+
+            // Reset flag — fresh data from JSON, mapping can be re-applied
+            _wikiMappingApplied = false;
+            TryApplyWikiMapping();
+
+            // Resolve mystery items (if mysteries already loaded)
+            ResolveMysteryItems();
+
+            // Update sidebar status
+            UpdateSidebarStatus();
 
             // Notify subscribers
             _chainPage?.OnDataLoaded();
@@ -316,6 +370,304 @@ public partial class MainWindow : FluentWindow
         statusBar.IsOpen = false;
     }
 
+    private async Task LoadWikiMappingAsync()
+    {
+        try
+        {
+            var cache = WikiMappingService.Load();
+            WikiMapping = cache;
+
+            if (WikiMappingService.NeedsRefresh(cache))
+            {
+                cache = await WikiMappingService.FetchFromWikiAsync();
+                WikiMapping = cache;
+            }
+        }
+        catch
+        {
+            // Use stale cache on failure — WikiMapping already set from Load()
+        }
+
+        TryApplyWikiMapping();
+    }
+
+    /// <summary>
+    /// Guards against double-application within the same data load cycle.
+    /// Called from both LoadDataAsync and LoadWikiMappingAsync (whichever completes second triggers the work).
+    /// </summary>
+    private void TryApplyWikiMapping()
+    {
+        if (_wikiMappingApplied || DataService == null || WikiMapping == null
+            || WikiMapping.Mappings.Count == 0) return;
+        _wikiMappingApplied = true;
+        ApplyWikiMappingToChains();
+    }
+
+    /// <summary>
+    /// Applies wiki mapping as primary data override: renames items, overrides levels,
+    /// regroups items into chains based on wiki chainName, and detects level collisions.
+    /// Priority: customName > wikiName > originalName > configKey.
+    /// </summary>
+    private void ApplyWikiMappingToChains()
+    {
+        if (DataService == null || WikiMapping == null || WikiMapping.Mappings.Count == 0) return;
+
+        var mappings = WikiMapping.Mappings;
+
+        // ── Phase 1: Apply field overrides per item ──
+        // Record each item's wiki-specified chainName (if any)
+        var itemWikiChainName = new Dictionary<ParsedItem, string>(); // item → wiki chainName
+
+        foreach (var chain in DataService.Chains)
+        {
+            foreach (var item in chain.Items)
+            {
+                if (string.IsNullOrEmpty(item.ItemType)) continue;
+                if (!mappings.TryGetValue(item.ItemType, out var entry)) continue;
+
+                // Override item name
+                if (!string.IsNullOrEmpty(entry.Name))
+                {
+                    item.Name = entry.Name;
+                    DataService.ItemNames[item.ItemType] = entry.Name;
+                }
+
+                // Override level
+                if (entry.Level.HasValue)
+                    item.Level = entry.Level.Value;
+
+                // Record wiki chainName for Phase 2
+                if (!string.IsNullOrEmpty(entry.ChainName))
+                    itemWikiChainName[item] = entry.ChainName;
+            }
+        }
+
+        // ── Phase 2: Build flat item list with effective chainName ──
+        // Each entry: (item, effectiveChainName, sourceChain)
+        var flatItems = new List<(ParsedItem Item, string EffectiveChainName, ParsedChain SourceChain)>();
+
+        foreach (var chain in DataService.Chains)
+        {
+            // Determine chain-level wiki default name:
+            // if ALL wiki-mapped items in this chain agree on one chainName → that name
+            var wikiNames = chain.Items
+                .Where(i => itemWikiChainName.ContainsKey(i))
+                .Select(i => itemWikiChainName[i])
+                .Distinct(StringComparer.Ordinal)
+                .ToList();
+
+            string? chainWikiDefault = wikiNames.Count == 1 ? wikiNames[0] : null;
+
+            foreach (var item in chain.Items)
+            {
+                // Item's own wiki chainName takes priority, then chain-level wiki default, then original DisplayName
+                string effectiveName;
+                if (itemWikiChainName.TryGetValue(item, out var itemSpecific))
+                    effectiveName = itemSpecific;
+                else if (chainWikiDefault != null)
+                    effectiveName = chainWikiDefault;
+                else
+                    effectiveName = chain.DisplayName;
+
+                item.SourceChainKey = chain.ConfigKey;
+                flatItems.Add((item, effectiveName, chain));
+            }
+        }
+
+        // ── Phase 3: Group items by effectiveChainName → build new chains ──
+        var newChains = new List<ParsedChain>();
+
+        foreach (var group in flatItems.GroupBy(x => x.EffectiveChainName, StringComparer.Ordinal))
+        {
+            var items = group.OrderBy(x => x.Item.Level).Select(x => x.Item).ToList();
+            var sourceChains = group.Select(x => x.SourceChain).Distinct().ToList();
+            var primarySource = sourceChains[0];
+
+            // Collect all source ConfigKeys
+            var allConfigKeys = sourceChains.Select(c => c.ConfigKey).Distinct().ToList();
+
+            // Check if the effective name came from wiki mapping
+            bool nameFromWiki = group.Any(x => itemWikiChainName.ContainsKey(x.Item));
+
+            // Determine display name: customName (from any source) > effectiveChainName
+            string? customName = null;
+            foreach (var sc in sourceChains)
+            {
+                if (!string.IsNullOrEmpty(sc.CustomName))
+                {
+                    customName = sc.CustomName;
+                    break;
+                }
+            }
+
+            var newChain = new ParsedChain
+            {
+                ConfigKey = primarySource.ConfigKey,
+                DisplayName = customName ?? group.Key,
+                OriginalName = primarySource.OriginalName,
+                HasNaturalName = primarySource.HasNaturalName,
+                CustomName = customName,
+                IsNameFromWiki = nameFromWiki && customName == null,
+                MergedFromConfigKeys = allConfigKeys.Count > 1 ? allConfigKeys : null,
+                Items = items,
+            };
+
+            newChains.Add(newChain);
+        }
+
+        // ── Phase 4: Replace DataService.Chains + update dictionaries ──
+        DataService.Chains.Clear();
+        DataService.Chains.AddRange(newChains);
+
+        foreach (var chain in newChains)
+        {
+            DataService.ChainNames[chain.ConfigKey] = chain.DisplayName;
+            if (chain.MergedFromConfigKeys != null)
+            {
+                foreach (var key in chain.MergedFromConfigKeys)
+                    DataService.ChainNames[key] = chain.DisplayName;
+            }
+        }
+
+        // ── Phase 5: Detect level collisions ──
+        foreach (var chain in newChains)
+        {
+            var levelGroups = chain.Items.GroupBy(i => i.Level).Where(g => g.Count() > 1).ToList();
+            if (levelGroups.Count > 0)
+            {
+                chain.HasLevelCollisions = true;
+                foreach (var lg in levelGroups)
+                    foreach (var item in lg)
+                        item.IsColliding = true;
+            }
+        }
+
+        // Refresh chain browser if it was already showing data
+        _chainPage?.OnDataLoaded();
+    }
+
+    /// <summary>
+    /// Pre-loads Mystery events from events.json and checks wiki page existence.
+    /// Runs during splash screen. Item resolution happens later when DataService loads.
+    /// </summary>
+    private async Task LoadMysteriesAsync()
+    {
+        var path = Settings.EventsJsonPath;
+        if (string.IsNullOrEmpty(path) || !File.Exists(path)) return;
+
+        try
+        {
+            var svc = new MysteryService();
+            await svc.LoadAsync(path);
+            MysteryService = svc;
+
+            // Resolve items if DataService is already available
+            if (DataService != null)
+            {
+                svc.ResolveEventItems(DataService);
+                svc.ResolveRewardItems(DataService, WikiMapping, null);
+            }
+
+            // Update sidebar event count
+            UpdateSidebarStatus();
+
+            // Wiki page existence check (unauthenticated, read-only)
+            await MysteryWikiService.CheckAllMysteryStatusAsync(svc.Mysteries, DataService);
+        }
+        catch
+        {
+            // Silently fail — user can reload from Mysteries page
+        }
+    }
+
+    /// <summary>
+    /// Called when chain data finishes loading — resolves mystery event items
+    /// and checks any missing wiki statuses (item pages need resolved names).
+    /// </summary>
+    private void ResolveMysteryItems()
+    {
+        if (MysteryService == null || DataService == null) return;
+
+        MysteryService.ResolveEventItems(DataService);
+        MysteryService.ResolveRewardItems(DataService, WikiMapping, null);
+        UpdateSidebarStatus();
+
+        // Check item pages that couldn't be checked earlier (EventItemName was null)
+        _ = CheckMissingItemPagesAsync();
+    }
+
+    private async Task CheckMissingItemPagesAsync()
+    {
+        if (MysteryService == null) return;
+
+        // Collect mysteries that have a resolved item name but no item page check yet
+        var needsCheck = MysteryService.Mysteries
+            .Where(m => !string.IsNullOrEmpty(m.EventItemName)
+                        && !m.WikiStatus.EventItemPageExists.HasValue)
+            .ToList();
+
+        if (needsCheck.Count == 0) return;
+
+        try
+        {
+            var titles = needsCheck
+                .Select(m => m.EventItemName!)
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            var existMap = await MysteryWikiService.CheckPagesExistAsync(titles);
+
+            foreach (var m in needsCheck)
+                m.WikiStatus.EventItemPageExists = existMap.GetValueOrDefault(m.EventItemName!, false);
+
+            // Update persistent cache with new item page results
+            var cache = MysteryWikiService.LoadStatusCache();
+            foreach (var m in MysteryService.Mysteries)
+            {
+                if (m.WikiStatus.EventItemPageExists == true)
+                {
+                    if (!cache.Entries.TryGetValue(m.ProgressionEventId, out var entry))
+                    {
+                        entry = new CachedMysteryStatus();
+                        cache.Entries[m.ProgressionEventId] = entry;
+                    }
+                    entry.EventItemPageExists = true;
+                }
+            }
+            MysteryWikiService.SaveStatusCache(cache);
+        }
+        catch
+        {
+            // Non-critical — user can re-check manually
+        }
+    }
+
+    private void UpdateSidebarStatus()
+    {
+        var chainCount = DataService?.Chains.Count ?? 0;
+        var itemCount = DataService?.ItemNames.Count ?? 0;
+        var eventCount = MysteryService?.Mysteries.Count ?? 0;
+
+        var eventText = eventCount > 0 ? $"{eventCount}" : "?";
+        txtDataStatus.Text = $"{chainCount} chains · {itemCount} items · {eventText} events";
+    }
+
+    /// <summary>
+    /// Forces a fresh fetch of wiki mapping data. Called from SettingsPage refresh button.
+    /// Reloads chain data from JSON to get fresh chains, then re-applies mapping.
+    /// </summary>
+    public async Task RefreshWikiMappingAsync()
+    {
+        WikiMapping = await WikiMappingService.FetchFromWikiAsync();
+
+        // Reload data from JSON so mapping applies to fresh (unmodified) chains
+        if (!string.IsNullOrEmpty(Settings.ChainItemOddsPath) && File.Exists(Settings.ChainItemOddsPath))
+        {
+            _wikiMappingApplied = false;
+            await LoadDataAsync(Settings.ChainItemOddsPath);
+        }
+    }
+
     public void SaveSettings()
     {
         SettingsService.Save(Settings);
@@ -332,12 +684,35 @@ public partial class MainWindow : FluentWindow
     }
 
     /// <summary>
+    /// Updates events.json path, saves settings, and notifies subscribers.
+    /// </summary>
+    public void SetEventsPath(string path)
+    {
+        Settings.EventsJsonPath = path;
+        SaveSettings();
+        MysteryService = null; // Force reload
+        _ = LoadMysteriesAsync();
+        EventsFileChanged?.Invoke();
+    }
+
+    /// <summary>
     /// Navigates to Settings page and highlights the chain_item_odds.json section.
     /// Called from WikiDataParserPage when user clicks the items file path link.
     /// </summary>
+    /// <summary>
+    /// Navigates to Image Splitter in chain mode — pre-fills chain data for wiki upload workflow.
+    /// </summary>
+    public void NavigateToImageSplitterChainMode(ParsedChain chain)
+    {
+        _imageSplitterPage ??= new ImageSplitterPage(this);
+        _imageSplitterPage.EnterChainMode(chain);
+        contentArea.Content = _imageSplitterPage;
+        navList.SelectedIndex = 1;
+    }
+
     public void NavigateToSettingsHighlightChainFile()
     {
-        navList.SelectedIndex = 6;
+        navList.SelectedIndex = 8;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightChainSection(),
             System.Windows.Threading.DispatcherPriority.Input);
@@ -345,17 +720,33 @@ public partial class MainWindow : FluentWindow
 
     public void NavigateToSettingsHighlightAreas()
     {
-        navList.SelectedIndex = 6;
+        navList.SelectedIndex = 8;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightAreasSection(),
             System.Windows.Threading.DispatcherPriority.Input);
     }
 
+    public void NavigateToSettingsHighlightWikiMapping()
+    {
+        navList.SelectedIndex = 8;
+        Dispatcher.InvokeAsync(
+            () => _settingsPage?.HighlightWikiMappingSection(),
+            System.Windows.Threading.DispatcherPriority.Input);
+    }
+
     public void NavigateToSettingsHighlightChunkSizes()
     {
-        navList.SelectedIndex = 6;
+        navList.SelectedIndex = 8;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightChunkSizes(),
+            System.Windows.Threading.DispatcherPriority.Input);
+    }
+
+    public void NavigateToSettingsHighlightEvents()
+    {
+        navList.SelectedIndex = 8;
+        Dispatcher.InvokeAsync(
+            () => _settingsPage?.HighlightEventsSection(),
             System.Windows.Threading.DispatcherPriority.Input);
     }
 

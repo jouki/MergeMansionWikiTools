@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
+using MergeMansionWikiTools.Services;
 using Microsoft.Win32;
 
 namespace MergeMansionWikiTools.Views;
@@ -11,11 +12,15 @@ namespace MergeMansionWikiTools.Views;
 public partial class SettingsPage : UserControl
 {
     private readonly MainWindow _main;
+    private ScrollViewer[] _tabPanels = null!;
+    private int _currentTabIndex;
 
     public SettingsPage(MainWindow main)
     {
         _main = main;
         InitializeComponent();
+
+        _tabPanels = [panelGeneral, panelTools, panelWiki, panelAdvanced];
 
         // Load saved paths
         txtChainPath.Text = _main.Settings.ChainItemOddsPath;
@@ -29,8 +34,24 @@ public partial class SettingsPage : UserControl
         // Show reset button if "don't ask again" is active
         UpdateResetFolderPrefVisibility();
 
+        // Debug mode
+        toggleDebugMode.IsChecked = _main.Settings.DebugMode;
+
+        // Clipboard settings
+        toggleClipboardAutoAdd.IsChecked = _main.Settings.ClipboardAutoAdd;
+        toggleClipboardGlobal.IsChecked = _main.Settings.ClipboardMonitorGlobal;
+        gridClipboardGlobal.Visibility = _main.Settings.ClipboardAutoAdd ? Visibility.Visible : Visibility.Collapsed;
+
         // Build chunk size rows
         BuildChunkRows();
+
+        // Wiki mapping status + bot credentials
+        UpdateWikiMappingStatus();
+        _suppressBotCredentialReset = true;
+        txtWikiBotUsername.Text = _main.Settings.WikiUsername;
+        txtWikiBotPassword.Password = _main.Settings.WikiPassword;
+        _suppressBotCredentialReset = false;
+        UpdateBotStatus();
 
         // Set theme ComboBox to match saved preference
         cmbTheme.SelectedIndex = _main.Settings.ThemePreference switch
@@ -39,6 +60,83 @@ public partial class SettingsPage : UserControl
             "Dark" => 2,
             _ => 0 // System
         };
+
+        // Position tab indicator after layout
+        Loaded += (_, _) => UpdateTabIndicator(animate: false);
+    }
+
+    // ── Tab bar ──
+
+    private void TabBar_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        var idx = tabBar.SelectedIndex;
+        if (idx < 0 || idx == _currentTabIndex) return;
+
+        SwitchTabContent(idx);
+        UpdateTabIndicator(animate: true);
+    }
+
+    private void SwitchToTab(int tabIndex)
+    {
+        tabBar.SelectedIndex = tabIndex;
+    }
+
+    private void SwitchTabContent(int index)
+    {
+        // Hide old panel
+        _tabPanels[_currentTabIndex].Visibility = Visibility.Collapsed;
+
+        // Show new panel with fade + slide-up animation
+        var panel = _tabPanels[index];
+        panel.Visibility = Visibility.Visible;
+        panel.Opacity = 0;
+
+        var translate = new TranslateTransform(0, 12);
+        panel.RenderTransform = translate;
+
+        var dur = TimeSpan.FromMilliseconds(200);
+        var ease = new CubicEase { EasingMode = EasingMode.EaseOut };
+
+        var fadeIn = new DoubleAnimation(0, 1, dur) { EasingFunction = ease };
+        var slideUp = new DoubleAnimation(12, 0, dur) { EasingFunction = ease };
+
+        panel.BeginAnimation(OpacityProperty, fadeIn);
+        translate.BeginAnimation(TranslateTransform.YProperty, slideUp);
+
+        _currentTabIndex = index;
+    }
+
+    private void UpdateTabIndicator(bool animate)
+    {
+        if (tabBar.SelectedIndex < 0 || tabIndicator == null) return;
+
+        if (tabBar.ItemContainerGenerator.ContainerFromIndex(tabBar.SelectedIndex)
+            is not ListBoxItem container)
+            return;
+
+        var transform = container.TransformToVisual(tabBarContainer);
+        var point = transform.Transform(new Point(0, 0));
+        double targetX = point.X;
+        double targetW = container.ActualWidth;
+
+        if (animate)
+        {
+            var dur = TimeSpan.FromMilliseconds(250);
+            var ease = new CubicEase { EasingMode = EasingMode.EaseOut };
+
+            tabIndicatorTransform.BeginAnimation(TranslateTransform.XProperty,
+                new DoubleAnimation { To = targetX, Duration = dur, EasingFunction = ease });
+            tabIndicator.BeginAnimation(WidthProperty,
+                new DoubleAnimation { To = targetW, Duration = dur, EasingFunction = ease });
+        }
+        else
+        {
+            tabIndicatorTransform.BeginAnimation(TranslateTransform.XProperty, null);
+            tabIndicatorTransform.X = targetX;
+            tabIndicator.BeginAnimation(WidthProperty, null);
+            tabIndicator.Width = targetW;
+        }
     }
 
     // ── Drag & Drop ──
@@ -78,8 +176,7 @@ public partial class SettingsPage : UserControl
         if (path != null)
         {
             txtEventsPath.Text = path;
-            _main.Settings.EventsJsonPath = path;
-            _main.SaveSettings();
+            _main.SetEventsPath(path);
         }
     }
 
@@ -118,8 +215,7 @@ public partial class SettingsPage : UserControl
         if (path != null)
         {
             txtEventsPath.Text = path;
-            _main.Settings.EventsJsonPath = path;
-            _main.SaveSettings();
+            _main.SetEventsPath(path);
         }
     }
 
@@ -134,6 +230,28 @@ public partial class SettingsPage : UserControl
     private void TinifyKey2_TextChanged(object sender, TextChangedEventArgs e)
     {
         _main.Settings.TinifyApiKey2 = txtTinifyKey2.Text.Trim();
+        _main.SaveSettings();
+    }
+
+    // ── Clipboard settings ──
+
+    private void ToggleClipboardAutoAdd_Changed(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        _main.Settings.ClipboardAutoAdd = toggleClipboardAutoAdd.IsChecked == true;
+        gridClipboardGlobal.Visibility = _main.Settings.ClipboardAutoAdd ? Visibility.Visible : Visibility.Collapsed;
+        if (!_main.Settings.ClipboardAutoAdd)
+        {
+            _main.Settings.ClipboardMonitorGlobal = false;
+            toggleClipboardGlobal.IsChecked = false;
+        }
+        _main.SaveSettings();
+    }
+
+    private void ToggleClipboardGlobal_Changed(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        _main.Settings.ClipboardMonitorGlobal = toggleClipboardGlobal.IsChecked == true;
         _main.SaveSettings();
     }
 
@@ -165,9 +283,10 @@ public partial class SettingsPage : UserControl
 
     // ── Section highlights (called from WikiDataParserPage links) ──
 
-    public void HighlightChainSection() => HighlightBorder(chainSectionBorder);
-    public void HighlightAreasSection() => HighlightBorder(areasSectionBorder);
-    public void HighlightChunkSizes() => HighlightBorder(expertChunkHighlight);
+    public void HighlightChainSection()    { SwitchToTab(0); HighlightBorder(chainSectionBorder); }
+    public void HighlightAreasSection()    { SwitchToTab(0); HighlightBorder(areasSectionBorder); }
+    public void HighlightEventsSection()   { SwitchToTab(0); HighlightBorder(eventsSectionBorder); }
+    public void HighlightChunkSizes()      { SwitchToTab(3); HighlightBorder(expertChunkHighlight); }
 
     /// <summary>
     /// Animates a yellow highlight fade on a border overlay.
@@ -243,7 +362,155 @@ public partial class SettingsPage : UserControl
         _main.SaveSettings();
     }
 
-    public void HighlightFlowchartSection() => HighlightBorder(flowchartSectionBorder);
+    public void HighlightFlowchartSection()    { SwitchToTab(1); HighlightBorder(flowchartSectionBorder); }
+    public void HighlightWikiMappingSection()  { SwitchToTab(2); HighlightBorder(wikiMappingSectionBorder); }
+
+    // ── Wiki Mapping ──
+
+    public void UpdateWikiMappingStatus()
+    {
+        var cache = _main.WikiMapping;
+        if (cache != null && cache.Mappings.Count > 0)
+        {
+            var local = cache.FetchedAt.ToLocalTime();
+            txtWikiMappingStatus.Text = $"{cache.Mappings.Count} entries · last updated {local:d. M. yyyy H:mm}";
+        }
+        else
+        {
+            txtWikiMappingStatus.Text = "No cache available.";
+        }
+    }
+
+    private bool _suppressBotCredentialReset;
+
+    private void WikiBotCredentials_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+    {
+        _main.Settings.WikiUsername = txtWikiBotUsername.Text.Trim();
+        if (!_suppressBotCredentialReset)
+        {
+            _main.Settings.WikiVerified = false;
+            _main.Settings.WikiVerifiedDisplayName = "";
+            UpdateBotStatus();
+        }
+        _main.SaveSettings();
+    }
+
+    private void WikiBotPassword_Changed(object sender, RoutedEventArgs e)
+    {
+        _main.Settings.WikiPassword = txtWikiBotPassword.Password;
+        if (!_suppressBotCredentialReset)
+        {
+            _main.Settings.WikiVerified = false;
+            _main.Settings.WikiVerifiedDisplayName = "";
+            UpdateBotStatus();
+        }
+        _main.SaveSettings();
+    }
+
+    private void UpdateBotStatus()
+    {
+        if (_main.Settings.WikiVerified)
+        {
+            txtWikiBotStatus.Text = $"Verified as {_main.Settings.WikiVerifiedDisplayName}";
+            txtWikiBotStatus.Foreground = (System.Windows.Media.Brush)FindResource("SystemFillColorSuccessBrush");
+        }
+        else if (!string.IsNullOrEmpty(_main.Settings.WikiUsername))
+        {
+            txtWikiBotStatus.Text = "Not verified";
+            txtWikiBotStatus.Foreground = (System.Windows.Media.Brush)FindResource("TextFillColorTertiaryBrush");
+        }
+        else
+        {
+            txtWikiBotStatus.Text = "";
+        }
+    }
+
+    private async void BtnVerifyBot_Click(object sender, RoutedEventArgs e)
+    {
+        var username = txtWikiBotUsername.Text.Trim();
+        var password = txtWikiBotPassword.Password;
+
+        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+        {
+            _main.ShowStatus("Enter your Fandom username and password.", Wpf.Ui.Controls.InfoBarSeverity.Warning);
+            return;
+        }
+
+        btnVerifyBot.IsEnabled = false;
+        txtWikiBotStatus.Text = "Verifying...";
+        txtWikiBotStatus.Foreground = (System.Windows.Media.Brush)FindResource("TextFillColorSecondaryBrush");
+
+        try
+        {
+            var confirmedName = await WikiMappingService.VerifyLoginAsync(username, password);
+
+            if (confirmedName != null)
+            {
+                _main.Settings.WikiVerified = true;
+                _main.Settings.WikiVerifiedDisplayName = confirmedName;
+                _main.ShowStatus($"Wiki account verified as {confirmedName}.", Wpf.Ui.Controls.InfoBarSeverity.Success);
+            }
+            else
+            {
+                _main.Settings.WikiVerified = false;
+                _main.Settings.WikiVerifiedDisplayName = "";
+                _main.ShowStatus("Login failed — check username and password.", Wpf.Ui.Controls.InfoBarSeverity.Error);
+            }
+
+            _main.SaveSettings();
+            UpdateBotStatus();
+        }
+        catch (Exception ex)
+        {
+            _main.Settings.WikiVerified = false;
+            _main.Settings.WikiVerifiedDisplayName = "";
+            _main.SaveSettings();
+            UpdateBotStatus();
+            _main.ShowStatus($"Verification failed: {ex.Message}", Wpf.Ui.Controls.InfoBarSeverity.Error);
+        }
+        finally
+        {
+            btnVerifyBot.IsEnabled = true;
+        }
+    }
+
+    private BotSetupGuideDialog? _guideDialog;
+
+    private void BtnBotGuide_Click(object sender, RoutedEventArgs e)
+    {
+        if (_guideDialog != null && _guideDialog.IsLoaded)
+        {
+            _guideDialog.Activate();
+            return;
+        }
+
+        _guideDialog = new BotSetupGuideDialog();
+        _guideDialog.Owner = Window.GetWindow(this);
+        _guideDialog.Closed += (_, _) => _guideDialog = null;
+        _guideDialog.Show();
+    }
+
+    private async void BtnRefreshMapping_Click(object sender, RoutedEventArgs e)
+    {
+        btnRefreshMapping.IsEnabled = false;
+        txtWikiMappingStatus.Text = "Fetching from wiki...";
+
+        try
+        {
+            await _main.RefreshWikiMappingAsync();
+            UpdateWikiMappingStatus();
+            _main.ShowStatus("Wiki mapping cache refreshed.", Wpf.Ui.Controls.InfoBarSeverity.Success);
+        }
+        catch (Exception ex)
+        {
+            txtWikiMappingStatus.Text = "Refresh failed.";
+            _main.ShowStatus($"Wiki mapping refresh failed: {ex.Message}", Wpf.Ui.Controls.InfoBarSeverity.Error);
+        }
+        finally
+        {
+            btnRefreshMapping.IsEnabled = true;
+        }
+    }
 
     private void ResetFolderPreference_Click(object sender, RoutedEventArgs e)
     {
@@ -259,6 +526,15 @@ public partial class SettingsPage : UserControl
         btnResetFolderPref.Visibility = _main.Settings.FlowchartRememberFolderChoice
             ? Visibility.Visible
             : Visibility.Collapsed;
+    }
+
+    // ── Debug Mode ──
+
+    private void ToggleDebugMode_Changed(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        _main.Settings.DebugMode = toggleDebugMode.IsChecked == true;
+        _main.SaveSettings();
     }
 
     // ── Expert — chunk sizes ──

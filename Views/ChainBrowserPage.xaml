@@ -29,6 +29,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <ui:TextBox x:Name="txtSearch" Grid.Column="0"
@@ -37,18 +38,97 @@
                         Margin="0,0,10,0"
                         Icon="{ui:SymbolIcon Search24}" />
 
-            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                <CheckBox x:Name="chkGenerators" Content="Generators"
-                          Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed" Margin="0,0,8,0" />
-                <CheckBox x:Name="chkSpawners" Content="Spawners"
-                          Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed" Margin="0,0,8,0" />
-                <CheckBox x:Name="chkProducts" Content="Products"
-                          Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed" Margin="0,0,8,0" />
-                <CheckBox x:Name="chkEvent" Content="Event"
-                          Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed" Margin="0,0,8,0" />
-                <CheckBox x:Name="chkNamed" Content="Named"
-                          Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed" />
-            </StackPanel>
+            <!-- Filters dropdown -->
+            <ui:Button x:Name="btnFilters" Grid.Column="1"
+                       Margin="0,0,8,0" Padding="12,0" Height="34"
+                       Appearance="Secondary" Click="FiltersButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="txtFiltersLabel" Text="Filters" VerticalAlignment="Center" />
+                    <ui:SymbolIcon Symbol="ChevronDown24" FontSize="12" Margin="6,0,0,0"
+                                   VerticalAlignment="Center" />
+                </StackPanel>
+            </ui:Button>
+            <Popup x:Name="popupFilters"
+                   PlacementTarget="{Binding ElementName=btnFilters}"
+                   Placement="Bottom" StaysOpen="False"
+                   AllowsTransparency="True" PopupAnimation="Fade"
+                   Opened="FilterPopup_Opened">
+                <Border x:Name="filterPopupRoot" Focusable="True"
+                        Background="{DynamicResource SolidBackgroundFillColorBaseBrush}"
+                        CornerRadius="8" Margin="0,4,0,0"
+                        PreviewKeyDown="FilterPopup_PreviewKeyDown">
+                    <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                            BorderThickness="1" CornerRadius="8" Padding="4,6">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="16" ShadowDepth="4" Opacity="0.22"
+                                              Direction="270" Color="Black" />
+                        </Border.Effect>
+                    <StackPanel>
+                        <StackPanel.Resources>
+                            <Style x:Key="FilterRow" TargetType="Border">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Padding" Value="12,8" />
+                                <Setter Property="CornerRadius" Value="4" />
+                                <Setter Property="Cursor" Value="Hand" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background"
+                                                Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Resources>
+                        <Border Style="{StaticResource FilterRow}"
+                                MouseLeftButtonDown="FilterRow_Click">
+                            <CheckBox x:Name="chkGenerators" Content="Generators"
+                                      IsHitTestVisible="False" Focusable="False"
+                                      Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed" />
+                        </Border>
+                        <Border Style="{StaticResource FilterRow}"
+                                MouseLeftButtonDown="FilterRow_Click">
+                            <CheckBox x:Name="chkSpawners" Content="Spawners"
+                                      IsHitTestVisible="False" Focusable="False"
+                                      Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed" />
+                        </Border>
+                        <Border Style="{StaticResource FilterRow}"
+                                MouseLeftButtonDown="FilterRow_Click">
+                            <CheckBox x:Name="chkProducts" Content="Products"
+                                      IsHitTestVisible="False" Focusable="False"
+                                      Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed" />
+                        </Border>
+                        <Border Style="{StaticResource FilterRow}"
+                                MouseLeftButtonDown="FilterRow_Click">
+                            <CheckBox x:Name="chkEvent" Content="Event"
+                                      IsHitTestVisible="False" Focusable="False"
+                                      Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed" />
+                        </Border>
+                        <Border Style="{StaticResource FilterRow}"
+                                MouseLeftButtonDown="FilterRow_Click">
+                            <CheckBox x:Name="chkNamed" Content="Named"
+                                      IsHitTestVisible="False" Focusable="False"
+                                      Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed" />
+                        </Border>
+                        <Border Style="{StaticResource FilterRow}"
+                                MouseLeftButtonDown="FilterRow_Click">
+                            <CheckBox x:Name="chkCollisions" Content="Collisions"
+                                      IsHitTestVisible="False" Focusable="False"
+                                      Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed" />
+                        </Border>
+                    </StackPanel>
+                    </Border>
+                </Border>
+            </Popup>
+
+            <!-- Refresh Wiki Cache button -->
+            <ui:Button x:Name="btnRefreshWiki" Grid.Column="2"
+                       Appearance="Secondary" Height="34" Padding="12,0"
+                       Click="RefreshWikiCache_Click">
+                <StackPanel Orientation="Horizontal">
+                    <ui:SymbolIcon Symbol="ArrowSync24" FontSize="16" VerticalAlignment="Center" />
+                    <TextBlock Text="Refresh Wiki Cache" Margin="6,0,0,0" VerticalAlignment="Center" />
+                </StackPanel>
+            </ui:Button>
         </Grid>
 
         <!-- Chain list -->
@@ -102,7 +182,8 @@
                             <Expander IsExpanded="False" Background="Transparent"
                                       BorderThickness="0" Padding="16,8,12,8"
                                       HorizontalContentAlignment="Stretch"
-                                      HorizontalAlignment="Stretch">
+                                      HorizontalAlignment="Stretch"
+                                      Collapsed="Expander_Collapsed">
                                 <Expander.Header>
                                     <Grid HorizontalAlignment="Stretch"
                                           Margin="0,0,10,0">
@@ -111,26 +192,47 @@
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
 
                                         <!-- Chain name + ConfigKey -->
                                         <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                                            <!-- DisplayName with search highlighting via Loaded event -->
-                                            <TextBlock x:Name="txtDisplayName"
-                                                       Text="{Binding DisplayName}"
-                                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontSize="14"
-                                                       FontWeight="SemiBold"
-                                                       TextTrimming="CharacterEllipsis"
-                                                       Tag="{Binding}"
-                                                       Loaded="TxtDisplayName_Loaded" />
+                                            <StackPanel Orientation="Horizontal">
+                                                <!-- DisplayName with search highlighting via Loaded event -->
+                                                <TextBlock x:Name="txtDisplayName"
+                                                           Text="{Binding DisplayName}"
+                                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontSize="14"
+                                                           FontWeight="SemiBold"
+                                                           TextTrimming="CharacterEllipsis"
+                                                           Tag="{Binding}"
+                                                           Loaded="TxtDisplayName_Loaded" />
+                                                <!-- Wiki badge -->
+                                                <Border Background="{DynamicResource AccentFillColorDefaultBrush}"
+                                                        CornerRadius="3" Padding="5,1" Margin="8,0,0,0"
+                                                        VerticalAlignment="Center"
+                                                        Visibility="{Binding IsNameFromWiki,
+                                                            Converter={StaticResource BoolToVis}}">
+                                                    <TextBlock Text="Wiki" FontSize="9" FontWeight="SemiBold"
+                                                               Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}" />
+                                                </Border>
+                                            </StackPanel>
                                             <TextBlock Text="{Binding ConfigKey}"
                                                        Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="11"
                                                        Visibility="{Binding ShowConfigKey,
                                                            Converter={StaticResource BoolToVis}}" />
                                         </StackPanel>
 
+                                        <!-- Level collision warning -->
+                                        <ui:SymbolIcon Grid.Column="1" Symbol="Warning24"
+                                                       Foreground="#FFB900" Margin="6,0,0,0"
+                                                       VerticalAlignment="Center"
+                                                       ToolTip="Level collision — two or more items share the same level"
+                                                       Visibility="{Binding HasLevelCollisions,
+                                                           Converter={StaticResource BoolToVis}}" />
+
                                         <!-- Summary badge -->
-                                        <Border Grid.Column="1" Background="{DynamicResource SubtleFillColorSecondaryBrush}"
+                                        <Border Grid.Column="2" Background="{DynamicResource SubtleFillColorSecondaryBrush}"
                                                 CornerRadius="4" Padding="8,3"
                                                 VerticalAlignment="Center" Margin="10,0">
                                             <TextBlock Text="{Binding Summary}"
@@ -138,54 +240,127 @@
                                         </Border>
 
                                         <!-- Action buttons -->
-                                        <ui:Button Grid.Column="2" Content="Generate Table"
+                                        <ui:Button Grid.Column="3" Content="Generate Table"
                                                    Appearance="Primary" FontSize="12"
                                                    Height="30" Padding="12,0"
                                                    Click="GenerateTable_Click"
                                                    Tag="{Binding}" />
-                                        <ui:Button Grid.Column="3" Content="Infobox"
+                                        <ui:Button Grid.Column="4" Content="Infobox"
                                                    Appearance="Secondary" FontSize="12"
                                                    Height="30" Padding="12,0" Margin="6,0,0,0"
                                                    Click="GenerateInfobox_Click"
                                                    Tag="{Binding}" />
+                                        <ui:Button Grid.Column="5" ToolTip="Upload chain images to wiki"
+                                                   ToolTipService.InitialShowDelay="0"
+                                                   Appearance="Secondary" FontSize="12"
+                                                   Height="30" Padding="8,0" Margin="6,0,0,0"
+                                                   Click="UploadImages_Click" Tag="{Binding}"
+                                                   Visibility="{Binding ShowUploadButton, Converter={StaticResource BoolToVis}}">
+                                            <Image Source="/Assets/ImageSplitterIcon.ico" Width="20" Height="20"
+                                                   RenderOptions.BitmapScalingMode="HighQuality"/>
+                                        </ui:Button>
                                     </Grid>
                                 </Expander.Header>
 
-                                <!-- Expanded: item list -->
+                                <!-- Expanded: item list + action bar -->
                                 <Border Background="{DynamicResource ChainExpandedContentBackground}"
                                         Margin="-17,-8,-13,-9"
                                         Padding="16,8,16,12"
                                         CornerRadius="0,0,4,4">
-                                    <ItemsControl ItemsSource="{Binding Items}">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <Grid Margin="0,2">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="35" />
-                                                        <ColumnDefinition Width="*" />
-                                                        <ColumnDefinition Width="Auto" />
-                                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <ItemsControl ItemsSource="{Binding ItemsView}"
+                                                      Margin="{Binding ItemsMargin}">
+                                            <ItemsControl.GroupStyle>
+                                                <GroupStyle>
+                                                    <GroupStyle.HeaderTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel Margin="0,20,0,2">
+                                                                <StackPanel Orientation="Horizontal"
+                                                                            Background="Transparent"
+                                                                            Cursor="Hand"
+                                                                            Tag="{Binding Name}"
+                                                                            MouseLeftButtonDown="GroupRow_Click">
+                                                                    <CheckBox VerticalAlignment="Center"
+                                                                              Margin="-4,0,4,0" Padding="0"
+                                                                              MinWidth="0" MinHeight="0"
+                                                                              Tag="{Binding Name}"
+                                                                              Click="GroupCheckBox_Click" />
+                                                                    <TextBlock Text="{Binding Name}"
+                                                                               Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                                                               FontSize="11" FontFamily="Consolas"
+                                                                               VerticalAlignment="Center" />
+                                                                </StackPanel>
+                                                                <Border Height="1" Margin="0,3,0,2"
+                                                                        Background="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </GroupStyle.HeaderTemplate>
+                                                </GroupStyle>
+                                            </ItemsControl.GroupStyle>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid Margin="0,2" Background="Transparent"
+                                                          Cursor="Hand"
+                                                          MouseLeftButtonDown="ItemRow_Click">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="24" />
+                                                            <ColumnDefinition Width="35" />
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="Auto" />
+                                                        </Grid.ColumnDefinitions>
 
-                                                    <TextBlock Text="{Binding Level, StringFormat='Lv{0}'}"
-                                                               Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
-                                                               FontFamily="Consolas"
-                                                               VerticalAlignment="Center" />
-                                                    <TextBlock Grid.Column="1"
-                                                               Text="{Binding Name}"
-                                                               Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
-                                                               VerticalAlignment="Center"
-                                                               Tag="{Binding}"
-                                                               Loaded="TxtItemName_Loaded" />
-                                                    <TextBlock Grid.Column="2"
-                                                               Text="{Binding TypeBadge}"
-                                                               Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="9"
-                                                               FontWeight="SemiBold"
-                                                               VerticalAlignment="Center"
-                                                               Padding="0,0,4,0" />
-                                                </Grid>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
+                                                        <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}"
+                                                                  Click="ItemCheckBox_Click"
+                                                                  VerticalAlignment="Center"
+                                                                  Margin="-4,0,0,0" Padding="0"
+                                                                  MinWidth="0" MinHeight="0" />
+                                                        <TextBlock Grid.Column="1"
+                                                                   Text="{Binding Level, StringFormat='Lv{0}'}"
+                                                                   Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
+                                                                   FontFamily="Consolas"
+                                                                   VerticalAlignment="Center" />
+                                                        <TextBlock Grid.Column="2" Text="&#x26A0;"
+                                                                   Foreground="#FFB900" FontSize="11"
+                                                                   VerticalAlignment="Center" Margin="0,0,4,0"
+                                                                   ToolTip="Level collision"
+                                                                   Visibility="{Binding IsColliding,
+                                                                       Converter={StaticResource BoolToVis}}" />
+                                                        <TextBlock Grid.Column="3"
+                                                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                                                   VerticalAlignment="Center"
+                                                                   Tag="{Binding}"
+                                                                   Loaded="TxtItemName_Loaded" />
+                                                        <TextBlock Grid.Column="4"
+                                                                   Text="{Binding TypeBadge}"
+                                                                   Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="9"
+                                                                   FontWeight="SemiBold"
+                                                                   VerticalAlignment="Center"
+                                                                   Padding="0,0,4,0" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+
+                                        <!-- Action bar (visible when items are checked) -->
+                                        <StackPanel Tag="ActionBar" Orientation="Horizontal"
+                                                    Visibility="Collapsed" Margin="0,8,0,0">
+                                            <TextBlock x:Name="txtSelectionCount" Text="0 selected" FontSize="12"
+                                                       VerticalAlignment="Center" Margin="0,0,10,0"
+                                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                                            <ui:Button x:Name="btnMoveItems" Content="Move Items"
+                                                       Icon="{ui:SymbolIcon ArrowMove24}"
+                                                       Appearance="Primary" Padding="12,6" Margin="0,0,6,0"
+                                                       Click="BtnMoveItems_Click"
+                                                       ToolTipService.ShowOnDisabled="True" />
+                                            <ui:Button x:Name="btnSetLevel" Content="Set Level"
+                                                       Icon="{ui:SymbolIcon Edit24}"
+                                                       Appearance="Secondary" Padding="12,6"
+                                                       Visibility="Collapsed"
+                                                       Click="BtnSetLevel_Click"
+                                                       ToolTipService.ShowOnDisabled="True" />
+                                        </StackPanel>
+                                    </StackPanel>
                                 </Border>
                             </Expander>
                         </Border>

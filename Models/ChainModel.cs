@@ -161,6 +161,15 @@ public class ParsedChain
     /// <summary>Custom user-assigned name, if any</summary>
     public string? CustomName { get; set; }
 
+    /// <summary>Whether DisplayName was overridden by wiki mapping data</summary>
+    public bool IsNameFromWiki { get; set; }
+
+    /// <summary>When this chain was merged from multiple JSON chains, lists all source ConfigKeys.</summary>
+    public List<string>? MergedFromConfigKeys { get; set; }
+
+    /// <summary>Whether two or more items share the same level in this chain.</summary>
+    public bool HasLevelCollisions { get; set; }
+
     public List<ParsedItem> Items { get; set; } = new();
 
     /// <summary>Compact summary like "12 levels, Generator"</summary>
@@ -175,11 +184,11 @@ public class ParsedChain
     /// <summary>Whether this looks like an event chain</summary>
     public bool IsEventChain => ConfigKey.StartsWith("CBE_") || ConfigKey.StartsWith("LDE_");
 
-    /// <summary>Whether the original name is truly human-readable (no underscores, not empty)</summary>
+    /// <summary>Whether this chain has a human-readable name (wiki, custom, or natural original name)</summary>
     public bool HasHumanReadableName =>
-        !string.IsNullOrWhiteSpace(OriginalName)
-        && !OriginalName.Contains('_')
-        && OriginalName.Length > 0;
+        IsNameFromWiki
+        || !string.IsNullOrEmpty(CustomName)
+        || (!string.IsNullOrWhiteSpace(OriginalName) && !OriginalName.Contains('_'));
 
     private string BuildSummary()
     {
@@ -232,10 +241,19 @@ public class ParsedItem
 
     // Sink (Transformative Item)
     public bool IsSink { get; set; }
-    public List<string>? SinkRequirementItemTypes { get; set; }
+    public List<string>? SinkRequirementConfigKeys { get; set; }
+
+    /// <summary>Numeric ConfigKey from JSON item (used by SinkFeatures ScoreTargets)</summary>
+    public string NumericConfigKey { get; set; } = "";
 
     // Depleting spawner
     public bool DecaysWhenCyclesAreDone { get; set; }
+
+    /// <summary>Whether this item collides (same level) with another item in its chain.</summary>
+    public bool IsColliding { get; set; }
+
+    /// <summary>ConfigKey of the original chain this item came from (before wiki mapping merge).</summary>
+    public string SourceChainKey { get; set; } = "";
 
     // Original definition reference
     public ItemDefinition? Source { get; set; }

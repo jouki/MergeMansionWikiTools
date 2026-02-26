@@ -27,6 +27,7 @@
     <Resource Include="Assets\AppLogo.ico" />
     <Resource Include="Assets\AppAboutLogo.jpg" />
     <Resource Include="Assets\ClaudeIcon.png" />
+    <Resource Include="Assets\SplashLogo.png" />
   </ItemGroup>
 
 </Project>

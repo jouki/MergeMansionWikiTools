@@ -6,7 +6,8 @@
         Title="Merge Mansion Wiki Tools" Height="943" Width="1380"
         WindowStartupLocation="CenterScreen"
         Icon="/Assets/AppLogo.ico"
-        ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica">
+        ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica"
+        PreviewKeyDown="Window_PreviewKeyDown">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -127,9 +128,25 @@
                             </ListBoxItem>
                             <ListBoxItem>
                                 <StackPanel Orientation="Horizontal">
+                                    <ui:SymbolIcon Symbol="Trophy24" FontSize="22" Margin="0,0,12,0"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                    <TextBlock Text="Mysteries" FontSize="14" VerticalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                </StackPanel>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <StackPanel Orientation="Horizontal">
                                     <ui:SymbolIcon Symbol="Flow24" FontSize="22" Margin="0,0,12,0"
                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                                     <TextBlock Text="Area Flowcharts" FontSize="14" VerticalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                </StackPanel>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <StackPanel Orientation="Horizontal">
+                                    <ui:SymbolIcon Symbol="Flow24" FontSize="22" Margin="0,0,12,0"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                    <TextBlock Text="[NEW] Area Flowcharts 2" FontSize="14" VerticalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                                 </StackPanel>
                             </ListBoxItem>
@@ -166,7 +183,7 @@
 
                     <!-- Version info -->
                     <StackPanel Grid.Row="2" HorizontalAlignment="Center" Margin="0,0,0,6">
-                        <TextBlock Text="v0.10.0" FontSize="10"
+                        <TextBlock Text="v0.11.0" FontSize="10"
                                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                                    HorizontalAlignment="Center" />
                         <TextBlock Text="by Jouki" FontSize="10"

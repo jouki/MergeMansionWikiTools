@@ -9,11 +9,16 @@ namespace MergeMansionWikiTools.Views;
 public partial class ChainNameDialog : FluentWindow
 {
     public string ChosenName { get; private set; } = "";
+    public bool SaveToWiki => chkSaveToWiki.IsChecked == true;
 
-    public ChainNameDialog(ChainNameService nameService, string configKey, string currentDisplayName)
+    public ChainNameDialog(ChainNameService nameService, string configKey, string currentDisplayName,
+        bool canSaveToWiki = false)
     {
         InitializeComponent();
         ApplicationThemeManager.Apply(this);
+
+        if (canSaveToWiki)
+            chkSaveToWiki.Visibility = Visibility.Visible;
 
         txtConfigKey.Text = $"ConfigKey: {configKey}";
         txtCurrentName.Text = $"Current: {currentDisplayName}";

@@ -12,6 +12,7 @@ public partial class TableGeneratorDialog : FluentWindow
     private readonly MainWindow _main;
     private readonly ParsedChain _chain;
     private string _tableName;
+    private string? _wikiNameWarning;
 
     public TableGeneratorDialog(MainWindow main, ParsedChain chain)
     {
@@ -31,7 +32,30 @@ public partial class TableGeneratorDialog : FluentWindow
         chkForceNamePrompt.IsChecked = main.Settings.ForceCustomNamePrompt;
         chkLowPrices.IsChecked = chain.IsEventChain ? true : main.Settings.LowPrices;
 
+        // Check for missing wiki name
+        _wikiNameWarning = CheckWikiNameMissing(chain, main);
+
         Loaded += (_, _) => GenerateTable();
+    }
+
+    /// <summary>
+    /// Returns a warning string if chain has no human-readable name and isn't mapped on the wiki.
+    /// </summary>
+    private static string? CheckWikiNameMissing(ParsedChain chain, MainWindow main)
+    {
+        if (chain.HasHumanReadableName) return null;
+
+        var mapping = main.WikiMapping;
+        if (mapping == null || mapping.Mappings.Count == 0) return null;
+
+        bool hasWikiEntry = chain.Items.Any(i =>
+            !string.IsNullOrEmpty(i.ItemType) && mapping.Mappings.ContainsKey(i.ItemType));
+
+        if (hasWikiEntry) return null;
+
+        return $"Chain \"{chain.DisplayName}\" has no human-readable name and is not mapped on the wiki. " +
+               "The generated {{Item}} templates may reference a non-existent page. " +
+               "Consider adding a name to Module:Datatable/Items/Mapping first.";
     }
 
     private void ChkShowNamePrompt_Changed(object sender, RoutedEventArgs e)
@@ -66,27 +90,62 @@ public partial class TableGeneratorDialog : FluentWindow
 
         if (showPrompt)
         {
+            bool canWiki = _main.Settings.WikiVerified;
+
             var nameDialog = new ChainNameDialog(
                 _main.ChainNameService,
                 _chain.ConfigKey,
-                _chain.DisplayName);
+                _chain.DisplayName,
+                canWiki);
             nameDialog.Owner = this;
 
             if (nameDialog.ShowDialog() == true && !string.IsNullOrWhiteSpace(nameDialog.ChosenName))
             {
                 _tableName = nameDialog.ChosenName;
                 _main.ChainNameService.SetCustomName(_chain.ConfigKey, _tableName);
+
+                if (nameDialog.SaveToWiki)
+                    _ = PushNameToWikiAsync(_tableName);
             }
         }
 
         GenerateTable(showNotification: true);
     }
 
+    private async Task PushNameToWikiAsync(string chainName)
+    {
+        try
+        {
+            warningBar.Message = "Saving to wiki...";
+            warningBar.Severity = InfoBarSeverity.Informational;
+            warningBar.IsOpen = true;
+
+            await WikiMappingService.PushChainNameToWikiAsync(
+                _main.Settings.WikiUsername,
+                _main.Settings.WikiPassword,
+                _chain.Items,
+                chainName);
+
+            warningBar.Message = "Chain name saved to wiki.";
+            warningBar.Severity = InfoBarSeverity.Success;
+            warningBar.IsOpen = true;
+
+            // Refresh local cache
+            _ = _main.RefreshWikiMappingAsync();
+        }
+        catch (Exception ex)
+        {
+            warningBar.Message = $"Wiki save failed: {ex.Message}";
+            warningBar.Severity = InfoBarSeverity.Error;
+            warningBar.IsOpen = true;
+        }
+    }
+
     private void GenerateTable(bool showNotification = false)
     {
         try
         {
-            var generator = new WikiTableGenerator(_main.DataService!);
+            var generator = new WikiTableGenerator(_main.DataService!, _main.WikiMapping);
 
             string? existingTable = string.IsNullOrWhiteSpace(txtExistingTable.Text)
                 ? null
@@ -105,10 +164,14 @@ public partial class TableGeneratorDialog : FluentWindow
             txtOutputPlaceholder.Visibility = Visibility.Collapsed;
             btnCopy.IsEnabled = true;
 
-            // Show warnings if any
-            if (generator.Warnings.Count > 0)
+            // Collect all warnings (generator + wiki name)
+            var allWarnings = new List<string>(generator.Warnings);
+            if (_wikiNameWarning != null)
+                allWarnings.Add(_wikiNameWarning);
+
+            if (allWarnings.Count > 0)
             {
-                warningBar.Message = string.Join("\n", generator.Warnings);
+                warningBar.Message = string.Join("\n", allWarnings);
                 warningBar.Severity = InfoBarSeverity.Warning;
                 warningBar.IsOpen = true;
             }

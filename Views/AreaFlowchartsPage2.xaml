@@ -1,0 +1,89 @@
+<UserControl x:Class="MergeMansionWikiTools.Views.AreaFlowchartsPage2"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Padding="24,16">
+            <StackPanel MaxWidth="900">
+
+                <TextBlock Text="[NEW] Area Flowcharts 2" FontSize="28" FontWeight="SemiBold"
+                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                           Margin="4,0,0,20" />
+
+                <!-- Search + Generate All row -->
+                <Grid Margin="0,0,0,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <ui:TextBox x:Name="txtSearch" Grid.Column="0"
+                                PlaceholderText="Search areas..."
+                                TextChanged="TxtSearch_TextChanged"
+                                Margin="0,0,10,0"
+                                Icon="{ui:SymbolIcon Search24}" />
+
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ui:Button x:Name="btnGenerateAll" Grid.Column="0"
+                                   Content="Generate All" Appearance="Primary"
+                                   Click="BtnGenerateAll_Click" Height="36" />
+                        <Border x:Name="btnGenerateAllSep" Grid.Column="1"
+                                Width="1" Background="#3CFFFFFF"
+                                VerticalAlignment="Stretch" Margin="0,6"
+                                Visibility="Collapsed" />
+                        <ui:Button x:Name="btnGenerateAllMenu" Grid.Column="2"
+                                   Appearance="Primary" Height="36" Width="30"
+                                   Padding="0" Click="BtnGenerateAllMenu_Click"
+                                   Visibility="Collapsed">
+                            <ui:SymbolIcon Symbol="ChevronDown24" FontSize="12" />
+                        </ui:Button>
+                    </Grid>
+                </Grid>
+
+                <!-- Output path display -->
+                <Grid Margin="0,0,0,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Output:" FontSize="12"
+                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                               VerticalAlignment="Center" Margin="4,0,8,0" />
+                    <TextBlock x:Name="txtOutputPath" Grid.Column="1" FontSize="12"
+                               Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                               VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
+                               Text="Not configured — set in Settings" />
+                    <ui:Button x:Name="btnOpenFolder" Grid.Column="2"
+                               Content="Open Folder" Appearance="Secondary"
+                               Click="BtnOpenFolder_Click" Height="30"
+                               Visibility="Collapsed" Margin="8,0,0,0" />
+                </Grid>
+
+                <!-- Area list -->
+                <StackPanel x:Name="areaListPanel" />
+
+                <!-- Empty state -->
+                <TextBlock x:Name="txtEmpty" Text="No areas loaded. Set the areas.json path in Settings."
+                           FontSize="13" Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                           Margin="4,20,0,0" Visibility="Collapsed" />
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- InfoBar at bottom -->
+        <ui:InfoBar x:Name="infoBar" Grid.Row="1" IsOpen="False"
+                    IsClosable="True" Margin="10,0,10,10" />
+    </Grid>
+</UserControl>

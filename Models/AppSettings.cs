@@ -14,6 +14,8 @@ public class AppSettings
     // Image Splitter
     public string TinifyApiKey { get; set; } = "";
     public string TinifyApiKey2 { get; set; } = "";
+    public bool ClipboardAutoAdd { get; set; } = true;
+    public bool ClipboardMonitorGlobal { get; set; } = false;
 
     // Wiki Data Parser — area chunk sizes (default: one chunk of 40)
     public List<int> AreaChunkSizes { get; set; } = new() { 40 };
@@ -27,6 +29,23 @@ public class AppSettings
     public string FlowchartOutputPath { get; set; } = "";
     public bool FlowchartRememberFolderChoice { get; set; } = false;
     public bool FlowchartAutoUpdateFolder { get; set; } = false;
+
+    // Chain Browser filters
+    public bool FilterGenerators { get; set; }
+    public bool FilterSpawners { get; set; }
+    public bool FilterProducts { get; set; }
+    public bool FilterEvent { get; set; }
+    public bool FilterNamed { get; set; }
+    public bool FilterCollisions { get; set; }
+
+    // Wiki — user must verify their own Fandom account to unlock wiki editing
+    public string WikiUsername { get; set; } = "";
+    public string WikiPassword { get; set; } = "";
+    public bool WikiVerified { get; set; } = false;
+    public string WikiVerifiedDisplayName { get; set; } = ""; // Fandom username after successful verify
+
+    // Debug
+    public bool DebugMode { get; set; } = false;
 
     // Appearance
     public string ThemePreference { get; set; } = "System"; // "System", "Light", "Dark"

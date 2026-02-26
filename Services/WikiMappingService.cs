@@ -1,0 +1,1112 @@
+using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Text.Json;
+using System.Text.RegularExpressions;
+using MergeMansionWikiTools.Models;
+
+namespace MergeMansionWikiTools.Services;
+
+public class WikiMappingEntry
+{
+    public string? ChainName { get; set; }
+    public string? Name { get; set; }
+    public int? Level { get; set; }
+    public double? SortingLevel { get; set; }
+    public bool Fueled { get; set; }
+    public bool IgnoreInTask { get; set; }
+}
+
+public class WikiMappingCache
+{
+    public DateTime FetchedAt { get; set; }
+    public Dictionary<string, WikiMappingEntry> Mappings { get; set; } = new();
+}
+
+public static class WikiMappingService
+{
+    private static readonly string CachePath = Path.Combine(
+        AppDomain.CurrentDomain.BaseDirectory, "wiki_mapping_cache.json");
+
+    private static readonly JsonSerializerOptions JsonOpts = new() { WriteIndented = true };
+
+    private static readonly HttpClient Http = new();
+
+    private const string ApiUrl =
+        "https://merge-mansion.fandom.com/api.php?action=query" +
+        "&titles=Module:Datatable/Items/Mapping" +
+        "&prop=revisions&rvprop=content&rvslots=main&format=json";
+
+    public static WikiMappingCache Load()
+    {
+        try
+        {
+            if (File.Exists(CachePath))
+            {
+                var json = File.ReadAllText(CachePath);
+                return JsonSerializer.Deserialize<WikiMappingCache>(json, JsonOpts)
+                       ?? new WikiMappingCache();
+            }
+        }
+        catch { /* Return empty on error */ }
+
+        return new WikiMappingCache();
+    }
+
+    public static void Save(WikiMappingCache cache)
+    {
+        try
+        {
+            var json = JsonSerializer.Serialize(cache, JsonOpts);
+            File.WriteAllText(CachePath, json);
+        }
+        catch { /* Silently fail */ }
+    }
+
+    public static bool NeedsRefresh(WikiMappingCache cache)
+    {
+        if (cache.Mappings.Count == 0) return true;
+        return (DateTime.UtcNow - cache.FetchedAt).TotalHours >= 24;
+    }
+
+    /// <summary>
+    /// Fetches the Lua module from Fandom MediaWiki API and parses it into a cache.
+    /// </summary>
+    public static async Task<WikiMappingCache> FetchFromWikiAsync()
+    {
+        var response = await Http.GetStringAsync(ApiUrl);
+        var doc = JsonDocument.Parse(response);
+
+        // Navigate: query → pages → {pageId} → revisions[0] → slots → main → *
+        var pages = doc.RootElement.GetProperty("query").GetProperty("pages");
+        string luaContent = "";
+
+        foreach (var page in pages.EnumerateObject())
+        {
+            var revisions = page.Value.GetProperty("revisions");
+            var firstRev = revisions[0];
+            luaContent = firstRev.GetProperty("slots")
+                                 .GetProperty("main")
+                                 .GetProperty("*")
+                                 .GetString() ?? "";
+            break;
+        }
+
+        var mappings = ParseLua(luaContent);
+
+        var cache = new WikiMappingCache
+        {
+            FetchedAt = DateTime.UtcNow,
+            Mappings = mappings
+        };
+
+        Save(cache);
+        return cache;
+    }
+
+    /// <summary>
+    /// Parses the Lua table entries into a dictionary.
+    /// Format: ["ItemType"] = {chainName = "Name", level = 1, fueled = true, ...}
+    /// </summary>
+    private static Dictionary<string, WikiMappingEntry> ParseLua(string lua)
+    {
+        var result = new Dictionary<string, WikiMappingEntry>(StringComparer.OrdinalIgnoreCase);
+
+        // Match each entry: ["key"] = { ... }
+        var entryRegex = new Regex(@"\[""([^""]+)""\]\s*=\s*\{([^}]*)\}", RegexOptions.Compiled);
+
+        foreach (Match m in entryRegex.Matches(lua))
+        {
+            var key = m.Groups[1].Value;
+            var body = m.Groups[2].Value;
+
+            var entry = new WikiMappingEntry
+            {
+                ChainName = ExtractString(body, "chainName"),
+                Name = ExtractString(body, "name"),
+                Level = ExtractInt(body, "level"),
+                SortingLevel = ExtractDouble(body, "sortingLevel"),
+                Fueled = ExtractBool(body, "fueled"),
+                IgnoreInTask = ExtractBool(body, "ignoreInTask"),
+            };
+
+            result.TryAdd(key, entry);
+        }
+
+        return result;
+    }
+
+    private static string? ExtractString(string body, string field)
+    {
+        var match = Regex.Match(body, field + @"\s*=\s*""([^""]*)""");
+        return match.Success ? match.Groups[1].Value : null;
+    }
+
+    private static int? ExtractInt(string body, string field)
+    {
+        var match = Regex.Match(body, field + @"\s*=\s*(\d+)");
+        return match.Success && int.TryParse(match.Groups[1].Value, out var v) ? v : null;
+    }
+
+    private static double? ExtractDouble(string body, string field)
+    {
+        var match = Regex.Match(body, field + @"\s*=\s*([\d.]+)");
+        return match.Success && double.TryParse(match.Groups[1].Value,
+            System.Globalization.CultureInfo.InvariantCulture, out var v) ? v : null;
+    }
+
+    private static bool ExtractBool(string body, string field)
+    {
+        var match = Regex.Match(body, field + @"\s*=\s*(true|false)");
+        return match.Success && match.Groups[1].Value == "true";
+    }
+
+    // ── Wiki Edit API ────────────────────────────────────────────────
+
+    private const string BaseApiUrl = "https://merge-mansion.fandom.com/api.php";
+
+    /// <summary>
+    /// Creates an authenticated HttpClient logged in with the given bot password credentials.
+    /// All edits go through the user's own bot — permissions are enforced by Fandom, not the app.
+    /// </summary>
+    internal static async Task<HttpClient> CreateAuthenticatedClientAsync(string username, string password)
+    {
+        var handler = new HttpClientHandler { CookieContainer = new CookieContainer() };
+        var client = new HttpClient(handler);
+
+        var tokenJson = await client.GetStringAsync(
+            $"{BaseApiUrl}?action=query&meta=tokens&type=login&format=json");
+        var loginToken = JsonDocument.Parse(tokenJson).RootElement
+            .GetProperty("query").GetProperty("tokens")
+            .GetProperty("logintoken").GetString()!;
+
+        var loginContent = new FormUrlEncodedContent(new Dictionary<string, string>
+        {
+            ["action"] = "login",
+            ["lgname"] = username,
+            ["lgpassword"] = password,
+            ["lgtoken"] = loginToken,
+            ["format"] = "json",
+        });
+        var resp = await client.PostAsync(BaseApiUrl, loginContent);
+        var doc = JsonDocument.Parse(await resp.Content.ReadAsStringAsync());
+        var result = doc.RootElement.GetProperty("login").GetProperty("result").GetString();
+
+        if (result != "Success")
+        {
+            client.Dispose();
+            throw new Exception($"Wiki login failed: {result}");
+        }
+
+        return client;
+    }
+
+    /// <summary>
+    /// Verifies a user's Fandom account via bot password (action=login).
+    /// Returns the confirmed Fandom username on success, null on failure.
+    /// </summary>
+    public static async Task<string?> VerifyLoginAsync(string username, string password)
+    {
+        try
+        {
+            using var client = await CreateAuthenticatedClientAsync(username, password);
+
+            // Query the logged-in user info to get the real username
+            var infoJson = await client.GetStringAsync(
+                $"{BaseApiUrl}?action=query&meta=userinfo&format=json");
+            var infoDoc = JsonDocument.Parse(infoJson);
+            var uiName = infoDoc.RootElement
+                .GetProperty("query").GetProperty("userinfo")
+                .GetProperty("name").GetString();
+
+            return uiName ?? username;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// Test edit: appends a timestamped comment to the given page using the user's own bot.
+    /// </summary>
+    public static async Task<string> TestEditPageAsync(
+        string username, string password, string page)
+    {
+        using var client = await CreateAuthenticatedClientAsync(username, password);
+
+        var csrfJson = await client.GetStringAsync(
+            $"{BaseApiUrl}?action=query&meta=tokens&format=json");
+        var csrfToken = JsonDocument.Parse(csrfJson).RootElement
+            .GetProperty("query").GetProperty("tokens")
+            .GetProperty("csrftoken").GetString()!;
+
+        var timestamp = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss UTC");
+        var editResp = await client.PostAsync(BaseApiUrl, new FormUrlEncodedContent(
+            new Dictionary<string, string>
+            {
+                ["action"] = "edit",
+                ["title"] = page,
+                ["appendtext"] = $"\n/* Test edit at {timestamp} via MergeMansionWikiTools */",
+                ["token"] = csrfToken,
+                ["summary"] = $"Test edit (via MergeMansionWikiTools)",
+                ["bot"] = "1",
+                ["format"] = "json",
+            }));
+        var editRaw = await editResp.Content.ReadAsStringAsync();
+        var editDoc = JsonDocument.Parse(editRaw);
+
+        if (editDoc.RootElement.TryGetProperty("error", out var error))
+            return $"Edit failed: {error.GetProperty("info").GetString()}";
+
+        if (editDoc.RootElement.TryGetProperty("edit", out var edit))
+        {
+            var editResult = edit.TryGetProperty("result", out var r) ? r.GetString() : "?";
+            return $"Edit result: {editResult}";
+        }
+
+        return $"Unexpected response: {(editRaw.Length > 200 ? editRaw[..200] : editRaw)}";
+    }
+
+    /// <summary>
+    /// Resolves the wiki filename for a chain by invoking Module:Utils FormatFileName.
+    /// Returns e.g. "MagicFlower01.png" for chain "Magic Flower" at level 1.
+    /// </summary>
+    public static async Task<string?> ResolveWikiFilenameAsync(string chainName)
+    {
+        var text = Uri.EscapeDataString($"{{{{#invoke:Utils|FormatFileName|{chainName}|1}}}}");
+        var url = $"{BaseApiUrl}?action=expandtemplates&text={text}&prop=wikitext&format=json";
+        var json = await Http.GetStringAsync(url);
+        var doc = JsonDocument.Parse(json);
+        return doc.RootElement.GetProperty("expandtemplates")
+                              .GetProperty("wikitext").GetString();
+    }
+
+    /// <summary>
+    /// Gets a CSRF token from the wiki for authenticated edits/uploads.
+    /// </summary>
+    internal static async Task<string> GetCsrfTokenAsync(HttpClient client)
+    {
+        var json = await client.GetStringAsync($"{BaseApiUrl}?action=query&meta=tokens&format=json");
+        return JsonDocument.Parse(json).RootElement
+            .GetProperty("query").GetProperty("tokens")
+            .GetProperty("csrftoken").GetString()!;
+    }
+
+    /// <summary>
+    /// Uploads a file to the wiki using an authenticated client and CSRF token.
+    /// </summary>
+    public static async Task<string> UploadFileAsync(
+        HttpClient client, string csrfToken,
+        string filename, byte[] fileData, string? description = null,
+        bool ignoreWarnings = true)
+    {
+        using var content = new MultipartFormDataContent();
+        content.Add(new StringContent("upload"), "action");
+        content.Add(new StringContent(filename), "filename");
+        content.Add(new StringContent(csrfToken), "token");
+        content.Add(new StringContent("1"), "bot");
+        if (ignoreWarnings)
+            content.Add(new StringContent("1"), "ignorewarnings");
+        content.Add(new StringContent("json"), "format");
+        if (description != null)
+            content.Add(new StringContent(description), "text");
+        content.Add(new StringContent("Uploaded via MergeMansionWikiTools"), "comment");
+        content.Add(new ByteArrayContent(fileData), "file", filename);
+
+        var resp = await client.PostAsync(BaseApiUrl, content);
+        var raw = await resp.Content.ReadAsStringAsync();
+        var doc = JsonDocument.Parse(raw);
+
+        if (doc.RootElement.TryGetProperty("error", out var error))
+            throw new Exception($"Upload failed: {error.GetProperty("info").GetString()}");
+
+        if (doc.RootElement.TryGetProperty("upload", out var upload))
+        {
+            // With ignoreWarnings, API may still return warnings alongside a successful result
+            if (!ignoreWarnings && upload.TryGetProperty("warnings", out var warnings))
+                throw new WikiUploadWarningException(warnings.ToString());
+
+            if (upload.TryGetProperty("result", out var resultProp))
+                return resultProp.GetString() ?? "Unknown";
+        }
+
+        return "Unknown";
+    }
+
+    internal class WikiUploadWarningException : Exception
+    {
+        public WikiUploadWarningException(string warnings) : base(warnings) { }
+    }
+
+    /// <summary>
+    /// Pushes chain name updates to the wiki module using the user's own bot credentials.
+    /// Permissions are enforced by Fandom — the app does not restrict any actions.
+    /// </summary>
+    public static async Task PushChainNameToWikiAsync(
+        string username, string password,
+        IReadOnlyList<ParsedItem> items, string chainName)
+    {
+        using var client = await CreateAuthenticatedClientAsync(username, password);
+
+        // 1. Fetch current Lua content
+        var luaJson = await client.GetStringAsync(ApiUrl);
+        var luaDoc = JsonDocument.Parse(luaJson);
+        var pages = luaDoc.RootElement.GetProperty("query").GetProperty("pages");
+        string currentLua = "";
+        foreach (var page in pages.EnumerateObject())
+        {
+            currentLua = page.Value.GetProperty("revisions")[0]
+                .GetProperty("slots").GetProperty("main")
+                .GetProperty("*").GetString() ?? "";
+            break;
+        }
+
+        // 2. Modify Lua
+        var updatedLua = UpdateLuaEntry(currentLua, items, chainName);
+
+        // 3. Get CSRF token
+        var csrfJson = await client.GetStringAsync(
+            $"{BaseApiUrl}?action=query&meta=tokens&format=json");
+        var csrfToken = JsonDocument.Parse(csrfJson).RootElement
+            .GetProperty("query").GetProperty("tokens")
+            .GetProperty("csrftoken").GetString()!;
+
+        // 4. Edit page
+        var editContent = new FormUrlEncodedContent(new Dictionary<string, string>
+        {
+            ["action"] = "edit",
+            ["title"] = "Module:Datatable/Items/Mapping",
+            ["text"] = updatedLua,
+            ["token"] = csrfToken,
+            ["summary"] = $"Update chainName → \"{chainName}\" (via MergeMansionWikiTools)",
+            ["bot"] = "1",
+            ["format"] = "json",
+        });
+        var editResp = await client.PostAsync(BaseApiUrl, editContent);
+        var editDoc = JsonDocument.Parse(await editResp.Content.ReadAsStringAsync());
+
+        if (editDoc.RootElement.TryGetProperty("error", out var error))
+            throw new Exception($"Wiki edit failed: {error.GetProperty("info").GetString()}");
+    }
+
+    /// <summary>
+    /// Updates or adds chainName (and optionally level) entries in the Lua module source.
+    /// </summary>
+    private static string UpdateLuaEntry(
+        string lua, IReadOnlyList<ParsedItem> items, string chainName, int? level = null)
+    {
+        var escapedName = chainName.Replace("\"", "\\\"");
+
+        foreach (var item in items)
+        {
+            if (string.IsNullOrEmpty(item.ItemType)) continue;
+
+            var escapedType = Regex.Escape(item.ItemType);
+            var entryRegex = new Regex(
+                @"(\[""" + escapedType + @"""\]\s*=\s*\{)([^}]*)(})",
+                RegexOptions.None);
+
+            if (entryRegex.IsMatch(lua))
+            {
+                // Entry exists — update or add chainName field
+                lua = entryRegex.Replace(lua, m =>
+                {
+                    var prefix = m.Groups[1].Value;
+                    var body = m.Groups[2].Value;
+                    var suffix = m.Groups[3].Value;
+
+                    // Update chainName
+                    var chainNameRegex = new Regex(@"chainName\s*=\s*""[^""]*""");
+                    if (chainNameRegex.IsMatch(body))
+                        body = chainNameRegex.Replace(body, $"chainName = \"{escapedName}\"");
+                    else
+                    {
+                        body = body.TrimStart();
+                        body = $"chainName = \"{escapedName}\", " + body;
+                    }
+
+                    // Update level if specified
+                    if (level.HasValue)
+                    {
+                        var levelRegex = new Regex(@"level\s*=\s*\d+");
+                        if (levelRegex.IsMatch(body))
+                            body = levelRegex.Replace(body, $"level = {level.Value}");
+                        else
+                        {
+                            // Add level after chainName
+                            var insertIdx = body.IndexOf("chainName");
+                            if (insertIdx >= 0)
+                            {
+                                // Find end of chainName value
+                                var afterChain = body.IndexOf('"', body.IndexOf('"', insertIdx + 12) + 1);
+                                if (afterChain >= 0)
+                                    body = body.Insert(afterChain + 1, $", level = {level.Value}");
+                            }
+                        }
+                    }
+
+                    return prefix + body + suffix;
+                });
+            }
+            else
+            {
+                // Entry doesn't exist — add before closing "}"
+                var fields = $"chainName = \"{escapedName}\"";
+                if (level.HasValue)
+                    fields += $", level = {level.Value}";
+                var newEntry = $"\t[\"{item.ItemType}\"] = {{{fields}}},\n";
+                var lastBrace = lua.LastIndexOf('}');
+                if (lastBrace >= 0)
+                    lua = lua.Insert(lastBrace, newEntry);
+            }
+        }
+
+        return lua;
+    }
+
+    // ── Item Move & Level Operations ──────────────────────────────────
+
+    /// <summary>
+    /// Pushes item mapping changes (chainName + optional level) to the wiki Lua module.
+    /// </summary>
+    public static async Task PushItemMappingsAsync(
+        string username, string password,
+        IReadOnlyList<ParsedItem> items, string chainName, int? level = null)
+    {
+        using var client = await CreateAuthenticatedClientAsync(username, password);
+
+        // 1. Fetch current Lua content
+        var luaJson = await client.GetStringAsync(ApiUrl);
+        var luaDoc = JsonDocument.Parse(luaJson);
+        var pages = luaDoc.RootElement.GetProperty("query").GetProperty("pages");
+        string currentLua = "";
+        foreach (var page in pages.EnumerateObject())
+        {
+            currentLua = page.Value.GetProperty("revisions")[0]
+                .GetProperty("slots").GetProperty("main")
+                .GetProperty("*").GetString() ?? "";
+            break;
+        }
+
+        // 2. Modify Lua
+        var updatedLua = UpdateLuaEntry(currentLua, items, chainName, level);
+
+        // 3. Get CSRF token
+        var csrfToken = await GetCsrfTokenAsync(client);
+
+        // 4. Build edit summary
+        string summary;
+        if (level.HasValue && items.Count == 1)
+            summary = $"Set level {level.Value} for {items[0].ItemType} → \"{chainName}\" (via MergeMansionWikiTools)";
+        else
+            summary = $"Move items → \"{chainName}\" (via MergeMansionWikiTools)";
+
+        // 5. Edit page
+        var editContent = new FormUrlEncodedContent(new Dictionary<string, string>
+        {
+            ["action"] = "edit",
+            ["title"] = "Module:Datatable/Items/Mapping",
+            ["text"] = updatedLua,
+            ["token"] = csrfToken,
+            ["summary"] = summary,
+            ["bot"] = "1",
+            ["format"] = "json",
+        });
+        var editResp = await client.PostAsync(BaseApiUrl, editContent);
+        var editDoc = JsonDocument.Parse(await editResp.Content.ReadAsStringAsync());
+
+        if (editDoc.RootElement.TryGetProperty("error", out var error))
+            throw new Exception($"Wiki edit failed: {error.GetProperty("info").GetString()}");
+    }
+
+    /// <summary>
+    /// Checks which chain images exist on the wiki for given levels.
+    /// Returns level → image URL (null if image doesn't exist).
+    /// Uses the original PNG URL (not thumburl) to preserve transparency.
+    /// </summary>
+    public static async Task<Dictionary<int, string?>> CheckChainImagesAsync(string chainName, int[] levels)
+    {
+        var fullName = await ResolveWikiFilenameAsync(chainName);
+        if (string.IsNullOrEmpty(fullName))
+            return levels.ToDictionary(l => l, _ => (string?)null);
+
+        // Strip trailing "01.png" or "01" to get base name
+        string baseName;
+        if (fullName.EndsWith(".png", StringComparison.OrdinalIgnoreCase) && fullName.Length > 6)
+            baseName = fullName[..^6];
+        else if (fullName.Length > 2)
+            baseName = fullName[..^2];
+        else
+            baseName = fullName;
+
+        // Build file titles
+        var titles = levels.Select(l => $"File:{baseName}{l:D2}.png");
+        var titlesStr = string.Join("|", titles);
+
+        // Use iiprop=url without iiurlwidth — returns the original PNG (preserves transparency)
+        var url = $"{BaseApiUrl}?action=query&titles={Uri.EscapeDataString(titlesStr)}" +
+                  "&prop=imageinfo&iiprop=url&format=json";
+        var json = await Http.GetStringAsync(url);
+        var doc = JsonDocument.Parse(json);
+
+        var result = new Dictionary<int, string?>();
+        var pagesEl = doc.RootElement.GetProperty("query").GetProperty("pages");
+
+        foreach (var level in levels)
+        {
+            var fileName = $"{baseName}{level:D2}.png";
+            string? imageUrl = null;
+            foreach (var page in pagesEl.EnumerateObject())
+            {
+                var pageTitle = page.Value.GetProperty("title").GetString() ?? "";
+                if (pageTitle.Equals($"File:{fileName}", StringComparison.OrdinalIgnoreCase)
+                    && page.Value.TryGetProperty("imageinfo", out var ii))
+                {
+                    imageUrl = ii[0].GetProperty("url").GetString();
+                    break;
+                }
+            }
+            result[level] = imageUrl;
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// Checks whether a single wiki page exists (unauthenticated read-only API).
+    /// </summary>
+    public static async Task<bool> CheckPageExistsAsync(string pageTitle)
+    {
+        var url = $"{BaseApiUrl}?action=query" +
+                  $"&titles={Uri.EscapeDataString(pageTitle)}" +
+                  "&format=json";
+        var json = await Http.GetStringAsync(url);
+        var doc = JsonDocument.Parse(json);
+
+        var pages = doc.RootElement.GetProperty("query").GetProperty("pages");
+        foreach (var page in pages.EnumerateObject())
+        {
+            if (page.Value.TryGetProperty("missing", out _))
+                return false;
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// Moves a wiki page from one title to another.
+    /// On cantmove-noredirect, retries without noredirect.
+    /// On articleexists, throws WikiArticleExistsException.
+    /// </summary>
+    public static async Task<string> MoveWikiPageAsync(
+        HttpClient client, string csrfToken,
+        string from, string to, string reason)
+    {
+        var content = new FormUrlEncodedContent(new Dictionary<string, string>
+        {
+            ["action"] = "move",
+            ["from"] = from,
+            ["to"] = to,
+            ["reason"] = reason,
+            ["noredirect"] = "1",
+            ["movetalk"] = "1",
+            ["token"] = csrfToken,
+            ["bot"] = "1",
+            ["format"] = "json",
+        });
+        var resp = await client.PostAsync(BaseApiUrl, content);
+        var raw = await resp.Content.ReadAsStringAsync();
+        var doc = JsonDocument.Parse(raw);
+
+        if (doc.RootElement.TryGetProperty("error", out var error))
+        {
+            var code = error.GetProperty("code").GetString() ?? "";
+            if (code == "cantmove-noredirect")
+            {
+                // Retry without noredirect
+                var retryContent = new FormUrlEncodedContent(new Dictionary<string, string>
+                {
+                    ["action"] = "move",
+                    ["from"] = from,
+                    ["to"] = to,
+                    ["reason"] = reason,
+                    ["movetalk"] = "1",
+                    ["token"] = csrfToken,
+                    ["bot"] = "1",
+                    ["format"] = "json",
+                });
+                var retryResp = await client.PostAsync(BaseApiUrl, retryContent);
+                var retryRaw = await retryResp.Content.ReadAsStringAsync();
+                var retryDoc = JsonDocument.Parse(retryRaw);
+
+                if (retryDoc.RootElement.TryGetProperty("error", out var retryError))
+                    throw new Exception($"Move failed: {retryError.GetProperty("info").GetString()}");
+                return "Success (with redirect)";
+            }
+            if (code == "articleexists")
+                throw new WikiArticleExistsException($"Target page \"{to}\" already exists");
+            throw new Exception($"Move failed: {error.GetProperty("info").GetString()}");
+        }
+        return "Success";
+    }
+
+    internal class WikiArticleExistsException : Exception
+    {
+        public WikiArticleExistsException(string message) : base(message) { }
+    }
+
+    /// <summary>
+    /// Updates the content of a moved page: adds/updates DISPLAYTITLE, Infobox title1, Item/Group displayName.
+    /// Handles {{#var:DisplayTitle}} pattern and existing DISPLAYTITLE.
+    /// Only applies when the new name has a parenthetical suffix.
+    /// Returns true if the page was edited.
+    /// </summary>
+    public static async Task<bool> UpdateMovedPageContentAsync(
+        HttpClient client, string csrfToken,
+        string pageTitle, string displayName)
+    {
+        var wikitext = await FetchPageWikitextAsync(client, pageTitle);
+        if (string.IsNullOrEmpty(wikitext)) return false;
+
+        var original = wikitext;
+
+        // 1. DISPLAYTITLE + optional #vardefine:DisplayTitle
+        bool usesDisplayTitleVar = wikitext.Contains("{{#var:DisplayTitle}}", StringComparison.OrdinalIgnoreCase);
+        var displayTitleValue = usesDisplayTitleVar ? "{{#var:DisplayTitle}}" : displayName;
+        var varDefinePart = usesDisplayTitleVar
+            ? $"{{{{#vardefine:DisplayTitle|{displayName}}}}}" : null;
+
+        if (Regex.IsMatch(wikitext, @"\{\{DISPLAYTITLE:", RegexOptions.IgnoreCase))
+        {
+            // Update existing DISPLAYTITLE value
+            wikitext = Regex.Replace(wikitext,
+                @"\{\{DISPLAYTITLE:[^}]*\}\}",
+                $"{{{{DISPLAYTITLE:{displayTitleValue}}}}}",
+                RegexOptions.IgnoreCase);
+
+            // If we need vardefine and it doesn't exist yet, insert before DISPLAYTITLE
+            if (varDefinePart != null &&
+                !Regex.IsMatch(wikitext, @"\{\{#vardefine:DisplayTitle\|", RegexOptions.IgnoreCase))
+            {
+                wikitext = Regex.Replace(wikitext,
+                    @"(\{\{DISPLAYTITLE:)",
+                    varDefinePart + "$1",
+                    RegexOptions.IgnoreCase);
+            }
+        }
+        else
+        {
+            // Insert new DISPLAYTITLE
+            var displayTitleTag = $"{{{{DISPLAYTITLE:{displayTitleValue}}}}}";
+            var toInsert = varDefinePart != null
+                ? varDefinePart + displayTitleTag
+                : displayTitleTag;
+
+            // Try to place on first line if it contains {{#vardefine
+            var firstLineEnd = wikitext.IndexOf('\n');
+            if (firstLineEnd > 0)
+            {
+                var firstLine = wikitext[..firstLineEnd];
+                if (firstLine.Contains("{{#vardefine", StringComparison.OrdinalIgnoreCase))
+                {
+                    // Insert before <!-- comment if present, otherwise at end of line
+                    var commentIdx = firstLine.IndexOf("<!--");
+                    if (commentIdx >= 0)
+                        wikitext = firstLine[..commentIdx] + toInsert + firstLine[commentIdx..] + wikitext[firstLineEnd..];
+                    else
+                        wikitext = firstLine + toInsert + wikitext[firstLineEnd..];
+                }
+                else
+                {
+                    wikitext = toInsert + "\n" + wikitext;
+                }
+            }
+            else
+            {
+                wikitext = toInsert + "\n" + wikitext;
+            }
+        }
+
+        // 2. After {{Infobox Items line → insert | title1 = displayName
+        var infoboxRegex = new Regex(@"(\{\{Infobox Items[^\n]*\n)", RegexOptions.IgnoreCase);
+        if (infoboxRegex.IsMatch(wikitext) &&
+            !Regex.IsMatch(wikitext, @"\|\s*title1\s*=", RegexOptions.IgnoreCase))
+        {
+            wikitext = infoboxRegex.Replace(wikitext,
+                $"$1| title1 = {displayName}\n", 1);
+        }
+
+        // 3. {{Item/Group|{{PAGENAME}}|N}} → {{Item/Group|{{PAGENAME}}|N|displayName=displayName}}
+        wikitext = Regex.Replace(wikitext,
+            @"\{\{Item/Group\|\{\{PAGENAME\}\}\|(\d+)\}\}",
+            $"{{{{Item/Group|{{{{PAGENAME}}}}|$1|displayName={displayName}}}}}");
+
+        if (wikitext == original) return false;
+
+        var editContent = new FormUrlEncodedContent(new Dictionary<string, string>
+        {
+            ["action"] = "edit",
+            ["title"] = pageTitle,
+            ["text"] = wikitext,
+            ["token"] = csrfToken,
+            ["summary"] = "Update page after move: add DISPLAYTITLE + title1 (via MergeMansionWikiTools)",
+            ["bot"] = "1",
+            ["format"] = "json",
+        });
+        var resp = await client.PostAsync(BaseApiUrl, editContent);
+        var doc = JsonDocument.Parse(await resp.Content.ReadAsStringAsync());
+
+        if (doc.RootElement.TryGetProperty("error", out var error))
+            throw new Exception($"Edit failed on \"{pageTitle}\": {error.GetProperty("info").GetString()}");
+
+        return true;
+    }
+
+    /// <summary>
+    /// Moves a wiki file (image) from one title to another.
+    /// </summary>
+    public static async Task<string> MoveFileAsync(
+        HttpClient client, string csrfToken,
+        string from, string to, string reason)
+    {
+        var content = new FormUrlEncodedContent(new Dictionary<string, string>
+        {
+            ["action"] = "move",
+            ["from"] = from,
+            ["to"] = to,
+            ["reason"] = reason,
+            ["noredirect"] = "1",
+            ["movetalk"] = "1",
+            ["token"] = csrfToken,
+            ["bot"] = "1",
+            ["format"] = "json",
+        });
+        var resp = await client.PostAsync(BaseApiUrl, content);
+        var raw = await resp.Content.ReadAsStringAsync();
+        var doc = JsonDocument.Parse(raw);
+
+        if (doc.RootElement.TryGetProperty("error", out var error))
+        {
+            var code = error.GetProperty("code").GetString() ?? "";
+            // If noredirect not allowed, retry without it
+            if (code == "cantmove-noredirect")
+                return await MoveFileWithRedirectAsync(client, csrfToken, from, to, reason);
+            throw new Exception($"Move failed: {error.GetProperty("info").GetString()}");
+        }
+        return "Success";
+    }
+
+    private static async Task<string> MoveFileWithRedirectAsync(
+        HttpClient client, string csrfToken,
+        string from, string to, string reason)
+    {
+        var content = new FormUrlEncodedContent(new Dictionary<string, string>
+        {
+            ["action"] = "move",
+            ["from"] = from,
+            ["to"] = to,
+            ["reason"] = reason,
+            ["movetalk"] = "1",
+            ["token"] = csrfToken,
+            ["bot"] = "1",
+            ["format"] = "json",
+        });
+        var resp = await client.PostAsync(BaseApiUrl, content);
+        var raw = await resp.Content.ReadAsStringAsync();
+        var doc = JsonDocument.Parse(raw);
+
+        if (doc.RootElement.TryGetProperty("error", out var error))
+            throw new Exception($"Move failed: {error.GetProperty("info").GetString()}");
+        return "Success (with redirect)";
+    }
+
+    /// <summary>
+    /// Moves all chain images from old name to new name on the wiki.
+    /// On articleexists, overwrites by downloading source and re-uploading to target.
+    /// Returns (moved, overwritten, skipped).
+    /// </summary>
+    public static async Task<(int moved, int overwritten, int skipped)> MoveChainImagesAsync(
+        HttpClient client, string csrfToken,
+        string oldChainName, string newChainName, int[] levels,
+        Dictionary<int, string?>? sourceImageUrls = null,
+        Action<int, int>? onProgress = null)
+    {
+        var oldFull = await ResolveWikiFilenameAsync(oldChainName);
+        var newFull = await ResolveWikiFilenameAsync(newChainName);
+
+        if (string.IsNullOrEmpty(oldFull) || string.IsNullOrEmpty(newFull))
+            return (0, 0, levels.Length);
+
+        // Get base names
+        string GetBase(string f) => f.EndsWith(".png", StringComparison.OrdinalIgnoreCase) && f.Length > 6
+            ? f[..^6] : (f.Length > 2 ? f[..^2] : f);
+        var oldBase = GetBase(oldFull);
+        var newBase = GetBase(newFull);
+
+        // Check which old images exist (use provided URLs if available)
+        var existingImages = sourceImageUrls ?? await CheckChainImagesAsync(oldChainName, levels);
+
+        int moved = 0, overwritten = 0, skipped = 0;
+        int total = levels.Length;
+
+        foreach (var level in levels)
+        {
+            if (existingImages.TryGetValue(level, out var imageUrl) && imageUrl != null)
+            {
+                var from = $"File:{oldBase}{level:D2}.png";
+                var to = $"File:{newBase}{level:D2}.png";
+                var reason = $"Rename chain images: \"{oldChainName}\" → \"{newChainName}\" (via MergeMansionWikiTools)";
+
+                try
+                {
+                    await MoveFileAsync(client, csrfToken, from, to, reason);
+                    moved++;
+                }
+                catch (Exception ex)
+                {
+                    // On articleexists: download source image → upload to target (overwrite)
+                    if (ex.Message.Contains("already exists") || ex.Message.Contains("articleexists"))
+                    {
+                        try
+                        {
+                            var bytes = await Http.GetByteArrayAsync(imageUrl);
+                            var targetFilename = $"{newBase}{level:D2}.png";
+                            await UploadFileAsync(client, csrfToken, targetFilename, bytes,
+                                ignoreWarnings: true);
+                            overwritten++;
+                        }
+                        catch
+                        {
+                            skipped++;
+                        }
+                    }
+                    else
+                    {
+                        skipped++;
+                    }
+                }
+            }
+            else
+            {
+                skipped++;
+            }
+            onProgress?.Invoke(moved + overwritten + skipped, total);
+        }
+
+        return (moved, overwritten, skipped);
+    }
+
+    // ── Backlinks & Reference Updates ─────────────────────────────────
+
+    /// <summary>
+    /// Fetches all pages that link to the given page title (main namespace only).
+    /// Handles continuation for >500 results.
+    /// </summary>
+    public static async Task<List<string>> GetBacklinksAsync(string pageTitle, CancellationToken ct = default)
+    {
+        var results = new List<string>();
+        string? blcontinue = null;
+
+        do
+        {
+            ct.ThrowIfCancellationRequested();
+
+            var url = $"{BaseApiUrl}?action=query&list=backlinks" +
+                      $"&bltitle={Uri.EscapeDataString(pageTitle)}" +
+                      "&bllimit=500&blnamespace=0&format=json";
+            if (blcontinue != null)
+                url += $"&blcontinue={Uri.EscapeDataString(blcontinue)}";
+
+            var json = await Http.GetStringAsync(url, ct);
+            var doc = JsonDocument.Parse(json);
+
+            if (doc.RootElement.TryGetProperty("query", out var query)
+                && query.TryGetProperty("backlinks", out var bl))
+            {
+                foreach (var item in bl.EnumerateArray())
+                {
+                    var title = item.GetProperty("title").GetString();
+                    if (title != null)
+                        results.Add(title);
+                }
+            }
+
+            blcontinue = null;
+            if (doc.RootElement.TryGetProperty("continue", out var cont)
+                && cont.TryGetProperty("blcontinue", out var blc))
+            {
+                blcontinue = blc.GetString();
+            }
+        } while (blcontinue != null);
+
+        return results;
+    }
+
+    /// <summary>
+    /// Fetches the raw wikitext content of a page.
+    /// </summary>
+    public static async Task<string> FetchPageWikitextAsync(HttpClient client, string pageTitle)
+    {
+        var url = $"{BaseApiUrl}?action=query" +
+                  $"&titles={Uri.EscapeDataString(pageTitle)}" +
+                  "&prop=revisions&rvprop=content&rvslots=main&format=json";
+        var json = await client.GetStringAsync(url);
+        var doc = JsonDocument.Parse(json);
+
+        var pages = doc.RootElement.GetProperty("query").GetProperty("pages");
+        foreach (var page in pages.EnumerateObject())
+        {
+            if (page.Value.TryGetProperty("revisions", out var revs) && revs.GetArrayLength() > 0)
+            {
+                return revs[0].GetProperty("slots").GetProperty("main")
+                    .GetProperty("*").GetString() ?? "";
+            }
+        }
+        return "";
+    }
+
+    /// <summary>
+    /// Updates all references from oldName to newName on a wiki page.
+    /// Returns true if the page was actually edited (wikitext changed).
+    /// </summary>
+    public static async Task<bool> UpdatePageReferencesAsync(
+        HttpClient client, string csrfToken,
+        string pageTitle, string oldName, string newName)
+    {
+        var wikitext = await FetchPageWikitextAsync(client, pageTitle);
+        if (string.IsNullOrEmpty(wikitext)) return false;
+
+        var updated = ReplaceChainReferences(wikitext, oldName, newName);
+        if (updated == wikitext) return false;
+
+        var editContent = new FormUrlEncodedContent(new Dictionary<string, string>
+        {
+            ["action"] = "edit",
+            ["title"] = pageTitle,
+            ["text"] = updated,
+            ["token"] = csrfToken,
+            ["summary"] = $"Update references: \"{oldName}\" → \"{newName}\" (via MergeMansionWikiTools)",
+            ["bot"] = "1",
+            ["format"] = "json",
+        });
+        var resp = await client.PostAsync(BaseApiUrl, editContent);
+        var doc = JsonDocument.Parse(await resp.Content.ReadAsStringAsync());
+
+        if (doc.RootElement.TryGetProperty("error", out var error))
+            throw new Exception($"Edit failed on \"{pageTitle}\": {error.GetProperty("info").GetString()}");
+
+        return true;
+    }
+
+    /// <summary>
+    /// Replaces all wiki references from oldName to newName in wikitext.
+    /// Handles: [[wikilinks]], {{Item|}}, {{Item/nolevel|}}, {{Item/Group|}} templates.
+    /// </summary>
+    internal static string ReplaceChainReferences(string wikitext, string oldName, string newName)
+    {
+        var escapedOld = Regex.Escape(oldName);
+        bool newHasSuffix = newName.LastIndexOf('(') > 0;
+        var displayName = newHasSuffix ? StripParenthetical(newName) : newName;
+
+        // (a) [[Old Name]] → [[New Name]] or [[New Name|Display]] if suffix
+        if (newHasSuffix)
+        {
+            wikitext = Regex.Replace(wikitext,
+                @"\[\[" + escapedOld + @"\]\]",
+                $"[[{newName}|{displayName}]]");
+        }
+        else
+        {
+            wikitext = Regex.Replace(wikitext,
+                @"\[\[" + escapedOld + @"\]\]",
+                $"[[{newName}]]");
+        }
+
+        // (b) [[Old Name|existing text]] → [[New Name|existing text]]
+        wikitext = Regex.Replace(wikitext,
+            @"\[\[" + escapedOld + @"\|([^\]]*)\]\]",
+            $"[[{newName}|$1]]");
+
+        // (c) {{Item|Old Name| → {{Item|New Name|
+        wikitext = Regex.Replace(wikitext,
+            @"\{\{Item\|" + escapedOld + @"\|",
+            $"{{{{Item|{newName}|");
+
+        // (d) {{Item/nolevel|Old Name}} or {{Item/nolevel|Old Name|...}}
+        wikitext = Regex.Replace(wikitext,
+            @"\{\{Item/nolevel\|" + escapedOld + @"([|}])",
+            $"{{{{Item/nolevel|{newName}$1");
+
+        // (e) {{Item/Group|Old Name| → {{Item/Group|New Name|
+        wikitext = Regex.Replace(wikitext,
+            @"\{\{Item/Group\|" + escapedOld + @"\|",
+            $"{{{{Item/Group|{newName}|");
+
+        // (f) {{#vardefine:...|Old Name}} → {{#vardefine:...|New Name}}
+        wikitext = Regex.Replace(wikitext,
+            @"(\{\{#vardefine:[^|]*\|)" + escapedOld + @"(\}\})",
+            $"$1{newName}$2");
+
+        // (g) When suffix + page uses DropDisplayName:
+        //     - Update existing {{#vardefine:DropDisplayName|...}} → displayName
+        //     - Or create {{#vardefine:DropDisplayName|displayName}} if page uses {{#var:DropDisplayName}}
+        if (newHasSuffix)
+        {
+            bool hasVarDefine = Regex.IsMatch(wikitext,
+                @"\{\{#vardefine:DropDisplayName\|", RegexOptions.IgnoreCase);
+            bool hasVarUsage = wikitext.Contains("{{#var:DropDisplayName}}",
+                StringComparison.OrdinalIgnoreCase);
+
+            if (hasVarDefine)
+            {
+                // Update existing vardefine value
+                wikitext = Regex.Replace(wikitext,
+                    @"(\{\{#vardefine:DropDisplayName\|)[^}]*(\}\})",
+                    $"$1{displayName}$2",
+                    RegexOptions.IgnoreCase);
+            }
+            else if (hasVarUsage)
+            {
+                // Page uses {{#var:DropDisplayName}} but has no vardefine — create one
+                // Insert after {{#vardefine:DropName|...}} if present, otherwise prepend
+                var dropNameDefine = Regex.Match(wikitext,
+                    @"\{\{#vardefine:DropName\|[^}]*\}\}", RegexOptions.IgnoreCase);
+                var newDefine = $"{{{{#vardefine:DropDisplayName|{displayName}}}}}";
+                if (dropNameDefine.Success)
+                {
+                    var insertAt = dropNameDefine.Index + dropNameDefine.Length;
+                    wikitext = wikitext.Insert(insertAt, newDefine);
+                }
+                else
+                {
+                    wikitext = newDefine + wikitext;
+                }
+            }
+        }
+
+        return wikitext;
+    }
+
+    /// <summary>
+    /// Counts how many references to oldName exist in the wikitext.
+    /// Uses the same patterns as ReplaceChainReferences.
+    /// </summary>
+    internal static int CountChainReferences(string wikitext, string oldName)
+    {
+        var escaped = Regex.Escape(oldName);
+        int count = 0;
+        count += Regex.Matches(wikitext, @"\[\[" + escaped + @"(\]\]|\|)").Count;     // [[Name]] or [[Name|...]]
+        count += Regex.Matches(wikitext, @"\{\{Item\|" + escaped + @"\|").Count;       // {{Item|Name|
+        count += Regex.Matches(wikitext, @"\{\{Item/nolevel\|" + escaped + @"[|}]").Count; // {{Item/nolevel|Name
+        count += Regex.Matches(wikitext, @"\{\{Item/Group\|" + escaped + @"\|").Count; // {{Item/Group|Name|
+        count += Regex.Matches(wikitext, @"\{\{#vardefine:[^|]*\|" + escaped + @"\}\}").Count; // {{#vardefine:...|Name}}
+        return count;
+    }
+
+    private static string StripParenthetical(string name)
+    {
+        var idx = name.LastIndexOf('(');
+        if (idx > 0)
+            return name[..idx].TrimEnd();
+        return name;
+    }
+}

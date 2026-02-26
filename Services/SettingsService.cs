@@ -16,17 +16,32 @@ public static class SettingsService
 
     public static AppSettings Load()
     {
+        AppSettings settings;
         try
         {
             if (File.Exists(SettingsPath))
             {
                 var json = File.ReadAllText(SettingsPath);
-                return JsonSerializer.Deserialize<AppSettings>(json, JsonOpts) ?? new AppSettings();
+                settings = JsonSerializer.Deserialize<AppSettings>(json, JsonOpts) ?? new AppSettings();
+            }
+            else
+            {
+                settings = new AppSettings();
             }
         }
-        catch { /* Return defaults on any error */ }
+        catch
+        {
+            settings = new AppSettings();
+        }
 
-        return new AppSettings();
+        // Apply defaults for fields added after initial save
+        ApplyDefaults(settings);
+        return settings;
+    }
+
+    private static void ApplyDefaults(AppSettings s)
+    {
+        // Placeholder for future field migrations
     }
 
     public static void Save(AppSettings settings)

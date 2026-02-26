@@ -20,6 +20,9 @@ public class DataService
     /// <summary>All item names by ItemType (e.g., "Lamp_09" → "Victorian Lamp")</summary>
     public Dictionary<string, string> ItemNames { get; private set; } = new();
 
+    /// <summary>All item levels by ItemType from JSON's LevelNumber field</summary>
+    public Dictionary<string, int> ItemLevels { get; private set; } = new();
+
     /// <summary>ConfigKey → chain name mapping</summary>
     public Dictionary<string, string> ChainNames { get; private set; } = new();
 
@@ -36,6 +39,7 @@ public class DataService
     {
         Warnings.Clear();
         ItemNames.Clear();
+        ItemLevels.Clear();
         ChainNames.Clear();
         Chains.Clear();
 
@@ -73,9 +77,14 @@ public class DataService
 
                     var itemType = GetString(item, "ItemType");
                     var name = GetString(item, "Name");
+                    var levelNum = GetInt(item, "LevelNumber");
 
-                    if (!string.IsNullOrEmpty(itemType) && !string.IsNullOrEmpty(name))
-                        ItemNames.TryAdd(itemType, name);
+                    if (!string.IsNullOrEmpty(itemType))
+                    {
+                        if (!string.IsNullOrEmpty(name))
+                            ItemNames.TryAdd(itemType, name);
+                        ItemLevels.TryAdd(itemType, levelNum);
+                    }
                 }
             }
         }
@@ -131,6 +140,7 @@ public class DataService
             Level = GetInt(item, "LevelNumber"),
             Name = GetString(item, "Name"),
             ItemType = GetString(item, "ItemType"),
+            NumericConfigKey = GetStringOrNumber(item, "ConfigKey"),
             SellCoins = GetInt(item, "SellCoins"),
             Unsellable = GetBool(item, "Unsellable"),
             Description = GetString(item, "Description"),
@@ -252,7 +262,7 @@ public class DataService
                 factory.TryGetProperty("ScoreTargets", out var targets) &&
                 targets.ValueKind == JsonValueKind.Object)
             {
-                pi.SinkRequirementItemTypes = targets.EnumerateObject()
+                pi.SinkRequirementConfigKeys = targets.EnumerateObject()
                     .Select(p => p.Name)
                     .Where(k => !string.IsNullOrEmpty(k))
                     .ToList();
@@ -381,21 +391,68 @@ public class DataService
     }
 
     /// <summary>
+    /// Resolves the level for an ItemType.
+    /// Priority: wiki mapping level → JSON LevelNumber field → 0.
+    /// </summary>
+    public int ResolveLevel(string itemType, WikiMappingCache? wikiMapping)
+    {
+        if (wikiMapping != null &&
+            wikiMapping.Mappings.TryGetValue(itemType, out var entry) &&
+            entry.Level.HasValue)
+            return entry.Level.Value;
+
+        if (ItemLevels.TryGetValue(itemType, out var jsonLevel))
+            return jsonLevel;
+
+        return 0;
+    }
+
+    /// <summary>
     /// Gets the display name of a chain given its ConfigKey.
-    /// Checks custom names first, then original chain name.
+    /// Priority: custom name → wiki mapping (ChainNames updated by ApplyWikiMapping) → original name → configKey.
     /// </summary>
     public string ResolveChainDisplayName(string configKey)
     {
         var custom = _nameService.GetCustomName(configKey);
         if (!string.IsNullOrEmpty(custom)) return custom;
 
-        if (ChainNames.TryGetValue(configKey, out var name) && IsNaturalName(name))
+        if (ChainNames.TryGetValue(configKey, out var name) && !string.IsNullOrEmpty(name))
             return name;
 
         return configKey;
     }
 
+    /// <summary>
+    /// Resolves a chain display name from an ItemType, checking wiki mapping first.
+    /// Used by template generators for cross-chain references.
+    /// </summary>
+    public string ResolveChainDisplayNameFromItemType(string itemType, WikiMappingCache? wikiMapping)
+    {
+        // Wiki mapping has highest priority (after custom)
+        if (wikiMapping != null &&
+            wikiMapping.Mappings.TryGetValue(itemType, out var entry) &&
+            !string.IsNullOrEmpty(entry.ChainName))
+        {
+            var ck = GetChainKeyFromItemType(itemType);
+            var custom = _nameService.GetCustomName(ck);
+            return !string.IsNullOrEmpty(custom) ? custom : entry.ChainName;
+        }
+
+        var chainKey = GetChainKeyFromItemType(itemType);
+        return ResolveChainDisplayName(chainKey);
+    }
+
     // ── JSON helpers ────────────────────────────────────────────────
+
+    private static string GetStringOrNumber(JsonElement el, string prop, string def = "")
+    {
+        if (el.TryGetProperty(prop, out var val))
+        {
+            if (val.ValueKind == JsonValueKind.String) return val.GetString() ?? def;
+            if (val.ValueKind == JsonValueKind.Number) return val.GetRawText();
+        }
+        return def;
+    }
 
     private static string GetString(JsonElement el, string prop, string def = "")
     {
