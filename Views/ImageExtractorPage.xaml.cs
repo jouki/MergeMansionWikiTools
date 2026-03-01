@@ -1,10 +1,12 @@
+using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks.Dataflow;
 using System.Windows;
 using System.Windows.Controls;
-using Microsoft.Win32;
+using System.Windows.Media;
+using MergeMansionWikiTools.Services;
 using Wpf.Ui.Controls;
 
 namespace MergeMansionWikiTools.Views;
@@ -14,342 +16,459 @@ public partial class ImageExtractorPage : UserControl
     private readonly MainWindow _main;
     private static readonly HttpClient _http = new();
 
+    private string? _detectedApkPath;
+    private string? _detectedVersionDir;
+    private string? _detectedVersion;
+
+    private CancellationTokenSource? _serverCts;
+    private CancellationTokenSource? _extractCts;
+
     public ImageExtractorPage(MainWindow main)
     {
         _main = main;
         InitializeComponent();
-        UpdateExpAutoPathLabel();
+        DetectVersionFolder();
+        DetectServerState();
+        DetectExtractApkState();
+        _main.ApkVersionChanged += OnApkVersionChanged;
     }
 
-    // ── Drag & Drop ─────────────────────────────────────────────────
-
-    private void FileDragOver(object sender, DragEventArgs e)
+    private void OnApkVersionChanged()
     {
-        e.Effects = e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Copy : DragDropEffects.None;
-        e.Handled = true;
+        DetectVersionFolder();
+        DetectServerState();
+        DetectExtractApkState();
     }
 
-    private void FileApproachDrop(object sender, DragEventArgs e)
+    private void BtnGoToApkSettings_Click(object sender, RoutedEventArgs e)
     {
-        var path = GetDroppedPath(e);
-        if (path != null && File.Exists(path))
-            SetFileApproach(path);
+        _main.NavigateToSettingsHighlightApk();
     }
 
-    private void DlCustomOutputDrop(object sender, DragEventArgs e)
+    private void BtnOpenExportFolder_Click(object sender, RoutedEventArgs e)
     {
-        var path = GetDroppedPath(e);
-        if (path != null && Directory.Exists(path))
-            txtDlCustomOutput.Text = path;
+        if (_detectedVersionDir == null) return;
+        var exportDir = Path.Combine(_detectedVersionDir, "Export - PNGs");
+        if (Directory.Exists(exportDir))
+            Process.Start(new ProcessStartInfo(exportDir) { UseShellExecute = true });
     }
 
-    private void ExpSourceDrop(object sender, DragEventArgs e)
-    {
-        var path = GetDroppedPath(e);
-        if (path != null && Directory.Exists(path))
-            SetExpSource(path);
-    }
+    // ── Version folder detection ──────────────────────────────────────
 
-    private void ExpCustomOutputDrop(object sender, DragEventArgs e)
+    private void DetectVersionFolder()
     {
-        var path = GetDroppedPath(e);
-        if (path != null && Directory.Exists(path))
-            txtExpCustomOutput.Text = path;
-    }
+        _detectedApkPath = null;
+        _detectedVersionDir = null;
+        _detectedVersion = null;
 
-    private static string? GetDroppedPath(DragEventArgs e)
-    {
-        var files = (string[]?)e.Data.GetData(DataFormats.FileDrop);
-        return files?.Length > 0 ? files[0] : null;
-    }
-
-    // ── Browse ───────────────────────────────────────────────────────
-
-    private void BrowseFileApproach_Click(object sender, RoutedEventArgs e)
-    {
-        var dlg = new OpenFileDialog
-        {
-            Title = "Select .txt URL list",
-            Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*",
-            CheckFileExists = true
-        };
         var basePath = _main.Settings.ImageExporterBasePath;
-        if (!string.IsNullOrEmpty(basePath) && Directory.Exists(basePath))
-            dlg.InitialDirectory = basePath;
-        if (dlg.ShowDialog() == true) SetFileApproach(dlg.FileName);
-    }
+        if (string.IsNullOrWhiteSpace(basePath) || !Directory.Exists(basePath))
+            return;
 
-    private void BrowseDlCustomOutput_Click(object sender, RoutedEventArgs e)
-    {
-        var path = BrowseFolder("Select custom download output folder", null);
-        if (path != null) txtDlCustomOutput.Text = path;
-    }
+        var savedVersion = _main.Settings.SelectedApkVersion;
+        string? versionDir = null;
 
-    private void BrowseExpSource_Click(object sender, RoutedEventArgs e)
-    {
-        var startPath = string.IsNullOrEmpty(_main.Settings.ImageExporterBasePath)
-            ? null : _main.Settings.ImageExporterBasePath;
-        var path = BrowseFolder("Select source folder with PNG files", startPath);
-        if (path != null) SetExpSource(path);
-    }
-
-    private void BrowseExpCustomOutput_Click(object sender, RoutedEventArgs e)
-    {
-        var path = BrowseFolder("Select custom export output folder", null);
-        if (path != null) txtExpCustomOutput.Text = path;
-    }
-
-    // ── Path setters ─────────────────────────────────────────────────
-
-    private void SetFileApproach(string filePath)
-    {
-        txtFileApproach.Text = filePath;
-        UpdateDlAutoPath(filePath);
-    }
-
-    private void SetExpSource(string folderPath)
-    {
-        txtExpSource.Text = folderPath;
-        UpdateExpAutoPathLabel();
-    }
-
-    private void UpdateDlAutoPath(string? txtFilePath = null)
-    {
-        txtFilePath ??= txtFileApproach?.Text?.Trim();
-        if (!string.IsNullOrEmpty(txtFilePath) && File.Exists(txtFilePath))
-            txtDlAutoPath.Text = ComputeDownloadDir(txtFilePath);
+        if (!string.IsNullOrEmpty(savedVersion))
+        {
+            var specificDir = Path.Combine(basePath, savedVersion);
+            if (Directory.Exists(specificDir))
+                versionDir = specificDir;
+        }
         else
-            txtDlAutoPath.Text = "";
-    }
+        {
+            versionDir = Directory.GetDirectories(basePath)
+                .OrderByDescending(d => Path.GetFileName(d))
+                .FirstOrDefault();
+        }
 
-    private void UpdateExpAutoPathLabel()
-    {
-        var source = NormalizeDir(txtExpSource?.Text);
-        // Note: XAML Run after this one already appends ' - PNGs"', so we only set the folder name
-        runExpAutoPath.Text = !string.IsNullOrEmpty(source)
-            ? Path.GetFileName(source)
-            : "{source}";
-    }
+        if (versionDir == null)
+            return;
 
-    // ── Output mode toggles ──────────────────────────────────────────
+        _detectedVersionDir = versionDir;
+        _detectedVersion = Path.GetFileName(versionDir);
+        _detectedApkPath = CatalogParserService.FindApkInFolder(versionDir);
 
-    private void DlOutputMode_Changed(object sender, RoutedEventArgs e)
-    {
-        if (dlCustomOutputRow == null) return;
-        dlCustomOutputRow.Visibility = rbDlCustom.IsChecked == true
+        // Show "Open Export Folder" if it already exists
+        var exportDir = Path.Combine(versionDir, "Export - PNGs");
+        btnOpenExportFolder.Visibility = Directory.Exists(exportDir)
             ? Visibility.Visible : Visibility.Collapsed;
     }
 
-    private void ExpOutputMode_Changed(object sender, RoutedEventArgs e)
-    {
-        if (expCustomOutputRow == null) return;
-        expCustomOutputRow.Visibility = rbExpCustom.IsChecked == true
-            ? Visibility.Visible : Visibility.Collapsed;
-    }
+    // ── Extract Assets from Server ────────────────────────────────────
 
-    // ── Bundle Downloader ────────────────────────────────────────────
-
-    private async void BtnDownload_Click(object sender, RoutedEventArgs e)
+    private void DetectServerState()
     {
-        var txtPath = txtFileApproach?.Text?.Trim();
-        if (string.IsNullOrEmpty(txtPath) || !File.Exists(txtPath))
+        panelNoServerApk.Visibility = Visibility.Collapsed;
+        btnServerExtract.IsEnabled = false;
+        txtServerAutoPath.Text = "";
+
+        if (_detectedVersionDir == null)
         {
-            ShowDlInfo("Select a .txt URL list file first.", InfoBarSeverity.Error);
+            if (string.IsNullOrWhiteSpace(_main.Settings.ImageExporterBasePath)
+                || !Directory.Exists(_main.Settings.ImageExporterBasePath))
+                txtServerDetected.Text = "No workspace folder configured.";
+            else
+                txtServerDetected.Text = "No version folder found.";
+            txtServerDetected.Foreground = (Brush)FindResource("SystemFillColorCautionBrush");
+            panelNoServerApk.Visibility = Visibility.Visible;
             return;
         }
 
-        var urls = File.ReadAllLines(txtPath)
-            .Where(l => !string.IsNullOrWhiteSpace(l))
-            .Select(l => l.Trim())
-            .ToList();
+        var catalogPath = Path.Combine(_detectedVersionDir, "catalog.bin");
+        var hasCatalog = File.Exists(catalogPath);
+        var apkPath = CatalogParserService.FindApkInFolder(_detectedVersionDir);
 
-        if (urls.Count == 0) { ShowDlInfo("No URLs found in the file.", InfoBarSeverity.Warning); return; }
-
-        var outDir = rbDlCustom.IsChecked == true && !string.IsNullOrEmpty(txtDlCustomOutput.Text)
-            ? txtDlCustomOutput.Text.Trim()
-            : ComputeDownloadDir(txtPath);
-
-        try { Directory.CreateDirectory(outDir); }
-        catch (Exception ex) { ShowDlInfo($"Cannot create output folder: {ex.Message}", InfoBarSeverity.Error); return; }
-
-        btnDownload.IsEnabled = false;
-        txtDlProgress.Text = $"Starting — {urls.Count} URLs...";
-        dlInfoBar.IsOpen = false;
-
-        int done = 0, errors = 0;
-        var progress = new Progress<string>(msg => txtDlProgress.Text = msg);
-
-        var block = new ActionBlock<string>(async url =>
+        if (!hasCatalog && apkPath == null)
         {
-            var fileName = Path.GetFileName(url.Split('?')[0]);
-            if (string.IsNullOrEmpty(fileName)) fileName = $"file_{Guid.NewGuid():N}";
-            try
-            {
-                var data = await _http.GetByteArrayAsync(url);
-                await File.WriteAllBytesAsync(Path.Combine(outDir, fileName), data);
-                var d = Interlocked.Increment(ref done);
-                ((IProgress<string>)progress).Report($"Downloaded {d} / {urls.Count}...");
-            }
-            catch { Interlocked.Increment(ref errors); }
-        }, new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = 4 });
-
-        foreach (var url in urls) block.Post(url);
-        block.Complete();
-        await block.Completion;
-
-        btnDownload.IsEnabled = true;
-        txtDlProgress.Text = "";
-
-        ShowDlInfo(
-            errors > 0
-                ? $"Done! {done} downloaded, {errors} error(s).\n→ {outDir}"
-                : $"Done! {done} file(s) downloaded.\n→ {outDir}",
-            errors > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success);
-    }
-
-    private static string ComputeDownloadDir(string txtFilePath)
-    {
-        var parentDir = Path.GetDirectoryName(txtFilePath) ?? "";
-        var folderName = Path.GetFileName(parentDir);
-        return Path.Combine(parentDir, $"Downloaded_bundles_{folderName}");
-    }
-
-    // ── Image Exporter ───────────────────────────────────────────────
-
-    private async void BtnExport_Click(object sender, RoutedEventArgs e)
-    {
-        var sourceDir = NormalizeDir(txtExpSource.Text);
-        if (!Directory.Exists(sourceDir))
-        {
-            ShowExpInfo("Select a valid source folder first.", InfoBarSeverity.Error);
+            var version = _main.Settings.SelectedApkVersion;
+            txtServerDetected.Text = string.IsNullOrEmpty(version)
+                ? "No APK or catalog.bin found."
+                : $"No APK or catalog.bin found for version {version}.";
+            txtServerDetected.Foreground = (Brush)FindResource("SystemFillColorCautionBrush");
+            panelNoServerApk.Visibility = Visibility.Visible;
             return;
         }
 
-        var outDir = GetExportOutputDir(sourceDir);
-        try { Directory.CreateDirectory(outDir); }
-        catch (Exception ex) { ShowExpInfo($"Cannot create output folder: {ex.Message}", InfoBarSeverity.Error); return; }
+        var source = hasCatalog ? "catalog.bin" : "APK";
+        var status = $"{source} found (v{_detectedVersion}). Will download bundles from server and extract images.";
 
-        btnExport.IsEnabled = false;
-        txtExpProgress.Text = "Scanning for PNG files...";
-        expInfoBar.IsOpen = false;
-
-        int done = 0, errors = 0;
-        var progress = new Progress<string>(msg => txtExpProgress.Text = msg);
-
-        await Task.Run(() =>
+        // Show cached bundle count
+        var downloadDir = Path.Combine(_detectedVersionDir, "Game Files", "Server");
+        if (Directory.Exists(downloadDir))
         {
-            var allPngs = Directory.GetFiles(sourceDir, "*.png", SearchOption.AllDirectories);
+            var cachedCount = Directory.GetFiles(downloadDir).Length;
+            if (cachedCount > 0)
+                status += $" ({cachedCount:N0} bundles cached)";
+        }
 
-            // Pre-scan duplicates
-            var byName = allPngs
-                .GroupBy(p => Path.GetFileName(p)!, StringComparer.OrdinalIgnoreCase)
-                .ToDictionary(g => g.Key, g => g.ToList(), StringComparer.OrdinalIgnoreCase);
+        txtServerDetected.Text = status;
+        txtServerDetected.Foreground = (Brush)FindResource("SystemFillColorSuccessBrush");
+        txtServerAutoPath.Text = $"Output: {Path.Combine(_detectedVersionDir, "Export - PNGs")}";
+        btnServerExtract.IsEnabled = true;
+    }
 
-            ((IProgress<string>)progress).Report($"Found {allPngs.Length} PNG files, copying...");
+    private void BtnCancelServer_Click(object sender, RoutedEventArgs e)
+    {
+        _serverCts?.Cancel();
+    }
 
-            foreach (var png in allPngs)
+    private async void BtnServerExtract_Click(object sender, RoutedEventArgs e)
+    {
+        if (_detectedVersionDir == null)
+        {
+            ShowServerInfo("No version folder found.", InfoBarSeverity.Error);
+            return;
+        }
+
+        var versionDir = _detectedVersionDir;
+        var outputDir = Path.Combine(versionDir, "Export - PNGs");
+
+        _serverCts = new CancellationTokenSource();
+        var ct = _serverCts.Token;
+
+        btnServerExtract.IsEnabled = false;
+        btnCancelServer.Visibility = Visibility.Visible;
+        serverInfoBar.IsOpen = false;
+
+        int dlDownloaded = 0, dlCached = 0, dlErrors = 0;
+
+        try
+        {
+            // ── Phase 1: Ensure catalog.bin ──
+            var catalogPath = Path.Combine(versionDir, "catalog.bin");
+            if (!File.Exists(catalogPath))
             {
-                try
+                var apkPath = CatalogParserService.FindApkInFolder(versionDir);
+                if (apkPath == null)
                 {
-                    var fileName = Path.GetFileName(png);
-                    var isDuplicate = byName[fileName].Count > 1;
-
-                    string targetName;
-                    if (isDuplicate)
-                    {
-                        var suffix = GetDuplicateSuffix(png, sourceDir);
-                        var baseName = Path.GetFileNameWithoutExtension(fileName);
-                        targetName = string.IsNullOrEmpty(suffix) ? fileName : $"{baseName}_{suffix}.png";
-                    }
-                    else
-                    {
-                        targetName = fileName;
-                    }
-
-                    // Avoid collision in output
-                    var targetPath = Path.Combine(outDir, targetName);
-                    int counter = 1;
-                    while (File.Exists(targetPath))
-                    {
-                        counter++;
-                        targetPath = Path.Combine(outDir,
-                            $"{Path.GetFileNameWithoutExtension(targetName)}_{counter}.png");
-                    }
-
-                    File.Copy(png, targetPath, overwrite: false);
-                    var d = Interlocked.Increment(ref done);
-                    ((IProgress<string>)progress).Report($"Copied {d} / {allPngs.Length}...");
+                    ShowServerInfo("No APK or catalog.bin found.", InfoBarSeverity.Error);
+                    return;
                 }
-                catch { Interlocked.Increment(ref errors); }
+                txtServerProgress.Text = "Extracting catalog.bin from APK...";
+                catalogPath = await Task.Run(() =>
+                    CatalogParserService.ExtractCatalogFromApk(apkPath, versionDir), ct);
             }
-        });
 
-        btnExport.IsEnabled = true;
-        txtExpProgress.Text = "";
+            // ── Phase 2: Parse URLs ──
+            txtServerProgress.Text = "Parsing catalog URLs...";
+            var catalogResult = await Task.Run(() => CatalogParserService.ExtractUrls(catalogPath), ct);
 
-        ShowExpInfo(
-            errors > 0
-                ? $"Done! {done} PNGs copied, {errors} error(s).\n→ {outDir}"
-                : $"Done! {done} PNG(s) copied.\n→ {outDir}",
-            errors > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success);
-    }
+            if (catalogResult.Urls.Count == 0)
+            {
+                ShowServerInfo("No download URLs found in catalog.", InfoBarSeverity.Warning);
+                return;
+            }
 
-    private string GetExportOutputDir(string sourceDir)
-    {
-        if (rbExpCustom.IsChecked == true && !string.IsNullOrEmpty(txtExpCustomOutput.Text))
-            return txtExpCustomOutput.Text.Trim();
+            // ── Phase 3: Download bundles (with skip logic) ──
+            var downloadDir = Path.Combine(versionDir, "Game Files", "Server");
+            Directory.CreateDirectory(downloadDir);
 
-        var sourceName = Path.GetFileName(sourceDir);
-        var parent = Path.GetDirectoryName(sourceDir) ?? sourceDir;
-        return Path.Combine(parent, $"{sourceName} - PNGs");
-    }
+            // Determine which bundles are already cached
+            var existingFiles = new HashSet<string>(
+                Directory.GetFiles(downloadDir).Select(Path.GetFileName)!,
+                StringComparer.OrdinalIgnoreCase);
 
-    /// <summary>
-    /// Walks up from filePath toward sourceRoot, returns the name of the deepest
-    /// ancestor folder whose name contains '_'. Used to create a suffix for duplicate filenames.
-    /// </summary>
-    private static string GetDuplicateSuffix(string filePath, string sourceRoot)
-    {
-        var dir = Path.GetDirectoryName(filePath);
-        while (dir != null && !dir.Equals(sourceRoot, StringComparison.OrdinalIgnoreCase))
-        {
-            var name = Path.GetFileName(dir);
-            if (name?.Contains('_') == true) return name;
-            dir = Path.GetDirectoryName(dir);
+            var toDownload = new List<string>();
+            foreach (var url in catalogResult.Urls)
+            {
+                var fileName = Path.GetFileName(url.Split('?')[0]);
+                if (string.IsNullOrEmpty(fileName) || !existingFiles.Contains(fileName))
+                    toDownload.Add(url);
+                else
+                    dlCached++;
+            }
+
+            if (toDownload.Count > 0)
+            {
+                var total = toDownload.Count;
+                txtServerProgress.Text = $"Downloading bundles... 0% (0/{total}, {dlCached:N0} cached)";
+
+                var block = new ActionBlock<string>(async url =>
+                {
+                    var fileName = Path.GetFileName(url.Split('?')[0]);
+                    if (string.IsNullOrEmpty(fileName)) fileName = $"file_{Guid.NewGuid():N}";
+                    try
+                    {
+                        var data = await _http.GetByteArrayAsync(url, ct);
+                        await File.WriteAllBytesAsync(Path.Combine(downloadDir, fileName), data, ct);
+                        var d = Interlocked.Increment(ref dlDownloaded);
+                        var pct = (int)(d * 100.0 / total);
+                        Dispatcher.Invoke(() =>
+                            txtServerProgress.Text = $"Downloading bundles... {pct}% ({d}/{total}, {dlCached:N0} cached)");
+                    }
+                    catch (OperationCanceledException) { throw; }
+                    catch { Interlocked.Increment(ref dlErrors); }
+                }, new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = 16, CancellationToken = ct });
+
+                foreach (var url in toDownload) block.Post(url);
+                block.Complete();
+                await block.Completion;
+
+                if (dlErrors > 0)
+                    txtServerProgress.Text = $"Downloaded {dlDownloaded} bundles ({dlErrors} errors, {dlCached:N0} cached). Extracting textures...";
+                else
+                    txtServerProgress.Text = $"Downloaded {dlDownloaded} bundles ({dlCached:N0} cached). Extracting textures...";
+            }
+            else
+            {
+                txtServerProgress.Text = $"All {dlCached:N0} bundles cached. Extracting textures...";
+            }
+
+            // ── Phase 4: Ensure TPK ──
+            var workspace = _main.Settings.ImageExporterBasePath;
+            if (string.IsNullOrEmpty(workspace) || !Directory.Exists(workspace))
+                workspace = versionDir;
+
+            var tpkPath = await AssetExtractionService.EnsureTpkAsync(
+                workspace,
+                status => Dispatcher.Invoke(() => txtServerProgress.Text = status),
+                ct);
+
+            // ── Phase 5: Extract textures ──
+            Directory.CreateDirectory(outputDir);
+
+            var result = await AssetExtractionService.ExtractAllTexturesAsync(
+                downloadDir,
+                tpkPath,
+                outputDir,
+                (bundleName, current, total, textures) =>
+                    Dispatcher.Invoke(() =>
+                    {
+                        var pct = (int)(current * 100.0 / total);
+                        txtServerProgress.Text = $"Extracting: {pct}% ({current}/{total} bundles, {textures:N0} textures) — {bundleName}";
+                    }),
+                ct);
+
+            // ── Done ──
+            txtServerProgress.Text = "";
+            var msg = $"Done! {result.ExtractedTextures:N0} textures from {result.ProcessedBundles} bundles.";
+            if (result.SkippedDuplicates > 0)
+                msg += $" {result.SkippedDuplicates:N0} duplicate(s) skipped.";
+            if (dlCached > 0)
+                msg += $" {dlCached:N0} cached (skipped download).";
+            msg += $"\n→ {outputDir}";
+            if (dlErrors > 0)
+                msg += $"\n{dlErrors} download error(s).";
+            if (result.FailedBundles > 0)
+                msg += $"\n{result.FailedBundles} bundle(s) had extraction errors.";
+
+            var severity = (dlErrors > 0 || result.FailedBundles > 0) ? InfoBarSeverity.Warning : InfoBarSeverity.Success;
+            ShowServerInfo(msg, severity);
+
+            // Refresh detection (cached count + export folder may have changed)
+            DetectServerState();
+            btnOpenExportFolder.Visibility = Visibility.Visible;
         }
-        return Path.GetFileName(Path.GetDirectoryName(filePath) ?? "") ?? "";
+        catch (OperationCanceledException)
+        {
+            txtServerProgress.Text = "";
+            ShowServerInfo("Cancelled. Partial results may have been saved.", InfoBarSeverity.Informational);
+        }
+        catch (Exception ex)
+        {
+            txtServerProgress.Text = "";
+            ShowServerInfo($"Failed: {ex.Message}", InfoBarSeverity.Error);
+        }
+        finally
+        {
+            btnServerExtract.IsEnabled = true;
+            btnCancelServer.Visibility = Visibility.Collapsed;
+            _serverCts = null;
+        }
     }
 
-    // ── InfoBar ──────────────────────────────────────────────────────
-
-    private void ShowDlInfo(string message, InfoBarSeverity severity)
+    private void ShowServerInfo(string message, InfoBarSeverity severity)
     {
-        dlInfoBar.Message = message;
-        dlInfoBar.Severity = severity;
-        dlInfoBar.IsOpen = true;
+        serverInfoBar.Message = message;
+        serverInfoBar.Severity = severity;
+        serverInfoBar.IsOpen = true;
     }
 
-    private void ShowExpInfo(string message, InfoBarSeverity severity)
+    // ── Extract Assets from APK ───────────────────────────────────────
+
+    private void DetectExtractApkState()
     {
-        expInfoBar.Message = message;
-        expInfoBar.Severity = severity;
-        expInfoBar.IsOpen = true;
+        panelNoExtractApk.Visibility = Visibility.Collapsed;
+        btnExtractAssets.IsEnabled = false;
+
+        var apkPath = _detectedApkPath;
+        if (apkPath == null && _detectedVersionDir != null)
+            apkPath = CatalogParserService.FindApkInFolder(_detectedVersionDir);
+
+        if (apkPath != null && _detectedVersionDir != null)
+        {
+            _detectedApkPath = apkPath;
+            txtExtractDetected.Text = $"APK auto-detected (v{_detectedVersion}).";
+            txtExtractDetected.Foreground = (Brush)FindResource("SystemFillColorSuccessBrush");
+            txtExtractAutoPath.Text = $"Output: {Path.Combine(_detectedVersionDir, "Export - PNGs")}";
+            btnExtractAssets.IsEnabled = true;
+        }
+        else if (string.IsNullOrWhiteSpace(_main.Settings.ImageExporterBasePath)
+                 || !Directory.Exists(_main.Settings.ImageExporterBasePath))
+        {
+            txtExtractDetected.Text = "No workspace folder configured.";
+            txtExtractDetected.Foreground = (Brush)FindResource("SystemFillColorCautionBrush");
+            panelNoExtractApk.Visibility = Visibility.Visible;
+            txtExtractAutoPath.Text = "";
+        }
+        else
+        {
+            var version = _main.Settings.SelectedApkVersion;
+            txtExtractDetected.Text = string.IsNullOrEmpty(version)
+                ? "No APK/XAPK found in workspace."
+                : $"No APK/XAPK found for version {version}.";
+            txtExtractDetected.Foreground = (Brush)FindResource("SystemFillColorCautionBrush");
+            panelNoExtractApk.Visibility = Visibility.Visible;
+            txtExtractAutoPath.Text = "";
+        }
     }
 
-    // ── Helpers ──────────────────────────────────────────────────────
-
-    /// <summary>Trims trailing directory separators so Path.GetFileName works correctly.</summary>
-    private static string NormalizeDir(string? path)
+    private void BtnCancelExtract_Click(object sender, RoutedEventArgs e)
     {
-        if (string.IsNullOrEmpty(path)) return "";
-        return path.Trim().TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+        _extractCts?.Cancel();
     }
 
-    private static string? BrowseFolder(string description, string? initialDir)
+    private async void BtnExtractAssets_Click(object sender, RoutedEventArgs e)
     {
-        var dlg = new OpenFolderDialog { Title = description };
-        if (!string.IsNullOrEmpty(initialDir) && Directory.Exists(initialDir))
-            dlg.InitialDirectory = initialDir;
-        return dlg.ShowDialog() == true ? dlg.FolderName : null;
+        if (_detectedApkPath == null || _detectedVersionDir == null)
+        {
+            ShowExtractInfo("No APK found. Select a game version in Settings.", InfoBarSeverity.Error);
+            return;
+        }
+
+        var apkPath = _detectedApkPath;
+        var versionDir = _detectedVersionDir;
+        var outputDir = Path.Combine(versionDir, "Export - PNGs");
+
+        // Persistent bundle dir (not temp)
+        var bundleDir = Path.Combine(versionDir, "Game Files", "APK");
+
+        var workspace = _main.Settings.ImageExporterBasePath;
+        if (string.IsNullOrEmpty(workspace) || !Directory.Exists(workspace))
+            workspace = versionDir;
+
+        _extractCts = new CancellationTokenSource();
+        var ct = _extractCts.Token;
+
+        btnExtractAssets.IsEnabled = false;
+        btnCancelExtract.Visibility = Visibility.Visible;
+        extractInfoBar.IsOpen = false;
+        txtExtractProgress.Text = "Preparing...";
+
+        try
+        {
+            // 1. Ensure TPK
+            var tpkPath = await AssetExtractionService.EnsureTpkAsync(
+                workspace,
+                status => Dispatcher.Invoke(() => txtExtractProgress.Text = status),
+                ct);
+
+            // 2. Extract bundles to persistent dir
+            Directory.CreateDirectory(bundleDir);
+            var includeBuiltIn = _main.Settings.ExtractIncludeBuiltIn;
+            var (_, bundleCount) = await AssetExtractionService.ExtractBundlesFromApkAsync(
+                apkPath,
+                bundleDir,
+                includeBuiltIn,
+                status => Dispatcher.Invoke(() => txtExtractProgress.Text = status),
+                ct);
+
+            if (bundleCount == 0)
+            {
+                ShowExtractInfo("No asset bundles found in the APK.", InfoBarSeverity.Warning);
+                return;
+            }
+
+            // 3. Extract textures
+            Directory.CreateDirectory(outputDir);
+
+            var result = await AssetExtractionService.ExtractAllTexturesAsync(
+                bundleDir,
+                tpkPath,
+                outputDir,
+                (bundleName, current, total, textures) =>
+                    Dispatcher.Invoke(() =>
+                    {
+                        var pct = (int)(current * 100.0 / total);
+                        txtExtractProgress.Text = $"{pct}% ({current}/{total} bundles, {textures:N0} textures) — {bundleName}";
+                    }),
+                ct);
+
+            // 4. Show results
+            txtExtractProgress.Text = "";
+            var msg = $"Done! {result.ExtractedTextures:N0} textures extracted from {result.ProcessedBundles} bundles.";
+            if (result.SkippedDuplicates > 0)
+                msg += $" {result.SkippedDuplicates:N0} duplicate(s) skipped.";
+            msg += $"\n→ {outputDir}";
+            if (result.FailedBundles > 0)
+                msg += $"\n{result.FailedBundles} bundle(s) had errors.";
+
+            var severity = result.FailedBundles > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success;
+            ShowExtractInfo(msg, severity);
+            btnOpenExportFolder.Visibility = Visibility.Visible;
+        }
+        catch (OperationCanceledException)
+        {
+            txtExtractProgress.Text = "";
+            ShowExtractInfo("Extraction cancelled. Partial results may have been saved.", InfoBarSeverity.Informational);
+        }
+        catch (Exception ex)
+        {
+            txtExtractProgress.Text = "";
+            ShowExtractInfo($"Extraction failed: {ex.Message}", InfoBarSeverity.Error);
+        }
+        finally
+        {
+            btnExtractAssets.IsEnabled = true;
+            btnCancelExtract.Visibility = Visibility.Collapsed;
+            _extractCts = null;
+        }
+    }
+
+    private void ShowExtractInfo(string message, InfoBarSeverity severity)
+    {
+        extractInfoBar.Message = message;
+        extractInfoBar.Severity = severity;
+        extractInfoBar.IsOpen = true;
     }
 }

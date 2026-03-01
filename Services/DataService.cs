@@ -35,8 +35,12 @@ public class DataService
     /// <summary>Warnings generated during loading</summary>
     public List<string> Warnings { get; private set; } = new();
 
+    /// <summary>CreatedAt timestamp from JSON root</summary>
+    public string CreatedAt { get; private set; } = "";
+
     public async Task LoadAsync(string filePath)
     {
+        using var _t = AppLogger.Timed("DataService.LoadAsync");
         Warnings.Clear();
         ItemNames.Clear();
         ItemLevels.Clear();
@@ -47,6 +51,10 @@ public class DataService
         _rawDoc = await JsonDocument.ParseAsync(stream);
 
         var root = _rawDoc.RootElement;
+
+        if (root.TryGetProperty("CreatedAt", out var ca))
+            CreatedAt = ca.GetString() ?? "";
+
         if (!root.TryGetProperty("Data", out var dataArray))
             throw new InvalidDataException("JSON missing 'Data' array.");
 
@@ -269,6 +277,19 @@ public class DataService
             }
         }
 
+        // ── BubbleFeatures ──
+        if (item.TryGetProperty("BubbleFeatures", out var bf))
+        {
+            var spawnOdds = GetInt(bf, "SpawnOdds");
+            if (spawnOdds > 0)
+            {
+                pi.HasBubble = true;
+                pi.BubbleDurationMs = GetLong(bf, "BubbleDuration");
+                pi.BubbleOpenCost = GetInt(bf, "OpenQuantity");
+                pi.BubbleSpawnOdds = spawnOdds;
+            }
+        }
+
         return pi;
     }
 
@@ -276,6 +297,7 @@ public class DataService
     /// Extract drop odds from ActivationFeatures.
     /// Odds can be at: ActivationSpawn.BaseProducer.ControlledRandom.Odds
     ///                  ActivationSpawn.BaseProducer.Random.Odds
+    ///                  ActivationSpawn.PredefinedSequence.Odds
     ///                  or directly at ActivationFeatures.Odds (rare)
     /// </summary>
     private Dictionary<string, double>? ExtractOdds(JsonElement af)
@@ -323,6 +345,13 @@ public class DataService
             var constant = GetString(bp, "Constant");
             if (!string.IsNullOrEmpty(constant))
                 return new Dictionary<string, double> { { constant, 100.0 } };
+        }
+
+        // Path 1d: ActivationSpawn → PredefinedSequence → Odds
+        if (asp.TryGetProperty("PredefinedSequence", out var ps))
+        {
+            if (ps.TryGetProperty("Odds", out var odds) && odds.ValueKind == JsonValueKind.Object)
+                return ParseOddsDictionary(odds);
         }
 
         fallback:

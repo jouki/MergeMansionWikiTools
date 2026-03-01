@@ -1,0 +1,2039 @@
+using System.IO;
+using System.Net.Http;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using System.Windows.Threading;
+using MergeMansionWikiTools.Models;
+using MergeMansionWikiTools.Services;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
+using Wpf.Ui.Controls;
+using static MergeMansionWikiTools.Services.UserStatsService;
+using Point = SixLabors.ImageSharp.Point;
+using Rectangle = SixLabors.ImageSharp.Rectangle;
+using Image = SixLabors.ImageSharp.Image;
+
+namespace MergeMansionWikiTools.Views;
+
+// ── Data models ──
+
+internal class OptimiserImage
+{
+    public string FilePath { get; set; } = "";
+    public BitmapImage? Thumbnail { get; set; }
+    public bool IsScissorsActive { get; set; }
+    public bool IsSplit { get; set; }
+    public bool IsOptimized { get; set; }
+    public List<string> SplitResultFiles { get; set; } = new();
+    public List<(Rectangle Full, Rectangle Main)> DetectedObjects { get; set; } = new();
+    public int DetectedColumns { get; set; } = 1;
+    public string? DetectedChainName { get; set; }
+}
+
+internal class OptimiserCluster
+{
+    public List<OptimiserImage> Images { get; } = new();
+    public int NameSourceIndex { get; set; } // which image's DetectedChainName to use
+    public string IndexText { get; set; } = ""; // per-cluster index input text
+    public string LastSplitIndices { get; set; } = ""; // normalized indices used for the last split
+}
+
+public partial class ImageOptimiserPage : UserControl
+{
+    private readonly MainWindow _main;
+    private readonly List<OptimiserCluster> _clusters = new();
+    private OptimiserCluster? _selectedCluster;
+    private OptimiserImage? _selectedImage;
+
+    private IEnumerable<OptimiserImage> AllImages => _clusters.SelectMany(c => c.Images);
+
+    // ── Optimization tracking ──
+    private readonly HashSet<string> _optimizedFiles = new(StringComparer.OrdinalIgnoreCase);
+    private bool _suppressIndexReset;
+
+    // ── Chain mode state ──
+    private ParsedChain? _activeChain;
+    private string? _resolvedFilenameBase;
+
+    // ── Object detection constants (same as ImageSplitterPage) ──
+    private const int AlphaThreshold = 5;
+    private const int MainAlphaThreshold = 80;
+    private const int MinCellArea = 400;
+    private const int MaxColumnsPerRow = 15;
+
+    public ImageOptimiserPage(MainWindow main)
+    {
+        _main = main;
+        InitializeComponent();
+
+        _main.WikiVerifiedChanged += OnWikiVerifiedChanged;
+        _main.TinifyApiKeyChanged += OnTinifyApiKeyChanged;
+
+        UpdateOptimizeButtonState();
+        UpdateUploadButtonState();
+    }
+
+    private void OnWikiVerifiedChanged() => UpdateUploadButtonState();
+    private void OnTinifyApiKeyChanged() => UpdateOptimizeButtonState();
+
+    private void UpdateOptimizeButtonState()
+    {
+        bool hasKey = !string.IsNullOrWhiteSpace(_main.Settings.TinifyApiKey);
+        btnOptimizeAll.IsEnabled = hasKey;
+        btnOptimizeAll.ToolTip = hasKey ? null : "Set your TinyPNG API key in Settings first";
+    }
+
+    private void UpdateUploadButtonState()
+    {
+        bool anyOptimized = _optimizedFiles.Count > 0 || AllImages.Any(i => i.IsOptimized);
+        if (!anyOptimized)
+        {
+            btnUploadWiki.IsEnabled = false;
+            btnUploadWiki.ToolTip = "Optimize images first";
+        }
+        else if (!_main.Settings.WikiVerified)
+        {
+            btnUploadWiki.IsEnabled = false;
+            btnUploadWiki.ToolTip = "Wiki bot not configured. Set up credentials in Settings.";
+        }
+        else
+        {
+            btnUploadWiki.IsEnabled = true;
+            btnUploadWiki.ToolTip = "Upload optimized images to the wiki";
+        }
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  DRAG & DROP
+    // ══════════════════════════════════════════════════════════════
+
+    private void Page_DragOver(object sender, DragEventArgs e)
+    {
+        if (_isDraggingThumb)
+        {
+            e.Effects = DragDropEffects.None;
+            e.Handled = true;
+            return;
+        }
+        if (e.Data.GetDataPresent(DataFormats.FileDrop))
+        {
+            e.Effects = DragDropEffects.Copy;
+            e.Handled = true;
+        }
+    }
+
+    private void Page_Drop(object sender, DragEventArgs e)
+    {
+        if (_isDraggingThumb) return;
+        if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
+        var files = (string[])e.Data.GetData(DataFormats.FileDrop)!;
+        var imageFiles = files.Where(f =>
+            f.EndsWith(".png", StringComparison.OrdinalIgnoreCase) ||
+            f.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
+            f.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase) ||
+            f.EndsWith(".webp", StringComparison.OrdinalIgnoreCase)).ToArray();
+
+        if (imageFiles.Length == 0) return;
+        AddImages(imageFiles);
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  ADD IMAGES
+    // ══════════════════════════════════════════════════════════════
+
+    private void AddImages(string[] paths)
+    {
+        foreach (var path in paths)
+        {
+            if (AllImages.Any(img => img.FilePath.Equals(path, StringComparison.OrdinalIgnoreCase)))
+                continue;
+
+            var thumb = LoadThumbnail(path, 80);
+            if (thumb == null) continue;
+
+            var oi = new OptimiserImage
+            {
+                FilePath = path,
+                Thumbnail = thumb,
+                DetectedChainName = TryMatchChainName(path)
+            };
+
+            // Run object detection
+            try
+            {
+                using var img = Image.Load<Rgba32>(path);
+                oi.DetectedObjects = DetectObjects(img);
+                var ordered = OrderObjects(oi.DetectedObjects);
+                if (ordered.Count > 0)
+                {
+                    var rows = ordered.GroupBy(o => o.Full.Top / 60);
+                    oi.DetectedColumns = rows.Max(g => g.Count());
+                }
+
+                // Auto-enable scissors when multiple objects detected
+                if (ordered.Count > 1)
+                    oi.IsScissorsActive = true;
+            }
+            catch { /* detection failed — non-critical */ }
+
+            // Create a single-image cluster
+            var cluster = new OptimiserCluster();
+            cluster.Images.Add(oi);
+            _clusters.Add(cluster);
+        }
+
+        RebuildThumbnailStrip();
+        if (_selectedImage == null && _clusters.Count > 0)
+            SelectImage(_clusters[0].Images[0]);
+
+        bool hasImages = _clusters.Count > 0;
+        thumbnailStripBorder.Visibility = hasImages ? Visibility.Visible : Visibility.Collapsed;
+        txtPlaceholder.Visibility = hasImages ? Visibility.Collapsed : Visibility.Visible;
+    }
+
+    private static BitmapImage? LoadThumbnail(string path, int decodeHeight)
+    {
+        try
+        {
+            var bmp = new BitmapImage();
+            bmp.BeginInit();
+            bmp.UriSource = new Uri(path);
+            bmp.DecodePixelHeight = decodeHeight;
+            bmp.CacheOption = BitmapCacheOption.OnLoad;
+            bmp.EndInit();
+            bmp.Freeze();
+            return bmp;
+        }
+        catch { return null; }
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  THUMBNAIL STRIP
+    // ══════════════════════════════════════════════════════════════
+
+    // ── Thumbnail drag state ──
+    private OptimiserImage? _dragSource;
+    private bool _isDraggingThumb;
+    private System.Windows.Point _thumbDragStart;
+    private Border? _insertionLine;
+
+    private void RebuildThumbnailStrip()
+    {
+        thumbnailPanel.Children.Clear();
+
+        foreach (var cluster in _clusters)
+        {
+            var clusterIsSelected = cluster == _selectedCluster;
+
+            for (int i = 0; i < cluster.Images.Count; i++)
+            {
+                var oi = cluster.Images[i];
+
+                // Card container
+                var card = new Border
+                {
+                    Width = 88,
+                    Height = 88,
+                    CornerRadius = new CornerRadius(6),
+                    BorderThickness = new Thickness(clusterIsSelected ? 2 : 1),
+                    BorderBrush = clusterIsSelected
+                        ? (Brush)FindResource("AccentFillColorDefaultBrush")
+                        : (Brush)FindResource("CardStrokeColorDefaultBrush"),
+                    Background = (Brush)FindResource("SubtleFillColorSecondaryBrush"),
+                    Margin = new Thickness(2),
+                    Cursor = Cursors.Hand,
+                    Tag = oi,
+                    ClipToBounds = true
+                };
+
+                var grid = new Grid();
+                card.Child = grid;
+
+                // Thumbnail image
+                var img = new System.Windows.Controls.Image
+                {
+                    Source = oi.Thumbnail,
+                    Stretch = Stretch.Uniform,
+                    Margin = new Thickness(4),
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+                grid.Children.Add(img);
+
+                // Scissors toggle (bottom-right)
+                var scissorsBorder = new Border
+                {
+                    Width = 22,
+                    Height = 22,
+                    CornerRadius = new CornerRadius(4),
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    VerticalAlignment = VerticalAlignment.Bottom,
+                    Margin = new Thickness(0, 0, 2, 2),
+                    Background = oi.IsScissorsActive
+                        ? (Brush)FindResource("AccentFillColorDefaultBrush")
+                        : new SolidColorBrush(System.Windows.Media.Color.FromArgb(0x80, 0, 0, 0)),
+                    Cursor = Cursors.Hand,
+                    Tag = oi,
+                    ToolTip = "Toggle split mode",
+                };
+                ToolTipService.SetInitialShowDelay(scissorsBorder, 0);
+
+                var scissorsIcon = new Wpf.Ui.Controls.SymbolIcon
+                {
+                    Symbol = SymbolRegular.Cut24,
+                    FontSize = 12,
+                    Foreground = Brushes.White
+                };
+                scissorsBorder.Child = scissorsIcon;
+                scissorsBorder.MouseLeftButtonDown += ToggleScissors_Click;
+                grid.Children.Add(scissorsBorder);
+
+                // Name source indicator (small accent dot on the name-source image)
+                if (cluster.Images.Count > 1 && i == cluster.NameSourceIndex)
+                {
+                    var nameSourceDot = new Border
+                    {
+                        Width = 8,
+                        Height = 8,
+                        CornerRadius = new CornerRadius(4),
+                        HorizontalAlignment = HorizontalAlignment.Left,
+                        VerticalAlignment = VerticalAlignment.Bottom,
+                        Margin = new Thickness(4, 0, 0, 4),
+                        Background = (Brush)FindResource("AccentFillColorDefaultBrush")
+                    };
+                    grid.Children.Add(nameSourceDot);
+                }
+
+                // Remove button (top-right)
+                var removeBorder = new Border
+                {
+                    Width = 18,
+                    Height = 18,
+                    CornerRadius = new CornerRadius(9),
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    VerticalAlignment = VerticalAlignment.Top,
+                    Margin = new Thickness(0, 2, 2, 0),
+                    Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(0xA0, 0, 0, 0)),
+                    Cursor = Cursors.Hand,
+                    Tag = oi,
+                    Visibility = Visibility.Collapsed
+                };
+
+                var removeIcon = new Wpf.Ui.Controls.SymbolIcon
+                {
+                    Symbol = SymbolRegular.Dismiss16,
+                    FontSize = 10,
+                    Foreground = Brushes.White
+                };
+                removeBorder.Child = removeIcon;
+                removeBorder.MouseLeftButtonDown += RemoveImage_Click;
+                grid.Children.Add(removeBorder);
+
+                // Optimized indicator (top-left green check)
+                if (oi.IsOptimized || oi.IsSplit)
+                {
+                    var checkBorder = new Border
+                    {
+                        Width = 18,
+                        Height = 18,
+                        CornerRadius = new CornerRadius(9),
+                        HorizontalAlignment = HorizontalAlignment.Left,
+                        VerticalAlignment = VerticalAlignment.Top,
+                        Margin = new Thickness(2, 2, 0, 0),
+                        Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0x4C, 0xAF, 0x50))
+                    };
+                    var checkIcon = new Wpf.Ui.Controls.SymbolIcon
+                    {
+                        Symbol = SymbolRegular.Checkmark16,
+                        FontSize = 10,
+                        Foreground = Brushes.White
+                    };
+                    checkBorder.Child = checkIcon;
+                    grid.Children.Add(checkBorder);
+                }
+
+                // Show/hide remove on hover
+                card.MouseEnter += (_, _) => removeBorder.Visibility = Visibility.Visible;
+                card.MouseLeave += (_, _) => removeBorder.Visibility = Visibility.Collapsed;
+
+                // Click to select (clear drag state to prevent stale _dragSource causing accidental links)
+                card.MouseLeftButtonDown += (s, e) =>
+                {
+                    _dragSource = null;
+                    if (s is Border b && b.Tag is OptimiserImage oimg)
+                    {
+                        SelectImage(oimg);
+                        e.Handled = true;
+                    }
+                };
+
+                // Drag source + drop target
+                card.MouseMove += ThumbBorder_MouseMove;
+                card.AllowDrop = true;
+                card.DragOver += ThumbBorder_DragOver;
+                card.DragLeave += ThumbBorder_DragLeave;
+                card.Drop += ThumbBorder_Drop;
+
+                thumbnailPanel.Children.Add(card);
+
+                // Link icon between images in same cluster
+                if (i < cluster.Images.Count - 1)
+                {
+                    var bondIndex = i;
+                    var bondCluster = cluster;
+                    var linkIcon = new Border
+                    {
+                        Width = 22,
+                        Height = 22,
+                        CornerRadius = new CornerRadius(11),
+                        Background = (Brush)FindResource("AccentFillColorDefaultBrush"),
+                        VerticalAlignment = VerticalAlignment.Center,
+                        Cursor = Cursors.Hand,
+                        ToolTip = "Click to unlink",
+                        Margin = new Thickness(-2, 0, -2, 0)
+                    };
+                    ToolTipService.SetInitialShowDelay(linkIcon, 0);
+                    linkIcon.Child = new Wpf.Ui.Controls.SymbolIcon
+                    {
+                        Symbol = SymbolRegular.Link24,
+                        FontSize = 11,
+                        Foreground = Brushes.White
+                    };
+                    linkIcon.MouseLeftButtonDown += (_, _) => UnlinkAt(bondCluster, bondIndex);
+                    thumbnailPanel.Children.Add(linkIcon);
+                }
+            }
+
+            // Separator between clusters (reorder drop target + hover link button)
+            var clusterIdx = _clusters.IndexOf(cluster);
+            var sep = new Border
+            {
+                Width = 24,
+                MinHeight = 88,
+                Background = Brushes.Transparent,
+                Margin = new Thickness(0),
+                VerticalAlignment = VerticalAlignment.Center,
+                AllowDrop = true,
+                Tag = cluster
+            };
+
+            var sepGrid = new Grid();
+            sep.Child = sepGrid;
+
+            // Thin line (default state)
+            var sepLine = new Border
+            {
+                Width = 1,
+                Height = 60,
+                Background = (Brush)FindResource("CardStrokeColorDefaultBrush"),
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            sepGrid.Children.Add(sepLine);
+
+            // Link button (shown on hover, hidden during drag)
+            if (clusterIdx < _clusters.Count - 1)
+            {
+                var leftCluster = cluster;
+                var rightCluster = _clusters[clusterIdx + 1];
+                var linkBtn = new Border
+                {
+                    Width = 22,
+                    Height = 22,
+                    CornerRadius = new CornerRadius(11),
+                    Background = (Brush)FindResource("SubtleFillColorTertiaryBrush"),
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Cursor = Cursors.Hand,
+                    Visibility = Visibility.Collapsed,
+                    ToolTip = "Link clusters"
+                };
+                ToolTipService.SetInitialShowDelay(linkBtn, 0);
+                linkBtn.Child = new Wpf.Ui.Controls.SymbolIcon
+                {
+                    Symbol = SymbolRegular.Link24,
+                    FontSize = 11,
+                    Foreground = (Brush)FindResource("TextFillColorSecondaryBrush")
+                };
+                linkBtn.MouseLeftButtonDown += (_, e) =>
+                {
+                    e.Handled = true;
+                    MergeClusters(leftCluster, rightCluster);
+                };
+                sepGrid.Children.Add(linkBtn);
+
+                sep.MouseEnter += (_, _) =>
+                {
+                    if (!_isDraggingThumb)
+                    {
+                        sepLine.Visibility = Visibility.Collapsed;
+                        linkBtn.Visibility = Visibility.Visible;
+                    }
+                };
+                sep.MouseLeave += (_, _) =>
+                {
+                    sepLine.Visibility = Visibility.Visible;
+                    linkBtn.Visibility = Visibility.Collapsed;
+                };
+            }
+
+            sep.DragOver += SepBorder_DragOver;
+            sep.DragLeave += SepBorder_DragLeave;
+            sep.Drop += SepBorder_Drop;
+            thumbnailPanel.Children.Add(sep);
+        }
+
+        // Remove trailing separator
+        if (thumbnailPanel.Children.Count > 0 &&
+            thumbnailPanel.Children[^1] is Border lastBorder &&
+            lastBorder.Tag is OptimiserCluster)
+        {
+            thumbnailPanel.Children.RemoveAt(thumbnailPanel.Children.Count - 1);
+        }
+    }
+
+    private void SelectImage(OptimiserImage oi)
+    {
+        // Save current cluster's index text before switching
+        if (_selectedCluster != null)
+            _selectedCluster.IndexText = inputIndices.Text;
+
+        _selectedImage = oi;
+        var newCluster = _clusters.FirstOrDefault(c => c.Images.Contains(oi));
+        _selectedCluster = newCluster;
+
+        // Restore new cluster's index text (suppress reset — not a user edit)
+        _suppressIndexReset = true;
+        inputIndices.Text = newCluster?.IndexText ?? "";
+        _suppressIndexReset = false;
+
+        ShowPreviewForSelection();
+
+        // Update split controls visibility — show if ANY image in the cluster has scissors active
+        bool anyScissors = newCluster?.Images.Any(i => i.IsScissorsActive) == true;
+        indexInputPanel.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+        btnSplit.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+
+        // Update detection overlay
+        UpdateDetectionOverlay();
+
+        // Update name source dropdown
+        UpdateNameSourceDropdown();
+
+        // Refresh thumbnail strip selection highlight
+        RebuildThumbnailStrip();
+    }
+
+    private void ShowPreviewForSelection()
+    {
+        if (_selectedCluster == null || _selectedCluster.Images.Count == 0)
+        {
+            imgPreview.Source = null;
+            txtPlaceholder.Visibility = Visibility.Visible;
+            return;
+        }
+
+        txtPlaceholder.Visibility = Visibility.Collapsed;
+
+        if (_selectedCluster.Images.Count == 1)
+        {
+            // Single image — show full preview
+            try
+            {
+                var bmp = new BitmapImage();
+                bmp.BeginInit();
+                bmp.UriSource = new Uri(_selectedCluster.Images[0].FilePath);
+                bmp.CacheOption = BitmapCacheOption.OnLoad;
+                bmp.EndInit();
+                bmp.Freeze();
+                imgPreview.Source = bmp;
+            }
+            catch
+            {
+                imgPreview.Source = _selectedCluster.Images[0].Thumbnail;
+            }
+        }
+        else
+        {
+            // Multi-image cluster — build combined preview
+            BuildCombinedPreview(_selectedCluster);
+        }
+    }
+
+    private static List<List<OptimiserImage>> ComputeRowLayout(OptimiserCluster cluster)
+    {
+        var rows = new List<List<OptimiserImage>>();
+        var currentRow = new List<OptimiserImage>();
+        int currentCols = 0;
+
+        foreach (var oi in cluster.Images)
+        {
+            int cols = Math.Max(oi.DetectedColumns, 1);
+            if (currentRow.Count > 0 && currentCols + cols > MaxColumnsPerRow)
+            {
+                rows.Add(currentRow);
+                currentRow = new List<OptimiserImage>();
+                currentCols = 0;
+            }
+            currentRow.Add(oi);
+            currentCols += cols;
+        }
+        if (currentRow.Count > 0)
+            rows.Add(currentRow);
+
+        return rows;
+    }
+
+    private void BuildCombinedPreview(OptimiserCluster cluster)
+    {
+        try
+        {
+            var bitmapCache = new Dictionary<string, BitmapImage>();
+            foreach (var oi in cluster.Images)
+            {
+                if (bitmapCache.ContainsKey(oi.FilePath)) continue;
+                var bmp = new BitmapImage();
+                bmp.BeginInit();
+                bmp.UriSource = new Uri(oi.FilePath);
+                bmp.CacheOption = BitmapCacheOption.OnLoad;
+                bmp.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                bmp.EndInit();
+                bmp.Freeze();
+                bitmapCache[oi.FilePath] = bmp;
+            }
+
+            var rows = ComputeRowLayout(cluster);
+
+            int maxRowWidth = 0;
+            var rowDims = new List<(int w, int h)>();
+            foreach (var row in rows)
+            {
+                int w = row.Sum(oi => bitmapCache[oi.FilePath].PixelWidth);
+                int h = row.Max(oi => bitmapCache[oi.FilePath].PixelHeight);
+                rowDims.Add((w, h));
+                maxRowWidth = Math.Max(maxRowWidth, w);
+            }
+            int totalHeight = rowDims.Sum(d => d.h);
+
+            if (maxRowWidth == 0 || totalHeight == 0) return;
+
+            var dv = new DrawingVisual();
+            using (var dc = dv.RenderOpen())
+            {
+                double y = 0;
+                for (int r = 0; r < rows.Count; r++)
+                {
+                    double x = maxRowWidth - rowDims[r].w; // right-align overflow rows
+                    foreach (var oi in rows[r])
+                    {
+                        var bmp = bitmapCache[oi.FilePath];
+                        dc.DrawImage(bmp, new Rect(x, y, bmp.PixelWidth, bmp.PixelHeight));
+                        x += bmp.PixelWidth;
+                    }
+                    y += rowDims[r].h;
+                }
+            }
+
+            var rtb = new RenderTargetBitmap(maxRowWidth, totalHeight, 96, 96, PixelFormats.Pbgra32);
+            rtb.Render(dv);
+            rtb.Freeze();
+
+            imgPreview.Source = rtb;
+        }
+        catch
+        {
+            imgPreview.Source = cluster.Images[0].Thumbnail;
+        }
+    }
+
+    private void UpdateDetectionOverlay()
+    {
+        detectionOverlay.Children.Clear();
+        if (_selectedCluster == null) return;
+
+        // Collect all scissors-active images in cluster that have detections
+        var activeImages = _selectedCluster.Images
+            .Where(oi => oi.IsScissorsActive && oi.DetectedObjects.Count > 1)
+            .ToList();
+        if (activeImages.Count == 0) return;
+
+        // Schedule overlay drawing after layout pass (need actual sizes)
+        Dispatcher.InvokeAsync(() =>
+        {
+            if (_selectedCluster == null || imgPreview.Source == null) return;
+
+            imgPreview.UpdateLayout();
+
+            var bitmapSource = (BitmapSource)imgPreview.Source;
+            double srcW = bitmapSource.PixelWidth;
+            double srcH = bitmapSource.PixelHeight;
+            double dispW = imgPreview.ActualWidth;
+            double dispH = imgPreview.ActualHeight;
+
+            if (dispW <= 0 || dispH <= 0 || srcW <= 0 || srcH <= 0) return;
+
+            var imgOrigin = imgPreview.TransformToVisual(detectionOverlay)
+                .Transform(new System.Windows.Point(0, 0));
+
+            double scale = Math.Min(dispW / srcW, dispH / srcH);
+            double renderedW = srcW * scale;
+            double renderedH = srcH * scale;
+            double baseOffsetX = imgOrigin.X + (dispW - renderedW) / 2;
+            double baseOffsetY = imgOrigin.Y + (dispH - renderedH) / 2;
+
+            if (_selectedCluster.Images.Count == 1)
+            {
+                // Single image — simple overlay
+                DrawDetectionRects(_selectedCluster.Images[0], baseOffsetX, baseOffsetY, scale);
+            }
+            else
+            {
+                // Multi-image combined preview — compute each image's pixel offset
+                var rows = ComputeRowLayout(_selectedCluster);
+
+                // Build bitmap cache for pixel dimensions
+                var pixelDims = new Dictionary<string, (int w, int h)>();
+                foreach (var oi in _selectedCluster.Images)
+                {
+                    if (pixelDims.ContainsKey(oi.FilePath)) continue;
+                    try
+                    {
+                        var bmp = new BitmapImage();
+                        bmp.BeginInit();
+                        bmp.UriSource = new Uri(oi.FilePath);
+                        bmp.CacheOption = BitmapCacheOption.OnLoad;
+                        bmp.EndInit();
+                        bmp.Freeze();
+                        pixelDims[oi.FilePath] = (bmp.PixelWidth, bmp.PixelHeight);
+                    }
+                    catch { pixelDims[oi.FilePath] = (0, 0); }
+                }
+
+                int maxRowWidth = 0;
+                var rowDims = new List<(int w, int h)>();
+                foreach (var row in rows)
+                {
+                    int w = row.Sum(oi => pixelDims.GetValueOrDefault(oi.FilePath).w);
+                    int h = row.Max(oi => pixelDims.GetValueOrDefault(oi.FilePath).h);
+                    rowDims.Add((w, h));
+                    maxRowWidth = Math.Max(maxRowWidth, w);
+                }
+
+                double pixelY = 0;
+                for (int r = 0; r < rows.Count; r++)
+                {
+                    double pixelX = maxRowWidth - rowDims[r].w; // right-align matching BuildCombinedPreview
+                    foreach (var oi in rows[r])
+                    {
+                        var (pw, ph) = pixelDims.GetValueOrDefault(oi.FilePath);
+                        if (oi.IsScissorsActive && oi.DetectedObjects.Count > 1)
+                        {
+                            double ox = baseOffsetX + pixelX * scale;
+                            double oy = baseOffsetY + pixelY * scale;
+                            DrawDetectionRects(oi, ox, oy, scale);
+                        }
+                        pixelX += pw;
+                    }
+                    pixelY += rowDims[r].h;
+                }
+            }
+        }, DispatcherPriority.Loaded);
+    }
+
+    private void DrawDetectionRects(OptimiserImage oi, double offsetX, double offsetY, double scale)
+    {
+        foreach (var obj in oi.DetectedObjects)
+        {
+            var rect = new System.Windows.Shapes.Rectangle
+            {
+                Width = obj.Main.Width * scale,
+                Height = obj.Main.Height * scale,
+                Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(0xC0, 0xFF, 0x40, 0x40)),
+                StrokeThickness = 1.5,
+                Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(0x20, 0xFF, 0x00, 0x00)),
+                IsHitTestVisible = false
+            };
+            Canvas.SetLeft(rect, offsetX + obj.Main.Left * scale);
+            Canvas.SetTop(rect, offsetY + obj.Main.Top * scale);
+            detectionOverlay.Children.Add(rect);
+        }
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  NAME SOURCE DROPDOWN
+    // ══════════════════════════════════════════════════════════════
+
+    private void UpdateNameSourceDropdown()
+    {
+        if (_selectedCluster == null || _selectedCluster.Images.Count <= 1)
+        {
+            cmbNameSource.Visibility = Visibility.Collapsed;
+            return;
+        }
+
+        cmbNameSource.Visibility = Visibility.Visible;
+        cmbNameSource.SelectionChanged -= CmbNameSource_SelectionChanged;
+        cmbNameSource.Items.Clear();
+
+        for (int i = 0; i < _selectedCluster.Images.Count; i++)
+        {
+            var fname = System.IO.Path.GetFileName(_selectedCluster.Images[i].FilePath);
+            cmbNameSource.Items.Add(fname);
+        }
+
+        // Default: pick file with most detected objects
+        if (_selectedCluster.NameSourceIndex < 0 || _selectedCluster.NameSourceIndex >= _selectedCluster.Images.Count)
+        {
+            _selectedCluster.NameSourceIndex = 0;
+            int maxObj = 0;
+            for (int i = 0; i < _selectedCluster.Images.Count; i++)
+            {
+                if (_selectedCluster.Images[i].DetectedObjects.Count > maxObj)
+                {
+                    maxObj = _selectedCluster.Images[i].DetectedObjects.Count;
+                    _selectedCluster.NameSourceIndex = i;
+                }
+            }
+        }
+
+        cmbNameSource.SelectedIndex = _selectedCluster.NameSourceIndex;
+        cmbNameSource.SelectionChanged += CmbNameSource_SelectionChanged;
+    }
+
+    private void CmbNameSource_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (_selectedCluster != null && cmbNameSource.SelectedIndex >= 0)
+        {
+            _selectedCluster.NameSourceIndex = cmbNameSource.SelectedIndex;
+            RebuildThumbnailStrip(); // refresh dot indicator
+        }
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  SCISSORS TOGGLE
+    // ══════════════════════════════════════════════════════════════
+
+    private void ToggleScissors_Click(object sender, MouseButtonEventArgs e)
+    {
+        if (sender is not FrameworkElement el || el.Tag is not OptimiserImage oi) return;
+        e.Handled = true;
+
+        oi.IsScissorsActive = !oi.IsScissorsActive;
+
+        // Show/hide split controls based on whether ANY image in the cluster has scissors
+        var cluster = _clusters.FirstOrDefault(c => c.Images.Contains(oi));
+        if (cluster != null && cluster == _selectedCluster)
+        {
+            bool anyScissors = cluster.Images.Any(i => i.IsScissorsActive);
+            indexInputPanel.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+            btnSplit.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        // Update overlay if toggled image is in the displayed cluster
+        if (_selectedCluster != null && _selectedCluster.Images.Contains(oi))
+            UpdateDetectionOverlay();
+
+        RebuildThumbnailStrip();
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  REMOVE / CLEAR
+    // ══════════════════════════════════════════════════════════════
+
+    private void RemoveImage_Click(object sender, MouseButtonEventArgs e)
+    {
+        if (sender is not FrameworkElement el || el.Tag is not OptimiserImage oi) return;
+        e.Handled = true;
+
+        // Find and remove from cluster
+        var cluster = _clusters.FirstOrDefault(c => c.Images.Contains(oi));
+        if (cluster != null)
+        {
+            cluster.Images.Remove(oi);
+            if (cluster.Images.Count > 0 && cluster.NameSourceIndex >= cluster.Images.Count)
+                cluster.NameSourceIndex = cluster.Images.Count - 1;
+            if (cluster.Images.Count == 0)
+                _clusters.Remove(cluster);
+        }
+
+        if (_selectedImage == oi)
+        {
+            var firstImage = AllImages.FirstOrDefault();
+            if (firstImage != null)
+                SelectImage(firstImage);
+            else
+            {
+                _selectedImage = null;
+                _selectedCluster = null;
+                imgPreview.Source = null;
+                txtPlaceholder.Visibility = Visibility.Visible;
+                indexInputPanel.Visibility = Visibility.Collapsed;
+                btnSplit.Visibility = Visibility.Collapsed;
+                detectionOverlay.Children.Clear();
+            }
+        }
+
+        thumbnailStripBorder.Visibility = _clusters.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+        RebuildThumbnailStrip();
+    }
+
+    private void BtnClearAll_Click(object sender, RoutedEventArgs e)
+    {
+        _clusters.Clear();
+        _selectedImage = null;
+        _selectedCluster = null;
+        thumbnailPanel.Children.Clear();
+        thumbnailStripBorder.Visibility = Visibility.Collapsed;
+        imgPreview.Source = null;
+        txtPlaceholder.Visibility = Visibility.Visible;
+        indexInputPanel.Visibility = Visibility.Collapsed;
+        btnSplit.Visibility = Visibility.Collapsed;
+        detectionOverlay.Children.Clear();
+        UpdateUploadButtonState();
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  LINKING / UNLINKING
+    // ══════════════════════════════════════════════════════════════
+
+    private bool LinkImages(OptimiserImage target, OptimiserImage source)
+    {
+        if (target == source) return false;
+
+        var targetCluster = _clusters.First(c => c.Images.Contains(target));
+        var sourceCluster = _clusters.First(c => c.Images.Contains(source));
+        if (targetCluster == sourceCluster) return false;
+
+        // Merge: append source images to target cluster
+        targetCluster.Images.AddRange(sourceCluster.Images);
+        _clusters.Remove(sourceCluster);
+
+        SelectImage(target);
+        RebuildThumbnailStrip();
+        return true;
+    }
+
+    private void MergeClusters(OptimiserCluster left, OptimiserCluster right)
+    {
+        if (!_clusters.Contains(left) || !_clusters.Contains(right)) return;
+
+        left.Images.AddRange(right.Images);
+        _clusters.Remove(right);
+
+        SelectImage(left.Images[0]);
+        RebuildThumbnailStrip();
+    }
+
+    private void UnlinkAt(OptimiserCluster cluster, int bondIndex)
+    {
+        if (bondIndex < 0 || bondIndex >= cluster.Images.Count - 1) return;
+
+        var rightImages = cluster.Images.Skip(bondIndex + 1).ToList();
+        cluster.Images.RemoveRange(bondIndex + 1, rightImages.Count);
+
+        var newCluster = new OptimiserCluster();
+        foreach (var img in rightImages) newCluster.Images.Add(img);
+
+        var idx = _clusters.IndexOf(cluster);
+        _clusters.Insert(idx + 1, newCluster);
+
+        // Clamp name source index
+        if (cluster.NameSourceIndex >= cluster.Images.Count)
+            cluster.NameSourceIndex = cluster.Images.Count - 1;
+
+        SelectImage(cluster.Images[0]);
+        RebuildThumbnailStrip();
+    }
+
+    // ── Thumbnail drag & drop (reorder edges + link center) ──
+
+    private enum DropZone { None, ReorderBefore, Link, ReorderAfter }
+    private Border? _lastHighlightedThumb;
+
+    private DropZone GetDropZone(Border border, DragEventArgs e)
+    {
+        var pos = e.GetPosition(border);
+        double ratio = pos.X / border.ActualWidth;
+
+        // Wider reorder edges (40%) for images inside a multi-image cluster
+        double edge = 0.10;
+        if (border.Tag is OptimiserImage oi)
+        {
+            var cluster = _clusters.FirstOrDefault(c => c.Images.Contains(oi));
+            if (cluster != null && cluster.Images.Count > 1)
+                edge = 0.25;
+        }
+
+        if (ratio < edge) return DropZone.ReorderBefore;
+        if (ratio > 1.0 - edge) return DropZone.ReorderAfter;
+        return DropZone.Link;
+    }
+
+    // ── Insertion indicator (vertical accent line between thumbnails) ──
+
+    private void ShowInsertionIndicator(FrameworkElement anchor, bool afterAnchor)
+    {
+        if (_insertionLine == null)
+        {
+            _insertionLine = new Border
+            {
+                Width = 3,
+                Height = 80,
+                CornerRadius = new CornerRadius(1.5),
+                Background = (Brush)FindResource("AccentFillColorDefaultBrush"),
+                IsHitTestVisible = false
+            };
+        }
+
+        if (!insertionCanvas.Children.Contains(_insertionLine))
+            insertionCanvas.Children.Add(_insertionLine);
+
+        _insertionLine.Visibility = Visibility.Visible;
+
+        // Compute X position relative to thumbnailPanel (the Canvas' coordinate space)
+        var anchorPos = anchor.TransformToVisual(thumbnailPanel).Transform(new System.Windows.Point(0, 0));
+        double x = afterAnchor ? anchorPos.X + anchor.ActualWidth + 1 : anchorPos.X - 4;
+
+        Canvas.SetLeft(_insertionLine, x);
+        Canvas.SetTop(_insertionLine, (anchor.ActualHeight - 80) / 2);
+    }
+
+    private void HideInsertionIndicator()
+    {
+        if (_insertionLine != null)
+            _insertionLine.Visibility = Visibility.Collapsed;
+    }
+
+    // ── Drag initiation ──
+
+    private void ThumbBorder_MouseMove(object sender, MouseEventArgs e)
+    {
+        if (e.LeftButton != MouseButtonState.Pressed) return;
+        var border = (Border)sender;
+        var pos = e.GetPosition(border);
+
+        if (_dragSource == null)
+        {
+            _thumbDragStart = pos;
+            _dragSource = (OptimiserImage)border.Tag;
+            return;
+        }
+
+        if (Math.Abs(pos.X - _thumbDragStart.X) < 8 && Math.Abs(pos.Y - _thumbDragStart.Y) < 8)
+            return;
+
+        _isDraggingThumb = true;
+        var data = new DataObject("OptimiserImage", _dragSource);
+        DragDrop.DoDragDrop(border, data, DragDropEffects.Move | DragDropEffects.Link);
+        _isDraggingThumb = false;
+        _dragSource = null;
+        ClearDropHighlight();
+        HideInsertionIndicator();
+    }
+
+    // ── Thumbnail DragOver / DragLeave / Drop ──
+
+    private void ThumbBorder_DragOver(object sender, DragEventArgs e)
+    {
+        if (!e.Data.GetDataPresent("OptimiserImage"))
+        {
+            e.Effects = DragDropEffects.None;
+            e.Handled = true;
+            return;
+        }
+
+        var border = (Border)sender;
+        var source = (OptimiserImage)e.Data.GetData("OptimiserImage")!;
+        var target = (OptimiserImage)border.Tag;
+
+        if (source == target)
+        {
+            e.Effects = DragDropEffects.None;
+            ClearDropHighlight();
+            HideInsertionIndicator();
+            e.Handled = true;
+            return;
+        }
+
+        var zone = GetDropZone(border, e);
+        e.Effects = zone == DropZone.Link ? DragDropEffects.Link : DragDropEffects.Move;
+
+        // Visual feedback
+        ClearDropHighlight();
+
+        if (zone == DropZone.Link)
+        {
+            HideInsertionIndicator();
+            _lastHighlightedThumb = border;
+            border.Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(0x30, 0x80, 0x80, 0xFF));
+        }
+        else
+        {
+            ShowInsertionIndicator(border, zone == DropZone.ReorderAfter);
+        }
+
+        e.Handled = true;
+    }
+
+    private void ThumbBorder_DragLeave(object sender, DragEventArgs e)
+    {
+        ClearDropHighlight();
+        HideInsertionIndicator();
+    }
+
+    private void ClearDropHighlight()
+    {
+        if (_lastHighlightedThumb == null) return;
+        var b = _lastHighlightedThumb;
+        _lastHighlightedThumb = null;
+
+        bool isSelected = b.Tag is OptimiserImage oi &&
+                          _clusters.FirstOrDefault(c => c.Images.Contains(oi)) == _selectedCluster;
+        b.BorderBrush = isSelected
+            ? (Brush)FindResource("AccentFillColorDefaultBrush")
+            : (Brush)FindResource("CardStrokeColorDefaultBrush");
+        b.Background = (Brush)FindResource("SubtleFillColorSecondaryBrush");
+    }
+
+    private void ThumbBorder_Drop(object sender, DragEventArgs e)
+    {
+        e.Handled = true;
+        ClearDropHighlight();
+        HideInsertionIndicator();
+        if (!e.Data.GetDataPresent("OptimiserImage")) return;
+
+        var source = (OptimiserImage)e.Data.GetData("OptimiserImage")!;
+        var target = (OptimiserImage)((Border)sender).Tag;
+        if (source == target) return;
+
+        var zone = GetDropZone((Border)sender, e);
+
+        if (zone == DropZone.Link)
+        {
+            LinkImages(target, source);
+        }
+        else
+        {
+            var sourceCluster = _clusters.First(c => c.Images.Contains(source));
+            var targetCluster = _clusters.First(c => c.Images.Contains(target));
+
+            if (sourceCluster == targetCluster && sourceCluster.Images.Count > 1)
+            {
+                // Reorder individual image within its own cluster
+                int targetIdx = sourceCluster.Images.IndexOf(target);
+                if (zone == DropZone.ReorderAfter) targetIdx++;
+                ReorderImageInCluster(sourceCluster, source, targetIdx);
+            }
+            else if (sourceCluster.Images.Count > 1 && AreClustersAdjacent(sourceCluster, targetCluster))
+            {
+                // Adjacent cluster — reorder image to the edge of its own cluster
+                int srcIdx = _clusters.IndexOf(sourceCluster);
+                int tgtIdx = _clusters.IndexOf(targetCluster);
+                int newIdx = tgtIdx > srcIdx
+                    ? sourceCluster.Images.Count - 1  // target is to the right → move to end
+                    : 0;                               // target is to the left → move to start
+                ReorderImageInCluster(sourceCluster, source, newIdx);
+            }
+            else
+            {
+                // Distant — move entire cluster
+                ReorderCluster(sourceCluster, targetCluster, zone == DropZone.ReorderAfter);
+            }
+        }
+    }
+
+    // ── Separator DragOver / DragLeave / Drop ──
+
+    private void SepBorder_DragOver(object sender, DragEventArgs e)
+    {
+        if (!e.Data.GetDataPresent("OptimiserImage"))
+        {
+            e.Effects = DragDropEffects.None;
+            e.Handled = true;
+            return;
+        }
+
+        e.Effects = DragDropEffects.Move;
+        if (sender is Border sep)
+            ShowInsertionIndicator(sep, false);
+        e.Handled = true;
+    }
+
+    private void SepBorder_DragLeave(object sender, DragEventArgs e)
+    {
+        HideInsertionIndicator();
+    }
+
+    private void SepBorder_Drop(object sender, DragEventArgs e)
+    {
+        e.Handled = true;
+        HideInsertionIndicator();
+        if (!e.Data.GetDataPresent("OptimiserImage")) return;
+
+        var source = (OptimiserImage)e.Data.GetData("OptimiserImage")!;
+        var sourceCluster = _clusters.First(c => c.Images.Contains(source));
+
+        if (sender is not FrameworkElement el || el.Tag is not OptimiserCluster afterCluster) return;
+
+        if (sourceCluster.Images.Count > 1)
+        {
+            // Separator is after 'afterCluster'. The next cluster is at afterCluster index + 1.
+            int afterIdx = _clusters.IndexOf(afterCluster);
+            int srcIdx = _clusters.IndexOf(sourceCluster);
+
+            if (sourceCluster == afterCluster)
+            {
+                // Separator right after source cluster — move image to end
+                ReorderImageInCluster(sourceCluster, source, sourceCluster.Images.Count - 1);
+                return;
+            }
+            if (afterIdx + 1 < _clusters.Count && _clusters[afterIdx + 1] == sourceCluster)
+            {
+                // Separator right before source cluster — move image to start
+                ReorderImageInCluster(sourceCluster, source, 0);
+                return;
+            }
+        }
+
+        if (sourceCluster == afterCluster) return;
+        ReorderCluster(sourceCluster, afterCluster, after: true);
+    }
+
+    private void ReorderCluster(OptimiserCluster source, OptimiserCluster target, bool after)
+    {
+        _clusters.Remove(source);
+        int targetIdx = _clusters.IndexOf(target);
+        int insertIdx = after ? targetIdx + 1 : targetIdx;
+        _clusters.Insert(insertIdx, source);
+
+        RebuildThumbnailStrip();
+    }
+
+    private void ReorderImageInCluster(OptimiserCluster cluster, OptimiserImage image, int newIndex)
+    {
+        int oldIndex = cluster.Images.IndexOf(image);
+        if (oldIndex < 0 || oldIndex == newIndex) return;
+
+        cluster.Images.RemoveAt(oldIndex);
+        if (newIndex > oldIndex) newIndex--;
+        newIndex = Math.Clamp(newIndex, 0, cluster.Images.Count);
+        cluster.Images.Insert(newIndex, image);
+
+        // Adjust name source index if it was pointing to the moved image
+        if (cluster.NameSourceIndex == oldIndex)
+            cluster.NameSourceIndex = newIndex;
+        else if (oldIndex < cluster.NameSourceIndex && newIndex >= cluster.NameSourceIndex)
+            cluster.NameSourceIndex--;
+        else if (oldIndex > cluster.NameSourceIndex && newIndex <= cluster.NameSourceIndex)
+            cluster.NameSourceIndex++;
+
+        RebuildThumbnailStrip();
+        ShowPreviewForSelection();
+        UpdateDetectionOverlay();
+    }
+
+    private bool AreClustersAdjacent(OptimiserCluster a, OptimiserCluster b)
+    {
+        int idxA = _clusters.IndexOf(a);
+        int idxB = _clusters.IndexOf(b);
+        return Math.Abs(idxA - idxB) == 1;
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  SPLIT (for scissors-active images)
+    // ══════════════════════════════════════════════════════════════
+
+    private void InputIndices_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (_suppressIndexReset) return;
+        if (_selectedCluster == null || !_selectedCluster.Images.Any(i => i.IsSplit)) return;
+
+        // Compare normalized tokens — only reset if the actual indices changed
+        var tokens = inputIndices.Text
+            .Split(new[] { ' ', ',', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        var normalized = string.Join(" ", tokens);
+
+        if (normalized == _selectedCluster.LastSplitIndices) return;
+
+        // Indices changed — invalidate previous split and remove old files from optimization tracking
+        foreach (var oi in _selectedCluster.Images)
+        {
+            if (oi.IsSplit)
+            {
+                foreach (var f in oi.SplitResultFiles)
+                    _optimizedFiles.Remove(f);
+                oi.IsSplit = false;
+                oi.IsOptimized = false;
+                oi.SplitResultFiles.Clear();
+            }
+        }
+        _selectedCluster.LastSplitIndices = "";
+        UpdateUploadButtonState();
+    }
+
+    private void InputIndices_PreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Enter && Keyboard.Modifiers == ModifierKeys.None)
+        {
+            e.Handled = true;
+            ProcessSplit();
+        }
+    }
+
+    private void BtnSplit_Click(object sender, RoutedEventArgs e) => ProcessSplit();
+
+    private void ProcessSplit()
+    {
+        if (_selectedCluster == null || _selectedCluster.Images.Count == 0) return;
+
+        // Collect scissors-active images in the cluster
+        var scissorsImages = _selectedCluster.Images.Where(oi => oi.IsScissorsActive).ToList();
+        if (scissorsImages.Count == 0) return;
+
+        var suffixes = inputIndices.Text.Split(new[] { ' ', ',', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        if (suffixes.Length == 0)
+        {
+            infoBar.Message = "Enter index values first.";
+            infoBar.Severity = InfoBarSeverity.Warning;
+            infoBar.IsOpen = true;
+            return;
+        }
+
+        try
+        {
+            // Remove old split results from optimization tracking before re-splitting
+            foreach (var oi in scissorsImages)
+            {
+                foreach (var f in oi.SplitResultFiles)
+                    _optimizedFiles.Remove(f);
+                oi.IsOptimized = false;
+            }
+
+            // Gather all objects from all scissors-active images in the cluster
+            var allOrdered = new List<(Rectangle Full, Rectangle Main, string SourcePath)>();
+
+            // Count non-skip suffixes for merge logic
+            int nonSkipCount = suffixes.Count(s => s != "-");
+
+            foreach (var oi in scissorsImages)
+            {
+                using var img = Image.Load<Rgba32>(oi.FilePath);
+                var objects = DetectObjects(img);
+                var ordered = OrderObjects(objects);
+
+                // Apply merge only when single image in cluster
+                if (scissorsImages.Count == 1 && ordered.Count > suffixes.Length)
+                    ordered = MergeToExpectedCount(ordered, suffixes.Length);
+
+                foreach (var obj in ordered)
+                    allOrdered.Add((obj.Full, obj.Main, oi.FilePath));
+            }
+
+            if (allOrdered.Count > suffixes.Length)
+            {
+                infoBar.Message = $"Not enough indexes ({suffixes.Length}) for {allOrdered.Count} objects.";
+                infoBar.Severity = InfoBarSeverity.Error;
+                infoBar.IsOpen = true;
+                return;
+            }
+
+            // Output dir and name from the name source image
+            var nameSourceImg = _selectedCluster.Images[
+                Math.Clamp(_selectedCluster.NameSourceIndex, 0, _selectedCluster.Images.Count - 1)];
+            string dir = System.IO.Path.GetDirectoryName(nameSourceImg.FilePath)!;
+            string name = System.IO.Path.GetFileNameWithoutExtension(nameSourceImg.FilePath);
+            bool singleObject = nonSkipCount == 1;
+
+            // Cache source images for cropping
+            var imageCache = new Dictionary<string, Image<Rgba32>>();
+            var allResultFiles = new List<string>();
+            int skippedCount = 0;
+
+            try
+            {
+                foreach (var sourcePath in allOrdered.Select(o => o.SourcePath).Distinct())
+                {
+                    if (!imageCache.ContainsKey(sourcePath))
+                        imageCache[sourcePath] = Image.Load<Rgba32>(sourcePath);
+                }
+
+                for (int i = 0; i < allOrdered.Count; i++)
+                {
+                    // Skip objects where suffix is "-"
+                    if (i < suffixes.Length && suffixes[i] == "-")
+                    {
+                        skippedCount++;
+                        continue;
+                    }
+
+                    var obj = allOrdered[i];
+                    var sourceImage = imageCache[obj.SourcePath];
+                    int size = GetCanvasSize(obj.Full.Width, obj.Full.Height);
+
+                    using var canvas = new Image<Rgba32>(size, size);
+                    float cx = (obj.Main.Left + obj.Main.Right + 1) / 2f;
+                    float cy = (obj.Main.Top + obj.Main.Bottom + 1) / 2f;
+                    int px = (int)Math.Round(size / 2f + 1.0f - (cx - obj.Full.Left));
+                    int py = (int)Math.Round(size / 2f + 1.0f - (cy - obj.Full.Top));
+
+                    using (var crop = sourceImage.Clone(x => x.Crop(obj.Full)))
+                        canvas.Mutate(x => x.DrawImage(crop, new Point(px, py), 1f));
+
+                    string fullPath = singleObject
+                        ? nameSourceImg.FilePath
+                        : System.IO.Path.Combine(dir, $"{name}{suffixes[i].PadLeft(2, '0')}.png");
+
+                    using (var fs = new FileStream(fullPath, FileMode.Create, FileAccess.Write, FileShare.None))
+                        canvas.SaveAsPng(fs);
+
+                    allResultFiles.Add(fullPath);
+                }
+            }
+            finally
+            {
+                foreach (var img in imageCache.Values)
+                    img.Dispose();
+            }
+
+            // Mark all scissors-active images as split, store result files on name source
+            foreach (var oi in scissorsImages)
+            {
+                oi.IsSplit = true;
+                oi.SplitResultFiles.Clear();
+            }
+            nameSourceImg.SplitResultFiles = allResultFiles;
+            _selectedCluster.LastSplitIndices = string.Join(" ", suffixes);
+
+            var msg = $"Split into {allResultFiles.Count} images.";
+            if (skippedCount > 0) msg += $" Skipped {skippedCount}.";
+            infoBar.Message = msg;
+            infoBar.Severity = InfoBarSeverity.Success;
+            infoBar.IsOpen = true;
+
+            RebuildThumbnailStrip();
+        }
+        catch (Exception ex)
+        {
+            infoBar.Message = $"Split failed: {ex.Message}";
+            infoBar.Severity = InfoBarSeverity.Error;
+            infoBar.IsOpen = true;
+        }
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  OPTIMIZE ALL (TinyPNG)
+    // ══════════════════════════════════════════════════════════════
+
+    private async void BtnOptimizeAll_Click(object sender, RoutedEventArgs e)
+    {
+        // Save current cluster's index text before checking
+        if (_selectedCluster != null)
+            _selectedCluster.IndexText = inputIndices.Text;
+
+        // Check if any cluster has actual indices set but hasn't been split yet
+        var unsplitClusters = _clusters.Where(c =>
+            c.IndexText.Split(new[] { ' ', ',', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Length > 0 &&
+            c.Images.Any(i => i.IsScissorsActive) &&
+            !c.Images.Any(i => i.IsSplit)).ToList();
+
+        if (unsplitClusters.Count > 0)
+        {
+            var msgBox = new Wpf.Ui.Controls.MessageBox
+            {
+                Title = "Unsplit images detected",
+                Content = "You have entered split indices but haven't split the images yet.\n\nDo you want to split them and proceed to optimization?",
+                PrimaryButtonText = "Split & proceed",
+                SecondaryButtonText = "Skip",
+                CloseButtonText = "Cancel",
+                Owner = Window.GetWindow(this)
+            };
+            Wpf.Ui.Appearance.ApplicationThemeManager.Apply(msgBox);
+            var result = await msgBox.ShowDialogAsync();
+
+            if (result == Wpf.Ui.Controls.MessageBoxResult.Primary)
+            {
+                // Remember current selection to restore after splitting
+                var savedImage = _selectedImage;
+                var savedCluster = _selectedCluster;
+
+                // Split each unsplit cluster
+                _suppressIndexReset = true;
+                foreach (var cluster in unsplitClusters)
+                {
+                    _selectedCluster = cluster;
+                    _selectedImage = cluster.Images.FirstOrDefault();
+                    inputIndices.Text = cluster.IndexText;
+                    ProcessSplit();
+                }
+                _suppressIndexReset = false;
+
+                // Restore original selection
+                if (savedImage != null && savedCluster != null && _clusters.Contains(savedCluster))
+                    SelectImage(savedImage);
+                else if (_clusters.Count > 0)
+                    SelectImage(_clusters[0].Images[0]);
+
+                // Fall through to optimization below
+            }
+            else if (result == Wpf.Ui.Controls.MessageBoxResult.None)
+            {
+                return;
+            }
+            // Primary=split+proceed, Secondary=skip to optimize, None(Close)=abort
+        }
+
+        // Collect files to optimize: iterate by cluster to avoid duplicate merged images
+        var filesToOptimize = new List<string>();
+        foreach (var cluster in _clusters)
+        {
+            var clusterSplitFiles = new List<string>();
+            bool hasSplit = false;
+            foreach (var oi in cluster.Images)
+            {
+                if (oi.IsSplit && oi.SplitResultFiles.Count > 0)
+                {
+                    clusterSplitFiles.AddRange(oi.SplitResultFiles);
+                    hasSplit = true;
+                }
+            }
+
+            if (hasSplit && clusterSplitFiles.Count > 0)
+                filesToOptimize.AddRange(clusterSplitFiles);
+            else
+                foreach (var oi in cluster.Images)
+                    filesToOptimize.Add(oi.FilePath);
+        }
+
+        if (filesToOptimize.Count == 0) return;
+
+        var apiKey = _main.Settings.TinifyApiKey;
+        var apiKey2 = _main.Settings.TinifyApiKey2;
+
+        var optWin = new OptimizationWindow(filesToOptimize, apiKey, apiKey2)
+        {
+            Owner = Window.GetWindow(this)
+        };
+        optWin.ShowDialog();
+
+        // Track which individual files were optimized
+        var optimizedPaths = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var f in optWin.Files)
+        {
+            if (f.IsOptimized)
+                optimizedPaths.Add(f.Path);
+        }
+        _optimizedFiles.UnionWith(optimizedPaths);
+
+        if (optimizedPaths.Count > 0)
+        {
+            // Mark images as optimized if all their files are optimized
+            foreach (var oi in AllImages)
+            {
+                if (oi.IsSplit && oi.SplitResultFiles.Count > 0)
+                    oi.IsOptimized = oi.SplitResultFiles.All(f => _optimizedFiles.Contains(f));
+                else
+                    oi.IsOptimized = _optimizedFiles.Contains(oi.FilePath);
+            }
+
+            Increment(s => s.ImagesOptimized += optimizedPaths.Count);
+
+            infoBar.Message = $"Optimized {optimizedPaths.Count} images.";
+            infoBar.Severity = InfoBarSeverity.Success;
+            infoBar.IsOpen = true;
+
+            // Refresh thumbnails
+            foreach (var oi in AllImages)
+            {
+                var newThumb = LoadThumbnail(oi.FilePath, 80);
+                if (newThumb != null) oi.Thumbnail = newThumb;
+            }
+            RebuildThumbnailStrip();
+        }
+
+        UpdateUploadButtonState();
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  CHAIN MODE
+    // ══════════════════════════════════════════════════════════════
+
+    public void EnterChainMode(ParsedChain chain)
+    {
+        _activeChain = chain;
+        _resolvedFilenameBase = null;
+
+        chainModeBanner.Visibility = Visibility.Visible;
+        txtChainName.Text = chain.DisplayName;
+        txtChainItemCount.Text = $"{chain.Items.Count} items in chain";
+
+        // Start resolving wiki filename base in background
+        _ = ResolveChainFilenameAsync(chain.DisplayName);
+    }
+
+    private void BtnExitChainMode_Click(object sender, RoutedEventArgs e)
+    {
+        _activeChain = null;
+        _resolvedFilenameBase = null;
+        chainModeBanner.Visibility = Visibility.Collapsed;
+    }
+
+    private async Task ResolveChainFilenameAsync(string chainName)
+    {
+        try
+        {
+            var filename = await WikiMappingService.ResolveWikiFilenameAsync(chainName);
+            if (filename != null)
+            {
+                // Strip "01.png" to get the base
+                if (filename.EndsWith(".png", StringComparison.OrdinalIgnoreCase) && filename.Length > 6)
+                    _resolvedFilenameBase = filename[..^6];
+                else
+                    _resolvedFilenameBase = filename[..^4];
+            }
+        }
+        catch { /* non-critical */ }
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  UPLOAD TO WIKI
+    // ══════════════════════════════════════════════════════════════
+
+    private void BtnUploadWiki_Click(object sender, RoutedEventArgs e)
+    {
+        if (!_main.Settings.WikiVerified)
+        {
+            infoBar.Message = "Wiki bot not configured. Set up credentials in Settings.";
+            infoBar.Severity = InfoBarSeverity.Warning;
+            infoBar.IsOpen = true;
+            return;
+        }
+
+        if (_clusters.Count == 0) return;
+
+        // Collect upload items: group by cluster; merged cluster split results share one group
+        var uploadItems = new List<WikiUploadItem>();
+        foreach (var cluster in _clusters)
+        {
+            // Determine the cluster's name source image
+            var nameSourceIdx = Math.Clamp(cluster.NameSourceIndex, 0, cluster.Images.Count - 1);
+            var nameSourceImg = cluster.Images[nameSourceIdx];
+            var clusterChainName = nameSourceImg.DetectedChainName;
+            var clusterGroupPath = nameSourceImg.FilePath; // shared SplitGroupSourcePath for the whole cluster
+
+            // Collect all split result files across the cluster
+            var clusterSplitFiles = new List<string>();
+            bool hasSplit = false;
+            foreach (var oi in cluster.Images)
+            {
+                if (oi.IsSplit && oi.SplitResultFiles.Count > 0)
+                {
+                    clusterSplitFiles.AddRange(oi.SplitResultFiles);
+                    hasSplit = true;
+                }
+            }
+
+            if (hasSplit && clusterSplitFiles.Count > 0)
+            {
+                // All split results from this cluster form ONE group
+                foreach (var splitPath in clusterSplitFiles)
+                {
+                    uploadItems.Add(new WikiUploadItem
+                    {
+                        FilePath = splitPath,
+                        DetectedChainName = clusterChainName,
+                        IsPartOfSplitGroup = true,
+                        SplitGroupSourcePath = clusterGroupPath,
+                        IsOptimized = _optimizedFiles.Contains(splitPath)
+                    });
+                }
+            }
+            else
+            {
+                // Non-split: each image as individual row
+                foreach (var oi in cluster.Images)
+                {
+                    uploadItems.Add(new WikiUploadItem
+                    {
+                        FilePath = oi.FilePath,
+                        DetectedChainName = oi.DetectedChainName,
+                        IsPartOfSplitGroup = false,
+                        IsOptimized = _optimizedFiles.Contains(oi.FilePath)
+                    });
+                }
+            }
+        }
+
+        var dialog = new WikiUploadDialog(_main, uploadItems)
+        {
+            Owner = Window.GetWindow(this)
+        };
+        dialog.ShowDialog();
+
+        if (dialog.UploadedCount > 0)
+        {
+            infoBar.Message = $"Uploaded {dialog.UploadedCount} images to wiki.";
+            infoBar.Severity = InfoBarSeverity.Success;
+            infoBar.IsOpen = true;
+        }
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  CTRL+V PASTE
+    // ══════════════════════════════════════════════════════════════
+
+    /// <summary>Called from MainWindow.PreviewKeyDown when Optimiser page is active.</summary>
+    public bool HandleCtrlV()
+    {
+        // Don't intercept when typing in the indices TextBox
+        if (Keyboard.FocusedElement is System.Windows.Controls.TextBox) return false;
+
+        PasteFromClipboard();
+        return true;
+    }
+
+    private void PasteFromClipboard()
+    {
+        try
+        {
+            // Copied image files (Ctrl+C on .png in Explorer)
+            if (Clipboard.ContainsFileDropList())
+            {
+                var files = Clipboard.GetFileDropList();
+                var images = new List<string>();
+                foreach (string? f in files)
+                    if (f != null && IsImageFile(f) && File.Exists(f))
+                        images.Add(f);
+
+                if (images.Count > 0)
+                {
+                    AddImages(images.ToArray());
+                    return;
+                }
+            }
+
+            // Bitmap data (Print Screen, copy from editor)
+            if (Clipboard.ContainsImage() || Clipboard.ContainsData(DataFormats.Bitmap) || Clipboard.ContainsData(DataFormats.Dib))
+            {
+                var bmp = Clipboard.GetImage();
+                if (bmp != null)
+                {
+                    // Save clipboard image to temp file, then add
+                    var tempDir = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "MergeMansionWikiTools");
+                    Directory.CreateDirectory(tempDir);
+                    var tempPath = System.IO.Path.Combine(tempDir, $"clipboard_{DateTime.Now:yyyyMMdd_HHmmss}.png");
+
+                    var encoder = new PngBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create(bmp));
+                    using (var fs = new FileStream(tempPath, FileMode.Create))
+                        encoder.Save(fs);
+
+                    AddImages(new[] { tempPath });
+                    return;
+                }
+            }
+
+            infoBar.Message = "No image found in clipboard.";
+            infoBar.Severity = InfoBarSeverity.Warning;
+            infoBar.IsOpen = true;
+        }
+        catch (Exception ex)
+        {
+            infoBar.Message = $"Failed to paste: {ex.Message}";
+            infoBar.Severity = InfoBarSeverity.Error;
+            infoBar.IsOpen = true;
+        }
+    }
+
+    private static bool IsImageFile(string path)
+    {
+        var ext = System.IO.Path.GetExtension(path).ToLowerInvariant();
+        return ext is ".png" or ".jpg" or ".jpeg" or ".bmp" or ".gif" or ".tiff" or ".webp";
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  CHAIN NAME MATCHING (Levenshtein)
+    // ══════════════════════════════════════════════════════════════
+
+    private string? TryMatchChainName(string filePath)
+    {
+        var name = System.IO.Path.GetFileNameWithoutExtension(filePath);
+        if (name.StartsWith("Item", StringComparison.OrdinalIgnoreCase) && name.Length > 4)
+            name = name.Substring(4);
+
+        // Strip trailing digits (level numbers like "01", "02")
+        var cleanedName = name;
+        while (cleanedName.Length > 0 && char.IsDigit(cleanedName[^1]))
+            cleanedName = cleanedName[..^1];
+
+        // Try Levenshtein matching against loaded chains
+        var chains = _main.DataService?.Chains;
+        if (chains != null && chains.Count > 0 && cleanedName.Length > 0)
+        {
+            var candidates = new List<string> { cleanedName };
+            for (int idx = cleanedName.IndexOf('_'); idx >= 0 && idx < cleanedName.Length - 1; idx = cleanedName.IndexOf('_', idx + 1))
+                candidates.Add(cleanedName.Substring(idx + 1));
+
+            ParsedChain? best = null;
+            double bestSim = 0;
+
+            foreach (var chain in chains)
+            {
+                var keys = new List<string>();
+                if (!string.IsNullOrEmpty(chain.ConfigKey))
+                    keys.Add(chain.ConfigKey);
+                if (chain.MergedFromConfigKeys != null)
+                    keys.AddRange(chain.MergedFromConfigKeys);
+
+                foreach (var key in keys)
+                {
+                    foreach (var candidate in candidates)
+                    {
+                        double sim = 1.0 - (double)LevenshteinDistance(candidate.ToLowerInvariant(), key.ToLowerInvariant())
+                                     / Math.Max(candidate.Length, key.Length);
+                        if (sim > bestSim)
+                        {
+                            bestSim = sim;
+                            best = chain;
+                        }
+                    }
+                }
+            }
+
+            if (best != null && bestSim >= 0.75)
+                return best.DisplayName;
+        }
+
+        // Fallback: use cleaned filename (without extension, trailing digits, or "Item" prefix)
+        if (cleanedName.Length > 0)
+            return cleanedName;
+
+        // Last resort: original filename without extension
+        return name.Length > 0 ? name : null;
+    }
+
+    private static int LevenshteinDistance(string a, string b)
+    {
+        if (a.Length == 0) return b.Length;
+        if (b.Length == 0) return a.Length;
+
+        var d = new int[a.Length + 1, b.Length + 1];
+        for (int i = 0; i <= a.Length; i++) d[i, 0] = i;
+        for (int j = 0; j <= b.Length; j++) d[0, j] = j;
+
+        for (int i = 1; i <= a.Length; i++)
+        for (int j = 1; j <= b.Length; j++)
+        {
+            int cost = a[i - 1] == b[j - 1] ? 0 : 1;
+            d[i, j] = Math.Min(
+                Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1),
+                d[i - 1, j - 1] + cost);
+        }
+
+        return d[a.Length, b.Length];
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  OBJECT DETECTION — Flood Fill + Smart Merge (duplicated from ImageSplitterPage)
+    // ══════════════════════════════════════════════════════════════
+
+    private static List<(Rectangle Full, Rectangle Main)> DetectObjects(Image<Rgba32> img)
+    {
+        if (img.Width < 130 && img.Height < 130)
+            return new List<(Rectangle, Rectangle)> { (new Rectangle(0, 0, img.Width, img.Height), new Rectangle(0, 0, img.Width, img.Height)) };
+
+        var visited = new bool[img.Width, img.Height];
+        var list = new List<(Rectangle Full, Rectangle Main)>();
+
+        for (int y = 0; y < img.Height; y++)
+            for (int x = 0; x < img.Width; x++)
+            {
+                if (!visited[x, y] && img[x, y].A > AlphaThreshold)
+                {
+                    var r = FloodFill(img, x, y, visited);
+                    if (r.Full.Width * r.Full.Height >= MinCellArea)
+                        list.Add(r);
+                }
+            }
+
+        return list;
+    }
+
+    private static (Rectangle Full, Rectangle Main) FloodFill(Image<Rgba32> img, int sx, int sy, bool[,] v)
+    {
+        int x1 = sx, x2 = sx, y1 = sy, y2 = sy;
+        int mx1 = int.MaxValue, mx2 = int.MinValue, my1 = int.MaxValue, my2 = int.MinValue;
+        bool hasMain = false;
+
+        var q = new Queue<Point>();
+        q.Enqueue(new Point(sx, sy));
+        v[sx, sy] = true;
+
+        while (q.Count > 0)
+        {
+            var p = q.Dequeue();
+            x1 = Math.Min(x1, p.X); x2 = Math.Max(x2, p.X);
+            y1 = Math.Min(y1, p.Y); y2 = Math.Max(y2, p.Y);
+
+            if (img[p.X, p.Y].A >= MainAlphaThreshold)
+            {
+                mx1 = Math.Min(mx1, p.X); mx2 = Math.Max(mx2, p.X);
+                my1 = Math.Min(my1, p.Y); my2 = Math.Max(my2, p.Y);
+                hasMain = true;
+            }
+
+            foreach (var (dx, dy) in new[] { (0, 1), (0, -1), (1, 0), (-1, 0) })
+            {
+                int nx = p.X + dx, ny = p.Y + dy;
+                if (nx >= 0 && nx < img.Width && ny >= 0 && ny < img.Height
+                    && !v[nx, ny] && img[nx, ny].A > AlphaThreshold)
+                {
+                    v[nx, ny] = true;
+                    q.Enqueue(new Point(nx, ny));
+                }
+            }
+        }
+
+        var full = new Rectangle(x1, y1, x2 - x1 + 1, y2 - y1 + 1);
+        var main = hasMain ? new Rectangle(mx1, my1, mx2 - mx1 + 1, my2 - my1 + 1) : full;
+        return (full, main);
+    }
+
+    private static List<(Rectangle Full, Rectangle Main)> OrderObjects(List<(Rectangle Full, Rectangle Main)> objects)
+    {
+        if (objects.Count <= 1) return objects;
+
+        var sorted = objects.OrderBy(o => o.Full.Top + o.Full.Height / 2.0).ToList();
+        var rows = new List<List<(Rectangle Full, Rectangle Main)>>();
+        var currentRow = new List<(Rectangle Full, Rectangle Main)> { sorted[0] };
+
+        for (int i = 1; i < sorted.Count; i++)
+        {
+            double prevCenter = currentRow.Last().Full.Top + currentRow.Last().Full.Height / 2.0;
+            double currCenter = sorted[i].Full.Top + sorted[i].Full.Height / 2.0;
+            double gap = currCenter - prevCenter;
+            double threshold = Math.Max(currentRow.Last().Full.Height, sorted[i].Full.Height) / 2.0;
+
+            if (gap > threshold)
+            {
+                rows.Add(currentRow);
+                currentRow = new List<(Rectangle Full, Rectangle Main)>();
+            }
+            currentRow.Add(sorted[i]);
+        }
+        rows.Add(currentRow);
+
+        return rows.SelectMany(r => r.OrderBy(o => o.Full.Left)).ToList();
+    }
+
+    private static List<(Rectangle Full, Rectangle Main)> MergeToExpectedCount(
+        List<(Rectangle Full, Rectangle Main)> objects, int expectedCount)
+    {
+        if (objects.Count <= expectedCount) return objects;
+
+        var list = new List<(Rectangle Full, Rectangle Main)>(objects);
+
+        while (list.Count > expectedCount)
+        {
+            var ordered = OrderObjects(list);
+            list = ordered;
+
+            var widths = list.Select(o => (double)o.Full.Width).OrderBy(w => w).ToList();
+            var areas = list.Select(o => (double)(o.Full.Width * o.Full.Height)).OrderBy(a => a).ToList();
+            double medianW = widths[widths.Count / 2];
+            double medianArea = areas[areas.Count / 2];
+
+            var rows = new List<List<int>>();
+            var currentRow = new List<int> { 0 };
+
+            for (int i = 1; i < list.Count; i++)
+            {
+                double prevCenter = list[currentRow.Last()].Full.Top + list[currentRow.Last()].Full.Height / 2.0;
+                double currCenter = list[i].Full.Top + list[i].Full.Height / 2.0;
+                double gap = currCenter - prevCenter;
+                double thresh = Math.Max(list[currentRow.Last()].Full.Height, list[i].Full.Height) / 2.0;
+
+                if (gap > thresh)
+                {
+                    rows.Add(currentRow);
+                    currentRow = new List<int>();
+                }
+                currentRow.Add(i);
+            }
+            rows.Add(currentRow);
+
+            double bestScore = double.MinValue;
+            int bestA = -1, bestB = -1;
+
+            foreach (var row in rows)
+            {
+                for (int ri = 0; ri < row.Count; ri++)
+                    for (int rj = ri + 1; rj < row.Count; rj++)
+                    {
+                        int ai = row[ri], bi = row[rj];
+                        var a = list[ai]; var b = list[bi];
+
+                        int xOvlp = Math.Max(0, Math.Min(a.Full.Left + a.Full.Width, b.Full.Left + b.Full.Width) - Math.Max(a.Full.Left, b.Full.Left));
+                        int yOvlp = Math.Max(0, Math.Min(a.Full.Top + a.Full.Height, b.Full.Top + b.Full.Height) - Math.Max(a.Full.Top, b.Full.Top));
+                        double overlapArea = xOvlp * yOvlp;
+                        double smallerArea = Math.Min((double)a.Full.Width * a.Full.Height, (double)b.Full.Width * b.Full.Height);
+                        double bboxOverlapRatio = smallerArea > 0 ? overlapArea / smallerArea : 0;
+
+                        double edgeGap = Math.Max(0, Math.Max(a.Full.Left, b.Full.Left) - Math.Min(a.Full.Left + a.Full.Width, b.Full.Left + b.Full.Width));
+
+                        double areaA = a.Full.Width * a.Full.Height;
+                        double areaB = b.Full.Width * b.Full.Height;
+                        bool fragA = areaA < 0.5 * medianArea;
+                        bool fragB = areaB < 0.5 * medianArea;
+                        double fragmentScore = (fragA && fragB) ? 2.0 : (fragA || fragB) ? -0.5 : 0.0;
+
+                        double mergedW = Math.Max(a.Full.Left + a.Full.Width, b.Full.Left + b.Full.Width) - Math.Min(a.Full.Left, b.Full.Left);
+                        double sizeScore = 1.0 / (1.0 + Math.Abs(mergedW - medianW) / Math.Max(medianW, 1));
+
+                        double gapScore = 1.0 / (1.0 + edgeGap);
+
+                        double score = 10.0 * bboxOverlapRatio + 3.0 * fragmentScore + 2.0 * sizeScore + 1.0 * gapScore;
+
+                        if (score > bestScore)
+                        {
+                            bestScore = score;
+                            bestA = ai;
+                            bestB = bi;
+                        }
+                    }
+            }
+
+            if (bestA < 0 || bestB < 0) break;
+
+            var objA = list[bestA]; var objB = list[bestB];
+            int fLeft = Math.Min(objA.Full.Left, objB.Full.Left);
+            int fTop = Math.Min(objA.Full.Top, objB.Full.Top);
+            int fRight = Math.Max(objA.Full.Left + objA.Full.Width, objB.Full.Left + objB.Full.Width);
+            int fBot = Math.Max(objA.Full.Top + objA.Full.Height, objB.Full.Top + objB.Full.Height);
+            var mergedFull = new Rectangle(fLeft, fTop, fRight - fLeft, fBot - fTop);
+
+            int mLeft = Math.Min(objA.Main.Left, objB.Main.Left);
+            int mTop = Math.Min(objA.Main.Top, objB.Main.Top);
+            int mRight = Math.Max(objA.Main.Left + objA.Main.Width, objB.Main.Left + objB.Main.Width);
+            int mBot = Math.Max(objA.Main.Top + objA.Main.Height, objB.Main.Top + objB.Main.Height);
+            var mergedMain = new Rectangle(mLeft, mTop, mRight - mLeft, mBot - mTop);
+
+            list.RemoveAt(bestB);
+            list.RemoveAt(bestA);
+            list.Add((mergedFull, mergedMain));
+        }
+
+        return OrderObjects(list);
+    }
+
+    private static int GetCanvasSize(int w, int h)
+    {
+        int m = Math.Max(w, h);
+        int[] s = { 96, 100, 105, 110, 115, 120, 128, 132, 136, 142, 148, 154, 160, 164, 172, 180, 188, 192, 196, 208, 216, 224, 240, 256, 512, 768, 1024 };
+        return s.FirstOrDefault(x => x >= m) == 0 ? 256 : s.First(x => x >= m);
+    }
+}

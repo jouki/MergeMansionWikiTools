@@ -41,7 +41,9 @@ public static class SettingsService
 
     private static void ApplyDefaults(AppSettings s)
     {
-        // Placeholder for future field migrations
+        // Auto-skip OOBE for existing users who already have data configured
+        if (!s.OobeCompleted && !string.IsNullOrEmpty(s.ChainItemOddsPath))
+            s.OobeCompleted = true;
     }
 
     public static void Save(AppSettings settings)

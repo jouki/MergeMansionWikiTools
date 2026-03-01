@@ -144,12 +144,33 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Name="txtAreasHeader" Grid.Column="0"
                                    FontSize="16" FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                    VerticalAlignment="Center" />
-                        <Button x:Name="btnCollapseAreas" Grid.Column="1"
+                        <ui:SymbolIcon x:Name="iconAreasDateState" Grid.Column="1"
+                                       Visibility="Collapsed"
+                                       FontSize="20" VerticalAlignment="Center" Margin="8,0,0,0"
+                                       ToolTipService.InitialShowDelay="0"
+                                       ToolTipService.ShowOnDisabled="True" />
+                        <ui:Button x:Name="btnUpdateWiki" Grid.Column="2"
+                                   Appearance="Primary"
+                                   Height="32" Padding="12,0"
+                                   Click="BtnUpdateWiki_Click"
+                                   VerticalAlignment="Center" Margin="8,0,0,0"
+                                   ToolTipService.InitialShowDelay="0"
+                                   ToolTipService.ShowOnDisabled="True">
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Symbol="ArrowUpload24" FontSize="14" Margin="0,0,6,0"
+                                              Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}" />
+                                <TextBlock Text="Update Wiki" VerticalAlignment="Center"
+                                           Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}" />
+                            </StackPanel>
+                        </ui:Button>
+                        <Button x:Name="btnCollapseAreas" Grid.Column="3"
                                 Style="{StaticResource IconButtonStyle}"
                                 Click="BtnCollapseAreas_Click"
                                 VerticalAlignment="Center" Margin="8,0,0,0">
@@ -173,12 +194,33 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Items + Chain Names" Grid.Column="0"
                                    FontSize="16" FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                    VerticalAlignment="Center" />
-                        <Button x:Name="btnCollapseItems" Grid.Column="1"
+                        <ui:SymbolIcon x:Name="iconItemsDateState" Grid.Column="1"
+                                       Visibility="Collapsed"
+                                       FontSize="20" VerticalAlignment="Center" Margin="8,0,0,0"
+                                       ToolTipService.InitialShowDelay="0"
+                                       ToolTipService.ShowOnDisabled="True" />
+                        <ui:Button x:Name="btnUpdateItemsWiki" Grid.Column="2"
+                                   Appearance="Primary"
+                                   Height="32" Padding="12,0"
+                                   Click="BtnUpdateItemsWiki_Click"
+                                   VerticalAlignment="Center" Margin="8,0,0,0"
+                                   ToolTipService.InitialShowDelay="0"
+                                   ToolTipService.ShowOnDisabled="True">
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Symbol="ArrowUpload24" FontSize="14" Margin="0,0,6,0"
+                                              Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}" />
+                                <TextBlock Text="Update Wiki" VerticalAlignment="Center"
+                                           Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}" />
+                            </StackPanel>
+                        </ui:Button>
+                        <Button x:Name="btnCollapseItems" Grid.Column="3"
                                 Style="{StaticResource IconButtonStyle}"
                                 Click="BtnCollapseItems_Click"
                                 VerticalAlignment="Center" Margin="8,0,0,0">
@@ -189,12 +231,24 @@
 
                     <!-- Collapsible content -->
                     <StackPanel x:Name="itemsContent">
-                        <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+
+                        <!-- Section header (shared across single/multi-chunk) -->
+                        <TextBlock x:Name="txtCombinedHeader"
+                                   FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                   Margin="4,0,0,8" />
+
+                        <!-- Item chunk cards container (multi-chunk mode) -->
+                        <StackPanel x:Name="itemChunksContainer" Visibility="Collapsed" />
+
+                        <!-- Single combined card (single-module mode) -->
+                        <Border x:Name="combinedCard"
+                                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
                                 CornerRadius="8"
                                 BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1"
                                 Margin="0,0,0,8">
                             <StackPanel>
-                                <!-- Header row: label | mini-loading | Copy -->
+                                <!-- Header row: Copy button + mini-loading -->
                                 <Grid Margin="14,10,10,10">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
@@ -202,7 +256,8 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock x:Name="txtCombinedHeader" Grid.Column="0"
+                                    <TextBlock x:Name="txtCombinedCardLabel" Grid.Column="0"
+                                               Text="p.items + p.chainNames"
                                                FontSize="13" FontWeight="SemiBold"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                VerticalAlignment="Center" />

@@ -15,6 +15,8 @@ namespace MergeMansionWikiTools
         {
             base.OnStartup(e);
 
+            AppLogger.Init();
+
             // Apply theme early (before MainWindow renders) based on saved preference
             var settings = SettingsService.Load();
             ApplyTheme(settings.ThemePreference);
@@ -27,6 +29,26 @@ namespace MergeMansionWikiTools
             splash.RunFadeSequence(
                 startFadeOut =>
                 {
+                    using var _ = AppLogger.Timed("App.Startup");
+
+                    // OOBE: show setup wizard for first-time users
+                    if (!settings.OobeCompleted)
+                    {
+                        splash.Hide();
+                        var wizard = new SetupWizard();
+                        wizard.ShowDialog();
+
+                        if (!wizard.CompletedNormally)
+                        {
+                            // X button = user cancelled → shut down app entirely
+                            splash.Close();
+                            Shutdown();
+                            return;
+                        }
+
+                        settings = SettingsService.Load(); // Wizard saved its own copy
+                    }
+
                     // Fade-in done — splash is static, safe to load MainWindow
                     var main = new MainWindow();
                     main.Show();
@@ -40,6 +62,12 @@ namespace MergeMansionWikiTools
                 },
                 () => splash.Close()
             );
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            AppLogger.Flush();
+            base.OnExit(e);
         }
 
         public static void ApplyTheme(string preference)

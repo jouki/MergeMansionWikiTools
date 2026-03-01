@@ -11,6 +11,7 @@ public class LuaArea
     public string InternalName { get; set; } = "";
     public string DisplayName { get; set; } = "";
     public string AreaId { get; set; } = "";
+    public string? ReleaseDate { get; set; }
     public List<LuaTask> Tasks { get; set; } = new();
 }
 
@@ -24,6 +25,7 @@ public class LuaTask
     public List<string> ChildIds { get; set; } = new();
     public int? XpReward { get; set; }
     public string? ItemReward { get; set; }
+    public string? UnlockDate { get; set; }
 }
 
 // Internal helper — keeps task relationships during parsing
@@ -38,6 +40,7 @@ internal class TaskNode
     public List<TaskNode> Children { get; set; } = new();
     public int? XpReward { get; set; }
     public string? ItemReward { get; set; }
+    public string? UnlockDate { get; set; }
 }
 
 // ── Service ──────────────────────────────────────────────────────────
@@ -45,6 +48,7 @@ internal class TaskNode
 public class AreasService
 {
     public List<LuaArea> Areas { get; private set; } = new();
+    public string CreatedAt { get; private set; } = "";
 
     public async Task LoadAsync(string filePath)
     {
@@ -52,19 +56,33 @@ public class AreasService
         await using var stream = File.OpenRead(filePath);
         var doc = await JsonDocument.ParseAsync(stream);
 
+        if (doc.RootElement.TryGetProperty("CreatedAt", out var ca))
+            CreatedAt = ca.GetString() ?? "";
+
         if (!doc.RootElement.TryGetProperty("Data", out var dataArray))
             throw new InvalidDataException("areas.json missing 'Data' array.");
 
+        // Pass 1: build global hotspot lookup across all areas
+        // (DOT graphs can reference tasks from other areas)
+        var globalHotspots = new Dictionary<string, HotspotInfo>(StringComparer.Ordinal);
         foreach (var areaEl in dataArray.EnumerateArray())
         {
-            var area = ParseArea(areaEl);
+            foreach (var kv in BuildHotspotsLookup(areaEl))
+                globalHotspots.TryAdd(kv.Key, kv.Value);
+        }
+
+        // Pass 2: parse areas with global hotspot fallback
+        foreach (var areaEl in dataArray.EnumerateArray())
+        {
+            var area = ParseArea(areaEl, globalHotspots);
             if (area != null) Areas.Add(area);
         }
     }
 
     // ── Area parsing ─────────────────────────────────────────────────
 
-    private static LuaArea? ParseArea(JsonElement el)
+    private static LuaArea? ParseArea(JsonElement el,
+        Dictionary<string, HotspotInfo>? globalHotspots = null)
     {
         var name = GetStr(el, "Name");
         var areaId = GetStr(el, "AreaId");
@@ -72,7 +90,13 @@ public class AreasService
 
         if (string.IsNullOrEmpty(name)) return null;
 
+        // Local hotspots first, with global fallback for cross-area tasks
         var hotspots = BuildHotspotsLookup(el);
+        if (globalHotspots != null)
+            foreach (var kv in globalHotspots)
+                hotspots.TryAdd(kv.Key, kv.Value);
+
+        var releaseDate = ParseTimeNeeded(el, "UnlockRequirements");
         var tasks = ParseTaskDependencies(taskDeps, hotspots);
 
         return new LuaArea
@@ -80,6 +104,7 @@ public class AreasService
             InternalName = name,
             DisplayName = BuildDisplayName(name),
             AreaId = areaId,
+            ReleaseDate = releaseDate,
             Tasks = tasks
         };
     }
@@ -101,7 +126,8 @@ public class AreasService
         string Description,
         Dictionary<string, int> Requirements,
         int? XpReward,
-        string? ItemReward);
+        string? ItemReward,
+        string? UnlockDate);
 
     private static Dictionary<string, HotspotInfo> BuildHotspotsLookup(JsonElement areaEl)
     {
@@ -119,7 +145,8 @@ public class AreasService
             var desc = GetStr(hs, "Description");
             var reqs = ParseHotspotRequirements(hs);
             var (xp, item) = ParseHotspotRewards(hs);
-            result[id] = new HotspotInfo(desc, reqs, xp, item);
+            var unlockDate = ParseTimeNeeded(hs, "UnlockRequirementsList");
+            result[id] = new HotspotInfo(desc, reqs, xp, item, unlockDate);
         }
 
         return result;
@@ -238,7 +265,8 @@ public class AreasService
                 DotIndex = dotIdx,
                 Requirements = reqs,
                 XpReward = hs?.XpReward,
-                ItemReward = hs?.ItemReward
+                ItemReward = hs?.ItemReward,
+                UnlockDate = hs?.UnlockDate
             };
 
             byDotIndex[dotIdx] = node;
@@ -257,6 +285,32 @@ public class AreasService
 
             parent.Children.Add(child);
             child.Parents.Add(parent);
+        }
+
+        // Remove empty tasks (no requirements + no rewards) and reroute edges
+        var emptyNodes = byId.Values
+            .Where(n => n.Requirements.Count == 0 && n.XpReward == null && string.IsNullOrEmpty(n.ItemReward))
+            .ToList();
+
+        foreach (var empty in emptyNodes)
+        {
+            foreach (var parent in empty.Parents)
+            {
+                parent.Children.Remove(empty);
+                foreach (var child in empty.Children)
+                    if (!parent.Children.Contains(child))
+                        parent.Children.Add(child);
+            }
+            foreach (var child in empty.Children)
+            {
+                child.Parents.Remove(empty);
+                foreach (var parent in empty.Parents)
+                    if (!child.Parents.Contains(parent))
+                        child.Parents.Add(parent);
+            }
+
+            byId.Remove(empty.Id);
+            byDotIndex.Remove(empty.DotIndex);
         }
 
         // Remove isolated nodes (no parents and no children)
@@ -279,7 +333,8 @@ public class AreasService
                 ParentIds = n.Parents.Where(p => connected.ContainsKey(p.Id)).Select(p => p.Id).ToList(),
                 ChildIds = n.Children.Where(c => connected.ContainsKey(c.Id)).Select(c => c.Id).ToList(),
                 XpReward = n.XpReward,
-                ItemReward = n.ItemReward
+                ItemReward = n.ItemReward,
+                UnlockDate = n.UnlockDate
             })
             .ToList();
     }
@@ -322,6 +377,30 @@ public class AreasService
         sorted.Reverse(); // topological order (roots first)
         for (int i = 0; i < sorted.Count; i++)
             sorted[i].SortIndex = i + 1;
+    }
+
+    // ── Date helpers ──────────────────────────────────────────────────
+
+    private static string? ParseTimeNeeded(JsonElement el, string listPropName)
+    {
+        if (!el.TryGetProperty(listPropName, out var arr) ||
+            arr.ValueKind != JsonValueKind.Array)
+            return null;
+
+        foreach (var req in arr.EnumerateArray())
+        {
+            if (req.ValueKind != JsonValueKind.Object) continue;
+            if (req.TryGetProperty("TimeNeeded", out var tn) &&
+                tn.TryGetProperty("StartInclusive", out var start) &&
+                start.ValueKind == JsonValueKind.String)
+            {
+                var raw = start.GetString();
+                if (!string.IsNullOrEmpty(raw) && DateTime.TryParse(raw, out var dt))
+                    return dt.ToString("dd.MM.yyyy");
+            }
+        }
+
+        return null;
     }
 
     // ── JSON helpers ─────────────────────────────────────────────────

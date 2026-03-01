@@ -1,0 +1,138 @@
+<UserControl x:Class="MergeMansionWikiTools.Views.ImageOptimiserPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             AllowDrop="True" DragOver="Page_DragOver" Drop="Page_Drop">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Row 0: Chain mode banner (collapsed by default) -->
+        <Border x:Name="chainModeBanner" Grid.Row="0" Visibility="Collapsed"
+                Background="{DynamicResource AccentFillColorDefaultBrush}"
+                CornerRadius="6" Padding="14,8" Margin="0,0,0,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <ui:SymbolIcon Symbol="Link24"
+                               Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}" />
+                <StackPanel Grid.Column="1" Margin="10,0">
+                    <TextBlock x:Name="txtChainName" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
+                    <TextBlock x:Name="txtChainItemCount" FontSize="11"
+                               Foreground="{DynamicResource TextOnAccentFillColorSecondaryBrush}"/>
+                </StackPanel>
+                <ui:Button Grid.Column="2" Content="Exit" Icon="{ui:SymbolIcon Dismiss24}"
+                           Click="BtnExitChainMode_Click"
+                           Background="#20000000" BorderThickness="0"
+                           Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
+                           MouseOverBackground="#30000000" PressedBackground="#40000000"
+                           Padding="12,6"/>
+            </Grid>
+        </Border>
+
+        <!-- Row 1: Thumbnail strip (collapsed when no images) -->
+        <Border x:Name="thumbnailStripBorder" Grid.Row="1" Visibility="Collapsed"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                CornerRadius="8" Margin="0,0,0,10"
+                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled"
+                              Padding="6,6,0,6">
+                    <Grid>
+                        <StackPanel x:Name="thumbnailPanel" Orientation="Horizontal"/>
+                        <Canvas x:Name="insertionCanvas" IsHitTestVisible="False"/>
+                    </Grid>
+                </ScrollViewer>
+                <ui:Button x:Name="btnClearAll" Grid.Column="1" ToolTip="Clear all images"
+                           ToolTipService.InitialShowDelay="0"
+                           Appearance="Secondary" Padding="6" Margin="4,0,6,0"
+                           VerticalAlignment="Center" Click="BtnClearAll_Click">
+                    <ui:SymbolIcon Symbol="Delete24" FontSize="16"/>
+                </ui:Button>
+            </Grid>
+        </Border>
+
+        <!-- Row 2: Preview / Drop zone -->
+        <Border Grid.Row="2" Background="{DynamicResource CardBackgroundFillColorDefaultBrush}" CornerRadius="8" Margin="0,0,0,15"
+                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+            <Grid>
+                <Image x:Name="imgPreview" Margin="15"/>
+                <!-- Detection overlay canvas (for scissors mode) -->
+                <Canvas x:Name="detectionOverlay" IsHitTestVisible="False"/>
+                <ui:TextBlock x:Name="txtPlaceholder" Text="Drag images here to optimise"
+                              HorizontalAlignment="Center" VerticalAlignment="Center" Appearance="Tertiary"/>
+            </Grid>
+        </Border>
+
+        <!-- Row 3: Index input (Collapsed by default — visible when scissors active) -->
+        <StackPanel x:Name="indexInputPanel" Grid.Row="3" Visibility="Collapsed">
+            <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="11" Margin="2,0,0,3"
+                       Text="Use &quot;-&quot; to skip an object (e.g. 4 - 2 3 1)"/>
+            <ui:TextBox x:Name="inputIndices"
+                        PlaceholderText="Insert Indexes (ex. 4 5 2 3 1)..."
+                        AcceptsReturn="True" MinHeight="60" Margin="0,0,0,10"
+                        VerticalContentAlignment="Top" TextWrapping="Wrap"
+                        PreviewKeyDown="InputIndices_PreviewKeyDown"
+                        TextChanged="InputIndices_TextChanged"/>
+        </StackPanel>
+
+        <!-- Row 4: Button bar -->
+        <Grid Grid.Row="4" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <ui:Button x:Name="btnUploadWiki" Grid.Column="0"
+                       Content="Upload to Wiki" Icon="{ui:SymbolIcon ArrowUpload24}"
+                       Appearance="Primary" Height="45" Padding="16,0"
+                       IsEnabled="False" Click="BtnUploadWiki_Click"
+                       HorizontalAlignment="Left" Margin="0,0,10,0"
+                       ToolTip="Optimize images first"
+                       ToolTipService.InitialShowDelay="0"
+                       ToolTipService.ShowOnDisabled="True"/>
+
+            <ui:Button x:Name="btnOptimizeAll" Grid.Column="1"
+                       Content="Optimize All (TinyPNG)" Icon="{ui:SymbolIcon ArrowDownload24}"
+                       Appearance="Secondary" Height="45"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                       Click="BtnOptimizeAll_Click"
+                       ToolTipService.InitialShowDelay="0"
+                       ToolTipService.ShowOnDisabled="True"/>
+
+            <!-- Name source dropdown (visible for multi-image clusters) -->
+            <ComboBox x:Name="cmbNameSource" Grid.Column="2"
+                      Visibility="Collapsed" Height="45" MinWidth="180"
+                      Margin="10,0,0,0" VerticalAlignment="Bottom"
+                      SelectionChanged="CmbNameSource_SelectionChanged"/>
+
+            <ui:Button x:Name="btnSplit" Grid.Column="3"
+                       Content="Split" Icon="{ui:SymbolIcon Cut24}"
+                       Appearance="Primary" Height="45" Width="140"
+                       Margin="10,0,0,0" VerticalAlignment="Bottom"
+                       Visibility="Collapsed" Click="BtnSplit_Click"/>
+        </Grid>
+
+        <!-- Row 5: InfoBar (MinHeight reserves space to prevent preview resize) -->
+        <Grid Grid.Row="5" MinHeight="48">
+            <ui:InfoBar x:Name="infoBar" IsOpen="False" IsClosable="True"/>
+        </Grid>
+    </Grid>
+</UserControl>

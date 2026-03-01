@@ -68,7 +68,7 @@
                                        Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
                                        HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
-                        <TextBlock Text="Create a new bot password" FontSize="14" FontWeight="SemiBold"
+                        <TextBlock Text="Create a new bot" FontSize="14" FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                    VerticalAlignment="Center" Margin="10,0,0,0" />
                     </StackPanel>

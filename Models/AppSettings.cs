@@ -22,8 +22,7 @@ public class AppSettings
 
     // Image Extractor
     public string ImageExporterBasePath { get; set; } = "";
-    public string ImageExporterCustomOutputPath { get; set; } = "";
-    public string BundleDownloaderCustomOutputPath { get; set; } = "";
+    public string SelectedApkVersion { get; set; } = "";
 
     // Area Flowcharts
     public string FlowchartOutputPath { get; set; } = "";
@@ -43,6 +42,12 @@ public class AppSettings
     public string WikiPassword { get; set; } = "";
     public bool WikiVerified { get; set; } = false;
     public string WikiVerifiedDisplayName { get; set; } = ""; // Fandom username after successful verify
+
+    // OOBE (first-run wizard)
+    public bool OobeCompleted { get; set; } = false;
+
+    // Image Extractor — advanced
+    public bool ExtractIncludeBuiltIn { get; set; } = false;
 
     // Debug
     public bool DebugMode { get; set; } = false;

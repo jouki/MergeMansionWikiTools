@@ -30,7 +30,14 @@ public static class WikiMappingService
 
     private static readonly JsonSerializerOptions JsonOpts = new() { WriteIndented = true };
 
-    private static readonly HttpClient Http = new();
+    private static readonly HttpClient Http = CreateHttpClient();
+
+    private static HttpClient CreateHttpClient()
+    {
+        var client = new HttpClient(new HttpClientHandler { UseProxy = false });
+        client.DefaultRequestHeaders.UserAgent.ParseAdd("MergeMansionWikiTools/1.0");
+        return client;
+    }
 
     private const string ApiUrl =
         "https://merge-mansion.fandom.com/api.php?action=query" +
@@ -48,7 +55,7 @@ public static class WikiMappingService
                        ?? new WikiMappingCache();
             }
         }
-        catch { /* Return empty on error */ }
+        catch (Exception ex) { AppLogger.Error("WikiMappingService.Load failed", ex); }
 
         return new WikiMappingCache();
     }
@@ -60,7 +67,7 @@ public static class WikiMappingService
             var json = JsonSerializer.Serialize(cache, JsonOpts);
             File.WriteAllText(CachePath, json);
         }
-        catch { /* Silently fail */ }
+        catch (Exception ex) { AppLogger.Error("WikiMappingService.Save failed", ex); }
     }
 
     public static bool NeedsRefresh(WikiMappingCache cache)
@@ -74,6 +81,7 @@ public static class WikiMappingService
     /// </summary>
     public static async Task<WikiMappingCache> FetchFromWikiAsync()
     {
+        using var _t = AppLogger.Timed("WikiMapping.FetchFromWikiAsync");
         var response = await Http.GetStringAsync(ApiUrl);
         var doc = JsonDocument.Parse(response);
 
@@ -271,10 +279,12 @@ public static class WikiMappingService
     /// <summary>
     /// Resolves the wiki filename for a chain by invoking Module:Utils FormatFileName.
     /// Returns e.g. "MagicFlower01.png" for chain "Magic Flower" at level 1.
+    /// When suppressLevel is true, returns e.g. "MagicFlower.png" (no level suffix).
     /// </summary>
-    public static async Task<string?> ResolveWikiFilenameAsync(string chainName)
+    public static async Task<string?> ResolveWikiFilenameAsync(string chainName, bool suppressLevel = false)
     {
-        var text = Uri.EscapeDataString($"{{{{#invoke:Utils|FormatFileName|{chainName}|1}}}}");
+        var suppressArg = suppressLevel ? "|true" : "";
+        var text = Uri.EscapeDataString($"{{{{#invoke:Utils|FormatFileName|{chainName}|1{suppressArg}}}}}");
         var url = $"{BaseApiUrl}?action=expandtemplates&text={text}&prop=wikitext&format=json";
         var json = await Http.GetStringAsync(url);
         var doc = JsonDocument.Parse(json);
@@ -1108,5 +1118,562 @@ public static class WikiMappingService
         if (idx > 0)
             return name[..idx].TrimEnd();
         return name;
+    }
+
+    // ── Module Date Checking ─────────────────────────────────────────
+
+    /// <summary>
+    /// Reads the first line of a wiki module looking for "-- createdAt: ..." comment.
+    /// Returns the date string, or null if the module doesn't exist or has no createdAt.
+    /// </summary>
+    public static async Task<string?> FetchModuleCreatedAtAsync(string moduleTitle)
+    {
+        try
+        {
+            var url = $"{BaseApiUrl}?action=query" +
+                      $"&titles={Uri.EscapeDataString(moduleTitle)}" +
+                      "&prop=revisions&rvprop=content&rvslots=main&format=json";
+            var json = await Http.GetStringAsync(url);
+            var doc = JsonDocument.Parse(json);
+
+            var pages = doc.RootElement.GetProperty("query").GetProperty("pages");
+            foreach (var page in pages.EnumerateObject())
+            {
+                if (page.Value.TryGetProperty("missing", out _)) return null;
+                if (page.Value.TryGetProperty("revisions", out var revs) && revs.GetArrayLength() > 0)
+                {
+                    var content = revs[0].GetProperty("slots").GetProperty("main")
+                        .GetProperty("*").GetString() ?? "";
+                    // Parse first line: "-- createdAt: 2025-05-01T12:00:00Z"
+                    var firstLine = content.Split('\n', 2)[0];
+                    if (firstLine.StartsWith("-- createdAt: "))
+                        return firstLine["-- createdAt: ".Length..].Trim();
+                }
+            }
+        }
+        catch { }
+        return null;
+    }
+
+    /// <summary>
+    /// Fetches the full content of a wiki module (unauthenticated read).
+    /// Returns null if the module doesn't exist.
+    /// </summary>
+    public static async Task<string?> FetchModuleContentAsync(string moduleTitle)
+    {
+        try
+        {
+            var url = $"{BaseApiUrl}?action=query" +
+                      $"&titles={Uri.EscapeDataString(moduleTitle)}" +
+                      "&prop=revisions&rvprop=content&rvslots=main&format=json";
+            var json = await Http.GetStringAsync(url);
+            var doc = JsonDocument.Parse(json);
+
+            var pages = doc.RootElement.GetProperty("query").GetProperty("pages");
+            foreach (var page in pages.EnumerateObject())
+            {
+                if (page.Value.TryGetProperty("missing", out _)) return null;
+                if (page.Value.TryGetProperty("revisions", out var revs) && revs.GetArrayLength() > 0)
+                {
+                    return revs[0].GetProperty("slots").GetProperty("main")
+                        .GetProperty("*").GetString();
+                }
+            }
+        }
+        catch (Exception ex) { AppLogger.Error($"FetchModuleContentAsync({moduleTitle}) failed", ex); }
+        return null;
+    }
+
+    /// <summary>
+    /// Extracts the createdAt date from a module content's first line comment.
+    /// </summary>
+    public static string? ExtractCreatedAtFromContent(string? content)
+    {
+        if (string.IsNullOrEmpty(content)) return null;
+        var firstLine = content.Split('\n', 2)[0];
+        if (firstLine.StartsWith("-- createdAt: "))
+            return firstLine["-- createdAt: ".Length..].Trim();
+        return null;
+    }
+
+    /// <summary>
+    /// Extracts top-level Lua table keys from a specific p.XXX = {...} section.
+    /// Pattern matches: \n\t["key"] entries (one-tab indentation = top-level).
+    /// If tableName is provided, only keys from that section are extracted.
+    /// </summary>
+    public static HashSet<string> ExtractLuaTableKeys(string content, string? tableName = null)
+    {
+        var keys = new HashSet<string>();
+        var section = GetTableSection(content, tableName);
+        if (section == null) return keys;
+
+        foreach (Match m in Regex.Matches(section, @"\n\t\[""([^""]+)""\]"))
+            keys.Add(m.Groups[1].Value);
+        return keys;
+    }
+
+    /// <summary>
+    /// Extracts top-level Lua table entries as key → full entry line (single-line entries).
+    /// Used for detecting modified values, not just added/removed keys.
+    /// </summary>
+    public static Dictionary<string, string> ExtractLuaTableEntries(string content, string tableName)
+    {
+        var entries = new Dictionary<string, string>();
+        var section = GetTableSection(content, tableName);
+        if (section == null) return entries;
+
+        foreach (Match m in Regex.Matches(section, @"\n\t\[""([^""]+)""\] = (\{[^\n]+\})"))
+            entries.TryAdd(m.Groups[1].Value, m.Groups[2].Value);
+        return entries;
+    }
+
+    /// <summary>
+    /// Extracts top-level Lua area entries as key → full multi-line block text.
+    /// Area entries span multiple lines with nested braces (tasks, requirements, etc.).
+    /// Uses brace-depth tracking to capture complete blocks.
+    /// </summary>
+    public static Dictionary<string, string> ExtractLuaAreaEntries(string content, string tableName = "areas")
+    {
+        var entries = new Dictionary<string, string>();
+        var section = GetTableSection(content, tableName);
+        if (section == null) return entries;
+
+        // Find each top-level entry: \n\t["key"] = {
+        var entryPattern = new Regex(@"\n\t\[""([^""]+)""\]\s*=\s*\{");
+        var matches = entryPattern.Matches(section);
+
+        for (int m = 0; m < matches.Count; m++)
+        {
+            var key = matches[m].Groups[1].Value;
+            // Start after the opening brace of the entry
+            var braceStart = matches[m].Index + matches[m].Length - 1; // points to '{'
+            var blockStart = braceStart;
+
+            // Track brace depth (starting at 1 for the opening brace we found)
+            int depth = 1;
+            bool inString = false;
+            int i = braceStart + 1;
+
+            while (i < section.Length && depth > 0)
+            {
+                char c = section[i];
+                if (c == '"' && (i == 0 || section[i - 1] != '\\'))
+                    inString = !inString;
+                if (!inString)
+                {
+                    if (c == '{') depth++;
+                    else if (c == '}') depth--;
+                }
+                i++;
+            }
+
+            if (depth == 0)
+            {
+                // Capture the full block including outer braces
+                var block = section[blockStart..i];
+                entries.TryAdd(key, block);
+            }
+        }
+
+        return entries;
+    }
+
+    private static string? GetTableSection(string content, string? tableName)
+    {
+        if (tableName == null) return content;
+
+        var marker = "p." + tableName + " = {";
+        var startIdx = content.IndexOf(marker);
+        if (startIdx < 0) return null;
+        startIdx += marker.Length;
+
+        var endIdx = content.IndexOf("\n}", startIdx);
+        if (endIdx < 0) endIdx = content.Length;
+        return content[startIdx..endIdx];
+    }
+
+    // ── Area Module Publishing ────────────────────────────────────────
+
+    /// <summary>
+    /// Queries which Module:Datatable/Areas/N subpages exist on the wiki.
+    /// Returns a sorted list of integer indices (e.g. [1, 2, 3]).
+    /// </summary>
+    public static async Task<List<int>> QueryExistingAreaModulesAsync()
+    {
+        var results = new List<int>();
+        string? apcontinue = null;
+
+        do
+        {
+            var url = $"{BaseApiUrl}?action=query&list=allpages" +
+                      "&apprefix=Datatable/Areas/&apnamespace=828&aplimit=100&format=json";
+            if (apcontinue != null)
+                url += $"&apcontinue={Uri.EscapeDataString(apcontinue)}";
+
+            var json = await Http.GetStringAsync(url);
+            var doc = JsonDocument.Parse(json);
+
+            if (doc.RootElement.TryGetProperty("query", out var query)
+                && query.TryGetProperty("allpages", out var pages))
+            {
+                foreach (var page in pages.EnumerateArray())
+                {
+                    var title = page.GetProperty("title").GetString() ?? "";
+                    // title = "Module:Datatable/Areas/1" etc.
+                    var lastSlash = title.LastIndexOf('/');
+                    if (lastSlash >= 0 && int.TryParse(title[(lastSlash + 1)..], out var idx))
+                        results.Add(idx);
+                }
+            }
+
+            apcontinue = null;
+            if (doc.RootElement.TryGetProperty("continue", out var cont)
+                && cont.TryGetProperty("apcontinue", out var apc))
+            {
+                apcontinue = apc.GetString();
+            }
+        } while (apcontinue != null);
+
+        results.Sort();
+        return results;
+    }
+
+    /// <summary>
+    /// Edits (creates or overwrites) a Lua module page on the wiki.
+    /// Returns the edit result string ("Success" / "nochange").
+    /// </summary>
+    public static async Task<string> EditModuleAsync(
+        HttpClient client, string csrfToken,
+        string title, string content, string summary)
+    {
+        AppLogger.Info($"EditModule: {title}");
+        using var _t = AppLogger.Timed($"EditModuleAsync({title})");
+        var editContent = new FormUrlEncodedContent(new Dictionary<string, string>
+        {
+            ["action"] = "edit",
+            ["title"] = title,
+            ["text"] = content,
+            ["token"] = csrfToken,
+            ["summary"] = summary,
+            ["bot"] = "1",
+            ["format"] = "json",
+        });
+        var resp = await client.PostAsync(BaseApiUrl, editContent);
+        var raw = await resp.Content.ReadAsStringAsync();
+        var doc = JsonDocument.Parse(raw);
+
+        if (doc.RootElement.TryGetProperty("error", out var error))
+            throw new Exception($"Edit failed on \"{title}\": {error.GetProperty("info").GetString()}");
+
+        if (doc.RootElement.TryGetProperty("edit", out var edit)
+            && edit.TryGetProperty("result", out var result))
+            return result.GetString() ?? "Unknown";
+
+        return "Unknown";
+    }
+
+    /// <summary>
+    /// Generates the arbiter Lua module that requires and combines area data chunks.
+    /// </summary>
+    public static string GenerateAreasArbiterLua(int chunkCount)
+    {
+        var sb = new System.Text.StringBuilder();
+        sb.AppendLine("local p = {}");
+
+        for (int i = 1; i <= chunkCount; i++)
+            sb.AppendLine($"local areas_{i} = require('Module:Datatable/Areas/{i}')");
+
+        sb.AppendLine();
+        sb.AppendLine("p.areas = {");
+        for (int i = 1; i <= chunkCount; i++)
+        {
+            var comma = i < chunkCount ? "," : "";
+            sb.AppendLine($"\tareas{i} = areas_{i}.areas{comma}");
+        }
+        sb.AppendLine("}");
+        sb.AppendLine();
+        sb.AppendLine("return p");
+
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Fetches ordering indices from Module:Datatable/Areas/Mapping.
+    /// Returns a dictionary of area name → orderingIndex.
+    /// </summary>
+    public static async Task<Dictionary<string, double>> FetchAreaOrderingAsync()
+    {
+        var result = new Dictionary<string, double>();
+        try
+        {
+            var content = await FetchModuleContentAsync("Module:Datatable/Areas/Mapping");
+            if (content == null) return result;
+
+            // Pattern: ["AreaName"] = {orderingIndex = N} (N can be int or decimal like 8.5)
+            foreach (Match m in Regex.Matches(content,
+                @"\[""([^""]+)""\]\s*=\s*\{[^}]*orderingIndex\s*=\s*([0-9.]+)"))
+            {
+                if (double.TryParse(m.Groups[2].Value,
+                        System.Globalization.NumberStyles.Any,
+                        System.Globalization.CultureInfo.InvariantCulture, out var idx))
+                    result.TryAdd(m.Groups[1].Value, idx);
+            }
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Error("FetchAreaOrderingAsync failed", ex);
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// Updates the wiki "Modules" page to include/update Areas submodule links.
+    /// Preserves existing non-numeric submodule lines and adds numeric chunk links with area ranges.
+    /// </summary>
+    public static async Task UpdateAreasModulesPageAsync(
+        HttpClient client, string csrfToken, int chunkCount, List<(string Label, string Lua)> chunks)
+    {
+        // Fetch current wikitext of the "Modules" page
+        var url = $"{BaseApiUrl}?action=query" +
+                  $"&titles={Uri.EscapeDataString("Modules")}" +
+                  "&prop=revisions&rvprop=content&rvslots=main&format=json";
+        var json = await Http.GetStringAsync(url);
+        var doc = JsonDocument.Parse(json);
+
+        string? wikitext = null;
+        var pages = doc.RootElement.GetProperty("query").GetProperty("pages");
+        foreach (var page in pages.EnumerateObject())
+        {
+            if (page.Value.TryGetProperty("missing", out _)) return;
+            if (page.Value.TryGetProperty("revisions", out var revs) && revs.GetArrayLength() > 0)
+            {
+                wikitext = revs[0].GetProperty("slots").GetProperty("main")
+                    .GetProperty("*").GetString();
+            }
+        }
+
+        if (string.IsNullOrEmpty(wikitext)) return;
+
+        // Find the Areas section
+        var lines = wikitext.Split('\n').ToList();
+        var areasLineIdx = -1;
+        for (int i = 0; i < lines.Count; i++)
+        {
+            var trimmed = lines[i].TrimStart();
+            if (trimmed.StartsWith('*') &&
+                (trimmed.Contains("[[Module:Datatable/Areas|") ||
+                 trimmed.Contains("[[Module:Datatable/Areas]]")))
+            {
+                areasLineIdx = i;
+                break;
+            }
+        }
+
+        if (areasLineIdx < 0) return; // Areas section not found
+
+        // Collect existing sub-entries under the Areas line (** lines)
+        var subStart = areasLineIdx + 1;
+        var subEnd = subStart;
+        while (subEnd < lines.Count && lines[subEnd].TrimStart().StartsWith("**"))
+            subEnd++;
+
+        // Preserve non-numeric submodule lines
+        var preserved = new List<string>();
+        for (int i = subStart; i < subEnd; i++)
+        {
+            if (!Regex.IsMatch(lines[i], @"\[\[Module:Datatable/Areas/\d+\|"))
+                preserved.Add(lines[i]);
+        }
+
+        // Build new submodule lines: preserved + numeric chunks with area ranges
+        var newSubLines = new List<string>();
+        newSubLines.AddRange(preserved);
+        for (int i = 1; i <= chunkCount; i++)
+        {
+            var line = $"** '''[[Module:Datatable/Areas/{i}|Datatable/Areas/{i}]]'''";
+            if (i <= chunks.Count && !string.IsNullOrEmpty(chunks[i - 1].Label))
+                line += $" — Areas {chunks[i - 1].Label}";
+            newSubLines.Add(line);
+        }
+
+        // Replace the old sub-entries
+        lines.RemoveRange(subStart, subEnd - subStart);
+        lines.InsertRange(subStart, newSubLines);
+
+        var newWikitext = string.Join('\n', lines);
+        if (newWikitext == wikitext) return; // no changes
+
+        await EditModuleAsync(client, csrfToken, "Modules", newWikitext,
+            $"Update Areas submodule links ({chunkCount} chunks) (via MergeMansionWikiTools)");
+    }
+
+    // ── Item Module Publishing ────────────────────────────────────────
+
+    /// <summary>
+    /// Queries which Module:Datatable/Items/N subpages exist on the wiki.
+    /// Returns a sorted list of integer indices (e.g. [1, 2]).
+    /// Filters out non-numeric suffixes (e.g. "Mapping").
+    /// </summary>
+    public static async Task<List<int>> QueryExistingItemModulesAsync()
+    {
+        var results = new List<int>();
+        string? apcontinue = null;
+
+        do
+        {
+            var url = $"{BaseApiUrl}?action=query&list=allpages" +
+                      "&apprefix=Datatable/Items/&apnamespace=828&aplimit=100&format=json";
+            if (apcontinue != null)
+                url += $"&apcontinue={Uri.EscapeDataString(apcontinue)}";
+
+            var json = await Http.GetStringAsync(url);
+            var doc = JsonDocument.Parse(json);
+
+            if (doc.RootElement.TryGetProperty("query", out var query)
+                && query.TryGetProperty("allpages", out var pages))
+            {
+                foreach (var page in pages.EnumerateArray())
+                {
+                    var title = page.GetProperty("title").GetString() ?? "";
+                    // title = "Module:Datatable/Items/1" etc.
+                    var lastSlash = title.LastIndexOf('/');
+                    if (lastSlash >= 0 && int.TryParse(title[(lastSlash + 1)..], out var idx))
+                        results.Add(idx);
+                }
+            }
+
+            apcontinue = null;
+            if (doc.RootElement.TryGetProperty("continue", out var cont)
+                && cont.TryGetProperty("apcontinue", out var apc))
+            {
+                apcontinue = apc.GetString();
+            }
+        } while (apcontinue != null);
+
+        results.Sort();
+        return results;
+    }
+
+    /// <summary>
+    /// Generates the arbiter Lua module for Items that requires and flat-merges item data chunks
+    /// and includes p.chainNames directly.
+    /// Unlike Areas (which uses nested tables), Items uses a FLAT merge because Module:Items
+    /// iterates with "for id, item in pairs(itemsData.items)".
+    /// </summary>
+    public static string GenerateItemsArbiterLua(
+        int chunkCount, string chainNamesBlock, string? createdAt = null)
+    {
+        var sb = new System.Text.StringBuilder();
+        if (!string.IsNullOrEmpty(createdAt))
+            sb.AppendLine($"-- createdAt: {createdAt}");
+        sb.AppendLine("local str = require('Module:Strings')");
+        sb.AppendLine("local p = {}");
+
+        for (int i = 1; i <= chunkCount; i++)
+            sb.AppendLine($"local items_{i} = require('Module:Datatable/Items/{i}')");
+
+        sb.AppendLine();
+        sb.AppendLine("p.items = items_1.items");
+        for (int i = 2; i <= chunkCount; i++)
+            sb.AppendLine($"for k, v in pairs(items_{i}.items) do p.items[k] = v end");
+
+        sb.AppendLine();
+        sb.AppendLine(chainNamesBlock);
+        sb.AppendLine();
+        sb.AppendLine("return p");
+
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Updates the wiki "Modules" page to include/update Items submodule links.
+    /// Preserves existing non-numeric submodules (e.g. Mapping) and adds numeric chunk links.
+    /// </summary>
+    public static async Task UpdateModulesPageAsync(
+        HttpClient client, string csrfToken, int chunkCount, int firstEventChunkIndex = 0)
+    {
+        // Fetch current wikitext of the "Modules" page
+        var content = await FetchModuleContentAsync("Modules");
+        if (content == null) return; // page doesn't exist, skip
+
+        // Note: FetchModuleContentAsync uses ns=Module by default via titles=,
+        // but "Modules" is in main namespace — need direct fetch
+        var url = $"{BaseApiUrl}?action=query" +
+                  $"&titles={Uri.EscapeDataString("Modules")}" +
+                  "&prop=revisions&rvprop=content&rvslots=main&format=json";
+        var json = await Http.GetStringAsync(url);
+        var doc = JsonDocument.Parse(json);
+
+        string? wikitext = null;
+        var pages = doc.RootElement.GetProperty("query").GetProperty("pages");
+        foreach (var page in pages.EnumerateObject())
+        {
+            if (page.Value.TryGetProperty("missing", out _)) return;
+            if (page.Value.TryGetProperty("revisions", out var revs) && revs.GetArrayLength() > 0)
+            {
+                wikitext = revs[0].GetProperty("slots").GetProperty("main")
+                    .GetProperty("*").GetString();
+            }
+        }
+
+        if (string.IsNullOrEmpty(wikitext)) return;
+
+        // Find the Items section and update submodule lines
+        var lines = wikitext.Split('\n').ToList();
+        var itemsLineIdx = -1;
+        for (int i = 0; i < lines.Count; i++)
+        {
+            var trimmed = lines[i].TrimStart();
+            if (trimmed.StartsWith('*') &&
+                (trimmed.Contains("[[Module:Datatable/Items|") ||
+                 trimmed.Contains("[[Module:Datatable/Items]]")))
+            {
+                itemsLineIdx = i;
+                break;
+            }
+        }
+
+        if (itemsLineIdx < 0) return; // Items section not found
+
+        // Collect existing sub-entries under the Items line (** lines)
+        var subStart = itemsLineIdx + 1;
+        var subEnd = subStart;
+        while (subEnd < lines.Count && lines[subEnd].TrimStart().StartsWith("**"))
+            subEnd++;
+
+        // Preserve non-numeric submodule lines (e.g. Mapping)
+        var preserved = new List<string>();
+        for (int i = subStart; i < subEnd; i++)
+        {
+            // Keep lines that are NOT numeric chunk links
+            if (!Regex.IsMatch(lines[i], @"\[\[Module:Datatable/Items/\d+\|"))
+                preserved.Add(lines[i]);
+        }
+
+        // Build new submodule lines: preserved + numeric chunks (with main/event annotations)
+        var newSubLines = new List<string>();
+        newSubLines.AddRange(preserved);
+        for (int i = 1; i <= chunkCount; i++)
+        {
+            var line = $"** '''[[Module:Datatable/Items/{i}|Datatable/Items/{i}]]'''";
+            if (firstEventChunkIndex > 0)
+            {
+                if (i == 1)
+                    line += " — Main items";
+                else if (i == firstEventChunkIndex)
+                    line += " — Event items onwards";
+            }
+            newSubLines.Add(line);
+        }
+
+        // Replace the old sub-entries
+        lines.RemoveRange(subStart, subEnd - subStart);
+        lines.InsertRange(subStart, newSubLines);
+
+        var newWikitext = string.Join('\n', lines);
+        if (newWikitext == wikitext) return; // no changes
+
+        await EditModuleAsync(client, csrfToken, "Modules", newWikitext,
+            $"Update Items submodule links ({chunkCount} chunks) (via MergeMansionWikiTools)");
     }
 }

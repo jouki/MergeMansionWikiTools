@@ -21,7 +21,7 @@ public static class UserStatsService
                 return JsonSerializer.Deserialize<UserStats>(json, JsonOpts) ?? new UserStats();
             }
         }
-        catch { }
+        catch (Exception ex) { AppLogger.Error("UserStatsService.Load failed", ex); }
         return new UserStats();
     }
 
@@ -31,7 +31,7 @@ public static class UserStatsService
         {
             File.WriteAllText(StatsPath, JsonSerializer.Serialize(stats, JsonOpts));
         }
-        catch { }
+        catch (Exception ex) { AppLogger.Error("UserStatsService.Save failed", ex); }
     }
 
     public static void Increment(Action<UserStats> update)

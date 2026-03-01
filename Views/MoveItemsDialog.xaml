@@ -188,6 +188,17 @@
                                            Appearance="Secondary" Padding="12,6"
                                            Click="BtnChooseOtherName_Click" />
                             </StackPanel>
+
+                            <!-- Separator -->
+                            <Border Height="1" Margin="0,10,0,6"
+                                    Background="{DynamicResource ControlStrokeColorDefaultBrush}" />
+
+                            <!-- Mapping-only option -->
+                            <CheckBox x:Name="chkMappingOnly"
+                                      Content="Update Mapping Table only"
+                                      FontSize="12"
+                                      Checked="ChkMappingOnly_Changed"
+                                      Unchecked="ChkMappingOnly_Changed" />
                         </StackPanel>
                     </Border>
 

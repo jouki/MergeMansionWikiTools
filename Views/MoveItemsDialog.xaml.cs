@@ -35,6 +35,7 @@ public partial class MoveItemsDialog : FluentWindow
     private CancellationTokenSource? _searchCts;
     private bool _hasConflict;
     private bool _hasLevelCollision;
+    private bool _mappingOnly;
     private bool _suppressTextChanged; // prevent re-entry when setting text from suggestion
     private const int MaxSuggestions = 30;
 
@@ -318,7 +319,9 @@ public partial class MoveItemsDialog : FluentWindow
     {
         _conflictChain = null;
         _hasConflict = false;
+        _mappingOnly = false;
         conflictPanel.Visibility = Visibility.Collapsed;
+        chkMappingOnly.IsChecked = false;
         conflictImages.Children.Clear();
         UpdateConfirmEnabled();
     }
@@ -483,9 +486,15 @@ public partial class MoveItemsDialog : FluentWindow
     private void UpdateConfirmEnabled()
     {
         if (btnConfirm == null) return;
-        btnConfirm.IsEnabled = !_hasConflict && !_hasLevelCollision
+        btnConfirm.IsEnabled = (!_hasConflict || _mappingOnly) && !_hasLevelCollision
             && !string.IsNullOrWhiteSpace(txtChainName.Text)
             && _backlinksReady;
+    }
+
+    private void ChkMappingOnly_Changed(object sender, RoutedEventArgs e)
+    {
+        _mappingOnly = chkMappingOnly.IsChecked == true;
+        UpdateConfirmEnabled();
     }
 
     // ── Backlinks panel ───────────────────────────────────────────────
@@ -1032,6 +1041,38 @@ public partial class MoveItemsDialog : FluentWindow
         int? level = null;
         if (_singleItemMode)
             level = (int)(nbLevel.Value ?? _selectedItems[0].Level);
+
+        // ── Mapping-only shortcut: skip preview/move, just push Lua mapping ──
+        if (_mappingOnly)
+        {
+            btnConfirm.IsEnabled = false;
+            statusBar.Message = "Updating mapping...";
+            statusBar.Severity = InfoBarSeverity.Informational;
+            statusBar.IsOpen = true;
+
+            try
+            {
+                var settings = _main.Settings;
+                await WikiMappingService.PushItemMappingsAsync(
+                    settings.WikiUsername, settings.WikiPassword,
+                    _selectedItems, chainName, level);
+
+                Increment(s => s.MysteryPagesPublished++);
+
+                statusBar.Message = "Mapping updated successfully.";
+                statusBar.Severity = InfoBarSeverity.Success;
+                await Task.Delay(800);
+                DialogResult = true;
+                Close();
+            }
+            catch (Exception ex)
+            {
+                statusBar.Message = $"Error: {ex.Message}";
+                statusBar.Severity = InfoBarSeverity.Error;
+                btnConfirm.IsEnabled = true;
+            }
+            return;
+        }
 
         // ── Fetch preview data (images + reference counts + filenames) ──
         // Backlinks only relevant when page is being moved

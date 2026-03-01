@@ -111,8 +111,99 @@
             <ScrollViewer x:Name="panelGeneral" VerticalScrollBarVisibility="Auto">
                 <StackPanel MaxWidth="700" Margin="24,16">
 
-                    <!-- DUMP FILES -->
+                    <!-- WORKSPACE -->
                     <StackPanel Orientation="Horizontal" Margin="4,0,0,10">
+                        <ui:SymbolIcon Symbol="FolderOpen24" FontSize="20" Margin="0,0,8,0"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        <TextBlock Text="Workspace" FontSize="16" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                    </StackPanel>
+
+                    <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                            CornerRadius="8"
+                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                        <Border x:Name="apkSectionBorder" CornerRadius="4" Background="Transparent">
+                        <StackPanel Margin="16,14,16,12">
+                            <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                       TextWrapping="Wrap" Margin="0,0,0,8">
+                                <Run Text="Default folder for saving and browsing files. The app will start here when opening file dialogs." />
+                            </TextBlock>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <ui:TextBox x:Name="txtImageBasePath"
+                                            PlaceholderText="Optional — leave empty to start from default location..."
+                                            IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False"
+                                            Margin="0,0,8,0" />
+                                <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
+                                           Click="BrowseImageBasePath_Click" Margin="0,0,8,0" Height="36" />
+                                <ui:Button Grid.Column="2" Content="Clear" Appearance="Secondary"
+                                           Click="ClearImageBasePath_Click" Height="36" />
+                            </Grid>
+
+                            <Separator Opacity="0.15" Margin="-16,10,-16,12" />
+
+                            <TextBlock Text="Game Version" FontSize="13" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,0,0,4" />
+                            <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                       TextWrapping="Wrap" Margin="0,0,0,10">
+                                <Run Text="Select game version. APK is downloaded into a version subfolder inside your Workspace." />
+                            </TextBlock>
+
+                            <!-- Version + actions (single row) -->
+                            <Grid Margin="0,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Version:" FontSize="12" VerticalAlignment="Center"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                           Margin="0,0,8,0" />
+                                <ComboBox x:Name="cmbApkVersion" Grid.Column="1" MinWidth="160"
+                                         SelectionChanged="CmbApkVersion_SelectionChanged" />
+                                <ui:Button x:Name="btnRefreshVersions" Grid.Column="2"
+                                           Content="↻" Appearance="Secondary" Height="36" Width="36"
+                                           Click="BtnRefreshVersions_Click" Margin="8,0,0,0"
+                                           ToolTipService.InitialShowDelay="0" ToolTip="Refresh version list" />
+                                <!-- Spacer column 3 -->
+                                <ui:Button x:Name="btnOpenApkFolder" Grid.Column="4"
+                                           Content="Open Folder" Appearance="Secondary" Height="36"
+                                           Click="BtnOpenApkFolder_Click" Margin="0,0,8,0"
+                                           Visibility="Collapsed" />
+                                <ui:Button x:Name="btnCancelDownload" Grid.Column="5"
+                                           Content="Cancel" Appearance="Secondary" Height="36"
+                                           Click="BtnCancelDownload_Click" Margin="0,0,8,0"
+                                           Visibility="Collapsed" />
+                                <ui:Button x:Name="btnDownloadApk" Grid.Column="6"
+                                           Content="Download APK" Appearance="Primary" Height="36"
+                                           Click="BtnDownloadApk_Click" />
+                            </Grid>
+
+                            <!-- Status text -->
+                            <Grid Margin="0,6,0,0">
+                                <TextBlock x:Name="txtApkDownloadStatus"
+                                           VerticalAlignment="Center" TextWrapping="Wrap"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12" />
+                            </Grid>
+
+                            <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
+                                       Margin="0,8,0,0">
+                                <Run Text="Downloads may fail due to Cloudflare protection." />
+                            </TextBlock>
+                        </StackPanel>
+                        </Border>
+                    </Border>
+
+                    <!-- DUMP FILES -->
+                    <StackPanel Orientation="Horizontal" Margin="4,28,0,10">
                         <ui:SymbolIcon Symbol="Database24" FontSize="20" Margin="0,0,8,0"
                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                         <TextBlock Text="Dump Files" FontSize="16" FontWeight="SemiBold"
@@ -121,7 +212,8 @@
 
                     <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
                             CornerRadius="8"
-                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1"
+                            AllowDrop="True" DragOver="FileDragOver" Drop="DumpFilesCardDrop">
                         <StackPanel>
 
                             <!-- chain_item_odds.json -->
@@ -240,45 +332,6 @@
                             </Grid>
                         </StackPanel>
                     </Border>
-
-                    <!-- WORKSPACE -->
-                    <StackPanel Orientation="Horizontal" Margin="4,28,0,10">
-                        <ui:SymbolIcon Symbol="FolderOpen24" FontSize="20" Margin="0,0,8,0"
-                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                        <TextBlock Text="Workspace" FontSize="16" FontWeight="SemiBold"
-                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                    </StackPanel>
-
-                    <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                            CornerRadius="8"
-                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
-                        <StackPanel Margin="16,14,16,12">
-                            <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
-                                       TextWrapping="Wrap" Margin="0,0,0,8">
-                                <Run Text="Default folder for saving and browsing files. The app will start here when opening file dialogs." />
-                            </TextBlock>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <ui:TextBox x:Name="txtImageBasePath"
-                                            PlaceholderText="Optional — leave empty to start from default location..."
-                                            IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False"
-                                            Margin="0,0,8,0" />
-                                <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
-                                           Click="BrowseImageBasePath_Click" Margin="0,0,8,0" Height="36" />
-                                <ui:Button Grid.Column="2" Content="Clear" Appearance="Secondary"
-                                           Click="ClearImageBasePath_Click" Height="36" />
-                            </Grid>
-                        </StackPanel>
-                    </Border>
-
-                    <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
-                               Margin="4,6,0,0">
-                        <Run Text="Path is saved automatically." />
-                    </TextBlock>
 
                 </StackPanel>
             </ScrollViewer>
@@ -427,6 +480,7 @@
                                    Click="ResetFolderPreference_Click"
                                    Visibility="Collapsed" />
                     </StackPanel>
+
 
                 </StackPanel>
             </ScrollViewer>
@@ -582,25 +636,50 @@
                     <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
                             CornerRadius="8"
                             BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
-                        <StackPanel Margin="16,14,16,12">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                                    <TextBlock Text="Enable Debug Mode" FontSize="13" FontWeight="SemiBold"
-                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                                    <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
-                                               TextWrapping="Wrap" Margin="0,4,16,0">
-                                        <Run Text="When enabled, generated flowcharts are also saved to a 'FlowCharts' folder next to the .exe file. This allows external tools (e.g. Claude) to access SVG outputs directly." />
-                                    </TextBlock>
-                                </StackPanel>
-                                <ui:ToggleSwitch x:Name="toggleDebugMode" Grid.Column="1"
-                                                 VerticalAlignment="Center"
-                                                 Checked="ToggleDebugMode_Changed"
-                                                 Unchecked="ToggleDebugMode_Changed" />
-                            </Grid>
+                        <StackPanel>
+                            <StackPanel Margin="16,14,16,12">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                        <TextBlock Text="Enable Debug Mode" FontSize="13" FontWeight="SemiBold"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                        <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                                   TextWrapping="Wrap" Margin="0,4,16,0">
+                                            <Run Text="When enabled, generated flowcharts are also saved to a 'FlowCharts' folder next to the .exe file. This allows external tools (e.g. Claude) to access SVG outputs directly." />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <ui:ToggleSwitch x:Name="toggleDebugMode" Grid.Column="1"
+                                                     VerticalAlignment="Center"
+                                                     Checked="ToggleDebugMode_Changed"
+                                                     Unchecked="ToggleDebugMode_Changed" />
+                                </Grid>
+                            </StackPanel>
+
+                            <Separator Opacity="0.15" Margin="0" />
+
+                            <StackPanel Margin="16,12,16,12">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                        <TextBlock Text="Include built-in Unity assets" FontSize="13" FontWeight="SemiBold"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                        <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                                   TextWrapping="Wrap" Margin="0,4,16,0">
+                                            <Run Text="Also extract data.unity3d and default resources from the base APK. These are internal Unity files that usually don't contain useful textures." />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <ui:ToggleSwitch x:Name="toggleExtractBuiltIn" Grid.Column="1"
+                                                     VerticalAlignment="Center"
+                                                     Checked="ToggleExtractBuiltIn_Changed"
+                                                     Unchecked="ToggleExtractBuiltIn_Changed" />
+                                </Grid>
+                            </StackPanel>
                         </StackPanel>
                     </Border>
 

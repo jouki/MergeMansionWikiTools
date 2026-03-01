@@ -130,6 +130,14 @@ public partial class ChainBrowserPage : UserControl
 
         if (_main.DataService != null)
             OnDataLoaded();
+
+        _main.WikiVerifiedChanged += OnWikiVerifiedChanged;
+    }
+
+    private void OnWikiVerifiedChanged()
+    {
+        // Refresh upload button visibility (binding reads WikiVerified)
+        lvChains.Items.Refresh();
     }
 
     public void OnDataLoaded()
@@ -189,6 +197,7 @@ public partial class ChainBrowserPage : UserControl
 
     private void ApplyFilter()
     {
+        using var _t = AppLogger.Timed("FilterChains");
         if (lvChains == null) return;
 
         var search = txtSearch?.Text?.Trim() ?? "";
@@ -225,8 +234,32 @@ public partial class ChainBrowserPage : UserControl
         }
 
         var result = filtered.ToList();
+        AppLogger.Info($"FilterChains: {result.Count}/{_allChains.Count} matches, setting ItemsSource...");
         lvChains.ItemsSource = result;
         txtChainCount.Text = $"{result.Count} / {_allChains.Count} chains";
+
+        // Show hint when search matches exist but are hidden by filters
+        if (anyFilter && !string.IsNullOrEmpty(search))
+        {
+            var searchOnly = _allChains.Where(c =>
+                c.DisplayName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+                c.ConfigKey.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+                c.Items.Any(i => i.Name.Contains(search, StringComparison.OrdinalIgnoreCase)));
+            var hiddenCount = searchOnly.Count() - result.Count;
+            if (hiddenCount > 0)
+            {
+                txtFilterHint.Text = $"{hiddenCount} chain(s) match your search but are hidden by filters";
+                filterHint.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                filterHint.Visibility = Visibility.Collapsed;
+            }
+        }
+        else
+        {
+            filterHint.Visibility = Visibility.Collapsed;
+        }
     }
 
     /// <summary>
@@ -374,7 +407,7 @@ public partial class ChainBrowserPage : UserControl
         if (sender is not Wpf.Ui.Controls.Button btn || btn.Tag is not ChainViewModel vm)
             return;
 
-        _main.NavigateToImageSplitterChainMode(vm.Source);
+        _main.NavigateToImageOptimiserChainMode(vm.Source);
     }
 
     // ── Item selection & action bar ──────────────────────────────────

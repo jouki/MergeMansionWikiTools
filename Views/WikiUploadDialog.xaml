@@ -1,0 +1,55 @@
+<ui:FluentWindow x:Class="MergeMansionWikiTools.Views.WikiUploadDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="Upload to Wiki" SizeToContent="Height" MaxHeight="750"
+    Width="850" MinHeight="300"
+    WindowStartupLocation="CenterOwner"
+    ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica"
+    ResizeMode="CanResizeWithGrip">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Row 0: TitleBar -->
+        <ui:TitleBar Grid.Row="0" Title="Upload Images to Wiki" Height="36"/>
+
+        <!-- Row 1: Subtitle -->
+        <TextBlock Grid.Row="1" Margin="24,10,24,10"
+                   Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap">
+            Set the chain name for each image to resolve wiki filenames.
+        </TextBlock>
+
+        <!-- Row 2: Upload rows (built in code-behind) -->
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="24,0">
+            <StackPanel x:Name="uploadRowsPanel"/>
+        </ScrollViewer>
+
+        <!-- Row 3: ProgressBar (collapsed until upload) -->
+        <ProgressBar x:Name="progressBar" Grid.Row="3" Margin="24,10" Visibility="Collapsed" Height="4"/>
+
+        <!-- Row 4: InfoBar -->
+        <ui:InfoBar x:Name="infoBar" Grid.Row="4" Margin="24,0" IsOpen="False" IsClosable="True"/>
+
+        <!-- Row 5: Buttons -->
+        <Grid Grid.Row="5" Margin="24,10,24,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <ui:Button Content="Close" Icon="{ui:SymbolIcon Dismiss24}" Appearance="Secondary"
+                       Width="120" Click="BtnClose_Click"/>
+            <ui:Button x:Name="btnUpload" Grid.Column="2" Content="Upload" Icon="{ui:SymbolIcon ArrowUpload24}"
+                       Appearance="Primary" Width="160" Click="BtnUpload_Click"/>
+        </Grid>
+    </Grid>
+</ui:FluentWindow>

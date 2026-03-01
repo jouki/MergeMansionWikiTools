@@ -14,6 +14,8 @@ public partial class SettingsPage : UserControl
     private readonly MainWindow _main;
     private ScrollViewer[] _tabPanels = null!;
     private int _currentTabIndex;
+    private List<ApkDownloadService.ApkVersionInfo>? _apkVersions;
+    private string? _lastApkDir;
 
     public SettingsPage(MainWindow main)
     {
@@ -36,6 +38,9 @@ public partial class SettingsPage : UserControl
 
         // Debug mode
         toggleDebugMode.IsChecked = _main.Settings.DebugMode;
+
+        // Image Extractor advanced
+        toggleExtractBuiltIn.IsChecked = _main.Settings.ExtractIncludeBuiltIn;
 
         // Clipboard settings
         toggleClipboardAutoAdd.IsChecked = _main.Settings.ClipboardAutoAdd;
@@ -63,6 +68,13 @@ public partial class SettingsPage : UserControl
 
         // Position tab indicator after layout
         Loaded += (_, _) => UpdateTabIndicator(animate: false);
+
+        // Subscribe to wizard download status (if a download was started during OOBE)
+        SetupWizard.DownloadStatusUpdated += OnWizardDownloadStatus;
+        Unloaded += (_, _) => SetupWizard.DownloadStatusUpdated -= OnWizardDownloadStatus;
+
+        // APK version list (fire-and-forget, non-blocking)
+        _ = LoadApkVersionsAsync();
     }
 
     // ── Tab bar ──
@@ -151,6 +163,13 @@ public partial class SettingsPage : UserControl
 
     private async void ChainFileDrop(object sender, DragEventArgs e)
     {
+        var files = (string[]?)e.Data.GetData(DataFormats.FileDrop);
+        if (files is { Length: > 1 })
+        {
+            await AutoAssignDroppedFiles(files);
+            e.Handled = true;
+            return;
+        }
         var path = GetDroppedFilePath(e);
         if (path != null)
         {
@@ -158,26 +177,124 @@ public partial class SettingsPage : UserControl
             SaveChainPath(path);
             await _main.LoadDataAsync(path);
         }
+        e.Handled = true;
     }
 
-    private void AreasFileDrop(object sender, DragEventArgs e)
+    private async void AreasFileDrop(object sender, DragEventArgs e)
     {
+        var files = (string[]?)e.Data.GetData(DataFormats.FileDrop);
+        if (files is { Length: > 1 })
+        {
+            await AutoAssignDroppedFiles(files);
+            e.Handled = true;
+            return;
+        }
         var path = GetDroppedFilePath(e);
         if (path != null)
         {
             txtAreasPath.Text = path;
             _main.SetAreasPath(path);
         }
+        e.Handled = true;
     }
 
-    private void EventsFileDrop(object sender, DragEventArgs e)
+    private async void EventsFileDrop(object sender, DragEventArgs e)
     {
+        var files = (string[]?)e.Data.GetData(DataFormats.FileDrop);
+        if (files is { Length: > 1 })
+        {
+            await AutoAssignDroppedFiles(files);
+            e.Handled = true;
+            return;
+        }
         var path = GetDroppedFilePath(e);
         if (path != null)
         {
             txtEventsPath.Text = path;
             _main.SetEventsPath(path);
         }
+        e.Handled = true;
+    }
+
+    private async void DumpFilesCardDrop(object sender, DragEventArgs e)
+    {
+        var files = (string[]?)e.Data.GetData(DataFormats.FileDrop);
+        if (files == null || files.Length == 0) return;
+
+        await AutoAssignDroppedFiles(files);
+        e.Handled = true;
+    }
+
+    private async Task AutoAssignDroppedFiles(string[] paths)
+    {
+        var jsonFiles = paths.Where(p => p.EndsWith(".json", StringComparison.OrdinalIgnoreCase)).ToArray();
+        if (jsonFiles.Length == 0)
+        {
+            _main.ShowStatus("No .json files found in the dropped files.", Wpf.Ui.Controls.InfoBarSeverity.Warning);
+            return;
+        }
+
+        var assigned = new List<string>();
+
+        foreach (var file in jsonFiles)
+        {
+            var type = DetectJsonFileType(file);
+            switch (type)
+            {
+                case "chain":
+                    txtChainPath.Text = file;
+                    SaveChainPath(file);
+                    await _main.LoadDataAsync(file);
+                    assigned.Add("chain_item_odds.json");
+                    break;
+                case "areas":
+                    txtAreasPath.Text = file;
+                    _main.SetAreasPath(file);
+                    assigned.Add("areas.json");
+                    break;
+                case "events":
+                    txtEventsPath.Text = file;
+                    _main.SetEventsPath(file);
+                    assigned.Add("events.json");
+                    break;
+            }
+        }
+
+        if (assigned.Count > 0)
+            _main.ShowStatus($"Assigned {assigned.Count} file{(assigned.Count > 1 ? "s" : "")}: {string.Join(", ", assigned)}", Wpf.Ui.Controls.InfoBarSeverity.Success);
+        else
+            _main.ShowStatus("Could not detect any known dump files.", Wpf.Ui.Controls.InfoBarSeverity.Warning);
+    }
+
+    private static string? DetectJsonFileType(string path)
+    {
+        // 1. Filename-based detection (fast, reliable for well-known names)
+        var fileName = System.IO.Path.GetFileNameWithoutExtension(path);
+        if (fileName.Contains("chain_item_odds", StringComparison.OrdinalIgnoreCase))
+            return "chain";
+        if (fileName.Equals("areas", StringComparison.OrdinalIgnoreCase))
+            return "areas";
+        if (fileName.Equals("events", StringComparison.OrdinalIgnoreCase))
+            return "events";
+
+        // 2. Content-based fallback (for renamed files)
+        try
+        {
+            using var fs = new System.IO.FileStream(path, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
+            var buffer = new byte[4096];
+            int read = fs.Read(buffer, 0, buffer.Length);
+            var snippet = System.Text.Encoding.UTF8.GetString(buffer, 0, read);
+
+            if (snippet.Contains("\"PrimaryChain\"") || snippet.Contains("\"ConfigKey\""))
+                return "chain";
+            if (snippet.Contains("\"TaskDependencies\"") || snippet.Contains("\"HotspotsRefs\""))
+                return "areas";
+            if (snippet.Contains("\"Progressions\"") || snippet.Contains("\"SP_"))
+                return "events";
+        }
+        catch { }
+
+        return null;
     }
 
     private static string? GetDroppedFilePath(DragEventArgs e)
@@ -225,12 +342,14 @@ public partial class SettingsPage : UserControl
     {
         _main.Settings.TinifyApiKey = txtTinifyKey.Text.Trim();
         _main.SaveSettings();
+        _main.RaiseTinifyApiKeyChanged();
     }
 
     private void TinifyKey2_TextChanged(object sender, TextChangedEventArgs e)
     {
         _main.Settings.TinifyApiKey2 = txtTinifyKey2.Text.Trim();
         _main.SaveSettings();
+        _main.RaiseTinifyApiKeyChanged();
     }
 
     // ── Clipboard settings ──
@@ -308,8 +427,8 @@ public partial class SettingsPage : UserControl
             AutoReverse = false,
             FillBehavior = System.Windows.Media.Animation.FillBehavior.Stop
         };
-        // Clear the overlay background — parent card's DynamicResource background is untouched
-        anim.Completed += (_, _) => border.ClearValue(Border.BackgroundProperty);
+        // Reset to Transparent — preserves hit-testing (ClearValue sets null → breaks drag-drop)
+        anim.Completed += (_, _) => border.Background = Brushes.Transparent;
 
         brush.BeginAnimation(SolidColorBrush.ColorProperty, anim);
     }
@@ -362,6 +481,7 @@ public partial class SettingsPage : UserControl
         _main.SaveSettings();
     }
 
+    public void HighlightApkSection()           { SwitchToTab(0); HighlightBorder(apkSectionBorder); }
     public void HighlightFlowchartSection()    { SwitchToTab(1); HighlightBorder(flowchartSectionBorder); }
     public void HighlightWikiMappingSection()  { SwitchToTab(2); HighlightBorder(wikiMappingSectionBorder); }
 
@@ -459,6 +579,7 @@ public partial class SettingsPage : UserControl
 
             _main.SaveSettings();
             UpdateBotStatus();
+            _main.RaiseWikiVerifiedChanged();
         }
         catch (Exception ex)
         {
@@ -466,6 +587,7 @@ public partial class SettingsPage : UserControl
             _main.Settings.WikiVerifiedDisplayName = "";
             _main.SaveSettings();
             UpdateBotStatus();
+            _main.RaiseWikiVerifiedChanged();
             _main.ShowStatus($"Verification failed: {ex.Message}", Wpf.Ui.Controls.InfoBarSeverity.Error);
         }
         finally
@@ -526,6 +648,307 @@ public partial class SettingsPage : UserControl
         btnResetFolderPref.Visibility = _main.Settings.FlowchartRememberFolderChoice
             ? Visibility.Visible
             : Visibility.Collapsed;
+    }
+
+    // ── APK Download ──
+
+    private CancellationTokenSource? _apkDownloadCts;
+
+    private async Task LoadApkVersionsAsync()
+    {
+        try
+        {
+            cmbApkVersion.Items.Clear();
+            cmbApkVersion.Items.Add("Loading...");
+            cmbApkVersion.SelectedIndex = 0;
+            cmbApkVersion.IsEnabled = false;
+
+            _apkVersions = await Task.Run(() => ApkDownloadService.FetchAvailableVersionsAsync());
+
+            cmbApkVersion.Items.Clear();
+            if (_apkVersions.Count > 0)
+            {
+                cmbApkVersion.Items.Add($"Latest ({_apkVersions[0].Version})");
+                for (int i = 1; i < _apkVersions.Count; i++)
+                    cmbApkVersion.Items.Add(_apkVersions[i].Version);
+            }
+            else
+            {
+                cmbApkVersion.Items.Add("Latest");
+            }
+
+            // Restore persisted version selection
+            var saved = _main.Settings.SelectedApkVersion;
+            int restoredIdx = 0;
+            if (!string.IsNullOrEmpty(saved) && _apkVersions.Count > 0)
+            {
+                for (int i = 0; i < _apkVersions.Count; i++)
+                {
+                    if (_apkVersions[i].Version == saved) { restoredIdx = i; break; }
+                }
+            }
+            cmbApkVersion.SelectedIndex = restoredIdx;
+
+            // Always persist the resolved version so Image Extractor can use it
+            if (_apkVersions.Count > 0)
+            {
+                _main.Settings.SelectedApkVersion = _apkVersions[restoredIdx].Version;
+                _main.SaveSettings();
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"[APK Versions] Fetch failed: {ex}");
+            cmbApkVersion.Items.Clear();
+            cmbApkVersion.Items.Add("Latest");
+            cmbApkVersion.SelectedIndex = 0;
+            _apkVersions = null;
+            txtApkDownloadStatus.Text = $"Version list failed: {ex.Message}";
+            txtApkDownloadStatus.Foreground = (Brush)FindResource("SystemFillColorCautionBrush");
+        }
+        finally
+        {
+            cmbApkVersion.IsEnabled = true;
+            UpdateApkFolderButton();
+            // Show wizard download status if one is in progress
+            ShouldShowWizardDownload();
+        }
+    }
+
+    private void CmbApkVersion_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        _lastApkDir = null;
+        UpdateApkFolderButton();
+        CheckApkExistence();
+
+        // Persist selected version
+        var idx = cmbApkVersion.SelectedIndex;
+        if (idx >= 0 && _apkVersions != null && idx < _apkVersions.Count)
+        {
+            _main.Settings.SelectedApkVersion = _apkVersions[idx].Version;
+            _main.SaveSettings();
+            _main.RaiseApkVersionChanged();
+        }
+    }
+
+    private void CheckApkExistence()
+    {
+        // If a wizard-initiated download is active and matches, show its status instead
+        if (ShouldShowWizardDownload())
+            return;
+
+        var basePath = _main.Settings.ImageExporterBasePath;
+        var idx = cmbApkVersion.SelectedIndex;
+        if (string.IsNullOrWhiteSpace(basePath) || idx < 0 || _apkVersions == null || idx >= _apkVersions.Count)
+        {
+            txtApkDownloadStatus.Text = "";
+            return;
+        }
+
+        var ver = _apkVersions[idx].Version;
+        var dir = System.IO.Path.Combine(basePath, ver);
+
+        if (!System.IO.Directory.Exists(dir) ||
+            !System.IO.Directory.EnumerateFiles(dir, "*.apk").Any() &&
+            !System.IO.Directory.EnumerateFiles(dir, "*.xapk").Any())
+        {
+            txtApkDownloadStatus.Text = $"No APK found for v{ver} — download it first.";
+            txtApkDownloadStatus.Foreground = (Brush)FindResource("SystemFillColorCautionBrush");
+        }
+        else
+        {
+            txtApkDownloadStatus.Text = "";
+        }
+    }
+
+    /// <summary>
+    /// Returns true and shows wizard download status if the currently selected version matches
+    /// an active OOBE download (always shown for "Latest", otherwise only when version matches).
+    /// </summary>
+    private bool ShouldShowWizardDownload()
+    {
+        if (SetupWizard.ActiveDownloadVersion == null) return false;
+        if (!SetupWizard.ActiveDownloadRunning && string.IsNullOrEmpty(_wizardDownloadLastStatus)) return false;
+
+        var idx = cmbApkVersion.SelectedIndex;
+        var selectedVer = idx >= 0 && _apkVersions != null && idx < _apkVersions.Count
+            ? _apkVersions[idx].Version : null;
+
+        bool show = SetupWizard.ActiveDownloadIsLatest
+            || selectedVer == SetupWizard.ActiveDownloadVersion;
+
+        if (show && !string.IsNullOrEmpty(_wizardDownloadLastStatus))
+        {
+            txtApkDownloadStatus.Text = _wizardDownloadLastStatus;
+            if (_wizardDownloadLastBrush != null)
+                txtApkDownloadStatus.Foreground = (Brush)FindResource(_wizardDownloadLastBrush);
+            return true;
+        }
+
+        return false;
+    }
+
+    private string? _wizardDownloadLastStatus;
+    private string? _wizardDownloadLastBrush;
+
+    private void OnWizardDownloadStatus(string statusText, string? brushKey)
+    {
+        _wizardDownloadLastStatus = statusText;
+        _wizardDownloadLastBrush = brushKey;
+
+        try
+        {
+            Dispatcher.Invoke(() =>
+            {
+                if (ShouldShowWizardDownload())
+                {
+                    // Already updated by ShouldShowWizardDownload
+                }
+
+                // After download finishes, also refresh folder button
+                if (!SetupWizard.ActiveDownloadRunning)
+                    UpdateApkFolderButton();
+            });
+        }
+        catch { }
+    }
+
+    private async void BtnRefreshVersions_Click(object sender, RoutedEventArgs e)
+    {
+        btnRefreshVersions.IsEnabled = false;
+        try
+        {
+            await LoadApkVersionsAsync();
+        }
+        finally
+        {
+            btnRefreshVersions.IsEnabled = true;
+        }
+    }
+
+    private string? GetSelectedVersionDir()
+    {
+        var basePath = _main.Settings.ImageExporterBasePath;
+        if (string.IsNullOrWhiteSpace(basePath)) return null;
+
+        // After download, _lastApkDir is set directly
+        if (!string.IsNullOrEmpty(_lastApkDir) && System.IO.Directory.Exists(_lastApkDir))
+            return _lastApkDir;
+
+        // Check if the selected version's folder exists
+        var idx = cmbApkVersion.SelectedIndex;
+        if (idx >= 0 && _apkVersions != null && idx < _apkVersions.Count)
+        {
+            var ver = _apkVersions[idx].Version;
+            var dir = System.IO.Path.Combine(basePath, ver);
+            if (System.IO.Directory.Exists(dir)) return dir;
+        }
+
+        return null;
+    }
+
+    private void UpdateApkFolderButton()
+    {
+        var dir = GetSelectedVersionDir();
+        btnOpenApkFolder.Visibility = dir != null ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    private void BtnOpenApkFolder_Click(object sender, RoutedEventArgs e)
+    {
+        var dir = GetSelectedVersionDir();
+        if (dir != null)
+            Process.Start(new ProcessStartInfo(dir) { UseShellExecute = true });
+    }
+
+    private async void BtnDownloadApk_Click(object sender, RoutedEventArgs e)
+    {
+        var basePath = _main.Settings.ImageExporterBasePath;
+        if (string.IsNullOrWhiteSpace(basePath))
+        {
+            _main.ShowStatus("Set your Workspace folder first (General tab).", Wpf.Ui.Controls.InfoBarSeverity.Warning);
+            return;
+        }
+
+        if (!System.IO.Directory.Exists(basePath))
+        {
+            _main.ShowStatus("Workspace folder does not exist.", Wpf.Ui.Controls.InfoBarSeverity.Warning);
+            return;
+        }
+
+        // Determine if a specific version is selected
+        var selectedIdx = cmbApkVersion.SelectedIndex;
+        var useSpecificVersion = selectedIdx > 0 && _apkVersions != null && selectedIdx < _apkVersions.Count;
+        var selectedVersion = useSpecificVersion ? _apkVersions![selectedIdx] : null;
+
+        btnDownloadApk.IsEnabled = false;
+        btnCancelDownload.Visibility = Visibility.Visible;
+        _apkDownloadCts = new CancellationTokenSource();
+
+        try
+        {
+            (string version, string filePath) result;
+
+            if (selectedVersion != null)
+            {
+                result = await Task.Run(() =>
+                    ApkDownloadService.DownloadVersionAsync(
+                        basePath, selectedVersion,
+                        status => Dispatcher.Invoke(() => txtApkDownloadStatus.Text = status),
+                        _apkDownloadCts.Token),
+                    _apkDownloadCts.Token);
+            }
+            else
+            {
+                result = await Task.Run(() =>
+                    ApkDownloadService.DownloadLatestAsync(
+                        basePath,
+                        status => Dispatcher.Invoke(() => txtApkDownloadStatus.Text = status),
+                        _apkDownloadCts.Token),
+                    _apkDownloadCts.Token);
+            }
+
+            var sizeMb = new System.IO.FileInfo(result.filePath).Length / 1024.0 / 1024.0;
+            txtApkDownloadStatus.Text = $"Done! v{result.version} ({sizeMb:F1} MB)";
+            txtApkDownloadStatus.Foreground = (Brush)FindResource("SystemFillColorSuccessBrush");
+            _main.ShowStatus($"APK downloaded: v{result.version}\n→ {result.filePath}", Wpf.Ui.Controls.InfoBarSeverity.Success);
+
+            _lastApkDir = System.IO.Path.GetDirectoryName(result.filePath);
+            UpdateApkFolderButton();
+            _main.RaiseApkVersionChanged();
+        }
+        catch (OperationCanceledException)
+        {
+            txtApkDownloadStatus.Text = "Download cancelled.";
+            txtApkDownloadStatus.Foreground = (Brush)FindResource("TextFillColorSecondaryBrush");
+        }
+        catch (Exception ex)
+        {
+            txtApkDownloadStatus.Text = "Download failed.";
+            txtApkDownloadStatus.Foreground = (Brush)FindResource("SystemFillColorCautionBrush");
+            _main.ShowStatus($"APK download failed: {ex.Message}", Wpf.Ui.Controls.InfoBarSeverity.Error);
+        }
+        finally
+        {
+            btnDownloadApk.IsEnabled = true;
+            btnCancelDownload.Visibility = Visibility.Collapsed;
+            _apkDownloadCts?.Dispose();
+            _apkDownloadCts = null;
+        }
+    }
+
+    private void BtnCancelDownload_Click(object sender, RoutedEventArgs e)
+    {
+        _apkDownloadCts?.Cancel();
+    }
+
+    // ── Image Extractor (Advanced) ──
+
+    private void ToggleExtractBuiltIn_Changed(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        _main.Settings.ExtractIncludeBuiltIn = toggleExtractBuiltIn.IsChecked == true;
+        _main.SaveSettings();
     }
 
     // ── Debug Mode ──

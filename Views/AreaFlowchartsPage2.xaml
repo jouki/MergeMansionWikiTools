@@ -12,7 +12,7 @@
         <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Padding="24,16">
             <StackPanel MaxWidth="900">
 
-                <TextBlock Text="[NEW] Area Flowcharts 2" FontSize="28" FontWeight="SemiBold"
+                <TextBlock Text="Area Flowcharts" FontSize="28" FontWeight="SemiBold"
                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                            Margin="4,0,0,20" />
 
@@ -75,9 +75,12 @@
                 <StackPanel x:Name="areaListPanel" />
 
                 <!-- Empty state -->
-                <TextBlock x:Name="txtEmpty" Text="No areas loaded. Set the areas.json path in Settings."
-                           FontSize="13" Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                           Margin="4,20,0,0" Visibility="Collapsed" />
+                <StackPanel x:Name="emptyPanel" Visibility="Collapsed" Margin="4,20,0,0">
+                    <TextBlock x:Name="txtEmpty" Text="No areas loaded. Set the areas.json path in Settings."
+                               FontSize="13" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                    <ui:Button x:Name="btnGoToSettings" Content="Go to Settings" Appearance="Secondary"
+                               Margin="0,8,0,0" Height="34" Click="BtnGoToSettings_Click" />
+                </StackPanel>
 
             </StackPanel>
         </ScrollViewer>

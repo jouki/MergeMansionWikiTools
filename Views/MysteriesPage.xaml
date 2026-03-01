@@ -50,15 +50,10 @@
 
                 <!-- Empty state -->
                 <StackPanel x:Name="emptyState" Visibility="Collapsed" Margin="4,20,0,0">
-                    <TextBlock FontSize="13"
-                               Foreground="{DynamicResource TextFillColorTertiaryBrush}">
-                        <Run Text="No events.json loaded." />
-                    </TextBlock>
-                    <TextBlock FontSize="13" Margin="0,4,0,0">
-                        <Hyperlink Click="GoToSettings_Click">
-                            <Run Text="Set the path in Settings" />
-                        </Hyperlink>
-                    </TextBlock>
+                    <TextBlock Text="No events.json loaded." FontSize="13"
+                               Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                    <ui:Button Content="Go to Settings" Appearance="Secondary" Margin="0,8,0,0"
+                               Height="34" Click="GoToSettings_Click" />
                 </StackPanel>
 
             </StackPanel>

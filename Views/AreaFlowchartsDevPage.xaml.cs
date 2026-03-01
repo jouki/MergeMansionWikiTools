@@ -11,13 +11,13 @@ using TextBlock = System.Windows.Controls.TextBlock;
 
 namespace MergeMansionWikiTools.Views;
 
-public partial class AreaFlowchartsPage : UserControl
+public partial class AreaFlowchartsDevPage : UserControl
 {
     private readonly MainWindow _main;
     private List<LuaArea>? _areas;
     private bool _areasLoaded;
 
-    public AreaFlowchartsPage(MainWindow main)
+    public AreaFlowchartsDevPage(MainWindow main)
     {
         _main = main;
         InitializeComponent();
@@ -44,7 +44,8 @@ public partial class AreaFlowchartsPage : UserControl
         var path = _main.Settings.AreasJsonPath;
         if (string.IsNullOrEmpty(path) || !File.Exists(path))
         {
-            txtEmpty.Visibility = Visibility.Visible;
+            btnGoToSettings.Visibility = Visibility.Visible;
+            emptyPanel.Visibility = Visibility.Visible;
             return;
         }
 
@@ -60,7 +61,8 @@ public partial class AreaFlowchartsPage : UserControl
         {
             ShowInfo($"Failed to load areas: {ex.Message}", InfoBarSeverity.Error);
             txtEmpty.Text = "Failed to load areas.json.";
-            txtEmpty.Visibility = Visibility.Visible;
+            btnGoToSettings.Visibility = Visibility.Collapsed;
+            emptyPanel.Visibility = Visibility.Visible;
         }
     }
 
@@ -72,11 +74,12 @@ public partial class AreaFlowchartsPage : UserControl
 
         if (_areas == null || _areas.Count == 0)
         {
-            txtEmpty.Visibility = Visibility.Visible;
+            btnGoToSettings.Visibility = Visibility.Visible;
+            emptyPanel.Visibility = Visibility.Visible;
             return;
         }
 
-        txtEmpty.Visibility = Visibility.Collapsed;
+        emptyPanel.Visibility = Visibility.Collapsed;
         var search = txtSearch.Text?.Trim() ?? "";
 
         var filtered = string.IsNullOrEmpty(search)
@@ -88,7 +91,8 @@ public partial class AreaFlowchartsPage : UserControl
         if (filtered.Count == 0)
         {
             txtEmpty.Text = "No areas match your search.";
-            txtEmpty.Visibility = Visibility.Visible;
+            btnGoToSettings.Visibility = Visibility.Collapsed;
+            emptyPanel.Visibility = Visibility.Visible;
             return;
         }
 
@@ -355,7 +359,7 @@ public partial class AreaFlowchartsPage : UserControl
             var outputPath = Path.Combine(folder, $"{safeName}.svg");
             Directory.CreateDirectory(folder);
 
-            var svg = await Task.Run(() => FlowchartService.GenerateSvg(area, _main.DataService));
+            var svg = await Task.Run(() => FlowchartService3.GenerateSvg(area, _main.DataService));
             if (string.IsNullOrEmpty(svg))
                 throw new InvalidOperationException($"No tasks with requirements found in {area.DisplayName}.");
 
@@ -395,7 +399,7 @@ public partial class AreaFlowchartsPage : UserControl
                 var safeName = string.Join("_", area.DisplayName.Split(Path.GetInvalidFileNameChars()));
                 var outputPath = Path.Combine(folder, $"{safeName}.svg");
 
-                var svg = await Task.Run(() => FlowchartService.GenerateSvg(area, _main.DataService));
+                var svg = await Task.Run(() => FlowchartService3.GenerateSvg(area, _main.DataService));
                 if (!string.IsNullOrEmpty(svg))
                 {
                     await File.WriteAllTextAsync(outputPath, svg);
@@ -430,7 +434,7 @@ public partial class AreaFlowchartsPage : UserControl
             Directory.CreateDirectory(dir);
 
         var svg = await Task.Run(() =>
-            FlowchartService.GenerateSvg(area, _main.DataService));
+            FlowchartService3.GenerateSvg(area, _main.DataService));
 
         if (string.IsNullOrEmpty(svg))
             throw new InvalidOperationException($"No tasks with requirements found in {area.DisplayName}.");
@@ -538,6 +542,11 @@ public partial class AreaFlowchartsPage : UserControl
     {
         if (_areasLoaded)
             BuildAreaList();
+    }
+
+    private void BtnGoToSettings_Click(object sender, RoutedEventArgs e)
+    {
+        _main.NavigateToSettingsHighlightAreas();
     }
 
     // ── Helpers ──────────────────────────────────────────────────────

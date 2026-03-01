@@ -16,7 +16,7 @@ public partial class AboutPage : UserControl
     {
         _main = main;
         InitializeComponent();
-        txtVersion.Text = "v0.8.0";
+        txtVersion.Text = "v0.12.0";
         RefreshStats();
     }
 

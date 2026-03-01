@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,7 +7,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using MergeMansionWikiTools.Models;
 using MergeMansionWikiTools.Services;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
@@ -49,13 +47,6 @@ public partial class ImageSplitterPage : UserControl
     private readonly List<ImageCluster> _clusters = new();
     private ImageCluster? _selectedCluster;
 
-    // ── Chain mode state ──
-    private ParsedChain? _activeChain;
-    private ParsedChain? _suggestedChain;
-    private Task<string?>? _filenameTask;
-    private string? _resolvedFilenameBase;
-    private bool _allOptimized;
-
     // ── Clipboard monitoring ──
     [DllImport("user32.dll")]
     private static extern uint GetClipboardSequenceNumber();
@@ -75,154 +66,6 @@ public partial class ImageSplitterPage : UserControl
         var dpd = System.ComponentModel.DependencyPropertyDescriptor.FromProperty(
             Wpf.Ui.Controls.InfoBar.IsOpenProperty, typeof(Wpf.Ui.Controls.InfoBar));
         dpd?.AddValueChanged(infoBar, (_, _) => { if (!infoBar.IsOpen) HideClipboardAdd(); });
-    }
-
-    // ══════════════════════════════════════════════════════════════
-    //  CHAIN MODE
-    // ══════════════════════════════════════════════════════════════
-
-    public void EnterChainMode(ParsedChain chain)
-    {
-        _activeChain = chain;
-        _suggestedChain = null;
-        _filenameTask = null;
-        _resolvedFilenameBase = null;
-        _allOptimized = false;
-
-        chainSuggestionBanner.Visibility = Visibility.Collapsed;
-        chainModeBanner.Visibility = Visibility.Visible;
-        txtChainName.Text = chain.DisplayName;
-        txtChainItemCount.Text = $"{chain.Items.Count} items in chain";
-
-        // Don't pre-fill indices — user enters them manually
-        inputIndices.Text = "";
-
-        btnUploadWiki.Visibility = Visibility.Visible;
-        btnUploadWiki.IsEnabled = false;
-        btnUploadWiki.ToolTip = "Images must be optimized first";
-    }
-
-    private void BtnExitChainMode_Click(object sender, RoutedEventArgs e)
-    {
-        _activeChain = null;
-        _filenameTask = null;
-        _resolvedFilenameBase = null;
-        _allOptimized = false;
-
-        chainModeBanner.Visibility = Visibility.Collapsed;
-        btnUploadWiki.Visibility = Visibility.Collapsed;
-        btnUploadWiki.IsEnabled = false;
-        inputIndices.Text = "";
-    }
-
-    // ── Chain suggestion from filename ──
-
-    private void TryMatchChain(string filePath)
-    {
-        System.Diagnostics.Debug.WriteLine($"[TryMatchChain] Called with: {filePath}");
-
-        if (_activeChain != null)
-        {
-            System.Diagnostics.Debug.WriteLine($"[TryMatchChain] SKIPPED — _activeChain is set: {_activeChain.ConfigKey}");
-            return;
-        }
-
-        var chains = _main.DataService?.Chains;
-        System.Diagnostics.Debug.WriteLine($"[TryMatchChain] DataService null? {_main.DataService == null}, Chains null? {chains == null}, Count: {chains?.Count ?? -1}");
-        if (chains == null || chains.Count == 0) return;
-
-        // Normalize filename: strip extension, strip leading "Item" prefix
-        var name = System.IO.Path.GetFileNameWithoutExtension(filePath);
-        if (name.StartsWith("Item", StringComparison.OrdinalIgnoreCase) && name.Length > 4)
-            name = name.Substring(4);
-
-        // Build candidate names: full name + each suffix after '_' (strips area prefix)
-        var candidates = new List<string> { name };
-        for (int idx = name.IndexOf('_'); idx >= 0 && idx < name.Length - 1; idx = name.IndexOf('_', idx + 1))
-            candidates.Add(name.Substring(idx + 1));
-
-        System.Diagnostics.Debug.WriteLine($"[TryMatchChain] Candidates: [{string.Join(", ", candidates)}]");
-
-        ParsedChain? best = null;
-        double bestSim = 0;
-
-        foreach (var chain in chains)
-        {
-            // Collect all config keys for this chain (primary + merged)
-            var keys = new List<string>();
-            if (!string.IsNullOrEmpty(chain.ConfigKey))
-                keys.Add(chain.ConfigKey);
-            if (chain.MergedFromConfigKeys != null)
-                keys.AddRange(chain.MergedFromConfigKeys);
-
-            foreach (var key in keys)
-            {
-                foreach (var candidate in candidates)
-                {
-                    double sim = 1.0 - (double)LevenshteinDistance(candidate.ToLowerInvariant(), key.ToLowerInvariant())
-                                 / Math.Max(candidate.Length, key.Length);
-                    if (sim > bestSim)
-                    {
-                        bestSim = sim;
-                        best = chain;
-                    }
-                }
-            }
-        }
-
-        System.Diagnostics.Debug.WriteLine($"[TryMatchChain] Best match: {best?.ConfigKey ?? "null"}, sim={bestSim:F4}, threshold=0.75, pass={bestSim >= 0.75}");
-
-        if (best != null && bestSim >= 0.75)
-        {
-            _suggestedChain = best;
-            var pct = (int)(bestSim * 100);
-            var origName = System.IO.Path.GetFileNameWithoutExtension(filePath);
-            var displayName = best.DisplayName != best.ConfigKey ? $" ({best.DisplayName})" : "";
-            txtSuggestionMessage.Text = $"\"{origName}\" matches chain \"{best.ConfigKey}\"{displayName} ({pct}%)";
-            chainSuggestionBanner.Visibility = Visibility.Visible;
-            System.Diagnostics.Debug.WriteLine($"[TryMatchChain] SHOWING BANNER: \"{origName}\" → \"{best.ConfigKey}\" ({pct}%)");
-        }
-        else
-        {
-            _suggestedChain = null;
-            chainSuggestionBanner.Visibility = Visibility.Collapsed;
-            System.Diagnostics.Debug.WriteLine($"[TryMatchChain] NO MATCH — banner collapsed");
-        }
-    }
-
-    private static int LevenshteinDistance(string a, string b)
-    {
-        if (a.Length == 0) return b.Length;
-        if (b.Length == 0) return a.Length;
-
-        var d = new int[a.Length + 1, b.Length + 1];
-        for (int i = 0; i <= a.Length; i++) d[i, 0] = i;
-        for (int j = 0; j <= b.Length; j++) d[0, j] = j;
-
-        for (int i = 1; i <= a.Length; i++)
-        for (int j = 1; j <= b.Length; j++)
-        {
-            int cost = a[i - 1] == b[j - 1] ? 0 : 1;
-            d[i, j] = Math.Min(
-                Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1),
-                d[i - 1, j - 1] + cost);
-        }
-
-        return d[a.Length, b.Length];
-    }
-
-    private void BtnLinkSuggested_Click(object sender, RoutedEventArgs e)
-    {
-        if (_suggestedChain == null) return;
-        var indices = inputIndices.Text;
-        EnterChainMode(_suggestedChain);
-        inputIndices.Text = indices;
-    }
-
-    private void BtnDismissSuggestion_Click(object sender, RoutedEventArgs e)
-    {
-        chainSuggestionBanner.Visibility = Visibility.Collapsed;
-        _suggestedChain = null;
     }
 
     // ══════════════════════════════════════════════════════════════
@@ -251,10 +94,6 @@ public partial class ImageSplitterPage : UserControl
         if (imageFiles.Length == 0) return;
 
         AddImages(imageFiles);
-
-        // In chain mode with multiple files: auto-link all into one cluster
-        if (_activeChain != null && _allImages.Count > 1)
-            AutoLinkAll();
     }
 
     private static bool IsImageFile(string path)
@@ -328,9 +167,6 @@ public partial class ImageSplitterPage : UserControl
             ShowPreviewForSelection();
 
         BuildThumbnailStrip();
-
-        // Try to match first file's name against chains
-        TryMatchChain(paths[0]);
 
         var total = paths.Length;
         HideClipboardAdd();
@@ -911,12 +747,6 @@ public partial class ImageSplitterPage : UserControl
         infoBar.IsOpen = true;
         btnOpenOptimize.Visibility = Visibility.Collapsed;
 
-        _allOptimized = false;
-        if (_activeChain != null)
-        {
-            btnUploadWiki.IsEnabled = false;
-            btnUploadWiki.ToolTip = "Images must be optimized first";
-        }
         Dispatcher.Invoke(DispatcherPriority.Background, new Action(() => { }));
 
         _lastGeneratedFiles.Clear();
@@ -939,14 +769,6 @@ public partial class ImageSplitterPage : UserControl
 
                 foreach (var obj in ordered)
                     allOrdered.Add((obj.Full, obj.Main, si.FilePath));
-            }
-
-            // Chain mode warning
-            if (_activeChain != null && allOrdered.Count > _activeChain.Items.Count)
-            {
-                infoBar.Message = $"Warning: Detected {allOrdered.Count} objects but chain has only {_activeChain.Items.Count} items.";
-                infoBar.Severity = InfoBarSeverity.Warning;
-                infoBar.IsOpen = true;
             }
 
             if (allOrdered.Count > suffixes.Length)
@@ -1418,164 +1240,7 @@ public partial class ImageSplitterPage : UserControl
         var apiKey = _main.Settings.TinifyApiKey;
         var apiKey2 = _main.Settings.TinifyApiKey2;
         var optWin = new OptimizationWindow(_lastGeneratedFiles, apiKey, apiKey2);
-
-        if (_activeChain != null)
-        {
-            var chainName = _activeChain.DisplayName;
-            optWin.OptimizationStarted += () =>
-            {
-                _filenameTask = WikiMappingService.ResolveWikiFilenameAsync(chainName);
-            };
-        }
-
         optWin.Owner = Window.GetWindow(this);
         optWin.ShowDialog();
-
-        _allOptimized = optWin.AllOptimized;
-        if (_activeChain != null)
-            UpdateUploadButtonState();
-    }
-
-    private async void UpdateUploadButtonState()
-    {
-        if (!_allOptimized || _filenameTask == null) return;
-
-        try
-        {
-            var filename = await _filenameTask;
-            if (filename != null)
-            {
-                if (filename.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
-                    _resolvedFilenameBase = filename[..^6];
-                else
-                    _resolvedFilenameBase = filename[..^2];
-
-                btnUploadWiki.IsEnabled = true;
-                btnUploadWiki.ToolTip = null;
-            }
-            else
-            {
-                infoBar.Message = "Failed to resolve wiki filename: empty response.";
-                infoBar.Severity = InfoBarSeverity.Error;
-                infoBar.IsOpen = true;
-            }
-        }
-        catch (Exception ex)
-        {
-            infoBar.Message = $"Failed to resolve wiki filename: {ex.Message}";
-            infoBar.Severity = InfoBarSeverity.Error;
-            infoBar.IsOpen = true;
-        }
-    }
-
-    private async void BtnUploadWiki_Click(object sender, RoutedEventArgs e)
-    {
-        if (_activeChain == null || _resolvedFilenameBase == null) return;
-
-        btnUploadWiki.IsEnabled = false;
-        infoBar.Message = "Uploading images to wiki...";
-        infoBar.Severity = InfoBarSeverity.Informational;
-        infoBar.IsOpen = true;
-
-        try
-        {
-            var settings = _main.Settings;
-            using var client = await WikiMappingService.CreateAuthenticatedClientAsync(
-                settings.WikiUsername, settings.WikiPassword);
-            var csrfToken = await WikiMappingService.GetCsrfTokenAsync(client);
-
-            int uploaded = 0;
-            int skipped = 0;
-            bool forceAll = false;
-            bool skipAll = false;
-            var sortedFiles = _lastGeneratedFiles.OrderBy(f => f, StringComparer.OrdinalIgnoreCase).ToList();
-            int total = Math.Min(sortedFiles.Count, _activeChain.Items.Count);
-
-            for (int i = 0; i < total; i++)
-            {
-                var filePath = sortedFiles[i];
-                var level = _activeChain.Items[i].Level;
-                var wikiFilename = _resolvedFilenameBase + level.ToString("D2") + ".png";
-
-                infoBar.Message = $"Uploading {wikiFilename} ({i + 1}/{total})...";
-                Dispatcher.Invoke(DispatcherPriority.Background, new Action(() => { }));
-
-                var fileData = await File.ReadAllBytesAsync(filePath);
-
-                try
-                {
-                    await WikiMappingService.UploadFileAsync(client, csrfToken, wikiFilename, fileData,
-                        ignoreWarnings: forceAll);
-                    uploaded++;
-                }
-                catch (Exception ex) when (forceAll && ex.Message.Contains("exact duplicate"))
-                {
-                    uploaded++;
-                }
-                catch (WikiMappingService.WikiUploadWarningException) when (!forceAll)
-                {
-                    if (skipAll) { skipped++; continue; }
-
-                    var dlg = new UploadConflictDialog(wikiFilename, total - i - 1, filePath)
-                        { Owner = Window.GetWindow(this) };
-                    dlg.ShowDialog();
-
-                    switch (dlg.Choice)
-                    {
-                        case UploadConflictChoice.Force:
-                            await ForceUploadOrSkipDuplicate(client, csrfToken, wikiFilename, fileData);
-                            uploaded++;
-                            break;
-                        case UploadConflictChoice.ForceAll:
-                            forceAll = true;
-                            await ForceUploadOrSkipDuplicate(client, csrfToken, wikiFilename, fileData);
-                            uploaded++;
-                            break;
-                        case UploadConflictChoice.Skip:
-                            skipped++;
-                            break;
-                        case UploadConflictChoice.SkipAll:
-                            skipAll = true;
-                            skipped++;
-                            break;
-                        default: // Cancel
-                            goto endUpload;
-                    }
-                }
-            }
-            endUpload:
-
-            var msg = $"Uploaded {uploaded} images to wiki.";
-            if (skipped > 0) msg += $" Skipped {skipped} duplicates.";
-            infoBar.Message = msg;
-            infoBar.Severity = InfoBarSeverity.Success;
-            infoBar.IsOpen = true;
-
-            Increment(s => s.WikiImagesUploaded += uploaded);
-        }
-        catch (Exception ex)
-        {
-            infoBar.Message = $"Upload failed: {ex.Message}";
-            infoBar.Severity = InfoBarSeverity.Error;
-            infoBar.IsOpen = true;
-        }
-        finally
-        {
-            btnUploadWiki.IsEnabled = true;
-        }
-    }
-
-    private static async Task ForceUploadOrSkipDuplicate(
-        HttpClient client, string csrfToken, string filename, byte[] fileData)
-    {
-        try
-        {
-            await WikiMappingService.UploadFileAsync(client, csrfToken, filename, fileData,
-                ignoreWarnings: true);
-        }
-        catch (Exception ex) when (ex.Message.Contains("exact duplicate"))
-        {
-            // File is byte-identical on wiki — already correct
-        }
     }
 }

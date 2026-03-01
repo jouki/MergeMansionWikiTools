@@ -16,6 +16,16 @@ namespace MergeMansionWikiTools.Views;
 
 public partial class MainWindow : FluentWindow
 {
+    // ── Events ──
+    public event Action? ApkVersionChanged;
+    public void RaiseApkVersionChanged() => ApkVersionChanged?.Invoke();
+
+    public event Action? WikiVerifiedChanged;
+    public void RaiseWikiVerifiedChanged() => WikiVerifiedChanged?.Invoke();
+
+    public event Action? TinifyApiKeyChanged;
+    public void RaiseTinifyApiKeyChanged() => TinifyApiKeyChanged?.Invoke();
+
     // ── Shared services (accessible by pages) ──
     public AppSettings Settings { get; private set; }
     public ChainNameService ChainNameService { get; } = new();
@@ -35,17 +45,19 @@ public partial class MainWindow : FluentWindow
 
     private ChainBrowserPage? _chainPage;
     private ImageSplitterPage? _imageSplitterPage;
+    private ImageOptimiserPage? _imageOptimiserPage;
     private WikiDataParserPage? _wikiDataParserPage;
     private ImageExtractorPage? _imageExtractorPage;
     private DialogueMakerPage? _dialogueMakerPage;
     private MysteriesPage? _mysteriesPage;
-    private AreaFlowchartsPage? _areaFlowchartsPage;
-    private AreaFlowchartsPage2? _areaFlowchartsPage2;
+    private AreaFlowchartsPage2? _areaFlowchartsPage;
+    private AreaFlowchartsDevPage? _areaFlowchartsDevPage;
     private SettingsPage? _settingsPage;
     private AboutPage? _aboutPage;
 
     public MainWindow()
     {
+        using var _t = AppLogger.Timed("MainWindow.ctor");
         InitializeComponent();
 
         Settings = SettingsService.Load();
@@ -59,6 +71,9 @@ public partial class MainWindow : FluentWindow
 
         // Track session
         Increment(s => { s.SessionCount++; if (s.FirstLaunch == default) s.FirstLaunch = DateTime.UtcNow; });
+
+        // Validate dump file paths — clear stale paths that no longer exist
+        ValidateDumpFilePaths();
 
         // Try auto-load if path is configured
         if (!string.IsNullOrEmpty(Settings.ChainItemOddsPath) && File.Exists(Settings.ChainItemOddsPath))
@@ -161,11 +176,18 @@ public partial class MainWindow : FluentWindow
     private void Window_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
     {
         if (e.Key == System.Windows.Input.Key.V &&
-            System.Windows.Input.Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control &&
-            contentArea.Content is ImageSplitterPage isPage)
+            System.Windows.Input.Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
         {
-            if (isPage.HandleCtrlV())
-                e.Handled = true;
+            if (contentArea.Content is ImageSplitterPage isPage)
+            {
+                if (isPage.HandleCtrlV())
+                    e.Handled = true;
+            }
+            else if (contentArea.Content is ImageOptimiserPage ioPage)
+            {
+                if (ioPage.HandleCtrlV())
+                    e.Handled = true;
+            }
         }
     }
 
@@ -174,6 +196,7 @@ public partial class MainWindow : FluentWindow
     private void NavList_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (contentArea == null) return;
+        AppLogger.Info($"Navigate → index {navList.SelectedIndex}");
 
         // Stop clipboard monitor when leaving IS page (unless global)
         if (navList.SelectedIndex != 1 && _imageSplitterPage != null && !Settings.ClipboardMonitorGlobal)
@@ -183,14 +206,15 @@ public partial class MainWindow : FluentWindow
         {
             case 0: ShowChainsPage(); break;
             case 1: ShowImageSplitterPage(); break;
-            case 2: ShowDialogueMakerPage(); break;
-            case 3: ShowWikiDataParserPage(); break;
-            case 4: ShowImageExtractorPage(); break;
-            case 5: ShowMysteriesPage(); break;
-            case 6: ShowAreaFlowchartsPage(); break;
-            case 7: ShowAreaFlowchartsPage2(); break;
-            case 8: ShowSettingsPage(); break;
-            case 9: ShowAboutPage(); break;
+            case 2: ShowImageOptimiserPage(); break;
+            case 3: ShowDialogueMakerPage(); break;
+            case 4: ShowWikiDataParserPage(); break;
+            case 5: ShowImageExtractorPage(); break;
+            case 6: ShowMysteriesPage(); break;
+            case 7: ShowAreaFlowchartsPage(); break;
+            case 8: ShowAreaFlowchartsDevPage(); break;
+            case 9: ShowSettingsPage(); break;
+            case 10: ShowAboutPage(); break;
         }
 
         UpdateNavIndicator();
@@ -209,6 +233,12 @@ public partial class MainWindow : FluentWindow
         if (contentArea.Content != _imageSplitterPage)
             contentArea.Content = _imageSplitterPage;
         _imageSplitterPage.StartClipboardMonitor();
+    }
+
+    private void ShowImageOptimiserPage()
+    {
+        _imageOptimiserPage ??= new ImageOptimiserPage(this);
+        contentArea.Content = _imageOptimiserPage;
     }
 
     private void ShowWikiDataParserPage()
@@ -247,14 +277,14 @@ public partial class MainWindow : FluentWindow
 
     private void ShowAreaFlowchartsPage()
     {
-        _areaFlowchartsPage ??= new AreaFlowchartsPage(this);
+        _areaFlowchartsPage ??= new AreaFlowchartsPage2(this);
         contentArea.Content = _areaFlowchartsPage;
     }
 
-    private void ShowAreaFlowchartsPage2()
+    private void ShowAreaFlowchartsDevPage()
     {
-        _areaFlowchartsPage2 ??= new AreaFlowchartsPage2(this);
-        contentArea.Content = _areaFlowchartsPage2;
+        _areaFlowchartsDevPage ??= new AreaFlowchartsDevPage(this);
+        contentArea.Content = _areaFlowchartsDevPage;
     }
 
     private void ShowSettingsPage()
@@ -305,6 +335,7 @@ public partial class MainWindow : FluentWindow
 
     public async Task LoadDataAsync(string path)
     {
+        using var _t = AppLogger.Timed("LoadDataAsync");
         try
         {
             ShowStatus("Loading data...", InfoBarSeverity.Informational);
@@ -338,6 +369,7 @@ public partial class MainWindow : FluentWindow
         }
         catch (Exception ex)
         {
+            AppLogger.Error("LoadDataAsync failed", ex);
             txtDataStatus.Text = "Load failed";
             ShowStatus($"Error: {ex.Message}", InfoBarSeverity.Error);
         }
@@ -372,6 +404,7 @@ public partial class MainWindow : FluentWindow
 
     private async Task LoadWikiMappingAsync()
     {
+        using var _t = AppLogger.Timed("LoadWikiMappingAsync");
         try
         {
             var cache = WikiMappingService.Load();
@@ -383,8 +416,9 @@ public partial class MainWindow : FluentWindow
                 WikiMapping = cache;
             }
         }
-        catch
+        catch (Exception ex)
         {
+            AppLogger.Error("LoadWikiMappingAsync failed", ex);
             // Use stale cache on failure — WikiMapping already set from Load()
         }
 
@@ -411,6 +445,7 @@ public partial class MainWindow : FluentWindow
     private void ApplyWikiMappingToChains()
     {
         if (DataService == null || WikiMapping == null || WikiMapping.Mappings.Count == 0) return;
+        using var _t = AppLogger.Timed("ApplyWikiMappingToChains");
 
         var mappings = WikiMapping.Mappings;
 
@@ -555,6 +590,7 @@ public partial class MainWindow : FluentWindow
         var path = Settings.EventsJsonPath;
         if (string.IsNullOrEmpty(path) || !File.Exists(path)) return;
 
+        using var _t = AppLogger.Timed("LoadMysteriesAsync");
         try
         {
             var svc = new MysteryService();
@@ -574,8 +610,9 @@ public partial class MainWindow : FluentWindow
             // Wiki page existence check (unauthenticated, read-only)
             await MysteryWikiService.CheckAllMysteryStatusAsync(svc.Mysteries, DataService);
         }
-        catch
+        catch (Exception ex)
         {
+            AppLogger.Error("LoadMysteriesAsync failed", ex);
             // Silently fail — user can reload from Mysteries page
         }
     }
@@ -636,8 +673,9 @@ public partial class MainWindow : FluentWindow
             }
             MysteryWikiService.SaveStatusCache(cache);
         }
-        catch
+        catch (Exception ex)
         {
+            AppLogger.Error("CheckMissingItemPagesAsync failed", ex);
             // Non-critical — user can re-check manually
         }
     }
@@ -674,6 +712,33 @@ public partial class MainWindow : FluentWindow
     }
 
     /// <summary>
+    /// Clears persisted dump file paths that no longer exist on disk.
+    /// Runs once at startup so stale paths don't confuse users.
+    /// </summary>
+    private void ValidateDumpFilePaths()
+    {
+        bool changed = false;
+
+        if (!string.IsNullOrEmpty(Settings.ChainItemOddsPath) && !File.Exists(Settings.ChainItemOddsPath))
+        {
+            Settings.ChainItemOddsPath = "";
+            changed = true;
+        }
+        if (!string.IsNullOrEmpty(Settings.AreasJsonPath) && !File.Exists(Settings.AreasJsonPath))
+        {
+            Settings.AreasJsonPath = "";
+            changed = true;
+        }
+        if (!string.IsNullOrEmpty(Settings.EventsJsonPath) && !File.Exists(Settings.EventsJsonPath))
+        {
+            Settings.EventsJsonPath = "";
+            changed = true;
+        }
+
+        if (changed) SaveSettings();
+    }
+
+    /// <summary>
     /// Updates areas.json path, saves settings, and notifies subscribers.
     /// </summary>
     public void SetAreasPath(string path)
@@ -700,19 +765,27 @@ public partial class MainWindow : FluentWindow
     /// Called from WikiDataParserPage when user clicks the items file path link.
     /// </summary>
     /// <summary>
-    /// Navigates to Image Splitter in chain mode — pre-fills chain data for wiki upload workflow.
+    /// Navigates to Image Optimiser in chain mode — pre-fills chain data for wiki upload workflow.
     /// </summary>
-    public void NavigateToImageSplitterChainMode(ParsedChain chain)
+    public void NavigateToImageOptimiserChainMode(ParsedChain chain)
     {
-        _imageSplitterPage ??= new ImageSplitterPage(this);
-        _imageSplitterPage.EnterChainMode(chain);
-        contentArea.Content = _imageSplitterPage;
-        navList.SelectedIndex = 1;
+        _imageOptimiserPage ??= new ImageOptimiserPage(this);
+        _imageOptimiserPage.EnterChainMode(chain);
+        contentArea.Content = _imageOptimiserPage;
+        navList.SelectedIndex = 2;
+    }
+
+    public void NavigateToSettingsHighlightApk()
+    {
+        navList.SelectedIndex = 9;
+        Dispatcher.InvokeAsync(
+            () => _settingsPage?.HighlightApkSection(),
+            System.Windows.Threading.DispatcherPriority.Input);
     }
 
     public void NavigateToSettingsHighlightChainFile()
     {
-        navList.SelectedIndex = 8;
+        navList.SelectedIndex = 9;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightChainSection(),
             System.Windows.Threading.DispatcherPriority.Input);
@@ -720,7 +793,7 @@ public partial class MainWindow : FluentWindow
 
     public void NavigateToSettingsHighlightAreas()
     {
-        navList.SelectedIndex = 8;
+        navList.SelectedIndex = 9;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightAreasSection(),
             System.Windows.Threading.DispatcherPriority.Input);
@@ -728,7 +801,7 @@ public partial class MainWindow : FluentWindow
 
     public void NavigateToSettingsHighlightWikiMapping()
     {
-        navList.SelectedIndex = 8;
+        navList.SelectedIndex = 9;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightWikiMappingSection(),
             System.Windows.Threading.DispatcherPriority.Input);
@@ -736,7 +809,7 @@ public partial class MainWindow : FluentWindow
 
     public void NavigateToSettingsHighlightChunkSizes()
     {
-        navList.SelectedIndex = 8;
+        navList.SelectedIndex = 9;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightChunkSizes(),
             System.Windows.Threading.DispatcherPriority.Input);
@@ -744,7 +817,7 @@ public partial class MainWindow : FluentWindow
 
     public void NavigateToSettingsHighlightEvents()
     {
-        navList.SelectedIndex = 8;
+        navList.SelectedIndex = 9;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightEventsSection(),
             System.Windows.Threading.DispatcherPriority.Input);

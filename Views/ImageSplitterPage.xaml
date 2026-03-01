@@ -7,69 +7,14 @@
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Row 0: Chain mode banner (collapsed by default) -->
-        <Border x:Name="chainModeBanner" Grid.Row="0" Visibility="Collapsed"
-                Background="{DynamicResource AccentFillColorDefaultBrush}"
-                CornerRadius="6" Padding="14,8" Margin="0,0,0,12">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <ui:SymbolIcon Symbol="Link24"
-                               Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}" />
-                <StackPanel Grid.Column="1" Margin="10,0">
-                    <TextBlock x:Name="txtChainName" FontWeight="SemiBold"
-                               Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
-                    <TextBlock x:Name="txtChainItemCount" FontSize="11"
-                               Foreground="{DynamicResource TextOnAccentFillColorSecondaryBrush}"/>
-                </StackPanel>
-                <ui:Button Grid.Column="2" Content="Exit" Icon="{ui:SymbolIcon Dismiss24}"
-                           Click="BtnExitChainMode_Click"
-                           Background="#20000000" BorderThickness="0"
-                           Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
-                           MouseOverBackground="#30000000" PressedBackground="#40000000"
-                           Padding="12,6"/>
-            </Grid>
-        </Border>
-
-        <!-- Chain suggestion banner (collapsed by default) -->
-        <Border x:Name="chainSuggestionBanner" Grid.Row="0" Visibility="Collapsed"
-                Background="{DynamicResource SubtleFillColorTertiaryBrush}"
-                CornerRadius="6" Padding="0" Margin="0,0,0,12"
-                BorderBrush="{DynamicResource AccentFillColorDefaultBrush}" BorderThickness="3,0,0,0">
-            <Grid Margin="12,8">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <ui:SymbolIcon Symbol="Lightbulb24" FontSize="18" VerticalAlignment="Center"/>
-                <TextBlock x:Name="txtSuggestionMessage" Grid.Column="1" Margin="10,0"
-                           VerticalAlignment="Center" TextWrapping="Wrap"/>
-                <ui:Button x:Name="btnLinkSuggested" Grid.Column="2" Content="Link to Chain"
-                           Icon="{ui:SymbolIcon Link24}" Appearance="Primary"
-                           Padding="12,6" Margin="0,0,6,0" VerticalAlignment="Center"
-                           Click="BtnLinkSuggested_Click"/>
-                <ui:Button Grid.Column="3" Padding="6" VerticalAlignment="Center"
-                           Appearance="Secondary" Click="BtnDismissSuggestion_Click"
-                           ToolTip="Dismiss" ToolTipService.InitialShowDelay="0">
-                    <ui:SymbolIcon Symbol="Dismiss24" FontSize="14"/>
-                </ui:Button>
-            </Grid>
-        </Border>
-
-        <!-- Row 1: Thumbnail strip (collapsed when no images) -->
-        <Border x:Name="thumbnailStripBorder" Grid.Row="1" Visibility="Collapsed"
+        <!-- Row 0: Thumbnail strip (collapsed when no images) -->
+        <Border x:Name="thumbnailStripBorder" Grid.Row="0" Visibility="Collapsed"
                 Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
                 CornerRadius="8" Margin="0,0,0,10"
                 BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
@@ -91,8 +36,8 @@
             </Grid>
         </Border>
 
-        <!-- Row 2: Preview / Drop zone -->
-        <Border Grid.Row="2" Background="{DynamicResource CardBackgroundFillColorDefaultBrush}" CornerRadius="8" Margin="0,0,0,15"
+        <!-- Row 1: Preview / Drop zone -->
+        <Border Grid.Row="1" Background="{DynamicResource CardBackgroundFillColorDefaultBrush}" CornerRadius="8" Margin="0,0,0,15"
                 BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
             <Grid>
                 <Image x:Name="imgPreview" Margin="15"/>
@@ -101,8 +46,8 @@
             </Grid>
         </Border>
 
-        <!-- Row 3: Index input TextBox -->
-        <ui:TextBox x:Name="inputIndices" Grid.Row="3"
+        <!-- Row 2: Index input TextBox -->
+        <ui:TextBox x:Name="inputIndices" Grid.Row="2"
                     PlaceholderText="Insert Indexes (ex. 4 5 2 3 1)..."
                     AcceptsReturn="True"
                     MinHeight="80"
@@ -111,8 +56,8 @@
                     Margin="0,0,0,10"
                     PreviewKeyDown="InputIndices_PreviewKeyDown"/>
 
-        <!-- Row 4: Button bar -->
-        <Grid Grid.Row="4" Margin="0,0,0,10">
+        <!-- Row 3: Button bar -->
+        <Grid Grid.Row="3" Margin="0,0,0,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -120,15 +65,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <ui:Button x:Name="btnUploadWiki" Grid.Column="0"
-                       Content="Upload to Wiki" Icon="{ui:SymbolIcon ArrowUpload24}"
-                       Appearance="Primary" Visibility="Collapsed"
-                       IsEnabled="False" Click="BtnUploadWiki_Click"
-                       Height="45" HorizontalAlignment="Left" Margin="0,0,10,0"
-                       ToolTip="Images must be optimized first"
-                       ToolTipService.ShowOnDisabled="True"/>
-
-            <ui:Button x:Name="btnOpenOptimize" Grid.Column="1"
+            <ui:Button x:Name="btnOpenOptimize" Grid.Column="0"
                        Content="Optimise generated PNGs (TinyPNG)"
                        Icon="{ui:SymbolIcon ArrowDownload24}" Appearance="Secondary"
                        Visibility="Collapsed" Click="BtnOpenOptimize_Click"
@@ -146,8 +83,8 @@
                        Margin="10,0,0,0" VerticalAlignment="Bottom"/>
         </Grid>
 
-        <!-- Row 5: InfoBar + clipboard Add button -->
-        <Grid Grid.Row="5" MinHeight="48">
+        <!-- Row 4: InfoBar + clipboard Add button -->
+        <Grid Grid.Row="4" MinHeight="48">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>

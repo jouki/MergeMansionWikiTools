@@ -15,7 +15,14 @@ namespace MergeMansionWikiTools.Services;
 public static class MysteryWikiService
 {
     private const string BaseApiUrl = "https://merge-mansion.fandom.com/api.php";
-    private static readonly HttpClient Http = new();
+    private static readonly HttpClient Http = CreateHttpClient();
+
+    private static HttpClient CreateHttpClient()
+    {
+        var client = new HttpClient(new HttpClientHandler { UseProxy = false });
+        client.DefaultRequestHeaders.UserAgent.ParseAdd("MergeMansionWikiTools/1.0");
+        return client;
+    }
 
     private static readonly string StatusCachePath = Path.Combine(
         AppDomain.CurrentDomain.BaseDirectory, "mystery_wiki_status_cache.json");
@@ -141,6 +148,7 @@ public static class MysteryWikiService
             var batch = titleList.Skip(i).Take(50);
             var joined = string.Join("|", batch);
             var url = $"{BaseApiUrl}?action=query&titles={Uri.EscapeDataString(joined)}&format=json";
+            AppLogger.Info($"CheckPagesExist batch: {url}");
 
             var json = await Http.GetStringAsync(url);
             var doc = JsonDocument.Parse(json);
@@ -1054,9 +1062,12 @@ public static class MysteryWikiService
     public static async Task CheckAllMysteryStatusAsync(
         IReadOnlyList<MysteryEvent> mysteries, DataService? ds)
     {
+        using var _t = AppLogger.Timed($"CheckAllMysteryStatusAsync ({mysteries.Count} mysteries)");
+
         // Load cache and apply confirmed-true values
         var cache = LoadStatusCache();
         ApplyCache(mysteries, cache);
+        AppLogger.Info($"Cache loaded: {cache.Entries.Count} entries");
 
         // Resolve suggested page titles (needed even for cached entries)
         // Step 1: Detect same-name mystery events
@@ -1117,9 +1128,12 @@ public static class MysteryWikiService
             }
         }
 
+        AppLogger.Info($"PageExistence: {titleToMystery.Count} titles to check");
         if (titleToMystery.Count > 0)
         {
-            var existMap = await CheckPagesExistAsync(titleToMystery.Keys);
+            Dictionary<string, bool> existMap;
+            using (var _tp = AppLogger.Timed("CheckPagesExistAsync"))
+                existMap = await CheckPagesExistAsync(titleToMystery.Keys);
 
             foreach (var (title, entries) in titleToMystery)
             {
@@ -1140,11 +1154,14 @@ public static class MysteryWikiService
                      || m.WikiStatus.RewardContentMatches != true)
             .ToList();
 
+        AppLogger.Info($"TemplateCheck: {needsTemplateCheck.Count} mysteries need check");
         if (needsTemplateCheck.Count > 0)
         {
             try
             {
-                var templates = await FetchRewardTemplatesAsync();
+                Dictionary<string, string> templates;
+                using (var _tr = AppLogger.Timed("FetchRewardTemplatesAsync"))
+                    templates = await FetchRewardTemplatesAsync();
                 foreach (var m in needsTemplateCheck)
                 {
                     var (xpMatch, contentMatch, variant) = CompareWithTemplates(m, templates);
@@ -1165,6 +1182,7 @@ public static class MysteryWikiService
                      && m.WikiStatus.EventPageContentMatches != true)
             .ToList();
 
+        AppLogger.Info($"EventPageContentCheck: {needsPageContentCheck.Count} mysteries need check");
         if (needsPageContentCheck.Count > 0)
         {
             try
@@ -1173,8 +1191,9 @@ public static class MysteryWikiService
                     .Select(m => m.WikiStatus.SuggestedPageTitle ?? m.Name)
                     .Distinct(StringComparer.OrdinalIgnoreCase)
                     .ToList();
-
-                var pageContents = await FetchPagesContentAsync(pageTitles);
+                Dictionary<string, string> pageContents;
+                using (var _te = AppLogger.Timed("FetchEventPagesContentAsync"))
+                    pageContents = await FetchPagesContentAsync(pageTitles);
 
                 foreach (var m in needsPageContentCheck)
                 {
@@ -1199,6 +1218,7 @@ public static class MysteryWikiService
                      && !string.IsNullOrEmpty(m.EventItemName))
             .ToList();
 
+        AppLogger.Info($"ItemPageContentCheck: {needsItemContentCheck.Count} mysteries need check");
         if (needsItemContentCheck.Count > 0)
         {
             try
@@ -1207,8 +1227,9 @@ public static class MysteryWikiService
                     .Select(m => m.EventItemName!)
                     .Distinct(StringComparer.OrdinalIgnoreCase)
                     .ToList();
-
-                var itemContents = await FetchPagesContentAsync(itemTitles);
+                Dictionary<string, string> itemContents;
+                using (var _ti = AppLogger.Timed("FetchItemPagesContentAsync"))
+                    itemContents = await FetchPagesContentAsync(itemTitles);
 
                 foreach (var m in needsItemContentCheck)
                 {

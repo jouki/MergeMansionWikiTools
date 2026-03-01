@@ -44,7 +44,8 @@ public partial class AreaFlowchartsPage2 : UserControl
         var path = _main.Settings.AreasJsonPath;
         if (string.IsNullOrEmpty(path) || !File.Exists(path))
         {
-            txtEmpty.Visibility = Visibility.Visible;
+            btnGoToSettings.Visibility = Visibility.Visible;
+            emptyPanel.Visibility = Visibility.Visible;
             return;
         }
 
@@ -60,7 +61,8 @@ public partial class AreaFlowchartsPage2 : UserControl
         {
             ShowInfo($"Failed to load areas: {ex.Message}", InfoBarSeverity.Error);
             txtEmpty.Text = "Failed to load areas.json.";
-            txtEmpty.Visibility = Visibility.Visible;
+            btnGoToSettings.Visibility = Visibility.Collapsed;
+            emptyPanel.Visibility = Visibility.Visible;
         }
     }
 
@@ -72,11 +74,12 @@ public partial class AreaFlowchartsPage2 : UserControl
 
         if (_areas == null || _areas.Count == 0)
         {
-            txtEmpty.Visibility = Visibility.Visible;
+            btnGoToSettings.Visibility = Visibility.Visible;
+            emptyPanel.Visibility = Visibility.Visible;
             return;
         }
 
-        txtEmpty.Visibility = Visibility.Collapsed;
+        emptyPanel.Visibility = Visibility.Collapsed;
         var search = txtSearch.Text?.Trim() ?? "";
 
         var filtered = string.IsNullOrEmpty(search)
@@ -88,7 +91,8 @@ public partial class AreaFlowchartsPage2 : UserControl
         if (filtered.Count == 0)
         {
             txtEmpty.Text = "No areas match your search.";
-            txtEmpty.Visibility = Visibility.Visible;
+            btnGoToSettings.Visibility = Visibility.Collapsed;
+            emptyPanel.Visibility = Visibility.Visible;
             return;
         }
 
@@ -538,6 +542,11 @@ public partial class AreaFlowchartsPage2 : UserControl
     {
         if (_areasLoaded)
             BuildAreaList();
+    }
+
+    private void BtnGoToSettings_Click(object sender, RoutedEventArgs e)
+    {
+        _main.NavigateToSettingsHighlightAreas();
     }
 
     // ── Helpers ──────────────────────────────────────────────────────

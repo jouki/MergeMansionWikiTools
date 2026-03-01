@@ -7,6 +7,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -131,8 +132,19 @@
             </ui:Button>
         </Grid>
 
+        <!-- Filter hint -->
+        <StackPanel x:Name="filterHint" Grid.Row="2" Orientation="Horizontal"
+                    Margin="4,0,4,8" Visibility="Collapsed">
+            <ui:SymbolIcon Symbol="Info16" FontSize="14"
+                           Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                           VerticalAlignment="Center" />
+            <TextBlock x:Name="txtFilterHint" Margin="6,0,0,0"
+                       FontSize="12" VerticalAlignment="Center"
+                       Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+        </StackPanel>
+
         <!-- Chain list -->
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3">
             <!-- Empty state -->
             <StackPanel x:Name="emptyState" VerticalAlignment="Center"
                         HorizontalAlignment="Center" Visibility="Visible">
@@ -150,7 +162,11 @@
                       Visibility="Collapsed"
                       Padding="0,0,0,0"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                      ScrollViewer.VerticalScrollBarVisibility="Auto">
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      ScrollViewer.CanContentScroll="True"
+                      VirtualizingPanel.IsVirtualizing="True"
+                      VirtualizingPanel.ScrollUnit="Pixel"
+                      VirtualizingPanel.VirtualizationMode="Recycling">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />

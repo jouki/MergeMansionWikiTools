@@ -181,8 +181,13 @@ public class ParsedChain
     /// <summary>Whether any item has SpawnFeatures</summary>
     public bool HasSpawners => Items.Any(i => i.IsSpawner);
 
-    /// <summary>Whether this looks like an event chain</summary>
-    public bool IsEventChain => ConfigKey.StartsWith("CBE_") || ConfigKey.StartsWith("LDE_");
+    /// <summary>All known event chain ConfigKey prefix bases (without trailing underscore).</summary>
+    public static readonly string[] EventPrefixes =
+        { "LS", "LC", "LDE", "CBE", "MME", "GM", "DE", "SLBE", "TCE", "BLE", "LBE", "SE", "CSE", "JP" };
+
+    /// <summary>Whether this looks like an event chain (matches prefix with or without underscore separator).</summary>
+    public bool IsEventChain => EventPrefixes.Any(p =>
+        ConfigKey.StartsWith(p + "_") || (ConfigKey.StartsWith(p) && ConfigKey.Length > p.Length && char.IsUpper(ConfigKey[p.Length])));
 
     /// <summary>Whether this chain has a human-readable name (wiki, custom, or natural original name)</summary>
     public bool HasHumanReadableName =>
@@ -245,6 +250,12 @@ public class ParsedItem
 
     /// <summary>Numeric ConfigKey from JSON item (used by SinkFeatures ScoreTargets)</summary>
     public string NumericConfigKey { get; set; } = "";
+
+    // Bubble features
+    public bool HasBubble { get; set; }
+    public long BubbleDurationMs { get; set; }
+    public int BubbleOpenCost { get; set; }
+    public int BubbleSpawnOdds { get; set; }
 
     // Depleting spawner
     public bool DecaysWhenCyclesAreDone { get; set; }
