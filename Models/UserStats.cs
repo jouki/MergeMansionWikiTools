@@ -14,5 +14,6 @@ public class UserStats
     public int MysteryTemplatesGenerated { get; set; }
     public int MysteryPagesPublished { get; set; }
     public int WikiImagesUploaded { get; set; }
+    public int PhonePulls { get; set; }
     public DateTime FirstLaunch { get; set; } = DateTime.UtcNow;
 }

@@ -76,6 +76,14 @@
                 <Canvas x:Name="detectionOverlay" IsHitTestVisible="False"/>
                 <ui:TextBlock x:Name="txtPlaceholder" Text="Drag images here to optimise"
                               HorizontalAlignment="Center" VerticalAlignment="Center" Appearance="Tertiary"/>
+                <ui:Button x:Name="btnRefreshDetection"
+                           Icon="{ui:SymbolIcon ArrowSync24}"
+                           Appearance="Secondary" Height="32" Width="32" Padding="0"
+                           HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                           Margin="0,0,8,8" Visibility="Collapsed"
+                           Click="BtnRefreshDetection_Click"
+                           ToolTip="Recalculate object detection preview"
+                           ToolTipService.InitialShowDelay="0"/>
             </Grid>
         </Border>
 
@@ -105,12 +113,12 @@
                        Appearance="Primary" Height="45" Padding="16,0"
                        IsEnabled="False" Click="BtnUploadWiki_Click"
                        HorizontalAlignment="Left" Margin="0,0,10,0"
-                       ToolTip="Optimize images first"
+                       ToolTip="Optimise images first"
                        ToolTipService.InitialShowDelay="0"
                        ToolTipService.ShowOnDisabled="True"/>
 
             <ui:Button x:Name="btnOptimizeAll" Grid.Column="1"
-                       Content="Optimize All (TinyPNG)" Icon="{ui:SymbolIcon ArrowDownload24}"
+                       Content="Optimise All (TinyPNG)" Icon="{ui:SymbolIcon ArrowDownload24}"
                        Appearance="Secondary" Height="45"
                        HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
                        Click="BtnOptimizeAll_Click"
@@ -130,9 +138,18 @@
                        Visibility="Collapsed" Click="BtnSplit_Click"/>
         </Grid>
 
-        <!-- Row 5: InfoBar (MinHeight reserves space to prevent preview resize) -->
+        <!-- Row 5: InfoBar + clipboard Add button -->
         <Grid Grid.Row="5" MinHeight="48">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
             <ui:InfoBar x:Name="infoBar" IsOpen="False" IsClosable="True"/>
+            <ui:Button x:Name="btnClipboardAdd" Grid.Column="1"
+                       Content="Add" Icon="{ui:SymbolIcon ClipboardPaste24}"
+                       Appearance="Primary" Height="36" Padding="14,0"
+                       Margin="8,0,0,0" VerticalAlignment="Center"
+                       Visibility="Collapsed" Click="BtnClipboardAdd_Click"/>
         </Grid>
     </Grid>
 </UserControl>

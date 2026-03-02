@@ -1,6 +1,8 @@
+using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using System.Windows.Controls;
+using System.Windows.Input;
 using MergeMansionWikiTools.Services;
 
 namespace MergeMansionWikiTools.Views;
@@ -16,7 +18,7 @@ public partial class AboutPage : UserControl
     {
         _main = main;
         InitializeComponent();
-        txtVersion.Text = "v0.12.0";
+        txtVersion.Text = "v0.13.0";
         RefreshStats();
     }
 
@@ -58,6 +60,24 @@ public partial class AboutPage : UserControl
             ? "—"
             : stats.FirstLaunch.ToLocalTime().ToString("d MMM yyyy");
     }
+
+    private void JoukiAvatar_Click(object sender, MouseButtonEventArgs e) =>
+        Process.Start(new ProcessStartInfo("https://github.com/jouki") { UseShellExecute = true });
+
+    private void JoukiName_Click(object sender, MouseButtonEventArgs e) =>
+        Process.Start(new ProcessStartInfo("https://github.com/jouki") { UseShellExecute = true });
+
+    private void RepoLink_Click(object sender, MouseButtonEventArgs e) =>
+        Process.Start(new ProcessStartInfo("https://github.com/jouki/MergeMansionWikiTools") { UseShellExecute = true });
+
+    private void OnepiecefreakAvatar_Click(object sender, MouseButtonEventArgs e) =>
+        Process.Start(new ProcessStartInfo("https://github.com/onepiecefreak3") { UseShellExecute = true });
+
+    private void OnepiecefreakName_Click(object sender, MouseButtonEventArgs e) =>
+        Process.Start(new ProcessStartInfo("https://github.com/onepiecefreak3") { UseShellExecute = true });
+
+    private void DumperRepo_Click(object sender, MouseButtonEventArgs e) =>
+        Process.Start(new ProcessStartInfo("https://github.com/mm-utils/merge-mansion-dumper") { UseShellExecute = true });
 
     private static int? TryCountAreas(string path)
     {

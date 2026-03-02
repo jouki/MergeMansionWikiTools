@@ -44,7 +44,6 @@ public partial class MainWindow : FluentWindow
     private bool _wikiMappingApplied;
 
     private ChainBrowserPage? _chainPage;
-    private ImageSplitterPage? _imageSplitterPage;
     private ImageOptimiserPage? _imageOptimiserPage;
     private WikiDataParserPage? _wikiDataParserPage;
     private ImageExtractorPage? _imageExtractorPage;
@@ -52,6 +51,7 @@ public partial class MainWindow : FluentWindow
     private MysteriesPage? _mysteriesPage;
     private AreaFlowchartsPage2? _areaFlowchartsPage;
     private AreaFlowchartsDevPage? _areaFlowchartsDevPage;
+    private GameDataDumperPage? _gameDataDumperPage;
     private SettingsPage? _settingsPage;
     private AboutPage? _aboutPage;
 
@@ -178,12 +178,7 @@ public partial class MainWindow : FluentWindow
         if (e.Key == System.Windows.Input.Key.V &&
             System.Windows.Input.Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
         {
-            if (contentArea.Content is ImageSplitterPage isPage)
-            {
-                if (isPage.HandleCtrlV())
-                    e.Handled = true;
-            }
-            else if (contentArea.Content is ImageOptimiserPage ioPage)
+            if (contentArea.Content is ImageOptimiserPage ioPage)
             {
                 if (ioPage.HandleCtrlV())
                     e.Handled = true;
@@ -198,19 +193,19 @@ public partial class MainWindow : FluentWindow
         if (contentArea == null) return;
         AppLogger.Info($"Navigate → index {navList.SelectedIndex}");
 
-        // Stop clipboard monitor when leaving IS page (unless global)
-        if (navList.SelectedIndex != 1 && _imageSplitterPage != null && !Settings.ClipboardMonitorGlobal)
-            _imageSplitterPage.StopClipboardMonitor();
+        // Stop clipboard monitor when leaving IO page (unless global)
+        if (navList.SelectedIndex != 1 && _imageOptimiserPage != null && !Settings.ClipboardMonitorGlobal)
+            _imageOptimiserPage.StopClipboardMonitor();
 
         switch (navList.SelectedIndex)
         {
             case 0: ShowChainsPage(); break;
-            case 1: ShowImageSplitterPage(); break;
-            case 2: ShowImageOptimiserPage(); break;
-            case 3: ShowDialogueMakerPage(); break;
-            case 4: ShowWikiDataParserPage(); break;
-            case 5: ShowImageExtractorPage(); break;
-            case 6: ShowMysteriesPage(); break;
+            case 1: ShowImageOptimiserPage(); break;
+            case 2: ShowDialogueMakerPage(); break;
+            case 3: ShowWikiDataParserPage(); break;
+            case 4: ShowImageExtractorPage(); break;
+            case 5: ShowMysteriesPage(); break;
+            case 6: ShowGameDataDumperPage(); break;
             case 7: ShowAreaFlowchartsPage(); break;
             case 8: ShowAreaFlowchartsDevPage(); break;
             case 9: ShowSettingsPage(); break;
@@ -226,19 +221,11 @@ public partial class MainWindow : FluentWindow
         contentArea.Content = _chainPage;
     }
 
-    private void ShowImageSplitterPage()
-    {
-        _imageSplitterPage ??= new ImageSplitterPage(this);
-        // If already showing chain mode content, don't reset it
-        if (contentArea.Content != _imageSplitterPage)
-            contentArea.Content = _imageSplitterPage;
-        _imageSplitterPage.StartClipboardMonitor();
-    }
-
     private void ShowImageOptimiserPage()
     {
         _imageOptimiserPage ??= new ImageOptimiserPage(this);
         contentArea.Content = _imageOptimiserPage;
+        _imageOptimiserPage.StartClipboardMonitor();
     }
 
     private void ShowWikiDataParserPage()
@@ -273,6 +260,12 @@ public partial class MainWindow : FluentWindow
     {
         _mysteriesPage ??= new MysteriesPage(this);
         contentArea.Content = _mysteriesPage;
+    }
+
+    private void ShowGameDataDumperPage()
+    {
+        _gameDataDumperPage ??= new GameDataDumperPage(this);
+        contentArea.Content = _gameDataDumperPage;
     }
 
     private void ShowAreaFlowchartsPage()
@@ -772,7 +765,7 @@ public partial class MainWindow : FluentWindow
         _imageOptimiserPage ??= new ImageOptimiserPage(this);
         _imageOptimiserPage.EnterChainMode(chain);
         contentArea.Content = _imageOptimiserPage;
-        navList.SelectedIndex = 2;
+        navList.SelectedIndex = 1;
     }
 
     public void NavigateToSettingsHighlightApk()

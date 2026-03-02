@@ -98,16 +98,8 @@
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="/Assets/ImageSplitterIcon.ico" Width="42" Height="42" Margin="0,0,12,0"
                                            RenderOptions.BitmapScalingMode="HighQuality"/>
-                                    <TextBlock Text="Image Splitter" FontSize="14" VerticalAlignment="Center"
+                                    <TextBlock Text="Image Optimiser" FontSize="14" VerticalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                                </StackPanel>
-                            </ListBoxItem>
-                            <ListBoxItem Padding="12,8">
-                                <StackPanel Orientation="Horizontal" Margin="16,0,0,0">
-                                    <ui:SymbolIcon Symbol="ImageEdit24" FontSize="18" Margin="0,0,12,0"
-                                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
-                                    <TextBlock Text="Image Optimiser" FontSize="13" VerticalAlignment="Center"
-                                               Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
                                 </StackPanel>
                             </ListBoxItem>
                             <ListBoxItem>
@@ -139,6 +131,14 @@
                                     <ui:SymbolIcon Symbol="Trophy24" FontSize="22" Margin="0,0,12,0"
                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                                     <TextBlock Text="Mysteries" FontSize="14" VerticalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                </StackPanel>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <StackPanel Orientation="Horizontal">
+                                    <ui:SymbolIcon Symbol="DatabaseArrowDown20" FontSize="22" Margin="0,0,12,0"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                    <TextBlock Text="Game Data Dumper" FontSize="14" VerticalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                                 </StackPanel>
                             </ListBoxItem>

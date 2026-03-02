@@ -11,7 +11,7 @@ public class AppSettings
     public bool ForceCustomNamePrompt { get; set; } = false;
     public bool LowPrices { get; set; } = false;
 
-    // Image Splitter
+    // Image Optimiser
     public string TinifyApiKey { get; set; } = "";
     public string TinifyApiKey2 { get; set; } = "";
     public bool ClipboardAutoAdd { get; set; } = true;
@@ -51,6 +51,13 @@ public class AppSettings
 
     // Debug
     public bool DebugMode { get; set; } = false;
+    public bool ShowDetectionIndices { get; set; } = false;
+
+    // Game Data Dumper
+    public string DumperConfigPath { get; set; } = "";
+    public string DumperPatchPath { get; set; } = "";
+    public string DumperLanguagePath { get; set; } = "";
+    public string DumperOutputPath { get; set; } = "";
 
     // Appearance
     public string ThemePreference { get; set; } = "System"; // "System", "Light", "Dark"

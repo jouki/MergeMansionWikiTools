@@ -198,7 +198,7 @@ public partial class WikiUploadDialog : FluentWindow
                 Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0xFF, 0xA5, 0x00)),
                 VerticalAlignment = VerticalAlignment.Center,
                 Margin = new Thickness(2, 0, 10, 0),
-                ToolTip = "This image must be optimized before uploading to the wiki"
+                ToolTip = "This image must be optimised before uploading to the wiki"
             };
             ToolTipService.SetInitialShowDelay(warnIcon, 0);
             Grid.SetColumn(warnIcon, 0);
@@ -484,7 +484,7 @@ public partial class WikiUploadDialog : FluentWindow
                     Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0xFF, 0xA5, 0x00)),
                     VerticalAlignment = VerticalAlignment.Center,
                     Margin = new Thickness(2, 0, 8, 0),
-                    ToolTip = "This image must be optimized before uploading to the wiki"
+                    ToolTip = "This image must be optimised before uploading to the wiki"
                 };
                 ToolTipService.SetInitialShowDelay(warnIcon, 0);
                 Grid.SetColumn(warnIcon, 0);

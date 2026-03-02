@@ -13,6 +13,7 @@
     <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
     <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <DefaultItemExcludes>$(DefaultItemExcludes);External\**</DefaultItemExcludes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,7 +22,12 @@
     <PackageReference Include="WPF-UI" Version="4.2.0" />
     <PackageReference Include="System.Text.Json" Version="9.0.3" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
+    <PackageReference Include="MediaDevices" Version="1.10.0" />
     <PackageReference Include="Tinify" Version="1.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="External\merge-mansion-dumper\merge-mansion-dumper.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +35,7 @@
     <Resource Include="Assets\AppLogo.ico" />
     <Resource Include="Assets\AppAboutLogo.jpg" />
     <Resource Include="Assets\ClaudeIcon.png" />
+    <Resource Include="Assets\OnepiecefreakAvatar.png" />
     <Resource Include="Assets\SplashLogo.png" />
   </ItemGroup>
 

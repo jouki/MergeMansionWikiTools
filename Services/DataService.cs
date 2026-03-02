@@ -81,20 +81,34 @@ public class DataService
 
                 foreach (var entry in list.EnumerateArray())
                 {
-                    if (!entry.TryGetProperty("Item", out var item)) continue;
-
-                    var itemType = GetString(item, "ItemType");
-                    var name = GetString(item, "Name");
-                    var levelNum = GetInt(item, "LevelNumber");
-
-                    if (!string.IsNullOrEmpty(itemType))
+                    // Normal: single "Item" per level
+                    if (entry.TryGetProperty("Item", out var item))
                     {
-                        if (!string.IsNullOrEmpty(name))
-                            ItemNames.TryAdd(itemType, name);
-                        ItemLevels.TryAdd(itemType, levelNum);
+                        RegisterItemName(item);
+                        continue;
+                    }
+                    // Atypical: "Items" array — multiple variants per level
+                    if (entry.TryGetProperty("Items", out var items) && items.ValueKind == JsonValueKind.Array)
+                    {
+                        foreach (var it in items.EnumerateArray())
+                            RegisterItemName(it);
                     }
                 }
             }
+        }
+    }
+
+    private void RegisterItemName(JsonElement item)
+    {
+        var itemType = GetString(item, "ItemType");
+        var name = GetString(item, "Name");
+        var levelNum = GetInt(item, "LevelNumber");
+
+        if (!string.IsNullOrEmpty(itemType))
+        {
+            if (!string.IsNullOrEmpty(name))
+                ItemNames.TryAdd(itemType, name);
+            ItemLevels.TryAdd(itemType, levelNum);
         }
     }
 
@@ -129,11 +143,24 @@ public class DataService
             // Parse items
             foreach (var entry in primaryList.EnumerateArray())
             {
-                if (!entry.TryGetProperty("Item", out var itemEl)) continue;
-
-                var parsedItem = ParseItem(itemEl);
-                if (parsedItem != null)
-                    parsed.Items.Add(parsedItem);
+                // Normal: single "Item" per level
+                if (entry.TryGetProperty("Item", out var itemEl))
+                {
+                    var parsedItem = ParseItem(itemEl);
+                    if (parsedItem != null)
+                        parsed.Items.Add(parsedItem);
+                    continue;
+                }
+                // Atypical: "Items" array — multiple variants per level
+                if (entry.TryGetProperty("Items", out var itemsEl) && itemsEl.ValueKind == JsonValueKind.Array)
+                {
+                    foreach (var it in itemsEl.EnumerateArray())
+                    {
+                        var parsedItem = ParseItem(it);
+                        if (parsedItem != null)
+                            parsed.Items.Add(parsedItem);
+                    }
+                }
             }
 
             if (parsed.Items.Count > 0)

@@ -1,0 +1,24 @@
+using GameLogic.Player.Items;
+using Metaplay.Core.Model;
+using System;
+using System.Collections.Generic;
+using GameLogic.Config;
+
+namespace GameLogic.MergeChains
+{
+    [MetaSerializable]
+    public interface IMergeChainElement
+    {
+        // RVA: -1 Offset: -1 Slot: 0
+        int IndexOf(int itemId);
+        // RVA: -1 Offset: -1 Slot: 1
+        bool Contains(int itemId);
+        // RVA: -1 Offset: -1 Slot: 2
+        ItemDefinition First();
+        // RVA: -1 Offset: -1 Slot: 4
+        ItemDefinition ElementAtOrDefault(int index);
+        int Count { get; }
+
+        IEnumerable<ItemDef> AllItemDefs { get; }
+    }
+}

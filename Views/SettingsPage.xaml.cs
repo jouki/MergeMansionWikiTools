@@ -38,6 +38,7 @@ public partial class SettingsPage : UserControl
 
         // Debug mode
         toggleDebugMode.IsChecked = _main.Settings.DebugMode;
+        toggleDetectionIndices.IsChecked = _main.Settings.ShowDetectionIndices;
 
         // Image Extractor advanced
         toggleExtractBuiltIn.IsChecked = _main.Settings.ExtractIncludeBuiltIn;
@@ -957,6 +958,13 @@ public partial class SettingsPage : UserControl
     {
         if (!IsLoaded) return;
         _main.Settings.DebugMode = toggleDebugMode.IsChecked == true;
+        _main.SaveSettings();
+    }
+
+    private void ToggleDetectionIndices_Changed(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        _main.Settings.ShowDetectionIndices = toggleDetectionIndices.IsChecked == true;
         _main.SaveSettings();
     }
 

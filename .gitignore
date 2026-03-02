@@ -364,3 +364,15 @@ FodyWeavers.xsd
 
 # git-crypt key
 git-crypt.key
+
+# External dumper assets (not needed for build)
+External/merge-mansion-dumper/assets/
+
+# Il2CppDumper tool (separate standalone exe, not part of build)
+tools/Il2CppDumper/
+
+# Runtime game data (pulled from phone or manually copied)
+_DATA/
+
+# Claude Code local config
+.claude/

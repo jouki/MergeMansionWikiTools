@@ -231,20 +231,20 @@
                 </ScrollViewer>
 
                 <!-- ══════════════════════════════════════════════════════════
-                     STEP 3 — Image Splitter API
+                     STEP 3 — Image Optimiser API
                      ══════════════════════════════════════════════════════════ -->
                 <ScrollViewer x:Name="panelStep3" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
                             <ui:SymbolIcon Symbol="ImageEdit24" FontSize="20" Margin="0,0,8,0"
                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                            <TextBlock Text="Image Splitter" FontSize="16" FontWeight="SemiBold"
+                            <TextBlock Text="Image Optimiser" FontSize="16" FontWeight="SemiBold"
                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                         </StackPanel>
 
                         <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
                                    TextWrapping="Wrap" Margin="0,0,0,12">
-                            <Run Text="The Image Splitter compresses images using the TinyPNG API before uploading them to the wiki." />
+                            <Run Text="The Image Optimiser compresses images using the TinyPNG API before uploading them to the wiki." />
                         </TextBlock>
 
                         <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"

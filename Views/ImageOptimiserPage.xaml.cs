@@ -1,5 +1,6 @@
 using System.IO;
 using System.Net.Http;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -31,6 +32,7 @@ internal class OptimiserImage
     public bool IsOptimized { get; set; }
     public List<string> SplitResultFiles { get; set; } = new();
     public List<(Rectangle Full, Rectangle Main)> DetectedObjects { get; set; } = new();
+    public List<(Rectangle Full, Rectangle Main)> RawDetectedObjects { get; set; } = new();
     public int DetectedColumns { get; set; } = 1;
     public string? DetectedChainName { get; set; }
 }
@@ -56,11 +58,18 @@ public partial class ImageOptimiserPage : UserControl
     private readonly HashSet<string> _optimizedFiles = new(StringComparer.OrdinalIgnoreCase);
     private bool _suppressIndexReset;
 
+    // ── Clipboard monitoring ──
+    [DllImport("user32.dll")]
+    private static extern uint GetClipboardSequenceNumber();
+
+    private DispatcherTimer? _clipboardTimer;
+    private uint _lastClipboardSeq;
+
     // ── Chain mode state ──
     private ParsedChain? _activeChain;
     private string? _resolvedFilenameBase;
 
-    // ── Object detection constants (same as ImageSplitterPage) ──
+    // ── Object detection constants ──
     private const int AlphaThreshold = 5;
     private const int MainAlphaThreshold = 80;
     private const int MinCellArea = 400;
@@ -73,6 +82,11 @@ public partial class ImageOptimiserPage : UserControl
 
         _main.WikiVerifiedChanged += OnWikiVerifiedChanged;
         _main.TinifyApiKeyChanged += OnTinifyApiKeyChanged;
+
+        // Hide clipboard Add button when InfoBar is closed
+        var dpd = System.ComponentModel.DependencyPropertyDescriptor.FromProperty(
+            Wpf.Ui.Controls.InfoBar.IsOpenProperty, typeof(Wpf.Ui.Controls.InfoBar));
+        dpd?.AddValueChanged(infoBar, (_, _) => { if (!infoBar.IsOpen) HideClipboardAdd(); });
 
         UpdateOptimizeButtonState();
         UpdateUploadButtonState();
@@ -104,7 +118,7 @@ public partial class ImageOptimiserPage : UserControl
         else
         {
             btnUploadWiki.IsEnabled = true;
-            btnUploadWiki.ToolTip = "Upload optimized images to the wiki";
+            btnUploadWiki.ToolTip = "Upload optimised images to the wiki";
         }
     }
 
@@ -167,7 +181,8 @@ public partial class ImageOptimiserPage : UserControl
             try
             {
                 using var img = Image.Load<Rgba32>(path);
-                oi.DetectedObjects = DetectObjects(img);
+                oi.RawDetectedObjects = DetectObjects(img);
+                oi.DetectedObjects = oi.RawDetectedObjects;
                 var ordered = OrderObjects(oi.DetectedObjects);
                 if (ordered.Count > 0)
                 {
@@ -518,6 +533,7 @@ public partial class ImageOptimiserPage : UserControl
         bool anyScissors = newCluster?.Images.Any(i => i.IsScissorsActive) == true;
         indexInputPanel.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
         btnSplit.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+        btnRefreshDetection.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
 
         // Update detection overlay
         UpdateDetectionOverlay();
@@ -686,10 +702,32 @@ public partial class ImageOptimiserPage : UserControl
             double baseOffsetX = imgOrigin.X + (dispW - renderedW) / 2;
             double baseOffsetY = imgOrigin.Y + (dispH - renderedH) / 2;
 
+            // Parse current index input for labels
+            var suffixes = inputIndices.Text
+                .Split(new[] { ' ', ',', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            string[]? labels = suffixes.Length > 0 ? suffixes : null;
+
+            // Real-time merge: adapt DetectedObjects to suffix count
+            if (suffixes.Length > 0)
+            {
+                foreach (var oi in activeImages)
+                {
+                    if (oi.RawDetectedObjects.Count > suffixes.Length)
+                        oi.DetectedObjects = MergeToExpectedCount(oi.RawDetectedObjects, suffixes.Length);
+                    else
+                        oi.DetectedObjects = oi.RawDetectedObjects;
+                }
+            }
+            else
+            {
+                foreach (var oi in activeImages)
+                    oi.DetectedObjects = oi.RawDetectedObjects;
+            }
+
             if (_selectedCluster.Images.Count == 1)
             {
                 // Single image — simple overlay
-                DrawDetectionRects(_selectedCluster.Images[0], baseOffsetX, baseOffsetY, scale);
+                DrawDetectionRects(_selectedCluster.Images[0], baseOffsetX, baseOffsetY, scale, labels, 0);
             }
             else
             {
@@ -724,6 +762,7 @@ public partial class ImageOptimiserPage : UserControl
                     maxRowWidth = Math.Max(maxRowWidth, w);
                 }
 
+                int labelOffset = 0;
                 double pixelY = 0;
                 for (int r = 0; r < rows.Count; r++)
                 {
@@ -735,7 +774,8 @@ public partial class ImageOptimiserPage : UserControl
                         {
                             double ox = baseOffsetX + pixelX * scale;
                             double oy = baseOffsetY + pixelY * scale;
-                            DrawDetectionRects(oi, ox, oy, scale);
+                            DrawDetectionRects(oi, ox, oy, scale, labels, labelOffset);
+                            labelOffset += OrderObjects(oi.DetectedObjects).Count;
                         }
                         pixelX += pw;
                     }
@@ -745,10 +785,13 @@ public partial class ImageOptimiserPage : UserControl
         }, DispatcherPriority.Loaded);
     }
 
-    private void DrawDetectionRects(OptimiserImage oi, double offsetX, double offsetY, double scale)
+    private void DrawDetectionRects(OptimiserImage oi, double offsetX, double offsetY, double scale,
+                                     string[]? labels = null, int labelOffset = 0)
     {
-        foreach (var obj in oi.DetectedObjects)
+        var ordered = OrderObjects(oi.DetectedObjects);
+        for (int i = 0; i < ordered.Count; i++)
         {
+            var obj = ordered[i];
             var rect = new System.Windows.Shapes.Rectangle
             {
                 Width = obj.Main.Width * scale,
@@ -758,9 +801,48 @@ public partial class ImageOptimiserPage : UserControl
                 Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(0x20, 0xFF, 0x00, 0x00)),
                 IsHitTestVisible = false
             };
-            Canvas.SetLeft(rect, offsetX + obj.Main.Left * scale);
-            Canvas.SetTop(rect, offsetY + obj.Main.Top * scale);
+            double left = offsetX + obj.Main.Left * scale;
+            double top = offsetY + obj.Main.Top * scale;
+            Canvas.SetLeft(rect, left);
+            Canvas.SetTop(rect, top);
             detectionOverlay.Children.Add(rect);
+
+            // Label
+            int globalIdx = labelOffset + i;
+            string? labelText = null;
+            System.Windows.Media.Color labelColor = Colors.White;
+            if (labels != null && globalIdx < labels.Length)
+            {
+                labelText = labels[globalIdx];
+                labelColor = labelText == "-"
+                    ? System.Windows.Media.Color.FromRgb(0xFF, 0xA5, 0x00)  // orange for skip
+                    : Colors.White;
+            }
+            else if (_main.Settings.ShowDetectionIndices)
+            {
+                labelText = (i + 1).ToString();
+                labelColor = System.Windows.Media.Color.FromArgb(0xB0, 0xFF, 0xFF, 0xFF); // dim
+            }
+
+            if (labelText == null) continue;
+
+            var labelBorder = new Border
+            {
+                Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(0xAA, 0x00, 0x00, 0x00)),
+                CornerRadius = new CornerRadius(3),
+                Padding = new Thickness(4, 1, 4, 1),
+                IsHitTestVisible = false,
+                Child = new System.Windows.Controls.TextBlock
+                {
+                    Text = labelText,
+                    Foreground = new SolidColorBrush(labelColor),
+                    FontSize = 12,
+                    FontWeight = FontWeights.Bold
+                }
+            };
+            Canvas.SetLeft(labelBorder, left);
+            Canvas.SetTop(labelBorder, top);
+            detectionOverlay.Children.Add(labelBorder);
         }
     }
 
@@ -832,6 +914,7 @@ public partial class ImageOptimiserPage : UserControl
             bool anyScissors = cluster.Images.Any(i => i.IsScissorsActive);
             indexInputPanel.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
             btnSplit.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+            btnRefreshDetection.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
         }
 
         // Update overlay if toggled image is in the displayed cluster
@@ -874,6 +957,7 @@ public partial class ImageOptimiserPage : UserControl
                 txtPlaceholder.Visibility = Visibility.Visible;
                 indexInputPanel.Visibility = Visibility.Collapsed;
                 btnSplit.Visibility = Visibility.Collapsed;
+                btnRefreshDetection.Visibility = Visibility.Collapsed;
                 detectionOverlay.Children.Clear();
             }
         }
@@ -893,6 +977,7 @@ public partial class ImageOptimiserPage : UserControl
         txtPlaceholder.Visibility = Visibility.Visible;
         indexInputPanel.Visibility = Visibility.Collapsed;
         btnSplit.Visibility = Visibility.Collapsed;
+        btnRefreshDetection.Visibility = Visibility.Collapsed;
         detectionOverlay.Children.Clear();
         UpdateUploadButtonState();
     }
@@ -905,9 +990,9 @@ public partial class ImageOptimiserPage : UserControl
     {
         if (target == source) return false;
 
-        var targetCluster = _clusters.First(c => c.Images.Contains(target));
-        var sourceCluster = _clusters.First(c => c.Images.Contains(source));
-        if (targetCluster == sourceCluster) return false;
+        var targetCluster = _clusters.FirstOrDefault(c => c.Images.Contains(target));
+        var sourceCluster = _clusters.FirstOrDefault(c => c.Images.Contains(source));
+        if (targetCluster == null || sourceCluster == null || targetCluster == sourceCluster) return false;
 
         // Merge: append source images to target cluster
         targetCluster.Images.AddRange(sourceCluster.Images);
@@ -1119,8 +1204,9 @@ public partial class ImageOptimiserPage : UserControl
         }
         else
         {
-            var sourceCluster = _clusters.First(c => c.Images.Contains(source));
-            var targetCluster = _clusters.First(c => c.Images.Contains(target));
+            var sourceCluster = _clusters.FirstOrDefault(c => c.Images.Contains(source));
+            var targetCluster = _clusters.FirstOrDefault(c => c.Images.Contains(target));
+            if (sourceCluster == null || targetCluster == null) return;
 
             if (sourceCluster == targetCluster && sourceCluster.Images.Count > 1)
             {
@@ -1176,7 +1262,8 @@ public partial class ImageOptimiserPage : UserControl
         if (!e.Data.GetDataPresent("OptimiserImage")) return;
 
         var source = (OptimiserImage)e.Data.GetData("OptimiserImage")!;
-        var sourceCluster = _clusters.First(c => c.Images.Contains(source));
+        var sourceCluster = _clusters.FirstOrDefault(c => c.Images.Contains(source));
+        if (sourceCluster == null) return;
 
         if (sender is not FrameworkElement el || el.Tag is not OptimiserCluster afterCluster) return;
 
@@ -1251,6 +1338,10 @@ public partial class ImageOptimiserPage : UserControl
     private void InputIndices_TextChanged(object sender, TextChangedEventArgs e)
     {
         if (_suppressIndexReset) return;
+
+        // Refresh overlay labels on every keystroke
+        UpdateDetectionOverlay();
+
         if (_selectedCluster == null || !_selectedCluster.Images.Any(i => i.IsSplit)) return;
 
         // Compare normalized tokens — only reset if the actual indices changed
@@ -1286,6 +1377,26 @@ public partial class ImageOptimiserPage : UserControl
     }
 
     private void BtnSplit_Click(object sender, RoutedEventArgs e) => ProcessSplit();
+
+    private void BtnRefreshDetection_Click(object sender, RoutedEventArgs e)
+    {
+        if (_selectedCluster == null) return;
+
+        // Re-run the expensive flood fill detection and cache raw results
+        foreach (var oi in _selectedCluster.Images.Where(i => i.IsScissorsActive))
+        {
+            try
+            {
+                using var img = SixLabors.ImageSharp.Image.Load<Rgba32>(oi.FilePath);
+                oi.RawDetectedObjects = DetectObjects(img);
+                oi.DetectedObjects = oi.RawDetectedObjects;
+            }
+            catch { /* detection failed — non-critical */ }
+        }
+
+        // UpdateDetectionOverlay will apply MergeToExpectedCount based on current suffixes
+        UpdateDetectionOverlay();
+    }
 
     private void ProcessSplit()
     {
@@ -1446,7 +1557,7 @@ public partial class ImageOptimiserPage : UserControl
             var msgBox = new Wpf.Ui.Controls.MessageBox
             {
                 Title = "Unsplit images detected",
-                Content = "You have entered split indices but haven't split the images yet.\n\nDo you want to split them and proceed to optimization?",
+                Content = "You have entered split indices but haven't split the images yet.\n\nDo you want to split them and proceed to optimisation?",
                 PrimaryButtonText = "Split & proceed",
                 SecondaryButtonText = "Skip",
                 CloseButtonText = "Cancel",
@@ -1542,7 +1653,7 @@ public partial class ImageOptimiserPage : UserControl
 
             Increment(s => s.ImagesOptimized += optimizedPaths.Count);
 
-            infoBar.Message = $"Optimized {optimizedPaths.Count} images.";
+            infoBar.Message = $"Optimised {optimizedPaths.Count} images.";
             infoBar.Severity = InfoBarSeverity.Success;
             infoBar.IsOpen = true;
 
@@ -1683,6 +1794,117 @@ public partial class ImageOptimiserPage : UserControl
     }
 
     // ══════════════════════════════════════════════════════════════
+    //  CLIPBOARD MONITORING
+    // ══════════════════════════════════════════════════════════════
+
+    public void StartClipboardMonitor()
+    {
+        if (_clipboardTimer != null) return;
+        _lastClipboardSeq = GetClipboardSequenceNumber();
+        _clipboardTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
+        _clipboardTimer.Tick += ClipboardMonitor_Tick;
+        _clipboardTimer.Start();
+    }
+
+    public void StopClipboardMonitor()
+    {
+        _clipboardTimer?.Stop();
+        _clipboardTimer = null;
+    }
+
+    /// <summary>Returns clipboard image file paths (FileDrop with image extensions), or null.</summary>
+    private static string[]? GetClipboardImageFiles()
+    {
+        if (!Clipboard.ContainsFileDropList()) return null;
+        var files = Clipboard.GetFileDropList();
+        var images = new List<string>();
+        foreach (string? f in files)
+            if (f != null && IsImageFile(f) && File.Exists(f))
+                images.Add(f);
+        return images.Count > 0 ? images.ToArray() : null;
+    }
+
+    private void ClipboardMonitor_Tick(object? sender, EventArgs e)
+    {
+        try
+        {
+            var seq = GetClipboardSequenceNumber();
+            if (seq == _lastClipboardSeq) return;
+
+            // Check for copied image files first (Ctrl+C on .png in Explorer)
+            var imageFiles = GetClipboardImageFiles();
+            bool hasBitmap = Clipboard.ContainsImage()
+                          || Clipboard.ContainsData(DataFormats.Bitmap)
+                          || Clipboard.ContainsData(DataFormats.Dib);
+
+            if (!hasBitmap && imageFiles == null)
+            {
+                _lastClipboardSeq = seq;
+                return;
+            }
+
+            if (_main.Settings.ClipboardAutoAdd)
+            {
+                _lastClipboardSeq = seq;
+                if (imageFiles != null)
+                {
+                    AddImages(imageFiles);
+                }
+                else
+                {
+                    var bmp = Clipboard.GetImage();
+                    if (bmp != null)
+                    {
+                        // Save clipboard image to temp file, then add
+                        var tempDir = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "MergeMansionWikiTools");
+                        Directory.CreateDirectory(tempDir);
+                        var tempPath = System.IO.Path.Combine(tempDir, $"clipboard_{DateTime.Now:yyyyMMdd_HHmmss}.png");
+
+                        var encoder = new PngBitmapEncoder();
+                        encoder.Frames.Add(BitmapFrame.Create(bmp));
+                        using (var fs = new FileStream(tempPath, FileMode.Create))
+                            encoder.Save(fs);
+
+                        AddImages(new[] { tempPath });
+                    }
+                }
+            }
+            else
+            {
+                _lastClipboardSeq = seq;
+                int count = imageFiles?.Length ?? 1;
+                ShowClipboardNotification(count);
+            }
+        }
+        catch
+        {
+            // Clipboard access can throw — silently ignore
+        }
+    }
+
+    private void ShowClipboardNotification(int count)
+    {
+        infoBar.Content = null;
+        infoBar.Message = count == 1
+            ? "Image detected in clipboard — press Ctrl+V or click Add."
+            : $"{count} images detected in clipboard — press Ctrl+V or click Add.";
+        infoBar.Severity = InfoBarSeverity.Informational;
+        infoBar.IsOpen = true;
+        btnClipboardAdd.Visibility = Visibility.Visible;
+    }
+
+    private void HideClipboardAdd()
+    {
+        btnClipboardAdd.Visibility = Visibility.Collapsed;
+    }
+
+    private void BtnClipboardAdd_Click(object sender, RoutedEventArgs e)
+    {
+        HideClipboardAdd();
+        PasteFromClipboard();
+    }
+
+    // ══════════════════════════════════════════════════════════════
     //  CTRL+V PASTE
     // ══════════════════════════════════════════════════════════════
 
@@ -1692,6 +1914,7 @@ public partial class ImageOptimiserPage : UserControl
         // Don't intercept when typing in the indices TextBox
         if (Keyboard.FocusedElement is System.Windows.Controls.TextBox) return false;
 
+        HideClipboardAdd();
         PasteFromClipboard();
         return true;
     }
@@ -1711,6 +1934,7 @@ public partial class ImageOptimiserPage : UserControl
 
                 if (images.Count > 0)
                 {
+                    _lastClipboardSeq = GetClipboardSequenceNumber();
                     AddImages(images.ToArray());
                     return;
                 }
@@ -1722,6 +1946,8 @@ public partial class ImageOptimiserPage : UserControl
                 var bmp = Clipboard.GetImage();
                 if (bmp != null)
                 {
+                    _lastClipboardSeq = GetClipboardSequenceNumber();
+
                     // Save clipboard image to temp file, then add
                     var tempDir = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "MergeMansionWikiTools");
                     Directory.CreateDirectory(tempDir);
@@ -1838,7 +2064,7 @@ public partial class ImageOptimiserPage : UserControl
     }
 
     // ══════════════════════════════════════════════════════════════
-    //  OBJECT DETECTION — Flood Fill + Smart Merge (duplicated from ImageSplitterPage)
+    //  OBJECT DETECTION — Flood Fill + Smart Merge
     // ══════════════════════════════════════════════════════════════
 
     private static List<(Rectangle Full, Rectangle Main)> DetectObjects(Image<Rgba32> img)
@@ -1860,7 +2086,78 @@ public partial class ImageOptimiserPage : UserControl
                 }
             }
 
-        return list;
+        return MergeColumnStacks(list);
+    }
+
+    /// <summary>
+    /// Merges vertically stacked objects that share the same horizontal column.
+    /// Sprite sheets typically arrange items in a single row; multiple objects
+    /// stacked vertically in one column are almost always parts of the same item
+    /// (e.g. separate kebab skewers with a transparent gap between them).
+    /// </summary>
+    private static List<(Rectangle Full, Rectangle Main)> MergeColumnStacks(
+        List<(Rectangle Full, Rectangle Main)> objects)
+    {
+        if (objects.Count <= 1) return objects;
+
+        // Union-Find: group objects sharing >40% horizontal overlap
+        int n = objects.Count;
+        var parent = Enumerable.Range(0, n).ToArray();
+
+        int Find(int x) { while (parent[x] != x) x = parent[x] = parent[parent[x]]; return x; }
+        void Unite(int a, int b) { parent[Find(a)] = Find(b); }
+
+        for (int i = 0; i < n; i++)
+            for (int j = i + 1; j < n; j++)
+            {
+                int overlapLeft = Math.Max(objects[i].Full.Left, objects[j].Full.Left);
+                int overlapRight = Math.Min(objects[i].Full.Left + objects[i].Full.Width,
+                                            objects[j].Full.Left + objects[j].Full.Width);
+                int overlap = Math.Max(0, overlapRight - overlapLeft);
+                int narrower = Math.Min(objects[i].Full.Width, objects[j].Full.Width);
+                if (narrower > 0 && (double)overlap / narrower > 0.4)
+                    Unite(i, j);
+            }
+
+        // Build column groups
+        var groups = new Dictionary<int, List<int>>();
+        for (int i = 0; i < n; i++)
+        {
+            int root = Find(i);
+            if (!groups.ContainsKey(root)) groups[root] = new();
+            groups[root].Add(i);
+        }
+
+        // Only merge if majority of columns are single-object
+        int singleCount = groups.Values.Count(g => g.Count == 1);
+        if (singleCount * 2 <= groups.Count) return objects; // ≤50% single → likely a grid, don't merge
+
+        // Merge multi-object columns
+        var result = new List<(Rectangle Full, Rectangle Main)>();
+        foreach (var group in groups.Values)
+        {
+            if (group.Count == 1)
+            {
+                result.Add(objects[group[0]]);
+                continue;
+            }
+
+            // Union of all Full and Main rectangles in the group
+            int fL = int.MaxValue, fT = int.MaxValue, fR = int.MinValue, fB = int.MinValue;
+            int mL = int.MaxValue, mT = int.MaxValue, mR = int.MinValue, mB = int.MinValue;
+            foreach (int idx in group)
+            {
+                var (full, main) = objects[idx];
+                fL = Math.Min(fL, full.Left); fT = Math.Min(fT, full.Top);
+                fR = Math.Max(fR, full.Left + full.Width); fB = Math.Max(fB, full.Top + full.Height);
+                mL = Math.Min(mL, main.Left); mT = Math.Min(mT, main.Top);
+                mR = Math.Max(mR, main.Left + main.Width); mB = Math.Max(mB, main.Top + main.Height);
+            }
+            result.Add((new Rectangle(fL, fT, fR - fL, fB - fT),
+                         new Rectangle(mL, mT, mR - mL, mB - mT)));
+        }
+
+        return result;
     }
 
     private static (Rectangle Full, Rectangle Main) FloodFill(Image<Rgba32> img, int sx, int sy, bool[,] v)

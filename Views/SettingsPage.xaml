@@ -344,7 +344,7 @@
                     <StackPanel Orientation="Horizontal" Margin="4,0,0,10">
                         <ui:SymbolIcon Symbol="ImageEdit24" FontSize="20" Margin="0,0,8,0"
                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                        <TextBlock Text="Image Splitter" FontSize="16" FontWeight="SemiBold"
+                        <TextBlock Text="Image Optimiser" FontSize="16" FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                     </StackPanel>
 
@@ -394,7 +394,7 @@
                                                    Margin="0,0,0,4" />
                                         <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
                                                    TextWrapping="Wrap">
-                                            <Run Text="Automatically add images detected in the clipboard to the Image Splitter." />
+                                            <Run Text="Automatically add images detected in the clipboard to the Image Optimiser." />
                                         </TextBlock>
                                     </StackPanel>
                                     <ui:ToggleSwitch x:Name="toggleClipboardAutoAdd" Grid.Column="1"
@@ -413,7 +413,7 @@
                                                    Margin="0,0,0,4" />
                                         <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
                                                    TextWrapping="Wrap">
-                                            <Run Text="When off, clipboard is only monitored while the Image Splitter page is active." />
+                                            <Run Text="When off, clipboard is only monitored while the Image Optimiser page is active." />
                                         </TextBlock>
                                     </StackPanel>
                                     <ui:ToggleSwitch x:Name="toggleClipboardGlobal" Grid.Column="1"
@@ -655,6 +655,29 @@
                                                      VerticalAlignment="Center"
                                                      Checked="ToggleDebugMode_Changed"
                                                      Unchecked="ToggleDebugMode_Changed" />
+                                </Grid>
+                            </StackPanel>
+
+                            <Separator Opacity="0.15" Margin="0" />
+
+                            <StackPanel Margin="16,12,16,12">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                        <TextBlock Text="Show detection indices" FontSize="13" FontWeight="SemiBold"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                        <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                                   TextWrapping="Wrap" Margin="0,4,16,0">
+                                            <Run Text="Show sequential index numbers on detection rectangles in Image Optimiser, even when no split indices have been entered." />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <ui:ToggleSwitch x:Name="toggleDetectionIndices" Grid.Column="1"
+                                                     VerticalAlignment="Center"
+                                                     Checked="ToggleDetectionIndices_Changed"
+                                                     Unchecked="ToggleDetectionIndices_Changed" />
                                 </Grid>
                             </StackPanel>
 

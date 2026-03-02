@@ -1,0 +1,235 @@
+<UserControl x:Class="MergeMansionWikiTools.Views.GameDataDumperPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="24,16">
+        <StackPanel MaxWidth="900">
+
+            <TextBlock Text="Game Data Dumper" FontSize="28" FontWeight="SemiBold"
+                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                       Margin="4,0,0,24" />
+
+            <!-- ══ INPUT FILES ════════════════════════════════════════ -->
+            <Grid Margin="4,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Input Files" FontSize="16" FontWeight="SemiBold"
+                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                           VerticalAlignment="Center" />
+                <ui:Button x:Name="btnPullFromPhone" Grid.Column="1"
+                           Appearance="Secondary" Height="34" Padding="14,0"
+                           Click="BtnPullFromPhone_Click"
+                           ToolTip="Detect connected Android phone and copy game data files"
+                           ToolTipService.InitialShowDelay="0">
+                    <StackPanel Orientation="Horizontal">
+                        <ui:SymbolIcon Symbol="Phone24" FontSize="16" Margin="0,0,6,0" />
+                        <TextBlock Text="Pull from Phone" FontSize="12" VerticalAlignment="Center" />
+                    </StackPanel>
+                </ui:Button>
+            </Grid>
+
+            <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    CornerRadius="8"
+                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1"
+                    Margin="0,0,0,16">
+                <StackPanel Margin="16,14,16,14">
+
+                    <!-- Config archive (required) -->
+                    <TextBlock Text="Config archive" FontSize="13" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                               Margin="0,0,0,6" />
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" AllowDrop="True" CornerRadius="4"
+                                Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}" BorderThickness="1"
+                                Drop="ConfigPath_Drop" DragOver="Path_DragOver">
+                            <TextBox x:Name="txtConfigPath" AllowDrop="False" IsHitTestVisible="False"
+                                     IsReadOnly="True" Background="Transparent" BorderThickness="0"
+                                     FontSize="12" VerticalAlignment="Center"
+                                     Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                     Text="Drop config archive file here or browse..." />
+                        </Border>
+                        <ui:Button Grid.Column="1" Appearance="Secondary" Height="34" Margin="8,0,0,0"
+                                   ToolTip="Browse for config archive"
+                                   Click="BtnBrowseConfig_Click">
+                            <ui:SymbolIcon Symbol="FolderOpen24" FontSize="16" />
+                        </ui:Button>
+                    </Grid>
+
+                    <!-- Patch config (optional) -->
+                    <TextBlock FontSize="13" Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                               Margin="0,0,0,6">
+                        <Run Text="Patch config" FontWeight="SemiBold" />
+                        <Run Text="(optional)" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                    </TextBlock>
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" AllowDrop="True" CornerRadius="4"
+                                Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}" BorderThickness="1"
+                                Drop="PatchPath_Drop" DragOver="Path_DragOver">
+                            <TextBox x:Name="txtPatchPath" AllowDrop="False" IsHitTestVisible="False"
+                                     IsReadOnly="True" Background="Transparent" BorderThickness="0"
+                                     FontSize="12" VerticalAlignment="Center"
+                                     Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                     Text="Drop patch config file here or browse..." />
+                        </Border>
+                        <ui:Button Grid.Column="1" Appearance="Secondary" Height="34" Margin="8,0,0,0"
+                                   ToolTip="Browse for patch config"
+                                   Click="BtnBrowsePatch_Click">
+                            <ui:SymbolIcon Symbol="FolderOpen24" FontSize="16" />
+                        </ui:Button>
+                    </Grid>
+
+                    <!-- Language file (optional) -->
+                    <TextBlock FontSize="13" Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                               Margin="0,0,0,6">
+                        <Run Text="Language file" FontWeight="SemiBold" />
+                        <Run Text="(optional)" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                    </TextBlock>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" AllowDrop="True" CornerRadius="4"
+                                Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}" BorderThickness="1"
+                                Drop="LanguagePath_Drop" DragOver="Path_DragOver">
+                            <TextBox x:Name="txtLanguagePath" AllowDrop="False" IsHitTestVisible="False"
+                                     IsReadOnly="True" Background="Transparent" BorderThickness="0"
+                                     FontSize="12" VerticalAlignment="Center"
+                                     Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                     Text="Drop language file here or browse..." />
+                        </Border>
+                        <ui:Button Grid.Column="1" Appearance="Secondary" Height="34" Margin="8,0,0,0"
+                                   ToolTip="Browse for language file"
+                                   Click="BtnBrowseLanguage_Click">
+                            <ui:SymbolIcon Symbol="FolderOpen24" FontSize="16" />
+                        </ui:Button>
+                    </Grid>
+
+                </StackPanel>
+            </Border>
+
+            <!-- ══ AUTO-DETECT ════════════════════════════════════════ -->
+            <TextBlock x:Name="txtAutoDetect" FontSize="12" TextWrapping="Wrap"
+                       Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                       Margin="4,-10,0,12" />
+
+            <!-- ══ OUTPUT ══════════════════════════════════════════════ -->
+            <TextBlock Text="Output" FontSize="16" FontWeight="SemiBold"
+                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                       Margin="4,0,0,10" />
+
+            <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    CornerRadius="8"
+                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1"
+                    Margin="0,0,0,16">
+                <StackPanel Margin="16,14,16,14">
+
+                    <!-- Output directory -->
+                    <TextBlock Text="Output directory" FontSize="13" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                               Margin="0,0,0,6" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" AllowDrop="True" CornerRadius="4"
+                                Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}" BorderThickness="1"
+                                Drop="OutputPath_Drop" DragOver="Path_DragOver">
+                            <TextBox x:Name="txtOutputPath" AllowDrop="False" IsHitTestVisible="False"
+                                     IsReadOnly="True" Background="Transparent" BorderThickness="0"
+                                     FontSize="12" VerticalAlignment="Center"
+                                     Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                     Text="Drop folder here or browse..." />
+                        </Border>
+                        <ui:Button Grid.Column="1" Appearance="Secondary" Height="34" Margin="8,0,0,0"
+                                   ToolTip="Browse for output directory"
+                                   Click="BtnBrowseOutput_Click">
+                            <ui:SymbolIcon Symbol="FolderOpen24" FontSize="16" />
+                        </ui:Button>
+                    </Grid>
+
+                </StackPanel>
+            </Border>
+
+            <!-- ══ ACTIONS ═════════════════════════════════════════════ -->
+            <Grid Margin="4,0,0,16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ui:Button x:Name="btnDumpAll" Grid.Column="0" Content="Dump All"
+                           Appearance="Primary" Height="38" Padding="20,0"
+                           Click="BtnDumpAll_Click" />
+                <ui:Button x:Name="btnDumpChains" Grid.Column="1" Content="Dump Chains"
+                           Appearance="Secondary" Height="38" Padding="16,0" Margin="8,0,0,0"
+                           Click="BtnDumpChains_Click" />
+                <ui:Button x:Name="btnDumpAreas" Grid.Column="2" Content="Dump Areas"
+                           Appearance="Secondary" Height="38" Padding="16,0" Margin="8,0,0,0"
+                           Click="BtnDumpAreas_Click" />
+                <ui:Button x:Name="btnDumpEvents" Grid.Column="3" Content="Dump Events"
+                           Appearance="Secondary" Height="38" Padding="16,0" Margin="8,0,0,0"
+                           Click="BtnDumpEvents_Click" />
+                <ui:Button x:Name="btnDumpCards" Grid.Column="4" Content="Dump Cards"
+                           Appearance="Secondary" Height="38" Padding="16,0" Margin="8,0,0,0"
+                           Click="BtnDumpCards_Click" />
+            </Grid>
+
+            <!-- ══ EXPERIMENTAL ════════════════════════════════════════ -->
+            <TextBlock Text="Experimental" FontSize="16" FontWeight="SemiBold"
+                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                       Margin="4,8,0,10" />
+
+            <Grid Margin="4,0,0,16">
+                <ui:Button x:Name="btnDumpExperimental" Content="Dump Experimental"
+                           Appearance="Secondary" Height="38" Padding="16,0"
+                           Click="BtnDumpExperimental_Click" />
+            </Grid>
+
+            <!-- ══ PROGRESS LOG ════════════════════════════════════════ -->
+            <TextBlock Text="Log" FontSize="16" FontWeight="SemiBold"
+                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                       Margin="4,0,0,10" />
+
+            <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    CornerRadius="8"
+                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1"
+                    Margin="0,0,0,16" MinHeight="200" MaxHeight="350">
+                <ScrollViewer x:Name="logScroller" VerticalScrollBarVisibility="Auto" Padding="16,12">
+                    <TextBlock x:Name="txtLog" FontSize="12" FontFamily="Cascadia Code,Consolas,Courier New"
+                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                               TextWrapping="Wrap" Text="Ready." />
+                </ScrollViewer>
+            </Border>
+
+            <!-- ══ RESULT ══════════════════════════════════════════════ -->
+            <ui:InfoBar x:Name="resultInfoBar" IsOpen="False" IsClosable="True"
+                        Margin="0,0,0,8" />
+
+            <ui:Button x:Name="btnOpenOutputFolder" Content="Open Output Folder"
+                       Appearance="Secondary" Height="34" Visibility="Collapsed"
+                       Margin="0,0,0,16" Click="BtnOpenOutputFolder_Click" />
+
+        </StackPanel>
+    </ScrollViewer>
+
+</UserControl>
