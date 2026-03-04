@@ -15,9 +15,9 @@ namespace Code.GameLogic.GameEvents.DailyChallenges.Data
         public ConfigId<DailyChallengesMinigameId, DailyChallengesMinigameData> ConfigId { get; set; }
 
         [MetaMember(2, (MetaMemberFlags)0)]
-        private List<PlayerSegmentId> WeekSegments { get; set; }
+        public List<PlayerSegmentId> WeekSegments { get; set; }
 
         [MetaMember(3, (MetaMemberFlags)0)]
-        private List<ConfigId<DailyChallengesWeekId, DailyChallengesWeekData>> WeeksIds { get; set; }
+        public List<ConfigId<DailyChallengesWeekId, DailyChallengesWeekData>> WeeksIds { get; set; }
     }
 }

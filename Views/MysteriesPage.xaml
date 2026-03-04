@@ -5,45 +5,52 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Padding="24,16">
-            <StackPanel MaxWidth="1000">
+        <!-- Fixed header (stays visible while scrolling) -->
+        <StackPanel Grid.Row="0" MaxWidth="1000" HorizontalAlignment="Stretch" Margin="24,16,24,0">
 
-                <TextBlock Text="Mysteries" FontSize="28" FontWeight="SemiBold"
-                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                           Margin="4,0,0,20" />
+            <TextBlock Text="Mysteries" FontSize="28" FontWeight="SemiBold"
+                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                       Margin="4,0,0,20" />
 
-                <!-- Toolbar: Search + actions -->
-                <Grid Margin="0,0,0,12">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
+            <!-- Toolbar: Search + actions -->
+            <Grid Margin="0,0,0,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-                    <ui:TextBox x:Name="txtSearch" Grid.Column="0"
-                                PlaceholderText="Search mysteries..."
-                                TextChanged="TxtSearch_TextChanged"
-                                Margin="0,0,10,0"
-                                Icon="{ui:SymbolIcon Search24}" />
+                <ui:TextBox x:Name="txtSearch" Grid.Column="0"
+                            PlaceholderText="Search mysteries..."
+                            TextChanged="TxtSearch_TextChanged"
+                            Margin="0,0,10,0"
+                            Icon="{ui:SymbolIcon Search24}" />
 
-                    <ui:Button x:Name="btnRefresh" Grid.Column="1"
-                               Content="Refresh" Appearance="Secondary"
-                               Click="BtnRefresh_Click" Height="36"
-                               Margin="0,0,8,0" />
+                <ui:Button x:Name="btnRefresh" Grid.Column="1"
+                           Content="Refresh" Appearance="Secondary"
+                           Click="BtnRefresh_Click" Height="36"
+                           Margin="0,0,8,0" />
 
-                    <ui:Button x:Name="btnCheckWiki" Grid.Column="2"
-                               Content="Check Wiki Status" Appearance="Primary"
-                               Click="BtnCheckWiki_Click" Height="36" />
-                </Grid>
+                <ui:Button x:Name="btnCheckWiki" Grid.Column="2"
+                           Content="Check Wiki Status" Appearance="Primary"
+                           Click="BtnCheckWiki_Click" Height="36" />
+            </Grid>
 
-                <!-- Summary -->
-                <TextBlock x:Name="txtSummary" FontSize="12"
-                           Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                           Margin="4,0,0,16" />
+            <!-- Summary -->
+            <TextBlock x:Name="txtSummary" FontSize="12"
+                       Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                       Margin="4,0,0,12" />
+
+        </StackPanel>
+
+        <!-- Scrollable mystery list -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel MaxWidth="1000" Margin="24,0,24,16">
 
                 <!-- Mystery list -->
                 <StackPanel x:Name="mysteryListPanel" />
@@ -60,7 +67,7 @@
         </ScrollViewer>
 
         <!-- InfoBar at bottom -->
-        <ui:InfoBar x:Name="infoBar" Grid.Row="1" IsOpen="False"
+        <ui:InfoBar x:Name="infoBar" Grid.Row="2" IsOpen="False"
                     IsClosable="True" Margin="10,0,10,10" />
     </Grid>
 </UserControl>

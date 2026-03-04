@@ -59,6 +59,7 @@ public partial class MainWindow : FluentWindow
     {
         using var _t = AppLogger.Timed("MainWindow.ctor");
         InitializeComponent();
+        txtSidebarVersion.Text = Models.AppVersion.Version;
 
         Settings = SettingsService.Load();
         App.ApplyTheme(Settings.ThemePreference);

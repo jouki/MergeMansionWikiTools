@@ -15,5 +15,6 @@ public class UserStats
     public int MysteryPagesPublished { get; set; }
     public int WikiImagesUploaded { get; set; }
     public int PhonePulls { get; set; }
+    public int DataDumps { get; set; }
     public DateTime FirstLaunch { get; set; } = DateTime.UtcNow;
 }

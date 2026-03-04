@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:local="clr-namespace:MergeMansionWikiTools.Views"
-        Title="Merge Mansion Wiki Tools" Height="943" Width="1380"
+        Title="Merge Mansion Wiki Tools" Height="963" Width="1380"
         WindowStartupLocation="CenterScreen"
         Icon="/Assets/AppLogo.ico"
         ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica"
@@ -191,7 +191,7 @@
 
                     <!-- Version info -->
                     <StackPanel Grid.Row="2" HorizontalAlignment="Center" Margin="0,0,0,6">
-                        <TextBlock Text="v0.11.0" FontSize="10"
+                        <TextBlock x:Name="txtSidebarVersion" FontSize="10"
                                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                                    HorizontalAlignment="Center" />
                         <TextBlock Text="by Jouki" FontSize="10"

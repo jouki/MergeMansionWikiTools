@@ -87,7 +87,7 @@ public class DialogueExtractorService
             // Only consider lines in the bottom 35% of the image
             if (relativeY < 0.65) continue;
 
-            var lineText = ocrLine.Text.Trim();
+            var lineText = ocrLine.Text.Trim().Replace('\'', '\u2019');
             if (string.IsNullOrWhiteSpace(lineText)) continue;
 
             // Filter out button/UI text

@@ -109,7 +109,7 @@ public partial class ImageExtractorPage : UserControl
                 txtServerDetected.Text = "No workspace folder configured.";
             else
                 txtServerDetected.Text = "No version folder found.";
-            txtServerDetected.Foreground = (Brush)FindResource("SystemFillColorCautionBrush");
+            txtServerDetected.SetResourceReference(System.Windows.Controls.TextBlock.ForegroundProperty, "SystemFillColorCautionBrush");
             panelNoServerApk.Visibility = Visibility.Visible;
             return;
         }
@@ -124,7 +124,7 @@ public partial class ImageExtractorPage : UserControl
             txtServerDetected.Text = string.IsNullOrEmpty(version)
                 ? "No APK or catalog.bin found."
                 : $"No APK or catalog.bin found for version {version}.";
-            txtServerDetected.Foreground = (Brush)FindResource("SystemFillColorCautionBrush");
+            txtServerDetected.SetResourceReference(System.Windows.Controls.TextBlock.ForegroundProperty, "SystemFillColorCautionBrush");
             panelNoServerApk.Visibility = Visibility.Visible;
             return;
         }
@@ -142,7 +142,7 @@ public partial class ImageExtractorPage : UserControl
         }
 
         txtServerDetected.Text = status;
-        txtServerDetected.Foreground = (Brush)FindResource("SystemFillColorSuccessBrush");
+        txtServerDetected.SetResourceReference(System.Windows.Controls.TextBlock.ForegroundProperty, "SystemFillColorSuccessBrush");
         txtServerAutoPath.Text = $"Output: {Path.Combine(_detectedVersionDir, "Export - PNGs")}";
         btnServerExtract.IsEnabled = true;
     }
@@ -339,7 +339,7 @@ public partial class ImageExtractorPage : UserControl
         {
             _detectedApkPath = apkPath;
             txtExtractDetected.Text = $"APK auto-detected (v{_detectedVersion}).";
-            txtExtractDetected.Foreground = (Brush)FindResource("SystemFillColorSuccessBrush");
+            txtExtractDetected.SetResourceReference(System.Windows.Controls.TextBlock.ForegroundProperty, "SystemFillColorSuccessBrush");
             txtExtractAutoPath.Text = $"Output: {Path.Combine(_detectedVersionDir, "Export - PNGs")}";
             btnExtractAssets.IsEnabled = true;
         }
@@ -347,7 +347,7 @@ public partial class ImageExtractorPage : UserControl
                  || !Directory.Exists(_main.Settings.ImageExporterBasePath))
         {
             txtExtractDetected.Text = "No workspace folder configured.";
-            txtExtractDetected.Foreground = (Brush)FindResource("SystemFillColorCautionBrush");
+            txtExtractDetected.SetResourceReference(System.Windows.Controls.TextBlock.ForegroundProperty, "SystemFillColorCautionBrush");
             panelNoExtractApk.Visibility = Visibility.Visible;
             txtExtractAutoPath.Text = "";
         }
@@ -357,7 +357,7 @@ public partial class ImageExtractorPage : UserControl
             txtExtractDetected.Text = string.IsNullOrEmpty(version)
                 ? "No APK/XAPK found in workspace."
                 : $"No APK/XAPK found for version {version}.";
-            txtExtractDetected.Foreground = (Brush)FindResource("SystemFillColorCautionBrush");
+            txtExtractDetected.SetResourceReference(System.Windows.Controls.TextBlock.ForegroundProperty, "SystemFillColorCautionBrush");
             panelNoExtractApk.Visibility = Visibility.Visible;
             txtExtractAutoPath.Text = "";
         }

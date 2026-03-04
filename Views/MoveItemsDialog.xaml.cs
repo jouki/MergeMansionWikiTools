@@ -820,10 +820,13 @@ public partial class MoveItemsDialog : FluentWindow
         }
 
         // ── 3. Images ──
-        if (isRename)
+        // Only show image move step if at least one image actually exists on wiki
+        var imgCount = imageUrls?.Count(kv => kv.Value != null) ?? 0;
+        if (isRename && imgCount > 0)
         {
-            var imgCount = _selectedItems.Count;
-            var levels = _selectedItems.OrderBy(i => i.Level).Select(i => i.Level).ToList();
+            var levels = _selectedItems.OrderBy(i => i.Level)
+                .Where(i => imageUrls != null && imageUrls.TryGetValue(i.Level, out var u) && u != null)
+                .Select(i => i.Level).ToList();
             var minLv = levels.First();
             var maxLv = levels.Last();
             var lvRange = minLv == maxLv ? $"{minLv:D2}" : $"{minLv:D2}\u2013{maxLv:D2}";

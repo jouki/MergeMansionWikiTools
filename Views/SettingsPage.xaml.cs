@@ -31,11 +31,6 @@ public partial class SettingsPage : UserControl
         txtTinifyKey.Text = _main.Settings.TinifyApiKey;
         txtTinifyKey2.Text = _main.Settings.TinifyApiKey2;
         txtImageBasePath.Text = _main.Settings.ImageExporterBasePath;
-        txtFlowchartPath.Text = _main.Settings.FlowchartOutputPath;
-
-        // Show reset button if "don't ask again" is active
-        UpdateResetFolderPrefVisibility();
-
         // Debug mode
         toggleDebugMode.IsChecked = _main.Settings.DebugMode;
         toggleDetectionIndices.IsChecked = _main.Settings.ShowDetectionIndices;
@@ -460,30 +455,7 @@ public partial class SettingsPage : UserControl
 
     // ── Area Flowcharts — output folder ──
 
-    private void BrowseFlowchartPath_Click(object sender, RoutedEventArgs e)
-    {
-        var dlg = new OpenFolderDialog { Title = "Select flowchart output folder" };
-        if (!string.IsNullOrEmpty(_main.Settings.FlowchartOutputPath) &&
-            System.IO.Directory.Exists(_main.Settings.FlowchartOutputPath))
-            dlg.InitialDirectory = _main.Settings.FlowchartOutputPath;
-
-        if (dlg.ShowDialog() == true)
-        {
-            txtFlowchartPath.Text = dlg.FolderName;
-            _main.Settings.FlowchartOutputPath = dlg.FolderName;
-            _main.SaveSettings();
-        }
-    }
-
-    private void ClearFlowchartPath_Click(object sender, RoutedEventArgs e)
-    {
-        txtFlowchartPath.Text = "";
-        _main.Settings.FlowchartOutputPath = "";
-        _main.SaveSettings();
-    }
-
     public void HighlightApkSection()           { SwitchToTab(0); HighlightBorder(apkSectionBorder); }
-    public void HighlightFlowchartSection()    { SwitchToTab(1); HighlightBorder(flowchartSectionBorder); }
     public void HighlightWikiMappingSection()  { SwitchToTab(2); HighlightBorder(wikiMappingSectionBorder); }
 
     // ── Wiki Mapping ──
@@ -533,12 +505,12 @@ public partial class SettingsPage : UserControl
         if (_main.Settings.WikiVerified)
         {
             txtWikiBotStatus.Text = $"Verified as {_main.Settings.WikiVerifiedDisplayName}";
-            txtWikiBotStatus.Foreground = (System.Windows.Media.Brush)FindResource("SystemFillColorSuccessBrush");
+            txtWikiBotStatus.SetResourceReference(TextBlock.ForegroundProperty, "SystemFillColorSuccessBrush");
         }
         else if (!string.IsNullOrEmpty(_main.Settings.WikiUsername))
         {
             txtWikiBotStatus.Text = "Not verified";
-            txtWikiBotStatus.Foreground = (System.Windows.Media.Brush)FindResource("TextFillColorTertiaryBrush");
+            txtWikiBotStatus.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorTertiaryBrush");
         }
         else
         {
@@ -559,7 +531,7 @@ public partial class SettingsPage : UserControl
 
         btnVerifyBot.IsEnabled = false;
         txtWikiBotStatus.Text = "Verifying...";
-        txtWikiBotStatus.Foreground = (System.Windows.Media.Brush)FindResource("TextFillColorSecondaryBrush");
+        txtWikiBotStatus.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorSecondaryBrush");
 
         try
         {
@@ -635,21 +607,7 @@ public partial class SettingsPage : UserControl
         }
     }
 
-    private void ResetFolderPreference_Click(object sender, RoutedEventArgs e)
-    {
-        _main.Settings.FlowchartRememberFolderChoice = false;
-        _main.Settings.FlowchartAutoUpdateFolder = false;
-        _main.SaveSettings();
-        UpdateResetFolderPrefVisibility();
-        _main.ShowStatus("'Save to' preference reset.", Wpf.Ui.Controls.InfoBarSeverity.Success);
-    }
 
-    public void UpdateResetFolderPrefVisibility()
-    {
-        btnResetFolderPref.Visibility = _main.Settings.FlowchartRememberFolderChoice
-            ? Visibility.Visible
-            : Visibility.Collapsed;
-    }
 
     // ── APK Download ──
 
@@ -705,7 +663,7 @@ public partial class SettingsPage : UserControl
             cmbApkVersion.SelectedIndex = 0;
             _apkVersions = null;
             txtApkDownloadStatus.Text = $"Version list failed: {ex.Message}";
-            txtApkDownloadStatus.Foreground = (Brush)FindResource("SystemFillColorCautionBrush");
+            txtApkDownloadStatus.SetResourceReference(TextBlock.ForegroundProperty, "SystemFillColorCautionBrush");
         }
         finally
         {
@@ -755,7 +713,7 @@ public partial class SettingsPage : UserControl
             !System.IO.Directory.EnumerateFiles(dir, "*.xapk").Any())
         {
             txtApkDownloadStatus.Text = $"No APK found for v{ver} — download it first.";
-            txtApkDownloadStatus.Foreground = (Brush)FindResource("SystemFillColorCautionBrush");
+            txtApkDownloadStatus.SetResourceReference(TextBlock.ForegroundProperty, "SystemFillColorCautionBrush");
         }
         else
         {
@@ -783,7 +741,7 @@ public partial class SettingsPage : UserControl
         {
             txtApkDownloadStatus.Text = _wizardDownloadLastStatus;
             if (_wizardDownloadLastBrush != null)
-                txtApkDownloadStatus.Foreground = (Brush)FindResource(_wizardDownloadLastBrush);
+                txtApkDownloadStatus.SetResourceReference(TextBlock.ForegroundProperty, _wizardDownloadLastBrush);
             return true;
         }
 
@@ -911,7 +869,7 @@ public partial class SettingsPage : UserControl
 
             var sizeMb = new System.IO.FileInfo(result.filePath).Length / 1024.0 / 1024.0;
             txtApkDownloadStatus.Text = $"Done! v{result.version} ({sizeMb:F1} MB)";
-            txtApkDownloadStatus.Foreground = (Brush)FindResource("SystemFillColorSuccessBrush");
+            txtApkDownloadStatus.SetResourceReference(TextBlock.ForegroundProperty, "SystemFillColorSuccessBrush");
             _main.ShowStatus($"APK downloaded: v{result.version}\n→ {result.filePath}", Wpf.Ui.Controls.InfoBarSeverity.Success);
 
             _lastApkDir = System.IO.Path.GetDirectoryName(result.filePath);
@@ -921,12 +879,12 @@ public partial class SettingsPage : UserControl
         catch (OperationCanceledException)
         {
             txtApkDownloadStatus.Text = "Download cancelled.";
-            txtApkDownloadStatus.Foreground = (Brush)FindResource("TextFillColorSecondaryBrush");
+            txtApkDownloadStatus.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorSecondaryBrush");
         }
         catch (Exception ex)
         {
             txtApkDownloadStatus.Text = "Download failed.";
-            txtApkDownloadStatus.Foreground = (Brush)FindResource("SystemFillColorCautionBrush");
+            txtApkDownloadStatus.SetResourceReference(TextBlock.ForegroundProperty, "SystemFillColorCautionBrush");
             _main.ShowStatus($"APK download failed: {ex.Message}", Wpf.Ui.Controls.InfoBarSeverity.Error);
         }
         finally

@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using Code.GameLogic.GameEvents;
 using Code.GameLogic.GameEvents.DailyChallenges.Data;
 using GameLogic.Config;
+using GameLogic.Player.Requirements;
 using GameLogic.Player.Rewards;
-using GameLogic.Story;
 using merge_mansion_dumper.Dumper.Base;
 using merge_mansion_dumper.Dumper.Json;
 using Metaplay.Core.Localization;
@@ -45,115 +46,49 @@ namespace merge_mansion_dumper.Dumper
         {
             var result = new Dictionary<string, object>();
 
-            // ── 1. DigEvent (Archaeology) ──────────────────────────────
+            // ── 1. DigEvent (Archaeology — combined) ─────────────────────
 
-            result["DigEvents"] = config.DigEvents?.EnumerateAll()
-                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
-
-            result["DigEventBoards"] = config.DigEventBoards?.EnumerateAll().Select(x =>
+            result["DigEvent"] = new Dictionary<string, object>
             {
-                var b = (DigEventBoards)x.Value;
-                return new Dictionary<string, object>
+                ["Events"] = config.DigEvents?.EnumerateAll()
+                    .Select(x => x.Value).ToArray() ?? Array.Empty<object>(),
+
+                ["Boards"] = config.DigEventBoards?.EnumerateAll().Select(x =>
                 {
-                    ["BoardId"] = b.BoardId?.ToString(),
-                    ["BoardWidth"] = b.BoardWidth,
-                    ["BoardHeight"] = b.BoardHeight,
-                    ["CellSize"] = b.CellSize,
-                    ["Treasures"] = b.Treasures?.Select(t => t?.ToString()).ToArray(),
-                    ["BoardReward"] = b.BoardReward,
-                    ["CompensationChance"] = b.CompensationChance,
-                };
-            }).ToArray() ?? Array.Empty<object>();
+                    var b = (DigEventBoards)x.Value;
+                    return new Dictionary<string, object>
+                    {
+                        ["BoardId"] = b.BoardId?.ToString(),
+                        ["BoardWidth"] = b.BoardWidth,
+                        ["BoardHeight"] = b.BoardHeight,
+                        ["CellSize"] = b.CellSize,
+                        ["Treasures"] = b.Treasures?.Select(t => t?.ToString()).ToArray(),
+                        ["BoardReward"] = b.BoardReward,
+                        ["CompensationChance"] = b.CompensationChance,
+                    };
+                }).ToArray() ?? Array.Empty<object>(),
 
-            result["DigEventItems"] = config.DigEventItemInfos?.EnumerateAll().Select(x =>
-            {
-                var item = (DigEventItemInfo)x.Value;
-                return new Dictionary<string, object>
+                ["Items"] = config.DigEventItemInfos?.EnumerateAll().Select(x =>
                 {
-                    ["ItemId"] = item.ItemId?.ToString(),
-                    ["AssetId"] = item.AssetId,
-                    ["GoesMuseum"] = item.GoesMuseum,
-                    ["CanBeShiny"] = item.CanBeShiny,
-                    ["Shape"] = item.Coordinates?.Select(c => new[] { c.Item1, c.Item2 }).ToArray(),
-                    ["Weight"] = item.Weight,
-                    ["MuseumSize"] = $"{item.MuseumItemWidth}x{item.MuseumItemHeight}",
-                    ["MuseumItemRotation"] = item.MuseumItemRotation.ToString(),
-                };
-            }).ToArray() ?? Array.Empty<object>();
+                    var item = (DigEventItemInfo)x.Value;
+                    return new Dictionary<string, object>
+                    {
+                        ["ItemId"] = item.ItemId?.ToString(),
+                        ["AssetId"] = item.AssetId,
+                        ["GoesMuseum"] = item.GoesMuseum,
+                        ["CanBeShiny"] = item.CanBeShiny,
+                        ["Shape"] = item.Coordinates?.Select(c => new[] { c.Item1, c.Item2 }).ToArray(),
+                        ["Weight"] = item.Weight,
+                        ["MuseumSize"] = $"{item.MuseumItemWidth}x{item.MuseumItemHeight}",
+                        ["MuseumItemRotation"] = item.MuseumItemRotation.ToString(),
+                    };
+                }).ToArray() ?? Array.Empty<object>(),
 
-            result["DigEventMuseumShelves"] = config.DigEventShelves?.EnumerateAll()
-                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
+                ["ShinyProgression"] = config.DigEventShinyProgression?.EnumerateAll()
+                    .Select(x => x.Value).ToArray() ?? Array.Empty<object>(),
+            };
 
-            result["DigEventMuseumCollections"] = config.DigEventMuseumCollections?.EnumerateAll()
-                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
-
-            result["DigEventShinyProgression"] = config.DigEventShinyProgression?.EnumerateAll()
-                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
-
-            // ── 2. BoultonLeague ────────────────────────────────────────
-
-            result["BoultonLeagueEvents"] = config.BoultonLeagueEvents?.EnumerateAll().Select(x =>
-            {
-                var evt = (BoultonLeagueEventInfo)x.Value;
-                return new Dictionary<string, object>
-                {
-                    ["EventId"] = evt.EventId?.ToString(),
-                    ["NameLocId"] = evt.NameLocId,
-                    ["DisplayName"] = Localize(evt.NameLocId) ?? evt.DisplayName,
-                    ["Description"] = evt.Description,
-                    ["GroupId"] = evt.GroupId?.ToString(),
-                    ["MatchmakingAlgorithm"] = evt.MatchmakingAlgorithm.ToString(),
-                    ["JoinAutomatically"] = evt.JoinAutomatically,
-                    ["StageRefs"] = evt.StageRefs,
-                    ["ActivableParams"] = evt.ActivableParams,
-                    ["CategoryInfo"] = evt.CategoryInfo,
-                };
-            }).ToArray() ?? Array.Empty<object>();
-
-            result["BoultonLeagueStages"] = config.BoultonLeagueStages?.EnumerateAll().Select(x =>
-            {
-                var stage = (BoultonLeagueStageInfo)x.Value;
-                return new Dictionary<string, object>
-                {
-                    ["StageId"] = stage.StageId?.ToString(),
-                    ["NameLocId"] = stage.NameLocId,
-                    ["DisplayName"] = Localize(stage.NameLocId),
-                    ["DemotionScoreThreshold"] = stage.DemotionScoreThreshold,
-                    ["PromotionScoreThreshold"] = stage.PromotionScoreThreshold,
-                    ["FinishReward"] = stage.FinishReward,
-                    ["PromotionReward"] = stage.PromotionReward,
-                    ["LeaderboardPlacementRewardLevelRefs"] = stage.LeaderboardPlacementRewardLevelRefs,
-                };
-            }).ToArray() ?? Array.Empty<object>();
-
-            // ── 3. Dialogues ────────────────────────────────────────────
-
-            result["Dialogues"] = config.DialogItems?.EnumerateAll().Select(x =>
-            {
-                var d = (DialogItemInfo)x.Value;
-                return new Dictionary<string, object>
-                {
-                    ["DialogItemId"] = d.DialogItemId?.ToString(),
-                    ["LocalizationId"] = d.LocalizationId,
-                    ["Text"] = Localize(d.LocalizationId),
-                    ["DialogMode"] = d.DialogMode.ToString(),
-                    ["LeftCharacter"] = d.LeftCharacter.ToString(),
-                    ["LeftCharacterState"] = d.LeftCharacterState.ToString(),
-                    ["LeftSpeaks"] = d.LeftSpeaks,
-                    ["RightCharacter"] = d.RightCharacter.ToString(),
-                    ["RightCharacterState"] = d.RightCharacterState.ToString(),
-                    ["RightSpeaks"] = d.RightSpeaks,
-                    ["WaitConfirmation"] = d.WaitConfirmation,
-                };
-            }).ToArray() ?? Array.Empty<object>();
-
-            result["DialogueCharacters"] = config.DialogueCharacters?.EnumerateAll()
-                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
-
-            result["CollectibleDialogues"] = config.CollectibleDialoguesInfo?.EnumerateAll()
-                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
-
-            // ── 4. Pets ─────────────────────────────────────────────────
+            // ── 2. Pets ──────────────────────────────────────────────────
 
             result["Pets"] = config.PetInfos?.EnumerateAll().Select(x =>
             {
@@ -178,79 +113,134 @@ namespace merge_mansion_dumper.Dumper
                 };
             }).ToArray() ?? Array.Empty<object>();
 
-            // ── 5. Offers + InAppProducts ───────────────────────────────
+            // ── 3. Offers (combined) ───────────────────────────────────
 
-            result["Offers"] = config.Offers?.EnumerateAll()
-                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
-
-            result["InAppProducts"] = config.InAppProducts?.EnumerateAll()
-                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
-
-            result["OfferGroups"] = config.OfferGroups?.EnumerateAll()
-                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
-
-            // ── 6. Energy Settings ──────────────────────────────────────
-
-            result["EnergySettings"] = config.EnergySettings?.EnumerateAll().Select(x =>
+            result["Offers"] = new Dictionary<string, object>
             {
-                var e = (EnergySettingsConfig)x.Value;
+                ["Offers"] = config.Offers?.EnumerateAll()
+                    .Select(x => x.Value).ToArray() ?? Array.Empty<object>(),
+
+                ["InAppProducts"] = config.InAppProducts?.EnumerateAll()
+                    .Select(x => x.Value).ToArray() ?? Array.Empty<object>(),
+
+                ["OfferGroups"] = config.OfferGroups?.EnumerateAll()
+                    .Select(x => x.Value).ToArray() ?? Array.Empty<object>(),
+
+                ["OfferPopupTriggers"] = config.OfferPopupTriggers?.EnumerateAll().Select(x =>
+                {
+                    var t = (OfferPopupTrigger)x.Value;
+                    return new Dictionary<string, object>
+                    {
+                        ["TriggerId"] = t.ConfigKey?.ToString(),
+                        ["MaxTriggersPerSession"] = t.MaxTriggersPerSession,
+                        ["MaxTriggersTotal"] = t.MaxTriggersTotal,
+                        ["TriggerRequirements"] = t.TriggerRequirements?.Select(SerializeRequirement).ToArray(),
+                        ["TriggerPlacements"] = t.TriggerPlacements?.ToDictionary(
+                            kv => kv.Key.ToString(),
+                            kv => (object)kv.Value),
+                        ["ActivatesOfferGroup"] = t.ActivatesOfferGroup,
+                        ["MaxWaitTimerToPrompt"] = t.MaxWaitTimerToPrompt,
+                    };
+                }).ToArray() ?? Array.Empty<object>(),
+            };
+
+            // ── 4. DailyChallenges (combined) ─────────────────────────────
+
+            // Build lookup tables
+            var objectiveLookup = new Dictionary<string, DailyChallengesStandardObjectiveData>();
+            if (config.DailyChallengesStandardObjectives != null)
+                foreach (var kv in config.DailyChallengesStandardObjectives.EnumerateAll())
+                    objectiveLookup[kv.Key.ToString()] = (DailyChallengesStandardObjectiveData)kv.Value;
+
+            var milestoneLookup = new Dictionary<string, DailyChallengesMilestoneData>();
+            if (config.DailyChallengesMilestones != null)
+                foreach (var kv in config.DailyChallengesMilestones.EnumerateAll())
+                    milestoneLookup[kv.Key.ToString()] = (DailyChallengesMilestoneData)kv.Value;
+
+            var dayLookup = new Dictionary<string, DailyChallengesDayData>();
+            if (config.DailyChallengesDays != null)
+                foreach (var kv in config.DailyChallengesDays.EnumerateAll())
+                    dayLookup[kv.Key.ToString()] = (DailyChallengesDayData)kv.Value;
+
+            result["DailyChallenges"] = config.DailyChallengesWeeks?.EnumerateAll().Select(wkv =>
+            {
+                var week = (DailyChallengesWeekData)wkv.Value;
                 return new Dictionary<string, object>
                 {
-                    ["EnergyType"] = e.ConfigKey.ToString(),
-                    ["MaxRechargeAmount"] = e.MaxRechargeAmount,
-                    ["DefaultUnitRestoreDuration"] = e.DefaultUnitRestoreDuration,
+                    ["WeekId"] = week.ConfigKey?.ToString(),
+                    ["Difficulty"] = week.WeekDifficulty,
+                    ["Days"] = week.Days?.Select((dayRef, dayIndex) =>
+                    {
+                        var dayId = dayRef?.ConfigKey?.ToString();
+                        dayLookup.TryGetValue(dayId ?? "", out var day);
+                        return new Dictionary<string, object>
+                        {
+                            ["Day"] = dayIndex + 1,
+                            ["DayId"] = dayId,
+                            ["RequiredTasksForReward"] = day?.RequiredCompletedObjectivesForDayReward,
+                            ["TargetMilestoneIndex"] = day?.TargetMilestoneIndex,
+                            ["Tasks"] = day?.StandardObjectives?.Select(objRef =>
+                            {
+                                var objId = objRef?.ConfigKey?.ToString();
+                                objectiveLookup.TryGetValue(objId ?? "", out var obj);
+                                if (obj == null) return new Dictionary<string, object> { ["TaskId"] = objId };
+                                return new Dictionary<string, object>
+                                {
+                                    ["TaskId"] = objId,
+                                    ["DisplayName"] = Localize(obj.LocId),
+                                    ["ObjectiveType"] = obj.ObjectiveType.ToString(),
+                                    ["Requirement"] = obj.ObjectiveRequirement,
+                                    ["Parameter"] = obj.ObjectiveParameter,
+                                    ["Priority"] = obj.OrderPriority,
+                                };
+                            }).ToArray(),
+                        };
+                    }).ToArray(),
+                    ["Milestones"] = week.Milestones?.Select(msRef =>
+                    {
+                        var msId = msRef?.ConfigKey?.ToString();
+                        milestoneLookup.TryGetValue(msId ?? "", out var ms);
+                        if (ms == null) return new Dictionary<string, object> { ["MilestoneId"] = msId };
+                        return (object)new Dictionary<string, object>
+                        {
+                            ["MilestoneId"] = msId,
+                            ["RequiredPoints"] = ms.RequiredPoints,
+                            ["Rewards"] = ms.Rewards,
+                        };
+                    }).ToArray(),
                 };
             }).ToArray() ?? Array.Empty<object>();
-
-            // ── 7. DailyChallenges ──────────────────────────────────────
-
-            result["DailyChallengesWeeks"] = config.DailyChallengesWeeks?.EnumerateAll()
-                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
-
-            result["DailyChallengesDays"] = config.DailyChallengesDays?.EnumerateAll()
-                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
-
-            result["DailyChallengesMinigames"] = config.DailyChallengesMinigames?.EnumerateAll()
-                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
-
-            result["DailyChallengesStandardObjectives"] = config.DailyChallengesStandardObjectives?.EnumerateAll().Select(x =>
-            {
-                var obj = (DailyChallengesStandardObjectiveData)x.Value;
-                return new Dictionary<string, object>
-                {
-                    ["ConfigKey"] = obj.ConfigKey?.ToString(),
-                    ["LocId"] = obj.LocId,
-                    ["DisplayName"] = Localize(obj.LocId),
-                    ["ObjectiveType"] = obj.ObjectiveType.ToString(),
-                    ["ObjectiveRequirement"] = obj.ObjectiveRequirement,
-                    ["ObjectiveParameter"] = obj.ObjectiveParameter,
-                    ["OrderPriority"] = obj.OrderPriority,
-                    ["RewardsPoolData"] = obj.RewardsPoolData,
-                };
-            }).ToArray() ?? Array.Empty<object>();
-
-            result["DailyChallengesSpecialObjectives"] = config.DailyChallengesSpecialObjectives?.EnumerateAll().Select(x =>
-            {
-                var obj = (DailyChallengesSpecialObjectiveData)x.Value;
-                return new Dictionary<string, object>
-                {
-                    ["ConfigKey"] = obj.ConfigKey?.ToString(),
-                    ["LocId"] = obj.LocId,
-                    ["DisplayName"] = Localize(obj.LocId),
-                    ["ObjectiveType"] = obj.ObjectiveType.ToString(),
-                    ["ObjectiveRequirement"] = obj.ObjectiveRequirement,
-                    ["ObjectiveGroup"] = obj.ObjectiveGroup,
-                    ["ObjectiveParameter"] = obj.ObjectiveParameter,
-                    ["RewardsPoolData"] = obj.RewardsPoolData,
-                };
-            }).ToArray() ?? Array.Empty<object>();
-
-            result["DailyChallengesMilestones"] = config.DailyChallengesMilestones?.EnumerateAll()
-                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
-
-            result["DailyChallengesEventSettings"] = config.DailyChallengesEventSettings;
 
             return result;
+        }
+
+        private static object SerializeRequirement(PlayerRequirement req)
+        {
+            if (req == null) return null;
+
+            var type = req.GetType();
+            var dict = new Dictionary<string, object>
+            {
+                ["$type"] = type.Name
+            };
+
+            var flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly;
+
+            foreach (var prop in type.GetProperties(flags))
+            {
+                if (prop.GetIndexParameters().Length > 0) continue;
+                try { dict[prop.Name] = prop.GetValue(req); }
+                catch { /* skip unreadable */ }
+            }
+
+            foreach (var field in type.GetFields(flags))
+            {
+                if (field.Name.Contains("BackingField")) continue;
+                try { dict[field.Name] = field.GetValue(req); }
+                catch { /* skip unreadable */ }
+            }
+
+            return dict;
         }
 
         private static string Localize(string locId)

@@ -429,58 +429,6 @@
                     <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
                                Margin="4,6,0,16"><Run Text="Get your free key at " /><Hyperlink NavigateUri="https://tinify.com/developers" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="tinypng.com (tinify.com)" /></Hyperlink><Run Text="." /></TextBlock>
 
-                    <!-- AREA FLOWCHARTS -->
-                    <StackPanel Orientation="Horizontal" Margin="4,12,0,10">
-                        <ui:SymbolIcon Symbol="Flow24" FontSize="20" Margin="0,0,8,0"
-                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                        <TextBlock Text="Area Flowcharts" FontSize="16" FontWeight="SemiBold"
-                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                    </StackPanel>
-
-                    <Border x:Name="flowchartSectionBorder"
-                            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                            CornerRadius="8"
-                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
-                        <StackPanel>
-                            <StackPanel Margin="16,14,16,12">
-                                <TextBlock Text="Flowchart Output Folder" FontSize="13" FontWeight="SemiBold"
-                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                           Margin="0,0,0,4" />
-                                <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
-                                           TextWrapping="Wrap" Margin="0,0,0,8">
-                                    <Run Text="Directory where generated SVG flowcharts will be saved." />
-                                </TextBlock>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <ui:TextBox x:Name="txtFlowchartPath"
-                                                PlaceholderText="Select output folder..."
-                                                IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False"
-                                                Margin="0,0,8,0" />
-                                    <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
-                                               Click="BrowseFlowchartPath_Click" Margin="0,0,8,0" Height="36" />
-                                    <ui:Button Grid.Column="2" Content="Clear" Appearance="Secondary"
-                                               Click="ClearFlowchartPath_Click" Height="36" />
-                                </Grid>
-                            </StackPanel>
-                        </StackPanel>
-                    </Border>
-
-                    <StackPanel Orientation="Horizontal" Margin="4,6,0,0">
-                        <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
-                                   VerticalAlignment="Center">
-                            <Run Text="Path is saved automatically." />
-                        </TextBlock>
-                        <ui:Button x:Name="btnResetFolderPref" Content="Reset 'Save to' preference"
-                                   Appearance="Secondary" FontSize="11" Height="26"
-                                   Margin="16,0,0,0" Padding="10,0"
-                                   Click="ResetFolderPreference_Click"
-                                   Visibility="Collapsed" />
-                    </StackPanel>
-
 
                 </StackPanel>
             </ScrollViewer>

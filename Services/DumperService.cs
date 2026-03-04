@@ -64,12 +64,24 @@ internal static class DumperService
         string? AreasPath,
         string? EventsPath,
         string? CardCollectionPath,
+        string? DialoguesPath,
         string? ExperimentalPath,
         List<string> Warnings,
         List<string> Errors
     );
 
-    public enum DumpMode { All, Chains, Areas, Events, CardCollection, Experimental }
+    [Flags]
+    public enum DumpMode
+    {
+        None = 0,
+        Chains = 1,
+        Areas = 2,
+        Events = 4,
+        CardCollection = 8,
+        Experimental = 16,
+        Dialogues = 32,
+        All = Chains | Areas | Events | CardCollection | Dialogues
+    }
 
     private static readonly object _initLock = new();
     private static bool _initialized;
@@ -80,13 +92,14 @@ internal static class DumperService
         string? languagePath,
         string outputDir,
         DumpMode mode = DumpMode.All,
+        EventFilters eventFilters = EventFilters.All,
         IProgress<string>? progress = null)
     {
         return await Task.Run(() =>
         {
             var warnings = new List<string>();
             var errors = new List<string>();
-            string? chainPath = null, areasPath = null, eventsPath = null, cardCollectionPath = null, experimentalPath = null;
+            string? chainPath = null, areasPath = null, eventsPath = null, cardCollectionPath = null, dialoguesPath = null, experimentalPath = null;
 
             void Log(string level, string msg, Exception? ex = null)
             {
@@ -237,7 +250,7 @@ internal static class DumperService
                 Directory.CreateDirectory(outputDir);
 
                 // 7. Run dumpers
-                if (mode == DumpMode.All || mode == DumpMode.Chains)
+                if (mode.HasFlag(DumpMode.Chains))
                 {
                     chainPath = Path.Combine(outputDir, "chain_item_odds.json");
                     progress?.Report("Dumping merge chains...");
@@ -255,7 +268,7 @@ internal static class DumperService
                     }
                 }
 
-                if (mode == DumpMode.All || mode == DumpMode.Areas)
+                if (mode.HasFlag(DumpMode.Areas))
                 {
                     areasPath = Path.Combine(outputDir, "areas.json");
                     progress?.Report("Dumping areas...");
@@ -273,13 +286,13 @@ internal static class DumperService
                     }
                 }
 
-                if (mode == DumpMode.All || mode == DumpMode.Events)
+                if (mode.HasFlag(DumpMode.Events))
                 {
                     eventsPath = Path.Combine(outputDir, "events.json");
                     progress?.Report("Dumping events...");
                     try
                     {
-                        new EventDumper().WriteJson(eventsPath, ClientGlobal.SharedGameConfig);
+                        new EventDumper(eventFilters).WriteJson(eventsPath, ClientGlobal.SharedGameConfig);
                         var size = new FileInfo(eventsPath).Length / 1024;
                         progress?.Report($"events.json written ({size} KB)");
                         AppLogger.Info($"events.json: {size} KB");
@@ -291,7 +304,7 @@ internal static class DumperService
                     }
                 }
 
-                if (mode == DumpMode.All || mode == DumpMode.CardCollection)
+                if (mode.HasFlag(DumpMode.CardCollection))
                 {
                     cardCollectionPath = Path.Combine(outputDir, "card_collection.json");
                     progress?.Report("Dumping card collection...");
@@ -309,7 +322,25 @@ internal static class DumperService
                     }
                 }
 
-                if (mode == DumpMode.Experimental)
+                if (mode.HasFlag(DumpMode.Dialogues))
+                {
+                    dialoguesPath = Path.Combine(outputDir, "dialogues.json");
+                    progress?.Report("Dumping dialogues...");
+                    try
+                    {
+                        new DialogueDumper().WriteJson(dialoguesPath, ClientGlobal.SharedGameConfig);
+                        var size = new FileInfo(dialoguesPath).Length / 1024;
+                        progress?.Report($"dialogues.json written ({size} KB)");
+                        AppLogger.Info($"dialogues.json: {size} KB");
+                    }
+                    catch (Exception ex)
+                    {
+                        Log("ERROR", $"Dialogues dump failed: {ex.Message}", ex);
+                        dialoguesPath = null;
+                    }
+                }
+
+                if (mode.HasFlag(DumpMode.Experimental))
                 {
                     var expDir = Path.Combine(outputDir, "Experimental");
                     experimentalPath = expDir;
@@ -364,19 +395,19 @@ internal static class DumperService
                             var patchDir = Path.Combine(outputDir, patchLabel);
                             Directory.CreateDirectory(patchDir);
 
-                            if (mode == DumpMode.All || mode == DumpMode.Chains)
+                            if (mode.HasFlag(DumpMode.Chains))
                             {
                                 try { new MergeChainDumper(true).WriteJson(Path.Combine(patchDir, "chain_item_odds.json"), ClientGlobal.SharedGameConfig); }
                                 catch (Exception ex) { Log("WARN", $"Patch {patchLabel} chains: {ex.Message}", ex); }
                             }
-                            if (mode == DumpMode.All || mode == DumpMode.Areas)
+                            if (mode.HasFlag(DumpMode.Areas))
                             {
                                 try { new AreaDumper().WriteJson(Path.Combine(patchDir, "areas.json"), ClientGlobal.SharedGameConfig); }
                                 catch (Exception ex) { Log("WARN", $"Patch {patchLabel} areas: {ex.Message}", ex); }
                             }
-                            if (mode == DumpMode.All || mode == DumpMode.Events)
+                            if (mode.HasFlag(DumpMode.Events))
                             {
-                                try { new EventDumper().WriteJson(Path.Combine(patchDir, "events.json"), ClientGlobal.SharedGameConfig); }
+                                try { new EventDumper(eventFilters).WriteJson(Path.Combine(patchDir, "events.json"), ClientGlobal.SharedGameConfig); }
                                 catch (Exception ex) { Log("WARN", $"Patch {patchLabel} events: {ex.Message}", ex); }
                             }
 
@@ -417,7 +448,7 @@ internal static class DumperService
                 Log("ERROR", $"Fatal: {ex.Message}", ex);
             }
 
-            return new DumpResult(chainPath, areasPath, eventsPath, cardCollectionPath, experimentalPath, warnings, errors);
+            return new DumpResult(chainPath, areasPath, eventsPath, cardCollectionPath, dialoguesPath, experimentalPath, warnings, errors);
         });
     }
 

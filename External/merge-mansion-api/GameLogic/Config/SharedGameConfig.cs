@@ -1257,12 +1257,12 @@ namespace GameLogic.Config
         [GameConfigEntry("DailyChallengesWeeksByMinigameId", true, null)]
         [GameConfigEntryTransform(typeof(DailyChallengesWeekByMinigameIdDataSource))]
         [GameConfigSyntaxAdapter(new string[] { "ConfigKey -> ConfigKey #key" }, new string[] { }, false)]
-        private GameConfigLibrary<DailyChallengesMinigameId, DailyChallengesWeekByMinigameIdData> DailyChallengesWeeksByMinigameId { get; set; }
+        public GameConfigLibrary<DailyChallengesMinigameId, DailyChallengesWeekByMinigameIdData> DailyChallengesWeeksByMinigameId { get; set; }
 
         [GameConfigEntry("DailyChallengesWeeksByPreviousCompletion", true, null)]
         [GameConfigEntryTransform(typeof(DailyChallengeWeekByPreviousCompletionDataSource))]
         [GameConfigSyntaxAdapter(new string[] { "ConfigKey -> ConfigKey #key" }, new string[] { }, false)]
-        private GameConfigLibrary<DailyChallengesWeekId, DailyChallengeWeekByPreviousCompletionData> DailyChallengesWeeksByPreviousCompletion { get; set; }
+        public GameConfigLibrary<DailyChallengesWeekId, DailyChallengeWeekByPreviousCompletionData> DailyChallengesWeeksByPreviousCompletion { get; set; }
 
         [GameConfigEntry("DailyChallengesMinigames", true, null)]
         [GameConfigSyntaxAdapter(new string[] { "ConfigKey -> ConfigKey #key" }, new string[] { }, false)]

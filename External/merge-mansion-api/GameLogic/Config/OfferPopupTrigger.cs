@@ -32,7 +32,7 @@ namespace GameLogic.Config
         }
 
         [MetaMember(5, (MetaMemberFlags)0)]
-        private Dictionary<OfferPopupTriggerPlacementType, List<string>> TriggerPlacements { get; set; }
+        public Dictionary<OfferPopupTriggerPlacementType, List<string>> TriggerPlacements { get; set; }
 
         [MetaMember(6, (MetaMemberFlags)0)]
         public bool ActivatesOfferGroup { get; set; }

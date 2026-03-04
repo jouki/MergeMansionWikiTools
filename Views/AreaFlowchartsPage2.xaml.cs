@@ -6,7 +6,10 @@ using System.Windows.Media;
 using MergeMansionWikiTools.Services;
 using Microsoft.Win32;
 using Wpf.Ui.Controls;
+using Wpf.Ui.Appearance;
 using static MergeMansionWikiTools.Services.UserStatsService;
+using System.Windows.Controls.Primitives;
+using System.Windows.Media.Animation;
 using TextBlock = System.Windows.Controls.TextBlock;
 
 namespace MergeMansionWikiTools.Views;
@@ -16,11 +19,15 @@ public partial class AreaFlowchartsPage2 : UserControl
     private readonly MainWindow _main;
     private List<LuaArea>? _areas;
     private bool _areasLoaded;
+    private readonly SolidColorBrush _splitSepBrush;
 
     public AreaFlowchartsPage2(MainWindow main)
     {
         _main = main;
         InitializeComponent();
+        _splitSepBrush = GetSplitSeparatorBrush();
+        btnGenerateAllSep.Background = _splitSepBrush;
+        ApplicationThemeManager.Changed += (_, _) => Dispatcher.InvokeAsync(RefreshSplitSeparatorColor);
         UpdateOutputPathDisplay();
         UpdateGenerateAllSplitVisibility();
         ApplySplitButtonStyle(btnGenerateAll, btnGenerateAllMenu);
@@ -34,6 +41,14 @@ public partial class AreaFlowchartsPage2 : UserControl
             areaListPanel.Children.Clear();
             txtEmpty.Text = "No areas.json file configured. Set the path in Settings.";
             await TryLoadAreasAsync();
+        });
+
+        // Refresh output path when APK version changes (affects derived path)
+        _main.ApkVersionChanged += () => Dispatcher.InvokeAsync(() =>
+        {
+            UpdateOutputPathDisplay();
+            UpdateGenerateAllSplitVisibility();
+            if (_areasLoaded) BuildAreaList();
         });
     }
 
@@ -109,13 +124,13 @@ public partial class AreaFlowchartsPage2 : UserControl
     {
         var border = new Border
         {
-            Background = (System.Windows.Media.Brush)FindResource("CardBackgroundFillColorDefaultBrush"),
             CornerRadius = new CornerRadius(6),
-            BorderBrush = (System.Windows.Media.Brush)FindResource("CardStrokeColorDefaultBrush"),
             BorderThickness = new Thickness(1),
             Margin = new Thickness(0, 0, 0, 8),
             Padding = new Thickness(16, 12, 16, 12)
         };
+        border.SetResourceReference(Border.BackgroundProperty, "CardBackgroundFillColorDefaultBrush");
+        border.SetResourceReference(Border.BorderBrushProperty, "CardStrokeColorDefaultBrush");
 
         var grid = new Grid();
         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
@@ -129,9 +144,9 @@ public partial class AreaFlowchartsPage2 : UserControl
         {
             Text = area.DisplayName,
             FontSize = 14,
-            FontWeight = FontWeights.SemiBold,
-            Foreground = (System.Windows.Media.Brush)FindResource("TextFillColorPrimaryBrush")
+            FontWeight = FontWeights.SemiBold
         };
+        nameText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorPrimaryBrush");
         namePanel.Children.Add(nameText);
 
         var taskCount = area.Tasks.Count(t => t.Requirements.Count > 0);
@@ -139,9 +154,9 @@ public partial class AreaFlowchartsPage2 : UserControl
         {
             Text = $"{taskCount} tasks with requirements · {area.Tasks.Count} total",
             FontSize = 11,
-            Foreground = (System.Windows.Media.Brush)FindResource("TextFillColorTertiaryBrush"),
             Margin = new Thickness(0, 2, 0, 0)
         };
+        metaText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorTertiaryBrush");
         namePanel.Children.Add(metaText);
 
         Grid.SetColumn(namePanel, 0);
@@ -184,9 +199,9 @@ public partial class AreaFlowchartsPage2 : UserControl
             var sep = new Border
             {
                 Width = 1,
-                Background = new SolidColorBrush(Color.FromArgb(60, 255, 255, 255)),
+                Background = _splitSepBrush,
                 VerticalAlignment = VerticalAlignment.Stretch,
-                Margin = new Thickness(0, 5, 0, 5)
+                Margin = new Thickness(0, 2, 0, 1.5)
             };
             Grid.SetColumn(sep, 1);
             genContainer.Children.Add(sep);
@@ -198,7 +213,7 @@ public partial class AreaFlowchartsPage2 : UserControl
                 Width = 28,
                 Padding = new Thickness(0),
                 Tag = area,
-                Content = new SymbolIcon { Symbol = SymbolRegular.ChevronDown24, FontSize = 12 }
+                Content = CreateAccentSymbolIcon(SymbolRegular.ChevronDown24, 12)
             };
             btnChevron.Click += BtnGenerateMenu_Click;
             Grid.SetColumn(btnChevron, 2);
@@ -313,13 +328,8 @@ public partial class AreaFlowchartsPage2 : UserControl
         };
         menu.Items.Add(item);
 
-        // Align menu right-edge with the split button group (opens left)
         var target = btn.Parent as FrameworkElement ?? btn;
-        menu.PlacementTarget = target;
-        menu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
-        menu.Opened += (_, _) =>
-            menu.HorizontalOffset = target.ActualWidth - menu.ActualWidth;
-        menu.IsOpen = true;
+        OpenSplitMenu(menu, target);
     }
 
     /// <summary>
@@ -332,13 +342,8 @@ public partial class AreaFlowchartsPage2 : UserControl
         item.Click += async (_, _) => await GenerateAllToCustomFolder();
         menu.Items.Add(item);
 
-        // Align menu right-edge with the split button group (opens left)
         var target = btnGenerateAllMenu.Parent as FrameworkElement ?? btnGenerateAllMenu;
-        menu.PlacementTarget = target;
-        menu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
-        menu.Opened += (_, _) =>
-            menu.HorizontalOffset = target.ActualWidth - menu.ActualWidth;
-        menu.IsOpen = true;
+        OpenSplitMenu(menu, target);
     }
 
     private async Task GenerateToCustomFolder(LuaArea area, FrameworkElement chevronBtn)
@@ -461,9 +466,12 @@ public partial class AreaFlowchartsPage2 : UserControl
 
     // ── Folder management ─────────────────────────────────────────────
 
-    private static string? BrowseOutputFolder()
+    private string? BrowseOutputFolder()
     {
         var dlg = new OpenFolderDialog { Title = "Select flowchart output folder" };
+        var dir = GetOutputDir();
+        if (!string.IsNullOrEmpty(dir) && Directory.Exists(dir))
+            dlg.InitialDirectory = dir;
         return dlg.ShowDialog() == true ? dlg.FolderName : null;
     }
 
@@ -553,8 +561,18 @@ public partial class AreaFlowchartsPage2 : UserControl
 
     private string? GetOutputDir()
     {
+        // Explicit path takes priority
         var path = _main.Settings.FlowchartOutputPath;
-        return string.IsNullOrEmpty(path) ? null : path;
+        if (!string.IsNullOrEmpty(path))
+            return path;
+
+        // Derive from workspace + version + "Flowcharts"
+        var basePath = _main.Settings.ImageExporterBasePath;
+        var version = _main.Settings.SelectedApkVersion;
+        if (!string.IsNullOrEmpty(basePath) && !string.IsNullOrEmpty(version))
+            return Path.Combine(basePath, version, "Flowcharts");
+
+        return null;
     }
 
     private string? GetOutputFilePath(LuaArea area)
@@ -594,6 +612,66 @@ public partial class AreaFlowchartsPage2 : UserControl
             if (openBtn != null) openBtn.Visibility = Visibility.Visible;
         }
     }
+
+    private static SymbolIcon CreateAccentSymbolIcon(SymbolRegular symbol, double fontSize)
+    {
+        var icon = new SymbolIcon { Symbol = symbol, FontSize = fontSize };
+        icon.SetResourceReference(SymbolIcon.ForegroundProperty, "TextOnAccentFillColorPrimaryBrush");
+        return icon;
+    }
+
+    /// <summary>
+    /// Opens a split-button context menu with expand-down animation (no slide from above).
+    /// </summary>
+    private static void OpenSplitMenu(ContextMenu menu, FrameworkElement target)
+    {
+        // Disable built-in slide animation
+        menu.Resources[SystemParameters.MenuPopupAnimationKey] = PopupAnimation.None;
+
+        // Custom expand-down: ScaleY 0→1 from top edge
+        menu.RenderTransformOrigin = new Point(0.5, 0);
+        menu.RenderTransform = new ScaleTransform(1, 0);
+
+        menu.PlacementTarget = target;
+        menu.Placement = PlacementMode.Bottom;
+
+        menu.Opened += (_, _) =>
+        {
+            menu.HorizontalOffset = target.ActualWidth - menu.ActualWidth;
+
+            var anim = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(120))
+            {
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
+            };
+            ((ScaleTransform)menu.RenderTransform).BeginAnimation(ScaleTransform.ScaleYProperty, anim);
+        };
+
+        menu.IsOpen = true;
+    }
+
+    /// <summary>
+    /// Derives a separator color from the accent button color (slightly darker).
+    /// </summary>
+    private Color GetSplitSeparatorColor()
+    {
+        try
+        {
+            if (FindResource("AccentFillColorDefaultBrush") is SolidColorBrush accent)
+            {
+                var c = accent.Color;
+                return Color.FromRgb(
+                    (byte)Math.Max(0, c.R - 35),
+                    (byte)Math.Max(0, c.G - 35),
+                    (byte)Math.Max(0, c.B - 35));
+            }
+        }
+        catch { }
+        return Color.FromArgb(0x30, 0, 0, 0);
+    }
+
+    private SolidColorBrush GetSplitSeparatorBrush() => new(GetSplitSeparatorColor());
+
+    private void RefreshSplitSeparatorColor() => _splitSepBrush.Color = GetSplitSeparatorColor();
 
     // ── Split button styling ────────────────────────────────────────
 

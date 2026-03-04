@@ -34,16 +34,16 @@ namespace Code.GameLogic.IAP
         public OfferPopupTriggerId ConfigKey { get; set; }
 
         [MetaMember(2, (MetaMemberFlags)0)]
-        private int MaxTriggersPerSession { get; set; }
+        public int MaxTriggersPerSession { get; set; }
 
         [MetaMember(3, (MetaMemberFlags)0)]
-        private int MaxTriggersTotal { get; set; }
+        public int MaxTriggersTotal { get; set; }
 
         [MetaMember(4, (MetaMemberFlags)0)]
-        private List<PlayerRequirement> TriggerRequirements { get; set; }
+        public List<PlayerRequirement> TriggerRequirements { get; set; }
 
         [MetaMember(5, (MetaMemberFlags)0)]
-        private Dictionary<OfferPopupTriggerPlacementType, List<string>> TriggerPlacements { get; set; }
+        public Dictionary<OfferPopupTriggerPlacementType, List<string>> TriggerPlacements { get; set; }
 
         [MetaMember(6, (MetaMemberFlags)0)]
         public bool ActivatesOfferGroup { get; set; }

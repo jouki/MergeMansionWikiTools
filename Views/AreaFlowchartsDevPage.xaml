@@ -5,71 +5,79 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Padding="24,16">
-            <StackPanel MaxWidth="900">
+        <!-- Fixed header (stays visible while scrolling) -->
+        <StackPanel Grid.Row="0" MaxWidth="900" HorizontalAlignment="Stretch" Margin="24,16,24,0">
 
-                <TextBlock Text="[DEV] Area Flowcharts" FontSize="28" FontWeight="SemiBold"
-                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                           Margin="4,0,0,20" />
+            <TextBlock Text="[DEV] Area Flowcharts" FontSize="28" FontWeight="SemiBold"
+                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                       Margin="4,0,0,20" />
 
-                <!-- Search + Generate All row -->
-                <Grid Margin="0,0,0,16">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
+            <!-- Search + Generate All row -->
+            <Grid Margin="0,0,0,16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-                    <ui:TextBox x:Name="txtSearch" Grid.Column="0"
-                                PlaceholderText="Search areas..."
-                                TextChanged="TxtSearch_TextChanged"
-                                Margin="0,0,10,0"
-                                Icon="{ui:SymbolIcon Search24}" />
+                <ui:TextBox x:Name="txtSearch" Grid.Column="0"
+                            PlaceholderText="Search areas..."
+                            TextChanged="TxtSearch_TextChanged"
+                            Margin="0,0,10,0"
+                            Icon="{ui:SymbolIcon Search24}" />
 
-                    <Grid Grid.Column="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <ui:Button x:Name="btnGenerateAll" Grid.Column="0"
-                                   Content="Generate All" Appearance="Primary"
-                                   Click="BtnGenerateAll_Click" Height="36" />
-                        <Border x:Name="btnGenerateAllSep" Grid.Column="1"
-                                Width="1" Background="#3CFFFFFF"
-                                VerticalAlignment="Stretch" Margin="0,6"
-                                Visibility="Collapsed" />
-                        <ui:Button x:Name="btnGenerateAllMenu" Grid.Column="2"
-                                   Appearance="Primary" Height="36" Width="30"
-                                   Padding="0" Click="BtnGenerateAllMenu_Click"
-                                   Visibility="Collapsed">
-                            <ui:SymbolIcon Symbol="ChevronDown24" FontSize="12" />
-                        </ui:Button>
-                    </Grid>
-                </Grid>
-
-                <!-- Output path display -->
-                <Grid Margin="0,0,0,16">
+                <Grid Grid.Column="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="Output:" FontSize="12"
-                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                               VerticalAlignment="Center" Margin="4,0,8,0" />
-                    <TextBlock x:Name="txtOutputPath" Grid.Column="1" FontSize="12"
-                               Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                               VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
-                               Text="Not configured — set in Settings" />
-                    <ui:Button x:Name="btnOpenFolder" Grid.Column="2"
-                               Content="Open Folder" Appearance="Secondary"
-                               Click="BtnOpenFolder_Click" Height="30"
-                               Visibility="Collapsed" Margin="8,0,0,0" />
+                    <ui:Button x:Name="btnGenerateAll" Grid.Column="0"
+                               Content="Generate All" Appearance="Primary"
+                               Click="BtnGenerateAll_Click" Height="36" />
+                    <Border x:Name="btnGenerateAllSep" Grid.Column="1"
+                            Width="1"
+                            VerticalAlignment="Stretch"
+                            Visibility="Collapsed" />
+                    <ui:Button x:Name="btnGenerateAllMenu" Grid.Column="2"
+                               Appearance="Primary" Height="36" Width="30"
+                               Padding="0" Click="BtnGenerateAllMenu_Click"
+                               Visibility="Collapsed">
+                        <ui:SymbolIcon Symbol="ChevronDown24" FontSize="12"
+                                      Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}" />
+                    </ui:Button>
                 </Grid>
+            </Grid>
+
+            <!-- Output path display -->
+            <Grid Margin="0,0,0,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Output:" FontSize="12"
+                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                           VerticalAlignment="Center" Margin="4,0,8,0" />
+                <TextBlock x:Name="txtOutputPath" Grid.Column="1" FontSize="12"
+                           Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                           VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
+                           Text="Not configured — set in Settings" />
+                <ui:Button x:Name="btnOpenFolder" Grid.Column="2"
+                           Content="Open Folder" Appearance="Secondary"
+                           Click="BtnOpenFolder_Click" Height="30"
+                           Visibility="Collapsed" Margin="8,0,0,0" />
+            </Grid>
+
+        </StackPanel>
+
+        <!-- Scrollable area list -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel MaxWidth="900" Margin="24,0,24,16">
 
                 <!-- Area list -->
                 <StackPanel x:Name="areaListPanel" />
@@ -86,7 +94,7 @@
         </ScrollViewer>
 
         <!-- InfoBar at bottom -->
-        <ui:InfoBar x:Name="infoBar" Grid.Row="1" IsOpen="False"
+        <ui:InfoBar x:Name="infoBar" Grid.Row="2" IsOpen="False"
                     IsClosable="True" Margin="10,0,10,10" />
     </Grid>
 </UserControl>

@@ -130,9 +130,9 @@ public partial class MysteriesPage : UserControl
             {
                 Text = "No mysteries match your search.",
                 FontSize = 13,
-                Foreground = (Brush)FindResource("TextFillColorTertiaryBrush"),
                 Margin = new Thickness(4, 20, 0, 0)
             };
+            noResults.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorTertiaryBrush");
             mysteryListPanel.Children.Add(noResults);
             return;
         }
@@ -149,18 +149,18 @@ public partial class MysteriesPage : UserControl
                     Text = year?.ToString() ?? "Unknown date",
                     FontSize = 18,
                     FontWeight = FontWeights.SemiBold,
-                    Foreground = (Brush)FindResource("TextFillColorPrimaryBrush"),
                     Margin = new Thickness(0, lastYear == null ? 0 : 16, 0, 8)
                 };
+                header.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorPrimaryBrush");
                 mysteryListPanel.Children.Add(header);
 
                 // Separator line
                 var line = new Border
                 {
                     Height = 1,
-                    Background = (Brush)FindResource("DividerStrokeColorDefaultBrush"),
                     Margin = new Thickness(0, 0, 0, 10)
                 };
+                line.SetResourceReference(Border.BackgroundProperty, "DividerStrokeColorDefaultBrush");
                 mysteryListPanel.Children.Add(line);
 
                 lastYear = year;
@@ -175,13 +175,13 @@ public partial class MysteriesPage : UserControl
     {
         var border = new Border
         {
-            Background = (Brush)FindResource("CardBackgroundFillColorDefaultBrush"),
             CornerRadius = new CornerRadius(6),
-            BorderBrush = (Brush)FindResource("CardStrokeColorDefaultBrush"),
             BorderThickness = new Thickness(1),
             Margin = new Thickness(0, 0, 0, 8),
             Padding = new Thickness(16, 12, 16, 12)
         };
+        border.SetResourceReference(Border.BackgroundProperty, "CardBackgroundFillColorDefaultBrush");
+        border.SetResourceReference(Border.BorderBrushProperty, "CardStrokeColorDefaultBrush");
 
         var grid = new Grid();
         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
@@ -197,30 +197,32 @@ public partial class MysteriesPage : UserControl
             Text = mystery.Name,
             FontSize = 14,
             FontWeight = FontWeights.SemiBold,
-            Foreground = (Brush)FindResource("TextFillColorPrimaryBrush"),
             VerticalAlignment = VerticalAlignment.Center
         };
+        nameText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorPrimaryBrush");
         nameRow.Children.Add(nameText);
 
         // Type badge
         var typeBadge = new Border
         {
-            Background = mystery.MysteryType == MysteryType.Pet
-                ? (Brush)FindResource("AccentFillColorDefaultBrush")
-                : (Brush)FindResource("SubtleFillColorSecondaryBrush"),
             CornerRadius = new CornerRadius(4),
             Padding = new Thickness(6, 2, 6, 2),
             Margin = new Thickness(8, 0, 0, 0),
             VerticalAlignment = VerticalAlignment.Center
         };
+        typeBadge.SetResourceReference(Border.BackgroundProperty,
+            mystery.MysteryType == MysteryType.Pet
+                ? "AccentFillColorDefaultBrush"
+                : "SubtleFillColorSecondaryBrush");
         var typeBadgeText = new TextBlock
         {
             Text = mystery.MysteryType == MysteryType.Pet ? "Pet" : "Standard",
-            FontSize = 11,
-            Foreground = mystery.MysteryType == MysteryType.Pet
-                ? (Brush)FindResource("TextOnAccentFillColorPrimaryBrush")
-                : (Brush)FindResource("TextFillColorSecondaryBrush")
+            FontSize = 11
         };
+        typeBadgeText.SetResourceReference(TextBlock.ForegroundProperty,
+            mystery.MysteryType == MysteryType.Pet
+                ? "TextOnAccentFillColorPrimaryBrush"
+                : "TextFillColorSecondaryBrush");
         typeBadge.Child = typeBadgeText;
         nameRow.Children.Add(typeBadge);
 
@@ -233,10 +235,10 @@ public partial class MysteriesPage : UserControl
         {
             Text = $"{dateStr} · Event Item: {itemStr}",
             FontSize = 11,
-            Foreground = (Brush)FindResource("TextFillColorTertiaryBrush"),
             Margin = new Thickness(0, 3, 0, 0),
             TextTrimming = TextTrimming.CharacterEllipsis
         };
+        metaText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorTertiaryBrush");
         infoPanel.Children.Add(metaText);
 
         // Status line (wiki status indicators — 3-state: green/yellow/red)

@@ -37,7 +37,7 @@ namespace Code.GameLogic.GameEvents
         public CoreSupportEventType EventType { get; set; }
 
         [MetaMember(8, (MetaMemberFlags)0)]
-        private CoreSupportEventMinigameId MinigameId { get; set; }
+        public CoreSupportEventMinigameId MinigameId { get; set; }
 
         [MetaMember(9, (MetaMemberFlags)0)]
         private string AssetOverride { get; set; }

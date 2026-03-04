@@ -1,5 +1,10 @@
 namespace MergeMansionWikiTools.Models;
 
+public static class AppVersion
+{
+    public const string Version = "v0.14.0";
+}
+
 public class AppSettings
 {
     public string ChainItemOddsPath { get; set; } = "";
@@ -58,6 +63,28 @@ public class AppSettings
     public string DumperPatchPath { get; set; } = "";
     public string DumperLanguagePath { get; set; } = "";
     public string DumperOutputPath { get; set; } = "";
+    public bool DumpChains { get; set; } = true;
+    public bool DumpAreas { get; set; } = true;
+    public bool DumpEvents { get; set; } = true;
+    public bool DumpCards { get; set; } = true;
+    public bool DumpDialogues { get; set; } = true;
+
+    // Event filters
+    public bool EventLuckyCatch { get; set; } = true;
+    public bool EventLuckySnap { get; set; } = true;
+    public bool EventSeasonal { get; set; } = true;
+    public bool EventReArchaeology { get; set; } = true;
+    public bool EventHorizonsCup { get; set; } = true;
+    public bool EventRollTheDice { get; set; } = true;
+    public bool EventGarageCleanup { get; set; } = true;
+    public bool EventMysteries { get; set; } = true;
+    public bool EventBoultonLeague { get; set; } = true;
+    public bool EventLegacy { get; set; } = true;
+    public bool EventBakeOff { get; set; } = true;
+    public bool EventBonanza { get; set; } = true;
+    public bool EventOthers { get; set; } = true;
+    public bool EventUncategorised { get; set; } = true;
+    public bool EventSubExpanded { get; set; } = false;
 
     // Appearance
     public string ThemePreference { get; set; } = "System"; // "System", "Light", "Dark"

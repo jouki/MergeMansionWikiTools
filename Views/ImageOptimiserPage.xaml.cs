@@ -2116,7 +2116,17 @@ public partial class ImageOptimiserPage : UserControl
                 int overlap = Math.Max(0, overlapRight - overlapLeft);
                 int narrower = Math.Min(objects[i].Full.Width, objects[j].Full.Width);
                 if (narrower > 0 && (double)overlap / narrower > 0.4)
-                    Unite(i, j);
+                {
+                    // Safety: only merge objects that are vertically close (parts of the same item).
+                    // Items in different sprite-sheet rows share horizontal overlap but have large vertical gaps.
+                    int iBot = objects[i].Full.Top + objects[i].Full.Height;
+                    int jBot = objects[j].Full.Top + objects[j].Full.Height;
+                    int vertGap = Math.Max(0, Math.Max(objects[i].Full.Top, objects[j].Full.Top)
+                                             - Math.Min(iBot, jBot));
+                    double avgW = (objects[i].Full.Width + objects[j].Full.Width) / 2.0;
+                    if (vertGap <= avgW * 0.5)
+                        Unite(i, j);
+                }
             }
 
         // Build column groups

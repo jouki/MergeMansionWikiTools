@@ -16,6 +16,6 @@ namespace Code.GameLogic.GameEvents.DailyChallenges.Data
         public ConfigId<DailyChallengesWeekId, DailyChallengesWeekData> PreviousWeekConfigId { get; set; }
 
         [MetaMember(2, (MetaMemberFlags)0)]
-        private List<ValueTuple<float, ConfigId<DailyChallengesWeekId, DailyChallengesWeekData>>> CompletionRatioToNewWeekData { get; set; }
+        public List<ValueTuple<float, ConfigId<DailyChallengesWeekId, DailyChallengesWeekData>>> CompletionRatioToNewWeekData { get; set; }
     }
 }
