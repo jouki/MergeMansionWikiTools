@@ -719,7 +719,9 @@ public partial class GameDataDumperPage : UserControl
         var chainPath = Path.Combine(dumpDir, "chain_item_odds.json");
         if (File.Exists(chainPath))
         {
+            _main.Settings.ChainItemOddsPath = chainPath;
             await _main.LoadDataAsync(chainPath);
+            _main.SaveSettings();
             loaded.Add("chains");
         }
 

@@ -317,7 +317,32 @@ public class DataService
             }
         }
 
+        // ── ExtraSpawn token values ──
+        var extraSpawn = ParseExtraSpawnValues(item);
+        if (extraSpawn.Count > 0)
+            pi.ExtraSpawnValues = extraSpawn;
+
         return pi;
+    }
+
+    private static readonly string[] ExtraSpawnFieldNames =
+    {
+        "DigEventTaps", "QuaternaryEnergy",
+        "ClassicRacesSailPoints", "RollTheDiceToken", "BuilderEventToken"
+    };
+
+    private static Dictionary<string, double> ParseExtraSpawnValues(JsonElement item)
+    {
+        var result = new Dictionary<string, double>(StringComparer.Ordinal);
+        foreach (var name in ExtraSpawnFieldNames)
+        {
+            if (item.TryGetProperty(name, out var v) && v.ValueKind == JsonValueKind.Number)
+            {
+                var val = v.GetDouble();
+                if (val > 0) result[name] = val;
+            }
+        }
+        return result;
     }
 
     /// <summary>

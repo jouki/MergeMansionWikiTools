@@ -26,6 +26,7 @@ public class LuaTask
     public int? XpReward { get; set; }
     public string? ItemReward { get; set; }
     public string? UnlockDate { get; set; }
+    public Dictionary<string, int> TokenValues { get; set; } = new();
 }
 
 // Internal helper — keeps task relationships during parsing
@@ -41,6 +42,7 @@ internal class TaskNode
     public int? XpReward { get; set; }
     public string? ItemReward { get; set; }
     public string? UnlockDate { get; set; }
+    public Dictionary<string, int> TokenValues { get; set; } = new();
 }
 
 // ── Service ──────────────────────────────────────────────────────────
@@ -127,7 +129,8 @@ public class AreasService
         Dictionary<string, int> Requirements,
         int? XpReward,
         string? ItemReward,
-        string? UnlockDate);
+        string? UnlockDate,
+        Dictionary<string, int> TokenValues);
 
     private static Dictionary<string, HotspotInfo> BuildHotspotsLookup(JsonElement areaEl)
     {
@@ -146,7 +149,8 @@ public class AreasService
             var reqs = ParseHotspotRequirements(hs);
             var (xp, item) = ParseHotspotRewards(hs);
             var unlockDate = ParseTimeNeeded(hs, "UnlockRequirementsList");
-            result[id] = new HotspotInfo(desc, reqs, xp, item, unlockDate);
+            var tokens = ParseTokenValues(hs);
+            result[id] = new HotspotInfo(desc, reqs, xp, item, unlockDate, tokens);
         }
 
         return result;
@@ -211,6 +215,23 @@ public class AreasService
         return (xp, item);
     }
 
+    private static readonly string[] TokenFieldNames =
+    {
+        "DigEventTaps", "QuaternaryEnergy",
+        "ClassicRacesSailPoints", "RollTheDiceToken", "BuilderEventToken"
+    };
+
+    private static Dictionary<string, int> ParseTokenValues(JsonElement hs)
+    {
+        var result = new Dictionary<string, int>(StringComparer.Ordinal);
+        foreach (var name in TokenFieldNames)
+        {
+            var val = GetInt(hs, name);
+            if (val > 0) result[name] = val;
+        }
+        return result;
+    }
+
     // ── Task dependency parsing (DOT graph format) ───────────────────
 
     private static readonly Regex NodeRegex = new(
@@ -266,7 +287,8 @@ public class AreasService
                 Requirements = reqs,
                 XpReward = hs?.XpReward,
                 ItemReward = hs?.ItemReward,
-                UnlockDate = hs?.UnlockDate
+                UnlockDate = hs?.UnlockDate,
+                TokenValues = hs?.TokenValues ?? new()
             };
 
             byDotIndex[dotIdx] = node;
@@ -334,7 +356,8 @@ public class AreasService
                 ChildIds = n.Children.Where(c => connected.ContainsKey(c.Id)).Select(c => c.Id).ToList(),
                 XpReward = n.XpReward,
                 ItemReward = n.ItemReward,
-                UnlockDate = n.UnlockDate
+                UnlockDate = n.UnlockDate,
+                TokenValues = n.TokenValues
             })
             .ToList();
     }

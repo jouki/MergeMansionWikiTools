@@ -260,6 +260,9 @@ public class ParsedItem
     // Depleting spawner
     public bool DecaysWhenCyclesAreDone { get; set; }
 
+    // ExtraSpawn token values (DigEventTaps, QuaternaryEnergy, etc.)
+    public Dictionary<string, double>? ExtraSpawnValues { get; set; }
+
     /// <summary>Whether this item collides (same level) with another item in its chain.</summary>
     public bool IsColliding { get; set; }
 

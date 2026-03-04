@@ -256,14 +256,11 @@ public partial class WikiDataParserPage : UserControl
             await areasService.LoadAsync(areasPath);
             _areasCreatedAt = areasService.CreatedAt;
 
-            var chunkSizes = _main.Settings.AreaChunkSizes;
-            if (chunkSizes == null || chunkSizes.Count == 0) chunkSizes = new List<int> { 40 };
-
             // Generate Lua on background thread (can be CPU-intensive for large area sets)
             _lastChunks = await Task.Run(() =>
             {
                 using var _t = AppLogger.Timed("GenerateAreaChunks");
-                return _luaGen.GenerateAreaChunks(areasService.Areas, chunkSizes, _areasCreatedAt);
+                return _luaGen.GenerateAreaChunks(areasService.Areas, _areasCreatedAt);
             });
 
             txtAreasHeader.Text = $"Areas — {areasService.Areas.Count} areas · {_lastChunks.Count} chunk(s)";
@@ -1711,7 +1708,7 @@ public partial class WikiDataParserPage : UserControl
         var sizeStr = FormatSize(bytes);
         var labelText = isArbiter
             ? $"Arbiter (Module:Datatable/Areas) — {lineCount} lines \u2022 {sizeStr}"
-            : $"Areas {label} — {lineCount} lines";
+            : $"Areas {label} (Module:Datatable/Areas/{label}) — {lineCount} lines \u2022 {sizeStr}";
 
         var lbl = new WpfTextBlock
         {
@@ -1779,7 +1776,6 @@ public partial class WikiDataParserPage : UserControl
             Orientation = Orientation.Horizontal,
             Margin = new Thickness(14, 0, 14, 8)
         };
-
         var warnText = new WpfTextBlock
         {
             FontSize = 12,
@@ -1788,20 +1784,7 @@ public partial class WikiDataParserPage : UserControl
         };
         try { warnText.Foreground = (Brush)FindResource("SystemFillColorCautionBrush"); }
         catch { warnText.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0xF9, 0xA8, 0x25)); }
-
-        var settingsBtn = new Wpf.Ui.Controls.Button
-        {
-            Content = "\u2192 Settings",
-            Appearance = ControlAppearance.Secondary,
-            Height = 26,
-            Padding = new Thickness(10, 0, 10, 0),
-            Margin = new Thickness(10, 0, 0, 0),
-            VerticalAlignment = VerticalAlignment.Center
-        };
-        settingsBtn.Click += (_, _) => _main.NavigateToSettingsHighlightChunkSizes();
-
         warnPanel.Children.Add(warnText);
-        warnPanel.Children.Add(settingsBtn);
         sp.Children.Add(warnPanel);
 
         // ── Separator + TextBox ──
@@ -1898,8 +1881,7 @@ public partial class WikiDataParserPage : UserControl
         {
             var mb = bytes / (1024.0 * 1024.0);
             warnText.Text =
-                $"⚠ Chunk \"{label}\" is {mb:F2} MB and exceeds the Wiki 2 MB limit. " +
-                $"Reduce the number of areas per chunk in Settings.";
+                $"⚠ Chunk \"{label}\" is {mb:F2} MB and exceeds the Wiki 2 MB limit.";
             warnPanel.Visibility = Visibility.Visible;
         }
 
@@ -2163,13 +2145,6 @@ public partial class WikiDataParserPage : UserControl
             ids.OrderBy(MinParentIndex)
                .ThenBy(id => allTaskInfo.TryGetValue(id, out var info) ? info.Index : int.MaxValue)
                .ToList();
-
-        string TaskLabel(string tid)
-        {
-            if (allTaskInfo.TryGetValue(tid, out var info) && info.Index < int.MaxValue)
-                return $"#{info.Index} {tid}";
-            return tid;
-        }
 
         // Clickable task header — only the task ID part is interactive (hover underline + click to copy)
         WpfTextBlock ClickableTaskHeader(string prefix, string tid, Brush brush, FontWeight? weight = null)

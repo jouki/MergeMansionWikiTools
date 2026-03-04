@@ -538,41 +538,6 @@
             <ScrollViewer x:Name="panelAdvanced" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
                 <StackPanel MaxWidth="700" Margin="24,16">
 
-                    <!-- WIKI DATA PARSER -->
-                    <StackPanel Orientation="Horizontal" Margin="4,0,0,10">
-                        <ui:SymbolIcon Symbol="DocumentTable24" FontSize="20" Margin="0,0,8,0"
-                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                        <TextBlock Text="Wiki Data Parser" FontSize="16" FontWeight="SemiBold"
-                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                    </StackPanel>
-
-                    <Border x:Name="expertChunkCard"
-                            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                            CornerRadius="8"
-                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
-                        <Border x:Name="expertChunkHighlight" CornerRadius="4">
-                        <StackPanel>
-                            <StackPanel Margin="16,14,16,14">
-                                <TextBlock Text="Area chunk sizes" FontSize="13" FontWeight="SemiBold"
-                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                           Margin="0,0,0,4" />
-                                <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
-                                           TextWrapping="Wrap" Margin="0,0,0,10">
-                                    <Run Text="Define how many areas go into each Lua chunk. Areas beyond the defined chunks use 40 as default." />
-                                </TextBlock>
-
-                                <!-- Dynamic chunk rows — built in code-behind -->
-                                <StackPanel x:Name="chunksPanel" Margin="0,0,0,8" />
-
-                                <!-- Add row -->
-                                <ui:Button x:Name="btnAddChunk" Content="+ Add chunk"
-                                           Appearance="Secondary" Height="32"
-                                           Click="BtnAddChunk_Click" HorizontalAlignment="Left" />
-                            </StackPanel>
-                        </StackPanel>
-                        </Border>
-                    </Border>
-
                     <!-- DEBUG MODE -->
                     <StackPanel Orientation="Horizontal" Margin="4,28,0,10">
                         <ui:SymbolIcon Symbol="Bug24" FontSize="20" Margin="0,0,8,0"

@@ -598,6 +598,11 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                     WriteProperty(writer, "RequiredItemValue", requiredItemValue, serializer);
                     WriteProperty(writer, "RewardItemValue", rewardedItemValue, serializer);
                 }
+
+                var extraSpawnValues = ExtraSpawnHelper.GetItemValues(_config, item.ConfigKey);
+                if (extraSpawnValues != null)
+                    foreach (var kv in extraSpawnValues)
+                        WriteProperty(writer, kv.Key, kv.Value, serializer);
             }
         }
 

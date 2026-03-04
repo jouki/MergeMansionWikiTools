@@ -161,6 +161,13 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
             {
                 if (LocMan.HasString(LocMan.GetHotspotDescriptionLocId(hotspot.Id)))
                     WriteProperty(writer, "Description", LocMan.GetHotspotDescription(hotspot.Id), serializer);
+
+                if (hotspot.RequirementsList != null)
+                {
+                    var sums = ExtraSpawnHelper.SumRequirementValues(_config, hotspot.RequirementsList);
+                    foreach (var kv in sums)
+                        WriteProperty(writer, kv.Key, kv.Value, serializer);
+                }
             }
         }
 

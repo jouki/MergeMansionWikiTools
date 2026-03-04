@@ -43,9 +43,6 @@ public partial class SettingsPage : UserControl
         toggleClipboardGlobal.IsChecked = _main.Settings.ClipboardMonitorGlobal;
         gridClipboardGlobal.Visibility = _main.Settings.ClipboardAutoAdd ? Visibility.Visible : Visibility.Collapsed;
 
-        // Build chunk size rows
-        BuildChunkRows();
-
         // Wiki mapping status + bot credentials
         UpdateWikiMappingStatus();
         _suppressBotCredentialReset = true;
@@ -401,7 +398,7 @@ public partial class SettingsPage : UserControl
     public void HighlightChainSection()    { SwitchToTab(0); HighlightBorder(chainSectionBorder); }
     public void HighlightAreasSection()    { SwitchToTab(0); HighlightBorder(areasSectionBorder); }
     public void HighlightEventsSection()   { SwitchToTab(0); HighlightBorder(eventsSectionBorder); }
-    public void HighlightChunkSizes()      { SwitchToTab(3); HighlightBorder(expertChunkHighlight); }
+    // HighlightChunkSizes removed — area chunking is now dynamic
 
     /// <summary>
     /// Animates a yellow highlight fade on a border overlay.
@@ -926,93 +923,7 @@ public partial class SettingsPage : UserControl
         _main.SaveSettings();
     }
 
-    // ── Expert — chunk sizes ──
-
-    private void BuildChunkRows()
-    {
-        chunksPanel.Children.Clear();
-        var sizes = _main.Settings.AreaChunkSizes;
-        if (sizes == null || sizes.Count == 0) sizes = new List<int> { 40 };
-
-        foreach (var size in sizes)
-            AddChunkRow(size);
-
-        UpdateRemoveButtons();
-    }
-
-    private void AddChunkRow(int value = 40)
-    {
-        var row = new Grid { Margin = new Thickness(0, 0, 0, 6) };
-        row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(90) });
-        row.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-
-        var tb = new Wpf.Ui.Controls.TextBox
-        {
-            Text = value.ToString(),
-            PlaceholderText = "40",
-            Height = 34
-        };
-        tb.TextChanged += (_, _) => SaveChunkSizesAuto();
-        Grid.SetColumn(tb, 0);
-
-        var removeBtn = new Wpf.Ui.Controls.Button
-        {
-            Content = "×",
-            Appearance = Wpf.Ui.Controls.ControlAppearance.Secondary,
-            Height = 34,
-            Width = 34,
-            Padding = new Thickness(0),
-            Margin = new Thickness(8, 0, 0, 0),
-            Visibility = Visibility.Collapsed
-        };
-        removeBtn.Click += (_, _) =>
-        {
-            chunksPanel.Children.Remove(row);
-            UpdateRemoveButtons();
-            SaveChunkSizesAuto();
-        };
-        Grid.SetColumn(removeBtn, 1);
-
-        row.Children.Add(tb);
-        row.Children.Add(removeBtn);
-        chunksPanel.Children.Add(row);
-    }
-
-    private void BtnAddChunk_Click(object sender, RoutedEventArgs e)
-    {
-        AddChunkRow();
-        UpdateRemoveButtons();
-        SaveChunkSizesAuto();
-    }
-
-    private void UpdateRemoveButtons()
-    {
-        for (int i = 0; i < chunksPanel.Children.Count; i++)
-        {
-            if (chunksPanel.Children[i] is Grid row)
-            {
-                var btn = row.Children.OfType<Wpf.Ui.Controls.Button>().FirstOrDefault();
-                if (btn != null)
-                    btn.Visibility = i == 0 ? Visibility.Collapsed : Visibility.Visible;
-            }
-        }
-    }
-
-    private void SaveChunkSizesAuto()
-    {
-        var sizes = new List<int>();
-        foreach (Grid row in chunksPanel.Children)
-        {
-            var tb = row.Children.OfType<Wpf.Ui.Controls.TextBox>().FirstOrDefault();
-            if (tb != null && int.TryParse(tb.Text.Trim(), out var n) && n > 0)
-                sizes.Add(n);
-        }
-
-        if (sizes.Count == 0) sizes.Add(40);
-
-        _main.Settings.AreaChunkSizes = sizes;
-        _main.SaveSettings();
-    }
+    // Area chunk sizes removed — chunking is now dynamic based on byte size
 
     // ── Helpers ──
 

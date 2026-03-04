@@ -801,14 +801,6 @@ public partial class MainWindow : FluentWindow
             System.Windows.Threading.DispatcherPriority.Input);
     }
 
-    public void NavigateToSettingsHighlightChunkSizes()
-    {
-        navList.SelectedIndex = 9;
-        Dispatcher.InvokeAsync(
-            () => _settingsPage?.HighlightChunkSizes(),
-            System.Windows.Threading.DispatcherPriority.Input);
-    }
-
     public void NavigateToSettingsHighlightEvents()
     {
         navList.SelectedIndex = 9;

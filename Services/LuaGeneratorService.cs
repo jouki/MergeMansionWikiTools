@@ -13,44 +13,58 @@ public class LuaGeneratorService
     // ── Area Lua ──────────────────────────────────────────────────────
 
     /// <summary>
-    /// Splits areas into labelled chunks and generates a Lua module for each.
-    /// chunkSizes defines the size per chunk (e.g. [40, 30]). Areas beyond defined
-    /// chunks default to 40 areas per chunk.
-    /// Returns a list of (Label, Lua) pairs, e.g. ("1–40", "local p = ...").
+    /// Dynamically splits areas into chunks that fit within 90% of 2 MB.
+    /// Each area stays whole (never split mid-area).
+    /// Returns a list of (Label, Lua) pairs, e.g. ("1–35", "local p = ...").
     /// </summary>
     public List<(string Label, string Lua)> GenerateAreaChunks(
         List<LuaArea> areas,
-        List<int> chunkSizes,
         string? createdAt = null)
     {
         var result = new List<(string, string)>();
         if (areas.Count == 0) return result;
 
-        var chunks = BuildChunkBoundaries(areas.Count, chunkSizes);
-        foreach (var (start, end) in chunks)
+        // Try single chunk first
+        var full = GenerateAreasLua(areas, 0, areas.Count - 1, createdAt);
+        if (Encoding.UTF8.GetByteCount(full) < ChunkThreshold)
         {
-            var label = $"{start + 1}–{end + 1}";
-            result.Add((label, GenerateAreasLua(areas, start, end, createdAt)));
+            result.Add(("1–" + areas.Count, full));
+            return result;
         }
 
-        return result;
-    }
+        // Generate Lua for each area individually to measure sizes
+        var perArea = new List<string>(areas.Count);
+        for (int i = 0; i < areas.Count; i++)
+            perArea.Add(GenerateSingleAreaEntry(areas[i], isLast: false));
 
-    private static List<(int Start, int End)> BuildChunkBoundaries(int total, List<int> sizes)
-    {
-        var result = new List<(int, int)>();
-        var fallback = 40; // areas beyond defined chunks always default to 40
-        var cursor = 0;
-        var sizeIdx = 0;
+        // Calculate wrapper overhead
+        var wrapperTemplate = BuildAreaWrapper("", createdAt);
+        var wrapperBytes = (long)Encoding.UTF8.GetByteCount(wrapperTemplate);
+        var targetBytes = ChunkThreshold - wrapperBytes;
 
-        while (cursor < total)
+        // Greedily pack areas into chunks
+        var chunkStart = 0;
+        long currentBytes = 0;
+
+        for (int i = 0; i < areas.Count; i++)
         {
-            var size = sizeIdx < sizes.Count ? Math.Max(1, sizes[sizeIdx]) : fallback;
-            var end = Math.Min(cursor + size - 1, total - 1);
-            result.Add((cursor, end));
-            cursor = end + 1;
-            sizeIdx++;
+            var entryBytes = Encoding.UTF8.GetByteCount(perArea[i]);
+
+            if (currentBytes + entryBytes > targetBytes && i > chunkStart)
+            {
+                // Emit current chunk
+                var label = $"{chunkStart + 1}–{i}";
+                result.Add((label, GenerateAreasLua(areas, chunkStart, i - 1, createdAt)));
+                chunkStart = i;
+                currentBytes = 0;
+            }
+
+            currentBytes += entryBytes;
         }
+
+        // Emit final chunk
+        var finalLabel = $"{chunkStart + 1}–{areas.Count}";
+        result.Add((finalLabel, GenerateAreasLua(areas, chunkStart, areas.Count - 1, createdAt)));
 
         return result;
     }
@@ -79,6 +93,32 @@ public class LuaGeneratorService
         }
 
         sb.Append("\n}\n\nreturn p");
+        return sb.ToString();
+    }
+
+    /// <summary>Generates the Lua entry for a single area (without wrapper).</summary>
+    private static string GenerateSingleAreaEntry(LuaArea area, bool isLast)
+    {
+        var sb = new StringBuilder();
+        var comma = isLast ? "" : ",";
+        var tasks = BuildTasksTable(area.Tasks, 3);
+        sb.Append($"\n\t[\"{Esc(area.DisplayName)}\"] = {{\n");
+        sb.Append($"\t\tname = \"{Esc(area.DisplayName)}\",\n");
+        sb.Append($"\t\tingameName = \"{Esc(area.InternalName)}\",\n");
+        if (!string.IsNullOrEmpty(area.ReleaseDate))
+            sb.Append($"\t\trelease = \"{Esc(area.ReleaseDate)}\",\n");
+        sb.Append($"\t\ttasks = {tasks}\n");
+        sb.Append($"\t}}{comma}");
+        return sb.ToString();
+    }
+
+    /// <summary>Builds the area Lua wrapper (header + footer) with empty content, for size measurement.</summary>
+    private static string BuildAreaWrapper(string content, string? createdAt)
+    {
+        var sb = new StringBuilder();
+        if (!string.IsNullOrEmpty(createdAt))
+            sb.Append($"-- createdAt: {createdAt}\n");
+        sb.Append($"local p = {{}}\n\np.areas = {{{content}\n}}\n\nreturn p");
         return sb.ToString();
     }
 
@@ -147,6 +187,15 @@ public class LuaGeneratorService
                 sb.Append($"\n{p2}requirements = {{");
                 sb.Append(string.Join(", ", task.Requirements.Select(
                     kv => $"{{name = \"{Esc(kv.Key)}\", amount = {kv.Value}}}")));
+                sb.Append("},");
+            }
+
+            // Token values (ExtraSpawn: DigEventTaps, QuaternaryEnergy, etc.)
+            if (task.TokenValues.Count > 0)
+            {
+                sb.Append($"\n{p2}tokens = {{");
+                sb.Append(string.Join(", ", task.TokenValues.Select(
+                    kv => $"{CamelToLua(kv.Key)} = {kv.Value}")));
                 sb.Append("}");
             }
 
@@ -346,7 +395,8 @@ public class LuaGeneratorService
         bool HasBubble,
         long BubbleDurationMs,
         int BubbleOpenCost,
-        int BubbleSpawnOdds);
+        int BubbleSpawnOdds,
+        Dictionary<string, double>? ExtraSpawnValues);
 
     private static List<FlatItem> BuildFlatItems(List<ParsedChain> chains, bool useRawNames = false)
     {
@@ -373,7 +423,8 @@ public class LuaGeneratorService
                     item.HasBubble,
                     item.BubbleDurationMs,
                     item.BubbleOpenCost,
-                    item.BubbleSpawnOdds));
+                    item.BubbleSpawnOdds,
+                    item.ExtraSpawnValues));
             }
         }
         return list;
@@ -403,6 +454,15 @@ public class LuaGeneratorService
             {
                 var durationMinutes = Math.Round(it.BubbleDurationMs / 1000.0 / 60.0, 0);
                 sb.Append($"bubble = {{duration = {durationMinutes:F0}, cost = {it.BubbleOpenCost}, spawnOdds = {it.BubbleSpawnOdds}}}, ");
+            }
+
+            // extraSpawn token values
+            if (it.ExtraSpawnValues?.Count > 0)
+            {
+                sb.Append("tokens = {");
+                sb.Append(string.Join(", ", it.ExtraSpawnValues.Select(
+                    kv => $"{CamelToLua(kv.Key)} = {kv.Value.ToString(CultureInfo.InvariantCulture)}")));
+                sb.Append("}, ");
             }
 
             // odds
@@ -456,6 +516,12 @@ public class LuaGeneratorService
         sb.Append("\n}");
         return sb.ToString();
     }
+
+    // ── Lua helpers ────────────────────────────────────────────────────
+
+    /// <summary>Converts PascalCase to camelCase for Lua field names.</summary>
+    private static string CamelToLua(string s)
+        => string.IsNullOrEmpty(s) ? s : char.ToLowerInvariant(s[0]) + s[1..];
 
     // ── Lua string escaping ───────────────────────────────────────────
 

@@ -2,7 +2,7 @@ namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.14.0";
+    public const string Version = "v0.14.1";
 }
 
 public class AppSettings
@@ -22,8 +22,8 @@ public class AppSettings
     public bool ClipboardAutoAdd { get; set; } = true;
     public bool ClipboardMonitorGlobal { get; set; } = false;
 
-    // Wiki Data Parser — area chunk sizes (default: one chunk of 40)
-    public List<int> AreaChunkSizes { get; set; } = new() { 40 };
+    // Wiki Data Parser — area chunk sizes (default: one chunk of 30)
+    public List<int> AreaChunkSizes { get; set; } = new() { 30 };
 
     // Image Extractor
     public string ImageExporterBasePath { get; set; } = "";
