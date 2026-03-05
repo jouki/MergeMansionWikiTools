@@ -263,6 +263,9 @@ public class ParsedItem
     // ExtraSpawn token values (DigEventTaps, QuaternaryEnergy, etc.)
     public Dictionary<string, double>? ExtraSpawnValues { get; set; }
 
+    // Speed-up cost in gems (generators only)
+    public int? SpeedUpCostGems { get; set; }
+
     /// <summary>Whether this item collides (same level) with another item in its chain.</summary>
     public bool IsColliding { get; set; }
 

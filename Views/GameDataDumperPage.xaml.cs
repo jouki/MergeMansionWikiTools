@@ -667,6 +667,7 @@ public partial class GameDataDumperPage : UserControl
     {
         btnPullFromPhone.IsEnabled = enabled;
         btnDump.IsEnabled = enabled;
+        btnDumpSep.Opacity = enabled ? 1.0 : 0.3;
         btnDumpMenu.IsEnabled = enabled;
         chkChains.IsEnabled = enabled;
         chkAreas.IsEnabled = enabled;

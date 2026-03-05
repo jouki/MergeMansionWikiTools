@@ -396,7 +396,8 @@ public class LuaGeneratorService
         long BubbleDurationMs,
         int BubbleOpenCost,
         int BubbleSpawnOdds,
-        Dictionary<string, double>? ExtraSpawnValues);
+        Dictionary<string, double>? ExtraSpawnValues,
+        int? SpeedUpCostGems);
 
     private static List<FlatItem> BuildFlatItems(List<ParsedChain> chains, bool useRawNames = false)
     {
@@ -424,7 +425,8 @@ public class LuaGeneratorService
                     item.BubbleDurationMs,
                     item.BubbleOpenCost,
                     item.BubbleSpawnOdds,
-                    item.ExtraSpawnValues));
+                    item.ExtraSpawnValues,
+                    item.IsGenerator ? item.SpeedUpCostGems : null));
             }
         }
         return list;
@@ -446,6 +448,7 @@ public class LuaGeneratorService
 
             if (it.IsGenerator) sb.Append("isGen = true, ");
             if (it.IsTemporary) sb.Append("isTemp = true, ");
+            if (it.SpeedUpCostGems.HasValue) sb.Append($"skipPrice = {it.SpeedUpCostGems.Value}, ");
 
             sb.Append($"chainName = \"{Esc(it.ChainName)}\", ");
 

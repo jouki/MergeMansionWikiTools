@@ -6,6 +6,9 @@ using System.Reflection;
 using Code.GameLogic.GameEvents;
 using Code.GameLogic.GameEvents.DailyChallenges.Data;
 using GameLogic.Config;
+using GameLogic.Player.Items;
+using GameLogic.Player.Items.Activation;
+using GameLogic.Player.Items.Production;
 using GameLogic.Player.Requirements;
 using GameLogic.Player.Rewards;
 using merge_mansion_dumper.Dumper.Base;
@@ -45,6 +48,31 @@ namespace merge_mansion_dumper.Dumper
         public override IDictionary<string, object> Dump(SharedGameConfig config)
         {
             var result = new Dictionary<string, object>();
+
+            // ── 0. SharedGlobals ──────────────────────────────────────────
+            var globals = config.SharedGlobals;
+            if (globals != null)
+            {
+                var globalsData = new Dictionary<string, object>();
+
+                // Dump all properties via reflection
+                var props = globals.GetType().GetProperties(
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                foreach (var p in props)
+                {
+                    try
+                    {
+                        var val = p.GetValue(globals);
+                        if (val != null)
+                            globalsData[$"{p.Name} ({p.PropertyType.Name})"] = val.ToString();
+                        else
+                            globalsData[$"{p.Name} ({p.PropertyType.Name})"] = null;
+                    }
+                    catch { globalsData[p.Name] = "<error>"; }
+                }
+
+                result["SharedGlobals"] = globalsData;
+            }
 
             // ── 1. DigEvent (Archaeology — combined) ─────────────────────
 
@@ -211,6 +239,89 @@ namespace merge_mansion_dumper.Dumper
                 };
             }).ToArray() ?? Array.Empty<object>();
 
+            // ── 5. Speed-Up Cost Analysis ────────────────────────────────
+            var speedUpData = new List<object>();
+            int dbgTotal = 0, dbgHasAct = 0, dbgHasSpawn = 0, dbgHasCycle = 0;
+            if (config.Items != null)
+            {
+                foreach (var kv in config.Items.EnumerateAll())
+                {
+                    dbgTotal++;
+                    var item = (ItemDefinition)kv.Value;
+
+                    // Debug: try multiple access paths
+                    var actFeatures = item.ActivationFeatures as ActivationFeatures;
+                    if (actFeatures == null)
+                    {
+                        // Try reflection for private field
+                        var field = item.GetType().GetField("_ActivationFeatures",
+                            BindingFlags.NonPublic | BindingFlags.Instance);
+                        actFeatures = field?.GetValue(item) as ActivationFeatures;
+                    }
+
+                    if (actFeatures == null) continue;
+                    dbgHasAct++;
+
+                    if (actFeatures.ActivationSpawn == null || actFeatures.ActivationSpawn is EmptyProducer)
+                        continue;
+                    dbgHasSpawn++;
+
+                    // Navigate: IActivationCycle → ActivationCycle → DailyActivationCyclesData → ActivationCycleData
+                    var activationCycle = actFeatures.ActivationCycle as ActivationCycle;
+                    if (activationCycle == null) continue;
+
+                    long delayMs;
+                    int amount = 0;
+                    double timerSkipMult = 0;
+
+                    var cycleData = activationCycle.DailyActivationCyclesData as ActivationCycleData;
+                    if (cycleData?.DelaysBetweenCycles != null && cycleData.DelaysBetweenCycles.Count > 0)
+                    {
+                        delayMs = cycleData.DelaysBetweenCycles.First().Milliseconds;
+                        amount = cycleData.ActivationAmountInCycle?.FirstOrDefault() ?? 0;
+                        timerSkipMult = cycleData.TimerSkipMultiplier?.FirstOrDefault().Double ?? 0;
+                    }
+                    else
+                    {
+                        // Fallback: simple single-cycle generator
+                        delayMs = activationCycle.ActivationDelay.Milliseconds;
+                    }
+
+                    if (delayMs <= 0) continue;
+                    dbgHasCycle++;
+
+                    var producer = actFeatures.ActivationSpawn;
+                    var (avgTSP, drops) = GetProducerDropsTSP(producer, config);
+                    var baseProducer = GetBaseProducer(producer);
+
+                    speedUpData.Add(new Dictionary<string, object>
+                    {
+                        ["ItemType"] = kv.Key,
+                        ["RawItemTSP"] = item.TimeSkipPriceGems.Double,
+                        ["ProducerType"] = baseProducer.GetType().Name,
+                        ["ProducerTSP"] = Math.Round(avgTSP, 6),
+                        ["Delay_ms"] = delayMs,
+                        ["Amount"] = amount,
+                        ["TimerSkipMult"] = timerSkipMult,
+                        ["StorageMax"] = actFeatures.StorageMax,
+                        ["HowManyCycles"] = activationCycle.HowManyCycles,
+                        ["HasCycleData"] = cycleData != null,
+                        ["Drops"] = drops,
+                    });
+                }
+            }
+            result["SpeedUpAnalysis"] = new Dictionary<string, object>
+            {
+                ["_debug"] = new Dictionary<string, object>
+                {
+                    ["TotalItems"] = dbgTotal,
+                    ["HasActivationFeatures"] = dbgHasAct,
+                    ["HasNonEmptySpawn"] = dbgHasSpawn,
+                    ["HasCycleWithDelay"] = dbgHasCycle,
+                },
+                ["Generators"] = speedUpData,
+            };
+
             return result;
         }
 
@@ -255,6 +366,82 @@ namespace merge_mansion_dumper.Dumper
             return lang.Translations.TryGetValue(TranslationId.FromString(locId), out var translation)
                 ? translation
                 : null;
+        }
+
+        /// <summary>
+        /// Resolves all drop items from a producer and returns (avgTSP, list of drop details).
+        /// </summary>
+        private static (double avgTSP, List<object> drops) GetProducerDropsTSP(
+            IItemSpawner producer, SharedGameConfig config)
+        {
+            var drops = new List<object>();
+
+            // Unwrap PrefixProducer
+            if (producer is PrefixProducer pp && pp.BaseProducer is IItemSpawner baseProd)
+                return GetProducerDropsTSP(baseProd, config);
+
+            // Collect product references with weights based on producer type
+            var itemEntries = new List<(ItemDef itemRef, int weight)>();
+            switch (producer)
+            {
+                case ConstantProducer cp when cp.Products != null:
+                    itemEntries.AddRange(cp.Products.Select(p => (p, 1)));
+                    break;
+                case RandomProducer rp when rp.OddsList != null:
+                    itemEntries.AddRange(rp.OddsList.Select(o => (o.Type, o.Weight)));
+                    break;
+                case ControlledRandomProducer crp when crp.GenerationOdds != null:
+                    itemEntries.AddRange(crp.GenerationOdds.Select(o => (o.Type, o.Weight)));
+                    break;
+                default:
+                    // Try reflection for OddsList (sequence producers)
+                    var oddsListProp = producer.GetType().GetProperty("OddsList",
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                    if (oddsListProp?.GetValue(producer) is IEnumerable<ItemOdds> oddsList)
+                        itemEntries.AddRange(oddsList.Select(o => (o.Type, o.Weight)));
+                    break;
+            }
+
+            foreach (var (itemRef, weight) in itemEntries)
+            {
+                try
+                {
+                    var def = itemRef?.GetDef(config);
+                    var tsp = def?.TimeSkipPriceGems.Double ?? 0;
+                    drops.Add(new Dictionary<string, object>
+                    {
+                        ["ItemType"] = itemRef?.ConfigKey ?? 0,
+                        ["TSP"] = Math.Round(tsp, 6),
+                        ["Weight"] = weight,
+                    });
+                }
+                catch
+                {
+                    drops.Add(new Dictionary<string, object>
+                    {
+                        ["ItemType"] = itemRef?.ConfigKey ?? 0,
+                        ["TSP"] = "<error>",
+                        ["Weight"] = weight,
+                    });
+                }
+            }
+
+            var avg = drops.Count > 0
+                ? drops.OfType<Dictionary<string, object>>()
+                    .Where(d => d["TSP"] is double)
+                    .Select(d => (double)d["TSP"])
+                    .DefaultIfEmpty(0)
+                    .Average()
+                : 0;
+
+            return (avg, drops);
+        }
+
+        private static IItemSpawner GetBaseProducer(IItemSpawner producer)
+        {
+            while (producer is PrefixProducer pp && pp.BaseProducer is IItemSpawner baseProd)
+                producer = baseProd;
+            return producer;
         }
 
         protected override JsonSerializerSettings CreateSettings(SharedGameConfig config)

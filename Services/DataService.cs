@@ -322,6 +322,10 @@ public class DataService
         if (extraSpawn.Count > 0)
             pi.ExtraSpawnValues = extraSpawn;
 
+        // ── SpeedUpCostGems ──
+        if (item.TryGetProperty("SpeedUpCostGems", out var sucEl) && sucEl.ValueKind == JsonValueKind.Number)
+            pi.SpeedUpCostGems = sucEl.GetInt32();
+
         return pi;
     }
 

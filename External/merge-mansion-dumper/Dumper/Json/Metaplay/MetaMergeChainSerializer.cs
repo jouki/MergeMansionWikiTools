@@ -10,10 +10,12 @@ using System;
 using System.Linq;
 using GameLogic.Config;
 using GameLogic.Player.Items.Persistent;
+using GameLogic.Player.Items.Activation;
 using GameLogic.DailyTasksV2;
 using GameLogic.Player.Items.Order;
 using Metaplay.Core.Math;
 using GameLogic.Player.Items.Sink;
+using GameLogic.Player.Items.Spawning;
 
 namespace merge_mansion_dumper.Dumper.Json.Metaplay
 {
@@ -603,6 +605,12 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 if (extraSpawnValues != null)
                     foreach (var kv in extraSpawnValues)
                         WriteProperty(writer, kv.Key, kv.Value, serializer);
+
+                var (speedUpCost, weightedAvgTSP) = ComputeSpeedUpCostGems(item);
+                if (weightedAvgTSP.HasValue)
+                    WriteProperty(writer, "WeightedAvgTSP", weightedAvgTSP.Value, serializer);
+                if (speedUpCost.HasValue)
+                    WriteProperty(writer, "SpeedUpCostGems", speedUpCost.Value, serializer);
             }
         }
 
@@ -621,6 +629,12 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 if (name == nameof(ItemDefinition.MergeChainDef))
                 {
                     WriteProperty(writer, name, (value as MergeChainDef)?.ConfigKey, serializer);
+                    return;
+                }
+                if (name == nameof(ItemDefinition.TimeSkipPriceGems))
+                {
+                    // Write exact F64.Double value (MetaMathJsonSerializer uses Math.Ceiling which rounds up)
+                    WriteProperty(writer, name, ((F64)value).Double, serializer);
                     return;
                 }
             }
@@ -642,6 +656,82 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
             }
 
             base.WriteObjectMember(writer, name, type, value, serializer);
+        }
+
+        private (int? cost, double? avgTSP) ComputeSpeedUpCostGems(ItemDefinition item)
+        {
+            // Primary generators (ActivationFeatures — tap to activate)
+            var af = item.ActivationFeatures;
+            if (af != null)
+            {
+                // Must cast to concrete ActivationCycleData — the IActivationCycleData
+                // interface properties (Get*) are [IgnoreDataMember] and never populated.
+                var cycleData = af.ActivationCycle?.DailyActivationCyclesData as ActivationCycleData;
+                if (cycleData != null)
+                {
+                    var amounts = cycleData.ActivationAmountInCycle;
+                    var howMany = cycleData.HowManyAreGeneratedInCycle;
+                    if (amounts?.Count > 0 && howMany?.Count > 0 && amounts[0] > 0 && howMany[0] > 0
+                        && af.ActivationSpawn != null)
+                    {
+                        double avgTSP = ComputeWeightedAvgTSP(af.ActivationSpawn);
+                        if (avgTSP > 0)
+                        {
+                            int cost = (int)Math.Round(amounts[0] * howMany[0] * avgTSP, MidpointRounding.AwayFromZero);
+                            return (cost, avgTSP);
+                        }
+                    }
+                }
+            }
+
+            // Secondary generators (SpawnFeatures — automatic spawning, e.g. Vase)
+            var sf = item.SpawnFeatures as SpawnFeatures;
+            if (sf?.Spawn != null && sf.SpawnCycle is SpawnCycle sc
+                && sc.SpawnAmountInCycle > 0 && sc.HowManyAreGeneratedPerSpawn > 0)
+            {
+                double avgTSP = ComputeWeightedAvgTSP(sf.Spawn);
+                if (avgTSP > 0)
+                {
+                    int cost = (int)Math.Round(sc.SpawnAmountInCycle * sc.HowManyAreGeneratedPerSpawn * avgTSP, MidpointRounding.AwayFromZero);
+                    return (cost, avgTSP);
+                }
+            }
+
+            return (null, null);
+        }
+
+        private double ComputeWeightedAvgTSP(IItemSpawner spawner)
+        {
+            if (spawner is PrefixProducer pp && pp.BaseProducer != null)
+                return ComputeWeightedAvgTSP(pp.BaseProducer);
+
+            if (spawner is ConstantProducer cp && cp.Products?.Count > 0)
+                return cp.Products.Average(p => p.GetDef(_config).TimeSkipPriceGems.Double);
+
+            if (spawner is RandomProducer rp && rp.OddsList?.Count > 0)
+            {
+                double weightSum = rp.OddsList.Sum(o => (double)o.Weight);
+                if (weightSum <= 0) return 0;
+                return rp.OddsList.Sum(o => o.Weight / weightSum * o.Type.GetDef(_config).TimeSkipPriceGems.Double);
+            }
+
+            if (spawner is ControlledRandomProducer crp && crp.GenerationOdds?.Count > 0)
+            {
+                double weightSum = crp.GenerationOdds.Sum(o => (double)o.Weight);
+                if (weightSum <= 0) return 0;
+                return crp.GenerationOdds.Sum(o => o.Weight / weightSum * o.Type.GetDef(_config).TimeSkipPriceGems.Double);
+            }
+
+            if (spawner is ControlledRandomSequenceProducer crsp && crsp.OddsList?.Count > 0)
+            {
+                double weightSum = crsp.OddsList.Sum(o => (double)o.Weight);
+                if (weightSum <= 0) return 0;
+                return crsp.OddsList.Sum(o => o.Weight / weightSum * o.Type.GetDef(_config).TimeSkipPriceGems.Double);
+            }
+
+            // Fallback for other spawner types
+            try { return spawner.TimeSkipPriceGems(null).Double; }
+            catch { return 0; }
         }
     }
 }
