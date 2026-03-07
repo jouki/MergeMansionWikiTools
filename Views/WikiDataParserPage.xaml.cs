@@ -1581,7 +1581,7 @@ public partial class WikiDataParserPage : UserControl
         string capturedLabel = label;
         copyBtn.Click += (_, _) =>
         {
-            Clipboard.SetDataObject(capturedLua, false);
+            Clipboard.SetDataObject(capturedLua, true);
             var desc = capturedIsArbiter ? "Arbiter" : $"Chunk {capturedLabel}";
             ShowInfo($"{desc} copied to clipboard.", InfoBarSeverity.Success);
         };
@@ -1753,7 +1753,7 @@ public partial class WikiDataParserPage : UserControl
             string capturedLua = lua;
             copyBtn.Click += (_, _) =>
             {
-                Clipboard.SetDataObject(capturedLua, false);
+                Clipboard.SetDataObject(capturedLua, true);
                 ShowInfo("Arbiter copied to clipboard.", InfoBarSeverity.Success);
             };
         }
@@ -2169,7 +2169,7 @@ public partial class WikiDataParserPage : UserControl
             System.Windows.Documents.Run? copiedRun = null;
             idRun.MouseLeftButtonDown += (s, e) =>
             {
-                Clipboard.SetDataObject(tid, false);
+                Clipboard.SetDataObject(tid, true);
                 if (copiedRun != null) return;
                 copiedRun = new System.Windows.Documents.Run("  Copied!")
                 {
@@ -2819,7 +2819,7 @@ public partial class WikiDataParserPage : UserControl
     {
         if (index >= 0 && index < _lastChunks.Count)
         {
-            Clipboard.SetDataObject(_lastChunks[index].Lua, false);
+            Clipboard.SetDataObject(_lastChunks[index].Lua, true);
             ShowInfo($"Chunk \"{_lastChunks[index].Label}\" copied to clipboard.", InfoBarSeverity.Success);
         }
     }
@@ -2828,14 +2828,14 @@ public partial class WikiDataParserPage : UserControl
     {
         if (!string.IsNullOrEmpty(_lastCombined))
         {
-            Clipboard.SetDataObject(_lastCombined, false);
+            Clipboard.SetDataObject(_lastCombined, true);
             ShowInfo("Items + Chain Names copied to clipboard.", InfoBarSeverity.Success);
         }
         else if (_lastItemChunks.Count > 0)
         {
             // Multi-chunk: copy all chunks concatenated (for manual use)
             var all = string.Join("\n\n", _lastItemChunks.Select(c => c.Lua));
-            Clipboard.SetDataObject(all, false);
+            Clipboard.SetDataObject(all, true);
             ShowInfo($"All {_lastItemChunks.Count} item chunks copied to clipboard.", InfoBarSeverity.Success);
         }
     }

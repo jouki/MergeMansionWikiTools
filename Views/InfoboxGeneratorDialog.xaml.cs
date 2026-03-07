@@ -94,9 +94,13 @@ public partial class InfoboxGeneratorDialog : FluentWindow
             txtOutputPlaceholder.Visibility = Visibility.Collapsed;
             btnCopy.IsEnabled = true;
 
-            if (_wikiNameWarning != null)
+            var allWarnings = new List<string>();
+            if (_wikiNameWarning != null) allWarnings.Add(_wikiNameWarning);
+            allWarnings.AddRange(_service.Warnings);
+
+            if (allWarnings.Count > 0)
             {
-                infoBar.Message = _wikiNameWarning;
+                infoBar.Message = string.Join("\n", allWarnings);
                 infoBar.Severity = InfoBarSeverity.Warning;
                 infoBar.IsOpen = true;
             }
@@ -122,7 +126,7 @@ public partial class InfoboxGeneratorDialog : FluentWindow
         {
             try
             {
-                Clipboard.SetDataObject(txtOutput.Text, false);
+                Clipboard.SetDataObject(txtOutput.Text, true);
                 success = true;
                 Increment(s => s.InfoboxesGenerated++);
                 break;

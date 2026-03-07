@@ -7,7 +7,7 @@ namespace Metaplay.Core.Config
         public static IOReader ReadEntry(this IConfigArchive archive, string name)
         {
             var data = archive.GetEntryBytes(name);
-            return new IOReader(data.ToArray());
+            return new IOReader(data.Array, data.Offset, data.Count);
         }
     }
 }

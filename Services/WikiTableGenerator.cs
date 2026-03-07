@@ -1,5 +1,4 @@
 using System.Text;
-using System.Text.RegularExpressions;
 using MergeMansionWikiTools.Models;
 
 namespace MergeMansionWikiTools.Services;
@@ -27,8 +26,7 @@ public class WikiTableGenerator
     /// <param name="chain">Parsed chain data</param>
     /// <param name="tableName">Display name for the table header</param>
     /// <param name="lowPrices">If true, sets LowPrices variable to true</param>
-    /// <param name="existingTable">Optional existing table text to extract Speed Up Cost from</param>
-    public string Generate(ParsedChain chain, string tableName, bool lowPrices, string? existingTable = null)
+    public string Generate(ParsedChain chain, string tableName, bool lowPrices)
     {
         Warnings.Clear();
 
@@ -58,10 +56,8 @@ public class WikiTableGenerator
         var fuelMap = BuildFuelMap(items);
         bool showFuel = fuelMap.Count > 0;
 
-        // ── Extract Speed Up Cost from existing table if provided ──
-        var speedUpCosts = new Dictionary<int, string>();
-        if (!string.IsNullOrEmpty(existingTable))
-            speedUpCosts = ExtractSpeedUpCosts(existingTable);
+        // Transforms To — sink reward items
+        bool showTransformsTo = items.Any(i => i.IsSink && !string.IsNullOrEmpty(i.SinkRewardItemType));
 
         // ── Build table ──
         var sb = new StringBuilder();
@@ -83,6 +79,9 @@ public class WikiTableGenerator
 
         if (showFuel)
             sb.AppendLine("! Fuel");
+
+        if (showTransformsTo)
+            sb.AppendLine("! Transforms To");
 
         if (showDrops)
             sb.AppendLine("! Drops");
@@ -142,6 +141,10 @@ public class WikiTableGenerator
             if (showFuel)
                 sb.AppendLine($"| {BuildFuelCell(item, fuelMap)}");
 
+            // Transforms To (sink reward)
+            if (showTransformsTo)
+                sb.AppendLine($"| {BuildTransformsToCell(item)}");
+
             // Drops
             if (showDrops)
                 sb.AppendLine($"| {BuildDropsCell(item)}");
@@ -169,10 +172,8 @@ public class WikiTableGenerator
             // Speed Up Cost
             if (showSpeedUpCost)
             {
-                if (speedUpCosts.TryGetValue(item.Level, out var cost))
-                    sb.AppendLine($"| {cost}");
-                else if (item.IsGenerator || (item.IsSpawner && item.SpawnDelayMs > 0))
-                    sb.AppendLine("| {{Gems}} ?");
+                if (item.IsGenerator || (item.IsSpawner && item.SpawnDelayMs > 0))
+                    sb.AppendLine("| {{Gems}} {{#Invoke:Items|GetItemSkipPriceFromChainName|{{#var:Level}}}}");
                 else
                     sb.AppendLine("| {{Dash}}");
             }
@@ -291,22 +292,12 @@ public class WikiTableGenerator
 
     private string BuildDropValuesCell(ParsedItem item)
     {
-        // Generator drop values
         if (item.IsGenerator && item.ActivationAmountInCycle > 0)
-        {
-            int activationAmount = item.ActivationAmountInCycle;
-            int batches = item.StorageMax > 0 && activationAmount > 0
-                ? item.StorageMax / activationAmount
-                : 1;
-
-            return $"{{{{DropValuesTable|{activationAmount}|{batches}}}}}";
-        }
+            return "{{#Invoke:Items|GetItemDropValuesFromChainName|{{#var:Level}}}}";
 
         // Spawner drop values: 1 drop per charge, StorageMax charges
         if (item.IsSpawner && item.SpawnStorageMax > 0)
-        {
             return $"{{{{DropValuesTable|1|{item.SpawnStorageMax}}}}}";
-        }
 
         return "{{Dash}}";
     }
@@ -316,7 +307,7 @@ public class WikiTableGenerator
     private string BuildChargeTimeCell(ParsedItem item)
     {
         if (item.IsGenerator && item.FirstCycleStartDelayMs >= 5000)
-            return $"{{{{TimeValuesTable|{item.FirstCycleStartDelayMs}}}}}";
+            return "{{#Invoke:Items|GetItemChargeTimeFromChainName|{{#var:Level}}}}";
 
         return "{{Dash}}";
     }
@@ -326,7 +317,7 @@ public class WikiTableGenerator
     private string BuildRechargeTimeCell(ParsedItem item)
     {
         if (item.IsGenerator && item.RechargeTimeMs >= 1000)
-            return $"{{{{TimeValuesTable|{item.RechargeTimeMs}}}}}";
+            return "{{#Invoke:Items|GetItemRechargeTimeFromChainName|{{#var:Level}}}}";
 
         if (item.IsSpawner && item.SpawnDelayMs >= 1000)
             return $"{{{{TimeValuesTable|{item.SpawnDelayMs}}}}}";
@@ -377,7 +368,7 @@ public class WikiTableGenerator
     /// <summary>
     /// Builds a map: item Level → list of required (chain, item) for sink items in this chain.
     /// </summary>
-    private Dictionary<int, List<(ParsedChain Chain, ParsedItem Item)>> BuildFuelMap(List<ParsedItem> chainItems)
+    private Dictionary<int, List<(ParsedChain Chain, ParsedItem Item, int Amount)>> BuildFuelMap(List<ParsedItem> chainItems)
     {
         var sinkItems = chainItems.Where(i => i.IsSink && i.SinkRequirementConfigKeys != null).ToList();
         if (sinkItems.Count == 0) return new();
@@ -389,15 +380,19 @@ public class WikiTableGenerator
                 if (!string.IsNullOrEmpty(item.NumericConfigKey))
                     configKeyToItem.TryAdd(item.NumericConfigKey, (chain, item));
 
-        var map = new Dictionary<int, List<(ParsedChain, ParsedItem)>>();
+        var map = new Dictionary<int, List<(ParsedChain, ParsedItem, int)>>();
 
         foreach (var sinkItem in sinkItems)
         {
-            var list = new List<(ParsedChain, ParsedItem)>();
+            var list = new List<(ParsedChain, ParsedItem, int)>();
             foreach (var reqKey in sinkItem.SinkRequirementConfigKeys!)
             {
                 if (configKeyToItem.TryGetValue(reqKey, out var match))
-                    list.Add(match);
+                {
+                    int amount = sinkItem.SinkRequirementAmounts != null
+                        && sinkItem.SinkRequirementAmounts.TryGetValue(reqKey, out var amt) ? amt : 1;
+                    list.Add((match.Chain, match.Item, amount));
+                }
             }
             if (list.Count > 0)
                 map[sinkItem.Level] = list;
@@ -406,15 +401,34 @@ public class WikiTableGenerator
         return map;
     }
 
-    private string BuildFuelCell(ParsedItem item, Dictionary<int, List<(ParsedChain Chain, ParsedItem Item)>> fuelMap)
+    private string BuildFuelCell(ParsedItem item, Dictionary<int, List<(ParsedChain Chain, ParsedItem Item, int Amount)>> fuelMap)
     {
         if (!fuelMap.TryGetValue(item.Level, out var requirements)) return "{{Dash}}";
 
         var parts = new List<string>();
-        foreach (var (reqChain, reqItem) in requirements)
-            parts.Add($"{{{{Item|{reqChain.DisplayName}|{reqItem.Level}}}}}");
+        foreach (var (reqChain, reqItem, amount) in requirements)
+        {
+            var template = $"{{{{Item|{reqChain.DisplayName}|{reqItem.Level}}}}}";
+            parts.Add(amount > 1 ? $"{amount}x {template}" : template);
+        }
 
         return parts.Count > 0 ? string.Join("<br>", parts) : "{{Dash}}";
+    }
+
+    // ── Transforms To ─────────────────────────────────────────────────
+
+    private string BuildTransformsToCell(ParsedItem item)
+    {
+        if (!item.IsSink || string.IsNullOrEmpty(item.SinkRewardItemType))
+            return "{{Dash}}";
+
+        // Find chain + item for the reward ItemType
+        foreach (var chain in _data.Chains)
+            foreach (var ci in chain.Items)
+                if (string.Equals(ci.ItemType, item.SinkRewardItemType, StringComparison.OrdinalIgnoreCase))
+                    return $"{{{{Item|{chain.DisplayName}|{ci.Level}}}}}";
+
+        return "{{Dash}}";
     }
 
     // ── Fuel For ─────────────────────────────────────────────────────
@@ -484,80 +498,6 @@ public class WikiTableGenerator
 
         // Try as chain key
         return _data.ResolveChainDisplayName(itemTypeOrChainKey);
-    }
-
-    /// <summary>
-    /// Extracts Speed Up Cost values from an existing wiki table.
-    /// Returns a dictionary of level → cost text.
-    /// </summary>
-    private Dictionary<int, string> ExtractSpeedUpCosts(string tableText)
-    {
-        var result = new Dictionary<int, string>();
-
-        try
-        {
-            var lines = tableText.Split('\n');
-
-            // Find the "Speed Up Cost" column index by counting header lines
-            int speedUpCol = -1;
-            int colIndex = 0;
-
-            foreach (var line in lines)
-            {
-                var trimmed = line.Trim();
-                if (trimmed.StartsWith("!"))
-                {
-                    if (trimmed.Contains("Speed Up Cost", StringComparison.OrdinalIgnoreCase))
-                        speedUpCol = colIndex;
-                    colIndex++;
-                }
-            }
-
-            if (speedUpCol < 0) return result;
-
-            // Parse rows
-            int currentLevel = 0;
-            int currentCol = -1;
-
-            foreach (var line in lines)
-            {
-                var trimmed = line.Trim();
-
-                if (trimmed.StartsWith("|-"))
-                {
-                    currentCol = 0;
-                    continue;
-                }
-
-                if (!trimmed.StartsWith("|") || trimmed.StartsWith("|+") || trimmed.StartsWith("|}"))
-                    continue;
-
-                if (currentCol < 0) continue;
-
-                var cellValue = trimmed.TrimStart('|').Trim();
-
-                // Try to extract level: from <!-- N --> comment, or plain number in first column
-                var lvlComment = Regex.Match(trimmed, @"<!--\s*(\d+)\s*-->");
-                if (lvlComment.Success)
-                    currentLevel = int.Parse(lvlComment.Groups[1].Value);
-                else if (currentCol == 0 && int.TryParse(cellValue.Trim(), out var plainLevel))
-                    currentLevel = plainLevel;
-
-                if (currentCol == speedUpCol && currentLevel > 0)
-                {
-                    if (!string.IsNullOrEmpty(cellValue) && cellValue != "{{Dash}}")
-                        result[currentLevel] = cellValue;
-                }
-
-                currentCol++;
-            }
-        }
-        catch
-        {
-            Warnings.Add("Failed to parse existing table for Speed Up Cost values.");
-        }
-
-        return result;
     }
 
     private bool HasDrops(ParsedItem item)

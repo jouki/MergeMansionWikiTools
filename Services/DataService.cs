@@ -151,15 +151,24 @@ public class DataService
                         parsed.Items.Add(parsedItem);
                     continue;
                 }
-                // Atypical: "Items" array — multiple variants per level
+                // Atypical: "Items" array — multiple variants per level (e.g. DogAreaWood + SaunaAreaWood)
                 if (entry.TryGetProperty("Items", out var itemsEl) && itemsEl.ValueKind == JsonValueKind.Array)
                 {
+                    var variants = new List<ParsedItem>();
                     foreach (var it in itemsEl.EnumerateArray())
                     {
                         var parsedItem = ParseItem(it);
                         if (parsedItem != null)
-                            parsed.Items.Add(parsedItem);
+                            variants.Add(parsedItem);
                     }
+
+                    if (variants.Count > 1)
+                    {
+                        foreach (var v in variants)
+                            v.VariantLabel = ExtractAreaLabel(v.ItemType, configKey);
+                    }
+
+                    parsed.Items.AddRange(variants);
                 }
             }
 
@@ -233,10 +242,16 @@ public class DataService
             {
                 pi.SpawnItemType = GetString(spawn, "Constant");
 
-                // ControlledRandom odds (e.g. HotelStay, Shell spawners)
+                // ControlledRandom / ControlledRandomSequence odds
                 if (spawn.TryGetProperty("ControlledRandom", out var cr))
                 {
                     if (cr.TryGetProperty("Odds", out var odds) && odds.ValueKind == JsonValueKind.Object)
+                        pi.SpawnOdds = ParseOddsDictionary(odds);
+                }
+
+                if (pi.SpawnOdds == null && spawn.TryGetProperty("ControlledRandomSequence", out var crs))
+                {
+                    if (crs.TryGetProperty("Odds", out var odds) && odds.ValueKind == JsonValueKind.Object)
                         pi.SpawnOdds = ParseOddsDictionary(odds);
                 }
 
@@ -301,7 +316,56 @@ public class DataService
                     .Select(p => p.Name)
                     .Where(k => !string.IsNullOrEmpty(k))
                     .ToList();
+                pi.SinkRequirementAmounts = targets.EnumerateObject()
+                    .Where(p => !string.IsNullOrEmpty(p.Name))
+                    .ToDictionary(p => p.Name, p => p.Value.ValueKind == JsonValueKind.Number ? p.Value.GetInt32() : 1);
             }
+            if (factory.TryGetProperty("RewardDef", out var rewardDef) && rewardDef.ValueKind == JsonValueKind.String)
+                pi.SinkRewardItemType = rewardDef.GetString();
+        }
+
+        // ── OrderFeatures (tasks requiring items → rewards) ──
+        if (item.TryGetProperty("OrderFeatures", out var order) && GetBool(order, "IsOrder"))
+        {
+            pi.IsOrder = true;
+            var required = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+            var rewards = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+
+            // OrderProducer can be Constant, ControlledRandom, or ControlledPredefinedSequence
+            if (order.TryGetProperty("OrderProducer", out var op))
+            {
+                // Try each variant — all have "Tasks" arrays with "Required" and "Rewards"
+                foreach (var variant in new[] { "Constant", "ControlledRandom", "ControlledPredefinedSequence" })
+                {
+                    if (!op.TryGetProperty(variant, out var v)) continue;
+                    if (!v.TryGetProperty("Tasks", out var tasks) || tasks.ValueKind != JsonValueKind.Array) continue;
+
+                    foreach (var task in tasks.EnumerateArray())
+                    {
+                        if (task.TryGetProperty("Required", out var reqArr) && reqArr.ValueKind == JsonValueKind.Array)
+                            foreach (var r in reqArr.EnumerateArray())
+                            {
+                                var it = GetString(r, "Item");
+                                var amt = GetInt(r, "Amount", 1);
+                                if (!string.IsNullOrEmpty(it))
+                                    required[it] = required.GetValueOrDefault(it) + amt;
+                            }
+
+                        if (task.TryGetProperty("Rewards", out var rewArr) && rewArr.ValueKind == JsonValueKind.Array)
+                            foreach (var r in rewArr.EnumerateArray())
+                            {
+                                var it = GetString(r, "Item");
+                                var amt = GetInt(r, "Amount", 1);
+                                if (!string.IsNullOrEmpty(it))
+                                    rewards[it] = rewards.GetValueOrDefault(it) + amt;
+                            }
+                    }
+                    break;
+                }
+            }
+
+            if (required.Count > 0) pi.OrderRequiredItems = required;
+            if (rewards.Count > 0) pi.OrderRewardItems = rewards;
         }
 
         // ── BubbleFeatures ──
@@ -325,6 +389,16 @@ public class DataService
         // ── SpeedUpCostGems ──
         if (item.TryGetProperty("SpeedUpCostGems", out var sucEl) && sucEl.ValueKind == JsonValueKind.Number)
             pi.SpeedUpCostGems = sucEl.GetInt32();
+
+        // ── RechargeTimeMs for secondary generators (SpawnFeatures) ──
+        if (pi.RechargeTimeMs == 0
+            && item.TryGetProperty("SpawnFeatures", out var spf)
+            && spf.TryGetProperty("SpawnCycle", out var spCycle)
+            && spCycle.TryGetProperty("DelayBetweenCycles", out var dbc)
+            && dbc.ValueKind == JsonValueKind.Number)
+        {
+            pi.RechargeTimeMs = dbc.GetInt64();
+        }
 
         return pi;
     }
@@ -378,17 +452,30 @@ public class DataService
                 return ParseOddsDictionary(odds);
         }
 
+        // Path 1a2: ActivationSpawn → ControlledRandomSequence → Odds (direct)
+        if (asp.TryGetProperty("ControlledRandomSequence", out var directCrs))
+        {
+            if (directCrs.TryGetProperty("Odds", out var odds) && odds.ValueKind == JsonValueKind.Object)
+                return ParseOddsDictionary(odds);
+        }
+
         // Path 1b: ActivationSpawn → Constant (single item)
         var directConst = GetString(asp, "Constant");
         if (!string.IsNullOrEmpty(directConst))
             return new Dictionary<string, double> { { directConst, 100.0 } };
 
-        // Path 1c: ActivationSpawn → BaseProducer → ControlledRandom/Random/Constant
+        // Path 1c: ActivationSpawn → BaseProducer → ControlledRandom/ControlledRandomSequence/Random/Constant
         if (asp.TryGetProperty("BaseProducer", out var bp))
         {
             if (bp.TryGetProperty("ControlledRandom", out var cr))
             {
                 if (cr.TryGetProperty("Odds", out var odds) && odds.ValueKind == JsonValueKind.Object)
+                    return ParseOddsDictionary(odds);
+            }
+
+            if (bp.TryGetProperty("ControlledRandomSequence", out var crs))
+            {
+                if (crs.TryGetProperty("Odds", out var odds) && odds.ValueKind == JsonValueKind.Object)
                     return ParseOddsDictionary(odds);
             }
 
@@ -444,6 +531,44 @@ public class DataService
         if (name.Count(c => c == '_') >= 2) return false;
 
         return true;
+    }
+
+    /// <summary>
+    /// Extracts a human-readable area label from an ItemType prefix that differs from the chain's ConfigKey.
+    /// E.g. ItemType="SaunaAreaWood_01", chainKey="DogAreaWood" → "Sauna Area".
+    /// Returns null if the item belongs to the chain's own prefix.
+    /// </summary>
+    private static string? ExtractAreaLabel(string itemType, string chainKey)
+    {
+        // Get prefix before last "_XX" number suffix
+        var lastUnderscore = itemType.LastIndexOf('_');
+        if (lastUnderscore <= 0) return null;
+        var itemPrefix = itemType[..lastUnderscore];
+
+        // Split CamelCase into words
+        string[] ToWords(string s) =>
+            System.Text.RegularExpressions.Regex.Replace(s, "(?<=[a-z])(?=[A-Z])", " ").Split(' ');
+
+        var itemWords = ToWords(itemPrefix);
+        var chainWords = ToWords(chainKey);
+
+        // Find how many trailing words are shared between item prefix and chain key
+        // E.g. "Sauna Area Wood" vs "Dog Area Wood" → 2 common trailing words ("Area", "Wood")
+        int common = 0;
+        for (int i = 1; i <= Math.Min(itemWords.Length, chainWords.Length); i++)
+        {
+            if (itemWords[^i].Equals(chainWords[^i], StringComparison.OrdinalIgnoreCase))
+                common = i;
+            else
+                break;
+        }
+
+        // Keep only the differing leading part: "Sauna Area Wood" → "Sauna", "Dog Area Wood" → "Dog"
+        var label = common > 0 && common < itemWords.Length
+            ? string.Join(' ', itemWords[..^common])
+            : string.Join(' ', itemWords);
+
+        return string.IsNullOrWhiteSpace(label) ? null : label;
     }
 
     /// <summary>

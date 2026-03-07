@@ -312,7 +312,7 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
 
             if (value is GarageCleanupPatternInfo pattern)
             {
-                var rewards = ClientGlobal.SharedGameConfig.GarageCleanupRewards;
+                var rewards = _config.GarageCleanupRewards;
                 if (!rewards.TryGetValue(pattern.RewardId, out var reward))
                     return;
 
@@ -386,7 +386,7 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                     writer.WriteStartArray();
 
                     foreach (var item in (IList<int>)value)
-                        WriteValue(writer, ClientGlobal.SharedGameConfig.Items.GetValueOrDefault(item)?.ItemType, serializer);
+                        WriteValue(writer, _config.Items.GetValueOrDefault(item)?.ItemType, serializer);
 
                     writer.WriteEndArray();
 
@@ -463,7 +463,7 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                     writer.WritePropertyName(name);
                     writer.WriteStartArray();
 
-                    var boardRows = ClientGlobal.SharedGameConfig.GarageCleanupBoardRows;
+                    var boardRows = _config.GarageCleanupBoardRows;
 
                     foreach (var rowId in (IList<GarageCleanupBoardRowId>)value)
                     {
@@ -502,7 +502,7 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                     writer.WritePropertyName(name);
                     writer.WriteStartArray();
 
-                    var patternRows = ClientGlobal.SharedGameConfig.GarageCleanupPatternRows;
+                    var patternRows = _config.GarageCleanupPatternRows;
 
                     foreach (var rowId in (IList<GarageCleanupPatternRowId>)value)
                     {
@@ -523,7 +523,7 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 if (name == nameof(BoardCell.ItemId))
                 {
                     writer.WritePropertyName(name);
-                    WriteValue(writer, ClientGlobal.SharedGameConfig.Items.GetValueOrDefault((int)value)?.ItemType, serializer);
+                    WriteValue(writer, _config.Items.GetValueOrDefault((int)value)?.ItemType, serializer);
 
                     return;
                 }

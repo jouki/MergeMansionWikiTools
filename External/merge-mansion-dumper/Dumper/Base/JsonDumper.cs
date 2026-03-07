@@ -15,7 +15,12 @@ namespace merge_mansion_dumper.Dumper.Base
             if (!string.IsNullOrEmpty(dir))
                 Directory.CreateDirectory(dir);
 
-            File.WriteAllText(file, JsonConvert.SerializeObject(data, Formatting.Indented, CreateSettings(config)));
+            var serializer = JsonSerializer.Create(CreateSettings(config));
+            serializer.Formatting = Formatting.Indented;
+
+            using var sw = new StreamWriter(file, false, System.Text.Encoding.UTF8, 65536);
+            using var jw = new JsonTextWriter(sw) { Formatting = Formatting.Indented };
+            serializer.Serialize(jw, data);
         }
 
         protected virtual JsonSerializerSettings CreateSettings(SharedGameConfig config) => new() { NullValueHandling = NullValueHandling.Ignore };

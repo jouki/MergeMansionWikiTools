@@ -397,7 +397,11 @@ public class LuaGeneratorService
         int BubbleOpenCost,
         int BubbleSpawnOdds,
         Dictionary<string, double>? ExtraSpawnValues,
-        int? SpeedUpCostGems);
+        int? SpeedUpCostGems,
+        long RechargeTimeMs,
+        int Charges,
+        int DropsPerCharge,
+        long ChargeTimeMs);
 
     private static List<FlatItem> BuildFlatItems(List<ParsedChain> chains, bool useRawNames = false)
     {
@@ -412,6 +416,31 @@ public class LuaGeneratorService
             foreach (var item in chain.Items)
             {
                 if (string.IsNullOrEmpty(item.ItemType)) continue;
+                // Resolve generator fields — primary (ActivationFeatures) or secondary (SpawnFeatures)
+                int? skipPrice = null;
+                long rechargeTime = 0;
+                int charges = 0;
+                int dropsPerCharge = 0;
+                long chargeTime = 0;
+
+                if (item.IsGenerator)
+                {
+                    skipPrice = item.SpeedUpCostGems;
+                    rechargeTime = item.RechargeTimeMs;
+                    charges = item.ActivationAmountInCycle > 0 && item.StorageMax > 0
+                        ? item.StorageMax / item.ActivationAmountInCycle : 0;
+                    dropsPerCharge = item.ActivationAmountInCycle;
+                    chargeTime = item.FirstCycleStartDelayMs;
+                }
+                else if (item.IsSpawner)
+                {
+                    skipPrice = item.SpeedUpCostGems;
+                    rechargeTime = item.SpawnDelayMs;
+                    charges = item.SpawnAmountInCycle > 0 && item.SpawnStorageMax > 0
+                        ? item.SpawnStorageMax / item.SpawnAmountInCycle : 0;
+                    dropsPerCharge = item.SpawnAmountInCycle;
+                }
+
                 list.Add(new FlatItem(
                     item.ItemType,
                     item.Name,
@@ -426,7 +455,11 @@ public class LuaGeneratorService
                     item.BubbleOpenCost,
                     item.BubbleSpawnOdds,
                     item.ExtraSpawnValues,
-                    item.IsGenerator ? item.SpeedUpCostGems : null));
+                    skipPrice,
+                    rechargeTime,
+                    charges,
+                    dropsPerCharge,
+                    chargeTime));
             }
         }
         return list;
@@ -449,6 +482,10 @@ public class LuaGeneratorService
             if (it.IsGenerator) sb.Append("isGen = true, ");
             if (it.IsTemporary) sb.Append("isTemp = true, ");
             if (it.SpeedUpCostGems.HasValue) sb.Append($"skipPrice = {it.SpeedUpCostGems.Value}, ");
+            if (it.RechargeTimeMs > 0) sb.Append($"rechargeTime = {it.RechargeTimeMs}, ");
+            if (it.Charges > 0) sb.Append($"charges = {it.Charges}, ");
+            if (it.DropsPerCharge > 0) sb.Append($"dropsPerCharge = {it.DropsPerCharge}, ");
+            if (it.ChargeTimeMs > 0) sb.Append($"chargeTime = {it.ChargeTimeMs}, ");
 
             sb.Append($"chainName = \"{Esc(it.ChainName)}\", ");
 

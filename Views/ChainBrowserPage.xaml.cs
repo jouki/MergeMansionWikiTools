@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using MergeMansionWikiTools.Models;
 using MergeMansionWikiTools.Services;
+using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
 
 using TextBlock = System.Windows.Controls.TextBlock;
@@ -15,7 +16,7 @@ namespace MergeMansionWikiTools.Views;
 
 // ── View model wrappers for data binding ─────────────────────────
 
-public class ChainViewModel
+public class ChainViewModel : INotifyPropertyChanged
 {
     public ParsedChain Source { get; }
     private readonly MainWindow _main;
@@ -30,16 +31,78 @@ public class ChainViewModel
     public bool ShowUploadButton => _main.Settings.WikiVerified;
     public bool HasLevelCollisions => Source.HasLevelCollisions;
 
+    private bool _showMergeCheckbox;
+    public bool ShowMergeCheckbox
+    {
+        get => _showMergeCheckbox;
+        set { _showMergeCheckbox = value; PropertyChanged?.Invoke(this, new(nameof(ShowMergeCheckbox))); }
+    }
+
+    private bool _isMergeChecked;
+    public bool IsMergeChecked
+    {
+        get => _isMergeChecked;
+        set { _isMergeChecked = value; PropertyChanged?.Invoke(this, new(nameof(IsMergeChecked))); }
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
     public List<ItemViewModel> Items { get; }
 
-    /// <summary>
-    /// Returns a grouped CollectionView when the chain has level collisions from multiple
-    /// source chains, otherwise returns the plain Items list (no group headers).
-    /// </summary>
-    public object ItemsView { get; }
+    /// <summary>Tracks which group keys have their group checkbox checked.</summary>
+    public HashSet<string> CheckedGroups { get; } = new();
 
-    /// <summary>Whether items are grouped by source chain (for margin binding).</summary>
-    public bool HasGrouping { get; }
+    /// <summary>Whether this chain has items from multiple source chains.</summary>
+    public bool HasMultipleSources { get; }
+
+    /// <summary>Whether any items are aliases (for showing Group Alias checkbox).</summary>
+    public bool HasAliasItems { get; }
+
+    /// <summary>Whether alias grouping checkbox should be visible.</summary>
+    public bool ShowGroupAliasCheckbox => HasMultipleSources && HasAliasItems;
+
+    private bool _allItemsChecked;
+    /// <summary>Whether all items are currently checked (for Select All binding).</summary>
+    public bool AllItemsChecked
+    {
+        get => _allItemsChecked;
+        set { _allItemsChecked = value; PropertyChanged?.Invoke(this, new(nameof(AllItemsChecked))); }
+    }
+
+    private object _itemsView = null!;
+    /// <summary>Current items view (plain list or grouped CollectionView).</summary>
+    public object ItemsView
+    {
+        get => _itemsView;
+        private set { _itemsView = value; PropertyChanged?.Invoke(this, new(nameof(ItemsView))); }
+    }
+
+    private bool _hasGrouping;
+    /// <summary>Whether items are currently grouped (for margin binding).</summary>
+    public bool HasGrouping
+    {
+        get => _hasGrouping;
+        private set
+        {
+            _hasGrouping = value;
+            PropertyChanged?.Invoke(this, new(nameof(HasGrouping)));
+            PropertyChanged?.Invoke(this, new(nameof(ItemsMargin)));
+        }
+    }
+
+    private bool _groupAliases = true;
+    /// <summary>When true, alias items are collapsed into one "Aliases" group.</summary>
+    public bool GroupAliases
+    {
+        get => _groupAliases;
+        set
+        {
+            if (_groupAliases == value) return;
+            _groupAliases = value;
+            PropertyChanged?.Invoke(this, new(nameof(GroupAliases)));
+            RebuildItemsView();
+        }
+    }
 
     /// <summary>Negative top margin to compensate for first group header spacing.</summary>
     public Thickness ItemsMargin => HasGrouping ? new Thickness(0, -14, 0, 0) : new Thickness(0);
@@ -50,18 +113,55 @@ public class ChainViewModel
         _main = main;
         Items = source.Items.Select(i => new ItemViewModel(i)).ToList();
 
-        // Group by SourceChainKey when collisions come from multiple source chains
         var distinctSources = Items.Select(i => i.SourceChainKey).Where(k => k.Length > 0).Distinct().Count();
-        if (source.HasLevelCollisions && distinctSources > 1)
+        HasMultipleSources = distinctSources > 1;
+        HasAliasItems = Items.Any(i => i.IsAlias);
+
+        RebuildItemsView();
+    }
+
+    private void RebuildItemsView()
+    {
+        if (!HasMultipleSources)
         {
-            HasGrouping = true;
+            HasGrouping = false;
+            ItemsView = Items;
+            return;
+        }
+
+        HasGrouping = true;
+
+        if (GroupAliases && HasAliasItems)
+        {
+            // Remap CheckedGroups: individual alias keys → "Aliases" if all were checked
+            var aliasKeys = Items.Where(i => i.IsAlias).Select(i => i.SourceChainKey).Distinct().ToList();
+            if (aliasKeys.Count > 0 && aliasKeys.All(k => CheckedGroups.Contains(k)))
+            {
+                foreach (var k in aliasKeys) CheckedGroups.Remove(k);
+                CheckedGroups.Add("Aliases");
+            }
+            else
+            {
+                foreach (var k in aliasKeys) CheckedGroups.Remove(k);
+                CheckedGroups.Remove("Aliases");
+            }
+
             var view = new ListCollectionView(Items);
-            view.GroupDescriptions.Add(new PropertyGroupDescription(nameof(ItemViewModel.SourceChainKey)));
+            view.GroupDescriptions.Add(new PropertyGroupDescription(nameof(ItemViewModel.AliasGroupKey)));
             ItemsView = view;
         }
         else
         {
-            ItemsView = Items;
+            // Remap CheckedGroups: "Aliases" → expand to individual alias SourceChainKeys
+            if (CheckedGroups.Remove("Aliases"))
+            {
+                foreach (var k in Items.Where(i => i.IsAlias).Select(i => i.SourceChainKey).Distinct())
+                    CheckedGroups.Add(k);
+            }
+
+            var view = new ListCollectionView(Items);
+            view.GroupDescriptions.Add(new PropertyGroupDescription(nameof(ItemViewModel.SourceChainKey)));
+            ItemsView = view;
         }
     }
 }
@@ -75,6 +175,11 @@ public class ItemViewModel : INotifyPropertyChanged
     public string ItemType => Source.ItemType;
     public string SourceChainKey => Source.SourceChainKey;
     public bool IsColliding => Source.IsColliding;
+    public bool IsAlias => Source.IsAlias;
+    public string? VariantLabel => Source.VariantLabel;
+
+    /// <summary>Grouping key for alias mode: aliases → "Aliases", others → SourceChainKey.</summary>
+    public string AliasGroupKey => Source.IsAlias ? "Aliases" : SourceChainKey;
 
     private bool _isChecked;
     public bool IsChecked
@@ -108,6 +213,10 @@ public partial class ChainBrowserPage : UserControl
     private List<ChainViewModel> _allChains = new();
     private string _currentSearch = "";
     private ChainViewModel? _activeCheckChain;
+    private bool _mergeMode;
+    private readonly HashSet<ChainViewModel> _mergeSelection = new();
+    private readonly HashSet<ChainViewModel> _mergeCheckChains = new();
+    private SolidColorBrush _splitSepBrush;
 
     private static Brush HighlightBrush =>
         Application.Current.TryFindResource("AccentTextFillColorPrimaryBrush") as Brush
@@ -117,6 +226,11 @@ public partial class ChainBrowserPage : UserControl
     {
         _main = main;
         InitializeComponent();
+
+        _splitSepBrush = GetSplitSeparatorBrush();
+        btnMergeModeSep.Background = _splitSepBrush;
+        ApplicationThemeManager.Changed += (_, _) => Dispatcher.InvokeAsync(RefreshSplitSeparatorColor);
+        ApplySplitButtonStyle(btnMergeMode, btnMergeModeHelp);
 
         // Restore persisted filter states
         var s = _main.Settings;
@@ -357,6 +471,14 @@ public partial class ChainBrowserPage : UserControl
             }
         }
 
+        // Subtle variant label (e.g. "Sauna") for multi-variant chain levels
+        if (!string.IsNullOrEmpty(vm.VariantLabel))
+        {
+            var labelRun = new Run($"  {vm.VariantLabel}") { FontSize = 10 };
+            labelRun.SetResourceReference(Run.ForegroundProperty, "TextFillColorTertiaryBrush");
+            tb.Inlines.Add(labelRun);
+        }
+
     }
 
     private void FilterRow_Click(object sender, MouseButtonEventArgs e)
@@ -416,6 +538,8 @@ public partial class ChainBrowserPage : UserControl
     {
         foreach (var item in vm.Items)
             item.IsChecked = false;
+        vm.CheckedGroups.Clear();
+        vm.AllItemsChecked = false;
     }
 
     /// <summary>Walks up the visual tree from a given element to find the parent of type T.</summary>
@@ -445,6 +569,17 @@ public partial class ChainBrowserPage : UserControl
             if (result != null) return result;
         }
         return null;
+    }
+
+    private static IEnumerable<T> FindVisualChildren<T>(DependencyObject parent) where T : DependencyObject
+    {
+        for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+        {
+            var child = VisualTreeHelper.GetChild(parent, i);
+            if (child is T found) yield return found;
+            foreach (var descendant in FindVisualChildren<T>(child))
+                yield return descendant;
+        }
     }
 
     /// <summary>Walks down the visual tree to find the first descendant StackPanel with Tag="ActionBar".</summary>
@@ -507,6 +642,24 @@ public partial class ChainBrowserPage : UserControl
         }
     }
 
+    /// <summary>
+    /// Sets the active check chain. In merge mode, allows multi-chain selections;
+    /// in normal mode, clears previous chain's checks.
+    /// </summary>
+    private void SetActiveCheckChain(ChainViewModel chainVm)
+    {
+        if (_mergeMode)
+        {
+            _mergeCheckChains.Add(chainVm);
+        }
+        else
+        {
+            if (_activeCheckChain != null && _activeCheckChain != chainVm)
+                ClearChecks(_activeCheckChain);
+        }
+        _activeCheckChain = chainVm;
+    }
+
     private void GroupRow_Click(object sender, MouseButtonEventArgs e)
     {
         if (sender is not StackPanel sp) return;
@@ -531,16 +684,42 @@ public partial class ChainBrowserPage : UserControl
         var chainVm = border?.DataContext as ChainViewModel;
         if (chainVm == null) return;
 
-        if (_activeCheckChain != null && _activeCheckChain != chainVm)
-            ClearChecks(_activeCheckChain);
-        _activeCheckChain = chainVm;
+        SetActiveCheckChain(chainVm);
 
-        foreach (var item in chainVm.Items.Where(i => i.SourceChainKey == groupKey))
+        foreach (var item in GetGroupItems(chainVm, groupKey))
             item.IsChecked = isChecked;
 
-        var actionBar = FindActionBar(expander);
-        if (actionBar != null)
-            UpdateActionBar(chainVm, actionBar);
+        // Track group checkbox state
+        if (isChecked)
+            chainVm.CheckedGroups.Add(groupKey);
+        else
+            chainVm.CheckedGroups.Remove(groupKey);
+
+        // Sync Select All
+        chainVm.AllItemsChecked = chainVm.Items.Count > 0 && chainVm.Items.All(i => i.IsChecked);
+
+        if (_mergeMode)
+            UpdateMergeBar();
+        else
+        {
+            var actionBar = FindActionBar(expander);
+            if (actionBar != null)
+                UpdateActionBar(chainVm, actionBar);
+        }
+    }
+
+    private void GroupCheckBox_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is not CheckBox cb) return;
+        var groupKey = cb.Tag as string ?? "";
+
+        var expander = FindVisualParent<Expander>(cb);
+        if (expander == null) return;
+        var border = FindVisualParent<Border>(expander);
+        var chainVm = border?.DataContext as ChainViewModel;
+        if (chainVm == null) return;
+
+        cb.IsChecked = chainVm.CheckedGroups.Contains(groupKey);
     }
 
     private void GroupCheckBox_Click(object sender, RoutedEventArgs e)
@@ -555,18 +734,125 @@ public partial class ChainBrowserPage : UserControl
         var chainVm = border?.DataContext as ChainViewModel;
         if (chainVm == null) return;
 
-        // Clear other chain's checks
-        if (_activeCheckChain != null && _activeCheckChain != chainVm)
-            ClearChecks(_activeCheckChain);
-        _activeCheckChain = chainVm;
+        SetActiveCheckChain(chainVm);
 
         // Toggle items in this group only
-        foreach (var item in chainVm.Items.Where(i => i.SourceChainKey == groupKey))
+        foreach (var item in GetGroupItems(chainVm, groupKey))
             item.IsChecked = isChecked;
 
-        var actionBar = FindActionBar(expander);
-        if (actionBar != null)
-            UpdateActionBar(chainVm, actionBar);
+        // Track group checkbox state for persistence across view rebuilds
+        if (isChecked)
+            chainVm.CheckedGroups.Add(groupKey);
+        else
+            chainVm.CheckedGroups.Remove(groupKey);
+
+        // Sync Select All
+        chainVm.AllItemsChecked = chainVm.Items.Count > 0 && chainVm.Items.All(i => i.IsChecked);
+
+        if (_mergeMode)
+            UpdateMergeBar();
+        else
+        {
+            var actionBar = FindActionBar(expander);
+            if (actionBar != null)
+                UpdateActionBar(chainVm, actionBar);
+        }
+    }
+
+    private void SelectAllItems_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not CheckBox cb) return;
+        bool isChecked = cb.IsChecked == true;
+
+        var expander = FindVisualParent<Expander>(cb);
+        if (expander == null) return;
+        var border = FindVisualParent<Border>(expander);
+        var chainVm = border?.DataContext as ChainViewModel;
+        if (chainVm == null) return;
+
+        SetActiveCheckChain(chainVm);
+
+        foreach (var item in chainVm.Items)
+            item.IsChecked = isChecked;
+
+        // Update all group checkboxes too
+        if (isChecked)
+        {
+            foreach (var key in chainVm.Items.Select(i => chainVm.GroupAliases && chainVm.HasAliasItems
+                ? i.AliasGroupKey : i.SourceChainKey).Distinct())
+                chainVm.CheckedGroups.Add(key);
+        }
+        else
+        {
+            chainVm.CheckedGroups.Clear();
+        }
+
+        // Refresh group checkbox visuals
+        var itemsControl = FindVisualChild<ItemsControl>(expander);
+        if (itemsControl != null)
+        {
+            foreach (var groupCb in FindVisualChildren<CheckBox>(itemsControl)
+                .Where(c => c.Tag is string))
+                groupCb.IsChecked = isChecked;
+        }
+
+        if (_mergeMode)
+            UpdateMergeBar();
+        else
+        {
+            var actionBar = FindActionBar(expander);
+            if (actionBar != null)
+                UpdateActionBar(chainVm, actionBar);
+        }
+    }
+
+    /// <summary>
+    /// Syncs AllItemsChecked + CheckedGroups state based on actual item check states.
+    /// Also refreshes group checkbox visuals in the visual tree.
+    /// </summary>
+    private void SyncCheckState(ChainViewModel chainVm, Expander? expander)
+    {
+        // Sync AllItemsChecked
+        chainVm.AllItemsChecked = chainVm.Items.Count > 0 && chainVm.Items.All(i => i.IsChecked);
+
+        // Sync CheckedGroups based on whether all items in each group are checked
+        if (chainVm.HasGrouping)
+        {
+            bool aliasMode = chainVm.GroupAliases && chainVm.HasAliasItems;
+            var groups = chainVm.Items
+                .GroupBy(i => aliasMode ? i.AliasGroupKey : i.SourceChainKey)
+                .Where(g => g.Key.Length > 0);
+
+            foreach (var g in groups)
+            {
+                if (g.All(i => i.IsChecked))
+                    chainVm.CheckedGroups.Add(g.Key);
+                else
+                    chainVm.CheckedGroups.Remove(g.Key);
+            }
+
+            // Refresh group checkbox visuals
+            if (expander != null)
+            {
+                var itemsControl = FindVisualChild<ItemsControl>(expander);
+                if (itemsControl != null)
+                {
+                    foreach (var groupCb in FindVisualChildren<CheckBox>(itemsControl)
+                        .Where(c => c.Tag is string tag && tag.Length > 0))
+                        groupCb.IsChecked = chainVm.CheckedGroups.Contains((string)groupCb.Tag);
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Gets items matching a group key, handling "Aliases" as a special case.
+    /// </summary>
+    private static IEnumerable<ItemViewModel> GetGroupItems(ChainViewModel chainVm, string groupKey)
+    {
+        return groupKey == "Aliases"
+            ? chainVm.Items.Where(i => i.IsAlias)
+            : chainVm.Items.Where(i => i.SourceChainKey == groupKey);
     }
 
     private void ItemRow_Click(object sender, MouseButtonEventArgs e)
@@ -586,13 +872,17 @@ public partial class ChainBrowserPage : UserControl
         var chainVm = border?.DataContext as ChainViewModel;
         if (chainVm == null) return;
 
-        if (_activeCheckChain != null && _activeCheckChain != chainVm)
-            ClearChecks(_activeCheckChain);
-        _activeCheckChain = chainVm;
+        SetActiveCheckChain(chainVm);
+        SyncCheckState(chainVm, expander);
 
-        var actionBar = FindActionBar(expander);
-        if (actionBar != null)
-            UpdateActionBar(chainVm, actionBar);
+        if (_mergeMode)
+            UpdateMergeBar();
+        else
+        {
+            var actionBar = FindActionBar(expander);
+            if (actionBar != null)
+                UpdateActionBar(chainVm, actionBar);
+        }
     }
 
     private void ItemCheckBox_Click(object sender, RoutedEventArgs e)
@@ -608,18 +898,17 @@ public partial class ChainBrowserPage : UserControl
         var chainVm = border?.DataContext as ChainViewModel;
         if (chainVm == null) return;
 
-        // Per-chain scope: clear checks from other chains
-        if (_activeCheckChain != null && _activeCheckChain != chainVm)
-        {
-            ClearChecks(_activeCheckChain);
-            // Hide old action bar (if still visible in the UI)
-        }
-        _activeCheckChain = chainVm;
+        SetActiveCheckChain(chainVm);
+        SyncCheckState(chainVm, expander);
 
-        // Find action bar in this expander's content
-        var actionBar = FindActionBar(expander);
-        if (actionBar != null)
-            UpdateActionBar(chainVm, actionBar);
+        if (_mergeMode)
+            UpdateMergeBar();
+        else
+        {
+            var actionBar = FindActionBar(expander);
+            if (actionBar != null)
+                UpdateActionBar(chainVm, actionBar);
+        }
     }
 
     private void Expander_Collapsed(object sender, RoutedEventArgs e)
@@ -701,6 +990,269 @@ public partial class ChainBrowserPage : UserControl
         {
             _main.ShowStatus($"Failed to refresh: {ex.Message}", InfoBarSeverity.Error);
         }
+    }
+
+    // ── Merge mode ────────────────────────────────────────────────────
+
+    private void MergeMode_Click(object sender, RoutedEventArgs e)
+    {
+        _mergeMode = !_mergeMode;
+
+        // Toggle checkbox visibility on all chains
+        foreach (var vm in _allChains)
+        {
+            vm.ShowMergeCheckbox = _mergeMode;
+            if (!_mergeMode) vm.IsMergeChecked = false;
+        }
+
+        // Toggle button appearance
+        btnMergeMode.Appearance = _mergeMode
+            ? Wpf.Ui.Controls.ControlAppearance.Primary
+            : Wpf.Ui.Controls.ControlAppearance.Secondary;
+        btnMergeModeHelp.Appearance = _mergeMode
+            ? Wpf.Ui.Controls.ControlAppearance.Primary
+            : Wpf.Ui.Controls.ControlAppearance.Secondary;
+        txtMergeModeLabel.Text = _mergeMode ? "Exit Merge" : "Merge Mode";
+        _splitSepBrush.Color = _mergeMode ? GetSplitSeparatorColor() : GetInactiveSeparatorColor();
+
+        // Show/hide merge bar
+        if (_mergeMode)
+        {
+            mergeBar.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            mergeBar.Visibility = Visibility.Collapsed;
+            _mergeSelection.Clear();
+            // Clear item-level checks from all tracked chains
+            foreach (var c in _mergeCheckChains)
+                ClearChecks(c);
+            _mergeCheckChains.Clear();
+
+            // Reset group checkbox visuals in visible items
+            foreach (var groupCb in FindVisualChildren<CheckBox>(lvChains)
+                .Where(c => c.Tag is string tag && tag.Length > 0))
+                groupCb.IsChecked = false;
+        }
+
+        UpdateMergeBar();
+    }
+
+    private void MergeModeCancel_Click(object sender, RoutedEventArgs e)
+    {
+        if (_mergeMode) MergeMode_Click(sender, e);
+    }
+
+    private void MergeSelectAll_Click(object sender, RoutedEventArgs e)
+    {
+        // Get currently visible (filtered) chains
+        var visible = lvChains.ItemsSource as List<ChainViewModel>;
+        if (visible == null || visible.Count == 0) return;
+
+        // Toggle: if all visible are selected → deselect all, otherwise select all
+        bool allSelected = visible.All(c => c.IsMergeChecked);
+
+        foreach (var vm in visible)
+        {
+            vm.IsMergeChecked = !allSelected;
+            if (!allSelected)
+                _mergeSelection.Add(vm);
+            else
+                _mergeSelection.Remove(vm);
+        }
+
+        btnSelectAll.Content = allSelected ? "Select All" : "Deselect All";
+        UpdateMergeBar();
+    }
+
+    private void MergeCheckBox_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not CheckBox cb || cb.DataContext is not ChainViewModel vm) return;
+
+        if (vm.IsMergeChecked)
+            _mergeSelection.Add(vm);
+        else
+            _mergeSelection.Remove(vm);
+
+        UpdateMergeBar();
+    }
+
+    /// <summary>
+    /// Gets all chains with item-level checks (in merge mode: multiple chains, otherwise: just active).
+    /// </summary>
+    private IEnumerable<ChainViewModel> GetCheckedChains()
+    {
+        if (_mergeMode)
+            return _mergeCheckChains.Where(c => c.Items.Any(i => i.IsChecked));
+        if (_activeCheckChain != null)
+            return [_activeCheckChain];
+        return [];
+    }
+
+    /// <summary>
+    /// Counts item-level checked source chain groups across all checked chains.
+    /// </summary>
+    private int GetItemLevelMergeGroupCount()
+    {
+        return GetCheckedChains()
+            .SelectMany(c => c.Items)
+            .Where(i => i.IsChecked)
+            .Select(i => i.SourceChainKey)
+            .Where(k => k.Length > 0)
+            .Distinct()
+            .Count();
+    }
+
+    /// <summary>
+    /// Collects item-level merge selections as virtual ParsedChain objects grouped by SourceChainKey.
+    /// </summary>
+    private List<ChainViewModel> CollectItemLevelMergeChains()
+    {
+        var allChecked = GetCheckedChains()
+            .SelectMany(c => c.Items)
+            .Where(i => i.IsChecked)
+            .ToList();
+
+        if (allChecked.Count == 0) return new();
+
+        var groups = allChecked
+            .GroupBy(i => i.SourceChainKey)
+            .Where(g => g.Key.Length > 0)
+            .ToList();
+
+        var result = new List<ChainViewModel>();
+        foreach (var group in groups)
+        {
+            var virtualChain = new ParsedChain
+            {
+                ConfigKey = group.Key,
+                DisplayName = group.Key,
+                Items = group.Select(i => i.Source).ToList()
+            };
+            result.Add(new ChainViewModel(virtualChain, _main));
+        }
+        return result;
+    }
+
+    private void UpdateMergeBar()
+    {
+        int chainCount = _mergeSelection.Count;
+        int itemGroupCount = GetItemLevelMergeGroupCount();
+        int totalCount = chainCount + itemGroupCount;
+
+        if (itemGroupCount > 0 && chainCount == 0)
+            txtMergeCount.Text = $"{itemGroupCount} source chain{(itemGroupCount != 1 ? "s" : "")} selected (item-level)";
+        else if (itemGroupCount > 0)
+            txtMergeCount.Text = $"{chainCount} chain{(chainCount != 1 ? "s" : "")} + {itemGroupCount} source chain{(itemGroupCount != 1 ? "s" : "")} selected";
+        else
+            txtMergeCount.Text = $"{chainCount} chain{(chainCount != 1 ? "s" : "")} selected";
+
+        btnMergeChains.IsEnabled = totalCount >= 2;
+
+        // Update Select All label
+        var visible = lvChains.ItemsSource as List<ChainViewModel>;
+        if (visible != null && visible.Count > 0 && visible.All(c => c.IsMergeChecked))
+            btnSelectAll.Content = "Deselect All";
+        else
+            btnSelectAll.Content = "Select All";
+    }
+
+    private async void BtnMergeChains_Click(object sender, RoutedEventArgs e)
+    {
+        // Collect chain-level selections
+        var selected = _mergeSelection.OrderBy(c => c.DisplayName).ToList();
+
+        // Collect item-level selections (source chain groups from expanded chain)
+        var itemLevelChains = CollectItemLevelMergeChains();
+
+        // Combine, avoiding duplicates by ConfigKey
+        var existingKeys = new HashSet<string>(selected.Select(c => c.Source.ConfigKey));
+        foreach (var ilc in itemLevelChains)
+        {
+            if (!existingKeys.Contains(ilc.Source.ConfigKey))
+            {
+                selected.Add(ilc);
+                existingKeys.Add(ilc.Source.ConfigKey);
+            }
+        }
+
+        int totalCount = selected.Count;
+        if (totalCount < 2) return;
+
+        // Pass parent chain name if item-level selections came from chains
+        var checkedChains = GetCheckedChains().ToList();
+        string? parentChainName = checkedChains.Count == 1 && itemLevelChains.Count > 0
+            ? checkedChains[0].DisplayName
+            : null;
+
+        var dialog = new MergeChainsDialog(_main, selected, parentChainName);
+        dialog.Owner = Window.GetWindow(this);
+
+        if (dialog.ShowDialog() == true)
+        {
+            // Exit merge mode and refresh
+            if (_mergeMode) MergeMode_Click(sender, e);
+            await RefreshAfterWikiChange();
+        }
+    }
+
+    // ── Split button styling ────────────────────────────────────────
+
+    /// <summary>
+    /// Derives a separator color from the accent button color (slightly darker).
+    /// </summary>
+    private Color GetSplitSeparatorColor()
+    {
+        try
+        {
+            if (FindResource("AccentFillColorDefaultBrush") is SolidColorBrush accent)
+            {
+                var c = accent.Color;
+                return Color.FromRgb(
+                    (byte)Math.Max(0, c.R - 35),
+                    (byte)Math.Max(0, c.G - 35),
+                    (byte)Math.Max(0, c.B - 35));
+            }
+        }
+        catch { }
+        return Color.FromArgb(0x30, 0, 0, 0);
+    }
+
+    private static Color GetInactiveSeparatorColor() => Color.FromArgb(0x40, 0x80, 0x80, 0x80);
+
+    private SolidColorBrush GetSplitSeparatorBrush() => new(GetInactiveSeparatorColor());
+
+    private void RefreshSplitSeparatorColor() =>
+        _splitSepBrush.Color = _mergeMode ? GetSplitSeparatorColor() : GetInactiveSeparatorColor();
+
+    /// <summary>
+    /// Makes two adjacent buttons look like a single merged split button:
+    /// left button gets rounded-left corners, right button gets rounded-right.
+    /// </summary>
+    private static void ApplySplitButtonStyle(Wpf.Ui.Controls.Button leftBtn, Wpf.Ui.Controls.Button rightBtn)
+    {
+        leftBtn.Margin = new Thickness(0);
+        rightBtn.Margin = new Thickness(0);
+
+        leftBtn.Loaded += (_, _) => SetInternalCornerRadius(leftBtn, new CornerRadius(4, 0, 0, 4));
+        rightBtn.Loaded += (_, _) => SetInternalCornerRadius(rightBtn, new CornerRadius(0, 4, 4, 0));
+    }
+
+    /// <summary>
+    /// Finds the Border element inside a WPF UI Button's visual tree and sets its CornerRadius.
+    /// </summary>
+    private static void SetInternalCornerRadius(Control control, CornerRadius radius)
+    {
+        var border = FindVisualChild<Border>(control);
+        if (border != null)
+            border.CornerRadius = radius;
+    }
+
+    private void MergeModeHelp_Click(object sender, RoutedEventArgs e)
+    {
+        var dialog = new MergeModeHelpDialog();
+        dialog.Owner = Window.GetWindow(this);
+        dialog.ShowDialog();
     }
 
     private void GenerateTable_Click(object sender, RoutedEventArgs e)

@@ -370,88 +370,97 @@ namespace GameLogic.Config
         {
             // CUSTOM: Re-implement by using reflection, instead of source generating from GameConfigEntryAttribute
             var properties = GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            int imported = 0, skipped = 0, failed = 0;
 
             // Count entries with GameConfigEntry attribute for progress
             var entryProperties = properties
                 .Where(p => p.GetCustomAttribute<GameConfigEntryAttribute>() != null)
                 .ToArray();
             int total = entryProperties.Length;
-            int current = 0;
+
+            // Pre-resolve import methods and filter existing entries
+            var importWork = new System.Collections.Concurrent.ConcurrentBag<(PropertyInfo Property, string EntryName, GameConfigEntryAttribute Attr)>();
+            int skipped = 0;
 
             foreach (var property in entryProperties)
             {
-                var gameConfigAttribute = property.GetCustomAttribute<GameConfigEntryAttribute>();
-                current++;
-                // Create entry name
-                var entryName = gameConfigAttribute.EntryName;
-                if (gameConfigAttribute.MpcFormat)
+                var attr = property.GetCustomAttribute<GameConfigEntryAttribute>();
+                var entryName = attr.EntryName;
+                if (attr.MpcFormat)
                     entryName += ".mpc";
 
-                Console.WriteLine($"[PROGRESS] ({current}/{total}) {entryName}");
-
-                // Check if entry exists
                 if (!importer.Contains(entryName))
                 {
-                    if (gameConfigAttribute.RequireArchiveEntry)
+                    if (attr.RequireArchiveEntry)
                         Console.WriteLine($"[WARN] {entryName} not in archive, skipping.");
                     skipped++;
                     continue;
                 }
 
+                importWork.Add((property, entryName, attr));
+            }
+
+            Console.WriteLine($"[PROGRESS] Importing {importWork.Count}/{total} entries in parallel...");
+
+            // Phase 1: Deserialize all entries in parallel
+            int imported = 0, failed = 0;
+            var results = new System.Collections.Concurrent.ConcurrentDictionary<PropertyInfo, object>();
+
+            System.Threading.Tasks.Parallel.ForEach(importWork, item =>
+            {
                 try
                 {
-                    // Invoke ImportBinaryLibrary or ImportBinaryKeyValueStructure method
-                    if (property.PropertyType.GenericTypeArguments.Length == 2)
+                    object value;
+                    if (item.Property.PropertyType.GenericTypeArguments.Length == 2)
                     {
-                        var importMethod = typeof(GameConfigImporter).GetMethod(nameof(GameConfigImporter.ImportBinaryLibrary))?.MakeGenericMethod(property.PropertyType.GenericTypeArguments);
-                        property.SetValue(this, importMethod?.Invoke(importer, new object[] { entryName }));
+                        var importMethod = typeof(GameConfigImporter).GetMethod(nameof(GameConfigImporter.ImportBinaryLibrary))?.MakeGenericMethod(item.Property.PropertyType.GenericTypeArguments);
+                        value = importMethod?.Invoke(importer, new object[] { item.EntryName });
                     }
                     else
                     {
-                        var importMethod = typeof(GameConfigImporter).GetMethod(nameof(GameConfigImporter.ImportBinaryKeyValueStructure))?.MakeGenericMethod(property.PropertyType);
-                        property.SetValue(this, importMethod?.Invoke(importer, new object[] { entryName, false }));
+                        var importMethod = typeof(GameConfigImporter).GetMethod(nameof(GameConfigImporter.ImportBinaryKeyValueStructure))?.MakeGenericMethod(item.Property.PropertyType);
+                        value = importMethod?.Invoke(importer, new object[] { item.EntryName, false });
                     }
-                    imported++;
+
+                    results[item.Property] = value;
+                    System.Threading.Interlocked.Increment(ref imported);
                 }
                 catch (Exception ex)
                 {
                     var innerMsg = ex.InnerException?.Message ?? ex.Message;
-                    Console.WriteLine($"[ERROR] Failed to import {entryName}: {innerMsg}");
-                    failed++;
+                    Console.WriteLine($"[ERROR] Failed to import {item.EntryName}: {innerMsg}");
+                    System.Threading.Interlocked.Increment(ref failed);
                 }
-            }
+            });
+
+            // Phase 2: Assign results to properties (sequential — fast)
+            foreach (var (property, value) in results)
+                property.SetValue(this, value);
 
             Console.WriteLine($"[INFO] Import summary: {imported} imported, {skipped} skipped, {failed} failed");
 
-            // CUSTOM: Resolve MetaRef's, if toggled on
+            // Phase 3: Resolve MetaRef's in parallel
             Console.WriteLine("[PROGRESS] Resolving MetaRefs...");
-            int resolveCount = 0;
-            foreach (var property in entryProperties)
+            var resolveWork = entryProperties
+                .Select(p => (Property: p, Attr: p.GetCustomAttribute<GameConfigEntryAttribute>()))
+                .Where(x => x.Attr.ResolveContainedMetaRefs)
+                .Select(x => (x.Property, x.Attr, Value: x.Property.GetValue(this)))
+                .Where(x => x.Value != null)
+                .ToArray();
+
+            System.Threading.Tasks.Parallel.ForEach(resolveWork, item =>
             {
-                var gameConfigAttribute = property.GetCustomAttribute<GameConfigEntryAttribute>();
-                if (!gameConfigAttribute.ResolveContainedMetaRefs)
-                    continue;
-
-                var method = property.PropertyType.GetMethod("ResolveMetaRefs");
-                var propertyValue = property.GetValue(this);
-                if (propertyValue == null)
-                    continue;
-
-                resolveCount++;
-                Console.WriteLine($"[PROGRESS] ResolveMetaRefs: {gameConfigAttribute.EntryName}");
-
+                var method = item.Property.PropertyType.GetMethod("ResolveMetaRefs");
                 try
                 {
-                    method?.Invoke(propertyValue, new object[] { this });
+                    method?.Invoke(item.Value, new object[] { this });
                 }
                 catch (Exception ex)
                 {
                     var innerMsg = ex.InnerException?.Message ?? ex.Message;
-                    Console.WriteLine($"[WARN] ResolveMetaRefs failed for {gameConfigAttribute.EntryName}: {innerMsg}");
+                    Console.WriteLine($"[WARN] ResolveMetaRefs failed for {item.Attr.EntryName}: {innerMsg}");
                 }
-            }
-            Console.WriteLine($"[INFO] MetaRefs resolved for {resolveCount} entries");
+            });
+            Console.WriteLine($"[INFO] MetaRefs resolved for {resolveWork.Length} entries");
         }
 
         public IReadOnlyDictionary<OfferPlacementId, List<OfferPlacementId>> OfferPlacementIds { get; set; }
@@ -466,6 +475,96 @@ namespace GameLogic.Config
 
         public SharedGameConfig()
         {
+        }
+
+        /// <summary>
+        /// Creates a patched config by copying all properties from master and reimporting only the entries
+        /// affected by the patch. Much faster than full import for patches that modify few entries.
+        /// </summary>
+        public static SharedGameConfig ImportPatchedFrom(SharedGameConfig master, PatchedConfigArchive patchedArchive, IEnumerable<string> patchedEntryNames)
+        {
+            var patched = new SharedGameConfig();
+            var patchedSet = new HashSet<string>(patchedEntryNames);
+
+            var properties = typeof(SharedGameConfig).GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            var entryProperties = properties
+                .Where(p => p.GetCustomAttribute<GameConfigEntryAttribute>() != null)
+                .ToArray();
+
+            // Copy all properties from master
+            foreach (var property in entryProperties)
+            {
+                if (property.CanWrite)
+                    property.SetValue(patched, property.GetValue(master));
+            }
+
+            // Also copy non-entry properties (MaxPlayerLevel, etc.)
+            foreach (var property in properties)
+            {
+                if (property.GetCustomAttribute<GameConfigEntryAttribute>() != null)
+                    continue;
+                if (!property.CanRead || !property.CanWrite)
+                    continue;
+                try { property.SetValue(patched, property.GetValue(master)); }
+                catch { /* skip indexers, etc. */ }
+            }
+
+            // Copy base class fields
+            patched.ArchiveVersion = master.ArchiveVersion;
+            patched.ArchiveCreatedAt = master.ArchiveCreatedAt;
+
+            // Reimport only patched entries
+            var importer = new GameConfigImporter(patchedArchive, patched);
+            int reimported = 0;
+
+            foreach (var property in entryProperties)
+            {
+                var attr = property.GetCustomAttribute<GameConfigEntryAttribute>();
+                if (!patchedSet.Contains(attr.EntryName))
+                    continue;
+
+                var entryName = attr.EntryName;
+                if (attr.MpcFormat)
+                    entryName += ".mpc";
+
+                if (!importer.Contains(entryName))
+                    continue;
+
+                try
+                {
+                    if (property.PropertyType.GenericTypeArguments.Length == 2)
+                    {
+                        var importMethod = typeof(GameConfigImporter).GetMethod(nameof(GameConfigImporter.ImportBinaryLibrary))?.MakeGenericMethod(property.PropertyType.GenericTypeArguments);
+                        property.SetValue(patched, importMethod?.Invoke(importer, new object[] { entryName }));
+                    }
+                    else
+                    {
+                        var importMethod = typeof(GameConfigImporter).GetMethod(nameof(GameConfigImporter.ImportBinaryKeyValueStructure))?.MakeGenericMethod(property.PropertyType);
+                        property.SetValue(patched, importMethod?.Invoke(importer, new object[] { entryName, false }));
+                    }
+                    reimported++;
+                }
+                catch { /* skip on error */ }
+            }
+
+            // Resolve MetaRefs for reimported entries
+            foreach (var property in entryProperties)
+            {
+                var attr = property.GetCustomAttribute<GameConfigEntryAttribute>();
+                if (!patchedSet.Contains(attr.EntryName))
+                    continue;
+                if (!attr.ResolveContainedMetaRefs)
+                    continue;
+
+                var method = property.PropertyType.GetMethod("ResolveMetaRefs");
+                var value = property.GetValue(patched);
+                if (value == null) continue;
+
+                try { method?.Invoke(value, new object[] { patched }); }
+                catch { /* skip */ }
+            }
+
+            return patched;
         }
 
         public IImmutableSet<int> SecondaryEnergyMergeBoardPortalItems { get; set; }

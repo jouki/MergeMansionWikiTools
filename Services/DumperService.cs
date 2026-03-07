@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using GameLogic.Config;
@@ -134,12 +135,16 @@ internal static class DumperService
 
             try
             {
+                var sw = Stopwatch.StartNew();
+                string T() => $"[{sw.ElapsedMilliseconds}ms]";
+
                 AppLogger.Info($"=== Dump started: mode={mode}, config={configPath} ===");
 
                 // 1. Initialize MetaplayCore (once)
                 progress?.Report("Initializing MetaplayCore...");
                 EnsureInitialized();
-                AppLogger.Info("MetaplayCore initialized");
+                progress?.Report($"{T()} MetaplayCore initialized");
+                AppLogger.Info($"{T()} MetaplayCore initialized");
 
                 // 2. Load language file (optional)
                 if (!string.IsNullOrEmpty(languagePath) && File.Exists(languagePath))
@@ -150,8 +155,8 @@ internal static class DumperService
                         var langFileName = Path.GetFileName(languagePath);
                         var langHash = ContentHash.ParseString(langFileName);
                         MetaplaySDK.ActiveLanguage = LocalizationLanguage.ImportBinary(langHash, File.ReadAllBytes(languagePath));
-                        progress?.Report($"Language loaded: {langFileName}");
-                        AppLogger.Info($"Language loaded: {langFileName}");
+                        progress?.Report($"{T()} Language loaded: {langFileName}");
+                        AppLogger.Info($"{T()} Language loaded: {langFileName}");
                     }
                     catch (Exception ex)
                     {
@@ -163,15 +168,15 @@ internal static class DumperService
                 progress?.Report("Loading config archive...");
                 var archiveBytes = File.ReadAllBytes(configPath);
                 var archive = ConfigArchive.FromBytes(archiveBytes);
-                progress?.Report($"Config archive loaded ({archive.Entries.Count} entries)");
-                AppLogger.Info($"Config archive: {archive.Entries.Count} entries");
+                progress?.Report($"{T()} Config archive loaded ({archive.Entries.Count} entries)");
+                AppLogger.Info($"{T()} Config archive: {archive.Entries.Count} entries");
 
                 // Log all archive entry names for diagnostics
                 AppLogger.Info("Archive entries: " + string.Join(", ", archive.Entries.Select(e => e.Name)));
 
                 // 4. Load patches (optional)
                 PatchedConfigArchive patchedArchive;
-                var patchedArchives = new List<(PlayerExperimentId, ExperimentVariantId, PatchedConfigArchive)>();
+                var patchedArchives = new List<(PlayerExperimentId, ExperimentVariantId, PatchedConfigArchive, string[])>();
 
                 if (!string.IsNullOrEmpty(patchPath) && File.Exists(patchPath))
                 {
@@ -186,11 +191,16 @@ internal static class DumperService
                         foreach (var configPatch in configPatches)
                         {
                             var pa = new PatchedConfigArchive(archive, new[] { configPatch.Item3 });
-                            patchedArchives.Add((configPatch.Item1, configPatch.Item2, pa));
+                            var patchEntryNames = configPatch.Item3.EntryNames.ToArray();
+                            patchedArchives.Add((configPatch.Item1, configPatch.Item2, pa, patchEntryNames));
+
+                            // Diagnostics: log all entry names in each patch envelope
+                            var label = $"{configPatch.Item1}_{configPatch.Item2}";
+                            AppLogger.Info($"Patch {label} entries: [{string.Join(", ", patchEntryNames)}]");
                         }
 
-                        progress?.Report($"Loaded {configPatches.Length} patch(es)");
-                        AppLogger.Info($"Patches loaded: {configPatches.Length}");
+                        progress?.Report($"{T()} Loaded {configPatches.Length} patch(es)");
+                        AppLogger.Info($"{T()} Patches loaded: {configPatches.Length}");
                     }
                     catch (Exception ex)
                     {
@@ -201,8 +211,8 @@ internal static class DumperService
                 patchedArchive = PatchedConfigArchive.WithNoPatches(archive);
 
                 // 5. Import SharedGameConfig (master)
-                progress?.Report("Importing SharedGameConfig...");
-                AppLogger.Info("Starting SharedGameConfig import...");
+                progress?.Report($"{T()} Importing SharedGameConfig...");
+                AppLogger.Info($"{T()} Starting SharedGameConfig import...");
 
                 // Capture console output with real-time forwarding to UI
                 var consoleWriter = new ProgressTextWriter(progress);
@@ -241,207 +251,196 @@ internal static class DumperService
                     $"HotspotDefinitions={config.HotspotDefinitions != null}",
                 };
                 var diagMsg = $"Config state: {string.Join(", ", diag)}";
-                progress?.Report(diagMsg);
-                AppLogger.Info(diagMsg);
+                progress?.Report($"{T()} {diagMsg}");
+                AppLogger.Info($"{T()} {diagMsg}");
 
-                progress?.Report("SharedGameConfig imported");
+                progress?.Report($"{T()} SharedGameConfig imported");
 
                 // 6. Create output directory
                 Directory.CreateDirectory(outputDir);
 
-                // 7. Run dumpers
-                if (mode.HasFlag(DumpMode.Chains))
-                {
-                    chainPath = Path.Combine(outputDir, "chain_item_odds.json");
-                    progress?.Report("Dumping merge chains...");
-                    try
-                    {
-                        new MergeChainDumper(true).WriteJson(chainPath, ClientGlobal.SharedGameConfig);
-                        var size = new FileInfo(chainPath).Length / 1024;
-                        progress?.Report($"chain_item_odds.json written ({size} KB)");
-                        AppLogger.Info($"chain_item_odds.json: {size} KB");
-                    }
-                    catch (Exception ex)
-                    {
-                        Log("ERROR", $"Merge chains dump failed: {ex.Message}", ex);
-                        chainPath = null;
-                    }
-                }
-
-                if (mode.HasFlag(DumpMode.Areas))
-                {
-                    areasPath = Path.Combine(outputDir, "areas.json");
-                    progress?.Report("Dumping areas...");
-                    try
-                    {
-                        new AreaDumper().WriteJson(areasPath, ClientGlobal.SharedGameConfig);
-                        var size = new FileInfo(areasPath).Length / 1024;
-                        progress?.Report($"areas.json written ({size} KB)");
-                        AppLogger.Info($"areas.json: {size} KB");
-                    }
-                    catch (Exception ex)
-                    {
-                        Log("ERROR", $"Areas dump failed: {ex.Message}", ex);
-                        areasPath = null;
-                    }
-                }
-
-                if (mode.HasFlag(DumpMode.Events))
-                {
-                    eventsPath = Path.Combine(outputDir, "events.json");
-                    progress?.Report("Dumping events...");
-                    try
-                    {
-                        new EventDumper(eventFilters).WriteJson(eventsPath, ClientGlobal.SharedGameConfig);
-                        var size = new FileInfo(eventsPath).Length / 1024;
-                        progress?.Report($"events.json written ({size} KB)");
-                        AppLogger.Info($"events.json: {size} KB");
-                    }
-                    catch (Exception ex)
-                    {
-                        Log("ERROR", $"Events dump failed: {ex.Message}", ex);
-                        eventsPath = null;
-                    }
-                }
-
-                if (mode.HasFlag(DumpMode.CardCollection))
-                {
-                    cardCollectionPath = Path.Combine(outputDir, "card_collection.json");
-                    progress?.Report("Dumping card collection...");
-                    try
-                    {
-                        new CardCollectionDumper().WriteJson(cardCollectionPath, ClientGlobal.SharedGameConfig);
-                        var size = new FileInfo(cardCollectionPath).Length / 1024;
-                        progress?.Report($"card_collection.json written ({size} KB)");
-                        AppLogger.Info($"card_collection.json: {size} KB");
-                    }
-                    catch (Exception ex)
-                    {
-                        Log("ERROR", $"Card collection dump failed: {ex.Message}", ex);
-                        cardCollectionPath = null;
-                    }
-                }
-
-                if (mode.HasFlag(DumpMode.Dialogues))
-                {
-                    dialoguesPath = Path.Combine(outputDir, "dialogues.json");
-                    progress?.Report("Dumping dialogues...");
-                    try
-                    {
-                        new DialogueDumper().WriteJson(dialoguesPath, ClientGlobal.SharedGameConfig);
-                        var size = new FileInfo(dialoguesPath).Length / 1024;
-                        progress?.Report($"dialogues.json written ({size} KB)");
-                        AppLogger.Info($"dialogues.json: {size} KB");
-                    }
-                    catch (Exception ex)
-                    {
-                        Log("ERROR", $"Dialogues dump failed: {ex.Message}", ex);
-                        dialoguesPath = null;
-                    }
-                }
-
-                if (mode.HasFlag(DumpMode.Experimental))
-                {
-                    var expDir = Path.Combine(outputDir, "Experimental");
-                    experimentalPath = expDir;
-                    progress?.Report("Dumping experimental data...");
-                    try
-                    {
-                        var written = new ExperimentalDumper().WriteIndividualFiles(expDir, ClientGlobal.SharedGameConfig);
-                        foreach (var (section, filePath) in written)
-                        {
-                            var size = new FileInfo(filePath).Length / 1024;
-                            progress?.Report($"  {section}.json ({size} KB)");
-                        }
-                        progress?.Report($"Experimental: {written.Count} files written");
-                        AppLogger.Info($"Experimental: {written.Count} files into {expDir}");
-                    }
-                    catch (Exception ex)
-                    {
-                        Log("ERROR", $"Experimental dump failed: {ex.Message}", ex);
-                        experimentalPath = null;
-                    }
-                }
-
-                // 8. Dump patched variants
+                // 7. Filter relevant patches early (before parallel section)
                 var relevantPatchedArchives = patchedArchives.Where(x =>
                     x.Item3.ContainsPatch("Areas")
                     || x.Item3.ContainsPatch("HotspotDefinitions")
-                    || x.Item3.ContainsPatch("Items")).ToArray();
+                    || x.Item3.ContainsPatch("Items")
+                    || x.Item3.ContainsPatch("MergeChains"))
+                    .Select(x => (x.Item1, x.Item2, x.Item3, x.Item4))
+                    .ToArray();
 
-                if (relevantPatchedArchives.Length > 0)
+                if (relevantPatchedArchives.Length < patchedArchives.Count)
                 {
-                    progress?.Report($"Processing {relevantPatchedArchives.Length} experiment patch(es)...");
-                    AppLogger.Info($"Processing {relevantPatchedArchives.Length} experiment patches");
+                    var skipped = patchedArchives.Count - relevantPatchedArchives.Length;
+                    AppLogger.Info($"Patch filter: {relevantPatchedArchives.Length} relevant, {skipped} skipped (total {patchedArchives.Count})");
+                    progress?.Report($"Skipped {skipped} irrelevant patch(es)");
+                }
 
-                    foreach (var (experimentId, variantId, pa) in relevantPatchedArchives)
+                // 8. Run master dumps + patch import/dumps all in parallel
+                progress?.Report($"{T()} Dumping game data ({relevantPatchedArchives.Length} patches)...");
+                var masterConfig = ClientGlobal.SharedGameConfig;
+                var allTasks = new List<Action>();
+
+                // Master dumpers
+                if (mode.HasFlag(DumpMode.Chains))
+                    allTasks.Add(() =>
                     {
-                        var patchLabel = $"{experimentId}_{variantId}";
+                        var p = Path.Combine(outputDir, "chain_item_odds.json");
                         try
                         {
-                            ClientGlobal.SharedGameConfig = null;
+                            new MergeChainDumper(true).WriteJson(p, masterConfig);
+                            var size = new FileInfo(p).Length / 1024;
+                            progress?.Report($"{T()} chain_item_odds.json written ({size} KB)");
+                            AppLogger.Info($"{T()} chain_item_odds.json: {size} KB");
+                            chainPath = p;
+                        }
+                        catch (Exception ex) { Log("ERROR", $"Merge chains dump failed: {ex.Message}", ex); }
+                    });
 
-                            var patchWriter = new ProgressTextWriter(null); // silent — no UI spam
-                            Console.SetOut(patchWriter);
-                            try
+                if (mode.HasFlag(DumpMode.Areas))
+                    allTasks.Add(() =>
+                    {
+                        var p = Path.Combine(outputDir, "areas.json");
+                        try
+                        {
+                            new AreaDumper().WriteJson(p, masterConfig);
+                            var size = new FileInfo(p).Length / 1024;
+                            progress?.Report($"{T()} areas.json written ({size} KB)");
+                            AppLogger.Info($"{T()} areas.json: {size} KB");
+                            areasPath = p;
+                        }
+                        catch (Exception ex) { Log("ERROR", $"Areas dump failed: {ex.Message}", ex); }
+                    });
+
+                if (mode.HasFlag(DumpMode.Events))
+                    allTasks.Add(() =>
+                    {
+                        var p = Path.Combine(outputDir, "events.json");
+                        try
+                        {
+                            new EventDumper(eventFilters).WriteJson(p, masterConfig);
+                            var size = new FileInfo(p).Length / 1024;
+                            progress?.Report($"{T()} events.json written ({size} KB)");
+                            AppLogger.Info($"{T()} events.json: {size} KB");
+                            eventsPath = p;
+                        }
+                        catch (Exception ex) { Log("ERROR", $"Events dump failed: {ex.Message}", ex); }
+                    });
+
+                if (mode.HasFlag(DumpMode.CardCollection))
+                    allTasks.Add(() =>
+                    {
+                        var p = Path.Combine(outputDir, "card_collection.json");
+                        try
+                        {
+                            new CardCollectionDumper().WriteJson(p, masterConfig);
+                            var size = new FileInfo(p).Length / 1024;
+                            progress?.Report($"{T()} card_collection.json written ({size} KB)");
+                            AppLogger.Info($"{T()} card_collection.json: {size} KB");
+                            cardCollectionPath = p;
+                        }
+                        catch (Exception ex) { Log("ERROR", $"Card collection dump failed: {ex.Message}", ex); }
+                    });
+
+                if (mode.HasFlag(DumpMode.Dialogues))
+                    allTasks.Add(() =>
+                    {
+                        var p = Path.Combine(outputDir, "dialogues.json");
+                        try
+                        {
+                            new DialogueDumper().WriteJson(p, masterConfig);
+                            var size = new FileInfo(p).Length / 1024;
+                            progress?.Report($"{T()} dialogues.json written ({size} KB)");
+                            AppLogger.Info($"{T()} dialogues.json: {size} KB");
+                            dialoguesPath = p;
+                        }
+                        catch (Exception ex) { Log("ERROR", $"Dialogues dump failed: {ex.Message}", ex); }
+                    });
+
+                if (mode.HasFlag(DumpMode.Experimental))
+                    allTasks.Add(() =>
+                    {
+                        var expDir = Path.Combine(outputDir, "Experimental");
+                        try
+                        {
+                            var written = new ExperimentalDumper().WriteIndividualFiles(expDir, masterConfig);
+                            foreach (var (section, filePath) in written)
                             {
-                                ClientGlobal.SharedGameConfig = (SharedGameConfig)GameConfigFactory.Instance.ImportSharedGameConfig(pa);
+                                var size = new FileInfo(filePath).Length / 1024;
+                                progress?.Report($"  {section}.json ({size} KB)");
                             }
-                            finally
-                            {
-                                Console.SetOut(originalOut);
-                            }
+                            progress?.Report($"{T()} Experimental: {written.Count} files written");
+                            AppLogger.Info($"{T()} Experimental: {written.Count} files into {expDir}");
+                            experimentalPath = expDir;
+                        }
+                        catch (Exception ex)
+                        {
+                            Log("ERROR", $"Experimental dump failed: {ex.Message}", ex);
+                        }
+                    });
+
+                // Patch import+dump tasks (each patch imports & dumps independently)
+                foreach (var (experimentId, variantId, pa, patchEntryNames) in relevantPatchedArchives)
+                {
+                    var patchLabel = $"{experimentId}_{variantId}";
+                    var capturedPa = pa;
+                    var capturedEntryNames = patchEntryNames;
+
+                    allTasks.Add(() =>
+                    {
+                        try
+                        {
+                            var patchConfig = SharedGameConfig.ImportPatchedFrom(masterConfig, capturedPa, capturedEntryNames);
+                            progress?.Report($"{T()} Patch {patchLabel} imported ({capturedEntryNames.Length} entries)");
+                            AppLogger.Info($"{T()} Patch {patchLabel} imported");
 
                             var patchDir = Path.Combine(outputDir, patchLabel);
                             Directory.CreateDirectory(patchDir);
 
-                            if (mode.HasFlag(DumpMode.Chains))
+                            var needsChains = capturedPa.ContainsPatch("Items") || capturedPa.ContainsPatch("MergeChains");
+                            var needsAreas = capturedPa.ContainsPatch("Areas") || capturedPa.ContainsPatch("HotspotDefinitions");
+
+                            if (mode.HasFlag(DumpMode.Chains) && needsChains)
                             {
-                                try { new MergeChainDumper(true).WriteJson(Path.Combine(patchDir, "chain_item_odds.json"), ClientGlobal.SharedGameConfig); }
+                                try { new MergeChainDumper(true).WriteJson(Path.Combine(patchDir, "chain_item_odds.json"), patchConfig); }
                                 catch (Exception ex) { Log("WARN", $"Patch {patchLabel} chains: {ex.Message}", ex); }
                             }
-                            if (mode.HasFlag(DumpMode.Areas))
+                            if (mode.HasFlag(DumpMode.Areas) && needsAreas)
                             {
-                                try { new AreaDumper().WriteJson(Path.Combine(patchDir, "areas.json"), ClientGlobal.SharedGameConfig); }
+                                try { new AreaDumper().WriteJson(Path.Combine(patchDir, "areas.json"), patchConfig); }
                                 catch (Exception ex) { Log("WARN", $"Patch {patchLabel} areas: {ex.Message}", ex); }
                             }
-                            if (mode.HasFlag(DumpMode.Events))
+                            if (mode.HasFlag(DumpMode.Events) && needsAreas)
                             {
-                                try { new EventDumper(eventFilters).WriteJson(Path.Combine(patchDir, "events.json"), ClientGlobal.SharedGameConfig); }
+                                try { new EventDumper(eventFilters).WriteJson(Path.Combine(patchDir, "events.json"), patchConfig); }
                                 catch (Exception ex) { Log("WARN", $"Patch {patchLabel} events: {ex.Message}", ex); }
                             }
 
-                            progress?.Report($"Patch {patchLabel} dumped");
-                            AppLogger.Info($"Patch {patchLabel} dumped");
+                            progress?.Report($"{T()} Patch {patchLabel} dumped");
+                            AppLogger.Info($"{T()} Patch {patchLabel} dumped");
                         }
                         catch (Exception ex)
                         {
                             Log("WARN", $"Patch {patchLabel} failed: {ex.Message}", ex);
                         }
-                    }
-
-                    // Restore master config
-                    try
-                    {
-                        var restoreWriter = new ProgressTextWriter(null);
-                        Console.SetOut(restoreWriter);
-                        try
-                        {
-                            ClientGlobal.SharedGameConfig = (SharedGameConfig)GameConfigFactory.Instance.ImportSharedGameConfig(patchedArchive);
-                        }
-                        finally
-                        {
-                            Console.SetOut(originalOut);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Log("WARN", $"Restoring master config failed: {ex.Message}", ex);
-                    }
+                    });
                 }
 
-                progress?.Report("Done.");
-                AppLogger.Info("=== Dump completed ===");
+                // Suppress console output from parallel imports
+                var patchWriter = new ProgressTextWriter(null);
+                Console.SetOut(patchWriter);
+
+                try
+                {
+                    if (allTasks.Count > 0)
+                        Parallel.Invoke(allTasks.ToArray());
+                }
+                finally
+                {
+                    Console.SetOut(originalOut);
+                }
+
+                progress?.Report($"{T()} Done. Total: {sw.ElapsedMilliseconds}ms");
+                AppLogger.Info($"=== Dump completed in {sw.ElapsedMilliseconds}ms ===");
             }
             catch (Exception ex)
             {

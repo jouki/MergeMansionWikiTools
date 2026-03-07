@@ -28,19 +28,14 @@ namespace Metaplay.Core.Config
             return new ConfigArchiveEntry(name, hash, CompressionAlgorithm.None, bytes);
         }
 
+        private volatile byte[] _uncompressedCache;
+
         public byte[] Uncompress()
         {
-            switch (Compression)
-            {
-                case CompressionAlgorithm.None:
-                    return RawBytes;
+            if (Compression == CompressionAlgorithm.None)
+                return RawBytes;
 
-                case CompressionAlgorithm.Deflate:
-                    return CompressUtil.DeflateDecompress(RawBytes);
-
-                default:
-                    throw new InvalidOperationException("unsupported compression mode");
-            }
+            return _uncompressedCache ??= CompressUtil.DeflateDecompress(RawBytes);
         }
 
         public override int GetHashCode()

@@ -11,6 +11,9 @@ namespace Metaplay.Core.Config
 
         public bool IsEmpty => !_serializedEntryPatches.Any();
 
+        // CUSTOM: Expose entry names for diagnostics
+        public IEnumerable<string> EntryNames => _serializedEntryPatches.Keys;
+
         internal GameConfigPatchEnvelope(Dictionary<string, byte[]> serializedEntryPatches)
         {
             _serializedEntryPatches = serializedEntryPatches;

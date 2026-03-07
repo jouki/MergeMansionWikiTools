@@ -202,6 +202,17 @@ public partial class ImageOptimiserPage : UserControl
             _clusters.Add(cluster);
         }
 
+        // Auto-chain: if 3+ new images were added, offer to link them via InfoBar
+        if (paths.Length >= 3)
+        {
+            var newClusters = _clusters
+                .Where(c => c.Images.Count == 1 && paths.Contains(c.Images[0].FilePath, StringComparer.OrdinalIgnoreCase))
+                .ToList();
+
+            if (newClusters.Count >= 3)
+                ShowAutoLinkOffer(newClusters);
+        }
+
         RebuildThumbnailStrip();
         if (_selectedImage == null && _clusters.Count > 0)
             SelectImage(_clusters[0].Images[0]);
@@ -966,6 +977,47 @@ public partial class ImageOptimiserPage : UserControl
         RebuildThumbnailStrip();
     }
 
+    private void ThumbnailScrollViewer_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+    {
+        if (sender is ScrollViewer sv)
+        {
+            sv.ScrollToHorizontalOffset(sv.HorizontalOffset - e.Delta);
+            e.Handled = true;
+        }
+    }
+
+    private List<OptimiserCluster>? _pendingAutoLink;
+
+    private void ShowAutoLinkOffer(List<OptimiserCluster> newClusters)
+    {
+        _pendingAutoLink = newClusters;
+        txtAutoLinkMessage.Text = $"{newClusters.Count} images added. Link them into one chain?";
+        autoLinkBanner.Visibility = Visibility.Visible;
+    }
+
+    private void BtnAutoLink_Click(object sender, RoutedEventArgs e)
+    {
+        if (_pendingAutoLink == null || _pendingAutoLink.Count < 2) return;
+
+        var target = _pendingAutoLink[0];
+        for (int i = 1; i < _pendingAutoLink.Count; i++)
+        {
+            if (!_clusters.Contains(_pendingAutoLink[i])) continue;
+            target.Images.AddRange(_pendingAutoLink[i].Images);
+            _clusters.Remove(_pendingAutoLink[i]);
+        }
+        _pendingAutoLink = null;
+        autoLinkBanner.Visibility = Visibility.Collapsed;
+        RebuildThumbnailStrip();
+        SelectImage(target.Images[0]);
+    }
+
+    private void BtnAutoLinkDismiss_Click(object sender, RoutedEventArgs e)
+    {
+        _pendingAutoLink = null;
+        autoLinkBanner.Visibility = Visibility.Collapsed;
+    }
+
     private void BtnClearAll_Click(object sender, RoutedEventArgs e)
     {
         _clusters.Clear();
@@ -1673,6 +1725,8 @@ public partial class ImageOptimiserPage : UserControl
     //  CHAIN MODE
     // ══════════════════════════════════════════════════════════════
 
+    private string? _suggestedImagePath;
+
     public void EnterChainMode(ParsedChain chain)
     {
         _activeChain = chain;
@@ -1684,6 +1738,9 @@ public partial class ImageOptimiserPage : UserControl
 
         // Start resolving wiki filename base in background
         _ = ResolveChainFilenameAsync(chain.DisplayName);
+
+        // Try to find matching atlas image in Export folder
+        TrySuggestChainImage(chain);
     }
 
     private void BtnExitChainMode_Click(object sender, RoutedEventArgs e)
@@ -1691,6 +1748,66 @@ public partial class ImageOptimiserPage : UserControl
         _activeChain = null;
         _resolvedFilenameBase = null;
         chainModeBanner.Visibility = Visibility.Collapsed;
+        DismissSuggestion();
+    }
+
+    private void TrySuggestChainImage(ParsedChain chain)
+    {
+        _suggestedImagePath = null;
+        imageSuggestionBanner.Visibility = Visibility.Collapsed;
+
+        var basePath = _main.Settings.ImageExporterBasePath;
+        var version = _main.Settings.SelectedApkVersion;
+        if (string.IsNullOrEmpty(basePath) || string.IsNullOrEmpty(version))
+            return;
+
+        var exportDir = System.IO.Path.Combine(basePath, version, "Export - PNGs");
+        if (!Directory.Exists(exportDir))
+            return;
+
+        // Primary: Item{ConfigKey}.png
+        var candidates = new List<string> { $"Item{chain.ConfigKey}.png" };
+
+        // Also try merged keys
+        if (chain.MergedFromConfigKeys != null)
+            foreach (var mk in chain.MergedFromConfigKeys)
+                candidates.Add($"Item{mk}.png");
+
+        foreach (var candidate in candidates)
+        {
+            var fullPath = System.IO.Path.Combine(exportDir, candidate);
+            if (!File.Exists(fullPath)) continue;
+
+            _suggestedImagePath = fullPath;
+
+            // Show banner with thumbnail
+            txtSuggestionTitle.Text = $"Found: {candidate}";
+            txtSuggestionPath.Text = exportDir;
+
+            var thumb = LoadThumbnail(fullPath, 48);
+            imgSuggestionPreview.Source = thumb;
+
+            imageSuggestionBanner.Visibility = Visibility.Visible;
+            return;
+        }
+    }
+
+    private void BtnSuggestionLoad_Click(object sender, RoutedEventArgs e)
+    {
+        if (string.IsNullOrEmpty(_suggestedImagePath) || !File.Exists(_suggestedImagePath))
+            return;
+
+        DismissSuggestion();
+        AddImages(new[] { _suggestedImagePath });
+        ProcessSplit();
+    }
+
+    private void BtnSuggestionDismiss_Click(object sender, RoutedEventArgs e) => DismissSuggestion();
+
+    private void DismissSuggestion()
+    {
+        _suggestedImagePath = null;
+        imageSuggestionBanner.Visibility = Visibility.Collapsed;
     }
 
     private async Task ResolveChainFilenameAsync(string chainName)
@@ -1733,7 +1850,8 @@ public partial class ImageOptimiserPage : UserControl
             // Determine the cluster's name source image
             var nameSourceIdx = Math.Clamp(cluster.NameSourceIndex, 0, cluster.Images.Count - 1);
             var nameSourceImg = cluster.Images[nameSourceIdx];
-            var clusterChainName = nameSourceImg.DetectedChainName;
+            var chainName = _activeChain != null ? SplitCamelCase(_activeChain.ConfigKey!) : null;
+            var clusterChainName = chainName ?? nameSourceImg.DetectedChainName;
             var clusterGroupPath = nameSourceImg.FilePath; // shared SplitGroupSourcePath for the whole cluster
 
             // Collect all split result files across the cluster
@@ -1763,19 +1881,32 @@ public partial class ImageOptimiserPage : UserControl
                     });
                 }
             }
-            else
+            else if (cluster.Images.Count > 1)
             {
-                // Non-split: each image as individual row
+                // Multi-image cluster (linked): treat as group
                 foreach (var oi in cluster.Images)
                 {
                     uploadItems.Add(new WikiUploadItem
                     {
                         FilePath = oi.FilePath,
-                        DetectedChainName = oi.DetectedChainName,
-                        IsPartOfSplitGroup = false,
+                        DetectedChainName = chainName ?? clusterChainName ?? oi.DetectedChainName,
+                        IsPartOfSplitGroup = true,
+                        SplitGroupSourcePath = clusterGroupPath,
                         IsOptimized = _optimizedFiles.Contains(oi.FilePath)
                     });
                 }
+            }
+            else
+            {
+                // Single image: individual row
+                var oi = cluster.Images[0];
+                uploadItems.Add(new WikiUploadItem
+                {
+                    FilePath = oi.FilePath,
+                    DetectedChainName = chainName ?? oi.DetectedChainName,
+                    IsPartOfSplitGroup = false,
+                    IsOptimized = _optimizedFiles.Contains(oi.FilePath)
+                });
             }
         }
 
@@ -1979,6 +2110,21 @@ public partial class ImageOptimiserPage : UserControl
     {
         var ext = System.IO.Path.GetExtension(path).ToLowerInvariant();
         return ext is ".png" or ".jpg" or ".jpeg" or ".bmp" or ".gif" or ".tiff" or ".webp";
+    }
+
+    private static string SplitCamelCase(string input)
+    {
+        var sb = new System.Text.StringBuilder();
+        for (int i = 0; i < input.Length; i++)
+        {
+            if (i > 0 && char.IsUpper(input[i]) && !char.IsUpper(input[i - 1]))
+                sb.Append(' ');
+            else if (i > 1 && char.IsUpper(input[i]) && char.IsUpper(input[i - 1])
+                     && i + 1 < input.Length && char.IsLower(input[i + 1]))
+                sb.Append(' ');
+            sb.Append(input[i]);
+        }
+        return sb.ToString();
     }
 
     // ══════════════════════════════════════════════════════════════

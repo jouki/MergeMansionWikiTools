@@ -121,15 +121,37 @@
                 </Border>
             </Popup>
 
-            <!-- Refresh Wiki Cache button -->
-            <ui:Button x:Name="btnRefreshWiki" Grid.Column="2"
-                       Appearance="Secondary" Height="34" Padding="12,0"
-                       Click="RefreshWikiCache_Click">
-                <StackPanel Orientation="Horizontal">
-                    <ui:SymbolIcon Symbol="ArrowSync24" FontSize="16" VerticalAlignment="Center" />
-                    <TextBlock Text="Refresh Wiki Cache" Margin="6,0,0,0" VerticalAlignment="Center" />
-                </StackPanel>
-            </ui:Button>
+            <!-- Refresh Wiki Cache + Merge Mode buttons -->
+            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                <ui:Button x:Name="btnRefreshWiki"
+                           Appearance="Secondary" Height="34" Padding="12,0"
+                           Click="RefreshWikiCache_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <ui:SymbolIcon Symbol="ArrowSync24" FontSize="16" VerticalAlignment="Center" />
+                        <TextBlock Text="Refresh Wiki Cache" Margin="6,0,0,0" VerticalAlignment="Center" />
+                    </StackPanel>
+                </ui:Button>
+                <Grid Margin="8,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ui:Button x:Name="btnMergeMode" Appearance="Secondary" Height="34" Padding="12,0"
+                               Click="MergeMode_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <ui:SymbolIcon Symbol="LinkMultiple24" FontSize="16" VerticalAlignment="Center" />
+                            <TextBlock x:Name="txtMergeModeLabel" Text="Merge Mode" Margin="6,0,0,0" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </ui:Button>
+                    <Border x:Name="btnMergeModeSep" Grid.Column="1" Width="1"
+                            VerticalAlignment="Stretch" Margin="0,2,0,1" />
+                    <ui:Button x:Name="btnMergeModeHelp" Grid.Column="2" Appearance="Secondary"
+                               Height="34" Width="30" Padding="0" Click="MergeModeHelp_Click">
+                        <ui:SymbolIcon Symbol="QuestionCircle24" FontSize="14" />
+                    </ui:Button>
+                </Grid>
+            </StackPanel>
         </Grid>
 
         <!-- Filter hint -->
@@ -145,6 +167,11 @@
 
         <!-- Chain list -->
         <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
             <!-- Empty state -->
             <StackPanel x:Name="emptyState" VerticalAlignment="Center"
                         HorizontalAlignment="Center" Visibility="Visible">
@@ -157,7 +184,7 @@
             </StackPanel>
 
             <!-- Chain list -->
-            <ListView x:Name="lvChains" BorderThickness="0"
+            <ListView x:Name="lvChains" Grid.Row="0" BorderThickness="0"
                       Background="Transparent"
                       Visibility="Collapsed"
                       Padding="0,0,0,0"
@@ -204,6 +231,7 @@
                                     <Grid HorizontalAlignment="Stretch"
                                           Margin="0,0,10,0">
                                         <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="Auto" />
@@ -212,8 +240,18 @@
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
 
+                                        <!-- Merge mode checkbox -->
+                                        <CheckBox Grid.Column="0"
+                                                  VerticalAlignment="Center"
+                                                  Margin="0,0,8,0" Padding="0"
+                                                  MinWidth="0" MinHeight="0"
+                                                  Visibility="{Binding ShowMergeCheckbox,
+                                                      Converter={StaticResource BoolToVis}}"
+                                                  IsChecked="{Binding IsMergeChecked, Mode=TwoWay}"
+                                                  Click="MergeCheckBox_Click" />
+
                                         <!-- Chain name + ConfigKey -->
-                                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                             <StackPanel Orientation="Horizontal">
                                                 <!-- DisplayName with search highlighting via Loaded event -->
                                                 <TextBlock x:Name="txtDisplayName"
@@ -240,7 +278,7 @@
                                         </StackPanel>
 
                                         <!-- Level collision warning -->
-                                        <ui:SymbolIcon Grid.Column="1" Symbol="Warning24"
+                                        <ui:SymbolIcon Grid.Column="2" Symbol="Warning24"
                                                        Foreground="#FFB900" Margin="6,0,0,0"
                                                        VerticalAlignment="Center"
                                                        ToolTip="Level collision — two or more items share the same level"
@@ -248,7 +286,7 @@
                                                            Converter={StaticResource BoolToVis}}" />
 
                                         <!-- Summary badge -->
-                                        <Border Grid.Column="2" Background="{DynamicResource SubtleFillColorSecondaryBrush}"
+                                        <Border Grid.Column="3" Background="{DynamicResource SubtleFillColorSecondaryBrush}"
                                                 CornerRadius="4" Padding="8,3"
                                                 VerticalAlignment="Center" Margin="10,0">
                                             <TextBlock Text="{Binding Summary}"
@@ -256,17 +294,17 @@
                                         </Border>
 
                                         <!-- Action buttons -->
-                                        <ui:Button Grid.Column="3" Content="Generate Table"
+                                        <ui:Button Grid.Column="4" Content="Generate Table"
                                                    Appearance="Primary" FontSize="12"
                                                    Height="30" Padding="12,0"
                                                    Click="GenerateTable_Click"
                                                    Tag="{Binding}" />
-                                        <ui:Button Grid.Column="4" Content="Infobox"
+                                        <ui:Button Grid.Column="5" Content="Infobox"
                                                    Appearance="Secondary" FontSize="12"
                                                    Height="30" Padding="12,0" Margin="6,0,0,0"
                                                    Click="GenerateInfobox_Click"
                                                    Tag="{Binding}" />
-                                        <ui:Button Grid.Column="5" ToolTip="Upload chain images to wiki"
+                                        <ui:Button Grid.Column="6" ToolTip="Upload chain images to wiki"
                                                    ToolTipService.InitialShowDelay="0"
                                                    Appearance="Secondary" FontSize="12"
                                                    Height="30" Padding="8,0" Margin="6,0,0,0"
@@ -284,6 +322,21 @@
                                         Padding="16,8,16,12"
                                         CornerRadius="0,0,4,4">
                                     <StackPanel>
+                                        <!-- Top controls row -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                                            <CheckBox Content="Group Alias Items"
+                                                      IsChecked="{Binding GroupAliases, Mode=TwoWay}"
+                                                      Visibility="{Binding ShowGroupAliasCheckbox,
+                                                          Converter={StaticResource BoolToVis}}"
+                                                      FontSize="11" Margin="0,0,12,0"
+                                                      Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                                            <CheckBox Content="Select All"
+                                                      FontSize="11"
+                                                      IsChecked="{Binding AllItemsChecked, Mode=TwoWay}"
+                                                      Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                                      Click="SelectAllItems_Click" />
+                                        </StackPanel>
+
                                         <ItemsControl ItemsSource="{Binding ItemsView}"
                                                       Margin="{Binding ItemsMargin}">
                                             <ItemsControl.GroupStyle>
@@ -300,7 +353,8 @@
                                                                               Margin="-4,0,4,0" Padding="0"
                                                                               MinWidth="0" MinHeight="0"
                                                                               Tag="{Binding Name}"
-                                                                              Click="GroupCheckBox_Click" />
+                                                                              Click="GroupCheckBox_Click"
+                                                                              Loaded="GroupCheckBox_Loaded" />
                                                                     <TextBlock Text="{Binding Name}"
                                                                                Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                                                                                FontSize="11" FontFamily="Consolas"
@@ -383,6 +437,29 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
+            <!-- Merge action bar -->
+            <Border x:Name="mergeBar" Grid.Row="1" Visibility="Collapsed"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    CornerRadius="4" Padding="16,10" Margin="0,8,12,0">
+                <StackPanel Orientation="Horizontal">
+                    <ui:Button x:Name="btnSelectAll" Content="Select All"
+                               Appearance="Secondary" Margin="0,0,12,0"
+                               Click="MergeSelectAll_Click"
+                               ToolTip="Select/deselect all currently visible chains"
+                               ToolTipService.InitialShowDelay="0" />
+                    <TextBlock x:Name="txtMergeCount" Text="0 chains selected"
+                               VerticalAlignment="Center" Margin="0,0,12,0"
+                               Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="13" />
+                    <ui:Button x:Name="btnMergeChains" Content="Merge Chains"
+                               Appearance="Primary" IsEnabled="False"
+                               Click="BtnMergeChains_Click"
+                               ToolTip="Create wiki mapping that unifies selected chains under one name"
+                               ToolTipService.InitialShowDelay="0" />
+                    <ui:Button Content="Cancel" Appearance="Secondary"
+                               Margin="8,0,0,0" Click="MergeModeCancel_Click" />
+                </StackPanel>
+            </Border>
         </Grid>
     </Grid>
 </UserControl>

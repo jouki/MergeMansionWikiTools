@@ -1,6 +1,7 @@
 ﻿// Modified by Jouki (2026) — Unknown polymorphic derivative graceful skip with SkipStructMembers
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -34,20 +35,11 @@ namespace Metaplay.Generated
         private const string MetaRefFromKey = "FromKey";
         private const string AddItemName = "Add";
 
-        private static readonly IDictionary<Type, IDictionary<int, PropertyInfo>> _properties;
-        private static readonly IDictionary<Type, IDictionary<int, FieldInfo>> _fields;
+        private static readonly ConcurrentDictionary<Type, IDictionary<int, PropertyInfo>> _properties = new();
+        private static readonly ConcurrentDictionary<Type, IDictionary<int, FieldInfo>> _fields = new();
 
-        private static readonly IDictionary<Type, IDictionary<int, Type>> _derivableTypes;
-        private static readonly IDictionary<Type, IDictionary<int, Type>> _messageTypes;
-
-        static TypeSerializer()
-        {
-            _properties = new Dictionary<Type, IDictionary<int, PropertyInfo>>();
-            _fields = new Dictionary<Type, IDictionary<int, FieldInfo>>();
-
-            _derivableTypes = new Dictionary<Type, IDictionary<int, Type>>();
-            _messageTypes = new Dictionary<Type, IDictionary<int, Type>>();
-        }
+        private static readonly ConcurrentDictionary<Type, IDictionary<int, Type>> _derivableTypes = new();
+        private static readonly ConcurrentDictionary<Type, IDictionary<int, Type>> _messageTypes = new();
 
         #endregion
 
@@ -915,7 +907,8 @@ namespace Metaplay.Generated
                     result[key] = baseFields[key];
             }
 
-            return _fields[type] = result;
+            _fields.TryAdd(type, result);
+            return result;
         }
 
         private static IDictionary<int, PropertyInfo> GetTaggedProperties(Type type, bool isImplicit, ref int startIndex)
@@ -953,7 +946,8 @@ namespace Metaplay.Generated
                     result[key] = baseProperties[key];
             }
 
-            return _properties[type] = result;
+            _properties.TryAdd(type, result);
+            return result;
         }
 
         #endregion
@@ -994,32 +988,30 @@ namespace Metaplay.Generated
 
         private static void EnsureDerivableTypesCache(Type baseType)
         {
-            if (_derivableTypes.ContainsKey(baseType))
-                return;
-
-            var targetTypes = Assembly.GetExecutingAssembly().GetExportedTypes()
-                .Where(baseType.IsAssignableFrom)
-                .Select(x => (x, x.GetCustomAttribute<MetaSerializableDerivedAttribute>()))
-                .Where(x => x.Item2 != null);
-
-            var distinctTypes = new Dictionary<int, Type>();
-            foreach (var targetType in targetTypes)
+            _derivableTypes.GetOrAdd(baseType, bt =>
             {
-                if (!distinctTypes.ContainsKey(targetType.Item2.TypeCode))
-                    distinctTypes[targetType.Item2.TypeCode] = targetType.x;
-            }
+                var targetTypes = Assembly.GetExecutingAssembly().GetExportedTypes()
+                    .Where(bt.IsAssignableFrom)
+                    .Select(x => (x, x.GetCustomAttribute<MetaSerializableDerivedAttribute>()))
+                    .Where(x => x.Item2 != null);
 
-            _derivableTypes[baseType] = distinctTypes;
+                var distinctTypes = new Dictionary<int, Type>();
+                foreach (var targetType in targetTypes)
+                {
+                    if (!distinctTypes.ContainsKey(targetType.Item2.TypeCode))
+                        distinctTypes[targetType.Item2.TypeCode] = targetType.x;
+                }
+
+                return distinctTypes;
+            });
         }
 
         private static Type GetMetaMessageType(Type baseType, int targetId)
         {
-            // Get derived type from cache
-            if (!_messageTypes.TryGetValue(baseType, out var derivableTypes))
+            var derivableTypes = _messageTypes.GetOrAdd(baseType, bt =>
             {
-                // Determine derivable types for base type
                 var targetTypes = Assembly.GetExecutingAssembly().GetExportedTypes()
-                    .Where(baseType.IsAssignableFrom)
+                    .Where(bt.IsAssignableFrom)
                     .Select(x => (x, x.GetCustomAttribute<MetaMessageAttribute>()))
                     .Where(x => x.Item2 != null);
 
@@ -1030,8 +1022,8 @@ namespace Metaplay.Generated
                         distinctTypes[targetType.Item2.TypeCode] = targetType.x;
                 }
 
-                _messageTypes[baseType] = derivableTypes = distinctTypes;
-            }
+                return distinctTypes;
+            });
 
             if (!derivableTypes.TryGetValue(targetId, out var derivableType))
                 throw new InvalidOperationException($"Unknown derivative {targetId} for type {baseType.FullName}");
@@ -1048,7 +1040,8 @@ namespace Metaplay.Generated
             private static readonly Lazy<Tracer> Lazy = new(() => new Tracer());
             public static Tracer Instance => Lazy.Value;
 
-            private readonly Stack<string> _steps = new();
+            [ThreadStatic] private static Stack<string> _tlsSteps;
+            private static Stack<string> Steps => _tlsSteps ??= new();
             private readonly HashSet<object> _registered = new();
             private readonly Dictionary<object, List<string>> _traced = new();
 
@@ -1059,12 +1052,12 @@ namespace Metaplay.Generated
 
             public void Push(string step)
             {
-                _steps.Push(step);
+                Steps.Push(step);
             }
 
             public void Pop()
             {
-                _steps.Pop();
+                Steps.Pop();
             }
 
             public void Trace(object value)
@@ -1077,7 +1070,7 @@ namespace Metaplay.Generated
                     if (!_traced.TryGetValue(value, out var traces))
                         _traced[value] = traces = new();
 
-                    traces.Add(string.Join('.', _steps.Reverse()));
+                    traces.Add(string.Join('.', Steps.Reverse()));
                 }
             }
 

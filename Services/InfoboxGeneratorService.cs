@@ -13,6 +13,8 @@ public class InfoboxGeneratorOptions
 
 public class InfoboxGeneratorService
 {
+    public List<string> Warnings { get; } = new();
+
     /// <summary>
     /// Builds the complete {{Infobox Items|...}} wikitext for a chain.
     /// sourceLines: pre-built source lines (each a wiki template string), joined with &lt;br/&gt;
@@ -24,6 +26,8 @@ public class InfoboxGeneratorService
         InfoboxGeneratorOptions opts,
         IReadOnlyList<string> manualSourceLines)
     {
+        Warnings.Clear();
+
         // Collect all fields first, then format with aligned '='
         var fields = new List<(string Key, string Value)>();
 
@@ -68,6 +72,11 @@ public class InfoboxGeneratorService
         var usedIn = BuildUsedIn(chain, allChains, itemNames);
         if (usedIn.Count > 0)
             fields.Add(("used_in", string.Join("<br/>", usedIn)));
+
+        // ── transforms_to ──
+        var transforms = BuildTransformsTo(chain, allChains);
+        if (transforms.Count > 0)
+            fields.Add(("transforms_to", string.Join("<br/>", transforms)));
 
         // ── needs ──
         var needs = BuildNeeds(chain, allChains, itemNames);
@@ -159,16 +168,25 @@ public class InfoboxGeneratorService
 
             foreach (var item in otherChain.Items)
             {
+                // Drop/Spawn sources
                 bool drops = (item.DropOdds?.Keys.Any(k => myItemTypes.Contains(k)) == true) ||
                              (item.SpawnOdds?.Keys.Any(k => myItemTypes.Contains(k)) == true) ||
                              (item.SpawnItemType != null && myItemTypes.Contains(item.SpawnItemType));
 
-                if (!drops) continue;
-                var key = $"{otherChain.ConfigKey}:{item.Level}";
-                if (!seen.Add(key)) continue;
+                // Sink reward source (other chain transforms INTO this chain's items)
+                bool transforms = item.IsSink
+                    && !string.IsNullOrEmpty(item.SinkRewardItemType)
+                    && myItemTypes.Contains(item.SinkRewardItemType);
 
-                // Use chain display name + level
-                result.Add($"{{{{Item/Group|{otherChain.DisplayName}|{item.Level}}}}}");
+                // Order reward source (other chain's order tasks reward this chain's items)
+                bool orderRewards = item.IsOrder
+                    && item.OrderRewardItems != null
+                    && item.OrderRewardItems.Keys.Any(k => myItemTypes.Contains(k));
+
+                if (!drops && !transforms && !orderRewards) continue;
+                if (!seen.Add(otherChain.ConfigKey)) continue;
+
+                result.Add($"{{{{Item/Group|{otherChain.DisplayName}}}}}");
                 break; // one entry per source chain
             }
         }
@@ -295,6 +313,32 @@ public class InfoboxGeneratorService
         return string.Join("<br/>", parts);
     }
 
+    // ── Transforms To (sink reward) ──────────────────────────────────
+
+    private static List<string> BuildTransformsTo(
+        ParsedChain chain, IReadOnlyList<ParsedChain> allChains)
+    {
+        var itemTypeToChain = BuildItemTypeToChain(allChains);
+        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var result = new List<string>();
+
+        foreach (var item in chain.Items)
+        {
+            if (!item.IsSink || string.IsNullOrEmpty(item.SinkRewardItemType)) continue;
+            if (!seen.Add(item.SinkRewardItemType)) continue;
+
+            if (itemTypeToChain.TryGetValue(item.SinkRewardItemType, out var rewardChain))
+            {
+                var rewardItem = rewardChain.Items
+                    .FirstOrDefault(i => string.Equals(i.ItemType, item.SinkRewardItemType, StringComparison.OrdinalIgnoreCase));
+                int lvl = rewardItem?.Level ?? 1;
+                result.Add($"{{{{Item|{rewardChain.DisplayName}|{lvl}}}}}");
+            }
+        }
+
+        return result;
+    }
+
     // ── Used In (this chain's items are sink requirements elsewhere) ──
 
     private static List<string> BuildUsedIn(
@@ -304,20 +348,32 @@ public class InfoboxGeneratorService
             .Where(i => !string.IsNullOrEmpty(i.NumericConfigKey))
             .Select(i => i.NumericConfigKey)
             .ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var myItemTypes = chain.Items
+            .Where(i => !string.IsNullOrEmpty(i.ItemType))
+            .Select(i => i.ItemType!)
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
         var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         var result = new List<string>();
 
         foreach (var otherChain in allChains)
         {
+            if (otherChain == chain) continue;
+
             foreach (var item in otherChain.Items)
             {
-                if (!item.IsSink || item.SinkRequirementConfigKeys == null) continue;
-                if (!item.SinkRequirementConfigKeys.Any(r => myConfigKeys.Contains(r))) continue;
+                // Match via NumericConfigKey (ScoreTargets — sink fuel)
+                bool matchesSinkFuel = item.IsSink && item.SinkRequirementConfigKeys != null
+                    && item.SinkRequirementConfigKeys.Any(r => myConfigKeys.Contains(r));
 
-                var key = otherChain.ConfigKey;
-                if (!seen.Add(key)) continue;
+                // Match via order required items (this chain's items are needed by order tasks)
+                bool matchesOrderReq = item.IsOrder && item.OrderRequiredItems != null
+                    && item.OrderRequiredItems.Keys.Any(k => myItemTypes.Contains(k));
 
-                result.Add($"{{{{Item|{otherChain.DisplayName}|{item.Level}}}}}");
+                if (!matchesSinkFuel && !matchesOrderReq) continue;
+
+                if (!seen.Add(otherChain.ConfigKey)) continue;
+
+                result.Add($"{{{{Item/Group|{otherChain.DisplayName}}}}}");
             }
         }
 
@@ -343,10 +399,11 @@ public class InfoboxGeneratorService
 
                 if (configKeyToChain.TryGetValue(reqKey, out var match))
                 {
-                    if (chain.Items.Count > 1)
-                        result.Add($"{{{{Item|{match.Chain.DisplayName}|{match.Item.Level}|displayName=}}}}");
-                    else
-                        result.Add($"{{{{Item|{match.Chain.DisplayName}|{match.Item.Level}}}}}");
+                    var maxLevel = match.Chain.Items.Max(i => i.Level);
+                    int amount = item.SinkRequirementAmounts != null
+                        && item.SinkRequirementAmounts.TryGetValue(reqKey, out var amt) ? amt : 1;
+                    var template = $"{{{{Item|{match.Chain.DisplayName}|{maxLevel}}}}}";
+                    result.Add(amount > 1 ? $"{amount}x {template}" : template);
                 }
             }
         }

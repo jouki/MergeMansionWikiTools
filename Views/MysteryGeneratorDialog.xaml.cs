@@ -99,7 +99,7 @@ public partial class MysteryGeneratorDialog : FluentWindow
         {
             try
             {
-                Clipboard.SetDataObject(_fullOutput, false);
+                Clipboard.SetDataObject(_fullOutput, true);
                 success = true;
                 Increment(s => s.MysteryTemplatesGenerated++);
                 break;

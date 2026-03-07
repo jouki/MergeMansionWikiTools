@@ -1,5 +1,7 @@
 using System;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using MergeMansionWikiTools.Services;
 using MergeMansionWikiTools.Views;
@@ -14,6 +16,14 @@ namespace MergeMansionWikiTools
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+            // Fix Copy/Cut on TextBoxes: WPF UI TextBox's default handler doesn't
+            // flush clipboard (no OLE render), so WIN+V doesn't capture it and Cut
+            // doesn't reliably remove text. We intercept via PreviewExecuted and use
+            // native Win32 clipboard API (fast, no freeze, immediately rendered for WIN+V).
+            EventManager.RegisterClassHandler(typeof(System.Windows.Controls.TextBox),
+                CommandManager.PreviewExecutedEvent,
+                new ExecutedRoutedEventHandler(OnTextBoxCopyCut));
 
             AppLogger.Init();
 
@@ -68,6 +78,74 @@ namespace MergeMansionWikiTools
         {
             AppLogger.Flush();
             base.OnExit(e);
+        }
+
+        // ── Native Win32 clipboard (fast, no OLE freeze, rendered for WIN+V) ──
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern bool OpenClipboard(IntPtr hWndNewOwner);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern bool CloseClipboard();
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern bool EmptyClipboard();
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern IntPtr SetClipboardData(uint uFormat, IntPtr hMem);
+        [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+        private static extern IntPtr GlobalAlloc(uint uFlags, UIntPtr dwBytes);
+        [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+        private static extern IntPtr GlobalLock(IntPtr hMem);
+        [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+        private static extern bool GlobalUnlock(IntPtr hMem);
+
+        private const uint CF_UNICODETEXT = 13;
+        private const uint GMEM_MOVEABLE = 0x0002;
+
+        private static bool NativeSetClipboardText(string text)
+        {
+            if (!OpenClipboard(IntPtr.Zero))
+                return false;
+            try
+            {
+                EmptyClipboard();
+                var chars = text + "\0";
+                var bytes = System.Text.Encoding.Unicode.GetBytes(chars);
+                var hGlobal = GlobalAlloc(GMEM_MOVEABLE, (UIntPtr)bytes.Length);
+                if (hGlobal == IntPtr.Zero) return false;
+                var ptr = GlobalLock(hGlobal);
+                if (ptr == IntPtr.Zero) return false;
+                System.Runtime.InteropServices.Marshal.Copy(bytes, 0, ptr, bytes.Length);
+                GlobalUnlock(hGlobal);
+                SetClipboardData(CF_UNICODETEXT, hGlobal);
+                return true;
+            }
+            finally
+            {
+                CloseClipboard();
+            }
+        }
+
+        private static void OnTextBoxCopyCut(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (sender is not System.Windows.Controls.TextBox tb || tb.SelectionLength <= 0)
+                return;
+
+            if (e.Command == ApplicationCommands.Copy)
+            {
+                NativeSetClipboardText(tb.SelectedText);
+                e.Handled = true;
+            }
+            else if (e.Command == ApplicationCommands.Cut)
+            {
+                NativeSetClipboardText(tb.SelectedText);
+                if (!tb.IsReadOnly)
+                {
+                    var start = tb.SelectionStart;
+                    var len = tb.SelectionLength;
+                    tb.Text = tb.Text.Remove(start, len);
+                    tb.SelectionStart = start;
+                }
+                e.Handled = true;
+            }
         }
 
         public static void ApplyTheme(string preference)

@@ -155,7 +155,7 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
             {
                 writer.WriteStartObject();
 
-                WriteProperty(writer, "Constant", cp.Products[0].GetDef(ClientGlobal.SharedGameConfig).ItemType, serializer);
+                WriteProperty(writer, "Constant", cp.Products[0].GetDef(_config).ItemType, serializer);
 
                 writer.WriteEndObject();
             }
@@ -187,7 +187,7 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 writer.WriteStartObject();
 
                 double weightSum = crp.GenerationOdds.Sum(x => x.Weight);
-                foreach (var odd in crp.GenerationOdds.GroupBy(x => x.Type.GetDef(ClientGlobal.SharedGameConfig).ItemType))
+                foreach (var odd in crp.GenerationOdds.GroupBy(x => x.Type.GetDef(_config).ItemType))
                 {
                     var weight = _dropAsPercent ?
                         odd.Sum(x => x.Weight) / weightSum * 100 :
@@ -213,7 +213,7 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 writer.WriteStartObject();
 
                 double weightSum = rp.OddsList.Sum(x => x.Weight);
-                foreach (var odd in rp.OddsList.GroupBy(x => x.Type.GetDef(ClientGlobal.SharedGameConfig).ItemType))
+                foreach (var odd in rp.OddsList.GroupBy(x => x.Type.GetDef(_config).ItemType))
                 {
                     var weight = _dropAsPercent ?
                         odd.Sum(x => x.Weight) / weightSum * 100 :
@@ -239,7 +239,7 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 writer.WriteStartObject();
 
                 double weightSum = psp.OddsList.Sum(x => x.Weight);
-                foreach (var odd in psp.OddsList.GroupBy(x => x.Type.GetDef(ClientGlobal.SharedGameConfig).ItemType))
+                foreach (var odd in psp.OddsList.GroupBy(x => x.Type.GetDef(_config).ItemType))
                 {
                     var weight = _dropAsPercent ?
                         odd.Sum(x => x.Weight) / weightSum * 100 :
@@ -265,7 +265,7 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 writer.WriteStartObject();
 
                 double weightSum = crsp.TotalWeight;
-                foreach (var odd in crsp.OddsList.GroupBy(x => x.Type.GetDef(ClientGlobal.SharedGameConfig).ItemType))
+                foreach (var odd in crsp.OddsList.GroupBy(x => x.Type.GetDef(_config).ItemType))
                 {
                     var weight = _dropAsPercent ?
                         odd.Sum(x => x.Weight) / weightSum * 100 :
@@ -294,7 +294,7 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 writer.WriteStartObject();
 
                 double weightSum = cmsp.OddsList.Sum(x => x.Weight);
-                foreach (var odd in cmsp.OddsList.GroupBy(x => x.Type.GetDef(ClientGlobal.SharedGameConfig).ItemType))
+                foreach (var odd in cmsp.OddsList.GroupBy(x => x.Type.GetDef(_config).ItemType))
                 {
                     var weight = _dropAsPercent ?
                         odd.Sum(x => x.Weight) / weightSum * 100 :
@@ -323,7 +323,7 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 writer.WriteStartObject();
 
                 double weightSum = cpsp.OddsList.Sum(x => x.Weight);
-                foreach (var odd in cpsp.OddsList.GroupBy(x => x.Type.GetDef(ClientGlobal.SharedGameConfig).ItemType))
+                foreach (var odd in cpsp.OddsList.GroupBy(x => x.Type.GetDef(_config).ItemType))
                 {
                     var weight = _dropAsPercent ?
                         odd.Sum(x => x.Weight) / weightSum * 100 :
@@ -571,8 +571,9 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
         {
             if (value is MergeChainDefinition mergeChain)
             {
-                if (LocMan.HasString(LocMan.GetItemCategoryNameLocId(mergeChain.ConfigKey)))
-                    WriteProperty(writer, "Name", LocMan.GetItemCategoryName(mergeChain.ConfigKey), serializer);
+                var chainName = ResolveChainName(mergeChain);
+                if (chainName != null)
+                    WriteProperty(writer, "Name", chainName, serializer);
             }
             else if (value is ItemDefinition item)
             {
@@ -732,6 +733,67 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
             // Fallback for other spawner types
             try { return spawner.TimeSkipPriceGems(null).Double; }
             catch { return 0; }
+        }
+
+        /// <summary>
+        /// Resolves a human-readable chain name using multiple fallback strategies:
+        /// 1. Localization by chain ConfigKey (ItemCategory_{ConfigKey})
+        /// 2. Localization by PoolTag of first item (ItemCategory_{PoolTag})
+        /// 3. OverrideLocalizationItemCategory on first item (direct loc key or with ItemCategory_ prefix)
+        /// </summary>
+        private string ResolveChainName(MergeChainDefinition mergeChain)
+        {
+            // Skip name resolution for test/artifact chains
+            var firstItem = GetFirstItemDefinition(mergeChain);
+            if (firstItem?.Tags != null && (firstItem.Tags.Contains("Test") || firstItem.Tags.Contains("Artifact")))
+                return null;
+
+            // 1. Try chain ConfigKey directly
+            if (LocMan.HasString(LocMan.GetItemCategoryNameLocId(mergeChain.ConfigKey)))
+                return LocMan.GetItemCategoryName(mergeChain.ConfigKey);
+
+            // Get first item for PoolTag / Override fallbacks
+            var itemDef = firstItem;
+            if (itemDef == null)
+                return null;
+
+            // 2. Try PoolTag of first item
+            if (!string.IsNullOrEmpty(itemDef.PoolTag))
+            {
+                var poolLocId = LocMan.GetItemCategoryNameLocId(itemDef.PoolTag);
+                if (LocMan.HasString(poolLocId))
+                    return LocMan.GetItemCategoryName(itemDef.PoolTag);
+            }
+
+            // 3. Try OverrideLocalizationItemCategory
+            var overrideCat = itemDef.OverrideLocalizationItemCategory;
+            if (!string.IsNullOrEmpty(overrideCat))
+            {
+                // Value may be a full loc key (e.g. "ItemCategory_X") or just an identifier
+                if (LocMan.HasString(overrideCat))
+                    return LocMan.Get(overrideCat);
+
+                var withPrefix = LocMan.GetItemCategoryNameLocId(overrideCat);
+                if (LocMan.HasString(withPrefix))
+                    return LocMan.Get(withPrefix);
+            }
+
+            return null;
+        }
+
+        private ItemDefinition GetFirstItemDefinition(MergeChainDefinition mergeChain)
+        {
+            if (mergeChain.PrimaryChain == null || mergeChain.PrimaryChain.Count == 0)
+                return null;
+
+            var firstElement = mergeChain.PrimaryChain[0];
+            int firstKey = 0;
+            if (firstElement is SingleMergeChainElement single)
+                firstKey = single.Item.ConfigKey;
+            else if (firstElement is ListMergeChainElement list && list.Items?.Count > 0)
+                firstKey = list.Items[0].ConfigKey;
+
+            return firstKey != 0 ? _config.Items.GetValueOrDefault(firstKey) : null;
         }
     }
 }

@@ -15,6 +15,7 @@ public class WikiMappingEntry
     public double? SortingLevel { get; set; }
     public bool Fueled { get; set; }
     public bool IgnoreInTask { get; set; }
+    public bool IsAlias { get; set; }
 }
 
 public class WikiMappingCache
@@ -120,8 +121,8 @@ public static class WikiMappingService
     {
         var result = new Dictionary<string, WikiMappingEntry>(StringComparer.OrdinalIgnoreCase);
 
-        // Match each entry: ["key"] = { ... }
-        var entryRegex = new Regex(@"\[""([^""]+)""\]\s*=\s*\{([^}]*)\}", RegexOptions.Compiled);
+        // Match each entry: ["key"] = { ... }, but skip Lua-commented lines (--[...)
+        var entryRegex = new Regex(@"(?<!-)\[""([^""]+)""\]\s*=\s*\{([^}]*)\}", RegexOptions.Compiled);
 
         foreach (Match m in entryRegex.Matches(lua))
         {
@@ -136,6 +137,7 @@ public static class WikiMappingService
                 SortingLevel = ExtractDouble(body, "sortingLevel"),
                 Fueled = ExtractBool(body, "fueled"),
                 IgnoreInTask = ExtractBool(body, "ignoreInTask"),
+                IsAlias = ExtractBool(body, "isAlias"),
             };
 
             result.TryAdd(key, entry);
@@ -473,6 +475,243 @@ public static class WikiMappingService
         }
 
         return lua;
+    }
+
+    // ── Merge Alias Operations ─────────────────────────────────────────
+
+    /// <summary>
+    /// Updates Lua entries for a merge-alias operation:
+    /// - Primary chain items: sets chainName, removes isAlias if present
+    /// - Alias chain items: sets chainName + isAlias = true
+    /// </summary>
+    private static string UpdateLuaEntryAlias(
+        string lua, ParsedChain primaryChain, IReadOnlyList<ParsedChain> aliasChains, string mergedName)
+    {
+        var escapedName = mergedName.Replace("\"", "\\\"");
+
+        // Helper: update or add entry for a single item
+        string ProcessItem(string currentLua, ParsedItem item, bool isAlias)
+        {
+            if (string.IsNullOrEmpty(item.ItemType)) return currentLua;
+
+            var escapedType = Regex.Escape(item.ItemType);
+            var entryRegex = new Regex(
+                @"(\[""" + escapedType + @"""\]\s*=\s*\{)([^}]*)(})",
+                RegexOptions.None);
+
+            if (entryRegex.IsMatch(currentLua))
+            {
+                currentLua = entryRegex.Replace(currentLua, m =>
+                {
+                    var prefix = m.Groups[1].Value;
+                    var body = m.Groups[2].Value;
+                    var suffix = m.Groups[3].Value;
+
+                    // Update/add chainName
+                    var chainNameRegex = new Regex(@"chainName\s*=\s*""[^""]*""");
+                    if (chainNameRegex.IsMatch(body))
+                        body = chainNameRegex.Replace(body, $"chainName = \"{escapedName}\"");
+                    else
+                    {
+                        body = body.TrimStart();
+                        body = $"chainName = \"{escapedName}\", " + body;
+                    }
+
+                    // Handle isAlias
+                    var isAliasRegex = new Regex(@",?\s*isAlias\s*=\s*(true|false)");
+                    if (isAlias)
+                    {
+                        if (isAliasRegex.IsMatch(body))
+                            body = isAliasRegex.Replace(body, ", isAlias = true");
+                        else
+                            body += ", isAlias = true";
+                    }
+                    else
+                    {
+                        // Remove isAlias field if present
+                        body = isAliasRegex.Replace(body, "");
+                    }
+
+                    return prefix + body + suffix;
+                });
+            }
+            else
+            {
+                // Entry doesn't exist — add before closing "}"
+                var fields = $"chainName = \"{escapedName}\"";
+                if (isAlias)
+                    fields += ", isAlias = true";
+                var newEntry = $"\t[\"{item.ItemType}\"] = {{{fields}}},\n";
+                var lastBrace = currentLua.LastIndexOf('}');
+                if (lastBrace >= 0)
+                    currentLua = currentLua.Insert(lastBrace, newEntry);
+            }
+
+            return currentLua;
+        }
+
+        // Primary chain items: chainName only, no isAlias
+        foreach (var item in primaryChain.Items)
+            lua = ProcessItem(lua, item, isAlias: false);
+
+        // Alias chain items: chainName + isAlias = true
+        foreach (var chain in aliasChains)
+            foreach (var item in chain.Items)
+                lua = ProcessItem(lua, item, isAlias: true);
+
+        return lua;
+    }
+
+    /// <summary>
+    /// Pushes a merge-alias operation to the wiki: sets chainName on all items,
+    /// marks alias chain items with isAlias = true.
+    /// </summary>
+    public static async Task PushMergeAliasAsync(
+        string username, string password,
+        ParsedChain primaryChain,
+        IReadOnlyList<ParsedChain> aliasChains,
+        string mergedName)
+    {
+        using var client = await CreateAuthenticatedClientAsync(username, password);
+
+        // 1. Fetch current Lua
+        var luaJson = await client.GetStringAsync(ApiUrl);
+        var luaDoc = JsonDocument.Parse(luaJson);
+        var pages = luaDoc.RootElement.GetProperty("query").GetProperty("pages");
+        string currentLua = "";
+        foreach (var page in pages.EnumerateObject())
+        {
+            currentLua = page.Value.GetProperty("revisions")[0]
+                .GetProperty("slots").GetProperty("main")
+                .GetProperty("*").GetString() ?? "";
+            break;
+        }
+
+        // 2. Modify Lua
+        var updatedLua = UpdateLuaEntryAlias(currentLua, primaryChain, aliasChains, mergedName);
+
+        // 3. Get CSRF token + edit
+        var csrfToken = await GetCsrfTokenAsync(client);
+
+        var allKeys = new List<string> { primaryChain.ConfigKey };
+        allKeys.AddRange(aliasChains.Select(c => c.ConfigKey));
+        var summary = $"Merge chains: {string.Join(" + ", allKeys)} → \"{mergedName}\" (via MergeMansionWikiTools)";
+
+        var editContent = new FormUrlEncodedContent(new Dictionary<string, string>
+        {
+            ["action"] = "edit",
+            ["title"] = "Module:Datatable/Items/Mapping",
+            ["text"] = updatedLua,
+            ["token"] = csrfToken,
+            ["summary"] = summary,
+            ["bot"] = "1",
+            ["format"] = "json",
+        });
+        var editResp = await client.PostAsync(BaseApiUrl, editContent);
+        var editDoc = JsonDocument.Parse(await editResp.Content.ReadAsStringAsync());
+
+        if (editDoc.RootElement.TryGetProperty("error", out var error))
+            throw new Exception($"Wiki edit failed: {error.GetProperty("info").GetString()}");
+    }
+
+    /// <summary>
+    /// Adds alias chains to an existing chain name without modifying existing entries.
+    /// Only writes chainName + isAlias = true for items in the alias chains.
+    /// </summary>
+    public static async Task PushAddAliasesAsync(
+        string username, string password,
+        IReadOnlyList<ParsedChain> aliasChains,
+        string existingChainName)
+    {
+        using var client = await CreateAuthenticatedClientAsync(username, password);
+
+        // 1. Fetch current Lua
+        var luaJson = await client.GetStringAsync(ApiUrl);
+        var luaDoc = JsonDocument.Parse(luaJson);
+        var pages = luaDoc.RootElement.GetProperty("query").GetProperty("pages");
+        string currentLua = "";
+        foreach (var page in pages.EnumerateObject())
+        {
+            currentLua = page.Value.GetProperty("revisions")[0]
+                .GetProperty("slots").GetProperty("main")
+                .GetProperty("*").GetString() ?? "";
+            break;
+        }
+
+        // 2. Only add alias entries (don't touch existing items)
+        var escapedName = existingChainName.Replace("\"", "\\\"");
+        var lua = currentLua;
+
+        foreach (var chain in aliasChains)
+        {
+            foreach (var item in chain.Items)
+            {
+                if (string.IsNullOrEmpty(item.ItemType)) continue;
+
+                var escapedType = Regex.Escape(item.ItemType);
+                var entryRegex = new Regex(
+                    @"(\[""" + escapedType + @"""\]\s*=\s*\{)([^}]*)(})",
+                    RegexOptions.None);
+
+                if (entryRegex.IsMatch(lua))
+                {
+                    lua = entryRegex.Replace(lua, m =>
+                    {
+                        var prefix = m.Groups[1].Value;
+                        var body = m.Groups[2].Value;
+                        var suffix = m.Groups[3].Value;
+
+                        // Update/add chainName
+                        var chainNameRegex = new Regex(@"chainName\s*=\s*""[^""]*""");
+                        if (chainNameRegex.IsMatch(body))
+                            body = chainNameRegex.Replace(body, $"chainName = \"{escapedName}\"");
+                        else
+                        {
+                            body = body.TrimStart();
+                            body = $"chainName = \"{escapedName}\", " + body;
+                        }
+
+                        // Ensure isAlias = true
+                        var isAliasRegex = new Regex(@",?\s*isAlias\s*=\s*(true|false)");
+                        if (isAliasRegex.IsMatch(body))
+                            body = isAliasRegex.Replace(body, ", isAlias = true");
+                        else
+                            body += ", isAlias = true";
+
+                        return prefix + body + suffix;
+                    });
+                }
+                else
+                {
+                    var newEntry = $"\t[\"{item.ItemType}\"] = {{chainName = \"{escapedName}\", isAlias = true}},\n";
+                    var lastBrace = lua.LastIndexOf('}');
+                    if (lastBrace >= 0)
+                        lua = lua.Insert(lastBrace, newEntry);
+                }
+            }
+        }
+
+        // 3. Get CSRF token + edit
+        var csrfToken = await GetCsrfTokenAsync(client);
+
+        var chainKeys = aliasChains.Select(c => c.ConfigKey);
+        var summary = $"Add aliases: {string.Join(" + ", chainKeys)} → \"{existingChainName}\" (via MergeMansionWikiTools)";
+
+        var editContent = new FormUrlEncodedContent(new Dictionary<string, string>
+        {
+            ["action"] = "edit",
+            ["title"] = "Module:Datatable/Items/Mapping",
+            ["text"] = lua,
+            ["token"] = csrfToken,
+            ["summary"] = summary,
+            ["bot"] = "1",
+            ["format"] = "json",
+        });
+        var editResp = await client.PostAsync(BaseApiUrl, editContent);
+        var editDoc = JsonDocument.Parse(await editResp.Content.ReadAsStringAsync());
+
+        if (editDoc.RootElement.TryGetProperty("error", out var err))
+            throw new Exception($"Wiki edit failed: {err.GetProperty("info").GetString()}");
     }
 
     // ── Item Move & Level Operations ──────────────────────────────────

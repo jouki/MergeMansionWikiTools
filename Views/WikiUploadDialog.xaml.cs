@@ -42,6 +42,7 @@ internal class UploadRow
     public bool SuppressLevel { get; set; }
     public bool IsEnabled { get; set; } = true;
     public bool IsChecking { get; set; }
+    public bool IsPartOfSplit { get; set; }
 
     // UI references
     public Wpf.Ui.Controls.TextBox? ChainNameTextBox { get; set; }
@@ -432,7 +433,8 @@ public partial class WikiUploadDialog : FluentWindow
             {
                 FilePath = item.FilePath,
                 ChainName = item.DetectedChainName,
-                IsEnabled = item.IsOptimized
+                IsEnabled = item.IsOptimized,
+                IsPartOfSplit = true
             };
             _rows.Add(row);
             subRows.Add(row);
@@ -1142,7 +1144,7 @@ public partial class WikiUploadDialog : FluentWindow
                     }
 
                     // Show conflict dialog
-                    var dlg = new UploadConflictDialog(wikiFilename, remaining, row.FilePath)
+                    var dlg = new UploadConflictDialog(wikiFilename, remaining, row.FilePath, row.IsPartOfSplit, _main.Settings.WikiUsername)
                         { Owner = this };
                     dlg.ShowDialog();
 

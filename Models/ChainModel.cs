@@ -247,6 +247,15 @@ public class ParsedItem
     // Sink (Transformative Item)
     public bool IsSink { get; set; }
     public List<string>? SinkRequirementConfigKeys { get; set; }
+    public Dictionary<string, int>? SinkRequirementAmounts { get; set; }
+    public string? SinkRewardItemType { get; set; }
+
+    // Order features (tasks that require items and give rewards)
+    public bool IsOrder { get; set; }
+    /// <summary>ItemType → total amount required across all order tasks</summary>
+    public Dictionary<string, int>? OrderRequiredItems { get; set; }
+    /// <summary>ItemType → total amount rewarded across all order tasks</summary>
+    public Dictionary<string, int>? OrderRewardItems { get; set; }
 
     /// <summary>Numeric ConfigKey from JSON item (used by SinkFeatures ScoreTargets)</summary>
     public string NumericConfigKey { get; set; } = "";
@@ -266,8 +275,14 @@ public class ParsedItem
     // Speed-up cost in gems (generators only)
     public int? SpeedUpCostGems { get; set; }
 
+    /// <summary>Area variant label for multi-variant chain levels (e.g. "Sauna").</summary>
+    public string? VariantLabel { get; set; }
+
     /// <summary>Whether this item collides (same level) with another item in its chain.</summary>
     public bool IsColliding { get; set; }
+
+    /// <summary>Whether this item is an alias (secondary) in a wiki merge group.</summary>
+    public bool IsAlias { get; set; }
 
     /// <summary>ConfigKey of the original chain this item came from (before wiki mapping merge).</summary>
     public string SourceChainKey { get; set; } = "";

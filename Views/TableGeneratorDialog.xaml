@@ -62,31 +62,36 @@
                         <StackPanel Grid.Column="1">
                             <CheckBox x:Name="chkLowPrices" Content="Low Prices"
                                       ToolTip="Sets all item prices in chain to 1 Coin (for Event Items)"
-                                      ToolTipService.InitialShowDelay="150" />
+                                      ToolTipService.InitialShowDelay="150"
+                                      Checked="ChkOption_Changed" Unchecked="ChkOption_Changed" />
                             <CheckBox x:Name="chkIncludeHeading" Content="Include wiki heading"
                                       Margin="0,4,0,0"
-                                      ToolTip="Prepends == Statistics == and === Merge Stages === above the table" />
+                                      ToolTip="Prepends == Statistics == and === Merge Stages === above the table"
+                                      Checked="ChkOption_Changed" Unchecked="ChkOption_Changed" />
                         </StackPanel>
                     </Grid>
                 </StackPanel>
             </Border>
 
-            <!-- Existing table input -->
-            <Expander Grid.Row="2" Header="Paste existing table (for Speed Up Cost)" Margin="0,0,0,12"
-                      IsExpanded="False">
-                <ui:TextBox x:Name="txtExistingTable"
-                            PlaceholderText="Paste existing wiki table here to extract Speed Up Cost values..."
-                            AcceptsReturn="True" TextWrapping="Wrap"
-                            MinHeight="80" MaxHeight="150"
-                            VerticalContentAlignment="Top"
-                            Margin="0,8,0,0" />
-            </Expander>
+            <!-- Source group selector (visible when chain has level collisions from merged sources) -->
+            <Border x:Name="sourceGroupPanel" Grid.Row="2" Visibility="Collapsed"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    CornerRadius="4" Padding="16,10"
+                    Margin="0,0,0,12"
+                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Source group:" VerticalAlignment="Center" FontSize="13"
+                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,0,12,0"/>
+                    <ComboBox x:Name="cmbSourceGroup" Grid.Column="1"
+                              Height="36" VerticalAlignment="Center"
+                              SelectionChanged="CmbSourceGroup_SelectionChanged"/>
+                </Grid>
+            </Border>
 
-            <!-- Refresh button -->
-            <ui:Button Grid.Row="3" x:Name="btnRefresh" Content="Refresh Table"
-                       Appearance="Primary" Height="42"
-                       HorizontalAlignment="Stretch"
-                       Click="BtnGenerate_Click" Margin="0,0,0,12" />
 
             <!-- Output area -->
             <Border Grid.Row="4" Background="{DynamicResource CardBackgroundFillColorSecondaryBrush}"

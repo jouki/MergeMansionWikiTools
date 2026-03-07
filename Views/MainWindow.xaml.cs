@@ -446,6 +446,7 @@ public partial class MainWindow : FluentWindow
         // ── Phase 1: Apply field overrides per item ──
         // Record each item's wiki-specified chainName (if any)
         var itemWikiChainName = new Dictionary<ParsedItem, string>(); // item → wiki chainName
+        var itemIsAlias = new HashSet<ParsedItem>(); // items marked as alias in wiki mapping
 
         foreach (var chain in DataService.Chains)
         {
@@ -464,6 +465,13 @@ public partial class MainWindow : FluentWindow
                 // Override level
                 if (entry.Level.HasValue)
                     item.Level = entry.Level.Value;
+
+                // Track alias flag
+                if (entry.IsAlias)
+                {
+                    item.IsAlias = true;
+                    itemIsAlias.Add(item);
+                }
 
                 // Record wiki chainName for Phase 2
                 if (!string.IsNullOrEmpty(entry.ChainName))
@@ -559,15 +567,25 @@ public partial class MainWindow : FluentWindow
         }
 
         // ── Phase 5: Detect level collisions ──
+        // Skip collision warnings when all items in a level group are aliases,
+        // or when it's a mix of alias + non-alias items (alias defers to primary).
         foreach (var chain in newChains)
         {
             var levelGroups = chain.Items.GroupBy(i => i.Level).Where(g => g.Count() > 1).ToList();
             if (levelGroups.Count > 0)
             {
-                chain.HasLevelCollisions = true;
+                bool anyRealCollision = false;
                 foreach (var lg in levelGroups)
-                    foreach (var item in lg)
+                {
+                    // Only non-alias items can collide — aliases defer to the primary
+                    var nonAliasItems = lg.Where(item => !itemIsAlias.Contains(item)).ToList();
+                    if (nonAliasItems.Count <= 1) continue;
+
+                    anyRealCollision = true;
+                    foreach (var item in nonAliasItems)
                         item.IsColliding = true;
+                }
+                chain.HasLevelCollisions = anyRealCollision;
             }
         }
 

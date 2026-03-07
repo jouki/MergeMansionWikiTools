@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Windows;
 using MergeMansionWikiTools.Models;
 using MergeMansionWikiTools.Services;
@@ -11,6 +12,7 @@ public partial class TableGeneratorDialog : FluentWindow
 {
     private readonly MainWindow _main;
     private readonly ParsedChain _chain;
+    private ParsedChain _effectiveChain;   // filtered chain for generation
     private string _tableName;
     private string? _wikiNameWarning;
 
@@ -18,6 +20,7 @@ public partial class TableGeneratorDialog : FluentWindow
     {
         _main = main;
         _chain = chain;
+        _effectiveChain = chain;
         _tableName = chain.DisplayName;
 
         InitializeComponent();
@@ -32,10 +35,24 @@ public partial class TableGeneratorDialog : FluentWindow
         chkForceNamePrompt.IsChecked = main.Settings.ForceCustomNamePrompt;
         chkLowPrices.IsChecked = chain.IsEventChain ? true : main.Settings.LowPrices;
 
+        // Source group selector for merged chains with level collisions
+        if (chain.HasLevelCollisions && chain.MergedFromConfigKeys is { Count: > 1 })
+        {
+            sourceGroupPanel.Visibility = Visibility.Visible;
+            cmbSourceGroup.Items.Add("All (merged)");
+            foreach (var key in chain.MergedFromConfigKeys)
+                cmbSourceGroup.Items.Add(key);
+            cmbSourceGroup.SelectedIndex = 0;
+        }
+
         // Check for missing wiki name
         _wikiNameWarning = CheckWikiNameMissing(chain, main);
 
-        Loaded += (_, _) => GenerateTable();
+        Loaded += (_, _) =>
+        {
+            PromptForCustomNameIfNeeded();
+            GenerateTable();
+        };
     }
 
     /// <summary>
@@ -65,51 +82,48 @@ public partial class TableGeneratorDialog : FluentWindow
         _main.SaveSettings();
     }
 
-    private void BtnGenerate_Click(object sender, RoutedEventArgs e)
+    private void PromptForCustomNameIfNeeded()
     {
-        // Save checkbox states
-        _main.Settings.ShowCustomNamePrompt = chkShowNamePrompt.IsChecked == true;
-        _main.Settings.ForceCustomNamePrompt = chkForceNamePrompt.IsChecked == true;
-        _main.Settings.LowPrices = chkLowPrices.IsChecked == true;
-        _main.SaveSettings();
-
-        // ── Custom name prompt logic ──
         bool showPrompt = false;
 
         if (chkShowNamePrompt.IsChecked == true)
         {
-            if (chkForceNamePrompt.IsChecked == true)
-            {
-                showPrompt = true;
-            }
-            else
-            {
-                showPrompt = !_chain.HasNaturalName || string.IsNullOrEmpty(_chain.OriginalName);
-            }
+            showPrompt = chkForceNamePrompt.IsChecked == true
+                || !_chain.HasNaturalName
+                || string.IsNullOrEmpty(_chain.OriginalName);
         }
 
-        if (showPrompt)
+        if (!showPrompt) return;
+
+        bool canWiki = _main.Settings.WikiVerified;
+
+        var nameDialog = new ChainNameDialog(
+            _main.ChainNameService,
+            _chain.ConfigKey,
+            _chain.DisplayName,
+            canWiki);
+        nameDialog.Owner = this;
+
+        if (nameDialog.ShowDialog() == true && !string.IsNullOrWhiteSpace(nameDialog.ChosenName))
         {
-            bool canWiki = _main.Settings.WikiVerified;
+            _tableName = nameDialog.ChosenName;
+            _main.ChainNameService.SetCustomName(_chain.ConfigKey, _tableName);
 
-            var nameDialog = new ChainNameDialog(
-                _main.ChainNameService,
-                _chain.ConfigKey,
-                _chain.DisplayName,
-                canWiki);
-            nameDialog.Owner = this;
-
-            if (nameDialog.ShowDialog() == true && !string.IsNullOrWhiteSpace(nameDialog.ChosenName))
-            {
-                _tableName = nameDialog.ChosenName;
-                _main.ChainNameService.SetCustomName(_chain.ConfigKey, _tableName);
-
-                if (nameDialog.SaveToWiki)
-                    _ = PushNameToWikiAsync(_tableName);
-            }
+            if (nameDialog.SaveToWiki)
+                _ = PushNameToWikiAsync(_tableName);
         }
+    }
 
-        GenerateTable(showNotification: true);
+    private void ChkOption_Changed(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+
+        _main.Settings.LowPrices = chkLowPrices.IsChecked == true;
+        _main.Settings.ShowCustomNamePrompt = chkShowNamePrompt.IsChecked == true;
+        _main.Settings.ForceCustomNamePrompt = chkForceNamePrompt.IsChecked == true;
+        _main.SaveSettings();
+
+        GenerateTable();
     }
 
     private async Task PushNameToWikiAsync(string chainName)
@@ -141,19 +155,40 @@ public partial class TableGeneratorDialog : FluentWindow
         }
     }
 
+    private void CmbSourceGroup_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+    {
+        if (cmbSourceGroup.SelectedIndex <= 0)
+        {
+            // "All (merged)"
+            _effectiveChain = _chain;
+        }
+        else
+        {
+            var selectedKey = (string)cmbSourceGroup.SelectedItem;
+            var filtered = new ParsedChain
+            {
+                ConfigKey = _chain.ConfigKey,
+                DisplayName = _chain.DisplayName,
+                OriginalName = _chain.OriginalName,
+                HasNaturalName = _chain.HasNaturalName,
+                CustomName = _chain.CustomName,
+                IsNameFromWiki = _chain.IsNameFromWiki,
+                Items = _chain.Items.Where(i => i.SourceChainKey == selectedKey).ToList()
+            };
+            _effectiveChain = filtered;
+        }
+        GenerateTable();
+    }
+
     private void GenerateTable(bool showNotification = false)
     {
         try
         {
             var generator = new WikiTableGenerator(_main.DataService!, _main.WikiMapping);
 
-            string? existingTable = string.IsNullOrWhiteSpace(txtExistingTable.Text)
-                ? null
-                : txtExistingTable.Text;
-
             bool lowPrices = chkLowPrices.IsChecked == true;
 
-            var result = generator.Generate(_chain, _tableName, lowPrices, existingTable);
+            var result = generator.Generate(_effectiveChain, _tableName, lowPrices);
 
             // Prepend wiki heading if checked
             if (chkIncludeHeading.IsChecked == true)
@@ -214,7 +249,7 @@ public partial class TableGeneratorDialog : FluentWindow
             {
                 try
                 {
-                    Clipboard.SetDataObject(txtOutput.Text, false);
+                    Clipboard.SetDataObject(txtOutput.Text, true);
                     success = true;
                     Increment(s => s.TablesGenerated++);
                     break;

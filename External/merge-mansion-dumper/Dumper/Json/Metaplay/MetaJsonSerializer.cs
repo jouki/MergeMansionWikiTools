@@ -284,7 +284,7 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
 
             if (directorAction is TriggerDialogue triggerDialogueAction)
             {
-                var storyElements = ClientGlobal.SharedGameConfig.StoryElements;
+                var storyElements = _config.StoryElements;
                 if (storyElements.TryGetValue(triggerDialogueAction.StoryDefinitionId, out var element))
                     WriteObject(writer, element.GetType(), element, serializer);
                 else
