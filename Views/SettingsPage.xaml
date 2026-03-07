@@ -333,6 +333,39 @@
                         </StackPanel>
                     </Border>
 
+                    <!-- UPDATES -->
+                    <StackPanel Orientation="Horizontal" Margin="4,24,0,10">
+                        <ui:SymbolIcon Symbol="ArrowDownload24" FontSize="20" Margin="0,0,8,0"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        <TextBlock Text="Updates" FontSize="16" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                    </StackPanel>
+
+                    <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                            CornerRadius="8"
+                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                        <StackPanel Margin="16,14,16,12">
+                            <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                       TextWrapping="Wrap" Margin="0,0,0,10">
+                                <Run Text="The app checks for updates automatically every 15 minutes. You can also check manually." />
+                            </TextBlock>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock x:Name="txtUpdateStatus" Grid.Column="0" FontSize="12"
+                                           VerticalAlignment="Center"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                                <ui:Button x:Name="btnCheckUpdates" Grid.Column="2"
+                                           Content="Check for Updates" Appearance="Secondary"
+                                           Height="34" Padding="16,0"
+                                           Click="BtnCheckUpdates_Click" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
                 </StackPanel>
             </ScrollViewer>
 

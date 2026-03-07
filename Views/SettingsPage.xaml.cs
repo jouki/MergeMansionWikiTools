@@ -367,6 +367,36 @@ public partial class SettingsPage : UserControl
         _main.SaveSettings();
     }
 
+    // ── Updates ──
+
+    private async void BtnCheckUpdates_Click(object sender, RoutedEventArgs e)
+    {
+        btnCheckUpdates.IsEnabled = false;
+        txtUpdateStatus.Text = "Checking...";
+
+        try
+        {
+            var release = await Services.UpdateService.CheckForUpdateAsync();
+            if (release != null)
+            {
+                txtUpdateStatus.Text = $"New version available: {release.TagName}";
+                _main.ShowUpdateDialog(release);
+            }
+            else
+            {
+                txtUpdateStatus.Text = $"You're up to date ({Models.AppVersion.Version})";
+            }
+        }
+        catch (Exception ex)
+        {
+            txtUpdateStatus.Text = $"Check failed: {ex.Message}";
+        }
+        finally
+        {
+            btnCheckUpdates.IsEnabled = true;
+        }
+    }
+
     // ── Theme ──
 
     private void CmbTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)

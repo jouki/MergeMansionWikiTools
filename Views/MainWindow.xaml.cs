@@ -42,6 +42,7 @@ public partial class MainWindow : FluentWindow
     public event Action? EventsFileChanged;
 
     private bool _wikiMappingApplied;
+    private DispatcherTimer? _updateTimer;
 
     private ChainBrowserPage? _chainPage;
     private ImageOptimiserPage? _imageOptimiserPage;
@@ -90,6 +91,12 @@ public partial class MainWindow : FluentWindow
 
         // Show chains page by default (navList SelectedIndex=0 triggers this)
         ShowChainsPage();
+
+        // Auto-update check: at startup + every 15 minutes
+        _ = CheckForUpdateAsync();
+        _updateTimer = new DispatcherTimer { Interval = TimeSpan.FromMinutes(15) };
+        _updateTimer.Tick += async (_, _) => await CheckForUpdateAsync();
+        _updateTimer.Start();
     }
 
     // ── Windows appearance change detection ──
@@ -721,6 +728,28 @@ public partial class MainWindow : FluentWindow
     public void SaveSettings()
     {
         SettingsService.Save(Settings);
+    }
+
+    // ── Auto-update ──
+
+    private ReleaseInfo? _pendingUpdate;
+
+    public async Task CheckForUpdateAsync()
+    {
+        var release = await UpdateService.CheckForUpdateAsync();
+        if (release == null) return;
+
+        // Don't show the same version again if user already dismissed it
+        if (_pendingUpdate?.TagName == release.TagName) return;
+        _pendingUpdate = release;
+
+        ShowUpdateDialog(release);
+    }
+
+    public void ShowUpdateDialog(ReleaseInfo release)
+    {
+        var dialog = new UpdateDialog(release) { Owner = this };
+        dialog.Show();
     }
 
     /// <summary>
