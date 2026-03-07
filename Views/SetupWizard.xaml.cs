@@ -97,6 +97,19 @@ public partial class SetupWizard : FluentWindow
 
         // Next / Finish
         btnNext.Content = _currentStep == TotalSteps ? "Finish" : "Next";
+
+        UpdateNextButtonState();
+    }
+
+    private void UpdateNextButtonState()
+    {
+        btnNext.IsEnabled = _currentStep switch
+        {
+            1 => !string.IsNullOrWhiteSpace(txtWorkspacePath.Text),
+            3 => !string.IsNullOrWhiteSpace(txtTinifyKey.Text),
+            4 => _botVerified,
+            _ => true
+        };
     }
 
     private void BtnNext_Click(object sender, RoutedEventArgs e)
@@ -209,7 +222,10 @@ public partial class SetupWizard : FluentWindow
             dlg.InitialDirectory = current;
 
         if (dlg.ShowDialog() == true)
+        {
             txtWorkspacePath.Text = dlg.FolderName;
+            UpdateNextButtonState();
+        }
     }
 
     private async Task LoadVersionsAsync()
@@ -439,7 +455,7 @@ public partial class SetupWizard : FluentWindow
 
     // ── Step 3: TinyPNG API Keys ──
 
-    private void TinifyKey_TextChanged(object sender, TextChangedEventArgs e) { }
+    private void TinifyKey_TextChanged(object sender, TextChangedEventArgs e) { UpdateNextButtonState(); }
     private void TinifyKey2_TextChanged(object sender, TextChangedEventArgs e) { }
 
     // ── Step 4: Wiki Bot ──
@@ -474,6 +490,8 @@ public partial class SetupWizard : FluentWindow
         {
             txtWikiBotStatus.Text = "";
         }
+
+        UpdateNextButtonState();
     }
 
     private async void BtnVerifyBot_Click(object sender, RoutedEventArgs e)
