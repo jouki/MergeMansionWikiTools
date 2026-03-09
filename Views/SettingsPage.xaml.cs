@@ -30,6 +30,7 @@ public partial class SettingsPage : UserControl
         txtEventsPath.Text = _main.Settings.EventsJsonPath;
         txtTinifyKey.Text = _main.Settings.TinifyApiKey;
         txtTinifyKey2.Text = _main.Settings.TinifyApiKey2;
+        txtAnthropicKey.Text = _main.Settings.AnthropicApiKey;
         txtImageBasePath.Text = _main.Settings.ImageExporterBasePath;
         // Debug mode
         toggleDebugMode.IsChecked = _main.Settings.DebugMode;
@@ -68,6 +69,17 @@ public partial class SettingsPage : UserControl
 
         // APK version list (fire-and-forget, non-blocking)
         _ = LoadApkVersionsAsync();
+    }
+
+    /// <summary>
+    /// Re-reads file paths from Settings into the TextBoxes.
+    /// Called when navigating to the page or after external path changes.
+    /// </summary>
+    public void RefreshPaths()
+    {
+        txtChainPath.Text = _main.Settings.ChainItemOddsPath;
+        txtAreasPath.Text = _main.Settings.AreasJsonPath;
+        txtEventsPath.Text = _main.Settings.EventsJsonPath;
     }
 
     // ── Tab bar ──
@@ -343,6 +355,12 @@ public partial class SettingsPage : UserControl
         _main.Settings.TinifyApiKey2 = txtTinifyKey2.Text.Trim();
         _main.SaveSettings();
         _main.RaiseTinifyApiKeyChanged();
+    }
+
+    private void AnthropicKey_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        _main.Settings.AnthropicApiKey = txtAnthropicKey.Text.Trim();
+        _main.SaveSettings();
     }
 
     // ── Clipboard settings ──

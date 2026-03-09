@@ -545,6 +545,7 @@ public partial class ImageOptimiserPage : UserControl
         indexInputPanel.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
         btnSplit.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
         btnRefreshDetection.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+        UpdatePredictButtonVisibility();
 
         // Update detection overlay
         UpdateDetectionOverlay();
@@ -926,6 +927,7 @@ public partial class ImageOptimiserPage : UserControl
             indexInputPanel.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
             btnSplit.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
             btnRefreshDetection.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+            UpdatePredictButtonVisibility();
         }
 
         // Update overlay if toggled image is in the displayed cluster
@@ -1430,6 +1432,120 @@ public partial class ImageOptimiserPage : UserControl
 
     private void BtnSplit_Click(object sender, RoutedEventArgs e) => ProcessSplit();
 
+    // ── AI Index Prediction (experimental) ──
+
+    private void UpdatePredictButtonVisibility()
+    {
+        bool show = _activeChain != null
+                     && indexInputPanel.Visibility == Visibility.Visible
+                     && !string.IsNullOrWhiteSpace(_main.Settings.AnthropicApiKey);
+        btnPredictIndices.Visibility = show ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    private async void BtnPredictIndices_Click(object sender, RoutedEventArgs e)
+    {
+        if (_activeChain == null || _selectedCluster == null) return;
+
+        var apiKey = _main.Settings.AnthropicApiKey;
+        if (string.IsNullOrWhiteSpace(apiKey))
+        {
+            infoBar.Message = "Set your Anthropic API key in Settings → Tools first.";
+            infoBar.Severity = InfoBarSeverity.Warning;
+            infoBar.IsOpen = true;
+            return;
+        }
+
+        var scissorsImages = _selectedCluster.Images.Where(i => i.IsScissorsActive).ToList();
+        if (scissorsImages.Count == 0) return;
+
+        // Collect all detected objects across scissors-active images
+        var allObjects = new List<(OptimiserImage Img, SixLabors.ImageSharp.Rectangle Rect)>();
+        foreach (var oi in scissorsImages)
+            foreach (var (full, _) in oi.DetectedObjects)
+                allObjects.Add((oi, full));
+
+        if (allObjects.Count == 0)
+        {
+            infoBar.Message = "No detected objects to predict.";
+            infoBar.Severity = InfoBarSeverity.Warning;
+            infoBar.IsOpen = true;
+            return;
+        }
+
+        // Build candidate names from chain items (Level → Name)
+        var chainItems = _activeChain.Items.OrderBy(i => i.Level).ToList();
+        var candidateNames = chainItems.Select(i => i.Name ?? i.ItemType ?? $"Level {i.Level}").ToList();
+
+        // Crop each detected object to PNG bytes
+        var croppedImages = new List<byte[]>();
+        foreach (var (oi, rect) in allObjects)
+        {
+            try
+            {
+                croppedImages.Add(ImagePredictionService.CropRegionToPng(oi.FilePath, rect));
+            }
+            catch
+            {
+                croppedImages.Add(Array.Empty<byte>());
+            }
+        }
+
+        // Disable button during prediction
+        btnPredictIndices.IsEnabled = false;
+        btnPredictIndices.Content = "Predicting...";
+        infoBar.Message = $"Sending {croppedImages.Count} images to Claude Haiku...";
+        infoBar.Severity = InfoBarSeverity.Informational;
+        infoBar.IsOpen = true;
+
+        try
+        {
+            var predictions = await ImagePredictionService.PredictItemsAsync(
+                apiKey, croppedImages, candidateNames);
+
+            // Map predicted names back to chain levels
+            var indices = new List<string>();
+            int matched = 0;
+            for (int i = 0; i < predictions.Length; i++)
+            {
+                var pred = predictions[i];
+                if (pred != null)
+                {
+                    var item = chainItems.FirstOrDefault(ci =>
+                        string.Equals(ci.Name, pred, StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(ci.ItemType, pred, StringComparison.OrdinalIgnoreCase));
+                    if (item != null)
+                    {
+                        indices.Add(item.Level.ToString());
+                        matched++;
+                        continue;
+                    }
+                }
+                indices.Add("-"); // unknown → skip
+            }
+
+            inputIndices.Text = string.Join(" ", indices);
+            _selectedCluster.IndexText = inputIndices.Text;
+
+            infoBar.Message = $"Predicted {matched}/{predictions.Length} items successfully.";
+            infoBar.Severity = matched == predictions.Length ? InfoBarSeverity.Success : InfoBarSeverity.Warning;
+            infoBar.IsOpen = true;
+
+            AppLogger.Info($"AI prediction: {matched}/{predictions.Length} matched for chain '{_activeChain.ConfigKey}'");
+        }
+        catch (Exception ex)
+        {
+            infoBar.Message = $"Prediction failed: {ex.Message}";
+            infoBar.Severity = InfoBarSeverity.Error;
+            infoBar.IsOpen = true;
+            AppLogger.Error($"AI prediction error: {ex.Message}");
+        }
+        finally
+        {
+            btnPredictIndices.IsEnabled = true;
+            btnPredictIndices.Content = "Predict";
+        }
+    }
+
     private void BtnRefreshDetection_Click(object sender, RoutedEventArgs e)
     {
         if (_selectedCluster == null) return;
@@ -1741,6 +1857,7 @@ public partial class ImageOptimiserPage : UserControl
 
         // Try to find matching atlas image in Export folder
         TrySuggestChainImage(chain);
+        UpdatePredictButtonVisibility();
     }
 
     private void BtnExitChainMode_Click(object sender, RoutedEventArgs e)
@@ -1749,6 +1866,7 @@ public partial class ImageOptimiserPage : UserControl
         _resolvedFilenameBase = null;
         chainModeBanner.Visibility = Visibility.Collapsed;
         DismissSuggestion();
+        UpdatePredictButtonVisibility();
     }
 
     private void TrySuggestChainImage(ParsedChain chain)
@@ -1797,8 +1915,9 @@ public partial class ImageOptimiserPage : UserControl
         if (string.IsNullOrEmpty(_suggestedImagePath) || !File.Exists(_suggestedImagePath))
             return;
 
+        var path = _suggestedImagePath;
         DismissSuggestion();
-        AddImages(new[] { _suggestedImagePath });
+        AddImages(new[] { path });
         ProcessSplit();
     }
 

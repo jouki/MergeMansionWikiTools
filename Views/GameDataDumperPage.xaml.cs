@@ -755,6 +755,7 @@ public partial class GameDataDumperPage : UserControl
         resultInfoBar.IsOpen = true;
 
         AppLogger.Info($"Loaded dumped files from {dumpDir}: {string.Join(", ", loaded)}");
+        _main.RefreshSettingsPaths();
     }
 
     // ── Split button helpers ──────────────────────────────────────

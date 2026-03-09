@@ -100,7 +100,7 @@ namespace MergeMansionWikiTools
         private const uint CF_UNICODETEXT = 13;
         private const uint GMEM_MOVEABLE = 0x0002;
 
-        private static bool NativeSetClipboardText(string text)
+        internal static bool NativeSetClipboardText(string text)
         {
             if (!OpenClipboard(IntPtr.Zero))
                 return false;

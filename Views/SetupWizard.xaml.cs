@@ -106,6 +106,9 @@ public partial class SetupWizard : FluentWindow
         btnNext.IsEnabled = _currentStep switch
         {
             1 => !string.IsNullOrWhiteSpace(txtWorkspacePath.Text),
+            2 => !string.IsNullOrWhiteSpace(txtChainPath.Text)
+              || !string.IsNullOrWhiteSpace(txtAreasPath.Text)
+              || !string.IsNullOrWhiteSpace(txtEventsPath.Text),
             3 => !string.IsNullOrWhiteSpace(txtTinifyKey.Text),
             4 => _botVerified,
             _ => true
@@ -432,25 +435,26 @@ public partial class SetupWizard : FluentWindow
             }
         }
 
+        UpdateNextButtonState();
         e.Handled = true;
     }
 
     private void BrowseChainFile_Click(object sender, RoutedEventArgs e)
     {
         var path = BrowseJsonFile("Select chain_item_odds.json");
-        if (path != null) txtChainPath.Text = path;
+        if (path != null) { txtChainPath.Text = path; UpdateNextButtonState(); }
     }
 
     private void BrowseAreasFile_Click(object sender, RoutedEventArgs e)
     {
         var path = BrowseJsonFile("Select areas.json");
-        if (path != null) txtAreasPath.Text = path;
+        if (path != null) { txtAreasPath.Text = path; UpdateNextButtonState(); }
     }
 
     private void BrowseEventsFile_Click(object sender, RoutedEventArgs e)
     {
         var path = BrowseJsonFile("Select events.json");
-        if (path != null) txtEventsPath.Text = path;
+        if (path != null) { txtEventsPath.Text = path; UpdateNextButtonState(); }
     }
 
     // ── Step 3: TinyPNG API Keys ──

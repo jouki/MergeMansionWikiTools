@@ -291,8 +291,11 @@ public partial class MainWindow : FluentWindow
     private void ShowSettingsPage()
     {
         _settingsPage ??= new SettingsPage(this);
+        _settingsPage.RefreshPaths();
         contentArea.Content = _settingsPage;
     }
+
+    public void RefreshSettingsPaths() => _settingsPage?.RefreshPaths();
 
     private void ShowAboutPage()
     {

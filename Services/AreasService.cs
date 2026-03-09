@@ -92,8 +92,9 @@ public class AreasService
 
         if (string.IsNullOrEmpty(name)) return null;
 
-        // Local hotspots first, with global fallback for cross-area tasks
+        // Local hotspots first, merge multi-step CardStack groups, then global fallback
         var hotspots = BuildHotspotsLookup(el);
+        MergeMultistepCardStackGroups(el, hotspots);
         if (globalHotspots != null)
             foreach (var kv in globalHotspots)
                 hotspots.TryAdd(kv.Key, kv.Value);
@@ -187,9 +188,133 @@ public class AreasService
                 if (!string.IsNullOrEmpty(type))
                     reqs[type] = amount;
             }
+            else if (req.TryGetProperty("CardStack", out _))
+            {
+                // CardStack requirement — extract items from CardStackRef.Cards
+                ParseCardStackCards(hs, reqs);
+            }
         }
 
         return reqs;
+    }
+
+    private static void ParseCardStackCards(JsonElement hs, Dictionary<string, int> reqs)
+    {
+        if (!hs.TryGetProperty("CardStackRef", out var stackRef) ||
+            stackRef.ValueKind != JsonValueKind.Object)
+            return;
+
+        if (!stackRef.TryGetProperty("Cards", out var cards) ||
+            cards.ValueKind != JsonValueKind.Array)
+            return;
+
+        // Group cards by Row (sequence layer)
+        var rowItems = new Dictionary<int, Dictionary<string, int>>();
+        foreach (var card in cards.EnumerateArray())
+        {
+            if (!card.TryGetProperty("ItemDef", out var itemDef) ||
+                itemDef.ValueKind != JsonValueKind.Object)
+                continue;
+
+            var itemType = GetStr(itemDef, "ItemType");
+            if (string.IsNullOrEmpty(itemType)) continue;
+
+            var row = card.TryGetProperty("Row", out var rowEl) ? rowEl.GetInt32() : 0;
+
+            if (!rowItems.TryGetValue(row, out var items))
+                rowItems[row] = items = new Dictionary<string, int>(StringComparer.Ordinal);
+
+            items[itemType] = items.GetValueOrDefault(itemType) + 1;
+        }
+
+        // Pair cancellation: within each sequence, identical pairs cancel out.
+        // Only items with odd count contribute (count % 2 == 1 → need 1).
+        foreach (var (_, items) in rowItems)
+        {
+            foreach (var (itemType, count) in items)
+            {
+                var needed = count % 2;
+                if (needed > 0)
+                    reqs[itemType] = reqs.GetValueOrDefault(itemType) + needed;
+            }
+        }
+    }
+
+    /// <summary>
+    /// For CardStack tasks sharing a MultistepGroupId (e.g. Lounge poker, Speakeasy cards),
+    /// merges all card requirements into the final task and removes intermediate tasks.
+    /// The "final" task is the one not referenced as a parent by any other group member.
+    /// Intermediate tasks are removed from the lookup and will be filtered out as empty.
+    /// </summary>
+    private static void MergeMultistepCardStackGroups(
+        JsonElement areaEl,
+        Dictionary<string, HotspotInfo> hotspots)
+    {
+        if (!areaEl.TryGetProperty("HotspotsRefs", out var hsArray) ||
+            hsArray.ValueKind != JsonValueKind.Array)
+            return;
+
+        // Collect MultistepGroupId and parent refs for CardStack hotspots
+        var groupMembers = new Dictionary<string, List<string>>(StringComparer.Ordinal);
+        var parentRefs = new Dictionary<string, List<string>>(StringComparer.Ordinal);
+
+        foreach (var hs in hsArray.EnumerateArray())
+        {
+            var id = GetStr(hs, "Id");
+            var type = GetStr(hs, "Type");
+            var groupId = GetStr(hs, "MultistepGroupId");
+
+            if (type != "CardStack" || string.IsNullOrEmpty(groupId)) continue;
+
+            if (!groupMembers.TryGetValue(groupId, out var members))
+                groupMembers[groupId] = members = new();
+            members.Add(id);
+
+            if (hs.TryGetProperty("UnlockingParentRefs", out var parArr) &&
+                parArr.ValueKind == JsonValueKind.Array)
+            {
+                var parents = new List<string>();
+                foreach (var p in parArr.EnumerateArray())
+                    if (p.ValueKind == JsonValueKind.String)
+                        parents.Add(p.GetString()!);
+                parentRefs[id] = parents;
+            }
+        }
+
+        foreach (var (groupId, members) in groupMembers)
+        {
+            if (members.Count <= 1) continue;
+
+            // Final task = the one NOT referenced as parent by any other group member
+            var memberSet = new HashSet<string>(members, StringComparer.Ordinal);
+            var referencedAsParent = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var id in members)
+            {
+                if (!parentRefs.TryGetValue(id, out var parents)) continue;
+                foreach (var p in parents)
+                    if (memberSet.Contains(p))
+                        referencedAsParent.Add(p);
+            }
+
+            var finalId = members.FirstOrDefault(id => !referencedAsParent.Contains(id));
+            if (finalId == null || !hotspots.TryGetValue(finalId, out var finalInfo)) continue;
+
+            // Merge requirements from all intermediate tasks into the final task
+            var mergedReqs = new Dictionary<string, int>(finalInfo.Requirements, StringComparer.Ordinal);
+            foreach (var id in members)
+            {
+                if (id == finalId) continue;
+                if (!hotspots.TryGetValue(id, out var memberInfo)) continue;
+
+                foreach (var (key, amount) in memberInfo.Requirements)
+                    mergedReqs[key] = mergedReqs.GetValueOrDefault(key) + amount;
+
+                // Remove intermediate task — it will be filtered as empty in ParseTaskDependencies
+                hotspots.Remove(id);
+            }
+
+            hotspots[finalId] = finalInfo with { Requirements = mergedReqs };
+        }
     }
 
     private static (int? xp, string? item) ParseHotspotRewards(JsonElement hs)

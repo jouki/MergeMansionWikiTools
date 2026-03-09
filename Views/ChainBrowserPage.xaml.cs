@@ -618,7 +618,7 @@ public partial class ChainBrowserPage : UserControl
             }
         }
 
-        // Set Level visible only when exactly 1 item checked
+        // Set Level / Rename Item visible only when exactly 1 item checked
         bool wikiVerified = _main.Settings.WikiVerified;
         foreach (var child in actionBar.Children)
         {
@@ -626,7 +626,7 @@ public partial class ChainBrowserPage : UserControl
             {
                 if (btn.Content is string content)
                 {
-                    if (content == "Set Level")
+                    if (content is "Set Level" or "Rename Item")
                     {
                         btn.Visibility = count == 1 ? Visibility.Visible : Visibility.Collapsed;
                         btn.IsEnabled = wikiVerified;
@@ -978,6 +978,142 @@ public partial class ChainBrowserPage : UserControl
         {
             _ = RefreshAfterWikiChange();
         }
+    }
+
+    private async void BtnRenameItem_Click(object sender, RoutedEventArgs e)
+    {
+        var chainVm = GetChainVmFromButton(sender);
+        if (chainVm == null) return;
+
+        var checkedItems = chainVm.Items.Where(i => i.IsChecked).ToList();
+        if (checkedItems.Count != 1) return;
+
+        var item = checkedItems[0].Source;
+        var newName = ShowRenameDialog(item.Name, item.ItemType);
+        if (newName == null) return;
+
+        try
+        {
+            await WikiMappingService.PushItemNameAsync(
+                _main.Settings.WikiUsername, _main.Settings.WikiPassword,
+                item.ItemType, newName);
+            _main.ShowStatus($"Renamed {item.ItemType} → \"{newName}\"", InfoBarSeverity.Success);
+            _ = RefreshAfterWikiChange();
+        }
+        catch (Exception ex)
+        {
+            _main.ShowStatus($"Rename failed: {ex.Message}", InfoBarSeverity.Error);
+        }
+    }
+
+    /// <summary>
+    /// Shows a simple rename dialog. Returns the new name, or null if cancelled.
+    /// </summary>
+    private string? ShowRenameDialog(string currentName, string itemType)
+    {
+        string? result = null;
+
+        var window = new Wpf.Ui.Controls.FluentWindow
+        {
+            Title = "Rename Item",
+            Width = 420,
+            Height = 210,
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
+            ResizeMode = ResizeMode.NoResize,
+            Owner = Window.GetWindow(this),
+            ExtendsContentIntoTitleBar = true,
+            WindowBackdropType = Wpf.Ui.Controls.WindowBackdropType.Mica,
+        };
+        ApplicationThemeManager.Apply(window);
+
+        // --- Grid layout: Row 0 = TitleBar, Row 1 = content ---
+        var grid = new Grid();
+        grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+        grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+
+        var titleBar = new Wpf.Ui.Controls.TitleBar
+        {
+            Title = "Rename Item",
+            Height = 36,
+        };
+        Grid.SetRow(titleBar, 0);
+        grid.Children.Add(titleBar);
+
+        // --- Content ---
+        var contentPanel = new StackPanel { Margin = new Thickness(24, 10, 24, 20) };
+
+        var label = new TextBlock
+        {
+            Text = itemType,
+            FontSize = 12,
+            Margin = new Thickness(0, 0, 0, 6),
+        };
+        label.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorSecondaryBrush");
+
+        var textBox = new Wpf.Ui.Controls.TextBox
+        {
+            Text = currentName,
+            PlaceholderText = "Item name...",
+            FontSize = 14,
+        };
+
+        var btnSave = new Wpf.Ui.Controls.Button
+        {
+            Content = "Save",
+            Appearance = ControlAppearance.Primary,
+            Padding = new Thickness(20, 6, 20, 6),
+            Margin = new Thickness(0, 0, 8, 0),
+        };
+
+        var btnCancel = new Wpf.Ui.Controls.Button
+        {
+            Content = "Cancel",
+            Padding = new Thickness(20, 6, 20, 6),
+        };
+
+        var buttonPanel = new StackPanel
+        {
+            Orientation = Orientation.Horizontal,
+            HorizontalAlignment = HorizontalAlignment.Right,
+            Margin = new Thickness(0, 12, 0, 0),
+        };
+        buttonPanel.Children.Add(btnSave);
+        buttonPanel.Children.Add(btnCancel);
+
+        contentPanel.Children.Add(label);
+        contentPanel.Children.Add(textBox);
+        contentPanel.Children.Add(buttonPanel);
+
+        Grid.SetRow(contentPanel, 1);
+        grid.Children.Add(contentPanel);
+
+        window.Content = grid;
+
+        btnSave.Click += (_, _) =>
+        {
+            var name = textBox.Text.Trim();
+            if (!string.IsNullOrEmpty(name))
+            {
+                result = name;
+                window.DialogResult = true;
+            }
+        };
+        btnCancel.Click += (_, _) => window.DialogResult = false;
+
+        textBox.Loaded += (_, _) =>
+        {
+            textBox.Focus();
+            textBox.SelectAll();
+        };
+
+        // Enter = Save, Escape = Cancel
+        window.PreviewKeyDown += (_, ke) =>
+        {
+            if (ke.Key == Key.Enter) { btnSave.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent)); ke.Handled = true; }
+            else if (ke.Key == Key.Escape) { window.DialogResult = false; ke.Handled = true; }
+        };
+
+        return window.ShowDialog() == true ? result : null;
     }
 
     private async Task RefreshAfterWikiChange()

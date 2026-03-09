@@ -2,7 +2,7 @@ namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.15.2";
+    public const string Version = "v0.15.4";
 }
 
 public class AppSettings
@@ -85,6 +85,9 @@ public class AppSettings
     public bool EventOthers { get; set; } = true;
     public bool EventUncategorised { get; set; } = true;
     public bool EventSubExpanded { get; set; } = false;
+
+    // AI / Experimental
+    public string AnthropicApiKey { get; set; } = "";
 
     // Appearance
     public string ThemePreference { get; set; } = "System"; // "System", "Light", "Dark"

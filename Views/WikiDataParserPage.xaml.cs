@@ -314,6 +314,10 @@ public partial class WikiDataParserPage : UserControl
             var content = await WikiMappingService.FetchModuleContentAsync("Module:Datatable/Areas/1");
             if (content == null) return;
 
+            // Version check — block if wiki was uploaded by a newer MMWT version
+            if (CheckWikiVersionNewer(content, btnUpdateWiki, iconAreasDateState))
+                return;
+
             var wikiDate = WikiMappingService.ExtractCreatedAtFromContent(content);
             if (wikiDate != null)
             {
@@ -338,6 +342,10 @@ public partial class WikiDataParserPage : UserControl
             var wikiContent = await WikiMappingService.FetchModuleContentAsync(ItemsModuleTitle);
             if (wikiContent == null) return;
 
+            // Version check — block if wiki was uploaded by a newer MMWT version
+            if (CheckWikiVersionNewer(wikiContent, btnUpdateItemsWiki, iconItemsDateState))
+                return;
+
             var wikiDate = WikiMappingService.ExtractCreatedAtFromContent(wikiContent);
             if (wikiDate != null)
             {
@@ -351,6 +359,32 @@ public partial class WikiDataParserPage : UserControl
             }
         }
         catch { }
+    }
+
+    /// <summary>
+    /// Checks if the wiki module was uploaded by a newer MMWT version.
+    /// Returns true (and sets button to error state) if the local version is older.
+    /// If the wiki has no version tag, returns false (allows upload).
+    /// </summary>
+    private bool CheckWikiVersionNewer(string wikiContent,
+        Wpf.Ui.Controls.Button btn, Wpf.Ui.Controls.SymbolIcon dateIcon)
+    {
+        var wikiVersion = WikiMappingService.ExtractMmwtVersionFromContent(wikiContent);
+        if (wikiVersion == null) return false; // no version on wiki → allow
+
+        try
+        {
+            var cmp = WikiMappingService.CompareVersions(Models.AppVersion.Version, wikiVersion);
+            if (cmp < 0)
+            {
+                SetButtonOlderState(btn, dateIcon,
+                    $"Wiki was updated by a newer MMWT version ({wikiVersion}), you have {Models.AppVersion.Version}");
+                return true;
+            }
+        }
+        catch { } // malformed version → allow
+
+        return false;
     }
 
     /// <summary>
@@ -1581,7 +1615,7 @@ public partial class WikiDataParserPage : UserControl
         string capturedLabel = label;
         copyBtn.Click += (_, _) =>
         {
-            Clipboard.SetDataObject(capturedLua, true);
+            App.NativeSetClipboardText(capturedLua);
             var desc = capturedIsArbiter ? "Arbiter" : $"Chunk {capturedLabel}";
             ShowInfo($"{desc} copied to clipboard.", InfoBarSeverity.Success);
         };
@@ -1753,7 +1787,7 @@ public partial class WikiDataParserPage : UserControl
             string capturedLua = lua;
             copyBtn.Click += (_, _) =>
             {
-                Clipboard.SetDataObject(capturedLua, true);
+                App.NativeSetClipboardText(capturedLua);
                 ShowInfo("Arbiter copied to clipboard.", InfoBarSeverity.Success);
             };
         }
@@ -2169,7 +2203,7 @@ public partial class WikiDataParserPage : UserControl
             System.Windows.Documents.Run? copiedRun = null;
             idRun.MouseLeftButtonDown += (s, e) =>
             {
-                Clipboard.SetDataObject(tid, true);
+                App.NativeSetClipboardText(tid);
                 if (copiedRun != null) return;
                 copiedRun = new System.Windows.Documents.Run("  Copied!")
                 {
@@ -2819,7 +2853,7 @@ public partial class WikiDataParserPage : UserControl
     {
         if (index >= 0 && index < _lastChunks.Count)
         {
-            Clipboard.SetDataObject(_lastChunks[index].Lua, true);
+            App.NativeSetClipboardText(_lastChunks[index].Lua);
             ShowInfo($"Chunk \"{_lastChunks[index].Label}\" copied to clipboard.", InfoBarSeverity.Success);
         }
     }
@@ -2828,14 +2862,14 @@ public partial class WikiDataParserPage : UserControl
     {
         if (!string.IsNullOrEmpty(_lastCombined))
         {
-            Clipboard.SetDataObject(_lastCombined, true);
+            App.NativeSetClipboardText(_lastCombined);
             ShowInfo("Items + Chain Names copied to clipboard.", InfoBarSeverity.Success);
         }
         else if (_lastItemChunks.Count > 0)
         {
             // Multi-chunk: copy all chunks concatenated (for manual use)
             var all = string.Join("\n\n", _lastItemChunks.Select(c => c.Lua));
-            Clipboard.SetDataObject(all, true);
+            App.NativeSetClipboardText(all);
             ShowInfo($"All {_lastItemChunks.Count} item chunks copied to clipboard.", InfoBarSeverity.Success);
         }
     }

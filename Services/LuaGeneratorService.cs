@@ -10,6 +10,18 @@ public record ItemChunksResult(
 
 public class LuaGeneratorService
 {
+    /// <summary>
+    /// Builds the standard Lua header comments (createdAt + mmwtVersion).
+    /// </summary>
+    private static string BuildLuaHeader(string? createdAt)
+    {
+        var sb = new StringBuilder();
+        if (!string.IsNullOrEmpty(createdAt))
+            sb.Append($"-- createdAt: {createdAt}\n");
+        sb.Append($"-- mmwtVersion: {AppVersion.Version}\n");
+        return sb.ToString();
+    }
+
     // ── Area Lua ──────────────────────────────────────────────────────
 
     /// <summary>
@@ -72,8 +84,7 @@ public class LuaGeneratorService
     private static string GenerateAreasLua(List<LuaArea> areas, int startIdx, int endIdx, string? createdAt = null)
     {
         var sb = new StringBuilder();
-        if (!string.IsNullOrEmpty(createdAt))
-            sb.Append($"-- createdAt: {createdAt}\n");
+        sb.Append(BuildLuaHeader(createdAt));
         sb.Append("local p = {}\n\np.areas = {");
 
         var count = endIdx - startIdx + 1;
@@ -116,8 +127,7 @@ public class LuaGeneratorService
     private static string BuildAreaWrapper(string content, string? createdAt)
     {
         var sb = new StringBuilder();
-        if (!string.IsNullOrEmpty(createdAt))
-            sb.Append($"-- createdAt: {createdAt}\n");
+        sb.Append(BuildLuaHeader(createdAt));
         sb.Append($"local p = {{}}\n\np.areas = {{{content}\n}}\n\nreturn p");
         return sb.ToString();
     }
@@ -234,7 +244,7 @@ public class LuaGeneratorService
         var itemsBlock = BuildItemsTable(items);
         var chainNamesBlock = BuildChainNamesTable(items);
 
-        var prefix = !string.IsNullOrEmpty(createdAt) ? $"-- createdAt: {createdAt}\n" : "";
+        var prefix = BuildLuaHeader(createdAt);
         return $"{prefix}local str = require('Module:Strings')\nlocal p = {{}}\n\n{itemsBlock}\n\n{chainNamesBlock}\n\nreturn p";
     }
 
@@ -260,7 +270,7 @@ public class LuaGeneratorService
         var eventItemsBlock = BuildItemsTable(eventItems);
         var chainNamesBlock = BuildChainNamesTable(allItems);
 
-        var prefix = !string.IsNullOrEmpty(createdAt) ? $"-- createdAt: {createdAt}\n" : "";
+        var prefix = BuildLuaHeader(createdAt);
 
         // Build full single module to measure size
         var combinedItemsBlock = BuildItemsTable(allItems);

@@ -374,8 +374,9 @@ public static class WikiMappingService
             break;
         }
 
-        // 2. Modify Lua
-        var updatedLua = UpdateLuaEntry(currentLua, items, chainName);
+        // 2. Version check + modify Lua
+        ThrowIfNewerVersion(currentLua);
+        var updatedLua = EnsureMmwtVersionHeader(UpdateLuaEntry(currentLua, items, chainName));
 
         // 3. Get CSRF token
         var csrfJson = await client.GetStringAsync(
@@ -587,8 +588,9 @@ public static class WikiMappingService
             break;
         }
 
-        // 2. Modify Lua
-        var updatedLua = UpdateLuaEntryAlias(currentLua, primaryChain, aliasChains, mergedName);
+        // 2. Version check + modify Lua
+        ThrowIfNewerVersion(currentLua);
+        var updatedLua = EnsureMmwtVersionHeader(UpdateLuaEntryAlias(currentLua, primaryChain, aliasChains, mergedName));
 
         // 3. Get CSRF token + edit
         var csrfToken = await GetCsrfTokenAsync(client);
@@ -638,7 +640,8 @@ public static class WikiMappingService
             break;
         }
 
-        // 2. Only add alias entries (don't touch existing items)
+        // 2. Version check + add alias entries
+        ThrowIfNewerVersion(currentLua);
         var escapedName = existingChainName.Replace("\"", "\\\"");
         var lua = currentLua;
 
@@ -692,6 +695,7 @@ public static class WikiMappingService
         }
 
         // 3. Get CSRF token + edit
+        lua = EnsureMmwtVersionHeader(lua);
         var csrfToken = await GetCsrfTokenAsync(client);
 
         var chainKeys = aliasChains.Select(c => c.ConfigKey);
@@ -738,8 +742,9 @@ public static class WikiMappingService
             break;
         }
 
-        // 2. Modify Lua
-        var updatedLua = UpdateLuaEntry(currentLua, items, chainName, level);
+        // 2. Version check + modify Lua
+        ThrowIfNewerVersion(currentLua);
+        var updatedLua = EnsureMmwtVersionHeader(UpdateLuaEntry(currentLua, items, chainName, level));
 
         // 3. Get CSRF token
         var csrfToken = await GetCsrfTokenAsync(client);
@@ -767,6 +772,105 @@ public static class WikiMappingService
 
         if (editDoc.RootElement.TryGetProperty("error", out var error))
             throw new Exception($"Wiki edit failed: {error.GetProperty("info").GetString()}");
+    }
+
+    /// <summary>
+    /// Pushes an item name change to the wiki Lua module.
+    /// Updates the "name" field in Module:Datatable/Items/Mapping.
+    /// </summary>
+    public static async Task PushItemNameAsync(
+        string username, string password, string itemType, string newName)
+    {
+        using var client = await CreateAuthenticatedClientAsync(username, password);
+
+        // 1. Fetch current Lua content
+        var luaJson = await client.GetStringAsync(ApiUrl);
+        var luaDoc = JsonDocument.Parse(luaJson);
+        var pages = luaDoc.RootElement.GetProperty("query").GetProperty("pages");
+        string currentLua = "";
+        foreach (var page in pages.EnumerateObject())
+        {
+            currentLua = page.Value.GetProperty("revisions")[0]
+                .GetProperty("slots").GetProperty("main")
+                .GetProperty("*").GetString() ?? "";
+            break;
+        }
+
+        // 2. Version check + modify Lua
+        ThrowIfNewerVersion(currentLua);
+        var updatedLua = EnsureMmwtVersionHeader(UpdateLuaItemName(currentLua, itemType, newName));
+
+        // 3. Get CSRF token
+        var csrfToken = await GetCsrfTokenAsync(client);
+
+        // 4. Edit page
+        var summary = $"Rename {itemType} → \"{newName}\" (via MergeMansionWikiTools)";
+        var editContent = new FormUrlEncodedContent(new Dictionary<string, string>
+        {
+            ["action"] = "edit",
+            ["title"] = "Module:Datatable/Items/Mapping",
+            ["text"] = updatedLua,
+            ["token"] = csrfToken,
+            ["summary"] = summary,
+            ["bot"] = "1",
+            ["format"] = "json",
+        });
+        var editResp = await client.PostAsync(BaseApiUrl, editContent);
+        var editDoc = JsonDocument.Parse(await editResp.Content.ReadAsStringAsync());
+
+        if (editDoc.RootElement.TryGetProperty("error", out var error))
+            throw new Exception($"Wiki edit failed: {error.GetProperty("info").GetString()}");
+    }
+
+    /// <summary>
+    /// Updates or adds the "name" field for a single item in the Lua module source.
+    /// </summary>
+    private static string UpdateLuaItemName(string lua, string itemType, string newName)
+    {
+        var escapedType = Regex.Escape(itemType);
+        var escapedName = newName.Replace("\"", "\\\"");
+        var entryRegex = new Regex(
+            @"(\[""" + escapedType + @"""\]\s*=\s*\{)([^}]*)(})",
+            RegexOptions.None);
+
+        if (entryRegex.IsMatch(lua))
+        {
+            lua = entryRegex.Replace(lua, m =>
+            {
+                var prefix = m.Groups[1].Value;
+                var body = m.Groups[2].Value;
+                var suffix = m.Groups[3].Value;
+
+                // Update or add name field
+                var nameRegex = new Regex(@"name\s*=\s*""[^""]*""");
+                if (nameRegex.IsMatch(body))
+                    body = nameRegex.Replace(body, $"name = \"{escapedName}\"");
+                else
+                {
+                    // Insert after chainName if it exists, otherwise at start
+                    var chainNameMatch = Regex.Match(body, @"chainName\s*=\s*""[^""]*""");
+                    if (chainNameMatch.Success)
+                    {
+                        var insertAt = chainNameMatch.Index + chainNameMatch.Length;
+                        body = body.Insert(insertAt, $", name = \"{escapedName}\"");
+                    }
+                    else
+                        body = $"name = \"{escapedName}\", " + body.TrimStart();
+                }
+
+                return prefix + body + suffix;
+            });
+        }
+        else
+        {
+            // Entry doesn't exist — add with just name field
+            var newEntry = $"\t[\"{itemType}\"] = {{name = \"{escapedName}\"}},\n";
+            var lastBrace = lua.LastIndexOf('}');
+            if (lastBrace >= 0)
+                lua = lua.Insert(lastBrace, newEntry);
+        }
+
+        return lua;
     }
 
     /// <summary>
@@ -1433,6 +1537,71 @@ public static class WikiMappingService
         if (firstLine.StartsWith("-- createdAt: "))
             return firstLine["-- createdAt: ".Length..].Trim();
         return null;
+    }
+
+    /// <summary>
+    /// Extracts the mmwtVersion from a module content's header comments.
+    /// </summary>
+    public static string? ExtractMmwtVersionFromContent(string? content)
+    {
+        if (string.IsNullOrEmpty(content)) return null;
+        foreach (var line in content.Split('\n'))
+        {
+            var trimmed = line.Trim();
+            if (trimmed.StartsWith("-- mmwtVersion: "))
+                return trimmed["-- mmwtVersion: ".Length..].Trim();
+            if (!trimmed.StartsWith("--"))
+                break; // only check header comments
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Compares two version strings (e.g. "v0.15.0", "v0.16.0").
+    /// Returns negative if v1 &lt; v2, 0 if equal, positive if v1 &gt; v2.
+    /// </summary>
+    public static int CompareVersions(string v1, string v2)
+    {
+        var a = Version.Parse(v1.TrimStart('v'));
+        var b = Version.Parse(v2.TrimStart('v'));
+        return a.CompareTo(b);
+    }
+
+    /// <summary>
+    /// Throws if the wiki module was uploaded by a newer MMWT version.
+    /// No-op if the wiki has no version tag.
+    /// </summary>
+    private static void ThrowIfNewerVersion(string lua)
+    {
+        var wikiVersion = ExtractMmwtVersionFromContent(lua);
+        if (wikiVersion == null) return;
+
+        try
+        {
+            if (CompareVersions(AppVersion.Version, wikiVersion) < 0)
+                throw new InvalidOperationException(
+                    $"Wiki module was updated by a newer MMWT version ({wikiVersion}). Update your app ({AppVersion.Version}) first.");
+        }
+        catch (FormatException) { } // malformed version → allow
+    }
+
+    /// <summary>
+    /// Ensures the Lua content has a current mmwtVersion header comment.
+    /// Adds or updates the "-- mmwtVersion:" line.
+    /// </summary>
+    private static string EnsureMmwtVersionHeader(string lua)
+    {
+        var versionTag = $"-- mmwtVersion: {AppVersion.Version}";
+        var existing = ExtractMmwtVersionFromContent(lua);
+        if (existing != null)
+        {
+            // Replace existing version line
+            var regex = new Regex(@"-- mmwtVersion: .*");
+            return regex.Replace(lua, versionTag, 1);
+        }
+
+        // Add as first line (or after createdAt if present)
+        return versionTag + "\n" + lua;
     }
 
     /// <summary>

@@ -156,8 +156,19 @@
 
         <!-- Row 4: Index input (Collapsed by default — visible when scissors active) -->
         <StackPanel x:Name="indexInputPanel" Grid.Row="4" Visibility="Collapsed">
-            <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="11" Margin="2,0,0,3"
-                       Text="Use &quot;-&quot; to skip an object (e.g. 4 - 2 3 1)"/>
+            <Grid Margin="0,0,0,3">
+                <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="11" Margin="2,0,0,0"
+                           VerticalAlignment="Center"
+                           Text="Use &quot;-&quot; to skip an object (e.g. 4 - 2 3 1)"/>
+                <ui:Button x:Name="btnPredictIndices" HorizontalAlignment="Right"
+                           Content="Predict" Icon="{ui:SymbolIcon BrainCircuit24}"
+                           Appearance="Secondary" Height="28" Padding="10,0"
+                           Visibility="Collapsed"
+                           Click="BtnPredictIndices_Click"
+                           ToolTip="Use AI to predict index order based on item names (experimental)"
+                           ToolTipService.InitialShowDelay="0"
+                           ToolTipService.ShowOnDisabled="True"/>
+            </Grid>
             <ui:TextBox x:Name="inputIndices"
                         PlaceholderText="Insert Indexes (ex. 4 5 2 3 1)..."
                         AcceptsReturn="True" MinHeight="60" Margin="0,0,0,10"
