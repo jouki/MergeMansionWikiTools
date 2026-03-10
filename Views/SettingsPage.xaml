@@ -479,6 +479,31 @@
                     <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
                                Margin="4,6,0,16"><Run Text="Get your free key at " /><Hyperlink NavigateUri="https://tinify.com/developers" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="tinypng.com (tinify.com)" /></Hyperlink><Run Text="." /></TextBlock>
 
+                    <!-- ── DISCORD ── -->
+                    <StackPanel Orientation="Horizontal" Margin="4,0,0,10">
+                        <ui:SymbolIcon Symbol="Send24" FontSize="20" Margin="0,0,8,0"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        <TextBlock Text="Discord (Dump Distribution)" FontSize="16" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                    </StackPanel>
+
+                    <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                            CornerRadius="8"
+                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                        <StackPanel Margin="16,14,16,12">
+                            <TextBlock Text="Bot Token" FontSize="13" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                       Margin="0,0,0,6" />
+                            <ui:PasswordBox x:Name="txtDiscordToken"
+                                            PlaceholderText="Enter Discord bot token…"
+                                            PasswordChanged="DiscordToken_Changed" />
+                        </StackPanel>
+                    </Border>
+
+                    <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
+                               Margin="4,6,0,16" TextWrapping="Wrap"
+                               Text="Bot token for publishing dumps. Channel ID is pre-configured." />
+
                 </StackPanel>
             </ScrollViewer>
 
