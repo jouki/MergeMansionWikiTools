@@ -164,6 +164,9 @@ public class ParsedChain
     /// <summary>Whether DisplayName was overridden by wiki mapping data</summary>
     public bool IsNameFromWiki { get; set; }
 
+    /// <summary>PoolTag from the first item — used for visual asset (skeleton/texture) resolution.</summary>
+    public string PoolTag { get; set; } = "";
+
     /// <summary>When this chain was merged from multiple JSON chains, lists all source ConfigKeys.</summary>
     public List<string>? MergedFromConfigKeys { get; set; }
 
@@ -286,6 +289,9 @@ public class ParsedItem
 
     /// <summary>ConfigKey of the original chain this item came from (before wiki mapping merge).</summary>
     public string SourceChainKey { get; set; } = "";
+
+    /// <summary>Visual skin/sprite name from game config (maps to Unity Sprite asset names).</summary>
+    public string SkinName { get; set; } = "";
 
     // Original definition reference
     public ItemDefinition? Source { get; set; }

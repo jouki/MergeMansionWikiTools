@@ -141,11 +141,14 @@ public class DataService
                 parsed.DisplayName = configKey;
 
             // Parse items
+            string poolTag = "";
             foreach (var entry in primaryList.EnumerateArray())
             {
                 // Normal: single "Item" per level
                 if (entry.TryGetProperty("Item", out var itemEl))
                 {
+                    if (string.IsNullOrEmpty(poolTag))
+                        poolTag = GetString(itemEl, "PoolTag");
                     var parsedItem = ParseItem(itemEl);
                     if (parsedItem != null)
                         parsed.Items.Add(parsedItem);
@@ -157,6 +160,8 @@ public class DataService
                     var variants = new List<ParsedItem>();
                     foreach (var it in itemsEl.EnumerateArray())
                     {
+                        if (string.IsNullOrEmpty(poolTag))
+                            poolTag = GetString(it, "PoolTag");
                         var parsedItem = ParseItem(it);
                         if (parsedItem != null)
                             variants.Add(parsedItem);
@@ -173,7 +178,10 @@ public class DataService
             }
 
             if (parsed.Items.Count > 0)
+            {
+                parsed.PoolTag = poolTag;
                 Chains.Add(parsed);
+            }
         }
     }
 
@@ -188,6 +196,7 @@ public class DataService
             SellCoins = GetInt(item, "SellCoins"),
             Unsellable = GetBool(item, "Unsellable"),
             Description = GetString(item, "Description"),
+            SkinName = GetString(item, "SkinName"),
         };
 
         if (item.TryGetProperty("Tags", out var tagsEl) && tagsEl.ValueKind == JsonValueKind.Array)

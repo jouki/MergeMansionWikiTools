@@ -107,4 +107,5 @@ internal static class CatalogParserService
         var sorted = urls.OrderBy(u => u, StringComparer.OrdinalIgnoreCase).ToList();
         return new CatalogResult(sorted, totalLocations);
     }
+
 }

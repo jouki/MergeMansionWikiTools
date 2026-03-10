@@ -41,6 +41,7 @@ public partial class MoveItemsDialog : FluentWindow
 
     // ── Page move state ──
     private bool _sourcePageExists;
+    private bool _moveImages = true;
 
     // ── Backlinks state ──
     private CancellationTokenSource? _backlinksCts;
@@ -680,6 +681,11 @@ public partial class MoveItemsDialog : FluentWindow
         UpdateBacklinksDimming();
     }
 
+    private void ChkMoveImages_Changed(object sender, RoutedEventArgs e)
+    {
+        _moveImages = chkMoveImages.IsChecked == true;
+    }
+
     // ── Confirm / Cancel ──────────────────────────────────────────────
 
     private static async Task<Dictionary<string, int>> CountReferencesAsync(
@@ -841,13 +847,19 @@ public partial class MoveItemsDialog : FluentWindow
             imgGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(24) });
             imgGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 
-            var imgIcon = new TextBlock
+            // Checkbox instead of static icon
+            var imgCheckBox = new CheckBox
             {
-                Text = "\uD83D\uDDBC", FontSize = 14,
-                VerticalAlignment = VerticalAlignment.Top, Margin = new Thickness(0, 1, 0, 0)
+                IsChecked = _moveImages,
+                VerticalAlignment = VerticalAlignment.Top,
+                Margin = new Thickness(-4, -2, 0, 0),
+                MinWidth = 0, Padding = new Thickness(0),
+                ToolTip = "Uncheck to skip image move",
             };
-            Grid.SetColumn(imgIcon, 0);
-            imgGrid.Children.Add(imgIcon);
+            imgCheckBox.Checked += (_, _) => { _moveImages = true; chkMoveImages.IsChecked = true; };
+            imgCheckBox.Unchecked += (_, _) => { _moveImages = false; chkMoveImages.IsChecked = false; };
+            Grid.SetColumn(imgCheckBox, 0);
+            imgGrid.Children.Add(imgCheckBox);
 
             var imgContent = new StackPanel();
             imgContent.Children.Add(new TextBlock
@@ -1131,7 +1143,12 @@ public partial class MoveItemsDialog : FluentWindow
         };
         ApplicationThemeManager.Apply(previewBox);
 
-        if (await previewBox.ShowDialogAsync() != MessageBoxResult.Primary)
+        var previewResult = await previewBox.ShowDialogAsync();
+
+        // Sync checkbox back (user may have toggled it in the confirm dialog)
+        chkMoveImages.IsChecked = _moveImages;
+
+        if (previewResult != MessageBoxResult.Primary)
             return;
 
         btnConfirm.IsEnabled = false;
@@ -1145,7 +1162,7 @@ public partial class MoveItemsDialog : FluentWindow
             Dictionary<int, string?>? sourceImageUrls = null;
             Dictionary<int, string?>? targetImageExistence = null;
 
-            if (isRename)
+            if (isRename && _moveImages)
             {
                 statusBar.Message = "Checking images...";
                 statusBar.Severity = InfoBarSeverity.Informational;
@@ -1237,7 +1254,7 @@ public partial class MoveItemsDialog : FluentWindow
 
             // ── Step 3: Move images ──
             int imgMoved = 0, imgOverwritten = 0, imgSkipped = 0;
-            if (isRename)
+            if (isRename && _moveImages)
             {
                 statusBar.Message = "Moving images...";
                 var allLevels = _selectedItems.Select(i => i.Level).ToArray();

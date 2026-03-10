@@ -23,6 +23,8 @@ namespace MergeMansionWikiTools.Views;
 
 // ── Data models ──
 
+internal enum DetectionSource { Algorithm, Atlas }
+
 internal class OptimiserImage
 {
     public string FilePath { get; set; } = "";
@@ -35,6 +37,18 @@ internal class OptimiserImage
     public List<(Rectangle Full, Rectangle Main)> RawDetectedObjects { get; set; } = new();
     public int DetectedColumns { get; set; } = 1;
     public string? DetectedChainName { get; set; }
+    /// <summary>
+    /// Per-detected-object rotation correction in degrees (CW) from atlas rotate flags.
+    /// Built during prediction. Index corresponds to ordered detected objects.
+    /// </summary>
+    public float[]? ObjectRotations { get; set; }
+
+    // ── Per-source detection objects ──
+    public List<(Rectangle Full, Rectangle Main)>? AlgorithmObjects { get; set; }
+    public List<(Rectangle Full, Rectangle Main)>? AtlasObjects { get; set; }
+    public DetectionSource DefaultDetectionSource { get; set; } = DetectionSource.Algorithm;
+    /// <summary>Per-object source override (indexed by ordered position). Null = use default for all.</summary>
+    public DetectionSource[]? PerObjectDetectionSource { get; set; }
 }
 
 internal class OptimiserCluster
@@ -69,6 +83,10 @@ public partial class ImageOptimiserPage : UserControl
     private ParsedChain? _activeChain;
     private string? _resolvedFilenameBase;
 
+    // ── Output folder redirect (for images from export dir) ──
+    private string? _lastOutputDir;
+    private string? _customSplitOutputDir; // session-persistent custom output folder
+
     // ── Object detection constants ──
     private const int AlphaThreshold = 5;
     private const int MainAlphaThreshold = 80;
@@ -90,6 +108,7 @@ public partial class ImageOptimiserPage : UserControl
 
         UpdateOptimizeButtonState();
         UpdateUploadButtonState();
+
     }
 
     private void OnWikiVerifiedChanged() => UpdateUploadButtonState();
@@ -164,7 +183,9 @@ public partial class ImageOptimiserPage : UserControl
     {
         foreach (var path in paths)
         {
-            if (AllImages.Any(img => img.FilePath.Equals(path, StringComparison.OrdinalIgnoreCase)))
+            var fullPath = System.IO.Path.GetFullPath(path);
+            if (AllImages.Any(img => string.Equals(
+                System.IO.Path.GetFullPath(img.FilePath), fullPath, StringComparison.OrdinalIgnoreCase)))
                 continue;
 
             var thumb = LoadThumbnail(path, 80);
@@ -182,6 +203,7 @@ public partial class ImageOptimiserPage : UserControl
             {
                 using var img = Image.Load<Rgba32>(path);
                 oi.RawDetectedObjects = DetectObjects(img);
+                oi.AlgorithmObjects = oi.RawDetectedObjects;
                 oi.DetectedObjects = oi.RawDetectedObjects;
                 var ordered = OrderObjects(oi.DetectedObjects);
                 if (ordered.Count > 0)
@@ -190,8 +212,38 @@ public partial class ImageOptimiserPage : UserControl
                     oi.DetectedColumns = rows.Max(g => g.Count());
                 }
 
-                // Auto-enable scissors when multiple objects detected
-                if (ordered.Count > 1)
+                // Try atlas detection from sprite metadata
+                var expDir = GetExportDir();
+                if (expDir != null)
+                {
+                    var allSprites = SpriteMetadataService.Load(expDir);
+                    var texName = System.IO.Path.GetFileNameWithoutExtension(path);
+                    var textureSprites = SpriteMetadataService.GetSpritesForTexture(allSprites, texName);
+                    if (textureSprites.Count > 0)
+                    {
+                        var spriteObjects = textureSprites
+                            .OrderByDescending(s => s.RectY)
+                            .ThenBy(s => s.RectX)
+                            .Select(s =>
+                            {
+                                int x = (int)s.RectX;
+                                int y = img.Height - (int)(s.RectY + s.RectHeight);
+                                int w = Math.Max(1, (int)s.RectWidth);
+                                int h = Math.Max(1, (int)s.RectHeight);
+                                var rect = new Rectangle(x, y, w, h);
+                                return (Full: rect, Main: rect);
+                            }).ToList();
+
+                        oi.AtlasObjects = spriteObjects;
+                        oi.DefaultDetectionSource = DetectionSource.Atlas;
+                        oi.RawDetectedObjects = spriteObjects;
+                        oi.DetectedObjects = spriteObjects;
+                        ordered = OrderObjects(spriteObjects);
+                    }
+                }
+
+                // Auto-enable scissors when objects detected (atlas: always, algorithm: >1)
+                if (ordered.Count > 1 || (ordered.Count == 1 && oi.AtlasObjects != null))
                     oi.IsScissorsActive = true;
             }
             catch { /* detection failed — non-critical */ }
@@ -220,6 +272,41 @@ public partial class ImageOptimiserPage : UserControl
         bool hasImages = _clusters.Count > 0;
         thumbnailStripBorder.Visibility = hasImages ? Visibility.Visible : Visibility.Collapsed;
         txtPlaceholder.Visibility = hasImages ? Visibility.Collapsed : Visibility.Visible;
+
+        // Auto-enter chain mode: if a single atlas image was added and chain detected via PoolTag
+        if (_activeChain == null && paths.Length == 1)
+        {
+            var name = System.IO.Path.GetFileNameWithoutExtension(paths[0]);
+            var exportDir = GetExportDir();
+            if (exportDir != null)
+            {
+                var poolTag = SpriteMetadataService.ResolvePoolTagForTexture(name, exportDir);
+                if (poolTag != null)
+                {
+                    var chain = _main.DataService?.Chains?.FirstOrDefault(c =>
+                        string.Equals(c.PoolTag, poolTag, StringComparison.OrdinalIgnoreCase));
+                    if (chain != null)
+                    {
+                        // Select the new image so EnterChainMode operates on it
+                        var newOi = AllImages.FirstOrDefault(i =>
+                            i.FilePath.Equals(paths[0], StringComparison.OrdinalIgnoreCase));
+                        if (newOi != null) SelectImage(newOi);
+
+                        AppLogger.Info($"Auto chain mode: '{name}' → PoolTag '{poolTag}' → chain '{chain.ConfigKey}'");
+                        EnterChainMode(chain);
+                    }
+                }
+
+                // Fallback: if no chain entered via PoolTag, try sprite metadata detection
+                if (_activeChain == null)
+                {
+                    var allSkinMappings = SpriteMetadataService.LoadSkinMappings(exportDir);
+                    var detectedChain = FindChainForTexture(name, allSkinMappings);
+                    if (detectedChain != null)
+                        ShowChainSuggestion(detectedChain);
+                }
+            }
+        }
     }
 
     private static BitmapImage? LoadThumbnail(string path, int decodeHeight)
@@ -543,12 +630,16 @@ public partial class ImageOptimiserPage : UserControl
         // Update split controls visibility — show if ANY image in the cluster has scissors active
         bool anyScissors = newCluster?.Images.Any(i => i.IsScissorsActive) == true;
         indexInputPanel.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
-        btnSplit.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
-        btnRefreshDetection.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+        splitButtonGroup.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+        refreshButtonGroup.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
         UpdatePredictButtonVisibility();
+        UpdatePreviewMargins();
 
         // Update detection overlay
         UpdateDetectionOverlay();
+
+        // Auto-predict if enabled and indices are empty
+        TryAutoPredict();
 
         // Update name source dropdown
         UpdateNameSourceDropdown();
@@ -679,20 +770,24 @@ public partial class ImageOptimiserPage : UserControl
         }
     }
 
+    private void ImgPreview_SizeChanged(object sender, SizeChangedEventArgs e) => UpdateDetectionOverlay();
+
     private void UpdateDetectionOverlay()
     {
-        detectionOverlay.Children.Clear();
-        if (_selectedCluster == null) return;
+        UpdateDetectionButtonColors();
+
+        if (_selectedCluster == null) { detectionOverlay.Children.Clear(); return; }
 
         // Collect all scissors-active images in cluster that have detections
         var activeImages = _selectedCluster.Images
-            .Where(oi => oi.IsScissorsActive && oi.DetectedObjects.Count > 1)
+            .Where(oi => oi.IsScissorsActive && oi.DetectedObjects.Count > 0)
             .ToList();
-        if (activeImages.Count == 0) return;
+        if (activeImages.Count == 0) { detectionOverlay.Children.Clear(); return; }
 
         // Schedule overlay drawing after layout pass (need actual sizes)
         Dispatcher.InvokeAsync(() =>
         {
+            detectionOverlay.Children.Clear();
             if (_selectedCluster == null || imgPreview.Source == null) return;
 
             imgPreview.UpdateLayout();
@@ -782,7 +877,7 @@ public partial class ImageOptimiserPage : UserControl
                     foreach (var oi in rows[r])
                     {
                         var (pw, ph) = pixelDims.GetValueOrDefault(oi.FilePath);
-                        if (oi.IsScissorsActive && oi.DetectedObjects.Count > 1)
+                        if (oi.IsScissorsActive && oi.DetectedObjects.Count > 0)
                         {
                             double ox = baseOffsetX + pixelX * scale;
                             double oy = baseOffsetY + pixelY * scale;
@@ -801,9 +896,27 @@ public partial class ImageOptimiserPage : UserControl
                                      string[]? labels = null, int labelOffset = 0)
     {
         var ordered = OrderObjects(oi.DetectedObjects);
+        bool hasBothSources = oi.AlgorithmObjects != null && oi.AtlasObjects != null;
+
+        // Pre-compute ordered alternative source lists for per-object toggle
+        List<(Rectangle Full, Rectangle Main)>? orderedAlgo = null;
+        List<(Rectangle Full, Rectangle Main)>? orderedAtlas = null;
+        if (hasBothSources)
+        {
+            orderedAlgo = OrderObjects(oi.AlgorithmObjects!);
+            orderedAtlas = OrderObjects(oi.AtlasObjects!);
+        }
+
         for (int i = 0; i < ordered.Count; i++)
         {
-            var obj = ordered[i];
+            // Get effective rectangle (may be overridden by per-object source)
+            var obj = GetEffectiveObject(oi, i, ordered[i], orderedAlgo, orderedAtlas);
+
+            // Determine detection source for this object
+            DetectionSource objSource = oi.DefaultDetectionSource;
+            if (oi.PerObjectDetectionSource != null && i < oi.PerObjectDetectionSource.Length)
+                objSource = oi.PerObjectDetectionSource[i];
+
             var rect = new System.Windows.Shapes.Rectangle
             {
                 Width = obj.Main.Width * scale,
@@ -838,20 +951,63 @@ public partial class ImageOptimiserPage : UserControl
 
             if (labelText == null) continue;
 
+            // Build label content: [index text] + [source icon]
+            var sourceColor = objSource == DetectionSource.Atlas
+                ? System.Windows.Media.Color.FromRgb(0x4E, 0xC9, 0xB0) // green for atlas
+                : System.Windows.Media.Color.FromRgb(0x56, 0x9C, 0xD6); // blue for algorithm
+            bool canToggle = hasBothSources;
+
+            var labelPanel = new StackPanel { Orientation = Orientation.Horizontal };
+            labelPanel.Children.Add(new System.Windows.Controls.TextBlock
+            {
+                Text = labelText,
+                Foreground = new SolidColorBrush(labelColor),
+                FontSize = 12,
+                FontWeight = FontWeights.Bold
+            });
+
+            // Always show source indicator icon
+            labelPanel.Children.Add(new SymbolIcon
+            {
+                Symbol = objSource == DetectionSource.Atlas
+                    ? SymbolRegular.DocumentData24
+                    : SymbolRegular.BrainCircuit24,
+                FontSize = 12,
+                Foreground = new SolidColorBrush(canToggle ? sourceColor
+                    : System.Windows.Media.Color.FromArgb(0x80, sourceColor.R, sourceColor.G, sourceColor.B)),
+                Margin = new Thickness(3, 0, 0, 0),
+                VerticalAlignment = VerticalAlignment.Center
+            });
+
+            int capturedIndex = i;
+            var capturedOi = oi;
+
+            var tooltipText = objSource == DetectionSource.Atlas
+                ? "Object Detection Method: Game Files"
+                : "Object Detection Method: Algorithm";
+            if (canToggle) tooltipText += "\nClick to Toggle";
+
             var labelBorder = new Border
             {
                 Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(0xAA, 0x00, 0x00, 0x00)),
                 CornerRadius = new CornerRadius(3),
                 Padding = new Thickness(4, 1, 4, 1),
-                IsHitTestVisible = false,
-                Child = new System.Windows.Controls.TextBlock
-                {
-                    Text = labelText,
-                    Foreground = new SolidColorBrush(labelColor),
-                    FontSize = 12,
-                    FontWeight = FontWeights.Bold
-                }
+                IsHitTestVisible = canToggle,
+                Cursor = canToggle ? System.Windows.Input.Cursors.Hand : null,
+                ToolTip = tooltipText,
+                Child = labelPanel
             };
+            ToolTipService.SetInitialShowDelay(labelBorder, 0);
+
+            if (canToggle)
+            {
+                labelBorder.MouseLeftButtonDown += (s, ev) =>
+                {
+                    ev.Handled = true;
+                    ToggleObjectSource(capturedOi, capturedIndex);
+                };
+            }
+
             Canvas.SetLeft(labelBorder, left);
             Canvas.SetTop(labelBorder, top);
             detectionOverlay.Children.Add(labelBorder);
@@ -925,9 +1081,10 @@ public partial class ImageOptimiserPage : UserControl
         {
             bool anyScissors = cluster.Images.Any(i => i.IsScissorsActive);
             indexInputPanel.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
-            btnSplit.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
-            btnRefreshDetection.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+            splitButtonGroup.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+            refreshButtonGroup.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
             UpdatePredictButtonVisibility();
+            UpdatePreviewMargins();
         }
 
         // Update overlay if toggled image is in the displayed cluster
@@ -969,9 +1126,10 @@ public partial class ImageOptimiserPage : UserControl
                 imgPreview.Source = null;
                 txtPlaceholder.Visibility = Visibility.Visible;
                 indexInputPanel.Visibility = Visibility.Collapsed;
-                btnSplit.Visibility = Visibility.Collapsed;
-                btnRefreshDetection.Visibility = Visibility.Collapsed;
+                splitButtonGroup.Visibility = Visibility.Collapsed;
+                refreshButtonGroup.Visibility = Visibility.Collapsed;
                 detectionOverlay.Children.Clear();
+                UpdatePreviewMargins();
             }
         }
 
@@ -995,10 +1153,24 @@ public partial class ImageOptimiserPage : UserControl
         _pendingAutoLink = newClusters;
         txtAutoLinkMessage.Text = $"{newClusters.Count} images added. Link them into one chain?";
         autoLinkBanner.Visibility = Visibility.Visible;
+        UpdatePreviewMargins();
     }
 
     private void BtnAutoLink_Click(object sender, RoutedEventArgs e)
     {
+        // Chain suggestion mode — enter chain mode for the suggested chain
+        if (_pendingChainSuggestion != null)
+        {
+            var chain = _pendingChainSuggestion;
+            _pendingChainSuggestion = null;
+            autoLinkBanner.Visibility = Visibility.Collapsed;
+            UpdatePreviewMargins();
+            UpdateDetectionOverlay();
+            EnterChainMode(chain);
+            return;
+        }
+
+        // Multi-image auto-link mode
         if (_pendingAutoLink == null || _pendingAutoLink.Count < 2) return;
 
         var target = _pendingAutoLink[0];
@@ -1010,6 +1182,8 @@ public partial class ImageOptimiserPage : UserControl
         }
         _pendingAutoLink = null;
         autoLinkBanner.Visibility = Visibility.Collapsed;
+        UpdatePreviewMargins();
+        UpdateDetectionOverlay();
         RebuildThumbnailStrip();
         SelectImage(target.Images[0]);
     }
@@ -1017,23 +1191,51 @@ public partial class ImageOptimiserPage : UserControl
     private void BtnAutoLinkDismiss_Click(object sender, RoutedEventArgs e)
     {
         _pendingAutoLink = null;
+        _pendingChainSuggestion = null;
         autoLinkBanner.Visibility = Visibility.Collapsed;
+        UpdatePreviewMargins();
+        UpdateDetectionOverlay();
     }
 
-    private void BtnClearAll_Click(object sender, RoutedEventArgs e)
+    // ── Chain suggestion (from Map Indices) ──
+    private ParsedChain? _pendingChainSuggestion;
+
+    private void ShowChainSuggestion(ParsedChain chain)
+    {
+        _pendingChainSuggestion = chain;
+        _pendingAutoLink = null;
+        txtAutoLinkMessage.Text = $"Detected chain: {chain.DisplayName} ({chain.Items.Count} items)";
+        btnAutoLink.Content = "Link";
+        autoLinkBanner.Visibility = Visibility.Visible;
+        UpdatePreviewMargins();
+        AppLogger.Info($"Chain suggestion: '{chain.ConfigKey}' from Map Indices");
+    }
+
+    private void BtnClearAll_Click(object sender, RoutedEventArgs e) => ClearAll();
+
+    public void ClearAll()
     {
         _clusters.Clear();
         _selectedImage = null;
         _selectedCluster = null;
+        _optimizedFiles.Clear();
         thumbnailPanel.Children.Clear();
         thumbnailStripBorder.Visibility = Visibility.Collapsed;
         imgPreview.Source = null;
         txtPlaceholder.Visibility = Visibility.Visible;
         indexInputPanel.Visibility = Visibility.Collapsed;
-        btnSplit.Visibility = Visibility.Collapsed;
-        btnRefreshDetection.Visibility = Visibility.Collapsed;
+        splitButtonGroup.Visibility = Visibility.Collapsed;
+        refreshButtonGroup.Visibility = Visibility.Collapsed;
+        btnPredictIndices.Visibility = Visibility.Collapsed;
         detectionOverlay.Children.Clear();
+        autoLinkBanner.Visibility = Visibility.Collapsed;
+        _pendingAutoLink = null;
+        _pendingChainSuggestion = null;
+        _suppressIndexReset = true;
+        inputIndices.Text = "";
+        _suppressIndexReset = false;
         UpdateUploadButtonState();
+        UpdatePreviewMargins();
     }
 
     // ══════════════════════════════════════════════════════════════
@@ -1051,6 +1253,16 @@ public partial class ImageOptimiserPage : UserControl
         // Merge: append source images to target cluster
         targetCluster.Images.AddRange(sourceCluster.Images);
         _clusters.Remove(sourceCluster);
+
+        // If in chain mode, activate scissors on newly linked images with detected objects
+        if (_activeChain != null)
+        {
+            foreach (var oi in targetCluster.Images)
+            {
+                if (oi.DetectedObjects.Count > 0 && !oi.IsScissorsActive)
+                    oi.IsScissorsActive = true;
+            }
+        }
 
         SelectImage(target);
         RebuildThumbnailStrip();
@@ -1432,141 +1644,683 @@ public partial class ImageOptimiserPage : UserControl
 
     private void BtnSplit_Click(object sender, RoutedEventArgs e) => ProcessSplit();
 
-    // ── AI Index Prediction (experimental) ──
+    private void BtnSplitDropdown_Click(object sender, RoutedEventArgs e)
+    {
+        var menu = new System.Windows.Controls.ContextMenu();
+        var item = new System.Windows.Controls.MenuItem { Header = "Split To…" };
+        item.Click += (_, _) =>
+        {
+            var dlg = new Microsoft.Win32.OpenFolderDialog
+            {
+                Title = "Select output folder for split images",
+                InitialDirectory = _customSplitOutputDir
+                    ?? System.IO.Path.GetDirectoryName(_selectedImage?.FilePath) ?? ""
+            };
+            if (dlg.ShowDialog(Window.GetWindow(this)) == true)
+            {
+                _customSplitOutputDir = dlg.FolderName;
+                ProcessSplit(overrideOutputDir: dlg.FolderName);
+            }
+        };
+        menu.Items.Add(item);
+        menu.PlacementTarget = btnSplitDropdown;
+        menu.Placement = System.Windows.Controls.Primitives.PlacementMode.Top;
+        menu.IsOpen = true;
+    }
+
+    // ── Sprite Metadata Prediction ──
 
     private void UpdatePredictButtonVisibility()
     {
-        bool show = _activeChain != null
-                     && indexInputPanel.Visibility == Visibility.Visible
-                     && !string.IsNullOrWhiteSpace(_main.Settings.AnthropicApiKey);
+        // Show predict button when scissors are active — works with or without chain
+        bool show = indexInputPanel.Visibility == Visibility.Visible;
         btnPredictIndices.Visibility = show ? Visibility.Visible : Visibility.Collapsed;
+        UpdatePreviewMargins();
     }
 
-    private async void BtnPredictIndices_Click(object sender, RoutedEventArgs e)
+    /// <summary>
+    /// Resolves the export directory for the current APK version (where exported PNGs live).
+    /// </summary>
+    private string? GetExportDir()
     {
-        if (_activeChain == null || _selectedCluster == null) return;
+        var basePath = _main.Settings.ImageExporterBasePath;
+        var version = _main.Settings.SelectedApkVersion;
+        if (string.IsNullOrEmpty(basePath) || string.IsNullOrEmpty(version))
+            return null;
+        var dir = System.IO.Path.Combine(basePath, version, "Export - PNGs");
+        return Directory.Exists(dir) ? dir : null;
+    }
 
-        var apiKey = _main.Settings.AnthropicApiKey;
-        if (string.IsNullOrWhiteSpace(apiKey))
+    /// <summary>
+    /// Returns the output directory for split/optimize results.
+    /// If the source file is in the export directory, redirects to a sibling "Export - Items" folder.
+    /// Otherwise returns the source file's own directory.
+    /// </summary>
+    private (string dir, bool redirected) GetOutputDir(string sourceFilePath)
+    {
+        var sourceDir = System.IO.Path.GetDirectoryName(sourceFilePath)!;
+        var exportDir = GetExportDir();
+
+        if (exportDir != null)
         {
-            infoBar.Message = "Set your Anthropic API key in Settings → Tools first.";
+            var normSource = System.IO.Path.GetFullPath(sourceDir).TrimEnd(
+                System.IO.Path.DirectorySeparatorChar, System.IO.Path.AltDirectorySeparatorChar);
+            var normExport = System.IO.Path.GetFullPath(exportDir).TrimEnd(
+                System.IO.Path.DirectorySeparatorChar, System.IO.Path.AltDirectorySeparatorChar);
+
+            if (string.Equals(normSource, normExport, StringComparison.OrdinalIgnoreCase))
+            {
+                var parent = System.IO.Path.GetDirectoryName(normExport)!;
+                var outputDir = System.IO.Path.Combine(parent, "Export - Items");
+                return (outputDir, true);
+            }
+        }
+
+        return (sourceDir, false);
+    }
+
+    private void BtnPredictIndices_Click(object sender, RoutedEventArgs e)
+    {
+        RunPrediction(showWarnings: true);
+    }
+
+    /// <summary>
+    /// Core prediction logic. Returns true if prediction was applied.
+    /// When showWarnings is false (auto-predict), silently skips when conditions aren't met.
+    /// Prefers deterministic Spine skin mapping; falls back to heuristic matching.
+    /// </summary>
+    private bool RunPrediction(bool showWarnings)
+    {
+        if (_selectedCluster == null) return false;
+
+        var scissorsImages = _selectedCluster.Images.Where(i => i.IsScissorsActive).ToList();
+        if (scissorsImages.Count == 0) return false;
+
+        var imageFileName = System.IO.Path.GetFileNameWithoutExtension(scissorsImages[0].FilePath);
+
+        var exportDir = GetExportDir();
+        if (exportDir == null)
+        {
+            if (showWarnings)
+            {
+                infoBar.Message = "Set Image Exporter base path and APK version in Settings first.";
+                infoBar.Severity = InfoBarSeverity.Warning;
+                infoBar.IsOpen = true;
+            }
+            return false;
+        }
+
+        var allSprites = SpriteMetadataService.Load(exportDir);
+        var allSkinMappings = SpriteMetadataService.LoadSkinMappings(exportDir);
+
+        if (allSprites.Count == 0)
+        {
+            if (showWarnings)
+            {
+                infoBar.Message = "atlas_data.json not found. Re-extract textures from APK.";
+                infoBar.Severity = InfoBarSeverity.Warning;
+                infoBar.IsOpen = true;
+            }
+            return false;
+        }
+
+        var textureSprites = SpriteMetadataService.GetSpritesForTexture(allSprites, imageFileName);
+
+        if (textureSprites.Count > 0)
+        {
+            // Offer chain link via suggestion banner only on manual Map Levels click
+            if (showWarnings && _activeChain == null)
+            {
+                var detectedChain = FindChainForTexture(imageFileName, allSkinMappings);
+                if (detectedChain != null)
+                    ShowChainSuggestion(detectedChain);
+            }
+
+            PredictFromSpriteMetadata(textureSprites, allSkinMappings, imageFileName);
+            return true;
+        }
+
+        // No sprite metadata — offer chain link via suggestion banner only on manual click
+        if (showWarnings && _activeChain == null)
+        {
+            var detectedChain = FindChainForTexture(imageFileName, allSkinMappings);
+            if (detectedChain != null)
+                ShowChainSuggestion(detectedChain);
+        }
+
+        // Sequential prediction if chain is active
+        if (_activeChain != null)
+        {
+            var activeImg = scissorsImages[0];
+            var objectCount = activeImg.DetectedObjects.Count;
+            if (objectCount == 0) return false;
+
+            var chainItems = _activeChain.Items.OrderBy(i => i.Level).ToList();
+            var parts = new List<string>();
+            for (int i = 0; i < objectCount; i++)
+                parts.Add(i < chainItems.Count ? chainItems[i].Level.ToString() : "-");
+
+            inputIndices.Text = string.Join(" ", parts);
+            _selectedCluster.IndexText = inputIndices.Text;
+
+            if (showWarnings)
+            {
+                infoBar.Message = $"No sprite metadata for '{imageFileName}'. Sequential prediction. Verify manually.";
+                infoBar.Severity = InfoBarSeverity.Warning;
+                infoBar.IsOpen = true;
+            }
+            return true;
+        }
+
+        if (showWarnings)
+        {
+            infoBar.Message = $"No sprite metadata for '{imageFileName}'.";
+            infoBar.Severity = InfoBarSeverity.Warning;
+            infoBar.IsOpen = true;
+        }
+        return false;
+    }
+
+    private void PredictFromSpriteMetadata(
+        List<AssetExtractionService.SpriteInfo> textureSprites,
+        List<AssetExtractionService.SkinMapping> allSkinMappings,
+        string textureName)
+    {
+        // Sort sprites in same order as PredictIndices (Unity Y desc, X asc)
+        var orderedSprites = textureSprites
+            .OrderByDescending(s => s.RectY)
+            .ThenBy(s => s.RectX)
+            .ToList();
+
+        // Step 1: Build sprite index → level mapping
+        // Prefer deterministic skin mapping; fall back to heuristic
+        int[] indices;
+        bool deterministic = false;
+        if (_activeChain != null)
+        {
+            var chainItems = _activeChain.Items.OrderBy(i => i.Level).ToList();
+
+            // Try deterministic prediction first
+            var deterministicResult = SpriteMetadataService.PredictIndicesFromSkinMapping(
+                textureSprites, chainItems, allSkinMappings, textureName);
+
+            if (deterministicResult != null && deterministicResult.Any(l => l > 0))
+            {
+                indices = deterministicResult;
+                deterministic = true;
+            }
+            else
+            {
+                // Fall back to heuristic matching
+                indices = SpriteMetadataService.PredictIndices(textureSprites, chainItems);
+            }
+        }
+        else
+        {
+            // No chain: extract levels from trailing number in sprite names
+            indices = new int[orderedSprites.Count];
+            for (int i = 0; i < orderedSprites.Count; i++)
+            {
+                var name = orderedSprites[i].Name;
+                int j = name.Length - 1;
+                while (j >= 0 && char.IsDigit(name[j])) j--;
+                if (j < name.Length - 1 && int.TryParse(name[(j + 1)..], out var level))
+                    indices[i] = level;
+                else
+                    indices[i] = i + 1;
+            }
+        }
+
+        // Step 2: Get detected objects — merge to sprite count if over-detected
+        var activeImg = _selectedCluster!.Images.FirstOrDefault(i => i.IsScissorsActive);
+        if (activeImg == null || activeImg.DetectedObjects.Count == 0)
+        {
+            var fallbackParts = indices.Select(l => l > 0 ? l.ToString() : "-").ToList();
+            inputIndices.Text = string.Join(" ", fallbackParts);
+            _selectedCluster.IndexText = inputIndices.Text;
+            infoBar.Message = $"Sprite metadata: {indices.Count(l => l > 0)}/{indices.Length} matched (no detection overlay).";
             infoBar.Severity = InfoBarSeverity.Warning;
             infoBar.IsOpen = true;
             return;
         }
+
+        // Step 3: Get image height for coordinate conversion (Unity Y → image Y)
+        int imageHeight;
+        try
+        {
+            var imgInfo = Image.Identify(activeImg.FilePath);
+            imageHeight = imgInfo.Height;
+        }
+        catch
+        {
+            imageHeight = (int)orderedSprites.Max(s => s.RectY + s.RectHeight);
+        }
+
+        // Use sprite positions from game data as detected objects.
+        // The atlas_data.json has exact positions for every sprite — more reliable
+        // than image-based flood fill which can merge adjacent sprites.
+        // Set both RawDetectedObjects and DetectedObjects so UpdateDetectionOverlay
+        // uses the sprite-based positions as its baseline (it resets to RawDetectedObjects).
+        var spriteObjects = orderedSprites.Select(s =>
+        {
+            int x = (int)s.RectX;
+            int y = imageHeight - (int)(s.RectY + s.RectHeight);
+            int w = Math.Max(1, (int)s.RectWidth);
+            int h = Math.Max(1, (int)s.RectHeight);
+            var rect = new Rectangle(x, y, w, h);
+            return (Full: rect, Main: rect);
+        }).ToList();
+        activeImg.AtlasObjects = spriteObjects;
+        activeImg.DefaultDetectionSource = DetectionSource.Atlas;
+        activeImg.PerObjectDetectionSource = null;
+        activeImg.RawDetectedObjects = spriteObjects;
+        activeImg.DetectedObjects = spriteObjects;
+
+        var orderedObjects = OrderObjects(activeImg.DetectedObjects);
+
+        // Step 4: Map each sprite-based object to its level via the indices array.
+        // orderedSprites (Unity Y desc, X asc) and orderedObjects (image Y asc, X asc)
+        // have equivalent ordering since imageY = imageHeight - unityY.
+        // Match by position to handle any rounding differences in row detection.
+        var parts = new List<string>();
+        var rotations = new float[orderedObjects.Count];
+        int matched = 0;
+        var usedSpriteIndices = new HashSet<int>();
+
+        for (int objIdx = 0; objIdx < orderedObjects.Count; objIdx++)
+        {
+            var obj = orderedObjects[objIdx];
+            var objCenterX = obj.Full.Left + obj.Full.Width / 2.0;
+            var objCenterY = obj.Full.Top + obj.Full.Height / 2.0;
+
+            int bestIdx = -1;
+            double bestDist = double.MaxValue;
+
+            for (int i = 0; i < orderedSprites.Count; i++)
+            {
+                if (usedSpriteIndices.Contains(i)) continue;
+                var s = orderedSprites[i];
+
+                var spriteCenterX = s.RectX + s.RectWidth / 2.0;
+                var spriteCenterY = imageHeight - s.RectY - s.RectHeight / 2.0;
+
+                var dx = objCenterX - spriteCenterX;
+                var dy = objCenterY - spriteCenterY;
+                var dist = dx * dx + dy * dy;
+
+                if (dist < bestDist)
+                {
+                    bestDist = dist;
+                    bestIdx = i;
+                }
+            }
+
+            if (bestIdx >= 0)
+            {
+                usedSpriteIndices.Add(bestIdx);
+                if (indices[bestIdx] > 0)
+                {
+                    parts.Add(indices[bestIdx].ToString());
+                    matched++;
+                }
+                else
+                {
+                    parts.Add("-");
+                }
+
+                // If sprite was rotated in atlas (rotate: true), it needs 90° CW correction when split
+                if (orderedSprites[bestIdx].Rotated)
+                    rotations[objIdx] = 90f;
+            }
+            else
+            {
+                parts.Add("-");
+            }
+        }
+
+        // Store rotation data for use during split
+        activeImg.ObjectRotations = rotations;
+
+        // Format indices with row breaks matching visual layout (max 4 rows)
+        var objectRows = GroupIntoRows(orderedObjects);
+        if (objectRows.Count >= 2 && objectRows.Count <= 4)
+        {
+            var sb = new System.Text.StringBuilder();
+            int idx = 0;
+            for (int r = 0; r < objectRows.Count; r++)
+            {
+                if (r > 0) sb.Append('\n');
+                for (int c = 0; c < objectRows[r]; c++)
+                {
+                    if (c > 0) sb.Append(' ');
+                    sb.Append(parts[idx++]);
+                }
+            }
+            inputIndices.Text = sb.ToString();
+        }
+        else
+        {
+            inputIndices.Text = string.Join(" ", parts);
+        }
+        _selectedCluster.IndexText = inputIndices.Text;
+
+        var chainInfo = _activeChain != null ? $" for chain '{_activeChain.ConfigKey}'" : "";
+        var method = deterministic ? "skin mapping" : "heuristic";
+        infoBar.Message = $"Prediction ({method}): {matched}/{orderedObjects.Count} matched ({textureSprites.Count} sprites in atlas).";
+        infoBar.Severity = matched == orderedObjects.Count ? InfoBarSeverity.Success : InfoBarSeverity.Warning;
+        infoBar.IsOpen = true;
+
+        AppLogger.Info($"Prediction ({method}): {matched}/{orderedObjects.Count}{chainInfo}");
+    }
+
+    /// <summary>
+    /// Auto-predicts indices if they are empty (doesn't overwrite user input).
+    /// </summary>
+    private void TryAutoPredict()
+    {
+        if (_selectedCluster == null) return;
+
+        // Don't overwrite existing user input
+        if (!string.IsNullOrWhiteSpace(_selectedCluster.IndexText)) return;
 
         var scissorsImages = _selectedCluster.Images.Where(i => i.IsScissorsActive).ToList();
         if (scissorsImages.Count == 0) return;
 
-        // Collect all detected objects across scissors-active images
-        var allObjects = new List<(OptimiserImage Img, SixLabors.ImageSharp.Rectangle Rect)>();
-        foreach (var oi in scissorsImages)
-            foreach (var (full, _) in oi.DetectedObjects)
-                allObjects.Add((oi, full));
+        RunPrediction(showWarnings: false);
+    }
 
-        if (allObjects.Count == 0)
+    /// <summary>
+    /// Finds a chain whose items use the given texture, using deterministic skin mapping first.
+    /// Falls back to heuristic ConfigKey matching if no skin mapping is available.
+    /// </summary>
+    private ParsedChain? FindChainForTexture(string textureName,
+        List<AssetExtractionService.SkinMapping>? skinMappings = null)
+    {
+        var chains = _main.DataService?.Chains;
+        if (chains == null || chains.Count == 0) return null;
+
+        // Strategy 1: Deterministic — use skin mappings to find which chain's SkinNames
+        // match the skins defined in this skeleton/texture.
+        // Only useful when skin names are non-numeric (e.g., actual item names).
+        // Numeric skin names ("1","2","3"...) are shared by nearly all chains — useless for detection.
+        if (skinMappings != null && skinMappings.Count > 0)
         {
-            infoBar.Message = "No detected objects to predict.";
-            infoBar.Severity = InfoBarSeverity.Warning;
-            infoBar.IsOpen = true;
-            return;
-        }
+            var textureSkinNames = SpriteMetadataService.GetSkinNamesForTexture(skinMappings, textureName);
+            bool allNumeric = textureSkinNames.All(s => s.All(char.IsDigit));
 
-        // Build candidate names from chain items (Level → Name)
-        var chainItems = _activeChain.Items.OrderBy(i => i.Level).ToList();
-        var candidateNames = chainItems.Select(i => i.Name ?? i.ItemType ?? $"Level {i.Level}").ToList();
-
-        // Crop each detected object to PNG bytes
-        var croppedImages = new List<byte[]>();
-        foreach (var (oi, rect) in allObjects)
-        {
-            try
+            if (textureSkinNames.Count > 0 && !allNumeric)
             {
-                croppedImages.Add(ImagePredictionService.CropRegionToPng(oi.FilePath, rect));
-            }
-            catch
-            {
-                croppedImages.Add(Array.Empty<byte>());
-            }
-        }
+                ParsedChain? bestChain = null;
+                int bestMatchCount = 0;
 
-        // Disable button during prediction
-        btnPredictIndices.IsEnabled = false;
-        btnPredictIndices.Content = "Predicting...";
-        infoBar.Message = $"Sending {croppedImages.Count} images to Claude Haiku...";
-        infoBar.Severity = InfoBarSeverity.Informational;
-        infoBar.IsOpen = true;
-
-        try
-        {
-            var predictions = await ImagePredictionService.PredictItemsAsync(
-                apiKey, croppedImages, candidateNames);
-
-            // Map predicted names back to chain levels
-            var indices = new List<string>();
-            int matched = 0;
-            for (int i = 0; i < predictions.Length; i++)
-            {
-                var pred = predictions[i];
-                if (pred != null)
+                foreach (var chain in chains)
                 {
-                    var item = chainItems.FirstOrDefault(ci =>
-                        string.Equals(ci.Name, pred, StringComparison.OrdinalIgnoreCase) ||
-                        string.Equals(ci.ItemType, pred, StringComparison.OrdinalIgnoreCase));
-                    if (item != null)
+                    var chainSkinNames = chain.Items
+                        .Where(i => !string.IsNullOrEmpty(i.SkinName))
+                        .Select(i => i.SkinName!)
+                        .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+                    var matchCount = chainSkinNames.Count(s => textureSkinNames.Contains(s));
+                    if (matchCount > bestMatchCount)
                     {
-                        indices.Add(item.Level.ToString());
-                        matched++;
-                        continue;
+                        bestMatchCount = matchCount;
+                        bestChain = chain;
                     }
                 }
-                indices.Add("-"); // unknown → skip
+
+                if (bestChain != null && bestMatchCount >= 2)
+                {
+                    AppLogger.Info($"Deterministic chain detection: '{bestChain.ConfigKey}' " +
+                        $"({bestMatchCount} skin matches for texture '{textureName}')");
+                    return bestChain;
+                }
             }
-
-            inputIndices.Text = string.Join(" ", indices);
-            _selectedCluster.IndexText = inputIndices.Text;
-
-            infoBar.Message = $"Predicted {matched}/{predictions.Length} items successfully.";
-            infoBar.Severity = matched == predictions.Length ? InfoBarSeverity.Success : InfoBarSeverity.Warning;
-            infoBar.IsOpen = true;
-
-            AppLogger.Info($"AI prediction: {matched}/{predictions.Length} matched for chain '{_activeChain.ConfigKey}'");
         }
-        catch (Exception ex)
+
+        // Strategy 2: Reverse PoolTag lookup — texture name → PoolTag → chain
+        var exportDir = GetExportDir();
+        if (exportDir != null)
         {
-            infoBar.Message = $"Prediction failed: {ex.Message}";
-            infoBar.Severity = InfoBarSeverity.Error;
-            infoBar.IsOpen = true;
-            AppLogger.Error($"AI prediction error: {ex.Message}");
+            var matchedPoolTag = SpriteMetadataService.ResolvePoolTagForTexture(textureName, exportDir);
+            if (matchedPoolTag != null)
+            {
+                var match = chains.FirstOrDefault(c =>
+                    string.Equals(c.PoolTag, matchedPoolTag, StringComparison.OrdinalIgnoreCase));
+                if (match != null)
+                {
+                    AppLogger.Info($"Reverse PoolTag match: '{match.ConfigKey}' (texture '{textureName}' → PoolTag '{matchedPoolTag}')");
+                    return match;
+                }
+            }
         }
-        finally
+
+        // Strategy 3: Heuristic — prefix stripping and ConfigKey matching
+        var candidates = new List<string> { textureName };
+        foreach (var prefix in new[] { "Hideout", "Mansion2023_", "Mansion_", "Item", "Event" })
         {
-            btnPredictIndices.IsEnabled = true;
-            btnPredictIndices.Content = "Predict";
+            if (textureName.StartsWith(prefix, StringComparison.OrdinalIgnoreCase) && textureName.Length > prefix.Length)
+                candidates.Add(textureName[prefix.Length..]);
+        }
+
+        ParsedChain? best = null;
+        int bestScore = 0;
+
+        foreach (var chain in chains)
+        {
+            var configKey = chain.ConfigKey;
+            if (string.IsNullOrEmpty(configKey)) continue;
+
+            foreach (var candidate in candidates)
+            {
+                if (string.Equals(candidate, configKey, StringComparison.OrdinalIgnoreCase))
+                    return chain;
+
+                if (configKey.Contains(candidate, StringComparison.OrdinalIgnoreCase) && candidate.Length > bestScore)
+                {
+                    best = chain;
+                    bestScore = candidate.Length;
+                }
+                if (candidate.Contains(configKey, StringComparison.OrdinalIgnoreCase) && configKey.Length > bestScore)
+                {
+                    best = chain;
+                    bestScore = configKey.Length;
+                }
+            }
+        }
+
+        if (bestScore >= 4) return best;
+
+        return null;
+    }
+
+    private void BtnDetectAlgorithm_Click(object sender, RoutedEventArgs e)
+    {
+        RefreshDetectionAlgorithm();
+        UpdateDetectionButtonColors();
+    }
+
+    private void BtnDetectAtlas_Click(object sender, RoutedEventArgs e)
+    {
+        RefreshDetectionAtlas();
+        UpdateDetectionButtonColors();
+    }
+
+    private void UpdateDetectionButtonColors()
+    {
+        var activeOi = _selectedCluster?.Images.FirstOrDefault(i => i.IsScissorsActive);
+        var source = activeOi?.DefaultDetectionSource ?? DetectionSource.Algorithm;
+
+        if (source == DetectionSource.Algorithm)
+        {
+            iconAlgorithm.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0x56, 0x9C, 0xD6));
+            iconAtlas.SetResourceReference(System.Windows.Controls.Control.ForegroundProperty, "TextFillColorTertiaryBrush");
+        }
+        else
+        {
+            iconAlgorithm.SetResourceReference(System.Windows.Controls.Control.ForegroundProperty, "TextFillColorTertiaryBrush");
+            iconAtlas.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0x4E, 0xC9, 0xB0));
         }
     }
 
-    private void BtnRefreshDetection_Click(object sender, RoutedEventArgs e)
+    private void RefreshDetectionAlgorithm()
     {
         if (_selectedCluster == null) return;
 
-        // Re-run the expensive flood fill detection and cache raw results
         foreach (var oi in _selectedCluster.Images.Where(i => i.IsScissorsActive))
         {
             try
             {
                 using var img = SixLabors.ImageSharp.Image.Load<Rgba32>(oi.FilePath);
-                oi.RawDetectedObjects = DetectObjects(img);
-                oi.DetectedObjects = oi.RawDetectedObjects;
+                var objects = DetectObjects(img);
+                oi.AlgorithmObjects = objects;
+                oi.DefaultDetectionSource = DetectionSource.Algorithm;
+                oi.PerObjectDetectionSource = null;
+                oi.RawDetectedObjects = objects;
+                oi.DetectedObjects = objects;
+                oi.ObjectRotations = null;
             }
             catch { /* detection failed — non-critical */ }
         }
 
-        // UpdateDetectionOverlay will apply MergeToExpectedCount based on current suffixes
         UpdateDetectionOverlay();
     }
 
-    private void ProcessSplit()
+    private void RefreshDetectionAtlas()
+    {
+        if (_selectedCluster == null) return;
+
+        var exportDir = GetExportDir();
+        if (exportDir == null)
+        {
+            infoBar.Message = "Set Image Exporter base path and APK version in Settings first.";
+            infoBar.Severity = InfoBarSeverity.Warning;
+            infoBar.IsOpen = true;
+            return;
+        }
+
+        var allSprites = SpriteMetadataService.Load(exportDir);
+        if (allSprites.Count == 0)
+        {
+            infoBar.Message = "atlas_data.json not found. Re-extract textures from APK.";
+            infoBar.Severity = InfoBarSeverity.Warning;
+            infoBar.IsOpen = true;
+            return;
+        }
+
+        bool anyUpdated = false;
+        foreach (var oi in _selectedCluster.Images.Where(i => i.IsScissorsActive))
+        {
+            var imageFileName = System.IO.Path.GetFileNameWithoutExtension(oi.FilePath);
+            var textureSprites = SpriteMetadataService.GetSpritesForTexture(allSprites, imageFileName);
+            if (textureSprites.Count == 0) continue;
+
+            // Get image height for coordinate conversion
+            int imageHeight;
+            try
+            {
+                var imgInfo = Image.Identify(oi.FilePath);
+                imageHeight = imgInfo.Height;
+            }
+            catch { continue; }
+
+            var orderedSprites = textureSprites
+                .OrderByDescending(s => s.RectY)
+                .ThenBy(s => s.RectX)
+                .ToList();
+
+            var spriteObjects = orderedSprites.Select(s =>
+            {
+                int x = (int)s.RectX;
+                int y = imageHeight - (int)(s.RectY + s.RectHeight);
+                int w = Math.Max(1, (int)s.RectWidth);
+                int h = Math.Max(1, (int)s.RectHeight);
+                var rect = new Rectangle(x, y, w, h);
+                return (Full: rect, Main: rect);
+            }).ToList();
+
+            oi.AtlasObjects = spriteObjects;
+            oi.DefaultDetectionSource = DetectionSource.Atlas;
+            oi.PerObjectDetectionSource = null;
+            oi.RawDetectedObjects = spriteObjects;
+            oi.DetectedObjects = spriteObjects;
+            anyUpdated = true;
+        }
+
+        if (anyUpdated)
+        {
+            UpdateDetectionOverlay();
+            infoBar.Message = "Detection updated from atlas data.";
+            infoBar.Severity = InfoBarSeverity.Success;
+            infoBar.IsOpen = true;
+        }
+        else
+        {
+            infoBar.Message = "No atlas data found for current image.";
+            infoBar.Severity = InfoBarSeverity.Warning;
+            infoBar.IsOpen = true;
+        }
+    }
+
+    // ── Per-object detection source toggle ──
+
+    /// <summary>
+    /// Returns the effective rectangle for a given ordered object index, respecting per-object source overrides.
+    /// Falls back to the default ordered object if no override or no alternative source.
+    /// </summary>
+    private static (Rectangle Full, Rectangle Main) GetEffectiveObject(
+        OptimiserImage oi, int orderedIndex, (Rectangle Full, Rectangle Main) defaultObj,
+        List<(Rectangle Full, Rectangle Main)>? orderedAlgo,
+        List<(Rectangle Full, Rectangle Main)>? orderedAtlas)
+    {
+        if (oi.PerObjectDetectionSource == null || orderedAlgo == null || orderedAtlas == null)
+            return defaultObj;
+        if (orderedIndex < 0 || orderedIndex >= oi.PerObjectDetectionSource.Length)
+            return defaultObj;
+        if (orderedIndex >= orderedAlgo.Count || orderedIndex >= orderedAtlas.Count)
+            return defaultObj;
+
+        var source = oi.PerObjectDetectionSource[orderedIndex];
+        return source == DetectionSource.Atlas ? orderedAtlas[orderedIndex] : orderedAlgo[orderedIndex];
+    }
+
+    private void ToggleObjectSource(OptimiserImage oi, int orderedIndex)
+    {
+        var algo = oi.AlgorithmObjects;
+        var atlas = oi.AtlasObjects;
+        if (algo == null || atlas == null) return;
+
+        // Initialize per-object sources from current default if needed
+        int count = OrderObjects(oi.DetectedObjects).Count;
+        if (oi.PerObjectDetectionSource == null)
+            oi.PerObjectDetectionSource = Enumerable.Repeat(oi.DefaultDetectionSource, count).ToArray();
+
+        if (orderedIndex < 0 || orderedIndex >= oi.PerObjectDetectionSource.Length) return;
+
+        oi.PerObjectDetectionSource[orderedIndex] = oi.PerObjectDetectionSource[orderedIndex] == DetectionSource.Algorithm
+            ? DetectionSource.Atlas : DetectionSource.Algorithm;
+
+        // Only redraw overlay — don't modify RawDetectedObjects/DetectedObjects
+        UpdateDetectionOverlay();
+    }
+
+    // ── Dynamic preview margins based on banner visibility ──
+
+    private void UpdatePreviewMargins()
+    {
+        double top = autoLinkBanner.Visibility == Visibility.Visible ? 48 : 15;
+        bool anyBottomButton = refreshButtonGroup.Visibility == Visibility.Visible
+                            || btnPredictIndices.Visibility == Visibility.Visible;
+        double bottom = anyBottomButton ? 48 : 15;
+        var newMargin = new Thickness(15, top, 15, bottom);
+        if (imgPreview.Margin != newMargin)
+        {
+            imgPreview.Margin = newMargin;
+            // Margin change shifts the image position — redraw overlay to match
+            UpdateDetectionOverlay();
+        }
+    }
+
+    private void ProcessSplit(string? overrideOutputDir = null)
     {
         if (_selectedCluster == null || _selectedCluster.Images.Count == 0) return;
 
@@ -1577,7 +2331,7 @@ public partial class ImageOptimiserPage : UserControl
         var suffixes = inputIndices.Text.Split(new[] { ' ', ',', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
         if (suffixes.Length == 0)
         {
-            infoBar.Message = "Enter index values first.";
+            infoBar.Message = "Enter level values first.";
             infoBar.Severity = InfoBarSeverity.Warning;
             infoBar.IsOpen = true;
             return;
@@ -1594,28 +2348,45 @@ public partial class ImageOptimiserPage : UserControl
             }
 
             // Gather all objects from all scissors-active images in the cluster
-            var allOrdered = new List<(Rectangle Full, Rectangle Main, string SourcePath)>();
+            var allOrdered = new List<(Rectangle Full, Rectangle Main, string SourcePath, float Rotation)>();
 
             // Count non-skip suffixes for merge logic
             int nonSkipCount = suffixes.Count(s => s != "-");
 
             foreach (var oi in scissorsImages)
             {
-                using var img = Image.Load<Rgba32>(oi.FilePath);
-                var objects = DetectObjects(img);
+                // Use stored DetectedObjects (sprite-based when atlas_data.json is available,
+                // otherwise flood-fill based). Only re-detect as fallback.
+                var objects = oi.DetectedObjects.Count > 0
+                    ? oi.DetectedObjects
+                    : DetectObjects(Image.Load<Rgba32>(oi.FilePath));
                 var ordered = OrderObjects(objects);
 
                 // Apply merge only when single image in cluster
                 if (scissorsImages.Count == 1 && ordered.Count > suffixes.Length)
                     ordered = MergeToExpectedCount(ordered, suffixes.Length);
 
-                foreach (var obj in ordered)
-                    allOrdered.Add((obj.Full, obj.Main, oi.FilePath));
+                // Pre-compute ordered alternative sources for per-object overrides
+                bool hasBoth = oi.AlgorithmObjects != null && oi.AtlasObjects != null;
+                List<(Rectangle Full, Rectangle Main)>? ordAlgo = null, ordAtlas = null;
+                if (hasBoth)
+                {
+                    ordAlgo = OrderObjects(oi.AlgorithmObjects!);
+                    ordAtlas = OrderObjects(oi.AtlasObjects!);
+                }
+
+                for (int j = 0; j < ordered.Count; j++)
+                {
+                    var obj = GetEffectiveObject(oi, j, ordered[j], ordAlgo, ordAtlas);
+                    float rot = (oi.ObjectRotations != null && j < oi.ObjectRotations.Length)
+                        ? oi.ObjectRotations[j] : 0f;
+                    allOrdered.Add((obj.Full, obj.Main, oi.FilePath, rot));
+                }
             }
 
             if (allOrdered.Count > suffixes.Length)
             {
-                infoBar.Message = $"Not enough indexes ({suffixes.Length}) for {allOrdered.Count} objects.";
+                infoBar.Message = $"Not enough levels ({suffixes.Length}) for {allOrdered.Count} objects.";
                 infoBar.Severity = InfoBarSeverity.Error;
                 infoBar.IsOpen = true;
                 return;
@@ -1624,9 +2395,22 @@ public partial class ImageOptimiserPage : UserControl
             // Output dir and name from the name source image
             var nameSourceImg = _selectedCluster.Images[
                 Math.Clamp(_selectedCluster.NameSourceIndex, 0, _selectedCluster.Images.Count - 1)];
-            string dir = System.IO.Path.GetDirectoryName(nameSourceImg.FilePath)!;
             string name = System.IO.Path.GetFileNameWithoutExtension(nameSourceImg.FilePath);
             bool singleObject = nonSkipCount == 1;
+
+            string dir;
+            bool redirected;
+            if (overrideOutputDir != null)
+            {
+                dir = overrideOutputDir;
+                redirected = true;
+            }
+            else
+            {
+                (dir, redirected) = GetOutputDir(nameSourceImg.FilePath);
+            }
+            if (redirected)
+                Directory.CreateDirectory(dir);
 
             // Cache source images for cropping
             var imageCache = new Dictionary<string, Image<Rgba32>>();
@@ -1652,18 +2436,36 @@ public partial class ImageOptimiserPage : UserControl
 
                     var obj = allOrdered[i];
                     var sourceImage = imageCache[obj.SourcePath];
-                    int size = GetCanvasSize(obj.Full.Width, obj.Full.Height);
 
+                    using var crop = sourceImage.Clone(x => x.Crop(obj.Full));
+
+                    // Apply atlas rotation correction if sprite was stored rotated
+                    bool isRotated = obj.Rotation != 0f;
+                    if (isRotated)
+                        crop.Mutate(x => x.Rotate(obj.Rotation));
+
+                    int size = GetCanvasSize(crop.Width, crop.Height);
                     using var canvas = new Image<Rgba32>(size, size);
-                    float cx = (obj.Main.Left + obj.Main.Right + 1) / 2f;
-                    float cy = (obj.Main.Top + obj.Main.Bottom + 1) / 2f;
-                    int px = (int)Math.Round(size / 2f + 1.0f - (cx - obj.Full.Left));
-                    int py = (int)Math.Round(size / 2f + 1.0f - (cy - obj.Full.Top));
 
-                    using (var crop = sourceImage.Clone(x => x.Crop(obj.Full)))
-                        canvas.Mutate(x => x.DrawImage(crop, new Point(px, py), 1f));
+                    int px, py;
+                    if (isRotated)
+                    {
+                        // After rotation, center the crop on canvas
+                        px = (size - crop.Width) / 2;
+                        py = (size - crop.Height) / 2;
+                    }
+                    else
+                    {
+                        // Use Main rect for precise centering (center of mass)
+                        float cx = (obj.Main.Left + obj.Main.Right + 1) / 2f;
+                        float cy = (obj.Main.Top + obj.Main.Bottom + 1) / 2f;
+                        px = (int)Math.Round(size / 2f + 1.0f - (cx - obj.Full.Left));
+                        py = (int)Math.Round(size / 2f + 1.0f - (cy - obj.Full.Top));
+                    }
 
-                    string fullPath = singleObject
+                    canvas.Mutate(x => x.DrawImage(crop, new Point(px, py), 1f));
+
+                    string fullPath = singleObject && !redirected
                         ? nameSourceImg.FilePath
                         : System.IO.Path.Combine(dir, $"{name}{suffixes[i].PadLeft(2, '0')}.png");
 
@@ -1679,6 +2481,20 @@ public partial class ImageOptimiserPage : UserControl
                     img.Dispose();
             }
 
+            // Copy originals to output folder
+            if (redirected)
+            {
+                foreach (var sourcePath in scissorsImages.Select(oi => oi.FilePath).Distinct())
+                {
+                    var destPath = System.IO.Path.Combine(dir, System.IO.Path.GetFileName(sourcePath));
+                    if (!string.Equals(System.IO.Path.GetFullPath(sourcePath),
+                        System.IO.Path.GetFullPath(destPath), StringComparison.OrdinalIgnoreCase))
+                    {
+                        File.Copy(sourcePath, destPath, overwrite: true);
+                    }
+                }
+            }
+
             // Mark all scissors-active images as split, store result files on name source
             foreach (var oi in scissorsImages)
             {
@@ -1690,9 +2506,13 @@ public partial class ImageOptimiserPage : UserControl
 
             var msg = $"Split into {allResultFiles.Count} images.";
             if (skippedCount > 0) msg += $" Skipped {skippedCount}.";
+            if (redirected) msg += $" → {System.IO.Path.GetFileName(dir)}";
             infoBar.Message = msg;
             infoBar.Severity = InfoBarSeverity.Success;
             infoBar.IsOpen = true;
+
+            _lastOutputDir = redirected ? dir : null;
+            btnOpenOutputFolder.Visibility = redirected ? Visibility.Visible : Visibility.Collapsed;
 
             RebuildThumbnailStrip();
         }
@@ -1703,6 +2523,8 @@ public partial class ImageOptimiserPage : UserControl
             infoBar.IsOpen = true;
         }
     }
+
+
 
     // ══════════════════════════════════════════════════════════════
     //  OPTIMIZE ALL (TinyPNG)
@@ -1725,7 +2547,7 @@ public partial class ImageOptimiserPage : UserControl
             var msgBox = new Wpf.Ui.Controls.MessageBox
             {
                 Title = "Unsplit images detected",
-                Content = "You have entered split indices but haven't split the images yet.\n\nDo you want to split them and proceed to optimisation?",
+                Content = "You have entered split levels but haven't split the images yet.\n\nDo you want to split them and proceed to optimisation?",
                 PrimaryButtonText = "Split & proceed",
                 SecondaryButtonText = "Skip",
                 CloseButtonText = "Cancel",
@@ -1767,7 +2589,9 @@ public partial class ImageOptimiserPage : UserControl
         }
 
         // Collect files to optimize: iterate by cluster to avoid duplicate merged images
+        // If source is from export dir and not yet split, copy to output dir first
         var filesToOptimize = new List<string>();
+        bool anyRedirected = false;
         foreach (var cluster in _clusters)
         {
             var clusterSplitFiles = new List<string>();
@@ -1782,10 +2606,29 @@ public partial class ImageOptimiserPage : UserControl
             }
 
             if (hasSplit && clusterSplitFiles.Count > 0)
+            {
                 filesToOptimize.AddRange(clusterSplitFiles);
+            }
             else
+            {
                 foreach (var oi in cluster.Images)
-                    filesToOptimize.Add(oi.FilePath);
+                {
+                    var (outDir, redirected) = GetOutputDir(oi.FilePath);
+                    if (redirected)
+                    {
+                        anyRedirected = true;
+                        Directory.CreateDirectory(outDir);
+                        var destPath = System.IO.Path.Combine(outDir,
+                            System.IO.Path.GetFileName(oi.FilePath));
+                        File.Copy(oi.FilePath, destPath, overwrite: true);
+                        filesToOptimize.Add(destPath);
+                    }
+                    else
+                    {
+                        filesToOptimize.Add(oi.FilePath);
+                    }
+                }
+            }
         }
 
         if (filesToOptimize.Count == 0) return;
@@ -1821,7 +2664,19 @@ public partial class ImageOptimiserPage : UserControl
 
             Increment(s => s.ImagesOptimized += optimizedPaths.Count);
 
-            infoBar.Message = $"Optimised {optimizedPaths.Count} images.";
+            var optMsg = $"Optimised {optimizedPaths.Count} images.";
+            if (anyRedirected)
+            {
+                var outDir = filesToOptimize.Select(f => System.IO.Path.GetDirectoryName(f)!)
+                    .FirstOrDefault(d => d.EndsWith("Export - Items", StringComparison.OrdinalIgnoreCase));
+                if (outDir != null)
+                {
+                    _lastOutputDir = outDir;
+                    btnOpenOutputFolder.Visibility = Visibility.Visible;
+                    optMsg += $" → {System.IO.Path.GetFileName(outDir)}";
+                }
+            }
+            infoBar.Message = optMsg;
             infoBar.Severity = InfoBarSeverity.Success;
             infoBar.IsOpen = true;
 
@@ -1857,7 +2712,36 @@ public partial class ImageOptimiserPage : UserControl
 
         // Try to find matching atlas image in Export folder
         TrySuggestChainImage(chain);
+
+        // Enable scissors on images with detected objects (even single objects for 1:1 crop)
+        if (_selectedCluster != null)
+        {
+            bool changed = false;
+            foreach (var oi in _selectedCluster.Images)
+            {
+                if (oi.DetectedObjects.Count > 0 && !oi.IsScissorsActive)
+                {
+                    oi.IsScissorsActive = true;
+                    changed = true;
+                }
+            }
+            if (changed)
+            {
+                bool anyScissors = _selectedCluster.Images.Any(i => i.IsScissorsActive);
+                indexInputPanel.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+                splitButtonGroup.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+                refreshButtonGroup.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+                RebuildThumbnailStrip();
+            }
+        }
+
         UpdatePredictButtonVisibility();
+
+        // Auto-predict if images are already loaded
+        TryAutoPredict();
+
+        // Refresh detection overlay (sprite positions may have changed)
+        UpdateDetectionOverlay();
     }
 
     private void BtnExitChainMode_Click(object sender, RoutedEventArgs e)
@@ -1867,6 +2751,29 @@ public partial class ImageOptimiserPage : UserControl
         chainModeBanner.Visibility = Visibility.Collapsed;
         DismissSuggestion();
         UpdatePredictButtonVisibility();
+        UpdatePreviewMargins();
+
+        // Re-run flood fill detection to recalculate rectangles (sprite-based positions
+        // from chain mode may no longer be relevant)
+        if (_selectedCluster != null)
+        {
+            foreach (var oi in _selectedCluster.Images.Where(i => i.IsScissorsActive))
+            {
+                try
+                {
+                    using var img = Image.Load<Rgba32>(oi.FilePath);
+                    var objects = DetectObjects(img);
+                    oi.AlgorithmObjects = objects;
+                    oi.DefaultDetectionSource = DetectionSource.Algorithm;
+                    oi.PerObjectDetectionSource = null;
+                    oi.RawDetectedObjects = objects;
+                    oi.DetectedObjects = objects;
+                    oi.ObjectRotations = null;
+                }
+                catch { /* detection failed — non-critical */ }
+            }
+            UpdateDetectionOverlay();
+        }
     }
 
     private void TrySuggestChainImage(ParsedChain chain)
@@ -1883,8 +2790,19 @@ public partial class ImageOptimiserPage : UserControl
         if (!Directory.Exists(exportDir))
             return;
 
-        // Primary: Item{ConfigKey}.png
-        var candidates = new List<string> { $"Item{chain.ConfigKey}.png" };
+        // Build candidate filenames (highest priority first)
+        var candidates = new List<string>();
+
+        // Primary: resolve via PoolTag → prefab name (from game's PoolConfig)
+        if (!string.IsNullOrEmpty(chain.PoolTag))
+        {
+            var textureName = SpriteMetadataService.ResolveSkeletonForPoolTag(chain.PoolTag, exportDir);
+            if (textureName != null)
+                candidates.Add($"{textureName}.png");
+        }
+
+        // Fallback: Item{ConfigKey}.png pattern
+        candidates.Add($"Item{chain.ConfigKey}.png");
 
         // Also try merged keys
         if (chain.MergedFromConfigKeys != null)
@@ -1896,16 +2814,16 @@ public partial class ImageOptimiserPage : UserControl
             var fullPath = System.IO.Path.Combine(exportDir, candidate);
             if (!File.Exists(fullPath)) continue;
 
-            _suggestedImagePath = fullPath;
+            // Skip if this image (or same filename from another folder) is already loaded
+            var candidateFileName = System.IO.Path.GetFileName(fullPath);
+            if (AllImages.Any(img => string.Equals(
+                System.IO.Path.GetFileName(img.FilePath),
+                candidateFileName,
+                StringComparison.OrdinalIgnoreCase)))
+                return;
 
-            // Show banner with thumbnail
-            txtSuggestionTitle.Text = $"Found: {candidate}";
-            txtSuggestionPath.Text = exportDir;
-
-            var thumb = LoadThumbnail(fullPath, 48);
-            imgSuggestionPreview.Source = thumb;
-
-            imageSuggestionBanner.Visibility = Visibility.Visible;
+            // Auto-load the atlas image directly (skip suggestion banner)
+            AddImages(new[] { fullPath });
             return;
         }
     }
@@ -1969,7 +2887,7 @@ public partial class ImageOptimiserPage : UserControl
             // Determine the cluster's name source image
             var nameSourceIdx = Math.Clamp(cluster.NameSourceIndex, 0, cluster.Images.Count - 1);
             var nameSourceImg = cluster.Images[nameSourceIdx];
-            var chainName = _activeChain != null ? SplitCamelCase(_activeChain.ConfigKey!) : null;
+            var chainName = _activeChain?.DisplayName;
             var clusterChainName = chainName ?? nameSourceImg.DetectedChainName;
             var clusterGroupPath = nameSourceImg.FilePath; // shared SplitGroupSourcePath for the whole cluster
 
@@ -2148,6 +3066,12 @@ public partial class ImageOptimiserPage : UserControl
         btnClipboardAdd.Visibility = Visibility.Collapsed;
     }
 
+    private void BtnOpenOutputFolder_Click(object sender, RoutedEventArgs e)
+    {
+        if (_lastOutputDir != null && System.IO.Directory.Exists(_lastOutputDir))
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(_lastOutputDir) { UseShellExecute = true });
+    }
+
     private void BtnClipboardAdd_Click(object sender, RoutedEventArgs e)
     {
         HideClipboardAdd();
@@ -2253,6 +3177,36 @@ public partial class ImageOptimiserPage : UserControl
     private string? TryMatchChainName(string filePath)
     {
         var name = System.IO.Path.GetFileNameWithoutExtension(filePath);
+
+        // Try sprite metadata or PoolTag-based matching (most accurate for atlas textures)
+        var exportDir = GetExportDir();
+        if (exportDir != null)
+        {
+            var allSprites = SpriteMetadataService.Load(exportDir);
+            var allSkinMappings = SpriteMetadataService.LoadSkinMappings(exportDir);
+            if (allSprites.Count > 0)
+            {
+                var textureSprites = SpriteMetadataService.GetSpritesForTexture(allSprites, name);
+                if (textureSprites.Count > 0)
+                {
+                    var matchedChain = FindChainForTexture(name, allSkinMappings);
+                    if (matchedChain != null)
+                        return matchedChain.DisplayName;
+                }
+            }
+
+            // Reverse PoolTag lookup: texture name → PoolTag → chain
+            var matchedPoolTag = SpriteMetadataService.ResolvePoolTagForTexture(name, exportDir);
+            if (matchedPoolTag != null)
+            {
+                var poolTagChains = _main.DataService?.Chains;
+                var match = poolTagChains?.FirstOrDefault(c =>
+                    string.Equals(c.PoolTag, matchedPoolTag, StringComparison.OrdinalIgnoreCase));
+                if (match != null)
+                    return match.DisplayName;
+            }
+        }
+
         if (name.StartsWith("Item", StringComparison.OrdinalIgnoreCase) && name.Length > 4)
             name = name.Substring(4);
 
@@ -2478,7 +3432,16 @@ public partial class ImageOptimiserPage : UserControl
     private static List<(Rectangle Full, Rectangle Main)> OrderObjects(List<(Rectangle Full, Rectangle Main)> objects)
     {
         if (objects.Count <= 1) return objects;
+        var rows = SplitIntoObjectRows(objects);
+        return rows.SelectMany(r => r.OrderBy(o => o.Full.Left)).ToList();
+    }
 
+    /// <summary>
+    /// Splits detected objects into visual rows based on Y positions.
+    /// </summary>
+    private static List<List<(Rectangle Full, Rectangle Main)>> SplitIntoObjectRows(
+        List<(Rectangle Full, Rectangle Main)> objects)
+    {
         var sorted = objects.OrderBy(o => o.Full.Top + o.Full.Height / 2.0).ToList();
         var rows = new List<List<(Rectangle Full, Rectangle Main)>>();
         var currentRow = new List<(Rectangle Full, Rectangle Main)> { sorted[0] };
@@ -2498,8 +3461,16 @@ public partial class ImageOptimiserPage : UserControl
             currentRow.Add(sorted[i]);
         }
         rows.Add(currentRow);
+        return rows;
+    }
 
-        return rows.SelectMany(r => r.OrderBy(o => o.Full.Left)).ToList();
+    /// <summary>
+    /// Returns per-row object counts (e.g. [8, 2] for 8 items in first row, 2 in second).
+    /// </summary>
+    private static List<int> GroupIntoRows(List<(Rectangle Full, Rectangle Main)> orderedObjects)
+    {
+        var rows = SplitIntoObjectRows(orderedObjects);
+        return rows.Select(r => r.Count).ToList();
     }
 
     private static List<(Rectangle Full, Rectangle Main)> MergeToExpectedCount(

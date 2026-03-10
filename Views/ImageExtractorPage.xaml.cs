@@ -280,6 +280,7 @@ public partial class ImageExtractorPage : UserControl
                 ct);
 
             // ── Done ──
+            SpriteMetadataService.InvalidateCache();
             txtServerProgress.Text = "";
             var msg = $"Done! {result.ExtractedTextures:N0} textures from {result.ProcessedBundles} bundles.";
             if (result.SkippedDuplicates > 0)
@@ -435,6 +436,7 @@ public partial class ImageExtractorPage : UserControl
                 ct);
 
             // 4. Show results
+            SpriteMetadataService.InvalidateCache();
             txtExtractProgress.Text = "";
             var msg = $"Done! {result.ExtractedTextures:N0} textures extracted from {result.ProcessedBundles} bundles.";
             if (result.SkippedDuplicates > 0)

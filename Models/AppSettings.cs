@@ -2,7 +2,7 @@ namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.15.4";
+    public const string Version = "v0.16.0";
 }
 
 public class AppSettings
@@ -21,6 +21,8 @@ public class AppSettings
     public string TinifyApiKey2 { get; set; } = "";
     public bool ClipboardAutoAdd { get; set; } = true;
     public bool ClipboardMonitorGlobal { get; set; } = false;
+    public bool AutoPredict { get; set; } = true;
+    public bool ClearOptimiserOnChainEntry { get; set; } = true;
 
     // Wiki Data Parser — area chunk sizes (default: one chunk of 30)
     public List<int> AreaChunkSizes { get; set; } = new() { 30 };
@@ -86,8 +88,9 @@ public class AppSettings
     public bool EventUncategorised { get; set; } = true;
     public bool EventSubExpanded { get; set; } = false;
 
-    // AI / Experimental
-    public string AnthropicApiKey { get; set; } = "";
+    // Discord — dump distribution
+    public string DiscordBotToken { get; set; } = "MTQ4MTA1OTQzMjk5Njc5ODQ3NA.GhQm04.8K1wvBOqrczgokA_lkf7SKcSpYqFBli52895Fw";
+    public string DiscordChannelId { get; set; } = "1108526050826276935";
 
     // Appearance
     public string ThemePreference { get; set; } = "System"; // "System", "Light", "Dark"

@@ -344,26 +344,24 @@
                     <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
                             CornerRadius="8"
                             BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
-                        <StackPanel Margin="16,14,16,12">
-                            <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
-                                       TextWrapping="Wrap" Margin="0,0,0,10">
-                                <Run Text="The app checks for updates automatically every 15 minutes. You can also check manually." />
-                            </TextBlock>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock x:Name="txtUpdateStatus" Grid.Column="0" FontSize="12"
-                                           VerticalAlignment="Center"
+                        <Grid Margin="16,14,16,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                           TextWrapping="Wrap"
+                                           Text="The app checks for updates automatically every 15 minutes. You can also check manually." />
+                                <TextBlock x:Name="txtUpdateStatus" FontSize="12" Margin="0,4,0,0"
                                            Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
-                                <ui:Button x:Name="btnCheckUpdates" Grid.Column="2"
-                                           Content="Check for Updates" Appearance="Secondary"
-                                           Height="34" Padding="16,0"
-                                           Click="BtnCheckUpdates_Click" />
-                            </Grid>
-                        </StackPanel>
+                            </StackPanel>
+                            <ui:Button x:Name="btnCheckUpdates" Grid.Column="1"
+                                       Content="Check for Updates" Appearance="Secondary"
+                                       Height="34" Padding="16,0" Margin="12,0,0,0"
+                                       VerticalAlignment="Center"
+                                       Click="BtnCheckUpdates_Click" />
+                        </Grid>
                     </Border>
 
                 </StackPanel>
@@ -454,6 +452,25 @@
                                                      Checked="ToggleClipboardGlobal_Changed"
                                                      Unchecked="ToggleClipboardGlobal_Changed" />
                                 </Grid>
+                                <Grid Margin="0,10,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                        <TextBlock Text="Clear optimiser on chain entry" FontSize="13" FontWeight="SemiBold"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                   Margin="0,0,0,4" />
+                                        <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                                   TextWrapping="Wrap">
+                                            <Run Text="Clear all images from the Image Optimiser when navigating from Item Chains." />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <ui:ToggleSwitch x:Name="toggleClearOptimiserOnChainEntry" Grid.Column="1"
+                                                     VerticalAlignment="Center"
+                                                     Checked="ToggleClearOptimiserOnChainEntry_Changed"
+                                                     Unchecked="ToggleClearOptimiserOnChainEntry_Changed" />
+                                </Grid>
                             </StackPanel>
 
                         </StackPanel>
@@ -461,34 +478,6 @@
 
                     <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
                                Margin="4,6,0,16"><Run Text="Get your free key at " /><Hyperlink NavigateUri="https://tinify.com/developers" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="tinypng.com (tinify.com)" /></Hyperlink><Run Text="." /></TextBlock>
-
-                    <!-- AI / EXPERIMENTAL -->
-                    <StackPanel Orientation="Horizontal" Margin="4,0,0,10">
-                        <ui:SymbolIcon Symbol="BrainCircuit24" FontSize="20" Margin="0,0,8,0"
-                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                        <TextBlock Text="AI / Experimental" FontSize="16" FontWeight="SemiBold"
-                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                    </StackPanel>
-
-                    <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                            CornerRadius="8"
-                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
-                        <StackPanel Margin="16,14,16,12">
-                            <TextBlock Text="Anthropic API Key" FontSize="13" FontWeight="SemiBold"
-                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                       Margin="0,0,0,4" />
-                            <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
-                                       TextWrapping="Wrap" Margin="0,0,0,8">
-                                <Run Text="Used for AI-powered index prediction in the Image Optimiser. Uses Claude Haiku (~$0.01 per batch)." />
-                            </TextBlock>
-                            <ui:TextBox x:Name="txtAnthropicKey"
-                                        PlaceholderText="sk-ant-api03-..."
-                                        TextChanged="AnthropicKey_TextChanged" />
-                        </StackPanel>
-                    </Border>
-
-                    <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
-                               Margin="4,6,0,16"><Run Text="Get your API key at " /><Hyperlink NavigateUri="https://console.anthropic.com/settings/keys" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="console.anthropic.com" /></Hyperlink><Run Text="." /></TextBlock>
 
                 </StackPanel>
             </ScrollViewer>

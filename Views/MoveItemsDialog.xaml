@@ -150,15 +150,23 @@
                                       ValueChanged="NbLevel_ValueChanged" />
                     </Grid>
 
-                    <!-- Move wiki page checkbox -->
-                    <CheckBox x:Name="chkMovePage" Grid.Row="5"
-                              FontSize="12" Margin="0,0,0,10"
-                              IsEnabled="False"
-                              ToolTipService.ShowOnDisabled="True"
-                              ToolTipService.InitialShowDelay="0"
-                              ToolTip="Page does not exist on wiki"
-                              Checked="ChkMovePage_Changed"
-                              Unchecked="ChkMovePage_Changed" />
+                    <!-- Move wiki page + Move images checkboxes -->
+                    <StackPanel Grid.Row="5">
+                        <CheckBox x:Name="chkMovePage"
+                                  FontSize="12" Margin="0,0,0,4"
+                                  IsEnabled="False"
+                                  ToolTipService.ShowOnDisabled="True"
+                                  ToolTipService.InitialShowDelay="0"
+                                  ToolTip="Page does not exist on wiki"
+                                  Checked="ChkMovePage_Changed"
+                                  Unchecked="ChkMovePage_Changed" />
+                        <CheckBox x:Name="chkMoveImages"
+                                  Content="Move chain images"
+                                  FontSize="12" Margin="0,0,0,10"
+                                  IsChecked="True"
+                                  Checked="ChkMoveImages_Changed"
+                                  Unchecked="ChkMoveImages_Changed" />
+                    </StackPanel>
 
                     <!-- Conflict panel -->
                     <Border x:Name="conflictPanel" Grid.Row="6" Visibility="Collapsed"

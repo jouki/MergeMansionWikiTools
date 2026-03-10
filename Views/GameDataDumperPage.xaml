@@ -368,6 +368,17 @@
                             <TextBlock Text="Load Dumped Files" FontSize="12" VerticalAlignment="Center" />
                         </StackPanel>
                     </ui:Button>
+                    <ui:Button x:Name="btnPublishDiscord" Appearance="Secondary" Height="34"
+                               Visibility="Collapsed" Margin="8,0,0,0"
+                               Click="BtnPublishDiscord_Click"
+                               ToolTip="Publish dump ZIP to Discord channel"
+                               ToolTipService.InitialShowDelay="0"
+                               ToolTipService.ShowOnDisabled="True">
+                        <StackPanel Orientation="Horizontal">
+                            <ui:SymbolIcon Symbol="Send24" FontSize="16" Margin="0,0,6,0" />
+                            <TextBlock Text="Publish to Discord" FontSize="12" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </ui:Button>
                 </StackPanel>
             </Grid>
 

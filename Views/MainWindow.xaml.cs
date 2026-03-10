@@ -550,6 +550,7 @@ public partial class MainWindow : FluentWindow
             var newChain = new ParsedChain
             {
                 ConfigKey = primarySource.ConfigKey,
+                PoolTag = primarySource.PoolTag,
                 DisplayName = customName ?? group.Key,
                 OriginalName = primarySource.OriginalName,
                 HasNaturalName = primarySource.HasNaturalName,
@@ -814,6 +815,8 @@ public partial class MainWindow : FluentWindow
     public void NavigateToImageOptimiserChainMode(ParsedChain chain)
     {
         _imageOptimiserPage ??= new ImageOptimiserPage(this);
+        if (Settings.ClearOptimiserOnChainEntry)
+            _imageOptimiserPage.ClearAll();
         _imageOptimiserPage.EnterChainMode(chain);
         contentArea.Content = _imageOptimiserPage;
         navList.SelectedIndex = 1;

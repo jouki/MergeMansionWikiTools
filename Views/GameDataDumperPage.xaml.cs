@@ -627,6 +627,9 @@ public partial class GameDataDumperPage : UserControl
                     btnUseDumpFiles.Visibility = Visibility.Collapsed;
 
                 Increment(s => s.DataDumps++);
+
+                // Auto-check if dump is newer than last Discord publish
+                _ = CheckDiscordPublishAsync(outputPath);
             }
 
             resultInfoBar.IsOpen = true;
@@ -817,6 +820,121 @@ public partial class GameDataDumperPage : UserControl
         var border = FindVisualChild<Border>(control);
         if (border != null)
             border.CornerRadius = radius;
+    }
+
+    // ── Discord Publish ─────────────────────────────────────────
+
+    private string? _pendingPublishDir;
+
+    private async Task CheckDiscordPublishAsync(string dumpDir)
+    {
+        var token = _main.Settings.DiscordBotToken;
+        var channelId = _main.Settings.DiscordChannelId;
+        if (string.IsNullOrWhiteSpace(token) || string.IsNullOrWhiteSpace(channelId))
+        {
+            btnPublishDiscord.Visibility = Visibility.Collapsed;
+            return;
+        }
+
+        var createdAt = DiscordDumpService.ReadCreatedAtFromDump(dumpDir);
+        if (createdAt == null)
+        {
+            btnPublishDiscord.Visibility = Visibility.Collapsed;
+            return;
+        }
+
+        try
+        {
+            var lastPublished = await DiscordDumpService.GetLastPublishedDateAsync(token, channelId);
+            if (DiscordDumpService.IsDumpNewer(createdAt, lastPublished))
+            {
+                _pendingPublishDir = dumpDir;
+                btnPublishDiscord.Visibility = Visibility.Visible;
+                btnPublishDiscord.IsEnabled = true;
+
+                if (lastPublished == null)
+                    btnPublishDiscord.ToolTip = "New dump available — no previous publish found";
+                else
+                    btnPublishDiscord.ToolTip = $"Dump is newer than last publish ({lastPublished:yyyy-MM-dd HH:mm})";
+            }
+            else
+            {
+                btnPublishDiscord.Visibility = Visibility.Visible;
+                btnPublishDiscord.IsEnabled = false;
+                btnPublishDiscord.ToolTip = "Dump is not newer than last published version";
+            }
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Warn($"Discord publish check failed: {ex.Message}");
+            btnPublishDiscord.Visibility = Visibility.Collapsed;
+        }
+    }
+
+    private async void BtnPublishDiscord_Click(object sender, RoutedEventArgs e)
+    {
+        if (_pendingPublishDir == null) return;
+
+        var token = _main.Settings.DiscordBotToken;
+        var channelId = _main.Settings.DiscordChannelId;
+        if (string.IsNullOrWhiteSpace(token) || string.IsNullOrWhiteSpace(channelId)) return;
+
+        var createdAt = DiscordDumpService.ReadCreatedAtFromDump(_pendingPublishDir);
+        if (createdAt == null) return;
+
+        // Confirm before publishing
+        var msgBox = new Wpf.Ui.Controls.MessageBox
+        {
+            Title = "Publish to Discord",
+            Content = $"Upload dump ZIP to Discord?\n\nCreated at: {createdAt}\nFolder: {System.IO.Path.GetFileName(_pendingPublishDir)}",
+            PrimaryButtonText = "Publish",
+            CloseButtonText = "Cancel",
+            Owner = Window.GetWindow(this)
+        };
+        Wpf.Ui.Appearance.ApplicationThemeManager.Apply(msgBox);
+        var result = await msgBox.ShowDialogAsync();
+        if (result != Wpf.Ui.Controls.MessageBoxResult.Primary) return;
+
+        btnPublishDiscord.IsEnabled = false;
+        var originalContent = btnPublishDiscord.ToolTip;
+
+        var progress = new Progress<string>(msg =>
+        {
+            Dispatcher.Invoke(() =>
+            {
+                txtLog.Text += $"\n[Discord] {msg}";
+                logScroller.ScrollToEnd();
+            });
+        });
+
+        try
+        {
+            var success = await DiscordDumpService.PublishDumpAsync(
+                token, channelId, _pendingPublishDir, createdAt, progress);
+
+            if (success)
+            {
+                resultInfoBar.Title = "Published to Discord";
+                resultInfoBar.Message = "Dump ZIP uploaded successfully.";
+                resultInfoBar.Severity = Wpf.Ui.Controls.InfoBarSeverity.Success;
+                resultInfoBar.IsOpen = true;
+                btnPublishDiscord.ToolTip = "Already published";
+            }
+            else
+            {
+                btnPublishDiscord.IsEnabled = true;
+                btnPublishDiscord.ToolTip = originalContent;
+            }
+        }
+        catch (Exception ex)
+        {
+            resultInfoBar.Title = "Discord publish failed";
+            resultInfoBar.Message = ex.Message;
+            resultInfoBar.Severity = Wpf.Ui.Controls.InfoBarSeverity.Error;
+            resultInfoBar.IsOpen = true;
+            btnPublishDiscord.IsEnabled = true;
+            btnPublishDiscord.ToolTip = originalContent;
+        }
     }
 
     private static T? FindVisualChild<T>(DependencyObject parent) where T : DependencyObject

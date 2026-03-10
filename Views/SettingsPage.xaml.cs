@@ -30,7 +30,6 @@ public partial class SettingsPage : UserControl
         txtEventsPath.Text = _main.Settings.EventsJsonPath;
         txtTinifyKey.Text = _main.Settings.TinifyApiKey;
         txtTinifyKey2.Text = _main.Settings.TinifyApiKey2;
-        txtAnthropicKey.Text = _main.Settings.AnthropicApiKey;
         txtImageBasePath.Text = _main.Settings.ImageExporterBasePath;
         // Debug mode
         toggleDebugMode.IsChecked = _main.Settings.DebugMode;
@@ -43,6 +42,7 @@ public partial class SettingsPage : UserControl
         toggleClipboardAutoAdd.IsChecked = _main.Settings.ClipboardAutoAdd;
         toggleClipboardGlobal.IsChecked = _main.Settings.ClipboardMonitorGlobal;
         gridClipboardGlobal.Visibility = _main.Settings.ClipboardAutoAdd ? Visibility.Visible : Visibility.Collapsed;
+        toggleClearOptimiserOnChainEntry.IsChecked = _main.Settings.ClearOptimiserOnChainEntry;
 
         // Wiki mapping status + bot credentials
         UpdateWikiMappingStatus();
@@ -357,11 +357,6 @@ public partial class SettingsPage : UserControl
         _main.RaiseTinifyApiKeyChanged();
     }
 
-    private void AnthropicKey_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        _main.Settings.AnthropicApiKey = txtAnthropicKey.Text.Trim();
-        _main.SaveSettings();
-    }
 
     // ── Clipboard settings ──
 
@@ -385,6 +380,13 @@ public partial class SettingsPage : UserControl
         _main.SaveSettings();
     }
 
+    private void ToggleClearOptimiserOnChainEntry_Changed(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        _main.Settings.ClearOptimiserOnChainEntry = toggleClearOptimiserOnChainEntry.IsChecked == true;
+        _main.SaveSettings();
+    }
+
     // ── Updates ──
 
     private async void BtnCheckUpdates_Click(object sender, RoutedEventArgs e)
@@ -403,6 +405,7 @@ public partial class SettingsPage : UserControl
             else
             {
                 txtUpdateStatus.Text = $"You're up to date ({Models.AppVersion.Version})";
+                txtUpdateStatus.SetResourceReference(TextBlock.ForegroundProperty, "SystemFillColorSuccessBrush");
             }
         }
         catch (Exception ex)
