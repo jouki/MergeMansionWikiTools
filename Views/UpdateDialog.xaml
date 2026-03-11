@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         Title="Update Available"
-        Width="520" SizeToContent="Height"
+        Width="640" Height="580"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         ExtendsContentIntoTitleBar="True">
@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto" />  <!-- TitleBar -->
             <RowDefinition Height="Auto" />  <!-- Header -->
             <RowDefinition Height="Auto" />  <!-- Version info -->
-            <RowDefinition Height="Auto" />  <!-- Changelog -->
+            <RowDefinition Height="*" />     <!-- Changelog -->
             <RowDefinition Height="Auto" />  <!-- Progress -->
             <RowDefinition Height="Auto" />  <!-- Buttons -->
         </Grid.RowDefinitions>
@@ -68,16 +68,21 @@
         <!-- Changelog -->
         <Border Grid.Row="3" Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
                 CornerRadius="8" Padding="16,12" Margin="24,0,24,16"
-                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1"
-                MaxHeight="250">
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <StackPanel>
-                    <TextBlock Text="What's new" FontSize="13" FontWeight="SemiBold"
-                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,0,0,6" />
-                    <TextBlock x:Name="txtChangelog" TextWrapping="Wrap" FontSize="12"
-                               Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
-                </StackPanel>
-            </ScrollViewer>
+                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="What's new" FontSize="13" FontWeight="SemiBold"
+                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,0,0,6" />
+                <RichTextBox x:Name="rtbChangelog" Grid.Row="1"
+                             IsReadOnly="True" BorderThickness="0" Background="Transparent"
+                             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                             FontSize="12" Padding="0"
+                             VerticalScrollBarVisibility="Auto"
+                             IsDocumentEnabled="True" />
+            </Grid>
         </Border>
 
         <!-- Progress (hidden by default) -->

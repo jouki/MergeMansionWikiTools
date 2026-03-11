@@ -2,7 +2,7 @@ namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.16.1";
+    public const string Version = "v0.16.2";
 }
 
 public class AppSettings
@@ -100,7 +100,8 @@ public class AppSettings
             return string.Join(".", p.Select(s => new string(s.Reverse().ToArray())));
         }
     }
-    public string DiscordChannelId { get; set; } = "1108526050826276935";
+    public string DiscordChannelId { get; set; } = DefaultDiscordChannelId;
+    internal const string DefaultDiscordChannelId = "1108526050826276935";
 
     // Appearance
     public string ThemePreference { get; set; } = "System"; // "System", "Light", "Dark"

@@ -827,17 +827,25 @@ public partial class GameDataDumperPage : UserControl
 
     private string? _pendingPublishDir;
 
+    private void SetPublishEnabled(bool enabled)
+    {
+        btnPublishDiscord.IsEnabled = enabled;
+        btnPublishDiscord.Opacity = enabled ? 1.0 : 0.4;
+    }
+
     private async Task CheckDiscordPublishAsync(string dumpDir)
     {
         var token = _main.Settings.DiscordBotToken;
         if (string.IsNullOrWhiteSpace(token))
             token = AppSettings.DefaultDiscordBotToken;
         var channelId = _main.Settings.DiscordChannelId;
+        if (string.IsNullOrWhiteSpace(channelId))
+            channelId = AppSettings.DefaultDiscordChannelId;
 
         var createdAt = DiscordDumpService.ReadCreatedAtFromDump(dumpDir);
         if (createdAt == null)
         {
-            btnPublishDiscord.IsEnabled = false;
+            SetPublishEnabled(false);
             btnPublishDiscord.ToolTip = "No CreatedAt timestamp found in dump files";
             return;
         }
@@ -848,7 +856,7 @@ public partial class GameDataDumperPage : UserControl
             if (DiscordDumpService.IsDumpNewer(createdAt, lastPublished))
             {
                 _pendingPublishDir = dumpDir;
-                btnPublishDiscord.IsEnabled = true;
+                SetPublishEnabled(true);
 
                 if (lastPublished == null)
                     btnPublishDiscord.ToolTip = "New dump available — no previous publish found";
@@ -857,14 +865,14 @@ public partial class GameDataDumperPage : UserControl
             }
             else
             {
-                btnPublishDiscord.IsEnabled = false;
+                SetPublishEnabled(false);
                 btnPublishDiscord.ToolTip = "Dump is not newer than last published version";
             }
         }
         catch (Exception ex)
         {
             AppLogger.Warn($"Discord publish check failed: {ex.Message}");
-            btnPublishDiscord.IsEnabled = false;
+            SetPublishEnabled(false);
             btnPublishDiscord.ToolTip = $"Discord check failed: {ex.Message}";
         }
     }
@@ -877,6 +885,8 @@ public partial class GameDataDumperPage : UserControl
         if (string.IsNullOrWhiteSpace(token))
             token = AppSettings.DefaultDiscordBotToken;
         var channelId = _main.Settings.DiscordChannelId;
+        if (string.IsNullOrWhiteSpace(channelId))
+            channelId = AppSettings.DefaultDiscordChannelId;
 
         var createdAt = DiscordDumpService.ReadCreatedAtFromDump(_pendingPublishDir);
         if (createdAt == null) return;
@@ -921,7 +931,7 @@ public partial class GameDataDumperPage : UserControl
             }
             else
             {
-                btnPublishDiscord.IsEnabled = true;
+                SetPublishEnabled(true);
                 btnPublishDiscord.ToolTip = originalContent;
             }
         }

@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
+using SharpSevenZip;
 
 namespace MergeMansionWikiTools.Services;
 
@@ -71,24 +72,58 @@ internal static class DiscordDumpService
         string botToken, string channelId, string dumpDir, string createdAt,
         IProgress<string>? progress = null)
     {
-        // 1. Create ZIP
-        progress?.Report("Creating ZIP archive…");
+        // 1. Create 7z archive with LZMA2 ultra compression
+        progress?.Report("Creating 7z archive…");
         var now = DateTimeOffset.Now;
-        var zipName = $"dump_{now:dd_MM_yyyy_HH_mm}.zip";
-        var zipPath = Path.Combine(Path.GetTempPath(), zipName);
+        var archiveName = $"dump_{now:dd_MM_yyyy_HH_mm}.7z";
+        var zipPath = Path.Combine(Path.GetTempPath(), archiveName);
+        var zipName = archiveName;
 
         try
         {
             if (File.Exists(zipPath)) File.Delete(zipPath);
-            ZipFile.CreateFromDirectory(dumpDir, zipPath, CompressionLevel.Optimal, false);
 
-            var zipSize = new FileInfo(zipPath).Length;
-            progress?.Report($"ZIP created: {zipName} ({zipSize / (1024 * 1024.0):F1} MB)");
-
-            // Discord file size limit: 25 MB for regular bots
-            if (zipSize > 25 * 1024 * 1024)
+            var compressor = new SharpSevenZip.SharpSevenZipCompressor
             {
-                progress?.Report("ERROR: ZIP exceeds 25 MB Discord limit.");
+                ArchiveFormat = SharpSevenZip.OutArchiveFormat.SevenZip,
+                CompressionLevel = SharpSevenZip.CompressionLevel.Ultra,
+                CompressionMethod = SharpSevenZip.CompressionMethod.Lzma2,
+                DirectoryStructure = true,
+                PreserveDirectoryRoot = false
+            };
+            compressor.CompressDirectory(dumpDir, zipPath);
+
+            var archiveSize = new FileInfo(zipPath).Length;
+            progress?.Report($"7z created: {archiveName} ({archiveSize / (1024 * 1024.0):F1} MB)");
+
+            // Discord file size limit depends on server boost tier (8 MB for tier 0)
+            if (archiveSize > 8 * 1024 * 1024)
+            {
+                // Retry without Experimental/ subfolder
+                progress?.Report("7z too large — retrying without Experimental/ folder…");
+                File.Delete(zipPath);
+
+                // Copy files to temp dir excluding Experimental/
+                var tempDir = Path.Combine(Path.GetTempPath(), $"dump_filtered_{now:HHmmss}");
+                if (Directory.Exists(tempDir)) Directory.Delete(tempDir, true);
+                foreach (var file in Directory.EnumerateFiles(dumpDir, "*", SearchOption.AllDirectories))
+                {
+                    var rel = Path.GetRelativePath(dumpDir, file).Replace('\\', '/');
+                    if (rel.StartsWith("Experimental/", StringComparison.OrdinalIgnoreCase))
+                        continue;
+                    var dest = Path.Combine(tempDir, rel.Replace('/', Path.DirectorySeparatorChar));
+                    Directory.CreateDirectory(Path.GetDirectoryName(dest)!);
+                    File.Copy(file, dest);
+                }
+                compressor.CompressDirectory(tempDir, zipPath);
+                try { Directory.Delete(tempDir, true); } catch { }
+                archiveSize = new FileInfo(zipPath).Length;
+                progress?.Report($"7z without Experimental: {archiveSize / (1024 * 1024.0):F1} MB");
+            }
+
+            if (archiveSize > 25 * 1024 * 1024)
+            {
+                progress?.Report("ERROR: Archive still exceeds 25 MB Discord limit.");
                 return false;
             }
 
@@ -124,7 +159,7 @@ internal static class DiscordDumpService
                 threadPayload.Add(new StringContent($"Dump {now:dd.MM.yyyy HH:mm}"), "name");
 
                 var fc = new ByteArrayContent(fileBytes);
-                fc.Headers.ContentType = new MediaTypeHeaderValue("application/zip");
+                fc.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                 threadPayload.Add(fc, "message[files[0]]", zipName);
 
                 var threadReq = new HttpRequestMessage(HttpMethod.Post,
@@ -165,12 +200,12 @@ internal static class DiscordDumpService
             }
             else
             {
-                // Regular text channel → POST message with file
+                // Regular text channel / thread → POST message with file
                 using var form = new MultipartFormDataContent();
                 form.Add(new StringContent(messageText), "content");
 
                 var fc = new ByteArrayContent(fileBytes);
-                fc.Headers.ContentType = new MediaTypeHeaderValue("application/zip");
+                fc.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                 form.Add(fc, "files[0]", zipName);
 
                 var request = new HttpRequestMessage(HttpMethod.Post,

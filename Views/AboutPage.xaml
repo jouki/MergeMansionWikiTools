@@ -165,6 +165,10 @@
                                 </TextBlock.Style>
                                 onepiecefreak
                             </TextBlock>
+                            <TextBlock Text="Co-Author"
+                                       FontSize="11"
+                                       Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                       Margin="0,1,0,0"/>
                             <TextBlock Cursor="Hand" MouseLeftButtonUp="DumperRepo_Click"
                                        ToolTip="github.com/mm-utils/merge-mansion-dumper">
                                 <TextBlock.Style>
