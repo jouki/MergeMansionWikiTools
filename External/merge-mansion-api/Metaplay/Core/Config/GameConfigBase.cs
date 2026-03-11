@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace Metaplay.Core.Config
@@ -7,7 +8,7 @@ namespace Metaplay.Core.Config
     {
         protected GameConfigBase()
         {
-            _refResolvers = new Dictionary<Type, List<Func<object, object>>>();
+            _refResolvers = new ConcurrentDictionary<Type, List<Func<object, object>>>();
             if (MetaplayCore.IsInitialized)
                 return;
             throw new InvalidOperationException("MetaplayCore.Initialize() must be called before GameConfigs can be used");
@@ -15,16 +16,9 @@ namespace Metaplay.Core.Config
 
         public void RegisterReferenceResolver(Type type, Func<object, object> tryResolveFunc)
         {
-            if (_refResolvers.TryGetValue(type, out var resList))
-            {
-                resList.Add(tryResolveFunc);
-                return;
-            }
-
-            _refResolvers[type] = new List<Func<object, object>>
-            {
-                tryResolveFunc
-            };
+            _refResolvers.AddOrUpdate(type,
+                _ => new List<Func<object, object>> { tryResolveFunc },
+                (_, existing) => { existing.Add(tryResolveFunc); return existing; });
         }
 
         public object TryResolveReference(Type type, object configKey)
@@ -70,7 +64,7 @@ namespace Metaplay.Core.Config
 
         ContentHash Metaplay.Core.Config.IGameConfig.ArchiveVersion => ArchiveVersion;
 
-        private Dictionary<Type, List<Func<object, object>>> _refResolvers;
+        private ConcurrentDictionary<Type, List<Func<object, object>>> _refResolvers;
         public MetaTime ArchiveCreatedAt;
         public ContentHash ArchiveVersion;
     }

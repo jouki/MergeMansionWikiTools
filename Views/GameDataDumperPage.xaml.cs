@@ -6,6 +6,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using merge_mansion_dumper.Dumper;
+using MergeMansionWikiTools.Models;
 using MergeMansionWikiTools.Services;
 using Microsoft.Win32;
 using Wpf.Ui.Appearance;
@@ -829,17 +830,15 @@ public partial class GameDataDumperPage : UserControl
     private async Task CheckDiscordPublishAsync(string dumpDir)
     {
         var token = _main.Settings.DiscordBotToken;
+        if (string.IsNullOrWhiteSpace(token))
+            token = AppSettings.DefaultDiscordBotToken;
         var channelId = _main.Settings.DiscordChannelId;
-        if (string.IsNullOrWhiteSpace(token) || string.IsNullOrWhiteSpace(channelId))
-        {
-            btnPublishDiscord.Visibility = Visibility.Collapsed;
-            return;
-        }
 
         var createdAt = DiscordDumpService.ReadCreatedAtFromDump(dumpDir);
         if (createdAt == null)
         {
-            btnPublishDiscord.Visibility = Visibility.Collapsed;
+            btnPublishDiscord.IsEnabled = false;
+            btnPublishDiscord.ToolTip = "No CreatedAt timestamp found in dump files";
             return;
         }
 
@@ -849,7 +848,6 @@ public partial class GameDataDumperPage : UserControl
             if (DiscordDumpService.IsDumpNewer(createdAt, lastPublished))
             {
                 _pendingPublishDir = dumpDir;
-                btnPublishDiscord.Visibility = Visibility.Visible;
                 btnPublishDiscord.IsEnabled = true;
 
                 if (lastPublished == null)
@@ -859,7 +857,6 @@ public partial class GameDataDumperPage : UserControl
             }
             else
             {
-                btnPublishDiscord.Visibility = Visibility.Visible;
                 btnPublishDiscord.IsEnabled = false;
                 btnPublishDiscord.ToolTip = "Dump is not newer than last published version";
             }
@@ -867,7 +864,8 @@ public partial class GameDataDumperPage : UserControl
         catch (Exception ex)
         {
             AppLogger.Warn($"Discord publish check failed: {ex.Message}");
-            btnPublishDiscord.Visibility = Visibility.Collapsed;
+            btnPublishDiscord.IsEnabled = false;
+            btnPublishDiscord.ToolTip = $"Discord check failed: {ex.Message}";
         }
     }
 
@@ -876,8 +874,9 @@ public partial class GameDataDumperPage : UserControl
         if (_pendingPublishDir == null) return;
 
         var token = _main.Settings.DiscordBotToken;
+        if (string.IsNullOrWhiteSpace(token))
+            token = AppSettings.DefaultDiscordBotToken;
         var channelId = _main.Settings.DiscordChannelId;
-        if (string.IsNullOrWhiteSpace(token) || string.IsNullOrWhiteSpace(channelId)) return;
 
         var createdAt = DiscordDumpService.ReadCreatedAtFromDump(_pendingPublishDir);
         if (createdAt == null) return;

@@ -95,12 +95,13 @@ public class AreasService
         // Local hotspots first, merge multi-step CardStack groups, then global fallback
         var hotspots = BuildHotspotsLookup(el);
         MergeMultistepCardStackGroups(el, hotspots);
+        var localHotspotIds = new HashSet<string>(hotspots.Keys, StringComparer.Ordinal);
         if (globalHotspots != null)
             foreach (var kv in globalHotspots)
                 hotspots.TryAdd(kv.Key, kv.Value);
 
         var releaseDate = ParseTimeNeeded(el, "UnlockRequirements");
-        var tasks = ParseTaskDependencies(taskDeps, hotspots);
+        var tasks = ParseTaskDependencies(taskDeps, hotspots, localHotspotIds);
 
         return new LuaArea
         {
@@ -373,7 +374,8 @@ public class AreasService
 
     private static List<LuaTask> ParseTaskDependencies(
         string raw,
-        Dictionary<string, HotspotInfo> hotspots)
+        Dictionary<string, HotspotInfo> hotspots,
+        HashSet<string>? localHotspotIds = null)
     {
         if (string.IsNullOrWhiteSpace(raw)) return new();
 
@@ -391,12 +393,15 @@ public class AreasService
         // taskId → TaskNode
         var byId = new Dictionary<string, TaskNode>(StringComparer.Ordinal);
 
-        // Parse nodes
+        // Parse nodes — skip cross-area tasks (present in DOT as unlock parents from other areas)
         foreach (Match m in nodeRegex.Matches(normalized))
         {
             if (!int.TryParse(m.Groups[1].Value, out var dotIdx)) continue;
             var taskId = m.Groups[2].Value.Trim();
-            var rest = m.Groups[3].Value.Trim();
+
+            // Skip tasks that belong to a different area
+            if (localHotspotIds != null && !localHotspotIds.Contains(taskId))
+                continue;
 
             // Title and requirements come from HotspotsRefs (reliable JSON data)
             // DOT graph text is ignored — it mixes description with requirement labels

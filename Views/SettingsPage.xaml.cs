@@ -52,9 +52,6 @@ public partial class SettingsPage : UserControl
         _suppressBotCredentialReset = false;
         UpdateBotStatus();
 
-        // Discord
-        txtDiscordToken.Password = _main.Settings.DiscordBotToken;
-
         // Set theme ComboBox to match saved preference
         cmbTheme.SelectedIndex = _main.Settings.ThemePreference switch
         {
@@ -361,13 +358,7 @@ public partial class SettingsPage : UserControl
     }
 
 
-    // ── Discord settings ──
 
-    private void DiscordToken_Changed(object sender, RoutedEventArgs e)
-    {
-        _main.Settings.DiscordBotToken = txtDiscordToken.Password.Trim();
-        _main.SaveSettings();
-    }
 
     // ── Clipboard settings ──
 

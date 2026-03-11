@@ -3,6 +3,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Text.Json;
 
 namespace MergeMansionWikiTools.Services;
@@ -95,66 +96,111 @@ internal static class DiscordDumpService
             var messageText = $"New dumps from {now:dd.MM.yyyy HH:mm}{now:zzz}.\n" +
                               $"The data itself was created at {createdAt}";
 
-            // 3. Upload via multipart form
+            // 3. Resolve channel type and upload
             progress?.Report("Uploading to Discord…");
-
-            using var form = new MultipartFormDataContent();
-            form.Add(new StringContent(messageText), "content");
-
             var fileBytes = await File.ReadAllBytesAsync(zipPath);
-            var fileContent = new ByteArrayContent(fileBytes);
-            fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/zip");
-            form.Add(fileContent, "files[0]", zipName);
 
-            var request = new HttpRequestMessage(HttpMethod.Post,
-                $"{BaseUrl}/channels/{channelId}/messages");
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bot", botToken);
-            request.Content = form;
+            string? postedMessageId = null;
+            string? postedChannelId = null;
 
-            var response = await _http.SendAsync(request);
-            if (response.IsSuccessStatusCode)
+            var chReq = new HttpRequestMessage(HttpMethod.Get, $"{BaseUrl}/channels/{channelId}");
+            chReq.Headers.Authorization = new AuthenticationHeaderValue("Bot", botToken);
+            var chRes = await _http.SendAsync(chReq);
+            var isForum = false;
+            if (chRes.IsSuccessStatusCode)
             {
-                progress?.Report("Published successfully.");
-                AppLogger.Info($"Discord dump published: {zipName} to channel {channelId}");
+                var chJson = await chRes.Content.ReadAsStringAsync();
+                using var chDoc = JsonDocument.Parse(chJson);
+                var chType = chDoc.RootElement.GetProperty("type").GetInt32();
+                isForum = chType is 15 or 16; // forum or media channel
+            }
 
-                // Forward to additional channels
-                foreach (var fwdId in ForwardChannelIds)
+            if (isForum)
+            {
+                // Forum/media channel → create thread with initial message + file
+                progress?.Report("Forum channel detected — creating thread…");
+                using var threadPayload = new MultipartFormDataContent();
+                threadPayload.Add(new StringContent(messageText), "message[content]");
+                threadPayload.Add(new StringContent($"Dump {now:dd.MM.yyyy HH:mm}"), "name");
+
+                var fc = new ByteArrayContent(fileBytes);
+                fc.Headers.ContentType = new MediaTypeHeaderValue("application/zip");
+                threadPayload.Add(fc, "message[files[0]]", zipName);
+
+                var threadReq = new HttpRequestMessage(HttpMethod.Post,
+                    $"{BaseUrl}/channels/{channelId}/threads");
+                threadReq.Headers.Authorization = new AuthenticationHeaderValue("Bot", botToken);
+                threadReq.Content = threadPayload;
+
+                var threadRes = await _http.SendAsync(threadReq);
+                if (!threadRes.IsSuccessStatusCode)
                 {
-                    try
-                    {
-                        progress?.Report($"Forwarding to channel {fwdId}…");
-                        using var fwdForm = new MultipartFormDataContent();
-                        fwdForm.Add(new StringContent(messageText), "content");
-                        var fwdFileContent = new ByteArrayContent(fileBytes);
-                        fwdFileContent.Headers.ContentType = new MediaTypeHeaderValue("application/zip");
-                        fwdForm.Add(fwdFileContent, "files[0]", zipName);
-
-                        var fwdReq = new HttpRequestMessage(HttpMethod.Post,
-                            $"{BaseUrl}/channels/{fwdId}/messages");
-                        fwdReq.Headers.Authorization = new AuthenticationHeaderValue("Bot", botToken);
-                        fwdReq.Content = fwdForm;
-
-                        var fwdRes = await _http.SendAsync(fwdReq);
-                        if (fwdRes.IsSuccessStatusCode)
-                            progress?.Report($"Forwarded to {fwdId}.");
-                        else
-                            progress?.Report($"Forward to {fwdId} failed: {fwdRes.StatusCode}");
-                    }
-                    catch (Exception ex)
-                    {
-                        progress?.Report($"Forward to {fwdId} error: {ex.Message}");
-                    }
+                    var body = await threadRes.Content.ReadAsStringAsync();
+                    progress?.Report($"Discord API error: {threadRes.StatusCode} — {body}");
+                    AppLogger.Warn($"Discord forum thread failed: {threadRes.StatusCode} — {body}");
+                    return false;
                 }
 
-                return true;
+                // Extract message ID from the thread's initial message
+                var resJson = await threadRes.Content.ReadAsStringAsync();
+                using var resDoc = JsonDocument.Parse(resJson);
+                var root = resDoc.RootElement;
+                // Forum thread response includes the thread channel; the initial message is in "message"
+                if (root.TryGetProperty("message", out var msgEl) &&
+                    msgEl.TryGetProperty("id", out var msgId) &&
+                    msgEl.TryGetProperty("channel_id", out var msgChId))
+                {
+                    postedMessageId = msgId.GetString();
+                    postedChannelId = msgChId.GetString();
+                }
+                // Fallback: thread id itself might contain last_message_id
+                else if (root.TryGetProperty("last_message_id", out var lmId))
+                {
+                    postedMessageId = lmId.GetString();
+                    postedChannelId = root.GetProperty("id").GetString();
+                }
+
+                progress?.Report("Forum thread created successfully.");
+                AppLogger.Info($"Discord forum thread created in channel {channelId}");
             }
             else
             {
-                var body = await response.Content.ReadAsStringAsync();
-                progress?.Report($"Discord API error: {response.StatusCode} — {body}");
-                AppLogger.Warn($"Discord publish failed: {response.StatusCode} — {body}");
-                return false;
+                // Regular text channel → POST message with file
+                using var form = new MultipartFormDataContent();
+                form.Add(new StringContent(messageText), "content");
+
+                var fc = new ByteArrayContent(fileBytes);
+                fc.Headers.ContentType = new MediaTypeHeaderValue("application/zip");
+                form.Add(fc, "files[0]", zipName);
+
+                var request = new HttpRequestMessage(HttpMethod.Post,
+                    $"{BaseUrl}/channels/{channelId}/messages");
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bot", botToken);
+                request.Content = form;
+
+                var response = await _http.SendAsync(request);
+                if (!response.IsSuccessStatusCode)
+                {
+                    var body = await response.Content.ReadAsStringAsync();
+                    progress?.Report($"Discord API error: {response.StatusCode} — {body}");
+                    AppLogger.Warn($"Discord publish failed: {response.StatusCode} — {body}");
+                    return false;
+                }
+
+                var resJson = await response.Content.ReadAsStringAsync();
+                using var resDoc = JsonDocument.Parse(resJson);
+                postedMessageId = resDoc.RootElement.GetProperty("id").GetString();
+                postedChannelId = resDoc.RootElement.GetProperty("channel_id").GetString();
+
+                progress?.Report("Published successfully.");
+                AppLogger.Info($"Discord dump published: {zipName} to channel {channelId}");
             }
+
+            // 4. Forward to additional channels via Discord forward API
+            if (postedMessageId != null && postedChannelId != null)
+                await ForwardToChannelsAsync(botToken, postedMessageId, postedChannelId, progress);
+
+            return true;
         }
         finally
         {
@@ -225,5 +271,47 @@ internal static class DiscordDumpService
             return result;
 
         return null;
+    }
+
+    private static async Task ForwardToChannelsAsync(
+        string botToken, string messageId, string sourceChannelId,
+        IProgress<string>? progress)
+    {
+        foreach (var fwdId in ForwardChannelIds)
+        {
+            try
+            {
+                progress?.Report($"Forwarding to channel {fwdId}…");
+
+                // Discord forward: message_reference with type 1 (FORWARD)
+                var payload = JsonSerializer.Serialize(new
+                {
+                    message_reference = new
+                    {
+                        type = 1, // FORWARD
+                        channel_id = sourceChannelId,
+                        message_id = messageId
+                    }
+                });
+
+                var fwdReq = new HttpRequestMessage(HttpMethod.Post,
+                    $"{BaseUrl}/channels/{fwdId}/messages");
+                fwdReq.Headers.Authorization = new AuthenticationHeaderValue("Bot", botToken);
+                fwdReq.Content = new StringContent(payload, Encoding.UTF8, "application/json");
+
+                var fwdRes = await _http.SendAsync(fwdReq);
+                if (fwdRes.IsSuccessStatusCode)
+                    progress?.Report($"Forwarded to {fwdId}.");
+                else
+                {
+                    var body = await fwdRes.Content.ReadAsStringAsync();
+                    progress?.Report($"Forward to {fwdId} failed: {fwdRes.StatusCode} — {body}");
+                }
+            }
+            catch (Exception ex)
+            {
+                progress?.Report($"Forward to {fwdId} error: {ex.Message}");
+            }
+        }
     }
 }
