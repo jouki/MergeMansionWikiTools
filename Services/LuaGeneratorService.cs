@@ -437,9 +437,10 @@ public class LuaGeneratorService
                 {
                     skipPrice = item.SpeedUpCostGems;
                     rechargeTime = item.RechargeTimeMs;
-                    charges = item.ActivationAmountInCycle > 0 && item.StorageMax > 0
-                        ? item.StorageMax / item.ActivationAmountInCycle : 0;
-                    dropsPerCharge = item.ActivationAmountInCycle;
+                    int totalDropsPerCharge = item.ActivationAmountInCycle * item.HowManyGeneratedInCycle;
+                    charges = totalDropsPerCharge > 0 && item.StorageMax > 0
+                        ? item.StorageMax / totalDropsPerCharge : 0;
+                    dropsPerCharge = totalDropsPerCharge;
                     chargeTime = item.FirstCycleStartDelayMs;
                 }
                 else if (item.IsSpawner)

@@ -211,16 +211,16 @@ public class DataService
             // Storage max
             pi.StorageMax = GetInt(af, "StorageMax");
 
-            // Activation cycle data
+            // Activation cycle data (flattened: renamed fields, scalars instead of arrays)
             if (af.TryGetProperty("ActivationCycle", out var ac))
             {
-                pi.FirstCycleStartDelayMs = GetLong(ac, "FirstCycleStartDelay");
+                pi.FirstCycleStartDelayMs = GetLong(ac, "InitialCooldown");
 
-                if (ac.TryGetProperty("DailyActivationCyclesData", out var daily))
-                {
-                    pi.ActivationAmountInCycle = GetFirstInt(daily, "ActivationAmountInCycle");
-                    pi.RechargeTimeMs = GetFirstLong(daily, "DelaysBetweenCycles");
-                }
+                pi.ActivationAmountInCycle = GetInt(ac, "MiniChargesInSingleCharge");
+                pi.HowManyGeneratedInCycle = GetInt(ac, "DropsInSingleMiniCharge");
+                if (pi.HowManyGeneratedInCycle <= 0) pi.HowManyGeneratedInCycle = 1;
+                pi.ActivationHowManyCycles = GetInt(ac, "HowManyCycles", -1);
+                pi.RechargeTimeMs = GetLong(ac, "ChargeCooldown");
             }
 
             // DecayAfterLastCycleProducer (what generator decays into after use)

@@ -87,18 +87,13 @@ public class RandomOddsData
 
 public class ActivationCycleData
 {
-    public int ActivationDelay { get; set; }
-    public int FirstCycleStartDelay { get; set; }
+    public long MiniChargeCooldown { get; set; }
+    public long InitialCooldown { get; set; }
     public int HowManyCycles { get; set; } = -1;
-    public DailyActivationCyclesData? DailyActivationCyclesData { get; set; }
-}
-
-public class DailyActivationCyclesData
-{
-    public List<long> DelaysBetweenCycles { get; set; } = new();
-    public List<double> TimerSkipMultiplier { get; set; } = new();
-    public List<int> ActivationAmountInCycle { get; set; } = new();
-    public List<int> HowManyAreGeneratedInCycle { get; set; } = new();
+    public long ChargeCooldown { get; set; }
+    public int MiniChargesInSingleCharge { get; set; }
+    public int DropsInSingleMiniCharge { get; set; }
+    public double TimerSkipMultiplier { get; set; }
 }
 
 // ── Spawn features ──────────────────────────────────────────────────
@@ -230,6 +225,8 @@ public class ParsedItem
     public bool IsGenerator { get; set; }
     public Dictionary<string, double>? DropOdds { get; set; }
     public int ActivationAmountInCycle { get; set; }
+    public int HowManyGeneratedInCycle { get; set; } = 1;
+    public int ActivationHowManyCycles { get; set; } = -1;
     public int StorageMax { get; set; }
     public long RechargeTimeMs { get; set; }
     public long FirstCycleStartDelayMs { get; set; }

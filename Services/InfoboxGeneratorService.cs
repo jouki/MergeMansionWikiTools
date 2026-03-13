@@ -144,14 +144,28 @@ public class InfoboxGeneratorService
         if (chain.HasSpawners)       types.Add("Secondary Source Item");
         if (chain.IsEventChain)      types.Add("Event Item");
 
+        // Temporary Item — any item in chain has IsTemporary flag
+        if (chain.Items.Any(i => i.IsTemporary))
+            types.Add("Temporary Item");
+
+        // Decaying Item — any item has any form of decay
         bool decaying = chain.Items.Any(i =>
             i.HasDecay ||
             !string.IsNullOrEmpty(i.DecayAfterLastCycleItemType) ||
+            (i.DecayAfterLastCycleOdds != null && i.DecayAfterLastCycleOdds.Count > 0) ||
             !string.IsNullOrEmpty(i.SpawnDecayIntoItemType));
         if (decaying) types.Add("Decaying Item");
 
+        // Depleting Item — producer with limited cycles, no decay, no transform
         bool depleting = opts.IsDepleting ||
-            chain.Items.Any(i => i.DecaysWhenCyclesAreDone && i.SpawnHowManyCycles > 0);
+            chain.Items.Any(i =>
+                ((i.IsGenerator && i.ActivationHowManyCycles > 0) ||
+                 (i.IsSpawner && i.SpawnHowManyCycles > 0))
+                && !i.IsSink
+                && !i.HasDecay
+                && string.IsNullOrEmpty(i.DecayAfterLastCycleItemType)
+                && (i.DecayAfterLastCycleOdds == null || i.DecayAfterLastCycleOdds.Count == 0)
+                && string.IsNullOrEmpty(i.SpawnDecayIntoItemType));
         if (depleting) types.Add("Depleting Item");
 
         bool fueled = chain.Items.Any(i => i.IsSink);

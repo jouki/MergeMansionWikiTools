@@ -36,7 +36,9 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
             typeof(IItemProducer),
             typeof(IOrderProducer),
             typeof(PersistentFeatures),
-            typeof(ISinkStateFactory)
+            typeof(ISinkStateFactory),
+            typeof(IActivationCycle),
+            typeof(ActivationFeatures)
         };
 
         public MetaMergeChainSerializer(SharedGameConfig config, bool dropAsPercent, ILogger output)
@@ -70,7 +72,18 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 WriteObject(writer, sinkFactory.GetType(), sinkFactory, serializer);
             else if (value is PersistentFeatures persistent)
                 WriteObject(writer, persistent.GetType(), persistent, serializer);
+            else if (value is ActivationFeatures afObj)
+            {
+                _currentAF = afObj;
+                WriteObject(writer, afObj.GetType(), afObj, serializer);
+                _currentAF = null;
+            }
+            else if (value is ActivationCycle ac)
+                SerializeActivationCycle(writer, ac, serializer);
         }
+
+        /// <summary>Tracks current ActivationFeatures for MaxCharges injection before StorageMax.</summary>
+        private ActivationFeatures _currentAF;
 
         private void SerializeMergeChain(JsonWriter writer, MergeChainDefinition chainDef, JsonSerializer serializer)
         {
@@ -613,6 +626,11 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 if (speedUpCost.HasValue)
                     WriteProperty(writer, "SpeedUpCostGems", speedUpCost.Value, serializer);
             }
+            else if (value is ActivationFeatures afCustom)
+            {
+                // Non-MetaMember computed properties (would be lost without WriteObject override)
+                WriteProperty(writer, "Activable", afCustom.Activable, serializer);
+            }
         }
 
         protected override void WriteObjectMember(JsonWriter writer, string name, Type type, object value, JsonSerializer serializer)
@@ -653,6 +671,24 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 {
                     WriteProperty(writer, name, (value as ItemDef)?.GetDef(_config).ItemType ?? string.Empty, serializer);
                     return;
+                }
+            }
+            else if (type.IsAssignableTo(typeof(ActivationFeatures)))
+            {
+                // Inject MaxCharges immediately before StorageMax
+                if (name == nameof(ActivationFeatures.StorageMax) && _currentAF != null)
+                {
+                    int storageMax = (int)value;
+                    var ac = _currentAF.ActivationCycle as ActivationCycle;
+                    var cd = ac?.DailyActivationCyclesData as ActivationCycleData;
+                    if (cd != null && storageMax > 0)
+                    {
+                        int amt = cd.ActivationAmountInCycle?.FirstOrDefault() ?? 0;
+                        int hmg = cd.HowManyAreGeneratedInCycle?.FirstOrDefault() ?? 0;
+                        int dpc = amt * hmg;
+                        if (dpc > 0)
+                            WriteProperty(writer, "MaxCharges", storageMax / dpc, serializer);
+                    }
                 }
             }
 
@@ -733,6 +769,34 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
             // Fallback for other spawner types
             try { return spawner.TimeSkipPriceGems(null).Double; }
             catch { return 0; }
+        }
+
+        /// <summary>
+        /// Serializes ActivationCycle with renamed and flattened fields.
+        /// DailyActivationCyclesData arrays are unwrapped to scalars (all are single-element).
+        /// </summary>
+        private void SerializeActivationCycle(JsonWriter writer, ActivationCycle ac, JsonSerializer serializer)
+        {
+            writer.WriteStartObject();
+
+            WriteProperty(writer, "MiniChargeCooldown", ac.ActivationDelay.Milliseconds, serializer);
+            WriteProperty(writer, "InitialCooldown", ac.FirstCycleStartDelay.Milliseconds, serializer);
+            WriteProperty(writer, "HowManyCycles", ac.HowManyCycles, serializer);
+
+            var cycleData = ac.DailyActivationCyclesData as ActivationCycleData;
+            if (cycleData != null)
+            {
+                if (cycleData.DelaysBetweenCycles?.Count > 0)
+                    WriteProperty(writer, "ChargeCooldown", cycleData.DelaysBetweenCycles[0].Milliseconds, serializer);
+                if (cycleData.ActivationAmountInCycle?.Count > 0)
+                    WriteProperty(writer, "MiniChargesInSingleCharge", cycleData.ActivationAmountInCycle[0], serializer);
+                if (cycleData.HowManyAreGeneratedInCycle?.Count > 0)
+                    WriteProperty(writer, "DropsInSingleMiniCharge", cycleData.HowManyAreGeneratedInCycle[0], serializer);
+                if (cycleData.TimerSkipMultiplier?.Count > 0)
+                    WriteProperty(writer, "TimerSkipMultiplier", cycleData.TimerSkipMultiplier[0].Double, serializer);
+            }
+
+            writer.WriteEndObject();
         }
 
         /// <summary>
