@@ -479,6 +479,15 @@ public partial class ChainBrowserPage : UserControl
             tb.Inlines.Add(labelRun);
         }
 
+        // Show original JSON name when item was renamed via wiki
+        if (!string.IsNullOrEmpty(vm.Source.OriginalName)
+            && vm.Source.OriginalName != vm.Name)
+        {
+            var rawRun = new Run($"  ({vm.Source.OriginalName})") { FontSize = 10 };
+            rawRun.SetResourceReference(Run.ForegroundProperty, "TextFillColorTertiaryBrush");
+            tb.Inlines.Add(rawRun);
+        }
+
     }
 
     private void FilterRow_Click(object sender, MouseButtonEventArgs e)
@@ -618,7 +627,7 @@ public partial class ChainBrowserPage : UserControl
             }
         }
 
-        // Set Level / Rename Item visible only when exactly 1 item checked
+        // Set Level visible only for single item; Rename Item for 1+
         bool wikiVerified = _main.Settings.WikiVerified;
         foreach (var child in actionBar.Children)
         {
@@ -626,9 +635,16 @@ public partial class ChainBrowserPage : UserControl
             {
                 if (btn.Content is string content)
                 {
-                    if (content is "Set Level" or "Rename Item")
+                    if (content == "Set Level")
                     {
                         btn.Visibility = count == 1 ? Visibility.Visible : Visibility.Collapsed;
+                        btn.IsEnabled = wikiVerified;
+                        btn.ToolTip = wikiVerified ? null : "Wiki connection required";
+                    }
+                    else if (content is "Rename Item" or "Rename Items")
+                    {
+                        btn.Visibility = count >= 1 ? Visibility.Visible : Visibility.Collapsed;
+                        btn.Content = count > 1 ? "Rename Items" : "Rename Item";
                         btn.IsEnabled = wikiVerified;
                         btn.ToolTip = wikiVerified ? null : "Wiki connection required";
                     }
@@ -986,24 +1002,241 @@ public partial class ChainBrowserPage : UserControl
         if (chainVm == null) return;
 
         var checkedItems = chainVm.Items.Where(i => i.IsChecked).ToList();
-        if (checkedItems.Count != 1) return;
+        if (checkedItems.Count == 0) return;
 
-        var item = checkedItems[0].Source;
-        var newName = ShowRenameDialog(item.Name, item.ItemType);
-        if (newName == null) return;
+        if (checkedItems.Count == 1)
+        {
+            // Single rename
+            var item = checkedItems[0].Source;
+            var newName = ShowRenameDialog(item.Name, item.ItemType);
+            if (newName == null) return;
 
-        try
-        {
-            await WikiMappingService.PushItemNameAsync(
-                _main.Settings.WikiUsername, _main.Settings.WikiPassword,
-                item.ItemType, newName);
-            _main.ShowStatus($"Renamed {item.ItemType} → \"{newName}\"", InfoBarSeverity.Success);
-            _ = RefreshAfterWikiChange();
+            try
+            {
+                await WikiMappingService.PushItemNameAsync(
+                    _main.Settings.WikiUsername, _main.Settings.WikiPassword,
+                    item.ItemType, newName);
+                _main.ShowStatus($"Renamed {item.ItemType} → \"{newName}\"", InfoBarSeverity.Success);
+                _ = RefreshAfterWikiChange();
+            }
+            catch (Exception ex)
+            {
+                _main.ShowStatus($"Rename failed: {ex.Message}", InfoBarSeverity.Error);
+            }
         }
-        catch (Exception ex)
+        else
         {
-            _main.ShowStatus($"Rename failed: {ex.Message}", InfoBarSeverity.Error);
+            // Batch rename
+            var renames = ShowBatchRenameDialog(checkedItems.Select(i => i.Source).ToList(), chainVm.Source);
+            if (renames == null || renames.Count == 0) return;
+
+            try
+            {
+                await WikiMappingService.PushItemNamesBatchAsync(
+                    _main.Settings.WikiUsername, _main.Settings.WikiPassword, renames);
+                _main.ShowStatus($"Renamed {renames.Count} items", InfoBarSeverity.Success);
+                _ = RefreshAfterWikiChange();
+            }
+            catch (Exception ex)
+            {
+                _main.ShowStatus($"Batch rename failed: {ex.Message}", InfoBarSeverity.Error);
+            }
         }
+    }
+
+    /// <summary>
+    /// Shows a batch rename dialog for multiple items.
+    /// Returns list of (ItemType, NewName) pairs, or null if cancelled.
+    /// </summary>
+    private List<(string ItemType, string NewName)>? ShowBatchRenameDialog(List<ParsedItem> items, ParsedChain chain)
+    {
+        List<(string ItemType, string NewName)>? result = null;
+
+        var window = new Wpf.Ui.Controls.FluentWindow
+        {
+            Title = "Rename Items",
+            Width = 500,
+            Height = Math.Min(240 + items.Count * 62, 600),
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
+            ResizeMode = ResizeMode.CanResize,
+            MinWidth = 400, MinHeight = 280,
+            Owner = Window.GetWindow(this),
+            ExtendsContentIntoTitleBar = true,
+            WindowBackdropType = Wpf.Ui.Controls.WindowBackdropType.Mica,
+        };
+        ApplicationThemeManager.Apply(window);
+
+        var grid = new Grid();
+        grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+        grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+
+        var titleBar = new Wpf.Ui.Controls.TitleBar { Title = "Rename Items", Height = 36 };
+        Grid.SetRow(titleBar, 0);
+        grid.Children.Add(titleBar);
+
+        var contentPanel = new Grid { Margin = new Thickness(24, 10, 24, 20) };
+        contentPanel.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });  // checkboxes
+        contentPanel.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) }); // items
+        contentPanel.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });  // buttons
+
+        var textBoxes = new List<(string ItemType, Wpf.Ui.Controls.TextBox TextBox)>();
+
+        // Find primary item name (non-alias at matching level)
+        var primaryNameByLevel = chain.Items
+            .Where(i => !i.IsAlias && !string.IsNullOrEmpty(i.Name) && !i.Name.StartsWith("Item_"))
+            .ToDictionary(i => i.Level, i => i.Name);
+
+        // Checkboxes panel
+        var checkPanel = new StackPanel { Margin = new Thickness(0, 0, 0, 8) };
+
+        var chkSameName = new CheckBox
+        {
+            Content = "Use same name for all",
+            ToolTip = "Set all items to the first item's name",
+        };
+        ToolTipService.SetInitialShowDelay(chkSameName, 150);
+
+        var chkPrimaryName = new CheckBox
+        {
+            Content = "Use primary item names",
+            ToolTip = "Set each item's name to the primary (non-alias) item's name at the same level",
+            Margin = new Thickness(0, 4, 0, 0),
+            IsEnabled = primaryNameByLevel.Count > 0,
+        };
+        ToolTipService.SetInitialShowDelay(chkPrimaryName, 150);
+
+        checkPanel.Children.Add(chkSameName);
+        checkPanel.Children.Add(chkPrimaryName);
+        Grid.SetRow(checkPanel, 0);
+        contentPanel.Children.Add(checkPanel);
+
+        // Scrollable item list
+        var scrollViewer = new ScrollViewer { VerticalScrollBarVisibility = ScrollBarVisibility.Auto };
+        var itemsPanel = new StackPanel();
+
+        foreach (var item in items)
+        {
+            var label = new TextBlock
+            {
+                Text = item.ItemType,
+                FontSize = 11,
+                Margin = new Thickness(0, textBoxes.Count > 0 ? 10 : 0, 0, 3),
+            };
+            label.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorTertiaryBrush");
+
+            var textBox = new Wpf.Ui.Controls.TextBox
+            {
+                Text = item.Name,
+                PlaceholderText = "Item name...",
+                FontSize = 13,
+            };
+            textBoxes.Add((item.ItemType, textBox));
+
+            itemsPanel.Children.Add(label);
+            itemsPanel.Children.Add(textBox);
+        }
+
+        scrollViewer.Content = itemsPanel;
+        Grid.SetRow(scrollViewer, 1);
+        contentPanel.Children.Add(scrollViewer);
+
+        // Helper: disable/enable all textboxes
+        void SetTextBoxesLocked(bool locked)
+        {
+            foreach (var (_, tb) in textBoxes)
+                tb.IsEnabled = !locked;
+        }
+
+        // Live sync: typing in first textbox updates all others when checkbox is on
+        if (textBoxes.Count > 0)
+        {
+            textBoxes[0].TextBox.TextChanged += (_, _) =>
+            {
+                if (chkSameName.IsChecked != true) return;
+                var text = textBoxes[0].TextBox.Text;
+                for (int i = 1; i < textBoxes.Count; i++)
+                    textBoxes[i].TextBox.Text = text;
+            };
+        }
+
+        // Wire "same name for all" checkbox
+        chkSameName.Checked += (_, _) =>
+        {
+            chkPrimaryName.IsChecked = false;
+            if (textBoxes.Count == 0) return;
+            var firstName = textBoxes[0].TextBox.Text;
+            for (int i = 1; i < textBoxes.Count; i++)
+                textBoxes[i].TextBox.Text = firstName;
+            for (int i = 1; i < textBoxes.Count; i++)
+                textBoxes[i].TextBox.IsEnabled = false;
+            if (textBoxes.Count > 0) textBoxes[0].TextBox.IsEnabled = true;
+        };
+        chkSameName.Unchecked += (_, _) => SetTextBoxesLocked(false);
+
+        // Wire "use primary item names" checkbox
+        chkPrimaryName.Checked += (_, _) =>
+        {
+            chkSameName.IsChecked = false;
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (primaryNameByLevel.TryGetValue(items[i].Level, out var primaryName))
+                    textBoxes[i].TextBox.Text = primaryName;
+            }
+            SetTextBoxesLocked(true);
+        };
+        chkPrimaryName.Unchecked += (_, _) => SetTextBoxesLocked(false);
+
+        // Buttons
+        var btnSave = new Wpf.Ui.Controls.Button
+        {
+            Content = $"Save All ({items.Count})",
+            Appearance = ControlAppearance.Primary,
+            Padding = new Thickness(20, 6, 20, 6),
+            Margin = new Thickness(0, 0, 8, 0),
+        };
+        var btnCancel = new Wpf.Ui.Controls.Button
+        {
+            Content = "Cancel",
+            Padding = new Thickness(20, 6, 20, 6),
+        };
+        var buttonPanel = new StackPanel
+        {
+            Orientation = Orientation.Horizontal,
+            HorizontalAlignment = HorizontalAlignment.Right,
+            Margin = new Thickness(0, 12, 0, 0),
+        };
+        buttonPanel.Children.Add(btnSave);
+        buttonPanel.Children.Add(btnCancel);
+        Grid.SetRow(buttonPanel, 2);
+        contentPanel.Children.Add(buttonPanel);
+
+        Grid.SetRow(contentPanel, 1);
+        grid.Children.Add(contentPanel);
+        window.Content = grid;
+
+        btnSave.Click += (_, _) =>
+        {
+            // Sync first textbox to all locked ones
+            if (chkSameName.IsChecked == true && textBoxes.Count > 1)
+            {
+                var name = textBoxes[0].TextBox.Text;
+                for (int i = 1; i < textBoxes.Count; i++)
+                    textBoxes[i].TextBox.Text = name;
+            }
+
+            result = textBoxes
+                .Select(t => (t.ItemType, t.TextBox.Text.Trim()))
+                .Where(t => !string.IsNullOrEmpty(t.Item2))
+                .ToList();
+            window.DialogResult = true;
+        };
+        btnCancel.Click += (_, _) => window.DialogResult = false;
+        window.PreviewKeyDown += (_, ke) =>
+        {
+            if (ke.Key == Key.Escape) { window.DialogResult = false; ke.Handled = true; }
+        };
+
+        return window.ShowDialog() == true ? result : null;
     }
 
     /// <summary>
@@ -1154,6 +1387,10 @@ public partial class ChainBrowserPage : UserControl
         // Show/hide merge bar
         if (_mergeMode)
         {
+            // Carry over item-level checks from normal mode
+            if (_activeCheckChain != null && _activeCheckChain.Items.Any(i => i.IsChecked))
+                _mergeCheckChains.Add(_activeCheckChain);
+
             mergeBar.Visibility = Visibility.Visible;
         }
         else

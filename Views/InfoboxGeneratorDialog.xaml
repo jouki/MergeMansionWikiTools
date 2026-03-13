@@ -65,6 +65,16 @@
                                       ToolTip="Force-adds Depleting Item type even if not auto-detected from JSON"
                                       ToolTipService.InitialShowDelay="150"
                                       Checked="ChkOption_Changed" Unchecked="ChkOption_Changed" />
+                            <CheckBox x:Name="chkKeepFullName" Content="Keep full name (parenthetical)"
+                                      Margin="0,5,0,0"
+                                      ToolTip="Keep the parenthetical part in the title, e.g. 'Construction Kit (Dirty)' instead of 'Construction Kit'"
+                                      ToolTipService.InitialShowDelay="150"
+                                      Checked="ChkOption_Changed" Unchecked="ChkOption_Changed" />
+                            <CheckBox x:Name="chkHardcodeGallery" Content="Hardcode Gallery Image"
+                                      Margin="0,5,0,0"
+                                      ToolTip="Use hardcoded item name instead of {{PAGENAME}} in gallery image template"
+                                      ToolTipService.InitialShowDelay="150"
+                                      Checked="ChkOption_Changed" Unchecked="ChkOption_Changed" />
                         </StackPanel>
                     </Grid>
                 </StackPanel>

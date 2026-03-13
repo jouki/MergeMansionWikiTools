@@ -51,12 +51,10 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Grid.Column="0">
-                            <CheckBox x:Name="chkShowNamePrompt" Content="Show custom name prompt"
-                                      Checked="ChkShowNamePrompt_Changed"
-                                      Unchecked="ChkShowNamePrompt_Changed" />
-                            <CheckBox x:Name="chkForceNamePrompt" Content="Force prompt always"
-                                      Margin="24,4,0,0"
-                                      IsEnabled="{Binding IsChecked, ElementName=chkShowNamePrompt}" />
+                            <CheckBox x:Name="chkHardcodeName" Content="Hardcode name"
+                                      ToolTip="Use hardcoded chain name instead of {{PAGENAME}} in table caption"
+                                      ToolTipService.InitialShowDelay="150"
+                                      Checked="ChkOption_Changed" Unchecked="ChkOption_Changed" />
                         </StackPanel>
 
                         <StackPanel Grid.Column="1">

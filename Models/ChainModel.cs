@@ -200,7 +200,12 @@ public class ParsedChain
 
     private string BuildSummary()
     {
-        var parts = new List<string> { $"{Items.Count} lvl" };
+        int maxLvl = Items.Count > 0 ? Items.Max(i => i.Level) : 0;
+        int aliasCount = Items.Count - maxLvl;
+        var label = aliasCount > 0
+            ? $"{maxLvl} lvl · {aliasCount} alias{(aliasCount != 1 ? "es" : "")}"
+            : $"{maxLvl} lvl";
+        var parts = new List<string> { label };
 
         if (HasGenerators) parts.Add("Generator");
         else if (HasSpawners) parts.Add("Spawner");
@@ -216,6 +221,7 @@ public class ParsedItem
 {
     public int Level { get; set; }
     public string Name { get; set; } = "";
+    public string OriginalName { get; set; } = "";
     public string ItemType { get; set; } = "";
     public int SellCoins { get; set; }
     public bool Unsellable { get; set; }
@@ -228,6 +234,7 @@ public class ParsedItem
     public long RechargeTimeMs { get; set; }
     public long FirstCycleStartDelayMs { get; set; }
     public string? DecayAfterLastCycleItemType { get; set; }
+    public Dictionary<string, double>? DecayAfterLastCycleOdds { get; set; }
 
     // Spawner info
     public bool IsSpawner { get; set; }

@@ -874,6 +874,60 @@ public static class WikiMappingService
     }
 
     /// <summary>
+    /// Pushes multiple item name changes to the wiki in a single edit.
+    /// </summary>
+    public static async Task PushItemNamesBatchAsync(
+        string username, string password, IReadOnlyList<(string ItemType, string NewName)> renames)
+    {
+        if (renames.Count == 0) return;
+
+        using var client = await CreateAuthenticatedClientAsync(username, password);
+
+        // 1. Fetch current Lua content
+        var luaJson = await client.GetStringAsync(ApiUrl);
+        var luaDoc = JsonDocument.Parse(luaJson);
+        var pages = luaDoc.RootElement.GetProperty("query").GetProperty("pages");
+        string currentLua = "";
+        foreach (var page in pages.EnumerateObject())
+        {
+            currentLua = page.Value.GetProperty("revisions")[0]
+                .GetProperty("slots").GetProperty("main")
+                .GetProperty("*").GetString() ?? "";
+            break;
+        }
+
+        // 2. Version check + apply all renames
+        ThrowIfNewerVersion(currentLua);
+        var updatedLua = currentLua;
+        foreach (var (itemType, newName) in renames)
+            updatedLua = UpdateLuaItemName(updatedLua, itemType, newName);
+        updatedLua = EnsureMmwtVersionHeader(updatedLua);
+
+        // 3. Get CSRF token
+        var csrfToken = await GetCsrfTokenAsync(client);
+
+        // 4. Edit page
+        var names = string.Join(", ", renames.Select(r => r.ItemType));
+        var summary = $"Batch rename {renames.Count} items: {names} (via MergeMansionWikiTools)";
+        if (summary.Length > 500) summary = $"Batch rename {renames.Count} items (via MergeMansionWikiTools)";
+        var editContent = new FormUrlEncodedContent(new Dictionary<string, string>
+        {
+            ["action"] = "edit",
+            ["title"] = "Module:Datatable/Items/Mapping",
+            ["text"] = updatedLua,
+            ["token"] = csrfToken,
+            ["summary"] = summary,
+            ["bot"] = "1",
+            ["format"] = "json",
+        });
+        var editResp = await client.PostAsync(BaseApiUrl, editContent);
+        var editDoc = JsonDocument.Parse(await editResp.Content.ReadAsStringAsync());
+
+        if (editDoc.RootElement.TryGetProperty("error", out var error))
+            throw new Exception($"Wiki edit failed: {error.GetProperty("info").GetString()}");
+    }
+
+    /// <summary>
     /// Checks which chain images exist on the wiki for given levels.
     /// Returns level → image URL (null if image doesn't exist).
     /// Uses the original PNG URL (not thumburl) to preserve transparency.

@@ -154,6 +154,13 @@
                 </Border>
             </Popup>
 
+            <!-- Rename aliases option -->
+            <CheckBox x:Name="chkRenameAliases"
+                      Content="Rename alias items to match primary"
+                      Margin="0,8,0,0"
+                      ToolTip="Set the same item name on alias items as the primary chain's item at the same level"
+                      ToolTipService.InitialShowDelay="150" />
+
             <!-- Status -->
             <TextBlock x:Name="txtStatus" Margin="0,8,0,0" FontSize="12"
                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"

@@ -30,9 +30,8 @@ public partial class TableGeneratorDialog : FluentWindow
         txtChainInfo.Text = $"{chain.DisplayName}";
         txtChainDetail.Text = $"ConfigKey: {chain.ConfigKey} · {chain.Items.Count} levels · {chain.Summary}";
 
-        // Restore checkbox states from settings
-        chkShowNamePrompt.IsChecked = main.Settings.ShowCustomNamePrompt;
-        chkForceNamePrompt.IsChecked = main.Settings.ForceCustomNamePrompt;
+        // Auto-check hardcode name for non-event chains
+        chkHardcodeName.IsChecked = !chain.IsEventChain;
         chkLowPrices.IsChecked = chain.IsEventChain ? true : main.Settings.LowPrices;
 
         // Source group selector for merged chains with level collisions
@@ -48,11 +47,7 @@ public partial class TableGeneratorDialog : FluentWindow
         // Check for missing wiki name
         _wikiNameWarning = CheckWikiNameMissing(chain, main);
 
-        Loaded += (_, _) =>
-        {
-            PromptForCustomNameIfNeeded();
-            GenerateTable();
-        };
+        Loaded += (_, _) => GenerateTable();
     }
 
     /// <summary>
@@ -75,84 +70,14 @@ public partial class TableGeneratorDialog : FluentWindow
                "Consider adding a name to Module:Datatable/Items/Mapping first.";
     }
 
-    private void ChkShowNamePrompt_Changed(object sender, RoutedEventArgs e)
-    {
-        // Save state immediately
-        _main.Settings.ShowCustomNamePrompt = chkShowNamePrompt.IsChecked == true;
-        _main.SaveSettings();
-    }
-
-    private void PromptForCustomNameIfNeeded()
-    {
-        bool showPrompt = false;
-
-        if (chkShowNamePrompt.IsChecked == true)
-        {
-            showPrompt = chkForceNamePrompt.IsChecked == true
-                || !_chain.HasNaturalName
-                || string.IsNullOrEmpty(_chain.OriginalName);
-        }
-
-        if (!showPrompt) return;
-
-        bool canWiki = _main.Settings.WikiVerified;
-
-        var nameDialog = new ChainNameDialog(
-            _main.ChainNameService,
-            _chain.ConfigKey,
-            _chain.DisplayName,
-            canWiki);
-        nameDialog.Owner = this;
-
-        if (nameDialog.ShowDialog() == true && !string.IsNullOrWhiteSpace(nameDialog.ChosenName))
-        {
-            _tableName = nameDialog.ChosenName;
-            _main.ChainNameService.SetCustomName(_chain.ConfigKey, _tableName);
-
-            if (nameDialog.SaveToWiki)
-                _ = PushNameToWikiAsync(_tableName);
-        }
-    }
-
     private void ChkOption_Changed(object sender, RoutedEventArgs e)
     {
         if (!IsLoaded) return;
 
         _main.Settings.LowPrices = chkLowPrices.IsChecked == true;
-        _main.Settings.ShowCustomNamePrompt = chkShowNamePrompt.IsChecked == true;
-        _main.Settings.ForceCustomNamePrompt = chkForceNamePrompt.IsChecked == true;
         _main.SaveSettings();
 
         GenerateTable();
-    }
-
-    private async Task PushNameToWikiAsync(string chainName)
-    {
-        try
-        {
-            warningBar.Message = "Saving to wiki...";
-            warningBar.Severity = InfoBarSeverity.Informational;
-            warningBar.IsOpen = true;
-
-            await WikiMappingService.PushChainNameToWikiAsync(
-                _main.Settings.WikiUsername,
-                _main.Settings.WikiPassword,
-                _chain.Items,
-                chainName);
-
-            warningBar.Message = "Chain name saved to wiki.";
-            warningBar.Severity = InfoBarSeverity.Success;
-            warningBar.IsOpen = true;
-
-            // Refresh local cache
-            _ = _main.RefreshWikiMappingAsync();
-        }
-        catch (Exception ex)
-        {
-            warningBar.Message = $"Wiki save failed: {ex.Message}";
-            warningBar.Severity = InfoBarSeverity.Error;
-            warningBar.IsOpen = true;
-        }
     }
 
     private void CmbSourceGroup_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -187,8 +112,9 @@ public partial class TableGeneratorDialog : FluentWindow
             var generator = new WikiTableGenerator(_main.DataService!, _main.WikiMapping);
 
             bool lowPrices = chkLowPrices.IsChecked == true;
+            bool hardcodeName = chkHardcodeName.IsChecked == true;
 
-            var result = generator.Generate(_effectiveChain, _tableName, lowPrices);
+            var result = generator.Generate(_effectiveChain, _tableName, lowPrices, hardcodeName);
 
             // Prepend wiki heading if checked
             if (chkIncludeHeading.IsChecked == true)

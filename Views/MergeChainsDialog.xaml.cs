@@ -356,7 +356,6 @@ public partial class MergeChainsDialog : FluentWindow
 
             if (_existingPrimaryChain != null && primary.IsExistingChain)
             {
-                // Existing chain is primary: only add aliases, don't touch existing entries
                 await WikiMappingService.PushAddAliasesAsync(
                     _main.Settings.WikiUsername!,
                     _main.Settings.WikiPassword!,
@@ -365,13 +364,36 @@ public partial class MergeChainsDialog : FluentWindow
             }
             else
             {
-                // Normal merge or user picked a different primary
                 await WikiMappingService.PushMergeAliasAsync(
                     _main.Settings.WikiUsername!,
                     _main.Settings.WikiPassword!,
                     primary.Source.Source,
                     aliasChains,
                     mergedName);
+            }
+
+            // Rename alias items to match primary item names (by level)
+            if (chkRenameAliases.IsChecked == true)
+            {
+                txtStatus.Text = "Renaming alias items...";
+                var primaryItems = primary.Source.Source.Items;
+                var nameByLevel = primaryItems
+                    .Where(i => !string.IsNullOrEmpty(i.Name) && !i.Name.StartsWith("Item_"))
+                    .ToDictionary(i => i.Level, i => i.Name);
+
+                var renames = new List<(string ItemType, string NewName)>();
+                foreach (var chain in aliasChains)
+                    foreach (var item in chain.Items)
+                        if (nameByLevel.TryGetValue(item.Level, out var name))
+                            renames.Add((item.ItemType, name));
+
+                if (renames.Count > 0)
+                {
+                    await WikiMappingService.PushItemNamesBatchAsync(
+                        _main.Settings.WikiUsername!,
+                        _main.Settings.WikiPassword!,
+                        renames);
+                }
             }
 
             _main.ShowStatus($"Chains merged as \"{mergedName}\" on wiki.", InfoBarSeverity.Success);

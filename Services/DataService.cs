@@ -191,6 +191,7 @@ public class DataService
         {
             Level = GetInt(item, "LevelNumber"),
             Name = GetString(item, "Name"),
+            OriginalName = GetString(item, "Name"),
             ItemType = GetString(item, "ItemType"),
             NumericConfigKey = GetStringOrNumber(item, "ConfigKey"),
             SellCoins = GetInt(item, "SellCoins"),
@@ -229,7 +230,15 @@ public class DataService
                 if (dap.ValueKind == JsonValueKind.String)
                     dapConst = dap.GetString();
                 else if (dap.ValueKind == JsonValueKind.Object)
+                {
                     dapConst = GetString(dap, "Constant");
+
+                    // ControlledRandom odds (multiple decay targets with probabilities)
+                    if (dap.TryGetProperty("ControlledRandom", out var dapCr)
+                        && dapCr.TryGetProperty("Odds", out var dapOdds)
+                        && dapOdds.ValueKind == JsonValueKind.Object)
+                        pi.DecayAfterLastCycleOdds = ParseOddsDictionary(dapOdds);
+                }
 
                 if (!string.IsNullOrEmpty(dapConst) && dapConst != "Empty")
                     pi.DecayAfterLastCycleItemType = dapConst;

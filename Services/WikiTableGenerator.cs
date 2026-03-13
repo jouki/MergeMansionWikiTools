@@ -26,49 +26,48 @@ public class WikiTableGenerator
     /// <param name="chain">Parsed chain data</param>
     /// <param name="tableName">Display name for the table header</param>
     /// <param name="lowPrices">If true, sets LowPrices variable to true</param>
-    public string Generate(ParsedChain chain, string tableName, bool lowPrices)
+    public string Generate(ParsedChain chain, string tableName, bool lowPrices, bool hardcodeName = false)
     {
         Warnings.Clear();
 
-        var items = chain.Items.OrderBy(i => i.Level).ToList();
+        // Use all items (incl. aliases) for column visibility, but only non-aliases for rows
+        var allItems = chain.Items.OrderBy(i => i.Level).ToList();
+        var items = allItems.Where(i => !i.IsAlias).ToList();
         if (items.Count == 0) return "<!-- No items in chain -->";
 
-        // ── Determine which columns to show ──
-        bool showSellsFor = items.Any(i => !i.Unsellable);
-        bool showDrops = items.Any(i => HasDrops(i));
-        bool showDropValues = items.Any(i =>
+        // ── Determine which columns to show (check ALL items incl. aliases) ──
+        bool showSellsFor = allItems.Any(i => !i.Unsellable);
+        bool showDrops = allItems.Any(i => HasDrops(i));
+        bool showDropValues = allItems.Any(i =>
             (i.IsGenerator && i.ActivationAmountInCycle > 0)
             || (i.IsSpawner && i.SpawnStorageMax > 0));
-        bool showRechargeTime = items.Any(i => i.IsGenerator && i.RechargeTimeMs >= 1000)
-                             || items.Any(i => i.IsSpawner && i.SpawnDelayMs >= 1000);
-        bool showChargeTime = items.Any(i => i.IsGenerator && i.FirstCycleStartDelayMs >= 5000);
+        bool showRechargeTime = allItems.Any(i => i.IsGenerator && i.RechargeTimeMs >= 1000)
+                             || allItems.Any(i => i.IsSpawner && i.SpawnDelayMs >= 1000);
+        bool showChargeTime = allItems.Any(i => i.IsGenerator && i.FirstCycleStartDelayMs >= 5000);
         bool showSpeedUpCost = showRechargeTime; // Show alongside recharge
-        bool showDecaysInto = items.Any(i =>
+        bool showDecaysInto = allItems.Any(i =>
             !string.IsNullOrEmpty(i.SpawnDecayIntoItemType)
             || !string.IsNullOrEmpty(i.DecayAfterLastCycleItemType)
+            || (i.DecayAfterLastCycleOdds != null && i.DecayAfterLastCycleOdds.Count > 0)
             || (i.HasDecay && !string.IsNullOrEmpty(i.DecayIntoItemType)));
 
         // Fuel For — build lookup: NumericConfigKey → list of (sinkChain, sinkItem)
-        var fuelForMap = BuildFuelForMap(items);
+        var fuelForMap = BuildFuelForMap(allItems);
         bool showFuelFor = fuelForMap.Count > 0;
 
         // Fuel — this chain has sink items that require fuel
-        var fuelMap = BuildFuelMap(items);
+        var fuelMap = BuildFuelMap(allItems);
         bool showFuel = fuelMap.Count > 0;
 
         // Transforms To — sink reward items
-        bool showTransformsTo = items.Any(i => i.IsSink && !string.IsNullOrEmpty(i.SinkRewardItemType));
+        bool showTransformsTo = allItems.Any(i => i.IsSink && !string.IsNullOrEmpty(i.SinkRewardItemType));
 
         // ── Build table ──
         var sb = new StringBuilder();
 
         // Header
         sb.AppendLine("{| class=\"article-table\"");
-        // If tableName contains brackets, use text before the bracket; otherwise use {{PAGENAME}}
-        var bracketIdx = tableName.IndexOf('(');
-        var captionName = bracketIdx >= 0
-            ? tableName[..bracketIdx].Trim()
-            : "{{PAGENAME}}";
+        var captionName = hardcodeName ? tableName : "{{PAGENAME}}";
         sb.AppendLine($"|+ <u>{captionName}</u>");
         sb.AppendLine("! Lvl");
         sb.AppendLine("! Image");
@@ -104,10 +103,16 @@ public class WikiTableGenerator
         if (showSpeedUpCost)
             sb.AppendLine("! Speed Up Cost");
 
+        // Build level → all items (incl. aliases) for aggregating cell data
+        var itemsByLevel = allItems.GroupBy(i => i.Level)
+            .ToDictionary(g => g.Key, g => g.ToList());
+
         // Rows
         bool isFirst = true;
         foreach (var item in items)
         {
+            var levelItems = itemsByLevel.GetValueOrDefault(item.Level) ?? new List<ParsedItem> { item };
+
             if (isFirst)
             {
                 sb.Append($"|- {{{{#vardefine:LowPrices|{(lowPrices ? "true" : "false")}}}}}");
@@ -123,7 +128,7 @@ public class WikiTableGenerator
             sb.AppendLine($"| {{{{#var:Level}}}} <!-- {item.Level} -->");
 
             // Image
-            sb.AppendLine($"| style=\"text-align:center;\" | {{{{Item/Icon|{{{{PAGENAME}}}}|{{{{#var:Level}}}}}}}}");
+            sb.AppendLine($"| style=\"text-align:center;\" | {{{{Item/Icon|{captionName}|{{{{#var:Level}}}}}}}}");
 
             // Item name
             sb.AppendLine($"| <u>{{{{#Invoke:Items|GetItemNameFromChainName|{{{{#var:Level}}}}}}}}</u>");
@@ -131,7 +136,7 @@ public class WikiTableGenerator
             // Sells for
             if (showSellsFor)
             {
-                if (item.Unsellable)
+                if (levelItems.All(i => i.Unsellable))
                     sb.AppendLine("| {{Dash}}");
                 else
                     sb.AppendLine("| {{#Invoke:Items|GetItemPriceByLevel|{{#var:Level}}}}");
@@ -143,11 +148,11 @@ public class WikiTableGenerator
 
             // Transforms To (sink reward)
             if (showTransformsTo)
-                sb.AppendLine($"| {BuildTransformsToCell(item)}");
+                sb.AppendLine($"| {BuildTransformsToCellAggregated(levelItems)}");
 
             // Drops
             if (showDrops)
-                sb.AppendLine($"| {BuildDropsCell(item)}");
+                sb.AppendLine($"| {BuildDropsCellAggregated(levelItems)}");
 
             // Drop Values
             if (showDropValues)
@@ -159,7 +164,7 @@ public class WikiTableGenerator
 
             // Decays Into
             if (showDecaysInto)
-                sb.AppendLine($"| {BuildDecaysIntoCell(item)}");
+                sb.AppendLine($"| {BuildDecaysIntoCellAggregated(levelItems)}");
 
             // Charge Time (FirstCycleStartDelay)
             if (showChargeTime)
@@ -172,7 +177,7 @@ public class WikiTableGenerator
             // Speed Up Cost
             if (showSpeedUpCost)
             {
-                if (item.IsGenerator || (item.IsSpawner && item.SpawnDelayMs > 0))
+                if (levelItems.Any(i => i.IsGenerator || (i.IsSpawner && i.SpawnDelayMs > 0)))
                     sb.AppendLine("| {{Gems}} {{#Invoke:Items|GetItemSkipPriceFromChainName|{{#var:Level}}}}");
                 else
                     sb.AppendLine("| {{Dash}}");
@@ -361,6 +366,99 @@ public class WikiTableGenerator
         }
 
         return "{{Dash}}";
+    }
+
+    // ── Aggregated cells (combine data from all items at the same level) ──
+
+    /// <summary>Aggregates decay targets from all items at a level (incl. aliases).</summary>
+    private string BuildDecaysIntoCellAggregated(List<ParsedItem> levelItems)
+    {
+        var seen = new HashSet<(string Name, int Level)>();
+        var parts = new List<string>();
+
+        // Build ItemType → (chain, item) lookup for resolving decay targets
+        var itemTypeToChain = new Dictionary<string, (ParsedChain Chain, ParsedItem Item)>(StringComparer.OrdinalIgnoreCase);
+        foreach (var chain in _data.Chains)
+            foreach (var ci in chain.Items)
+                if (!string.IsNullOrEmpty(ci.ItemType))
+                    itemTypeToChain.TryAdd(ci.ItemType, (chain, ci));
+
+        foreach (var item in levelItems)
+        {
+            var decayTypes = new List<string?> {
+                item.DecayAfterLastCycleItemType,
+                item.SpawnDecayIntoItemType,
+                item.HasDecay ? item.DecayIntoItemType : null
+            };
+
+            // DecayAfterLastCycleOdds — multiple decay targets
+            if (item.DecayAfterLastCycleOdds != null)
+                decayTypes.AddRange(item.DecayAfterLastCycleOdds.Keys);
+
+            foreach (var decayType in decayTypes)
+            {
+                if (string.IsNullOrEmpty(decayType)) continue;
+
+                if (itemTypeToChain.TryGetValue(decayType, out var match))
+                {
+                    if (seen.Add((match.Chain.DisplayName, match.Item.Level)))
+                        parts.Add($"{{{{Item|{match.Chain.DisplayName}|{match.Item.Level}}}}}");
+                }
+                else
+                {
+                    // Fallback to ResolveChainName for non-item-type keys
+                    var name = ResolveChainName(decayType);
+                    var level = _data.ResolveLevel(decayType, _wikiMapping);
+                    if (seen.Add((name, level)))
+                        parts.Add($"{{{{Item|{name}|{level}}}}}");
+                }
+            }
+
+            // Warning for suspicious finite spawner
+            if (item.IsSpawner && item.SpawnHowManyCycles > 0
+                && string.IsNullOrEmpty(item.SpawnDecayIntoItemType))
+            {
+                Warnings.Add($"Level {item.Level} ({item.Name}): Finite spawn cycles but no DecayProducer — item may vanish from board.");
+            }
+        }
+
+        return parts.Count > 0 ? string.Join("<br>", parts) : "{{Dash}}";
+    }
+
+    /// <summary>Aggregates drops from all items at a level (incl. aliases).</summary>
+    private string BuildDropsCellAggregated(List<ParsedItem> levelItems)
+    {
+        var parts = new List<string>();
+        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var item in levelItems)
+        {
+            var cellParts = BuildDropsCell(item);
+            if (cellParts != "{{Dash}}" && seen.Add(cellParts))
+                parts.Add(cellParts);
+        }
+
+        return parts.Count > 0 ? string.Join("<br>", parts) : "{{Dash}}";
+    }
+
+    /// <summary>Aggregates transforms-to from all items at a level (incl. aliases).</summary>
+    private string BuildTransformsToCellAggregated(List<ParsedItem> levelItems)
+    {
+        var seen = new HashSet<(string, int)>();
+        var parts = new List<string>();
+
+        foreach (var item in levelItems)
+        {
+            if (!item.IsSink || string.IsNullOrEmpty(item.SinkRewardItemType)) continue;
+
+            foreach (var chain in _data.Chains)
+                foreach (var ci in chain.Items)
+                    if (string.Equals(ci.ItemType, item.SinkRewardItemType, StringComparison.OrdinalIgnoreCase))
+                        if (seen.Add((chain.DisplayName, ci.Level)))
+                            parts.Add($"{{{{Item|{chain.DisplayName}|{ci.Level}}}}}");
+        }
+
+        return parts.Count > 0 ? string.Join("<br>", parts) : "{{Dash}}";
     }
 
     // ── Fuel (what sink items in this chain require) ──────────────────

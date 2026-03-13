@@ -1,3 +1,4 @@
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using MergeMansionWikiTools.Models;
@@ -13,6 +14,7 @@ public partial class InfoboxGeneratorDialog : FluentWindow
     private readonly MainWindow _main;
     private readonly ParsedChain _chain;
     private readonly InfoboxGeneratorService _service = new();
+    private List<LuaArea>? _areas;
     private bool _suppressRegenerate;
     private string? _wikiNameWarning;
 
@@ -27,17 +29,40 @@ public partial class InfoboxGeneratorDialog : FluentWindow
         txtChainInfo.Text = chain.DisplayName;
         txtChainDetail.Text = $"ConfigKey: {chain.ConfigKey} · {chain.Items.Count} levels · {chain.Summary}";
 
+        // Load areas for task-reward source detection
+        LoadAreas();
+
         // Pre-populate sources with auto-detected
         _suppressRegenerate = true;
         var ds = _main.DataService!;
-        var autoSources = _service.BuildAutoSources(chain, ds.Chains, ds.ItemNames);
+        var autoSources = _service.BuildAutoSources(chain, ds.Chains, ds.ItemNames, _areas);
         txtSources.Text = string.Join("\n", autoSources);
         _suppressRegenerate = false;
+
+        // Hide "keep full name" if there's no parenthetical; pre-check for non-event chains
+        if (!chain.DisplayName.Contains('('))
+            chkKeepFullName.Visibility = Visibility.Collapsed;
+        else if (!chain.IsEventChain)
+            chkKeepFullName.IsChecked = true;
 
         // Check for missing wiki name
         _wikiNameWarning = CheckWikiNameMissing(chain, main);
 
         Loaded += (_, _) => RegeneratePreview();
+    }
+
+    private void LoadAreas()
+    {
+        var path = _main.Settings.AreasJsonPath;
+        if (string.IsNullOrEmpty(path) || !File.Exists(path)) return;
+
+        try
+        {
+            var svc = new AreasService();
+            Task.Run(() => svc.LoadAsync(path)).GetAwaiter().GetResult();
+            _areas = svc.Areas;
+        }
+        catch { /* areas loading failure is non-critical */ }
     }
 
     private static string? CheckWikiNameMissing(ParsedChain chain, MainWindow main)
@@ -78,6 +103,8 @@ public partial class InfoboxGeneratorDialog : FluentWindow
             IsStarter   = chkIsStarter.IsChecked == true,
             IsPoints    = chkIsPoints.IsChecked == true,
             IsDepleting = chkIsDepleting.IsChecked == true,
+            KeepFullName = chkKeepFullName.IsChecked == true,
+            HardcodeGalleryImage = chkHardcodeGallery.IsChecked == true,
         };
 
         var manualSources = txtSources.Text
@@ -121,21 +148,9 @@ public partial class InfoboxGeneratorDialog : FluentWindow
     {
         if (string.IsNullOrEmpty(txtOutput.Text)) return;
 
-        bool success = false;
-        for (int i = 0; i < 3; i++)
-        {
-            try
-            {
-                Clipboard.SetDataObject(txtOutput.Text, true);
-                success = true;
-                Increment(s => s.InfoboxesGenerated++);
-                break;
-            }
-            catch (System.Runtime.InteropServices.COMException)
-            {
-                await Task.Delay(100);
-            }
-        }
+        App.NativeSetClipboardText(txtOutput.Text);
+        Increment(s => s.InfoboxesGenerated++);
+        bool success = true;
 
         btnCopy.Content = success ? "Copied!" : "Failed!";
         _ = ResetCopyButton();

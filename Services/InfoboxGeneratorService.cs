@@ -9,11 +9,16 @@ public class InfoboxGeneratorOptions
     public bool IsStarter { get; set; }
     public bool IsPoints { get; set; }
     public bool IsDepleting { get; set; }   // manual override
+    public bool KeepFullName { get; set; }  // keep parenthetical in title
+    public bool HardcodeGalleryImage { get; set; } // use item name instead of {{PAGENAME}} in gallery
 }
 
 public class InfoboxGeneratorService
 {
     public List<string> Warnings { get; } = new();
+
+    /// <summary>Area display name detected from task-reward lookup (set by BuildAutoSources).</summary>
+    public string? TaskRewardAreaName { get; private set; }
 
     /// <summary>
     /// Builds the complete {{Infobox Items|...}} wikitext for a chain.
@@ -34,17 +39,27 @@ public class InfoboxGeneratorService
         // ── title1 ──
         var baseName = StripParentheses(chain.DisplayName);
         if (baseName != chain.DisplayName)
-            fields.Add(("title1", baseName));
+            fields.Add(("title1", opts.KeepFullName ? chain.DisplayName : baseName));
 
         // ── image1 (gallery) ──
-        var gallerySb = new StringBuilder();
-        gallerySb.AppendLine();
-        gallerySb.AppendLine("{{#tag:gallery|");
-        gallerySb.AppendLine($"  {{{{ItemNameToFilename|{{{{PAGENAME}}}}|1}}}}{{{{!}}}} Level 1");
-        if (chain.Items.Count > 1)
-            gallerySb.AppendLine($"  {{{{ItemNameToFilename|{{{{PAGENAME}}}}|{{{{#Invoke:Items|GetItemMaxLevelFromChainName}}}}}}}}{{{{!}}}} Level {{{{#Invoke:Items|GetItemMaxLevelFromChainName}}}}");
-        gallerySb.Append("}}");
-        fields.Add(("image1", gallerySb.ToString()));
+        int maxLvl = chain.Items.Max(i => i.Level);
+        var imgName = opts.HardcodeGalleryImage
+            ? (opts.KeepFullName ? chain.DisplayName : baseName)
+            : "{{PAGENAME}}";
+        if (maxLvl > 1)
+        {
+            var gallerySb = new StringBuilder();
+            gallerySb.AppendLine();
+            gallerySb.AppendLine("{{#tag:gallery|");
+            gallerySb.AppendLine($"  {{{{ItemNameToFilename|{imgName}|1}}}}{{{{!}}}} Level 1");
+            gallerySb.AppendLine($"  {{{{ItemNameToFilename|{imgName}|{{{{#Invoke:Items|GetItemMaxLevelFromChainName}}}}}}}}{{{{!}}}} Level {{{{#Invoke:Items|GetItemMaxLevelFromChainName}}}}");
+            gallerySb.Append("}}");
+            fields.Add(("image1", gallerySb.ToString()));
+        }
+        else
+        {
+            fields.Add(("image1", $"{{{{#tag:gallery|{{{{ItemNameToFilename|{imgName}|1}}}}{{{{!}}}} Level 1}}}}"));
+        }
 
         // ── type ──
         var types = BuildTypes(chain, allChains, opts);
@@ -55,6 +70,13 @@ public class InfoboxGeneratorService
         var sourceLines = new List<string>(manualSourceLines);
         if (opts.AddShop)
             sourceLines.Add("{{Item/Group|Shop}}");
+        if (!string.IsNullOrEmpty(TaskRewardAreaName))
+        {
+            var taskLink = opts.KeepFullName && baseName != chain.DisplayName
+                ? $"{{{{TaskLink|{{{{#var:SourceArea}}}}|{chain.DisplayName}}}}}"
+                : "{{TaskLink|{{#var:SourceArea}}}}";
+            sourceLines.Add(taskLink);
+        }
         if (sourceLines.Count > 0)
             fields.Add(("source", string.Join("<br/>", sourceLines)));
 
@@ -86,6 +108,13 @@ public class InfoboxGeneratorService
         // Format with aligned '='
         int maxKeyLen = fields.Max(f => f.Key.Length);
         var sb = new StringBuilder();
+
+        // Prepend {{#vardefine:SourceArea|...}} when task-reward area was detected
+        if (!string.IsNullOrEmpty(TaskRewardAreaName))
+        {
+            sb.AppendLine($"{{{{#vardefine:SourceArea|{TaskRewardAreaName}}}}}");
+        }
+
         sb.AppendLine("{{Infobox Items");
         foreach (var (key, value) in fields)
             sb.AppendLine($"| {key.PadRight(maxKeyLen)} = {value}");
@@ -156,7 +185,8 @@ public class InfoboxGeneratorService
     /// Returns formatted wiki template strings.
     /// </summary>
     public List<string> BuildAutoSources(
-        ParsedChain chain, IReadOnlyList<ParsedChain> allChains, Dictionary<string, string> itemNames)
+        ParsedChain chain, IReadOnlyList<ParsedChain> allChains, Dictionary<string, string> itemNames,
+        IReadOnlyList<LuaArea>? areas = null)
     {
         var myItemTypes = chain.Items.Select(i => i.ItemType).ToHashSet(StringComparer.OrdinalIgnoreCase);
         var result = new List<string>();
@@ -183,11 +213,48 @@ public class InfoboxGeneratorService
                     && item.OrderRewardItems != null
                     && item.OrderRewardItems.Keys.Any(k => myItemTypes.Contains(k));
 
-                if (!drops && !transforms && !orderRewards) continue;
+                // Decay source (other chain's item decays INTO this chain's items)
+                bool decays =
+                    (!string.IsNullOrEmpty(item.DecayIntoItemType) && myItemTypes.Contains(item.DecayIntoItemType)) ||
+                    (!string.IsNullOrEmpty(item.SpawnDecayIntoItemType) && myItemTypes.Contains(item.SpawnDecayIntoItemType)) ||
+                    (!string.IsNullOrEmpty(item.DecayAfterLastCycleItemType) && myItemTypes.Contains(item.DecayAfterLastCycleItemType)) ||
+                    (item.DecayAfterLastCycleOdds?.Keys.Any(k => myItemTypes.Contains(k)) == true);
+
+                if (!drops && !transforms && !orderRewards && !decays) continue;
                 if (!seen.Add(otherChain.ConfigKey)) continue;
 
-                result.Add($"{{{{Item/Group|{otherChain.DisplayName}}}}}");
+                // Non-event chains get fullName=true to show parenthetical
+                if (!otherChain.IsEventChain)
+                    result.Add($"{{{{Item/Group|{otherChain.DisplayName}|fullName=true}}}}");
+                else
+                    result.Add($"{{{{Item/Group|{otherChain.DisplayName}}}}}");
                 break; // one entry per source chain
+            }
+        }
+
+        // Task reward source — temp items that are rewards from area tasks
+        TaskRewardAreaName = null;
+        if (areas != null)
+        {
+            var tempItemTypes = chain.Items
+                .Where(i => i.IsTemporary)
+                .Select(i => i.ItemType)
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+            if (tempItemTypes.Count > 0)
+            {
+                foreach (var area in areas)
+                {
+                    foreach (var task in area.Tasks)
+                    {
+                        if (!string.IsNullOrEmpty(task.ItemReward) && tempItemTypes.Contains(task.ItemReward))
+                        {
+                            TaskRewardAreaName = area.DisplayName;
+                            goto doneTaskSearch;
+                        }
+                    }
+                }
+                doneTaskSearch:;
             }
         }
 
@@ -263,48 +330,45 @@ public class InfoboxGeneratorService
     {
         var itemTypeToChain = BuildItemTypeToChain(allChains);
 
-        // Collect all decay targets grouped by target chain
-        // key = chain ConfigKey, value = (chain, levels)
-        var byChain = new Dictionary<string, (ParsedChain Chain, List<int> Levels)>(StringComparer.OrdinalIgnoreCase);
+        // Deduplicate by (DisplayName, level) to avoid alias duplicates
+        var seen = new HashSet<(string Name, int Level)>();
+        var parts = new List<string>();
         var unmatchedNames = new List<string>();
 
         foreach (var item in chain.Items)
         {
-            var decayType = item.DecayIntoItemType
-                            ?? item.SpawnDecayIntoItemType
-                            ?? item.DecayAfterLastCycleItemType;
-            if (string.IsNullOrEmpty(decayType)) continue;
+            // Collect all decay target item types from this item
+            var decayTypes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-            if (itemTypeToChain.TryGetValue(decayType, out var decayChain))
+            if (!string.IsNullOrEmpty(item.DecayIntoItemType))
+                decayTypes.Add(item.DecayIntoItemType);
+            if (!string.IsNullOrEmpty(item.SpawnDecayIntoItemType))
+                decayTypes.Add(item.SpawnDecayIntoItemType);
+            if (!string.IsNullOrEmpty(item.DecayAfterLastCycleItemType))
+                decayTypes.Add(item.DecayAfterLastCycleItemType);
+
+            // DecayAfterLastCycleOdds — multiple decay targets with probabilities
+            if (item.DecayAfterLastCycleOdds != null)
+                foreach (var key in item.DecayAfterLastCycleOdds.Keys)
+                    decayTypes.Add(key);
+
+            foreach (var decayType in decayTypes)
             {
-                var matchingItem = decayChain.Items
-                    .FirstOrDefault(i => string.Equals(i.ItemType, decayType, StringComparison.OrdinalIgnoreCase));
-                int lvl = matchingItem?.Level ?? 1;
-
-                if (!byChain.TryGetValue(decayChain.ConfigKey, out var entry))
+                if (itemTypeToChain.TryGetValue(decayType, out var decayChain))
                 {
-                    entry = (decayChain, new List<int>());
-                    byChain[decayChain.ConfigKey] = entry;
+                    var matchingItem = decayChain.Items
+                        .FirstOrDefault(i => string.Equals(i.ItemType, decayType, StringComparison.OrdinalIgnoreCase));
+                    int lvl = matchingItem?.Level ?? 1;
+
+                    if (seen.Add((decayChain.DisplayName, lvl)))
+                        parts.Add($"{{{{Item|{decayChain.DisplayName}|{lvl}}}}}");
                 }
-                if (!entry.Levels.Contains(lvl))
-                    entry.Levels.Add(lvl);
+                else if (itemNames.TryGetValue(decayType, out var name))
+                {
+                    if (!unmatchedNames.Contains(name))
+                        unmatchedNames.Add(name);
+                }
             }
-            else if (itemNames.TryGetValue(decayType, out var name))
-            {
-                if (!unmatchedNames.Contains(name))
-                    unmatchedNames.Add(name);
-            }
-        }
-
-        var parts = new List<string>();
-
-        foreach (var (_, (dChain, levels)) in byChain)
-        {
-            int minLvl = levels.Min();
-            int maxLvl = levels.Max();
-            parts.Add(minLvl == maxLvl
-                ? $"{{{{Item|{dChain.DisplayName}|{minLvl}}}}}"
-                : $"{{{{Item/Group|{dChain.DisplayName}|{minLvl}|min={minLvl}|max={maxLvl}}}}}");
         }
 
         foreach (var name in unmatchedNames)
@@ -319,19 +383,20 @@ public class InfoboxGeneratorService
         ParsedChain chain, IReadOnlyList<ParsedChain> allChains)
     {
         var itemTypeToChain = BuildItemTypeToChain(allChains);
-        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var seen = new HashSet<(string Name, int Level)>();
         var result = new List<string>();
 
         foreach (var item in chain.Items)
         {
             if (!item.IsSink || string.IsNullOrEmpty(item.SinkRewardItemType)) continue;
-            if (!seen.Add(item.SinkRewardItemType)) continue;
 
             if (itemTypeToChain.TryGetValue(item.SinkRewardItemType, out var rewardChain))
             {
                 var rewardItem = rewardChain.Items
                     .FirstOrDefault(i => string.Equals(i.ItemType, item.SinkRewardItemType, StringComparison.OrdinalIgnoreCase));
                 int lvl = rewardItem?.Level ?? 1;
+
+                if (!seen.Add((rewardChain.DisplayName, lvl))) continue;
                 result.Add($"{{{{Item|{rewardChain.DisplayName}|{lvl}}}}}");
             }
         }
@@ -387,7 +452,9 @@ public class InfoboxGeneratorService
     {
         var configKeyToChain = BuildConfigKeyToChain(allChains);
         var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-        var result = new List<string>();
+
+        // Collect per chain: actual item levels + amounts
+        var byChain = new Dictionary<string, (ParsedChain Chain, List<(int Level, int Amount)> Items)>(StringComparer.OrdinalIgnoreCase);
 
         foreach (var item in chain.Items)
         {
@@ -399,12 +466,28 @@ public class InfoboxGeneratorService
 
                 if (configKeyToChain.TryGetValue(reqKey, out var match))
                 {
-                    var maxLevel = match.Chain.Items.Max(i => i.Level);
+                    int level = match.Item.Level;
                     int amount = item.SinkRequirementAmounts != null
                         && item.SinkRequirementAmounts.TryGetValue(reqKey, out var amt) ? amt : 1;
-                    var template = $"{{{{Item|{match.Chain.DisplayName}|{maxLevel}}}}}";
-                    result.Add(amount > 1 ? $"{amount}x {template}" : template);
+
+                    if (!byChain.TryGetValue(match.Chain.ConfigKey, out var entry))
+                    {
+                        entry = (match.Chain, new List<(int, int)>());
+                        byChain[match.Chain.ConfigKey] = entry;
+                    }
+                    entry.Items.Add((level, amount));
                 }
+            }
+        }
+
+        var result = new List<string>();
+
+        foreach (var (_, (needChain, items)) in byChain)
+        {
+            foreach (var (lvl, amt) in items.OrderBy(x => x.Level))
+            {
+                var template = $"{{{{Item|{needChain.DisplayName}|{lvl}}}}}";
+                result.Add(amt > 1 ? $"{amt}x {template}" : template);
             }
         }
 

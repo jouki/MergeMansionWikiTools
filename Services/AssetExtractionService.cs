@@ -557,6 +557,7 @@ internal static class AssetExtractionService
                 {
                     var textAssets = afile.GetAssetsOfType(AssetClassID.TextAsset);
                     var spineAtlasNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                    var spineAtlasData = new Dictionary<string, (string Text, string TextureName)>(StringComparer.OrdinalIgnoreCase);
                     var skeletonCandidates = new List<(string Name, string Script)>();
 
                     // Pass 1: process .atlas files, collect skeleton candidates
@@ -569,28 +570,30 @@ internal static class AssetExtractionService
                             var scriptData = baseField["m_Script"].AsString;
                             if (string.IsNullOrEmpty(scriptData)) continue;
 
+                            bool isAtlas = false;
+                            string atlasBaseName = assetName;
+
                             if (assetName.EndsWith(".atlas", StringComparison.OrdinalIgnoreCase))
                             {
-                                var atlasBaseName = assetName[..^6];
+                                atlasBaseName = assetName[..^6];
+                                isAtlas = true;
+                            }
+                            else if (LooksLikeSpineAtlas(scriptData))
+                            {
+                                isAtlas = true;
+                            }
+
+                            if (isAtlas)
+                            {
                                 spineAtlasNames.Add(atlasBaseName);
 
                                 var spineSprites = ParseSpineAtlas(scriptData);
                                 if (spineSprites.Count > 0)
                                 {
                                     sprites.AddRange(spineSprites);
-                                    AppLogger.Info($"[SPINE] '{assetName}': {spineSprites.Count} sprites → texture '{spineSprites[0].TextureName}'");
-                                }
-                            }
-                            else if (LooksLikeSpineAtlas(scriptData))
-                            {
-                                // Some bundles store Spine atlas TextAssets without ".atlas" extension
-                                spineAtlasNames.Add(assetName);
-
-                                var spineSprites = ParseSpineAtlas(scriptData);
-                                if (spineSprites.Count > 0)
-                                {
-                                    sprites.AddRange(spineSprites);
-                                    AppLogger.Info($"[SPINE] '{assetName}' (no .atlas ext): {spineSprites.Count} sprites → texture '{spineSprites[0].TextureName}'");
+                                    var texName = spineSprites[0].TextureName;
+                                    spineAtlasData[atlasBaseName] = (scriptData, texName);
+                                    AppLogger.Info($"[SPINE] '{assetName}': {spineSprites.Count} sprites → texture '{texName}'");
                                 }
                             }
                             else
@@ -604,23 +607,66 @@ internal static class AssetExtractionService
                         }
                     }
 
-                    // Pass 2: parse skeleton JSONs for known atlas names → skin→sprite mapping
+                    // Pass 2: parse skeleton JSONs + save raw Spine files for icon rendering
+                    var spineRawDir = Path.Combine(outputDir, "_SpineRaw");
                     foreach (var (skelName, skelScript) in skeletonCandidates)
                     {
-                        if (!spineAtlasNames.Contains(skelName)) continue;
-
-                        try
+                        // Parse skin mappings for same-name skeletons (existing behavior)
+                        if (spineAtlasNames.Contains(skelName))
                         {
-                            var mappings = ParseSpineSkeletonSkins(skelName, skelScript);
-                            if (mappings.Count > 0)
+                            try
                             {
-                                skinMappings.AddRange(mappings);
-                                AppLogger.Info($"[SPINE] Skeleton '{skelName}': {mappings.Count} skin→sprite mappings");
+                                var mappings = ParseSpineSkeletonSkins(skelName, skelScript);
+                                if (mappings.Count > 0)
+                                {
+                                    skinMappings.AddRange(mappings);
+                                    AppLogger.Info($"[SPINE] Skeleton '{skelName}': {mappings.Count} skin→sprite mappings");
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                AppLogger.Info($"[SPINE] Skeleton parse failed for '{skelName}': {ex.GetType().Name}: {ex.Message}");
                             }
                         }
-                        catch (Exception ex)
+
+                        // Save skeleton JSON for rendering if it's a multi-slot assembly
+                        // (single-slot skeletons don't need compositing — the extracted sprite IS the icon)
+                        if (spineAtlasData.Count > 0 && skelScript.Contains("\"bones\""))
                         {
-                            AppLogger.Info($"[SPINE] Skeleton parse failed for '{skelName}': {ex.GetType().Name}: {ex.Message}");
+                            try
+                            {
+                                using var doc = JsonDocument.Parse(skelScript);
+                                var root = doc.RootElement;
+                                if (root.TryGetProperty("bones", out _) && root.TryGetProperty("slots", out var slotsArr))
+                                {
+                                    // Count slots that have a default attachment (= visible layers)
+                                    int visibleSlots = 0;
+                                    foreach (var slot in slotsArr.EnumerateArray())
+                                        if (slot.TryGetProperty("attachment", out _))
+                                            visibleSlots++;
+
+                                    // Only save multi-slot skeletons that need assembly
+                                    if (visibleSlots > 1)
+                                    {
+                                        Directory.CreateDirectory(spineRawDir);
+                                        File.WriteAllText(Path.Combine(spineRawDir, $"{skelName}.skel"), skelScript);
+                                    }
+                                }
+                            }
+                            catch { /* Not valid JSON — skip */ }
+                        }
+                    }
+
+                    // Save atlas files for rendering
+                    if (spineAtlasData.Count > 0)
+                    {
+                        Directory.CreateDirectory(spineRawDir);
+                        foreach (var (atlasName, (atlasText, textureName)) in spineAtlasData)
+                        {
+                            File.WriteAllText(Path.Combine(spineRawDir, $"{atlasName}.atlas"), atlasText);
+                            // Record atlas→texture mapping
+                            File.WriteAllText(Path.Combine(spineRawDir, $"{atlasName}.atlas.tex"),
+                                textureName);
                         }
                     }
                 }
@@ -746,7 +792,227 @@ internal static class AssetExtractionService
             AppLogger.Info($"Saved atlas_data.json ({spriteList.Count} sprites, {skinMapList.Count} skin mappings) to {atlasDataPath}");
         }
 
+        // ── Render Spine skeleton icons (on background thread) ─────────
+        var spineRawDir = Path.Combine(outputDir, "_SpineRaw");
+        if (Directory.Exists(spineRawDir))
+        {
+            onProgress?.Invoke("Assembling Spine icons...", bundleFiles.Length, bundleFiles.Length, totalTextures);
+            var assembled = await Task.Run(() => RenderSpineIcons(spineRawDir, outputDir, onProgress, ct), ct);
+            if (assembled > 0)
+                onProgress?.Invoke($"Assembled {assembled} Spine icons", bundleFiles.Length, bundleFiles.Length, totalTextures);
+
+            // Clean up raw Spine files — no longer needed after rendering
+            try { Directory.Delete(spineRawDir, recursive: true); }
+            catch { /* ignore — non-critical */ }
+        }
+
         return new ExtractionResult(bundleFiles.Length, processed, totalTextures, totalSkipped, failed, warningList);
+    }
+
+    // ── Spine Icon Rendering ─────────────────────────────────────────
+
+    /// <summary>
+    /// Renders Spine skeleton icons from raw atlas+skeleton files saved during extraction.
+    /// Each skeleton is rendered with its matching atlas and saved to Assembled/ subfolder.
+    /// </summary>
+    private static int RenderSpineIcons(string spineRawDir, string outputDir,
+        Action<string, int, int, int>? onProgress, CancellationToken ct)
+    {
+        var assembledDir = Path.Combine(outputDir, "Assembled");
+        var atlasFiles = Directory.GetFiles(spineRawDir, "*.atlas");
+        var skelFiles = Directory.GetFiles(spineRawDir, "*.skel");
+        if (atlasFiles.Length == 0 || skelFiles.Length == 0) return 0;
+
+        AppLogger.Info($"[SPINE] Rendering pass: {atlasFiles.Length} atlas(es), {skelFiles.Length} skeleton(s)");
+
+        // Load atlas data + pre-cache region names (avoid re-parsing per skeleton)
+        var atlases = new Dictionary<string, (string Text, string TexturePath, HashSet<string> Regions)>(
+            StringComparer.OrdinalIgnoreCase);
+        foreach (var atlasFile in atlasFiles)
+        {
+            var atlasName = Path.GetFileNameWithoutExtension(atlasFile);
+            var atlasText = File.ReadAllText(atlasFile);
+            var texFile = atlasFile + ".tex";
+            var textureName = File.Exists(texFile) ? File.ReadAllText(texFile).Trim() : atlasName;
+            var texturePath = Path.Combine(outputDir, textureName + ".png");
+            if (!File.Exists(texturePath))
+            {
+                AppLogger.Info($"[SPINE] Texture not found for atlas '{atlasName}': {texturePath}");
+                continue;
+            }
+            var regions = SpineRenderService.GetAtlasRegionNames(atlasText);
+            atlases[atlasName] = (atlasText, texturePath, regions);
+        }
+
+        if (atlases.Count == 0) return 0;
+
+        // Match each skeleton to an atlas by sprite name overlap
+        var skelAtlasMap = new Dictionary<string, string>(); // skel file → atlas name
+        foreach (var skelFile in skelFiles)
+        {
+            if (ct.IsCancellationRequested) return 0;
+            var skelName = Path.GetFileNameWithoutExtension(skelFile);
+            try
+            {
+                var skelJson = File.ReadAllText(skelFile);
+                var spriteNames = ExtractSkelSpriteNames(skelJson);
+                if (spriteNames.Count == 0) continue;
+
+                string? bestAtlas = null;
+                int bestOverlap = 0;
+                foreach (var (atlasName, (_, _, regions)) in atlases)
+                {
+                    int overlap = spriteNames.Count(s => regions.Contains(s));
+                    if (overlap > bestOverlap) { bestOverlap = overlap; bestAtlas = atlasName; }
+                }
+
+                if (bestAtlas != null && bestOverlap > 0)
+                    skelAtlasMap[skelFile] = bestAtlas;
+            }
+            catch (Exception ex)
+            {
+                AppLogger.Info($"[SPINE] Match failed for '{skelName}': {ex.Message}");
+            }
+        }
+
+        if (skelAtlasMap.Count == 0) return 0;
+        int totalToRender = skelAtlasMap.Count;
+        AppLogger.Info($"[SPINE] Matched {totalToRender} skeletons to atlases, rendering...");
+        onProgress?.Invoke($"Assembling Spine icons (0/{totalToRender})...", 0, totalToRender, 0);
+
+        Directory.CreateDirectory(assembledDir);
+        int rendered = 0;
+
+        // Group skeletons by atlas to share loaded texture
+        foreach (var group in skelAtlasMap.GroupBy(kv => kv.Value))
+        {
+            if (ct.IsCancellationRequested) break;
+            var (atlasText, texturePath, _) = atlases[group.Key];
+
+            Image<Rgba32>? texture = null;
+            try
+            {
+                texture = Image.Load<Rgba32>(texturePath);
+
+                foreach (var (skelFile, _) in group)
+                {
+                    if (ct.IsCancellationRequested) break;
+                    var skelName = Path.GetFileNameWithoutExtension(skelFile);
+                    var outPath = Path.Combine(assembledDir, skelName + ".png");
+                    if (File.Exists(outPath)) { rendered++; continue; }
+
+                    try
+                    {
+                        var skelJson = File.ReadAllText(skelFile);
+                        using var icon = SpineRenderService.RenderIcon(skelJson, atlasText, texture, "Select")
+                                      ?? SpineRenderService.RenderIcon(skelJson, atlasText, texture, "Idle");
+                        if (icon != null)
+                        {
+                            icon.SaveAsPng(outPath);
+                            rendered++;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        AppLogger.Info($"[SPINE] Render failed '{skelName}': {ex.GetType().Name}: {ex.Message}");
+                    }
+
+                    onProgress?.Invoke($"Assembling Spine icons ({rendered}/{totalToRender}) — {skelName}",
+                        rendered, totalToRender, rendered);
+                }
+            }
+            catch (Exception ex)
+            {
+                AppLogger.Info($"[SPINE] Failed to load texture for atlas '{group.Key}': {ex.Message}");
+            }
+            finally { texture?.Dispose(); }
+        }
+
+        // Create prefab-name aliases so Image Optimiser can find rendered icons by prefab name
+        // Skeleton files: "FactoryBoulevard_ConcreteMixer_01" → prefab: "FactoryBoulevard_ConcreteMixer01Dirty"
+        int aliases = 0;
+        try
+        {
+            var mappingPath = Path.Combine(Path.GetDirectoryName(outputDir)!, "pool_tag_to_prefab_mapping.json");
+            if (File.Exists(mappingPath) && Directory.Exists(assembledDir))
+            {
+                var mappingJson = File.ReadAllText(mappingPath);
+                var mapping = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, string>>(mappingJson);
+                if (mapping != null)
+                {
+                    // Build lookup: normalized skeleton name → rendered PNG path
+                    var renderedFiles = Directory.GetFiles(assembledDir, "*.png");
+                    var skelLookup = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                    foreach (var f in renderedFiles)
+                    {
+                        var name = Path.GetFileNameWithoutExtension(f);
+                        // Normalize: remove underscore before digits ("_01" → "01")
+                        var normalized = System.Text.RegularExpressions.Regex.Replace(name, @"_(?=\d)", "");
+                        skelLookup[normalized] = f;
+                    }
+
+                    foreach (var kv in mapping)
+                    {
+                        var prefabName = kv.Value;
+                        // Strip "-UI" suffix (same as SpriteMetadataService)
+                        if (prefabName.EndsWith("-UI", StringComparison.OrdinalIgnoreCase))
+                            prefabName = prefabName[..^3];
+
+                        var aliasPath = Path.Combine(assembledDir, prefabName + ".png");
+                        if (File.Exists(aliasPath)) continue;
+
+                        // Find matching skeleton: normalized skeleton name must be a prefix of prefab name
+                        foreach (var (normalizedSkel, sourcePath) in skelLookup)
+                        {
+                            if (prefabName.StartsWith(normalizedSkel, StringComparison.OrdinalIgnoreCase)
+                                && prefabName.Length > normalizedSkel.Length)
+                            {
+                                File.Copy(sourcePath, aliasPath);
+                                aliases++;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Info($"[SPINE] Alias creation error: {ex.Message}");
+        }
+
+        AppLogger.Info($"[SPINE] Rendered {rendered} icons to Assembled/ ({aliases} prefab aliases)");
+        return rendered;
+    }
+
+    /// <summary>Extracts sprite/attachment names from a Spine skeleton JSON for atlas matching.</summary>
+    private static HashSet<string> ExtractSkelSpriteNames(string skelJson)
+    {
+        var names = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        try
+        {
+            using var doc = JsonDocument.Parse(skelJson);
+            var root = doc.RootElement;
+            if (!root.TryGetProperty("skins", out var skins)) return names;
+
+            foreach (var skin in skins.EnumerateArray())
+            {
+                if (!skin.TryGetProperty("attachments", out var atts)) continue;
+                foreach (var slot in atts.EnumerateObject())
+                    foreach (var att in slot.Value.EnumerateObject())
+                    {
+                        // Use "path" or "name" if present, else the attachment key
+                        if (att.Value.TryGetProperty("path", out var p))
+                            names.Add(p.GetString()!);
+                        else if (att.Value.TryGetProperty("name", out var n))
+                            names.Add(n.GetString()!);
+                        else
+                            names.Add(att.Name);
+                    }
+            }
+        }
+        catch { }
+        return names;
     }
 
     // ── Helpers ───────────────────────────────────────────────────────

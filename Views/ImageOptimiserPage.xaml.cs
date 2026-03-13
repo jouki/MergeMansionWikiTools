@@ -2809,22 +2809,27 @@ public partial class ImageOptimiserPage : UserControl
             foreach (var mk in chain.MergedFromConfigKeys)
                 candidates.Add($"Item{mk}.png");
 
+        // Search in Export - PNGs/ and also in Assembled/ subfolder (Spine-rendered icons)
+        var searchDirs = new[] { exportDir, System.IO.Path.Combine(exportDir, "Assembled") };
         foreach (var candidate in candidates)
         {
-            var fullPath = System.IO.Path.Combine(exportDir, candidate);
-            if (!File.Exists(fullPath)) continue;
+            foreach (var dir in searchDirs)
+            {
+                var fullPath = System.IO.Path.Combine(dir, candidate);
+                if (!File.Exists(fullPath)) continue;
 
-            // Skip if this image (or same filename from another folder) is already loaded
-            var candidateFileName = System.IO.Path.GetFileName(fullPath);
-            if (AllImages.Any(img => string.Equals(
-                System.IO.Path.GetFileName(img.FilePath),
-                candidateFileName,
-                StringComparison.OrdinalIgnoreCase)))
+                // Skip if this image (or same filename from another folder) is already loaded
+                var candidateFileName = System.IO.Path.GetFileName(fullPath);
+                if (AllImages.Any(img => string.Equals(
+                    System.IO.Path.GetFileName(img.FilePath),
+                    candidateFileName,
+                    StringComparison.OrdinalIgnoreCase)))
+                    return;
+
+                // Auto-load the image directly (skip suggestion banner)
+                AddImages(new[] { fullPath });
                 return;
-
-            // Auto-load the atlas image directly (skip suggestion banner)
-            AddImages(new[] { fullPath });
-            return;
+            }
         }
     }
 
