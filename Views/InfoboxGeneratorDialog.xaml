@@ -19,7 +19,6 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -80,25 +79,8 @@
                 </StackPanel>
             </Border>
 
-            <!-- Sources -->
-            <Expander Grid.Row="2" Header="Sources (one per line)"
-                      IsExpanded="True" Margin="0,0,0,10">
-                <StackPanel Margin="0,8,0,0">
-                    <TextBlock Text="Auto-detected from other chains — edit as needed."
-                               FontSize="11"
-                               Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                               Margin="0,0,0,5" />
-                    <ui:TextBox x:Name="txtSources"
-                                AcceptsReturn="True" TextWrapping="NoWrap"
-                                MinHeight="60" MaxHeight="120"
-                                VerticalContentAlignment="Top"
-                                FontFamily="Consolas" FontSize="12"
-                                TextChanged="TxtSources_TextChanged" />
-                </StackPanel>
-            </Expander>
-
             <!-- Preview -->
-            <Border Grid.Row="3"
+            <Border Grid.Row="2"
                     Background="{DynamicResource CardBackgroundFillColorSecondaryBrush}"
                     CornerRadius="4"
                     BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
@@ -121,7 +103,7 @@
             </Border>
 
             <!-- Bottom bar -->
-            <Grid Grid.Row="4" Margin="0,12,0,0" MinHeight="50">
+            <Grid Grid.Row="3" Margin="0,12,0,0" MinHeight="50">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />

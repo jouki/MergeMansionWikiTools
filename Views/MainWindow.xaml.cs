@@ -33,6 +33,9 @@ public partial class MainWindow : FluentWindow
     public WikiMappingCache? WikiMapping { get; set; }
     public MysteryService? MysteryService { get; set; }
 
+    /// <summary>Whether variant subdirectories exist alongside chain_item_odds.json.</summary>
+    public bool HasVariantDirectories { get; private set; }
+
     // ── Data file change events ──
     /// <summary>Fired after chain_item_odds.json is successfully loaded.</summary>
     public event Action? ChainDataLoaded;
@@ -350,6 +353,9 @@ public partial class MainWindow : FluentWindow
 
             ShowStatus($"Loaded {DataService.Chains.Count} chains from {Path.GetFileName(path)}", InfoBarSeverity.Success);
             Increment(s => s.DataLoads++);
+
+            // Check for AB test variant directories
+            HasVariantDirectories = VariantComparisonService.HasVariants(path);
 
             // Reset flag — fresh data from JSON, mapping can be re-applied
             _wikiMappingApplied = false;
@@ -822,6 +828,34 @@ public partial class MainWindow : FluentWindow
         navList.SelectedIndex = 1;
     }
 
+    public void NavigateToImageOptimiserWithFile(string filePath)
+    {
+        _imageOptimiserPage ??= new ImageOptimiserPage(this);
+        _imageOptimiserPage.AddFileFromPath(filePath);
+        contentArea.Content = _imageOptimiserPage;
+        navList.SelectedIndex = 1;
+    }
+
+    /// <summary>
+    /// Opens Image Optimiser from Mysteries context — adds file, sets algorithm detection,
+    /// and configures "Back to Mysteries" mode with callback for returning split results.
+    /// </summary>
+    public void NavigateToImageOptimiserForMystery(string filePath, Action<List<string>> onComplete)
+    {
+        _imageOptimiserPage ??= new ImageOptimiserPage(this);
+        _imageOptimiserPage.ClearAll();
+        _imageOptimiserPage.ForceAlgorithmDetection = true; // prevent atlas override
+        _imageOptimiserPage.AddFileFromPath(filePath);
+        _imageOptimiserPage.SetMysteryReturnMode(onComplete);
+        contentArea.Content = _imageOptimiserPage;
+        navList.SelectedIndex = 1;
+    }
+
+    public void NavigateToPage(int index)
+    {
+        navList.SelectedIndex = index;
+    }
+
     public void NavigateToSettingsHighlightApk()
     {
         navList.SelectedIndex = 9;
@@ -876,6 +910,12 @@ public partial class MainWindow : FluentWindow
         overlayImage.Source = bi;
         imageOverlay.Visibility = Visibility.Visible;
         imageOverlay.Focus();
+    }
+
+    public void ShowImageOverlay(string filePath)
+    {
+        if (!File.Exists(filePath)) return;
+        ShowImageOverlay(File.ReadAllBytes(filePath));
     }
 
     private void ImageOverlay_Close(object sender, System.Windows.Input.MouseButtonEventArgs e)

@@ -15,6 +15,7 @@ public partial class InfoboxGeneratorDialog : FluentWindow
     private readonly ParsedChain _chain;
     private readonly InfoboxGeneratorService _service = new();
     private List<LuaArea>? _areas;
+    private List<string> _autoSources = new();
     private bool _suppressRegenerate;
     private string? _wikiNameWarning;
 
@@ -33,11 +34,8 @@ public partial class InfoboxGeneratorDialog : FluentWindow
         LoadAreas();
 
         // Pre-populate sources with auto-detected
-        _suppressRegenerate = true;
         var ds = _main.DataService!;
-        var autoSources = _service.BuildAutoSources(chain, ds.Chains, ds.ItemNames, _areas);
-        txtSources.Text = string.Join("\n", autoSources);
-        _suppressRegenerate = false;
+        _autoSources = _service.BuildAutoSources(chain, ds.Chains, ds.ItemNames, _areas);
 
         // Hide "keep full name" if there's no parenthetical; pre-check for non-event chains
         if (!chain.DisplayName.Contains('('))
@@ -85,12 +83,6 @@ public partial class InfoboxGeneratorDialog : FluentWindow
     private void ChkOption_Changed(object sender, RoutedEventArgs e)
         => RegeneratePreview();
 
-    private void TxtSources_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        if (_suppressRegenerate) return;
-        RegeneratePreview();
-    }
-
     private void RegeneratePreview()
     {
         if (_main.DataService == null) return;
@@ -107,15 +99,9 @@ public partial class InfoboxGeneratorDialog : FluentWindow
             HardcodeGalleryImage = chkHardcodeGallery.IsChecked == true,
         };
 
-        var manualSources = txtSources.Text
-            .Split('\n', StringSplitOptions.RemoveEmptyEntries)
-            .Select(l => l.Trim())
-            .Where(l => !string.IsNullOrEmpty(l))
-            .ToList();
-
         try
         {
-            var result = _service.Generate(_chain, ds.Chains, ds.ItemNames, opts, manualSources);
+            var result = _service.Generate(_chain, ds.Chains, ds.ItemNames, opts, _autoSources);
             txtOutput.Text = result;
             txtOutput.Visibility = Visibility.Visible;
             txtOutputPlaceholder.Visibility = Visibility.Collapsed;

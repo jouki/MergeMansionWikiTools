@@ -103,6 +103,17 @@ public class WikiPageStatus
     /// <summary>Does the event item page content match (EventName vardefine)?</summary>
     public bool? EventItemPageContentMatches { get; set; }
 
+    /// <summary>Images: total expected, how many exist on wiki</summary>
+    public int ImagesTotalExpected { get; set; }
+    public int ImagesExistOnWiki { get; set; }
+
+    /// <summary>Images status: Missing (all missing), Mismatch (partial), Match (all exist)</summary>
+    public WikiCheckState ImagesState =>
+        ImagesTotalExpected == 0 ? WikiCheckState.Unknown
+        : ImagesExistOnWiki == 0 ? WikiCheckState.Missing
+        : ImagesExistOnWiki >= ImagesTotalExpected ? WikiCheckState.Match
+        : WikiCheckState.Mismatch;
+
     /// <summary>Does a matching reward template variant exist (by XP progression)?</summary>
     public bool? RewardTemplateMatches { get; set; }
 
@@ -122,14 +133,14 @@ public class WikiPageStatus
         EventPageExists != true ? (EventPageExists == false ? WikiCheckState.Missing : WikiCheckState.Unknown)
         : EventPageContentMatches == true ? WikiCheckState.Match
         : EventPageContentMatches == false ? WikiCheckState.Mismatch
-        : WikiCheckState.Match; // exists but not yet content-checked → treat as match
+        : WikiCheckState.Unknown; // exists but not yet content-checked → show as unknown until checked
 
     /// <summary>Event item page: Missing → Mismatch → Match</summary>
     public WikiCheckState EventItemPageState =>
         EventItemPageExists != true ? (EventItemPageExists == false ? WikiCheckState.Missing : WikiCheckState.Unknown)
         : EventItemPageContentMatches == true ? WikiCheckState.Match
         : EventItemPageContentMatches == false ? WikiCheckState.Mismatch
-        : WikiCheckState.Match; // exists but not yet content-checked → treat as match
+        : WikiCheckState.Unknown; // exists but not yet content-checked → show as unknown
 
     /// <summary>Reward template: Missing (red) → Mismatch/formatting (yellow) → Match (green).</summary>
     public WikiCheckState RewardTemplateState =>
@@ -174,6 +185,90 @@ public class MysteryEvent
     public WikiPageStatus WikiStatus { get; set; } = new();
 }
 
+// ── Diff models ─────────────────────────────────────────────
+
+public enum DiffLineType
+{
+    /// <summary>Line matches in both wiki and generated content.</summary>
+    Match,
+    /// <summary>Line exists only in generated (new) content.</summary>
+    Added,
+    /// <summary>Line exists only in wiki (current) content.</summary>
+    Removed
+}
+
+public class DiffLine
+{
+    public DiffLineType Type { get; set; }
+    public string Text { get; set; } = "";
+}
+
+// ── Diff section scope ──────────────────────────────────────
+
+public enum MysteryDiffScope
+{
+    Rewards,
+    EventPage,
+    EventItemPage
+}
+
+// ── Decoration detection models ─────────────────────────────
+
+public class DetectedDecorationFile
+{
+    /// <summary>Source file path (atlas PNG or standalone PNG)</summary>
+    public string SourcePath { get; set; } = "";
+
+    /// <summary>Target wiki filename</summary>
+    public string WikiFilename { get; set; } = "";
+
+    /// <summary>Category: Decoration, Wallpaper, Badge, EventItem</summary>
+    public string Category { get; set; } = "";
+
+    /// <summary>Sprite rect within atlas (null if standalone file)</summary>
+    public SpriteRect? AtlasRect { get; set; }
+
+    /// <summary>Width of the sliced/source image</summary>
+    public int Width { get; set; }
+
+    /// <summary>Height of the sliced/source image</summary>
+    public int Height { get; set; }
+
+    /// <summary>Whether the file already exists on the wiki</summary>
+    public bool? ExistsOnWiki { get; set; }
+
+    /// <summary>Path to sliced/optimized temp file (after processing)</summary>
+    public string? ProcessedPath { get; set; }
+
+    /// <summary>File size after TinyPNG optimization</summary>
+    public long? OptimizedSize { get; set; }
+}
+
+public class SpriteRect
+{
+    public int X { get; set; }
+    public int Y { get; set; }
+    public int Width { get; set; }
+    public int Height { get; set; }
+}
+
+// ── Dialogue models ─────────────────────────────────────────
+
+public class DialogueGroup
+{
+    /// <summary>Wiki tab name (e.g., "Event Intro", "Decoration Level 1")</summary>
+    public string TabName { get; set; } = "";
+
+    /// <summary>Ordered dialogue lines within this group</summary>
+    public List<DialogueLine> Lines { get; set; } = new();
+}
+
+public class DialogueLine
+{
+    public string Speaker { get; set; } = "";
+    public string Text { get; set; } = "";
+}
+
 // ── Item mapping overrides ───────────────────────────────────────
 
 public class MysteryItemMapping
@@ -198,11 +293,13 @@ public class MysteryWikiStatusCache
 public class CachedMysteryStatus
 {
     public bool EventPageExists { get; set; }
-    public bool EventPageContentMatches { get; set; }
+    public bool? EventPageContentMatches { get; set; }
     public bool EventItemPageExists { get; set; }
-    public bool EventItemPageContentMatches { get; set; }
+    public bool? EventItemPageContentMatches { get; set; }
     public bool RewardTemplateMatches { get; set; }
     public bool RewardContentMatches { get; set; }
     public string? MatchingVariant { get; set; }
     public string? SuggestedPageTitle { get; set; }
+    public int ImagesTotalExpected { get; set; }
+    public int ImagesExistOnWiki { get; set; }
 }

@@ -164,29 +164,13 @@ public partial class TableGeneratorDialog : FluentWindow
             warningBar.IsOpen = false;
     }
 
-    private async void BtnCopy_Click(object sender, RoutedEventArgs e)
+    private void BtnCopy_Click(object sender, RoutedEventArgs e)
     {
         if (!string.IsNullOrEmpty(txtOutput.Text))
         {
-            // SetDataObject with copy=false is fast (no OLE flush).
-            // Data stays on clipboard while the app is running.
-            bool success = false;
-            for (int i = 0; i < 3; i++)
-            {
-                try
-                {
-                    Clipboard.SetDataObject(txtOutput.Text, true);
-                    success = true;
-                    Increment(s => s.TablesGenerated++);
-                    break;
-                }
-                catch (System.Runtime.InteropServices.COMException)
-                {
-                    await Task.Delay(100);
-                }
-            }
-
-            btnCopy.Content = success ? "Copied!" : "Failed!";
+            App.NativeSetClipboardText(txtOutput.Text);
+            Increment(s => s.TablesGenerated++);
+            btnCopy.Content = "Copied!";
             _ = ResetCopyButton();
         }
     }

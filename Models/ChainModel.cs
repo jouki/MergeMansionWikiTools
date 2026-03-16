@@ -228,8 +228,11 @@ public class ParsedItem
     public int HowManyGeneratedInCycle { get; set; } = 1;
     public int ActivationHowManyCycles { get; set; } = -1;
     public int StorageMax { get; set; }
+    public int MaxCharges { get; set; }
     public long RechargeTimeMs { get; set; }
+    public long MiniChargeCooldownMs { get; set; }
     public long FirstCycleStartDelayMs { get; set; }
+    public double TimerSkipMultiplier { get; set; }
     public string? DecayAfterLastCycleItemType { get; set; }
     public Dictionary<string, double>? DecayAfterLastCycleOdds { get; set; }
 

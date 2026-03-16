@@ -63,6 +63,9 @@ internal static class AssetExtractionService
 
     private static readonly HttpClient _http = new();
     private static readonly object _fileLock = new();
+    /// <summary>Maps baseName (without suffix) → container suffix for the FIRST extracted file.</summary>
+    private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string>
+        _firstFileSuffixMap = new(StringComparer.OrdinalIgnoreCase);
 
     // ── TPK download ──────────────────────────────────────────────────
 
@@ -364,6 +367,11 @@ internal static class AssetExtractionService
                                 outPath = GetUniqueFilePath(outputDir, safeFileName, suffix);
                                 File.Create(outPath).Dispose(); // reserve the path
                             }
+
+                            // Store suffix for every file (even first/plain) for post-processing rename
+                            var baseNameOnly = Path.GetFileNameWithoutExtension(safeFileName);
+                            var safeSuffix = SanitizeFileName(Path.GetFileNameWithoutExtension(suffix));
+                            _firstFileSuffixMap.TryAdd(baseNameOnly, safeSuffix);
                         }
 
                         if (outPath != null)
@@ -485,8 +493,7 @@ internal static class AssetExtractionService
                             AppLogger.Info($"[ATLAS] '{atlasName}': renderDataMap.IsDummy={mapField.IsDummy}, children={(!mapField.IsDummy ? mapField.Children.Count : 0)}");
                             if (mapField.IsDummy || mapField.Children.Count == 0) continue;
 
-                            string atlasTextureName = "";
-                            var atlasRects = new List<(float x, float y, float w, float h)>();
+                            var atlasRects = new List<(float x, float y, float w, float h, string texName)>();
 
                             foreach (var entry in mapField.Children)
                             {
@@ -494,58 +501,69 @@ internal static class AssetExtractionService
                                 {
                                     var value = entry[1]; // SpriteAtlasData
                                     var textureRect = value["textureRect"];
-                                    atlasRects.Add((
-                                        textureRect["x"].AsFloat,
-                                        textureRect["y"].AsFloat,
-                                        textureRect["width"].AsFloat,
-                                        textureRect["height"].AsFloat));
 
-                                    // Resolve atlas texture name from first valid entry
-                                    if (string.IsNullOrEmpty(atlasTextureName))
+                                    // Resolve texture name PER ENTRY (each sprite can be on a different atlas page)
+                                    string entryTexName = "";
+                                    try
                                     {
                                         var texPPtr = value["texture"];
                                         var fid = texPPtr["m_FileID"].AsInt;
                                         var pid = texPPtr["m_PathID"].AsLong;
                                         if (fid == 0 && texNameMap.TryGetValue(pid, out var localTexName))
-                                            atlasTextureName = localTexName;
+                                            entryTexName = localTexName;
                                         else
                                         {
-                                            try
-                                            {
-                                                var ext = am.GetExtAsset(afileInst, texPPtr);
-                                                if (ext.baseField != null)
-                                                    atlasTextureName = ext.baseField["m_Name"].AsString ?? "";
-                                            }
-                                            catch { }
+                                            var ext = am.GetExtAsset(afileInst, texPPtr);
+                                            if (ext.baseField != null)
+                                                entryTexName = ext.baseField["m_Name"].AsString ?? "";
                                         }
                                     }
+                                    catch { }
+
+                                    atlasRects.Add((
+                                        textureRect["x"].AsFloat,
+                                        textureRect["y"].AsFloat,
+                                        textureRect["width"].AsFloat,
+                                        textureRect["height"].AsFloat,
+                                        entryTexName));
                                 }
                                 catch (Exception ex) { AppLogger.Info($"[ATLAS] Map entry read failed: {ex.GetType().Name}: {ex.Message}"); }
                             }
 
-                            AppLogger.Info($"[ATLAS] '{atlasName}': {atlasRects.Count} valid rects, textureName='{atlasTextureName}'");
-                            if (atlasRects.Count == 0) continue;
-                            if (string.IsNullOrEmpty(atlasTextureName))
-                                atlasTextureName = atlasName; // Fallback: use atlas asset name
+                            // Determine fallback texture name (most common non-empty entry)
+                            var fallbackTexName = atlasRects
+                                .Where(r => !string.IsNullOrEmpty(r.texName))
+                                .GroupBy(r => r.texName)
+                                .OrderByDescending(g => g.Count())
+                                .FirstOrDefault()?.Key ?? atlasName;
 
-                            // Create SpriteInfo entries — correlate names with rects by index
+                            AppLogger.Info($"[ATLAS] '{atlasName}': {atlasRects.Count} valid rects, fallbackTex='{fallbackTexName}'");
+                            if (atlasRects.Count == 0) continue;
+
+                            // Create SpriteInfo entries — each sprite has its own texture page
                             int count = Math.Min(spriteNames.Count, atlasRects.Count);
                             for (int j = 0; j < count; j++)
                             {
-                                var (rx, ry, rw, rh) = atlasRects[j];
+                                var (rx, ry, rw, rh, texName) = atlasRects[j];
                                 if (rw > 0 && rh > 0)
-                                    sprites.Add(new SpriteInfo(spriteNames[j], atlasTextureName, rx, ry, rw, rh));
+                                {
+                                    var effectiveTex = !string.IsNullOrEmpty(texName) ? texName : fallbackTexName;
+                                    sprites.Add(new SpriteInfo(spriteNames[j], effectiveTex, rx, ry, rw, rh));
+                                }
                             }
 
                             // Extra rects without names → auto-generated names
                             for (int j = count; j < atlasRects.Count; j++)
                             {
-                                var (rx, ry, rw, rh) = atlasRects[j];
+                                var (rx, ry, rw, rh, texName) = atlasRects[j];
                                 if (rw > 0 && rh > 0)
-                                    sprites.Add(new SpriteInfo($"{atlasName}_{j}", atlasTextureName, rx, ry, rw, rh));
+                                {
+                                    var effectiveTex = !string.IsNullOrEmpty(texName) ? texName : fallbackTexName;
+                                    sprites.Add(new SpriteInfo($"{atlasName}_{j}", effectiveTex, rx, ry, rw, rh));
+                                }
                             }
 
-                            AppLogger.Info($"SpriteAtlas '{atlasName}': {Math.Max(count, atlasRects.Count)} sprites → texture '{atlasTextureName}' (names={spriteNames.Count}, rects={atlasRects.Count})");
+                            AppLogger.Info($"SpriteAtlas '{atlasName}': {Math.Max(count, atlasRects.Count)} sprites → texture '{fallbackTexName}' (names={spriteNames.Count}, rects={atlasRects.Count})");
                         }
                         catch (Exception ex) { AppLogger.Info($"[ATLAS] Read failed: {ex.GetType().Name}: {ex.Message}"); }
                     }
@@ -694,6 +712,7 @@ internal static class AssetExtractionService
         CancellationToken ct = default)
     {
         Directory.CreateDirectory(outputDir);
+        _firstFileSuffixMap.Clear();
 
         var bundleFiles = Directory.GetFiles(bundleDir)
             .Where(f =>
@@ -761,6 +780,10 @@ internal static class AssetExtractionService
             var logPath = Path.Combine(logDir, $"extraction_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log");
             await File.WriteAllLinesAsync(logPath, warningList, ct);
         }
+
+        // Post-process: fix inconsistent naming where first file has no suffix but duplicates do
+        // e.g., Popup_Shared_Art.png + Popup_Shared_Art_SP_FerretPet2025.png → rename first to include suffix
+        FixInconsistentDuplicateNames(outputDir, globalTextureMap);
 
         // Post-process sprites: replace Unity texture m_Name with exported PNG filename
         var spriteList = allSprites.ToList();
@@ -1330,6 +1353,102 @@ internal static class AssetExtractionService
     }
 
     /// <summary>
+    /// <summary>
+    /// Post-extraction fix: if a file "X.png" exists AND files "X_suffix.png" also exist,
+    /// the plain "X.png" was the first extracted duplicate and needs a suffix too.
+    /// Finds the correct suffix from the textureFileMap and renames.
+    /// </summary>
+    private static void FixInconsistentDuplicateNames(string outputDir,
+        System.Collections.Concurrent.ConcurrentDictionary<string, string> textureFileMap)
+    {
+        try
+        {
+            var pngFiles = Directory.GetFiles(outputDir, "*.png")
+                .Select(f => Path.GetFileNameWithoutExtension(f))
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+            foreach (var baseName in pngFiles.ToList())
+            {
+                // Skip files that already have a suffix pattern (contain _ after the base)
+                // We're looking for plain names like "Popup_Shared_Art" that have
+                // sibling files like "Popup_Shared_Art_SP_FerretPet2025"
+
+                var plainPath = Path.Combine(outputDir, baseName + ".png");
+                if (!File.Exists(plainPath)) continue;
+
+                // Find files that start with baseName + "_" (these are the suffixed duplicates)
+                var suffixedSiblings = pngFiles
+                    .Where(f => f.Length > baseName.Length + 1
+                        && f.StartsWith(baseName + "_", StringComparison.OrdinalIgnoreCase)
+                        && f != baseName)
+                    .ToList();
+
+                if (suffixedSiblings.Count == 0) continue;
+
+                // Plain file exists alongside suffixed siblings — needs its own suffix
+                var plainBytes = File.ReadAllBytes(plainPath);
+
+                // Check if plain is identical to any sibling (true duplicate → delete)
+                bool isDuplicate = false;
+                foreach (var sib in suffixedSiblings)
+                {
+                    var sibPath = Path.Combine(outputDir, sib + ".png");
+                    if (File.Exists(sibPath) && IsFileIdentical(sibPath, plainBytes))
+                    {
+                        File.Delete(plainPath);
+                        isDuplicate = true;
+                        // Update textureFileMap: find any entry pointing to baseName
+                        var key = textureFileMap.FirstOrDefault(kv =>
+                            string.Equals(kv.Value, baseName, StringComparison.OrdinalIgnoreCase)).Key;
+                        if (key != null) textureFileMap[key] = sib;
+                        AppLogger.Info($"FixDuplicateNames: deleted duplicate {baseName}.png (identical to {sib}.png)");
+                        break;
+                    }
+                }
+                if (isDuplicate) continue;
+
+                // Not identical — rename to include the correct container suffix
+                string candidate;
+                if (_firstFileSuffixMap.TryGetValue(baseName, out var savedSuffix)
+                    && !string.IsNullOrEmpty(savedSuffix))
+                {
+                    // Use the container suffix that was saved during extraction
+                    candidate = $"{baseName}_{savedSuffix}";
+                    // Ensure uniqueness
+                    if (pngFiles.Contains(candidate))
+                    {
+                        int num = 2;
+                        while (pngFiles.Contains($"{candidate}_{num}")) num++;
+                        candidate = $"{candidate}_{num}";
+                    }
+                }
+                else
+                {
+                    // Fallback: numeric suffix
+                    int num = 0;
+                    do { num++; candidate = $"{baseName}_{num}"; }
+                    while (pngFiles.Contains(candidate));
+                }
+
+                var newPath = Path.Combine(outputDir, candidate + ".png");
+                File.Move(plainPath, newPath);
+
+                // Update textureFileMap
+                var texKey = textureFileMap.FirstOrDefault(kv =>
+                    string.Equals(kv.Value, baseName, StringComparison.OrdinalIgnoreCase)).Key;
+                if (texKey != null) textureFileMap[texKey] = candidate;
+                pngFiles.Remove(baseName);
+                pngFiles.Add(candidate);
+
+                AppLogger.Info($"FixDuplicateNames: renamed {baseName}.png → {candidate}.png");
+            }
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Warn($"FixInconsistentDuplicateNames failed: {ex.Message}");
+        }
+    }
+
     /// Extracts a meaningful suffix from a Unity container path.
     /// Walks up the path segments looking for a name with '_' (same logic as GetDuplicateSuffix).
     /// E.g. "assets/assetbundles/events/seasonpass/sp_generic/art/sprites/tex.png" → "sp_generic"

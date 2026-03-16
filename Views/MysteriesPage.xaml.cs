@@ -15,6 +15,7 @@ public partial class MysteriesPage : UserControl
     private readonly MainWindow _main;
     private MysteryService? _mysteryService;
     private MysteryItemMapping? _itemMapping;
+    private DialogueService? _dialogueService;
     private bool _loaded;
 
     public MysteriesPage(MainWindow main)
@@ -26,14 +27,71 @@ public partial class MysteriesPage : UserControl
         // Use pre-loaded MysteryService from MainWindow (loaded during splash screen)
         TryUsePreloaded();
 
+        // Load pet display names from Pets.json
+        MysteryWikiService.LoadPetDisplayNames(
+            _main.Settings.ImageExporterBasePath, _main.Settings.SelectedApkVersion);
+
+        // Auto-load dialogues.json if it exists alongside events.json
+        _ = TryLoadDialoguesAsync();
+
         // Auto-reload when events.json path changes
         _main.EventsFileChanged += () => Dispatcher.InvokeAsync(() =>
         {
             _loaded = false;
             _mysteryService = null;
+            _dialogueService = null;
             mysteryListPanel.Children.Clear();
             TryUsePreloaded();
+            _ = TryLoadDialoguesAsync();
         });
+    }
+
+    private async Task TryLoadDialoguesAsync()
+    {
+        // Search for dialogues.json in multiple locations
+        var candidates = new List<string>();
+
+        // 1. Same directory as events.json
+        var eventsPath = _main.Settings.EventsJsonPath;
+        if (!string.IsNullOrEmpty(eventsPath))
+        {
+            var dir = Path.GetDirectoryName(eventsPath);
+            if (!string.IsNullOrEmpty(dir))
+                candidates.Add(Path.Combine(dir, "dialogues.json"));
+        }
+
+        // 2. Dumper output directory
+        if (!string.IsNullOrEmpty(_main.Settings.DumperOutputPath))
+            candidates.Add(Path.Combine(_main.Settings.DumperOutputPath, "dialogues.json"));
+
+        // 3. APK version Dump folder
+        if (!string.IsNullOrEmpty(_main.Settings.ImageExporterBasePath)
+            && !string.IsNullOrEmpty(_main.Settings.SelectedApkVersion))
+        {
+            var dumpDir = Path.Combine(_main.Settings.ImageExporterBasePath,
+                _main.Settings.SelectedApkVersion, "Dump");
+            candidates.Add(Path.Combine(dumpDir, "dialogues.json"));
+        }
+
+        AppLogger.Info($"DialogueService: searching {candidates.Count} candidates: {string.Join(", ", candidates)}");
+        var dialoguesPath = candidates.FirstOrDefault(File.Exists);
+        if (dialoguesPath == null)
+        {
+            AppLogger.Warn("DialogueService: dialogues.json not found in any candidate path");
+            return;
+        }
+
+        try
+        {
+            _dialogueService = new DialogueService();
+            await _dialogueService.LoadAsync(dialoguesPath);
+            AppLogger.Info($"DialogueService loaded from: {dialoguesPath}");
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Warn($"Failed to load dialogues.json: {ex.Message}");
+            _dialogueService = null;
+        }
     }
 
     // ── Loading ───────────────────────────────────────────────────
@@ -250,7 +308,15 @@ public partial class MysteriesPage : UserControl
 
         var pageState = mystery.WikiStatus.EventPageState;
         if (pageState != WikiCheckState.Unknown)
-            statusPanel.Children.Add(CreateStatusIndicator("Page", pageState));
+        {
+            var pageInd = CreateStatusIndicator("Page", pageState);
+            pageInd.Cursor = System.Windows.Input.Cursors.Hand;
+            pageInd.Tag = (mystery, MysteryDiffScope.EventPage);
+            pageInd.MouseLeftButtonDown += StatusIndicator_Click;
+            ToolTipService.SetInitialShowDelay(pageInd, 0);
+            pageInd.ToolTip = "Click to diff Event Page";
+            statusPanel.Children.Add(pageInd);
+        }
 
         var rewardState = mystery.WikiStatus.RewardTemplateState;
         if (rewardState != WikiCheckState.Unknown)
@@ -258,12 +324,50 @@ public partial class MysteriesPage : UserControl
             var tmplText = !string.IsNullOrEmpty(mystery.WikiStatus.MatchingVariant)
                 ? $"Rewards ({mystery.WikiStatus.MatchingVariant})"
                 : "Rewards";
-            statusPanel.Children.Add(CreateStatusIndicator(tmplText, rewardState));
+            var rewardInd = CreateStatusIndicator(tmplText, rewardState);
+            rewardInd.Cursor = System.Windows.Input.Cursors.Hand;
+            rewardInd.Tag = (mystery, MysteryDiffScope.Rewards);
+            rewardInd.MouseLeftButtonDown += StatusIndicator_Click;
+            ToolTipService.SetInitialShowDelay(rewardInd, 0);
+            rewardInd.ToolTip = "Click to diff Rewards";
+            statusPanel.Children.Add(rewardInd);
         }
 
         var itemState = mystery.WikiStatus.EventItemPageState;
         if (itemState != WikiCheckState.Unknown)
-            statusPanel.Children.Add(CreateStatusIndicator("Item", itemState));
+        {
+            var itemInd = CreateStatusIndicator("Item", itemState);
+            itemInd.Cursor = System.Windows.Input.Cursors.Hand;
+            itemInd.Tag = (mystery, MysteryDiffScope.EventItemPage);
+            itemInd.MouseLeftButtonDown += StatusIndicator_Click;
+            ToolTipService.SetInitialShowDelay(itemInd, 0);
+            itemInd.ToolTip = "Click to diff Event Item Page";
+            statusPanel.Children.Add(itemInd);
+        }
+
+        // Images indicator
+        var imagesState = mystery.WikiStatus.ImagesState;
+        if (imagesState != WikiCheckState.Unknown)
+        {
+            var imagesLabel = mystery.WikiStatus.ImagesExistOnWiki > 0
+                ? $"Images ({mystery.WikiStatus.ImagesExistOnWiki}/{mystery.WikiStatus.ImagesTotalExpected})"
+                : "Images";
+            var imagesInd = CreateStatusIndicator(imagesLabel, imagesState);
+            imagesInd.Cursor = System.Windows.Input.Cursors.Hand;
+            imagesInd.Tag = (mystery, MysteryDiffScope.EventPage); // opens Prepare on Images tab
+            imagesInd.MouseLeftButtonDown += (s, _) =>
+            {
+                if (s is not Border b) return;
+                var (m, _) = ((MysteryEvent, MysteryDiffScope))b.Tag;
+                var dlg = new MysteryGeneratorDialog(_main, m, _itemMapping,
+                    MysteryGeneratorMode.Images, _dialogueService);
+                dlg.Owner = Window.GetWindow(this);
+                dlg.Show();
+            };
+            ToolTipService.SetInitialShowDelay(imagesInd, 0);
+            imagesInd.ToolTip = "Click to open Images";
+            statusPanel.Children.Add(imagesInd);
+        }
 
         if (statusPanel.Children.Count > 0)
             infoPanel.Children.Add(statusPanel);
@@ -278,38 +382,32 @@ public partial class MysteriesPage : UserControl
             VerticalAlignment = VerticalAlignment.Center
         };
 
-        var btnGenerate = new Wpf.Ui.Controls.Button
+        // "Prepare" button — opens the unified mystery editor dialog
+        var btnPrepare = new Wpf.Ui.Controls.Button
         {
-            Content = "Generate Rewards",
-            Appearance = ControlAppearance.Primary,
+            Content = "Prepare",
+            Appearance = ControlAppearance.Secondary,
             Height = 32,
             Margin = new Thickness(8, 0, 0, 0),
             Tag = mystery
         };
-        btnGenerate.Click += BtnGenerateRewards_Click;
-        btnPanel.Children.Add(btnGenerate);
+        btnPrepare.Click += BtnPrepare_Click;
+        btnPanel.Children.Add(btnPrepare);
 
-        var btnEventPage = new Wpf.Ui.Controls.Button
+        // Update Wiki button (accent)
+        if (_main.Settings.WikiVerified)
         {
-            Content = "Event Page",
-            Appearance = ControlAppearance.Secondary,
-            Height = 32,
-            Margin = new Thickness(4, 0, 0, 0),
-            Tag = mystery
-        };
-        btnEventPage.Click += BtnGenerateEventPage_Click;
-        btnPanel.Children.Add(btnEventPage);
-
-        var btnItemPage = new Wpf.Ui.Controls.Button
-        {
-            Content = "Item Page",
-            Appearance = ControlAppearance.Secondary,
-            Height = 32,
-            Margin = new Thickness(4, 0, 0, 0),
-            Tag = mystery
-        };
-        btnItemPage.Click += BtnGenerateItemPage_Click;
-        btnPanel.Children.Add(btnItemPage);
+            var btnUpdateWiki = new Wpf.Ui.Controls.Button
+            {
+                Content = "Update Wiki",
+                Appearance = ControlAppearance.Primary,
+                Height = 32,
+                Margin = new Thickness(4, 0, 0, 0),
+                Tag = mystery
+            };
+            btnUpdateWiki.Click += BtnUpdateWiki_Click;
+            btnPanel.Children.Add(btnUpdateWiki);
+        }
 
         Grid.SetColumn(btnPanel, 1);
         grid.Children.Add(btnPanel);
@@ -365,8 +463,12 @@ public partial class MysteriesPage : UserControl
         _loaded = false;
         _mysteryService = null;
         mysteryListPanel.Children.Clear();
+
+        // Clear status cache so everything gets re-checked
+        MysteryWikiService.ClearStatusCache();
+
         await TryLoadAsync();
-        ShowInfo("Mysteries reloaded.", InfoBarSeverity.Success);
+        ShowInfo("Mysteries reloaded. Click 'Check Wiki Status' to re-check all labels.", InfoBarSeverity.Success);
     }
 
     private async void BtnCheckWiki_Click(object sender, RoutedEventArgs e)
@@ -384,7 +486,7 @@ public partial class MysteriesPage : UserControl
         {
             // Full batch check: page existence + template comparison
             await MysteryWikiService.CheckAllMysteryStatusAsync(
-                _mysteryService.Mysteries, _main.DataService);
+                _mysteryService.Mysteries, _main.DataService, _dialogueService);
 
             BuildMysteryList();
             ShowInfo("Wiki status checked.", InfoBarSeverity.Success);
@@ -399,31 +501,117 @@ public partial class MysteriesPage : UserControl
         }
     }
 
-    private void BtnGenerateRewards_Click(object sender, RoutedEventArgs e)
+    private void BtnPrepare_Click(object sender, RoutedEventArgs e)
     {
         if (sender is not Wpf.Ui.Controls.Button btn || btn.Tag is not MysteryEvent mystery) return;
 
-        var dialog = new MysteryGeneratorDialog(_main, mystery, _itemMapping, MysteryGeneratorMode.Rewards);
+        var dialog = new MysteryGeneratorDialog(_main, mystery, _itemMapping,
+            MysteryGeneratorMode.EventPage, _dialogueService);
         dialog.Owner = Window.GetWindow(this);
         dialog.Show();
     }
 
-    private void BtnGenerateEventPage_Click(object sender, RoutedEventArgs e)
+    private void StatusIndicator_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
-        if (sender is not Wpf.Ui.Controls.Button btn || btn.Tag is not MysteryEvent mystery) return;
+        if (sender is not Border border) return;
+        var (mystery, scope) = ((MysteryEvent, MysteryDiffScope))border.Tag;
 
-        var dialog = new MysteryGeneratorDialog(_main, mystery, _itemMapping, MysteryGeneratorMode.EventPage);
+        // Open the Prepare dialog on the matching tab
+        var mode = scope switch
+        {
+            MysteryDiffScope.Rewards => MysteryGeneratorMode.Rewards,
+            MysteryDiffScope.EventPage => MysteryGeneratorMode.EventPage,
+            MysteryDiffScope.EventItemPage => MysteryGeneratorMode.EventItemPage,
+            _ => MysteryGeneratorMode.Rewards
+        };
+
+        var dialog = new MysteryGeneratorDialog(_main, mystery, _itemMapping, mode, _dialogueService);
         dialog.Owner = Window.GetWindow(this);
         dialog.Show();
     }
 
-    private void BtnGenerateItemPage_Click(object sender, RoutedEventArgs e)
+    private async void BtnUpdateWiki_Click(object sender, RoutedEventArgs e)
     {
         if (sender is not Wpf.Ui.Controls.Button btn || btn.Tag is not MysteryEvent mystery) return;
 
-        var dialog = new MysteryGeneratorDialog(_main, mystery, _itemMapping, MysteryGeneratorMode.EventItemPage);
-        dialog.Owner = Window.GetWindow(this);
-        dialog.Show();
+        if (!_main.Settings.WikiVerified)
+        {
+            ShowInfo("Wiki account not verified.", InfoBarSeverity.Warning);
+            return;
+        }
+
+        // Show preview/confirmation dialog
+        btn.IsEnabled = false;
+        ShowInfo("Fetching preview...", InfoBarSeverity.Informational, autoClose: false);
+
+        try
+        {
+            var preview = await MysteryWikiService.PreviewWikiUpdatesAsync(mystery);
+
+            var result = System.Windows.MessageBox.Show(
+                preview + "\nProceed with updates?",
+                "Update Wiki Pages — Confirm",
+                System.Windows.MessageBoxButton.OKCancel,
+                System.Windows.MessageBoxImage.Question);
+
+            if (result != System.Windows.MessageBoxResult.OK)
+            {
+                btn.IsEnabled = true;
+                infoBar.IsOpen = false;
+                return;
+            }
+        }
+        catch (Exception ex)
+        {
+            ShowInfo($"Preview failed: {ex.Message}", InfoBarSeverity.Error);
+            btn.IsEnabled = true;
+            return;
+        }
+
+        ShowInfo("Updating wiki pages...", InfoBarSeverity.Informational, autoClose: false);
+
+        var results = new List<string>();
+        try
+        {
+            // Update main page
+            try
+            {
+                var mainResult = await MysteryWikiService.UpdateMainPageAsync(
+                    _main.Settings.WikiUsername, _main.Settings.WikiPassword,
+                    mystery.Name, mystery.WikiStatus.SuggestedPageTitle ?? mystery.Name,
+                    mystery.StartDate);
+                results.Add($"Main page: {mainResult}");
+            }
+            catch (Exception ex) { results.Add($"Main page: {ex.Message}"); }
+
+            // Update Mystery table
+            try
+            {
+                var tableResult = await MysteryWikiService.UpdateMysteryPageTableAsync(
+                    _main.Settings.WikiUsername, _main.Settings.WikiPassword, mystery);
+                results.Add($"Mystery page: {tableResult}");
+            }
+            catch (Exception ex) { results.Add($"Mystery page: {ex.Message}"); }
+
+            // Update Module:Datatable/Various
+            try
+            {
+                var moduleResult = await MysteryWikiService.UpdateMysteryTableAsync(
+                    _main.Settings.WikiUsername, _main.Settings.WikiPassword, mystery);
+                results.Add($"Module: {moduleResult}");
+            }
+            catch (Exception ex) { results.Add($"Module: {ex.Message}"); }
+
+            ShowInfo(string.Join(" | ", results), InfoBarSeverity.Success);
+        }
+        catch (Exception ex)
+        {
+            ShowInfo($"Update failed: {ex.Message}", InfoBarSeverity.Error);
+        }
+        finally
+        {
+            btn.IsEnabled = true;
+        }
     }
 
     private void GoToSettings_Click(object sender, RoutedEventArgs e)

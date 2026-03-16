@@ -2,7 +2,7 @@ namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.16.3";
+    public const string Version = "v0.17.0";
 }
 
 public class AppSettings

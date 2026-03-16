@@ -594,6 +594,9 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 if (itemName != null)
                     WriteProperty(writer, "Name", itemName, serializer);
 
+                // ItemType early — between Name and Description for readability
+                WriteProperty(writer, "ItemType", item.ItemType, serializer);
+
                 var descName = LocMan.GetDescription(item.ItemType, item.LevelNumber);
                 if (descName != null)
                     WriteProperty(writer, "Description", descName, serializer);
@@ -645,6 +648,9 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
             }
             else if (type.IsAssignableTo(typeof(ItemDefinition)))
             {
+                // Skip — already written in WritePreObjectMembers
+                if (name == nameof(ItemDefinition.ItemType))
+                    return;
                 if (name == nameof(ItemDefinition.MergeChainDef))
                 {
                     WriteProperty(writer, name, (value as MergeChainDef)?.ConfigKey, serializer);

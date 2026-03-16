@@ -696,7 +696,7 @@ public partial class GameDataDumperPage : UserControl
     private void BtnCopyLog_Click(object sender, RoutedEventArgs e)
     {
         if (!string.IsNullOrEmpty(txtLog.Text))
-            Clipboard.SetDataObject(txtLog.Text, true);
+            App.NativeSetClipboardText(txtLog.Text);
     }
 
     private void BtnOpenLogFile_Click(object sender, RoutedEventArgs e)

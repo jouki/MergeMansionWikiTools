@@ -29,7 +29,36 @@ public class ChainViewModel : INotifyPropertyChanged
     public bool ShowConfigKey => Source.DisplayName != Source.ConfigKey;
     public bool IsNameFromWiki => Source.IsNameFromWiki;
     public bool ShowUploadButton => _main.Settings.WikiVerified;
+    public bool ShowCompareButton => _main.HasVariantDirectories;
     public bool HasLevelCollisions => Source.HasLevelCollisions;
+
+    private bool? _hasVariantDiffs;
+    /// <summary>null = not yet scanned, true = has diffs, false = no diffs.</summary>
+    public bool? HasVariantDiffs
+    {
+        get => _hasVariantDiffs;
+        set
+        {
+            _hasVariantDiffs = value;
+            PropertyChanged?.Invoke(this, new(nameof(HasVariantDiffs)));
+            PropertyChanged?.Invoke(this, new(nameof(CompareButtonOpacity)));
+            PropertyChanged?.Invoke(this, new(nameof(CompareButtonTooltip)));
+        }
+    }
+
+    public double CompareButtonOpacity => _hasVariantDiffs switch
+    {
+        true => 1.0,
+        false => 0.35,
+        null => 0.6
+    };
+
+    public string CompareButtonTooltip => _hasVariantDiffs switch
+    {
+        true => "Compare with AB test groups (differences found)",
+        false => "Compare with AB test groups (no differences)",
+        null => "Compare with AB test groups"
+    };
 
     private bool _showMergeCheckbox;
     public bool ShowMergeCheckbox
@@ -267,6 +296,33 @@ public partial class ChainBrowserPage : UserControl
 
         emptyState.Visibility = Visibility.Collapsed;
         lvChains.Visibility = Visibility.Visible;
+
+        // Fire-and-forget: scan all chains for variant diffs
+        if (_main.HasVariantDirectories)
+            _ = ScanVariantDiffsAsync();
+    }
+
+    private async Task ScanVariantDiffsAsync()
+    {
+        try
+        {
+            var basePath = _main.Settings.ChainItemOddsPath;
+            var variants = VariantComparisonService.DiscoverVariants(basePath);
+            if (variants.Count == 0) return;
+
+            // Run heavy I/O + CPU parsing on thread pool, never blocks UI
+            var keysWithDiffs = await Task.Run(() =>
+                VariantComparisonService.ScanAllChainsForDiffsAsync(basePath, variants));
+
+            // Update on UI thread (we're back on dispatcher after await)
+            foreach (var vm in _allChains)
+                vm.HasVariantDiffs = keysWithDiffs.Contains(vm.Source.ConfigKey);
+
+            // Re-apply filter in case AB Diffs filter is active
+            if (chkABDiffs?.IsChecked == true)
+                ApplyFilter();
+        }
+        catch { /* ignore scan failures */ }
     }
 
     private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e) => ApplyFilter();
@@ -335,7 +391,8 @@ public partial class ChainBrowserPage : UserControl
         bool fEvent = chkEvent?.IsChecked == true;
         bool fNamed = chkNamed?.IsChecked == true;
         bool fCollisions = chkCollisions?.IsChecked == true;
-        bool anyFilter = fGen || fSpawn || fProd || fEvent || fNamed || fCollisions;
+        bool fABDiffs = chkABDiffs?.IsChecked == true;
+        bool anyFilter = fGen || fSpawn || fProd || fEvent || fNamed || fCollisions || fABDiffs;
 
         if (anyFilter)
         {
@@ -345,6 +402,7 @@ public partial class ChainBrowserPage : UserControl
             if (fEvent) filtered = filtered.Where(c => c.Source.IsEventChain);
             if (fNamed) filtered = filtered.Where(c => c.Source.HasHumanReadableName);
             if (fCollisions) filtered = filtered.Where(c => c.Source.HasLevelCollisions);
+            if (fABDiffs) filtered = filtered.Where(c => c.HasVariantDiffs == true);
         }
 
         var result = filtered.ToList();
@@ -511,6 +569,7 @@ public partial class ChainBrowserPage : UserControl
         if (chkEvent?.IsChecked == true) count++;
         if (chkNamed?.IsChecked == true) count++;
         if (chkCollisions?.IsChecked == true) count++;
+        if (chkABDiffs?.IsChecked == true) count++;
 
         txtFiltersLabel.Text = count > 0 ? $"Filters ({count})" : "Filters";
     }
@@ -1656,6 +1715,30 @@ public partial class ChainBrowserPage : UserControl
         }
 
         var dialog = new InfoboxGeneratorDialog(_main, vm.Source);
+        dialog.Owner = Window.GetWindow(this);
+        dialog.ShowDialog();
+    }
+
+    private void CompareVariants_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Wpf.Ui.Controls.Button btn || btn.Tag is not ChainViewModel vm)
+            return;
+
+        var basePath = _main.Settings.ChainItemOddsPath;
+        if (string.IsNullOrEmpty(basePath))
+        {
+            _main.ShowStatus("No data file loaded.", InfoBarSeverity.Error);
+            return;
+        }
+
+        var variants = VariantComparisonService.DiscoverVariants(basePath);
+        if (variants.Count == 0)
+        {
+            _main.ShowStatus("No AB test variant directories found.", InfoBarSeverity.Warning);
+            return;
+        }
+
+        var dialog = new VariantComparisonDialog(vm.Source, basePath, variants);
         dialog.Owner = Window.GetWindow(this);
         dialog.ShowDialog();
     }

@@ -523,7 +523,7 @@ public class DataService
         return null;
     }
 
-    private Dictionary<string, double> ParseOddsDictionary(JsonElement el)
+    internal static Dictionary<string, double> ParseOddsDictionary(JsonElement el)
     {
         var dict = new Dictionary<string, double>();
         foreach (var prop in el.EnumerateObject())
@@ -672,7 +672,7 @@ public class DataService
 
     // ── JSON helpers ────────────────────────────────────────────────
 
-    private static string GetStringOrNumber(JsonElement el, string prop, string def = "")
+    internal static string GetStringOrNumber(JsonElement el, string prop, string def = "")
     {
         if (el.TryGetProperty(prop, out var val))
         {
@@ -682,14 +682,14 @@ public class DataService
         return def;
     }
 
-    private static string GetString(JsonElement el, string prop, string def = "")
+    internal static string GetString(JsonElement el, string prop, string def = "")
     {
         if (el.TryGetProperty(prop, out var val) && val.ValueKind == JsonValueKind.String)
             return val.GetString() ?? def;
         return def;
     }
 
-    private static int GetInt(JsonElement el, string prop, int def = 0)
+    internal static int GetInt(JsonElement el, string prop, int def = 0)
     {
         if (el.TryGetProperty(prop, out var val))
         {
@@ -700,14 +700,14 @@ public class DataService
         return def;
     }
 
-    private static long GetLong(JsonElement el, string prop, long def = 0)
+    internal static long GetLong(JsonElement el, string prop, long def = 0)
     {
         if (el.TryGetProperty(prop, out var val) && val.ValueKind == JsonValueKind.Number)
             return val.GetInt64();
         return def;
     }
 
-    private static bool GetBool(JsonElement el, string prop, bool def = false)
+    internal static bool GetBool(JsonElement el, string prop, bool def = false)
     {
         if (el.TryGetProperty(prop, out var val))
         {

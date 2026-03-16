@@ -744,7 +744,7 @@ public partial class DialogueMakerPage : UserControl
     {
         if (_fullOutput == null) return;
 
-        Clipboard.SetDataObject(_fullOutput, true);
+        App.NativeSetClipboardText(_fullOutput);
         _main.ShowStatus("Dialogue copied to clipboard.", InfoBarSeverity.Success);
     }
 

@@ -116,6 +116,12 @@
                                       IsHitTestVisible="False" Focusable="False"
                                       Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed" />
                         </Border>
+                        <Border Style="{StaticResource FilterRow}"
+                                MouseLeftButtonDown="FilterRow_Click">
+                            <CheckBox x:Name="chkABDiffs" Content="AB Diffs"
+                                      IsHitTestVisible="False" Focusable="False"
+                                      Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed" />
+                        </Border>
                     </StackPanel>
                     </Border>
                 </Border>
@@ -238,6 +244,7 @@
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
 
                                         <!-- Merge mode checkbox -->
@@ -312,6 +319,16 @@
                                                    Visibility="{Binding ShowUploadButton, Converter={StaticResource BoolToVis}}">
                                             <Image Source="/Assets/ImageSplitterIcon.ico" Width="20" Height="20"
                                                    RenderOptions.BitmapScalingMode="HighQuality"/>
+                                        </ui:Button>
+                                        <ui:Button Grid.Column="7"
+                                                   ToolTip="{Binding CompareButtonTooltip}"
+                                                   ToolTipService.InitialShowDelay="0"
+                                                   Appearance="Secondary" FontSize="12"
+                                                   Height="30" Padding="8,0" Margin="6,0,0,0"
+                                                   Opacity="{Binding CompareButtonOpacity}"
+                                                   Click="CompareVariants_Click" Tag="{Binding}"
+                                                   Visibility="{Binding ShowCompareButton, Converter={StaticResource BoolToVis}}">
+                                            <ui:SymbolIcon Symbol="ArrowSwap24" FontSize="18" />
                                         </ui:Button>
                                     </Grid>
                                 </Expander.Header>

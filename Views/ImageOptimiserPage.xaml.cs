@@ -235,10 +235,6 @@ public partial class ImageOptimiserPage : UserControl
                             }).ToList();
 
                         oi.AtlasObjects = spriteObjects;
-                        oi.DefaultDetectionSource = DetectionSource.Atlas;
-                        oi.RawDetectedObjects = spriteObjects;
-                        oi.DetectedObjects = spriteObjects;
-                        ordered = OrderObjects(spriteObjects);
                     }
                 }
 
@@ -1213,6 +1209,42 @@ public partial class ImageOptimiserPage : UserControl
 
     private void BtnClearAll_Click(object sender, RoutedEventArgs e) => ClearAll();
 
+    public void AddFileFromPath(string filePath)
+    {
+        if (System.IO.File.Exists(filePath))
+            AddImages(new[] { filePath });
+    }
+
+    private Action<List<string>>? _mysteryReturnCallback;
+
+    /// <summary>When true, AddImages will use Algorithm detection instead of Atlas.</summary>
+    public bool ForceAlgorithmDetection { get; set; }
+
+    /// <summary>
+    /// Configures the Image Optimiser to show "Back to Mysteries" instead of "Upload to Wiki",
+    /// sets Algorithm as default detection, and registers a callback for returning split results.
+    /// </summary>
+    public void SetMysteryReturnMode(Action<List<string>> onComplete)
+    {
+        _mysteryReturnCallback = onComplete;
+        btnUploadWiki.Content = "Back to Mysteries";
+        btnUploadWiki.Icon = new Wpf.Ui.Controls.SymbolIcon { Symbol = Wpf.Ui.Controls.SymbolRegular.ArrowLeft24 };
+
+        // Force Algorithm detection — deferred to run after any atlas refresh
+        Dispatcher.InvokeAsync(() =>
+        {
+            foreach (var cluster in _clusters)
+                foreach (var oi in cluster.Images)
+                {
+                    oi.DefaultDetectionSource = DetectionSource.Algorithm;
+                    oi.PerObjectDetectionSource = null;
+                    if (oi.AlgorithmObjects != null)
+                        oi.DetectedObjects = oi.AlgorithmObjects;
+                }
+            UpdateDetectionOverlay();
+        }, System.Windows.Threading.DispatcherPriority.Background);
+    }
+
     public void ClearAll()
     {
         _clusters.Clear();
@@ -1642,7 +1674,7 @@ public partial class ImageOptimiserPage : UserControl
         }
     }
 
-    private void BtnSplit_Click(object sender, RoutedEventArgs e) => ProcessSplit();
+    private void BtnSplit_Click(object sender, RoutedEventArgs e) => ProcessSplit(loadExistingIfFound: false);
 
     private void BtnSplitDropdown_Click(object sender, RoutedEventArgs e)
     {
@@ -1692,12 +1724,31 @@ public partial class ImageOptimiserPage : UserControl
     }
 
     /// <summary>
+    /// Returns the Processed Images directory in the workspace root.
+    /// Creates it if it doesn't exist. Falls back to Export - Items if workspace not set.
+    /// </summary>
+    internal string? GetProcessedImagesDir()
+    {
+        var basePath = _main.Settings.ImageExporterBasePath;
+        if (string.IsNullOrEmpty(basePath)) return null;
+        var dir = System.IO.Path.Combine(basePath, "Processed Images");
+        if (!System.IO.Directory.Exists(dir))
+            System.IO.Directory.CreateDirectory(dir);
+        return dir;
+    }
+
+    /// <summary>
     /// Returns the output directory for split/optimize results.
-    /// If the source file is in the export directory, redirects to a sibling "Export - Items" folder.
-    /// Otherwise returns the source file's own directory.
+    /// Priority: Processed Images (workspace root) → Export - Items (sibling) → source dir.
     /// </summary>
     private (string dir, bool redirected) GetOutputDir(string sourceFilePath)
     {
+        // Priority 1: Processed Images in workspace root
+        var processedDir = GetProcessedImagesDir();
+        if (processedDir != null)
+            return (processedDir, true);
+
+        // Priority 2: Export - Items (sibling of Export - PNGs)
         var sourceDir = System.IO.Path.GetDirectoryName(sourceFilePath)!;
         var exportDir = GetExportDir();
 
@@ -1911,10 +1962,13 @@ public partial class ImageOptimiserPage : UserControl
             return (Full: rect, Main: rect);
         }).ToList();
         activeImg.AtlasObjects = spriteObjects;
-        activeImg.DefaultDetectionSource = DetectionSource.Atlas;
-        activeImg.PerObjectDetectionSource = null;
-        activeImg.RawDetectedObjects = spriteObjects;
-        activeImg.DetectedObjects = spriteObjects;
+        if (!ForceAlgorithmDetection)
+        {
+            activeImg.DefaultDetectionSource = DetectionSource.Atlas;
+            activeImg.PerObjectDetectionSource = null;
+            activeImg.RawDetectedObjects = spriteObjects;
+            activeImg.DetectedObjects = spriteObjects;
+        }
 
         var orderedObjects = OrderObjects(activeImg.DetectedObjects);
 
@@ -2320,7 +2374,7 @@ public partial class ImageOptimiserPage : UserControl
         }
     }
 
-    private void ProcessSplit(string? overrideOutputDir = null)
+    private void ProcessSplit(string? overrideOutputDir = null, bool loadExistingIfFound = false)
     {
         if (_selectedCluster == null || _selectedCluster.Images.Count == 0) return;
 
@@ -2411,6 +2465,147 @@ public partial class ImageOptimiserPage : UserControl
             }
             if (redirected)
                 Directory.CreateDirectory(dir);
+
+            // Check for existing processed files in output dir
+            if (redirected)
+            {
+                var existingFiles = new List<string>();
+                for (int i = 0; i < suffixes.Length; i++)
+                {
+                    if (suffixes[i] == "-") continue;
+                    var expectedPath = System.IO.Path.Combine(dir, $"{name}{suffixes[i].PadLeft(2, '0')}.png");
+                    if (File.Exists(expectedPath))
+                        existingFiles.Add(expectedPath);
+                }
+
+                if (existingFiles.Count > 0 && !loadExistingIfFound)
+                {
+                    // Check if any have optimization marker
+                    int optimizedCount = 0;
+                    foreach (var f in existingFiles)
+                    {
+                        try
+                        {
+                            var bytes = File.ReadAllBytes(f);
+                            if (OptimizationWindow.HasOptMarker(bytes))
+                                optimizedCount++;
+                        }
+                        catch { /* ignore */ }
+                    }
+
+                    var existMsg = $"{existingFiles.Count} file(s) already exist in output folder.";
+                    if (optimizedCount > 0)
+                        existMsg += $"\n{optimizedCount} are already optimized (TinyPNG).";
+                    existMsg += "\n\nLoad existing files or ignore and re-split?";
+
+                    var msgBox = new Wpf.Ui.Controls.MessageBox
+                    {
+                        Title = "Existing Files Found",
+                        Content = existMsg,
+                        PrimaryButtonText = "Load Existing",
+                        SecondaryButtonText = "Ignore & Split",
+                        CloseButtonText = "Cancel",
+                        MinWidth = 500,
+                        Owner = Window.GetWindow(this)
+                    };
+                    Wpf.Ui.Appearance.ApplicationThemeManager.Apply(msgBox);
+                    var msgResult = msgBox.ShowDialogAsync().GetAwaiter().GetResult();
+
+                    if (msgResult == Wpf.Ui.Controls.MessageBoxResult.None)
+                        return; // Cancel
+
+                    if (msgResult == Wpf.Ui.Controls.MessageBoxResult.Primary)
+                    {
+                        // Load existing files into the cluster
+                        var loadedResults = new List<string>();
+                        foreach (var oi in scissorsImages)
+                            oi.SplitResultFiles.Clear();
+
+                        for (int i = 0; i < suffixes.Length; i++)
+                        {
+                            if (suffixes[i] == "-") continue;
+                            var expectedPath = System.IO.Path.Combine(dir, $"{name}{suffixes[i].PadLeft(2, '0')}.png");
+                            if (File.Exists(expectedPath))
+                            {
+                                loadedResults.Add(expectedPath);
+
+                                // Check optimization marker
+                                try
+                                {
+                                    var bytes = File.ReadAllBytes(expectedPath);
+                                    if (OptimizationWindow.HasOptMarker(bytes))
+                                        _optimizedFiles.Add(expectedPath);
+                                }
+                                catch { /* ignore */ }
+                            }
+                            else
+                            {
+                                // Missing file — split just this one from the atlas
+                                // (simplified: re-split all missing)
+                                break; // Fall through to normal split for missing files
+                            }
+                        }
+
+                        if (loadedResults.Count >= nonSkipCount)
+                        {
+                            // All files loaded — mark as split + set optimization state
+                            foreach (var oi in scissorsImages)
+                            {
+                                oi.SplitResultFiles.Clear();
+                                oi.IsSplit = false;
+                            }
+                            scissorsImages[0].SplitResultFiles = loadedResults;
+                            scissorsImages[0].IsSplit = true;
+                            scissorsImages[0].IsOptimized = loadedResults.All(f => _optimizedFiles.Contains(f));
+                            UpdateUploadButtonState();
+
+                            var optCount = loadedResults.Count(f => _optimizedFiles.Contains(f));
+                            infoBar.Message = $"Loaded {loadedResults.Count} existing files" +
+                                (optCount > 0 ? $" ({optCount} optimized)." : ".");
+                            infoBar.Severity = InfoBarSeverity.Success;
+                            infoBar.IsOpen = true;
+                            return;
+                        }
+                    }
+                    // Secondary (Ignore & Split) → fall through to normal split
+                }
+
+                // Auto-load when called from "Load Existing" in Unsplit dialog
+                if (loadExistingIfFound && existingFiles.Count > 0)
+                {
+                    var loadedResults = new List<string>();
+                    foreach (var oi in scissorsImages)
+                        oi.SplitResultFiles.Clear();
+
+                    for (int i = 0; i < suffixes.Length; i++)
+                    {
+                        if (suffixes[i] == "-") continue;
+                        var expectedPath = System.IO.Path.Combine(dir, $"{name}{suffixes[i].PadLeft(2, '0')}.png");
+                        if (File.Exists(expectedPath))
+                        {
+                            loadedResults.Add(expectedPath);
+                            try
+                            {
+                                var bytes = File.ReadAllBytes(expectedPath);
+                                if (OptimizationWindow.HasOptMarker(bytes))
+                                    _optimizedFiles.Add(expectedPath);
+                            }
+                            catch { }
+                        }
+                    }
+
+                    if (loadedResults.Count > 0)
+                    {
+                        foreach (var oi in scissorsImages)
+                            oi.IsSplit = false;
+                        scissorsImages[0].SplitResultFiles = loadedResults;
+                        scissorsImages[0].IsSplit = true;
+                        scissorsImages[0].IsOptimized = loadedResults.All(f => _optimizedFiles.Contains(f));
+                        UpdateUploadButtonState();
+                        return;
+                    }
+                }
+            }
 
             // Cache source images for cropping
             var imageCache = new Dictionary<string, Image<Rgba32>>();
@@ -2544,25 +2739,100 @@ public partial class ImageOptimiserPage : UserControl
 
         if (unsplitClusters.Count > 0)
         {
+            // Check if existing processed files are available for any unsplit cluster
+            bool hasExisting = false;
+            int existingCount = 0;
+            int existingOptCount = 0;
+            var processedDir = GetProcessedImagesDir();
+
+            if (processedDir != null)
+            {
+                foreach (var cluster in unsplitClusters)
+                {
+                    var nameIdx = Math.Clamp(cluster.NameSourceIndex, 0, cluster.Images.Count - 1);
+                    var clName = System.IO.Path.GetFileNameWithoutExtension(cluster.Images[nameIdx].FilePath);
+                    var suffArr = cluster.IndexText.Split(new[] { ' ', ',', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (var suf in suffArr)
+                    {
+                        if (suf == "-") continue;
+                        var path = System.IO.Path.Combine(processedDir, $"{clName}{suf.PadLeft(2, '0')}.png");
+                        if (File.Exists(path))
+                        {
+                            hasExisting = true;
+                            existingCount++;
+                            try
+                            {
+                                if (OptimizationWindow.HasOptMarker(File.ReadAllBytes(path)))
+                                    existingOptCount++;
+                            }
+                            catch { }
+                        }
+                    }
+                }
+            }
+
+            string content = "You have entered split levels but haven't split the images yet.\n\n";
+            if (hasExisting)
+                content += $"{existingCount} existing file(s) found in Processed Images" +
+                    (existingOptCount > 0 ? $" ({existingOptCount} optimized)" : "") +
+                    ".\n\n";
+            content += "Do you want to split them and proceed to optimisation?";
+
             var msgBox = new Wpf.Ui.Controls.MessageBox
             {
                 Title = "Unsplit images detected",
-                Content = "You have entered split levels but haven't split the images yet.\n\nDo you want to split them and proceed to optimisation?",
-                PrimaryButtonText = "Split & proceed",
-                SecondaryButtonText = "Skip",
+                Content = content,
+                PrimaryButtonText = hasExisting ? "Load Existing" : "Split & proceed",
+                SecondaryButtonText = hasExisting ? "Split & proceed" : "Skip",
                 CloseButtonText = "Cancel",
+                MinWidth = 500,
                 Owner = Window.GetWindow(this)
             };
             Wpf.Ui.Appearance.ApplicationThemeManager.Apply(msgBox);
             var result = await msgBox.ShowDialogAsync();
 
-            if (result == Wpf.Ui.Controls.MessageBoxResult.Primary)
+            bool doSplit = false;
+            bool doLoad = false;
+
+            if (hasExisting)
             {
-                // Remember current selection to restore after splitting
+                if (result == Wpf.Ui.Controls.MessageBoxResult.Primary) doLoad = true;
+                else if (result == Wpf.Ui.Controls.MessageBoxResult.Secondary) doSplit = true;
+                else return; // Cancel
+            }
+            else
+            {
+                if (result == Wpf.Ui.Controls.MessageBoxResult.Primary) doSplit = true;
+                else if (result == Wpf.Ui.Controls.MessageBoxResult.None) return;
+                // Secondary = Skip → fall through to optimization
+            }
+
+            if (doLoad && processedDir != null)
+            {
+                // Load existing files from Processed Images (skip inner dialog)
                 var savedImage = _selectedImage;
                 var savedCluster = _selectedCluster;
 
-                // Split each unsplit cluster
+                _suppressIndexReset = true;
+                foreach (var cluster in unsplitClusters)
+                {
+                    _selectedCluster = cluster;
+                    _selectedImage = cluster.Images.FirstOrDefault();
+                    inputIndices.Text = cluster.IndexText;
+                    ProcessSplit(loadExistingIfFound: true);
+                }
+                _suppressIndexReset = false;
+
+                if (savedImage != null && savedCluster != null && _clusters.Contains(savedCluster))
+                    SelectImage(savedImage);
+                else if (_clusters.Count > 0)
+                    SelectImage(_clusters[0].Images[0]);
+            }
+            else if (doSplit)
+            {
+                var savedImage = _selectedImage;
+                var savedCluster = _selectedCluster;
+
                 _suppressIndexReset = true;
                 foreach (var cluster in unsplitClusters)
                 {
@@ -2573,19 +2843,12 @@ public partial class ImageOptimiserPage : UserControl
                 }
                 _suppressIndexReset = false;
 
-                // Restore original selection
                 if (savedImage != null && savedCluster != null && _clusters.Contains(savedCluster))
                     SelectImage(savedImage);
                 else if (_clusters.Count > 0)
                     SelectImage(_clusters[0].Images[0]);
-
-                // Fall through to optimization below
             }
-            else if (result == Wpf.Ui.Controls.MessageBoxResult.None)
-            {
-                return;
-            }
-            // Primary=split+proceed, Secondary=skip to optimize, None(Close)=abort
+            // else: Skip → fall through to optimization
         }
 
         // Collect files to optimize: iterate by cluster to avoid duplicate merged images
@@ -2875,6 +3138,33 @@ public partial class ImageOptimiserPage : UserControl
 
     private void BtnUploadWiki_Click(object sender, RoutedEventArgs e)
     {
+        // Mystery return mode — collect split results and return
+        if (_mysteryReturnCallback != null)
+        {
+            var resultFiles = new List<string>();
+            foreach (var cluster in _clusters)
+                foreach (var oi in cluster.Images)
+                    if (oi.IsSplit && oi.SplitResultFiles.Count > 0)
+                        resultFiles.AddRange(oi.SplitResultFiles);
+
+            if (resultFiles.Count == 0)
+            {
+                infoBar.Message = "No split images to return. Split images first.";
+                infoBar.Severity = InfoBarSeverity.Warning;
+                infoBar.IsOpen = true;
+                return;
+            }
+
+            var callback = _mysteryReturnCallback;
+            _mysteryReturnCallback = null;
+            // Restore button
+            btnUploadWiki.Content = "Upload to Wiki";
+            btnUploadWiki.Icon = new Wpf.Ui.Controls.SymbolIcon { Symbol = Wpf.Ui.Controls.SymbolRegular.ArrowUpload24 };
+
+            callback(resultFiles);
+            return;
+        }
+
         if (!_main.Settings.WikiVerified)
         {
             infoBar.Message = "Wiki bot not configured. Set up credentials in Settings.";
