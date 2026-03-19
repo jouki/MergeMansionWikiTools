@@ -126,18 +126,23 @@
                     <Grid Grid.Row="0" Margin="0,0,0,6">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="32" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Wiki (current)" FontSize="12" FontWeight="SemiBold"
-                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="4,0,0,0" />
-                        <TextBlock Grid.Column="1" Text="Generated (new)" FontSize="12" FontWeight="SemiBold"
-                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="8,0,0,0" />
+                        <TextBlock x:Name="txtDiffLeftHeader" Grid.Column="0" FontSize="12" Margin="4,0,0,0">
+                            <Run Text="Wiki (current)" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Run x:Name="runDiffLeftSuffix" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                        </TextBlock>
+                        <TextBlock x:Name="txtDiffRightHeader" Grid.Column="2" FontSize="12" Margin="4,0,0,0">
+                            <Run Text="Generated (new)" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Run x:Name="runDiffRightSuffix" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                        </TextBlock>
                     </Grid>
 
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="4" />
+                            <ColumnDefinition Width="32" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
@@ -147,12 +152,17 @@
                             <ScrollViewer x:Name="scrollLeft" VerticalScrollBarVisibility="Auto"
                                           HorizontalScrollBarVisibility="Auto"
                                           ScrollChanged="ScrollLeft_ScrollChanged">
-                                <StackPanel x:Name="pnlLeft" Margin="8,6,8,6" />
+                                <StackPanel x:Name="pnlLeft" Margin="8,6,8,6"
+                                            MouseLeftButtonUp="PnlLeft_MouseUp" />
                             </ScrollViewer>
                         </Border>
 
-                        <Border Grid.Column="1"
-                                Background="{DynamicResource CardStrokeColorDefaultBrush}" />
+                        <ScrollViewer Grid.Column="1" x:Name="scrollCenter"
+                                      VerticalScrollBarVisibility="Hidden"
+                                      HorizontalScrollBarVisibility="Disabled"
+                                      ScrollChanged="ScrollCenter_ScrollChanged">
+                            <StackPanel x:Name="pnlCenter" />
+                        </ScrollViewer>
 
                         <Border Grid.Column="2" CornerRadius="0,4,4,0" BorderThickness="0,1,1,1"
                                 BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
@@ -160,7 +170,8 @@
                             <ScrollViewer x:Name="scrollRight" VerticalScrollBarVisibility="Auto"
                                           HorizontalScrollBarVisibility="Auto"
                                           ScrollChanged="ScrollRight_ScrollChanged">
-                                <StackPanel x:Name="pnlRight" Margin="8,6,8,6" />
+                                <StackPanel x:Name="pnlRight" Margin="8,6,8,6"
+                                            MouseLeftButtonUp="PnlRight_MouseUp" />
                             </ScrollViewer>
                         </Border>
                     </Grid>
@@ -186,23 +197,31 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <ui:InfoBar x:Name="warningBar" Grid.Column="0" IsOpen="False"
                             IsClosable="True" VerticalAlignment="Stretch"
                             Margin="0,0,12,0" />
 
-                <ui:Button x:Name="btnPublish" Grid.Column="1"
+                <ui:Button x:Name="btnConfirmManual" Grid.Column="1"
+                           Content="Confirm as Correct"
+                           Appearance="Secondary" Click="BtnConfirmManual_Click"
+                           VerticalAlignment="Stretch"
+                           Margin="0,1,8,2" Visibility="Collapsed"
+                           ToolTip="Manually confirm this section as correct despite data mismatch"
+                           ToolTipService.InitialShowDelay="0" />
+                <ui:Button x:Name="btnPublish" Grid.Column="2"
                            Content="Publish to Wiki"
                            Appearance="Primary" Click="BtnPublish_Click"
                            VerticalAlignment="Stretch"
                            Margin="0,1,8,2" Visibility="Collapsed" />
-                <ui:Button Grid.Column="2" Content="Copy to Clipboard"
+                <ui:Button Grid.Column="3" Content="Copy to Clipboard"
                            x:Name="btnCopy"
                            Appearance="Secondary" Click="BtnCopy_Click"
                            VerticalAlignment="Stretch"
                            Margin="0,1,8,2" IsEnabled="False" />
-                <ui:Button Grid.Column="3" Content="Close"
+                <ui:Button Grid.Column="4" Content="Close"
                            Appearance="Secondary" Click="BtnClose_Click"
                            VerticalAlignment="Stretch"
                            Margin="0,1,0,2" />

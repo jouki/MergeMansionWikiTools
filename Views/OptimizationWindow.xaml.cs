@@ -126,6 +126,10 @@ public partial class OptimizationWindow : FluentWindow
         }
 
         statusInfo.IsOpen = true;
+
+        // Show TinyPNG usage bar
+        if (hasKey)
+            Loaded += (_, _) => tinifyUsage.Initialize(_apiKey, _apiKey2);
     }
 
     private static BitmapImage LoadBitmapNoLock(byte[] bytes)
@@ -232,6 +236,7 @@ public partial class OptimizationWindow : FluentWindow
 
         progressBar.Visibility = Visibility.Collapsed;
         btnRun.IsEnabled = true;
+        tinifyUsage.Initialize(_apiKey, _apiKey2);
 
         int skippedCount = toProcess.Count(f => f.WasSkipped);
         statusInfo.Title = "Optimisation completed";

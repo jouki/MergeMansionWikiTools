@@ -1,12 +1,14 @@
 <UserControl x:Class="MergeMansionWikiTools.Views.MysteryImagesControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:local="clr-namespace:MergeMansionWikiTools.Views">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -75,8 +77,11 @@
         <ui:InfoBar x:Name="infoBar" Grid.Row="2" IsOpen="False"
                     IsClosable="True" Margin="0,8,0,0" />
 
+        <!-- TinyPNG usage bar -->
+        <local:TinifyUsageBarsControl x:Name="tinifyUsage" Grid.Row="3" Margin="0,10,0,0"/>
+
         <!-- Bottom buttons -->
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
             <ui:Button x:Name="btnOptimize" Content="Optimize (TinyPNG)" Appearance="Secondary"
                        Click="BtnOptimize_Click" IsEnabled="False" Margin="0,0,8,0" />
             <ui:Button x:Name="btnUpload" Content="Upload Selected" Appearance="Primary"

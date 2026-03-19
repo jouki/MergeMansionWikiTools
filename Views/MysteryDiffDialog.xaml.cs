@@ -60,7 +60,7 @@ public partial class MysteryDiffDialog : Wpf.Ui.Controls.FluentWindow
     {
         try
         {
-            var (wikiContent, generated, diffs) = await MysteryWikiService.ComputeDiffAsync(
+            var (wikiContent, generated, diffs, _) = await MysteryWikiService.ComputeDiffAsync(
                 _mystery, _scope, _main.DataService, _main.WikiMapping, _mapping, _dialogueService);
 
             pnlLoading.Visibility = Visibility.Collapsed;
@@ -93,8 +93,9 @@ public partial class MysteryDiffDialog : Wpf.Ui.Controls.FluentWindow
             // Stats
             int added = diffs.Count(d => d.Type == DiffLineType.Added);
             int removed = diffs.Count(d => d.Type == DiffLineType.Removed);
+            int modified = diffs.Count(d => d.Type == DiffLineType.Modified);
             int matched = diffs.Count(d => d.Type == DiffLineType.Match);
-            txtStats.Text = $"{added} added · {removed} removed · {matched} unchanged";
+            txtStats.Text = $"{added} added · {removed} removed · {modified} modified · {matched} unchanged";
         }
         catch (Exception ex)
         {
@@ -127,6 +128,12 @@ public partial class MysteryDiffDialog : Wpf.Ui.Controls.FluentWindow
                 case DiffLineType.Added:
                     // Only in generated (right) — empty placeholder on left, green on right
                     pnlLeft.Children.Add(CreateDiffPlaceholder(DiffLineType.Added));
+                    pnlRight.Children.Add(CreateDiffLine(diff.Text, DiffLineType.Added));
+                    break;
+
+                case DiffLineType.Modified:
+                    // Both sides differ — show old on left (red), new on right (green)
+                    pnlLeft.Children.Add(CreateDiffLine(diff.OldText ?? "", DiffLineType.Removed));
                     pnlRight.Children.Add(CreateDiffLine(diff.Text, DiffLineType.Added));
                     break;
             }

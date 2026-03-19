@@ -1,0 +1,49 @@
+<UserControl x:Class="MergeMansionWikiTools.Views.TinifyUsageBarsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+
+        <!-- Primary key bar -->
+        <Grid x:Name="gridKey1" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Margin="0,0,0,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="txtKey1Status" FontSize="11"
+                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                           VerticalAlignment="Center"/>
+                <TextBlock x:Name="txtKey1Count" Grid.Column="1" FontSize="11"
+                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                           VerticalAlignment="Center" Margin="10,0,0,0"/>
+            </Grid>
+            <ProgressBar x:Name="barKey1" Grid.Row="1" Minimum="0" Maximum="500" Height="5"/>
+        </Grid>
+
+        <!-- Fallback key bar -->
+        <Grid x:Name="gridKey2" Visibility="Collapsed" Margin="0,8,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Margin="0,0,0,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="txtKey2Status" FontSize="11"
+                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                           VerticalAlignment="Center"/>
+                <TextBlock x:Name="txtKey2Count" Grid.Column="1" FontSize="11"
+                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                           VerticalAlignment="Center" Margin="10,0,0,0"/>
+            </Grid>
+            <ProgressBar x:Name="barKey2" Grid.Row="1" Minimum="0" Maximum="500" Height="5"/>
+        </Grid>
+
+    </StackPanel>
+</UserControl>

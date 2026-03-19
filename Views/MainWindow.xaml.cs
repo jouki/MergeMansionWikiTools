@@ -635,9 +635,6 @@ public partial class MainWindow : FluentWindow
 
             // Update sidebar event count
             UpdateSidebarStatus();
-
-            // Wiki page existence check (unauthenticated, read-only)
-            await MysteryWikiService.CheckAllMysteryStatusAsync(svc.Mysteries, DataService);
         }
         catch (Exception ex)
         {
@@ -685,22 +682,6 @@ public partial class MainWindow : FluentWindow
 
             foreach (var m in needsCheck)
                 m.WikiStatus.EventItemPageExists = existMap.GetValueOrDefault(m.EventItemName!, false);
-
-            // Update persistent cache with new item page results
-            var cache = MysteryWikiService.LoadStatusCache();
-            foreach (var m in MysteryService.Mysteries)
-            {
-                if (m.WikiStatus.EventItemPageExists == true)
-                {
-                    if (!cache.Entries.TryGetValue(m.ProgressionEventId, out var entry))
-                    {
-                        entry = new CachedMysteryStatus();
-                        cache.Entries[m.ProgressionEventId] = entry;
-                    }
-                    entry.EventItemPageExists = true;
-                }
-            }
-            MysteryWikiService.SaveStatusCache(cache);
         }
         catch (Exception ex)
         {

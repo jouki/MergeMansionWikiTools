@@ -392,6 +392,26 @@
                                 <ui:TextBox x:Name="txtTinifyKey"
                                             PlaceholderText="Enter your primary TinyPNG API key..."
                                             TextChanged="TinifyKey_TextChanged" />
+                                <!-- Usage bar -->
+                                <Grid x:Name="gridTinify1Usage" Margin="0,8,0,0" Visibility="Collapsed">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Margin="0,0,0,5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock x:Name="txtTinify1Status" FontSize="11"
+                                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                   VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="txtTinify1Count" Grid.Column="1" FontSize="11"
+                                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                   VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </Grid>
+                                    <ProgressBar x:Name="barTinify1" Grid.Row="1" Minimum="0" Maximum="500" Height="5"/>
+                                </Grid>
                             </StackPanel>
 
                             <Separator Opacity="0.15" Margin="0" />
@@ -408,6 +428,26 @@
                                 <ui:TextBox x:Name="txtTinifyKey2"
                                             PlaceholderText="Optional — leave empty to skip fallback..."
                                             TextChanged="TinifyKey2_TextChanged" />
+                                <!-- Usage bar -->
+                                <Grid x:Name="gridTinify2Usage" Margin="0,8,0,0" Visibility="Collapsed">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Margin="0,0,0,5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock x:Name="txtTinify2Status" FontSize="11"
+                                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                   VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="txtTinify2Count" Grid.Column="1" FontSize="11"
+                                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                   VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </Grid>
+                                    <ProgressBar x:Name="barTinify2" Grid.Row="1" Minimum="0" Maximum="500" Height="5"/>
+                                </Grid>
                             </StackPanel>
 
                             <Separator Opacity="0.15" Margin="0" />

@@ -1,526 +1,919 @@
+using System;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
-using System.Text;
+using System.Linq;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using MergeMansionWikiTools.Models;
 using MergeMansionWikiTools.Services;
-using Wpf.Ui.Appearance;
+using TinifyAPI;
 using Wpf.Ui.Controls;
-using static MergeMansionWikiTools.Services.UserStatsService;
-
-using TextBlock = System.Windows.Controls.TextBlock;
 
 namespace MergeMansionWikiTools.Views;
 
-/// <summary>
-/// Reusable control for mystery image management.
-/// Displays detected images, supports optimize + upload workflow.
-/// Used in both MysteryGeneratorDialog (Images tab) and standalone MysteryDecorationUploadDialog.
-/// </summary>
 public partial class MysteryImagesControl : UserControl
 {
-    private MainWindow? _main;
-    private MysteryEvent? _mystery;
-    private List<DetectedDecorationFile> _detectedFiles = new();
-    private readonly Dictionary<DetectedDecorationFile, System.Windows.Controls.CheckBox> _checkboxes = new();
-    private readonly HashSet<DetectedDecorationFile> _optimizedFiles = new();
-    private bool _initialized;
+	private MainWindow? _main;
 
-    public MysteryImagesControl()
-    {
-        InitializeComponent();
-    }
+	private MysteryEvent? _mystery;
 
-    /// <summary>Initialize and auto-scan for the given mystery.</summary>
-    public void Initialize(MainWindow main, MysteryEvent mystery)
-    {
-        if (_initialized) return;
-        _initialized = true;
-        _main = main;
-        _mystery = mystery;
-        _ = AutoScanAsync();
-    }
+	private List<DetectedDecorationFile> _detectedFiles = new List<DetectedDecorationFile>();
 
-    private async Task AutoScanAsync()
-    {
-        if (_main == null || _mystery == null) return;
+	private readonly Dictionary<DetectedDecorationFile, CheckBox> _checkboxes = new Dictionary<DetectedDecorationFile, CheckBox>();
 
-        var exportDir = MysteryWikiService.ResolveExportPngsDir(
-            _main.Settings.ImageExporterBasePath, _main.Settings.SelectedApkVersion);
+	private readonly HashSet<DetectedDecorationFile> _optimizedFiles = new HashSet<DetectedDecorationFile>();
 
-        if (string.IsNullOrEmpty(exportDir))
-        {
-            pnlLoading.Visibility = Visibility.Collapsed;
-            pnlEmpty.Visibility = Visibility.Visible;
-            txtEmptyMessage.Text = "Export path not configured.\nSet Image Exporter base path and APK version in Settings.";
-            return;
-        }
+	private bool _initialized;
 
-        txtExportPath.Text = exportDir;
+	private string? _initializedForPageTitle;
 
-        try
-        {
-            _detectedFiles = await Task.Run(() =>
-                MysteryWikiService.DetectDecorationFiles(
-                    exportDir, _mystery.ProgressionEventId, _mystery.Name,
-                    _mystery.MysteryType == MysteryType.Pet, _mystery));
+	private double _zoomLevel = 1.0;
 
-            pnlLoading.Visibility = Visibility.Collapsed;
+	private int _imgNativeW;
 
-            if (_detectedFiles.Count == 0)
-            {
-                pnlEmpty.Visibility = Visibility.Visible;
-                txtEmptyMessage.Text = $"No image files found for {_mystery.ProgressionEventId}\nin {exportDir}";
-                return;
-            }
+	private int _imgNativeH;
 
-            // Check wiki existence
-            var uploadable = _detectedFiles.Where(f => f.Category != "EventItem").ToList();
-            if (uploadable.Count > 0)
-            {
-                var wikiFilenames = uploadable.Select(f => $"File:{f.WikiFilename}").ToList();
-                var existMap = await MysteryWikiService.CheckPagesExistAsync(wikiFilenames);
-                foreach (var file in uploadable)
-                    file.ExistsOnWiki = existMap.GetValueOrDefault($"File:{file.WikiFilename}", false);
-            }
+	private Point _dragStart;
 
-            foreach (var f in _detectedFiles)
-                if (f.OptimizedSize.HasValue)
-                    _optimizedFiles.Add(f);
+	private double _dragStartX;
 
-            await CheckExistingSplitEventItemAsync();
+	private double _dragStartY;
 
-            BuildFileList();
-            scrollFiles.Visibility = Visibility.Visible;
-            btnOptimize.IsEnabled = true;
-            btnUpload.IsEnabled = true;
+	private bool _isDragging;
 
-            var uploadableCount = _detectedFiles.Count(f => f.Category != "EventItem");
-            var preOptimized = _optimizedFiles.Count;
-            var msg = $"Found {_detectedFiles.Count} files ({uploadableCount} uploadable)";
-            if (preOptimized > 0) msg += $", {preOptimized} already optimized";
-            ShowInfo(msg + ".", InfoBarSeverity.Success);
-        }
-        catch (Exception ex)
-        {
-            pnlLoading.Visibility = Visibility.Collapsed;
-            pnlEmpty.Visibility = Visibility.Visible;
-            txtEmptyMessage.Text = $"Scan failed: {ex.Message}";
-        }
-    }
+	private bool _didDrag;
 
-    // ── File list building ─────────────────────────────────────
 
-    private void BuildFileList()
-    {
-        pnlFiles.Children.Clear();
 
-        var prevChecked = new Dictionary<DetectedDecorationFile, bool>();
-        foreach (var (f, cb) in _checkboxes)
-            prevChecked[f] = cb.IsChecked == true;
-        _checkboxes.Clear();
 
-        // Select All
-        var selectAllCb = new System.Windows.Controls.CheckBox
-        {
-            Content = "Select All", IsChecked = false,
-            Margin = new Thickness(0, 0, 0, 8), FontSize = 12
-        };
-        selectAllCb.SetResourceReference(System.Windows.Controls.CheckBox.ForegroundProperty, "TextFillColorSecondaryBrush");
-        pnlFiles.Children.Add(selectAllCb);
 
-        var splitItems = _detectedFiles.Where(f => f.Category.StartsWith("Event Item Lv")).ToList();
-        bool splitGroupHeaderAdded = false;
 
-        foreach (var file in _detectedFiles)
-        {
-            if (!splitGroupHeaderAdded && file.Category.StartsWith("Event Item Lv") && splitItems.Count > 0)
-            {
-                splitGroupHeaderAdded = true;
-                var groupHeader = new Border
-                {
-                    CornerRadius = new CornerRadius(4),
-                    Padding = new Thickness(10, 8, 10, 8),
-                    Margin = new Thickness(0, 8, 0, 0)
-                };
-                groupHeader.SetResourceReference(Border.BackgroundProperty, "SubtleFillColorSecondaryBrush");
-                var headerText = new TextBlock
-                {
-                    Text = $"Event Item ({splitItems.Count} files): {_mystery?.EventItemName ?? "Unknown"}",
-                    FontSize = 12, FontWeight = FontWeights.SemiBold
-                };
-                headerText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorSecondaryBrush");
-                groupHeader.Child = headerText;
-                pnlFiles.Children.Add(groupHeader);
-            }
 
-            bool isEventItem = file.Category == "EventItem";
 
-            var row = new Border
-            {
-                CornerRadius = new CornerRadius(4),
-                Padding = new Thickness(10, 8, 10, 8),
-                Margin = new Thickness(0, 0, 0, 4)
-            };
-            row.SetResourceReference(Border.BackgroundProperty, "CardBackgroundFillColorDefaultBrush");
 
-            var grid = new Grid();
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
 
-            if (isEventItem)
-            {
-                var spacer = new Border { Width = 24 };
-                Grid.SetColumn(spacer, 0);
-                grid.Children.Add(spacer);
-            }
-            else
-            {
-                bool wasChecked = prevChecked.TryGetValue(file, out var prev) ? prev : file.ExistsOnWiki != true;
-                var cb = new System.Windows.Controls.CheckBox
-                {
-                    IsChecked = wasChecked,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    Margin = new Thickness(0, 0, 8, 0)
-                };
-                Grid.SetColumn(cb, 0);
-                grid.Children.Add(cb);
-                _checkboxes[file] = cb;
-            }
 
-            // Thumbnail
-            try
-            {
-                if (File.Exists(file.SourcePath))
-                {
-                    var bi = new BitmapImage();
-                    bi.BeginInit();
-                    bi.UriSource = new Uri(file.SourcePath);
-                    bi.DecodePixelWidth = 48;
-                    bi.CacheOption = BitmapCacheOption.OnLoad;
-                    bi.EndInit();
-                    bi.Freeze();
 
-                    var img = new System.Windows.Controls.Image
-                    {
-                        Source = bi, Width = 48, Height = 48,
-                        Stretch = Stretch.Uniform,
-                        Margin = new Thickness(0, 0, 10, 0),
-                        VerticalAlignment = VerticalAlignment.Center,
-                        Cursor = System.Windows.Input.Cursors.Hand,
-                        ToolTip = "Click to preview", Tag = file.SourcePath
-                    };
-                    ToolTipService.SetInitialShowDelay(img, 0);
-                    img.MouseLeftButtonDown += (s, _) =>
-                    {
-                        if (s is System.Windows.Controls.Image i && i.Tag is string path)
-                            ShowPreview(path);
-                    };
-                    Grid.SetColumn(img, 1);
-                    grid.Children.Add(img);
-                }
-            }
-            catch { }
 
-            // Info
-            var infoPanel = new StackPanel { VerticalAlignment = VerticalAlignment.Center };
-            bool isSplitItem = file.Category.StartsWith("Event Item Lv");
-            var displayName = isEventItem ? Path.GetFileName(file.SourcePath)
-                : isSplitItem ? $"{file.Category.Replace("Event Item ", "")}  {file.WikiFilename}"
-                : file.WikiFilename;
 
-            var fileNameText = new TextBlock
-            {
-                Text = displayName, FontSize = 12, FontWeight = FontWeights.Medium,
-                TextTrimming = TextTrimming.CharacterEllipsis
-            };
-            fileNameText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorPrimaryBrush");
-            infoPanel.Children.Add(fileNameText);
 
-            var sourceInfo = $"{file.Category} · {Path.GetFileName(file.SourcePath)}";
-            if (_optimizedFiles.Contains(file) && file.OptimizedSize.HasValue)
-                sourceInfo += $" · {file.OptimizedSize.Value / 1024.0:F1} KB";
-            var sourceText = new TextBlock { Text = sourceInfo, FontSize = 11 };
-            sourceText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorTertiaryBrush");
-            infoPanel.Children.Add(sourceText);
+	public Action? OnStatusChanged { get; set; }
 
-            Grid.SetColumn(infoPanel, 2);
-            grid.Children.Add(infoPanel);
+	public MysteryImagesControl()
+	{
+		InitializeComponent();
+	}
 
-            // Right side
-            if (isEventItem)
-            {
-                var btnOpt = new Wpf.Ui.Controls.Button
-                {
-                    Content = "Image Optimiser", Appearance = ControlAppearance.Secondary,
-                    Height = 32, FontSize = 11, VerticalAlignment = VerticalAlignment.Center,
-                    Margin = new Thickness(8, 0, 0, 0), Tag = file.SourcePath
-                };
-                btnOpt.Click += BtnOpenInOptimiser_Click;
-                Grid.SetColumn(btnOpt, 3);
-                grid.Children.Add(btnOpt);
-            }
-            else
-            {
-                var statusBadge = new Border
-                {
-                    CornerRadius = new CornerRadius(4), Padding = new Thickness(6, 2, 6, 2),
-                    VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(8, 0, 0, 0)
-                };
-                var statusText = new TextBlock { FontSize = 11 };
-                bool isOptimized = _optimizedFiles.Contains(file);
-                if (isOptimized && file.ExistsOnWiki == true)
-                {
-                    statusBadge.Background = new SolidColorBrush(Color.FromArgb(0x25, 0x60, 0xA0, 0xE0));
-                    statusText.Foreground = new SolidColorBrush(Color.FromRgb(0x70, 0xB0, 0xF0));
-                    statusText.Text = "\u2713 Ready · Exists";
-                }
-                else if (isOptimized)
-                {
-                    statusBadge.Background = new SolidColorBrush(Color.FromArgb(0x30, 0x00, 0xA0, 0x00));
-                    statusText.Foreground = new SolidColorBrush(Color.FromRgb(0x30, 0xC0, 0x30));
-                    statusText.Text = "\u2713 Optimized";
-                }
-                else if (file.ExistsOnWiki == true)
-                {
-                    statusBadge.Background = new SolidColorBrush(Color.FromArgb(0x30, 0xC0, 0x90, 0x00));
-                    statusText.Foreground = new SolidColorBrush(Color.FromRgb(0xD0, 0xA0, 0x20));
-                    statusText.Text = "Exists";
-                }
-                else
-                {
-                    statusBadge.Background = new SolidColorBrush(Color.FromArgb(0x30, 0x00, 0xA0, 0x00));
-                    statusText.Foreground = new SolidColorBrush(Color.FromRgb(0x30, 0xC0, 0x30));
-                    statusText.Text = "New";
-                }
-                statusBadge.Child = statusText;
-                Grid.SetColumn(statusBadge, 3);
-                grid.Children.Add(statusBadge);
-            }
+	public void Initialize(MainWindow main, MysteryEvent mystery)
+	{
+		string currentPageTitle = mystery.WikiStatus.SuggestedPageTitle ?? mystery.Name;
+		if (_initialized && _initializedForPageTitle != currentPageTitle)
+		{
+			// SuggestedPageTitle changed (e.g. disambiguation resolved after Event Page tab loaded)
+			// Reset so we re-scan with the correct wiki image name
+			_initialized = false;
+			_detectedFiles.Clear();
+			_checkboxes.Clear();
+			_optimizedFiles.Clear();
+		}
+		if (!_initialized)
+		{
+			_initialized = true;
+			_initializedForPageTitle = currentPageTitle;
+			_main = main;
+			_mystery = mystery;
+			pnlLoading.Visibility = Visibility.Visible;
+			pnlEmpty.Visibility = Visibility.Collapsed;
+			scrollFiles.Visibility = Visibility.Collapsed;
+			AutoScanAsync();
+			if (!string.IsNullOrWhiteSpace(main.Settings.TinifyApiKey))
+				tinifyUsage.Initialize(main.Settings.TinifyApiKey, main.Settings.TinifyApiKey2);
+		}
+	}
 
-            row.Child = grid;
-            pnlFiles.Children.Add(row);
-        }
+	private async Task AutoScanAsync()
+	{
+		if (_main == null || _mystery == null)
+		{
+			return;
+		}
+		string exportDir = MysteryWikiService.ResolveExportPngsDir(_main.Settings.ImageExporterBasePath, _main.Settings.SelectedApkVersion);
+		if (string.IsNullOrEmpty(exportDir))
+		{
+			pnlLoading.Visibility = Visibility.Collapsed;
+			pnlEmpty.Visibility = Visibility.Visible;
+			txtEmptyMessage.Text = "Export path not configured.\nSet Image Exporter base path and APK version in Settings.";
+			return;
+		}
+		txtExportPath.Text = exportDir;
+		try
+		{
+			_detectedFiles = await Task.Run(() => MysteryWikiService.DetectDecorationFiles(exportDir, _mystery.ProgressionEventId, _mystery.WikiImageName, _mystery.MysteryType == MysteryType.Pet, _mystery));
+			pnlLoading.Visibility = Visibility.Collapsed;
+			if (_detectedFiles.Count == 0)
+			{
+				pnlEmpty.Visibility = Visibility.Visible;
+				txtEmptyMessage.Text = "No image files found for " + _mystery.ProgressionEventId + "\nin " + exportDir;
+				return;
+			}
+			List<DetectedDecorationFile> uploadable = _detectedFiles.Where((DetectedDecorationFile detectedDecorationFile) => detectedDecorationFile.Category != "EventItem").ToList();
+			if (uploadable.Count > 0)
+			{
+				List<string> wikiFilenames = uploadable.Select((DetectedDecorationFile detectedDecorationFile) => "File:" + detectedDecorationFile.WikiFilename).ToList();
+				Dictionary<string, bool> existMap = await MysteryWikiService.CheckPagesExistAsync(wikiFilenames);
+				foreach (DetectedDecorationFile file in uploadable)
+				{
+					file.ExistsOnWiki = existMap.GetValueOrDefault("File:" + file.WikiFilename, defaultValue: false);
+				}
+			}
+			foreach (DetectedDecorationFile f in _detectedFiles)
+			{
+				if (f.OptimizedSize.HasValue)
+				{
+					_optimizedFiles.Add(f);
+				}
+			}
+			await CheckExistingSplitEventItemAsync();
+			BuildFileList();
+			scrollFiles.Visibility = Visibility.Visible;
+			btnOptimize.IsEnabled = true;
+			btnUpload.IsEnabled = true;
+			int uploadableCount = _detectedFiles.Count((DetectedDecorationFile detectedDecorationFile) => detectedDecorationFile.Category != "EventItem");
+			int preOptimized = _optimizedFiles.Count;
+			string msg = $"Found {_detectedFiles.Count} files ({uploadableCount} uploadable)";
+			if (preOptimized > 0)
+			{
+				msg += $", {preOptimized} already optimized";
+			}
+			ShowInfo(msg + ".", InfoBarSeverity.Success);
+		}
+		catch (Exception ex)
+		{
+			pnlLoading.Visibility = Visibility.Collapsed;
+			pnlEmpty.Visibility = Visibility.Visible;
+			txtEmptyMessage.Text = "Scan failed: " + ex.Message;
+		}
+	}
 
-        // Wire Select All AFTER rows
-        selectAllCb.Checked += (_, _) =>
-        { foreach (var (f, cb) in _checkboxes) if (f.Category != "EventItem") cb.IsChecked = true; };
-        selectAllCb.Unchecked += (_, _) =>
-        { foreach (var (_, cb) in _checkboxes) cb.IsChecked = false; };
+	private void BuildFileList()
+	{
+		pnlFiles.Children.Clear();
+		Dictionary<DetectedDecorationFile, bool> dictionary = new Dictionary<DetectedDecorationFile, bool>();
+		foreach (KeyValuePair<DetectedDecorationFile, CheckBox> checkbox in _checkboxes)
+		{
+			checkbox.Deconstruct(out var key, out var value);
+			DetectedDecorationFile key2 = key;
+			CheckBox checkBox = value;
+			dictionary[key2] = checkBox.IsChecked == true;
+		}
+		_checkboxes.Clear();
+		CheckBox checkBox2 = new CheckBox
+		{
+			Content = "Select All",
+			IsChecked = false,
+			Margin = new Thickness(0.0, 0.0, 0.0, 8.0),
+			FontSize = 12.0
+		};
+		checkBox2.SetResourceReference(Control.ForegroundProperty, "TextFillColorSecondaryBrush");
+		pnlFiles.Children.Add(checkBox2);
+		List<DetectedDecorationFile> list = _detectedFiles.Where((DetectedDecorationFile f) => f.Category.StartsWith("Event Item Lv")).ToList();
+		bool flag = false;
+		foreach (DetectedDecorationFile detectedFile in _detectedFiles)
+		{
+			if (!flag && detectedFile.Category.StartsWith("Event Item Lv") && list.Count > 0)
+			{
+				flag = true;
+				Border border = new Border
+				{
+					CornerRadius = new CornerRadius(4.0),
+					Padding = new Thickness(10.0, 8.0, 10.0, 8.0),
+					Margin = new Thickness(0.0, 8.0, 0.0, 0.0)
+				};
+				border.SetResourceReference(Border.BackgroundProperty, "SubtleFillColorSecondaryBrush");
+				System.Windows.Controls.TextBlock textBlock = new System.Windows.Controls.TextBlock
+				{
+					Text = $"Event Item ({list.Count} files): {_mystery?.EventItemName ?? "Unknown"}",
+					FontSize = 12.0,
+					FontWeight = FontWeights.SemiBold
+				};
+				textBlock.SetResourceReference(System.Windows.Controls.TextBlock.ForegroundProperty, "TextFillColorSecondaryBrush");
+				border.Child = textBlock;
+				pnlFiles.Children.Add(border);
+			}
+			bool flag2 = detectedFile.Category == "EventItem";
+			Border border2 = new Border
+			{
+				CornerRadius = new CornerRadius(4.0),
+				Padding = new Thickness(10.0, 8.0, 10.0, 8.0),
+				Margin = new Thickness(0.0, 0.0, 0.0, 4.0)
+			};
+			border2.SetResourceReference(Border.BackgroundProperty, "CardBackgroundFillColorDefaultBrush");
+			Grid grid = new Grid();
+			grid.ColumnDefinitions.Add(new ColumnDefinition
+			{
+				Width = GridLength.Auto
+			});
+			grid.ColumnDefinitions.Add(new ColumnDefinition
+			{
+				Width = GridLength.Auto
+			});
+			grid.ColumnDefinitions.Add(new ColumnDefinition
+			{
+				Width = new GridLength(1.0, GridUnitType.Star)
+			});
+			grid.ColumnDefinitions.Add(new ColumnDefinition
+			{
+				Width = GridLength.Auto
+			});
+			if (flag2)
+			{
+				Border element = new Border
+				{
+					Width = 24.0
+				};
+				Grid.SetColumn(element, 0);
+				grid.Children.Add(element);
+			}
+			else
+			{
+				bool value3;
+				bool value2 = (dictionary.TryGetValue(detectedFile, out value3) ? value3 : (detectedFile.ExistsOnWiki != true));
+				CheckBox checkBox3 = new CheckBox
+				{
+					IsChecked = value2,
+					VerticalAlignment = VerticalAlignment.Center,
+					Margin = new Thickness(0.0, 0.0, 8.0, 0.0)
+				};
+				Grid.SetColumn(checkBox3, 0);
+				grid.Children.Add(checkBox3);
+				_checkboxes[detectedFile] = checkBox3;
+			}
+			try
+			{
+				if (File.Exists(detectedFile.SourcePath))
+				{
+					BitmapImage bitmapImage = new BitmapImage();
+					bitmapImage.BeginInit();
+					bitmapImage.UriSource = new Uri(detectedFile.SourcePath);
+					bitmapImage.DecodePixelWidth = 48;
+					bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+					bitmapImage.EndInit();
+					bitmapImage.Freeze();
+					System.Windows.Controls.Image image = new System.Windows.Controls.Image
+					{
+						Source = bitmapImage,
+						Width = 48.0,
+						Height = 48.0,
+						Stretch = Stretch.Uniform,
+						Margin = new Thickness(0.0, 0.0, 10.0, 0.0),
+						VerticalAlignment = VerticalAlignment.Center,
+						Cursor = Cursors.Hand,
+						ToolTip = "Click to preview",
+						Tag = detectedFile.SourcePath
+					};
+					ToolTipService.SetInitialShowDelay(image, 0);
+					image.MouseLeftButtonDown += delegate(object s, MouseButtonEventArgs _)
+					{
+						if (s is System.Windows.Controls.Image { Tag: string tag })
+						{
+							ShowPreview(tag);
+						}
+					};
+					Grid.SetColumn(image, 1);
+					grid.Children.Add(image);
+				}
+			}
+			catch
+			{
+			}
+			StackPanel stackPanel = new StackPanel
+			{
+				VerticalAlignment = VerticalAlignment.Center
+			};
+			bool flag3 = detectedFile.Category.StartsWith("Event Item Lv");
+			string text = (flag2 ? Path.GetFileName(detectedFile.SourcePath) : (flag3 ? (detectedFile.Category.Replace("Event Item ", "") + "  " + detectedFile.WikiFilename) : detectedFile.WikiFilename));
+			System.Windows.Controls.TextBlock textBlock2 = new System.Windows.Controls.TextBlock
+			{
+				Text = text,
+				FontSize = 12.0,
+				FontWeight = FontWeights.Medium,
+				TextTrimming = TextTrimming.CharacterEllipsis
+			};
+			textBlock2.SetResourceReference(System.Windows.Controls.TextBlock.ForegroundProperty, "TextFillColorPrimaryBrush");
+			stackPanel.Children.Add(textBlock2);
+			string text2 = detectedFile.Category + "  " + Path.GetFileName(detectedFile.SourcePath);
+			if (_optimizedFiles.Contains(detectedFile) && detectedFile.OptimizedSize.HasValue)
+			{
+				text2 += $"  {(double)detectedFile.OptimizedSize.Value / 1024.0:F1} KB";
+			}
+			System.Windows.Controls.TextBlock textBlock3 = new System.Windows.Controls.TextBlock
+			{
+				Text = text2,
+				FontSize = 11.0
+			};
+			textBlock3.SetResourceReference(System.Windows.Controls.TextBlock.ForegroundProperty, "TextFillColorTertiaryBrush");
+			stackPanel.Children.Add(textBlock3);
+			Grid.SetColumn(stackPanel, 2);
+			grid.Children.Add(stackPanel);
+			if (flag2)
+			{
+				Wpf.Ui.Controls.Button button = new Wpf.Ui.Controls.Button
+				{
+					Content = "Image Optimiser",
+					Appearance = ControlAppearance.Secondary,
+					Height = 32.0,
+					FontSize = 11.0,
+					VerticalAlignment = VerticalAlignment.Center,
+					Margin = new Thickness(8.0, 0.0, 0.0, 0.0),
+					Tag = detectedFile.SourcePath
+				};
+				button.Click += BtnOpenInOptimiser_Click;
+				Grid.SetColumn(button, 3);
+				grid.Children.Add(button);
+			}
+			else
+			{
+				Border border3 = new Border
+				{
+					CornerRadius = new CornerRadius(4.0),
+					Padding = new Thickness(6.0, 2.0, 6.0, 2.0),
+					VerticalAlignment = VerticalAlignment.Center,
+					Margin = new Thickness(8.0, 0.0, 0.0, 0.0)
+				};
+				System.Windows.Controls.TextBlock textBlock4 = new System.Windows.Controls.TextBlock
+				{
+					FontSize = 11.0
+				};
+				bool flag4 = _optimizedFiles.Contains(detectedFile);
+				if (flag4 && detectedFile.ExistsOnWiki == true)
+				{
+					border3.Background = new SolidColorBrush(Color.FromArgb(37, 96, 160, 224));
+					textBlock4.Foreground = new SolidColorBrush(Color.FromRgb(112, 176, 240));
+					textBlock4.Text = "? Ready  Exists";
+				}
+				else if (flag4)
+				{
+					border3.Background = new SolidColorBrush(Color.FromArgb(48, 0, 160, 0));
+					textBlock4.Foreground = new SolidColorBrush(Color.FromRgb(48, 192, 48));
+					textBlock4.Text = "? Optimized";
+				}
+				else if (detectedFile.ExistsOnWiki == true)
+				{
+					border3.Background = new SolidColorBrush(Color.FromArgb(48, 192, 144, 0));
+					textBlock4.Foreground = new SolidColorBrush(Color.FromRgb(208, 160, 32));
+					textBlock4.Text = "Exists";
+				}
+				else
+				{
+					border3.Background = new SolidColorBrush(Color.FromArgb(48, 0, 160, 0));
+					textBlock4.Foreground = new SolidColorBrush(Color.FromRgb(48, 192, 48));
+					textBlock4.Text = "New";
+				}
+				border3.Child = textBlock4;
+				Grid.SetColumn(border3, 3);
+				grid.Children.Add(border3);
+			}
+			border2.Child = grid;
+			pnlFiles.Children.Add(border2);
+		}
+		checkBox2.Checked += delegate
+		{
+			foreach (var (detectedDecorationFile2, checkBox5) in _checkboxes)
+			{
+				if (detectedDecorationFile2.Category != "EventItem")
+				{
+					checkBox5.IsChecked = true;
+				}
+			}
+		};
+		checkBox2.Unchecked += delegate
+		{
+			foreach (KeyValuePair<DetectedDecorationFile, CheckBox> checkbox2 in _checkboxes)
+			{
+				checkbox2.Deconstruct(out var _, out var value4);
+				CheckBox checkBox4 = value4;
+				checkBox4.IsChecked = false;
+			}
+		};
+		List<KeyValuePair<DetectedDecorationFile, CheckBox>> list2 = _checkboxes.Where<KeyValuePair<DetectedDecorationFile, CheckBox>>((KeyValuePair<DetectedDecorationFile, CheckBox> kv) => kv.Key.Category != "EventItem").ToList();
+		if (list2.Count > 0 && list2.All((KeyValuePair<DetectedDecorationFile, CheckBox> kv) => kv.Value.IsChecked == true))
+		{
+			checkBox2.IsChecked = true;
+		}
+	}
 
-        var uploadable = _checkboxes.Where(kv => kv.Key.Category != "EventItem").ToList();
-        if (uploadable.Count > 0 && uploadable.All(kv => kv.Value.IsChecked == true))
-            selectAllCb.IsChecked = true;
-    }
+	private async Task CheckExistingSplitEventItemAsync()
+	{
+		if (_main == null || _mystery == null)
+		{
+			return;
+		}
+		DetectedDecorationFile eventItemEntry = _detectedFiles.FirstOrDefault((DetectedDecorationFile detectedDecorationFile) => detectedDecorationFile.Category == "EventItem");
+		if (eventItemEntry == null)
+		{
+			return;
+		}
+		string eventItemName = _mystery.EventItemName;
+		if (string.IsNullOrEmpty(eventItemName))
+		{
+			return;
+		}
+		string searchDir = null;
+		string workspaceDir = _main.Settings.ImageExporterBasePath;
+		if (!string.IsNullOrEmpty(workspaceDir))
+		{
+			string pd = Path.Combine(workspaceDir, "Processed Images");
+			if (Directory.Exists(pd))
+			{
+				searchDir = pd;
+			}
+		}
+		if (searchDir == null)
+		{
+			return;
+		}
+		List<(string path, int level, string wikiName)> foundSplits = new List<(string, int, string)>();
+		for (int lvl = 1; lvl <= 10; lvl++)
+		{
+			string wikiName = MysteryWikiService.FormatFileName(eventItemName, lvl);
+			string filePath = Path.Combine(searchDir, wikiName);
+			if (File.Exists(filePath))
+			{
+				foundSplits.Add((filePath, lvl, wikiName));
+				continue;
+			}
+			break;
+		}
+		if (foundSplits.Count == 0)
+		{
+			return;
+		}
+		_detectedFiles.Remove(eventItemEntry);
+		foreach (var item in foundSplits)
+		{
+			string path = item.path;
+			int level = item.level;
+			string wikiName2 = item.wikiName;
+			DetectedDecorationFile file = new DetectedDecorationFile
+			{
+				SourcePath = path,
+				WikiFilename = wikiName2,
+				Category = $"Event Item Lv{level:D2}"
+			};
+			try
+			{
+				byte[] bytes = await File.ReadAllBytesAsync(path);
+				if (OptimizationWindow.HasOptMarker(bytes))
+				{
+					file.OptimizedSize = bytes.Length;
+					_optimizedFiles.Add(file);
+				}
+			}
+			catch
+			{
+			}
+			_detectedFiles.Add(file);
+		}
+		List<string> wikiNames = foundSplits.Select<(string, int, string), string>(((string path, int level, string wikiName) s) => "File:" + s.wikiName).ToList();
+		Dictionary<string, bool> existMap = await MysteryWikiService.CheckPagesExistAsync(wikiNames);
+		foreach (DetectedDecorationFile f in _detectedFiles.Where((DetectedDecorationFile detectedDecorationFile) => detectedDecorationFile.Category.StartsWith("Event Item Lv")))
+		{
+			f.ExistsOnWiki = existMap.GetValueOrDefault("File:" + f.WikiFilename, defaultValue: false);
+		}
+	}
 
-    // ── Event Item split detection ─────────────────────────────
+	private void BtnOpenInOptimiser_Click(object sender, RoutedEventArgs e)
+	{
+		if (_main != null && sender is Wpf.Ui.Controls.Button { Tag: string tag })
+		{
+			_main.NavigateToImageOptimiserWithFile(tag);
+			Window.GetWindow(this)?.Close();
+		}
+	}
 
-    private async Task CheckExistingSplitEventItemAsync()
-    {
-        if (_main == null || _mystery == null) return;
-        var eventItemEntry = _detectedFiles.FirstOrDefault(f => f.Category == "EventItem");
-        if (eventItemEntry == null) return;
-        var eventItemName = _mystery.EventItemName;
-        if (string.IsNullOrEmpty(eventItemName)) return;
+	private void BtnOptimize_Click(object sender, RoutedEventArgs e)
+	{
+		if (_main != null && _mystery != null)
+		{
+			MysteryDecorationUploadDialog mysteryDecorationUploadDialog = new MysteryDecorationUploadDialog(_main, _mystery);
+			mysteryDecorationUploadDialog.OnStatusChanged = OnStatusChanged;
+			mysteryDecorationUploadDialog.Owner = Window.GetWindow(this);
+			mysteryDecorationUploadDialog.ShowDialog();
+			_initialized = false;
+			_detectedFiles.Clear();
+			_checkboxes.Clear();
+			_optimizedFiles.Clear();
+			AutoScanAsync();
+			if (!string.IsNullOrWhiteSpace(_main.Settings.TinifyApiKey))
+				tinifyUsage.Initialize(_main.Settings.TinifyApiKey, _main.Settings.TinifyApiKey2);
+		}
+	}
 
-        string? searchDir = null;
-        var workspaceDir = _main.Settings.ImageExporterBasePath;
-        if (!string.IsNullOrEmpty(workspaceDir))
-        {
-            var pd = Path.Combine(workspaceDir, "Processed Images");
-            if (Directory.Exists(pd)) searchDir = pd;
-        }
-        if (searchDir == null) return;
+	private async void BtnUpload_Click(object sender, RoutedEventArgs e)
+	{
+		if (_main == null || _mystery == null)
+		{
+			return;
+		}
+		if (!_main.Settings.WikiVerified)
+		{
+			ShowInfo("Wiki account not verified. Go to Settings  Wiki to log in.", InfoBarSeverity.Warning);
+			return;
+		}
+		CheckBox value;
+		List<DetectedDecorationFile> selected = _detectedFiles.Where((DetectedDecorationFile detectedDecorationFile) => detectedDecorationFile.Category != "EventItem" && _checkboxes.TryGetValue(detectedDecorationFile, out value) && value.IsChecked == true).ToList();
+		if (selected.Count == 0)
+		{
+			ShowInfo("No files selected for upload.", InfoBarSeverity.Warning);
+			return;
+		}
+		string apiKey = _main.Settings.TinifyApiKey;
+		string apiKey2 = _main.Settings.TinifyApiKey2;
+		Func<byte[], Task<byte[]>> optimizeFunc = async delegate(byte[] data)
+		{
+			if (string.IsNullOrWhiteSpace(apiKey))
+			{
+				throw new Exception("TinyPNG API key not set.");
+			}
+			Tinify.Key = apiKey;
+			try
+			{
+				return await (await Tinify.FromBuffer(data)).ToBuffer();
+			}
+			catch (AccountException) when (!string.IsNullOrWhiteSpace(apiKey2))
+			{
+				Tinify.Key = apiKey2;
+				return await (await Tinify.FromBuffer(data)).ToBuffer();
+			}
+		};
+		btnUpload.IsEnabled = false;
+		btnOptimize.IsEnabled = false;
+		int uploaded = 0;
+		int skipped = 0;
+		int failed = 0;
+		bool forceAll = false;
+		bool skipAll = false;
+		bool confirmAll = false;
+		bool optimizeAll = false;
+		ShowInfo($"Processing {selected.Count} files...", InfoBarSeverity.Informational);
+		try
+		{
+			using HttpClient client = await WikiMappingService.CreateAuthenticatedClientAsync(_main.Settings.WikiUsername, _main.Settings.WikiPassword);
+			string csrfToken = JsonDocument.Parse(await client.GetStringAsync("https://merge-mansion.fandom.com/api.php?action=query&meta=tokens&format=json")).RootElement.GetProperty("query").GetProperty("tokens").GetProperty("csrftoken")
+				.GetString();
+			Window ownerWindow = Window.GetWindow(this);
+			for (int idx = 0; idx < selected.Count; idx++)
+			{
+				DetectedDecorationFile file = selected[idx];
+				try
+				{
+					if (!File.Exists(file.SourcePath))
+					{
+						failed++;
+						continue;
+					}
+					bool needsOptimize = !_optimizedFiles.Contains(file);
+					int remaining = selected.Count - idx - 1;
+					bool hasUnoptimizedRemaining = selected.Skip(idx + 1).Any((DetectedDecorationFile item) => !_optimizedFiles.Contains(item));
+					if (needsOptimize && !optimizeAll)
+					{
+						UploadConflictDialog wizardDlg = UploadConflictDialog.CreateOptimizeWizard(file.WikiFilename, remaining, file.SourcePath, optimizeFunc, _main.Settings.WikiUsername, hasUnoptimizedRemaining);
+						wizardDlg.Owner = ownerWindow;
+						wizardDlg.ShowDialog();
+						try
+						{
+							byte[] postBytes = File.ReadAllBytes(file.SourcePath);
+							if (OptimizationWindow.HasOptMarker(postBytes))
+							{
+								_optimizedFiles.Add(file);
+								file.OptimizedSize = postBytes.Length;
+							}
+						}
+						catch
+						{
+						}
+						switch (wizardDlg.Choice)
+						{
+						case UploadConflictChoice.ForceAll:
+							forceAll = true;
+							confirmAll = true;
+							break;
+						case UploadConflictChoice.ForceAllOptimize:
+							optimizeAll = true;
+							forceAll = true;
+							confirmAll = true;
+							break;
+						case UploadConflictChoice.Skip:
+							skipped++;
+							goto end_IL_0402;
+						case UploadConflictChoice.SkipAll:
+							skipAll = true;
+							skipped++;
+							goto end_IL_0402;
+						case UploadConflictChoice.Cancel:
+							goto end_IL_0319;
+						}
+						goto IL_0886;
+					}
+					if (needsOptimize && optimizeAll)
+					{
+						byte[] marked = OptimizationWindow.InsertOptMarker(await optimizeFunc(await File.ReadAllBytesAsync(file.SourcePath)));
+						await File.WriteAllBytesAsync(file.SourcePath, marked);
+						_optimizedFiles.Add(file);
+						file.OptimizedSize = marked.Length;
+						goto IL_0886;
+					}
+					if (!needsOptimize)
+					{
+						goto IL_0886;
+					}
+					skipped++;
+					goto end_IL_0402;
+					IL_0886:
+					if (forceAll || confirmAll)
+					{
+						goto IL_0bd3;
+					}
+					Dictionary<string, bool> existMap = await MysteryWikiService.CheckPagesExistAsync(new string[1] { "File:" + file.WikiFilename });
+					file.ExistsOnWiki = existMap.GetValueOrDefault("File:" + file.WikiFilename, defaultValue: false) || existMap.GetValueOrDefault("File:" + file.WikiFilename.Replace('_', ' '), defaultValue: false);
+					if (file.ExistsOnWiki == true)
+					{
+						if (skipAll)
+						{
+							skipped++;
+							continue;
+						}
+						if (!needsOptimize || optimizeAll)
+						{
+							UploadConflictDialog dlg = new UploadConflictDialog(file.WikiFilename, remaining, file.SourcePath, isPartOfSplit: false, _main.Settings.WikiUsername)
+							{
+								Owner = ownerWindow
+							};
+							dlg.ShowDialog();
+							switch (dlg.Choice)
+							{
+							case UploadConflictChoice.ForceAll:
+								forceAll = true;
+								break;
+							case UploadConflictChoice.Skip:
+								skipped++;
+								goto end_IL_0402;
+							case UploadConflictChoice.SkipAll:
+								skipAll = true;
+								skipped++;
+								goto end_IL_0402;
+							case UploadConflictChoice.Cancel:
+								goto end_IL_0319;
+							}
+						}
+						goto IL_0bd3;
+					}
+					if (needsOptimize)
+					{
+						goto IL_0bd3;
+					}
+					UploadConflictDialog confirmDlg = UploadConflictDialog.CreateNewFileDialog(file.WikiFilename, remaining, file.SourcePath, _main.Settings.WikiUsername);
+					confirmDlg.ShowForceOptimizeButton(hasUnoptimizedRemaining);
+					confirmDlg.Owner = ownerWindow;
+					confirmDlg.ShowDialog();
+					if (confirmDlg.Choice == UploadConflictChoice.ForceAll)
+					{
+						confirmAll = true;
+						goto IL_0bd3;
+					}
+					if (confirmDlg.Choice == UploadConflictChoice.ForceAllOptimize)
+					{
+						optimizeAll = true;
+						forceAll = true;
+						confirmAll = true;
+						goto IL_0bd3;
+					}
+					if (confirmDlg.Choice == UploadConflictChoice.Force)
+					{
+						goto IL_0bd3;
+					}
+					goto end_IL_0319;
+					IL_0bd3:
+					await WikiMappingService.UploadFileAsync(fileData: await File.ReadAllBytesAsync(file.SourcePath), description: (file.ExistsOnWiki != true) ? "{{Permission}}" : null, client: client, csrfToken: csrfToken, filename: file.WikiFilename);
+					uploaded++;
+					UserStatsService.Increment(delegate(UserStats s)
+					{
+						s.MysteryPagesPublished++;
+					});
+					end_IL_0402:;
+				}
+				catch (Exception ex)
+				{
+					AppLogger.Warn("Upload failed for " + file.WikiFilename + ": " + ex.Message);
+					failed++;
+				}
+			}
+			end_IL_0319:;
+		}
+		catch (Exception ex2)
+		{
+			Exception ex3 = ex2;
+			ShowInfo("Authentication failed: " + ex3.Message, InfoBarSeverity.Error);
+			btnUpload.IsEnabled = true;
+			return;
+		}
+		btnUpload.IsEnabled = true;
+		btnOptimize.IsEnabled = true;
+		if (_main != null && !string.IsNullOrWhiteSpace(_main.Settings.TinifyApiKey))
+			tinifyUsage.Initialize(_main.Settings.TinifyApiKey, _main.Settings.TinifyApiKey2);
+		if (uploaded > 0)
+		{
+			List<string> allWikiNames = (from detectedDecorationFile in _detectedFiles
+				where detectedDecorationFile.Category != "EventItem" && !string.IsNullOrEmpty(detectedDecorationFile.WikiFilename)
+				select "File:" + detectedDecorationFile.WikiFilename).ToList();
+			if (allWikiNames.Count > 0)
+			{
+				Dictionary<string, bool> existMap2 = await MysteryWikiService.CheckPagesExistAsync(allWikiNames);
+				foreach (DetectedDecorationFile f in _detectedFiles.Where((DetectedDecorationFile detectedDecorationFile) => !string.IsNullOrEmpty(detectedDecorationFile.WikiFilename)))
+				{
+					f.ExistsOnWiki = existMap2.GetValueOrDefault("File:" + f.WikiFilename, defaultValue: false);
+				}
+			}
+			BuildFileList();
+			_mystery.WikiStatus.ImagesExistOnWiki = _detectedFiles.Count((DetectedDecorationFile detectedDecorationFile) => detectedDecorationFile.Category != "EventItem" && detectedDecorationFile.ExistsOnWiki == true);
+			MysteryWikiService.UpdateSingleMysteryCache(_mystery);
+			OnStatusChanged?.Invoke();
+		}
+		List<string> parts = new List<string>();
+		if (uploaded > 0)
+		{
+			parts.Add($"{uploaded} uploaded");
+		}
+		if (skipped > 0)
+		{
+			parts.Add($"{skipped} skipped");
+		}
+		if (failed > 0)
+		{
+			parts.Add($"{failed} failed");
+		}
+		ShowInfo(string.Join("  ", parts), (failed <= 0) ? InfoBarSeverity.Success : InfoBarSeverity.Warning);
+	}
 
-        var foundSplits = new List<(string path, int level, string wikiName)>();
-        for (int lvl = 1; lvl <= 10; lvl++)
-        {
-            var wikiName = MysteryWikiService.FormatFileName(eventItemName, lvl);
-            var filePath = Path.Combine(searchDir, wikiName);
-            if (File.Exists(filePath)) foundSplits.Add((filePath, lvl, wikiName));
-            else break;
-        }
-        if (foundSplits.Count == 0) return;
+	private void ShowPreview(string filePath)
+	{
+		try
+		{
+			BitmapImage bitmapImage = new BitmapImage();
+			bitmapImage.BeginInit();
+			bitmapImage.UriSource = new Uri(filePath);
+			bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+			bitmapImage.EndInit();
+			bitmapImage.Freeze();
+			previewImage.Source = bitmapImage;
+			_imgNativeW = bitmapImage.PixelWidth;
+			_imgNativeH = bitmapImage.PixelHeight;
+			previewOverlay.Visibility = Visibility.Visible;
+			base.Dispatcher.InvokeAsync(CenterAndFitPreview, DispatcherPriority.Loaded);
+		}
+		catch
+		{
+		}
+	}
 
-        _detectedFiles.Remove(eventItemEntry);
-        foreach (var (path, level, wikiName) in foundSplits)
-        {
-            var file = new DetectedDecorationFile
-            {
-                SourcePath = path, WikiFilename = wikiName,
-                Category = $"Event Item Lv{level:D2}"
-            };
-            try
-            {
-                var bytes = await File.ReadAllBytesAsync(path);
-                if (OptimizationWindow.HasOptMarker(bytes))
-                { file.OptimizedSize = bytes.Length; _optimizedFiles.Add(file); }
-            }
-            catch { }
-            _detectedFiles.Add(file);
-        }
+	private void CenterAndFitPreview()
+	{
+		double actualWidth = previewCanvas.ActualWidth;
+		double actualHeight = previewCanvas.ActualHeight;
+		if (!(actualWidth <= 0.0) && !(actualHeight <= 0.0) && _imgNativeW > 0)
+		{
+			_zoomLevel = 1.0;
+			while (_zoomLevel > 0.25 && ((double)_imgNativeW * _zoomLevel > actualWidth || (double)_imgNativeH * _zoomLevel > actualHeight))
+			{
+				_zoomLevel -= 0.125;
+			}
+			previewImage.Width = (double)_imgNativeW * _zoomLevel;
+			previewImage.Height = (double)_imgNativeH * _zoomLevel;
+			Canvas.SetLeft(previewImage, (actualWidth - previewImage.Width) / 2.0);
+			Canvas.SetTop(previewImage, (actualHeight - previewImage.Height) / 2.0);
+			int value = (int)(_zoomLevel * 100.0);
+			txtPreviewInfo.Text = $"{_imgNativeW}�{_imgNativeH}  {value}%";
+		}
+	}
 
-        var wikiNames = foundSplits.Select(s => $"File:{s.wikiName}").ToList();
-        var existMap = await MysteryWikiService.CheckPagesExistAsync(wikiNames);
-        foreach (var f in _detectedFiles.Where(f => f.Category.StartsWith("Event Item Lv")))
-            f.ExistsOnWiki = existMap.GetValueOrDefault($"File:{f.WikiFilename}", false);
-    }
+	private void PreviewCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
+	{
+		if (previewOverlay.Visibility == Visibility.Visible && previewImage.Source != null)
+		{
+			CenterAndFitPreview();
+		}
+	}
 
-    // ── Buttons ────────────────────────────────────────────────
+	private void PreviewOverlay_MouseDown(object sender, MouseButtonEventArgs e)
+	{
+		_isDragging = true;
+		_didDrag = false;
+		_dragStart = e.GetPosition(previewCanvas);
+		_dragStartX = Canvas.GetLeft(previewImage);
+		_dragStartY = Canvas.GetTop(previewImage);
+		if (double.IsNaN(_dragStartX))
+		{
+			_dragStartX = 0.0;
+		}
+		if (double.IsNaN(_dragStartY))
+		{
+			_dragStartY = 0.0;
+		}
+		previewOverlay.Cursor = Cursors.SizeAll;
+		previewOverlay.CaptureMouse();
+		e.Handled = true;
+	}
 
-    private void BtnOpenInOptimiser_Click(object sender, RoutedEventArgs e)
-    {
-        if (_main == null || sender is not Wpf.Ui.Controls.Button btn || btn.Tag is not string filePath) return;
-        _main.NavigateToImageOptimiserWithFile(filePath);
-        Window.GetWindow(this)?.Close();
-    }
+	private void PreviewOverlay_MouseMove(object sender, MouseEventArgs e)
+	{
+		if (_isDragging)
+		{
+			Point position = e.GetPosition(previewCanvas);
+			if (Math.Abs(position.X - _dragStart.X) > 3.0 || Math.Abs(position.Y - _dragStart.Y) > 3.0)
+			{
+				_didDrag = true;
+			}
+			Canvas.SetLeft(previewImage, _dragStartX + (position.X - _dragStart.X));
+			Canvas.SetTop(previewImage, _dragStartY + (position.Y - _dragStart.Y));
+		}
+	}
 
-    private void BtnOptimize_Click(object sender, RoutedEventArgs e)
-    {
-        if (_main == null || _mystery == null) return;
-        // Open full dialog for optimization workflow
-        var dialog = new MysteryDecorationUploadDialog(_main, _mystery);
-        dialog.Owner = Window.GetWindow(this);
-        dialog.ShowDialog();
-        // Refresh after dialog closes
-        _initialized = false;
-        _detectedFiles.Clear();
-        _checkboxes.Clear();
-        _optimizedFiles.Clear();
-        _ = AutoScanAsync();
-    }
+	private void PreviewOverlay_MouseUp(object sender, MouseButtonEventArgs e)
+	{
+		bool isDragging = _isDragging;
+		_isDragging = false;
+		previewOverlay.Cursor = Cursors.Arrow;
+		previewOverlay.ReleaseMouseCapture();
+		if (isDragging && !_didDrag)
+		{
+			double num = Canvas.GetLeft(previewImage);
+			double num2 = Canvas.GetTop(previewImage);
+			if (double.IsNaN(num))
+			{
+				num = 0.0;
+			}
+			if (double.IsNaN(num2))
+			{
+				num2 = 0.0;
+			}
+			Point position = e.GetPosition(previewCanvas);
+			if (!(position.X >= num) || !(position.Y >= num2) || !(position.X <= num + previewImage.Width) || !(position.Y <= num2 + previewImage.Height))
+			{
+				previewOverlay.Visibility = Visibility.Collapsed;
+				previewImage.Source = null;
+			}
+		}
+	}
 
-    private void BtnUpload_Click(object sender, RoutedEventArgs e)
-    {
-        if (_main == null || _mystery == null) return;
-        var dialog = new MysteryDecorationUploadDialog(_main, _mystery);
-        dialog.Owner = Window.GetWindow(this);
-        dialog.ShowDialog();
-        _initialized = false;
-        _detectedFiles.Clear();
-        _checkboxes.Clear();
-        _optimizedFiles.Clear();
-        _ = AutoScanAsync();
-    }
+	private void PreviewClose_Click(object sender, MouseButtonEventArgs e)
+	{
+		previewOverlay.Visibility = Visibility.Collapsed;
+		previewImage.Source = null;
+		e.Handled = true;
+	}
 
-    // ── Image preview ──────────────────────────────────────────
+	private void PreviewScroll_MouseWheel(object sender, MouseWheelEventArgs e)
+	{
+		e.Handled = true;
+		double zoomLevel = _zoomLevel;
+		_zoomLevel += ((e.Delta > 0) ? 0.125 : (-0.125));
+		_zoomLevel = Math.Max(0.25, Math.Min(4.0, _zoomLevel));
+		Point position = e.GetPosition(previewCanvas);
+		double num = Canvas.GetLeft(previewImage);
+		double num2 = Canvas.GetTop(previewImage);
+		if (double.IsNaN(num))
+		{
+			num = 0.0;
+		}
+		if (double.IsNaN(num2))
+		{
+			num2 = 0.0;
+		}
+		double num3 = _zoomLevel / zoomLevel;
+		previewImage.Width = (double)_imgNativeW * _zoomLevel;
+		previewImage.Height = (double)_imgNativeH * _zoomLevel;
+		Canvas.SetLeft(previewImage, position.X - (position.X - num) * num3);
+		Canvas.SetTop(previewImage, position.Y - (position.Y - num2) * num3);
+		int value = (int)(_zoomLevel * 100.0);
+		txtPreviewInfo.Text = $"{_imgNativeW}�{_imgNativeH}  {value}%";
+	}
 
-    private double _zoomLevel = 1.0;
-    private int _imgNativeW, _imgNativeH;
-    private Point _dragStart;
-    private double _dragStartX, _dragStartY;
-    private bool _isDragging, _didDrag;
+	private void ShowInfo(string message, InfoBarSeverity severity)
+	{
+		infoBar.Message = message;
+		infoBar.Severity = severity;
+		infoBar.IsOpen = true;
+	}
 
-    private void ShowPreview(string filePath)
-    {
-        try
-        {
-            var bi = new BitmapImage();
-            bi.BeginInit();
-            bi.UriSource = new Uri(filePath);
-            bi.CacheOption = BitmapCacheOption.OnLoad;
-            bi.EndInit();
-            bi.Freeze();
-            previewImage.Source = bi;
-            _imgNativeW = bi.PixelWidth;
-            _imgNativeH = bi.PixelHeight;
-            previewOverlay.Visibility = Visibility.Visible;
-            Dispatcher.InvokeAsync(CenterAndFitPreview, System.Windows.Threading.DispatcherPriority.Loaded);
-        }
-        catch { }
-    }
-
-    private void CenterAndFitPreview()
-    {
-        double availW = previewCanvas.ActualWidth, availH = previewCanvas.ActualHeight;
-        if (availW <= 0 || availH <= 0 || _imgNativeW <= 0) return;
-        _zoomLevel = 1.0;
-        while (_zoomLevel > 0.25 && (_imgNativeW * _zoomLevel > availW || _imgNativeH * _zoomLevel > availH))
-            _zoomLevel -= 0.125;
-        previewImage.Width = _imgNativeW * _zoomLevel;
-        previewImage.Height = _imgNativeH * _zoomLevel;
-        Canvas.SetLeft(previewImage, (availW - previewImage.Width) / 2);
-        Canvas.SetTop(previewImage, (availH - previewImage.Height) / 2);
-        var pct = (int)(_zoomLevel * 100);
-        txtPreviewInfo.Text = $"{_imgNativeW}\u00D7{_imgNativeH} \u00B7 {pct}%";
-    }
-
-    private void PreviewCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
-    {
-        if (previewOverlay.Visibility == Visibility.Visible && previewImage.Source != null)
-            CenterAndFitPreview();
-    }
-
-    private void PreviewOverlay_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-    {
-        _isDragging = true; _didDrag = false;
-        _dragStart = e.GetPosition(previewCanvas);
-        _dragStartX = Canvas.GetLeft(previewImage); _dragStartY = Canvas.GetTop(previewImage);
-        if (double.IsNaN(_dragStartX)) _dragStartX = 0;
-        if (double.IsNaN(_dragStartY)) _dragStartY = 0;
-        previewOverlay.Cursor = System.Windows.Input.Cursors.SizeAll;
-        previewOverlay.CaptureMouse();
-        e.Handled = true;
-    }
-
-    private void PreviewOverlay_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
-    {
-        if (!_isDragging) return;
-        var pos = e.GetPosition(previewCanvas);
-        if (Math.Abs(pos.X - _dragStart.X) > 3 || Math.Abs(pos.Y - _dragStart.Y) > 3) _didDrag = true;
-        Canvas.SetLeft(previewImage, _dragStartX + (pos.X - _dragStart.X));
-        Canvas.SetTop(previewImage, _dragStartY + (pos.Y - _dragStart.Y));
-    }
-
-    private void PreviewOverlay_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-    {
-        bool wasDragging = _isDragging;
-        _isDragging = false;
-        previewOverlay.Cursor = System.Windows.Input.Cursors.Arrow;
-        previewOverlay.ReleaseMouseCapture();
-        if (wasDragging && !_didDrag)
-        {
-            var imgLeft = Canvas.GetLeft(previewImage); var imgTop = Canvas.GetTop(previewImage);
-            if (double.IsNaN(imgLeft)) imgLeft = 0; if (double.IsNaN(imgTop)) imgTop = 0;
-            var pos = e.GetPosition(previewCanvas);
-            bool onImage = pos.X >= imgLeft && pos.Y >= imgTop
-                && pos.X <= imgLeft + previewImage.Width && pos.Y <= imgTop + previewImage.Height;
-            if (!onImage) { previewOverlay.Visibility = Visibility.Collapsed; previewImage.Source = null; }
-        }
-    }
-
-    private void PreviewClose_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
-    {
-        previewOverlay.Visibility = Visibility.Collapsed; previewImage.Source = null;
-        e.Handled = true;
-    }
-
-    private void PreviewScroll_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
-    {
-        e.Handled = true;
-        var oldZoom = _zoomLevel;
-        _zoomLevel += e.Delta > 0 ? 0.125 : -0.125;
-        _zoomLevel = Math.Max(0.25, Math.Min(4.0, _zoomLevel));
-        var cursorPos = e.GetPosition(previewCanvas);
-        double left = Canvas.GetLeft(previewImage), top = Canvas.GetTop(previewImage);
-        if (double.IsNaN(left)) left = 0; if (double.IsNaN(top)) top = 0;
-        double ratio = _zoomLevel / oldZoom;
-        previewImage.Width = _imgNativeW * _zoomLevel;
-        previewImage.Height = _imgNativeH * _zoomLevel;
-        Canvas.SetLeft(previewImage, cursorPos.X - (cursorPos.X - left) * ratio);
-        Canvas.SetTop(previewImage, cursorPos.Y - (cursorPos.Y - top) * ratio);
-        var pct = (int)(_zoomLevel * 100);
-        txtPreviewInfo.Text = $"{_imgNativeW}\u00D7{_imgNativeH} \u00B7 {pct}%";
-    }
-
-    private void ShowInfo(string message, InfoBarSeverity severity)
-    {
-        infoBar.Message = message;
-        infoBar.Severity = severity;
-        infoBar.IsOpen = true;
-    }
 }

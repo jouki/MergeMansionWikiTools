@@ -22,6 +22,9 @@ public partial class MysteryDecorationUploadDialog : Wpf.Ui.Controls.FluentWindo
     private readonly Dictionary<DetectedDecorationFile, System.Windows.Controls.CheckBox> _checkboxes = new();
     private readonly HashSet<DetectedDecorationFile> _optimizedFiles = new();
 
+    /// <summary>Callback to refresh the mystery list after image upload changes status.</summary>
+    public Action? OnStatusChanged { get; set; }
+
     public MysteryDecorationUploadDialog(MainWindow main, MysteryEvent mystery)
     {
         _main = main;
@@ -60,7 +63,7 @@ public partial class MysteryDecorationUploadDialog : Wpf.Ui.Controls.FluentWindo
         {
             _detectedFiles = await Task.Run(() =>
                 MysteryWikiService.DetectDecorationFiles(
-                    exportDir, _mystery.ProgressionEventId, _mystery.Name,
+                    exportDir, _mystery.ProgressionEventId, _mystery.WikiImageName,
                     _mystery.MysteryType == MysteryType.Pet, _mystery));
 
             pnlLoading.Visibility = Visibility.Collapsed;
@@ -825,6 +828,12 @@ public partial class MysteryDecorationUploadDialog : Wpf.Ui.Controls.FluentWindo
                     f.ExistsOnWiki = existMap.GetValueOrDefault($"File:{f.WikiFilename}", false);
             }
             BuildFileList();
+
+            // Update mystery image count in cache
+            _mystery.WikiStatus.ImagesExistOnWiki = _detectedFiles
+                .Count(f => f.Category != "EventItem" && f.ExistsOnWiki == true);
+            MysteryWikiService.UpdateSingleMysteryCache(_mystery);
+            OnStatusChanged?.Invoke();
         }
 
         var parts = new List<string>();

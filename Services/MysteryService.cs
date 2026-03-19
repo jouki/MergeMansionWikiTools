@@ -44,13 +44,17 @@ public class MysteryService
             if (!string.IsNullOrEmpty(jsonName))
                 mystery.Name = jsonName;
 
-            // Schedule.Start — nested inside ActivableParams
+            // Schedule.Start + Duration — nested inside ActivableParams
             if (prog.TryGetProperty("ActivableParams", out var activable)
                 && activable.TryGetProperty("Schedule", out var sched))
             {
                 var startStr = GetString(sched, "Start");
                 if (!string.IsNullOrEmpty(startStr) && DateTime.TryParse(startStr, out var dt))
                     mystery.StartDate = dt;
+
+                var durStr = GetString(sched, "Duration");
+                if (!string.IsNullOrEmpty(durStr))
+                    mystery.Duration = ParseDuration(durStr);
             }
 
             // Event item — plain number field "EventItem"
@@ -468,5 +472,26 @@ public class MysteryService
         if (el.TryGetProperty(prop, out var val) && val.ValueKind == JsonValueKind.Number)
             return val.GetInt64();
         return def;
+    }
+
+    /// <summary>
+    /// Parses a duration period string (e.g. "21d 0h 0min 0s" or "32d 1h 0min 0s")
+    /// and returns a TimeSpan preserving full precision for calendar-day computation.
+    /// </summary>
+    private static TimeSpan? ParseDuration(string durStr)
+    {
+        int days = 0, hours = 0, minutes = 0;
+
+        var dayMatch = System.Text.RegularExpressions.Regex.Match(durStr, @"(\d+)d\b");
+        if (dayMatch.Success) days = int.Parse(dayMatch.Groups[1].Value);
+
+        var hourMatch = System.Text.RegularExpressions.Regex.Match(durStr, @"(\d+)h\b");
+        if (hourMatch.Success) hours = int.Parse(hourMatch.Groups[1].Value);
+
+        var minMatch = System.Text.RegularExpressions.Regex.Match(durStr, @"(\d+)min\b");
+        if (minMatch.Success) minutes = int.Parse(minMatch.Groups[1].Value);
+
+        var ts = new TimeSpan(days, hours, minutes, 0);
+        return ts > TimeSpan.Zero ? ts : null;
     }
 }

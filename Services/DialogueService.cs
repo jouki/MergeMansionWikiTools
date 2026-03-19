@@ -73,7 +73,7 @@ public class DialogueService
     /// Standard mystery: Intro, LastCollectibleItemDiscovered, Decoration_Slot1-5, AllRewardsCompleted.
     /// Pet mystery: Intro, TA1 (pet), TA2-TA3 (decorations), LastCollectibleItemDiscovered, AllRewardsCompleted.
     /// </summary>
-    public List<DialogueGroup> GetMysteryDialogues(string progressionEventId, MysteryType mysteryType, string? petName)
+    public List<DialogueGroup> GetMysteryDialogues(string progressionEventId, MysteryType mysteryType, string? petName, int decoCount = 0)
     {
         if (_dialoguesByGroup == null)
             return new List<DialogueGroup>();
@@ -81,13 +81,13 @@ public class DialogueService
         // Set pet display name for "Pet" speaker replacement
         _currentPetDisplayName = petName;
 
-        var prefix = progressionEventId;
+        var prefix = ResolvePrefix(progressionEventId);
         var groups = new List<DialogueGroup>();
 
         if (mysteryType == MysteryType.Pet)
             BuildPetGroups(prefix, petName ?? "Pet", groups);
         else
-            BuildStandardGroups(prefix, groups);
+            BuildStandardGroups(prefix, groups, decoCount);
 
         return groups;
     }
@@ -98,20 +98,67 @@ public class DialogueService
     public bool HasDialogues(string progressionEventId)
     {
         if (_dialoguesByGroup == null) return false;
+        var prefix = ResolvePrefix(progressionEventId);
         return _dialoguesByGroup.Keys.Any(k =>
-            k.StartsWith(progressionEventId, StringComparison.OrdinalIgnoreCase));
+            k.StartsWith(prefix, StringComparison.OrdinalIgnoreCase));
+    }
+
+    /// <summary>
+    /// Resolves the actual dialogue prefix for a progressionEventId.
+    /// Handles alt prefix mapping for pet mysteries where dialogue keys
+    /// may use a different prefix (e.g., SP_BunnyPet2025 → SP_PigBirthday2025).
+    /// </summary>
+    private string ResolvePrefix(string progressionEventId)
+    {
+        if (_dialoguesByGroup == null) return progressionEventId;
+
+        // Direct match — most common case
+        if (_dialoguesByGroup.Keys.Any(k =>
+            k.StartsWith(progressionEventId, StringComparison.OrdinalIgnoreCase)))
+            return progressionEventId;
+
+        // Alt prefix: extract keyword from event ID and search keys
+        // SP_BunnyPet2025 → keyword "Bunny"
+        var stripped = progressionEventId.Replace("SP_", "", StringComparison.OrdinalIgnoreCase);
+        stripped = Regex.Replace(stripped, @"Pet\d*$", ""); // remove "Pet2025"
+        stripped = Regex.Replace(stripped, @"\d+$", ""); // remove trailing year
+
+        if (string.IsNullOrEmpty(stripped)) return progressionEventId;
+
+        // Find an SP_ key that contains this keyword and has _Intro suffix
+        var altKey = _dialoguesByGroup.Keys
+            .FirstOrDefault(k => k.StartsWith("SP_", StringComparison.OrdinalIgnoreCase)
+                && k.Contains(stripped, StringComparison.OrdinalIgnoreCase)
+                && k.Contains("_Intro", StringComparison.OrdinalIgnoreCase));
+
+        if (altKey != null)
+        {
+            // Extract prefix: everything before "_Intro"
+            var introIdx = altKey.IndexOf("_Intro", StringComparison.OrdinalIgnoreCase);
+            if (introIdx > 0)
+            {
+                var altPrefix = altKey[..introIdx];
+                AppLogger.Info($"DialogueService: alt prefix '{altPrefix}' for '{progressionEventId}'");
+                return altPrefix;
+            }
+        }
+
+        return progressionEventId;
     }
 
     // ── Standard mystery tab mapping ────────────────────────────
 
-    private void BuildStandardGroups(string prefix, List<DialogueGroup> groups)
+    private void BuildStandardGroups(string prefix, List<DialogueGroup> groups, int decoCount)
     {
         TryAddGroupFuzzy(groups, prefix, "Intro", "Event Intro");
         TryAddGroupFuzzy(groups, prefix, "LastCollectibleItemDiscovered", "Getting Event Item L4");
 
+        // Decoration levels: fill from dialogue keys, pad remaining as empty placeholders
         var decoSlots = FindDecorationSlots(prefix);
         for (int i = 0; i < decoSlots.Count; i++)
             TryAddGroupFuzzy(groups, prefix, decoSlots[i], $"Decoration Level {i + 1}");
+        for (int i = decoSlots.Count; i < decoCount; i++)
+            AddEmptyGroup(groups, $"Decoration Level {i + 1}");
 
         TryAddGroupFuzzy(groups, prefix, "AllRewardsCompleted", "Event Outro");
     }
@@ -122,12 +169,36 @@ public class DialogueService
     {
         TryAddGroupFuzzy(groups, prefix, "Intro", "Event Intro");
         TryAddGroupFuzzy(groups, prefix, "LastCollectibleItemDiscovered", "Getting Event Item L4");
-        TryAddGroupFuzzy(groups, prefix, "TA1", $"Getting {petName}");
-        TryAddGroupFuzzy(groups, prefix, "TA2", "Decoration Level 1");
-        TryAddGroupFuzzy(groups, prefix, "TA3", "Decoration Level 2");
 
-        // Event Outro
+        // TA mapping depends on how many TAs exist:
+        // 3 TAs (newer pets): TA1=Getting Pet, TA2=Deco1, TA3=Deco2
+        // 2 TAs (older pets, no TA3): TA1=Deco1, TA2=Deco2
+        //   (3 oldest pets have no "Getting Pet" dialogue in game data — wiki content was added manually)
+        bool hasTA3 = HasGroupFuzzy(prefix, "TA3");
+        if (hasTA3)
+        {
+            TryAddGroupFuzzy(groups, prefix, "TA1", $"Getting {petName}");
+            TryAddGroupFuzzy(groups, prefix, "TA2", "Decoration Level 1");
+            TryAddGroupFuzzy(groups, prefix, "TA3", "Decoration Level 2");
+        }
+        else
+        {
+            // Older pets: no "Getting Pet" dialogue in game data — add empty header for merge from wiki
+            AddEmptyGroup(groups, $"Getting {petName}");
+            TryAddGroupFuzzy(groups, prefix, "TA1", "Decoration Level 1");
+            TryAddGroupFuzzy(groups, prefix, "TA2", "Decoration Level 2");
+        }
+
         TryAddGroupFuzzy(groups, prefix, "AllRewardsCompleted", "Event Outro");
+    }
+
+    /// <summary>Checks if a dialogue group exists for the given prefix + suffix.</summary>
+    private bool HasGroupFuzzy(string prefix, string suffix)
+    {
+        if (_dialoguesByGroup == null) return false;
+        var key = $"{prefix}_{suffix}";
+        var keyD = $"{prefix}_{suffix}_Dialogue";
+        return _dialoguesByGroup.ContainsKey(key) || _dialoguesByGroup.ContainsKey(keyD);
     }
 
     /// <summary>
@@ -153,6 +224,7 @@ public class DialogueService
     /// <summary>
     /// Tries to find a dialogue group with fuzzy matching:
     /// tries "{prefix}_{suffix}" first, then "{prefix}_{suffix}_Dialogue".
+    /// Always adds the tab header even if no dialogues are found (empty placeholder for merge from wiki).
     /// </summary>
     private void TryAddGroupFuzzy(List<DialogueGroup> groups, string prefix, string suffix, string tabName)
     {
@@ -166,13 +238,24 @@ public class DialogueService
 
         // Try with _Dialogue suffix
         var keyWithDialogue = $"{prefix}_{suffix}_Dialogue";
-        TryAddGroup(groups, keyWithDialogue, tabName);
+        if (_dialoguesByGroup != null && _dialoguesByGroup.ContainsKey(keyWithDialogue))
+        {
+            TryAddGroup(groups, keyWithDialogue, tabName);
+            return;
+        }
+
+        // No dialogue found — still add empty tab header
+        AddEmptyGroup(groups, tabName);
     }
 
     private void TryAddGroup(List<DialogueGroup> groups, string groupKey, string tabName)
     {
         if (_dialoguesByGroup == null) return;
-        if (!_dialoguesByGroup.TryGetValue(groupKey, out var entries)) return;
+        if (!_dialoguesByGroup.TryGetValue(groupKey, out var entries))
+        {
+            AddEmptyGroup(groups, tabName);
+            return;
+        }
 
         var lines = new List<DialogueLine>();
         foreach (var e in entries)
@@ -192,9 +275,11 @@ public class DialogueService
             lines.Add(new DialogueLine { Speaker = speaker, Text = e.Text });
         }
 
-        if (lines.Count > 0)
-            groups.Add(new DialogueGroup { TabName = tabName, Lines = lines });
+        groups.Add(new DialogueGroup { TabName = tabName, Lines = lines });
     }
+
+    private static void AddEmptyGroup(List<DialogueGroup> groups, string tabName)
+        => groups.Add(new DialogueGroup { TabName = tabName, Lines = new List<DialogueLine>() });
 
     // ── Wiki formatting ─────────────────────────────────────────
 
@@ -214,9 +299,12 @@ public class DialogueService
             for (int j = 0; j < group.Lines.Count; j++)
             {
                 var line = group.Lines[j];
-                // Normalize curly/typographic apostrophes to ASCII straight quote
-                var text = line.Text.Replace('\u2019', '\'').Replace('\u2018', '\'')
-                    .Replace('\u201C', '"').Replace('\u201D', '"');
+                // Normalize curly/typographic characters to ASCII
+                var text = line.Text
+                    .Replace('\u2019', '\'').Replace('\u2018', '\'')  // curly apostrophes
+                    .Replace('\u201C', '"').Replace('\u201D', '"')    // curly quotes
+                    .Replace("\u2026", "...")                          // ellipsis → three dots
+                    .Replace("\u2013", "-").Replace("\u2014", "-");   // en/em dash → hyphen
                 sb.AppendLine($"'''{line.Speaker}''': {text}");
 
                 // Empty line between replies (but not after the last one)

@@ -9,7 +9,7 @@
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <SelfContained>true</SelfContained>
     <ApplicationIcon>Assets\AppLogo.ico</ApplicationIcon>
-    <DefaultItemExcludes>$(DefaultItemExcludes);External\**</DefaultItemExcludes>
+    <DefaultItemExcludes>$(DefaultItemExcludes);External\**;Tests\**</DefaultItemExcludes>
   </PropertyGroup>
 
   <ItemGroup>

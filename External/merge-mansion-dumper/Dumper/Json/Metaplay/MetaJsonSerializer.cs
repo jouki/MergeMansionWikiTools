@@ -92,6 +92,10 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
 
         private void SerializePeriod(JsonWriter writer, MetaCalendarPeriod period, JsonSerializer serializer)
         {
+            // Normalize: convert overflow hours to days (e.g. 769h → 32d 1h)
+            var totalDays = period.Days + period.Hours / 24;
+            var remainingHours = period.Hours % 24;
+
             var parts = new List<string>();
             var trailingZeroes = false;
 
@@ -105,14 +109,14 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 parts.Add($"{period.Months}mo");
                 trailingZeroes = true;
             }
-            if (period.Days > 0 || trailingZeroes)
+            if (totalDays > 0 || trailingZeroes)
             {
-                parts.Add($"{period.Days}d");
+                parts.Add($"{totalDays}d");
                 trailingZeroes = true;
             }
-            if (period.Hours > 0 || trailingZeroes)
+            if (remainingHours > 0 || trailingZeroes)
             {
-                parts.Add($"{period.Hours}h");
+                parts.Add($"{remainingHours}h");
                 trailingZeroes = true;
             }
             if (period.Minutes > 0 || trailingZeroes)

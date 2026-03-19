@@ -16,6 +16,8 @@ public partial class SettingsPage : UserControl
     private int _currentTabIndex;
     private List<ApkDownloadService.ApkVersionInfo>? _apkVersions;
     private string? _lastApkDir;
+    private CancellationTokenSource? _tinifyCheck1Cts;
+    private CancellationTokenSource? _tinifyCheck2Cts;
 
     public SettingsPage(MainWindow main)
     {
@@ -69,6 +71,12 @@ public partial class SettingsPage : UserControl
 
         // APK version list (fire-and-forget, non-blocking)
         _ = LoadApkVersionsAsync();
+
+        // Check TinyPNG usage on load
+        if (!string.IsNullOrWhiteSpace(_main.Settings.TinifyApiKey))
+            TriggerTinifyCheck(1, _main.Settings.TinifyApiKey, delayMs: 0);
+        if (!string.IsNullOrWhiteSpace(_main.Settings.TinifyApiKey2))
+            TriggerTinifyCheck(2, _main.Settings.TinifyApiKey2, delayMs: 0);
     }
 
     /// <summary>
@@ -348,6 +356,7 @@ public partial class SettingsPage : UserControl
         _main.Settings.TinifyApiKey = txtTinifyKey.Text.Trim();
         _main.SaveSettings();
         _main.RaiseTinifyApiKeyChanged();
+        TriggerTinifyCheck(1, _main.Settings.TinifyApiKey);
     }
 
     private void TinifyKey2_TextChanged(object sender, TextChangedEventArgs e)
@@ -355,7 +364,97 @@ public partial class SettingsPage : UserControl
         _main.Settings.TinifyApiKey2 = txtTinifyKey2.Text.Trim();
         _main.SaveSettings();
         _main.RaiseTinifyApiKeyChanged();
+        TriggerTinifyCheck(2, _main.Settings.TinifyApiKey2);
     }
+
+    // ── TinyPNG usage bar ──
+
+    private void TriggerTinifyCheck(int idx, string key, int delayMs = 800)
+    {
+        if (idx == 1)
+        {
+            _tinifyCheck1Cts?.Cancel();
+            if (string.IsNullOrWhiteSpace(key)) { HideTinifyUsage(1); return; }
+            _tinifyCheck1Cts = StartTinifyCheck(1, key, delayMs);
+        }
+        else
+        {
+            _tinifyCheck2Cts?.Cancel();
+            if (string.IsNullOrWhiteSpace(key)) { HideTinifyUsage(2); return; }
+            _tinifyCheck2Cts = StartTinifyCheck(2, key, delayMs);
+        }
+    }
+
+    private CancellationTokenSource StartTinifyCheck(int idx, string key, int delayMs)
+    {
+        ShowTinifyLoading(idx);
+        var cts = new CancellationTokenSource();
+        var token = cts.Token;
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                if (delayMs > 0) await Task.Delay(delayMs, token);
+                await CheckTinifyUsageAsync(idx, key, token);
+            }
+            catch (OperationCanceledException) { }
+        });
+        return cts;
+    }
+
+    private async Task CheckTinifyUsageAsync(int idx, string key, CancellationToken token)
+    {
+        var (count, error) = await TinifyChecker.CheckAsync(key, token);
+        if (error != null)
+            Dispatcher.Invoke(() => ShowTinifyError(idx, error));
+        else
+            Dispatcher.Invoke(() => ShowTinifyUsage(idx, count));
+    }
+
+    private void ShowTinifyLoading(int idx)
+    {
+        var (grid, bar, status, count) = GetTinifyControls(idx);
+        grid.Visibility = Visibility.Visible;
+        status.Text = "Checking...";
+        status.ClearValue(TextBlock.ForegroundProperty);
+        count.Text = "";
+        bar.IsIndeterminate = true;
+    }
+
+    private void ShowTinifyUsage(int idx, int used)
+    {
+        var (grid, bar, status, count) = GetTinifyControls(idx);
+        const int limit = 500;
+        grid.Visibility = Visibility.Visible;
+        status.Text = "Compressions this month:";
+        status.ClearValue(TextBlock.ForegroundProperty);
+        count.Text = $"{used} / {limit}";
+        bar.IsIndeterminate = false;
+        bar.Value = used;
+        bar.Foreground = TinifyChecker.CreateUsageBrush(used);
+    }
+
+    private void ShowTinifyError(int idx, string message)
+    {
+        var (grid, bar, status, count) = GetTinifyControls(idx);
+        grid.Visibility = Visibility.Visible;
+        status.Text = message;
+        status.Foreground = new SolidColorBrush(Colors.OrangeRed);
+        count.Text = "";
+        bar.IsIndeterminate = false;
+        bar.Value = 0;
+    }
+
+    private void HideTinifyUsage(int idx)
+    {
+        var (grid, _, _, _) = GetTinifyControls(idx);
+        grid.Visibility = Visibility.Collapsed;
+    }
+
+    private (Grid grid, ProgressBar bar, TextBlock status, TextBlock count) GetTinifyControls(int idx)
+        => idx == 1
+            ? (gridTinify1Usage, barTinify1, txtTinify1Status, txtTinify1Count)
+            : (gridTinify2Usage, barTinify2, txtTinify2Status, txtTinify2Count);
 
 
 
