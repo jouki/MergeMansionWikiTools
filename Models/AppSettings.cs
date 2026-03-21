@@ -4,9 +4,9 @@ namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.18.4";
+    public const string Version = "v0.18.5";
 
-    // Full version with build timestamp, e.g. "v0.18.4 (build 20260321-1200)"
+    // Full version with build timestamp, e.g. "v0.18.5 (build 20260321-1200)"
     public static string Build { get; } = GetBuild();
     private static string GetBuild()
     {

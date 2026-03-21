@@ -441,6 +441,9 @@ internal class FlowchartService3
 
         AssignYPositions(nodes, layers);
 
+        // Column compaction — merge non-overlapping columns to reduce horizontal width
+        CompactColumns(nodes);
+
         return layers;
     }
 
@@ -1042,6 +1045,110 @@ internal class FlowchartService3
 
             y += maxH + LayerGap;
         }
+    }
+
+    // ── Column compaction ──────────────────────────────────────────────
+
+    /// <summary>
+    /// Post-processing: merges columns whose Y ranges don't overlap into the same
+    /// X position, reducing total flowchart width. Uses greedy first-fit bin packing.
+    /// </summary>
+    private static void CompactColumns(Dictionary<string, FNode> nodes)
+    {
+        const double yBuffer = LayerGap / 2; // vertical buffer between merged ranges
+
+        // Step 1: Group real nodes by X position
+        var columnGroups = new Dictionary<double, List<FNode>>();
+        foreach (var n in nodes.Values)
+        {
+            if (n.IsDummy) continue;
+            double key = Math.Round(n.X, 1);
+            if (!columnGroups.TryGetValue(key, out var list))
+            {
+                list = new List<FNode>();
+                columnGroups[key] = list;
+            }
+            list.Add(n);
+        }
+
+        // Step 2: Build column info with Y intervals
+        var columns = new List<(double origX, double yMin, double yMax, List<FNode> nodes)>();
+        foreach (var (xKey, nodeList) in columnGroups)
+        {
+            double minY = nodeList.Min(n => n.Y) - yBuffer;
+            double maxY = nodeList.Max(n => n.Y + n.Height) + yBuffer;
+            columns.Add((xKey, minY, maxY, nodeList));
+        }
+
+        // Step 3: Sort by original X (left to right)
+        columns.Sort((a, b) => a.origX.CompareTo(b.origX));
+
+        // Step 4: Greedy first-fit packing into slots
+        var slots = new List<(double x, List<(double min, double max)> intervals)>();
+
+        foreach (var col in columns)
+        {
+            int bestSlot = -1;
+            for (int si = 0; si < slots.Count; si++)
+            {
+                bool overlaps = false;
+                foreach (var (min, max) in slots[si].intervals)
+                {
+                    if (col.yMin < max && col.yMax > min) { overlaps = true; break; }
+                }
+                if (!overlaps) { bestSlot = si; break; }
+            }
+
+            double assignedX;
+            if (bestSlot >= 0)
+            {
+                slots[bestSlot].intervals.Add((col.yMin, col.yMax));
+                assignedX = slots[bestSlot].x;
+            }
+            else
+            {
+                double newX = slots.Count == 0 ? 0 : slots.Max(s => s.x) + MaxNodeW + NodeGapX;
+                slots.Add((newX, new List<(double, double)> { (col.yMin, col.yMax) }));
+                assignedX = newX;
+            }
+
+            // Apply to real nodes
+            foreach (var n in col.nodes)
+                n.X = assignedX;
+        }
+
+        // Step 5: Update dummy nodes — map old X → new X from nearest real column
+        var xMapping = new Dictionary<double, double>();
+        foreach (var col in columns)
+        {
+            var newX = col.nodes[0].X;
+            xMapping.TryAdd(Math.Round(col.origX, 1), newX);
+        }
+
+        foreach (var n in nodes.Values)
+        {
+            if (!n.IsDummy) continue;
+            double roundedX = Math.Round(n.X, 1);
+            if (xMapping.TryGetValue(roundedX, out double newX))
+            {
+                n.X = newX;
+            }
+            else
+            {
+                // Find nearest mapped X
+                double closestKey = 0;
+                double closestDist = double.MaxValue;
+                foreach (var key in xMapping.Keys)
+                {
+                    double dist = Math.Abs(key - roundedX);
+                    if (dist < closestDist) { closestDist = dist; closestKey = key; }
+                }
+                if (closestDist < double.MaxValue)
+                    n.X += xMapping[closestKey] - closestKey;
+            }
+        }
+
+        AppLogger.Info($"[FLOWCHART-V3] CompactColumns: {columns.Count} columns → {slots.Count} slots");
     }
 
     // ── SVG rendering ────────────────────────────────────────────────
