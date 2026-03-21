@@ -45,6 +45,8 @@ internal class OptimiserImage
 
     // ── Per-source detection objects ──
     public List<(Rectangle Full, Rectangle Main)>? AlgorithmObjects { get; set; }
+    /// <summary>Flood-fill results BEFORE MergeColumnStacks (more objects, no column merging).</summary>
+    public List<(Rectangle Full, Rectangle Main)>? UnmergedAlgorithmObjects { get; set; }
     public List<(Rectangle Full, Rectangle Main)>? AtlasObjects { get; set; }
     public DetectionSource DefaultDetectionSource { get; set; } = DetectionSource.Algorithm;
     /// <summary>Per-object source override (indexed by ordered position). Null = use default for all.</summary>
@@ -202,7 +204,8 @@ public partial class ImageOptimiserPage : UserControl
             try
             {
                 using var img = Image.Load<Rgba32>(path);
-                oi.RawDetectedObjects = DetectObjects(img);
+                oi.UnmergedAlgorithmObjects = DetectObjectsRaw(img);
+                oi.RawDetectedObjects = MergeColumnStacks(oi.UnmergedAlgorithmObjects);
                 oi.AlgorithmObjects = oi.RawDetectedObjects;
                 oi.DetectedObjects = oi.RawDetectedObjects;
                 var ordered = OrderObjects(oi.DetectedObjects);
@@ -810,13 +813,25 @@ public partial class ImageOptimiserPage : UserControl
                 .Split(new[] { ' ', ',', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
             string[]? labels = suffixes.Length > 0 ? suffixes : null;
 
-            // Real-time merge: adapt DetectedObjects to suffix count
+            // Real-time merge/expand: adapt DetectedObjects to suffix count
             if (suffixes.Length > 0)
             {
                 foreach (var oi in activeImages)
                 {
                     if (oi.RawDetectedObjects.Count > suffixes.Length)
                         oi.DetectedObjects = MergeToExpectedCount(oi.RawDetectedObjects, suffixes.Length);
+                    else if (suffixes.Length > oi.RawDetectedObjects.Count
+                             && oi.UnmergedAlgorithmObjects != null
+                             && oi.UnmergedAlgorithmObjects.Count > oi.RawDetectedObjects.Count)
+                    {
+                        // User provided more indices than merged flood-fill detected —
+                        // apply per-row merge: merges fragments within rows (pencil + book)
+                        // but prevents cross-row merging that collapsed separate items.
+                        var perRowMerged = MergeColumnStacksPerRow(oi.UnmergedAlgorithmObjects);
+                        if (perRowMerged.Count > suffixes.Length)
+                            perRowMerged = MergeToExpectedCount(perRowMerged, suffixes.Length);
+                        oi.DetectedObjects = perRowMerged;
+                    }
                     else
                         oi.DetectedObjects = oi.RawDetectedObjects;
                 }
@@ -1669,8 +1684,13 @@ public partial class ImageOptimiserPage : UserControl
     {
         if (e.Key == Key.Enter && Keyboard.Modifiers == ModifierKeys.None)
         {
-            e.Handled = true;
-            ProcessSplit();
+            // In single-line mode, Enter triggers split.
+            // In multi-line mode (after Map Levels or manual editing), Enter adds a new line.
+            if (!inputIndices.Text.Contains('\n'))
+            {
+                e.Handled = true;
+                ProcessSplit();
+            }
         }
     }
 
@@ -1899,6 +1919,21 @@ public partial class ImageOptimiserPage : UserControl
             {
                 indices = deterministicResult;
                 deterministic = true;
+
+                // Hybrid: fill unmatched sprites with heuristic matching
+                if (indices.Any(l => l == 0))
+                {
+                    var heuristicIndices = SpriteMetadataService.PredictIndices(textureSprites, chainItems);
+                    var hybridUsed = new HashSet<int>(indices.Where(l => l > 0));
+                    for (int i = 0; i < indices.Length; i++)
+                    {
+                        if (indices[i] == 0 && heuristicIndices[i] > 0 && !hybridUsed.Contains(heuristicIndices[i]))
+                        {
+                            indices[i] = heuristicIndices[i];
+                            hybridUsed.Add(heuristicIndices[i]);
+                        }
+                    }
+                }
             }
             else
             {
@@ -1962,84 +1997,95 @@ public partial class ImageOptimiserPage : UserControl
             return (Full: rect, Main: rect);
         }).ToList();
         activeImg.AtlasObjects = spriteObjects;
-        // Keep FloodFill (Algorithm) as the default detection/crop method.
-        // Atlas objects are stored so the user can switch to atlas view via the toggle,
-        // but detection overlay and crop boundaries use FloodFill by default.
-        // If FloodFill hasn't run yet (no detected objects), fall back to atlas positions.
+        // Store atlas for detection source toggle; flood-fill remains default for crop.
         if (activeImg.DetectedObjects.Count == 0)
         {
             activeImg.RawDetectedObjects = spriteObjects;
             activeImg.DetectedObjects = spriteObjects;
         }
 
-        var orderedObjects = OrderObjects(
-            activeImg.DetectedObjects.Count > 0 ? activeImg.DetectedObjects : spriteObjects);
-
-        // Step 4: Map each sprite-based object to its level via the indices array.
-        // orderedSprites (Unity Y desc, X asc) and orderedObjects (image Y asc, X asc)
-        // have equivalent ordering since imageY = imageHeight - unityY.
-        // Match by position to handle any rounding differences in row detection.
+        // Step 4: Map atlas sprites to levels, deduplicate, write indices.
+        // Iterate over atlas sprites (exact positions from game data) for complete coverage.
+        // Deduplicate: skip sprites whose level was already output (handles textures
+        // where each item has multiple sprites, e.g. front+back views).
+        // Flood-fill remains the detection/crop method — overlay adapts via merge/expand.
+        var orderedAtlas = OrderObjects(spriteObjects);
         var parts = new List<string>();
-        var rotations = new float[orderedObjects.Count];
+        var rotationsList = new List<float>();
+        var keptPositions = new List<(Rectangle Full, Rectangle Main)>();
         int matched = 0;
+        var usedLevels = new HashSet<int>();
         var usedSpriteIndices = new HashSet<int>();
 
-        for (int objIdx = 0; objIdx < orderedObjects.Count; objIdx++)
+        for (int objIdx = 0; objIdx < orderedAtlas.Count; objIdx++)
         {
-            var obj = orderedObjects[objIdx];
+            var obj = orderedAtlas[objIdx];
             var objCenterX = obj.Full.Left + obj.Full.Width / 2.0;
             var objCenterY = obj.Full.Top + obj.Full.Height / 2.0;
 
+            // Find nearest unmatched sprite
             int bestIdx = -1;
             double bestDist = double.MaxValue;
-
             for (int i = 0; i < orderedSprites.Count; i++)
             {
                 if (usedSpriteIndices.Contains(i)) continue;
                 var s = orderedSprites[i];
-
-                var spriteCenterX = s.RectX + s.RectWidth / 2.0;
-                var spriteCenterY = imageHeight - s.RectY - s.RectHeight / 2.0;
-
-                var dx = objCenterX - spriteCenterX;
-                var dy = objCenterY - spriteCenterY;
+                var dx = objCenterX - (s.RectX + s.RectWidth / 2.0);
+                var dy = objCenterY - (imageHeight - s.RectY - s.RectHeight / 2.0);
                 var dist = dx * dx + dy * dy;
-
-                if (dist < bestDist)
-                {
-                    bestDist = dist;
-                    bestIdx = i;
-                }
+                if (dist < bestDist) { bestDist = dist; bestIdx = i; }
             }
 
-            if (bestIdx >= 0)
-            {
-                usedSpriteIndices.Add(bestIdx);
-                if (indices[bestIdx] > 0)
-                {
-                    parts.Add(indices[bestIdx].ToString());
-                    matched++;
-                }
-                else
-                {
-                    parts.Add("-");
-                }
+            if (bestIdx < 0) continue;
+            usedSpriteIndices.Add(bestIdx);
 
-                // If sprite was rotated in atlas (rotate: true), it needs 90° CW correction when split
-                if (orderedSprites[bestIdx].Rotated)
-                    rotations[objIdx] = 90f;
+            int level = indices[bestIdx];
+            if (level > 0 && usedLevels.Contains(level))
+                continue; // Skip duplicate — same item, different sprite (e.g. front+back)
+
+            if (level > 0)
+            {
+                usedLevels.Add(level);
+                parts.Add(level.ToString());
+                matched++;
             }
             else
             {
+                // Unmatched sprite — check if it overlaps with an already-kept sprite.
+                // If so, it's a secondary view (back/shadow) of the same item → skip.
+                bool overlapsKept = false;
+                foreach (var kept in keptPositions)
+                {
+                    int oL = Math.Max(obj.Full.Left, kept.Full.Left);
+                    int oR = Math.Min(obj.Full.Left + obj.Full.Width, kept.Full.Left + kept.Full.Width);
+                    int oT = Math.Max(obj.Full.Top, kept.Full.Top);
+                    int oB = Math.Min(obj.Full.Top + obj.Full.Height, kept.Full.Top + kept.Full.Height);
+
+                    if (oR > oL && oB > oT)
+                    {
+                        int overlapArea = (oR - oL) * (oB - oT);
+                        int spriteArea = obj.Full.Width * obj.Full.Height;
+                        if (spriteArea > 0 && (double)overlapArea / spriteArea > 0.3)
+                        {
+                            overlapsKept = true;
+                            break;
+                        }
+                    }
+                }
+                if (overlapsKept) continue;
+
                 parts.Add("-");
             }
+
+            rotationsList.Add(orderedSprites[bestIdx].Rotated ? 90f : 0f);
+            keptPositions.Add(obj);
         }
 
         // Store rotation data for use during split
-        activeImg.ObjectRotations = rotations;
+        activeImg.ObjectRotations = rotationsList.ToArray();
 
         // Format indices with row breaks matching visual layout (max 4 rows)
-        var objectRows = GroupIntoRows(orderedObjects);
+        var objectRows = keptPositions.Count > 0 ? GroupIntoRows(keptPositions) : new List<int> { parts.Count };
         if (objectRows.Count >= 2 && objectRows.Count <= 4)
         {
             var sb = new System.Text.StringBuilder();
@@ -2063,11 +2109,12 @@ public partial class ImageOptimiserPage : UserControl
 
         var chainInfo = _activeChain != null ? $" for chain '{_activeChain.ConfigKey}'" : "";
         var method = deterministic ? "skin mapping" : "heuristic";
-        infoBar.Message = $"Prediction ({method}): {matched}/{orderedObjects.Count} matched ({textureSprites.Count} sprites in atlas).";
-        infoBar.Severity = matched == orderedObjects.Count ? InfoBarSeverity.Success : InfoBarSeverity.Warning;
+        int dedupTotal = parts.Count;
+        infoBar.Message = $"Prediction ({method}): {matched}/{dedupTotal} matched ({textureSprites.Count} sprites in atlas).";
+        infoBar.Severity = matched == dedupTotal ? InfoBarSeverity.Success : InfoBarSeverity.Warning;
         infoBar.IsOpen = true;
 
-        AppLogger.Info($"Prediction ({method}): {matched}/{orderedObjects.Count}{chainInfo}");
+        AppLogger.Info($"Prediction ({method}): {matched}/{dedupTotal}{chainInfo}");
     }
 
     /// <summary>
@@ -2228,7 +2275,9 @@ public partial class ImageOptimiserPage : UserControl
             try
             {
                 using var img = SixLabors.ImageSharp.Image.Load<Rgba32>(oi.FilePath);
-                var objects = DetectObjects(img);
+                var rawObjects = DetectObjectsRaw(img);
+                var objects = MergeColumnStacks(rawObjects);
+                oi.UnmergedAlgorithmObjects = rawObjects;
                 oi.AlgorithmObjects = objects;
                 oi.DefaultDetectionSource = DetectionSource.Algorithm;
                 oi.PerObjectDetectionSource = null;
@@ -3029,7 +3078,9 @@ public partial class ImageOptimiserPage : UserControl
                 try
                 {
                     using var img = Image.Load<Rgba32>(oi.FilePath);
-                    var objects = DetectObjects(img);
+                    var rawObjects = DetectObjectsRaw(img);
+                    var objects = MergeColumnStacks(rawObjects);
+                    oi.UnmergedAlgorithmObjects = rawObjects;
                     oi.AlgorithmObjects = objects;
                     oi.DefaultDetectionSource = DetectionSource.Algorithm;
                     oi.PerObjectDetectionSource = null;
@@ -3639,7 +3690,8 @@ public partial class ImageOptimiserPage : UserControl
     //  OBJECT DETECTION — Flood Fill + Smart Merge
     // ══════════════════════════════════════════════════════════════
 
-    private static List<(Rectangle Full, Rectangle Main)> DetectObjects(Image<Rgba32> img)
+    /// <summary>Raw flood-fill detection without column merge.</summary>
+    private static List<(Rectangle Full, Rectangle Main)> DetectObjectsRaw(Image<Rgba32> img)
     {
         if (img.Width < 130 && img.Height < 130)
             return new List<(Rectangle, Rectangle)> { (new Rectangle(0, 0, img.Width, img.Height), new Rectangle(0, 0, img.Width, img.Height)) };
@@ -3658,7 +3710,12 @@ public partial class ImageOptimiserPage : UserControl
                 }
             }
 
-        return MergeColumnStacks(list);
+        return list;
+    }
+
+    private static List<(Rectangle Full, Rectangle Main)> DetectObjects(Image<Rgba32> img)
+    {
+        return MergeColumnStacks(DetectObjectsRaw(img));
     }
 
     /// <summary>
@@ -3815,6 +3872,22 @@ public partial class ImageOptimiserPage : UserControl
         }
         rows.Add(currentRow);
         return rows;
+    }
+
+    /// <summary>
+    /// Applies MergeColumnStacks within each visual row independently.
+    /// This merges fragments within a row (e.g. pencil + book) but prevents
+    /// cross-row merging (bottom-row objects stay separate from top-row).
+    /// </summary>
+    private static List<(Rectangle Full, Rectangle Main)> MergeColumnStacksPerRow(
+        List<(Rectangle Full, Rectangle Main)> objects)
+    {
+        if (objects.Count <= 1) return objects;
+        var rows = SplitIntoObjectRows(objects);
+        var result = new List<(Rectangle Full, Rectangle Main)>();
+        foreach (var row in rows)
+            result.AddRange(MergeColumnStacks(row));
+        return result;
     }
 
     /// <summary>
