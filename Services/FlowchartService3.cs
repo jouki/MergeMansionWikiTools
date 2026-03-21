@@ -396,9 +396,49 @@ internal class FlowchartService3
 
         InsertDummyNodes(nodes, layers);
 
+        // Diagnostic: log layer assignment and graph structure for problem area
+        var diagRange = nodes.Values
+            .Where(nd => !nd.IsDummy && nd.DisplayIndex >= 78 && nd.DisplayIndex <= 95)
+            .OrderBy(nd => nd.DisplayIndex)
+            .ToList();
+        if (diagRange.Count > 0)
+        {
+            AppLogger.Info("[FLOWCHART-V3] === Layer assignment & graph structure (tasks 78-95) ===");
+            foreach (var nd in diagRange)
+            {
+                var realParents = nd.Parents.Where(pid => nodes.ContainsKey(pid) && !nodes[pid].IsDummy)
+                    .Select(pid => nodes[pid].DisplayIndex.ToString()).ToList();
+                var realChildren = nd.Children.Where(cid => nodes.ContainsKey(cid) && !nodes[cid].IsDummy)
+                    .Select(cid => nodes[cid].DisplayIndex.ToString()).ToList();
+                AppLogger.Info($"[FLOWCHART-V3]   Task {nd.DisplayIndex}: Layer={nd.Layer}, Parents=[{string.Join(",", realParents)}], Children=[{string.Join(",", realChildren)}]");
+            }
+        }
+
         MinimizeCrossings(nodes, layers, iterations: 12);
         AssignXPositions(nodes, layers);
         AlignLinearChains(nodes, layers);
+
+        // Diagnostic: FINAL positions after AlignLinearChains returns
+        if (diagRange.Count > 0)
+        {
+            AppLogger.Info("[FLOWCHART-V3] === FINAL X positions after AlignLinearChains ===");
+            foreach (var nd in diagRange)
+                AppLogger.Info($"[FLOWCHART-V3]   Task {nd.DisplayIndex}: X={nd.X:F0}");
+
+            // Also log layer 30 (where T81+T218 live) to see cascade effects
+            for (int li = 0; li < layers.Count; li++)
+            {
+                bool hasDiag = layers[li].Any(nid => nodes.TryGetValue(nid, out var nd2) && !nd2.IsDummy && nd2.DisplayIndex >= 80 && nd2.DisplayIndex <= 82);
+                if (hasDiag)
+                {
+                    var layerInfo = layers[li]
+                        .Where(nid => nodes.ContainsKey(nid) && !nodes[nid].IsDummy)
+                        .Select(nid => { var nd2 = nodes[nid]; return $"T{nd2.DisplayIndex}:X={nd2.X:F0}"; });
+                    AppLogger.Info($"[FLOWCHART-V3]   Layer {li} final: [{string.Join(", ", layerInfo)}]");
+                }
+            }
+        }
+
         AssignYPositions(nodes, layers);
 
         return layers;
@@ -682,14 +722,34 @@ internal class FlowchartService3
                 nodes[nid].X += offset;
         }
 
+        // Diagnostic: track positions of tasks in suspected problem range
+        var diagIds = nodes.Values
+            .Where(nd => !nd.IsDummy && nd.DisplayIndex >= 78 && nd.DisplayIndex <= 95)
+            .OrderBy(nd => nd.DisplayIndex)
+            .ToList();
+        if (diagIds.Count > 0)
+        {
+            AppLogger.Info("[FLOWCHART-V3] === ImproveLayerPositions start ===");
+            AppLogger.Info($"[FLOWCHART-V3] Pre-iteration: {string.Join(", ", diagIds.Select(d => $"T{d.DisplayIndex}:X={d.X:F0}"))}");
+        }
+
         for (int iter = 0; iter < 8; iter++)
         {
             for (int li = 1; li < layers.Count; li++)
                 ImproveLayerPositions(nodes, layers[li], useParents: true);
 
+            if (diagIds.Count > 0)
+                AppLogger.Info($"[FLOWCHART-V3] Iter {iter} top-down:  {string.Join(", ", diagIds.Select(d => $"T{d.DisplayIndex}:X={d.X:F0}"))}");
+
             for (int li = layers.Count - 2; li >= 0; li--)
                 ImproveLayerPositions(nodes, layers[li], useParents: false);
+
+            if (diagIds.Count > 0)
+                AppLogger.Info($"[FLOWCHART-V3] Iter {iter} bottom-up: {string.Join(", ", diagIds.Select(d => $"T{d.DisplayIndex}:X={d.X:F0}"))}");
         }
+
+        if (diagIds.Count > 0)
+            AppLogger.Info("[FLOWCHART-V3] === ImproveLayerPositions end ===");
     }
 
     private static void ImproveLayerPositions(
@@ -758,6 +818,11 @@ internal class FlowchartService3
             foreach (var nid in layers[li])
                 layerOf[nid] = li;
 
+        AppLogger.Info("[FLOWCHART-V3] === AlignLinearChains (FORCE mode) ===");
+
+        // Track nodes that have been force-aligned — protected from push-aside cascade
+        var forceAligned = new HashSet<string>(StringComparer.Ordinal);
+
         // Process all nodes top-down (topological order = parents before children)
         foreach (var node in TopologicalSort(nodes))
         {
@@ -773,29 +838,80 @@ internal class FlowchartService3
             var parent = realParents[0];
 
             // Only force if this node is the parent's FIRST real child (by DisplayIndex)
-            var firstChildId = parent.Children
+            var siblingIds = parent.Children
                 .Where(cid => nodes.TryGetValue(cid, out var c) && !c.IsDummy)
                 .Select(cid => nodes[cid])
                 .OrderBy(c => c.DisplayIndex)
-                .Select(c => c.Id)
-                .FirstOrDefault();
-            if (firstChildId != node.Id) continue;
+                .ToList();
+            var firstChildId = siblingIds.FirstOrDefault()?.Id;
+            if (firstChildId != node.Id)
+            {
+                // Log skipped nodes in diagnostic range or sharing layers 29-31
+                if (node.DisplayIndex >= 78 && node.DisplayIndex <= 95
+                    || (layerOf.TryGetValue(node.Id, out var skipLi) && skipLi >= 29 && skipLi <= 31))
+                    AppLogger.Info($"[FLOWCHART-V3]   Task {node.DisplayIndex}: SKIPPED — not first child of parent {parent.DisplayIndex} (first child={siblingIds.FirstOrDefault()?.DisplayIndex}, siblings=[{string.Join(",", siblingIds.Select(s => s.DisplayIndex))}])");
+                continue;
+            }
 
             // Target: center of parent
             double targetCenterX = parent.X + parent.Width / 2;
             double shift = targetCenterX - (node.X + node.Width / 2);
-            if (Math.Abs(shift) < 1) continue;
+            if (Math.Abs(shift) < 1)
+            {
+                forceAligned.Add(node.Id);
+                if (node.DisplayIndex >= 78 && node.DisplayIndex <= 95)
+                    AppLogger.Info($"[FLOWCHART-V3]   Task {node.DisplayIndex}: already aligned under parent {parent.DisplayIndex} (shift={shift:F1})");
+                continue;
+            }
 
             if (!layerOf.TryGetValue(node.Id, out int li)) continue;
             var layer = layers[li];
             int idx = layer.IndexOf(node.Id);
             if (idx < 0) continue;
 
-            // FORCE the X position — no "try", just do it
-            node.X += shift;
+            // Clamp shift to avoid displacing already force-aligned nodes
+            double clampedShift = ClampShiftForProtected(nodes, layer, idx, shift, forceAligned);
 
-            // Push overlapping neighbors aside (cascade both directions)
+            // Log the force alignment — log any node sharing a layer with T80-T82 (layers 29-31)
+            bool logThis = (node.DisplayIndex >= 78 && node.DisplayIndex <= 95) || (li >= 29 && li <= 31);
+            if (logThis)
+            {
+                var layerNeighbors = new List<string>();
+                for (int j = 0; j < layer.Count; j++)
+                {
+                    var ln = nodes[layer[j]];
+                    if (!ln.IsDummy)
+                        layerNeighbors.Add($"T{ln.DisplayIndex}:X={ln.X:F0}");
+                }
+                var clampNote = Math.Abs(clampedShift - shift) > 1 ? $" CLAMPED from {shift:F1}" : "";
+                AppLogger.Info($"[FLOWCHART-V3]   Task {node.DisplayIndex}: FORCE X {node.X:F0}→{node.X + clampedShift:F0} (shift={clampedShift:F1}{clampNote}, parent=T{parent.DisplayIndex}@X={parent.X:F0}, layer={li}, layerIdx={idx}, siblings=[{string.Join(",", siblingIds.Select(s => s.DisplayIndex))}])");
+                AppLogger.Info($"[FLOWCHART-V3]     Layer {li} before push: [{string.Join(", ", layerNeighbors)}]");
+            }
+
+            if (Math.Abs(clampedShift) < 1)
+            {
+                forceAligned.Add(node.Id);
+                continue;
+            }
+
+            // FORCE the X position with clamped shift
+            node.X += clampedShift;
+            forceAligned.Add(node.Id);
+
+            // Push overlapping neighbors aside (cascade)
             PushNeighborsAside(nodes, layer, idx);
+
+            if (logThis)
+            {
+                var layerAfter = new List<string>();
+                for (int j = 0; j < layer.Count; j++)
+                {
+                    var ln = nodes[layer[j]];
+                    if (!ln.IsDummy)
+                        layerAfter.Add($"T{ln.DisplayIndex}:X={ln.X:F0}");
+                }
+                AppLogger.Info($"[FLOWCHART-V3]     Layer {li} after push:  [{string.Join(", ", layerAfter)}]");
+            }
         }
     }
 
@@ -829,6 +945,78 @@ internal class FlowchartService3
             right.X = rightBound + NodeGapX;
             rightBound = right.X + right.Width;
         }
+    }
+
+    /// <summary>
+    /// Calculates how far a node at 'idx' can shift without displacing any protected node
+    /// in the cascade. Returns clamped shift value.
+    /// Strategy: find the nearest protected node in the cascade direction, then compute
+    /// the minimum distance needed from the protected node through all intermediate real nodes.
+    /// </summary>
+    private static double ClampShiftForProtected(
+        Dictionary<string, FNode> nodes, List<string> layer, int idx,
+        double desiredShift, HashSet<string> forceAligned)
+    {
+        var node = nodes[layer[idx]];
+
+        if (desiredShift < 0)
+        {
+            // Shifting left — find first protected node to the left (cascade direction)
+            int protectedIdx = -1;
+            for (int j = idx - 1; j >= 0; j--)
+            {
+                var left = nodes[layer[j]];
+                if (left.IsDummy) continue;
+                if (forceAligned.Contains(left.Id)) { protectedIdx = j; break; }
+            }
+
+            if (protectedIdx < 0) return desiredShift; // no protected node — shift freely
+
+            // Compute minimum X for our node: start from protected node's right edge,
+            // then add width+gap for each real intermediate node between protected and us
+            var pNode = nodes[layer[protectedIdx]];
+            double minX = pNode.X + pNode.Width + NodeGapX;
+            for (int k = protectedIdx + 1; k < idx; k++)
+            {
+                var mid = nodes[layer[k]];
+                if (mid.IsDummy) continue;
+                minX += mid.Width + NodeGapX;
+            }
+
+            // Clamp: our node can't go below minX
+            double clampedShift = Math.Max(desiredShift, minX - node.X);
+            return clampedShift;
+        }
+
+        if (desiredShift > 0)
+        {
+            // Shifting right — find first protected node to the right
+            int protectedIdx = -1;
+            for (int j = idx + 1; j < layer.Count; j++)
+            {
+                var left = nodes[layer[j]];
+                if (left.IsDummy) continue;
+                if (forceAligned.Contains(left.Id)) { protectedIdx = j; break; }
+            }
+
+            if (protectedIdx < 0) return desiredShift; // no protected node
+
+            // Compute maximum X: from protected node's left edge, subtract widths going back
+            var pNode = nodes[layer[protectedIdx]];
+            double maxRight = pNode.X - NodeGapX;
+            for (int k = protectedIdx - 1; k > idx; k--)
+            {
+                var mid = nodes[layer[k]];
+                if (mid.IsDummy) continue;
+                maxRight -= mid.Width + NodeGapX;
+            }
+            double maxX = maxRight - node.Width;
+
+            double clampedShift = Math.Min(desiredShift, maxX - node.X);
+            return clampedShift;
+        }
+
+        return desiredShift;
     }
 
     private static void AssignYPositions(Dictionary<string, FNode> nodes, List<List<string>> layers)
