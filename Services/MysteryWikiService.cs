@@ -3996,10 +3996,32 @@ public static class MysteryWikiService
 			}
 		}
 		List<string> list9 = new List<string>();
-		foreach (string item13 in new string[2] { progressionEventId, text3 }.Distinct())
+
+		// Priority 1: Deterministic — resolve texture filename via PoolTag from game data
+		if (mystery?.EventItemPoolTag is { Length: > 0 } poolTag)
 		{
-			list9.AddRange(Directory.GetFiles(exportDir, item13 + "*CollectableItems*.png"));
-			list9.AddRange(Directory.GetFiles(exportDir, item13 + "*CollectableItem.png"));
+			var textureName = SpriteMetadataService.ResolveSkeletonForPoolTag(poolTag, exportDir);
+			if (textureName != null)
+			{
+				var exactPath = Path.Combine(exportDir, textureName + ".png");
+				if (File.Exists(exactPath))
+					list9.Add(exactPath);
+				else
+				{
+					// Try glob in case of suffix variations
+					list9.AddRange(Directory.GetFiles(exportDir, textureName + "*.png"));
+				}
+			}
+		}
+
+		// Priority 2: Heuristic — CollectableItems pattern matching
+		if (list9.Count == 0)
+		{
+			foreach (string item13 in new string[2] { progressionEventId, text3 }.Distinct())
+			{
+				list9.AddRange(Directory.GetFiles(exportDir, item13 + "*CollectableItems*.png"));
+				list9.AddRange(Directory.GetFiles(exportDir, item13 + "*CollectableItem.png"));
+			}
 		}
 		if (list9.Count == 0)
 		{

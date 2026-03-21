@@ -128,6 +128,7 @@ public class MysteryEvent
     public long EventItemNumericId { get; set; }
     public string? EventItemName { get; set; }
     public string? EventItemType { get; set; }
+    public string? EventItemPoolTag { get; set; }
     public DateTime? StartDate { get; set; }
     public TimeSpan? Duration { get; set; }
 

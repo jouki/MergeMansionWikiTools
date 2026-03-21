@@ -319,8 +319,8 @@ public class MysteryService
     /// </summary>
     public void ResolveEventItems(DataService ds)
     {
-        // Build NumericConfigKey → (ItemType, ChainDisplayName) lookup
-        var lookup = new Dictionary<long, (string ItemType, string ChainName)>();
+        // Build NumericConfigKey → (ItemType, ChainDisplayName, PoolTag) lookup
+        var lookup = new Dictionary<long, (string ItemType, string ChainName, string PoolTag)>();
         foreach (var chain in ds.Chains)
         {
             foreach (var item in chain.Items)
@@ -328,7 +328,7 @@ public class MysteryService
                 if (!string.IsNullOrEmpty(item.NumericConfigKey)
                     && long.TryParse(item.NumericConfigKey, out var numId))
                 {
-                    lookup.TryAdd(numId, (item.ItemType, chain.DisplayName));
+                    lookup.TryAdd(numId, (item.ItemType, chain.DisplayName, chain.PoolTag));
                 }
             }
         }
@@ -340,6 +340,7 @@ public class MysteryService
             {
                 mystery.EventItemType = match.ItemType;
                 mystery.EventItemName = match.ChainName;
+                mystery.EventItemPoolTag = match.PoolTag;
             }
         }
     }
