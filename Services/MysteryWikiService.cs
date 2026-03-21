@@ -3253,7 +3253,7 @@ public static class MysteryWikiService
 		{
 			return false;
 		}
-		string path = Path.Combine(directoryName, "atlas_data.json");
+		string path = Path.Combine(directoryName, "image_atlas_data.json");
 		if (!File.Exists(path))
 		{
 			return false;

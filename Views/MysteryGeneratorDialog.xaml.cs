@@ -103,6 +103,16 @@ public partial class MysteryGeneratorDialog : FluentWindow
 
 	public Func<string, Task>? OnRewardTemplateCreated { get; set; }
 
+	public void ShowImagesTab()
+	{
+		tabMode.SelectedIndex = (int)MysteryGeneratorMode.Images;
+	}
+
+	public void ResetImagesForRefresh()
+	{
+		imagesControl.ResetForRefresh();
+	}
+
 	public MysteryGeneratorDialog(MainWindow main, MysteryEvent mystery, MysteryItemMapping? mapping, MysteryGeneratorMode initialMode, DialogueService? dialogueService = null)
 	{
 		_main = main;

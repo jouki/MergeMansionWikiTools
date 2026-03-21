@@ -32,6 +32,8 @@
                                Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
                     <TextBlock x:Name="txtChainItemCount" FontSize="11"
                                Foreground="{DynamicResource TextOnAccentFillColorSecondaryBrush}"/>
+                    <TextBlock x:Name="txtDetectionMethod" FontSize="11" Visibility="Collapsed"
+                               Foreground="{DynamicResource TextOnAccentFillColorSecondaryBrush}"/>
                 </StackPanel>
                 <ui:Button Grid.Column="2" Content="Exit" Icon="{ui:SymbolIcon Dismiss24}"
                            Click="BtnExitChainMode_Click"

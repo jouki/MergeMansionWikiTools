@@ -63,7 +63,7 @@ public partial class MainWindow : FluentWindow
     {
         using var _t = AppLogger.Timed("MainWindow.ctor");
         InitializeComponent();
-        txtSidebarVersion.Text = Models.AppVersion.Version;
+        txtSidebarVersion.Text = Models.AppVersion.Build;
 
         Settings = SettingsService.Load();
         App.ApplyTheme(Settings.ThemePreference);
@@ -828,6 +828,23 @@ public partial class MainWindow : FluentWindow
         _imageOptimiserPage.ForceAlgorithmDetection = true; // prevent atlas override
         _imageOptimiserPage.AddFileFromPath(filePath);
         _imageOptimiserPage.SetMysteryReturnMode(onComplete);
+        contentArea.Content = _imageOptimiserPage;
+        navList.SelectedIndex = 1;
+    }
+
+    /// <summary>
+    /// Opens Image Optimiser from Prepare dialog context — adds file, maps chain, sets FloodFill,
+    /// and configures "Back to Prepare" mode with callback for returning split results.
+    /// </summary>
+    public void NavigateToImageOptimiserForPrepare(string filePath, ParsedChain? chain, Action<List<string>> onComplete)
+    {
+        _imageOptimiserPage ??= new ImageOptimiserPage(this);
+        _imageOptimiserPage.ClearAll();
+        _imageOptimiserPage.ForceAlgorithmDetection = true;
+        _imageOptimiserPage.AddFileFromPath(filePath);
+        _imageOptimiserPage.SetMysteryReturnMode(onComplete, "Back to Mysteries");
+        if (chain != null)
+            _imageOptimiserPage.EnterChainMode(chain);
         contentArea.Content = _imageOptimiserPage;
         navList.SelectedIndex = 1;
     }

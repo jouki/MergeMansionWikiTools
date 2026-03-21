@@ -10,6 +10,7 @@
     <SelfContained>true</SelfContained>
     <ApplicationIcon>Assets\AppLogo.ico</ApplicationIcon>
     <DefaultItemExcludes>$(DefaultItemExcludes);External\**;Tests\**</DefaultItemExcludes>
+    <InformationalVersion>0.17.1+$([System.DateTime]::UtcNow.ToString("yyyyMMdd-HHmm"))</InformationalVersion>
   </PropertyGroup>
 
   <ItemGroup>

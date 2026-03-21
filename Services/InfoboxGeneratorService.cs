@@ -58,7 +58,7 @@ public class InfoboxGeneratorService
         }
         else
         {
-            fields.Add(("image1", $"{{{{#tag:gallery|{{{{ItemNameToFilename|{imgName}|1}}}}{{{{!}}}} Level 1}}}}"));
+            fields.Add(("image1", $"{{{{#tag:gallery|{{{{ItemNameToFilename|{imgName}|1}}}}}}}}"));
         }
 
         // ── type ──

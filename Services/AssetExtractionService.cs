@@ -25,7 +25,11 @@ internal static class AssetExtractionService
         int Textures, int Skipped, List<string> Warnings,
         List<SpriteInfo> Sprites,
         List<SkinMapping> SkinMappings,
-        Dictionary<string, string> TextureFileMap);
+        Dictionary<string, string> TextureFileMap,
+        /// <summary>Spine atlas base names found in this bundle (e.g. "ItemTools").</summary>
+        HashSet<string> SpineAtlasNames,
+        /// <summary>Skeleton candidates NOT matched in this bundle — for cross-bundle matching.</summary>
+        List<(string Name, string Script)> UnmatchedSkeletons);
 
     /// <summary>
     /// Metadata for a single sprite within a texture atlas.
@@ -51,21 +55,30 @@ internal static class AssetExtractionService
         float OffsetY = 0,
         float Rotation = 0,
         float ScaleX = 1,
-        float ScaleY = 1);
+        float ScaleY = 1,
+        string AttachmentKey = ""); // original attachment key before "name" path override
 
     /// <summary>
-    /// Combined atlas data file: sprites + skin mappings in a single JSON.
-    /// Saved as atlas_data.json in the version directory (parent of Export - PNGs).
+    /// Combined image atlas data file: sprites, skin mappings, and PoolTag→prefab mapping.
+    /// Saved as image_atlas_data.json in the version directory (parent of Export - PNGs).
     /// </summary>
     public record AtlasData(
         List<SpriteInfo> Sprites,
-        List<SkinMapping> SkinMappings);
+        List<SkinMapping> SkinMappings,
+        Dictionary<string, string>? PoolTagMapping = null);
 
     private static readonly HttpClient _http = new();
     private static readonly object _fileLock = new();
+    /// <summary>Guards image_atlas_data.json read-merge-write so concurrent extractions don't overwrite each other.</summary>
+    private static readonly SemaphoreSlim _atlasSaveLock = new(1, 1);
     /// <summary>Maps baseName (without suffix) → container suffix for the FIRST extracted file.</summary>
     private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string>
         _firstFileSuffixMap = new(StringComparer.OrdinalIgnoreCase);
+    /// <summary>Base names (e.g. "Mansion2023_Tools") where a real naming conflict was detected —
+    /// i.e. GetUniqueFilePath had to add a suffix because a different file with the same name already existed.
+    /// Only these should trigger FixInconsistentDuplicateNames rename logic.</summary>
+    private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, bool>
+        _conflictBaseNames = new(StringComparer.OrdinalIgnoreCase);
 
     // ── TPK download ──────────────────────────────────────────────────
 
@@ -237,6 +250,9 @@ internal static class AssetExtractionService
         var textureFileMap = new Dictionary<string, string>(); // Unity m_Name → exported filename (without ext)
         int textures = 0, skipped = 0;
         var bundleName = Path.GetFileName(bundlePath);
+        // Accumulated across all asset files in this bundle (for cross-bundle matching)
+        var bundleSpineAtlasNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var bundleUnmatchedSkeletons = new List<(string Name, string Script)>();
 
         var am = new AssetsManager();
         try
@@ -251,7 +267,8 @@ internal static class AssetExtractionService
             catch (Exception ex)
             {
                 warnings.Add($"[LOAD] {bundleName}: {ex.Message}");
-                return new BundleExtractionResult(0, 0, warnings, sprites, skinMappings, textureFileMap);
+                return new BundleExtractionResult(0, 0, warnings, sprites, skinMappings, textureFileMap,
+                    new HashSet<string>(StringComparer.OrdinalIgnoreCase), []);
             }
 
             // Iterate all assets files inside the bundle
@@ -372,6 +389,14 @@ internal static class AssetExtractionService
                             var baseNameOnly = Path.GetFileNameWithoutExtension(safeFileName);
                             var safeSuffix = SanitizeFileName(Path.GetFileNameWithoutExtension(suffix));
                             _firstFileSuffixMap.TryAdd(baseNameOnly, safeSuffix);
+
+                            // Track real naming conflicts: when GetUniqueFilePath added a suffix
+                            // (outPath differs from the plain basePath) this is a true conflict —
+                            // same Unity texture name found in multiple bundles with different content.
+                            if (outPath != null
+                                && !string.Equals(outPath, Path.Combine(outputDir, safeFileName),
+                                    StringComparison.OrdinalIgnoreCase))
+                                _conflictBaseNames[baseNameOnly] = true;
                         }
 
                         if (outPath != null)
@@ -627,6 +652,7 @@ internal static class AssetExtractionService
 
                     // Pass 2: parse skeleton JSONs + save raw Spine files for icon rendering
                     var spineRawDir = Path.Combine(outputDir, "_SpineRaw");
+                    var unmatchedSkeletons = new List<(string Name, string Script)>();
                     foreach (var (skelName, skelScript) in skeletonCandidates)
                     {
                         // Parse skin mappings for same-name skeletons (existing behavior)
@@ -645,6 +671,10 @@ internal static class AssetExtractionService
                             {
                                 AppLogger.Info($"[SPINE] Skeleton parse failed for '{skelName}': {ex.GetType().Name}: {ex.Message}");
                             }
+                        }
+                        else
+                        {
+                            unmatchedSkeletons.Add((skelName, skelScript));
                         }
 
                         // Save skeleton JSON for rendering if it's a multi-slot assembly
@@ -687,6 +717,11 @@ internal static class AssetExtractionService
                                 textureName);
                         }
                     }
+
+                    // Accumulate for cross-bundle matching
+                    foreach (var name in spineAtlasNames)
+                        bundleSpineAtlasNames.Add(name);
+                    bundleUnmatchedSkeletons.AddRange(unmatchedSkeletons);
                 }
                 catch (Exception ex)
                 {
@@ -699,7 +734,176 @@ internal static class AssetExtractionService
             am.UnloadAll();
         }
 
-        return new BundleExtractionResult(textures, skipped, warnings, sprites, skinMappings, textureFileMap);
+        return new BundleExtractionResult(textures, skipped, warnings, sprites, skinMappings, textureFileMap,
+            bundleSpineAtlasNames, bundleUnmatchedSkeletons);
+    }
+
+    // ── Extract GameObjectPoolConfig (PoolTag → prefab name) ─────────
+
+    /// Recursively searches all string values in a field tree, collecting paths where the value
+    /// contains <paramref name="searchTerm"/>. Used for pool config diagnostics.
+    private static void SearchFieldForString(
+        AssetTypeValueField field, string searchTerm, string path,
+        List<string> results, int maxDepth)
+    {
+        if (field.IsDummy || maxDepth < 0) return;
+        if (field.TypeName == "string")
+        {
+            try
+            {
+                var val = field.AsString;
+                if (val != null && val.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+                    results.Add($"{path}={val}");
+            }
+            catch { }
+            return;
+        }
+        foreach (var child in field.Children)
+            SearchFieldForString(child, searchTerm, path + "/" + child.FieldName, results, maxDepth - 1);
+    }
+
+    /// <summary>
+    /// Reads startup_scenes_all.bundle and extracts the GameObjectPoolConfig mapping:
+    /// PoolTag → prefab/skeleton name (e.g. "MaintenanceTools" → "Mansion2023_Tools").
+    /// Returns the mapping dictionary to be included in image_atlas_data.json.
+    /// </summary>
+    public static Dictionary<string, string> ExtractPoolTagMapping(string bundleDir, string tpkPath, string outputDir)
+    {
+        // The PoolConfig MonoBehaviour lives in startup_scenes_all.bundle.
+        // It has a "pools" array where each entry contains:
+        //   itemTag: string (the PoolTag, e.g. "MaintenanceTools")
+        //   prefabRef: AssetReference with a Path field (e.g. ".../Mansion2023_Tools.prefab")
+        var startupPath = Path.Combine(bundleDir, "startup_scenes_all.bundle");
+        if (!File.Exists(startupPath))
+        {
+            AppLogger.Info("[POOL] startup_scenes_all.bundle not found — skipping pool mapping");
+            return new Dictionary<string, string>();
+        }
+
+        var mapping = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+        var am = new AssetsManager();
+        try
+        {
+            am.LoadClassPackage(tpkPath);
+            var bunInst = am.LoadBundleFile(startupPath, unpackIfPacked: true);
+
+            var dirInfos = bunInst.file.BlockAndDirInfo.DirectoryInfos;
+            for (int fi = 0; fi < dirInfos.Count; fi++)
+            {
+                AssetsFileInstance? afileInst;
+                try { afileInst = am.LoadAssetsFileFromBundle(bunInst, fi); }
+                catch { continue; }
+                if (afileInst?.file == null) continue;
+
+                am.LoadClassDatabaseFromPackage(afileInst.file.Metadata.UnityVersion);
+
+                var monos = afileInst.file.GetAssetsOfType(AssetClassID.MonoBehaviour);
+                foreach (var monoInfo in monos)
+                {
+                    AssetTypeValueField? bf;
+                    try { bf = am.GetBaseField(afileInst, monoInfo); }
+                    catch { continue; }
+                    if (bf == null || bf.IsDummy) continue;
+
+                    // Check if this MonoBehaviour is the PoolConfig (has "pools" array with "itemTag")
+                    var poolsField = bf["pools"];
+                    if (poolsField.IsDummy) continue;
+
+                    var poolsArr = poolsField["Array"];
+                    if (poolsArr.IsDummy || poolsArr.Children.Count == 0) continue;
+
+                    // Verify structure: first entry must have "itemTag" string field
+                    var firstEntry = poolsArr.Children[0];
+                    var tagCheck = firstEntry["itemTag"];
+                    if (tagCheck.IsDummy) continue;
+
+                    var monoName = bf["m_Name"]?.AsString ?? "(unnamed)";
+                    AppLogger.Info($"[POOL] Found PoolConfig '{monoName}' with {poolsArr.Children.Count} entries");
+
+                    foreach (var entry in poolsArr.Children)
+                    {
+                        try
+                        {
+                            var itemTag = entry["itemTag"]?.AsString ?? "";
+                            if (string.IsNullOrEmpty(itemTag)) continue;
+
+                            // prefabRef is an AssetReference — try multiple field access patterns
+                            var prefabRef = entry["prefabRef"];
+                            if (prefabRef.IsDummy) continue;
+
+                            string prefabName = "";
+
+                            // Pattern 1: AssetReference with nested string fields (Path, m_AssetGUID, etc.)
+                            // Walk all children looking for a string that looks like an asset path
+                            foreach (var refChild in prefabRef.Children)
+                            {
+                                if (refChild.TypeName != "string") continue;
+                                var val = refChild.AsString ?? "";
+                                if (val.EndsWith(".prefab", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    prefabName = Path.GetFileNameWithoutExtension(val);
+                                    break;
+                                }
+                            }
+
+                            // Pattern 2: If no .prefab path found, check for a direct path/name string
+                            if (string.IsNullOrEmpty(prefabName))
+                            {
+                                foreach (var refChild in prefabRef.Children)
+                                {
+                                    if (refChild.TypeName != "string") continue;
+                                    var val = refChild.AsString ?? "";
+                                    if (!string.IsNullOrEmpty(val) && val.Length > 2
+                                        && !val.All(c => char.IsDigit(c) || c == '-'))
+                                    {
+                                        // Use the last path segment as prefab name
+                                        var segments = val.Split('/');
+                                        prefabName = segments[^1];
+                                        if (prefabName.EndsWith(".prefab", StringComparison.OrdinalIgnoreCase))
+                                            prefabName = prefabName[..^7];
+                                        break;
+                                    }
+                                }
+                            }
+
+                            // Pattern 3: prefabRef is a PPtr — resolve via GetExtAsset
+                            if (string.IsNullOrEmpty(prefabName) && prefabRef.TypeName.StartsWith("PPtr"))
+                            {
+                                try
+                                {
+                                    var ext = am.GetExtAsset(afileInst, prefabRef);
+                                    if (ext.baseField != null)
+                                        prefabName = ext.baseField["m_Name"]?.AsString ?? "";
+                                }
+                                catch { }
+                            }
+
+                            if (string.IsNullOrEmpty(prefabName)) continue;
+
+                            // Strip -UI suffix (visual-only variant)
+                            if (prefabName.EndsWith("-UI", StringComparison.OrdinalIgnoreCase))
+                                prefabName = prefabName[..^3];
+                            else if (prefabName.EndsWith("UI", StringComparison.OrdinalIgnoreCase)
+                                && prefabName.Length > 2
+                                && char.IsUpper(prefabName[^3]))
+                                prefabName = prefabName[..^2];
+
+                            mapping.TryAdd(itemTag, prefabName);
+                        }
+                        catch { }
+                    }
+
+                    AppLogger.Info($"[POOL] Extracted {mapping.Count} pool entries from '{monoName}'");
+                    var samples = mapping.Take(5).Select(kv => $"{kv.Key} → {kv.Value}");
+                    AppLogger.Info($"[POOL] Sample: {string.Join(", ", samples)}");
+                }
+            }
+        }
+        finally { am.UnloadAll(); }
+
+        AppLogger.Info($"[POOL] Extracted {mapping.Count} pool tag mappings");
+        return mapping;
     }
 
     // ── Extract all bundles in parallel ──────────────────────────────
@@ -713,6 +917,7 @@ internal static class AssetExtractionService
     {
         Directory.CreateDirectory(outputDir);
         _firstFileSuffixMap.Clear();
+        _conflictBaseNames.Clear();
 
         var bundleFiles = Directory.GetFiles(bundleDir)
             .Where(f =>
@@ -728,6 +933,9 @@ internal static class AssetExtractionService
         var allSprites = new System.Collections.Concurrent.ConcurrentBag<SpriteInfo>();
         var allSkinMappings = new System.Collections.Concurrent.ConcurrentBag<SkinMapping>();
         var globalTextureMap = new System.Collections.Concurrent.ConcurrentDictionary<string, string>();
+        // For cross-bundle Spine atlas↔skeleton matching
+        var globalSpineAtlasNames = new System.Collections.Concurrent.ConcurrentDictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
+        var globalUnmatchedSkeletons = new System.Collections.Concurrent.ConcurrentBag<(string Name, string Script)>();
 
         var maxParallel = Math.Clamp(Environment.ProcessorCount / 2, 2, 8);
 
@@ -765,10 +973,33 @@ internal static class AssetExtractionService
                     allSkinMappings.Add(m);
                 foreach (var kv in result.TextureFileMap)
                     globalTextureMap.TryAdd(kv.Key, kv.Value);
+                foreach (var name in result.SpineAtlasNames)
+                    globalSpineAtlasNames.TryAdd(name, true);
+                foreach (var skel in result.UnmatchedSkeletons)
+                    globalUnmatchedSkeletons.Add(skel);
 
                 if (result.Warnings.Any(w => w.StartsWith("[LOAD]") || w.StartsWith("[ERROR]") || w.StartsWith("[VERSION]")))
                     Interlocked.Increment(ref failed);
             });
+
+        // Cross-bundle Spine matching: skeletons not resolved locally (atlas was in a different bundle)
+        var locallyMatchedNames = allSkinMappings.Select(m => m.SkeletonName)
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+        foreach (var (skelName, skelScript) in globalUnmatchedSkeletons)
+        {
+            if (locallyMatchedNames.Contains(skelName)) continue; // already matched same-bundle
+            if (!globalSpineAtlasNames.ContainsKey(skelName)) continue; // no atlas found anywhere
+            try
+            {
+                var mappings = ParseSpineSkeletonSkins(skelName, skelScript);
+                if (mappings.Count > 0)
+                {
+                    foreach (var m in mappings) allSkinMappings.Add(m);
+                    AppLogger.Info($"[SPINE] Cross-bundle skeleton '{skelName}': {mappings.Count} skin→sprite mappings");
+                }
+            }
+            catch { /* skip malformed skeleton */ }
+        }
 
         // Write diagnostic log next to the exe
         var warningList = allWarnings.ToList();
@@ -780,6 +1011,9 @@ internal static class AssetExtractionService
             var logPath = Path.Combine(logDir, $"extraction_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log");
             await File.WriteAllLinesAsync(logPath, warningList, ct);
         }
+
+        // Extract GameObjectPoolConfig (PoolTag → prefab name) — done once, not per-bundle
+        var poolTagMapping = ExtractPoolTagMapping(bundleDir, tpkPath, outputDir);
 
         // Post-process: fix inconsistent naming where first file has no suffix but duplicates do
         // e.g., Popup_Shared_Art.png + Popup_Shared_Art_SP_FerretPet2025.png → rename first to include suffix
@@ -799,20 +1033,68 @@ internal static class AssetExtractionService
                 }
             }
         }
-        // Save combined atlas data (sprites + skin mappings) one level above Export - PNGs
+        // Save combined image atlas data — merge with any existing file so concurrent extractions don't overwrite each other.
+        // Pattern: lock → read existing → union sprites + skin mappings + pool tags → write → unlock.
         var skinMapList = allSkinMappings.ToList();
-        if (spriteList.Count > 0 || skinMapList.Count > 0)
+        if (spriteList.Count > 0 || skinMapList.Count > 0 || poolTagMapping.Count > 0)
         {
             var parentDir = Path.GetDirectoryName(outputDir)!;
-            var atlasDataPath = Path.Combine(parentDir, "atlas_data.json");
-            var atlasData = new AtlasData(spriteList, skinMapList);
-            var json = JsonSerializer.Serialize(atlasData, new JsonSerializerOptions
+            var atlasDataPath = Path.Combine(parentDir, "image_atlas_data.json");
+            await _atlasSaveLock.WaitAsync(ct);
+            try
             {
-                WriteIndented = false,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            });
-            await File.WriteAllTextAsync(atlasDataPath, json, ct);
-            AppLogger.Info($"Saved atlas_data.json ({spriteList.Count} sprites, {skinMapList.Count} skin mappings) to {atlasDataPath}");
+                // Read existing data (may have been written by a concurrent extraction)
+                if (File.Exists(atlasDataPath))
+                {
+                    try
+                    {
+                        var existing = JsonSerializer.Deserialize<AtlasData>(
+                            await File.ReadAllTextAsync(atlasDataPath, ct),
+                            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                        if (existing != null)
+                        {
+                            // Union sprites by name — keep existing, append new
+                            var existingNames = existing.Sprites
+                                .Select(s => s.Name)
+                                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+                            spriteList = existing.Sprites
+                                .Concat(spriteList.Where(s => !existingNames.Contains(s.Name)))
+                                .ToList();
+
+                            // Union skin mappings by (SkeletonName, SkinName) — keep existing, append new
+                            var existingKeys = existing.SkinMappings
+                                .Select(m => (m.SkeletonName, m.SkinName))
+                                .ToHashSet();
+                            skinMapList = existing.SkinMappings
+                                .Concat(skinMapList.Where(m => !existingKeys.Contains((m.SkeletonName, m.SkinName))))
+                                .ToList();
+
+                            // Merge pool tag mapping — new extraction wins (overwrite existing keys)
+                            if (existing.PoolTagMapping != null && poolTagMapping.Count == 0)
+                                poolTagMapping = new Dictionary<string, string>(existing.PoolTagMapping, StringComparer.OrdinalIgnoreCase);
+                            else if (existing.PoolTagMapping != null)
+                            {
+                                foreach (var kv in existing.PoolTagMapping)
+                                    poolTagMapping.TryAdd(kv.Key, kv.Value);
+                            }
+                        }
+                    }
+                    catch { /* Corrupt existing file — overwrite */ }
+                }
+
+                var atlasData = new AtlasData(spriteList, skinMapList, poolTagMapping.Count > 0 ? poolTagMapping : null);
+                var json = JsonSerializer.Serialize(atlasData, new JsonSerializerOptions
+                {
+                    WriteIndented = false,
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                });
+                await File.WriteAllTextAsync(atlasDataPath, json, ct);
+                AppLogger.Info($"Saved image_atlas_data.json ({spriteList.Count} sprites, {skinMapList.Count} skin mappings, {poolTagMapping.Count} pool tags) to {atlasDataPath}");
+            }
+            finally
+            {
+                _atlasSaveLock.Release();
+            }
         }
 
         // ── Render Spine skeleton icons (on background thread) ─────────
@@ -956,11 +1238,13 @@ internal static class AssetExtractionService
         int aliases = 0;
         try
         {
-            var mappingPath = Path.Combine(Path.GetDirectoryName(outputDir)!, "pool_tag_to_prefab_mapping.json");
-            if (File.Exists(mappingPath) && Directory.Exists(assembledDir))
+            var atlasPath = Path.Combine(Path.GetDirectoryName(outputDir)!, "image_atlas_data.json");
+            if (File.Exists(atlasPath) && Directory.Exists(assembledDir))
             {
-                var mappingJson = File.ReadAllText(mappingPath);
-                var mapping = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, string>>(mappingJson);
+                var atlasJson = File.ReadAllText(atlasPath);
+                var atlasData = System.Text.Json.JsonSerializer.Deserialize<AtlasData>(atlasJson,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                var mapping = atlasData?.PoolTagMapping;
                 if (mapping != null)
                 {
                     // Build lookup: normalized skeleton name → rendered PNG path
@@ -1239,14 +1523,15 @@ internal static class AssetExtractionService
                     {
                         foreach (var attachment in slot.Value.EnumerateObject())
                         {
-                            var spriteName = attachment.Name;
+                            var attachmentKey = attachment.Name; // item type e.g. "MaintenanceTools_01"
+                            var spriteName = attachmentKey;
                             float offsetX = 0, offsetY = 0, rotation = 0, scaleX = 1, scaleY = 1;
 
                             if (attachment.Value.ValueKind == JsonValueKind.Object)
                             {
                                 if (attachment.Value.TryGetProperty("name", out var nameOverride) &&
                                     nameOverride.ValueKind == JsonValueKind.String)
-                                    spriteName = nameOverride.GetString()!;
+                                    spriteName = nameOverride.GetString()!; // atlas region e.g. "Mansion2023_Tools_01"
 
                                 if (attachment.Value.TryGetProperty("x", out var xProp))
                                     offsetX = xProp.GetSingle();
@@ -1261,7 +1546,7 @@ internal static class AssetExtractionService
                             }
 
                             mappings.Add(new SkinMapping(skeletonName, skinName!, spriteName,
-                                offsetX, offsetY, rotation, scaleX, scaleY));
+                                offsetX, offsetY, rotation, scaleX, scaleY, attachmentKey));
                         }
                     }
                 }
@@ -1279,7 +1564,8 @@ internal static class AssetExtractionService
                     {
                         foreach (var attachment in slot.Value.EnumerateObject())
                         {
-                            var spriteName = attachment.Name;
+                            var attachmentKey = attachment.Name;
+                            var spriteName = attachmentKey;
                             float offsetX = 0, offsetY = 0, rotation = 0, scaleX = 1, scaleY = 1;
 
                             if (attachment.Value.ValueKind == JsonValueKind.Object)
@@ -1301,7 +1587,7 @@ internal static class AssetExtractionService
                             }
 
                             mappings.Add(new SkinMapping(skeletonName, skinName, spriteName,
-                                offsetX, offsetY, rotation, scaleX, scaleY));
+                                offsetX, offsetY, rotation, scaleX, scaleY, attachmentKey));
                         }
                     }
                 }
@@ -1384,6 +1670,12 @@ internal static class AssetExtractionService
                     .ToList();
 
                 if (suffixedSiblings.Count == 0) continue;
+
+                // Only rename if a real naming conflict was recorded for this base name.
+                // Without this guard, files like "Mansion2023_Tools_Drill_On.png" (an original
+                // Unity texture name that merely starts with "Mansion2023_Tools_") would falsely
+                // trigger a rename of "Mansion2023_Tools.png".
+                if (!_conflictBaseNames.ContainsKey(baseName)) continue;
 
                 // Plain file exists alongside suffixed siblings — needs its own suffix
                 var plainBytes = File.ReadAllBytes(plainPath);

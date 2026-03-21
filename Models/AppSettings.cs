@@ -1,8 +1,26 @@
+using System.Reflection;
+
 namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.17.0";
+    public const string Version = "v0.18.1";
+
+    // Full version with build timestamp, e.g. "v0.18.1 (build 20260321-1200)"
+    public static string Build { get; } = GetBuild();
+    private static string GetBuild()
+    {
+        var info = Assembly.GetExecutingAssembly()
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+            ?.InformationalVersion ?? "";
+        var idx = info.IndexOf('+');
+        if (idx < 0) return Version;
+        // .NET SDK appends "+timestamp.githash" — keep only the timestamp part
+        var suffix = info[(idx + 1)..];
+        var dotIdx = suffix.IndexOf('.');
+        if (dotIdx > 0) suffix = suffix[..dotIdx];
+        return $"{Version} (build {suffix})";
+    }
 }
 
 public class AppSettings

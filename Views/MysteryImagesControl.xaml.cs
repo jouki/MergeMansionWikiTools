@@ -75,6 +75,16 @@ public partial class MysteryImagesControl : UserControl
 		InitializeComponent();
 	}
 
+
+	/// <summary>Forces a full re-scan on next Initialize call (e.g. after returning from Image Optimiser).</summary>
+	public void ResetForRefresh()
+	{
+		_initialized = false;
+		_detectedFiles.Clear();
+		_checkboxes.Clear();
+		_optimizedFiles.Clear();
+	}
+
 	public void Initialize(MainWindow main, MysteryEvent mystery)
 	{
 		string currentPageTitle = mystery.WikiStatus.SuggestedPageTitle ?? mystery.Name;
@@ -360,13 +370,13 @@ public partial class MysteryImagesControl : UserControl
 				{
 					border3.Background = new SolidColorBrush(Color.FromArgb(37, 96, 160, 224));
 					textBlock4.Foreground = new SolidColorBrush(Color.FromRgb(112, 176, 240));
-					textBlock4.Text = "? Ready  Exists";
+					textBlock4.Text = "✓ Ready · Exists";
 				}
 				else if (flag4)
 				{
 					border3.Background = new SolidColorBrush(Color.FromArgb(48, 0, 160, 0));
 					textBlock4.Foreground = new SolidColorBrush(Color.FromRgb(48, 192, 48));
-					textBlock4.Text = "? Optimized";
+					textBlock4.Text = "✓ Optimized";
 				}
 				else if (detectedFile.ExistsOnWiki == true)
 				{
@@ -455,6 +465,23 @@ public partial class MysteryImagesControl : UserControl
 			}
 			break;
 		}
+		// Fallback: look for source-filename-based split files (e.g. SP_Omoide2026_CollectableItems01.png)
+		if (foundSplits.Count == 0 && !string.IsNullOrEmpty(eventItemEntry.SourcePath))
+		{
+			string sourceName = Path.GetFileNameWithoutExtension(eventItemEntry.SourcePath);
+			for (int lvl = 1; lvl <= 10; lvl++)
+			{
+				string sourceFileName = $"{sourceName}{lvl:D2}.png";
+				string filePath2 = Path.Combine(searchDir, sourceFileName);
+				if (File.Exists(filePath2))
+				{
+					string wikiName2 = MysteryWikiService.FormatFileName(eventItemName, lvl);
+					foundSplits.Add((filePath2, lvl, wikiName2));
+					continue;
+				}
+				break;
+			}
+		}
 		if (foundSplits.Count == 0)
 		{
 			return;
@@ -495,11 +522,29 @@ public partial class MysteryImagesControl : UserControl
 
 	private void BtnOpenInOptimiser_Click(object sender, RoutedEventArgs e)
 	{
-		if (_main != null && sender is Wpf.Ui.Controls.Button { Tag: string tag })
+		if (_main == null || sender is not Wpf.Ui.Controls.Button { Tag: string filePath }) return;
+
+		// Find event item chain by ConfigKey derived from EventItemType
+		ParsedChain? chain = null;
+		if (_mystery?.EventItemType != null && _main.DataService != null)
 		{
-			_main.NavigateToImageOptimiserWithFile(tag);
-			Window.GetWindow(this)?.Close();
+			var configKey = DataService.GetChainKeyFromItemType(_mystery.EventItemType);
+			chain = _main.DataService.Chains.FirstOrDefault(c => c.ConfigKey == configKey);
 		}
+
+		var prepareWindow = Window.GetWindow(this) as MysteryGeneratorDialog;
+		prepareWindow?.Hide();
+
+		_main.NavigateToImageOptimiserForPrepare(filePath, chain, splitResults =>
+		{
+			_main.Dispatcher.InvokeAsync(() =>
+			{
+				_main.NavigateToPage(5); // back to Mysteries
+				prepareWindow?.ResetImagesForRefresh();
+				prepareWindow?.Show();
+				prepareWindow?.ShowImagesTab();
+			});
+		});
 	}
 
 	private void BtnOptimize_Click(object sender, RoutedEventArgs e)

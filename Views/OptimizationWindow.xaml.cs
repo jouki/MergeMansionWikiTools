@@ -96,13 +96,16 @@ public partial class OptimizationWindow : FluentWindow
             var fi = new FileInfo(p);
             byte[] bytes = File.ReadAllBytes(p);
             var thumb = LoadBitmapNoLock(bytes);
+            bool alreadyOptimized = HasOptMarker(bytes);
 
             Files.Add(new FileInfoItem
             {
                 Name = fi.Name,
                 Path = p,
                 OriginalSize = fi.Length,
-                IsSelected = true,
+                IsSelected = !alreadyOptimized,
+                IsOptimized = alreadyOptimized,
+                WasSkipped = alreadyOptimized,
                 Thumbnail = thumb
             });
         }

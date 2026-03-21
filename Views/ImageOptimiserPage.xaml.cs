@@ -1224,10 +1224,10 @@ public partial class ImageOptimiserPage : UserControl
     /// Configures the Image Optimiser to show "Back to Mysteries" instead of "Upload to Wiki",
     /// sets Algorithm as default detection, and registers a callback for returning split results.
     /// </summary>
-    public void SetMysteryReturnMode(Action<List<string>> onComplete)
+    public void SetMysteryReturnMode(Action<List<string>> onComplete, string label = "Back to Mysteries")
     {
         _mysteryReturnCallback = onComplete;
-        btnUploadWiki.Content = "Back to Mysteries";
+        btnUploadWiki.Content = label;
         btnUploadWiki.Icon = new Wpf.Ui.Controls.SymbolIcon { Symbol = Wpf.Ui.Controls.SymbolRegular.ArrowLeft24 };
 
         // Force Algorithm detection — deferred to run after any atlas refresh
@@ -1808,7 +1808,7 @@ public partial class ImageOptimiserPage : UserControl
         {
             if (showWarnings)
             {
-                infoBar.Message = "atlas_data.json not found. Re-extract textures from APK.";
+                infoBar.Message = "image_atlas_data.json not found. Re-extract textures from APK.";
                 infoBar.Severity = InfoBarSeverity.Warning;
                 infoBar.IsOpen = true;
             }
@@ -1948,7 +1948,7 @@ public partial class ImageOptimiserPage : UserControl
         }
 
         // Use sprite positions from game data as detected objects.
-        // The atlas_data.json has exact positions for every sprite — more reliable
+        // The image_atlas_data.json has exact positions for every sprite — more reliable
         // than image-based flood fill which can merge adjacent sprites.
         // Set both RawDetectedObjects and DetectedObjects so UpdateDetectionOverlay
         // uses the sprite-based positions as its baseline (it resets to RawDetectedObjects).
@@ -1962,15 +1962,18 @@ public partial class ImageOptimiserPage : UserControl
             return (Full: rect, Main: rect);
         }).ToList();
         activeImg.AtlasObjects = spriteObjects;
-        if (!ForceAlgorithmDetection)
+        // Keep FloodFill (Algorithm) as the default detection/crop method.
+        // Atlas objects are stored so the user can switch to atlas view via the toggle,
+        // but detection overlay and crop boundaries use FloodFill by default.
+        // If FloodFill hasn't run yet (no detected objects), fall back to atlas positions.
+        if (activeImg.DetectedObjects.Count == 0)
         {
-            activeImg.DefaultDetectionSource = DetectionSource.Atlas;
-            activeImg.PerObjectDetectionSource = null;
             activeImg.RawDetectedObjects = spriteObjects;
             activeImg.DetectedObjects = spriteObjects;
         }
 
-        var orderedObjects = OrderObjects(activeImg.DetectedObjects);
+        var orderedObjects = OrderObjects(
+            activeImg.DetectedObjects.Count > 0 ? activeImg.DetectedObjects : spriteObjects);
 
         // Step 4: Map each sprite-based object to its level via the indices array.
         // orderedSprites (Unity Y desc, X asc) and orderedObjects (image Y asc, X asc)
@@ -2255,7 +2258,7 @@ public partial class ImageOptimiserPage : UserControl
         var allSprites = SpriteMetadataService.Load(exportDir);
         if (allSprites.Count == 0)
         {
-            infoBar.Message = "atlas_data.json not found. Re-extract textures from APK.";
+            infoBar.Message = "image_atlas_data.json not found. Re-extract textures from APK.";
             infoBar.Severity = InfoBarSeverity.Warning;
             infoBar.IsOpen = true;
             return;
@@ -2409,7 +2412,7 @@ public partial class ImageOptimiserPage : UserControl
 
             foreach (var oi in scissorsImages)
             {
-                // Use stored DetectedObjects (sprite-based when atlas_data.json is available,
+                // Use stored DetectedObjects (sprite-based when image_atlas_data.json is available,
                 // otherwise flood-fill based). Only re-detect as fallback.
                 var objects = oi.DetectedObjects.Count > 0
                     ? oi.DetectedObjects
@@ -3012,6 +3015,7 @@ public partial class ImageOptimiserPage : UserControl
         _activeChain = null;
         _resolvedFilenameBase = null;
         chainModeBanner.Visibility = Visibility.Collapsed;
+        txtDetectionMethod.Visibility = Visibility.Collapsed;
         DismissSuggestion();
         UpdatePredictButtonVisibility();
         UpdatePreviewMargins();
@@ -3043,6 +3047,7 @@ public partial class ImageOptimiserPage : UserControl
     {
         _suggestedImagePath = null;
         imageSuggestionBanner.Visibility = Visibility.Collapsed;
+        txtDetectionMethod.Visibility = Visibility.Collapsed;
 
         var basePath = _main.Settings.ImageExporterBasePath;
         var version = _main.Settings.SelectedApkVersion;
@@ -3053,35 +3058,82 @@ public partial class ImageOptimiserPage : UserControl
         if (!Directory.Exists(exportDir))
             return;
 
-        // Build candidate filenames (highest priority first)
-        var candidates = new List<string>();
+        var searchDirs = new[] { exportDir, System.IO.Path.Combine(exportDir, "Assembled") };
 
-        // Primary: resolve via PoolTag → prefab name (from game's PoolConfig)
+        // Build candidate filenames with detection method labels (highest priority first).
+        // Each entry: (filename, method label for debug).
+        var candidates = new List<(string FileName, string Method)>();
+
+        // ── Priority 1: PoolConfig mapping (deterministic, from game data) ──
+        // PoolConfig MonoBehaviour in startup_scenes_all.bundle maps PoolTag → prefab name.
+        // e.g. PoolTag "MaintenanceTools" → prefab "Mansion2023_Tools" → Mansion2023_Tools.png
         if (!string.IsNullOrEmpty(chain.PoolTag))
         {
             var textureName = SpriteMetadataService.ResolveSkeletonForPoolTag(chain.PoolTag, exportDir);
             if (textureName != null)
-                candidates.Add($"{textureName}.png");
+                candidates.Add(($"{textureName}.png", "PoolConfig"));
         }
 
-        // Fallback: Item{ConfigKey}.png pattern
-        candidates.Add($"Item{chain.ConfigKey}.png");
+        var allSkinMappings = SpriteMetadataService.LoadSkinMappings(exportDir);
 
-        // Also try merged keys
+        // ── Priority 2: ItemType → SpriteName in skin mappings → skeleton ──
+        var itemTypeTexture = SpriteMetadataService.FindTextureForChainFromItemTypes(
+            allSkinMappings, chain.Items.ToList());
+        if (itemTypeTexture != null)
+            candidates.Add(($"{itemTypeTexture}.png", "ItemType skin mapping"));
+
+        // ── Priority 3: SkinName mapping (reliable for non-numeric named skins) ──
+        var skinTexture = SpriteMetadataService.FindTextureForChainFromSkinMapping(
+            allSkinMappings, chain.Items.ToList());
+        if (skinTexture != null)
+            candidates.Add(($"{skinTexture}.png", "SkinName mapping"));
+
+        // ── Priority 4: CamelCase suffix heuristic (fallback) ──
+        if (candidates.Count == 0)
+        {
+            var allSprites = SpriteMetadataService.Load(exportDir);
+            if (allSprites.Count > 0)
+            {
+                var matchedSprites = SpriteMetadataService.FindSpritesForChain(
+                    allSprites, chain.ConfigKey, exportDir);
+                if (matchedSprites.Count > 0)
+                {
+                    var texName = matchedSprites[0].TextureName;
+                    candidates.Add(($"{texName}.png", "CamelCase heuristic"));
+                }
+            }
+        }
+
+        // ── Priority 5: Item{ConfigKey}.png pattern + merged keys ──
+        candidates.Add(($"Item{chain.ConfigKey}.png", "Item{{ConfigKey}} pattern"));
         if (chain.MergedFromConfigKeys != null)
             foreach (var mk in chain.MergedFromConfigKeys)
-                candidates.Add($"Item{mk}.png");
+                candidates.Add(($"Item{mk}.png", "Item{{MergedKey}} pattern"));
 
-        // Search in Export - PNGs/ and also in Assembled/ subfolder (Spine-rendered icons)
-        var searchDirs = new[] { exportDir, System.IO.Path.Combine(exportDir, "Assembled") };
-        foreach (var candidate in candidates)
+        // Deduplicate candidates (keep first occurrence = highest priority)
+        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var uniqueCandidates = new List<(string FileName, string Method)>();
+        foreach (var c in candidates)
+        {
+            if (seen.Add(c.FileName))
+                uniqueCandidates.Add(c);
+        }
+
+        foreach (var (candidate, method) in uniqueCandidates)
         {
             foreach (var dir in searchDirs)
             {
                 var fullPath = System.IO.Path.Combine(dir, candidate);
-                if (!File.Exists(fullPath)) continue;
+                if (!File.Exists(fullPath))
+                {
+                    // Extractor may have suffix-renamed the file (e.g. due to naming conflict)
+                    var baseName = System.IO.Path.GetFileNameWithoutExtension(candidate);
+                    var suffixed = Directory.GetFiles(dir, $"{baseName}_*.png").FirstOrDefault();
+                    if (suffixed == null) continue;
+                    fullPath = suffixed;
+                }
 
-                // Skip if this image (or same filename from another folder) is already loaded
+                // Skip if already loaded
                 var candidateFileName = System.IO.Path.GetFileName(fullPath);
                 if (AllImages.Any(img => string.Equals(
                     System.IO.Path.GetFileName(img.FilePath),
@@ -3089,7 +3141,13 @@ public partial class ImageOptimiserPage : UserControl
                     StringComparison.OrdinalIgnoreCase)))
                     return;
 
-                // Auto-load the image directly (skip suggestion banner)
+                if (_main.Settings.DebugMode)
+                {
+                    AppLogger.Info($"[IMAGE] Chain '{chain.ConfigKey}': loaded '{candidateFileName}' via {method}");
+                    txtDetectionMethod.Text = $"Image: {candidateFileName}  ·  Method: {method}";
+                    txtDetectionMethod.Visibility = Visibility.Visible;
+                }
+
                 AddImages(new[] { fullPath });
                 return;
             }

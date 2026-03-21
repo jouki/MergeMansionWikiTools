@@ -20,18 +20,18 @@ internal static class SpriteMetadataService
     };
 
     /// <summary>
-    /// Resolves atlas_data.json path from the export directory.
+    /// Resolves image_atlas_data.json path from the export directory.
     /// The file lives one level above Export - PNGs (in the version directory).
     /// </summary>
     private static string GetAtlasDataPath(string exportDir)
     {
         var parent = Path.GetDirectoryName(exportDir)!;
-        return Path.Combine(parent, "atlas_data.json");
+        return Path.Combine(parent, "image_atlas_data.json");
     }
 
     /// <summary>
-    /// Loads the combined atlas data (sprites + skin mappings) from atlas_data.json.
-    /// Results are cached until the path changes.
+    /// Loads the combined image atlas data (sprites, skin mappings, pool tag mapping)
+    /// from image_atlas_data.json. Results are cached until the path changes.
     /// </summary>
     private static AtlasData LoadAtlasData(string exportDir)
     {
@@ -46,42 +46,72 @@ internal static class SpriteMetadataService
             _cache = JsonSerializer.Deserialize<AtlasData>(json, _jsonOpts)
                 ?? new AtlasData(new List<SpriteInfo>(), new List<SkinMapping>());
             _cachePath = path;
-            AppLogger.Info($"Loaded atlas_data.json ({_cache.Sprites.Count} sprites, {_cache.SkinMappings.Count} skin mappings) from {path}");
+            var poolCount = _cache.PoolTagMapping?.Count ?? 0;
+            AppLogger.Info($"Loaded image_atlas_data.json ({_cache.Sprites.Count} sprites, {_cache.SkinMappings.Count} skin mappings, {poolCount} pool tags) from {path}");
             return _cache;
         }
 
-        // Fallback: legacy separate files in Export - PNGs
+        // Fallback: legacy separate files
         var sprites = new List<SpriteInfo>();
         var skins = new List<SkinMapping>();
+        Dictionary<string, string>? poolTags = null;
 
-        var legacySpritePath = Path.Combine(exportDir, "sprite_metadata.json");
-        if (File.Exists(legacySpritePath))
+        // Legacy: atlas_data.json (old name)
+        var legacyAtlasPath = Path.Combine(Path.GetDirectoryName(exportDir)!, "atlas_data.json");
+        if (File.Exists(legacyAtlasPath))
         {
-            sprites = JsonSerializer.Deserialize<List<SpriteInfo>>(File.ReadAllText(legacySpritePath), _jsonOpts)
-                ?? new List<SpriteInfo>();
-            AppLogger.Info($"Loaded {sprites.Count} sprite entries from legacy {legacySpritePath}");
+            var legacyData = JsonSerializer.Deserialize<AtlasData>(File.ReadAllText(legacyAtlasPath), _jsonOpts);
+            if (legacyData != null)
+            {
+                sprites = legacyData.Sprites;
+                skins = legacyData.SkinMappings;
+                poolTags = legacyData.PoolTagMapping;
+                AppLogger.Info($"Loaded legacy atlas_data.json ({sprites.Count} sprites, {skins.Count} skin mappings)");
+            }
+        }
+        else
+        {
+            // Legacy: separate files in Export - PNGs
+            var legacySpritePath = Path.Combine(exportDir, "sprite_metadata.json");
+            if (File.Exists(legacySpritePath))
+            {
+                sprites = JsonSerializer.Deserialize<List<SpriteInfo>>(File.ReadAllText(legacySpritePath), _jsonOpts)
+                    ?? new List<SpriteInfo>();
+                AppLogger.Info($"Loaded {sprites.Count} sprite entries from legacy {legacySpritePath}");
+            }
+
+            var legacySkinPath = Path.Combine(exportDir, "skin_mapping.json");
+            if (File.Exists(legacySkinPath))
+            {
+                skins = JsonSerializer.Deserialize<List<SkinMapping>>(File.ReadAllText(legacySkinPath), _jsonOpts)
+                    ?? new List<SkinMapping>();
+                AppLogger.Info($"Loaded {skins.Count} skin mapping entries from legacy {legacySkinPath}");
+            }
         }
 
-        var legacySkinPath = Path.Combine(exportDir, "skin_mapping.json");
-        if (File.Exists(legacySkinPath))
+        // Legacy: separate pool_tag_to_prefab_mapping.json
+        if (poolTags == null)
         {
-            skins = JsonSerializer.Deserialize<List<SkinMapping>>(File.ReadAllText(legacySkinPath), _jsonOpts)
-                ?? new List<SkinMapping>();
-            AppLogger.Info($"Loaded {skins.Count} skin mapping entries from legacy {legacySkinPath}");
+            var legacyPoolPath = Path.Combine(Path.GetDirectoryName(exportDir)!, "pool_tag_to_prefab_mapping.json");
+            if (File.Exists(legacyPoolPath))
+            {
+                poolTags = JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(legacyPoolPath));
+                AppLogger.Info($"Loaded {poolTags?.Count ?? 0} entries from legacy pool_tag_to_prefab_mapping.json");
+            }
         }
 
-        _cache = new AtlasData(sprites, skins);
+        _cache = new AtlasData(sprites, skins, poolTags);
         _cachePath = path;
         return _cache;
     }
 
     /// <summary>
-    /// Loads sprite metadata from atlas_data.json.
+    /// Loads sprite metadata from image_atlas_data.json.
     /// </summary>
     public static List<SpriteInfo> Load(string exportDir) => LoadAtlasData(exportDir).Sprites;
 
     /// <summary>
-    /// Loads skin mappings from atlas_data.json.
+    /// Loads skin mappings from image_atlas_data.json.
     /// </summary>
     public static List<SkinMapping> LoadSkinMappings(string exportDir) => LoadAtlasData(exportDir).SkinMappings;
 
@@ -92,8 +122,6 @@ internal static class SpriteMetadataService
     {
         _cache = null;
         _cachePath = null;
-        _poolTagMap = null;
-        _poolTagMapPath = null;
     }
 
     /// <summary>
@@ -104,40 +132,17 @@ internal static class SpriteMetadataService
         return all.Where(s => string.Equals(s.TextureName, textureName, StringComparison.OrdinalIgnoreCase)).ToList();
     }
 
-    private static Dictionary<string, string>? _poolTagMap;
-    private static string? _poolTagMapPath;
-
     /// <summary>
-    /// Loads the pool_tag_to_prefab_mapping.json from the version directory.
-    /// This file is extracted from the game's GameObjectPoolConfig ScriptableObject
+    /// Loads the PoolTag → prefab name mapping from image_atlas_data.json.
+    /// This data is extracted from the game's GameObjectPoolConfig ScriptableObject
     /// and provides the definitive PoolTag → prefab/skeleton name mapping.
     /// </summary>
     private static Dictionary<string, string> LoadPoolTagMapping(string exportDir)
     {
-        var parent = Path.GetDirectoryName(exportDir)!;
-        var path = Path.Combine(parent, "pool_tag_to_prefab_mapping.json");
-
-        if (_poolTagMap != null && _poolTagMapPath == path)
-            return _poolTagMap;
-
-        _poolTagMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-        _poolTagMapPath = path;
-
-        if (!File.Exists(path))
-        {
-            AppLogger.Info($"pool_tag_to_prefab_mapping.json not found at {path}");
-            return _poolTagMap;
-        }
-
-        var json = File.ReadAllText(path);
-        var raw = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
-        if (raw != null)
-        {
-            foreach (var kv in raw)
-                _poolTagMap[kv.Key] = kv.Value;
-        }
-        AppLogger.Info($"Loaded pool_tag_to_prefab_mapping.json ({_poolTagMap.Count} entries)");
-        return _poolTagMap;
+        var data = LoadAtlasData(exportDir);
+        if (data.PoolTagMapping != null && data.PoolTagMapping.Count > 0)
+            return data.PoolTagMapping;
+        return new Dictionary<string, string>();
     }
 
     /// <summary>
@@ -153,10 +158,14 @@ internal static class SpriteMetadataService
         var mapping = LoadPoolTagMapping(exportDir);
         if (mapping.TryGetValue(poolTag, out var prefabName))
         {
-            // Strip "-UI" suffix (some prefabs have it, textures don't)
-            var textureName = prefabName.EndsWith("-UI", StringComparison.OrdinalIgnoreCase)
-                ? prefabName[..^3]
-                : prefabName;
+            // Strip UI suffix variants: "-UI" (e.g. ItemMakeupTools-UI) or "UI" (e.g. ItemGardenToolsUI)
+            var textureName = prefabName;
+            if (textureName.EndsWith("-UI", StringComparison.OrdinalIgnoreCase))
+                textureName = textureName[..^3];
+            else if (textureName.Length > 2
+                && textureName.EndsWith("UI", StringComparison.Ordinal)
+                && char.IsLower(textureName[^3]))
+                textureName = textureName[..^2];
             AppLogger.Info($"PoolTag '{poolTag}' → '{textureName}' [PoolConfig]");
             return textureName;
         }
@@ -183,7 +192,9 @@ internal static class SpriteMetadataService
             if (prefabName.EndsWith("-UI", StringComparison.OrdinalIgnoreCase))
                 prefabName = prefabName[..^3];
 
-            if (string.Equals(prefabName, textureName, StringComparison.OrdinalIgnoreCase))
+            // Exact match or suffix-renamed match (e.g. "Mansion2023_Tools_prefabsmansion2023_assets_all")
+            if (string.Equals(prefabName, textureName, StringComparison.OrdinalIgnoreCase)
+                || textureName.StartsWith(prefabName + "_", StringComparison.OrdinalIgnoreCase))
                 return kv.Key;
         }
 
@@ -230,7 +241,7 @@ internal static class SpriteMetadataService
             if (result.Count > 0) return result;
         }
 
-        // Try finding a texture whose name contains any CamelCase part of the ConfigKey
+        // Try finding a texture whose name contains any CamelCase part of the ConfigKey (Item prefix)
         if (parts.Count > 1)
         {
             for (int i = parts.Count - 1; i >= 0; i--)
@@ -359,6 +370,11 @@ internal static class SpriteMetadataService
         if (chainSkinNames.Count == 0)
             return null;
 
+        // Numeric-only SkinNames ("1", "2", "3"...) are shared by nearly all chains —
+        // they cannot reliably identify a texture. Skip deterministic lookup in that case.
+        if (chainSkinNames.All(s => s.All(char.IsDigit)))
+            return null;
+
         // Group skin mappings by skeleton, find the skeleton with most matching skins
         var bySkeletonMatch = allSkinMappings
             .GroupBy(m => m.SkeletonName, StringComparer.OrdinalIgnoreCase)
@@ -373,12 +389,63 @@ internal static class SpriteMetadataService
             .ThenBy(x => Math.Abs(x.TotalSkins - chainSkinNames.Count)) // prefer matching skin count
             .FirstOrDefault();
 
-        if (bySkeletonMatch != null)
+        // Require at least 30% of the chain's named skins to match — prevents a single
+        // coincidental skin name from selecting a completely unrelated skeleton.
+        if (bySkeletonMatch != null
+            && bySkeletonMatch.MatchCount >= Math.Max(2, (int)Math.Ceiling(chainSkinNames.Count * 0.3)))
         {
             AppLogger.Info($"Skin mapping → texture '{bySkeletonMatch.Skeleton}' " +
                 $"({bySkeletonMatch.MatchCount}/{chainSkinNames.Count} skins matched, " +
                 $"skeleton has {bySkeletonMatch.TotalSkins} skins)");
             return bySkeletonMatch.Skeleton;
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Deterministic texture lookup via ItemType → SpriteName in skin mappings.
+    /// Each chain item has an ItemType (e.g. "MaintenanceTools_01"). The skin mapping
+    /// image_atlas_data.json records which Spine skeleton (= texture) each sprite belongs to:
+    ///   {skeletonName: "ItemTools", spriteName: "MaintenanceTools_01"}
+    /// Matching ItemType against SpriteName gives the skeleton = texture name.
+    /// This is 100% from game data — no heuristics.
+    /// </summary>
+    public static string? FindTextureForChainFromItemTypes(
+        List<SkinMapping> allSkinMappings, List<ParsedItem> chainItems)
+    {
+        if (allSkinMappings.Count == 0 || chainItems.Count == 0)
+            return null;
+
+        var itemTypes = chainItems
+            .Where(i => !string.IsNullOrEmpty(i.ItemType))
+            .Select(i => i.ItemType!)
+            .ToList();
+
+        if (itemTypes.Count == 0)
+            return null;
+
+        // Match each ItemType against skin mapping SpriteName (exact or prefix match)
+        // e.g. ItemType "MaintenanceTools_01" matches SpriteName "MaintenanceTools_01"
+        var best = allSkinMappings
+            .Where(m => itemTypes.Any(t =>
+                string.Equals(m.SpriteName, t, StringComparison.OrdinalIgnoreCase) ||
+                m.SpriteName.StartsWith(t + "_", StringComparison.OrdinalIgnoreCase) ||
+                t.StartsWith(m.SpriteName + "_", StringComparison.OrdinalIgnoreCase) ||
+                // Also match against AttachmentKey (item type before atlas-region "name" override)
+                (!string.IsNullOrEmpty(m.AttachmentKey) && (
+                    string.Equals(m.AttachmentKey, t, StringComparison.OrdinalIgnoreCase) ||
+                    m.AttachmentKey.StartsWith(t + "_", StringComparison.OrdinalIgnoreCase) ||
+                    t.StartsWith(m.AttachmentKey + "_", StringComparison.OrdinalIgnoreCase)))))
+            .GroupBy(m => m.SkeletonName, StringComparer.OrdinalIgnoreCase)
+            .Select(g => (Skeleton: g.Key, Count: g.Count()))
+            .OrderByDescending(x => x.Count)
+            .FirstOrDefault();
+
+        if (best.Count > 0)
+        {
+            AppLogger.Info($"ItemType mapping → texture '{best.Skeleton}' ({best.Count} item types matched)");
+            return best.Skeleton;
         }
 
         return null;
