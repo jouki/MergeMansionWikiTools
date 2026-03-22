@@ -65,8 +65,8 @@ internal class FlowchartService3
     const double EdgePad = 3;       // gap between node boundary and edge start/end
     const double SnapThresh = 5;    // snap small X offsets to straight
     const double AlignThresh = 20;  // snap drift in dummy waypoints
-    const double BendRadius = 8;    // default rounded corner radius on edge bends
-    const double BendRadiusLarge = 30; // TEMP: larger radius for divergence/convergence junction bends
+    const double BendRadius = 7;    // default rounded corner radius on edge bends
+    const double BendRadiusLarge = 12; // larger radius for divergence/convergence junction bends
 
     // ── XP icon (base64 PNG) ────────────────────────────────────────
 
@@ -1894,6 +1894,69 @@ internal class FlowchartService3
             }
         }
 
+        // (f) Shared vertical corridor: when two edges from different sources share an
+        //     overlapping vertical segment at the same X:
+        //     - JOINER (higher yMin): entry bend marked (joins corridor from above)
+        //     - LEAVER (lower yMax): exit bend marked (splits off corridor before other ends)
+        //     Skips identical segments (overlapping same-path edges).
+        var vSegs = new List<(int edgeIdx, double x, double yMin, double yMax, int bendTop, int bendBot)>();
+        for (int ei = 0; ei < edgeRoutes.Count; ei++)
+        {
+            var rPts = edgeRoutes[ei].pts;
+            for (int si = 0; si < rPts.Count - 1; si++)
+            {
+                if (Math.Abs(rPts[si].x - rPts[si + 1].x) < 0.1) // vertical segment
+                {
+                    int topIdx = rPts[si].y < rPts[si + 1].y ? si : si + 1;
+                    int botIdx = rPts[si].y < rPts[si + 1].y ? si + 1 : si;
+                    vSegs.Add((ei, rPts[si].x,
+                        Math.Min(rPts[si].y, rPts[si + 1].y),
+                        Math.Max(rPts[si].y, rPts[si + 1].y),
+                        topIdx, botIdx));
+                }
+            }
+        }
+
+        foreach (var xGroup in vSegs.GroupBy(s => (int)Math.Round(s.x)))
+        {
+            var segs = xGroup.ToList();
+            if (segs.Count < 2) continue;
+            for (int i = 0; i < segs.Count; i++)
+            {
+                for (int j = i + 1; j < segs.Count; j++)
+                {
+                    if (edgeRoutes[segs[i].edgeIdx].from == edgeRoutes[segs[j].edgeIdx].from)
+                        continue;
+                    // Skip identical segments (same-path overlapping edges)
+                    if (Math.Abs(segs[i].yMin - segs[j].yMin) < 1 &&
+                        Math.Abs(segs[i].yMax - segs[j].yMax) < 1)
+                        continue;
+                    // Check vertical overlap
+                    if (segs[i].yMax <= segs[j].yMin + 1 || segs[j].yMax <= segs[i].yMin + 1)
+                        continue;
+
+                    // JOINER: edge entering the corridor later (higher yMin)
+                    var joiner = segs[i].yMin > segs[j].yMin ? segs[i] : segs[j];
+                    var epJ = edgeRoutes[joiner.edgeIdx].pts;
+                    if (epJ.Count > 2 && joiner.bendTop > 0 && joiner.bendTop < epJ.Count - 1)
+                    {
+                        if (Math.Abs(epJ[joiner.bendTop - 1].y - epJ[joiner.bendTop].y) < 1)
+                            junctionBends.Add((joiner.edgeIdx, joiner.bendTop));
+                    }
+
+                    // LEAVER: edge exiting the corridor earlier (lower yMax)
+                    var leaver = segs[i].yMax < segs[j].yMax ? segs[i] : segs[j];
+                    var epL = edgeRoutes[leaver.edgeIdx].pts;
+                    if (epL.Count > 2 && leaver.bendBot > 0 && leaver.bendBot < epL.Count - 1)
+                    {
+                        // Verify it's an exit to horizontal (next Y matches bend Y)
+                        if (Math.Abs(epL[leaver.bendBot + 1].y - epL[leaver.bendBot].y) < 1)
+                            junctionBends.Add((leaver.edgeIdx, leaver.bendBot));
+                    }
+                }
+            }
+        }
+
         // ── Pass 3: Render edges with per-bend junction radii ──
         for (int ei = 0; ei < edgeRoutes.Count; ei++)
         {
@@ -1980,14 +2043,9 @@ internal class FlowchartService3
             double lenIn = Math.Sqrt((curr.x - prev.x) * (curr.x - prev.x) + (curr.y - prev.y) * (curr.y - prev.y));
             double lenOut = Math.Sqrt((next.x - curr.x) * (next.x - curr.x) + (next.y - curr.y) * (next.y - curr.y));
 
-            // Select radius for this bend point
-            double baseR = (largeBendIndices?.Contains(i) == true) ? largeRadius : defaultRadius;
-
-            // Clamp radius to half of shortest adjacent segment (TEMP: no clamp for large bends)
-            double r = (largeBendIndices?.Contains(i) == true)
-                ? baseR
-                : Math.Min(baseR, Math.Min(lenIn, lenOut) / 2);
-            if (r < 0.5)
+            // Select radius for this bend point (fixed, no clamping)
+            double r = (largeBendIndices?.Contains(i) == true) ? largeRadius : defaultRadius;
+            if (r < 0.5 || Math.Min(lenIn, lenOut) < 1)
             {
                 // Degenerate — just line to corner
                 sb.Append($" L{curr.x.ToString(ci)},{curr.y.ToString(ci)}");
