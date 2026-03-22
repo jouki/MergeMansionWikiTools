@@ -65,7 +65,8 @@ internal class FlowchartService3
     const double EdgePad = 3;       // gap between node boundary and edge start/end
     const double SnapThresh = 5;    // snap small X offsets to straight
     const double AlignThresh = 20;  // snap drift in dummy waypoints
-    const double BendRadius = 7;    // rounded corner radius on edge bends
+    const double BendRadius = 8;    // default rounded corner radius on edge bends
+    const double BendRadiusLarge = 30; // TEMP: larger radius for divergence/convergence junction bends
 
     // ── XP icon (base64 PNG) ────────────────────────────────────────
 
@@ -1455,6 +1456,14 @@ internal class FlowchartService3
         foreach (var (from, _) in realEdges)
             edgeCountBySource[from] = edgeCountBySource.GetValueOrDefault(from) + 1;
 
+        // Count incoming edges per target for convergence detection
+        var edgeCountByTarget = new Dictionary<string, int>(StringComparer.Ordinal);
+        foreach (var (_, to) in realEdges)
+            edgeCountByTarget[to] = edgeCountByTarget.GetValueOrDefault(to) + 1;
+
+        // ── Pass 1: Route all edges and collect filtered waypoints ──
+        var edgeRoutes = new List<(string from, string to, List<(double x, double y)> pts)>();
+
         foreach (var (fromId, toId) in realEdges)
         {
             if (!nodes.TryGetValue(fromId, out var source) || source.IsDummy) continue;
@@ -1472,7 +1481,7 @@ internal class FlowchartService3
             int srcLayer = nodeLayer.GetValueOrDefault(fromId, -1);
             int tgtLayer = nodeLayer.GetValueOrDefault(toId, -1);
 
-            // Collect waypoints, then render with rounded bends
+            // Collect waypoints
             var pts = new List<(double x, double y)> { (sx, sy) };
 
             double routeStartX = sx;
@@ -1487,186 +1496,433 @@ internal class FlowchartService3
             }
 
             // Strategy 1: Straight vertical (aligned)
+            bool straightRouted = false;
             if (Math.Abs(routeStartX - tx) < SnapThresh)
             {
                 if (!SegmentHitsNode(routeStartX, routeStartY, routeStartX, ty,
                     nodeBoxes, fromId, toId, margin))
                 {
                     pts.Add((routeStartX, ty));
-                    sb.AppendLine($"    <path class=\"edge-path\" d=\"{BuildRoundedPath(pts, BendRadius, ci)}\" marker-end=\"url(#arrow)\" />");
-                    continue;
+                    straightRouted = true;
                 }
             }
 
-            // Strategy 2: Z-bend at each inter-layer gap
-            bool routed = false;
-            if (srcLayer >= 0 && tgtLayer >= 0 && tgtLayer > srcLayer)
+            if (!straightRouted)
             {
-                for (int gapLayer = srcLayer; gapLayer < tgtLayer; gapLayer++)
+                // Strategy 2: Z-bend at each inter-layer gap
+                bool routed = false;
+                if (srcLayer >= 0 && tgtLayer >= 0 && tgtLayer > srcLayer)
                 {
-                    double gapY = (layerBottom[gapLayer] + layerTop[gapLayer + 1]) / 2;
-                    // Ensure gap is between routeStartY and ty
-                    if (gapY <= routeStartY + 2 || gapY >= ty - 2) continue;
-
-                    bool hit =
-                        SegmentHitsNode(routeStartX, routeStartY, routeStartX, gapY,
-                            nodeBoxes, fromId, toId, margin) ||
-                        SegmentHitsNode(routeStartX, gapY, tx, gapY,
-                            nodeBoxes, fromId, toId, margin) ||
-                        SegmentHitsNode(tx, gapY, tx, ty,
-                            nodeBoxes, fromId, toId, margin);
-
-                    if (!hit)
+                    for (int gapLayer = srcLayer; gapLayer < tgtLayer; gapLayer++)
                     {
-                        pts.Add((routeStartX, gapY));
-                        pts.Add((tx, gapY));
-                        pts.Add((tx, ty));
-                        routed = true;
-                        break;
-                    }
-                }
-            }
+                        double gapY = (layerBottom[gapLayer] + layerTop[gapLayer + 1]) / 2;
+                        if (gapY <= routeStartY + 2 || gapY >= ty - 2) continue;
 
-            if (!routed)
-            {
-                bool sameColumn = Math.Abs(routeStartX - tx) < MaxNodeW / 2;
+                        bool hit =
+                            SegmentHitsNode(routeStartX, routeStartY, routeStartX, gapY,
+                                nodeBoxes, fromId, toId, margin) ||
+                            SegmentHitsNode(routeStartX, gapY, tx, gapY,
+                                nodeBoxes, fromId, toId, margin) ||
+                            SegmentHitsNode(tx, gapY, tx, ty,
+                                nodeBoxes, fromId, toId, margin);
 
-                if (sameColumn)
-                {
-                    // Strategy 3a: Same-column edge with blocking nodes.
-                    double jogOffset = MaxNodeW / 2 + NodeGapX;
-
-                    double jogLeft = routeStartX - jogOffset;
-                    double jogRight = routeStartX + jogOffset;
-
-                    double gapY1 = routeStartY + BusOffset;
-                    double gapY2 = ty - BusOffset;
-                    if (srcLayer >= 0 && tgtLayer >= 0 && tgtLayer > srcLayer)
-                    {
-                        double g1 = (layerBottom[srcLayer] + layerTop[Math.Min(srcLayer + 1, layers.Count - 1)]) / 2;
-                        if (g1 > routeStartY + 2) gapY1 = g1;
-                        double g2 = (layerBottom[Math.Max(tgtLayer - 1, 0)] + layerTop[tgtLayer]) / 2;
-                        if (g2 < ty - 2) gapY2 = g2;
-                    }
-
-                    int ScoreJog(double jx)
-                    {
-                        int h = 0;
-                        if (SegmentHitsNode(routeStartX, routeStartY, routeStartX, gapY1, nodeBoxes, fromId, toId, margin)) h++;
-                        if (SegmentHitsNode(routeStartX, gapY1, jx, gapY1, nodeBoxes, fromId, toId, margin)) h++;
-                        if (SegmentHitsNode(jx, gapY1, jx, gapY2, nodeBoxes, fromId, toId, margin)) h++;
-                        if (SegmentHitsNode(jx, gapY2, tx, gapY2, nodeBoxes, fromId, toId, margin)) h++;
-                        if (SegmentHitsNode(tx, gapY2, tx, ty, nodeBoxes, fromId, toId, margin)) h++;
-                        return h;
-                    }
-
-                    int leftHits = (jogLeft > 0) ? ScoreJog(jogLeft) : int.MaxValue;
-                    int rightHits = ScoreJog(jogRight);
-                    double jogX = (leftHits <= rightHits) ? jogLeft : jogRight;
-
-                    pts.Add((routeStartX, gapY1));
-                    pts.Add((jogX, gapY1));
-                    pts.Add((jogX, gapY2));
-                    pts.Add((tx, gapY2));
-                    pts.Add((tx, ty));
-                }
-                else
-                {
-                    // Strategy 3b: Corridor routing for different-column edges.
-                    double gapY1 = routeStartY + BusOffset;
-                    double gapY2 = ty - BusOffset;
-                    if (srcLayer >= 0 && tgtLayer >= 0 && tgtLayer > srcLayer)
-                    {
-                        double g1 = (layerBottom[srcLayer] + layerTop[Math.Min(srcLayer + 1, layers.Count - 1)]) / 2;
-                        if (g1 > routeStartY + 2) gapY1 = g1;
-                        double g2 = (layerBottom[Math.Max(tgtLayer - 1, 0)] + layerTop[tgtLayer]) / 2;
-                        if (g2 < ty - 2) gapY2 = g2;
-                    }
-
-                    var occupied = new List<(double left, double right)>();
-                    foreach (var (nl, nt, nr, nb, nid) in nodeBoxes)
-                    {
-                        if (nid == fromId || nid == toId) continue;
-                        if (nb + margin >= gapY1 && nt - margin <= gapY2)
-                            occupied.Add((nl - margin, nr + margin));
-                    }
-                    occupied.Sort((a, z) => a.left.CompareTo(z.left));
-
-                    var merged = new List<(double left, double right)>();
-                    foreach (var iv in occupied)
-                    {
-                        if (merged.Count > 0 && iv.left <= merged[^1].right)
-                            merged[^1] = (merged[^1].left, Math.Max(merged[^1].right, iv.right));
-                        else
-                            merged.Add(iv);
-                    }
-
-                    var candidates = new List<double>();
-                    if (merged.Count > 0 && merged[0].left > NodeGapX)
-                        candidates.Add(merged[0].left - NodeGapX / 2);
-                    for (int mi = 0; mi < merged.Count - 1; mi++)
-                        candidates.Add((merged[mi].right + merged[mi + 1].left) / 2);
-                    if (merged.Count > 0)
-                        candidates.Add(merged[^1].right + NodeGapX / 2);
-                    if (candidates.Count == 0)
-                    {
-                        candidates.Add(routeStartX);
-                        candidates.Add(tx);
-                    }
-
-                    double midX = (routeStartX + tx) / 2;
-                    double bestCX = candidates[0];
-                    int bestCHits = int.MaxValue;
-
-                    foreach (var cx in candidates)
-                    {
-                        if (cx < margin) continue;
-                        int hits = 0;
-                        if (SegmentHitsNode(routeStartX, routeStartY, routeStartX, gapY1,
-                            nodeBoxes, fromId, toId, margin)) hits++;
-                        if (SegmentHitsNode(routeStartX, gapY1, cx, gapY1,
-                            nodeBoxes, fromId, toId, margin)) hits++;
-                        if (SegmentHitsNode(cx, gapY1, cx, gapY2,
-                            nodeBoxes, fromId, toId, margin)) hits++;
-                        if (SegmentHitsNode(cx, gapY2, tx, gapY2,
-                            nodeBoxes, fromId, toId, margin)) hits++;
-                        if (SegmentHitsNode(tx, gapY2, tx, ty,
-                            nodeBoxes, fromId, toId, margin)) hits++;
-
-                        if (hits < bestCHits ||
-                            (hits == bestCHits && Math.Abs(cx - midX) < Math.Abs(bestCX - midX)))
+                        if (!hit)
                         {
-                            bestCHits = hits;
-                            bestCX = cx;
-                            if (hits == 0) break;
+                            pts.Add((routeStartX, gapY));
+                            pts.Add((tx, gapY));
+                            pts.Add((tx, ty));
+                            routed = true;
+                            break;
                         }
                     }
+                }
 
-                    if (Math.Abs(bestCX - routeStartX) < SnapThresh)
+                if (!routed)
+                {
+                    bool sameColumn = Math.Abs(routeStartX - tx) < MaxNodeW / 2;
+
+                    if (sameColumn)
                     {
-                        pts.Add((routeStartX, gapY2));
-                        pts.Add((tx, gapY2));
-                        pts.Add((tx, ty));
-                    }
-                    else if (Math.Abs(bestCX - tx) < SnapThresh)
-                    {
+                        // Strategy 3a: Same-column edge with blocking nodes.
+                        double jogOffset = MaxNodeW / 2 + NodeGapX / 2;
+
+                        double jogLeft = routeStartX - jogOffset;
+                        double jogRight = routeStartX + jogOffset;
+
+                        double gapY1 = routeStartY + BusOffset;
+                        double gapY2 = ty - BusOffset;
+                        if (srcLayer >= 0 && tgtLayer >= 0 && tgtLayer > srcLayer)
+                        {
+                            double g1 = (layerBottom[srcLayer] + layerTop[Math.Min(srcLayer + 1, layers.Count - 1)]) / 2;
+                            if (g1 > routeStartY + 2) gapY1 = g1;
+                            double g2 = (layerBottom[Math.Max(tgtLayer - 1, 0)] + layerTop[tgtLayer]) / 2;
+                            if (g2 < ty - 2) gapY2 = g2;
+                        }
+
+                        int ScoreJog(double jx)
+                        {
+                            int h = 0;
+                            if (SegmentHitsNode(routeStartX, routeStartY, routeStartX, gapY1, nodeBoxes, fromId, toId, margin)) h++;
+                            if (SegmentHitsNode(routeStartX, gapY1, jx, gapY1, nodeBoxes, fromId, toId, margin)) h++;
+                            if (SegmentHitsNode(jx, gapY1, jx, gapY2, nodeBoxes, fromId, toId, margin)) h++;
+                            if (SegmentHitsNode(jx, gapY2, tx, gapY2, nodeBoxes, fromId, toId, margin)) h++;
+                            if (SegmentHitsNode(tx, gapY2, tx, ty, nodeBoxes, fromId, toId, margin)) h++;
+                            return h;
+                        }
+
+                        int leftHits = (jogLeft > 0) ? ScoreJog(jogLeft) : int.MaxValue;
+                        int rightHits = ScoreJog(jogRight);
+                        double jogX = (leftHits <= rightHits) ? jogLeft : jogRight;
+
                         pts.Add((routeStartX, gapY1));
-                        pts.Add((tx, gapY1));
+                        pts.Add((jogX, gapY1));
+                        pts.Add((jogX, gapY2));
+                        pts.Add((tx, gapY2));
                         pts.Add((tx, ty));
                     }
                     else
                     {
-                        pts.Add((routeStartX, gapY1));
-                        pts.Add((bestCX, gapY1));
-                        pts.Add((bestCX, gapY2));
-                        pts.Add((tx, gapY2));
-                        pts.Add((tx, ty));
+                        // Strategy 3b: Corridor routing for different-column edges.
+                        double gapY1 = routeStartY + BusOffset;
+                        double gapY2 = ty - BusOffset;
+                        if (srcLayer >= 0 && tgtLayer >= 0 && tgtLayer > srcLayer)
+                        {
+                            double g1 = (layerBottom[srcLayer] + layerTop[Math.Min(srcLayer + 1, layers.Count - 1)]) / 2;
+                            if (g1 > routeStartY + 2) gapY1 = g1;
+                            double g2 = (layerBottom[Math.Max(tgtLayer - 1, 0)] + layerTop[tgtLayer]) / 2;
+                            if (g2 < ty - 2) gapY2 = g2;
+                        }
+
+                        var occupied = new List<(double left, double right)>();
+                        foreach (var (nl, nt, nr, nb, nid) in nodeBoxes)
+                        {
+                            if (nid == fromId || nid == toId) continue;
+                            if (nb + margin >= gapY1 && nt - margin <= gapY2)
+                                occupied.Add((nl - margin, nr + margin));
+                        }
+                        occupied.Sort((a, z) => a.left.CompareTo(z.left));
+
+                        var merged = new List<(double left, double right)>();
+                        foreach (var iv in occupied)
+                        {
+                            if (merged.Count > 0 && iv.left <= merged[^1].right)
+                                merged[^1] = (merged[^1].left, Math.Max(merged[^1].right, iv.right));
+                            else
+                                merged.Add(iv);
+                        }
+
+                        var candidates = new List<double>();
+                        if (merged.Count > 0 && merged[0].left > NodeGapX)
+                            candidates.Add(merged[0].left - NodeGapX / 2);
+                        for (int mi = 0; mi < merged.Count - 1; mi++)
+                            candidates.Add((merged[mi].right + merged[mi + 1].left) / 2);
+                        if (merged.Count > 0)
+                            candidates.Add(merged[^1].right + NodeGapX / 2);
+                        if (candidates.Count == 0)
+                        {
+                            candidates.Add(routeStartX);
+                            candidates.Add(tx);
+                        }
+
+                        double midX = (routeStartX + tx) / 2;
+                        double bestCX = candidates[0];
+                        int bestCHits = int.MaxValue;
+
+                        foreach (var cx in candidates)
+                        {
+                            if (cx < margin) continue;
+                            int hits = 0;
+                            if (SegmentHitsNode(routeStartX, routeStartY, routeStartX, gapY1,
+                                nodeBoxes, fromId, toId, margin)) hits++;
+                            if (SegmentHitsNode(routeStartX, gapY1, cx, gapY1,
+                                nodeBoxes, fromId, toId, margin)) hits++;
+                            if (SegmentHitsNode(cx, gapY1, cx, gapY2,
+                                nodeBoxes, fromId, toId, margin)) hits++;
+                            if (SegmentHitsNode(cx, gapY2, tx, gapY2,
+                                nodeBoxes, fromId, toId, margin)) hits++;
+                            if (SegmentHitsNode(tx, gapY2, tx, ty,
+                                nodeBoxes, fromId, toId, margin)) hits++;
+
+                            if (hits < bestCHits ||
+                                (hits == bestCHits && Math.Abs(cx - midX) < Math.Abs(bestCX - midX)))
+                            {
+                                bestCHits = hits;
+                                bestCX = cx;
+                                if (hits == 0) break;
+                            }
+                        }
+
+                        if (Math.Abs(bestCX - routeStartX) < SnapThresh)
+                        {
+                            pts.Add((routeStartX, gapY2));
+                            pts.Add((tx, gapY2));
+                            pts.Add((tx, ty));
+                        }
+                        else if (Math.Abs(bestCX - tx) < SnapThresh)
+                        {
+                            pts.Add((routeStartX, gapY1));
+                            pts.Add((tx, gapY1));
+                            pts.Add((tx, ty));
+                        }
+                        else
+                        {
+                            pts.Add((routeStartX, gapY1));
+                            pts.Add((bestCX, gapY1));
+                            pts.Add((bestCX, gapY2));
+                            pts.Add((tx, gapY2));
+                            pts.Add((tx, ty));
+                        }
                     }
                 }
             }
 
-            sb.AppendLine($"    <path class=\"edge-path\" d=\"{BuildRoundedPath(pts, BendRadius, ci)}\" marker-end=\"url(#arrow)\" />");
+            // Filter out collinear waypoints (e.g. bus segment on same vertical line)
+            // to prevent short segments from over-clamping bend radii
+            var filtered = new List<(double x, double y)> { pts[0] };
+            for (int fi = 1; fi < pts.Count - 1; fi++)
+            {
+                var prev = filtered[^1];
+                var curr = pts[fi];
+                var next = pts[fi + 1];
+                if (!IsCollinear(prev, curr, next))
+                    filtered.Add(curr);
+            }
+            filtered.Add(pts[^1]);
+
+            edgeRoutes.Add((fromId, toId, filtered));
         }
+
+        // ── Pass 2: Detect visual junctions ──
+        // A bend is a junction (large radius) if:
+        //  (a) Multiple edges share the same bend point with different in/out directions
+        //  (c) Overlapping horizontal segments from different sources — SOURCE-SIDE bends only
+        //  (d) Multi-child divergence: straight + non-straight children → first bend
+        //  (e) Multi-parent convergence: straight + non-straight incoming → last bend
+        var bendMap = new Dictionary<(int rx, int ry),
+            List<(int edgeIdx, int bendIdx, int outDx, int outDy, int inDx, int inDy)>>();
+
+        for (int ei = 0; ei < edgeRoutes.Count; ei++)
+        {
+            var rPts = edgeRoutes[ei].pts;
+            for (int bi = 1; bi < rPts.Count - 1; bi++)
+            {
+                var key = ((int)Math.Round(rPts[bi].x), (int)Math.Round(rPts[bi].y));
+                int outDx = Math.Sign(rPts[bi + 1].x - rPts[bi].x);
+                int outDy = Math.Sign(rPts[bi + 1].y - rPts[bi].y);
+                int inDx = Math.Sign(rPts[bi].x - rPts[bi - 1].x);
+                int inDy = Math.Sign(rPts[bi].y - rPts[bi - 1].y);
+
+                if (!bendMap.ContainsKey(key)) bendMap[key] = new();
+                bendMap[key].Add((ei, bi, outDx, outDy, inDx, inDy));
+            }
+        }
+
+        var junctionBends = new HashSet<(int edgeIdx, int bendIdx)>();
+
+        // (a) Shared bend points with different directions
+        foreach (var (_, bends) in bendMap)
+        {
+            if (bends.Count < 2) continue;
+            bool hasDivergence = bends.Select(b => (b.outDx, b.outDy)).Distinct().Count() > 1;
+            bool hasConvergence = bends.Select(b => (b.inDx, b.inDy)).Distinct().Count() > 1;
+            if (hasDivergence || hasConvergence)
+            {
+                foreach (var b in bends)
+                    junctionBends.Add((b.edgeIdx, b.bendIdx));
+            }
+        }
+
+        // (c) Overlapping horizontal segments from different sources → SOURCE-SIDE bends only
+        // Source-side = where edge enters horizontal from vertical (prev waypoint has same X)
+        var hSegs = new List<(int edgeIdx, double y, double xMin, double xMax, int bendL, int bendR)>();
+        for (int ei = 0; ei < edgeRoutes.Count; ei++)
+        {
+            var rPts = edgeRoutes[ei].pts;
+            for (int si = 0; si < rPts.Count - 1; si++)
+            {
+                if (Math.Abs(rPts[si].y - rPts[si + 1].y) < 0.1)
+                {
+                    hSegs.Add((ei, rPts[si].y,
+                        Math.Min(rPts[si].x, rPts[si + 1].x),
+                        Math.Max(rPts[si].x, rPts[si + 1].x),
+                        si, si + 1));
+                }
+            }
+        }
+
+        foreach (var yGroup in hSegs.GroupBy(s => (int)Math.Round(s.y)))
+        {
+            var segs = yGroup.ToList();
+            if (segs.Count < 2) continue;
+            for (int i = 0; i < segs.Count; i++)
+            {
+                for (int j = i + 1; j < segs.Count; j++)
+                {
+                    if (edgeRoutes[segs[i].edgeIdx].from == edgeRoutes[segs[j].edgeIdx].from)
+                        continue;
+                    if (segs[i].xMax <= segs[j].xMin + 1 || segs[j].xMax <= segs[i].xMin + 1)
+                        continue;
+                    // Overlapping → mark only source-side bends (entering horizontal from vertical)
+                    void MarkSourceSideBend(int edgeIdx, int bendIdx)
+                    {
+                        var ep = edgeRoutes[edgeIdx].pts;
+                        if (bendIdx <= 0 || bendIdx >= ep.Count - 1) return;
+                        // Source-side: previous waypoint has same X (came from vertical segment)
+                        if (Math.Abs(ep[bendIdx - 1].x - ep[bendIdx].x) < 1)
+                            junctionBends.Add((edgeIdx, bendIdx));
+                    }
+                    MarkSourceSideBend(segs[i].edgeIdx, segs[i].bendL);
+                    MarkSourceSideBend(segs[i].edgeIdx, segs[i].bendR);
+                    MarkSourceSideBend(segs[j].edgeIdx, segs[j].bendL);
+                    MarkSourceSideBend(segs[j].edgeIdx, segs[j].bendR);
+                }
+            }
+        }
+
+        // (d) Multi-child divergence: if source has both straight and non-straight edges,
+        //     or non-straight edges with different first-bend directions → first bend is divergence
+        var edgesBySource = new Dictionary<string, List<int>>(StringComparer.Ordinal);
+        for (int ei = 0; ei < edgeRoutes.Count; ei++)
+        {
+            var src = edgeRoutes[ei].from;
+            if (!edgesBySource.ContainsKey(src)) edgesBySource[src] = new();
+            edgesBySource[src].Add(ei);
+        }
+
+        foreach (var (_, siblings) in edgesBySource)
+        {
+            if (siblings.Count < 2) continue;
+
+            bool hasStraight = siblings.Any(ei => edgeRoutes[ei].pts.Count <= 2);
+            var nonStraight = siblings.Where(ei => edgeRoutes[ei].pts.Count > 2).ToList();
+
+            bool isDivergence = false;
+            if (hasStraight && nonStraight.Count > 0)
+            {
+                // One child goes straight, another turns → bus split divergence
+                isDivergence = true;
+            }
+            else if (nonStraight.Count >= 2)
+            {
+                // Multiple non-straight: check if first bends differ (different coords or directions)
+                var firstBendSigs = nonStraight.Select(ei =>
+                {
+                    var p = edgeRoutes[ei].pts;
+                    return ((int)Math.Round(p[1].x), (int)Math.Round(p[1].y),
+                            Math.Sign(p[2].x - p[1].x), Math.Sign(p[2].y - p[1].y));
+                }).Distinct().Count();
+                if (firstBendSigs > 1) isDivergence = true;
+            }
+
+            if (isDivergence)
+            {
+                foreach (var ei in nonStraight)
+                    junctionBends.Add((ei, 1));
+            }
+        }
+
+        // (e) Multi-parent convergence: target with both straight and non-straight incoming edges,
+        //     or non-straight with different last-bend incoming directions → last bend is convergence
+        var edgesByTarget = new Dictionary<string, List<int>>(StringComparer.Ordinal);
+        for (int ei = 0; ei < edgeRoutes.Count; ei++)
+        {
+            var tgt = edgeRoutes[ei].to;
+            if (!edgesByTarget.ContainsKey(tgt)) edgesByTarget[tgt] = new();
+            edgesByTarget[tgt].Add(ei);
+        }
+
+        foreach (var (_, siblings) in edgesByTarget)
+        {
+            if (siblings.Count < 2) continue;
+
+            bool hasStraightIn = siblings.Any(ei => edgeRoutes[ei].pts.Count <= 2);
+            var nonStraightIn = siblings.Where(ei => edgeRoutes[ei].pts.Count > 2).ToList();
+
+            bool isConvergence = false;
+            if (hasStraightIn && nonStraightIn.Count > 0)
+            {
+                // One arrives straight, another bends → visible convergence
+                isConvergence = true;
+            }
+            else if (nonStraightIn.Count >= 2)
+            {
+                // Multiple non-straight: convergence if last bends differ in direction OR position
+                // (different horizontal bus heights → different last-bend Y, even if same direction)
+                var lastBendInDirs = nonStraightIn.Select(ei =>
+                {
+                    var p = edgeRoutes[ei].pts;
+                    int lb = p.Count - 2;
+                    return (Math.Sign(p[lb].x - p[lb - 1].x), Math.Sign(p[lb].y - p[lb - 1].y));
+                }).Distinct().Count();
+                if (lastBendInDirs > 1) isConvergence = true;
+
+                if (!isConvergence)
+                {
+                    // Check if last bends are at different coordinates (different bus heights)
+                    var lastBendCoords = nonStraightIn.Select(ei =>
+                    {
+                        var p = edgeRoutes[ei].pts;
+                        int lb = p.Count - 2;
+                        return ((int)Math.Round(p[lb].x), (int)Math.Round(p[lb].y));
+                    }).Distinct().Count();
+                    if (lastBendCoords > 1) isConvergence = true;
+                }
+            }
+
+            if (isConvergence)
+            {
+                // Compute distance from each edge's last bend to the target
+                var bendDistances = nonStraightIn.Select(ei =>
+                {
+                    var p = edgeRoutes[ei].pts;
+                    int lb = p.Count - 2;
+                    return (ei, dist: Math.Abs(p[lb + 1].y - p[lb].y) + Math.Abs(p[lb + 1].x - p[lb].x));
+                }).ToList();
+
+                double minDist = bendDistances.Min(b => b.dist);
+
+                // Only mark edges whose last bend is close to the target.
+                // Edges with bends far from the target are "from above" and don't create
+                // a visible junction at their bend point.
+                foreach (var (ei, dist) in bendDistances)
+                {
+                    if (dist <= Math.Max(minDist * 5, 200))
+                    {
+                        junctionBends.Add((ei, edgeRoutes[ei].pts.Count - 2));
+                    }
+                }
+            }
+        }
+
+        // ── Pass 3: Render edges with per-bend junction radii ──
+        for (int ei = 0; ei < edgeRoutes.Count; ei++)
+        {
+            var (fromId, toId, ePts) = edgeRoutes[ei];
+
+            HashSet<int>? largeBends = null;
+            for (int bi = 1; bi < ePts.Count - 1; bi++)
+            {
+                if (junctionBends.Contains((ei, bi)))
+                {
+                    largeBends ??= new HashSet<int>();
+                    largeBends.Add(bi);
+                }
+            }
+
+            if (largeBends != null)
+                AppLogger.Info($"[FLOWCHART-V3] Edge {fromId}→{toId}: junction bends at [{string.Join(",", largeBends)}], pts={ePts.Count}");
+
+            sb.AppendLine($"    <path class=\"edge-path\" d=\"{BuildRoundedPath(ePts, BendRadius, BendRadiusLarge, largeBends, ci)}\" marker-end=\"url(#arrow)\" />");
+        }
+    }
+
+    /// <summary>
+    /// Checks if three waypoints are collinear (all on same X or same Y in grid-based routing).
+    /// </summary>
+    private static bool IsCollinear((double x, double y) a, (double x, double y) b, (double x, double y) c)
+    {
+        return (Math.Abs(a.x - b.x) < 0.1 && Math.Abs(b.x - c.x) < 0.1) ||
+               (Math.Abs(a.y - b.y) < 0.1 && Math.Abs(b.y - c.y) < 0.1);
     }
 
     /// <summary>
@@ -1696,8 +1952,11 @@ internal class FlowchartService3
 
     /// <summary>
     /// Builds an SVG path string from waypoints, rounding each bend with a quadratic Bezier.
+    /// Per-bend radius: bends listed in largeBendIndices use largeRadius, others use defaultRadius.
     /// </summary>
-    private static string BuildRoundedPath(List<(double x, double y)> pts, double radius, CultureInfo ci)
+    private static string BuildRoundedPath(
+        List<(double x, double y)> pts, double defaultRadius, double largeRadius,
+        HashSet<int>? largeBendIndices, CultureInfo ci)
     {
         if (pts.Count < 2)
             return "";
@@ -1721,8 +1980,13 @@ internal class FlowchartService3
             double lenIn = Math.Sqrt((curr.x - prev.x) * (curr.x - prev.x) + (curr.y - prev.y) * (curr.y - prev.y));
             double lenOut = Math.Sqrt((next.x - curr.x) * (next.x - curr.x) + (next.y - curr.y) * (next.y - curr.y));
 
-            // Clamp radius to half of shortest adjacent segment
-            double r = Math.Min(radius, Math.Min(lenIn, lenOut) / 2);
+            // Select radius for this bend point
+            double baseR = (largeBendIndices?.Contains(i) == true) ? largeRadius : defaultRadius;
+
+            // Clamp radius to half of shortest adjacent segment (TEMP: no clamp for large bends)
+            double r = (largeBendIndices?.Contains(i) == true)
+                ? baseR
+                : Math.Min(baseR, Math.Min(lenIn, lenOut) / 2);
             if (r < 0.5)
             {
                 // Degenerate — just line to corner
