@@ -14,14 +14,14 @@ using TextBlock = System.Windows.Controls.TextBlock;
 
 namespace MergeMansionWikiTools.Views;
 
-public partial class AreaFlowchartsPage2 : UserControl
+public partial class AreaFlowchartsPage : UserControl
 {
     private readonly MainWindow _main;
     private List<LuaArea>? _areas;
     private bool _areasLoaded;
     private readonly SolidColorBrush _splitSepBrush;
 
-    public AreaFlowchartsPage2(MainWindow main)
+    public AreaFlowchartsPage(MainWindow main)
     {
         _main = main;
         InitializeComponent();
@@ -364,7 +364,7 @@ public partial class AreaFlowchartsPage2 : UserControl
             var outputPath = Path.Combine(folder, $"{safeName}.svg");
             Directory.CreateDirectory(folder);
 
-            var svg = await Task.Run(() => FlowchartService2.GenerateSvg(area, _main.DataService));
+            var svg = await Task.Run(() => FlowchartService.GenerateSvg(area, _main.DataService));
             if (string.IsNullOrEmpty(svg))
                 throw new InvalidOperationException($"No tasks with requirements found in {area.DisplayName}.");
 
@@ -404,7 +404,7 @@ public partial class AreaFlowchartsPage2 : UserControl
                 var safeName = string.Join("_", area.DisplayName.Split(Path.GetInvalidFileNameChars()));
                 var outputPath = Path.Combine(folder, $"{safeName}.svg");
 
-                var svg = await Task.Run(() => FlowchartService2.GenerateSvg(area, _main.DataService));
+                var svg = await Task.Run(() => FlowchartService.GenerateSvg(area, _main.DataService));
                 if (!string.IsNullOrEmpty(svg))
                 {
                     await File.WriteAllTextAsync(outputPath, svg);
@@ -439,7 +439,7 @@ public partial class AreaFlowchartsPage2 : UserControl
             Directory.CreateDirectory(dir);
 
         var svg = await Task.Run(() =>
-            FlowchartService2.GenerateSvg(area, _main.DataService));
+            FlowchartService.GenerateSvg(area, _main.DataService));
 
         if (string.IsNullOrEmpty(svg))
             throw new InvalidOperationException($"No tasks with requirements found in {area.DisplayName}.");
