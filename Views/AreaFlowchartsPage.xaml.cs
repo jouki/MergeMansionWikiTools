@@ -3,6 +3,8 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using MergeMansionWikiTools.Models;
 using MergeMansionWikiTools.Services;
 using Microsoft.Win32;
 using Wpf.Ui.Controls;
@@ -70,6 +72,7 @@ public partial class AreaFlowchartsPage : UserControl
             await service.LoadAsync(path);
             _areas = service.Areas;
             _areasLoaded = true;
+            await DiscordFlowchartService.EnsureMappingLoadedAsync();
             BuildAreaList();
         }
         catch (Exception ex)
@@ -113,7 +116,11 @@ public partial class AreaFlowchartsPage : UserControl
 
         var hasFolder = GetOutputDir() != null;
 
-        foreach (var area in filtered)
+        var sorted = filtered
+            .OrderBy(a => DiscordFlowchartService.GetOrderingIndex(a.DisplayName))
+            .ToList();
+
+        foreach (var area in sorted)
         {
             var card = CreateAreaCard(area, hasFolder);
             areaListPanel.Children.Add(card);
@@ -133,9 +140,44 @@ public partial class AreaFlowchartsPage : UserControl
         border.SetResourceReference(Border.BorderBrushProperty, "CardStrokeColorDefaultBrush");
 
         var grid = new Grid();
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+
+        // Area image thumbnail (wiki-style crop)
+        var imagePath = FindAreaImagePath(area);
+        if (imagePath != null)
+        {
+            try
+            {
+                var bmp = new BitmapImage();
+                bmp.BeginInit();
+                bmp.UriSource = new Uri(imagePath);
+                bmp.CacheOption = BitmapCacheOption.OnLoad;
+                bmp.DecodePixelWidth = 200;
+                bmp.EndInit();
+                bmp.Freeze();
+
+                var imgContainer = new Border
+                {
+                    Width = 48,
+                    Height = 48,
+                    ClipToBounds = true,
+                    CornerRadius = new CornerRadius(4),
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Margin = new Thickness(0, 0, 12, 0),
+                    Background = new ImageBrush(bmp)
+                    {
+                        Stretch = Stretch.UniformToFill
+                    }
+                };
+
+                Grid.SetColumn(imgContainer, 0);
+                grid.Children.Add(imgContainer);
+            }
+            catch { /* image load failed — card renders without thumbnail */ }
+        }
 
         // Area name + task count
         var namePanel = new StackPanel { VerticalAlignment = VerticalAlignment.Center };
@@ -159,7 +201,7 @@ public partial class AreaFlowchartsPage : UserControl
         metaText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorTertiaryBrush");
         namePanel.Children.Add(metaText);
 
-        Grid.SetColumn(namePanel, 0);
+        Grid.SetColumn(namePanel, 1);
         grid.Children.Add(namePanel);
 
         // Open button
@@ -173,11 +215,11 @@ public partial class AreaFlowchartsPage : UserControl
             Tag = area
         };
         btnOpen.Click += BtnOpenSvg_Click;
-        Grid.SetColumn(btnOpen, 1);
+        Grid.SetColumn(btnOpen, 2);
         grid.Children.Add(btnOpen);
 
-        // Generate button (split when folder is configured)
-        var genContainer = new Grid { Margin = new Thickness(8, 0, 0, 0) };
+        // Generate button (always split — chevron has "Save to..." + "Publish to Discord")
+        var genContainer = new Grid { Margin = new Thickness(8, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
         genContainer.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
         genContainer.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
         genContainer.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
@@ -193,36 +235,33 @@ public partial class AreaFlowchartsPage : UserControl
         Grid.SetColumn(btnGen, 0);
         genContainer.Children.Add(btnGen);
 
-        if (hasFolder)
+        // Thin separator between main button and chevron
+        var sep = new Border
         {
-            // Thin separator between main button and chevron
-            var sep = new Border
-            {
-                Width = 1,
-                Background = _splitSepBrush,
-                VerticalAlignment = VerticalAlignment.Stretch,
-                Margin = new Thickness(0, 2, 0, 1.5)
-            };
-            Grid.SetColumn(sep, 1);
-            genContainer.Children.Add(sep);
+            Width = 1,
+            Background = _splitSepBrush,
+            VerticalAlignment = VerticalAlignment.Stretch,
+            Margin = new Thickness(0, 2, 0, 1.5)
+        };
+        Grid.SetColumn(sep, 1);
+        genContainer.Children.Add(sep);
 
-            var btnChevron = new Wpf.Ui.Controls.Button
-            {
-                Appearance = ControlAppearance.Primary,
-                Height = 32,
-                Width = 28,
-                Padding = new Thickness(0),
-                Tag = area,
-                Content = CreateAccentSymbolIcon(SymbolRegular.ChevronDown24, 12)
-            };
-            btnChevron.Click += BtnGenerateMenu_Click;
-            Grid.SetColumn(btnChevron, 2);
-            genContainer.Children.Add(btnChevron);
+        var btnChevron = new Wpf.Ui.Controls.Button
+        {
+            Appearance = ControlAppearance.Primary,
+            Height = 32,
+            Width = 28,
+            Padding = new Thickness(0),
+            Tag = area,
+            Content = CreateAccentSymbolIcon(SymbolRegular.ChevronDown24, 12)
+        };
+        btnChevron.Click += BtnGenerateMenu_Click;
+        Grid.SetColumn(btnChevron, 2);
+        genContainer.Children.Add(btnChevron);
 
-            ApplySplitButtonStyle(btnGen, btnChevron);
-        }
+        ApplySplitButtonStyle(btnGen, btnChevron);
 
-        Grid.SetColumn(genContainer, 2);
+        Grid.SetColumn(genContainer, 3);
         grid.Children.Add(genContainer);
 
         // Check if SVG already exists — show Open button
@@ -313,7 +352,7 @@ public partial class AreaFlowchartsPage : UserControl
     }
 
     /// <summary>
-    /// Chevron click on per-area split button — shows "Save to..." context menu.
+    /// Chevron click on per-area split button — shows context menu with save + Discord options.
     /// </summary>
     private void BtnGenerateMenu_Click(object sender, RoutedEventArgs e)
     {
@@ -321,12 +360,23 @@ public partial class AreaFlowchartsPage : UserControl
         var area = btn.Tag as LuaArea;
 
         var menu = new ContextMenu();
-        var item = new System.Windows.Controls.MenuItem { Header = "Save to..." };
-        item.Click += async (_, _) =>
+
+        if (GetOutputDir() != null)
         {
-            if (area != null) await GenerateToCustomFolder(area, btn);
+            var saveItem = new System.Windows.Controls.MenuItem { Header = "Save to..." };
+            saveItem.Click += async (_, _) =>
+            {
+                if (area != null) await GenerateToCustomFolder(area, btn);
+            };
+            menu.Items.Add(saveItem);
+        }
+
+        var discordItem = new System.Windows.Controls.MenuItem { Header = "Publish to Discord" };
+        discordItem.Click += async (_, _) =>
+        {
+            if (area != null) await PublishAreaToDiscordAsync(area);
         };
-        menu.Items.Add(item);
+        menu.Items.Add(discordItem);
 
         var target = btn.Parent as FrameworkElement ?? btn;
         OpenSplitMenu(menu, target);
@@ -544,6 +594,126 @@ public partial class AreaFlowchartsPage : UserControl
         }
     }
 
+    // ── Discord publishing ───────────────────────────────────────────
+
+    private async void BtnPublishDiscord_Click(object sender, RoutedEventArgs e)
+    {
+        if (_areas == null || _areas.Count == 0)
+        {
+            ShowInfo("No areas loaded.", InfoBarSeverity.Warning);
+            return;
+        }
+
+        var token = AppSettings.DefaultDiscordBotToken;
+        var threadId = _main.Settings.FlowchartDiscordThreadId;
+
+        btnPublishDiscord.IsEnabled = false;
+        btnGenerateAll.IsEnabled = false;
+
+        try
+        {
+            ShowInfo("Generating Discord SVGs…", InfoBarSeverity.Informational);
+            var svgs = new List<(LuaArea area, string svg)>();
+            await Task.Run(() =>
+            {
+                foreach (var area in _areas)
+                {
+                    var svg = FlowchartService.GenerateSvg(area, _main.DataService, forDiscord: true);
+                    if (!string.IsNullOrEmpty(svg))
+                        svgs.Add((area, svg));
+                }
+            });
+
+            if (svgs.Count == 0)
+            {
+                ShowInfo("No flowcharts generated (no areas with tasks).", InfoBarSeverity.Warning);
+                return;
+            }
+
+            var progress = new Progress<string>(msg =>
+            {
+                infoBar.Message = msg;
+                infoBar.Severity = InfoBarSeverity.Informational;
+                infoBar.IsOpen = true;
+            });
+
+            var (created, updated, deleted, failed) = await DiscordFlowchartService.PublishAllAsync(
+                token, threadId, svgs, progress);
+
+            var parts = new List<string>();
+            if (created > 0) parts.Add($"{created} created");
+            if (updated > 0) parts.Add($"{updated} updated");
+            if (deleted > 0) parts.Add($"{deleted} deleted");
+            if (failed > 0) parts.Add($"{failed} failed");
+            var summary = "Discord: " + string.Join(", ", parts);
+            ShowInfo(summary, failed > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success,
+                persistent: true);
+        }
+        catch (Exception ex)
+        {
+            ShowInfo($"Discord publish error: {ex.Message}", InfoBarSeverity.Error);
+        }
+        finally
+        {
+            btnPublishDiscord.IsEnabled = true;
+            btnGenerateAll.IsEnabled = true;
+        }
+    }
+
+    private async Task PublishAreaToDiscordAsync(LuaArea area)
+    {
+        var token = AppSettings.DefaultDiscordBotToken;
+        var threadId = _main.Settings.FlowchartDiscordThreadId;
+
+        ShowInfo($"Publishing {area.DisplayName} to Discord…", InfoBarSeverity.Informational);
+
+        try
+        {
+            var svg = await Task.Run(() =>
+                FlowchartService.GenerateSvg(area, _main.DataService, forDiscord: true));
+
+            if (string.IsNullOrEmpty(svg))
+            {
+                ShowInfo($"{area.DisplayName}: no tasks with requirements.", InfoBarSeverity.Warning);
+                return;
+            }
+
+            var progress = new Progress<string>(msg =>
+            {
+                infoBar.Message = msg;
+                infoBar.Severity = InfoBarSeverity.Informational;
+                infoBar.IsOpen = true;
+            });
+
+            // Callback to generate SVG for any area (used when ordering needs fixing)
+            Func<string, Task<string?>> generateSvg = async name =>
+            {
+                var match = _areas?.FirstOrDefault(a =>
+                    a.DisplayName.Equals(name, StringComparison.OrdinalIgnoreCase));
+                if (match == null) return null;
+                return await Task.Run(() =>
+                    FlowchartService.GenerateSvg(match, _main.DataService, forDiscord: true));
+            };
+
+            var (success, wasUpdate, reordered) = await DiscordFlowchartService.PublishOneAsync(
+                token, threadId, area.DisplayName, svg, generateSvg, progress);
+
+            if (success)
+            {
+                var msg = $"{area.DisplayName}: {(wasUpdate ? "updated" : "created")} on Discord.";
+                if (reordered > 0)
+                    msg += $" {reordered} other message{(reordered > 1 ? "s" : "")} reordered.";
+                ShowInfo(msg, InfoBarSeverity.Success);
+            }
+            else
+                ShowInfo($"{area.DisplayName}: Discord publish failed.", InfoBarSeverity.Error);
+        }
+        catch (Exception ex)
+        {
+            ShowInfo($"Discord error: {ex.Message}", InfoBarSeverity.Error);
+        }
+    }
+
     // ── Search ───────────────────────────────────────────────────────
 
     private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -710,6 +880,117 @@ public partial class AreaFlowchartsPage : UserControl
             if (found != null)
                 return found;
         }
+        return null;
+    }
+
+    // ── Area image lookup ───────────────────────────────────────────
+
+    // Override only for AreaIds with no substring/prefix/suffix relation to image name
+    private static readonly Dictionary<string, string> AreaImageOverrides = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ["SwimmingPool"] = "PoolArea",
+        ["JapaneseGarden"] = "StoneGarden",
+        ["DogArea"] = "RufusPark",
+        ["AntiqueDealer"] = "TheGate",
+        ["BeachRight"] = "BeachHouse",
+        ["ShackExterior"] = "Beach",
+        ["BeachBar"] = "BeachJuiceBar",
+    };
+
+    // Runtime cache: image key → full file path (rebuilt on directory change)
+    private Dictionary<string, string>? _areaImageCache;
+    private string? _areaImageCacheDir;
+
+    /// <summary>
+    /// Finds the area background image in the exported PNGs folder.
+    /// Scans available Area_InfoPopupBg_*.png files and matches via
+    /// multi-strategy resolution (override → direct → suffix → prefix → possessive).
+    /// </summary>
+    private string? FindAreaImagePath(LuaArea area)
+    {
+        var basePath = _main.Settings.ImageExporterBasePath;
+        var version = _main.Settings.SelectedApkVersion;
+        if (string.IsNullOrEmpty(basePath) || string.IsNullOrEmpty(version)) return null;
+
+        var exportDir = Path.Combine(basePath, version, "Export - PNGs");
+        if (!Directory.Exists(exportDir)) return null;
+
+        // Build/rebuild cache of available image keys → file paths
+        if (_areaImageCache == null || !string.Equals(_areaImageCacheDir, exportDir, StringComparison.OrdinalIgnoreCase))
+        {
+            _areaImageCacheDir = exportDir;
+            _areaImageCache = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var file in Directory.EnumerateFiles(exportDir, "Area_Info*PopupBg_*.png"))
+            {
+                var name = Path.GetFileNameWithoutExtension(file);
+                var idx = name.LastIndexOf("PopupBg_", StringComparison.OrdinalIgnoreCase);
+                if (idx >= 0)
+                    _areaImageCache.TryAdd(name[(idx + 8)..], file);
+            }
+        }
+
+        var imageKey = ResolveImageKey(area.AreaId);
+        return imageKey != null && _areaImageCache.TryGetValue(imageKey, out var path) ? path : null;
+    }
+
+    /// <summary>
+    /// Multi-strategy resolution: AreaId → image key in Area_InfoPopupBg_{key}.png.
+    /// Handles prefix/suffix stripping, possessive 's', etc. automatically.
+    /// </summary>
+    private string? ResolveImageKey(string areaId)
+    {
+        if (_areaImageCache == null) return null;
+
+        // 1. Explicit override (truly unrelated names only)
+        if (AreaImageOverrides.TryGetValue(areaId, out var over))
+            return _areaImageCache.ContainsKey(over) ? over : null;
+
+        // 2. Direct match
+        if (_areaImageCache.ContainsKey(areaId))
+            return areaId;
+
+        // 3. Strip trailing digits: "GardenRight20" → "GardenRight"
+        var stripped = areaId.TrimEnd('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+        if (stripped.Length > 0 && stripped != areaId && _areaImageCache.ContainsKey(stripped))
+            return stripped;
+
+        // 4. Image name is longest suffix of AreaId: "MansionPlaza" → "Plaza"
+        string? best = null;
+        foreach (var img in _areaImageCache.Keys)
+            if (img.Length >= 3 && areaId.EndsWith(img, StringComparison.OrdinalIgnoreCase) &&
+                (best == null || img.Length > best.Length))
+                best = img;
+        if (best != null) return best;
+
+        // 5. AreaId is suffix of image name: "Hideout" → "SecretHideout"
+        best = null;
+        foreach (var img in _areaImageCache.Keys)
+            if (areaId.Length >= 3 && img.EndsWith(areaId, StringComparison.OrdinalIgnoreCase) &&
+                (best == null || img.Length < best.Length))
+                best = img;
+        if (best != null) return best;
+
+        // 6. Image name is longest prefix of AreaId: "SaunaBurn" → "Sauna", "BBQArea" → "BBQ"
+        best = null;
+        foreach (var img in _areaImageCache.Keys)
+            if (img.Length >= 3 && areaId.StartsWith(img, StringComparison.OrdinalIgnoreCase) &&
+                (best == null || img.Length > best.Length))
+                best = img;
+        if (best != null) return best;
+
+        // 7. Possessive 's': "DebRoom" → "DebsRoom", "GrandmaRoom" → "GrandmasRoom"
+        foreach (var img in _areaImageCache.Keys)
+        {
+            if (img.Length != areaId.Length + 1) continue;
+            for (int i = 1; i < img.Length; i++)
+            {
+                if (char.ToLowerInvariant(img[i]) != 's') continue;
+                if (string.Concat(img.AsSpan(0, i), img.AsSpan(i + 1))
+                        .Equals(areaId, StringComparison.OrdinalIgnoreCase))
+                    return img;
+            }
+        }
+
         return null;
     }
 

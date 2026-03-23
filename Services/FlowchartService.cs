@@ -45,7 +45,7 @@ internal class FlowchartService
 
     const double PadX = 8;
     const double PadY = 7;
-    const double HeaderH = 28;
+    const double HeaderH = 34;
     const double LineH = 18;
     const double SepGap = 8;
     const double LayerGap = 55;
@@ -58,7 +58,7 @@ internal class FlowchartService
     const double FontSzItem = 11.5;
     const double FontSzReward = 11;
 
-    const double IndexColW = 38;    // width for right-aligned "#NNN"
+    const double IndexColW = 24;    // width for right-aligned "#NNN"
     const double IndexTitleGap = 6; // gap between index and title
     const double QtyColW = 24;      // width for right-aligned "99x"
     const double QtyNameGap = 6;    // gap between qty and item name
@@ -73,6 +73,7 @@ internal class FlowchartService
     const double AlignThresh = 20;  // snap drift in dummy waypoints
     const double BendRadius = 7;    // default rounded corner radius on edge bends
     const double BendRadiusLarge = 12; // larger radius for divergence/convergence junction bends
+    const int MaxTitleChars = 37;     // max chars before title wraps to 2 lines
 
     // ── XP icon (base64 PNG) ────────────────────────────────────────
 
@@ -81,7 +82,7 @@ internal class FlowchartService
 
     // ── Public API ───────────────────────────────────────────────────
 
-    public static string GenerateSvg(LuaArea area, DataService? ds)
+    public static string GenerateSvg(LuaArea area, DataService? ds, bool forDiscord = false)
     {
         // 1. Build graph from LuaTask data (uses LuaTask.Index for display)
         var nodes = BuildGraph(area.Tasks, ds);
@@ -138,7 +139,7 @@ internal class FlowchartService
         var layers = SugiyamaLayout(nodes);
 
         // 11. Generate SVG
-        return RenderSvg(area.DisplayName, nodes, layers, realEdges);
+        return RenderSvg(area.DisplayName, nodes, layers, realEdges, forDiscord);
     }
 
     // ── Graph building ───────────────────────────────────────────────
@@ -333,7 +334,7 @@ internal class FlowchartService
         // Header width: "#NNN" (IndexColW) + gap + title (wraps to 2 lines if too long)
         double titleCharW = FontSzTitle * 0.64; // bold
         double availTitleW = MaxNodeW - PadX * 2 - IndexColW - IndexTitleGap;
-        int maxTitleChars = Math.Max(8, (int)(availTitleW / titleCharW));
+        int maxTitleChars = MaxTitleChars;
 
         double headerContentW;
         if (node.Title.Length > maxTitleChars)
@@ -383,12 +384,15 @@ internal class FlowchartService
         node.Width = MaxNodeW;
 
         // Height (dynamic header for 2-line titles)
-        double headerH = node.HeaderLines == 2 ? 44.0 : HeaderH;
+        double headerH = node.HeaderLines == 2 ? 50.0 : HeaderH;
         double h = 0;
 
-        // Parent link section (above header)
+        // Parent link section (above header — 7px top pad + 6px link area)
         if (node.ParentDisplayIndices.Count > 0)
-            h += LinkSectionPad + LinkLineH;
+        {
+            h += 13;
+            headerH -= 5; // shorter header bar when parent links take up space above
+        }
 
         h += headerH;
         h += PadY; // top padding of body
@@ -406,9 +410,9 @@ internal class FlowchartService
 
         h += PadY; // bottom padding
 
-        // Child link section (separator + links below rewards)
+        // Child link section (separator + links below rewards, +2px bottom)
         if (node.ChildDisplayIndices.Count > 0)
-            h += SepGap + LinkLineH + LinkSectionPad;
+            h += SepGap + LinkLineH + LinkSectionPad + 2;
 
         node.Height = h;
     }
@@ -1187,7 +1191,7 @@ internal class FlowchartService
 
     private static string RenderSvg(string areaName,
         Dictionary<string, FNode> nodes, List<List<string>> layers,
-        List<(string from, string to)> realEdges)
+        List<(string from, string to)> realEdges, bool forDiscord = false)
     {
         var ci = CultureInfo.InvariantCulture;
 
@@ -1227,30 +1231,60 @@ internal class FlowchartService
         sb.AppendLine($"  <title>{Esc(areaName)} — Task Flowchart</title>");
         sb.AppendLine();
 
-        // Inline CSS
+        // Inline CSS — Merge Mansion warm theme
         sb.AppendLine("  <style>");
-        sb.AppendLine("    .node-header { fill: #3D5A80; }");
-        sb.AppendLine("    .node-body { fill: #FFFFFF; stroke: #B0B8C4; stroke-width: 1.2; }");
-        sb.AppendLine("    .header-idx { fill: #FFFFFF; font-family: Arial, Helvetica, sans-serif; font-size: 12px; }");
-        sb.AppendLine("    .header-title { fill: #FFFFFF; font-family: Arial, Helvetica, sans-serif; font-size: 13px; font-weight: bold; }");
-        sb.AppendLine("    .item-qty { fill: #6B7280; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px; }");
-        sb.AppendLine("    .item-name { fill: #3D3D5C; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px; }");
-        sb.AppendLine("    .reward-text { fill: #6B7280; font-family: Arial, Helvetica, sans-serif; font-size: 11px; }");
-        sb.AppendLine("    .sep-line { stroke: #D1D5DB; stroke-width: 0.8; }");
-        sb.AppendLine("    .link-ref { fill: #8B95A5; font-family: Arial, Helvetica, sans-serif; font-size: 9px; cursor: pointer; }");
-        sb.AppendLine("    .link-ref-header { fill: #C0CBE0; font-family: Arial, Helvetica, sans-serif; font-size: 9px; cursor: pointer; }");
-        sb.AppendLine("    .link-ref:hover { fill: #3D5A80; text-decoration: underline; }");
+        sb.AppendLine("    @import url('https://fonts.cdnfonts.com/css/tisa-sans-pro');");
+        sb.AppendLine("    svg { scroll-behavior: smooth; background: #FBF4E8; width: 100%; min-width: " + svgW.ToString(ci) + "px; }");
+        sb.AppendLine("    .node-header { fill: url(#grad-header); }");
+        sb.AppendLine("    .node-body { fill: url(#grad-body); filter: url(#shadow-node); }");
+        sb.AppendLine("    .node-stroke-outer { fill: none; stroke: #c3732a; stroke-width: 2; }");
+        sb.AppendLine("    .node-stroke-inner { fill: none; stroke: #91521d; stroke-width: 2; }");
+        sb.AppendLine("    .header-idx { fill: #d4e8ff; font-family: 'Tisa Sans Pro', Georgia, serif; font-size: 12px; font-style: italic; }");
+        sb.AppendLine("    .header-title { fill: #eef7ff; stroke: #124d76; stroke-width: 3px; paint-order: stroke fill; font-family: 'Tisa Sans Pro', Georgia, serif; font-size: 13px; font-weight: bold; font-style: italic; }");
+        sb.AppendLine("    .item-qty { fill: #9B7B58; font-family: 'Tisa Sans Pro', Trebuchet MS, sans-serif; font-size: 11.5px; font-weight: 500; }");
+        sb.AppendLine("    .item-name { fill: #955417; font-family: 'Tisa Sans Pro', Trebuchet MS, sans-serif; font-size: 11.5px; font-weight: 500; }");
+        sb.AppendLine("    .reward-text { fill: #9B7B58; font-family: 'Tisa Sans Pro', Trebuchet MS, sans-serif; font-size: 11px; font-style: italic; }");
+        sb.AppendLine("    .sep-line { stroke: #D4A860; stroke-width: 0.8; stroke-dasharray: 4 3; }");
+        sb.AppendLine("    .link-ref { fill: #A07840; font-family: 'Tisa Sans Pro', Trebuchet MS, sans-serif; font-size: 9px; cursor: pointer; }");
+        sb.AppendLine("    .link-ref-header { fill: #96c0f0; font-family: 'Tisa Sans Pro', Trebuchet MS, sans-serif; font-size: 9px; cursor: pointer; }");
+        sb.AppendLine("    .link-ref:hover { fill: #E8961E; text-decoration: underline; }");
         sb.AppendLine("    .link-ref-header:hover { fill: #FFFFFF; text-decoration: underline; }");
-        sb.AppendLine("    .edge-path { fill: none; stroke: #8B95A5; stroke-width: 1.5; }");
-        sb.AppendLine("    .edge-arrow { fill: #8B95A5; }");
-        sb.AppendLine("    svg { scroll-behavior: smooth; }");
-        sb.AppendLine("    @keyframes node-flash { 0%{stroke-width:2.8;stroke:#3D5A80} 100%{stroke-width:1.2;stroke:#B0B8C4} }");
-        sb.AppendLine("    rect:target + g .node-body { stroke: #3D5A80; stroke-width: 2.8; animation: node-flash 1.5s ease-out 0.8s forwards; }");
+        sb.AppendLine("    .edge-path { fill: none; stroke: #B8874A; stroke-width: 1.5; }");
+        sb.AppendLine("    .edge-arrow { fill: #9C6F3A; }");
+        sb.AppendLine("    @keyframes node-shake { 0%,100%{transform:translate(0,0)} 15%,55%{transform:translate(-1.5px,0)} 35%,75%{transform:translate(1.5px,0)} }");
+        sb.AppendLine("    @keyframes node-glow { 0%{filter:drop-shadow(0 0 6px rgba(255,248,220,0.9)) drop-shadow(0 0 14px rgba(230,180,60,0.7)) drop-shadow(0 0 28px rgba(200,130,20,0.4))} 40%{filter:drop-shadow(0 0 4px rgba(255,240,200,0.6)) drop-shadow(0 0 10px rgba(218,165,32,0.4))} 100%{filter:url(#shadow-node)} }");
+        sb.AppendLine("    @keyframes node-stroke-flash { 0%{stroke:#E8C050;stroke-width:3} 30%{stroke:#D4A040;stroke-width:2.6} 100%{stroke:#c3732a;stroke-width:2} }");
+        sb.AppendLine("    rect:target + g { transform-box:fill-box; transform-origin:center; filter:drop-shadow(0 0 6px rgba(255,248,220,0.9)) drop-shadow(0 0 14px rgba(230,180,60,0.7)) drop-shadow(0 0 28px rgba(200,130,20,0.4)); animation:node-shake 0.4s ease-in-out 0.3s, node-glow 3s ease-out 0.7s forwards }");
+        sb.AppendLine("    rect:target + g .node-stroke-outer { stroke:#E8C050; stroke-width:3; animation:node-stroke-flash 3s ease-out 0.7s forwards }");
         sb.AppendLine("  </style>");
         sb.AppendLine();
 
-        // Arrow marker definition
+        // Gradients, filters, markers
         sb.AppendLine("  <defs>");
+        sb.AppendLine("    <linearGradient id=\"grad-header\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">");
+        sb.AppendLine("      <stop offset=\"0%\" stop-color=\"#4A7CBF\" />");
+        sb.AppendLine("      <stop offset=\"100%\" stop-color=\"#3A5F96\" />");
+        sb.AppendLine("    </linearGradient>");
+        sb.AppendLine("    <linearGradient id=\"grad-body\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">");
+        sb.AppendLine("      <stop offset=\"0%\" stop-color=\"#FFF8EC\" />");
+        sb.AppendLine("      <stop offset=\"100%\" stop-color=\"#FAEDD4\" />");
+        sb.AppendLine("    </linearGradient>");
+        sb.AppendLine("    <linearGradient id=\"grad-header-inset\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">");
+        sb.AppendLine("      <stop offset=\"0%\" stop-color=\"#000\" stop-opacity=\"0.30\" />");
+        sb.AppendLine("      <stop offset=\"100%\" stop-color=\"#000\" stop-opacity=\"0\" />");
+        sb.AppendLine("    </linearGradient>");
+        sb.AppendLine("    <linearGradient id=\"grad-header-shadow\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">");
+        sb.AppendLine("      <stop offset=\"0%\" stop-color=\"#000\" stop-opacity=\"0.25\" />");
+        sb.AppendLine("      <stop offset=\"35%\" stop-color=\"#000\" stop-opacity=\"0.10\" />");
+        sb.AppendLine("      <stop offset=\"70%\" stop-color=\"#000\" stop-opacity=\"0.03\" />");
+        sb.AppendLine("      <stop offset=\"100%\" stop-color=\"#000\" stop-opacity=\"0\" />");
+        sb.AppendLine("    </linearGradient>");
+        sb.AppendLine("    <filter id=\"shadow-node\" x=\"-4%\" y=\"-2%\" width=\"110%\" height=\"110%\">");
+        sb.AppendLine("      <feDropShadow dx=\"2\" dy=\"3\" stdDeviation=\"3\" flood-color=\"#4A3520\" flood-opacity=\"0.2\" />");
+        sb.AppendLine("    </filter>");
+        sb.AppendLine($"    <image id=\"xp-icon\" width=\"{IconSize.ToString(ci)}\" height=\"{IconSize.ToString(ci)}\"");
+        sb.AppendLine($"           href=\"data:image/png;base64,{XP_ICON_BASE64}\"");
+        sb.AppendLine($"           xlink:href=\"data:image/png;base64,{XP_ICON_BASE64}\" />");
         sb.AppendLine($"    <marker id=\"arrow\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\"");
         sb.AppendLine($"            markerWidth=\"{ArrowSize.ToString(ci)}\" markerHeight=\"{ArrowSize.ToString(ci)}\"");
         sb.AppendLine("            orient=\"auto-start-reverse\">");
@@ -1268,21 +1302,22 @@ internal class FlowchartService
         // Render nodes
         sb.AppendLine("  <!-- Nodes -->");
         foreach (var n in nodes.Values.Where(n => !n.IsDummy))
-            RenderNode(sb, n, offsetX, offsetY, ci);
+            RenderNode(sb, n, offsetX, offsetY, ci, forDiscord);
 
         sb.AppendLine("</svg>");
         return sb.ToString();
     }
 
     private static void RenderNode(StringBuilder sb, FNode n, double ox, double oy,
-        CultureInfo ci)
+        CultureInfo ci, bool forDiscord = false)
     {
         double x = n.X + ox;
         double y = n.Y + oy;
         double w = n.Width;
-        double r = 6; // corner radius
+        double r = 10; // corner radius (game-style rounded panels)
         double headerH = n.HeaderLines == 2 ? 44.0 : HeaderH;
-        double parentLinkH = n.ParentDisplayIndices.Count > 0 ? LinkSectionPad + LinkLineH : 0;
+        double parentLinkH = n.ParentDisplayIndices.Count > 0 ? 13 : 0; // 7px top + 6px link
+        if (parentLinkH > 0) headerH -= 5; // shorter header bar when parent links above
 
         // Invisible scroll anchor shifted above node so it lands ~center of viewport
         double anchorOffset = 300;
@@ -1291,7 +1326,7 @@ internal class FlowchartService
 
         sb.AppendLine($"  <g id=\"ng-{n.DisplayIndex}\">");
 
-        // Body rectangle (full height, rounded corners)
+        // Body rectangle (fill + shadow, no stroke)
         sb.AppendLine($"    <rect class=\"node-body\" x=\"{x.ToString(ci)}\" y=\"{y.ToString(ci)}\"" +
                       $" width=\"{w.ToString(ci)}\" height=\"{n.Height.ToString(ci)}\" rx=\"{r.ToString(ci)}\" />");
 
@@ -1307,18 +1342,28 @@ internal class FlowchartService
         sb.AppendLine($"    <rect class=\"node-header\" x=\"{x.ToString(ci)}\" y=\"{y.ToString(ci)}\"" +
                       $" width=\"{w.ToString(ci)}\" height=\"{combinedHeaderH.ToString(ci)}\"" +
                       $" clip-path=\"url(#clip-{n.DisplayIndex})\" />");
+        // Inset shadow at top of header (subtle top-down darkening)
+        double insetShadowH = 8;
+        sb.AppendLine($"    <rect fill=\"url(#grad-header-inset)\" x=\"{x.ToString(ci)}\" y=\"{y.ToString(ci)}\"" +
+                      $" width=\"{w.ToString(ci)}\" height=\"{insetShadowH.ToString(ci)}\"" +
+                      $" clip-path=\"url(#clip-{n.DisplayIndex})\" />");
         // Fill bottom corners of combined header
         double stripY = y + combinedHeaderH - r;
         if (stripY > y)
         {
-            sb.AppendLine($"    <rect class=\"node-header\" x=\"{x.ToString(ci)}\" y=\"{stripY.ToString(ci)}\"" +
+            sb.AppendLine($"    <rect fill=\"#3A5F96\" x=\"{x.ToString(ci)}\" y=\"{stripY.ToString(ci)}\"" +
                           $" width=\"{w.ToString(ci)}\" height=\"{r.ToString(ci)}\" />");
         }
+
+        // Shadow below header (header casts shadow onto body)
+        double shadowBelowH = 5;
+        sb.AppendLine($"    <rect fill=\"url(#grad-header-shadow)\" x=\"{x.ToString(ci)}\" y=\"{(y + combinedHeaderH).ToString(ci)}\"" +
+                      $" width=\"{w.ToString(ci)}\" height=\"{shadowBelowH.ToString(ci)}\" />");
 
         // ── Parent link section (above header bar, header-coloured background) ──
         if (n.ParentDisplayIndices.Count > 0)
         {
-            double linkY = y + LinkSectionPad + LinkLineH * 0.75;
+            double linkY = y + 7 + 6 * 0.75; // 7px top pad, centered in 6px link area
             double linkX = x + w / 2; // centered
             RenderLinkRefs(sb, n.ParentDisplayIndices, linkX, linkY, ci, "link-ref-header");
         }
@@ -1336,11 +1381,11 @@ internal class FlowchartService
         {
             // 2-line header: index centered vertically, title on two lines (+1px bottom nudge)
             double idxY = headerBarY + headerH / 2 + FontSzHeader * 0.35 + 1;
+            if (parentLinkH > 0) idxY -= 5;
             sb.AppendLine($"    <text class=\"header-idx\" x=\"{idxEndX.ToString(ci)}\" y=\"{idxY.ToString(ci)}\"" +
                           $" text-anchor=\"end\">#{n.DisplayIndex}</text>");
 
-            double titleCW = FontSzTitle * 0.64;
-            int maxChars = Math.Max(8, (int)(availTitleW / titleCW));
+            int maxChars = MaxTitleChars;
             int breakAt = n.Title.LastIndexOf(' ', Math.Min(maxChars, n.Title.Length - 1));
             if (breakAt <= 0) breakAt = maxChars;
             string line1 = n.Title[..breakAt].TrimEnd();
@@ -1349,6 +1394,7 @@ internal class FlowchartService
                 line2 = line2[..(maxChars - 3)] + "...";
 
             double line1Y = headerBarY + headerH / 2 - FontSzTitle * 0.25 + 1;
+            if (parentLinkH > 0) line1Y -= 5;
             double line2Y = line1Y + FontSzTitle * 1.3;
             sb.AppendLine($"    <text class=\"header-title\" x=\"{titleStartX.ToString(ci)}\" y=\"{line1Y.ToString(ci)}\"" +
                           $">{Esc(line1)}</text>");
@@ -1357,15 +1403,20 @@ internal class FlowchartService
         }
         else
         {
-            double headerTextY = headerBarY + headerH / 2 + Math.Max(FontSzHeader, FontSzTitle) * 0.35 + 1;
+            // Title baseline (larger font with outline)
+            double titleY = headerBarY + headerH / 2 + FontSzTitle * 0.35 + 1;
+            // Index baseline — nudge up 1.5px to visually center against outlined title
+            double idxY = headerBarY + headerH / 2 + FontSzHeader * 0.35 - 0.5;
+            // When parent links present, nudge title+idx up to reduce link→title gap
+            if (parentLinkH > 0) { titleY -= 5; idxY -= 5; }
 
             // Index (right-aligned)
-            sb.AppendLine($"    <text class=\"header-idx\" x=\"{idxEndX.ToString(ci)}\" y=\"{headerTextY.ToString(ci)}\"" +
+            sb.AppendLine($"    <text class=\"header-idx\" x=\"{idxEndX.ToString(ci)}\" y=\"{idxY.ToString(ci)}\"" +
                           $" text-anchor=\"end\">#{n.DisplayIndex}</text>");
 
             // Title (left-aligned, truncated if needed)
             string title = TruncateText(n.Title, availTitleW, FontSzTitle, true);
-            sb.AppendLine($"    <text class=\"header-title\" x=\"{titleStartX.ToString(ci)}\" y=\"{headerTextY.ToString(ci)}\"" +
+            sb.AppendLine($"    <text class=\"header-title\" x=\"{titleStartX.ToString(ci)}\" y=\"{titleY.ToString(ci)}\"" +
                           $">{Esc(title)}</text>");
         }
 
@@ -1411,32 +1462,40 @@ internal class FlowchartService
 
         if (hasReward)
         {
-            // Separator
+            // Separator (full width)
             cy += SepGap / 2;
-            sb.AppendLine($"    <line class=\"sep-line\" x1=\"{(x + PadX).ToString(ci)}\" y1=\"{cy.ToString(ci)}\"" +
-                          $" x2=\"{(x + w - PadX).ToString(ci)}\" y2=\"{cy.ToString(ci)}\" />");
+            sb.AppendLine($"    <line class=\"sep-line\" x1=\"{x.ToString(ci)}\" y1=\"{cy.ToString(ci)}\"" +
+                          $" x2=\"{(x + w).ToString(ci)}\" y2=\"{cy.ToString(ci)}\" />");
             cy += SepGap / 2;
+
+            // Calculate available vertical space for reward centering
+            double rewardTop = cy;
+            double rewardBottom;
+            if (n.ChildDisplayIndices.Count > 0)
+                rewardBottom = y + n.Height - LinkLineH - LinkSectionPad - 2 - SepGap / 2;
+            else
+                rewardBottom = y + n.Height - PadY;
+            double rewardAvail = rewardBottom - rewardTop;
 
             if (hasXp)
             {
-                // XP reward: "number ⭐ · Item Reward" — vertically centered in section
+                // XP reward: "⭐ number · Item Reward" — icon first, then number
                 double sectionH = IconSize + 4;
-                double iconY = cy + (sectionH - IconSize) / 2;
-                double rewardTextY = cy + sectionH / 2 + FontSzReward * 0.35;
-                double cursorX = textX;
+                double centerOffset = (rewardAvail - sectionH) / 2 - 2; // nudge 2px up
+                double rewardStartY = rewardTop + Math.Max(0, centerOffset);
+                double iconY = rewardStartY + (sectionH - IconSize) / 2;
+                double rewardTextY = rewardStartY + sectionH / 2 + FontSzReward * 0.35;
+                double cursorX = textX + 8; // extra left padding for reward section
+
+                // XP icon first (references <defs> image)
+                sb.AppendLine($"    <use href=\"#xp-icon\" xlink:href=\"#xp-icon\" x=\"{cursorX.ToString(ci)}\" y=\"{iconY.ToString(ci)}\" />");
+                cursorX += IconSize + 4;
 
                 // XP number text
                 string xpStr = n.XpReward!.Value.ToString();
                 sb.AppendLine($"    <text class=\"reward-text\" x=\"{cursorX.ToString(ci)}\" y=\"{rewardTextY.ToString(ci)}\"" +
                               $">{Esc(xpStr)}</text>");
-                cursorX += xpStr.Length * FontSzReward * 0.60 + 4;
-
-                // XP icon
-                sb.AppendLine($"    <image x=\"{cursorX.ToString(ci)}\" y=\"{iconY.ToString(ci)}\"" +
-                              $" width=\"{IconSize.ToString(ci)}\" height=\"{IconSize.ToString(ci)}\"" +
-                              $" href=\"data:image/png;base64,{XP_ICON_BASE64}\"" +
-                              $" xlink:href=\"data:image/png;base64,{XP_ICON_BASE64}\" />");
-                cursorX += IconSize;
+                cursorX += xpStr.Length * FontSzReward * 0.60;
 
                 // Optional item reward after icon
                 if (hasItemReward)
@@ -1451,10 +1510,11 @@ internal class FlowchartService
             }
             else
             {
-                // Item reward only (no icon)
-                cy += FontSzReward * 0.85;
-                string truncReward = TruncateText(n.ItemRewardText!, w - PadX * 2, FontSzReward, false);
-                sb.AppendLine($"    <text class=\"reward-text\" x=\"{textX.ToString(ci)}\" y=\"{cy.ToString(ci)}\"" +
+                // Item reward only (no icon) — centered in available space
+                double centerY = rewardTop + rewardAvail / 2 + FontSzReward * 0.35;
+                double rewardTextX = textX + 8; // extra left padding for reward section
+                string truncReward = TruncateText(n.ItemRewardText!, w - PadX * 2 - 8, FontSzReward, false);
+                sb.AppendLine($"    <text class=\"reward-text\" x=\"{rewardTextX.ToString(ci)}\" y=\"{centerY.ToString(ci)}\"" +
                               $">{Esc(truncReward)}</text>");
             }
         }
@@ -1462,13 +1522,23 @@ internal class FlowchartService
         // ── Child link section (below rewards, with separator) ──
         if (n.ChildDisplayIndices.Count > 0)
         {
-            double sepY = y + n.Height - LinkLineH - LinkSectionPad - SepGap / 2;
+            double sepY = y + n.Height - LinkLineH - LinkSectionPad - 2 - SepGap / 2;
             sb.AppendLine($"    <line class=\"sep-line\" x1=\"{x.ToString(ci)}\" y1=\"{sepY.ToString(ci)}\"" +
                           $" x2=\"{(x + w).ToString(ci)}\" y2=\"{sepY.ToString(ci)}\" />");
-            double linkY = y + n.Height - LinkSectionPad - LinkLineH * 0.25;
+            // Center link text vertically between separator and bottom edge (accounting for stroke inset, -2px nudge)
+            double footerTop = sepY + SepGap / 2;
+            double footerBottom = y + n.Height - 3;
+            double linkY = footerTop + (footerBottom - footerTop) / 2 + LinkFontSz * 0.35 - 2;
             double linkX = x + w / 2; // centered
             RenderLinkRefs(sb, n.ChildDisplayIndices, linkX, linkY, ci);
         }
+
+        // Double stroke on top of everything: outer 2px #c3732a, inner 2px #91521d (inset by 2px)
+        sb.AppendLine($"    <rect class=\"node-stroke-outer\" x=\"{x.ToString(ci)}\" y=\"{y.ToString(ci)}\"" +
+                      $" width=\"{w.ToString(ci)}\" height=\"{n.Height.ToString(ci)}\" rx=\"{r.ToString(ci)}\" />");
+        double si = 2; // stroke inset for inner border
+        sb.AppendLine($"    <rect class=\"node-stroke-inner\" x=\"{(x + si).ToString(ci)}\" y=\"{(y + si).ToString(ci)}\"" +
+                      $" width=\"{(w - si * 2).ToString(ci)}\" height=\"{(n.Height - si * 2).ToString(ci)}\" rx=\"{(r - si).ToString(ci)}\" />");
 
         sb.AppendLine("  </g>");
     }
@@ -2185,9 +2255,23 @@ internal class FlowchartService
 
     private static string TruncateText(string text, double maxWidth, double fontSize, bool bold)
     {
-        double charW = fontSize * (bold ? 0.64 : 0.60);
+        double charW = fontSize * (bold ? 0.48 : 0.52);
         int maxChars = (int)(maxWidth / charW);
         if (text.Length <= maxChars) return text;
+
+        // Preserve level suffix like " [L5]" when truncating item names
+        if (!bold)
+        {
+            int lvlIdx = text.LastIndexOf(" [L");
+            if (lvlIdx > 0)
+            {
+                string suffix = text[lvlIdx..];
+                int nameMax = maxChars - suffix.Length;
+                if (nameMax > 3)
+                    return text[..(nameMax - 2)] + ".." + suffix;
+            }
+        }
+
         return maxChars > 3 ? text[..(maxChars - 3)] + "..." : text[..maxChars];
     }
 }

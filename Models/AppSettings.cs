@@ -4,7 +4,7 @@ namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.18.8";
+    public const string Version = "v0.18.9";
 
     // Full version with build timestamp, e.g. "v0.18.7 (build 20260322-1200)"
     public static string Build { get; } = GetBuild();
@@ -118,6 +118,9 @@ public class AppSettings
     }
     public string DiscordChannelId { get; set; } = DefaultDiscordChannelId;
     internal const string DefaultDiscordChannelId = "1108526050826276935";
+
+    // Discord — flowchart publishing
+    public string FlowchartDiscordThreadId { get; set; } = "1485372779002986667";
 
     // Appearance
     public string ThemePreference { get; set; } = "System"; // "System", "Light", "Dark"
