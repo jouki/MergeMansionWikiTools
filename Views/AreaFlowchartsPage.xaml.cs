@@ -74,6 +74,39 @@ public partial class AreaFlowchartsPage : UserControl
             _areasLoaded = true;
             await DiscordFlowchartService.EnsureMappingLoadedAsync();
             BuildAreaList();
+
+            // TEMP: Dump area-related bundles for research
+            _ = Task.Run(() =>
+            {
+                try
+                {
+                    AppLogger.Info("[DUMP] Starting bundle dump research...");
+                    var basePath = _main.Settings.ImageExporterBasePath;
+                    var version = _main.Settings.SelectedApkVersion;
+                    AppLogger.Info($"[DUMP] basePath={basePath}, version={version}");
+                    if (string.IsNullOrEmpty(basePath)) { AppLogger.Info("[DUMP] basePath empty"); return; }
+
+                    // tpk: check version dir, then parent
+                    var versionDir = !string.IsNullOrEmpty(version)
+                        ? Path.Combine(basePath, version) : basePath;
+                    var tpkPath = Path.Combine(versionDir, "classdata.tpk");
+                    AppLogger.Info($"[DUMP] Trying tpk: {tpkPath} (exists={File.Exists(tpkPath)})");
+                    if (!File.Exists(tpkPath))
+                    {
+                        tpkPath = Path.Combine(basePath, "classdata.tpk");
+                        AppLogger.Info($"[DUMP] Trying tpk: {tpkPath} (exists={File.Exists(tpkPath)})");
+                    }
+                    if (!File.Exists(tpkPath)) { AppLogger.Info("[DUMP] classdata.tpk not found anywhere"); return; }
+
+                    var apkDir = Path.Combine(versionDir, "Game Files", "APK");
+                    AppLogger.Info($"[DUMP] APK dir: {apkDir} (exists={Directory.Exists(apkDir)})");
+                    // Only dump AreaIconsLibrary — it has the mapping we need
+                    var p = Path.Combine(apkDir, "scriptableobjectsareaiconslibrary_assets_all.bundle");
+                    if (File.Exists(p))
+                        AssetExtractionService.DumpBundleContents(p, tpkPath, maxFieldDepth: 7);
+                }
+                catch (Exception ex) { AppLogger.Info($"[DUMP] Error: {ex.Message}"); }
+            });
         }
         catch (Exception ex)
         {
@@ -161,12 +194,11 @@ public partial class AreaFlowchartsPage : UserControl
 
                 var imgContainer = new Border
                 {
-                    Width = 48,
-                    Height = 48,
+                    Width = 64,
                     ClipToBounds = true,
-                    CornerRadius = new CornerRadius(4),
-                    VerticalAlignment = VerticalAlignment.Center,
-                    Margin = new Thickness(0, 0, 12, 0),
+                    CornerRadius = new CornerRadius(6, 0, 0, 6), // match card corner radius
+                    VerticalAlignment = VerticalAlignment.Stretch, // match card height
+                    Margin = new Thickness(-16, -12, 12, -12), // flush with card left edge
                     Background = new ImageBrush(bmp)
                     {
                         Stretch = Stretch.UniformToFill
@@ -1066,12 +1098,13 @@ public partial class AreaFlowchartsPage : UserControl
         ["BeachRight"] = "BeachHouse",
         ["ShackExterior"] = "Beach",
         ["BeachBar"] = "BeachJuiceBar",
-        ["MansionRightFiller"] = "GardenRight",
+        ["MansionRightFiller"] = "SideFiller",
     };
 
     // Runtime cache: image key → full file path (rebuilt on directory change)
     private Dictionary<string, string>? _areaImageCache;
     private string? _areaImageCacheDir;
+    private Dictionary<string, string>? _areaIconMapping; // from AreaIconsLibrary bundle
 
     /// <summary>
     /// Finds the area background image in the exported PNGs folder.
@@ -1099,6 +1132,17 @@ public partial class AreaFlowchartsPage : UserControl
                 if (idx >= 0)
                     _areaImageCache.TryAdd(name[(idx + 8)..], file);
             }
+
+            // Load AreaId → sprite mapping from AreaIconsLibrary bundle (authoritative)
+            if (_areaIconMapping == null)
+            {
+                var apkDir = Path.Combine(basePath, version, "Game Files", "APK");
+                var tpkPath = Path.Combine(basePath, "classdata.tpk");
+                if (!File.Exists(tpkPath))
+                    tpkPath = Path.Combine(basePath, version, "classdata.tpk");
+                if (Directory.Exists(apkDir) && File.Exists(tpkPath))
+                    _areaIconMapping = AssetExtractionService.ExtractAreaIconMapping(apkDir, tpkPath);
+            }
         }
 
         var imageKey = ResolveImageKey(area.AreaId);
@@ -1113,7 +1157,11 @@ public partial class AreaFlowchartsPage : UserControl
     {
         if (_areaImageCache == null) return null;
 
-        // 1. Explicit override (truly unrelated names only)
+        // 0. Bundle-extracted mapping (AreaIconsLibrary — authoritative)
+        if (_areaIconMapping != null && _areaIconMapping.TryGetValue(areaId, out var bundleKey))
+            if (_areaImageCache.ContainsKey(bundleKey)) return bundleKey;
+
+        // 1. Explicit override (fallback for missing bundle data)
         if (AreaImageOverrides.TryGetValue(areaId, out var over))
             return _areaImageCache.ContainsKey(over) ? over : null;
 

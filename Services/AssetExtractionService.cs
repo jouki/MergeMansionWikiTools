@@ -1832,4 +1832,187 @@ internal static class AssetExtractionService
         var existing = File.ReadAllBytes(existingPath);
         return existing.AsSpan().SequenceEqual(newBytes);
     }
+
+    // ── Area icon mapping extraction ──────────────────────────────────
+
+    /// <summary>
+    /// Extracts AreaId → sprite name mapping from AreaIconsLibrary bundle.
+    /// Returns e.g. { "MansionRightFiller" → "SideFiller", "SwimmingPool" → "PoolArea", ... }
+    /// </summary>
+    public static Dictionary<string, string> ExtractAreaIconMapping(string bundleDir, string tpkPath)
+    {
+        var bundlePath = Path.Combine(bundleDir, "scriptableobjectsareaiconslibrary_assets_all.bundle");
+        var mapping = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+        if (!File.Exists(bundlePath))
+        {
+            AppLogger.Info("[AREA-ICONS] AreaIconsLibrary bundle not found");
+            return mapping;
+        }
+
+        var am = new AssetsManager();
+        try
+        {
+            am.LoadClassPackage(tpkPath);
+            var bunInst = am.LoadBundleFile(bundlePath, unpackIfPacked: true);
+            var dirInfos = bunInst.file.BlockAndDirInfo.DirectoryInfos;
+
+            for (int fi = 0; fi < dirInfos.Count; fi++)
+            {
+                AssetsFileInstance? afileInst;
+                try { afileInst = am.LoadAssetsFileFromBundle(bunInst, fi); }
+                catch { continue; }
+                if (afileInst?.file == null) continue;
+
+                try { am.LoadClassDatabaseFromPackage(afileInst.file.Metadata.UnityVersion); }
+                catch { continue; }
+
+                // Find MonoBehaviour named "AreaIconsLibrary"
+                foreach (var info in afileInst.file.GetAssetsOfType(AssetClassID.MonoBehaviour))
+                {
+                    try
+                    {
+                        var bf = am.GetBaseField(afileInst, info);
+                        if (bf == null || bf.IsDummy) continue;
+
+                        var nameField = bf["m_Name"];
+                        if (nameField.IsDummy || nameField.AsString != "AreaIconsLibrary") continue;
+
+                        var arrField = bf["areaSpritesMapping"]?["Array"];
+                        if (arrField == null || arrField.IsDummy) continue;
+
+                        foreach (var entry in arrField.Children)
+                        {
+                            var areaId = entry["areaId"]?.AsString;
+                            var spriteName = entry["sprites"]?["BannerIconRef"]?["m_SubObjectName"]?.AsString;
+                            if (string.IsNullOrEmpty(areaId) || string.IsNullOrEmpty(spriteName)) continue;
+
+                            // Strip "Area_InfoPopupBg_" prefix to get the image key
+                            const string prefix = "Area_InfoPopupBg_";
+                            var imageKey = spriteName.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)
+                                ? spriteName[prefix.Length..] : spriteName;
+
+                            mapping[areaId] = imageKey;
+                        }
+
+                        AppLogger.Info($"[AREA-ICONS] Extracted {mapping.Count} area→sprite mappings from AreaIconsLibrary");
+                    }
+                    catch { }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Info($"[AREA-ICONS] Error reading bundle: {ex.Message}");
+        }
+        finally { am.UnloadAll(); }
+
+        return mapping;
+    }
+
+    // ── Bundle diagnostic dump ─────────────────────────────────────────
+
+    /// <summary>
+    /// Dumps all assets and their field structures from a bundle to AppLogger.
+    /// Used for research/debugging — discovers field layout of unknown bundles.
+    /// </summary>
+    public static void DumpBundleContents(string bundlePath, string tpkPath, int maxFieldDepth = 3)
+    {
+        if (!File.Exists(bundlePath))
+        {
+            AppLogger.Info($"[DUMP] Bundle not found: {bundlePath}");
+            return;
+        }
+
+        AppLogger.Info($"[DUMP] === Dumping: {Path.GetFileName(bundlePath)} ===");
+        var am = new AssetsManager();
+        try
+        {
+            am.LoadClassPackage(tpkPath);
+            var bunInst = am.LoadBundleFile(bundlePath, unpackIfPacked: true);
+            var dirInfos = bunInst.file.BlockAndDirInfo.DirectoryInfos;
+            AppLogger.Info($"[DUMP] {dirInfos.Count} entries in bundle");
+
+            for (int fi = 0; fi < dirInfos.Count; fi++)
+            {
+                AssetsFileInstance? afileInst;
+                try { afileInst = am.LoadAssetsFileFromBundle(bunInst, fi); }
+                catch { continue; }
+                if (afileInst?.file == null) continue;
+
+                try { am.LoadClassDatabaseFromPackage(afileInst.file.Metadata.UnityVersion); }
+                catch { continue; }
+
+                var afile = afileInst.file;
+                AppLogger.Info($"[DUMP]   File[{fi}]: {dirInfos[fi].Name}, {afile.AssetInfos.Count} assets, Unity {afile.Metadata.UnityVersion}");
+
+                foreach (var info in afile.AssetInfos)
+                {
+                    try
+                    {
+                        var bf = am.GetBaseField(afileInst, info);
+                        if (bf == null || bf.IsDummy) continue;
+
+                        string name = "(unnamed)";
+                        var nameField = bf["m_Name"];
+                        if (!nameField.IsDummy) name = nameField.AsString ?? "(null)";
+
+                        AppLogger.Info($"[DUMP]     Asset: TypeId={info.TypeId} PathId={info.PathId} Name=\"{name}\"");
+
+                        // Dump field tree recursively
+                        DumpFieldTree(bf, "        ", maxFieldDepth, 0);
+                    }
+                    catch (Exception ex)
+                    {
+                        AppLogger.Info($"[DUMP]     Asset TypeId={info.TypeId} PathId={info.PathId} — error: {ex.Message}");
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Info($"[DUMP] Error reading bundle: {ex.Message}");
+        }
+        finally
+        {
+            am.UnloadAll();
+        }
+        AppLogger.Info($"[DUMP] === Done: {Path.GetFileName(bundlePath)} ===");
+    }
+
+    private static void DumpFieldTree(AssetTypeValueField field, string indent, int maxDepth, int depth)
+    {
+        if (depth >= maxDepth) return;
+
+        foreach (var child in field.Children)
+        {
+            try
+            {
+                string fname = child.FieldName ?? "?";
+                string ftype = child.TypeName ?? "?";
+                string fval = "";
+
+                if (ftype == "string")
+                    fval = $" = \"{child.AsString ?? ""}\"";
+                else if (ftype == "int" || ftype == "SInt32" || ftype == "UInt32")
+                    fval = $" = {child.AsInt}";
+                else if (ftype == "SInt64" || ftype == "UInt64")
+                    fval = $" = {child.AsLong}";
+                else if (ftype == "float")
+                    fval = $" = {child.AsFloat}";
+                else if (ftype == "bool")
+                    fval = $" = {(child.AsBool ? "true" : "false")}";
+                else if (child.Children.Count > 0)
+                    fval = $" ({child.Children.Count} children)";
+
+                AppLogger.Info($"[DUMP] {indent}{fname}: {ftype}{fval}");
+
+                if (child.Children.Count > 0 && child.Children.Count <= 200)
+                    DumpFieldTree(child, indent + "  ", maxDepth, depth + 1);
+                else if (child.Children.Count > 200)
+                    AppLogger.Info($"[DUMP] {indent}  ... ({child.Children.Count} children, truncated)");
+            }
+            catch { }
+        }
+    }
 }
