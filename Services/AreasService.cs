@@ -343,6 +343,7 @@ public class AreasService
 
     private static readonly string[] TokenFieldNames =
     {
+        "SoloMilestoneHotspotValue", "BoultonLeaguePoints",
         "DigEventTaps", "QuaternaryEnergy",
         "ClassicRacesSailPoints", "RollTheDiceToken", "BuilderEventToken"
     };

@@ -1,0 +1,288 @@
+using System.IO;
+using MergeMansionWikiTools.Models;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using static MergeMansionWikiTools.Services.AssetExtractionService;
+using Rectangle = SixLabors.ImageSharp.Rectangle;
+
+namespace MergeMansionWikiTools.Services;
+
+/// <summary>
+/// Extracts and crops item icons from atlas sprite sheets for use in flowcharts.
+/// Delegates all detection, prediction, and cropping to shared ImageProcessingService
+/// (identical logic to Image Optimiser).
+/// </summary>
+internal static class FlowchartImageService
+{
+    /// <summary>
+    /// For a set of itemTypes, extracts their icons from atlas sprite sheets.
+    /// Returns a mapping of itemType → base64 PNG string.
+    /// First checks processedImagesDir (shared with Image Optimiser) for existing cropped files.
+    /// If not found there, crops from atlas and saves to processedImagesDir.
+    /// Uses identical prediction + rotation logic as Image Optimiser.
+    /// </summary>
+    public static Dictionary<string, string> ExtractItemIcons(
+        IEnumerable<string> itemTypes,
+        DataService ds,
+        string exportDir,
+        string? processedImagesDir)
+    {
+        var result = new Dictionary<string, string>(StringComparer.Ordinal);
+
+        // Group items by chain to avoid processing the same atlas multiple times
+        var byChain = new Dictionary<string, List<(string itemType, int level)>>(StringComparer.Ordinal);
+        foreach (var itemType in itemTypes.Distinct(StringComparer.Ordinal))
+        {
+            var chainKey = DataService.GetChainKeyFromItemType(itemType);
+            var level = DataService.GetLevelFromItemType(itemType);
+            if (level <= 0) continue;
+
+            if (!byChain.TryGetValue(chainKey, out var list))
+            {
+                list = new List<(string, int)>();
+                byChain[chainKey] = list;
+            }
+            list.Add((itemType, level));
+        }
+
+        if (byChain.Count == 0) return result;
+
+        if (processedImagesDir != null)
+            Directory.CreateDirectory(processedImagesDir);
+
+        // Load atlas metadata
+        var allSprites = SpriteMetadataService.Load(exportDir);
+        var allSkinMappings = SpriteMetadataService.LoadSkinMappings(exportDir);
+        var searchDirs = new[] { exportDir, Path.Combine(exportDir, "Assembled") };
+
+        // Process each chain
+        foreach (var (chainKey, items) in byChain)
+        {
+            try
+            {
+                var chain = ds.Chains.FirstOrDefault(c =>
+                    string.Equals(c.ConfigKey, chainKey, StringComparison.Ordinal));
+                if (chain == null) continue;
+
+                // Find atlas image file
+                var atlasPath = FindAtlasImage(chain, exportDir, searchDirs, allSprites, allSkinMappings);
+                if (atlasPath == null)
+                {
+                    AppLogger.Info($"[FLOWCHART-IMG] Chain '{chainKey}': no atlas image found");
+                    continue;
+                }
+
+                var textureName = Path.GetFileNameWithoutExtension(atlasPath);
+                AppLogger.Info($"[FLOWCHART-IMG] Chain '{chainKey}': atlas '{textureName}'");
+
+                using var img = Image.Load<Rgba32>(atlasPath);
+
+                // Use atlas-based prediction (identical to Image Optimiser)
+                var textureSprites = SpriteMetadataService.GetSpritesForTexture(allSprites, textureName);
+                var chainItems = chain.Items.OrderBy(i => i.Level).ToList();
+
+                Dictionary<int, (Rectangle Full, Rectangle Main, float Rotation)> levelMap;
+
+                if (textureSprites.Count > 0)
+                {
+                    // Step 1: Atlas-based prediction (Map Levels)
+                    var prediction = ImageProcessingService.PredictFromSpriteMetadata(
+                        textureSprites, allSkinMappings, textureName, chainItems, img.Height);
+
+                    if (prediction == null)
+                    {
+                        AppLogger.Info($"[FLOWCHART-IMG] Chain '{chainKey}': prediction failed");
+                        continue;
+                    }
+
+                    // Build compact level+rotation list (skip zeros from AllPositionLevels)
+                    // This matches what Image Optimiser shows in suffix textboxes
+                    var compactLevels = new List<int>();
+                    var compactRotations = new List<float>();
+                    for (int i = 0; i < prediction.AllPositionLevels.Length; i++)
+                    {
+                        int lv = prediction.AllPositionLevels[i];
+                        float rt = prediction.AllPositionRotations[i];
+                        if (lv != 0 || (i < prediction.Indices.Length && i < prediction.KeptPositions.Count))
+                        {
+                            compactLevels.Add(lv);
+                            compactRotations.Add(rt);
+                        }
+                    }
+                    // Actually simpler: use prediction.Indices + Rotations directly — they ARE the compact list
+                    compactLevels.Clear();
+                    compactRotations.Clear();
+                    for (int i = 0; i < prediction.Indices.Length; i++)
+                    {
+                        compactLevels.Add(prediction.Indices[i]);
+                        compactRotations.Add(i < prediction.Rotations.Length ? prediction.Rotations[i] : 0f);
+                    }
+
+                    // Step 2: Adaptive flood-fill detection — match count to kept sprite count
+                    int expectedCount = compactLevels.Count;
+                    var floodOrdered = ImageProcessingService.AdaptDetectionCount(img, expectedCount);
+                    floodOrdered = ImageProcessingService.OrderObjects(floodOrdered);
+
+                    AppLogger.Info($"[FLOWCHART-IMG] Chain '{chainKey}': flood={floodOrdered.Count}, " +
+                        $"expected={expectedCount}, levels=[{string.Join(" ", compactLevels)}]");
+
+                    // Step 3: 1:1 positional mapping
+                    levelMap = new Dictionary<int, (Rectangle, Rectangle, float)>();
+                    int mapCount = Math.Min(floodOrdered.Count, compactLevels.Count);
+                    for (int i = 0; i < mapCount; i++)
+                    {
+                        int level = compactLevels[i];
+                        if (level <= 0 || levelMap.ContainsKey(level)) continue;
+                        float rot = compactRotations[i];
+                        levelMap[level] = (floodOrdered[i].Full, floodOrdered[i].Main, rot);
+                    }
+                }
+                else
+                {
+                    // No sprite metadata — flood-fill + sequential assignment
+                    var fallbackObjects = ImageProcessingService.DetectObjects(img);
+                    var fallbackOrdered = ImageProcessingService.OrderObjects(fallbackObjects);
+                    levelMap = new Dictionary<int, (Rectangle, Rectangle, float)>();
+                    int count = Math.Min(chainItems.Count, fallbackOrdered.Count);
+                    for (int i = 0; i < count; i++)
+                    {
+                        if (!levelMap.ContainsKey(chainItems[i].Level))
+                            levelMap[chainItems[i].Level] = (fallbackOrdered[i].Full, fallbackOrdered[i].Main, 0f);
+                    }
+                }
+
+                // Crop and save each requested level
+                foreach (var (itemType, level) in items)
+                {
+                    if (!levelMap.TryGetValue(level, out var entry)) continue;
+                    if (processedImagesDir == null) continue;
+
+                    // Image Optimiser naming: {TextureName}{Level:00}.png (e.g. ItemTools07.png)
+                    var ioFileName = $"{textureName}{level.ToString().PadLeft(2, '0')}.png";
+                    var ioPath = Path.Combine(processedImagesDir, ioFileName);
+
+                    // Check if Image Optimiser already produced this file (possibly optimized)
+                    if (File.Exists(ioPath))
+                    {
+                        var bytes = File.ReadAllBytes(ioPath);
+                        result[itemType] = Convert.ToBase64String(bytes);
+                        continue;
+                    }
+
+                    // Not found — crop from atlas and save to Processed Images
+                    ImageProcessingService.CropAndSave(img, entry.Full, entry.Main, ioPath, entry.Rotation);
+
+                    if (File.Exists(ioPath))
+                    {
+                        var bytes = File.ReadAllBytes(ioPath);
+                        result[itemType] = Convert.ToBase64String(bytes);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                AppLogger.Info($"[FLOWCHART-IMG] Chain '{chainKey}' error: {ex.Message}");
+            }
+        }
+
+        AppLogger.Info($"[FLOWCHART-IMG] Extracted {result.Count} item icons");
+        return result;
+    }
+
+    /// <summary>
+    /// Finds the atlas PNG file for a chain using the same priority as Image Optimiser.
+    /// </summary>
+    private static string? FindAtlasImage(
+        ParsedChain chain, string exportDir, string[] searchDirs,
+        List<SpriteInfo> allSprites, List<SkinMapping> allSkinMappings)
+    {
+        var candidates = new List<string>();
+
+        // Priority 1: PoolConfig mapping
+        if (!string.IsNullOrEmpty(chain.PoolTag))
+        {
+            var texName = SpriteMetadataService.ResolveSkeletonForPoolTag(chain.PoolTag, exportDir);
+            if (texName != null) candidates.Add($"{texName}.png");
+        }
+
+        // Priority 2: ItemType → SpriteName in skin mappings
+        var itemTypeTexture = SpriteMetadataService.FindTextureForChainFromItemTypes(
+            allSkinMappings, chain.Items.ToList());
+        if (itemTypeTexture != null) candidates.Add($"{itemTypeTexture}.png");
+
+        // Priority 3: SkinName mapping
+        var skinTexture = SpriteMetadataService.FindTextureForChainFromSkinMapping(
+            allSkinMappings, chain.Items.ToList());
+        if (skinTexture != null) candidates.Add($"{skinTexture}.png");
+
+        // Priority 4: CamelCase suffix heuristic
+        if (allSprites.Count > 0)
+        {
+            var matchedSprites = SpriteMetadataService.FindSpritesForChain(
+                allSprites, chain.ConfigKey, exportDir);
+            if (matchedSprites.Count > 0)
+                candidates.Add($"{matchedSprites[0].TextureName}.png");
+        }
+
+        // Priority 5: Item{ConfigKey}.png pattern
+        candidates.Add($"Item{chain.ConfigKey}.png");
+        if (chain.MergedFromConfigKeys != null)
+            foreach (var mk in chain.MergedFromConfigKeys)
+                candidates.Add($"Item{mk}.png");
+
+        // Deduplicate
+        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var candidate in candidates)
+        {
+            if (!seen.Add(candidate)) continue;
+
+            foreach (var dir in searchDirs)
+            {
+                var fullPath = Path.Combine(dir, candidate);
+                if (File.Exists(fullPath)) return fullPath;
+
+                // Check suffix-renamed files
+                var baseName = Path.GetFileNameWithoutExtension(candidate);
+                var suffixed = Directory.GetFiles(dir, $"{baseName}_*.png").FirstOrDefault();
+                if (suffixed != null) return suffixed;
+            }
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Computes a tight bounding box of high-alpha pixels (alpha > 80) within a region.
+    /// This gives the "Main" rect matching Image Optimiser's flood-fill Main detection,
+    /// but computed locally per sprite — no global flood-fill needed.
+    /// </summary>
+    private static Rectangle ComputeMainRect(Image<Rgba32> img, Rectangle full)
+    {
+        int minX = full.Right, minY = full.Bottom;
+        int maxX = full.Left - 1, maxY = full.Top - 1;
+
+        int top = Math.Max(0, full.Top);
+        int bottom = Math.Min(img.Height, full.Top + full.Height);
+        int left = Math.Max(0, full.Left);
+        int right = Math.Min(img.Width, full.Left + full.Width);
+
+        for (int py = top; py < bottom; py++)
+        {
+            for (int px = left; px < right; px++)
+            {
+                if (img[px, py].A > ImageProcessingService.MainAlphaThreshold)
+                {
+                    if (px < minX) minX = px;
+                    if (px > maxX) maxX = px;
+                    if (py < minY) minY = py;
+                    if (py > maxY) maxY = py;
+                }
+            }
+        }
+
+        // No high-alpha pixels found — fall back to full rect
+        if (maxX < minX || maxY < minY) return full;
+
+        return new Rectangle(minX, minY, maxX - minX + 1, maxY - minY + 1);
+    }
+}

@@ -204,19 +204,36 @@ public partial class AreaFlowchartsPage : UserControl
         Grid.SetColumn(namePanel, 1);
         grid.Children.Add(namePanel);
 
-        // Open button
-        var btnOpen = new Wpf.Ui.Controls.Button
+        // Open buttons (SVG + HTML)
+        var openPanel = new StackPanel
         {
-            Content = "Open",
+            Orientation = Orientation.Horizontal,
+            Margin = new Thickness(8, 0, 0, 0),
+            Visibility = Visibility.Collapsed
+        };
+        var btnOpenSvg = new Wpf.Ui.Controls.Button
+        {
+            Content = "SVG",
             Appearance = ControlAppearance.Secondary,
             Height = 32,
-            Margin = new Thickness(8, 0, 0, 0),
-            Visibility = Visibility.Collapsed,
             Tag = area
         };
-        btnOpen.Click += BtnOpenSvg_Click;
-        Grid.SetColumn(btnOpen, 2);
-        grid.Children.Add(btnOpen);
+        btnOpenSvg.Click += BtnOpenSvg_Click;
+        openPanel.Children.Add(btnOpenSvg);
+
+        var btnOpenHtml = new Wpf.Ui.Controls.Button
+        {
+            Content = "HTML",
+            Appearance = ControlAppearance.Secondary,
+            Height = 32,
+            Margin = new Thickness(4, 0, 0, 0),
+            Tag = area
+        };
+        btnOpenHtml.Click += BtnOpenHtml_Click;
+        openPanel.Children.Add(btnOpenHtml);
+
+        Grid.SetColumn(openPanel, 2);
+        grid.Children.Add(openPanel);
 
         // Generate button (always split — chevron has "Save to..." + "Publish to Discord")
         var genContainer = new Grid { Margin = new Thickness(8, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
@@ -267,7 +284,7 @@ public partial class AreaFlowchartsPage : UserControl
         // Check if SVG already exists — show Open button
         var outputPath = GetOutputFilePath(area);
         if (outputPath != null && File.Exists(outputPath))
-            btnOpen.Visibility = Visibility.Visible;
+            openPanel.Visibility = Visibility.Visible;
 
         border.Child = grid;
         return border;
@@ -331,8 +348,15 @@ public partial class AreaFlowchartsPage : UserControl
             int count = 0;
             foreach (var area in _areas)
             {
-                await GenerateFlowchartAsync(area);
-                count++;
+                try
+                {
+                    await GenerateFlowchartAsync(area);
+                    count++;
+                }
+                catch (InvalidOperationException)
+                {
+                    // Skip areas with no tasks/requirements (e.g. Gift Shop)
+                }
             }
 
             ShowInfo($"Generated {count} flowcharts.\n\u2192 {outputDir}", InfoBarSeverity.Success, persistent: true);
@@ -414,11 +438,19 @@ public partial class AreaFlowchartsPage : UserControl
             var outputPath = Path.Combine(folder, $"{safeName}.svg");
             Directory.CreateDirectory(folder);
 
-            var svg = await Task.Run(() => FlowchartService.GenerateSvg(area, _main.DataService));
+            var itemIcons = await Task.Run(() => ExtractItemIconsForArea(area, folder));
+
+            var svg = await Task.Run(() => FlowchartService.GenerateSvg(area, _main.DataService, itemIcons: itemIcons));
             if (string.IsNullOrEmpty(svg))
                 throw new InvalidOperationException($"No tasks with requirements found in {area.DisplayName}.");
 
             await File.WriteAllTextAsync(outputPath, svg);
+
+            // Also generate Discord HTML version
+            var html = await Task.Run(() => FlowchartService.GenerateSvg(area, _main.DataService, forDiscord: true, itemIcons: itemIcons, tokenIcons: LoadTokenIcons()));
+            if (!string.IsNullOrEmpty(html))
+                await File.WriteAllTextAsync(Path.Combine(folder, $"{safeName}.html"), html);
+
             if (_main.Settings.DebugMode) WriteDebugCopy(area, svg);
             ShowInfo($"Generated flowchart for {area.DisplayName}.\n\u2192 {folder}", InfoBarSeverity.Success);
 
@@ -454,10 +486,18 @@ public partial class AreaFlowchartsPage : UserControl
                 var safeName = string.Join("_", area.DisplayName.Split(Path.GetInvalidFileNameChars()));
                 var outputPath = Path.Combine(folder, $"{safeName}.svg");
 
-                var svg = await Task.Run(() => FlowchartService.GenerateSvg(area, _main.DataService));
+                var itemIcons = await Task.Run(() => ExtractItemIconsForArea(area, folder));
+
+                var svg = await Task.Run(() => FlowchartService.GenerateSvg(area, _main.DataService, itemIcons: itemIcons));
                 if (!string.IsNullOrEmpty(svg))
                 {
                     await File.WriteAllTextAsync(outputPath, svg);
+
+                    // Also generate Discord HTML version
+                    var html = await Task.Run(() => FlowchartService.GenerateSvg(area, _main.DataService, forDiscord: true, itemIcons: itemIcons, tokenIcons: LoadTokenIcons()));
+                    if (!string.IsNullOrEmpty(html))
+                        await File.WriteAllTextAsync(Path.Combine(folder, $"{safeName}.html"), html);
+
                     if (_main.Settings.DebugMode) WriteDebugCopy(area, svg);
                     count++;
                 }
@@ -488,17 +528,131 @@ public partial class AreaFlowchartsPage : UserControl
         if (!string.IsNullOrEmpty(dir))
             Directory.CreateDirectory(dir);
 
+        // Extract item icons from atlases
+        var itemIcons = await Task.Run(() => ExtractItemIconsForArea(area, dir!));
+
+        // Generate wiki SVG (with icons)
         var svg = await Task.Run(() =>
-            FlowchartService.GenerateSvg(area, _main.DataService));
+            FlowchartService.GenerateSvg(area, _main.DataService, itemIcons: itemIcons));
 
         if (string.IsNullOrEmpty(svg))
             throw new InvalidOperationException($"No tasks with requirements found in {area.DisplayName}.");
 
         await File.WriteAllTextAsync(outputPath, svg);
 
+        // Generate Discord HTML (interactive version, with icons)
+        var html = await Task.Run(() =>
+            FlowchartService.GenerateSvg(area, _main.DataService, forDiscord: true, itemIcons: itemIcons, tokenIcons: LoadTokenIcons()));
+
+        if (!string.IsNullOrEmpty(html))
+        {
+            var htmlPath = Path.ChangeExtension(outputPath, ".html");
+            await File.WriteAllTextAsync(htmlPath, html);
+        }
+
         // Debug mode: also save next to .exe
         if (_main.Settings.DebugMode)
             WriteDebugCopy(area, svg);
+    }
+
+    /// <summary>
+    /// Extracts item icons for all requirements in an area's tasks.
+    /// Returns itemType → base64 PNG mapping. Saves cropped PNGs to Images/ subfolder.
+    /// </summary>
+    private Dictionary<string, string>? ExtractItemIconsForArea(LuaArea area, string outputDir)
+    {
+        try
+        {
+            var basePath = _main.Settings.ImageExporterBasePath;
+            var version = _main.Settings.SelectedApkVersion;
+            if (string.IsNullOrEmpty(basePath) || string.IsNullOrEmpty(version))
+                return null;
+
+            var exportDir = Path.Combine(basePath, version, "Export - PNGs");
+            if (!Directory.Exists(exportDir))
+                return null;
+
+            if (_main.DataService == null) return null;
+
+            // Collect all unique itemTypes from area tasks (requirements + reward items)
+            var itemTypes = area.Tasks
+                .SelectMany(t => t.Requirements.Keys)
+                .Concat(area.Tasks
+                    .Select(t => t.ItemReward)
+                    .Where(r => !string.IsNullOrEmpty(r))!)
+                .Distinct(StringComparer.Ordinal)
+                .ToList();
+
+            if (itemTypes.Count == 0) return null;
+
+            // Use shared Processed Images folder (same as Image Optimiser)
+            var processedImagesDir = Path.Combine(basePath, "Processed Images");
+            var icons = FlowchartImageService.ExtractItemIcons(
+                itemTypes, _main.DataService, exportDir, processedImagesDir);
+
+            return icons.Count > 0 ? icons : null;
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Info($"[FLOWCHART] Icon extraction failed: {ex.Message}");
+            return null;
+        }
+    }
+
+    /// <summary>Token field → image file mapping for flowchart token slots.</summary>
+    private static readonly (string Field, string FileName)[] TokenImageFiles =
+    {
+        ("SoloMilestoneHotspotValue", "TeatimeDelight_tea-token_96.png"),
+        ("BoultonLeaguePoints",       "BLE_Shared_PointsIcon_96.png"),
+        ("DigEventTaps",              "DE_Shared_Pickaxe_Image_96.png"),
+        ("ClassicRacesSailPoints",    "HorizonCup_coin-token_96.png"),
+        ("RollTheDiceToken",          "RollTheDice_Knife-token_96.png"),
+    };
+
+    private Dictionary<string, string>? _tokenIconsCache;
+
+    /// <summary>Loads token PNG images as base64 strings. Searches known paths.</summary>
+    private Dictionary<string, string> LoadTokenIcons()
+    {
+        if (_tokenIconsCache != null) return _tokenIconsCache;
+
+        var result = new Dictionary<string, string>(StringComparer.Ordinal);
+
+        // Try known search paths for token images
+        var searchDirs = new List<string>();
+        searchDirs.Add(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "Tokens"));
+        // User's asset directory (relative to ImageExporterBasePath parent)
+        var basePath = _main.Settings.ImageExporterBasePath;
+        if (!string.IsNullOrEmpty(basePath))
+        {
+            var parent = Path.GetDirectoryName(basePath);
+            if (parent != null)
+                searchDirs.Add(Path.Combine(parent, "Assets", "Tokens"));
+        }
+        // Hardcoded fallback for known project layout
+        searchDirs.Add(@"D:\_BACKUP_2.0\Adobe Photoshop - Savy\Merge Mansion\Assets\Tokens");
+
+        string? tokenDir = null;
+        foreach (var dir in searchDirs)
+        {
+            if (Directory.Exists(dir)) { tokenDir = dir; break; }
+        }
+
+        if (tokenDir != null)
+        {
+            foreach (var (field, fileName) in TokenImageFiles)
+            {
+                var path = Path.Combine(tokenDir, fileName);
+                if (File.Exists(path))
+                {
+                    var bytes = File.ReadAllBytes(path);
+                    result[field] = Convert.ToBase64String(bytes);
+                }
+            }
+        }
+
+        _tokenIconsCache = result;
+        return result;
     }
 
     private static void WriteDebugCopy(LuaArea area, string svg)
@@ -585,6 +739,16 @@ public partial class AreaFlowchartsPage : UserControl
         }
     }
 
+    private void BtnOpenHtml_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Wpf.Ui.Controls.Button btn || btn.Tag is not LuaArea area) return;
+        var svgPath = GetOutputFilePath(area);
+        if (svgPath == null) return;
+        var htmlPath = Path.ChangeExtension(svgPath, ".html");
+        if (File.Exists(htmlPath))
+            Process.Start(new ProcessStartInfo(htmlPath) { UseShellExecute = true });
+    }
+
     private void BtnOpenFolder_Click(object sender, RoutedEventArgs e)
     {
         var dir = GetOutputDir();
@@ -612,13 +776,15 @@ public partial class AreaFlowchartsPage : UserControl
 
         try
         {
-            ShowInfo("Generating Discord SVGs…", InfoBarSeverity.Informational);
+            ShowInfo("Generating Discord flowcharts…", InfoBarSeverity.Informational);
             var svgs = new List<(LuaArea area, string svg)>();
+            var outputDir = GetOutputDir();
             await Task.Run(() =>
             {
                 foreach (var area in _areas)
                 {
-                    var svg = FlowchartService.GenerateSvg(area, _main.DataService, forDiscord: true);
+                    var itemIcons = outputDir != null ? ExtractItemIconsForArea(area, outputDir) : null;
+                    var svg = FlowchartService.GenerateSvg(area, _main.DataService, forDiscord: true, itemIcons: itemIcons, tokenIcons: LoadTokenIcons());
                     if (!string.IsNullOrEmpty(svg))
                         svgs.Add((area, svg));
                 }
@@ -669,8 +835,13 @@ public partial class AreaFlowchartsPage : UserControl
 
         try
         {
+            var discordOutputDir = GetOutputDir();
+            var itemIcons = discordOutputDir != null
+                ? await Task.Run(() => ExtractItemIconsForArea(area, discordOutputDir))
+                : null;
+
             var svg = await Task.Run(() =>
-                FlowchartService.GenerateSvg(area, _main.DataService, forDiscord: true));
+                FlowchartService.GenerateSvg(area, _main.DataService, forDiscord: true, itemIcons: itemIcons, tokenIcons: LoadTokenIcons()));
 
             if (string.IsNullOrEmpty(svg))
             {
@@ -691,8 +862,10 @@ public partial class AreaFlowchartsPage : UserControl
                 var match = _areas?.FirstOrDefault(a =>
                     a.DisplayName.Equals(name, StringComparison.OrdinalIgnoreCase));
                 if (match == null) return null;
+                var matchIcons = discordOutputDir != null
+                    ? ExtractItemIconsForArea(match, discordOutputDir) : null;
                 return await Task.Run(() =>
-                    FlowchartService.GenerateSvg(match, _main.DataService, forDiscord: true));
+                    FlowchartService.GenerateSvg(match, _main.DataService, forDiscord: true, itemIcons: matchIcons, tokenIcons: LoadTokenIcons()));
             };
 
             var (success, wasUpdate, reordered) = await DiscordFlowchartService.PublishOneAsync(
@@ -770,16 +943,14 @@ public partial class AreaFlowchartsPage : UserControl
     }
 
     /// <summary>
-    /// Finds the Open button in the same card as the given Generate button and makes it visible.
+    /// Finds the Open panel in the same card as the given Generate button and makes it visible.
     /// </summary>
     private static void ShowOpenButtonInCard(Wpf.Ui.Controls.Button genBtn)
     {
-        // genBtn is inside genContainer Grid → inside card Grid → find Open button
         if (genBtn.Parent is Grid genContainer && genContainer.Parent is Grid cardGrid)
         {
-            var openBtn = cardGrid.Children.OfType<Wpf.Ui.Controls.Button>()
-                .FirstOrDefault(b => b.Content?.ToString() == "Open");
-            if (openBtn != null) openBtn.Visibility = Visibility.Visible;
+            var openPanel = cardGrid.Children.OfType<StackPanel>().FirstOrDefault();
+            if (openPanel != null) openPanel.Visibility = Visibility.Visible;
         }
     }
 
@@ -895,6 +1066,7 @@ public partial class AreaFlowchartsPage : UserControl
         ["BeachRight"] = "BeachHouse",
         ["ShackExterior"] = "Beach",
         ["BeachBar"] = "BeachJuiceBar",
+        ["MansionRightFiller"] = "GardenRight",
     };
 
     // Runtime cache: image key → full file path (rebuilt on directory change)

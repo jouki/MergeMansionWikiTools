@@ -89,10 +89,10 @@ public partial class ImageOptimiserPage : UserControl
     private string? _lastOutputDir;
     private string? _customSplitOutputDir; // session-persistent custom output folder
 
-    // ── Object detection constants ──
-    private const int AlphaThreshold = 5;
-    private const int MainAlphaThreshold = 80;
-    private const int MinCellArea = 400;
+    // ── Object detection constants (delegated to ImageProcessingService) ──
+    private const int AlphaThreshold = ImageProcessingService.AlphaThreshold;
+    private const int MainAlphaThreshold = ImageProcessingService.MainAlphaThreshold;
+    private const int MinCellArea = ImageProcessingService.MinCellArea;
     private const int MaxColumnsPerRow = 15;
 
     public ImageOptimiserPage(MainWindow main)
@@ -2684,40 +2684,12 @@ public partial class ImageOptimiserPage : UserControl
                     var obj = allOrdered[i];
                     var sourceImage = imageCache[obj.SourcePath];
 
-                    using var crop = sourceImage.Clone(x => x.Crop(obj.Full));
-
-                    // Apply atlas rotation correction if sprite was stored rotated
-                    bool isRotated = obj.Rotation != 0f;
-                    if (isRotated)
-                        crop.Mutate(x => x.Rotate(obj.Rotation));
-
-                    int size = GetCanvasSize(crop.Width, crop.Height);
-                    using var canvas = new Image<Rgba32>(size, size);
-
-                    int px, py;
-                    if (isRotated)
-                    {
-                        // After rotation, center the crop on canvas
-                        px = (size - crop.Width) / 2;
-                        py = (size - crop.Height) / 2;
-                    }
-                    else
-                    {
-                        // Use Main rect for precise centering (center of mass)
-                        float cx = (obj.Main.Left + obj.Main.Right + 1) / 2f;
-                        float cy = (obj.Main.Top + obj.Main.Bottom + 1) / 2f;
-                        px = (int)Math.Round(size / 2f + 1.0f - (cx - obj.Full.Left));
-                        py = (int)Math.Round(size / 2f + 1.0f - (cy - obj.Full.Top));
-                    }
-
-                    canvas.Mutate(x => x.DrawImage(crop, new Point(px, py), 1f));
-
                     string fullPath = singleObject && !redirected
                         ? nameSourceImg.FilePath
                         : System.IO.Path.Combine(dir, $"{name}{suffixes[i].PadLeft(2, '0')}.png");
 
-                    using (var fs = new FileStream(fullPath, FileMode.Create, FileAccess.Write, FileShare.None))
-                        canvas.SaveAsPng(fs);
+                    // Use shared CropAndSave (identical to FlowchartImageService)
+                    ImageProcessingService.CropAndSave(sourceImage, obj.Full, obj.Main, fullPath, obj.Rotation);
 
                     allResultFiles.Add(fullPath);
                 }
@@ -3690,189 +3662,27 @@ public partial class ImageOptimiserPage : UserControl
     //  OBJECT DETECTION — Flood Fill + Smart Merge
     // ══════════════════════════════════════════════════════════════
 
-    /// <summary>Raw flood-fill detection without column merge.</summary>
+    /// <summary>Raw flood-fill detection without column merge. Delegates to shared ImageProcessingService.</summary>
     private static List<(Rectangle Full, Rectangle Main)> DetectObjectsRaw(Image<Rgba32> img)
-    {
-        if (img.Width < 130 && img.Height < 130)
-            return new List<(Rectangle, Rectangle)> { (new Rectangle(0, 0, img.Width, img.Height), new Rectangle(0, 0, img.Width, img.Height)) };
-
-        var visited = new bool[img.Width, img.Height];
-        var list = new List<(Rectangle Full, Rectangle Main)>();
-
-        for (int y = 0; y < img.Height; y++)
-            for (int x = 0; x < img.Width; x++)
-            {
-                if (!visited[x, y] && img[x, y].A > AlphaThreshold)
-                {
-                    var r = FloodFill(img, x, y, visited);
-                    if (r.Full.Width * r.Full.Height >= MinCellArea)
-                        list.Add(r);
-                }
-            }
-
-        return list;
-    }
+        => ImageProcessingService.DetectObjectsRaw(img);
 
     private static List<(Rectangle Full, Rectangle Main)> DetectObjects(Image<Rgba32> img)
-    {
-        return MergeColumnStacks(DetectObjectsRaw(img));
-    }
+        => ImageProcessingService.DetectObjects(img);
 
-    /// <summary>
-    /// Merges vertically stacked objects that share the same horizontal column.
-    /// Sprite sheets typically arrange items in a single row; multiple objects
-    /// stacked vertically in one column are almost always parts of the same item
-    /// (e.g. separate kebab skewers with a transparent gap between them).
-    /// </summary>
+    /// <summary>Delegates to shared ImageProcessingService.</summary>
     private static List<(Rectangle Full, Rectangle Main)> MergeColumnStacks(
         List<(Rectangle Full, Rectangle Main)> objects)
-    {
-        if (objects.Count <= 1) return objects;
-
-        // Union-Find: group objects sharing >40% horizontal overlap
-        int n = objects.Count;
-        var parent = Enumerable.Range(0, n).ToArray();
-
-        int Find(int x) { while (parent[x] != x) x = parent[x] = parent[parent[x]]; return x; }
-        void Unite(int a, int b) { parent[Find(a)] = Find(b); }
-
-        for (int i = 0; i < n; i++)
-            for (int j = i + 1; j < n; j++)
-            {
-                int overlapLeft = Math.Max(objects[i].Full.Left, objects[j].Full.Left);
-                int overlapRight = Math.Min(objects[i].Full.Left + objects[i].Full.Width,
-                                            objects[j].Full.Left + objects[j].Full.Width);
-                int overlap = Math.Max(0, overlapRight - overlapLeft);
-                int narrower = Math.Min(objects[i].Full.Width, objects[j].Full.Width);
-                if (narrower > 0 && (double)overlap / narrower > 0.4)
-                {
-                    // Safety: only merge objects that are vertically close (parts of the same item).
-                    // Items in different sprite-sheet rows share horizontal overlap but have large vertical gaps.
-                    int iBot = objects[i].Full.Top + objects[i].Full.Height;
-                    int jBot = objects[j].Full.Top + objects[j].Full.Height;
-                    int vertGap = Math.Max(0, Math.Max(objects[i].Full.Top, objects[j].Full.Top)
-                                             - Math.Min(iBot, jBot));
-                    double avgW = (objects[i].Full.Width + objects[j].Full.Width) / 2.0;
-                    if (vertGap <= avgW * 0.5)
-                        Unite(i, j);
-                }
-            }
-
-        // Build column groups
-        var groups = new Dictionary<int, List<int>>();
-        for (int i = 0; i < n; i++)
-        {
-            int root = Find(i);
-            if (!groups.ContainsKey(root)) groups[root] = new();
-            groups[root].Add(i);
-        }
-
-        // Only merge if majority of columns are single-object
-        int singleCount = groups.Values.Count(g => g.Count == 1);
-        if (singleCount * 2 <= groups.Count) return objects; // ≤50% single → likely a grid, don't merge
-
-        // Merge multi-object columns
-        var result = new List<(Rectangle Full, Rectangle Main)>();
-        foreach (var group in groups.Values)
-        {
-            if (group.Count == 1)
-            {
-                result.Add(objects[group[0]]);
-                continue;
-            }
-
-            // Union of all Full and Main rectangles in the group
-            int fL = int.MaxValue, fT = int.MaxValue, fR = int.MinValue, fB = int.MinValue;
-            int mL = int.MaxValue, mT = int.MaxValue, mR = int.MinValue, mB = int.MinValue;
-            foreach (int idx in group)
-            {
-                var (full, main) = objects[idx];
-                fL = Math.Min(fL, full.Left); fT = Math.Min(fT, full.Top);
-                fR = Math.Max(fR, full.Left + full.Width); fB = Math.Max(fB, full.Top + full.Height);
-                mL = Math.Min(mL, main.Left); mT = Math.Min(mT, main.Top);
-                mR = Math.Max(mR, main.Left + main.Width); mB = Math.Max(mB, main.Top + main.Height);
-            }
-            result.Add((new Rectangle(fL, fT, fR - fL, fB - fT),
-                         new Rectangle(mL, mT, mR - mL, mB - mT)));
-        }
-
-        return result;
-    }
+        => ImageProcessingService.MergeColumnStacks(objects);
 
     private static (Rectangle Full, Rectangle Main) FloodFill(Image<Rgba32> img, int sx, int sy, bool[,] v)
-    {
-        int x1 = sx, x2 = sx, y1 = sy, y2 = sy;
-        int mx1 = int.MaxValue, mx2 = int.MinValue, my1 = int.MaxValue, my2 = int.MinValue;
-        bool hasMain = false;
-
-        var q = new Queue<Point>();
-        q.Enqueue(new Point(sx, sy));
-        v[sx, sy] = true;
-
-        while (q.Count > 0)
-        {
-            var p = q.Dequeue();
-            x1 = Math.Min(x1, p.X); x2 = Math.Max(x2, p.X);
-            y1 = Math.Min(y1, p.Y); y2 = Math.Max(y2, p.Y);
-
-            if (img[p.X, p.Y].A >= MainAlphaThreshold)
-            {
-                mx1 = Math.Min(mx1, p.X); mx2 = Math.Max(mx2, p.X);
-                my1 = Math.Min(my1, p.Y); my2 = Math.Max(my2, p.Y);
-                hasMain = true;
-            }
-
-            foreach (var (dx, dy) in new[] { (0, 1), (0, -1), (1, 0), (-1, 0) })
-            {
-                int nx = p.X + dx, ny = p.Y + dy;
-                if (nx >= 0 && nx < img.Width && ny >= 0 && ny < img.Height
-                    && !v[nx, ny] && img[nx, ny].A > AlphaThreshold)
-                {
-                    v[nx, ny] = true;
-                    q.Enqueue(new Point(nx, ny));
-                }
-            }
-        }
-
-        var full = new Rectangle(x1, y1, x2 - x1 + 1, y2 - y1 + 1);
-        var main = hasMain ? new Rectangle(mx1, my1, mx2 - mx1 + 1, my2 - my1 + 1) : full;
-        return (full, main);
-    }
+        => ImageProcessingService.FloodFill(img, sx, sy, v);
 
     private static List<(Rectangle Full, Rectangle Main)> OrderObjects(List<(Rectangle Full, Rectangle Main)> objects)
-    {
-        if (objects.Count <= 1) return objects;
-        var rows = SplitIntoObjectRows(objects);
-        return rows.SelectMany(r => r.OrderBy(o => o.Full.Left)).ToList();
-    }
+        => ImageProcessingService.OrderObjects(objects);
 
-    /// <summary>
-    /// Splits detected objects into visual rows based on Y positions.
-    /// </summary>
     private static List<List<(Rectangle Full, Rectangle Main)>> SplitIntoObjectRows(
         List<(Rectangle Full, Rectangle Main)> objects)
-    {
-        var sorted = objects.OrderBy(o => o.Full.Top + o.Full.Height / 2.0).ToList();
-        var rows = new List<List<(Rectangle Full, Rectangle Main)>>();
-        var currentRow = new List<(Rectangle Full, Rectangle Main)> { sorted[0] };
-
-        for (int i = 1; i < sorted.Count; i++)
-        {
-            double prevCenter = currentRow.Last().Full.Top + currentRow.Last().Full.Height / 2.0;
-            double currCenter = sorted[i].Full.Top + sorted[i].Full.Height / 2.0;
-            double gap = currCenter - prevCenter;
-            double threshold = Math.Max(currentRow.Last().Full.Height, sorted[i].Full.Height) / 2.0;
-
-            if (gap > threshold)
-            {
-                rows.Add(currentRow);
-                currentRow = new List<(Rectangle Full, Rectangle Main)>();
-            }
-            currentRow.Add(sorted[i]);
-        }
-        rows.Add(currentRow);
-        return rows;
-    }
+        => ImageProcessingService.SplitIntoObjectRows(objects);
 
     /// <summary>
     /// Applies MergeColumnStacks within each visual row independently.
@@ -3881,14 +3691,7 @@ public partial class ImageOptimiserPage : UserControl
     /// </summary>
     private static List<(Rectangle Full, Rectangle Main)> MergeColumnStacksPerRow(
         List<(Rectangle Full, Rectangle Main)> objects)
-    {
-        if (objects.Count <= 1) return objects;
-        var rows = SplitIntoObjectRows(objects);
-        var result = new List<(Rectangle Full, Rectangle Main)>();
-        foreach (var row in rows)
-            result.AddRange(MergeColumnStacks(row));
-        return result;
-    }
+        => ImageProcessingService.MergeColumnStacksPerRow(objects);
 
     /// <summary>
     /// Returns per-row object counts (e.g. [8, 2] for 8 items in first row, 2 in second).
@@ -3901,108 +3704,9 @@ public partial class ImageOptimiserPage : UserControl
 
     private static List<(Rectangle Full, Rectangle Main)> MergeToExpectedCount(
         List<(Rectangle Full, Rectangle Main)> objects, int expectedCount)
-    {
-        if (objects.Count <= expectedCount) return objects;
+        => ImageProcessingService.MergeToExpectedCount(objects, expectedCount);
 
-        var list = new List<(Rectangle Full, Rectangle Main)>(objects);
-
-        while (list.Count > expectedCount)
-        {
-            var ordered = OrderObjects(list);
-            list = ordered;
-
-            var widths = list.Select(o => (double)o.Full.Width).OrderBy(w => w).ToList();
-            var areas = list.Select(o => (double)(o.Full.Width * o.Full.Height)).OrderBy(a => a).ToList();
-            double medianW = widths[widths.Count / 2];
-            double medianArea = areas[areas.Count / 2];
-
-            var rows = new List<List<int>>();
-            var currentRow = new List<int> { 0 };
-
-            for (int i = 1; i < list.Count; i++)
-            {
-                double prevCenter = list[currentRow.Last()].Full.Top + list[currentRow.Last()].Full.Height / 2.0;
-                double currCenter = list[i].Full.Top + list[i].Full.Height / 2.0;
-                double gap = currCenter - prevCenter;
-                double thresh = Math.Max(list[currentRow.Last()].Full.Height, list[i].Full.Height) / 2.0;
-
-                if (gap > thresh)
-                {
-                    rows.Add(currentRow);
-                    currentRow = new List<int>();
-                }
-                currentRow.Add(i);
-            }
-            rows.Add(currentRow);
-
-            double bestScore = double.MinValue;
-            int bestA = -1, bestB = -1;
-
-            foreach (var row in rows)
-            {
-                for (int ri = 0; ri < row.Count; ri++)
-                    for (int rj = ri + 1; rj < row.Count; rj++)
-                    {
-                        int ai = row[ri], bi = row[rj];
-                        var a = list[ai]; var b = list[bi];
-
-                        int xOvlp = Math.Max(0, Math.Min(a.Full.Left + a.Full.Width, b.Full.Left + b.Full.Width) - Math.Max(a.Full.Left, b.Full.Left));
-                        int yOvlp = Math.Max(0, Math.Min(a.Full.Top + a.Full.Height, b.Full.Top + b.Full.Height) - Math.Max(a.Full.Top, b.Full.Top));
-                        double overlapArea = xOvlp * yOvlp;
-                        double smallerArea = Math.Min((double)a.Full.Width * a.Full.Height, (double)b.Full.Width * b.Full.Height);
-                        double bboxOverlapRatio = smallerArea > 0 ? overlapArea / smallerArea : 0;
-
-                        double edgeGap = Math.Max(0, Math.Max(a.Full.Left, b.Full.Left) - Math.Min(a.Full.Left + a.Full.Width, b.Full.Left + b.Full.Width));
-
-                        double areaA = a.Full.Width * a.Full.Height;
-                        double areaB = b.Full.Width * b.Full.Height;
-                        bool fragA = areaA < 0.5 * medianArea;
-                        bool fragB = areaB < 0.5 * medianArea;
-                        double fragmentScore = (fragA && fragB) ? 2.0 : (fragA || fragB) ? -0.5 : 0.0;
-
-                        double mergedW = Math.Max(a.Full.Left + a.Full.Width, b.Full.Left + b.Full.Width) - Math.Min(a.Full.Left, b.Full.Left);
-                        double sizeScore = 1.0 / (1.0 + Math.Abs(mergedW - medianW) / Math.Max(medianW, 1));
-
-                        double gapScore = 1.0 / (1.0 + edgeGap);
-
-                        double score = 10.0 * bboxOverlapRatio + 3.0 * fragmentScore + 2.0 * sizeScore + 1.0 * gapScore;
-
-                        if (score > bestScore)
-                        {
-                            bestScore = score;
-                            bestA = ai;
-                            bestB = bi;
-                        }
-                    }
-            }
-
-            if (bestA < 0 || bestB < 0) break;
-
-            var objA = list[bestA]; var objB = list[bestB];
-            int fLeft = Math.Min(objA.Full.Left, objB.Full.Left);
-            int fTop = Math.Min(objA.Full.Top, objB.Full.Top);
-            int fRight = Math.Max(objA.Full.Left + objA.Full.Width, objB.Full.Left + objB.Full.Width);
-            int fBot = Math.Max(objA.Full.Top + objA.Full.Height, objB.Full.Top + objB.Full.Height);
-            var mergedFull = new Rectangle(fLeft, fTop, fRight - fLeft, fBot - fTop);
-
-            int mLeft = Math.Min(objA.Main.Left, objB.Main.Left);
-            int mTop = Math.Min(objA.Main.Top, objB.Main.Top);
-            int mRight = Math.Max(objA.Main.Left + objA.Main.Width, objB.Main.Left + objB.Main.Width);
-            int mBot = Math.Max(objA.Main.Top + objA.Main.Height, objB.Main.Top + objB.Main.Height);
-            var mergedMain = new Rectangle(mLeft, mTop, mRight - mLeft, mBot - mTop);
-
-            list.RemoveAt(bestB);
-            list.RemoveAt(bestA);
-            list.Add((mergedFull, mergedMain));
-        }
-
-        return OrderObjects(list);
-    }
 
     private static int GetCanvasSize(int w, int h)
-    {
-        int m = Math.Max(w, h);
-        int[] s = { 96, 100, 105, 110, 115, 120, 128, 132, 136, 142, 148, 154, 160, 164, 172, 180, 188, 192, 196, 208, 216, 224, 240, 256, 512, 768, 1024 };
-        return s.FirstOrDefault(x => x >= m) == 0 ? 256 : s.First(x => x >= m);
-    }
+        => ImageProcessingService.GetCanvasSize(w, h);
 }

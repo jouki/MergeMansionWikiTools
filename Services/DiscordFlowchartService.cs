@@ -58,7 +58,8 @@ internal static class DiscordFlowchartService
             var apiUrl = "https://merge-mansion.fandom.com/api.php"
                 + "?action=query&titles=Module:Datatable/Areas/Mapping"
                 + "&prop=revisions&rvprop=content&rvslots=main&format=json";
-            var json = await _http.GetStringAsync(apiUrl);
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+            var json = await _http.GetStringAsync(apiUrl, cts.Token);
             using var doc = JsonDocument.Parse(json);
             var pages = doc.RootElement.GetProperty("query").GetProperty("pages");
             string lua = "";
@@ -435,7 +436,7 @@ internal static class DiscordFlowchartService
     // ── Helpers ───────────────────────────────────────────────────────
 
     private static string SafeFileName(string displayName) =>
-        string.Join("_", displayName.Split(Path.GetInvalidFileNameChars())) + ".svg";
+        string.Join("_", displayName.Split(Path.GetInvalidFileNameChars())) + ".html";
 
     private static async Task<bool> SendArea(
         string botToken, string threadId, string areaDisplayName, string svg)

@@ -19,6 +19,10 @@ internal class FlowchartService
         public List<FReq> Requirements = new();
         public int? XpReward;
         public string? ItemRewardText;
+        public string? ItemRewardType;        // raw item type key for icon lookup
+        public string? ItemRewardWikiName;     // chain display name for wiki link
+        public bool ItemRewardSingleLevel;     // true when chain has only 1 unique level
+        public Dictionary<string, int> TokenValues = new(); // field name → value
         public HashSet<string> Parents = new();
         public HashSet<string> Children = new();
         public bool IsDummy;
@@ -39,6 +43,9 @@ internal class FlowchartService
         public int Qty;
         public string ItemName = "";   // "Wheelbarrow [L5]"
         public string? Tooltip;        // chain display name
+        public string ItemType = "";   // raw item type key for icon lookup
+        public string? ChainWikiName;  // chain display name for wiki link (e.g. "Sewing Supplies")
+        public bool HasIcon;           // true when itemIcons has base64 for this item
     }
 
     // ── Constants ────────────────────────────────────────────────────
@@ -67,6 +74,10 @@ internal class FlowchartService
     const double LinkFontSz = 9;    // font size for parent/child link references
     const double LinkLineH = 12;    // line height for link section
     const double LinkSectionPad = 3; // padding around link sections
+    const double ItemSlotSize = 42;    // outer slot rectangle size
+    const double ItemIconDisplay = 32; // displayed image size inside slot
+    const double ItemSlotCorner = 6;   // slot corner radius
+    const double ItemSlotGap = 6;      // gap between slot and qty column
     const double BusOffset = 20;    // how far below source the edge bus is
     const double EdgePad = 0;       // gap between node boundary and edge start/end
     const double SnapThresh = 5;    // snap small X offsets to straight
@@ -77,12 +88,36 @@ internal class FlowchartService
 
     // ── XP icon (base64 PNG) ────────────────────────────────────────
 
+    private const string CHECKMARK_ICON_BASE64 =
+        "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";
+
     private const string XP_ICON_BASE64 =
         "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";
 
+    // ── Token slot ordering (left to right) ─────────────────────────
+    // Field name → display order (lower = more left)
+    private static readonly (string Field, string Label)[] TokenSlotOrder =
+    {
+        ("SoloMilestoneHotspotValue", "Teatime"),
+        ("BoultonLeaguePoints",       "BLE"),
+        ("DigEventTaps",              "DE"),
+        ("ClassicRacesSailPoints",    "Horizon"),
+        ("RollTheDiceToken",          "RTD"),
+    };
+
+    const double TokenSlotSize = 22;   // outer circle diameter (small — icon overflows)
+    const double TokenIconSize = 20;   // icon display size (same or bigger than circle)
+    const double TokenSlotGap = 6;     // gap between token slots (center-to-center spacing via colW)
+    const double TokenFontSz = 10;     // font size for token value text
+    const int TokenCols = 3;           // columns per row
+    const double TokenColW = 26;       // column width for token grid
+    const double TokenRowH = 28;       // row height (must match rendering row spacing)
+
     // ── Public API ───────────────────────────────────────────────────
 
-    public static string GenerateSvg(LuaArea area, DataService? ds, bool forDiscord = false)
+    public static string GenerateSvg(LuaArea area, DataService? ds, bool forDiscord = false,
+        Dictionary<string, string>? itemIcons = null,
+        Dictionary<string, string>? tokenIcons = null)
     {
         // 1. Build graph from LuaTask data (uses LuaTask.Index for display)
         var nodes = BuildGraph(area.Tasks, ds);
@@ -124,9 +159,17 @@ internal class FlowchartService
                 .OrderBy(i => i).ToList();
         }
 
+        // 7b. Mark requirements that have icons available (icons displayed only in Discord/HTML)
+        if (forDiscord && itemIcons != null)
+        {
+            foreach (var n in nodes.Values)
+                foreach (var req in n.Requirements)
+                    req.HasIcon = itemIcons.ContainsKey(req.ItemType);
+        }
+
         // 8. Calculate node dimensions (uses ParentDisplayIndices/ChildDisplayIndices for link sections)
         foreach (var n in nodes.Values)
-            CalculateNodeSize(n);
+            CalculateNodeSize(n, forDiscord);
 
         // 9. Collect real edges BEFORE dummy insertion modifies Children/Parents
         var realEdges = new List<(string from, string to)>();
@@ -139,7 +182,15 @@ internal class FlowchartService
         var layers = SugiyamaLayout(nodes);
 
         // 11. Generate SVG
-        return RenderSvg(area.DisplayName, nodes, layers, realEdges, forDiscord);
+        var svgContent = RenderSvg(area.DisplayName, nodes, layers, realEdges, forDiscord, itemIcons, tokenIcons);
+
+        if (forDiscord)
+        {
+            int realNodeCount = nodes.Values.Count(n => !n.IsDummy);
+            return WrapAsInteractiveHtml(svgContent, area.DisplayName, realNodeCount);
+        }
+
+        return svgContent;
     }
 
     // ── Graph building ───────────────────────────────────────────────
@@ -151,6 +202,7 @@ internal class FlowchartService
 
         foreach (var t in tasks)
         {
+            var (rewardText, rewardWiki, rewardSingleLevel) = FormatItemReward(t.ItemReward, ds);
             var node = new FNode
             {
                 Id = t.Id,
@@ -160,7 +212,11 @@ internal class FlowchartService
                 Children = new HashSet<string>(t.ChildIds, StringComparer.Ordinal),
                 Requirements = ResolveRequirements(t.Requirements, ds),
                 XpReward = t.XpReward,
-                ItemRewardText = FormatItemReward(t.ItemReward, ds)
+                ItemRewardText = rewardText,
+                ItemRewardType = t.ItemReward,
+                ItemRewardWikiName = rewardWiki,
+                ItemRewardSingleLevel = rewardSingleLevel,
+                TokenValues = t.TokenValues ?? new()
             };
             nodes[t.Id] = node;
         }
@@ -190,22 +246,37 @@ internal class FlowchartService
                 name = itemType;
             }
 
-            result.Add(new FReq { Qty = qty, ItemName = name, Tooltip = tooltip });
+            result.Add(new FReq { Qty = qty, ItemName = name, Tooltip = tooltip, ItemType = itemType, ChainWikiName = tooltip });
         }
         return result;
     }
 
-    private static string? FormatItemReward(string? itemReward, DataService? ds)
+    private static (string? text, string? wikiName, bool singleLevel) FormatItemReward(
+        string? itemReward, DataService? ds)
     {
-        if (string.IsNullOrEmpty(itemReward)) return null;
+        if (string.IsNullOrEmpty(itemReward)) return (null, null, false);
 
         if (ds != null)
         {
             var name = ds.ResolveItemName(itemReward);
             var level = DataService.GetLevelFromItemType(itemReward);
-            return level > 0 ? $"{name} [L{level}]" : name;
+            var chainKey = DataService.GetChainKeyFromItemType(itemReward);
+            var wikiName = ds.ResolveChainDisplayName(chainKey);
+
+            // Check if chain has only 1 unique level
+            bool singleLevel = false;
+            var chain = ds.Chains.FirstOrDefault(c =>
+                string.Equals(c.ConfigKey, chainKey, StringComparison.Ordinal));
+            if (chain != null)
+            {
+                var uniqueLevels = chain.Items.Select(i => i.Level).Distinct().Count();
+                singleLevel = uniqueLevels <= 1;
+            }
+
+            var text = level > 0 && !singleLevel ? $"{name} [L{level}]" : name;
+            return (text, wikiName, singleLevel);
         }
-        return itemReward;
+        return (itemReward, null, false);
     }
 
     // ── Empty node removal ───────────────────────────────────────────
@@ -327,7 +398,7 @@ internal class FlowchartService
 
     // ── Node sizing ──────────────────────────────────────────────────
 
-    private static void CalculateNodeSize(FNode node)
+    private static void CalculateNodeSize(FNode node, bool forDiscord = false)
     {
         if (node.IsDummy) { node.Width = 0; node.Height = 0; return; }
 
@@ -398,17 +469,39 @@ internal class FlowchartService
         h += PadY; // top padding of body
 
         // Items (always present — we only show nodes with requirements)
-        h += node.Requirements.Count * LineH;
+        bool hasAnyIcon = node.Requirements.Any(r => r.HasIcon);
+        double itemLineH = hasAnyIcon ? ItemSlotSize + 2 : LineH;
+        h += node.Requirements.Count * itemLineH;
 
-        // Reward
+        // Reward + tokens (tokens float right, share vertical space with reward)
         bool hasReward = hasXp || hasItemReward;
-        if (hasReward)
+        bool hasTokens = node.TokenValues.Count > 0 && forDiscord;
+        if (hasReward || hasTokens)
         {
             h += SepGap;
-            h += hasXp ? IconSize + 4 : LineH; // icon needs more vertical space
+            // Left side: XP line + optional reward item line below
+            double leftH = 0;
+            if (hasXp) leftH += IconSize + 2;
+            if (hasItemReward && forDiscord) leftH += 6 + LineH; // 6px gap + reward item line in HTML
+            else if (hasItemReward && hasXp) leftH += 0; // SVG: inline with XP
+            else if (hasItemReward) leftH += LineH;
+
+            if (hasTokens)
+            {
+                int tokenCount = node.TokenValues.Count;
+                int rows = (tokenCount + TokenCols - 1) / TokenCols;
+                double tokenH = rows * TokenRowH - 22; // tokens overflow visually
+                // 2+ rows: tokens drive height; 1 row: ensure reward item fits (+6px for icon clearance)
+                h += rows >= 2 ? tokenH : Math.Max(leftH + (hasItemReward ? 6 : 0), tokenH);
+            }
+            else
+            {
+                h += leftH;
+            }
         }
 
-        h += PadY; // bottom padding
+        // Bottom padding (reduced when tokens provide visual spacing)
+        h += hasTokens ? 2 : PadY;
 
         // Child link section (separator + links below rewards, +2px bottom)
         if (node.ChildDisplayIndices.Count > 0)
@@ -1191,7 +1284,9 @@ internal class FlowchartService
 
     private static string RenderSvg(string areaName,
         Dictionary<string, FNode> nodes, List<List<string>> layers,
-        List<(string from, string to)> realEdges, bool forDiscord = false)
+        List<(string from, string to)> realEdges, bool forDiscord = false,
+        Dictionary<string, string>? itemIcons = null,
+        Dictionary<string, string>? tokenIcons = null)
     {
         var ci = CultureInfo.InvariantCulture;
 
@@ -1222,7 +1317,8 @@ internal class FlowchartService
         var sb = new StringBuilder();
 
         // SVG header (SVG 1.1 + xlink for image href, Fandom-compatible)
-        sb.AppendLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+        if (!forDiscord)
+            sb.AppendLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         sb.AppendLine("<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\"");
         sb.AppendLine($"     width=\"{svgW.ToString(ci)}\" height=\"{svgH.ToString(ci)}\"");
         sb.AppendLine($"     viewBox=\"0 0 {svgW.ToString(ci)} {svgH.ToString(ci)}\">");
@@ -1249,6 +1345,16 @@ internal class FlowchartService
         sb.AppendLine("    .link-ref-header { fill: #96c0f0; font-family: 'Tisa Sans Pro', Trebuchet MS, sans-serif; font-size: 9px; cursor: pointer; }");
         sb.AppendLine("    .link-ref:hover { fill: #E8961E; text-decoration: underline; }");
         sb.AppendLine("    .link-ref-header:hover { fill: #FFFFFF; text-decoration: underline; }");
+        sb.AppendLine("    .item-slot { fill: #D4C4A8; stroke: #B8A888; stroke-width: 1; }");
+        sb.AppendLine("    .icon-hover { transition: transform 0.3s ease; }");
+        sb.AppendLine("    .icon-hover:hover { transform: scale(1.1); }");
+        sb.AppendLine("    a .header-idx:hover { text-decoration: underline; }");
+        sb.AppendLine("    a .item-name { cursor: pointer; }");
+        sb.AppendLine("    a .item-name:hover { text-decoration: underline; }");
+        sb.AppendLine("    a .reward-text { cursor: pointer; }");
+        sb.AppendLine("    a .reward-text:hover { text-decoration: underline; }");
+        sb.AppendLine("    .token-circle { fill: #FFFDF5; stroke: #C8B088; stroke-width: 1.5; }");
+        sb.AppendLine("    .token-value { fill: #6B4520; stroke: #FFFDF5; stroke-width: 2.5px; paint-order: stroke fill; font-family: 'Tisa Sans Pro', Georgia, serif; font-weight: 800; text-anchor: middle; }");
         sb.AppendLine("    .edge-path { fill: none; stroke: #B8874A; stroke-width: 1.5; }");
         sb.AppendLine("    .edge-arrow { fill: #9C6F3A; }");
         sb.AppendLine("    @keyframes node-shake { 0%,100%{transform:translate(0,0)} 15%,55%{transform:translate(-1.5px,0)} 35%,75%{transform:translate(1.5px,0)} }");
@@ -1256,6 +1362,37 @@ internal class FlowchartService
         sb.AppendLine("    @keyframes node-stroke-flash { 0%{stroke:#E8C050;stroke-width:3} 30%{stroke:#D4A040;stroke-width:2.6} 100%{stroke:#c3732a;stroke-width:2} }");
         sb.AppendLine("    rect:target + g { transform-box:fill-box; transform-origin:center; filter:drop-shadow(0 0 6px rgba(255,248,220,0.9)) drop-shadow(0 0 14px rgba(230,180,60,0.7)) drop-shadow(0 0 28px rgba(200,130,20,0.4)); animation:node-shake 0.4s ease-in-out 0.3s, node-glow 3s ease-out 0.7s forwards }");
         sb.AppendLine("    rect:target + g .node-stroke-outer { stroke:#E8C050; stroke-width:3; animation:node-stroke-flash 3s ease-out 0.7s forwards }");
+        if (forDiscord)
+        {
+            sb.AppendLine("    /* ── Interactive completed state (warm pastel green, game-inspired) ── */");
+            sb.AppendLine("    [data-node-idx] { cursor: pointer; }");
+            sb.AppendLine("    [data-node-idx] .node-stroke-outer, [data-node-idx] .node-stroke-inner { transition: stroke 0.3s ease; }");
+            sb.AppendLine("    [data-node-idx] .node-body { transition: filter 0.4s ease; }");
+            sb.AppendLine("    .check-icon { opacity: 0; transition: opacity 0.3s ease; }");
+            sb.AppendLine("    @keyframes complete-glow { 0%{filter:drop-shadow(0 0 0px rgba(120,180,60,0))} 20%{filter:drop-shadow(0 0 12px rgba(120,190,60,0.8)) drop-shadow(0 0 24px rgba(80,160,40,0.5))} 60%{filter:drop-shadow(0 0 6px rgba(120,180,60,0.4)) drop-shadow(0 0 14px rgba(80,160,40,0.2))} 100%{filter:none} }");
+            sb.AppendLine("    .completed { animation: complete-glow 0.8s ease-out; }");
+            sb.AppendLine("    .completed .node-body { fill: url(#grad-body-done); filter: url(#shadow-node-done); }");
+            sb.AppendLine("    .completed .node-header { fill: url(#grad-header-done); }");
+            sb.AppendLine("    .completed .header-fill-btm { fill: #A0C470; }");
+            sb.AppendLine("    .completed .node-stroke-outer { stroke: #8AAD5A; stroke-width: 2.2; }");
+            sb.AppendLine("    .completed .node-stroke-inner { stroke: #7A9D4A; }");
+            sb.AppendLine("    .completed .header-idx { fill: #E8F4D8; }");
+            sb.AppendLine("    .completed .header-title { fill: #F0F8E4; stroke: #4A7A28; }");
+            sb.AppendLine("    .completed .item-qty { fill: #6A8E3E; }");
+            sb.AppendLine("    .completed .item-name { fill: #5A7E30; }");
+            sb.AppendLine("    .completed .reward-text { fill: #6A8E3E; }");
+            sb.AppendLine("    .completed .sep-line { stroke: #B8CC8A; }");
+            sb.AppendLine("    .completed .link-ref { fill: #6A8E3E; }");
+            sb.AppendLine("    .completed .link-ref-header { fill: #D8F0B8; }");
+            sb.AppendLine("    .completed .item-slot { fill: #C8D8A8; stroke: #A0B888; }");
+            sb.AppendLine("    .completed .check-icon { opacity: 1; }");
+            sb.AppendLine("    .completed .token-circle { fill: #E8F4D0; stroke: #A0B888; }");
+            sb.AppendLine("    .completed .token-value { fill: #5A7E30; }");
+            sb.AppendLine("    /* ── Anchor highlight (JS-driven for HTML wrapper) ── */");
+            sb.AppendLine("    @keyframes anchor-glow { 0%{filter:drop-shadow(0 0 8px rgba(255,220,100,0.9)) drop-shadow(0 0 18px rgba(230,180,60,0.6))} 50%{filter:drop-shadow(0 0 5px rgba(255,220,100,0.5)) drop-shadow(0 0 12px rgba(218,165,32,0.3))} 100%{filter:none} }");
+            sb.AppendLine("    .anchor-highlight { animation: anchor-glow 2s ease-out forwards; }");
+            sb.AppendLine("    .anchor-highlight .node-stroke-outer { stroke: #E8C050; stroke-width: 3; animation: node-stroke-flash 2s ease-out forwards; }");
+        }
         sb.AppendLine("  </style>");
         sb.AppendLine();
 
@@ -1282,14 +1419,67 @@ internal class FlowchartService
         sb.AppendLine("    <filter id=\"shadow-node\" x=\"-4%\" y=\"-2%\" width=\"110%\" height=\"110%\">");
         sb.AppendLine("      <feDropShadow dx=\"2\" dy=\"3\" stdDeviation=\"3\" flood-color=\"#4A3520\" flood-opacity=\"0.2\" />");
         sb.AppendLine("    </filter>");
-        sb.AppendLine($"    <image id=\"xp-icon\" width=\"{IconSize.ToString(ci)}\" height=\"{IconSize.ToString(ci)}\"");
-        sb.AppendLine($"           href=\"data:image/png;base64,{XP_ICON_BASE64}\"");
-        sb.AppendLine($"           xlink:href=\"data:image/png;base64,{XP_ICON_BASE64}\" />");
+        if (forDiscord)
+        {
+            sb.AppendLine($"    <image id=\"xp-icon\" width=\"{IconSize.ToString(ci)}\" height=\"{IconSize.ToString(ci)}\"");
+            sb.AppendLine($"           href=\"data:image/png;base64,{XP_ICON_BASE64}\"");
+            sb.AppendLine($"           xlink:href=\"data:image/png;base64,{XP_ICON_BASE64}\" />");
+        }
         sb.AppendLine($"    <marker id=\"arrow\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\"");
         sb.AppendLine($"            markerWidth=\"{ArrowSize.ToString(ci)}\" markerHeight=\"{ArrowSize.ToString(ci)}\"");
         sb.AppendLine("            orient=\"auto-start-reverse\">");
         sb.AppendLine("      <path d=\"M 0 0 L 10 5 L 0 10 z\" class=\"edge-arrow\" />");
         sb.AppendLine("    </marker>");
+        if (forDiscord)
+        {
+            sb.AppendLine("    <!-- Completed state gradients (warm pastel green) -->");
+            sb.AppendLine("    <linearGradient id=\"grad-header-done\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">");
+            sb.AppendLine("      <stop offset=\"0%\" stop-color=\"#B8D48C\" />");
+            sb.AppendLine("      <stop offset=\"100%\" stop-color=\"#A0C470\" />");
+            sb.AppendLine("    </linearGradient>");
+            sb.AppendLine("    <linearGradient id=\"grad-body-done\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">");
+            sb.AppendLine("      <stop offset=\"0%\" stop-color=\"#E8F2D8\" />");
+            sb.AppendLine("      <stop offset=\"100%\" stop-color=\"#DCE8C8\" />");
+            sb.AppendLine("    </linearGradient>");
+            sb.AppendLine("    <filter id=\"shadow-node-done\" x=\"-8%\" y=\"-6%\" width=\"118%\" height=\"118%\">");
+            sb.AppendLine("      <feDropShadow dx=\"0\" dy=\"0\" stdDeviation=\"4\" flood-color=\"#6AAE40\" flood-opacity=\"0.35\" />");
+            sb.AppendLine("      <feDropShadow dx=\"1\" dy=\"2\" stdDeviation=\"2\" flood-color=\"#3A5A20\" flood-opacity=\"0.15\" />");
+            sb.AppendLine("    </filter>");
+            sb.AppendLine($"    <image id=\"check-icon\" width=\"28\" height=\"28\"");
+            sb.AppendLine($"           href=\"data:image/png;base64,{CHECKMARK_ICON_BASE64}\"");
+            sb.AppendLine($"           xlink:href=\"data:image/png;base64,{CHECKMARK_ICON_BASE64}\" />");
+        }
+        // Item icon images (deduplicated, Discord/HTML only) — each unique icon gets an <image> in defs
+        if (forDiscord && itemIcons != null && itemIcons.Count > 0)
+        {
+            var iconDisplaySz = ItemIconDisplay.ToString(ci);
+            sb.AppendLine("    <!-- Item icons -->");
+            var emittedBase64 = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var (itemType, base64) in itemIcons)
+            {
+                if (!emittedBase64.Add(base64)) continue; // skip duplicate images
+                var iconId = ItemIconDefId(itemType);
+                sb.AppendLine($"    <image id=\"{iconId}\" width=\"{iconDisplaySz}\" height=\"{iconDisplaySz}\"");
+                sb.AppendLine($"           href=\"data:image/png;base64,{base64}\"");
+                sb.AppendLine($"           xlink:href=\"data:image/png;base64,{base64}\" />");
+            }
+        }
+        // Token icon images (Discord/HTML only)
+        if (forDiscord && tokenIcons != null && tokenIcons.Count > 0)
+        {
+            var tokenSz = TokenIconSize.ToString(ci);
+            sb.AppendLine("    <!-- Token icons -->");
+            foreach (var (field, base64) in tokenIcons)
+            {
+                sb.AppendLine($"    <image id=\"token-{field}\" width=\"{tokenSz}\" height=\"{tokenSz}\"");
+                sb.AppendLine($"           href=\"data:image/png;base64,{base64}\"");
+                sb.AppendLine($"           xlink:href=\"data:image/png;base64,{base64}\" />");
+            }
+        }
+        // Token shadow filter (subtle circular shadow)
+        sb.AppendLine("    <filter id=\"shadow-token\" x=\"-20%\" y=\"-10%\" width=\"140%\" height=\"140%\">");
+        sb.AppendLine("      <feDropShadow dx=\"0\" dy=\"1\" stdDeviation=\"1\" flood-color=\"#6A5030\" flood-opacity=\"0.25\" />");
+        sb.AppendLine("    </filter>");
         sb.AppendLine("  </defs>");
         sb.AppendLine();
 
@@ -1302,14 +1492,15 @@ internal class FlowchartService
         // Render nodes
         sb.AppendLine("  <!-- Nodes -->");
         foreach (var n in nodes.Values.Where(n => !n.IsDummy))
-            RenderNode(sb, n, offsetX, offsetY, ci, forDiscord);
+            RenderNode(sb, n, offsetX, offsetY, ci, forDiscord, itemIcons, areaName, tokenIcons);
 
         sb.AppendLine("</svg>");
         return sb.ToString();
     }
 
     private static void RenderNode(StringBuilder sb, FNode n, double ox, double oy,
-        CultureInfo ci, bool forDiscord = false)
+        CultureInfo ci, bool forDiscord = false, Dictionary<string, string>? itemIcons = null,
+        string? areaName = null, Dictionary<string, string>? tokenIcons = null)
     {
         double x = n.X + ox;
         double y = n.Y + oy;
@@ -1324,7 +1515,19 @@ internal class FlowchartService
         sb.AppendLine($"  <rect id=\"node-{n.DisplayIndex}\" x=\"{x.ToString(ci)}\" y=\"{(y - anchorOffset).ToString(ci)}\"" +
                       $" width=\"0\" height=\"0\" fill=\"none\" />");
 
-        sb.AppendLine($"  <g id=\"ng-{n.DisplayIndex}\">");
+        string nodeAttrs;
+        if (forDiscord)
+        {
+            var parentsAttr = n.ParentDisplayIndices.Count > 0
+                ? $" data-parents=\"{string.Join(",", n.ParentDisplayIndices)}\""
+                : "";
+            nodeAttrs = $" data-node-idx=\"{n.DisplayIndex}\"{parentsAttr}";
+        }
+        else
+        {
+            nodeAttrs = "";
+        }
+        sb.AppendLine($"  <g id=\"ng-{n.DisplayIndex}\"{nodeAttrs}>");
 
         // Body rectangle (fill + shadow, no stroke)
         sb.AppendLine($"    <rect class=\"node-body\" x=\"{x.ToString(ci)}\" y=\"{y.ToString(ci)}\"" +
@@ -1351,7 +1554,8 @@ internal class FlowchartService
         double stripY = y + combinedHeaderH - r;
         if (stripY > y)
         {
-            sb.AppendLine($"    <rect fill=\"#3A5F96\" x=\"{x.ToString(ci)}\" y=\"{stripY.ToString(ci)}\"" +
+            var btmCls = forDiscord ? " class=\"header-fill-btm\"" : "";
+            sb.AppendLine($"    <rect fill=\"#3A5F96\"{btmCls} x=\"{x.ToString(ci)}\" y=\"{stripY.ToString(ci)}\"" +
                           $" width=\"{w.ToString(ci)}\" height=\"{r.ToString(ci)}\" />");
         }
 
@@ -1371,19 +1575,32 @@ internal class FlowchartService
         // Actual header bar starts after parent links
         double headerBarY = y + parentLinkH;
 
-        // ── Header text: "#NNN" (right-aligned) + "Title" (left-aligned) ──
+        // ── Header text: "#NNN" (right-aligned, wiki-linked) + "Title" (left-aligned) ──
 
         double idxEndX = x + PadX + IndexColW;
         double titleStartX = idxEndX + IndexTitleGap;
         double availTitleW = w - PadX - IndexColW - IndexTitleGap - PadX;
+
+        // Wiki link for task ID: area#TNNN
+        string? taskHref = areaName != null ? $"{WikiUrl(areaName)}#T{n.DisplayIndex}" : null;
 
         if (n.HeaderLines == 2)
         {
             // 2-line header: index centered vertically, title on two lines (+1px bottom nudge)
             double idxY = headerBarY + headerH / 2 + FontSzHeader * 0.35 + 1;
             if (parentLinkH > 0) idxY -= 5;
-            sb.AppendLine($"    <text class=\"header-idx\" x=\"{idxEndX.ToString(ci)}\" y=\"{idxY.ToString(ci)}\"" +
-                          $" text-anchor=\"end\">#{n.DisplayIndex}</text>");
+            if (taskHref != null)
+            {
+                sb.AppendLine($"    <a href=\"{Esc(taskHref)}\" target=\"_blank\">");
+                sb.AppendLine($"      <text class=\"header-idx\" x=\"{idxEndX.ToString(ci)}\" y=\"{idxY.ToString(ci)}\"" +
+                              $" text-anchor=\"end\">#{n.DisplayIndex}</text>");
+                sb.AppendLine("    </a>");
+            }
+            else
+            {
+                sb.AppendLine($"    <text class=\"header-idx\" x=\"{idxEndX.ToString(ci)}\" y=\"{idxY.ToString(ci)}\"" +
+                              $" text-anchor=\"end\">#{n.DisplayIndex}</text>");
+            }
 
             int maxChars = MaxTitleChars;
             int breakAt = n.Title.LastIndexOf(' ', Math.Min(maxChars, n.Title.Length - 1));
@@ -1410,9 +1627,19 @@ internal class FlowchartService
             // When parent links present, nudge title+idx up to reduce link→title gap
             if (parentLinkH > 0) { titleY -= 5; idxY -= 5; }
 
-            // Index (right-aligned)
-            sb.AppendLine($"    <text class=\"header-idx\" x=\"{idxEndX.ToString(ci)}\" y=\"{idxY.ToString(ci)}\"" +
-                          $" text-anchor=\"end\">#{n.DisplayIndex}</text>");
+            // Index (right-aligned, wiki-linked)
+            if (taskHref != null)
+            {
+                sb.AppendLine($"    <a href=\"{Esc(taskHref)}\" target=\"_blank\">");
+                sb.AppendLine($"      <text class=\"header-idx\" x=\"{idxEndX.ToString(ci)}\" y=\"{idxY.ToString(ci)}\"" +
+                              $" text-anchor=\"end\">#{n.DisplayIndex}</text>");
+                sb.AppendLine("    </a>");
+            }
+            else
+            {
+                sb.AppendLine($"    <text class=\"header-idx\" x=\"{idxEndX.ToString(ci)}\" y=\"{idxY.ToString(ci)}\"" +
+                              $" text-anchor=\"end\">#{n.DisplayIndex}</text>");
+            }
 
             // Title (left-aligned, truncated if needed)
             string title = TruncateText(n.Title, availTitleW, FontSzTitle, true);
@@ -1425,104 +1652,286 @@ internal class FlowchartService
         double textX = x + PadX;
         double cy = headerBarY + headerH + PadY;
 
-        // Items (quantity aligned + name aligned)
-        double qtyEndX = x + PadX + QtyColW;
+        // Items (quantity aligned + name aligned, optionally with icon slots — icons only in HTML/Discord)
+        bool hasAnyIcon = forDiscord && n.Requirements.Any(r => r.HasIcon);
+        double iconOffset = hasAnyIcon ? ItemSlotSize + ItemSlotGap : 0;
+        double qtyEndX = x + PadX + iconOffset + QtyColW;
         double nameStartX = qtyEndX + QtyNameGap;
-        double availNameW = w - PadX - QtyColW - QtyNameGap - PadX;
+        double availNameW = w - PadX - iconOffset - QtyColW - QtyNameGap - PadX;
+        double itemLineH = hasAnyIcon ? ItemSlotSize + 2 : LineH;
 
         foreach (var req in n.Requirements)
         {
-            cy += FontSzItem * 0.85;
-
-            // Quantity (right-aligned)
-            sb.AppendLine($"    <text class=\"item-qty\" x=\"{qtyEndX.ToString(ci)}\" y=\"{cy.ToString(ci)}\"" +
-                          $" text-anchor=\"end\">{req.Qty}x</text>");
-
-            // Item name (left-aligned, with tooltip)
-            string itemText = TruncateText(req.ItemName, availNameW, FontSzItem, false);
-            if (req.Tooltip != null)
+            if (hasAnyIcon)
             {
-                sb.AppendLine($"    <text class=\"item-name\" x=\"{nameStartX.ToString(ci)}\" y=\"{cy.ToString(ci)}\">");
-                sb.AppendLine($"      <title>{Esc(req.Tooltip)}</title>");
-                sb.AppendLine($"      {Esc(itemText)}</text>");
+                // Icon slot (rounded rect + icon image, wiki-linked)
+                double slotX = x + PadX;
+                double slotY = cy;
+
+                // Wrap slot in <a> link to chain wiki page if available
+                string? chainHref = req.ChainWikiName != null ? WikiUrl(req.ChainWikiName) : null;
+                if (chainHref != null)
+                    sb.AppendLine($"    <a href=\"{Esc(chainHref)}\" target=\"_blank\">");
+
+                sb.AppendLine($"    <rect class=\"item-slot\" x=\"{slotX.ToString(ci)}\" y=\"{slotY.ToString(ci)}\"" +
+                              $" width=\"{ItemSlotSize.ToString(ci)}\" height=\"{ItemSlotSize.ToString(ci)}\"" +
+                              $" rx=\"{ItemSlotCorner.ToString(ci)}\" />");
+
+                if (req.HasIcon && itemIcons != null && itemIcons.ContainsKey(req.ItemType))
+                {
+                    double iconX = slotX + (ItemSlotSize - ItemIconDisplay) / 2;
+                    double iconY2 = slotY + (ItemSlotSize - ItemIconDisplay) / 2;
+                    double iconCx = iconX + ItemIconDisplay / 2;
+                    double iconCy = iconY2 + ItemIconDisplay / 2;
+                    var iconId = ItemIconDefId(req.ItemType);
+                    sb.AppendLine($"    <g class=\"icon-hover\" style=\"transform-origin:{iconCx.ToString(ci)}px {iconCy.ToString(ci)}px\">");
+                    sb.AppendLine($"      <use href=\"#{iconId}\" xlink:href=\"#{iconId}\"" +
+                                  $" x=\"{iconX.ToString(ci)}\" y=\"{iconY2.ToString(ci)}\" />");
+                    sb.AppendLine("    </g>");
+                }
+
+                if (chainHref != null)
+                    sb.AppendLine("    </a>");
+
+                // Text vertically centered with icon slot
+                double textCy = slotY + ItemSlotSize / 2 + FontSzItem * 0.35;
+
+                // Quantity (right-aligned)
+                sb.AppendLine($"    <text class=\"item-qty\" x=\"{qtyEndX.ToString(ci)}\" y=\"{textCy.ToString(ci)}\"" +
+                              $" text-anchor=\"end\">{req.Qty}x</text>");
+
+                // Item name (left-aligned, with tooltip)
+                string itemText = TruncateText(req.ItemName, availNameW, FontSzItem, false);
+                if (req.Tooltip != null)
+                {
+                    sb.AppendLine($"    <text class=\"item-name\" x=\"{nameStartX.ToString(ci)}\" y=\"{textCy.ToString(ci)}\">");
+                    sb.AppendLine($"      <title>{Esc(req.Tooltip)}</title>");
+                    sb.AppendLine($"      {Esc(itemText)}</text>");
+                }
+                else
+                {
+                    sb.AppendLine($"    <text class=\"item-name\" x=\"{nameStartX.ToString(ci)}\" y=\"{textCy.ToString(ci)}\"" +
+                                  $">{Esc(itemText)}</text>");
+                }
+                cy += itemLineH;
             }
             else
             {
-                sb.AppendLine($"    <text class=\"item-name\" x=\"{nameStartX.ToString(ci)}\" y=\"{cy.ToString(ci)}\"" +
-                              $">{Esc(itemText)}</text>");
+                cy += FontSzItem * 0.85;
+
+                // Quantity (right-aligned)
+                sb.AppendLine($"    <text class=\"item-qty\" x=\"{qtyEndX.ToString(ci)}\" y=\"{cy.ToString(ci)}\"" +
+                              $" text-anchor=\"end\">{req.Qty}x</text>");
+
+                // Item name (left-aligned, wiki-linked to chain page)
+                string itemText = TruncateText(req.ItemName, availNameW, FontSzItem, false);
+                string? chainHref2 = req.ChainWikiName != null ? WikiUrl(req.ChainWikiName) : null;
+
+                if (chainHref2 != null)
+                    sb.AppendLine($"    <a href=\"{Esc(chainHref2)}\" target=\"_blank\">");
+
+                if (req.Tooltip != null)
+                {
+                    sb.AppendLine($"    <text class=\"item-name\" x=\"{nameStartX.ToString(ci)}\" y=\"{cy.ToString(ci)}\">");
+                    sb.AppendLine($"      <title>{Esc(req.Tooltip)}</title>");
+                    sb.AppendLine($"      {Esc(itemText)}</text>");
+                }
+                else
+                {
+                    sb.AppendLine($"    <text class=\"item-name\" x=\"{nameStartX.ToString(ci)}\" y=\"{cy.ToString(ci)}\"" +
+                                  $">{Esc(itemText)}</text>");
+                }
+
+                if (chainHref2 != null)
+                    sb.AppendLine("    </a>");
+
+                cy += LineH - FontSzItem * 0.85;
             }
-            cy += LineH - FontSzItem * 0.85;
         }
 
-        // ── Reward section ──
+        // ── Reward section (XP + optional reward item; tokens float right) ──
 
         bool hasXp = n.XpReward.HasValue && n.XpReward.Value > 0;
         bool hasItemReward = !string.IsNullOrEmpty(n.ItemRewardText);
         bool hasReward = hasXp || hasItemReward;
+        bool hasTokens = n.TokenValues.Count > 0 && forDiscord;
 
-        if (hasReward)
+        if (hasReward || hasTokens)
         {
-            // Separator (full width)
+            // Separator
             cy += SepGap / 2;
             sb.AppendLine($"    <line class=\"sep-line\" x1=\"{x.ToString(ci)}\" y1=\"{cy.ToString(ci)}\"" +
                           $" x2=\"{(x + w).ToString(ci)}\" y2=\"{cy.ToString(ci)}\" />");
             cy += SepGap / 2;
 
-            // Calculate available vertical space for reward centering
             double rewardTop = cy;
-            double rewardBottom;
-            if (n.ChildDisplayIndices.Count > 0)
-                rewardBottom = y + n.Height - LinkLineH - LinkSectionPad - 2 - SepGap / 2;
-            else
-                rewardBottom = y + n.Height - PadY;
+            // rewardBottom must match sizing exactly
+            double bottomPad = hasTokens ? 2 : PadY;
+            double childSectionH = n.ChildDisplayIndices.Count > 0
+                ? SepGap + LinkLineH + LinkSectionPad + 2 : 0;
+            double rewardBottom = y + n.Height - bottomPad - childSectionH;
             double rewardAvail = rewardBottom - rewardTop;
+
+            // ── Tokens (float right) ──
+            if (hasTokens)
+            {
+                var tokenEntries = new List<(string field, int value)>();
+                foreach (var (tf, _) in TokenSlotOrder)
+                    if (n.TokenValues.TryGetValue(tf, out var tv) && tv > 0)
+                        tokenEntries.Add((tf, tv));
+
+                if (tokenEntries.Count > 0)
+                {
+                    int tRows = (tokenEntries.Count + TokenCols - 1) / TokenCols;
+                    double gridW = TokenCols * TokenColW;
+                    double gridStartX = x + w - PadX - gridW;
+                    double gridTopY = rewardTop + 2;
+
+                    for (int i = 0; i < tokenEntries.Count; i++)
+                    {
+                        int row = i / TokenCols;
+                        int col = i % TokenCols;
+                        var (field, value) = tokenEntries[i];
+
+                        double cellCx = gridStartX + col * TokenColW + TokenColW / 2;
+                        double cellTopY = gridTopY + row * (TokenRowH + 3); // 3px inter-row gap
+                        double circleCy = cellTopY + TokenSlotSize / 2 + 2;
+
+                        // Circle (small background)
+                        sb.AppendLine($"    <circle class=\"token-circle\" cx=\"{cellCx.ToString(ci)}\" cy=\"{circleCy.ToString(ci)}\"" +
+                                      $" r=\"{(TokenSlotSize / 2).ToString(ci)}\" filter=\"url(#shadow-token)\" />");
+
+                        // Icon (overflows top of circle)
+                        if (tokenIcons != null && tokenIcons.ContainsKey(field))
+                        {
+                            double tiX = cellCx - TokenIconSize / 2;
+                            double tiY = circleCy - TokenSlotSize / 2 - TokenIconSize * 0.25; // overflow top
+                            sb.AppendLine($"    <use href=\"#token-{field}\" xlink:href=\"#token-{field}\"" +
+                                          $" x=\"{tiX.ToString(ci)}\" y=\"{tiY.ToString(ci)}\" />");
+                        }
+
+                        // Value text (overlaps bottom of circle, italic)
+                        double valY = circleCy + TokenSlotSize / 2 - 1;
+                        sb.AppendLine($"    <text class=\"token-value\" x=\"{cellCx.ToString(ci)}\" y=\"{valY.ToString(ci)}\"" +
+                                      $" font-size=\"{TokenFontSz.ToString(ci)}\" font-style=\"italic\">{value}</text>");
+                    }
+                }
+            }
+
+            // ── Left side: XP line ──
+            double xpLineH = hasXp ? IconSize + 4 : 0;
+            double leftCursorY = rewardTop;
 
             if (hasXp)
             {
-                // XP reward: "⭐ number · Item Reward" — icon first, then number
-                double sectionH = IconSize + 4;
-                double centerOffset = (rewardAvail - sectionH) / 2 - 2; // nudge 2px up
-                double rewardStartY = rewardTop + Math.Max(0, centerOffset);
-                double iconY = rewardStartY + (sectionH - IconSize) / 2;
-                double rewardTextY = rewardStartY + sectionH / 2 + FontSzReward * 0.35;
-                double cursorX = textX + 8; // extra left padding for reward section
+                double xpCenterY = leftCursorY + xpLineH / 2;
+                double iconY2 = xpCenterY - IconSize / 2;
+                double xpTextY = xpCenterY + FontSzReward * 0.35;
+                double cursorX = textX + 8;
 
-                // XP icon first (references <defs> image)
-                sb.AppendLine($"    <use href=\"#xp-icon\" xlink:href=\"#xp-icon\" x=\"{cursorX.ToString(ci)}\" y=\"{iconY.ToString(ci)}\" />");
-                cursorX += IconSize + 4;
-
-                // XP number text
-                string xpStr = n.XpReward!.Value.ToString();
-                sb.AppendLine($"    <text class=\"reward-text\" x=\"{cursorX.ToString(ci)}\" y=\"{rewardTextY.ToString(ci)}\"" +
-                              $">{Esc(xpStr)}</text>");
-                cursorX += xpStr.Length * FontSzReward * 0.60;
-
-                // Optional item reward after icon
-                if (hasItemReward)
+                if (forDiscord)
                 {
-                    cursorX += 4;
+                    sb.AppendLine($"    <use href=\"#xp-icon\" xlink:href=\"#xp-icon\" x=\"{cursorX.ToString(ci)}\" y=\"{iconY2.ToString(ci)}\" />");
+                    cursorX += IconSize + 4;
+                }
+                else
+                {
+                    sb.AppendLine($"    <text class=\"reward-text\" x=\"{cursorX.ToString(ci)}\" y=\"{xpTextY.ToString(ci)}\"" +
+                                  $" font-weight=\"bold\">XP</text>");
+                    cursorX += 2 * FontSzReward * 0.65 + 4;
+                }
+
+                string xpStr = n.XpReward!.Value.ToString();
+                sb.AppendLine($"    <text class=\"reward-text\" x=\"{cursorX.ToString(ci)}\" y=\"{xpTextY.ToString(ci)}\"" +
+                              $">{Esc(xpStr)}</text>");
+
+                // SVG: inline item reward after XP (no separate line)
+                if (hasItemReward && !forDiscord)
+                {
+                    cursorX += xpStr.Length * FontSzReward * 0.60 + 4;
                     string itemStr = $" · {n.ItemRewardText}";
                     double availW = w - (cursorX - x) - PadX;
                     string truncItem = TruncateText(itemStr, availW, FontSzReward, false);
-                    sb.AppendLine($"    <text class=\"reward-text\" x=\"{cursorX.ToString(ci)}\" y=\"{rewardTextY.ToString(ci)}\"" +
+                    var rewardHref = n.ItemRewardWikiName != null ? WikiUrl(n.ItemRewardWikiName) : null;
+                    if (rewardHref != null)
+                        sb.AppendLine($"    <a href=\"{Esc(rewardHref)}\" target=\"_blank\">");
+                    sb.AppendLine($"    <text class=\"reward-text\" x=\"{cursorX.ToString(ci)}\" y=\"{xpTextY.ToString(ci)}\"" +
                                   $">{Esc(truncItem)}</text>");
+                    if (rewardHref != null)
+                        sb.AppendLine("    </a>");
+                }
+
+                leftCursorY += xpLineH + 6; // 6px gap before reward item line
+            }
+
+            // ── Left side: Reward item on new line (HTML), or standalone (no XP) ──
+            if (hasItemReward && (forDiscord || !hasXp))
+            {
+                if (forDiscord)
+                {
+                    double riLineY = leftCursorY + LineH / 2 + FontSzReward * 0.35 + 1;
+                    double cursorX = textX + 8;
+
+                    // Reward item icon
+                    bool hasRewardIcon = n.ItemRewardType != null &&
+                        itemIcons != null && itemIcons.ContainsKey(n.ItemRewardType);
+                    if (hasRewardIcon)
+                    {
+                        double riSize = 24; // display size for reward item icon
+                        double riScale = riSize / ItemIconDisplay; // scale from defs size
+                        double riImgY = leftCursorY + (LineH - riSize) / 2 + 1;
+                        double riCx = cursorX + riSize / 2;
+                        double riCy = riImgY + riSize / 2;
+                        var riHref = n.ItemRewardWikiName != null ? WikiUrl(n.ItemRewardWikiName) : null;
+                        if (riHref != null)
+                            sb.AppendLine($"    <a href=\"{Esc(riHref)}\" target=\"_blank\">");
+                        var riIconId = ItemIconDefId(n.ItemRewardType!);
+                        // Scale icon from defs size (32) to display size via transform
+                        sb.AppendLine($"    <g class=\"icon-hover\" style=\"transform-origin:{riCx.ToString(ci)}px {riCy.ToString(ci)}px\">");
+                        sb.AppendLine($"      <g transform=\"translate({cursorX.ToString(ci)},{riImgY.ToString(ci)}) scale({riScale.ToString(ci)})\">");
+                        sb.AppendLine($"        <use href=\"#{riIconId}\" xlink:href=\"#{riIconId}\" x=\"0\" y=\"0\" />");
+                        sb.AppendLine("      </g>");
+                        sb.AppendLine("    </g>");
+                        if (riHref != null) sb.AppendLine("    </a>");
+                        cursorX += riSize + 4;
+                    }
+
+                    // Reward item text (limited width to not overlap tokens)
+                    double tokenGridW = hasTokens ? TokenCols * TokenColW + 4 : 0;
+                    double rwAvailW = w - (cursorX - x) - PadX - tokenGridW;
+                    string truncReward = TruncateText(n.ItemRewardText!, rwAvailW, FontSzReward, false);
+                    var rwHref = n.ItemRewardWikiName != null ? WikiUrl(n.ItemRewardWikiName) : null;
+                    if (rwHref != null)
+                        sb.AppendLine($"    <a href=\"{Esc(rwHref)}\" target=\"_blank\">");
+                    sb.AppendLine($"    <text class=\"reward-text\" x=\"{cursorX.ToString(ci)}\" y=\"{riLineY.ToString(ci)}\"" +
+                                  $">{Esc(truncReward)}</text>");
+                    if (rwHref != null) sb.AppendLine("    </a>");
+                }
+                else if (!hasXp)
+                {
+                    // SVG: item reward only (no XP)
+                    double centerY = rewardTop + rewardAvail / 2 + FontSzReward * 0.35;
+                    double cursorX = textX + 8;
+                    string truncReward = TruncateText(n.ItemRewardText!, w - PadX * 2 - 8, FontSzReward, false);
+                    var rwHref = n.ItemRewardWikiName != null ? WikiUrl(n.ItemRewardWikiName) : null;
+                    if (rwHref != null)
+                        sb.AppendLine($"    <a href=\"{Esc(rwHref)}\" target=\"_blank\">");
+                    sb.AppendLine($"    <text class=\"reward-text\" x=\"{cursorX.ToString(ci)}\" y=\"{centerY.ToString(ci)}\"" +
+                                  $">{Esc(truncReward)}</text>");
+                    if (rwHref != null) sb.AppendLine("    </a>");
                 }
             }
-            else
-            {
-                // Item reward only (no icon) — centered in available space
-                double centerY = rewardTop + rewardAvail / 2 + FontSzReward * 0.35;
-                double rewardTextX = textX + 8; // extra left padding for reward section
-                string truncReward = TruncateText(n.ItemRewardText!, w - PadX * 2 - 8, FontSzReward, false);
-                sb.AppendLine($"    <text class=\"reward-text\" x=\"{rewardTextX.ToString(ci)}\" y=\"{centerY.ToString(ci)}\"" +
-                              $">{Esc(truncReward)}</text>");
-            }
+
+            cy = rewardBottom;
         }
 
         // ── Child link section (below rewards, with separator) ──
         if (n.ChildDisplayIndices.Count > 0)
         {
-            double sepY = y + n.Height - LinkLineH - LinkSectionPad - 2 - SepGap / 2;
+            bool hasTokens2 = n.TokenValues.Count > 0 && forDiscord;
+            double bPad = hasTokens2 ? 2 : PadY;
+            double cSec = SepGap + LinkLineH + LinkSectionPad + 2;
+            double sepY = y + n.Height - bPad - cSec + SepGap / 2;
             sb.AppendLine($"    <line class=\"sep-line\" x1=\"{x.ToString(ci)}\" y1=\"{sepY.ToString(ci)}\"" +
                           $" x2=\"{(x + w).ToString(ci)}\" y2=\"{sepY.ToString(ci)}\" />");
             // Center link text vertically between separator and bottom edge (accounting for stroke inset, -2px nudge)
@@ -1539,6 +1948,16 @@ internal class FlowchartService
         double si = 2; // stroke inset for inner border
         sb.AppendLine($"    <rect class=\"node-stroke-inner\" x=\"{(x + si).ToString(ci)}\" y=\"{(y + si).ToString(ci)}\"" +
                       $" width=\"{(w - si * 2).ToString(ci)}\" height=\"{(n.Height - si * 2).ToString(ci)}\" rx=\"{(r - si).ToString(ci)}\" />");
+
+        // Checkmark badge (hidden by default, shown when .completed)
+        if (forDiscord)
+        {
+            double checkSz = 28;
+            double checkX = x + w - checkSz - 2;
+            double checkY = y - 4;
+            sb.AppendLine($"    <use class=\"check-icon\" href=\"#check-icon\" xlink:href=\"#check-icon\"" +
+                          $" x=\"{checkX.ToString(ci)}\" y=\"{checkY.ToString(ci)}\" />");
+        }
 
         sb.AppendLine("  </g>");
     }
@@ -2253,6 +2672,10 @@ internal class FlowchartService
             .Replace("'", "&apos;");
     }
 
+    /// <summary>Builds a Fandom wiki URL from a page title (spaces → underscores, URI-safe).</summary>
+    private static string WikiUrl(string pageTitle)
+        => $"https://merge-mansion.fandom.com/wiki/{Uri.EscapeDataString(pageTitle.Replace(' ', '_'))}";
+
     private static string TruncateText(string text, double maxWidth, double fontSize, bool bold)
     {
         double charW = fontSize * (bold ? 0.48 : 0.52);
@@ -2274,4 +2697,150 @@ internal class FlowchartService
 
         return maxChars > 3 ? text[..(maxChars - 3)] + "..." : text[..maxChars];
     }
+
+    // ── Interactive HTML wrapper (Discord) ────────────────────────────
+
+    /// <summary>
+    /// Wraps SVG content in an interactive HTML document with click-to-complete
+    /// task tracking, progress bar, and localStorage persistence.
+    /// </summary>
+    private static string WrapAsInteractiveHtml(string svgContent, string areaName, int totalNodes)
+    {
+        var sb = new StringBuilder();
+        sb.AppendLine("<!DOCTYPE html>");
+        sb.AppendLine("<html lang=\"en\">");
+        sb.AppendLine("<head>");
+        sb.AppendLine("<meta charset=\"UTF-8\">");
+        sb.AppendLine("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">");
+        sb.AppendLine($"<title>{Esc(areaName)} — Task Flowchart</title>");
+        sb.AppendLine("<style>");
+        sb.AppendLine("  * { box-sizing: border-box; }");
+        sb.AppendLine("  html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #FBF4E8; font-family: 'Tisa Sans Pro', Georgia, serif; }");
+        sb.AppendLine("  #app { position: relative; width: 100%; height: 100%; }");
+        sb.AppendLine("  #scroll-container { width: 100%; height: 100%; overflow: auto; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }");
+        sb.AppendLine("  #top-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 200; pointer-events: none; }");
+        sb.AppendLine("  #progress-bar { height: 4px; background: rgba(74,53,32,0.08); }");
+        sb.AppendLine("  #progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #6BBF4A, #4CAF50, #43A047); transition: width 0.4s ease; border-radius: 0 2px 2px 0; }");
+        sb.AppendLine("  #top-controls { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 4px 14px 0 0; }");
+        sb.AppendLine("  #progress-text { font-size: 13px; color: #6B5B3E; background: rgba(251,244,232,0.85); padding: 4px 12px; border-radius: 8px; box-shadow: 0 1px 6px rgba(74,53,32,0.15); user-select: none; pointer-events: auto; }");
+        sb.AppendLine("  #btn-reset { font-size: 11px; color: #8B6B4E; background: rgba(251,244,232,0.85); padding: 4px 10px; border-radius: 6px; border: 1px solid #D4C0A0; cursor: pointer; box-shadow: 0 1px 4px rgba(74,53,32,0.12); pointer-events: auto; }");
+        sb.AppendLine("  #btn-reset:hover { background: #FFF0D8; color: #6B4B2E; }");
+        sb.AppendLine("</style>");
+        sb.AppendLine("</head>");
+        sb.AppendLine("<body>");
+        sb.AppendLine("<div id=\"top-bar\">");
+        sb.AppendLine("  <div id=\"progress-bar\"><div id=\"progress-fill\"></div></div>");
+        sb.AppendLine("  <div id=\"top-controls\">");
+        sb.AppendLine("    <button id=\"btn-reset\" title=\"Reset all progress\">Reset</button>");
+        sb.AppendLine("    <div id=\"progress-text\">0 / 0</div>");
+        sb.AppendLine("  </div>");
+        sb.AppendLine("</div>");
+        sb.AppendLine("<div id=\"app\">");
+        sb.AppendLine("<div id=\"scroll-container\">");
+        sb.Append(svgContent);
+        sb.AppendLine("</div>");
+        sb.AppendLine("</div>");
+        sb.AppendLine();
+        sb.AppendLine("<script>");
+        sb.AppendLine("(function() {");
+        sb.AppendLine($"  var KEY = 'flowchart-{EscJs(areaName)}';");
+        sb.AppendLine($"  var total = {totalNodes};");
+        sb.AppendLine("  var done = {};");
+        sb.AppendLine("  try { var s = localStorage.getItem(KEY); if (s) done = JSON.parse(s); } catch(e) {}");
+        sb.AppendLine();
+        sb.AppendLine("  function save() { try { localStorage.setItem(KEY, JSON.stringify(done)); } catch(e) {} }");
+        sb.AppendLine();
+        sb.AppendLine("  // Build parent and children lookup maps");
+        sb.AppendLine("  var parentMap = {};");
+        sb.AppendLine("  var childMap = {};");
+        sb.AppendLine("  document.querySelectorAll('[data-node-idx]').forEach(function(g) {");
+        sb.AppendLine("    var id = g.getAttribute('data-node-idx');");
+        sb.AppendLine("    var p = g.getAttribute('data-parents');");
+        sb.AppendLine("    parentMap[id] = p ? p.split(',') : [];");
+        sb.AppendLine("    childMap[id] = childMap[id] || [];");
+        sb.AppendLine("    (parentMap[id]).forEach(function(pid) {");
+        sb.AppendLine("      childMap[pid] = childMap[pid] || [];");
+        sb.AppendLine("      childMap[pid].push(id);");
+        sb.AppendLine("    });");
+        sb.AppendLine("  });");
+        sb.AppendLine();
+        sb.AppendLine("  function completeWithParents(id) {");
+        sb.AppendLine("    if (done[id]) return;");
+        sb.AppendLine("    done[id] = 1;");
+        sb.AppendLine("    (parentMap[id] || []).forEach(function(pid) { completeWithParents(pid); });");
+        sb.AppendLine("  }");
+        sb.AppendLine();
+        sb.AppendLine("  function uncompleteWithChildren(id) {");
+        sb.AppendLine("    if (!done[id]) return;");
+        sb.AppendLine("    delete done[id];");
+        sb.AppendLine("    (childMap[id] || []).forEach(function(cid) { uncompleteWithChildren(cid); });");
+        sb.AppendLine("  }");
+        sb.AppendLine();
+        sb.AppendLine("  var prevDone = {};");
+        sb.AppendLine("  function refresh() {");
+        sb.AppendLine("    var n = 0;");
+        sb.AppendLine("    document.querySelectorAll('[data-node-idx]').forEach(function(g) {");
+        sb.AppendLine("      var id = g.getAttribute('data-node-idx');");
+        sb.AppendLine("      if (done[id]) {");
+        sb.AppendLine("        if (!prevDone[id]) { g.classList.remove('completed'); void g.offsetWidth; }");
+        sb.AppendLine("        g.classList.add('completed'); n++;");
+        sb.AppendLine("      } else { g.classList.remove('completed'); }");
+        sb.AppendLine("    });");
+        sb.AppendLine("    prevDone = {}; for (var k in done) prevDone[k] = 1;");
+        sb.AppendLine("    var pct = total > 0 ? (n / total * 100) : 0;");
+        sb.AppendLine("    document.getElementById('progress-fill').style.width = pct + '%';");
+        sb.AppendLine("    document.getElementById('progress-text').textContent = n + ' / ' + total + ' (' + Math.round(pct) + '%)';");
+        sb.AppendLine("  }");
+        sb.AppendLine();
+        sb.AppendLine("  document.querySelectorAll('[data-node-idx]').forEach(function(g) {");
+        sb.AppendLine("    g.addEventListener('click', function(e) {");
+        sb.AppendLine("      if (e.target.closest('a')) return;");
+        sb.AppendLine("      var id = this.getAttribute('data-node-idx');");
+        sb.AppendLine("      if (done[id]) { uncompleteWithChildren(id); }");
+        sb.AppendLine("      else { completeWithParents(id); }");
+        sb.AppendLine("      save(); refresh();");
+        sb.AppendLine("    });");
+        sb.AppendLine("  });");
+        sb.AppendLine();
+        sb.AppendLine("  document.getElementById('btn-reset').addEventListener('click', function() {");
+        sb.AppendLine("    if (!confirm('Reset all progress for this area?')) return;");
+        sb.AppendLine("    done = {};");
+        sb.AppendLine("    save(); refresh();");
+        sb.AppendLine("  });");
+        sb.AppendLine();
+        sb.AppendLine("  refresh();");
+        sb.AppendLine();
+        sb.AppendLine("  // Anchor highlight: glow animation when navigating to a node via link");
+        sb.AppendLine("  function highlightAnchor() {");
+        sb.AppendLine("    var h = location.hash;");
+        sb.AppendLine("    if (!h || !h.startsWith('#node-')) return;");
+        sb.AppendLine("    var idx = h.substring(6);");
+        sb.AppendLine("    var g = document.getElementById('ng-' + idx);");
+        sb.AppendLine("    if (!g) return;");
+        sb.AppendLine("    // Scroll node into center of viewport (works for horizontal + vertical)");
+        sb.AppendLine("    var sc = document.getElementById('scroll-container');");
+        sb.AppendLine("    var rect = g.getBoundingClientRect();");
+        sb.AppendLine("    var scRect = sc.getBoundingClientRect();");
+        sb.AppendLine("    var cx = rect.left - scRect.left + sc.scrollLeft + rect.width / 2 - sc.clientWidth / 2;");
+        sb.AppendLine("    var cy2 = rect.top - scRect.top + sc.scrollTop + rect.height / 2 - sc.clientHeight / 2;");
+        sb.AppendLine("    sc.scrollTo({ left: Math.max(0, cx), top: Math.max(0, cy2), behavior: 'smooth' });");
+        sb.AppendLine("    document.querySelectorAll('.anchor-highlight').forEach(function(el) { el.classList.remove('anchor-highlight'); });");
+        sb.AppendLine("    void g.offsetWidth;");
+        sb.AppendLine("    g.classList.add('anchor-highlight');");
+        sb.AppendLine("    setTimeout(function() { g.classList.remove('anchor-highlight'); }, 2200);");
+        sb.AppendLine("  }");
+        sb.AppendLine("  window.addEventListener('hashchange', highlightAnchor);");
+        sb.AppendLine("  highlightAnchor();");
+        sb.AppendLine("})();");
+        sb.AppendLine("</script>");
+        sb.AppendLine("</body>");
+        sb.AppendLine("</html>");
+        return sb.ToString();
+    }
+
+    private static string EscJs(string s) =>
+        s.Replace("\\", "\\\\").Replace("'", "\\'").Replace("\"", "\\\"").Replace("\n", "\\n");
+
+    private static string ItemIconDefId(string itemType) =>
+        $"item-{itemType.Replace("_", "-").ToLowerInvariant()}";
 }
