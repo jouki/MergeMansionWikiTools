@@ -35,7 +35,11 @@ internal static class FlowchartImageService
         {
             var chainKey = DataService.GetChainKeyFromItemType(itemType);
             var level = DataService.GetLevelFromItemType(itemType);
-            if (level <= 0) continue;
+            if (level <= 0)
+            {
+                AppLogger.Info($"[FLOWCHART-IMG] Item '{itemType}': level={level}, skipped (no numeric suffix)");
+                continue;
+            }
 
             if (!byChain.TryGetValue(chainKey, out var list))
             {
@@ -62,7 +66,22 @@ internal static class FlowchartImageService
             {
                 var chain = ds.Chains.FirstOrDefault(c =>
                     string.Equals(c.ConfigKey, chainKey, StringComparison.Ordinal));
-                if (chain == null) continue;
+
+                // Fallback: chain was merged as alias — find the primary chain containing this ItemType
+                if (chain == null)
+                {
+                    var sampleItemType = items[0].itemType;
+                    chain = ds.Chains.FirstOrDefault(c =>
+                        c.Items.Any(i => string.Equals(i.ItemType, sampleItemType, StringComparison.OrdinalIgnoreCase)));
+                    if (chain != null)
+                        AppLogger.Info($"[FLOWCHART-IMG] Chain '{chainKey}': resolved via alias to '{chain.ConfigKey}'");
+                }
+
+                if (chain == null)
+                {
+                    AppLogger.Info($"[FLOWCHART-IMG] Chain '{chainKey}': not found in DataService.Chains");
+                    continue;
+                }
 
                 // Find atlas image file
                 var atlasPath = FindAtlasImage(chain, exportDir, searchDirs, allSprites, allSkinMappings);

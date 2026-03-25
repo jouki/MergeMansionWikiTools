@@ -77,7 +77,7 @@ internal class FlowchartService
     const double ItemSlotSize = 42;    // outer slot rectangle size
     const double ItemIconDisplay = 32; // displayed image size inside slot
     const double ItemSlotCorner = 6;   // slot corner radius
-    const double ItemSlotGap = 6;      // gap between slot and qty column
+    const double ItemSlotGap = 0;      // gap between slot and qty column
     const double BusOffset = 20;    // how far below source the edge bus is
     const double EdgePad = 0;       // gap between node boundary and edge start/end
     const double SnapThresh = 5;    // snap small X offsets to straight
@@ -1450,18 +1450,26 @@ internal class FlowchartService
             sb.AppendLine($"           xlink:href=\"data:image/png;base64,{CHECKMARK_ICON_BASE64}\" />");
         }
         // Item icon images (deduplicated, Discord/HTML only) — each unique icon gets an <image> in defs
+        // iconAliasMap: itemType → actual defs ID (handles aliases sharing same base64)
+        Dictionary<string, string>? iconAliasMap = null;
         if (forDiscord && itemIcons != null && itemIcons.Count > 0)
         {
             var iconDisplaySz = ItemIconDisplay.ToString(ci);
             sb.AppendLine("    <!-- Item icons -->");
-            var emittedBase64 = new HashSet<string>(StringComparer.Ordinal);
+            // Deduplicate: emit each unique base64 once, build itemType→defId alias map
+            var base64ToDefId = new Dictionary<string, string>(StringComparer.Ordinal);
+            iconAliasMap = new Dictionary<string, string>(StringComparer.Ordinal);
             foreach (var (itemType, base64) in itemIcons)
             {
-                if (!emittedBase64.Add(base64)) continue; // skip duplicate images
                 var iconId = ItemIconDefId(itemType);
-                sb.AppendLine($"    <image id=\"{iconId}\" width=\"{iconDisplaySz}\" height=\"{iconDisplaySz}\"");
-                sb.AppendLine($"           href=\"data:image/png;base64,{base64}\"");
-                sb.AppendLine($"           xlink:href=\"data:image/png;base64,{base64}\" />");
+                if (base64ToDefId.TryAdd(base64, iconId))
+                {
+                    sb.AppendLine($"    <image id=\"{iconId}\" width=\"{iconDisplaySz}\" height=\"{iconDisplaySz}\"");
+                    sb.AppendLine($"           href=\"data:image/png;base64,{base64}\"");
+                    sb.AppendLine($"           xlink:href=\"data:image/png;base64,{base64}\" />");
+                }
+                // Map every itemType to its actual defs ID (may differ for aliases)
+                iconAliasMap[itemType] = base64ToDefId[base64];
             }
         }
         // Token icon images (Discord/HTML only)
@@ -1492,7 +1500,7 @@ internal class FlowchartService
         // Render nodes
         sb.AppendLine("  <!-- Nodes -->");
         foreach (var n in nodes.Values.Where(n => !n.IsDummy))
-            RenderNode(sb, n, offsetX, offsetY, ci, forDiscord, itemIcons, areaName, tokenIcons);
+            RenderNode(sb, n, offsetX, offsetY, ci, forDiscord, itemIcons, areaName, tokenIcons, iconAliasMap);
 
         sb.AppendLine("</svg>");
         return sb.ToString();
@@ -1500,7 +1508,8 @@ internal class FlowchartService
 
     private static void RenderNode(StringBuilder sb, FNode n, double ox, double oy,
         CultureInfo ci, bool forDiscord = false, Dictionary<string, string>? itemIcons = null,
-        string? areaName = null, Dictionary<string, string>? tokenIcons = null)
+        string? areaName = null, Dictionary<string, string>? tokenIcons = null,
+        Dictionary<string, string>? iconAliasMap = null)
     {
         double x = n.X + ox;
         double y = n.Y + oy;
@@ -1683,7 +1692,7 @@ internal class FlowchartService
                     double iconY2 = slotY + (ItemSlotSize - ItemIconDisplay) / 2;
                     double iconCx = iconX + ItemIconDisplay / 2;
                     double iconCy = iconY2 + ItemIconDisplay / 2;
-                    var iconId = ItemIconDefId(req.ItemType);
+                    var iconId = ResolveIconDefId(req.ItemType, iconAliasMap);
                     sb.AppendLine($"    <g class=\"icon-hover\" style=\"transform-origin:{iconCx.ToString(ci)}px {iconCy.ToString(ci)}px\">");
                     sb.AppendLine($"      <use href=\"#{iconId}\" xlink:href=\"#{iconId}\"" +
                                   $" x=\"{iconX.ToString(ci)}\" y=\"{iconY2.ToString(ci)}\" />");
@@ -1885,7 +1894,7 @@ internal class FlowchartService
                         var riHref = n.ItemRewardWikiName != null ? WikiUrl(n.ItemRewardWikiName) : null;
                         if (riHref != null)
                             sb.AppendLine($"    <a href=\"{Esc(riHref)}\" target=\"_blank\">");
-                        var riIconId = ItemIconDefId(n.ItemRewardType!);
+                        var riIconId = ResolveIconDefId(n.ItemRewardType!, iconAliasMap);
                         // Scale icon from defs size (32) to display size via transform
                         sb.AppendLine($"    <g class=\"icon-hover\" style=\"transform-origin:{riCx.ToString(ci)}px {riCy.ToString(ci)}px\">");
                         sb.AppendLine($"      <g transform=\"translate({cursorX.ToString(ci)},{riImgY.ToString(ci)}) scale({riScale.ToString(ci)})\">");
@@ -2843,4 +2852,8 @@ internal class FlowchartService
 
     private static string ItemIconDefId(string itemType) =>
         $"item-{itemType.Replace("_", "-").ToLowerInvariant()}";
+
+    /// <summary>Resolves the actual defs ID for an itemType, using alias map for deduplication.</summary>
+    private static string ResolveIconDefId(string itemType, Dictionary<string, string>? aliasMap) =>
+        aliasMap != null && aliasMap.TryGetValue(itemType, out var defId) ? defId : ItemIconDefId(itemType);
 }

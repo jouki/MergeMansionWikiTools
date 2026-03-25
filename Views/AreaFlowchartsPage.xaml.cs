@@ -21,6 +21,7 @@ public partial class AreaFlowchartsPage : UserControl
     private readonly MainWindow _main;
     private List<LuaArea>? _areas;
     private bool _areasLoaded;
+    private L1CostService? _l1CostService;
     private readonly SolidColorBrush _splitSepBrush;
 
     public AreaFlowchartsPage(MainWindow main)
@@ -70,7 +71,9 @@ public partial class AreaFlowchartsPage : UserControl
         {
             var service = new AreasService();
             await service.LoadAsync(path);
-            _areas = service.Areas;
+            _areas = service.Areas
+                .Where(a => a.DisplayName != "Story Event" && a.DisplayName != "Maddie Meets Mansion")
+                .ToList();
             _areasLoaded = true;
             await DiscordFlowchartService.EnsureMappingLoadedAsync();
             BuildAreaList();
@@ -223,10 +226,15 @@ public partial class AreaFlowchartsPage : UserControl
         nameText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorPrimaryBrush");
         namePanel.Children.Add(nameText);
 
-        var taskCount = area.Tasks.Count(t => t.Requirements.Count > 0);
+        var taskCount = L1CostService.CountTasksWithRequirements(area);
+        // Lazy-init L1 cost service
+        if (_l1CostService == null && _main.DataService != null)
+            _l1CostService = new L1CostService(_main.DataService);
+        var l1Total = _l1CostService?.ComputeAreaL1Cost(area) ?? 0;
+        var l1Str = l1Total.ToString("N0"); // thousands separator
         var metaText = new TextBlock
         {
-            Text = $"{taskCount} tasks with requirements · {area.Tasks.Count} total",
+            Text = $"{taskCount} tasks · {l1Str} L1",
             FontSize = 11,
             Margin = new Thickness(0, 2, 0, 0)
         };

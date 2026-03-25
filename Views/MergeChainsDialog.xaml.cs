@@ -377,9 +377,10 @@ public partial class MergeChainsDialog : FluentWindow
             {
                 txtStatus.Text = "Renaming alias items...";
                 var primaryItems = primary.Source.Source.Items;
-                var nameByLevel = primaryItems
-                    .Where(i => !string.IsNullOrEmpty(i.Name) && !i.Name.StartsWith("Item_"))
-                    .ToDictionary(i => i.Level, i => i.Name);
+                var nameByLevel = new Dictionary<int, string>();
+                foreach (var i in primaryItems)
+                    if (!string.IsNullOrEmpty(i.Name) && !i.Name.StartsWith("Item_"))
+                        nameByLevel.TryAdd(i.Level, i.Name);
 
                 var renames = new List<(string ItemType, string NewName)>();
                 foreach (var chain in aliasChains)
