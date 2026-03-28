@@ -73,6 +73,8 @@ public partial class MainWindow : FluentWindow
         ApplicationThemeManager.Changed += OnAppThemeChanged;
 
         Loaded += (_, _) => UpdateNavIndicator(animate: false);
+        RestoreWindowPosition();
+        Closing += (_, _) => SaveWindowPosition();
 
         // Track session
         Increment(s => { s.SessionCount++; if (s.FirstLaunch == default) s.FirstLaunch = DateTime.UtcNow; });
@@ -145,13 +147,61 @@ public partial class MainWindow : FluentWindow
         return IntPtr.Zero;
     }
 
+    private void RestoreWindowPosition()
+    {
+        var s = Settings;
+        if (s.WindowLeft.HasValue && s.WindowTop.HasValue)
+        {
+            // Basic sanity: ensure at least part of the window is visible on the virtual screen
+            double left = s.WindowLeft.Value;
+            double top = s.WindowTop.Value;
+            double w = s.WindowWidth ?? 1380;
+            double h = s.WindowHeight ?? 963;
+            bool onScreen = left + w > SystemParameters.VirtualScreenLeft
+                && left < SystemParameters.VirtualScreenLeft + SystemParameters.VirtualScreenWidth
+                && top + h > SystemParameters.VirtualScreenTop
+                && top < SystemParameters.VirtualScreenTop + SystemParameters.VirtualScreenHeight;
+            if (onScreen)
+            {
+                WindowStartupLocation = WindowStartupLocation.Manual;
+                Left = left;
+                Top = top;
+            }
+        }
+        if (s.WindowWidth.HasValue && s.WindowWidth.Value >= 400)
+            Width = s.WindowWidth.Value;
+        if (s.WindowHeight.HasValue && s.WindowHeight.Value >= 300)
+            Height = s.WindowHeight.Value;
+        if (s.WindowMaximized)
+            WindowState = WindowState.Maximized;
+    }
+
+    private void SaveWindowPosition()
+    {
+        var s = Settings;
+        s.WindowMaximized = WindowState == WindowState.Maximized;
+        // Save Normal state bounds (not Maximized — so restoring from maximized goes back to last normal size)
+        if (WindowState == WindowState.Normal)
+        {
+            s.WindowLeft = Left;
+            s.WindowTop = Top;
+            s.WindowWidth = Width;
+            s.WindowHeight = Height;
+        }
+        SaveSettings();
+    }
+
     private static ScrollViewer? FindParentScrollViewer(DependencyObject? element)
     {
         while (element != null)
         {
             if (element is ScrollViewer sv)
                 return sv;
-            element = VisualTreeHelper.GetParent(element);
+            // VisualTreeHelper throws on non-Visual elements (e.g. Run, Inline) — fall back to logical tree
+            DependencyObject? parent;
+            try { parent = VisualTreeHelper.GetParent(element); }
+            catch { parent = LogicalTreeHelper.GetParent(element); }
+            element = parent;
         }
         return null;
     }
@@ -443,21 +493,19 @@ public partial class MainWindow : FluentWindow
     private async Task LoadWikiMappingAsync()
     {
         using var _t = AppLogger.Timed("LoadWikiMappingAsync");
+        // Load cache immediately for fast startup
+        var cache = WikiMappingService.Load();
+        WikiMapping = cache;
+
+        // Always fetch fresh data from wiki (cache is fallback only)
         try
         {
-            var cache = WikiMappingService.Load();
+            cache = await WikiMappingService.FetchFromWikiAsync();
             WikiMapping = cache;
-
-            if (WikiMappingService.NeedsRefresh(cache))
-            {
-                cache = await WikiMappingService.FetchFromWikiAsync();
-                WikiMapping = cache;
-            }
         }
         catch (Exception ex)
         {
-            AppLogger.Error("LoadWikiMappingAsync failed", ex);
-            // Use stale cache on failure — WikiMapping already set from Load()
+            AppLogger.Error("LoadWikiMappingAsync: fetch failed, using cache", ex);
         }
 
         TryApplyWikiMapping();

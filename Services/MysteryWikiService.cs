@@ -271,8 +271,7 @@ public static class MysteryWikiService
 		}
 		catch (Exception ex)
 		{
-			Exception ex2 = ex;
-			AppLogger.Warn("Failed to load manual confirm flags: " + ex2.Message);
+			AppLogger.Warn("Failed to load manual confirm flags: " + ex.Message);
 		}
 	}
 
@@ -1022,27 +1021,19 @@ public static class MysteryWikiService
 
 	private static string FormatSingleReward(MysteryReward reward, string tier)
 	{
-		MysteryRewardType type = reward.Type;
-		if (1 == 0)
+		return reward.Type switch
 		{
-		}
-		string result = type switch
-		{
-			MysteryRewardType.Coins => $"{{{{Coins}}}} {reward.Amount}", 
-			MysteryRewardType.Diamonds => $"{{{{Gems}}}} {reward.Amount}", 
-			MysteryRewardType.Energy => $"{{{{Energy}}}} {reward.Amount}", 
-			MysteryRewardType.Experience => $"{{{{XP}}}} {reward.Amount}", 
-			MysteryRewardType.Item => FormatItemReward(reward), 
-			MysteryRewardType.Decoration => FormatDecorationReward(reward, tier), 
-			MysteryRewardType.CardPack => FormatCardPack(reward), 
-			MysteryRewardType.Pet => "{{Decoration|silver|0|text={{{pet}}}}}", 
-			MysteryRewardType.InformantTip => FormatInformantTip(reward), 
-			_ => "", 
+			MysteryRewardType.Coins => $"{{{{Coins}}}} {reward.Amount}",
+			MysteryRewardType.Diamonds => $"{{{{Gems}}}} {reward.Amount}",
+			MysteryRewardType.Energy => $"{{{{Energy}}}} {reward.Amount}",
+			MysteryRewardType.Experience => $"{{{{XP}}}} {reward.Amount}",
+			MysteryRewardType.Item => FormatItemReward(reward),
+			MysteryRewardType.Decoration => FormatDecorationReward(reward, tier),
+			MysteryRewardType.CardPack => FormatCardPack(reward),
+			MysteryRewardType.Pet => "{{Decoration|silver|0|text={{{pet}}}}}",
+			MysteryRewardType.InformantTip => FormatInformantTip(reward),
+			_ => "",
 		};
-		if (1 == 0)
-		{
-		}
-		return result;
 	}
 
 	private static string FormatItemReward(MysteryReward reward)
@@ -1161,10 +1152,6 @@ public static class MysteryWikiService
 			handler.AppendLiteral("}}");
 			stringBuilder4.AppendLine(ref handler);
 		}
-		else
-		{
-			stringBuilder.AppendLine("{{#vardefine:EventDisplayName|{{#var:EventName}}}}");
-		}
 		if (flag)
 		{
 			stringBuilder2 = stringBuilder;
@@ -1187,17 +1174,15 @@ public static class MysteryWikiService
 			stringBuilder.AppendLine("| title1 = {{#var:DisplayTitle}}");
 		}
 		stringBuilder.AppendLine("| type   = Drop Item");
-		stringBuilder.AppendLine("| source = Merging Items during {{Item/nolevel|{{#var:EventName}}|displayName={{#var:EventDisplayName}}}} Event");
+		stringBuilder.AppendLine(flag2
+			? "| source = Merging Items during {{Item/nolevel|{{#var:EventName}}|displayName={{#var:EventDisplayName}}}} Event"
+			: "| source = Merging Items during {{Item/nolevel|{{#var:EventName}}}} Event");
 		stringBuilder.AppendLine("}}");
 		string value2 = (flag ? "{{Item/Group|{{PAGENAME}}|4|displayName={{#var:DisplayTitle}}}}" : "{{Item/Group|{{PAGENAME}}|4}}");
-		stringBuilder2 = stringBuilder;
-		StringBuilder stringBuilder6 = stringBuilder2;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(116, 2, stringBuilder2);
-		handler.AppendFormatted(value2);
-		handler.AppendLiteral(" is an item in '''''Merge Mansion'''''.  It is used in the {{Item/nolevel|{{#var:EventName}}|displayName={{#var:EventDisplayName}}}} [[Events|Event]] of ");
-		handler.AppendFormatted(value);
-		handler.AppendLiteral(".");
-		stringBuilder6.AppendLine(ref handler);
+		string eventRef = flag2
+			? "{{Item/nolevel|{{#var:EventName}}|displayName={{#var:EventDisplayName}}}}"
+			: "{{Item/nolevel|{{#var:EventName}}}}";
+		stringBuilder.AppendLine($"{value2} is an item in '''''Merge Mansion'''''.  It is used in the {eventRef} [[Events|Event]] of {value}.");
 		stringBuilder.AppendLine();
 		string value3 = (flag ? "{{Item/nolevel|{{PAGENAME}}|1|displayName={{#var:DisplayTitle}}}}" : "{{Item/nolevel|{{PAGENAME}}|1}}");
 		string value4 = (flag ? "{{#var:DisplayTitle}}" : "{{PAGENAME}}");
@@ -1259,13 +1244,37 @@ public static class MysteryWikiService
 		ParsedChain parsedChain = null;
 		if (ds != null && !string.IsNullOrEmpty(mystery.EventItemType))
 		{
-			parsedChain = ds.Chains.FirstOrDefault((ParsedChain c) => c.Items.Any((ParsedItem parsedItem) => parsedItem.ItemType == mystery.EventItemType));
+			// Find chain by ConfigKey derived from EventItemType (e.g. "CBE_X_01" → "CBE_X")
+			// This finds the original chain WITHOUT merged aliases
+			int lastUnderscore = mystery.EventItemType.LastIndexOf('_');
+			if (lastUnderscore > 0)
+			{
+				string configKey = mystery.EventItemType[..lastUnderscore];
+				parsedChain = ds.Chains.FirstOrDefault(c =>
+					string.Equals(c.ConfigKey, configKey, StringComparison.OrdinalIgnoreCase));
+			}
+			// Fallback: match by ItemType presence
+			if (parsedChain == null)
+				parsedChain = ds.Chains.FirstOrDefault(c => c.Items.Any(i => i.ItemType == mystery.EventItemType));
 		}
 		if (parsedChain != null)
 		{
+			// If chain was merged with aliases, create a filtered copy with only non-alias items
+			if (parsedChain.Items.Any(i => i.IsAlias))
+			{
+				parsedChain = new ParsedChain
+				{
+					ConfigKey = parsedChain.ConfigKey,
+					OriginalName = parsedChain.OriginalName,
+					DisplayName = parsedChain.DisplayName,
+					Items = parsedChain.Items.Where(i => !i.IsAlias).ToList(),
+					PoolTag = parsedChain.PoolTag,
+					IsNameFromWiki = parsedChain.IsNameFromWiki,
+				};
+			}
 			WikiTableGenerator wikiTableGenerator = new WikiTableGenerator(ds, wikiMapping);
-			string tableName = (flag ? text3 : (mystery.EventItemName ?? "{{PAGENAME}}"));
-			stringBuilder.Append(wikiTableGenerator.Generate(parsedChain, tableName, lowPrices: false));
+			string? captionOverride = flag ? "{{#var:DisplayTitle}}" : null;
+			stringBuilder.Append(wikiTableGenerator.Generate(parsedChain, mystery.EventItemName ?? "{{PAGENAME}}", lowPrices: false, captionOverride: captionOverride));
 		}
 		else
 		{
@@ -2903,36 +2912,25 @@ public static class MysteryWikiService
 		stringBuilder.AppendLine("{{Mystery Pass/Event Item}}");
 		stringBuilder.AppendLine();
 		stringBuilder.AppendLine("== Rewards == ");
-		if (!string.IsNullOrEmpty(rewardVariant))
+		if (rewardVariant != null)
 		{
-			// Use {{PAGENAME}} when reward variant matches the event page title
 			string rewardVariantDisplay = rewardVariant;
 			string pageTitle = mystery.WikiStatus.SuggestedPageTitle ?? mystery.Name;
 			if (rewardVariant == pageTitle)
 				rewardVariantDisplay = "{{PAGENAME}}";
+			// Build template call: base template = "{{Mystery Pass/Rewards}}", variant = "{{Mystery Pass/Rewards/X}}"
+			string rewardsCall = string.IsNullOrEmpty(rewardVariantDisplay)
+				? "Mystery Pass/Rewards"
+				: $"Mystery Pass/Rewards/{rewardVariantDisplay}";
 
 			if (flag && !string.IsNullOrEmpty(mystery.PetName))
 			{
-				string value3 = FormatPetDisplayName(mystery.PetName);
-				stringBuilder2 = stringBuilder;
-				StringBuilder stringBuilder6 = stringBuilder2;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(30, 2, stringBuilder2);
-				handler.AppendLiteral("{{Mystery Pass/Rewards/");
-				handler.AppendFormatted(rewardVariantDisplay);
-				handler.AppendLiteral("|pet=");
-				handler.AppendFormatted(value3);
-				handler.AppendLiteral("}}");
-				stringBuilder6.AppendLine(ref handler);
+				string petDisplayName = FormatPetDisplayName(mystery.PetName);
+				stringBuilder.AppendLine($"{{{{{rewardsCall}|pet={petDisplayName}}}}}");
 			}
 			else
 			{
-				stringBuilder2 = stringBuilder;
-				StringBuilder stringBuilder7 = stringBuilder2;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(25, 1, stringBuilder2);
-				handler.AppendLiteral("{{Mystery Pass/Rewards/");
-				handler.AppendFormatted(rewardVariantDisplay);
-				handler.AppendLiteral("}}");
-				stringBuilder7.AppendLine(ref handler);
+				stringBuilder.AppendLine($"{{{{{rewardsCall}}}}}");
 			}
 		}
 		else if (flag && !string.IsNullOrEmpty(mystery.PetName))

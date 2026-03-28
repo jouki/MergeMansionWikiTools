@@ -26,7 +26,8 @@ public class WikiTableGenerator
     /// <param name="chain">Parsed chain data</param>
     /// <param name="tableName">Display name for the table header</param>
     /// <param name="lowPrices">If true, sets LowPrices variable to true</param>
-    public string Generate(ParsedChain chain, string tableName, bool lowPrices, bool hardcodeName = false)
+    /// <param name="captionOverride">If set, use this for the table caption instead of tableName/PAGENAME</param>
+    public string Generate(ParsedChain chain, string tableName, bool lowPrices, bool hardcodeName = false, string? captionOverride = null)
     {
         Warnings.Clear();
 
@@ -181,8 +182,9 @@ public class WikiTableGenerator
 
         // Header
         sb.AppendLine("{| class = \"article-table\"");
+        var caption = captionOverride ?? (hardcodeName ? tableName : "{{PAGENAME}}");
+        sb.AppendLine($"|+ <u>{caption}</u>");
         var captionName = hardcodeName ? tableName : "{{PAGENAME}}";
-        sb.AppendLine($"|+ <u>{captionName}</u>");
 
         // Two-row header only when normal (non-nested) decay expansion exists
         string hp = hasAnyNonNestedDecayExpansion ? "! rowspan = 2 | " : "! ";

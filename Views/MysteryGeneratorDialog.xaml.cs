@@ -109,6 +109,9 @@ public partial class MysteryGeneratorDialog : FluentWindow
 
 	private readonly HashSet<int> _revertRows = new HashSet<int>();
 
+	/// <summary>Exact output line indices that were inserted/replaced by merge operations.</summary>
+	private readonly HashSet<int> _mergedOutputLineIndices = new HashSet<int>();
+
 	private static readonly Brush BrushModifiedBg = new SolidColorBrush(Color.FromArgb(32, 208, 160, 32));
 
 	private static readonly Brush BrushModifiedFg = new SolidColorBrush(Color.FromRgb(208, 176, 64));
@@ -162,7 +165,7 @@ public partial class MysteryGeneratorDialog : FluentWindow
 	private async Task PrecomputeHypotheticalVariantAsync()
 	{
 		WikiCheckState rewardState = _mystery.WikiStatus.RewardTemplateState;
-		if ((uint)(rewardState - 3) <= 1u)
+		if (rewardState == WikiCheckState.Match || rewardState == WikiCheckState.Confirmed)
 		{
 			return;
 		}
@@ -190,6 +193,14 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		// Cancel any in-flight async diff/compare operations from previous tab
 		_diffCts?.Cancel();
 		_diffCts = new CancellationTokenSource();
+		// Reset merge/selection state from previous tab
+		_selectedRemovedIndices.Clear();
+		_savedRightElements.Clear();
+		_mergedRightRows.Clear();
+		_mergedRowToOutputIdx.Clear();
+		_revertRows.Clear();
+		_mergedOutputLineIndices.Clear();
+		_originalOutput = null;
 		pnlOutput.Visibility = Visibility.Collapsed;
 		pnlDiff.Visibility = Visibility.Collapsed;
 		imagesControl.Visibility = Visibility.Collapsed;
@@ -222,36 +233,21 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		btnCopy.Visibility = Visibility.Visible;
 		try
 		{
-			MysteryGeneratorMode currentMode = _currentMode;
-			if (1 == 0)
+			_fullOutput = _currentMode switch
 			{
-			}
-			string fullOutput = currentMode switch
-			{
-				MysteryGeneratorMode.Rewards => MysteryWikiService.GenerateRewardTemplate(_mystery, _mapping), 
+				MysteryGeneratorMode.Rewards => MysteryWikiService.GenerateRewardTemplate(_mystery, _mapping),
 				MysteryGeneratorMode.EventPage => MysteryWikiService.GenerateEventPageWithDialogues(_mystery, GetEffectiveRewardVariant(), _dialogueService),
-				MysteryGeneratorMode.EventItemPage => MysteryWikiService.GenerateEventItemPage(_mystery, _main.DataService, _main.WikiMapping), 
-				_ => "", 
+				MysteryGeneratorMode.EventItemPage => MysteryWikiService.GenerateEventItemPage(_mystery, _main.DataService, _main.WikiMapping),
+				_ => "",
 			};
-			if (1 == 0)
+			bool shouldLoadDiff = _currentMode switch
 			{
-			}
-			_fullOutput = fullOutput;
-			MysteryGeneratorMode currentMode2 = _currentMode;
-			if (1 == 0)
-			{
-			}
-			bool flag = currentMode2 switch
-			{
-				MysteryGeneratorMode.EventPage => _mystery.WikiStatus.EventPageExists == true, 
-				MysteryGeneratorMode.EventItemPage => _mystery.WikiStatus.EventItemPageExists == true, 
+				MysteryGeneratorMode.EventPage => _mystery.WikiStatus.EventPageExists == true,
+				MysteryGeneratorMode.EventItemPage => _mystery.WikiStatus.EventItemPageExists == true,
 				MysteryGeneratorMode.Rewards => _mystery.WikiStatus.RewardTemplateMatches == true || _mystery.WikiStatus.MatchingVariant != null,
-				_ => false, 
+				_ => false,
 			};
-			if (1 == 0)
-			{
-			}
-			if (flag)
+			if (shouldLoadDiff)
 			{
 				UpdateConfirmButton();
 				LoadDiffAsync(_diffCts.Token);
@@ -392,11 +388,10 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		}
 		catch (Exception ex)
 		{
-			Exception ex2 = ex;
 			pnlDiffLoading.Visibility = Visibility.Collapsed;
 			pnlDiff.Visibility = Visibility.Collapsed;
 			ShowPlainOutput();
-			warningBar.Message = "Diff failed: " + ex2.Message;
+			warningBar.Message = "Diff failed: " + ex.Message;
 			warningBar.Severity = InfoBarSeverity.Warning;
 			warningBar.IsOpen = true;
 		}
@@ -409,6 +404,7 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		pnlCenter.Children.Clear();
 		_currentDiffs = diffs;
 		_selectedRemovedIndices.Clear();
+		_savedRightElements.Clear();
 		_rowToDiffIndex.Clear();
 		_diffIndexToRow.Clear();
 		_pairedRemovedIndices.Clear();
@@ -786,9 +782,7 @@ public partial class MysteryGeneratorDialog : FluentWindow
 	private void ApplyMerge(HashSet<int> indicesToMerge)
 	{
 		if (_currentDiffs == null || indicesToMerge.Count == 0 || _lastWikiContent == null)
-		{
 			return;
-		}
 		List<string> list = new List<string>();
 		for (int i = 0; i < _currentDiffs.Count; i++)
 		{
@@ -801,6 +795,7 @@ public partial class MysteryGeneratorDialog : FluentWindow
 			{
 				if (indicesToMerge.Contains(i))
 				{
+					_mergedOutputLineIndices.Add(list.Count);
 					list.Add(diffLine.OldText ?? diffLine.Text);
 				}
 				else
@@ -812,11 +807,10 @@ public partial class MysteryGeneratorDialog : FluentWindow
 			{
 				if (indicesToMerge.Contains(i))
 				{
+					_mergedOutputLineIndices.Add(list.Count);
 					list.Add(diffLine.Text);
 					if (_pairedRemovedIndices.Contains(i) && i + 1 < _currentDiffs.Count && _currentDiffs[i + 1].Type == DiffLineType.Added)
-					{
 						i++;
-					}
 				}
 			}
 			else if (diffLine.Type == DiffLineType.Added)
@@ -862,31 +856,7 @@ public partial class MysteryGeneratorDialog : FluentWindow
 
 	private HashSet<int> ComputeMergedOutputIndices()
 	{
-		HashSet<int> hashSet = new HashSet<int>();
-		if (_originalOutput == null)
-		{
-			return hashSet;
-		}
-		List<DiffLine> list = MysteryWikiService.ComputeLineDiffs(_originalOutput, _fullOutput);
-		int num = 0;
-		foreach (DiffLine item in list)
-		{
-			if (item.Type == DiffLineType.Match)
-			{
-				num++;
-			}
-			else if (item.Type == DiffLineType.Added)
-			{
-				hashSet.Add(num);
-				num++;
-			}
-			else if (item.Type == DiffLineType.Modified)
-			{
-				hashSet.Add(num);
-				num++;
-			}
-		}
-		return hashSet;
+		return new HashSet<int>(_mergedOutputLineIndices);
 	}
 
 	private void BuildDiffViewWithMerged(List<DiffLine> diffs, HashSet<int> mergedOutputIndices)
@@ -1056,6 +1026,8 @@ public partial class MysteryGeneratorDialog : FluentWindow
 			}
 		}
 		_fullOutput = string.Join("\n", list2);
+		foreach (int idx in outputIndicesToRevert)
+			_mergedOutputLineIndices.Remove(idx);
 		_revertRows.Clear();
 		ReDiffLocally();
 	}
@@ -1237,53 +1209,35 @@ public partial class MysteryGeneratorDialog : FluentWindow
 			MysteryGeneratorMode.EventItemPage => manualConfirm.ItemPageConfirmed,
 			_ => false,
 		};
-		MysteryGeneratorMode currentMode2 = _currentMode;
-		if (1 == 0)
+		WikiCheckState checkState = _currentMode switch
 		{
-		}
-		WikiCheckState wikiCheckState = currentMode2 switch
-		{
-			MysteryGeneratorMode.EventPage => _mystery.WikiStatus.EventPageState, 
-			MysteryGeneratorMode.Rewards => _mystery.WikiStatus.RewardTemplateState, 
-			MysteryGeneratorMode.EventItemPage => _mystery.WikiStatus.EventItemPageState, 
-			_ => WikiCheckState.Unknown, 
+			MysteryGeneratorMode.EventPage => _mystery.WikiStatus.EventPageState,
+			MysteryGeneratorMode.Rewards => _mystery.WikiStatus.RewardTemplateState,
+			MysteryGeneratorMode.EventItemPage => _mystery.WikiStatus.EventItemPageState,
+			_ => WikiCheckState.Unknown,
 		};
-		if (1 == 0)
-		{
-		}
-		WikiCheckState wikiCheckState2 = wikiCheckState;
 		if (flag2)
 		{
 			btnConfirmManual.Content = "Remove Confirmation";
 			btnConfirmManual.Visibility = Visibility.Visible;
 			btnPublish.IsEnabled = false;
-			MysteryGeneratorMode currentMode3 = _currentMode;
-			if (1 == 0)
+			string sectionName = _currentMode switch
 			{
-			}
-			string text = currentMode3 switch
-			{
-				MysteryGeneratorMode.EventPage => "Event Page", 
-				MysteryGeneratorMode.Rewards => "Rewards", 
-				MysteryGeneratorMode.EventItemPage => "Event Item Page", 
-				_ => "", 
+				MysteryGeneratorMode.EventPage => "Event Page",
+				MysteryGeneratorMode.Rewards => "Rewards",
+				MysteryGeneratorMode.EventItemPage => "Event Item Page",
+				_ => "",
 			};
-			if (1 == 0)
-			{
-			}
-			string text2 = text;
-			btnPublish.ToolTip = "Publish disabled: " + text2 + " is manually confirmed as correct. Remove confirmation first.";
+			btnPublish.ToolTip = $"Publish disabled: {sectionName} is manually confirmed as correct. Remove confirmation first.";
 			ToolTipService.SetInitialShowDelay(btnPublish, 0);
-			ToolTipService.SetShowOnDisabled(btnPublish, value: true);
+			ToolTipService.SetShowOnDisabled(btnPublish, true);
 		}
 		else
 		{
 			btnPublish.IsEnabled = true;
 			btnPublish.ToolTip = null;
-			// Show "Confirm as Correct" for Mismatch, and also for Rewards in Missing/Unknown state
-			// (user can confirm a specific template variant even when no template matches)
-			bool showConfirm = wikiCheckState2 == WikiCheckState.Mismatch
-				|| (_currentMode == MysteryGeneratorMode.Rewards && wikiCheckState2 != WikiCheckState.Match);
+			bool showConfirm = checkState == WikiCheckState.Mismatch
+				|| (_currentMode == MysteryGeneratorMode.Rewards && checkState != WikiCheckState.Match);
 			if (showConfirm)
 			{
 				if (_currentMode == MysteryGeneratorMode.Rewards
@@ -1322,25 +1276,15 @@ public partial class MysteryGeneratorDialog : FluentWindow
 			return;
 		}
 		MysteryManualConfirmFlags flags = _mystery.WikiStatus.ManualConfirm;
-		MysteryGeneratorMode currentMode = _currentMode;
-		if (1 == 0)
+		string flagName = _currentMode switch
 		{
-		}
-		string text = currentMode switch
-		{
-			MysteryGeneratorMode.EventPage => "eventPageManualConfirm", 
-			MysteryGeneratorMode.Rewards => "rewardsManualConfirm", 
-			MysteryGeneratorMode.EventItemPage => "itemPageConfirmed", 
-			_ => "", 
+			MysteryGeneratorMode.EventPage => "eventPageManualConfirm",
+			MysteryGeneratorMode.Rewards => "rewardsManualConfirm",
+			MysteryGeneratorMode.EventItemPage => "itemPageConfirmed",
+			_ => "",
 		};
-		if (1 == 0)
-		{
-		}
-		string flagName = text;
 		if (string.IsNullOrEmpty(flagName))
-		{
 			return;
-		}
 		bool currentValue = _currentMode switch
 		{
 			MysteryGeneratorMode.EventPage => flags.EventPageConfirmed,
@@ -1356,31 +1300,22 @@ public partial class MysteryGeneratorDialog : FluentWindow
 			if (cmbCompareTemplate.SelectedIndex > 0 && cmbCompareTemplate.SelectedItem is ComboBoxItem selectedItem
 				&& selectedItem.Content is string display)
 			{
-				// Extract variant suffix from display (e.g. "Rewards/Pet/3" → "Pet/3", "Rewards (base)" → "true")
 				if (display.StartsWith("Rewards/", StringComparison.OrdinalIgnoreCase))
 					rewardsConfirmValue = display["Rewards/".Length..];
 				else
-					rewardsConfirmValue = "true"; // base template
+					rewardsConfirmValue = "true";
 			}
 			else
 				rewardsConfirmValue = "true";
 		}
-		string action = (newValue ? "Set" : "Remove");
-		MysteryGeneratorMode currentMode3 = _currentMode;
-		if (1 == 0)
+		string action = newValue ? "Set" : "Remove";
+		string sectionName = _currentMode switch
 		{
-		}
-		text = currentMode3 switch
-		{
-			MysteryGeneratorMode.EventPage => "Event Page", 
-			MysteryGeneratorMode.Rewards => "Rewards", 
-			MysteryGeneratorMode.EventItemPage => "Event Item Page", 
-			_ => "", 
+			MysteryGeneratorMode.EventPage => "Event Page",
+			MysteryGeneratorMode.Rewards => "Rewards",
+			MysteryGeneratorMode.EventItemPage => "Event Item Page",
+			_ => "",
 		};
-		if (1 == 0)
-		{
-		}
-		string sectionName = text;
 		btnConfirmManual.IsEnabled = false;
 		warningBar.Message = "Loading preview...";
 		warningBar.Severity = InfoBarSeverity.Informational;
@@ -1556,10 +1491,9 @@ public partial class MysteryGeneratorDialog : FluentWindow
 				warningBar.Severity = InfoBarSeverity.Error;
 			}
 		}
-		catch (Exception ex2)
+		catch (Exception ex)
 		{
-			Exception ex3 = ex2;
-			warningBar.Message = "Publish failed: " + ex3.Message;
+			warningBar.Message = "Publish failed: " + ex.Message;
 			warningBar.Severity = InfoBarSeverity.Error;
 		}
 		finally
@@ -1640,21 +1574,13 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		bool published = false;
 		try
 		{
-			MysteryGeneratorMode currentMode = _currentMode;
-			if (1 == 0)
-			{
-			}
-			string text = currentMode switch
+			string summary = _currentMode switch
 			{
 				MysteryGeneratorMode.Rewards => IsNamedRewardVariant ? "Update reward template (via MergeMansionWikiTools)" : "Create reward template (via MergeMansionWikiTools)",
-				MysteryGeneratorMode.EventPage => "Create/update mystery page (via MergeMansionWikiTools)", 
-				MysteryGeneratorMode.EventItemPage => "Create/update event item page (via MergeMansionWikiTools)", 
-				_ => "Edit via MergeMansionWikiTools", 
+				MysteryGeneratorMode.EventPage => "Create/update mystery page (via MergeMansionWikiTools)",
+				MysteryGeneratorMode.EventItemPage => "Create/update event item page (via MergeMansionWikiTools)",
+				_ => "Edit via MergeMansionWikiTools",
 			};
-			if (1 == 0)
-			{
-			}
-			string summary = text;
 			string result = await MysteryWikiService.PublishPageAsync(_main.Settings.WikiUsername, _main.Settings.WikiPassword, pageTitle, _fullOutput, summary);
 			UserStatsService.Increment(delegate(UserStats s)
 			{
@@ -1693,10 +1619,8 @@ public partial class MysteryGeneratorDialog : FluentWindow
 				string rewardsPrefix = "Template:Mystery Pass/Rewards";
 				if (pageTitle.StartsWith(rewardsPrefix))
 				{
-					text = pageTitle;
-					int length = rewardsPrefix.Length;
-					string after = text.Substring(length, text.Length - length).TrimStart('/');
-					_mystery.WikiStatus.MatchingVariant = (string.IsNullOrEmpty(after) ? "" : after);
+					string after = pageTitle[rewardsPrefix.Length..].TrimStart('/');
+					_mystery.WikiStatus.MatchingVariant = string.IsNullOrEmpty(after) ? "" : after;
 				}
 				break;
 			}
@@ -1744,8 +1668,7 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		}
 		catch (Exception ex)
 		{
-			Exception ex2 = ex;
-			warningBar.Message = "Publish failed: " + ex2.Message;
+			warningBar.Message = "Publish failed: " + ex.Message;
 			warningBar.Severity = InfoBarSeverity.Error;
 			warningBar.IsOpen = true;
 		}
@@ -1932,7 +1855,11 @@ public partial class MysteryGeneratorDialog : FluentWindow
 				warningBar.Message = string.Join("  ", parts);
 				warningBar.Severity = InfoBarSeverity.Informational;
 				warningBar.IsOpen = true;
-				btnPublish.Content = IsNamedRewardVariant ? "Update Reward Template" : "Create New Reward Template";
+				// Only show publish if no other template already matches
+				if (_mystery.WikiStatus.RewardTemplateMatches == true)
+					btnPublish.Visibility = Visibility.Collapsed;
+				else
+					btnPublish.Content = IsNamedRewardVariant ? "Update Reward Template" : "Create New Reward Template";
 			}
 			UpdateConfirmButton();
 		}

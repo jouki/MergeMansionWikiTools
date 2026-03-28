@@ -420,10 +420,7 @@ public partial class MysteriesPage : UserControl
 
 	private static Border CreateStatusIndicator(string label, WikiCheckState state)
 	{
-		if (1 == 0)
-		{
-		}
-		(SolidColorBrush, SolidColorBrush, string) tuple = state switch
+		var (bg, fg, symbol) = state switch
 		{
 			WikiCheckState.Match => (new SolidColorBrush(Color.FromArgb(48, 0, 160, 0)), new SolidColorBrush(Color.FromRgb(48, 192, 48)), "\u2713 "),
 			WikiCheckState.Confirmed => (new SolidColorBrush(Color.FromArgb(37, 64, 128, 224)), new SolidColorBrush(Color.FromRgb(96, 160, 240)), "\u2713 "),
@@ -431,26 +428,19 @@ public partial class MysteriesPage : UserControl
 			WikiCheckState.Missing => (new SolidColorBrush(Color.FromArgb(48, 208, 0, 0)), new SolidColorBrush(Color.FromRgb(208, 64, 64)), "\u2717 "),
 			_ => (new SolidColorBrush(Color.FromArgb(32, 128, 128, 128)), new SolidColorBrush(Color.FromRgb(144, 144, 144)), "? "),
 		};
-		if (1 == 0)
-		{
-		}
-		(SolidColorBrush, SolidColorBrush, string) tuple2 = tuple;
-		SolidColorBrush item = tuple2.Item1;
-		SolidColorBrush item2 = tuple2.Item2;
-		string item3 = tuple2.Item3;
 		Border border = new Border
 		{
 			CornerRadius = new CornerRadius(3.0),
 			Padding = new Thickness(5.0, 1.0, 5.0, 1.0),
 			Margin = new Thickness(0.0, 0.0, 6.0, 0.0),
-			Background = item
+			Background = bg
 		};
 		System.Windows.Controls.TextBlock textBlock = new System.Windows.Controls.TextBlock
 		{
 			FontSize = 10.0,
-			Foreground = item2
+			Foreground = fg
 		};
-		textBlock.Inlines.Add(new Run(item3));
+		textBlock.Inlines.Add(new Run(symbol));
 		textBlock.Inlines.Add(new Run(label));
 		border.Child = textBlock;
 		return border;
@@ -500,8 +490,7 @@ public partial class MysteriesPage : UserControl
 		}
 		catch (Exception ex)
 		{
-			Exception ex2 = ex;
-			ShowInfo("Wiki check failed: " + ex2.Message, InfoBarSeverity.Error);
+			ShowInfo("Wiki check failed: " + ex.Message, InfoBarSeverity.Error);
 		}
 		finally
 		{
@@ -555,21 +544,14 @@ public partial class MysteriesPage : UserControl
 	{
 		if (sender is Border border)
 		{
-			var (mystery, mysteryDiffScope) = ((MysteryEvent, MysteryDiffScope))border.Tag;
-			if (1 == 0)
+			var (mystery, scope) = ((MysteryEvent, MysteryDiffScope))border.Tag;
+			MysteryGeneratorMode mode = scope switch
 			{
-			}
-			MysteryGeneratorMode mysteryGeneratorMode = mysteryDiffScope switch
-			{
-				MysteryDiffScope.Rewards => MysteryGeneratorMode.Rewards, 
-				MysteryDiffScope.EventPage => MysteryGeneratorMode.EventPage, 
-				MysteryDiffScope.EventItemPage => MysteryGeneratorMode.EventItemPage, 
-				_ => MysteryGeneratorMode.Rewards, 
+				MysteryDiffScope.Rewards => MysteryGeneratorMode.Rewards,
+				MysteryDiffScope.EventPage => MysteryGeneratorMode.EventPage,
+				MysteryDiffScope.EventItemPage => MysteryGeneratorMode.EventItemPage,
+				_ => MysteryGeneratorMode.Rewards,
 			};
-			if (1 == 0)
-			{
-			}
-			MysteryGeneratorMode mode = mysteryGeneratorMode;
 			OpenPrepareDialog(mystery, mode);
 		}
 	}
@@ -591,7 +573,7 @@ public partial class MysteriesPage : UserControl
 					foreach (MysteryEvent m in _mysteryService.Mysteries)
 					{
 						WikiCheckState rewardTemplateState = m.WikiStatus.RewardTemplateState;
-						if ((uint)(rewardTemplateState - 3) > 1u)
+						if (rewardTemplateState != WikiCheckState.Match && rewardTemplateState != WikiCheckState.Confirmed)
 						{
 							var (matches, variant) = MysteryWikiService.CompareWithTemplates(m, templates);
 							m.WikiStatus.RewardTemplateMatches = matches;
@@ -644,8 +626,7 @@ public partial class MysteriesPage : UserControl
 		}
 		catch (Exception ex)
 		{
-			Exception ex2 = ex;
-			ShowInfo("Preview failed: " + ex2.Message, InfoBarSeverity.Error);
+			ShowInfo("Preview failed: " + ex.Message, InfoBarSeverity.Error);
 			btn.IsEnabled = true;
 			return;
 		}
@@ -667,11 +648,7 @@ public partial class MysteriesPage : UserControl
 					results.Add("Main page: " + await MysteryWikiService.UpdateMainPageAsync(_main.Settings.WikiUsername, _main.Settings.WikiPassword, mystery.Name, mystery.WikiStatus.SuggestedPageTitle ?? mystery.Name, mystery.StartDate));
 					mystery.WikiStatus.WikiMainPageListed = true;
 				}
-				catch (Exception ex)
-				{
-					Exception ex3 = ex;
-					results.Add("Main page: " + ex3.Message);
-				}
+				catch (Exception ex) { results.Add("Main page: " + ex.Message); }
 			}
 			if (steps[1].IsEnabled)
 			{
@@ -680,11 +657,7 @@ public partial class MysteriesPage : UserControl
 					results.Add("Mystery page: " + await MysteryWikiService.UpdateMysteryPageTableAsync(_main.Settings.WikiUsername, _main.Settings.WikiPassword, mystery));
 					mystery.WikiStatus.WikiMysteryTableListed = true;
 				}
-				catch (Exception ex)
-				{
-					Exception ex4 = ex;
-					results.Add("Mystery page: " + ex4.Message);
-				}
+				catch (Exception ex) { results.Add("Mystery page: " + ex.Message); }
 			}
 			if (steps[2].IsEnabled)
 			{
@@ -693,11 +666,7 @@ public partial class MysteriesPage : UserControl
 					results.Add("Module: " + await MysteryWikiService.UpdateMysteryTableAsync(_main.Settings.WikiUsername, _main.Settings.WikiPassword, mystery));
 					mystery.WikiStatus.WikiModuleListed = true;
 				}
-				catch (Exception ex)
-				{
-					Exception ex5 = ex;
-					results.Add("Module: " + ex5.Message);
-				}
+				catch (Exception ex) { results.Add("Module: " + ex.Message); }
 			}
 			if (results.Count == 0)
 			{
@@ -710,8 +679,7 @@ public partial class MysteriesPage : UserControl
 		}
 		catch (Exception ex)
 		{
-			Exception ex6 = ex;
-			ShowInfo("Update failed: " + ex6.Message, InfoBarSeverity.Error);
+			ShowInfo("Update failed: " + ex.Message, InfoBarSeverity.Error);
 		}
 		finally
 		{

@@ -38,6 +38,41 @@ namespace MergeMansionWikiTools
 
             // Splash: fade in 1s (smooth) → load app behind splash → fade out 0.2s
             var splash = new SplashWindow();
+            // Center splash on the monitor where the main window was last used
+            if (settings.WindowLeft.HasValue && settings.WindowTop.HasValue)
+            {
+                double winW = settings.WindowWidth ?? 1380;
+                double winH = settings.WindowHeight ?? 963;
+                // Place splash temporarily at saved window center so WPF assigns it to the correct monitor
+                splash.WindowStartupLocation = WindowStartupLocation.Manual;
+                splash.Left = settings.WindowLeft.Value + (winW - 400) / 2;
+                splash.Top = settings.WindowTop.Value + (winH - 400) / 2;
+                // After the window handle is created, use it to find the actual monitor working area
+                splash.SourceInitialized += (_, _) =>
+                {
+                    var source = System.Windows.Interop.HwndSource.FromHwnd(
+                        new System.Windows.Interop.WindowInteropHelper(splash).Handle);
+                    if (source?.CompositionTarget != null)
+                    {
+                        var dpi = source.CompositionTarget.TransformToDevice;
+                        // Convert DIP center to physical pixels for MonitorFromPoint
+                        double cx = (splash.Left + 200) * dpi.M11;
+                        double cy = (splash.Top + 200) * dpi.M22;
+                        var hMon = MonitorFromPoint(new POINT((int)cx, (int)cy), 2);
+                        var mi = new MONITORINFO { cbSize = System.Runtime.InteropServices.Marshal.SizeOf<MONITORINFO>() };
+                        if (GetMonitorInfo(hMon, ref mi))
+                        {
+                            // Convert monitor working area back to DIP
+                            double monL = mi.rcWork.left / dpi.M11;
+                            double monT = mi.rcWork.top / dpi.M22;
+                            double monW = (mi.rcWork.right - mi.rcWork.left) / dpi.M11;
+                            double monH = (mi.rcWork.bottom - mi.rcWork.top) / dpi.M22;
+                            splash.Left = monL + (monW - 400) / 2;
+                            splash.Top = monT + (monH - 400) / 2;
+                        }
+                    }
+                };
+            }
             MainWindow = splash;
             splash.Show();
 
@@ -84,6 +119,22 @@ namespace MergeMansionWikiTools
             AppLogger.Flush();
             base.OnExit(e);
         }
+
+        // ── Monitor detection (for splash centering on correct monitor) ──
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern IntPtr MonitorFromPoint(POINT pt, uint dwFlags);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern bool GetMonitorInfo(IntPtr hMonitor, ref MONITORINFO lpmi);
+
+        [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+        private struct POINT { public int x, y; public POINT(int x, int y) { this.x = x; this.y = y; } }
+
+        [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+        private struct RECT { public int left, top, right, bottom; }
+
+        [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+        private struct MONITORINFO { public int cbSize; public RECT rcMonitor; public RECT rcWork; public uint dwFlags; }
 
         // ── Native Win32 clipboard (fast, no OLE freeze, rendered for WIN+V) ──
 

@@ -323,6 +323,7 @@ public class DialogueService
                     .Replace('\u201C', '"').Replace('\u201D', '"')    // curly quotes
                     .Replace("\u2026", "...")                          // ellipsis → three dots
                     .Replace("\u2013", "-").Replace("\u2014", "-");   // en/em dash → hyphen
+                text = Regex.Replace(text, "<i>(.*?)</i>", "''$1''", RegexOptions.IgnoreCase);
                 sb.AppendLine($"'''{line.Speaker}''': {text}");
 
                 // Empty line between replies (but not after the last one)
