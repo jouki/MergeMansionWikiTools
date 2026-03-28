@@ -154,6 +154,14 @@
                                ToolTipService.InitialShowDelay="0"
                                ToolTipService.ShowOnDisabled="True"
                                Margin="0,0,6,0"/>
+                    <ui:Button x:Name="btnToggleRects"
+                               Appearance="Secondary" Height="32" Width="32" Padding="0"
+                               Visibility="Collapsed" Click="BtnToggleRects_Click"
+                               ToolTip="Show/hide detection rectangles"
+                               ToolTipService.InitialShowDelay="0"
+                               Margin="0,0,6,0">
+                        <ui:SymbolIcon x:Name="iconToggleRects" Symbol="Eye24" FontSize="16"/>
+                    </ui:Button>
                     <Border x:Name="refreshButtonGroup" Visibility="Collapsed" CornerRadius="6">
                         <StackPanel Orientation="Horizontal">
                             <ui:Button x:Name="btnDetectAlgorithm"

@@ -68,8 +68,21 @@ public class WikiPageStatus
     public bool? WikiMysteryTableListed { get; set; }
     public bool? WikiModuleListed { get; set; }
 
+    /// <summary>False when mystery is too old for main page (older than last year).
+    /// Set by MysteryWikiService during status checks, or from MysteryEvent.StartDate.</summary>
+    public bool MainPageEligible { get; set; } = true;
+
+    /// <summary>Sets MainPageEligible based on mystery start date.</summary>
+    public void UpdateMainPageEligibility(DateTime? startDate)
+    {
+        int currentYear = DateTime.Now.Year;
+        MainPageEligible = !(startDate.HasValue && startDate.Value.Year < currentYear - 1);
+    }
+
+    public int WikiListedTotal => MainPageEligible ? 3 : 2;
+
     public int WikiListedCount =>
-        (WikiMainPageListed == true ? 1 : 0) +
+        (MainPageEligible && WikiMainPageListed == true ? 1 : 0) +
         (WikiMysteryTableListed == true ? 1 : 0) +
         (WikiModuleListed == true ? 1 : 0);
 
@@ -77,10 +90,11 @@ public class WikiPageStatus
     {
         get
         {
-            if (WikiMainPageListed == null && WikiMysteryTableListed == null && WikiModuleListed == null)
+            bool mainUnknown = MainPageEligible ? WikiMainPageListed == null : false;
+            if (mainUnknown && WikiMysteryTableListed == null && WikiModuleListed == null)
                 return WikiCheckState.Unknown;
             int count = WikiListedCount;
-            if (count >= 3) return WikiCheckState.Match;
+            if (count >= WikiListedTotal) return WikiCheckState.Match;
             if (count == 0) return WikiCheckState.Missing;
             return WikiCheckState.Mismatch;
         }
@@ -89,6 +103,9 @@ public class WikiPageStatus
     public bool? RewardTemplateMatches { get; set; }
     public bool? RewardContentMatches { get; set; }
     public string? MatchingVariant { get; set; }
+    public string? MatchingGalleryVariant { get; set; }
+    /// <summary>If set, this gallery template needs to be created on wiki during publish.</summary>
+    public string? PendingGalleryTemplateContent { get; set; }
     public string? SuggestedPageTitle { get; set; }
 
     public MysteryManualConfirmFlags ManualConfirm { get; set; } = new();

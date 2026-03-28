@@ -34,6 +34,7 @@ public static class MysteryWikiService
 
 	private static readonly string StatusCachePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "mystery_wiki_status_cache.json");
 
+
 	private static readonly JsonSerializerOptions JsonOpts = new JsonSerializerOptions
 	{
 		WriteIndented = true
@@ -473,6 +474,9 @@ public static class MysteryWikiService
 	public static async Task<WikiPageStatus> CheckMysteryStatusAsync(MysteryEvent mystery, DataService? ds)
 	{
 		WikiPageStatus status = new WikiPageStatus();
+		// Age check: only this year and last year mysteries are eligible for main page
+		int currentYear = DateTime.Now.Year;
+		status.MainPageEligible = !(mystery.StartDate.HasValue && mystery.StartDate.Value.Year < currentYear - 1);
 		string pageName = mystery.Name;
 		status.SuggestedPageTitle = pageName;
 		if (ds != null)
@@ -537,59 +541,197 @@ public static class MysteryWikiService
 		return result;
 	}
 
-	public static async Task<(bool XpMatches, bool ContentMatches, string? Variant)> CompareWithExistingTemplatesAsync(MysteryEvent mystery, MysteryItemMapping? mapping)
+	// ── Gallery template detection ──────────────────────────────────
+
+	/// <summary>Fetches all Mystery Pass/Gallery templates from wiki.</summary>
+	public static async Task<Dictionary<string, string>> FetchGalleryTemplatesAsync()
+	{
+		var result = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+		string listUrl = "https://merge-mansion.fandom.com/api.php?action=query&list=allpages&apprefix=Mystery_Pass/Gallery&apnamespace=10&aplimit=100&format=json";
+		var listDoc = JsonDocument.Parse(await Http.GetStringAsync(listUrl));
+		var allPages = listDoc.RootElement.GetProperty("query").GetProperty("allpages");
+		var titles = new List<string>();
+		foreach (var p in allPages.EnumerateArray())
+		{
+			string? t = p.GetProperty("title").GetString();
+			if (!string.IsNullOrEmpty(t)) titles.Add(t);
+		}
+		for (int i = 0; i < titles.Count; i += 50)
+		{
+			string joined = string.Join("|", titles.Skip(i).Take(50));
+			string url = "https://merge-mansion.fandom.com/api.php?action=query&titles=" + Uri.EscapeDataString(joined) + "&prop=revisions&rvprop=content&rvslots=main&format=json";
+			var doc = JsonDocument.Parse(await Http.GetStringAsync(url));
+			foreach (var page in doc.RootElement.GetProperty("query").GetProperty("pages").EnumerateObject())
+			{
+				if (page.Value.TryGetProperty("revisions", out var revs))
+				{
+					string title = page.Value.GetProperty("title").GetString() ?? "";
+					string content = revs[0].GetProperty("slots").GetProperty("main").GetProperty("*").GetString() ?? "";
+					result[title] = content;
+				}
+			}
+		}
+		return result;
+	}
+
+	/// <summary>
+	/// Counts decoration slots in a Gallery template (including Pet Icon which is decoration #0).
+	/// </summary>
+	private static int CountGalleryDecorationSlots(string templateContent)
+	{
+		int count = 0;
+		foreach (var line in templateContent.Split('\n'))
+			if (line.Contains("Decoration #") || line.Contains("Decoration|") || line.Contains("Pet Icon"))
+				count++;
+		return count;
+	}
+
+	/// <summary>
+	/// Finds a Gallery template variant matching the decoration count.
+	/// Returns variant string ("" = default, "2", "Pet", etc.) or null if none found.
+	/// </summary>
+	public static string? FindMatchingGalleryVariant(int decoCount, bool isPet, Dictionary<string, string> galleryTemplates)
+	{
+		foreach (var (title, content) in galleryTemplates)
+		{
+			int idx = title.IndexOf("/Gallery", StringComparison.OrdinalIgnoreCase);
+			if (idx < 0) continue;
+			string suffix = title[(idx + "/Gallery".Length)..].TrimStart('/');
+			bool isPetTemplate = suffix.StartsWith("Pet", StringComparison.OrdinalIgnoreCase);
+
+			if (isPet != isPetTemplate) continue;
+
+			int slots = CountGalleryDecorationSlots(content);
+			if (slots == decoCount) return suffix.Length == 0 ? "" : suffix;
+		}
+		return null; // no match
+	}
+
+	/// <summary>
+	/// Generates Gallery template content for a given decoration count (standard mystery).
+	/// Follows the same pattern as existing templates.
+	/// </summary>
+	public static string GenerateGalleryTemplateContent(int decoCount, bool isPet)
+	{
+		var sb = new StringBuilder();
+		sb.AppendLine("{{#tag:gallery|");
+		sb.AppendLine("{{PAGENAME}}.png {{!}} Event Splash Art");
+		if (isPet)
+		{
+			sb.AppendLine("{{ItemNameToFilename|{{PAGENAME}}Decoration|0}} {{!}} Pet Icon");
+			for (int d = 1; d <= decoCount; d++)
+				sb.AppendLine($"{{{{ItemNameToFilename|{{{{PAGENAME}}}}Decoration|{d}}}}} {{{{!}}}} Decoration #{d}");
+		}
+		else
+		{
+			for (int d = 1; d <= decoCount; d++)
+				sb.AppendLine($"{{{{ItemNameToFilename|{{{{PAGENAME}}}}Decoration|{d}}}}} {{{{!}}}} Decoration #{d}");
+		}
+		sb.Append("}}");
+		return sb.ToString();
+	}
+
+	/// <summary>
+	/// Gets the next available Gallery variant name (numeric) for creating a new template.
+	/// </summary>
+	public static async Task<string> GetNextGalleryVariantNameAsync(bool isPet)
+	{
+		var templates = await FetchGalleryTemplatesAsync();
+		int maxNum = 0;
+		foreach (var title in templates.Keys)
+		{
+			int idx = title.IndexOf("/Gallery", StringComparison.OrdinalIgnoreCase);
+			if (idx < 0) continue;
+			string suffix = title[(idx + "/Gallery".Length)..].TrimStart('/');
+			if (isPet && !suffix.StartsWith("Pet", StringComparison.OrdinalIgnoreCase)) continue;
+			if (!isPet && suffix.StartsWith("Pet", StringComparison.OrdinalIgnoreCase)) continue;
+
+			string numPart = isPet ? suffix.Replace("Pet", "").TrimStart('/') : suffix;
+			if (int.TryParse(numPart, out int num) && num > maxNum) maxNum = num;
+			if (string.IsNullOrEmpty(numPart) && !isPet) maxNum = Math.Max(maxNum, 1); // default = "1"
+		}
+		return isPet ? $"Pet/{maxNum + 1}" : (maxNum + 1).ToString();
+	}
+
+	public static async Task<(bool Matches, string? Variant)> CompareWithExistingTemplatesAsync(MysteryEvent mystery, MysteryItemMapping? mapping)
 	{
 		return CompareWithTemplates(mystery, await FetchRewardTemplatesAsync());
 	}
 
-	public static (bool XpMatches, bool ContentMatches, string? Variant) CompareWithTemplates(MysteryEvent mystery, Dictionary<string, string> templates)
+	public static (bool Matches, string? Variant) CompareWithTemplates(MysteryEvent mystery, Dictionary<string, string> templates)
 	{
-		bool flag = mystery.MysteryType == MysteryType.Pet;
-		List<(string, string)> list = new List<(string, string)>();
-		foreach (KeyValuePair<string, string> template in templates)
+		bool isPet = mystery.MysteryType == MysteryType.Pet;
+		string mysteryName = mystery.WikiStatus.SuggestedPageTitle ?? mystery.Name;
+
+		// Build variant→content list (filtered by pet/non-pet)
+		var candidates = new List<(string Variant, string Content)>();
+		foreach (var (title, content) in templates)
 		{
-			template.Deconstruct(out var key, out var value);
-			string text = key;
-			string item = value;
-			int num = text.IndexOf("/Rewards", StringComparison.OrdinalIgnoreCase);
-			string text2 = null;
-			if (num >= 0)
+			int idx = title.IndexOf("/Rewards", StringComparison.OrdinalIgnoreCase);
+			string variant = null;
+			if (idx >= 0)
 			{
-				value = text;
-				int num2 = num + "/Rewards".Length;
-				string text3 = value.Substring(num2, value.Length - num2).TrimStart('/');
-				if (!string.IsNullOrEmpty(text3))
-				{
-					text2 = text3;
-				}
+				string after = title[(idx + "/Rewards".Length)..].TrimStart('/');
+				if (!string.IsNullOrEmpty(after))
+					variant = after;
 			}
-			bool flag2 = text2?.StartsWith("Pet", StringComparison.OrdinalIgnoreCase) ?? false;
-			if (flag == flag2)
+			bool isPetTemplate = variant?.StartsWith("Pet", StringComparison.OrdinalIgnoreCase) ?? false;
+			if (isPet == isPetTemplate)
+				candidates.Add((variant ?? "", content));
+		}
+
+		// Pass 1: Find full match (XP + content identical)
+		foreach (var (variant, content) in candidates)
+		{
+			if (CompareRewardsWithTemplate(mystery, content))
+				return (Matches: true, Variant: variant);
+		}
+
+		// Pass 2: No match — check if a mystery-named template exists (for diff comparison)
+		var namedMatch = candidates.FirstOrDefault(c =>
+			string.Equals(c.Variant, mysteryName, StringComparison.OrdinalIgnoreCase));
+		if (namedMatch.Content != null)
+			return (Matches: false, Variant: namedMatch.Variant);
+
+		// Pass 3: No match at all — compute next available variant from existing templates
+		string nextVariant = ComputeNextVariant(isPet, templates);
+		return (Matches: false, Variant: nextVariant);
+	}
+
+	/// <summary>
+	/// Synchronously computes the next available reward variant name from a templates dictionary.
+	/// Pet: "Pet", "Pet/2", "Pet/3"... Standard: "", "2", "3"...
+	/// </summary>
+	private static string ComputeNextVariant(bool isPet, Dictionary<string, string> templates)
+	{
+		int maxNum = 0;
+		foreach (string title in templates.Keys)
+		{
+			int idx = title.IndexOf("/Rewards", StringComparison.OrdinalIgnoreCase);
+			if (idx < 0) continue;
+			string after = title[(idx + "/Rewards".Length)..].TrimStart('/');
+			if (isPet)
 			{
-				list.Add((text2 ?? "", item));
+				if (!after.StartsWith("Pet", StringComparison.OrdinalIgnoreCase)) continue;
+				string petAfter = after.Length <= 3 ? "" : after[3..].TrimStart('/');
+				if (string.IsNullOrEmpty(petAfter))
+					maxNum = Math.Max(maxNum, 1);
+				else if (int.TryParse(petAfter, out int n))
+					maxNum = Math.Max(maxNum, n);
+			}
+			else
+			{
+				if (after.StartsWith("Pet", StringComparison.OrdinalIgnoreCase)) continue;
+				if (string.IsNullOrEmpty(after))
+					maxNum = Math.Max(maxNum, 1);
+				else if (int.TryParse(after, out int n))
+					maxNum = Math.Max(maxNum, n);
 			}
 		}
-		string text4 = null;
-		foreach (var (text5, templateContent) in list)
-		{
-			var (flag3, flag4) = CompareRewardsWithTemplate(mystery, templateContent);
-			if (flag3)
-			{
-				if (flag4)
-				{
-					return (XpMatches: true, ContentMatches: true, Variant: text5);
-				}
-				if (text4 == null)
-				{
-					text4 = text5;
-				}
-			}
-		}
-		if (text4 != null)
-		{
-			return (XpMatches: true, ContentMatches: false, Variant: text4);
-		}
-		return (XpMatches: false, ContentMatches: false, Variant: null);
+		int next = maxNum + 1;
+		return isPet
+			? (next == 1 ? "Pet" : $"Pet/{next}")
+			: (next == 1 ? "" : $"{next}");
 	}
 
 	public static async Task<string> GetNextVariantNameAsync(bool isPet)
@@ -656,56 +798,40 @@ public static class MysteryWikiService
 		return (next == 1) ? "" : $"{next}";
 	}
 
-	private static (bool XpMatches, bool ContentMatches) CompareRewardsWithTemplate(MysteryEvent mystery, string templateContent)
+	private static bool CompareRewardsWithTemplate(MysteryEvent mystery, string templateContent)
 	{
 		templateContent = Regex.Replace(templateContent, "<!--.*?-->", "", RegexOptions.Singleline);
 		List<List<string>> list = ParseTemplateRows(templateContent);
 		List<MysteryRewardLevel> list2 = ((mystery.FreeTier.Count > 0) ? mystery.FreeTier : ((mystery.SilverTier.Count > 0) ? mystery.SilverTier : mystery.GoldTier));
 		if (list2.Count == 0 || list.Count == 0)
-		{
-			return (XpMatches: false, ContentMatches: false);
-		}
+			return false;
 		List<List<string>> list3 = list.Where((List<string> r) => r.Count >= 5 && !r[0].Contains("PremiumLevel") && r[0].Trim() != "0").ToList();
 		if (list3.Count != list2.Count - 1)
-		{
-			return (XpMatches: false, ContentMatches: false);
-		}
+			return false;
 		for (int num = 0; num < list3.Count; num++)
 		{
 			Match match = Regex.Match(list3[num][1], "\\{\\{Pass XP\\}\\}\\s*(\\d+)");
 			if (!match.Success)
-			{
-				return (XpMatches: false, ContentMatches: false);
-			}
+				return false;
 			if (int.Parse(match.Groups[1].Value) != list2[num + 1].XpRequired)
-			{
-				return (XpMatches: false, ContentMatches: false);
-			}
+				return false;
 		}
 		string content = GenerateRewardTemplate(mystery, null);
 		List<List<string>> source = ParseTemplateRows(content);
 		List<List<string>> list4 = source.Where((List<string> r) => r.Count >= 5 && !r[0].Contains("PremiumLevel") && r[0].Trim() != "0").ToList();
 		if (list4.Count != list3.Count)
-		{
-			return (XpMatches: true, ContentMatches: false);
-		}
+			return false;
 		for (int num2 = 0; num2 < list3.Count; num2++)
 		{
 			for (int num3 = 1; num3 <= 4; num3++)
 			{
 				if (num3 >= list3[num2].Count || num3 >= list4[num2].Count)
-				{
-					return (XpMatches: true, ContentMatches: false);
-				}
-				string text = NormalizeCell(list3[num2][num3]);
-				string text2 = NormalizeCell(list4[num2][num3]);
-				if (text != text2)
-				{
-					return (XpMatches: true, ContentMatches: false);
-				}
+					return false;
+				if (NormalizeCell(list3[num2][num3]) != NormalizeCell(list4[num2][num3]))
+					return false;
 			}
 		}
-		return (XpMatches: true, ContentMatches: true);
+		return true;
 	}
 
 	private static List<List<string>> ParseTemplateRows(string content)
@@ -1048,14 +1174,14 @@ public static class MysteryWikiService
 			stringBuilder.AppendLine("| title1 = {{#var:DisplayTitle}}");
 		}
 		stringBuilder.AppendLine("| type   = Drop Item");
-		stringBuilder.AppendLine("| source = Merging Items during {{Item/nolevel|{{#var:EventName}}}} Event");
+		stringBuilder.AppendLine("| source = Merging Items during {{Item/nolevel|{{#var:EventName}}|displayName={{#var:EventDisplayName}}}} Event");
 		stringBuilder.AppendLine("}}");
 		string value2 = (flag ? "{{Item/Group|{{PAGENAME}}|4|displayName={{#var:DisplayTitle}}}}" : "{{Item/Group|{{PAGENAME}}|4}}");
 		stringBuilder2 = stringBuilder;
 		StringBuilder stringBuilder6 = stringBuilder2;
 		handler = new StringBuilder.AppendInterpolatedStringHandler(116, 2, stringBuilder2);
 		handler.AppendFormatted(value2);
-		handler.AppendLiteral(" is an item in '''''Merge Mansion'''''.  It is used in the {{Item/nolevel|{{#var:EventName}}}} [[Events|Event]] of ");
+		handler.AppendLiteral(" is an item in '''''Merge Mansion'''''.  It is used in the {{Item/nolevel|{{#var:EventName}}|displayName={{#var:EventDisplayName}}}} [[Events|Event]] of ");
 		handler.AppendFormatted(value);
 		handler.AppendLiteral(".");
 		stringBuilder6.AppendLine(ref handler);
@@ -1339,6 +1465,20 @@ public static class MysteryWikiService
 					}
 				}
 			}
+			// Gallery template detection
+			try
+			{
+				var galleryTemplates = await FetchGalleryTemplatesAsync();
+				foreach (var m in mysteries)
+				{
+					int decoCount = CountDecorations(m);
+					bool isPetM = m.MysteryType == MysteryType.Pet;
+					var galleryVariant = FindMatchingGalleryVariant(decoCount, isPetM, galleryTemplates);
+					m.WikiStatus.MatchingGalleryVariant = galleryVariant;
+				}
+				AppLogger.Info($"GalleryCheck: matched {mysteries.Count(m => m.WikiStatus.MatchingGalleryVariant != null)} of {mysteries.Count}");
+			}
+			catch (Exception ex) { AppLogger.Info($"GalleryCheck error: {ex.Message}"); }
 			Dictionary<string, List<(MysteryEvent Mystery, string Type)>> titleToMystery = new Dictionary<string, List<(MysteryEvent, string)>>(StringComparer.OrdinalIgnoreCase);
 			foreach (MysteryEvent m2 in mysteries)
 			{
@@ -1400,9 +1540,9 @@ public static class MysteryWikiService
 					}
 					foreach (MysteryEvent m3 in needsTemplateCheck)
 					{
-						var (xpMatch, contentMatch, variant) = CompareWithTemplates(m3, templates);
-						m3.WikiStatus.RewardTemplateMatches = xpMatch;
-						m3.WikiStatus.RewardContentMatches = contentMatch;
+						var (matches, variant) = CompareWithTemplates(m3, templates);
+						m3.WikiStatus.RewardTemplateMatches = matches;
+						m3.WikiStatus.RewardContentMatches = matches;
 						m3.WikiStatus.MatchingVariant = variant;
 					}
 				}
@@ -1487,7 +1627,7 @@ public static class MysteryWikiService
 					string imgName = m6.WikiImageName;
 					string pageNameUsc = imgName.Replace(' ', '_');
 					bool isPetM = m6.MysteryType == MysteryType.Pet;
-					int decoCount = (isPetM ? 3 : 5);
+					int decoCount = CountDecorations(m6);
 					List<string> expectedImages = new List<string>
 					{
 						pageNameUsc + ".png",
@@ -1497,6 +1637,18 @@ public static class MysteryWikiService
 					for (int d = ((!isPetM) ? 1 : 0); d <= decoCount + (isPetM ? (-1) : 0); d++)
 					{
 						expectedImages.Add(FormatFileName(imgName + "Decoration", d));
+					}
+					// Event item images: one per chain level (find chain by display name)
+					if (!string.IsNullOrEmpty(m6.EventItemName) && ds != null)
+					{
+						var eiChain = ds.Chains.FirstOrDefault(c =>
+							string.Equals(c.DisplayName, m6.EventItemName, StringComparison.OrdinalIgnoreCase));
+						if (eiChain != null && eiChain.Items.Count > 0)
+						{
+							var uniqueLevels = eiChain.Items.Select(i => i.Level).Distinct().OrderBy(l => l);
+							foreach (var level in uniqueLevels)
+								expectedImages.Add(FormatFileName(m6.EventItemName, level));
+						}
 					}
 					m6.WikiStatus.ImagesTotalExpected = expectedImages.Count;
 					mysteryImageMap[m6.ProgressionEventId] = expectedImages;
@@ -2309,6 +2461,38 @@ public static class MysteryWikiService
 		}
 		case MysteryDiffScope.EventPage:
 			pageTitle = mystery.WikiStatus.SuggestedPageTitle ?? mystery.Name;
+			// Always (re-)detect gallery variant to ensure correctness
+			if (true)
+			{
+				try
+				{
+					var galleryTemplates = await FetchGalleryTemplatesAsync();
+					int decoCount = CountDecorations(mystery);
+					bool isPetM = mystery.MysteryType == MysteryType.Pet;
+					AppLogger.Info($"Gallery detect: {mystery.Name}, decoCount={decoCount}, isPet={isPetM}, templates={galleryTemplates.Count}");
+					foreach (var (gt, gc) in galleryTemplates)
+					{
+						int slots = CountGalleryDecorationSlots(gc);
+						int gIdx = gt.IndexOf("/Gallery", StringComparison.OrdinalIgnoreCase);
+						string sfx = gIdx >= 0 ? gt[(gIdx + "/Gallery".Length)..].TrimStart('/') : "";
+						bool isPetT = sfx.StartsWith("Pet", StringComparison.OrdinalIgnoreCase);
+						AppLogger.Info($"  Template '{gt}': slots={slots}, isPet={isPetT}, suffix='{sfx}'");
+					}
+					mystery.WikiStatus.MatchingGalleryVariant = FindMatchingGalleryVariant(decoCount, isPetM, galleryTemplates);
+					// If no match, assign next variant name (template will be created during publish)
+					if (mystery.WikiStatus.MatchingGalleryVariant == null && decoCount > 0)
+					{
+						string newVariant = await GetNextGalleryVariantNameAsync(isPetM);
+						mystery.WikiStatus.MatchingGalleryVariant = newVariant;
+						mystery.WikiStatus.PendingGalleryTemplateContent = GenerateGalleryTemplateContent(decoCount, isPetM);
+						AppLogger.Info($"Gallery: no match for {decoCount} decorations, will create Template:Mystery Pass/Gallery/{newVariant}");
+					}
+				}
+				catch (Exception ex)
+				{
+					AppLogger.Info($"Gallery auto-detect failed: {ex.Message}");
+				}
+			}
 			generated = GenerateEventPageWithDialogues(mystery, mystery.WikiStatus.MatchingVariant, dialogueService);
 			break;
 		case MysteryDiffScope.EventItemPage:
@@ -2399,9 +2583,21 @@ public static class MysteryWikiService
 		}
 	}
 
-	private static int CountDecorations(MysteryEvent mystery)
+	internal static int CountDecorations(MysteryEvent mystery)
 	{
 		int num = 0;
+		// Pet mysteries always have a Pet Icon (decoration #0)
+		if (mystery.MysteryType == MysteryType.Pet) num++;
+		foreach (MysteryRewardLevel item in mystery.FreeTier)
+		{
+			foreach (MysteryReward reward in item.Rewards)
+			{
+				if (reward.Type == MysteryRewardType.Decoration)
+				{
+					num++;
+				}
+			}
+		}
 		foreach (MysteryRewardLevel item in mystery.SilverTier)
 		{
 			foreach (MysteryReward reward in item.Rewards)
@@ -2423,6 +2619,24 @@ public static class MysteryWikiService
 			}
 		}
 		return num;
+	}
+
+	/// <summary>
+	/// Returns decoration slot IDs ordered by reward tier position (Silver then Gold).
+	/// E.g., ["SP_Pickleball2025_Decoration_Slot33", "SP_Pickleball2025_Decoration_Slot34", ...]
+	/// </summary>
+	internal static List<string> GetOrderedDecorationSlotIds(MysteryEvent mystery)
+	{
+		var result = new List<string>();
+		foreach (var level in mystery.SilverTier)
+			foreach (var reward in level.Rewards)
+				if (reward.Type == MysteryRewardType.Decoration && !string.IsNullOrEmpty(reward.DecorationId))
+					result.Add(reward.DecorationId);
+		foreach (var level in mystery.GoldTier)
+			foreach (var reward in level.Rewards)
+				if (reward.Type == MysteryRewardType.Decoration && !string.IsNullOrEmpty(reward.DecorationId))
+					result.Add(reward.DecorationId);
+		return result;
 	}
 
 	public static string FormatPetDisplayName(string? configKey)
@@ -2483,6 +2697,12 @@ public static class MysteryWikiService
 		stringBuilder.AppendLine("== Rewards == ");
 		if (!string.IsNullOrEmpty(rewardVariant))
 		{
+			// Use {{PAGENAME}} when reward variant matches the event page title
+			string rewardVariantDisplay = rewardVariant;
+			string pageTitle = mystery.WikiStatus.SuggestedPageTitle ?? mystery.Name;
+			if (rewardVariant == pageTitle)
+				rewardVariantDisplay = "{{PAGENAME}}";
+
 			if (flag && !string.IsNullOrEmpty(mystery.PetName))
 			{
 				string value3 = FormatPetDisplayName(mystery.PetName);
@@ -2490,7 +2710,7 @@ public static class MysteryWikiService
 				StringBuilder stringBuilder6 = stringBuilder2;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(30, 2, stringBuilder2);
 				handler.AppendLiteral("{{Mystery Pass/Rewards/");
-				handler.AppendFormatted(rewardVariant);
+				handler.AppendFormatted(rewardVariantDisplay);
 				handler.AppendLiteral("|pet=");
 				handler.AppendFormatted(value3);
 				handler.AppendLiteral("}}");
@@ -2502,25 +2722,27 @@ public static class MysteryWikiService
 				StringBuilder stringBuilder7 = stringBuilder2;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(25, 1, stringBuilder2);
 				handler.AppendLiteral("{{Mystery Pass/Rewards/");
-				handler.AppendFormatted(rewardVariant);
+				handler.AppendFormatted(rewardVariantDisplay);
 				handler.AppendLiteral("}}");
 				stringBuilder7.AppendLine(ref handler);
 			}
 		}
 		else if (flag && !string.IsNullOrEmpty(mystery.PetName))
 		{
+			// Fallback for pet: {{PAGENAME}} variant (caller should provide rewardVariant from GetNextVariantNameAsync)
 			string value4 = FormatPetDisplayName(mystery.PetName);
 			stringBuilder2 = stringBuilder;
 			StringBuilder stringBuilder8 = stringBuilder2;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(33, 1, stringBuilder2);
-			handler.AppendLiteral("{{Mystery Pass/Rewards/Pet|pet=");
+			handler = new StringBuilder.AppendInterpolatedStringHandler(40, 1, stringBuilder2);
+			handler.AppendLiteral("{{Mystery Pass/Rewards/{{PAGENAME}}|pet=");
 			handler.AppendFormatted(value4);
 			handler.AppendLiteral("}}");
 			stringBuilder8.AppendLine(ref handler);
 		}
 		else
 		{
-			stringBuilder.AppendLine("{{Mystery Pass/Rewards}}");
+			// Fallback for standard: {{PAGENAME}} variant (caller should provide rewardVariant from GetNextVariantNameAsync)
+			stringBuilder.AppendLine("{{Mystery Pass/Rewards/{{PAGENAME}}}}");
 		}
 		stringBuilder.AppendLine();
 		stringBuilder.AppendLine("== Dialogue == ");
@@ -2529,7 +2751,8 @@ public static class MysteryWikiService
 		{
 			string petName = ((!string.IsNullOrEmpty(mystery.PetName)) ? FormatPetDisplayName(mystery.PetName) : null);
 			int decoCount = CountDecorations(mystery);
-			list = dialogueService.GetMysteryDialogues(mystery.ProgressionEventId, mystery.MysteryType, petName, decoCount);
+			var orderedSlots = GetOrderedDecorationSlotIds(mystery);
+			list = dialogueService.GetMysteryDialogues(mystery.ProgressionEventId, mystery.MysteryType, petName, decoCount, orderedSlots);
 		}
 		if (list != null && list.Count > 0)
 		{
@@ -2578,7 +2801,13 @@ public static class MysteryWikiService
 		}
 		stringBuilder.AppendLine();
 		stringBuilder.AppendLine("== Gallery == ");
-		stringBuilder.AppendLine(flag ? "{{Mystery Pass/Gallery/Pet}}" : "{{Mystery Pass/Gallery}}");
+		var gv = mystery.WikiStatus.MatchingGalleryVariant;
+		string galleryTemplate;
+		if (gv != null)
+			galleryTemplate = gv == "" ? "{{Mystery Pass/Gallery}}" : $"{{{{Mystery Pass/Gallery/{gv}}}}}";
+		else
+			galleryTemplate = flag ? "{{Mystery Pass/Gallery/Pet}}" : "{{Mystery Pass/Gallery}}"; // fallback
+		stringBuilder.AppendLine(galleryTemplate);
 		return stringBuilder.ToString();
 	}
 
@@ -2761,7 +2990,83 @@ public static class MysteryWikiService
 		{
 			throw new Exception("Could not find p.mysteries in Module:Datatable/Various.");
 		}
+		// Compact indices to prevent ipairs gaps
+		updatedContent = CompactMysteryIndices(updatedContent) ?? updatedContent;
 		return await PublishPageAsync(username, password, moduleTitle, updatedContent, $"Add {mystery.Name} [#{newIndex}] to p.mysteries (via MergeMansionWikiTools)");
+	}
+
+	/// <summary>
+	/// Re-indexes p.mysteries entries to close any gaps (e.g. [26], [28] → [26], [27]).
+	/// Required because Lua ipairs() stops at the first gap, breaking navigation arrows.
+	/// </summary>
+	internal static string? CompactMysteryIndices(string wikiContent)
+	{
+		var regex = new Regex(@"p\.mysteries\s*=\s*\{");
+		var match = regex.Match(wikiContent);
+		if (!match.Success) return null;
+
+		// Find the end of p.mysteries section (next p.xxx = assignment)
+		var nextSection = Regex.Match(wikiContent[(match.Index + 12)..], @"\np\.\w+\s*=");
+		int sectionEnd = nextSection.Success ? match.Index + 12 + nextSection.Index : wikiContent.Length;
+
+		// Find all [N] = { entries ONLY within p.mysteries section
+		var entryPattern = new Regex(@"\[(\d+)\](\s*=\s*\{)");
+		var entries = new List<(Match Match, int OldIndex)>();
+		foreach (Match m in entryPattern.Matches(wikiContent))
+		{
+			if (m.Index > match.Index && m.Index < sectionEnd)
+				entries.Add((m, int.Parse(m.Groups[1].Value)));
+		}
+
+		if (entries.Count == 0) return null;
+
+		// Check if indices are already compact (1, 2, 3, ...)
+		entries.Sort((a, b) => a.OldIndex.CompareTo(b.OldIndex));
+		bool hasGaps = false;
+		for (int i = 0; i < entries.Count; i++)
+		{
+			if (entries[i].OldIndex != i + 1)
+			{
+				hasGaps = true;
+				break;
+			}
+		}
+		if (!hasGaps) return wikiContent; // already compact
+
+		// Renumber in reverse order (highest index first to avoid offset shifts)
+		var sb = new StringBuilder(wikiContent);
+		for (int i = entries.Count - 1; i >= 0; i--)
+		{
+			int newIdx = i + 1;
+			var entry = entries[i];
+			if (entry.OldIndex != newIdx)
+			{
+				string oldText = $"[{entry.OldIndex}]";
+				string newText = $"[{newIdx}]";
+				sb.Remove(entry.Match.Index, oldText.Length);
+				sb.Insert(entry.Match.Index, newText);
+			}
+		}
+
+		return sb.ToString();
+	}
+
+	/// <summary>
+	/// Fetches Module:Datatable/Various, compacts mystery indices, and publishes if changed.
+	/// </summary>
+	public static async Task<string> ReindexMysteryTableAsync(string username, string password)
+	{
+		string moduleTitle = "Module:Datatable/Various";
+		string wikiContent = await FetchPageContentAsync(moduleTitle);
+		if (string.IsNullOrEmpty(wikiContent))
+			throw new Exception("Could not fetch Module:Datatable/Various content.");
+
+		string? compacted = CompactMysteryIndices(wikiContent);
+		if (compacted == null || compacted == wikiContent)
+			return "No gaps found — indices are already compact.";
+
+		return await PublishPageAsync(username, password, moduleTitle, compacted,
+			"Reindex p.mysteries — close index gaps for ipairs (via MergeMansionWikiTools)");
 	}
 
 	internal static (int newIndex, string? updatedContent) InsertMysteryIntoModule(string wikiContent, MysteryEvent mystery)
@@ -3062,7 +3367,7 @@ public static class MysteryWikiService
 			}
 		}
 		string text = stringBuilder.ToString();
-		text = text.Replace("'", "").Replace("R", "").Replace("t", "")
+		text = text.Replace("'", "")
 			.Replace(":", "")
 			.Replace("!", "")
 			.Replace("?", "")

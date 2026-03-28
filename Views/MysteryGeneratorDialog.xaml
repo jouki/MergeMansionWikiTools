@@ -20,6 +20,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -89,8 +90,17 @@
                 </ListBox>
             </Grid>
 
+            <!-- Compare dropdown (Rewards only) -->
+            <StackPanel x:Name="pnlCompareDropdown" Grid.Row="2" Orientation="Horizontal"
+                        Visibility="Collapsed" Margin="0,0,0,8">
+                <TextBlock Text="Compare with:" FontSize="12" VerticalAlignment="Center"
+                           Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,8,0" />
+                <ComboBox x:Name="cmbCompareTemplate" MinWidth="300" FontSize="12"
+                          SelectionChanged="CmbCompareTemplate_SelectionChanged" />
+            </StackPanel>
+
             <!-- Content area -->
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="3">
                 <!-- Generated text output (Rewards, or Event/Item Page when no diff) -->
                 <Border x:Name="pnlOutput"
                         Background="{DynamicResource CardBackgroundFillColorSecondaryBrush}"
@@ -131,7 +141,12 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Name="txtDiffLeftHeader" Grid.Column="0" FontSize="12" Margin="4,0,0,0">
                             <Run Text="Wiki (current)" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
-                            <Run x:Name="runDiffLeftSuffix" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                            <Run x:Name="runDiffLeftSuffix" Foreground="{DynamicResource TextFillColorTertiaryBrush}" /><Hyperlink x:Name="linkDiffLeftPage"
+                                         Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                         TextDecorations="None"
+                                         MouseEnter="LinkDiffLeftPage_MouseEnter"
+                                         MouseLeave="LinkDiffLeftPage_MouseLeave"
+                                         RequestNavigate="LinkDiffLeftPage_RequestNavigate"><Run x:Name="runDiffLeftLink" /></Hyperlink>
                         </TextBlock>
                         <TextBlock x:Name="txtDiffRightHeader" Grid.Column="2" FontSize="12" Margin="4,0,0,0">
                             <Run Text="Generated (new)" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
@@ -191,7 +206,7 @@
             </Grid>
 
             <!-- Bottom buttons + status -->
-            <Grid Grid.Row="3" Margin="0,12,0,0" MinHeight="50">
+            <Grid Grid.Row="4" Margin="0,12,0,0" MinHeight="50">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />

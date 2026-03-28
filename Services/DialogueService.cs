@@ -73,7 +73,7 @@ public class DialogueService
     /// Standard mystery: Intro, LastCollectibleItemDiscovered, Decoration_Slot1-5, AllRewardsCompleted.
     /// Pet mystery: Intro, TA1 (pet), TA2-TA3 (decorations), LastCollectibleItemDiscovered, AllRewardsCompleted.
     /// </summary>
-    public List<DialogueGroup> GetMysteryDialogues(string progressionEventId, MysteryType mysteryType, string? petName, int decoCount = 0)
+    public List<DialogueGroup> GetMysteryDialogues(string progressionEventId, MysteryType mysteryType, string? petName, int decoCount = 0, List<string>? orderedDecoSlotIds = null)
     {
         if (_dialoguesByGroup == null)
             return new List<DialogueGroup>();
@@ -87,7 +87,7 @@ public class DialogueService
         if (mysteryType == MysteryType.Pet)
             BuildPetGroups(prefix, petName ?? "Pet", groups);
         else
-            BuildStandardGroups(prefix, groups, decoCount);
+            BuildStandardGroups(prefix, groups, decoCount, orderedDecoSlotIds);
 
         return groups;
     }
@@ -148,16 +148,34 @@ public class DialogueService
 
     // ── Standard mystery tab mapping ────────────────────────────
 
-    private void BuildStandardGroups(string prefix, List<DialogueGroup> groups, int decoCount)
+    private void BuildStandardGroups(string prefix, List<DialogueGroup> groups, int decoCount, List<string>? orderedDecoSlotIds = null)
     {
         TryAddGroupFuzzy(groups, prefix, "Intro", "Event Intro");
         TryAddGroupFuzzy(groups, prefix, "LastCollectibleItemDiscovered", "Getting Event Item L4");
 
-        // Decoration levels: fill from dialogue keys, pad remaining as empty placeholders
-        var decoSlots = FindDecorationSlots(prefix);
-        for (int i = 0; i < decoSlots.Count; i++)
-            TryAddGroupFuzzy(groups, prefix, decoSlots[i], $"Decoration Level {i + 1}");
-        for (int i = decoSlots.Count; i < decoCount; i++)
+        // Decoration levels: use reward-tier ordering when available, fallback to alphabetical
+        var dialogueSlots = FindDecorationSlots(prefix);
+        if (orderedDecoSlotIds != null && orderedDecoSlotIds.Count > 0)
+        {
+            // Map dialogue slots to their reward-tier position
+            // orderedDecoSlotIds contains full IDs like "SP_Pickleball2025_Decoration_Slot33"
+            // dialogueSlots contains suffixes like "Decoration_Slot33"
+            var orderedSuffixes = new List<string>();
+            foreach (var fullId in orderedDecoSlotIds)
+            {
+                // Extract suffix: strip progressionEventId prefix → "Decoration_SlotNN"
+                var suffix = dialogueSlots.FirstOrDefault(s =>
+                    fullId.EndsWith(s, StringComparison.OrdinalIgnoreCase));
+                if (suffix != null)
+                    orderedSuffixes.Add(suffix);
+            }
+            // Only include slots present in rewards — extra dialogue slots (not in rewards) are excluded
+            dialogueSlots = orderedSuffixes;
+        }
+
+        for (int i = 0; i < dialogueSlots.Count; i++)
+            TryAddGroupFuzzy(groups, prefix, dialogueSlots[i], $"Decoration Level {i + 1}");
+        for (int i = dialogueSlots.Count; i < decoCount; i++)
             AddEmptyGroup(groups, $"Decoration Level {i + 1}");
 
         TryAddGroupFuzzy(groups, prefix, "AllRewardsCompleted", "Event Outro");

@@ -350,9 +350,11 @@ public partial class MysteriesPage : UserControl
 		ToolTipService.SetInitialShowDelay(border6, 0);
 		border6.ToolTip = "Click to open Images";
 		stackPanel3.Children.Add(border6);
+		mystery.WikiStatus.UpdateMainPageEligibility(mystery.StartDate);
 		WikiCheckState wikiListedState = mystery.WikiStatus.WikiListedState;
 		int wikiListedCount = mystery.WikiStatus.WikiListedCount;
-		string label3 = ((wikiListedState == WikiCheckState.Unknown) ? "Wiki" : $"Wiki ({wikiListedCount}/3)");
+		int wikiListedTotal = mystery.WikiStatus.WikiListedTotal;
+		string label3 = ((wikiListedState == WikiCheckState.Unknown) ? "Wiki" : $"Wiki ({wikiListedCount}/{wikiListedTotal})");
 		Border border7 = CreateStatusIndicator(label3, wikiListedState);
 		ToolTipService.SetInitialShowDelay(border7, 0);
 		List<string> list = new List<string>();
@@ -477,6 +479,7 @@ public partial class MysteriesPage : UserControl
 			}
 			await MysteryWikiService.CheckAllMysteryStatusAsync(_mysteryService.Mysteries, _main.DataService, _dialogueService);
 			BuildMysteryList();
+
 			ShowInfo("Wiki status checked.", InfoBarSeverity.Success);
 		}
 		catch (Exception ex)
@@ -540,9 +543,9 @@ public partial class MysteriesPage : UserControl
 						WikiCheckState rewardTemplateState = m.WikiStatus.RewardTemplateState;
 						if ((uint)(rewardTemplateState - 3) > 1u)
 						{
-							var (xpMatch, contentMatch, variant) = MysteryWikiService.CompareWithTemplates(m, templates);
-							m.WikiStatus.RewardTemplateMatches = xpMatch;
-							m.WikiStatus.RewardContentMatches = contentMatch;
+							var (matches, variant) = MysteryWikiService.CompareWithTemplates(m, templates);
+							m.WikiStatus.RewardTemplateMatches = matches;
+							m.WikiStatus.RewardContentMatches = matches;
 							m.WikiStatus.MatchingVariant = variant;
 							MysteryWikiService.UpdateSingleMysteryCache(m);
 						}

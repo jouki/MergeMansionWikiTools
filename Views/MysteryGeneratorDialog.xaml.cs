@@ -50,6 +50,18 @@ public partial class MysteryGeneratorDialog : FluentWindow
 
 	private string? _hypotheticalRewardVariant;
 
+	// Reward template comparison dropdown
+	private Dictionary<string, string>? _rewardTemplatesCache;
+	private bool _suppressCompareSelection;
+
+	/// <summary>True when MatchingVariant is a mystery-named template (e.g. "Secrets of Serenity"),
+	/// not a numeric index ("6") or Pet-prefixed. Named templates get updated instead of creating new.</summary>
+	private bool IsNamedRewardVariant =>
+		_mystery.WikiStatus.MatchingVariant != null
+		&& !int.TryParse(_mystery.WikiStatus.MatchingVariant, out _)
+		&& _mystery.WikiStatus.MatchingVariant != ""
+		&& !_mystery.WikiStatus.MatchingVariant.StartsWith("Pet", StringComparison.OrdinalIgnoreCase);
+
 	private static readonly Brush BrushAddedBg = new SolidColorBrush(Color.FromArgb(37, 48, 192, 48));
 
 	private static readonly Brush BrushRemovedBg = new SolidColorBrush(Color.FromArgb(37, 208, 64, 64));
@@ -168,6 +180,11 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		imagesControl.Visibility = Visibility.Collapsed;
 		_isDiffMode = false;
 		btnPublish.Content = "Publish to Wiki";
+		// Show compare dropdown only in Rewards mode
+		pnlCompareDropdown.Visibility = _currentMode == MysteryGeneratorMode.Rewards
+			? Visibility.Visible : Visibility.Collapsed;
+		if (_currentMode == MysteryGeneratorMode.Rewards)
+			PopulateCompareDropdownAsync();
 		if (_currentMode == MysteryGeneratorMode.Images)
 		{
 			imagesControl.Visibility = Visibility.Visible;
@@ -204,7 +221,7 @@ public partial class MysteryGeneratorDialog : FluentWindow
 			{
 				MysteryGeneratorMode.EventPage => _mystery.WikiStatus.EventPageExists == true, 
 				MysteryGeneratorMode.EventItemPage => _mystery.WikiStatus.EventItemPageExists == true, 
-				MysteryGeneratorMode.Rewards => _mystery.WikiStatus.RewardTemplateMatches == true, 
+				MysteryGeneratorMode.Rewards => _mystery.WikiStatus.RewardTemplateMatches == true || _mystery.WikiStatus.MatchingVariant != null,
 				_ => false, 
 			};
 			if (1 == 0)
@@ -218,7 +235,7 @@ public partial class MysteryGeneratorDialog : FluentWindow
 			ShowPlainOutput();
 			if (_currentMode == MysteryGeneratorMode.Rewards && _mystery.WikiStatus.RewardTemplateMatches != true)
 			{
-				btnPublish.Content = "Create New Reward Template";
+				btnPublish.Content = IsNamedRewardVariant ? "Update Reward Template" : "Create New Reward Template";
 			}
 			UpdateConfirmButton();
 		}
@@ -244,10 +261,18 @@ public partial class MysteryGeneratorDialog : FluentWindow
 
 	private async Task LoadDiffAsync()
 	{
+		pnlOutput.Visibility = Visibility.Collapsed;
 		pnlDiff.Visibility = Visibility.Visible;
 		pnlDiffLoading.Visibility = Visibility.Visible;
 		pnlLeft.Children.Clear();
 		pnlRight.Children.Clear();
+		pnlCenter.Children.Clear();
+		// Force WPF to flush stale visuals (prevents ghost rendering after publish)
+		scrollLeft.ScrollToVerticalOffset(0);
+		scrollRight.ScrollToVerticalOffset(0);
+		scrollCenter.ScrollToVerticalOffset(0);
+		pnlLeft.UpdateLayout();
+		pnlRight.UpdateLayout();
 		try
 		{
 			MysteryGeneratorMode currentMode = _currentMode;
@@ -273,12 +298,12 @@ public partial class MysteryGeneratorDialog : FluentWindow
 			if (wikiContent == null)
 			{
 				pnlDiff.Visibility = Visibility.Collapsed;
-				runDiffLeftSuffix.Text = "";
+				SetDiffLeftLink(null);
 				runDiffRightSuffix.Text = "";
 				ShowPlainOutput();
 				return;
 			}
-			runDiffLeftSuffix.Text = (string.IsNullOrEmpty(diffPageTitle) ? "" : (" - " + diffPageTitle));
+			SetDiffLeftLink(diffPageTitle);
 			if (_currentMode == MysteryGeneratorMode.Rewards && _mystery.WikiStatus.RewardContentMatches != true && !string.IsNullOrEmpty(_hypotheticalRewardVariant))
 			{
 				string suffix = (string.IsNullOrEmpty(_hypotheticalRewardVariant) ? "" : ("/" + _hypotheticalRewardVariant));
@@ -294,6 +319,19 @@ public partial class MysteryGeneratorDialog : FluentWindow
 				_originalOutput = _fullOutput;
 			}
 			bool allMatch = diffs.All((DiffLine d) => d.Type == DiffLineType.Match);
+			// Update content match status so UpdateConfirmButton sees Mismatch (not Unknown)
+			switch (_currentMode)
+			{
+				case MysteryGeneratorMode.EventPage:
+					_mystery.WikiStatus.EventPageContentMatches = allMatch;
+					break;
+				case MysteryGeneratorMode.EventItemPage:
+					_mystery.WikiStatus.EventItemPageContentMatches = allMatch;
+					break;
+				case MysteryGeneratorMode.Rewards:
+					_mystery.WikiStatus.RewardContentMatches = allMatch;
+					break;
+			}
 			_isDiffMode = true;
 			BuildDiffView(diffs);
 			btnCopy.IsEnabled = true;
@@ -328,7 +366,7 @@ public partial class MysteryGeneratorDialog : FluentWindow
 				warningBar.IsOpen = true;
 				if (_currentMode == MysteryGeneratorMode.Rewards)
 				{
-					btnPublish.Content = "Create New Reward Template";
+					btnPublish.Content = IsNamedRewardVariant ? "Update Reward Template" : "Create New Reward Template";
 				}
 				else
 				{
@@ -663,45 +701,69 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		}
 		foreach (List<(int, int)> item3 in list2)
 		{
-			int item = item3[item3.Count / 2].Item1;
-			if (item >= 0 && item < pnlRight.Children.Count)
+			int midRow = item3[item3.Count / 2].Item1;
+			if (midRow < 0 || midRow >= pnlRight.Children.Count) continue;
+
+			HashSet<int> indices = new HashSet<int>(item3.Select<(int, int), int>(((int row, int di) g) => g.di));
+
+			// Save all right-side elements in the group
+			foreach (var (row, _) in item3)
 			{
-				HashSet<int> indices = new HashSet<int>(item3.Select<(int, int), int>(((int row, int di) g) => g.di));
-				Border border2 = new Border
+				if (row >= 0 && row < pnlRight.Children.Count && !_savedRightElements.ContainsKey(row))
+					_savedRightElements[row] = pnlRight.Children[row];
+			}
+
+			// Replace middle row with merge button
+			Border border2 = new Border
+			{
+				Padding = new Thickness(8.0, 1.0, 8.0, 1.0),
+				Margin = new Thickness(0.0, 0.0, 0.0, 1.0),
+				CornerRadius = new CornerRadius(2.0),
+				Cursor = Cursors.Hand,
+				Tag = "merge-arrow",
+				Background = BrushArrowBg
+			};
+			Grid grid = new Grid();
+			grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+			grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1.0, GridUnitType.Star) });
+			System.Windows.Controls.TextBlock element2 = new System.Windows.Controls.TextBlock
+			{
+				Text = $">  Merge {item3.Count} line{((item3.Count > 1) ? "s" : "")}",
+				FontFamily = new FontFamily("Consolas"),
+				FontSize = 12.0,
+				Foreground = BrushArrowFg
+			};
+			grid.Children.Add(element2);
+			border2.Child = grid;
+			border2.PreviewMouseLeftButtonDown += delegate(object s, MouseButtonEventArgs e)
+			{
+				ApplyMerge(indices);
+				e.Handled = true;
+			};
+			pnlRight.Children.RemoveAt(midRow);
+			pnlRight.Children.Insert(midRow, border2);
+
+			// Replace other rows in the group with empty placeholders
+			foreach (var (row, _) in item3)
+			{
+				if (row != midRow && row >= 0 && row < pnlRight.Children.Count)
 				{
-					Padding = new Thickness(8.0, 1.0, 8.0, 1.0),
-					Margin = new Thickness(0.0, 0.0, 0.0, 1.0),
-					CornerRadius = new CornerRadius(2.0),
-					Cursor = Cursors.Hand,
-					Tag = "merge-arrow",
-					Background = BrushArrowBg
-				};
-				Grid grid = new Grid();
-				grid.ColumnDefinitions.Add(new ColumnDefinition
-				{
-					Width = GridLength.Auto
-				});
-				grid.ColumnDefinitions.Add(new ColumnDefinition
-				{
-					Width = new GridLength(1.0, GridUnitType.Star)
-				});
-				System.Windows.Controls.TextBlock element2 = new System.Windows.Controls.TextBlock
-				{
-					Text = $">  Merge {item3.Count} line{((item3.Count > 1) ? "s" : "")}",
-					FontFamily = new FontFamily("Consolas"),
-					FontSize = 12.0,
-					Foreground = BrushArrowFg
-				};
-				grid.Children.Add(element2);
-				border2.Child = grid;
-				border2.PreviewMouseLeftButtonDown += delegate(object s, MouseButtonEventArgs e)
-				{
-					ApplyMerge(indices);
-					e.Handled = true;
-				};
-				_savedRightElements[item] = pnlRight.Children[item];
-				pnlRight.Children.RemoveAt(item);
-				pnlRight.Children.Insert(item, border2);
+					var placeholder = new Border
+					{
+						Padding = new Thickness(4.0, 1.0, 4.0, 1.0),
+						Margin = new Thickness(0.0, 0.0, 0.0, 1.0),
+						CornerRadius = new CornerRadius(2.0),
+						Background = BrushArrowBg,
+						Child = new System.Windows.Controls.TextBlock
+						{
+							Text = " ",
+							FontFamily = new FontFamily("Consolas"),
+							FontSize = 12.0
+						}
+					};
+					pnlRight.Children.RemoveAt(row);
+					pnlRight.Children.Insert(row, placeholder);
+				}
 			}
 		}
 	}
@@ -939,28 +1001,27 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		List<DiffLine> list = MysteryWikiService.ComputeLineDiffs(_originalOutput, _fullOutput);
 		Dictionary<int, string> dictionary = new Dictionary<int, string>();
 		int num = 0;
-		string value = null;
+		var removedQueue = new Queue<string>();
 		foreach (DiffLine item in list)
 		{
 			if (item.Type == DiffLineType.Match)
 			{
-				value = null;
+				removedQueue.Clear();
 				num++;
 			}
 			else if (item.Type == DiffLineType.Removed)
 			{
-				value = item.Text;
+				removedQueue.Enqueue(item.Text);
 			}
 			else if (item.Type == DiffLineType.Modified)
 			{
 				dictionary[num] = item.OldText;
-				value = null;
+				removedQueue.Clear();
 				num++;
 			}
 			else if (item.Type == DiffLineType.Added)
 			{
-				dictionary[num] = value;
-				value = null;
+				dictionary[num] = removedQueue.Count > 0 ? removedQueue.Dequeue() : null;
 				num++;
 			}
 		}
@@ -1061,6 +1122,41 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		border.Background = ((type == DiffLineType.Added) ? BrushAddedBg : BrushRemovedBg);
 		border.Child = child;
 		return border;
+	}
+
+	private void SetDiffLeftLink(string? pageTitle)
+	{
+		if (!string.IsNullOrEmpty(pageTitle))
+		{
+			runDiffLeftSuffix.Text = " - ";
+			runDiffLeftLink.Text = pageTitle;
+			linkDiffLeftPage.NavigateUri = new Uri("https://merge-mansion.fandom.com/wiki/" + Uri.EscapeDataString(pageTitle));
+			linkDiffLeftPage.Cursor = Cursors.Hand;
+		}
+		else
+		{
+			runDiffLeftSuffix.Text = "";
+			runDiffLeftLink.Text = "";
+			linkDiffLeftPage.NavigateUri = null;
+			linkDiffLeftPage.Cursor = Cursors.Arrow;
+		}
+	}
+
+	private void LinkDiffLeftPage_MouseEnter(object sender, MouseEventArgs e)
+	{
+		if (linkDiffLeftPage.NavigateUri != null)
+			linkDiffLeftPage.TextDecorations = System.Windows.TextDecorations.Underline;
+	}
+
+	private void LinkDiffLeftPage_MouseLeave(object sender, MouseEventArgs e)
+	{
+		linkDiffLeftPage.TextDecorations = null;
+	}
+
+	private void LinkDiffLeftPage_RequestNavigate(object sender, RequestNavigateEventArgs e)
+	{
+		Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
+		e.Handled = true;
 	}
 
 	private void ScrollLeft_ScrollChanged(object sender, ScrollChangedEventArgs e)
@@ -1438,9 +1534,20 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		bool flag2 = flag;
 		if (flag2)
 		{
-			WikiCheckState rewardTemplateState = _mystery.WikiStatus.RewardTemplateState;
-			bool flag3 = (uint)(rewardTemplateState - 3) <= 1u;
-			flag2 = !flag3;
+			// Skip reward template check if wiki already has a reward template call
+			// (the template already exists on the wiki — no need to block publishing)
+			bool wikiAlreadyHasRewards = _lastWikiContent != null
+				&& _lastWikiContent.Contains("{{Mystery Pass/Rewards", StringComparison.OrdinalIgnoreCase);
+			if (wikiAlreadyHasRewards)
+			{
+				flag2 = false;
+			}
+			else
+			{
+				WikiCheckState rewardTemplateState = _mystery.WikiStatus.RewardTemplateState;
+				bool flag3 = (uint)(rewardTemplateState - 3) <= 1u;
+				flag2 = !flag3;
+			}
 		}
 		if (flag2)
 		{
@@ -1479,7 +1586,7 @@ public partial class MysteryGeneratorDialog : FluentWindow
 			}
 			string text = currentMode switch
 			{
-				MysteryGeneratorMode.Rewards => "Create reward template (via MergeMansionWikiTools)", 
+				MysteryGeneratorMode.Rewards => IsNamedRewardVariant ? "Update reward template (via MergeMansionWikiTools)" : "Create reward template (via MergeMansionWikiTools)",
 				MysteryGeneratorMode.EventPage => "Create/update mystery page (via MergeMansionWikiTools)", 
 				MysteryGeneratorMode.EventItemPage => "Create/update event item page (via MergeMansionWikiTools)", 
 				_ => "Edit via MergeMansionWikiTools", 
@@ -1499,6 +1606,25 @@ public partial class MysteryGeneratorDialog : FluentWindow
 			case MysteryGeneratorMode.EventPage:
 				_mystery.WikiStatus.EventPageContentMatches = true;
 				_mystery.WikiStatus.EventPageExists = true;
+				// Auto-create pending gallery template if needed
+				if (!string.IsNullOrEmpty(_mystery.WikiStatus.PendingGalleryTemplateContent) &&
+				    !string.IsNullOrEmpty(_mystery.WikiStatus.MatchingGalleryVariant))
+				{
+					try
+					{
+						string galleryPageTitle = "Template:Mystery Pass/Gallery/" + _mystery.WikiStatus.MatchingGalleryVariant;
+						await MysteryWikiService.PublishPageAsync(
+							_main.Settings.WikiUsername!, _main.Settings.WikiPassword!,
+							galleryPageTitle, _mystery.WikiStatus.PendingGalleryTemplateContent,
+							$"Auto-create gallery template ({MysteryWikiService.CountDecorations(_mystery)} decorations, via MergeMansionWikiTools)");
+						_mystery.WikiStatus.PendingGalleryTemplateContent = null;
+						AppLogger.Info($"Created gallery template: {galleryPageTitle}");
+					}
+					catch (Exception ex)
+					{
+						AppLogger.Info($"Failed to create gallery template: {ex.Message}");
+					}
+				}
 				break;
 			case MysteryGeneratorMode.Rewards:
 			{
@@ -1553,6 +1679,8 @@ public partial class MysteryGeneratorDialog : FluentWindow
 				warningBar.Severity = InfoBarSeverity.Success;
 				warningBar.IsOpen = true;
 			}
+			// Re-compare with fresh wiki data after publish
+			await LoadDiffAsync();
 		}
 		catch (Exception ex)
 		{
@@ -1580,6 +1708,10 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		{
 		case MysteryGeneratorMode.Rewards:
 		{
+			// Named template (e.g. "Rewards/Secrets of Serenity") → update existing
+			if (IsNamedRewardVariant)
+				return "Template:Mystery Pass/Rewards/" + _mystery.WikiStatus.MatchingVariant;
+			// Otherwise create new with next available index
 			bool isPet = _mystery.MysteryType == MysteryType.Pet;
 			string variant = await MysteryWikiService.GetNextVariantNameAsync(isPet);
 			string suffix = (string.IsNullOrEmpty(variant) ? "" : ("/" + variant));
@@ -1591,6 +1723,153 @@ public partial class MysteryGeneratorDialog : FluentWindow
 			return _mystery.EventItemName;
 		default:
 			return null;
+		}
+	}
+
+	// ── Reward template comparison dropdown ──────────────────────
+
+	private async void PopulateCompareDropdownAsync()
+	{
+		if (_rewardTemplatesCache != null)
+		{
+			// Already populated — don't refetch
+			return;
+		}
+		try
+		{
+			_rewardTemplatesCache = await MysteryWikiService.FetchRewardTemplatesAsync();
+		}
+		catch
+		{
+			return;
+		}
+		if (_currentMode != MysteryGeneratorMode.Rewards) return;
+
+		bool isPet = _mystery.MysteryType == MysteryType.Pet;
+		_suppressCompareSelection = true;
+		cmbCompareTemplate.Items.Clear();
+		cmbCompareTemplate.Items.Add("(no comparison)");
+		cmbCompareTemplate.SelectedIndex = 0;
+
+		foreach (var (title, _) in _rewardTemplatesCache.OrderBy(kv => kv.Key))
+		{
+			// Extract variant suffix
+			int idx = title.IndexOf("/Rewards", StringComparison.OrdinalIgnoreCase);
+			string variant = "";
+			if (idx >= 0)
+			{
+				string after = title[(idx + "/Rewards".Length)..].TrimStart('/');
+				if (!string.IsNullOrEmpty(after)) variant = after;
+			}
+			bool isPetTemplate = variant.StartsWith("Pet", StringComparison.OrdinalIgnoreCase);
+			// Filter: Standard sees only non-Pet templates, Pet sees only Pet templates
+			if (isPet != isPetTemplate) continue;
+
+			// Display: "Template:Mystery Pass/Rewards/6" → "/6" or "(base)"
+			string display = string.IsNullOrEmpty(variant) ? "Rewards (base)" : "Rewards/" + variant;
+			cmbCompareTemplate.Items.Add(new ComboBoxItem
+			{
+				Content = display,
+				Tag = title // full wiki title for fetching
+			});
+		}
+		_suppressCompareSelection = false;
+	}
+
+	private async void CmbCompareTemplate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+	{
+		if (_suppressCompareSelection || _currentMode != MysteryGeneratorMode.Rewards) return;
+
+		if (cmbCompareTemplate.SelectedIndex <= 0 || cmbCompareTemplate.SelectedItem is not ComboBoxItem selected)
+		{
+			// "(no comparison)" selected — revert to plain output
+			pnlDiff.Visibility = Visibility.Collapsed;
+			ShowPlainOutput();
+			if (_mystery.WikiStatus.RewardTemplateMatches != true)
+				btnPublish.Content = IsNamedRewardVariant ? "Update Reward Template" : "Create New Reward Template";
+			UpdateConfirmButton();
+			return;
+		}
+
+		string templateTitle = (string)selected.Tag;
+
+		// Show diff: generated (left) vs selected template (right)
+		pnlOutput.Visibility = Visibility.Collapsed;
+		pnlDiff.Visibility = Visibility.Visible;
+		pnlDiffLoading.Visibility = Visibility.Visible;
+		pnlLeft.Children.Clear();
+		pnlRight.Children.Clear();
+		pnlCenter.Children.Clear();
+		scrollLeft.ScrollToVerticalOffset(0);
+		scrollRight.ScrollToVerticalOffset(0);
+
+		try
+		{
+			string wikiContent;
+			if (_rewardTemplatesCache != null && _rewardTemplatesCache.TryGetValue(templateTitle, out var cached))
+				wikiContent = cached;
+			else
+				wikiContent = await MysteryWikiService.FetchPageContentAsync(templateTitle);
+
+			if (string.IsNullOrEmpty(wikiContent))
+			{
+				pnlDiffLoading.Visibility = Visibility.Collapsed;
+				pnlDiff.Visibility = Visibility.Collapsed;
+				ShowPlainOutput();
+				warningBar.Message = "Could not fetch template content.";
+				warningBar.Severity = InfoBarSeverity.Warning;
+				warningBar.IsOpen = true;
+				return;
+			}
+
+			// Headers: left = selected template, right = generated
+			SetDiffLeftLink(templateTitle);
+			runDiffRightSuffix.Text = "";
+
+			_lastWikiContent = wikiContent;
+			if (_originalOutput == null)
+				_originalOutput = _fullOutput;
+
+			var diffs = MysteryWikiService.ComputeRewardLevelDiff(wikiContent, _fullOutput);
+			pnlDiffLoading.Visibility = Visibility.Collapsed;
+
+			bool allMatch = diffs.All(d => d.Type == DiffLineType.Match);
+			_isDiffMode = true;
+			BuildDiffView(diffs);
+			btnCopy.IsEnabled = true;
+			btnPublish.Visibility = _main.Settings.WikiVerified ? Visibility.Visible : Visibility.Collapsed;
+
+			if (allMatch)
+			{
+				warningBar.Message = "Content matches selected template.";
+				warningBar.Severity = InfoBarSeverity.Success;
+				warningBar.IsOpen = true;
+				btnPublish.Visibility = Visibility.Collapsed;
+			}
+			else
+			{
+				int added = diffs.Count(d => d.Type == DiffLineType.Added);
+				int removed = diffs.Count(d => d.Type == DiffLineType.Removed);
+				int modified = diffs.Count(d => d.Type == DiffLineType.Modified);
+				var parts = new List<string>();
+				if (added > 0) parts.Add($"{added} added");
+				if (removed > 0) parts.Add($"{removed} removed");
+				if (modified > 0) parts.Add($"{modified} modified");
+				warningBar.Message = string.Join("  ", parts);
+				warningBar.Severity = InfoBarSeverity.Informational;
+				warningBar.IsOpen = true;
+				btnPublish.Content = IsNamedRewardVariant ? "Update Reward Template" : "Create New Reward Template";
+			}
+			UpdateConfirmButton();
+		}
+		catch (Exception ex)
+		{
+			pnlDiffLoading.Visibility = Visibility.Collapsed;
+			pnlDiff.Visibility = Visibility.Collapsed;
+			ShowPlainOutput();
+			warningBar.Message = "Compare failed: " + ex.Message;
+			warningBar.Severity = InfoBarSeverity.Error;
+			warningBar.IsOpen = true;
 		}
 	}
 

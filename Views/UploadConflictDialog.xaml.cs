@@ -457,8 +457,8 @@ public partial class UploadConflictDialog : FluentWindow
 
             if (allMode)
             {
-                // "Optimize All" → set ForceAll and close (caller handles remaining)
-                Choice = UploadConflictChoice.ForceAll;
+                // "Optimize All" → signal caller to auto-optimize remaining files
+                Choice = UploadConflictChoice.ForceAllOptimize;
                 Close();
                 return;
             }

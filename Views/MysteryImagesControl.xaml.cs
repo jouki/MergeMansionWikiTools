@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -543,26 +544,69 @@ public partial class MysteryImagesControl : UserControl
 				prepareWindow?.ResetImagesForRefresh();
 				prepareWindow?.Show();
 				prepareWindow?.ShowImagesTab();
+				// Force re-scan: ShowImagesTab won't trigger SelectionChanged if already on Images tab
+				if (_main != null && _mystery != null)
+					Initialize(_main, _mystery);
 			});
 		});
 	}
 
 	private void BtnOptimize_Click(object sender, RoutedEventArgs e)
 	{
-		if (_main != null && _mystery != null)
+		if (_main == null) return;
+
+		// Collect all checked files (not EventItem)
+		CheckBox value;
+		var selectedFiles = _detectedFiles
+			.Where(f => f.Category != "EventItem"
+				&& _checkboxes.TryGetValue(f, out value) && value.IsChecked == true
+				&& File.Exists(f.SourcePath))
+			.ToList();
+
+		if (selectedFiles.Count == 0)
 		{
-			MysteryDecorationUploadDialog mysteryDecorationUploadDialog = new MysteryDecorationUploadDialog(_main, _mystery);
-			mysteryDecorationUploadDialog.OnStatusChanged = OnStatusChanged;
-			mysteryDecorationUploadDialog.Owner = Window.GetWindow(this);
-			mysteryDecorationUploadDialog.ShowDialog();
-			_initialized = false;
-			_detectedFiles.Clear();
-			_checkboxes.Clear();
-			_optimizedFiles.Clear();
-			AutoScanAsync();
-			if (!string.IsNullOrWhiteSpace(_main.Settings.TinifyApiKey))
-				tinifyUsage.Initialize(_main.Settings.TinifyApiKey, _main.Settings.TinifyApiKey2);
+			ShowInfo("No files selected.", InfoBarSeverity.Warning);
+			return;
 		}
+
+		var filesToOptimize = selectedFiles.Select(f => f.SourcePath).ToList();
+		// Pre-check only files that are not yet optimized
+		var preChecked = new HashSet<string>(
+			selectedFiles.Where(f => !_optimizedFiles.Contains(f)).Select(f => f.SourcePath),
+			StringComparer.OrdinalIgnoreCase);
+
+		var apiKey = _main.Settings.TinifyApiKey;
+		var apiKey2 = _main.Settings.TinifyApiKey2;
+		if (string.IsNullOrWhiteSpace(apiKey))
+		{
+			ShowInfo("TinyPNG API key not set. Go to Settings.", InfoBarSeverity.Warning);
+			return;
+		}
+
+		var optWin = new OptimizationWindow(filesToOptimize, apiKey, apiKey2, preChecked)
+		{
+			Owner = Window.GetWindow(this)
+		};
+		optWin.ShowDialog();
+
+		// Re-check which files are now optimized
+		foreach (var f in _detectedFiles)
+		{
+			if (_optimizedFiles.Contains(f)) continue;
+			try
+			{
+				if (File.Exists(f.SourcePath) && OptimizationWindow.HasOptMarker(File.ReadAllBytes(f.SourcePath)))
+				{
+					_optimizedFiles.Add(f);
+					f.OptimizedSize = new FileInfo(f.SourcePath).Length;
+				}
+			}
+			catch { }
+		}
+		BuildFileList();
+
+		if (!string.IsNullOrWhiteSpace(apiKey))
+			tinifyUsage.Initialize(apiKey, apiKey2);
 	}
 
 	private async void BtnUpload_Click(object sender, RoutedEventArgs e)
@@ -611,7 +655,7 @@ public partial class MysteryImagesControl : UserControl
 		bool skipAll = false;
 		bool confirmAll = false;
 		bool optimizeAll = false;
-		ShowInfo($"Processing {selected.Count} files...", InfoBarSeverity.Informational);
+		ShowInfo($"Authenticating...", InfoBarSeverity.Informational);
 		try
 		{
 			using HttpClient client = await WikiMappingService.CreateAuthenticatedClientAsync(_main.Settings.WikiUsername, _main.Settings.WikiPassword);
@@ -621,6 +665,7 @@ public partial class MysteryImagesControl : UserControl
 			for (int idx = 0; idx < selected.Count; idx++)
 			{
 				DetectedDecorationFile file = selected[idx];
+				ShowInfo($"Processing {idx + 1}/{selected.Count}: {file.WikiFilename}...", InfoBarSeverity.Informational);
 				try
 				{
 					if (!File.Exists(file.SourcePath))
@@ -656,8 +701,7 @@ public partial class MysteryImagesControl : UserControl
 							break;
 						case UploadConflictChoice.ForceAllOptimize:
 							optimizeAll = true;
-							forceAll = true;
-							confirmAll = true;
+							// Don't set forceAll/confirmAll — user still confirms each upload
 							break;
 						case UploadConflictChoice.Skip:
 							skipped++;
@@ -673,10 +717,28 @@ public partial class MysteryImagesControl : UserControl
 					}
 					if (needsOptimize && optimizeAll)
 					{
-						byte[] marked = OptimizationWindow.InsertOptMarker(await optimizeFunc(await File.ReadAllBytesAsync(file.SourcePath)));
-						await File.WriteAllBytesAsync(file.SourcePath, marked);
-						_optimizedFiles.Add(file);
-						file.OptimizedSize = marked.Length;
+						// Batch optimize all remaining unoptimized files in parallel
+						var toOptimize = selected.Skip(idx).Where(f => !_optimizedFiles.Contains(f)).ToList();
+						int done = 0;
+						var sem = new SemaphoreSlim(4);
+						await Task.WhenAll(toOptimize.Select(async f =>
+						{
+							await sem.WaitAsync();
+							try
+							{
+								int current = Interlocked.Increment(ref done);
+								Dispatcher.Invoke(() => ShowInfo($"Optimizing {current}/{toOptimize.Count}: {f.WikiFilename}...", InfoBarSeverity.Informational));
+								byte[] optimized = await optimizeFunc(await File.ReadAllBytesAsync(f.SourcePath));
+								byte[] marked = OptimizationWindow.InsertOptMarker(optimized);
+								await File.WriteAllBytesAsync(f.SourcePath, marked);
+								lock (_optimizedFiles) { _optimizedFiles.Add(f); }
+								f.OptimizedSize = marked.Length;
+							}
+							finally
+							{
+								sem.Release();
+							}
+						}));
 						goto IL_0886;
 					}
 					if (!needsOptimize)
@@ -750,6 +812,7 @@ public partial class MysteryImagesControl : UserControl
 					}
 					goto end_IL_0319;
 					IL_0bd3:
+					ShowInfo($"Uploading {idx + 1}/{selected.Count}: {file.WikiFilename}...", InfoBarSeverity.Informational);
 					await WikiMappingService.UploadFileAsync(fileData: await File.ReadAllBytesAsync(file.SourcePath), description: (file.ExistsOnWiki != true) ? "{{Permission}}" : null, client: client, csrfToken: csrfToken, filename: file.WikiFilename);
 					uploaded++;
 					UserStatsService.Increment(delegate(UserStats s)
@@ -791,7 +854,7 @@ public partial class MysteryImagesControl : UserControl
 				}
 			}
 			BuildFileList();
-			_mystery.WikiStatus.ImagesExistOnWiki = _detectedFiles.Count((DetectedDecorationFile detectedDecorationFile) => detectedDecorationFile.Category != "EventItem" && detectedDecorationFile.ExistsOnWiki == true);
+			_mystery.WikiStatus.ImagesExistOnWiki = _detectedFiles.Count((DetectedDecorationFile detectedDecorationFile) => detectedDecorationFile.ExistsOnWiki == true);
 			MysteryWikiService.UpdateSingleMysteryCache(_mystery);
 			OnStatusChanged?.Invoke();
 		}

@@ -79,7 +79,7 @@ public partial class OptimizationWindow : FluentWindow
     public event Action? OptimizationStarted;
     public bool AllOptimized => Files.All(f => !f.IsSelected || f.IsOptimized);
 
-    public OptimizationWindow(List<string> filePaths, string apiKey, string apiKey2)
+    public OptimizationWindow(List<string> filePaths, string apiKey, string apiKey2, HashSet<string>? preChecked = null)
     {
         _apiKey = apiKey;
         _apiKey2 = apiKey2;
@@ -97,13 +97,16 @@ public partial class OptimizationWindow : FluentWindow
             byte[] bytes = File.ReadAllBytes(p);
             var thumb = LoadBitmapNoLock(bytes);
             bool alreadyOptimized = HasOptMarker(bytes);
+            bool selected = preChecked != null
+                ? preChecked.Contains(p)
+                : !alreadyOptimized;
 
             Files.Add(new FileInfoItem
             {
                 Name = fi.Name,
                 Path = p,
                 OriginalSize = fi.Length,
-                IsSelected = !alreadyOptimized,
+                IsSelected = selected,
                 IsOptimized = alreadyOptimized,
                 WasSkipped = alreadyOptimized,
                 Thumbnail = thumb

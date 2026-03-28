@@ -631,6 +631,7 @@ public partial class ImageOptimiserPage : UserControl
         indexInputPanel.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
         splitButtonGroup.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
         refreshButtonGroup.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+        btnToggleRects.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
         UpdatePredictButtonVisibility();
         UpdatePreviewMargins();
 
@@ -900,6 +901,9 @@ public partial class ImageOptimiserPage : UserControl
                     pixelY += rowDims[r].h;
                 }
             }
+            // Re-apply current visibility mode after rebuild
+            if (_overlayVisMode != 0)
+                ApplyOverlayVisibility();
         }, DispatcherPriority.Loaded);
     }
 
@@ -1094,6 +1098,7 @@ public partial class ImageOptimiserPage : UserControl
             indexInputPanel.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
             splitButtonGroup.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
             refreshButtonGroup.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+            btnToggleRects.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
             UpdatePredictButtonVisibility();
             UpdatePreviewMargins();
         }
@@ -1139,6 +1144,7 @@ public partial class ImageOptimiserPage : UserControl
                 indexInputPanel.Visibility = Visibility.Collapsed;
                 splitButtonGroup.Visibility = Visibility.Collapsed;
                 refreshButtonGroup.Visibility = Visibility.Collapsed;
+                btnToggleRects.Visibility = Visibility.Collapsed;
                 detectionOverlay.Children.Clear();
                 UpdatePreviewMargins();
             }
@@ -1273,6 +1279,7 @@ public partial class ImageOptimiserPage : UserControl
         indexInputPanel.Visibility = Visibility.Collapsed;
         splitButtonGroup.Visibility = Visibility.Collapsed;
         refreshButtonGroup.Visibility = Visibility.Collapsed;
+        btnToggleRects.Visibility = Visibility.Collapsed;
         btnPredictIndices.Visibility = Visibility.Collapsed;
         detectionOverlay.Children.Clear();
         autoLinkBanner.Visibility = Visibility.Collapsed;
@@ -2237,6 +2244,55 @@ public partial class ImageOptimiserPage : UserControl
         return null;
     }
 
+    // 0 = all visible, 1 = labels only (no rects/source icons), 2 = all hidden
+    private int _overlayVisMode;
+
+    private void BtnToggleRects_Click(object sender, RoutedEventArgs e)
+    {
+        _overlayVisMode = (_overlayVisMode + 1) % 3;
+        ApplyOverlayVisibility();
+    }
+
+    private void ApplyOverlayVisibility()
+    {
+        if (_overlayVisMode == 2)
+        {
+            // All hidden
+            detectionOverlay.Visibility = Visibility.Collapsed;
+            iconToggleRects.Symbol = Wpf.Ui.Controls.SymbolRegular.EyeOff24;
+            iconToggleRects.ClearValue(ForegroundProperty);
+        }
+        else
+        {
+            detectionOverlay.Visibility = Visibility.Visible;
+            if (_overlayVisMode == 0)
+            {
+                // All visible
+                iconToggleRects.Symbol = Wpf.Ui.Controls.SymbolRegular.Eye24;
+                iconToggleRects.ClearValue(ForegroundProperty);
+            }
+            else
+            {
+                // Labels only — yellow eye to indicate partial visibility
+                iconToggleRects.Symbol = Wpf.Ui.Controls.SymbolRegular.Eye24;
+                iconToggleRects.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0xFF, 0xD7, 0x00));
+            }
+            foreach (UIElement child in detectionOverlay.Children)
+            {
+                if (child is System.Windows.Shapes.Rectangle rect)
+                    rect.Visibility = _overlayVisMode == 0 ? Visibility.Visible : Visibility.Collapsed;
+                else if (child is Border label)
+                {
+                    // In mode 1: hide source icons, keep label text
+                    var panel = label.Child as StackPanel;
+                    if (panel != null && panel.Children.Count > 1)
+                        panel.Children[panel.Children.Count - 1].Visibility =
+                            _overlayVisMode == 0 ? Visibility.Visible : Visibility.Collapsed;
+                }
+            }
+        }
+    }
+
     private void BtnDetectAlgorithm_Click(object sender, RoutedEventArgs e)
     {
         RefreshDetectionAlgorithm();
@@ -3018,6 +3074,7 @@ public partial class ImageOptimiserPage : UserControl
                 indexInputPanel.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
                 splitButtonGroup.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
                 refreshButtonGroup.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+                btnToggleRects.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
                 RebuildThumbnailStrip();
             }
         }
