@@ -374,12 +374,27 @@ public partial class MysteriesPage : UserControl
 			Orientation = Orientation.Horizontal,
 			VerticalAlignment = VerticalAlignment.Center
 		};
+		// Per-mystery refresh button (icon only)
+		Wpf.Ui.Controls.Button btnRefreshSingle = new Wpf.Ui.Controls.Button
+		{
+			Icon = new SymbolIcon { Symbol = SymbolRegular.ArrowClockwise24 },
+			Appearance = ControlAppearance.Secondary,
+			Height = 32.0,
+			Width = 32.0,
+			Padding = new Thickness(0),
+			Margin = new Thickness(0, 0, 4, 0),
+			Tag = mystery,
+			ToolTip = "Refresh wiki status for this mystery"
+		};
+		ToolTipService.SetInitialShowDelay(btnRefreshSingle, 0);
+		btnRefreshSingle.Click += BtnRefreshSingle_Click;
+		stackPanel4.Children.Add(btnRefreshSingle);
 		Wpf.Ui.Controls.Button button = new Wpf.Ui.Controls.Button
 		{
 			Content = "Prepare",
 			Appearance = ControlAppearance.Secondary,
 			Height = 32.0,
-			Margin = new Thickness(8.0, 0.0, 0.0, 0.0),
+			Margin = new Thickness(0, 0, 0, 0),
 			Tag = mystery
 		};
 		button.Click += BtnPrepare_Click;
@@ -470,6 +485,7 @@ public partial class MysteriesPage : UserControl
 			return;
 		}
 		btnCheckWiki.IsEnabled = false;
+		checkWikiProgress.Visibility = Visibility.Visible;
 		ShowInfo("Checking wiki status...", InfoBarSeverity.Informational, autoClose: false);
 		try
 		{
@@ -490,6 +506,40 @@ public partial class MysteriesPage : UserControl
 		finally
 		{
 			btnCheckWiki.IsEnabled = true;
+			checkWikiProgress.Visibility = Visibility.Collapsed;
+		}
+	}
+
+	private async void BtnRefreshSingle_Click(object sender, RoutedEventArgs e)
+	{
+		if (sender is not Wpf.Ui.Controls.Button { Tag: MysteryEvent mystery } btn)
+			return;
+		if (_mysteryService == null || _mysteryService.Mysteries.Count == 0)
+			return;
+
+		// Replace icon with spinner inside the same button
+		var savedIcon = btn.Icon;
+		btn.Icon = null;
+		btn.Content = new ProgressRing { Width = 16, Height = 16, IsIndeterminate = true };
+		btn.IsEnabled = false;
+
+		try
+		{
+			MysteryWikiService.ResetMatchedLabelsFromMemory(new[] { mystery });
+
+			if (_dialogueService == null)
+				await TryLoadDialoguesAsync();
+
+			await MysteryWikiService.CheckSingleMysteryStatusAsync(mystery, _mysteryService.Mysteries, _main.DataService, _dialogueService);
+			BuildMysteryList();
+		}
+		catch (Exception ex)
+		{
+			ShowInfo($"Check failed for {mystery.Name}: {ex.Message}", InfoBarSeverity.Error);
+			// Restore button state on error (BuildMysteryList won't be called)
+			btn.Content = null;
+			btn.Icon = savedIcon;
+			btn.IsEnabled = true;
 		}
 	}
 

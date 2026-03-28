@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -49,6 +50,8 @@ public partial class MysteryGeneratorDialog : FluentWindow
 	private readonly Dictionary<int, UIElement> _savedRightElements = new Dictionary<int, UIElement>();
 
 	private string? _hypotheticalRewardVariant;
+
+	private CancellationTokenSource? _diffCts;
 
 	// Reward template comparison dropdown
 	private Dictionary<string, string>? _rewardTemplatesCache;
@@ -134,6 +137,15 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		_currentMode = initialMode;
 		InitializeComponent();
 		ApplicationThemeManager.Apply(this);
+		SourceInitialized += (_, _) =>
+		{
+			var source = System.Windows.Interop.HwndSource.FromHwnd(new System.Windows.Interop.WindowInteropHelper(this).Handle);
+			source?.AddHook((IntPtr _, int msg, IntPtr wParam, IntPtr _, ref bool handled) =>
+			{
+				if (msg == 0x020E) MainWindow.HandleMouseHWheel(wParam, ref handled);
+				return IntPtr.Zero;
+			});
+		};
 		txtMysteryInfo.Text = mystery.Name;
 		string value = mystery.StartDate?.ToString("MMM d, yyyy") ?? "Unknown";
 		string value2 = ((mystery.MysteryType == MysteryType.Pet) ? "Pet" : "Standard");
@@ -175,16 +187,28 @@ public partial class MysteryGeneratorDialog : FluentWindow
 
 	private void GenerateOutput()
 	{
+		// Cancel any in-flight async diff/compare operations from previous tab
+		_diffCts?.Cancel();
+		_diffCts = new CancellationTokenSource();
 		pnlOutput.Visibility = Visibility.Collapsed;
 		pnlDiff.Visibility = Visibility.Collapsed;
 		imagesControl.Visibility = Visibility.Collapsed;
 		_isDiffMode = false;
-		btnPublish.Content = "Publish to Wiki";
+		btnPublish.Content = _currentMode == MysteryGeneratorMode.Rewards
+			? (IsNamedRewardVariant ? "Update Reward Template" : "Create New Reward Template")
+			: "Publish to Wiki";
 		// Show compare dropdown only in Rewards mode
 		pnlCompareDropdown.Visibility = _currentMode == MysteryGeneratorMode.Rewards
 			? Visibility.Visible : Visibility.Collapsed;
 		if (_currentMode == MysteryGeneratorMode.Rewards)
+		{
+			// Always set _fullOutput for Rewards before any early return
+			_fullOutput = MysteryWikiService.GenerateRewardTemplate(_mystery, _mapping);
 			PopulateCompareDropdownAsync();
+			// If populate auto-selected a confirmed variant, SelectionChanged will handle the diff view
+			if (cmbCompareTemplate.SelectedIndex > 0)
+				return;
+		}
 		if (_currentMode == MysteryGeneratorMode.Images)
 		{
 			imagesControl.Visibility = Visibility.Visible;
@@ -205,7 +229,7 @@ public partial class MysteryGeneratorDialog : FluentWindow
 			string fullOutput = currentMode switch
 			{
 				MysteryGeneratorMode.Rewards => MysteryWikiService.GenerateRewardTemplate(_mystery, _mapping), 
-				MysteryGeneratorMode.EventPage => MysteryWikiService.GenerateEventPageWithDialogues(_mystery, (_mystery.WikiStatus.RewardContentMatches == true) ? _mystery.WikiStatus.MatchingVariant : (_hypotheticalRewardVariant ?? _mystery.WikiStatus.MatchingVariant), _dialogueService), 
+				MysteryGeneratorMode.EventPage => MysteryWikiService.GenerateEventPageWithDialogues(_mystery, GetEffectiveRewardVariant(), _dialogueService),
 				MysteryGeneratorMode.EventItemPage => MysteryWikiService.GenerateEventItemPage(_mystery, _main.DataService, _main.WikiMapping), 
 				_ => "", 
 			};
@@ -229,14 +253,11 @@ public partial class MysteryGeneratorDialog : FluentWindow
 			}
 			if (flag)
 			{
-				LoadDiffAsync();
+				UpdateConfirmButton();
+				LoadDiffAsync(_diffCts.Token);
 				return;
 			}
 			ShowPlainOutput();
-			if (_currentMode == MysteryGeneratorMode.Rewards && _mystery.WikiStatus.RewardTemplateMatches != true)
-			{
-				btnPublish.Content = IsNamedRewardVariant ? "Update Reward Template" : "Create New Reward Template";
-			}
 			UpdateConfirmButton();
 		}
 		catch (Exception ex)
@@ -259,15 +280,15 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		warningBar.IsOpen = false;
 	}
 
-	private async Task LoadDiffAsync()
+	private async Task LoadDiffAsync(CancellationToken ct = default)
 	{
+		var modeAtStart = _currentMode;
 		pnlOutput.Visibility = Visibility.Collapsed;
 		pnlDiff.Visibility = Visibility.Visible;
 		pnlDiffLoading.Visibility = Visibility.Visible;
 		pnlLeft.Children.Clear();
 		pnlRight.Children.Clear();
 		pnlCenter.Children.Clear();
-		// Force WPF to flush stale visuals (prevents ghost rendering after publish)
 		scrollLeft.ScrollToVerticalOffset(0);
 		scrollRight.ScrollToVerticalOffset(0);
 		scrollCenter.ScrollToVerticalOffset(0);
@@ -275,21 +296,15 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		pnlRight.UpdateLayout();
 		try
 		{
-			MysteryGeneratorMode currentMode = _currentMode;
-			if (1 == 0)
+			MysteryDiffScope scope = modeAtStart switch
 			{
-			}
-			MysteryDiffScope mysteryDiffScope = currentMode switch
-			{
-				MysteryGeneratorMode.EventPage => MysteryDiffScope.EventPage, 
-				MysteryGeneratorMode.Rewards => MysteryDiffScope.Rewards, 
-				_ => MysteryDiffScope.EventItemPage, 
+				MysteryGeneratorMode.EventPage => MysteryDiffScope.EventPage,
+				MysteryGeneratorMode.Rewards => MysteryDiffScope.Rewards,
+				_ => MysteryDiffScope.EventItemPage,
 			};
-			if (1 == 0)
-			{
-			}
-			MysteryDiffScope scope = mysteryDiffScope;
-			(string? WikiContent, string GeneratedContent, List<DiffLine> Diffs, string PageTitle) tuple = await MysteryWikiService.ComputeDiffAsync(_mystery, scope, _main.DataService, _main.WikiMapping, _mapping, _dialogueService);
+			string? effectiveVariant = (modeAtStart == MysteryGeneratorMode.EventPage) ? GetEffectiveRewardVariant() : null;
+			(string? WikiContent, string GeneratedContent, List<DiffLine> Diffs, string PageTitle) tuple = await MysteryWikiService.ComputeDiffAsync(_mystery, scope, _main.DataService, _main.WikiMapping, _mapping, _dialogueService, effectiveVariant);
+			if (ct.IsCancellationRequested || _currentMode != modeAtStart) return;
 			var (wikiContent, _, _, _) = tuple;
 			_ = tuple.GeneratedContent;
 			List<DiffLine> diffs = tuple.Diffs;
@@ -1194,6 +1209,19 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		}
 	}
 
+	private string? GetEffectiveRewardVariant()
+	{
+		string? confirmed = _mystery.WikiStatus.ManualConfirm.RewardsConfirmed;
+		if (confirmed != null && confirmed != "true")
+			return confirmed; // Specific variant confirmed (e.g. "Pet/3", "6")
+		if (confirmed == "true")
+			return _mystery.WikiStatus.MatchingVariant; // Confirmed with whatever wiki has
+		// Not confirmed — current behavior
+		return (_mystery.WikiStatus.RewardContentMatches == true)
+			? _mystery.WikiStatus.MatchingVariant
+			: (_hypotheticalRewardVariant ?? _mystery.WikiStatus.MatchingVariant);
+	}
+
 	private void UpdateConfirmButton()
 	{
 		if (_currentMode == MysteryGeneratorMode.Images)
@@ -1202,21 +1230,13 @@ public partial class MysteryGeneratorDialog : FluentWindow
 			return;
 		}
 		MysteryManualConfirmFlags manualConfirm = _mystery.WikiStatus.ManualConfirm;
-		MysteryGeneratorMode currentMode = _currentMode;
-		if (1 == 0)
+		bool flag2 = _currentMode switch
 		{
-		}
-		bool flag = currentMode switch
-		{
-			MysteryGeneratorMode.EventPage => manualConfirm.EventPageConfirmed, 
-			MysteryGeneratorMode.Rewards => manualConfirm.RewardsConfirmed, 
-			MysteryGeneratorMode.EventItemPage => manualConfirm.ItemPageConfirmed, 
-			_ => false, 
+			MysteryGeneratorMode.EventPage => manualConfirm.EventPageConfirmed,
+			MysteryGeneratorMode.Rewards => manualConfirm.RewardsConfirmed != null,
+			MysteryGeneratorMode.EventItemPage => manualConfirm.ItemPageConfirmed,
+			_ => false,
 		};
-		if (1 == 0)
-		{
-		}
-		bool flag2 = flag;
 		MysteryGeneratorMode currentMode2 = _currentMode;
 		if (1 == 0)
 		{
@@ -1260,9 +1280,29 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		{
 			btnPublish.IsEnabled = true;
 			btnPublish.ToolTip = null;
-			if (wikiCheckState2 == WikiCheckState.Mismatch)
+			// Show "Confirm as Correct" for Mismatch, and also for Rewards in Missing/Unknown state
+			// (user can confirm a specific template variant even when no template matches)
+			bool showConfirm = wikiCheckState2 == WikiCheckState.Mismatch
+				|| (_currentMode == MysteryGeneratorMode.Rewards && wikiCheckState2 != WikiCheckState.Match);
+			if (showConfirm)
 			{
-				btnConfirmManual.Content = "Confirm as Correct";
+				if (_currentMode == MysteryGeneratorMode.Rewards
+					&& cmbCompareTemplate.SelectedIndex > 0
+					&& cmbCompareTemplate.SelectedItem is ComboBoxItem selItem
+					&& selItem.Content is string selDisplay)
+				{
+					string flagValue = selDisplay.StartsWith("Rewards/", StringComparison.OrdinalIgnoreCase)
+						? selDisplay["Rewards/".Length..] : "true";
+					var sp = new StackPanel { HorizontalAlignment = System.Windows.HorizontalAlignment.Center };
+					sp.Children.Add(new System.Windows.Controls.TextBlock { Text = "Confirm as Correct", HorizontalAlignment = System.Windows.HorizontalAlignment.Center });
+					var sub = new System.Windows.Controls.TextBlock { Text = flagValue, FontSize = 10, Opacity = 0.6, HorizontalAlignment = System.Windows.HorizontalAlignment.Center };
+					sp.Children.Add(sub);
+					btnConfirmManual.Content = sp;
+				}
+				else
+				{
+					btnConfirmManual.Content = "Confirm as Correct";
+				}
 				btnConfirmManual.Visibility = Visibility.Visible;
 			}
 			else
@@ -1301,22 +1341,30 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		{
 			return;
 		}
-		MysteryGeneratorMode currentMode2 = _currentMode;
-		if (1 == 0)
+		bool currentValue = _currentMode switch
 		{
-		}
-		bool flag = currentMode2 switch
-		{
-			MysteryGeneratorMode.EventPage => flags.EventPageConfirmed, 
-			MysteryGeneratorMode.Rewards => flags.RewardsConfirmed, 
-			MysteryGeneratorMode.EventItemPage => flags.ItemPageConfirmed, 
-			_ => false, 
+			MysteryGeneratorMode.EventPage => flags.EventPageConfirmed,
+			MysteryGeneratorMode.Rewards => flags.RewardsConfirmed != null,
+			MysteryGeneratorMode.EventItemPage => flags.ItemPageConfirmed,
+			_ => false,
 		};
-		if (1 == 0)
-		{
-		}
-		bool currentValue = flag;
 		bool newValue = !currentValue;
+		// For Rewards mode: determine the variant string to store
+		string? rewardsConfirmValue = null;
+		if (_currentMode == MysteryGeneratorMode.Rewards && newValue)
+		{
+			if (cmbCompareTemplate.SelectedIndex > 0 && cmbCompareTemplate.SelectedItem is ComboBoxItem selectedItem
+				&& selectedItem.Content is string display)
+			{
+				// Extract variant suffix from display (e.g. "Rewards/Pet/3" → "Pet/3", "Rewards (base)" → "true")
+				if (display.StartsWith("Rewards/", StringComparison.OrdinalIgnoreCase))
+					rewardsConfirmValue = display["Rewards/".Length..];
+				else
+					rewardsConfirmValue = "true"; // base template
+			}
+			else
+				rewardsConfirmValue = "true";
+		}
 		string action = (newValue ? "Set" : "Remove");
 		MysteryGeneratorMode currentMode3 = _currentMode;
 		if (1 == 0)
@@ -1360,7 +1408,25 @@ public partial class MysteryGeneratorDialog : FluentWindow
 			Regex linePattern = new Regex($"\\[{idx.Value}\\]\\s*=\\s*\\{{[^}}]+\\}}");
 			Match lineMatch = linePattern.Match(content);
 			beforeLine = (lineMatch.Success ? lineMatch.Value.Trim() : "(entry not found)");
-			if (newValue)
+			if (_currentMode == MysteryGeneratorMode.Rewards)
+			{
+				// Rewards uses string? value (e.g. "Pet/3", "true", or null to remove)
+				if (rewardsConfirmValue != null)
+				{
+					string luaValue = rewardsConfirmValue == "true" ? "true" : $"\"{rewardsConfirmValue}\"";
+					string insertText = flagName + " = " + luaValue;
+					if (!Regex.IsMatch(beforeLine, flagName + "\\s*="))
+						afterLine = Regex.Replace(beforeLine, "\\s*\\},?\\s*$", ", " + insertText + " },");
+					else
+						afterLine = Regex.Replace(beforeLine, flagName + "\\s*=\\s*(?:\"[^\"]*\"|\\w+)", insertText);
+				}
+				else
+				{
+					afterLine = Regex.Replace(beforeLine, ",?\\s*" + flagName + "\\s*=\\s*(?:\"[^\"]*\"|true)", "");
+					afterLine = Regex.Replace(afterLine, ",(\\s*\\})", "$1");
+				}
+			}
+			else if (newValue)
 			{
 				afterLine = ((!beforeLine.Contains(flagName)) ? Regex.Replace(beforeLine, "\\s*\\},?\\s*$", ", " + flagName + " = true },") : beforeLine);
 			}
@@ -1459,7 +1525,12 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		warningBar.IsOpen = true;
 		try
 		{
-			if ((await MysteryWikiService.SetManualConfirmFlagAsync(_main.Settings.WikiUsername, _main.Settings.WikiPassword, _mystery, flagName, newValue)).Item3)
+			bool publishSuccess;
+			if (_currentMode == MysteryGeneratorMode.Rewards)
+				publishSuccess = (await MysteryWikiService.SetManualConfirmFlagStringAsync(_main.Settings.WikiUsername, _main.Settings.WikiPassword, _mystery, flagName, rewardsConfirmValue)).Item3;
+			else
+				publishSuccess = (await MysteryWikiService.SetManualConfirmFlagAsync(_main.Settings.WikiUsername, _main.Settings.WikiPassword, _mystery, flagName, newValue)).Item3;
+			if (publishSuccess)
 			{
 				switch (_currentMode)
 				{
@@ -1467,7 +1538,7 @@ public partial class MysteryGeneratorDialog : FluentWindow
 					flags.EventPageConfirmed = newValue;
 					break;
 				case MysteryGeneratorMode.Rewards:
-					flags.RewardsConfirmed = newValue;
+					flags.RewardsConfirmed = rewardsConfirmValue;
 					break;
 				case MysteryGeneratorMode.EventItemPage:
 					flags.ItemPageConfirmed = newValue;
@@ -1534,20 +1605,9 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		bool flag2 = flag;
 		if (flag2)
 		{
-			// Skip reward template check if wiki already has a reward template call
-			// (the template already exists on the wiki — no need to block publishing)
-			bool wikiAlreadyHasRewards = _lastWikiContent != null
-				&& _lastWikiContent.Contains("{{Mystery Pass/Rewards", StringComparison.OrdinalIgnoreCase);
-			if (wikiAlreadyHasRewards)
-			{
-				flag2 = false;
-			}
-			else
-			{
-				WikiCheckState rewardTemplateState = _mystery.WikiStatus.RewardTemplateState;
-				bool flag3 = (uint)(rewardTemplateState - 3) <= 1u;
-				flag2 = !flag3;
-			}
+			WikiCheckState rewardTemplateState = _mystery.WikiStatus.RewardTemplateState;
+			// Only skip the dialog if the reward template is confirmed to match
+			flag2 = rewardTemplateState != WikiCheckState.Match && rewardTemplateState != WikiCheckState.Confirmed;
 		}
 		if (flag2)
 		{
@@ -1730,20 +1790,19 @@ public partial class MysteryGeneratorDialog : FluentWindow
 
 	private async void PopulateCompareDropdownAsync()
 	{
-		if (_rewardTemplatesCache != null)
+		var ct = _diffCts?.Token ?? CancellationToken.None;
+		if (_rewardTemplatesCache == null)
 		{
-			// Already populated — don't refetch
-			return;
+			try
+			{
+				_rewardTemplatesCache = await MysteryWikiService.FetchRewardTemplatesAsync();
+			}
+			catch
+			{
+				return;
+			}
 		}
-		try
-		{
-			_rewardTemplatesCache = await MysteryWikiService.FetchRewardTemplatesAsync();
-		}
-		catch
-		{
-			return;
-		}
-		if (_currentMode != MysteryGeneratorMode.Rewards) return;
+		if (ct.IsCancellationRequested || _currentMode != MysteryGeneratorMode.Rewards) return;
 
 		bool isPet = _mystery.MysteryType == MysteryType.Pet;
 		_suppressCompareSelection = true;
@@ -1753,7 +1812,6 @@ public partial class MysteryGeneratorDialog : FluentWindow
 
 		foreach (var (title, _) in _rewardTemplatesCache.OrderBy(kv => kv.Key))
 		{
-			// Extract variant suffix
 			int idx = title.IndexOf("/Rewards", StringComparison.OrdinalIgnoreCase);
 			string variant = "";
 			if (idx >= 0)
@@ -1762,18 +1820,32 @@ public partial class MysteryGeneratorDialog : FluentWindow
 				if (!string.IsNullOrEmpty(after)) variant = after;
 			}
 			bool isPetTemplate = variant.StartsWith("Pet", StringComparison.OrdinalIgnoreCase);
-			// Filter: Standard sees only non-Pet templates, Pet sees only Pet templates
 			if (isPet != isPetTemplate) continue;
 
-			// Display: "Template:Mystery Pass/Rewards/6" → "/6" or "(base)"
 			string display = string.IsNullOrEmpty(variant) ? "Rewards (base)" : "Rewards/" + variant;
 			cmbCompareTemplate.Items.Add(new ComboBoxItem
 			{
 				Content = display,
-				Tag = title // full wiki title for fetching
+				Tag = title
 			});
 		}
 		_suppressCompareSelection = false;
+		// Auto-select confirmed variant if available (triggers SelectionChanged → diff view)
+		string? confirmed = _mystery.WikiStatus.ManualConfirm.RewardsConfirmed;
+		if (confirmed != null && confirmed != "true")
+		{
+			string targetDisplay = "Rewards/" + confirmed;
+			for (int i = 1; i < cmbCompareTemplate.Items.Count; i++)
+			{
+				if (cmbCompareTemplate.Items[i] is ComboBoxItem item
+					&& item.Content is string d
+					&& string.Equals(d, targetDisplay, StringComparison.OrdinalIgnoreCase))
+				{
+					cmbCompareTemplate.SelectedIndex = i;
+					break;
+				}
+			}
+		}
 	}
 
 	private async void CmbCompareTemplate_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1785,13 +1857,14 @@ public partial class MysteryGeneratorDialog : FluentWindow
 			// "(no comparison)" selected — revert to plain output
 			pnlDiff.Visibility = Visibility.Collapsed;
 			ShowPlainOutput();
-			if (_mystery.WikiStatus.RewardTemplateMatches != true)
-				btnPublish.Content = IsNamedRewardVariant ? "Update Reward Template" : "Create New Reward Template";
+			btnPublish.Content = IsNamedRewardVariant ? "Update Reward Template" : "Create New Reward Template";
 			UpdateConfirmButton();
 			return;
 		}
 
 		string templateTitle = (string)selected.Tag;
+		var ct = _diffCts?.Token ?? CancellationToken.None;
+		var modeAtStart = _currentMode;
 
 		// Show diff: generated (left) vs selected template (right)
 		pnlOutput.Visibility = Visibility.Collapsed;
@@ -1810,6 +1883,7 @@ public partial class MysteryGeneratorDialog : FluentWindow
 				wikiContent = cached;
 			else
 				wikiContent = await MysteryWikiService.FetchPageContentAsync(templateTitle);
+			if (ct.IsCancellationRequested || _currentMode != modeAtStart) return;
 
 			if (string.IsNullOrEmpty(wikiContent))
 			{

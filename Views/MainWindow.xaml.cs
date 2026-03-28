@@ -2,6 +2,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -114,6 +115,7 @@ public partial class MainWindow : FluentWindow
     private const int WM_THEMECHANGED = 0x031A;
     private const int WM_SYSCOLORCHANGE = 0x0015;
     private const int WM_SETTINGCHANGE = 0x001A;
+    private const int WM_MOUSEHWHEEL = 0x020E;
 
     private DispatcherTimer? _appearanceTimer;
 
@@ -136,8 +138,42 @@ public partial class MainWindow : FluentWindow
                     Dispatcher.InvokeAsync(ApplySystemAppearance);
                 }
                 break;
+            case WM_MOUSEHWHEEL:
+                HandleMouseHWheel(wParam, ref handled);
+                break;
         }
         return IntPtr.Zero;
+    }
+
+    private static ScrollViewer? FindParentScrollViewer(DependencyObject? element)
+    {
+        while (element != null)
+        {
+            if (element is ScrollViewer sv)
+                return sv;
+            element = VisualTreeHelper.GetParent(element);
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Handles WM_MOUSEHWHEEL (tilt wheel) for any window. Call from WndProc hooks.
+    /// </summary>
+    public static bool HandleMouseHWheel(IntPtr wParam, ref bool handled)
+    {
+        int tiltDelta = (short)((wParam.ToInt64() >> 16) & 0xFFFF);
+        var target = Mouse.DirectlyOver as DependencyObject;
+        if (target != null)
+        {
+            var sv = FindParentScrollViewer(target);
+            if (sv != null)
+            {
+                sv.ScrollToHorizontalOffset(sv.HorizontalOffset + tiltDelta * 0.4);
+                handled = true;
+                return true;
+            }
+        }
+        return false;
     }
 
     /// <summary>

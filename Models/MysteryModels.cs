@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace MergeMansionWikiTools.Models;
 
@@ -128,7 +131,7 @@ public class WikiPageStatus
         : WikiCheckState.Unknown;
 
     public WikiCheckState RewardTemplateState =>
-        ManualConfirm.RewardsConfirmed ? WikiCheckState.Confirmed
+        ManualConfirm.RewardsConfirmed != null ? WikiCheckState.Confirmed
         : RewardTemplateMatches != true
             ? (RewardTemplateMatches == false ? WikiCheckState.Missing : WikiCheckState.Unknown)
         : RewardContentMatches == true ? WikiCheckState.Match
@@ -181,10 +184,11 @@ public class MysteryEvent
 public class MysteryManualConfirmFlags
 {
     public bool EventPageConfirmed { get; set; }
-    public bool RewardsConfirmed { get; set; }
+    /// <summary>null = not confirmed, "true" = confirmed with current wiki template, "Pet/3" = confirmed with specific variant</summary>
+    public string? RewardsConfirmed { get; set; }
     public bool ItemPageConfirmed { get; set; }
     public bool ImagesConfirmed { get; set; }
-    public bool AnyConfirmed => EventPageConfirmed || RewardsConfirmed || ItemPageConfirmed || ImagesConfirmed;
+    public bool AnyConfirmed => EventPageConfirmed || RewardsConfirmed != null || ItemPageConfirmed || ImagesConfirmed;
 }
 
 // ── Diff models ──────────────────────────────────────────────────
@@ -260,7 +264,8 @@ public class CachedMysteryStatus
     public int ImagesTotalExpected { get; set; }
     public int ImagesExistOnWiki { get; set; }
     public bool EventPageConfirmed { get; set; }
-    public bool RewardsConfirmed { get; set; }
+    [JsonConverter(typeof(BoolOrStringJsonConverter))]
+    public string? RewardsConfirmed { get; set; }
     public bool ItemPageConfirmed { get; set; }
     public bool ImagesConfirmed { get; set; }
     public int MysteryTableIndex { get; set; }
@@ -284,4 +289,23 @@ public class MysteryUpdateStep
     public bool IsEnabled { get; set; } = true;
     /// <summary>When set, the step is disabled (unchecked + grayed) with this reason shown.</summary>
     public string? DisabledReason { get; set; }
+}
+
+/// <summary>JSON converter for backward-compatible deserialization of RewardsConfirmed (bool→string migration).</summary>
+public class BoolOrStringJsonConverter : JsonConverter<string?>
+{
+    public override string? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        if (reader.TokenType == JsonTokenType.True) return "true";
+        if (reader.TokenType == JsonTokenType.False) return null;
+        if (reader.TokenType == JsonTokenType.Null) return null;
+        if (reader.TokenType == JsonTokenType.String) return reader.GetString();
+        throw new JsonException($"Unexpected token {reader.TokenType} for BoolOrStringJsonConverter");
+    }
+
+    public override void Write(Utf8JsonWriter writer, string? value, JsonSerializerOptions options)
+    {
+        if (value == null) writer.WriteNullValue();
+        else writer.WriteStringValue(value);
+    }
 }

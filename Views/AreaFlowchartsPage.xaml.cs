@@ -67,6 +67,7 @@ public partial class AreaFlowchartsPage : UserControl
             return;
         }
 
+        loadingPanel.Visibility = Visibility.Visible;
         try
         {
             var service = new AreasService();
@@ -76,6 +77,7 @@ public partial class AreaFlowchartsPage : UserControl
                 .ToList();
             _areasLoaded = true;
             await DiscordFlowchartService.EnsureMappingLoadedAsync();
+            loadingPanel.Visibility = Visibility.Collapsed;
             BuildAreaList();
 
             // TEMP: Dump area-related bundles for research
@@ -113,6 +115,7 @@ public partial class AreaFlowchartsPage : UserControl
         }
         catch (Exception ex)
         {
+            loadingPanel.Visibility = Visibility.Collapsed;
             ShowInfo($"Failed to load areas: {ex.Message}", InfoBarSeverity.Error);
             txtEmpty.Text = "Failed to load areas.json.";
             btnGoToSettings.Visibility = Visibility.Collapsed;

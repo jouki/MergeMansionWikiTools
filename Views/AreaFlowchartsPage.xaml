@@ -83,7 +83,7 @@
                            Text="Not configured — set in Settings" />
                 <ui:Button x:Name="btnOpenFolder" Grid.Column="2"
                            Content="Open Folder" Appearance="Secondary"
-                           Click="BtnOpenFolder_Click" Height="30"
+                           Click="BtnOpenFolder_Click" Height="34"
                            Visibility="Collapsed" Margin="8,0,0,0" />
             </Grid>
 
@@ -92,6 +92,16 @@
         <!-- Scrollable area list -->
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <StackPanel MaxWidth="900" Margin="24,0,24,16">
+
+                <!-- Loading indicator -->
+                <StackPanel x:Name="loadingPanel" Visibility="Collapsed"
+                            HorizontalAlignment="Center" Margin="0,40,0,0">
+                    <ui:ProgressRing Width="32" Height="32" IsIndeterminate="True"
+                                     HorizontalAlignment="Center" />
+                    <TextBlock Text="Loading areas..." FontSize="13" Margin="0,12,0,0"
+                               HorizontalAlignment="Center"
+                               Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                </StackPanel>
 
                 <!-- Area list -->
                 <StackPanel x:Name="areaListPanel" />

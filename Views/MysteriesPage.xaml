@@ -41,6 +41,10 @@
                            Click="BtnCheckWiki_Click" Height="36" />
             </Grid>
 
+            <ProgressBar x:Name="checkWikiProgress"
+                         IsIndeterminate="True" Visibility="Collapsed"
+                         Height="3" Margin="4,-8,4,4" />
+
             <!-- Summary -->
             <TextBlock x:Name="txtSummary" FontSize="12"
                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"

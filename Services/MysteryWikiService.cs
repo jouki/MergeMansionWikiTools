@@ -164,7 +164,7 @@ public static class MysteryWikiService
 						value.RewardTemplateMatches = null;
 						value.RewardContentMatches = null;
 						value.MatchingVariant = null;
-						value.RewardsConfirmed = false;
+						value.RewardsConfirmed = null;
 					}
 					WikiCheckState imagesState = mystery.WikiStatus.ImagesState;
 					if (imagesState == WikiCheckState.Match || imagesState == WikiCheckState.Confirmed)
@@ -258,7 +258,10 @@ public static class MysteryWikiService
 					{
 						mystery.WikiStatus.MysteryTableIndex = index;
 						mystery.WikiStatus.ManualConfirm.EventPageConfirmed = Regex.IsMatch(fields, "eventPageManualConfirm\\s*=\\s*true", RegexOptions.IgnoreCase);
-						mystery.WikiStatus.ManualConfirm.RewardsConfirmed = Regex.IsMatch(fields, "rewardsManualConfirm\\s*=\\s*true", RegexOptions.IgnoreCase);
+						var rewardsMatch = Regex.Match(fields, "rewardsManualConfirm\\s*=\\s*(?:\"([^\"]+)\"|true)", RegexOptions.IgnoreCase);
+						mystery.WikiStatus.ManualConfirm.RewardsConfirmed = rewardsMatch.Success
+							? (rewardsMatch.Groups[1].Success ? rewardsMatch.Groups[1].Value : "true")
+							: null;
 						mystery.WikiStatus.ManualConfirm.ItemPageConfirmed = Regex.IsMatch(fields, "itemPageConfirmed\\s*=\\s*true", RegexOptions.IgnoreCase);
 						mystery.WikiStatus.ManualConfirm.ImagesConfirmed = Regex.IsMatch(fields, "imagesConfirmed\\s*=\\s*true", RegexOptions.IgnoreCase);
 					}
@@ -273,7 +276,10 @@ public static class MysteryWikiService
 		}
 	}
 
-	public static async Task<(string Before, string After, bool Success)> SetManualConfirmFlagAsync(string username, string password, MysteryEvent mystery, string flagName, bool value)
+	public static Task<(string Before, string After, bool Success)> SetManualConfirmFlagAsync(string username, string password, MysteryEvent mystery, string flagName, bool value)
+		=> SetManualConfirmFlagStringAsync(username, password, mystery, flagName, value ? "true" : null);
+
+	public static async Task<(string Before, string After, bool Success)> SetManualConfirmFlagStringAsync(string username, string password, MysteryEvent mystery, string flagName, string? value)
 	{
 		string content = await FetchPageContentAsync("Module:Datatable/Various");
 		if (string.IsNullOrEmpty(content))
@@ -294,13 +300,20 @@ public static class MysteryWikiService
 		string beforeLine = lineMatch.Value;
 		string fields = lineMatch.Groups[2].Value;
 		string afterFields;
-		if (value)
+		if (value != null)
 		{
-			afterFields = ((!Regex.IsMatch(fields, flagName + "\\s*=", RegexOptions.IgnoreCase)) ? (fields.TrimEnd().TrimEnd(',') + ", " + flagName + " = true") : Regex.Replace(fields, flagName + "\\s*=\\s*\\w+", flagName + " = true", RegexOptions.IgnoreCase));
+			// Format: flagName = "value" for strings, flagName = true for plain true
+			string luaValue = value == "true" ? "true" : $"\"{value}\"";
+			string insertText = flagName + " = " + luaValue;
+			if (!Regex.IsMatch(fields, flagName + "\\s*=", RegexOptions.IgnoreCase))
+				afterFields = fields.TrimEnd().TrimEnd(',') + ", " + insertText;
+			else
+				afterFields = Regex.Replace(fields, flagName + "\\s*=\\s*(?:\"[^\"]*\"|\\w+)", insertText, RegexOptions.IgnoreCase);
 		}
 		else
 		{
-			afterFields = Regex.Replace(fields, ",?\\s*" + flagName + "\\s*=\\s*true", "", RegexOptions.IgnoreCase);
+			// Remove the flag entirely (handles both quoted and unquoted values)
+			afterFields = Regex.Replace(fields, ",?\\s*" + flagName + "\\s*=\\s*(?:\"[^\"]*\"|true)", "", RegexOptions.IgnoreCase);
 			afterFields = Regex.Replace(afterFields, ",\\s*$", "");
 		}
 		string afterLine = lineMatch.Groups[1].Value + afterFields + lineMatch.Groups[3].Value;
@@ -312,7 +325,7 @@ public static class MysteryWikiService
 		string text2 = content;
 		int num = lineMatch.Index + lineMatch.Length;
 		string updatedContent = text + afterLine + text2.Substring(num, text2.Length - num);
-		string action = (value ? "Set" : "Remove");
+		string action = value != null ? "Set" : "Remove";
 		await PublishPageAsync(username, password, "Module:Datatable/Various", updatedContent, $"{action} {flagName} for {mystery.Name} (via MergeMansionWikiTools)");
 		return (Before: beforeLine, After: afterLine, Success: true);
 	}
@@ -1715,6 +1728,188 @@ public static class MysteryWikiService
 		}
 	}
 
+	public static async Task CheckSingleMysteryStatusAsync(MysteryEvent mystery, IReadOnlyList<MysteryEvent> allMysteries, DataService? ds, DialogueService? dialogueService = null)
+	{
+		using (AppLogger.Timed($"CheckSingleMysteryStatusAsync ({mystery.Name})"))
+		{
+			MysteryWikiStatusCache cache = LoadStatusCache();
+
+			// Phase 1: Disambiguation (reuse allMysteries for name collision detection)
+			HashSet<MysteryEvent> nameGroups = (from g in allMysteries.GroupBy(m => m.Name, StringComparer.OrdinalIgnoreCase)
+				where g.Count() > 1
+				select g).SelectMany(g => g).ToHashSet();
+
+			mystery.WikiStatus.SuggestedPageTitle = null;
+			string pageName = mystery.Name;
+			string suggestedTitle = pageName;
+			if (nameGroups.Contains(mystery) && mystery.StartDate.HasValue)
+			{
+				suggestedTitle = $"{pageName} (Mystery {mystery.StartDate.Value.Year})";
+			}
+			else
+			{
+				bool collision = false;
+				if (ds != null)
+				{
+					collision = ds.ChainNames.Values.Any(n => string.Equals(n, pageName, StringComparison.OrdinalIgnoreCase));
+					if (!collision)
+						collision = ds.ItemNames.Values.Any(n => string.Equals(n, pageName, StringComparison.OrdinalIgnoreCase));
+				}
+				if (!collision)
+					collision = allMysteries.Any(other => other != mystery && string.Equals(other.EventItemName, pageName, StringComparison.OrdinalIgnoreCase));
+				if (!collision)
+					collision = allMysteries.Any(other => other != mystery && string.Equals(other.Name, mystery.EventItemName, StringComparison.OrdinalIgnoreCase));
+				if (collision && mystery.StartDate.HasValue)
+					suggestedTitle = $"{pageName} (Mystery {mystery.StartDate.Value.Year})";
+			}
+			mystery.WikiStatus.SuggestedPageTitle = suggestedTitle;
+
+			// Phase 1.5: Wiki-based disambiguation
+			if (mystery.WikiStatus.SuggestedPageTitle == mystery.Name && mystery.StartDate.HasValue)
+			{
+				string yearTitle = $"{mystery.Name} (Mystery {mystery.StartDate.Value.Year})";
+				bool yearExists = await WikiMappingService.CheckPageExistsAsync(yearTitle);
+				if (yearExists)
+				{
+					mystery.WikiStatus.SuggestedPageTitle = yearTitle;
+					AppLogger.Info($"Wiki disambiguation: '{mystery.Name}' → '{yearTitle}'");
+				}
+			}
+
+			// Gallery template detection
+			try
+			{
+				var galleryTemplates = await FetchGalleryTemplatesAsync();
+				int decoCount = CountDecorations(mystery);
+				bool isPetM = mystery.MysteryType == MysteryType.Pet;
+				mystery.WikiStatus.MatchingGalleryVariant = FindMatchingGalleryVariant(decoCount, isPetM, galleryTemplates);
+			}
+			catch (Exception ex) { AppLogger.Info($"GalleryCheck error: {ex.Message}"); }
+
+			// Page existence
+			string eventTitle = mystery.WikiStatus.SuggestedPageTitle ?? mystery.Name;
+			mystery.WikiStatus.EventPageExists = await WikiMappingService.CheckPageExistsAsync(eventTitle);
+			if (!string.IsNullOrEmpty(mystery.EventItemName))
+				mystery.WikiStatus.EventItemPageExists = await WikiMappingService.CheckPageExistsAsync(mystery.EventItemName);
+
+			// Reward template check
+			try
+			{
+				var templates = await FetchRewardTemplatesAsync();
+				var (matches, variant) = CompareWithTemplates(mystery, templates);
+				mystery.WikiStatus.RewardTemplateMatches = matches;
+				mystery.WikiStatus.RewardContentMatches = matches;
+				mystery.WikiStatus.MatchingVariant = variant;
+			}
+			catch { }
+
+			// Event page content check
+			if (mystery.WikiStatus.EventPageExists == true)
+			{
+				try
+				{
+					string wikiContent = await FetchPageContentAsync(eventTitle);
+					if (wikiContent != null)
+					{
+						if (IsDisambiguationPage(wikiContent) && mystery.StartDate.HasValue)
+						{
+							string resolvedTitle = $"{mystery.Name} (Mystery {mystery.StartDate.Value.Year})";
+							mystery.WikiStatus.SuggestedPageTitle = resolvedTitle;
+							wikiContent = await FetchPageContentAsync(resolvedTitle);
+							if (wikiContent == null)
+							{
+								mystery.WikiStatus.EventPageExists = false;
+								mystery.WikiStatus.EventPageContentMatches = null;
+							}
+						}
+						if (wikiContent != null)
+						{
+							string generated = GenerateEventPageWithDialogues(mystery, mystery.WikiStatus.MatchingVariant, dialogueService);
+							mystery.WikiStatus.EventPageContentMatches = CompareEventPageContent(generated, wikiContent);
+						}
+					}
+				}
+				catch { }
+			}
+
+			// Event item page content check
+			if (mystery.WikiStatus.EventItemPageExists == true && !string.IsNullOrEmpty(mystery.EventItemName))
+			{
+				try
+				{
+					string wikiContent = await FetchPageContentAsync(mystery.EventItemName);
+					if (wikiContent != null)
+						mystery.WikiStatus.EventItemPageContentMatches = CompareEventItemPageContent(mystery, wikiContent, ds);
+				}
+				catch { }
+			}
+
+			// Images check
+			try
+			{
+				string imgName = mystery.WikiImageName;
+				string pageNameUsc = imgName.Replace(' ', '_');
+				bool isPetM = mystery.MysteryType == MysteryType.Pet;
+				int decoCount = CountDecorations(mystery);
+				List<string> expectedImages = new List<string>
+				{
+					pageNameUsc + ".png",
+					FormatFileName(imgName, 1),
+					pageNameUsc + "_Icon.png"
+				};
+				for (int d = (!isPetM ? 1 : 0); d <= decoCount + (isPetM ? -1 : 0); d++)
+					expectedImages.Add(FormatFileName(imgName + "Decoration", d));
+				if (!string.IsNullOrEmpty(mystery.EventItemName) && ds != null)
+				{
+					var eiChain = ds.Chains.FirstOrDefault(c =>
+						string.Equals(c.DisplayName, mystery.EventItemName, StringComparison.OrdinalIgnoreCase));
+					if (eiChain != null && eiChain.Items.Count > 0)
+					{
+						foreach (var level in eiChain.Items.Select(i => i.Level).Distinct().OrderBy(l => l))
+							expectedImages.Add(FormatFileName(mystery.EventItemName, level));
+					}
+				}
+				mystery.WikiStatus.ImagesTotalExpected = expectedImages.Count;
+				var imgFileNames = expectedImages.Select(f => "File:" + f);
+				var imgExistMap = await CheckPagesExistAsync(imgFileNames);
+				mystery.WikiStatus.ImagesExistOnWiki = expectedImages.Count(f => imgExistMap.GetValueOrDefault("File:" + f, false));
+			}
+			catch (Exception ex) { AppLogger.Warn("Images check failed: " + ex.Message); }
+
+			// Wiki listing check
+			try
+			{
+				string mainPageContent = await FetchPageContentAsync("Merge Mansion Wiki");
+				string mysteryTableContent = await FetchPageContentAsync("Template:Events/Mystery Events");
+				string moduleContent = await FetchPageContentAsync("Module:Datatable/Various");
+				var mysteryEventsMatch = System.Text.RegularExpressions.Regex.Match(mainPageContent ?? "", "! colspan = 2 \\| Latest \\[\\[Mystery Events\\]\\]");
+				string mysteryEventsSection = "";
+				if (mysteryEventsMatch.Success && mainPageContent != null)
+				{
+					string afterHdr = mainPageContent.Substring(mysteryEventsMatch.Index + mysteryEventsMatch.Length);
+					var nextHdr = System.Text.RegularExpressions.Regex.Match(afterHdr, "! colspan = 2 \\|");
+					mysteryEventsSection = nextHdr.Success
+						? mainPageContent.Substring(mysteryEventsMatch.Index, mysteryEventsMatch.Length + nextHdr.Index)
+						: mainPageContent.Substring(mysteryEventsMatch.Index);
+				}
+				string pt = mystery.WikiStatus.SuggestedPageTitle ?? mystery.Name;
+				mystery.WikiStatus.WikiMainPageListed = mysteryEventsSection.Contains(mystery.Name, StringComparison.OrdinalIgnoreCase)
+					|| (pt != mystery.Name && mysteryEventsSection.Contains(pt, StringComparison.OrdinalIgnoreCase));
+				mystery.WikiStatus.WikiMysteryTableListed = mysteryTableContent != null && (
+					mysteryTableContent.Contains($"[[{pt}]]", StringComparison.OrdinalIgnoreCase) ||
+					mysteryTableContent.Contains($"[[{pt}|", StringComparison.OrdinalIgnoreCase) ||
+					mysteryTableContent.Contains($"|{pt}|", StringComparison.OrdinalIgnoreCase) ||
+					mysteryTableContent.Contains($"|{pt}}}", StringComparison.OrdinalIgnoreCase));
+				mystery.WikiStatus.WikiModuleListed = moduleContent != null && (moduleContent.Contains("\"" + mystery.Name + "\"", StringComparison.OrdinalIgnoreCase) || moduleContent.Contains("\"" + pt + "\"", StringComparison.OrdinalIgnoreCase));
+			}
+			catch (Exception ex) { AppLogger.Warn("Wiki listing check failed: " + ex.Message); }
+
+			await LoadManualConfirmFlagsAsync(new[] { mystery });
+			UpdateCache(new[] { mystery }, cache);
+			SaveStatusCache(cache);
+		}
+	}
+
 	public static async Task<string> PublishPageAsync(string username, string password, string pageTitle, string content, string editSummary)
 	{
 		using HttpClient client = await WikiMappingService.CreateAuthenticatedClientAsync(username, password);
@@ -2441,7 +2636,7 @@ public static class MysteryWikiService
 		return array[length];
 	}
 
-	public static async Task<(string? WikiContent, string GeneratedContent, List<DiffLine> Diffs, string PageTitle)> ComputeDiffAsync(MysteryEvent mystery, MysteryDiffScope scope, DataService? ds, WikiMappingCache? wikiMapping, MysteryItemMapping? mapping, DialogueService? dialogueService)
+	public static async Task<(string? WikiContent, string GeneratedContent, List<DiffLine> Diffs, string PageTitle)> ComputeDiffAsync(MysteryEvent mystery, MysteryDiffScope scope, DataService? ds, WikiMappingCache? wikiMapping, MysteryItemMapping? mapping, DialogueService? dialogueService, string? overrideRewardVariant = null)
 	{
 		string generated;
 		string pageTitle;
@@ -2493,7 +2688,7 @@ public static class MysteryWikiService
 					AppLogger.Info($"Gallery auto-detect failed: {ex.Message}");
 				}
 			}
-			generated = GenerateEventPageWithDialogues(mystery, mystery.WikiStatus.MatchingVariant, dialogueService);
+			generated = GenerateEventPageWithDialogues(mystery, overrideRewardVariant ?? mystery.WikiStatus.MatchingVariant, dialogueService);
 			break;
 		case MysteryDiffScope.EventItemPage:
 			pageTitle = mystery.EventItemName ?? mystery.Name;
@@ -2514,7 +2709,7 @@ public static class MysteryWikiService
 			{
 				mystery.WikiStatus.SuggestedPageTitle = resolvedTitle;
 				// Re-generate with updated SuggestedPageTitle so EventDisplayName is correct
-				generated = GenerateEventPageWithDialogues(mystery, mystery.WikiStatus.MatchingVariant, dialogueService);
+				generated = GenerateEventPageWithDialogues(mystery, overrideRewardVariant ?? mystery.WikiStatus.MatchingVariant, dialogueService);
 			}
 		}
 		else
@@ -2647,9 +2842,22 @@ public static class MysteryWikiService
 		}
 		if (_petDisplayNames != null && _petDisplayNames.TryGetValue(configKey, out string value))
 		{
-			return value;
+			return StripPetSuffix(value);
 		}
 		return configKey;
+	}
+
+	/// <summary>
+	/// Strips " the ..." suffix from pet SelectionHeader to get wiki display name.
+	/// E.g., "Amy the Cat" → "Amy", "Pablo the Goat" → "Pablo",
+	/// but "Klepto &amp; Bandit" → "Klepto &amp; Bandit" (no " the "), "Boo!" → "Boo!" (no " the ").
+	/// </summary>
+	private static string StripPetSuffix(string name)
+	{
+		int idx = name.IndexOf(" the ", StringComparison.OrdinalIgnoreCase);
+		if (idx > 0)
+			return name[..idx];
+		return name;
 	}
 
 	public static string GenerateEventPageWithDialogues(MysteryEvent mystery, string? rewardVariant, DialogueService? dialogueService)

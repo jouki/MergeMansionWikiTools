@@ -25,6 +25,11 @@ namespace MergeMansionWikiTools
                 CommandManager.PreviewExecutedEvent,
                 new ExecutedRoutedEventHandler(OnTextBoxCopyCut));
 
+            // Shift+MouseWheel → horizontal scroll on any ScrollViewer
+            EventManager.RegisterClassHandler(typeof(ScrollViewer),
+                UIElement.PreviewMouseWheelEvent,
+                new MouseWheelEventHandler(OnScrollViewerShiftWheel));
+
             AppLogger.Init();
 
             // Apply theme early (before MainWindow renders) based on saved preference
@@ -144,6 +149,15 @@ namespace MergeMansionWikiTools
                     tb.Text = tb.Text.Remove(start, len);
                     tb.SelectionStart = start;
                 }
+                e.Handled = true;
+            }
+        }
+
+        private static void OnScrollViewerShiftWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (sender is ScrollViewer sv && (Keyboard.Modifiers & ModifierKeys.Shift) != 0)
+            {
+                sv.ScrollToHorizontalOffset(sv.HorizontalOffset - e.Delta);
                 e.Handled = true;
             }
         }
