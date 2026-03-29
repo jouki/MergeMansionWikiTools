@@ -3587,10 +3587,35 @@ public static class MysteryWikiService
 			int num2 = 0;
 			int num3 = 0;
 			int num4 = 0;
+			// Pet-specific sprite collection (no sactx filter required)
+			var petDecors = new List<(string Name, string Texture, int X, int Y, int W, int H, int Order)>();
 			foreach (JsonElement item2 in value.EnumerateArray())
 			{
 				string text2 = item2.GetProperty("name").GetString() ?? "";
 				string text3 = item2.GetProperty("textureName").GetString() ?? "";
+				// Collect pet decoration sprites before sactx filter (they may be on non-sactx atlas textures)
+				if (isPet)
+				{
+					int prX = (int)item2.GetProperty("rectX").GetSingle();
+					int prY = (int)item2.GetProperty("rectY").GetSingle();
+					int prW = (int)item2.GetProperty("rectWidth").GetSingle();
+					int prH = (int)item2.GetProperty("rectHeight").GetSingle();
+					if (text2.Equals(progressionEventId + "_Decor_Pet", StringComparison.OrdinalIgnoreCase))
+						petDecors.Add((text2, text3, prX, prY, prW, prH, 0));
+					else if (text2.Equals(progressionEventId + "_Decor_PetHomeTA", StringComparison.OrdinalIgnoreCase))
+						petDecors.Add((text2, text3, prX, prY, prW, prH, 1));
+					else if (text2.Equals(progressionEventId + "_Decor_PetHomeTB", StringComparison.OrdinalIgnoreCase))
+						petDecors.Add((text2, text3, prX, prY, prW, prH, 2));
+					// Icon: handle both {id}_Set_Icon and {id}Set_Icon (some game data omits underscore)
+					if (text == null
+						&& (text2.Equals(progressionEventId + "_Set_Icon", StringComparison.OrdinalIgnoreCase)
+							|| text2.Equals(progressionEventId + "Set_Icon", StringComparison.OrdinalIgnoreCase))
+						&& !text2.Contains("Badge", StringComparison.OrdinalIgnoreCase))
+					{
+						text = text3;
+						num = prX; num2 = prY; num3 = prW; num4 = prH;
+					}
+				}
 				if (!text3.StartsWith("sactx-"))
 				{
 					continue;
@@ -3619,6 +3644,49 @@ public static class MysteryWikiService
 					num2 = (int)item2.GetProperty("rectY").GetSingle();
 					num3 = (int)item2.GetProperty("rectWidth").GetSingle();
 					num4 = (int)item2.GetProperty("rectHeight").GetSingle();
+				}
+			}
+			// Pet fallback: if standard detection found nothing, use pet-specific sprites
+			if (list.Count == 0 && isPet && petDecors.Count > 0)
+			{
+				// Deduplicate by name, prefer entries whose texture resolves to a file; order Pet→TA→TB
+				var seenPet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+				var orderedPet = petDecors
+					.OrderBy(p => p.Order)
+					.ThenByDescending(p => ResolveSpriteTexturePath(exportDir, p.Texture) != null ? 1 : 0)
+					.Where(p => seenPet.Add(p.Name))
+					.ToList();
+				// Find atlas texture from PetHome sprites (for Decor_Pet fallback)
+				string? atlasTextureName = orderedPet
+					.Where(p => p.Texture.Contains("Atlas", StringComparison.OrdinalIgnoreCase))
+					.Select(p => p.Texture)
+					.FirstOrDefault();
+				foreach (var pd in orderedPet)
+				{
+					bool isDecorPet = pd.Name.EndsWith("_Decor_Pet", StringComparison.OrdinalIgnoreCase);
+					string? resolvedTex = ResolveSpriteTexturePath(exportDir, pd.Texture);
+					if (resolvedTex != null)
+					{
+						// Texture file found — use metadata rect as-is
+						list.Add((pd.Name, pd.Texture, pd.X, pd.Y, pd.W, pd.H));
+					}
+					else if (isDecorPet && atlasTextureName != null && ResolveSpriteTexturePath(exportDir, atlasTextureName) != null)
+					{
+						// Decor_Pet standalone missing — compute position on Decorations Atlas
+						int maxDecoEndX = orderedPet
+							.Where(p => !p.Name.EndsWith("_Decor_Pet", StringComparison.OrdinalIgnoreCase)
+										&& p.Texture.Equals(atlasTextureName, StringComparison.OrdinalIgnoreCase))
+							.Select(p => p.X + p.W)
+							.DefaultIfEmpty(0)
+							.Max();
+						int petX = maxDecoEndX + 4; // small padding after last decoration
+						list.Add((pd.Name, atlasTextureName, petX, pd.Y, pd.W, pd.H));
+					}
+					else if (!isDecorPet)
+					{
+						// Non-pet decoration with unresolvable texture — still add, texture resolution will retry later
+						list.Add((pd.Name, pd.Texture, pd.X, pd.Y, pd.W, pd.H));
+					}
 				}
 			}
 			if (list.Count == 0)
@@ -3652,6 +3720,7 @@ public static class MysteryWikiService
 			}
 			var source = (from s in list
 				where allowedSlots.Count == 0 || allowedSlots.Contains(s.Item1)
+					|| s.Item1.Contains("_Decor_Pet", StringComparison.OrdinalIgnoreCase)
 				orderby slotOrder.TryGetValue(s.Item1, out var value4) ? value4 : ExtractSlotNumber(s.Item1)
 				select s).ToList();
 			HashSet<string> seenNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -3685,8 +3754,13 @@ public static class MysteryWikiService
 				string text9 = Path.Combine(exportDir, item5.Item2 + ".png");
 				if (!File.Exists(text9))
 				{
-					decoNum++;
-					continue;
+					// Fallback: try sactx-prefixed atlas file
+					text9 = ResolveSpriteTexturePath(exportDir, item5.Item2);
+					if (text9 == null)
+					{
+						decoNum++;
+						continue;
+					}
 				}
 				if (!dictionary.TryGetValue(text9, out var value2))
 				{
@@ -3763,7 +3837,9 @@ public static class MysteryWikiService
 					}
 				}
 				string text13 = Path.Combine(exportDir, text + ".png");
-				if (File.Exists(text13))
+				if (!File.Exists(text13))
+					text13 = ResolveSpriteTexturePath(exportDir, text);
+				if (text13 != null && File.Exists(text13))
 				{
 					if (!dictionary.TryGetValue(text13, out var value3))
 					{
@@ -3945,6 +4021,20 @@ public static class MysteryWikiService
 			AppLogger.Warn("AutoOrderByWikiMatch failed: " + ex.Message);
 			return tiles;
 		}
+	}
+
+	/// <summary>Resolves a sprite texture name to an actual file path, trying direct name then sactx-prefixed glob.</summary>
+	private static string? ResolveSpriteTexturePath(string exportDir, string textureName)
+	{
+		string direct = Path.Combine(exportDir, textureName + ".png");
+		if (File.Exists(direct)) return direct;
+		try
+		{
+			string[] sactxFiles = Directory.GetFiles(exportDir, "sactx-*-" + textureName + "-*.png");
+			if (sactxFiles.Length > 0) return sactxFiles[0];
+		}
+		catch { }
+		return null;
 	}
 
 	private static int ExtractSlotNumber(string spriteName)

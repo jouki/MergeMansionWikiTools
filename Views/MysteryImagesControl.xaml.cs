@@ -49,6 +49,10 @@ public partial class MysteryImagesControl : UserControl
 
 	private double _dragStartX;
 
+	private bool _suppressDuplicateWarnings;
+
+	private enum UploadOutcome { Uploaded, DuplicateSkipped, Skipped, Cancelled }
+
 	private double _dragStartY;
 
 	private bool _isDragging;
@@ -649,9 +653,10 @@ public partial class MysteryImagesControl : UserControl
 
 		btnUpload.IsEnabled = false;
 		btnOptimize.IsEnabled = false;
-		int uploaded = 0, skipped = 0, failed = 0;
+		int uploaded = 0, skipped = 0, failed = 0, duplicates = 0;
 		bool forceAll = false, skipAll = false, confirmAll = false, optimizeAll = false;
 		bool cancelled = false;
+		_suppressDuplicateWarnings = false;
 
 		Window ownerWindow = Window.GetWindow(this);
 
@@ -773,9 +778,14 @@ public partial class MysteryImagesControl : UserControl
 
 				if (doUpload)
 				{
-					bool success = await UploadWithRetryAsync(client, csrfToken, file, ownerWindow, idx, selected.Count);
-					if (success) uploaded++;
-					else failed++;
+					var outcome = await UploadWithRetryAsync(client, csrfToken, file, ownerWindow, idx, selected.Count);
+					switch (outcome)
+					{
+						case UploadOutcome.Uploaded: uploaded++; break;
+						case UploadOutcome.DuplicateSkipped: duplicates++; break;
+						case UploadOutcome.Skipped: skipped++; break;
+						case UploadOutcome.Cancelled: cancelled = true; break;
+					}
 				}
 			}
 		}
@@ -812,9 +822,10 @@ public partial class MysteryImagesControl : UserControl
 
 		var parts = new List<string>();
 		if (uploaded > 0) parts.Add($"{uploaded} uploaded");
+		if (duplicates > 0) parts.Add($"{duplicates} duplicates skipped");
 		if (skipped > 0) parts.Add($"{skipped} skipped");
 		if (failed > 0) parts.Add($"{failed} failed");
-		ShowInfo(string.Join("  ", parts), failed > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success);
+		ShowInfo(string.Join("  ·  ", parts), failed > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success);
 	}
 
 	private void TryMarkOptimized(DetectedDecorationFile file)
@@ -856,7 +867,7 @@ public partial class MysteryImagesControl : UserControl
 		}));
 	}
 
-	private async Task<bool> UploadWithRetryAsync(HttpClient client, string csrfToken,
+	private async Task<UploadOutcome> UploadWithRetryAsync(HttpClient client, string csrfToken,
 		DetectedDecorationFile file, Window ownerWindow, int idx, int total)
 	{
 		while (true)
@@ -869,16 +880,90 @@ public partial class MysteryImagesControl : UserControl
 					fileData: await File.ReadAllBytesAsync(file.SourcePath),
 					description: "{{Permission}}");
 				UserStatsService.Increment(s => s.MysteryPagesPublished++);
-				return true;
+				return UploadOutcome.Uploaded;
 			}
 			catch (Exception ex)
 			{
 				AppLogger.Warn($"Upload failed for {file.WikiFilename}: {ex.Message}");
-				var result = System.Windows.MessageBox.Show(
-					$"Upload failed for {file.WikiFilename}:\n\n{ex.Message}\n\nRetry?",
-					"Upload Error", System.Windows.MessageBoxButton.YesNoCancel, System.Windows.MessageBoxImage.Warning);
-				if (result == System.Windows.MessageBoxResult.Yes) continue;
-				return false;
+				bool isDuplicate = ex.Message.Contains("exact duplicate", StringComparison.OrdinalIgnoreCase);
+
+				if (isDuplicate)
+				{
+					if (_suppressDuplicateWarnings)
+						return UploadOutcome.DuplicateSkipped;
+
+					var dupContent = new System.Windows.Controls.StackPanel();
+					dupContent.Children.Add(new Wpf.Ui.Controls.TextBlock
+					{
+						Text = file.WikiFilename,
+						FontWeight = FontWeights.SemiBold,
+						FontSize = 14
+					});
+					dupContent.Children.Add(new Wpf.Ui.Controls.TextBlock
+					{
+						Text = "This file is already up to date on the wiki.",
+						Margin = new Thickness(0, 8, 0, 0),
+						Opacity = 0.75
+					});
+					var chkSuppress = new System.Windows.Controls.CheckBox
+					{
+						Content = "Don't show again for duplicates during this upload",
+						Margin = new Thickness(0, 12, 0, 0)
+					};
+					dupContent.Children.Add(chkSuppress);
+
+					var dupBox = new Wpf.Ui.Controls.MessageBox
+					{
+						Title = "Duplicate File",
+						Content = dupContent,
+						PrimaryButtonText = "Continue",
+						CloseButtonText = "Cancel All",
+						MinWidth = 450,
+						Owner = ownerWindow
+					};
+					Wpf.Ui.Appearance.ApplicationThemeManager.Apply(dupBox);
+					var dupResult = await dupBox.ShowDialogAsync();
+					if (chkSuppress.IsChecked == true) _suppressDuplicateWarnings = true;
+					if (dupResult == Wpf.Ui.Controls.MessageBoxResult.Primary)
+						return UploadOutcome.DuplicateSkipped;
+					return UploadOutcome.Cancelled;
+				}
+
+				// Non-duplicate error
+				var errorContent = new System.Windows.Controls.StackPanel();
+				errorContent.Children.Add(new Wpf.Ui.Controls.TextBlock
+				{
+					Text = file.WikiFilename,
+					FontWeight = FontWeights.SemiBold,
+					FontSize = 14
+				});
+				errorContent.Children.Add(new System.Windows.Controls.TextBox
+				{
+					Text = ex.Message,
+					IsReadOnly = true,
+					TextWrapping = TextWrapping.Wrap,
+					BorderThickness = new Thickness(0),
+					Background = System.Windows.Media.Brushes.Transparent,
+					Padding = new Thickness(0),
+					Margin = new Thickness(0, 8, 0, 0),
+					FontSize = 12,
+					Opacity = 0.75
+				});
+				var msgBox = new Wpf.Ui.Controls.MessageBox
+				{
+					Title = "Upload Failed",
+					Content = errorContent,
+					PrimaryButtonText = "Retry",
+					SecondaryButtonText = "Skip",
+					CloseButtonText = "Cancel All",
+					MinWidth = 450,
+					Owner = ownerWindow
+				};
+				Wpf.Ui.Appearance.ApplicationThemeManager.Apply(msgBox);
+				var result = await msgBox.ShowDialogAsync();
+				if (result == Wpf.Ui.Controls.MessageBoxResult.Primary) continue;
+				if (result == Wpf.Ui.Controls.MessageBoxResult.Secondary) return UploadOutcome.Skipped;
+				return UploadOutcome.Cancelled;
 			}
 		}
 	}

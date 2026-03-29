@@ -376,3 +376,7 @@ _DATA/
 
 # Claude Code local config
 .claude/
+
+# Desktop launcher
+MergeMansionWikiTools.bat
+Assets/LauncherIcon.ico
