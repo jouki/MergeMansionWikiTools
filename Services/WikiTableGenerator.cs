@@ -27,7 +27,8 @@ public class WikiTableGenerator
     /// <param name="tableName">Display name for the table header</param>
     /// <param name="lowPrices">If true, sets LowPrices variable to true</param>
     /// <param name="captionOverride">If set, use this for the table caption instead of tableName/PAGENAME</param>
-    public string Generate(ParsedChain chain, string tableName, bool lowPrices, bool hardcodeName = false, string? captionOverride = null)
+    /// <param name="sellsForInvoke">If set, force show Sells For column with this invoke template per row (e.g. for event items)</param>
+    public string Generate(ParsedChain chain, string tableName, bool lowPrices, bool hardcodeName = false, string? captionOverride = null, string? sellsForInvoke = null)
     {
         Warnings.Clear();
 
@@ -37,7 +38,7 @@ public class WikiTableGenerator
         if (items.Count == 0) return "<!-- No items in chain -->";
 
         // ── Determine which columns to show (check ALL items incl. aliases) ──
-        bool showSellsFor = allItems.Any(i => !i.Unsellable);
+        bool showSellsFor = sellsForInvoke != null || allItems.Any(i => !i.Unsellable);
         bool showDrops = allItems.Any(i => HasDrops(i));
         bool showDropValues = allItems.Any(i =>
             (i.IsGenerator && i.ActivationAmountInCycle > 0)
@@ -324,7 +325,9 @@ public class WikiTableGenerator
 
                             if (showSellsFor)
                             {
-                                if (levelItems.All(i => i.Unsellable))
+                                if (sellsForInvoke != null)
+                                    sb.AppendLine($"| rowspan = {totalRows} | {sellsForInvoke}");
+                                else if (levelItems.All(i => i.Unsellable))
                                     sb.AppendLine($"| rowspan = {totalRows} | {{{{Dash}}}}");
                                 else
                                     sb.AppendLine($"| rowspan = {totalRows} | {{{{#Invoke:Items|GetItemPriceByLevel|{{{{#var:Level}}}}}}}}");
@@ -381,7 +384,9 @@ public class WikiTableGenerator
 
                                 if (showSellsFor)
                                 {
-                                    if (levelItems.All(i => i.Unsellable))
+                                    if (sellsForInvoke != null)
+                                        sb.AppendLine($"| rowspan = {totalRows} | {sellsForInvoke}");
+                                    else if (levelItems.All(i => i.Unsellable))
                                         sb.AppendLine($"| rowspan = {totalRows} | {{{{Dash}}}}");
                                     else
                                         sb.AppendLine($"| rowspan = {totalRows} | {{{{#Invoke:Items|GetItemPriceByLevel|{{{{#var:Level}}}}}}}}");
@@ -430,7 +435,9 @@ public class WikiTableGenerator
 
                 if (showSellsFor)
                 {
-                    if (levelItems.All(i => i.Unsellable))
+                    if (sellsForInvoke != null)
+                        sb.AppendLine($"| {sellsForInvoke}");
+                    else if (levelItems.All(i => i.Unsellable))
                         sb.AppendLine("| {{Dash}}");
                     else
                         sb.AppendLine("| {{#Invoke:Items|GetItemPriceByLevel|{{#var:Level}}}}");

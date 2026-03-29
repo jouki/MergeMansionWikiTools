@@ -937,62 +937,20 @@ public static class MysteryWikiService
 			MysteryRewardLevel mysteryRewardLevel3 = ((i < mystery.GoldTier.Count) ? mystery.GoldTier[i] : null);
 			int value = mysteryRewardLevel?.XpRequired ?? mysteryRewardLevel2?.XpRequired ?? mysteryRewardLevel3?.XpRequired ?? 0;
 			stringBuilder.AppendLine("|-");
-			StringBuilder stringBuilder2 = stringBuilder;
-			StringBuilder stringBuilder3 = stringBuilder2;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(2, 1, stringBuilder2);
-			handler.AppendLiteral("| ");
-			handler.AppendFormatted(i);
-			stringBuilder3.AppendLine(ref handler);
-			stringBuilder2 = stringBuilder;
-			StringBuilder stringBuilder4 = stringBuilder2;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(14, 1, stringBuilder2);
-			handler.AppendLiteral("| {{Pass XP}} ");
-			handler.AppendFormatted(value);
-			stringBuilder4.AppendLine(ref handler);
-			stringBuilder2 = stringBuilder;
-			StringBuilder stringBuilder5 = stringBuilder2;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(2, 1, stringBuilder2);
-			handler.AppendLiteral("| ");
-			handler.AppendFormatted(FormatRewards(mysteryRewardLevel?.Rewards));
-			stringBuilder5.AppendLine(ref handler);
-			stringBuilder2 = stringBuilder;
-			StringBuilder stringBuilder6 = stringBuilder2;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(2, 1, stringBuilder2);
-			handler.AppendLiteral("| ");
-			handler.AppendFormatted(FormatRewards(mysteryRewardLevel2?.Rewards, "silver"));
-			stringBuilder6.AppendLine(ref handler);
-			stringBuilder2 = stringBuilder;
-			StringBuilder stringBuilder7 = stringBuilder2;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(2, 1, stringBuilder2);
-			handler.AppendLiteral("| ");
-			handler.AppendFormatted(FormatRewards(mysteryRewardLevel3?.Rewards, "gold"));
-			stringBuilder7.AppendLine(ref handler);
+			stringBuilder.AppendLine($"| {i}");
+			stringBuilder.AppendLine($"| {{{{Pass XP}}}} {value}");
+			stringBuilder.AppendLine($"| {FormatRewards(mysteryRewardLevel?.Rewards)}");
+			stringBuilder.AppendLine($"| {FormatRewards(mysteryRewardLevel2?.Rewards, "silver")}");
+			stringBuilder.AppendLine($"| {FormatRewards(mysteryRewardLevel3?.Rewards, "gold")}");
 		}
-		int[] array = new int[5] { 2000, 3000, 3000, 4000, 5000 };
+		int[] premiumXp = { 2000, 3000, 3000, 4000, 5000 };
 		for (int j = 0; j < 5; j++)
 		{
 			stringBuilder.AppendLine("|-");
-			StringBuilder stringBuilder2 = stringBuilder;
-			StringBuilder stringBuilder8 = stringBuilder2;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, stringBuilder2);
-			handler.AppendLiteral("| {{PremiumLevel|");
-			handler.AppendFormatted(j + 1);
-			handler.AppendLiteral("}}");
-			stringBuilder8.AppendLine(ref handler);
-			stringBuilder2 = stringBuilder;
-			StringBuilder stringBuilder9 = stringBuilder2;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(14, 1, stringBuilder2);
-			handler.AppendLiteral("| {{Pass XP}} ");
-			handler.AppendFormatted(array[j]);
-			stringBuilder9.AppendLine(ref handler);
+			stringBuilder.AppendLine($"| {{{{PremiumLevel|{j + 1}}}}}");
+			stringBuilder.AppendLine($"| {{{{Pass XP}}}} {premiumXp[j]}");
 			stringBuilder.AppendLine("| {{Dash}}");
-			stringBuilder2 = stringBuilder;
-			StringBuilder stringBuilder10 = stringBuilder2;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(88, 1, stringBuilder2);
-			handler.AppendLiteral("| colspan = 2 style = \"text-align: center\" | {{Item/Group|Challenge Chest|");
-			handler.AppendFormatted(j + 1);
-			handler.AppendLiteral("|iconLevel=1}}");
-			stringBuilder10.AppendLine(ref handler);
+			stringBuilder.AppendLine($"| colspan = 2 style = \"text-align: center\" | {{{{Item/Group|Challenge Chest|{j + 1}|iconLevel=1}}}}");
 		}
 		stringBuilder.AppendLine("|}");
 		return stringBuilder.ToString();
@@ -1129,38 +1087,18 @@ public static class MysteryWikiService
 	public static string GenerateEventItemPage(MysteryEvent mystery, DataService? ds = null, WikiMappingCache? wikiMapping = null)
 	{
 		StringBuilder stringBuilder = new StringBuilder();
-		string text = mystery.WikiStatus.SuggestedPageTitle ?? mystery.Name;
-		string value = mystery.StartDate?.Year.ToString() ?? "YYYY";
-		string text2 = mystery.EventItemName ?? "{{PAGENAME}}";
-		string text3 = StripParenthetical(text2);
-		bool flag = text3 != text2;
-		bool flag2 = text != mystery.Name;
-		StringBuilder stringBuilder2 = stringBuilder;
-		StringBuilder stringBuilder3 = stringBuilder2;
-		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(25, 1, stringBuilder2);
-		handler.AppendLiteral("{{#vardefine:EventName|");
-		handler.AppendFormatted(text);
-		handler.AppendLiteral("}}");
-		stringBuilder3.Append(ref handler);
-		if (flag2)
+		string eventPageTitle = mystery.WikiStatus.SuggestedPageTitle ?? mystery.Name;
+		string year = mystery.StartDate?.Year.ToString() ?? "YYYY";
+		string eventItemName = mystery.EventItemName ?? "{{PAGENAME}}";
+		string strippedName = StripParenthetical(eventItemName);
+		bool hasParenthetical = strippedName != eventItemName;
+		bool hasDisambiguation = eventPageTitle != mystery.Name;
+		stringBuilder.Append($"{{{{#vardefine:EventName|{eventPageTitle}}}}}");
+		if (hasDisambiguation)
+			stringBuilder.AppendLine($"{{{{#vardefine:EventDisplayName|{mystery.Name}}}}}");
+		if (hasParenthetical)
 		{
-			stringBuilder2 = stringBuilder;
-			StringBuilder stringBuilder4 = stringBuilder2;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(32, 1, stringBuilder2);
-			handler.AppendLiteral("{{#vardefine:EventDisplayName|");
-			handler.AppendFormatted(mystery.Name);
-			handler.AppendLiteral("}}");
-			stringBuilder4.AppendLine(ref handler);
-		}
-		if (flag)
-		{
-			stringBuilder2 = stringBuilder;
-			StringBuilder stringBuilder5 = stringBuilder2;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(28, 1, stringBuilder2);
-			handler.AppendLiteral("{{#vardefine:DisplayTitle|");
-			handler.AppendFormatted(text3);
-			handler.AppendLiteral("}}");
-			stringBuilder5.AppendLine(ref handler);
+			stringBuilder.AppendLine($"{{{{#vardefine:DisplayTitle|{strippedName}}}}}");
 			stringBuilder.AppendLine("{{DISPLAYTITLE:{{#var:DisplayTitle}}}}");
 		}
 		stringBuilder.AppendLine("{{Infobox Items");
@@ -1169,74 +1107,35 @@ public static class MysteryWikiService
 		stringBuilder.AppendLine("{{ItemNameToFilename|{{PAGENAME}}|1}} {{!}} Level 1");
 		stringBuilder.AppendLine("{{ItemNameToFilename|{{PAGENAME}}|{{#Invoke:Items|GetItemMaxLevelFromChainName}}}} {{!}} Level {{#Invoke:Items|GetItemMaxLevelFromChainName}}");
 		stringBuilder.AppendLine("}}");
-		if (flag)
-		{
+		if (hasParenthetical)
 			stringBuilder.AppendLine("| title1 = {{#var:DisplayTitle}}");
-		}
 		stringBuilder.AppendLine("| type   = Drop Item");
-		stringBuilder.AppendLine(flag2
+		stringBuilder.AppendLine(hasDisambiguation
 			? "| source = Merging Items during {{Item/nolevel|{{#var:EventName}}|displayName={{#var:EventDisplayName}}}} Event"
 			: "| source = Merging Items during {{Item/nolevel|{{#var:EventName}}}} Event");
 		stringBuilder.AppendLine("}}");
-		string value2 = (flag ? "{{Item/Group|{{PAGENAME}}|4|displayName={{#var:DisplayTitle}}}}" : "{{Item/Group|{{PAGENAME}}|4}}");
-		string eventRef = flag2
+		string itemGroupRef = hasParenthetical ? "{{Item/Group|{{PAGENAME}}|4|displayName={{#var:DisplayTitle}}}}" : "{{Item/Group|{{PAGENAME}}|4}}";
+		string eventRef = hasDisambiguation
 			? "{{Item/nolevel|{{#var:EventName}}|displayName={{#var:EventDisplayName}}}}"
 			: "{{Item/nolevel|{{#var:EventName}}}}";
-		stringBuilder.AppendLine($"{value2} is an item in '''''Merge Mansion'''''.  It is used in the {eventRef} [[Events|Event]] of {value}.");
+		stringBuilder.AppendLine($"{itemGroupRef} is an item in '''''Merge Mansion'''''.  It is used in the {eventRef} [[Events|Event]] of {year}.");
 		stringBuilder.AppendLine();
-		string value3 = (flag ? "{{Item/nolevel|{{PAGENAME}}|1|displayName={{#var:DisplayTitle}}}}" : "{{Item/nolevel|{{PAGENAME}}|1}}");
-		string value4 = (flag ? "{{#var:DisplayTitle}}" : "{{PAGENAME}}");
-		stringBuilder2 = stringBuilder;
-		StringBuilder stringBuilder7 = stringBuilder2;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(170, 1, stringBuilder2);
-		handler.AppendLiteral("* ");
-		handler.AppendFormatted(value3);
-		handler.AppendLiteral("  can spawn from any merge action which takes place on the normal board and also on any Story Event boards like other [[Events#Progression_Events|Mystery Pass events]].");
-		stringBuilder7.AppendLine(ref handler);
-		stringBuilder2 = stringBuilder;
-		StringBuilder stringBuilder8 = stringBuilder2;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(71, 1, stringBuilder2);
-		handler.AppendLiteral("* ");
-		handler.AppendFormatted(value3);
-		handler.AppendLiteral("  can be merged up to level 4, which then gives the max points of 20.");
-		stringBuilder8.AppendLine(ref handler);
-		stringBuilder2 = stringBuilder;
-		StringBuilder stringBuilder9 = stringBuilder2;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(55, 1, stringBuilder2);
-		handler.AppendLiteral("* Similar to {{XP}}[[XP]] ");
-		handler.AppendFormatted(value4);
-		handler.AppendLiteral(" can be collected by tapping.");
-		stringBuilder9.AppendLine(ref handler);
+		string itemRef = hasParenthetical ? "{{Item/nolevel|{{PAGENAME}}|1|displayName={{#var:DisplayTitle}}}}" : "{{Item/nolevel|{{PAGENAME}}|1}}";
+		string displayName = hasParenthetical ? "{{#var:DisplayTitle}}" : "{{PAGENAME}}";
+		stringBuilder.AppendLine($"* {itemRef}  can spawn from any merge action which takes place on the normal board and also on any Story Event boards like other [[Events#Progression_Events|Mystery Pass events]].");
+		stringBuilder.AppendLine($"* {itemRef}  can be merged up to level 4, which then gives the max points of 20.");
+		stringBuilder.AppendLine($"* Similar to {{{{XP}}}}[[XP]] {displayName} can be collected by tapping.");
 		stringBuilder.AppendLine("* It is advisable to leave 2 empty spots whilst merging, as the priority order for drops whilst merging goes to:");
-		stringBuilder2 = stringBuilder;
-		StringBuilder stringBuilder10 = stringBuilder2;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(2, 1, stringBuilder2);
-		handler.AppendLiteral("# ");
-		handler.AppendFormatted(value3);
-		stringBuilder10.AppendLine(ref handler);
+		stringBuilder.AppendLine($"# {itemRef}");
 		stringBuilder.AppendLine("# Double Bubbles");
 		stringBuilder.AppendLine("# {{XP}} XP");
 		stringBuilder.AppendLine();
-		stringBuilder2 = stringBuilder;
-		StringBuilder stringBuilder11 = stringBuilder2;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(91, 1, stringBuilder2);
-		handler.AppendLiteral("Therefore, to maximise the ");
-		handler.AppendFormatted(value4);
-		handler.AppendLiteral(" drops and XP, it is best to keep 2 free spots for them to drop.");
-		stringBuilder11.AppendLine(ref handler);
+		stringBuilder.AppendLine($"Therefore, to maximise the {displayName} drops and XP, it is best to keep 2 free spots for them to drop.");
 		stringBuilder.AppendLine();
 		stringBuilder.AppendLine("== Descriptions == ");
 		for (int i = 1; i <= 4; i++)
 		{
-			stringBuilder2 = stringBuilder;
-			StringBuilder stringBuilder12 = stringBuilder2;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(71, 2, stringBuilder2);
-			handler.AppendLiteral("{{Item/Icon|{{PAGENAME}}|");
-			handler.AppendFormatted(i);
-			handler.AppendLiteral("}} {{#Invoke:Items|GetItemDescFromChainName|");
-			handler.AppendFormatted(i);
-			handler.AppendLiteral("}}");
-			stringBuilder12.AppendLine(ref handler);
+			stringBuilder.AppendLine($"{{{{Item/Icon|{{{{PAGENAME}}}}|{i}}}}} {{{{#Invoke:Items|GetItemDescFromChainName|{i}}}}}");
 			stringBuilder.AppendLine();
 		}
 		stringBuilder.AppendLine("== Statistics == ");
@@ -1273,54 +1172,26 @@ public static class MysteryWikiService
 				};
 			}
 			WikiTableGenerator wikiTableGenerator = new WikiTableGenerator(ds, wikiMapping);
-			string? captionOverride = flag ? "{{#var:DisplayTitle}}" : null;
-			stringBuilder.Append(wikiTableGenerator.Generate(parsedChain, mystery.EventItemName ?? "{{PAGENAME}}", lowPrices: false, captionOverride: captionOverride));
+			string? captionOverride = hasParenthetical ? "{{#var:DisplayTitle}}" : null;
+			stringBuilder.Append(wikiTableGenerator.Generate(parsedChain, mystery.EventItemName ?? "{{PAGENAME}}", lowPrices: false,
+				captionOverride: captionOverride));
 		}
 		else
 		{
 			stringBuilder.AppendLine("{| class=\"article-table\"");
-			stringBuilder2 = stringBuilder;
-			StringBuilder stringBuilder13 = stringBuilder2;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(10, 1, stringBuilder2);
-			handler.AppendLiteral("|+ <u>");
-			handler.AppendFormatted(value4);
-			handler.AppendLiteral("</u>");
-			stringBuilder13.AppendLine(ref handler);
+			stringBuilder.AppendLine($"|+ <u>{displayName}</u>");
 			stringBuilder.AppendLine("! Lvl");
 			stringBuilder.AppendLine("! Image");
 			stringBuilder.AppendLine("! Item");
 			stringBuilder.AppendLine("! [[Coins|Sells for]]");
 			stringBuilder.AppendLine("! Drops");
-			int[] array = new int[4] { 1, 2, 4, 6 };
-			for (int num = 1; num <= 4; num++)
+			for (int lvl = 1; lvl <= 4; lvl++)
 			{
 				stringBuilder.AppendLine("|-");
-				stringBuilder2 = stringBuilder;
-				StringBuilder stringBuilder14 = stringBuilder2;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(2, 1, stringBuilder2);
-				handler.AppendLiteral("| ");
-				handler.AppendFormatted(num);
-				stringBuilder14.AppendLine(ref handler);
-				stringBuilder2 = stringBuilder;
-				StringBuilder stringBuilder15 = stringBuilder2;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(57, 1, stringBuilder2);
-				handler.AppendLiteral("| style=\"text-align:center;\" |{{Item/Icon|{{PAGENAME}}|");
-				handler.AppendFormatted(num);
-				handler.AppendLiteral("}}");
-				stringBuilder15.AppendLine(ref handler);
-				stringBuilder2 = stringBuilder;
-				StringBuilder stringBuilder16 = stringBuilder2;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(52, 1, stringBuilder2);
-				handler.AppendLiteral("| <u>{{#Invoke:Items|GetItemNameFromChainName|");
-				handler.AppendFormatted(num);
-				handler.AppendLiteral("}}</u>");
-				stringBuilder16.AppendLine(ref handler);
-				stringBuilder2 = stringBuilder;
-				StringBuilder stringBuilder17 = stringBuilder2;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(11, 1, stringBuilder2);
-				handler.AppendLiteral("| {{Coins}}");
-				handler.AppendFormatted(array[num - 1]);
-				stringBuilder17.AppendLine(ref handler);
+				stringBuilder.AppendLine($"| {lvl}");
+				stringBuilder.AppendLine($"| style=\"text-align:center;\" |{{{{Item/Icon|{{{{PAGENAME}}}}|{lvl}}}}}");
+				stringBuilder.AppendLine($"| <u>{{{{#Invoke:Items|GetItemNameFromChainName|{lvl}}}}}</u>");
+				stringBuilder.AppendLine($"| {{{{#Invoke:Items|GetItemPriceByLevel|{lvl}}}}}");
 				stringBuilder.AppendLine("| {{Dash}}");
 			}
 			stringBuilder.AppendLine("|}");
@@ -2872,35 +2743,19 @@ public static class MysteryWikiService
 	public static string GenerateEventPageWithDialogues(MysteryEvent mystery, string? rewardVariant, DialogueService? dialogueService)
 	{
 		StringBuilder stringBuilder = new StringBuilder();
-		string text = mystery.EventItemName ?? "Unknown";
-		string value = FormatStartDate(mystery.StartDate);
+		string eventItemName = mystery.EventItemName ?? "Unknown";
+		string startDate = FormatStartDate(mystery.StartDate);
 		bool flag = mystery.MysteryType == MysteryType.Pet;
 		string suggestedPageTitle = mystery.WikiStatus.SuggestedPageTitle;
-		string value2 = ((suggestedPageTitle != null && suggestedPageTitle != mystery.Name) ? mystery.Name : "{{PAGENAME}}");
-		string text2 = StripParenthetical(text);
-		bool flag2 = text2 != text;
-		StringBuilder stringBuilder2 = stringBuilder;
-		StringBuilder stringBuilder3 = stringBuilder2;
-		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(25, 1, stringBuilder2);
-		handler.AppendLiteral("{{#vardefine:EventItem|");
-		handler.AppendFormatted(text);
-		handler.AppendLiteral("}}");
-		stringBuilder3.Append(ref handler);
-		stringBuilder.Append(flag2 ? ("{{#vardefine:EventItemDisplayName|" + text2 + "}}") : "{{#vardefine:EventItemDisplayName|{{#var:EventItem}}}}");
-		stringBuilder2 = stringBuilder;
-		StringBuilder stringBuilder4 = stringBuilder2;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(32, 1, stringBuilder2);
-		handler.AppendLiteral("{{#vardefine:EventDisplayName|");
-		handler.AppendFormatted(value2);
-		handler.AppendLiteral("}}");
-		stringBuilder4.AppendLine(ref handler);
-		stringBuilder2 = stringBuilder;
-		StringBuilder stringBuilder5 = stringBuilder2;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(36, 1, stringBuilder2);
-		handler.AppendLiteral("{{Mystery Pass/Intro|startingDate=");
-		handler.AppendFormatted(value);
-		handler.AppendLiteral("}}");
-		stringBuilder5.AppendLine(ref handler);
+		string eventDisplayName = (suggestedPageTitle != null && suggestedPageTitle != mystery.Name) ? mystery.Name : "{{PAGENAME}}";
+		string strippedItemName = StripParenthetical(eventItemName);
+		bool itemHasParenthetical = strippedItemName != eventItemName;
+		stringBuilder.Append($"{{{{#vardefine:EventItem|{eventItemName}}}}}");
+		stringBuilder.Append(itemHasParenthetical
+			? $"{{{{#vardefine:EventItemDisplayName|{strippedItemName}}}}}"
+			: "{{#vardefine:EventItemDisplayName|{{#var:EventItem}}}}");
+		stringBuilder.AppendLine($"{{{{#vardefine:EventDisplayName|{eventDisplayName}}}}}");
+		stringBuilder.AppendLine($"{{{{Mystery Pass/Intro|startingDate={startDate}}}}}");
 		stringBuilder.AppendLine();
 		stringBuilder.AppendLine("== Event Mechanics == ");
 		stringBuilder.AppendLine("{{Mystery Pass/Event Mechanics}}");
@@ -2935,15 +2790,8 @@ public static class MysteryWikiService
 		}
 		else if (flag && !string.IsNullOrEmpty(mystery.PetName))
 		{
-			// Fallback for pet: {{PAGENAME}} variant (caller should provide rewardVariant from GetNextVariantNameAsync)
-			string value4 = FormatPetDisplayName(mystery.PetName);
-			stringBuilder2 = stringBuilder;
-			StringBuilder stringBuilder8 = stringBuilder2;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(40, 1, stringBuilder2);
-			handler.AppendLiteral("{{Mystery Pass/Rewards/{{PAGENAME}}|pet=");
-			handler.AppendFormatted(value4);
-			handler.AppendLiteral("}}");
-			stringBuilder8.AppendLine(ref handler);
+			string petDisplayName = FormatPetDisplayName(mystery.PetName);
+			stringBuilder.AppendLine($"{{{{Mystery Pass/Rewards/{{{{PAGENAME}}}}|pet={petDisplayName}}}}}");
 		}
 		else
 		{
@@ -2973,14 +2821,8 @@ public static class MysteryWikiService
 			stringBuilder.AppendLine();
 			if (flag)
 			{
-				string value5 = ((!string.IsNullOrEmpty(mystery.PetName)) ? FormatPetDisplayName(mystery.PetName) : "Pet");
-				stringBuilder2 = stringBuilder;
-				StringBuilder stringBuilder9 = stringBuilder2;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(14, 1, stringBuilder2);
-				handler.AppendLiteral("|-| Getting ");
-				handler.AppendFormatted(value5);
-				handler.AppendLiteral(" =");
-				stringBuilder9.AppendLine(ref handler);
+				string petName = !string.IsNullOrEmpty(mystery.PetName) ? FormatPetDisplayName(mystery.PetName) : "Pet";
+				stringBuilder.AppendLine($"|-| Getting {petName} =");
 				stringBuilder.AppendLine();
 				stringBuilder.AppendLine("|-| Decoration Level 1 =");
 				stringBuilder.AppendLine();
@@ -2991,13 +2833,7 @@ public static class MysteryWikiService
 			{
 				for (int i = 1; i <= 5; i++)
 				{
-					stringBuilder2 = stringBuilder;
-					StringBuilder stringBuilder10 = stringBuilder2;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(23, 1, stringBuilder2);
-					handler.AppendLiteral("|-| Decoration Level ");
-					handler.AppendFormatted(i);
-					handler.AppendLiteral(" =");
-					stringBuilder10.AppendLine(ref handler);
+					stringBuilder.AppendLine($"|-| Decoration Level {i} =");
 					stringBuilder.AppendLine();
 				}
 			}
@@ -3020,72 +2856,25 @@ public static class MysteryWikiService
 	public static string GenerateGallerySection(MysteryEvent mystery)
 	{
 		StringBuilder stringBuilder = new StringBuilder();
-		bool flag = mystery.MysteryType == MysteryType.Pet;
-		string wikiImageName = mystery.WikiImageName;
+		bool isPet = mystery.MysteryType == MysteryType.Pet;
+		string img = mystery.WikiImageName;
 		stringBuilder.AppendLine("<gallery>");
-		StringBuilder stringBuilder2 = stringBuilder;
-		StringBuilder stringBuilder3 = stringBuilder2;
-		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(24, 1, stringBuilder2);
-		handler.AppendFormatted(wikiImageName);
-		handler.AppendLiteral(" Wallpaper.png|Wallpaper");
-		stringBuilder3.AppendLine(ref handler);
-		stringBuilder2 = stringBuilder;
-		StringBuilder stringBuilder4 = stringBuilder2;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(16, 1, stringBuilder2);
-		handler.AppendFormatted(wikiImageName);
-		handler.AppendLiteral(" Badge.png|Badge");
-		stringBuilder4.AppendLine(ref handler);
-		if (flag)
+		stringBuilder.AppendLine($"{img} Wallpaper.png|Wallpaper");
+		stringBuilder.AppendLine($"{img} Badge.png|Badge");
+		if (isPet)
 		{
-			stringBuilder2 = stringBuilder;
-			StringBuilder stringBuilder5 = stringBuilder2;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(30, 1, stringBuilder2);
-			handler.AppendFormatted(wikiImageName);
-			handler.AppendLiteral(" Decoration 1.png|Decoration 1");
-			stringBuilder5.AppendLine(ref handler);
-			stringBuilder2 = stringBuilder;
-			StringBuilder stringBuilder6 = stringBuilder2;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(30, 1, stringBuilder2);
-			handler.AppendFormatted(wikiImageName);
-			handler.AppendLiteral(" Decoration 2.png|Decoration 2");
-			stringBuilder6.AppendLine(ref handler);
+			stringBuilder.AppendLine($"{img} Decoration 1.png|Decoration 1");
+			stringBuilder.AppendLine($"{img} Decoration 2.png|Decoration 2");
 			if (!string.IsNullOrEmpty(mystery.PetName))
-			{
-				stringBuilder2 = stringBuilder;
-				StringBuilder stringBuilder7 = stringBuilder2;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(6, 3, stringBuilder2);
-				handler.AppendFormatted(wikiImageName);
-				handler.AppendLiteral(" ");
-				handler.AppendFormatted(mystery.PetName);
-				handler.AppendLiteral(".png|");
-				handler.AppendFormatted(mystery.PetName);
-				stringBuilder7.AppendLine(ref handler);
-			}
+				stringBuilder.AppendLine($"{img} {mystery.PetName}.png|{mystery.PetName}");
 		}
 		else
 		{
 			for (int i = 1; i <= 5; i++)
-			{
-				stringBuilder2 = stringBuilder;
-				StringBuilder stringBuilder8 = stringBuilder2;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(28, 3, stringBuilder2);
-				handler.AppendFormatted(wikiImageName);
-				handler.AppendLiteral(" Decoration ");
-				handler.AppendFormatted(i);
-				handler.AppendLiteral(".png|Decoration ");
-				handler.AppendFormatted(i);
-				stringBuilder8.AppendLine(ref handler);
-			}
+				stringBuilder.AppendLine($"{img} Decoration {i}.png|Decoration {i}");
 		}
 		if (!string.IsNullOrEmpty(mystery.EventItemName))
-		{
-			stringBuilder2 = stringBuilder;
-			StringBuilder stringBuilder9 = stringBuilder2;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(26, 1, stringBuilder2);
-			handler.AppendFormatted(mystery.EventItemName);
-			handler.AppendLiteral(" Event Item.png|Event Item");
-			stringBuilder9.AppendLine(ref handler);
-		}
+			stringBuilder.AppendLine($"{mystery.EventItemName} Event Item.png|Event Item");
 		stringBuilder.AppendLine("</gallery>");
 		return stringBuilder.ToString();
 	}
