@@ -105,17 +105,20 @@ public partial class UploadConflictDialog : FluentWindow
     /// The dialog stays open through the entire flow.
     /// </summary>
     private bool _hasUnoptimizedRemaining;
+    private bool _optimizeOnly;
 
     public static UploadConflictDialog CreateOptimizeWizard(
         string filename, int remaining, string localFilePath,
         Func<byte[], Task<byte[]>> optimizeFunc,
-        string? currentUser = null, bool hasUnoptimizedRemaining = false)
+        string? currentUser = null, bool hasUnoptimizedRemaining = false,
+        bool optimizeOnly = false)
     {
         var dlg = new UploadConflictDialog(filename, localFilePath);
         dlg._optimizeFunc = optimizeFunc;
         dlg._isOptimizeMode = true;
         dlg._currentUser = currentUser;
         dlg._hasUnoptimizedRemaining = hasUnoptimizedRemaining;
+        dlg._optimizeOnly = optimizeOnly;
         dlg.txtMessage.Text = $"{filename} is not optimized.";
         dlg.txtRemaining.Text = "Wiki images must be optimized via TinyPNG before upload.";
         dlg.SetSinglePreviewMode("Optimization Required", "Not optimized",
@@ -457,8 +460,14 @@ public partial class UploadConflictDialog : FluentWindow
 
             if (allMode)
             {
-                // "Optimize All" → signal caller to auto-optimize remaining files
                 Choice = UploadConflictChoice.ForceAllOptimize;
+                Close();
+                return;
+            }
+
+            if (_optimizeOnly)
+            {
+                Choice = UploadConflictChoice.Force;
                 Close();
                 return;
             }

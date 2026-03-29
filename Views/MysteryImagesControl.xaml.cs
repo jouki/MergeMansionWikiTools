@@ -611,268 +611,278 @@ public partial class MysteryImagesControl : UserControl
 
 	private async void BtnUpload_Click(object sender, RoutedEventArgs e)
 	{
-		if (_main == null || _mystery == null)
-		{
-			return;
-		}
+		if (_main == null || _mystery == null) return;
 		if (!_main.Settings.WikiVerified)
 		{
-			ShowInfo("Wiki account not verified. Go to Settings  Wiki to log in.", InfoBarSeverity.Warning);
+			ShowInfo("Wiki account not verified. Go to Settings to log in.", InfoBarSeverity.Warning);
 			return;
 		}
-		CheckBox value;
-		List<DetectedDecorationFile> selected = _detectedFiles.Where((DetectedDecorationFile detectedDecorationFile) => detectedDecorationFile.Category != "EventItem" && _checkboxes.TryGetValue(detectedDecorationFile, out value) && value.IsChecked == true).ToList();
+		var selected = _detectedFiles
+			.Where(f => f.Category != "EventItem" && _checkboxes.TryGetValue(f, out var cb) && cb.IsChecked == true)
+			.ToList();
 		if (selected.Count == 0)
 		{
 			ShowInfo("No files selected for upload.", InfoBarSeverity.Warning);
 			return;
 		}
+
 		string apiKey = _main.Settings.TinifyApiKey;
 		string apiKey2 = _main.Settings.TinifyApiKey2;
-		Func<byte[], Task<byte[]>> optimizeFunc = async delegate(byte[] data)
+		if (string.IsNullOrWhiteSpace(apiKey))
 		{
-			if (string.IsNullOrWhiteSpace(apiKey))
-			{
-				throw new Exception("TinyPNG API key not set.");
-			}
-			Tinify.Key = apiKey;
-			try
-			{
-				return await (await Tinify.FromBuffer(data)).ToBuffer();
-			}
+			ShowInfo("TinyPNG API key not set.", InfoBarSeverity.Warning);
+			return;
+		}
+		Tinify.Key = apiKey;
+		var tinifyLock = new SemaphoreSlim(2, 2);
+		Func<byte[], Task<byte[]>> optimizeFunc = async (byte[] data) =>
+		{
+			await tinifyLock.WaitAsync();
+			try { return await (await Tinify.FromBuffer(data)).ToBuffer(); }
 			catch (AccountException) when (!string.IsNullOrWhiteSpace(apiKey2))
 			{
 				Tinify.Key = apiKey2;
 				return await (await Tinify.FromBuffer(data)).ToBuffer();
 			}
+			finally { tinifyLock.Release(); }
 		};
+
 		btnUpload.IsEnabled = false;
 		btnOptimize.IsEnabled = false;
-		int uploaded = 0;
-		int skipped = 0;
-		int failed = 0;
-		bool forceAll = false;
-		bool skipAll = false;
-		bool confirmAll = false;
-		bool optimizeAll = false;
-		ShowInfo($"Authenticating...", InfoBarSeverity.Informational);
+		int uploaded = 0, skipped = 0, failed = 0;
+		bool forceAll = false, skipAll = false, confirmAll = false, optimizeAll = false;
+		bool cancelled = false;
+
+		Window ownerWindow = Window.GetWindow(this);
+
+		// ══════════════════════════════════════════════════════════
+		// PHASE 1: Optimize all files that need it
+		// ══════════════════════════════════════════════════════════
+			for (int idx = 0; idx < selected.Count && !cancelled; idx++)
+			{
+				var file = selected[idx];
+				if (!File.Exists(file.SourcePath)) continue;
+				if (_optimizedFiles.Contains(file)) continue;
+
+				if (optimizeAll)
+				{
+					await BatchOptimizeRemainingAsync(selected, idx, optimizeFunc);
+					break; // all remaining done
+				}
+
+				int remaining = selected.Count - idx - 1;
+				bool hasUnoptimizedRemaining = selected.Skip(idx + 1).Any(f => !_optimizedFiles.Contains(f));
+				var wizard = UploadConflictDialog.CreateOptimizeWizard(
+					file.WikiFilename, remaining, file.SourcePath, optimizeFunc,
+					_main.Settings.WikiUsername, hasUnoptimizedRemaining, optimizeOnly: true);
+				wizard.Owner = ownerWindow;
+				wizard.ShowDialog();
+				TryMarkOptimized(file);
+
+				switch (wizard.Choice)
+				{
+					case UploadConflictChoice.Force: break; // single optimize done by wizard
+					case UploadConflictChoice.ForceAll: forceAll = true; confirmAll = true; break;
+					case UploadConflictChoice.ForceAllOptimize:
+						optimizeAll = true;
+						await BatchOptimizeRemainingAsync(selected, idx + 1, optimizeFunc);
+						break;
+					case UploadConflictChoice.Skip: skipped++; break;
+					case UploadConflictChoice.SkipAll: break; // just stop optimize phase
+					case UploadConflictChoice.Cancel: cancelled = true; break;
+				}
+			}
+			if (cancelled) { btnUpload.IsEnabled = true; btnOptimize.IsEnabled = true; return; }
+
+			// ══════════════════════════════════════════════════════════
+			// PHASE 2: Upload all files
+			// ══════════════════════════════════════════════════════════
+
+		ShowInfo("Authenticating...", InfoBarSeverity.Informational);
 		try
 		{
 			using HttpClient client = await WikiMappingService.CreateAuthenticatedClientAsync(_main.Settings.WikiUsername, _main.Settings.WikiPassword);
-			string csrfToken = JsonDocument.Parse(await client.GetStringAsync("https://merge-mansion.fandom.com/api.php?action=query&meta=tokens&format=json")).RootElement.GetProperty("query").GetProperty("tokens").GetProperty("csrftoken")
-				.GetString();
-			Window ownerWindow = Window.GetWindow(this);
-			for (int idx = 0; idx < selected.Count; idx++)
+			string csrfToken = JsonDocument.Parse(await client.GetStringAsync(
+				"https://merge-mansion.fandom.com/api.php?action=query&meta=tokens&format=json"))
+				.RootElement.GetProperty("query").GetProperty("tokens").GetProperty("csrftoken").GetString();
+
+			// Batch existence check before upload
+			ShowInfo("Checking wiki file existence...", InfoBarSeverity.Informational);
+			var wikiNames = selected.Where(f => !string.IsNullOrEmpty(f.WikiFilename)).Select(f => "File:" + f.WikiFilename).ToList();
+			if (wikiNames.Count > 0)
 			{
-				DetectedDecorationFile file = selected[idx];
-				ShowInfo($"Processing {idx + 1}/{selected.Count}: {file.WikiFilename}...", InfoBarSeverity.Informational);
-				try
+				var existMap = await MysteryWikiService.CheckPagesExistAsync(wikiNames);
+				foreach (var f in selected.Where(f => !string.IsNullOrEmpty(f.WikiFilename)))
+					f.ExistsOnWiki = existMap.GetValueOrDefault("File:" + f.WikiFilename, false)
+						|| existMap.GetValueOrDefault("File:" + f.WikiFilename.Replace('_', ' '), false);
+			}
+
+			for (int idx = 0; idx < selected.Count && !cancelled; idx++)
+			{
+				var file = selected[idx];
+				if (!File.Exists(file.SourcePath)) { failed++; continue; }
+				if (!_optimizedFiles.Contains(file)) { skipped++; continue; } // not optimized = skip upload
+
+				int remaining = selected.Count - idx - 1;
+
+				bool doUpload = false;
+				if (forceAll)
 				{
-					if (!File.Exists(file.SourcePath))
-					{
-						failed++;
-						continue;
-					}
-					bool needsOptimize = !_optimizedFiles.Contains(file);
-					int remaining = selected.Count - idx - 1;
-					bool hasUnoptimizedRemaining = selected.Skip(idx + 1).Any((DetectedDecorationFile item) => !_optimizedFiles.Contains(item));
-					if (needsOptimize && !optimizeAll)
-					{
-						UploadConflictDialog wizardDlg = UploadConflictDialog.CreateOptimizeWizard(file.WikiFilename, remaining, file.SourcePath, optimizeFunc, _main.Settings.WikiUsername, hasUnoptimizedRemaining);
-						wizardDlg.Owner = ownerWindow;
-						wizardDlg.ShowDialog();
-						try
-						{
-							byte[] postBytes = File.ReadAllBytes(file.SourcePath);
-							if (OptimizationWindow.HasOptMarker(postBytes))
-							{
-								_optimizedFiles.Add(file);
-								file.OptimizedSize = postBytes.Length;
-							}
-						}
-						catch
-						{
-						}
-						switch (wizardDlg.Choice)
-						{
-						case UploadConflictChoice.ForceAll:
-							forceAll = true;
-							confirmAll = true;
-							break;
-						case UploadConflictChoice.ForceAllOptimize:
-							optimizeAll = true;
-							// Don't set forceAll/confirmAll — user still confirms each upload
-							break;
-						case UploadConflictChoice.Skip:
-							skipped++;
-							goto end_IL_0402;
-						case UploadConflictChoice.SkipAll:
-							skipAll = true;
-							skipped++;
-							goto end_IL_0402;
-						case UploadConflictChoice.Cancel:
-							goto end_IL_0319;
-						}
-						goto IL_0886;
-					}
-					if (needsOptimize && optimizeAll)
-					{
-						// Batch optimize all remaining unoptimized files in parallel
-						var toOptimize = selected.Skip(idx).Where(f => !_optimizedFiles.Contains(f)).ToList();
-						int done = 0;
-						var sem = new SemaphoreSlim(4);
-						await Task.WhenAll(toOptimize.Select(async f =>
-						{
-							await sem.WaitAsync();
-							try
-							{
-								int current = Interlocked.Increment(ref done);
-								Dispatcher.Invoke(() => ShowInfo($"Optimizing {current}/{toOptimize.Count}: {f.WikiFilename}...", InfoBarSeverity.Informational));
-								byte[] optimized = await optimizeFunc(await File.ReadAllBytesAsync(f.SourcePath));
-								byte[] marked = OptimizationWindow.InsertOptMarker(optimized);
-								await File.WriteAllBytesAsync(f.SourcePath, marked);
-								lock (_optimizedFiles) { _optimizedFiles.Add(f); }
-								f.OptimizedSize = marked.Length;
-							}
-							finally
-							{
-								sem.Release();
-							}
-						}));
-						goto IL_0886;
-					}
-					if (!needsOptimize)
-					{
-						goto IL_0886;
-					}
-					skipped++;
-					goto end_IL_0402;
-					IL_0886:
-					if (forceAll || confirmAll)
-					{
-						goto IL_0bd3;
-					}
-					Dictionary<string, bool> existMap = await MysteryWikiService.CheckPagesExistAsync(new string[1] { "File:" + file.WikiFilename });
-					file.ExistsOnWiki = existMap.GetValueOrDefault("File:" + file.WikiFilename, defaultValue: false) || existMap.GetValueOrDefault("File:" + file.WikiFilename.Replace('_', ' '), defaultValue: false);
-					if (file.ExistsOnWiki == true)
-					{
-						if (skipAll)
-						{
-							skipped++;
-							continue;
-						}
-						if (!needsOptimize || optimizeAll)
-						{
-							UploadConflictDialog dlg = new UploadConflictDialog(file.WikiFilename, remaining, file.SourcePath, isPartOfSplit: false, _main.Settings.WikiUsername)
-							{
-								Owner = ownerWindow
-							};
-							dlg.ShowDialog();
-							switch (dlg.Choice)
-							{
-							case UploadConflictChoice.ForceAll:
-								forceAll = true;
-								break;
-							case UploadConflictChoice.Skip:
-								skipped++;
-								goto end_IL_0402;
-							case UploadConflictChoice.SkipAll:
-								skipAll = true;
-								skipped++;
-								goto end_IL_0402;
-							case UploadConflictChoice.Cancel:
-								goto end_IL_0319;
-							}
-						}
-						goto IL_0bd3;
-					}
-					if (needsOptimize)
-					{
-						goto IL_0bd3;
-					}
-					UploadConflictDialog confirmDlg = UploadConflictDialog.CreateNewFileDialog(file.WikiFilename, remaining, file.SourcePath, _main.Settings.WikiUsername);
-					confirmDlg.ShowForceOptimizeButton(hasUnoptimizedRemaining);
-					confirmDlg.Owner = ownerWindow;
-					confirmDlg.ShowDialog();
-					if (confirmDlg.Choice == UploadConflictChoice.ForceAll)
-					{
-						confirmAll = true;
-						goto IL_0bd3;
-					}
-					if (confirmDlg.Choice == UploadConflictChoice.ForceAllOptimize)
-					{
-						optimizeAll = true;
-						forceAll = true;
-						confirmAll = true;
-						goto IL_0bd3;
-					}
-					if (confirmDlg.Choice == UploadConflictChoice.Force)
-					{
-						goto IL_0bd3;
-					}
-					goto end_IL_0319;
-					IL_0bd3:
-					ShowInfo($"Uploading {idx + 1}/{selected.Count}: {file.WikiFilename}...", InfoBarSeverity.Informational);
-					await WikiMappingService.UploadFileAsync(fileData: await File.ReadAllBytesAsync(file.SourcePath), description: (file.ExistsOnWiki != true) ? "{{Permission}}" : null, client: client, csrfToken: csrfToken, filename: file.WikiFilename);
-					uploaded++;
-					UserStatsService.Increment(delegate(UserStats s)
-					{
-						s.MysteryPagesPublished++;
-					});
-					end_IL_0402:;
+					doUpload = true;
 				}
-				catch (Exception ex)
+				else if (file.ExistsOnWiki == true)
 				{
-					AppLogger.Warn("Upload failed for " + file.WikiFilename + ": " + ex.Message);
-					failed++;
+					if (skipAll) { skipped++; continue; }
+					var dlg = new UploadConflictDialog(file.WikiFilename, remaining, file.SourcePath,
+						isPartOfSplit: false, currentUser: _main.Settings.WikiUsername)
+					{ Owner = ownerWindow };
+					dlg.ShowDialog();
+					switch (dlg.Choice)
+					{
+						case UploadConflictChoice.Force: doUpload = true; break;
+						case UploadConflictChoice.ForceAll: forceAll = true; doUpload = true; break;
+						case UploadConflictChoice.Skip: skipped++; continue;
+						case UploadConflictChoice.SkipAll: skipAll = true; skipped++; continue;
+						case UploadConflictChoice.Cancel: cancelled = true; continue;
+					}
+				}
+				else // new file
+				{
+					if (confirmAll)
+					{
+						doUpload = true;
+					}
+					else
+					{
+						bool hasUnoptimizedRemaining = selected.Skip(idx + 1).Any(f => !_optimizedFiles.Contains(f));
+						var dlg = UploadConflictDialog.CreateNewFileDialog(
+							file.WikiFilename, remaining, file.SourcePath, _main.Settings.WikiUsername);
+						dlg.ShowForceOptimizeButton(hasUnoptimizedRemaining);
+						dlg.Owner = ownerWindow;
+						dlg.ShowDialog();
+						switch (dlg.Choice)
+						{
+							case UploadConflictChoice.Force: doUpload = true; break;
+							case UploadConflictChoice.ForceAll: confirmAll = true; doUpload = true; break;
+							case UploadConflictChoice.ForceAllOptimize:
+								forceAll = true; confirmAll = true; doUpload = true; break;
+							case UploadConflictChoice.Cancel: cancelled = true; continue;
+						}
+					}
+				}
+
+				if (doUpload)
+				{
+					bool success = await UploadWithRetryAsync(client, csrfToken, file, ownerWindow, idx, selected.Count);
+					if (success) uploaded++;
+					else failed++;
 				}
 			}
-			end_IL_0319:;
 		}
-		catch (Exception ex2)
+		catch (Exception ex)
 		{
-			Exception ex3 = ex2;
-			ShowInfo("Authentication failed: " + ex3.Message, InfoBarSeverity.Error);
+			ShowInfo("Authentication failed: " + ex.Message, InfoBarSeverity.Error);
 			btnUpload.IsEnabled = true;
+			btnOptimize.IsEnabled = true;
 			return;
 		}
+
+		// Post-upload: rescan + result
 		btnUpload.IsEnabled = true;
 		btnOptimize.IsEnabled = true;
-		if (_main != null && !string.IsNullOrWhiteSpace(_main.Settings.TinifyApiKey))
+		if (!string.IsNullOrWhiteSpace(_main.Settings.TinifyApiKey))
 			tinifyUsage.Initialize(_main.Settings.TinifyApiKey, _main.Settings.TinifyApiKey2);
+
 		if (uploaded > 0)
 		{
-			List<string> allWikiNames = (from detectedDecorationFile in _detectedFiles
-				where detectedDecorationFile.Category != "EventItem" && !string.IsNullOrEmpty(detectedDecorationFile.WikiFilename)
-				select "File:" + detectedDecorationFile.WikiFilename).ToList();
+			var allWikiNames = _detectedFiles
+				.Where(f => f.Category != "EventItem" && !string.IsNullOrEmpty(f.WikiFilename))
+				.Select(f => "File:" + f.WikiFilename).ToList();
 			if (allWikiNames.Count > 0)
 			{
-				Dictionary<string, bool> existMap2 = await MysteryWikiService.CheckPagesExistAsync(allWikiNames);
-				foreach (DetectedDecorationFile f in _detectedFiles.Where((DetectedDecorationFile detectedDecorationFile) => !string.IsNullOrEmpty(detectedDecorationFile.WikiFilename)))
-				{
-					f.ExistsOnWiki = existMap2.GetValueOrDefault("File:" + f.WikiFilename, defaultValue: false);
-				}
+				var existMap = await MysteryWikiService.CheckPagesExistAsync(allWikiNames);
+				foreach (var f in _detectedFiles.Where(f => !string.IsNullOrEmpty(f.WikiFilename)))
+					f.ExistsOnWiki = existMap.GetValueOrDefault("File:" + f.WikiFilename, false);
 			}
 			BuildFileList();
-			_mystery.WikiStatus.ImagesExistOnWiki = _detectedFiles.Count((DetectedDecorationFile detectedDecorationFile) => detectedDecorationFile.ExistsOnWiki == true);
+			_mystery.WikiStatus.ImagesExistOnWiki = _detectedFiles.Count(f => f.ExistsOnWiki == true);
 			MysteryWikiService.UpdateSingleMysteryCache(_mystery);
 			OnStatusChanged?.Invoke();
 		}
-		List<string> parts = new List<string>();
-		if (uploaded > 0)
-		{
-			parts.Add($"{uploaded} uploaded");
-		}
-		if (skipped > 0)
-		{
-			parts.Add($"{skipped} skipped");
-		}
-		if (failed > 0)
-		{
-			parts.Add($"{failed} failed");
-		}
-		ShowInfo(string.Join("  ", parts), (failed <= 0) ? InfoBarSeverity.Success : InfoBarSeverity.Warning);
+
+		var parts = new List<string>();
+		if (uploaded > 0) parts.Add($"{uploaded} uploaded");
+		if (skipped > 0) parts.Add($"{skipped} skipped");
+		if (failed > 0) parts.Add($"{failed} failed");
+		ShowInfo(string.Join("  ", parts), failed > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success);
 	}
+
+	private void TryMarkOptimized(DetectedDecorationFile file)
+	{
+		try
+		{
+			byte[] bytes = File.ReadAllBytes(file.SourcePath);
+			if (OptimizationWindow.HasOptMarker(bytes))
+			{
+				_optimizedFiles.Add(file);
+				file.OptimizedSize = bytes.Length;
+			}
+		}
+		catch { }
+	}
+
+	private async Task BatchOptimizeRemainingAsync(List<DetectedDecorationFile> selected, int startIdx,
+		Func<byte[], Task<byte[]>> optimizeFunc)
+	{
+		var toOptimize = selected.Skip(startIdx).Where(f => !_optimizedFiles.Contains(f)).ToList();
+		if (toOptimize.Count == 0) return;
+		int done = 0;
+		var sem = new SemaphoreSlim(4);
+		await Task.WhenAll(toOptimize.Select(async f =>
+		{
+			await sem.WaitAsync();
+			try
+			{
+				int current = Interlocked.Increment(ref done);
+				Dispatcher.Invoke(() => ShowInfo($"Optimizing {current}/{toOptimize.Count}: {f.WikiFilename}...",
+					InfoBarSeverity.Informational));
+				byte[] optimized = await optimizeFunc(await File.ReadAllBytesAsync(f.SourcePath));
+				byte[] marked = OptimizationWindow.InsertOptMarker(optimized);
+				await File.WriteAllBytesAsync(f.SourcePath, marked);
+				lock (_optimizedFiles) { _optimizedFiles.Add(f); }
+				f.OptimizedSize = marked.Length;
+			}
+			finally { sem.Release(); }
+		}));
+	}
+
+	private async Task<bool> UploadWithRetryAsync(HttpClient client, string csrfToken,
+		DetectedDecorationFile file, Window ownerWindow, int idx, int total)
+	{
+		while (true)
+		{
+			try
+			{
+				ShowInfo($"Uploading {idx + 1}/{total}: {file.WikiFilename}...", InfoBarSeverity.Informational);
+				await WikiMappingService.UploadFileAsync(
+					client: client, csrfToken: csrfToken, filename: file.WikiFilename,
+					fileData: await File.ReadAllBytesAsync(file.SourcePath),
+					description: "{{Permission}}");
+				UserStatsService.Increment(s => s.MysteryPagesPublished++);
+				return true;
+			}
+			catch (Exception ex)
+			{
+				AppLogger.Warn($"Upload failed for {file.WikiFilename}: {ex.Message}");
+				var result = System.Windows.MessageBox.Show(
+					$"Upload failed for {file.WikiFilename}:\n\n{ex.Message}\n\nRetry?",
+					"Upload Error", System.Windows.MessageBoxButton.YesNoCancel, System.Windows.MessageBoxImage.Warning);
+				if (result == System.Windows.MessageBoxResult.Yes) continue;
+				return false;
+			}
+		}
+	}
+
 
 	private void ShowPreview(string filePath)
 	{
