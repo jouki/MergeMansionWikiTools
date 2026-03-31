@@ -83,6 +83,48 @@ internal static class DiscordDumpService
         {
             if (File.Exists(zipPath)) File.Delete(zipPath);
 
+            // Include Phone Raw Files (C/P/L — newest file from each) if available
+            string? combinedDir = null;
+            try
+            {
+                var dataDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "_DATA");
+                if (Directory.Exists(dataDir))
+                {
+                    var hasAny = false;
+                    var phoneDir = Path.Combine(Path.GetTempPath(), $"phone_raw_{now:HHmmss}",
+                        "Phone Raw Files");
+
+                    foreach (var sub in new[] { "C", "P", "L" })
+                    {
+                        var srcDir = Path.Combine(dataDir, sub);
+                        if (!Directory.Exists(srcDir)) continue;
+
+                        var newestFile = Directory.GetFiles(srcDir)
+                            .OrderByDescending(f => new FileInfo(f).LastWriteTimeUtc)
+                            .FirstOrDefault();
+                        if (newestFile == null) continue;
+
+                        var destDir = Path.Combine(phoneDir, sub);
+                        Directory.CreateDirectory(destDir);
+                        File.Copy(newestFile, Path.Combine(destDir, Path.GetFileName(newestFile)));
+                        hasAny = true;
+                    }
+
+                    if (hasAny)
+                    {
+                        combinedDir = Path.Combine(Path.GetTempPath(), $"dump_combined_{now:HHmmss}");
+                        CopyDirectory(dumpDir, combinedDir);
+                        CopyDirectory(Path.GetDirectoryName(phoneDir)!, combinedDir);
+                        progress?.Report("Including Phone Raw Files in archive…");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                AppLogger.Warn($"Phone Raw Files collection failed (non-critical): {ex.Message}");
+                combinedDir = null;
+            }
+
             var compressor = new SharpSevenZip.SharpSevenZipCompressor
             {
                 ArchiveFormat = SharpSevenZip.OutArchiveFormat.SevenZip,
@@ -91,7 +133,9 @@ internal static class DiscordDumpService
                 DirectoryStructure = true,
                 PreserveDirectoryRoot = false
             };
-            compressor.CompressDirectory(dumpDir, zipPath);
+            compressor.CompressDirectory(combinedDir ?? dumpDir, zipPath);
+            if (combinedDir != null)
+                try { Directory.Delete(combinedDir, true); } catch { }
 
             var archiveSize = new FileInfo(zipPath).Length;
             progress?.Report($"7z created: {archiveName} ({archiveSize / (1024 * 1024.0):F1} MB)");
@@ -290,7 +334,7 @@ internal static class DiscordDumpService
     /// <summary>
     /// Parses "The data itself was created at {timestamp}" from a Discord message.
     /// </summary>
-    private static DateTimeOffset? ParseCreatedAtFromMessage(string content)
+    internal static DateTimeOffset? ParseCreatedAtFromMessage(string content)
     {
         const string marker = "The data itself was created at ";
         var idx = content.IndexOf(marker, StringComparison.OrdinalIgnoreCase);
@@ -301,10 +345,26 @@ internal static class DiscordDumpService
         var newlineIdx = timestamp.IndexOf('\n');
         if (newlineIdx >= 0) timestamp = timestamp[..newlineIdx].Trim();
 
+        // Strip invisible/zero-width Unicode characters that Discord editor may insert
+        timestamp = new string(timestamp.Where(c => c <= 127).ToArray()).Trim();
+        // Discord escapes colons/dots in edited messages: "13\:11\:45" → "13:11:45"
+        timestamp = timestamp.Replace("\\:", ":").Replace("\\.", ".");
+        // Strip trailing punctuation (e.g. "...347." → "...347")
+        timestamp = timestamp.TrimEnd('.', ',', ';', ' ');
+
         if (DateTimeOffset.TryParse(timestamp, CultureInfo.InvariantCulture,
                 DateTimeStyles.RoundtripKind, out var result))
             return result;
 
+        // Regex fallback: extract ISO8601-like pattern (stops at digits/letters, not trailing dots)
+        var m = System.Text.RegularExpressions.Regex.Match(timestamp,
+            @"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:[+-]\d{2}:?\d{2}|Z)?");
+        if (m.Success && DateTimeOffset.TryParse(m.Value, CultureInfo.InvariantCulture,
+                DateTimeStyles.RoundtripKind, out result))
+            return result;
+
+        AppLogger.Warn($"ParseCreatedAtFromMessage: failed to parse [{timestamp}] " +
+                        $"(len={timestamp.Length}, hex={Convert.ToHexString(System.Text.Encoding.UTF8.GetBytes(timestamp))})");
         return null;
     }
 
@@ -347,6 +407,18 @@ internal static class DiscordDumpService
             {
                 progress?.Report($"Forward to {fwdId} error: {ex.Message}");
             }
+        }
+    }
+
+    private static void CopyDirectory(string sourceDir, string destDir)
+    {
+        foreach (var file in Directory.EnumerateFiles(sourceDir, "*", SearchOption.AllDirectories))
+        {
+            var rel = Path.GetRelativePath(sourceDir, file);
+            var dest = Path.Combine(destDir, rel);
+            Directory.CreateDirectory(Path.GetDirectoryName(dest)!);
+            if (!File.Exists(dest))
+                File.Copy(file, dest);
         }
     }
 }

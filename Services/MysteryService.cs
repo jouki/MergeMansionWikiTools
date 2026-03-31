@@ -60,10 +60,31 @@ public class MysteryService
             // Event item — plain number field "EventItem"
             mystery.EventItemNumericId = GetLong(prog, "EventItem");
 
-            // Parse tiers
+            // Parse tiers — newer format has Track1/Track2 at top level;
+            // older format has them nested inside V2Info, with PremiumEventLevelRefs as single paid tier
             mystery.FreeTier = ParseTier(prog, "FreeEventLevelRefs");
             mystery.SilverTier = ParseTier(prog, "Track1EventLevelRefs");
             mystery.GoldTier = ParseTier(prog, "Track2EventLevelRefs");
+
+            // Fallback: check V2Info for Track1/Track2 (older dump format)
+            if (prog.TryGetProperty("V2Info", out var v2Info))
+            {
+                if (mystery.SilverTier.Count == 0 && mystery.GoldTier.Count == 0)
+                {
+                    mystery.SilverTier = ParseTier(v2Info, "Track1EventLevelRefs");
+                    mystery.GoldTier = ParseTier(v2Info, "Track2EventLevelRefs");
+                }
+                // V2Info may have more Free levels than the top-level (e.g., 51 vs 46) — use the larger set
+                var v2Free = ParseTier(v2Info, "FreeEventLevelRefs");
+                if (v2Free.Count > mystery.FreeTier.Count)
+                    mystery.FreeTier = v2Free;
+            }
+
+            // Fallback: PremiumEventLevelRefs (even older — single premium tier, use as Silver)
+            if (mystery.SilverTier.Count == 0 && mystery.GoldTier.Count == 0)
+            {
+                mystery.SilverTier = ParseTier(prog, "PremiumEventLevelRefs");
+            }
 
             // Count premium levels
             mystery.PremiumLevels = Math.Max(mystery.SilverTier.Count, mystery.GoldTier.Count);
@@ -178,11 +199,14 @@ public class MysteryService
         // RewardItem — ItemDef is a plain string (item type key), not an object
         if (rewardEl.TryGetProperty("RewardItem", out var item))
         {
+            var itemKey = GetString(item, "ItemDef");
+            if (string.IsNullOrEmpty(itemKey))
+                itemKey = GetString(item, "ItemRef"); // older dump format
             var reward = new MysteryReward
             {
                 Type = MysteryRewardType.Item,
                 Amount = GetInt(item, "Amount", 1),
-                ItemKey = GetString(item, "ItemDef"),
+                ItemKey = itemKey,
             };
 
             // Parse hourglass duration override

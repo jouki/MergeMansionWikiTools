@@ -1012,7 +1012,8 @@ public static class MysteryWikiService
 			int value2 = (text.Contains("Mid") ? 2 : ((!text.Contains("Big")) ? 1 : 3));
 			return $"{{{{Item/nolevel|Unlimited Energy|{value2}}}}}";
 		}
-		string text3 = reward.ItemDisplayName ?? reward.ItemKey ?? "Unknown";
+		string text3 = !string.IsNullOrEmpty(reward.ItemDisplayName) ? reward.ItemDisplayName
+			: !string.IsNullOrEmpty(reward.ItemKey) ? reward.ItemKey : "Unknown";
 		if (NoLevelItems.Contains(text3))
 		{
 			if (reward.ItemLevel.HasValue && reward.ItemLevel.Value > 0)
@@ -2604,6 +2605,13 @@ public static class MysteryWikiService
 		return (WikiContent: wikiContent, GeneratedContent: generated, Diffs: diffs, PageTitle: pageTitle);
 	}
 
+	public static void LoadPetDisplayNamesFromPath(string path)
+	{
+		_petDisplayNames = null;
+		if (string.IsNullOrEmpty(path) || !File.Exists(path)) return;
+		LoadPetDisplayNamesInternal(path);
+	}
+
 	public static void LoadPetDisplayNames(string? basePath, string? apkVersion)
 	{
 		_petDisplayNames = null;
@@ -2611,11 +2619,16 @@ public static class MysteryWikiService
 		{
 			return;
 		}
-		string path = Path.Combine(basePath, apkVersion, "Dump", "Experimental", "Pets.json");
+		// Check main Dump/ first, then Experimental/
+		string path = Path.Combine(basePath, apkVersion, "Dump", "Pets.json");
 		if (!File.Exists(path))
-		{
-			return;
-		}
+			path = Path.Combine(basePath, apkVersion, "Dump", "Experimental", "Pets.json");
+		if (!File.Exists(path)) return;
+		LoadPetDisplayNamesInternal(path);
+	}
+
+	private static void LoadPetDisplayNamesInternal(string path)
+	{
 		try
 		{
 			string json = File.ReadAllText(path);

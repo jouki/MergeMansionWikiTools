@@ -37,7 +37,10 @@ public partial class MysteriesPage : UserControl
 		InitializeComponent();
 		_itemMapping = MysteryService.LoadMapping();
 		TryUsePreloaded();
-		MysteryWikiService.LoadPetDisplayNames(_main.Settings.ImageExporterBasePath, _main.Settings.SelectedApkVersion);
+		if (!string.IsNullOrEmpty(_main.Settings.PetsJsonPath) && File.Exists(_main.Settings.PetsJsonPath))
+			MysteryWikiService.LoadPetDisplayNamesFromPath(_main.Settings.PetsJsonPath);
+		else
+			MysteryWikiService.LoadPetDisplayNames(_main.Settings.ImageExporterBasePath, _main.Settings.SelectedApkVersion);
 		TryLoadDialoguesAsync();
 		_main.EventsFileChanged += delegate
 		{
@@ -56,6 +59,8 @@ public partial class MysteriesPage : UserControl
 	private async Task TryLoadDialoguesAsync()
 	{
 		List<string> candidates = new List<string>();
+		if (!string.IsNullOrEmpty(_main.Settings.DialoguesJsonPath))
+			candidates.Add(_main.Settings.DialoguesJsonPath);
 		string eventsPath = _main.Settings.EventsJsonPath;
 		if (!string.IsNullOrEmpty(eventsPath))
 		{
@@ -71,7 +76,8 @@ public partial class MysteriesPage : UserControl
 		}
 		if (!string.IsNullOrEmpty(_main.Settings.ImageExporterBasePath) && !string.IsNullOrEmpty(_main.Settings.SelectedApkVersion))
 		{
-			string dumpDir = Path.Combine(_main.Settings.ImageExporterBasePath, _main.Settings.SelectedApkVersion, "Dump");
+			var dumpFolder = !string.IsNullOrEmpty(_main.Settings.ActiveDumpFolder) ? _main.Settings.ActiveDumpFolder : "Dump";
+			string dumpDir = Path.Combine(_main.Settings.ImageExporterBasePath, _main.Settings.SelectedApkVersion, dumpFolder);
 			candidates.Add(Path.Combine(dumpDir, "dialogues.json"));
 		}
 		AppLogger.Info($"DialogueService: searching {candidates.Count} candidates: {string.Join(", ", candidates)}");

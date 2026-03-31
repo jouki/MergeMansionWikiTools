@@ -87,6 +87,27 @@ internal static class DumperService
     private static readonly object _initLock = new();
     private static bool _initialized;
 
+    /// <summary>
+    /// Reads CreatedAt timestamp from a binary config archive WITHOUT doing a full import.
+    /// Fast — only parses the archive header.
+    /// </summary>
+    public static DateTimeOffset? ReadConfigCreatedAt(string configPath)
+    {
+        try
+        {
+            var bytes = File.ReadAllBytes(configPath);
+            var archive = ConfigArchive.FromBytes(bytes);
+            var metaTime = archive.CreatedAt;
+            // MetaTime.MillisecondsSinceEpoch is milliseconds since Unix epoch
+            return DateTimeOffset.FromUnixTimeMilliseconds(metaTime.MillisecondsSinceEpoch);
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Warn($"ReadConfigCreatedAt failed: {ex.Message}");
+            return null;
+        }
+    }
+
     public static async Task<DumpResult> DumpAsync(
         string configPath,
         string? patchPath,
@@ -371,6 +392,15 @@ internal static class DumperService
                             progress?.Report($"{T()} Experimental: {written.Count} files written");
                             AppLogger.Info($"{T()} Experimental: {written.Count} files into {expDir}");
                             experimentalPath = expDir;
+
+                            // Copy Pets.json to main Dump/ for easier access
+                            var expPets = Path.Combine(expDir, "Pets.json");
+                            var mainPets = Path.Combine(outputDir, "Pets.json");
+                            if (File.Exists(expPets) && !File.Exists(mainPets))
+                            {
+                                File.Copy(expPets, mainPets);
+                                AppLogger.Info($"{T()} Pets.json copied to main dump folder");
+                            }
                         }
                         catch (Exception ex)
                         {

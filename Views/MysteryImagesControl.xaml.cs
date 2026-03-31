@@ -123,12 +123,17 @@ public partial class MysteryImagesControl : UserControl
 		{
 			return;
 		}
-		string exportDir = MysteryWikiService.ResolveExportPngsDir(_main.Settings.ImageExporterBasePath, _main.Settings.SelectedApkVersion);
+		var basePath = _main.Settings.ImageExporterBasePath;
+		var apkVersion = _main.Settings.SelectedApkVersion;
+		string exportDir = MysteryWikiService.ResolveExportPngsDir(basePath, apkVersion);
 		if (string.IsNullOrEmpty(exportDir))
 		{
 			pnlLoading.Visibility = Visibility.Collapsed;
 			pnlEmpty.Visibility = Visibility.Visible;
-			txtEmptyMessage.Text = "Export path not configured.\nSet Image Exporter base path and APK version in Settings.";
+			if (string.IsNullOrEmpty(basePath) || string.IsNullOrEmpty(apkVersion))
+				txtEmptyMessage.Text = "Export path not configured.\nSet Workspace and Game Version in Settings.";
+			else
+				txtEmptyMessage.Text = $"No exported images found for v{apkVersion}.\nRun Image Extractor to extract game assets,\nor select a version that has been exported.";
 			return;
 		}
 		txtExportPath.Text = exportDir;

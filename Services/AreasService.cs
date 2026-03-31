@@ -335,7 +335,11 @@ public class AreasService
 
             if (r.TryGetProperty("RewardItem", out var itemEl) &&
                 itemEl.ValueKind == JsonValueKind.Object)
+            {
                 item = GetStr(itemEl, "ItemDef");
+                if (string.IsNullOrEmpty(item))
+                    item = GetStr(itemEl, "ItemRef"); // older dump format
+            }
         }
 
         return (xp, item);

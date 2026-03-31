@@ -1,9 +1,11 @@
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
+using MergeMansionWikiTools.Models;
 using MergeMansionWikiTools.Services;
 using Microsoft.Win32;
 
@@ -21,8 +23,10 @@ public partial class SettingsPage : UserControl
 
     public SettingsPage(MainWindow main)
     {
+        AppLogger.Info("[Settings] Constructor START");
         _main = main;
         InitializeComponent();
+        AppLogger.Info("[Settings] InitializeComponent done");
 
         _tabPanels = [panelGeneral, panelTools, panelWiki, panelAdvanced];
 
@@ -30,6 +34,9 @@ public partial class SettingsPage : UserControl
         txtChainPath.Text = _main.Settings.ChainItemOddsPath;
         txtAreasPath.Text = _main.Settings.AreasJsonPath;
         txtEventsPath.Text = _main.Settings.EventsJsonPath;
+        txtDialoguesPath.Text = _main.Settings.DialoguesJsonPath;
+        txtPetsPath.Text = _main.Settings.PetsJsonPath;
+        txtCardCollectionPath.Text = _main.Settings.CardCollectionJsonPath;
         txtTinifyKey.Text = _main.Settings.TinifyApiKey;
         txtTinifyKey2.Text = _main.Settings.TinifyApiKey2;
         txtImageBasePath.Text = _main.Settings.ImageExporterBasePath;
@@ -46,6 +53,10 @@ public partial class SettingsPage : UserControl
         gridClipboardGlobal.Visibility = _main.Settings.ClipboardAutoAdd ? Visibility.Visible : Visibility.Collapsed;
         toggleClearOptimiserOnChainEntry.IsChecked = _main.Settings.ClearOptimiserOnChainEntry;
 
+        // Dumper settings
+        toggleDumpAutoNewFolder.IsChecked = _main.Settings.DumpAutoNewFolder;
+
+        AppLogger.Info("[Settings] Checkboxes done");
         // Wiki mapping status + bot credentials
         UpdateWikiMappingStatus();
         _suppressBotCredentialReset = true;
@@ -69,14 +80,17 @@ public partial class SettingsPage : UserControl
         SetupWizard.DownloadStatusUpdated += OnWizardDownloadStatus;
         Unloaded += (_, _) => SetupWizard.DownloadStatusUpdated -= OnWizardDownloadStatus;
 
-        // APK version list (fire-and-forget, non-blocking)
-        _ = LoadApkVersionsAsync();
+        AppLogger.Info("[Settings] Wiki/Bot status done");
+        // Apply pre-loaded data when available (non-blocking, no re-fetch)
+        ApplyPreloadedDataWhenReady();
 
         // Check TinyPNG usage on load
+        AppLogger.Info("[Settings] ApplyPreloadedData done");
         if (!string.IsNullOrWhiteSpace(_main.Settings.TinifyApiKey))
             TriggerTinifyCheck(1, _main.Settings.TinifyApiKey, delayMs: 0);
         if (!string.IsNullOrWhiteSpace(_main.Settings.TinifyApiKey2))
             TriggerTinifyCheck(2, _main.Settings.TinifyApiKey2, delayMs: 0);
+        AppLogger.Info("[Settings] Constructor END");
     }
 
     /// <summary>
@@ -88,6 +102,9 @@ public partial class SettingsPage : UserControl
         txtChainPath.Text = _main.Settings.ChainItemOddsPath;
         txtAreasPath.Text = _main.Settings.AreasJsonPath;
         txtEventsPath.Text = _main.Settings.EventsJsonPath;
+        txtDialoguesPath.Text = _main.Settings.DialoguesJsonPath;
+        txtPetsPath.Text = _main.Settings.PetsJsonPath;
+        txtCardCollectionPath.Text = _main.Settings.CardCollectionJsonPath;
     }
 
     // ── Tab bar ──
@@ -270,6 +287,21 @@ public partial class SettingsPage : UserControl
                     _main.SetEventsPath(file);
                     assigned.Add("events.json");
                     break;
+                case "dialogues":
+                    txtDialoguesPath.Text = file;
+                    _main.SetDialoguesPath(file);
+                    assigned.Add("dialogues.json");
+                    break;
+                case "pets":
+                    txtPetsPath.Text = file;
+                    _main.SetPetsPath(file);
+                    assigned.Add("Pets.json");
+                    break;
+                case "card_collection":
+                    txtCardCollectionPath.Text = file;
+                    _main.SetCardCollectionPath(file);
+                    assigned.Add("card_collection.json");
+                    break;
             }
         }
 
@@ -289,6 +321,12 @@ public partial class SettingsPage : UserControl
             return "areas";
         if (fileName.Equals("events", StringComparison.OrdinalIgnoreCase))
             return "events";
+        if (fileName.Equals("dialogues", StringComparison.OrdinalIgnoreCase))
+            return "dialogues";
+        if (fileName.Equals("Pets", StringComparison.OrdinalIgnoreCase))
+            return "pets";
+        if (fileName.Contains("card_collection", StringComparison.OrdinalIgnoreCase))
+            return "card_collection";
 
         // 2. Content-based fallback (for renamed files)
         try
@@ -304,6 +342,12 @@ public partial class SettingsPage : UserControl
                 return "areas";
             if (snippet.Contains("\"Progressions\"") || snippet.Contains("\"SP_"))
                 return "events";
+            if (snippet.Contains("\"Dialogues\"") || snippet.Contains("\"DialogItemId\""))
+                return "dialogues";
+            if (snippet.Contains("\"PetId\"") || snippet.Contains("\"SelectionHeader\""))
+                return "pets";
+            if (snippet.Contains("\"CardCollection\""))
+                return "card_collection";
         }
         catch { }
 
@@ -485,6 +529,13 @@ public partial class SettingsPage : UserControl
     {
         if (!IsLoaded) return;
         _main.Settings.ClearOptimiserOnChainEntry = toggleClearOptimiserOnChainEntry.IsChecked == true;
+        _main.SaveSettings();
+    }
+
+    private void ToggleDumpAutoNewFolder_Changed(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        _main.Settings.DumpAutoNewFolder = toggleDumpAutoNewFolder.IsChecked == true;
         _main.SaveSettings();
     }
 
@@ -766,24 +817,23 @@ public partial class SettingsPage : UserControl
     {
         try
         {
-            cmbApkVersion.Items.Clear();
-            cmbApkVersion.Items.Add("Loading...");
+            cmbApkVersion.ItemsSource = new[] { "Loading..." };
             cmbApkVersion.SelectedIndex = 0;
             cmbApkVersion.IsEnabled = false;
 
-            _apkVersions = await Task.Run(() => ApkDownloadService.FetchAvailableVersionsAsync());
-
-            cmbApkVersion.Items.Clear();
-            if (_apkVersions.Count > 0)
+            // Use pre-loaded data from splash if available, otherwise fetch fresh
+            if (App.PreloadedVersionsTask != null)
             {
-                cmbApkVersion.Items.Add($"Latest ({_apkVersions[0].Version})");
-                for (int i = 1; i < _apkVersions.Count; i++)
-                    cmbApkVersion.Items.Add(_apkVersions[i].Version);
+                _apkVersions = await App.PreloadedVersionsTask;
+                App.PreloadedVersionsTask = null;
             }
             else
             {
-                cmbApkVersion.Items.Add("Latest");
+                _apkVersions = await Task.Run(() => ApkDownloadService.FetchAvailableVersionsAsync());
             }
+
+            _main.ApkVersions = _apkVersions;
+            cmbApkVersion.ItemsSource = BuildVersionList();
 
             // Restore persisted version selection
             var saved = _main.Settings.SelectedApkVersion;
@@ -807,8 +857,7 @@ public partial class SettingsPage : UserControl
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"[APK Versions] Fetch failed: {ex}");
-            cmbApkVersion.Items.Clear();
-            cmbApkVersion.Items.Add("Latest");
+            cmbApkVersion.ItemsSource = new[] { "Latest" };
             cmbApkVersion.SelectedIndex = 0;
             _apkVersions = null;
             txtApkDownloadStatus.Text = $"Version list failed: {ex.Message}";
@@ -830,14 +879,24 @@ public partial class SettingsPage : UserControl
         UpdateApkFolderButton();
         CheckApkExistence();
 
-        // Persist selected version
+        // Persist selected version + update download button state
         var idx = cmbApkVersion.SelectedIndex;
         if (idx >= 0 && _apkVersions != null && idx < _apkVersions.Count)
         {
             _main.Settings.SelectedApkVersion = _apkVersions[idx].Version;
             _main.SaveSettings();
             _main.RaiseApkVersionChanged();
+
+            // Disable download for versions not available on APKPure
+            var canDownload = _apkVersions[idx].CanDownload;
+            btnDownloadApk.IsEnabled = canDownload;
+            btnDownloadApk.ToolTip = canDownload
+                ? null
+                : $"v{_apkVersions[idx].Version} is not available for automatic download.";
         }
+
+        // Refresh available dumps for the new version
+        _ = ScanLocalDumpsAsync();
     }
 
     private void CheckApkExistence()
@@ -861,8 +920,16 @@ public partial class SettingsPage : UserControl
             !System.IO.Directory.EnumerateFiles(dir, "*.apk").Any() &&
             !System.IO.Directory.EnumerateFiles(dir, "*.xapk").Any())
         {
-            txtApkDownloadStatus.Text = $"No APK found for v{ver} — download it first.";
-            txtApkDownloadStatus.SetResourceReference(TextBlock.ForegroundProperty, "SystemFillColorCautionBrush");
+            if (_apkVersions[idx].CanDownload)
+            {
+                txtApkDownloadStatus.Text = $"No APK found for v{ver} — download it first.";
+                txtApkDownloadStatus.SetResourceReference(TextBlock.ForegroundProperty, "SystemFillColorCautionBrush");
+            }
+            else
+            {
+                txtApkDownloadStatus.Text = $"No APK found for v{ver}. This version is not available for automatic download.";
+                txtApkDownloadStatus.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorTertiaryBrush");
+            }
         }
         else
         {
@@ -1019,7 +1086,8 @@ public partial class SettingsPage : UserControl
             var sizeMb = new System.IO.FileInfo(result.filePath).Length / 1024.0 / 1024.0;
             txtApkDownloadStatus.Text = $"Done! v{result.version} ({sizeMb:F1} MB)";
             txtApkDownloadStatus.SetResourceReference(TextBlock.ForegroundProperty, "SystemFillColorSuccessBrush");
-            _main.ShowStatus($"APK downloaded: v{result.version}\n→ {result.filePath}", Wpf.Ui.Controls.InfoBarSeverity.Success);
+            _main.ShowStatus($"APK downloaded: v{result.version}\n→ {result.filePath}",
+                Wpf.Ui.Controls.InfoBarSeverity.Success);
 
             _lastApkDir = System.IO.Path.GetDirectoryName(result.filePath);
             UpdateApkFolderButton();
@@ -1095,5 +1163,724 @@ public partial class SettingsPage : UserControl
         };
 
         return dlg.ShowDialog() == true ? dlg.FileName : null;
+    }
+
+    // ── Active Dump selector ──
+
+    private List<string> _activeDumpFolders = [];
+
+    private async Task ScanLocalDumpsAsync()
+    {
+        cmbActiveDump.Items.Clear();
+        _activeDumpFolders.Clear();
+
+        var basePath = _main.Settings.ImageExporterBasePath;
+        var version = _main.Settings.SelectedApkVersion;
+        if (string.IsNullOrEmpty(basePath) || string.IsNullOrEmpty(version))
+        {
+            cmbActiveDump.Items.Add("No version selected");
+            cmbActiveDump.SelectedIndex = 0;
+            cmbActiveDump.IsEnabled = false;
+            return;
+        }
+
+        var versionDir = Path.Combine(basePath, version);
+        var folders = DiscordDumpDownloadService.ScanDumpFolders(versionDir);
+
+        if (folders.Count == 0)
+        {
+            cmbActiveDump.Items.Add("No dumps found");
+            cmbActiveDump.SelectedIndex = 0;
+            cmbActiveDump.IsEnabled = false;
+            return;
+        }
+
+        foreach (var (name, createdAt) in folders)
+        {
+            _activeDumpFolders.Add(name);
+            var dateStr = createdAt != null ? $" ({createdAt[..Math.Min(10, createdAt.Length)]})" : "";
+            cmbActiveDump.Items.Add($"{name}{dateStr}");
+        }
+
+        var saved = _main.Settings.ActiveDumpFolder;
+        var matchIdx = _activeDumpFolders.IndexOf(saved);
+        cmbActiveDump.SelectedIndex = matchIdx >= 0 ? matchIdx : 0;
+        cmbActiveDump.IsEnabled = true;
+    }
+
+    private async void BtnSetActiveDump_Click(object sender, RoutedEventArgs e)
+    {
+        if (cmbActiveDump.SelectedIndex < 0 || cmbActiveDump.SelectedIndex >= _activeDumpFolders.Count)
+            return;
+
+        var folderName = _activeDumpFolders[cmbActiveDump.SelectedIndex];
+        _main.Settings.ActiveDumpFolder = folderName;
+        _main.SaveSettings();
+
+        var basePath = _main.Settings.ImageExporterBasePath;
+        var version = _main.Settings.SelectedApkVersion;
+        if (!string.IsNullOrEmpty(basePath) && !string.IsNullOrEmpty(version))
+        {
+            var dumpDir = Path.Combine(basePath, version, folderName);
+            if (Directory.Exists(dumpDir))
+                await AssignDumpFilePathsAsync(dumpDir);
+        }
+    }
+
+    /// <summary>
+    /// Waits for APK versions to load (up to 15s), then refreshes Discord dropdown with version labels.
+    /// </summary>
+    private async Task RefreshDiscordVersionsWhenReadyAsync()
+    {
+        for (int i = 0; i < 30; i++)
+        {
+            await Task.Delay(500);
+            if (_apkVersions != null && _apkVersions.Count > 0) break;
+        }
+
+        if (_apkVersions == null || _apkVersions.Count == 0 || _discordDumps == null) return;
+
+        // Rebuild dropdown items with version labels
+        var localTimestamps = DiscordDumpDownloadService.ScanLocalCreatedAtTimestamps(
+            _main.Settings.ImageExporterBasePath);
+
+        cmbDiscordDumps.Items.Clear();
+        foreach (var dump in _discordDumps)
+        {
+            var effectiveDate = dump.DataCreatedAt ?? dump.MessageTimestamp;
+            var dateStr = effectiveDate.ToString("yyyy-MM-dd");
+            var match = ApkDownloadService.MatchVersionByDate(_apkVersions, effectiveDate);
+            var versionStr = match != null ? $" → v{match.Version}" : "";
+            var checkmark = localTimestamps.Contains(effectiveDate) ? " ✔" : "";
+            var prefix = dump.DataCreatedAt == null ? "~" : "";
+            cmbDiscordDumps.Items.Add($"{prefix}{dateStr}{versionStr}{checkmark}");
+        }
+        if (_discordDumps.Count > 0)
+            cmbDiscordDumps.SelectedIndex = 0;
+    }
+
+    /// <summary>
+    /// Subscribes to splash pre-loaded tasks. When each completes, applies data to UI on dispatcher.
+    /// Never re-fetches, never blocks UI. Each task continuation runs independently.
+    /// </summary>
+    private void ApplyPreloadedDataWhenReady()
+    {
+        AppLogger.Info("[Settings] ApplyPreloadedDataWhenReady START");
+        // Versions — show "Loading..." until splash task completes
+        if (App.PreloadedVersionsTask != null)
+        {
+            // Always apply via Dispatcher — never block constructor even if task is already complete
+            App.PreloadedVersionsTask.ContinueWith(t =>
+            {
+                if (t.IsCompletedSuccessfully)
+                    Dispatcher.InvokeAsync(() => ApplyVersionData(t.Result));
+            }, TaskScheduler.Default);
+        }
+        else
+        {
+            // No preload — fetch in background
+            _ = LoadApkVersionsAsync();
+        }
+
+        // Discord dumps — always apply via Dispatcher
+        if (App.PreloadedDiscordDumpsTask != null)
+        {
+            App.PreloadedDiscordDumpsTask.ContinueWith(t =>
+            {
+                if (t.IsCompletedSuccessfully)
+                    Dispatcher.InvokeAsync(() => ApplyDiscordDumpData(t.Result));
+            }, TaskScheduler.Default);
+        }
+        else
+        {
+            _ = LoadDiscordDumpsAsync();
+        }
+
+        // Local dump folders (disk scan — fast, run on threadpool)
+        Task.Run(() =>
+        {
+            var basePath = _main.Settings.ImageExporterBasePath;
+            var version = _main.Settings.SelectedApkVersion;
+            if (string.IsNullOrEmpty(basePath) || string.IsNullOrEmpty(version)) return;
+            var versionDir = System.IO.Path.Combine(basePath, version);
+            var folders = DiscordDumpDownloadService.ScanDumpFolders(versionDir);
+            Dispatcher.InvokeAsync(() => ApplyDumpFolderData(folders));
+        });
+    }
+
+    private List<string> BuildDiscordDumpList(List<DiscordDumpDownloadService.DiscordDumpInfo> dumps)
+    {
+        // Use pre-loaded timestamps from splash, or scan now
+        if (_cachedLocalTimestamps == null)
+        {
+            if (App.PreloadedLocalTimestampsTask is { IsCompletedSuccessfully: true })
+            {
+                _cachedLocalTimestamps = App.PreloadedLocalTimestampsTask.Result;
+                App.PreloadedLocalTimestampsTask = null;
+            }
+            else
+            {
+                _cachedLocalTimestamps = DiscordDumpDownloadService.ScanLocalCreatedAtTimestamps(
+                    _main.Settings.ImageExporterBasePath);
+            }
+        }
+
+        var items = new List<string>();
+        foreach (var dump in dumps)
+        {
+            var effectiveDate = dump.DataCreatedAt ?? dump.MessageTimestamp;
+            var dateStr = effectiveDate.ToString("yyyy-MM-dd");
+            var versionStr = "";
+            if (_apkVersions != null)
+            {
+                var match = ApkDownloadService.MatchVersionByDate(_apkVersions, effectiveDate);
+                if (match != null) versionStr = $" → v{match.Version}";
+            }
+            var checkmark = _cachedLocalTimestamps.Contains(effectiveDate) ? " ✔" : "";
+            var prefix = dump.DataCreatedAt == null ? "~" : "";
+            items.Add($"{prefix}{dateStr}{versionStr}{checkmark}");
+        }
+        if (items.Count == 0)
+            items.Add("No dumps found");
+        return items;
+    }
+
+    private HashSet<DateTimeOffset>? _cachedLocalTimestamps;
+
+    private List<string> BuildVersionList()
+    {
+        var showDates = chkShowReleaseDates.IsChecked == true;
+        var items = new List<string>();
+        if (_apkVersions == null || _apkVersions.Count == 0)
+        {
+            items.Add("Latest");
+            return items;
+        }
+        items.Add($"Latest ({_apkVersions[0].Version})");
+        for (int i = 1; i < _apkVersions.Count; i++)
+        {
+            var v = _apkVersions[i];
+            var dateStr = showDates && v.ReleaseDate.HasValue
+                ? $"  ({v.ReleaseDate.Value:yyyy-MM-dd})" : "";
+            items.Add($"{v.Version}{dateStr}");
+        }
+        return items;
+    }
+
+    private void ApplyVersionData(List<ApkDownloadService.ApkVersionInfo> versions)
+    {
+        var sw = System.Diagnostics.Stopwatch.StartNew();
+        AppLogger.Info($"[Settings] ApplyVersionData START ({versions.Count} versions)");
+        _apkVersions = versions;
+        _main.ApkVersions = versions;
+        cmbApkVersion.ItemsSource = BuildVersionList();
+        AppLogger.Info($"[Settings] ApplyVersionData ItemsSource set: {sw.ElapsedMilliseconds}ms");
+
+        var saved = _main.Settings.SelectedApkVersion;
+        int restoredIdx = 0;
+        if (!string.IsNullOrEmpty(saved) && _apkVersions.Count > 0)
+            for (int i = 0; i < _apkVersions.Count; i++)
+                if (_apkVersions[i].Version == saved) { restoredIdx = i; break; }
+
+        cmbApkVersion.SelectedIndex = restoredIdx;
+        cmbApkVersion.IsEnabled = true;
+
+        if (_apkVersions.Count > 0)
+        {
+            _main.Settings.SelectedApkVersion = _apkVersions[restoredIdx].Version;
+            _main.SaveSettings();
+        }
+
+        AppLogger.Info($"[Settings] ApplyVersionData SelectedIndex set: {sw.ElapsedMilliseconds}ms");
+        UpdateApkFolderButton();
+        CheckApkExistence();
+        AppLogger.Info($"[Settings] ApplyVersionData END: {sw.ElapsedMilliseconds}ms");
+    }
+
+    private async void ApplyDiscordDumpData(List<DiscordDumpDownloadService.DiscordDumpInfo> dumps)
+    {
+        AppLogger.Info($"[Settings] ApplyDiscordDumpData START ({dumps.Count} dumps)");
+        _discordDumps = dumps;
+
+        // Wait for versions if not loaded yet (max 10s)
+        if (_apkVersions == null && App.PreloadedVersionsTask != null)
+        {
+            try { _apkVersions = await App.PreloadedVersionsTask; _main.ApkVersions = _apkVersions; }
+            catch { }
+        }
+
+        var versions = _apkVersions;
+        var basePath = _main.Settings.ImageExporterBasePath;
+        var items = await Task.Run(() =>
+        {
+            var localTs = App.PreloadedLocalTimestampsTask is { IsCompletedSuccessfully: true }
+                ? App.PreloadedLocalTimestampsTask.Result
+                : DiscordDumpDownloadService.ScanLocalCreatedAtTimestamps(basePath);
+
+            var list = new List<string>();
+            foreach (var dump in dumps)
+            {
+                var effectiveDate = dump.DataCreatedAt ?? dump.MessageTimestamp;
+                var dateStr = effectiveDate.ToString("yyyy-MM-dd");
+                var versionStr = "";
+                if (versions != null)
+                {
+                    var match = ApkDownloadService.MatchVersionByDate(versions, effectiveDate);
+                    if (match != null) versionStr = $" → v{match.Version}";
+                }
+                var checkmark = localTs.Contains(effectiveDate) ? " ✔" : "";
+                var prefix = dump.DataCreatedAt == null ? "~" : "";
+                list.Add($"{prefix}{dateStr}{versionStr}{checkmark}");
+            }
+            if (list.Count == 0) list.Add("No dumps found");
+            return list;
+        });
+
+        AppLogger.Info($"[Settings] ApplyDiscordDumpData list built ({items.Count} items)");
+        cmbDiscordDumps.ItemsSource = items;
+
+        if (_discordDumps.Count > 0)
+            cmbDiscordDumps.SelectedIndex = 0;
+
+        cmbDiscordDumps.IsEnabled = true;
+        txtDumpDownloadStatus.Text = $"Found {_discordDumps.Count} dumps.";
+
+        if (versions == null || versions.Count == 0)
+            _ = RefreshDiscordVersionsWhenReadyAsync();
+    }
+
+    private void ApplyDumpFolderData(List<(string folderName, string? createdAt)> folders)
+    {
+        cmbActiveDump.Items.Clear();
+        _activeDumpFolders.Clear();
+
+        if (folders.Count == 0)
+        {
+            cmbActiveDump.Items.Add("No dumps found");
+            cmbActiveDump.SelectedIndex = 0;
+            cmbActiveDump.IsEnabled = false;
+            return;
+        }
+
+        foreach (var (name, createdAt) in folders)
+        {
+            _activeDumpFolders.Add(name);
+            var dateStr = createdAt != null ? $" ({createdAt[..Math.Min(10, createdAt.Length)]})" : "";
+            cmbActiveDump.Items.Add($"{name}{dateStr}");
+        }
+
+        var saved = _main.Settings.ActiveDumpFolder;
+        var matchIdx = _activeDumpFolders.IndexOf(saved);
+        cmbActiveDump.SelectedIndex = matchIdx >= 0 ? matchIdx : 0;
+        cmbActiveDump.IsEnabled = true;
+    }
+
+    private void BtnRefreshDumps_Click(object sender, RoutedEventArgs e) => _ = ScanLocalDumpsAsync();
+
+    private void ChkShowReleaseDates_Changed(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded || _apkVersions == null) return;
+        var savedVersion = _main.Settings.SelectedApkVersion;
+        cmbApkVersion.ItemsSource = BuildVersionList();
+
+        int restoredIdx = 0;
+        if (!string.IsNullOrEmpty(savedVersion))
+            for (int i = 0; i < _apkVersions.Count; i++)
+                if (_apkVersions[i].Version == savedVersion) { restoredIdx = i; break; }
+        cmbApkVersion.SelectedIndex = restoredIdx;
+    }
+
+    private async Task AssignDumpFilePathsAsync(string dumpDir)
+    {
+        var fileMappings = new (string fileName, Action<string> setter)[]
+        {
+            ("chain_item_odds.json", p => { txtChainPath.Text = p; SaveChainPath(p); }),
+            ("areas.json", p => { txtAreasPath.Text = p; _main.SetAreasPath(p); }),
+            ("events.json", p => { txtEventsPath.Text = p; _main.SetEventsPath(p); }),
+            ("dialogues.json", p => { txtDialoguesPath.Text = p; _main.SetDialoguesPath(p); }),
+            ("card_collection.json", p => { txtCardCollectionPath.Text = p; _main.SetCardCollectionPath(p); }),
+        };
+
+        foreach (var (fileName, setter) in fileMappings)
+        {
+            var path = Path.Combine(dumpDir, fileName);
+            if (File.Exists(path))
+                setter(path);
+        }
+
+        // Pets.json: check main Dump/ first, fallback to Experimental/
+        var petsPath = Path.Combine(dumpDir, "Pets.json");
+        if (!File.Exists(petsPath))
+            petsPath = Path.Combine(dumpDir, "Experimental", "Pets.json");
+        if (File.Exists(petsPath))
+        {
+            txtPetsPath.Text = petsPath;
+            _main.SetPetsPath(petsPath);
+        }
+
+        // Warn if Experimental/ is missing (Discord dump without it)
+        if (!Directory.Exists(Path.Combine(dumpDir, "Experimental")))
+        {
+            if (!File.Exists(Path.Combine(dumpDir, "Pets.json")))
+                _main.ShowStatus("This dump does not include Experimental/ folder. Pet names may show as IDs.",
+                    Wpf.Ui.Controls.InfoBarSeverity.Warning);
+        }
+
+        // Reload chain data
+        var chainPath = Path.Combine(dumpDir, "chain_item_odds.json");
+        if (File.Exists(chainPath))
+            await _main.LoadDataAsync(chainPath);
+    }
+
+    // ── Discord dump download ──
+
+    private List<DiscordDumpDownloadService.DiscordDumpInfo>? _discordDumps;
+    private CancellationTokenSource? _dumpDownloadCts;
+
+    private async void BtnRefreshDiscordDumps_Click(object sender, RoutedEventArgs e)
+    {
+        btnRefreshDiscordDumps.IsEnabled = false;
+        await LoadDiscordDumpsAsync();
+        btnRefreshDiscordDumps.IsEnabled = true;
+    }
+
+    private async Task LoadDiscordDumpsAsync()
+    {
+        cmbDiscordDumps.Items.Clear();
+        cmbDiscordDumps.Items.Add("Loading...");
+        cmbDiscordDumps.SelectedIndex = 0;
+        cmbDiscordDumps.IsEnabled = false;
+        txtDumpDownloadStatus.Text = "";
+
+        try
+        {
+            var token = _main.Settings.DiscordBotToken;
+            if (string.IsNullOrWhiteSpace(token))
+                token = AppSettings.DefaultDiscordBotToken;
+
+            var progress = new Progress<string>(msg =>
+                Dispatcher.Invoke(() => txtDumpDownloadStatus.Text = msg));
+
+            // Use pre-loaded data from splash if available
+            if (App.PreloadedDiscordDumpsTask != null)
+            {
+                _discordDumps = await App.PreloadedDiscordDumpsTask;
+                App.PreloadedDiscordDumpsTask = null; // consumed
+            }
+            else
+            {
+                _discordDumps = await DiscordDumpDownloadService.FetchAllDumpMessagesAsync(
+                    token, AppSettings.DefaultDiscordChannelId, progress);
+            }
+
+            cmbDiscordDumps.Items.Clear();
+
+            // Detect already-downloaded dumps
+            var localTimestamps = DiscordDumpDownloadService.ScanLocalCreatedAtTimestamps(
+                _main.Settings.ImageExporterBasePath);
+
+            foreach (var dump in _discordDumps)
+            {
+                // Use DataCreatedAt (from message text), fallback to message posted date
+                var effectiveDate = dump.DataCreatedAt ?? dump.MessageTimestamp;
+                var dateStr = effectiveDate.ToString("yyyy-MM-dd");
+                var versionStr = "";
+                if (_apkVersions != null)
+                {
+                    var match = ApkDownloadService.MatchVersionByDate(_apkVersions, effectiveDate);
+                    if (match != null) versionStr = $" → v{match.Version}";
+                }
+                var checkmark = localTimestamps.Contains(effectiveDate) ? " ✔" : "";
+                // Mark entries where DataCreatedAt couldn't be parsed (message date used as fallback)
+                var prefix = dump.DataCreatedAt == null ? "~" : "";
+                cmbDiscordDumps.Items.Add($"{prefix}{dateStr}{versionStr}{checkmark}");
+
+                if (dump.DataCreatedAt == null)
+                    AppLogger.Warn($"Discord dump with no CreatedAt: msg={dump.MessageId}, " +
+                                   $"posted={dump.MessageTimestamp:O}, file={dump.AttachmentFilename}");
+            }
+
+            if (_discordDumps.Count == 0)
+                cmbDiscordDumps.Items.Add("No dumps found");
+            else
+                cmbDiscordDumps.SelectedIndex = 0;
+
+            txtDumpDownloadStatus.Text = $"Found {_discordDumps.Count} dumps.";
+
+            // If versions weren't loaded yet (race condition), refresh once they arrive
+            if (_apkVersions == null || _apkVersions.Count == 0)
+                _ = RefreshDiscordVersionsWhenReadyAsync();
+        }
+        catch (Exception ex)
+        {
+            cmbDiscordDumps.Items.Clear();
+            cmbDiscordDumps.Items.Add("Fetch failed");
+            txtDumpDownloadStatus.Text = $"Error: {ex.Message}";
+            _main.ShowStatus($"Discord dump list failed: {ex.Message}",
+                Wpf.Ui.Controls.InfoBarSeverity.Error);
+        }
+        finally
+        {
+            cmbDiscordDumps.IsEnabled = true;
+        }
+    }
+
+    private async void BtnDownloadDump_Click(object sender, RoutedEventArgs e)
+    {
+        // 1. Validate workspace
+        var basePath = _main.Settings.ImageExporterBasePath;
+        if (string.IsNullOrWhiteSpace(basePath))
+        {
+            _main.ShowStatus("Set your Workspace folder first.", Wpf.Ui.Controls.InfoBarSeverity.Warning);
+            return;
+        }
+
+        // 2. Get selected dump
+        var idx = cmbDiscordDumps.SelectedIndex;
+        if (idx < 0 || _discordDumps == null || idx >= _discordDumps.Count) return;
+        var dump = _discordDumps[idx];
+        if (dump.AttachmentUrl == null) return;
+
+        // 3. Determine version — auto-detect from dump date via APK release dates
+        string? version = null;
+        var effectiveDate = dump.DataCreatedAt ?? dump.MessageTimestamp;
+        if (_apkVersions != null)
+        {
+            var match = ApkDownloadService.MatchVersionByDate(_apkVersions, effectiveDate);
+            if (match != null) version = match.Version;
+        }
+
+        if (string.IsNullOrEmpty(version))
+        {
+            var msgBox = new Wpf.Ui.Controls.MessageBox
+            {
+                Title = "Unknown Version",
+                Content = $"Could not determine game version for this dump ({effectiveDate:yyyy-MM-dd}).\n\nThe dump will be saved to 'Unknown Version/Dump {effectiveDate:yyyy-MM-dd}'.",
+                PrimaryButtonText = "OK",
+                CloseButtonText = "Cancel",
+                Owner = Window.GetWindow(this)
+            };
+            Wpf.Ui.Appearance.ApplicationThemeManager.Apply(msgBox);
+            var result = await msgBox.ShowDialogAsync();
+            if (result != Wpf.Ui.Controls.MessageBoxResult.Primary) return;
+            version = "Unknown Version";
+        }
+
+        var isUnknown = version == "Unknown Version";
+        var versionDir = Path.Combine(basePath, version);
+
+        // 4. Check collision (same CreatedAt already exists locally)
+        if (dump.DataCreatedAt.HasValue)
+        {
+            var existing = DiscordDumpDownloadService.FindExistingDumpByCreatedAt(
+                versionDir, dump.DataCreatedAt.Value);
+            if (existing != null)
+            {
+                var msgBox = new Wpf.Ui.Controls.MessageBox
+                {
+                    Title = "Dump Already Exists",
+                    Content = $"A dump with the same data timestamp already exists in:\n{existing}\n\nOverwrite it, create a new folder, or cancel?",
+                    PrimaryButtonText = "Overwrite",
+                    SecondaryButtonText = "New Folder",
+                    CloseButtonText = "Cancel",
+                    Owner = Window.GetWindow(this)
+                };
+                Wpf.Ui.Appearance.ApplicationThemeManager.Apply(msgBox);
+                var result = await msgBox.ShowDialogAsync();
+
+                if (result == Wpf.Ui.Controls.MessageBoxResult.None) return; // Cancel
+                if (result == Wpf.Ui.Controls.MessageBoxResult.Primary)
+                {
+                    // Overwrite: delete existing
+                    var existDir = Path.Combine(versionDir, existing);
+                    if (Directory.Exists(existDir))
+                        Directory.Delete(existDir, true);
+                }
+                // Secondary = new folder (continue with auto-naming)
+            }
+        }
+
+        // 5. Determine dump folder name
+        var dumpFolder = DiscordDumpDownloadService.GetNextDumpFolderName(
+            versionDir, dump.DataCreatedAt, isUnknown);
+
+        // 6. Download + Extract
+        btnDownloadDump.IsEnabled = false;
+        barDumpDownload.Visibility = Visibility.Visible;
+        barDumpDownload.IsIndeterminate = true;
+        _dumpDownloadCts = new CancellationTokenSource();
+
+        try
+        {
+            // Phase 1: Download 7z
+            txtDumpDownloadStatus.Text = "Downloading…";
+            Directory.CreateDirectory(versionDir);
+            var archivePath = Path.Combine(versionDir, dump.AttachmentFilename!);
+
+            await DiscordDumpDownloadService.DownloadAttachmentAsync(
+                dump.AttachmentUrl, archivePath,
+                new Progress<(long dl, long? total)>(p => Dispatcher.Invoke(() =>
+                {
+                    if (p.total is > 0)
+                    {
+                        barDumpDownload.IsIndeterminate = false;
+                        barDumpDownload.Maximum = p.total.Value;
+                        barDumpDownload.Value = p.dl;
+                        var pct = (double)p.dl / p.total.Value * 100;
+                        txtDumpDownloadStatus.Text = $"Downloading… {pct:F0}%";
+                    }
+                })),
+                _dumpDownloadCts.Token);
+
+            // Phase 2: Extract 7z (keep archive)
+            txtDumpDownloadStatus.Text = "Extracting…";
+            barDumpDownload.IsIndeterminate = true;
+            var extractDir = Path.Combine(versionDir, dumpFolder);
+            await DiscordDumpDownloadService.ExtractArchiveAsync(archivePath, extractDir);
+
+            // Phase 3: Offer to set as active
+            barDumpDownload.Visibility = Visibility.Collapsed;
+            txtDumpDownloadStatus.Text = $"Done! Extracted to {dumpFolder}";
+            txtDumpDownloadStatus.SetResourceReference(
+                TextBlock.ForegroundProperty, "SystemFillColorSuccessBrush");
+
+            var setActiveBox = new Wpf.Ui.Controls.MessageBox
+            {
+                Title = "Download Complete",
+                Content = $"Dump (v{version}) extracted to {Path.GetFileName(basePath)}/{version}/{dumpFolder}/",
+                PrimaryButtonText = "Switch version and load",
+                SecondaryButtonText = "Load files only",
+                CloseButtonText = "Keep files",
+                MinWidth = 450,
+                Owner = Window.GetWindow(this)
+            };
+            setActiveBox.Loaded += (sender, _) =>
+            {
+                try
+                {
+                    var box = (Wpf.Ui.Controls.MessageBox)sender;
+                    if (box.Template.FindName("PrimaryColumn", box) is ColumnDefinition primaryCol)
+                        primaryCol.Width = new GridLength(1.6, GridUnitType.Star);
+                }
+                catch { }
+            };
+            Wpf.Ui.Appearance.ApplicationThemeManager.Apply(setActiveBox);
+            var setResult = await setActiveBox.ShowDialogAsync();
+
+            if (setResult == Wpf.Ui.Controls.MessageBoxResult.Primary)
+            {
+                // Switch Game Version + load dump files
+                _main.Settings.SelectedApkVersion = version;
+                _main.Settings.ActiveDumpFolder = dumpFolder;
+                _main.SaveSettings();
+
+                if (_apkVersions != null)
+                {
+                    var versionIdx = _apkVersions.FindIndex(v => v.Version == version);
+                    if (versionIdx >= 0)
+                        cmbApkVersion.SelectedIndex = versionIdx;
+                }
+
+                await AssignDumpFilePathsAsync(extractDir);
+                _main.RaiseApkVersionChanged();
+            }
+            else if (setResult == Wpf.Ui.Controls.MessageBoxResult.Secondary)
+            {
+                // Load dump files without switching version
+                _main.Settings.ActiveDumpFolder = dumpFolder;
+                _main.SaveSettings();
+                await AssignDumpFilePathsAsync(extractDir);
+            }
+
+            await ScanLocalDumpsAsync();
+
+            _main.ShowStatus($"Dump downloaded and extracted to {version}/{dumpFolder}",
+                Wpf.Ui.Controls.InfoBarSeverity.Success);
+        }
+        catch (OperationCanceledException)
+        {
+            txtDumpDownloadStatus.Text = "Download cancelled.";
+        }
+        catch (Exception ex)
+        {
+            txtDumpDownloadStatus.Text = $"Failed: {ex.Message}";
+            _main.ShowStatus($"Dump download failed: {ex.Message}",
+                Wpf.Ui.Controls.InfoBarSeverity.Error);
+        }
+        finally
+        {
+            btnDownloadDump.IsEnabled = true;
+            barDumpDownload.Visibility = Visibility.Collapsed;
+            txtDumpDownloadStatus.SetResourceReference(
+                TextBlock.ForegroundProperty, "TextFillColorSecondaryBrush");
+            _dumpDownloadCts?.Dispose();
+            _dumpDownloadCts = null;
+        }
+    }
+
+    // ── Browse/Drop handlers for new dump files ──
+
+    private void BrowseDialoguesFile_Click(object sender, RoutedEventArgs e)
+    {
+        var path = BrowseJsonFile("Select dialogues.json");
+        if (path != null) { txtDialoguesPath.Text = path; _main.SetDialoguesPath(path); }
+    }
+
+    private void BrowsePetsFile_Click(object sender, RoutedEventArgs e)
+    {
+        var path = BrowseJsonFile("Select Pets.json");
+        if (path != null) { txtPetsPath.Text = path; _main.SetPetsPath(path); }
+    }
+
+    private void BrowseCardCollectionFile_Click(object sender, RoutedEventArgs e)
+    {
+        var path = BrowseJsonFile("Select card_collection.json");
+        if (path != null) { txtCardCollectionPath.Text = path; _main.SetCardCollectionPath(path); }
+    }
+
+    private void DialoguesFileDrop(object sender, DragEventArgs e)
+    {
+        var path = GetDroppedFilePath(e);
+        if (path != null) { txtDialoguesPath.Text = path; _main.SetDialoguesPath(path); }
+        e.Handled = true;
+    }
+
+    private void PetsFileDrop(object sender, DragEventArgs e)
+    {
+        var path = GetDroppedFilePath(e);
+        if (path != null) { txtPetsPath.Text = path; _main.SetPetsPath(path); }
+        e.Handled = true;
+    }
+
+    private void CardCollectionFileDrop(object sender, DragEventArgs e)
+    {
+        var path = GetDroppedFilePath(e);
+        if (path != null) { txtCardCollectionPath.Text = path; _main.SetCardCollectionPath(path); }
+        e.Handled = true;
+    }
+
+    private static void FindAllDescendants<T>(DependencyObject parent, List<T> results) where T : DependencyObject
+    {
+        var count = System.Windows.Media.VisualTreeHelper.GetChildrenCount(parent);
+        for (int i = 0; i < count; i++)
+        {
+            var child = System.Windows.Media.VisualTreeHelper.GetChild(parent, i);
+            if (child is T match) results.Add(match);
+            FindAllDescendants(child, results);
+        }
+    }
+
+    private static T? FindDescendant<T>(DependencyObject parent, Func<T, bool>? predicate = null) where T : DependencyObject
+    {
+        var count = System.Windows.Media.VisualTreeHelper.GetChildrenCount(parent);
+        for (int i = 0; i < count; i++)
+        {
+            var child = System.Windows.Media.VisualTreeHelper.GetChild(parent, i);
+            if (child is T match && (predicate == null || predicate(match)))
+                return match;
+            var found = FindDescendant(child, predicate);
+            if (found != null) return found;
+        }
+        return null;
     }
 }

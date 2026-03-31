@@ -33,6 +33,7 @@ public partial class MainWindow : FluentWindow
     public DataService? DataService { get; private set; }
     public WikiMappingCache? WikiMapping { get; set; }
     public MysteryService? MysteryService { get; set; }
+    internal List<ApkDownloadService.ApkVersionInfo>? ApkVersions { get; set; }
 
     /// <summary>Whether variant subdirectories exist alongside chain_item_odds.json.</summary>
     public bool HasVariantDirectories { get; private set; }
@@ -82,20 +83,23 @@ public partial class MainWindow : FluentWindow
         // Validate dump file paths — clear stale paths that no longer exist
         ValidateDumpFilePaths();
 
-        // Try auto-load if path is configured
-        if (!string.IsNullOrEmpty(Settings.ChainItemOddsPath) && File.Exists(Settings.ChainItemOddsPath))
-        {
+        // Consume pre-loaded data from splash screen, or load fresh
+        if (App.PreloadedChainDataTask != null)
+            _ = ConsumePreloadedChainDataAsync();
+        else if (!string.IsNullOrEmpty(Settings.ChainItemOddsPath) && File.Exists(Settings.ChainItemOddsPath))
             _ = LoadDataAsync(Settings.ChainItemOddsPath);
-        }
 
-        // Load wiki mapping cache (auto-refresh if stale)
-        _ = LoadWikiMappingAsync();
+        if (App.PreloadedWikiMappingTask != null)
+            _ = ConsumePreloadedWikiMappingAsync();
+        else
+            _ = LoadWikiMappingAsync();
 
-        // Pre-load mysteries + wiki status check (runs during splash screen)
+        // Pre-load mysteries + wiki status check
         _ = LoadMysteriesAsync();
 
         // Show chains page by default (navList SelectedIndex=0 triggers this)
         ShowChainsPage();
+
 
         // Auto-update check: at startup + every 15 minutes
         _ = CheckForUpdateAsync();
@@ -371,10 +375,29 @@ public partial class MainWindow : FluentWindow
 
     private void ShowSettingsPage()
     {
+        var sw = System.Diagnostics.Stopwatch.StartNew();
         _settingsPage ??= new SettingsPage(this);
+        AppLogger.Info($"[ShowSettings] ctor: {sw.ElapsedMilliseconds}ms");
         _settingsPage.RefreshPaths();
+        AppLogger.Info($"[ShowSettings] RefreshPaths: {sw.ElapsedMilliseconds}ms");
         contentArea.Content = _settingsPage;
+        AppLogger.Info($"[ShowSettings] Content assigned: {sw.ElapsedMilliseconds}ms");
+        Dispatcher.InvokeAsync(() => AppLogger.Info($"[ShowSettings] UI idle after: {sw.ElapsedMilliseconds}ms"),
+            System.Windows.Threading.DispatcherPriority.ApplicationIdle);
     }
+
+    internal void SetPreCreatedSettingsPage(SettingsPage page) => _settingsPage = page;
+
+    /// <summary>
+    /// Returns game version string for a given date, or null if versions not loaded yet.
+    /// </summary>
+    public string? GetVersionForDate(DateTimeOffset date)
+    {
+        if (ApkVersions == null || ApkVersions.Count == 0) return null;
+        return ApkDownloadService.MatchVersionByDate(ApkVersions, date)?.Version;
+    }
+
+    public string? GetVersionForDate(DateTime date) => GetVersionForDate(new DateTimeOffset(date));
 
     public void RefreshSettingsPaths() => _settingsPage?.RefreshPaths();
 
@@ -488,6 +511,56 @@ public partial class MainWindow : FluentWindow
     {
         await Task.Delay(4000);
         statusBar.IsOpen = false;
+    }
+
+    private async Task ConsumePreloadedChainDataAsync()
+    {
+        try
+        {
+            ShowStatus("Loading data...", Wpf.Ui.Controls.InfoBarSeverity.Informational);
+            txtDataStatus.Text = "Loading...";
+
+            DataService = await App.PreloadedChainDataTask!;
+            App.PreloadedChainDataTask = null;
+
+            ShowStatus($"Loaded {DataService.Chains.Count} chains...", Wpf.Ui.Controls.InfoBarSeverity.Success);
+            Increment(s => s.DataLoads++);
+
+            HasVariantDirectories = VariantComparisonService.HasVariants(Settings.ChainItemOddsPath);
+            _wikiMappingApplied = false;
+            TryApplyWikiMapping();
+            ResolveMysteryItems();
+            UpdateSidebarStatus();
+            _chainPage?.OnDataLoaded();
+            ChainDataLoaded?.Invoke();
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Error("ConsumePreloadedChainData failed, falling back to fresh load", ex);
+            App.PreloadedChainDataTask = null;
+            if (!string.IsNullOrEmpty(Settings.ChainItemOddsPath))
+                _ = LoadDataAsync(Settings.ChainItemOddsPath);
+        }
+    }
+
+    private async Task ConsumePreloadedWikiMappingAsync()
+    {
+        try
+        {
+            var cache = WikiMappingService.Load(); // local cache first (instant)
+            WikiMapping = cache;
+
+            var fresh = await App.PreloadedWikiMappingTask!;
+            App.PreloadedWikiMappingTask = null;
+            WikiMapping = fresh;
+            TryApplyWikiMapping();
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Error("ConsumePreloadedWikiMapping failed", ex);
+            App.PreloadedWikiMappingTask = null;
+            _ = LoadWikiMappingAsync();
+        }
     }
 
     private async Task LoadWikiMappingAsync()
@@ -842,6 +915,21 @@ public partial class MainWindow : FluentWindow
             Settings.EventsJsonPath = "";
             changed = true;
         }
+        if (!string.IsNullOrEmpty(Settings.DialoguesJsonPath) && !File.Exists(Settings.DialoguesJsonPath))
+        {
+            Settings.DialoguesJsonPath = "";
+            changed = true;
+        }
+        if (!string.IsNullOrEmpty(Settings.PetsJsonPath) && !File.Exists(Settings.PetsJsonPath))
+        {
+            Settings.PetsJsonPath = "";
+            changed = true;
+        }
+        if (!string.IsNullOrEmpty(Settings.CardCollectionJsonPath) && !File.Exists(Settings.CardCollectionJsonPath))
+        {
+            Settings.CardCollectionJsonPath = "";
+            changed = true;
+        }
 
         if (changed) SaveSettings();
     }
@@ -866,6 +954,26 @@ public partial class MainWindow : FluentWindow
         MysteryService = null; // Force reload
         _ = LoadMysteriesAsync();
         EventsFileChanged?.Invoke();
+    }
+
+    public void SetDialoguesPath(string path)
+    {
+        Settings.DialoguesJsonPath = path;
+        SaveSettings();
+    }
+
+    public void SetPetsPath(string path)
+    {
+        Settings.PetsJsonPath = path;
+        SaveSettings();
+        if (File.Exists(path))
+            MysteryWikiService.LoadPetDisplayNamesFromPath(path);
+    }
+
+    public void SetCardCollectionPath(string path)
+    {
+        Settings.CardCollectionJsonPath = path;
+        SaveSettings();
     }
 
     /// <summary>

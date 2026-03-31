@@ -3,6 +3,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using MergeMansionWikiTools.Models;
 using MergeMansionWikiTools.Services;
 using MergeMansionWikiTools.Views;
 using Microsoft.Win32;
@@ -13,6 +16,12 @@ namespace MergeMansionWikiTools
 {
     public partial class App : Application
     {
+        // Pre-fetched during splash — consumed by SettingsPage/MainWindow on first load
+        internal static Task<List<ApkDownloadService.ApkVersionInfo>>? PreloadedVersionsTask;
+        internal static Task<List<DiscordDumpDownloadService.DiscordDumpInfo>>? PreloadedDiscordDumpsTask;
+        internal static Task<DataService>? PreloadedChainDataTask;
+        internal static Task<WikiMappingCache>? PreloadedWikiMappingTask;
+        internal static Task<HashSet<DateTimeOffset>>? PreloadedLocalTimestampsTask;
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -76,6 +85,26 @@ namespace MergeMansionWikiTools
             MainWindow = splash;
             splash.Show();
 
+            // Pre-fetch external data in background during splash animation
+            // These run in parallel and results are consumed by SettingsPage/MainWindow on first load
+            PreloadedVersionsTask = Task.Run(() => ApkDownloadService.FetchAvailableVersionsAsync());
+            var botToken = string.IsNullOrWhiteSpace(settings.DiscordBotToken)
+                ? AppSettings.DefaultDiscordBotToken : settings.DiscordBotToken;
+            PreloadedDiscordDumpsTask = Task.Run(() =>
+                DiscordDumpDownloadService.FetchAllDumpMessagesAsync(botToken, AppSettings.DefaultDiscordChannelId));
+
+            // Pre-load game data + wiki mapping in background
+            if (!string.IsNullOrEmpty(settings.ChainItemOddsPath) && System.IO.File.Exists(settings.ChainItemOddsPath))
+                PreloadedChainDataTask = Task.Run(async () =>
+                {
+                    var ds = new DataService(new ChainNameService());
+                    await ds.LoadAsync(settings.ChainItemOddsPath);
+                    return ds;
+                });
+            PreloadedWikiMappingTask = Task.Run(() => WikiMappingService.FetchFromWikiAsync());
+            PreloadedLocalTimestampsTask = Task.Run(() =>
+                DiscordDumpDownloadService.ScanLocalCreatedAtTimestamps(settings.ImageExporterBasePath));
+
             splash.RunFadeSequence(
                 startFadeOut =>
                 {
@@ -99,16 +128,14 @@ namespace MergeMansionWikiTools
                         settings = SettingsService.Load(); // Wizard saved its own copy
                     }
 
-                    // Fade-in done — splash is static, safe to load MainWindow
+                    // Fade-in done — create MainWindow
                     var main = new MainWindow();
                     main.Show();
                     MainWindow = main;
 
-                    // Start fade-out once MainWindow is fully loaded
-                    if (main.IsLoaded)
-                        startFadeOut();
-                    else
-                        main.Loaded += (_, _) => startFadeOut();
+                    // Start fade-out immediately — MainWindow is already visible
+                    startFadeOut();
+                    AppLogger.Info("[Splash] Fade-out started");
                 },
                 () => splash.Close()
             );

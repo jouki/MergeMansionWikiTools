@@ -8,6 +8,8 @@ using System.Linq;
 using GameLogic;
 using GameLogic.Player.Items;
 using GameLogic.Config;
+using GameLogic.Config.Shop;
+using GameLogic.Config.Shop.Items;
 using Serilog;
 
 namespace merge_mansion_dumper.Dumper.Json.Metaplay
@@ -299,7 +301,13 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 WriteProperty(writer, "Name", LocMan.Get(collectibleEvent.NameLocId), serializer);
 
             if (value is ProgressionEventInfo progressionEvent)
+            {
                 WriteProperty(writer, "Name", LocMan.Get(progressionEvent.NameLocId), serializer);
+
+                // Resolve perk data (slot counts, gem amounts, XP) and embed into events.json
+                try { WritePerkData(writer, "Track1PerkData", progressionEvent.Track1IAPPerkRefs?.Select(r => r.Ref).ToList(), serializer); } catch { }
+                try { WritePerkData(writer, "Track2PerkData", progressionEvent.Track2IAPPerkRefs?.Select(r => r.Ref).ToList(), serializer); } catch { }
+            }
 
             if (value is LeaderboardEventInfo leaderboardEvent)
                 WriteProperty(writer, "Name", LocMan.Get(leaderboardEvent.NameLocId), serializer);
@@ -532,6 +540,96 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
             #endregion
 
             base.WriteObjectMember(writer, name, type, value, serializer);
+        }
+
+        /// <summary>
+        /// Resolves perk references to concrete values (inventory slots, gem amounts, XP bonus)
+        /// and writes them as a JSON object property on the progression event.
+        /// </summary>
+        private void WritePerkData(JsonWriter writer, string propertyName,
+            IList<ProgressionEventPerkInfo> perkRefs, JsonSerializer serializer)
+        {
+            if (perkRefs == null || perkRefs.Count == 0) return;
+
+            writer.WritePropertyName(propertyName);
+            writer.WriteStartObject();
+
+            foreach (var perkInfo in perkRefs)
+            {
+                if (perkInfo?.Perk == null) continue;
+                var perk = perkInfo.Perk;
+                var id = perkInfo.Id?.ToString() ?? "unknown";
+
+                if (perk is ProgressionEventExtraInventorySlotsPerk slotsPerk)
+                {
+                    writer.WritePropertyName(id);
+                    writer.WriteStartObject();
+                    WriteProperty(writer, "Type", "ExtraInventorySlots", serializer);
+                    WriteProperty(writer, "SlotCount", slotsPerk.SlotCount, serializer);
+                    writer.WriteEndObject();
+                }
+                else if (perk is ProgressionEventXpPerk xpPerk)
+                {
+                    writer.WritePropertyName(id);
+                    writer.WriteStartObject();
+                    WriteProperty(writer, "Type", "EventXp", serializer);
+                    WriteProperty(writer, "Amount", xpPerk.Amount, serializer);
+                    writer.WriteEndObject();
+                }
+                else if (perk is ProgressionEventFreeDailyShopItemPerk dailyShopPerk)
+                {
+                    writer.WritePropertyName(id);
+                    writer.WriteStartObject();
+                    WriteProperty(writer, "Type", "FreeDailyShopItem", serializer);
+                    WriteProperty(writer, "ShopItemId", dailyShopPerk.ShopItemId?.ToString(), serializer);
+                    ResolveShopItemAmount(writer, dailyShopPerk.ShopItemId, serializer);
+                    writer.WriteEndObject();
+                }
+                else if (perk is ProgressionEventFreeDailyCurrencyPerk dailyCurrencyPerk)
+                {
+                    writer.WritePropertyName(id);
+                    writer.WriteStartObject();
+                    WriteProperty(writer, "Type", "FreeDailyCurrency", serializer);
+                    WriteProperty(writer, "ShopItemId", dailyCurrencyPerk.ShopItemId?.ToString(), serializer);
+                    ResolveShopItemAmount(writer, dailyCurrencyPerk.ShopItemId, serializer);
+                    writer.WriteEndObject();
+                }
+                else if (perk is ProgressionEventFreeShopItemPerk freeShopPerk)
+                {
+                    writer.WritePropertyName(id);
+                    writer.WriteStartObject();
+                    WriteProperty(writer, "Type", "FreeShopItem", serializer);
+                    WriteProperty(writer, "ShopItemId", freeShopPerk.ShopItemId?.ToString(), serializer);
+                    WriteProperty(writer, "Interval", freeShopPerk.Interval.ToString(), serializer);
+                    ResolveShopItemAmount(writer, freeShopPerk.ShopItemId, serializer);
+                    writer.WriteEndObject();
+                }
+            }
+
+            writer.WriteEndObject();
+        }
+
+        /// <summary>
+        /// Resolves a ShopItemId to its concrete amount (e.g., DiamondItem → gem count).
+        /// </summary>
+        private void ResolveShopItemAmount(JsonWriter writer, ShopItemId shopItemId, JsonSerializer serializer)
+        {
+            if (shopItemId == null || _config.ShopItems == null) return;
+            if (!_config.ShopItems.TryGetValue(shopItemId, out var shopInfo)) return;
+
+            var actualItem = shopInfo.ActualItem;
+            if (actualItem is DiamondItem diamondItem)
+            {
+                WriteProperty(writer, "Gems", (int)diamondItem.Amount, serializer);
+            }
+            else if (actualItem is EnergyItem energyItem)
+            {
+                WriteProperty(writer, "Energy", (int)energyItem.EnergyAmount, serializer);
+            }
+            else
+            {
+                WriteProperty(writer, "ItemType", actualItem?.GetType().Name, serializer);
+            }
         }
     }
 }

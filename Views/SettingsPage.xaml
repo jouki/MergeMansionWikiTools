@@ -168,12 +168,21 @@
                                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                            Margin="0,0,8,0" />
                                 <ComboBox x:Name="cmbApkVersion" Grid.Column="1" MinWidth="160"
-                                         SelectionChanged="CmbApkVersion_SelectionChanged" />
+                                         SelectionChanged="CmbApkVersion_SelectionChanged"
+                                         VirtualizingStackPanel.IsVirtualizing="True"
+                                         VirtualizingStackPanel.VirtualizationMode="Recycling" />
                                 <ui:Button x:Name="btnRefreshVersions" Grid.Column="2"
                                            Content="↻" Appearance="Secondary" Height="36" Width="36"
                                            Click="BtnRefreshVersions_Click" Margin="8,0,0,0"
                                            ToolTipService.InitialShowDelay="0" ToolTip="Refresh version list" />
-                                <!-- Spacer column 3 -->
+                                <CheckBox x:Name="chkShowReleaseDates" Grid.Column="3"
+                                          Content="Dates" FontSize="11" VerticalAlignment="Center"
+                                          Margin="12,0,0,0"
+                                          Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                          ToolTipService.InitialShowDelay="0"
+                                          ToolTip="Show release dates in version list"
+                                          Checked="ChkShowReleaseDates_Changed"
+                                          Unchecked="ChkShowReleaseDates_Changed" />
                                 <ui:Button x:Name="btnOpenApkFolder" Grid.Column="4"
                                            Content="Open Folder" Appearance="Secondary" Height="36"
                                            Click="BtnOpenApkFolder_Click" Margin="0,0,8,0"
@@ -184,7 +193,9 @@
                                            Visibility="Collapsed" />
                                 <ui:Button x:Name="btnDownloadApk" Grid.Column="6"
                                            Content="Download APK" Appearance="Primary" Height="36"
-                                           Click="BtnDownloadApk_Click" />
+                                           Click="BtnDownloadApk_Click"
+                                           ToolTipService.ShowOnDisabled="True"
+                                           ToolTipService.InitialShowDelay="0" />
                             </Grid>
 
                             <!-- Status text -->
@@ -196,7 +207,7 @@
 
                             <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
                                        Margin="0,8,0,0">
-                                <Run Text="Downloads may fail due to Cloudflare protection." />
+                                <Run Text="Downloads from APKPure. May fail due to Cloudflare protection. Older versions may not be available." />
                             </TextBlock>
                         </StackPanel>
                         </Border>
@@ -215,6 +226,67 @@
                             BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1"
                             AllowDrop="True" DragOver="FileDragOver" Drop="DumpFilesCardDrop">
                         <StackPanel>
+
+                            <!-- Available Dumps -->
+                            <StackPanel Margin="16,14,16,12">
+                                <TextBlock Text="Available Dumps" FontSize="13" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,0,0,4" />
+                                <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                           TextWrapping="Wrap" Margin="0,0,0,8">
+                                    <Run Text="Local dump folders for the selected game version." />
+                                </TextBlock>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <ComboBox x:Name="cmbActiveDump" MinWidth="200" />
+                                    <ui:Button x:Name="btnSetActiveDump" Grid.Column="1"
+                                               Content="Set As Active" Appearance="Secondary" Height="36"
+                                               Click="BtnSetActiveDump_Click" Margin="8,0,0,0"
+                                               ToolTipService.InitialShowDelay="0" ToolTip="Load dump files from this folder" />
+                                    <ui:Button x:Name="btnRefreshDumps" Grid.Column="2"
+                                               Content="↻" Appearance="Secondary" Height="36" Width="36"
+                                               Click="BtnRefreshDumps_Click" Margin="8,0,0,0"
+                                               ToolTipService.InitialShowDelay="0" ToolTip="Scan for dump folders" />
+                                </Grid>
+                            </StackPanel>
+
+                            <Separator Opacity="0.15" Margin="0" />
+
+                            <!-- Download from Discord -->
+                            <StackPanel Margin="16,14,16,12">
+                                <TextBlock Text="Download from Discord" FontSize="13" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,0,0,4" />
+                                <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                           TextWrapping="Wrap" Margin="0,0,0,8">
+                                    <Run Text="Download and extract a dump archive from the Discord dump thread." />
+                                </TextBlock>
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <ComboBox x:Name="cmbDiscordDumps" MinWidth="200"
+                                              VirtualizingStackPanel.IsVirtualizing="True"
+                                              VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                                    <ui:Button x:Name="btnRefreshDiscordDumps" Grid.Column="1"
+                                               Content="↻" Appearance="Secondary" Height="36" Width="36"
+                                               Click="BtnRefreshDiscordDumps_Click" Margin="8,0,0,0"
+                                               ToolTipService.InitialShowDelay="0" ToolTip="Fetch dump list from Discord" />
+                                    <ui:Button x:Name="btnDownloadDump" Grid.Column="2"
+                                               Content="Download" Appearance="Primary" Height="36"
+                                               Click="BtnDownloadDump_Click" Margin="8,0,0,0" />
+                                </Grid>
+                                <ProgressBar x:Name="barDumpDownload" Height="4" Margin="0,0,0,4"
+                                             Visibility="Collapsed" />
+                                <TextBlock x:Name="txtDumpDownloadStatus" FontSize="12"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+
+                            <Separator Opacity="0.15" Margin="0" />
 
                             <!-- chain_item_odds.json -->
                             <Border x:Name="chainSectionBorder" CornerRadius="4"
@@ -285,6 +357,81 @@
                                                     Margin="0,0,8,0" />
                                         <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
                                                    Click="BrowseEventsFile_Click" Height="36" />
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+
+                            <Separator Opacity="0.15" Margin="0" />
+
+                            <!-- dialogues.json -->
+                            <Border x:Name="dialoguesSectionBorder" CornerRadius="4"
+                                    AllowDrop="True" DragOver="FileDragOver" Drop="DialoguesFileDrop"
+                                    Background="Transparent">
+                                <StackPanel Margin="16,14,16,12">
+                                    <TextBlock Text="dialogues.json" FontSize="13" FontWeight="SemiBold"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                               Margin="0,0,0,8" />
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <ui:TextBox x:Name="txtDialoguesPath" Grid.Column="0"
+                                                    PlaceholderText="Drag file here or browse..."
+                                                    IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False"
+                                                    Margin="0,0,8,0" />
+                                        <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
+                                                   Click="BrowseDialoguesFile_Click" Height="36" />
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+
+                            <Separator Opacity="0.15" Margin="0" />
+
+                            <!-- Pets.json -->
+                            <Border x:Name="petsSectionBorder" CornerRadius="4"
+                                    AllowDrop="True" DragOver="FileDragOver" Drop="PetsFileDrop"
+                                    Background="Transparent">
+                                <StackPanel Margin="16,14,16,12">
+                                    <TextBlock Text="Pets.json" FontSize="13" FontWeight="SemiBold"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                               Margin="0,0,0,8" />
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <ui:TextBox x:Name="txtPetsPath" Grid.Column="0"
+                                                    PlaceholderText="Drag file here or browse..."
+                                                    IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False"
+                                                    Margin="0,0,8,0" />
+                                        <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
+                                                   Click="BrowsePetsFile_Click" Height="36" />
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+
+                            <Separator Opacity="0.15" Margin="0" />
+
+                            <!-- card_collection.json -->
+                            <Border x:Name="cardCollectionSectionBorder" CornerRadius="4"
+                                    AllowDrop="True" DragOver="FileDragOver" Drop="CardCollectionFileDrop"
+                                    Background="Transparent">
+                                <StackPanel Margin="16,14,16,12">
+                                    <TextBlock Text="card_collection.json" FontSize="13" FontWeight="SemiBold"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                               Margin="0,0,0,8" />
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <ui:TextBox x:Name="txtCardCollectionPath" Grid.Column="0"
+                                                    PlaceholderText="Drag file here or browse..."
+                                                    IsReadOnly="True" AllowDrop="False" IsHitTestVisible="False"
+                                                    Margin="0,0,8,0" />
+                                        <ui:Button Grid.Column="1" Content="Browse" Appearance="Secondary"
+                                                   Click="BrowseCardCollectionFile_Click" Height="36" />
                                     </Grid>
                                 </StackPanel>
                             </Border>
@@ -519,6 +666,39 @@
                     <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="12"
                                Margin="4,6,0,16"><Run Text="Get your free key at " /><Hyperlink NavigateUri="https://tinify.com/developers" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="tinypng.com (tinify.com)" /></Hyperlink><Run Text="." /></TextBlock>
 
+                    <!-- GAME DATA DUMPER -->
+                    <StackPanel Orientation="Horizontal" Margin="4,12,0,10">
+                        <ui:SymbolIcon Symbol="DatabaseArrowDown20" FontSize="20" Margin="0,0,8,0"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        <TextBlock Text="Game Data Dumper" FontSize="16" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                    </StackPanel>
+
+                    <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                            CornerRadius="8"
+                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                        <StackPanel Margin="16,14,16,12">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                    <TextBlock Text="Auto-create new dump folder" FontSize="13" FontWeight="SemiBold"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                               Margin="0,0,0,4" />
+                                    <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                               TextWrapping="Wrap">
+                                        <Run Text="When enabled, new dumps are saved to Dump 2, Dump 3, etc. instead of overwriting existing data." />
+                                    </TextBlock>
+                                </StackPanel>
+                                <ui:ToggleSwitch x:Name="toggleDumpAutoNewFolder" Grid.Column="1"
+                                                 VerticalAlignment="Center"
+                                                 Checked="ToggleDumpAutoNewFolder_Changed"
+                                                 Unchecked="ToggleDumpAutoNewFolder_Changed" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
 
                 </StackPanel>
             </ScrollViewer>

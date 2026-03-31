@@ -340,6 +340,8 @@ public class DataService
             }
             if (factory.TryGetProperty("RewardDef", out var rewardDef) && rewardDef.ValueKind == JsonValueKind.String)
                 pi.SinkRewardItemType = rewardDef.GetString();
+            else if (factory.TryGetProperty("Reward", out var rewardOld) && rewardOld.ValueKind == JsonValueKind.String)
+                pi.SinkRewardItemType = rewardOld.GetString(); // older dump format
         }
 
         // ── OrderFeatures (tasks requiring items → rewards) ──

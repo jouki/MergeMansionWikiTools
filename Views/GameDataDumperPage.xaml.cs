@@ -195,7 +195,99 @@ public partial class GameDataDumperPage : UserControl
         var version = _main.Settings.SelectedApkVersion;
         if (string.IsNullOrEmpty(basePath) || string.IsNullOrEmpty(version))
             return null;
-        return Path.Combine(basePath, version, "Dump");
+        var folder = _main.Settings.ActiveDumpFolder;
+        if (string.IsNullOrEmpty(folder)) folder = "Dump";
+        return Path.Combine(basePath, version, folder);
+    }
+
+    /// <summary>
+    /// Resolves dump output directory with collision detection.
+    /// Returns null if user cancelled, or the resolved path.
+    /// </summary>
+    private async Task<string?> ResolveDumpOutputDirAsync()
+    {
+        var basePath = _main.Settings.ImageExporterBasePath;
+        var version = _main.Settings.SelectedApkVersion;
+        if (string.IsNullOrEmpty(basePath) || string.IsNullOrEmpty(version))
+            return null;
+
+        var versionDir = Path.Combine(basePath, version);
+        var dumpDir = Path.Combine(versionDir, "Dump");
+
+        // No existing Dump folder → use "Dump"
+        if (!Directory.Exists(dumpDir))
+            return dumpDir;
+
+        // Auto-new-folder mode → always create next available Dump N
+        if (_main.Settings.DumpAutoNewFolder)
+        {
+            var autoFolder = DiscordDumpDownloadService.GetNextDumpFolderName(
+                versionDir, null, isUnknownVersion: false);
+            return Path.Combine(versionDir, autoFolder);
+        }
+
+        // Check if any existing Dump folder has the same CreatedAt (= same data already dumped)
+        // We read CreatedAt from the config file that will be used for this dump
+        var configCreatedAt = ReadConfigCreatedAt();
+        if (configCreatedAt != null)
+        {
+            var existingFolder = DiscordDumpDownloadService.FindExistingDumpByCreatedAt(
+                versionDir,
+                DateTimeOffset.Parse(configCreatedAt, System.Globalization.CultureInfo.InvariantCulture,
+                    System.Globalization.DateTimeStyles.RoundtripKind));
+            if (existingFolder != null)
+            {
+                // Same timestamp exists → ask: dump into that folder or create new?
+                var msgBox = new Wpf.Ui.Controls.MessageBox
+                {
+                    Title = "Dump Already Exists",
+                    Content = $"A dump with the same data timestamp already exists in:\n{existingFolder}\n\nDump into this folder (overwrite) or create a new one?",
+                    PrimaryButtonText = "Overwrite",
+                    SecondaryButtonText = "New Folder",
+                    CloseButtonText = "Cancel",
+                    Owner = Window.GetWindow(this)
+                };
+                Wpf.Ui.Appearance.ApplicationThemeManager.Apply(msgBox);
+                var result = await msgBox.ShowDialogAsync();
+                if (result == Wpf.Ui.Controls.MessageBoxResult.None) return null; // Cancel
+                if (result == Wpf.Ui.Controls.MessageBoxResult.Primary)
+                    return Path.Combine(versionDir, existingFolder);
+                // Secondary = new folder
+                var collisionFolder = DiscordDumpDownloadService.GetNextDumpFolderName(
+                    versionDir, null, isUnknownVersion: false);
+                return Path.Combine(versionDir, collisionFolder);
+            }
+        }
+
+        // Dump/ exists but different timestamp → ask: overwrite, new folder, or cancel
+        var nextFolder = DiscordDumpDownloadService.GetNextDumpFolderName(
+            versionDir, null, isUnknownVersion: false);
+        var overwriteBox = new Wpf.Ui.Controls.MessageBox
+        {
+            Title = "Dump Folder Exists",
+            Content = $"A Dump folder already exists for this version.\n\nOverwrite it, create \"{nextFolder}\", or cancel?",
+            PrimaryButtonText = "Overwrite",
+            SecondaryButtonText = nextFolder,
+            CloseButtonText = "Cancel",
+            Owner = Window.GetWindow(this)
+        };
+        Wpf.Ui.Appearance.ApplicationThemeManager.Apply(overwriteBox);
+        var overwriteResult = await overwriteBox.ShowDialogAsync();
+        if (overwriteResult == Wpf.Ui.Controls.MessageBoxResult.None) return null;
+        if (overwriteResult == Wpf.Ui.Controls.MessageBoxResult.Primary)
+            return dumpDir; // overwrite existing Dump/
+        var newFolder = DiscordDumpDownloadService.GetNextDumpFolderName(
+            versionDir, null, isUnknownVersion: false);
+        return Path.Combine(versionDir, newFolder);
+    }
+
+    private string? ReadConfigCreatedAt()
+    {
+        var configPath = GetPathText(txtConfigPath);
+        if (string.IsNullOrEmpty(configPath)) return null;
+        // Can't read CreatedAt from binary config before dump — return null
+        // (CreatedAt is only available after dump creates the JSON files)
+        return null;
     }
 
     private void UpdateDumpFolderVisibility()
@@ -535,14 +627,36 @@ public partial class GameDataDumperPage : UserControl
             return;
         }
 
-        var outputPath = customOutputDir ?? GetDumpOutputDir();
-        if (string.IsNullOrEmpty(outputPath))
+        string? outputPath;
+        if (customOutputDir != null)
         {
-            resultInfoBar.Title = "Output directory cannot be determined";
-            resultInfoBar.Message = "Please set a workspace path and APK version in Settings, or use the arrow menu to dump to a custom folder.";
-            resultInfoBar.Severity = Wpf.Ui.Controls.InfoBarSeverity.Error;
-            resultInfoBar.IsOpen = true;
-            return;
+            outputPath = customOutputDir;
+        }
+        else
+        {
+            outputPath = await ResolveDumpOutputDirAsync();
+            if (outputPath == null)
+            {
+                // User cancelled or paths not configured
+                var basePath = _main.Settings.ImageExporterBasePath;
+                var version = _main.Settings.SelectedApkVersion;
+                if (string.IsNullOrEmpty(basePath) || string.IsNullOrEmpty(version))
+                {
+                    resultInfoBar.Title = "Output directory cannot be determined";
+                    resultInfoBar.Message = "Please set a workspace path and APK version in Settings, or use the arrow menu to dump to a custom folder.";
+                    resultInfoBar.Severity = Wpf.Ui.Controls.InfoBarSeverity.Error;
+                    resultInfoBar.IsOpen = true;
+                }
+                return;
+            }
+        }
+
+        // Pre-dump: quick version check from config archive header
+        if (customOutputDir == null)
+        {
+            var mismatchResult = await CheckVersionBeforeDumpAsync(configPath, outputPath);
+            if (mismatchResult == null) return; // user cancelled
+            if (mismatchResult != outputPath) outputPath = mismatchResult; // user chose to redirect
         }
 
         _isDumping = true;
@@ -691,6 +805,47 @@ public partial class GameDataDumperPage : UserControl
             Process.Start(new ProcessStartInfo { FileName = path, UseShellExecute = true });
     }
 
+    private void BtnOpenDumpFolderMenu_Click(object sender, RoutedEventArgs e)
+    {
+        var basePath = _main.Settings.ImageExporterBasePath;
+        var version = _main.Settings.SelectedApkVersion;
+        if (string.IsNullOrEmpty(basePath) || string.IsNullOrEmpty(version)) return;
+
+        var versionDir = Path.Combine(basePath, version);
+        var folders = DiscordDumpDownloadService.ScanDumpFolders(versionDir);
+        if (folders.Count == 0) return;
+
+        var menu = new ContextMenu();
+        foreach (var (name, createdAt) in folders)
+        {
+            var header = new StackPanel { Orientation = Orientation.Horizontal };
+            header.Children.Add(new TextBlock { Text = name, VerticalAlignment = VerticalAlignment.Center });
+            if (createdAt != null)
+            {
+                header.Children.Add(new TextBlock
+                {
+                    Text = $"  ({createdAt[..Math.Min(10, createdAt.Length)]})",
+                    Foreground = (System.Windows.Media.Brush)FindResource("TextFillColorTertiaryBrush"),
+                    FontSize = 11,
+                    VerticalAlignment = VerticalAlignment.Center
+                });
+            }
+
+            var folderPath = Path.Combine(versionDir, name);
+            var item = new MenuItem { Header = header };
+            item.Click += (_, _) =>
+            {
+                if (Directory.Exists(folderPath))
+                    Process.Start(new ProcessStartInfo { FileName = folderPath, UseShellExecute = true });
+            };
+            menu.Items.Add(item);
+        }
+
+        menu.PlacementTarget = btnOpenDumpFolderMenu;
+        menu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
+        menu.IsOpen = true;
+    }
+
     // ── Log action buttons ────────────────────────────────────────
 
     private void BtnCopyLog_Click(object sender, RoutedEventArgs e)
@@ -742,6 +897,29 @@ public partial class GameDataDumperPage : UserControl
         {
             _main.SetEventsPath(eventsPath);
             loaded.Add("events");
+        }
+
+        var dialoguesPath = Path.Combine(dumpDir, "dialogues.json");
+        if (File.Exists(dialoguesPath))
+        {
+            _main.SetDialoguesPath(dialoguesPath);
+            loaded.Add("dialogues");
+        }
+
+        var petsPath = Path.Combine(dumpDir, "Pets.json");
+        if (!File.Exists(petsPath))
+            petsPath = Path.Combine(dumpDir, "Experimental", "Pets.json");
+        if (File.Exists(petsPath))
+        {
+            _main.SetPetsPath(petsPath);
+            loaded.Add("Pets");
+        }
+
+        var cardCollectionPath = Path.Combine(dumpDir, "card_collection.json");
+        if (File.Exists(cardCollectionPath))
+        {
+            _main.SetCardCollectionPath(cardCollectionPath);
+            loaded.Add("card_collection");
         }
 
         if (loaded.Count > 0)
@@ -874,6 +1052,69 @@ public partial class GameDataDumperPage : UserControl
             AppLogger.Warn($"Discord publish check failed: {ex.Message}");
             SetPublishEnabled(false);
             btnPublishDiscord.ToolTip = $"Discord check failed: {ex.Message}";
+        }
+    }
+
+    /// <summary>
+    /// Before dump: reads CreatedAt from the binary config archive header (fast, no full import)
+    /// and checks if the data matches the currently selected APK version.
+    /// Returns: the output path to use (may be redirected), or null if user cancelled.
+    /// </summary>
+    private async Task<string?> CheckVersionBeforeDumpAsync(string configPath, string currentOutputPath)
+    {
+        try
+        {
+            var selectedVersion = _main.Settings.SelectedApkVersion;
+            if (string.IsNullOrEmpty(selectedVersion)) return currentOutputPath;
+
+            var createdAt = await Task.Run(() => DumperService.ReadConfigCreatedAt(configPath));
+            if (createdAt == null) return currentOutputPath; // can't read — proceed normally
+
+            // Try to match the config's CreatedAt to an APK version
+            List<ApkDownloadService.ApkVersionInfo>? versions = null;
+            try { versions = await Task.Run(() => ApkDownloadService.FetchAvailableVersionsAsync()); }
+            catch { }
+            if (versions == null || versions.Count == 0) return currentOutputPath;
+
+            var matched = ApkDownloadService.MatchVersionByDate(versions, createdAt.Value);
+            if (matched == null) return currentOutputPath; // can't determine — no warning
+            if (matched.Version == selectedVersion) return currentOutputPath; // match — all good
+
+            // Mismatch! Warn before dump
+            var msgBox = new Wpf.Ui.Controls.MessageBox
+            {
+                Title = "Version Mismatch",
+                Content = $"The game data appears to be from v{matched.Version} " +
+                          $"(created {createdAt.Value:yyyy-MM-dd}), but the selected " +
+                          $"game version is v{selectedVersion}.\n\n" +
+                          $"Save dump to v{matched.Version} instead?",
+                PrimaryButtonText = $"Use v{matched.Version}",
+                SecondaryButtonText = $"Keep v{selectedVersion}",
+                CloseButtonText = "Cancel",
+                Owner = Window.GetWindow(this)
+            };
+            Wpf.Ui.Appearance.ApplicationThemeManager.Apply(msgBox);
+            var result = await msgBox.ShowDialogAsync();
+
+            if (result == Wpf.Ui.Controls.MessageBoxResult.None)
+                return null; // Cancel
+
+            if (result == Wpf.Ui.Controls.MessageBoxResult.Primary)
+            {
+                // Redirect to correct version folder
+                var basePath = _main.Settings.ImageExporterBasePath;
+                var correctVersionDir = Path.Combine(basePath, matched.Version);
+                var folder = DiscordDumpDownloadService.GetNextDumpFolderName(
+                    correctVersionDir, createdAt, isUnknownVersion: false);
+                return Path.Combine(correctVersionDir, folder);
+            }
+
+            return currentOutputPath; // Keep — use originally resolved path
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Warn($"Pre-dump version check failed: {ex.Message}");
+            return currentOutputPath;
         }
     }
 

@@ -4,7 +4,7 @@ namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.19.4";
+    public const string Version = "v0.19.5";
 
     // Full version with build timestamp, e.g. "v0.18.7 (build 20260322-1200)"
     public static string Build { get; } = GetBuild();
@@ -28,6 +28,9 @@ public class AppSettings
     public string ChainItemOddsPath { get; set; } = "";
     public string AreasJsonPath { get; set; } = "";
     public string EventsJsonPath { get; set; } = "";
+    public string DialoguesJsonPath { get; set; } = "";
+    public string PetsJsonPath { get; set; } = "";
+    public string CardCollectionJsonPath { get; set; } = "";
 
     // Table generator checkboxes (persisted)
     public bool LowPrices { get; set; } = false;
@@ -46,6 +49,7 @@ public class AppSettings
     // Image Extractor
     public string ImageExporterBasePath { get; set; } = "";
     public string SelectedApkVersion { get; set; } = "";
+    public string ActiveDumpFolder { get; set; } = "";  // "Dump", "Dump 2", etc.
 
     // Area Flowcharts
     public string FlowchartOutputPath { get; set; } = "";
@@ -86,6 +90,7 @@ public class AppSettings
     public bool DumpEvents { get; set; } = true;
     public bool DumpCards { get; set; } = true;
     public bool DumpDialogues { get; set; } = true;
+    public bool DumpAutoNewFolder { get; set; } = true; // auto-create Dump 2/3/... instead of overwriting
 
     // Event filters
     public bool EventLuckyCatch { get; set; } = true;

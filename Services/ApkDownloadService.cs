@@ -1,14 +1,16 @@
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace MergeMansionWikiTools.Services;
 
 internal static class ApkDownloadService
 {
-    public record ApkVersionInfo(string Version, string VersionCode, string ApkId);
+    public record ApkVersionInfo(string Version, string VersionCode, string ApkId, DateTimeOffset? ReleaseDate = null, bool CanDownload = true);
 
     private const string PackageName = "com.everywear.game5";
     private const string AppSlug = "merge-mansion-puzzles-story";
@@ -97,9 +99,11 @@ internal static class ApkDownloadService
         }
 
         if (response == null)
+        {
             throw new InvalidOperationException(
-                "All download URLs returned 403 (Cloudflare). " +
-                "APKPure blocks automated downloads — try again later or download manually from apkpure.com.");
+                "APKPure download failed (Cloudflare protection). " +
+                "Try again later or download manually from apkpure.com.");
+        }
 
         using (response)
         {
@@ -224,10 +228,147 @@ internal static class ApkDownloadService
     }
 
     /// <summary>
-    /// Fetches the list of available versions from APKPure's version history page.
-    /// Uses curl to bypass Cloudflare TLS fingerprinting that blocks .NET HttpClient.
+    /// Fetches available versions with release dates.
+    /// Merges Uptodown (100+ versions with dates) + APKPure (downloadable versions with CDN IDs).
+    /// Versions only on Uptodown get CanDownload=false.
     /// </summary>
     public static async Task<List<ApkVersionInfo>> FetchAvailableVersionsAsync(CancellationToken ct = default)
+    {
+        List<ApkVersionInfo>? uptodownVersions = null;
+        List<ApkVersionInfo>? apkPureVersions = null;
+
+        // Fetch both in parallel
+        try
+        {
+            var uptodownTask = FetchVersionsFromUptodownAsync(ct);
+            var apkPureTask = Task.Run(async () =>
+            {
+                try { return await FetchVersionsFromApkPureAsync(ct); }
+                catch { return new List<ApkVersionInfo>(); }
+            }, ct);
+
+            await Task.WhenAll(uptodownTask, apkPureTask);
+            uptodownVersions = uptodownTask.Result;
+            apkPureVersions = apkPureTask.Result;
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Warn($"Version fetch error: {ex.Message}");
+        }
+
+        // If only APKPure succeeded, return it directly (all downloadable)
+        if ((uptodownVersions == null || uptodownVersions.Count == 0) &&
+            apkPureVersions is { Count: > 0 })
+            return apkPureVersions;
+
+        // If only Uptodown succeeded, mark all as not downloadable
+        if (uptodownVersions is { Count: > 0 } &&
+            (apkPureVersions == null || apkPureVersions.Count == 0))
+        {
+            AppLogger.Info($"Fetched {uptodownVersions.Count} versions from Uptodown (no APKPure data)");
+            return uptodownVersions.Select(v => v with { CanDownload = false }).ToList();
+        }
+
+        if (uptodownVersions == null || uptodownVersions.Count == 0)
+            return new List<ApkVersionInfo>();
+
+        // Merge: Uptodown provides dates + full history, APKPure provides download capability
+        var apkPureLookup = new Dictionary<string, ApkVersionInfo>();
+        foreach (var v in apkPureVersions!)
+            apkPureLookup.TryAdd(v.Version, v);
+
+        var merged = new List<ApkVersionInfo>();
+        var seen = new HashSet<string>();
+
+        foreach (var utd in uptodownVersions)
+        {
+            if (!seen.Add(utd.Version)) continue;
+
+            if (apkPureLookup.TryGetValue(utd.Version, out var apkPure))
+            {
+                // Available on both — use Uptodown date + APKPure download IDs
+                merged.Add(new ApkVersionInfo(
+                    utd.Version, apkPure.VersionCode, apkPure.ApkId,
+                    utd.ReleaseDate ?? apkPure.ReleaseDate, CanDownload: true));
+            }
+            else
+            {
+                // Only on Uptodown — can't download
+                merged.Add(utd with { CanDownload = false });
+            }
+        }
+
+        // Add any APKPure-only versions (shouldn't happen often)
+        foreach (var ap in apkPureVersions!)
+        {
+            if (seen.Add(ap.Version))
+                merged.Add(ap with { CanDownload = true });
+        }
+
+        var downloadable = merged.Count(v => v.CanDownload);
+        AppLogger.Info($"Merged {merged.Count} versions ({downloadable} downloadable from APKPure)");
+        return merged;
+    }
+
+    // ── Uptodown JSON API (primary) ──────────────────────────────
+
+    private const string UptodownAppId = "843732";
+    private static readonly HttpClient _uptodownHttp = new();
+
+    private static async Task<List<ApkVersionInfo>> FetchVersionsFromUptodownAsync(CancellationToken ct)
+    {
+        var results = new List<ApkVersionInfo>();
+        var seen = new HashSet<string>();
+
+        for (int page = 1; page <= 10; page++)
+        {
+            ct.ThrowIfCancellationRequested();
+
+            var url = $"https://merge-mansion.en.uptodown.com/android/apps/{UptodownAppId}/versions/{page}";
+            using var request = new HttpRequestMessage(HttpMethod.Get, url);
+            request.Headers.Add("User-Agent", BrowserUserAgent);
+            request.Headers.Add("Accept", "application/json");
+
+            var response = await _uptodownHttp.SendAsync(request, ct);
+            if (!response.IsSuccessStatusCode) break;
+
+            var json = await response.Content.ReadAsStringAsync(ct);
+            using var doc = JsonDocument.Parse(json);
+            var root = doc.RootElement;
+
+            if (!root.TryGetProperty("success", out var success) || success.GetInt32() != 1)
+                break;
+            if (!root.TryGetProperty("data", out var data) || data.GetArrayLength() == 0)
+                break;
+
+            foreach (var entry in data.EnumerateArray())
+            {
+                var version = entry.TryGetProperty("version", out var v) ? v.GetString() : null;
+                if (string.IsNullOrEmpty(version) || !seen.Add(version)) continue;
+
+                DateTimeOffset? releaseDate = null;
+                if (entry.TryGetProperty("lastUpdate", out var dateEl))
+                {
+                    var dateStr = dateEl.GetString();
+                    if (!string.IsNullOrEmpty(dateStr) &&
+                        DateTimeOffset.TryParse(dateStr, CultureInfo.InvariantCulture,
+                            DateTimeStyles.None, out var parsed))
+                        releaseDate = parsed;
+                }
+
+                var versionCode = entry.TryGetProperty("versionCode", out var vc) ? vc.ToString() : "";
+                var fileId = entry.TryGetProperty("fileID", out var fid) ? fid.ToString() : "";
+
+                results.Add(new ApkVersionInfo(version, versionCode, fileId, releaseDate));
+            }
+        }
+
+        return results;
+    }
+
+    // ── APKPure HTML scraping (fallback) ─────────────────────────
+
+    private static async Task<List<ApkVersionInfo>> FetchVersionsFromApkPureAsync(CancellationToken ct)
     {
         var url = $"https://apkpure.com/{AppSlug}/{PackageName}/versions";
         var html = await FetchWithCurlAsync(url, ct);
@@ -235,7 +376,6 @@ internal static class ApkDownloadService
         var results = new List<ApkVersionInfo>();
         var seen = new HashSet<string>();
 
-        // Match each <a> or <div> tag that contains all three data attributes (they may be on separate lines)
         foreach (Match tag in Regex.Matches(html, @"<(?:a|div)\b[^>]*data-dt-version=""[^""]*""[^>]*>", RegexOptions.Singleline))
         {
             var tagHtml = tag.Value;
@@ -246,17 +386,66 @@ internal static class ApkDownloadService
             if (!mVer.Success || !mCode.Success || !mApk.Success) continue;
 
             var ver = mVer.Groups[1].Value;
-            // Deduplicate (latest appears twice: ver-top header + first list item)
             if (seen.Add(ver))
-                results.Add(new ApkVersionInfo(ver, mCode.Groups[1].Value, mApk.Groups[1].Value));
+            {
+                DateTimeOffset? releaseDate = null;
+                var mUtc = Regex.Match(tagHtml, @"data-dt-utc=""([^""]+)""");
+                if (mUtc.Success && long.TryParse(mUtc.Groups[1].Value, out var utcMs))
+                    releaseDate = DateTimeOffset.FromUnixTimeMilliseconds(utcMs);
+
+                results.Add(new ApkVersionInfo(ver, mCode.Groups[1].Value, mApk.Groups[1].Value, releaseDate));
+            }
+        }
+
+        if (results.Count > 0 && results.All(r => r.ReleaseDate == null))
+        {
+            var datePattern = new Regex(
+                @"data-dt-version=""(?<ver>[^""]+)""[^>]*>.*?(?<date>\w+ \d{1,2},? \d{4})",
+                RegexOptions.Singleline | RegexOptions.IgnoreCase);
+
+            foreach (Match dm in datePattern.Matches(html))
+            {
+                var dVer = dm.Groups["ver"].Value;
+                var dDate = dm.Groups["date"].Value;
+                if (DateTimeOffset.TryParse(dDate, CultureInfo.InvariantCulture,
+                        DateTimeStyles.None, out var parsed))
+                {
+                    var idx = results.FindIndex(r => r.Version == dVer);
+                    if (idx >= 0 && results[idx].ReleaseDate == null)
+                        results[idx] = results[idx] with { ReleaseDate = parsed };
+                }
+            }
         }
 
         return results;
     }
 
     /// <summary>
-    /// Downloads a specific version using curl to bypass Cloudflare.
-    /// ApkId is used as direct URL path (e.g. "b/XAPK/Y29t...").
+    /// Finds the most likely game version for a given dump timestamp.
+    /// Returns the version whose release date is closest to but not after the dump creation date.
+    /// </summary>
+    public static ApkVersionInfo? MatchVersionByDate(
+        List<ApkVersionInfo> versions, DateTimeOffset dumpCreatedAt)
+    {
+        ApkVersionInfo? best = null;
+        var bestDelta = TimeSpan.MaxValue;
+
+        foreach (var v in versions)
+        {
+            if (v.ReleaseDate == null) continue;
+            var delta = dumpCreatedAt - v.ReleaseDate.Value;
+            if (delta >= TimeSpan.Zero && delta < bestDelta)
+            {
+                bestDelta = delta;
+                best = v;
+            }
+        }
+
+        return best;
+    }
+
+    /// <summary>
+    /// Downloads a specific version. Primary: APKPure via curl. Fallback: Uptodown direct download.
     /// </summary>
     public static async Task<(string version, string filePath)> DownloadVersionAsync(
         string basePath, ApkVersionInfo version,
@@ -265,8 +454,8 @@ internal static class ApkDownloadService
         var versionDir = Path.Combine(basePath, version.Version);
         Directory.CreateDirectory(versionDir);
 
-        // Same CDN pattern as DownloadLatestAsync, but with versionCode
-        string[] downloadUrls =
+        // ── Primary: APKPure CDN (curl, bypasses Cloudflare) ──
+        string[] apkPureUrls =
         [
             $"https://d.apkpure.net/b/XAPK/{PackageName}?versionCode={version.VersionCode}",
             $"https://d.apkpure.com/b/XAPK/{PackageName}?versionCode={version.VersionCode}",
@@ -274,10 +463,10 @@ internal static class ApkDownloadService
             $"https://d.apkpure.com/b/APK/{PackageName}?versionCode={version.VersionCode}",
         ];
 
-        foreach (var url in downloadUrls)
+        foreach (var url in apkPureUrls)
         {
             ct.ThrowIfCancellationRequested();
-            onStatus?.Invoke($"Downloading v{version.Version}...");
+            onStatus?.Invoke($"Downloading v{version.Version} from APKPure...");
 
             var tempFile = Path.Combine(versionDir, $"download_{version.Version}.tmp");
 
@@ -294,9 +483,13 @@ internal static class ApkDownloadService
         }
 
         throw new InvalidOperationException(
-            $"All download URLs for v{version.Version} failed. " +
-            "Try again later or download manually from apkpure.com.");
+            $"Download of v{version.Version} failed — APKPure may not have this version.\n" +
+            $"Try downloading manually from apkpure.com or via the Uptodown mobile app.");
     }
+
+    // Note: Uptodown CDN does NOT serve game APKs — it serves the Uptodown App Store installer.
+    // Old versions can only be downloaded via the Uptodown mobile app, not via web.
+    // Uptodown is used only for version listing + release dates, NOT for APK downloads.
 
     /// <summary>
     /// Downloads a file using curl, monitors progress by polling file size.
@@ -422,6 +615,26 @@ internal static class ApkDownloadService
                 // Non-stall failure — don't retry, try next URL
                 try { if (File.Exists(tempFile)) File.Delete(tempFile); } catch { }
                 return null;
+            }
+
+            // Validate the downloaded file is not HTML (Cloudflare block page, error page, etc.)
+            if (File.Exists(tempFile))
+            {
+                try
+                {
+                    using var fs = File.OpenRead(tempFile);
+                    var header = new byte[Math.Min(256, fs.Length)];
+                    fs.Read(header, 0, header.Length);
+                    var headerStr = System.Text.Encoding.ASCII.GetString(header);
+                    if (headerStr.Contains("<!DOCTYPE", StringComparison.OrdinalIgnoreCase) ||
+                        headerStr.Contains("<html", StringComparison.OrdinalIgnoreCase))
+                    {
+                        AppLogger.Warn($"Downloaded file is HTML, not APK — discarding: {url}");
+                        try { File.Delete(tempFile); } catch { }
+                        return null;
+                    }
+                }
+                catch { }
             }
 
             // Success — determine final filename from Content-Disposition or use default
