@@ -56,6 +56,7 @@ public partial class MainWindow : FluentWindow
     private DialogueMakerPage? _dialogueMakerPage;
     private MysteriesPage? _mysteriesPage;
     private AreaFlowchartsPage? _areaFlowchartsPage;
+    private ClueCollectionPage? _clueCollectionPage;
     private GameDataDumperPage? _gameDataDumperPage;
     private SettingsPage? _settingsPage;
     private AboutPage? _aboutPage;
@@ -307,8 +308,9 @@ public partial class MainWindow : FluentWindow
             case 5: ShowMysteriesPage(); break;
             case 6: ShowGameDataDumperPage(); break;
             case 7: ShowAreaFlowchartsPage(); break;
-            case 8: ShowSettingsPage(); break;
-            case 9: ShowAboutPage(); break;
+            case 8: ShowClueCollectionPage(); break;
+            case 9: ShowSettingsPage(); break;
+            case 10: ShowAboutPage(); break;
         }
 
         UpdateNavIndicator();
@@ -371,6 +373,12 @@ public partial class MainWindow : FluentWindow
     {
         _areaFlowchartsPage ??= new AreaFlowchartsPage(this);
         contentArea.Content = _areaFlowchartsPage;
+    }
+
+    private void ShowClueCollectionPage()
+    {
+        _clueCollectionPage ??= new ClueCollectionPage(this);
+        contentArea.Content = _clueCollectionPage;
     }
 
     private void ShowSettingsPage()
@@ -1040,7 +1048,7 @@ public partial class MainWindow : FluentWindow
 
     public void NavigateToSettingsHighlightApk()
     {
-        navList.SelectedIndex = 8;
+        navList.SelectedIndex = 9;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightApkSection(),
             System.Windows.Threading.DispatcherPriority.Input);
@@ -1048,7 +1056,7 @@ public partial class MainWindow : FluentWindow
 
     public void NavigateToSettingsHighlightChainFile()
     {
-        navList.SelectedIndex = 8;
+        navList.SelectedIndex = 9;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightChainSection(),
             System.Windows.Threading.DispatcherPriority.Input);
@@ -1056,7 +1064,7 @@ public partial class MainWindow : FluentWindow
 
     public void NavigateToSettingsHighlightAreas()
     {
-        navList.SelectedIndex = 8;
+        navList.SelectedIndex = 9;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightAreasSection(),
             System.Windows.Threading.DispatcherPriority.Input);
@@ -1064,7 +1072,7 @@ public partial class MainWindow : FluentWindow
 
     public void NavigateToSettingsHighlightWikiMapping()
     {
-        navList.SelectedIndex = 8;
+        navList.SelectedIndex = 9;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightWikiMappingSection(),
             System.Windows.Threading.DispatcherPriority.Input);
@@ -1072,7 +1080,7 @@ public partial class MainWindow : FluentWindow
 
     public void NavigateToSettingsHighlightEvents()
     {
-        navList.SelectedIndex = 8;
+        navList.SelectedIndex = 9;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightEventsSection(),
             System.Windows.Threading.DispatcherPriority.Input);
