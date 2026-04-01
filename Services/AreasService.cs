@@ -170,13 +170,23 @@ public class AreasService
         {
             if (req.ValueKind != JsonValueKind.Object) continue;
 
-            if (req.TryGetProperty("ItemAcquired", out var itemsEl) &&
-                itemsEl.ValueKind == JsonValueKind.Array)
+            if (req.TryGetProperty("ItemAcquired", out var itemsEl))
             {
-                foreach (var itemEl in itemsEl.EnumerateArray())
+                if (itemsEl.ValueKind == JsonValueKind.Array)
                 {
-                    var itemRef = GetStr(itemEl, "ItemRef");
-                    var amount = GetInt(itemEl, "Requirement");
+                    foreach (var itemEl in itemsEl.EnumerateArray())
+                    {
+                        var itemRef = GetStr(itemEl, "ItemRef");
+                        var amount = GetInt(itemEl, "Requirement");
+                        if (!string.IsNullOrEmpty(itemRef))
+                            reqs[itemRef] = amount;
+                    }
+                }
+                else if (itemsEl.ValueKind == JsonValueKind.Object)
+                {
+                    // Older dump format: ItemAcquired is a single object, not an array
+                    var itemRef = GetStr(itemsEl, "ItemRef");
+                    var amount = GetInt(itemsEl, "Requirement");
                     if (!string.IsNullOrEmpty(itemRef))
                         reqs[itemRef] = amount;
                 }

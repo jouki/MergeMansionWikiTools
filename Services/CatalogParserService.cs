@@ -23,15 +23,14 @@ internal static class CatalogParserService
     }
 
     /// <summary>
-    /// Extracts catalog.bin from an APK/XAPK file.
-    /// XAPK: outer ZIP → UnityDataAssetPack.apk → assets/aa/catalog.bin
-    /// APK:  ZIP → assets/aa/catalog.bin
+    /// Extracts the Addressables catalog from an APK/XAPK file.
+    /// XAPK: outer ZIP → UnityDataAssetPack.apk → assets/aa/catalog.bin (or .json for older APKs)
+    /// APK:  ZIP → assets/aa/catalog.bin (or .json)
     /// </summary>
     public static string ExtractCatalogFromApk(string apkPath, string outputDir)
     {
         var ext = Path.GetExtension(apkPath).ToLowerInvariant();
         Directory.CreateDirectory(outputDir);
-        var outputPath = Path.Combine(outputDir, "catalog.bin");
 
         using var outerStream = File.OpenRead(apkPath);
         using var outerZip = new ZipArchive(outerStream, ZipArchiveMode.Read);
@@ -51,28 +50,30 @@ internal static class CatalogParserService
             innerMs.Position = 0;
 
             using var innerZip = new ZipArchive(innerMs, ZipArchiveMode.Read);
-            ExtractCatalogEntry(innerZip, outputPath);
+            return ExtractCatalogEntry(innerZip, outputDir);
         }
         else
         {
             // Direct APK
-            ExtractCatalogEntry(outerZip, outputPath);
+            return ExtractCatalogEntry(outerZip, outputDir);
         }
-
-        return outputPath;
     }
 
-    private static void ExtractCatalogEntry(ZipArchive zip, string outputPath)
+    private static string ExtractCatalogEntry(ZipArchive zip, string outputDir)
     {
         var catalogEntry = zip.Entries
-            .FirstOrDefault(e => e.FullName.Equals("assets/aa/catalog.bin", StringComparison.OrdinalIgnoreCase));
+            .FirstOrDefault(e => e.FullName.Equals("assets/aa/catalog.bin", StringComparison.OrdinalIgnoreCase))
+            ?? zip.Entries
+            .FirstOrDefault(e => e.FullName.Equals("assets/aa/catalog.json", StringComparison.OrdinalIgnoreCase));
 
         if (catalogEntry == null)
-            throw new FileNotFoundException("assets/aa/catalog.bin not found inside the APK.");
+            throw new FileNotFoundException("assets/aa/catalog.bin (or .json) not found inside the APK.");
 
+        var outputPath = Path.Combine(outputDir, Path.GetFileName(catalogEntry.FullName));
         using var entryStream = catalogEntry.Open();
         using var fileStream = File.Create(outputPath);
         entryStream.CopyTo(fileStream);
+        return outputPath;
     }
 
     /// <summary>
