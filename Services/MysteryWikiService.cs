@@ -817,7 +817,8 @@ public static class MysteryWikiService
 		List<MysteryRewardLevel> list2 = ((mystery.FreeTier.Count > 0) ? mystery.FreeTier : ((mystery.SilverTier.Count > 0) ? mystery.SilverTier : mystery.GoldTier));
 		if (list2.Count == 0 || list.Count == 0)
 			return false;
-		List<List<string>> list3 = list.Where((List<string> r) => r.Count >= 5 && !r[0].Contains("PremiumLevel") && r[0].Trim() != "0").ToList();
+		int expectedCols = mystery.IsV2 ? 5 : 4;
+		List<List<string>> list3 = list.Where((List<string> r) => r.Count >= expectedCols && !r[0].Contains("PremiumLevel") && r[0].Trim() != "0").ToList();
 		if (list3.Count != list2.Count - 1)
 			return false;
 		for (int num = 0; num < list3.Count; num++)
@@ -830,12 +831,12 @@ public static class MysteryWikiService
 		}
 		string content = GenerateRewardTemplate(mystery, null);
 		List<List<string>> source = ParseTemplateRows(content);
-		List<List<string>> list4 = source.Where((List<string> r) => r.Count >= 5 && !r[0].Contains("PremiumLevel") && r[0].Trim() != "0").ToList();
+		List<List<string>> list4 = source.Where((List<string> r) => r.Count >= expectedCols && !r[0].Contains("PremiumLevel") && r[0].Trim() != "0").ToList();
 		if (list4.Count != list3.Count)
 			return false;
 		for (int num2 = 0; num2 < list3.Count; num2++)
 		{
-			for (int num3 = 1; num3 <= 4; num3++)
+			for (int num3 = 1; num3 < expectedCols; num3++)
 			{
 				if (num3 >= list3[num2].Count || num3 >= list4[num2].Count)
 					return false;
@@ -894,87 +895,155 @@ public static class MysteryWikiService
 
 	public static string GenerateRewardTemplate(MysteryEvent mystery, MysteryItemMapping? mapping)
 	{
-		StringBuilder stringBuilder = new StringBuilder();
-		bool flag = mystery.MysteryType == MysteryType.Pet;
-		int num = 1;
-		foreach (MysteryRewardLevel item in mystery.SilverTier)
-		{
-			foreach (MysteryReward reward in item.Rewards)
-			{
+		var sb = new StringBuilder();
+		bool isV2 = mystery.IsV2;
+
+		// Assign sequential decoration numbering across Silver then Gold tiers
+		int decoNum = 1;
+		foreach (var level in mystery.SilverTier)
+			foreach (var reward in level.Rewards)
 				if (reward.Type == MysteryRewardType.Decoration)
-				{
-					reward.ItemLevel = num++;
-				}
-			}
-		}
-		foreach (MysteryRewardLevel item2 in mystery.GoldTier)
+					reward.ItemLevel = decoNum++;
+		foreach (var level in mystery.GoldTier)
+			foreach (var reward in level.Rewards)
+				if (reward.Type == MysteryRewardType.Decoration)
+					reward.ItemLevel = decoNum++;
+
+		// ── Table header ──
+		sb.AppendLine("{| class=\"article-table\"");
+		sb.AppendLine("! Level");
+		sb.AppendLine("! {{Pass XP}}Points Needed");
+		sb.AppendLine("! F2P  Reward");
+		if (isV2)
 		{
-			foreach (MysteryReward reward2 in item2.Rewards)
+			sb.AppendLine("! {{#Invoke:Utils|Icon|name=Silver Pass Ticket|suppressLevel=true|size=32}} Silver Pass Reward");
+			sb.AppendLine("! {{#Invoke:Utils|Icon|name=Gold Pass Ticket|suppressLevel=true|size=32}} Gold Pass Reward");
+		}
+		else
+		{
+			sb.AppendLine("! {{#Invoke:Utils|Icon|name=Gold Pass Ticket|suppressLevel=true|size=32}} Premium Pass Reward");
+		}
+
+		// ── Level 0 ──
+		if (mystery.HasZeroLevel)
+		{
+			sb.AppendLine("|-");
+			sb.AppendLine("| 0");
+			sb.AppendLine("| {{Pass XP}} -");
+
+			// Free L0 from data (typically Energy 10)
+			var freeL0 = mystery.FreeTier.Count > 0 ? mystery.FreeTier[0] : null;
+			sb.AppendLine($"| {FormatRewards(freeL0?.Rewards, "free", true)}");
+
+			if (isV2)
 			{
-				if (reward2.Type == MysteryRewardType.Decoration)
-				{
-					reward2.ItemLevel = num++;
-				}
+				sb.AppendLine($"| {FormatPerkLevel0(mystery.Track1PerkData)}");
+				sb.AppendLine($"| {FormatPerkLevel0(mystery.Track2PerkData)}");
+			}
+			else
+			{
+				var premL0 = mystery.SilverTier.Count > 0 ? mystery.SilverTier[0] : null;
+				sb.AppendLine($"| {FormatRewards(premL0?.Rewards, "gold", true)}");
 			}
 		}
-		stringBuilder.AppendLine("{| class=\"article-table\"");
-		stringBuilder.AppendLine("! Level");
-		stringBuilder.AppendLine("! {{Pass XP}}Points Needed");
-		stringBuilder.AppendLine("! F2P  Reward");
-		stringBuilder.AppendLine("! {{#Invoke:Utils|Icon|name=Silver Pass Ticket|suppressLevel=true|size=32}} Silver Pass Reward");
-		stringBuilder.AppendLine("! {{#Invoke:Utils|Icon|name=Gold Pass Ticket|suppressLevel=true|size=32}} Gold Pass Reward");
-		stringBuilder.AppendLine("|-");
-		stringBuilder.AppendLine("| 0");
-		stringBuilder.AppendLine("| {{Pass XP}} -");
-		stringBuilder.AppendLine("| {{Energy}} 10");
-		stringBuilder.AppendLine("| 5 {{Gems}}/day <br> 3 {{#Invoke:Utils|Icon|name=InventorySlot|suppressLevel=true|size=24}} [[Inventory]] slots");
-		stringBuilder.AppendLine("| 5 {{Gems}}/day <br> 3 {{#Invoke:Utils|Icon|name=InventorySlot|suppressLevel=true|size=24}} [[Inventory]] slots");
-		int num2 = Math.Max(mystery.FreeTier.Count, Math.Max(mystery.SilverTier.Count, mystery.GoldTier.Count));
-		for (int i = 1; i < num2; i++)
+
+		// ── Regular levels ──
+		int startIndex = mystery.HasZeroLevel ? 1 : 0;
+		int maxLevels = Math.Max(mystery.FreeTier.Count,
+			Math.Max(mystery.SilverTier.Count, mystery.GoldTier.Count));
+
+		for (int i = startIndex; i < maxLevels; i++)
 		{
-			MysteryRewardLevel mysteryRewardLevel = ((i < mystery.FreeTier.Count) ? mystery.FreeTier[i] : null);
-			MysteryRewardLevel mysteryRewardLevel2 = ((i < mystery.SilverTier.Count) ? mystery.SilverTier[i] : null);
-			MysteryRewardLevel mysteryRewardLevel3 = ((i < mystery.GoldTier.Count) ? mystery.GoldTier[i] : null);
-			int value = mysteryRewardLevel?.XpRequired ?? mysteryRewardLevel2?.XpRequired ?? mysteryRewardLevel3?.XpRequired ?? 0;
-			stringBuilder.AppendLine("|-");
-			stringBuilder.AppendLine($"| {i}");
-			stringBuilder.AppendLine($"| {{{{Pass XP}}}} {value}");
-			stringBuilder.AppendLine($"| {FormatRewards(mysteryRewardLevel?.Rewards)}");
-			stringBuilder.AppendLine($"| {FormatRewards(mysteryRewardLevel2?.Rewards, "silver")}");
-			stringBuilder.AppendLine($"| {FormatRewards(mysteryRewardLevel3?.Rewards, "gold")}");
+			var freeLevel = i < mystery.FreeTier.Count ? mystery.FreeTier[i] : null;
+			var silverLevel = i < mystery.SilverTier.Count ? mystery.SilverTier[i] : null;
+			var goldLevel = i < mystery.GoldTier.Count ? mystery.GoldTier[i] : null;
+			int xp = freeLevel?.XpRequired ?? silverLevel?.XpRequired ?? goldLevel?.XpRequired ?? 0;
+
+			sb.AppendLine("|-");
+			sb.AppendLine($"| {i}");
+			sb.AppendLine($"| {{{{Pass XP}}}} {xp}");
+			sb.AppendLine($"| {FormatRewards(freeLevel?.Rewards, "free", true)}");
+
+			if (isV2)
+			{
+				sb.AppendLine($"| {FormatRewards(silverLevel?.Rewards, "silver", true)}");
+				sb.AppendLine($"| {FormatRewards(goldLevel?.Rewards, "gold", true)}");
+			}
+			else
+			{
+				sb.AppendLine($"| {FormatRewards(silverLevel?.Rewards, "gold", true)}");
+			}
 		}
-		int[] premiumXp = { 2000, 3000, 3000, 4000, 5000 };
-		for (int j = 0; j < 5; j++)
+
+		// ── Bonus levels (from data) ──
+		for (int j = 0; j < mystery.BonusTier.Count; j++)
 		{
-			stringBuilder.AppendLine("|-");
-			stringBuilder.AppendLine($"| {{{{PremiumLevel|{j + 1}}}}}");
-			stringBuilder.AppendLine($"| {{{{Pass XP}}}} {premiumXp[j]}");
-			stringBuilder.AppendLine("| {{Dash}}");
-			stringBuilder.AppendLine($"| colspan = 2 style = \"text-align: center\" | {{{{Item/Group|Challenge Chest|{j + 1}|iconLevel=1}}}}");
+			var bonus = mystery.BonusTier[j];
+			sb.AppendLine("|-");
+			sb.AppendLine($"| {{{{PremiumLevel|{j + 1}}}}}");
+			sb.AppendLine($"| {{{{Pass XP}}}} {bonus.XpRequired}");
+			sb.AppendLine("| {{Dash}}");
+			string bonusContent = FormatRewards(bonus.Rewards, "free", true);
+			if (isV2)
+				sb.AppendLine($"| colspan = 2 style = \"text-align: center\" | {bonusContent}");
+			else
+				sb.AppendLine($"| {bonusContent}");
 		}
-		stringBuilder.AppendLine("|}");
-		return stringBuilder.ToString();
+
+		// ── Recurring levels (V1 only) ──
+		if (mystery.RecurringFreeTier.Count > 0 || mystery.RecurringPremiumTier.Count > 0)
+		{
+			int recurMax = Math.Max(mystery.RecurringFreeTier.Count, mystery.RecurringPremiumTier.Count);
+			for (int k = 0; k < recurMax; k++)
+			{
+				var recurFree = k < mystery.RecurringFreeTier.Count ? mystery.RecurringFreeTier[k] : null;
+				var recurPrem = k < mystery.RecurringPremiumTier.Count ? mystery.RecurringPremiumTier[k] : null;
+				int recurXp = recurFree?.XpRequired ?? recurPrem?.XpRequired ?? 0;
+
+				sb.AppendLine("|-");
+				sb.AppendLine($"| {{{{PremiumLevel|{k + 1}}}}}");
+				sb.AppendLine($"| {{{{Pass XP}}}} {recurXp}");
+				sb.AppendLine($"| {FormatRewards(recurFree?.Rewards, "free", true)}");
+				sb.AppendLine($"| {FormatRewards(recurPrem?.Rewards, "gold", true)}");
+			}
+		}
+
+		sb.AppendLine("|}");
+		return sb.ToString();
 	}
 
-	private static string FormatRewards(List<MysteryReward>? rewards, string tier = "free")
+	private static string FormatPerkLevel0(MysteryPerkData? perkData)
 	{
+		if (perkData == null)
+			return "5 {{Gems}}/day <br> 3 {{#Invoke:Utils|Icon|name=InventorySlot|suppressLevel=true|size=24}} [[Inventory]] slots";
+
+		var parts = new List<string>();
+		if (perkData.FreeDailyGems > 0)
+			parts.Add($"{perkData.FreeDailyGems} {{{{Gems}}}}/day");
+		if (perkData.ExtraInventorySlots > 0)
+			parts.Add($"{perkData.ExtraInventorySlots} {{{{#Invoke:Utils|Icon|name=InventorySlot|suppressLevel=true|size=24}}}} [[Inventory]] slots");
+		if (perkData.EventXpBonus > 0)
+			parts.Add($"{{{{Pass XP}}}} {perkData.EventXpBonus} bonus");
+		return parts.Count > 0 ? string.Join(" <br> ", parts) : "{{Dash}}";
+	}
+
+	private static string FormatRewards(List<MysteryReward>? rewards, string tier = "free", bool dashIfEmpty = false)
+	{
+		string empty = dashIfEmpty ? "{{Dash}}" : "?";
 		if (rewards == null || rewards.Count == 0)
-		{
-			return "?";
-		}
-		List<string> list = new List<string>();
-		foreach (MysteryReward reward in rewards)
+			return empty;
+
+		var list = new List<string>();
+		foreach (var reward in rewards)
 		{
 			if (reward.Type != MysteryRewardType.Perk)
 			{
 				string text = FormatSingleReward(reward, tier);
 				if (!string.IsNullOrEmpty(text))
-				{
 					list.Add(text);
-				}
 			}
 		}
-		return (list.Count > 0) ? string.Join(" <br> ", list) : "?";
+		return list.Count > 0 ? string.Join(" <br> ", list) : empty;
 	}
 
 	private static string FormatSingleReward(MysteryReward reward, string tier)
@@ -1089,7 +1158,7 @@ public static class MysteryWikiService
 	{
 		StringBuilder stringBuilder = new StringBuilder();
 		string eventPageTitle = mystery.WikiStatus.SuggestedPageTitle ?? mystery.Name;
-		string year = mystery.StartDate?.Year.ToString() ?? "YYYY";
+		string year = FormatYearColumn(mystery);
 		string eventItemName = mystery.EventItemName ?? "{{PAGENAME}}";
 		string strippedName = StripParenthetical(eventItemName);
 		bool hasParenthetical = strippedName != eventItemName;
@@ -1228,6 +1297,16 @@ public static class MysteryWikiService
 		string value = ((d.Day % 10 == 1 && d.Day != 11) ? "st" : ((d.Day % 10 == 2 && d.Day != 12) ? "nd" : ((d.Day % 10 == 3 && d.Day != 13) ? "rd" : "th")));
 		string value2 = d.ToString("MMMM", CultureInfo.InvariantCulture);
 		return $"{value2} {d.Day}{value}";
+	}
+
+	/// <summary>Formats the Year column: "2024" or "2024 - 2025" if event spans across years.</summary>
+	private static string FormatYearColumn(MysteryEvent mystery)
+	{
+		if (!mystery.StartDate.HasValue) return "????";
+		int startYear = mystery.StartDate.Value.Year;
+		if (mystery.EndDate.HasValue && mystery.EndDate.Value.Year > startYear)
+			return $"{startYear} - {mystery.EndDate.Value.Year}";
+		return startYear.ToString();
 	}
 
 	public static async Task<Dictionary<string, string>> FetchPagesContentAsync(IEnumerable<string> titles)
@@ -1590,11 +1669,26 @@ public static class MysteryWikiService
 						m8.WikiStatus.WikiMainPageListed = mysteryEventsSection.Contains(m8.Name, StringComparison.OrdinalIgnoreCase)
 							|| (pt != m8.Name && mysteryEventsSection.Contains(pt, StringComparison.OrdinalIgnoreCase));
 						// Mystery table: use link-specific matching to avoid false positives from same-name mysteries in other years
-						m8.WikiStatus.WikiMysteryTableListed = mysteryTableContent != null && (
+						bool tableListed = mysteryTableContent != null && (
 							mysteryTableContent.Contains($"[[{pt}]]", StringComparison.OrdinalIgnoreCase) ||
 							mysteryTableContent.Contains($"[[{pt}|", StringComparison.OrdinalIgnoreCase) ||
 							mysteryTableContent.Contains($"|{pt}|", StringComparison.OrdinalIgnoreCase) ||
 							mysteryTableContent.Contains($"|{pt}}}", StringComparison.OrdinalIgnoreCase));
+						// If listed, verify row values are correct — wrong values = not fully listed
+						if (tableListed && mysteryTableContent != null)
+						{
+							string itemName = m8.EventItemName ?? "Unknown";
+							string durationStr = m8.DurationDays.HasValue ? $"{m8.DurationDays.Value} d" : "";
+							string yearStr = FormatYearColumn(m8);
+							string startStr = m8.StartDate.HasValue ? FormatDateNoYear(m8.StartDate.Value) : "";
+							string endStr = m8.EndDate.HasValue ? FormatDateNoYear(m8.EndDate.Value) : "";
+							string expectedItem = "{{Item/Group|" + itemName + "|4}}";
+							var rowDiffs = CheckMysteryTableRow(mysteryTableContent, pt, m8.Name,
+								expectedItem, durationStr, yearStr, startStr, endStr);
+							if (rowDiffs.Count > 0)
+								tableListed = false;
+						}
+						m8.WikiStatus.WikiMysteryTableListed = tableListed;
 						m8.WikiStatus.WikiModuleListed = moduleContent != null && (moduleContent.Contains("\"" + m8.Name + "\"", StringComparison.OrdinalIgnoreCase) || moduleContent.Contains("\"" + pt + "\"", StringComparison.OrdinalIgnoreCase));
 					}
 				}
@@ -1776,11 +1870,25 @@ public static class MysteryWikiService
 				string pt = mystery.WikiStatus.SuggestedPageTitle ?? mystery.Name;
 				mystery.WikiStatus.WikiMainPageListed = mysteryEventsSection.Contains(mystery.Name, StringComparison.OrdinalIgnoreCase)
 					|| (pt != mystery.Name && mysteryEventsSection.Contains(pt, StringComparison.OrdinalIgnoreCase));
-				mystery.WikiStatus.WikiMysteryTableListed = mysteryTableContent != null && (
+				bool singleTableListed = mysteryTableContent != null && (
 					mysteryTableContent.Contains($"[[{pt}]]", StringComparison.OrdinalIgnoreCase) ||
 					mysteryTableContent.Contains($"[[{pt}|", StringComparison.OrdinalIgnoreCase) ||
 					mysteryTableContent.Contains($"|{pt}|", StringComparison.OrdinalIgnoreCase) ||
 					mysteryTableContent.Contains($"|{pt}}}", StringComparison.OrdinalIgnoreCase));
+				if (singleTableListed && mysteryTableContent != null)
+				{
+					string itemName = mystery.EventItemName ?? "Unknown";
+					string durationStr = mystery.DurationDays.HasValue ? $"{mystery.DurationDays.Value} d" : "";
+					string yearStr = FormatYearColumn(mystery);
+					string startStr = mystery.StartDate.HasValue ? FormatDateNoYear(mystery.StartDate.Value) : "";
+					string endStr = mystery.EndDate.HasValue ? FormatDateNoYear(mystery.EndDate.Value) : "";
+					string expectedItem = "{{Item/Group|" + itemName + "|4}}";
+					var rowDiffs = CheckMysteryTableRow(mysteryTableContent, pt, mystery.Name,
+						expectedItem, durationStr, yearStr, startStr, endStr);
+					if (rowDiffs.Count > 0)
+						singleTableListed = false;
+				}
+				mystery.WikiStatus.WikiMysteryTableListed = singleTableListed;
 				mystery.WikiStatus.WikiModuleListed = moduleContent != null && (moduleContent.Contains("\"" + mystery.Name + "\"", StringComparison.OrdinalIgnoreCase) || moduleContent.Contains("\"" + pt + "\"", StringComparison.OrdinalIgnoreCase));
 			}
 			catch (Exception ex) { AppLogger.Warn("Wiki listing check failed: " + ex.Message); }
@@ -2771,7 +2879,16 @@ public static class MysteryWikiService
 		stringBuilder.AppendLine($"{{{{Mystery Pass/Intro|startingDate={startDate}}}}}");
 		stringBuilder.AppendLine();
 		stringBuilder.AppendLine("== Event Mechanics == ");
-		stringBuilder.AppendLine("{{Mystery Pass/Event Mechanics}}");
+		if (mystery.IsV2)
+		{
+			stringBuilder.AppendLine("{{Mystery Pass/Event Mechanics}}");
+		}
+		else
+		{
+			int durationDays = mystery.DurationDays ?? 21;
+			int mainLevels = mystery.FreeTier.Count - (mystery.HasZeroLevel ? 1 : 0);
+			stringBuilder.AppendLine($"{{{{Mystery Pass/Event Mechanics/Old|duration={durationDays}|levels={mainLevels}}}}}");
+		}
 		stringBuilder.AppendLine();
 		stringBuilder.AppendLine("== Item Descriptions == ");
 		stringBuilder.AppendLine("{{Mystery Pass/ItemDesc}}");
@@ -3272,24 +3389,171 @@ public static class MysteryWikiService
 		}
 		string suggestedTitle = mystery.WikiStatus.SuggestedPageTitle ?? mystery.Name;
 		bool hasDisplayName = suggestedTitle != mystery.Name;
-		if (wikiContent.Contains(suggestedTitle, StringComparison.OrdinalIgnoreCase))
-		{
-			return "Mystery already listed in mystery table.";
-		}
 		string itemName = mystery.EventItemName ?? "Unknown";
 		string startDateStr = (mystery.StartDate.HasValue ? FormatDateNoYear(mystery.StartDate.Value) : "Unknown");
 		string endDateStr = (mystery.EndDate.HasValue ? FormatDateNoYear(mystery.EndDate.Value) : "");
 		string durationStr = (mystery.DurationDays.HasValue ? $"{mystery.DurationDays.Value} d" : "21 d");
-		string year = mystery.StartDate?.Year.ToString() ?? "????";
+		string year = FormatYearColumn(mystery);
 		string iconPart = (hasDisplayName ? $"{{{{Item/Icon|{suggestedTitle}|displayName={mystery.Name}}}}}" : ("{{Item/Icon|" + suggestedTitle + "}}"));
 		string linkPart = (hasDisplayName ? $"[[{suggestedTitle}|{mystery.Name}]]" : ("[[" + suggestedTitle + "]]"));
-		string newRow = "|-\n| 8\n| " + iconPart + "\n| " + linkPart + "\n| {{Item/Group|" + itemName + "|4}}\n| " + durationStr + "\n! " + year + "\n| " + startDateStr + "\n| " + endDateStr + "\n";
+		string expectedItemGroup = "{{Item/Group|" + itemName + "|4}}";
+
+		if (wikiContent.Contains(suggestedTitle, StringComparison.OrdinalIgnoreCase))
+		{
+			// Row exists — check if values need fixing
+			var diffs = CheckMysteryTableRow(wikiContent, suggestedTitle, mystery.Name,
+				expectedItemGroup, durationStr, year, startDateStr, endDateStr);
+			if (diffs.Count == 0)
+				return "Mystery already listed in mystery table.";
+
+			// Fix the existing row by replacing cell values
+			string updatedContent = FixMysteryTableRow(wikiContent, suggestedTitle, mystery.Name,
+				expectedItemGroup, durationStr, year, startDateStr, endDateStr);
+			string fixedFields = string.Join(", ", diffs.Select(d => d.field));
+			return await PublishPageAsync(username, password, templateTitle, updatedContent,
+				$"Fix {mystery.Name} row: {fixedFields} (via MergeMansionWikiTools)");
+		}
+
+		string newRow = "|-\n| 8\n| " + iconPart + "\n| " + linkPart + "\n| " + expectedItemGroup + "\n| " + durationStr + "\n! " + year + "\n| " + startDateStr + "\n| " + endDateStr + "\n";
 		int insertPos = FindChronologicalInsertPosition(wikiContent, mystery.StartDate);
-		string text = wikiContent.Substring(0, insertPos);
-		string text2 = wikiContent;
-		int num = insertPos;
-		string updatedPage = text + newRow + text2.Substring(num, text2.Length - num);
+		string updatedPage = wikiContent.Substring(0, insertPos) + newRow + wikiContent.Substring(insertPos);
 		return await PublishPageAsync(username, password, templateTitle, updatedPage, "Add " + mystery.Name + " to mystery table (via MergeMansionWikiTools)");
+	}
+
+	/// <summary>
+	/// Finds the table row block for a mystery by looking for the wiki link [[pageTitle...]].
+	/// Returns (startIndex, endIndex) of the row block (from |- to next |- or |}).
+	/// </summary>
+	private static (int start, int end, List<string> lines)? FindMysteryTableRowBlock(
+		string tableContent, string pageTitle, string mysteryName)
+	{
+		// Search for [[pageTitle]] or [[pageTitle| in the table
+		string linkPattern1 = $"[[{pageTitle}]]";
+		string linkPattern2 = $"[[{pageTitle}|";
+		int linkIdx = tableContent.IndexOf(linkPattern1, StringComparison.OrdinalIgnoreCase);
+		if (linkIdx < 0)
+			linkIdx = tableContent.IndexOf(linkPattern2, StringComparison.OrdinalIgnoreCase);
+		if (linkIdx < 0) return null;
+
+		// Walk backward to find the |- that starts this row
+		int rowStart = tableContent.LastIndexOf("\n|-", linkIdx, StringComparison.Ordinal);
+		if (rowStart < 0) return null;
+		rowStart++; // skip the leading \n
+
+		// Walk forward to find the next |- or |} that ends this row
+		int afterSep = tableContent.IndexOf('\n', rowStart) + 1; // skip the |- line itself
+		int nextRowSep = tableContent.IndexOf("\n|-", afterSep, StringComparison.Ordinal);
+		int tableEnd = tableContent.IndexOf("\n|}", afterSep, StringComparison.Ordinal);
+		int rowEnd;
+		if (nextRowSep >= 0 && (tableEnd < 0 || nextRowSep < tableEnd))
+			rowEnd = nextRowSep + 1; // +1 to include the \n
+		else if (tableEnd >= 0)
+			rowEnd = tableEnd + 1;
+		else
+			return null;
+
+		string rowBlock = tableContent[afterSep..rowEnd];
+		var lines = rowBlock.Split('\n', StringSplitOptions.RemoveEmptyEntries).ToList();
+		return (rowStart, rowEnd, lines);
+	}
+
+	/// <summary>
+	/// Parses cell values from row lines (lines starting with | or !).
+	/// Strips rowspan="N" | prefix if present.
+	/// </summary>
+	private static List<string> ParseRowCells(List<string> lines)
+	{
+		var cells = new List<string>();
+		foreach (var line in lines)
+		{
+			var trimmed = line.TrimStart();
+			if (!trimmed.StartsWith("|") && !trimmed.StartsWith("!")) continue;
+			string cellContent = trimmed[1..].Trim();
+			// Strip rowspan prefix: 'rowspan="2" | actual content'
+			var rspanMatch = Regex.Match(cellContent, @"^rowspan=""\d+""\s*\|\s*(.*)$");
+			if (rspanMatch.Success)
+				cellContent = rspanMatch.Groups[1].Value.Trim();
+			cells.Add(cellContent);
+		}
+		return cells;
+	}
+
+	/// <summary>
+	/// Checks an existing mystery table row for correctness. Returns list of field diffs.
+	/// </summary>
+	private static List<(string field, string oldVal, string newVal)> CheckMysteryTableRow(
+		string tableContent, string pageTitle, string mysteryName,
+		string expectedItemGroup, string expectedDuration, string expectedYear,
+		string expectedStartDate, string expectedEndDate)
+	{
+		var diffs = new List<(string field, string oldVal, string newVal)>();
+
+		var rowInfo = FindMysteryTableRowBlock(tableContent, pageTitle, mysteryName);
+		if (rowInfo == null) return diffs;
+
+		var cells = ParseRowCells(rowInfo.Value.lines);
+		// Expected: [0]=Level(8), [1]=Icon, [2]=Link, [3]=Item/Group, [4]=Duration, [5]=Year, [6]=Start, [7]=End
+		if (cells.Count < 8) return diffs;
+
+		string itemCell = cells[3];
+		if (!itemCell.Equals(expectedItemGroup, StringComparison.OrdinalIgnoreCase))
+			diffs.Add(("Event Item", itemCell, expectedItemGroup));
+
+		string durCell = cells[4];
+		if (!durCell.Equals(expectedDuration, StringComparison.OrdinalIgnoreCase))
+			diffs.Add(("Duration", durCell, expectedDuration));
+
+		string yearCell = cells[5];
+		if (!yearCell.Equals(expectedYear, StringComparison.Ordinal))
+			diffs.Add(("Year", yearCell, expectedYear));
+
+		string startCell = cells[6];
+		if (!startCell.Equals(expectedStartDate, StringComparison.OrdinalIgnoreCase))
+			diffs.Add(("Start Date", startCell, expectedStartDate));
+
+		string endCell = cells[7];
+		if (!endCell.Equals(expectedEndDate, StringComparison.OrdinalIgnoreCase))
+			diffs.Add(("Finish Date", endCell, expectedEndDate));
+
+		return diffs;
+	}
+
+	/// <summary>
+	/// Replaces cell values in an existing mystery table row with correct values.
+	/// Rebuilds only cells 3-7 (Item, Duration, Year, Start, End), preserving the rest.
+	/// </summary>
+	private static string FixMysteryTableRow(string tableContent, string pageTitle, string mysteryName,
+		string expectedItemGroup, string expectedDuration, string expectedYear,
+		string expectedStartDate, string expectedEndDate)
+	{
+		var rowInfo = FindMysteryTableRowBlock(tableContent, pageTitle, mysteryName);
+		if (rowInfo == null) return tableContent;
+
+		var (rowStart, rowEnd, lines) = rowInfo.Value;
+
+		// Find cell lines by index (lines starting with | or !)
+		int cellIdx = 0;
+		for (int i = 0; i < lines.Count; i++)
+		{
+			var trimmed = lines[i].TrimStart();
+			if (!trimmed.StartsWith("|") && !trimmed.StartsWith("!")) continue;
+
+			// Replace cells 3-7 (Item, Duration, Year, Start, End)
+			switch (cellIdx)
+			{
+				case 3: lines[i] = "| " + expectedItemGroup; break;
+				case 4: lines[i] = "| " + expectedDuration; break;
+				case 5: lines[i] = "! " + expectedYear; break;
+				case 6: lines[i] = "| " + expectedStartDate; break;
+				case 7: lines[i] = "| " + expectedEndDate; break;
+			}
+			cellIdx++;
+		}
+
+		// Rebuild: |- separator + new cell lines
+		string sepLine = tableContent[rowStart..tableContent.IndexOf('\n', rowStart)];
+		string newRowBlock = sepLine + "\n" + string.Join("\n", lines) + "\n";
+		return tableContent[..rowStart] + newRowBlock + tableContent[rowEnd..];
 	}
 
 	private static int FindChronologicalInsertPosition(string wikiContent, DateTime? startDate)
@@ -4537,25 +4801,44 @@ public static class MysteryWikiService
 			Icon = "\ud83c\udfe0",
 			ContentPreview = mainPreview
 		});
-		bool tableExists = (await FetchPageContentAsync("Template:Events/Mystery Events"))?.Contains(pageTitle, StringComparison.OrdinalIgnoreCase) ?? false;
+		string tableContent = await FetchPageContentAsync("Template:Events/Mystery Events");
+		bool tableExists = tableContent?.Contains(pageTitle, StringComparison.OrdinalIgnoreCase) ?? false;
 		string itemName = mystery.EventItemName ?? "Unknown";
-		string year = mystery.StartDate?.Year.ToString() ?? "????";
+		string year = FormatYearColumn(mystery);
 		string startDateStr = (mystery.StartDate.HasValue ? FormatDateNoYear(mystery.StartDate.Value) : "Unknown");
 		string endDateStr = (mystery.EndDate.HasValue ? FormatDateNoYear(mystery.EndDate.Value) : "");
 		string durationStr = (mystery.DurationDays.HasValue ? $"{mystery.DurationDays.Value} d" : "21 d");
 		bool hasDisplayName = pageTitle != mystery.Name;
 		string previewIcon = (hasDisplayName ? $"{{{{Item/Icon|{pageTitle}|displayName={mystery.Name}}}}}" : ("{{Item/Icon|" + pageTitle + "}}"));
 		string previewLink = (hasDisplayName ? $"[[{pageTitle}|{mystery.Name}]]" : ("[[" + pageTitle + "]]"));
-		string tableRowPreview = "|-\n| 8\n| " + previewIcon + "\n| " + previewLink + "\n| {{Item/Group|" + itemName + "|4}}\n| " + durationStr + "\n! " + year + "\n| " + startDateStr + "\n| " + endDateStr;
+		string expectedItemGroup = "{{Item/Group|" + itemName + "|4}}";
+		string tableRowPreview = "|-\n| 8\n| " + previewIcon + "\n| " + previewLink + "\n| " + expectedItemGroup + "\n| " + durationStr + "\n! " + year + "\n| " + startDateStr + "\n| " + endDateStr;
+
+		// If listed, check if row values are correct
+		string? tableFixDetail = null;
+		string? tableFixPreview = null;
+		bool tableNeedsFix = false;
+		if (tableExists && tableContent != null)
+		{
+			var diffs = CheckMysteryTableRow(tableContent, pageTitle, mystery.Name, expectedItemGroup, durationStr, year, startDateStr, endDateStr);
+			if (diffs.Count > 0)
+			{
+				tableNeedsFix = true;
+				tableFixDetail = "Fix row: " + string.Join(", ", diffs.Select(d => d.field));
+				tableFixPreview = string.Join("\n", diffs.Select(d => $"  {d.field}: {d.oldVal} → {d.newVal}"));
+			}
+		}
+
 		steps.Add(new MysteryUpdateStep
 		{
 			Title = "Update Mystery page (table)",
-			Detail = (tableExists ? "Already listed (no change)" : $"Add row: {mystery.Name}, {itemName}, {durationStr}"),
-			IsNoChange = tableExists,
-			IsEnabled = !tableExists,
+			Detail = tableNeedsFix ? tableFixDetail!
+				: (tableExists ? "Already listed (no change)" : $"Add row: {mystery.Name}, {itemName}, {durationStr}"),
+			IsNoChange = tableExists && !tableNeedsFix,
+			IsEnabled = !tableExists || tableNeedsFix,
 			WikiUrl = wikiBase + "Template:Events/Mystery_Events",
 			Icon = "\ud83d\udccb",
-			ContentPreview = (tableExists ? null : tableRowPreview)
+			ContentPreview = tableNeedsFix ? tableFixPreview : (tableExists ? null : tableRowPreview)
 		});
 		string moduleContent = await FetchPageContentAsync("Module:Datatable/Various");
 		bool moduleExists = moduleContent != null && (moduleContent.Contains("\"" + mystery.Name + "\"", StringComparison.OrdinalIgnoreCase) || moduleContent.Contains("\"" + pageTitle + "\"", StringComparison.OrdinalIgnoreCase));

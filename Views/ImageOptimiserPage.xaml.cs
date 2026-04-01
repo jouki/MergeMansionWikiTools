@@ -3206,6 +3206,7 @@ public partial class ImageOptimiserPage : UserControl
                 var fullPath = System.IO.Path.Combine(dir, candidate);
                 if (!File.Exists(fullPath))
                 {
+                    if (!Directory.Exists(dir)) continue;
                     // Extractor may have suffix-renamed the file (e.g. due to naming conflict)
                     var baseName = System.IO.Path.GetFileNameWithoutExtension(candidate);
                     var suffixed = Directory.GetFiles(dir, $"{baseName}_*.png").FirstOrDefault();

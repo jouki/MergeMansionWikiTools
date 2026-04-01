@@ -100,6 +100,36 @@ internal static class SpriteMetadataService
             }
         }
 
+        if (sprites.Count > 0 || skins.Count > 0 || poolTags != null)
+        {
+            _cache = new AtlasData(sprites, skins, poolTags);
+            _cachePath = path;
+            return _cache;
+        }
+
+        // Fallback: find newest sibling version with atlas data
+        var versionDir = Path.GetDirectoryName(exportDir);
+        var baseDir = versionDir != null ? Path.GetDirectoryName(versionDir) : null;
+        if (baseDir != null && Directory.Exists(baseDir))
+        {
+            var siblingVersions = Directory.GetDirectories(baseDir)
+                .OrderByDescending(d => Path.GetFileName(d), StringComparer.OrdinalIgnoreCase);
+            foreach (var sibDir in siblingVersions)
+            {
+                if (sibDir == versionDir) continue;
+                var sibAtlasPath = Path.Combine(sibDir, "image_atlas_data.json");
+                if (!File.Exists(sibAtlasPath)) continue;
+
+                var json = File.ReadAllText(sibAtlasPath);
+                _cache = JsonSerializer.Deserialize<AtlasData>(json, _jsonOpts)
+                    ?? new AtlasData(new List<SpriteInfo>(), new List<SkinMapping>());
+                _cachePath = path; // cache keyed to the ORIGINAL path so re-entry works
+                var pc = _cache.PoolTagMapping?.Count ?? 0;
+                AppLogger.Info($"Loaded image_atlas_data.json from fallback version {Path.GetFileName(sibDir)} ({_cache.Sprites.Count} sprites, {_cache.SkinMappings.Count} skins, {pc} pool tags)");
+                return _cache;
+            }
+        }
+
         _cache = new AtlasData(sprites, skins, poolTags);
         _cachePath = path;
         return _cache;

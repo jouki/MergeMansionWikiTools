@@ -65,9 +65,10 @@ public class MysteryService
             mystery.FreeTier = ParseTier(prog, "FreeEventLevelRefs");
             mystery.SilverTier = ParseTier(prog, "Track1EventLevelRefs");
             mystery.GoldTier = ParseTier(prog, "Track2EventLevelRefs");
+            mystery.BonusTier = ParseTier(prog, "BonusEventLevelRefs");
 
             // Fallback: check V2Info for Track1/Track2 (older dump format)
-            if (prog.TryGetProperty("V2Info", out var v2Info))
+            if (prog.TryGetProperty("V2Info", out var v2Info) && GetBool(v2Info, "IsEnabled", true))
             {
                 if (mystery.SilverTier.Count == 0 && mystery.GoldTier.Count == 0)
                 {
@@ -78,6 +79,8 @@ public class MysteryService
                 var v2Free = ParseTier(v2Info, "FreeEventLevelRefs");
                 if (v2Free.Count > mystery.FreeTier.Count)
                     mystery.FreeTier = v2Free;
+                if (mystery.BonusTier.Count == 0)
+                    mystery.BonusTier = ParseTier(v2Info, "BonusEventLevelRefs");
             }
 
             // Fallback: PremiumEventLevelRefs (even older — single premium tier, use as Silver)
@@ -86,10 +89,21 @@ public class MysteryService
                 mystery.SilverTier = ParseTier(prog, "PremiumEventLevelRefs");
             }
 
-            // Count premium levels
-            mystery.PremiumLevels = Math.Max(mystery.SilverTier.Count, mystery.GoldTier.Count);
+            // V1 recurring tiers (not present in V2)
+            mystery.RecurringFreeTier = ParseTier(prog, "RecurringFreeEventLevelRefs");
+            mystery.RecurringPremiumTier = ParseTier(prog, "RecurringPremiumEventLevelRefs");
 
-            // Detect type: if any reward across all tiers is a Decoration → Pet
+            // HasZeroLevel — default true (matches V2 behavior)
+            mystery.HasZeroLevel = GetBool(prog, "HasZeroLevel", true);
+
+            // V2 detection: has both Silver and Gold tiers
+            mystery.IsV2 = mystery.SilverTier.Count > 0 && mystery.GoldTier.Count > 0;
+
+            // Perk data for level 0 paid tiers (embedded by dumper)
+            mystery.Track1PerkData = ParsePerkData(prog, "Track1PerkData");
+            mystery.Track2PerkData = ParsePerkData(prog, "Track2PerkData");
+
+            // Detect type: if any reward across all tiers is a Pet → Pet mystery
             mystery.MysteryType = DetectMysteryType(mystery);
 
             Mysteries.Add(mystery);
@@ -319,7 +333,7 @@ public class MysteryService
     private static MysteryType DetectMysteryType(MysteryEvent mystery)
     {
         // Only RewardPet determines Pet type — both Standard and Pet have decorations
-        var allTiers = mystery.FreeTier.Concat(mystery.SilverTier).Concat(mystery.GoldTier);
+        var allTiers = mystery.FreeTier.Concat(mystery.SilverTier).Concat(mystery.GoldTier).Concat(mystery.BonusTier);
         foreach (var level in allTiers)
         {
             foreach (var r in level.Rewards)
@@ -376,7 +390,7 @@ public class MysteryService
     {
         foreach (var mystery in Mysteries)
         {
-            var allTiers = mystery.FreeTier.Concat(mystery.SilverTier).Concat(mystery.GoldTier);
+            var allTiers = mystery.FreeTier.Concat(mystery.SilverTier).Concat(mystery.GoldTier).Concat(mystery.BonusTier);
             foreach (var level in allTiers)
             {
                 foreach (var reward in level.Rewards)
@@ -453,7 +467,7 @@ public class MysteryService
 
         foreach (var mystery in Mysteries)
         {
-            var allTiers = mystery.FreeTier.Concat(mystery.SilverTier).Concat(mystery.GoldTier);
+            var allTiers = mystery.FreeTier.Concat(mystery.SilverTier).Concat(mystery.GoldTier).Concat(mystery.BonusTier);
             foreach (var level in allTiers)
             {
                 foreach (var reward in level.Rewards)
@@ -497,6 +511,42 @@ public class MysteryService
         if (el.TryGetProperty(prop, out var val) && val.ValueKind == JsonValueKind.Number)
             return val.GetInt64();
         return def;
+    }
+
+    private static bool GetBool(JsonElement el, string prop, bool def = false)
+    {
+        if (el.TryGetProperty(prop, out var val))
+        {
+            if (val.ValueKind == JsonValueKind.True) return true;
+            if (val.ValueKind == JsonValueKind.False) return false;
+        }
+        return def;
+    }
+
+    private static MysteryPerkData? ParsePerkData(JsonElement prog, string propertyName)
+    {
+        if (!prog.TryGetProperty(propertyName, out var perkObj) ||
+            perkObj.ValueKind != JsonValueKind.Object)
+            return null;
+
+        var result = new MysteryPerkData();
+        foreach (var perk in perkObj.EnumerateObject())
+        {
+            var type = GetString(perk.Value, "Type");
+            switch (type)
+            {
+                case "ExtraInventorySlots":
+                    result.ExtraInventorySlots += GetInt(perk.Value, "SlotCount");
+                    break;
+                case "FreeDailyShopItem":
+                    result.FreeDailyGems += GetInt(perk.Value, "Gems");
+                    break;
+                case "EventXp":
+                    result.EventXpBonus += GetInt(perk.Value, "Amount");
+                    break;
+            }
+        }
+        return result;
     }
 
     /// <summary>

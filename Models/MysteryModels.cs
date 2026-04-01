@@ -44,6 +44,15 @@ public class MysteryRewardLevel
     public List<MysteryReward> Rewards { get; set; } = new();
 }
 
+// ── Perk data for level 0 paid tiers ────────────────────────────
+
+public class MysteryPerkData
+{
+    public int ExtraInventorySlots { get; set; }
+    public int FreeDailyGems { get; set; }
+    public int EventXpBonus { get; set; }
+}
+
 // ── Wiki check state ─────────────────────────────────────────────
 
 public enum WikiCheckState { Unknown, Missing, Mismatch, Match, Confirmed }
@@ -171,7 +180,13 @@ public class MysteryEvent
     public List<MysteryRewardLevel> FreeTier { get; set; } = new();
     public List<MysteryRewardLevel> SilverTier { get; set; } = new();
     public List<MysteryRewardLevel> GoldTier { get; set; } = new();
-    public int PremiumLevels { get; set; }
+    public List<MysteryRewardLevel> BonusTier { get; set; } = new();
+    public List<MysteryRewardLevel> RecurringFreeTier { get; set; } = new();
+    public List<MysteryRewardLevel> RecurringPremiumTier { get; set; } = new();
+    public bool HasZeroLevel { get; set; } = true;
+    public bool IsV2 { get; set; }
+    public MysteryPerkData? Track1PerkData { get; set; }
+    public MysteryPerkData? Track2PerkData { get; set; }
 
     public WikiPageStatus WikiStatus { get; set; } = new();
 

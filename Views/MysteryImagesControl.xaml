@@ -13,10 +13,39 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!-- Export path info -->
-        <TextBlock x:Name="txtExportPath" Grid.Row="0" FontSize="11"
-                   Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                   Margin="0,0,0,6" TextTrimming="CharacterEllipsis" />
+        <!-- Export path + fallback version -->
+        <Grid Grid.Row="0" Margin="0,0,0,6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="txtExportPath" Grid.Column="0" FontSize="11"
+                       Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                       TextTrimming="CharacterEllipsis" Cursor="Hand"
+                       MouseLeftButtonDown="TxtExportPath_Click"
+                       MouseEnter="TxtExportPath_MouseEnter"
+                       MouseLeave="TxtExportPath_MouseLeave"
+                       ToolTip="Open folder" VerticalAlignment="Center" />
+            <StackPanel x:Name="pnlFallback" Grid.Column="1" Orientation="Horizontal"
+                        Visibility="Collapsed" Margin="12,0,0,0" VerticalAlignment="Center">
+                <TextBlock Text="Fallback image folder" FontSize="11"
+                           Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                           VerticalAlignment="Center" />
+                <Border Margin="4,0,6,0" Width="14" Height="14" CornerRadius="7"
+                        Background="{DynamicResource TextFillColorTertiaryBrush}"
+                        VerticalAlignment="Center" Cursor="Hand"
+                        ToolTipService.InitialShowDelay="0"
+                        ToolTipService.ShowOnDisabled="True"
+                        ToolTip="Some images were not found in the current version's export folder. Select a game version that has exported images to search for the missing files.">
+                    <TextBlock Text="i" FontSize="9" FontWeight="Bold"
+                               Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <ComboBox x:Name="cmbFallbackVersion" MinWidth="130" FontSize="11"
+                          Padding="10,4,30,4"
+                          SelectionChanged="CmbFallbackVersion_SelectionChanged" />
+            </StackPanel>
+        </Grid>
 
         <!-- File list area -->
         <Border Grid.Row="1" CornerRadius="4" BorderThickness="1"

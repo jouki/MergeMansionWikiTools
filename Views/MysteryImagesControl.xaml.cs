@@ -59,6 +59,10 @@ public partial class MysteryImagesControl : UserControl
 
 	private bool _didDrag;
 
+	private string? _currentExportDir;
+	private bool _suppressFallbackChange;
+	private string? _activeFallbackVersion;
+
 
 
 
@@ -88,6 +92,114 @@ public partial class MysteryImagesControl : UserControl
 		_detectedFiles.Clear();
 		_checkboxes.Clear();
 		_optimizedFiles.Clear();
+	}
+
+	private void TxtExportPath_Click(object sender, MouseButtonEventArgs e)
+	{
+		var path = txtExportPath.Text;
+		if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
+			Process.Start(new ProcessStartInfo { FileName = path, UseShellExecute = true });
+	}
+
+	private void TxtExportPath_MouseEnter(object sender, MouseEventArgs e)
+		=> txtExportPath.TextDecorations = TextDecorations.Underline;
+
+	private void TxtExportPath_MouseLeave(object sender, MouseEventArgs e)
+		=> txtExportPath.TextDecorations = null;
+
+	private void CmbFallbackVersion_SelectionChanged(object sender, SelectionChangedEventArgs e)
+	{
+		if (_suppressFallbackChange || _main == null || _mystery == null) return;
+		if (cmbFallbackVersion.SelectedItem is not string selectedVersion) return;
+
+		_activeFallbackVersion = selectedVersion;
+		var basePath = _main.Settings.ImageExporterBasePath;
+		var fallbackDir = MysteryWikiService.ResolveExportPngsDir(basePath, selectedVersion);
+		if (string.IsNullOrEmpty(fallbackDir)) return;
+
+		// Re-scan: merge fallback images for missing files
+		_ = RescanWithFallbackAsync(fallbackDir);
+	}
+
+	private async Task RescanWithFallbackAsync(string fallbackDir)
+	{
+		if (_main == null || _mystery == null || string.IsNullOrEmpty(_currentExportDir)) return;
+
+		var primaryDir = _currentExportDir;
+		var progressionEventId = _mystery.ProgressionEventId;
+		var wikiImageName = _mystery.WikiImageName;
+		bool isPet = _mystery.MysteryType == MysteryType.Pet;
+
+		pnlLoading.Visibility = Visibility.Visible;
+		scrollFiles.Visibility = Visibility.Collapsed;
+		pnlEmpty.Visibility = Visibility.Collapsed;
+
+		try
+		{
+			// Scan primary directory
+			var primaryFiles = await Task.Run(() =>
+				MysteryWikiService.DetectDecorationFiles(primaryDir, progressionEventId, wikiImageName, isPet, _mystery));
+
+			// Scan fallback for categories missing from primary
+			var missingCategories = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+			var expectedCategories = new[] { "Wallpaper", "Badge", "Decoration", "Icon", "EventItem" };
+			var foundCategories = primaryFiles.Select(f => f.Category).ToHashSet(StringComparer.OrdinalIgnoreCase);
+			foreach (var cat in expectedCategories)
+				if (!foundCategories.Contains(cat))
+					missingCategories.Add(cat);
+
+			if (missingCategories.Count > 0 && fallbackDir != primaryDir)
+			{
+				var fallbackFiles = await Task.Run(() =>
+					MysteryWikiService.DetectDecorationFiles(fallbackDir, progressionEventId, wikiImageName, isPet, _mystery));
+
+				foreach (var ff in fallbackFiles)
+					if (missingCategories.Contains(ff.Category) &&
+					    !primaryFiles.Any(p => p.WikiFilename == ff.WikiFilename))
+						primaryFiles.Add(ff);
+			}
+
+			_detectedFiles = primaryFiles;
+			_checkboxes.Clear();
+			_optimizedFiles.Clear();
+			pnlLoading.Visibility = Visibility.Collapsed;
+
+			if (_detectedFiles.Count == 0)
+			{
+				pnlEmpty.Visibility = Visibility.Visible;
+				txtEmptyMessage.Text = $"No image files found for {progressionEventId}\nin {primaryDir}";
+				return;
+			}
+
+			// Wiki existence check
+			var uploadable = _detectedFiles.Where(f => f.Category != "EventItem").ToList();
+			if (uploadable.Count > 0)
+			{
+				var wikiFilenames = uploadable.Select(f => "File:" + f.WikiFilename).ToList();
+				var existMap = await MysteryWikiService.CheckPagesExistAsync(wikiFilenames);
+				foreach (var file in uploadable)
+					file.ExistsOnWiki = existMap.GetValueOrDefault("File:" + file.WikiFilename);
+			}
+			foreach (var f in _detectedFiles)
+				if (f.OptimizedSize.HasValue)
+					_optimizedFiles.Add(f);
+
+			await CheckExistingSplitEventItemAsync();
+			BuildFileList();
+			scrollFiles.Visibility = Visibility.Visible;
+			btnOptimize.IsEnabled = true;
+			btnUpload.IsEnabled = true;
+
+			int total = _detectedFiles.Count;
+			int uploadableCount = _detectedFiles.Count(f => f.Category != "EventItem");
+			ShowInfo($"Found {total} files ({uploadableCount} uploadable) with fallback.", InfoBarSeverity.Success);
+		}
+		catch (Exception ex)
+		{
+			pnlLoading.Visibility = Visibility.Collapsed;
+			pnlEmpty.Visibility = Visibility.Visible;
+			txtEmptyMessage.Text = "Fallback scan failed: " + ex.Message;
+		}
 	}
 
 	public void Initialize(MainWindow main, MysteryEvent mystery)
@@ -134,9 +246,11 @@ public partial class MysteryImagesControl : UserControl
 				txtEmptyMessage.Text = "Export path not configured.\nSet Workspace and Game Version in Settings.";
 			else
 				txtEmptyMessage.Text = $"No exported images found for v{apkVersion}.\nRun Image Extractor to extract game assets,\nor select a version that has been exported.";
+			pnlFallback.Visibility = Visibility.Collapsed;
 			return;
 		}
 		txtExportPath.Text = exportDir;
+		_currentExportDir = exportDir;
 		try
 		{
 			_detectedFiles = await Task.Run(() => MysteryWikiService.DetectDecorationFiles(exportDir, _mystery.ProgressionEventId, _mystery.WikiImageName, _mystery.MysteryType == MysteryType.Pet, _mystery));
@@ -145,6 +259,8 @@ public partial class MysteryImagesControl : UserControl
 			{
 				pnlEmpty.Visibility = Visibility.Visible;
 				txtEmptyMessage.Text = "No image files found for " + _mystery.ProgressionEventId + "\nin " + exportDir;
+				ShowFallbackIfNeeded(basePath, apkVersion);
+				await ReapplyFallbackIfActiveAsync(basePath);
 				return;
 			}
 			List<DetectedDecorationFile> uploadable = _detectedFiles.Where((DetectedDecorationFile detectedDecorationFile) => detectedDecorationFile.Category != "EventItem").ToList();
@@ -177,6 +293,8 @@ public partial class MysteryImagesControl : UserControl
 				msg += $", {preOptimized} already optimized";
 			}
 			ShowInfo(msg + ".", InfoBarSeverity.Success);
+			ShowFallbackIfNeeded(basePath, apkVersion);
+			await ReapplyFallbackIfActiveAsync(basePath);
 		}
 		catch (Exception ex)
 		{
@@ -184,6 +302,73 @@ public partial class MysteryImagesControl : UserControl
 			pnlEmpty.Visibility = Visibility.Visible;
 			txtEmptyMessage.Text = "Scan failed: " + ex.Message;
 		}
+	}
+
+	private async Task ReapplyFallbackIfActiveAsync(string basePath)
+	{
+		if (string.IsNullOrEmpty(_activeFallbackVersion)) return;
+		if (pnlFallback.Visibility != Visibility.Visible) return;
+
+		// Select the remembered version in the dropdown (triggers re-scan)
+		_suppressFallbackChange = true;
+		var items = cmbFallbackVersion.ItemsSource as List<string>;
+		int idx = items?.IndexOf(_activeFallbackVersion) ?? -1;
+		if (idx >= 0)
+			cmbFallbackVersion.SelectedIndex = idx;
+		_suppressFallbackChange = false;
+
+		if (idx >= 0)
+		{
+			var fallbackDir = MysteryWikiService.ResolveExportPngsDir(basePath, _activeFallbackVersion);
+			if (!string.IsNullOrEmpty(fallbackDir))
+				await RescanWithFallbackAsync(fallbackDir);
+		}
+	}
+
+	private void ShowFallbackIfNeeded(string basePath, string currentVersion)
+	{
+		// Check if all expected categories are present
+		var expectedCategories = new[] { "Wallpaper", "Badge", "Decoration", "Icon" };
+		var foundCategories = _detectedFiles.Select(f => f.Category).ToHashSet(StringComparer.OrdinalIgnoreCase);
+		bool allFound = expectedCategories.All(c => foundCategories.Contains(c));
+
+		if (allFound)
+		{
+			pnlFallback.Visibility = Visibility.Collapsed;
+			return;
+		}
+
+		// Find versions with Export - PNGs
+		var versions = new List<string>();
+		if (!string.IsNullOrEmpty(basePath) && Directory.Exists(basePath))
+		{
+			foreach (var dir in Directory.EnumerateDirectories(basePath))
+			{
+				var exportPngs = Path.Combine(dir, "Export - PNGs");
+				if (Directory.Exists(exportPngs))
+					versions.Add(Path.GetFileName(dir));
+			}
+		}
+
+		if (versions.Count == 0)
+		{
+			pnlFallback.Visibility = Visibility.Collapsed;
+			return;
+		}
+
+		// Sort descending (newest first)
+		versions.Sort((a, b) => string.Compare(b, a, StringComparison.OrdinalIgnoreCase));
+
+		_suppressFallbackChange = true;
+		cmbFallbackVersion.ItemsSource = versions;
+		// Pre-select: user's selected version from Settings, fallback to newest
+		var selectedVersion = _main?.Settings.SelectedApkVersion;
+		int preSelectIdx = !string.IsNullOrEmpty(selectedVersion)
+			? versions.IndexOf(selectedVersion) : -1;
+		cmbFallbackVersion.SelectedIndex = preSelectIdx >= 0 ? preSelectIdx : 0;
+		_suppressFallbackChange = false;
+
+		pnlFallback.Visibility = Visibility.Visible;
 	}
 
 	private void BuildFileList()

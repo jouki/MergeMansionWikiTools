@@ -368,6 +368,9 @@ public partial class MysteriesPage : UserControl
 		list.Add("Mystery table: " + ((mystery.WikiStatus.WikiMysteryTableListed == true) ? "\u2713" : ((mystery.WikiStatus.WikiMysteryTableListed == false) ? "\u2717" : "?")));
 		list.Add("Module: " + ((mystery.WikiStatus.WikiModuleListed == true) ? "\u2713" : ((mystery.WikiStatus.WikiModuleListed == false) ? "\u2717" : "?")));
 		border7.ToolTip = string.Join("\n", list);
+		border7.Cursor = Cursors.Hand;
+		border7.Tag = mystery;
+		border7.MouseLeftButtonDown += WikiLabel_Click;
 		stackPanel3.Children.Add(border7);
 		if (stackPanel3.Children.Count > 0)
 		{
@@ -599,31 +602,27 @@ public partial class MysteriesPage : UserControl
 		mysteryGeneratorDialog.Show();
 	}
 
+	private void WikiLabel_Click(object sender, MouseButtonEventArgs e)
+	{
+		if (sender is FrameworkElement el && el.Tag is MysteryEvent mystery)
+			_ = ShowUpdateWikiDialog(mystery);
+	}
+
 	private async void BtnUpdateWiki_Click(object sender, RoutedEventArgs e)
 	{
-		Wpf.Ui.Controls.Button btn = sender as Wpf.Ui.Controls.Button;
-		MysteryEvent mystery = default(MysteryEvent);
-		int num;
-		if (btn != null)
-		{
-			object tag = btn.Tag;
-			mystery = tag as MysteryEvent;
-			num = ((mystery == null) ? 1 : 0);
-		}
-		else
-		{
-			num = 1;
-		}
-		if (num != 0)
-		{
-			return;
-		}
+		if (sender is not Wpf.Ui.Controls.Button btn || btn.Tag is not MysteryEvent mystery) return;
+		btn.IsEnabled = false;
+		try { await ShowUpdateWikiDialog(mystery); }
+		finally { btn.IsEnabled = true; }
+	}
+
+	private async Task ShowUpdateWikiDialog(MysteryEvent mystery)
+	{
 		if (!_main.Settings.WikiVerified)
 		{
 			ShowInfo("Wiki account not verified.", InfoBarSeverity.Warning);
 			return;
 		}
-		btn.IsEnabled = false;
 		ShowInfo("Fetching preview...", InfoBarSeverity.Informational, autoClose: false);
 		List<MysteryUpdateStep> steps;
 		try
@@ -633,16 +632,12 @@ public partial class MysteriesPage : UserControl
 		catch (Exception ex)
 		{
 			ShowInfo("Preview failed: " + ex.Message, InfoBarSeverity.Error);
-			btn.IsEnabled = true;
 			return;
 		}
 		infoBar.IsOpen = false;
 		Wpf.Ui.Controls.MessageBox previewBox = BuildUpdatePreviewDialog(mystery, steps);
 		if (await previewBox.ShowDialogAsync() != Wpf.Ui.Controls.MessageBoxResult.Primary)
-		{
-			btn.IsEnabled = true;
 			return;
-		}
 		ShowInfo("Updating wiki pages...", InfoBarSeverity.Informational, autoClose: false);
 		List<string> results = new List<string>();
 		try
@@ -686,10 +681,6 @@ public partial class MysteriesPage : UserControl
 		catch (Exception ex)
 		{
 			ShowInfo("Update failed: " + ex.Message, InfoBarSeverity.Error);
-		}
-		finally
-		{
-			btn.IsEnabled = true;
 		}
 	}
 
