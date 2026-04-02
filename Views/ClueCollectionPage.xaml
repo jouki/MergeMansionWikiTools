@@ -1,7 +1,8 @@
 <UserControl x:Class="MergeMansionWikiTools.Views.ClueCollectionPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:local="clr-namespace:MergeMansionWikiTools.Views">
 
     <Grid Margin="32,24,32,24">
         <Grid.RowDefinitions>
@@ -9,17 +10,48 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <TextBlock Grid.Row="0" Text="Clue Collection" FontSize="28" FontWeight="SemiBold" Margin="0,0,0,16"
-                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+        <Grid Grid.Row="0" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Clue Collection" FontSize="28" FontWeight="SemiBold"
+                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+            <!-- (check sizes buttons are per-case in the list) -->
+        </Grid>
 
-        <!-- Status -->
-        <StackPanel Grid.Row="1" Margin="0,0,0,12">
-            <TextBlock x:Name="txtStatus" FontSize="12"
-                       Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
-        </StackPanel>
+        <!-- Status + image folder override -->
+        <Grid Grid.Row="1" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="txtStatus" Grid.Column="0" FontSize="12"
+                       Foreground="{DynamicResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+            <StackPanel x:Name="pnlImageFolder" Grid.Column="1" Orientation="Horizontal"
+                        Visibility="Collapsed" VerticalAlignment="Center">
+                <TextBlock Text="Image folder" FontSize="11"
+                           Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                           VerticalAlignment="Center" />
+                <Border Margin="4,0,6,0" Width="14" Height="14" CornerRadius="7"
+                        Background="{DynamicResource TextFillColorTertiaryBrush}"
+                        VerticalAlignment="Center" Cursor="Hand"
+                        ToolTipService.InitialShowDelay="0"
+                        ToolTip="Select which game version's Export - PNGs folder to use for card images.">
+                    <TextBlock Text="i" FontSize="9" FontWeight="Bold"
+                               Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <ComboBox x:Name="cmbImageVersion" MinWidth="130" FontSize="11"
+                          Padding="10,4,30,4"
+                          SelectionChanged="CmbImageVersion_SelectionChanged" />
+            </StackPanel>
+        </Grid>
 
         <!-- Case list -->
         <Border Grid.Row="2" CornerRadius="4" BorderThickness="1"
@@ -51,8 +83,37 @@
             </Grid>
         </Border>
 
+        <!-- Processing status bar with thumbnail -->
+        <Border x:Name="pnlProcessing" Grid.Row="3" Visibility="Collapsed"
+                CornerRadius="4" Padding="10,8,10,8" Margin="0,8,0,0"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Width="48" Height="58" CornerRadius="3"
+                        Margin="0,0,10,0" ClipToBounds="True">
+                    <Image x:Name="imgProcessingThumb" Stretch="UniformToFill" />
+                </Border>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <TextBlock x:Name="txtProcessingStatus" FontSize="12" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                    <TextBlock x:Name="txtProcessingFile" FontSize="10.5"
+                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                               TextTrimming="CharacterEllipsis" Margin="0,2,0,0" />
+                    <ProgressBar x:Name="pbProcessing" Height="4" Margin="0,4,0,0"
+                                 Minimum="0" Maximum="100" Value="0" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- TinyPNG usage bar -->
+        <local:TinifyUsageBarsControl x:Name="tinifyUsage" Grid.Row="4" Margin="0,6,0,0"
+                                       Visibility="Collapsed" />
+
         <!-- Info bar -->
-        <ui:InfoBar x:Name="infoBar" Grid.Row="3" IsOpen="False"
+        <ui:InfoBar x:Name="infoBar" Grid.Row="5" IsOpen="False"
                     IsClosable="True" Margin="0,8,0,0" />
     </Grid>
 </UserControl>

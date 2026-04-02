@@ -4,7 +4,7 @@ namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.19.6"; // Dynamic reward template, old dump compat, image fallback, wiki table row fix
+    public const string Version = "v0.20.0"; // Clue Collection automation, TinyPNG bar redesign, scrollbar patterns
 
     // Full version with build timestamp, e.g. "v0.18.7 (build 20260322-1200)"
     public static string Build { get; } = GetBuild();

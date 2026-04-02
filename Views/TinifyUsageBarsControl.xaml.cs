@@ -26,7 +26,7 @@ public partial class TinifyUsageBarsControl : UserControl
         var token = _cts.Token;
         bool hasKey2 = !string.IsNullOrWhiteSpace(key2);
 
-        ShowLoading(gridKey1, barKey1, txtKey1Status, txtKey1Count, "Primary:");
+        ShowLoading(gridKey1, barKey1, txtKey1Status, txtKey1Count, "TinyPNG Compression limit:");
         gridKey2.Visibility = Visibility.Collapsed;
 
         _ = Task.Run(() => CheckAndDisplayAsync(key1, key2, hasKey2, token));
@@ -65,7 +65,7 @@ public partial class TinifyUsageBarsControl : UserControl
         {
             // Actively on fallback key — show only key2
             gridKey1.Visibility = Visibility.Collapsed;
-            ShowUsage(gridKey2, barKey2, txtKey2Status, txtKey2Count, "Fallback:", count2, limit);
+            ShowUsageFormatted(gridKey2, barKey2, txtKey2Status, txtKey2Count, "secondary", count2, limit);
         }
         else if (key1Exhausted && (key2Exhausted || (hasKey2 && err2 != null)))
         {
@@ -84,14 +84,14 @@ public partial class TinifyUsageBarsControl : UserControl
     private void RenderKey1(int count, string? err, int limit)
     {
         if (err != null) ShowError(gridKey1, barKey1, txtKey1Status, txtKey1Count, $"Primary: {err}");
-        else             ShowUsage(gridKey1, barKey1, txtKey1Status, txtKey1Count, "Primary:", count, limit);
+        else             ShowUsageFormatted(gridKey1, barKey1, txtKey1Status, txtKey1Count, "primary", count, limit);
     }
 
     private void RenderKey2(int count, string? err, int limit, bool hasKey2)
     {
         if (!hasKey2) { gridKey2.Visibility = Visibility.Collapsed; return; }
         if (err != null) ShowError(gridKey2, barKey2, txtKey2Status, txtKey2Count, $"Fallback: {err}");
-        else             ShowUsage(gridKey2, barKey2, txtKey2Status, txtKey2Count, "Fallback:", count, limit);
+        else             ShowUsageFormatted(gridKey2, barKey2, txtKey2Status, txtKey2Count, "secondary", count, limit);
     }
 
     private static void ShowLoading(Grid grid, ProgressBar bar, TextBlock status, TextBlock count, string prefix)
@@ -109,6 +109,21 @@ public partial class TinifyUsageBarsControl : UserControl
         grid.Visibility = Visibility.Visible;
         status.Text = prefix;
         status.ClearValue(TextBlock.ForegroundProperty);
+        count.Text = $"{used} / {limit}";
+        bar.IsIndeterminate = false;
+        bar.Value = used;
+        bar.Foreground = TinifyChecker.CreateUsageBrush(used, limit);
+    }
+
+    private static void ShowUsageFormatted(Grid grid, ProgressBar bar, TextBlock status, TextBlock count, string keyLabel, int used, int limit)
+    {
+        grid.Visibility = Visibility.Visible;
+        status.Inlines.Clear();
+        status.Inlines.Add(new System.Windows.Documents.Run("TinyPNG Compression limit "));
+        status.Inlines.Add(new System.Windows.Documents.Run($"({keyLabel})")
+        {
+            Foreground = (System.Windows.Media.Brush)status.FindResource("TextFillColorTertiaryBrush")
+        });
         count.Text = $"{used} / {limit}";
         bar.IsIndeterminate = false;
         bar.Value = used;
