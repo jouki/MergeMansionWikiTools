@@ -197,10 +197,11 @@ public partial class AreaFlowchartsPage : UserControl
         border.SetResourceReference(Border.BorderBrushProperty, "CardStrokeColorDefaultBrush");
 
         var grid = new Grid();
-        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto }); // 0: image
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }); // 1: name
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto }); // 2: upload image
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto }); // 3: open buttons
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto }); // 4: generate
 
         // Area image thumbnail (wiki-style crop)
         var imagePath = FindAreaImagePath(area);
@@ -293,7 +294,24 @@ public partial class AreaFlowchartsPage : UserControl
         btnOpenHtml.Click += BtnOpenHtml_Click;
         openPanel.Children.Add(btnOpenHtml);
 
-        Grid.SetColumn(openPanel, 2);
+        // Upload Image button (only if image found)
+        if (imagePath != null)
+        {
+            var btnUploadImg = new Wpf.Ui.Controls.Button
+            {
+                Content = "Upload Image",
+                Appearance = ControlAppearance.Secondary,
+                Height = 32,
+                Margin = new Thickness(8, 0, 0, 0),
+                Tag = area,
+                Visibility = _main.Settings.WikiVerified ? Visibility.Visible : Visibility.Collapsed
+            };
+            btnUploadImg.Click += BtnUploadAreaImage_Click;
+            Grid.SetColumn(btnUploadImg, 2);
+            grid.Children.Add(btnUploadImg);
+        }
+
+        Grid.SetColumn(openPanel, 3);
         grid.Children.Add(openPanel);
 
         // Generate button (always split — chevron has "Save to..." + "Publish to Discord")
@@ -339,7 +357,7 @@ public partial class AreaFlowchartsPage : UserControl
 
         ApplySplitButtonStyle(btnGen, btnChevron);
 
-        Grid.SetColumn(genContainer, 3);
+        Grid.SetColumn(genContainer, 4);
         grid.Children.Add(genContainer);
 
         // Check if SVG already exists — show Open button
@@ -349,6 +367,89 @@ public partial class AreaFlowchartsPage : UserControl
 
         border.Child = grid;
         return border;
+    }
+
+    // ── Area image upload ─────────────────────────────────────────────
+
+    private async void BtnUploadAreaImage_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Wpf.Ui.Controls.Button btn || btn.Tag is not LuaArea area) return;
+
+        var imagePath = FindAreaImagePath(area);
+        if (imagePath == null)
+        {
+            ShowInfo("No area image found.", InfoBarSeverity.Warning);
+            return;
+        }
+
+        // Check Processed Images first for already-optimized version
+        var processedDir = GetProcessedImagesDir();
+        var fileName = Path.GetFileName(imagePath);
+        string sourcePath = imagePath;
+        if (processedDir != null)
+        {
+            var processedPath = Path.Combine(processedDir, fileName);
+            if (File.Exists(processedPath) && OptimizationWindow.HasOptMarker(File.ReadAllBytes(processedPath)))
+                sourcePath = processedPath;
+        }
+
+        btn.IsEnabled = false;
+        var origContent = btn.Content;
+        btn.Content = "Uploading...";
+
+        try
+        {
+            var data = await File.ReadAllBytesAsync(sourcePath);
+
+            // Optimize if not already optimized
+            if (!OptimizationWindow.HasOptMarker(data))
+            {
+                btn.Content = "Optimizing...";
+                var apiKey = _main.Settings.TinifyApiKey;
+                if (string.IsNullOrEmpty(apiKey))
+                {
+                    ShowInfo("TinyPNG API key not configured. Set it in Settings.", InfoBarSeverity.Warning);
+                    return;
+                }
+                TinifyAPI.Tinify.Key = apiKey;
+                var optimized = await (await TinifyAPI.Tinify.FromBuffer(data)).ToBuffer();
+                data = OptimizationWindow.InsertOptMarker(optimized);
+
+                // Save to Processed Images
+                if (processedDir != null)
+                {
+                    Directory.CreateDirectory(processedDir);
+                    await File.WriteAllBytesAsync(Path.Combine(processedDir, fileName), data);
+                }
+                btn.Content = "Uploading...";
+            }
+
+            // Upload to wiki
+            var wikiFilename = $"{area.DisplayName}.png";
+            using var client = await WikiMappingService.CreateAuthenticatedClientAsync(
+                _main.Settings.WikiUsername!, _main.Settings.WikiPassword!);
+            var csrfToken = await WikiMappingService.GetCsrfTokenAsync(client);
+            var result = await WikiMappingService.UploadFileAsync(
+                client, csrfToken, wikiFilename, data, "{{Permission}}", ignoreWarnings: true);
+
+            ShowInfo($"Uploaded: {wikiFilename}", InfoBarSeverity.Success);
+        }
+        catch (Exception ex)
+        {
+            ShowInfo($"Upload failed: {ex.Message}", InfoBarSeverity.Error);
+        }
+        finally
+        {
+            btn.IsEnabled = true;
+            btn.Content = origContent;
+        }
+    }
+
+    private string? GetProcessedImagesDir()
+    {
+        var basePath = _main.Settings.ImageExporterBasePath;
+        if (string.IsNullOrEmpty(basePath)) return null;
+        return Path.Combine(basePath, "Processed Images");
     }
 
     // ── Generation ───────────────────────────────────────────────────

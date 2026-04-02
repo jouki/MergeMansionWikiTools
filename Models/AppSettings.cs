@@ -4,7 +4,7 @@ namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.20.2"; // HotspotId update for Unity 6, experimental dump fixes, flowchart reload
+    public const string Version = "v0.20.3"; // Areas rename, per-area image upload, Clue Collection case detection fix
 
     // Full version with build timestamp, e.g. "v0.18.7 (build 20260322-1200)"
     public static string Build { get; } = GetBuild();

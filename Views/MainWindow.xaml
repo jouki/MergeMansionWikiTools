@@ -146,7 +146,7 @@
                                 <StackPanel Orientation="Horizontal">
                                     <ui:SymbolIcon Symbol="FlowchartCircle24" FontSize="22" Margin="0,0,12,0"
                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                                    <TextBlock Text="Area Flowcharts" FontSize="14" VerticalAlignment="Center"
+                                    <TextBlock Text="Areas" FontSize="14" VerticalAlignment="Center"
                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                                 </StackPanel>
                             </ListBoxItem>

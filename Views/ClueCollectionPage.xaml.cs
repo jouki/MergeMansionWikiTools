@@ -762,9 +762,15 @@ public partial class ClueCollectionPage : UserControl
         int sectionStart = moduleContent.IndexOf("p.clueCollections = {", StringComparison.Ordinal);
         if (sectionStart < 0) throw new Exception("p.clueCollections section not found.");
 
-        // Check if case already exists — if so, replace the entire entry block
-        string caseMarker = $"[{caseObj.Index}]";
-        int existingStart = moduleContent.IndexOf(caseMarker, sectionStart, StringComparison.Ordinal);
+        // Check if case already exists — match case-level entry by looking for [N] = {name = "CaseName"
+        // This is unique to case entries; set entries have [N] = {name = "...", reward = "..."
+        int existingStart = -1;
+        foreach (var nameVariant in new[] { caseObj.DisplayName, $"CASE {caseObj.Index}: {caseObj.DisplayName}" })
+        {
+            var casePattern = $"[{caseObj.Index}] = {{name = \"{nameVariant}\"";
+            existingStart = moduleContent.IndexOf(casePattern, sectionStart, StringComparison.OrdinalIgnoreCase);
+            if (existingStart >= 0) break;
+        }
 
         string updated;
         string editSummary;

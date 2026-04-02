@@ -13,7 +13,7 @@
         <!-- Fixed header (stays visible while scrolling) -->
         <StackPanel Grid.Row="0" MaxWidth="900" HorizontalAlignment="Stretch" Margin="24,16,24,0">
 
-            <TextBlock Text="Area Flowcharts" FontSize="28" FontWeight="SemiBold"
+            <TextBlock Text="Areas" FontSize="28" FontWeight="SemiBold"
                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                        Margin="4,0,0,20" />
 
