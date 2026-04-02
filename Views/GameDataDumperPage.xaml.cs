@@ -610,7 +610,47 @@ public partial class GameDataDumperPage : UserControl
     }
 
     private async void BtnDumpExperimental_Click(object sender, RoutedEventArgs e)
-        => await RunDumpAsync(DumperService.DumpMode.Experimental);
+    {
+        // Experimental dump goes into existing Dump/Experimental/ — use current active dump path directly
+        var basePath = _main.Settings.ImageExporterBasePath;
+        var version = _main.Settings.SelectedApkVersion;
+        if (string.IsNullOrEmpty(basePath) || string.IsNullOrEmpty(version))
+        {
+            resultInfoBar.Title = "Output directory cannot be determined";
+            resultInfoBar.Message = "Please set a workspace path and APK version in Settings.";
+            resultInfoBar.Severity = Wpf.Ui.Controls.InfoBarSeverity.Error;
+            resultInfoBar.IsOpen = true;
+            return;
+        }
+        // Find the highest existing Dump folder (Dump 4 > Dump 3 > Dump 2 > Dump), or create "Dump"
+        var versionDir = Path.Combine(basePath, version);
+        var outputPath = Path.Combine(versionDir, "Dump");
+        if (Directory.Exists(versionDir))
+        {
+            var dumpDirs = Directory.GetDirectories(versionDir, "Dump*")
+                .Where(d => System.Text.RegularExpressions.Regex.IsMatch(Path.GetFileName(d), @"^Dump( \d+)?$"))
+                .OrderByDescending(d => d.Length).ThenByDescending(d => d)
+                .ToList();
+            if (dumpDirs.Count > 0)
+                outputPath = dumpDirs[0];
+        }
+
+        var expDir = Path.Combine(outputPath, "Experimental");
+        // Only ask about overwrite if Experimental subfolder already exists
+        if (Directory.Exists(expDir))
+        {
+            var result = await new Wpf.Ui.Controls.MessageBox
+            {
+                Title = "Experimental Dump Exists",
+                Content = $"An Experimental subfolder already exists in:\n{expDir}\n\nOverwrite it?",
+                PrimaryButtonText = "Overwrite",
+                CloseButtonText = "Cancel",
+                Owner = Window.GetWindow(this)
+            }.ShowDialogAsync();
+            if (result != Wpf.Ui.Controls.MessageBoxResult.Primary) return;
+        }
+        await RunDumpAsync(DumperService.DumpMode.Experimental, outputPath);
+    }
 
     private async Task RunDumpAsync(DumperService.DumpMode mode, string? customOutputDir = null)
     {
@@ -735,11 +775,10 @@ public partial class GameDataDumperPage : UserControl
                 resultInfoBar.Message = $"Generated: {string.Join(", ", files)}";
                 resultInfoBar.Severity = Wpf.Ui.Controls.InfoBarSeverity.Success;
 
-                // Show Load Dumped Files button (only for non-experimental dumps)
+                // Show Load Dumped Files button — keep visible after experimental dump if it was already shown
                 if (mode != DumperService.DumpMode.Experimental)
                     btnUseDumpFiles.Visibility = Visibility.Visible;
-                else
-                    btnUseDumpFiles.Visibility = Visibility.Collapsed;
+                // Don't hide button after experimental dump — main dump files are still valid
 
                 Increment(s => s.DataDumps++);
 

@@ -373,6 +373,7 @@ public partial class MainWindow : FluentWindow
     {
         _areaFlowchartsPage ??= new AreaFlowchartsPage(this);
         contentArea.Content = _areaFlowchartsPage;
+        _areaFlowchartsPage.OnPageShown();
     }
 
     private void ShowClueCollectionPage()

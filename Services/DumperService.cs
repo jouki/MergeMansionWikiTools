@@ -393,12 +393,12 @@ internal static class DumperService
                             AppLogger.Info($"{T()} Experimental: {written.Count} files into {expDir}");
                             experimentalPath = expDir;
 
-                            // Copy Pets.json to main Dump/ for easier access
+                            // Always copy Pets.json to main Dump/ — used by DialogueService for Pet speaker resolution
                             var expPets = Path.Combine(expDir, "Pets.json");
                             var mainPets = Path.Combine(outputDir, "Pets.json");
-                            if (File.Exists(expPets) && !File.Exists(mainPets))
+                            if (File.Exists(expPets))
                             {
-                                File.Copy(expPets, mainPets);
+                                File.Copy(expPets, mainPets, overwrite: true);
                                 AppLogger.Info($"{T()} Pets.json copied to main dump folder");
                             }
                         }

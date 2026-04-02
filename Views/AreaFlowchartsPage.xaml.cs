@@ -21,6 +21,7 @@ public partial class AreaFlowchartsPage : UserControl
     private readonly MainWindow _main;
     private List<LuaArea>? _areas;
     private bool _areasLoaded;
+    private string? _lastLoadedPath;
     private L1CostService? _l1CostService;
     private readonly SolidColorBrush _splitSepBrush;
 
@@ -55,6 +56,22 @@ public partial class AreaFlowchartsPage : UserControl
         });
     }
 
+    /// <summary>
+    /// Called each time the user navigates to this page. Reloads areas if the path changed.
+    /// </summary>
+    public async void OnPageShown()
+    {
+        var currentPath = _main.Settings.AreasJsonPath;
+        if (currentPath != _lastLoadedPath)
+        {
+            _areasLoaded = false;
+            _areas = null;
+            areaListPanel.Children.Clear();
+            await TryLoadAreasAsync();
+        }
+        UpdateOutputPathDisplay();
+    }
+
     // ── Area loading ─────────────────────────────────────────────────
 
     private async Task TryLoadAreasAsync()
@@ -76,6 +93,7 @@ public partial class AreaFlowchartsPage : UserControl
                 .Where(a => a.DisplayName != "Story Event" && a.DisplayName != "Maddie Meets Mansion")
                 .ToList();
             _areasLoaded = true;
+            _lastLoadedPath = path;
             await DiscordFlowchartService.EnsureMappingLoadedAsync();
             loadingPanel.Visibility = Visibility.Collapsed;
             BuildAreaList();
@@ -355,8 +373,9 @@ public partial class AreaFlowchartsPage : UserControl
             await GenerateFlowchartAsync(area);
             ShowInfo($"Generated flowchart for {area.DisplayName}.", InfoBarSeverity.Success);
 
-            // Show Open button in the card
+            // Show Open button in the card + update global Open Folder visibility
             ShowOpenButtonInCard(btn);
+            UpdateOutputPathDisplay();
         }
         catch (Exception ex)
         {
@@ -404,8 +423,9 @@ public partial class AreaFlowchartsPage : UserControl
 
             ShowInfo($"Generated {count} flowcharts.\n\u2192 {outputDir}", InfoBarSeverity.Success, persistent: true);
 
-            // Refresh list to show Open buttons
+            // Refresh list to show Open buttons + update global Open Folder visibility
             BuildAreaList();
+            UpdateOutputPathDisplay();
         }
         catch (Exception ex)
         {

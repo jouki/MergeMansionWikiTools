@@ -575,8 +575,12 @@ public class AreasService
 
     private static string GetStr(JsonElement el, string prop)
     {
-        if (el.TryGetProperty(prop, out var v) && v.ValueKind == JsonValueKind.String)
+        if (!el.TryGetProperty(prop, out var v)) return "";
+        if (v.ValueKind == JsonValueKind.String)
             return v.GetString() ?? "";
+        // Accept numeric values as strings (e.g., HotspotId integers when enum can't resolve)
+        if (v.ValueKind == JsonValueKind.Number)
+            return v.GetRawText();
         return "";
     }
 
