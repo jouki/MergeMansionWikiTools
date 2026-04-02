@@ -425,7 +425,8 @@ public partial class AreaFlowchartsPage : UserControl
             }
 
             // Upload to wiki
-            var sanitized = area.DisplayName.Replace(" ", "").Replace("'", "");
+            // Resolve wiki filename via Module:Utils FormatFileName (suppressLevel + skipExtension)
+            var sanitized = await ResolveWikiFilenamePart(area.DisplayName);
             var wikiFilename = $"Area_Info_Popup_{sanitized}.png";
             using var client = await WikiMappingService.CreateAuthenticatedClientAsync(
                 _main.Settings.WikiUsername!, _main.Settings.WikiPassword!);
@@ -444,6 +445,34 @@ public partial class AreaFlowchartsPage : UserControl
             btn.IsEnabled = true;
             btn.Content = origContent;
         }
+    }
+
+    /// <summary>
+    /// Calls wiki Module:Utils FormatFileName to get the sanitized name part
+    /// (spaces removed, special chars handled, capitalize after space, no level/extension).
+    /// </summary>
+    private static async Task<string> ResolveWikiFilenamePart(string displayName)
+    {
+        try
+        {
+            using var client = new System.Net.Http.HttpClient();
+            var url = "https://merge-mansion.fandom.com/api.php";
+            var content = new System.Net.Http.FormUrlEncodedContent(new Dictionary<string, string>
+            {
+                ["action"] = "expandtemplates",
+                ["text"] = $"{{{{#invoke:Utils|FormatFileName|{displayName}||true|true}}}}",
+                ["prop"] = "wikitext",
+                ["format"] = "json",
+            });
+            var resp = await client.PostAsync(url, content);
+            var json = System.Text.Json.JsonDocument.Parse(await resp.Content.ReadAsStringAsync());
+            var result = json.RootElement.GetProperty("expandtemplates").GetProperty("wikitext").GetString();
+            if (!string.IsNullOrEmpty(result) && !result.Contains("error"))
+                return result;
+        }
+        catch { }
+        // Fallback: simple space+apostrophe removal
+        return displayName.Replace(" ", "").Replace("'", "");
     }
 
     private string? GetProcessedImagesDir()
