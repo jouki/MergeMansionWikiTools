@@ -813,36 +813,35 @@ public static class MysteryWikiService
 	private static bool CompareRewardsWithTemplate(MysteryEvent mystery, string templateContent)
 	{
 		templateContent = Regex.Replace(templateContent, "<!--.*?-->", "", RegexOptions.Singleline);
-		List<List<string>> list = ParseTemplateRows(templateContent);
-		List<MysteryRewardLevel> list2 = ((mystery.FreeTier.Count > 0) ? mystery.FreeTier : ((mystery.SilverTier.Count > 0) ? mystery.SilverTier : mystery.GoldTier));
-		if (list2.Count == 0 || list.Count == 0)
-			return false;
 		int expectedCols = mystery.IsV2 ? 5 : 4;
-		List<List<string>> list3 = list.Where((List<string> r) => r.Count >= expectedCols && !r[0].Contains("PremiumLevel") && r[0].Trim() != "0").ToList();
-		if (list3.Count != list2.Count - 1)
+
+		// Parse ALL data rows from wiki template (regular levels + bonus/PremiumLevel)
+		List<List<string>> wikiRows = ParseTemplateRows(templateContent)
+			.Where(r => r.Count >= 2).ToList(); // at least level + 1 column
+		if (wikiRows.Count == 0)
 			return false;
-		for (int num = 0; num < list3.Count; num++)
-		{
-			Match match = Regex.Match(list3[num][1], "\\{\\{Pass XP\\}\\}\\s*(\\d+)");
-			if (!match.Success)
-				return false;
-			if (int.Parse(match.Groups[1].Value) != list2[num + 1].XpRequired)
-				return false;
-		}
-		string content = GenerateRewardTemplate(mystery, null);
-		List<List<string>> source = ParseTemplateRows(content);
-		List<List<string>> list4 = source.Where((List<string> r) => r.Count >= expectedCols && !r[0].Contains("PremiumLevel") && r[0].Trim() != "0").ToList();
-		if (list4.Count != list3.Count)
+
+		// Generate our template and parse its rows
+		string generated = GenerateRewardTemplate(mystery, null);
+		List<List<string>> genRows = ParseTemplateRows(generated)
+			.Where(r => r.Count >= 2).ToList();
+
+		// Row count must match
+		if (wikiRows.Count != genRows.Count)
 			return false;
-		for (int num2 = 0; num2 < list3.Count; num2++)
+
+		// Cell-by-cell comparison of ALL rows (regular + bonus)
+		for (int i = 0; i < wikiRows.Count; i++)
 		{
-			for (int num3 = 1; num3 < expectedCols; num3++)
+			int cols = Math.Min(wikiRows[i].Count, genRows[i].Count);
+			for (int j = 0; j < cols; j++)
 			{
-				if (num3 >= list3[num2].Count || num3 >= list4[num2].Count)
-					return false;
-				if (NormalizeCell(list3[num2][num3]) != NormalizeCell(list4[num2][num3]))
+				if (NormalizeCell(wikiRows[i][j]) != NormalizeCell(genRows[i][j]))
 					return false;
 			}
+			// If one row has more columns than the other → mismatch
+			if (wikiRows[i].Count != genRows[i].Count)
+				return false;
 		}
 		return true;
 	}
@@ -938,7 +937,8 @@ public static class MysteryWikiService
 			if (isV2)
 			{
 				sb.AppendLine($"| {FormatPerkLevel0(mystery.Track1PerkData)}");
-				sb.AppendLine($"| {FormatPerkLevel0(mystery.Track2PerkData)}");
+				// Track2 data includes inherited Track1 perks — subtract to show only Gold-specific contribution
+				sb.AppendLine($"| {FormatPerkLevel0(SubtractPerks(mystery.Track2PerkData, mystery.Track1PerkData))}");
 			}
 			else
 			{
@@ -1012,6 +1012,22 @@ public static class MysteryWikiService
 		return sb.ToString();
 	}
 
+	/// <summary>
+	/// Returns the difference between two perk sets (total - inherited = tier-specific).
+	/// Track2 data includes inherited Track1 perks — subtracting gives the Gold-only contribution.
+	/// </summary>
+	private static MysteryPerkData? SubtractPerks(MysteryPerkData? total, MysteryPerkData? inherited)
+	{
+		if (total == null) return null;
+		if (inherited == null) return total;
+		return new MysteryPerkData
+		{
+			FreeDailyGems = total.FreeDailyGems - inherited.FreeDailyGems,
+			ExtraInventorySlots = total.ExtraInventorySlots - inherited.ExtraInventorySlots,
+			EventXpBonus = total.EventXpBonus - inherited.EventXpBonus,
+		};
+	}
+
 	private static string FormatPerkLevel0(MysteryPerkData? perkData)
 	{
 		if (perkData == null)
@@ -1023,7 +1039,7 @@ public static class MysteryWikiService
 		if (perkData.ExtraInventorySlots > 0)
 			parts.Add($"{perkData.ExtraInventorySlots} {{{{#Invoke:Utils|Icon|name=InventorySlot|suppressLevel=true|size=24}}}} [[Inventory]] slots");
 		if (perkData.EventXpBonus > 0)
-			parts.Add($"{{{{Pass XP}}}} {perkData.EventXpBonus} bonus");
+			parts.Add($"{perkData.EventXpBonus} Event Points");
 		return parts.Count > 0 ? string.Join(" <br> ", parts) : "{{Dash}}";
 	}
 
@@ -1066,6 +1082,13 @@ public static class MysteryWikiService
 	private static string FormatItemReward(MysteryReward reward)
 	{
 		string text = reward.ItemKey ?? "";
+		// Bonus chests: SP_{event}_MysteryPassChest{A-E}_01 → Challenge Chest 1-5
+		var chestMatch = System.Text.RegularExpressions.Regex.Match(text, @"MysteryPassChest([A-E])_?\d+$");
+		if (chestMatch.Success)
+		{
+			int chestLevel = chestMatch.Groups[1].Value[0] - 'A' + 1;
+			return $"{{{{Item/Group|Challenge Chest|{chestLevel}|iconLevel=1}}}}";
+		}
 		if (text.StartsWith("TimeSkipBoosterSingle") && reward.DurationMs.HasValue)
 		{
 			string text2 = FormatDuration(reward.DurationMs.Value);
@@ -1916,7 +1939,7 @@ public static class MysteryWikiService
 		}))).Content.ReadAsStringAsync());
 		if (editDoc.RootElement.TryGetProperty("error", out var error))
 		{
-			throw new Exception("Wiki edit failed: " + error.GetProperty("info").GetString());
+			throw WikiMappingService.WikiEditException(error.GetProperty("info").GetString());
 		}
 		if (editDoc.RootElement.TryGetProperty("edit", out var edit))
 		{
@@ -2947,11 +2970,11 @@ public static class MysteryWikiService
 			stringBuilder.AppendLine("<tabber>");
 			stringBuilder.AppendLine("|-| Event Intro =");
 			stringBuilder.AppendLine();
-			stringBuilder.AppendLine("|-| Getting Event Item L4 =");
-			stringBuilder.AppendLine();
 			if (flag)
 			{
 				string petName = !string.IsNullOrEmpty(mystery.PetName) ? FormatPetDisplayName(mystery.PetName) : "Pet";
+				stringBuilder.AppendLine($"|-| Getting {petName} =");
+				stringBuilder.AppendLine();
 				stringBuilder.AppendLine($"|-| Getting {petName} =");
 				stringBuilder.AppendLine();
 				stringBuilder.AppendLine("|-| Decoration Level 1 =");
@@ -2961,6 +2984,8 @@ public static class MysteryWikiService
 			}
 			else
 			{
+				stringBuilder.AppendLine("|-| Getting Event Item L4 =");
+				stringBuilder.AppendLine();
 				for (int i = 1; i <= 5; i++)
 				{
 					stringBuilder.AppendLine($"|-| Decoration Level {i} =");

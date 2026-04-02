@@ -79,6 +79,9 @@ public partial class AboutPage : UserControl
     private void DumperRepo_Click(object sender, MouseButtonEventArgs e) =>
         Process.Start(new ProcessStartInfo("https://github.com/mm-utils/merge-mansion-dumper") { UseShellExecute = true });
 
+    private void KofiCard_Click(object sender, MouseButtonEventArgs e) =>
+        Process.Start(new ProcessStartInfo("https://ko-fi.com/jouki") { UseShellExecute = true });
+
     private static int? TryCountAreas(string path)
     {
         try

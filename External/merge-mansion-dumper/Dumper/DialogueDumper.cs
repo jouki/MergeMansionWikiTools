@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameLogic;
 using GameLogic.Config;
 using GameLogic.Story;
 using merge_mansion_dumper.Dumper.Base;
@@ -83,28 +84,65 @@ namespace merge_mansion_dumper.Dumper
                 }
             }
 
+            // Export all Dialog_Title_ character name mappings from localization
+            var characterNames = new Dictionary<string, string>();
+            foreach (var enumVal in Enum.GetValues(typeof(DialogCharacterType)))
+            {
+                var name = enumVal.ToString();
+                if (name == "NoChange" || name == "None" || name == "Empty") continue;
+                var displayName = Localize($"Dialog_Title_{name}");
+                if (!string.IsNullOrEmpty(displayName))
+                    characterNames[name] = displayName;
+            }
+
             return new Dictionary<string, object>
             {
-                ["Dialogues"] = allDialogues.ToArray()
+                ["Dialogues"] = allDialogues.ToArray(),
+                ["CharacterNames"] = characterNames
             };
         }
 
         private Dictionary<string, object> SerializeDialogItem(DialogItemInfo d)
         {
-            return new Dictionary<string, object>
+            var leftName = d.LeftCharacter.ToString();
+            var rightName = d.RightCharacter.ToString();
+
+            var dict = new Dictionary<string, object>
             {
                 ["DialogItemId"] = d.DialogItemId?.ToString(),
                 ["LocalizationId"] = d.LocalizationId,
                 ["Text"] = Localize(d.LocalizationId),
                 ["DialogMode"] = d.DialogMode.ToString(),
-                ["LeftCharacter"] = d.LeftCharacter.ToString(),
+                ["LeftCharacter"] = leftName,
                 ["LeftCharacterState"] = d.LeftCharacterState.ToString(),
                 ["LeftSpeaks"] = d.LeftSpeaks,
-                ["RightCharacter"] = d.RightCharacter.ToString(),
+                ["RightCharacter"] = rightName,
                 ["RightCharacterState"] = d.RightCharacterState.ToString(),
                 ["RightSpeaks"] = d.RightSpeaks,
                 ["WaitConfirmation"] = d.WaitConfirmation,
             };
+
+            // Resolve display names from localization (Dialog_Title_{CharacterType})
+            var leftDisplay = LocalizeCharacterName(leftName);
+            if (leftDisplay != null)
+                dict["LeftCharacterDisplayName"] = leftDisplay;
+            var rightDisplay = LocalizeCharacterName(rightName);
+            if (rightDisplay != null)
+                dict["RightCharacterDisplayName"] = rightDisplay;
+
+            if (!string.IsNullOrEmpty(d.LeftCharacterConfigId))
+                dict["LeftCharacterConfigId"] = d.LeftCharacterConfigId;
+            if (!string.IsNullOrEmpty(d.RightCharacterConfigId))
+                dict["RightCharacterConfigId"] = d.RightCharacterConfigId;
+
+            return dict;
+        }
+
+        private static string LocalizeCharacterName(string characterType)
+        {
+            if (string.IsNullOrEmpty(characterType) || characterType == "NoChange" || characterType == "None" || characterType == "Empty")
+                return null;
+            return Localize($"Dialog_Title_{characterType}");
         }
 
         private static string Localize(string locId)

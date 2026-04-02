@@ -56,6 +56,7 @@ public partial class MysteryGeneratorDialog : FluentWindow
 	// Reward template comparison dropdown
 	private Dictionary<string, string>? _rewardTemplatesCache;
 	private bool _suppressCompareSelection;
+	private string? _selectedCompareTemplateTitle; // full page title of template selected in Compare dropdown
 
 	/// <summary>True when MatchingVariant is a mystery-named template (e.g. "Secrets of Serenity"),
 	/// not a numeric index ("6") or Pet-prefixed. Named templates get updated instead of creating new.</summary>
@@ -1567,6 +1568,21 @@ public partial class MysteryGeneratorDialog : FluentWindow
 			warningBar.IsOpen = true;
 			return;
 		}
+
+		// Confirmation dialog when updating an existing template selected in Compare dropdown
+		if (_currentMode == MysteryGeneratorMode.Rewards && !string.IsNullOrEmpty(_selectedCompareTemplateTitle))
+		{
+			var shortName = pageTitle.Replace("Template:Mystery Pass/", "");
+			var result = await new Wpf.Ui.Controls.MessageBox
+			{
+				Title = "Update existing template?",
+				Content = $"You are about to overwrite the existing template \"{shortName}\".\n\nThis will replace its current content with the generated rewards. Are you sure?",
+				PrimaryButtonText = "Update",
+				CloseButtonText = "Cancel",
+			}.ShowDialogAsync();
+			if (result != Wpf.Ui.Controls.MessageBoxResult.Primary) return;
+		}
+
 		btnPublish.IsEnabled = false;
 		warningBar.Message = "Publishing to " + pageTitle + "...";
 		warningBar.Severity = InfoBarSeverity.Informational;
@@ -1574,9 +1590,11 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		bool published = false;
 		try
 		{
+			bool isRewardUpdate = _currentMode == MysteryGeneratorMode.Rewards &&
+				(!string.IsNullOrEmpty(_selectedCompareTemplateTitle) || IsNamedRewardVariant);
 			string summary = _currentMode switch
 			{
-				MysteryGeneratorMode.Rewards => IsNamedRewardVariant ? "Update reward template (via MergeMansionWikiTools)" : "Create reward template (via MergeMansionWikiTools)",
+				MysteryGeneratorMode.Rewards => isRewardUpdate ? "Update reward template (via MergeMansionWikiTools)" : "Create reward template (via MergeMansionWikiTools)",
 				MysteryGeneratorMode.EventPage => "Create/update mystery page (via MergeMansionWikiTools)",
 				MysteryGeneratorMode.EventItemPage => "Create/update event item page (via MergeMansionWikiTools)",
 				_ => "Edit via MergeMansionWikiTools",
@@ -1622,6 +1640,23 @@ public partial class MysteryGeneratorDialog : FluentWindow
 					string after = pageTitle[rewardsPrefix.Length..].TrimStart('/');
 					_mystery.WikiStatus.MatchingVariant = string.IsNullOrEmpty(after) ? "" : after;
 				}
+				// Re-check Event Page — the matching variant may have changed,
+				// which changes the generated Event Page content (reward template reference).
+				// If the only difference was the template number, Event Page now matches.
+				try
+				{
+					var effectiveVariant = GetEffectiveRewardVariant();
+					var (wikiContent, generated, _, _) = await MysteryWikiService.ComputeDiffAsync(
+						_mystery, MysteryDiffScope.EventPage, _main.DataService, _main.WikiMapping, _mapping, _dialogueService, effectiveVariant);
+					if (wikiContent != null)
+					{
+						bool pageMatches = MysteryWikiService.ComputeLineDiffs(wikiContent, generated).All(d => d.Type == DiffLineType.Match);
+						_mystery.WikiStatus.EventPageContentMatches = pageMatches;
+					}
+				}
+				catch { /* non-critical — status will update on next Check Wiki Status */ }
+				// Invalidate template cache so dropdown picks up the new/updated template
+				_rewardTemplatesCache = null;
 				break;
 			}
 			case MysteryGeneratorMode.EventItemPage:
@@ -1663,8 +1698,11 @@ public partial class MysteryGeneratorDialog : FluentWindow
 				warningBar.Severity = InfoBarSeverity.Success;
 				warningBar.IsOpen = true;
 			}
-			// Re-compare with fresh wiki data after publish
-			await LoadDiffAsync();
+			// Refresh dropdown with new template list + re-compare with fresh wiki data
+			if (_currentMode == MysteryGeneratorMode.Rewards)
+				PopulateCompareDropdownAsync(); // re-fetches templates, auto-selects matching variant
+			else
+				await LoadDiffAsync();
 		}
 		catch (Exception ex)
 		{
@@ -1691,6 +1729,9 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		{
 		case MysteryGeneratorMode.Rewards:
 		{
+			// User selected a specific template in Compare dropdown → update that template
+			if (!string.IsNullOrEmpty(_selectedCompareTemplateTitle))
+				return _selectedCompareTemplateTitle;
 			// Named template (e.g. "Rewards/Secrets of Serenity") → update existing
 			if (IsNamedRewardVariant)
 				return "Template:Mystery Pass/Rewards/" + _mystery.WikiStatus.MatchingVariant;
@@ -1753,11 +1794,17 @@ public partial class MysteryGeneratorDialog : FluentWindow
 			});
 		}
 		_suppressCompareSelection = false;
-		// Auto-select confirmed variant if available (triggers SelectionChanged → diff view)
+		// Auto-select: confirmed variant > matching variant > none
+		string? autoSelectVariant = null;
 		string? confirmed = _mystery.WikiStatus.ManualConfirm.RewardsConfirmed;
 		if (confirmed != null && confirmed != "true")
+			autoSelectVariant = confirmed;
+		else if (!string.IsNullOrEmpty(_mystery.WikiStatus.MatchingVariant))
+			autoSelectVariant = _mystery.WikiStatus.MatchingVariant;
+
+		if (autoSelectVariant != null)
 		{
-			string targetDisplay = "Rewards/" + confirmed;
+			string targetDisplay = "Rewards/" + autoSelectVariant;
 			for (int i = 1; i < cmbCompareTemplate.Items.Count; i++)
 			{
 				if (cmbCompareTemplate.Items[i] is ComboBoxItem item
@@ -1778,6 +1825,7 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		if (cmbCompareTemplate.SelectedIndex <= 0 || cmbCompareTemplate.SelectedItem is not ComboBoxItem selected)
 		{
 			// "(no comparison)" selected — revert to plain output
+			_selectedCompareTemplateTitle = null;
 			pnlDiff.Visibility = Visibility.Collapsed;
 			ShowPlainOutput();
 			btnPublish.Content = IsNamedRewardVariant ? "Update Reward Template" : "Create New Reward Template";
@@ -1786,6 +1834,7 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		}
 
 		string templateTitle = (string)selected.Tag;
+		_selectedCompareTemplateTitle = templateTitle;
 		var ct = _diffCts?.Token ?? CancellationToken.None;
 		var modeAtStart = _currentMode;
 
@@ -1855,11 +1904,10 @@ public partial class MysteryGeneratorDialog : FluentWindow
 				warningBar.Message = string.Join("  ", parts);
 				warningBar.Severity = InfoBarSeverity.Informational;
 				warningBar.IsOpen = true;
-				// Only show publish if no other template already matches
-				if (_mystery.WikiStatus.RewardTemplateMatches == true)
-					btnPublish.Visibility = Visibility.Collapsed;
-				else
-					btnPublish.Content = IsNamedRewardVariant ? "Update Reward Template" : "Create New Reward Template";
+				// When comparing with a specific template → always offer to update it
+				var shortName = templateTitle.Replace("Template:Mystery Pass/", "");
+				btnPublish.Content = $"Update {shortName}";
+				btnPublish.Visibility = _main.Settings.WikiVerified ? Visibility.Visible : Visibility.Collapsed;
 			}
 			UpdateConfirmButton();
 		}

@@ -13,6 +13,7 @@ namespace MergeMansionWikiTools.Services;
 public class DialogueService
 {
     private Dictionary<string, List<RawDialogueEntry>>? _dialoguesByGroup;
+    private Dictionary<string, string>? _characterNames; // from CharacterNames in dialogues.json (localized Dialog_Title_)
     private string? _loadedPath;
     private string? _currentPetDisplayName;
 
@@ -52,6 +53,10 @@ public class DialogueService
                 Text = GetString(entry, "Text"),
                 LeftCharacter = GetString(entry, "LeftCharacter"),
                 RightCharacter = GetString(entry, "RightCharacter"),
+                LeftCharacterConfigId = GetString(entry, "LeftCharacterConfigId"),
+                RightCharacterConfigId = GetString(entry, "RightCharacterConfigId"),
+                LeftCharacterDisplayName = GetString(entry, "LeftCharacterDisplayName"),
+                RightCharacterDisplayName = GetString(entry, "RightCharacterDisplayName"),
                 LeftSpeaks = GetBool(entry, "LeftSpeaks"),
                 RightSpeaks = GetBool(entry, "RightSpeaks"),
             };
@@ -62,6 +67,19 @@ public class DialogueService
                 _dialoguesByGroup[groupKey] = list;
             }
             list.Add(raw);
+        }
+
+        // Load CharacterNames mapping (Dialog_Title_ localization, exported by dumper)
+        _characterNames = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        if (root.TryGetProperty("CharacterNames", out var charNames) && charNames.ValueKind == JsonValueKind.Object)
+        {
+            foreach (var prop in charNames.EnumerateObject())
+            {
+                var displayName = prop.Value.GetString();
+                if (!string.IsNullOrEmpty(displayName))
+                    _characterNames[prop.Name] = displayName;
+            }
+            AppLogger.Info($"DialogueService: loaded {_characterNames.Count} character name mappings");
         }
 
         _loadedPath = filePath;
@@ -186,7 +204,7 @@ public class DialogueService
     private void BuildPetGroups(string prefix, string petName, List<DialogueGroup> groups)
     {
         TryAddGroupFuzzy(groups, prefix, "Intro", "Event Intro");
-        TryAddGroupFuzzy(groups, prefix, "LastCollectibleItemDiscovered", "Getting Event Item L4");
+        TryAddGroupFuzzy(groups, prefix, "LastCollectibleItemDiscovered", $"Getting {petName}");
 
         // TA mapping depends on how many TAs exist:
         // 3 TAs (newer pets): TA1=Getting Pet, TA2=Deco1, TA3=Deco2
@@ -246,15 +264,19 @@ public class DialogueService
     /// </summary>
     private void TryAddGroupFuzzy(List<DialogueGroup> groups, string prefix, string suffix, string tabName)
     {
-        // Try exact key first
+        // Try exact key first — but fall through to _Dialogue variant if all entries have null Text
         var key = $"{prefix}_{suffix}";
         if (_dialoguesByGroup != null && _dialoguesByGroup.ContainsKey(key))
         {
-            TryAddGroup(groups, key, tabName);
-            return;
+            var lines = BuildDialogueLines(_dialoguesByGroup[key]);
+            if (lines.Count > 0)
+            {
+                groups.Add(new DialogueGroup { TabName = tabName, Lines = lines });
+                return;
+            }
         }
 
-        // Try with _Dialogue suffix
+        // Try with _Dialogue suffix (StoryElements entries — may have resolved text when global ones don't)
         var keyWithDialogue = $"{prefix}_{suffix}_Dialogue";
         if (_dialoguesByGroup != null && _dialoguesByGroup.ContainsKey(keyWithDialogue))
         {
@@ -266,6 +288,83 @@ public class DialogueService
         AddEmptyGroup(groups, tabName);
     }
 
+    private List<DialogueLine> BuildDialogueLines(List<RawDialogueEntry> entries)
+    {
+        var lines = new List<DialogueLine>();
+        foreach (var e in entries)
+        {
+            if (string.IsNullOrWhiteSpace(e.Text)) continue;
+
+            var speaker = e.LeftSpeaks ? e.LeftCharacter : e.RightCharacter;
+            if (string.IsNullOrEmpty(speaker) || speaker == "NoChange") continue;
+
+            speaker = ResolveSpeaker(e, speaker);
+
+            lines.Add(new DialogueLine { Speaker = speaker, Text = e.Text });
+        }
+        return lines;
+    }
+
+    /// <summary>
+    /// Resolves a speaker's display name using all available data sources.
+    /// Priority: 1) Per-entry DisplayName from dump (localized Dialog_Title_),
+    /// 2) CharacterNames table from dump (Dialog_Title_ for all enum values),
+    /// 3) For Pet: CharacterConfigId → Pets.json display name,
+    /// 4) For Pet: _currentPetDisplayName (from mystery.PetName),
+    /// 5) CharacterDisplayNames fallback (for characters missing from localization entirely).
+    /// </summary>
+    private string ResolveSpeaker(RawDialogueEntry entry, string characterType)
+    {
+        // 1. Per-entry localized display name (resolved at dump time from Dialog_Title_{type})
+        //    Skip if value equals the enum name (localization just echoes it — e.g. Dog→"Dog", not useful)
+        var displayName = entry.LeftSpeaks ? entry.LeftCharacterDisplayName : entry.RightCharacterDisplayName;
+        if (!string.IsNullOrEmpty(displayName)
+            && !string.Equals(displayName, characterType, StringComparison.OrdinalIgnoreCase))
+            return displayName;
+
+        // 2. CharacterNames table from dialogues.json (covers all known Dialog_Title_ entries)
+        //    Skip if value equals the enum name (no useful mapping — e.g. Dog→"Dog")
+        if (_characterNames != null && _characterNames.TryGetValue(characterType, out var charName)
+            && !string.Equals(charName, characterType, StringComparison.OrdinalIgnoreCase))
+            return charName;
+
+        // 2. For Pet character: resolve via CharacterConfigId → Pets.json
+        if (characterType == "Pet")
+        {
+            var configId = entry.LeftSpeaks ? entry.LeftCharacterConfigId : entry.RightCharacterConfigId;
+            if (!string.IsNullOrEmpty(configId))
+                return MysteryWikiService.FormatPetDisplayName(configId);
+
+            // Search sibling group for ConfigId (parallel non-_Dialogue / _Dialogue entries)
+            if (_dialoguesByGroup != null)
+            {
+                var groupKey = ExtractGroupKey(entry.DialogItemId);
+                var siblingKey = groupKey.EndsWith("_Dialogue", StringComparison.OrdinalIgnoreCase)
+                    ? groupKey[..^"_Dialogue".Length]
+                    : groupKey + "_Dialogue";
+
+                if (_dialoguesByGroup.TryGetValue(siblingKey, out var siblingEntries))
+                {
+                    foreach (var sib in siblingEntries)
+                    {
+                        var sibSpeaker = sib.LeftSpeaks ? sib.LeftCharacter : sib.RightCharacter;
+                        if (sibSpeaker != "Pet") continue;
+                        var sibConfigId = sib.LeftSpeaks ? sib.LeftCharacterConfigId : sib.RightCharacterConfigId;
+                        if (!string.IsNullOrEmpty(sibConfigId))
+                            return MysteryWikiService.FormatPetDisplayName(sibConfigId);
+                    }
+                }
+            }
+
+            // Pet mystery fallback (_currentPetDisplayName from mystery.PetName)
+            if (!string.IsNullOrEmpty(_currentPetDisplayName))
+                return _currentPetDisplayName;
+        }
+
+        // 3. Hardcoded fallback (for old dumps without DisplayName fields)
+        return FormatCharacterName(characterType);
+    }
+
     private void TryAddGroup(List<DialogueGroup> groups, string groupKey, string tabName)
     {
         if (_dialoguesByGroup == null) return;
@@ -275,25 +374,7 @@ public class DialogueService
             return;
         }
 
-        var lines = new List<DialogueLine>();
-        foreach (var e in entries)
-        {
-            // Skip empty/NoChange state markers
-            if (string.IsNullOrWhiteSpace(e.Text)) continue;
-
-            var speaker = e.LeftSpeaks ? e.LeftCharacter : e.RightCharacter;
-            if (string.IsNullOrEmpty(speaker) || speaker == "NoChange") continue;
-
-            // Replace "Pet" with actual pet display name (from Pets.json)
-            if (speaker == "Pet" && !string.IsNullOrEmpty(_currentPetDisplayName))
-                speaker = _currentPetDisplayName;
-            else
-                speaker = FormatCharacterName(speaker);
-
-            lines.Add(new DialogueLine { Speaker = speaker, Text = e.Text });
-        }
-
-        groups.Add(new DialogueGroup { TabName = tabName, Lines = lines });
+        groups.Add(new DialogueGroup { TabName = tabName, Lines = BuildDialogueLines(entries) });
     }
 
     private static void AddEmptyGroup(List<DialogueGroup> groups, string tabName)
@@ -359,21 +440,26 @@ public class DialogueService
     /// Maps game internal character names to wiki display names.
     /// Most characters use their internal name, but some differ.
     /// </summary>
+    /// <summary>
+    /// Fallback mapping for characters missing from Dialog_Title_ localization.
+    /// Priority 1 is always the localized DisplayName from dump.
+    /// This dictionary covers characters where the language file is incomplete.
+    /// </summary>
     private static readonly Dictionary<string, string> CharacterDisplayNames = new(StringComparer.OrdinalIgnoreCase)
     {
         ["Grandma"] = "Ursula",
         ["Voyance"] = "Lady Voyance",
         ["AntiqueDealer"] = "Julius",
-        ["Malzar"] = "Malzar",
         ["SgtPepper"] = "Sgt. Pepper",
         ["MysteryMachine"] = "Mystery Machine",
         ["PrisonerBluetooth"] = "Bluetooth",
         ["PrisonerGrace"] = "Grace",
         ["PrisonerIzzy"] = "Izzy",
-        ["Pet"] = "Pet",
-        ["Phone"] = "Phone",
+        ["Dog"] = "Rufus",
+        ["Ringleader"] = "Fiona DuVal",
         ["Ghost"] = "Ghost",
-        ["Dog"] = "Dog",
+        ["Phone"] = "Phone",
+        ["Pet"] = "Pet",
         ["Empty"] = "",
     };
 
@@ -425,6 +511,10 @@ public class DialogueService
         public string Text { get; set; } = "";
         public string LeftCharacter { get; set; } = "";
         public string RightCharacter { get; set; } = "";
+        public string LeftCharacterConfigId { get; set; } = "";
+        public string RightCharacterConfigId { get; set; } = "";
+        public string LeftCharacterDisplayName { get; set; } = "";
+        public string RightCharacterDisplayName { get; set; } = "";
         public bool LeftSpeaks { get; set; }
         public bool RightSpeaks { get; set; }
     }

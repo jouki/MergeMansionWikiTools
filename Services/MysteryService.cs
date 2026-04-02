@@ -539,6 +539,7 @@ public class MysteryService
                     result.ExtraInventorySlots += GetInt(perk.Value, "SlotCount");
                     break;
                 case "FreeDailyShopItem":
+                case "FreeDailyCurrency":
                     result.FreeDailyGems += GetInt(perk.Value, "Gems");
                     break;
                 case "EventXp":

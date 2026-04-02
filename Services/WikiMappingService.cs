@@ -29,6 +29,32 @@ public static class WikiMappingService
     private static readonly string CachePath = Path.Combine(
         AppDomain.CurrentDomain.BaseDirectory, "wiki_mapping_cache.json");
 
+    /// <summary>
+    /// Throws a user-friendly exception for wiki API errors.
+    /// Recognizes known server-side errors and provides actionable messages.
+    /// </summary>
+    internal static Exception WikiEditException(string info)
+    {
+        if (info.Contains("DBConnectionError", StringComparison.OrdinalIgnoreCase)
+            || info.Contains("DBQueryError", StringComparison.OrdinalIgnoreCase))
+            return new Exception("Fandom wiki server is temporarily unavailable (database error). Please try again in a few minutes.");
+
+        if (info.Contains("ratelimited", StringComparison.OrdinalIgnoreCase))
+            return new Exception("Wiki rate limit reached. Please wait a moment and try again.");
+
+        if (info.Contains("readonly", StringComparison.OrdinalIgnoreCase))
+            return new Exception("Fandom wiki is currently in read-only mode (maintenance). Please try again later.");
+
+        if (info.Contains("badtoken", StringComparison.OrdinalIgnoreCase))
+            return new Exception("Wiki session expired. Please restart the app and try again.");
+
+        if (info.Contains("protectedpage", StringComparison.OrdinalIgnoreCase)
+            || info.Contains("cascadeprotected", StringComparison.OrdinalIgnoreCase))
+            return new Exception("This wiki page is protected and cannot be edited by the bot account.");
+
+        return new Exception($"Wiki edit failed: {info}");
+    }
+
     private static readonly JsonSerializerOptions JsonOpts = new() { WriteIndented = true };
 
     private static readonly HttpClient Http = CreateHttpClient();
@@ -400,7 +426,7 @@ public static class WikiMappingService
         var editDoc = JsonDocument.Parse(await editResp.Content.ReadAsStringAsync());
 
         if (editDoc.RootElement.TryGetProperty("error", out var error))
-            throw new Exception($"Wiki edit failed: {error.GetProperty("info").GetString()}");
+            throw WikiEditException(error.GetProperty("info").GetString());
     }
 
     /// <summary>
@@ -613,7 +639,7 @@ public static class WikiMappingService
         var editDoc = JsonDocument.Parse(await editResp.Content.ReadAsStringAsync());
 
         if (editDoc.RootElement.TryGetProperty("error", out var error))
-            throw new Exception($"Wiki edit failed: {error.GetProperty("info").GetString()}");
+            throw WikiEditException(error.GetProperty("info").GetString());
     }
 
     /// <summary>
@@ -715,7 +741,7 @@ public static class WikiMappingService
         var editDoc = JsonDocument.Parse(await editResp.Content.ReadAsStringAsync());
 
         if (editDoc.RootElement.TryGetProperty("error", out var err))
-            throw new Exception($"Wiki edit failed: {err.GetProperty("info").GetString()}");
+            throw WikiEditException(err.GetProperty("info").GetString());
     }
 
     // ── Item Move & Level Operations ──────────────────────────────────
@@ -771,7 +797,7 @@ public static class WikiMappingService
         var editDoc = JsonDocument.Parse(await editResp.Content.ReadAsStringAsync());
 
         if (editDoc.RootElement.TryGetProperty("error", out var error))
-            throw new Exception($"Wiki edit failed: {error.GetProperty("info").GetString()}");
+            throw WikiEditException(error.GetProperty("info").GetString());
     }
 
     /// <summary>
@@ -819,7 +845,7 @@ public static class WikiMappingService
         var editDoc = JsonDocument.Parse(await editResp.Content.ReadAsStringAsync());
 
         if (editDoc.RootElement.TryGetProperty("error", out var error))
-            throw new Exception($"Wiki edit failed: {error.GetProperty("info").GetString()}");
+            throw WikiEditException(error.GetProperty("info").GetString());
     }
 
     /// <summary>
@@ -924,7 +950,7 @@ public static class WikiMappingService
         var editDoc = JsonDocument.Parse(await editResp.Content.ReadAsStringAsync());
 
         if (editDoc.RootElement.TryGetProperty("error", out var error))
-            throw new Exception($"Wiki edit failed: {error.GetProperty("info").GetString()}");
+            throw WikiEditException(error.GetProperty("info").GetString());
     }
 
     /// <summary>
