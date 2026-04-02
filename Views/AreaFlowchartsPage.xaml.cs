@@ -425,7 +425,8 @@ public partial class AreaFlowchartsPage : UserControl
             }
 
             // Upload to wiki
-            var wikiFilename = $"Area_Info_Popup_{area.AreaId}.png";
+            var sanitized = area.DisplayName.Replace(" ", "").Replace("'", "");
+            var wikiFilename = $"Area_Info_Popup_{sanitized}.png";
             using var client = await WikiMappingService.CreateAuthenticatedClientAsync(
                 _main.Settings.WikiUsername!, _main.Settings.WikiPassword!);
             var csrfToken = await WikiMappingService.GetCsrfTokenAsync(client);
