@@ -4,7 +4,7 @@ namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.20.3"; // Areas rename, per-area image upload, Clue Collection case detection fix
+    public const string Version = "v0.20.4"; // ConfigKey image naming, AB patch diff, Pets checkbox, IO/upload fixes
 
     // Full version with build timestamp, e.g. "v0.18.7 (build 20260322-1200)"
     public static string Build { get; } = GetBuild();
@@ -90,6 +90,7 @@ public class AppSettings
     public bool DumpEvents { get; set; } = true;
     public bool DumpCards { get; set; } = true;
     public bool DumpDialogues { get; set; } = true;
+    public bool DumpPets { get; set; } = true;
     public bool DumpAutoNewFolder { get; set; } = true; // auto-create Dump 2/3/... instead of overwriting
 
     // Event filters

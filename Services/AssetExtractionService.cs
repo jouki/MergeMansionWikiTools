@@ -1085,7 +1085,7 @@ internal static class AssetExtractionService
                 var atlasData = new AtlasData(spriteList, skinMapList, poolTagMapping.Count > 0 ? poolTagMapping : null);
                 var json = JsonSerializer.Serialize(atlasData, new JsonSerializerOptions
                 {
-                    WriteIndented = false,
+                    WriteIndented = true,
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
                 await File.WriteAllTextAsync(atlasDataPath, json, ct);

@@ -948,6 +948,7 @@ public partial class ClueCollectionPage : UserControl
             {
                 Owner = ownerWindow
             };
+            EnsureWindowVisible(ownerWindow);
             optWin.ShowDialog();
 
             // Re-check optimization status after dialog
@@ -1017,6 +1018,7 @@ public partial class ClueCollectionPage : UserControl
                 var dlg = new UploadConflictDialog(wikiName, remaining, localPath,
                     isPartOfSplit: false, currentUser: _main.Settings.WikiUsername)
                 { Owner = ownerWindow };
+                EnsureWindowVisible(ownerWindow);
                 dlg.ShowDialog();
                 switch (dlg.Choice)
                 {
@@ -1033,6 +1035,7 @@ public partial class ClueCollectionPage : UserControl
                 var dlg = UploadConflictDialog.CreateNewFileDialog(wikiName, remaining, localPath,
                     _main.Settings.WikiUsername);
                 dlg.Owner = ownerWindow;
+                EnsureWindowVisible(ownerWindow);
                 dlg.ShowDialog();
                 switch (dlg.Choice)
                 {
@@ -1099,10 +1102,10 @@ public partial class ClueCollectionPage : UserControl
                         await UploadWithRetryAsync(client, csrfToken, file.WikiName, bytes);
                         int done = Interlocked.Increment(ref uploaded);
                         int idx = Interlocked.Increment(ref processedInBulk);
-                        Dispatcher.Invoke(() =>
+                        Dispatcher.InvokeAsync(() =>
                             UpdateProcessingStatus("Uploading (parallel)", dialogIdx + idx, fileList.Count, file.WikiName, file.LocalPath));
                         if (canOptimize && done % tenPercentStep == 0)
-                            Dispatcher.Invoke(() => tinifyUsage.Initialize(apiKey!, apiKey2));
+                            Dispatcher.InvokeAsync(() => tinifyUsage.Initialize(apiKey!, apiKey2));
                     }
                     catch (Exception ex) { Interlocked.Increment(ref errors); AppLogger.Warn($"[ClueUpload] {file.WikiName}: {ex.Message}"); }
                     finally { semaphore.Release(); }
@@ -1420,5 +1423,13 @@ public partial class ClueCollectionPage : UserControl
         infoBar.Message = message;
         infoBar.Severity = severity;
         infoBar.IsOpen = true;
+    }
+
+    private static void EnsureWindowVisible(Window? window)
+    {
+        if (window == null) return;
+        if (window.WindowState == WindowState.Minimized)
+            window.WindowState = WindowState.Normal;
+        window.Activate();
     }
 }

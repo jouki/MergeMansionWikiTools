@@ -223,7 +223,7 @@
                        ToolTipService.InitialShowDelay="0"
                        ToolTipService.ShowOnDisabled="True"/>
 
-            <!-- Name source dropdown (visible for multi-image clusters) -->
+            <!-- Name source dropdown -->
             <ComboBox x:Name="cmbNameSource" Grid.Column="2"
                       Visibility="Collapsed" Height="45" MinWidth="180"
                       Margin="10,0,0,0" VerticalAlignment="Bottom"

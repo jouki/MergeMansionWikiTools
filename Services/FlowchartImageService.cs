@@ -176,26 +176,33 @@ internal static class FlowchartImageService
                     if (!levelMap.TryGetValue(level, out var entry)) continue;
                     if (processedImagesDir == null) continue;
 
-                    // Image Optimiser naming: {TextureName}{Level:00}.png (e.g. ItemTools07.png)
-                    var ioFileName = $"{textureName}{level.ToString().PadLeft(2, '0')}.png";
-                    var ioPath = Path.Combine(processedImagesDir, ioFileName);
+                    var levelSuffix = level.ToString().PadLeft(2, '0');
 
-                    // Check if Image Optimiser already produced this file (possibly optimized)
-                    if (File.Exists(ioPath))
+                    // ConfigKey naming (preferred): {ConfigKey}{Level:00}.png
+                    var configKeyName = $"{chain.ConfigKey}{levelSuffix}.png";
+                    var configKeyPath = Path.Combine(processedImagesDir, configKeyName);
+
+                    // Legacy naming (fallback): {TextureName}{Level:00}.png
+                    var legacyName = $"{textureName}{levelSuffix}.png";
+                    var legacyPath = Path.Combine(processedImagesDir, legacyName);
+
+                    // Check existing files: ConfigKey first, then legacy (may be optimized)
+                    if (File.Exists(configKeyPath))
                     {
-                        var bytes = File.ReadAllBytes(ioPath);
-                        result[itemType] = Convert.ToBase64String(bytes);
+                        result[itemType] = Convert.ToBase64String(File.ReadAllBytes(configKeyPath));
+                        continue;
+                    }
+                    if (File.Exists(legacyPath))
+                    {
+                        result[itemType] = Convert.ToBase64String(File.ReadAllBytes(legacyPath));
                         continue;
                     }
 
-                    // Not found — crop from atlas and save to Processed Images
-                    ImageProcessingService.CropAndSave(img, entry.Full, entry.Main, ioPath, entry.Rotation);
+                    // Not found — crop from atlas and save with ConfigKey name
+                    ImageProcessingService.CropAndSave(img, entry.Full, entry.Main, configKeyPath, entry.Rotation);
 
-                    if (File.Exists(ioPath))
-                    {
-                        var bytes = File.ReadAllBytes(ioPath);
-                        result[itemType] = Convert.ToBase64String(bytes);
-                    }
+                    if (File.Exists(configKeyPath))
+                        result[itemType] = Convert.ToBase64String(File.ReadAllBytes(configKeyPath));
                 }
             }
             catch (Exception ex)

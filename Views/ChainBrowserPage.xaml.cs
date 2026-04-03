@@ -537,10 +537,18 @@ public partial class ChainBrowserPage : UserControl
             tb.Inlines.Add(labelRun);
         }
 
-        // Show original JSON name when item was renamed via wiki
-        if (!string.IsNullOrEmpty(vm.Source.OriginalName)
+        // Show distinguishing identifier for aliases and renamed items
+        if (vm.IsAlias)
+        {
+            // Always show ItemType for aliases so they can be distinguished
+            var idRun = new Run($"  ({vm.Source.ItemType})") { FontSize = 10 };
+            idRun.SetResourceReference(Run.ForegroundProperty, "TextFillColorTertiaryBrush");
+            tb.Inlines.Add(idRun);
+        }
+        else if (!string.IsNullOrEmpty(vm.Source.OriginalName)
             && vm.Source.OriginalName != vm.Name)
         {
+            // Non-alias: show original JSON name when item was renamed via wiki
             var rawRun = new Run($"  ({vm.Source.OriginalName})") { FontSize = 10 };
             rawRun.SetResourceReference(Run.ForegroundProperty, "TextFillColorTertiaryBrush");
             tb.Inlines.Add(rawRun);
@@ -711,6 +719,18 @@ public partial class ChainBrowserPage : UserControl
                     {
                         btn.IsEnabled = wikiVerified;
                         btn.ToolTip = wikiVerified ? null : "Wiki connection required";
+                    }
+                    else if (content is "Set as Alias" or "Remove Alias")
+                    {
+                        btn.Visibility = count == 1 ? Visibility.Visible : Visibility.Collapsed;
+                        btn.IsEnabled = wikiVerified;
+                        btn.ToolTip = wikiVerified ? null : "Wiki connection required";
+                        if (count == 1)
+                        {
+                            var selected = chainVm.Items.FirstOrDefault(i => i.IsChecked);
+                            bool isAlias = selected?.IsAlias ?? false;
+                            btn.Content = isAlias ? "Remove Alias" : "Set as Alias";
+                        }
                     }
                 }
             }
@@ -1052,6 +1072,151 @@ public partial class ChainBrowserPage : UserControl
         if (dialog.ShowDialog() == true)
         {
             _ = RefreshAfterWikiChange();
+        }
+    }
+
+    private async void BtnToggleAlias_Click(object sender, RoutedEventArgs e)
+    {
+        var chainVm = GetChainVmFromButton(sender);
+        if (chainVm == null) return;
+
+        var selected = chainVm.Items.FirstOrDefault(i => i.IsChecked);
+        if (selected == null) return;
+
+        var item = selected.Source;
+        bool currentlyAlias = item.IsAlias;
+        string action = currentlyAlias ? "Remove alias flag" : "Set as alias";
+
+        // Build preview of what will be written
+        string chainName = chainVm.Source.DisplayName;
+        string currentEntry = currentlyAlias
+            ? $"[\"{item.ItemType}\"] = {{chainName = \"{chainName}\", isAlias = true}}"
+            : $"[\"{item.ItemType}\"] = {{chainName = \"{chainName}\"}}";
+        string newEntry = currentlyAlias
+            ? $"[\"{item.ItemType}\"] = {{chainName = \"{chainName}\"}}"
+            : $"[\"{item.ItemType}\"] = {{chainName = \"{chainName}\", isAlias = true}}";
+
+        var panel = new StackPanel();
+        panel.Children.Add(new TextBlock
+        {
+            Text = $"{action} for \"{item.Name}\" ({item.ItemType})",
+            TextWrapping = TextWrapping.Wrap,
+            Margin = new Thickness(0, 0, 0, 8)
+        });
+        panel.Children.Add(new TextBlock
+        {
+            Text = "Module:Datatable/Items/Mapping",
+            FontWeight = FontWeights.SemiBold,
+            FontSize = 12,
+            Margin = new Thickness(0, 0, 0, 6)
+        });
+
+        // Current state
+        var currentBorder = new Border
+        {
+            Background = new SolidColorBrush(Color.FromArgb(0x25, 0xD0, 0x40, 0x40)),
+            CornerRadius = new CornerRadius(4),
+            Padding = new Thickness(8, 6, 8, 6),
+            Margin = new Thickness(0, 0, 0, 4)
+        };
+        currentBorder.Child = new TextBlock
+        {
+            Text = "- " + currentEntry,
+            FontFamily = new FontFamily("Cascadia Code,Consolas,Courier New"),
+            FontSize = 11,
+            Foreground = new SolidColorBrush(Color.FromRgb(0xE0, 0x50, 0x50)),
+            TextWrapping = TextWrapping.Wrap
+        };
+        panel.Children.Add(currentBorder);
+
+        // New state
+        var newBorder = new Border
+        {
+            Background = new SolidColorBrush(Color.FromArgb(0x25, 0x30, 0xC0, 0x30)),
+            CornerRadius = new CornerRadius(4),
+            Padding = new Thickness(8, 6, 8, 6)
+        };
+        newBorder.Child = new TextBlock
+        {
+            Text = "+ " + newEntry,
+            FontFamily = new FontFamily("Cascadia Code,Consolas,Courier New"),
+            FontSize = 11,
+            Foreground = new SolidColorBrush(Color.FromRgb(0x40, 0xD0, 0x40)),
+            TextWrapping = TextWrapping.Wrap
+        };
+        panel.Children.Add(newBorder);
+
+        var confirmBox = new Wpf.Ui.Controls.MessageBox
+        {
+            Title = action,
+            Content = panel,
+            PrimaryButtonText = action,
+            CloseButtonText = "Cancel"
+        };
+        if (await confirmBox.ShowDialogAsync() != Wpf.Ui.Controls.MessageBoxResult.Primary) return;
+
+        try
+        {
+            var lua = await MysteryWikiService.FetchPageContentAsync("Module:Datatable/Items/Mapping");
+            if (string.IsNullOrEmpty(lua)) throw new Exception("Could not fetch Items/Mapping module.");
+
+            var escapedType = System.Text.RegularExpressions.Regex.Escape(item.ItemType);
+            var entryRegex = new System.Text.RegularExpressions.Regex(
+                @"(\[""" + escapedType + @"""\]\s*=\s*\{)([^}]*)(})");
+
+            if (!entryRegex.IsMatch(lua))
+            {
+                // Entry doesn't exist — create it with isAlias
+                // Find insertion point (before closing })
+                int insertPos = lua.LastIndexOf("\n}", StringComparison.Ordinal);
+                if (insertPos < 0) throw new Exception("Could not find insertion point.");
+                string luaEntry = currentlyAlias
+                    ? $"\t[\"{item.ItemType}\"] = {{chainName = \"{chainName}\"}},\n"
+                    : $"\t[\"{item.ItemType}\"] = {{chainName = \"{chainName}\", isAlias = true}},\n";
+                lua = lua[..(insertPos + 1)] + luaEntry + lua[(insertPos + 1)..];
+            }
+            else
+            {
+                lua = entryRegex.Replace(lua, m =>
+                {
+                    var prefix = m.Groups[1].Value;
+                    var body = m.Groups[2].Value;
+                    var suffix = m.Groups[3].Value;
+
+                    var isAliasRegex = new System.Text.RegularExpressions.Regex(@",?\s*isAlias\s*=\s*(true|false)");
+                    if (currentlyAlias)
+                    {
+                        // Remove isAlias
+                        body = isAliasRegex.Replace(body, "");
+                    }
+                    else
+                    {
+                        // Add isAlias = true
+                        if (isAliasRegex.IsMatch(body))
+                            body = isAliasRegex.Replace(body, ", isAlias = true");
+                        else
+                            body += ", isAlias = true";
+                    }
+                    return prefix + body + suffix;
+                });
+            }
+
+            await MysteryWikiService.PublishPageAsync(
+                _main.Settings.WikiUsername, _main.Settings.WikiPassword,
+                "Module:Datatable/Items/Mapping", lua,
+                $"{action} for {item.ItemType} (via MergeMansionWikiTools)");
+
+            _ = RefreshAfterWikiChange();
+        }
+        catch (Exception ex)
+        {
+            var errBox = new Wpf.Ui.Controls.MessageBox
+            {
+                Title = "Error",
+                Content = $"Failed: {ex.Message}",
+                CloseButtonText = "OK"
+            };
+            await errBox.ShowDialogAsync();
         }
     }
 

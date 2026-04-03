@@ -69,11 +69,10 @@
                         </ui:Button>
                     </Grid>
 
-                    <!-- Patch config (optional) -->
+                    <!-- Patch config -->
                     <TextBlock FontSize="13" Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                Margin="0,0,0,6">
                         <Run Text="Patch config" FontWeight="SemiBold" />
-                        <Run Text="(optional)" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
                     </TextBlock>
                     <Grid Margin="0,0,0,12">
                         <Grid.ColumnDefinitions>
@@ -97,11 +96,10 @@
                         </ui:Button>
                     </Grid>
 
-                    <!-- Language file (optional) -->
+                    <!-- Language file -->
                     <TextBlock FontSize="13" Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                Margin="0,0,0,6">
                         <Run Text="Language file" FontWeight="SemiBold" />
-                        <Run Text="(optional)" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
                     </TextBlock>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -166,6 +164,9 @@
                                   VerticalAlignment="Center" Margin="12,0,0,0"
                                   Checked="DumpCheckbox_Changed" Unchecked="DumpCheckbox_Changed" />
                         <CheckBox x:Name="chkCards" Grid.Column="4" Content="Cards"
+                                  VerticalAlignment="Center" Margin="12,0,0,0"
+                                  Checked="DumpCheckbox_Changed" Unchecked="DumpCheckbox_Changed" />
+                        <CheckBox x:Name="chkPets" Grid.Column="5" Content="Pets"
                                   VerticalAlignment="Center" Margin="12,0,0,0"
                                   Checked="DumpCheckbox_Changed" Unchecked="DumpCheckbox_Changed" />
                         <!-- Split Dump button -->

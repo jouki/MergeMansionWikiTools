@@ -448,9 +448,15 @@
                                                        ToolTipService.ShowOnDisabled="True" />
                                             <ui:Button x:Name="btnRenameItem" Content="Rename Item"
                                                        Icon="{ui:SymbolIcon Rename24}"
-                                                       Appearance="Secondary" Padding="12,6"
+                                                       Appearance="Secondary" Padding="12,6" Margin="0,0,6,0"
                                                        Visibility="Collapsed"
                                                        Click="BtnRenameItem_Click"
+                                                       ToolTipService.ShowOnDisabled="True" />
+                                            <ui:Button x:Name="btnToggleAlias" Content="Set as Alias"
+                                                       Icon="{ui:SymbolIcon Link24}"
+                                                       Appearance="Secondary" Padding="12,6"
+                                                       Visibility="Collapsed"
+                                                       Click="BtnToggleAlias_Click"
                                                        ToolTipService.ShowOnDisabled="True" />
                                         </StackPanel>
                                     </StackPanel>

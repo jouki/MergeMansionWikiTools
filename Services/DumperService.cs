@@ -50,10 +50,12 @@ internal sealed class ProgressTextWriter : TextWriter
 
         _lines.Add(line);
 
-        // Forward to UI — show [PROGRESS] as clean status, others as-is
+        // Forward to UI — show [PROGRESS] as clean status, skip noise
         if (line.StartsWith("[PROGRESS]"))
             _progress?.Report(line[11..]); // strip "[PROGRESS] "
-        else if (!line.StartsWith("[TRACE]")) // skip stack traces in UI
+        else if (line.Contains("not in archive, skipping"))
+            { } // log-only, not relevant for user
+        else if (!line.StartsWith("[TRACE]"))
             _progress?.Report(line);
     }
 }
@@ -81,7 +83,8 @@ internal static class DumperService
         CardCollection = 8,
         Experimental = 16,
         Dialogues = 32,
-        All = Chains | Areas | Events | CardCollection | Dialogues
+        Pets = 64,
+        All = Chains | Areas | Events | CardCollection | Dialogues | Pets
     }
 
     private static readonly object _initLock = new();
@@ -257,7 +260,7 @@ internal static class DumperService
 
                     if (line.StartsWith("[ERROR]") || line.StartsWith("[TRACE]"))
                         errors.Add(line);
-                    else if (line.StartsWith("[WARN]"))
+                    else if (line.StartsWith("[WARN]") && !line.Contains("not in archive, skipping"))
                         warnings.Add(line);
                     // [INFO] and [PROGRESS] lines are informational — not warnings
                 }
@@ -296,19 +299,23 @@ internal static class DumperService
                     progress?.Report($"Skipped {skipped} irrelevant patch(es)");
                 }
 
-                // 8. Run master dumps + patch import/dumps all in parallel
+                // 8. Run master dumps first, then patch dumps (patches need baseline content)
                 progress?.Report($"{T()} Dumping game data ({relevantPatchedArchives.Length} patches)...");
                 var masterConfig = ClientGlobal.SharedGameConfig;
-                var allTasks = new List<Action>();
 
-                // Master dumpers
+                // Baseline content for patch comparison (populated by master dumps)
+                string? baselineChains = null, baselineAreas = null, baselineEvents = null;
+
+                // ── Phase A: Master dumps (parallel) ──
+                var masterTasks = new List<Action>();
+
                 if (mode.HasFlag(DumpMode.Chains))
-                    allTasks.Add(() =>
+                    masterTasks.Add(() =>
                     {
                         var p = Path.Combine(outputDir, "chain_item_odds.json");
                         try
                         {
-                            new MergeChainDumper(true).WriteJson(p, masterConfig);
+                            baselineChains = new MergeChainDumper(true).WriteJson(p, masterConfig);
                             var size = new FileInfo(p).Length / 1024;
                             progress?.Report($"{T()} chain_item_odds.json written ({size} KB)");
                             AppLogger.Info($"{T()} chain_item_odds.json: {size} KB");
@@ -318,12 +325,12 @@ internal static class DumperService
                     });
 
                 if (mode.HasFlag(DumpMode.Areas))
-                    allTasks.Add(() =>
+                    masterTasks.Add(() =>
                     {
                         var p = Path.Combine(outputDir, "areas.json");
                         try
                         {
-                            new AreaDumper().WriteJson(p, masterConfig);
+                            baselineAreas = new AreaDumper().WriteJson(p, masterConfig);
                             var size = new FileInfo(p).Length / 1024;
                             progress?.Report($"{T()} areas.json written ({size} KB)");
                             AppLogger.Info($"{T()} areas.json: {size} KB");
@@ -333,12 +340,12 @@ internal static class DumperService
                     });
 
                 if (mode.HasFlag(DumpMode.Events))
-                    allTasks.Add(() =>
+                    masterTasks.Add(() =>
                     {
                         var p = Path.Combine(outputDir, "events.json");
                         try
                         {
-                            new EventDumper(eventFilters).WriteJson(p, masterConfig);
+                            baselineEvents = new EventDumper(eventFilters).WriteJson(p, masterConfig);
                             var size = new FileInfo(p).Length / 1024;
                             progress?.Report($"{T()} events.json written ({size} KB)");
                             AppLogger.Info($"{T()} events.json: {size} KB");
@@ -348,7 +355,7 @@ internal static class DumperService
                     });
 
                 if (mode.HasFlag(DumpMode.CardCollection))
-                    allTasks.Add(() =>
+                    masterTasks.Add(() =>
                     {
                         var p = Path.Combine(outputDir, "card_collection.json");
                         try
@@ -363,7 +370,7 @@ internal static class DumperService
                     });
 
                 if (mode.HasFlag(DumpMode.Dialogues))
-                    allTasks.Add(() =>
+                    masterTasks.Add(() =>
                     {
                         var p = Path.Combine(outputDir, "dialogues.json");
                         try
@@ -376,6 +383,26 @@ internal static class DumperService
                         }
                         catch (Exception ex) { Log("ERROR", $"Dialogues dump failed: {ex.Message}", ex); }
                     });
+
+                if (mode.HasFlag(DumpMode.Pets))
+                    masterTasks.Add(() =>
+                    {
+                        var p = Path.Combine(outputDir, "Pets.json");
+                        try
+                        {
+                            ExperimentalDumper.WritePetsJson(p, masterConfig);
+                            var size = new FileInfo(p).Length / 1024;
+                            progress?.Report($"{T()} Pets.json written ({size} KB)");
+                            AppLogger.Info($"{T()} Pets.json: {size} KB");
+                        }
+                        catch (Exception ex) { Log("ERROR", $"Pets dump failed: {ex.Message}", ex); }
+                    });
+
+                if (masterTasks.Count > 0)
+                    Parallel.Invoke(masterTasks.ToArray());
+
+                // ── Phase B: Patch dumps (parallel, after master completes) ──
+                var allTasks = new List<Action>();
 
                 if (mode.HasFlag(DumpMode.Experimental))
                     allTasks.Add(() =>
@@ -393,14 +420,7 @@ internal static class DumperService
                             AppLogger.Info($"{T()} Experimental: {written.Count} files into {expDir}");
                             experimentalPath = expDir;
 
-                            // Always copy Pets.json to main Dump/ — used by DialogueService for Pet speaker resolution
-                            var expPets = Path.Combine(expDir, "Pets.json");
-                            var mainPets = Path.Combine(outputDir, "Pets.json");
-                            if (File.Exists(expPets))
-                            {
-                                File.Copy(expPets, mainPets, overwrite: true);
-                                AppLogger.Info($"{T()} Pets.json copied to main dump folder");
-                            }
+                            // Pets.json is now dumped separately via DumpMode.Pets
                         }
                         catch (Exception ex)
                         {
@@ -424,29 +444,37 @@ internal static class DumperService
                             AppLogger.Info($"{T()} Patch {patchLabel} imported");
 
                             var patchDir = Path.Combine(outputDir, patchLabel);
-                            Directory.CreateDirectory(patchDir);
+                            var diffFiles = new List<string>();
+                            var sameFiles = new List<string>();
 
-                            var needsChains = capturedPa.ContainsPatch("Items") || capturedPa.ContainsPatch("MergeChains");
-                            var needsAreas = capturedPa.ContainsPatch("Areas") || capturedPa.ContainsPatch("HotspotDefinitions");
+                            void RecordResult(string fileName, bool differs)
+                            { if (differs) diffFiles.Add(fileName); else sameFiles.Add(fileName); }
 
-                            if (mode.HasFlag(DumpMode.Chains) && needsChains)
+                            if (mode.HasFlag(DumpMode.Chains))
                             {
-                                try { new MergeChainDumper(true).WriteJson(Path.Combine(patchDir, "chain_item_odds.json"), patchConfig); }
+                                try { RecordResult("chain_item_odds.json", new MergeChainDumper(true).WriteJsonIfDifferent(Path.Combine(patchDir, "chain_item_odds.json"), patchConfig, baselineChains)); }
                                 catch (Exception ex) { Log("WARN", $"Patch {patchLabel} chains: {ex.Message}", ex); }
                             }
-                            if (mode.HasFlag(DumpMode.Areas) && needsAreas)
+                            if (mode.HasFlag(DumpMode.Areas))
                             {
-                                try { new AreaDumper().WriteJson(Path.Combine(patchDir, "areas.json"), patchConfig); }
+                                try { RecordResult("areas.json", new AreaDumper().WriteJsonIfDifferent(Path.Combine(patchDir, "areas.json"), patchConfig, baselineAreas)); }
                                 catch (Exception ex) { Log("WARN", $"Patch {patchLabel} areas: {ex.Message}", ex); }
                             }
-                            if (mode.HasFlag(DumpMode.Events) && needsAreas)
+                            if (mode.HasFlag(DumpMode.Events))
                             {
-                                try { new EventDumper(eventFilters).WriteJson(Path.Combine(patchDir, "events.json"), patchConfig); }
+                                try { RecordResult("events.json", new EventDumper(eventFilters).WriteJsonIfDifferent(Path.Combine(patchDir, "events.json"), patchConfig, baselineEvents)); }
                                 catch (Exception ex) { Log("WARN", $"Patch {patchLabel} events: {ex.Message}", ex); }
                             }
 
-                            progress?.Report($"{T()} Patch {patchLabel} dumped");
-                            AppLogger.Info($"{T()} Patch {patchLabel} dumped");
+                            if (diffFiles.Count == 0 && Directory.Exists(patchDir) && !Directory.EnumerateFileSystemEntries(patchDir).Any())
+                                Directory.Delete(patchDir);
+
+                            var parts = new List<string>();
+                            if (diffFiles.Count > 0) parts.Add($"differs: {string.Join(", ", diffFiles)}");
+                            if (sameFiles.Count > 0) parts.Add($"identical: {string.Join(", ", sameFiles)}");
+                            var summary = $"{T()} Patch {patchLabel}: {string.Join(" · ", parts)}";
+                            progress?.Report(summary);
+                            AppLogger.Info(summary);
                         }
                         catch (Exception ex)
                         {

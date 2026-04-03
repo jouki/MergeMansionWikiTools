@@ -59,6 +59,7 @@ internal class OptimiserCluster
     public int NameSourceIndex { get; set; } // which image's DetectedChainName to use
     public string IndexText { get; set; } = ""; // per-cluster index input text
     public string LastSplitIndices { get; set; } = ""; // normalized indices used for the last split
+    public bool UseChainName { get; set; } // use Chain ConfigKey for output filenames instead of source filename
 }
 
 public partial class ImageOptimiserPage : UserControl
@@ -250,6 +251,11 @@ public partial class ImageOptimiserPage : UserControl
             // Create a single-image cluster
             var cluster = new OptimiserCluster();
             cluster.Images.Add(oi);
+
+            // Auto-enable UseChainName if texture is shared by multiple chains
+            if (IsMultiChainTexture(path))
+                cluster.UseChainName = true;
+
             _clusters.Add(cluster);
         }
 
@@ -1706,8 +1712,38 @@ public partial class ImageOptimiserPage : UserControl
     private void BtnSplitDropdown_Click(object sender, RoutedEventArgs e)
     {
         var menu = new System.Windows.Controls.ContextMenu();
-        var item = new System.Windows.Controls.MenuItem { Header = "Split To…" };
-        item.Click += (_, _) =>
+
+        // Use Chain Name checkbox
+        var chk = new CheckBox
+        {
+            Content = "Use Chain Name",
+            IsChecked = _selectedCluster?.UseChainName == true,
+            Margin = new Thickness(0, 2, 8, 2),
+        };
+        var tipPanel = new System.Windows.Controls.StackPanel { MaxWidth = 300 };
+        tipPanel.Children.Add(new System.Windows.Controls.TextBlock
+        {
+            Text = "Use this when the image contains items from multiple chains.",
+            FontWeight = FontWeights.SemiBold,
+            TextWrapping = TextWrapping.Wrap
+        });
+        tipPanel.Children.Add(new System.Windows.Controls.TextBlock
+        {
+            Text = "Saves as {ConfigKey}{Level}.png instead of {SourceFile}{Level}.png.",
+            TextWrapping = TextWrapping.Wrap,
+            Margin = new Thickness(0, 4, 0, 0),
+            Opacity = 0.7
+        });
+        chk.ToolTip = tipPanel;
+        ToolTipService.SetInitialShowDelay(chk, 0);
+        chk.Checked += (_, _) => { if (_selectedCluster != null) _selectedCluster.UseChainName = true; };
+        chk.Unchecked += (_, _) => { if (_selectedCluster != null) _selectedCluster.UseChainName = false; };
+        menu.Items.Add(chk);
+        menu.Items.Add(new System.Windows.Controls.Separator());
+
+        // Split To… folder picker
+        var splitToItem = new System.Windows.Controls.MenuItem { Header = "Split To…" };
+        splitToItem.Click += (_, _) =>
         {
             var dlg = new Microsoft.Win32.OpenFolderDialog
             {
@@ -1721,7 +1757,7 @@ public partial class ImageOptimiserPage : UserControl
                 ProcessSplit(overrideOutputDir: dlg.FolderName);
             }
         };
-        menu.Items.Add(item);
+        menu.Items.Add(splitToItem);
         menu.PlacementTarget = btnSplitDropdown;
         menu.Placement = System.Windows.Controls.Primitives.PlacementMode.Top;
         menu.IsOpen = true;
@@ -2144,6 +2180,39 @@ public partial class ImageOptimiserPage : UserControl
     /// Finds a chain whose items use the given texture, using deterministic skin mapping first.
     /// Falls back to heuristic ConfigKey matching if no skin mapping is available.
     /// </summary>
+    /// <summary>
+    /// Detects if multiple different chains reference the same atlas image file.
+    /// Uses PoolConfig mapping (PoolTag → TextureName) to find all chains that map to this texture.
+    /// </summary>
+    private bool IsMultiChainTexture(string filePath)
+    {
+        var chains = _main.DataService?.Chains;
+        if (chains == null || chains.Count == 0) return false;
+
+        var exportDir = GetExportDir();
+        if (exportDir == null) return false;
+
+        var textureName = System.IO.Path.GetFileNameWithoutExtension(filePath);
+
+        // Find all chains whose PoolTag resolves to this texture name
+        // Exclude chains tagged "Test" (dev/placeholder chains with reused PoolTags)
+        var matchedChains = new List<string>();
+        foreach (var chain in chains)
+        {
+            if (string.IsNullOrEmpty(chain.PoolTag)) continue;
+            if (chain.HasTestTag) continue;
+
+            var resolved = SpriteMetadataService.ResolveSkeletonForPoolTag(chain.PoolTag, exportDir);
+            if (resolved != null && string.Equals(resolved, textureName, StringComparison.OrdinalIgnoreCase))
+                matchedChains.Add(chain.ConfigKey);
+        }
+
+        if (matchedChains.Count > 1)
+            AppLogger.Info($"[MULTI-CHAIN] '{textureName}' shared by: {string.Join(", ", matchedChains)}");
+
+        return matchedChains.Count > 1;
+    }
+
     private ParsedChain? FindChainForTexture(string textureName,
         List<AssetExtractionService.SkinMapping>? skinMappings = null)
     {
@@ -2482,7 +2551,7 @@ public partial class ImageOptimiserPage : UserControl
         }
     }
 
-    private void ProcessSplit(string? overrideOutputDir = null, bool loadExistingIfFound = false)
+    private void ProcessSplit(string? overrideOutputDir = null, bool loadExistingIfFound = false, bool suppressExistingDialog = false)
     {
         if (_selectedCluster == null || _selectedCluster.Images.Count == 0) return;
 
@@ -2554,10 +2623,22 @@ public partial class ImageOptimiserPage : UserControl
                 return;
             }
 
-            // Output dir and name from the name source image
+            // Output dir and name from the name source image (or Chain ConfigKey)
             var nameSourceImg = _selectedCluster.Images[
                 Math.Clamp(_selectedCluster.NameSourceIndex, 0, _selectedCluster.Images.Count - 1)];
-            string name = System.IO.Path.GetFileNameWithoutExtension(nameSourceImg.FilePath);
+            string name;
+            if (_selectedCluster.UseChainName)
+            {
+                // Resolve chain ConfigKey: Chain Mode first, then DetectedChainName
+                var chainConfigKey = _activeChain?.ConfigKey
+                    ?? nameSourceImg.DetectedChainName
+                    ?? System.IO.Path.GetFileNameWithoutExtension(nameSourceImg.FilePath);
+                name = chainConfigKey;
+            }
+            else
+            {
+                name = System.IO.Path.GetFileNameWithoutExtension(nameSourceImg.FilePath);
+            }
             bool singleObject = nonSkipCount == 1;
 
             string dir;
@@ -2586,7 +2667,7 @@ public partial class ImageOptimiserPage : UserControl
                         existingFiles.Add(expectedPath);
                 }
 
-                if (existingFiles.Count > 0 && !loadExistingIfFound)
+                if (existingFiles.Count > 0 && !loadExistingIfFound && !suppressExistingDialog)
                 {
                     // Check if any have optimization marker
                     int optimizedCount = 0;
@@ -2702,7 +2783,7 @@ public partial class ImageOptimiserPage : UserControl
                         }
                     }
 
-                    if (loadedResults.Count > 0)
+                    if (loadedResults.Count >= nonSkipCount)
                     {
                         foreach (var oi in scissorsImages)
                             oi.IsSplit = false;
@@ -2712,6 +2793,7 @@ public partial class ImageOptimiserPage : UserControl
                         UpdateUploadButtonState();
                         return;
                     }
+                    // Not all files found — fall through to normal split
                 }
             }
 
@@ -2830,7 +2912,10 @@ public partial class ImageOptimiserPage : UserControl
                 foreach (var cluster in unsplitClusters)
                 {
                     var nameIdx = Math.Clamp(cluster.NameSourceIndex, 0, cluster.Images.Count - 1);
-                    var clName = System.IO.Path.GetFileNameWithoutExtension(cluster.Images[nameIdx].FilePath);
+                    var nameSourceImg = cluster.Images[nameIdx];
+                    var clName = cluster.UseChainName
+                        ? (_activeChain?.ConfigKey ?? nameSourceImg.DetectedChainName ?? System.IO.Path.GetFileNameWithoutExtension(nameSourceImg.FilePath))
+                        : System.IO.Path.GetFileNameWithoutExtension(nameSourceImg.FilePath);
                     var suffArr = cluster.IndexText.Split(new[] { ' ', ',', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (var suf in suffArr)
                     {
@@ -2887,48 +2972,27 @@ public partial class ImageOptimiserPage : UserControl
                 // Secondary = Skip → fall through to optimization
             }
 
-            if (doLoad && processedDir != null)
-            {
-                // Load existing files from Processed Images (skip inner dialog)
-                var savedImage = _selectedImage;
-                var savedCluster = _selectedCluster;
+            var savedImage = _selectedImage;
+            var savedCluster = _selectedCluster;
 
-                _suppressIndexReset = true;
-                foreach (var cluster in unsplitClusters)
-                {
-                    _selectedCluster = cluster;
-                    _selectedImage = cluster.Images.FirstOrDefault();
-                    inputIndices.Text = cluster.IndexText;
+            _suppressIndexReset = true;
+            foreach (var cluster in unsplitClusters)
+            {
+                _selectedCluster = cluster;
+                _selectedImage = cluster.Images.FirstOrDefault();
+                inputIndices.Text = cluster.IndexText;
+
+                if (doLoad)
                     ProcessSplit(loadExistingIfFound: true);
-                }
-                _suppressIndexReset = false;
-
-                if (savedImage != null && savedCluster != null && _clusters.Contains(savedCluster))
-                    SelectImage(savedImage);
-                else if (_clusters.Count > 0)
-                    SelectImage(_clusters[0].Images[0]);
+                else if (doSplit)
+                    ProcessSplit(suppressExistingDialog: true);
             }
-            else if (doSplit)
-            {
-                var savedImage = _selectedImage;
-                var savedCluster = _selectedCluster;
+            _suppressIndexReset = false;
 
-                _suppressIndexReset = true;
-                foreach (var cluster in unsplitClusters)
-                {
-                    _selectedCluster = cluster;
-                    _selectedImage = cluster.Images.FirstOrDefault();
-                    inputIndices.Text = cluster.IndexText;
-                    ProcessSplit();
-                }
-                _suppressIndexReset = false;
-
-                if (savedImage != null && savedCluster != null && _clusters.Contains(savedCluster))
-                    SelectImage(savedImage);
-                else if (_clusters.Count > 0)
-                    SelectImage(_clusters[0].Images[0]);
-            }
-            // else: Skip → fall through to optimization
+            if (savedImage != null && savedCluster != null && _clusters.Contains(savedCluster))
+                SelectImage(savedImage);
+            else if (_clusters.Count > 0)
+                SelectImage(_clusters[0].Images[0]);
         }
 
         // Collect files to optimize: iterate by cluster to avoid duplicate merged images
@@ -3080,6 +3144,19 @@ public partial class ImageOptimiserPage : UserControl
         }
 
         UpdatePredictButtonVisibility();
+
+        // Auto-enable UseChainName for multi-chain atlases
+        if (_selectedCluster != null && !_selectedCluster.UseChainName)
+        {
+            foreach (var oi in _selectedCluster.Images)
+            {
+                if (IsMultiChainTexture(oi.FilePath))
+                {
+                    _selectedCluster.UseChainName = true;
+                    break;
+                }
+            }
+        }
 
         // Auto-predict if images are already loaded
         TryAutoPredict();
@@ -3385,14 +3462,16 @@ public partial class ImageOptimiserPage : UserControl
         {
             Owner = Window.GetWindow(this)
         };
-        dialog.ShowDialog();
-
-        if (dialog.UploadedCount > 0)
+        dialog.Closed += (_, _) =>
         {
-            infoBar.Message = $"Uploaded {dialog.UploadedCount} images to wiki.";
-            infoBar.Severity = InfoBarSeverity.Success;
-            infoBar.IsOpen = true;
-        }
+            if (dialog.UploadedCount > 0)
+            {
+                infoBar.Message = $"Uploaded {dialog.UploadedCount} images to wiki.";
+                infoBar.Severity = InfoBarSeverity.Success;
+                infoBar.IsOpen = true;
+            }
+        };
+        dialog.Show();
     }
 
     // ══════════════════════════════════════════════════════════════

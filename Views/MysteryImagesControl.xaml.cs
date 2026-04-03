@@ -871,6 +871,7 @@ public partial class MysteryImagesControl : UserControl
 					file.WikiFilename, remaining, file.SourcePath, optimizeFunc,
 					_main.Settings.WikiUsername, hasUnoptimizedRemaining, optimizeOnly: true);
 				wizard.Owner = ownerWindow;
+				EnsureWindowVisible(ownerWindow);
 				wizard.ShowDialog();
 				TryMarkOptimized(file);
 
@@ -931,6 +932,7 @@ public partial class MysteryImagesControl : UserControl
 					var dlg = new UploadConflictDialog(file.WikiFilename, remaining, file.SourcePath,
 						isPartOfSplit: false, currentUser: _main.Settings.WikiUsername)
 					{ Owner = ownerWindow };
+					EnsureWindowVisible(ownerWindow);
 					dlg.ShowDialog();
 					switch (dlg.Choice)
 					{
@@ -954,6 +956,7 @@ public partial class MysteryImagesControl : UserControl
 							file.WikiFilename, remaining, file.SourcePath, _main.Settings.WikiUsername);
 						dlg.ShowForceOptimizeButton(hasUnoptimizedRemaining);
 						dlg.Owner = ownerWindow;
+						EnsureWindowVisible(ownerWindow);
 						dlg.ShowDialog();
 						switch (dlg.Choice)
 						{
@@ -1045,7 +1048,7 @@ public partial class MysteryImagesControl : UserControl
 			try
 			{
 				int current = Interlocked.Increment(ref done);
-				Dispatcher.Invoke(() => ShowInfo($"Optimizing {current}/{toOptimize.Count}: {f.WikiFilename}...",
+				Dispatcher.InvokeAsync(() => ShowInfo($"Optimizing {current}/{toOptimize.Count}: {f.WikiFilename}...",
 					InfoBarSeverity.Informational));
 				byte[] optimized = await optimizeFunc(await File.ReadAllBytesAsync(f.SourcePath));
 				byte[] marked = OptimizationWindow.InsertOptMarker(optimized);
@@ -1112,6 +1115,7 @@ public partial class MysteryImagesControl : UserControl
 						Owner = ownerWindow
 					};
 					Wpf.Ui.Appearance.ApplicationThemeManager.Apply(dupBox);
+					EnsureWindowVisible(ownerWindow);
 					var dupResult = await dupBox.ShowDialogAsync();
 					if (chkSuppress.IsChecked == true) _suppressDuplicateWarnings = true;
 					if (dupResult == Wpf.Ui.Controls.MessageBoxResult.Primary)
@@ -1150,6 +1154,7 @@ public partial class MysteryImagesControl : UserControl
 					Owner = ownerWindow
 				};
 				Wpf.Ui.Appearance.ApplicationThemeManager.Apply(msgBox);
+				EnsureWindowVisible(ownerWindow);
 				var result = await msgBox.ShowDialogAsync();
 				if (result == Wpf.Ui.Controls.MessageBoxResult.Primary) continue;
 				if (result == Wpf.Ui.Controls.MessageBoxResult.Secondary) return UploadOutcome.Skipped;
@@ -1307,6 +1312,14 @@ public partial class MysteryImagesControl : UserControl
 		infoBar.Message = message;
 		infoBar.Severity = severity;
 		infoBar.IsOpen = true;
+	}
+
+	private static void EnsureWindowVisible(Window? window)
+	{
+		if (window == null) return;
+		if (window.WindowState == WindowState.Minimized)
+			window.WindowState = WindowState.Normal;
+		window.Activate();
 	}
 
 }

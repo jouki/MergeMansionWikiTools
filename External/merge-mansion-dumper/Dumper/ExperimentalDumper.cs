@@ -354,6 +354,39 @@ namespace merge_mansion_dumper.Dumper
             return dict;
         }
 
+        /// <summary>Writes Pets.json as a standalone file (used by main dump).</summary>
+        public static void WritePetsJson(string filePath, SharedGameConfig config)
+        {
+            var pets = config.PetInfos?.EnumerateAll().Select(x =>
+            {
+                var pet = (GameLogic.Player.Rewards.PetInfo)x.Value;
+                return new Dictionary<string, object>
+                {
+                    ["PetId"] = pet.ConfigKey?.ToString(),
+                    ["UnlockHeaderLocId"] = pet.UnlockHeaderLocId,
+                    ["UnlockHeader"] = Localize(pet.UnlockHeaderLocId),
+                    ["UnlockDescLocId"] = pet.UnlockDescLocId,
+                    ["UnlockDesc"] = Localize(pet.UnlockDescLocId),
+                    ["InfoHeaderLocId"] = pet.InfoHeaderLocId,
+                    ["InfoHeader"] = Localize(pet.InfoHeaderLocId),
+                    ["InfoDescLocId"] = pet.InfoDescLocId,
+                    ["InfoDesc"] = Localize(pet.InfoDescLocId),
+                    ["SelectionHeaderLocId"] = pet.SelectionHeaderLocId,
+                    ["SelectionHeader"] = Localize(pet.SelectionHeaderLocId),
+                    ["SelectionDescriptionLocId"] = pet.SelectionDescriptionLocId,
+                    ["SelectionDescription"] = Localize(pet.SelectionDescriptionLocId),
+                    ["Decoration"] = pet.Decoration?.ToString(),
+                    ["AssetPackId"] = pet.AssetPackId?.ToString(),
+                };
+            }).ToArray() ?? Array.Empty<object>();
+
+            var data = new { CreatedAt = config.ArchiveCreatedAt, Data = pets };
+            var dir = System.IO.Path.GetDirectoryName(filePath);
+            if (!string.IsNullOrEmpty(dir))
+                Directory.CreateDirectory(dir);
+            File.WriteAllText(filePath, JsonConvert.SerializeObject(data, Formatting.Indented));
+        }
+
         private static string Localize(string locId)
         {
             if (string.IsNullOrEmpty(locId))

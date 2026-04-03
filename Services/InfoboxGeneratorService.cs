@@ -21,6 +21,25 @@ public class InfoboxGeneratorService
     public string? TaskRewardAreaName { get; private set; }
 
     /// <summary>
+    /// Item-specific reward boxes that are no longer available in the game.
+    /// These are excluded from auto-detected source lists.
+    /// </summary>
+    private static readonly HashSet<string> IgnoredSourceChains = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "RewardBoxCleaning",
+        "RewardBoxDetergent",
+        "RewardBoxFlower",
+        "RewardBoxGardenBench",
+        "RewardBoxGardeningGloves",
+        "RewardBoxLamp",
+        "RewardBoxOrangeFlower",
+        "RewardBoxPaintCan",
+        "RewardBoxPlantedFlower",
+        "RewardBoxScrews",
+        "RewardBoxTools",
+    };
+
+    /// <summary>
     /// Builds the complete {{Infobox Items|...}} wikitext for a chain.
     /// sourceLines: pre-built source lines (each a wiki template string), joined with &lt;br/&gt;
     /// </summary>
@@ -196,6 +215,7 @@ public class InfoboxGeneratorService
 
     /// <summary>
     /// Finds all chains that produce items in this chain.
+    /// Chains in <see cref="IgnoredSourceChains"/> are excluded.
     /// Returns formatted wiki template strings.
     /// </summary>
     public List<string> BuildAutoSources(
@@ -209,6 +229,7 @@ public class InfoboxGeneratorService
         foreach (var otherChain in allChains)
         {
             if (otherChain == chain) continue;
+            if (IgnoredSourceChains.Contains(otherChain.ConfigKey)) continue;
 
             foreach (var item in otherChain.Items)
             {

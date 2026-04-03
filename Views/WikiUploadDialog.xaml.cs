@@ -1,5 +1,6 @@
 using System.IO;
 using System.Net.Http;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -71,6 +72,8 @@ public partial class WikiUploadDialog : FluentWindow
     private bool _suppressTextChanged;
     private CancellationTokenSource? _searchCts;
     private CancellationTokenSource? _resolveCts;
+    private CancellationTokenSource? _uploadCts;
+    private bool _isUploading;
 
     public int UploadedCount { get; private set; }
 
@@ -1110,6 +1113,10 @@ public partial class WikiUploadDialog : FluentWindow
         progressBar.Maximum = toUpload.Count;
         progressBar.Value = 0;
 
+        _isUploading = true;
+        _uploadCts = new CancellationTokenSource();
+        var ct = _uploadCts.Token;
+
         int uploaded = 0;
         int skipped = 0;
         bool forceAll = false;
@@ -1124,6 +1131,8 @@ public partial class WikiUploadDialog : FluentWindow
 
             for (int idx = 0; idx < toUpload.Count; idx++)
             {
+                if (ct.IsCancellationRequested) break;
+
                 var row = toUpload[idx];
                 var wikiFilename = row.ResolvedWikiFilename!;
                 int remaining = toUpload.Count - idx - 1;
@@ -1131,7 +1140,7 @@ public partial class WikiUploadDialog : FluentWindow
                 infoBar.Message = $"Uploading {wikiFilename} ({idx + 1}/{toUpload.Count})...";
                 infoBar.Severity = InfoBarSeverity.Informational;
                 infoBar.IsOpen = true;
-                Dispatcher.Invoke(DispatcherPriority.Background, new Action(() => { }));
+                await Task.Yield();
 
                 // Handle conflicts: file already exists on wiki
                 if (row.FileExistsOnWiki && !forceAll && !row.ForceUpdate)
@@ -1144,6 +1153,7 @@ public partial class WikiUploadDialog : FluentWindow
                     }
 
                     // Show conflict dialog
+                    EnsureWindowVisible(this);
                     var dlg = new UploadConflictDialog(wikiFilename, remaining, row.FilePath, row.IsPartOfSplit, _main.Settings.WikiUsername)
                         { Owner = this };
                     dlg.ShowDialog();
@@ -1172,7 +1182,7 @@ public partial class WikiUploadDialog : FluentWindow
 
                 try
                 {
-                    var fileData = await File.ReadAllBytesAsync(row.FilePath);
+                    var fileData = await File.ReadAllBytesAsync(row.FilePath, ct);
                     bool ignore = forceAll || row.FileExistsOnWiki;
                     // Set file description page with {{Permission}} license for new uploads
                     string? description = !row.FileExistsOnWiki ? "{{Permission}}" : null;
@@ -1185,7 +1195,7 @@ public partial class WikiUploadDialog : FluentWindow
                     // File exists (not yet detected) — force upload
                     try
                     {
-                        var fileData = await File.ReadAllBytesAsync(row.FilePath);
+                        var fileData = await File.ReadAllBytesAsync(row.FilePath, ct);
                         await WikiMappingService.UploadFileAsync(client, csrfToken, wikiFilename, fileData,
                             ignoreWarnings: true);
                         uploaded++;
@@ -1195,6 +1205,10 @@ public partial class WikiUploadDialog : FluentWindow
                         skipped++;
                     }
                 }
+                catch (OperationCanceledException)
+                {
+                    break;
+                }
                 catch (Exception ex) when (ex.Message.Contains("exact duplicate"))
                 {
                     skipped++;
@@ -1203,14 +1217,25 @@ public partial class WikiUploadDialog : FluentWindow
             }
             endUpload:
 
-            var msg = $"Uploaded {uploaded} images.";
+            var msg = ct.IsCancellationRequested ? "Upload cancelled. " : "";
+            msg += $"Uploaded {uploaded} images.";
             if (skipped > 0) msg += $" Skipped {skipped}.";
             infoBar.Message = msg;
-            infoBar.Severity = InfoBarSeverity.Success;
+            infoBar.Severity = ct.IsCancellationRequested ? InfoBarSeverity.Warning : InfoBarSeverity.Success;
             infoBar.IsOpen = true;
 
             UploadedCount = uploaded;
-            Increment(s => s.WikiImagesUploaded += uploaded);
+            if (uploaded > 0)
+                Increment(s => s.WikiImagesUploaded += uploaded);
+        }
+        catch (OperationCanceledException)
+        {
+            var msg = $"Upload cancelled. Uploaded {uploaded} images.";
+            if (skipped > 0) msg += $" Skipped {skipped}.";
+            infoBar.Message = msg;
+            infoBar.Severity = InfoBarSeverity.Warning;
+            infoBar.IsOpen = true;
+            UploadedCount = uploaded;
         }
         catch (Exception ex)
         {
@@ -1220,12 +1245,49 @@ public partial class WikiUploadDialog : FluentWindow
         }
         finally
         {
+            _isUploading = false;
+            _uploadCts = null;
             progressBar.Visibility = Visibility.Collapsed;
             btnUpload.IsEnabled = true;
         }
     }
 
     private void BtnClose_Click(object sender, RoutedEventArgs e) => Close();
+
+    protected override async void OnClosing(System.ComponentModel.CancelEventArgs e)
+    {
+        if (_isUploading)
+        {
+            e.Cancel = true;
+            var msgBox = new Wpf.Ui.Controls.MessageBox
+            {
+                Title = "Upload in progress",
+                Content = "An upload is currently in progress. Do you want to cancel it?",
+                PrimaryButtonText = "Cancel Upload",
+                CloseButtonText = "Continue Uploading",
+                MinWidth = 400,
+                Owner = this
+            };
+            ApplicationThemeManager.Apply(msgBox);
+            var result = await msgBox.ShowDialogAsync();
+            if (result == Wpf.Ui.Controls.MessageBoxResult.Primary)
+            {
+                _uploadCts?.Cancel();
+                _isUploading = false;
+                Close();
+            }
+            return;
+        }
+        base.OnClosing(e);
+    }
+
+    private static void EnsureWindowVisible(Window? window)
+    {
+        if (window == null) return;
+        if (window.WindowState == WindowState.Minimized)
+            window.WindowState = WindowState.Normal;
+        window.Activate();
+    }
 
     // ══════════════════════════════════════════════════════════════
     //  HELPERS

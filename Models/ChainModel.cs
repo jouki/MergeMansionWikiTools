@@ -162,6 +162,9 @@ public class ParsedChain
     /// <summary>PoolTag from the first item — used for visual asset (skeleton/texture) resolution.</summary>
     public string PoolTag { get; set; } = "";
 
+    /// <summary>Whether the first item has a "Test" tag — dev/placeholder chain with reused PoolTag.</summary>
+    public bool HasTestTag { get; set; }
+
     /// <summary>When this chain was merged from multiple JSON chains, lists all source ConfigKeys.</summary>
     public List<string>? MergedFromConfigKeys { get; set; }
 

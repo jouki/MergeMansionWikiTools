@@ -142,6 +142,8 @@ public class DataService
 
             // Parse items
             string poolTag = "";
+            bool hasTestTag = false;
+            bool checkedTestTag = false;
             foreach (var entry in primaryList.EnumerateArray())
             {
                 // Normal: single "Item" per level
@@ -149,6 +151,17 @@ public class DataService
                 {
                     if (string.IsNullOrEmpty(poolTag))
                         poolTag = GetString(itemEl, "PoolTag");
+                    if (!checkedTestTag)
+                    {
+                        checkedTestTag = true;
+                        if (itemEl.TryGetProperty("Tags", out var tagsEl) && tagsEl.ValueKind == JsonValueKind.Array)
+                        {
+                            var tagList = tagsEl.EnumerateArray().Select(t => t.GetString()).ToList();
+                            hasTestTag = tagList.Any(t => string.Equals(t, "Test", StringComparison.OrdinalIgnoreCase));
+                            if (hasTestTag)
+                                AppLogger.Info($"[TEST-TAG] Chain '{configKey}' has Test tag (tags: {string.Join(", ", tagList)})");
+                        }
+                    }
                     var parsedItem = ParseItem(itemEl);
                     if (parsedItem != null)
                         parsed.Items.Add(parsedItem);
@@ -180,6 +193,9 @@ public class DataService
             if (parsed.Items.Count > 0)
             {
                 parsed.PoolTag = poolTag;
+                parsed.HasTestTag = hasTestTag;
+                if (hasTestTag)
+                    AppLogger.Info($"[TEST-TAG-SET] Chain '{configKey}' HasTestTag=True (PoolTag={poolTag})");
                 Chains.Add(parsed);
             }
         }

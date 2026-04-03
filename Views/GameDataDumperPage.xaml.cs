@@ -61,6 +61,7 @@ public partial class GameDataDumperPage : UserControl
         chkEvents.IsChecked = _main.Settings.DumpEvents;
         chkDialogues.IsChecked = _main.Settings.DumpDialogues;
         chkCards.IsChecked = _main.Settings.DumpCards;
+        chkPets.IsChecked = _main.Settings.DumpPets;
         // Event filters
         chkEvLuckyCatch.IsChecked = _main.Settings.EventLuckyCatch;
         chkEvLuckySnap.IsChecked = _main.Settings.EventLuckySnap;
@@ -456,6 +457,7 @@ public partial class GameDataDumperPage : UserControl
         _main.Settings.DumpEvents = chkEvents.IsChecked == true;
         _main.Settings.DumpDialogues = chkDialogues.IsChecked == true;
         _main.Settings.DumpCards = chkCards.IsChecked == true;
+        _main.Settings.DumpPets = chkPets.IsChecked == true;
         _main.SaveSettings();
     }
 
@@ -546,6 +548,7 @@ public partial class GameDataDumperPage : UserControl
         if (chkEvents.IsChecked == true) mode |= DumperService.DumpMode.Events;
         if (chkDialogues.IsChecked == true) mode |= DumperService.DumpMode.Dialogues;
         if (chkCards.IsChecked == true) mode |= DumperService.DumpMode.CardCollection;
+        if (chkPets.IsChecked == true) mode |= DumperService.DumpMode.Pets;
         return mode;
     }
 
@@ -831,6 +834,7 @@ public partial class GameDataDumperPage : UserControl
         chkEvents.IsEnabled = enabled;
         chkDialogues.IsEnabled = enabled;
         chkCards.IsEnabled = enabled;
+        chkPets.IsEnabled = enabled;
         expEventCategories.IsEnabled = enabled;
         btnDumpExperimental.IsEnabled = enabled;
     }

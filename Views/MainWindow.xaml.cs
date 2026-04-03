@@ -715,6 +715,7 @@ public partial class MainWindow : FluentWindow
             {
                 ConfigKey = primarySource.ConfigKey,
                 PoolTag = primarySource.PoolTag,
+                HasTestTag = primarySource.HasTestTag,
                 DisplayName = customName ?? group.Key,
                 OriginalName = primarySource.OriginalName,
                 HasNaturalName = primarySource.HasNaturalName,
