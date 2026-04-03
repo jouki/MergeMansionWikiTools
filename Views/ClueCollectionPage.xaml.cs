@@ -1051,7 +1051,7 @@ public partial class ClueCollectionPage : UserControl
                 try
                 {
                     var bytes = await File.ReadAllBytesAsync(localPath);
-                    await WikiMappingService.UploadFileAsync(client, csrfToken, wikiName, bytes, "{{Permission}}");
+                    await UploadWithRetryAsync(client, csrfToken, wikiName, bytes);
                     Interlocked.Increment(ref uploaded);
                 }
                 catch (Exception ex) { Interlocked.Increment(ref errors); AppLogger.Warn($"[ClueUpload] {wikiName}: {ex.Message}"); }
@@ -1074,21 +1074,18 @@ public partial class ClueCollectionPage : UserControl
 
             if (remainingFiles.Count > 0)
             {
-                var semaphore = new SemaphoreSlim(4);
+                var semaphore = new SemaphoreSlim(2); // 2 concurrent to avoid rate limiting
                 int processedInBulk = 0;
-                int bulkTotal = remainingFiles.Count;
 
                 var tasks = remainingFiles.Select(async file =>
                 {
                     bool existsOnWiki = existMap.GetValueOrDefault("File:" + file.WikiName);
 
-                    // Skip existing if only uploadAll (not forceAll)
                     if (existsOnWiki && !forceAll)
                     {
                         Interlocked.Increment(ref skipped);
                         return;
                     }
-                    // Skip if skipAll and existing
                     if (existsOnWiki && skipAll)
                     {
                         Interlocked.Increment(ref skipped);
@@ -1099,7 +1096,7 @@ public partial class ClueCollectionPage : UserControl
                     try
                     {
                         var bytes = await File.ReadAllBytesAsync(file.LocalPath);
-                        await WikiMappingService.UploadFileAsync(client, csrfToken, file.WikiName, bytes, "{{Permission}}");
+                        await UploadWithRetryAsync(client, csrfToken, file.WikiName, bytes);
                         int done = Interlocked.Increment(ref uploaded);
                         int idx = Interlocked.Increment(ref processedInBulk);
                         Dispatcher.Invoke(() =>
@@ -1361,6 +1358,60 @@ public partial class ClueCollectionPage : UserControl
                 parentSv.ScrollToVerticalOffset(parentSv.VerticalOffset - e.Delta);
         }
     }
+
+    /// <summary>Shared rate limit gate — when one upload gets rate-limited, ALL uploads pause.</summary>
+    private static readonly SemaphoreSlim _rateLimitGate = new(1, 1);
+    private static volatile bool _isRateLimited;
+
+    /// <summary>Uploads a file with retry on rate limiting (HTTP 429 / "ratelimited" error). Max 10 retries, 10s delay.</summary>
+    private static async Task UploadWithRetryAsync(System.Net.Http.HttpClient client, string csrfToken, string fileName, byte[] bytes)
+    {
+        const int maxRetries = 10;
+        const int retryDelayMs = 10_000;
+
+        for (int attempt = 1; attempt <= maxRetries; attempt++)
+        {
+            // Wait if another upload triggered rate limit pause
+            if (_isRateLimited)
+            {
+                AppLogger.Info($"[ClueUpload] {fileName}: waiting for rate limit cooldown...");
+                await _rateLimitGate.WaitAsync();
+                _rateLimitGate.Release();
+            }
+
+            try
+            {
+                await WikiMappingService.UploadFileAsync(client, csrfToken, fileName, bytes, "{{Permission}}");
+                return;
+            }
+            catch (Exception ex) when (attempt < maxRetries && IsRateLimitError(ex))
+            {
+                AppLogger.Warn($"[ClueUpload] {fileName}: rate limited (attempt {attempt}/{maxRetries}), pausing ALL uploads for {retryDelayMs / 1000}s...");
+
+                // Acquire gate — blocks all other uploads from proceeding
+                if (!_isRateLimited)
+                {
+                    _isRateLimited = true;
+                    await _rateLimitGate.WaitAsync();
+                    await Task.Delay(retryDelayMs);
+                    _isRateLimited = false;
+                    _rateLimitGate.Release();
+                }
+                else
+                {
+                    // Another thread already holds the gate — just wait for it
+                    await _rateLimitGate.WaitAsync();
+                    _rateLimitGate.Release();
+                }
+            }
+        }
+    }
+
+    private static bool IsRateLimitError(Exception ex)
+        => ex.Message.Contains("ratelimited", StringComparison.OrdinalIgnoreCase)
+        || ex.Message.Contains("429", StringComparison.Ordinal)
+        || ex.Message.Contains("rate limit", StringComparison.OrdinalIgnoreCase)
+        || ex.Message.Contains("Too Many Requests", StringComparison.OrdinalIgnoreCase);
 
     // ── Helpers ──────────────────────────────────────────────────────
 

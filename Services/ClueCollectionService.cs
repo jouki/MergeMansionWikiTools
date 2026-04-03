@@ -13,6 +13,7 @@ public class ClueCollectionCase
     public int Index { get; set; } // 1-based
     public string ConfigKey { get; set; } = "";
     public string DisplayName { get; set; } = "";
+    public int DurationDays { get; set; } = 63; // default 63 (3 mysteries period)
     public List<ClueCollectionSet> Sets { get; set; } = new();
     public List<string> GrandRewards { get; set; } = new(); // formatted wiki markup
     public bool ExistsOnWiki { get; set; }
@@ -102,6 +103,18 @@ public class ClueCollectionService
 
             // Parse grand rewards
             caseObj.GrandRewards = ParseRewardsRaw(ev);
+
+            // Parse duration from ActivableParams if available
+            if (ev.TryGetProperty("ActivableParams", out var actParams))
+            {
+                var durStr = GetStr(actParams, "Duration");
+                if (!string.IsNullOrEmpty(durStr))
+                {
+                    // Duration format: "Xd Yh Zmin Ws" — extract days
+                    var dayMatch = Regex.Match(durStr, @"(\d+)d\b");
+                    if (dayMatch.Success) caseObj.DurationDays = int.Parse(dayMatch.Groups[1].Value);
+                }
+            }
 
             Cases.Add(caseObj);
             caseIndex++;
@@ -249,7 +262,7 @@ public class ClueCollectionService
         sb.AppendLine($"| {{{{#Invoke:Various|GetClueCollectionName|{caseObj.Index}}}}}");
         sb.AppendLine($"| {caseObj.Sets.Count}");
         sb.AppendLine($"| {totalClues}");
-        sb.AppendLine($"| {{{{Time}}}} 63 days");
+        sb.AppendLine($"| {{{{Time}}}} {caseObj.DurationDays} days");
         sb.AppendLine($"| {grandRewardStr}");
         return sb.ToString();
     }
@@ -270,21 +283,13 @@ public class ClueCollectionService
         sb.AppendLine("! Duration");
         sb.AppendLine("! Grand Reward");
 
-        // Hardcoded duration per case (not in game data)
-        var durations = new Dictionary<int, int>
-        {
-            [1] = 70, [2] = 71, [3] = 63, [4] = 42,
-            [5] = 63, [6] = 63, [7] = 63, [8] = 63, [9] = 63
-        };
-
-        // Build row data
+        // Build row data — DurationDays from parsed data (default 63)
         var rows = new List<(int Index, string Name, int Sets, int Clues, int Duration, string Reward)>();
         foreach (var c in cases)
         {
             int totalClues = c.Sets.Sum(s => s.CardCount);
-            int dur = durations.GetValueOrDefault(c.Index, 63);
             string reward = string.Join("<br>", c.GrandRewards);
-            rows.Add((c.Index, c.DisplayName, c.Sets.Count, totalClues, dur, reward));
+            rows.Add((c.Index, c.DisplayName, c.Sets.Count, totalClues, c.DurationDays, reward));
         }
 
         // Group consecutive rows with identical (Sets, Clues, Duration, Reward)
