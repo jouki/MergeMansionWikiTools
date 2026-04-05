@@ -20,6 +20,9 @@ public class WikiTableGenerator
     /// <summary>Warnings encountered during generation.</summary>
     public List<string> Warnings { get; } = new();
 
+    private bool IsSinkSuppressed(ParsedItem item) =>
+        _wikiMapping?.Mappings.TryGetValue(item.ItemType, out var entry) == true && entry.IsNil("fuels");
+
     /// <summary>
     /// Generates a wiki table for the given chain.
     /// </summary>
@@ -63,8 +66,8 @@ public class WikiTableGenerator
         var fuelMap = BuildFuelMap(allItems);
         bool showFuel = fuelMap.Count > 0;
 
-        // Transforms To — sink reward items
-        bool showTransformsTo = allItems.Any(i => i.IsSink && !string.IsNullOrEmpty(i.SinkRewardItemType));
+        // Transforms To — sink reward items (skip items with fuels suppressed via mapping)
+        bool showTransformsTo = allItems.Any(i => i.IsSink && !string.IsNullOrEmpty(i.SinkRewardItemType) && !IsSinkSuppressed(i));
 
         // Transforms To Variant — separate column when transform targets have variants
         bool showTransformsToVariant = false;
@@ -89,7 +92,7 @@ public class WikiTableGenerator
         // Detect Transforms To Variant column: any sink item transforms into a variant target
         if (showTransformsTo)
         {
-            foreach (var sinkItem in allItems.Where(i => i.IsSink && !string.IsNullOrEmpty(i.SinkRewardItemType)))
+            foreach (var sinkItem in allItems.Where(i => i.IsSink && !string.IsNullOrEmpty(i.SinkRewardItemType) && !IsSinkSuppressed(i)))
             {
                 foreach (var ch in _data.Chains)
                     foreach (var ci in ch.Items)
@@ -762,7 +765,7 @@ public class WikiTableGenerator
 
         foreach (var item in levelItems)
         {
-            if (!item.IsSink || string.IsNullOrEmpty(item.SinkRewardItemType)) continue;
+            if (!item.IsSink || string.IsNullOrEmpty(item.SinkRewardItemType) || IsSinkSuppressed(item)) continue;
 
             foreach (var chain in _data.Chains)
                 foreach (var ci in chain.Items)
@@ -781,7 +784,7 @@ public class WikiTableGenerator
     /// </summary>
     private Dictionary<int, List<(ParsedChain Chain, ParsedItem Item, int Amount)>> BuildFuelMap(List<ParsedItem> chainItems)
     {
-        var sinkItems = chainItems.Where(i => i.IsSink && i.SinkRequirementConfigKeys != null).ToList();
+        var sinkItems = chainItems.Where(i => i.IsSink && i.SinkRequirementConfigKeys != null && !IsSinkSuppressed(i)).ToList();
         if (sinkItems.Count == 0) return new();
 
         // Build ConfigKey → (chain, item) lookup
@@ -888,7 +891,7 @@ public class WikiTableGenerator
         {
             foreach (var item in otherChain.Items)
             {
-                if (!item.IsSink || item.SinkRequirementConfigKeys == null) continue;
+                if (!item.IsSink || item.SinkRequirementConfigKeys == null || IsSinkSuppressed(item)) continue;
 
                 foreach (var reqKey in item.SinkRequirementConfigKeys)
                 {

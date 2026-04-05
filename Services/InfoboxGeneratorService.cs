@@ -15,6 +15,17 @@ public class InfoboxGeneratorOptions
 
 public class InfoboxGeneratorService
 {
+    private readonly DataService? _data;
+    private readonly WikiMappingCache? _wikiMapping;
+
+    public InfoboxGeneratorService() { }
+
+    public InfoboxGeneratorService(DataService data, WikiMappingCache? wikiMapping = null)
+    {
+        _data = data;
+        _wikiMapping = wikiMapping;
+    }
+
     public List<string> Warnings { get; } = new();
 
     /// <summary>Area display name detected from task-reward lookup (set by BuildAutoSources).</summary>
@@ -38,6 +49,31 @@ public class InfoboxGeneratorService
         "RewardBoxScrews",
         "RewardBoxTools",
     };
+
+    private bool IsSinkSuppressed(ParsedItem item) =>
+        _wikiMapping?.Mappings.TryGetValue(item.ItemType, out var entry) == true && entry.IsNil("fuels");
+
+    /// <summary>
+    /// Resolves a chain display name, preferring wiki mapping when available.
+    /// Falls back to chain.DisplayName when DataService is not set.
+    /// </summary>
+    private string ResolveChainName(ParsedChain chain, string? itemType = null)
+    {
+        if (_data != null && !string.IsNullOrEmpty(itemType))
+            return _data.ResolveChainDisplayNameFromItemType(itemType, _wikiMapping);
+        return chain.DisplayName;
+    }
+
+    /// <summary>
+    /// Resolves level for an ItemType, preferring wiki mapping when available.
+    /// Falls back to the ParsedItem level when DataService is not set.
+    /// </summary>
+    private int ResolveLevel(string itemType, ParsedItem? matchingItem)
+    {
+        if (_data != null)
+            return _data.ResolveLevel(itemType, _wikiMapping);
+        return matchingItem?.Level ?? 1;
+    }
 
     /// <summary>
     /// Builds the complete {{Infobox Items|...}} wikitext for a chain.
@@ -143,7 +179,7 @@ public class InfoboxGeneratorService
 
     // ── Type detection ────────────────────────────────────────────────
 
-    private static List<string> BuildTypes(
+    private List<string> BuildTypes(
         ParsedChain chain, IReadOnlyList<ParsedChain> allChains, InfoboxGeneratorOptions opts)
     {
         var types = new List<string>();
@@ -187,7 +223,7 @@ public class InfoboxGeneratorService
                 && string.IsNullOrEmpty(i.SpawnDecayIntoItemType));
         if (depleting) types.Add("Depleting Item");
 
-        bool fueled = chain.Items.Any(i => i.IsSink);
+        bool fueled = chain.Items.Any(i => i.IsSink && !IsSinkSuppressed(i));
         if (fueled) types.Add("Fueled Item");
 
         // Fuel Item — any item's NumericConfigKey is referenced by a sink in another chain
@@ -200,7 +236,7 @@ public class InfoboxGeneratorService
             bool isFuel = allChains
                 .Where(c => c != chain)
                 .SelectMany(c => c.Items)
-                .Where(i => i.IsSink && i.SinkRequirementConfigKeys != null)
+                .Where(i => i.IsSink && !IsSinkSuppressed(i) && i.SinkRequirementConfigKeys != null)
                 .SelectMany(i => i.SinkRequirementConfigKeys!)
                 .Any(req => myConfigKeys.Contains(req));
             if (isFuel) types.Add("Fuel Item");
@@ -224,7 +260,8 @@ public class InfoboxGeneratorService
     {
         var myItemTypes = chain.Items.Select(i => i.ItemType).ToHashSet(StringComparer.OrdinalIgnoreCase);
         var result = new List<string>();
-        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var sourceMaxLevel = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+        var sourceChains = new Dictionary<string, ParsedChain>(StringComparer.OrdinalIgnoreCase);
 
         foreach (var otherChain in allChains)
         {
@@ -239,7 +276,7 @@ public class InfoboxGeneratorService
                              (item.SpawnItemType != null && myItemTypes.Contains(item.SpawnItemType));
 
                 // Sink reward source (other chain transforms INTO this chain's items)
-                bool transforms = item.IsSink
+                bool transforms = item.IsSink && !IsSinkSuppressed(item)
                     && !string.IsNullOrEmpty(item.SinkRewardItemType)
                     && myItemTypes.Contains(item.SinkRewardItemType);
 
@@ -256,15 +293,32 @@ public class InfoboxGeneratorService
                     (item.DecayAfterLastCycleOdds?.Keys.Any(k => myItemTypes.Contains(k)) == true);
 
                 if (!drops && !transforms && !orderRewards && !decays) continue;
-                if (!seen.Add(otherChain.ConfigKey)) continue;
 
-                // Non-event chains get fullName=true to show parenthetical
-                if (!otherChain.IsEventChain)
-                    result.Add($"{{{{Item/Group|{otherChain.DisplayName}|fullName=true}}}}");
+                // Track highest level producer in this chain that drops our items
+                var resolvedLevel = ResolveLevel(item.ItemType, item);
+                sourceChains.TryAdd(otherChain.ConfigKey, otherChain);
+                if (sourceMaxLevel.TryGetValue(otherChain.ConfigKey, out var prevLevel))
+                {
+                    if (resolvedLevel > prevLevel)
+                        sourceMaxLevel[otherChain.ConfigKey] = resolvedLevel;
+                }
                 else
-                    result.Add($"{{{{Item/Group|{otherChain.DisplayName}}}}}");
-                break; // one entry per source chain
+                {
+                    sourceMaxLevel[otherChain.ConfigKey] = resolvedLevel;
+                }
             }
+        }
+
+        // Build source lines with highest producing level
+        foreach (var (configKey, maxLevel) in sourceMaxLevel)
+        {
+            var otherChain = sourceChains[configKey];
+            var sourceName = ResolveChainName(otherChain, otherChain.Items.FirstOrDefault()?.ItemType);
+            var levelStr = maxLevel > 0 ? $"|{maxLevel}" : "";
+            if (!otherChain.IsEventChain)
+                result.Add($"{{{{Item/Group|{sourceName}{levelStr}|fullName=true}}}}");
+            else
+                result.Add($"{{{{Item/Group|{sourceName}{levelStr}}}}}");
         }
 
         // Task reward source — temp items that are rewards from area tasks
@@ -298,7 +352,7 @@ public class InfoboxGeneratorService
 
     // ── Drops ─────────────────────────────────────────────────────────
 
-    private static List<string> BuildDrops(
+    private List<string> BuildDrops(
         ParsedChain chain, IReadOnlyList<ParsedChain> allChains, Dictionary<string, string> itemNames)
     {
         var itemTypeToChain = BuildItemTypeToChain(allChains);
@@ -323,7 +377,7 @@ public class InfoboxGeneratorService
                 {
                     var matchingItem = droppedChain.Items
                         .FirstOrDefault(i => string.Equals(i.ItemType, droppedType, StringComparison.OrdinalIgnoreCase));
-                    int lvl = matchingItem?.Level ?? 1;
+                    int lvl = ResolveLevel(droppedType, matchingItem);
 
                     if (!byChain.TryGetValue(droppedChain.ConfigKey, out var entry))
                     {
@@ -345,11 +399,12 @@ public class InfoboxGeneratorService
 
         foreach (var (_, (dChain, levels)) in byChain)
         {
+            var chainName = ResolveChainName(dChain, dChain.Items.FirstOrDefault()?.ItemType);
             int minLvl = levels.Min();
             int maxLvl = levels.Max();
             result.Add(minLvl == maxLvl
-                ? $"{{{{Item/Group|{dChain.DisplayName}|{minLvl}}}}}"
-                : $"{{{{Item/Group|{dChain.DisplayName}|{minLvl}|min={minLvl}|max={maxLvl}}}}}");
+                ? $"{{{{Item/Group|{chainName}|{minLvl}}}}}"
+                : $"{{{{Item/Group|{chainName}|{minLvl}|min={minLvl}|max={maxLvl}}}}}");
         }
 
         foreach (var name in unmatchedNames)
@@ -360,7 +415,7 @@ public class InfoboxGeneratorService
 
     // ── Decays Into ───────────────────────────────────────────────────
 
-    private static string BuildDecaysInto(
+    private string BuildDecaysInto(
         ParsedChain chain, IReadOnlyList<ParsedChain> allChains, Dictionary<string, string> itemNames)
     {
         var itemTypeToChain = BuildItemTypeToChain(allChains);
@@ -393,10 +448,11 @@ public class InfoboxGeneratorService
                 {
                     var matchingItem = decayChain.Items
                         .FirstOrDefault(i => string.Equals(i.ItemType, decayType, StringComparison.OrdinalIgnoreCase));
-                    int lvl = matchingItem?.Level ?? 1;
+                    int lvl = ResolveLevel(decayType, matchingItem);
+                    var chainName = ResolveChainName(decayChain, decayType);
 
-                    if (seen.Add((decayChain.DisplayName, lvl)))
-                        parts.Add($"{{{{Item|{decayChain.DisplayName}|{lvl}}}}}");
+                    if (seen.Add((chainName, lvl)))
+                        parts.Add($"{{{{Item|{chainName}|{lvl}}}}}");
                 }
                 else if (itemNames.TryGetValue(decayType, out var name))
                 {
@@ -414,7 +470,7 @@ public class InfoboxGeneratorService
 
     // ── Transforms To (sink reward) ──────────────────────────────────
 
-    private static List<string> BuildTransformsTo(
+    private List<string> BuildTransformsTo(
         ParsedChain chain, IReadOnlyList<ParsedChain> allChains)
     {
         var itemTypeToChain = BuildItemTypeToChain(allChains);
@@ -423,16 +479,17 @@ public class InfoboxGeneratorService
 
         foreach (var item in chain.Items)
         {
-            if (!item.IsSink || string.IsNullOrEmpty(item.SinkRewardItemType)) continue;
+            if (!item.IsSink || string.IsNullOrEmpty(item.SinkRewardItemType) || IsSinkSuppressed(item)) continue;
 
             if (itemTypeToChain.TryGetValue(item.SinkRewardItemType, out var rewardChain))
             {
                 var rewardItem = rewardChain.Items
                     .FirstOrDefault(i => string.Equals(i.ItemType, item.SinkRewardItemType, StringComparison.OrdinalIgnoreCase));
-                int lvl = rewardItem?.Level ?? 1;
+                int lvl = ResolveLevel(item.SinkRewardItemType, rewardItem);
+                var chainName = ResolveChainName(rewardChain, item.SinkRewardItemType);
 
-                if (!seen.Add((rewardChain.DisplayName, lvl))) continue;
-                result.Add($"{{{{Item|{rewardChain.DisplayName}|{lvl}}}}}");
+                if (!seen.Add((chainName, lvl))) continue;
+                result.Add($"{{{{Item|{chainName}|{lvl}}}}}");
             }
         }
 
@@ -441,7 +498,7 @@ public class InfoboxGeneratorService
 
     // ── Used In (this chain's items are sink requirements elsewhere) ──
 
-    private static List<string> BuildUsedIn(
+    private List<string> BuildUsedIn(
         ParsedChain chain, IReadOnlyList<ParsedChain> allChains, Dictionary<string, string> itemNames)
     {
         var myConfigKeys = chain.Items
@@ -462,7 +519,8 @@ public class InfoboxGeneratorService
             foreach (var item in otherChain.Items)
             {
                 // Match via NumericConfigKey (ScoreTargets — sink fuel)
-                bool matchesSinkFuel = item.IsSink && item.SinkRequirementConfigKeys != null
+                bool matchesSinkFuel = item.IsSink && !IsSinkSuppressed(item)
+                    && item.SinkRequirementConfigKeys != null
                     && item.SinkRequirementConfigKeys.Any(r => myConfigKeys.Contains(r));
 
                 // Match via order required items (this chain's items are needed by order tasks)
@@ -473,7 +531,8 @@ public class InfoboxGeneratorService
 
                 if (!seen.Add(otherChain.ConfigKey)) continue;
 
-                result.Add($"{{{{Item/Group|{otherChain.DisplayName}}}}}");
+                var usedInName = ResolveChainName(otherChain, otherChain.Items.FirstOrDefault()?.ItemType);
+                result.Add($"{{{{Item/Group|{usedInName}}}}}");
             }
         }
 
@@ -482,7 +541,7 @@ public class InfoboxGeneratorService
 
     // ── Needs (this item IS the sink) ─────────────────────────────────
 
-    private static List<string> BuildNeeds(
+    private List<string> BuildNeeds(
         ParsedChain chain, IReadOnlyList<ParsedChain> allChains, Dictionary<string, string> itemNames)
     {
         var configKeyToChain = BuildConfigKeyToChain(allChains);
@@ -493,7 +552,7 @@ public class InfoboxGeneratorService
 
         foreach (var item in chain.Items)
         {
-            if (!item.IsSink || item.SinkRequirementConfigKeys == null) continue;
+            if (!item.IsSink || item.SinkRequirementConfigKeys == null || IsSinkSuppressed(item)) continue;
 
             foreach (var reqKey in item.SinkRequirementConfigKeys)
             {
@@ -519,9 +578,10 @@ public class InfoboxGeneratorService
 
         foreach (var (_, (needChain, items)) in byChain)
         {
+            var chainName = ResolveChainName(needChain, needChain.Items.FirstOrDefault()?.ItemType);
             foreach (var (lvl, amt) in items.OrderBy(x => x.Level))
             {
-                var template = $"{{{{Item|{needChain.DisplayName}|{lvl}}}}}";
+                var template = $"{{{{Item|{chainName}|{lvl}}}}}";
                 result.Add(amt > 1 ? $"{amt}x {template}" : template);
             }
         }

@@ -590,14 +590,22 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
             }
             else if (value is ItemDefinition item)
             {
-                var itemName = LocMan.GetItemName(item.ItemType);
+                var overrideKey = item.OverrideLocalizationItemKey;
+                var fullOverrideKey = item.FullOverrideLocalizationItemKey;
+
+                if (!string.IsNullOrEmpty(overrideKey))
+                    WriteProperty(writer, "OverrideLocKey", overrideKey, serializer);
+                if (!string.IsNullOrEmpty(fullOverrideKey))
+                    WriteProperty(writer, "FullOverrideLocKey", fullOverrideKey, serializer);
+
+                var itemName = LocMan.GetItemName(item.ItemType, overrideKey, fullOverrideKey);
                 if (itemName != null)
                     WriteProperty(writer, "Name", itemName, serializer);
 
                 // ItemType early — between Name and Description for readability
                 WriteProperty(writer, "ItemType", item.ItemType, serializer);
 
-                var descName = LocMan.GetDescription(item.ItemType, item.LevelNumber);
+                var descName = LocMan.GetDescription(item.ItemType, item.LevelNumber, overrideKey, fullOverrideKey);
                 if (descName != null)
                     WriteProperty(writer, "Description", descName, serializer);
 

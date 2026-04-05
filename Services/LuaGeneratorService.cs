@@ -411,10 +411,19 @@ public class LuaGeneratorService
         long RechargeTimeMs,
         int Charges,
         int DropsPerCharge,
-        long ChargeTimeMs);
+        long ChargeTimeMs,
+        Dictionary<string, int>? Fuels,
+        string? FueledResult);
 
     private static List<FlatItem> BuildFlatItems(List<ParsedChain> chains, bool useRawNames = false)
     {
+        // Build NumericConfigKey → ItemType lookup for resolving sink fuel references
+        var configKeyToItemType = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var chain in chains)
+            foreach (var item in chain.Items)
+                if (!string.IsNullOrEmpty(item.NumericConfigKey) && !string.IsNullOrEmpty(item.ItemType))
+                    configKeyToItemType.TryAdd(item.NumericConfigKey, item.ItemType);
+
         var list = new List<FlatItem>();
         foreach (var chain in chains)
         {
@@ -425,7 +434,7 @@ public class LuaGeneratorService
 
             foreach (var item in chain.Items)
             {
-                if (string.IsNullOrEmpty(item.ItemType)) continue;
+                if (string.IsNullOrEmpty(item.ItemType) || item.IsAlias) continue;
                 // Resolve generator fields — primary (ActivationFeatures) or secondary (SpawnFeatures)
                 int? skipPrice = null;
                 long rechargeTime = 0;
@@ -452,6 +461,21 @@ public class LuaGeneratorService
                     dropsPerCharge = item.SpawnAmountInCycle;
                 }
 
+                // Resolve sink fuel references: NumericConfigKey → ItemType
+                Dictionary<string, int>? fuels = null;
+                string? fueledResult = null;
+                if (item.IsSink && item.SinkRequirementAmounts is { Count: > 0 })
+                {
+                    fuels = new Dictionary<string, int>();
+                    foreach (var (configKey, amount) in item.SinkRequirementAmounts)
+                    {
+                        if (configKeyToItemType.TryGetValue(configKey, out var fuelItemType))
+                            fuels[fuelItemType] = amount;
+                    }
+                    if (fuels.Count == 0) fuels = null;
+                    fueledResult = item.SinkRewardItemType;
+                }
+
                 list.Add(new FlatItem(
                     item.ItemType,
                     item.Name,
@@ -470,7 +494,9 @@ public class LuaGeneratorService
                     rechargeTime,
                     charges,
                     dropsPerCharge,
-                    chargeTime));
+                    chargeTime,
+                    fuels,
+                    fueledResult));
             }
         }
         return list;
@@ -514,6 +540,17 @@ public class LuaGeneratorService
                 sb.Append(string.Join(", ", it.ExtraSpawnValues.Select(
                     kv => $"{CamelToLua(kv.Key)} = {kv.Value.ToString(CultureInfo.InvariantCulture)}")));
                 sb.Append("}, ");
+            }
+
+            // fuels + fueledResult (sink/transform items)
+            if (it.Fuels is { Count: > 0 })
+            {
+                sb.Append("fuels = {");
+                sb.Append(string.Join(", ", it.Fuels.Select(
+                    kv => $"[\"{Esc(kv.Key)}\"] = {{amount = {kv.Value}}}")));
+                sb.Append("}, ");
+                if (!string.IsNullOrEmpty(it.FueledResult))
+                    sb.Append($"fueledResult = \"{Esc(it.FueledResult)}\", ");
             }
 
             // odds

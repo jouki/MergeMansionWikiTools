@@ -9,13 +9,27 @@ namespace MergeMansionWikiTools.Services;
 
 public class WikiMappingEntry
 {
-    public string? ChainName { get; set; }
-    public string? Name { get; set; }
-    public int? Level { get; set; }
-    public double? SortingLevel { get; set; }
-    public bool Fueled { get; set; }
-    public bool IgnoreInTask { get; set; }
-    public bool IsAlias { get; set; }
+    /// <summary>All fields from the Lua mapping entry. Values: string, double, bool, or null (explicit nil).</summary>
+    public Dictionary<string, object?> Fields { get; set; } = new(StringComparer.OrdinalIgnoreCase);
+
+    // Convenience typed accessors for commonly used fields
+    public string? ChainName => GetString("chainName");
+    public string? Name => GetString("name");
+    public int? Level => GetDouble("level") is double d ? (int)d : null;
+    public double? SortingLevel => GetDouble("sortingLevel");
+    public bool Fueled => GetBool("fueled");
+    public bool IgnoreInTask => GetBool("ignoreInTask");
+    public bool IsAlias => GetBool("isAlias");
+
+    /// <summary>Whether a field was explicitly set to nil in the mapping (e.g., fuels = nil).</summary>
+    public bool IsNil(string field) => Fields.TryGetValue(field, out var v) && v == null;
+
+    /// <summary>Whether a field exists in the mapping (any value including nil).</summary>
+    public bool Has(string field) => Fields.ContainsKey(field);
+
+    private string? GetString(string field) => Fields.TryGetValue(field, out var v) && v is string s ? s : null;
+    private double? GetDouble(string field) => Fields.TryGetValue(field, out var v) && v is double d ? d : null;
+    private bool GetBool(string field) => Fields.TryGetValue(field, out var v) && v is true;
 }
 
 public class WikiMappingCache
@@ -147,24 +161,18 @@ public static class WikiMappingService
     {
         var result = new Dictionary<string, WikiMappingEntry>(StringComparer.OrdinalIgnoreCase);
 
-        // Match each entry: ["key"] = { ... }, but skip Lua-commented lines (--[...)
-        var entryRegex = new Regex(@"(?<!-)\[""([^""]+)""\]\s*=\s*\{([^}]*)\}", RegexOptions.Compiled);
+        // Match top-level entry keys: ["key"] = { at line start (with optional indent)
+        var keyRegex = new Regex(@"^\s*\[""([^""]+)""\]\s*=\s*\{", RegexOptions.Compiled | RegexOptions.Multiline);
 
-        foreach (Match m in entryRegex.Matches(lua))
+        foreach (Match m in keyRegex.Matches(lua))
         {
             var key = m.Groups[1].Value;
-            var body = m.Groups[2].Value;
+            var bodyStart = m.Index + m.Length;
+            var body = ExtractBalancedBraceContent(lua, bodyStart);
+            if (body == null) continue;
 
-            var entry = new WikiMappingEntry
-            {
-                ChainName = ExtractString(body, "chainName"),
-                Name = ExtractString(body, "name"),
-                Level = ExtractInt(body, "level"),
-                SortingLevel = ExtractDouble(body, "sortingLevel"),
-                Fueled = ExtractBool(body, "fueled"),
-                IgnoreInTask = ExtractBool(body, "ignoreInTask"),
-                IsAlias = ExtractBool(body, "isAlias"),
-            };
+            var entry = new WikiMappingEntry();
+            ParseTopLevelFields(body, entry.Fields);
 
             result.TryAdd(key, entry);
         }
@@ -172,29 +180,58 @@ public static class WikiMappingService
         return result;
     }
 
-    private static string? ExtractString(string body, string field)
+    /// <summary>Parses only top-level fields from a Lua table body, skipping nested table content.</summary>
+    private static void ParseTopLevelFields(string body, Dictionary<string, object?> fields)
     {
-        var match = Regex.Match(body, field + @"\s*=\s*""([^""]*)""");
-        return match.Success ? match.Groups[1].Value : null;
+        // Strip nested tables from body before parsing fields
+        var flat = StripNestedTables(body);
+
+        var fieldRegex = new Regex(
+            @"(\w+)\s*=\s*(?:""([^""]*)""|(-?[\d.]+)|(\w+))",
+            RegexOptions.Compiled);
+
+        foreach (Match f in fieldRegex.Matches(flat))
+        {
+            var fieldName = f.Groups[1].Value;
+            if (f.Groups[2].Success) // string value
+                fields[fieldName] = f.Groups[2].Value;
+            else if (f.Groups[3].Success) // number value
+                fields[fieldName] = double.TryParse(f.Groups[3].Value,
+                    System.Globalization.CultureInfo.InvariantCulture, out var d) ? d : 0.0;
+            else if (f.Groups[4].Success) // keyword: true, false, nil
+            {
+                var kw = f.Groups[4].Value;
+                if (kw == "true") fields[fieldName] = true;
+                else if (kw == "false") fields[fieldName] = false;
+                else if (kw == "nil") fields[fieldName] = null;
+            }
+        }
     }
 
-    private static int? ExtractInt(string body, string field)
+    /// <summary>Removes all nested {...} blocks from a Lua table body, preserving top-level fields.</summary>
+    private static string StripNestedTables(string body)
     {
-        var match = Regex.Match(body, field + @"\s*=\s*(\d+)");
-        return match.Success && int.TryParse(match.Groups[1].Value, out var v) ? v : null;
+        var sb = new System.Text.StringBuilder(body.Length);
+        int depth = 0;
+        for (int i = 0; i < body.Length; i++)
+        {
+            if (body[i] == '{') { depth++; continue; }
+            if (body[i] == '}') { depth--; continue; }
+            if (depth == 0) sb.Append(body[i]);
+        }
+        return sb.ToString();
     }
 
-    private static double? ExtractDouble(string body, string field)
+    /// <summary>Extracts content from the position right after an opening '{' to its matching '}'.</summary>
+    private static string? ExtractBalancedBraceContent(string text, int start)
     {
-        var match = Regex.Match(body, field + @"\s*=\s*([\d.]+)");
-        return match.Success && double.TryParse(match.Groups[1].Value,
-            System.Globalization.CultureInfo.InvariantCulture, out var v) ? v : null;
-    }
-
-    private static bool ExtractBool(string body, string field)
-    {
-        var match = Regex.Match(body, field + @"\s*=\s*(true|false)");
-        return match.Success && match.Groups[1].Value == "true";
+        int depth = 1;
+        for (int i = start; i < text.Length; i++)
+        {
+            if (text[i] == '{') depth++;
+            else if (text[i] == '}') { depth--; if (depth == 0) return text[start..i]; }
+        }
+        return null;
     }
 
     // ── Wiki Edit API ────────────────────────────────────────────────

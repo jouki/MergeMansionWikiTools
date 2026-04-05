@@ -129,8 +129,20 @@ public static class LocMan
 
     #region Items
 
-    public static string GetDescription(string itemType, int level)
+    public static string GetDescription(string itemType, int level, string overrideKey = null, string fullOverrideKey = null)
     {
+        if (!string.IsNullOrEmpty(fullOverrideKey))
+        {
+            var fullId = $"Item_{fullOverrideKey}_Description";
+            if (HasString(fullId)) return Get(fullId);
+        }
+        if (!string.IsNullOrEmpty(overrideKey))
+        {
+            // overrideKey is an ItemType (e.g., "StablesInterior_AdvancedHorseTool_05") — strip suffix, use its level
+            var overrideName = GetSubstringBeforeLastChar(overrideKey, '_');
+            var overrideId = $"Item_{overrideName}{level}_Description";
+            if (HasString(overrideId)) return Get(overrideId);
+        }
         var itemName = GetSubstringBeforeLastChar(itemType, '_');
         return Get($"Item_{itemName}{level}_Description");
     }
@@ -179,14 +191,32 @@ public static class LocMan
         return Get($"Item_{itemName}{level}_Description");
     }
 
-    public static string GetItemName(string itemType)
+    public static string GetItemName(string itemType, string overrideKey = null, string fullOverrideKey = null)
     {
+        if (!string.IsNullOrEmpty(fullOverrideKey))
+        {
+            var fullId = $"Item_{fullOverrideKey}";
+            if (HasString(fullId)) return Get(fullId);
+        }
+
         var lastIndex = itemType.LastIndexOf('_');
         if (lastIndex <= 0 || lastIndex >= itemType.Length - 1)
             throw new Exception($"{itemType} has invalid _ (underscore) placement. Last _ should separate item name and level.");
 
         var firstPart = itemType[..lastIndex];
         var secondPart = int.Parse(itemType[(lastIndex + 1)..]);
+
+        if (!string.IsNullOrEmpty(overrideKey))
+        {
+            // overrideKey is an ItemType (e.g., "StablesInterior_AdvancedHorseTool_05") — parse its own level
+            var ovLastIndex = overrideKey.LastIndexOf('_');
+            if (ovLastIndex > 0 && ovLastIndex < overrideKey.Length - 1
+                && int.TryParse(overrideKey[(ovLastIndex + 1)..], out var ovLevel))
+            {
+                var overrideId = $"Item_{overrideKey[..ovLastIndex]}{ovLevel}";
+                if (HasString(overrideId)) return Get(overrideId);
+            }
+        }
 
         return Get($"Item_{firstPart}{secondPart}");
     }

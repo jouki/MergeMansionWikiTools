@@ -282,7 +282,7 @@ namespace GameLogic.Player.Items
         }
 
         [MetaMember(49, (MetaMemberFlags)0)]
-        private string OverrideLocalizationItemKey { get; set; }
+        public string OverrideLocalizationItemKey { get; set; }
 
         [IgnoreDataMember]
         public string LocalizationItemKey { get; }

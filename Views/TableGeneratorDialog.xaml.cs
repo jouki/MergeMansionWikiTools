@@ -30,8 +30,8 @@ public partial class TableGeneratorDialog : FluentWindow
         txtChainInfo.Text = $"{chain.DisplayName}";
         txtChainDetail.Text = $"ConfigKey: {chain.ConfigKey} · {chain.Items.Count} levels · {chain.Summary}";
 
-        // Auto-check hardcode name for non-event chains
-        chkHardcodeName.IsChecked = !chain.IsEventChain;
+        // Auto-check hardcode name for event chains with parenthetical (e.g., "Puzzle Box (Event)")
+        chkHardcodeName.IsChecked = chain.IsEventChain && chain.DisplayName.Contains('(');
         chkLowPrices.IsChecked = chain.IsEventChain ? true : main.Settings.LowPrices;
 
         // Source group selector for merged chains with level collisions

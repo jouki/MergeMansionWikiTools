@@ -4,7 +4,7 @@ namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.20.4"; // ConfigKey image naming, AB patch diff, Pets checkbox, IO/upload fixes
+    public const string Version = "v0.20.5"; // Fuel/sink Lua export, mapping dynamic parser, infobox mapping support, description loc override
 
     // Full version with build timestamp, e.g. "v0.18.7 (build 20260322-1200)"
     public static string Build { get; } = GetBuild();

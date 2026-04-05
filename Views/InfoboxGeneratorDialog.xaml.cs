@@ -13,7 +13,7 @@ public partial class InfoboxGeneratorDialog : FluentWindow
 {
     private readonly MainWindow _main;
     private readonly ParsedChain _chain;
-    private readonly InfoboxGeneratorService _service = new();
+    private readonly InfoboxGeneratorService _service;
     private List<LuaArea>? _areas;
     private List<string> _autoSources = new();
     private bool _suppressRegenerate;
@@ -23,6 +23,7 @@ public partial class InfoboxGeneratorDialog : FluentWindow
     {
         _main = main;
         _chain = chain;
+        _service = new InfoboxGeneratorService(main.DataService!, main.WikiMapping);
 
         InitializeComponent();
         ApplicationThemeManager.Apply(this);
