@@ -44,6 +44,7 @@ internal static class EventChainFlowchartService
         public string Id = "";
         public string Title = "";
         public string Sub = "";
+        public double WeightedDist = double.MaxValue; // weighted distance from nearest root
         public HashSet<string> Parents = new();
         public List<string> Children = new();  // ordered list, not HashSet — order matters for layout
         public int Layer, Order;
@@ -110,7 +111,7 @@ internal static class EventChainFlowchartService
         // Keep all nodes (including isolated — e.g. characters on board)
 
         // Layout
-        var layers = SugiyamaLayout(graph);
+        var layers = SugiyamaLayout(graph, edges);
 
         // Build icon lookup: chainKey → base64 PNG (try highest level, fallback to level 1)
         var iconByChain = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
@@ -319,6 +320,20 @@ internal static class EventChainFlowchartService
     }
 
     /// <summary>Compresses "L3, L4, L5, L7, L8" → "L3-L5, L7-L8"</summary>
+    /// <summary>Extracts minimum level number from label like "L3, L5" or "L6-L10" → 3 or 6.</summary>
+    static double ExtractMinLevel(string label)
+    {
+        if (string.IsNullOrEmpty(label)) return 1;
+        double min = double.MaxValue;
+        foreach (var part in label.Split(',', StringSplitOptions.TrimEntries))
+        {
+            var p = part.Trim();
+            if (p.StartsWith("L") && int.TryParse(p[1..].Split('-')[0], out var n))
+                min = Math.Min(min, n);
+        }
+        return min < double.MaxValue ? min : 1;
+    }
+
     static string CompressLevelLabel(string label)
     {
         if (string.IsNullOrEmpty(label)) return label;
@@ -352,9 +367,9 @@ internal static class EventChainFlowchartService
     //  SUGIYAMA LAYOUT
     // ══════════════════════════════════════════════════════════════
 
-    static List<List<string>> SugiyamaLayout(Dictionary<string, N> g)
+    static List<List<string>> SugiyamaLayout(Dictionary<string, N> g, List<ChainGraphEdge> edges)
     {
-        AssignLayers(g);
+        AssignLayers(g, edges);
 
         int maxLayer = g.Values.Max(n => n.Layer);
         var layers = Enumerable.Range(0, maxLayer + 1).Select(_ => new List<string>()).ToList();
@@ -369,48 +384,72 @@ internal static class EventChainFlowchartService
         return layers;
     }
 
-    static void AssignLayers(Dictionary<string, N> g)
+    static void AssignLayers(Dictionary<string, N> g, List<ChainGraphEdge> edges)
     {
-        // BFS parallel layer assignment from ALL root nodes simultaneously.
-        // Each node gets layer = shortest distance from any root.
-        // This places Decorations under Cabinet (layer 2) and Ingredients under Cabinet (layer 2),
-        // instead of pushing them down to where their latest parent is.
-        var roots = g.Values.Where(n => !n.Parents.Any(p => g.ContainsKey(p))).Select(n => n.Id).ToList();
+        // Weighted shortest-path layer assignment (Dijkstra-like).
+        // Edge weight = minimum level number from label (L1 = cheap, L10 = expensive).
+        // Nodes appear at layer = ceil(weighted_distance / bucket_size).
+        // This ensures Lollipops (L1 from Candy Machine, dist=13) appears BELOW
+        // Candy Machine (L5 from Machine Assembly, dist=12), not beside it.
 
-        // Initialize all layers to -1
-        foreach (var n in g.Values) n.Layer = -1;
-
-        // BFS from all roots in parallel
-        var queue = new Queue<string>();
-        foreach (var r in roots)
+        // Build edge weight lookup: source→target → min level
+        var edgeWeight = new Dictionary<string, double>();
+        foreach (var e in edges)
         {
-            g[r].Layer = 0;
-            queue.Enqueue(r);
+            var key = $"{e.SourceChainKey}→{e.TargetChainKey}";
+            double w = ExtractMinLevel(e.Label);
+            if (!edgeWeight.ContainsKey(key) || w < edgeWeight[key])
+                edgeWeight[key] = w;
         }
 
-        while (queue.Count > 0)
+        // Dijkstra from all roots
+        var roots = g.Values.Where(n => !n.Parents.Any(p => g.ContainsKey(p))).Select(n => n.Id).ToList();
+        foreach (var n in g.Values) n.WeightedDist = double.MaxValue;
+        var pq = new SortedSet<(double dist, string id)>();
+
+        foreach (var r in roots)
         {
-            var id = queue.Dequeue();
+            g[r].WeightedDist = 0;
+            pq.Add((0, r));
+        }
+
+        while (pq.Count > 0)
+        {
+            var (dist, id) = pq.Min;
+            pq.Remove(pq.Min);
             var n = g[id];
+            if (dist > n.WeightedDist) continue;
+
             foreach (var c in n.Children)
             {
                 if (!g.TryGetValue(c, out var cn)) continue;
-                int proposed = n.Layer + 1;
-                if (cn.Layer == -1 || proposed < cn.Layer)
+                var wKey = $"{id}→{c}";
+                double w = edgeWeight.GetValueOrDefault(wKey, 1);
+                double newDist = dist + w;
+                if (newDist < cn.WeightedDist)
                 {
-                    cn.Layer = proposed;
-                    queue.Enqueue(c);
+                    cn.WeightedDist = newDist;
+                    pq.Add((newDist, c));
                 }
             }
         }
 
-        // Assign remaining unvisited nodes (cycles)
+        // Assign layers: sort by weighted distance, bucket into layers.
+        // Nodes with same weighted distance = same layer.
+        // Bucket: group by distinct sorted distances.
+        var allDists = g.Values
+            .Where(n => n.WeightedDist < double.MaxValue)
+            .Select(n => n.WeightedDist)
+            .Distinct().OrderBy(d => d).ToList();
+
+        var distToLayer = new Dictionary<double, int>();
+        for (int i = 0; i < allDists.Count; i++)
+            distToLayer[allDists[i]] = i;
+
         foreach (var n in g.Values)
-            if (n.Layer == -1) n.Layer = 0;
+            n.Layer = n.WeightedDist < double.MaxValue ? distToLayer[n.WeightedDist] : 0;
 
         // Push-down: ensure every node is BELOW all its hierarchical parents.
-        // This fixes cases where BFS shortest path places a node on the same layer
-        // as another parent (e.g., Lollipops on same layer as Candy Machine).
         var topo = TopologicalSort(g);
         bool changed = true;
         for (int pass = 0; pass < 10 && changed; pass++)
