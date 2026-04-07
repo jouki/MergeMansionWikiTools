@@ -752,14 +752,8 @@ internal static class EventChainFlowchartService
                 if (graph.TryGetValue(nid, out var n) && !n.IsDummy)
                     nodeLayer[nid] = li;
 
-        // Per-source child index — offset each child's edge horizontally at source
+        // Per-source index for Y offset — edges from different sources route at different Y levels
         var srcChildIndex = new Dictionary<string, int>(StringComparer.Ordinal);
-        var srcChildCount = new Dictionary<string, int>(StringComparer.Ordinal);
-        foreach (var e in edges)
-        {
-            srcChildCount.TryAdd(e.SourceChainKey, 0);
-            srcChildCount[e.SourceChainKey]++;
-        }
 
         // Route each edge
         foreach (var group in edges.GroupBy(e => e.EdgeType).OrderBy(g => g.Key))
@@ -774,20 +768,16 @@ internal static class EventChainFlowchartService
 
                 bool isDecay = edge.EdgeType == ChainEdgeType.Decay;
 
-                // Per-edge-type offset to separate different types visually
+                // Per-source Y offset: edges from different sources get different gapY to prevent overlap
+                // Edges from SAME source share gapY (they form a bus from that node)
                 double typeYOff = (int)edge.EdgeType * 6;
-
-                // Per-source child index for horizontal spacing at shared source
-                srcChildIndex.TryAdd(edge.SourceChainKey, 0);
-                int childIdx = srcChildIndex[edge.SourceChainKey]++;
-                int childTotal = srcChildCount.GetValueOrDefault(edge.SourceChainKey, 1);
-                double childOff = childTotal > 1 ? (childIdx - (childTotal - 1) / 2.0) * 10 : 0;
+                srcChildIndex.TryAdd(edge.SourceChainKey, srcChildIndex.Count);
+                double srcYOff = srcChildIndex.GetValueOrDefault(edge.SourceChainKey) * 5;
 
                 // Anchor points
                 double sx, sy, tx, ty;
                 if (isDecay)
                 {
-                    // Decay: start from right edge at bottom of node
                     sx = src.X + ox + src.W;              // right edge
                     sy = src.Y + oy + src.H;              // bottom edge
                     tx = tgt.X + ox + tgt.W / 2;         // target top center
@@ -795,7 +785,7 @@ internal static class EventChainFlowchartService
                 }
                 else
                 {
-                    sx = src.X + ox + src.W / 2 + childOff;
+                    sx = src.X + ox + src.W / 2;
                     sy = src.Y + oy + src.H;
                     tx = tgt.X + ox + tgt.W / 2;
                     ty = tgt.Y + oy;
@@ -856,12 +846,12 @@ internal static class EventChainFlowchartService
 
                     if (!routed)
                     {
-                        // Strategy 2: Z-bend at inter-layer gap (with per-type Y offset)
+                        // Strategy 2: Z-bend at inter-layer gap (offset per source + type)
                         if (srcL >= 0 && tgtL >= 0 && tgtL > srcL)
                         {
                             for (int gl = srcL; gl < tgtL && !routed; gl++)
                             {
-                                double gapY = (layerBottom[gl] + layerTop[gl + 1]) / 2 + typeYOff;
+                                double gapY = (layerBottom[gl] + layerTop[gl + 1]) / 2 + srcYOff + typeYOff;
                                 if (gapY <= routeY + 2 || gapY >= ty - 2) continue;
 
                                 bool hit = Hits(routeX, routeY, routeX, gapY, boxes, src.Id, tgt.Id)
