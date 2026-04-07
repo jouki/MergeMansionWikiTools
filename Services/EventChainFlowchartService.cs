@@ -14,12 +14,13 @@ internal static class EventChainFlowchartService
 
     const double PadX = 10;
     const double PadY = 8;
-    const double NodeGapX = 45;
-    const double LayerGap = 70;
+    const double NodeGapX = 50;
+    const double LayerGap = 90;   // increased for edge bend room
     const double MaxNodeW = 260;
-    const double MinNodeW = 140;
-    const double HeaderH = 36;
-    const double SubH = 18;
+    const double MinNodeW = 160;
+    const double HeaderH = 30;    // smaller header (no icon in header anymore)
+    const double BodyH = 38;      // body section with icon
+    const double SubH = 0;        // subtitle merged into body
     const double ArrowSize = 6;
     const double BusOffset = 18;
     const double BendRadius = 8;
@@ -75,15 +76,14 @@ internal static class EventChainFlowchartService
             int parenIdx = title.IndexOf(" (");
             if (parenIdx > 0) title = title[..parenIdx];
 
-            double iconSpace = 36; // 32px icon + gap
-            double titleW = title.Length * 7.5 + iconSpace + PadX * 2;
+            double titleW = title.Length * 7.5 + PadX * 2;
             double w = Math.Clamp(titleW, MinNodeW, MaxNodeW);
             graph[n.ChainKey] = new N
             {
                 Id = n.ChainKey,
                 Title = title,
                 Sub = $"{n.ItemCount} items",
-                W = w, H = HeaderH + SubH + PadY,
+                W = w, H = HeaderH + BodyH,
             };
         }
 
@@ -100,16 +100,22 @@ internal static class EventChainFlowchartService
         // Layout
         var layers = SugiyamaLayout(graph);
 
-        // Build icon lookup: chainKey → base64 PNG (highest level item)
+        // Build icon lookup: chainKey → base64 PNG (try highest level, fallback to level 1)
         var iconByChain = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         if (chainIcons != null)
         {
             foreach (var chain in eventChains)
             {
                 if (chain.Items.Count == 0) continue;
-                var highestItem = chain.Items.OrderByDescending(i => i.Level).First();
-                if (chainIcons.TryGetValue(highestItem.ItemType, out var b64))
-                    iconByChain[chain.ConfigKey] = b64;
+                // Try highest level first
+                foreach (var item in chain.Items.OrderByDescending(i => i.Level))
+                {
+                    if (!string.IsNullOrEmpty(item.ItemType) && chainIcons.TryGetValue(item.ItemType, out var b64))
+                    {
+                        iconByChain[chain.ConfigKey] = b64;
+                        break;
+                    }
+                }
             }
         }
 
@@ -479,8 +485,8 @@ internal static class EventChainFlowchartService
             foreach (var id in layer) g[id].X += off;
         }
 
-        // Improve: median of parents/children (8 iterations)
-        for (int iter = 0; iter < 8; iter++)
+        // Improve: median of parents/children (16 iterations for better convergence)
+        for (int iter = 0; iter < 16; iter++)
         {
             bool topDown = iter % 2 == 0;
             var order = topDown ? layers : layers.AsEnumerable().Reverse().ToList();
@@ -640,37 +646,38 @@ internal static class EventChainFlowchartService
             // Body
             sb.AppendLine($"<rect x='{F(nx)}' y='{F(ny)}' width='{F(n.W)}' height='{F(n.H)}' class='node-body'/>");
 
-            // Header background (rounded top)
-            sb.AppendLine($"<clipPath id='clip-{n.Id.GetHashCode():X}'><rect x='{F(nx)}' y='{F(ny)}' width='{F(n.W)}' height='{F(n.H)}' rx='8'/></clipPath>");
-            sb.AppendLine($"<rect x='{F(nx)}' y='{F(ny)}' width='{F(n.W)}' height='{F(hh)}' fill='#4A7CBF' clip-path='url(#clip-{n.Id.GetHashCode():X})'/>");
+            // Header background (rounded top, clipped)
+            var clipId = $"clip-{Math.Abs(n.Id.GetHashCode()):X}";
+            sb.AppendLine($"<clipPath id='{clipId}'><rect x='{F(nx)}' y='{F(ny)}' width='{F(n.W)}' height='{F(n.H)}' rx='8'/></clipPath>");
+            sb.AppendLine($"<rect x='{F(nx)}' y='{F(ny)}' width='{F(n.W)}' height='{F(hh)}' fill='#4A7CBF' clip-path='url(#{clipId})'/>");
             sb.AppendLine($"<rect x='{F(nx)}' y='{F(ny + hh - 4)}' width='{F(n.W)}' height='4' fill='#3A5F96'/>");
 
-            // Icon slot + Title in header
+            // Title (centered in header)
+            int maxChars = Math.Max(5, (int)((n.W - PadX * 2) / 7.8));
+            string title = n.Title.Length > maxChars ? n.Title[..Math.Max(maxChars - 3, 3)] + "..." : n.Title;
+            sb.AppendLine($"<text x='{F(nx + n.W / 2)}' y='{F(ny + hh / 2 + 5)}' text-anchor='middle' class='node-title'>{Esc(title)}</text>");
+
+            // Body: icon slot + subtitle
+            double bodyY = ny + hh;
             string? iconB64 = null;
             bool hasIcon = iconByChain != null && iconByChain.TryGetValue(n.Id, out iconB64);
             double iconSize = 32;
-            double slotSize = iconSize + 4;
-            double slotX = nx + 2;
-            double slotY = ny + (hh - slotSize) / 2;
-            double textStartX = slotX + slotSize + 4;
-            double textAvailW = n.W - (textStartX - nx) - PadX;
-            int maxChars = Math.Max(5, (int)(textAvailW / 7.5));
+            double slotSize = iconSize + 2;
+            double slotX = nx + PadX - 2;
+            double slotY = bodyY + (BodyH - slotSize) / 2;
 
-            string title = n.Title.Length > maxChars ? n.Title[..Math.Max(maxChars - 3, 3)] + "..." : n.Title;
-
-            // Orange icon slot background
+            // Icon slot background
             sb.AppendLine($"<rect x='{F(slotX)}' y='{F(slotY)}' width='{F(slotSize)}' height='{F(slotSize)}' rx='4' fill='#D4C4A8' stroke='#B8A888' stroke-width='1'/>");
 
             if (hasIcon)
             {
-                sb.AppendLine($"<image x='{F(slotX + 2)}' y='{F(slotY + 2)}' width='{F(iconSize)}' height='{F(iconSize)}' " +
+                sb.AppendLine($"<image x='{F(slotX + 1)}' y='{F(slotY + 1)}' width='{F(iconSize)}' height='{F(iconSize)}' " +
                     $"href='data:image/png;base64,{iconB64}' preserveAspectRatio='xMidYMid meet'/>");
             }
 
-            sb.AppendLine($"<text x='{F(textStartX)}' y='{F(ny + hh / 2 + 5)}' class='node-title'>{Esc(title)}</text>");
-
-            // Subtitle (below header)
-            sb.AppendLine($"<text x='{F(nx + PadX)}' y='{F(ny + hh + SubH - 4)}' class='node-sub'>{Esc(n.Sub)}</text>");
+            // Subtitle text right of icon
+            double subTextX = slotX + slotSize + 6;
+            sb.AppendLine($"<text x='{F(subTextX)}' y='{F(bodyY + BodyH / 2 + 4)}' class='node-sub'>{Esc(n.Sub)}</text>");
         }
 
         // ── Legend ────────────────────────────────────────────────
@@ -747,9 +754,9 @@ internal static class EventChainFlowchartService
                 double sx, sy, tx, ty;
                 if (isDecay)
                 {
-                    // Decay: start from right side, slightly above bottom corner (protažení pro zaoblení)
-                    sx = src.X + ox + src.W - 4;       // slightly inside right edge (for rounded corner)
-                    sy = src.Y + oy + src.H;            // bottom
+                    // Decay: start from right-bottom corner of node
+                    sx = src.X + ox + src.W;             // right edge exactly
+                    sy = src.Y + oy + src.H - 6;         // slightly above bottom (avoids rounded corner)
                     tx = tgt.X + ox + tgt.W / 2;        // target top center
                     ty = tgt.Y + oy;
                 }
@@ -793,7 +800,6 @@ internal static class EventChainFlowchartService
                     }
 
                     // Route: right from source → down → left to target top
-                    pts.Add((src.X + ox + src.W + 4, sy)); // extend past rounded corner
                     pts.Add((rightX, sy));
                     if (Math.Abs(rightX - tx) > SnapThresh)
                     {

@@ -204,11 +204,20 @@ public partial class EventsPage : UserControl
 
             if (exportDir != null)
             {
-                var itemTypes = _selectedEvent.Chains
-                    .Where(c => c.Items.Count > 0)
-                    .Select(c => c.Items.OrderByDescending(i => i.Level).First().ItemType)
-                    .Where(t => !string.IsNullOrEmpty(t))
-                    .ToList();
+                // Extract icon for each chain — try highest level first, fallback to level 1
+                var itemTypes = new List<string>();
+                foreach (var chain in _selectedEvent.Chains)
+                {
+                    if (chain.Items.Count == 0) continue;
+                    // Prefer highest level for visual representation
+                    var best = chain.Items.OrderByDescending(i => i.Level).First();
+                    if (!string.IsNullOrEmpty(best.ItemType))
+                        itemTypes.Add(best.ItemType);
+                    // Also add level 1 as fallback (different atlas for some chains)
+                    var first = chain.Items.OrderBy(i => i.Level).First();
+                    if (!string.IsNullOrEmpty(first.ItemType) && first.ItemType != best.ItemType)
+                        itemTypes.Add(first.ItemType);
+                }
 
                 chainIcons = await Task.Run(() =>
                     FlowchartImageService.ExtractItemIcons(itemTypes, _main.DataService, exportDir, processedDir));
