@@ -531,22 +531,7 @@ internal static class EventChainFlowchartService
                 g[ordered[i]].Order = i;
         }
 
-        // Refine: 4 bottom-up barycenter passes (skip layer 0 — root order is fixed)
-        for (int iter = 0; iter < 4; iter++)
-        {
-            for (int li = layers.Count - 2; li >= 1; li--)  // skip layer 0
-            {
-                foreach (var id in layers[li])
-                {
-                    var n = g[id];
-                    var cOrders = n.Children.Where(c => g.ContainsKey(c)).Select(c => (double)g[c].Order).ToList();
-                    if (cOrders.Count > 0)
-                        n.Order = (int)Math.Round(cOrders.Average() * 10000);
-                }
-                layers[li] = layers[li].OrderBy(id => g[id].Order).ToList();
-                for (int i = 0; i < layers[li].Count; i++) g[layers[li][i]].Order = i;
-            }
-        }
+        // No barycenter refinement — BFS parent-first ordering is authoritative.
     }
 
     static void AssignXPositions(Dictionary<string, N> g, List<List<string>> layers)
