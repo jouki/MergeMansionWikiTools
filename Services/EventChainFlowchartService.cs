@@ -355,37 +355,53 @@ internal static class EventChainFlowchartService
 
     static void AssignLayers(Dictionary<string, N> g)
     {
-        var topo = TopologicalSort(g);
+        // BFS parallel layer assignment from ALL root nodes simultaneously.
+        // Each node gets layer = shortest distance from any root.
+        // This places Decorations under Cabinet (layer 2) and Ingredients under Cabinet (layer 2),
+        // instead of pushing them down to where their latest parent is.
+        var roots = g.Values.Where(n => !n.Parents.Any(p => g.ContainsKey(p))).Select(n => n.Id).ToList();
 
-        // Phase 1: Longest-path layer assignment (standard)
+        // Initialize all layers to -1
+        foreach (var n in g.Values) n.Layer = -1;
+
+        // BFS from all roots in parallel
+        var queue = new Queue<string>();
+        foreach (var r in roots)
+        {
+            g[r].Layer = 0;
+            queue.Enqueue(r);
+        }
+
+        while (queue.Count > 0)
+        {
+            var id = queue.Dequeue();
+            var n = g[id];
+            foreach (var c in n.Children)
+            {
+                if (!g.TryGetValue(c, out var cn)) continue;
+                int proposed = n.Layer + 1;
+                if (cn.Layer == -1 || proposed < cn.Layer)
+                {
+                    cn.Layer = proposed;
+                    queue.Enqueue(c);
+                }
+            }
+        }
+
+        // Assign remaining unvisited nodes (cycles)
+        foreach (var n in g.Values)
+            if (n.Layer == -1) n.Layer = 0;
+
+        // Phase 2: Push DOWN nodes that are above ALL their parents (shouldn't happen with BFS, but safety)
+        var topo = TopologicalSort(g);
         foreach (var id in topo)
         {
             var n = g[id];
-            int pMax = -1;
+            int maxParent = -1;
             foreach (var p in n.Parents)
-                if (g.TryGetValue(p, out var pn)) pMax = Math.Max(pMax, pn.Layer);
-            n.Layer = pMax + 1;
-        }
-
-        // Phase 2: Pull-down non-root internal nodes closer to children
-        foreach (var id in topo.AsEnumerable().Reverse())
-        {
-            var n = g[id];
-            if (n.Children.Count == 0) continue;
-            // Root nodes (starter producers) stay at layer 0
-            if (!n.Parents.Any(p => g.ContainsKey(p))) continue;
-
-            int minChild = int.MaxValue;
-            foreach (var c in n.Children)
-                if (g.TryGetValue(c, out var cn)) minChild = Math.Min(minChild, cn.Layer);
-            if (minChild > n.Layer + 1)
-            {
-                int target = minChild - 1;
-                int maxParent = -1;
-                foreach (var p in n.Parents)
-                    if (g.TryGetValue(p, out var pn)) maxParent = Math.Max(maxParent, pn.Layer);
-                if (target > maxParent) n.Layer = target;
-            }
+                if (g.TryGetValue(p, out var pn)) maxParent = Math.Max(maxParent, pn.Layer);
+            if (maxParent >= 0 && n.Layer <= maxParent)
+                n.Layer = maxParent + 1;
         }
 
         // Compact layer numbers
