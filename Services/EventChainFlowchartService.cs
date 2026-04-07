@@ -54,7 +54,8 @@ internal static class EventChainFlowchartService
     //  PUBLIC API
     // ══════════════════════════════════════════════════════════════
 
-    public static string GenerateSvg(List<ParsedChain> eventChains, DataService ds, string eventName)
+    public static string GenerateSvg(List<ParsedChain> eventChains, DataService ds, string eventName,
+        Dictionary<string, string>? chainIcons = null)
     {
         var (nodes, edges) = BuildChainGraph(eventChains, ds);
         if (nodes.Count == 0)
@@ -98,8 +99,21 @@ internal static class EventChainFlowchartService
         // Layout
         var layers = SugiyamaLayout(graph);
 
+        // Build icon lookup: chainKey → base64 PNG (highest level item)
+        var iconByChain = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        if (chainIcons != null)
+        {
+            foreach (var chain in eventChains)
+            {
+                if (chain.Items.Count == 0) continue;
+                var highestItem = chain.Items.OrderByDescending(i => i.Level).First();
+                if (chainIcons.TryGetValue(highestItem.ItemType, out var b64))
+                    iconByChain[chain.ConfigKey] = b64;
+            }
+        }
+
         // Render
-        return RenderSvg(graph, edges, layers, eventName);
+        return RenderSvg(graph, edges, layers, eventName, iconByChain);
     }
 
     static string EmptySvg(string msg) =>
@@ -565,7 +579,7 @@ internal static class EventChainFlowchartService
     // ══════════════════════════════════════════════════════════════
 
     static string RenderSvg(Dictionary<string, N> graph, List<ChainGraphEdge> edges,
-        List<List<string>> layers, string eventName)
+        List<List<string>> layers, string eventName, Dictionary<string, string>? iconByChain = null)
     {
         var ci = CultureInfo.InvariantCulture;
         var sb = new StringBuilder();
@@ -614,7 +628,7 @@ internal static class EventChainFlowchartService
         sb.AppendLine($"<text x='{F(svgW / 2)}' y='26' text-anchor='middle' class='title'>{Esc(eventName)}</text>");
 
         // ── Route and render edges ───────────────────────────────
-        RouteAndRenderEdges(sb, graph, edges, ox, oy, ci);
+        RouteAndRenderEdges(sb, graph, edges, layers, ox, oy, ci);
 
         // ── Render nodes ─────────────────────────────────────────
         foreach (var n in graph.Values.Where(n => !n.IsDummy))
@@ -630,9 +644,25 @@ internal static class EventChainFlowchartService
             sb.AppendLine($"<rect x='{F(nx)}' y='{F(ny)}' width='{F(n.W)}' height='{F(hh)}' fill='#4A7CBF' clip-path='url(#clip-{n.Id.GetHashCode():X})'/>");
             sb.AppendLine($"<rect x='{F(nx)}' y='{F(ny + hh - 4)}' width='{F(n.W)}' height='4' fill='#3A5F96'/>");
 
-            // Title (centered in header)
-            string title = n.Title.Length > 28 ? n.Title[..25] + "..." : n.Title;
-            sb.AppendLine($"<text x='{F(nx + n.W / 2)}' y='{F(ny + hh / 2 + 4.5)}' text-anchor='middle' class='node-title'>{Esc(title)}</text>");
+            // Icon + Title in header
+            string? iconB64 = null;
+            bool hasIcon = iconByChain != null && iconByChain.TryGetValue(n.Id, out iconB64);
+            double iconSize = hh - 6;
+            double iconX = nx + 3;
+            double iconY = ny + 3;
+            double textStartX = hasIcon ? iconX + iconSize + 4 : nx + PadX;
+            double textAvailW = n.W - (textStartX - nx) - PadX;
+            int maxChars = (int)(textAvailW / 7);
+
+            string title = n.Title.Length > maxChars ? n.Title[..Math.Max(maxChars - 3, 3)] + "..." : n.Title;
+
+            if (hasIcon)
+            {
+                sb.AppendLine($"<image x='{F(iconX)}' y='{F(iconY)}' width='{F(iconSize)}' height='{F(iconSize)}' " +
+                    $"href='data:image/png;base64,{iconB64}' preserveAspectRatio='xMidYMid meet'/>");
+            }
+
+            sb.AppendLine($"<text x='{F(textStartX)}' y='{F(ny + hh / 2 + 4.5)}' class='node-title'>{Esc(title)}</text>");
 
             // Subtitle (below header)
             sb.AppendLine($"<text x='{F(nx + PadX)}' y='{F(ny + hh + SubH - 4)}' class='node-sub'>{Esc(n.Sub)}</text>");
@@ -659,24 +689,40 @@ internal static class EventChainFlowchartService
     // ── Edge routing ─────────────────────────────────────────────
 
     static void RouteAndRenderEdges(StringBuilder sb, Dictionary<string, N> graph,
-        List<ChainGraphEdge> edges, double ox, double oy, CultureInfo ci)
+        List<ChainGraphEdge> edges, List<List<string>> layers, double ox, double oy, CultureInfo ci)
     {
-        // Node bounding boxes for collision detection
+        // Node bounding boxes (with margin)
+        double margin = 4;
         var boxes = graph.Values.Where(n => !n.IsDummy)
-            .Select(n => (left: n.X + ox - 4, top: n.Y + oy - 4, right: n.X + ox + n.W + 4, bottom: n.Y + oy + n.H + 4, id: n.Id))
+            .Select(n => (left: n.X + ox - margin, top: n.Y + oy - margin,
+                right: n.X + ox + n.W + margin, bottom: n.Y + oy + n.H + margin, id: n.Id))
             .ToList();
 
-        // Count edges per (type + target) for merging — only same-type same-dest may share
-        var destTypeCount = new Dictionary<string, int>();
-        var destTypeIndex = new Dictionary<string, int>();
-        foreach (var e in edges)
+        // Layer Y ranges for gap routing
+        var layerBottom = new double[layers.Count];
+        var layerTop = new double[layers.Count];
+        for (int li = 0; li < layers.Count; li++)
         {
-            var key = $"{e.EdgeType}→{e.TargetChainKey}";
-            destTypeCount.TryAdd(key, 0);
-            destTypeCount[key]++;
+            double minY = double.MaxValue, maxYH = double.MinValue;
+            foreach (var nid in layers[li])
+            {
+                if (!graph.TryGetValue(nid, out var n) || n.IsDummy) continue;
+                double ny = n.Y + oy;
+                minY = Math.Min(minY, ny);
+                maxYH = Math.Max(maxYH, ny + n.H);
+            }
+            layerTop[li] = minY == double.MaxValue ? 0 : minY;
+            layerBottom[li] = maxYH == double.MinValue ? 0 : maxYH;
         }
 
-        // Render edges by type
+        // Node → layer lookup
+        var nodeLayer = new Dictionary<string, int>(StringComparer.Ordinal);
+        for (int li = 0; li < layers.Count; li++)
+            foreach (var nid in layers[li])
+                if (graph.TryGetValue(nid, out var n) && !n.IsDummy)
+                    nodeLayer[nid] = li;
+
+        // Route each edge
         foreach (var group in edges.GroupBy(e => e.EdgeType).OrderBy(g => g.Key))
         {
             var color = EdgeStyles[group.Key].color;
@@ -684,130 +730,174 @@ internal static class EventChainFlowchartService
 
             foreach (var edge in group)
             {
-                if (!graph.TryGetValue(edge.SourceChainKey, out var srcN) ||
-                    !graph.TryGetValue(edge.TargetChainKey, out var tgtN)) continue;
+                if (!graph.TryGetValue(edge.SourceChainKey, out var src) ||
+                    !graph.TryGetValue(edge.TargetChainKey, out var tgt)) continue;
 
-                // Offset parallel edges of same type to same target
-                var dtKey = $"{edge.EdgeType}→{edge.TargetChainKey}";
-                destTypeIndex.TryAdd(dtKey, 0);
-                int idx = destTypeIndex[dtKey]++;
-                int total = destTypeCount[dtKey];
-                double mergeOff = total > 1 ? (idx - (total - 1) / 2.0) * 8 : 0;
-
-                // Anchor points
-                double sx, sy, tx, ty;
                 bool isDecay = edge.EdgeType == ChainEdgeType.Decay;
-                bool isSinkIn = edge.EdgeType == ChainEdgeType.SinkInput;
 
+                // Anchor points: decay exits right-bottom, enters top; others bottom → top
+                double sx, sy, tx, ty;
                 if (isDecay)
                 {
-                    sx = srcN.X + ox + srcN.W;
-                    sy = srcN.Y + oy + srcN.H * 0.7;
-                    tx = tgtN.X + ox + tgtN.W;
-                    ty = tgtN.Y + oy + tgtN.H * 0.3;
-                }
-                else if (isSinkIn)
-                {
-                    sx = srcN.X + ox + srcN.W / 2 + mergeOff;
-                    sy = srcN.Y + oy + srcN.H;
-                    tx = tgtN.X + ox;
-                    ty = tgtN.Y + oy + tgtN.H * 0.5;
+                    sx = src.X + ox + src.W;         // right edge
+                    sy = src.Y + oy + src.H;          // bottom
+                    tx = tgt.X + ox + tgt.W / 2;      // top center
+                    ty = tgt.Y + oy;
                 }
                 else
                 {
-                    sx = srcN.X + ox + srcN.W / 2 + mergeOff;
-                    sy = srcN.Y + oy + srcN.H;
-                    tx = tgtN.X + ox + tgtN.W / 2 + mergeOff;
-                    ty = tgtN.Y + oy;
+                    sx = src.X + ox + src.W / 2;
+                    sy = src.Y + oy + src.H;
+                    tx = tgt.X + ox + tgt.W / 2;
+                    ty = tgt.Y + oy;
                 }
 
-                // Build waypoints with collision avoidance
+                if (sy >= ty) continue; // skip backward edges
+
+                int srcL = nodeLayer.GetValueOrDefault(src.Id, -1);
+                int tgtL = nodeLayer.GetValueOrDefault(tgt.Id, -1);
+
                 var pts = new List<(double x, double y)> { (sx, sy) };
+
+                // Bus offset for multi-child sources
+                bool isMultiChild = src.Children.Count > 1;
+                double routeX = sx, routeY = sy;
+                if (isMultiChild && !isDecay)
+                {
+                    double busY = sy + BusOffset;
+                    pts.Add((sx, busY));
+                    routeY = busY;
+                }
 
                 if (isDecay)
                 {
-                    double rightX = Math.Max(sx, tx) + 25;
+                    // Decay: right then down/up to target top — route around right side
+                    double rightX = src.X + ox + src.W + NodeGapX / 2;
+                    // Find rightmost node edge in source layer to route past
+                    foreach (var b in boxes)
+                        if (b.right > rightX && b.top < sy + LayerGap && b.bottom > sy - 10)
+                            rightX = b.right + 8;
+
                     pts.Add((rightX, sy));
                     pts.Add((rightX, ty));
                     pts.Add((tx, ty));
                 }
-                else if (Math.Abs(sx - tx) < SnapThresh)
-                {
-                    // Straight vertical — check collision
-                    if (!SegmentHitsNode(sx, sy, sx, ty, boxes, srcN.Id, tgtN.Id))
-                    {
-                        pts.Add((sx, ty));
-                    }
-                    else
-                    {
-                        // Jog around: find clear corridor
-                        double jogX = srcN.X + ox + srcN.W + NodeGapX / 2;
-                        double midY = (sy + ty) / 2;
-                        pts.Add((sx, midY));
-                        pts.Add((jogX, midY));
-                        pts.Add((jogX, ty + (ty - midY)));
-                        pts.Add((tx, ty));
-                    }
-                }
                 else
                 {
-                    // Z-route: down → across → down
-                    double midY = (sy + ty) / 2;
-
-                    // Check if horizontal segment hits a node
-                    if (SegmentHitsNode(sx, midY, tx, midY, boxes, srcN.Id, tgtN.Id))
+                    // Strategy 1: Straight vertical
+                    bool routed = false;
+                    if (Math.Abs(routeX - tx) < SnapThresh)
                     {
-                        // Try routing at layer gap (slightly above or below mid)
-                        double altY1 = sy + (ty - sy) * 0.3;
-                        double altY2 = sy + (ty - sy) * 0.7;
-                        if (!SegmentHitsNode(sx, altY1, tx, altY1, boxes, srcN.Id, tgtN.Id))
-                            midY = altY1;
-                        else if (!SegmentHitsNode(sx, altY2, tx, altY2, boxes, srcN.Id, tgtN.Id))
-                            midY = altY2;
-                        // else: keep midY as fallback
+                        if (!Hits(routeX, routeY, routeX, ty, boxes, src.Id, tgt.Id))
+                        {
+                            pts.Add((routeX, ty));
+                            routed = true;
+                        }
                     }
 
-                    pts.Add((sx, midY));
-                    pts.Add((tx, midY));
-                    pts.Add((tx, ty));
+                    if (!routed)
+                    {
+                        // Strategy 2: Z-bend at inter-layer gap
+                        if (srcL >= 0 && tgtL >= 0 && tgtL > srcL)
+                        {
+                            for (int gl = srcL; gl < tgtL && !routed; gl++)
+                            {
+                                double gapY = (layerBottom[gl] + layerTop[gl + 1]) / 2;
+                                if (gapY <= routeY + 2 || gapY >= ty - 2) continue;
+
+                                bool hit = Hits(routeX, routeY, routeX, gapY, boxes, src.Id, tgt.Id)
+                                    || Hits(routeX, gapY, tx, gapY, boxes, src.Id, tgt.Id)
+                                    || Hits(tx, gapY, tx, ty, boxes, src.Id, tgt.Id);
+                                if (!hit)
+                                {
+                                    pts.Add((routeX, gapY));
+                                    pts.Add((tx, gapY));
+                                    pts.Add((tx, ty));
+                                    routed = true;
+                                }
+                            }
+                        }
+                    }
+
+                    if (!routed)
+                    {
+                        // Strategy 3: Corridor routing
+                        double gapY1 = routeY + BusOffset;
+                        double gapY2 = ty - BusOffset;
+                        if (srcL >= 0 && tgtL >= 0 && tgtL > srcL)
+                        {
+                            double g1 = (layerBottom[srcL] + layerTop[Math.Min(srcL + 1, layers.Count - 1)]) / 2;
+                            if (g1 > routeY + 2) gapY1 = g1;
+                            double g2 = (layerBottom[Math.Max(tgtL - 1, 0)] + layerTop[tgtL]) / 2;
+                            if (g2 < ty - 2) gapY2 = g2;
+                        }
+
+                        // Find clear corridor X
+                        var occupied = boxes.Where(b => b.id != src.Id && b.id != tgt.Id
+                            && b.bottom + margin >= gapY1 && b.top - margin <= gapY2)
+                            .Select(b => (b.left - margin, b.right + margin)).OrderBy(x => x.Item1).ToList();
+
+                        var merged = new List<(double l, double r)>();
+                        foreach (var iv in occupied)
+                        {
+                            if (merged.Count > 0 && iv.Item1 <= merged[^1].r)
+                                merged[^1] = (merged[^1].l, Math.Max(merged[^1].r, iv.Item2));
+                            else merged.Add(iv);
+                        }
+
+                        var cands = new List<double>();
+                        if (merged.Count > 0 && merged[0].l > NodeGapX)
+                            cands.Add(merged[0].l - NodeGapX / 2);
+                        for (int i = 0; i < merged.Count - 1; i++)
+                            cands.Add((merged[i].r + merged[i + 1].l) / 2);
+                        if (merged.Count > 0)
+                            cands.Add(merged[^1].r + NodeGapX / 2);
+                        if (cands.Count == 0) { cands.Add(routeX); cands.Add(tx); }
+
+                        double bestX = cands[0]; int bestH = int.MaxValue;
+                        double midX = (routeX + tx) / 2;
+                        foreach (var cx in cands)
+                        {
+                            int h = 0;
+                            if (Hits(routeX, routeY, routeX, gapY1, boxes, src.Id, tgt.Id)) h++;
+                            if (Hits(routeX, gapY1, cx, gapY1, boxes, src.Id, tgt.Id)) h++;
+                            if (Hits(cx, gapY1, cx, gapY2, boxes, src.Id, tgt.Id)) h++;
+                            if (Hits(cx, gapY2, tx, gapY2, boxes, src.Id, tgt.Id)) h++;
+                            if (h < bestH || (h == bestH && Math.Abs(cx - midX) < Math.Abs(bestX - midX)))
+                            { bestH = h; bestX = cx; if (h == 0) break; }
+                        }
+
+                        if (Math.Abs(bestX - routeX) < SnapThresh)
+                        { pts.Add((routeX, gapY2)); pts.Add((tx, gapY2)); pts.Add((tx, ty)); }
+                        else if (Math.Abs(bestX - tx) < SnapThresh)
+                        { pts.Add((routeX, gapY1)); pts.Add((tx, gapY1)); pts.Add((tx, ty)); }
+                        else
+                        { pts.Add((routeX, gapY1)); pts.Add((bestX, gapY1)); pts.Add((bestX, gapY2)); pts.Add((tx, gapY2)); pts.Add((tx, ty)); }
+                    }
                 }
 
                 var filtered = FilterCollinear(pts);
                 var path = BuildRoundedPath(filtered, BendRadius, ci);
                 sb.AppendLine($"<path d='{path}' stroke='{color}' stroke-width='1.8' fill='none' marker-end='url(#{markerId})'/>");
 
-                // Label — offset perpendicular to first segment
+                // Label on first vertical segment
                 var edgeLabel = CompressLevelLabel(edge.Label);
                 if (!string.IsNullOrEmpty(edgeLabel) && filtered.Count >= 2)
                 {
-                    double t = 0.25;
-                    int seg = filtered.Count > 2 ? 1 : 0; // prefer second segment for Z-routes
-                    double lx = filtered[seg].x + (filtered[seg + 1].x - filtered[seg].x) * t;
-                    double ly = filtered[seg].y + (filtered[seg + 1].y - filtered[seg].y) * t;
+                    // Find first vertical segment
+                    int seg = 0;
+                    for (int i = 0; i < filtered.Count - 1; i++)
+                        if (Math.Abs(filtered[i].x - filtered[i + 1].x) < 1) { seg = i; break; }
 
-                    double dx = filtered[seg + 1].x - filtered[seg].x;
-                    double dy = filtered[seg + 1].y - filtered[seg].y;
-                    double len = Math.Sqrt(dx * dx + dy * dy);
-                    if (len > 1)
-                    {
-                        double perpX = -dy / len * 12;
-                        double perpY = dx / len * 12;
-                        // Always offset to the left of the direction
-                        lx += perpX;
-                        ly += perpY;
-                    }
-                    else
-                    {
-                        ly -= 8;
-                    }
-
-                    sb.AppendLine($"<text x='{lx.ToString("F1", ci)}' y='{ly.ToString("F1", ci)}' text-anchor='middle' class='edge-label' fill='{color}'>{Esc(edgeLabel)}</text>");
+                    double lx = filtered[seg].x - 12; // left of vertical line
+                    double ly = (filtered[seg].y + filtered[seg + 1].y) / 2 + 3;
+                    sb.AppendLine($"<text x='{lx.ToString("F1", ci)}' y='{ly.ToString("F1", ci)}' text-anchor='end' class='edge-label' fill='{color}'>{Esc(edgeLabel)}</text>");
                 }
             }
         }
     }
 
-    static bool SegmentHitsNode(double x1, double y1, double x2, double y2,
+    static bool Hits(double x1, double y1, double x2, double y2,
         List<(double left, double top, double right, double bottom, string id)> boxes,
         string srcId, string tgtId)
     {

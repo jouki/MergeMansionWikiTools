@@ -187,14 +187,35 @@ public partial class EventsPage : UserControl
             : "No chains found for this event.";
     }
 
-    private void BtnGenerateFlowchart_Click(object sender, RoutedEventArgs e)
+    private async void BtnGenerateFlowchart_Click(object sender, RoutedEventArgs e)
     {
         if (_selectedEvent == null || _main.DataService == null) return;
 
         try
         {
+            btnGenerateFlowchart.IsEnabled = false;
+            ShowInfo("Generating flowchart...", InfoBarSeverity.Informational);
+
+            // Extract chain icons (highest level per chain)
+            Dictionary<string, string>? chainIcons = null;
+            var exportDir = ResolveExportDir();
+            var processedDir = !string.IsNullOrEmpty(_main.Settings.ImageExporterBasePath)
+                ? System.IO.Path.Combine(_main.Settings.ImageExporterBasePath, "Processed Images") : null;
+
+            if (exportDir != null)
+            {
+                var itemTypes = _selectedEvent.Chains
+                    .Where(c => c.Items.Count > 0)
+                    .Select(c => c.Items.OrderByDescending(i => i.Level).First().ItemType)
+                    .Where(t => !string.IsNullOrEmpty(t))
+                    .ToList();
+
+                chainIcons = await Task.Run(() =>
+                    FlowchartImageService.ExtractItemIcons(itemTypes, _main.DataService, exportDir, processedDir));
+            }
+
             var svg = EventChainFlowchartService.GenerateSvg(
-                _selectedEvent.Chains, _main.DataService, _selectedEvent.DisplayName);
+                _selectedEvent.Chains, _main.DataService, _selectedEvent.DisplayName, chainIcons);
             _lastSvg = svg;
 
             // Auto-save to Events folder next to dump
@@ -220,6 +241,19 @@ public partial class EventsPage : UserControl
         {
             ShowInfo($"Flowchart failed: {ex.Message}", InfoBarSeverity.Error);
         }
+        finally
+        {
+            btnGenerateFlowchart.IsEnabled = true;
+        }
+    }
+
+    private string? ResolveExportDir()
+    {
+        var basePath = _main.Settings.ImageExporterBasePath;
+        var version = _main.Settings.SelectedApkVersion;
+        if (string.IsNullOrEmpty(basePath) || string.IsNullOrEmpty(version)) return null;
+        var dir = Path.Combine(basePath, version, "Export - PNGs");
+        return Directory.Exists(dir) ? dir : null;
     }
 
     private void BtnSaveSvg_Click(object sender, RoutedEventArgs e)
