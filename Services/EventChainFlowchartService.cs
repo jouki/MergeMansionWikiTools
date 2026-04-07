@@ -460,7 +460,24 @@ internal static class EventChainFlowchartService
         // append each node's children in order to the next layer.
         // This produces intuitive flowchart ordering.
 
-        // First: order layer 0 (roots) — left-aligned, as-is from BFS
+        // Order layer 0: sort by number of descendants (most connected first = main producer left)
+        layers[0] = layers[0].OrderByDescending(id =>
+        {
+            int count = 0;
+            var seen = new HashSet<string>();
+            var q = new Queue<string>();
+            q.Enqueue(id);
+            while (q.Count > 0)
+            {
+                var nid = q.Dequeue();
+                if (!seen.Add(nid)) continue;
+                count++;
+                if (g.TryGetValue(nid, out var nn))
+                    foreach (var c in nn.Children.Where(c => g.ContainsKey(c)))
+                        q.Enqueue(c);
+            }
+            return count;
+        }).ToList();
         for (int i = 0; i < layers[0].Count; i++)
             g[layers[0][i]].Order = i;
 
@@ -497,10 +514,10 @@ internal static class EventChainFlowchartService
                 g[ordered[i]].Order = i;
         }
 
-        // Refine: 6 iterations of barycenter (bottom-up pass to improve)
-        for (int iter = 0; iter < 6; iter++)
+        // Refine: 4 bottom-up barycenter passes (skip layer 0 — root order is fixed)
+        for (int iter = 0; iter < 4; iter++)
         {
-            for (int li = layers.Count - 2; li >= 0; li--)
+            for (int li = layers.Count - 2; li >= 1; li--)  // skip layer 0
             {
                 foreach (var id in layers[li])
                 {
@@ -529,9 +546,10 @@ internal static class EventChainFlowchartService
             }
         }
 
-        // Center layers
+        // NO centering — left-aligned layout. Nodes positioned by median improvement below.
         double maxW = layers.Max(l => l.Count > 0 ? l.Max(id => g[id].X + g[id].W) : 0);
-        foreach (var layer in layers)
+        // Skip centering — was causing the layout to appear centered
+        if (false) foreach (var layer in layers)
         {
             if (layer.Count == 0) continue;
             double lw = layer.Max(id => g[id].X + g[id].W);
