@@ -204,9 +204,13 @@ internal static class EventChainFlowchartService
                         MergeEdge(edgeMap, chain.ConfigKey, ck, type, lvl);
                 }
 
-                // Spawn/Drop
-                if (item.DropOdds != null) foreach (var k in item.DropOdds.Keys) AddEdge(k, ChainEdgeType.SpawnDrop);
-                if (item.SpawnOdds != null) foreach (var k in item.SpawnOdds.Keys) AddEdge(k, ChainEdgeType.SpawnDrop);
+                // Spawn/Drop — sorted by drop rate descending (highest rate = first child)
+                if (item.DropOdds != null)
+                    foreach (var k in item.DropOdds.OrderByDescending(kv => kv.Value).Select(kv => kv.Key))
+                        AddEdge(k, ChainEdgeType.SpawnDrop);
+                if (item.SpawnOdds != null)
+                    foreach (var k in item.SpawnOdds.OrderByDescending(kv => kv.Value).Select(kv => kv.Key))
+                        AddEdge(k, ChainEdgeType.SpawnDrop);
                 if (!string.IsNullOrEmpty(item.SpawnItemType)) AddEdge(item.SpawnItemType, ChainEdgeType.SpawnDrop);
 
                 // Decay
@@ -482,6 +486,10 @@ internal static class EventChainFlowchartService
         for (int i = 0; i < layers[0].Count; i++)
             g[layers[0][i]].Order = i;
 
+        AppLogger.Info($"[FLOWCHART-ORDER] Layer 0: {string.Join(", ", layers[0].Select(id => g[id].Title))}");
+        foreach (var rid in layers[0])
+            AppLogger.Info($"[FLOWCHART-ORDER]   {g[rid].Title} descendants={CountDescendants(rid)} children=[{string.Join(", ", g[rid].Children.Select(c => g.TryGetValue(c, out var cn) ? cn.Title : c))}]");
+
         // For each subsequent layer: order by parent position
         for (int li = 1; li < layers.Count; li++)
         {
@@ -490,14 +498,17 @@ internal static class EventChainFlowchartService
             var added = new HashSet<string>();
 
             // Walk previous layer left-to-right, append each parent's children
-            // Children order: keep insertion order (no alphabetical sort — parent order matters)
             foreach (var parentId in layers[li - 1])
             {
                 if (!g.TryGetValue(parentId, out var parent)) continue;
                 foreach (var childId in parent.Children)
                 {
                     if (layerNodes.Contains(childId) && added.Add(childId))
+                    {
                         ordered.Add(childId);
+                        if (li <= 3)
+                            AppLogger.Info($"[FLOWCHART-ORDER] Layer {li}: parent '{g[parentId].Title}' → child '{(g.TryGetValue(childId, out var cn) ? cn.Title : childId)}'");
+                    }
                 }
             }
 
