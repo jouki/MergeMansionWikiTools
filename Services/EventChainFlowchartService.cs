@@ -456,53 +456,53 @@ internal static class EventChainFlowchartService
 
     static void MinimizeCrossings(Dictionary<string, N> g, List<List<string>> layers)
     {
-        // Initial ordering: BFS from roots — children appear near their parents
-        var visited = new HashSet<string>();
-        var bfsOrder = new Dictionary<string, int>();
-        int orderIdx = 0;
-        var bfsQueue = new Queue<string>();
-        foreach (var layer in layers)
-            foreach (var id in layer)
-                if (g.TryGetValue(id, out var n) && !n.IsDummy && n.Parents.All(p => !g.ContainsKey(p) || g[p].IsDummy))
-                    bfsQueue.Enqueue(id);
+        // Layer-by-layer BFS ordering: process each layer left-to-right,
+        // append each node's children in order to the next layer.
+        // This produces intuitive flowchart ordering.
 
-        while (bfsQueue.Count > 0)
+        // First: order layer 0 (roots) — left-aligned, as-is from BFS
+        for (int i = 0; i < layers[0].Count; i++)
+            g[layers[0][i]].Order = i;
+
+        // For each subsequent layer: order by parent position
+        for (int li = 1; li < layers.Count; li++)
         {
-            var id = bfsQueue.Dequeue();
-            if (!visited.Add(id)) continue;
-            bfsOrder[id] = orderIdx++;
-            if (g.TryGetValue(id, out var n))
-                foreach (var c in n.Children.Where(c => g.ContainsKey(c)))
-                    bfsQueue.Enqueue(c);
+            var layerNodes = new HashSet<string>(layers[li]);
+            var ordered = new List<string>();
+            var added = new HashSet<string>();
+
+            // Walk previous layer left-to-right, append children in order
+            foreach (var parentId in layers[li - 1])
+            {
+                if (!g.TryGetValue(parentId, out var parent)) continue;
+                foreach (var childId in parent.Children)
+                {
+                    if (layerNodes.Contains(childId) && added.Add(childId))
+                        ordered.Add(childId);
+                }
+            }
+
+            // Append any remaining nodes not reached (disconnected or from earlier layers)
+            foreach (var id in layers[li])
+                if (added.Add(id))
+                    ordered.Add(id);
+
+            layers[li] = ordered;
+            for (int i = 0; i < ordered.Count; i++)
+                g[ordered[i]].Order = i;
         }
 
-        // Apply BFS order as initial Order within layers
-        for (int li = 0; li < layers.Count; li++)
+        // Refine: 6 iterations of barycenter (bottom-up pass to improve)
+        for (int iter = 0; iter < 6; iter++)
         {
-            var sorted = layers[li].OrderBy(id => bfsOrder.GetValueOrDefault(id, 999)).ToList();
-            layers[li] = sorted;
-            for (int i = 0; i < sorted.Count; i++) g[sorted[i]].Order = i;
-        }
-
-        // Barycenter: 12 iterations alternating down/up
-        for (int iter = 0; iter < 12; iter++)
-        {
-            bool down = iter % 2 == 0;
-            var sweep = down
-                ? Enumerable.Range(1, layers.Count - 1)
-                : Enumerable.Range(0, layers.Count - 1).Reverse();
-
-            foreach (int li in sweep)
+            for (int li = layers.Count - 2; li >= 0; li--)
             {
                 foreach (var id in layers[li])
                 {
                     var n = g[id];
-                    var refs = (down ? n.Parents : n.Children)
-                        .Where(r => g.ContainsKey(r))
-                        .Select(r => (double)g[r].Order)
-                        .ToList();
-                    if (refs.Count > 0)
-                        n.Order = (int)Math.Round(refs.Average() * 10000);
+                    var cOrders = n.Children.Where(c => g.ContainsKey(c)).Select(c => (double)g[c].Order).ToList();
+                    if (cOrders.Count > 0)
+                        n.Order = (int)Math.Round(cOrders.Average() * 10000);
                 }
                 layers[li] = layers[li].OrderBy(id => g[id].Order).ToList();
                 for (int i = 0; i < layers[li].Count; i++) g[layers[li][i]].Order = i;
