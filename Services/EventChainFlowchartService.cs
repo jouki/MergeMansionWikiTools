@@ -495,7 +495,7 @@ internal static class EventChainFlowchartService
                         .Select(r => (double)g[r].Order)
                         .ToList();
                     if (refs.Count > 0)
-                        n.Order = (int)Math.Round(refs.Average() * 1000) + bfsOrder.GetValueOrDefault(id, 500);
+                        n.Order = (int)Math.Round(refs.Average() * 10000);
                 }
                 layers[li] = layers[li].OrderBy(id => g[id].Order).ToList();
                 for (int i = 0; i < layers[li].Count; i++) g[layers[li][i]].Order = i;
