@@ -87,12 +87,20 @@ internal static class EventChainFlowchartService
             };
         }
 
-        // Build adjacency — ONLY SpawnDrop and Decay edges form parent→child hierarchy.
-        // SinkInput/SinkOutput are rendered as edges but don't affect layout.
+        // Build adjacency — SpawnDrop, Decay, and SinkInput form parent→child hierarchy.
+        // SinkOutput (reward edges) only form hierarchy for non-generator targets.
+        // This ensures characters (Order items fed by SinkInput) appear below their source items,
+        // while SinkInput to Machines (transformative items) doesn't create wrong parent relationships.
+        var orderChains = new HashSet<string>(eventChains
+            .Where(c => c.Items.Any(i => i.IsOrder))
+            .Select(c => c.ConfigKey), StringComparer.OrdinalIgnoreCase);
+
         foreach (var e in edges.OrderBy(e => e.EdgeType))
         {
             if (!graph.ContainsKey(e.SourceChainKey) || !graph.ContainsKey(e.TargetChainKey)) continue;
-            if (e.EdgeType == ChainEdgeType.SinkInput || e.EdgeType == ChainEdgeType.SinkOutput) continue;
+
+            // Skip SinkInput unless target is an Order chain (character)
+            if (e.EdgeType == ChainEdgeType.SinkInput && !orderChains.Contains(e.TargetChainKey)) continue;
             var src = graph[e.SourceChainKey];
             if (!src.Children.Contains(e.TargetChainKey))
                 src.Children.Add(e.TargetChainKey);
