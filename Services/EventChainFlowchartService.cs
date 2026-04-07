@@ -240,7 +240,17 @@ internal static class EventChainFlowchartService
                         }
                     if (item.OrderRewardItems != null)
                         foreach (var k in item.OrderRewardItems.Keys)
-                            AddEdge(k, ChainEdgeType.SinkOutput);
+                        {
+                            // Skip reward edges targeting infinite generators (no decay)
+                            var targetCk = ResolveChainKey(k, itemToChain, ds);
+                            var targetChain = targetCk != null ? eventChains.FirstOrDefault(c => c.ConfigKey == targetCk) : null;
+                            bool isInfiniteGen = targetChain?.Items.Any(i =>
+                                i.IsGenerator
+                                && string.IsNullOrEmpty(i.DecayAfterLastCycleItemType)
+                                && i.DecayAfterLastCycleOdds == null) == true;
+                            if (!isInfiniteGen)
+                                AddEdge(k, ChainEdgeType.SinkOutput);
+                        }
                 }
             }
         }
