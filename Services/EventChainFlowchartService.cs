@@ -436,28 +436,57 @@ internal static class EventChainFlowchartService
 
     static void MinimizeCrossings(Dictionary<string, N> g, List<List<string>> layers)
     {
-        // Barycenter: sweep down then up
-        for (int li = 1; li < layers.Count; li++)
+        // Initial ordering: BFS from roots — children appear near their parents
+        var visited = new HashSet<string>();
+        var bfsOrder = new Dictionary<string, int>();
+        int orderIdx = 0;
+        var bfsQueue = new Queue<string>();
+        foreach (var layer in layers)
+            foreach (var id in layer)
+                if (g.TryGetValue(id, out var n) && !n.IsDummy && n.Parents.All(p => !g.ContainsKey(p) || g[p].IsDummy))
+                    bfsQueue.Enqueue(id);
+
+        while (bfsQueue.Count > 0)
         {
-            foreach (var id in layers[li])
-            {
-                var n = g[id];
-                var pOrders = n.Parents.Where(p => g.ContainsKey(p)).Select(p => g[p].Order).ToList();
-                if (pOrders.Count > 0) n.Order = (int)Math.Round(pOrders.Average());
-            }
-            layers[li] = layers[li].OrderBy(id => g[id].Order).ToList();
-            for (int i = 0; i < layers[li].Count; i++) g[layers[li][i]].Order = i;
+            var id = bfsQueue.Dequeue();
+            if (!visited.Add(id)) continue;
+            bfsOrder[id] = orderIdx++;
+            if (g.TryGetValue(id, out var n))
+                foreach (var c in n.Children.Where(c => g.ContainsKey(c)))
+                    bfsQueue.Enqueue(c);
         }
-        for (int li = layers.Count - 2; li >= 0; li--)
+
+        // Apply BFS order as initial Order within layers
+        foreach (var layer in layers)
         {
-            foreach (var id in layers[li])
+            var sorted = layer.OrderBy(id => bfsOrder.GetValueOrDefault(id, 999)).ToList();
+            layers[layers.IndexOf(layer)] = sorted;
+            for (int i = 0; i < sorted.Count; i++) g[sorted[i]].Order = i;
+        }
+
+        // Barycenter: 12 iterations alternating down/up
+        for (int iter = 0; iter < 12; iter++)
+        {
+            bool down = iter % 2 == 0;
+            var sweep = down
+                ? Enumerable.Range(1, layers.Count - 1)
+                : Enumerable.Range(0, layers.Count - 1).Reverse();
+
+            foreach (int li in sweep)
             {
-                var n = g[id];
-                var cOrders = n.Children.Where(c => g.ContainsKey(c)).Select(c => g[c].Order).ToList();
-                if (cOrders.Count > 0) n.Order = (int)Math.Round(cOrders.Average());
+                foreach (var id in layers[li])
+                {
+                    var n = g[id];
+                    var refs = (down ? n.Parents : n.Children)
+                        .Where(r => g.ContainsKey(r))
+                        .Select(r => (double)g[r].Order)
+                        .ToList();
+                    if (refs.Count > 0)
+                        n.Order = (int)Math.Round(refs.Average() * 1000) + bfsOrder.GetValueOrDefault(id, 500);
+                }
+                layers[li] = layers[li].OrderBy(id => g[id].Order).ToList();
+                for (int i = 0; i < layers[li].Count; i++) g[layers[li][i]].Order = i;
             }
-            layers[li] = layers[li].OrderBy(id => g[id].Order).ToList();
-            for (int i = 0; i < layers[li].Count; i++) g[layers[li][i]].Order = i;
         }
     }
 
@@ -811,16 +840,15 @@ internal static class EventChainFlowchartService
 
                 if (isDecay)
                 {
-                    // Decay: route from right-bottom corner → right → down → to target top
-                    // Start: extend right from node corner
-                    double rightX = src.X + ox + src.W + NodeGapX * 0.6;
+                    // Decay: route from right-bottom → right (past all nodes) → down → to target
+                    double rightX = src.X + ox + src.W + NodeGapX;
 
-                    // Push rightX past any nodes in the way
+                    // Push rightX past ALL nodes between source and target Y range
                     foreach (var b in boxes)
                     {
                         if (b.id == src.Id || b.id == tgt.Id) continue;
-                        if (b.right > rightX - 5 && b.left < rightX + 5 && b.bottom > sy && b.top < ty)
-                            rightX = b.right + margin + 4;
+                        if (b.right > rightX - margin && b.top < ty + margin && b.bottom > sy - margin)
+                            rightX = Math.Max(rightX, b.right + margin + 6);
                     }
 
                     // Route: right from source → down → left to target top
