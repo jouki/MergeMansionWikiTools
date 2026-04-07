@@ -345,7 +345,7 @@ internal static class EventChainFlowchartService
         foreach (var n in g.Values) layers[n.Layer].Add(n.Id);
 
         InsertDummyNodes(g, layers);
-        for (int i = 0; i < 12; i++) MinimizeCrossings(g, layers);
+        MinimizeCrossings(g, layers);
         AssignXPositions(g, layers);
         AssignYPositions(g, layers);
         CompactColumns(g);
@@ -471,13 +471,18 @@ internal static class EventChainFlowchartService
             var ordered = new List<string>();
             var added = new HashSet<string>();
 
-            // Walk previous layer left-to-right, append children in order
+            // Walk previous layer left-to-right, append children sorted by name
             foreach (var parentId in layers[li - 1])
             {
                 if (!g.TryGetValue(parentId, out var parent)) continue;
-                foreach (var childId in parent.Children)
+                // Sort children by display name for deterministic ordering
+                var sortedChildren = parent.Children
+                    .Where(c => layerNodes.Contains(c))
+                    .OrderBy(c => g.TryGetValue(c, out var cn) ? cn.Title : c)
+                    .ToList();
+                foreach (var childId in sortedChildren)
                 {
-                    if (layerNodes.Contains(childId) && added.Add(childId))
+                    if (added.Add(childId))
                         ordered.Add(childId);
                 }
             }
