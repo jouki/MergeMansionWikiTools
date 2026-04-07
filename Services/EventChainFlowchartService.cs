@@ -345,12 +345,9 @@ internal static class EventChainFlowchartService
 
     static void AssignLayers(Dictionary<string, N> g)
     {
-        // BFS parallel layer assignment — each node placed at earliest possible layer
-        // This means: layer = min(parent layers) + 1, not max(parent layers) + 1
-        // Result: nodes appear close to their FIRST parent, not pushed down by later parents
         var topo = TopologicalSort(g);
 
-        // Phase 1: Assign layer = max(parent) + 1 (standard longest-path for baseline)
+        // Phase 1: Longest-path layer assignment (standard)
         foreach (var id in topo)
         {
             var n = g[id];
@@ -360,30 +357,14 @@ internal static class EventChainFlowchartService
             n.Layer = pMax + 1;
         }
 
-        // Phase 2: Pull UP nodes that have a much earlier parent
-        // If a node has parent at layer 1 AND parent at layer 5, place at layer 2 (near earliest parent)
-        // This allows backward edges from layer-5 parent to this node — which is fine for event flowcharts
-        foreach (var id in topo)
-        {
-            var n = g[id];
-            var parentLayers = n.Parents.Where(p => g.ContainsKey(p)).Select(p => g[p].Layer).ToList();
-            if (parentLayers.Count <= 1) continue;
-
-            int minParent = parentLayers.Min();
-            int maxParent = parentLayers.Max();
-
-            // Only pull up if the gap is significant (>= 2 layers between earliest and latest parent)
-            if (maxParent - minParent >= 2)
-                n.Layer = minParent + 1;
-        }
-
-        // Phase 3: Pull-down non-root nodes to be closer to their children
+        // Phase 2: Pull-down non-root internal nodes closer to children
         foreach (var id in topo.AsEnumerable().Reverse())
         {
             var n = g[id];
             if (n.Children.Count == 0) continue;
-            // Don't pull down root nodes (no parents) — they stay at layer 0 as starter items
+            // Root nodes (starter producers) stay at layer 0
             if (!n.Parents.Any(p => g.ContainsKey(p))) continue;
+
             int minChild = int.MaxValue;
             foreach (var c in n.Children)
                 if (g.TryGetValue(c, out var cn)) minChild = Math.Min(minChild, cn.Layer);
