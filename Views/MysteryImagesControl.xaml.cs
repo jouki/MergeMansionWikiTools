@@ -734,7 +734,7 @@ public partial class MysteryImagesControl : UserControl
 		{
 			_main.Dispatcher.InvokeAsync(() =>
 			{
-				_main.NavigateToPage(5); // back to Mysteries
+				_main.NavigateToPage(6); // back to Mysteries
 				prepareWindow?.ResetImagesForRefresh();
 				prepareWindow?.Show();
 				prepareWindow?.ShowImagesTab();

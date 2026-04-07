@@ -599,7 +599,7 @@ public partial class MysteryDecorationUploadDialog : Wpf.Ui.Controls.FluentWindo
                 }
 
                 // Navigate back to Mysteries page and show dialog
-                _main.NavigateToPage(5); // Mysteries page index
+                _main.NavigateToPage(6); // Mysteries page index
                 Show();
             });
         });

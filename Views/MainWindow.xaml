@@ -128,6 +128,16 @@
                             </ListBoxItem>
                             <ListBoxItem>
                                 <StackPanel Orientation="Horizontal">
+                                    <ui:SymbolIcon Symbol="CalendarLtr24" FontSize="22" Margin="0,0,12,0"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                    <TextBlock Text="Events" FontSize="14" VerticalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                    <TextBlock Text="[WIP]" FontSize="10" VerticalAlignment="Center" Margin="6,0,0,0"
+                                               Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                                </StackPanel>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <StackPanel Orientation="Horizontal">
                                     <ui:SymbolIcon Symbol="Trophy24" FontSize="22" Margin="0,0,12,0"
                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                                     <TextBlock Text="Mysteries" FontSize="14" VerticalAlignment="Center"

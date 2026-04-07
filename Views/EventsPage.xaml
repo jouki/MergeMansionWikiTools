@@ -1,0 +1,109 @@
+<UserControl x:Class="MergeMansionWikiTools.Views.EventsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+
+    <Grid Margin="24,16,24,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Row 0: Header -->
+        <Grid Grid.Row="0" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="Events" FontSize="28" FontWeight="SemiBold"
+                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                <TextBlock Text="[WIP]" FontSize="14" VerticalAlignment="Bottom" Margin="8,0,0,4"
+                           Foreground="{DynamicResource TextFillColorTertiaryBrush}"/>
+            </StackPanel>
+
+            <ui:TextBox x:Name="txtSearch" Grid.Column="1"
+                        PlaceholderText="Search events..." Margin="16,0"
+                        Icon="{ui:SymbolIcon Search24}"
+                        TextChanged="TxtSearch_TextChanged"/>
+
+            <TextBlock x:Name="txtSummary" Grid.Column="2"
+                       VerticalAlignment="Center"
+                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+        </Grid>
+
+        <!-- Row 1: Split content -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Left: event list -->
+            <Border Grid.Column="0" CornerRadius="8" Margin="0,0,12,0"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="8">
+                    <StackPanel x:Name="eventListPanel"/>
+                </ScrollViewer>
+            </Border>
+
+            <!-- Right: event detail + flowchart -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Event header -->
+                <StackPanel x:Name="eventDetailPanel" Grid.Row="0" Margin="0,0,0,8"
+                            Visibility="Collapsed">
+                    <TextBlock x:Name="txtEventName" FontSize="22" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                    <TextBlock x:Name="txtEventInfo" FontSize="13"
+                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                </StackPanel>
+
+                <!-- Chain list (collapsible) -->
+                <Expander x:Name="chainExpander" Grid.Row="1" Header="Chains"
+                          Margin="0,0,0,8" Visibility="Collapsed">
+                    <ScrollViewer MaxHeight="200" VerticalScrollBarVisibility="Auto">
+                        <StackPanel x:Name="chainListPanel"/>
+                    </ScrollViewer>
+                </Expander>
+
+                <!-- Flowchart placeholder -->
+                <Border Grid.Row="2" CornerRadius="8"
+                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                        BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                    <TextBlock x:Name="txtPlaceholder" Text="Select an event to view its item chain flowchart."
+                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="14"/>
+                </Border>
+
+                <!-- Buttons -->
+                <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,12,0,8"
+                            HorizontalAlignment="Right">
+                    <ui:Button x:Name="btnGenerateFlowchart" Content="Generate Flowchart"
+                               Icon="{ui:SymbolIcon FlowchartCircle24}"
+                               Appearance="Primary" Click="BtnGenerateFlowchart_Click"
+                               IsEnabled="False" Margin="0,0,8,0"/>
+                    <ui:Button x:Name="btnSaveSvg" Content="Save SVG"
+                               Icon="{ui:SymbolIcon Save24}"
+                               Click="BtnSaveSvg_Click" IsEnabled="False" Margin="0,0,8,0"/>
+                    <ui:Button x:Name="btnOpenFlowchart" Content="Open"
+                               Icon="{ui:SymbolIcon Open24}"
+                               Click="BtnOpenFlowchart_Click" IsEnabled="False"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <!-- Row 2: InfoBar -->
+        <ui:InfoBar x:Name="infoBar" Grid.Row="2" IsOpen="False" IsClosable="True" Margin="0,8,0,8"/>
+    </Grid>
+</UserControl>
