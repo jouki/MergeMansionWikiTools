@@ -88,11 +88,19 @@ public partial class EventsPage : UserControl
                 eventListPanel.Children.Add(new System.Windows.Controls.TextBlock
                 {
                     Text = year > 0 ? year.ToString() : "Unknown",
-                    FontSize = 16,
-                    FontWeight = FontWeights.SemiBold,
-                    Margin = new Thickness(4, 12, 0, 4),
-                    Foreground = (Brush)FindResource("TextFillColorSecondaryBrush")
+                    FontSize = 18,
+                    FontWeight = FontWeights.Bold,
+                    Margin = new Thickness(4, lastYear == null ? 0 : 16, 0, 6),
+                    Foreground = (Brush)FindResource("AccentTextFillColorPrimaryBrush")
                 });
+                // Year separator line
+                if (lastYear != null)
+                    eventListPanel.Children.Insert(eventListPanel.Children.Count - 1, new Border
+                    {
+                        Height = 1,
+                        Margin = new Thickness(4, 8, 4, 0),
+                        Background = (Brush)FindResource("ControlStrokeColorDefaultBrush")
+                    });
             }
 
             var card = CreateEventCard(ev);
@@ -126,14 +134,29 @@ public partial class EventsPage : UserControl
             Foreground = (Brush)FindResource("TextFillColorTertiaryBrush")
         });
 
+        var hoverBrush = (Brush)FindResource("ControlFillColorSecondaryBrush");
+        var selectedBrush = (Brush)FindResource("ControlFillColorDefaultBrush");
+
         var border = new Border
         {
             Child = panel,
             CornerRadius = new CornerRadius(6),
-            Margin = new Thickness(0, 2, 0, 2),
+            Margin = new Thickness(0, 1, 0, 1),
+            Padding = new Thickness(0),
             Cursor = System.Windows.Input.Cursors.Hand,
             Background = Brushes.Transparent,
             Tag = ev
+        };
+
+        border.MouseEnter += (_, _) =>
+        {
+            if (border.Tag as CollectibleBoardEvent != _selectedEvent)
+                border.Background = hoverBrush;
+        };
+        border.MouseLeave += (_, _) =>
+        {
+            if (border.Tag as CollectibleBoardEvent != _selectedEvent)
+                border.Background = Brushes.Transparent;
         };
 
         border.MouseLeftButtonUp += (_, _) =>
