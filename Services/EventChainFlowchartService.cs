@@ -408,8 +408,28 @@ internal static class EventChainFlowchartService
         foreach (var n in g.Values)
             if (n.Layer == -1) n.Layer = 0;
 
-        // Note: No Phase 2 push-down. BFS shortest path is authoritative.
-        // Backward edges (child above parent) are allowed and rendered with right-side routing.
+        // Push-down: ensure every node is BELOW all its hierarchical parents.
+        // This fixes cases where BFS shortest path places a node on the same layer
+        // as another parent (e.g., Lollipops on same layer as Candy Machine).
+        var topo = TopologicalSort(g);
+        bool changed = true;
+        for (int pass = 0; pass < 10 && changed; pass++)
+        {
+            changed = false;
+            foreach (var id in topo)
+            {
+                var n = g[id];
+                foreach (var p in n.Parents)
+                {
+                    if (!g.TryGetValue(p, out var pn)) continue;
+                    if (n.Layer <= pn.Layer)
+                    {
+                        n.Layer = pn.Layer + 1;
+                        changed = true;
+                    }
+                }
+            }
+        }
 
         // Compact layer numbers
         var usedLayers = g.Values.Select(n => n.Layer).Distinct().OrderBy(l => l).ToList();
