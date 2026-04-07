@@ -18,8 +18,8 @@ internal static class EventChainFlowchartService
     const double LayerGap = 90;   // increased for edge bend room
     const double MaxNodeW = 260;
     const double MinNodeW = 160;
-    const double HeaderH = 30;    // smaller header (no icon in header anymore)
-    const double BodyH = 38;      // body section with icon
+    const double HeaderH = 30;    // title only
+    const double BodyH = 44;      // icon slot + subtitle with padding
     const double SubH = 0;        // subtitle merged into body
     const double ArrowSize = 6;
     const double BusOffset = 18;
@@ -512,6 +512,24 @@ internal static class EventChainFlowchartService
                 }
             }
         }
+
+        // Final pass: snap nodes with single parent directly under parent center
+        foreach (var layer in layers)
+        {
+            for (int i = 0; i < layer.Count; i++)
+            {
+                var n = g[layer[i]];
+                if (n.IsDummy) continue;
+                var parents = n.Parents.Where(p => g.ContainsKey(p) && !g[p].IsDummy).ToList();
+                if (parents.Count != 1) continue;
+
+                var parent = g[parents[0]];
+                double desired = parent.X + parent.W / 2 - n.W / 2;
+                double leftBound = i > 0 ? g[layer[i - 1]].X + g[layer[i - 1]].W + NodeGapX : double.MinValue;
+                double rightBound = i < layer.Count - 1 ? g[layer[i + 1]].X - n.W - NodeGapX : double.MaxValue;
+                n.X = Math.Clamp(desired, leftBound, rightBound);
+            }
+        }
     }
 
     static void AssignYPositions(Dictionary<string, N> g, List<List<string>> layers)
@@ -734,6 +752,15 @@ internal static class EventChainFlowchartService
                 if (graph.TryGetValue(nid, out var n) && !n.IsDummy)
                     nodeLayer[nid] = li;
 
+        // Per-source child index — offset each child's edge horizontally at source
+        var srcChildIndex = new Dictionary<string, int>(StringComparer.Ordinal);
+        var srcChildCount = new Dictionary<string, int>(StringComparer.Ordinal);
+        foreach (var e in edges)
+        {
+            srcChildCount.TryAdd(e.SourceChainKey, 0);
+            srcChildCount[e.SourceChainKey]++;
+        }
+
         // Route each edge
         foreach (var group in edges.GroupBy(e => e.EdgeType).OrderBy(g => g.Key))
         {
@@ -747,22 +774,28 @@ internal static class EventChainFlowchartService
 
                 bool isDecay = edge.EdgeType == ChainEdgeType.Decay;
 
-                // Per-edge-type horizontal offset to prevent overlapping
+                // Per-edge-type offset to separate different types visually
                 double typeYOff = (int)edge.EdgeType * 6;
+
+                // Per-source child index for horizontal spacing at shared source
+                srcChildIndex.TryAdd(edge.SourceChainKey, 0);
+                int childIdx = srcChildIndex[edge.SourceChainKey]++;
+                int childTotal = srcChildCount.GetValueOrDefault(edge.SourceChainKey, 1);
+                double childOff = childTotal > 1 ? (childIdx - (childTotal - 1) / 2.0) * 10 : 0;
 
                 // Anchor points
                 double sx, sy, tx, ty;
                 if (isDecay)
                 {
-                    // Decay: start from right-bottom corner of node
-                    sx = src.X + ox + src.W;             // right edge exactly
-                    sy = src.Y + oy + src.H - 6;         // slightly above bottom (avoids rounded corner)
-                    tx = tgt.X + ox + tgt.W / 2;        // target top center
+                    // Decay: start from right edge at bottom of node
+                    sx = src.X + ox + src.W;              // right edge
+                    sy = src.Y + oy + src.H;              // bottom edge
+                    tx = tgt.X + ox + tgt.W / 2;         // target top center
                     ty = tgt.Y + oy;
                 }
                 else
                 {
-                    sx = src.X + ox + src.W / 2;
+                    sx = src.X + ox + src.W / 2 + childOff;
                     sy = src.Y + oy + src.H;
                     tx = tgt.X + ox + tgt.W / 2;
                     ty = tgt.Y + oy;
