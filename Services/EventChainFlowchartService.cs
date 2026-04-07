@@ -768,11 +768,12 @@ internal static class EventChainFlowchartService
 
                 bool isDecay = edge.EdgeType == ChainEdgeType.Decay;
 
-                // Per-source Y offset: edges from different sources get different gapY to prevent overlap
-                // Edges from SAME source share gapY (they form a bus from that node)
-                double typeYOff = (int)edge.EdgeType * 6;
-                srcChildIndex.TryAdd(edge.SourceChainKey, srcChildIndex.Count);
-                double srcYOff = srcChildIndex.GetValueOrDefault(edge.SourceChainKey) * 5;
+                // Per-source Y offset: edges from different sources route at different Y in the gap
+                // Combined with per-type offset to fully separate all edge groups
+                double typeYOff = (int)edge.EdgeType * 8;
+                if (!srcChildIndex.ContainsKey(edge.SourceChainKey))
+                    srcChildIndex[edge.SourceChainKey] = srcChildIndex.Count;
+                double srcYOff = srcChildIndex[edge.SourceChainKey] * 8;
 
                 // Anchor points
                 double sx, sy, tx, ty;
