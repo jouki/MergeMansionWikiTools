@@ -460,24 +460,22 @@ internal static class EventChainFlowchartService
         // append each node's children in order to the next layer.
         // This produces intuitive flowchart ordering.
 
-        // Order layer 0: sort by number of descendants (most connected first = main producer left)
-        layers[0] = layers[0].OrderByDescending(id =>
+        // Order layer 0: most total descendants first (main event chain tree left)
+        int CountDescendants(string rootId)
         {
-            int count = 0;
             var seen = new HashSet<string>();
             var q = new Queue<string>();
-            q.Enqueue(id);
+            q.Enqueue(rootId);
             while (q.Count > 0)
             {
                 var nid = q.Dequeue();
-                if (!seen.Add(nid)) continue;
-                count++;
-                if (g.TryGetValue(nid, out var nn))
-                    foreach (var c in nn.Children.Where(c => g.ContainsKey(c)))
-                        q.Enqueue(c);
+                if (!seen.Add(nid) || !g.TryGetValue(nid, out var nn)) continue;
+                foreach (var c in nn.Children.Where(c => g.ContainsKey(c)))
+                    q.Enqueue(c);
             }
-            return count;
-        }).ToList();
+            return seen.Count;
+        }
+        layers[0] = layers[0].OrderByDescending(CountDescendants).ToList();
         for (int i = 0; i < layers[0].Count; i++)
             g[layers[0][i]].Order = i;
 
@@ -488,18 +486,14 @@ internal static class EventChainFlowchartService
             var ordered = new List<string>();
             var added = new HashSet<string>();
 
-            // Walk previous layer left-to-right, append children sorted by name
+            // Walk previous layer left-to-right, append each parent's children
+            // Children order: keep insertion order (no alphabetical sort — parent order matters)
             foreach (var parentId in layers[li - 1])
             {
                 if (!g.TryGetValue(parentId, out var parent)) continue;
-                // Sort children by display name for deterministic ordering
-                var sortedChildren = parent.Children
-                    .Where(c => layerNodes.Contains(c))
-                    .OrderBy(c => g.TryGetValue(c, out var cn) ? cn.Title : c)
-                    .ToList();
-                foreach (var childId in sortedChildren)
+                foreach (var childId in parent.Children)
                 {
-                    if (added.Add(childId))
+                    if (layerNodes.Contains(childId) && added.Add(childId))
                         ordered.Add(childId);
                 }
             }
