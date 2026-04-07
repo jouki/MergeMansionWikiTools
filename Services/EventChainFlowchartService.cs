@@ -16,9 +16,9 @@ internal static class EventChainFlowchartService
     const double PadY = 8;
     const double NodeGapX = 45;
     const double LayerGap = 70;
-    const double MaxNodeW = 220;
-    const double MinNodeW = 120;
-    const double HeaderH = 28;
+    const double MaxNodeW = 260;
+    const double MinNodeW = 140;
+    const double HeaderH = 36;
     const double SubH = 18;
     const double ArrowSize = 6;
     const double BusOffset = 18;
@@ -75,7 +75,8 @@ internal static class EventChainFlowchartService
             int parenIdx = title.IndexOf(" (");
             if (parenIdx > 0) title = title[..parenIdx];
 
-            double titleW = title.Length * 7.5 + PadX * 2;
+            double iconSpace = 36; // 32px icon + gap
+            double titleW = title.Length * 7.5 + iconSpace + PadX * 2;
             double w = Math.Clamp(titleW, MinNodeW, MaxNodeW);
             graph[n.ChainKey] = new N
             {
@@ -644,25 +645,29 @@ internal static class EventChainFlowchartService
             sb.AppendLine($"<rect x='{F(nx)}' y='{F(ny)}' width='{F(n.W)}' height='{F(hh)}' fill='#4A7CBF' clip-path='url(#clip-{n.Id.GetHashCode():X})'/>");
             sb.AppendLine($"<rect x='{F(nx)}' y='{F(ny + hh - 4)}' width='{F(n.W)}' height='4' fill='#3A5F96'/>");
 
-            // Icon + Title in header
+            // Icon slot + Title in header
             string? iconB64 = null;
             bool hasIcon = iconByChain != null && iconByChain.TryGetValue(n.Id, out iconB64);
-            double iconSize = hh - 6;
-            double iconX = nx + 3;
-            double iconY = ny + 3;
-            double textStartX = hasIcon ? iconX + iconSize + 4 : nx + PadX;
+            double iconSize = 32;
+            double slotSize = iconSize + 4;
+            double slotX = nx + 2;
+            double slotY = ny + (hh - slotSize) / 2;
+            double textStartX = slotX + slotSize + 4;
             double textAvailW = n.W - (textStartX - nx) - PadX;
-            int maxChars = (int)(textAvailW / 7);
+            int maxChars = Math.Max(5, (int)(textAvailW / 7.5));
 
             string title = n.Title.Length > maxChars ? n.Title[..Math.Max(maxChars - 3, 3)] + "..." : n.Title;
 
+            // Orange icon slot background
+            sb.AppendLine($"<rect x='{F(slotX)}' y='{F(slotY)}' width='{F(slotSize)}' height='{F(slotSize)}' rx='4' fill='#D4C4A8' stroke='#B8A888' stroke-width='1'/>");
+
             if (hasIcon)
             {
-                sb.AppendLine($"<image x='{F(iconX)}' y='{F(iconY)}' width='{F(iconSize)}' height='{F(iconSize)}' " +
+                sb.AppendLine($"<image x='{F(slotX + 2)}' y='{F(slotY + 2)}' width='{F(iconSize)}' height='{F(iconSize)}' " +
                     $"href='data:image/png;base64,{iconB64}' preserveAspectRatio='xMidYMid meet'/>");
             }
 
-            sb.AppendLine($"<text x='{F(textStartX)}' y='{F(ny + hh / 2 + 4.5)}' class='node-title'>{Esc(title)}</text>");
+            sb.AppendLine($"<text x='{F(textStartX)}' y='{F(ny + hh / 2 + 5)}' class='node-title'>{Esc(title)}</text>");
 
             // Subtitle (below header)
             sb.AppendLine($"<text x='{F(nx + PadX)}' y='{F(ny + hh + SubH - 4)}' class='node-sub'>{Esc(n.Sub)}</text>");
@@ -691,8 +696,8 @@ internal static class EventChainFlowchartService
     static void RouteAndRenderEdges(StringBuilder sb, Dictionary<string, N> graph,
         List<ChainGraphEdge> edges, List<List<string>> layers, double ox, double oy, CultureInfo ci)
     {
-        // Node bounding boxes (with margin)
-        double margin = 4;
+        // Node bounding boxes (with generous margin to prevent edge-on-border)
+        double margin = 8;
         var boxes = graph.Values.Where(n => !n.IsDummy)
             .Select(n => (left: n.X + ox - margin, top: n.Y + oy - margin,
                 right: n.X + ox + n.W + margin, bottom: n.Y + oy + n.H + margin, id: n.Id))
@@ -735,13 +740,17 @@ internal static class EventChainFlowchartService
 
                 bool isDecay = edge.EdgeType == ChainEdgeType.Decay;
 
-                // Anchor points: decay exits right-bottom, enters top; others bottom → top
+                // Per-edge-type horizontal offset to prevent overlapping
+                double typeYOff = (int)edge.EdgeType * 6;
+
+                // Anchor points
                 double sx, sy, tx, ty;
                 if (isDecay)
                 {
-                    sx = src.X + ox + src.W;         // right edge
-                    sy = src.Y + oy + src.H;          // bottom
-                    tx = tgt.X + ox + tgt.W / 2;      // top center
+                    // Decay: start from right side, slightly above bottom corner (protažení pro zaoblení)
+                    sx = src.X + ox + src.W - 4;       // slightly inside right edge (for rounded corner)
+                    sy = src.Y + oy + src.H;            // bottom
+                    tx = tgt.X + ox + tgt.W / 2;        // target top center
                     ty = tgt.Y + oy;
                 }
                 else
@@ -752,7 +761,7 @@ internal static class EventChainFlowchartService
                     ty = tgt.Y + oy;
                 }
 
-                if (sy >= ty) continue; // skip backward edges
+                if (sy >= ty - 2) continue; // skip backward/same-level edges
 
                 int srcL = nodeLayer.GetValueOrDefault(src.Id, -1);
                 int tgtL = nodeLayer.GetValueOrDefault(tgt.Id, -1);
@@ -771,15 +780,26 @@ internal static class EventChainFlowchartService
 
                 if (isDecay)
                 {
-                    // Decay: right then down/up to target top — route around right side
-                    double rightX = src.X + ox + src.W + NodeGapX / 2;
-                    // Find rightmost node edge in source layer to route past
-                    foreach (var b in boxes)
-                        if (b.right > rightX && b.top < sy + LayerGap && b.bottom > sy - 10)
-                            rightX = b.right + 8;
+                    // Decay: route from right-bottom corner → right → down → to target top
+                    // Start: extend right from node corner
+                    double rightX = src.X + ox + src.W + NodeGapX * 0.6;
 
+                    // Push rightX past any nodes in the way
+                    foreach (var b in boxes)
+                    {
+                        if (b.id == src.Id || b.id == tgt.Id) continue;
+                        if (b.right > rightX - 5 && b.left < rightX + 5 && b.bottom > sy && b.top < ty)
+                            rightX = b.right + margin + 4;
+                    }
+
+                    // Route: right from source → down → left to target top
+                    pts.Add((src.X + ox + src.W + 4, sy)); // extend past rounded corner
                     pts.Add((rightX, sy));
-                    pts.Add((rightX, ty));
+                    if (Math.Abs(rightX - tx) > SnapThresh)
+                    {
+                        pts.Add((rightX, ty - 8)); // approach target from above-right
+                        pts.Add((tx, ty - 8));
+                    }
                     pts.Add((tx, ty));
                 }
                 else
@@ -797,12 +817,12 @@ internal static class EventChainFlowchartService
 
                     if (!routed)
                     {
-                        // Strategy 2: Z-bend at inter-layer gap
+                        // Strategy 2: Z-bend at inter-layer gap (with per-type Y offset)
                         if (srcL >= 0 && tgtL >= 0 && tgtL > srcL)
                         {
                             for (int gl = srcL; gl < tgtL && !routed; gl++)
                             {
-                                double gapY = (layerBottom[gl] + layerTop[gl + 1]) / 2;
+                                double gapY = (layerBottom[gl] + layerTop[gl + 1]) / 2 + typeYOff;
                                 if (gapY <= routeY + 2 || gapY >= ty - 2) continue;
 
                                 bool hit = Hits(routeX, routeY, routeX, gapY, boxes, src.Id, tgt.Id)
