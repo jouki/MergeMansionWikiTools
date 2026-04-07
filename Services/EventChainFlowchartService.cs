@@ -45,7 +45,7 @@ internal static class EventChainFlowchartService
         public string Title = "";
         public string Sub = "";
         public HashSet<string> Parents = new();
-        public HashSet<string> Children = new();
+        public List<string> Children = new();  // ordered list, not HashSet — order matters for layout
         public int Layer, Order;
         public double X, Y, W, H;
         public bool IsDummy;
@@ -87,11 +87,14 @@ internal static class EventChainFlowchartService
             };
         }
 
-        // Build adjacency (use ALL edge types for layout)
-        foreach (var e in edges)
+        // Build adjacency — edges sorted by type priority (SpawnDrop first, then Decay, Sink)
+        // This ensures children list has spawn/drop targets first
+        foreach (var e in edges.OrderBy(e => e.EdgeType))
         {
             if (!graph.ContainsKey(e.SourceChainKey) || !graph.ContainsKey(e.TargetChainKey)) continue;
-            graph[e.SourceChainKey].Children.Add(e.TargetChainKey);
+            var src = graph[e.SourceChainKey];
+            if (!src.Children.Contains(e.TargetChainKey))
+                src.Children.Add(e.TargetChainKey);
             graph[e.TargetChainKey].Parents.Add(e.SourceChainKey);
         }
 
@@ -562,7 +565,7 @@ internal static class EventChainFlowchartService
                 {
                     var n = g[layer[i]];
                     if (n.IsDummy) continue;
-                    var refs = (topDown ? n.Parents : n.Children)
+                    var refs = (topDown ? (IEnumerable<string>)n.Parents : n.Children)
                         .Where(r => g.ContainsKey(r))
                         .Select(r => g[r].X + g[r].W / 2)
                         .OrderBy(x => x).ToList();
