@@ -87,11 +87,12 @@ internal static class EventChainFlowchartService
             };
         }
 
-        // Build adjacency — edges sorted by type priority (SpawnDrop first, then Decay, Sink)
-        // This ensures children list has spawn/drop targets first
+        // Build adjacency — ONLY SpawnDrop and Decay edges form parent→child hierarchy.
+        // SinkInput/SinkOutput are rendered as edges but don't affect layout.
         foreach (var e in edges.OrderBy(e => e.EdgeType))
         {
             if (!graph.ContainsKey(e.SourceChainKey) || !graph.ContainsKey(e.TargetChainKey)) continue;
+            if (e.EdgeType == ChainEdgeType.SinkInput || e.EdgeType == ChainEdgeType.SinkOutput) continue;
             var src = graph[e.SourceChainKey];
             if (!src.Children.Contains(e.TargetChainKey))
                 src.Children.Add(e.TargetChainKey);
