@@ -457,10 +457,10 @@ internal static class EventChainFlowchartService
         }
 
         // Apply BFS order as initial Order within layers
-        foreach (var layer in layers)
+        for (int li = 0; li < layers.Count; li++)
         {
-            var sorted = layer.OrderBy(id => bfsOrder.GetValueOrDefault(id, 999)).ToList();
-            layers[layers.IndexOf(layer)] = sorted;
+            var sorted = layers[li].OrderBy(id => bfsOrder.GetValueOrDefault(id, 999)).ToList();
+            layers[li] = sorted;
             for (int i = 0; i < sorted.Count; i++) g[sorted[i]].Order = i;
         }
 
