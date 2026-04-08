@@ -379,7 +379,7 @@ internal static class EventChainFlowchartService
         InsertDummyNodes(g, layers);
         MinimizeCrossings(g, layers);
         AssignXPositions(g, layers);
-        AssignYPositions(g, layers);
+        AssignYPositions(g, layers, edges);
         CompactColumns(g);
 
         return layers;
@@ -666,20 +666,61 @@ internal static class EventChainFlowchartService
         }
     }
 
-    static void AssignYPositions(Dictionary<string, N> g, List<List<string>> layers)
+    static void AssignYPositions(Dictionary<string, N> g, List<List<string>> layers, List<ChainGraphEdge> edges)
     {
-        // LayerGap = StreamGap (node-to-stream) + MinStreamSlots * StreamGap + StreamGap (stream-to-node)
-        double layerGap = StreamGap + MinStreamSlots * StreamGap + StreamGap;
+        // Pre-compute: number of stream slots needed per gap-row (layer index)
+        var nodeLayer = new Dictionary<string, int>(StringComparer.Ordinal);
+        for (int li = 0; li < layers.Count; li++)
+            foreach (var nid in layers[li])
+                if (g.TryGetValue(nid, out var n) && !n.IsDummy)
+                    nodeLayer[nid] = li;
+
+        var gapSlotCount = new Dictionary<int, int>(); // layer index → number of stream slots needed
+        var gapTypes = new Dictionary<int, HashSet<ChainEdgeType>>();
+        foreach (var e in edges)
+        {
+            int sl = nodeLayer.GetValueOrDefault(e.SourceChainKey, -1);
+            if (sl < 0) continue;
+            if (!gapTypes.ContainsKey(sl)) gapTypes[sl] = new HashSet<ChainEdgeType>();
+            gapTypes[sl].Add(e.EdgeType);
+
+            // Check if backward edge
+            if (g.TryGetValue(e.SourceChainKey, out var s) && g.TryGetValue(e.TargetChainKey, out var t))
+                if (s.Layer >= t.Layer && !gapTypes[sl].Contains((ChainEdgeType)99))
+                    gapSlotCount[sl] = gapSlotCount.GetValueOrDefault(sl) + 0; // just mark
+        }
+
+        foreach (var (layer, types) in gapTypes)
+            gapSlotCount[layer] = types.Count;
+
+        // Check for backward edges — add 1 slot
+        foreach (var e in edges)
+        {
+            if (!g.TryGetValue(e.SourceChainKey, out var s) || !g.TryGetValue(e.TargetChainKey, out var t)) continue;
+            if (s.Layer >= t.Layer)
+            {
+                int sl = nodeLayer.GetValueOrDefault(e.SourceChainKey, -1);
+                if (sl >= 0) gapSlotCount[sl] = gapSlotCount.GetValueOrDefault(sl) + 1;
+                break; // only count once per gap-row (backward takes 1 slot)
+            }
+        }
 
         double y = 0;
-        foreach (var layer in layers)
+        for (int li = 0; li < layers.Count; li++)
         {
+            var layer = layers[li];
             double maxH = layer.Where(id => !g[id].IsDummy).Select(id => g[id].H).DefaultIfEmpty(20).Max();
             foreach (var id in layer)
             {
                 var n = g[id];
                 n.Y = n.IsDummy ? y + maxH / 2 : y + (maxH - n.H) / 2;
             }
+
+            // Dynamic gap: max(MinStreamSlots, actual slots needed) * StreamGap + padding
+            int slotsNeeded = gapSlotCount.GetValueOrDefault(li, 0);
+            int slots = Math.Max((int)MinStreamSlots, slotsNeeded);
+            double layerGap = StreamGap + slots * StreamGap + BendRadius;
+
             y += maxH + layerGap;
         }
     }
