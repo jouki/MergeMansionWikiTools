@@ -953,7 +953,8 @@ internal static class EventChainFlowchartService
                     ChainEdgeType.SinkInput => 3,
                     _ => 1
                 };
-                double typeStreamY = StreamGap + typeStreamSlot * StreamGap; // offset from node bottom
+                // Base = StreamGap + BendRadius (28px for clean turn), then +StreamGap per additional slot
+                double typeStreamY = StreamGap + BendRadius + typeStreamSlot * StreamGap;
 
                 // Compute target X: distribute by edge TYPE (not source)
                 // Same type from different sources shares one X slot
