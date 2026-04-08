@@ -938,7 +938,7 @@ internal static class EventChainFlowchartService
                 double sx, sy, tx, ty;
                 if (isDecay)
                 {
-                    sx = src.X + ox + src.W - 1;  // 1px inside node edge (into rounding)
+                    sx = src.X + ox + src.W - 0.5;  // half px inside node edge
                     sy = src.Y + oy + src.H - DecayStartExtend;
                     tx = computedTx;
                     ty = tgt.Y + oy;
