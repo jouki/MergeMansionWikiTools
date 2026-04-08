@@ -917,9 +917,15 @@ internal static class EventChainFlowchartService
                 bool isDecay = edge.EdgeType == ChainEdgeType.Decay;
 
                 // Stream slot assignment: each edge type gets its own Y stream
-                // Stream 0 = first type (closest to source nodes), Stream 1 = next, etc.
-                // Order: SpawnDrop (0) → Decay (1) → SinkInput (2) → SinkOutput (3)
-                int typeStreamSlot = (int)edge.EdgeType;
+                // Order top→bottom: Decay (0) → SpawnDrop (1) → SinkOutput (2) → SinkInput (3)
+                int typeStreamSlot = edge.EdgeType switch
+                {
+                    ChainEdgeType.Decay => 0,
+                    ChainEdgeType.SpawnDrop => 1,
+                    ChainEdgeType.SinkOutput => 2,
+                    ChainEdgeType.SinkInput => 3,
+                    _ => 1
+                };
                 double typeStreamY = StreamGap + typeStreamSlot * StreamGap; // offset from node bottom
 
                 // Compute target X: distribute by edge TYPE (not source)
