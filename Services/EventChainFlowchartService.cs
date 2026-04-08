@@ -892,22 +892,16 @@ internal static class EventChainFlowchartService
         // Per-source index for Y offset — edges from different sources route at different Y levels
         var srcChildIndex = new Dictionary<string, int>(StringComparer.Ordinal);
 
-        // Pre-compute: how many distinct incoming edge groups per target node
-        // Group key = source chain (edges from same source merge into one entry point)
-        var targetIncoming = new Dictionary<string, List<string>>(StringComparer.Ordinal); // target → list of unique source keys
-        var targetIncomingIdx = new Dictionary<string, int>(StringComparer.Ordinal); // "target|source" → index
+        // Pre-compute: how many distinct edge TYPES enter each target node
+        // Same type from different sources shares one X slot
+        var targetIncomingTypes = new Dictionary<string, List<ChainEdgeType>>(StringComparer.Ordinal);
         foreach (var e in edges)
         {
-            if (!targetIncoming.ContainsKey(e.TargetChainKey))
-                targetIncoming[e.TargetChainKey] = new List<string>();
-            var srcKey = $"{e.SourceChainKey}|{e.EdgeType}";
-            if (!targetIncoming[e.TargetChainKey].Contains(srcKey))
-                targetIncoming[e.TargetChainKey].Add(srcKey);
+            if (!targetIncomingTypes.ContainsKey(e.TargetChainKey))
+                targetIncomingTypes[e.TargetChainKey] = new List<ChainEdgeType>();
+            if (!targetIncomingTypes[e.TargetChainKey].Contains(e.EdgeType))
+                targetIncomingTypes[e.TargetChainKey].Add(e.EdgeType);
         }
-        // Assign index per incoming group
-        foreach (var (tgt, sources) in targetIncoming)
-            for (int i = 0; i < sources.Count; i++)
-                targetIncomingIdx[$"{tgt}|{sources[i]}"] = i;
 
         // Route each edge
         foreach (var group in edges.GroupBy(e => e.EdgeType).OrderBy(g => g.Key))
@@ -929,12 +923,13 @@ internal static class EventChainFlowchartService
                     srcChildIndex[edge.SourceChainKey] = srcChildIndex.Count;
                 double srcYOff = srcChildIndex[edge.SourceChainKey] * 8;
 
-                // Compute target X based on how many incoming groups this target has
-                var inSrcKey = $"{edge.TargetChainKey}|{edge.SourceChainKey}|{edge.EdgeType}";
-                int inIdx = targetIncomingIdx.GetValueOrDefault(inSrcKey, 0);
-                int inTotal = targetIncoming.TryGetValue(edge.TargetChainKey, out var inList) ? inList.Count : 1;
-                // Distribute: 1 group = 50%, 2 = 33%/67%, 3 = 25%/50%/75%, etc.
-                double tgtFrac = (inIdx + 1.0) / (inTotal + 1.0);
+                // Compute target X: distribute by edge TYPE (not source)
+                // Same type from different sources shares one X slot
+                var inTypes = targetIncomingTypes.TryGetValue(edge.TargetChainKey, out var tList) ? tList : new List<ChainEdgeType>();
+                int typeIdx = inTypes.IndexOf(edge.EdgeType);
+                if (typeIdx < 0) typeIdx = 0;
+                int typeTotal = inTypes.Count;
+                double tgtFrac = (typeIdx + 1.0) / (typeTotal + 1.0);
                 double tgtNodeX = (graph.TryGetValue(edge.TargetChainKey, out var tgtN2) ? tgtN2.X + ox : 0);
                 double tgtNodeW = tgtN2?.W ?? MaxNodeW;
                 double computedTx = tgtNodeX + tgtNodeW * tgtFrac;
