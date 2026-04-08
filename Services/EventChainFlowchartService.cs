@@ -15,17 +15,18 @@ internal static class EventChainFlowchartService
     const double PadX = 10;
     const double PadY = 8;
     const double NodeGapX = 50;
-    const double LayerGap = 90;   // increased for edge bend room
+    const double MinStreamSlots = 3;   // minimum stream slots between layers
+    const double StreamGap = 20;       // gap between node edge and stream, and between adjacent streams (shared)
     const double MaxNodeW = 260;
     const double MinNodeW = 160;
-    const double HeaderH = 30;    // title only
-    const double BodyH = 44;      // icon slot + subtitle with padding
-    const double SubH = 0;        // subtitle merged into body
+    const double HeaderH = 30;
+    const double BodyH = 44;
+    const double SubH = 0;
     const double ArrowSize = 6;
-    const double BusOffset = 18;
     const double BendRadius = 8;
     const double BendRadiusLarge = 13;
     const double SnapThresh = 4;
+    const double DecayStartExtend = 5; // extend decay start upward into node corner rounding
     const double FontSzTitle = 13;
     const double FontSzSub = 10.5;
 
@@ -667,16 +668,19 @@ internal static class EventChainFlowchartService
 
     static void AssignYPositions(Dictionary<string, N> g, List<List<string>> layers)
     {
+        // LayerGap = StreamGap (node-to-stream) + MinStreamSlots * StreamGap + StreamGap (stream-to-node)
+        double layerGap = StreamGap + MinStreamSlots * StreamGap + StreamGap;
+
         double y = 0;
         foreach (var layer in layers)
         {
-            double maxH = layer.Where(id => !g[id].IsDummy).Select(id => g[id].H).DefaultIfEmpty(SubH).Max();
+            double maxH = layer.Where(id => !g[id].IsDummy).Select(id => g[id].H).DefaultIfEmpty(20).Max();
             foreach (var id in layer)
             {
                 var n = g[id];
                 n.Y = n.IsDummy ? y + maxH / 2 : y + (maxH - n.H) / 2;
             }
-            y += maxH + LayerGap;
+            y += maxH + layerGap;
         }
     }
 
@@ -686,7 +690,7 @@ internal static class EventChainFlowchartService
         if (realNodes.Count == 0) return;
 
         var cols = realNodes.GroupBy(n => Math.Round(n.X, 1)).OrderBy(c => c.Key).ToList();
-        double yBuf = LayerGap / 2;
+        double yBuf = (StreamGap + MinStreamSlots * StreamGap + StreamGap) / 2;
 
         var slots = new List<(double x, List<(double yMin, double yMax)> ranges)>();
 
@@ -912,9 +916,10 @@ internal static class EventChainFlowchartService
                 double sx, sy, tx, ty;
                 if (isDecay)
                 {
-                    sx = src.X + ox + src.W;              // right edge
-                    sy = src.Y + oy + src.H;              // bottom edge
-                    tx = tgt.X + ox + tgt.W / 2;         // target top center
+                    // Decay: start from right-bottom corner, extended up into rounding
+                    sx = src.X + ox + src.W;
+                    sy = src.Y + oy + src.H - DecayStartExtend;  // start slightly inside bottom for rounding
+                    tx = tgt.X + ox + tgt.W / 2;
                     ty = tgt.Y + oy;
                 }
                 else
@@ -944,32 +949,22 @@ internal static class EventChainFlowchartService
                 double routeX = sx, routeY = sy;
                 if (isMultiChild && !isDecay)
                 {
-                    double busY = sy + BusOffset;
+                    double busY = sy + StreamGap;
                     pts.Add((sx, busY));
                     routeY = busY;
                 }
 
                 if (isDecay)
                 {
-                    // Decay: route from right-bottom → right (past all nodes) → down → to target
-                    double rightX = src.X + ox + src.W + NodeGapX;
+                    // Decay: always go DOWN from right-bottom corner, then turn horizontally
+                    // Stream Y = 20px below source node bottom
+                    double nodeBottom = src.Y + oy + src.H;
+                    double streamY = nodeBottom + StreamGap;
 
-                    // Push rightX past ALL nodes between source and target Y range
-                    foreach (var b in boxes)
-                    {
-                        if (b.id == src.Id || b.id == tgt.Id) continue;
-                        if (b.right > rightX - margin && b.top < ty + margin && b.bottom > sy - margin)
-                            rightX = Math.Max(rightX, b.right + margin + 6);
-                    }
-
-                    // Route: right from source → down → left to target top
-                    pts.Add((rightX, sy));
-                    if (Math.Abs(rightX - tx) > SnapThresh)
-                    {
-                        pts.Add((rightX, ty - 8)); // approach target from above-right
-                        pts.Add((tx, ty - 8));
-                    }
-                    pts.Add((tx, ty));
+                    // Route: down from corner to stream Y, then horizontal to target X, then up to target
+                    pts.Add((sx, streamY));      // down to stream level
+                    pts.Add((tx, streamY));      // horizontal to target column
+                    pts.Add((tx, ty));           // up to target top
                 }
                 else
                 {
@@ -1011,8 +1006,8 @@ internal static class EventChainFlowchartService
                     if (!routed)
                     {
                         // Strategy 3: Corridor routing
-                        double gapY1 = routeY + BusOffset;
-                        double gapY2 = ty - BusOffset;
+                        double gapY1 = routeY + StreamGap;
+                        double gapY2 = ty - StreamGap;
                         if (srcL >= 0 && tgtL >= 0 && tgtL > srcL)
                         {
                             double g1 = (layerBottom[srcL] + layerTop[Math.Min(srcL + 1, layers.Count - 1)]) / 2;
