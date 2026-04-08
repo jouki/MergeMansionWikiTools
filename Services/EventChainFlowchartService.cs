@@ -930,6 +930,25 @@ internal static class EventChainFlowchartService
             }
         }
 
+        // Pre-compute: which edge types exist per gap-row (source layer)
+        // Used for relative slot assignment (only types present get slots)
+        var gapRowTypes = new Dictionary<int, List<ChainEdgeType>>();
+        foreach (var e in edges)
+        {
+            if (!graph.TryGetValue(e.SourceChainKey, out var s) || !graph.TryGetValue(e.TargetChainKey, out var t)) continue;
+            int sl = nodeLayer.GetValueOrDefault(e.SourceChainKey, -1);
+            if (sl < 0) continue;
+            if (!gapRowTypes.ContainsKey(sl)) gapRowTypes[sl] = new List<ChainEdgeType>();
+            if (!gapRowTypes[sl].Contains(e.EdgeType)) gapRowTypes[sl].Add(e.EdgeType);
+        }
+        // Sort each gap-row's types in canonical order: Decay, SpawnDrop, SinkOutput, SinkInput
+        foreach (var kv in gapRowTypes)
+            kv.Value.Sort((a, b) =>
+            {
+                int Order(ChainEdgeType t) => t switch { ChainEdgeType.Decay => 0, ChainEdgeType.SpawnDrop => 1, ChainEdgeType.SinkOutput => 2, ChainEdgeType.SinkInput => 3, _ => 9 };
+                return Order(a).CompareTo(Order(b));
+            });
+
         // Route each edge
         foreach (var group in edges.GroupBy(e => e.EdgeType).OrderBy(g => g.Key))
         {
@@ -943,17 +962,13 @@ internal static class EventChainFlowchartService
 
                 bool isDecay = edge.EdgeType == ChainEdgeType.Decay;
 
-                // Stream slot assignment: each edge type gets its own Y stream
-                // Order top→bottom: Decay (0) → SpawnDrop (1) → SinkOutput (2) → SinkInput (3)
-                int typeStreamSlot = edge.EdgeType switch
-                {
-                    ChainEdgeType.Decay => 0,
-                    ChainEdgeType.SpawnDrop => 1,
-                    ChainEdgeType.SinkOutput => 2,
-                    ChainEdgeType.SinkInput => 3,
-                    _ => 1
-                };
-                // Base = StreamGap + BendRadius (28px for clean turn), then +StreamGap per additional slot
+                // Stream slot: RELATIVE within this gap-row's active types
+                // Only types that actually have edges in this gap-row get slots
+                int srcLayer = nodeLayer.GetValueOrDefault(edge.SourceChainKey, -1);
+                var activeTypes = gapRowTypes.TryGetValue(srcLayer, out var gt) ? gt : new List<ChainEdgeType> { edge.EdgeType };
+                int typeStreamSlot = activeTypes.IndexOf(edge.EdgeType);
+                if (typeStreamSlot < 0) typeStreamSlot = 0;
+                // Base = StreamGap + BendRadius (28px), then +StreamGap per additional slot
                 double typeStreamY = StreamGap + BendRadius + typeStreamSlot * StreamGap;
 
                 // Compute target X: distribute by edge TYPE (not source)
