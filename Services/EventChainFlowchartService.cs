@@ -26,7 +26,7 @@ internal static class EventChainFlowchartService
     const double BendRadius = 8;
     const double BendRadiusLarge = 13;
     const double SnapThresh = 4;
-    const double DecayStartExtend = 5; // extend decay start upward into node corner rounding
+    const double DecayStartExtend = 12; // extend decay start upward into node corner rounding
     const double FontSzTitle = 13;
     const double FontSzSub = 10.5;
 
