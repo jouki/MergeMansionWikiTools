@@ -892,6 +892,23 @@ internal static class EventChainFlowchartService
         // Per-source index for Y offset — edges from different sources route at different Y levels
         var srcChildIndex = new Dictionary<string, int>(StringComparer.Ordinal);
 
+        // Pre-compute: how many distinct incoming edge groups per target node
+        // Group key = source chain (edges from same source merge into one entry point)
+        var targetIncoming = new Dictionary<string, List<string>>(StringComparer.Ordinal); // target → list of unique source keys
+        var targetIncomingIdx = new Dictionary<string, int>(StringComparer.Ordinal); // "target|source" → index
+        foreach (var e in edges)
+        {
+            if (!targetIncoming.ContainsKey(e.TargetChainKey))
+                targetIncoming[e.TargetChainKey] = new List<string>();
+            var srcKey = $"{e.SourceChainKey}|{e.EdgeType}";
+            if (!targetIncoming[e.TargetChainKey].Contains(srcKey))
+                targetIncoming[e.TargetChainKey].Add(srcKey);
+        }
+        // Assign index per incoming group
+        foreach (var (tgt, sources) in targetIncoming)
+            for (int i = 0; i < sources.Count; i++)
+                targetIncomingIdx[$"{tgt}|{sources[i]}"] = i;
+
         // Route each edge
         foreach (var group in edges.GroupBy(e => e.EdgeType).OrderBy(g => g.Key))
         {
@@ -912,21 +929,30 @@ internal static class EventChainFlowchartService
                     srcChildIndex[edge.SourceChainKey] = srcChildIndex.Count;
                 double srcYOff = srcChildIndex[edge.SourceChainKey] * 8;
 
+                // Compute target X based on how many incoming groups this target has
+                var inSrcKey = $"{edge.TargetChainKey}|{edge.SourceChainKey}|{edge.EdgeType}";
+                int inIdx = targetIncomingIdx.GetValueOrDefault(inSrcKey, 0);
+                int inTotal = targetIncoming.TryGetValue(edge.TargetChainKey, out var inList) ? inList.Count : 1;
+                // Distribute: 1 group = 50%, 2 = 33%/67%, 3 = 25%/50%/75%, etc.
+                double tgtFrac = (inIdx + 1.0) / (inTotal + 1.0);
+                double tgtNodeX = (graph.TryGetValue(edge.TargetChainKey, out var tgtN2) ? tgtN2.X + ox : 0);
+                double tgtNodeW = tgtN2?.W ?? MaxNodeW;
+                double computedTx = tgtNodeX + tgtNodeW * tgtFrac;
+
                 // Anchor points
                 double sx, sy, tx, ty;
                 if (isDecay)
                 {
-                    // Decay: start from right-bottom corner, extended up into rounding
-                    sx = src.X + ox + src.W;
-                    sy = src.Y + oy + src.H - DecayStartExtend;  // start slightly inside bottom for rounding
-                    tx = tgt.X + ox + tgt.W / 2;
+                    sx = src.X + ox + src.W + 1;  // 1px right of node edge for alignment
+                    sy = src.Y + oy + src.H - DecayStartExtend;
+                    tx = computedTx;
                     ty = tgt.Y + oy;
                 }
                 else
                 {
                     sx = src.X + ox + src.W / 2;
                     sy = src.Y + oy + src.H;
-                    tx = tgt.X + ox + tgt.W / 2;
+                    tx = computedTx;
                     ty = tgt.Y + oy;
                 }
 
@@ -1064,18 +1090,29 @@ internal static class EventChainFlowchartService
                 var path = BuildRoundedPath(filtered, BendRadius, ci);
                 sb.AppendLine($"<path d='{path}' stroke='{color}' stroke-width='1.8' fill='none' marker-end='url(#{markerId})'/>");
 
-                // Label on first vertical segment
+                // Label placement
                 var edgeLabel = CompressLevelLabel(edge.Label);
                 if (!string.IsNullOrEmpty(edgeLabel) && filtered.Count >= 2)
                 {
-                    // Find first vertical segment
-                    int seg = 0;
-                    for (int i = 0; i < filtered.Count - 1; i++)
-                        if (Math.Abs(filtered[i].x - filtered[i + 1].x) < 1) { seg = i; break; }
+                    double lx, ly;
+                    if (isDecay && filtered.Count >= 3)
+                    {
+                        // Decay: label on horizontal segment (between 2nd and 3rd waypoint)
+                        lx = (filtered[1].x + filtered[2].x) / 2;
+                        ly = filtered[1].y - 5;
+                        sb.AppendLine($"<text x='{lx.ToString("F1", ci)}' y='{ly.ToString("F1", ci)}' text-anchor='middle' class='edge-label' fill='{color}'>{Esc(edgeLabel)}</text>");
+                    }
+                    else
+                    {
+                        // Others: label left of first vertical segment
+                        int seg = 0;
+                        for (int i = 0; i < filtered.Count - 1; i++)
+                            if (Math.Abs(filtered[i].x - filtered[i + 1].x) < 1) { seg = i; break; }
 
-                    double lx = filtered[seg].x - 12; // left of vertical line
-                    double ly = (filtered[seg].y + filtered[seg + 1].y) / 2 + 3;
-                    sb.AppendLine($"<text x='{lx.ToString("F1", ci)}' y='{ly.ToString("F1", ci)}' text-anchor='end' class='edge-label' fill='{color}'>{Esc(edgeLabel)}</text>");
+                        lx = filtered[seg].x - 12;
+                        ly = (filtered[seg].y + filtered[seg + 1].y) / 2 + 3;
+                        sb.AppendLine($"<text x='{lx.ToString("F1", ci)}' y='{ly.ToString("F1", ci)}' text-anchor='end' class='edge-label' fill='{color}'>{Esc(edgeLabel)}</text>");
+                    }
                 }
             }
         }
