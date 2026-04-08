@@ -916,12 +916,11 @@ internal static class EventChainFlowchartService
 
                 bool isDecay = edge.EdgeType == ChainEdgeType.Decay;
 
-                // Per-source Y offset: edges from different sources route at different Y in the gap
-                // Combined with per-type offset to fully separate all edge groups
-                double typeYOff = (int)edge.EdgeType * 8;
-                if (!srcChildIndex.ContainsKey(edge.SourceChainKey))
-                    srcChildIndex[edge.SourceChainKey] = srcChildIndex.Count;
-                double srcYOff = srcChildIndex[edge.SourceChainKey] * 8;
+                // Stream slot assignment: each edge type gets its own Y stream
+                // Stream 0 = first type (closest to source nodes), Stream 1 = next, etc.
+                // Order: SpawnDrop (0) → Decay (1) → SinkInput (2) → SinkOutput (3)
+                int typeStreamSlot = (int)edge.EdgeType;
+                double typeStreamY = StreamGap + typeStreamSlot * StreamGap; // offset from node bottom
 
                 // Compute target X: distribute by edge TYPE (not source)
                 // Same type from different sources shares one X slot
@@ -978,9 +977,9 @@ internal static class EventChainFlowchartService
                 if (isDecay)
                 {
                     // Decay: always go DOWN from right-bottom corner, then turn horizontally
-                    // Stream Y = 20px below source node bottom
+                    // Use decay's stream slot Y (type 1 = 2nd stream from top)
                     double nodeBottom = src.Y + oy + src.H;
-                    double streamY = nodeBottom + StreamGap;
+                    double streamY = nodeBottom + typeStreamY;
 
                     // Route: down from corner to stream Y, then horizontal to target X, then up to target
                     pts.Add((sx, streamY));      // down to stream level
@@ -1007,7 +1006,7 @@ internal static class EventChainFlowchartService
                         {
                             for (int gl = srcL; gl < tgtL && !routed; gl++)
                             {
-                                double gapY = (layerBottom[gl] + layerTop[gl + 1]) / 2 + srcYOff + typeYOff;
+                                double gapY = layerBottom[gl] + typeStreamY;
                                 if (gapY <= routeY + 2 || gapY >= ty - 2) continue;
 
                                 bool hit = Hits(routeX, routeY, routeX, gapY, boxes, src.Id, tgt.Id)
