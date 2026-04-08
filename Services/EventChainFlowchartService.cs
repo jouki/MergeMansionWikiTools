@@ -909,14 +909,21 @@ internal static class EventChainFlowchartService
                 sourceOutgoingTypes[e.SourceChainKey].Add(e.EdgeType);
         }
 
-        // Pre-compute: which source nodes have backward edges (need extra slot for decay)
+        // Pre-compute: which source nodes have backward edges
         var nodesWithBackwardEdge = new HashSet<string>(StringComparer.Ordinal);
+        // Pre-compute: which gap-rows (source layer index) have a backward edge passing through
+        var gapRowsWithBackward = new HashSet<int>();
         foreach (var e in edges)
         {
             if (!graph.TryGetValue(e.SourceChainKey, out var s) || !graph.TryGetValue(e.TargetChainKey, out var t)) continue;
             double eSy = s.Y + oy + s.H;
             double eTy = t.Y + oy;
-            if (eSy >= eTy - 2) nodesWithBackwardEdge.Add(e.SourceChainKey);
+            if (eSy >= eTy - 2)
+            {
+                nodesWithBackwardEdge.Add(e.SourceChainKey);
+                int srcLayer = nodeLayer.GetValueOrDefault(e.SourceChainKey, -1);
+                if (srcLayer >= 0) gapRowsWithBackward.Add(srcLayer);
+            }
         }
 
         // Route each edge
@@ -1059,9 +1066,9 @@ internal static class EventChainFlowchartService
                 {
                     // Decay: always go DOWN from right-bottom corner, then turn horizontally
                     double nodeBottom = src.Y + oy + src.H;
-                    // If source also has backward edge, backward takes slot 0, decay shifts down
-                    double extraSlot = nodesWithBackwardEdge.Contains(src.Id) ? StreamGap : 0;
-                    double streamY = nodeBottom + StreamGap + BendRadius + extraSlot;
+                    // If gap-row has ANY backward edge, all forward streams shift down by 1 slot
+                    double backwardOffset = gapRowsWithBackward.Contains(srcL) ? StreamGap : 0;
+                    double streamY = nodeBottom + StreamGap + BendRadius + backwardOffset;
 
                     // Route: down from corner to stream Y, then horizontal to target X, then up to target
                     pts.Add((sx, streamY));      // down to stream level
@@ -1088,7 +1095,9 @@ internal static class EventChainFlowchartService
                         {
                             for (int gl = srcL; gl < tgtL && !routed; gl++)
                             {
-                                double gapY = layerBottom[gl] + typeStreamY;
+                                // If this gap-row has backward edges, shift all streams down by 1 slot
+                                double backwardSlotOffset = gapRowsWithBackward.Contains(gl) ? StreamGap : 0;
+                                double gapY = layerBottom[gl] + typeStreamY + backwardSlotOffset;
                                 if (gapY <= routeY + 2 || gapY >= ty - 2) continue;
 
                                 bool hit = Hits(routeX, routeY, routeX, gapY, boxes, src.Id, tgt.Id)
