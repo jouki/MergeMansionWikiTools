@@ -909,6 +909,16 @@ internal static class EventChainFlowchartService
                 sourceOutgoingTypes[e.SourceChainKey].Add(e.EdgeType);
         }
 
+        // Pre-compute: which source nodes have backward edges (need extra slot for decay)
+        var nodesWithBackwardEdge = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var e in edges)
+        {
+            if (!graph.TryGetValue(e.SourceChainKey, out var s) || !graph.TryGetValue(e.TargetChainKey, out var t)) continue;
+            double eSy = s.Y + oy + s.H;
+            double eTy = t.Y + oy;
+            if (eSy >= eTy - 2) nodesWithBackwardEdge.Add(e.SourceChainKey);
+        }
+
         // Route each edge
         foreach (var group in edges.GroupBy(e => e.EdgeType).OrderBy(g => g.Key))
         {
@@ -976,7 +986,9 @@ internal static class EventChainFlowchartService
                 {
                     var pts2 = new List<(double x, double y)>();
                     double nodeBottom = src.Y + oy + src.H;
-                    double downY = nodeBottom + StreamGap; // go down 20px then turn sideways
+
+                    // Backward edge takes first stream slot. If source also has decay, decay shifts down.
+                    double downY = nodeBottom + StreamGap + BendRadius; // 20px + bend radius for clean turn
 
                     // Decide side: count crossings left vs right
                     double leftX = src.X + ox - NodeGapX / 2;
@@ -1046,9 +1058,10 @@ internal static class EventChainFlowchartService
                 if (isDecay)
                 {
                     // Decay: always go DOWN from right-bottom corner, then turn horizontally
-                    // Use decay's stream slot Y (type 1 = 2nd stream from top)
                     double nodeBottom = src.Y + oy + src.H;
-                    double streamY = nodeBottom + typeStreamY;
+                    // If source also has backward edge, backward takes slot 0, decay shifts down
+                    double extraSlot = nodesWithBackwardEdge.Contains(src.Id) ? StreamGap : 0;
+                    double streamY = nodeBottom + StreamGap + BendRadius + extraSlot;
 
                     // Route: down from corner to stream Y, then horizontal to target X, then up to target
                     pts.Add((sx, streamY));      // down to stream level
