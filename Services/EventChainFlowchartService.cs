@@ -976,7 +976,7 @@ internal static class EventChainFlowchartService
                 {
                     var pts2 = new List<(double x, double y)>();
                     double nodeBottom = src.Y + oy + src.H;
-                    double downY = nodeBottom + typeStreamY; // go down to stream level
+                    double downY = nodeBottom + StreamGap; // go down 20px then turn sideways
 
                     // Decide side: count crossings left vs right
                     double leftX = src.X + ox - NodeGapX / 2;
