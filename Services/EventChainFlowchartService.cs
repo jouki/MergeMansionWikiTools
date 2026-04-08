@@ -892,15 +892,21 @@ internal static class EventChainFlowchartService
         // Per-source index for Y offset — edges from different sources route at different Y levels
         var srcChildIndex = new Dictionary<string, int>(StringComparer.Ordinal);
 
-        // Pre-compute: how many distinct edge TYPES enter each target node
-        // Same type from different sources shares one X slot
+        // Pre-compute: distinct edge TYPES entering each target node
         var targetIncomingTypes = new Dictionary<string, List<ChainEdgeType>>(StringComparer.Ordinal);
+        // Pre-compute: distinct edge TYPES leaving each source node
+        var sourceOutgoingTypes = new Dictionary<string, List<ChainEdgeType>>(StringComparer.Ordinal);
         foreach (var e in edges)
         {
             if (!targetIncomingTypes.ContainsKey(e.TargetChainKey))
                 targetIncomingTypes[e.TargetChainKey] = new List<ChainEdgeType>();
             if (!targetIncomingTypes[e.TargetChainKey].Contains(e.EdgeType))
                 targetIncomingTypes[e.TargetChainKey].Add(e.EdgeType);
+
+            if (!sourceOutgoingTypes.ContainsKey(e.SourceChainKey))
+                sourceOutgoingTypes[e.SourceChainKey] = new List<ChainEdgeType>();
+            if (!sourceOutgoingTypes[e.SourceChainKey].Contains(e.EdgeType))
+                sourceOutgoingTypes[e.SourceChainKey].Add(e.EdgeType);
         }
 
         // Route each edge
@@ -939,6 +945,14 @@ internal static class EventChainFlowchartService
                 double tgtNodeW = tgtN2?.W ?? MaxNodeW;
                 double computedTx = tgtNodeX + tgtNodeW * tgtFrac;
 
+                // Source X: distribute outgoing edges by type across node width
+                var outTypes = sourceOutgoingTypes.TryGetValue(edge.SourceChainKey, out var oList) ? oList : new List<ChainEdgeType>();
+                int outTypeIdx = outTypes.IndexOf(edge.EdgeType);
+                if (outTypeIdx < 0) outTypeIdx = 0;
+                int outTypeTotal = outTypes.Count;
+                double srcFrac = (outTypeIdx + 1.0) / (outTypeTotal + 1.0);
+                double computedSx = src.X + ox + src.W * srcFrac;
+
                 // Anchor points
                 double sx, sy, tx, ty;
                 if (isDecay)
@@ -950,19 +964,68 @@ internal static class EventChainFlowchartService
                 }
                 else
                 {
-                    sx = src.X + ox + src.W / 2;
+                    sx = computedSx;
                     sy = src.Y + oy + src.H;
                     tx = computedTx;
                     ty = tgt.Y + oy;
                 }
 
-                // For backward edges (source below target), swap to route upward
+                // For backward edges (source below target): down → side → up
                 bool isBackward = sy >= ty - 2;
-                if (isBackward && !isDecay)
+                if (isBackward)
                 {
-                    // Route as decay-like: right side exit, route around
-                    sx = src.X + ox + src.W;
-                    sy = src.Y + oy + src.H / 2;
+                    var pts2 = new List<(double x, double y)>();
+                    double nodeBottom = src.Y + oy + src.H;
+                    double downY = nodeBottom + typeStreamY; // go down to stream level
+
+                    // Decide side: count crossings left vs right
+                    double leftX = src.X + ox - NodeGapX / 2;
+                    double rightX = src.X + ox + src.W + NodeGapX / 2;
+
+                    // Push past any nodes on the side
+                    foreach (var b in boxes)
+                    {
+                        if (b.id == src.Id || b.id == tgt.Id) continue;
+                        if (b.bottom > ty && b.top < nodeBottom + typeStreamY + StreamGap)
+                        {
+                            if (b.left < rightX + 5 && b.right > rightX - 5)
+                                rightX = b.right + margin + 4;
+                            if (b.right > leftX - 5 && b.left < leftX + 5)
+                                leftX = b.left - margin - 4;
+                        }
+                    }
+
+                    // Score: prefer side with fewer node crossings on vertical path
+                    int leftHits = 0, rightHits = 0;
+                    foreach (var b in boxes)
+                    {
+                        if (b.id == src.Id || b.id == tgt.Id) continue;
+                        if (b.left < leftX && b.right > leftX && b.top < downY && b.bottom > ty) leftHits++;
+                        if (b.left < rightX && b.right > rightX && b.top < downY && b.bottom > ty) rightHits++;
+                    }
+
+                    double sideX = rightHits <= leftHits ? rightX : leftX;
+
+                    pts2.Add((sx, sy));
+                    pts2.Add((sx, downY));       // down
+                    pts2.Add((sideX, downY));     // side
+                    pts2.Add((sideX, ty - StreamGap)); // up to above target
+                    pts2.Add((tx, ty - StreamGap));    // horizontal to target column
+                    pts2.Add((tx, ty));                // down into target
+
+                    var filtered2 = FilterCollinear(pts2);
+                    var path2 = BuildRoundedPath(filtered2, BendRadius, ci);
+                    sb.AppendLine($"<path d='{path2}' stroke='{color}' stroke-width='1.8' fill='none' marker-end='url(#{markerId})'/>");
+
+                    // Label on horizontal segment
+                    var edgeLabel2 = CompressLevelLabel(edge.Label);
+                    if (!string.IsNullOrEmpty(edgeLabel2) && filtered2.Count >= 3)
+                    {
+                        double lx2 = (filtered2[1].x + filtered2[2].x) / 2;
+                        double ly2 = filtered2[1].y - 5;
+                        sb.AppendLine($"<text x='{lx2.ToString("F1", ci)}' y='{ly2.ToString("F1", ci)}' text-anchor='middle' class='edge-label' fill='{color}'>{Esc(edgeLabel2)}</text>");
+                    }
+                    continue; // skip normal routing
                 }
 
                 int srcL = nodeLayer.GetValueOrDefault(src.Id, -1);
