@@ -903,10 +903,14 @@ internal static class EventChainFlowchartService
             if (!targetIncomingTypes[e.TargetChainKey].Contains(e.EdgeType))
                 targetIncomingTypes[e.TargetChainKey].Add(e.EdgeType);
 
-            if (!sourceOutgoingTypes.ContainsKey(e.SourceChainKey))
-                sourceOutgoingTypes[e.SourceChainKey] = new List<ChainEdgeType>();
-            if (!sourceOutgoingTypes[e.SourceChainKey].Contains(e.EdgeType))
-                sourceOutgoingTypes[e.SourceChainKey].Add(e.EdgeType);
+            // Decay has fixed exit (right-bottom corner) — exclude from source X distribution
+            if (e.EdgeType != ChainEdgeType.Decay)
+            {
+                if (!sourceOutgoingTypes.ContainsKey(e.SourceChainKey))
+                    sourceOutgoingTypes[e.SourceChainKey] = new List<ChainEdgeType>();
+                if (!sourceOutgoingTypes[e.SourceChainKey].Contains(e.EdgeType))
+                    sourceOutgoingTypes[e.SourceChainKey].Add(e.EdgeType);
+            }
         }
 
         // Pre-compute: which source nodes have backward edges
