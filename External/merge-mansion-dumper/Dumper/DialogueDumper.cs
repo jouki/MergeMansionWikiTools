@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GameLogic;
 using GameLogic.Config;
+using GameLogic.Player.Items;
 using GameLogic.Story;
 using merge_mansion_dumper.Dumper.Base;
 using merge_mansion_dumper.Dumper.Json;
@@ -95,10 +96,84 @@ namespace merge_mansion_dumper.Dumper
                     characterNames[name] = displayName;
             }
 
+            // 4. CollectibleDialoguesInfo — maps items/decorations to dialogue triggers
+            var collectibleDialogueMapping = new List<Dictionary<string, object>>();
+            if (config.CollectibleDialoguesInfo != null)
+            {
+                foreach (var kvp in config.CollectibleDialoguesInfo.EnumerateAll())
+                {
+                    var info = (CollectibleDialoguesInfo)kvp.Value;
+                    var entry = new Dictionary<string, object>
+                    {
+                        ["ConfigKey"] = info.ConfigKey?.ToString(),
+                        ["RequiredBoardEventIds"] = info.RequiredBoardEventIds
+                    };
+
+                    // Item dialogues — resolve int ConfigKey hashes to ItemType strings
+                    if (info.ItemDialogues != null)
+                    {
+                        var itemEntries = new List<Dictionary<string, object>>();
+                        foreach (var itemDialogue in info.ItemDialogues)
+                        {
+                            var itemEntry = new Dictionary<string, object>
+                            {
+                                ["StoryDefinitionId"] = itemDialogue.StoryInfo?.KeyObject?.ToString(),
+                                ["GroupId"] = itemDialogue.GroupId?.ToString()
+                            };
+
+                            // Resolve ItemTypes (int hashes) to readable names
+                            if (itemDialogue.ItemTypes != null)
+                            {
+                                var resolvedItems = new List<string>();
+                                foreach (var itemTypeHash in itemDialogue.ItemTypes)
+                                {
+                                    if (config.Items != null && config.Items.TryGetValue(itemTypeHash, out var itemDef))
+                                        resolvedItems.Add(itemDef.ItemType);
+                                    else
+                                        resolvedItems.Add(itemTypeHash.ToString());
+                                }
+                                itemEntry["ItemTypes"] = resolvedItems;
+                            }
+
+                            itemEntries.Add(itemEntry);
+                        }
+                        entry["ItemDialogues"] = itemEntries;
+                    }
+
+                    // Decoration dialogues
+                    if (info.DecorationsDialogues != null)
+                    {
+                        var decoEntries = new List<Dictionary<string, object>>();
+                        foreach (var decoDialogue in info.DecorationsDialogues)
+                        {
+                            var decoEntry = new Dictionary<string, object>
+                            {
+                                ["StoryDefinitionId"] = decoDialogue.StoryInfo?.KeyObject?.ToString(),
+                                ["GroupId"] = decoDialogue.GroupId?.ToString()
+                            };
+
+                            try
+                            {
+                                var decoInfo = decoDialogue.DecorationInfo?.Ref;
+                                if (decoInfo != null)
+                                    decoEntry["DecorationConfigKey"] = decoInfo.ConfigKey?.ToString();
+                            }
+                            catch { }
+
+                            decoEntries.Add(decoEntry);
+                        }
+                        entry["DecorationsDialogues"] = decoEntries;
+                    }
+
+                    collectibleDialogueMapping.Add(entry);
+                }
+            }
+
             return new Dictionary<string, object>
             {
                 ["Dialogues"] = allDialogues.ToArray(),
-                ["CharacterNames"] = characterNames
+                ["CharacterNames"] = characterNames,
+                ["CollectibleDialogueMapping"] = collectibleDialogueMapping
             };
         }
 

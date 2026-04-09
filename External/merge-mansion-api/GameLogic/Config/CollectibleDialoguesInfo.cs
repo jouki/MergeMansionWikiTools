@@ -14,10 +14,10 @@ namespace GameLogic.Config
         public CollectibleDialoguesInfoId ConfigKey { get; set; }
 
         [MetaMember(2, (MetaMemberFlags)0)]
-        private List<ItemDialogueEntry> ItemDialogues { get; set; }
+        public List<ItemDialogueEntry> ItemDialogues { get; set; }
 
         [MetaMember(3, (MetaMemberFlags)0)]
-        private List<DecorationDialogueEntry> DecorationsDialogues { get; set; }
+        public List<DecorationDialogueEntry> DecorationsDialogues { get; set; }
 
         public CollectibleDialoguesInfo()
         {

@@ -4,7 +4,7 @@ namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.20.5"; // Fuel/sink Lua export, mapping dynamic parser, infobox mapping support, description loc override
+    public const string Version = "v0.20.6"; // Events flowchart stream routing, CollectibleDialoguesInfo export, fuel/sink Lua export
 
     // Full version with build timestamp, e.g. "v0.18.7 (build 20260322-1200)"
     public static string Build { get; } = GetBuild();

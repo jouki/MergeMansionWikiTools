@@ -379,8 +379,9 @@ internal static class EventChainFlowchartService
         InsertDummyNodes(g, layers);
         MinimizeCrossings(g, layers);
         AssignXPositions(g, layers);
-        AssignYPositions(g, layers, edges);
+        AssignYPositions(g, layers);
         CompactColumns(g);
+        AdjustGapRowHeights(g, layers, edges);
 
         return layers;
     }
@@ -666,62 +667,86 @@ internal static class EventChainFlowchartService
         }
     }
 
-    static void AssignYPositions(Dictionary<string, N> g, List<List<string>> layers, List<ChainGraphEdge> edges)
+    static void AssignYPositions(Dictionary<string, N> g, List<List<string>> layers)
     {
-        // Pre-compute: number of stream slots needed per gap-row (layer index)
-        var nodeLayer = new Dictionary<string, int>(StringComparer.Ordinal);
-        for (int li = 0; li < layers.Count; li++)
-            foreach (var nid in layers[li])
-                if (g.TryGetValue(nid, out var n) && !n.IsDummy)
-                    nodeLayer[nid] = li;
-
-        var gapSlotCount = new Dictionary<int, int>(); // layer index → number of stream slots needed
-        var gapTypes = new Dictionary<int, HashSet<ChainEdgeType>>();
-        foreach (var e in edges)
-        {
-            int sl = nodeLayer.GetValueOrDefault(e.SourceChainKey, -1);
-            if (sl < 0) continue;
-            if (!gapTypes.ContainsKey(sl)) gapTypes[sl] = new HashSet<ChainEdgeType>();
-            gapTypes[sl].Add(e.EdgeType);
-
-            // Check if backward edge
-            if (g.TryGetValue(e.SourceChainKey, out var s) && g.TryGetValue(e.TargetChainKey, out var t))
-                if (s.Layer >= t.Layer && !gapTypes[sl].Contains((ChainEdgeType)99))
-                    gapSlotCount[sl] = gapSlotCount.GetValueOrDefault(sl) + 0; // just mark
-        }
-
-        foreach (var (layer, types) in gapTypes)
-            gapSlotCount[layer] = types.Count;
-
-        // Check for backward edges — add 1 slot
-        foreach (var e in edges)
-        {
-            if (!g.TryGetValue(e.SourceChainKey, out var s) || !g.TryGetValue(e.TargetChainKey, out var t)) continue;
-            if (s.Layer >= t.Layer)
-            {
-                int sl = nodeLayer.GetValueOrDefault(e.SourceChainKey, -1);
-                if (sl >= 0) gapSlotCount[sl] = gapSlotCount.GetValueOrDefault(sl) + 1;
-                break; // only count once per gap-row (backward takes 1 slot)
-            }
-        }
+        // LayerGap = StreamGap (node-to-stream) + MinStreamSlots * StreamGap + StreamGap (stream-to-node)
+        double layerGap = StreamGap + MinStreamSlots * StreamGap + StreamGap;
 
         double y = 0;
-        for (int li = 0; li < layers.Count; li++)
+        foreach (var layer in layers)
         {
-            var layer = layers[li];
             double maxH = layer.Where(id => !g[id].IsDummy).Select(id => g[id].H).DefaultIfEmpty(20).Max();
             foreach (var id in layer)
             {
                 var n = g[id];
                 n.Y = n.IsDummy ? y + maxH / 2 : y + (maxH - n.H) / 2;
             }
-
-            // Dynamic gap: max(MinStreamSlots, actual slots needed) * StreamGap + padding
-            int slotsNeeded = gapSlotCount.GetValueOrDefault(li, 0);
-            int slots = Math.Max((int)MinStreamSlots, slotsNeeded);
-            double layerGap = StreamGap + slots * StreamGap + BendRadius;
-
             y += maxH + layerGap;
+        }
+    }
+
+    /// <summary>
+    /// Post-processing pass: where a gap-row needs more than MinStreamSlots, shift all nodes
+    /// below that gap-row down by the extra space required.
+    /// Runs AFTER CompactColumns so horizontal layout is unaffected.
+    /// </summary>
+    static void AdjustGapRowHeights(Dictionary<string, N> g, List<List<string>> layers, List<ChainGraphEdge> edges)
+    {
+        double defaultGap = StreamGap + MinStreamSlots * StreamGap + StreamGap;
+
+        // Build nodeLayer lookup for real (non-dummy) nodes
+        var nodeLayer = new Dictionary<string, int>(StringComparer.Ordinal);
+        for (int li = 0; li < layers.Count; li++)
+            foreach (var nid in layers[li])
+                if (g.TryGetValue(nid, out var n) && !n.IsDummy)
+                    nodeLayer[nid] = li;
+
+        // Count total sub-slots per gap-row: for each (gap, type), count distinct sources
+        var gapSources = new Dictionary<(int gap, ChainEdgeType type), HashSet<string>>();
+        var gapHasBackward = new HashSet<int>();
+
+        foreach (var e in edges)
+        {
+            int srcLayer = nodeLayer.GetValueOrDefault(e.SourceChainKey, -1);
+            int tgtLayer = nodeLayer.GetValueOrDefault(e.TargetChainKey, -1);
+            if (srcLayer < 0 || tgtLayer < 0) continue;
+
+            if (g.TryGetValue(e.SourceChainKey, out var s) && g.TryGetValue(e.TargetChainKey, out var t) && s.Layer >= t.Layer)
+                gapHasBackward.Add(srcLayer);
+
+            int minL = Math.Min(srcLayer, tgtLayer);
+            int maxL = Math.Max(srcLayer, tgtLayer);
+            for (int gap = minL; gap < maxL; gap++)
+            {
+                var key = (gap, e.EdgeType);
+                if (!gapSources.TryGetValue(key, out var sources))
+                    gapSources[key] = sources = new HashSet<string>(StringComparer.Ordinal);
+                sources.Add(e.SourceChainKey);
+            }
+        }
+
+        // Total sub-slots per gap-row = sum of distinct sources across all types
+        var gapSlotCount = new Dictionary<int, int>();
+        foreach (var ((gap, _), sources) in gapSources)
+            gapSlotCount[gap] = gapSlotCount.GetValueOrDefault(gap) + sources.Count;
+
+        // Compute cumulative extra shift and apply to layers below
+        double cumulativeShift = 0;
+        for (int li = 0; li < layers.Count - 1; li++)
+        {
+            int subSlots = gapSlotCount.GetValueOrDefault(li, 0);
+            int backwardSlot = gapHasBackward.Contains(li) ? 1 : 0;
+            int slotsNeeded = subSlots + backwardSlot;
+            int slots = Math.Max((int)MinStreamSlots, slotsNeeded);
+            double neededGap = StreamGap + slots * StreamGap + StreamGap;
+            double extra = Math.Max(0, neededGap - defaultGap);
+            cumulativeShift += extra;
+
+            if (cumulativeShift > 0)
+            {
+                foreach (var nid in layers[li + 1])
+                    g[nid].Y += cumulativeShift;
+            }
         }
     }
 
@@ -971,24 +996,104 @@ internal static class EventChainFlowchartService
             }
         }
 
-        // Pre-compute: which edge types exist per gap-row (source layer)
-        // Used for relative slot assignment (only types present get slots)
-        var gapRowTypes = new Dictionary<int, List<ChainEdgeType>>();
+        // Pre-compute: per gap-row, build ordered stream slot list
+        // Each slot = (edgeType, sourceKey). Different sources of the same type with different
+        // destinations get separate sub-slots. Ordering minimizes crossings.
+        // An edge from layer A→B passes through gap-rows A..B-1.
+
+        // Step 1: collect (type, source, targets) per gap-row
+        var gapEdgeBundles = new Dictionary<(int gap, ChainEdgeType type), Dictionary<string, HashSet<string>>>();
         foreach (var e in edges)
         {
             if (!graph.TryGetValue(e.SourceChainKey, out var s) || !graph.TryGetValue(e.TargetChainKey, out var t)) continue;
-            int sl = nodeLayer.GetValueOrDefault(e.SourceChainKey, -1);
-            if (sl < 0) continue;
-            if (!gapRowTypes.ContainsKey(sl)) gapRowTypes[sl] = new List<ChainEdgeType>();
-            if (!gapRowTypes[sl].Contains(e.EdgeType)) gapRowTypes[sl].Add(e.EdgeType);
-        }
-        // Sort each gap-row's types in canonical order: Decay, SpawnDrop, SinkOutput, SinkInput
-        foreach (var kv in gapRowTypes)
-            kv.Value.Sort((a, b) =>
+            int srcL = nodeLayer.GetValueOrDefault(e.SourceChainKey, -1);
+            int tgtL = nodeLayer.GetValueOrDefault(e.TargetChainKey, -1);
+            if (srcL < 0 || tgtL < 0 || srcL >= tgtL) continue;
+            for (int gl = srcL; gl < tgtL; gl++)
             {
-                int Order(ChainEdgeType t) => t switch { ChainEdgeType.Decay => 0, ChainEdgeType.SpawnDrop => 1, ChainEdgeType.SinkOutput => 2, ChainEdgeType.SinkInput => 3, _ => 9 };
-                return Order(a).CompareTo(Order(b));
-            });
+                var key = (gl, e.EdgeType);
+                if (!gapEdgeBundles.TryGetValue(key, out var bundles))
+                    gapEdgeBundles[key] = bundles = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
+                if (!bundles.TryGetValue(e.SourceChainKey, out var targets))
+                    bundles[e.SourceChainKey] = targets = new HashSet<string>(StringComparer.Ordinal);
+                targets.Add(e.TargetChainKey);
+            }
+        }
+
+        // Step 2: build ordered gapStreamSlots per gap-row
+        // Sources with the SAME destination set share one sub-slot.
+        // Different destination sets get separate sub-slots, ordered by crossing minimization.
+        static int TypeOrder(ChainEdgeType t) => t switch { ChainEdgeType.Decay => 0, ChainEdgeType.SpawnDrop => 1, ChainEdgeType.SinkOutput => 2, ChainEdgeType.SinkInput => 3, _ => 9 };
+
+        var allGaps = new HashSet<int>();
+        foreach (var k in gapEdgeBundles.Keys) allGaps.Add(k.gap);
+
+        // gapSourceSlot: (gap, source, type) → absolute slot index. Handles many-to-one (same dest set → same slot).
+        var gapSourceSlot = new Dictionary<(int gap, string source, ChainEdgeType type), int>();
+        var gapSlotCount = new Dictionary<int, int>(); // gap → total slot count
+
+        foreach (var gap in allGaps)
+        {
+            int slotIdx = 0;
+            var typesInGap = gapEdgeBundles.Keys.Where(k => k.gap == gap).Select(k => k.type).Distinct().OrderBy(TypeOrder).ToList();
+
+            foreach (var type in typesInGap)
+            {
+                var bundles = gapEdgeBundles[(gap, type)];
+
+                // Group sources by their destination set (exact match)
+                var destGroups = new Dictionary<string, List<string>>(StringComparer.Ordinal);
+                foreach (var (src, targets) in bundles)
+                {
+                    string destKey = string.Join("|", targets.OrderBy(x => x, StringComparer.Ordinal));
+                    if (!destGroups.TryGetValue(destKey, out var group))
+                        destGroups[destKey] = group = new List<string>();
+                    group.Add(src);
+                }
+
+                if (destGroups.Count <= 1)
+                {
+                    // All sources share the same destination set → 1 sub-slot
+                    foreach (var (_, groupSrcs) in destGroups)
+                        foreach (var src in groupSrcs)
+                            gapSourceSlot[(gap, src, type)] = slotIdx;
+                    slotIdx++;
+                }
+                else
+                {
+                    // Multiple destination groups → separate sub-slots, ordered by crossing minimization
+                    var groupKeys = destGroups.Keys.ToList();
+
+                    // Crossing cost = number of IMMEDIATE targets (in layer gap+1).
+                    // Group with more immediate targets creates more vertical drops that cross
+                    // other streams when placed above → should go BELOW (higher slot index).
+                    int nextLayer = gap + 1;
+                    var immediateCount = new Dictionary<string, int>(StringComparer.Ordinal);
+                    foreach (var gk in groupKeys)
+                    {
+                        int count = 0;
+                        foreach (var src in destGroups[gk])
+                            foreach (var tgt in bundles[src])
+                            {
+                                int tgtL = nodeLayer.GetValueOrDefault(tgt, -1);
+                                if (tgtL == nextLayer) count++;
+                            }
+                        immediateCount[gk] = count;
+                    }
+
+                    // Sort: fewer immediate targets → lower slot (above), more → higher slot (below)
+                    groupKeys.Sort((a, b) => immediateCount[a].CompareTo(immediateCount[b]));
+
+                    foreach (var gk in groupKeys)
+                    {
+                        foreach (var src in destGroups[gk])
+                            gapSourceSlot[(gap, src, type)] = slotIdx;
+                        slotIdx++;
+                    }
+                }
+            }
+            gapSlotCount[gap] = slotIdx;
+        }
 
         // Route each edge
         foreach (var group in edges.GroupBy(e => e.EdgeType).OrderBy(g => g.Key))
@@ -1003,14 +1108,12 @@ internal static class EventChainFlowchartService
 
                 bool isDecay = edge.EdgeType == ChainEdgeType.Decay;
 
-                // Stream slot: RELATIVE within this gap-row's active types
-                // Only types that actually have edges in this gap-row get slots
+                // Stream slot: absolute index from gapSourceSlot (destination-set grouped sub-slots)
                 int srcLayer = nodeLayer.GetValueOrDefault(edge.SourceChainKey, -1);
-                var activeTypes = gapRowTypes.TryGetValue(srcLayer, out var gt) ? gt : new List<ChainEdgeType> { edge.EdgeType };
-                int typeStreamSlot = activeTypes.IndexOf(edge.EdgeType);
-                if (typeStreamSlot < 0) typeStreamSlot = 0;
-                // Base = StreamGap + BendRadius (28px), then +StreamGap per additional slot
-                double typeStreamY = StreamGap + BendRadius + typeStreamSlot * StreamGap;
+                int srcAbsSlot = srcLayer >= 0
+                    ? gapSourceSlot.GetValueOrDefault((srcLayer, edge.SourceChainKey, edge.EdgeType), 0)
+                    : 0;
+                double typeStreamY = StreamGap + BendRadius + srcAbsSlot * StreamGap;
 
                 // Compute target X: distribute by edge TYPE (not source)
                 // Same type from different sources shares one X slot
@@ -1127,9 +1230,9 @@ internal static class EventChainFlowchartService
                 {
                     // Decay: always go DOWN from right-bottom corner, then turn horizontally
                     double nodeBottom = src.Y + oy + src.H;
-                    // If gap-row has ANY backward edge, all forward streams shift down by 1 slot
+                    // Use absolute slot from gapSourceSlot (consistent with other types)
                     double backwardOffset = gapRowsWithBackward.Contains(srcL) ? StreamGap : 0;
-                    double streamY = nodeBottom + StreamGap + BendRadius + backwardOffset;
+                    double streamY = nodeBottom + StreamGap + BendRadius + srcAbsSlot * StreamGap + backwardOffset;
 
                     // Route: down from corner to stream Y, then horizontal to target X, then up to target
                     pts.Add((sx, streamY));      // down to stream level
@@ -1156,9 +1259,11 @@ internal static class EventChainFlowchartService
                         {
                             for (int gl = srcL; gl < tgtL && !routed; gl++)
                             {
-                                // If this gap-row has backward edges, shift all streams down by 1 slot
+                                // Absolute stream slot for this edge's (type, source) in this gap-row
+                                int glSlot = gapSourceSlot.GetValueOrDefault((gl, edge.SourceChainKey, edge.EdgeType), 0);
+                                double gapStreamY = StreamGap + BendRadius + glSlot * StreamGap;
                                 double backwardSlotOffset = gapRowsWithBackward.Contains(gl) ? StreamGap : 0;
-                                double gapY = layerBottom[gl] + typeStreamY + backwardSlotOffset;
+                                double gapY = layerBottom[gl] + gapStreamY + backwardSlotOffset;
                                 if (gapY <= routeY + 2 || gapY >= ty - 2) continue;
 
                                 bool hit = Hits(routeX, routeY, routeX, gapY, boxes, src.Id, tgt.Id)
@@ -1177,15 +1282,23 @@ internal static class EventChainFlowchartService
 
                     if (!routed)
                     {
-                        // Strategy 3: Corridor routing
+                        // Strategy 3: Corridor routing (stream-slot-aware Y)
                         double gapY1 = routeY + StreamGap;
                         double gapY2 = ty - StreamGap;
                         if (srcL >= 0 && tgtL >= 0 && tgtL > srcL)
                         {
-                            double g1 = (layerBottom[srcL] + layerTop[Math.Min(srcL + 1, layers.Count - 1)]) / 2;
-                            if (g1 > routeY + 2) gapY1 = g1;
-                            double g2 = (layerBottom[Math.Max(tgtL - 1, 0)] + layerTop[tgtL]) / 2;
-                            if (g2 < ty - 2) gapY2 = g2;
+                            // Absolute slot in source gap-row
+                            int s3Slot1 = gapSourceSlot.GetValueOrDefault((srcL, edge.SourceChainKey, edge.EdgeType), 0);
+                            double slotY1 = layerBottom[srcL] + StreamGap + BendRadius + s3Slot1 * StreamGap
+                                + (gapRowsWithBackward.Contains(srcL) ? StreamGap : 0);
+                            if (slotY1 > routeY + 2) gapY1 = slotY1;
+
+                            // Absolute slot in target gap-row (gap above target)
+                            int prevGap = tgtL - 1;
+                            int s3Slot2 = gapSourceSlot.GetValueOrDefault((prevGap, edge.SourceChainKey, edge.EdgeType), 0);
+                            double slotY2 = layerBottom[prevGap] + StreamGap + BendRadius + s3Slot2 * StreamGap
+                                + (gapRowsWithBackward.Contains(prevGap) ? StreamGap : 0);
+                            if (slotY2 < ty - 2) gapY2 = slotY2;
                         }
 
                         // Find clear corridor X

@@ -203,13 +203,22 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 foreach (var odd in crp.GenerationOdds.GroupBy(x => x.Type.GetDef(_config).ItemType))
                 {
                     var weight = _dropAsPercent ?
-                        odd.Sum(x => x.Weight) / weightSum * 100 :
+                        odd.Sum(x => x.Weight) * 100 / weightSum :
                         odd.Sum(x => x.Weight);
 
                     WriteProperty(writer, odd.Key, weight, serializer);
                 }
 
                 writer.WriteEndObject();
+
+                if (_dropAsPercent)
+                {
+                    writer.WritePropertyName("OddsWeights");
+                    writer.WriteStartObject();
+                    foreach (var odd in crp.GenerationOdds.GroupBy(x => x.Type.GetDef(_config).ItemType))
+                        WriteProperty(writer, odd.Key, (double)odd.Sum(x => x.Weight), serializer);
+                    writer.WriteEndObject();
+                }
 
                 writer.WriteEndObject();
 
@@ -229,13 +238,22 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 foreach (var odd in rp.OddsList.GroupBy(x => x.Type.GetDef(_config).ItemType))
                 {
                     var weight = _dropAsPercent ?
-                        odd.Sum(x => x.Weight) / weightSum * 100 :
+                        odd.Sum(x => x.Weight) * 100 / weightSum :
                         odd.Sum(x => x.Weight);
 
                     WriteProperty(writer, odd.Key, weight, serializer);
                 }
 
                 writer.WriteEndObject();
+
+                if (_dropAsPercent)
+                {
+                    writer.WritePropertyName("OddsWeights");
+                    writer.WriteStartObject();
+                    foreach (var odd in rp.OddsList.GroupBy(x => x.Type.GetDef(_config).ItemType))
+                        WriteProperty(writer, odd.Key, (double)odd.Sum(x => x.Weight), serializer);
+                    writer.WriteEndObject();
+                }
 
                 writer.WriteEndObject();
 
@@ -255,13 +273,22 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 foreach (var odd in psp.OddsList.GroupBy(x => x.Type.GetDef(_config).ItemType))
                 {
                     var weight = _dropAsPercent ?
-                        odd.Sum(x => x.Weight) / weightSum * 100 :
+                        odd.Sum(x => x.Weight) * 100 / weightSum :
                         odd.Sum(x => x.Weight);
 
                     WriteProperty(writer, odd.Key, weight, serializer);
                 }
 
                 writer.WriteEndObject();
+
+                if (_dropAsPercent)
+                {
+                    writer.WritePropertyName("OddsWeights");
+                    writer.WriteStartObject();
+                    foreach (var odd in psp.OddsList.GroupBy(x => x.Type.GetDef(_config).ItemType))
+                        WriteProperty(writer, odd.Key, (double)odd.Sum(x => x.Weight), serializer);
+                    writer.WriteEndObject();
+                }
 
                 writer.WriteEndObject();
 
@@ -281,13 +308,22 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 foreach (var odd in crsp.OddsList.GroupBy(x => x.Type.GetDef(_config).ItemType))
                 {
                     var weight = _dropAsPercent ?
-                        odd.Sum(x => x.Weight) / weightSum * 100 :
+                        odd.Sum(x => x.Weight) * 100 / weightSum :
                         odd.Sum(x => x.Weight);
 
                     WriteProperty(writer, odd.Key, weight, serializer);
                 }
 
                 writer.WriteEndObject();
+
+                if (_dropAsPercent)
+                {
+                    writer.WritePropertyName("OddsWeights");
+                    writer.WriteStartObject();
+                    foreach (var odd in crsp.OddsList.GroupBy(x => x.Type.GetDef(_config).ItemType))
+                        WriteProperty(writer, odd.Key, (double)odd.Sum(x => x.Weight), serializer);
+                    writer.WriteEndObject();
+                }
 
                 writer.WriteEndObject();
 
@@ -310,13 +346,22 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 foreach (var odd in cmsp.OddsList.GroupBy(x => x.Type.GetDef(_config).ItemType))
                 {
                     var weight = _dropAsPercent ?
-                        odd.Sum(x => x.Weight) / weightSum * 100 :
+                        odd.Sum(x => x.Weight) * 100 / weightSum :
                         odd.Sum(x => x.Weight);
 
                     WriteProperty(writer, odd.Key, weight, serializer);
                 }
 
                 writer.WriteEndObject();
+
+                if (_dropAsPercent)
+                {
+                    writer.WritePropertyName("OddsWeights");
+                    writer.WriteStartObject();
+                    foreach (var odd in cmsp.OddsList.GroupBy(x => x.Type.GetDef(_config).ItemType))
+                        WriteProperty(writer, odd.Key, (double)odd.Sum(x => x.Weight), serializer);
+                    writer.WriteEndObject();
+                }
 
                 writer.WriteEndObject();
 
@@ -339,13 +384,22 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 foreach (var odd in cpsp.OddsList.GroupBy(x => x.Type.GetDef(_config).ItemType))
                 {
                     var weight = _dropAsPercent ?
-                        odd.Sum(x => x.Weight) / weightSum * 100 :
+                        odd.Sum(x => x.Weight) * 100 / weightSum :
                         odd.Sum(x => x.Weight);
 
                     WriteProperty(writer, odd.Key, weight, serializer);
                 }
 
                 writer.WriteEndObject();
+
+                if (_dropAsPercent)
+                {
+                    writer.WritePropertyName("OddsWeights");
+                    writer.WriteStartObject();
+                    foreach (var odd in cpsp.OddsList.GroupBy(x => x.Type.GetDef(_config).ItemType))
+                        WriteProperty(writer, odd.Key, (double)odd.Sum(x => x.Weight), serializer);
+                    writer.WriteEndObject();
+                }
 
                 writer.WriteEndObject();
 
@@ -382,9 +436,11 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                     writer.WriteStartObject();
 
                     var weight = _dropAsPercent ?
-                        odds.Item2 / weightSum * 100 :
+                        odds.Item2 * 100 / weightSum :
                         odds.Item2;
                     WriteProperty(writer, "Odds", weight, serializer);
+                    if (_dropAsPercent)
+                        WriteProperty(writer, "OddsWeight", (double)odds.Item2, serializer);
 
                     writer.WritePropertyName("Required");
                     writer.WriteStartArray();
@@ -453,9 +509,11 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                     writer.WriteStartObject();
 
                     var weight = _dropAsPercent ?
-                        odds.Item2 / weightSum * 100 :
+                        odds.Item2 * 100 / weightSum :
                         odds.Item2;
                     WriteProperty(writer, "Odds", weight, serializer);
+                    if (_dropAsPercent)
+                        WriteProperty(writer, "OddsWeight", (double)odds.Item2, serializer);
 
                     writer.WritePropertyName("Required");
                     writer.WriteStartArray();
@@ -524,9 +582,11 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                     writer.WriteStartObject();
 
                     var weight = _dropAsPercent ?
-                        odds.Item2 / weightSum * 100 :
+                        odds.Item2 * 100 / weightSum :
                         odds.Item2;
                     WriteProperty(writer, "Odds", weight, serializer);
+                    if (_dropAsPercent)
+                        WriteProperty(writer, "OddsWeight", (double)odds.Item2, serializer);
 
                     writer.WritePropertyName("Required");
                     writer.WriteStartArray();
