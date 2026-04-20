@@ -351,7 +351,7 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
             {
                 if (name is nameof(RewardItem.ItemDef) or nameof(RewardItemForCollectibleBoardEvent.ItemDef))
                 {
-                    WriteProperty(writer, name, (value as ItemDef)?.GetDef(_config).ItemType, serializer);
+                    WriteProperty(writer, name, (value as ItemDef)?.GetDef(_config)?.ItemType, serializer);
                     return;
                 }
 

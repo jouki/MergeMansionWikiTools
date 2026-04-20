@@ -4,7 +4,7 @@ namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.20.6"; // Events flowchart stream routing, CollectibleDialoguesInfo export, fuel/sink Lua export
+    public const string Version = "v0.20.9"; // Flowchart wiki upload (individual + bulk), font fallback to Trebuchet MS, Infobox source rules, HotspotId rebuild, br/ tag
 
     // Full version with build timestamp, e.g. "v0.18.7 (build 20260322-1200)"
     public static string Build { get; } = GetBuild();

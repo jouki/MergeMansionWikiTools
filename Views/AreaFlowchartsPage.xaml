@@ -64,6 +64,17 @@
                             <TextBlock Text="Publish to Discord" VerticalAlignment="Center" />
                         </StackPanel>
                     </ui:Button>
+                    <ui:Button x:Name="btnUploadWikiAll"
+                               Appearance="Secondary" Height="36"
+                               Margin="8,0,0,0"
+                               Click="BtnUploadWikiAll_Click"
+                               ToolTip="Upload all generated flowchart SVGs to Fandom wiki">
+                        <StackPanel Orientation="Horizontal"
+                                    TextElement.Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ui:Button}}">
+                            <ui:SymbolIcon Symbol="CloudArrowUp24" FontSize="14" Margin="0,0,6,0" />
+                            <TextBlock Text="Upload All to Wiki" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </ui:Button>
                 </StackPanel>
             </Grid>
 
@@ -117,8 +128,32 @@
             </StackPanel>
         </ScrollViewer>
 
-        <!-- InfoBar at bottom -->
-        <ui:InfoBar x:Name="infoBar" Grid.Row="2" IsOpen="False"
-                    IsClosable="True" Margin="10,0,10,10" />
+        <!-- Progress panel + InfoBar at bottom -->
+        <StackPanel Grid.Row="2" Margin="10,0,10,10">
+            <Border x:Name="progressPanel" Visibility="Collapsed"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="4"
+                    Padding="12,10" Margin="0,0,0,8">
+                <StackPanel>
+                    <Grid Margin="0,0,0,6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="txtProgressLabel" Grid.Column="0"
+                                   FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                   TextTrimming="CharacterEllipsis" />
+                        <TextBlock x:Name="txtProgressCount" Grid.Column="1"
+                                   FontSize="12"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                   VerticalAlignment="Center" />
+                    </Grid>
+                    <ProgressBar x:Name="progressBar" Height="6" Minimum="0" Maximum="100" />
+                </StackPanel>
+            </Border>
+            <ui:InfoBar x:Name="infoBar" IsOpen="False" IsClosable="True" />
+        </StackPanel>
     </Grid>
 </UserControl>

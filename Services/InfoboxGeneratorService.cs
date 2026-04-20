@@ -119,7 +119,7 @@ public class InfoboxGeneratorService
         // ── type ──
         var types = BuildTypes(chain, allChains, opts);
         if (types.Count > 0)
-            fields.Add(("type", string.Join("<br/>", types)));
+            fields.Add(("type", string.Join("<br>", types)));
 
         // ── source ──
         var sourceLines = new List<string>(manualSourceLines);
@@ -133,12 +133,12 @@ public class InfoboxGeneratorService
             sourceLines.Add(taskLink);
         }
         if (sourceLines.Count > 0)
-            fields.Add(("source", string.Join("<br/>", sourceLines)));
+            fields.Add(("source", string.Join("<br>", sourceLines)));
 
         // ── drops ──
         var drops = BuildDrops(chain, allChains, itemNames);
         if (drops.Count > 0)
-            fields.Add(("drops", string.Join("<br/>", drops)));
+            fields.Add(("drops", string.Join("<br>", drops)));
 
         // ── decays_into ──
         var decaysInto = BuildDecaysInto(chain, allChains, itemNames);
@@ -148,17 +148,17 @@ public class InfoboxGeneratorService
         // ── used_in ──
         var usedIn = BuildUsedIn(chain, allChains, itemNames);
         if (usedIn.Count > 0)
-            fields.Add(("used_in", string.Join("<br/>", usedIn)));
+            fields.Add(("used_in", string.Join("<br>", usedIn)));
 
         // ── transforms_to ──
         var transforms = BuildTransformsTo(chain, allChains);
         if (transforms.Count > 0)
-            fields.Add(("transforms_to", string.Join("<br/>", transforms)));
+            fields.Add(("transforms_to", string.Join("<br>", transforms)));
 
         // ── needs ──
         var needs = BuildNeeds(chain, allChains, itemNames);
         if (needs.Count > 0)
-            fields.Add(("needs", string.Join("<br/>", needs)));
+            fields.Add(("needs", string.Join("<br>", needs)));
 
         // Format with aligned '='
         int maxKeyLen = fields.Max(f => f.Key.Length);
@@ -260,7 +260,7 @@ public class InfoboxGeneratorService
     {
         var myItemTypes = chain.Items.Select(i => i.ItemType).ToHashSet(StringComparer.OrdinalIgnoreCase);
         var result = new List<string>();
-        var sourceMaxLevel = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+        var sourceLevels = new Dictionary<string, SortedSet<int>>(StringComparer.OrdinalIgnoreCase);
         var sourceChains = new Dictionary<string, ParsedChain>(StringComparer.OrdinalIgnoreCase);
 
         foreach (var otherChain in allChains)
@@ -294,31 +294,25 @@ public class InfoboxGeneratorService
 
                 if (!drops && !transforms && !orderRewards && !decays) continue;
 
-                // Track highest level producer in this chain that drops our items
+                // Collect ALL producing levels (aliases transparent — treated as primary items at their levels)
                 var resolvedLevel = ResolveLevel(item.ItemType, item);
                 sourceChains.TryAdd(otherChain.ConfigKey, otherChain);
-                if (sourceMaxLevel.TryGetValue(otherChain.ConfigKey, out var prevLevel))
+                if (!sourceLevels.TryGetValue(otherChain.ConfigKey, out var levelSet))
                 {
-                    if (resolvedLevel > prevLevel)
-                        sourceMaxLevel[otherChain.ConfigKey] = resolvedLevel;
+                    levelSet = new SortedSet<int>();
+                    sourceLevels[otherChain.ConfigKey] = levelSet;
                 }
-                else
-                {
-                    sourceMaxLevel[otherChain.ConfigKey] = resolvedLevel;
-                }
+                if (resolvedLevel > 0) levelSet.Add(resolvedLevel);
             }
         }
 
-        // Build source lines with highest producing level
-        foreach (var (configKey, maxLevel) in sourceMaxLevel)
+        // Emit source lines per source-level-rules (see memory/source-level-rules.md):
+        // all levels produce → no level · single/range/non-consecutive → templates joined <br>
+        foreach (var (configKey, producingLevels) in sourceLevels)
         {
             var otherChain = sourceChains[configKey];
             var sourceName = ResolveChainName(otherChain, otherChain.Items.FirstOrDefault()?.ItemType);
-            var levelStr = maxLevel > 0 ? $"|{maxLevel}" : "";
-            if (!otherChain.IsEventChain)
-                result.Add($"{{{{Item/Group|{sourceName}{levelStr}|fullName=true}}}}");
-            else
-                result.Add($"{{{{Item/Group|{sourceName}{levelStr}}}}}");
+            result.Add(FormatSourceEntry(sourceName, otherChain, producingLevels));
         }
 
         // Task reward source — temp items that are rewards from area tasks
@@ -348,6 +342,67 @@ public class InfoboxGeneratorService
         }
 
         return result;
+    }
+
+    /// <summary>
+    /// Formats one source chain entry with appropriate level(s) per source-level-rules.md.
+    /// - producingLevels.Count == totalLevels OR chain is single-level → no level (generic)
+    /// - Single producing level → {{Item/Group|Name|N|min=N[|fullName=true]}}
+    /// - Consecutive range → {{Item/Group|Name|max|min=min|max=max[|fullName=true]}}
+    /// - Non-consecutive → split into runs, each formatted as single/range, joined by &lt;br&gt;
+    /// fullName=true is added only when name has a parenthetical suffix AND chain is non-event
+    /// (otherwise it's redundant — wiki template defaults to name-as-is for unparenthesised chains).
+    /// </summary>
+    private string FormatSourceEntry(string sourceName, ParsedChain sourceChain, SortedSet<int> producingLevels)
+    {
+        // Total distinct levels in source chain (aliases counted transparently)
+        var totalLevels = sourceChain.Items
+            .Select(i => ResolveLevel(i.ItemType, i))
+            .Where(lvl => lvl > 0)
+            .Distinct()
+            .Count();
+
+        // fullName=true preserves "(...)" suffix — only needed for non-event chains with disambiguation
+        bool needsFullName = !sourceChain.IsEventChain && HasParentheticalSuffix(sourceName);
+        string fullNameSuffix = needsFullName ? "|fullName=true" : "";
+
+        // All levels produce OR single-level chain OR no valid producing levels → no level
+        if (producingLevels.Count == 0 || totalLevels <= 1 || producingLevels.Count == totalLevels)
+            return $"{{{{Item/Group|{sourceName}{fullNameSuffix}}}}}";
+
+        // Detect contiguous runs and emit one template per run
+        var entries = SplitIntoRuns(producingLevels).Select(r =>
+            r.Min == r.Max
+                ? $"{{{{Item/Group|{sourceName}|{r.Min}|min={r.Min}{fullNameSuffix}}}}}"
+                : $"{{{{Item/Group|{sourceName}|{r.Max}|min={r.Min}|max={r.Max}{fullNameSuffix}}}}}");
+
+        return string.Join("<br>", entries);
+    }
+
+    /// <summary>
+    /// Detects parenthetical disambiguation suffix at end of chain name, e.g. "Hammer (Garden Rope)".
+    /// Mirrors Lua Module:Utils regex `%s*%b()$` which strips such suffixes by default.
+    /// </summary>
+    private static bool HasParentheticalSuffix(string name)
+        => name.TrimEnd().EndsWith(")") && name.Contains('(');
+
+    /// <summary>Splits a sorted set of integers into contiguous (Min, Max) runs.</summary>
+    private static List<(int Min, int Max)> SplitIntoRuns(SortedSet<int> levels)
+    {
+        var runs = new List<(int Min, int Max)>();
+        int? start = null, end = null;
+        foreach (var lvl in levels) // already sorted ascending
+        {
+            if (start == null) { start = end = lvl; }
+            else if (lvl == end + 1) { end = lvl; }
+            else
+            {
+                runs.Add((start.Value, end.Value));
+                start = end = lvl;
+            }
+        }
+        if (start != null) runs.Add((start.Value, end.Value));
+        return runs;
     }
 
     // ── Drops ─────────────────────────────────────────────────────────
@@ -465,7 +520,7 @@ public class InfoboxGeneratorService
         foreach (var name in unmatchedNames)
             parts.Add($"{{{{Item/nolevel|{name}}}}}");
 
-        return string.Join("<br/>", parts);
+        return string.Join("<br>", parts);
     }
 
     // ── Transforms To (sink reward) ──────────────────────────────────

@@ -1329,20 +1329,22 @@ internal class FlowchartService
 
         // Inline CSS — Merge Mansion warm theme
         sb.AppendLine("  <style>");
-        sb.AppendLine("    @import url('https://fonts.cdnfonts.com/css/tisa-sans-pro');");
+        // NOTE: Fandom's CSP blocks font-src (default-src 'none' without explicit font-src)
+        // → @font-face with data URI AND external @import both fail at render time.
+        // Using Trebuchet MS (widely available system font) as primary — no custom fonts.
         sb.AppendLine("    svg { scroll-behavior: smooth; background: #FBF4E8; width: 100%; min-width: " + svgW.ToString(ci) + "px; }");
         sb.AppendLine("    .node-header { fill: url(#grad-header); }");
         sb.AppendLine("    .node-body { fill: url(#grad-body); filter: url(#shadow-node); }");
         sb.AppendLine("    .node-stroke-outer { fill: none; stroke: #c3732a; stroke-width: 2; }");
         sb.AppendLine("    .node-stroke-inner { fill: none; stroke: #91521d; stroke-width: 2; }");
-        sb.AppendLine("    .header-idx { fill: #d4e8ff; font-family: 'Tisa Sans Pro', Georgia, serif; font-size: 12px; font-style: italic; }");
-        sb.AppendLine("    .header-title { fill: #eef7ff; stroke: #124d76; stroke-width: 3px; paint-order: stroke fill; font-family: 'Tisa Sans Pro', Georgia, serif; font-size: 13px; font-weight: bold; font-style: italic; }");
-        sb.AppendLine("    .item-qty { fill: #9B7B58; font-family: 'Tisa Sans Pro', Trebuchet MS, sans-serif; font-size: 11.5px; font-weight: 500; }");
-        sb.AppendLine("    .item-name { fill: #955417; font-family: 'Tisa Sans Pro', Trebuchet MS, sans-serif; font-size: 11.5px; font-weight: 500; }");
-        sb.AppendLine("    .reward-text { fill: #9B7B58; font-family: 'Tisa Sans Pro', Trebuchet MS, sans-serif; font-size: 11px; font-style: italic; }");
+        sb.AppendLine("    .header-idx { fill: #d4e8ff; font-family: 'Trebuchet MS', Arial, sans-serif; font-size: 12px; font-style: italic; }");
+        sb.AppendLine("    .header-title { fill: #eef7ff; stroke: #124d76; stroke-width: 3px; paint-order: stroke fill; font-family: 'Trebuchet MS', Arial, sans-serif; font-size: 13px; font-weight: bold; font-style: italic; }");
+        sb.AppendLine("    .item-qty { fill: #9B7B58; font-family: 'Trebuchet MS', Arial, sans-serif; font-size: 11.5px; font-weight: 500; }");
+        sb.AppendLine("    .item-name { fill: #955417; font-family: 'Trebuchet MS', Arial, sans-serif; font-size: 11.5px; font-weight: 500; }");
+        sb.AppendLine("    .reward-text { fill: #9B7B58; font-family: 'Trebuchet MS', Arial, sans-serif; font-size: 11px; font-style: italic; }");
         sb.AppendLine("    .sep-line { stroke: #D4A860; stroke-width: 0.8; stroke-dasharray: 4 3; }");
-        sb.AppendLine("    .link-ref { fill: #A07840; font-family: 'Tisa Sans Pro', Trebuchet MS, sans-serif; font-size: 9px; cursor: pointer; }");
-        sb.AppendLine("    .link-ref-header { fill: #96c0f0; font-family: 'Tisa Sans Pro', Trebuchet MS, sans-serif; font-size: 9px; cursor: pointer; }");
+        sb.AppendLine("    .link-ref { fill: #A07840; font-family: 'Trebuchet MS', Arial, sans-serif; font-size: 9px; cursor: pointer; }");
+        sb.AppendLine("    .link-ref-header { fill: #96c0f0; font-family: 'Trebuchet MS', Arial, sans-serif; font-size: 9px; cursor: pointer; }");
         sb.AppendLine("    .link-ref:hover { fill: #E8961E; text-decoration: underline; }");
         sb.AppendLine("    .link-ref-header:hover { fill: #FFFFFF; text-decoration: underline; }");
         sb.AppendLine("    .item-slot { fill: #D4C4A8; stroke: #B8A888; stroke-width: 1; }");
@@ -1354,7 +1356,7 @@ internal class FlowchartService
         sb.AppendLine("    a .reward-text { cursor: pointer; }");
         sb.AppendLine("    a .reward-text:hover { text-decoration: underline; }");
         sb.AppendLine("    .token-circle { fill: #FFFDF5; stroke: #C8B088; stroke-width: 1.5; }");
-        sb.AppendLine("    .token-value { fill: #6B4520; stroke: #FFFDF5; stroke-width: 2.5px; paint-order: stroke fill; font-family: 'Tisa Sans Pro', Georgia, serif; font-weight: 800; text-anchor: middle; }");
+        sb.AppendLine("    .token-value { fill: #6B4520; stroke: #FFFDF5; stroke-width: 2.5px; paint-order: stroke fill; font-family: 'Trebuchet MS', Arial, sans-serif; font-weight: 800; text-anchor: middle; }");
         sb.AppendLine("    .edge-path { fill: none; stroke: #B8874A; stroke-width: 1.5; }");
         sb.AppendLine("    .edge-arrow { fill: #9C6F3A; }");
         sb.AppendLine("    @keyframes node-shake { 0%,100%{transform:translate(0,0)} 15%,55%{transform:translate(-1.5px,0)} 35%,75%{transform:translate(1.5px,0)} }");
@@ -2724,7 +2726,7 @@ internal class FlowchartService
         sb.AppendLine($"<title>{Esc(areaName)} — Task Flowchart</title>");
         sb.AppendLine("<style>");
         sb.AppendLine("  * { box-sizing: border-box; }");
-        sb.AppendLine("  html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #FBF4E8; font-family: 'Tisa Sans Pro', Georgia, serif; }");
+        sb.AppendLine("  html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #FBF4E8; font-family: 'Trebuchet MS', Arial, sans-serif; }");
         sb.AppendLine("  #app { position: relative; width: 100%; height: 100%; }");
         sb.AppendLine("  #scroll-container { width: 100%; height: 100%; overflow: auto; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }");
         sb.AppendLine("  #top-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 200; pointer-events: none; }");

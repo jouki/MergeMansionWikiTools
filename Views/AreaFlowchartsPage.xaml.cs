@@ -534,27 +534,38 @@ public partial class AreaFlowchartsPage : UserControl
         var outputDir = GetOutputDir()!;
 
         btnGenerateAll.IsEnabled = false;
+        btnPublishDiscord.IsEnabled = false;
+        btnUploadWikiAll.IsEnabled = false;
         btnGenerateAll.Content = "Generating...";
 
         try
         {
-            int count = 0;
+            int total = _areas.Count;
+            int done = 0, skipped = 0;
+            ShowProgress($"Starting generation for {total} areas…", 0, total);
+
             foreach (var area in _areas)
             {
+                var areaName = area.DisplayName.Trim();
+                ShowProgress($"Generating {areaName}…", done, total);
                 try
                 {
                     await GenerateFlowchartAsync(area);
-                    count++;
+                    done++;
                 }
                 catch (InvalidOperationException)
                 {
-                    // Skip areas with no tasks/requirements (e.g. Gift Shop)
+                    // Skip areas with no tasks/requirements (e.g. placeholder areas)
+                    skipped++;
                 }
+                ShowProgress($"Generating {areaName}…", done + skipped, total);
             }
 
-            ShowInfo($"Generated {count} flowcharts.\n\u2192 {outputDir}", InfoBarSeverity.Success, persistent: true);
+            var summary = skipped > 0
+                ? $"Generated {done} flowcharts · skipped {skipped} empty areas.\n\u2192 {outputDir}"
+                : $"Generated {done} flowcharts.\n\u2192 {outputDir}";
+            ShowInfo(summary, InfoBarSeverity.Success, persistent: true);
 
-            // Refresh list to show Open buttons + update global Open Folder visibility
             BuildAreaList();
             UpdateOutputPathDisplay();
         }
@@ -564,7 +575,10 @@ public partial class AreaFlowchartsPage : UserControl
         }
         finally
         {
+            HideProgress();
             btnGenerateAll.IsEnabled = true;
+            btnPublishDiscord.IsEnabled = true;
+            btnUploadWikiAll.IsEnabled = true;
             btnGenerateAll.Content = "Generate All";
         }
     }
@@ -595,6 +609,13 @@ public partial class AreaFlowchartsPage : UserControl
             if (area != null) await PublishAreaToDiscordAsync(area);
         };
         menu.Items.Add(discordItem);
+
+        var wikiItem = new System.Windows.Controls.MenuItem { Header = "Upload to Wiki" };
+        wikiItem.Click += async (_, _) =>
+        {
+            if (area != null) await UploadAreaToWikiAsync(area);
+        };
+        menu.Items.Add(wikiItem);
 
         var target = btn.Parent as FrameworkElement ?? btn;
         OpenSplitMenu(menu, target);
@@ -1081,6 +1102,142 @@ public partial class AreaFlowchartsPage : UserControl
         }
     }
 
+    // ── Wiki upload ──────────────────────────────────────────────────
+
+    private async Task UploadAreaToWikiAsync(LuaArea area)
+    {
+        var user = _main.Settings.WikiUsername;
+        var pass = _main.Settings.WikiPassword;
+        if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(pass))
+        {
+            ShowInfo("Wiki credentials not configured (Settings → Wiki Credentials).",
+                InfoBarSeverity.Warning);
+            return;
+        }
+
+        var outputDir = GetOutputDir();
+        if (string.IsNullOrEmpty(outputDir))
+        {
+            ShowInfo("Flowchart output folder not configured.", InfoBarSeverity.Warning);
+            return;
+        }
+
+        var bytes = WikiFlowchartUploadService.ReadSvgFromDisk(outputDir, area.DisplayName);
+        if (bytes == null)
+        {
+            ShowInfo($"{area.DisplayName}: SVG not generated yet — click Generate first.",
+                InfoBarSeverity.Warning);
+            return;
+        }
+
+        var areaName = area.DisplayName.Trim();
+        ShowInfo($"Uploading {areaName} to wiki…", InfoBarSeverity.Informational);
+        try
+        {
+            using var client = await WikiMappingService.CreateAuthenticatedClientAsync(user, pass);
+            var csrf = await WikiMappingService.GetCsrfTokenAsync(client);
+            var map = await WikiFlowchartUploadService.ResolveWikiFilenamesAsync(client, new[] { areaName });
+            if (!map.TryGetValue(areaName, out var wikiFilename) || string.IsNullOrEmpty(wikiFilename))
+            {
+                ShowInfo($"{areaName}: wiki API failed to resolve filename.", InfoBarSeverity.Error);
+                return;
+            }
+            var (ok, result) = await WikiFlowchartUploadService.UploadOneAsync(
+                client, csrf, wikiFilename, bytes);
+            if (ok)
+                ShowInfo($"Uploaded → File:{wikiFilename}", InfoBarSeverity.Success, persistent: true);
+            else
+                ShowInfo($"{areaName}: upload returned '{result}'", InfoBarSeverity.Warning);
+        }
+        catch (Exception ex)
+        {
+            ShowInfo($"Upload failed: {ex.Message}", InfoBarSeverity.Error);
+        }
+    }
+
+    private async void BtnUploadWikiAll_Click(object sender, RoutedEventArgs e)
+    {
+        if (_areas == null || _areas.Count == 0)
+        {
+            ShowInfo("No areas loaded.", InfoBarSeverity.Warning);
+            return;
+        }
+
+        var user = _main.Settings.WikiUsername;
+        var pass = _main.Settings.WikiPassword;
+        if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(pass))
+        {
+            ShowInfo("Wiki credentials not configured (Settings → Wiki Credentials).",
+                InfoBarSeverity.Warning);
+            return;
+        }
+
+        var outputDir = GetOutputDir();
+        if (string.IsNullOrEmpty(outputDir))
+        {
+            ShowInfo("Flowchart output folder not configured.", InfoBarSeverity.Warning);
+            return;
+        }
+
+        btnUploadWikiAll.IsEnabled = false;
+        btnGenerateAll.IsEnabled = false;
+        btnPublishDiscord.IsEnabled = false;
+        try
+        {
+            // Gather existing SVGs (skip areas without a generated flowchart)
+            var items = new List<(string, byte[])>();
+            foreach (var area in _areas)
+            {
+                var bytes = WikiFlowchartUploadService.ReadSvgFromDisk(outputDir, area.DisplayName);
+                if (bytes != null)
+                    items.Add((area.DisplayName, bytes));
+            }
+
+            if (items.Count == 0)
+            {
+                ShowInfo("No generated flowchart SVGs found in output folder. Click Generate All first.",
+                    InfoBarSeverity.Warning);
+                return;
+            }
+
+            int total = items.Count;
+            ShowProgress($"Preparing upload of {total} flowcharts…", 0, total);
+
+            // Parse "[N/M] ..." lines from the service to drive the progress bar
+            var progress = new Progress<string>(msg =>
+            {
+                var m = System.Text.RegularExpressions.Regex.Match(msg, @"^\[(\d+)/(\d+)\]\s*(.*)$");
+                if (m.Success && int.TryParse(m.Groups[1].Value, out var cur)
+                             && int.TryParse(m.Groups[2].Value, out var tot))
+                    ShowProgress(m.Groups[3].Value.Trim(), cur, tot);
+                else
+                    ShowProgress(msg, (int)progressBar.Value, total);
+            });
+
+            var (ok, failed, skipped) = await WikiFlowchartUploadService.UploadAllAsync(
+                user, pass, items, progress);
+
+            var parts = new List<string>();
+            if (ok > 0) parts.Add($"{ok} uploaded");
+            if (failed > 0) parts.Add($"{failed} failed");
+            if (skipped > 0) parts.Add($"{skipped} skipped");
+            var summary = "Wiki: " + string.Join(", ", parts);
+            ShowInfo(summary, failed > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success,
+                persistent: true);
+        }
+        catch (Exception ex)
+        {
+            ShowInfo($"Bulk upload error: {ex.Message}", InfoBarSeverity.Error);
+        }
+        finally
+        {
+            HideProgress();
+            btnUploadWikiAll.IsEnabled = true;
+            btnGenerateAll.IsEnabled = true;
+            btnPublishDiscord.IsEnabled = true;
+        }
+    }
+
     // ── Search ───────────────────────────────────────────────────────
 
     private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -1117,7 +1274,9 @@ public partial class AreaFlowchartsPage : UserControl
         var dir = GetOutputDir();
         if (dir == null) return null;
 
-        var safeName = string.Join("_", area.DisplayName.Split(Path.GetInvalidFileNameChars()));
+        // Trim leading/trailing whitespace — some JSON entries have stray spaces (" Walk-in Closet")
+        var name = area.DisplayName.Trim();
+        var safeName = string.Join("_", name.Split(Path.GetInvalidFileNameChars()));
         return Path.Combine(dir, $"{safeName}.svg");
     }
 
@@ -1390,5 +1549,24 @@ public partial class AreaFlowchartsPage : UserControl
     {
         await Task.Delay(4000);
         infoBar.IsOpen = false;
+    }
+
+    // ── Progress panel helpers ───────────────────────────────────────
+
+    private void ShowProgress(string label, int current, int total)
+    {
+        progressPanel.Visibility = Visibility.Visible;
+        txtProgressLabel.Text = label;
+        txtProgressCount.Text = total > 0 ? $"{current} / {total}" : "…";
+        progressBar.Maximum = Math.Max(1, total);
+        progressBar.Value = Math.Min(current, progressBar.Maximum);
+    }
+
+    private void HideProgress()
+    {
+        progressPanel.Visibility = Visibility.Collapsed;
+        txtProgressLabel.Text = string.Empty;
+        txtProgressCount.Text = string.Empty;
+        progressBar.Value = 0;
     }
 }
