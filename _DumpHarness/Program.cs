@@ -1,7 +1,15 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using AssetsTools.NET;
+using AssetsTools.NET.Extra;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
 using GameLogic.Config;
+using GameLogic.Hotspots.CardStack;
+using Code.GameLogic.Hotspots;
 using merge_mansion_dumper.Dumper;
 using Metaplay.Core;
 using Metaplay.Core.Config;
@@ -16,9 +24,25 @@ internal static class Program
 {
     public static int Main(string[] args)
     {
+        // Sub-command: probe Unity bundles for minigame icon assets
+        if (args.Length >= 2 && args[0] == "--probe-minigame-bundles")
+        {
+            return ProbeBundles(args[1]);
+        }
+        if (args.Length >= 2 && args[0] == "--probe-one")
+        {
+            return ProbeOneBundle(args[1]);
+        }
+        if (args.Length >= 4 && args[0] == "--extract-minigame-icons")
+        {
+            // --extract-minigame-icons <gameFilesRoot> <outputDir> <tpkPath>
+            return ExtractIcons(args[1], args[2], args[3]);
+        }
+
         if (args.Length < 3)
         {
             Console.Error.WriteLine("Usage: DumpHarness <configPath> <languagePath> <outputDir>");
+            Console.Error.WriteLine("   or: DumpHarness --probe-minigame-bundles <APK/Game Files/APK dir>");
             return 2;
         }
 
@@ -64,6 +88,12 @@ internal static class Program
             var written = new ExperimentalDumper().WriteIndividualFiles(outputDir, gameConfig);
             foreach (var (section, path) in written)
                 Console.WriteLine($"        -> {section}.json ({new FileInfo(path).Length / 1024} KB)");
+
+            // Also dump areas.json so we can verify Theme field for IllustrationTask/CardStack hotspots.
+            Console.WriteLine("[4b/4] Running AreaDumper...");
+            var areasPath = Path.Combine(outputDir, "areas.json");
+            new AreaDumper().WriteJson(areasPath, gameConfig);
+            Console.WriteLine($"        -> areas.json ({new FileInfo(areasPath).Length / 1024} KB)");
 
             Console.WriteLine();
             Console.WriteLine("=== SharedGlobals.SpeedUpCostBehavior probe ===");
@@ -126,6 +156,127 @@ internal static class Program
                 Console.WriteLine($"Raw scan error: {ex.Message}");
             }
 
+            // ── Special task libraries: CardStacks + CustomTables (for Illustrations) ──
+            Console.WriteLine();
+            Console.WriteLine("=== Special task libraries ===");
+            try
+            {
+                if (gameConfig.CardStacks != null)
+                {
+                    Console.WriteLine($"CardStacks ({gameConfig.CardStacks.Count} entries):");
+                    Console.WriteLine($"  {"ConfigKey",-30} {"Style",-10} {"Theme",-30} {"Size"}");
+                    foreach (var kv in gameConfig.CardStacks.EnumerateAll())
+                    {
+                        var info = (CardStackInfo)kv.Value;
+                        Console.WriteLine($"  {kv.Key,-30} {info.Style,-10} {(info.Theme ?? "<null>"),-30} {info.Width}x{info.Height}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("CardStacks = null");
+                }
+
+                Console.WriteLine();
+                if (gameConfig.CustomTables != null)
+                {
+                    Console.WriteLine($"CustomTables (Illustrations) ({gameConfig.CustomTables.Count} entries):");
+                    Console.WriteLine($"  {"ConfigKey",-40} {"Theme"}");
+                    foreach (var kv in gameConfig.CustomTables.EnumerateAll())
+                    {
+                        var info = (CustomHotspotTablesInfo)kv.Value;
+                        Console.WriteLine($"  {kv.Key,-40} {(info.Theme ?? "<null>")}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("CustomTables = null");
+                }
+
+                // ── HotspotDefinitions grouped by CustomHotspotTableId + CardStackRef (sub-tasks) ──
+                // Public property 'HotspotTableId' aliases private 'CustomHotspotTableId'.
+                // CardStackRef is private — read via reflection.
+                Console.WriteLine();
+                Console.WriteLine("=== HotspotDefinitions grouped by CustomHotspotTableId ===");
+                if (gameConfig.HotspotDefinitions != null)
+                {
+                    var tableFld = typeof(GameLogic.Hotspots.HotspotDefinition).GetField(
+                        "<CustomHotspotTableId>k__BackingField",
+                        System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                    var cardStackFld = typeof(GameLogic.Hotspots.HotspotDefinition).GetField(
+                        "<CardStackRef>k__BackingField",
+                        System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+
+                    var groupedT = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<GameLogic.Hotspots.HotspotDefinition>>();
+                    var groupedC = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<GameLogic.Hotspots.HotspotDefinition>>();
+
+                    foreach (var kv in gameConfig.HotspotDefinitions.EnumerateAll())
+                    {
+                        var def = (GameLogic.Hotspots.HotspotDefinition)kv.Value;
+                        var tableId = tableFld?.GetValue(def);
+                        if (tableId != null)
+                        {
+                            var key = tableId.ToString();
+                            if (!string.IsNullOrEmpty(key))
+                            {
+                                if (!groupedT.TryGetValue(key, out var list))
+                                    groupedT[key] = list = new System.Collections.Generic.List<GameLogic.Hotspots.HotspotDefinition>();
+                                list.Add(def);
+                            }
+                        }
+                        var csRef = cardStackFld?.GetValue(def);
+                        if (csRef != null)
+                        {
+                            string csKey = null;
+                            try
+                            {
+                                var keyObjProp = csRef.GetType().GetProperty("KeyObject") ?? csRef.GetType().GetProperty("Key");
+                                csKey = keyObjProp?.GetValue(csRef)?.ToString() ?? csRef.ToString();
+                            }
+                            catch { csKey = null; }
+                            if (string.IsNullOrEmpty(csKey)) csKey = "<unresolved-ref>";
+                            if (!groupedC.TryGetValue(csKey, out var list2))
+                                groupedC[csKey] = list2 = new System.Collections.Generic.List<GameLogic.Hotspots.HotspotDefinition>();
+                            list2.Add(def);
+                        }
+                    }
+
+                    Console.WriteLine($"Total HotspotDefinitions with CustomHotspotTableId: {groupedT.Values.Sum(l => l.Count)} across {groupedT.Count} tables");
+                    foreach (var g in groupedT.OrderBy(x => x.Key))
+                    {
+                        Console.WriteLine($"\n--- Table: {g.Key} ({g.Value.Count} hotspots) ---");
+                        foreach (var def in g.Value.OrderBy(d => d.Id.ToString()).Take(30))
+                        {
+                            string desc = "";
+                            try { desc = LocMan.GetHotspotDescription(def.Id) ?? ""; } catch { }
+                            if (string.IsNullOrEmpty(desc)) desc = "(no loc)";
+                            string reqs = "";
+                            if (def.RequirementsList != null)
+                                reqs = string.Join(", ", def.RequirementsList.Select(r => r?.GetType().Name ?? "null"));
+                            Console.WriteLine($"   {def.Id,-55} Type={def.Type,-18} desc='{desc}' reqs=[{reqs}]");
+                        }
+                    }
+
+                    Console.WriteLine();
+                    Console.WriteLine("=== HotspotDefinitions grouped by CardStackRef ===");
+                    Console.WriteLine($"Total HotspotDefinitions with CardStackRef: {groupedC.Values.Sum(l => l.Count)} across {groupedC.Count} stacks");
+                    foreach (var g in groupedC.OrderBy(x => x.Key).Take(5))
+                    {
+                        Console.WriteLine($"\n--- CardStack: {g.Key} ({g.Value.Count} hotspots) — sample of up to 5 ---");
+                        foreach (var def in g.Value.Take(5))
+                        {
+                            string desc = "";
+                            try { desc = LocMan.GetHotspotDescription(def.Id) ?? ""; } catch { }
+                            if (string.IsNullOrEmpty(desc)) desc = "(no loc)";
+                            Console.WriteLine($"   {def.Id,-55} Type={def.Type,-15} desc='{desc}'");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Library dump error: {ex.GetType().Name}: {ex.Message}");
+            }
+
             return 0;
         }
         catch (Exception ex)
@@ -138,6 +289,452 @@ internal static class Program
                 Console.Error.WriteLine(ex.InnerException.StackTrace);
             }
             return 1;
+        }
+    }
+
+    // Bundle probe — list asset names in minigame-related Unity bundles to find icons.
+    private static int ProbeBundles(string apkDir)
+    {
+        if (!Directory.Exists(apkDir))
+        {
+            Console.Error.WriteLine($"Not a directory: {apkDir}");
+            return 2;
+        }
+        var targetPatterns = new[] {
+            "uiicons", "scriptableobjectsareaiconslibrary",
+            "uihotspot", "uiunifiedicons"
+        };
+        var bundles = Directory.EnumerateFiles(apkDir, "*.bundle", SearchOption.AllDirectories)
+            .Where(p => targetPatterns.Any(pat => Path.GetFileName(p).ToLowerInvariant().Contains(pat)))
+            .ToList();
+        Console.WriteLine($"Found {bundles.Count} candidate bundles in {apkDir}:");
+        foreach (var b in bundles) Console.WriteLine($"  - {Path.GetFileName(b)}");
+        Console.WriteLine();
+
+        var am = new AssetsTools.NET.Extra.AssetsManager();
+        // Try to auto-detect classdata.tpk for type info (optional — without it we can still enumerate by class id)
+        try
+        {
+            var tpkCandidates = new[] {
+                Path.Combine(Path.GetDirectoryName(apkDir) ?? apkDir, "..", "classdata.tpk"),
+                Path.Combine(Path.GetDirectoryName(apkDir) ?? apkDir, "classdata.tpk"),
+                Path.Combine(apkDir, "classdata.tpk"),
+            };
+            foreach (var tpk in tpkCandidates)
+                if (File.Exists(tpk)) { am.LoadClassPackage(tpk); Console.WriteLine($"Loaded classdata.tpk from {tpk}"); break; }
+        }
+        catch { }
+
+        foreach (var bpath in bundles)
+        {
+            Console.WriteLine($"\n=== {Path.GetFileName(bpath)} ===");
+            try
+            {
+                var bunInst = am.LoadBundleFile(bpath, unpackIfPacked: true);
+                if (bunInst == null) { Console.WriteLine("  (failed to load)"); continue; }
+
+                foreach (var afInst in am.LoadAllAssetsFromBundle(bunInst))
+                {
+                    try { am.LoadClassDatabaseFromPackage(afInst.file.Metadata.UnityVersion); } catch { }
+                    var afile = afInst.file;
+                    // Texture2D + Sprite + MonoBehaviour names
+                    foreach (AssetClassID classId in new[] {
+                        AssetClassID.Texture2D,
+                        AssetClassID.Sprite,
+                        AssetClassID.MonoBehaviour })
+                    {
+                        var assets = afile.GetAssetsOfType(classId);
+                        if (assets.Count == 0) continue;
+                        foreach (var ai in assets)
+                        {
+                            string nm = "";
+                            try
+                            {
+                                var baseField = am.GetBaseField(afInst, ai);
+                                nm = baseField?["m_Name"]?.AsString ?? "";
+                            }
+                            catch { }
+                            // Filter: only names containing theme keywords or minigame/icon keywords
+                            if (string.IsNullOrEmpty(nm)) continue;
+                            var lo = nm.ToLowerInvariant();
+                            // Show all names (for uiicons / areaicons exploration)
+                            Console.WriteLine($"  [{classId}] {nm}");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"  ERROR: {ex.GetType().Name}: {ex.Message}");
+            }
+        }
+        return 0;
+    }
+
+    // Harness-side dynamic icon extraction — mirrors Services/MinigameIconExtractor.cs.
+    // Themes are discovered from SharedGameConfig (CardStacks + CustomTables);
+    // sprite names are guessed via candidate patterns and matched in UI-ish bundles.
+    private static int ExtractIcons(string gameFilesRoot, string outputDir, string tpkPath)
+    {
+        // Boot MetaplayCore + import SharedGameConfig to discover themes dynamically.
+        // Config archive is expected under <gameFilesRoot>/../Dump/ or passed via --config.
+        // For the harness we just re-use the _DATA paths from the earlier workflow.
+        string[] guessedConfigPaths = {
+            Path.Combine(gameFilesRoot, "..", "_DATA", "C"),
+            @"D:\_BACKUP_2.0\Code Projects\MergeMansionWikiTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\_DATA\C",
+        };
+        string? configDir = guessedConfigPaths.FirstOrDefault(Directory.Exists);
+        List<string> themes = new();
+        if (configDir != null)
+        {
+            try
+            {
+                var cFile = Directory.EnumerateFiles(configDir).FirstOrDefault();
+                if (cFile != null)
+                {
+                    Metaplay.Core.MetaplayCore.Initialize();
+                    var archive = Metaplay.Core.Config.ConfigArchive.FromBytes(File.ReadAllBytes(cFile));
+                    var patched = Metaplay.Core.Config.PatchedConfigArchive.WithNoPatches(archive);
+                    var cfg = (GameLogic.Config.SharedGameConfig)
+                        Metaplay.Core.Config.GameConfigFactory.Instance.ImportSharedGameConfig(patched);
+                    // Enumerate themes
+                    if (cfg.CardStacks != null)
+                        foreach (var kv in cfg.CardStacks.EnumerateAll())
+                        {
+                            var info = (GameLogic.Hotspots.CardStack.CardStackInfo)kv.Value;
+                            if (!string.IsNullOrEmpty(info.Theme)) themes.Add(info.Theme);
+                        }
+                    if (cfg.CustomTables != null)
+                        foreach (var kv in cfg.CustomTables.EnumerateAll())
+                        {
+                            var info = (Code.GameLogic.Hotspots.CustomHotspotTablesInfo)kv.Value;
+                            if (!string.IsNullOrEmpty(info.Theme)) themes.Add(info.Theme);
+                        }
+                    themes = themes.Distinct(StringComparer.Ordinal).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[WARN] Could not auto-discover themes: {ex.Message}");
+            }
+        }
+        if (themes.Count == 0)
+        {
+            Console.WriteLine("[INFO] No themes discovered from config — falling back to known 26.03.01 set.");
+            themes = new List<string> { "Dollhouse", "Painting", "Perfumery", "Card", "Book", "SpyNotes" };
+        }
+        Console.WriteLine($"Themes to extract: {string.Join(", ", themes)}");
+
+        // Candidate sprite names per theme (matches Services/MinigameIconExtractor.cs logic).
+        IEnumerable<string> CandsFor(string theme)
+        {
+            var t = theme; var tl = theme.ToLowerInvariant();
+            yield return $"MapSpot_Icon_{t}Task";
+            yield return $"MapSpot_Icon_{t}";
+            yield return $"ui_icon_{tl}";
+            yield return $"ui_icon_{tl}_white";
+            yield return $"ui_icon_area_hotspot_{tl}";
+            yield return $"Icon_{t}";
+            yield return $"{t}_Icon";
+        }
+        var spriteToTheme = new Dictionary<string, (string Theme, int Rank)>(StringComparer.OrdinalIgnoreCase);
+        foreach (var theme in themes)
+        {
+            int rank = 0;
+            foreach (var c in CandsFor(theme))
+            {
+                if (!spriteToTheme.ContainsKey(c)) spriteToTheme[c] = (theme, rank);
+                rank++;
+            }
+        }
+        var unresolved = new HashSet<string>(themes);
+
+        // Scan bundles in pattern priority order.
+        var patterns = new[] {
+            "uigeneric_assets_all",
+            "featuresstackminigamesprites_assets_all",
+            "featuresillustrationtask",
+            "uiicons_assets_all",
+            "uisharedalleventsui_assets_all",
+            "scriptableobjectsillustration",
+            "scriptableobjectsareaiconslibrary",
+        };
+        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var bundles = new List<string>();
+        foreach (var pattern in patterns)
+            foreach (var sub in new[] { "APK", "Server" })
+            {
+                var dir = Path.Combine(gameFilesRoot, sub);
+                if (!Directory.Exists(dir)) continue;
+                foreach (var b in Directory.EnumerateFiles(dir, "*.bundle", SearchOption.TopDirectoryOnly))
+                    if (Path.GetFileName(b).Contains(pattern, StringComparison.OrdinalIgnoreCase) && seen.Add(b))
+                        bundles.Add(b);
+            }
+
+        Directory.CreateDirectory(outputDir);
+        int extracted = 0, missing = 0;
+
+        // PASS 1 — scan every bundle, collect the best-ranked candidate per theme.
+        // "Best" = lowest rank (MapSpot_Icon_*Task has highest priority, ui_icon_*_white lowest).
+        // This prevents the first-found white fallback from blocking the colored MapSpot icon
+        // that lives in a later-scanned bundle.
+        var bestPerTheme = new Dictionary<string, (int Rank, string Bundle, string SpriteName)>(StringComparer.Ordinal);
+        Console.WriteLine($"Scanning {bundles.Count} bundles (PASS 1 — pick best candidate per theme)...");
+        foreach (var bundlePath in bundles)
+        {
+            if (themes.All(t => bestPerTheme.TryGetValue(t, out var b) && b.Rank == 0)) break; // all got rank-0
+            try
+            {
+                var am = new AssetsManager();
+                am.LoadClassPackage(tpkPath);
+                var bunInst = am.LoadBundleFile(bundlePath, unpackIfPacked: true);
+                for (int i = 0; i < bunInst.file.BlockAndDirInfo.DirectoryInfos.Count; i++)
+                {
+                    AssetsTools.NET.Extra.AssetsFileInstance? afInst;
+                    try { afInst = am.LoadAssetsFileFromBundle(bunInst, i); } catch { continue; }
+                    if (afInst?.file == null) continue;
+                    try { am.LoadClassDatabaseFromPackage(afInst.file.Metadata.UnityVersion); } catch { }
+                    foreach (var si in afInst.file.GetAssetsOfType(AssetClassID.Sprite))
+                    {
+                        string nm;
+                        try { nm = am.GetBaseField(afInst, si)["m_Name"].AsString ?? ""; } catch { continue; }
+                        if (!spriteToTheme.TryGetValue(nm, out var tr)) continue;
+                        if (bestPerTheme.TryGetValue(tr.Theme, out var existing) && existing.Rank <= tr.Rank) continue;
+                        bestPerTheme[tr.Theme] = (tr.Rank, bundlePath, nm);
+                    }
+                }
+            }
+            catch { }
+        }
+        foreach (var t in themes)
+        {
+            if (bestPerTheme.TryGetValue(t, out var b))
+                Console.WriteLine($"  {t}: rank {b.Rank} → {b.SpriteName} in {Path.GetFileName(b.Bundle)}");
+            else
+                Console.WriteLine($"  {t}: no candidate found");
+        }
+
+        // PASS 2 — for each theme, extract just that one sprite from the chosen bundle.
+        Console.WriteLine("\nPASS 2 — extract chosen sprites:");
+        foreach (var group in bestPerTheme.Values.GroupBy(b => b.Bundle))
+        {
+            var wantedSprites = group.ToDictionary(g => g.SpriteName, g => themes.First(t => bestPerTheme[t].SpriteName == g.SpriteName), StringComparer.OrdinalIgnoreCase);
+            var resolved = new HashSet<string>(wantedSprites.Values);
+            ExtractFromBundleInline(group.Key, tpkPath, outputDir, wantedSprites.ToDictionary(kv => kv.Key, kv => (kv.Value, 0)), resolved, ref extracted, ref missing);
+        }
+
+        // Check unresolved (themes with no candidate in any bundle)
+        foreach (var t in themes)
+        {
+            if (!bestPerTheme.ContainsKey(t))
+            {
+                Console.WriteLine($"[NOT-FOUND] Theme '{t}' — no sprite matches in any bundle");
+                missing++;
+            }
+        }
+
+        Console.WriteLine($"\nExtracted {extracted}. Missing {missing}.");
+        return missing == 0 ? 0 : 1;
+    }
+
+    private static void ExtractFromBundleInline(string bundlePath, string tpkPath, string outputDir,
+        Dictionary<string, (string Theme, int Rank)> spriteToTheme, HashSet<string> unresolved,
+        ref int extracted, ref int missing)
+    {
+        var am = new AssetsManager();
+        am.LoadClassPackage(tpkPath);
+        BundleFileInstance bunInst;
+        try { bunInst = am.LoadBundleFile(bundlePath, unpackIfPacked: true); }
+        catch (Exception ex) { Console.WriteLine($"  [LOAD] {ex.Message}"); return; }
+
+        // Collect all asset files in bundle + build cross-file texture lookup.
+        var allAssetFiles = new List<AssetsTools.NET.Extra.AssetsFileInstance>();
+        for (int i = 0; i < bunInst.file.BlockAndDirInfo.DirectoryInfos.Count; i++)
+        {
+            AssetsTools.NET.Extra.AssetsFileInstance? fi;
+            try { fi = am.LoadAssetsFileFromBundle(bunInst, i); }
+            catch { continue; }
+            if (fi?.file != null) allAssetFiles.Add(fi);
+        }
+        foreach (var afInst in allAssetFiles)
+        {
+            try { am.LoadClassDatabaseFromPackage(afInst.file.Metadata.UnityVersion); } catch { }
+        }
+
+        // Build texture lookup: (fileInstance, pathId) — try matching by pathId across all files
+        // (sprite→texture references in Unity bundles can span asset files via m_FileID).
+        var texturesByPathId = new Dictionary<long, (AssetsTools.NET.Extra.AssetsFileInstance AfInst, AssetFileInfo Info)>();
+        foreach (var afInst in allAssetFiles)
+            foreach (var ti in afInst.file.GetAssetsOfType(AssetClassID.Texture2D))
+                texturesByPathId[ti.PathId] = (afInst, ti);
+
+        var decoded = new Dictionary<long, Image<Bgra32>?>();
+        Image<Bgra32>? Decode(long pathId)
+        {
+            if (decoded.TryGetValue(pathId, out var c)) return c;
+            if (!texturesByPathId.TryGetValue(pathId, out var entry)) { decoded[pathId] = null; return null; }
+            try
+            {
+                var bf = am.GetBaseField(entry.AfInst, entry.Info);
+                var tf = AssetsTools.NET.Texture.TextureFile.ReadTextureFile(bf);
+                byte[]? data = null;
+                try { data = tf.FillPictureData(entry.AfInst); } catch { }
+                if (data == null || data.Length == 0) { tf.SetPictureDataFromBundle(bunInst); data = tf.pictureData; }
+                if (data == null || data.Length == 0) { decoded[pathId] = null; return null; }
+                var raw = tf.DecodeTextureRaw(data, useBgra: true);
+                if (raw == null || raw.Length == 0) { decoded[pathId] = null; return null; }
+                var img = Image.LoadPixelData<Bgra32>(raw, tf.m_Width, tf.m_Height);
+                img.Mutate(x => x.Flip(FlipMode.Vertical));
+                decoded[pathId] = img;
+                return img;
+            }
+            catch (Exception ex) { Console.WriteLine($"  DECODE err: {ex.Message}"); decoded[pathId] = null; return null; }
+        }
+
+        // Build SpriteAtlas fallback: spriteName → (textureName, rect)
+        // Used when Sprite.m_RD.texture.m_PathID == 0 (packed sprite).
+        var atlasFallback = new Dictionary<string, (long TexPathId, float Rx, float Ry, float Rw, float Rh)>(StringComparer.Ordinal);
+        foreach (var afInst in allAssetFiles)
+        {
+            foreach (var atlas in afInst.file.GetAssetsOfType(AssetClassID.SpriteAtlas))
+            {
+                try
+                {
+                    var bf = am.GetBaseField(afInst, atlas);
+                    var names = new List<string>();
+                    var namesField = bf["m_PackedSpriteNamesToIndex.Array"];
+                    if (!namesField.IsDummy)
+                        foreach (var c in namesField.Children) names.Add(c.AsString);
+                    var mapField = bf["m_RenderDataMap.Array"];
+                    if (mapField.IsDummy) continue;
+                    int idx = 0;
+                    foreach (var entry in mapField.Children)
+                    {
+                        if (idx >= names.Count) break;
+                        var value = entry[1];
+                        var rect = value["textureRect"];
+                        long texPathId = value["texture"]["m_PathID"].AsLong;
+                        var name = names[idx];
+                        if (!string.IsNullOrEmpty(name) && !atlasFallback.ContainsKey(name))
+                            atlasFallback[name] = (texPathId,
+                                rect["x"].AsFloat, rect["y"].AsFloat,
+                                rect["width"].AsFloat, rect["height"].AsFloat);
+                        idx++;
+                    }
+                }
+                catch { }
+            }
+        }
+
+        foreach (var afInst in allAssetFiles)
+        {
+            // Per-theme best match (lowest rank wins).
+            var bestByTheme = new Dictionary<string, (int Rank, AssetFileInfo Sprite, long TexPathId, float Rx, float Ry, float Rw, float Rh)>();
+            foreach (var si in afInst.file.GetAssetsOfType(AssetClassID.Sprite))
+            {
+                string nm;
+                AssetTypeValueField sf;
+                try { sf = am.GetBaseField(afInst, si); nm = sf["m_Name"].AsString ?? ""; } catch { continue; }
+                if (string.IsNullOrEmpty(nm)) continue;
+                if (!spriteToTheme.TryGetValue(nm, out var tr)) continue;
+                if (!unresolved.Contains(tr.Theme)) continue;
+                if (bestByTheme.TryGetValue(tr.Theme, out var existing) && existing.Rank <= tr.Rank) continue;
+                try
+                {
+                    var rd = sf["m_RD"];
+                    long texPathId = rd["texture"]["m_PathID"].AsLong;
+                    float rx = rd["textureRect"]["x"].AsFloat;
+                    float ry = rd["textureRect"]["y"].AsFloat;
+                    float rw = rd["textureRect"]["width"].AsFloat;
+                    float rh = rd["textureRect"]["height"].AsFloat;
+                    // Fallback to SpriteAtlas metadata if direct reference is null.
+                    if (texPathId == 0 && atlasFallback.TryGetValue(nm, out var atlasEntry))
+                    {
+                        texPathId = atlasEntry.TexPathId;
+                        rx = atlasEntry.Rx; ry = atlasEntry.Ry; rw = atlasEntry.Rw; rh = atlasEntry.Rh;
+                    }
+                    bestByTheme[tr.Theme] = (tr.Rank, si, texPathId, rx, ry, rw, rh);
+                }
+                catch (Exception ex) { Console.WriteLine($"  [META] {nm}: {ex.Message}"); }
+            }
+            if (bestByTheme.Count == 0) continue;
+
+            foreach (var (theme, info) in bestByTheme)
+            {
+                var parent = Decode(info.TexPathId);
+                if (parent == null) { Console.WriteLine($"  [NOTEX] {theme} (pathId={info.TexPathId})"); missing++; continue; }
+                int cx = (int)Math.Round(info.Rx);
+                int cy = parent.Height - (int)Math.Round(info.Ry) - (int)Math.Round(info.Rh);
+                int cw = (int)Math.Round(info.Rw);
+                int ch = (int)Math.Round(info.Rh);
+                cx = Math.Clamp(cx, 0, parent.Width - 1);
+                cy = Math.Clamp(cy, 0, parent.Height - 1);
+                cw = Math.Clamp(cw, 1, parent.Width - cx);
+                ch = Math.Clamp(ch, 1, parent.Height - cy);
+                try
+                {
+                    using var crop = parent.Clone(x => x.Crop(new Rectangle(cx, cy, cw, ch)));
+                    var outPath = Path.Combine(outputDir, $"MinigameIcon_{theme}.png");
+                    crop.SaveAsPng(outPath);
+                    Console.WriteLine($"  -> {theme} ({cw}x{ch}) {Path.GetFileName(outPath)}");
+                    extracted++;
+                    unresolved.Remove(theme);
+                }
+                catch (Exception ex) { Console.WriteLine($"  [CROP] {theme}: {ex.Message}"); missing++; }
+            }
+        }
+        foreach (var img in decoded.Values) img?.Dispose();
+    }
+
+    private static int ProbeOneBundle(string bundlePath)
+    {
+        if (!File.Exists(bundlePath)) { Console.Error.WriteLine($"Not found: {bundlePath}"); return 2; }
+        var am = new AssetsManager();
+        var bunInst = am.LoadBundleFile(bundlePath, unpackIfPacked: true);
+        Console.WriteLine($"Bundle: {Path.GetFileName(bundlePath)}");
+        foreach (var afInst in am.LoadAllAssetsFromBundle(bunInst))
+        {
+            foreach (AssetClassID cid in new[] {
+                AssetClassID.Texture2D, AssetClassID.Sprite, AssetClassID.SpriteAtlas,
+                AssetClassID.MonoBehaviour, AssetClassID.GameObject })
+            {
+                var assets = afInst.file.GetAssetsOfType(cid);
+                if (assets.Count == 0) continue;
+                Console.WriteLine($"-- {cid} ({assets.Count}) --");
+                foreach (var ai in assets)
+                {
+                    string nm = "";
+                    try { nm = am.GetBaseField(afInst, ai)?["m_Name"]?.AsString ?? ""; } catch { }
+                    if (!string.IsNullOrEmpty(nm)) Console.WriteLine($"  {nm}");
+                }
+            }
+        }
+        return 0;
+    }
+
+    private static System.Collections.Generic.IEnumerable<AssetsTools.NET.Extra.AssetsFileInstance> LoadAllAssetsFromBundle_Compat(
+        AssetsTools.NET.Extra.AssetsManager am, AssetsTools.NET.Extra.BundleFileInstance bunInst)
+    {
+        for (int i = 0; i < bunInst.file.BlockAndDirInfo.DirectoryInfos.Count; i++)
+        {
+            AssetsTools.NET.Extra.AssetsFileInstance fi = null;
+            try { fi = am.LoadAssetsFileFromBundle(bunInst, i, loadDeps: false); } catch { }
+            if (fi != null) yield return fi;
+        }
+    }
+}
+
+// Extension for AssetsManager if LoadAllAssetsFromBundle isn't public
+internal static class AssetsManagerExt
+{
+    public static System.Collections.Generic.IEnumerable<AssetsTools.NET.Extra.AssetsFileInstance> LoadAllAssetsFromBundle(
+        this AssetsTools.NET.Extra.AssetsManager am, AssetsTools.NET.Extra.BundleFileInstance bunInst)
+    {
+        for (int i = 0; i < bunInst.file.BlockAndDirInfo.DirectoryInfos.Count; i++)
+        {
+            AssetsTools.NET.Extra.AssetsFileInstance fi = null;
+            try { fi = am.LoadAssetsFileFromBundle(bunInst, i, loadDeps: false); } catch { }
+            if (fi != null) yield return fi;
         }
     }
 }

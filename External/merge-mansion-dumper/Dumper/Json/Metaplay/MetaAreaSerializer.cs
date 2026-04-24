@@ -168,7 +168,67 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                     foreach (var kv in sums)
                         WriteProperty(writer, kv.Key, kv.Value, serializer);
                 }
+
+                // Emit Theme for special task types (IllustrationTask + CardStack + their sub-tasks).
+                // Parent IllustrationTask has CustomHotspotTableId via the Requirements. Sub-tasks have
+                // it directly on the HotspotDefinition. CardStack tasks have CardStackRef.
+                string theme = ResolveHotspotTheme(hotspot);
+                if (theme != null)
+                    WriteProperty(writer, "Theme", theme, serializer);
             }
+        }
+
+        private string ResolveHotspotTheme(HotspotDefinition hotspot)
+        {
+            // Sub-tasks and parent IllustrationTask with direct CustomHotspotTableId ref
+            var tableIdField = typeof(HotspotDefinition).GetField(
+                "<CustomHotspotTableId>k__BackingField",
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            var tableId = tableIdField?.GetValue(hotspot) as Code.GameLogic.Hotspots.CustomHotspotTableId;
+            if (tableId != null && _config.CustomTables != null)
+            {
+                try
+                {
+                    var info = _config.CustomTables.GetInfoByKey(tableId) as Code.GameLogic.Hotspots.CustomHotspotTablesInfo;
+                    if (info?.Theme != null) return info.Theme;
+                }
+                catch { }
+            }
+
+            // Parent IllustrationTask: RequirementsList has CompleteIllustrationRequirement → CustomHotspotTableId
+            if (hotspot.RequirementsList != null)
+            {
+                foreach (var req in hotspot.RequirementsList)
+                {
+                    if (req is GameLogic.Player.Requirements.CompleteIllustrationRequirement illuReq)
+                    {
+                        try
+                        {
+                            var info = _config.CustomTables?.GetInfoByKey(illuReq.Illustration) as Code.GameLogic.Hotspots.CustomHotspotTablesInfo;
+                            if (info?.Theme != null) return info.Theme;
+                        }
+                        catch { }
+                    }
+                }
+            }
+
+            // CardStack hotspots: CardStackRef → CardStackInfo.Theme
+            var cardStackField = typeof(HotspotDefinition).GetField(
+                "<CardStackRef>k__BackingField",
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            var csRef = cardStackField?.GetValue(hotspot);
+            if (csRef != null)
+            {
+                try
+                {
+                    var refProp = csRef.GetType().GetProperty("Ref");
+                    var csInfo = refProp?.GetValue(csRef) as GameLogic.Hotspots.CardStack.CardStackInfo;
+                    if (csInfo?.Theme != null) return csInfo.Theme;
+                }
+                catch { }
+            }
+
+            return null;
         }
 
         protected override void WriteObjectMember(JsonWriter writer, string name, Type type, object value, JsonSerializer serializer)

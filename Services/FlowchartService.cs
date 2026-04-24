@@ -26,6 +26,9 @@ internal class FlowchartService
         public HashSet<string> Parents = new();
         public HashSet<string> Children = new();
         public bool IsDummy;
+        // Minigame theme marker: "Dollhouse", "Painting", "Perfumery", "Card", "Book", "SpyNotes"
+        // Sub-tasks sharing the same Special are grouped by a visual box in the flowchart.
+        public string? Special;
 
         // Layout
         public int Layer;
@@ -216,7 +219,8 @@ internal class FlowchartService
                 ItemRewardType = t.ItemReward,
                 ItemRewardWikiName = rewardWiki,
                 ItemRewardSingleLevel = rewardSingleLevel,
-                TokenValues = t.TokenValues ?? new()
+                TokenValues = t.TokenValues ?? new(),
+                Special = t.Special
             };
             nodes[t.Id] = node;
         }
@@ -1493,6 +1497,10 @@ internal class FlowchartService
         sb.AppendLine("  </defs>");
         sb.AppendLine();
 
+        // Render minigame group boxes (behind everything) — visually group sub-tasks
+        // that share a Special theme (Dollhouse, Painting, Perfumery, Card, Book, SpyNotes).
+        RenderSpecialGroups(sb, nodes, offsetX, offsetY, ci);
+
         // Render edges (behind nodes) — independent routing after final positions
         sb.AppendLine("  <!-- Edges -->");
         RouteEdges(sb, realEdges, nodes, layers, offsetX, offsetY, ci);
@@ -1506,6 +1514,85 @@ internal class FlowchartService
 
         sb.AppendLine("</svg>");
         return sb.ToString();
+    }
+
+    // ── Special group boxes ────────────────────────────────────────────
+    // Nodes sharing a non-null Special value get grouped under a rounded
+    // background rect + label. Parent IllustrationTask (also carrying Special)
+    // is included in the group so the checkpoint task sits visually with its
+    // sub-tasks. CardStack groups usually have a single node — still get a
+    // subtle box so the minigame nature is visible at a glance.
+    private static void RenderSpecialGroups(StringBuilder sb, Dictionary<string, FNode> nodes,
+        double ox, double oy, CultureInfo ci)
+    {
+        var groups = nodes.Values
+            .Where(n => !n.IsDummy && !string.IsNullOrEmpty(n.Special))
+            .GroupBy(n => n.Special, StringComparer.Ordinal)
+            .ToList();
+        if (groups.Count == 0) return;
+
+        sb.AppendLine("  <!-- Minigame group boxes -->");
+
+        // Pastel accent color per theme (falls through to a neutral gold if unknown).
+        string ThemeColor(string theme) => theme switch
+        {
+            "Dollhouse"   => "#F4A8C2",  // rose pink
+            "Painting"    => "#B7A4E0",  // lavender
+            "Perfumery"   => "#E6C34D",  // amber gold
+            "Card"        => "#E85D5D",  // deep red
+            "Book"        => "#6FA7D9",  // cornflower blue
+            "SpyNotes"    => "#8FBF7F",  // sage green
+            _             => "#C9A96E",  // fallback warm tan
+        };
+
+        const double padX = 14;
+        const double padY = 16;
+        const double labelH = 22;
+        const double corner = 14;
+
+        foreach (var g in groups)
+        {
+            var theme = g.Key!;
+            double minX = g.Min(n => n.X);
+            double minY = g.Min(n => n.Y);
+            double maxX = g.Max(n => n.X + n.Width);
+            double maxY = g.Max(n => n.Y + n.Height);
+
+            double bx = minX - padX + ox;
+            double by = minY - padY - labelH + oy;
+            double bw = (maxX - minX) + padX * 2;
+            double bh = (maxY - minY) + padY * 2 + labelH;
+
+            string color = ThemeColor(theme);
+
+            // Rounded rect: ~12% fill + 70% border, soft look.
+            sb.AppendLine($"  <g class=\"minigame-group\" data-theme=\"{Esc(theme)}\">");
+            sb.AppendLine(
+                $"    <rect x=\"{bx.ToString(ci)}\" y=\"{by.ToString(ci)}\" " +
+                $"width=\"{bw.ToString(ci)}\" height=\"{bh.ToString(ci)}\" " +
+                $"rx=\"{corner.ToString(ci)}\" ry=\"{corner.ToString(ci)}\" " +
+                $"fill=\"{color}\" fill-opacity=\"0.12\" " +
+                $"stroke=\"{color}\" stroke-opacity=\"0.70\" stroke-width=\"1.5\" " +
+                $"stroke-dasharray=\"6 4\" />");
+
+            // Label pill in the top-left corner, above the border line.
+            double labelPadX = 10;
+            double labelY = by + 3;
+            double labelPillH = labelH - 6;
+            string labelText = $"Minigame: {theme}";
+            double labelW = labelText.Length * 7.2 + labelPadX * 2;
+            sb.AppendLine(
+                $"    <rect x=\"{(bx + 10).ToString(ci)}\" y=\"{labelY.ToString(ci)}\" " +
+                $"width=\"{labelW.ToString(ci)}\" height=\"{labelPillH.ToString(ci)}\" " +
+                $"rx=\"{(labelPillH / 2).ToString(ci)}\" ry=\"{(labelPillH / 2).ToString(ci)}\" " +
+                $"fill=\"{color}\" fill-opacity=\"0.92\" />");
+            sb.AppendLine(
+                $"    <text x=\"{(bx + 10 + labelPadX).ToString(ci)}\" y=\"{(labelY + labelPillH * 0.72).ToString(ci)}\" " +
+                $"font-family=\"'Trebuchet MS', Arial, sans-serif\" font-size=\"11\" font-weight=\"bold\" fill=\"#FFFFFF\">" +
+                $"{Esc(labelText)}</text>");
+            sb.AppendLine("  </g>");
+        }
+        sb.AppendLine();
     }
 
     private static void RenderNode(StringBuilder sb, FNode n, double ox, double oy,

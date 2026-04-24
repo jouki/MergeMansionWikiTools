@@ -473,4 +473,98 @@ public partial class ImageExtractorPage : UserControl
         extractInfoBar.Severity = severity;
         extractInfoBar.IsOpen = true;
     }
+
+    // ── Minigame Icons ─────────────────────────────────────────────
+    // Extracts minigame task icons (Dollhouse/Painting/Perfumery/Card/Book/SpyNotes,
+    // plus any future themes) from Unity bundles. Themes are enumerated dynamically
+    // from SharedGameConfig (see MinigameIconExtractor.DiscoverThemesFromConfig).
+    private async void BtnExtractMinigameIcons_Click(object sender, RoutedEventArgs e)
+    {
+        if (_detectedVersionDir == null)
+        {
+            ShowMinigameIconsInfo("No game version detected. Select one in Settings first.", InfoBarSeverity.Error);
+            return;
+        }
+
+        // Game Files path has two subfolders: APK/ (local APK bundles) and Server/ (addressables).
+        var gameFilesRoot = Path.Combine(_detectedVersionDir, "Game Files");
+        if (!Directory.Exists(Path.Combine(gameFilesRoot, "APK")) && !Directory.Exists(Path.Combine(gameFilesRoot, "Server")))
+        {
+            ShowMinigameIconsInfo($"Expected APK/ or Server/ under {gameFilesRoot}. Run 'Extract Images' first to populate bundles.", InfoBarSeverity.Error);
+            return;
+        }
+
+        var outputDir = Path.Combine(_detectedVersionDir, "MinigameIcons");
+        var workspace = _main.Settings.ImageExporterBasePath;
+        if (string.IsNullOrEmpty(workspace) || !Directory.Exists(workspace))
+            workspace = _detectedVersionDir;
+
+        btnExtractMinigameIcons.IsEnabled = false;
+        minigameIconsInfoBar.IsOpen = false;
+        txtMinigameIconsProgress.Text = "Preparing...";
+
+        try
+        {
+            var tpkPath = await AssetExtractionService.EnsureTpkAsync(
+                workspace,
+                status => Dispatcher.Invoke(() => txtMinigameIconsProgress.Text = status),
+                default);
+
+            // Dynamically discover themes from SharedGameConfig. Falls back to known set
+            // if config is not loaded in this session.
+            var themes = DiscoverThemesFromMain();
+            if (themes.Count == 0)
+            {
+                themes = new List<string> { "Dollhouse", "Painting", "Perfumery", "Card", "Book", "SpyNotes" };
+                ShowMinigameIconsInfo("No config loaded — using known 26.03.01 theme set as fallback.", InfoBarSeverity.Warning);
+            }
+
+            txtMinigameIconsProgress.Text = $"Extracting {themes.Count} themes...";
+
+            var result = await MinigameIconExtractor.ExtractAsync(
+                gameFilesRoot, outputDir, tpkPath, themes,
+                new Progress<string>(s => Dispatcher.Invoke(() => txtMinigameIconsProgress.Text = s))
+            );
+
+            txtMinigameIconsProgress.Text = "";
+            var msg = $"Extracted {result.Extracted}/{themes.Count} icons → {outputDir}";
+            if (result.Missing > 0)
+                msg += $"\n{result.Missing} theme(s) missing. Check logs.";
+            txtMinigameIconsPath.Text = outputDir;
+
+            var severity = result.Missing > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success;
+            ShowMinigameIconsInfo(msg, severity);
+        }
+        catch (Exception ex)
+        {
+            txtMinigameIconsProgress.Text = "";
+            ShowMinigameIconsInfo($"Extraction failed: {ex.Message}", InfoBarSeverity.Error);
+        }
+        finally
+        {
+            btnExtractMinigameIcons.IsEnabled = true;
+        }
+    }
+
+    private List<string> DiscoverThemesFromMain()
+    {
+        // DataService can hold a parsed SharedGameConfig reference when the app has run a dump.
+        // If not available, fall through to empty list (caller uses hardcoded fallback).
+        try
+        {
+            var configProp = typeof(MainWindow).GetProperty("SharedGameConfig");
+            var config = configProp?.GetValue(_main);
+            if (config != null)
+                return MinigameIconExtractor.DiscoverThemesFromConfig(config);
+        }
+        catch { }
+        return new List<string>();
+    }
+
+    private void ShowMinigameIconsInfo(string message, InfoBarSeverity severity)
+    {
+        minigameIconsInfoBar.Message = message;
+        minigameIconsInfoBar.Severity = severity;
+        minigameIconsInfoBar.IsOpen = true;
+    }
 }

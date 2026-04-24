@@ -134,6 +134,37 @@
                     <ui:InfoBar x:Name="extractInfoBar" IsOpen="False" IsClosable="True"
                                 Margin="16,0,16,12" />
 
+                    <!-- ── Separator ────────────────────────────────── -->
+                    <Separator Opacity="0.15" Margin="0" />
+
+                    <!-- ── Minigame Icons ─────────────────────────────────── -->
+                    <TextBlock Text="Minigame Icons" FontSize="13" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                               Margin="16,14,16,6" />
+                    <TextBlock Text="Extracts task-list icons for special minigames (Dollhouse, Painting, Perfumery, Card, Book, SpyNotes) directly from the game's Unity asset bundles. Themes are discovered dynamically from SharedGameConfig."
+                               FontSize="11" TextWrapping="Wrap"
+                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                               Margin="16,0,16,8" />
+                    <TextBlock x:Name="txtMinigameIconsPath" FontSize="11"
+                               Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                               Margin="16,0,16,8" TextWrapping="Wrap" />
+                    <Grid Margin="16,0,16,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <ui:Button x:Name="btnExtractMinigameIcons" Grid.Column="0"
+                                   Content="Extract Minigame Icons" Appearance="Primary"
+                                   Height="38" Padding="20,0"
+                                   Click="BtnExtractMinigameIcons_Click" />
+                        <TextBlock x:Name="txtMinigameIconsProgress" Grid.Column="1"
+                                   FontSize="12" VerticalAlignment="Center"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                   Margin="12,0,0,0" TextWrapping="Wrap" />
+                    </Grid>
+                    <ui:InfoBar x:Name="minigameIconsInfoBar" IsOpen="False" IsClosable="True"
+                                Margin="16,0,16,12" />
+
                 </StackPanel>
             </Border>
 

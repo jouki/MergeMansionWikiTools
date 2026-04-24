@@ -27,6 +27,10 @@ public class LuaTask
     public string? ItemReward { get; set; }
     public string? UnlockDate { get; set; }
     public Dictionary<string, int> TokenValues { get; set; } = new();
+    // Theme marker for special minigame tasks (IllustrationTask + CardStack).
+    // Values from game data: "Dollhouse", "Painting", "Perfumery", "Card", "Book", "SpyNotes".
+    // Present on both parent (IllustrationTask) and all sub-tasks sharing the table.
+    public string? Special { get; set; }
 }
 
 // Internal helper — keeps task relationships during parsing
@@ -43,6 +47,7 @@ internal class TaskNode
     public string? ItemReward { get; set; }
     public string? UnlockDate { get; set; }
     public Dictionary<string, int> TokenValues { get; set; } = new();
+    public string? Special { get; set; }
 }
 
 // ── Service ──────────────────────────────────────────────────────────
@@ -132,7 +137,8 @@ public class AreasService
         int? XpReward,
         string? ItemReward,
         string? UnlockDate,
-        Dictionary<string, int> TokenValues);
+        Dictionary<string, int> TokenValues,
+        string? Special);
 
     private static Dictionary<string, HotspotInfo> BuildHotspotsLookup(JsonElement areaEl)
     {
@@ -152,7 +158,9 @@ public class AreasService
             var (xp, item) = ParseHotspotRewards(hs);
             var unlockDate = ParseTimeNeeded(hs, "UnlockRequirementsList");
             var tokens = ParseTokenValues(hs);
-            result[id] = new HotspotInfo(desc, reqs, xp, item, unlockDate, tokens);
+            var special = GetStr(hs, "Theme");
+            result[id] = new HotspotInfo(desc, reqs, xp, item, unlockDate, tokens,
+                string.IsNullOrEmpty(special) ? null : special);
         }
 
         return result;
@@ -433,7 +441,8 @@ public class AreasService
                 XpReward = hs?.XpReward,
                 ItemReward = hs?.ItemReward,
                 UnlockDate = hs?.UnlockDate,
-                TokenValues = hs?.TokenValues ?? new()
+                TokenValues = hs?.TokenValues ?? new(),
+                Special = hs?.Special
             };
 
             byDotIndex[dotIdx] = node;
@@ -502,7 +511,8 @@ public class AreasService
                 XpReward = n.XpReward,
                 ItemReward = n.ItemReward,
                 UnlockDate = n.UnlockDate,
-                TokenValues = n.TokenValues
+                TokenValues = n.TokenValues,
+                Special = n.Special
             })
             .ToList();
     }

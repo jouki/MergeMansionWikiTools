@@ -159,6 +159,9 @@ public class LuaGeneratorService
             sb.Append($"{p2}id = \"{Esc(task.Id)}\",\n");
             sb.Append($"{p2}desc = \"{Esc(task.Title)}\",");
 
+            if (!string.IsNullOrEmpty(task.Special))
+                sb.Append($"\n{p2}special = \"{Esc(task.Special)}\",");
+
             if (!string.IsNullOrEmpty(task.UnlockDate))
                 sb.Append($"\n{p2}unlock = \"{Esc(task.UnlockDate)}\",");
 
@@ -413,7 +416,258 @@ public class LuaGeneratorService
         int DropsPerCharge,
         long ChargeTimeMs,
         Dictionary<string, int>? Fuels,
-        string? FueledResult);
+        string? FueledResult,
+        /// <summary>Single-use drop target ItemType (cycles=1 Constant drop, consumed). Filtered by main-source trump + same-chain.</summary>
+        string? SingleUseDrop,
+        /// <summary>Decay target ItemType (DecayFeatures or DecayAfterLastCycle Constant). Filtered by main-source trump + same-chain.</summary>
+        string? DecayInto,
+        /// <summary>Multi-target decay odds map (ControlledRandom targets → probability). Used by Markov cycle solver. No filtering.</summary>
+        Dictionary<string, double>? DecayOdds);
+
+    /// <summary>
+    /// True iff the item is a "truly infinite producer" — stable main source for its drops/spawns.
+    /// Rule: cycles == -1 AND DecayAfterLastCycleProducer field absent in JSON.
+    /// </summary>
+    private static bool IsTrulyInfiniteProducer(ParsedItem item)
+    {
+        if (item.IsGenerator
+            && item.ActivationHowManyCycles == -1
+            && !item.HasDecayAfterLastCycleField)
+            return true;
+        if (item.IsSpawner
+            && item.SpawnHowManyCycles == -1
+            && !item.DecaysWhenCyclesAreDone)
+            return true;
+        return false;
+    }
+
+    /// <summary>
+    /// Lookup chain (DisplayName) that contains a given ItemType. For same-chain filter.
+    /// Skips Test-tagged items so they can't be referenced as legitimate sources.
+    /// </summary>
+    private static Dictionary<string, string> BuildItemToChainMap(List<ParsedChain> chains)
+    {
+        var map = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var chain in chains)
+            foreach (var item in chain.Items)
+                if (!string.IsNullOrEmpty(item.ItemType) && !item.IsTestTag)
+                    map.TryAdd(item.ItemType, chain.DisplayName);
+        return map;
+    }
+
+    /// <summary>
+    /// Transitive closure of "permanent-reachable" chains starting from chains with a truly-infinite
+    /// producer. A chain becomes permanent if any permanent chain has a cross-chain relation into it
+    /// (Constant drop/decay/spawn, or stochastic output from a truly-infinite producer).
+    /// Used to prioritise real merge-game paths over event-only / temporary producers when choosing
+    /// the cheapest source for a target.
+    /// </summary>
+    private static HashSet<string> BuildPermanentChains(
+        List<ParsedChain> chains, Dictionary<string, string> itemToChain)
+    {
+        var seeds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var chain in chains)
+            if (chain.Items.Any(it => !it.IsTestTag && IsTrulyInfiniteProducer(it)))
+                seeds.Add(chain.DisplayName);
+
+        var edges = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
+
+        void AddEdge(string srcChain, string? tgtItem)
+        {
+            if (string.IsNullOrEmpty(tgtItem)) return;
+            if (!itemToChain.TryGetValue(tgtItem, out var tgtChain)) return;
+            if (string.Equals(srcChain, tgtChain, StringComparison.OrdinalIgnoreCase)) return;
+            if (!edges.TryGetValue(srcChain, out var set))
+                edges[srcChain] = set = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            set.Add(tgtChain);
+        }
+
+        foreach (var chain in chains)
+        {
+            foreach (var item in chain.Items)
+            {
+                if (item.IsTestTag) continue;
+                bool isInf = IsTrulyInfiniteProducer(item);
+
+                // Drops — all keys if truly-infinite; only Constant (single ≥99.9%) otherwise
+                if (item.DropOdds != null)
+                {
+                    if (isInf) foreach (var k in item.DropOdds.Keys) AddEdge(chain.DisplayName, k);
+                    else if (item.DropOdds is { Count: 1 } d && d.First().Value >= 99.9)
+                        AddEdge(chain.DisplayName, d.First().Key);
+                }
+                // Spawns — same rule
+                if (item.SpawnOdds != null)
+                {
+                    if (isInf) foreach (var k in item.SpawnOdds.Keys) AddEdge(chain.DisplayName, k);
+                    else if (item.SpawnOdds is { Count: 1 } s && s.First().Value >= 99.9)
+                        AddEdge(chain.DisplayName, s.First().Key);
+                }
+                AddEdge(chain.DisplayName, item.SpawnItemType);
+                AddEdge(chain.DisplayName, item.DecayIntoItemType);
+                AddEdge(chain.DisplayName, item.DecayAfterLastCycleItemType);
+                AddEdge(chain.DisplayName, item.SpawnDecayIntoItemType);
+            }
+        }
+
+        var result = new HashSet<string>(seeds, StringComparer.OrdinalIgnoreCase);
+        var queue = new Queue<string>(seeds);
+        while (queue.Count > 0)
+        {
+            var c = queue.Dequeue();
+            if (!edges.TryGetValue(c, out var targets)) continue;
+            foreach (var t in targets)
+                if (result.Add(t)) queue.Enqueue(t);
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// Computes item level in L1 equivalents (= 2^(level-1)).
+    /// </summary>
+    private static double L1CountByLevel(int level) => level > 0 ? Math.Pow(2, level - 1) : 1;
+
+    /// <summary>
+    /// For each target ItemType, finds the source chain with MINIMUM cost per 1 target_L1 (cheapest-source filter).
+    /// Cost = sourceItem L1 equivalents / (targetLevel L1 equivalents × dropsPerCharge).
+    /// Resolves the "Shrapnel should come from Vase L1 (cheap), not Bottle L8 (128× L1 expensive)" issue.
+    /// Permanent-chain priority: a permanent-reachable source trumps non-permanent one regardless of cost —
+    /// prevents event-only / standalone chains from being picked just because they happen to tie on per-cycle cost.
+    /// Considers only direct (1-hop) relations — multi-hop cascades in wiki Lua BFS follow whichever chain emits the relation.
+    /// </summary>
+    private static Dictionary<string, string> BuildBestSourceChainMap(
+        List<ParsedChain> chains, Dictionary<string, string> itemToChain, HashSet<string> permanentChains)
+    {
+        // target ItemType → (minCost, chainDisplayName, isPermanent)
+        var best = new Dictionary<string, (double cost, string chain, bool isPerm)>(StringComparer.OrdinalIgnoreCase);
+
+        void Consider(string target, double cost, string chain)
+        {
+            if (string.IsNullOrEmpty(target) || string.IsNullOrEmpty(chain)) return;
+            bool isPerm = permanentChains.Contains(chain);
+            if (!best.TryGetValue(target, out var cur))
+            {
+                best[target] = (cost, chain, isPerm);
+                return;
+            }
+            // Permanent source always trumps non-permanent, regardless of cost
+            if (cur.isPerm && !isPerm) return;
+            if (isPerm && !cur.isPerm) { best[target] = (cost, chain, isPerm); return; }
+            // Same perm status → cheapest wins
+            if (cost < cur.cost) best[target] = (cost, chain, isPerm);
+        }
+
+        int TargetLevel(string itemType)
+        {
+            // Extract level from ItemType suffix "_NN" if present
+            var idx = itemType.LastIndexOf('_');
+            if (idx > 0 && int.TryParse(itemType.AsSpan(idx + 1), out var lvl)) return lvl;
+            return 1;
+        }
+
+        foreach (var chain in chains)
+        {
+            foreach (var item in chain.Items)
+            {
+                if (string.IsNullOrEmpty(item.ItemType) || item.IsTestTag) continue;
+                double srcL1 = L1CountByLevel(item.Level);
+
+                // Single-use drop (cycles != -1 OR DecayAfterLastCycle field present, Constant drop ≥99.9%)
+                bool isSingleUseGen = item.IsGenerator
+                    && (item.ActivationHowManyCycles != -1 || item.HasDecayAfterLastCycleField);
+                if (isSingleUseGen && item.DropOdds is { Count: 1 } odds && odds.First().Value >= 99.9)
+                {
+                    var target = odds.First().Key;
+                    if (!string.Equals(itemToChain.GetValueOrDefault(target), chain.DisplayName, StringComparison.OrdinalIgnoreCase))
+                    {
+                        double tgtL1 = L1CountByLevel(TargetLevel(target));
+                        int drops = item.HowManyGeneratedInCycle > 0 ? item.HowManyGeneratedInCycle : 1;
+                        double cost = srcL1 / (tgtL1 * drops);
+                        Consider(target, cost, chain.DisplayName);
+                    }
+                }
+
+                // Decay (DecayFeatures.ItemProducer Constant)
+                if (item.HasDecay && !string.IsNullOrEmpty(item.DecayIntoItemType))
+                {
+                    var target = item.DecayIntoItemType;
+                    if (!string.Equals(itemToChain.GetValueOrDefault(target), chain.DisplayName, StringComparison.OrdinalIgnoreCase))
+                    {
+                        double tgtL1 = L1CountByLevel(TargetLevel(target));
+                        double cost = srcL1 / tgtL1;
+                        Consider(target, cost, chain.DisplayName);
+                    }
+                }
+
+                // Decay-after-last-cycle Constant (only when item is NOT truly infinite)
+                if (item.IsGenerator && !string.IsNullOrEmpty(item.DecayAfterLastCycleItemType)
+                    && !IsTrulyInfiniteProducer(item))
+                {
+                    var target = item.DecayAfterLastCycleItemType;
+                    if (!string.Equals(itemToChain.GetValueOrDefault(target), chain.DisplayName, StringComparison.OrdinalIgnoreCase))
+                    {
+                        double tgtL1 = L1CountByLevel(TargetLevel(target));
+                        double cost = srcL1 / tgtL1;
+                        Consider(target, cost, chain.DisplayName);
+                    }
+                }
+
+                // Spawner — finite/depleting spawner with Constant spawn target
+                bool isFiniteSpawner = item.IsSpawner
+                    && (item.SpawnHowManyCycles != -1 || item.DecaysWhenCyclesAreDone);
+                if (isFiniteSpawner && !string.IsNullOrEmpty(item.SpawnItemType))
+                {
+                    var target = item.SpawnItemType;
+                    if (!string.Equals(itemToChain.GetValueOrDefault(target), chain.DisplayName, StringComparison.OrdinalIgnoreCase))
+                    {
+                        double tgtL1 = L1CountByLevel(TargetLevel(target));
+                        int drops = item.SpawnAmountInCycle > 0 ? item.SpawnAmountInCycle : 1;
+                        double cost = srcL1 / (tgtL1 * drops);
+                        Consider(target, cost, chain.DisplayName);
+                    }
+                }
+
+                // Spawner decay (SpawnFeatures.DecayProducer Constant)
+                if (item.IsSpawner && !string.IsNullOrEmpty(item.SpawnDecayIntoItemType))
+                {
+                    var target = item.SpawnDecayIntoItemType;
+                    if (!string.Equals(itemToChain.GetValueOrDefault(target), chain.DisplayName, StringComparison.OrdinalIgnoreCase))
+                    {
+                        double tgtL1 = L1CountByLevel(TargetLevel(target));
+                        double cost = srcL1 / tgtL1;
+                        Consider(target, cost, chain.DisplayName);
+                    }
+                }
+            }
+        }
+
+        return best.ToDictionary(kv => kv.Key, kv => kv.Value.chain, StringComparer.OrdinalIgnoreCase);
+    }
+
+    /// <summary>
+    /// Collects target ItemTypes that have a truly-infinite producer (stable main source).
+    /// Used to filter out "temporary" producers (single-use drops, decay) when a stable source exists.
+    /// Includes stochastic drops from infinite producers (e.g. Toolbox drops Screws at 3-9% per merge
+    /// but it's still the designed source) — transient single-use finite gens never reach this list because
+    /// IsTrulyInfiniteProducer already filters them out.
+    /// </summary>
+    private static HashSet<string> BuildMainSourceTargets(List<ParsedChain> chains)
+    {
+        var targets = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var chain in chains)
+            foreach (var item in chain.Items)
+            {
+                if (item.IsTestTag) continue;
+                if (!IsTrulyInfiniteProducer(item)) continue;
+                if (item.DropOdds != null)
+                    foreach (var k in item.DropOdds.Keys) targets.Add(k);
+                if (item.SpawnOdds != null)
+                    foreach (var k in item.SpawnOdds.Keys) targets.Add(k);
+                if (!string.IsNullOrEmpty(item.SpawnItemType))
+                    targets.Add(item.SpawnItemType);
+            }
+        return targets;
+    }
 
     private static List<FlatItem> BuildFlatItems(List<ParsedChain> chains, bool useRawNames = false)
     {
@@ -423,6 +677,14 @@ public class LuaGeneratorService
             foreach (var item in chain.Items)
                 if (!string.IsNullOrEmpty(item.NumericConfigKey) && !string.IsNullOrEmpty(item.ItemType))
                     configKeyToItemType.TryAdd(item.NumericConfigKey, item.ItemType);
+
+        // Main-source trump rule: targets with stable infinite producer skip temporary (single-use/decay) relations
+        var mainSourceTargets = BuildMainSourceTargets(chains);
+        var itemToChain = BuildItemToChainMap(chains);
+        // Permanent-reachable chains (transitive closure from truly-infinite seeds)
+        var permanentChains = BuildPermanentChains(chains, itemToChain);
+        // Cheapest-source filter: prefer permanent sources, then minimum L1 cost
+        var bestSourceMap = BuildBestSourceChainMap(chains, itemToChain, permanentChains);
 
         var list = new List<FlatItem>();
         foreach (var chain in chains)
@@ -434,7 +696,7 @@ public class LuaGeneratorService
 
             foreach (var item in chain.Items)
             {
-                if (string.IsNullOrEmpty(item.ItemType) || item.IsAlias) continue;
+                if (string.IsNullOrEmpty(item.ItemType) || item.IsAlias || item.IsTestTag) continue;
                 // Resolve generator fields — primary (ActivationFeatures) or secondary (SpawnFeatures)
                 int? skipPrice = null;
                 long rechargeTime = 0;
@@ -476,6 +738,70 @@ public class LuaGeneratorService
                     fueledResult = item.SinkRewardItemType;
                 }
 
+                // ── Consumption relations (single-use drop + decay) with main-source trump + same-chain filter ──
+                string? singleUseDrop = null;
+                string? decayInto = null;
+
+                // Single-use drop: generator with finite cycles OR stable-destruct via DecayAfterLastCycle=Empty.
+                // Constant drop target only (ControlledRandom → future phase with statistical average).
+                bool isSingleUseGenerator = item.IsGenerator
+                    && (item.ActivationHowManyCycles != -1 || item.HasDecayAfterLastCycleField);
+                if (isSingleUseGenerator
+                    && item.DropOdds is { Count: 1 } odds
+                    && odds.First().Value >= 99.9) // Constant (single key with ~100% odds)
+                {
+                    var target = odds.First().Key;
+                    if (!mainSourceTargets.Contains(target)
+                        && itemToChain.TryGetValue(target, out var targetChain)
+                        && !string.Equals(targetChain, chain.DisplayName, StringComparison.OrdinalIgnoreCase))
+                    {
+                        // Cheapest-source filter: only emit if THIS chain is the cheapest source of the target
+                        if (bestSourceMap.TryGetValue(target, out var bestSingle)
+                            && string.Equals(bestSingle, chain.DisplayName, StringComparison.OrdinalIgnoreCase))
+                            singleUseDrop = target;
+                    }
+                }
+
+                // Spawner single-use drop: finite/depleting spawner with Constant SpawnItemType
+                // (equivalent semantic to generator single-use drop)
+                bool isFiniteSpawnerItem = item.IsSpawner
+                    && (item.SpawnHowManyCycles != -1 || item.DecaysWhenCyclesAreDone);
+                if (singleUseDrop == null && isFiniteSpawnerItem && !string.IsNullOrEmpty(item.SpawnItemType))
+                {
+                    var target = item.SpawnItemType;
+                    if (!mainSourceTargets.Contains(target)
+                        && itemToChain.TryGetValue(target, out var spawnTargetChain)
+                        && !string.Equals(spawnTargetChain, chain.DisplayName, StringComparison.OrdinalIgnoreCase))
+                    {
+                        if (bestSourceMap.TryGetValue(target, out var bestSpawn)
+                            && string.Equals(bestSpawn, chain.DisplayName, StringComparison.OrdinalIgnoreCase))
+                            singleUseDrop = target;
+                    }
+                }
+
+                // Decay into: DecayFeatures.ItemProducer Constant (from DecayIntoItemType) OR
+                // DecayAfterLastCycle Constant (when item is NOT truly infinite) OR
+                // SpawnFeatures.DecayProducer Constant (SpawnDecayIntoItemType)
+                string? decayCandidate = null;
+                if (item.HasDecay && !string.IsNullOrEmpty(item.DecayIntoItemType))
+                    decayCandidate = item.DecayIntoItemType;
+                else if (item.IsGenerator && !string.IsNullOrEmpty(item.DecayAfterLastCycleItemType)
+                         && !IsTrulyInfiniteProducer(item))
+                    decayCandidate = item.DecayAfterLastCycleItemType;
+                else if (item.IsSpawner && !string.IsNullOrEmpty(item.SpawnDecayIntoItemType))
+                    decayCandidate = item.SpawnDecayIntoItemType;
+
+                if (!string.IsNullOrEmpty(decayCandidate)
+                    && !mainSourceTargets.Contains(decayCandidate)
+                    && itemToChain.TryGetValue(decayCandidate, out var decayChain)
+                    && !string.Equals(decayChain, chain.DisplayName, StringComparison.OrdinalIgnoreCase))
+                {
+                    // Cheapest-source filter: only emit if THIS chain is the cheapest source of the target
+                    if (bestSourceMap.TryGetValue(decayCandidate, out var bestDecay)
+                        && string.Equals(bestDecay, chain.DisplayName, StringComparison.OrdinalIgnoreCase))
+                        decayInto = decayCandidate;
+                }
+
                 list.Add(new FlatItem(
                     item.ItemType,
                     item.Name,
@@ -496,7 +822,10 @@ public class LuaGeneratorService
                     dropsPerCharge,
                     chargeTime,
                     fuels,
-                    fueledResult));
+                    fueledResult,
+                    singleUseDrop,
+                    decayInto,
+                    item.DecayAfterLastCycleOdds));
             }
         }
         return list;
@@ -551,6 +880,24 @@ public class LuaGeneratorService
                 sb.Append("}, ");
                 if (!string.IsNullOrEmpty(it.FueledResult))
                     sb.Append($"fueledResult = \"{Esc(it.FueledResult)}\", ");
+            }
+
+            // Consumption relations (Phase 1: single-use drop + decay, filtered by main-source trump + same-chain)
+            if (!string.IsNullOrEmpty(it.SingleUseDrop))
+                sb.Append($"singleUseDrop = \"{Esc(it.SingleUseDrop)}\", ");
+            if (!string.IsNullOrEmpty(it.DecayInto))
+                sb.Append($"decayInto = \"{Esc(it.DecayInto)}\", ");
+
+            // Multi-target decay odds (for Markov cycle solver — no filtering, raw transition probabilities)
+            if (it.DecayOdds is { Count: > 0 } decayOdds)
+            {
+                var orderedDecay = decayOdds
+                    .OrderByDescending(kv => kv.Value)
+                    .ThenBy(kv => kv.Key, StringComparer.Ordinal);
+                sb.Append("decayOdds = {");
+                sb.Append(string.Join(", ", orderedDecay.Select(kv =>
+                    $"{{id = \"{Esc(kv.Key)}\", value = {kv.Value.ToString(CultureInfo.InvariantCulture)}}}")));
+                sb.Append("}, ");
             }
 
             // odds

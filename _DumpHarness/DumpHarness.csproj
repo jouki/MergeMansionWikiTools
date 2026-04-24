@@ -10,4 +10,9 @@
     <ProjectReference Include="..\External\merge-mansion-dumper\merge-mansion-dumper.csproj" />
     <ProjectReference Include="..\External\merge-mansion-api\merge-mansion-api.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AssetsTools.NET.Addressables" Version="3.0.2" />
+    <PackageReference Include="AssetsTools.NET.Texture" Version="3.0.2" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
+  </ItemGroup>
 </Project>
