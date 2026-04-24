@@ -9,7 +9,7 @@
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <SelfContained>true</SelfContained>
     <ApplicationIcon>Assets\AppLogo.ico</ApplicationIcon>
-    <DefaultItemExcludes>$(DefaultItemExcludes);External\**;Tests\**</DefaultItemExcludes>
+    <DefaultItemExcludes>$(DefaultItemExcludes);External\**;Tests\**;_DumpHarness\**</DefaultItemExcludes>
     <InformationalVersion>0.17.1+$([System.DateTime]::UtcNow.ToString("yyyyMMdd-HHmm"))</InformationalVersion>
   </PropertyGroup>
 

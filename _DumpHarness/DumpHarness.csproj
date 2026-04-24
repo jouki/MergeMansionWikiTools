@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <AssemblyName>DumpHarness</AssemblyName>
+    <RootNamespace>DumpHarness</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\External\merge-mansion-dumper\merge-mansion-dumper.csproj" />
+    <ProjectReference Include="..\External\merge-mansion-api\merge-mansion-api.csproj" />
+  </ItemGroup>
+</Project>

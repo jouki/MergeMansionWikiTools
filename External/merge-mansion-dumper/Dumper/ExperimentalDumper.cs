@@ -50,28 +50,57 @@ namespace merge_mansion_dumper.Dumper
             var result = new Dictionary<string, object>();
 
             // ── 0. SharedGlobals ──────────────────────────────────────────
+            // Structured dump: serialize each property via the full JsonSerializer chain
+            // (handles F64, MetaDuration, and nested complex types like SpeedUpCostBehavior).
+            // Complex types with no custom converter fall through to Json.NET default
+            // object serialization — we get public properties with values instead of just
+            // the type name.
             var globals = config.SharedGlobals;
             if (globals != null)
             {
                 var globalsData = new Dictionary<string, object>();
+                var globalsSettings = CreateSettings(config);
+                // ReferenceLoopHandling.Ignore prevents crashes on self-referential properties
+                // (e.g. GameConfigKeyValue<T>.Member returns 'this').
+                globalsSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 
-                // Dump all properties via reflection
                 var props = globals.GetType().GetProperties(
-                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                    BindingFlags.Public | BindingFlags.Instance);
                 foreach (var p in props)
                 {
+                    // Skip the self-reference Member property from GameConfigKeyValue<T>
+                    if (p.Name == "Member" || p.Name == "ConfigKey")
+                        continue;
+
+                    string key = $"{p.Name} ({p.PropertyType.Name})";
                     try
                     {
                         var val = p.GetValue(globals);
-                        if (val != null)
-                            globalsData[$"{p.Name} ({p.PropertyType.Name})"] = val.ToString();
+                        if (val == null)
+                        {
+                            globalsData[key] = null;
+                            Output.Warning($"[SharedGlobals] {p.Name} ({p.PropertyType.Name}) = null");
+                        }
                         else
-                            globalsData[$"{p.Name} ({p.PropertyType.Name})"] = null;
+                        {
+                            // Serialize to JSON token via the configured serializer chain,
+                            // then embed as object so the outer JsonConvert pass emits it inline.
+                            var json = JsonConvert.SerializeObject(val, globalsSettings);
+                            globalsData[key] = Newtonsoft.Json.Linq.JToken.Parse(json);
+                        }
                     }
-                    catch { globalsData[p.Name] = "<error>"; }
+                    catch (Exception ex)
+                    {
+                        globalsData[key] = $"<error: {ex.GetType().Name}: {ex.Message}>";
+                        Output.Error($"[SharedGlobals] Failed to serialize {p.Name} ({p.PropertyType.Name}): {ex.Message}");
+                    }
                 }
 
                 result["SharedGlobals"] = globalsData;
+            }
+            else
+            {
+                Output.Warning("[SharedGlobals] config.SharedGlobals is null — entire entry missing from import.");
             }
 
             // ── 1. DigEvent (Archaeology — combined) ─────────────────────

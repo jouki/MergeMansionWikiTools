@@ -788,7 +788,12 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                         double avgTSP = ComputeWeightedAvgTSP(af.ActivationSpawn);
                         if (avgTSP > 0)
                         {
-                            int cost = (int)Math.Round(amounts[0] * howMany[0] * avgTSP, MidpointRounding.AwayFromZero);
+                            // Game formula: display = ceil(remaining × raw / total).
+                            // At fresh timer reset (remaining == total): display = ceil(raw).
+                            // So "peak display" = Math.Ceiling(raw). Round(raw) underreports
+                            // when fractional part < 0.5 (e.g. Carved Wooden Box: raw 9.186,
+                            // Round=9 but game shows 10 at fresh reset).
+                            int cost = (int)Math.Ceiling(amounts[0] * howMany[0] * avgTSP);
                             return (cost, avgTSP);
                         }
                     }
@@ -803,7 +808,8 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 double avgTSP = ComputeWeightedAvgTSP(sf.Spawn);
                 if (avgTSP > 0)
                 {
-                    int cost = (int)Math.Round(sc.SpawnAmountInCycle * sc.HowManyAreGeneratedPerSpawn * avgTSP, MidpointRounding.AwayFromZero);
+                    // See ActivationFeatures branch for rounding rationale (Ceiling = peak display).
+                    int cost = (int)Math.Ceiling(sc.SpawnAmountInCycle * sc.HowManyAreGeneratedPerSpawn * avgTSP);
                     return (cost, avgTSP);
                 }
             }
