@@ -215,6 +215,9 @@ internal static class DiscordFlowchartService
         IProgress<string>? progress = null)
     {
         await EnsureMappingLoadedAsync();
+        // Discord auto-archives inactive threads — every API write returns 50083 "Thread is archived".
+        // Unarchive once at the start of the batch (idempotent — no-op if already active).
+        await EnsureThreadUnarchivedAsync(botToken, threadId, progress);
         progress?.Report("Reading existing messages…");
         var existingOrdered = await FetchExistingMessagesOrderedAsync(botToken, threadId);
 
@@ -284,6 +287,7 @@ internal static class DiscordFlowchartService
         IProgress<string>? progress = null)
     {
         await EnsureMappingLoadedAsync();
+        await EnsureThreadUnarchivedAsync(botToken, threadId, progress);
         progress?.Report("Reading existing messages…");
         var existing = await FetchExistingMessagesOrderedAsync(botToken, threadId);
 
@@ -450,42 +454,139 @@ internal static class DiscordFlowchartService
     // ── Discord API ──────────────────────────────────────────────────
 
     /// <summary>
-    /// Sends an HTTP request with automatic retry on 429 (rate limit).
-    /// Reads Retry-After header or JSON body for wait duration.
+    /// Unarchives the thread if Discord auto-archived it. Idempotent — sending PATCH with
+    /// archived=false on an already-active thread is a no-op. Without this, every API write
+    /// to an archived thread fails with HTTP 400 / code 50083 ("Thread is archived"), which
+    /// the retry logic would then loop on indefinitely.
+    /// </summary>
+    private static async Task EnsureThreadUnarchivedAsync(
+        string botToken, string threadId, IProgress<string>? progress = null)
+    {
+        try
+        {
+            var payload = JsonSerializer.Serialize(new { archived = false, locked = false });
+            HttpRequestMessage MakeRequest()
+            {
+                var req = new HttpRequestMessage(HttpMethod.Patch, $"{BaseUrl}/channels/{threadId}");
+                req.Headers.Authorization = new AuthenticationHeaderValue("Bot", botToken);
+                req.Content = new StringContent(payload, Encoding.UTF8, "application/json");
+                return req;
+            }
+
+            var response = await SendWithRetryAsync(MakeRequest(), MakeRequest);
+            if (response.IsSuccessStatusCode)
+            {
+                AppLogger.Debug($"[Discord] Thread {threadId} unarchived (or already active)");
+                return;
+            }
+            // Non-success — log body but don't throw; the subsequent edit/create call will surface
+            // the real error if unarchive truly failed (e.g. missing permission).
+            var body = await response.Content.ReadAsStringAsync();
+            AppLogger.Warn($"[Discord] Thread unarchive returned {response.StatusCode}: {body}");
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Warn($"[Discord] Thread unarchive error: {ex.Message}");
+        }
+    }
+
+    // ── Concurrency cap (no time-based throttle) ──
+    // Discord does its own rate limiting via 429 responses. We just cap concurrent in-flight
+    // requests so we don't open arbitrary sockets, and let SendWithRetryAsync honor whatever
+    // retry_after Discord tells us (precisely from body, not the rounded-up header).
+    private static readonly SemaphoreSlim _rateLimitSlots = new(5, 5);
+
+    private static async Task AcquireRateSlotAsync() => await _rateLimitSlots.WaitAsync();
+    private static void ReleaseRateSlot() => _rateLimitSlots.Release();
+
+    /// <summary>
+    /// Sends an HTTP request with automatic retry on 429 (rate limit) + comprehensive
+    /// per-request logging (status, X-RateLimit-* headers, body on error). Throttled to
+    /// 5 starts per second via the global slot semaphore.
     /// </summary>
     private static async Task<HttpResponseMessage> SendWithRetryAsync(
         HttpRequestMessage request, Func<HttpRequestMessage> cloneRequest, int maxRetries = 3)
     {
-        var response = await _http.SendAsync(request);
-
-        for (int attempt = 0; attempt < maxRetries && (int)response.StatusCode == 429; attempt++)
+        await AcquireRateSlotAsync();
+        HttpResponseMessage response;
+        try
         {
-            // Parse retry delay from Retry-After header or JSON body
-            double waitSeconds = 2.0;
-            if (response.Headers.TryGetValues("Retry-After", out var retryValues) &&
-                double.TryParse(retryValues.FirstOrDefault(), out var headerWait))
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            var method = request.Method.Method;
+            var path = request.RequestUri?.AbsolutePath ?? "?";
+            response = await _http.SendAsync(request);
+            sw.Stop();
+            LogDiscordResponse(method, path, response, sw.ElapsedMilliseconds);
+
+            for (int attempt = 0; attempt < maxRetries && (int)response.StatusCode == 429; attempt++)
             {
-                waitSeconds = headerWait;
-            }
-            else
-            {
+                // PREFER body's retry_after (fractional seconds, e.g. 0.338) over the Retry-After
+                // header which Discord rounds up to whole seconds (e.g. 1). Saves ~0.5-1s per retry.
+                double waitSeconds = 1.0;
+                bool fromBody = false;
                 try
                 {
                     var body = await response.Content.ReadAsStringAsync();
                     using var doc = JsonDocument.Parse(body);
                     if (doc.RootElement.TryGetProperty("retry_after", out var ra))
+                    {
                         waitSeconds = ra.GetDouble();
+                        fromBody = true;
+                    }
                 }
-                catch { /* use default */ }
+                catch { /* fall through to header */ }
+
+                if (!fromBody && response.Headers.TryGetValues("Retry-After", out var retryValues) &&
+                    double.TryParse(retryValues.FirstOrDefault(), out var headerWait))
+                    waitSeconds = headerWait;
+
+                // Tiny 50ms cushion only — Discord's retry_after already includes its own buffer.
+                AppLogger.Info($"[Discord] {method} {path}: 429 — waiting {waitSeconds:F3}s {(fromBody ? "(body)" : "(header)")} (attempt {attempt + 1}/{maxRetries})");
+                await Task.Delay(TimeSpan.FromSeconds(waitSeconds) + TimeSpan.FromMilliseconds(50));
+
+                sw.Restart();
+                response = await _http.SendAsync(cloneRequest());
+                sw.Stop();
+                LogDiscordResponse(method, path, response, sw.ElapsedMilliseconds, retryAttempt: attempt + 1);
             }
-
-            AppLogger.Info($"Discord rate limited — waiting {waitSeconds:F1}s (attempt {attempt + 1}/{maxRetries})");
-            await Task.Delay(TimeSpan.FromSeconds(waitSeconds + 0.5));
-
-            response = await _http.SendAsync(cloneRequest());
+        }
+        finally
+        {
+            ReleaseRateSlot();
         }
 
         return response;
+    }
+
+    /// <summary>Logs Discord response — status, rate-limit headers, and body excerpt on error.</summary>
+    private static void LogDiscordResponse(string method, string path,
+        HttpResponseMessage response, long elapsedMs, int? retryAttempt = null)
+    {
+        string Header(string name) =>
+            response.Headers.TryGetValues(name, out var vals) ? (vals.FirstOrDefault() ?? "-") : "-";
+
+        var bucket = Header("X-RateLimit-Bucket");
+        var rlLimit = Header("X-RateLimit-Limit");
+        var rlRemaining = Header("X-RateLimit-Remaining");
+        var rlReset = Header("X-RateLimit-Reset-After");
+        var rlScope = Header("X-RateLimit-Scope");
+        var retryTag = retryAttempt.HasValue ? $" retry#{retryAttempt}" : "";
+
+        var bodyExcerpt = "";
+        if (!response.IsSuccessStatusCode)
+        {
+            try
+            {
+                var body = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                bodyExcerpt = body.Length > 200 ? body.Substring(0, 200) + "…" : body;
+                bodyExcerpt = $" body={bodyExcerpt}";
+            }
+            catch { }
+        }
+
+        AppLogger.Debug(
+            $"[Discord] {method} {path} -> {(int)response.StatusCode} {response.StatusCode}{retryTag} " +
+            $"({elapsedMs}ms) RL[remaining={rlRemaining}/{rlLimit} reset={rlReset}s bucket={bucket} scope={rlScope}]{bodyExcerpt}");
     }
 
     private static async Task<string?> CreateMessageAsync(

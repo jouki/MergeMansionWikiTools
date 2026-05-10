@@ -232,12 +232,25 @@ public class ParsedItem
     public int ActivationHowManyCycles { get; set; } = -1;
     public int StorageMax { get; set; }
     public int MaxCharges { get; set; }
+    /// <summary>
+    /// True when item starts with a pre-filled storage. Determines how to interpret
+    /// `StorageMax` semantically: when true raw StorageMax is the per-cycle drops
+    /// capacity (e.g. Mane Comb 4 drops, Water Bucket 30/cycle); when false items
+    /// start empty and the dumper overrides StorageMax to <c>HowManyCycles × dpc</c>
+    /// as total lifetime drops (e.g. Plain Box 5 total, White Moth 60 total).
+    /// </summary>
+    public bool StartsFull { get; set; }
     public long RechargeTimeMs { get; set; }
     public long MiniChargeCooldownMs { get; set; }
     public long FirstCycleStartDelayMs { get; set; }
     public double TimerSkipMultiplier { get; set; }
     public string? DecayAfterLastCycleItemType { get; set; }
     public Dictionary<string, double>? DecayAfterLastCycleOdds { get; set; }
+    /// <summary>
+    /// True when JSON has DecayAfterLastCycleProducer field at all (even "Empty").
+    /// Used to detect "truly infinite producer" (cycles=-1 AND field absent).
+    /// </summary>
+    public bool HasDecayAfterLastCycleField { get; set; }
 
     // Spawner info
     public bool IsSpawner { get; set; }
@@ -253,9 +266,20 @@ public class ParsedItem
     public string? DecayIntoItemType { get; set; }
     public string? SpawnDecayIntoItemType { get; set; }
 
+    // Chest features — items with ChestFeatures.LootProducer (e.g. Brown Chest, Mystery
+    // Chest, Reward Boxes). Each entry is itemType → drop probability (%).
+    public bool IsChest { get; set; }
+    public Dictionary<string, double>? ChestRewardOdds { get; set; }
+
     // Lua generation extras
     public string Description { get; set; } = "";
     public bool IsTemporary { get; set; }
+
+    /// <summary>True if Tags contains "Test" — dev/placeholder item, exclude from all consumption logic.</summary>
+    public bool IsTestTag { get; set; }
+
+    /// <summary>Full tag list from JSON (e.g. "Repeatable", "DontSellIfOnlyOneOrHighest", "GoesOnTopOfPocket"). Used by table/infobox generators.</summary>
+    public List<string>? Tags { get; set; }
 
     // Sink (Transformative Item)
     public bool IsSink { get; set; }
@@ -269,6 +293,12 @@ public class ParsedItem
     public Dictionary<string, int>? OrderRequiredItems { get; set; }
     /// <summary>ItemType → total amount rewarded across all order tasks</summary>
     public Dictionary<string, int>? OrderRewardItems { get; set; }
+
+    /// <summary>Full task list with per-task odds, weight, requirements, rewards.
+    /// Preserved separately from aggregated OrderRequiredItems/OrderRewardItems so the wiki
+    /// Tasks table generator can render per-task rows (range-collapsing identical tuples
+    /// based on integer slot weights, mimicking Distillation Apparatus wiki style).</summary>
+    public List<ParsedTask>? OrderTasks { get; set; }
 
     /// <summary>Numeric ConfigKey from JSON item (used by SinkFeatures ScoreTargets)</summary>
     public string NumericConfigKey { get; set; } = "";
@@ -305,4 +335,17 @@ public class ParsedItem
 
     // Original definition reference
     public ItemDefinition? Source { get; set; }
+}
+
+/// <summary>Single OrderFeatures task — required items, rewards, and roll odds.
+/// For ControlledRandom: OddsWeight is integer slot count (e.g. 4 = 4 of 15 rotation slots).
+/// For Constant: Odds is the % chance per spawn.</summary>
+public class ParsedTask
+{
+    public double Odds { get; set; }
+    public double OddsWeight { get; set; }
+    /// <summary>Required ItemType → Amount (in declaration order from JSON).</summary>
+    public List<(string ItemType, int Amount)> Required { get; set; } = new();
+    /// <summary>Reward ItemType → Amount (in declaration order from JSON).</summary>
+    public List<(string ItemType, int Amount)> Rewards { get; set; } = new();
 }

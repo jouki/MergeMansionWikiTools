@@ -147,7 +147,8 @@
                         <ui:NumberBox x:Name="nbLevel" Grid.Column="1"
                                       Minimum="1" Maximum="99" SmallChange="1"
                                       SpinButtonPlacementMode="Compact"
-                                      ValueChanged="NbLevel_ValueChanged" />
+                                      ValueChanged="NbLevel_ValueChanged"
+                                      TextChanged="NbLevel_TextChanged" />
                     </Grid>
 
                     <!-- Move wiki page + Move images checkboxes -->
@@ -162,10 +163,16 @@
                                   Unchecked="ChkMovePage_Changed" />
                         <CheckBox x:Name="chkMoveImages"
                                   Content="Move chain images"
-                                  FontSize="12" Margin="0,0,0,10"
+                                  FontSize="12" Margin="0,0,0,4"
                                   IsChecked="True"
                                   Checked="ChkMoveImages_Changed"
                                   Unchecked="ChkMoveImages_Changed" />
+                        <CheckBox x:Name="chkSetAsAlias"
+                                  Content="Set as Alias"
+                                  FontSize="12" Margin="0,0,0,10"
+                                  IsChecked="False"
+                                  Checked="ChkSetAsAlias_Changed"
+                                  Unchecked="ChkSetAsAlias_Changed" />
                     </StackPanel>
 
                     <!-- Conflict panel -->

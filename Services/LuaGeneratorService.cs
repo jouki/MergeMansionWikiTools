@@ -6,7 +6,8 @@ namespace MergeMansionWikiTools.Services;
 
 public record ItemChunksResult(
     List<(string Label, string Lua)> Chunks,
-    int FirstEventChunkIndex);  // 1-based; 0 = no event chunks
+    int FirstEventChunkIndex,                   // 1-based; 0 = no event chunks
+    List<LuaGeneratorService.FlatItem> FlatItems); // Live items used to build the chunks (preserved for chainNames regeneration with archive)
 
 public class LuaGeneratorService
 {
@@ -159,8 +160,8 @@ public class LuaGeneratorService
             sb.Append($"{p2}id = \"{Esc(task.Id)}\",\n");
             sb.Append($"{p2}desc = \"{Esc(task.Title)}\",");
 
-            if (!string.IsNullOrEmpty(task.Special))
-                sb.Append($"\n{p2}special = \"{Esc(task.Special)}\",");
+            if (!string.IsNullOrEmpty(task.Minigame))
+                sb.Append($"\n{p2}minigame = \"{Esc(task.Minigame)}\",");
 
             if (!string.IsNullOrEmpty(task.UnlockDate))
                 sb.Append($"\n{p2}unlock = \"{Esc(task.UnlockDate)}\",");
@@ -285,7 +286,8 @@ public class LuaGeneratorService
             // Single chunk — no splitting needed
             return new ItemChunksResult(
                 new List<(string, string)> { ("", full) },
-                FirstEventChunkIndex: 0);
+                FirstEventChunkIndex: 0,
+                FlatItems: allItems);
         }
 
         // Multi-chunk: split main and event entries separately, then concatenate
@@ -311,7 +313,7 @@ public class LuaGeneratorService
         for (int i = 0; i < eventChunks.Count; i++)
             result.Add(BuildItemChunk(eventChunks[i], result.Count + 1, prefix));
 
-        return new ItemChunksResult(result, firstEventChunkIndex);
+        return new ItemChunksResult(result, firstEventChunkIndex, allItems);
     }
 
     /// <summary>
@@ -396,7 +398,7 @@ public class LuaGeneratorService
         return (chunkNumber.ToString(), sb.ToString());
     }
 
-    private sealed record FlatItem(
+    public sealed record FlatItem(
         string ItemType,
         string Name,
         int Level,
@@ -422,7 +424,9 @@ public class LuaGeneratorService
         /// <summary>Decay target ItemType (DecayFeatures or DecayAfterLastCycle Constant). Filtered by main-source trump + same-chain.</summary>
         string? DecayInto,
         /// <summary>Multi-target decay odds map (ControlledRandom targets → probability). Used by Markov cycle solver. No filtering.</summary>
-        Dictionary<string, double>? DecayOdds);
+        Dictionary<string, double>? DecayOdds,
+        /// <summary>Total HowManyCycles for finite generators/spawners (>0). Used by wiki Lua to compute lifetime maxDrops = dropsPerCharge × cycles. 0 = infinite or unset.</summary>
+        int Cycles);
 
     /// <summary>
     /// True iff the item is a "truly infinite producer" — stable main source for its drops/spawns.
@@ -703,16 +707,43 @@ public class LuaGeneratorService
                 int charges = 0;
                 int dropsPerCharge = 0;
                 long chargeTime = 0;
+                int cycles = 0; // HowManyCycles when finite (>0); 0 means infinite or unset.
 
                 if (item.IsGenerator)
                 {
                     skipPrice = item.SpeedUpCostGems;
                     rechargeTime = item.RechargeTimeMs;
                     int totalDropsPerCharge = item.ActivationAmountInCycle * item.HowManyGeneratedInCycle;
-                    charges = totalDropsPerCharge > 0 && item.StorageMax > 0
+                    int storageCharges = totalDropsPerCharge > 0 && item.StorageMax > 0
                         ? item.StorageMax / totalDropsPerCharge : 0;
+                    // StartsFull-conditional formula matching MetaMergeChainSerializer.
+                    // - sf=true:  raw StorageMax IS per-cycle drops capacity (= reality);
+                    //             charges per cycle = StorageMax/dpc.
+                    //             Examples: Mane Comb (4/1=4), Water Bucket (30/30=1).
+                    // - sf=false: 1 batch-tap per cycle (StorageMax was overridden in
+                    //             dumper to hmc × dpc as total drops).
+                    //             Examples: Plain Box, White Moth, Suitcase.
+                    // - infinite (hmc=-1): keep storageCharges (no cycle cap).
+                    if (item.ActivationHowManyCycles > 0)
+                    {
+                        charges = item.StartsFull
+                            ? Math.Max(1, storageCharges)
+                            : 1;
+                    }
+                    else
+                    {
+                        charges = storageCharges;
+                    }
                     dropsPerCharge = totalDropsPerCharge;
-                    chargeTime = item.FirstCycleStartDelayMs;
+                    // InitialCooldown (FirstCycleStartDelayMs) only emitted when significant (> 5s).
+                    // - Vanishing/decay items typically have ~50-500ms (engine spin-up) → first charge
+                    //   considered ready by player, total recharge = (effectiveCharges - 1) × rechargeTime.
+                    // - Vase L1-L3 etc. with real initial cooldown (> 5s) WILL emit, and wiki Module:Items
+                    //   adds it to total recharge time.
+                    // Threshold chosen by user based on practical gameplay perception.
+                    chargeTime = item.FirstCycleStartDelayMs > 5000 ? item.FirstCycleStartDelayMs : 0;
+                    if (item.ActivationHowManyCycles > 0)
+                        cycles = item.ActivationHowManyCycles;
                 }
                 else if (item.IsSpawner)
                 {
@@ -721,6 +752,8 @@ public class LuaGeneratorService
                     charges = item.SpawnAmountInCycle > 0 && item.SpawnStorageMax > 0
                         ? item.SpawnStorageMax / item.SpawnAmountInCycle : 0;
                     dropsPerCharge = item.SpawnAmountInCycle;
+                    if (item.SpawnHowManyCycles > 0)
+                        cycles = item.SpawnHowManyCycles;
                 }
 
                 // Resolve sink fuel references: NumericConfigKey → ItemType
@@ -825,7 +858,8 @@ public class LuaGeneratorService
                     fueledResult,
                     singleUseDrop,
                     decayInto,
-                    item.DecayAfterLastCycleOdds));
+                    item.DecayAfterLastCycleOdds,
+                    cycles));
             }
         }
         return list;
@@ -850,6 +884,7 @@ public class LuaGeneratorService
             if (it.SpeedUpCostGems.HasValue) sb.Append($"skipPrice = {it.SpeedUpCostGems.Value}, ");
             if (it.RechargeTimeMs > 0) sb.Append($"rechargeTime = {it.RechargeTimeMs}, ");
             if (it.Charges > 0) sb.Append($"charges = {it.Charges}, ");
+            if (it.Cycles > 0) sb.Append($"cycles = {it.Cycles}, ");
             if (it.DropsPerCharge > 0) sb.Append($"dropsPerCharge = {it.DropsPerCharge}, ");
             if (it.ChargeTimeMs > 0) sb.Append($"chargeTime = {it.ChargeTimeMs}, ");
 
@@ -923,32 +958,132 @@ public class LuaGeneratorService
         return sb.ToString();
     }
 
-    private static string BuildChainNamesTable(List<FlatItem> items)
+    /// <summary>
+    /// Builds p.chainNames as a positional list per chain (chain name → array of item ids).
+    /// Format: <code>["Chain"] = { "item_01", "item_02", "archived_id" }</code>.
+    /// Includes BOTH live items (from <paramref name="items"/>) and archived item ids
+    /// (from <paramref name="archivedIdsByChain"/>) so wiki callers can iterate one list and
+    /// resolve each id (live → p.items; archived → Archive module via lazy fallback).
+    /// Live ids come first, sorted by Level/ItemType (game order); archived ids appended,
+    /// sorted alphabetically. ipairs over the result is well-defined and fast.
+    /// </summary>
+    public static string BuildChainNamesTable(
+        List<FlatItem> items,
+        IReadOnlyDictionary<string, IReadOnlyList<string>>? archivedIdsByChain = null)
     {
         var sb = new StringBuilder();
         sb.Append("p.chainNames = {");
 
-        var groups = items
-            .Where(i => !string.IsNullOrWhiteSpace(i.ChainName))
+        // Group live items by chain (live = items present in current dump)
+        var liveByChain = items
+            .Where(i => !string.IsNullOrWhiteSpace(i.ChainName) && !string.IsNullOrEmpty(i.ItemType))
             .GroupBy(i => i.ChainName)
-            .OrderBy(g => g.Key, StringComparer.Ordinal)
-            .ToList();
-
-        for (int gi = 0; gi < groups.Count; gi++)
-        {
-            var g = groups[gi];
-            var comma = gi < groups.Count - 1 ? "," : "";
-
-            var ids = g
-                .Where(x => !string.IsNullOrEmpty(x.ItemType))
+            .ToDictionary(g => g.Key, g => g
                 .OrderBy(x => x.Level)
                 .ThenBy(x => x.ItemType, StringComparer.Ordinal)
-                .Select(x => $"\"{Esc(x.ItemType)}\"");
+                .Select(x => x.ItemType)
+                .ToList(),
+                StringComparer.Ordinal);
 
-            sb.Append($"\n\t[\"{Esc(g.Key)}\"] = {{ {string.Join(", ", ids)} }}{comma}");
+        // Union of all chain names (live + archived chains)
+        var allChains = new HashSet<string>(liveByChain.Keys, StringComparer.Ordinal);
+        if (archivedIdsByChain != null)
+            foreach (var k in archivedIdsByChain.Keys) allChains.Add(k);
+
+        var sortedChains = allChains.OrderBy(c => c, StringComparer.Ordinal).ToList();
+        for (int gi = 0; gi < sortedChains.Count; gi++)
+        {
+            var chain = sortedChains[gi];
+            var trailingComma = gi < sortedChains.Count - 1 ? "," : "";
+
+            var liveIds = liveByChain.GetValueOrDefault(chain, new List<string>());
+            var archivedIds = archivedIdsByChain != null && archivedIdsByChain.TryGetValue(chain, out var arr)
+                ? (IReadOnlyList<string>)arr
+                : Array.Empty<string>();
+
+            // Combine: live (already sorted) + archived (alphabetical, dedup against live)
+            var liveSet = new HashSet<string>(liveIds, StringComparer.Ordinal);
+            var combined = new List<string>(liveIds);
+            foreach (var id in archivedIds.OrderBy(x => x, StringComparer.Ordinal))
+                if (liveSet.Add(id)) combined.Add(id);
+
+            var idsLua = string.Join(", ", combined.Select(id => $"\"{Esc(id)}\""));
+            sb.Append($"\n\t[\"{Esc(chain)}\"] = {{ {idsLua} }}{trailingComma}");
         }
 
         sb.Append("\n}");
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Builds <code>p.archived = { ["item_id"] = true, ... }</code> — a flat boolean map of all
+    /// currently-archived item ids. Loaded into the Items arbiter alongside p.chainNames so
+    /// wiki callers can quickly check `p.archived[id]` without consulting the heavy Archive module.
+    /// Empty input yields <c>p.archived = {}</c> (always emitted for consistency).
+    /// </summary>
+    public static string BuildArchivedFlagsTable(IEnumerable<string> archivedIds)
+    {
+        var sortedIds = archivedIds
+            .Where(id => !string.IsNullOrEmpty(id))
+            .Distinct(StringComparer.Ordinal)
+            .OrderBy(id => id, StringComparer.Ordinal)
+            .ToList();
+
+        if (sortedIds.Count == 0)
+            return "p.archived = {}";
+
+        var sb = new StringBuilder();
+        sb.Append("p.archived = {");
+        for (int i = 0; i < sortedIds.Count; i++)
+        {
+            var trailingComma = i < sortedIds.Count - 1 ? "," : "";
+            sb.Append($"\n\t[\"{Esc(sortedIds[i])}\"] = true{trailingComma}");
+        }
+        sb.Append("\n}");
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Builds the Module:Datatable/Items/Archive content.
+    /// Structure: <code>p.items = { ["Chain"] = { ["item_id"] = { full data }, ... }, ... }</code>.
+    /// Each item's full data is the verbatim raw Lua entry as it last appeared in the live module
+    /// (preserved at the time of removal so wiki pages keep working).
+    /// </summary>
+    public static string BuildArchiveModule(
+        IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> archivedByChain,
+        string? createdAt = null)
+    {
+        var sb = new StringBuilder();
+        if (!string.IsNullOrEmpty(createdAt))
+            sb.AppendLine($"-- createdAt: {createdAt}");
+        sb.AppendLine("local str = require('Module:Strings')");
+        sb.AppendLine("local p = {}");
+        sb.AppendLine();
+        sb.Append("p.items = {");
+
+        var sortedChains = archivedByChain.Keys.OrderBy(c => c, StringComparer.Ordinal).ToList();
+        for (int gi = 0; gi < sortedChains.Count; gi++)
+        {
+            var chain = sortedChains[gi];
+            var items = archivedByChain[chain];
+            if (items.Count == 0) continue;
+            var trailingComma = gi < sortedChains.Count - 1 ? "," : "";
+
+            sb.Append($"\n\t[\"{Esc(chain)}\"] = {{");
+            var sortedIds = items.Keys.OrderBy(k => k, StringComparer.Ordinal).ToList();
+            for (int ei = 0; ei < sortedIds.Count; ei++)
+            {
+                var id = sortedIds[ei];
+                var rawEntry = items[id];
+                var entryComma = ei < sortedIds.Count - 1 ? "," : "";
+                sb.Append($"\n\t\t[\"{Esc(id)}\"] = {rawEntry}{entryComma}");
+            }
+            sb.Append($"\n\t}}{trailingComma}");
+        }
+
+        sb.Append("\n}\n");
+        sb.AppendLine();
+        sb.AppendLine("return p");
         return sb.ToString();
     }
 

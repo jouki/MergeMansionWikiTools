@@ -217,7 +217,16 @@ public class DataService
         };
 
         if (item.TryGetProperty("Tags", out var tagsEl) && tagsEl.ValueKind == JsonValueKind.Array)
-            pi.IsTemporary = tagsEl.EnumerateArray().Any(t => t.GetString()?.StartsWith("Temp") == true);
+        {
+            var tags = tagsEl.EnumerateArray()
+                .Select(t => t.GetString())
+                .Where(s => !string.IsNullOrEmpty(s))
+                .Cast<string>()
+                .ToList();
+            pi.Tags = tags;
+            pi.IsTemporary = tags.Any(t => t.StartsWith("Temp"));
+            pi.IsTestTag = tags.Any(t => string.Equals(t, "Test", StringComparison.OrdinalIgnoreCase));
+        }
 
         // ── ActivationFeatures (generator) ──
         if (item.TryGetProperty("ActivationFeatures", out var af))
@@ -226,6 +235,10 @@ public class DataService
 
             // Storage max
             pi.StorageMax = GetInt(af, "StorageMax");
+            // StartsFull determines whether StorageMax is per-cycle (true) or total (false).
+            // Used by LuaGeneratorService to split charges/cycles correctly.
+            pi.StartsFull = af.TryGetProperty("StartsFull", out var sfEl)
+                && sfEl.ValueKind == JsonValueKind.True;
 
             // Activation cycle data (flattened: renamed fields, scalars instead of arrays)
             if (af.TryGetProperty("ActivationCycle", out var ac))
@@ -242,6 +255,8 @@ public class DataService
             // DecayAfterLastCycleProducer (what generator decays into after use)
             if (af.TryGetProperty("DecayAfterLastCycleProducer", out var dap))
             {
+                // Track presence of the field — absence + cycles=-1 signals "truly infinite"
+                pi.HasDecayAfterLastCycleField = true;
                 string? dapConst = null;
                 if (dap.ValueKind == JsonValueKind.String)
                     dapConst = dap.GetString();
@@ -338,6 +353,46 @@ public class DataService
         if (item.TryGetProperty("SpawnFeatures", out var sfDecay))
             pi.DecaysWhenCyclesAreDone = GetBool(sfDecay, "DecaysWhenCyclesAreDone");
 
+        // ── ChestFeatures (Brown Chest, Mystery Chest, Reward Boxes, …) ──
+        // ChestFeatures.LootProducer.BaseProducer.{Random|Constant|ControlledRandom*}
+        // → odds map of items the chest drops on opening. We read every supported
+        // producer shape (mirrors ExtractOdds for SpawnFeatures).
+        if (item.TryGetProperty("ChestFeatures", out var chest) && GetBool(chest, "IsChest"))
+        {
+            pi.IsChest = true;
+            if (chest.TryGetProperty("LootProducer", out var lootProd) &&
+                lootProd.TryGetProperty("BaseProducer", out var baseProd))
+            {
+                Dictionary<string, double>? chestOdds = null;
+                if (baseProd.TryGetProperty("Random", out var rand) &&
+                    rand.TryGetProperty("Odds", out var randOdds))
+                {
+                    chestOdds = ParseOddsDictionary(randOdds);
+                }
+                else if (baseProd.TryGetProperty("ControlledRandomSequence", out var crs) &&
+                         crs.TryGetProperty("Odds", out var crsOdds))
+                {
+                    chestOdds = ParseOddsDictionary(crsOdds);
+                }
+                else if (baseProd.TryGetProperty("ControlledRandom", out var cr) &&
+                         cr.TryGetProperty("Odds", out var crOdds))
+                {
+                    chestOdds = ParseOddsDictionary(crOdds);
+                }
+                else if (baseProd.TryGetProperty("Constant", out var constProd) &&
+                         constProd.TryGetProperty("ItemType", out var constId) &&
+                         constId.ValueKind == JsonValueKind.String)
+                {
+                    chestOdds = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase)
+                    {
+                        [constId.GetString() ?? ""] = 100.0
+                    };
+                }
+                if (chestOdds != null && chestOdds.Count > 0)
+                    pi.ChestRewardOdds = chestOdds;
+            }
+        }
+
         // ── SinkFeatures (Transformative Item) ──
         if (item.TryGetProperty("SinkFeatures", out var sink) && GetBool(sink, "IsSink"))
         {
@@ -366,6 +421,7 @@ public class DataService
             pi.IsOrder = true;
             var required = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
             var rewards = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+            var perTaskList = new List<ParsedTask>();
 
             // OrderProducer can be Constant, ControlledRandom, or ControlledPredefinedSequence
             if (order.TryGetProperty("OrderProducer", out var op))
@@ -378,13 +434,22 @@ public class DataService
 
                     foreach (var task in tasks.EnumerateArray())
                     {
+                        var pt = new ParsedTask
+                        {
+                            Odds = GetDouble(task, "Odds"),
+                            OddsWeight = GetDouble(task, "OddsWeight"),
+                        };
+
                         if (task.TryGetProperty("Required", out var reqArr) && reqArr.ValueKind == JsonValueKind.Array)
                             foreach (var r in reqArr.EnumerateArray())
                             {
                                 var it = GetString(r, "Item");
                                 var amt = GetInt(r, "Amount", 1);
                                 if (!string.IsNullOrEmpty(it))
+                                {
                                     required[it] = required.GetValueOrDefault(it) + amt;
+                                    pt.Required.Add((it, amt));
+                                }
                             }
 
                         if (task.TryGetProperty("Rewards", out var rewArr) && rewArr.ValueKind == JsonValueKind.Array)
@@ -393,8 +458,13 @@ public class DataService
                                 var it = GetString(r, "Item");
                                 var amt = GetInt(r, "Amount", 1);
                                 if (!string.IsNullOrEmpty(it))
+                                {
                                     rewards[it] = rewards.GetValueOrDefault(it) + amt;
+                                    pt.Rewards.Add((it, amt));
+                                }
                             }
+
+                        perTaskList.Add(pt);
                     }
                     break;
                 }
@@ -402,6 +472,7 @@ public class DataService
 
             if (required.Count > 0) pi.OrderRequiredItems = required;
             if (rewards.Count > 0) pi.OrderRewardItems = rewards;
+            if (perTaskList.Count > 0) pi.OrderTasks = perTaskList;
         }
 
         // ── BubbleFeatures ──
@@ -492,6 +563,15 @@ public class DataService
         if (asp.TryGetProperty("ControlledRandomSequence", out var directCrs))
         {
             if (directCrs.TryGetProperty("Odds", out var odds) && odds.ValueKind == JsonValueKind.Object)
+                return ParseOddsDictionary(odds);
+        }
+
+        // Path 1a3: ActivationSpawn → Random → Odds (direct, no BaseProducer wrapper).
+        // Used by single-cycle Box-style items (Simple Brown Box / Suitcase / Radio etc.)
+        // where the producer is a plain Random rather than a ControlledRandom.
+        if (asp.TryGetProperty("Random", out var directRnd))
+        {
+            if (directRnd.TryGetProperty("Odds", out var odds) && odds.ValueKind == JsonValueKind.Object)
                 return ParseOddsDictionary(odds);
         }
 
@@ -722,6 +802,14 @@ public class DataService
     {
         if (el.TryGetProperty(prop, out var val) && val.ValueKind == JsonValueKind.Number)
             return val.GetInt64();
+        return def;
+    }
+
+    internal static double GetDouble(JsonElement el, string prop, double def = 0.0)
+    {
+        if (el.TryGetProperty(prop, out var val) && val.ValueKind == JsonValueKind.Number
+            && val.TryGetDouble(out var d))
+            return d;
         return def;
     }
 

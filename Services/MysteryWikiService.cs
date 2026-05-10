@@ -46,7 +46,14 @@ public static class MysteryWikiService
 
 	private const string InventorySlotIcon = "{{#Invoke:Utils|Icon|name=InventorySlot|suppressLevel=true|size=24}}";
 
-	private static readonly HashSet<string> NoLevelItems = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "Missing Evidence", "Clues Envelope", "Unlimited Energy" };
+	private static readonly HashSet<string> NoLevelItems = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "Missing Evidence", "Wild Card", "Clues Envelope", "Unlimited Energy" };
+
+	// Game version 26.01.01 (2026-01-20) renamed the EN locale string for the InformantTip item ("TCE_Case01_InformantTip" loc key)
+	// from "Missing Evidence" to "Wild Card". Mysteries with StartDate >= this cutoff use the new name in generated wiki content.
+	private static readonly DateTime WildCardRenameDate = new DateTime(2026, 1, 20);
+
+	internal static string GetInformantTipDisplayName(DateTime? mysteryStartDate)
+		=> (mysteryStartDate.HasValue && mysteryStartDate.Value >= WildCardRenameDate) ? "Wild Card" : "Missing Evidence";
 
 	private static readonly HashSet<string> PlainItemItems = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "Brown Chest", "Fancy Blue Chest" };
 
@@ -424,7 +431,8 @@ public static class MysteryWikiService
 				}
 				if (!string.IsNullOrEmpty(value.SuggestedPageTitle))
 				{
-					mystery.WikiStatus.SuggestedPageTitle = value.SuggestedPageTitle;
+					// Strip legacy "Season Pass - " prefix that may have been stored before the rename refactor.
+					mystery.WikiStatus.SuggestedPageTitle = MysteryService.StripSeasonPassPrefix(value.SuggestedPageTitle);
 				}
 			}
 		}
@@ -932,7 +940,7 @@ public static class MysteryWikiService
 
 			// Free L0 from data (typically Energy 10)
 			var freeL0 = mystery.FreeTier.Count > 0 ? mystery.FreeTier[0] : null;
-			sb.AppendLine($"| {FormatRewards(freeL0?.Rewards, "free", true)}");
+			sb.AppendLine($"| {FormatRewards(freeL0?.Rewards, mystery, "free", true)}");
 
 			if (isV2)
 			{
@@ -943,7 +951,7 @@ public static class MysteryWikiService
 			else
 			{
 				var premL0 = mystery.SilverTier.Count > 0 ? mystery.SilverTier[0] : null;
-				sb.AppendLine($"| {FormatRewards(premL0?.Rewards, "gold", true)}");
+				sb.AppendLine($"| {FormatRewards(premL0?.Rewards, mystery, "gold", true)}");
 			}
 		}
 
@@ -962,16 +970,16 @@ public static class MysteryWikiService
 			sb.AppendLine("|-");
 			sb.AppendLine($"| {i}");
 			sb.AppendLine($"| {{{{Pass XP}}}} {xp}");
-			sb.AppendLine($"| {FormatRewards(freeLevel?.Rewards, "free", true)}");
+			sb.AppendLine($"| {FormatRewards(freeLevel?.Rewards, mystery, "free", true)}");
 
 			if (isV2)
 			{
-				sb.AppendLine($"| {FormatRewards(silverLevel?.Rewards, "silver", true)}");
-				sb.AppendLine($"| {FormatRewards(goldLevel?.Rewards, "gold", true)}");
+				sb.AppendLine($"| {FormatRewards(silverLevel?.Rewards, mystery, "silver", true)}");
+				sb.AppendLine($"| {FormatRewards(goldLevel?.Rewards, mystery, "gold", true)}");
 			}
 			else
 			{
-				sb.AppendLine($"| {FormatRewards(silverLevel?.Rewards, "gold", true)}");
+				sb.AppendLine($"| {FormatRewards(silverLevel?.Rewards, mystery, "gold", true)}");
 			}
 		}
 
@@ -983,7 +991,7 @@ public static class MysteryWikiService
 			sb.AppendLine($"| {{{{PremiumLevel|{j + 1}}}}}");
 			sb.AppendLine($"| {{{{Pass XP}}}} {bonus.XpRequired}");
 			sb.AppendLine("| {{Dash}}");
-			string bonusContent = FormatRewards(bonus.Rewards, "free", true);
+			string bonusContent = FormatRewards(bonus.Rewards, mystery, "free", true);
 			if (isV2)
 				sb.AppendLine($"| colspan = 2 style = \"text-align: center\" | {bonusContent}");
 			else
@@ -1003,8 +1011,8 @@ public static class MysteryWikiService
 				sb.AppendLine("|-");
 				sb.AppendLine($"| {{{{PremiumLevel|{k + 1}}}}}");
 				sb.AppendLine($"| {{{{Pass XP}}}} {recurXp}");
-				sb.AppendLine($"| {FormatRewards(recurFree?.Rewards, "free", true)}");
-				sb.AppendLine($"| {FormatRewards(recurPrem?.Rewards, "gold", true)}");
+				sb.AppendLine($"| {FormatRewards(recurFree?.Rewards, mystery, "free", true)}");
+				sb.AppendLine($"| {FormatRewards(recurPrem?.Rewards, mystery, "gold", true)}");
 			}
 		}
 
@@ -1043,7 +1051,7 @@ public static class MysteryWikiService
 		return parts.Count > 0 ? string.Join(" <br> ", parts) : "{{Dash}}";
 	}
 
-	private static string FormatRewards(List<MysteryReward>? rewards, string tier = "free", bool dashIfEmpty = false)
+	private static string FormatRewards(List<MysteryReward>? rewards, MysteryEvent mystery, string tier = "free", bool dashIfEmpty = false)
 	{
 		string empty = dashIfEmpty ? "{{Dash}}" : "?";
 		if (rewards == null || rewards.Count == 0)
@@ -1054,7 +1062,7 @@ public static class MysteryWikiService
 		{
 			if (reward.Type != MysteryRewardType.Perk)
 			{
-				string text = FormatSingleReward(reward, tier);
+				string text = FormatSingleReward(reward, mystery, tier);
 				if (!string.IsNullOrEmpty(text))
 					list.Add(text);
 			}
@@ -1062,7 +1070,7 @@ public static class MysteryWikiService
 		return list.Count > 0 ? string.Join(" <br> ", list) : empty;
 	}
 
-	private static string FormatSingleReward(MysteryReward reward, string tier)
+	private static string FormatSingleReward(MysteryReward reward, MysteryEvent mystery, string tier)
 	{
 		return reward.Type switch
 		{
@@ -1074,7 +1082,7 @@ public static class MysteryWikiService
 			MysteryRewardType.Decoration => FormatDecorationReward(reward, tier),
 			MysteryRewardType.CardPack => FormatCardPack(reward),
 			MysteryRewardType.Pet => "{{Decoration|silver|0|text={{{pet}}}}}",
-			MysteryRewardType.InformantTip => FormatInformantTip(reward),
+			MysteryRewardType.InformantTip => FormatInformantTip(reward, mystery),
 			_ => "",
 		};
 	}
@@ -1149,11 +1157,12 @@ public static class MysteryWikiService
 		return $"{{{{Item/nolevel|Clues Envelope|{value}}}}}";
 	}
 
-	private static string FormatInformantTip(MysteryReward reward)
+	private static string FormatInformantTip(MysteryReward reward, MysteryEvent mystery)
 	{
 		string? informantTipCardId = reward.InformantTipCardId;
 		int value = ((informantTipCardId == null || !informantTipCardId.Contains("Special")) ? 1 : 2);
-		return $"{{{{Item/nolevel|Missing Evidence|{value}}}}}";
+		string itemName = GetInformantTipDisplayName(mystery.StartDate);
+		return $"{{{{Item/nolevel|{itemName}|{value}}}}}";
 	}
 
 	private static string FormatDuration(long ms)
@@ -3884,6 +3893,12 @@ public static class MysteryWikiService
 				}
 			}
 			List<(string, string, int, int, int, int)> list = new List<(string, string, int, int, int, int)>();
+			// Per-sprite metadata extracted from standalone entries (pivot, canvas size, border)
+			// and atlas entries (textureRectOffset). Defaults assumed if absent: center pivot,
+			// no trim offset. In Merge Mansion data these are consistently the defaults, but
+			// reading them lets crop/padding logic stay correct if game ever changes that.
+			var pivots = new Dictionary<string, (double X, double Y)>(StringComparer.OrdinalIgnoreCase);
+			var trimOffsets = new Dictionary<string, (double X, double Y)>(StringComparer.OrdinalIgnoreCase);
 			string text = null;
 			int num = 0;
 			int num2 = 0;
@@ -3895,6 +3910,35 @@ public static class MysteryWikiService
 			{
 				string text2 = item2.GetProperty("name").GetString() ?? "";
 				string text3 = item2.GetProperty("textureName").GetString() ?? "";
+
+				// Capture sprite-asset-side metadata (pivot, etc.) from standalone entries.
+				// In image_atlas_data.json each sprite appears twice: once as atlas member
+				// (textureName == atlas asset) and once as standalone (textureName == sprite
+				// name). Pivot is meaningful only on the standalone entry since it describes
+				// the sprite's intrinsic anchor; atlas entry doesn't carry it.
+				if (string.Equals(text3, text2, StringComparison.OrdinalIgnoreCase))
+				{
+					if (item2.TryGetProperty("pivotX", out var pxEl) && item2.TryGetProperty("pivotY", out var pyEl))
+					{
+						pivots[text2] = (pxEl.GetDouble(), pyEl.GetDouble());
+					}
+				}
+				else
+				{
+					// Atlas entry: textureRectOffset is the trim offset within the atlas rect.
+					// Empirically (probed across SP_*, CBE_* atlases in 26.04.01) Merge Mansion
+					// data always has (0,0). If the game ever starts trimming, log a warning so
+					// we know to extend the crop logic with offset compensation.
+					if (item2.TryGetProperty("textureRectOffsetX", out var oxEl) && item2.TryGetProperty("textureRectOffsetY", out var oyEl))
+					{
+						double ox = oxEl.GetDouble(), oy = oyEl.GetDouble();
+						if (ox != 0 || oy != 0)
+						{
+							trimOffsets[text2] = (ox, oy);
+							AppLogger.Warn($"Sprite '{text2}' has non-zero textureRectOffset ({ox}, {oy}) — atlas is trimmed; crop logic may need offset compensation.");
+						}
+					}
+				}
 				// Collect pet decoration sprites before sactx filter (they may be on non-sactx atlas textures)
 				if (isPet)
 				{
@@ -3918,7 +3962,19 @@ public static class MysteryWikiService
 						num = prX; num2 = prY; num3 = prW; num4 = prH;
 					}
 				}
-				if (!text3.StartsWith("sactx-"))
+				// Skip standalone single-sprite-texture duplicate entries (textureName ==
+				// sprite name). Image_atlas_data.json contains both an atlas member entry
+				// (textureName = atlas name) AND a standalone copy (textureName = sprite
+				// name, rect = native canvas) for every sprite. We want only the atlas
+				// member — the standalone is redundant for crop purposes.
+				//
+				// Previous filter `if (!text3.StartsWith("sactx-")) continue;` was unreliable:
+				// game v26.04.01+ exports atlas textureName WITHOUT the sactx- prefix for
+				// some mysteries (SP_WorldCup2026, all CBE_*), which silently filtered out
+				// every atlas entry → primary path returned false → fallback SliceDecorationAtlas
+				// ran with naive 256×256 grid, producing decorations with bleed from
+				// neighbouring atlas tiles.
+				if (string.Equals(text3, text2, StringComparison.OrdinalIgnoreCase))
 				{
 					continue;
 				}
@@ -4089,9 +4145,15 @@ public static class MysteryWikiService
 					int num10 = 256;
 					RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap(num10, num10, 96.0, 96.0, PixelFormats.Pbgra32);
 					DrawingVisual drawingVisual = new DrawingVisual();
+					// Pivot-aware positioning. Unity sprite pivot is normalized 0..1 with
+					// origin at bottom-left, so Y is flipped for top-left WPF rendering.
+					// Default (0.5, 0.5) = center → matches the previous hardcoded behaviour.
+					var (pvx, pvy) = pivots.TryGetValue(item5.Item1, out var pv) ? pv : (0.5, 0.5);
+					double drawX = (num10 - num8) * pvx;
+					double drawY = (num10 - num9) * (1.0 - pvy);
 					using (DrawingContext drawingContext = drawingVisual.RenderOpen())
 					{
-						drawingContext.DrawImage(croppedBitmap, new Rect((double)(num10 - num8) / 2.0, (double)(num10 - num9) / 2.0, num8, num9));
+						drawingContext.DrawImage(croppedBitmap, new Rect(drawX, drawY, num8, num9));
 					}
 					renderTargetBitmap.Render(drawingVisual);
 					source2 = renderTargetBitmap;
@@ -4380,13 +4442,20 @@ public static class MysteryWikiService
 				Directory.CreateDirectory(text5);
 			}
 		}
-		string[] array = ((!isPet) ? new string[3]
+		// Wallpaper detection. Game v26.04.01+ uses suffix convention
+		// "{progressionEventId}_PopupSharedArt.png" instead of legacy
+		// "PopupSharedArt_{progressionEventId}.png". Both are searched for compat.
+		string[] array = ((!isPet) ? new string[5]
 		{
+			progressionEventId + "_PopupSharedArt*.png",         // NEW (26.04.01+)
+			progressionEventId + "_ProgressionPopupArt*.png",    // NEW
 			"ProgressionPopupArt_" + progressionEventId + "*.png",
 			"Popup_Progression_Art_" + progressionEventId + "*.png",
 			"Popup_Header_" + progressionEventId + "*.png"
-		} : new string[9]
+		} : new string[11]
 		{
+			progressionEventId + "_PopupSharedArt*.png",         // NEW (26.04.01+)
+			text3 + "_PopupSharedArt*.png",                      // NEW (alt prefix for pets)
 			"PopupSharedArt_" + progressionEventId + "*.png",
 			"Popup_Shared_Art_" + progressionEventId + "*.png",
 			"Popup_Header_Art_" + progressionEventId + "*.png",
@@ -4462,31 +4531,48 @@ public static class MysteryWikiService
 				OptimizedSize = CheckOptMarker(text7)
 			});
 		}
+		// Badge detection. Game v26.04.01+ uses suffix convention
+		// "{progressionEventId}_MainHubBadgeArt.png" instead of legacy
+		// "MainHubBadgeArt_{progressionEventId}.png". Both are searched.
 		List<string> list3 = new List<string>
 		{
+			progressionEventId + "_MainHubBadgeArt*.png",        // NEW (26.04.01+)
 			"MainHubBadgeArt_" + progressionEventId + "*.png",
 			"MainHub_Badge_" + progressionEventId + "*.png"
 		};
 		if (text3 != progressionEventId)
 		{
+			list3.Add(text3 + "_MainHubBadgeArt*.png");          // NEW (alt prefix)
 			list3.Add("MainHubBadgeArt_" + text3 + "*.png");
 			list3.Add("MainHub_Badge_" + text3 + "*.png");
 		}
+		// Add at most one Badge entry. Game asset extraction sometimes saves the same
+		// texture multiple times when it appears in multiple bundles (e.g.
+		// MainHubBadgeArt_SP_WorldCup2026.png + _2.png + _3.png — bit-identical, just
+		// dedup-suffixed by GetUniqueFilePath when the user re-runs extraction).
+		// Without this guard each pattern × each duplicate file produced its own
+		// DetectedDecorationFile, so the dialog showed 3× "Badge" entries.
+		bool badgeAdded = false;
 		foreach (string item6 in list3)
 		{
+			if (badgeAdded) break;
 			string[] files = Directory.GetFiles(exportDir, item6);
-			foreach (string sourcePath2 in files)
+			if (files.Length == 0) continue;
+			// Pick canonical file: shortest filename = without "_2/_3/..." dedup suffix.
+			string sourcePath2 = files
+				.OrderBy(f => Path.GetFileName(f).Length)
+				.ThenBy(f => f, StringComparer.OrdinalIgnoreCase)
+				.First();
+			string wikiFilename2 = FormatFileName(mysteryName, 1);
+			string text8 = CopyToProcessed(sourcePath2, wikiFilename2, text5);
+			list.Add(new DetectedDecorationFile
 			{
-				string wikiFilename2 = FormatFileName(mysteryName, 1);
-				string text8 = CopyToProcessed(sourcePath2, wikiFilename2, text5);
-				list.Add(new DetectedDecorationFile
-				{
-					SourcePath = text8,
-					WikiFilename = wikiFilename2,
-					Category = "Badge",
-					OptimizedSize = CheckOptMarker(text8)
-				});
-			}
+				SourcePath = text8,
+				WikiFilename = wikiFilename2,
+				Category = "Badge",
+				OptimizedSize = CheckOptMarker(text8)
+			});
+			badgeAdded = true;
 		}
 		int decoNum = ((!isPet) ? 1 : 0);
 		List<string> list4 = (ExtractDecorationsFromSpriteMetadata(exportDir, progressionEventId, mysteryName, text, text5, isPet, ref decoNum, list, mystery) ? new List<string>() : (from f in Directory.GetFiles(exportDir, "*" + progressionEventId + "*Decorations*Atlas*.png")

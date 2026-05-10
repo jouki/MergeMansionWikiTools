@@ -30,6 +30,18 @@ public partial class WikiDataParserPage : UserControl
     private string? _lastChainNamesBlock;
     private int _firstEventChunkIndex; // 1-based; 0 = no event separation
 
+    // Archive (Module:Datatable/Items/Archive) state — populated during BtnUpdateItemsWiki_Click pre-flight.
+    // Captures raw wiki Lua entries for items currently live on wiki (so removed items can be archived
+    // with their last-known full data preserved).
+    private Dictionary<string, string>? _lastWikiItemEntries;
+    private Dictionary<string, string>? _lastLocalItemEntries;
+    private ArchiveDiff? _lastArchiveDiff;
+    private List<LuaGeneratorService.FlatItem>? _lastFlatItems; // saved at chunk-gen for chainNames regeneration with archive flags
+    private HashSet<string>? _lastBrokenChainIds; // ids whose live chainName starts with "#missing#" — shadowed by archive
+    private string? _lastMappingPatchedContent; // patched Module:Datatable/Items/Mapping content, ready to post
+    private int _lastMappingEnrichedCount; // how many entries got enriched (for dialog display)
+    private HashSet<string>? _lastMappingHandledIds; // broken-chain ids that have a non-#missing# mapping override
+
     private const long MaxWikiBytes = 2 * 1024 * 1024; // 2 MB
 
     // CreatedAt from JSON sources
@@ -38,9 +50,20 @@ public partial class WikiDataParserPage : UserControl
 
     // Changelog data (local vs wiki comparison)
     private sealed record ModifiedEntry(string Key, string WikiValue, string LocalValue);
-    private sealed record ChangelogData(List<string> Added, List<string> Removed, List<ModifiedEntry> Modified)
+    private sealed record RenamedEntry(string OldId, string NewId, string? OldChain, string? NewChain);
+    /// Where: "archive" (full data preserved in Module:Datatable/Items/Archive) or
+    ///        "mapping" (broken-chain handled via Module:Datatable/Items/Mapping override + enrichment).
+    private sealed record ArchivedEntry(string Id, string Where, string? Chain);
+    private sealed record ChangelogData(
+        List<string> Added,
+        List<string> Removed,
+        List<ModifiedEntry> Modified,
+        List<RenamedEntry>? Renamed = null)
     {
-        public bool HasChanges() => Added.Count > 0 || Removed.Count > 0 || Modified.Count > 0;
+        public List<ArchivedEntry>? Archived { get; set; }
+        public bool HasChanges() => Added.Count > 0 || Removed.Count > 0 || Modified.Count > 0
+                                    || (Renamed?.Count ?? 0) > 0
+                                    || (Archived?.Count ?? 0) > 0;
     }
     private ChangelogData? _areasChangelog;
     private ChangelogData? _itemsChangelog;
@@ -570,30 +593,55 @@ public partial class WikiDataParserPage : UserControl
                     foreach (var kv in WikiMappingService.ExtractLuaAreaEntries(chunk.Lua, "areas"))
                         allLocalKeys.Add(kv.Key);
 
-                var unmapped = allLocalKeys.Where(k => !_areaOrdering.ContainsKey(k)).OrderBy(k => k).ToList();
+                var unmapped = allLocalKeys
+                    .Where(k => !_areaOrdering.ContainsKey(k) && !AreaOrderingService.SkipNames.Contains(k))
+                    .OrderBy(k => k)
+                    .ToList();
                 if (unmapped.Count > 0)
                 {
-                    var names = string.Join(", ", unmapped);
                     ShowInfo($"Wiki updated — {string.Join(", ", parts)}.", InfoBarSeverity.Success);
 
-                    var msgBox = new WpfMessageBox
+                    // Load area unlock info and deduce ordering indices
+                    var areasPath = _main.Settings.AreasJsonPath;
+                    List<AreaUnlockInfo> allAreas;
+                    try
                     {
-                        Title = "Missing Ordering Indices",
-                        Content = new WpfTextBlock
-                        {
-                            Text = $"The following {unmapped.Count} area(s) are not in Module:Datatable/Areas/Mapping " +
-                                   $"and need ordering indices:\n\n{names}\n\n" +
-                                   "Please add them to the mapping module on the wiki so they appear in the correct order.",
-                            TextWrapping = TextWrapping.Wrap, FontSize = 13,
-                            Margin = new Thickness(0, 0, 0, 10)
-                        },
-                        PrimaryButtonText = "OK",
-                        Owner = Window.GetWindow(this),
-                        MinWidth = 480,
-                        SizeToContent = SizeToContent.Height
+                        allAreas = await AreaOrderingService.LoadFromAreasJsonAsync(areasPath);
+                    }
+                    catch (Exception ex)
+                    {
+                        ShowInfo($"Failed to load areas.json for ordering deduction: {ex.Message}", InfoBarSeverity.Error);
+                        return;
+                    }
+
+                    var deduced = AreaOrderingService.Deduce(allAreas, _areaOrdering, unmapped);
+
+                    // Fetch current module content to compute REMOVE diff (existing commented entries
+                    // that will be cleared by the patch). We do this in the host page so the dialog
+                    // can render the diff immediately on open.
+                    var moduleContent = await WikiMappingService.FetchModuleContentAsync("Module:Datatable/Areas/Mapping");
+                    var existingCommented = moduleContent != null
+                        ? AreaOrderingService.ExtractCommentedEntries(moduleContent)
+                        : new List<RemovedCommentedEntry>();
+
+                    if (deduced.Count == 0 && existingCommented.Count == 0)
+                    {
+                        // Nothing to add and nothing to clear → silent return
+                        return;
+                    }
+
+                    var dlg = new MissingOrderingDialog(
+                        deduced,
+                        existingCommented,
+                        _main.Settings.WikiUsername,
+                        _main.Settings.WikiPassword)
+                    {
+                        Owner = Window.GetWindow(this)
                     };
-                    ApplicationThemeManager.Apply(msgBox);
-                    await msgBox.ShowDialogAsync();
+                    dlg.ShowDialog();
+
+                    // Re-fetch ordering after potential edit so subsequent runs see the new indices
+                    _areaOrdering = await WikiMappingService.FetchAreaOrderingAsync();
                     return;
                 }
             }
@@ -765,14 +813,17 @@ public partial class WikiDataParserPage : UserControl
     private async void BtnUpdateItemsWiki_Click(object sender, RoutedEventArgs e)
     {
         using var _t = AppLogger.Timed("UpdateItemsWiki");
+        AppLogger.Info($"[UpdateItems] click: chunks={_lastItemChunks.Count}, firstEventChunk={_firstEventChunkIndex}, createdAt={_itemsCreatedAt}, flatItems={_lastFlatItems?.Count ?? -1}");
         if (!_main.Settings.WikiVerified)
         {
+            AppLogger.Warn("[UpdateItems] aborted: wiki bot not verified");
             ShowInfo("Wiki bot not verified. Configure credentials in Settings first.", InfoBarSeverity.Warning);
             return;
         }
 
         if (_lastItemChunks.Count == 0)
         {
+            AppLogger.Warn("[UpdateItems] aborted: no chunks generated");
             ShowInfo("No items data generated. Generate items first.", InfoBarSeverity.Warning);
             return;
         }
@@ -867,14 +918,9 @@ public partial class WikiDataParserPage : UserControl
                         foreach (var kv in WikiMappingService.ExtractLuaTableEntries(chunk.Lua, "items"))
                             localEntries.TryAdd(kv.Key, kv.Value);
 
-                    var added = localEntries.Keys.Except(wikiEntries.Keys).OrderBy(k => k).ToList();
-                    var removed = wikiEntries.Keys.Except(localEntries.Keys).OrderBy(k => k).ToList();
-                    var modified = localEntries.Keys.Intersect(wikiEntries.Keys)
-                        .Where(k => localEntries[k] != wikiEntries[k])
-                        .OrderBy(k => k)
-                        .Select(k => new ModifiedEntry(k, wikiEntries[k], localEntries[k]))
-                        .ToList();
-                    _itemsChangelog = new ChangelogData(added, removed, modified);
+                    _itemsChangelog = ComputeItemsChangelog(wikiEntries, localEntries);
+                    _lastWikiItemEntries = wikiEntries;
+                    _lastLocalItemEntries = localEntries;
                 }
                 else if (_itemsChangelog == null)
                 {
@@ -888,7 +934,146 @@ public partial class WikiDataParserPage : UserControl
                                 localEntries.TryAdd(kv.Key, kv.Value);
 
                         _itemsChangelog = ComputeItemsChangelog(arbiterContent, localEntries);
+                        _lastWikiItemEntries = WikiMappingService.ExtractLuaTableEntries(arbiterContent, "items");
+                        _lastLocalItemEntries = localEntries;
                     }
+                }
+
+                // Reset mapping state for this run
+                _lastMappingPatchedContent = null;
+                _lastMappingEnrichedCount = 0;
+                _lastMappingHandledIds = new HashSet<string>(StringComparer.Ordinal);
+
+                // Compute archive diff: existing Archive + newly-removed items + #missing#-chain shadows + restorations from live.
+                // _lastWikiItemEntries[id] holds the raw Lua entry for items about to be removed/shadowed — that's
+                // the canonical "last-known good" data we preserve in the archive.
+                AppLogger.Debug($"[UpdateItems] _itemsChangelog: removed={_itemsChangelog?.Removed.Count}, added={_itemsChangelog?.Added.Count}, modified={_itemsChangelog?.Modified.Count}, renamed={_itemsChangelog?.Renamed?.Count ?? 0}");
+                AppLogger.Debug($"[UpdateItems] _lastWikiItemEntries={_lastWikiItemEntries?.Count ?? -1}, _lastLocalItemEntries={_lastLocalItemEntries?.Count ?? -1}, _lastFlatItems={_lastFlatItems?.Count ?? -1}");
+                if (_lastWikiItemEntries != null && _lastLocalItemEntries != null && _itemsChangelog != null)
+                {
+                    ShowInfo("Computing items archive diff...", InfoBarSeverity.Informational);
+                    var existingArchiveContent = await WikiMappingService.FetchModuleContentAsync(ItemsArchiveService.ArchiveModuleTitle);
+                    var existingArchive = ItemsArchiveService.ParseArchive(existingArchiveContent)
+                        .ToDictionary(
+                            kv => kv.Key,
+                            kv => (IReadOnlyDictionary<string, string>)kv.Value,
+                            StringComparer.Ordinal);
+
+                    // Items still in local data but with broken chainName (`#missing#…` placeholder when game
+                    // can't resolve a spreadsheet cell). Treat as archive shadows: they keep their old wiki entry
+                    // (with proper chainName) so wiki pages keep rendering, but they're excluded from chainNames.
+                    _lastBrokenChainIds = new HashSet<string>(StringComparer.Ordinal);
+                    if (_lastFlatItems != null)
+                    {
+                        foreach (var f in _lastFlatItems)
+                        {
+                            if (!string.IsNullOrEmpty(f.ItemType) &&
+                                !string.IsNullOrEmpty(f.ChainName) &&
+                                f.ChainName.StartsWith("#missing#", StringComparison.Ordinal))
+                                _lastBrokenChainIds.Add(f.ItemType);
+                        }
+                    }
+                    AppLogger.Debug($"[UpdateItems] broken-chain ids ({_lastBrokenChainIds.Count}): {string.Join(", ", _lastBrokenChainIds.Take(10))}{(_lastBrokenChainIds.Count > 10 ? "..." : "")}");
+
+                    // Archive source = Removed (in wiki, not in local) ∪ broken-chain (in local but unresolvable).
+                    // ItemsArchiveService.Compute derives the bucket key from the item id (strip `_NN`) and
+                    // overwrites the entry's chainName field — we don't need to fix anything here.
+                    var archiveSourceRaw = new Dictionary<string, string>(StringComparer.Ordinal);
+                    foreach (var id in _itemsChangelog.Removed)
+                        if (_lastWikiItemEntries.TryGetValue(id, out var raw))
+                            archiveSourceRaw[id] = raw;
+                    foreach (var id in _lastBrokenChainIds)
+                        if (_lastWikiItemEntries.TryGetValue(id, out var raw))
+                            archiveSourceRaw[id] = raw;
+
+                    // Fetch Module:Datatable/Items/Mapping. If a broken-chain item already has a non-#missing#
+                    // chainName override there, the wiki page is already rendering correctly via mapping —
+                    // skip from archive shadow. Plus enrich the mapping entry with any missing fields from
+                    // the live items entry (without overwriting existing mapping fields).
+                    ShowInfo("Fetching Module:Datatable/Items/Mapping...", InfoBarSeverity.Informational);
+                    var mappingContent = await WikiMappingService.FetchModuleContentAsync(ItemsMappingService.MappingModuleTitle);
+                    var mappingEntries = ItemsMappingService.ParseMappingModule(mappingContent);
+                    var enrichedInners = new Dictionary<string, string>(StringComparer.Ordinal);
+                    var brokenIdsHandledByMapping = new HashSet<string>(StringComparer.Ordinal);
+
+                    foreach (var id in _lastBrokenChainIds.ToList())
+                    {
+                        if (!mappingEntries.TryGetValue(id, out var mapEntry)) continue;
+                        if (!mapEntry.Fields.TryGetValue("chainName", out var mapChain)) continue;
+                        var chainStr = mapChain.Trim().Trim('"');
+                        if (chainStr.StartsWith("#missing#", StringComparison.Ordinal)) continue;
+
+                        // Mapping has a non-broken chainName override → wiki page works via mapping.
+                        brokenIdsHandledByMapping.Add(id);
+
+                        // Enrich mapping with missing fields from local items entry (skipping broken chainName).
+                        if (!_lastLocalItemEntries.TryGetValue(id, out var localRaw)) continue;
+                        // Strip outer braces from raw entry: "{key=val, ...}" → "key=val, ..."
+                        var stripped = localRaw.Trim();
+                        if (stripped.StartsWith("{") && stripped.EndsWith("}"))
+                            stripped = stripped.Substring(1, stripped.Length - 2);
+                        var (localFields, localOrder) = ItemsMappingService.ParseLuaFields(stripped);
+
+                        bool changed = false;
+                        foreach (var key in localOrder)
+                        {
+                            if (key == "chainName") continue; // mapping already has the corrected one
+                            if (mapEntry.Fields.ContainsKey(key)) continue; // never overwrite existing
+                            mapEntry.Fields[key] = localFields[key];
+                            mapEntry.FieldOrder.Add(key);
+                            changed = true;
+                        }
+                        if (changed)
+                            enrichedInners[id] = mapEntry.EmitInnerLua();
+                    }
+
+                    AppLogger.Debug($"[UpdateItems] mapping: parsed {mappingEntries.Count} entries, enriched {enrichedInners.Count}, brokenIdsHandledByMapping={brokenIdsHandledByMapping.Count}");
+                    if (enrichedInners.Count > 0 && mappingContent != null)
+                    {
+                        _lastMappingPatchedContent = ItemsMappingService.PatchMappingEntries(mappingContent, enrichedInners);
+                        _lastMappingEnrichedCount = enrichedInners.Count;
+                        AppLogger.Debug($"[UpdateItems] mapping patch ready: {enrichedInners.Count} entries, content size {mappingContent.Length} -> {_lastMappingPatchedContent.Length}");
+                    }
+
+                    // Drop mapping-handled ids from broken-chain set: they don't need archive shadow.
+                    foreach (var id in brokenIdsHandledByMapping) _lastBrokenChainIds.Remove(id);
+                    _lastMappingHandledIds = brokenIdsHandledByMapping;
+                    AppLogger.Debug($"[UpdateItems] broken-chain ids after mapping handling: {_lastBrokenChainIds.Count}");
+                    // Recompute archiveSourceRaw to reflect the reduced broken set.
+                    archiveSourceRaw.Clear();
+                    foreach (var id in _itemsChangelog.Removed)
+                        if (_lastWikiItemEntries.TryGetValue(id, out var raw))
+                            archiveSourceRaw[id] = raw;
+                    foreach (var id in _lastBrokenChainIds)
+                        if (_lastWikiItemEntries.TryGetValue(id, out var raw))
+                            archiveSourceRaw[id] = raw;
+
+                    // Live ids exclude broken-chain ones — so they stay archived (don't get treated as "Restored")
+                    // even though they're still in chunks. resolveItem on wiki prefers archive when p.archived[id].
+                    var liveIds = new HashSet<string>(_lastLocalItemEntries.Keys, StringComparer.Ordinal);
+                    foreach (var id in _lastBrokenChainIds) liveIds.Remove(id);
+
+                    _lastArchiveDiff = ItemsArchiveService.Compute(existingArchive, archiveSourceRaw, liveIds);
+                    AppLogger.Debug($"[UpdateItems] archive diff: NewlyArchived={_lastArchiveDiff.NewlyArchived.Count}, Restored={_lastArchiveDiff.Restored.Count}, Carried={_lastArchiveDiff.Carried.Count}, FinalArchive chains={_lastArchiveDiff.FinalArchive.Count}");
+
+                    // Build the unified Archived list for the changelog: preserved items go here regardless of
+                    // mechanism (archive module or mapping override). User-facing way to confirm "nothing
+                    // is silently lost" — every removed-from-live item shows up either in Removed (truly gone)
+                    // or in Archived (data preserved on wiki via archive or mapping enrichment).
+                    var archivedList = new List<ArchivedEntry>();
+                    foreach (var entry in _lastArchiveDiff.NewlyArchived)
+                        archivedList.Add(new ArchivedEntry(entry.ItemId, "archive", entry.ChainName));
+                    if (_lastMappingHandledIds != null)
+                    {
+                        foreach (var id in _lastMappingHandledIds)
+                        {
+                            // Try to extract chainName from the patched mapping content
+                            var chain = ExtractChainNameFromEntry(_lastWikiItemEntries.GetValueOrDefault(id, ""));
+                            archivedList.Add(new ArchivedEntry(id, "mapping", chain));
+                        }
+                    }
+                    _itemsChangelog.Archived = archivedList.OrderBy(a => a.Id, StringComparer.Ordinal).ToList();
+                    AppLogger.Debug($"[UpdateItems] changelog Archived: {_itemsChangelog.Archived.Count} (archive={_lastArchiveDiff.NewlyArchived.Count}, mapping={_lastMappingHandledIds?.Count ?? 0})");
                 }
 
                 // Preview confirmation
@@ -911,9 +1096,61 @@ public partial class WikiDataParserPage : UserControl
                 var csrfToken = await WikiMappingService.GetCsrfTokenAsync(client);
 
                 const string blankContent = "-- This module is no longer in use\nreturn {}";
-                var totalActions = toUpdate.Count + toCreate.Count + toBlank.Count + 2; // +arbiter +modules page
+                var willPostArchive = _lastArchiveDiff != null && _lastArchiveDiff.HasChanges;
+                var willPostMapping = _lastMappingPatchedContent != null && _lastMappingEnrichedCount > 0;
+
+                // Pre-flight: detect whether Module:Items needs the archive-loader patch.
+                // We only post the patched module when (a) we actually have any archived items now
+                // (so the new fallback would have something to find) AND (b) the marker isn't there.
+                bool willPatchConsumer = false;
+                string? patchedConsumerLua = null;
+                var willHaveArchive = (_lastArchiveDiff != null && _lastArchiveDiff.FinalArchive.Count > 0);
+                if (willHaveArchive)
+                {
+                    ShowInfo($"Checking {ItemsArchiveService.ItemsConsumerModuleTitle} for archive support...", InfoBarSeverity.Informational);
+                    var consumerLua = await WikiMappingService.FetchModuleContentAsync(ItemsArchiveService.ItemsConsumerModuleTitle);
+                    if (consumerLua != null)
+                    {
+                        try
+                        {
+                            var (patched, changed) = ItemsArchiveService.PatchConsumerModule(consumerLua);
+                            if (changed)
+                            {
+                                willPatchConsumer = true;
+                                patchedConsumerLua = patched;
+                            }
+                        }
+                        catch (InvalidOperationException ex)
+                        {
+                            // Anchor mismatch — abort cleanly so user investigates.
+                            ShowInfo($"Cannot auto-patch {ItemsArchiveService.ItemsConsumerModuleTitle}: {ex.Message}", InfoBarSeverity.Error);
+                            btnUpdateItemsWiki.IsEnabled = true;
+                            return;
+                        }
+                    }
+                }
+
+                var totalActions = toUpdate.Count + toCreate.Count + toBlank.Count + 2 // +arbiter +modules page
+                                   + (willPostArchive ? 1 : 0)
+                                   + (willPostMapping ? 1 : 0)
+                                   + (willPatchConsumer ? 1 : 0);
                 int done = 0;
                 int created = 0, updated = 0, blanked = 0;
+
+                // Build broken-chain correction map: for items whose live chainName starts with "#missing#",
+                // recover the last-known-good chain name from the archive (which already has the correct chainName
+                // as its chain-bucket key). We patch chunk Lua before upload so live chunks get clean chainName values.
+                var brokenChainCorrections = new Dictionary<string, string>(StringComparer.Ordinal);
+                if (_lastBrokenChainIds != null && _lastArchiveDiff != null)
+                {
+                    foreach (var (chain, items) in _lastArchiveDiff.FinalArchive)
+                    {
+                        if (chain.StartsWith("#missing#", StringComparison.Ordinal)) continue; // defensive
+                        foreach (var id in items.Keys)
+                            if (_lastBrokenChainIds.Contains(id))
+                                brokenChainCorrections[id] = chain;
+                    }
+                }
 
                 // Upload data chunks
                 for (int i = 0; i < localCount; i++)
@@ -925,8 +1162,12 @@ public partial class WikiDataParserPage : UserControl
 
                     ShowInfo($"[{done + 1}/{totalActions}] {act} {title}...", InfoBarSeverity.Informational);
 
+                    var chunkLua = _lastItemChunks[i].Lua;
+                    if (brokenChainCorrections.Count > 0)
+                        chunkLua = ItemsArchiveService.PatchBrokenChainNamesInChunk(chunkLua, brokenChainCorrections);
+
                     await WikiMappingService.EditModuleAsync(
-                        client, csrfToken, title, _lastItemChunks[i].Lua,
+                        client, csrfToken, title, chunkLua,
                         $"{act} item data chunk {chunkIndex} (via MergeMansionWikiTools)");
 
                     if (isNew) created++; else updated++;
@@ -946,14 +1187,66 @@ public partial class WikiDataParserPage : UserControl
                     done++;
                 }
 
-                // Upload arbiter
+                // Upload Mapping module (enriched entries)
+                if (willPostMapping && _lastMappingPatchedContent != null)
+                {
+                    ShowInfo($"[{done + 1}/{totalActions}] Enriching {ItemsMappingService.MappingModuleTitle}...", InfoBarSeverity.Informational);
+                    await WikiMappingService.EditModuleAsync(
+                        client, csrfToken, ItemsMappingService.MappingModuleTitle, _lastMappingPatchedContent,
+                        $"Enrich {_lastMappingEnrichedCount} entries with missing item fields (via MergeMansionWikiTools)");
+                    done++;
+                }
+
+                // Upload Archive module (when there are archive changes)
+                int archivedItemCountForChainNames = 0;
+                if (willPostArchive && _lastArchiveDiff != null)
+                {
+                    ShowInfo($"[{done + 1}/{totalActions}] Updating {ItemsArchiveService.ArchiveModuleTitle}...", InfoBarSeverity.Informational);
+                    var archiveLua = LuaGeneratorService.BuildArchiveModule(_lastArchiveDiff.FinalArchive, _itemsCreatedAt);
+                    var archParts = new List<string>();
+                    if (_lastArchiveDiff.NewlyArchived.Count > 0) archParts.Add($"+{_lastArchiveDiff.NewlyArchived.Count} archived");
+                    if (_lastArchiveDiff.Restored.Count > 0) archParts.Add($"-{_lastArchiveDiff.Restored.Count} restored");
+                    var archSummary = $"Update items archive ({string.Join(", ", archParts)}) (via MergeMansionWikiTools)";
+                    await WikiMappingService.EditModuleAsync(
+                        client, csrfToken, ItemsArchiveService.ArchiveModuleTitle, archiveLua, archSummary);
+                    done++;
+                    archivedItemCountForChainNames = _lastArchiveDiff.FinalArchive.Sum(kv => kv.Value.Count);
+                }
+
+                // Upload arbiter — regenerate chainNames block to include archived ids in positional list
+                // + emit p.archived flat marker map alongside. Filter out items whose live chainName starts
+                // with "#missing#" — they're archived shadows so chainNames shouldn't list them under the
+                // broken chain name (their old chainName from the archive is what wiki callers should use).
                 ShowInfo($"[{done + 1}/{totalActions}] Updating arbiter {ItemsModuleTitle}...", InfoBarSeverity.Informational);
+                var chainNamesBlockForArbiter = _lastChainNamesBlock!;
+                string? archivedFlagsBlock = null;
+                if (_lastArchiveDiff != null && _lastArchiveDiff.FinalArchive.Count > 0 && _lastFlatItems != null)
+                {
+                    var liveFlatItems = _lastFlatItems
+                        .Where(f => string.IsNullOrEmpty(f.ChainName) ||
+                                    !f.ChainName.StartsWith("#missing#", StringComparison.Ordinal))
+                        .ToList();
+                    chainNamesBlockForArbiter = LuaGeneratorService.BuildChainNamesTable(
+                        liveFlatItems, _lastArchiveDiff.ArchivedIdsByChain());
+                    archivedFlagsBlock = LuaGeneratorService.BuildArchivedFlagsTable(
+                        _lastArchiveDiff.FinalArchive.Values.SelectMany(d => d.Keys));
+                }
                 var arbiterLua = WikiMappingService.GenerateItemsArbiterLua(
-                    localCount, _lastChainNamesBlock!, _itemsCreatedAt);
+                    localCount, chainNamesBlockForArbiter, archivedFlagsBlock, _itemsCreatedAt);
                 await WikiMappingService.EditModuleAsync(
                     client, csrfToken, ItemsModuleTitle, arbiterLua,
-                    $"Update items arbiter ({localCount} chunks) (via MergeMansionWikiTools)");
+                    $"Update items arbiter ({localCount} chunks{(archivedItemCountForChainNames > 0 ? $", {archivedItemCountForChainNames} archived" : "")}) (via MergeMansionWikiTools)");
                 done++;
+
+                // Patch consumer Module:Items (lazy archive loader + resolveItem fallback)
+                if (willPatchConsumer && patchedConsumerLua != null)
+                {
+                    ShowInfo($"[{done + 1}/{totalActions}] Patching {ItemsArchiveService.ItemsConsumerModuleTitle} for archive support...", InfoBarSeverity.Informational);
+                    await WikiMappingService.EditModuleAsync(
+                        client, csrfToken, ItemsArchiveService.ItemsConsumerModuleTitle, patchedConsumerLua,
+                        $"Add archive loader + resolveItem fallback (via MergeMansionWikiTools)");
+                    done++;
+                }
 
                 // Update Modules page
                 ShowInfo($"[{done + 1}/{totalActions}] Updating Modules page...", InfoBarSeverity.Informational);
@@ -998,6 +1291,8 @@ public partial class WikiDataParserPage : UserControl
     private static ChangelogData ComputeItemsChangelog(
         Dictionary<string, string> wikiEntries, Dictionary<string, string> localEntries)
     {
+        AppLogger.Debug($"[ComputeItemsChangelog] wikiEntries={wikiEntries.Count}, localEntries={localEntries.Count}");
+
         var added = localEntries.Keys.Except(wikiEntries.Keys).OrderBy(k => k).ToList();
         var removed = wikiEntries.Keys.Except(localEntries.Keys).OrderBy(k => k).ToList();
         var modified = localEntries.Keys.Intersect(wikiEntries.Keys)
@@ -1005,7 +1300,82 @@ public partial class WikiDataParserPage : UserControl
             .OrderBy(k => k)
             .Select(k => new ModifiedEntry(k, wikiEntries[k], localEntries[k]))
             .ToList();
-        return new ChangelogData(added, removed, modified);
+
+        AppLogger.Debug($"[ComputeItemsChangelog] initial: +{added.Count} added, -{removed.Count} removed, ~{modified.Count} modified");
+
+        // Rename detection: pair Removed items with their counterparts in CURRENT LOCAL DATA.
+        // Match heuristic: both ids match `^CBE_<event>_(.+)$` and the (.+) part is identical, but the
+        // <event> segments differ. Example: `CBE_Easter2025_Assembly_01` (Removed — old event ended) ↔
+        // `CBE_SweetMess_Assembly_01` (still in local — current event) → game devs renamed the event.
+        //
+        // IMPORTANT: counterparts are searched in the FULL set of localEntries (not just `added`) because
+        // the new event's items typically already exist on the wiki (Modified or unchanged), they're not
+        // freshly added. Looking only at `added` misses them entirely.
+        var renamed = new List<RenamedEntry>();
+        var rxEvent = new System.Text.RegularExpressions.Regex(
+            @"^CBE_([A-Za-z0-9]+)_(.+)$", System.Text.RegularExpressions.RegexOptions.Compiled);
+
+        // Build local index: rest → list of (id, eventPrefix)
+        var localByRest = new Dictionary<string, List<(string Id, string Event)>>(StringComparer.Ordinal);
+        foreach (var lid in localEntries.Keys)
+        {
+            var m = rxEvent.Match(lid);
+            if (!m.Success) continue;
+            var ev = m.Groups[1].Value;
+            var rest = m.Groups[2].Value;
+            if (!localByRest.TryGetValue(rest, out var list))
+                localByRest[rest] = list = new List<(string, string)>();
+            list.Add((lid, ev));
+        }
+        AppLogger.Debug($"[ComputeItemsChangelog] localByRest entries: {localByRest.Count} unique rests across local items");
+
+        var pairedRemoved = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var rid in removed)
+        {
+            var m = rxEvent.Match(rid);
+            if (!m.Success) continue;
+            var oldEvent = m.Groups[1].Value;
+            var rest = m.Groups[2].Value;
+            if (!localByRest.TryGetValue(rest, out var candidates) || candidates.Count == 0) continue;
+            // Match candidates with a DIFFERENT event prefix (otherwise it's a no-op pairing).
+            (string Id, string Event)? match = null;
+            foreach (var c in candidates)
+            {
+                if (!string.Equals(c.Event, oldEvent, StringComparison.Ordinal))
+                {
+                    match = c;
+                    break;
+                }
+            }
+            if (match == null) continue;
+
+            pairedRemoved.Add(rid);
+            var oldChain = ExtractChainNameFromEntry(wikiEntries.GetValueOrDefault(rid, ""));
+            var newChain = ExtractChainNameFromEntry(localEntries.GetValueOrDefault(match.Value.Id, ""));
+            renamed.Add(new RenamedEntry(rid, match.Value.Id, oldChain, newChain));
+        }
+        if (renamed.Count > 0)
+        {
+            removed = removed.Where(r => !pairedRemoved.Contains(r)).ToList();
+            renamed = renamed.OrderBy(r => r.OldId, StringComparer.Ordinal).ToList();
+        }
+
+        AppLogger.Debug($"[ComputeItemsChangelog] final: +{added.Count} added, -{removed.Count} removed (was {removed.Count + pairedRemoved.Count}), ~{modified.Count} modified, ↻{renamed.Count} renamed");
+        if (renamed.Count > 0)
+        {
+            // Log first 5 rename pairs for sanity check
+            foreach (var r in renamed.Take(5))
+                AppLogger.Debug($"[ComputeItemsChangelog] rename sample: {r.OldId} → {r.NewId}  (chain {r.OldChain} → {r.NewChain})");
+        }
+
+        return new ChangelogData(added, removed, modified, renamed.Count > 0 ? renamed : null);
+    }
+
+    private static string? ExtractChainNameFromEntry(string raw)
+    {
+        if (string.IsNullOrEmpty(raw)) return null;
+        var m = System.Text.RegularExpressions.Regex.Match(raw, @"chainName\s*=\s*""([^""]+)""");
+        return m.Success ? m.Groups[1].Value : null;
     }
 
     private static ChangelogData ComputeAreasChangelog(
@@ -1253,10 +1623,54 @@ public partial class WikiDataParserPage : UserControl
                 $"{wikiBase}Module:Datatable/Items/{i}");
         }
 
+        // Mapping enrichment step (shown only if any entries got enriched)
+        if (_lastMappingPatchedContent != null && _lastMappingEnrichedCount > 0)
+        {
+            AddStep("🧩", $"Enrich {ItemsMappingService.MappingModuleTitle}",
+                $"+{_lastMappingEnrichedCount} entries enriched with missing fields from items data",
+                "Existing mapping fields are preserved; only missing fields (name, level, desc, …) are appended",
+                $"{wikiBase}{ItemsMappingService.MappingModuleTitle}");
+        }
+
+        // Archive step (shown only if there are archive changes)
+        if (_lastArchiveDiff != null && _lastArchiveDiff.HasChanges)
+        {
+            var archAdds = _lastArchiveDiff.NewlyArchived.Count;
+            var archRestores = _lastArchiveDiff.Restored.Count;
+            var archCarried = _lastArchiveDiff.Carried.Count;
+            var brokenCount = _lastBrokenChainIds?.Count ?? 0;
+            var removedRegular = archAdds - brokenCount;
+            var archParts = new List<string>();
+            if (archAdds > 0)
+            {
+                if (brokenCount > 0 && removedRegular > 0)
+                    archParts.Add($"+{archAdds} new archived ({removedRegular} removed, {brokenCount} #missing# shadow)");
+                else if (brokenCount > 0)
+                    archParts.Add($"+{brokenCount} #missing# chain shadow archived");
+                else
+                    archParts.Add($"+{archAdds} new archived");
+            }
+            if (archRestores > 0) archParts.Add($"-{archRestores} restored to live");
+            if (archCarried > 0) archParts.Add($"{archCarried} kept");
+            AddStep("\uD83D\uDDC4", $"Update {ItemsArchiveService.ArchiveModuleTitle}",
+                string.Join(", ", archParts),
+                "Preserves last-known full data of removed items + #missing# chain shadows so wiki pages keep working",
+                $"{wikiBase}{ItemsArchiveService.ArchiveModuleTitle}");
+        }
+
         AddStep("\uD83D\uDD17", $"Update {ItemsModuleTitle}",
-            $"Arbiter \u2014 require() {chunkCount} chunk(s) + p.chainNames",
-            "Flat-merges all chunks into p.items, includes chainNames directly",
+            $"Arbiter \u2014 require() {chunkCount} chunk(s) + p.chainNames + p.archived",
+            "Flat-merges all chunks into p.items; chainNames stays positional (ipairs-friendly), p.archived flat marker map for archived ids",
             $"{wikiBase}{ItemsModuleTitle}");
+
+        // Show consumer patch step in dialog if archive is non-empty (we'll detect at click-time)
+        if (_lastArchiveDiff != null && _lastArchiveDiff.FinalArchive.Count > 0)
+        {
+            AddStep("\uD83E\uDE79", $"Patch {ItemsArchiveService.ItemsConsumerModuleTitle} (if needed)",
+                "Lazy archive loader + resolveItem fallback to Archive module",
+                "Idempotent \u2014 only posts when the loader marker isn't already present",
+                $"{wikiBase}{ItemsArchiveService.ItemsConsumerModuleTitle}");
+        }
 
         var modulesDetail = _firstEventChunkIndex > 0
             ? $"Add/update {chunkCount} submodule link(s) with main/event annotations"
@@ -1291,19 +1705,24 @@ public partial class WikiDataParserPage : UserControl
         try
         {
             // Parse fresh from JSON — pure game data, no wiki mapping, no custom names
-            var (itemChunks, chainNamesBlock, chainCount, createdAt, firstEventIdx) = await Task.Run(() =>
+            var (itemChunks, chainNamesBlock, chainCount, createdAt, firstEventIdx, flatItems) = await Task.Run(() =>
             {
                 using var _t = AppLogger.Timed("GenerateItemChunks");
                 var freshDs = new DataService(new ChainNameService());
                 freshDs.LoadAsync(chainPath).GetAwaiter().GetResult();
                 var result = _luaGen.GenerateItemChunks(freshDs.Chains, useRawNames: true, freshDs.CreatedAt);
                 var cn = _luaGen.GenerateChainNamesLua(freshDs.Chains, useRawNames: true);
-                return (result.Chunks, cn, freshDs.Chains.Count, freshDs.CreatedAt, result.FirstEventChunkIndex);
+                return (result.Chunks, cn, freshDs.Chains.Count, freshDs.CreatedAt, result.FirstEventChunkIndex, result.FlatItems);
             });
             _lastItemChunks = itemChunks;
             _lastChainNamesBlock = chainNamesBlock;
             _itemsCreatedAt = createdAt;
             _firstEventChunkIndex = firstEventIdx;
+            _lastFlatItems = flatItems;
+            _lastArchiveDiff = null;
+            _lastWikiItemEntries = null;
+            _lastLocalItemEntries = null;
+            _lastBrokenChainIds = null;
 
             // For backward compat: _lastCombined is the single module content (1 chunk)
             // or the first chunk preview (multi-chunk) — used by BuildItemNameMap, changelog
@@ -1466,6 +1885,8 @@ public partial class WikiDataParserPage : UserControl
         if (changelog.Modified.Count > 0) parts.Add($"{changelog.Modified.Count} modified");
         if (changelog.Added.Count > 0) parts.Add($"+{changelog.Added.Count} new");
         if (changelog.Removed.Count > 0) parts.Add($"\u2212{changelog.Removed.Count} removed");
+        if ((changelog.Renamed?.Count ?? 0) > 0) parts.Add($"\u21bb{changelog.Renamed!.Count} renamed");
+        if ((changelog.Archived?.Count ?? 0) > 0) parts.Add($"\ud83d\udce6{changelog.Archived!.Count} archived");
 
         var summaryTb = new WpfTextBlock
         {
@@ -2604,6 +3025,78 @@ public partial class WikiDataParserPage : UserControl
                     panel => AddSimpleEntries(panel, cl.Removed.Skip(initialCount), "\u2212", redBrush));
 
             AddCollapsibleSection(root, $"Removed ({cl.Removed.Count})", redBrush, secondary, remContent);
+        }
+
+        // Renamed (CBE event rename: CBE_Easter2025_Foo_NN \u2194 CBE_SweetMess_Foo_NN). Items are shown
+        // here instead of in Removed/Added so the user sees they're not lost \u2014 just relocated.
+        // Renamed items are excluded from the archive (they live in the new id).
+        var renamedList = cl.Renamed;
+        if (renamedList != null && renamedList.Count > 0)
+        {
+            var blueBrush = new SolidColorBrush(Color.FromRgb(0x6B, 0xA0, 0xE8));
+            var renContent = new StackPanel { Margin = new Thickness(4, 0, 0, 4) };
+            void AddRenamedEntries(StackPanel panel, IEnumerable<RenamedEntry> entries)
+            {
+                foreach (var r in entries)
+                {
+                    var line = new WpfTextBlock
+                    {
+                        FontSize = 11, Foreground = blueBrush,
+                        Margin = new Thickness(0, 1, 0, 1), TextWrapping = TextWrapping.Wrap
+                    };
+                    line.Inlines.Add(new System.Windows.Documents.Run("\u21bb ") { Foreground = blueBrush });
+                    line.Inlines.Add(new System.Windows.Documents.Run(r.OldId) { Foreground = redBrush });
+                    line.Inlines.Add(new System.Windows.Documents.Run(" \u2192 ") { Foreground = secondary });
+                    line.Inlines.Add(new System.Windows.Documents.Run(r.NewId) { Foreground = greenBrush });
+                    if (!string.IsNullOrEmpty(r.OldChain) && r.OldChain != r.NewChain)
+                    {
+                        line.Inlines.Add(new System.Windows.Documents.Run($"  ({r.OldChain} \u2192 {r.NewChain ?? "?"})")
+                        { Foreground = tertiary, FontSize = 10 });
+                    }
+                    panel.Children.Add(line);
+                }
+            }
+            AddRenamedEntries(renContent, renamedList.Take(initialCount));
+            if (renamedList.Count > initialCount)
+                AddShowAllLink(renContent, renamedList.Count, secondary,
+                    panel => AddRenamedEntries(panel, renamedList.Skip(initialCount)));
+
+            AddCollapsibleSection(root, $"Renamed ({renamedList.Count})", blueBrush, secondary, renContent);
+        }
+
+        // Archived: items preserved either in Module:Datatable/Items/Archive (full data backed up) or
+        // in Module:Datatable/Items/Mapping (override + enrichment). Reassures user nothing was silently lost.
+        var archivedList = cl.Archived;
+        if (archivedList != null && archivedList.Count > 0)
+        {
+            var goldBrush = new SolidColorBrush(Color.FromRgb(0xC8, 0xA8, 0x4A));
+            var archContent = new StackPanel { Margin = new Thickness(4, 0, 0, 4) };
+            void AddArchivedEntries(StackPanel panel, IEnumerable<ArchivedEntry> entries)
+            {
+                foreach (var a in entries)
+                {
+                    var line = new WpfTextBlock
+                    {
+                        FontSize = 11, Foreground = primary,
+                        Margin = new Thickness(0, 1, 0, 1), TextWrapping = TextWrapping.Wrap
+                    };
+                    line.Inlines.Add(new System.Windows.Documents.Run("📦 ") { Foreground = goldBrush });
+                    line.Inlines.Add(new System.Windows.Documents.Run(a.Id) { Foreground = primary });
+                    var whereLabel = a.Where == "archive" ? "→ Archive" : "→ Mapping";
+                    line.Inlines.Add(new System.Windows.Documents.Run($"  {whereLabel}")
+                    { Foreground = goldBrush, FontSize = 10 });
+                    if (!string.IsNullOrEmpty(a.Chain))
+                        line.Inlines.Add(new System.Windows.Documents.Run($"  ({a.Chain})")
+                        { Foreground = tertiary, FontSize = 10 });
+                    panel.Children.Add(line);
+                }
+            }
+            AddArchivedEntries(archContent, archivedList.Take(initialCount));
+            if (archivedList.Count > initialCount)
+                AddShowAllLink(archContent, archivedList.Count, secondary,
+                    panel => AddArchivedEntries(panel, archivedList.Skip(initialCount)));
+
+            AddCollapsibleSection(root, $"Archived ({archivedList.Count})", goldBrush, secondary, archContent);
         }
     }
 

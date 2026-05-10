@@ -33,6 +33,12 @@ public partial class TableGeneratorDialog : FluentWindow
         // Auto-check hardcode name for event chains with parenthetical (e.g., "Puzzle Box (Event)")
         chkHardcodeName.IsChecked = chain.IsEventChain && chain.DisplayName.Contains('(');
         chkLowPrices.IsChecked = chain.IsEventChain ? true : main.Settings.LowPrices;
+        chkIncludeHeading.IsChecked = main.Settings.TableGeneratorIncludeHeading;
+
+        // Show "Include Tasks section" only when chain has at least one OrderFeatures item.
+        bool hasOrderTasks = chain.Items.Any(i => i.OrderTasks is { Count: > 0 });
+        chkIncludeTasks.Visibility = hasOrderTasks ? Visibility.Visible : Visibility.Collapsed;
+        chkIncludeTasks.IsChecked = hasOrderTasks; // default ON when applicable
 
         // Source group selector for merged chains with level collisions
         if (chain.HasLevelCollisions && chain.MergedFromConfigKeys is { Count: > 1 })
@@ -80,6 +86,16 @@ public partial class TableGeneratorDialog : FluentWindow
         GenerateTable();
     }
 
+    private void ChkIncludeHeading_Changed(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+
+        _main.Settings.TableGeneratorIncludeHeading = chkIncludeHeading.IsChecked == true;
+        _main.SaveSettings();
+
+        GenerateTable();
+    }
+
     private void CmbSourceGroup_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
     {
         if (cmbSourceGroup.SelectedIndex <= 0)
@@ -115,6 +131,19 @@ public partial class TableGeneratorDialog : FluentWindow
             bool hardcodeName = chkHardcodeName.IsChecked == true;
 
             var result = generator.Generate(_effectiveChain, _tableName, lowPrices, hardcodeName);
+
+            // Append Tasks section for items with OrderFeatures (e.g. Distillation Apparatus, Vending Machine).
+            // Convention from wiki: one blank line between Merge Stages table and Tasks section.
+            if (chkIncludeTasks.IsChecked == true)
+            {
+                var tasksBlocks = _effectiveChain.Items
+                    .Where(i => i.IsOrder && i.OrderTasks is { Count: > 0 })
+                    .Select(i => generator.GenerateOrderTasksTable(i))
+                    .Where(b => !string.IsNullOrEmpty(b))
+                    .ToList();
+                if (tasksBlocks.Count > 0)
+                    result += "\n" + string.Join("\n", tasksBlocks);
+            }
 
             // Prepend wiki heading if checked
             if (chkIncludeHeading.IsChecked == true)

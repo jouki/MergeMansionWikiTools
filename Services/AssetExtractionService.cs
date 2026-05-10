@@ -41,7 +41,30 @@ internal static class AssetExtractionService
         float RectY,
         float RectWidth,
         float RectHeight,
-        bool Rotated = false);
+        bool Rotated = false,
+        // ── Unity Sprite metadata (extracted from Sprite asset) ────────────
+        // Native canvas size (Sprite.m_Rect width/height) — what the sprite
+        // would be as a standalone texture before atlas packing.
+        float? CanvasWidth = null,
+        float? CanvasHeight = null,
+        // Pivot (Sprite.m_Pivot) — normalized 0..1; typically (0.5, 0.5).
+        float? PivotX = null,
+        float? PivotY = null,
+        // Atlas tag (Sprite.m_AtlasTags[0]) — SpriteAtlas asset this sprite belongs to.
+        string? AtlasTag = null,
+        // Pixels per unit (Sprite.m_PixelsToUnits) — Unity standard 100.
+        float? PixelsPerUnit = null,
+        // 9-slice border (Sprite.m_Border) — left, bottom, right, top.
+        float? BorderLeft = null,
+        float? BorderBottom = null,
+        float? BorderRight = null,
+        float? BorderTop = null,
+        // ── SpriteAtlas-specific (extracted from SpriteAtlas.SpriteAtlasData) ─
+        // Trim offset within atlas: when non-zero, the sprite was trimmed during
+        // packing and Rect doesn't include the full visual content's transparent
+        // margin. In Merge Mansion atlases this is consistently (0,0).
+        float? TextureRectOffsetX = null,
+        float? TextureRectOffsetY = null);
 
     /// <summary>
     /// Spine skeleton skin → sprite mapping.
@@ -372,18 +395,35 @@ internal static class AssetExtractionService
                         string? outPath;
                         lock (_fileLock)
                         {
-                            // Check if an identical file already exists (skip duplicates)
+                            // Check if an identical file already exists (skip duplicates).
+                            // Look at ALL existing variants (base + _<suffix> + _<suffix>_N) —
+                            // not just basePath. Without this, repeated re-extractions accumulate
+                            // bit-identical duplicates (e.g. MainHubBadgeArt_X_2.png, _3.png ...)
+                            // because the original IsFileIdentical only checked basePath.
                             var basePath = Path.Combine(outputDir, safeFileName);
-                            if (File.Exists(basePath) && IsFileIdentical(basePath, pngBytes))
+                            var baseNameOnly2 = Path.GetFileNameWithoutExtension(safeFileName);
+                            var ext2 = Path.GetExtension(safeFileName);
+                            outPath = null;
+                            try
                             {
-                                skipped++;
-                                outPath = null;
+                                var existingVariants = Directory.GetFiles(outputDir,
+                                    $"{baseNameOnly2}*{ext2}");
+                                foreach (var existing in existingVariants)
+                                {
+                                    if (IsFileIdentical(existing, pngBytes))
+                                    {
+                                        skipped++;
+                                        outPath = null;
+                                        goto skipWrite;
+                                    }
+                                }
                             }
-                            else
-                            {
-                                outPath = GetUniqueFilePath(outputDir, safeFileName, suffix);
-                                File.Create(outPath).Dispose(); // reserve the path
-                            }
+                            catch { /* directory access failed — fall through to write */ }
+
+                            // No existing file matches → reserve a unique path for write.
+                            outPath = GetUniqueFilePath(outputDir, safeFileName, suffix);
+                            File.Create(outPath).Dispose(); // reserve the path
+                            skipWrite:;
 
                             // Store suffix for every file (even first/plain) for post-processing rename
                             var baseNameOnly = Path.GetFileNameWithoutExtension(safeFileName);
@@ -446,7 +486,7 @@ internal static class AssetExtractionService
                             var spriteName = baseField["m_Name"].AsString;
                             if (string.IsNullOrEmpty(spriteName)) continue;
 
-                            // Read rect (position in atlas)
+                            // Read rect (= native canvas size for standalone sprite asset)
                             var rect = baseField["m_Rect"];
                             var rx = rect["x"].AsFloat;
                             var ry = rect["y"].AsFloat;
@@ -481,7 +521,30 @@ internal static class AssetExtractionService
                                     textureName = InferTextureFromSpriteName(spriteName);
                             }
 
-                            sprites.Add(new SpriteInfo(spriteName, textureName, rx, ry, rw, rh));
+                            // Extract richer Sprite metadata (pivot, border, atlas tag, etc.)
+                            float? pivotX = null, pivotY = null;
+                            float? bL = null, bB = null, bR = null, bT = null;
+                            float? ppu = null;
+                            string? atlasTag = null;
+                            try { var pv = baseField["m_Pivot"]; pivotX = pv["x"].AsFloat; pivotY = pv["y"].AsFloat; } catch { }
+                            try { var br = baseField["m_Border"]; bL = br["x"].AsFloat; bB = br["y"].AsFloat; bR = br["z"].AsFloat; bT = br["w"].AsFloat; } catch { }
+                            try { ppu = baseField["m_PixelsToUnits"].AsFloat; } catch { }
+                            try
+                            {
+                                var tagsArr = baseField["m_AtlasTags.Array"];
+                                if (!tagsArr.IsDummy && tagsArr.Children.Count > 0)
+                                    atlasTag = tagsArr.Children[0].AsString;
+                            }
+                            catch { }
+
+                            sprites.Add(new SpriteInfo(
+                                spriteName, textureName, rx, ry, rw, rh,
+                                Rotated: false,
+                                CanvasWidth: rw, CanvasHeight: rh,
+                                PivotX: pivotX, PivotY: pivotY,
+                                AtlasTag: atlasTag,
+                                PixelsPerUnit: ppu,
+                                BorderLeft: bL, BorderBottom: bB, BorderRight: bR, BorderTop: bT));
                         }
                         catch { /* sprite metadata read failed — non-critical */ }
                     }
@@ -518,7 +581,7 @@ internal static class AssetExtractionService
                             AppLogger.Info($"[ATLAS] '{atlasName}': renderDataMap.IsDummy={mapField.IsDummy}, children={(!mapField.IsDummy ? mapField.Children.Count : 0)}");
                             if (mapField.IsDummy || mapField.Children.Count == 0) continue;
 
-                            var atlasRects = new List<(float x, float y, float w, float h, string texName)>();
+                            var atlasRects = new List<(float x, float y, float w, float h, string texName, float offX, float offY)>();
 
                             foreach (var entry in mapField.Children)
                             {
@@ -526,6 +589,8 @@ internal static class AssetExtractionService
                                 {
                                     var value = entry[1]; // SpriteAtlasData
                                     var textureRect = value["textureRect"];
+                                    float offX = 0f, offY = 0f;
+                                    try { var off = value["textureRectOffset"]; offX = off["x"].AsFloat; offY = off["y"].AsFloat; } catch { }
 
                                     // Resolve texture name PER ENTRY (each sprite can be on a different atlas page)
                                     string entryTexName = "";
@@ -550,7 +615,8 @@ internal static class AssetExtractionService
                                         textureRect["y"].AsFloat,
                                         textureRect["width"].AsFloat,
                                         textureRect["height"].AsFloat,
-                                        entryTexName));
+                                        entryTexName,
+                                        offX, offY));
                                 }
                                 catch (Exception ex) { AppLogger.Info($"[ATLAS] Map entry read failed: {ex.GetType().Name}: {ex.Message}"); }
                             }
@@ -565,26 +631,33 @@ internal static class AssetExtractionService
                             AppLogger.Info($"[ATLAS] '{atlasName}': {atlasRects.Count} valid rects, fallbackTex='{fallbackTexName}'");
                             if (atlasRects.Count == 0) continue;
 
-                            // Create SpriteInfo entries — each sprite has its own texture page
+                            // Create SpriteInfo entries — each sprite has its own texture page.
+                            // textureRectOffset captured for completeness; in MM atlases it's (0,0).
                             int count = Math.Min(spriteNames.Count, atlasRects.Count);
                             for (int j = 0; j < count; j++)
                             {
-                                var (rx, ry, rw, rh, texName) = atlasRects[j];
+                                var (rx, ry, rw, rh, texName, offX, offY) = atlasRects[j];
                                 if (rw > 0 && rh > 0)
                                 {
                                     var effectiveTex = !string.IsNullOrEmpty(texName) ? texName : fallbackTexName;
-                                    sprites.Add(new SpriteInfo(spriteNames[j], effectiveTex, rx, ry, rw, rh));
+                                    sprites.Add(new SpriteInfo(
+                                        spriteNames[j], effectiveTex, rx, ry, rw, rh,
+                                        Rotated: false,
+                                        TextureRectOffsetX: offX, TextureRectOffsetY: offY));
                                 }
                             }
 
                             // Extra rects without names → auto-generated names
                             for (int j = count; j < atlasRects.Count; j++)
                             {
-                                var (rx, ry, rw, rh, texName) = atlasRects[j];
+                                var (rx, ry, rw, rh, texName, offX, offY) = atlasRects[j];
                                 if (rw > 0 && rh > 0)
                                 {
                                     var effectiveTex = !string.IsNullOrEmpty(texName) ? texName : fallbackTexName;
-                                    sprites.Add(new SpriteInfo($"{atlasName}_{j}", effectiveTex, rx, ry, rw, rh));
+                                    sprites.Add(new SpriteInfo(
+                                        $"{atlasName}_{j}", effectiveTex, rx, ry, rw, rh,
+                                        Rotated: false,
+                                        TextureRectOffsetX: offX, TextureRectOffsetY: offY));
                                 }
                             }
 
@@ -1053,20 +1126,30 @@ internal static class AssetExtractionService
                             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
                         if (existing != null)
                         {
-                            // Union sprites by name — keep existing, append new
-                            var existingNames = existing.Sprites
-                                .Select(s => s.Name)
-                                .ToHashSet(StringComparer.OrdinalIgnoreCase);
-                            spriteList = existing.Sprites
-                                .Concat(spriteList.Where(s => !existingNames.Contains(s.Name)))
+                            // Union sprites by (name, textureName) — FRESH WINS, fall back to existing.
+                            // A sprite has two entries in atlas data: atlas-member (textureName=atlas)
+                            // and standalone (textureName=name). Both must coexist, so the dedup key
+                            // is (name, textureName), not name alone. Fresh entries always replace
+                            // existing matches — otherwise schema additions (like v0.20.45's pivot,
+                            // border, canvasWidth/Height) never propagate because old entries shadow
+                            // newer-format ones with the same name+texture.
+                            int freshCount = spriteList.Count;
+                            var freshKeys = spriteList
+                                .Select(s => (s.Name, s.TextureName))
+                                .ToHashSet();
+                            int keptFromExisting = existing.Sprites.Count(s => !freshKeys.Contains((s.Name, s.TextureName)));
+                            spriteList = spriteList
+                                .Concat(existing.Sprites.Where(s => !freshKeys.Contains((s.Name, s.TextureName))))
                                 .ToList();
+                            int replacedByFresh = (existing.Sprites.Count + freshCount) - spriteList.Count;
+                            AppLogger.Info($"Atlas data merge: {freshCount} fresh + {keptFromExisting} kept-from-existing (replaced {replacedByFresh} stale entries from previous extractions)");
 
-                            // Union skin mappings by (SkeletonName, SkinName) — keep existing, append new
-                            var existingKeys = existing.SkinMappings
+                            // Union skin mappings by (SkeletonName, SkinName) — FRESH WINS, fall back to existing.
+                            var freshSkinKeys = skinMapList
                                 .Select(m => (m.SkeletonName, m.SkinName))
                                 .ToHashSet();
-                            skinMapList = existing.SkinMappings
-                                .Concat(skinMapList.Where(m => !existingKeys.Contains((m.SkeletonName, m.SkinName))))
+                            skinMapList = skinMapList
+                                .Concat(existing.SkinMappings.Where(m => !freshSkinKeys.Contains((m.SkeletonName, m.SkinName))))
                                 .ToList();
 
                             // Merge pool tag mapping — new extraction wins (overwrite existing keys)

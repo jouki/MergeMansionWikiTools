@@ -33,6 +33,9 @@ public static class AppLogger
 
     public static void Warn(string msg) => Enqueue("WARN", msg);
 
+    /// <summary>Verbose diagnostic logging for tracing internal state. Always enabled.</summary>
+    public static void Debug(string msg) => Enqueue("DEBUG", msg);
+
     public static void Error(string msg, Exception? ex = null)
     {
         if (ex != null)

@@ -27,10 +27,13 @@ public class LuaTask
     public string? ItemReward { get; set; }
     public string? UnlockDate { get; set; }
     public Dictionary<string, int> TokenValues { get; set; } = new();
-    // Theme marker for special minigame tasks (IllustrationTask + CardStack).
+    // Minigame theme marker (IllustrationTask + CardStack).
     // Values from game data: "Dollhouse", "Painting", "Perfumery", "Card", "Book", "SpyNotes".
     // Present on both parent (IllustrationTask) and all sub-tasks sharing the table.
-    public string? Special { get; set; }
+    public string? Minigame { get; set; }
+    // True when this hotspot has CompleteIllustrationRequirement — marks the parent
+    // IllustrationTask in a minigame group (sub-tasks use direct CustomHotspotTableId).
+    public bool IsIllustrationParent { get; set; }
 }
 
 // Internal helper — keeps task relationships during parsing
@@ -47,7 +50,8 @@ internal class TaskNode
     public string? ItemReward { get; set; }
     public string? UnlockDate { get; set; }
     public Dictionary<string, int> TokenValues { get; set; } = new();
-    public string? Special { get; set; }
+    public string? Minigame { get; set; }
+    public bool IsIllustrationParent { get; set; }
 }
 
 // ── Service ──────────────────────────────────────────────────────────
@@ -138,7 +142,8 @@ public class AreasService
         string? ItemReward,
         string? UnlockDate,
         Dictionary<string, int> TokenValues,
-        string? Special);
+        string? Minigame,
+        bool IsIllustrationParent);
 
     private static Dictionary<string, HotspotInfo> BuildHotspotsLookup(JsonElement areaEl)
     {
@@ -158,12 +163,30 @@ public class AreasService
             var (xp, item) = ParseHotspotRewards(hs);
             var unlockDate = ParseTimeNeeded(hs, "UnlockRequirementsList");
             var tokens = ParseTokenValues(hs);
-            var special = GetStr(hs, "Theme");
+            var minigame = GetStr(hs, "Theme");
+            var isIllustrationParent = HasCompleteIllustrationReq(hs);
             result[id] = new HotspotInfo(desc, reqs, xp, item, unlockDate, tokens,
-                string.IsNullOrEmpty(special) ? null : special);
+                string.IsNullOrEmpty(minigame) ? null : minigame,
+                isIllustrationParent);
         }
 
         return result;
+    }
+
+    // Parent IllustrationTask is marked by presence of CompleteIllustrationRequirement
+    // in RequirementsList. Its sub-tasks use direct CustomHotspotTableId (no such req).
+    private static bool HasCompleteIllustrationReq(JsonElement hs)
+    {
+        if (!hs.TryGetProperty("RequirementsList", out var list) ||
+            list.ValueKind != JsonValueKind.Array)
+            return false;
+        foreach (var req in list.EnumerateArray())
+        {
+            if (req.ValueKind == JsonValueKind.Object &&
+                req.TryGetProperty("CompleteIllustration", out _))
+                return true;
+        }
+        return false;
     }
 
     private static Dictionary<string, int> ParseHotspotRequirements(JsonElement hs)
@@ -442,7 +465,8 @@ public class AreasService
                 ItemReward = hs?.ItemReward,
                 UnlockDate = hs?.UnlockDate,
                 TokenValues = hs?.TokenValues ?? new(),
-                Special = hs?.Special
+                Minigame = hs?.Minigame,
+                IsIllustrationParent = hs?.IsIllustrationParent ?? false
             };
 
             byDotIndex[dotIdx] = node;
@@ -512,7 +536,8 @@ public class AreasService
                 ItemReward = n.ItemReward,
                 UnlockDate = n.UnlockDate,
                 TokenValues = n.TokenValues,
-                Special = n.Special
+                Minigame = n.Minigame,
+                IsIllustrationParent = n.IsIllustrationParent
             })
             .ToList();
     }

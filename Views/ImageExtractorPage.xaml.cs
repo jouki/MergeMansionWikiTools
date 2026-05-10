@@ -494,10 +494,12 @@ public partial class ImageExtractorPage : UserControl
             return;
         }
 
-        var outputDir = Path.Combine(_detectedVersionDir, "MinigameIcons");
+        // Icons go straight into the shared "Processed Images" folder alongside other
+        // wiki-ready PNGs (naming `Minigame {Theme}01.png` matches the wiki upload name).
         var workspace = _main.Settings.ImageExporterBasePath;
         if (string.IsNullOrEmpty(workspace) || !Directory.Exists(workspace))
             workspace = _detectedVersionDir;
+        var outputDir = Path.Combine(workspace, "Processed Images");
 
         btnExtractMinigameIcons.IsEnabled = false;
         minigameIconsInfoBar.IsOpen = false;
@@ -510,26 +512,46 @@ public partial class ImageExtractorPage : UserControl
                 status => Dispatcher.Invoke(() => txtMinigameIconsProgress.Text = status),
                 default);
 
-            // Dynamically discover themes from SharedGameConfig. Falls back to known set
-            // if config is not loaded in this session.
-            var themes = DiscoverThemesFromMain();
-            if (themes.Count == 0)
+            // Dynamically discover themes + their HotspotType from SharedGameConfig. Falls back to
+            // known set if config is not loaded in this session.
+            var themeTypes = DiscoverThemeTypesFromMain();
+            if (themeTypes.Count == 0)
             {
-                themes = new List<string> { "Dollhouse", "Painting", "Perfumery", "Card", "Book", "SpyNotes" };
+                themeTypes = new Dictionary<string, string>(StringComparer.Ordinal)
+                {
+                    ["Dollhouse"] = "IllustrationTask",
+                    ["Painting"] = "IllustrationTask",
+                    ["Perfumery"] = "IllustrationTask",
+                    ["Card"] = "CardStack",
+                    ["Book"] = "CardStack",
+                    ["SpyNotes"] = "CardStack",
+                };
                 ShowMinigameIconsInfo("No config loaded — using known 26.03.01 theme set as fallback.", InfoBarSeverity.Warning);
             }
+            var themes = themeTypes.Keys.ToList();
 
             txtMinigameIconsProgress.Text = $"Extracting {themes.Count} themes...";
 
             var result = await MinigameIconExtractor.ExtractAsync(
                 gameFilesRoot, outputDir, tpkPath, themes,
-                new Progress<string>(s => Dispatcher.Invoke(() => txtMinigameIconsProgress.Text = s))
+                new Progress<string>(s => Dispatcher.Invoke(() => txtMinigameIconsProgress.Text = s)),
+                themeTypes: themeTypes
             );
 
             txtMinigameIconsProgress.Text = "";
             var msg = $"Extracted {result.Extracted}/{themes.Count} icons → {outputDir}";
             if (result.Missing > 0)
-                msg += $"\n{result.Missing} theme(s) missing. Check logs.";
+                msg += $"\n{result.Missing} theme(s) missing.";
+
+            // Show per-theme pick info so user can spot wrong-variant picks (e.g. white mask
+            // instead of colored MapSpot icon) and cross-check against the atlas.
+            var picks = result.Warnings.Where(w => w.StartsWith("[PICKED]")).ToList();
+            if (picks.Count > 0)
+                msg += "\n\n" + string.Join("\n", picks);
+            var others = result.Warnings.Where(w => !w.StartsWith("[PICKED]")).ToList();
+            if (others.Count > 0)
+                msg += "\n\n" + string.Join("\n", others);
+
             txtMinigameIconsPath.Text = outputDir;
 
             var severity = result.Missing > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success;
@@ -546,19 +568,160 @@ public partial class ImageExtractorPage : UserControl
         }
     }
 
+    // ── Minigame Icons — Optimize via TinyPNG ─────────────────────────
+    private void BtnOptimizeMinigameIcons_Click(object sender, RoutedEventArgs e)
+    {
+        var files = EnumerateMinigameIconFiles();
+        if (files.Count == 0)
+        {
+            ShowMinigameIconsInfo("No minigame icon files found. Run Extract first.", InfoBarSeverity.Warning);
+            return;
+        }
+
+        var apiKey = _main.Settings.TinifyApiKey;
+        var apiKey2 = _main.Settings.TinifyApiKey2;
+        if (string.IsNullOrWhiteSpace(apiKey))
+        {
+            ShowMinigameIconsInfo("TinyPNG API key not set. Go to Settings.", InfoBarSeverity.Warning);
+            return;
+        }
+
+        // Pre-check the UNOPTIMIZED files — they're what the user actually needs to run.
+        var preChecked = new HashSet<string>(files.Where(f =>
+        {
+            try { return !OptimizationWindow.HasOptMarker(File.ReadAllBytes(f)); }
+            catch { return true; }
+        }), StringComparer.OrdinalIgnoreCase);
+
+        var optWin = new OptimizationWindow(files, apiKey, apiKey2, preChecked)
+        {
+            Owner = Window.GetWindow(this)
+        };
+        optWin.ShowDialog();
+        ShowMinigameIconsInfo($"Optimization window closed. Ready for upload.", InfoBarSeverity.Success);
+    }
+
+    // ── Minigame Icons — Upload to Fandom wiki ────────────────────────
+    private async void BtnUploadMinigameIcons_Click(object sender, RoutedEventArgs e)
+    {
+        if (!_main.Settings.WikiVerified)
+        {
+            ShowMinigameIconsInfo("Wiki account not verified. Go to Settings to log in.", InfoBarSeverity.Warning);
+            return;
+        }
+
+        var files = EnumerateMinigameIconFiles();
+        if (files.Count == 0)
+        {
+            ShowMinigameIconsInfo("No minigame icon files found. Run Extract first.", InfoBarSeverity.Warning);
+            return;
+        }
+
+        // Block upload if ANY icon is not yet TinyPNG-optimized. The marker is inserted by
+        // OptimizationWindow after compression — its absence means raw output from extractor.
+        var unoptimized = files.Where(f =>
+        {
+            try { return !OptimizationWindow.HasOptMarker(File.ReadAllBytes(f)); }
+            catch { return true; }
+        }).Select(Path.GetFileName).ToList();
+        if (unoptimized.Count > 0)
+        {
+            ShowMinigameIconsInfo(
+                $"Upload blocked: {unoptimized.Count} icon(s) not optimized. Run 'Optimize' first.\n\n" +
+                string.Join("\n", unoptimized),
+                InfoBarSeverity.Warning);
+            return;
+        }
+
+        btnUploadMinigameIcons.IsEnabled = false;
+        minigameIconsInfoBar.IsOpen = false;
+        txtMinigameIconsProgress.Text = "Authenticating...";
+
+        int ok = 0, failed = 0;
+        var errors = new List<string>();
+        try
+        {
+            using var client = await WikiMappingService.CreateAuthenticatedClientAsync(
+                _main.Settings.WikiUsername!, _main.Settings.WikiPassword!);
+            var csrf = await WikiMappingService.GetCsrfTokenAsync(client);
+
+            for (int i = 0; i < files.Count; i++)
+            {
+                var path = files[i];
+                var wikiName = Path.GetFileName(path);
+                txtMinigameIconsProgress.Text = $"Uploading {i + 1}/{files.Count}: {wikiName}...";
+                try
+                {
+                    var result = await WikiMappingService.UploadFileAsync(
+                        client, csrf, wikiName,
+                        await File.ReadAllBytesAsync(path),
+                        description: "{{Permission}}", ignoreWarnings: true);
+                    if (result == "Success" || result == "Warning") ok++;
+                    else { failed++; errors.Add($"{wikiName}: {result}"); }
+                }
+                catch (Exception ex)
+                {
+                    failed++;
+                    // Treat "exact duplicate" as success — the file is already up to date.
+                    if (ex.Message.Contains("exact duplicate", StringComparison.OrdinalIgnoreCase))
+                    {
+                        failed--;
+                        ok++;
+                    }
+                    else
+                    {
+                        errors.Add($"{wikiName}: {ex.Message}");
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            ShowMinigameIconsInfo($"Upload failed: {ex.Message}", InfoBarSeverity.Error);
+            return;
+        }
+        finally
+        {
+            txtMinigameIconsProgress.Text = "";
+            btnUploadMinigameIcons.IsEnabled = true;
+        }
+
+        var msg = $"Uploaded {ok}/{files.Count} icons.";
+        if (failed > 0) msg += $"\n{failed} failed:\n" + string.Join("\n", errors);
+        ShowMinigameIconsInfo(msg, failed > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success);
+    }
+
+    private List<string> EnumerateMinigameIconFiles()
+    {
+        var workspace = _main.Settings.ImageExporterBasePath;
+        if (string.IsNullOrEmpty(workspace) || !Directory.Exists(workspace))
+            workspace = _detectedVersionDir;
+        if (string.IsNullOrEmpty(workspace)) return new();
+        var dir = Path.Combine(workspace, "Processed Images");
+        if (!Directory.Exists(dir)) return new();
+        return Directory.EnumerateFiles(dir, "Minigame*01.png")
+            .OrderBy(p => p, StringComparer.OrdinalIgnoreCase)
+            .ToList();
+    }
+
     private List<string> DiscoverThemesFromMain()
     {
+        return DiscoverThemeTypesFromMain().Keys.OrderBy(s => s).ToList();
+    }
+
+    private Dictionary<string, string> DiscoverThemeTypesFromMain()
+    {
         // DataService can hold a parsed SharedGameConfig reference when the app has run a dump.
-        // If not available, fall through to empty list (caller uses hardcoded fallback).
+        // If not available, fall through to empty dict (caller uses hardcoded fallback).
         try
         {
             var configProp = typeof(MainWindow).GetProperty("SharedGameConfig");
             var config = configProp?.GetValue(_main);
             if (config != null)
-                return MinigameIconExtractor.DiscoverThemesFromConfig(config);
+                return MinigameIconExtractor.DiscoverThemeTypesFromConfig(config);
         }
         catch { }
-        return new List<string>();
+        return new Dictionary<string, string>(StringComparer.Ordinal);
     }
 
     private void ShowMinigameIconsInfo(string message, InfoBarSeverity severity)

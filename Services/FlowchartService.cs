@@ -27,8 +27,12 @@ internal class FlowchartService
         public HashSet<string> Children = new();
         public bool IsDummy;
         // Minigame theme marker: "Dollhouse", "Painting", "Perfumery", "Card", "Book", "SpyNotes"
-        // Sub-tasks sharing the same Special are grouped by a visual box in the flowchart.
-        public string? Special;
+        // Sub-tasks sharing the same Minigame theme are grouped by a visual box in the flowchart.
+        public string? Minigame;
+        // True when this is an IllustrationTask parent (CompleteIllustrationRequirement
+        // with Reward typically being a chest). Parent's sub-tasks chain separately in
+        // the DOT graph; we synthesize leaf→parent edges so it closes visually.
+        public bool IsIllustrationParent;
 
         // Layout
         public int Layer;
@@ -50,6 +54,13 @@ internal class FlowchartService
         public string? ChainWikiName;  // chain display name for wiki link (e.g. "Sewing Supplies")
         public bool HasIcon;           // true when itemIcons has base64 for this item
     }
+
+    // ── Algorithm mode (set per-call by GenerateSvg) ─────────────────
+    // "Default" — shows all tasks incl. parent/phase (Fix A), but no synthetic
+    // leaf→parent edges and no minigame group bounding rects.
+    // "Experimental" — full minigame treatment (ConnectIllustrationParents +
+    // RenderMinigameGroups bounding boxes). Still rough around layout quality.
+    [ThreadStatic] private static bool _experimentalMode;
 
     // ── Constants ────────────────────────────────────────────────────
 
@@ -120,8 +131,12 @@ internal class FlowchartService
 
     public static string GenerateSvg(LuaArea area, DataService? ds, bool forDiscord = false,
         Dictionary<string, string>? itemIcons = null,
-        Dictionary<string, string>? tokenIcons = null)
+        Dictionary<string, string>? tokenIcons = null,
+        string algorithm = "Default")
     {
+        bool experimental = string.Equals(algorithm, "Experimental", StringComparison.OrdinalIgnoreCase);
+        _experimentalMode = experimental;
+
         // 1. Build graph from LuaTask data (uses LuaTask.Index for display)
         var nodes = BuildGraph(area.Tasks, ds);
         if (nodes.Count == 0) return "";
@@ -135,6 +150,12 @@ internal class FlowchartService
 
         // 3. Remove empty nodes (no requirements) and reconnect
         RemoveEmptyNodes(nodes);
+
+        // 3b. Experimental: synthesize leaf→parent edges for IllustrationTask groups.
+        // Default mode keeps the original DOT graph as-is (parent floats without
+        // incoming edges from sub-task leaves, but is still visible because of Fix A).
+        if (experimental)
+            ConnectIllustrationParents(nodes);
 
         // 4. Transitive reduction
         TransitiveReduction(nodes);
@@ -220,7 +241,8 @@ internal class FlowchartService
                 ItemRewardWikiName = rewardWiki,
                 ItemRewardSingleLevel = rewardSingleLevel,
                 TokenValues = t.TokenValues ?? new(),
-                Special = t.Special
+                Minigame = t.Minigame,
+                IsIllustrationParent = t.IsIllustrationParent
             };
             nodes[t.Id] = node;
         }
@@ -287,8 +309,16 @@ internal class FlowchartService
 
     private static void RemoveEmptyNodes(Dictionary<string, FNode> nodes)
     {
+        // Keep nodes that have ANY meaningful content: requirements, rewards, or
+        // a Minigame theme marker (IllustrationTask parent has no parsed reqs
+        // — CompleteIllustrationRequirement isn't emitted — but does carry rewards
+        // and Minigame. CardStack phase tasks can pair-cancel to 0 reqs but still
+        // carry per-phase chest rewards).
         var toRemove = nodes.Values
-            .Where(n => n.Requirements.Count == 0)
+            .Where(n => n.Requirements.Count == 0
+                        && n.XpReward == null
+                        && string.IsNullOrEmpty(n.ItemRewardType)
+                        && string.IsNullOrEmpty(n.Minigame))
             .Select(n => n.Id)
             .ToList();
 
@@ -316,6 +346,46 @@ internal class FlowchartService
             }
 
             nodes.Remove(id);
+        }
+    }
+
+    // ── IllustrationTask parent wiring ───────────────────────────────
+    // For each minigame group (nodes sharing the same Minigame theme), if there's a parent
+    // IllustrationTask (IsIllustrationParent flag), connect the sub-task chain's
+    // leaves to it. Without these synthetic edges, the parent ends up floating and
+    // the last sub-task looks like a dead end.
+    //
+    // CardStack minigames have no IllustrationParent — phases are a linear chain and
+    // don't need this treatment. Groups without a detected parent are left as-is.
+    private static void ConnectIllustrationParents(Dictionary<string, FNode> nodes)
+    {
+        var parents = nodes.Values
+            .Where(n => n.IsIllustrationParent && !string.IsNullOrEmpty(n.Minigame))
+            .ToList();
+
+        foreach (var parent in parents)
+        {
+            // Sub-tasks sharing the theme (everything else in the group).
+            var subtasks = nodes.Values
+                .Where(n => n.Id != parent.Id && n.Minigame == parent.Minigame)
+                .ToList();
+            if (subtasks.Count == 0) continue;
+
+            var subtaskIds = new HashSet<string>(subtasks.Select(s => s.Id),
+                StringComparer.Ordinal);
+
+            // Leaf = sub-task whose children include no other sub-task in the group.
+            // Multiple leaves possible when sub-tasks branch and rejoin.
+            var leaves = subtasks
+                .Where(s => !s.Children.Any(cid => subtaskIds.Contains(cid)))
+                .ToList();
+
+            foreach (var leaf in leaves)
+            {
+                if (leaf.Children.Contains(parent.Id)) continue;
+                leaf.Children.Add(parent.Id);
+                parent.Parents.Add(leaf.Id);
+            }
         }
     }
 
@@ -1498,8 +1568,11 @@ internal class FlowchartService
         sb.AppendLine();
 
         // Render minigame group boxes (behind everything) — visually group sub-tasks
-        // that share a Special theme (Dollhouse, Painting, Perfumery, Card, Book, SpyNotes).
-        RenderSpecialGroups(sb, nodes, offsetX, offsetY, ci);
+        // that share a Minigame theme (Dollhouse, Painting, Perfumery, Card, Book, SpyNotes).
+        // Experimental-only: bounding-rect approach over-encloses unrelated tasks when
+        // the group spans many layout columns, so Default mode hides the rects entirely.
+        if (_experimentalMode)
+            RenderMinigameGroups(sb, nodes, offsetX, offsetY, ci);
 
         // Render edges (behind nodes) — independent routing after final positions
         sb.AppendLine("  <!-- Edges -->");
@@ -1516,18 +1589,18 @@ internal class FlowchartService
         return sb.ToString();
     }
 
-    // ── Special group boxes ────────────────────────────────────────────
-    // Nodes sharing a non-null Special value get grouped under a rounded
-    // background rect + label. Parent IllustrationTask (also carrying Special)
+    // ── Minigame group boxes ───────────────────────────────────────────
+    // Nodes sharing a non-null Minigame theme get grouped under a rounded
+    // background rect + label. Parent IllustrationTask (also carrying Minigame)
     // is included in the group so the checkpoint task sits visually with its
     // sub-tasks. CardStack groups usually have a single node — still get a
     // subtle box so the minigame nature is visible at a glance.
-    private static void RenderSpecialGroups(StringBuilder sb, Dictionary<string, FNode> nodes,
+    private static void RenderMinigameGroups(StringBuilder sb, Dictionary<string, FNode> nodes,
         double ox, double oy, CultureInfo ci)
     {
         var groups = nodes.Values
-            .Where(n => !n.IsDummy && !string.IsNullOrEmpty(n.Special))
-            .GroupBy(n => n.Special, StringComparer.Ordinal)
+            .Where(n => !n.IsDummy && !string.IsNullOrEmpty(n.Minigame))
+            .GroupBy(n => n.Minigame, StringComparer.Ordinal)
             .ToList();
         if (groups.Count == 0) return;
 

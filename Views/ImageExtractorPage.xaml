@@ -151,13 +151,23 @@
                     <Grid Margin="16,0,16,12">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <ui:Button x:Name="btnExtractMinigameIcons" Grid.Column="0"
-                                   Content="Extract Minigame Icons" Appearance="Primary"
+                                   Content="Extract" Appearance="Primary"
                                    Height="38" Padding="20,0"
                                    Click="BtnExtractMinigameIcons_Click" />
-                        <TextBlock x:Name="txtMinigameIconsProgress" Grid.Column="1"
+                        <ui:Button x:Name="btnOptimizeMinigameIcons" Grid.Column="1"
+                                   Content="Optimize" Appearance="Secondary"
+                                   Height="38" Padding="16,0" Margin="8,0,0,0"
+                                   Click="BtnOptimizeMinigameIcons_Click" />
+                        <ui:Button x:Name="btnUploadMinigameIcons" Grid.Column="2"
+                                   Content="Upload to Wiki" Appearance="Secondary"
+                                   Height="38" Padding="16,0" Margin="8,0,0,0"
+                                   Click="BtnUploadMinigameIcons_Click" />
+                        <TextBlock x:Name="txtMinigameIconsProgress" Grid.Column="3"
                                    FontSize="12" VerticalAlignment="Center"
                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                    Margin="12,0,0,0" TextWrapping="Wrap" />

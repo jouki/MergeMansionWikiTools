@@ -115,14 +115,30 @@ public static class LocMan
         return $"HotspotDescription_{hotspotId}";
     }
 
+    // CUSTOM: From v26.04.01 some hotspots use bare enum-name keys (no "HotspotDescription_" prefix).
+    // E.g. lang file has "FirstFloorHallwayCharacterTask1" = "Offer notes" but no "HotspotDescription_FirstFloorHallwayCharacterTask1".
+    // Reports true if either prefixed or bare key exists.
+    public static bool HasHotspotDescription(HotspotId hotspotId)
+    {
+        if (!Enum.IsDefined(hotspotId))
+            return false;
+        if (HasString(GetHotspotDescriptionLocId(hotspotId)))
+            return true;
+        return HasString(hotspotId.ToString());
+    }
+
     public static string GetHotspotDescription(HotspotId hotspotId)
     {
         // CUSTOM: Check if hotspot is defined
         if (!Enum.IsDefined(hotspotId))
             return string.Empty;
 
-        var hotspotLocId = GetHotspotDescriptionLocId(hotspotId);
-        return Get(hotspotLocId);
+        // CUSTOM: Try prefixed key first ("HotspotDescription_{Id}"), then bare "{Id}" fallback (v26.04.01+).
+        if (TryGet(GetHotspotDescriptionLocId(hotspotId), out var translation))
+            return translation;
+        if (TryGet(hotspotId.ToString(), out translation))
+            return translation;
+        return string.Empty;
     }
 
     #endregion
@@ -144,7 +160,25 @@ public static class LocMan
             if (HasString(overrideId)) return Get(overrideId);
         }
         var itemName = GetSubstringBeforeLastChar(itemType, '_');
-        return Get($"Item_{itemName}{level}_Description");
+        // CUSTOM: Try level-based key first (current LocMan behavior).
+        var primaryId = $"Item_{itemName}{level}_Description";
+        if (HasString(primaryId)) return Get(primaryId);
+        // CUSTOM: Fallback — use the numeric suffix from itemType when it diverges from `level`.
+        // Game data sometimes bumps an item's `level` field (e.g. InfiniteEnergyBig_01 went 1→3 in v26.04.01)
+        // without re-publishing the description string under the new level key. The legacy `_NN` suffix
+        // in itemType usually matches the original lang key, so use that as a soft recovery.
+        var lastUnderscore = itemType.LastIndexOf('_');
+        if (lastUnderscore >= 0 && lastUnderscore < itemType.Length - 1)
+        {
+            var suffix = itemType.Substring(lastUnderscore + 1);
+            if (int.TryParse(suffix, out var suffixLevel) && suffixLevel != level)
+            {
+                var suffixId = $"Item_{itemName}{suffixLevel}_Description";
+                if (HasString(suffixId)) return Get(suffixId);
+            }
+        }
+        // Last resort: emit the level-based key (legacy behavior — wiki page shows raw key, signals real gap).
+        return Get(primaryId);
     }
 
     public static bool TryGetInformation(string itemType, out string value)

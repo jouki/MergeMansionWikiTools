@@ -153,6 +153,17 @@ public class WikiPageStatus
 public class MysteryEvent
 {
     public string Name { get; set; } = "";
+
+    /// <summary>
+    /// Original name from JSON (e.g. "Season Pass - Buzzing with Purpose") before any
+    /// prefix stripping. Used by wiki migration to locate the legacy page/file titles.
+    /// Equal to <see cref="Name"/> when no stripping applied.
+    /// </summary>
+    public string RawJsonName { get; set; } = "";
+
+    /// <summary>True when the JSON name began with the "Season Pass - " prefix that we strip.</summary>
+    public bool HadSeasonPassPrefix => !string.Equals(RawJsonName, Name, StringComparison.Ordinal);
+
     public string ProgressionEventId { get; set; } = "";
     public long EventItemNumericId { get; set; }
     public string? EventItemName { get; set; }

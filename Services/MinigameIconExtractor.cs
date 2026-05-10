@@ -52,12 +52,20 @@ public static class MinigameIconExtractor
     /// Generates candidate sprite names for a theme, in priority order.
     /// Patterns inferred from 26.03.01 naming conventions.
     /// </summary>
-    private static IEnumerable<string> SpriteCandidates(string theme)
+    /// <param name="hotspotType">"CardStack" or "IllustrationTask" — enables generic
+    /// MapSpot_Icon_{Type} fallback for themes without a specific icon (e.g. Painting
+    /// falls back to MapSpot_Icon_IllustrationTask since no PaintingTask sprite exists).</param>
+    private static IEnumerable<string> SpriteCandidates(string theme, string? hotspotType = null)
     {
         var t = theme;
         var tl = theme.ToLowerInvariant();
         yield return $"MapSpot_Icon_{t}Task";
         yield return $"MapSpot_Icon_{t}";
+        // Generic HotspotType fallback — colored MapSpot icon shared by all themes
+        // of the same type that lack a specific icon. Placed BEFORE ui_icon so the
+        // colored variant wins over the white/outline UI glyph.
+        if (!string.IsNullOrEmpty(hotspotType))
+            yield return $"MapSpot_Icon_{hotspotType}";
         yield return $"ui_icon_{tl}";
         yield return $"ui_icon_{tl}_white";
         yield return $"ui_icon_area_hotspot_{tl}";
@@ -80,7 +88,8 @@ public static class MinigameIconExtractor
         string tpkPath,
         IEnumerable<string> themes,
         IProgress<string>? progress = null,
-        CancellationToken ct = default)
+        CancellationToken ct = default,
+        IReadOnlyDictionary<string, string>? themeTypes = null)
     {
         return Task.Run(() =>
         {
@@ -103,16 +112,22 @@ public static class MinigameIconExtractor
                                   .ToList();
             var unresolved = new HashSet<string>(themeList, StringComparer.Ordinal);
 
-            // spriteName → (preferred theme, candidate rank) — lower rank = higher priority.
-            var spriteToTheme = new Dictionary<string, (string Theme, int Rank)>(StringComparer.OrdinalIgnoreCase);
+            // spriteName → LIST of (theme, rank) — a single candidate (e.g. the generic
+            // MapSpot_Icon_IllustrationTask) is shared by multiple themes. Without the list
+            // the first theme to register the name would "own" it and other themes would
+            // never pick it up, silently dropping their fallback option.
+            var spriteToThemes = new Dictionary<string, List<(string Theme, int Rank)>>(
+                StringComparer.OrdinalIgnoreCase);
             foreach (var theme in themeList)
             {
                 int rank = 0;
-                foreach (var cand in SpriteCandidates(theme))
+                string? type = null;
+                themeTypes?.TryGetValue(theme, out type);
+                foreach (var cand in SpriteCandidates(theme, type))
                 {
-                    // Don't overwrite an earlier (better-ranked) entry if collision.
-                    if (!spriteToTheme.ContainsKey(cand))
-                        spriteToTheme[cand] = (theme, rank);
+                    if (!spriteToThemes.TryGetValue(cand, out var list))
+                        spriteToThemes[cand] = list = new();
+                    list.Add((theme, rank));
                     rank++;
                 }
             }
@@ -130,8 +145,6 @@ public static class MinigameIconExtractor
             foreach (var bundlePath in bundles)
             {
                 ct.ThrowIfCancellationRequested();
-                if (themeList.All(t => bestPerTheme.TryGetValue(t, out var b) && b.Rank == 0))
-                    break; // every theme has the best possible candidate already
                 try
                 {
                     var am = new AssetsManager();
@@ -147,9 +160,19 @@ public static class MinigameIconExtractor
                         {
                             string nm;
                             try { nm = am.GetBaseField(afInst, si)["m_Name"].AsString ?? ""; } catch { continue; }
-                            if (!spriteToTheme.TryGetValue(nm, out var tr)) continue;
-                            if (bestPerTheme.TryGetValue(tr.Theme, out var existing) && existing.Rank <= tr.Rank) continue;
-                            bestPerTheme[tr.Theme] = (tr.Rank, bundlePath, nm);
+                            if (string.IsNullOrEmpty(nm)) continue;
+
+                            // Rank-based best pick (candidate patterns). A single sprite
+                            // may match multiple themes (generic fallback), so update each.
+                            if (spriteToThemes.TryGetValue(nm, out var claimants))
+                            {
+                                foreach (var tr in claimants)
+                                {
+                                    if (!bestPerTheme.TryGetValue(tr.Theme, out var existing) || existing.Rank > tr.Rank)
+                                        bestPerTheme[tr.Theme] = (tr.Rank, bundlePath, nm);
+                                }
+                            }
+
                         }
                     }
                 }
@@ -159,19 +182,34 @@ public static class MinigameIconExtractor
                 }
             }
 
+            // Diagnostic: per-theme pick log (rank 0 = best, rank 6 = fallback).
+            // Lets the user verify that the intended sprite name matched for each theme.
+            foreach (var t in themeList)
+            {
+                if (bestPerTheme.TryGetValue(t, out var pick))
+                    warnings.Add($"[PICKED] {t} -> '{pick.SpriteName}' (rank {pick.Rank}) from {Path.GetFileName(pick.Bundle)}");
+            }
+
             // PASS 2 — extract the chosen sprites, grouped by bundle to open each bundle once.
-            foreach (var group in bestPerTheme.Values.GroupBy(b => b.Bundle))
+            foreach (var bundleGroup in bestPerTheme.GroupBy(kv => kv.Value.Bundle))
             {
                 ct.ThrowIfCancellationRequested();
-                // Map: sprite_name → (theme, rank=0) so ExtractFromBundle treats only these as targets.
-                var wantedSpriteToTheme = group.ToDictionary(
-                    g => g.SpriteName,
-                    g => (Theme: bestPerTheme.First(kv => kv.Value.SpriteName == g.SpriteName).Key, Rank: 0),
+                // sprite_name → list of themes that picked it (same generic sprite may serve
+                // multiple themes — e.g. MapSpot_Icon_IllustrationTask shared by illustration
+                // themes without a specific icon).
+                var wantedSpriteToTheme = new Dictionary<string, List<(string Theme, int Rank)>>(
                     StringComparer.OrdinalIgnoreCase);
-                var resolved = new HashSet<string>(wantedSpriteToTheme.Values.Select(v => v.Theme));
+                foreach (var kv in bundleGroup)
+                {
+                    var sprite = kv.Value.SpriteName;
+                    if (!wantedSpriteToTheme.TryGetValue(sprite, out var lst))
+                        wantedSpriteToTheme[sprite] = lst = new();
+                    lst.Add((kv.Key, 0));
+                }
+                var resolved = new HashSet<string>(wantedSpriteToTheme.Values.SelectMany(v => v.Select(x => x.Theme)));
                 try
                 {
-                    var hits = ExtractFromBundle(group.Key, tpkPath, outputDir, wantedSpriteToTheme, resolved, warnings, progress, ct);
+                    var hits = ExtractFromBundle(bundleGroup.Key, tpkPath, outputDir, wantedSpriteToTheme, resolved, warnings, progress, ct);
                     foreach (var (theme, path) in hits)
                     {
                         themeToFile[theme] = path;
@@ -182,12 +220,16 @@ public static class MinigameIconExtractor
                 catch (OperationCanceledException) { throw; }
                 catch (Exception ex)
                 {
-                    warnings.Add($"[BUNDLE-ERROR] {Path.GetFileName(group.Key)}: {ex.GetType().Name}: {ex.Message}");
+                    warnings.Add($"[BUNDLE-ERROR] {Path.GetFileName(bundleGroup.Key)}: {ex.GetType().Name}: {ex.Message}");
                 }
             }
 
             foreach (var t in unresolved)
-                warnings.Add($"[NOT-FOUND] Theme '{t}' — no matching sprite in any scanned bundle (tried: {string.Join(", ", SpriteCandidates(t))})");
+            {
+                string? type = null;
+                themeTypes?.TryGetValue(t, out type);
+                warnings.Add($"[NOT-FOUND] Theme '{t}' — no matching sprite in any scanned bundle (tried: {string.Join(", ", SpriteCandidates(t, type))})");
+            }
 
             return new ExtractionResult(outPaths.Count, unresolved.Count, warnings, outPaths, themeToFile);
         }, ct);
@@ -228,7 +270,7 @@ public static class MinigameIconExtractor
         string bundlePath,
         string tpkPath,
         string outputDir,
-        Dictionary<string, (string Theme, int Rank)> spriteToTheme,
+        Dictionary<string, List<(string Theme, int Rank)>> spriteToTheme,
         HashSet<string> unresolved,
         List<string> warnings,
         IProgress<string>? progress,
@@ -356,34 +398,38 @@ public static class MinigameIconExtractor
                 catch { continue; }
                 if (string.IsNullOrEmpty(nm)) continue;
 
-                if (!spriteToTheme.TryGetValue(nm, out var tr)) continue;
-                if (!unresolved.Contains(tr.Theme)) continue;
+                if (!spriteToTheme.TryGetValue(nm, out var trList)) continue;
 
-                // Keep the best-ranked candidate per theme.
-                if (matchesByTheme.TryGetValue(tr.Theme, out var existing) && existing.Rank <= tr.Rank)
-                    continue;
-
+                // Read sprite metadata once; reused across all themes claiming this sprite.
+                long texPathId;
+                float rx, ry, rw, rh;
                 try
                 {
                     var rd = sf["m_RD"];
-                    long texPathId = rd["texture"]["m_PathID"].AsLong;
+                    texPathId = rd["texture"]["m_PathID"].AsLong;
                     var rect = rd["textureRect"];
-                    float rx = rect["x"].AsFloat;
-                    float ry = rect["y"].AsFloat;
-                    float rw = rect["width"].AsFloat;
-                    float rh = rect["height"].AsFloat;
-                    // Fallback: if the sprite is atlas-packed (no direct texture ref),
-                    // grab the real rect + parent tex from the SpriteAtlas metadata.
+                    rx = rect["x"].AsFloat;
+                    ry = rect["y"].AsFloat;
+                    rw = rect["width"].AsFloat;
+                    rh = rect["height"].AsFloat;
                     if (texPathId == 0 && atlasFallback.TryGetValue(nm, out var atlasEntry))
                     {
                         texPathId = atlasEntry.TexPathId;
                         rx = atlasEntry.Rx; ry = atlasEntry.Ry; rw = atlasEntry.Rw; rh = atlasEntry.Rh;
                     }
-                    matchesByTheme[tr.Theme] = new ThemeMatch(tr.Theme, tr.Rank, si, texPathId, rx, ry, rw, rh);
                 }
                 catch (Exception ex)
                 {
-                    warnings.Add($"[SPRITE-META] {bundleName}/{nm} ({tr.Theme}): {ex.GetType().Name}: {ex.Message}");
+                    warnings.Add($"[SPRITE-META] {bundleName}/{nm}: {ex.GetType().Name}: {ex.Message}");
+                    continue;
+                }
+
+                foreach (var tr in trList)
+                {
+                    if (!unresolved.Contains(tr.Theme)) continue;
+                    if (matchesByTheme.TryGetValue(tr.Theme, out var existing) && existing.Rank <= tr.Rank)
+                        continue;
+                    matchesByTheme[tr.Theme] = new ThemeMatch(tr.Theme, tr.Rank, si, texPathId, rx, ry, rw, rh);
                 }
             }
 
@@ -408,7 +454,9 @@ public static class MinigameIconExtractor
                 try
                 {
                     using var crop = parent.Clone(x => x.Crop(new Rectangle(cx, cy, cw, ch)));
-                    var outPath = Path.Combine(outputDir, $"MinigameIcon_{match.Theme}.png");
+                    // Filename must match wiki's FormatFileName convention (no spaces) so
+                    // `utils.Icon('Minigame Dollhouse', 1, 28)` resolves to `MinigameDollhouse01.png`.
+                    var outPath = Path.Combine(outputDir, $"Minigame{match.Theme}01.png");
                     crop.SaveAsPng(outPath);
                     results.Add((match.Theme, outPath));
                     progress?.Report($"  {match.Theme} ({cw}x{ch}) — {Path.GetFileName(outPath)}");
@@ -430,10 +478,20 @@ public static class MinigameIconExtractor
     /// </summary>
     public static List<string> DiscoverThemesFromConfig(object sharedGameConfig)
     {
-        var themes = new HashSet<string>(StringComparer.Ordinal);
-        if (sharedGameConfig == null) return themes.ToList();
+        return DiscoverThemeTypesFromConfig(sharedGameConfig).Keys.OrderBy(s => s).ToList();
+    }
 
-        foreach (var libName in new[] { "CardStacks", "CustomTables" })
+    /// <summary>
+    /// Discovers themes AND maps each to the owning HotspotType ("CardStack" or
+    /// "IllustrationTask"). Used for generic MapSpot_Icon_{HotspotType} fallback
+    /// when a theme lacks a specific icon (e.g., Painting uses MapSpot_Icon_IllustrationTask).
+    /// </summary>
+    public static Dictionary<string, string> DiscoverThemeTypesFromConfig(object sharedGameConfig)
+    {
+        var map = new Dictionary<string, string>(StringComparer.Ordinal);
+        if (sharedGameConfig == null) return map;
+
+        foreach (var (libName, hotspotType) in new[] { ("CardStacks", "CardStack"), ("CustomTables", "IllustrationTask") })
         {
             var libProp = sharedGameConfig.GetType().GetProperty(libName);
             var lib = libProp?.GetValue(sharedGameConfig);
@@ -443,15 +501,15 @@ public static class MinigameIconExtractor
             if (entries == null) continue;
             foreach (var kv in entries)
             {
-                // kv is KeyValuePair<TKey, IGameConfigData>
                 var valueProp = kv.GetType().GetProperty("Value");
                 var info = valueProp?.GetValue(kv);
                 if (info == null) continue;
                 var themeProp = info.GetType().GetProperty("Theme");
                 var theme = themeProp?.GetValue(info) as string;
-                if (!string.IsNullOrEmpty(theme)) themes.Add(theme);
+                if (!string.IsNullOrEmpty(theme) && !map.ContainsKey(theme))
+                    map[theme] = hotspotType;
             }
         }
-        return themes.ToList();
+        return map;
     }
 }

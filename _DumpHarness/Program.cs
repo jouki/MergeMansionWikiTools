@@ -38,11 +38,29 @@ internal static class Program
             // --extract-minigame-icons <gameFilesRoot> <outputDir> <tpkPath>
             return ExtractIcons(args[1], args[2], args[3]);
         }
+        if (args.Length >= 4 && args[0] == "--probe-loc")
+        {
+            // --probe-loc <configPath> <languagePath> <regexPattern>
+            return ProbeLoc(args[1], args[2], args[3]);
+        }
+        if (args.Length >= 3 && args[0] == "--probe-sprite-fields")
+        {
+            // --probe-sprite-fields <bundlePath> <tpkPath> [<spriteNameFilter>]
+            string spriteFilter = args.Length >= 4 ? args[3] : "";
+            return ProbeSpriteFields(args[1], args[2], spriteFilter);
+        }
+        if (args.Length >= 3 && args[0] == "--probe-atlas-fields")
+        {
+            // --probe-atlas-fields <bundlePath> <tpkPath> [<spriteNameFilter>]
+            string atlasFilter = args.Length >= 4 ? args[3] : "";
+            return ProbeAtlasFields(args[1], args[2], atlasFilter);
+        }
 
         if (args.Length < 3)
         {
             Console.Error.WriteLine("Usage: DumpHarness <configPath> <languagePath> <outputDir>");
             Console.Error.WriteLine("   or: DumpHarness --probe-minigame-bundles <APK/Game Files/APK dir>");
+            Console.Error.WriteLine("   or: DumpHarness --probe-loc <configPath> <languagePath> <regexPattern>");
             return 2;
         }
 
@@ -686,6 +704,179 @@ internal static class Program
         foreach (var img in decoded.Values) img?.Dispose();
     }
 
+    /// <summary>
+    /// Dumps every field of every Sprite asset in a bundle. Used to discover what
+    /// metadata Unity exposes (m_Pivot, m_Border, m_RD.textureRect, m_PixelsToUnits, etc.)
+    /// beyond just m_Rect that AssetExtractionService currently captures.
+    /// </summary>
+    private static int ProbeSpriteFields(string bundlePath, string tpkPath, string filter)
+    {
+        if (!File.Exists(bundlePath)) { Console.Error.WriteLine($"Not found: {bundlePath}"); return 2; }
+        if (!File.Exists(tpkPath)) { Console.Error.WriteLine($"TPK not found: {tpkPath}"); return 2; }
+
+        var am = new AssetsManager();
+        am.LoadClassPackage(tpkPath);
+
+        var bunInst = am.LoadBundleFile(bundlePath, unpackIfPacked: true);
+        Console.WriteLine($"Bundle: {Path.GetFileName(bundlePath)}");
+        if (!string.IsNullOrEmpty(filter))
+            Console.WriteLine($"Filter: substring match on '{filter}'");
+
+        int spritesFound = 0;
+        int spritesShown = 0;
+        foreach (var afInst in am.LoadAllAssetsFromBundle(bunInst))
+        {
+            try { am.LoadClassDatabaseFromPackage(afInst.file.Metadata.UnityVersion); } catch { }
+
+            var spriteInfos = afInst.file.GetAssetsOfType(AssetClassID.Sprite);
+            if (spriteInfos.Count == 0) continue;
+
+            foreach (var si in spriteInfos)
+            {
+                AssetTypeValueField? bf = null;
+                try { bf = am.GetBaseField(afInst, si); } catch { continue; }
+                if (bf == null) continue;
+
+                string name = bf["m_Name"].AsString ?? "";
+                spritesFound++;
+                if (!string.IsNullOrEmpty(filter) && !name.Contains(filter, StringComparison.OrdinalIgnoreCase))
+                    continue;
+
+                spritesShown++;
+                Console.WriteLine($"\n========== Sprite: {name} ==========");
+                DumpField(bf, indent: 0, maxDepth: 6);
+            }
+        }
+        Console.WriteLine($"\nTotal sprites in bundle: {spritesFound}, shown: {spritesShown}");
+        return 0;
+    }
+
+    /// <summary>Recursively prints a Unity asset field tree with values. Used by --probe-sprite-fields.</summary>
+    private static void DumpField(AssetTypeValueField field, int indent, int maxDepth)
+    {
+        if (indent > maxDepth) return;
+        string pad = new string(' ', indent * 2);
+        string typeName = field.TypeName ?? "";
+        string fieldName = field.FieldName ?? "(root)";
+
+        // Leaf — print value if it's a primitive
+        var children = field.Children;
+        if (children.Count == 0)
+        {
+            string val;
+            try
+            {
+                val = typeName switch
+                {
+                    "int"     => field.AsInt.ToString(),
+                    "UInt32"  or "unsigned int" => field.AsUInt.ToString(),
+                    "SInt64"  or "long" => field.AsLong.ToString(),
+                    "UInt64"  or "unsigned long" => field.AsULong.ToString(),
+                    "float"   => field.AsFloat.ToString("0.######"),
+                    "bool"    => field.AsBool.ToString(),
+                    "string"  => "\"" + (field.AsString ?? "") + "\"",
+                    _ => $"<{typeName}>"
+                };
+            }
+            catch { val = $"<{typeName} unreadable>"; }
+            Console.WriteLine($"{pad}{fieldName}: {typeName} = {val}");
+            return;
+        }
+
+        // Container — print header and recurse. Skip large arrays (vertex data, index buffer).
+        if (fieldName.Contains("VertexData", StringComparison.OrdinalIgnoreCase)
+            || fieldName.Contains("IndexBuffer", StringComparison.OrdinalIgnoreCase)
+            || fieldName.Contains("PhysicsShape", StringComparison.OrdinalIgnoreCase)
+            || fieldName.Contains("Bones", StringComparison.OrdinalIgnoreCase)
+            || fieldName.Contains("SubMeshes", StringComparison.OrdinalIgnoreCase))
+        {
+            Console.WriteLine($"{pad}{fieldName}: {typeName} <skipped — large/binary>");
+            return;
+        }
+
+        Console.WriteLine($"{pad}{fieldName}: {typeName}");
+        foreach (var ch in children)
+            DumpField(ch, indent + 1, maxDepth);
+    }
+
+    /// <summary>
+    /// Dumps SpriteAtlas asset render data map entries — these are the post-packing
+    /// position rect + per-sprite textureRect inside the atlas page. This is the
+    /// authoritative source for atlas position; image_atlas_data.json currently
+    /// only stores atlas position but loses textureRectOffset and uvTransform.
+    /// </summary>
+    private static int ProbeAtlasFields(string bundlePath, string tpkPath, string filter)
+    {
+        if (!File.Exists(bundlePath)) { Console.Error.WriteLine($"Not found: {bundlePath}"); return 2; }
+        if (!File.Exists(tpkPath)) { Console.Error.WriteLine($"TPK not found: {tpkPath}"); return 2; }
+
+        var am = new AssetsManager();
+        am.LoadClassPackage(tpkPath);
+
+        var bunInst = am.LoadBundleFile(bundlePath, unpackIfPacked: true);
+        Console.WriteLine($"Bundle: {Path.GetFileName(bundlePath)}");
+
+        foreach (var afInst in am.LoadAllAssetsFromBundle(bunInst))
+        {
+            try { am.LoadClassDatabaseFromPackage(afInst.file.Metadata.UnityVersion); } catch { }
+
+            var atlasInfos = afInst.file.GetAssetsOfType(AssetClassID.SpriteAtlas);
+            if (atlasInfos.Count == 0) continue;
+
+            foreach (var ai in atlasInfos)
+            {
+                AssetTypeValueField? bf = null;
+                try { bf = am.GetBaseField(afInst, ai); } catch { continue; }
+                if (bf == null) continue;
+
+                string atlasName = bf["m_Name"].AsString ?? "";
+                Console.WriteLine($"\n========== SpriteAtlas: {atlasName} ==========");
+
+                // Top-level fields — show non-array ones
+                foreach (var ch in bf.Children)
+                {
+                    string fname = ch.FieldName ?? "";
+                    if (fname == "m_PackedSprites" || fname == "m_PackedSpriteNamesToIndex"
+                        || fname == "m_RenderDataMap" || fname == "m_MasterAtlas") continue;
+                    DumpField(ch, indent: 1, maxDepth: 3);
+                }
+
+                // Packed sprite names list
+                var namesField = bf["m_PackedSpriteNamesToIndex.Array"];
+                var spriteNames = new List<string>();
+                if (!namesField.IsDummy)
+                    foreach (var n in namesField.Children)
+                        spriteNames.Add(n.AsString);
+                Console.WriteLine($"  Packed sprite names ({spriteNames.Count}): {string.Join(", ", spriteNames)}");
+
+                // RenderDataMap entries — the meat
+                var mapField = bf["m_RenderDataMap.Array"];
+                if (mapField.IsDummy)
+                {
+                    Console.WriteLine("  m_RenderDataMap is empty");
+                    continue;
+                }
+                Console.WriteLine($"  m_RenderDataMap entries: {mapField.Children.Count}");
+
+                int idx = 0;
+                foreach (var entry in mapField.Children)
+                {
+                    string spriteName = idx < spriteNames.Count ? spriteNames[idx] : $"<idx{idx}>";
+                    if (!string.IsNullOrEmpty(filter) && !spriteName.Contains(filter, StringComparison.OrdinalIgnoreCase))
+                    {
+                        idx++;
+                        continue;
+                    }
+                    Console.WriteLine($"\n  ── Entry [{idx}] sprite: {spriteName} ──");
+                    // Entry is a pair: first = key (GUID+pathId), second = SpriteAtlasData
+                    DumpField(entry, indent: 2, maxDepth: 6);
+                    idx++;
+                }
+            }
+        }
+        return 0;
+    }
+
     private static int ProbeOneBundle(string bundlePath)
     {
         if (!File.Exists(bundlePath)) { Console.Error.WriteLine($"Not found: {bundlePath}"); return 2; }
@@ -720,6 +911,55 @@ internal static class Program
             AssetsTools.NET.Extra.AssetsFileInstance fi = null;
             try { fi = am.LoadAssetsFileFromBundle(bunInst, i, loadDeps: false); } catch { }
             if (fi != null) yield return fi;
+        }
+    }
+
+    // Probe LocMan — load language file and list all translation keys matching regex pattern.
+    // Useful for diagnosing missing HotspotDescription_* keys after enum rebuild.
+    private static int ProbeLoc(string configPath, string languagePath, string pattern)
+    {
+        Console.WriteLine($"=== ProbeLoc ===");
+        Console.WriteLine($"Config:   {configPath}");
+        Console.WriteLine($"Language: {languagePath}");
+        Console.WriteLine($"Pattern:  {pattern}");
+
+        try
+        {
+            MetaplayCore.Initialize();
+
+            if (string.IsNullOrEmpty(languagePath) || !File.Exists(languagePath))
+            {
+                Console.Error.WriteLine($"Language file not found: {languagePath}");
+                return 2;
+            }
+            var langHash = ContentHash.ParseString(Path.GetFileName(languagePath));
+            MetaplaySDK.ActiveLanguage = LocalizationLanguage.ImportBinary(langHash, File.ReadAllBytes(languagePath));
+
+            var rx = new System.Text.RegularExpressions.Regex(pattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            var translations = MetaplaySDK.ActiveLanguage.Translations;
+            Console.WriteLine($"Total translations in language: {translations.Count}");
+
+            var matches = new System.Collections.Generic.List<(string Key, string Value)>();
+            foreach (var kv in translations)
+            {
+                var key = kv.Key.Value;
+                if (rx.IsMatch(key))
+                    matches.Add((key, kv.Value));
+            }
+
+            matches.Sort((a, b) => string.Compare(a.Key, b.Key, StringComparison.Ordinal));
+            Console.WriteLine($"Matches: {matches.Count}");
+            foreach (var (k, v) in matches)
+            {
+                var snippet = v.Length > 80 ? v.Substring(0, 80) + "..." : v;
+                Console.WriteLine($"  {k} = {snippet}");
+            }
+            return 0;
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"FATAL: {ex.GetType().Name}: {ex.Message}");
+            return 1;
         }
     }
 }

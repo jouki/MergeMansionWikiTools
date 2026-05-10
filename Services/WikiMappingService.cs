@@ -470,7 +470,8 @@ public static class WikiMappingService
     /// Updates or adds chainName (and optionally level) entries in the Lua module source.
     /// </summary>
     private static string UpdateLuaEntry(
-        string lua, IReadOnlyList<ParsedItem> items, string chainName, int? level = null)
+        string lua, IReadOnlyList<ParsedItem> items, string chainName, int? level = null,
+        bool? isAlias = null)
     {
         var escapedName = chainName.Replace("\"", "\\\"");
 
@@ -522,6 +523,24 @@ public static class WikiMappingService
                         }
                     }
 
+                    // Handle isAlias (only when explicitly set)
+                    if (isAlias.HasValue)
+                    {
+                        var isAliasRegex = new Regex(@",?\s*isAlias\s*=\s*(true|false)");
+                        if (isAlias.Value)
+                        {
+                            if (isAliasRegex.IsMatch(body))
+                                body = isAliasRegex.Replace(body, ", isAlias = true");
+                            else
+                                body += ", isAlias = true";
+                        }
+                        else
+                        {
+                            // Remove isAlias field if present
+                            body = isAliasRegex.Replace(body, "");
+                        }
+                    }
+
                     return prefix + body + suffix;
                 });
             }
@@ -531,6 +550,8 @@ public static class WikiMappingService
                 var fields = $"chainName = \"{escapedName}\"";
                 if (level.HasValue)
                     fields += $", level = {level.Value}";
+                if (isAlias == true)
+                    fields += ", isAlias = true";
                 var newEntry = $"\t[\"{item.ItemType}\"] = {{{fields}}},\n";
                 var lastBrace = lua.LastIndexOf('}');
                 if (lastBrace >= 0)
@@ -788,7 +809,8 @@ public static class WikiMappingService
     /// </summary>
     public static async Task PushItemMappingsAsync(
         string username, string password,
-        IReadOnlyList<ParsedItem> items, string chainName, int? level = null)
+        IReadOnlyList<ParsedItem> items, string chainName, int? level = null,
+        bool? isAlias = null)
     {
         using var client = await CreateAuthenticatedClientAsync(username, password);
 
@@ -807,7 +829,7 @@ public static class WikiMappingService
 
         // 2. Version check + modify Lua
         ThrowIfNewerVersion(currentLua);
-        var updatedLua = EnsureMmwtVersionHeader(UpdateLuaEntry(currentLua, items, chainName, level));
+        var updatedLua = EnsureMmwtVersionHeader(UpdateLuaEntry(currentLua, items, chainName, level, isAlias));
 
         // 3. Get CSRF token
         var csrfToken = await GetCsrfTokenAsync(client);
@@ -818,6 +840,8 @@ public static class WikiMappingService
             summary = $"Set level {level.Value} for {items[0].ItemType} → \"{chainName}\" (via MergeMansionWikiTools)";
         else
             summary = $"Move items → \"{chainName}\" (via MergeMansionWikiTools)";
+        if (isAlias.HasValue)
+            summary += isAlias.Value ? " [alias]" : " [alias removed]";
 
         // 5. Edit page
         var editContent = new FormUrlEncodedContent(new Dictionary<string, string>
@@ -1934,9 +1958,12 @@ public static class WikiMappingService
             var content = await FetchModuleContentAsync("Module:Datatable/Areas/Mapping");
             if (content == null) return result;
 
-            // Pattern: ["AreaName"] = {orderingIndex = N} (N can be int or decimal like 8.5)
+            // Match only NON-COMMENTED rows (line-anchored regex, must start with optional whitespace then `[`).
+            // Commented rows like `--["Name"] = {orderingIndex = N}` would be matched without the `^[ \t]*\[`
+            // anchor (a previous bug); they are now filtered out so existing in-prep markers don't poison the dict.
             foreach (Match m in Regex.Matches(content,
-                @"\[""([^""]+)""\]\s*=\s*\{[^}]*orderingIndex\s*=\s*([0-9.]+)"))
+                @"^[ \t]*\[""([^""]+)""\]\s*=\s*\{[^}]*orderingIndex\s*=\s*([0-9.]+)",
+                RegexOptions.Multiline))
             {
                 if (double.TryParse(m.Groups[2].Value,
                         System.Globalization.NumberStyles.Any,
@@ -2086,7 +2113,8 @@ public static class WikiMappingService
     /// iterates with "for id, item in pairs(itemsData.items)".
     /// </summary>
     public static string GenerateItemsArbiterLua(
-        int chunkCount, string chainNamesBlock, string? createdAt = null)
+        int chunkCount, string chainNamesBlock,
+        string? archivedFlagsBlock = null, string? createdAt = null)
     {
         var sb = new System.Text.StringBuilder();
         if (!string.IsNullOrEmpty(createdAt))
@@ -2104,6 +2132,15 @@ public static class WikiMappingService
 
         sb.AppendLine();
         sb.AppendLine(chainNamesBlock);
+
+        // Optional p.archived flat marker map — emitted only when archive workflow ran for this update.
+        // When omitted (e.g. legacy callers), older Module:Items code falls back gracefully on `nil`.
+        if (!string.IsNullOrEmpty(archivedFlagsBlock))
+        {
+            sb.AppendLine();
+            sb.AppendLine(archivedFlagsBlock);
+        }
+
         sb.AppendLine();
         sb.AppendLine("return p");
 
@@ -2166,13 +2203,25 @@ public static class WikiMappingService
         while (subEnd < lines.Count && lines[subEnd].TrimStart().StartsWith("**"))
             subEnd++;
 
-        // Preserve non-numeric submodule lines (e.g. Mapping)
+        // Preserve non-numeric submodule lines (e.g. Mapping, Archive). Numeric chunks are
+        // regenerated below — non-numeric ones are kept verbatim with whatever description the
+        // wiki maintainer wrote.
         var preserved = new List<string>();
+        var hasArchiveLink = false;
         for (int i = subStart; i < subEnd; i++)
         {
-            // Keep lines that are NOT numeric chunk links
-            if (!Regex.IsMatch(lines[i], @"\[\[Module:Datatable/Items/\d+\|"))
-                preserved.Add(lines[i]);
+            if (Regex.IsMatch(lines[i], @"\[\[Module:Datatable/Items/\d+\|")) continue;
+            preserved.Add(lines[i]);
+            if (lines[i].Contains("[[Module:Datatable/Items/Archive", StringComparison.Ordinal))
+                hasArchiveLink = true;
+        }
+
+        // Ensure the Archive submodule link is present. Inserted once on first run; subsequent runs
+        // detect the existing link and skip (idempotent).
+        if (!hasArchiveLink)
+        {
+            preserved.Add("** '''[[Module:Datatable/Items/Archive|Datatable/Items/Archive]]''' — Last-known data of items removed from current dump + #missing# chain shadows (lazy-loaded fallback)");
+            AppLogger.Debug("[UpdateModulesPage] Added missing Datatable/Items/Archive link to preserved list");
         }
 
         // Build new submodule lines: preserved + numeric chunks (with main/event annotations)

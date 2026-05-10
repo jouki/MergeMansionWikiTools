@@ -260,26 +260,69 @@ public partial class GameDataDumperPage : UserControl
             }
         }
 
-        // Dump/ exists but different timestamp → ask: overwrite, new folder, or cancel
+        // Dump/ exists but different timestamp → offer a dropdown of every existing
+        // Dump folder (Dump, Dump 2, Dump 3, ...) so the user can pick which to
+        // overwrite, plus a "Create new" default. Previously Overwrite always targeted
+        // plain "Dump" even when the user cared about the newest one (Dump 4).
         var nextFolder = DiscordDumpDownloadService.GetNextDumpFolderName(
             versionDir, null, isUnknownVersion: false);
-        var overwriteBox = new Wpf.Ui.Controls.MessageBox
+        return await ShowDumpFolderSelectDialogAsync(versionDir, nextFolder);
+    }
+
+    // Displays a MessageBox with a ComboBox listing existing Dump folders + "Create new".
+    // Returns the chosen absolute path, or null if user cancelled.
+    private async Task<string?> ShowDumpFolderSelectDialogAsync(string versionDir, string nextFolder)
+    {
+        // Discover existing Dump folders sorted by index (Dump = 1, Dump 2, Dump 3, ...).
+        var existing = new List<string>();
+        if (Directory.Exists(Path.Combine(versionDir, "Dump")))
+            existing.Add("Dump");
+        for (int i = 2; i < 1000; i++)
+        {
+            var name = $"Dump {i}";
+            if (Directory.Exists(Path.Combine(versionDir, name)))
+                existing.Add(name);
+        }
+
+        // Options: each existing folder (newest first — most likely user intent) + "Create new"
+        var options = new List<string>();
+        for (int i = existing.Count - 1; i >= 0; i--) options.Add(existing[i]);
+        var createNewLabel = $"Create new ({nextFolder})";
+        options.Add(createNewLabel);
+
+        // Build content — label + combo + hint
+        var panel = new System.Windows.Controls.StackPanel { Margin = new System.Windows.Thickness(0) };
+        panel.Children.Add(new System.Windows.Controls.TextBlock
+        {
+            Text = "A Dump folder already exists for this version. Select which one to overwrite, or create a new one:",
+            TextWrapping = System.Windows.TextWrapping.Wrap,
+            Margin = new System.Windows.Thickness(0, 0, 0, 10)
+        });
+        var combo = new System.Windows.Controls.ComboBox
+        {
+            ItemsSource = options,
+            SelectedIndex = 0, // newest existing folder by default
+            MinWidth = 220,
+            HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch
+        };
+        panel.Children.Add(combo);
+
+        var msgBox = new Wpf.Ui.Controls.MessageBox
         {
             Title = "Dump Folder Exists",
-            Content = $"A Dump folder already exists for this version.\n\nOverwrite it, create \"{nextFolder}\", or cancel?",
-            PrimaryButtonText = "Overwrite",
-            SecondaryButtonText = nextFolder,
+            Content = panel,
+            PrimaryButtonText = "OK",
             CloseButtonText = "Cancel",
             Owner = Window.GetWindow(this)
         };
-        Wpf.Ui.Appearance.ApplicationThemeManager.Apply(overwriteBox);
-        var overwriteResult = await overwriteBox.ShowDialogAsync();
-        if (overwriteResult == Wpf.Ui.Controls.MessageBoxResult.None) return null;
-        if (overwriteResult == Wpf.Ui.Controls.MessageBoxResult.Primary)
-            return dumpDir; // overwrite existing Dump/
-        var newFolder = DiscordDumpDownloadService.GetNextDumpFolderName(
-            versionDir, null, isUnknownVersion: false);
-        return Path.Combine(versionDir, newFolder);
+        Wpf.Ui.Appearance.ApplicationThemeManager.Apply(msgBox);
+        var result = await msgBox.ShowDialogAsync();
+        if (result != Wpf.Ui.Controls.MessageBoxResult.Primary) return null; // Cancel or close
+
+        var choice = combo.SelectedItem as string ?? options[0];
+        if (choice == createNewLabel)
+            return Path.Combine(versionDir, nextFolder);
+        return Path.Combine(versionDir, choice);
     }
 
     private string? ReadConfigCreatedAt()

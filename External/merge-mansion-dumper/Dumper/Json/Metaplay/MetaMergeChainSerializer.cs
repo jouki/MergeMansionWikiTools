@@ -749,7 +749,31 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
             }
             else if (type.IsAssignableTo(typeof(ActivationFeatures)))
             {
-                // Inject MaxCharges immediately before StorageMax
+                // Inject MaxCharges immediately before StorageMax + override StorageMax.
+                //
+                // Empirical rule (verified on 1538 generators in v26.04.01) — the meaning
+                // of `StorageMax` depends on `ActivationFeatures.StartsFull`:
+                //
+                //   StartsFull == true   (item starts pre-filled):
+                //     • raw StorageMax IS the per-cycle drops capacity (= reality)
+                //     • MaxCharges = StorageMax / dropsPerCharge   (taps per cycle)
+                //     • StorageMax in JSON = raw (kept)
+                //     Examples: Mane Comb (storage=4 dpc=1 → 4 drops/cycle, hmc=1 → 4 total),
+                //               Water Bucket (storage=30 dpc=30 → 1 charge/cycle, hmc=2 → 60 total)
+                //
+                //   StartsFull == false  (item starts empty, must wait for cycle):
+                //     • raw StorageMax is a padded UI hint or per-cycle queue capacity
+                //     • MaxCharges = 1 (= one batch tap per cycle)
+                //     • StorageMax in JSON = HowManyCycles × dpc  (= total lifetime drops)
+                //     Examples: Plain Box (raw=15 → 5), White Moth (raw=20 → 60), Suitcase, Radios
+                //
+                //   HowManyCycles == -1  (infinite refill, no override):
+                //     • MaxCharges = StorageMax / dpc, StorageMax kept
+                //     Examples: Flower Pot chain, Drawer chain, Toolbox
+                //
+                // Lua semantic: total drops = dpc × charges × cycles where charges=MaxCharges,
+                // cycles=HowManyCycles. The split into charges/cycles depends on StartsFull
+                // (StartsFull=True spreads taps within one cycle; False spreads across cycles).
                 if (name == nameof(ActivationFeatures.StorageMax) && _currentAF != null)
                 {
                     int storageMax = (int)value;
@@ -761,7 +785,44 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                         int hmg = cd.HowManyAreGeneratedInCycle?.FirstOrDefault() ?? 0;
                         int dpc = amt * hmg;
                         if (dpc > 0)
-                            WriteProperty(writer, "MaxCharges", storageMax / dpc, serializer);
+                        {
+                            int howManyCycles = ac.HowManyCycles;
+                            bool startsFull = _currentAF.StartsFull;
+                            int storageCharges = storageMax / dpc;
+                            // perCycleTaps = how many tap actions fit within one cycle.
+                            // From Lua's perspective this becomes the `charges` field;
+                            // it's multiplied by `cycles` (= HowManyCycles) for total.
+                            int perCycleTaps;
+                            int storageOut;
+                            if (howManyCycles > 0)
+                            {
+                                if (startsFull)
+                                {
+                                    perCycleTaps = System.Math.Max(1, storageCharges);
+                                    storageOut = storageMax; // raw is reality
+                                }
+                                else
+                                {
+                                    perCycleTaps = 1; // 1 batch-tap per cycle
+                                    storageOut = howManyCycles * dpc; // override = total
+                                }
+                            }
+                            else
+                            {
+                                perCycleTaps = storageCharges; // infinite refill
+                                storageOut = storageMax;
+                            }
+                            // PLAYER MaxCharges = total tap actions in lifetime.
+                            // From player perspective each cycle is "another charge", so
+                            // White Moth (1 tap × 3 cycles) shows MaxCharges=3 (not 1).
+                            // For infinite items HowManyCycles=-1 → just per-cycle taps.
+                            int playerMaxCharges = (howManyCycles > 0)
+                                ? perCycleTaps * howManyCycles
+                                : perCycleTaps;
+                            WriteProperty(writer, "MaxCharges", playerMaxCharges, serializer);
+                            WriteProperty(writer, name, storageOut, serializer);
+                            return;
+                        }
                     }
                 }
             }

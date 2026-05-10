@@ -78,11 +78,13 @@
                 </StackPanel>
             </Grid>
 
-            <!-- Output path display -->
+            <!-- Output path display + Algorithm selector -->
             <Grid Margin="0,0,0,12">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Output:" FontSize="12"
@@ -92,7 +94,15 @@
                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                            VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
                            Text="Not configured — set in Settings" />
-                <ui:Button x:Name="btnOpenFolder" Grid.Column="2"
+                <TextBlock Grid.Column="2" Text="Algorithm:" FontSize="12"
+                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                           VerticalAlignment="Center" Margin="16,0,6,0" />
+                <ComboBox x:Name="cmbAlgorithm" Grid.Column="3" Width="140"
+                          SelectionChanged="CmbAlgorithm_SelectionChanged">
+                    <ComboBoxItem Content="Default" Tag="Default" />
+                    <ComboBoxItem Content="Experimental" Tag="Experimental" />
+                </ComboBox>
+                <ui:Button x:Name="btnOpenFolder" Grid.Column="4"
                            Content="Open Folder" Appearance="Secondary"
                            Click="BtnOpenFolder_Click" Height="34"
                            Visibility="Collapsed" Margin="8,0,0,0" />

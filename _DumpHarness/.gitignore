@@ -1,0 +1,5 @@
+bin/
+obj/
+out/
+_workdump/
+speedup_diff_*.md

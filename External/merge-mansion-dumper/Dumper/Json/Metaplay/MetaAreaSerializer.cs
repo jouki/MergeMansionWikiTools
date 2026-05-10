@@ -125,7 +125,7 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 return null;
 
             var description = string.Empty;
-            if (LocMan.HasString(LocMan.GetHotspotDescriptionLocId(hotspot.Id)))
+            if (LocMan.HasHotspotDescription(hotspot.Id))
                 description = LocMan.GetHotspotDescription(hotspot.Id).Replace('"','\'');
 
             var res = hotspot.ConfigKey + Environment.NewLine + description;
@@ -159,7 +159,7 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
             }
             else if (value is HotspotDefinition hotspot)
             {
-                if (LocMan.HasString(LocMan.GetHotspotDescriptionLocId(hotspot.Id)))
+                if (LocMan.HasHotspotDescription(hotspot.Id))
                     WriteProperty(writer, "Description", LocMan.GetHotspotDescription(hotspot.Id), serializer);
 
                 if (hotspot.RequirementsList != null)
@@ -213,17 +213,25 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
             }
 
             // CardStack hotspots: CardStackRef → CardStackInfo.Theme
+            // Lookup via KeyObject (+ config library) instead of MetaRef.Ref getter.
+            // MetaRef.Ref throws InvalidOperationException when the reference is not yet
+            // resolved (ResolveMetaRefs hasn't run for this property), which happens for
+            // some HotspotDefinitions during serialization. KeyObject is always safe.
             var cardStackField = typeof(HotspotDefinition).GetField(
                 "<CardStackRef>k__BackingField",
                 System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
             var csRef = cardStackField?.GetValue(hotspot);
-            if (csRef != null)
+            if (csRef != null && _config.CardStacks != null)
             {
                 try
                 {
-                    var refProp = csRef.GetType().GetProperty("Ref");
-                    var csInfo = refProp?.GetValue(csRef) as GameLogic.Hotspots.CardStack.CardStackInfo;
-                    if (csInfo?.Theme != null) return csInfo.Theme;
+                    var keyObjProp = csRef.GetType().GetProperty("KeyObject");
+                    var key = keyObjProp?.GetValue(csRef);
+                    if (key is GameLogic.Hotspots.CardStack.CardStackId cardStackId)
+                    {
+                        var csInfo = _config.CardStacks.GetInfoByKey(cardStackId) as GameLogic.Hotspots.CardStack.CardStackInfo;
+                        if (csInfo?.Theme != null) return csInfo.Theme;
+                    }
                 }
                 catch { }
             }

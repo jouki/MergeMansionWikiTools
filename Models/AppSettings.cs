@@ -4,7 +4,7 @@ namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.20.18"; // Minigame special tasks: Theme flag + sub-tasks + flowchart group box + icon extractor
+    public const string Version = "v0.20.53"; // Bug 1 fix (final): WikiTableGenerator.BuildFuelForMap now skips items with IsTestTag — same filter LuaGeneratorService uses. Without this filter the wiki source code keeps a phantom {{Item|PoolToys|6}} entry next to {{Item|Pool Toys|6}}, even though the wiki RENDER hides it (Module:Items lookup returns dash). User wants clean source, not just hidden render. Test tag is the only reliable differentiator: primary PoolToys (3750-3768) has Test tag, Ver2PoolToys (9000-9007, active production) doesn't. Both share LegacyEvent + TempSkatie. — Bug 2 (Recharge Time) from v0.20.52 unchanged: Module:Items rev 47912 already pushed, White Moth shows 1h per charge / 2h total + Drops Values 20/3/60.
 
     // Full version with build timestamp, e.g. "v0.18.7 (build 20260322-1200)"
     public static string Build { get; } = GetBuild();
@@ -34,6 +34,7 @@ public class AppSettings
 
     // Table generator checkboxes (persisted)
     public bool LowPrices { get; set; } = false;
+    public bool TableGeneratorIncludeHeading { get; set; } = false;
 
     // Image Optimiser
     public string TinifyApiKey { get; set; } = "";
@@ -55,6 +56,9 @@ public class AppSettings
     public string FlowchartOutputPath { get; set; } = "";
     public bool FlowchartRememberFolderChoice { get; set; } = false;
     public bool FlowchartAutoUpdateFolder { get; set; } = false;
+    // "Default" — safe algorithm (shows all tasks incl. parent IllustrationTask/CardStack phases).
+    // "Experimental" — adds synthetic leaf→parent edges and minigame group bounding rects.
+    public string FlowchartAlgorithm { get; set; } = "Default";
 
     // Chain Browser filters
     public bool FilterGenerators { get; set; }

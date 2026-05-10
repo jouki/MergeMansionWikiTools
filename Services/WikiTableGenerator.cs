@@ -41,7 +41,14 @@ public class WikiTableGenerator
         if (items.Count == 0) return "<!-- No items in chain -->";
 
         // ── Determine which columns to show (check ALL items incl. aliases) ──
-        bool showSellsFor = sellsForInvoke != null || allItems.Any(i => !i.Unsellable);
+        // Skip "Sells for" when chain has only one unique level AND every item carries
+        // the DontSellIfOnlyOneOrHighest tag — game suppresses the sell action there too,
+        // so the column would otherwise show a misleading 1-coin price.
+        bool isOneLevel = allItems.Select(i => i.Level).Distinct().Count() == 1;
+        bool dontSellOneOrHighest = allItems.All(i =>
+            i.Tags != null && i.Tags.Any(t => string.Equals(t, "DontSellIfOnlyOneOrHighest", StringComparison.OrdinalIgnoreCase)));
+        bool suppressSellsFor = isOneLevel && dontSellOneOrHighest;
+        bool showSellsFor = sellsForInvoke != null || (allItems.Any(i => !i.Unsellable) && !suppressSellsFor);
         bool showDrops = allItems.Any(i => HasDrops(i));
         bool showDropValues = allItems.Any(i =>
             (i.IsGenerator && i.ActivationAmountInCycle > 0)
@@ -65,6 +72,15 @@ public class WikiTableGenerator
         // Fuel — this chain has sink items that require fuel
         var fuelMap = BuildFuelMap(allItems);
         bool showFuel = fuelMap.Count > 0;
+
+        // OrderFeatures items: emit Fuel + Drops + Drops per Task columns built
+        // from per-task Required/Rewards. The "or"-joined chain alternatives per slot
+        // mimic the hand-written Distillation Apparatus wiki layout. These columns
+        // co-exist with the standard Fuel/Drops columns since OrderFeatures rarely
+        // overlap with sink/drop-odds items in the same chain.
+        bool showOrderFuel = allItems.Any(i => i.OrderTasks is { Count: > 0 } && i.OrderTasks.Any(t => t.Required.Count > 0));
+        bool showOrderDrops = allItems.Any(i => i.OrderTasks is { Count: > 0 } && i.OrderTasks.Any(t => t.Rewards.Count > 0));
+        bool showDropsPerTask = showOrderDrops;
 
         // Transforms To — sink reward items (skip items with fuels suppressed via mapping)
         bool showTransformsTo = allItems.Any(i => i.IsSink && !string.IsNullOrEmpty(i.SinkRewardItemType) && !IsSinkSuppressed(i));
@@ -206,6 +222,11 @@ public class WikiTableGenerator
         if (showFuel)
             sb.AppendLine($"{hp}Fuel");
 
+        // OrderFeatures Fuel column (rendered same name as sink Fuel; used when items
+        // produce rewards via per-task requirements rather than sink fuel mechanics).
+        if (showOrderFuel)
+            sb.AppendLine($"{hp}Fuel");
+
         if (showTransformsTo)
             sb.AppendLine($"{hp}Transforms To");
         if (showTransformsToVariant)
@@ -214,6 +235,11 @@ public class WikiTableGenerator
         if (hasVariants && firstSplitCol == "Drops") sb.AppendLine($"{hp}Variant");
         if (showDrops)
             sb.AppendLine($"{hp}Drops");
+
+        if (showOrderDrops)
+            sb.AppendLine($"{hp}Drops");
+        if (showDropsPerTask)
+            sb.AppendLine($"{hp}Drops per Task");
 
         if (hasVariants && firstSplitCol == "DropValues") sb.AppendLine($"{hp}Variant");
         if (showDropValues)
@@ -338,6 +364,8 @@ public class WikiTableGenerator
 
                             if (showFuel)
                                 sb.AppendLine($"| rowspan = {totalRows} | {BuildFuelCell(item, fuelMap)}");
+                            if (showOrderFuel)
+                                sb.AppendLine($"| rowspan = {totalRows} | {BuildOrderFuelCell(item)}");
                             if (showTransformsTo)
                                 sb.AppendLine($"| rowspan = {totalRows} | {BuildTransformsToCellAggregated(levelItems)}");
                         }
@@ -354,6 +382,7 @@ public class WikiTableGenerator
                             showDrops, showDropValues, showFuelFor, showDecaysInto,
                             showDecayOdds, showChargeTime, showRechargeTime, showSpeedUpCost,
                             hasVariants, firstSplitCol, fuelForMap,
+                            showOrderDrops, showDropsPerTask,
                             totalRows: totalRows, hasAnyDecayExpansion: hasDecayExpansionColumns,
                             nestedDecayTable: headerNestedTable != null ? null : nestedTable,
                             skipDecayColumns: headerNestedTable != null);
@@ -413,6 +442,7 @@ public class WikiTableGenerator
                                 showDrops, showDropValues, showFuelFor, showDecaysInto,
                                 showDecayOdds, showChargeTime, showRechargeTime, showSpeedUpCost,
                                 hasVariants, firstSplitCol, fuelForMap,
+                                showOrderDrops, showDropsPerTask,
                                 dg, dcCount, totalRows, hasDecayExpansion ? decayGroups : null,
                                 hasDecayExpansionColumns,
                                 skipDecayColumns: headerNestedTable != null);
@@ -448,6 +478,8 @@ public class WikiTableGenerator
 
                 if (showFuel)
                     sb.AppendLine($"| {BuildFuelCell(item, fuelMap)}");
+                if (showOrderFuel)
+                    sb.AppendLine($"| {BuildOrderFuelCell(item)}");
                 if (showTransformsTo)
                     sb.AppendLine($"| {BuildTransformsToCellAggregated(levelItems)}");
                 if (showTransformsToVariant)
@@ -457,6 +489,10 @@ public class WikiTableGenerator
                 if (hasVariants && firstSplitCol == "Drops") sb.AppendLine("| {{Dash}}");
                 if (showDrops)
                     sb.AppendLine($"| {BuildDropsCellAggregated(levelItems)}");
+                if (showOrderDrops)
+                    sb.AppendLine($"| {BuildOrderDropsCell(item)}");
+                if (showDropsPerTask)
+                    sb.AppendLine($"| {BuildOrderDropsPerTaskCell(item)}");
 
                 if (hasVariants && firstSplitCol == "DropValues") sb.AppendLine("| {{Dash}}");
                 if (showDropValues)
@@ -829,6 +865,108 @@ public class WikiTableGenerator
         return parts.Count > 0 ? string.Join("<br>", parts) : "{{Dash}}";
     }
 
+    // ── OrderFeatures cells (Distillation Apparatus / Vending Machine style) ────
+
+    /// <summary>
+    /// Builds the Fuel cell for an OrderFeatures item: groups requirements by slot
+    /// position across tasks, dedupes alternative chains per slot, joins alternatives
+    /// with "or" within a slot and slots with "+". Each chain entry includes its
+    /// required level (single → `{{Item|name|level}}`, range → `{{Item/Group|...}}`).
+    /// </summary>
+    private string BuildOrderFuelCell(ParsedItem item)
+    {
+        if (item.OrderTasks is not { Count: > 0 } tasks) return "{{Dash}}";
+
+        int maxSlots = tasks.Max(t => t.Required.Count);
+        if (maxSlots == 0) return "{{Dash}}";
+
+        var slotGroups = new List<List<string>>();
+        for (int slot = 0; slot < maxSlots; slot++)
+        {
+            // chainName → unique levels seen across tasks at this slot
+            var byChain = new Dictionary<string, SortedSet<int>>(StringComparer.OrdinalIgnoreCase);
+            var order = new List<string>(); // first-seen order
+            foreach (var t in tasks)
+            {
+                if (slot >= t.Required.Count) continue;
+                var (itemType, _) = t.Required[slot];
+                var chainName = _data.ResolveChainDisplayName(DataService.GetChainKeyFromItemType(itemType)) ?? itemType;
+                int level = DataService.GetLevelFromItemType(itemType);
+                if (!byChain.TryGetValue(chainName, out var levels))
+                {
+                    byChain[chainName] = levels = new SortedSet<int>();
+                    order.Add(chainName);
+                }
+                if (level > 0) levels.Add(level);
+            }
+            var alternatives = order.Select(name => FormatLeveledChain(name, byChain[name])).ToList();
+            if (alternatives.Count > 0) slotGroups.Add(alternatives);
+        }
+
+        if (slotGroups.Count == 0) return "{{Dash}}";
+
+        var lines = new List<string>();
+        for (int g = 0; g < slotGroups.Count; g++)
+        {
+            if (g > 0) lines.Add("+");
+            for (int a = 0; a < slotGroups[g].Count; a++)
+                lines.Add(a == 0 ? slotGroups[g][a] : $"or {slotGroups[g][a]}");
+        }
+        return string.Join("<br>", lines);
+    }
+
+    /// <summary>Builds the Drops cell for an OrderFeatures item — unique reward chains × levels across all tasks.</summary>
+    private string BuildOrderDropsCell(ParsedItem item)
+    {
+        if (item.OrderTasks is not { Count: > 0 } tasks) return "{{Dash}}";
+
+        var byChain = new Dictionary<string, SortedSet<int>>(StringComparer.OrdinalIgnoreCase);
+        var order = new List<string>();
+        foreach (var t in tasks)
+        {
+            foreach (var (itemType, _) in t.Rewards)
+            {
+                var chainName = _data.ResolveChainDisplayName(DataService.GetChainKeyFromItemType(itemType)) ?? itemType;
+                int level = DataService.GetLevelFromItemType(itemType);
+                if (!byChain.TryGetValue(chainName, out var levels))
+                {
+                    byChain[chainName] = levels = new SortedSet<int>();
+                    order.Add(chainName);
+                }
+                if (level > 0) levels.Add(level);
+            }
+        }
+        if (order.Count == 0) return "{{Dash}}";
+
+        var parts = order.Select(name => FormatLeveledChain(name, byChain[name]));
+        return string.Join("<br>", parts);
+    }
+
+    /// <summary>Formats a chain reference with its required levels: single level → `{{Item|name|N}}`, range → `{{Item/Group|name|max|min=min|max=max}}`.</summary>
+    private static string FormatLeveledChain(string chainName, SortedSet<int> levels)
+    {
+        if (levels.Count == 0)
+            return $"{{{{Item/nolevel|{chainName}}}}}";
+        if (levels.Count == 1)
+            return $"{{{{Item|{chainName}|{levels.Min}}}}}";
+        return $"{{{{Item/Group|{chainName}|{levels.Max}|min={levels.Min}|max={levels.Max}}}}}";
+    }
+
+    /// <summary>Drops per Task — typical reward count per task (sum of amounts in first task with rewards).</summary>
+    private string BuildOrderDropsPerTaskCell(ParsedItem item)
+    {
+        if (item.OrderTasks is not { Count: > 0 } tasks) return "{{Dash}}";
+
+        // Use the most common total-per-task; if all tasks have same total, show single number.
+        var totals = tasks.Where(t => t.Rewards.Count > 0)
+            .Select(t => t.Rewards.Sum(r => r.Amount))
+            .ToList();
+        if (totals.Count == 0) return "{{Dash}}";
+
+        int min = totals.Min(), max = totals.Max();
+        return min == max ? min.ToString() : $"{min} - {max}";
+    }
+
     // ── Transforms To ─────────────────────────────────────────────────
 
     private string BuildTransformsToCell(ParsedItem item)
@@ -891,6 +1029,12 @@ public class WikiTableGenerator
         {
             foreach (var item in otherChain.Items)
             {
+                // Skip dev/test items (Tag "Test" → IsTestTag). Same filter Lua export uses.
+                // Without this, primary PoolToys chain (3750-3768, Test tag) creates a phantom
+                // {{Item|PoolToys|6}} entry next to {{Item|Pool Toys|6}} from Ver2PoolToys.
+                // The two PoolToys variants share LegacyEvent + TempSkatie tags — Test is the
+                // only reliable differentiator (don't filter LegacyEvent, would hit Ver2 too).
+                if (item.IsTestTag) continue;
                 if (!item.IsSink || item.SinkRequirementConfigKeys == null || IsSinkSuppressed(item)) continue;
 
                 foreach (var reqKey in item.SinkRequirementConfigKeys)
@@ -1009,6 +1153,7 @@ public class WikiTableGenerator
         bool showDecayOdds, bool showChargeTime, bool showRechargeTime, bool showSpeedUpCost,
         bool hasVariants, string? firstSplitCol,
         Dictionary<string, List<(ParsedChain Chain, ParsedItem Item)>> fuelForMap,
+        bool showOrderDrops = false, bool showDropsPerTask = false,
         int dg = 0, int dcCount = 1, int totalRows = 0, List<DecayChainGroup>? decayGroups = null,
         bool hasAnyDecayExpansion = false,
         string? nestedDecayTable = null,
@@ -1027,6 +1172,12 @@ public class WikiTableGenerator
             else if (isFirstRow)
                 sb.AppendLine($"| rowspan = {totalRows} | {BuildDropsCellAggregated(levelItems)}");
         }
+
+        // OrderFeatures Drops + Drops per Task (always rowspan — same across variants)
+        if (showOrderDrops && isFirstRow)
+            sb.AppendLine($"| rowspan = {totalRows} | {BuildOrderDropsCell(primary)}");
+        if (showDropsPerTask && isFirstRow)
+            sb.AppendLine($"| rowspan = {totalRows} | {BuildOrderDropsPerTaskCell(primary)}");
 
         // Drop Values
         if (hasVariants && firstSplitCol == "DropValues") sb.AppendLine($"| {(char)('A' + v)}");
@@ -1466,6 +1617,96 @@ public class WikiTableGenerator
             .Select(e => $"{{{{Item|{e.DisplayName}|{e.Level}}}}} {e.Odds:0.##}%");
 
         return string.Join("<br>", parts);
+    }
+
+    // ── Order Tasks wikitext ─────────────────────────────────────────
+    /// <summary>
+    /// Generates the "Tasks" section wikitext for an item that has OrderFeatures (e.g.
+    /// Distillation Apparatus, Vending Machine). Mimics the hand-written style on
+    /// Distillation Apparatus wiki page: heading, "fixed order" intro, table with
+    /// `Task | Required... | Reward` columns. Range-collapses consecutive identical
+    /// (Required, Rewards) tuples using cumulative integer slot weights.
+    /// </summary>
+    public string? GenerateOrderTasksTable(ParsedItem item)
+    {
+        if (!item.IsOrder || item.OrderTasks is not { Count: > 0 } tasks) return null;
+
+        // Range collapsing only works when ALL weights are positive integers; otherwise
+        // each task gets its own row labeled by 1-based index.
+        bool allIntWeights = tasks.All(t => t.OddsWeight > 0 && Math.Abs(t.OddsWeight - Math.Round(t.OddsWeight)) < 1e-6);
+
+        // Determine column count for "Required" — max # of required slots across tasks.
+        int requiredCols = tasks.Max(t => t.Required.Count);
+        if (requiredCols == 0) return null;
+
+        var sb = new StringBuilder();
+        sb.AppendLine("=== Tasks ===");
+        sb.AppendLine("The tasks are in a fixed order and repeat once a player completes all the listed tasks.");
+        sb.AppendLine("{| class=\"article-table\"");
+        sb.AppendLine("|+ <u>{{PAGENAME}}</u>");
+        sb.AppendLine("! Task");
+        if (requiredCols == 1)
+            sb.AppendLine("! Item");
+        else
+            for (int i = 1; i <= requiredCols; i++)
+                sb.AppendLine($"! Item {i}");
+        sb.AppendLine("! Reward");
+
+        int slotStart = 1;
+        for (int i = 0; i < tasks.Count; i++)
+        {
+            var t = tasks[i];
+            int slotsInThisTask = allIntWeights ? (int)Math.Round(t.OddsWeight) : 1;
+            int slotEnd = slotStart + slotsInThisTask - 1;
+
+            string label = slotsInThisTask == 1
+                ? slotStart.ToString()
+                : $"{slotStart} - {slotEnd}";
+
+            sb.AppendLine("|-");
+            sb.AppendLine($"! {label}");
+
+            // Required cells (pad with empty cells when this task has fewer required items)
+            for (int c = 0; c < requiredCols; c++)
+            {
+                if (c < t.Required.Count)
+                {
+                    var (it, amt) = t.Required[c];
+                    sb.AppendLine($"| {FormatItemRef(it, amt)}");
+                }
+                else
+                {
+                    sb.AppendLine("|");
+                }
+            }
+
+            // Reward cell (multi-item join with <br>)
+            if (t.Rewards.Count == 0)
+            {
+                sb.AppendLine("| {{Dash}}");
+            }
+            else
+            {
+                var rewardParts = t.Rewards.Select(r => FormatItemRef(r.ItemType, r.Amount));
+                sb.AppendLine($"| {string.Join("<br>", rewardParts)}");
+            }
+
+            slotStart = slotEnd + 1;
+        }
+
+        sb.AppendLine("|}");
+        return sb.ToString();
+    }
+
+    /// <summary>Resolves an ItemType to `Nx {{Item|ChainName|Level}}` (or just `{{Item|...}}` when amount=1).</summary>
+    private string FormatItemRef(string itemType, int amount)
+    {
+        var chainName = _data.ResolveChainDisplayName(DataService.GetChainKeyFromItemType(itemType)) ?? itemType;
+        var level = DataService.GetLevelFromItemType(itemType);
+        var amtPrefix = amount > 1 ? $"{amount}x " : "";
+        return level > 0
+            ? $"{amtPrefix}{{{{Item|{chainName}|{level}}}}}"
+            : $"{amtPrefix}{{{{Item/nolevel|{chainName}}}}}";
     }
 
     private class DropGroup

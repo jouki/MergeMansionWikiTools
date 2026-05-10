@@ -123,6 +123,12 @@ public class InfoboxGeneratorService
 
         // ── source ──
         var sourceLines = new List<string>(manualSourceLines);
+        // Repeatable-tagged items (e.g. Water Bucket) reset/respawn via a Repeatable Task —
+        // emit it as the first source so readers see the gameplay loop up front.
+        bool hasRepeatable = chain.Items.Any(i =>
+            i.Tags != null && i.Tags.Any(t => string.Equals(t, "Repeatable", StringComparison.OrdinalIgnoreCase)));
+        if (hasRepeatable)
+            sourceLines.Insert(0, "Repeatable Task");
         if (opts.AddShop)
             sourceLines.Add("{{Item/Group|Shop}}");
         if (!string.IsNullOrEmpty(TaskRewardAreaName))
@@ -184,18 +190,30 @@ public class InfoboxGeneratorService
     {
         var types = new List<string>();
 
-        // Drop Item — any other chain drops items from THIS chain
+        // Starter Item — user-marked, must be the FIRST type in the infobox.
+        if (opts.IsStarter)          types.Add("Starter Item");
+
+        // Drop Item — any other chain drops items from THIS chain (incl. ChestFeatures
+        // loot producers for chests like Brown Chest, Mystery Chest, Reward Boxes).
+        // Items tagged "DoesNotShowInInfoPopUp" are skipped (game-side hidden — same
+        // filter as in BuildAutoSources). Otherwise items whose only source is e.g.
+        // an AdventCalendar prize chain would still be tagged "Drop Item" even though
+        // the source line is empty.
         var myItemTypes = chain.Items.Select(i => i.ItemType).ToHashSet(StringComparer.OrdinalIgnoreCase);
         bool isDropped = allChains
             .Where(c => c != chain)
             .SelectMany(c => c.Items)
+            .Where(i => i.Tags?.Any(t => string.Equals(t, "DoesNotShowInInfoPopUp", StringComparison.OrdinalIgnoreCase)) != true)
             .Any(i => (i.DropOdds?.Keys.Any(k => myItemTypes.Contains(k)) == true) ||
                       (i.SpawnOdds?.Keys.Any(k => myItemTypes.Contains(k)) == true) ||
-                      (i.SpawnItemType != null && myItemTypes.Contains(i.SpawnItemType)));
+                      (i.SpawnItemType != null && myItemTypes.Contains(i.SpawnItemType)) ||
+                      (i.ChestRewardOdds?.Keys.Any(k => myItemTypes.Contains(k)) == true));
         if (isDropped) types.Add("Drop Item");
 
-        if (opts.IsStarter)          types.Add("Starter Item");
-        if (chain.HasGenerators)     types.Add("Primary Source Item");
+        // OrderFeatures items (e.g. Distillation Apparatus, Vending Machine) act as primary
+        // sources of their reward chains — task rewards are equivalent in role to drops.
+        bool hasOrderRewards = chain.Items.Any(i => i.OrderTasks is { Count: > 0 } && i.OrderTasks.Any(t => t.Rewards.Count > 0));
+        if (chain.HasGenerators || hasOrderRewards)     types.Add("Primary Source Item");
         if (chain.HasSpawners)       types.Add("Secondary Source Item");
         if (chain.IsEventChain)      types.Add("Event Item");
 
@@ -270,10 +288,25 @@ public class InfoboxGeneratorService
 
             foreach (var item in otherChain.Items)
             {
-                // Drop/Spawn sources
+                // Game flag: items tagged "DoesNotShowInInfoPopUp" are intentionally
+                // hidden from in-game source/drop popups. Wiki should respect the same
+                // semantic — showing them in the wiki source field is misleading because
+                // the player never sees the drop in-game.
+                //
+                // Affects ~67 items / 62 chains in v26.04.01 (AdventCalendar prizes,
+                // Predefined chest decoys, PEChristmas2022 GoC entries, LDE Grandma's
+                // Birthday2023 entrance/exit items, etc.). Example: Simple Brown Box
+                // (Plain Box) was attributed to AdventCalendar2023_Chocolate7 +
+                // AdventCalendar2025_Prize1 even though those drops are hidden in-game.
+                if (item.Tags?.Any(t => string.Equals(t, "DoesNotShowInInfoPopUp", StringComparison.OrdinalIgnoreCase)) == true)
+                    continue;
+
+                // Drop/Spawn sources (incl. ChestFeatures.LootProducer for chests like
+                // Brown Chest, Mystery Chest, Reward Boxes — items they drop on opening).
                 bool drops = (item.DropOdds?.Keys.Any(k => myItemTypes.Contains(k)) == true) ||
                              (item.SpawnOdds?.Keys.Any(k => myItemTypes.Contains(k)) == true) ||
-                             (item.SpawnItemType != null && myItemTypes.Contains(item.SpawnItemType));
+                             (item.SpawnItemType != null && myItemTypes.Contains(item.SpawnItemType)) ||
+                             (item.ChestRewardOdds?.Keys.Any(k => myItemTypes.Contains(k)) == true);
 
                 // Sink reward source (other chain transforms INTO this chain's items)
                 bool transforms = item.IsSink && !IsSinkSuppressed(item)
@@ -355,20 +388,26 @@ public class InfoboxGeneratorService
     /// </summary>
     private string FormatSourceEntry(string sourceName, ParsedChain sourceChain, SortedSet<int> producingLevels)
     {
-        // Total distinct levels in source chain (aliases counted transparently)
-        var totalLevels = sourceChain.Items
+        // Resolved levels of the chain (aliases counted transparently)
+        var levels = sourceChain.Items
             .Select(i => ResolveLevel(i.ItemType, i))
             .Where(lvl => lvl > 0)
-            .Distinct()
-            .Count();
+            .ToList();
+        var totalLevels = levels.Distinct().Count();
+        // Highest producing level — required as positional arg so Item/Group picks the right icon
+        // (absent positional defaults to level=1 in the Lua template)
+        var maxProducingLevel = producingLevels.Count > 0
+            ? producingLevels.Max()
+            : (levels.Count > 0 ? levels.Max() : 1);
 
         // fullName=true preserves "(...)" suffix — only needed for non-event chains with disambiguation
         bool needsFullName = !sourceChain.IsEventChain && HasParentheticalSuffix(sourceName);
         string fullNameSuffix = needsFullName ? "|fullName=true" : "";
 
-        // All levels produce OR single-level chain OR no valid producing levels → no level
+        // All levels produce OR single-level chain OR no valid producing levels
+        // → no min=/max= (no level text), but emit positional level for correct icon
         if (producingLevels.Count == 0 || totalLevels <= 1 || producingLevels.Count == totalLevels)
-            return $"{{{{Item/Group|{sourceName}{fullNameSuffix}}}}}";
+            return $"{{{{Item/Group|{sourceName}|{maxProducingLevel}{fullNameSuffix}}}}}";
 
         // Detect contiguous runs and emit one template per run
         var entries = SplitIntoRuns(producingLevels).Select(r =>
@@ -423,6 +462,11 @@ public class InfoboxGeneratorService
             if (item.DropOdds != null)  foreach (var k in item.DropOdds.Keys)  allOdds.Add(k);
             if (item.SpawnOdds != null) foreach (var k in item.SpawnOdds.Keys) allOdds.Add(k);
             if (item.SpawnItemType != null) allOdds.Add(item.SpawnItemType);
+            // OrderFeatures rewards (e.g. Distillation Apparatus task rewards = Perfumes / Perfume Collection)
+            if (item.OrderTasks != null)
+                foreach (var t in item.OrderTasks)
+                    foreach (var (rewardType, _) in t.Rewards)
+                        allOdds.Add(rewardType);
 
             foreach (var droppedType in allOdds)
             {
@@ -455,11 +499,15 @@ public class InfoboxGeneratorService
         foreach (var (_, (dChain, levels)) in byChain)
         {
             var chainName = ResolveChainName(dChain, dChain.Items.FirstOrDefault()?.ItemType);
+            bool needsFullName = !dChain.IsEventChain && HasParentheticalSuffix(chainName);
+            string fullNameSuffix = needsFullName ? "|fullName=true" : "";
             int minLvl = levels.Min();
             int maxLvl = levels.Max();
-            result.Add(minLvl == maxLvl
-                ? $"{{{{Item/Group|{chainName}|{minLvl}}}}}"
-                : $"{{{{Item/Group|{chainName}|{minLvl}|min={minLvl}|max={maxLvl}}}}}");
+            // Single level → {{Item}} (level-specific name).
+            // Multiple levels → {{Item/Group}} with max-level icon + min/max range labels.
+            result.Add(levels.Count == 1
+                ? $"{{{{Item|{chainName}|{maxLvl}{fullNameSuffix}}}}}"
+                : $"{{{{Item/Group|{chainName}|{maxLvl}|min={minLvl}|max={maxLvl}{fullNameSuffix}}}}}");
         }
 
         foreach (var name in unmatchedNames)
@@ -475,14 +523,12 @@ public class InfoboxGeneratorService
     {
         var itemTypeToChain = BuildItemTypeToChain(allChains);
 
-        // Deduplicate by (DisplayName, level) to avoid alias duplicates
-        var seen = new HashSet<(string Name, int Level)>();
-        var parts = new List<string>();
+        // Group decay targets by chainName, collecting all decay levels per chain
+        var byChain = new Dictionary<string, (ParsedChain Chain, SortedSet<int> Levels)>(StringComparer.OrdinalIgnoreCase);
         var unmatchedNames = new List<string>();
 
         foreach (var item in chain.Items)
         {
-            // Collect all decay target item types from this item
             var decayTypes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
             if (!string.IsNullOrEmpty(item.DecayIntoItemType))
@@ -491,8 +537,6 @@ public class InfoboxGeneratorService
                 decayTypes.Add(item.SpawnDecayIntoItemType);
             if (!string.IsNullOrEmpty(item.DecayAfterLastCycleItemType))
                 decayTypes.Add(item.DecayAfterLastCycleItemType);
-
-            // DecayAfterLastCycleOdds — multiple decay targets with probabilities
             if (item.DecayAfterLastCycleOdds != null)
                 foreach (var key in item.DecayAfterLastCycleOdds.Keys)
                     decayTypes.Add(key);
@@ -506,14 +550,34 @@ public class InfoboxGeneratorService
                     int lvl = ResolveLevel(decayType, matchingItem);
                     var chainName = ResolveChainName(decayChain, decayType);
 
-                    if (seen.Add((chainName, lvl)))
-                        parts.Add($"{{{{Item|{chainName}|{lvl}}}}}");
+                    if (!byChain.TryGetValue(chainName, out var entry))
+                    {
+                        entry = (decayChain, new SortedSet<int>());
+                        byChain[chainName] = entry;
+                    }
+                    entry.Levels.Add(lvl);
                 }
                 else if (itemNames.TryGetValue(decayType, out var name))
                 {
                     if (!unmatchedNames.Contains(name))
                         unmatchedNames.Add(name);
                 }
+            }
+        }
+
+        var parts = new List<string>();
+        foreach (var (chainName, (dChain, levels)) in byChain)
+        {
+            bool needsFullName = !dChain.IsEventChain && HasParentheticalSuffix(chainName);
+            string fullNameSuffix = needsFullName ? "|fullName=true" : "";
+
+            // Emit one template per contiguous level run (e.g. L3-L10 → one Item/Group, L3+L5+L10 → three entries)
+            foreach (var (min, max) in SplitIntoRuns(levels))
+            {
+                if (min == max)
+                    parts.Add($"{{{{Item|{chainName}|{min}{fullNameSuffix}}}}}");
+                else
+                    parts.Add($"{{{{Item/Group|{chainName}|{max}|min={min}|max={max}{fullNameSuffix}}}}}");
             }
         }
 
@@ -602,36 +666,72 @@ public class InfoboxGeneratorService
         var configKeyToChain = BuildConfigKeyToChain(allChains);
         var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-        // Collect per chain: actual item levels + amounts
-        var byChain = new Dictionary<string, (ParsedChain Chain, List<(int Level, int Amount)> Items)>(StringComparer.OrdinalIgnoreCase);
+        // Collect per chain: actual item levels + amounts + sort key (slot index for OrderTasks
+        // requirements so all slot-0 chains group before slot-1, etc. — e.g. Distillation
+        // Apparatus emits Lemon/Vanilla/Rose Essence consecutively, then Watering Can/Bottle
+        // consecutively, instead of interleaving. Sink-only chains use sort key 0.
+        var byChain = new Dictionary<string, (ParsedChain Chain, List<(int Level, int Amount)> Items, int SortKey, int InsertOrder)>(StringComparer.OrdinalIgnoreCase);
+        int insertCounter = 0;
 
+        var itemTypeToChain = BuildItemTypeToChain(allChains);
         foreach (var item in chain.Items)
         {
-            if (!item.IsSink || item.SinkRequirementConfigKeys == null || IsSinkSuppressed(item)) continue;
-
-            foreach (var reqKey in item.SinkRequirementConfigKeys)
+            // Sink requirements (NumericConfigKey-based)
+            if (item.IsSink && item.SinkRequirementConfigKeys != null && !IsSinkSuppressed(item))
             {
-                if (!seen.Add(reqKey)) continue;
-
-                if (configKeyToChain.TryGetValue(reqKey, out var match))
+                foreach (var reqKey in item.SinkRequirementConfigKeys)
                 {
-                    int level = match.Item.Level;
-                    int amount = item.SinkRequirementAmounts != null
-                        && item.SinkRequirementAmounts.TryGetValue(reqKey, out var amt) ? amt : 1;
+                    if (!seen.Add(reqKey)) continue;
 
-                    if (!byChain.TryGetValue(match.Chain.ConfigKey, out var entry))
+                    if (configKeyToChain.TryGetValue(reqKey, out var match))
                     {
-                        entry = (match.Chain, new List<(int, int)>());
+                        int level = match.Item.Level;
+                        int amount = item.SinkRequirementAmounts != null
+                            && item.SinkRequirementAmounts.TryGetValue(reqKey, out var amt) ? amt : 1;
+
+                        if (!byChain.TryGetValue(match.Chain.ConfigKey, out var entry))
+                        {
+                            entry = (match.Chain, new List<(int, int)>(), 0, insertCounter++);
+                            byChain[match.Chain.ConfigKey] = entry;
+                        }
+                        entry.Items.Add((level, amount));
                         byChain[match.Chain.ConfigKey] = entry;
                     }
-                    entry.Items.Add((level, amount));
+                }
+            }
+
+            // OrderFeatures requirements (per-task Required items, e.g. Distillation Apparatus essences/water)
+            if (item.OrderTasks != null)
+            {
+                foreach (var t in item.OrderTasks)
+                {
+                    for (int slot = 0; slot < t.Required.Count; slot++)
+                    {
+                        var (reqItemType, amount) = t.Required[slot];
+                        if (!seen.Add(reqItemType)) continue;
+                        if (!itemTypeToChain.TryGetValue(reqItemType, out var reqChain)) continue;
+                        var reqItem = reqChain.Items.FirstOrDefault(i =>
+                            string.Equals(i.ItemType, reqItemType, StringComparison.OrdinalIgnoreCase));
+                        if (reqItem == null) continue;
+                        if (!byChain.TryGetValue(reqChain.ConfigKey, out var entry))
+                        {
+                            entry = (reqChain, new List<(int, int)>(), slot, insertCounter++);
+                            byChain[reqChain.ConfigKey] = entry;
+                        }
+                        else if (slot < entry.SortKey)
+                        {
+                            entry = (entry.Chain, entry.Items, slot, entry.InsertOrder);
+                        }
+                        entry.Items.Add((reqItem.Level, amount));
+                        byChain[reqChain.ConfigKey] = entry;
+                    }
                 }
             }
         }
 
         var result = new List<string>();
 
-        foreach (var (_, (needChain, items)) in byChain)
+        foreach (var (_, (needChain, items, _, _)) in byChain.OrderBy(kv => kv.Value.SortKey).ThenBy(kv => kv.Value.InsertOrder))
         {
             var chainName = ResolveChainName(needChain, needChain.Items.FirstOrDefault()?.ItemType);
             foreach (var (lvl, amt) in items.OrderBy(x => x.Level))

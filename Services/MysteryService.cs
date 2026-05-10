@@ -33,16 +33,25 @@ public class MysteryService
             var eventId = GetString(prog, "ProgressionEventId");
             if (string.IsNullOrEmpty(eventId) || !eventId.StartsWith("SP_")) continue;
 
+            var derivedName = DeriveName(eventId);
             var mystery = new MysteryEvent
             {
                 ProgressionEventId = eventId,
-                Name = DeriveName(eventId),
+                Name = derivedName,
+                RawJsonName = derivedName,
             };
 
             // Name from JSON (may be more readable than derived)
             var jsonName = GetString(prog, "Name");
             if (!string.IsNullOrEmpty(jsonName))
-                mystery.Name = jsonName;
+            {
+                mystery.RawJsonName = jsonName;
+                mystery.Name = StripSeasonPassPrefix(jsonName);
+            }
+            else
+            {
+                mystery.Name = StripSeasonPassPrefix(derivedName);
+            }
 
             // Schedule.Start + Duration — nested inside ActivableParams
             if (prog.TryGetProperty("ActivableParams", out var activable)
@@ -117,6 +126,20 @@ public class MysteryService
             if (b.StartDate == null) return -1;
             return b.StartDate.Value.CompareTo(a.StartDate.Value);
         });
+    }
+
+    /// <summary>
+    /// Strips the "Season Pass - " prefix from a mystery display name (case-insensitive).
+    /// "Season Pass - Buzzing with Purpose" → "Buzzing with Purpose".
+    /// Names without the prefix are returned unchanged.
+    /// </summary>
+    public static string StripSeasonPassPrefix(string name)
+    {
+        if (string.IsNullOrEmpty(name)) return name;
+        const string prefix = "Season Pass - ";
+        if (name.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
+            return name[prefix.Length..].TrimStart();
+        return name;
     }
 
     /// <summary>

@@ -43,6 +43,12 @@ public partial class MoveItemsDialog : FluentWindow
     private bool _sourcePageExists;
     private bool _moveImages = true;
 
+    // ── Alias state ──
+    // Initial alias state of the primary selected item (single-item mode) or first item (multi-mode).
+    // Checkbox default = this value so the user can see the current state and toggle.
+    private bool _initialIsAlias;
+    private bool _setAsAlias;
+
     // ── Backlinks state ──
     private CancellationTokenSource? _backlinksCts;
     private List<string> _allBacklinks = new();
@@ -119,6 +125,10 @@ public partial class MoveItemsDialog : FluentWindow
             _suppressTextChanged = false;
         }
 
+        // Initialize alias checkbox with current item state so user can see & toggle it
+        _initialIsAlias = _selectedItems.Count > 0 && _selectedItems[0].IsAlias;
+        _setAsAlias = _initialIsAlias;
+        chkSetAsAlias.IsChecked = _initialIsAlias;
     }
 
     // ── Autocomplete ──────────────────────────────────────────────────
@@ -280,6 +290,15 @@ public partial class MoveItemsDialog : FluentWindow
 
         // O(1) lookup instead of LINQ scan
         if (!_chainByName.TryGetValue(name, out var match) || match == _sourceChain)
+        {
+            HideConflict();
+            UpdateBacklinksDimming();
+            return;
+        }
+
+        // Single-item mode: existence of the target chain isn't a blocking conflict.
+        // The user moves one item to a chosen level — collision is per-level, handled by CheckLevelCollision.
+        if (_singleItemMode)
         {
             HideConflict();
             UpdateBacklinksDimming();
@@ -451,6 +470,11 @@ public partial class MoveItemsDialog : FluentWindow
         CheckLevelCollision();
     }
 
+    private void NbLevel_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        CheckLevelCollision();
+    }
+
     private void CheckLevelCollision()
     {
         if (!_singleItemMode || nbLevel == null) return;
@@ -461,7 +485,15 @@ public partial class MoveItemsDialog : FluentWindow
         var targetName = txtChainName.Text?.Trim() ?? "";
         if (string.IsNullOrEmpty(targetName)) { UpdateConfirmEnabled(); return; }
 
-        var desiredLevel = (int)(nbLevel.Value ?? _selectedItems[0].Level);
+        // Prefer parsing the live text (updates on every keystroke); Value only commits
+        // on focus loss / Enter / spinner click, so reading it would show stale validation.
+        int desiredLevel;
+        if (int.TryParse(nbLevel.Text, out var parsed) && parsed >= 1 && parsed <= 99)
+            desiredLevel = parsed;
+        else if (nbLevel.Value.HasValue)
+            desiredLevel = (int)nbLevel.Value.Value;
+        else
+            desiredLevel = _selectedItems[0].Level;
 
         // O(1) lookup
         if (!_chainByName.TryGetValue(targetName, out var targetChain))
@@ -476,8 +508,18 @@ public partial class MoveItemsDialog : FluentWindow
 
         if (collision != null)
         {
-            _hasLevelCollision = true;
-            txtLevelWarning.Text = $"Level {desiredLevel} is already taken by \"{collision.Name}\"";
+            // Alias items may coexist with another item at the same level — warn only, don't block.
+            bool isAliasOperation = _setAsAlias;
+            if (isAliasOperation)
+            {
+                _hasLevelCollision = false;
+                txtLevelWarning.Text = $"Level {desiredLevel} already has \"{collision.Name}\" — allowed because this item is an alias.";
+            }
+            else
+            {
+                _hasLevelCollision = true;
+                txtLevelWarning.Text = $"Level {desiredLevel} is already taken by \"{collision.Name}\"";
+            }
             levelWarning.Visibility = Visibility.Visible;
         }
 
@@ -684,6 +726,13 @@ public partial class MoveItemsDialog : FluentWindow
     private void ChkMoveImages_Changed(object sender, RoutedEventArgs e)
     {
         _moveImages = chkMoveImages.IsChecked == true;
+    }
+
+    private void ChkSetAsAlias_Changed(object sender, RoutedEventArgs e)
+    {
+        _setAsAlias = chkSetAsAlias.IsChecked == true;
+        // Alias flag affects level-collision blocking semantics; re-evaluate
+        CheckLevelCollision();
     }
 
     // ── Confirm / Cancel ──────────────────────────────────────────────
@@ -1057,6 +1106,9 @@ public partial class MoveItemsDialog : FluentWindow
         if (_singleItemMode)
             level = (int)(nbLevel.Value ?? _selectedItems[0].Level);
 
+        // Only push isAlias when the checkbox value differs from the current item state
+        bool? aliasToPush = _setAsAlias != _initialIsAlias ? _setAsAlias : (bool?)null;
+
         // ── Mapping-only shortcut: skip preview/move, just push Lua mapping ──
         if (_mappingOnly)
         {
@@ -1070,7 +1122,11 @@ public partial class MoveItemsDialog : FluentWindow
                 var settings = _main.Settings;
                 await WikiMappingService.PushItemMappingsAsync(
                     settings.WikiUsername, settings.WikiPassword,
-                    _selectedItems, chainName, level);
+                    _selectedItems, chainName, level, aliasToPush);
+
+                // Reflect change locally so UI stays in sync
+                if (aliasToPush.HasValue && _selectedItems.Count > 0)
+                    _selectedItems[0].IsAlias = aliasToPush.Value;
 
                 Increment(s => s.MysteryPagesPublished++);
 
@@ -1216,7 +1272,11 @@ public partial class MoveItemsDialog : FluentWindow
 
             await WikiMappingService.PushItemMappingsAsync(
                 settings.WikiUsername, settings.WikiPassword,
-                _selectedItems, chainName, level);
+                _selectedItems, chainName, level, aliasToPush);
+
+            // Reflect change locally so UI stays in sync
+            if (aliasToPush.HasValue && _selectedItems.Count > 0)
+                _selectedItems[0].IsAlias = aliasToPush.Value;
 
             Increment(s => s.MysteryPagesPublished++);
 

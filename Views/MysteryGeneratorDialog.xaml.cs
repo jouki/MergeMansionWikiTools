@@ -56,7 +56,8 @@ public partial class MysteryGeneratorDialog : FluentWindow
 	// Reward template comparison dropdown
 	private Dictionary<string, string>? _rewardTemplatesCache;
 	private bool _suppressCompareSelection;
-	private string? _selectedCompareTemplateTitle; // full page title of template selected in Compare dropdown
+	private bool _autoSelectingCompare; // true while PopulateCompareDropdownAsync is auto-selecting a variant — prevents auto-select from being treated as user intent to publish there
+	private string? _selectedCompareTemplateTitle; // full page title of template selected in Compare dropdown (only set on MANUAL user selection — used as publish destination)
 
 	/// <summary>True when MatchingVariant is a mystery-named template (e.g. "Secrets of Serenity"),
 	/// not a numeric index ("6") or Pet-prefixed. Named templates get updated instead of creating new.</summary>
@@ -65,6 +66,23 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		&& !int.TryParse(_mystery.WikiStatus.MatchingVariant, out _)
 		&& _mystery.WikiStatus.MatchingVariant != ""
 		&& !_mystery.WikiStatus.MatchingVariant.StartsWith("Pet", StringComparison.OrdinalIgnoreCase);
+
+	/// <summary>Computes Publish button label for Rewards mode so it always reflects the actual destination.
+	/// Manual compare selection → "Update Rewards/X". Named matching variant → "Update Reward Template".
+	/// Otherwise → "Create New (Rewards/N)" with the next-variant hint, or plain "Create New Reward Template".</summary>
+	private string ComputeRewardButtonLabel()
+	{
+		if (!string.IsNullOrEmpty(_selectedCompareTemplateTitle))
+		{
+			var shortName = _selectedCompareTemplateTitle.Replace("Template:Mystery Pass/", "");
+			return $"Update {shortName}";
+		}
+		if (IsNamedRewardVariant)
+			return "Update Reward Template";
+		if (!string.IsNullOrEmpty(_hypotheticalRewardVariant))
+			return $"Create New (Rewards/{_hypotheticalRewardVariant})";
+		return "Create New Reward Template";
+	}
 
 	private static readonly Brush BrushAddedBg = new SolidColorBrush(Color.FromArgb(37, 48, 192, 48));
 
@@ -206,8 +224,13 @@ public partial class MysteryGeneratorDialog : FluentWindow
 		pnlDiff.Visibility = Visibility.Collapsed;
 		imagesControl.Visibility = Visibility.Collapsed;
 		_isDiffMode = false;
+		// Clear any stale manual compare selection from a previous tab visit — auto-select in
+		// PopulateCompareDropdownAsync no longer overwrites publish destination, so a leftover
+		// _selectedCompareTemplateTitle would incorrectly persist into the new tab visit.
+		if (_currentMode == MysteryGeneratorMode.Rewards)
+			_selectedCompareTemplateTitle = null;
 		btnPublish.Content = _currentMode == MysteryGeneratorMode.Rewards
-			? (IsNamedRewardVariant ? "Update Reward Template" : "Create New Reward Template")
+			? ComputeRewardButtonLabel()
 			: "Publish to Wiki";
 		// Show compare dropdown only in Rewards mode
 		pnlCompareDropdown.Visibility = _currentMode == MysteryGeneratorMode.Rewards
@@ -378,7 +401,7 @@ public partial class MysteryGeneratorDialog : FluentWindow
 				warningBar.IsOpen = true;
 				if (_currentMode == MysteryGeneratorMode.Rewards)
 				{
-					btnPublish.Content = IsNamedRewardVariant ? "Update Reward Template" : "Create New Reward Template";
+					btnPublish.Content = ComputeRewardButtonLabel();
 				}
 				else
 				{
@@ -1569,18 +1592,37 @@ public partial class MysteryGeneratorDialog : FluentWindow
 			return;
 		}
 
-		// Confirmation dialog when updating an existing template selected in Compare dropdown
+		// Confirmation dialog when a Compare template is selected — give explicit choice between
+		// creating a new template or overwriting the selected one. Auto-select shouldn't reach here
+		// (it doesn't set _selectedCompareTemplateTitle anymore), so this fires only on manual selection.
 		if (_currentMode == MysteryGeneratorMode.Rewards && !string.IsNullOrEmpty(_selectedCompareTemplateTitle))
 		{
-			var shortName = pageTitle.Replace("Template:Mystery Pass/", "");
-			var result = await new Wpf.Ui.Controls.MessageBox
+			var existingShortName = _selectedCompareTemplateTitle.Replace("Template:Mystery Pass/", "");
+			bool isPetMode = _mystery.MysteryType == MysteryType.Pet;
+			string nextVariant = await MysteryWikiService.GetNextVariantNameAsync(isPetMode);
+			string newSuffix = string.IsNullOrEmpty(nextVariant) ? "" : ("/" + nextVariant);
+			string newShortName = "Rewards" + newSuffix;
+			string newPageTitle = "Template:Mystery Pass/" + newShortName;
+
+			var msgBox = new Wpf.Ui.Controls.MessageBox
 			{
-				Title = "Update existing template?",
-				Content = $"You are about to overwrite the existing template \"{shortName}\".\n\nThis will replace its current content with the generated rewards. Are you sure?",
-				PrimaryButtonText = "Update",
+				Title = "Create new template or update existing?",
+				Content = $"A reward template \"{existingShortName}\" is selected for comparison.\n\n" +
+				          $"• Create New — publish a fresh \"{newShortName}\" template (recommended for new mysteries).\n" +
+				          $"• Update Existing — overwrite \"{existingShortName}\" with the generated content.",
+				PrimaryButtonText = $"Create New ({newShortName})",
+				SecondaryButtonText = $"Update {existingShortName}",
 				CloseButtonText = "Cancel",
-			}.ShowDialogAsync();
-			if (result != Wpf.Ui.Controls.MessageBoxResult.Primary) return;
+				Owner = this,
+			};
+			ApplicationThemeManager.Apply(msgBox);
+			var result = await msgBox.ShowDialogAsync();
+			if (result == Wpf.Ui.Controls.MessageBoxResult.Primary)
+				pageTitle = newPageTitle; // Create New — override the GetPageTitleForModeAsync result
+			else if (result == Wpf.Ui.Controls.MessageBoxResult.Secondary)
+				{ /* keep pageTitle = _selectedCompareTemplateTitle (Update) */ }
+			else
+				return; // Cancel / dismissed
 		}
 
 		btnPublish.IsEnabled = false;
@@ -1811,11 +1853,14 @@ public partial class MysteryGeneratorDialog : FluentWindow
 					&& item.Content is string d
 					&& string.Equals(d, targetDisplay, StringComparison.OrdinalIgnoreCase))
 				{
-					cmbCompareTemplate.SelectedIndex = i;
+					_autoSelectingCompare = true;
+					try { cmbCompareTemplate.SelectedIndex = i; }
+					finally { _autoSelectingCompare = false; }
 					break;
 				}
 			}
 		}
+		btnPublish.Content = ComputeRewardButtonLabel();
 	}
 
 	private async void CmbCompareTemplate_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1828,13 +1873,17 @@ public partial class MysteryGeneratorDialog : FluentWindow
 			_selectedCompareTemplateTitle = null;
 			pnlDiff.Visibility = Visibility.Collapsed;
 			ShowPlainOutput();
-			btnPublish.Content = IsNamedRewardVariant ? "Update Reward Template" : "Create New Reward Template";
+			btnPublish.Content = ComputeRewardButtonLabel();
 			UpdateConfirmButton();
 			return;
 		}
 
 		string templateTitle = (string)selected.Tag;
-		_selectedCompareTemplateTitle = templateTitle;
+		// Only treat selection as user intent to publish here when it's a manual selection.
+		// Auto-select from PopulateCompareDropdownAsync sets the diff view but does NOT change publish destination.
+		if (!_autoSelectingCompare)
+			_selectedCompareTemplateTitle = templateTitle;
+		btnPublish.Content = ComputeRewardButtonLabel();
 		var ct = _diffCts?.Token ?? CancellationToken.None;
 		var modeAtStart = _currentMode;
 

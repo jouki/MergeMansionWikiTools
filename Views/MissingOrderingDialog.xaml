@@ -1,0 +1,116 @@
+<ui:FluentWindow x:Class="MergeMansionWikiTools.Views.MissingOrderingDialog"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                 Title="Missing Ordering Indices"
+                 Width="820" MinHeight="380"
+                 SizeToContent="Height"
+                 WindowStartupLocation="CenterOwner"
+                 ResizeMode="NoResize"
+                 ExtendsContentIntoTitleBar="True"
+                 WindowBackdropType="Mica">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ui:TitleBar Grid.Row="0" Title="Missing Ordering Indices" Height="36" />
+
+        <Grid Grid.Row="1" Margin="24,4,24,18">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />   <!-- header -->
+                <RowDefinition Height="Auto" />   <!-- helper text -->
+                <RowDefinition Height="Auto" />   <!-- preview (diff) -->
+                <RowDefinition Height="Auto" />   <!-- legend / status -->
+                <RowDefinition Height="Auto" />   <!-- buttons -->
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <TextBlock x:Name="txtHeader" Grid.Row="0"
+                       FontSize="16" FontWeight="SemiBold"
+                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                       TextWrapping="Wrap"
+                       Margin="0,4,0,8"
+                       Text="The following changes will be applied to Module:Datatable/Areas/Mapping:" />
+
+            <!-- Helper text -->
+            <TextBlock Grid.Row="1"
+                       FontSize="12"
+                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                       TextWrapping="Wrap"
+                       Margin="0,0,0,10"
+                       Text="Indices are deduced from UnlockRequirements (fallback TeaseRequirements). Click the preview to copy the additions, or use Update Module to push changes directly. + = added, - = removed (existing commented in-prep entries that will be cleared)." />
+
+            <!-- Preview pane (click-to-copy of additions only) -->
+            <Border Grid.Row="2"
+                    x:Name="previewBorder"
+                    Background="{DynamicResource CardBackgroundFillColorSecondaryBrush}"
+                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="6"
+                    Padding="12,10"
+                    Margin="0,0,0,8"
+                    Cursor="Hand"
+                    MouseLeftButtonUp="PreviewBorder_MouseLeftButtonUp"
+                    ToolTip="Click to copy additions to clipboard">
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Auto"
+                              MaxHeight="320">
+                    <TextBlock x:Name="txtPreview"
+                               FontFamily="Consolas, Cascadia Code, Courier New"
+                               FontSize="13"
+                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                               TextWrapping="NoWrap"
+                               IsHitTestVisible="False" />
+                </ScrollViewer>
+            </Border>
+
+            <!-- InfoBar for status (success/error after Update) -->
+            <ui:InfoBar Grid.Row="3"
+                        x:Name="infoBar"
+                        IsOpen="False"
+                        IsClosable="False"
+                        Margin="0,0,0,10" />
+
+            <!-- Buttons -->
+            <Grid Grid.Row="4" Margin="0,4,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <ui:Button Grid.Column="0"
+                           x:Name="btnCopy"
+                           Content="Copy"
+                           Icon="{ui:SymbolIcon Copy24}"
+                           Click="BtnCopy_Click" />
+
+                <ui:Button Grid.Column="1"
+                           x:Name="btnOpenModule"
+                           Content="Open Module"
+                           Icon="{ui:SymbolIcon Globe24}"
+                           Margin="8,0,0,0"
+                           Click="BtnOpenModule_Click" />
+
+                <ui:Button Grid.Column="3"
+                           x:Name="btnUpdate"
+                           Content="Update Module"
+                           Appearance="Primary"
+                           Icon="{ui:SymbolIcon CloudArrowUp24}"
+                           MinWidth="160"
+                           Margin="0,0,8,0"
+                           Click="BtnUpdate_Click" />
+
+                <ui:Button Grid.Column="4"
+                           Content="Close"
+                           MinWidth="90"
+                           Click="BtnClose_Click" />
+            </Grid>
+        </Grid>
+    </Grid>
+</ui:FluentWindow>

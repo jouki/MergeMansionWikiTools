@@ -25,6 +25,8 @@ public partial class AreaFlowchartsPage : UserControl
     private L1CostService? _l1CostService;
     private readonly SolidColorBrush _splitSepBrush;
 
+    private string Algo => _main.Settings.FlowchartAlgorithm;
+
     public AreaFlowchartsPage(MainWindow main)
     {
         _main = main;
@@ -35,6 +37,7 @@ public partial class AreaFlowchartsPage : UserControl
         UpdateOutputPathDisplay();
         UpdateGenerateAllSplitVisibility();
         ApplySplitButtonStyle(btnGenerateAll, btnGenerateAllMenu);
+        InitAlgorithmSelector();
         _ = TryLoadAreasAsync();
 
         // Auto-reload when areas.json path changes
@@ -54,6 +57,29 @@ public partial class AreaFlowchartsPage : UserControl
             UpdateGenerateAllSplitVisibility();
             if (_areasLoaded) BuildAreaList();
         });
+    }
+
+    private void InitAlgorithmSelector()
+    {
+        var current = _main.Settings.FlowchartAlgorithm;
+        foreach (ComboBoxItem item in cmbAlgorithm.Items)
+        {
+            if (string.Equals(item.Tag as string, current, StringComparison.OrdinalIgnoreCase))
+            {
+                cmbAlgorithm.SelectedItem = item;
+                return;
+            }
+        }
+        cmbAlgorithm.SelectedIndex = 0; // fallback to Default
+    }
+
+    private void CmbAlgorithm_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (cmbAlgorithm.SelectedItem is not ComboBoxItem item) return;
+        var value = item.Tag as string ?? "Default";
+        if (_main.Settings.FlowchartAlgorithm == value) return;
+        _main.Settings.FlowchartAlgorithm = value;
+        _main.SaveSettings();
     }
 
     /// <summary>
@@ -655,14 +681,14 @@ public partial class AreaFlowchartsPage : UserControl
 
             var itemIcons = await Task.Run(() => ExtractItemIconsForArea(area, folder));
 
-            var svg = await Task.Run(() => FlowchartService.GenerateSvg(area, _main.DataService, itemIcons: itemIcons));
+            var svg = await Task.Run(() => FlowchartService.GenerateSvg(area, _main.DataService, itemIcons: itemIcons, algorithm: Algo));
             if (string.IsNullOrEmpty(svg))
                 throw new InvalidOperationException($"No tasks with requirements found in {area.DisplayName}.");
 
             await File.WriteAllTextAsync(outputPath, svg);
 
             // Also generate Discord HTML version
-            var html = await Task.Run(() => FlowchartService.GenerateSvg(area, _main.DataService, forDiscord: true, itemIcons: itemIcons, tokenIcons: LoadTokenIcons()));
+            var html = await Task.Run(() => FlowchartService.GenerateSvg(area, _main.DataService, forDiscord: true, itemIcons: itemIcons, tokenIcons: LoadTokenIcons(), algorithm: Algo));
             if (!string.IsNullOrEmpty(html))
                 await File.WriteAllTextAsync(Path.Combine(folder, $"{safeName}.html"), html);
 
@@ -703,13 +729,13 @@ public partial class AreaFlowchartsPage : UserControl
 
                 var itemIcons = await Task.Run(() => ExtractItemIconsForArea(area, folder));
 
-                var svg = await Task.Run(() => FlowchartService.GenerateSvg(area, _main.DataService, itemIcons: itemIcons));
+                var svg = await Task.Run(() => FlowchartService.GenerateSvg(area, _main.DataService, itemIcons: itemIcons, algorithm: Algo));
                 if (!string.IsNullOrEmpty(svg))
                 {
                     await File.WriteAllTextAsync(outputPath, svg);
 
                     // Also generate Discord HTML version
-                    var html = await Task.Run(() => FlowchartService.GenerateSvg(area, _main.DataService, forDiscord: true, itemIcons: itemIcons, tokenIcons: LoadTokenIcons()));
+                    var html = await Task.Run(() => FlowchartService.GenerateSvg(area, _main.DataService, forDiscord: true, itemIcons: itemIcons, tokenIcons: LoadTokenIcons(), algorithm: Algo));
                     if (!string.IsNullOrEmpty(html))
                         await File.WriteAllTextAsync(Path.Combine(folder, $"{safeName}.html"), html);
 
@@ -748,7 +774,7 @@ public partial class AreaFlowchartsPage : UserControl
 
         // Generate wiki SVG (with icons)
         var svg = await Task.Run(() =>
-            FlowchartService.GenerateSvg(area, _main.DataService, itemIcons: itemIcons));
+            FlowchartService.GenerateSvg(area, _main.DataService, itemIcons: itemIcons, algorithm: Algo));
 
         if (string.IsNullOrEmpty(svg))
             throw new InvalidOperationException($"No tasks with requirements found in {area.DisplayName}.");
@@ -757,7 +783,7 @@ public partial class AreaFlowchartsPage : UserControl
 
         // Generate Discord HTML (interactive version, with icons)
         var html = await Task.Run(() =>
-            FlowchartService.GenerateSvg(area, _main.DataService, forDiscord: true, itemIcons: itemIcons, tokenIcons: LoadTokenIcons()));
+            FlowchartService.GenerateSvg(area, _main.DataService, forDiscord: true, itemIcons: itemIcons, tokenIcons: LoadTokenIcons(), algorithm: Algo));
 
         if (!string.IsNullOrEmpty(html))
         {
@@ -999,7 +1025,7 @@ public partial class AreaFlowchartsPage : UserControl
                 foreach (var area in _areas)
                 {
                     var itemIcons = outputDir != null ? ExtractItemIconsForArea(area, outputDir) : null;
-                    var svg = FlowchartService.GenerateSvg(area, _main.DataService, forDiscord: true, itemIcons: itemIcons, tokenIcons: LoadTokenIcons());
+                    var svg = FlowchartService.GenerateSvg(area, _main.DataService, forDiscord: true, itemIcons: itemIcons, tokenIcons: LoadTokenIcons(), algorithm: Algo);
                     if (!string.IsNullOrEmpty(svg))
                         svgs.Add((area, svg));
                 }
@@ -1056,7 +1082,7 @@ public partial class AreaFlowchartsPage : UserControl
                 : null;
 
             var svg = await Task.Run(() =>
-                FlowchartService.GenerateSvg(area, _main.DataService, forDiscord: true, itemIcons: itemIcons, tokenIcons: LoadTokenIcons()));
+                FlowchartService.GenerateSvg(area, _main.DataService, forDiscord: true, itemIcons: itemIcons, tokenIcons: LoadTokenIcons(), algorithm: Algo));
 
             if (string.IsNullOrEmpty(svg))
             {
@@ -1080,7 +1106,7 @@ public partial class AreaFlowchartsPage : UserControl
                 var matchIcons = discordOutputDir != null
                     ? ExtractItemIconsForArea(match, discordOutputDir) : null;
                 return await Task.Run(() =>
-                    FlowchartService.GenerateSvg(match, _main.DataService, forDiscord: true, itemIcons: matchIcons, tokenIcons: LoadTokenIcons()));
+                    FlowchartService.GenerateSvg(match, _main.DataService, forDiscord: true, itemIcons: matchIcons, tokenIcons: LoadTokenIcons(), algorithm: Algo));
             };
 
             var (success, wasUpdate, reordered) = await DiscordFlowchartService.PublishOneAsync(
