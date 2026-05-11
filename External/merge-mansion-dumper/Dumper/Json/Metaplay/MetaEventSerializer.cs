@@ -1,4 +1,5 @@
 ﻿using Code.GameLogic.GameEvents;
+using Code.GameLogic.GameEvents.SoloMilestone;
 using merge_mansion_dumper.Graphs;
 using Metaplay.Core;
 using Newtonsoft.Json;
@@ -36,7 +37,10 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 typeof(BoardCell),
                 typeof(EventOfferSetInfo),
 
-                typeof(DailyTaskDefinition)
+                typeof(DailyTaskDefinition),
+
+                typeof(SoloMilestoneEventInfo),
+                typeof(SoloMilestoneMilestonesInfo)
             };
 
         protected override Type[] GetTypes() => _supportedTypes;
@@ -79,6 +83,11 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
 
             else if (value is DailyTaskDefinition dailyTask)
                 SerializeDailyTask(writer, dailyTask, serializer);
+
+            else if (value is SoloMilestoneEventInfo smei)
+                SerializeSoloMilestoneEvent(writer, smei, serializer);
+            else if (value is SoloMilestoneMilestonesInfo smmi)
+                SerializeSoloMilestoneMilestones(writer, smmi, serializer);
         }
 
         private void SerializeBoardEvent(JsonWriter writer, BoardEventInfo boardEvent, JsonSerializer serializer)
@@ -233,6 +242,28 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
             }
 
             WriteObject(writer, dailyTask.GetType(), dailyTask, serializer);
+        }
+
+        private void SerializeSoloMilestoneEvent(JsonWriter writer, SoloMilestoneEventInfo eventInfo, JsonSerializer serializer)
+        {
+            if (eventInfo.ConfigKey?.Value == null)
+            {
+                WriteEmptyObject(writer);
+                return;
+            }
+
+            WriteObject(writer, eventInfo.GetType(), eventInfo, serializer);
+        }
+
+        private void SerializeSoloMilestoneMilestones(JsonWriter writer, SoloMilestoneMilestonesInfo milestoneInfo, JsonSerializer serializer)
+        {
+            if (milestoneInfo.ConfigKey?.Value == null)
+            {
+                WriteEmptyObject(writer);
+                return;
+            }
+
+            WriteObject(writer, milestoneInfo.GetType(), milestoneInfo, serializer);
         }
 
         #region Task graph

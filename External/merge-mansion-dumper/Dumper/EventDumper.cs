@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.GameLogic.GameEvents;
+using Code.GameLogic.GameEvents.SoloMilestone;
 using GameLogic.Config;
 using merge_mansion_dumper.Dumper.Base;
 using merge_mansion_dumper.Dumper.Json;
@@ -32,9 +33,11 @@ namespace merge_mansion_dumper.Dumper
         BakeOff = 1 << 12,
         Bonanza = 1 << 13,
         Others = 1 << 14,
+        SoloMilestone = 1 << 15,
         All = LuckyCatch | LuckySnap | Seasonal | ReArchaeology | HorizonsCup
             | RollTheDice | GarageCleanup | Mysteries | BoultonLeague
             | Legacy | Uncategorised | BakeOff | Bonanza | Others
+            | SoloMilestone
     }
 
     public class EventDumper : JsonDumper<IDictionary<string, object>>
@@ -132,6 +135,43 @@ namespace merge_mansion_dumper.Dumper
                 events["Shops"] = config.ShopEvents?.EnumerateAll().Select(x => x.Value).ToArray() ?? Array.Empty<object>();
                 events["DailyTasks"] = config.DailyTasks?.EnumerateAll().Select(x => x.Value).ToArray() ?? Array.Empty<object>();
                 events["DailyTasksV2"] = config.DailyTasksV2?.EnumerateAll().Select(x => x.Value).ToArray() ?? Array.Empty<object>();
+            }
+
+            // SoloMilestone events (Teatime Delight etc. — weekend events with milestone levels;
+            // task completion in areas grants SoloMilestoneHotspotValue points → level up)
+            if (_filters.HasFlag(EventFilters.SoloMilestone))
+            {
+                events["SoloMilestoneEvents"] = config.SoloMilestoneEvents?.EnumerateAll().Select(x =>
+                {
+                    var evt = (SoloMilestoneEventInfo)x.Value;
+                    return new Dictionary<string, object>
+                    {
+                        ["ConfigKey"] = evt.ConfigKey?.ToString(),
+                        ["NameLocId"] = evt.NameLocId,
+                        ["DisplayName"] = Localize(evt.NameLocId) ?? evt.DisplayName,
+                        ["Description"] = evt.Description,
+                        ["ActivableParams"] = evt.ActivableParams,
+                        ["CategoryInfo"] = evt.CategoryInfo,
+                        ["GroupId"] = evt.GroupId?.ToString(),
+                        ["Theme"] = evt.Theme,
+                        ["Priority"] = evt.Priority,
+                        ["TokenSpawnsEnabled"] = evt.TokenSpawnsEnabled,
+                        ["Milestones"] = evt.Milestones?.Select(m => m?.ToString()).ToArray(),
+                        ["UnlockRequirement"] = evt.UnlockRequirement,
+                    };
+                }).ToArray() ?? Array.Empty<object>();
+
+                events["SoloMilestoneMilestones"] = config.SoloMilestoneMilestones?.EnumerateAll().Select(x =>
+                {
+                    var ms = (SoloMilestoneMilestonesInfo)x.Value;
+                    return new Dictionary<string, object>
+                    {
+                        ["ConfigKey"] = ms.ConfigKey?.ToString(),
+                        ["Requirement"] = ms.Requirement,
+                        ["Rewards"] = ms.Rewards,
+                        ["RewardSegment"] = ms.RewardSegment?.Select(s => s?.ToString()).ToArray(),
+                    };
+                }).ToArray() ?? Array.Empty<object>();
             }
 
             return events;

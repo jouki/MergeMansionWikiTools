@@ -301,6 +301,14 @@
                                           ToolTip="Shops, Daily Tasks"
                                           ToolTipService.InitialShowDelay="0"
                                           Checked="EventSubCheckbox_Changed" Unchecked="EventSubCheckbox_Changed" />
+                                <CheckBox x:Name="chkEvSoloMilestone" Grid.Row="2" Grid.Column="4"
+                                          Content="Solo Milestone" FontSize="11" Margin="8,0,0,0"
+                                          ToolTipService.InitialShowDelay="0"
+                                          Checked="EventSubCheckbox_Changed" Unchecked="EventSubCheckbox_Changed">
+                                    <CheckBox.ToolTip>
+                                        <TextBlock Text="Solo Milestone events (weekend events):&#x0a;Teatime Delight&#x0a;Player collects points from area tasks&#x0a;(SoloMilestoneHotspotValue) to unlock&#x0a;tiered rewards (~40 milestones)." />
+                                    </CheckBox.ToolTip>
+                                </CheckBox>
                                 <CheckBox x:Name="chkEvUncategorised" Grid.Row="2" Grid.Column="3"
                                           Content="Uncategorised" FontSize="11" Margin="8,0,0,0"
                                           ToolTipService.InitialShowDelay="0"

@@ -4,7 +4,7 @@ namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.20.53"; // Bug 1 fix (final): WikiTableGenerator.BuildFuelForMap now skips items with IsTestTag — same filter LuaGeneratorService uses. Without this filter the wiki source code keeps a phantom {{Item|PoolToys|6}} entry next to {{Item|Pool Toys|6}}, even though the wiki RENDER hides it (Module:Items lookup returns dash). User wants clean source, not just hidden render. Test tag is the only reliable differentiator: primary PoolToys (3750-3768) has Test tag, Ver2PoolToys (9000-9007, active production) doesn't. Both share LegacyEvent + TempSkatie. — Bug 2 (Recharge Time) from v0.20.52 unchanged: Module:Items rev 47912 already pushed, White Moth shows 1h per charge / 2h total + Drops Values 20/3/60.
+    public const string Version = "v0.20.54"; // Solo Milestone event export. New EventFilters.SoloMilestone flag (1 << 15) + UI checkbox (Game Data Dumper page). EventDumper.Dump() emits two new sections to events.json: "SoloMilestoneEvents" (per-event config: ConfigKey, NameLocId, DisplayName, Description, ActivableParams, Theme, Priority, Milestones[], UnlockRequirement) and "SoloMilestoneMilestones" (per-milestone config: ConfigKey, Requirement points, Rewards, RewardSegment). Captures Teatime Delight (~40 milestones, weekend recurrence) and any other game-defined SoloMilestoneEvents. MetaEventSerializer now handles SoloMilestoneEventInfo + SoloMilestoneMilestonesInfo types. Pipeline: areas.json task SoloMilestoneHotspotValue points → milestone level → reward.
 
     // Full version with build timestamp, e.g. "v0.18.7 (build 20260322-1200)"
     public static string Build { get; } = GetBuild();
@@ -112,6 +112,7 @@ public class AppSettings
     public bool EventBonanza { get; set; } = true;
     public bool EventOthers { get; set; } = true;
     public bool EventUncategorised { get; set; } = true;
+    public bool EventSoloMilestone { get; set; } = true;
     public bool EventSubExpanded { get; set; } = false;
 
     // Discord — dump distribution

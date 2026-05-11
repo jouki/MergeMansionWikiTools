@@ -77,6 +77,7 @@ public partial class GameDataDumperPage : UserControl
         chkEvLegacy.IsChecked = _main.Settings.EventLegacy;
         chkEvOthers.IsChecked = _main.Settings.EventOthers;
         chkEvUncategorised.IsChecked = _main.Settings.EventUncategorised;
+        chkEvSoloMilestone.IsChecked = _main.Settings.EventSoloMilestone;
         expEventCategories.IsExpanded = _main.Settings.EventSubExpanded;
         _suppressSave = false;
 
@@ -528,6 +529,7 @@ public partial class GameDataDumperPage : UserControl
         _main.Settings.EventLegacy = chkEvLegacy.IsChecked == true;
         _main.Settings.EventOthers = chkEvOthers.IsChecked == true;
         _main.Settings.EventUncategorised = chkEvUncategorised.IsChecked == true;
+        _main.Settings.EventSoloMilestone = chkEvSoloMilestone.IsChecked == true;
         _main.SaveSettings();
     }
 
@@ -612,6 +614,7 @@ public partial class GameDataDumperPage : UserControl
         if (chkEvLegacy.IsChecked == true) f |= EventFilters.Legacy;
         if (chkEvOthers.IsChecked == true) f |= EventFilters.Others;
         if (chkEvUncategorised.IsChecked == true) f |= EventFilters.Uncategorised;
+        if (chkEvSoloMilestone.IsChecked == true) f |= EventFilters.SoloMilestone;
         return f;
     }
 
