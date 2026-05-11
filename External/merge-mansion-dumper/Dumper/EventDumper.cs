@@ -137,6 +137,27 @@ namespace merge_mansion_dumper.Dumper
                 events["DailyTasksV2"] = config.DailyTasksV2?.EnumerateAll().Select(x => x.Value).ToArray() ?? Array.Empty<object>();
             }
 
+            // EventLevels — resolved per-level data referenced by ProgressionEvent / Season Pass / etc.
+            // ProgressionEventInfo only stores MetaRef<EventLevelInfo>, so patches that touch EventLevels
+            // (e.g. WildItem_SeasonPass_01_B) don't show up in event dumps unless we serialize the
+            // library itself. Always exported — covers Wild Item / Wild Card / any AB reward swap.
+            events["EventLevels"] = config.EventLevels?.EnumerateAll()
+                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
+
+            // DailyScoop — five interlinked libraries (Milestones / StandardObjectives /
+            // SpecialObjectives / Days / Weeks). Wild Item AB-patch WildItem_DailyScoop_V2_01_B
+            // touches DailyScoopStandardObjectives. Always exported for visibility.
+            events["DailyScoopMilestones"] = config.DailyScoopMilestones?.EnumerateAll()
+                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
+            events["DailyScoopStandardObjectives"] = config.DailyScoopStandardObjectives?.EnumerateAll()
+                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
+            events["DailyScoopSpecialObjectives"] = config.DailyScoopSpecialObjectives?.EnumerateAll()
+                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
+            events["DailyScoopDays"] = config.DailyScoopDays?.EnumerateAll()
+                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
+            events["DailyScoopWeeks"] = config.DailyScoopWeeks?.EnumerateAll()
+                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
+
             // SoloMilestone events (Teatime Delight etc. — weekend events with milestone levels;
             // task completion in areas grants SoloMilestoneHotspotValue points → level up)
             if (_filters.HasFlag(EventFilters.SoloMilestone))
