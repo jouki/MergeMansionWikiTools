@@ -1,4 +1,5 @@
 ﻿using Code.GameLogic.GameEvents;
+using Code.GameLogic.GameEvents.DailyScoop;
 using Code.GameLogic.GameEvents.SoloMilestone;
 using merge_mansion_dumper.Graphs;
 using Metaplay.Core;
@@ -40,7 +41,14 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 typeof(DailyTaskDefinition),
 
                 typeof(SoloMilestoneEventInfo),
-                typeof(SoloMilestoneMilestonesInfo)
+                typeof(SoloMilestoneMilestonesInfo),
+
+                typeof(EventLevelInfo),
+                typeof(DailyScoopMilestoneData),
+                typeof(DailyScoopStandardObjectiveData),
+                typeof(DailyScoopSpecialObjectiveData),
+                typeof(DailyScoopDayData),
+                typeof(DailyScoopWeekData)
             };
 
         protected override Type[] GetTypes() => _supportedTypes;
@@ -88,6 +96,35 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 SerializeSoloMilestoneEvent(writer, smei, serializer);
             else if (value is SoloMilestoneMilestonesInfo smmi)
                 SerializeSoloMilestoneMilestones(writer, smmi, serializer);
+
+            else if (value is EventLevelInfo eventLevel)
+                SerializeMetaTaggedObject(writer, eventLevel, serializer);
+            else if (value is DailyScoopMilestoneData dsm)
+                SerializeMetaTaggedObject(writer, dsm, serializer);
+            else if (value is DailyScoopStandardObjectiveData dsso)
+                SerializeMetaTaggedObject(writer, dsso, serializer);
+            else if (value is DailyScoopSpecialObjectiveData dsspo)
+                SerializeMetaTaggedObject(writer, dsspo, serializer);
+            else if (value is DailyScoopDayData dsd)
+                SerializeMetaTaggedObject(writer, dsd, serializer);
+            else if (value is DailyScoopWeekData dsw)
+                SerializeMetaTaggedObject(writer, dsw, serializer);
+        }
+
+        // Generic MetaMember-tagged serializer for resolved-library entries.
+        // Uses BaseMetaJsonSerializer.WriteObject() which iterates only properties/fields
+        // tagged with [MetaMember(TagId > 0)], skipping derived getters like
+        // RewardDecoration.Decoration which would call MetaRef<DecorationInfo>.Ref and
+        // throw if the reference hasn't been resolved (e.g. in patch import contexts).
+        private void SerializeMetaTaggedObject<T>(JsonWriter writer, T obj, JsonSerializer serializer)
+            where T : class
+        {
+            if (obj == null)
+            {
+                WriteEmptyObject(writer);
+                return;
+            }
+            WriteObject(writer, obj.GetType(), obj, serializer);
         }
 
         private void SerializeBoardEvent(JsonWriter writer, BoardEventInfo boardEvent, JsonSerializer serializer)
