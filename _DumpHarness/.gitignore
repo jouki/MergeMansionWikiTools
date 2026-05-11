@@ -3,3 +3,4 @@ obj/
 out/
 _workdump/
 speedup_diff_*.md
+_test_output/
