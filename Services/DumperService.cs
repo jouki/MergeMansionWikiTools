@@ -284,15 +284,28 @@ internal static class DumperService
                 Directory.CreateDirectory(outputDir);
 
                 // 7. Filter relevant patches early (before parallel section)
-                // SoloMilestoneEvents/Milestones added so AB variants of weekend events
-                // (e.g. Teatime Delight Wild Item rewards) are no longer dropped as irrelevant.
+                // Explicit whitelist for base dump (Areas, Items, MergeChains, HotspotDefinitions)
+                // plus pattern match for anything that could affect events.json output (Event, Milestone,
+                // Task, Scoop, Tournament, Mystery). Real-world patches like WildItem_SeasonPass_01_B
+                // touch only "EventLevels" and WildItem_DailyScoop_V2_01_B touches only
+                // "DailyScoopStandardObjectives" — neither would match a narrow Solo Milestone whitelist.
+                static bool IsEventPatch(string entry) =>
+                    entry.Contains("Event", StringComparison.OrdinalIgnoreCase)
+                    || entry.Contains("Milestone", StringComparison.OrdinalIgnoreCase)
+                    || entry.Contains("Task", StringComparison.OrdinalIgnoreCase)
+                    || entry.Contains("Scoop", StringComparison.OrdinalIgnoreCase)
+                    || entry.Contains("Tournament", StringComparison.OrdinalIgnoreCase)
+                    || entry.Contains("Mystery", StringComparison.OrdinalIgnoreCase)
+                    || entry.Contains("Boulton", StringComparison.OrdinalIgnoreCase)
+                    || entry.Contains("Leaderboard", StringComparison.OrdinalIgnoreCase)
+                    || entry.Contains("Progression", StringComparison.OrdinalIgnoreCase)
+                    || entry.Contains("GarageCleanup", StringComparison.OrdinalIgnoreCase);
                 var relevantPatchedArchives = patchedArchives.Where(x =>
                     x.Item3.ContainsPatch("Areas")
                     || x.Item3.ContainsPatch("HotspotDefinitions")
                     || x.Item3.ContainsPatch("Items")
                     || x.Item3.ContainsPatch("MergeChains")
-                    || x.Item3.ContainsPatch("SoloMilestoneEvents")
-                    || x.Item3.ContainsPatch("SoloMilestoneMilestones"))
+                    || x.Item4.Any(IsEventPatch))
                     .Select(x => (x.Item1, x.Item2, x.Item3, x.Item4))
                     .ToArray();
 
