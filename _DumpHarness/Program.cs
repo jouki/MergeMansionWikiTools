@@ -55,6 +55,11 @@ internal static class Program
             string atlasFilter = args.Length >= 4 ? args[3] : "";
             return ProbeAtlasFields(args[1], args[2], atlasFilter);
         }
+        if (args.Length >= 5 && args[0] == "--dump-events-patched")
+        {
+            // --dump-events-patched <configPath> <patchPath> <languagePath> <outputDir>
+            return DumpEventsPatched(args[1], args[2], args[3], args[4]);
+        }
 
         if (args.Length < 3)
         {
@@ -311,6 +316,120 @@ internal static class Program
     }
 
     // Bundle probe — list asset names in minigame-related Unity bundles to find icons.
+    // ── --dump-events-patched: import config + apply each specialization patch + dump events.json per patch ──
+    private static int DumpEventsPatched(string configPath, string patchPath, string languagePath, string outputDir)
+    {
+        Console.WriteLine("=== DumpHarness --dump-events-patched ===");
+        Console.WriteLine($"Config:   {configPath}");
+        Console.WriteLine($"Patches:  {patchPath}");
+        Console.WriteLine($"Language: {languagePath}");
+        Console.WriteLine($"Output:   {outputDir}");
+        Directory.CreateDirectory(outputDir);
+
+        try
+        {
+            Console.WriteLine("[1] Initializing MetaplayCore...");
+            MetaplayCore.Initialize();
+
+            if (!string.IsNullOrEmpty(languagePath) && File.Exists(languagePath))
+            {
+                Console.WriteLine("[2] Loading language...");
+                var langHash = ContentHash.ParseString(Path.GetFileName(languagePath));
+                MetaplaySDK.ActiveLanguage = LocalizationLanguage.ImportBinary(langHash, File.ReadAllBytes(languagePath));
+            }
+
+            Console.WriteLine("[3] Importing SharedGameConfig...");
+            var archiveBytes = File.ReadAllBytes(configPath);
+            var archive = ConfigArchive.FromBytes(archiveBytes);
+            var patchedArchive = PatchedConfigArchive.WithNoPatches(archive);
+            var masterConfig = (SharedGameConfig)GameConfigFactory.Instance.ImportSharedGameConfig(patchedArchive);
+            ClientGlobal.SharedGameConfig = masterConfig;
+
+            Console.WriteLine("[4] Dumping base events.json...");
+            var basePath = Path.Combine(outputDir, "events.json");
+            new EventDumper().WriteJson(basePath, masterConfig);
+            Console.WriteLine($"        -> events.json ({new FileInfo(basePath).Length / 1024} KB)");
+
+            if (!string.IsNullOrEmpty(patchPath) && File.Exists(patchPath))
+            {
+                Console.WriteLine("[5] Loading patches...");
+                var specPatches = Metaplay.Core.Config.GameConfigSpecializationPatches.FromBytes(File.ReadAllBytes(patchPath));
+                var configPatches = specPatches.Patches
+                    .SelectMany(y => y.Value.Select(z => (y.Key, z.Key, Metaplay.Core.Config.GameConfigPatchEnvelope.Deserialize(z.Value))))
+                    .ToArray();
+                Console.WriteLine($"        Found {configPatches.Length} patches");
+
+                foreach (var (expId, varId, env) in configPatches)
+                {
+                    var label = $"{expId}_{varId}";
+                    var entries = env.EntryNames.ToArray();
+                    Console.WriteLine($"  Patch {label}: entries=[{string.Join(",", entries)}]");
+
+                    var pa = new PatchedConfigArchive(archive, new[] { env });
+                    try
+                    {
+                        var patchedConfig = SharedGameConfig.ImportPatchedFrom(masterConfig, pa, entries);
+                        var subDir = Path.Combine(outputDir, label);
+                        Directory.CreateDirectory(subDir);
+                        var subPath = Path.Combine(subDir, "events.json");
+                        new EventDumper().WriteJson(subPath, patchedConfig);
+                        var size = new FileInfo(subPath).Length / 1024;
+                        Console.WriteLine($"     -> {label}/events.json OK ({size} KB)");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"     !! {label} FAILED: {ex.GetType().Name}: {ex.Message}");
+                        // Walk full exception chain + print full stack traces
+                        var e = ex;
+                        int depth = 0;
+                        while (e != null)
+                        {
+                            Console.WriteLine($"        [depth={depth}] {e.GetType().Name}: {e.Message}");
+                            if (!string.IsNullOrEmpty(e.StackTrace))
+                            {
+                                foreach (var line in e.StackTrace.Split('\n'))
+                                    Console.WriteLine($"           {line.TrimEnd()}");
+                            }
+                            e = e.InnerException;
+                            depth++;
+                        }
+
+                        // Also probe whether ContractResolver actually marks Decoration as Ignored
+                        try
+                        {
+                            var resolver = new merge_mansion_dumper.Dumper.Base.IgnoreDataMemberContractResolver();
+                            var contract = resolver.ResolveContract(typeof(GameLogic.Player.Rewards.RewardDecoration))
+                                as Newtonsoft.Json.Serialization.JsonObjectContract;
+                            if (contract != null)
+                            {
+                                Console.WriteLine($"        [probe] RewardDecoration property check via ContractResolver:");
+                                foreach (var p in contract.Properties)
+                                    Console.WriteLine($"           - {p.PropertyName}: Ignored={p.Ignored}, Readable={p.Readable}");
+                            }
+                            else
+                            {
+                                Console.WriteLine("        [probe] No contract returned for RewardDecoration");
+                            }
+                        }
+                        catch (Exception probeEx)
+                        {
+                            Console.WriteLine($"        [probe] failed: {probeEx.Message}");
+                        }
+                    }
+                }
+            }
+
+            Console.WriteLine("=== Done ===");
+            return 0;
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"FATAL: {ex.GetType().Name}: {ex.Message}");
+            Console.Error.WriteLine(ex.StackTrace);
+            return 1;
+        }
+    }
+
     private static int ProbeBundles(string apkDir)
     {
         if (!Directory.Exists(apkDir))

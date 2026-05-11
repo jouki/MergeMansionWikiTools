@@ -302,13 +302,18 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
 
         private void SerializeMetaRef(JsonWriter writer, IMetaRef metaRef, JsonSerializer serializer)
         {
-            if (!metaRef.IsResolved)
-            {
-                serializer.Serialize(writer, metaRef.KeyObject);
-                return;
-            }
-
-            serializer.Serialize(writer, metaRef.GetType().GetProperty("Ref")?.GetValue(metaRef));
+            // Always serialize as KeyObject (= the referenced ID). Previously the resolved case
+            // serialized metaRef.Ref (= the full nested object) via reflection. That path is
+            // unsafe because Newtonsoft's default reflection serializer then iterates every
+            // public property on the resolved object — including derived getters that hide
+            // MetaRef.Ref calls behind their own bodies (e.g. RewardDecoration.Decoration =>
+            // DecorationRef.Ref, DecorationInfo.LayeredDecorationSetInfo =>
+            // LayeredDecorationSetInfoRef.Ref). Those nested refs aren't always resolved in
+            // patch contexts → InvalidOperationException. The getters are marked with
+            // [IgnoreDataMember], but Newtonsoft does NOT honor System.Runtime.Serialization
+            // attributes by default. Serializing only the ID short-circuits the entire problem;
+            // resolved data is already available from its own library dump.
+            serializer.Serialize(writer, metaRef.KeyObject);
         }
 
         private void SerializeActivable(JsonWriter writer, MetaActivableLifetimeSpec activable, JsonSerializer serializer)

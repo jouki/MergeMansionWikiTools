@@ -39,15 +39,41 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
             WriteCustomObjectMembers(writer, @object, serializer);
 
             var flags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
-            var values = type.GetProperties(flags).Select(p => new ObjectValue(p.GetValue(@object), p.Name.Trim('_'), p.GetCustomAttribute<MetaMemberAttribute>()?.TagId ?? -1));
-            values = values.Concat(type.GetFields(flags).Select(f => new ObjectValue(f.GetValue(@object), f.Name.Trim('_'), f.GetCustomAttribute<MetaMemberAttribute>()?.TagId ?? -1)));
 
-            foreach (var value in values.Where(x => x.Order > 0).OrderBy(x => x.Order))
+            // Build (Info, TagId) pairs first — do NOT call GetValue() yet. Some getters
+            // (e.g. RewardDecoration.Decoration => DecorationRef.Ref, DecorationInfo.LayeredDecorationSetInfo)
+            // are derived from MetaRefs and throw InvalidOperationException when the underlying
+            // ref hasn't been resolved (common in patched-config contexts). We MUST filter on
+            // MetaMember.TagId > 0 BEFORE invoking getters so unsafe derived members never run.
+            var propPairs = type.GetProperties(flags)
+                .Select(p => (MemberName: p.Name.Trim('_'), TagId: p.GetCustomAttribute<MetaMemberAttribute>()?.TagId ?? -1, Getter: (Func<object>)(() => p.GetValue(@object))));
+            var fieldPairs = type.GetFields(flags)
+                .Select(f => (MemberName: f.Name.Trim('_'), TagId: f.GetCustomAttribute<MetaMemberAttribute>()?.TagId ?? -1, Getter: (Func<object>)(() => f.GetValue(@object))));
+
+            var ordered = propPairs.Concat(fieldPairs)
+                .Where(x => x.TagId > 0)
+                .OrderBy(x => x.TagId)
+                .ToArray();
+
+            foreach (var member in ordered)
             {
-                if (value.Value == null && serializer.NullValueHandling == NullValueHandling.Ignore)
+                object value;
+                try
+                {
+                    value = member.Getter();
+                }
+                catch (System.Reflection.TargetInvocationException tie)
+                    when (tie.InnerException is InvalidOperationException)
+                {
+                    // Defensive: even MetaMember-tagged getter can throw if it dereferences
+                    // an unresolved MetaRef. Skip the field rather than crash the whole dump.
+                    continue;
+                }
+
+                if (value == null && serializer.NullValueHandling == NullValueHandling.Ignore)
                     continue;
 
-                WriteObjectMember(writer, value.Name, type, value.Value, serializer);
+                WriteObjectMember(writer, member.MemberName, type, value, serializer);
             }
 
             writer.WriteEndObject();
