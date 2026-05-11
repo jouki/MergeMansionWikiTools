@@ -1,9 +1,34 @@
 ﻿using System.IO;
+using System.Reflection;
+using System.Runtime.Serialization;
 using GameLogic.Config;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace merge_mansion_dumper.Dumper.Base
 {
+    /// <summary>
+    /// Contract resolver that honors System.Runtime.Serialization's [IgnoreDataMember]
+    /// attribute. Newtonsoft only respects its own [JsonIgnore]; game-side API classes
+    /// (DecorationInfo.LayeredDecorationSetInfo, RewardDecoration.Decoration, etc.) use
+    /// [IgnoreDataMember] on derived getters that internally call MetaRef.Ref. Without
+    /// this resolver Newtonsoft default reflection serializer invokes those getters and
+    /// crashes when the underlying MetaRef hasn't been resolved in the current archive.
+    /// </summary>
+    public class IgnoreDataMemberContractResolver : DefaultContractResolver
+    {
+        protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
+        {
+            var property = base.CreateProperty(member, memberSerialization);
+            if (member.GetCustomAttribute<IgnoreDataMemberAttribute>() != null)
+            {
+                property.Ignored = true;
+                property.ShouldSerialize = _ => false;
+            }
+            return property;
+        }
+    }
+
     public abstract class JsonDumper<TDump> : BaseDumper<TDump>
     {
         /// <summary>Serializes and writes to file. Returns the JSON string for baseline comparison.</summary>
@@ -55,6 +80,10 @@ namespace merge_mansion_dumper.Dumper.Base
             return sw.ToString();
         }
 
-        protected virtual JsonSerializerSettings CreateSettings(SharedGameConfig config) => new() { NullValueHandling = NullValueHandling.Ignore };
+        protected virtual JsonSerializerSettings CreateSettings(SharedGameConfig config) => new()
+        {
+            NullValueHandling = NullValueHandling.Ignore,
+            ContractResolver = new IgnoreDataMemberContractResolver(),
+        };
     }
 }
