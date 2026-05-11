@@ -350,14 +350,26 @@ internal static class Program
             new EventDumper().WriteJson(basePath, masterConfig);
             Console.WriteLine($"        -> events.json ({new FileInfo(basePath).Length / 1024} KB)");
 
-            if (!string.IsNullOrEmpty(patchPath) && File.Exists(patchPath))
+            if (!string.IsNullOrEmpty(patchPath))
             {
-                Console.WriteLine("[5] Loading patches...");
-                var specPatches = Metaplay.Core.Config.GameConfigSpecializationPatches.FromBytes(File.ReadAllBytes(patchPath));
-                var configPatches = specPatches.Patches
-                    .SelectMany(y => y.Value.Select(z => (y.Key, z.Key, Metaplay.Core.Config.GameConfigPatchEnvelope.Deserialize(z.Value))))
-                    .ToArray();
-                Console.WriteLine($"        Found {configPatches.Length} patches");
+                // Support both file mode (legacy) and directory mode (union across all snapshots).
+                var patchFiles = new List<string>();
+                if (Directory.Exists(patchPath))
+                    patchFiles.AddRange(Directory.GetFiles(patchPath).OrderBy(File.GetLastWriteTimeUtc));
+                else if (File.Exists(patchPath))
+                    patchFiles.Add(patchPath);
+
+                Console.WriteLine($"[5] Loading {patchFiles.Count} patch file(s)...");
+                var merged = new Dictionary<string, (Metaplay.Core.Player.PlayerExperimentId, Metaplay.Core.Player.ExperimentVariantId, Metaplay.Core.Config.GameConfigPatchEnvelope)>(StringComparer.Ordinal);
+                foreach (var pf in patchFiles)
+                {
+                    var specPatches = Metaplay.Core.Config.GameConfigSpecializationPatches.FromBytes(File.ReadAllBytes(pf));
+                    foreach (var (expId, vs) in specPatches.Patches)
+                        foreach (var (varId, bytes) in vs)
+                            merged[$"{expId}_{varId}"] = (expId, varId, Metaplay.Core.Config.GameConfigPatchEnvelope.Deserialize(bytes));
+                }
+                var configPatches = merged.Values.ToArray();
+                Console.WriteLine($"        Found {configPatches.Length} unique patches across {patchFiles.Count} file(s)");
 
                 foreach (var (expId, varId, env) in configPatches)
                 {

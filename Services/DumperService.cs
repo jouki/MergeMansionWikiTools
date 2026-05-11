@@ -199,36 +199,97 @@ internal static class DumperService
                 AppLogger.Info("Archive entries: " + string.Join(", ", archive.Entries.Select(e => e.Name)));
 
                 // 4. Load patches (optional)
+                //
+                // Game stores multiple patch snapshots in _DATA/P/ — one per session/server
+                // response. Each file contains a different set of `(ExperimentId, VariantId)`
+                // tuples and a patch like WildItem_SME_01_B may exist in only one of them.
+                // Resolution strategy:
+                //   - If DumperPatchPath points to a file → load that file only (legacy).
+                //   - If it points to a directory → load every file in it and union patches,
+                //     keyed by (ExperimentId, VariantId). On duplicate keys keep the version
+                //     from the most-recently-modified file (newest server response).
+                //
+                // This ensures patches like WildItem_SME_01_B (only in newer patch snapshot)
+                // get picked up automatically without manual settings.json editing.
                 PatchedConfigArchive patchedArchive;
                 var patchedArchives = new List<(PlayerExperimentId, ExperimentVariantId, PatchedConfigArchive, string[])>();
 
-                if (!string.IsNullOrEmpty(patchPath) && File.Exists(patchPath))
+                if (!string.IsNullOrEmpty(patchPath))
                 {
-                    progress?.Report("Loading patch config...");
-                    try
+                    var patchFilesToLoad = new List<string>();
+                    if (Directory.Exists(patchPath))
                     {
-                        var specializationPatches = GameConfigSpecializationPatches.FromBytes(File.ReadAllBytes(patchPath));
-                        var configPatches = specializationPatches.Patches
-                            .SelectMany(y => y.Value.Select(z => (y.Key, z.Key, GameConfigPatchEnvelope.Deserialize(z.Value))))
-                            .ToArray();
+                        // Directory mode — enumerate, sort by mtime ascending so newer files
+                        // overwrite older entries in the merge dictionary below.
+                        patchFilesToLoad.AddRange(Directory.GetFiles(patchPath)
+                            .OrderBy(f => File.GetLastWriteTimeUtc(f)));
+                    }
+                    else if (File.Exists(patchPath))
+                    {
+                        patchFilesToLoad.Add(patchPath);
 
-                        foreach (var configPatch in configPatches)
+                        // If the user pointed at a file inside a _DATA/P-style directory,
+                        // also pull in any sibling patch files so multi-snapshot archives
+                        // load the same way directory mode does. Sibling files must look
+                        // like Metaplay content hashes (no extension, 32+ alphanumeric chars).
+                        var parentDir = Path.GetDirectoryName(patchPath);
+                        if (!string.IsNullOrEmpty(parentDir) && Directory.Exists(parentDir))
                         {
-                            var pa = new PatchedConfigArchive(archive, new[] { configPatch.Item3 });
-                            var patchEntryNames = configPatch.Item3.EntryNames.ToArray();
-                            patchedArchives.Add((configPatch.Item1, configPatch.Item2, pa, patchEntryNames));
+                            foreach (var sibling in Directory.GetFiles(parentDir)
+                                .OrderBy(f => File.GetLastWriteTimeUtc(f)))
+                            {
+                                if (sibling == patchPath) continue;
+                                var name = Path.GetFileName(sibling);
+                                // Heuristic: Metaplay content hash files have no extension and contain a dash.
+                                if (Path.GetExtension(name) == string.Empty && name.Contains('-'))
+                                    patchFilesToLoad.Add(sibling);
+                            }
+                        }
+                    }
 
-                            // Diagnostics: log all entry names in each patch envelope
-                            var label = $"{configPatch.Item1}_{configPatch.Item2}";
-                            AppLogger.Info($"Patch {label} entries: [{string.Join(", ", patchEntryNames)}]");
+                    if (patchFilesToLoad.Count > 0)
+                    {
+                        progress?.Report($"Loading patches from {patchFilesToLoad.Count} file(s)...");
+                        AppLogger.Info($"Patch files to scan: {patchFilesToLoad.Count}");
+
+                        // Merge across all files. Key is the patch label, value is the deserialized envelope.
+                        // Newer files (later in patchFilesToLoad, since sorted by mtime asc) overwrite older
+                        // entries for the same label — so a single label produces one PatchedConfigArchive.
+                        var mergedPatches = new Dictionary<string, (PlayerExperimentId ExpId, ExperimentVariantId VarId, GameConfigPatchEnvelope Envelope, string SourceFile)>(StringComparer.Ordinal);
+
+                        foreach (var pf in patchFilesToLoad)
+                        {
+                            try
+                            {
+                                var specializationPatches = GameConfigSpecializationPatches.FromBytes(File.ReadAllBytes(pf));
+                                var configPatches = specializationPatches.Patches
+                                    .SelectMany(y => y.Value.Select(z => (ExpId: y.Key, VarId: z.Key, Envelope: GameConfigPatchEnvelope.Deserialize(z.Value))))
+                                    .ToArray();
+
+                                foreach (var (expId, varId, envelope) in configPatches)
+                                {
+                                    var label = $"{expId}_{varId}";
+                                    mergedPatches[label] = (expId, varId, envelope, Path.GetFileName(pf));
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Log("WARN", $"Patch file {Path.GetFileName(pf)} skipped: {ex.Message}", ex);
+                            }
                         }
 
-                        progress?.Report($"{T()} Loaded {configPatches.Length} patch(es)");
-                        AppLogger.Info($"{T()} Patches loaded: {configPatches.Length}");
-                    }
-                    catch (Exception ex)
-                    {
-                        Log("WARN", $"Patch file skipped: {ex.Message}", ex);
+                        foreach (var kv in mergedPatches)
+                        {
+                            var (expId, varId, envelope, sourceFile) = kv.Value;
+                            var pa = new PatchedConfigArchive(archive, new[] { envelope });
+                            var patchEntryNames = envelope.EntryNames.ToArray();
+                            patchedArchives.Add((expId, varId, pa, patchEntryNames));
+
+                            AppLogger.Info($"Patch {kv.Key} entries: [{string.Join(", ", patchEntryNames)}] (from {sourceFile})");
+                        }
+
+                        progress?.Report($"{T()} Loaded {mergedPatches.Count} unique patch(es) across {patchFilesToLoad.Count} file(s)");
+                        AppLogger.Info($"{T()} Patches loaded: {mergedPatches.Count} unique across {patchFilesToLoad.Count} files");
                     }
                 }
 
