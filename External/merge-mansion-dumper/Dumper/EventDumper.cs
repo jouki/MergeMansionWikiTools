@@ -141,40 +141,67 @@ namespace merge_mansion_dumper.Dumper
             // task completion in areas grants SoloMilestoneHotspotValue points → level up)
             if (_filters.HasFlag(EventFilters.SoloMilestone))
             {
-                events["SoloMilestoneEvents"] = config.SoloMilestoneEvents?.EnumerateAll().Select(x =>
-                {
-                    var evt = (SoloMilestoneEventInfo)x.Value;
-                    return new Dictionary<string, object>
+                events["SoloMilestoneEvents"] = config.SoloMilestoneEvents?.EnumerateAll()
+                    .OrderBy(x => GetIdBase(((SoloMilestoneEventInfo)x.Value).ConfigKey?.Value), StringComparer.OrdinalIgnoreCase)
+                    .ThenBy(x => GetIdNumber(((SoloMilestoneEventInfo)x.Value).ConfigKey?.Value))
+                    .Select(x =>
                     {
-                        ["ConfigKey"] = evt.ConfigKey?.ToString(),
-                        ["NameLocId"] = evt.NameLocId,
-                        ["DisplayName"] = Localize(evt.NameLocId) ?? evt.DisplayName,
-                        ["Description"] = evt.Description,
-                        ["ActivableParams"] = evt.ActivableParams,
-                        ["CategoryInfo"] = evt.CategoryInfo,
-                        ["GroupId"] = evt.GroupId?.ToString(),
-                        ["Theme"] = evt.Theme,
-                        ["Priority"] = evt.Priority,
-                        ["TokenSpawnsEnabled"] = evt.TokenSpawnsEnabled,
-                        ["Milestones"] = evt.Milestones?.Select(m => m?.ToString()).ToArray(),
-                        ["UnlockRequirement"] = evt.UnlockRequirement,
-                    };
-                }).ToArray() ?? Array.Empty<object>();
+                        var evt = (SoloMilestoneEventInfo)x.Value;
+                        return new Dictionary<string, object>
+                        {
+                            ["ConfigKey"] = evt.ConfigKey?.ToString(),
+                            ["NameLocId"] = evt.NameLocId,
+                            ["DisplayName"] = Localize(evt.NameLocId) ?? evt.DisplayName,
+                            ["Description"] = evt.Description,
+                            ["ActivableParams"] = evt.ActivableParams,
+                            ["CategoryInfo"] = evt.CategoryInfo,
+                            ["GroupId"] = evt.GroupId?.ToString(),
+                            ["Theme"] = evt.Theme,
+                            ["Priority"] = evt.Priority,
+                            ["TokenSpawnsEnabled"] = evt.TokenSpawnsEnabled,
+                            ["Milestones"] = evt.Milestones?.Select(m => m?.ToString()).ToArray(),
+                            ["UnlockRequirement"] = evt.UnlockRequirement,
+                        };
+                    }).ToArray() ?? Array.Empty<object>();
 
-                events["SoloMilestoneMilestones"] = config.SoloMilestoneMilestones?.EnumerateAll().Select(x =>
-                {
-                    var ms = (SoloMilestoneMilestonesInfo)x.Value;
-                    return new Dictionary<string, object>
+                events["SoloMilestoneMilestones"] = config.SoloMilestoneMilestones?.EnumerateAll()
+                    .OrderBy(x => GetIdBase(((SoloMilestoneMilestonesInfo)x.Value).ConfigKey?.Value), StringComparer.OrdinalIgnoreCase)
+                    .ThenBy(x => GetIdNumber(((SoloMilestoneMilestonesInfo)x.Value).ConfigKey?.Value))
+                    .Select(x =>
                     {
-                        ["ConfigKey"] = ms.ConfigKey?.ToString(),
-                        ["Requirement"] = ms.Requirement,
-                        ["Rewards"] = ms.Rewards,
-                        ["RewardSegment"] = ms.RewardSegment?.Select(s => s?.ToString()).ToArray(),
-                    };
-                }).ToArray() ?? Array.Empty<object>();
+                        var ms = (SoloMilestoneMilestonesInfo)x.Value;
+                        return new Dictionary<string, object>
+                        {
+                            ["ConfigKey"] = ms.ConfigKey?.ToString(),
+                            ["Requirement"] = ms.Requirement,
+                            ["Rewards"] = ms.Rewards,
+                            ["RewardSegment"] = ms.RewardSegment?.Select(s => s?.ToString()).ToArray(),
+                        };
+                    }).ToArray() ?? Array.Empty<object>();
             }
 
             return events;
+        }
+
+        // ── ConfigKey sort helpers (e.g. "MySummerTea_38" → ("MySummerTea", 38)) ──
+        // Splits trailing "_NN" numeric suffix; non-numeric tails keep number=0.
+        // Used to sort solo milestone events + milestones by family prefix then level.
+
+        private static string GetIdBase(string key)
+        {
+            if (string.IsNullOrEmpty(key)) return "";
+            var underscoreIdx = key.LastIndexOf('_');
+            if (underscoreIdx < 0 || underscoreIdx == key.Length - 1) return key;
+            var tail = key.Substring(underscoreIdx + 1);
+            return int.TryParse(tail, out _) ? key.Substring(0, underscoreIdx) : key;
+        }
+
+        private static int GetIdNumber(string key)
+        {
+            if (string.IsNullOrEmpty(key)) return 0;
+            var underscoreIdx = key.LastIndexOf('_');
+            if (underscoreIdx < 0 || underscoreIdx == key.Length - 1) return 0;
+            return int.TryParse(key.Substring(underscoreIdx + 1), out var num) ? num : 0;
         }
 
         // ── CollectibleBoard classification ───────────────────────────

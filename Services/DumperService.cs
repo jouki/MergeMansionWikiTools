@@ -284,11 +284,15 @@ internal static class DumperService
                 Directory.CreateDirectory(outputDir);
 
                 // 7. Filter relevant patches early (before parallel section)
+                // SoloMilestoneEvents/Milestones added so AB variants of weekend events
+                // (e.g. Teatime Delight Wild Item rewards) are no longer dropped as irrelevant.
                 var relevantPatchedArchives = patchedArchives.Where(x =>
                     x.Item3.ContainsPatch("Areas")
                     || x.Item3.ContainsPatch("HotspotDefinitions")
                     || x.Item3.ContainsPatch("Items")
-                    || x.Item3.ContainsPatch("MergeChains"))
+                    || x.Item3.ContainsPatch("MergeChains")
+                    || x.Item3.ContainsPatch("SoloMilestoneEvents")
+                    || x.Item3.ContainsPatch("SoloMilestoneMilestones"))
                     .Select(x => (x.Item1, x.Item2, x.Item3, x.Item4))
                     .ToArray();
 
