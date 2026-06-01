@@ -284,6 +284,7 @@ public partial class MoveItemsDialog : FluentWindow
         if (string.IsNullOrWhiteSpace(name))
         {
             HideConflict();
+            HideMergeInfo();
             UpdateBacklinksDimming();
             return;
         }
@@ -292,25 +293,40 @@ public partial class MoveItemsDialog : FluentWindow
         if (!_chainByName.TryGetValue(name, out var match) || match == _sourceChain)
         {
             HideConflict();
+            HideMergeInfo();
             UpdateBacklinksDimming();
             return;
         }
 
-        // Single-item mode: existence of the target chain isn't a blocking conflict.
-        // The user moves one item to a chosen level — collision is per-level, handled by CheckLevelCollision.
+        // Single-item mode: chain existence isn't a blocking conflict.
+        // Per-level handling lives in CheckLevelCollision (uses nbLevel). Show informational merge banner so the user sees they are merging into an existing chain.
         if (_singleItemMode)
         {
             HideConflict();
+            ShowMergeInfo(match);
             UpdateBacklinksDimming();
             return;
         }
 
-        // Show conflict
+        // Multi-item mode: blocking only when REAL collisions exist (= both sides non-alias at same level).
+        var realCollisions = ComputeRealLevelCollisions(match);
+
+        if (realCollisions.Count == 0)
+        {
+            HideConflict();
+            ShowMergeInfo(match);
+            UpdateBacklinksDimming();
+            return;
+        }
+
+        // Real collisions → existing blocking warning UI
+        HideMergeInfo();
         _conflictChain = match;
         _hasConflict = true;
 
+        var collisionLevels = string.Join(", ", realCollisions.OrderBy(c => c.src.Level).Select(c => $"L{c.src.Level}"));
         txtConflictTitle.Text = $"\"{match.DisplayName}\" already exists";
-        txtConflictDetail.Text = $"Internal: {match.ConfigKey} · {match.Items.Count} items";
+        txtConflictDetail.Text = $"Internal: {match.ConfigKey} · {match.Items.Count} items · Level collision: {collisionLevels}";
         btnMoveConflictFirst.Content = $"Move \"{match.DisplayName}\" first";
 
         conflictPanel.Visibility = Visibility.Visible;
@@ -321,6 +337,40 @@ public partial class MoveItemsDialog : FluentWindow
 
         // Load conflict chain images asynchronously
         _ = LoadConflictImagesAsync(match);
+    }
+
+    private List<(ParsedItem src, ParsedItem tgt)> ComputeRealLevelCollisions(ParsedChain targetChain)
+    {
+        var result = new List<(ParsedItem, ParsedItem)>();
+        foreach (var src in _selectedItems)
+        {
+            // Moving as alias → existing item at same level can legitimately coexist
+            if (_setAsAlias) continue;
+            foreach (var tgt in targetChain.Items)
+            {
+                if (tgt == src) continue;
+                if (tgt.IsAlias) continue; // alias target: legitimate coexistence
+                if (tgt.Level != src.Level) continue;
+                result.Add((src, tgt));
+                break;
+            }
+        }
+        return result;
+    }
+
+    private void ShowMergeInfo(ParsedChain target)
+    {
+        var levels = string.Join(", ", _selectedItems.OrderBy(i => i.Level).Select(i => $"L{i.Level}"));
+        var movingCount = _selectedItems.Count;
+        var tgtCount = target.Items.Count;
+        txtMergeInfoTitle.Text = $"Merging into existing chain \"{target.DisplayName}\"";
+        txtMergeInfoDetail.Text = $"Internal: {target.ConfigKey} · target has {tgtCount} item{(tgtCount != 1 ? "s" : "")} · merging {movingCount} item{(movingCount != 1 ? "s" : "")} at {levels}";
+        mergeInfoPanel.Visibility = Visibility.Visible;
+    }
+
+    private void HideMergeInfo()
+    {
+        mergeInfoPanel.Visibility = Visibility.Collapsed;
     }
 
     /// <summary>
@@ -508,12 +558,16 @@ public partial class MoveItemsDialog : FluentWindow
 
         if (collision != null)
         {
-            // Alias items may coexist with another item at the same level — warn only, don't block.
-            bool isAliasOperation = _setAsAlias;
-            if (isAliasOperation)
+            // Aliases on either side never block — same-level alias is legitimate coexistence.
+            bool sourceIsAlias = _setAsAlias;
+            bool targetIsAlias = collision.IsAlias;
+            if (sourceIsAlias || targetIsAlias)
             {
                 _hasLevelCollision = false;
-                txtLevelWarning.Text = $"Level {desiredLevel} already has \"{collision.Name}\" — allowed because this item is an alias.";
+                string reason = sourceIsAlias && targetIsAlias
+                    ? "both are aliases"
+                    : sourceIsAlias ? "moving as alias" : "existing item is alias";
+                txtLevelWarning.Text = $"Level {desiredLevel} already has \"{collision.Name}\" — allowed ({reason}).";
             }
             else
             {
@@ -731,7 +785,8 @@ public partial class MoveItemsDialog : FluentWindow
     private void ChkSetAsAlias_Changed(object sender, RoutedEventArgs e)
     {
         _setAsAlias = chkSetAsAlias.IsChecked == true;
-        // Alias flag affects level-collision blocking semantics; re-evaluate
+        // Alias flag affects both per-level collision (single-mode) and real-collision set (multi-mode); re-evaluate both.
+        CheckConflict(txtChainName.Text?.Trim() ?? "");
         CheckLevelCollision();
     }
 

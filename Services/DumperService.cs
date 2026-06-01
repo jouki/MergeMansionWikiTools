@@ -344,38 +344,17 @@ internal static class DumperService
                 // 6. Create output directory
                 Directory.CreateDirectory(outputDir);
 
-                // 7. Filter relevant patches early (before parallel section)
-                // Explicit whitelist for base dump (Areas, Items, MergeChains, HotspotDefinitions)
-                // plus pattern match for anything that could affect events.json output (Event, Milestone,
-                // Task, Scoop, Tournament, Mystery). Real-world patches like WildItem_SeasonPass_01_B
-                // touch only "EventLevels" and WildItem_DailyScoop_V2_01_B touches only
-                // "DailyScoopStandardObjectives" — neither would match a narrow Solo Milestone whitelist.
-                static bool IsEventPatch(string entry) =>
-                    entry.Contains("Event", StringComparison.OrdinalIgnoreCase)
-                    || entry.Contains("Milestone", StringComparison.OrdinalIgnoreCase)
-                    || entry.Contains("Task", StringComparison.OrdinalIgnoreCase)
-                    || entry.Contains("Scoop", StringComparison.OrdinalIgnoreCase)
-                    || entry.Contains("Tournament", StringComparison.OrdinalIgnoreCase)
-                    || entry.Contains("Mystery", StringComparison.OrdinalIgnoreCase)
-                    || entry.Contains("Boulton", StringComparison.OrdinalIgnoreCase)
-                    || entry.Contains("Leaderboard", StringComparison.OrdinalIgnoreCase)
-                    || entry.Contains("Progression", StringComparison.OrdinalIgnoreCase)
-                    || entry.Contains("GarageCleanup", StringComparison.OrdinalIgnoreCase);
-                var relevantPatchedArchives = patchedArchives.Where(x =>
-                    x.Item3.ContainsPatch("Areas")
-                    || x.Item3.ContainsPatch("HotspotDefinitions")
-                    || x.Item3.ContainsPatch("Items")
-                    || x.Item3.ContainsPatch("MergeChains")
-                    || x.Item4.Any(IsEventPatch))
+                // 7. Extract ALL patches — no filter.
+                // Patches that do not change Items/MergeChains/Areas/Events output are still imported;
+                // WriteJsonIfDifferent suppresses their files on byte-identical match and the empty
+                // subfolder is deleted at the end of the patch task. Net effect: zero false negatives
+                // (any patch that mutates any tracked field survives), tiny throughput cost for the
+                // irrelevant ones.
+                var relevantPatchedArchives = patchedArchives
                     .Select(x => (x.Item1, x.Item2, x.Item3, x.Item4))
                     .ToArray();
 
-                if (relevantPatchedArchives.Length < patchedArchives.Count)
-                {
-                    var skipped = patchedArchives.Count - relevantPatchedArchives.Length;
-                    AppLogger.Info($"Patch filter: {relevantPatchedArchives.Length} relevant, {skipped} skipped (total {patchedArchives.Count})");
-                    progress?.Report($"Skipped {skipped} irrelevant patch(es)");
-                }
+                AppLogger.Info($"Patch extraction: {relevantPatchedArchives.Length} patches (unfiltered, all branches)");
 
                 // 8. Run master dumps first, then patch dumps (patches need baseline content)
                 progress?.Report($"{T()} Dumping game data ({relevantPatchedArchives.Length} patches)...");

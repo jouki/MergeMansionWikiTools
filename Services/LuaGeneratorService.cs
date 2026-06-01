@@ -423,6 +423,10 @@ public class LuaGeneratorService
         string? SingleUseDrop,
         /// <summary>Decay target ItemType (DecayFeatures or DecayAfterLastCycle Constant). Filtered by main-source trump + same-chain.</summary>
         string? DecayInto,
+        /// <summary>Cross-chain merge result ItemType. MergeFeatures.Mechanic.ResultProducer pointing to L1 of a DIFFERENT chain
+        /// (e.g. SeedBagEmpty_04 → GoldRoot_01). Same-chain merges (normal L+1 progression) are filtered out — they are implicit
+        /// in chain expansion. Used by Lua itemGraph to add a merge edge with sourcesPerOp = 2 (= 2 source items per 1 target).</summary>
+        string? MergeResult,
         /// <summary>Multi-target decay odds map (ControlledRandom targets → probability). Used by Markov cycle solver. No filtering.</summary>
         Dictionary<string, double>? DecayOdds,
         /// <summary>Total HowManyCycles for finite generators/spawners (>0). Used by wiki Lua to compute lifetime maxDrops = dropsPerCharge × cycles. 0 = infinite or unset.</summary>
@@ -711,39 +715,55 @@ public class LuaGeneratorService
 
                 if (item.IsGenerator)
                 {
-                    skipPrice = item.SpeedUpCostGems;
-                    rechargeTime = item.RechargeTimeMs;
-                    int totalDropsPerCharge = item.ActivationAmountInCycle * item.HowManyGeneratedInCycle;
-                    int storageCharges = totalDropsPerCharge > 0 && item.StorageMax > 0
-                        ? item.StorageMax / totalDropsPerCharge : 0;
-                    // StartsFull-conditional formula matching MetaMergeChainSerializer.
-                    // - sf=true:  raw StorageMax IS per-cycle drops capacity (= reality);
-                    //             charges per cycle = StorageMax/dpc.
-                    //             Examples: Mane Comb (4/1=4), Water Bucket (30/30=1).
-                    // - sf=false: 1 batch-tap per cycle (StorageMax was overridden in
-                    //             dumper to hmc × dpc as total drops).
-                    //             Examples: Plain Box, White Moth, Suitcase.
-                    // - infinite (hmc=-1): keep storageCharges (no cycle cap).
-                    if (item.ActivationHowManyCycles > 0)
+                    // Sentinel detection: 9999 in mini-charge fields = "always-active marker" items
+                    // (DiningPianoMetronomeActive_*, LDE_Hopeberry2024_FurnaceProducing_01,
+                    //  CBE_SweetMess_ChocoMachineProducing_01, SLBE_Football_Storage_01).
+                    // These are stateful event/minigame items, NOT real droppable generators.
+                    // Skip drops accounting (charges/dropsPerCharge/rechargeTime stay 0 → not emitted to Lua)
+                    // — wiki preserves dash output. Item still added to items table for chain navigation.
+                    // See memory/game-mechanic-rules.md.
+                    bool isSentinel = item.ActivationAmountInCycle >= 9999
+                                   || item.HowManyGeneratedInCycle >= 9999;
+                    if (!isSentinel)
                     {
-                        charges = item.StartsFull
-                            ? Math.Max(1, storageCharges)
-                            : 1;
+                        skipPrice = item.SpeedUpCostGems;
+                        rechargeTime = item.RechargeTimeMs;
+                        int totalDropsPerCharge = item.ActivationAmountInCycle * item.HowManyGeneratedInCycle;
+                        int storageCharges = totalDropsPerCharge > 0 && item.StorageMax > 0
+                            ? item.StorageMax / totalDropsPerCharge : 0;
+                        // StartsFull-conditional formula matching MetaMergeChainSerializer.
+                        // - sf=true:  raw StorageMax IS per-cycle drops capacity (= reality);
+                        //             charges per cycle = StorageMax/dpc.
+                        //             Examples: Mane Comb (4/1=4), Water Bucket (30/30=1).
+                        // - sf=false: 1 batch-tap per cycle (StorageMax was overridden in
+                        //             dumper to hmc × dpc as total drops).
+                        //             Examples: Plain Box, White Moth, Suitcase.
+                        // - infinite (hmc=-1): per-cycle taps = storageCharges, ALE pokud item
+                        //             používá mini-charge mechaniku (StorageMax < dpc, např. Secret
+                        //             Code Book: storage=32, dpc=96), storageCharges=0 → wrap to 1.
+                        //             Mini-charges jsou interní batching v rámci 1 main charge,
+                        //             nepočítají se jako individuální charges. Viz game-mechanic-rules.md.
+                        if (item.ActivationHowManyCycles > 0)
+                        {
+                            charges = item.StartsFull
+                                ? Math.Max(1, storageCharges)
+                                : 1;
+                        }
+                        else
+                        {
+                            charges = Math.Max(1, storageCharges);
+                        }
+                        dropsPerCharge = totalDropsPerCharge;
+                        // InitialCooldown (FirstCycleStartDelayMs) only emitted when significant (> 5s).
+                        // - Vanishing/decay items typically have ~50-500ms (engine spin-up) → first charge
+                        //   considered ready by player, total recharge = (effectiveCharges - 1) × rechargeTime.
+                        // - Vase L1-L3 etc. with real initial cooldown (> 5s) WILL emit, and wiki Module:Items
+                        //   adds it to total recharge time.
+                        // Threshold chosen by user based on practical gameplay perception.
+                        chargeTime = item.FirstCycleStartDelayMs > 5000 ? item.FirstCycleStartDelayMs : 0;
+                        if (item.ActivationHowManyCycles > 0)
+                            cycles = item.ActivationHowManyCycles;
                     }
-                    else
-                    {
-                        charges = storageCharges;
-                    }
-                    dropsPerCharge = totalDropsPerCharge;
-                    // InitialCooldown (FirstCycleStartDelayMs) only emitted when significant (> 5s).
-                    // - Vanishing/decay items typically have ~50-500ms (engine spin-up) → first charge
-                    //   considered ready by player, total recharge = (effectiveCharges - 1) × rechargeTime.
-                    // - Vase L1-L3 etc. with real initial cooldown (> 5s) WILL emit, and wiki Module:Items
-                    //   adds it to total recharge time.
-                    // Threshold chosen by user based on practical gameplay perception.
-                    chargeTime = item.FirstCycleStartDelayMs > 5000 ? item.FirstCycleStartDelayMs : 0;
-                    if (item.ActivationHowManyCycles > 0)
-                        cycles = item.ActivationHowManyCycles;
                 }
                 else if (item.IsSpawner)
                 {
@@ -825,14 +845,48 @@ public class LuaGeneratorService
                     decayCandidate = item.SpawnDecayIntoItemType;
 
                 if (!string.IsNullOrEmpty(decayCandidate)
-                    && !mainSourceTargets.Contains(decayCandidate)
-                    && itemToChain.TryGetValue(decayCandidate, out var decayChain)
-                    && !string.Equals(decayChain, chain.DisplayName, StringComparison.OrdinalIgnoreCase))
+                    && itemToChain.TryGetValue(decayCandidate, out var decayChain))
                 {
-                    // Cheapest-source filter: only emit if THIS chain is the cheapest source of the target
-                    if (bestSourceMap.TryGetValue(decayCandidate, out var bestDecay)
-                        && string.Equals(bestDecay, chain.DisplayName, StringComparison.OrdinalIgnoreCase))
-                        decayInto = decayCandidate;
+                    bool sameChain = string.Equals(decayChain, chain.DisplayName, StringComparison.OrdinalIgnoreCase);
+                    if (sameChain)
+                    {
+                        // Same-chain decay: emit ONLY FORWARD progressions (target level > source level).
+                        // Forward = Sink-Producer ladder where the producer decays into the NEXT processing
+                        // stage of the same chain (e.g. Shipping Container: ShippingContainerProducer_01 L2
+                        // → ShippingContainer_02 L3 → … → ScarabBox). The Lua solver needs these edges to
+                        // walk the chain when reached via a fuel relation from another chain (Tools → SC).
+                        // Backward (Wood L4→L3 depletion) and same-level (PoolToys repeatable producer loops
+                        // reverting to their Sink form) are NOT forward pipelines and stay filtered to avoid
+                        // circular/self-referential cost cascades. Levels are raw game levels; wiki aliases
+                        // (mapping table only) don't affect this comparison.
+                        var tgtItem = chain.Items.FirstOrDefault(i =>
+                            string.Equals(i.ItemType, decayCandidate, StringComparison.OrdinalIgnoreCase));
+                        if (tgtItem != null && tgtItem.Level > item.Level)
+                            decayInto = decayCandidate;
+                    }
+                    else if (!mainSourceTargets.Contains(decayCandidate))
+                    {
+                        // Cross-chain decay: skip when target has a permanent main source elsewhere,
+                        // and emit only if THIS chain is the cheapest source of the target.
+                        if (bestSourceMap.TryGetValue(decayCandidate, out var bestDecay)
+                            && string.Equals(bestDecay, chain.DisplayName, StringComparison.OrdinalIgnoreCase))
+                            decayInto = decayCandidate;
+                    }
+                }
+
+                // ── Cross-chain merge result (MergeFeatures.Mechanic.ResultProducer) ──
+                // Emitted only when merge target lives in a DIFFERENT wiki chain. Same-chain
+                // L+1 merges are the default progression and don't need a graph edge — the
+                // BFS solver already expands through chain levels. Only the chain-terminal
+                // cross-chain merge (e.g. SeedBagEmpty_04 → GoldRoot_01, Crate Parts L4 →
+                // Recycled Field Table L1) needs to be exposed to the Lua solver so it can
+                // back-attribute "Empty Seed Bag is needed for Golden Tree".
+                string? mergeResult = null;
+                if (!string.IsNullOrEmpty(item.MergeResultItemType)
+                    && itemToChain.TryGetValue(item.MergeResultItemType, out var mergeTargetChain)
+                    && !string.Equals(mergeTargetChain, chain.DisplayName, StringComparison.OrdinalIgnoreCase))
+                {
+                    mergeResult = item.MergeResultItemType;
                 }
 
                 list.Add(new FlatItem(
@@ -858,6 +912,7 @@ public class LuaGeneratorService
                     fueledResult,
                     singleUseDrop,
                     decayInto,
+                    mergeResult,
                     item.DecayAfterLastCycleOdds,
                     cycles));
             }
@@ -922,6 +977,10 @@ public class LuaGeneratorService
                 sb.Append($"singleUseDrop = \"{Esc(it.SingleUseDrop)}\", ");
             if (!string.IsNullOrEmpty(it.DecayInto))
                 sb.Append($"decayInto = \"{Esc(it.DecayInto)}\", ");
+            // Cross-chain merge result — only for items whose MergeFeatures.Mechanic.ResultProducer points
+            // to L1 of a different chain. Lua solver attaches an itemGraph edge with sourcesPerOp = 2.
+            if (!string.IsNullOrEmpty(it.MergeResult))
+                sb.Append($"mergeResult = \"{Esc(it.MergeResult)}\", ");
 
             // Multi-target decay odds (for Markov cycle solver — no filtering, raw transition probabilities)
             if (it.DecayOdds is { Count: > 0 } decayOdds)

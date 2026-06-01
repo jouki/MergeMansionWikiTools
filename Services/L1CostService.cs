@@ -85,7 +85,7 @@ public class L1CostService
             // Check cache first (within recursion too)
             if (_cache.TryGetValue(itemType, out var cached)) return cached;
 
-            var chainKey = DataService.GetChainKeyFromItemType(itemType);
+            var chainKey = _data.ResolveChainKeyFromItemType(itemType);
             var level = DataService.GetLevelFromItemType(itemType);
 
             // Find the chain and item in DataService

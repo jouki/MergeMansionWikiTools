@@ -26,6 +26,16 @@ public class DataService
     /// <summary>ConfigKey → chain name mapping</summary>
     public Dictionary<string, string> ChainNames { get; private set; } = new();
 
+    /// <summary>ItemType → chain display name (e.g., "GardenTools_06" → "Gardening Tools")</summary>
+    public Dictionary<string, string> ItemToChainName { get; private set; } = new();
+
+    /// <summary>ItemType → chain ConfigKey. Built deterministically from JSON, so it survives
+    /// cases where the heuristic <see cref="GetChainKeyFromItemType"/> would mis-strip
+    /// (e.g. ItemType "Order_Cinema_Theater_01" → ConfigKey "OrderCinema_Theater" — heuristic
+    /// would yield "Order_Cinema_Theater" because the chain name uses an extra underscore that
+    /// the ConfigKey collapses).</summary>
+    public Dictionary<string, string> ItemTypeToConfigKey { get; private set; } = new(StringComparer.OrdinalIgnoreCase);
+
     /// <summary>Loaded chains</summary>
     public List<ParsedChain> Chains { get; private set; } = new();
 
@@ -45,6 +55,8 @@ public class DataService
         ItemNames.Clear();
         ItemLevels.Clear();
         ChainNames.Clear();
+        ItemToChainName.Clear();
+        ItemTypeToConfigKey.Clear();
         Chains.Clear();
 
         await using var stream = File.OpenRead(filePath);
@@ -67,6 +79,9 @@ public class DataService
 
     private void BuildItemNames(JsonElement dataArray)
     {
+        // Two-pass so PrimaryChain entries always win ItemType → ConfigKey reverse mapping.
+        // (An item that is primary in chain X and an alias in chain Z must map to X, regardless
+        // of JSON order.)
         foreach (var chainEl in dataArray.EnumerateArray())
         {
             var configKey = GetString(chainEl, "ConfigKey");
@@ -75,30 +90,37 @@ public class DataService
             if (!string.IsNullOrEmpty(configKey) && !string.IsNullOrEmpty(chainName))
                 ChainNames[configKey] = chainName;
 
-            foreach (var listName in new[] { "PrimaryChain", "FallbackChain" })
-            {
-                if (!chainEl.TryGetProperty(listName, out var list)) continue;
+            ProcessChainList(chainEl, "PrimaryChain", chainName, configKey);
+        }
+        foreach (var chainEl in dataArray.EnumerateArray())
+        {
+            var configKey = GetString(chainEl, "ConfigKey");
+            var chainName = GetString(chainEl, "Name");
+            ProcessChainList(chainEl, "FallbackChain", chainName, configKey);
+        }
+    }
 
-                foreach (var entry in list.EnumerateArray())
-                {
-                    // Normal: single "Item" per level
-                    if (entry.TryGetProperty("Item", out var item))
-                    {
-                        RegisterItemName(item);
-                        continue;
-                    }
-                    // Atypical: "Items" array — multiple variants per level
-                    if (entry.TryGetProperty("Items", out var items) && items.ValueKind == JsonValueKind.Array)
-                    {
-                        foreach (var it in items.EnumerateArray())
-                            RegisterItemName(it);
-                    }
-                }
+    private void ProcessChainList(JsonElement chainEl, string listName, string chainName, string configKey)
+    {
+        if (!chainEl.TryGetProperty(listName, out var list)) return;
+        foreach (var entry in list.EnumerateArray())
+        {
+            // Normal: single "Item" per level
+            if (entry.TryGetProperty("Item", out var item))
+            {
+                RegisterItemName(item, chainName, configKey);
+                continue;
+            }
+            // Atypical: "Items" array — multiple variants per level
+            if (entry.TryGetProperty("Items", out var items) && items.ValueKind == JsonValueKind.Array)
+            {
+                foreach (var it in items.EnumerateArray())
+                    RegisterItemName(it, chainName, configKey);
             }
         }
     }
 
-    private void RegisterItemName(JsonElement item)
+    private void RegisterItemName(JsonElement item, string chainName, string configKey)
     {
         var itemType = GetString(item, "ItemType");
         var name = GetString(item, "Name");
@@ -109,6 +131,10 @@ public class DataService
             if (!string.IsNullOrEmpty(name))
                 ItemNames.TryAdd(itemType, name);
             ItemLevels.TryAdd(itemType, levelNum);
+            if (!string.IsNullOrEmpty(chainName))
+                ItemToChainName.TryAdd(itemType, chainName);
+            if (!string.IsNullOrEmpty(configKey))
+                ItemTypeToConfigKey.TryAdd(itemType, configKey);
         }
     }
 
@@ -262,7 +288,7 @@ public class DataService
                     dapConst = dap.GetString();
                 else if (dap.ValueKind == JsonValueKind.Object)
                 {
-                    dapConst = GetString(dap, "Constant");
+                    dapConst = GetConstantFirst(dap);
 
                     // ControlledRandom odds (multiple decay targets with probabilities)
                     if (dap.TryGetProperty("ControlledRandom", out var dapCr)
@@ -289,7 +315,7 @@ public class DataService
             // Spawn target
             if (sf.TryGetProperty("Spawn", out var spawn) && spawn.ValueKind == JsonValueKind.Object)
             {
-                pi.SpawnItemType = GetString(spawn, "Constant");
+                pi.SpawnItemType = GetConstantFirst(spawn);
 
                 // ControlledRandom / ControlledRandomSequence odds
                 if (spawn.TryGetProperty("ControlledRandom", out var cr))
@@ -326,7 +352,7 @@ public class DataService
                 if (dp.ValueKind == JsonValueKind.String)
                     dpConst = dp.GetString();
                 else if (dp.ValueKind == JsonValueKind.Object)
-                    dpConst = GetString(dp, "Constant");
+                    dpConst = GetConstantFirst(dp);
 
                 if (!string.IsNullOrEmpty(dpConst) && dpConst != "Empty")
                     pi.SpawnDecayIntoItemType = dpConst;
@@ -344,7 +370,7 @@ public class DataService
                     if (ip.ValueKind == JsonValueKind.String)
                         pi.DecayIntoItemType = ip.GetString();
                     else if (ip.ValueKind == JsonValueKind.Object)
-                        pi.DecayIntoItemType = GetString(ip, "Constant");
+                        pi.DecayIntoItemType = GetConstantFirst(ip);
                 }
             }
         }
@@ -354,42 +380,60 @@ public class DataService
             pi.DecaysWhenCyclesAreDone = GetBool(sfDecay, "DecaysWhenCyclesAreDone");
 
         // ── ChestFeatures (Brown Chest, Mystery Chest, Reward Boxes, …) ──
-        // ChestFeatures.LootProducer.BaseProducer.{Random|Constant|ControlledRandom*}
-        // → odds map of items the chest drops on opening. We read every supported
-        // producer shape (mirrors ExtractOdds for SpawnFeatures).
+        // LootProducer is polymorphic IItemProducer. The dumper exposes one of:
+        //   - PrefixProducer  → `{Marker, BaseProducer: {...inner shape...}}`
+        //   - RandomProducer  → `{Random: {Odds: {...}}}`
+        //   - ControlledRandom[Sequence]Producer  → `{ControlledRandom(Sequence): {Odds: {...}}}`
+        //   - ConstantProducer  → `{Constant: [{Item, Quantity}, ...]}` (post v0.20.73; legacy: `{Constant: "ItemType"}`)
         if (item.TryGetProperty("ChestFeatures", out var chest) && GetBool(chest, "IsChest"))
         {
             pi.IsChest = true;
-            if (chest.TryGetProperty("LootProducer", out var lootProd) &&
-                lootProd.TryGetProperty("BaseProducer", out var baseProd))
+            if (chest.TryGetProperty("LootProducer", out var lootProd)
+                && lootProd.ValueKind == JsonValueKind.Object)
             {
+                // PrefixProducer unwraps to BaseProducer; everything else reads from lootProd directly.
+                // Guard: BaseProducer must itself be an object (PrefixProducer wraps a sub-producer).
+                JsonElement src = lootProd;
+                if (lootProd.TryGetProperty("BaseProducer", out var bp) && bp.ValueKind == JsonValueKind.Object)
+                    src = bp;
                 Dictionary<string, double>? chestOdds = null;
-                if (baseProd.TryGetProperty("Random", out var rand) &&
+                List<(string Item, int Quantity)>? chestItems = null;
+
+                if (src.TryGetProperty("Random", out var rand) &&
                     rand.TryGetProperty("Odds", out var randOdds))
                 {
                     chestOdds = ParseOddsDictionary(randOdds);
                 }
-                else if (baseProd.TryGetProperty("ControlledRandomSequence", out var crs) &&
+                else if (src.TryGetProperty("ControlledRandomSequence", out var crs) &&
                          crs.TryGetProperty("Odds", out var crsOdds))
                 {
                     chestOdds = ParseOddsDictionary(crsOdds);
                 }
-                else if (baseProd.TryGetProperty("ControlledRandom", out var cr) &&
+                else if (src.TryGetProperty("ControlledRandom", out var cr) &&
                          cr.TryGetProperty("Odds", out var crOdds))
                 {
                     chestOdds = ParseOddsDictionary(crOdds);
                 }
-                else if (baseProd.TryGetProperty("Constant", out var constProd) &&
-                         constProd.TryGetProperty("ItemType", out var constId) &&
-                         constId.ValueKind == JsonValueKind.String)
+                else if (src.TryGetProperty("Constant", out _))
                 {
-                    chestOdds = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase)
+                    // ConstantProducer = guaranteed payload (= every listed item drops). Treat as
+                    // a deterministic list rather than odds. Caller can convert to 100/N odds if needed.
+                    chestItems = GetConstantList(src);
+                    if (chestItems.Count > 0)
                     {
-                        [constId.GetString() ?? ""] = 100.0
-                    };
+                        chestOdds = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase);
+                        foreach (var (it, _) in chestItems)
+                        {
+                            if (chestOdds.ContainsKey(it)) continue; // collapse duplicates
+                            chestOdds[it] = 100.0;
+                        }
+                    }
                 }
+
                 if (chestOdds != null && chestOdds.Count > 0)
                     pi.ChestRewardOdds = chestOdds;
+                if (chestItems != null && chestItems.Count > 0)
+                    pi.ChestRewardItems = chestItems;
             }
         }
 
@@ -473,6 +517,24 @@ public class DataService
             if (required.Count > 0) pi.OrderRequiredItems = required;
             if (rewards.Count > 0) pi.OrderRewardItems = rewards;
             if (perTaskList.Count > 0) pi.OrderTasks = perTaskList;
+        }
+
+        // ── MergeFeatures.Mechanic.ResultProducer ──
+        // Captures the item type that 2× merging produces. Normally L+1 of same chain;
+        // for chain-terminal items it can point to L1 of a DIFFERENT chain
+        // (e.g. SeedBagEmpty_04 → GoldRoot_01). Used by infobox + chain table to render
+        // transforms_to when target is in a different chain.
+        if (item.TryGetProperty("MergeFeatures", out var mf)
+            && mf.TryGetProperty("Mechanic", out var mech)
+            && mech.TryGetProperty("ResultProducer", out var rp))
+        {
+            string? resultType = null;
+            if (rp.ValueKind == JsonValueKind.Object)
+                resultType = GetConstantFirst(rp);
+            // rp.ValueKind == String typically holds "Empty" (no result) — skip
+
+            if (!string.IsNullOrEmpty(resultType) && resultType != "Empty")
+                pi.MergeResultItemType = resultType;
         }
 
         // ── BubbleFeatures ──
@@ -576,7 +638,7 @@ public class DataService
         }
 
         // Path 1b: ActivationSpawn → Constant (single item)
-        var directConst = GetString(asp, "Constant");
+        var directConst = GetConstantFirst(asp);
         if (!string.IsNullOrEmpty(directConst))
             return new Dictionary<string, double> { { directConst, 100.0 } };
 
@@ -601,7 +663,7 @@ public class DataService
                     return ParseOddsDictionary(odds);
             }
 
-            var constant = GetString(bp, "Constant");
+            var constant = GetConstantFirst(bp);
             if (!string.IsNullOrEmpty(constant))
                 return new Dictionary<string, double> { { constant, 100.0 } };
         }
@@ -759,13 +821,26 @@ public class DataService
             wikiMapping.Mappings.TryGetValue(itemType, out var entry) &&
             !string.IsNullOrEmpty(entry.ChainName))
         {
-            var ck = GetChainKeyFromItemType(itemType);
+            var ck = ResolveChainKeyFromItemType(itemType);
             var custom = _nameService.GetCustomName(ck);
             return !string.IsNullOrEmpty(custom) ? custom : entry.ChainName;
         }
 
-        var chainKey = GetChainKeyFromItemType(itemType);
+        var chainKey = ResolveChainKeyFromItemType(itemType);
         return ResolveChainDisplayName(chainKey);
+    }
+
+    /// <summary>
+    /// Resolves an ItemType to its owning chain's ConfigKey. Prefers the deterministic
+    /// <see cref="ItemTypeToConfigKey"/> reverse map built from JSON; falls back to the
+    /// static <see cref="GetChainKeyFromItemType"/> heuristic (last-underscore strip) for
+    /// ItemTypes that weren't loaded via JSON (e.g. wiki-only references, dump-less callers).
+    /// </summary>
+    public string ResolveChainKeyFromItemType(string itemType)
+    {
+        if (ItemTypeToConfigKey.TryGetValue(itemType, out var ck))
+            return ck;
+        return GetChainKeyFromItemType(itemType);
     }
 
     // ── JSON helpers ────────────────────────────────────────────────
@@ -785,6 +860,59 @@ public class DataService
         if (el.TryGetProperty(prop, out var val) && val.ValueKind == JsonValueKind.String)
             return val.GetString() ?? def;
         return def;
+    }
+
+    /// <summary>
+    /// Reads the first ItemType from a ConstantProducer "Constant" field, supporting both shapes:
+    /// new array `[{Item, Quantity}, ...]` (post v0.20.73 dumper) and legacy scalar string.
+    /// </summary>
+    internal static string GetConstantFirst(JsonElement el, string prop = "Constant", string def = "")
+    {
+        if (!el.TryGetProperty(prop, out var val)) return def;
+        if (val.ValueKind == JsonValueKind.String) return val.GetString() ?? def;
+        if (val.ValueKind == JsonValueKind.Array)
+        {
+            foreach (var elem in val.EnumerateArray())
+            {
+                if (elem.ValueKind == JsonValueKind.Object && elem.TryGetProperty("Item", out var it)
+                    && it.ValueKind == JsonValueKind.String)
+                {
+                    var s = it.GetString();
+                    if (!string.IsNullOrEmpty(s)) return s;
+                }
+            }
+        }
+        return def;
+    }
+
+    /// <summary>
+    /// Reads all (Item, Quantity) pairs from a ConstantProducer "Constant" field.
+    /// Legacy scalar string format yields a single (item, 1) entry. Empty list if missing/malformed.
+    /// </summary>
+    internal static List<(string Item, int Quantity)> GetConstantList(JsonElement el, string prop = "Constant")
+    {
+        var result = new List<(string, int)>();
+        if (!el.TryGetProperty(prop, out var val)) return result;
+        if (val.ValueKind == JsonValueKind.String)
+        {
+            var s = val.GetString();
+            if (!string.IsNullOrEmpty(s)) result.Add((s, 1));
+            return result;
+        }
+        if (val.ValueKind != JsonValueKind.Array) return result;
+        foreach (var elem in val.EnumerateArray())
+        {
+            if (elem.ValueKind != JsonValueKind.Object) continue;
+            string? item = null;
+            if (elem.TryGetProperty("Item", out var it) && it.ValueKind == JsonValueKind.String)
+                item = it.GetString();
+            int qty = 1;
+            if (elem.TryGetProperty("Quantity", out var q) && q.ValueKind == JsonValueKind.Number && q.TryGetInt32(out var n))
+                qty = n;
+            if (!string.IsNullOrEmpty(item))
+                result.Add((item, qty));
+        }
+        return result;
     }
 
     internal static int GetInt(JsonElement el, string prop, int def = 0)

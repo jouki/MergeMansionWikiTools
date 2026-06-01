@@ -723,7 +723,7 @@ public partial class MysteryImagesControl : UserControl
 		ParsedChain? chain = null;
 		if (_mystery?.EventItemType != null && _main.DataService != null)
 		{
-			var configKey = DataService.GetChainKeyFromItemType(_mystery.EventItemType);
+			var configKey = _main.DataService.ResolveChainKeyFromItemType(_mystery.EventItemType);
 			chain = _main.DataService.Chains.FirstOrDefault(c => c.ConfigKey == configKey);
 		}
 

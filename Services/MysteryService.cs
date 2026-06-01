@@ -28,6 +28,19 @@ public class MysteryService
         if (!root.TryGetProperty("Data", out var data)) return;
         if (!data.TryGetProperty("Progressions", out var progressions)) return;
 
+        // Build EventLevels lookup. Dumper v0.20.60+ emits tier refs as plain key strings
+        // (MetaRef.KeyObject); the resolved level data lives in Data.EventLevels[] indexed by
+        // EventLevelId. Older dumps inlined resolved objects into the tier arrays.
+        var eventLevelById = new Dictionary<string, JsonElement>(StringComparer.Ordinal);
+        if (data.TryGetProperty("EventLevels", out var eventLevels) && eventLevels.ValueKind == JsonValueKind.Array)
+        {
+            foreach (var lvl in eventLevels.EnumerateArray())
+            {
+                var id = GetString(lvl, "EventLevelId");
+                if (!string.IsNullOrEmpty(id)) eventLevelById[id] = lvl;
+            }
+        }
+
         foreach (var prog in progressions.EnumerateArray())
         {
             var eventId = GetString(prog, "ProgressionEventId");
@@ -71,36 +84,36 @@ public class MysteryService
 
             // Parse tiers — newer format has Track1/Track2 at top level;
             // older format has them nested inside V2Info, with PremiumEventLevelRefs as single paid tier
-            mystery.FreeTier = ParseTier(prog, "FreeEventLevelRefs");
-            mystery.SilverTier = ParseTier(prog, "Track1EventLevelRefs");
-            mystery.GoldTier = ParseTier(prog, "Track2EventLevelRefs");
-            mystery.BonusTier = ParseTier(prog, "BonusEventLevelRefs");
+            mystery.FreeTier = ParseTier(prog, "FreeEventLevelRefs", eventLevelById);
+            mystery.SilverTier = ParseTier(prog, "Track1EventLevelRefs", eventLevelById);
+            mystery.GoldTier = ParseTier(prog, "Track2EventLevelRefs", eventLevelById);
+            mystery.BonusTier = ParseTier(prog, "BonusEventLevelRefs", eventLevelById);
 
             // Fallback: check V2Info for Track1/Track2 (older dump format)
             if (prog.TryGetProperty("V2Info", out var v2Info) && GetBool(v2Info, "IsEnabled", true))
             {
                 if (mystery.SilverTier.Count == 0 && mystery.GoldTier.Count == 0)
                 {
-                    mystery.SilverTier = ParseTier(v2Info, "Track1EventLevelRefs");
-                    mystery.GoldTier = ParseTier(v2Info, "Track2EventLevelRefs");
+                    mystery.SilverTier = ParseTier(v2Info, "Track1EventLevelRefs", eventLevelById);
+                    mystery.GoldTier = ParseTier(v2Info, "Track2EventLevelRefs", eventLevelById);
                 }
                 // V2Info may have more Free levels than the top-level (e.g., 51 vs 46) — use the larger set
-                var v2Free = ParseTier(v2Info, "FreeEventLevelRefs");
+                var v2Free = ParseTier(v2Info, "FreeEventLevelRefs", eventLevelById);
                 if (v2Free.Count > mystery.FreeTier.Count)
                     mystery.FreeTier = v2Free;
                 if (mystery.BonusTier.Count == 0)
-                    mystery.BonusTier = ParseTier(v2Info, "BonusEventLevelRefs");
+                    mystery.BonusTier = ParseTier(v2Info, "BonusEventLevelRefs", eventLevelById);
             }
 
             // Fallback: PremiumEventLevelRefs (even older — single premium tier, use as Silver)
             if (mystery.SilverTier.Count == 0 && mystery.GoldTier.Count == 0)
             {
-                mystery.SilverTier = ParseTier(prog, "PremiumEventLevelRefs");
+                mystery.SilverTier = ParseTier(prog, "PremiumEventLevelRefs", eventLevelById);
             }
 
             // V1 recurring tiers (not present in V2)
-            mystery.RecurringFreeTier = ParseTier(prog, "RecurringFreeEventLevelRefs");
-            mystery.RecurringPremiumTier = ParseTier(prog, "RecurringPremiumEventLevelRefs");
+            mystery.RecurringFreeTier = ParseTier(prog, "RecurringFreeEventLevelRefs", eventLevelById);
+            mystery.RecurringPremiumTier = ParseTier(prog, "RecurringPremiumEventLevelRefs", eventLevelById);
 
             // HasZeroLevel — default true (matches V2 behavior)
             mystery.HasZeroLevel = GetBool(prog, "HasZeroLevel", true);
@@ -167,15 +180,42 @@ public class MysteryService
         return result.ToString().Replace('_', ' ').Trim();
     }
 
-    private static List<MysteryRewardLevel> ParseTier(JsonElement prog, string tierProperty)
+    private static List<MysteryRewardLevel> ParseTier(JsonElement prog, string tierProperty,
+        IReadOnlyDictionary<string, JsonElement> eventLevelById)
     {
         var levels = new List<MysteryRewardLevel>();
 
-        if (!prog.TryGetProperty(tierProperty, out var tierArray)) return levels;
+        if (!prog.TryGetProperty(tierProperty, out var tierArray)
+            || tierArray.ValueKind != JsonValueKind.Array) return levels;
 
         int levelIndex = 0;
-        foreach (var levelEl in tierArray.EnumerateArray())
+        foreach (var rawEl in tierArray.EnumerateArray())
         {
+            // Tier ref may be: (a) a plain key string (dumper v0.20.60+ — resolve via
+            // eventLevelById lookup), or (b) an inlined resolved object (older dumps).
+            JsonElement levelEl;
+            if (rawEl.ValueKind == JsonValueKind.String)
+            {
+                var key = rawEl.GetString() ?? "";
+                if (!eventLevelById.TryGetValue(key, out levelEl))
+                {
+                    // Reference points to a missing event level — still emit an empty level
+                    // so per-tier level counts stay consistent with the source.
+                    levels.Add(new MysteryRewardLevel { Level = levelIndex, XpRequired = 0 });
+                    levelIndex++;
+                    continue;
+                }
+            }
+            else if (rawEl.ValueKind == JsonValueKind.Object)
+            {
+                levelEl = rawEl;
+            }
+            else
+            {
+                levelIndex++;
+                continue;
+            }
+
             var level = new MysteryRewardLevel
             {
                 Level = levelIndex,
@@ -183,7 +223,8 @@ public class MysteryService
             };
             levelIndex++;
 
-            if (levelEl.TryGetProperty("Rewards", out var rewardsArray))
+            if (levelEl.TryGetProperty("Rewards", out var rewardsArray)
+                && rewardsArray.ValueKind == JsonValueKind.Array)
             {
                 foreach (var rewardEl in rewardsArray.EnumerateArray())
                 {
@@ -256,7 +297,9 @@ public class MysteryService
             rewards.Add(reward);
         }
 
-        // RewardDecoration — actual data is nested inside DecorationRef
+        // RewardDecoration — actual data is in DecorationRef.
+        // Dumper v0.20.60+ emits MetaRef as raw key string (= KeyObject), older dumps had
+        // nested object {DecorationId, DisplayName}. Handle both shapes.
         if (rewardEl.TryGetProperty("RewardDecoration", out var deco))
         {
             var reward = new MysteryReward
@@ -267,8 +310,15 @@ public class MysteryService
 
             if (deco.TryGetProperty("DecorationRef", out var decoRef))
             {
-                reward.DecorationId = GetString(decoRef, "DecorationId");
-                reward.DecorationName = GetString(decoRef, "DisplayName");
+                if (decoRef.ValueKind == JsonValueKind.String)
+                {
+                    reward.DecorationId = decoRef.GetString();
+                }
+                else if (decoRef.ValueKind == JsonValueKind.Object)
+                {
+                    reward.DecorationId = GetString(decoRef, "DecorationId");
+                    reward.DecorationName = GetString(decoRef, "DisplayName");
+                }
             }
 
             rewards.Add(reward);
@@ -285,8 +335,15 @@ public class MysteryService
 
             if (layered.TryGetProperty("DecorationRef", out var layeredRef))
             {
-                reward.DecorationId = GetString(layeredRef, "DecorationId");
-                reward.DecorationName = GetString(layeredRef, "DisplayName");
+                if (layeredRef.ValueKind == JsonValueKind.String)
+                {
+                    reward.DecorationId = layeredRef.GetString();
+                }
+                else if (layeredRef.ValueKind == JsonValueKind.Object)
+                {
+                    reward.DecorationId = GetString(layeredRef, "DecorationId");
+                    reward.DecorationName = GetString(layeredRef, "DisplayName");
+                }
             }
 
             rewards.Add(reward);
@@ -334,7 +391,12 @@ public class MysteryService
             };
 
             if (pet.TryGetProperty("PetRef", out var petRef))
-                reward.PetName = GetString(petRef, "ConfigKey");
+            {
+                if (petRef.ValueKind == JsonValueKind.String)
+                    reward.PetName = petRef.GetString();
+                else if (petRef.ValueKind == JsonValueKind.Object)
+                    reward.PetName = GetString(petRef, "ConfigKey");
+            }
 
             rewards.Add(reward);
         }
@@ -347,6 +409,45 @@ public class MysteryService
                 Type = MysteryRewardType.InformantTip,
                 Amount = 1,
                 InformantTipCardId = GetString(tip, "CardId"),
+            });
+        }
+
+        // RewardCooldownRemover — "Unlimited Production" booster.
+        // Shape: {"Duration": 180000, "Source": "..."} — Duration in ms, no Amount field (always 1).
+        // Removes producer cooldowns for the specified duration (in game UI shows as
+        // "Unlimited Production" timer, despite the dialog FTUE wording).
+        if (rewardEl.TryGetProperty("RewardCooldownRemover", out var cdr))
+        {
+            rewards.Add(new MysteryReward
+            {
+                Type = MysteryRewardType.CooldownRemover,
+                Amount = 1,
+                DurationMs = GetLong(cdr, "Duration"),
+            });
+        }
+
+        // RewardActivateInfiniteEnergy — Unlimited Energy booster, auto-activates on claim
+        // (distinct from the inventory item InfiniteEnergySmall_01 etc.).
+        // Shape: {"Duration": 180000, "Source": "..."}.
+        if (rewardEl.TryGetProperty("RewardActivateInfiniteEnergy", out var aie))
+        {
+            rewards.Add(new MysteryReward
+            {
+                Type = MysteryRewardType.ActivateInfiniteEnergy,
+                Amount = 1,
+                DurationMs = GetLong(aie, "Duration"),
+            });
+        }
+
+        // RewardSkipTime — Time Skip booster (auto-applied on claim).
+        // Shape: {"MergeBoardIds": [...], "DurationToSkip": 1800000, "Source": "..."}.
+        if (rewardEl.TryGetProperty("RewardSkipTime", out var skip))
+        {
+            rewards.Add(new MysteryReward
+            {
+                Type = MysteryRewardType.SkipTime,
+                Amount = 1,
+                DurationMs = GetLong(skip, "DurationToSkip"),
             });
         }
 
@@ -438,7 +539,18 @@ public class MysteryService
                         continue;
                     }
 
-                    // Priority 3: DataService item names
+                    // Priority 3: DataService — prefer CHAIN name (e.g. "Gardening Tools" for
+                    // GardenTools_06) over individual item name ("Knife"). Wiki templates link
+                    // to the chain page, not to per-level item pages. Level preserved from
+                    // ItemLevels so {{Item/Group|Gardening Tools|6}} renders the correct level.
+                    if (ds.ItemToChainName.TryGetValue(reward.ItemKey, out var dsChain)
+                        && !string.IsNullOrEmpty(dsChain))
+                    {
+                        reward.ItemDisplayName = dsChain;
+                        if (ds.ItemLevels.TryGetValue(reward.ItemKey, out var dsLevel))
+                            reward.ItemLevel = dsLevel;
+                        continue;
+                    }
                     if (ds.ItemNames.TryGetValue(reward.ItemKey, out var dsName))
                     {
                         reward.ItemDisplayName = dsName;

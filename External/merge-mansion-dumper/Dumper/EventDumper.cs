@@ -67,6 +67,62 @@ namespace merge_mansion_dumper.Dumper
             if (_filters.HasFlag(EventFilters.Mysteries))
                 events["Progressions"] = config.ProgressionEvents?.EnumerateAll().Select(x => x.Value).ToArray() ?? Array.Empty<object>();
 
+            // ProgressionPackEvents + ProgressionPacks (= "Merge It Up" — merge-counter pass with
+            // free/premium tracks). The game classifies these in their own library, NOT under
+            // any of the *Event filters above, so they were silently missing from every dump.
+            //
+            // ProgressionPackEvents → event-level metadata (ConfigKey, Schedule with StartDate +
+            //   Duration via MetaActivableParams.Schedule, PremiumIAP product, Segments, Priority,
+            //   ObjectiveType, ObjectiveParameter, OfferGroupId, PlacementId).
+            //
+            // ProgressionPacks → pack content (FreeOffers + PremiumOffers per level —
+            //   RewardCoins/RewardGems/RewardItem/etc., LevelRequirements thresholds list,
+            //   ObjectiveType (Merge=1, UseProducer=3, CompleteTasks=7 — see StatsObjectiveType.cs)).
+            //
+            // Always exported — no filter flag, mirroring DailyScoop / EventLevels pattern.
+            // Custom Dictionary shape so DisplayName/Description are resolved through the language
+            // table (`PP_Shared_MainHeader` → "Merge It Up") and so each event surfaces its linked
+            // pack contents inline — saves jumping between two top-level arrays just to read one event.
+            events["ProgressionPackEvents"] = config.ProgressionPackEvents?.EnumerateAll()
+                .OrderBy(x => GetProgressionPackEventStart(x.Value))
+                .Select(x =>
+                {
+                    var evt = (GameLogic.ProgressivePacks.ProgressionPackEventInfo)x.Value;
+                    var packId = evt.ProgressionPackId?.ToString();
+                    var pack = !string.IsNullOrEmpty(packId)
+                        ? config.ProgressionPacks?.EnumerateAll()
+                            .Where(p => string.Equals(((GameLogic.ProgressivePacks.ProgressionPack)p.Value).ConfigKey?.ToString(), packId, StringComparison.Ordinal))
+                            .Select(p => (GameLogic.ProgressivePacks.ProgressionPack)p.Value)
+                            .FirstOrDefault()
+                        : null;
+
+                    return new Dictionary<string, object>
+                    {
+                        ["ConfigKey"] = evt.ConfigKey?.ToString(),
+                        ["DisplayName"] = Localize(evt.DisplayName) ?? evt.DisplayName,
+                        ["DisplayNameLocId"] = evt.DisplayName,
+                        ["Description"] = Localize(evt.Description) ?? evt.Description,
+                        ["DescriptionLocId"] = evt.Description,
+                        ["ActivableParams"] = evt.ActivableParams,
+                        ["UnlockRequirement"] = evt.UnlockRequirement,
+                        ["GroupId"] = evt.GroupId?.ToString(),
+                        ["Priority"] = evt.Priority,
+                        ["PremiumIAP"] = evt.PremiumIAP?.KeyObject?.ToString(),
+                        ["UseOfferId"] = evt.UseOfferId,
+                        ["OfferGroupId"] = evt.OfferGroupId?.KeyObject?.ToString(),
+                        ["PlacementId"] = evt.PlacementId,
+                        ["CategoryInfo"] = evt.CategoryInfo,
+                        ["ProgressionPackId"] = packId,
+                        ["Pack"] = pack != null ? BuildProgressionPackPayload(pack) : null,
+                    };
+                }).ToArray() ?? Array.Empty<object>();
+
+            // Standalone pack library (also keep for completeness — some packs may be referenced
+            // by multiple event instances or by AB patches that override the pack content).
+            events["ProgressionPacks"] = config.ProgressionPacks?.EnumerateAll()
+                .Select(x => BuildProgressionPackPayload((GameLogic.ProgressivePacks.ProgressionPack)x.Value))
+                .ToArray() ?? Array.Empty<object>();
+
             // GarageCleanups → GarageCleanup filter
             if (_filters.HasFlag(EventFilters.GarageCleanup))
                 events["GarageCleanups"] = config.GarageCleanupEvents?.EnumerateAll().Select(x => x.Value).ToArray() ?? Array.Empty<object>();
@@ -202,6 +258,55 @@ namespace merge_mansion_dumper.Dumper
             }
 
             return events;
+        }
+
+        // ── ProgressionPack zip-merge ─────────────────────────────────
+        // FreeOffers[i] + PremiumOffers[i] + LevelRequirements[i] are three parallel arrays
+        // indexed by level (1..N). Wiki consumers always want them paired, so emit a
+        // single "Levels" array where each entry holds the merge threshold + both rewards.
+
+        private static Dictionary<string, object> BuildProgressionPackPayload(GameLogic.ProgressivePacks.ProgressionPack pack)
+        {
+            var levels = new List<Dictionary<string, object>>();
+            var free = pack.FreeOffers ?? new List<GameLogic.Player.Rewards.PlayerReward>();
+            var premium = pack.PremiumOffers ?? new List<GameLogic.Player.Rewards.PlayerReward>();
+            var reqs = pack.LevelRequirements ?? new List<int>();
+            int count = Math.Max(reqs.Count, Math.Max(free.Count, premium.Count));
+
+            for (int i = 0; i < count; i++)
+            {
+                levels.Add(new Dictionary<string, object>
+                {
+                    ["Level"] = i + 1,
+                    ["MergesRequired"] = i < reqs.Count ? (object)reqs[i] : null,
+                    ["FreeReward"] = i < free.Count ? (object)free[i] : null,
+                    ["PremiumReward"] = i < premium.Count ? (object)premium[i] : null,
+                });
+            }
+
+            return new Dictionary<string, object>
+            {
+                ["ConfigKey"] = pack.ConfigKey?.ToString(),
+                ["ObjectiveType"] = pack.ObjectiveType.ToString(),
+                ["ObjectiveParameter"] = pack.ObjectiveParameter,
+                ["LevelCount"] = levels.Count,
+                ["Levels"] = levels,
+            };
+        }
+
+        private static DateTime GetProgressionPackEventStart(object evt)
+        {
+            var typed = evt as GameLogic.ProgressivePacks.ProgressionPackEventInfo;
+            try
+            {
+                var sched = typed?.ActivableParams?.Schedule as Metaplay.Core.Schedule.MetaRecurringCalendarSchedule;
+                if (sched?.Start != null)
+                    return new DateTime(sched.Start.Year, sched.Start.Month, sched.Start.Day,
+                                        sched.Start.Hour, sched.Start.Minute, sched.Start.Second,
+                                        DateTimeKind.Utc);
+            }
+            catch { }
+            return DateTime.MaxValue;
         }
 
         // ── ConfigKey sort helpers (e.g. "MySummerTea_38" → ("MySummerTea", 38)) ──

@@ -916,10 +916,47 @@ public static class MysteryWikiService
 				if (reward.Type == MysteryRewardType.Decoration)
 					reward.ItemLevel = decoNum++;
 
+		// ── Pre-compute XP totals for cumulative + % Progress columns ──
+		// Cumulative is monotonically growing across L0 → regular L1..N → bonus/recurring.
+		// The % Progress denominator is anchored at the LAST regular level (= L50), NOT the
+		// grand total — so premium/bonus rows go above 100 % to reflect that those rewards
+		// are extra effort beyond the standard pass completion.
+		int regularEndCumulative = 0;
+		int cumulativeXp = 0;
+
+		// Pre-walk regular levels (L0 + L1..N) to find regular-end cumulative.
+		int regularStart = mystery.HasZeroLevel ? 1 : 0;
+		int regularMax = Math.Max(mystery.FreeTier.Count,
+			Math.Max(mystery.SilverTier.Count, mystery.GoldTier.Count));
+		// L0 contributes 0 XP, no need to add it.
+		for (int i = regularStart; i < regularMax; i++)
+		{
+			var freeLv = i < mystery.FreeTier.Count ? mystery.FreeTier[i] : null;
+			var silverLv = i < mystery.SilverTier.Count ? mystery.SilverTier[i] : null;
+			var goldLv = i < mystery.GoldTier.Count ? mystery.GoldTier[i] : null;
+			regularEndCumulative += freeLv?.XpRequired ?? silverLv?.XpRequired ?? goldLv?.XpRequired ?? 0;
+		}
+
+		string EmitPassXpRow(int xp, bool isZeroLevel)
+		{
+			cumulativeXp += xp;
+			double pct = regularEndCumulative > 0 ? (double)cumulativeXp / regularEndCumulative * 100.0 : 0.0;
+			// Anchor "100" at the regular-end row to avoid 99.99/100.01 float drift.
+			string pctStr = Math.Abs(pct - 100.0) < 0.05
+				? "100"
+				: pct.ToString("0.#", System.Globalization.CultureInfo.InvariantCulture);
+			// nowrap on the cell keeps "'''N''' / cumN" on a single line; otherwise the
+			// space between numerator and slash lets MediaWiki break it into two visual rows.
+			if (isZeroLevel)
+				return "| style=\"white-space:nowrap\" | {{Pass XP}} '''-''' / 0\n| -";
+			return $"| style=\"white-space:nowrap\" | {{{{Pass XP}}}} '''{xp}''' / {cumulativeXp}\n| {pctStr} %";
+		}
+
 		// ── Table header ──
 		sb.AppendLine("{| class=\"article-table\"");
 		sb.AppendLine("! Level");
-		sb.AppendLine("! {{Pass XP}}Points Needed");
+		sb.AppendLine("! style=\"white-space:nowrap\" | {{Pass XP}} Points Needed");
+		sb.AppendLine("! % Progress");
 		sb.AppendLine("! F2P  Reward");
 		if (isV2)
 		{
@@ -936,7 +973,7 @@ public static class MysteryWikiService
 		{
 			sb.AppendLine("|-");
 			sb.AppendLine("| 0");
-			sb.AppendLine("| {{Pass XP}} -");
+			sb.AppendLine(EmitPassXpRow(0, isZeroLevel: true));
 
 			// Free L0 from data (typically Energy 10)
 			var freeL0 = mystery.FreeTier.Count > 0 ? mystery.FreeTier[0] : null;
@@ -969,7 +1006,7 @@ public static class MysteryWikiService
 
 			sb.AppendLine("|-");
 			sb.AppendLine($"| {i}");
-			sb.AppendLine($"| {{{{Pass XP}}}} {xp}");
+			sb.AppendLine(EmitPassXpRow(xp, isZeroLevel: false));
 			sb.AppendLine($"| {FormatRewards(freeLevel?.Rewards, mystery, "free", true)}");
 
 			if (isV2)
@@ -989,7 +1026,7 @@ public static class MysteryWikiService
 			var bonus = mystery.BonusTier[j];
 			sb.AppendLine("|-");
 			sb.AppendLine($"| {{{{PremiumLevel|{j + 1}}}}}");
-			sb.AppendLine($"| {{{{Pass XP}}}} {bonus.XpRequired}");
+			sb.AppendLine(EmitPassXpRow(bonus.XpRequired, isZeroLevel: false));
 			sb.AppendLine("| {{Dash}}");
 			string bonusContent = FormatRewards(bonus.Rewards, mystery, "free", true);
 			if (isV2)
@@ -1010,7 +1047,7 @@ public static class MysteryWikiService
 
 				sb.AppendLine("|-");
 				sb.AppendLine($"| {{{{PremiumLevel|{k + 1}}}}}");
-				sb.AppendLine($"| {{{{Pass XP}}}} {recurXp}");
+				sb.AppendLine(EmitPassXpRow(recurXp, isZeroLevel: false));
 				sb.AppendLine($"| {FormatRewards(recurFree?.Rewards, mystery, "free", true)}");
 				sb.AppendLine($"| {FormatRewards(recurPrem?.Rewards, mystery, "gold", true)}");
 			}
@@ -1083,6 +1120,9 @@ public static class MysteryWikiService
 			MysteryRewardType.CardPack => FormatCardPack(reward),
 			MysteryRewardType.Pet => "{{Decoration|silver|0|text={{{pet}}}}}",
 			MysteryRewardType.InformantTip => FormatInformantTip(reward, mystery),
+			MysteryRewardType.CooldownRemover => FormatCooldownRemover(reward),
+			MysteryRewardType.ActivateInfiniteEnergy => FormatActivateInfiniteEnergy(reward),
+			MysteryRewardType.SkipTime => FormatSkipTime(reward),
 			_ => "",
 		};
 	}
@@ -1155,6 +1195,43 @@ public static class MysteryWikiService
 			}
 		}
 		return $"{{{{Item/nolevel|Clues Envelope|{value}}}}}";
+	}
+
+	private static string FormatCooldownRemover(MysteryReward reward)
+	{
+		// "Unlimited Production" booster (AAR_CooldownRemover_FTUE wording in dialogues).
+		// Game UI shows duration as label on the icon. DurationMs is in milliseconds.
+		string durationText = reward.DurationMs.HasValue
+			? FormatDuration(reward.DurationMs.Value)
+			: "";
+		return string.IsNullOrEmpty(durationText)
+			? "{{Item/nolevel|Unlimited Production}}"
+			: $"{durationText} {{{{Item/nolevel|Unlimited Production}}}}";
+	}
+
+	private static string FormatActivateInfiniteEnergy(MysteryReward reward)
+	{
+		// Auto-activated Unlimited Energy booster (RewardActivateInfiniteEnergy). Distinct from
+		// the inventory item Unlimited Energy chain but shares the display name on wiki;
+		// level 0 disambiguates the auto-activate variant from item levels 1/2/3.
+		string durationText = reward.DurationMs.HasValue
+			? FormatDuration(reward.DurationMs.Value)
+			: "";
+		return string.IsNullOrEmpty(durationText)
+			? "{{Item/nolevel|Unlimited Energy|0}}"
+			: $"{durationText} {{{{Item/nolevel|Unlimited Energy|0}}}}";
+	}
+
+	private static string FormatSkipTime(MysteryReward reward)
+	{
+		// RewardSkipTime — auto-applied Time Skip booster (advances all producer timers on
+		// the specified merge boards by DurationToSkip ms).
+		string durationText = reward.DurationMs.HasValue
+			? FormatDuration(reward.DurationMs.Value)
+			: "";
+		return string.IsNullOrEmpty(durationText)
+			? "{{Item/nolevel|Time Skip}}"
+			: $"{durationText} {{{{Item/nolevel|Time Skip}}}}";
 	}
 
 	private static string FormatInformantTip(MysteryReward reward, MysteryEvent mystery)

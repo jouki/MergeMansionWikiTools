@@ -60,6 +60,20 @@ internal static class Program
             // --dump-events-patched <configPath> <patchPath> <languagePath> <outputDir>
             return DumpEventsPatched(args[1], args[2], args[3], args[4]);
         }
+        if (args.Length >= 4 && args[0] == "--probe-bubble")
+        {
+            // --probe-bubble <_DATA_dir> <itemPrefix> <languagePath>
+            // Scans every (configArchive × patchFile × (expId,varId)) tuple individually
+            // (no dedup) and probes BubbleFeatures.SpawnOdds for matching items.
+            return ProbeBubble(args[1], args[2], args[3]);
+        }
+        if (args.Length >= 4 && args[0] == "--dump-chain")
+        {
+            // --dump-chain <configPath> <languagePath> <outputDir>
+            // Runs only MergeChainDumper → chain_item_odds.json. Used to validate
+            // ConstantProducer multi-product serialization (v0.20.73+).
+            return DumpChain(args[1], args[2], args[3]);
+        }
 
         if (args.Length < 3)
         {
@@ -439,6 +453,129 @@ internal static class Program
             Console.Error.WriteLine($"FATAL: {ex.GetType().Name}: {ex.Message}");
             Console.Error.WriteLine(ex.StackTrace);
             return 1;
+        }
+    }
+
+    private static int ProbeBubble(string dataDir, string itemPrefix, string languagePath)
+    {
+        Console.WriteLine($"=== DumpHarness --probe-bubble (itemPrefix={itemPrefix}) ===");
+        Console.WriteLine($"Data dir: {dataDir}");
+
+        var cDir = Path.Combine(dataDir, "C");
+        var pDir = Path.Combine(dataDir, "P");
+        if (!Directory.Exists(cDir) || !Directory.Exists(pDir))
+        {
+            Console.Error.WriteLine("Expected <dataDir>/C/ and <dataDir>/P/");
+            return 2;
+        }
+
+        try
+        {
+            MetaplayCore.Initialize();
+            if (!string.IsNullOrEmpty(languagePath) && File.Exists(languagePath))
+            {
+                var langHash = ContentHash.ParseString(Path.GetFileName(languagePath));
+                MetaplaySDK.ActiveLanguage = LocalizationLanguage.ImportBinary(langHash, File.ReadAllBytes(languagePath));
+            }
+
+            var configFiles = Directory.GetFiles(cDir);
+            var patchFiles = Directory.GetFiles(pDir);
+            Console.WriteLine($"Configs: {configFiles.Length}, patch files: {patchFiles.Length}");
+
+            // Track ALL patch envelopes per file (no merge dedup)
+            var allPatches = new List<(string FileName, Metaplay.Core.Player.PlayerExperimentId ExpId, Metaplay.Core.Player.ExperimentVariantId VarId, Metaplay.Core.Config.GameConfigPatchEnvelope Env)>();
+            foreach (var pf in patchFiles)
+            {
+                var fileName = Path.GetFileName(pf);
+                var spec = Metaplay.Core.Config.GameConfigSpecializationPatches.FromBytes(File.ReadAllBytes(pf));
+                foreach (var (expId, vs) in spec.Patches)
+                    foreach (var (varId, bytes) in vs)
+                        allPatches.Add((fileName, expId, varId, Metaplay.Core.Config.GameConfigPatchEnvelope.Deserialize(bytes)));
+            }
+            Console.WriteLine($"Total raw (expId, varId) tuples across files: {allPatches.Count}");
+            Console.WriteLine();
+
+            foreach (var cf in configFiles)
+            {
+                var cName = Path.GetFileName(cf);
+                Console.WriteLine($"=== CONFIG ARCHIVE: {cName} ===");
+                var archive = Metaplay.Core.Config.ConfigArchive.FromBytes(File.ReadAllBytes(cf));
+                var baseConfig = (GameLogic.Config.SharedGameConfig)Metaplay.Core.Config.GameConfigFactory.Instance.ImportSharedGameConfig(
+                    Metaplay.Core.Config.PatchedConfigArchive.WithNoPatches(archive));
+
+                PrintBubbleSnapshot("BASELINE", baseConfig, itemPrefix);
+
+                foreach (var (fileName, expId, varId, env) in allPatches)
+                {
+                    var label = $"{fileName.Substring(0, 8)}.. / {expId}_{varId}";
+                    try
+                    {
+                        var pa = new Metaplay.Core.Config.PatchedConfigArchive(archive, new[] { env });
+                        var pcfg = GameLogic.Config.SharedGameConfig.ImportPatchedFrom(baseConfig, pa, env.EntryNames.ToArray());
+                        PrintBubbleSnapshot(label, pcfg, itemPrefix);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"  [{label}] FAILED: {ex.GetType().Name}: {ex.Message}");
+                    }
+                }
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("=== Done ===");
+            return 0;
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"FATAL: {ex.GetType().Name}: {ex.Message}");
+            Console.Error.WriteLine(ex.StackTrace);
+            return 1;
+        }
+    }
+
+    private static void PrintBubbleSnapshot(string label, GameLogic.Config.SharedGameConfig cfg, string itemPrefix)
+    {
+        try
+        {
+            // SingleMergeChainElement.First() resolves via ClientGlobal.SharedGameConfig.Items.
+            // Swap the global so the iteration reads the patched config's items, not the
+            // last assigned baseline.
+            ClientGlobal.SharedGameConfig = cfg;
+
+            var items = new List<GameLogic.Player.Items.ItemDefinition>();
+            foreach (var (key, chainObj) in cfg.MergeChains.EnumerateAll())
+            {
+                var chain = (GameLogic.MergeChains.MergeChainDefinition)chainObj;
+                if (chain?.PrimaryChain == null) continue;
+                foreach (var element in chain.PrimaryChain)
+                {
+                    GameLogic.Player.Items.ItemDefinition it = null;
+                    try { it = element?.First(); } catch { continue; }
+                    if (it?.ItemType?.ToString().StartsWith(itemPrefix, StringComparison.Ordinal) == true)
+                        items.Add(it);
+                }
+            }
+            items = items.OrderBy(it => it.ItemType?.ToString()).ToList();
+            if (items.Count == 0) return;
+
+            var sb = new System.Text.StringBuilder();
+            sb.Append($"  [{label}] ");
+            foreach (var it in items)
+            {
+                var bf = it.BubbleFeatures;
+                if (bf == null) { sb.Append($"{it.ItemType}=NULL "); }
+                else { sb.Append($"{it.ItemType}=odds:{bf.SpawnOdds} "); }
+            }
+            Console.WriteLine(sb.ToString().TrimEnd());
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"  [{label}] SNAPSHOT FAILED: {ex.GetType().Name}: {ex.Message}");
+            if (ex.StackTrace != null)
+            {
+                var firstFrame = ex.StackTrace.Split('\n').FirstOrDefault();
+                if (firstFrame != null) Console.WriteLine($"    at {firstFrame.Trim()}");
+            }
         }
     }
 
@@ -1090,6 +1227,42 @@ internal static class Program
         catch (Exception ex)
         {
             Console.Error.WriteLine($"FATAL: {ex.GetType().Name}: {ex.Message}");
+            return 1;
+        }
+    }
+
+    private static int DumpChain(string configPath, string languagePath, string outputDir)
+    {
+        Console.WriteLine("=== DumpHarness --dump-chain (chain_item_odds.json only) ===");
+        Console.WriteLine($"Config:   {configPath}");
+        Console.WriteLine($"Language: {languagePath}");
+        Console.WriteLine($"Output:   {outputDir}");
+        Directory.CreateDirectory(outputDir);
+
+        try
+        {
+            MetaplayCore.Initialize();
+            if (!string.IsNullOrEmpty(languagePath) && File.Exists(languagePath))
+            {
+                var langHash = ContentHash.ParseString(Path.GetFileName(languagePath));
+                MetaplaySDK.ActiveLanguage = LocalizationLanguage.ImportBinary(langHash, File.ReadAllBytes(languagePath));
+            }
+
+            var archiveBytes = File.ReadAllBytes(configPath);
+            var archive = ConfigArchive.FromBytes(archiveBytes);
+            var patchedArchive = PatchedConfigArchive.WithNoPatches(archive);
+            var gameConfig = (SharedGameConfig)GameConfigFactory.Instance.ImportSharedGameConfig(patchedArchive);
+            ClientGlobal.SharedGameConfig = gameConfig;
+
+            var outPath = Path.Combine(outputDir, "chain_item_odds.json");
+            new MergeChainDumper(dropsAsPercent: true).WriteJson(outPath, gameConfig);
+            Console.WriteLine($"-> {outPath} ({new FileInfo(outPath).Length / 1024} KB)");
+            return 0;
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"DumpChain failed: {ex.Message}");
+            Console.Error.WriteLine(ex.StackTrace);
             return 1;
         }
     }

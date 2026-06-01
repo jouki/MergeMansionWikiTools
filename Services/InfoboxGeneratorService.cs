@@ -241,24 +241,32 @@ public class InfoboxGeneratorService
                 && string.IsNullOrEmpty(i.SpawnDecayIntoItemType));
         if (depleting) types.Add("Depleting Item");
 
-        bool fueled = chain.Items.Any(i => i.IsSink && !IsSinkSuppressed(i));
+        // Fueled Item — chain consumes other items. Two consumption mechanics: sink fuel
+        // (NumericConfigKey-based, e.g. ScoreTargets) and order tasks (ItemType-based, e.g.
+        // The Cinema's order requires Cinema Ticket + Cinema Snacks per movie).
+        bool fueled = chain.Items.Any(i =>
+            (i.IsSink && !IsSinkSuppressed(i)) ||
+            (i.OrderTasks != null && i.OrderTasks.Any(t => t.Required.Count > 0)));
         if (fueled) types.Add("Fueled Item");
 
-        // Fuel Item — any item's NumericConfigKey is referenced by a sink in another chain
+        // Fuel Item — this chain's items are consumed elsewhere. Mirror of Fueled detection:
+        // sink consumption matches via NumericConfigKey; order consumption matches via ItemType.
         var myConfigKeys = chain.Items
             .Where(i => !string.IsNullOrEmpty(i.NumericConfigKey))
             .Select(i => i.NumericConfigKey)
             .ToHashSet(StringComparer.OrdinalIgnoreCase);
-        if (myConfigKeys.Count > 0)
-        {
-            bool isFuel = allChains
-                .Where(c => c != chain)
-                .SelectMany(c => c.Items)
-                .Where(i => i.IsSink && !IsSinkSuppressed(i) && i.SinkRequirementConfigKeys != null)
-                .SelectMany(i => i.SinkRequirementConfigKeys!)
-                .Any(req => myConfigKeys.Contains(req));
-            if (isFuel) types.Add("Fuel Item");
-        }
+        bool isFuelBySink = myConfigKeys.Count > 0 && allChains
+            .Where(c => c != chain)
+            .SelectMany(c => c.Items)
+            .Where(i => i.IsSink && !IsSinkSuppressed(i) && i.SinkRequirementConfigKeys != null)
+            .SelectMany(i => i.SinkRequirementConfigKeys!)
+            .Any(req => myConfigKeys.Contains(req));
+        bool isFuelByOrder = myItemTypes.Count > 0 && allChains
+            .Where(c => c != chain)
+            .SelectMany(c => c.Items)
+            .Any(i => i.IsOrder && i.OrderRequiredItems != null
+                && i.OrderRequiredItems.Keys.Any(k => myItemTypes.Contains(k)));
+        if (isFuelBySink || isFuelByOrder) types.Add("Fuel Item");
 
         if (opts.IsPoints) types.Add("Points Item");
 
@@ -598,17 +606,35 @@ public class InfoboxGeneratorService
 
         foreach (var item in chain.Items)
         {
-            if (!item.IsSink || string.IsNullOrEmpty(item.SinkRewardItemType) || IsSinkSuppressed(item)) continue;
-
-            if (itemTypeToChain.TryGetValue(item.SinkRewardItemType, out var rewardChain))
+            // Sink reward (Transformative Item — e.g. Distillation Apparatus output)
+            if (item.IsSink && !string.IsNullOrEmpty(item.SinkRewardItemType) && !IsSinkSuppressed(item))
             {
-                var rewardItem = rewardChain.Items
-                    .FirstOrDefault(i => string.Equals(i.ItemType, item.SinkRewardItemType, StringComparison.OrdinalIgnoreCase));
-                int lvl = ResolveLevel(item.SinkRewardItemType, rewardItem);
-                var chainName = ResolveChainName(rewardChain, item.SinkRewardItemType);
+                if (itemTypeToChain.TryGetValue(item.SinkRewardItemType, out var rewardChain))
+                {
+                    var rewardItem = rewardChain.Items
+                        .FirstOrDefault(i => string.Equals(i.ItemType, item.SinkRewardItemType, StringComparison.OrdinalIgnoreCase));
+                    int lvl = ResolveLevel(item.SinkRewardItemType, rewardItem);
+                    var chainName = ResolveChainName(rewardChain, item.SinkRewardItemType);
 
-                if (!seen.Add((chainName, lvl))) continue;
-                result.Add($"{{{{Item|{chainName}|{lvl}}}}}");
+                    if (seen.Add((chainName, lvl)))
+                        result.Add($"{{{{Item|{chainName}|{lvl}}}}}");
+                }
+            }
+
+            // Cross-chain merge result (e.g. Bigger Pile of Seed Bags L4 → Golden Seed L1).
+            // Only emit when the merge target lives in a DIFFERENT chain — same-chain L+1
+            // merges are the default progression and don't need a transforms_to row.
+            if (!string.IsNullOrEmpty(item.MergeResultItemType)
+                && itemTypeToChain.TryGetValue(item.MergeResultItemType, out var mergeChain)
+                && mergeChain != chain)
+            {
+                var mergeItem = mergeChain.Items
+                    .FirstOrDefault(i => string.Equals(i.ItemType, item.MergeResultItemType, StringComparison.OrdinalIgnoreCase));
+                int lvl = ResolveLevel(item.MergeResultItemType, mergeItem);
+                var chainName = ResolveChainName(mergeChain, item.MergeResultItemType);
+
+                if (seen.Add((chainName, lvl)))
+                    result.Add($"{{{{Item|{chainName}|{lvl}}}}}");
             }
         }
 
@@ -734,10 +760,18 @@ public class InfoboxGeneratorService
         foreach (var (_, (needChain, items, _, _)) in byChain.OrderBy(kv => kv.Value.SortKey).ThenBy(kv => kv.Value.InsertOrder))
         {
             var chainName = ResolveChainName(needChain, needChain.Items.FirstOrDefault()?.ItemType);
-            foreach (var (lvl, amt) in items.OrderBy(x => x.Level))
+            bool needsFullName = !needChain.IsEventChain && HasParentheticalSuffix(chainName);
+            string fullNameSuffix = needsFullName ? "|fullName=true" : "";
+
+            // Aggregate consecutive levels into Item/Group ranges. Per-level amounts
+            // are intentionally dropped — infobox is overview-only; per-task amounts
+            // live in the Tasks table on the same wiki page.
+            var levelSet = new SortedSet<int>(items.Select(x => x.Level));
+            foreach (var (min, max) in SplitIntoRuns(levelSet))
             {
-                var template = $"{{{{Item|{chainName}|{lvl}}}}}";
-                result.Add(amt > 1 ? $"{amt}x {template}" : template);
+                result.Add(min == max
+                    ? $"{{{{Item|{chainName}|{min}{fullNameSuffix}}}}}"
+                    : $"{{{{Item/Group|{chainName}|{max}|min={min}|max={max}{fullNameSuffix}}}}}");
             }
         }
 

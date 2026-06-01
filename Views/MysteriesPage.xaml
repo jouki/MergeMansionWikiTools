@@ -17,6 +17,20 @@
                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                        Margin="4,0,0,20" />
 
+            <!-- AB bucket selector — when set, loads patched events.json from <DumpFolder>/<bucket>/ -->
+            <Grid Margin="0,0,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="AB experiment bucket:" VerticalAlignment="Center"
+                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                           Margin="4,0,8,0" FontSize="12" />
+                <ComboBox x:Name="cmbBucket" Grid.Column="1"
+                          SelectionChanged="CmbBucket_SelectionChanged"
+                          HorizontalAlignment="Stretch" />
+            </Grid>
+
             <!-- Toolbar: Search + actions -->
             <Grid Margin="0,0,0,12">
                 <Grid.ColumnDefinitions>

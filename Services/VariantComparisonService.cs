@@ -325,7 +325,7 @@ internal static class VariantComparisonService
                     dapConst = dap.GetString();
                 else if (dap.ValueKind == JsonValueKind.Object)
                 {
-                    dapConst = GetString(dap, "Constant");
+                    dapConst = GetConstantFirst(dap);
                     if (dap.TryGetProperty("ControlledRandom", out var dapCr)
                         && dapCr.TryGetProperty("Odds", out var dapOdds)
                         && dapOdds.ValueKind == JsonValueKind.Object)
@@ -347,7 +347,7 @@ internal static class VariantComparisonService
 
             if (sf.TryGetProperty("Spawn", out var spawn) && spawn.ValueKind == JsonValueKind.Object)
             {
-                pi.SpawnItemType = GetString(spawn, "Constant");
+                pi.SpawnItemType = GetConstantFirst(spawn);
 
                 if (spawn.TryGetProperty("ControlledRandom", out var cr) &&
                     cr.TryGetProperty("Odds", out var odds) && odds.ValueKind == JsonValueKind.Object)
@@ -375,7 +375,7 @@ internal static class VariantComparisonService
                 if (dp.ValueKind == JsonValueKind.String)
                     dpConst = dp.GetString();
                 else if (dp.ValueKind == JsonValueKind.Object)
-                    dpConst = GetString(dp, "Constant");
+                    dpConst = GetConstantFirst(dp);
                 if (!string.IsNullOrEmpty(dpConst) && dpConst != "Empty")
                     pi.SpawnDecayIntoItemType = dpConst;
             }
@@ -392,9 +392,23 @@ internal static class VariantComparisonService
                     if (ip.ValueKind == JsonValueKind.String)
                         pi.DecayIntoItemType = ip.GetString();
                     else if (ip.ValueKind == JsonValueKind.Object)
-                        pi.DecayIntoItemType = GetString(ip, "Constant");
+                        pi.DecayIntoItemType = GetConstantFirst(ip);
                 }
             }
+        }
+
+        // ── BubbleFeatures ──
+        // Parsed unconditionally — SpawnOdds == 0 is a valid game value (means the item
+        // does not naturally spawn bubbled, but BubbleDuration + OpenQuantity still apply
+        // when bubbled via Black Card / Scissors). AB patches such as
+        // Bubble_FS_Price_Optimization frequently mutate SpawnOdds + OpenQuantity
+        // on items whose baseline SpawnOdds is 0, so the comparator must read this block.
+        if (item.TryGetProperty("BubbleFeatures", out var bf) && bf.ValueKind == JsonValueKind.Object)
+        {
+            pi.HasBubble = true;
+            pi.BubbleDurationMs = GetLong(bf, "BubbleDuration");
+            pi.BubbleOpenCost = GetInt(bf, "OpenQuantity");
+            pi.BubbleSpawnOdds = GetInt(bf, "SpawnOdds");
         }
 
         // ── SpeedUpCostGems ──
@@ -439,7 +453,7 @@ internal static class VariantComparisonService
             directCrs.TryGetProperty("Odds", out var odds2) && odds2.ValueKind == JsonValueKind.Object)
             return ParseOddsDictionary(odds2);
 
-        var directConst = GetString(asp, "Constant");
+        var directConst = GetConstantFirst(asp);
         if (!string.IsNullOrEmpty(directConst))
             return new Dictionary<string, double> { { directConst, 100.0 } };
 
@@ -457,7 +471,7 @@ internal static class VariantComparisonService
                 rnd.TryGetProperty("Odds", out var odds5) && odds5.ValueKind == JsonValueKind.Object)
                 return ParseOddsDictionary(odds5);
 
-            var constant = GetString(bp, "Constant");
+            var constant = GetConstantFirst(bp);
             if (!string.IsNullOrEmpty(constant))
                 return new Dictionary<string, double> { { constant, 100.0 } };
         }
@@ -550,6 +564,18 @@ internal static class VariantComparisonService
             CompareBool(diffs, "DoesDecay", baseItem.HasDecay, varItem.HasDecay);
             CompareString(diffs, "ItemProducer", baseItem.DecayIntoItemType, varItem.DecayIntoItemType);
             CompareString(diffs, "DecayProducer", baseItem.SpawnDecayIntoItemType, varItem.SpawnDecayIntoItemType);
+        }
+
+        // Bubble fields (JSON names from BubbleFeatures)
+        // Buff/nerf semantics from player perspective:
+        //   SpawnOdds higher  → more bubbles encountered          → buff
+        //   OpenQuantity      → cost in diamonds to pop           → lower is buff
+        //   BubbleDuration    → time before bubble disappears     → higher is buff
+        if (baseItem.HasBubble || varItem.HasBubble)
+        {
+            CompareInt(diffs, "BubbleFeatures.SpawnOdds", baseItem.BubbleSpawnOdds, varItem.BubbleSpawnOdds, higherIsBuff: true);
+            CompareInt(diffs, "BubbleFeatures.OpenQuantity", baseItem.BubbleOpenCost, varItem.BubbleOpenCost, higherIsBuff: false);
+            CompareLong(diffs, "BubbleFeatures.BubbleDuration", baseItem.BubbleDurationMs, varItem.BubbleDurationMs, higherIsBuff: true);
         }
 
         return diffs;

@@ -33,7 +33,7 @@ internal static class FlowchartImageService
         var byChain = new Dictionary<string, List<(string itemType, int level)>>(StringComparer.Ordinal);
         foreach (var itemType in itemTypes.Distinct(StringComparer.Ordinal))
         {
-            var chainKey = DataService.GetChainKeyFromItemType(itemType);
+            var chainKey = ds.ResolveChainKeyFromItemType(itemType);
             var level = DataService.GetLevelFromItemType(itemType);
             if (level <= 0)
             {
@@ -114,46 +114,78 @@ internal static class FlowchartImageService
                         continue;
                     }
 
-                    // Build compact level+rotation list (skip zeros from AllPositionLevels)
-                    // This matches what Image Optimiser shows in suffix textboxes
-                    var compactLevels = new List<int>();
-                    var compactRotations = new List<float>();
-                    for (int i = 0; i < prediction.AllPositionLevels.Length; i++)
-                    {
-                        int lv = prediction.AllPositionLevels[i];
-                        float rt = prediction.AllPositionRotations[i];
-                        if (lv != 0 || (i < prediction.Indices.Length && i < prediction.KeptPositions.Count))
-                        {
-                            compactLevels.Add(lv);
-                            compactRotations.Add(rt);
-                        }
-                    }
-                    // Actually simpler: use prediction.Indices + Rotations directly — they ARE the compact list
-                    compactLevels.Clear();
-                    compactRotations.Clear();
-                    for (int i = 0; i < prediction.Indices.Length; i++)
-                    {
-                        compactLevels.Add(prediction.Indices[i]);
-                        compactRotations.Add(i < prediction.Rotations.Length ? prediction.Rotations[i] : 0f);
-                    }
-
-                    // Step 2: Adaptive flood-fill detection — match count to kept sprite count
-                    int expectedCount = compactLevels.Count;
+                    // Hybrid mapping:
+                    //   • LEVEL identification → from atlas sprite metadata (prediction.Indices
+                    //     + prediction.KeptPositions). Atlas tells us "position X = level N",
+                    //     reliable because skin mapping is deterministic.
+                    //   • CROP rect → from flood-fill detection. Flood finds tight pixel bounds
+                    //     of each sprite without the transparent padding that atlas rects often
+                    //     include, giving a cleaner crop with no oversize border.
+                    //
+                    // Previously the code paired atlas-derived levels with flood blobs by
+                    // POSITIONAL index (compactLevels[i] ↔ floodOrdered[i]). That breaks when
+                    // MergeColumnStacks collapses atlas slots into fewer flood blobs (or when
+                    // either side reorders): for Ready Blueprint, atlas slot 0 = L1 blueprint
+                    // paper, but floodOrdered[0] could be a pen because a vertically-aligned
+                    // pair of sprites got merged into a single blob shifted to a different
+                    // image-space slot.
+                    //
+                    // Fix: instead of positional 1:1, match by SPATIAL OVERLAP — for each
+                    // (level, atlas KeptPosition) pair, find the flood blob whose center is
+                    // inside the atlas rect (or, failing that, closest by distance). The flood
+                    // blob's tight bounds become the crop; the level comes from atlas.
+                    int expectedCount = prediction.Indices.Length;
                     var floodOrdered = ImageProcessingService.AdaptDetectionCount(img, expectedCount);
                     floodOrdered = ImageProcessingService.OrderObjects(floodOrdered);
 
-                    AppLogger.Info($"[FLOWCHART-IMG] Chain '{chainKey}': flood={floodOrdered.Count}, " +
-                        $"expected={expectedCount}, levels=[{string.Join(" ", compactLevels)}]");
+                    AppLogger.Info($"[FLOWCHART-IMG] Chain '{chainKey}': " +
+                        $"kept={prediction.KeptPositions.Count}, flood={floodOrdered.Count}, " +
+                        $"levels=[{string.Join(" ", prediction.Indices)}]");
 
-                    // Step 3: 1:1 positional mapping
                     levelMap = new Dictionary<int, (Rectangle, Rectangle, float)>();
-                    int mapCount = Math.Min(floodOrdered.Count, compactLevels.Count);
-                    for (int i = 0; i < mapCount; i++)
+                    var usedFlood = new HashSet<int>();
+                    int kpCount = Math.Min(prediction.KeptPositions.Count, prediction.Indices.Length);
+                    for (int i = 0; i < kpCount; i++)
                     {
-                        int level = compactLevels[i];
+                        int level = prediction.Indices[i];
                         if (level <= 0 || levelMap.ContainsKey(level)) continue;
-                        float rot = compactRotations[i];
-                        levelMap[level] = (floodOrdered[i].Full, floodOrdered[i].Main, rot);
+                        float rot = i < prediction.Rotations.Length ? prediction.Rotations[i] : 0f;
+                        var atlasRect = prediction.KeptPositions[i].Full;
+                        var atlasCenterX = atlasRect.Left + atlasRect.Width / 2.0;
+                        var atlasCenterY = atlasRect.Top + atlasRect.Height / 2.0;
+
+                        // Find best flood blob: prefer the one whose center lies inside
+                        // atlasRect; if none, the one whose center is closest to atlasCenter.
+                        int bestIdx = -1;
+                        double bestDist = double.MaxValue;
+                        bool bestInside = false;
+                        for (int f = 0; f < floodOrdered.Count; f++)
+                        {
+                            if (usedFlood.Contains(f)) continue;
+                            var fr = floodOrdered[f].Full;
+                            var fx = fr.Left + fr.Width / 2.0;
+                            var fy = fr.Top + fr.Height / 2.0;
+                            bool inside = fx >= atlasRect.Left && fx <= atlasRect.Right
+                                       && fy >= atlasRect.Top  && fy <= atlasRect.Bottom;
+                            double dx = fx - atlasCenterX, dy = fy - atlasCenterY;
+                            double dist = dx * dx + dy * dy;
+                            // Inside-center beats any outside; otherwise nearest center wins.
+                            if (inside && !bestInside) { bestInside = true; bestIdx = f; bestDist = dist; }
+                            else if (inside == bestInside && dist < bestDist) { bestIdx = f; bestDist = dist; }
+                        }
+
+                        if (bestIdx >= 0)
+                        {
+                            usedFlood.Add(bestIdx);
+                            var flood = floodOrdered[bestIdx];
+                            levelMap[level] = (flood.Full, flood.Main, rot);
+                        }
+                        else
+                        {
+                            // No flood blob available — fall back to the atlas rect itself.
+                            // Crop will include the transparent border but at least it's the right sprite.
+                            levelMap[level] = (atlasRect, prediction.KeptPositions[i].Main, rot);
+                        }
                     }
                 }
                 else

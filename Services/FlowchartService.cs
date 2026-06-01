@@ -262,7 +262,7 @@ internal class FlowchartService
             {
                 name = ds.ResolveItemName(itemType);
                 var level = DataService.GetLevelFromItemType(itemType);
-                var chainKey = DataService.GetChainKeyFromItemType(itemType);
+                var chainKey = ds.ResolveChainKeyFromItemType(itemType);
                 tooltip = ds.ResolveChainDisplayName(chainKey);
 
                 name = level > 0 ? $"{name} [L{level}]" : name;
@@ -286,7 +286,7 @@ internal class FlowchartService
         {
             var name = ds.ResolveItemName(itemReward);
             var level = DataService.GetLevelFromItemType(itemReward);
-            var chainKey = DataService.GetChainKeyFromItemType(itemReward);
+            var chainKey = ds.ResolveChainKeyFromItemType(itemReward);
             var wikiName = ds.ResolveChainDisplayName(chainKey);
 
             // Check if chain has only 1 unique level

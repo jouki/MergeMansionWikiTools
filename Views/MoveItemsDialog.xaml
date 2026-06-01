@@ -175,6 +175,24 @@
                                   Unchecked="ChkSetAsAlias_Changed" />
                     </StackPanel>
 
+                    <!-- Merge info panel (target chain exists but no real level collisions) -->
+                    <Border x:Name="mergeInfoPanel" Grid.Row="6" Visibility="Collapsed"
+                            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                            CornerRadius="6" Padding="14,10" Margin="0,0,0,10"
+                            BorderBrush="{DynamicResource SystemFillColorSuccessBrush}" BorderThickness="1">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                                <TextBlock Text="&#x2139;" Foreground="#3FA9F5" FontSize="14"
+                                           VerticalAlignment="Center" Margin="0,0,6,0" />
+                                <TextBlock x:Name="txtMergeInfoTitle" FontSize="13" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            </StackPanel>
+                            <TextBlock x:Name="txtMergeInfoDetail" FontSize="11"
+                                       Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Border>
+
                     <!-- Conflict panel -->
                     <Border x:Name="conflictPanel" Grid.Row="6" Visibility="Collapsed"
                             Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"

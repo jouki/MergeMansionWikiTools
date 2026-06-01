@@ -166,10 +166,26 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 WriteValue(writer, "InstantDecay", serializer);
             else if (producer is ConstantProducer cp)
             {
+                // ConstantProducer holds parallel Products + Quantities lists.
+                // Old serializer emitted only Products[0] as scalar — losing every additional
+                // product (e.g. Reward Boxes whose 1st Prize bundles 7 items) and every
+                // Quantity (e.g. XP=2 on AdditionalSpawnProducer, 12× Hourglass loot).
+                // Always emit array of {Item, Quantity} pairs so the full payload survives.
                 writer.WriteStartObject();
-
-                WriteProperty(writer, "Constant", cp.Products[0].GetDef(_config).ItemType, serializer);
-
+                writer.WritePropertyName("Constant");
+                writer.WriteStartArray();
+                int n = cp.Products?.Count ?? 0;
+                for (int i = 0; i < n; i++)
+                {
+                    var itemType = cp.Products[i].GetDef(_config)?.ItemType;
+                    if (string.IsNullOrEmpty(itemType)) continue;
+                    int qty = (cp.Quantities != null && i < cp.Quantities.Count) ? cp.Quantities[i] : 1;
+                    writer.WriteStartObject();
+                    WriteProperty(writer, "Item", itemType, serializer);
+                    WriteProperty(writer, "Quantity", qty, serializer);
+                    writer.WriteEndObject();
+                }
+                writer.WriteEndArray();
                 writer.WriteEndObject();
             }
             else if (producer is PrefixProducer pp)
@@ -783,8 +799,12 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                     {
                         int amt = cd.ActivationAmountInCycle?.FirstOrDefault() ?? 0;
                         int hmg = cd.HowManyAreGeneratedInCycle?.FirstOrDefault() ?? 0;
+                        // Sentinel guard: 9999/9999 sentinel = stateful event/minigame marker,
+                        // NOT a real droppable producer. Leave MaxCharges/StorageMax at raw values
+                        // (don't inject computed MaxCharges) so consumers can ignore via raw check.
+                        bool isSentinel = amt >= 9999 || hmg >= 9999;
                         int dpc = amt * hmg;
-                        if (dpc > 0)
+                        if (dpc > 0 && !isSentinel)
                         {
                             int howManyCycles = ac.HowManyCycles;
                             bool startsFull = _currentAF.StartsFull;
@@ -809,8 +829,16 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                             }
                             else
                             {
-                                perCycleTaps = storageCharges; // infinite refill
-                                storageOut = storageMax;
+                                // infinite refill — when StorageMax < dpc (mini-charge mechanic,
+                                // e.g. Secret Code Book storage=32 / dpc=96 = 0), wrap to 1.
+                                // Mini-charges are internal batching, NOT individual main charges.
+                                // See memory/game-mechanic-rules.md.
+                                perCycleTaps = System.Math.Max(1, storageCharges);
+                                // For mini-charge items, raw StorageMax represents per-mini-batch
+                                // queue size (e.g. SCB raw=32 = drops in one mini-batch). Player
+                                // semantic = total drops per main charge → override to dpc.
+                                // For regular infinite items (storageCharges >= 1), raw IS total.
+                                storageOut = storageCharges < 1 ? dpc : storageMax;
                             }
                             // PLAYER MaxCharges = total tap actions in lifetime.
                             // From player perspective each cycle is "another charge", so

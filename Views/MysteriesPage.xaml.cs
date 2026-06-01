@@ -31,11 +31,14 @@ public partial class MysteriesPage : UserControl
 
 	private bool _loaded;
 
+	private bool _suppressBucketChange;
+
 	public MysteriesPage(MainWindow main)
 	{
 		_main = main;
 		InitializeComponent();
 		_itemMapping = MysteryService.LoadMapping();
+		PopulateBucketDropdown();
 		TryUsePreloaded();
 		if (!string.IsNullOrEmpty(_main.Settings.PetsJsonPath) && File.Exists(_main.Settings.PetsJsonPath))
 			MysteryWikiService.LoadPetDisplayNamesFromPath(_main.Settings.PetsJsonPath);
@@ -50,10 +53,84 @@ public partial class MysteriesPage : UserControl
 				_mysteryService = null;
 				_dialogueService = null;
 				mysteryListPanel.Children.Clear();
+				PopulateBucketDropdown();
 				TryUsePreloaded();
 				TryLoadDialoguesAsync();
 			});
 		};
+	}
+
+	/// <summary>
+	/// Resolves the events.json path for the active AB bucket. When ActiveSeasonPassBucket is set
+	/// and <DumpFolder>/<bucket>/events.json exists, uses that (patched dump). Otherwise base path.
+	/// </summary>
+	private string ResolveEventsJsonPath()
+	{
+		string basePath = _main.Settings.EventsJsonPath;
+		string bucket = _main.Settings.ActiveSeasonPassBucket ?? "";
+		if (string.IsNullOrEmpty(bucket) || string.IsNullOrEmpty(basePath)) return basePath;
+		string dir = Path.GetDirectoryName(basePath);
+		if (string.IsNullOrEmpty(dir)) return basePath;
+		string patched = Path.Combine(dir, bucket, "events.json");
+		return File.Exists(patched) ? patched : basePath;
+	}
+
+	/// <summary>
+	/// Populates the AB bucket dropdown with patch subfolders that have events.json next to the
+	/// base events.json. "(base)" entry maps to empty bucket = use base events.json.
+	/// </summary>
+	private void PopulateBucketDropdown()
+	{
+		_suppressBucketChange = true;
+		try
+		{
+			cmbBucket.Items.Clear();
+			cmbBucket.Items.Add("(base — no patch)");
+			string basePath = _main.Settings.EventsJsonPath;
+			if (!string.IsNullOrEmpty(basePath))
+			{
+				string dir = Path.GetDirectoryName(basePath);
+				if (!string.IsNullOrEmpty(dir) && Directory.Exists(dir))
+				{
+					foreach (var sub in Directory.GetDirectories(dir).OrderBy(s => s))
+					{
+						string name = Path.GetFileName(sub);
+						if (File.Exists(Path.Combine(sub, "events.json")))
+							cmbBucket.Items.Add(name);
+					}
+				}
+			}
+			string current = _main.Settings.ActiveSeasonPassBucket ?? "";
+			if (string.IsNullOrEmpty(current))
+			{
+				cmbBucket.SelectedIndex = 0;
+			}
+			else
+			{
+				int idx = cmbBucket.Items.IndexOf(current);
+				cmbBucket.SelectedIndex = idx >= 0 ? idx : 0;
+			}
+		}
+		finally
+		{
+			_suppressBucketChange = false;
+		}
+	}
+
+	private void CmbBucket_SelectionChanged(object sender, SelectionChangedEventArgs e)
+	{
+		if (_suppressBucketChange) return;
+		string selected = cmbBucket.SelectedItem as string ?? "";
+		if (selected.StartsWith("(base"))
+			_main.Settings.ActiveSeasonPassBucket = "";
+		else
+			_main.Settings.ActiveSeasonPassBucket = selected;
+		SettingsService.Save(_main.Settings);
+		_loaded = false;
+		_mysteryService = null;
+		_main.MysteryService = null;
+		mysteryListPanel.Children.Clear();
+		TryLoadAsync();
 	}
 
 	private async Task TryLoadDialoguesAsync()
@@ -123,7 +200,7 @@ public partial class MysteriesPage : UserControl
 
 	private async Task TryLoadAsync()
 	{
-		string path = _main.Settings.EventsJsonPath;
+		string path = ResolveEventsJsonPath();
 		if (string.IsNullOrEmpty(path) || !File.Exists(path))
 		{
 			emptyState.Visibility = Visibility.Visible;

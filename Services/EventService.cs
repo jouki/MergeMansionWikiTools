@@ -50,12 +50,18 @@ public class EventService
                     duration = ParseDuration(durEl.GetString());
             }
 
-            // Parse board items (seed for flood-fill chain detection)
+            // Parse board items (seed for flood-fill chain detection).
+            // Dumper v0.20.60+ emits BoardRefs as array of raw key strings (= MetaRef.KeyObject).
+            // Older dumps had each entry as object with nested BoardLayout. Handle both shapes;
+            // string form means we skip board-item seeding for this event (chain detection
+            // falls back to prefix matching via eventId).
             var boardItems = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-            if (board.TryGetProperty("BoardRefs", out var boardRefs))
+            if (board.TryGetProperty("BoardRefs", out var boardRefs)
+                && boardRefs.ValueKind == JsonValueKind.Array)
             {
                 foreach (var br in boardRefs.EnumerateArray())
                 {
+                    if (br.ValueKind != JsonValueKind.Object) continue;
                     if (br.TryGetProperty("BoardLayout", out var layout))
                     {
                         foreach (var cell in layout.EnumerateArray())

@@ -271,6 +271,13 @@ public class ParsedItem
     public bool IsChest { get; set; }
     public Dictionary<string, double>? ChestRewardOdds { get; set; }
 
+    /// <summary>
+    /// ConstantProducer payload (Reward Boxes): ordered (Item, Quantity) pairs from
+    /// `ChestFeatures.LootProducer.Constant`. Guaranteed drops, not probabilistic.
+    /// Null for non-constant loot (Random / ControlledRandom* / PrefixProducer wrappers).
+    /// </summary>
+    public List<(string Item, int Quantity)>? ChestRewardItems { get; set; }
+
     // Lua generation extras
     public string Description { get; set; } = "";
     public bool IsTemporary { get; set; }
@@ -286,6 +293,14 @@ public class ParsedItem
     public List<string>? SinkRequirementConfigKeys { get; set; }
     public Dictionary<string, int>? SinkRequirementAmounts { get; set; }
     public string? SinkRewardItemType { get; set; }
+
+    /// <summary>
+    /// Merge result ItemType from MergeFeatures.Mechanic.ResultProducer.Constant.
+    /// For normal merges this points to L+1 of the same chain; for cross-chain merges
+    /// (e.g. Bigger Pile of Seed Bags L4 → Golden Seed L1) this points to a different chain.
+    /// Used by Infobox / chain table to emit transforms_to when target is in a different chain.
+    /// </summary>
+    public string? MergeResultItemType { get; set; }
 
     // Order features (tasks that require items and give rewards)
     public bool IsOrder { get; set; }

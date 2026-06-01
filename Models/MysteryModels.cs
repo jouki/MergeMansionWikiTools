@@ -9,7 +9,8 @@ namespace MergeMansionWikiTools.Models;
 
 public enum MysteryRewardType
 {
-    Energy, Diamonds, Coins, Item, Decoration, Experience, CardPack, Perk, Pet, InformantTip
+    Energy, Diamonds, Coins, Item, Decoration, Experience, CardPack, Perk, Pet, InformantTip,
+    CooldownRemover, ActivateInfiniteEnergy, SkipTime
 }
 
 // ── Mystery type ─────────────────────────────────────────────────

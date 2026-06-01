@@ -82,8 +82,19 @@ public class WikiTableGenerator
         bool showOrderDrops = allItems.Any(i => i.OrderTasks is { Count: > 0 } && i.OrderTasks.Any(t => t.Rewards.Count > 0));
         bool showDropsPerTask = showOrderDrops;
 
-        // Transforms To — sink reward items (skip items with fuels suppressed via mapping)
-        bool showTransformsTo = allItems.Any(i => i.IsSink && !string.IsNullOrEmpty(i.SinkRewardItemType) && !IsSinkSuppressed(i));
+        // Transforms To — emitted when chain has at least one of:
+        // (1) a sink reward item (skip items with fuels suppressed via mapping)
+        // (2) a cross-chain merge target — MergeFeatures.Mechanic.ResultProducer points
+        //     to an item from a DIFFERENT chain (e.g. SeedBagEmpty_04 → GoldRoot_01).
+        bool HasCrossChainMergeTarget(ParsedItem it) =>
+            !string.IsNullOrEmpty(it.MergeResultItemType)
+            && _data.Chains.FirstOrDefault(c => c.Items.Any(ci =>
+                   string.Equals(ci.ItemType, it.MergeResultItemType, StringComparison.OrdinalIgnoreCase))) is { } target
+            && target != chain;
+
+        bool showTransformsTo =
+            allItems.Any(i => i.IsSink && !string.IsNullOrEmpty(i.SinkRewardItemType) && !IsSinkSuppressed(i))
+            || allItems.Any(HasCrossChainMergeTarget);
 
         // Transforms To Variant — separate column when transform targets have variants
         bool showTransformsToVariant = false;
@@ -105,14 +116,24 @@ public class WikiTableGenerator
         }
         bool hasVariants = levelDiffering.Count > 0;
 
-        // Detect Transforms To Variant column: any sink item transforms into a variant target
+        // Detect Transforms To Variant column: any sink OR cross-chain-merge item
+        // transforms into a target whose level has multiple variants.
         if (showTransformsTo)
         {
-            foreach (var sinkItem in allItems.Where(i => i.IsSink && !string.IsNullOrEmpty(i.SinkRewardItemType) && !IsSinkSuppressed(i)))
+            var targetItemTypes = new List<string>();
+            foreach (var it in allItems)
+            {
+                if (it.IsSink && !string.IsNullOrEmpty(it.SinkRewardItemType) && !IsSinkSuppressed(it))
+                    targetItemTypes.Add(it.SinkRewardItemType!);
+                if (HasCrossChainMergeTarget(it))
+                    targetItemTypes.Add(it.MergeResultItemType!);
+            }
+
+            foreach (var targetType in targetItemTypes)
             {
                 foreach (var ch in _data.Chains)
                     foreach (var ci in ch.Items)
-                        if (string.Equals(ci.ItemType, sinkItem.SinkRewardItemType, StringComparison.OrdinalIgnoreCase))
+                        if (string.Equals(ci.ItemType, targetType, StringComparison.OrdinalIgnoreCase))
                             if (ch.Items.Count(i => i.Level == ci.Level) > 1)
                             { showTransformsToVariant = true; goto ttVarDone; }
             }
@@ -367,7 +388,7 @@ public class WikiTableGenerator
                             if (showOrderFuel)
                                 sb.AppendLine($"| rowspan = {totalRows} | {BuildOrderFuelCell(item)}");
                             if (showTransformsTo)
-                                sb.AppendLine($"| rowspan = {totalRows} | {BuildTransformsToCellAggregated(levelItems)}");
+                                sb.AppendLine($"| rowspan = {totalRows} | {BuildTransformsToCellAggregated(levelItems, chain)}");
                         }
                         else
                         {
@@ -376,7 +397,7 @@ public class WikiTableGenerator
 
                         // Transforms To Variant — per variant row
                         if (showTransformsToVariant)
-                            sb.AppendLine($"| {GetTransformsToVariantLabel(vi) ?? "{{Dash}}"}");
+                            sb.AppendLine($"| {GetTransformsToVariantLabel(vi, chain) ?? "{{Dash}}"}");
 
                         EmitSplitColumns(sb, v, vc, vi, item, levelItems, diff,
                             showDrops, showDropValues, showFuelFor, showDecaysInto,
@@ -427,7 +448,7 @@ public class WikiTableGenerator
                                 if (showFuel)
                                     sb.AppendLine($"| rowspan = {totalRows} | {BuildFuelCell(item, fuelMap)}");
                                 if (showTransformsTo)
-                                    sb.AppendLine($"| rowspan = {totalRows} | {BuildTransformsToCellAggregated(levelItems)}");
+                                    sb.AppendLine($"| rowspan = {totalRows} | {BuildTransformsToCellAggregated(levelItems, chain)}");
                             }
                             else
                             {
@@ -436,7 +457,7 @@ public class WikiTableGenerator
 
                             // Transforms To Variant — per variant row
                             if (showTransformsToVariant)
-                                sb.AppendLine($"| {GetTransformsToVariantLabel(vi) ?? "{{Dash}}"}");
+                                sb.AppendLine($"| {GetTransformsToVariantLabel(vi, chain) ?? "{{Dash}}"}");
 
                             EmitSplitColumns(sb, v, vc, vi, item, levelItems, diff,
                                 showDrops, showDropValues, showFuelFor, showDecaysInto,
@@ -481,9 +502,9 @@ public class WikiTableGenerator
                 if (showOrderFuel)
                     sb.AppendLine($"| {BuildOrderFuelCell(item)}");
                 if (showTransformsTo)
-                    sb.AppendLine($"| {BuildTransformsToCellAggregated(levelItems)}");
+                    sb.AppendLine($"| {BuildTransformsToCellAggregated(levelItems, chain)}");
                 if (showTransformsToVariant)
-                    sb.AppendLine($"| {GetTransformsToVariantLabel(item) ?? "{{Dash}}"}");
+                    sb.AppendLine($"| {GetTransformsToVariantLabel(item, chain) ?? "{{Dash}}"}");
 
                 // Variant column = Dash for levels without variants
                 if (hasVariants && firstSplitCol == "Drops") sb.AppendLine("| {{Dash}}");
@@ -609,7 +630,7 @@ public class WikiTableGenerator
 
         foreach (var (itemRef, chance) in odds)
         {
-            var chainKey = DataService.GetChainKeyFromItemType(itemRef);
+            var chainKey = _data.ResolveChainKeyFromItemType(itemRef);
             var level = _data.ResolveLevel(itemRef, _wikiMapping);
 
             if (!groups.TryGetValue(chainKey, out var group))
@@ -793,21 +814,35 @@ public class WikiTableGenerator
         return parts.Count > 0 ? string.Join("<br>", parts) : "{{Dash}}";
     }
 
-    /// <summary>Aggregates transforms-to from all items at a level (incl. aliases).</summary>
-    private string BuildTransformsToCellAggregated(List<ParsedItem> levelItems)
+    /// <summary>Aggregates transforms-to from all items at a level (incl. aliases).
+    /// Includes both sink rewards AND cross-chain merge targets (MergeFeatures.Mechanic
+    /// .ResultProducer pointing to an item from a different chain — e.g. SeedBagEmpty_04
+    /// → GoldRoot_01).</summary>
+    private string BuildTransformsToCellAggregated(List<ParsedItem> levelItems, ParsedChain currentChain)
     {
         var seen = new HashSet<(string, int)>();
         var parts = new List<string>();
 
-        foreach (var item in levelItems)
+        void AddTarget(string targetItemType, bool requireDifferentChain)
         {
-            if (!item.IsSink || string.IsNullOrEmpty(item.SinkRewardItemType) || IsSinkSuppressed(item)) continue;
-
             foreach (var chain in _data.Chains)
+            {
+                if (requireDifferentChain && chain == currentChain) continue;
+
                 foreach (var ci in chain.Items)
-                    if (string.Equals(ci.ItemType, item.SinkRewardItemType, StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(ci.ItemType, targetItemType, StringComparison.OrdinalIgnoreCase))
                         if (seen.Add((chain.DisplayName, ci.Level)))
                             parts.Add($"{{{{Item|{chain.DisplayName}|{ci.Level}}}}}");
+            }
+        }
+
+        foreach (var item in levelItems)
+        {
+            if (item.IsSink && !string.IsNullOrEmpty(item.SinkRewardItemType) && !IsSinkSuppressed(item))
+                AddTarget(item.SinkRewardItemType!, requireDifferentChain: false);
+
+            if (!string.IsNullOrEmpty(item.MergeResultItemType))
+                AddTarget(item.MergeResultItemType!, requireDifferentChain: true);
         }
 
         return parts.Count > 0 ? string.Join("<br>", parts) : "{{Dash}}";
@@ -890,7 +925,7 @@ public class WikiTableGenerator
             {
                 if (slot >= t.Required.Count) continue;
                 var (itemType, _) = t.Required[slot];
-                var chainName = _data.ResolveChainDisplayName(DataService.GetChainKeyFromItemType(itemType)) ?? itemType;
+                var chainName = _data.ResolveChainDisplayName(_data.ResolveChainKeyFromItemType(itemType)) ?? itemType;
                 int level = DataService.GetLevelFromItemType(itemType);
                 if (!byChain.TryGetValue(chainName, out var levels))
                 {
@@ -926,7 +961,7 @@ public class WikiTableGenerator
         {
             foreach (var (itemType, _) in t.Rewards)
             {
-                var chainName = _data.ResolveChainDisplayName(DataService.GetChainKeyFromItemType(itemType)) ?? itemType;
+                var chainName = _data.ResolveChainDisplayName(_data.ResolveChainKeyFromItemType(itemType)) ?? itemType;
                 int level = DataService.GetLevelFromItemType(itemType);
                 if (!byChain.TryGetValue(chainName, out var levels))
                 {
@@ -983,28 +1018,45 @@ public class WikiTableGenerator
         return "{{Dash}}";
     }
 
-    /// <summary>Returns the variant letter (A, B, C, ...) if the sink reward target is at a level with multiple variants, or null.</summary>
-    private string? GetTransformsToVariantLabel(ParsedItem item)
+    /// <summary>Returns the variant letter (A, B, C, ...) if the transform target (sink
+    /// reward OR cross-chain merge result) is at a level with multiple variants, or null.</summary>
+    private string? GetTransformsToVariantLabel(ParsedItem item, ParsedChain currentChain)
     {
-        if (!item.IsSink || string.IsNullOrEmpty(item.SinkRewardItemType)) return null;
+        string? Resolve(string targetItemType, bool requireDifferentChain)
+        {
+            foreach (var chain in _data.Chains)
+            {
+                if (requireDifferentChain && chain == currentChain) continue;
 
-        foreach (var chain in _data.Chains)
-            foreach (var ci in chain.Items)
-                if (string.Equals(ci.ItemType, item.SinkRewardItemType, StringComparison.OrdinalIgnoreCase))
-                {
-                    var targetLevelItems = chain.Items
-                        .Where(i => i.Level == ci.Level)
-                        .OrderBy(i => i.ItemType)
-                        .ToList();
-                    if (targetLevelItems.Count > 1)
+                foreach (var ci in chain.Items)
+                    if (string.Equals(ci.ItemType, targetItemType, StringComparison.OrdinalIgnoreCase))
                     {
-                        int idx = targetLevelItems.FindIndex(i =>
-                            string.Equals(i.ItemType, item.SinkRewardItemType, StringComparison.OrdinalIgnoreCase));
-                        if (idx >= 0)
-                            return ((char)('A' + idx)).ToString();
+                        var targetLevelItems = chain.Items
+                            .Where(i => i.Level == ci.Level)
+                            .OrderBy(i => i.ItemType)
+                            .ToList();
+                        if (targetLevelItems.Count > 1)
+                        {
+                            int idx = targetLevelItems.FindIndex(i =>
+                                string.Equals(i.ItemType, targetItemType, StringComparison.OrdinalIgnoreCase));
+                            if (idx >= 0)
+                                return ((char)('A' + idx)).ToString();
+                        }
+                        return null;
                     }
-                    return null;
-                }
+            }
+            return null;
+        }
+
+        if (item.IsSink && !string.IsNullOrEmpty(item.SinkRewardItemType))
+        {
+            var lbl = Resolve(item.SinkRewardItemType!, requireDifferentChain: false);
+            if (lbl != null) return lbl;
+        }
+
+        if (!string.IsNullOrEmpty(item.MergeResultItemType))
+            return Resolve(item.MergeResultItemType!, requireDifferentChain: true);
+
         return null;
     }
 
@@ -1701,7 +1753,7 @@ public class WikiTableGenerator
     /// <summary>Resolves an ItemType to `Nx {{Item|ChainName|Level}}` (or just `{{Item|...}}` when amount=1).</summary>
     private string FormatItemRef(string itemType, int amount)
     {
-        var chainName = _data.ResolveChainDisplayName(DataService.GetChainKeyFromItemType(itemType)) ?? itemType;
+        var chainName = _data.ResolveChainDisplayName(_data.ResolveChainKeyFromItemType(itemType)) ?? itemType;
         var level = DataService.GetLevelFromItemType(itemType);
         var amtPrefix = amount > 1 ? $"{amount}x " : "";
         return level > 0

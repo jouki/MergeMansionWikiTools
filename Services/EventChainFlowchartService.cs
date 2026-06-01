@@ -307,7 +307,7 @@ internal static class EventChainFlowchartService
     static string? ResolveChainKey(string itemType, Dictionary<string, string> itemToChain, DataService ds)
     {
         if (itemToChain.TryGetValue(itemType, out var ck)) return ck;
-        var chainKey = DataService.GetChainKeyFromItemType(itemType);
+        var chainKey = ds.ResolveChainKeyFromItemType(itemType);
         return ds.Chains.FirstOrDefault(c => c.ConfigKey.Equals(chainKey, StringComparison.OrdinalIgnoreCase))?.ConfigKey;
     }
 
