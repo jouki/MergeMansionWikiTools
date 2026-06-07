@@ -253,23 +253,45 @@ internal static class DumperService
                         AppLogger.Info($"Patch files to scan: {patchFilesToLoad.Count}");
 
                         // Merge across all files. Key is the patch label, value is the deserialized envelope.
-                        // Newer files (later in patchFilesToLoad, since sorted by mtime asc) overwrite older
-                        // entries for the same label — so a single label produces one PatchedConfigArchive.
-                        var mergedPatches = new Dictionary<string, (PlayerExperimentId ExpId, ExperimentVariantId VarId, GameConfigPatchEnvelope Envelope, string SourceFile)>(StringComparer.Ordinal);
+                        //
+                        // Collision rule (CRITICAL): a fresh "Pull from Phone" writes ALL _DATA/P/ files
+                        // with the SAME mtime, so "newest mtime wins" is non-deterministic — a stale
+                        // variant of a label (e.g. a Rebalance patch missing the latest experiment) can
+                        // arbitrarily overwrite the complete one. Observed 2026-06-05: A Gear Friend
+                        // (SP_RobotPet2026) test rewards existed only in one snapshot's
+                        // Rebalance_SeasonPass_May2026_01_B patch but got clobbered by an older same-label
+                        // stub → 0 changes dumped despite the experiment being live in-game.
+                        //
+                        // Fix: keep, per label, the RICHEST patch — largest raw payload (more patched
+                        // entries = more changes). Tiebreak by newer mtime. Raw byte size is a reliable
+                        // proxy for "completeness" and trivially available pre-deserialize. We bias toward
+                        // the fuller experiment: for a documentation tool, showing a slightly-older richer
+                        // variant beats silently losing the experiment entirely.
+                        var mergedPatches = new Dictionary<string, (PlayerExperimentId ExpId, ExperimentVariantId VarId, GameConfigPatchEnvelope Envelope, string SourceFile, int RawSize, DateTime Mtime)>(StringComparer.Ordinal);
 
                         foreach (var pf in patchFilesToLoad)
                         {
                             try
                             {
+                                var mtime = File.GetLastWriteTimeUtc(pf);
                                 var specializationPatches = GameConfigSpecializationPatches.FromBytes(File.ReadAllBytes(pf));
                                 var configPatches = specializationPatches.Patches
-                                    .SelectMany(y => y.Value.Select(z => (ExpId: y.Key, VarId: z.Key, Envelope: GameConfigPatchEnvelope.Deserialize(z.Value))))
+                                    .SelectMany(y => y.Value.Select(z => (ExpId: y.Key, VarId: z.Key, RawSize: z.Value?.Length ?? 0, Envelope: GameConfigPatchEnvelope.Deserialize(z.Value))))
                                     .ToArray();
 
-                                foreach (var (expId, varId, envelope) in configPatches)
+                                foreach (var (expId, varId, rawSize, envelope) in configPatches)
                                 {
                                     var label = $"{expId}_{varId}";
-                                    mergedPatches[label] = (expId, varId, envelope, Path.GetFileName(pf));
+                                    if (mergedPatches.TryGetValue(label, out var prev))
+                                    {
+                                        // Keep richer (bigger raw payload); tiebreak newer mtime.
+                                        bool replace = rawSize > prev.RawSize
+                                                       || (rawSize == prev.RawSize && mtime > prev.Mtime);
+                                        if (!replace) continue;
+                                        if (rawSize != prev.RawSize)
+                                            AppLogger.Info($"Patch {label}: preferring {Path.GetFileName(pf)} ({rawSize} B) over {prev.SourceFile} ({prev.RawSize} B) — richer payload wins (equal-mtime dedup fix)");
+                                    }
+                                    mergedPatches[label] = (expId, varId, envelope, Path.GetFileName(pf), rawSize, mtime);
                                 }
                             }
                             catch (Exception ex)
@@ -280,7 +302,7 @@ internal static class DumperService
 
                         foreach (var kv in mergedPatches)
                         {
-                            var (expId, varId, envelope, sourceFile) = kv.Value;
+                            var (expId, varId, envelope, sourceFile, _, _) = kv.Value;
                             var pa = new PatchedConfigArchive(archive, new[] { envelope });
                             var patchEntryNames = envelope.EntryNames.ToArray();
                             patchedArchives.Add((expId, varId, pa, patchEntryNames));

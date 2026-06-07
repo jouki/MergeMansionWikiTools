@@ -41,6 +41,11 @@ namespace MergeMansionWikiTools
 
             AppLogger.Init();
 
+            // Auto crash reporting → GitHub issue (best-effort, hooks all 3 unhandled-exception
+            // sources). Must come right after AppLogger so the log tail is attachable. No-op until
+            // a fine-grained PAT is embedded via tools/obfuscate_pat.
+            CrashReporterService.Init();
+
             // Apply theme early (before MainWindow renders) based on saved preference
             var settings = SettingsService.Load();
             ApplyTheme(settings.ThemePreference);

@@ -1,4 +1,5 @@
 using System.Text;
+using System.Text.RegularExpressions;
 using MergeMansionWikiTools.Models;
 
 namespace MergeMansionWikiTools.Services;
@@ -1747,6 +1748,308 @@ public class WikiTableGenerator
         }
 
         sb.AppendLine("|}");
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Post-processes raw wikitext fetched from the wiki Game Tips section. Four cleanups:
+    /// (1) Ensures "* " spacing on list markers (`*foo` → `* foo`, multi-level too).
+    /// (2) Renames `{{Item/nolevel|X}}` → `{{Item/Group|X|MAX}}` (with chain max level when known).
+    /// (3) Collapses `{{Item/Group|Name|N}} (L2-7)` → `{{Item/Group|Name|7|min=2|max=7}}` (positional
+    /// level is corrected to the bracket range max). Single-level `(L5)` collapses to `{{Item|Name|5}}`.
+    /// (4) Plain `[[Item Name]]` link → `{{Item/Group|Item Name|MAX}}` when name matches a known chain.
+    /// Piped links `[[X|Y]]` are left alone.
+    /// </summary>
+    public string PostProcessGameplayTips(string wikitext, string? currentChainName = null)
+    {
+        if (string.IsNullOrEmpty(wikitext)) return wikitext;
+        var nameToMaxLevel = BuildNameToMaxLevelDict();
+
+        // (1) "* foo" spacing
+        wikitext = Regex.Replace(wikitext, @"^(\*+)(?=\S)", "$1 ", RegexOptions.Multiline);
+
+        // (2) Item/nolevel → Item/Group (+max level when matched)
+        wikitext = Regex.Replace(wikitext, @"\{\{Item/nolevel\|([^|}]+)\}\}", m =>
+        {
+            var name = m.Groups[1].Value.Trim();
+            return nameToMaxLevel.TryGetValue(name, out var maxLvl)
+                ? $"{{{{Item/Group|{name}|{maxLvl}}}}}"
+                : $"{{{{Item/Group|{name}}}}}";
+        });
+
+        // (3) Item/Group ... (L2-7) → min/max collapse
+        wikitext = Regex.Replace(wikitext,
+            @"\{\{Item/Group\|([^|}]+)\|\d+\}\}\s*\(L(\d+)(?:-(\d+))?\)",
+            m =>
+            {
+                var name = m.Groups[1].Value.Trim();
+                int min = int.Parse(m.Groups[2].Value);
+                int max = m.Groups[3].Success ? int.Parse(m.Groups[3].Value) : min;
+                return min == max
+                    ? $"{{{{Item|{name}|{min}}}}}"
+                    : $"{{{{Item/Group|{name}|{max}|min={min}|max={max}}}}}";
+            });
+
+        // (4) [[Plain Name]] → {{Item/Group|Plain Name|MAX}} when known
+        wikitext = Regex.Replace(wikitext, @"\[\[([^\[\]|]+)\]\]", m =>
+        {
+            var name = m.Groups[1].Value.Trim();
+            return nameToMaxLevel.TryGetValue(name, out var maxLvl)
+                ? $"{{{{Item/Group|{name}|{maxLvl}}}}}"
+                : m.Value;
+        });
+
+        // (5) Swap CURRENT chain name → {{PAGENAME}} in Item-family templates. This means the
+        // generated output uses the wiki placeholder, which Hardcode-name mode (handled by caller)
+        // can swap back to the literal name in one pass.
+        if (!string.IsNullOrEmpty(currentChainName))
+        {
+            wikitext = Regex.Replace(wikitext,
+                $@"(\{{\{{Item(?:/Group|/nolevel|/Icon)?\|){Regex.Escape(currentChainName)}(?=\||\}}\}})",
+                m => m.Groups[1].Value + "{{PAGENAME}}");
+        }
+
+        // (6) Strip "|1" from single-level Item templates. {{Item/Group|Name|1}} for a chain
+        // that has only one level is redundant — wiki default level is 1. Reduces visual noise.
+        wikitext = Regex.Replace(wikitext,
+            @"(\{\{Item(?:/Group|/nolevel|/Icon)?\|)([^|}]+)\|1\}\}",
+            m =>
+            {
+                var name = m.Groups[2].Value.Trim();
+                // PAGENAME is the current chain — check its level count
+                string lookupName = name == "{{PAGENAME}}" ? (currentChainName ?? "") : name;
+                if (!string.IsNullOrEmpty(lookupName)
+                    && nameToMaxLevel.TryGetValue(lookupName, out var maxL)
+                    && maxL == 1)
+                {
+                    return $"{m.Groups[1].Value}{m.Groups[2].Value}}}}}";
+                }
+                return m.Value;
+            });
+
+        return wikitext;
+    }
+
+    /// <summary>
+    /// Builds a (wiki chain name → max level) lookup across all loaded chains. Wiki-resolved name
+    /// is used (so wiki mapping overrides win). Helper for <see cref="PostProcessGameplayTips"/>.
+    /// </summary>
+    private Dictionary<string, int> BuildNameToMaxLevelDict()
+    {
+        var dict = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+        foreach (var chain in _data.Chains)
+        {
+            var firstItem = chain.Items.FirstOrDefault();
+            string name = firstItem != null && !string.IsNullOrEmpty(firstItem.ItemType)
+                ? _data.ResolveChainDisplayNameFromItemType(firstItem.ItemType, _wikiMapping)
+                : chain.DisplayName;
+            int maxLvl = chain.Items.Count > 0 ? chain.Items.Max(i => i.Level) : 0;
+            if (maxLvl > 0 && !string.IsNullOrEmpty(name))
+                dict[name] = maxLvl;
+        }
+        return dict;
+    }
+
+    /// <summary>
+    /// Resolves the wiki page name for a chain — applies wiki mapping override on top of
+    /// custom/JSON name resolution. Used by Infobox Section intro and Hardcode name retrofit.
+    /// </summary>
+    public string GetWikiChainName(ParsedChain chain)
+    {
+        var firstItemType = chain.Items.FirstOrDefault()?.ItemType;
+        if (string.IsNullOrEmpty(firstItemType))
+            return chain.DisplayName;
+        return _data.ResolveChainDisplayNameFromItemType(firstItemType, _wikiMapping);
+    }
+
+    /// <summary>
+    /// Item Descriptions section (== Item Descriptions ==). Emits one line per level (1..maxLevel)
+    /// with item icon + Lua-resolved per-level description. Gated by presence of any non-empty
+    /// game-side Description on chain items (Lua resolver would emit empty strings otherwise).
+    /// When <paramref name="hardcodedName"/> is non-null, replaces {{PAGENAME}} with the literal name.
+    /// </summary>
+    public string? GenerateItemDescriptionsSection(ParsedChain chain, string? hardcodedName = null)
+    {
+        bool hasAnyDesc = chain.Items.Any(i => !string.IsNullOrEmpty(i.Description));
+        if (!hasAnyDesc) return null;
+
+        int maxLevel = chain.Items.Max(i => i.Level);
+        if (maxLevel <= 0) return null;
+
+        string nameRef = hardcodedName ?? "{{PAGENAME}}";
+        string descArg = hardcodedName != null ? $"|{hardcodedName}" : "";
+
+        var sb = new StringBuilder();
+        sb.AppendLine("== Item Descriptions ==");
+        for (int lvl = 1; lvl <= maxLevel; lvl++)
+        {
+            sb.AppendLine($"{{{{Item/Icon|{nameRef}|{lvl}}}}} {{{{#Invoke:Items|GetItemDescFromChainName|{lvl}{descArg}}}}}");
+            if (lvl < maxLevel)
+                sb.AppendLine();
+        }
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Drop Odds section (=== Drop Odds ===). Emits when any item in chain has randomized
+    /// production: DropOdds (generators), SpawnOdds (spawners), or DecayAfterLastCycleOdds
+    /// (randomized end-cycle outcome). Pure ConstantProducer decay (DecayProducer / ItemProducer)
+    /// is deterministic — no Drop Odds needed there.
+    /// </summary>
+    public string? GenerateDropOddsSection(ParsedChain chain, string? hardcodedName = null)
+    {
+        bool hasRandomOdds = chain.Items.Any(i =>
+            (i.DropOdds != null && i.DropOdds.Count > 0) ||
+            (i.SpawnOdds != null && i.SpawnOdds.Count > 0) ||
+            (i.DecayAfterLastCycleOdds != null && i.DecayAfterLastCycleOdds.Count > 0));
+        if (!hasRandomOdds) return null;
+
+        string arg = hardcodedName != null ? $"|{hardcodedName}" : "";
+        var sb = new StringBuilder();
+        sb.AppendLine("=== Drop Odds ===");
+        sb.AppendLine($"{{{{#Invoke:Items|GetItemOddsTableFromChainName{arg}}}}}");
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Double Bubbles section (=== [[Double Bubble]]s ===). Emits when:
+    /// (a) chain has more than 1 distinct level (single-level chains have no bubble progression to render),
+    /// (b) at least one item has an active bubble feature (HasBubble + BubbleSpawnOdds > 0
+    /// per memory/bubble-features-game-rule.md).
+    /// </summary>
+    public string? GenerateDoubleBubblesSection(ParsedChain chain, string? hardcodedName = null)
+    {
+        int distinctLevels = chain.Items.Select(i => i.Level).Distinct().Count();
+        if (distinctLevels <= 1) return null;
+
+        bool hasActiveBubble = chain.Items.Any(i => i.HasBubble && i.BubbleSpawnOdds > 0);
+        if (!hasActiveBubble) return null;
+
+        string arg = hardcodedName != null ? $"|{hardcodedName}" : "";
+        var sb = new StringBuilder();
+        sb.AppendLine("=== [[Double Bubble]]s ===");
+        sb.AppendLine($"{{{{#Invoke:Items|GetItemBubbleTableFromChainName{arg}}}}}");
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Uses section (== Uses ==). Emits when chain has any downstream consumption:
+    /// (1) ItemType referenced in any task.Requirements across all areas,
+    /// (2) ItemType referenced in another chain's OrderRequiredItems,
+    /// (3) NumericConfigKey referenced in another chain's SinkRequirementConfigKeys.
+    /// Indirect/transitive uses are computed by the wiki Lua solver itself
+    /// ({{#Invoke:Items|GetAllItemUses}}) — this gating only decides whether to emit the section.
+    /// </summary>
+    public string? GenerateUsesSection(ParsedChain chain, IReadOnlyList<ParsedChain> allChains, IReadOnlyList<LuaArea>? areas, string? hardcodedName = null)
+    {
+        var myItemTypes = chain.Items
+            .Where(i => !string.IsNullOrEmpty(i.ItemType))
+            .Select(i => i.ItemType!)
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+        if (myItemTypes.Count == 0) return null;
+
+        var myConfigKeys = chain.Items
+            .Where(i => !string.IsNullOrEmpty(i.NumericConfigKey))
+            .Select(i => i.NumericConfigKey)
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+        bool usedInTask = false;
+        if (areas != null)
+        {
+            foreach (var area in areas)
+            {
+                foreach (var task in area.Tasks)
+                {
+                    if (task.Requirements.Keys.Any(k => myItemTypes.Contains(k)))
+                    {
+                        usedInTask = true;
+                        break;
+                    }
+                }
+                if (usedInTask) break;
+            }
+        }
+
+        bool usedAsRequirement = !usedInTask && allChains
+            .Where(c => c != chain)
+            .SelectMany(c => c.Items)
+            .Any(i =>
+                (i.IsSink && i.SinkRequirementConfigKeys != null
+                    && i.SinkRequirementConfigKeys.Any(k => myConfigKeys.Contains(k))) ||
+                (i.IsOrder && i.OrderRequiredItems != null
+                    && i.OrderRequiredItems.Keys.Any(k => myItemTypes.Contains(k))));
+
+        if (!usedInTask && !usedAsRequirement) return null;
+
+        string arg = hardcodedName != null ? $"|{hardcodedName}" : "";
+        var sb = new StringBuilder();
+        sb.AppendLine("== Uses ==");
+        sb.AppendLine("{{UsesTableFeatures}}");
+        sb.AppendLine($"{{{{#Invoke:Items|GetAllItemUses{arg}}}}}");
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Infobox Section intro sentence (no heading) — goes directly under the infobox on the wiki page.
+    /// Three variants:
+    ///   - Default: `{{Item/Group|<name>|<max>}} are items in '''''Merge Mansion'''''. They are used on the Main Board.`
+    ///   - Temporary: `... are items in '''''Merge Mansion'''''. They are used on the Main Board in {{Area|<area>}}.`
+    ///   - Event: `... are items in '''''Merge Mansion'''''. They are used in the {{Item/Group|{{#var:EventName}}}} Event.`
+    /// Singular form ("is an item ... It is used ...") for single-level chains.
+    /// </summary>
+    public string? GenerateInfoboxSectionIntro(
+        ParsedChain chain,
+        string? hardcodedName,
+        IReadOnlyList<LuaArea>? areas,
+        EventService? eventService)
+    {
+        if (chain.Items.Count == 0) return null;
+
+        int maxLevel = chain.Items.Max(i => i.Level);
+        int distinctLevels = chain.Items.Select(i => i.Level).Distinct().Count();
+        bool isMulti = distinctLevels > 1;
+        string nameRef = hardcodedName ?? "{{PAGENAME}}";
+
+        // Parenthetical chain (e.g. "Tools (Beach Shack)") — when using {{PAGENAME}} the rendered
+        // page name keeps the disambiguation suffix, so we explicitly pass displayName so the
+        // visible text reads "Tools" instead of "Tools (Beach Shack)". Hardcoded name is the
+        // already-stripped chain name, so no extra param needed there.
+        bool hasParen = nameRef == "{{PAGENAME}}"
+            && chain.DisplayName.TrimEnd().EndsWith(")") && chain.DisplayName.Contains('(');
+        string displayNameSuffix = hasParen ? "|displayName={{#var:DisplayTitle}}" : "";
+
+        string subject = isMulti
+            ? $"{{{{Item/Group|{nameRef}|{maxLevel}{displayNameSuffix}}}}}"
+            : $"{{{{Item|{nameRef}{displayNameSuffix}}}}}";
+        string verb = isMulti ? "are items" : "is an item";
+        string usedPronoun = isMulti ? "They are" : "It is";
+
+        // Classify chain — event chain takes precedence (event items are temporary by definition
+        // but the event sentence is more specific).
+        var sb = new StringBuilder();
+        if (chain.IsEventChain && eventService?.FindEventForChain(chain) is { } evt
+            && !string.IsNullOrEmpty(evt.DisplayName))
+        {
+            sb.Append($"{subject} {verb} in '''''Merge Mansion'''''. {usedPronoun} used in the {{{{Item/Group|{{{{#var:EventName}}}}}}}} Event.");
+        }
+        else if (chain.Items.Any(i => i.IsTemporary) && areas != null)
+        {
+            var chainItemTypes = chain.Items.Select(i => i.ItemType).Where(t => !string.IsNullOrEmpty(t)).ToList();
+            var matchingAreas = AreasService.FindAreasRequiringChain(chainItemTypes!, areas);
+            if (matchingAreas.Count > 0)
+            {
+                var areaRefs = string.Join(", ", matchingAreas.Select(a => $"{{{{Area|{a.DisplayName}}}}}"));
+                sb.Append($"{subject} {verb} in '''''Merge Mansion'''''. {usedPronoun} used on the Main Board in {areaRefs}.");
+            }
+            else
+            {
+                sb.Append($"{subject} {verb} in '''''Merge Mansion'''''. {usedPronoun} used on the Main Board.");
+            }
+        }
+        else
+        {
+            sb.Append($"{subject} {verb} in '''''Merge Mansion'''''. {usedPronoun} used on the Main Board.");
+        }
         return sb.ToString();
     }
 

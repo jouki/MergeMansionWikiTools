@@ -11,6 +11,7 @@ public class InfoboxGeneratorOptions
     public bool IsDepleting { get; set; }   // manual override
     public bool KeepFullName { get; set; }  // keep parenthetical in title
     public bool HardcodeGalleryImage { get; set; } // use item name instead of {{PAGENAME}} in gallery
+    public string? EventName { get; set; }  // when non-null, prepended as {{#vardefine:EventName|...}} above the Infobox
 }
 
 public class InfoboxGeneratorService
@@ -92,9 +93,16 @@ public class InfoboxGeneratorService
         var fields = new List<(string Key, string Value)>();
 
         // ── title1 ──
+        // When chain name has a parenthetical disambiguation suffix (e.g. "Tools (Beach Shack)"),
+        // the wiki page name MUST keep the suffix to avoid collisions with other "Tools" pages —
+        // but the visible page title should show only the short name. We use the standard
+        // DisplayTitle pattern: {{#vardefine:DisplayTitle|<stripped>}} at top + DISPLAYTITLE
+        // magic word + {{#var:DisplayTitle}} as title1. This mirrors MysteryWikiService's
+        // handling for mystery pages. (Emitted as a prefix block below — see `sb.Append…`.)
         var baseName = StripParentheses(chain.DisplayName);
-        if (baseName != chain.DisplayName)
-            fields.Add(("title1", opts.KeepFullName ? chain.DisplayName : baseName));
+        bool hasParen = baseName != chain.DisplayName;
+        if (hasParen)
+            fields.Add(("title1", "{{#var:DisplayTitle}}"));
 
         // ── image1 (gallery) ──
         int maxLvl = chain.Items.Max(i => i.Level);
@@ -170,6 +178,19 @@ public class InfoboxGeneratorService
         int maxKeyLen = fields.Max(f => f.Key.Length);
         var sb = new StringBuilder();
 
+        // Prepend {{#vardefine:DisplayTitle|...}} + {{DISPLAYTITLE:...}} for parenthetical names.
+        // MUST come BEFORE {{Infobox Items}} so the title swap applies to the rendered page.
+        if (hasParen)
+        {
+            sb.AppendLine($"{{{{#vardefine:DisplayTitle|{baseName}}}}}");
+            sb.AppendLine("{{DISPLAYTITLE:{{#var:DisplayTitle}}}}");
+        }
+        // Prepend {{#vardefine:EventName|...}} when chain belongs to a CollectibleBoard event.
+        // Used by the Table Generator's Infobox Section intro sentence ({{#var:EventName}}).
+        if (!string.IsNullOrEmpty(opts.EventName))
+        {
+            sb.AppendLine($"{{{{#vardefine:EventName|{opts.EventName}}}}}");
+        }
         // Prepend {{#vardefine:SourceArea|...}} when task-reward area was detected
         if (!string.IsNullOrEmpty(TaskRewardAreaName))
         {

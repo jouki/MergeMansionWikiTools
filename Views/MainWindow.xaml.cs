@@ -35,6 +35,32 @@ public partial class MainWindow : FluentWindow
     public MysteryService? MysteryService { get; set; }
     internal List<ApkDownloadService.ApkVersionInfo>? ApkVersions { get; set; }
 
+    /// <summary>Pre-built autocomplete dataset for the Generate Page dialog. Eagerly populated
+    /// off-thread after chain data + areas load — see <see cref="StartAutocompletePrewarm"/>.
+    /// Null until the prewarm completes; consumers fall back to inline build.</summary>
+    public AutocompleteData? CachedAutocomplete { get; private set; }
+
+    /// <summary>Background task that builds CachedAutocomplete. Public so TableGeneratorDialog
+    /// can await it (instead of starting its own duplicate build) when it opens before prewarm finishes.</summary>
+    public Task<AutocompleteData>? AutocompletePrewarmTask { get; private set; }
+
+    /// <summary>Fired after the autocomplete dataset has been (re)built. Open Generate Page
+    /// dialogs subscribe to re-pull thumbnails — useful when image extraction finishes AFTER
+    /// the dialog opened (new version → no images → user extracts → thumbnails appear live).</summary>
+    public event Action? AutocompleteDataRefreshed;
+
+    /// <summary>Re-runs the autocomplete prewarm (e.g. after APK image extraction completes so
+    /// freshly-exported PNGs get picked up). Raises <see cref="AutocompleteDataRefreshed"/> when done.</summary>
+    public void RefreshAutocompleteData()
+    {
+        SpriteMetadataService.InvalidateCache();
+        StartAutocompletePrewarm();
+        // Notify subscribers once the rebuild finishes (task may already be running)
+        AutocompletePrewarmTask?.ContinueWith(_ =>
+            Dispatcher.Invoke(() => AutocompleteDataRefreshed?.Invoke()),
+            TaskScheduler.Default);
+    }
+
     /// <summary>Whether variant subdirectories exist alongside chain_item_odds.json.</summary>
     public bool HasVariantDirectories { get; private set; }
 
@@ -488,6 +514,7 @@ public partial class MainWindow : FluentWindow
             // Notify subscribers
             _chainPage?.OnDataLoaded();
             ChainDataLoaded?.Invoke();
+            StartAutocompletePrewarm();
 
             // Show warnings
             if (DataService.Warnings.Count > 0)
@@ -550,6 +577,7 @@ public partial class MainWindow : FluentWindow
             UpdateSidebarStatus();
             _chainPage?.OnDataLoaded();
             ChainDataLoaded?.Invoke();
+            StartAutocompletePrewarm();
         }
         catch (Exception ex)
         {
@@ -775,6 +803,46 @@ public partial class MainWindow : FluentWindow
 
         // Refresh chain browser if it was already showing data
         _chainPage?.OnDataLoaded();
+    }
+
+    /// <summary>Kicks off off-thread autocomplete dataset build. Re-invoked on every
+    /// data-load — discards previous cache. The Generate Page dialog reads the cached
+    /// dataset (or awaits the running task) instead of building inline, saving ~1-2s
+    /// per dialog open. Idempotent: safe to call before/after dialog opens.</summary>
+    private void StartAutocompletePrewarm()
+    {
+        if (DataService == null) return;
+        CachedAutocomplete = null;
+        var ds = DataService;
+        var wm = WikiMapping;
+        var imgBase = Settings.ImageExporterBasePath;
+        var apkVer = Settings.SelectedApkVersion;
+        var areasPath = Settings.AreasJsonPath;
+        AutocompletePrewarmTask = Task.Run(async () =>
+        {
+            using var _t = AppLogger.Timed("AutocompletePrewarm");
+            List<LuaArea>? areas = null;
+            if (!string.IsNullOrEmpty(areasPath) && File.Exists(areasPath))
+            {
+                try
+                {
+                    var svc = new AreasService();
+                    svc.LoadAsync(areasPath).GetAwaiter().GetResult();
+                    areas = svc.Areas;
+                }
+                catch { /* areas load failure non-critical for autocomplete */ }
+            }
+            // Pre-fetch wiki area ordering so autocomplete sorts areas by wiki orderingIndex
+            // (same source as Area Flowcharts page). 5-second timeout inside the call; on
+            // failure GetOrderingIndex returns double.MaxValue and we fall back to alpha sort.
+            try { await DiscordFlowchartService.EnsureMappingLoadedAsync(); }
+            catch (Exception ex) { AppLogger.Info($"[AUTOCOMPLETE-PREWARM] area ordering fetch failed: {ex.Message}"); }
+
+            var imageDir = AutocompleteDataService.ResolveImageDir(imgBase, apkVer);
+            var data = AutocompleteDataService.Build(ds, wm, areas, imageDir, imgBase, apkVer);
+            CachedAutocomplete = data;
+            return data;
+        });
     }
 
     /// <summary>

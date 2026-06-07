@@ -10,7 +10,7 @@
     <SelfContained>true</SelfContained>
     <ApplicationIcon>Assets\AppLogo.ico</ApplicationIcon>
     <DefaultItemExcludes>$(DefaultItemExcludes);External\**;Tests\**;_DumpHarness\**</DefaultItemExcludes>
-    <InformationalVersion>0.17.1+$([System.DateTime]::UtcNow.ToString("yyyyMMdd-HHmm"))</InformationalVersion>
+    <InformationalVersion>0.21.0+$([System.DateTime]::UtcNow.ToString("yyyyMMdd-HHmm"))</InformationalVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,6 +35,15 @@
     <Resource Include="Assets\ClaudeIcon.png" />
     <Resource Include="Assets\OnepiecefreakAvatar.png" />
     <Resource Include="Assets\SplashLogo.png" />
+  </ItemGroup>
+
+  <!-- Crash reporter PAT: copied next to the .exe when present. Gitignored (never committed —
+       a token in a public repo would be auto-revoked by GitHub secret scanning). Condition lets
+       the build succeed when the file is absent (crash reporting just stays disabled). -->
+  <ItemGroup>
+    <None Include="crashreporter.token" Condition="Exists('crashreporter.token')">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

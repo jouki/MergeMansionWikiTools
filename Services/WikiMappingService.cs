@@ -1,6 +1,7 @@
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using MergeMansionWikiTools.Models;
@@ -246,6 +247,10 @@ public static class WikiMappingService
     {
         var handler = new HttpClientHandler { CookieContainer = new CookieContainer() };
         var client = new HttpClient(handler);
+        // Fandom/Cloudflare returns 403 "error code: 1010" (a non-JSON body that breaks
+        // JsonDocument.Parse, e.g. on uploads) when the request has no/default User-Agent.
+        // The shared GET client sets one; the authenticated client must too.
+        client.DefaultRequestHeaders.UserAgent.ParseAdd("MergeMansionWikiTools/1.0");
 
         var tokenJson = await client.GetStringAsync(
             $"{BaseApiUrl}?action=query&meta=tokens&type=login&format=json");
@@ -1084,6 +1089,68 @@ public static class WikiMappingService
                 return false;
         }
         return true;
+    }
+
+    public enum WikiSectionFetchStatus { Ok, PageMissing, SectionMissing, NetworkError }
+    public record WikiSectionFetchResult(WikiSectionFetchStatus Status, string? Content);
+
+    /// <summary>
+    /// Fetches a single top-level section (== Heading ==) from a wiki page by title.
+    /// Status indicates outcome — content is non-null only when Status == Ok.
+    /// </summary>
+    public static async Task<WikiSectionFetchResult> FetchPageSectionAsync(string pageTitle, string sectionTitle)
+    {
+        try
+        {
+            var pageExists = await CheckPageExistsAsync(pageTitle);
+            if (!pageExists) return new WikiSectionFetchResult(WikiSectionFetchStatus.PageMissing, null);
+
+            var wikitext = await FetchPageWikitextAsync(Http, pageTitle);
+            if (string.IsNullOrEmpty(wikitext))
+                return new WikiSectionFetchResult(WikiSectionFetchStatus.PageMissing, null);
+
+            var section = ExtractTopLevelSection(wikitext, sectionTitle);
+            return section != null
+                ? new WikiSectionFetchResult(WikiSectionFetchStatus.Ok, section)
+                : new WikiSectionFetchResult(WikiSectionFetchStatus.SectionMissing, null);
+        }
+        catch
+        {
+            return new WikiSectionFetchResult(WikiSectionFetchStatus.NetworkError, null);
+        }
+    }
+
+    /// <summary>
+    /// Extracts content of a top-level section (== Heading ==) from wikitext. Stops at the next
+    /// top-level (level-2) heading. Subsections (===, ====) stay inside. Returns null if not found.
+    /// </summary>
+    private static string? ExtractTopLevelSection(string wikitext, string sectionTitle)
+    {
+        var lines = wikitext.Replace("\r\n", "\n").Split('\n');
+        bool inSection = false;
+        var content = new StringBuilder();
+        for (int i = 0; i < lines.Length; i++)
+        {
+            var trimmed = lines[i].Trim();
+            int leading = 0;
+            while (leading < trimmed.Length && trimmed[leading] == '=') leading++;
+            int trailing = 0;
+            while (trailing < trimmed.Length && trimmed[trimmed.Length - 1 - trailing] == '=') trailing++;
+            bool isTopLevelHeading = leading == 2 && trailing == 2 && trimmed.Length > 4;
+
+            if (isTopLevelHeading)
+            {
+                var title = trimmed.Substring(2, trimmed.Length - 4).Trim();
+                if (inSection) break;  // hit next top-level section
+                if (string.Equals(title, sectionTitle, StringComparison.OrdinalIgnoreCase))
+                {
+                    inSection = true;
+                    continue;
+                }
+            }
+            if (inSection) content.AppendLine(lines[i]);
+        }
+        return inSection ? content.ToString().TrimEnd() : null;
     }
 
     /// <summary>

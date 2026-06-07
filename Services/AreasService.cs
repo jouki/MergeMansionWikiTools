@@ -61,6 +61,25 @@ public class AreasService
     public List<LuaArea> Areas { get; private set; } = new();
     public string CreatedAt { get; private set; } = "";
 
+    /// <summary>
+    /// Returns areas where ANY of the given ItemTypes appears as a task requirement.
+    /// Used by Infobox Section intro sentence to locate the area for temporary items
+    /// (e.g. Cinema Snacks → Cinema area, because Cinema's tasks require Cinema Snacks).
+    /// </summary>
+    public static List<LuaArea> FindAreasRequiringChain(
+        IReadOnlyCollection<string> chainItemTypes,
+        IReadOnlyList<LuaArea> areas)
+    {
+        var typesSet = new HashSet<string>(chainItemTypes, StringComparer.OrdinalIgnoreCase);
+        var result = new List<LuaArea>();
+        foreach (var area in areas)
+        {
+            if (area.Tasks.Any(t => t.Requirements.Keys.Any(k => typesSet.Contains(k))))
+                result.Add(area);
+        }
+        return result;
+    }
+
     public async Task LoadAsync(string filePath)
     {
         Areas.Clear();

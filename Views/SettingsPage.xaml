@@ -886,6 +886,29 @@
                                                      Unchecked="ToggleExtractBuiltIn_Changed" />
                                 </Grid>
                             </StackPanel>
+
+                            <Separator Opacity="0.15" Margin="0" />
+
+                            <StackPanel Margin="16,12,16,12">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                        <TextBlock Text="Test crash reporter" FontSize="13" FontWeight="SemiBold"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                        <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
+                                                   TextWrapping="Wrap" Margin="0,4,16,0">
+                                            <Run Text="Throws a test exception to verify the automatic GitHub crash reporter. A test issue (labelled auto-crash) should appear on the repo. This will CLOSE the app." />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <ui:Button x:Name="btnTestCrash" Grid.Column="1"
+                                               Content="Trigger Test Crash" Appearance="Caution"
+                                               VerticalAlignment="Center"
+                                               Click="BtnTestCrash_Click" />
+                                </Grid>
+                            </StackPanel>
                         </StackPanel>
                     </Border>
 

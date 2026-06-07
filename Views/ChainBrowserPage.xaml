@@ -300,17 +300,13 @@
                                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="11" />
                                         </Border>
 
-                                        <!-- Action buttons -->
-                                        <ui:Button Grid.Column="4" Content="Generate Table"
+                                        <!-- Action buttons — Infobox functionality merged into Generate Page dialog -->
+                                        <ui:Button Grid.Column="4" Content="Generate"
                                                    Appearance="Primary" FontSize="12"
                                                    Height="30" Padding="12,0"
                                                    Click="GenerateTable_Click"
                                                    Tag="{Binding}" />
-                                        <ui:Button Grid.Column="5" Content="Infobox"
-                                                   Appearance="Secondary" FontSize="12"
-                                                   Height="30" Padding="12,0" Margin="6,0,0,0"
-                                                   Click="GenerateInfobox_Click"
-                                                   Tag="{Binding}" />
+                                        <ui:Button Grid.Column="5" Visibility="Collapsed" />
                                         <ui:Button Grid.Column="6" ToolTip="Upload chain images to wiki"
                                                    ToolTipService.InitialShowDelay="0"
                                                    Appearance="Secondary" FontSize="12"

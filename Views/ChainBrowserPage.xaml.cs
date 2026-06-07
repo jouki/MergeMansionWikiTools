@@ -365,6 +365,26 @@ public partial class ChainBrowserPage : UserControl
         _main.SaveSettings();
     }
 
+    /// <summary>Splits search text into non-empty whitespace-separated tokens.</summary>
+    private static string[] SplitSearchTokens(string search) =>
+        string.IsNullOrWhiteSpace(search)
+            ? Array.Empty<string>()
+            : search.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+    /// <summary>True when EVERY token is found in at least one searchable field
+    /// (DisplayName / ConfigKey / any item name). Case-insensitive substring match.</summary>
+    private static bool MatchesAllTokens(ChainViewModel c, string[] tokens)
+    {
+        foreach (var tok in tokens)
+        {
+            bool matched = c.DisplayName.Contains(tok, StringComparison.OrdinalIgnoreCase)
+                        || c.ConfigKey.Contains(tok, StringComparison.OrdinalIgnoreCase)
+                        || c.Items.Any(i => i.Name.Contains(tok, StringComparison.OrdinalIgnoreCase));
+            if (!matched) return false;
+        }
+        return true;
+    }
+
     private void ApplyFilter()
     {
         using var _t = AppLogger.Timed("FilterChains");
@@ -375,13 +395,13 @@ public partial class ChainBrowserPage : UserControl
 
         IEnumerable<ChainViewModel> filtered = _allChains;
 
-        // Text search
-        if (!string.IsNullOrEmpty(search))
+        // Text search — tokenize by whitespace, each token must match ANY searchable field
+        // (DisplayName/ConfigKey/item names). Token AND, field OR. So "tools beach" matches
+        // "Tools (Beach Shack)" because BOTH "tools" and "beach" appear in DisplayName.
+        var tokens = SplitSearchTokens(search);
+        if (tokens.Length > 0)
         {
-            filtered = filtered.Where(c =>
-                c.DisplayName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-                c.ConfigKey.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-                c.Items.Any(i => i.Name.Contains(search, StringComparison.OrdinalIgnoreCase)));
+            filtered = filtered.Where(c => MatchesAllTokens(c, tokens));
         }
 
         // Category filters (combinable — if none checked, show all)
@@ -411,12 +431,9 @@ public partial class ChainBrowserPage : UserControl
         txtChainCount.Text = $"{result.Count} / {_allChains.Count} chains";
 
         // Show hint when search matches exist but are hidden by filters
-        if (anyFilter && !string.IsNullOrEmpty(search))
+        if (anyFilter && tokens.Length > 0)
         {
-            var searchOnly = _allChains.Where(c =>
-                c.DisplayName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-                c.ConfigKey.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-                c.Items.Any(i => i.Name.Contains(search, StringComparison.OrdinalIgnoreCase)));
+            var searchOnly = _allChains.Where(c => MatchesAllTokens(c, tokens));
             var hiddenCount = searchOnly.Count() - result.Count;
             if (hiddenCount > 0)
             {

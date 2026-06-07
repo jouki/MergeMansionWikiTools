@@ -4,7 +4,7 @@ namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.20.74";
+    public const string Version = "v0.21.0";
 
     // Full version with build timestamp, e.g. "v0.18.7 (build 20260322-1200)"
     public static string Build { get; } = GetBuild();
@@ -34,7 +34,13 @@ public class AppSettings
 
     // Table generator checkboxes (persisted)
     public bool LowPrices { get; set; } = false;
-    public bool TableGeneratorIncludeHeading { get; set; } = false;
+    public bool TableGeneratorIncludeInfoboxSection { get; set; } = true;
+    public bool TableGeneratorIncludeGameTips { get; set; } = true;
+    public bool TableGeneratorIncludeItemDescriptions { get; set; } = true;
+    public bool TableGeneratorIncludeStatistics { get; set; } = true;
+    public bool TableGeneratorIncludeDropOdds { get; set; } = true;
+    public bool TableGeneratorIncludeDoubleBubbles { get; set; } = true;
+    public bool TableGeneratorIncludeUses { get; set; } = true;
 
     // Image Optimiser
     public string TinifyApiKey { get; set; } = "";

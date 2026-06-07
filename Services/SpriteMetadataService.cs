@@ -140,6 +140,11 @@ internal static class SpriteMetadataService
     /// </summary>
     public static List<SpriteInfo> Load(string exportDir) => LoadAtlasData(exportDir).Sprites;
 
+    /// <summary>Returns the full AtlasData (sprites + skin mappings + pool tag mapping).
+    /// Use when you need authoritative chain → skeleton → sprite resolution rather than
+    /// pure sprite-name heuristics.</summary>
+    public static AtlasData LoadFull(string exportDir) => LoadAtlasData(exportDir);
+
     /// <summary>
     /// Loads skin mappings from image_atlas_data.json.
     /// </summary>

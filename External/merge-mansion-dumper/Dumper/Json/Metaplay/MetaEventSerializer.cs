@@ -430,7 +430,12 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
 
                     var fallbackRefs = (Dictionary<EventLevelId, MetaRef<EventLevelInfo>>)value;
                     foreach (var key in fallbackRefs.Keys)
-                        WriteProperty(writer, key.Value, fallbackRefs[key].Ref, serializer);
+                        // Use .KeyObject (the unresolved key) instead of .Ref (which throws when
+                        // unresolved in patch contexts). Mirrors the v0.20.60 MetaRef.Ref-crash
+                        // fix in MetaJsonSerializer.SerializeMetaRef which also uses KeyObject.
+                        // Reproduces: AB patches that introduce new fallback level ids like
+                        // "CBE_VeilOfFate2023_FallBackRewardLevel5" not yet present in main config.
+                        WriteProperty(writer, key.Value, fallbackRefs[key].KeyObject, serializer);
 
                     writer.WriteEndObject();
 

@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-        Title="Generate Item Table" Height="750" Width="900"
+        Title="Generate Page" Height="950" Width="1100"
         WindowStartupLocation="CenterOwner"
         ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica">
 
@@ -12,7 +12,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ui:TitleBar Grid.Row="0" Title="Generate Item Table" Height="36" />
+        <ui:TitleBar Grid.Row="0" Title="Generate Page" Height="36" />
 
         <Grid Grid.Row="1" Margin="24,10,24,20">
             <Grid.RowDefinitions>
@@ -39,41 +39,210 @@
                     CornerRadius="4" Padding="16,14"
                     Margin="0,0,0,12"
                     BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
-                <StackPanel>
-                    <TextBlock Text="Options" FontSize="14" FontWeight="SemiBold"
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="1.4*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Titles row — both at the SAME vertical position -->
+                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                               Text="Options" FontSize="14" FontWeight="SemiBold"
                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                Margin="0,0,0,10" />
+                    <TextBlock x:Name="txtInfoboxOptionsTitle"
+                               Grid.Row="0" Grid.Column="2"
+                               Text="Infobox Options" FontSize="13" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                               Margin="20,0,0,10" />
 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <StackPanel Grid.Column="0">
+                    <!-- Checkbox columns -->
+                        <StackPanel Grid.Row="1" Grid.Column="0">
                             <CheckBox x:Name="chkHardcodeName" Content="Hardcode name"
-                                      ToolTip="Use hardcoded chain name instead of {{PAGENAME}} in table caption"
+                                      ToolTip="Use hardcoded chain name instead of {{PAGENAME}} in table caption + gallery image"
                                       ToolTipService.InitialShowDelay="150"
-                                      Checked="ChkOption_Changed" Unchecked="ChkOption_Changed" />
-                        </StackPanel>
-
-                        <StackPanel Grid.Column="1">
+                                      Checked="ChkHardcodeName_Changed" Unchecked="ChkHardcodeName_Changed" />
                             <CheckBox x:Name="chkLowPrices" Content="Low Prices"
+                                      Margin="0,4,0,0"
                                       ToolTip="Sets all item prices in chain to 1 Coin (for Event Items)"
                                       ToolTipService.InitialShowDelay="150"
                                       Checked="ChkOption_Changed" Unchecked="ChkOption_Changed" />
-                            <CheckBox x:Name="chkIncludeHeading" Content="Include wiki heading"
-                                      Margin="0,4,0,0"
-                                      ToolTip="Prepends == Statistics == and === Merge Stages === above the table"
-                                      Checked="ChkIncludeHeading_Changed" Unchecked="ChkIncludeHeading_Changed" />
-                            <CheckBox x:Name="chkIncludeTasks" Content="Include Tasks section"
-                                      Margin="0,4,0,0"
-                                      Visibility="Collapsed"
-                                      ToolTip="Appends === Tasks === wikitable for items with OrderFeatures (e.g. Distillation Apparatus)"
-                                      Checked="ChkOption_Changed" Unchecked="ChkOption_Changed" />
                         </StackPanel>
-                    </Grid>
-                </StackPanel>
+
+                        <StackPanel Grid.Row="1" Grid.Column="1">
+                            <!-- Infobox Section -->
+                            <Grid x:Name="gridInfoboxSection">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="chkIncludeInfoboxSection" Grid.Column="0" Content="Include Infobox Section"
+                                          ToolTip="Prepends {{Infobox Items}} + intro sentence — appears directly under the infobox on the wiki page"
+                                          Checked="ChkIncludeInfoboxSection_Changed" Unchecked="ChkIncludeInfoboxSection_Changed" />
+                                <ui:Button x:Name="btnRefreshInfoboxSection" Grid.Column="1"
+                                           Appearance="Transparent" Padding="2" Margin="6,0,0,0"
+                                           Visibility="Collapsed"
+                                           Click="BtnRefreshInfoboxSection_Click"
+                                           ToolTip="Reset this section to auto-generated content">
+                                    <ui:SymbolIcon Symbol="ArrowClockwise24" FontSize="14" />
+                                </ui:Button>
+                            </Grid>
+                            <!-- Gameplay Tips (with status icon + refresh) -->
+                            <Grid x:Name="gridGameTips" Margin="0,4,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="chkIncludeGameTips" Grid.Column="0" Content="Include Gameplay Tips from wiki"
+                                          ToolTip="Fetches the == Gameplay Tips == section from the wiki page of the same name"
+                                          Checked="ChkIncludeGameTips_Changed" Unchecked="ChkIncludeGameTips_Changed" />
+                                <ui:SymbolIcon x:Name="iconGameTipsStatus" Grid.Column="1"
+                                               Visibility="Collapsed"
+                                               Margin="6,0,0,0" FontSize="16"
+                                               VerticalAlignment="Center"
+                                               ToolTipService.InitialShowDelay="150" />
+                                <ui:Button x:Name="btnRefreshGameTips" Grid.Column="2"
+                                           Appearance="Transparent" Padding="2" Margin="6,0,0,0"
+                                           Visibility="Collapsed"
+                                           Click="BtnRefreshGameTips_Click"
+                                           ToolTip="Re-fetch Gameplay Tips from the wiki (discards local edits)">
+                                    <ui:SymbolIcon Symbol="ArrowClockwise24" FontSize="14" />
+                                </ui:Button>
+                            </Grid>
+                            <!-- Item Descriptions -->
+                            <Grid x:Name="gridItemDescriptions" Margin="0,4,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="chkIncludeItemDescriptions" Grid.Column="0" Content="Include Item Descriptions section"
+                                          ToolTip="Prepends == Item Descriptions == section above Statistics — one line per level with icon + Lua-resolved description"
+                                          Checked="ChkIncludeItemDescriptions_Changed" Unchecked="ChkIncludeItemDescriptions_Changed" />
+                                <ui:Button x:Name="btnRefreshItemDescriptions" Grid.Column="1"
+                                           Appearance="Transparent" Padding="2" Margin="6,0,0,0"
+                                           Visibility="Collapsed"
+                                           Click="BtnRefreshItemDescriptions_Click"
+                                           ToolTip="Reset this section to auto-generated content">
+                                    <ui:SymbolIcon Symbol="ArrowClockwise24" FontSize="14" />
+                                </ui:Button>
+                            </Grid>
+                            <!-- Statistics (always emitted main content; checkbox lets user suppress entirely) -->
+                            <Grid x:Name="gridStatistics" Margin="0,4,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="chkIncludeStatistics" Grid.Column="0" Content="Include Statistics section"
+                                          ToolTip="Master '== Statistics ==' section containing the Merge Stages table and sub-sections"
+                                          Checked="ChkIncludeStatistics_Changed" Unchecked="ChkIncludeStatistics_Changed" />
+                                <ui:Button x:Name="btnRefreshStatistics" Grid.Column="1"
+                                           Appearance="Transparent" Padding="2" Margin="6,0,0,0"
+                                           Visibility="Collapsed"
+                                           Click="BtnRefreshStatistics_Click"
+                                           ToolTip="Reset this section to auto-generated content">
+                                    <ui:SymbolIcon Symbol="ArrowClockwise24" FontSize="14" />
+                                </ui:Button>
+                            </Grid>
+                            <!-- Tasks -->
+                            <Grid x:Name="gridTasks" Margin="0,4,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="chkIncludeTasks" Grid.Column="0" Content="Include Tasks section"
+                                          ToolTip="Appends === Tasks === wikitable for items with OrderFeatures (e.g. Distillation Apparatus)"
+                                          Checked="ChkOption_Changed" Unchecked="ChkOption_Changed" />
+                                <ui:Button x:Name="btnRefreshTasks" Grid.Column="1"
+                                           Appearance="Transparent" Padding="2" Margin="6,0,0,0"
+                                           Visibility="Collapsed"
+                                           Click="BtnRefreshTasks_Click"
+                                           ToolTip="Reset this section to auto-generated content">
+                                    <ui:SymbolIcon Symbol="ArrowClockwise24" FontSize="14" />
+                                </ui:Button>
+                            </Grid>
+                            <!-- Drop Odds -->
+                            <Grid x:Name="gridDropOdds" Margin="0,4,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="chkIncludeDropOdds" Grid.Column="0" Content="Include Drop Odds section"
+                                          ToolTip="Appends === Drop Odds === wikitable for items that produce drops (DropOdds / SpawnOdds / random decay)"
+                                          Checked="ChkIncludeDropOdds_Changed" Unchecked="ChkIncludeDropOdds_Changed" />
+                                <ui:Button x:Name="btnRefreshDropOdds" Grid.Column="1"
+                                           Appearance="Transparent" Padding="2" Margin="6,0,0,0"
+                                           Visibility="Collapsed"
+                                           Click="BtnRefreshDropOdds_Click"
+                                           ToolTip="Reset this section to auto-generated content">
+                                    <ui:SymbolIcon Symbol="ArrowClockwise24" FontSize="14" />
+                                </ui:Button>
+                            </Grid>
+                            <!-- Double Bubbles -->
+                            <Grid x:Name="gridDoubleBubbles" Margin="0,4,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="chkIncludeDoubleBubbles" Grid.Column="0" Content="Include Double Bubbles section"
+                                          ToolTip="Appends === Double Bubbles === wikitable for multi-level chains with non-zero bubble spawn odds"
+                                          Checked="ChkIncludeDoubleBubbles_Changed" Unchecked="ChkIncludeDoubleBubbles_Changed" />
+                                <ui:Button x:Name="btnRefreshDoubleBubbles" Grid.Column="1"
+                                           Appearance="Transparent" Padding="2" Margin="6,0,0,0"
+                                           Visibility="Collapsed"
+                                           Click="BtnRefreshDoubleBubbles_Click"
+                                           ToolTip="Reset this section to auto-generated content">
+                                    <ui:SymbolIcon Symbol="ArrowClockwise24" FontSize="14" />
+                                </ui:Button>
+                            </Grid>
+                            <!-- Uses -->
+                            <Grid x:Name="gridUses" Margin="0,4,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="chkIncludeUses" Grid.Column="0" Content="Include Uses section"
+                                          ToolTip="Appends == Uses == section for items referenced in tasks or as sink/order requirements elsewhere"
+                                          Checked="ChkIncludeUses_Changed" Unchecked="ChkIncludeUses_Changed" />
+                                <ui:Button x:Name="btnRefreshUses" Grid.Column="1"
+                                           Appearance="Transparent" Padding="2" Margin="6,0,0,0"
+                                           Visibility="Collapsed"
+                                           Click="BtnRefreshUses_Click"
+                                           ToolTip="Reset this section to auto-generated content">
+                                    <ui:SymbolIcon Symbol="ArrowClockwise24" FontSize="14" />
+                                </ui:Button>
+                            </Grid>
+                        </StackPanel>
+
+                        <!-- Infobox Options (visible only when Infobox Section is enabled).
+                             Title lives in row 0 above; this panel holds only the checkboxes. -->
+                        <StackPanel x:Name="pnlInfoboxOptions" Grid.Row="1" Grid.Column="2" Margin="20,0,0,0">
+                            <CheckBox x:Name="chkInfoboxStarter" Content="Starter Item"
+                                      ToolTip="Mark as a Starter Item in the type field"
+                                      ToolTipService.InitialShowDelay="150"
+                                      Checked="ChkInfoboxOption_Changed" Unchecked="ChkInfoboxOption_Changed" />
+                            <CheckBox x:Name="chkInfoboxPoints" Content="Points Item"
+                                      Margin="0,4,0,0"
+                                      ToolTip="Mark as a Points Item in the type field"
+                                      ToolTipService.InitialShowDelay="150"
+                                      Checked="ChkInfoboxOption_Changed" Unchecked="ChkInfoboxOption_Changed" />
+                            <CheckBox x:Name="chkInfoboxDepleting" Content="Depleting Item (override)"
+                                      Margin="0,4,0,0"
+                                      ToolTip="Force-adds Depleting Item type even if not auto-detected from JSON"
+                                      ToolTipService.InitialShowDelay="150"
+                                      Checked="ChkInfoboxOption_Changed" Unchecked="ChkInfoboxOption_Changed" />
+                            <CheckBox x:Name="chkInfoboxKeepFullName" Content="Keep full name (parenthetical)"
+                                      Margin="0,4,0,0"
+                                      ToolTip="Keep the parenthetical suffix in title1, e.g. 'Tools (Beach Shack)' instead of 'Tools'"
+                                      ToolTipService.InitialShowDelay="150"
+                                      Checked="ChkInfoboxOption_Changed" Unchecked="ChkInfoboxOption_Changed" />
+                        </StackPanel>
+                </Grid>
             </Border>
 
             <!-- Source group selector (visible when chain has level collisions from merged sources) -->
@@ -109,12 +278,13 @@
                     <TextBox x:Name="txtOutput"
                              Background="Transparent"
                              Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                             BorderThickness="0" IsReadOnly="True"
+                             BorderThickness="0"
                              FontFamily="Consolas" FontSize="12"
-                             AcceptsReturn="True" TextWrapping="NoWrap"
+                             AcceptsReturn="True" AcceptsTab="True" TextWrapping="NoWrap"
                              VerticalScrollBarVisibility="Auto"
                              HorizontalScrollBarVisibility="Auto"
                              Padding="12,10"
+                             SpellCheck.IsEnabled="False"
                              Visibility="Collapsed" />
                 </Grid>
             </Border>

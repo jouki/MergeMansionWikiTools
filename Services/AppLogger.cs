@@ -14,6 +14,28 @@ public static class AppLogger
     private const int MaxLogFiles = 5;
     private const int FlushIntervalMs = 250;
 
+    /// <summary>Absolute path of the current day's log file (null before Init). Used by the
+    /// crash reporter to attach a recent log tail to GitHub crash issues.</summary>
+    public static string? LogPath => _logPath;
+
+    /// <summary>Flushes pending buffer then returns the last <paramref name="lineCount"/> lines
+    /// of the current log file. Safe to call from a crash handler (best-effort, never throws).</summary>
+    public static string GetRecentLogTail(int lineCount = 200)
+    {
+        try
+        {
+            FlushBuffer();
+            if (_logPath == null || !File.Exists(_logPath)) return "(no log file)";
+            lock (_writeLock)
+            {
+                var all = File.ReadAllLines(_logPath);
+                var start = Math.Max(0, all.Length - lineCount);
+                return string.Join("\n", all[start..]);
+            }
+        }
+        catch (Exception ex) { return $"(log tail unavailable: {ex.Message})"; }
+    }
+
     public static void Init()
     {
         var logDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logs");

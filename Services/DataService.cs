@@ -149,8 +149,10 @@ public class DataService
 
             var parsed = new ParsedChain { ConfigKey = configKey };
 
-            // Determine display name
-            var originalName = GetString(chainEl, "Name");
+            // Determine display name — trim because some chain Names in source JSON have stray
+            // leading whitespace (e.g. " Seedling Kit"). Without trim, the space leaks into
+            // generated wiki templates like `{{Item| Seedling Kit|1}}`.
+            var originalName = GetString(chainEl, "Name").Trim();
             parsed.OriginalName = originalName;
             parsed.HasNaturalName = IsNaturalName(originalName);
 

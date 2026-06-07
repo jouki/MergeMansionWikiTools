@@ -384,3 +384,8 @@ Assets/LauncherIcon.ico
 # Wiki working files & tools
 \[WIKI\]/
 tools/
+# Crash reporter PAT (never commit — GitHub secret-scanning would auto-revoke it)
+crashreporter.token
+
+# Side-dump test outputs (large, never commit)
+_DumpHarness/_test_output*/

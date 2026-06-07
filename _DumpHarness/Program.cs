@@ -374,15 +374,31 @@ internal static class Program
                     patchFiles.Add(patchPath);
 
                 Console.WriteLine($"[5] Loading {patchFiles.Count} patch file(s)...");
-                var merged = new Dictionary<string, (Metaplay.Core.Player.PlayerExperimentId, Metaplay.Core.Player.ExperimentVariantId, Metaplay.Core.Config.GameConfigPatchEnvelope)>(StringComparer.Ordinal);
+                // Equal-mtime dedup fix (mirror DumperService): fresh pull writes all snapshots with
+                // the same mtime → "last write wins" is non-deterministic and can clobber the complete
+                // patch with a stale stub. Keep the RICHEST payload (largest raw bytes) per label;
+                // tiebreak newer mtime. See memory/dumper-equal-mtime-dedup-bug.md.
+                var merged = new Dictionary<string, (Metaplay.Core.Player.PlayerExperimentId, Metaplay.Core.Player.ExperimentVariantId, Metaplay.Core.Config.GameConfigPatchEnvelope, int RawSize, DateTime Mtime)>(StringComparer.Ordinal);
                 foreach (var pf in patchFiles)
                 {
+                    var mtime = File.GetLastWriteTimeUtc(pf);
                     var specPatches = Metaplay.Core.Config.GameConfigSpecializationPatches.FromBytes(File.ReadAllBytes(pf));
                     foreach (var (expId, vs) in specPatches.Patches)
                         foreach (var (varId, bytes) in vs)
-                            merged[$"{expId}_{varId}"] = (expId, varId, Metaplay.Core.Config.GameConfigPatchEnvelope.Deserialize(bytes));
+                        {
+                            var label = $"{expId}_{varId}";
+                            int rawSize = bytes?.Length ?? 0;
+                            if (merged.TryGetValue(label, out var prev))
+                            {
+                                bool replace = rawSize > prev.RawSize || (rawSize == prev.RawSize && mtime > prev.Mtime);
+                                if (!replace) continue;
+                                if (rawSize != prev.RawSize)
+                                    Console.WriteLine($"        [dedup] {label}: richer payload {rawSize} B > {prev.RawSize} B wins");
+                            }
+                            merged[label] = (expId, varId, Metaplay.Core.Config.GameConfigPatchEnvelope.Deserialize(bytes), rawSize, mtime);
+                        }
                 }
-                var configPatches = merged.Values.ToArray();
+                var configPatches = merged.Values.Select(v => (v.Item1, v.Item2, v.Item3)).ToArray();
                 Console.WriteLine($"        Found {configPatches.Length} unique patches across {patchFiles.Count} file(s)");
 
                 foreach (var (expId, varId, env) in configPatches)

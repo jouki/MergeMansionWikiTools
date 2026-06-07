@@ -15,6 +15,7 @@ public partial class InfoboxGeneratorDialog : FluentWindow
     private readonly ParsedChain _chain;
     private readonly InfoboxGeneratorService _service;
     private List<LuaArea>? _areas;
+    private EventService? _eventService;
     private List<string> _autoSources = new();
     private bool _suppressRegenerate;
     private string? _wikiNameWarning;
@@ -34,6 +35,9 @@ public partial class InfoboxGeneratorDialog : FluentWindow
         // Load areas for task-reward source detection
         LoadAreas();
 
+        // Load events for EventName vardefine on event chains
+        LoadEvents();
+
         // Pre-populate sources with auto-detected
         var ds = _main.DataService!;
         _autoSources = _service.BuildAutoSources(chain, ds.Chains, ds.ItemNames, _areas);
@@ -48,6 +52,22 @@ public partial class InfoboxGeneratorDialog : FluentWindow
         _wikiNameWarning = CheckWikiNameMissing(chain, main);
 
         Loaded += (_, _) => RegeneratePreview();
+    }
+
+    private void LoadEvents()
+    {
+        var path = _main.Settings.EventsJsonPath;
+        if (string.IsNullOrEmpty(path) || !File.Exists(path)) return;
+
+        try
+        {
+            var svc = new EventService();
+            Task.Run(() => svc.LoadAsync(path)).GetAwaiter().GetResult();
+            if (_main.DataService != null)
+                svc.ResolveChains(_main.DataService);
+            _eventService = svc;
+        }
+        catch { /* event loading failure is non-critical; EventName vardefine just won't be emitted */ }
     }
 
     private void LoadAreas()
@@ -98,6 +118,7 @@ public partial class InfoboxGeneratorDialog : FluentWindow
             IsDepleting = chkIsDepleting.IsChecked == true,
             KeepFullName = chkKeepFullName.IsChecked == true,
             HardcodeGalleryImage = chkHardcodeGallery.IsChecked == true,
+            EventName   = _chain.IsEventChain ? _eventService?.FindEventForChain(_chain)?.DisplayName : null,
         };
 
         try

@@ -1127,6 +1127,29 @@ public partial class SettingsPage : UserControl
         _main.SaveSettings();
     }
 
+    /// <summary>Throws an unhandled exception on the UI thread to exercise the crash reporter
+    /// end-to-end (caught by App's DispatcherUnhandledException hook → GitHub issue). Confirms
+    /// first because this terminates the app.</summary>
+    private async void BtnTestCrash_Click(object sender, RoutedEventArgs e)
+    {
+        var box = new Wpf.Ui.Controls.MessageBox
+        {
+            Title = "Test crash reporter",
+            Content = "This throws a test exception to verify the GitHub crash reporter.\n\n" +
+                      "A test issue (label: auto-crash) should appear on the repo within a few seconds, " +
+                      "then the app will close. Continue?",
+            PrimaryButtonText = "Trigger crash",
+            CloseButtonText = "Cancel",
+        };
+        if (await box.ShowDialogAsync() != Wpf.Ui.Controls.MessageBoxResult.Primary) return;
+
+        // Defer past the dialog's message pump so the throw is a genuine unhandled UI-thread
+        // exception (caught by App.DispatcherUnhandledException → CrashReporterService).
+        Dispatcher.BeginInvoke(new Action(() =>
+            throw new InvalidOperationException(
+                "Synthetic test crash from Settings → Test crash reporter (intentional).")));
+    }
+
     // ── Debug Mode ──
 
     private void ToggleDebugMode_Changed(object sender, RoutedEventArgs e)

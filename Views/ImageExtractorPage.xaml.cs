@@ -299,6 +299,9 @@ public partial class ImageExtractorPage : UserControl
             // Refresh detection (cached count + export folder may have changed)
             DetectServerState();
             btnOpenExportFolder.Visibility = Visibility.Visible;
+
+            // Rebuild autocomplete thumbnails from the freshly-extracted PNGs.
+            _main.RefreshAutocompleteData();
         }
         catch (OperationCanceledException)
         {
@@ -448,6 +451,10 @@ public partial class ImageExtractorPage : UserControl
             var severity = result.FailedBundles > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success;
             ShowExtractInfo(msg, severity);
             btnOpenExportFolder.Visibility = Visibility.Visible;
+
+            // Rebuild autocomplete thumbnails — extraction just produced/updated the PNGs the
+            // Generate Page dialog draws from. Open dialogs refresh live via AutocompleteDataRefreshed.
+            _main.RefreshAutocompleteData();
         }
         catch (OperationCanceledException)
         {

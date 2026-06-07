@@ -11,6 +11,15 @@ public class EventService
 {
     public List<CollectibleBoardEvent> Events { get; } = new();
 
+    /// <summary>
+    /// Returns the event whose resolved Chains list contains the given chain.
+    /// Requires <see cref="ResolveChains"/> to have been called first.
+    /// </summary>
+    public CollectibleBoardEvent? FindEventForChain(ParsedChain chain)
+    {
+        return Events.FirstOrDefault(e => e.Chains.Contains(chain));
+    }
+
     public async Task LoadAsync(string filePath)
     {
         Events.Clear();
