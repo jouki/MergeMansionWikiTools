@@ -384,8 +384,9 @@ Assets/LauncherIcon.ico
 # Wiki working files & tools
 \[WIKI\]/
 tools/
-# Context documentation & Claude instructions (local only, never on GitHub)
-_CONTEXT/
+# Context documentation: _CONTEXT/ JE trackovaná, ale git-crypt ŠIFROVANÁ
+# (viz .gitattributes) — na GitHub jdou jen nečitelné bloby.
+# Claude instrukce + wiki artefakty zůstávají čistě lokální:
 _boulton_legacy/
 CLAUDE.md
 # Crash reporter PAT (never commit — GitHub secret-scanning would auto-revoke it)

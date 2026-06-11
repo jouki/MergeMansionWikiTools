@@ -63,6 +63,9 @@
 #*.RTF   diff=astextplain
 
 ###############################################################################
-# git-crypt: _CONTEXT byl dříve šifrovaný v repu; od 2026-06-11 je úplně mimo
-# git (viz .gitignore — kontextová dokumentace žije jen lokálně)
+# git-crypt: encrypt _CONTEXT folder
+# Obsah je na GitHubu jen jako AES šifrované bloby — čitelné POUZE s lokálním
+# git-crypt.key (nikdy necommitovat!). Public repo => záloha dostupná majiteli,
+# nečitelná pro veřejnost.
 ###############################################################################
+_CONTEXT/** filter=git-crypt diff=git-crypt
