@@ -4,6 +4,15 @@
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:local="clr-namespace:MergeMansionWikiTools.Views">
 
+    <UserControl.CommandBindings>
+        <CommandBinding Command="Copy"
+                        Executed="CopyCommand_Executed"
+                        CanExecute="CopyCommand_CanExecute" />
+    </UserControl.CommandBindings>
+    <UserControl.InputBindings>
+        <KeyBinding Modifiers="Control" Key="C" Command="Copy" />
+    </UserControl.InputBindings>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -78,10 +87,21 @@
                 <!-- Image preview overlay -->
                 <Border x:Name="previewOverlay" Visibility="Collapsed"
                         Background="#E0000000" CornerRadius="4"
+                        Focusable="True"
                         MouseLeftButtonDown="PreviewOverlay_MouseDown"
                         MouseLeftButtonUp="PreviewOverlay_MouseUp"
                         MouseMove="PreviewOverlay_MouseMove"
                         PreviewMouseWheel="PreviewScroll_MouseWheel">
+                    <Border.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Copy" InputGestureText="Ctrl+C"
+                                      Click="PreviewCopy_Click">
+                                <MenuItem.Icon>
+                                    <ui:SymbolIcon Symbol="Copy24" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </Border.ContextMenu>
                     <Grid>
                         <Canvas x:Name="previewCanvas" ClipToBounds="True"
                                 SizeChanged="PreviewCanvas_SizeChanged">

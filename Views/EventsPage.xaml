@@ -1,7 +1,8 @@
 <UserControl x:Class="MergeMansionWikiTools.Views.EventsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:views="clr-namespace:MergeMansionWikiTools.Views">
 
     <Grid Margin="24,16,24,0">
         <Grid.RowDefinitions>
@@ -46,9 +47,78 @@
             <Border Grid.Column="0" CornerRadius="8" Margin="0,0,12,0"
                     Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
                     BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="8">
-                    <StackPanel x:Name="eventListPanel"/>
-                </ScrollViewer>
+                <!-- Virtualizovaný seznam (rok-headery + karty eventů jako heterogenní položky;
+                     ItemsControl s vlastním templatem = ScrollViewer uvnitř, jinak by vnější
+                     ScrollViewer virtualizaci zabil). -->
+                <ItemsControl x:Name="eventListControl"
+                              Focusable="False"
+                              VirtualizingPanel.IsVirtualizing="True"
+                              VirtualizingPanel.VirtualizationMode="Recycling"
+                              VirtualizingPanel.ScrollUnit="Pixel">
+                    <ItemsControl.Resources>
+                        <!-- Rok-header: oddělovací linka + nadpis roku (linka je i před prvním
+                             headerem — 1:1 s původním ručním buildem) -->
+                        <DataTemplate DataType="{x:Type views:EventYearHeaderItem}">
+                            <StackPanel>
+                                <Border Height="1" Margin="4,8,4,0"
+                                        Background="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+                                <TextBlock Text="{Binding YearText}"
+                                           FontSize="18" FontWeight="Bold"
+                                           Margin="4,16,0,6"
+                                           Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+                            </StackPanel>
+                        </DataTemplate>
+
+                        <!-- Karta eventu -->
+                        <DataTemplate DataType="{x:Type views:EventCardItem}">
+                            <Border CornerRadius="6" Margin="0,1,0,1" Padding="0"
+                                    Cursor="Hand"
+                                    MouseLeftButtonUp="EventCard_MouseLeftButtonUp">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <!-- Hover jen pokud karta není vybraná (1:1 s původním MouseEnter/Leave) -->
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding IsSelected}" Value="False"/>
+                                                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
+                                            </MultiDataTrigger>
+                                            <!-- Zvýraznění po kliknutí (rebuild seznamu ho resetuje — 1:1) -->
+                                            <DataTrigger Binding="{Binding IsHighlighted}" Value="True">
+                                                <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <StackPanel Margin="8,6,8,6">
+                                    <TextBlock Text="{Binding DisplayName}"
+                                               FontSize="14" FontWeight="SemiBold"
+                                               TextTrimming="CharacterEllipsis"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                    <TextBlock Text="{Binding InfoText}"
+                                               FontSize="11"
+                                               Foreground="{DynamicResource TextFillColorTertiaryBrush}"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.Resources>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.Template>
+                        <ControlTemplate TargetType="ItemsControl">
+                            <ScrollViewer Padding="8" VerticalScrollBarVisibility="Auto"
+                                          CanContentScroll="True">
+                                <ItemsPresenter/>
+                            </ScrollViewer>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
+                </ItemsControl>
             </Border>
 
             <!-- Right: event detail + flowchart -->

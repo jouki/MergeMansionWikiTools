@@ -74,14 +74,9 @@ public static class MysteryMigrationService
     private const string EventsTableTitle = "Template:Events/Mystery Events";
     private const string ModuleTitle = "Module:Datatable/Various";
 
-    private static readonly HttpClient Http = CreateHttpClient();
-
-    private static HttpClient CreateHttpClient()
-    {
-        var c = new HttpClient(new HttpClientHandler { UseProxy = false });
-        c.DefaultRequestHeaders.UserAgent.ParseAdd("MergeMansionWikiTools/1.0");
-        return c;
-    }
+    // Neautentizované GETy (existence stránek, allimages discovery) jdou přes sdílený klient.
+    // Autentizované edity používají per-session klienta z WikiMappingService.CreateAuthenticatedClientAsync.
+    private static HttpClient Http => HttpClients.WikiApi;
 
     // ── Plan building ─────────────────────────────────────────────
 

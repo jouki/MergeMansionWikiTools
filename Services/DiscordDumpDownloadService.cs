@@ -14,7 +14,8 @@ namespace MergeMansionWikiTools.Services;
 internal static class DiscordDumpDownloadService
 {
     private const string BaseUrl = "https://discord.com/api/v10";
-    private static readonly HttpClient _http = new();
+    // Bot token goes per-request (HttpRequestMessage.Headers.Authorization) — never on the shared client.
+    private static readonly HttpClient _http = HttpClients.Discord;
 
     // ── Data model ──
 
@@ -307,7 +308,9 @@ internal static class DiscordDumpDownloadService
     {
         Directory.CreateDirectory(Path.GetDirectoryName(outputPath)!);
 
-        using var response = await _http.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, ct);
+        // LongDownload (15 min): HttpClient.Timeout applies to reading the streamed body too —
+        // dump archives are hundreds of MB and would get cut off by the 120 s Discord client.
+        using var response = await HttpClients.LongDownload.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, ct);
         response.EnsureSuccessStatusCode();
 
         var totalBytes = response.Content.Headers.ContentLength;

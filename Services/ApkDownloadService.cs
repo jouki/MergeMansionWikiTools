@@ -28,6 +28,11 @@ internal static class ApkDownloadService
         Action<string>? onStatus = null,
         CancellationToken ct = default)
     {
+        // Stays a LOCAL per-call client (NOT HttpClients.LongDownload): the APKPure flow needs
+        // a FRESH CookieContainer per download (Cloudflare warm-up cookies from the page visit
+        // must accompany the download request, and must not leak/stale across calls) plus full
+        // browser-impersonation DefaultRequestHeaders (Sec-Ch-Ua, Sec-Fetch-*, …) that may not
+        // be set on a shared client. UA is covered by ApplyBrowserHeaders (BrowserUserAgent).
         var cookies = new CookieContainer();
         using var handler = new HttpClientHandler
         {
@@ -259,14 +264,15 @@ internal static class ApkDownloadService
         // If only APKPure succeeded, return it directly (all downloadable)
         if ((uptodownVersions == null || uptodownVersions.Count == 0) &&
             apkPureVersions is { Count: > 0 })
-            return apkPureVersions;
+            return SortByVersionDescending(apkPureVersions);
 
         // If only Uptodown succeeded, mark all as not downloadable
         if (uptodownVersions is { Count: > 0 } &&
             (apkPureVersions == null || apkPureVersions.Count == 0))
         {
             AppLogger.Info($"Fetched {uptodownVersions.Count} versions from Uptodown (no APKPure data)");
-            return uptodownVersions.Select(v => v with { CanDownload = false }).ToList();
+            return SortByVersionDescending(
+                uptodownVersions.Select(v => v with { CanDownload = false }).ToList());
         }
 
         if (uptodownVersions == null || uptodownVersions.Count == 0)
@@ -305,15 +311,52 @@ internal static class ApkDownloadService
                 merged.Add(ap with { CanDownload = true });
         }
 
+        // Sort newest-first by version number. Uptodown order alone is unreliable: when APKPure
+        // already lists a newer build that Uptodown hasn't indexed yet, the APKPure-only entry
+        // was appended at the END above, so without this sort "Latest" (= index 0) would be a
+        // stale Uptodown version (e.g. showing 26.04.02 while APKPure already has 26.05.01).
+        SortByVersionDescending(merged);
+
         var downloadable = merged.Count(v => v.CanDownload);
         AppLogger.Info($"Merged {merged.Count} versions ({downloadable} downloadable from APKPure)");
         return merged;
     }
 
+    /// <summary>
+    /// Sorts a version list in place, newest-first, by numeric version components
+    /// (e.g. "26.05.01" &gt; "26.04.02"). Returns the same list for convenient chaining.
+    /// </summary>
+    private static List<ApkVersionInfo> SortByVersionDescending(List<ApkVersionInfo> versions)
+    {
+        versions.Sort((a, b) => CompareVersions(b.Version, a.Version));
+        return versions;
+    }
+
+    /// <summary>
+    /// Compares two dotted numeric version strings (e.g. "26.5.1" vs "26.04.02").
+    /// Returns &gt;0 if a is newer, &lt;0 if b is newer, 0 if equal. Non-numeric or missing
+    /// components are treated as 0; any unparseable remainder falls back to ordinal compare.
+    /// </summary>
+    private static int CompareVersions(string a, string b)
+    {
+        var pa = a.Split('.');
+        var pb = b.Split('.');
+        int len = Math.Max(pa.Length, pb.Length);
+        for (int i = 0; i < len; i++)
+        {
+            int na = i < pa.Length && int.TryParse(pa[i], out var x) ? x : 0;
+            int nb = i < pb.Length && int.TryParse(pb[i], out var y) ? y : 0;
+            if (na != nb) return na.CompareTo(nb);
+        }
+        return string.CompareOrdinal(a, b);
+    }
+
     // ── Uptodown JSON API (primary) ──────────────────────────────
 
     private const string UptodownAppId = "843732";
-    private static readonly HttpClient _uptodownHttp = new();
+    // Shared client — each request below sets its own browser User-Agent + Accept
+    // (per-request headers take precedence over the shared client's default UA).
+    private static readonly HttpClient _uptodownHttp = HttpClients.Default;
 
     private static async Task<List<ApkVersionInfo>> FetchVersionsFromUptodownAsync(CancellationToken ct)
     {

@@ -55,6 +55,17 @@ public class InfoboxGeneratorService
         _wikiMapping?.Mappings.TryGetValue(item.ItemType, out var entry) == true && entry.IsNil("fuels");
 
     /// <summary>
+    /// True when a chain is the game's dev/QA sandbox content, marked by the "Test" item tag
+    /// (e.g. TestPlant, DustySpawner, TestSeedBag, AutoSeedToSeedling, SplitDowngrade, Backtrack).
+    /// Every item in such chains carries the tag. These never ship to players, so attributing a
+    /// real item's source/drop to them is misleading — same rationale as the DoesNotShowInInfoPopUp
+    /// per-item filter in <see cref="BuildAutoSources"/>.
+    /// </summary>
+    private static bool IsTestChain(ParsedChain chain) =>
+        chain.Items.Any(i => i.Tags?.Any(
+            t => string.Equals(t, "Test", StringComparison.OrdinalIgnoreCase)) == true);
+
+    /// <summary>
     /// Resolves a chain display name, preferring wiki mapping when available.
     /// Falls back to chain.DisplayName when DataService is not set.
     /// </summary>
@@ -314,6 +325,7 @@ public class InfoboxGeneratorService
         {
             if (otherChain == chain) continue;
             if (IgnoredSourceChains.Contains(otherChain.ConfigKey)) continue;
+            if (IsTestChain(otherChain)) continue;
 
             foreach (var item in otherChain.Items)
             {

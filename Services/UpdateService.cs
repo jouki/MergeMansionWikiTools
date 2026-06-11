@@ -24,15 +24,20 @@ public static class UpdateService
     private const string RepoName = "MergeMansionWikiTools";
     private const string ApiUrl = $"https://api.github.com/repos/{RepoOwner}/{RepoName}/releases/latest";
 
-    private static readonly HttpClient Http = new()
+    /// <summary>Fail-fast timeout for the GitHub API release check (was the dedicated client's
+    /// Timeout) — the startup update check must not hang for the shared client's full 100 s.</summary>
+    private static readonly TimeSpan CheckTimeout = TimeSpan.FromSeconds(15);
+
+    /// <summary>GitHub API request with the headers the old dedicated client carried
+    /// (version-specific UA + Accept). Per-request headers take precedence over the shared
+    /// client's default UA.</summary>
+    private static HttpRequestMessage NewApiRequest(string url)
     {
-        DefaultRequestHeaders =
-        {
-            { "User-Agent", $"{RepoName}/{Models.AppVersion.Version}" },
-            { "Accept", "application/vnd.github+json" }
-        },
-        Timeout = TimeSpan.FromSeconds(15)
-    };
+        var req = new HttpRequestMessage(HttpMethod.Get, url);
+        req.Headers.UserAgent.ParseAdd($"{RepoName}/{Models.AppVersion.Version}");
+        req.Headers.Accept.ParseAdd("application/vnd.github+json");
+        return req;
+    }
 
     /// <summary>
     /// Checks GitHub Releases for a newer version.
@@ -42,7 +47,11 @@ public static class UpdateService
     {
         try
         {
-            var json = await Http.GetStringAsync(ApiUrl);
+            using var cts = new CancellationTokenSource(CheckTimeout);
+            using var req = NewApiRequest(ApiUrl);
+            using var resp = await HttpClients.Default.SendAsync(req, cts.Token);
+            resp.EnsureSuccessStatusCode();
+            var json = await resp.Content.ReadAsStringAsync(cts.Token);
             var doc = JsonDocument.Parse(json);
             var root = doc.RootElement;
 
@@ -117,7 +126,9 @@ public static class UpdateService
         {
             // 1. Download ZIP
             progress?.Report((0, "Downloading..."));
-            using (var response = await Http.GetAsync(release.AssetUrl, HttpCompletionOption.ResponseHeadersRead))
+            // LongDownload (15 min): HttpClient.Timeout applies to reading the streamed body too —
+            // the old dedicated client's 15 s would cut off any release ZIP on a slower connection.
+            using (var response = await HttpClients.LongDownload.GetAsync(release.AssetUrl, HttpCompletionOption.ResponseHeadersRead))
             {
                 response.EnsureSuccessStatusCode();
                 var totalBytes = response.Content.Headers.ContentLength ?? release.AssetSize;

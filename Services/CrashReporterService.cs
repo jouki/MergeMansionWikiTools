@@ -51,7 +51,10 @@ public static class CrashReporterService
     /// local offline queue for manual review).</summary>
     private const string TokenFileName = "crashreporter.token";
 
-    private static readonly HttpClient _http = new() { Timeout = TimeSpan.FromSeconds(HttpTimeoutSeconds) };
+    // Shared client + per-request CancellationTokenSource(HttpTimeoutSeconds) in SendAsync —
+    // preserves the original dedicated client's 20 s timeout (a crash report must never hang;
+    // Handle() waits HttpTimeoutSeconds + 5 s). UA + PAT auth are set per-request in NewRequest.
+    private static readonly HttpClient _http = HttpClients.Default;
     private static string StateDir => Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
         "MergeMansionWikiTools", "crash");
@@ -311,7 +314,8 @@ public static class CrashReporterService
                 var url = $"https://api.github.com/repos/{RepoOwner}/{RepoName}/issues" +
                           $"?state=open&labels={Uri.EscapeDataString(IssueLabel)}&per_page=100&page={page}";
                 using var req = NewRequest(HttpMethod.Get, url, pat);
-                using var resp = await _http.SendAsync(req).ConfigureAwait(false);
+                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(HttpTimeoutSeconds));
+                using var resp = await _http.SendAsync(req, cts.Token).ConfigureAwait(false);
                 if (!resp.IsSuccessStatusCode) return null;
                 using var doc = JsonDocument.Parse(await resp.Content.ReadAsStringAsync().ConfigureAwait(false));
                 var arr = doc.RootElement;
@@ -335,7 +339,8 @@ public static class CrashReporterService
     {
         using var req = NewRequest(HttpMethod.Post, url, pat);
         req.Content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
-        using var resp = await _http.SendAsync(req).ConfigureAwait(false);
+        using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(HttpTimeoutSeconds));
+        using var resp = await _http.SendAsync(req, cts.Token).ConfigureAwait(false);
         if (!resp.IsSuccessStatusCode)
             throw new HttpRequestException($"GitHub {(int)resp.StatusCode}: {await resp.Content.ReadAsStringAsync().ConfigureAwait(false)}");
     }

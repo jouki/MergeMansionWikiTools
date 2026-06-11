@@ -1765,8 +1765,12 @@ public class WikiTableGenerator
         if (string.IsNullOrEmpty(wikitext)) return wikitext;
         var nameToMaxLevel = BuildNameToMaxLevelDict();
 
-        // (1) "* foo" spacing
-        wikitext = Regex.Replace(wikitext, @"^(\*+)(?=\S)", "$1 ", RegexOptions.Multiline);
+        // (1) "* foo" spacing — insert one space after the bullet asterisks when the content
+        // follows immediately. The lookahead excludes '*' (not just any non-space): otherwise a
+        // nested bullet that already has its space ("** 8x") makes greedy \*+ backtrack to a
+        // single '*' and inject a space between the asterisks ("* * 8x"). Excluding '*' forces
+        // \*+ to consume the whole run, so already-spaced nested bullets are left untouched.
+        wikitext = Regex.Replace(wikitext, @"^(\*+)(?=[^\s*])", "$1 ", RegexOptions.Multiline);
 
         // (2) Item/nolevel → Item/Group (+max level when matched)
         wikitext = Regex.Replace(wikitext, @"\{\{Item/nolevel\|([^|}]+)\}\}", m =>

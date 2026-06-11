@@ -13,7 +13,8 @@ public record AreaUnlockInfo(
     string? UnlockAreaCompleted,          // parent areaId from UnlockRequirements (null if Impossible / no AreaCompleted)
     string? UnlockStartDate,              // ISO date string from UnlockRequirements TimeNeeded.StartInclusive
     string? TeaseAreaCompleted,           // fallback parent areaId from TeaseRequirements
-    string? TeaseStartDate);              // fallback ISO date from TeaseRequirements TimeNeeded.StartInclusive
+    string? TeaseStartDate,               // fallback ISO date from TeaseRequirements TimeNeeded.StartInclusive
+    bool UnlockImpossible);               // UnlockRequirements contains literal "Impossible" — area can't be opened yet
 
 public record DeducedEntry(
     string Name,
@@ -61,10 +62,10 @@ public static class AreaOrderingService
             // For unresolved Names like "HotspotTitle_FirstFloorKitchen", strip prefix + split camelCase.
             var displayName = BuildDisplayName(rawName);
 
-            var (unlockParent, unlockDate) = ExtractFirstParentAndDate(el, "UnlockRequirements");
-            var (teaseParent, teaseDate) = ExtractFirstParentAndDate(el, "TeaseRequirements");
+            var (unlockParent, unlockDate, unlockImpossible) = ExtractFirstParentAndDate(el, "UnlockRequirements");
+            var (teaseParent, teaseDate, _) = ExtractFirstParentAndDate(el, "TeaseRequirements");
 
-            result.Add(new AreaUnlockInfo(displayName, areaId, unlockParent, unlockDate, teaseParent, teaseDate));
+            result.Add(new AreaUnlockInfo(displayName, areaId, unlockParent, unlockDate, teaseParent, teaseDate, unlockImpossible));
         }
         return result;
     }
@@ -113,6 +114,7 @@ public static class AreaOrderingService
     /// Uses topological resolution from UnlockRequirements.AreaCompleted (fallback TeaseRequirements).
     /// Sibling order under the same parent: by UnlockStartDate asc (fallback TeaseStartDate, then Name).
     /// Areas without a resolvable parent (Impossible/cycle) are bucketed at lastValid+1, all sharing the same index, marked commented.
+    /// KONVENCE: oblast s UnlockRequirements = Impossible je VŽDY commented (i když teased) — viz DeducedEntry.IsCommented.
     /// </summary>
     public static List<DeducedEntry> Deduce(
         IReadOnlyList<AreaUnlockInfo> allAreas,
@@ -174,7 +176,10 @@ public static class AreaOrderingService
 
             foreach (var c in candidates)
             {
-                output.Add(new DeducedEntry(c.Info.Name, nextIdx, false));
+                // KONVENCE (2026-06-11): dokud má oblast UnlockRequirements = Impossible, postuje se
+                // JEN ZAKOMENTOVANÁ — i když už je teased (index se odvodí z Tease parenta normálně).
+                // Odkomentuje se až ve chvíli, kdy hra unlock reálně umožní.
+                output.Add(new DeducedEntry(c.Info.Name, nextIdx, c.Info.UnlockImpossible));
                 resolved[c.Info.Name] = nextIdx;
                 unresolved.Remove(c.Info);
                 nextIdx++;
@@ -223,7 +228,9 @@ public static class AreaOrderingService
 
     /// <summary>
     /// Patches the raw Lua module content:
-    /// 1. Removes any existing `--["AreaName"] = {orderingIndex = N},` commented rows (robust — only this exact shape).
+    /// 1. Removes existing `--["AreaName"] = {orderingIndex = N},` commented rows, ale POUZE pro
+    ///    oblasti, které se v tomto patchi znovu vkládají (entries) — cizí komentované záznamy
+    ///    (in-prep konvence: Unlock = Impossible ⇒ commented) zůstávají nedotčené.
     /// 2. Inserts new entries after the last legit `["..."] = {orderingIndex = N},` row inside the `p` table.
     /// Other comment styles (`-- text`, block comments `--[[...]]`) are left untouched.
     /// </summary>
@@ -246,10 +253,12 @@ public static class AreaOrderingService
             @"^[ \t]*\[""([^""]+)""\]\s*=\s*\{[^}]*orderingIndex\s*=\s*[0-9.]+[^}]*\}\s*,?\s*$",
             RegexOptions.Compiled);
 
-        // Pass 1: remove all commented orderingIndex rows
+        // Pass 1: remove commented orderingIndex rows being replaced by this patch
+        var replacedNames = new HashSet<string>(entries.Select(e => e.Name), StringComparer.Ordinal);
         for (int i = lines.Count - 1; i >= 0; i--)
         {
-            if (commentedRowRegex.IsMatch(lines[i]))
+            var m = commentedRowRegex.Match(lines[i]);
+            if (m.Success && replacedNames.Contains(m.Groups[1].Value))
                 lines.RemoveAt(i);
         }
 
@@ -274,17 +283,25 @@ public static class AreaOrderingService
 
     // ── Helpers ──────────────────────────────────────────────────────
 
-    private static (string? Parent, string? Date) ExtractFirstParentAndDate(JsonElement el, string listProp)
+    private static (string? Parent, string? Date, bool Impossible) ExtractFirstParentAndDate(JsonElement el, string listProp)
     {
-        if (!el.TryGetProperty(listProp, out var list)) return (null, null);
+        if (!el.TryGetProperty(listProp, out var list)) return (null, null, false);
         // The property may be an array of requirement objects, OR the single string "Impossible"
-        if (list.ValueKind != JsonValueKind.Array) return (null, null);
+        if (list.ValueKind == JsonValueKind.String)
+            return (null, null, list.GetString() == "Impossible");
+        if (list.ValueKind != JsonValueKind.Array) return (null, null, false);
 
         string? parent = null;
         string? date = null;
+        bool impossible = false;
         foreach (var req in list.EnumerateArray())
         {
-            // Strings inside the array (e.g. "Impossible") — skip
+            // String elements inside the array — e.g. "Impossible" (areas.json shape: "UnlockRequirements": ["Impossible"])
+            if (req.ValueKind == JsonValueKind.String)
+            {
+                if (req.GetString() == "Impossible") impossible = true;
+                continue;
+            }
             if (req.ValueKind != JsonValueKind.Object) continue;
             // AreaCompleted: "FactoryFloor"
             if (parent == null && req.TryGetProperty("AreaCompleted", out var ac) &&
@@ -296,7 +313,7 @@ public static class AreaOrderingService
                 si.ValueKind == JsonValueKind.String)
                 date = si.GetString();
         }
-        return (parent, date);
+        return (parent, date, impossible);
     }
 
     private static string GetStr(JsonElement el, string prop)

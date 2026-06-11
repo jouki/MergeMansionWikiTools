@@ -5,6 +5,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using MergeMansionWikiTools.Helpers;
 using MergeMansionWikiTools.Models;
 using MergeMansionWikiTools.Services;
 using Wpf.Ui.Appearance;
@@ -246,6 +247,7 @@ public partial class ChainBrowserPage : UserControl
     private readonly HashSet<ChainViewModel> _mergeSelection = new();
     private readonly HashSet<ChainViewModel> _mergeCheckChains = new();
     private SolidColorBrush _splitSepBrush;
+    private readonly Debouncer _searchDebounce = new(TimeSpan.FromMilliseconds(250));
 
     private static Brush HighlightBrush =>
         Application.Current.TryFindResource("AccentTextFillColorPrimaryBrush") as Brush
@@ -325,7 +327,8 @@ public partial class ChainBrowserPage : UserControl
         catch { /* ignore scan failures */ }
     }
 
-    private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e) => ApplyFilter();
+    private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e) =>
+        _searchDebounce.Trigger(ApplyFilter);
     private void ChkFilter_Changed(object sender, RoutedEventArgs e)
     {
         ApplyFilter();

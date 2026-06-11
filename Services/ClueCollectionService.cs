@@ -503,43 +503,52 @@ public class ClueCollectionService
     }
 
     private DataService? _dataService;
+    private WikiMappingCache? _wikiMapping;
 
-    /// <summary>Sets DataService reference for dynamic item name resolution.</summary>
-    public void SetDataService(DataService ds) => _dataService = ds;
+    /// <summary>Sets DataService + wiki mapping for dynamic item name/level resolution.
+    /// The mapping is consulted first so alias/level overrides win (e.g. a reward item flagged
+    /// as an alias of "Reward Box" at level 4 renders as {{Item/Group|Reward Box|4}}).</summary>
+    public void SetDataService(DataService ds, WikiMappingCache? wikiMapping = null)
+    {
+        _dataService = ds;
+        _wikiMapping = wikiMapping;
+    }
 
     /// <summary>
     /// Resolves ItemDef (ItemType like "TimeSkipBooster_04") to wiki name + level.
-    /// Uses DataService chain data for dynamic resolution, no hardcoded mappings.
+    /// Wiki mapping wins (alias chain name + level override), then chain data, then raw fallback.
     /// </summary>
     private string ResolveItemName(string itemDef)
     {
-        // Parse ItemType: ChainKey_LevelNumber (e.g. "TimeSkipBooster_04" → chain "TimeSkipBooster", level 4)
+        // Parse trailing "_NN" so the fallback paths have a level + chain key to work with.
         int lastUnderscore = itemDef.LastIndexOf('_');
-        if (lastUnderscore <= 0 || !int.TryParse(itemDef[(lastUnderscore + 1)..], out int level))
-            return itemDef;
+        int level = 1;
+        bool parsedLevel = lastUnderscore > 0 && int.TryParse(itemDef[(lastUnderscore + 1)..], out level);
+        string chainKey = lastUnderscore > 0 ? itemDef[..lastUnderscore] : itemDef;
 
-        string chainKey = itemDef[..lastUnderscore];
+        // Raw game ItemDefs always carry a "_NN" suffix; anything without one is already a
+        // resolved display name (re-run idempotency), so leave it untouched.
+        if (!parsedLevel) return itemDef;
 
-        // Try to resolve via DataService chains (dynamic, data-driven)
         if (_dataService != null)
         {
-            // Strategy 1: match by ConfigKey
+            // Mapping-aware resolution: ResolveChainDisplayNameFromItemType + ResolveLevel both
+            // consult _wikiMapping first (alias chain name + level override), then fall back to
+            // chain/JSON data. This is the single source of truth used by the infobox generators,
+            // so reward rendering matches the rest of the app.
+            string name = _dataService.ResolveChainDisplayNameFromItemType(itemDef, _wikiMapping);
+            int resolvedLevel = _dataService.ResolveLevel(itemDef, _wikiMapping);
+            if (resolvedLevel > 0) level = resolvedLevel;
+
+            if (!string.IsNullOrEmpty(name) && name != itemDef && name != chainKey + "_Chain")
+                return level > 1 ? $"{name}|{level}" : name;
+
+            // Secondary: locate the owning chain directly (covers items whose ItemType→chain key
+            // mapping isn't registered) and use its DisplayName.
             var chain = _dataService.Chains.FirstOrDefault(c =>
-                string.Equals(c.ConfigKey, chainKey, StringComparison.OrdinalIgnoreCase));
-
-            // Strategy 2: match by finding any item with this ItemType
-            if (chain == null)
-            {
-                foreach (var c in _dataService.Chains)
-                {
-                    if (c.Items.Any(i => string.Equals(i.ItemType, itemDef, StringComparison.OrdinalIgnoreCase)))
-                    {
-                        chain = c;
-                        break;
-                    }
-                }
-            }
-
+                            string.Equals(c.ConfigKey, chainKey, StringComparison.OrdinalIgnoreCase))
+                        ?? _dataService.Chains.FirstOrDefault(c =>
+                            c.Items.Any(i => string.Equals(i.ItemType, itemDef, StringComparison.OrdinalIgnoreCase)));
             if (chain != null)
             {
                 string displayName = !string.IsNullOrEmpty(chain.DisplayName) ? chain.DisplayName : chainKey;

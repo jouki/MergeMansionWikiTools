@@ -63,6 +63,10 @@ public partial class MysteryImagesControl : UserControl
 	private bool _suppressFallbackChange;
 	private string? _activeFallbackVersion;
 
+	// Path the Ctrl+C / "Copy" command targets — the previewed image while the overlay is
+	// open, otherwise the most recently right-clicked thumbnail.
+	private string? _copyTargetPath;
+
 
 
 
@@ -468,13 +472,8 @@ public partial class MysteryImagesControl : UserControl
 			{
 				if (File.Exists(detectedFile.SourcePath))
 				{
-					BitmapImage bitmapImage = new BitmapImage();
-					bitmapImage.BeginInit();
-					bitmapImage.UriSource = new Uri(detectedFile.SourcePath);
-					bitmapImage.DecodePixelWidth = 48;
-					bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-					bitmapImage.EndInit();
-					bitmapImage.Freeze();
+					BitmapImage bitmapImage = ThumbnailCache.Get(detectedFile.SourcePath, 48)
+						?? throw new IOException("Failed to decode " + detectedFile.SourcePath);
 					System.Windows.Controls.Image image = new System.Windows.Controls.Image
 					{
 						Source = bitmapImage,
@@ -495,6 +494,20 @@ public partial class MysteryImagesControl : UserControl
 							ShowPreview(tag);
 						}
 					};
+					// Right-click → Copy. Opening the menu also makes this thumbnail the
+					// target for a subsequent Ctrl+C.
+					string copyPath = detectedFile.SourcePath;
+					System.Windows.Controls.MenuItem copyItem = new System.Windows.Controls.MenuItem
+					{
+						Header = "Copy",
+						InputGestureText = "Ctrl+C",
+						Icon = new Wpf.Ui.Controls.SymbolIcon { Symbol = Wpf.Ui.Controls.SymbolRegular.Copy24 }
+					};
+					copyItem.Click += delegate { CopyImageToClipboard(copyPath); };
+					ContextMenu menu = new ContextMenu();
+					menu.Items.Add(copyItem);
+					menu.Opened += delegate { _copyTargetPath = copyPath; };
+					image.ContextMenu = menu;
 					Grid.SetColumn(image, 1);
 					grid.Children.Add(image);
 				}
@@ -745,7 +758,7 @@ public partial class MysteryImagesControl : UserControl
 		});
 	}
 
-	private void BtnOptimize_Click(object sender, RoutedEventArgs e)
+	private async void BtnOptimize_Click(object sender, RoutedEventArgs e)
 	{
 		if (_main == null) return;
 
@@ -789,7 +802,7 @@ public partial class MysteryImagesControl : UserControl
 			if (_optimizedFiles.Contains(f)) continue;
 			try
 			{
-				if (File.Exists(f.SourcePath) && OptimizationWindow.HasOptMarker(File.ReadAllBytes(f.SourcePath)))
+				if (File.Exists(f.SourcePath) && OptimizationWindow.HasOptMarker(await File.ReadAllBytesAsync(f.SourcePath)))
 				{
 					_optimizedFiles.Add(f);
 					f.OptimizedSize = new FileInfo(f.SourcePath).Length;
@@ -873,7 +886,7 @@ public partial class MysteryImagesControl : UserControl
 				wizard.Owner = ownerWindow;
 				EnsureWindowVisible(ownerWindow);
 				wizard.ShowDialog();
-				TryMarkOptimized(file);
+				await TryMarkOptimizedAsync(file);
 
 				switch (wizard.Choice)
 				{
@@ -1021,11 +1034,11 @@ public partial class MysteryImagesControl : UserControl
 		ShowInfo(string.Join("  ·  ", parts), failed > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success);
 	}
 
-	private void TryMarkOptimized(DetectedDecorationFile file)
+	private async Task TryMarkOptimizedAsync(DetectedDecorationFile file)
 	{
 		try
 		{
-			byte[] bytes = File.ReadAllBytes(file.SourcePath);
+			byte[] bytes = await File.ReadAllBytesAsync(file.SourcePath);
 			if (OptimizationWindow.HasOptMarker(bytes))
 			{
 				_optimizedFiles.Add(file);
@@ -1168,16 +1181,19 @@ public partial class MysteryImagesControl : UserControl
 	{
 		try
 		{
-			BitmapImage bitmapImage = new BitmapImage();
-			bitmapImage.BeginInit();
-			bitmapImage.UriSource = new Uri(filePath);
-			bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-			bitmapImage.EndInit();
-			bitmapImage.Freeze();
+			// Full-size preview — decode bez cache (StreamSource, žádný file lock)
+			BitmapImage? bitmapImage = ThumbnailCache.FromBytes(File.ReadAllBytes(filePath), 0);
+			if (bitmapImage == null)
+			{
+				return;
+			}
 			previewImage.Source = bitmapImage;
 			_imgNativeW = bitmapImage.PixelWidth;
 			_imgNativeH = bitmapImage.PixelHeight;
+			_copyTargetPath = filePath;
 			previewOverlay.Visibility = Visibility.Visible;
+			// Give the overlay keyboard focus so Ctrl+C lands on this control's Copy binding.
+			previewOverlay.Focus();
 			base.Dispatcher.InvokeAsync(CenterAndFitPreview, DispatcherPriority.Loaded);
 		}
 		catch
@@ -1312,6 +1328,68 @@ public partial class MysteryImagesControl : UserControl
 		infoBar.Message = message;
 		infoBar.Severity = severity;
 		infoBar.IsOpen = true;
+	}
+
+	/// <summary>
+	/// Copies an image file to the clipboard in three formats so it pastes correctly
+	/// everywhere: a standard bitmap (DIB, for basic editors), a PNG stream (alpha-aware
+	/// consumers like browsers/Photoshop/Discord), and a file-drop (Explorer/chat as a file).
+	/// </summary>
+	private void CopyImageToClipboard(string? filePath)
+	{
+		if (string.IsNullOrEmpty(filePath) || !File.Exists(filePath))
+		{
+			ShowInfo("Nothing to copy.", InfoBarSeverity.Warning);
+			return;
+		}
+		try
+		{
+			// Full-size decode bez cache (StreamSource, žádný file lock)
+			BitmapImage bmp = ThumbnailCache.FromBytes(File.ReadAllBytes(filePath), 0)
+				?? throw new IOException("Failed to decode " + filePath);
+
+			DataObject data = new DataObject();
+			data.SetImage(bmp);
+
+			using (MemoryStream ms = new MemoryStream())
+			{
+				PngBitmapEncoder encoder = new PngBitmapEncoder();
+				encoder.Frames.Add(BitmapFrame.Create(bmp));
+				encoder.Save(ms);
+				data.SetData("PNG", ms);
+
+				System.Collections.Specialized.StringCollection files = new System.Collections.Specialized.StringCollection();
+				files.Add(filePath);
+				data.SetFileDropList(files);
+
+				// copy=true flushes the data to the OLE clipboard so it survives the
+				// MemoryStream being disposed at the end of this using block.
+				Clipboard.SetDataObject(data, copy: true);
+			}
+
+			ShowInfo($"Copied {Path.GetFileName(filePath)} to clipboard.", InfoBarSeverity.Success);
+		}
+		catch (Exception ex)
+		{
+			AppLogger.Error("CopyImageToClipboard failed", ex);
+			ShowInfo("Copy failed: " + ex.Message, InfoBarSeverity.Error);
+		}
+	}
+
+	private void PreviewCopy_Click(object sender, RoutedEventArgs e)
+	{
+		CopyImageToClipboard(_copyTargetPath);
+	}
+
+	private void CopyCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+	{
+		e.CanExecute = !string.IsNullOrEmpty(_copyTargetPath) && File.Exists(_copyTargetPath);
+	}
+
+	private void CopyCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+	{
+		CopyImageToClipboard(_copyTargetPath);
+		e.Handled = true;
 	}
 
 	private static void EnsureWindowVisible(Window? window)

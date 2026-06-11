@@ -1331,45 +1331,6 @@ public partial class SettingsPage : UserControl
         });
     }
 
-    private List<string> BuildDiscordDumpList(List<DiscordDumpDownloadService.DiscordDumpInfo> dumps)
-    {
-        // Use pre-loaded timestamps from splash, or scan now
-        if (_cachedLocalTimestamps == null)
-        {
-            if (App.PreloadedLocalTimestampsTask is { IsCompletedSuccessfully: true })
-            {
-                _cachedLocalTimestamps = App.PreloadedLocalTimestampsTask.Result;
-                App.PreloadedLocalTimestampsTask = null;
-            }
-            else
-            {
-                _cachedLocalTimestamps = DiscordDumpDownloadService.ScanLocalCreatedAtTimestamps(
-                    _main.Settings.ImageExporterBasePath);
-            }
-        }
-
-        var items = new List<string>();
-        foreach (var dump in dumps)
-        {
-            var effectiveDate = dump.DataCreatedAt ?? dump.MessageTimestamp;
-            var dateStr = effectiveDate.ToString("yyyy-MM-dd");
-            var versionStr = "";
-            if (_apkVersions != null)
-            {
-                var match = ApkDownloadService.MatchVersionByDate(_apkVersions, effectiveDate);
-                if (match != null) versionStr = $" → v{match.Version}";
-            }
-            var checkmark = _cachedLocalTimestamps.Contains(effectiveDate) ? " ✔" : "";
-            var prefix = dump.DataCreatedAt == null ? "~" : "";
-            items.Add($"{prefix}{dateStr}{versionStr}{checkmark}");
-        }
-        if (items.Count == 0)
-            items.Add("No dumps found");
-        return items;
-    }
-
-    private HashSet<DateTimeOffset>? _cachedLocalTimestamps;
-
     private List<string> BuildVersionList()
     {
         var showDates = chkShowReleaseDates.IsChecked == true;

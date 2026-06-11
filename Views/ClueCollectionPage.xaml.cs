@@ -5,7 +5,6 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using MergeMansionWikiTools.Models;
 using MergeMansionWikiTools.Services;
 using Wpf.Ui.Controls;
@@ -21,10 +20,15 @@ public partial class ClueCollectionPage : UserControl
     private bool _suppressVersionChange;
     private string? _overrideExportDir;
 
+    /// <summary>ItemsSource virtualizovaného listu — instance se nemění, rebuild = Clear + Add
+    /// (zachová scroll pozici stejně jako dřívější pnlCases.Children.Clear()+Add).</summary>
+    private readonly System.Collections.ObjectModel.ObservableCollection<ClueCaseCardItem> _caseItems = new();
+
     public ClueCollectionPage(MainWindow main)
     {
         _main = main;
         InitializeComponent();
+        lstCases.ItemsSource = _caseItems;
         _ = TryLoadAsync();
     }
 
@@ -48,7 +52,7 @@ public partial class ClueCollectionPage : UserControl
             // Resolve item names AFTER loading (DataService may not be ready during parse)
             if (_main.DataService != null)
             {
-                _service.SetDataService(_main.DataService);
+                _service.SetDataService(_main.DataService, _main.WikiMapping);
                 _service.ResolveRewardNames();
             }
             txtStatus.Text = $"Found {_service.Cases.Count} cases. Checking wiki...";
@@ -61,7 +65,7 @@ public partial class ClueCollectionPage : UserControl
 
             pnlLoading.Visibility = Visibility.Collapsed;
             BuildCaseList();
-            scrollCases.Visibility = Visibility.Visible;
+            lstCases.Visibility = Visibility.Visible;
             _loaded = true;
             PopulateImageFolderDropdown();
         }
@@ -77,9 +81,11 @@ public partial class ClueCollectionPage : UserControl
 
     private void BuildCaseList()
     {
-        pnlCases.Children.Clear();
+        // Plný rebuild seznamu (stejný mechanismus jako dřív) — per-case stav (NEW badge,
+        // Check Sizes, vzhled Update Wiki, fajfka) se přepočítá v konstruktoru view-modelu.
+        _caseItems.Clear();
         foreach (var caseObj in _service!.Cases)
-            pnlCases.Children.Add(CreateCaseCard(caseObj));
+            _caseItems.Add(new ClueCaseCardItem(caseObj));
     }
 
     private void PopulateImageFolderDropdown()
@@ -127,131 +133,9 @@ public partial class ClueCollectionPage : UserControl
         }
     }
 
-    private Border CreateCaseCard(ClueCollectionCase caseObj)
-    {
-        var border = new Border
-        {
-            CornerRadius = new CornerRadius(4),
-            Padding = new Thickness(14, 10, 14, 10),
-            Margin = new Thickness(0, 0, 0, 4)
-        };
-        border.SetResourceReference(Border.BackgroundProperty, "CardBackgroundFillColorDefaultBrush");
-
-        var grid = new Grid();
-        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-
-        // Left: name + info
-        var infoPanel = new StackPanel();
-        var namePanel = new StackPanel { Orientation = Orientation.Horizontal };
-        var nameText = new TextBlock
-        {
-            Text = $"Case {caseObj.Index}: {caseObj.DisplayName}",
-            FontSize = 14,
-            FontWeight = FontWeights.SemiBold
-        };
-        nameText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorPrimaryBrush");
-        namePanel.Children.Add(nameText);
-
-        if (!caseObj.ExistsOnWiki)
-        {
-            var badge = new Border
-            {
-                Background = new SolidColorBrush(Color.FromRgb(0x4C, 0xAF, 0x50)),
-                CornerRadius = new CornerRadius(3),
-                Padding = new Thickness(6, 1, 6, 1),
-                Margin = new Thickness(8, 0, 0, 0),
-                VerticalAlignment = VerticalAlignment.Center
-            };
-            badge.Child = new TextBlock
-            {
-                Text = "NEW",
-                FontSize = 10,
-                FontWeight = FontWeights.Bold,
-                Foreground = Brushes.White
-            };
-            namePanel.Children.Add(badge);
-        }
-        infoPanel.Children.Add(namePanel);
-
-        int totalClues = caseObj.Sets.Sum(s => s.CardCount);
-        var metaText = new TextBlock
-        {
-            Text = $"{caseObj.Sets.Count} sets  ·  {totalClues} clues",
-            FontSize = 11,
-            Margin = new Thickness(0, 2, 0, 0)
-        };
-        metaText.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorTertiaryBrush");
-        infoPanel.Children.Add(metaText);
-
-        Grid.SetColumn(infoPanel, 0);
-        grid.Children.Add(infoPanel);
-
-        // Right: buttons
-        var btnPanel = new StackPanel
-        {
-            Orientation = Orientation.Horizontal,
-            VerticalAlignment = VerticalAlignment.Center
-        };
-
-        // Upload Images button (for all cases — allows re-uploading)
-        var btnUpload = new Wpf.Ui.Controls.Button
-        {
-            Content = "Upload Images",
-            Appearance = ControlAppearance.Secondary,
-            FontSize = 11,
-            Padding = new Thickness(12, 4, 12, 4),
-            Margin = new Thickness(0, 0, 6, 0),
-            Tag = caseObj
-        };
-        btnUpload.Click += BtnUploadImages_Click;
-        btnPanel.Children.Add(btnUpload);
-
-        // Check Sizes button (for cases on wiki)
-        if (caseObj.ExistsOnWiki)
-        {
-            var btnCheck = new Wpf.Ui.Controls.Button
-            {
-                Content = "Check Sizes",
-                Appearance = ControlAppearance.Secondary,
-                FontSize = 11,
-                Padding = new Thickness(12, 4, 12, 4),
-                Margin = new Thickness(0, 0, 6, 0),
-                Tag = caseObj
-            };
-            btnCheck.Click += BtnCheckCaseSizes_Click;
-            btnPanel.Children.Add(btnCheck);
-        }
-
-        var btnWiki = new Wpf.Ui.Controls.Button
-        {
-            Content = "Update Wiki",
-            Appearance = caseObj.ExistsOnWiki ? ControlAppearance.Secondary : ControlAppearance.Primary,
-            Height = 32,
-            FontSize = caseObj.ExistsOnWiki ? 11 : 14,
-            Tag = caseObj
-        };
-        btnWiki.Click += BtnUpdateWiki_Click;
-        btnPanel.Children.Add(btnWiki);
-
-        if (caseObj.ExistsOnWiki)
-        {
-            var check = new TextBlock
-            {
-                Text = "\u2713",
-                FontSize = 16,
-                Foreground = new SolidColorBrush(Color.FromRgb(0x4C, 0xAF, 0x50)),
-                Margin = new Thickness(4, 0, 4, 0)
-            };
-            btnPanel.Children.Add(check);
-        }
-
-        Grid.SetColumn(btnPanel, 1);
-        grid.Children.Add(btnPanel);
-
-        border.Child = grid;
-        return border;
-    }
+    // Vizuál case karty žije v XAML DataTemplate (lstCases.ItemTemplate) nad ClueCaseCardItem.
+    // Click handlery (BtnUploadImages_Click / BtnCheckCaseSizes_Click / BtnUpdateWiki_Click)
+    // dostávají ClueCollectionCase přes Tag="{Binding Case}" — signatury beze změny.
 
     // ── Preview + Confirm dialog ────────────────────────────────────
 
@@ -272,7 +156,7 @@ public partial class ClueCollectionPage : UserControl
             // Ensure DataService is available for item name resolution
             if (_main.DataService != null && _service != null)
             {
-                _service.SetDataService(_main.DataService);
+                _service.SetDataService(_main.DataService, _main.WikiMapping);
                 _service.ResolveRewardNames();
             }
 
@@ -588,13 +472,21 @@ public partial class ClueCollectionPage : UserControl
         // Step 4: History table merge (rowspan identical rows)
         if (_service != null && _service.Cases.Count >= 5)
         {
-            // Check if the current table could benefit from rowspan merging
+            // Compare the freshly merged table against what's currently on the page. The old
+            // heuristic only checked for the presence of "rowspan", which was wrong: a partially
+            // merged table (e.g. cases 5-9 merged, but newer 10/11 each added as their own row)
+            // already contains rowspan, so the step was flagged "no change" and the new rows never
+            // got merged. Regenerating also refreshes stale reward cells (e.g. old "Reward Box" →
+            // correct "Area Reward Box" for Tcce_final_chest_producers), so identical rows finally
+            // collapse together.
             var mergedTable = ClueCollectionService.GenerateMergedHistoryTable(_service.Cases);
-            bool alreadyMerged = pageContent.Contains("rowspan", StringComparison.OrdinalIgnoreCase);
+            string? currentTable = ExtractHistoryTable(pageContent);
+            bool alreadyMerged = currentTable != null
+                && NormalizeTable(currentTable) == NormalizeTable(mergedTable);
             steps.Add(new MysteryUpdateStep
             {
                 Title = "Refactor History table (row merging)",
-                Detail = alreadyMerged ? "Table already has rowspan merging (no change)"
+                Detail = alreadyMerged ? "Table already matches merged layout (no change)"
                     : "Merge identical Clue Sets / Total clues / Duration / Grand Reward columns with rowspan",
                 IsNoChange = alreadyMerged,
                 IsEnabled = false, // default off — user opts in
@@ -844,6 +736,29 @@ public partial class ClueCollectionPage : UserControl
             $"Add Clue Collection #{caseObj.Index}: History row + set rewards (via MergeMansionWikiTools)");
     }
 
+    /// <summary>
+    /// Extracts the History wikitable (`{| ... |}`) under the "== History ==" heading.
+    /// Returns null if the heading or table delimiters are missing.
+    /// </summary>
+    private static string? ExtractHistoryTable(string pageContent)
+    {
+        int historyIdx = pageContent.IndexOf("== History ==", StringComparison.Ordinal);
+        if (historyIdx < 0) return null;
+        int tableStart = pageContent.IndexOf("{|", historyIdx, StringComparison.Ordinal);
+        if (tableStart < 0) return null;
+        int tableEnd = pageContent.IndexOf("|}", tableStart, StringComparison.Ordinal);
+        if (tableEnd < 0) return null;
+        return pageContent[tableStart..(tableEnd + 2)];
+    }
+
+    /// <summary>Normalizes a wikitable for equality comparison: trims each line and drops blanks,
+    /// so cosmetic whitespace/line-ending differences don't read as a content change.</summary>
+    private static string NormalizeTable(string table) =>
+        string.Join("\n", table.Replace("\r", "")
+            .Split('\n')
+            .Select(l => l.Trim())
+            .Where(l => l.Length > 0));
+
     private async Task<string> MergeHistoryTableAsync()
     {
         if (_service == null) return "No data loaded.";
@@ -931,7 +846,7 @@ public partial class ClueCollectionPage : UserControl
             if (processedDir != null && !File.Exists(targetPath))
                 File.Copy(fullPath, targetPath);
 
-            bool isOpt = File.Exists(targetPath) && OptimizationWindow.HasOptMarker(File.ReadAllBytes(targetPath));
+            bool isOpt = File.Exists(targetPath) && OptimizationWindow.HasOptMarker(await File.ReadAllBytesAsync(targetPath));
             fileList.Add((fileName, targetPath, isOpt));
         }
 
@@ -955,7 +870,7 @@ public partial class ClueCollectionPage : UserControl
             for (int i = 0; i < fileList.Count; i++)
             {
                 var f = fileList[i];
-                bool isOpt = File.Exists(f.LocalPath) && OptimizationWindow.HasOptMarker(File.ReadAllBytes(f.LocalPath));
+                bool isOpt = File.Exists(f.LocalPath) && OptimizationWindow.HasOptMarker(await File.ReadAllBytesAsync(f.LocalPath));
                 fileList[i] = (f.WikiName, f.LocalPath, isOpt);
             }
         }
@@ -968,7 +883,7 @@ public partial class ClueCollectionPage : UserControl
             var f = fileList[i];
             if (!f.AlreadyOptimized)
             {
-                bool isOpt = File.Exists(f.LocalPath) && OptimizationWindow.HasOptMarker(File.ReadAllBytes(f.LocalPath));
+                bool isOpt = File.Exists(f.LocalPath) && OptimizationWindow.HasOptMarker(await File.ReadAllBytesAsync(f.LocalPath));
                 fileList[i] = (f.WikiName, f.LocalPath, isOpt);
             }
         }
@@ -1130,18 +1045,8 @@ public partial class ClueCollectionPage : UserControl
         txtProcessingFile.Text = fileName;
         pbProcessing.Value = total > 0 ? (double)current / total * 100 : 0;
 
-        try
-        {
-            var bmp = new BitmapImage();
-            bmp.BeginInit();
-            bmp.UriSource = new Uri(filePath);
-            bmp.DecodePixelWidth = 48;
-            bmp.CacheOption = BitmapCacheOption.OnLoad;
-            bmp.EndInit();
-            bmp.Freeze();
-            imgProcessingThumb.Source = bmp;
-        }
-        catch { imgProcessingThumb.Source = null; }
+        // ThumbnailCache vrací null při chybě — odpovídá původnímu catch → Source = null
+        imgProcessingThumb.Source = ThumbnailCache.Get(filePath, 48);
     }
 
     private string? ResolveExportDir()
@@ -1213,7 +1118,8 @@ public partial class ClueCollectionPage : UserControl
                 string titles = string.Join("|", batch);
                 string url = $"https://merge-mansion.fandom.com/api.php?action=query&titles={Uri.EscapeDataString(titles)}&prop=imageinfo&iiprop=size&format=json";
 
-                var json = await new System.Net.Http.HttpClient().GetStringAsync(url);
+                // Shared client (has User-Agent — required for Fandom) instead of per-batch new HttpClient
+                var json = await WikiMappingService.SharedHttp.GetStringAsync(url);
                 var doc = System.Text.Json.JsonDocument.Parse(json);
                 var pages = doc.RootElement.GetProperty("query").GetProperty("pages");
 
@@ -1432,4 +1338,34 @@ public partial class ClueCollectionPage : UserControl
             window.WindowState = WindowState.Normal;
         window.Activate();
     }
+}
+
+/// <summary>
+/// Lehký view-model jedné case karty pro virtualizovaný lstCases (DataTemplate v XAML).
+/// Vlastnosti jsou immutable — per-card update probíhá plným rebuildem seznamu
+/// (BuildCaseList → Clear + nové instance), stejně jako dřívější ruční rebuild pnlCases.
+/// </summary>
+public sealed class ClueCaseCardItem
+{
+    public ClueCaseCardItem(ClueCollectionCase caseObj)
+    {
+        Case = caseObj;
+        Title = $"Case {caseObj.Index}: {caseObj.DisplayName}";
+        int totalClues = caseObj.Sets.Sum(s => s.CardCount);
+        Meta = $"{caseObj.Sets.Count} sets  ·  {totalClues} clues";
+        NewBadgeVisibility = caseObj.ExistsOnWiki ? Visibility.Collapsed : Visibility.Visible;
+        OnWikiVisibility = caseObj.ExistsOnWiki ? Visibility.Visible : Visibility.Collapsed;
+        UpdateWikiAppearance = caseObj.ExistsOnWiki ? ControlAppearance.Secondary : ControlAppearance.Primary;
+        UpdateWikiFontSize = caseObj.ExistsOnWiki ? 11d : 14d;
+    }
+
+    /// <summary>Podkladová case — v template bindovaná na Tag tlačítek (handlery čtou btn.Tag).</summary>
+    public ClueCollectionCase Case { get; }
+
+    public string Title { get; }
+    public string Meta { get; }
+    public Visibility NewBadgeVisibility { get; }
+    public Visibility OnWikiVisibility { get; }
+    public ControlAppearance UpdateWikiAppearance { get; }
+    public double UpdateWikiFontSize { get; }
 }

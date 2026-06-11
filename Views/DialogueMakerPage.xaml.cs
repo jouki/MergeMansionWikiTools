@@ -698,17 +698,8 @@ public partial class DialogueMakerPage : UserControl
         _nextIndex = _images.Count + 1;
     }
 
-    private static BitmapImage LoadThumbnail(byte[] data)
-    {
-        var bi = new BitmapImage();
-        bi.BeginInit();
-        bi.StreamSource = new MemoryStream(data);
-        bi.DecodePixelWidth = 128;
-        bi.CacheOption = BitmapCacheOption.OnLoad;
-        bi.EndInit();
-        bi.Freeze();
-        return bi;
-    }
+    private static BitmapImage? LoadThumbnail(byte[] data)
+        => ThumbnailCache.FromBytes(data, 128);
 
     private void UpdateImageCount()
     {

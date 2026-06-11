@@ -74,6 +74,14 @@ internal static class Program
             // ConstantProducer multi-product serialization (v0.20.73+).
             return DumpChain(args[1], args[2], args[3]);
         }
+        if (args.Length >= 4 && args[0] == "--probe-hotspot")
+        {
+            // --probe-hotspot <configPath> <languagePath> <idSubstring>
+            // Prints HotspotDefinition fields relevant for description resolution
+            // (DescriptionLocalizationId, MultistepGroupId) + all loc key attempts.
+            // Used to diagnose tasks with missing Description in areas.json.
+            return ProbeHotspot(args[1], args[2], args[3]);
+        }
 
         if (args.Length < 3)
         {
@@ -1195,6 +1203,60 @@ internal static class Program
             AssetsTools.NET.Extra.AssetsFileInstance fi = null;
             try { fi = am.LoadAssetsFileFromBundle(bunInst, i, loadDeps: false); } catch { }
             if (fi != null) yield return fi;
+        }
+    }
+
+    // Probe HotspotDefinition — print description-resolution fields for hotspots whose Id
+    // contains the substring. Diagnoses tasks with missing Description in areas.json
+    // (e.g. renamed multistep members like FirstFloorHallwayReadingNookFixRightChair).
+    private static int ProbeHotspot(string configPath, string languagePath, string idSubstring)
+    {
+        Console.WriteLine($"=== ProbeHotspot ===");
+        Console.WriteLine($"Config:   {configPath}");
+        Console.WriteLine($"Language: {languagePath}");
+        Console.WriteLine($"Filter:   {idSubstring}");
+
+        try
+        {
+            MetaplayCore.Initialize();
+            if (!string.IsNullOrEmpty(languagePath) && File.Exists(languagePath))
+            {
+                var langHash = ContentHash.ParseString(Path.GetFileName(languagePath));
+                MetaplaySDK.ActiveLanguage = LocalizationLanguage.ImportBinary(langHash, File.ReadAllBytes(languagePath));
+            }
+            var archive = ConfigArchive.FromBytes(File.ReadAllBytes(configPath));
+            var patchedArchive = PatchedConfigArchive.WithNoPatches(archive);
+            var gameConfig = (SharedGameConfig)GameConfigFactory.Instance.ImportSharedGameConfig(patchedArchive);
+            ClientGlobal.SharedGameConfig = gameConfig;
+
+            int count = 0;
+            foreach (var kv in gameConfig.HotspotDefinitions.EnumerateAll())
+            {
+                var def = (GameLogic.Hotspots.HotspotDefinition)kv.Value;
+                var id = def.Id.ToString();
+                if (!id.Contains(idSubstring, StringComparison.OrdinalIgnoreCase)) continue;
+                count++;
+                Console.WriteLine($"--- {id}");
+                Console.WriteLine($"    DescriptionLocalizationId: '{def.DescriptionLocalizationId}'");
+                Console.WriteLine($"    MultistepGroupId:          '{def.MultistepGroupId}'");
+                string prefixed = $"HotspotDescription_{id}";
+                Console.WriteLine($"    key '{prefixed}': {(LocMan.HasString(prefixed) ? "'" + LocMan.Get(prefixed) + "'" : "MISSING")}");
+                Console.WriteLine($"    key '{id}' (bare): {(LocMan.HasString(id) ? "'" + LocMan.Get(id) + "'" : "MISSING")}");
+                var dli = def.DescriptionLocalizationId;
+                if (!string.IsNullOrEmpty(dli))
+                {
+                    Console.WriteLine($"    key '{dli}' (DLI bare): {(LocMan.HasString(dli) ? "'" + LocMan.Get(dli) + "'" : "MISSING")}");
+                    var dliPrefixed = $"HotspotDescription_{dli}";
+                    Console.WriteLine($"    key '{dliPrefixed}' (DLI prefixed): {(LocMan.HasString(dliPrefixed) ? "'" + LocMan.Get(dliPrefixed) + "'" : "MISSING")}");
+                }
+            }
+            Console.WriteLine($"Matched hotspots: {count}");
+            return 0;
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"FATAL: {ex.GetType().Name}: {ex.Message}");
+            return 1;
         }
     }
 

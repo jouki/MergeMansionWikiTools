@@ -1,5 +1,6 @@
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -33,7 +34,150 @@ public partial class MainWindow : FluentWindow
     public DataService? DataService { get; private set; }
     public WikiMappingCache? WikiMapping { get; set; }
     public MysteryService? MysteryService { get; set; }
+
+    /// <summary>Path the current <see cref="MysteryService"/> was loaded from (base or
+    /// AB-bucket events.json). Lets MysteriesPage decide whether the preloaded instance
+    /// matches its bucket-resolved path or a fresh load is needed.</summary>
+    public string? MysteryServiceLoadedPath { get; set; }
+
     internal List<ApkDownloadService.ApkVersionInfo>? ApkVersions { get; set; }
+
+    // ── Shared data caches ──────────────────────────────────────────────
+    // One JSON parse per file, shared across pages/dialogs (AreasService used to be
+    // parsed 5×, EventService 3×, etc.). Invalidated in the Set*Path methods — the
+    // Game Data Dumper calls those after every dump, even when the path itself is
+    // unchanged (file rewritten in place) — and in RefreshAutocompleteData as a
+    // post-APK-extraction safety net. See AsyncDataCache<T>.
+    private readonly AsyncDataCache<AreasService> _areasServiceCache = new(async path =>
+    {
+        var svc = new AreasService();
+        await svc.LoadAsync(path);
+        return svc;
+    });
+    private readonly AsyncDataCache<EventService> _eventServiceCache = new(async path =>
+    {
+        var svc = new EventService();
+        await svc.LoadAsync(path);
+        return svc;
+    });
+    private readonly AsyncDataCache<DialogueService> _dialogueServiceCache = new(async path =>
+    {
+        var svc = new DialogueService();
+        await svc.LoadAsync(path);
+        return svc;
+    });
+    private readonly AsyncDataCache<MysteryService> _mysteryServiceCache = new(async path =>
+    {
+        var svc = new MysteryService();
+        await svc.LoadAsync(path);
+        return svc;
+    });
+
+    // EventService.ResolveChains mutates the shared instance, so resolves are chained
+    // (serialized) to avoid two callers mutating ev.Chains concurrently. Resolution is
+    // re-run on every GetEventServiceAsync call — matching the old per-consumer behavior —
+    // because TryApplyWikiMapping replaces ParsedChain objects inside the SAME DataService
+    // instance (Chains.Clear + AddRange), so a one-shot "already resolved" flag would keep
+    // ev.Chains pointing at dead chain objects.
+    private readonly object _eventResolveLock = new();
+    private Task _eventResolveChain = Task.CompletedTask;
+
+    /// <summary>Shared, cached AreasService loaded from Settings.AreasJsonPath.
+    /// Returns null when the path is not configured or the file is missing.</summary>
+    public async Task<AreasService?> GetAreasServiceAsync()
+    {
+        var path = Settings.AreasJsonPath;
+        if (string.IsNullOrEmpty(path) || !File.Exists(path)) return null;
+        return await _areasServiceCache.GetOrLoadAsync(path);
+    }
+
+    /// <summary>Shared, cached EventService loaded from Settings.EventsJsonPath, with
+    /// chains resolved against the current DataService (when loaded). Returns null when
+    /// the path is not configured or the file is missing.</summary>
+    public async Task<EventService?> GetEventServiceAsync()
+    {
+        var path = Settings.EventsJsonPath;
+        if (string.IsNullOrEmpty(path) || !File.Exists(path)) return null;
+        var svc = await _eventServiceCache.GetOrLoadAsync(path);
+
+        var ds = DataService;
+        if (ds != null)
+        {
+            Task resolveTask;
+            lock (_eventResolveLock)
+            {
+                var prev = _eventResolveChain;
+                _eventResolveChain = resolveTask = Task.Run(async () =>
+                {
+                    try { await prev; } catch { /* previous resolve failure doesn't block this one */ }
+                    svc.ResolveChains(ds);
+                });
+            }
+            await resolveTask;
+        }
+        return svc;
+    }
+
+    /// <summary>Shared, cached DialogueService. Resolves dialogues.json via the same
+    /// candidate chain MysteriesPage historically used (explicit setting → next to
+    /// events.json → dumper output → APK dump folder). Returns null when no candidate
+    /// exists or the load fails (logged, matching the previous per-page behavior).</summary>
+    public async Task<DialogueService?> GetDialogueServiceAsync()
+    {
+        var path = ResolveDialoguesJsonPath();
+        if (path == null) return null;
+        try
+        {
+            var svc = await _dialogueServiceCache.GetOrLoadAsync(path);
+            AppLogger.Info("DialogueService loaded from: " + path);
+            return svc;
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Warn("Failed to load dialogues.json: " + ex.Message);
+            return null;
+        }
+    }
+
+    /// <summary>Finds dialogues.json — explicit setting first, then conventional
+    /// locations next to other dump files. Moved from MysteriesPage so all consumers
+    /// share one resolution + one parsed instance.</summary>
+    private string? ResolveDialoguesJsonPath()
+    {
+        var candidates = new List<string>();
+        if (!string.IsNullOrEmpty(Settings.DialoguesJsonPath))
+            candidates.Add(Settings.DialoguesJsonPath);
+        var eventsPath = Settings.EventsJsonPath;
+        if (!string.IsNullOrEmpty(eventsPath))
+        {
+            var dir = Path.GetDirectoryName(eventsPath);
+            if (!string.IsNullOrEmpty(dir))
+                candidates.Add(Path.Combine(dir, "dialogues.json"));
+        }
+        if (!string.IsNullOrEmpty(Settings.DumperOutputPath))
+            candidates.Add(Path.Combine(Settings.DumperOutputPath, "dialogues.json"));
+        if (!string.IsNullOrEmpty(Settings.ImageExporterBasePath) && !string.IsNullOrEmpty(Settings.SelectedApkVersion))
+        {
+            var dumpFolder = !string.IsNullOrEmpty(Settings.ActiveDumpFolder) ? Settings.ActiveDumpFolder : "Dump";
+            var dumpDir = Path.Combine(Settings.ImageExporterBasePath, Settings.SelectedApkVersion, dumpFolder);
+            candidates.Add(Path.Combine(dumpDir, "dialogues.json"));
+        }
+        AppLogger.Info($"DialogueService: searching {candidates.Count} candidates: {string.Join(", ", candidates)}");
+        var path = candidates.FirstOrDefault(File.Exists);
+        if (path == null)
+            AppLogger.Warn("DialogueService: dialogues.json not found in any candidate path");
+        return path;
+    }
+
+    /// <summary>Shared, cached MysteryService for the given events.json path (callers pass
+    /// the base path or an AB-bucket patched copy — see MysteriesPage.ResolveEventsJsonPath).</summary>
+    public Task<MysteryService> GetMysteryServiceAsync(string path)
+        => _mysteryServiceCache.GetOrLoadAsync(path);
+
+    /// <summary>Forces the next GetMysteryServiceAsync to re-parse from disk. Used by the
+    /// MysteriesPage Refresh button, which intentionally rebuilds mysteries from the file
+    /// (fresh WikiStatus objects) before re-applying the persisted status cache.</summary>
+    public void InvalidateMysteryServiceCache() => _mysteryServiceCache.Invalidate();
 
     /// <summary>Pre-built autocomplete dataset for the Generate Page dialog. Eagerly populated
     /// off-thread after chain data + areas load — see <see cref="StartAutocompletePrewarm"/>.
@@ -54,6 +198,13 @@ public partial class MainWindow : FluentWindow
     public void RefreshAutocompleteData()
     {
         SpriteMetadataService.InvalidateCache();
+        // Safety net: drop shared JSON data caches too (the dumper's Set*Path calls are
+        // the primary invalidation hooks; this covers any extraction flow that bypasses
+        // them). Cheap — caches re-parse lazily on next access.
+        _areasServiceCache.Invalidate();
+        _eventServiceCache.Invalidate();
+        _dialogueServiceCache.Invalidate();
+        _mysteryServiceCache.Invalidate();
         StartAutocompletePrewarm();
         // Notify subscribers once the rebuild finishes (task may already be running)
         AutocompletePrewarmTask?.ContinueWith(_ =>
@@ -817,31 +968,52 @@ public partial class MainWindow : FluentWindow
         var wm = WikiMapping;
         var imgBase = Settings.ImageExporterBasePath;
         var apkVer = Settings.SelectedApkVersion;
-        var areasPath = Settings.AreasJsonPath;
         AutocompletePrewarmTask = Task.Run(async () =>
         {
             using var _t = AppLogger.Timed("AutocompletePrewarm");
             List<LuaArea>? areas = null;
-            if (!string.IsNullOrEmpty(areasPath) && File.Exists(areasPath))
+            try
             {
-                try
-                {
-                    var svc = new AreasService();
-                    svc.LoadAsync(areasPath).GetAwaiter().GetResult();
-                    areas = svc.Areas;
-                }
-                catch { /* areas load failure non-critical for autocomplete */ }
+                // Shared per-path cache — repeated prewarms no longer re-parse areas.json
+                areas = (await GetAreasServiceAsync())?.Areas;
             }
+            catch { /* areas load failure non-critical for autocomplete */ }
             // Pre-fetch wiki area ordering so autocomplete sorts areas by wiki orderingIndex
             // (same source as Area Flowcharts page). 5-second timeout inside the call; on
             // failure GetOrderingIndex returns double.MaxValue and we fall back to alpha sort.
             try { await DiscordFlowchartService.EnsureMappingLoadedAsync(); }
             catch (Exception ex) { AppLogger.Info($"[AUTOCOMPLETE-PREWARM] area ordering fetch failed: {ex.Message}"); }
 
-            var imageDir = AutocompleteDataService.ResolveImageDir(imgBase, apkVer);
-            var data = AutocompleteDataService.Build(ds, wm, areas, imageDir, imgBase, apkVer);
-            CachedAutocomplete = data;
-            return data;
+            // STAGE 1 (fast, <1 s): text-only dataset — names/levels/areas. The prewarm task
+            // completes here, so a dialog opened right after app start gets usable text
+            // suggestions immediately instead of waiting for thumbnail resolution
+            // (previously the whole build blocked the dialog for ~30 s on large datasets).
+            var core = AutocompleteDataService.BuildCore(ds, wm, areas);
+            CachedAutocomplete = core;
+
+            // STAGE 2 (heavy, parallel): thumbnail resolution continues in the background.
+            // Publishes a new dataset + fires AutocompleteDataRefreshed so open dialogs
+            // re-pull and thumbnails appear. Staleness guard: if a newer prewarm replaced
+            // CachedAutocomplete meanwhile, this result is discarded.
+            _ = Task.Run(() =>
+            {
+                try
+                {
+                    using var _t2 = AppLogger.Timed("AutocompletePrewarm/Images");
+                    var imageDir = AutocompleteDataService.ResolveImageDir(imgBase, apkVer);
+                    var full = AutocompleteDataService.BuildImages(core, ds, wm, areas, imageDir, imgBase, apkVer);
+                    if (ReferenceEquals(CachedAutocomplete, core))
+                    {
+                        CachedAutocomplete = full;
+                        Dispatcher.InvokeAsync(() => AutocompleteDataRefreshed?.Invoke());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    AppLogger.Warn($"[AUTOCOMPLETE-PREWARM] image stage failed: {ex.Message}");
+                }
+            });
+            return core;
         });
     }
 
@@ -857,9 +1029,11 @@ public partial class MainWindow : FluentWindow
         using var _t = AppLogger.Timed("LoadMysteriesAsync");
         try
         {
-            var svc = new MysteryService();
-            await svc.LoadAsync(path);
+            // Shared per-path cache — MysteriesPage requesting the same path while this
+            // preload is still running awaits the same parse instead of starting its own
+            var svc = await _mysteryServiceCache.GetOrLoadAsync(path);
             MysteryService = svc;
+            MysteryServiceLoadedPath = path;
 
             // Resolve items if DataService is already available
             if (DataService != null)
@@ -933,6 +1107,34 @@ public partial class MainWindow : FluentWindow
 
         var eventText = eventCount > 0 ? $"{eventCount}" : "?";
         txtDataStatus.Text = $"{chainCount} chains · {itemCount} items · {eventText} events";
+
+        // Show the game version of the actually-loaded data on its own line (derived from the
+        // workspace folder, e.g. ...\APKs\26.05.01\Dump\chain_item_odds.json). This reflects
+        // what's loaded, not the APK dropdown selection — the two can diverge.
+        var version = ExtractVersionFromDataPath(Settings.ChainItemOddsPath);
+        if (version != null)
+        {
+            txtVersionStatus.Text = $"v{version}";
+            txtVersionStatus.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            txtVersionStatus.Visibility = Visibility.Collapsed;
+        }
+    }
+
+    /// <summary>
+    /// Pulls the game version out of a loaded data file path by finding the path segment
+    /// shaped like a version number (e.g. "26.05.01" in ...\APKs\26.05.01\Dump\...).
+    /// Returns null when no such segment exists.
+    /// </summary>
+    private static string? ExtractVersionFromDataPath(string? path)
+    {
+        if (string.IsNullOrEmpty(path)) return null;
+        foreach (var seg in path.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar))
+            if (Regex.IsMatch(seg, @"^\d+(\.\d+)+$"))
+                return seg;
+        return null;
     }
 
     /// <summary>
@@ -1027,6 +1229,8 @@ public partial class MainWindow : FluentWindow
     {
         Settings.AreasJsonPath = path;
         SaveSettings();
+        // File may have been rewritten in place (dumper re-run) — force re-parse
+        _areasServiceCache.Invalidate();
         AreasFileChanged?.Invoke();
     }
 
@@ -1037,7 +1241,12 @@ public partial class MainWindow : FluentWindow
     {
         Settings.EventsJsonPath = path;
         SaveSettings();
+        // File may have been rewritten in place (dumper re-run) — force re-parse of
+        // both events.json consumers (EventService + MysteryService)
+        _eventServiceCache.Invalidate();
+        _mysteryServiceCache.Invalidate();
         MysteryService = null; // Force reload
+        MysteryServiceLoadedPath = null;
         _ = LoadMysteriesAsync();
         EventsFileChanged?.Invoke();
     }
@@ -1046,6 +1255,8 @@ public partial class MainWindow : FluentWindow
     {
         Settings.DialoguesJsonPath = path;
         SaveSettings();
+        // File may have been rewritten in place (dumper re-run) — force re-parse
+        _dialogueServiceCache.Invalidate();
     }
 
     public void SetPetsPath(string path)

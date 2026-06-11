@@ -119,14 +119,56 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
         }
 
 
+        // CUSTOM: Description fallback for renamed multistep members. The game resolves step
+        // descriptions by MULTISTEP GROUP + step index ("HotspotDescription_{GroupId}_{N}",
+        // final step = bare "HotspotDescription_{GroupId}"). For most tasks the hotspot Id
+        // happens to equal "{GroupId}_{N}", so the per-Id lookup coincides — but for renamed
+        // members it misses. Example (26.05.01): FirstFloorHallwayReadingNookFixRightChair is
+        // step 1 of group ...PlaceMirror; its description lives under
+        // "HotspotDescription_FirstFloorHallwayReadingNookPlaceMirror_1" ("Place hook").
+        private string ResolveHotspotDescription(HotspotDefinition hotspot)
+        {
+            if (LocMan.HasHotspotDescription(hotspot.Id))
+                return LocMan.GetHotspotDescription(hotspot.Id);
+
+            var groupId = hotspot.MultistepGroupId?.ToString();
+            if (string.IsNullOrEmpty(groupId) || groupId == hotspot.Id.ToString())
+                return null;
+
+            var members = _config.HotspotDefinitions.EnumerateAll()
+                .Select(x => (HotspotDefinition)x.Value)
+                .Where(d => d.MultistepGroupId?.ToString() == groupId)
+                .ToList();
+
+            // Topological order along the intra-group unlock chain (groups are short linear
+            // chains; parents OUTSIDE the group don't constrain the order).
+            var ordered = new List<HotspotDefinition>();
+            var remaining = new List<HotspotDefinition>(members);
+            while (remaining.Count > 0)
+            {
+                var next = remaining.FirstOrDefault(d =>
+                    d.UnlockingParentRefs == null ||
+                    !d.UnlockingParentRefs.Any(p => remaining.Any(r => !ReferenceEquals(r, d) && r.Id.Equals(p.ConfigKey))));
+                if (next == null)
+                    break; // cyclic refs — give up, behave like before the fallback existed
+                ordered.Add(next);
+                remaining.Remove(next);
+            }
+
+            int index = ordered.FindIndex(d => d.Id.Equals(hotspot.Id));
+            if (index < 0)
+                return null;
+
+            var key = $"HotspotDescription_{groupId}_{index + 1}";
+            return LocMan.HasString(key) ? LocMan.Get(key) : null;
+        }
+
         private string GetNodeText(HotspotDefinition hotspot)
         {
             if (hotspot == null)
                 return null;
 
-            var description = string.Empty;
-            if (LocMan.HasHotspotDescription(hotspot.Id))
-                description = LocMan.GetHotspotDescription(hotspot.Id).Replace('"','\'');
+            var description = ResolveHotspotDescription(hotspot)?.Replace('"', '\'') ?? string.Empty;
 
             var res = hotspot.ConfigKey + Environment.NewLine + description;
 
@@ -159,8 +201,10 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
             }
             else if (value is HotspotDefinition hotspot)
             {
-                if (LocMan.HasHotspotDescription(hotspot.Id))
-                    WriteProperty(writer, "Description", LocMan.GetHotspotDescription(hotspot.Id), serializer);
+                // CUSTOM: multistep-aware resolution (see ResolveHotspotDescription)
+                var hotspotDescription = ResolveHotspotDescription(hotspot);
+                if (hotspotDescription != null)
+                    WriteProperty(writer, "Description", hotspotDescription, serializer);
 
                 if (hotspot.RequirementsList != null)
                 {

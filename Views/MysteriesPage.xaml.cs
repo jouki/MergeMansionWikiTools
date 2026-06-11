@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,6 +33,14 @@ public partial class MysteriesPage : UserControl
 	private bool _loaded;
 
 	private bool _suppressBucketChange;
+
+	// Manual "Check Wiki Status" run — non-null while a manual check is in flight.
+	// The button doubles as Cancel while this is set.
+	private CancellationTokenSource? _checkCts;
+
+	// Silent background auto-check (AutoCheckNonGreenAsync) — cancelled when the user
+	// starts a manual check so two checks never run over the same status cache.
+	private CancellationTokenSource? _autoCheckCts;
 
 	public MysteriesPage(MainWindow main)
 	{
@@ -129,57 +138,27 @@ public partial class MysteriesPage : UserControl
 		_loaded = false;
 		_mysteryService = null;
 		_main.MysteryService = null;
+		_main.MysteryServiceLoadedPath = null;
 		mysteryListPanel.Children.Clear();
 		TryLoadAsync();
 	}
 
 	private async Task TryLoadDialoguesAsync()
 	{
-		List<string> candidates = new List<string>();
-		if (!string.IsNullOrEmpty(_main.Settings.DialoguesJsonPath))
-			candidates.Add(_main.Settings.DialoguesJsonPath);
-		string eventsPath = _main.Settings.EventsJsonPath;
-		if (!string.IsNullOrEmpty(eventsPath))
-		{
-			string dir = Path.GetDirectoryName(eventsPath);
-			if (!string.IsNullOrEmpty(dir))
-			{
-				candidates.Add(Path.Combine(dir, "dialogues.json"));
-			}
-		}
-		if (!string.IsNullOrEmpty(_main.Settings.DumperOutputPath))
-		{
-			candidates.Add(Path.Combine(_main.Settings.DumperOutputPath, "dialogues.json"));
-		}
-		if (!string.IsNullOrEmpty(_main.Settings.ImageExporterBasePath) && !string.IsNullOrEmpty(_main.Settings.SelectedApkVersion))
-		{
-			var dumpFolder = !string.IsNullOrEmpty(_main.Settings.ActiveDumpFolder) ? _main.Settings.ActiveDumpFolder : "Dump";
-			string dumpDir = Path.Combine(_main.Settings.ImageExporterBasePath, _main.Settings.SelectedApkVersion, dumpFolder);
-			candidates.Add(Path.Combine(dumpDir, "dialogues.json"));
-		}
-		AppLogger.Info($"DialogueService: searching {candidates.Count} candidates: {string.Join(", ", candidates)}");
-		string dialoguesPath = candidates.FirstOrDefault(File.Exists);
-		if (dialoguesPath == null)
-		{
-			AppLogger.Warn("DialogueService: dialogues.json not found in any candidate path");
-			return;
-		}
-		try
-		{
-			_dialogueService = new DialogueService();
-			await _dialogueService.LoadAsync(dialoguesPath);
-			AppLogger.Info("DialogueService loaded from: " + dialoguesPath);
-		}
-		catch (Exception ex)
-		{
-			AppLogger.Warn("Failed to load dialogues.json: " + ex.Message);
-			_dialogueService = null;
-		}
+		// Shared per-path cache on MainWindow — candidate path resolution (explicit
+		// setting → next to events.json → dumper output → APK dump folder) moved there
+		// so all consumers share one resolution + one parsed dialogues.json instance.
+		// Returns null when no candidate exists or the load fails (logged).
+		_dialogueService = await _main.GetDialogueServiceAsync();
 	}
 
 	private void TryUsePreloaded()
 	{
-		if (_main.MysteryService != null && _main.MysteryService.Mysteries.Count > 0)
+		// Reuse the MainWindow-preloaded service only when it was loaded from the same
+		// events.json this page resolves to — with an AB bucket active the page reads a
+		// patched copy (<dump>/<bucket>/events.json), so the base-path preload won't match.
+		if (_main.MysteryService != null && _main.MysteryService.Mysteries.Count > 0
+			&& string.Equals(_main.MysteryServiceLoadedPath, ResolveEventsJsonPath(), StringComparison.OrdinalIgnoreCase))
 		{
 			_mysteryService = _main.MysteryService;
 			if (_main.DataService != null)
@@ -210,14 +189,16 @@ public partial class MysteriesPage : UserControl
 		emptyState.Visibility = Visibility.Collapsed;
 		try
 		{
-			_mysteryService = new MysteryService();
-			await _mysteryService.LoadAsync(path);
+			// Shared per-path cache on MainWindow — when the startup preload is still
+			// parsing the same path, this awaits the same parse instead of starting its own
+			_mysteryService = await _main.GetMysteryServiceAsync(path);
 			if (_main.DataService != null)
 			{
 				_mysteryService.ResolveEventItems(_main.DataService);
 				_mysteryService.ResolveRewardItems(_main.DataService, _main.WikiMapping, _itemMapping);
 			}
 			_main.MysteryService = _mysteryService;
+			_main.MysteryServiceLoadedPath = path;
 			MysteryWikiService.ApplyCachedStatus(_mysteryService.Mysteries, _main.DataService);
 			_loaded = true;
 			BuildMysteryList();
@@ -235,17 +216,37 @@ public partial class MysteriesPage : UserControl
 		{
 			return;
 		}
+		// A manual check is already running — don't start a competing silent check.
+		if (_checkCts != null)
+		{
+			return;
+		}
+		CancellationTokenSource cts = new CancellationTokenSource();
+		_autoCheckCts = cts;
 		try
 		{
 			if (_dialogueService == null)
 			{
 				await TryLoadDialoguesAsync();
 			}
-			await MysteryWikiService.CheckAllMysteryStatusAsync(_mysteryService.Mysteries, _main.DataService, _dialogueService);
+			cts.Token.ThrowIfCancellationRequested();
+			await MysteryWikiService.CheckAllMysteryStatusAsync(_mysteryService.Mysteries, _main.DataService, _dialogueService, null, cts.Token);
 			BuildMysteryList();
 		}
 		catch
 		{
+			// Silent auto-check: swallow everything, including OperationCanceledException
+			// (cancelled by a manual check taking over).
+		}
+		finally
+		{
+			// All continuations run on the dispatcher, so no race: clear the field first
+			// (only if it is still ours) so nobody can Cancel() a disposed CTS.
+			if (_autoCheckCts == cts)
+			{
+				_autoCheckCts = null;
+			}
+			cts.Dispose();
 		}
 	}
 
@@ -548,6 +549,10 @@ public partial class MysteriesPage : UserControl
 		}
 		_loaded = false;
 		_mysteryService = null;
+		// Refresh must rebuild mysteries from disk with fresh WikiStatus objects (the
+		// shared cache would otherwise hand back the same instance with stale in-memory
+		// labels) — drop the cache before reloading, matching the pre-cache behavior.
+		_main.InvalidateMysteryServiceCache();
 		mysteryListPanel.Children.Clear();
 		await TryLoadAsync();
 		ShowInfo("Green labels reset to Unknown. Click 'Check Wiki Status' to re-verify.", InfoBarSeverity.Success);
@@ -555,12 +560,23 @@ public partial class MysteriesPage : UserControl
 
 	private async void BtnCheckWiki_Click(object sender, RoutedEventArgs e)
 	{
+		// A manual check is already running — the button acts as Cancel.
+		if (_checkCts != null)
+		{
+			_checkCts.Cancel();
+			return;
+		}
 		if (_mysteryService == null || _mysteryService.Mysteries.Count == 0)
 		{
 			ShowInfo("No mysteries loaded.", InfoBarSeverity.Warning);
 			return;
 		}
-		btnCheckWiki.IsEnabled = false;
+		// Take over from the silent auto-check — never two checks over the same cache.
+		_autoCheckCts?.Cancel();
+		CancellationTokenSource cts = new CancellationTokenSource();
+		_checkCts = cts;
+		object originalContent = btnCheckWiki.Content;
+		btnCheckWiki.Content = "Cancel";
 		checkWikiProgress.Visibility = Visibility.Visible;
 		ShowInfo("Checking wiki status...", InfoBarSeverity.Informational, autoClose: false);
 		try
@@ -569,10 +585,24 @@ public partial class MysteriesPage : UserControl
 			{
 				await TryLoadDialoguesAsync();
 			}
-			await MysteryWikiService.CheckAllMysteryStatusAsync(_mysteryService.Mysteries, _main.DataService, _dialogueService);
+			cts.Token.ThrowIfCancellationRequested();
+			// Phase progress reported into the existing InfoBar (Progress<T> marshals to UI thread).
+			// Guard against late posts overwriting the "Check cancelled." message.
+			var progress = new Progress<string>(phase =>
+			{
+				if (!cts.IsCancellationRequested)
+					ShowInfo(phase, InfoBarSeverity.Informational, autoClose: false);
+			});
+			await MysteryWikiService.CheckAllMysteryStatusAsync(_mysteryService.Mysteries, _main.DataService, _dialogueService, progress, cts.Token);
 			BuildMysteryList();
 
 			ShowInfo("Wiki status checked.", InfoBarSeverity.Success);
+		}
+		catch (OperationCanceledException)
+		{
+			// Show whatever partial results made it into memory before the cancel.
+			BuildMysteryList();
+			ShowInfo("Check cancelled.", InfoBarSeverity.Informational);
 		}
 		catch (Exception ex)
 		{
@@ -580,8 +610,12 @@ public partial class MysteriesPage : UserControl
 		}
 		finally
 		{
-			btnCheckWiki.IsEnabled = true;
+			btnCheckWiki.Content = originalContent;
 			checkWikiProgress.Visibility = Visibility.Collapsed;
+			// Continuations run on the dispatcher — clear the field before disposing so a
+			// re-entrant click can never Cancel() a disposed CTS.
+			_checkCts = null;
+			cts.Dispose();
 		}
 	}
 
@@ -653,7 +687,8 @@ public partial class MysteriesPage : UserControl
 		{
 			try
 			{
-				Dictionary<string, string> templates = await MysteryWikiService.FetchRewardTemplatesAsync();
+				// forceRefresh: a new reward template was just uploaded — bypass the TTL cache
+				Dictionary<string, string> templates = await MysteryWikiService.FetchRewardTemplatesAsync(forceRefresh: true);
 				if (_mysteryService != null)
 				{
 					foreach (MysteryEvent m in _mysteryService.Mysteries)

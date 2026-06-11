@@ -90,7 +90,7 @@ internal static class AssetExtractionService
         List<SkinMapping> SkinMappings,
         Dictionary<string, string>? PoolTagMapping = null);
 
-    private static readonly HttpClient _http = new();
+    private static readonly HttpClient _http = HttpClients.Default;
     private static readonly object _fileLock = new();
     /// <summary>Guards image_atlas_data.json read-merge-write so concurrent extractions don't overwrite each other.</summary>
     private static readonly SemaphoreSlim _atlasSaveLock = new(1, 1);
@@ -102,6 +102,18 @@ internal static class AssetExtractionService
     /// Only these should trigger FixInconsistentDuplicateNames rename logic.</summary>
     private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, bool>
         _conflictBaseNames = new(StringComparer.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// Clears per-extraction naming caches (<see cref="_firstFileSuffixMap"/>, <see cref="_conflictBaseNames"/>).
+    /// Must be called at the start of each extraction run — the caches are only meaningful
+    /// within a single run (written in ExtractTexturesFromBundle, read in FixInconsistentDuplicateNames)
+    /// and would otherwise accumulate stale entries across extractions.
+    /// </summary>
+    public static void ResetNamingCaches()
+    {
+        _firstFileSuffixMap.Clear();
+        _conflictBaseNames.Clear();
+    }
 
     // ── TPK download ──────────────────────────────────────────────────
 
@@ -989,8 +1001,7 @@ internal static class AssetExtractionService
         CancellationToken ct = default)
     {
         Directory.CreateDirectory(outputDir);
-        _firstFileSuffixMap.Clear();
-        _conflictBaseNames.Clear();
+        ResetNamingCaches();
 
         var bundleFiles = Directory.GetFiles(bundleDir)
             .Where(f =>

@@ -76,10 +76,87 @@
                                MaxWidth="400" />
                 </StackPanel>
 
-                <ScrollViewer x:Name="scrollCases" Visibility="Collapsed"
-                              VerticalScrollBarVisibility="Auto">
-                    <StackPanel x:Name="pnlCases" Margin="8,6,8,6" />
-                </ScrollViewer>
+                <!-- Virtualizovaný list case karet — ListBox scrolluje sám (žádný vnější
+                     ScrollViewer, ten by virtualizaci zabil). Padding 8,6,8,6 = původní
+                     Margin StackPanelu pnlCases. -->
+                <ListBox x:Name="lstCases" Visibility="Collapsed"
+                         Background="Transparent" BorderThickness="0"
+                         Padding="8,6,8,6"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         ScrollViewer.CanContentScroll="True"
+                         VirtualizingStackPanel.IsVirtualizing="True"
+                         VirtualizingPanel.VirtualizationMode="Recycling"
+                         VirtualizingPanel.ScrollUnit="Pixel">
+                    <ListBox.ItemContainerStyle>
+                        <!-- Potlačený selection/hover — container je jen průhledný ContentPresenter -->
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="Padding" Value="0" />
+                            <Setter Property="Margin" Value="0" />
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Focusable" Value="False" />
+                            <Setter Property="IsTabStop" Value="False" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <ContentPresenter />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type local:ClueCaseCardItem}">
+                            <!-- 1:1 vizuál původního CreateCaseCard -->
+                            <Border CornerRadius="4" Padding="14,10,14,10" Margin="0,0,0,4"
+                                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Left: name + info -->
+                                    <StackPanel Grid.Column="0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Title}" FontSize="14" FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                            <Border Visibility="{Binding NewBadgeVisibility}"
+                                                    Background="#FF4CAF50" CornerRadius="3"
+                                                    Padding="6,1,6,1" Margin="8,0,0,0"
+                                                    VerticalAlignment="Center">
+                                                <TextBlock Text="NEW" FontSize="10" FontWeight="Bold"
+                                                           Foreground="White" />
+                                            </Border>
+                                        </StackPanel>
+                                        <TextBlock Text="{Binding Meta}" FontSize="11" Margin="0,2,0,0"
+                                                   Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                                    </StackPanel>
+
+                                    <!-- Right: buttons -->
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal"
+                                                VerticalAlignment="Center">
+                                        <ui:Button Content="Upload Images" Appearance="Secondary"
+                                                   FontSize="11" Padding="12,4,12,4" Margin="0,0,6,0"
+                                                   Tag="{Binding Case}" Click="BtnUploadImages_Click" />
+                                        <ui:Button Content="Check Sizes" Appearance="Secondary"
+                                                   FontSize="11" Padding="12,4,12,4" Margin="0,0,6,0"
+                                                   Visibility="{Binding OnWikiVisibility}"
+                                                   Tag="{Binding Case}" Click="BtnCheckCaseSizes_Click" />
+                                        <ui:Button Content="Update Wiki" Height="32"
+                                                   Appearance="{Binding UpdateWikiAppearance}"
+                                                   FontSize="{Binding UpdateWikiFontSize}"
+                                                   Tag="{Binding Case}" Click="BtnUpdateWiki_Click" />
+                                        <TextBlock Text="&#x2713;" FontSize="16" Foreground="#FF4CAF50"
+                                                   Margin="4,0,4,0"
+                                                   Visibility="{Binding OnWikiVisibility}" />
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </Grid>
         </Border>
 

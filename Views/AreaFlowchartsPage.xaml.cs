@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using MergeMansionWikiTools.Helpers;
 using MergeMansionWikiTools.Models;
 using MergeMansionWikiTools.Services;
 using Microsoft.Win32;
@@ -24,6 +25,7 @@ public partial class AreaFlowchartsPage : UserControl
     private string? _lastLoadedPath;
     private L1CostService? _l1CostService;
     private readonly SolidColorBrush _splitSepBrush;
+    private readonly Debouncer _searchDebounce = new(TimeSpan.FromMilliseconds(250));
 
     private string Algo => _main.Settings.FlowchartAlgorithm;
 
@@ -113,8 +115,10 @@ public partial class AreaFlowchartsPage : UserControl
         loadingPanel.Visibility = Visibility.Visible;
         try
         {
-            var service = new AreasService();
-            await service.LoadAsync(path);
+            // Shared per-path cache on MainWindow (single areas.json parse app-wide).
+            // The page filters into its own list below, so the shared instance stays untouched.
+            var service = await _main.GetAreasServiceAsync();
+            if (service == null) { loadingPanel.Visibility = Visibility.Collapsed; return; }
             _areas = service.Areas
                 .Where(a => a.DisplayName != "Story Event" && a.DisplayName != "Maddie Meets Mansion")
                 .ToList();
@@ -415,7 +419,7 @@ public partial class AreaFlowchartsPage : UserControl
         if (processedDir != null)
         {
             var processedPath = Path.Combine(processedDir, fileName);
-            if (File.Exists(processedPath) && OptimizationWindow.HasOptMarker(File.ReadAllBytes(processedPath)))
+            if (File.Exists(processedPath) && OptimizationWindow.HasOptMarker(await File.ReadAllBytesAsync(processedPath)))
                 sourcePath = processedPath;
         }
 
@@ -481,7 +485,9 @@ public partial class AreaFlowchartsPage : UserControl
     {
         try
         {
-            using var client = new System.Net.Http.HttpClient();
+            // Shared client from WikiMappingService — has the User-Agent header
+            // (CRITICAL for Fandom/Cloudflare; never call fandom API without UA).
+            var client = WikiMappingService.SharedHttp;
             var url = "https://merge-mansion.fandom.com/api.php";
             var content = new System.Net.Http.FormUrlEncodedContent(new Dictionary<string, string>
             {
@@ -1268,8 +1274,11 @@ public partial class AreaFlowchartsPage : UserControl
 
     private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e)
     {
-        if (_areasLoaded)
-            BuildAreaList();
+        _searchDebounce.Trigger(() =>
+        {
+            if (_areasLoaded)
+                BuildAreaList();
+        });
     }
 
     private void BtnGoToSettings_Click(object sender, RoutedEventArgs e)

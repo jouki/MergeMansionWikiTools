@@ -16,7 +16,8 @@ namespace MergeMansionWikiTools.Services;
 internal static class DiscordDumpService
 {
     private const string BaseUrl = "https://discord.com/api/v10";
-    private static readonly HttpClient _http = new();
+    // Bot token goes per-request (HttpRequestMessage.Headers.Authorization) — never on the shared client.
+    private static readonly HttpClient _http = HttpClients.Discord;
 
     // ── Public API ──
 

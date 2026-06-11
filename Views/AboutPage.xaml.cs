@@ -37,7 +37,8 @@ public partial class AboutPage : UserControl
             if (_cachedAreaCount == null)
             {
                 txtStatAreas.Text = "...";
-                _cachedAreaCount = await Task.Run(() => TryCountAreas(areasPath));
+                // Task.Run keeps the JSON parse off the UI thread; the file read itself is async
+                _cachedAreaCount = await Task.Run(() => TryCountAreasAsync(areasPath));
             }
 
             txtStatAreas.Text = _cachedAreaCount.HasValue ? _cachedAreaCount.Value.ToString("N0") : "—";
@@ -82,11 +83,11 @@ public partial class AboutPage : UserControl
     private void KofiCard_Click(object sender, MouseButtonEventArgs e) =>
         Process.Start(new ProcessStartInfo("https://ko-fi.com/jouki") { UseShellExecute = true });
 
-    private static int? TryCountAreas(string path)
+    private static async Task<int?> TryCountAreasAsync(string path)
     {
         try
         {
-            using var doc = JsonDocument.Parse(File.ReadAllBytes(path));
+            using var doc = JsonDocument.Parse(await File.ReadAllBytesAsync(path));
             if (doc.RootElement.TryGetProperty("Data", out var data) &&
                 data.ValueKind == JsonValueKind.Array)
                 return data.GetArrayLength();

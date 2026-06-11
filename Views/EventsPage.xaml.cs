@@ -2,6 +2,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using MergeMansionWikiTools.Helpers;
 using MergeMansionWikiTools.Models;
 using MergeMansionWikiTools.Services;
 using Wpf.Ui.Controls;
@@ -15,6 +16,8 @@ public partial class EventsPage : UserControl
     private CollectibleBoardEvent? _selectedEvent;
     private string? _lastSvg;
     private string? _lastSvgPath;
+    private readonly Debouncer _searchDebounce = new(TimeSpan.FromMilliseconds(250));
+    private List<object> _listItems = new();
 
     public EventsPage(MainWindow main)
     {
@@ -23,9 +26,12 @@ public partial class EventsPage : UserControl
 
         _ = TryLoadAsync();
 
-        _main.ChainDataLoaded += () => Dispatcher.InvokeAsync(() =>
+        _main.ChainDataLoaded += () => Dispatcher.InvokeAsync(async () =>
         {
-            _eventService?.ResolveChains(_main.DataService!);
+            if (_eventService == null) return;
+            // Re-resolves chains against the freshly loaded DataService — the getter
+            // runs ResolveChains on the shared instance (serialized on MainWindow)
+            await _main.GetEventServiceAsync();
             if (_selectedEvent != null)
                 ShowEventDetail(_selectedEvent);
         });
@@ -39,16 +45,13 @@ public partial class EventsPage : UserControl
 
     private async Task TryLoadAsync()
     {
-        var path = _main.Settings.EventsJsonPath;
-        if (string.IsNullOrEmpty(path) || !File.Exists(path)) return;
-
         try
         {
-            _eventService = new EventService();
-            await _eventService.LoadAsync(path);
-
-            if (_main.DataService != null)
-                _eventService.ResolveChains(_main.DataService);
+            // Shared per-path cache on MainWindow (single events.json parse app-wide);
+            // resolves chains against the current DataService when loaded.
+            // Returns null when the path is not configured or the file is missing.
+            _eventService = await _main.GetEventServiceAsync();
+            if (_eventService == null) return;
 
             BuildEventList();
         }
@@ -58,11 +61,16 @@ public partial class EventsPage : UserControl
         }
     }
 
+    /// <summary>
+    /// Postaví seznam view-modelů (rok-headery + karty) a přiřadí ho jako ItemsSource
+    /// virtualizovaného ItemsControl. Filtr logika 1:1 s původním ručním buildem.
+    /// </summary>
     private void BuildEventList()
     {
-        eventListPanel.Children.Clear();
         if (_eventService == null || _eventService.Events.Count == 0)
         {
+            _listItems = new List<object>();
+            eventListControl.ItemsSource = null;
             txtSummary.Text = "No events loaded.";
             return;
         }
@@ -78,6 +86,7 @@ public partial class EventsPage : UserControl
         txtSummary.Text = $"{events.Count} event{(events.Count != 1 ? "s" : "")}";
 
         // Group by year
+        var items = new List<object>(events.Count + 8);
         int? lastYear = null;
         foreach (var ev in events)
         {
@@ -85,96 +94,32 @@ public partial class EventsPage : UserControl
             if (year != lastYear)
             {
                 lastYear = year;
-                eventListPanel.Children.Add(new System.Windows.Controls.TextBlock
-                {
-                    Text = year > 0 ? year.ToString() : "Unknown",
-                    FontSize = 18,
-                    FontWeight = FontWeights.Bold,
-                    Margin = new Thickness(4, lastYear == null ? 0 : 16, 0, 6),
-                    Foreground = (Brush)FindResource("AccentTextFillColorPrimaryBrush")
-                });
-                // Year separator line
-                if (lastYear != null)
-                    eventListPanel.Children.Insert(eventListPanel.Children.Count - 1, new Border
-                    {
-                        Height = 1,
-                        Margin = new Thickness(4, 8, 4, 0),
-                        Background = (Brush)FindResource("ControlStrokeColorDefaultBrush")
-                    });
+                items.Add(new EventYearHeaderItem { YearText = year > 0 ? year.ToString() : "Unknown" });
             }
 
-            var card = CreateEventCard(ev);
-            eventListPanel.Children.Add(card);
+            // IsSelected (== _selectedEvent) potlačuje hover; IsHighlighted (pozadí) se po
+            // rebuildu neobnovuje — obojí 1:1 s původním chováním.
+            items.Add(new EventCardItem(ev) { IsSelected = ev == _selectedEvent });
         }
+
+        _listItems = items;
+        eventListControl.ItemsSource = items;
     }
 
-    private Border CreateEventCard(CollectibleBoardEvent ev)
+    /// <summary>Klik na kartu eventu v DataTemplate — výběr eventu + zvýraznění karty.</summary>
+    private void EventCard_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
-        var panel = new StackPanel { Margin = new Thickness(8, 6, 8, 6) };
+        if ((sender as FrameworkElement)?.DataContext is not EventCardItem item) return;
 
-        panel.Children.Add(new System.Windows.Controls.TextBlock
+        _selectedEvent = item.Event;
+        ShowEventDetail(item.Event);
+
+        // Highlight selected card
+        foreach (var card in _listItems.OfType<EventCardItem>())
         {
-            Text = ev.DisplayName,
-            FontSize = 14,
-            FontWeight = FontWeights.SemiBold,
-            TextTrimming = TextTrimming.CharacterEllipsis,
-            Foreground = (Brush)FindResource("TextFillColorPrimaryBrush")
-        });
-
-        var infoText = ev.EventId;
-        if (ev.StartDate.HasValue)
-            infoText = ev.StartDate.Value.ToString("d MMM yyyy");
-        if (ev.Chains.Count > 0)
-            infoText += $" · {ev.Chains.Count} chains";
-
-        panel.Children.Add(new System.Windows.Controls.TextBlock
-        {
-            Text = infoText,
-            FontSize = 11,
-            Foreground = (Brush)FindResource("TextFillColorTertiaryBrush")
-        });
-
-        var hoverBrush = (Brush)FindResource("ControlFillColorSecondaryBrush");
-        var selectedBrush = (Brush)FindResource("ControlFillColorDefaultBrush");
-
-        var border = new Border
-        {
-            Child = panel,
-            CornerRadius = new CornerRadius(6),
-            Margin = new Thickness(0, 1, 0, 1),
-            Padding = new Thickness(0),
-            Cursor = System.Windows.Input.Cursors.Hand,
-            Background = Brushes.Transparent,
-            Tag = ev
-        };
-
-        border.MouseEnter += (_, _) =>
-        {
-            if (border.Tag as CollectibleBoardEvent != _selectedEvent)
-                border.Background = hoverBrush;
-        };
-        border.MouseLeave += (_, _) =>
-        {
-            if (border.Tag as CollectibleBoardEvent != _selectedEvent)
-                border.Background = Brushes.Transparent;
-        };
-
-        border.MouseLeftButtonUp += (_, _) =>
-        {
-            _selectedEvent = ev;
-            ShowEventDetail(ev);
-
-            // Highlight selected card
-            foreach (var child in eventListPanel.Children)
-            {
-                if (child is Border b)
-                    b.Background = b == border
-                        ? (Brush)FindResource("ControlFillColorDefaultBrush")
-                        : Brushes.Transparent;
-            }
-        };
-
-        return border;
+            card.IsHighlighted = card == item;
+            card.IsSelected = card == item;
+        }
     }
 
     private void ShowEventDetail(CollectibleBoardEvent ev)
@@ -318,7 +263,7 @@ public partial class EventsPage : UserControl
 
     private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e)
     {
-        BuildEventList();
+        _searchDebounce.Trigger(BuildEventList);
     }
 
     private void ShowInfo(string message, InfoBarSeverity severity)
@@ -327,4 +272,54 @@ public partial class EventsPage : UserControl
         infoBar.Severity = severity;
         infoBar.IsOpen = true;
     }
+}
+
+// ── View modely položek seznamu eventů (heterogenní ItemsSource) ─────────────
+
+/// <summary>Rok-header v seznamu eventů (oddělovací linka + nadpis roku).</summary>
+public sealed class EventYearHeaderItem
+{
+    public string YearText { get; init; } = "";
+}
+
+/// <summary>Karta eventu v seznamu (virtualizovaný ItemsControl na EventsPage).</summary>
+public sealed class EventCardItem : System.ComponentModel.INotifyPropertyChanged
+{
+    public CollectibleBoardEvent Event { get; }
+    public string DisplayName => Event.DisplayName;
+    public string InfoText { get; }
+
+    private bool _isSelected;
+    /// <summary>True když Event == aktuálně vybraný event — potlačuje hover efekt
+    /// (přežívá rebuild seznamu, 1:1 s původním Tag != _selectedEvent checkem).</summary>
+    public bool IsSelected
+    {
+        get => _isSelected;
+        set { if (_isSelected != value) { _isSelected = value; OnPropertyChanged(nameof(IsSelected)); } }
+    }
+
+    private bool _isHighlighted;
+    /// <summary>True jen po kliknutí v aktuálním seznamu — řídí zvýrazněné pozadí.
+    /// Rebuild (filtr) ho resetuje, stejně jako původní ruční build karet.</summary>
+    public bool IsHighlighted
+    {
+        get => _isHighlighted;
+        set { if (_isHighlighted != value) { _isHighlighted = value; OnPropertyChanged(nameof(IsHighlighted)); } }
+    }
+
+    public EventCardItem(CollectibleBoardEvent ev)
+    {
+        Event = ev;
+
+        var infoText = ev.EventId;
+        if (ev.StartDate.HasValue)
+            infoText = ev.StartDate.Value.ToString("d MMM yyyy");
+        if (ev.Chains.Count > 0)
+            infoText += $" · {ev.Chains.Count} chains";
+        InfoText = infoText;
+    }
+
+    public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
+    private void OnPropertyChanged(string name) =>
+        PropertyChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(name));
 }

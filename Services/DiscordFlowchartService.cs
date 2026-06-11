@@ -17,37 +17,40 @@ internal static class DiscordFlowchartService
 {
     private const string BaseUrl = "https://discord.com/api/v10";
     internal const string DefaultThreadId = "1485372779002986667";
-    private static readonly HttpClient _http = new();
+    // Bot token goes per-request (HttpRequestMessage.Headers.Authorization) — never on the shared client.
+    private static readonly HttpClient _http = HttpClients.Discord;
 
     // ── Wiki area ordering (fetched at runtime from Module:Datatable/Areas/Mapping) ──
 
     public record WikiAreaMapping(double OrderingIndex, double Right = 0, double Bot = 0);
 
     private static Dictionary<string, WikiAreaMapping>? _wikiMapping;
+    private static DateTime _mappingFetchedAt;
+    private static readonly TimeSpan MappingTtl = TimeSpan.FromHours(6);
     private static readonly SemaphoreSlim _mappingLock = new(1, 1);
 
+    private static bool IsMappingFresh =>
+        _wikiMapping != null && DateTime.UtcNow - _mappingFetchedAt < MappingTtl;
+
     /// <summary>
-    /// Fetches and caches the area mapping from wiki. Safe to call multiple times.
+    /// Fetches and caches the area mapping from wiki (TTL 6 h). Safe to call multiple times.
     /// </summary>
-    public static async Task EnsureMappingLoadedAsync()
+    /// <param name="forceRefresh">True = ignore cache/TTL and re-fetch immediately.</param>
+    public static async Task EnsureMappingLoadedAsync(bool forceRefresh = false)
     {
-        if (_wikiMapping != null) return;
+        if (!forceRefresh && IsMappingFresh) return;
         await _mappingLock.WaitAsync();
         try
         {
-            if (_wikiMapping != null) return;
+            if (!forceRefresh && IsMappingFresh) return;
             _wikiMapping = await FetchWikiMappingAsync();
+            _mappingFetchedAt = DateTime.UtcNow;
         }
         finally { _mappingLock.Release(); }
     }
 
     /// <summary>Forces a re-fetch (e.g., after user edits wiki).</summary>
-    public static async Task RefreshMappingAsync()
-    {
-        await _mappingLock.WaitAsync();
-        try { _wikiMapping = await FetchWikiMappingAsync(); }
-        finally { _mappingLock.Release(); }
-    }
+    public static Task RefreshMappingAsync() => EnsureMappingLoadedAsync(forceRefresh: true);
 
     private static async Task<Dictionary<string, WikiAreaMapping>> FetchWikiMappingAsync()
     {
@@ -59,7 +62,8 @@ internal static class DiscordFlowchartService
                 + "?action=query&titles=Module:Datatable/Areas/Mapping"
                 + "&prop=revisions&rvprop=content&rvslots=main&format=json";
             using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
-            var json = await _http.GetStringAsync(apiUrl, cts.Token);
+            // Fandom call MUST go through the wiki client (carries User-Agent — Cloudflare 1010).
+            var json = await HttpClients.WikiApi.GetStringAsync(apiUrl, cts.Token);
             using var doc = JsonDocument.Parse(json);
             var pages = doc.RootElement.GetProperty("query").GetProperty("pages");
             string lua = "";

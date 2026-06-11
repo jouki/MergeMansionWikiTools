@@ -32,15 +32,10 @@ public partial class InfoboxGeneratorDialog : FluentWindow
         txtChainInfo.Text = chain.DisplayName;
         txtChainDetail.Text = $"ConfigKey: {chain.ConfigKey} · {chain.Items.Count} levels · {chain.Summary}";
 
-        // Load areas for task-reward source detection
-        LoadAreas();
-
-        // Load events for EventName vardefine on event chains
-        LoadEvents();
-
-        // Pre-populate sources with auto-detected
-        var ds = _main.DataService!;
-        _autoSources = _service.BuildAutoSources(chain, ds.Chains, ds.ItemNames, _areas);
+        // Load areas (task-reward source detection) + events (EventName vardefine)
+        // asynchronously — the dialog shows immediately and the preview updates
+        // once the data arrives (previously these loads blocked the UI thread).
+        _ = InitializeDataAsync();
 
         // Hide "keep full name" if there's no parenthetical; pre-check for non-event chains
         if (!chain.DisplayName.Contains('('))
@@ -54,32 +49,46 @@ public partial class InfoboxGeneratorDialog : FluentWindow
         Loaded += (_, _) => RegeneratePreview();
     }
 
-    private void LoadEvents()
+    private async Task InitializeDataAsync()
     {
-        var path = _main.Settings.EventsJsonPath;
-        if (string.IsNullOrEmpty(path) || !File.Exists(path)) return;
-
         try
         {
-            var svc = new EventService();
-            Task.Run(() => svc.LoadAsync(path)).GetAwaiter().GetResult();
-            if (_main.DataService != null)
-                svc.ResolveChains(_main.DataService);
-            _eventService = svc;
+            await Task.WhenAll(LoadAreasAsync(), LoadEventsAsync());
+
+            // Pre-populate sources with auto-detected (depends on _areas being loaded)
+            var ds = _main.DataService;
+            if (ds != null)
+                _autoSources = _service.BuildAutoSources(_chain, ds.Chains, ds.ItemNames, _areas);
+
+            // Refresh preview now that areas/events/auto-sources are available
+            RegeneratePreview();
+        }
+        catch (Exception ex)
+        {
+            infoBar.Message = $"Data load error: {ex.Message}";
+            infoBar.Severity = InfoBarSeverity.Error;
+            infoBar.IsOpen = true;
+        }
+    }
+
+    private async Task LoadEventsAsync()
+    {
+        try
+        {
+            // Shared per-path cache on MainWindow — events.json is parsed once app-wide;
+            // the getter also resolves chains against the current DataService when loaded
+            _eventService = await _main.GetEventServiceAsync();
         }
         catch { /* event loading failure is non-critical; EventName vardefine just won't be emitted */ }
     }
 
-    private void LoadAreas()
+    private async Task LoadAreasAsync()
     {
-        var path = _main.Settings.AreasJsonPath;
-        if (string.IsNullOrEmpty(path) || !File.Exists(path)) return;
-
         try
         {
-            var svc = new AreasService();
-            Task.Run(() => svc.LoadAsync(path)).GetAwaiter().GetResult();
-            _areas = svc.Areas;
+            // Shared per-path cache on MainWindow — areas.json is parsed once app-wide
+            // instead of on every dialog open (path/existence checks live in the getter)
+            _areas = (await _main.GetAreasServiceAsync())?.Areas;
         }
         catch { /* areas loading failure is non-critical */ }
     }

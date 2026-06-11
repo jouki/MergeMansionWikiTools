@@ -26,6 +26,7 @@ public partial class TableGeneratorDialog : FluentWindow
     private EventService? _eventService;
     private WikiMappingService.WikiSectionFetchResult? _gameTipsResult;
     private WikitextAutocomplete? _autocomplete;
+    private readonly Task _dataInitTask;
 
     // Section-aware editing model. Each section is built independently and composed via Render().
     // User edits are detected by parsing the textbox back into sections (heading-based) and stored
@@ -75,11 +76,11 @@ public partial class TableGeneratorDialog : FluentWindow
         gridTasks.Visibility = hasOrderTasks ? Visibility.Visible : Visibility.Collapsed;
         chkIncludeTasks.IsChecked = hasOrderTasks; // default ON when applicable
 
-        // Load areas (for Uses section gating + Infobox intro temporary-area detection)
-        LoadAreas();
-
-        // Load events (for Infobox intro Event variant)
-        LoadEvents();
+        // Load areas (Uses section gating + Infobox intro temporary-area detection) and
+        // events (Infobox intro Event variant) asynchronously — the dialog opens immediately
+        // and Uses gating + the preview refresh once the data arrives (previously these
+        // loads blocked the UI thread via GetAwaiter().GetResult()).
+        _dataInitTask = InitializeDataAsync();
 
         // Always-visible: Infobox Section, Gameplay Tips, Statistics
         chkIncludeInfoboxSection.IsChecked = main.Settings.TableGeneratorIncludeInfoboxSection;
@@ -144,6 +145,10 @@ public partial class TableGeneratorDialog : FluentWindow
 
     private async Task LoadAutocompleteDataAsync(ParsedChain chain)
     {
+        // _areas was loaded synchronously in the ctor before; now wait for the async
+        // init so temp-area detection + inline Build see the same data as before.
+        await _dataInitTask;
+
         AutocompleteData? data = _main.CachedAutocomplete;
         if (data == null && _main.AutocompletePrewarmTask != null)
         {
@@ -209,16 +214,40 @@ public partial class TableGeneratorDialog : FluentWindow
         Loaded += (_, _) => GenerateTable();
     }
 
-    private void LoadAreas()
+    private async Task InitializeDataAsync()
     {
-        var path = _main.Settings.AreasJsonPath;
-        if (string.IsNullOrEmpty(path) || !File.Exists(path)) return;
-
         try
         {
-            var svc = new AreasService();
-            Task.Run(() => svc.LoadAsync(path)).GetAwaiter().GetResult();
-            _areas = svc.Areas;
+            await Task.WhenAll(LoadAreasAsync(), LoadEventsAsync());
+
+            // Uses gating depends on _areas (task references) — recompute now that areas
+            // are loaded (the ctor computed it with _areas still null).
+            var ds = _main.DataService;
+            if (ds != null)
+            {
+                var probeGenerator = new WikiTableGenerator(ds, _main.WikiMapping);
+                bool hasUses = probeGenerator.GenerateUsesSection(_chain, ds.Chains, _areas) != null;
+                gridUses.Visibility = hasUses ? Visibility.Visible : Visibility.Collapsed;
+                chkIncludeUses.IsChecked = hasUses && _main.Settings.TableGeneratorIncludeUses;
+            }
+
+            // Refresh output with event/area-aware sections; before Loaded fires the
+            // Loaded handler covers the initial generate.
+            if (IsLoaded) GenerateTable();
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Warn($"TableGeneratorDialog data init failed: {ex.Message}");
+        }
+    }
+
+    private async Task LoadAreasAsync()
+    {
+        try
+        {
+            // Shared per-path cache on MainWindow — areas.json is parsed once app-wide
+            // instead of on every dialog open (path/existence checks live in the getter)
+            _areas = (await _main.GetAreasServiceAsync())?.Areas;
         }
         catch { /* areas loading failure is non-critical; Uses gating just won't see task references */ }
     }
@@ -280,18 +309,13 @@ public partial class TableGeneratorDialog : FluentWindow
         return int.TryParse(spriteName.AsSpan(idx + 1), out var n) ? n : 0;
     }
 
-    private void LoadEvents()
+    private async Task LoadEventsAsync()
     {
-        var path = _main.Settings.EventsJsonPath;
-        if (string.IsNullOrEmpty(path) || !File.Exists(path)) return;
-
         try
         {
-            var svc = new EventService();
-            Task.Run(() => svc.LoadAsync(path)).GetAwaiter().GetResult();
-            if (_main.DataService != null)
-                svc.ResolveChains(_main.DataService);
-            _eventService = svc;
+            // Shared per-path cache on MainWindow — events.json is parsed once app-wide;
+            // the getter also resolves chains against the current DataService when loaded
+            _eventService = await _main.GetEventServiceAsync();
         }
         catch { /* event loading failure is non-critical; Infobox intro Event variant just won't fire */ }
     }

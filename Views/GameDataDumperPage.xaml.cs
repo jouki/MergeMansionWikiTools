@@ -99,66 +99,67 @@ public partial class GameDataDumperPage : UserControl
 
     // ── Auto-detect ──────────────────────────────────────────────
 
-    private void TryAutoDetect()
+    private async void TryAutoDetect()
     {
-        var dataDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "_DATA");
-        if (!Directory.Exists(dataDir))
+        try
         {
-            txtAutoDetect.Text = "";
-            return;
-        }
+            var dataDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "_DATA");
 
-        bool anyDetected = false;
+            // Read current UI state on the UI thread before going off-thread
+            bool needConfig = string.IsNullOrEmpty(GetPathText(txtConfigPath));
+            bool needPatch = string.IsNullOrEmpty(GetPathText(txtPatchPath));
+            bool needLanguage = string.IsNullOrEmpty(GetPathText(txtLanguagePath));
 
-        // Config: _DATA/C/
-        if (string.IsNullOrEmpty(GetPathText(txtConfigPath)))
-        {
-            var cDir = Path.Combine(dataDir, "C");
-            if (Directory.Exists(cDir))
+            // Directory scanning off the UI thread
+            var (dataDirExists, configFile, patchFile, languageFile) = await Task.Run(() =>
             {
-                var files = Directory.GetFiles(cDir);
-                if (files.Length == 1)
-                {
-                    SetPathText(txtConfigPath, files[0]);
-                    SavePaths();
-                    anyDetected = true;
-                }
-            }
-        }
+                if (!Directory.Exists(dataDir))
+                    return (false, (string?)null, (string?)null, (string?)null);
 
-        // Patch: _DATA/P/
-        if (string.IsNullOrEmpty(GetPathText(txtPatchPath)))
-        {
-            var pDir = Path.Combine(dataDir, "P");
-            if (Directory.Exists(pDir))
+                string? FindSingleFile(string subDir)
+                {
+                    var dir = Path.Combine(dataDir, subDir);
+                    if (!Directory.Exists(dir)) return null;
+                    var files = Directory.GetFiles(dir);
+                    return files.Length == 1 ? files[0] : null;
+                }
+
+                return (true,
+                    needConfig ? FindSingleFile("C") : null,      // Config: _DATA/C/
+                    needPatch ? FindSingleFile("P") : null,       // Patch: _DATA/P/
+                    needLanguage ? FindSingleFile("L") : null);   // Language: _DATA/L/
+            });
+
+            if (!dataDirExists)
             {
-                var files = Directory.GetFiles(pDir);
-                if (files.Length == 1)
-                {
-                    SetPathText(txtPatchPath, files[0]);
-                    SavePaths();
-                    anyDetected = true;
-                }
+                txtAutoDetect.Text = "";
+                return;
             }
-        }
 
-        // Language: _DATA/L/
-        if (string.IsNullOrEmpty(GetPathText(txtLanguagePath)))
-        {
-            var lDir = Path.Combine(dataDir, "L");
-            if (Directory.Exists(lDir))
+            bool anyDetected = false;
+            if (configFile != null)
             {
-                var files = Directory.GetFiles(lDir);
-                if (files.Length == 1)
-                {
-                    SetPathText(txtLanguagePath, files[0]);
-                    SavePaths();
-                    anyDetected = true;
-                }
+                SetPathText(txtConfigPath, configFile);
+                anyDetected = true;
             }
-        }
+            if (patchFile != null)
+            {
+                SetPathText(txtPatchPath, patchFile);
+                anyDetected = true;
+            }
+            if (languageFile != null)
+            {
+                SetPathText(txtLanguagePath, languageFile);
+                anyDetected = true;
+            }
+            if (anyDetected) SavePaths();
 
-        txtAutoDetect.Text = anyDetected ? "Some paths were auto-detected from _DATA/ folder." : "";
+            txtAutoDetect.Text = anyDetected ? "Some paths were auto-detected from _DATA/ folder." : "";
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Warn($"Auto-detect from _DATA failed: {ex.Message}");
+        }
     }
 
     // ── Path helpers ──────────────────────────────────────────────

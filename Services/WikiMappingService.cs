@@ -72,14 +72,13 @@ public static class WikiMappingService
 
     private static readonly JsonSerializerOptions JsonOpts = new() { WriteIndented = true };
 
-    private static readonly HttpClient Http = CreateHttpClient();
+    private static readonly HttpClient Http = HttpClients.WikiApi;
 
-    private static HttpClient CreateHttpClient()
-    {
-        var client = new HttpClient(new HttpClientHandler { UseProxy = false });
-        client.DefaultRequestHeaders.UserAgent.ParseAdd("MergeMansionWikiTools/1.0");
-        return client;
-    }
+    /// <summary>
+    /// Shared HttpClient for internal app-wide use (already carries the User-Agent header —
+    /// CRITICAL for Fandom/Cloudflare; never call fandom API without UA).
+    /// </summary>
+    internal static HttpClient SharedHttp => HttpClients.WikiApi;
 
     private const string ApiUrl =
         "https://merge-mansion.fandom.com/api.php?action=query" +
@@ -245,12 +244,14 @@ public static class WikiMappingService
     /// </summary>
     internal static async Task<HttpClient> CreateAuthenticatedClientAsync(string username, string password)
     {
+        // Stays local (NOT HttpClients.*): the login session lives in a per-call CookieContainer
+        // that must not be shared across sessions/users of the shared wiki client.
         var handler = new HttpClientHandler { CookieContainer = new CookieContainer() };
         var client = new HttpClient(handler);
         // Fandom/Cloudflare returns 403 "error code: 1010" (a non-JSON body that breaks
         // JsonDocument.Parse, e.g. on uploads) when the request has no/default User-Agent.
         // The shared GET client sets one; the authenticated client must too.
-        client.DefaultRequestHeaders.UserAgent.ParseAdd("MergeMansionWikiTools/1.0");
+        client.DefaultRequestHeaders.UserAgent.ParseAdd(HttpClients.UserAgent);
 
         var tokenJson = await client.GetStringAsync(
             $"{BaseApiUrl}?action=query&meta=tokens&type=login&format=json");
