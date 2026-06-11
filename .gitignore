@@ -384,6 +384,10 @@ Assets/LauncherIcon.ico
 # Wiki working files & tools
 \[WIKI\]/
 tools/
+# Context documentation & Claude instructions (local only, never on GitHub)
+_CONTEXT/
+_boulton_legacy/
+CLAUDE.md
 # Crash reporter PAT (never commit — GitHub secret-scanning would auto-revoke it)
 crashreporter.token
 

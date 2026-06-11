@@ -63,6 +63,6 @@
 #*.RTF   diff=astextplain
 
 ###############################################################################
-# git-crypt: encrypt _CONTEXT folder
+# git-crypt: _CONTEXT byl dříve šifrovaný v repu; od 2026-06-11 je úplně mimo
+# git (viz .gitignore — kontextová dokumentace žije jen lokálně)
 ###############################################################################
-_CONTEXT/** filter=git-crypt diff=git-crypt
