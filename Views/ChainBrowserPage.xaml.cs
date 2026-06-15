@@ -742,19 +742,48 @@ public partial class ChainBrowserPage : UserControl
                     }
                     else if (content is "Set as Alias" or "Remove Alias")
                     {
-                        btn.Visibility = count == 1 ? Visibility.Visible : Visibility.Collapsed;
+                        btn.Visibility = count >= 1 ? Visibility.Visible : Visibility.Collapsed;
                         btn.IsEnabled = wikiVerified;
                         btn.ToolTip = wikiVerified ? null : "Wiki connection required";
-                        if (count == 1)
-                        {
-                            var selected = chainVm.Items.FirstOrDefault(i => i.IsChecked);
-                            bool isAlias = selected?.IsAlias ?? false;
-                            btn.Content = isAlias ? "Remove Alias" : "Set as Alias";
-                        }
+                        // Label reflects the toggle direction: only when EVERY checked item is
+                        // already an alias does the action remove the flag; otherwise it sets all
+                        // selected items as aliases (normalising a mixed selection to alias=true).
+                        var checkedItems = chainVm.Items.Where(i => i.IsChecked).ToList();
+                        bool allAlias = checkedItems.Count > 0 && checkedItems.All(i => i.IsAlias);
+                        btn.Content = allAlias ? "Remove Alias" : "Set as Alias";
                     }
                 }
             }
         }
+    }
+
+    // ── Right-click "Copy ID" context menu (chain header / group / item rows) ──
+
+    private static void CopyToClipboard(string? text)
+    {
+        if (string.IsNullOrEmpty(text)) return;
+        try { Clipboard.SetText(text); } catch { /* clipboard can be transiently locked by another app */ }
+    }
+
+    /// <summary>Chain header → copies the chain ConfigKey.</summary>
+    private void CopyChainId_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is FrameworkElement fe && fe.DataContext is ChainViewModel vm)
+            CopyToClipboard(vm.Source.ConfigKey);
+    }
+
+    /// <summary>Group header → copies the group key (source-chain ID).</summary>
+    private void CopyGroupId_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is FrameworkElement fe && fe.DataContext is System.Windows.Data.CollectionViewGroup g)
+            CopyToClipboard(g.Name as string);
+    }
+
+    /// <summary>Item row → copies the item ItemType.</summary>
+    private void CopyItemId_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is FrameworkElement fe && fe.DataContext is ItemViewModel vm)
+            CopyToClipboard(vm.Source.ItemType);
     }
 
     /// <summary>
@@ -1100,26 +1129,47 @@ public partial class ChainBrowserPage : UserControl
         var chainVm = GetChainVmFromButton(sender);
         if (chainVm == null) return;
 
-        var selected = chainVm.Items.FirstOrDefault(i => i.IsChecked);
-        if (selected == null) return;
+        var checkedItems = chainVm.Items.Where(i => i.IsChecked).ToList();
+        if (checkedItems.Count == 0) return;
 
-        var item = selected.Source;
-        bool currentlyAlias = item.IsAlias;
-        string action = currentlyAlias ? "Remove alias flag" : "Set as alias";
-
-        // Build preview of what will be written
         string chainName = chainVm.Source.DisplayName;
-        string currentEntry = currentlyAlias
-            ? $"[\"{item.ItemType}\"] = {{chainName = \"{chainName}\", isAlias = true}}"
-            : $"[\"{item.ItemType}\"] = {{chainName = \"{chainName}\"}}";
-        string newEntry = currentlyAlias
-            ? $"[\"{item.ItemType}\"] = {{chainName = \"{chainName}\"}}"
-            : $"[\"{item.ItemType}\"] = {{chainName = \"{chainName}\", isAlias = true}}";
+
+        // Toggle direction: only when EVERY selected item is already an alias does the action
+        // remove the flag; otherwise it sets all selected as aliases (normalises a mixed selection).
+        bool removeAlias = checkedItems.All(i => i.IsAlias);
+        string action = removeAlias ? "Remove alias flag" : "Set as alias";
+
+        // Fetch the live module first so the preview shows the EXACT before/after per item
+        // (whether a chainName override already exists, whether the entry is brand new, etc.).
+        string lua;
+        try
+        {
+            lua = await MysteryWikiService.FetchPageContentAsync("Module:Datatable/Items/Mapping");
+            if (string.IsNullOrEmpty(lua)) throw new Exception("Could not fetch Items/Mapping module.");
+        }
+        catch (Exception ex)
+        {
+            await new Wpf.Ui.Controls.MessageBox
+            {
+                Title = "Error",
+                Content = $"Failed to fetch mapping: {ex.Message}",
+                CloseButtonText = "OK"
+            }.ShowDialogAsync();
+            return;
+        }
+
+        // Compute the resulting Lua up-front (also reused on publish). Each pass reuses the updated
+        // text so a freshly-inserted entry is matched (not duplicated) by a later iteration.
+        var newLua = lua;
+        foreach (var vm in checkedItems)
+            newLua = ApplyAliasToggle(newLua, vm.Source.ItemType, removeAlias);
 
         var panel = new StackPanel();
         panel.Children.Add(new TextBlock
         {
-            Text = $"{action} for \"{item.Name}\" ({item.ItemType})",
+            Text = checkedItems.Count == 1
+                ? $"{action} for \"{checkedItems[0].Source.Name}\" ({checkedItems[0].Source.ItemType})"
+                : $"{action} for {checkedItems.Count} items in \"{chainName}\"",
             TextWrapping = TextWrapping.Wrap,
             Margin = new Thickness(0, 0, 0, 8)
         });
@@ -1131,40 +1181,54 @@ public partial class ChainBrowserPage : UserControl
             Margin = new Thickness(0, 0, 0, 6)
         });
 
-        // Current state
-        var currentBorder = new Border
+        // One real before→after diff pair per item, read straight from the fetched/computed Lua.
+        var diffPanel = new StackPanel();
+        foreach (var vm in checkedItems)
         {
-            Background = new SolidColorBrush(Color.FromArgb(0x25, 0xD0, 0x40, 0x40)),
-            CornerRadius = new CornerRadius(4),
-            Padding = new Thickness(8, 6, 8, 6),
-            Margin = new Thickness(0, 0, 0, 4)
-        };
-        currentBorder.Child = new TextBlock
-        {
-            Text = "- " + currentEntry,
-            FontFamily = new FontFamily("Cascadia Code,Consolas,Courier New"),
-            FontSize = 11,
-            Foreground = new SolidColorBrush(Color.FromRgb(0xE0, 0x50, 0x50)),
-            TextWrapping = TextWrapping.Wrap
-        };
-        panel.Children.Add(currentBorder);
+            string before = ExtractEntryLine(lua, vm.Source.ItemType) ?? "(not in mapping table)";
+            string after = ExtractEntryLine(newLua, vm.Source.ItemType) ?? "(no entry — nothing written)";
 
-        // New state
-        var newBorder = new Border
-        {
-            Background = new SolidColorBrush(Color.FromArgb(0x25, 0x30, 0xC0, 0x30)),
-            CornerRadius = new CornerRadius(4),
-            Padding = new Thickness(8, 6, 8, 6)
-        };
-        newBorder.Child = new TextBlock
-        {
-            Text = "+ " + newEntry,
-            FontFamily = new FontFamily("Cascadia Code,Consolas,Courier New"),
-            FontSize = 11,
-            Foreground = new SolidColorBrush(Color.FromRgb(0x40, 0xD0, 0x40)),
-            TextWrapping = TextWrapping.Wrap
-        };
-        panel.Children.Add(newBorder);
+            diffPanel.Children.Add(new Border
+            {
+                Background = new SolidColorBrush(Color.FromArgb(0x25, 0xD0, 0x40, 0x40)),
+                CornerRadius = new CornerRadius(4),
+                Padding = new Thickness(8, 6, 8, 6),
+                Margin = new Thickness(0, 0, 0, 4),
+                Child = new TextBlock
+                {
+                    Text = "- " + before,
+                    FontFamily = new FontFamily("Cascadia Code,Consolas,Courier New"),
+                    FontSize = 11,
+                    Foreground = new SolidColorBrush(Color.FromRgb(0xE0, 0x50, 0x50)),
+                    TextWrapping = TextWrapping.Wrap
+                }
+            });
+            diffPanel.Children.Add(new Border
+            {
+                Background = new SolidColorBrush(Color.FromArgb(0x25, 0x30, 0xC0, 0x30)),
+                CornerRadius = new CornerRadius(4),
+                Padding = new Thickness(8, 6, 8, 6),
+                Margin = new Thickness(0, 0, 0, checkedItems.Count > 1 ? 8 : 0),
+                Child = new TextBlock
+                {
+                    Text = "+ " + after,
+                    FontFamily = new FontFamily("Cascadia Code,Consolas,Courier New"),
+                    FontSize = 11,
+                    Foreground = new SolidColorBrush(Color.FromRgb(0x40, 0xD0, 0x40)),
+                    TextWrapping = TextWrapping.Wrap
+                }
+            });
+        }
+
+        if (checkedItems.Count > 4)
+            panel.Children.Add(new ScrollViewer
+            {
+                Content = diffPanel,
+                MaxHeight = 320,
+                VerticalScrollBarVisibility = ScrollBarVisibility.Auto
+            });
+        else
+            panel.Children.Add(diffPanel);
 
         var confirmBox = new Wpf.Ui.Controls.MessageBox
         {
@@ -1177,54 +1241,13 @@ public partial class ChainBrowserPage : UserControl
 
         try
         {
-            var lua = await MysteryWikiService.FetchPageContentAsync("Module:Datatable/Items/Mapping");
-            if (string.IsNullOrEmpty(lua)) throw new Exception("Could not fetch Items/Mapping module.");
-
-            var escapedType = System.Text.RegularExpressions.Regex.Escape(item.ItemType);
-            var entryRegex = new System.Text.RegularExpressions.Regex(
-                @"(\[""" + escapedType + @"""\]\s*=\s*\{)([^}]*)(})");
-
-            if (!entryRegex.IsMatch(lua))
-            {
-                // Entry doesn't exist — create it with isAlias
-                // Find insertion point (before closing })
-                int insertPos = lua.LastIndexOf("\n}", StringComparison.Ordinal);
-                if (insertPos < 0) throw new Exception("Could not find insertion point.");
-                string luaEntry = currentlyAlias
-                    ? $"\t[\"{item.ItemType}\"] = {{chainName = \"{chainName}\"}},\n"
-                    : $"\t[\"{item.ItemType}\"] = {{chainName = \"{chainName}\", isAlias = true}},\n";
-                lua = lua[..(insertPos + 1)] + luaEntry + lua[(insertPos + 1)..];
-            }
-            else
-            {
-                lua = entryRegex.Replace(lua, m =>
-                {
-                    var prefix = m.Groups[1].Value;
-                    var body = m.Groups[2].Value;
-                    var suffix = m.Groups[3].Value;
-
-                    var isAliasRegex = new System.Text.RegularExpressions.Regex(@",?\s*isAlias\s*=\s*(true|false)");
-                    if (currentlyAlias)
-                    {
-                        // Remove isAlias
-                        body = isAliasRegex.Replace(body, "");
-                    }
-                    else
-                    {
-                        // Add isAlias = true
-                        if (isAliasRegex.IsMatch(body))
-                            body = isAliasRegex.Replace(body, ", isAlias = true");
-                        else
-                            body += ", isAlias = true";
-                    }
-                    return prefix + body + suffix;
-                });
-            }
+            string summary = checkedItems.Count == 1
+                ? $"{action} for {checkedItems[0].Source.ItemType} (via MergeMansionWikiTools)"
+                : $"{action} for {checkedItems.Count} items in {chainName} (via MergeMansionWikiTools)";
 
             await MysteryWikiService.PublishPageAsync(
                 _main.Settings.WikiUsername, _main.Settings.WikiPassword,
-                "Module:Datatable/Items/Mapping", lua,
-                $"{action} for {item.ItemType} (via MergeMansionWikiTools)");
+                "Module:Datatable/Items/Mapping", newLua, summary);
 
             _ = RefreshAfterWikiChange();
         }
@@ -1238,6 +1261,70 @@ public partial class ChainBrowserPage : UserControl
             };
             await errBox.ShowDialogAsync();
         }
+    }
+
+    /// <summary>Returns the raw <c>["itemType"] = {...}</c> entry from the mapping Lua, or null if absent.</summary>
+    private static string? ExtractEntryLine(string lua, string itemType)
+    {
+        var escapedType = System.Text.RegularExpressions.Regex.Escape(itemType);
+        var m = System.Text.RegularExpressions.Regex.Match(
+            lua, @"\[""" + escapedType + @"""\]\s*=\s*\{[^}]*\}");
+        return m.Success ? m.Value : null;
+    }
+
+    /// <summary>
+    /// Adds or removes the <c>isAlias = true</c> flag for one item in the Items/Mapping Lua.
+    /// Deliberately NEVER writes <c>chainName</c>: a pure alias just marks a duplicate item, and its
+    /// chain comes from the game data (the mapping chainName is only an override, set via Move/Rename).
+    /// • set + entry missing  → create <c>{isAlias = true}</c> (no chainName)
+    /// • set + entry exists    → add the flag, leave chainName untouched
+    /// • remove + entry exists → strip the flag; if that empties the body, drop the whole line
+    /// • remove + entry missing→ no-op
+    /// Factored out so the same logic drives both single- and multi-item alias toggles.
+    /// </summary>
+    private static string ApplyAliasToggle(string lua, string itemType, bool removeAlias)
+    {
+        var escapedType = System.Text.RegularExpressions.Regex.Escape(itemType);
+        var entryRegex = new System.Text.RegularExpressions.Regex(
+            @"(\[""" + escapedType + @"""\]\s*=\s*\{)([^}]*)(})");
+
+        if (!entryRegex.IsMatch(lua))
+        {
+            if (removeAlias) return lua; // nothing to remove from a non-existent entry
+            // Create a pure alias entry — NO chainName (chain is resolved from game data).
+            int insertPos = lua.LastIndexOf("\n}", StringComparison.Ordinal);
+            if (insertPos < 0) throw new Exception("Could not find insertion point.");
+            string luaEntry = $"\t[\"{itemType}\"] = {{isAlias = true}},\n";
+            return lua[..(insertPos + 1)] + luaEntry + lua[(insertPos + 1)..];
+        }
+
+        lua = entryRegex.Replace(lua, m =>
+        {
+            var prefix = m.Groups[1].Value;
+            var body = m.Groups[2].Value;
+            var suffix = m.Groups[3].Value;
+
+            var isAliasRegex = new System.Text.RegularExpressions.Regex(@",?\s*isAlias\s*=\s*(true|false)");
+            if (removeAlias)
+                body = isAliasRegex.Replace(body, "");
+            else if (isAliasRegex.IsMatch(body))
+                body = isAliasRegex.Replace(body, ", isAlias = true");
+            else if (body.Trim().Length == 0)
+                body = "isAlias = true";          // empty entry → bare flag, no leading comma
+            else
+                body += ", isAlias = true";
+            return prefix + body + suffix;
+        });
+
+        // Removing the flag may leave an empty {} (e.g. an entry created as a pure alias) — drop the
+        // whole line so the table doesn't accumulate empty stubs.
+        if (removeAlias)
+        {
+            var emptyEntryRegex = new System.Text.RegularExpressions.Regex(
+                @"[ \t]*\[""" + escapedType + @"""\]\s*=\s*\{\s*\},?\r?\n");
+            lua = emptyEntryRegex.Replace(lua, "");
+        }
+        return lua;
     }
 
     private async void BtnRenameItem_Click(object sender, RoutedEventArgs e)

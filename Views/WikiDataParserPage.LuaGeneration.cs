@@ -31,7 +31,8 @@ public partial class WikiDataParserPage
             return;
         }
 
-        btnGenerateAreas.IsEnabled = false;
+        SetGenerateButtonsEnabled(false);
+        SetRowBusy(areasIdle, areasBusy, txtAreasBusy, true, "Generating areas…");
         ShowInfo("Loading areas...", InfoBarSeverity.Informational);
 
         try
@@ -82,7 +83,8 @@ public partial class WikiDataParserPage
         }
         finally
         {
-            btnGenerateAreas.IsEnabled = true;
+            SetRowBusy(areasIdle, areasBusy, txtAreasBusy, false);
+            SetGenerateButtonsEnabled(true);
         }
     }
 
@@ -97,7 +99,8 @@ public partial class WikiDataParserPage
             return;
         }
 
-        btnGenerateItems.IsEnabled = false;
+        SetGenerateButtonsEnabled(false);
+        SetRowBusy(itemsIdle, itemsBusy, txtItemsBusy, true, "Generating items…");
         ShowInfo("Generating items...", InfoBarSeverity.Informational);
 
         try
@@ -191,7 +194,99 @@ public partial class WikiDataParserPage
         }
         finally
         {
-            btnGenerateItems.IsEnabled = true;
+            SetRowBusy(itemsIdle, itemsBusy, txtItemsBusy, false);
+            SetGenerateButtonsEnabled(true);
+        }
+    }
+
+    // ── Generate Events schedule ──────────────────────────────────────
+
+    private async void BtnGenerateEvents_Click(object sender, RoutedEventArgs e)
+    {
+        var eventsPath = _main.Settings.EventsJsonPath;
+        if (string.IsNullOrEmpty(eventsPath) || !File.Exists(eventsPath))
+        {
+            ShowInfo("Events file not configured or not found. Set it in Settings.", InfoBarSeverity.Error);
+            return;
+        }
+
+        SetGenerateButtonsEnabled(false);
+        SetRowBusy(eventsIdle, eventsBusy, txtEventsBusy, true, "Fetching live module…");
+        ShowInfo("Loading event schedules...", InfoBarSeverity.Informational);
+
+        try
+        {
+            // Fetch the live Module:Datatable/Events so historical runs (which the game config
+            // drops after a re-air) are merged in, not overwritten. Read-only API — no auth.
+            var existing = await WikiMappingService.FetchModuleContentAsync("Module:Datatable/Events");
+
+            SetRowBusy(eventsIdle, eventsBusy, txtEventsBusy, true, "Generating schedule…");
+
+            var schedule = new EventScheduleService();
+            var lua = await Task.Run(async () =>
+            {
+                using var _t = AppLogger.Timed("GenerateEventScheduleLua");
+                await schedule.LoadAsync(eventsPath, existing);
+                return _luaGen.GenerateEventScheduleLua(schedule.Groups, schedule.CreatedAt);
+            });
+            _lastEventsLua = lua;
+
+            if (existing == null)
+                schedule.Notes.Insert(0, "⚠ Live Module:Datatable/Events not found / unreachable — output has NO merged history. Do not overwrite the live module with this if it already has runs.");
+
+            txtEventsHeader.Text =
+                $"Events schedule — {schedule.Groups.Count} events · {schedule.RunCount} runs";
+
+            var lineCount = lua.Count(c => c == '\n') + 1;
+            var bytes = Encoding.UTF8.GetByteCount(lua);
+            txtEventsCardLabel.Text =
+                $"Module:Datatable/Events — {lineCount} lines • {FormatSize(bytes)}";
+
+            if (schedule.Notes.Count > 0)
+            {
+                txtEventsNotes.Text = string.Join("\n", schedule.Notes.Select(n => "• " + n));
+                txtEventsNotes.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                txtEventsNotes.Visibility = Visibility.Collapsed;
+            }
+
+            eventsSection.Visibility = Visibility.Visible;
+            if (_eventsCollapsed)
+            {
+                eventsContent.Visibility = Visibility.Visible;
+                iconCollapseEvents.Symbol = Wpf.Ui.Controls.SymbolRegular.ChevronUp24;
+                _eventsCollapsed = false;
+            }
+
+            _combinedLoadCts ??= new CancellationTokenSource();
+            var (preview, remaining) = SplitForPreview(lua);
+            txtEvents.Text = preview;
+            eventsMiniLoading.Visibility = remaining != null ? Visibility.Visible : Visibility.Collapsed;
+            _ = LazySetEventsFullTextAsync(lua, _combinedLoadCts.Token);
+
+            UpdateEventsWikiButtonState();
+            ShowInfo($"Events schedule generated — {schedule.Groups.Count} events, {schedule.RunCount} runs.",
+                InfoBarSeverity.Success);
+        }
+        catch (Exception ex)
+        {
+            ShowInfo($"Error: {ex.Message}", InfoBarSeverity.Error);
+        }
+        finally
+        {
+            SetRowBusy(eventsIdle, eventsBusy, txtEventsBusy, false);
+            SetGenerateButtonsEnabled(true);
+        }
+    }
+
+    private void BtnCopyEvents_Click(object sender, RoutedEventArgs e)
+    {
+        if (!string.IsNullOrEmpty(_lastEventsLua))
+        {
+            App.NativeSetClipboardText(_lastEventsLua);
+            ShowInfo("Events schedule copied to clipboard.", InfoBarSeverity.Success);
         }
     }
 

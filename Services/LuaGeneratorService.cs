@@ -1146,6 +1146,121 @@ public class LuaGeneratorService
         return sb.ToString();
     }
 
+    // ── Events schedule Lua (Module:Datatable/Events) ─────────────────
+
+    /// <summary>
+    /// Builds the full Module:Datatable/Events content from parsed events.json schedules.
+    /// Format contract (consumed by Module:Events): entries with name/category/runs,
+    /// runs as explicit instances { start = {y,m,d,h,min}, durationDays = N }, all UTC.
+    /// </summary>
+    public string GenerateEventScheduleLua(List<EventScheduleGroup> groups, string? createdAt)
+    {
+        var sb = new StringBuilder();
+        sb.AppendLine("-- Module:Datatable/Events");
+        sb.AppendLine("-- Schedule data for timed Events, consumed by Module:Events to render");
+        sb.AppendLine("-- per-event schedules and the global upcoming-events calendar.");
+        sb.AppendLine("--");
+        sb.AppendLine("-- All times are UTC (the game schedules every Event in UTC).");
+        sb.AppendLine("--");
+        sb.AppendLine("-- Each entry in `events` has:");
+        sb.AppendLine("--   name        -- exact wiki page name of the Event (used for links)");
+        sb.AppendLine("--   category    -- grouping label shown in the global calendar");
+        sb.AppendLine("--   badge       -- (optional) dump asset handle (PrefabsOverride/AssetOverride),");
+        sb.AppendLine("--                  reference for mapping the event icon; the widget renders the");
+        sb.AppendLine("--                  icon via Module:Utils Icon(name), not this field.");
+        sb.AppendLine("--   parent      -- (Garage Cleanups only) the seasonal event this accompanies;");
+        sb.AppendLine("--                  the widget nests the cleanup under that event.");
+        sb.AppendLine("--   runs        -- list of scheduled runs. A run is either:");
+        sb.AppendLine("--                  * a single occurrence:");
+        sb.AppendLine("--                      { start = {year=, month=, day=, hour=, min=}, durationDays = N }");
+        sb.AppendLine("--                  * a recurrence rule (expanded by Module:Events):");
+        sb.AppendLine("--                      { start = {...}, durationDays = N, intervalDays = N,");
+        sb.AppendLine("--                        untilDate = {year=, month=, day=} }   -- inclusive last start");
+        sb.AppendLine("--                    or use `count = N` instead of `untilDate` for a fixed number of runs.");
+        sb.AppendLine("--");
+        sb.AppendLine("--   `min` and `hour` default to 0 when omitted.");
+        sb.AppendLine("--   Add `onFireVariant = true` to the run that carries the On Fire booster.");
+        sb.AppendLine("--   This flag is hand-maintained (not in the game dump) and is PRESERVED by");
+        sb.AppendLine("--   regeneration — the app merges it back onto the matching run.");
+        sb.AppendLine("--   `disabled = true` marks a run whose config entry is IsEnabled=false");
+        sb.AppendLine("--   (already-aired history or an unconfirmed future event). All events are");
+        sb.AppendLine("--   listed; hide the disabled ones on a page with |hideDisabled=true|.");
+        sb.AppendLine("--");
+        sb.AppendLine("-- The game config only keeps the LATEST scheduled run per event entry, so");
+        sb.AppendLine("-- re-aired events lose their old dates on regeneration. Historical runs must");
+        sb.AppendLine("-- be preserved by merging (never blanket-overwrite this module).");
+        sb.Append(BuildLuaHeader(createdAt));
+        sb.AppendLine();
+        sb.AppendLine("-- Events are ordered newest-first (by most recent run); the category");
+        sb.AppendLine("-- field groups them in the rendered calendar, not here.");
+        sb.AppendLine("return {");
+        sb.AppendLine("\tevents = {");
+
+        foreach (var g in groups)
+        {
+            sb.AppendLine("\t\t{");
+            sb.AppendLine($"\t\t\tname = \"{Esc(g.Name)}\",");
+            sb.AppendLine($"\t\t\tcategory = \"{Esc(g.Category)}\",");
+            if (!string.IsNullOrEmpty(g.Badge))
+                sb.AppendLine($"\t\t\tbadge = \"{Esc(g.Badge)}\",");
+            if (!string.IsNullOrEmpty(g.Parent))
+                sb.AppendLine($"\t\t\tparent = \"{Esc(g.Parent)}\",");
+            sb.AppendLine("\t\t\truns = {");
+
+            // Column alignment within this event's run list: pad month/day/hour/min so the
+            // start-table fields line up. (No trailing config-ID comment — kept output clean.)
+            var anyHour = g.Runs.Any(r => r.Start.Hour != 0 || r.Start.Minute != 0);
+            var anyMin = g.Runs.Any(r => r.Start.Minute != 0);
+            int monthW = g.Runs.Max(r => r.Start.Month.ToString().Length);
+            int dayW = g.Runs.Max(r => r.Start.Day.ToString().Length);
+            int hourW = anyHour ? g.Runs.Max(r => r.Start.Hour.ToString().Length) : 0;
+            int minW = anyMin ? g.Runs.Max(r => r.Start.Minute.ToString().Length) : 0;
+
+            // "12," padded so the next field starts at a constant column ("2,  " / "10, ").
+            static string Field(string key, int val, int width) => $"{key} = {(val + ",").PadRight(width + 2)}";
+
+            foreach (var run in g.Runs)
+            {
+                var s = run.Start;
+                var start = $"year = {s.Year}, " + Field("month", s.Month, monthW);
+                // last field carries no trailing comma; pad its value so the closing brace aligns.
+                if (anyHour || anyMin)
+                {
+                    start += Field("day", s.Day, dayW);
+                    if (anyMin)
+                        start += Field("hour", s.Hour, hourW) + $"min = {s.Minute.ToString().PadRight(minW)}";
+                    else
+                        start += $"hour = {s.Hour.ToString().PadRight(hourW)}";
+                }
+                else
+                {
+                    start += $"day = {s.Day.ToString().PadRight(dayW)}";
+                }
+                var flags = (run.OnFireVariant ? ", onFireVariant = true" : "")
+                          + (run.Disabled ? ", disabled = true" : "");
+                sb.AppendLine($"\t\t\t\t{{ start = {{ {start} }}, durationDays = {FormatDurationDays(run.Duration)}{flags} }},");
+            }
+            sb.AppendLine("\t\t\t},");
+            sb.AppendLine("\t\t},");
+        }
+
+        sb.AppendLine("\t},");
+        sb.AppendLine("}");
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Formats a duration as Lua days expression: whole days as "5",
+    /// fractional as "6 + 22/24" (+ minutes as "/1440" term) for readability.
+    /// </summary>
+    private static string FormatDurationDays(TimeSpan d)
+    {
+        var expr = d.Days.ToString(CultureInfo.InvariantCulture);
+        if (d.Hours != 0) expr += $" + {d.Hours}/24";
+        if (d.Minutes != 0) expr += $" + {d.Minutes}/1440";
+        return expr;
+    }
+
     // ── Lua helpers ────────────────────────────────────────────────────
 
     /// <summary>Converts PascalCase to camelCase for Lua field names.</summary>

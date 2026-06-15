@@ -1,4 +1,5 @@
-﻿using GameLogic.Codex;
+﻿using System.Collections.Generic;
+using GameLogic.Codex;
 using GameLogic.Merge;
 using GameLogic.MergeChains;
 using GameLogic.Player.Items.Production;
@@ -38,7 +39,8 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
             typeof(PersistentFeatures),
             typeof(ISinkStateFactory),
             typeof(IActivationCycle),
-            typeof(ActivationFeatures)
+            typeof(ActivationFeatures),
+            typeof(ListMergeChainElement)
         };
 
         public MetaMergeChainSerializer(SharedGameConfig config, bool dropAsPercent, ILogger output)
@@ -80,6 +82,36 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
             }
             else if (value is ActivationCycle ac)
                 SerializeActivationCycle(writer, ac, serializer);
+            else if (value is ListMergeChainElement listEl)
+                SerializeListChainElement(writer, listEl, serializer);
+        }
+
+        /// <summary>
+        /// Serializes one merge-chain position that holds a LIST of item refs.
+        /// The game models a branching merge chain (random terminal merge, e.g. Flower Bed → A/B/C
+        /// generators at 65/30/5) as a "branch-wide" list per position: each branch lane contributes
+        /// one ref, so pre-branch levels list the SAME item ref once per lane. Those identical refs
+        /// are real game data, not a dumper artifact — the very same Items list yields the genuinely
+        /// distinct A/B/C variants at the final level. We collapse refs whose item is identical
+        /// (same ConfigKey = same unique item ID = identical definition); distinct variants survive.
+        /// (The element's Count getter is a decompiled stub that is always 0, so it's dropped.)
+        /// </summary>
+        private void SerializeListChainElement(JsonWriter writer, ListMergeChainElement element, JsonSerializer serializer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("Items");
+            writer.WriteStartArray();
+
+            var seen = new HashSet<int>();
+            foreach (var itemDef in element.Items ?? Enumerable.Empty<ItemDef>())
+            {
+                if (itemDef == null) continue;
+                if (!seen.Add(itemDef.ConfigKey)) continue; // drop duplicate identical items
+                serializer.Serialize(writer, itemDef);       // routes back through SerializeItem(ItemDef)
+            }
+
+            writer.WriteEndArray();
+            writer.WriteEndObject();
         }
 
         /// <summary>Tracks current ActivationFeatures for MaxCharges injection before StorageMax.</summary>

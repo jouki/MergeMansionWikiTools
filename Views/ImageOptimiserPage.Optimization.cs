@@ -22,6 +22,30 @@ public partial class ImageOptimiserPage
         if (_selectedCluster != null)
             _selectedCluster.IndexText = inputIndices.Text;
 
+        // Resolve the split index for every scissors cluster that doesn't have one yet, using the
+        // SAME auto-predict that runs when you click a thumbnail. Without this, "Optimise All" only
+        // splits clusters whose index was set as a side-effect of being selected, so images you
+        // never clicked were silently left unsplit (and thus optimized/uploaded as the raw whole image).
+        var preSelImage = _selectedImage;
+        var preSelCluster = _selectedCluster;
+        _suppressIndexReset = true;
+        foreach (var cluster in _clusters)
+        {
+            if (!string.IsNullOrWhiteSpace(cluster.IndexText)) continue;
+            if (!cluster.Images.Any(i => i.IsScissorsActive)) continue;
+            if (cluster.Images.Any(i => i.IsSplit)) continue;
+
+            _selectedCluster = cluster;
+            _selectedImage = cluster.Images.FirstOrDefault();
+            inputIndices.Text = "";
+            TryAutoPredict(); // writes cluster.IndexText when a prediction is found
+        }
+        // Restore the user's selection + index box.
+        _selectedImage = preSelImage;
+        _selectedCluster = preSelCluster;
+        inputIndices.Text = preSelCluster?.IndexText ?? "";
+        _suppressIndexReset = false;
+
         // Check if any cluster has actual indices set but hasn't been split yet
         var unsplitClusters = _clusters.Where(c =>
             ImageSplitLogic.ParseIndexTokens(c.IndexText).Length > 0 &&

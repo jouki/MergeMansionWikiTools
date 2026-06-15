@@ -44,6 +44,9 @@ public partial class WikiDataParserPage : UserControl
 
     private const long MaxWikiBytes = 2 * 1024 * 1024; // 2 MB
 
+    // Events schedule state
+    private string? _lastEventsLua;
+
     // CreatedAt from JSON sources
     private string? _areasCreatedAt;
     private string? _itemsCreatedAt;
@@ -76,6 +79,7 @@ public partial class WikiDataParserPage : UserControl
     // Track collapse state
     private bool _areasCollapsed;
     private bool _itemsCollapsed;
+    private bool _eventsCollapsed;
 
     // Cancellation for ongoing chunked text loads
     private CancellationTokenSource? _chunkLoadCts;
@@ -93,6 +97,7 @@ public partial class WikiDataParserPage : UserControl
         RefreshStatus();
         UpdateWikiButtonState();
         UpdateItemsWikiButtonState();
+        UpdateEventsWikiButtonState();
         _main.WikiVerifiedChanged += OnWikiVerifiedChanged;
     }
 
@@ -100,12 +105,15 @@ public partial class WikiDataParserPage : UserControl
     {
         UpdateWikiButtonState();
         UpdateItemsWikiButtonState();
+        UpdateEventsWikiButtonState();
     }
 
     // ── Status ──────────────────────────────────────────────────────
 
     public async void RefreshStatus()
     {
+        // Set every row's status synchronously FIRST, so no row is left blank while the
+        // async area count runs (the await below used to leave Events empty mid-refresh).
         var ds = _main.DataService;
         var chainPath = _main.Settings.ChainItemOddsPath;
 
@@ -127,6 +135,25 @@ public partial class WikiDataParserPage : UserControl
             btnItemsPath.Visibility = Visibility.Collapsed;
         }
 
+        var eventsPath = _main.Settings.EventsJsonPath;
+        if (!string.IsNullOrEmpty(eventsPath) && File.Exists(eventsPath))
+        {
+            txtEventsStatus.Text = "Events: schedule source ready";
+            btnEventsPath.Content = eventsPath;
+            btnEventsPath.Visibility = Visibility.Visible;
+        }
+        else if (!string.IsNullOrEmpty(eventsPath))
+        {
+            txtEventsStatus.Text = $"Events: file not found — {Path.GetFileName(eventsPath)}";
+            btnEventsPath.Content = eventsPath;
+            btnEventsPath.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            txtEventsStatus.Text = "Events: no file configured — set in Settings";
+            btnEventsPath.Visibility = Visibility.Collapsed;
+        }
+
         var areasPath = _main.Settings.AreasJsonPath;
         if (!string.IsNullOrEmpty(areasPath) && File.Exists(areasPath))
         {
@@ -137,18 +164,20 @@ public partial class WikiDataParserPage : UserControl
                 _cachedAreaCount = null;
             }
 
+            btnAreasPath.Content = areasPath;
+            btnAreasPath.Visibility = Visibility.Visible;
+
             if (_cachedAreaCount == null)
             {
-                txtAreasStatus.Text = "Areas: counting...";
+                // Unified busy indicator (spinner + verb) instead of bare "counting..." text.
+                SetRowBusy(areasIdle, areasBusy, txtAreasBusy, true, "Counting areas…");
                 _cachedAreaCount = await Task.Run(() => TryCountAreas(areasPath));
+                SetRowBusy(areasIdle, areasBusy, txtAreasBusy, false);
             }
 
             txtAreasStatus.Text = _cachedAreaCount.HasValue
                 ? $"Areas: {_cachedAreaCount.Value} areas"
                 : $"Areas: {Path.GetFileName(areasPath)}";
-
-            btnAreasPath.Content = areasPath;
-            btnAreasPath.Visibility = Visibility.Visible;
         }
         else if (!string.IsNullOrEmpty(areasPath))
         {
@@ -161,6 +190,31 @@ public partial class WikiDataParserPage : UserControl
             txtAreasStatus.Text = "Areas: no file configured — set in Settings";
             btnAreasPath.Visibility = Visibility.Collapsed;
         }
+    }
+
+    // ── Busy-state helpers (unified loading communication across all three rows) ──
+
+    /// <summary>
+    /// Toggles a toolbar row between its idle status panel and a busy panel
+    /// (spinner + verb like "Generating…"). Keeps the three rows consistent.
+    /// </summary>
+    private static void SetRowBusy(UIElement idle, UIElement busy, WpfTextBlock verbText, bool isBusy, string verb = "")
+    {
+        busy.Visibility = isBusy ? Visibility.Visible : Visibility.Collapsed;
+        idle.Visibility = isBusy ? Visibility.Collapsed : Visibility.Visible;
+        if (isBusy) verbText.Text = verb;
+    }
+
+    /// <summary>
+    /// Enables/disables ALL three generate buttons. Called around any generation so the
+    /// user gets a clear "wait" signal (greyed buttons) instead of being able to launch
+    /// overlapping work while one job is already running.
+    /// </summary>
+    private void SetGenerateButtonsEnabled(bool enabled)
+    {
+        btnGenerateAreas.IsEnabled = enabled;
+        btnGenerateItems.IsEnabled = enabled;
+        btnGenerateEvents.IsEnabled = enabled;
     }
 
     private static int? TryCountAreas(string path)
@@ -186,6 +240,11 @@ public partial class WikiDataParserPage : UserControl
     private void BtnItemsPath_Click(object sender, RoutedEventArgs e)
     {
         _main.NavigateToSettingsHighlightChainFile();
+    }
+
+    private void BtnEventsPath_Click(object sender, RoutedEventArgs e)
+    {
+        _main.NavigateToSettingsHighlightEvents();
     }
 
     // ── Page lifecycle (called from MainWindow on navigation) ─────────
@@ -226,6 +285,14 @@ public partial class WikiDataParserPage : UserControl
             _itemChunkCardData[i].TextBox.Text = preview;
             _itemChunkCardData[i].MiniLoading.Visibility = remaining != null ? Visibility.Visible : Visibility.Collapsed;
         }
+
+        // Events schedule
+        if (!string.IsNullOrEmpty(_lastEventsLua))
+        {
+            var (preview, remaining) = SplitForPreview(_lastEventsLua);
+            txtEvents.Text = preview;
+            eventsMiniLoading.Visibility = remaining != null ? Visibility.Visible : Visibility.Collapsed;
+        }
     }
 
     /// <summary>
@@ -257,6 +324,10 @@ public partial class WikiDataParserPage : UserControl
             _ = LazySetChunkFullTextAsync(card.TextBox, _lastItemChunks[i].Lua,
                 card.MiniLoading, card.WarnPanel, card.WarnText, _lastItemChunks[i].Label, combinedCt);
         }
+
+        // Events schedule
+        if (!string.IsNullOrEmpty(_lastEventsLua))
+            _ = LazySetEventsFullTextAsync(_lastEventsLua, combinedCt);
     }
 
     // ── Collapse / expand ────────────────────────────────────────────
@@ -277,6 +348,27 @@ public partial class WikiDataParserPage : UserControl
         iconCollapseItems.Symbol = _itemsCollapsed
             ? Wpf.Ui.Controls.SymbolRegular.ChevronDown24
             : Wpf.Ui.Controls.SymbolRegular.ChevronUp24;
+    }
+
+    private void BtnCollapseEvents_Click(object sender, RoutedEventArgs e)
+    {
+        _eventsCollapsed = !_eventsCollapsed;
+        eventsContent.Visibility = _eventsCollapsed ? Visibility.Collapsed : Visibility.Visible;
+        iconCollapseEvents.Symbol = _eventsCollapsed
+            ? Wpf.Ui.Controls.SymbolRegular.ChevronDown24
+            : Wpf.Ui.Controls.SymbolRegular.ChevronUp24;
+    }
+
+    private async Task LazySetEventsFullTextAsync(string lua, CancellationToken ct)
+    {
+        var (_, remaining) = SplitForPreview(lua);
+        if (remaining == null) { eventsMiniLoading.Visibility = Visibility.Collapsed; return; }
+
+        await Dispatcher.InvokeAsync(() => { }, DispatcherPriority.ApplicationIdle);
+        await Task.Delay(30);
+        if (ct.IsCancellationRequested) return;
+
+        await AppendChunkedAsync(txtEvents, remaining, eventsMiniLoading, ct);
     }
 
     private async Task LazySetCombinedFullTextAsync(string lua, CancellationToken ct)

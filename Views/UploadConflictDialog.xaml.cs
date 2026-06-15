@@ -334,6 +334,9 @@ public partial class UploadConflictDialog : FluentWindow
 
                     if (!string.IsNullOrEmpty(wikiUser))
                         txtOldAuthor.Text = $"by {wikiUser}";
+
+                    // File exists on the wiki → offer a link to its page.
+                    lnkOldWiki.Visibility = Visibility.Visible;
                 }
                 catch { /* failed to decode */ }
                 ringOld.Visibility = Visibility.Collapsed;
@@ -429,6 +432,18 @@ public partial class UploadConflictDialog : FluentWindow
     {
         Choice = UploadConflictChoice.Cancel;
         Close();
+    }
+
+    /// <summary>Opens the existing file's wiki page in the default browser.</summary>
+    private void LnkOldWiki_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            var url = "https://merge-mansion.fandom.com/wiki/File:"
+                + Uri.EscapeDataString(_filename.Replace(' ', '_'));
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(url) { UseShellExecute = true });
+        }
+        catch { /* browser launch failed — ignore */ }
     }
 
     // ── Wizard: optimization → morph ────────────────────────────

@@ -1340,7 +1340,11 @@ public partial class SettingsPage : UserControl
             items.Add("Latest");
             return items;
         }
-        items.Add($"Latest ({_apkVersions[0].Version})");
+        // The "Latest" entry must append its date too (it was omitted, so the newest version
+        // showed no date even when one was available).
+        var latestDate = showDates && _apkVersions[0].ReleaseDate.HasValue
+            ? $"  ({_apkVersions[0].ReleaseDate.Value:yyyy-MM-dd})" : "";
+        items.Add($"Latest ({_apkVersions[0].Version}){latestDate}");
         for (int i = 1; i < _apkVersions.Count; i++)
         {
             var v = _apkVersions[i];

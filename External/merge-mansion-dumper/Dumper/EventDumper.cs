@@ -123,11 +123,15 @@ namespace merge_mansion_dumper.Dumper
                 .Select(x => BuildProgressionPackPayload((GameLogic.ProgressivePacks.ProgressionPack)x.Value))
                 .ToArray() ?? Array.Empty<object>();
 
-            // GarageCleanups → GarageCleanup filter
+            // GarageCleanups → GarageCleanup filter.
+            // PrefabsOverride ([MetaMember] private, ≈ the event's badge prefab) is already
+            // serialized by the default resolver, so no extra projection is needed here.
             if (_filters.HasFlag(EventFilters.GarageCleanup))
                 events["GarageCleanups"] = config.GarageCleanupEvents?.EnumerateAll().Select(x => x.Value).ToArray() ?? Array.Empty<object>();
 
-            // CoreSupportEvents — sub-filtered by EventId prefix
+            // CoreSupportEvents — sub-filtered by EventId prefix.
+            // AssetOverride/LocOverride ([MetaMember] private) would be surfaced by the default
+            // resolver if set, but they are null for every current CSE event, so nothing to add.
             if (HasAnyFlag(EventFilters.ReArchaeology | EventFilters.HorizonsCup | EventFilters.RollTheDice | EventFilters.Uncategorised))
             {
                 var filtered = config.CoreSupportEvents?.EnumerateAll()

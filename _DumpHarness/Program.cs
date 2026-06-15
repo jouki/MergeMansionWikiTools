@@ -82,6 +82,26 @@ internal static class Program
             // Used to diagnose tasks with missing Description in areas.json.
             return ProbeHotspot(args[1], args[2], args[3]);
         }
+        if (args.Length >= 3 && args[0] == "--probe-player-levels")
+        {
+            // --probe-player-levels <configPath> <languagePath>
+            // Prints MaxPlayerLevel + per-level NextLevelExperience (with cumulative)
+            // and reward summary from the PlayerLevels config library.
+            return ProbePlayerLevels(args[1], args[2]);
+        }
+        if (args.Length >= 3 && args[0] == "--probe-energy-modes")
+        {
+            // --probe-energy-modes <configPath> <languagePath>
+            // Prints EnergyModes library (Supercharge/Hypercharge): multipliers + LevelUpChance.
+            return ProbeEnergyModes(args[1], args[2]);
+        }
+        if (args.Length >= 3 && args[0] == "--probe-board")
+        {
+            // --probe-board <configPath> <languagePath> [<boardIdSubstring>]
+            // Prints Boards library entries: BoardId, size, EnergyType, ItemSellCost
+            // (per-board sell price override — source of "1 coin on event boards").
+            return ProbeBoard(args[1], args[2], args.Length >= 4 ? args[3] : "");
+        }
 
         if (args.Length < 3)
         {
@@ -1258,6 +1278,178 @@ internal static class Program
             Console.Error.WriteLine($"FATAL: {ex.GetType().Name}: {ex.Message}");
             return 1;
         }
+    }
+
+    // Probe PlayerLevels config library — prints MaxPlayerLevel and per-level
+    // NextLevelExperience (+ cumulative) with a reward summary. Source of truth
+    // for player level cap / XP curve (wiki only documents up to L50).
+    private static int ProbePlayerLevels(string configPath, string languagePath)
+    {
+        Console.WriteLine("=== ProbePlayerLevels ===");
+        Console.WriteLine($"Config:   {configPath}");
+        Console.WriteLine($"Language: {languagePath}");
+
+        try
+        {
+            MetaplayCore.Initialize();
+            if (!string.IsNullOrEmpty(languagePath) && File.Exists(languagePath))
+            {
+                var langHash = ContentHash.ParseString(Path.GetFileName(languagePath));
+                MetaplaySDK.ActiveLanguage = LocalizationLanguage.ImportBinary(langHash, File.ReadAllBytes(languagePath));
+            }
+            var archive = ConfigArchive.FromBytes(File.ReadAllBytes(configPath));
+            var patchedArchive = PatchedConfigArchive.WithNoPatches(archive);
+            var gameConfig = (SharedGameConfig)GameConfigFactory.Instance.ImportSharedGameConfig(patchedArchive);
+            ClientGlobal.SharedGameConfig = gameConfig;
+
+            Console.WriteLine($"MaxPlayerLevel: {gameConfig.MaxPlayerLevel}");
+
+            long cumulative = 0;
+            var levels = gameConfig.PlayerLevels.EnumerateAll()
+                .Select(kv => (global::Player.PlayerLevelData)kv.Value)
+                .OrderBy(l => l.Level)
+                .ToList();
+            Console.WriteLine($"PlayerLevels entries: {levels.Count}");
+            foreach (var lv in levels)
+            {
+                cumulative += lv.NextLevelExperience;
+                string rewards = lv.Rewards == null || lv.Rewards.Count == 0
+                    ? "-"
+                    : string.Join(", ", lv.Rewards.Select(DescribeReward));
+                Console.WriteLine($"L{lv.Level,3}: nextXP={lv.NextLevelExperience,8} cum={cumulative,10} rewards: {rewards}");
+            }
+            return 0;
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"FATAL: {ex.GetType().Name}: {ex.Message}");
+            return 1;
+        }
+    }
+
+    // Probe EnergyModes config library — Supercharge/Hypercharge definitions
+    // (EnergyConsumptionMultiplier drives aux-attachment chance scaling).
+    private static int ProbeEnergyModes(string configPath, string languagePath)
+    {
+        Console.WriteLine("=== ProbeEnergyModes ===");
+        Console.WriteLine($"Config:   {configPath}");
+
+        try
+        {
+            MetaplayCore.Initialize();
+            if (!string.IsNullOrEmpty(languagePath) && File.Exists(languagePath))
+            {
+                var langHash = ContentHash.ParseString(Path.GetFileName(languagePath));
+                MetaplaySDK.ActiveLanguage = LocalizationLanguage.ImportBinary(langHash, File.ReadAllBytes(languagePath));
+            }
+            var archive = ConfigArchive.FromBytes(File.ReadAllBytes(configPath));
+            var patchedArchive = PatchedConfigArchive.WithNoPatches(archive);
+            var gameConfig = (SharedGameConfig)GameConfigFactory.Instance.ImportSharedGameConfig(patchedArchive);
+            ClientGlobal.SharedGameConfig = gameConfig;
+
+            foreach (var kv in gameConfig.EnergyModes.EnumerateAll())
+            {
+                var m = (GameLogic.Player.Modes.EnergyModeInfo)kv.Value;
+                Console.WriteLine($"{m.ConfigKey,-20} EnergyMult={m.EnergyConsumptionMultiplier} CapacityMult={m.CapacityConsumptionMultiplier} LevelUpChance={m.LevelUpChance} LevelUpCount={m.LevelUpCount} NameLocId={m.NameLocId}");
+            }
+            Console.WriteLine("--- EnergySettings (per EnergyType) ---");
+            foreach (var kv in gameConfig.EnergySettings.EnumerateAll())
+            {
+                var t = kv.Value.GetType();
+                var parts = new List<string>();
+                foreach (var prop in t.GetProperties())
+                {
+                    object val = null;
+                    try { val = prop.GetValue(kv.Value); } catch { }
+                    if (val != null) parts.Add($"{prop.Name}={val}");
+                }
+                Console.WriteLine($"{kv.Key}: {string.Join(", ", parts)}");
+            }
+            return 0;
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"FATAL: {ex.GetType().Name}: {ex.Message}");
+            return 1;
+        }
+    }
+
+    // Probe Boards config library — per-board sell price override (BoardInfo.ItemSellCost).
+    // Verifies the "everything sells for 1 coin on event boards" rule from game config.
+    private static int ProbeBoard(string configPath, string languagePath, string idSubstring)
+    {
+        Console.WriteLine("=== ProbeBoard ===");
+        Console.WriteLine($"Config:   {configPath}");
+        Console.WriteLine($"Filter:   '{idSubstring}'");
+
+        try
+        {
+            MetaplayCore.Initialize();
+            if (!string.IsNullOrEmpty(languagePath) && File.Exists(languagePath))
+            {
+                var langHash = ContentHash.ParseString(Path.GetFileName(languagePath));
+                MetaplaySDK.ActiveLanguage = LocalizationLanguage.ImportBinary(langHash, File.ReadAllBytes(languagePath));
+            }
+            var archive = ConfigArchive.FromBytes(File.ReadAllBytes(configPath));
+            var patchedArchive = PatchedConfigArchive.WithNoPatches(archive);
+            var gameConfig = (SharedGameConfig)GameConfigFactory.Instance.ImportSharedGameConfig(patchedArchive);
+            ClientGlobal.SharedGameConfig = gameConfig;
+
+            int count = 0;
+            foreach (var kv in gameConfig.Boards.EnumerateAll())
+            {
+                var board = (Code.GameLogic.GameEvents.BoardInfo)kv.Value;
+                var id = board.BoardId.ToString();
+                if (!string.IsNullOrEmpty(idSubstring) && !id.Contains(idSubstring, StringComparison.OrdinalIgnoreCase))
+                    continue;
+                count++;
+                string sellCost = "null (fallback ItemSellPrices per level)";
+                if (board.ItemSellCost != null)
+                {
+                    var t = board.ItemSellCost.GetType();
+                    var parts = new List<string>();
+                    foreach (var prop in t.GetProperties())
+                    {
+                        object val = null;
+                        try { val = prop.GetValue(board.ItemSellCost); } catch { }
+                        if (val != null) parts.Add($"{prop.Name}={val}");
+                    }
+                    sellCost = $"{t.Name}({string.Join(",", parts)})";
+                }
+                Console.WriteLine($"{id,-50} {board.Width}x{board.Height,-3} Energy={board.EnergyType,-12} ItemSellCost={sellCost}");
+            }
+            Console.WriteLine($"Matched boards: {count}");
+            return 0;
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"FATAL: {ex.GetType().Name}: {ex.Message}");
+            return 1;
+        }
+    }
+
+    private static string DescribeReward(object reward)
+    {
+        if (reward == null)
+            return "null";
+        var type = reward.GetType();
+        var parts = new List<string>();
+        foreach (var propName in new[] { "Amount", "ItemDef", "EnergyType", "Progress" })
+        {
+            var prop = type.GetProperty(propName);
+            if (prop == null) continue;
+            var val = prop.GetValue(reward);
+            if (val == null) continue;
+            if (val is GameLogic.Config.ItemDef idef)
+            {
+                string itemName = null;
+                try { itemName = idef.GetDef(ClientGlobal.SharedGameConfig)?.ItemType?.ToString(); } catch { }
+                parts.Add($"Item={itemName ?? val.ToString()}");
+                continue;
+            }
+            parts.Add($"{propName}={val}");
+        }
+        return parts.Count > 0 ? $"{type.Name}({string.Join(",", parts)})" : type.Name;
     }
 
     // Probe LocMan — load language file and list all translation keys matching regex pattern.

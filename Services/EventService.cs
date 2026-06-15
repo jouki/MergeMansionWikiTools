@@ -183,8 +183,9 @@ public class EventService
             ? v.GetString() ?? "" : "";
     }
 
-    /// <summary>Parses duration strings like "4d 0h 0min 0s" or "107h 0min 0s".</summary>
-    private static TimeSpan? ParseDuration(string? s)
+    /// <summary>Parses duration strings like "4d 0h 0min 0s" or "107h 0min 0s".
+    /// Shared with EventScheduleService (single duration-parsing source of truth).</summary>
+    internal static TimeSpan? ParseDuration(string? s)
     {
         if (string.IsNullOrEmpty(s)) return null;
 

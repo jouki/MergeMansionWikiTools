@@ -521,6 +521,7 @@ public partial class WikiDataParserPage
     // ── Update Items Wiki ────────────────────────────────────────────
 
     private const string ItemsModuleTitle = "Module:Datatable/Items";
+    private const string EventsModuleTitle = "Module:Datatable/Events";
 
     private void UpdateItemsWikiButtonState()
     {
@@ -528,6 +529,157 @@ public partial class WikiDataParserPage
         btnUpdateItemsWiki.IsEnabled = _main.Settings.WikiVerified && hasData;
         iconItemsDateState.Visibility = Visibility.Collapsed;
         UpdateButtonTooltip(btnUpdateItemsWiki, hasData);
+    }
+
+    private void UpdateEventsWikiButtonState()
+    {
+        var hasData = !string.IsNullOrEmpty(_lastEventsLua);
+        btnUpdateEventsWiki.IsEnabled = _main.Settings.WikiVerified && hasData;
+        UpdateButtonTooltip(btnUpdateEventsWiki, hasData);
+    }
+
+    /// <summary>
+    /// Pushes the single Module:Datatable/Events module. Re-fetches the live module and
+    /// re-runs the historical merge at push time, so the upload always reflects the latest
+    /// on-wiki history even if it changed since "Generate Events" (no run is ever dropped).
+    /// </summary>
+    private async void BtnUpdateEventsWiki_Click(object sender, RoutedEventArgs e)
+    {
+        using var _t = AppLogger.Timed("UpdateEventsWiki");
+        if (!_main.Settings.WikiVerified)
+        {
+            ShowInfo("Wiki bot not verified. Configure credentials in Settings first.", InfoBarSeverity.Warning);
+            return;
+        }
+
+        var eventsPath = _main.Settings.EventsJsonPath;
+        if (string.IsNullOrEmpty(_lastEventsLua) || string.IsNullOrEmpty(eventsPath) || !File.Exists(eventsPath))
+        {
+            ShowInfo("No events data generated. Generate events first.", InfoBarSeverity.Warning);
+            return;
+        }
+
+        btnUpdateEventsWiki.IsEnabled = false;
+        SetGenerateButtonsEnabled(false);
+        SetRowBusy(eventsIdle, eventsBusy, txtEventsBusy, true, "Re-merging live module…");
+
+        try
+        {
+            // Re-fetch + re-merge so the push is built on the CURRENT live history.
+            var existing = await WikiMappingService.FetchModuleContentAsync(EventsModuleTitle);
+            var schedule = new EventScheduleService();
+            var lua = await Task.Run(async () =>
+            {
+                await schedule.LoadAsync(eventsPath, existing);
+                return _luaGen.GenerateEventScheduleLua(schedule.Groups, schedule.CreatedAt);
+            });
+            _lastEventsLua = lua;
+
+            // Refresh the on-screen preview to match exactly what will be pushed.
+            txtEventsHeader.Text = $"Events schedule — {schedule.Groups.Count} events · {schedule.RunCount} runs";
+            var (preview, remaining) = SplitForPreview(lua);
+            txtEvents.Text = preview;
+            eventsMiniLoading.Visibility = remaining != null ? Visibility.Visible : Visibility.Collapsed;
+            _combinedLoadCts ??= new CancellationTokenSource();
+            _ = LazySetEventsFullTextAsync(lua, _combinedLoadCts.Token);
+            if (schedule.Notes.Count > 0)
+            {
+                txtEventsNotes.Text = string.Join("\n", schedule.Notes.Select(n => "• " + n));
+                txtEventsNotes.Visibility = Visibility.Visible;
+            }
+
+            SetRowBusy(eventsIdle, eventsBusy, txtEventsBusy, false);
+
+            var exists = existing != null;
+            var lineCount = lua.Count(c => c == '\n') + 1;
+            var sizeStr = FormatSize(Encoding.UTF8.GetByteCount(lua));
+
+            var previewBox = CreatePreviewDialog(
+                "Update Events Data on Wiki",
+                BuildEventsUpdatePreview(exists, schedule.Groups.Count, schedule.RunCount, lineCount, sizeStr,
+                    schedule.Notes),
+                exists ? "Update" : "Create");
+
+            if (await previewBox.ShowDialogAsync() != WpfMessageBoxResult.Primary)
+            {
+                infoBar.IsOpen = false;
+                return;
+            }
+
+            ShowInfo("Authenticating with wiki...", InfoBarSeverity.Informational);
+            using var client = await WikiMappingService.CreateAuthenticatedClientAsync(
+                _main.Settings.WikiUsername, _main.Settings.WikiPassword);
+            var csrfToken = await WikiMappingService.GetCsrfTokenAsync(client);
+
+            var action = exists ? "Update" : "Create";
+            ShowInfo($"{action} {EventsModuleTitle}...", InfoBarSeverity.Informational);
+
+            await WikiMappingService.EditModuleAsync(
+                client, csrfToken, EventsModuleTitle, lua,
+                $"{action} event schedule data (via MergeMansionWikiTools)");
+
+            ShowInfo($"Wiki updated — {EventsModuleTitle} ({schedule.Groups.Count} events, {schedule.RunCount} runs).",
+                InfoBarSeverity.Success);
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Error("UpdateEventsWiki failed", ex);
+            ShowInfo($"Error: {ex.Message}", InfoBarSeverity.Error);
+        }
+        finally
+        {
+            SetRowBusy(eventsIdle, eventsBusy, txtEventsBusy, false);
+            SetGenerateButtonsEnabled(true);
+            UpdateEventsWikiButtonState();
+        }
+    }
+
+    private UIElement BuildEventsUpdatePreview(bool moduleExists, int eventCount, int runCount,
+        int lineCount, string sizeStr, IReadOnlyList<string> notes)
+    {
+        var primary = (Brush)FindResource("TextFillColorPrimaryBrush");
+        var secondary = (Brush)FindResource("TextFillColorSecondaryBrush");
+        var tertiary = (Brush)FindResource("TextFillColorTertiaryBrush");
+        var subtle = (Brush)FindResource("SubtleFillColorSecondaryBrush");
+
+        var panel = new StackPanel { Margin = new Thickness(0, 0, 0, 20) };
+
+        panel.Children.Add(new WpfTextBlock
+        {
+            Text = moduleExists
+                ? $"{EventsModuleTitle} will be overwritten"
+                : $"{EventsModuleTitle} will be created",
+            FontSize = 13, Foreground = secondary, Margin = new Thickness(0, 0, 0, 8)
+        });
+
+        panel.Children.Add(new Border
+        {
+            Background = subtle, CornerRadius = new CornerRadius(6),
+            Padding = new Thickness(12, 8, 12, 8), Margin = new Thickness(0, 0, 0, 8),
+            Child = new WpfTextBlock
+            {
+                Text = $"{eventCount} events · {runCount} runs · {lineCount} lines · {sizeStr}",
+                FontSize = 13, Foreground = primary
+            }
+        });
+
+        panel.Children.Add(new WpfTextBlock
+        {
+            Text = "Historical runs already merged from the live module — nothing is dropped.",
+            FontSize = 12, Foreground = tertiary, TextWrapping = TextWrapping.Wrap,
+            Margin = new Thickness(0, 0, 0, notes.Count > 0 ? 8 : 0)
+        });
+
+        if (notes.Count > 0)
+        {
+            panel.Children.Add(new WpfTextBlock
+            {
+                Text = string.Join("\n", notes.Select(n => "• " + n)),
+                FontSize = 11, Foreground = tertiary, TextWrapping = TextWrapping.Wrap
+            });
+        }
+
+        return panel;
     }
 
     private async void BtnUpdateItemsWiki_Click(object sender, RoutedEventArgs e)

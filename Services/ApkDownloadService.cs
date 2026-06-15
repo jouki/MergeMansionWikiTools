@@ -234,7 +234,9 @@ internal static class ApkDownloadService
 
     /// <summary>
     /// Fetches available versions with release dates.
-    /// Merges Uptodown (100+ versions with dates) + APKPure (downloadable versions with CDN IDs).
+    /// Merges APKPure (downloadable versions with CDN IDs + the accurate release date) + Uptodown
+    /// (full version history, and dates for older builds APKPure no longer lists). The APKPure date
+    /// wins when both have one — Uptodown indexes new builds days late.
     /// Versions only on Uptodown get CanDownload=false.
     /// </summary>
     public static async Task<List<ApkVersionInfo>> FetchAvailableVersionsAsync(CancellationToken ct = default)
@@ -278,7 +280,8 @@ internal static class ApkDownloadService
         if (uptodownVersions == null || uptodownVersions.Count == 0)
             return new List<ApkVersionInfo>();
 
-        // Merge: Uptodown provides dates + full history, APKPure provides download capability
+        // Merge: APKPure provides download IDs + the ACCURATE release date; Uptodown provides the
+        // full version history (and dates for older builds APKPure no longer lists).
         var apkPureLookup = new Dictionary<string, ApkVersionInfo>();
         foreach (var v in apkPureVersions!)
             apkPureLookup.TryAdd(v.Version, v);
@@ -292,10 +295,14 @@ internal static class ApkDownloadService
 
             if (apkPureLookup.TryGetValue(utd.Version, out var apkPure))
             {
-                // Available on both — use Uptodown date + APKPure download IDs
+                // Available on both — PREFER the APKPure date over Uptodown's. Uptodown is slow to
+                // index new builds, so its "lastUpdate" lags the real release (e.g. 26.05.01:
+                // Uptodown Jun 11 vs APKPure/CreatedAt Jun 8). That later date breaks
+                // MatchVersionByDate's "closest-not-after" rule and mis-attributes a fresh dump to
+                // the previous version. Fall back to Uptodown's date only if APKPure has none.
                 merged.Add(new ApkVersionInfo(
                     utd.Version, apkPure.VersionCode, apkPure.ApkId,
-                    utd.ReleaseDate ?? apkPure.ReleaseDate, CanDownload: true));
+                    apkPure.ReleaseDate ?? utd.ReleaseDate, CanDownload: true));
             }
             else
             {

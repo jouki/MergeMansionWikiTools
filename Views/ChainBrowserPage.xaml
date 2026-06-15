@@ -236,6 +236,11 @@
                                 <Expander.Header>
                                     <Grid HorizontalAlignment="Stretch"
                                           Margin="0,0,10,0">
+                                        <Grid.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Header="Copy ID" Click="CopyChainId_Click" />
+                                            </ContextMenu>
+                                        </Grid.ContextMenu>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
@@ -362,6 +367,11 @@
                                                                             Cursor="Hand"
                                                                             Tag="{Binding Name}"
                                                                             MouseLeftButtonDown="GroupRow_Click">
+                                                                    <StackPanel.ContextMenu>
+                                                                        <ContextMenu>
+                                                                            <MenuItem Header="Copy ID" Click="CopyGroupId_Click" />
+                                                                        </ContextMenu>
+                                                                    </StackPanel.ContextMenu>
                                                                     <CheckBox VerticalAlignment="Center"
                                                                               Margin="-4,0,4,0" Padding="0"
                                                                               MinWidth="0" MinHeight="0"
@@ -385,6 +395,11 @@
                                                     <Grid Margin="0,2" Background="Transparent"
                                                           Cursor="Hand"
                                                           MouseLeftButtonDown="ItemRow_Click">
+                                                        <Grid.ContextMenu>
+                                                            <ContextMenu>
+                                                                <MenuItem Header="Copy ID" Click="CopyItemId_Click" />
+                                                            </ContextMenu>
+                                                        </Grid.ContextMenu>
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="24" />
                                                             <ColumnDefinition Width="35" />
