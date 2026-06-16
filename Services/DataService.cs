@@ -304,7 +304,8 @@ public class DataService
             }
 
             // Drop odds — can be in multiple locations
-            pi.DropOdds = ExtractOdds(af);
+            pi.DropOdds = ExtractOdds(af, out var dropNonConstant);
+            pi.HasRandomDrop = dropNonConstant;
         }
 
         // ── SpawnFeatures ──
@@ -372,7 +373,23 @@ public class DataService
                     if (ip.ValueKind == JsonValueKind.String)
                         pi.DecayIntoItemType = ip.GetString();
                     else if (ip.ValueKind == JsonValueKind.Object)
+                    {
                         pi.DecayIntoItemType = GetConstantFirst(ip);
+
+                        // Non-constant decay (ControlledRandom/Random) = a "roller" that resolves to
+                        // one of several targets with odds (e.g. branching merge → A/B/C). Capture
+                        // them for the Decay Odds section.
+                        foreach (var producerKey in new[] { "ControlledRandom", "ControlledRandomSequence", "Random" })
+                        {
+                            if (ip.TryGetProperty(producerKey, out var prod)
+                                && prod.TryGetProperty("Odds", out var oddsEl)
+                                && oddsEl.ValueKind == JsonValueKind.Object)
+                            {
+                                pi.DecayIntoOdds = ParseOddsDictionary(oddsEl);
+                                break;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -601,12 +618,20 @@ public class DataService
     ///                  ActivationSpawn.PredefinedSequence.Odds
     ///                  or directly at ActivationFeatures.Odds (rare)
     /// </summary>
-    private Dictionary<string, double>? ExtractOdds(JsonElement af)
+    private Dictionary<string, double>? ExtractOdds(JsonElement af) => ExtractOdds(af, out _);
+
+    /// <param name="nonConstant">
+    /// Set true when the odds come from a randomized producer (ControlledRandom / Random / Sequence /
+    /// direct Odds) — i.e. real variance. A ConstantProducer (single 100% entry) leaves it false.
+    /// </param>
+    private Dictionary<string, double>? ExtractOdds(JsonElement af, out bool nonConstant)
     {
+        nonConstant = false;
+
         if (!af.TryGetProperty("ActivationSpawn", out var asp))
             goto fallback;
 
-        // ActivationSpawn can be a plain string (e.g. "GarageCleanupEvent")
+        // ActivationSpawn can be a plain string (e.g. "GarageCleanupEvent") — deterministic.
         if (asp.ValueKind == JsonValueKind.String)
         {
             var s = asp.GetString();
@@ -620,14 +645,14 @@ public class DataService
         if (asp.TryGetProperty("ControlledRandom", out var directCr))
         {
             if (directCr.TryGetProperty("Odds", out var odds) && odds.ValueKind == JsonValueKind.Object)
-                return ParseOddsDictionary(odds);
+            { nonConstant = true; return ParseOddsDictionary(odds); }
         }
 
         // Path 1a2: ActivationSpawn → ControlledRandomSequence → Odds (direct)
         if (asp.TryGetProperty("ControlledRandomSequence", out var directCrs))
         {
             if (directCrs.TryGetProperty("Odds", out var odds) && odds.ValueKind == JsonValueKind.Object)
-                return ParseOddsDictionary(odds);
+            { nonConstant = true; return ParseOddsDictionary(odds); }
         }
 
         // Path 1a3: ActivationSpawn → Random → Odds (direct, no BaseProducer wrapper).
@@ -636,10 +661,10 @@ public class DataService
         if (asp.TryGetProperty("Random", out var directRnd))
         {
             if (directRnd.TryGetProperty("Odds", out var odds) && odds.ValueKind == JsonValueKind.Object)
-                return ParseOddsDictionary(odds);
+            { nonConstant = true; return ParseOddsDictionary(odds); }
         }
 
-        // Path 1b: ActivationSpawn → Constant (single item)
+        // Path 1b: ActivationSpawn → Constant (single item) — deterministic.
         var directConst = GetConstantFirst(asp);
         if (!string.IsNullOrEmpty(directConst))
             return new Dictionary<string, double> { { directConst, 100.0 } };
@@ -650,19 +675,19 @@ public class DataService
             if (bp.TryGetProperty("ControlledRandom", out var cr))
             {
                 if (cr.TryGetProperty("Odds", out var odds) && odds.ValueKind == JsonValueKind.Object)
-                    return ParseOddsDictionary(odds);
+                { nonConstant = true; return ParseOddsDictionary(odds); }
             }
 
             if (bp.TryGetProperty("ControlledRandomSequence", out var crs))
             {
                 if (crs.TryGetProperty("Odds", out var odds) && odds.ValueKind == JsonValueKind.Object)
-                    return ParseOddsDictionary(odds);
+                { nonConstant = true; return ParseOddsDictionary(odds); }
             }
 
             if (bp.TryGetProperty("Random", out var rnd))
             {
                 if (rnd.TryGetProperty("Odds", out var odds) && odds.ValueKind == JsonValueKind.Object)
-                    return ParseOddsDictionary(odds);
+                { nonConstant = true; return ParseOddsDictionary(odds); }
             }
 
             var constant = GetConstantFirst(bp);
@@ -674,13 +699,13 @@ public class DataService
         if (asp.TryGetProperty("PredefinedSequence", out var ps))
         {
             if (ps.TryGetProperty("Odds", out var odds) && odds.ValueKind == JsonValueKind.Object)
-                return ParseOddsDictionary(odds);
+            { nonConstant = true; return ParseOddsDictionary(odds); }
         }
 
         fallback:
-        // Path 2: Direct Odds on ActivationFeatures (fallback)
+        // Path 2: Direct Odds on ActivationFeatures (fallback) — randomized.
         if (af.TryGetProperty("Odds", out var directOdds) && directOdds.ValueKind == JsonValueKind.Object)
-            return ParseOddsDictionary(directOdds);
+        { nonConstant = true; return ParseOddsDictionary(directOdds); }
 
         return null;
     }

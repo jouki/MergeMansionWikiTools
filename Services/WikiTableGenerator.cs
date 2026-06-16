@@ -328,10 +328,26 @@ public class WikiTableGenerator
 
         // Rows
         bool isFirst = true;
+        var renderedVariantLevels = new HashSet<int>();
         foreach (var item in items)
         {
-            var levelItems = itemsByLevel.GetValueOrDefault(item.Level) ?? new List<ParsedItem> { item };
-            bool hasSubRows = levelDiffering.ContainsKey(item.Level);
+            var allLevelItems = itemsByLevel.GetValueOrDefault(item.Level) ?? new List<ParsedItem> { item };
+
+            // When a level has explicit isVariant items, THOSE are the variant set: render exactly
+            // them and drop everything else at that level — notably a pure-hide alias like a decay
+            // "roller" (isAlias, not isVariant), which would otherwise appear as a phantom variant.
+            // Levels without any isVariant flag keep the legacy behaviour (all items, incl. aliases).
+            var levelItems = allLevelItems.Any(i => i.IsVariant)
+                ? allLevelItems.Where(i => i.IsVariant).ToList()
+                : allLevelItems;
+
+            bool hasSubRows = levelDiffering.ContainsKey(item.Level) && levelItems.Count > 1;
+
+            // A variant level renders ONE block. The loop iterates non-alias items, so a level with
+            // several non-alias variants (e.g. A/B/C all isVariant) would otherwise emit the block
+            // once per item — skip the repeats here.
+            if (hasSubRows && !renderedVariantLevels.Add(item.Level)) continue;
+
             var diff = hasSubRows ? levelDiffering[item.Level] : new HashSet<string>();
             int vc = hasSubRows ? levelItems.Count : 1;
 
@@ -1902,8 +1918,11 @@ public class WikiTableGenerator
     /// </summary>
     public string? GenerateDropOddsSection(ParsedChain chain, string? hardcodedName = null)
     {
+        // Only when a producer has REAL variance (non-constant controller). A pure ConstantProducer
+        // yields a single 100% DropOdds entry — nothing to present, so it must NOT trigger the section.
+        // SpawnOdds / DecayAfterLastCycleOdds are only ever populated from randomized producers.
         bool hasRandomOdds = chain.Items.Any(i =>
-            (i.DropOdds != null && i.DropOdds.Count > 0) ||
+            i.HasRandomDrop ||
             (i.SpawnOdds != null && i.SpawnOdds.Count > 0) ||
             (i.DecayAfterLastCycleOdds != null && i.DecayAfterLastCycleOdds.Count > 0));
         if (!hasRandomOdds) return null;
@@ -1912,6 +1931,28 @@ public class WikiTableGenerator
         var sb = new StringBuilder();
         sb.AppendLine("=== Drop Odds ===");
         sb.AppendLine($"{{{{#Invoke:Items|GetItemOddsTableFromChainName{arg}}}}}");
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Decay Odds section (=== Decay Odds ===). Emits when the chain has a "roller" — an item whose
+    /// non-constant decay resolves into multiple targets with odds (DecayIntoOdds, e.g. Flower Bed L6
+    /// → A/B/C at 65/30/5) AND at least one target is marked <c>isVariant</c> in the mapping. Variant
+    /// classification lives in the mapping; the data only carries the raw decayInto odds. The Lua
+    /// (GetItemDecayOddsTableFromChainName) renders one row per level, a column per variant target.
+    /// </summary>
+    public string? GenerateDecayOddsSection(ParsedChain chain, string? hardcodedName = null)
+    {
+        bool hasVariantRoller = chain.Items.Any(i =>
+            i.DecayIntoOdds is { Count: > 0 } odds &&
+            odds.Keys.Any(t =>
+                _wikiMapping?.Mappings.TryGetValue(t, out var e) == true && e.IsVariant));
+        if (!hasVariantRoller) return null;
+
+        string arg = hardcodedName != null ? $"|{hardcodedName}" : "";
+        var sb = new StringBuilder();
+        sb.AppendLine("=== Decay Odds ===");
+        sb.AppendLine($"{{{{#Invoke:Items|GetItemDecayOddsTableFromChainName{arg}}}}}");
         return sb.ToString();
     }
 

@@ -21,6 +21,7 @@ public class WikiMappingEntry
     public bool Fueled => GetBool("fueled");
     public bool IgnoreInTask => GetBool("ignoreInTask");
     public bool IsAlias => GetBool("isAlias");
+    public bool IsVariant => GetBool("isVariant");
 
     /// <summary>Whether a field was explicitly set to nil in the mapping (e.g., fuels = nil).</summary>
     public bool IsNil(string field) => Fields.TryGetValue(field, out var v) && v == null;

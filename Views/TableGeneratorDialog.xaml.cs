@@ -39,13 +39,14 @@ public partial class TableGeneratorDialog : FluentWindow
         MergeStages,       // == Statistics == + === Merge Stages === + main table
         Tasks,             // === Tasks === (subsection of Statistics)
         DropOdds,          // === Drop Odds === (subsection of Statistics)
+        DecayOdds,         // === Decay Odds === (subsection of Statistics)
         DoubleBubbles,     // === [[Double Bubble]]s === (subsection of Statistics)
         Uses,              // == Uses ==
     }
     private static readonly SectionKey[] SectionOrder = {
         SectionKey.InfoboxSection, SectionKey.GameplayTips, SectionKey.ItemDescriptions,
-        SectionKey.MergeStages, SectionKey.Tasks, SectionKey.DropOdds, SectionKey.DoubleBubbles,
-        SectionKey.Uses,
+        SectionKey.MergeStages, SectionKey.Tasks, SectionKey.DropOdds, SectionKey.DecayOdds,
+        SectionKey.DoubleBubbles, SectionKey.Uses,
     };
     private readonly Dictionary<SectionKey, string?> _generated = new();
     private readonly Dictionary<SectionKey, string?> _userOverride = new();
@@ -98,12 +99,15 @@ public partial class TableGeneratorDialog : FluentWindow
         var probeGenerator = new WikiTableGenerator(main.DataService!, main.WikiMapping);
         bool hasItemDescs = probeGenerator.GenerateItemDescriptionsSection(chain) != null;
         bool hasDropOdds = probeGenerator.GenerateDropOddsSection(chain) != null;
+        bool hasDecayOdds = probeGenerator.GenerateDecayOddsSection(chain) != null;
         bool hasDoubleBubbles = probeGenerator.GenerateDoubleBubblesSection(chain) != null;
         bool hasUses = probeGenerator.GenerateUsesSection(chain, main.DataService!.Chains, _areas) != null;
         gridItemDescriptions.Visibility = hasItemDescs ? Visibility.Visible : Visibility.Collapsed;
         chkIncludeItemDescriptions.IsChecked = hasItemDescs && main.Settings.TableGeneratorIncludeItemDescriptions;
         gridDropOdds.Visibility = hasDropOdds ? Visibility.Visible : Visibility.Collapsed;
         chkIncludeDropOdds.IsChecked = hasDropOdds && main.Settings.TableGeneratorIncludeDropOdds;
+        gridDecayOdds.Visibility = hasDecayOdds ? Visibility.Visible : Visibility.Collapsed;
+        chkIncludeDecayOdds.IsChecked = hasDecayOdds && main.Settings.TableGeneratorIncludeDecayOdds;
         gridDoubleBubbles.Visibility = hasDoubleBubbles ? Visibility.Visible : Visibility.Collapsed;
         chkIncludeDoubleBubbles.IsChecked = hasDoubleBubbles && main.Settings.TableGeneratorIncludeDoubleBubbles;
         gridUses.Visibility = hasUses ? Visibility.Visible : Visibility.Collapsed;
@@ -470,6 +474,10 @@ public partial class TableGeneratorDialog : FluentWindow
         HandleSectionCheckboxToggle(chkIncludeDropOdds, SectionKey.DropOdds, "Drop Odds",
             v => _main.Settings.TableGeneratorIncludeDropOdds = v);
 
+    private void ChkIncludeDecayOdds_Changed(object sender, RoutedEventArgs e) =>
+        HandleSectionCheckboxToggle(chkIncludeDecayOdds, SectionKey.DecayOdds, "Decay Odds",
+            v => _main.Settings.TableGeneratorIncludeDecayOdds = v);
+
     private void ChkIncludeDoubleBubbles_Changed(object sender, RoutedEventArgs e) =>
         HandleSectionCheckboxToggle(chkIncludeDoubleBubbles, SectionKey.DoubleBubbles, "Double Bubbles",
             v => _main.Settings.TableGeneratorIncludeDoubleBubbles = v);
@@ -521,6 +529,7 @@ public partial class TableGeneratorDialog : FluentWindow
             _generated[SectionKey.MergeStages] = BuildMergeStagesSection(generator, lowPrices, hardcodeName);
             _generated[SectionKey.Tasks] = BuildTasksSection(generator);
             _generated[SectionKey.DropOdds] = generator.GenerateDropOddsSection(_effectiveChain, hardcodedName);
+            _generated[SectionKey.DecayOdds] = generator.GenerateDecayOddsSection(_effectiveChain, hardcodedName);
             _generated[SectionKey.DoubleBubbles] = generator.GenerateDoubleBubblesSection(_effectiveChain, hardcodedName);
             _generated[SectionKey.Uses] = generator.GenerateUsesSection(_effectiveChain, _main.DataService!.Chains, _areas, hardcodedName);
 
@@ -686,6 +695,7 @@ public partial class TableGeneratorDialog : FluentWindow
         SectionKey.MergeStages => chkIncludeStatistics.IsChecked == true,
         SectionKey.Tasks => chkIncludeTasks.IsChecked == true,
         SectionKey.DropOdds => chkIncludeDropOdds.IsChecked == true,
+        SectionKey.DecayOdds => chkIncludeDecayOdds.IsChecked == true,
         SectionKey.DoubleBubbles => chkIncludeDoubleBubbles.IsChecked == true,
         SectionKey.Uses => chkIncludeUses.IsChecked == true,
         _ => false,
@@ -782,6 +792,7 @@ public partial class TableGeneratorDialog : FluentWindow
         if (t == "== Statistics ==") return SectionKey.MergeStages;
         if (t == "=== Tasks ===") return SectionKey.Tasks;
         if (t == "=== Drop Odds ===") return SectionKey.DropOdds;
+        if (t == "=== Decay Odds ===") return SectionKey.DecayOdds;
         if (t == "=== [[Double Bubble]]s ===") return SectionKey.DoubleBubbles;
         if (t == "== Uses ==") return SectionKey.Uses;
         return null;
@@ -804,6 +815,7 @@ public partial class TableGeneratorDialog : FluentWindow
         SetRefreshVisible(btnRefreshStatistics, _userOverride.ContainsKey(SectionKey.MergeStages));
         SetRefreshVisible(btnRefreshTasks, _userOverride.ContainsKey(SectionKey.Tasks));
         SetRefreshVisible(btnRefreshDropOdds, _userOverride.ContainsKey(SectionKey.DropOdds));
+        SetRefreshVisible(btnRefreshDecayOdds, _userOverride.ContainsKey(SectionKey.DecayOdds));
         SetRefreshVisible(btnRefreshDoubleBubbles, _userOverride.ContainsKey(SectionKey.DoubleBubbles));
         SetRefreshVisible(btnRefreshUses, _userOverride.ContainsKey(SectionKey.Uses));
     }
@@ -859,6 +871,7 @@ public partial class TableGeneratorDialog : FluentWindow
     private void BtnRefreshStatistics_Click(object sender, RoutedEventArgs e) => ResetSection(SectionKey.MergeStages);
     private void BtnRefreshTasks_Click(object sender, RoutedEventArgs e) => ResetSection(SectionKey.Tasks);
     private void BtnRefreshDropOdds_Click(object sender, RoutedEventArgs e) => ResetSection(SectionKey.DropOdds);
+    private void BtnRefreshDecayOdds_Click(object sender, RoutedEventArgs e) => ResetSection(SectionKey.DecayOdds);
     private void BtnRefreshDoubleBubbles_Click(object sender, RoutedEventArgs e) => ResetSection(SectionKey.DoubleBubbles);
     private void BtnRefreshUses_Click(object sender, RoutedEventArgs e) => ResetSection(SectionKey.Uses);
 

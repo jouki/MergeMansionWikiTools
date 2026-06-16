@@ -4,7 +4,7 @@ namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.22.0";
+    public const string Version = "v0.23.0";
 
     // Full version with build timestamp, e.g. "v0.18.7 (build 20260322-1200)"
     public static string Build { get; } = GetBuild();
@@ -39,6 +39,7 @@ public class AppSettings
     public bool TableGeneratorIncludeItemDescriptions { get; set; } = true;
     public bool TableGeneratorIncludeStatistics { get; set; } = true;
     public bool TableGeneratorIncludeDropOdds { get; set; } = true;
+    public bool TableGeneratorIncludeDecayOdds { get; set; } = true;
     public bool TableGeneratorIncludeDoubleBubbles { get; set; } = true;
     public bool TableGeneratorIncludeUses { get; set; } = true;
 

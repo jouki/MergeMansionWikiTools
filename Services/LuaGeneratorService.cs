@@ -430,7 +430,9 @@ public class LuaGeneratorService
         /// <summary>Multi-target decay odds map (ControlledRandom targets → probability). Used by Markov cycle solver. No filtering.</summary>
         Dictionary<string, double>? DecayOdds,
         /// <summary>Total HowManyCycles for finite generators/spawners (>0). Used by wiki Lua to compute lifetime maxDrops = dropsPerCharge × cycles. 0 = infinite or unset.</summary>
-        int Cycles);
+        int Cycles,
+        /// <summary>Multi-target decay-roll odds (targetItemType → percent) for a "roller" item. Emitted as decayInto = {{id, value}, …}; the Decay Odds section reads it + the mapping's isVariant flags.</summary>
+        Dictionary<string, double>? DecayIntoOdds = null);
 
     /// <summary>
     /// True iff the item is a "truly infinite producer" — stable main source for its drops/spawns.
@@ -704,7 +706,10 @@ public class LuaGeneratorService
 
             foreach (var item in chain.Items)
             {
-                if (string.IsNullOrEmpty(item.ItemType) || item.IsAlias || item.IsTestTag) continue;
+                // Aliases are normally skipped, but a decay "roller" (alias carrying multi-target
+                // decay odds) must survive so the Decay Odds section can read its decayInto.
+                if (string.IsNullOrEmpty(item.ItemType) || item.IsTestTag) continue;
+                if (item.IsAlias && item.DecayIntoOdds == null) continue;
                 // Resolve generator fields — primary (ActivationFeatures) or secondary (SpawnFeatures)
                 int? skipPrice = null;
                 long rechargeTime = 0;
@@ -914,7 +919,8 @@ public class LuaGeneratorService
                     decayInto,
                     mergeResult,
                     item.DecayAfterLastCycleOdds,
-                    cycles));
+                    cycles,
+                    item.DecayIntoOdds));
             }
         }
         return list;
@@ -975,7 +981,20 @@ public class LuaGeneratorService
             // Consumption relations (Phase 1: single-use drop + decay, filtered by main-source trump + same-chain)
             if (!string.IsNullOrEmpty(it.SingleUseDrop))
                 sb.Append($"singleUseDrop = \"{Esc(it.SingleUseDrop)}\", ");
-            if (!string.IsNullOrEmpty(it.DecayInto))
+            // decayInto: a multi-target roller emits a {{id, value}, …} odds list (Decay Odds section
+            // reads it + mapping isVariant); a deterministic Constant decay emits a single id string.
+            // The two are mutually exclusive (one ItemProducer per item).
+            if (it.DecayIntoOdds is { Count: > 0 } decayIntoOdds)
+            {
+                var orderedInto = decayIntoOdds
+                    .OrderByDescending(kv => kv.Value)
+                    .ThenBy(kv => kv.Key, StringComparer.Ordinal);
+                sb.Append("decayInto = {");
+                sb.Append(string.Join(", ", orderedInto.Select(kv =>
+                    $"{{id = \"{Esc(kv.Key)}\", value = {kv.Value.ToString(CultureInfo.InvariantCulture)}}}")));
+                sb.Append("}, ");
+            }
+            else if (!string.IsNullOrEmpty(it.DecayInto))
                 sb.Append($"decayInto = \"{Esc(it.DecayInto)}\", ");
             // Cross-chain merge result — only for items whose MergeFeatures.Mechanic.ResultProducer points
             // to L1 of a different chain. Lua solver attaches an itemGraph edge with sourcesPerOp = 2.

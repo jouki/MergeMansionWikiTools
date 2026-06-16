@@ -183,6 +183,23 @@
                                     <ui:SymbolIcon Symbol="ArrowClockwise24" FontSize="14" />
                                 </ui:Button>
                             </Grid>
+                            <!-- Decay Odds -->
+                            <Grid x:Name="gridDecayOdds" Margin="0,4,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <CheckBox x:Name="chkIncludeDecayOdds" Grid.Column="0" Content="Include Decay Odds section"
+                                          ToolTip="Appends === Decay Odds === wikitable for a branching merge whose decay roll yields multiple variants with odds (e.g. A/B/C 65/30/5)"
+                                          Checked="ChkIncludeDecayOdds_Changed" Unchecked="ChkIncludeDecayOdds_Changed" />
+                                <ui:Button x:Name="btnRefreshDecayOdds" Grid.Column="1"
+                                           Appearance="Transparent" Padding="2" Margin="6,0,0,0"
+                                           Visibility="Collapsed"
+                                           Click="BtnRefreshDecayOdds_Click"
+                                           ToolTip="Reset this section to auto-generated content">
+                                    <ui:SymbolIcon Symbol="ArrowClockwise24" FontSize="14" />
+                                </ui:Button>
+                            </Grid>
                             <!-- Double Bubbles -->
                             <Grid x:Name="gridDoubleBubbles" Margin="0,4,0,0">
                                 <Grid.ColumnDefinitions>

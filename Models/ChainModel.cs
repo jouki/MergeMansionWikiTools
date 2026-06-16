@@ -227,6 +227,13 @@ public class ParsedItem
     // Generator info
     public bool IsGenerator { get; set; }
     public Dictionary<string, double>? DropOdds { get; set; }
+
+    /// <summary>
+    /// True when <see cref="DropOdds"/> came from a NON-constant producer (ControlledRandom / Random /
+    /// Sequence) — i.e. there is real drop variance. A pure ConstantProducer yields a single 100%
+    /// entry in DropOdds but leaves this false (nothing to present in the Drop Odds section).
+    /// </summary>
+    public bool HasRandomDrop { get; set; }
     public int ActivationAmountInCycle { get; set; }
     public int HowManyGeneratedInCycle { get; set; } = 1;
     public int ActivationHowManyCycles { get; set; } = -1;
@@ -336,11 +343,26 @@ public class ParsedItem
     /// <summary>Area variant label for multi-variant chain levels (e.g. "Sauna").</summary>
     public string? VariantLabel { get; set; }
 
+    /// <summary>
+    /// Multi-target decay-roll odds (targetItemType → percent) from a "roller" item's
+    /// <c>DecayFeatures.ItemProducer</c> ControlledRandom/Random (e.g. Flower Bed L6 merge → A/B/C at
+    /// 65/30/5). Emitted to the data module as <c>decayInto = {{id, value}, …}</c>; the Decay Odds
+    /// section's Lua reads it and cross-references the mapping's <c>isVariant</c> flags.
+    /// </summary>
+    public Dictionary<string, double>? DecayIntoOdds { get; set; }
+
     /// <summary>Whether this item collides (same level) with another item in its chain.</summary>
     public bool IsColliding { get; set; }
 
     /// <summary>Whether this item is an alias (secondary) in a wiki merge group.</summary>
     public bool IsAlias { get; set; }
+
+    /// <summary>
+    /// Whether this item is an explicit display VARIANT (e.g. the A/B/C generator outcomes of a
+    /// branching merge). Like alias, it suppresses the same-level collision warning; unlike alias it
+    /// is meant to be SHOWN as a variant sub-row. Set from the mapping flag <c>isVariant = true</c>.
+    /// </summary>
+    public bool IsVariant { get; set; }
 
     /// <summary>ConfigKey of the original chain this item came from (before wiki mapping merge).</summary>
     public string SourceChainKey { get; set; } = "";

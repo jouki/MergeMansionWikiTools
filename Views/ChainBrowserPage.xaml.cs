@@ -206,6 +206,7 @@ public class ItemViewModel : INotifyPropertyChanged
     public string SourceChainKey => Source.SourceChainKey;
     public bool IsColliding => Source.IsColliding;
     public bool IsAlias => Source.IsAlias;
+    public bool IsVariant => Source.IsVariant;
     public string? VariantLabel => Source.VariantLabel;
 
     /// <summary>Grouping key for alias mode: aliases → "Aliases", others → SourceChainKey.</summary>
@@ -226,6 +227,7 @@ public class ItemViewModel : INotifyPropertyChanged
             if (Source.IsGenerator) parts.Add("GEN");
             if (Source.IsSpawner) parts.Add("SPAWN");
             if (Source.HasDecay) parts.Add("DECAY");
+            if (Source.IsVariant) parts.Add("VAR");
             return parts.Count > 0 ? string.Join(" ", parts) : "";
         }
     }
@@ -752,6 +754,15 @@ public partial class ChainBrowserPage : UserControl
                         bool allAlias = checkedItems.Count > 0 && checkedItems.All(i => i.IsAlias);
                         btn.Content = allAlias ? "Remove Alias" : "Set as Alias";
                     }
+                    else if (content is "Set as Variant" or "Remove Variant")
+                    {
+                        btn.Visibility = count >= 1 ? Visibility.Visible : Visibility.Collapsed;
+                        btn.IsEnabled = wikiVerified;
+                        btn.ToolTip = wikiVerified ? null : "Wiki connection required";
+                        var checkedItems = chainVm.Items.Where(i => i.IsChecked).ToList();
+                        bool allVariant = checkedItems.Count > 0 && checkedItems.All(i => i.IsVariant);
+                        btn.Content = allVariant ? "Remove Variant" : "Set as Variant";
+                    }
                 }
             }
         }
@@ -1125,22 +1136,29 @@ public partial class ChainBrowserPage : UserControl
     }
 
     private async void BtnToggleAlias_Click(object sender, RoutedEventArgs e)
+        => await ToggleMappingFlagAsync(GetChainVmFromButton(sender), "isAlias", "alias", i => i.IsAlias);
+
+    private async void BtnToggleVariant_Click(object sender, RoutedEventArgs e)
+        => await ToggleMappingFlagAsync(GetChainVmFromButton(sender), "isVariant", "variant", i => i.IsVariant);
+
+    /// <summary>
+    /// Shared toggle for a boolean mapping flag (isAlias / isVariant) over the checked items: fetch
+    /// live mapping → compute exact before/after per item → preview diff → publish. Direction is
+    /// "remove" only when EVERY selected item already has the flag, otherwise "set" (normalises a
+    /// mixed selection). Reuses <see cref="ApplyFlagToggle"/> so alias and variant share one code path.
+    /// </summary>
+    private async Task ToggleMappingFlagAsync(ChainViewModel? chainVm, string flagName, string flagLabel, Func<ItemViewModel, bool> hasFlag)
     {
-        var chainVm = GetChainVmFromButton(sender);
         if (chainVm == null) return;
 
         var checkedItems = chainVm.Items.Where(i => i.IsChecked).ToList();
         if (checkedItems.Count == 0) return;
 
         string chainName = chainVm.Source.DisplayName;
+        bool remove = checkedItems.All(hasFlag);
+        string action = remove ? $"Remove {flagLabel} flag" : $"Set as {flagLabel}";
 
-        // Toggle direction: only when EVERY selected item is already an alias does the action
-        // remove the flag; otherwise it sets all selected as aliases (normalises a mixed selection).
-        bool removeAlias = checkedItems.All(i => i.IsAlias);
-        string action = removeAlias ? "Remove alias flag" : "Set as alias";
-
-        // Fetch the live module first so the preview shows the EXACT before/after per item
-        // (whether a chainName override already exists, whether the entry is brand new, etc.).
+        // Fetch the live module first so the preview shows the EXACT before/after per item.
         string lua;
         try
         {
@@ -1162,7 +1180,7 @@ public partial class ChainBrowserPage : UserControl
         // text so a freshly-inserted entry is matched (not duplicated) by a later iteration.
         var newLua = lua;
         foreach (var vm in checkedItems)
-            newLua = ApplyAliasToggle(newLua, vm.Source.ItemType, removeAlias);
+            newLua = ApplyFlagToggle(newLua, vm.Source.ItemType, flagName, remove);
 
         var panel = new StackPanel();
         panel.Children.Add(new TextBlock
@@ -1273,16 +1291,16 @@ public partial class ChainBrowserPage : UserControl
     }
 
     /// <summary>
-    /// Adds or removes the <c>isAlias = true</c> flag for one item in the Items/Mapping Lua.
-    /// Deliberately NEVER writes <c>chainName</c>: a pure alias just marks a duplicate item, and its
-    /// chain comes from the game data (the mapping chainName is only an override, set via Move/Rename).
-    /// • set + entry missing  → create <c>{isAlias = true}</c> (no chainName)
-    /// • set + entry exists    → add the flag, leave chainName untouched
+    /// Adds or removes a boolean flag (<c>isAlias</c> / <c>isVariant</c>) for one item in the
+    /// Items/Mapping Lua. Deliberately NEVER writes <c>chainName</c>: these flags just classify the
+    /// item, its chain comes from the game data (mapping chainName is only an override, set via Move/Rename).
+    /// • set + entry missing  → create <c>{flag = true}</c> (no chainName)
+    /// • set + entry exists    → add the flag, leave other fields untouched
     /// • remove + entry exists → strip the flag; if that empties the body, drop the whole line
     /// • remove + entry missing→ no-op
-    /// Factored out so the same logic drives both single- and multi-item alias toggles.
+    /// Shared by the alias and variant toggles.
     /// </summary>
-    private static string ApplyAliasToggle(string lua, string itemType, bool removeAlias)
+    private static string ApplyFlagToggle(string lua, string itemType, string flagName, bool remove)
     {
         var escapedType = System.Text.RegularExpressions.Regex.Escape(itemType);
         var entryRegex = new System.Text.RegularExpressions.Regex(
@@ -1290,35 +1308,34 @@ public partial class ChainBrowserPage : UserControl
 
         if (!entryRegex.IsMatch(lua))
         {
-            if (removeAlias) return lua; // nothing to remove from a non-existent entry
-            // Create a pure alias entry — NO chainName (chain is resolved from game data).
+            if (remove) return lua; // nothing to remove from a non-existent entry
             int insertPos = lua.LastIndexOf("\n}", StringComparison.Ordinal);
             if (insertPos < 0) throw new Exception("Could not find insertion point.");
-            string luaEntry = $"\t[\"{itemType}\"] = {{isAlias = true}},\n";
+            string luaEntry = $"\t[\"{itemType}\"] = {{{flagName} = true}},\n";
             return lua[..(insertPos + 1)] + luaEntry + lua[(insertPos + 1)..];
         }
 
+        var flagRegex = new System.Text.RegularExpressions.Regex(
+            @",?\s*" + System.Text.RegularExpressions.Regex.Escape(flagName) + @"\s*=\s*(true|false)");
         lua = entryRegex.Replace(lua, m =>
         {
             var prefix = m.Groups[1].Value;
             var body = m.Groups[2].Value;
             var suffix = m.Groups[3].Value;
 
-            var isAliasRegex = new System.Text.RegularExpressions.Regex(@",?\s*isAlias\s*=\s*(true|false)");
-            if (removeAlias)
-                body = isAliasRegex.Replace(body, "");
-            else if (isAliasRegex.IsMatch(body))
-                body = isAliasRegex.Replace(body, ", isAlias = true");
+            if (remove)
+                body = flagRegex.Replace(body, "");
+            else if (flagRegex.IsMatch(body))
+                body = flagRegex.Replace(body, $", {flagName} = true");
             else if (body.Trim().Length == 0)
-                body = "isAlias = true";          // empty entry → bare flag, no leading comma
+                body = $"{flagName} = true";       // empty entry → bare flag, no leading comma
             else
-                body += ", isAlias = true";
+                body += $", {flagName} = true";
             return prefix + body + suffix;
         });
 
-        // Removing the flag may leave an empty {} (e.g. an entry created as a pure alias) — drop the
-        // whole line so the table doesn't accumulate empty stubs.
-        if (removeAlias)
+        // Removing the flag may leave an empty {} — drop the whole line so the table stays clean.
+        if (remove)
         {
             var emptyEntryRegex = new System.Text.RegularExpressions.Regex(
                 @"[ \t]*\[""" + escapedType + @"""\]\s*=\s*\{\s*\},?\r?\n");

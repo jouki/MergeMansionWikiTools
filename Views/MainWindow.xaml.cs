@@ -834,6 +834,10 @@ public partial class MainWindow : FluentWindow
                     itemIsAlias.Add(item);
                 }
 
+                // Track variant flag (explicit display variant — also defers collision like alias)
+                if (entry.IsVariant)
+                    item.IsVariant = true;
+
                 // Record wiki chainName for Phase 2
                 if (!string.IsNullOrEmpty(entry.ChainName))
                     itemWikiChainName[item] = entry.ChainName;
@@ -940,8 +944,9 @@ public partial class MainWindow : FluentWindow
                 bool anyRealCollision = false;
                 foreach (var lg in levelGroups)
                 {
-                    // Only non-alias items can collide — aliases defer to the primary
-                    var nonAliasItems = lg.Where(item => !itemIsAlias.Contains(item)).ToList();
+                    // Only "primary" items can collide — aliases AND explicit variants defer
+                    // (both are intentional same-level multiplicities, not real collisions).
+                    var nonAliasItems = lg.Where(item => !itemIsAlias.Contains(item) && !item.IsVariant).ToList();
                     if (nonAliasItems.Count <= 1) continue;
 
                     anyRealCollision = true;
