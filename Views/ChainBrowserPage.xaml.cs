@@ -1429,10 +1429,13 @@ public partial class ChainBrowserPage : UserControl
 
         var textBoxes = new List<(string ItemType, Wpf.Ui.Controls.TextBox TextBox)>();
 
-        // Find primary item name (non-alias at matching level)
+        // Find primary item name per level (first non-alias name at that level). Group-by, not
+        // ToDictionary(level): a level can hold several non-alias items (variants → all non-alias),
+        // which would throw "same key" (crash report #8: duplicate level key in batch rename).
         var primaryNameByLevel = chain.Items
             .Where(i => !i.IsAlias && !string.IsNullOrEmpty(i.Name) && !i.Name.StartsWith("Item_"))
-            .ToDictionary(i => i.Level, i => i.Name);
+            .GroupBy(i => i.Level)
+            .ToDictionary(g => g.Key, g => g.First().Name);
 
         // Checkboxes panel
         var checkPanel = new StackPanel { Margin = new Thickness(0, 0, 0, 8) };
