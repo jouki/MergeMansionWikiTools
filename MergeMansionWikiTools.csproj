@@ -9,7 +9,7 @@
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <SelfContained>true</SelfContained>
     <ApplicationIcon>Assets\AppLogo.ico</ApplicationIcon>
-    <DefaultItemExcludes>$(DefaultItemExcludes);External\**;Tests\**;_DumpHarness\**</DefaultItemExcludes>
+    <DefaultItemExcludes>$(DefaultItemExcludes);External\**;Tests\**;_DumpHarness\**;_CONTEXT\**;MergeMansionWikiTools.Tests\**</DefaultItemExcludes>
     <InformationalVersion>0.21.0+$([System.DateTime]::UtcNow.ToString("yyyyMMdd-HHmm"))</InformationalVersion>
   </PropertyGroup>
 
@@ -26,6 +26,11 @@
 
   <ItemGroup>
     <ProjectReference Include="External\merge-mansion-dumper\merge-mansion-dumper.csproj" />
+  </ItemGroup>
+
+  <!-- Expose internal helpers (e.g. GarageCleanupGridService.RewardsBodyLua) to the unit test project. -->
+  <ItemGroup>
+    <InternalsVisibleTo Include="MergeMansionWikiTools.Tests" />
   </ItemGroup>
 
   <ItemGroup>

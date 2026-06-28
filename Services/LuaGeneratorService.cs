@@ -1222,8 +1222,6 @@ public class LuaGeneratorService
             sb.AppendLine($"\t\t\tcategory = \"{Esc(g.Category)}\",");
             if (!string.IsNullOrEmpty(g.Badge))
                 sb.AppendLine($"\t\t\tbadge = \"{Esc(g.Badge)}\",");
-            if (!string.IsNullOrEmpty(g.Parent))
-                sb.AppendLine($"\t\t\tparent = \"{Esc(g.Parent)}\",");
             sb.AppendLine("\t\t\truns = {");
 
             // Column alignment within this event's run list: pad month/day/hour/min so the
@@ -1256,7 +1254,8 @@ public class LuaGeneratorService
                     start += $"day = {s.Day.ToString().PadRight(dayW)}";
                 }
                 var flags = (run.OnFireVariant ? ", onFireVariant = true" : "")
-                          + (run.Disabled ? ", disabled = true" : "");
+                          + (run.Disabled ? ", disabled = true" : "")
+                          + (string.IsNullOrEmpty(run.IdenticalTo) ? "" : $", identicalTo = \"{run.IdenticalTo}\"");
                 sb.AppendLine($"\t\t\t\t{{ start = {{ {start} }}, durationDays = {FormatDurationDays(run.Duration)}{flags} }},");
             }
             sb.AppendLine("\t\t\t},");

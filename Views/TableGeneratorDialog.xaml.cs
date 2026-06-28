@@ -176,8 +176,7 @@ public partial class TableGeneratorDialog : FluentWindow
         string? tempArea = null;
         if (_areas != null && chain.Items.Any(i => i.IsTemporary))
         {
-            var chainItemTypes = chain.Items.Select(i => i.ItemType).Where(t => !string.IsNullOrEmpty(t)).ToList();
-            var matching = AreasService.FindAreasRequiringChain(chainItemTypes!, _areas);
+            var matching = AreasService.FindAreasForTemporaryChain(chain, _areas);
             if (matching.Count > 0) tempArea = matching[0].DisplayName;
         }
         Dispatcher.Invoke(() =>

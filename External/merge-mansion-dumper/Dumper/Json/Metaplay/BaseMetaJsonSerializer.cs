@@ -18,8 +18,15 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
 
         public override bool CanConvert(Type objectType)
         {
+            // Unwrap Nullable<T> so a nullable value-type property routes through the SAME converter as
+            // its non-nullable form. Without this, a nullable member (e.g. `MetaCalendarPeriod? Recurrence`
+            // on MetaRecurringCalendarSchedule) is checked as Nullable<MetaCalendarPeriod> — which is NOT
+            // assignable to MetaCalendarPeriod — so CanConvert returns false, Json.NET skips our converter,
+            // and the value falls back to broken default serialization (the recurrence period was emitted
+            // as the bare type name "Metaplay.Core.Schedule.MetaCalendarPeriod" and thus lost).
+            var t = Nullable.GetUnderlyingType(objectType) ?? objectType;
             var types = GetTypes();
-            return types.Contains(objectType) || types.Any(objectType.IsAssignableTo);
+            return types.Contains(t) || types.Any(t.IsAssignableTo);
         }
 
         public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)

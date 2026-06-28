@@ -56,6 +56,7 @@
                               VirtualizingPanel.VirtualizationMode="Recycling"
                               VirtualizingPanel.ScrollUnit="Pixel">
                     <ItemsControl.Resources>
+                        <BooleanToVisibilityConverter x:Key="BoolToVis" />
                         <!-- Rok-header: oddělovací linka + nadpis roku (linka je i před prvním
                              headerem — 1:1 s původním ručním buildem) -->
                         <DataTemplate DataType="{x:Type views:EventYearHeaderItem}">
@@ -93,15 +94,27 @@
                                         </Style.Triggers>
                                     </Style>
                                 </Border.Style>
-                                <StackPanel Margin="8,6,8,6">
-                                    <TextBlock Text="{Binding DisplayName}"
-                                               FontSize="14" FontWeight="SemiBold"
-                                               TextTrimming="CharacterEllipsis"
-                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="{Binding InfoText}"
-                                               FontSize="11"
-                                               Foreground="{DynamicResource TextFillColorTertiaryBrush}"/>
-                                </StackPanel>
+                                <Grid Margin="8,6,8,6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0" Width="36" Height="36" Margin="0,0,10,0"
+                                            VerticalAlignment="Center"
+                                            Visibility="{Binding HasBadge, Converter={StaticResource BoolToVis}}">
+                                        <Image Source="{Binding BadgeImage}" Stretch="Uniform"
+                                               RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    </Border>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding DisplayName}"
+                                                   FontSize="14" FontWeight="SemiBold"
+                                                   TextTrimming="CharacterEllipsis"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                        <TextBlock Text="{Binding InfoText}"
+                                                   FontSize="11"
+                                                   Foreground="{DynamicResource TextFillColorTertiaryBrush}"/>
+                                    </StackPanel>
+                                </Grid>
                             </Border>
                         </DataTemplate>
                     </ItemsControl.Resources>
@@ -159,6 +172,10 @@
                 <!-- Buttons -->
                 <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,12,0,8"
                             HorizontalAlignment="Right">
+                    <ui:Button x:Name="btnGenerateGc" Content="Generate Garage Cleanup"
+                               Icon="{ui:SymbolIcon Grid24}"
+                               Click="BtnGenerateGc_Click"
+                               IsEnabled="False" Margin="0,0,8,0"/>
                     <ui:Button x:Name="btnGenerateFlowchart" Content="Generate Flowchart"
                                Icon="{ui:SymbolIcon FlowchartCircle24}"
                                Appearance="Primary" Click="BtnGenerateFlowchart_Click"

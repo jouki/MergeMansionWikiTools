@@ -708,6 +708,50 @@ public partial class MainWindow : FluentWindow
         statusBar.IsOpen = false;
     }
 
+    // ── Background upload widget ──
+
+    private Window? _backgroundUploadWindow;
+
+    /// <summary>
+    /// Shows the sidebar background-upload widget pointing at <paramref name="dialog"/>.
+    /// Call from the dialog when it hides itself (user closes window while upload runs).
+    /// </summary>
+    public void ShowBackgroundUpload(Window dialog, string text)
+    {
+        _backgroundUploadWindow = dialog;
+        txtBackgroundUpload.Text = text;
+        backgroundUploadWidget.Visibility = Visibility.Visible;
+    }
+
+    /// <summary>
+    /// Updates the progress text in the sidebar widget. Safe to call at any time (no-op when hidden).
+    /// </summary>
+    public void UpdateBackgroundUploadProgress(string text)
+    {
+        if (backgroundUploadWidget.Visibility != Visibility.Visible) return;
+        txtBackgroundUpload.Text = text;
+    }
+
+    /// <summary>
+    /// Hides the sidebar background-upload widget and releases the dialog reference.
+    /// </summary>
+    public void HideBackgroundUpload()
+    {
+        backgroundUploadWidget.Visibility = Visibility.Collapsed;
+        _backgroundUploadWindow = null;
+    }
+
+    private void BtnReopenUpload_Click(object sender, RoutedEventArgs e)
+    {
+        var w = _backgroundUploadWindow;
+        HideBackgroundUpload();
+        if (w != null)
+        {
+            w.Show();
+            w.Activate();
+        }
+    }
+
     private async Task ConsumePreloadedChainDataAsync()
     {
         try
@@ -1119,13 +1163,93 @@ public partial class MainWindow : FluentWindow
         var version = ExtractVersionFromDataPath(Settings.ChainItemOddsPath);
         if (version != null)
         {
-            txtVersionStatus.Text = $"v{version}";
+            // Append the loaded data's CreatedAt date so the freshness of the dump is visible at a
+            // glance (the whole point of the recent "stale config archive" bug). Tooltip shows the
+            // hour:minute detail, or — when the loaded files come from different dumps — a per-file
+            // breakdown so a mismatched set is obvious.
+            var created = CollectDataCreatedAt();
+            if (created.Count > 0)
+            {
+                var newest = created.Max(c => c.At);
+                var distinct = created.Select(c => c.At).Distinct().ToList();
+                txtVersionStatus.Text = $"v{version}  ·  {newest:d MMM yyyy}";
+                txtVersionStatus.ToolTip = distinct.Count == 1
+                    ? $"Data created {newest:d MMM yyyy, HH:mm} (UTC)"
+                    : "Loaded files have different dates:\n" + string.Join("\n",
+                        created.OrderByDescending(c => c.At).Select(c => $"  {c.Label}: {c.At:d MMM yyyy HH:mm}"));
+            }
+            else
+            {
+                txtVersionStatus.Text = $"v{version}";
+                txtVersionStatus.ToolTip = null;
+            }
             txtVersionStatus.Visibility = Visibility.Visible;
         }
         else
         {
             txtVersionStatus.Visibility = Visibility.Collapsed;
         }
+    }
+
+    /// <summary>
+    /// Reads the CreatedAt date from each currently-loaded dump JSON. CreatedAt is the first root
+    /// field, so we read only a small prefix of each file (they are 10–24 MB) instead of parsing.
+    /// Returns one entry per file that has a parseable CreatedAt.
+    /// </summary>
+    private List<(string Label, System.DateTime At)> CollectDataCreatedAt()
+    {
+        var sources = new (string Label, string? Path)[]
+        {
+            ("chains", Settings.ChainItemOddsPath),
+            ("areas", Settings.AreasJsonPath),
+            ("events", Settings.EventsJsonPath),
+            ("dialogues", Settings.DialoguesJsonPath),
+            ("Pets", Settings.PetsJsonPath),
+            ("cards", Settings.CardCollectionJsonPath),
+        };
+        var result = new List<(string, System.DateTime)>();
+        foreach (var (label, path) in sources)
+        {
+            var raw = ReadJsonCreatedAt(path);
+            if (raw == null) continue;
+            // Files from one dump share the same instant but NOT the same string: most use ISO
+            // "2026-06-24T12:20:38.46", Pets.json uses "2026-06-24 12:20:38.460 Z". Normalize both
+            // to a UTC instant so identical dumps don't read as "differing".
+            var norm = raw.Replace(" Z", "Z").Replace(" ", "T");
+            if (System.DateTime.TryParse(norm,
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    System.Globalization.DateTimeStyles.AssumeUniversal | System.Globalization.DateTimeStyles.AdjustToUniversal,
+                    out var dt))
+                result.Add((label, dt));
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// Newest CreatedAt (UTC) across the data files CURRENTLY LOADED in the app, or null if none.
+    /// Used by the dumper's Pull-from-Phone freshness check to compare the phone's config against
+    /// what the user already has loaded. Reuses <see cref="CollectDataCreatedAt"/> (UTC-normalized).
+    /// </summary>
+    public System.DateTime? GetLoadedDataCreatedAtUtc()
+    {
+        var created = CollectDataCreatedAt();
+        return created.Count == 0 ? null : created.Max(c => c.At);
+    }
+
+    /// <summary>Reads the "CreatedAt" string from the first bytes of a JSON file (cheap — no full parse).</summary>
+    private static string? ReadJsonCreatedAt(string? path)
+    {
+        if (string.IsNullOrWhiteSpace(path) || !File.Exists(path)) return null;
+        try
+        {
+            using var fs = File.OpenRead(path);
+            var buf = new byte[512];
+            int n = fs.Read(buf, 0, buf.Length);
+            var head = System.Text.Encoding.UTF8.GetString(buf, 0, n);
+            var m = Regex.Match(head, "\"CreatedAt\"\\s*:\\s*\"([^\"]+)\"");
+            return m.Success ? m.Groups[1].Value : null;
+        }
+        catch { return null; }
     }
 
     /// <summary>

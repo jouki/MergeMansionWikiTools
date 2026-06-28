@@ -44,11 +44,15 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
             <ui:Button Content="Close" Icon="{ui:SymbolIcon Dismiss24}" Appearance="Secondary"
                        Width="120" Click="BtnClose_Click"/>
-            <ui:Button x:Name="btnUpload" Grid.Column="2" Content="Upload" Icon="{ui:SymbolIcon ArrowUpload24}"
+            <ui:Button x:Name="btnCancelUpload" Grid.Column="1" Content="Cancel" Icon="{ui:SymbolIcon Dismiss24}"
+                       Appearance="Secondary" Width="120" Margin="0,0,8,0"
+                       Visibility="Collapsed" Click="BtnCancelUpload_Click"/>
+            <ui:Button x:Name="btnUpload" Grid.Column="3" Content="Upload" Icon="{ui:SymbolIcon ArrowUpload24}"
                        Appearance="Primary" Width="160" Click="BtnUpload_Click"/>
         </Grid>
     </Grid>

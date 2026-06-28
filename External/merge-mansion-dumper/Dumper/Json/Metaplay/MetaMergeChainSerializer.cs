@@ -717,6 +717,14 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 if (descName != null)
                     WriteProperty(writer, "Description", descName, serializer);
 
+                // UnlockRequirements emitted here (right after Description) instead of its
+                // default TagId position; skipped in WriteObjectMember to avoid duplication.
+                // Emission condition mirrors the base member loop (BaseMetaJsonSerializer.WriteObject)
+                // so the output is content-identical — only the field position changes.
+                var unlockReqs = item.UnlockRequirements;
+                if (!(unlockReqs == null && serializer.NullValueHandling == NullValueHandling.Ignore))
+                    WriteProperty(writer, "UnlockRequirements", unlockReqs, serializer);
+
                 var sellPrice = item.GetItemSellPrice(_config.SharedGlobals);
                 WriteProperty(writer, "SellCoins", sellPrice, serializer);
 
@@ -766,6 +774,9 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
             {
                 // Skip — already written in WritePreObjectMembers
                 if (name == nameof(ItemDefinition.ItemType))
+                    return;
+                // Skip — moved up under Description in WriteCustomObjectMembers
+                if (name == nameof(ItemDefinition.UnlockRequirements))
                     return;
                 if (name == nameof(ItemDefinition.MergeChainDef))
                 {

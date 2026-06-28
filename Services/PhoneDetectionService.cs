@@ -157,8 +157,12 @@ internal static class PhoneDetectionService
                         ClearAndCreateDir(pDir);
                         ClearAndCreateDir(lDir);
 
-                        // Config (1 file)
-                        string? configFilePath = null;
+                        // Config: the game caches SEVERAL config versions under this folder — download
+                        // all of them, then pick the one with the newest embedded archive CreatedAt.
+                        // The device enumeration order is arbitrary, so "first file" routinely selects a
+                        // stale build and the dump silently uses outdated config (e.g. an event whose
+                        // Start was moved to today only in the newest archive). CreatedAt is read straight
+                        // from the archive header — no MetaplayCore.Initialize needed (verified).
                         foreach (var remoteFile in configFiles)
                         {
                             ct.ThrowIfCancellationRequested();
@@ -167,7 +171,13 @@ internal static class PhoneDetectionService
                             DownloadFile(device, remoteFile, localPath);
                             var size = new FileInfo(localPath).Length;
                             progress?.Report($"  Config: {fileName} ({FormatSize(size)})");
-                            configFilePath ??= localPath;
+                        }
+                        string? configFilePath = DumperService.SelectNewestConfigArchive(cDir)
+                            ?? Directory.GetFiles(cDir).FirstOrDefault();
+                        if (configFilePath != null)
+                        {
+                            var createdAt = DumperService.ReadConfigCreatedAt(configFilePath);
+                            progress?.Report($"  → newest config: {Path.GetFileName(configFilePath)} (CreatedAt {createdAt:yyyy-MM-dd HH:mm}Z) of {configFiles.Length}");
                         }
 
                         // Patches (multiple files — newest selected)

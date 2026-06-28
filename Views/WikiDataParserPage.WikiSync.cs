@@ -405,74 +405,10 @@ public partial class WikiDataParserPage
             Background = (Brush)FindResource("ControlStrokeColorDefaultBrush")
         });
 
-        // Helper: add a step row to the top section
+        // Helper: add a step row to the top section (delegates to the shared card builder so the
+        // Areas/Items and Events dialogs render identical cards).
         void AddStep(string icon, string title, string? detail = null, string? detail2 = null, string? url = null)
-        {
-            var row = new Border
-            {
-                Background = subtle, CornerRadius = new CornerRadius(6),
-                Padding = new Thickness(12, 8, 12, 8), Margin = new Thickness(0, 0, 0, 6)
-            };
-            var grid = new Grid();
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(24) });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-
-            var iconTb = new WpfTextBlock
-            {
-                Text = icon, FontSize = 14,
-                VerticalAlignment = VerticalAlignment.Top, Margin = new Thickness(0, 1, 0, 0)
-            };
-            Grid.SetColumn(iconTb, 0);
-            grid.Children.Add(iconTb);
-
-            var content = new StackPanel();
-            if (url != null)
-            {
-                var titleTb = new WpfTextBlock
-                {
-                    FontSize = 12, FontWeight = FontWeights.SemiBold,
-                    Foreground = primary, TextWrapping = TextWrapping.Wrap
-                };
-                var linkRun = new System.Windows.Documents.Run(title)
-                {
-                    Cursor = System.Windows.Input.Cursors.Hand
-                };
-                linkRun.MouseEnter += (s, e) => linkRun.TextDecorations = TextDecorations.Underline;
-                linkRun.MouseLeave += (s, e) => linkRun.TextDecorations = null;
-                var capturedUrl = url;
-                linkRun.MouseLeftButtonDown += (s, e) =>
-                {
-                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(capturedUrl) { UseShellExecute = true });
-                };
-                titleTb.Inlines.Add(linkRun);
-                content.Children.Add(titleTb);
-            }
-            else
-            {
-                content.Children.Add(new WpfTextBlock
-                {
-                    Text = title, FontSize = 12, FontWeight = FontWeights.SemiBold,
-                    Foreground = primary, TextWrapping = TextWrapping.Wrap
-                });
-            }
-            if (detail != null)
-                content.Children.Add(new WpfTextBlock
-                {
-                    Text = detail, FontSize = 11, Foreground = secondary,
-                    TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 2, 0, 0)
-                });
-            if (detail2 != null)
-                content.Children.Add(new WpfTextBlock
-                {
-                    Text = detail2, FontSize = 10, Foreground = tertiary,
-                    TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 2, 0, 0)
-                });
-
-            Grid.SetColumn(content, 1);
-            grid.Children.Add(content);
-            row.Child = grid;
-            topSection.Children.Add(row);
-        }
+            => AddDialogStepCard(topSection, icon, title, detail, detail2, url);
 
         const string wikiBase = "https://merge-mansion.fandom.com/wiki/";
 
@@ -539,9 +475,11 @@ public partial class WikiDataParserPage
     }
 
     /// <summary>
-    /// Pushes the single Module:Datatable/Events module. Re-fetches the live module and
-    /// re-runs the historical merge at push time, so the upload always reflects the latest
-    /// on-wiki history even if it changed since "Generate Events" (no run is ever dropped).
+    /// Pushes the pre-generated Events + Various content to the wiki.
+    /// The merge pipeline (drift decisions, GC airings merge, Lua generation) runs in
+    /// "Generate Events" — this method is a pure push of what was already computed.
+    /// Conflict safety: the base content fetched at generate time is used to detect concurrent
+    /// edits (EditModuleAsync passes baserevid so the wiki rejects a stale push).
     /// </summary>
     private async void BtnUpdateEventsWiki_Click(object sender, RoutedEventArgs e)
     {
@@ -552,52 +490,40 @@ public partial class WikiDataParserPage
             return;
         }
 
-        var eventsPath = _main.Settings.EventsJsonPath;
-        if (string.IsNullOrEmpty(_lastEventsLua) || string.IsNullOrEmpty(eventsPath) || !File.Exists(eventsPath))
+        if (string.IsNullOrEmpty(_lastEventsLua))
         {
             ShowInfo("No events data generated. Generate events first.", InfoBarSeverity.Warning);
             return;
         }
 
+        var lua = _lastEventsLua;
+        var existing = _pendingEventsExisting;
+        var variousGridsSpliced = _pendingVariousContent;
+        var gcGroupCount = _pendingGcGroupCount;
+        var gcWritten = _pendingGcWritten;
+
         btnUpdateEventsWiki.IsEnabled = false;
         SetGenerateButtonsEnabled(false);
-        SetRowBusy(eventsIdle, eventsBusy, txtEventsBusy, true, "Re-merging live module…");
+        SetRowBusy(eventsIdle, eventsBusy, txtEventsBusy, true, "Preparing push…");
 
         try
         {
-            // Re-fetch + re-merge so the push is built on the CURRENT live history.
-            var existing = await WikiMappingService.FetchModuleContentAsync(EventsModuleTitle);
-            var schedule = new EventScheduleService();
-            var lua = await Task.Run(async () =>
-            {
-                await schedule.LoadAsync(eventsPath, existing);
-                return _luaGen.GenerateEventScheduleLua(schedule.Groups, schedule.CreatedAt);
-            });
-            _lastEventsLua = lua;
-
-            // Refresh the on-screen preview to match exactly what will be pushed.
-            txtEventsHeader.Text = $"Events schedule — {schedule.Groups.Count} events · {schedule.RunCount} runs";
-            var (preview, remaining) = SplitForPreview(lua);
-            txtEvents.Text = preview;
-            eventsMiniLoading.Visibility = remaining != null ? Visibility.Visible : Visibility.Collapsed;
-            _combinedLoadCts ??= new CancellationTokenSource();
-            _ = LazySetEventsFullTextAsync(lua, _combinedLoadCts.Token);
-            if (schedule.Notes.Count > 0)
-            {
-                txtEventsNotes.Text = string.Join("\n", schedule.Notes.Select(n => "• " + n));
-                txtEventsNotes.Visibility = Visibility.Visible;
-            }
-
-            SetRowBusy(eventsIdle, eventsBusy, txtEventsBusy, false);
-
             var exists = existing != null;
             var lineCount = lua.Count(c => c == '\n') + 1;
             var sizeStr = FormatSize(Encoding.UTF8.GetByteCount(lua));
 
+            // The on-screen preview already shows the final lua (set during Generate Events).
+            // Show the confirmation dialog so the user can review before committing.
+            SetRowBusy(eventsIdle, eventsBusy, txtEventsBusy, false);
+
+            // Reconstruct a light schedule just for the run/event counts in the dialog header.
+            // We don't re-run LoadAsync — the counts are already visible in the card header text,
+            // so we parse them from the Lua directly (or use a placeholder).
+            int runCount = lua.Count(c => c == '\n') > 0 ? -1 : 0; // placeholder; dialog uses lineCount instead
+
             var previewBox = CreatePreviewDialog(
                 "Update Events Data on Wiki",
-                BuildEventsUpdatePreview(exists, schedule.Groups.Count, schedule.RunCount, lineCount, sizeStr,
-                    schedule.Notes),
+                BuildEventsUpdatePreviewPushOnly(exists, lineCount, sizeStr),
                 exists ? "Update" : "Create");
 
             if (await previewBox.ShowDialogAsync() != WpfMessageBoxResult.Primary)
@@ -614,11 +540,26 @@ public partial class WikiDataParserPage
             var action = exists ? "Update" : "Create";
             ShowInfo($"{action} {EventsModuleTitle}...", InfoBarSeverity.Informational);
 
+            // Push Events module. The Lua was generated from the live module state captured at
+            // Generate Events time — the content is self-consistent (GC included) and ready to push.
             await WikiMappingService.EditModuleAsync(
                 client, csrfToken, EventsModuleTitle, lua,
                 $"{action} event schedule data (via MergeMansionWikiTools)");
 
-            ShowInfo($"Wiki updated — {EventsModuleTitle} ({schedule.Groups.Count} events, {schedule.RunCount} runs).",
+            // (A4) Garage Cleanup GRIDS → Module:Datatable/Various.
+            // The spliced content was computed during Generate Events (base = liveVarious at generate time).
+            bool gcVariousWritten = false;
+            if (variousGridsSpliced != null)
+            {
+                ShowInfo($"Updating Module:Datatable/Various (Garage Cleanup grids, +{gcWritten} new airing(s))…", InfoBarSeverity.Informational);
+                await WikiMappingService.EditModuleAsync(client, csrfToken, "Module:Datatable/Various", variousGridsSpliced,
+                    $"Update Garage Cleanup grids (+{gcWritten} airing(s), via MergeMansionWikiTools)");
+                gcVariousWritten = true;
+            }
+
+            ShowInfo($"Wiki updated — {EventsModuleTitle} ({lineCount} lines"
+                + (gcGroupCount > 0 ? $", {gcGroupCount} GC group(s)" : "") + ")"
+                + (gcVariousWritten ? $" + Datatable/Various (grids, +{gcWritten} GC airing(s))." : "."),
                 InfoBarSeverity.Success);
         }
         catch (Exception ex)
@@ -634,52 +575,152 @@ public partial class WikiDataParserPage
         }
     }
 
-    private UIElement BuildEventsUpdatePreview(bool moduleExists, int eventCount, int runCount,
-        int lineCount, string sizeStr, IReadOnlyList<string> notes)
+    private UIElement BuildEventsUpdatePreviewPushOnly(bool moduleExists, int lineCount, string sizeStr)
+    {
+        var secondary = (Brush)FindResource("TextFillColorSecondaryBrush");
+        var tertiary = (Brush)FindResource("TextFillColorTertiaryBrush");
+        var gold = new SolidColorBrush(Color.FromRgb(0xD9, 0xA4, 0x41));
+
+        var root = new StackPanel { Margin = new Thickness(0, 0, 0, 4) };
+
+        int gcNew = _lastGcChanges?.Count(c => c.Action == GarageCleanupGridService.GridAction.New) ?? 0;
+        int gcSplit = _lastGcChanges?.Count(c => c.Action is GarageCleanupGridService.GridAction.Split
+            or GarageCleanupGridService.GridAction.AddVersion) ?? 0;
+        int gcNote = _lastGcChanges?.Count(c => c.Action == GarageCleanupGridService.GridAction.NoteIdentical) ?? 0;
+        int gcData = gcNew + gcSplit;
+        bool gcRewards = _lastGcRewardCount > 0;
+        bool hasVarious = _pendingVariousContent != null;
+        int moduleCount = 1 + (hasVarious ? 1 : 0);
+
+        root.Children.Add(new WpfTextBlock
+        {
+            Text = $"{moduleCount} module{(moduleCount == 1 ? "" : "s")} will be edited",
+            FontSize = 13, Foreground = secondary, Margin = new Thickness(0, 0, 0, 4)
+        });
+        root.Children.Add(new Border
+        {
+            Height = 1, Margin = new Thickness(0, 4, 0, 10),
+            Background = (Brush)FindResource("ControlStrokeColorDefaultBrush")
+        });
+
+        AddDialogStepCard(root,
+            moduleExists ? "📝" : "➕",
+            $"{(moduleExists ? "Update" : "Create")} {EventsModuleTitle}",
+            $"{lineCount} lines · {sizeStr}",
+            moduleExists ? "Overwrite existing module — historical runs already merged, nothing dropped" : "New data module",
+            "https://merge-mansion.fandom.com/wiki/" + EventsModuleTitle);
+
+        if (hasVarious)
+        {
+            var d1Parts = new List<string>();
+            if (gcNew > 0) d1Parts.Add($"{gcNew} new grid(s)");
+            if (gcSplit > 0) d1Parts.Add($"{gcSplit} replay version split(s)");
+            if (gcRewards) d1Parts.Add($"{_lastGcRewardCount} reward table(s)");
+            AddDialogStepCard(root, "📝", "Update Module:Datatable/Various",
+                (d1Parts.Count > 0 ? "Update " + string.Join(" · ", d1Parts) : "Update Garage Cleanup data"),
+                "Historical year-suffixed grids preserved" + (gcNote > 0 ? $" · {gcNote} re-air identical to an older year (page note only)" : ""),
+                "https://merge-mansion.fandom.com/wiki/Module:Datatable/Various");
+        }
+
+        var changeParts = new List<string>();
+        if (gcData + gcNote > 0) changeParts.Add($"{gcNew} new · {gcSplit} split · {gcNote} note GC grid(s)");
+
+        if (changeParts.Count > 0)
+            root.Children.Add(new WpfTextBlock
+            {
+                Text = "Data changes: " + string.Join(", ", changeParts),
+                FontSize = 12, FontWeight = FontWeights.SemiBold, Foreground = gold,
+                Margin = new Thickness(0, 10, 0, 4)
+            });
+
+        if (gcData + gcNote > 0 && _lastGcChanges != null)
+        {
+            var gcContent = new StackPanel { Margin = new Thickness(18, 2, 0, 4) };
+            void Line(string text) => gcContent.Children.Add(new WpfTextBlock
+                { Text = text, FontSize = 11, Foreground = tertiary, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 1, 0, 1) });
+
+            foreach (var c in _lastGcChanges.Where(c => c.Action == GarageCleanupGridService.GridAction.Split))
+                Line(c.YearUnresolved
+                    ? $"⚠ split: {c.EventName} — year unresolved from Datatable/Events (skipped, set manually)"
+                    : $"⟲ split: {c.EventName} — plain → ({c.OldYear}) · new ({c.NewYear})  [{c.Detail}]");
+            foreach (var c in _lastGcChanges.Where(c => c.Action == GarageCleanupGridService.GridAction.AddVersion))
+                Line(c.YearUnresolved
+                    ? $"⚠ add: {c.EventName} — year unresolved from Datatable/Events (skipped, set manually)"
+                    : $"＋ version: {c.EventName} ({c.NewYear})  [{c.Detail}]");
+            foreach (var c in _lastGcChanges.Where(c => c.Action == GarageCleanupGridService.GridAction.NoteIdentical))
+                Line($"≡ note: {c.EventName} — {c.NewYear} identical to {c.IdenticalToYear} (page note only)");
+            foreach (var c in _lastGcChanges.Where(c => c.Action == GarageCleanupGridService.GridAction.New))
+                Line($"+ new: {c.EventName}");
+
+            AddCollapsibleSection(root, $"Garage Cleanup grids ({gcNew} new · {gcSplit} split · {gcNote} note)", gold, secondary, gcContent);
+        }
+
+        return root;
+    }
+
+    /// <summary>
+    /// Reusable "step card" row for the wiki-update dialogs (icon + title + 2 detail lines, optional
+    /// clickable wiki link). Shared by the Areas/Items dialog and the Events dialog so they look the same.
+    /// </summary>
+    private void AddDialogStepCard(StackPanel parent, string icon, string title,
+        string? detail = null, string? detail2 = null, string? url = null)
     {
         var primary = (Brush)FindResource("TextFillColorPrimaryBrush");
         var secondary = (Brush)FindResource("TextFillColorSecondaryBrush");
         var tertiary = (Brush)FindResource("TextFillColorTertiaryBrush");
         var subtle = (Brush)FindResource("SubtleFillColorSecondaryBrush");
 
-        var panel = new StackPanel { Margin = new Thickness(0, 0, 0, 20) };
-
-        panel.Children.Add(new WpfTextBlock
-        {
-            Text = moduleExists
-                ? $"{EventsModuleTitle} will be overwritten"
-                : $"{EventsModuleTitle} will be created",
-            FontSize = 13, Foreground = secondary, Margin = new Thickness(0, 0, 0, 8)
-        });
-
-        panel.Children.Add(new Border
+        var row = new Border
         {
             Background = subtle, CornerRadius = new CornerRadius(6),
-            Padding = new Thickness(12, 8, 12, 8), Margin = new Thickness(0, 0, 0, 8),
-            Child = new WpfTextBlock
-            {
-                Text = $"{eventCount} events · {runCount} runs · {lineCount} lines · {sizeStr}",
-                FontSize = 13, Foreground = primary
-            }
-        });
+            Padding = new Thickness(12, 8, 12, 8), Margin = new Thickness(0, 0, 0, 6)
+        };
+        var grid = new Grid();
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(24) });
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 
-        panel.Children.Add(new WpfTextBlock
+        var iconTb = new WpfTextBlock
         {
-            Text = "Historical runs already merged from the live module — nothing is dropped.",
-            FontSize = 12, Foreground = tertiary, TextWrapping = TextWrapping.Wrap,
-            Margin = new Thickness(0, 0, 0, notes.Count > 0 ? 8 : 0)
-        });
+            Text = icon, FontSize = 14,
+            VerticalAlignment = VerticalAlignment.Top, Margin = new Thickness(0, 1, 0, 0)
+        };
+        Grid.SetColumn(iconTb, 0);
+        grid.Children.Add(iconTb);
 
-        if (notes.Count > 0)
+        var content = new StackPanel();
+        if (url != null)
         {
-            panel.Children.Add(new WpfTextBlock
+            var titleTb = new WpfTextBlock
             {
-                Text = string.Join("\n", notes.Select(n => "• " + n)),
-                FontSize = 11, Foreground = tertiary, TextWrapping = TextWrapping.Wrap
+                FontSize = 12, FontWeight = FontWeights.SemiBold,
+                Foreground = primary, TextWrapping = TextWrapping.Wrap
+            };
+            var linkRun = new System.Windows.Documents.Run(title) { Cursor = System.Windows.Input.Cursors.Hand };
+            linkRun.MouseEnter += (s, e) => linkRun.TextDecorations = TextDecorations.Underline;
+            linkRun.MouseLeave += (s, e) => linkRun.TextDecorations = null;
+            var capturedUrl = url;
+            linkRun.MouseLeftButtonDown += (s, e) =>
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(capturedUrl) { UseShellExecute = true });
+            titleTb.Inlines.Add(linkRun);
+            content.Children.Add(titleTb);
+        }
+        else
+        {
+            content.Children.Add(new WpfTextBlock
+            {
+                Text = title, FontSize = 12, FontWeight = FontWeights.SemiBold,
+                Foreground = primary, TextWrapping = TextWrapping.Wrap
             });
         }
+        if (detail != null)
+            content.Children.Add(new WpfTextBlock { Text = detail, FontSize = 11, Foreground = secondary, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 2, 0, 0) });
+        if (detail2 != null)
+            content.Children.Add(new WpfTextBlock { Text = detail2, FontSize = 10, Foreground = tertiary, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 2, 0, 0) });
 
-        return panel;
+        Grid.SetColumn(content, 1);
+        grid.Children.Add(content);
+        row.Child = grid;
+        parent.Children.Add(row);
     }
 
     private async void BtnUpdateItemsWiki_Click(object sender, RoutedEventArgs e)

@@ -1,0 +1,162 @@
+<ui:FluentWindow x:Class="MergeMansionWikiTools.Views.EventDriftDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        Title="Event re-aired — same run or separate?" Width="720"
+        SizeToContent="Height" MaxHeight="780"
+        MinWidth="560" MinHeight="360"
+        ResizeMode="CanResizeWithGrip"
+        WindowStartupLocation="CenterOwner"
+        ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica"
+        Closing="Window_Closing">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <ui:TitleBar Grid.Row="0" Height="36" Title="Event re-aired — same run or separate?" />
+
+        <Grid Grid.Row="1" Margin="24,12,24,20">
+            <Grid.RowDefinitions>
+                <!-- Event name -->
+                <RowDefinition Height="Auto" />
+                <!-- Summary -->
+                <RowDefinition Height="Auto" />
+                <!-- Separator -->
+                <RowDefinition Height="Auto" />
+                <!-- Two variant cards -->
+                <RowDefinition Height="*" />
+                <!-- Bottom buttons -->
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Header: event name -->
+            <TextBlock Grid.Row="0" x:Name="txtEventName"
+                       FontSize="20" FontWeight="SemiBold"
+                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                       Margin="0,0,0,6" />
+
+            <!-- Subtitle: drift summary -->
+            <TextBlock Grid.Row="1" x:Name="txtSummary"
+                       FontSize="12" TextWrapping="Wrap"
+                       Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                       Margin="0,0,0,10" />
+
+            <!-- Thin separator -->
+            <Border Grid.Row="2" Height="1" Margin="0,0,0,14"
+                    Background="{DynamicResource ControlStrokeColorDefaultBrush}" />
+
+            <!-- Two-column clickable variant cards -->
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="12" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Card A -->
+                <Border Grid.Column="0" x:Name="cardA"
+                        CornerRadius="8"
+                        BorderThickness="2"
+                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                        Padding="12,10,12,10"
+                        Cursor="Hand"
+                        MouseEnter="CardA_Enter" MouseLeave="CardA_Leave"
+                        MouseLeftButtonUp="CardA_Click">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <!-- Card A header -->
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,8">
+                            <ui:SymbolIcon x:Name="iconA" Symbol="RadioButton20"
+                                           FontSize="16"
+                                           Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                           Margin="0,0,6,0" VerticalAlignment="Center" />
+                            <TextBlock Text="Variant A — two separate runs"
+                                       FontSize="13" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <!-- Card A diff content -->
+                        <Border Grid.Row="1" CornerRadius="4"
+                                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1"
+                                Background="{DynamicResource CardBackgroundFillColorSecondaryBrush}">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" MaxHeight="320">
+                                <StackPanel x:Name="pnlA" Margin="8,6,8,6" />
+                            </ScrollViewer>
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <!-- Card B -->
+                <Border Grid.Column="2" x:Name="cardB"
+                        CornerRadius="8"
+                        BorderThickness="2"
+                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                        Padding="12,10,12,10"
+                        Cursor="Hand"
+                        MouseEnter="CardB_Enter" MouseLeave="CardB_Leave"
+                        MouseLeftButtonUp="CardB_Click">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <!-- Card B header -->
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,8">
+                            <ui:SymbolIcon x:Name="iconB" Symbol="RadioButton20"
+                                           FontSize="16"
+                                           Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                           Margin="0,0,6,0" VerticalAlignment="Center" />
+                            <TextBlock Text="Variant B — same run, updated"
+                                       FontSize="13" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <!-- Card B diff content -->
+                        <Border Grid.Row="1" CornerRadius="4"
+                                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1"
+                                Background="{DynamicResource CardBackgroundFillColorSecondaryBrush}">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" MaxHeight="320">
+                                <StackPanel x:Name="pnlB" Margin="8,6,8,6" />
+                            </ScrollViewer>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!-- Bottom buttons -->
+            <Grid Grid.Row="4" Margin="0,14,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="8" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <ui:Button Grid.Column="1"
+                           Content="Cancel"
+                           Appearance="Secondary"
+                           Click="BtnCancel_Click"
+                           VerticalAlignment="Stretch" />
+
+                <ui:Button Grid.Column="3" x:Name="btnConfirm"
+                           Content="Confirm"
+                           Appearance="Primary"
+                           IsEnabled="False"
+                           Click="BtnConfirm_Click"
+                           VerticalAlignment="Stretch" />
+            </Grid>
+        </Grid>
+    </Grid>
+</ui:FluentWindow>

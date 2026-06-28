@@ -4,6 +4,7 @@ using Code.GameLogic.GameEvents.SoloMilestone;
 using merge_mansion_dumper.Graphs;
 using Metaplay.Core;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -146,7 +147,132 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 return;
             }
 
-            WriteObject(writer, progressionEvent.GetType(), progressionEvent, serializer);
+            // Serialize normally into a JObject, then reorganize the fields:
+            //  - EventItem + a new EventItemName (chain name, not the L1 item name) directly below ActivableParams
+            //  - ChancesToSpawnEventItemPerLevel directly below IntroDialogue
+            //  - Track1PerkData + Track2PerkData directly above FreeEventLevelRefs
+            // (DisplayName is already dropped in WriteObjectMember; "Name" holds the localized title.)
+            var tokenWriter = new JTokenWriter();
+            WriteObject(tokenWriter, progressionEvent.GetType(), progressionEvent, serializer);
+            var src = (JObject)tokenWriter.Token;
+
+            string eventItemName = null;
+            if (src["EventItem"] != null && int.TryParse(src["EventItem"].ToString(), out var eventItemId))
+                eventItemName = ResolveEventItemChainName(eventItemId);
+
+            var result = new JObject();
+            foreach (var prop in src.Properties())
+            {
+                var n = prop.Name;
+                if (n == "DisplayName" || n == "EventItem" || n == "ChancesToSpawnEventItemPerLevel"
+                    || n == "Track1PerkData" || n == "Track2PerkData")
+                    continue; // dropped or relocated to their anchors below
+
+                if (n == "FreeEventLevelRefs")
+                {
+                    if (src["Track1PerkData"] != null) result["Track1PerkData"] = src["Track1PerkData"];
+                    if (src["Track2PerkData"] != null) result["Track2PerkData"] = src["Track2PerkData"];
+                }
+
+                result[n] = prop.Value;
+
+                if (n == "ActivableParams" && src["EventItem"] != null)
+                {
+                    result["EventItem"] = src["EventItem"];
+                    if (eventItemName != null) result["EventItemName"] = eventItemName;
+                }
+                else if (n == "IntroDialogue" && src["ChancesToSpawnEventItemPerLevel"] != null)
+                {
+                    result["ChancesToSpawnEventItemPerLevel"] = src["ChancesToSpawnEventItemPerLevel"];
+                }
+            }
+
+            // Safety net: if an anchor field was absent, re-append relocated fields so nothing is lost.
+            if (src["EventItem"] != null && result["EventItem"] == null)
+            {
+                result["EventItem"] = src["EventItem"];
+                if (eventItemName != null && result["EventItemName"] == null) result["EventItemName"] = eventItemName;
+            }
+            if (src["ChancesToSpawnEventItemPerLevel"] != null && result["ChancesToSpawnEventItemPerLevel"] == null)
+                result["ChancesToSpawnEventItemPerLevel"] = src["ChancesToSpawnEventItemPerLevel"];
+            if (src["Track1PerkData"] != null && result["Track1PerkData"] == null) result["Track1PerkData"] = src["Track1PerkData"];
+            if (src["Track2PerkData"] != null && result["Track2PerkData"] == null) result["Track2PerkData"] = src["Track2PerkData"];
+
+            result.WriteTo(writer);
+        }
+
+        /// <summary>
+        /// Maps an event item id to the NAME OF ITS MERGE CHAIN (item category) — not the level-1
+        /// item name. Mirrors the chain-name resolution used by the merge-chain serializer.
+        /// </summary>
+        private string ResolveEventItemChainName(int eventItemId)
+        {
+            try
+            {
+                var itemDef = _config.Items.GetValueOrDefault(eventItemId) as ItemDefinition;
+                if (itemDef == null) return null;
+
+                var chainId = itemDef.MergeChainDef?.ConfigKey;
+                if (chainId != null && LocMan.HasString(LocMan.GetItemCategoryNameLocId(chainId)))
+                    return LocMan.GetItemCategoryName(chainId);
+
+                if (!string.IsNullOrEmpty(itemDef.PoolTag) && LocMan.HasString(LocMan.GetItemCategoryNameLocId(itemDef.PoolTag)))
+                    return LocMan.GetItemCategoryName(itemDef.PoolTag);
+
+                var ov = itemDef.OverrideLocalizationItemCategory;
+                if (!string.IsNullOrEmpty(ov))
+                {
+                    if (LocMan.HasString(ov)) return LocMan.Get(ov);
+                    var withPrefix = LocMan.GetItemCategoryNameLocId(ov);
+                    if (LocMan.HasString(withPrefix)) return LocMan.Get(withPrefix);
+                }
+                return null;
+            }
+            catch { return null; }
+        }
+
+        private Dictionary<string, string> _seasonalNameBySuffix;
+
+        /// <summary>seasonal-event id suffix (after the first '_') → its localized Name.</summary>
+        private Dictionary<string, string> SeasonalNameBySuffix()
+        {
+            if (_seasonalNameBySuffix != null) return _seasonalNameBySuffix;
+
+            var map = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            try
+            {
+                foreach (var kv in _config.CollectibleBoardEvents.EnumerateAll())
+                {
+                    if (kv.Value is not CollectibleBoardEventInfo cbe) continue;
+                    var id = kv.Key.ToString();
+                    var us = id.IndexOf('_');
+                    if (us < 0 || us >= id.Length - 1) continue;
+                    var nm = LocMan.Get(cbe.NameLocId);
+                    if (!string.IsNullOrEmpty(nm)) map[id.Substring(us + 1)] = nm;
+                }
+            }
+            catch { /* keep whatever resolved */ }
+
+            _seasonalNameBySuffix = map;
+            return map;
+        }
+
+        /// <summary>"GC_Flashback2025" → "Flashback Rewind Garage Cleanup" (parent seasonal + suffix).</summary>
+        private string ResolveGarageCleanupName(GarageCleanupEventInfo garageCleanup)
+        {
+            try
+            {
+                var id = garageCleanup.ConfigKey?.Value;
+                if (string.IsNullOrEmpty(id)) return "Garage Cleanup";
+
+                var core = id.StartsWith("GC_", StringComparison.OrdinalIgnoreCase) ? id.Substring(3) : id;
+                core = System.Text.RegularExpressions.Regex.Replace(core, "_\\d+$", "");
+
+                return SeasonalNameBySuffix().TryGetValue(core, out var parentName)
+                    ? parentName + " Garage Cleanup"
+                    : "Garage Cleanup";
+            }
+            catch { return "Garage Cleanup"; }
         }
 
         private void SerializeCollectibleBoardEvent(JsonWriter writer, CollectibleBoardEventInfo collectibleEvent, JsonSerializer serializer)
@@ -380,6 +506,12 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
             if (value is LeaderboardEventInfo leaderboardEvent)
                 WriteProperty(writer, "Name", LocMan.Get(leaderboardEvent.NameLocId), serializer);
 
+            // Garage Cleanups have no localized name of their own — name them after the seasonal
+            // event they accompany: "<Parent> Garage Cleanup" (e.g. GC_Flashback2025 →
+            // "Flashback Rewind Garage Cleanup"). Mirrors EventScheduleService's parent derivation.
+            if (value is GarageCleanupEventInfo garageCleanup)
+                WriteProperty(writer, "Name", ResolveGarageCleanupName(garageCleanup), serializer);
+
             if (value is EventOfferSetInfo eventOfferSet)
                 WriteProperty(writer, "Name", LocMan.Get(eventOfferSet.NameLocalizationId), serializer);
 
@@ -398,6 +530,17 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
 
         protected override void WriteObjectMember(JsonWriter writer, string name, Type type, object value, JsonSerializer serializer)
         {
+            // These event types expose their localized title via the "Name" custom member
+            // (WriteCustomObjectMembers). The raw config DisplayName is an internal stub
+            // (often the config key) — drop it from output to avoid duplication/confusion.
+            if (name == "DisplayName" &&
+                (type.IsAssignableTo(typeof(ProgressionEventInfo))
+                 || type.IsAssignableTo(typeof(CollectibleBoardEventInfo))
+                 || type.IsAssignableTo(typeof(LeaderboardEventInfo))
+                 || type.IsAssignableTo(typeof(BoardEventInfo))
+                 || type.IsAssignableTo(typeof(GarageCleanupEventInfo))))
+                return;
+
             #region Event types
 
             if (type.IsAssignableTo(typeof(BoardEventInfo)))
@@ -468,6 +611,49 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
 
                     foreach (var item in (IList<int>)value)
                         WriteValue(writer, _config.Items.GetValueOrDefault(item)?.ItemType, serializer);
+
+                    writer.WriteEndArray();
+
+                    return;
+                }
+
+                // Resolve the per-board (= per-level) pattern sets from refs to full definitions so
+                // the wiki can compute LINE/DIAGONAL/FULL reward coefficients from the boolean masks.
+                // Each set's Pattern1..4 are GarageCleanupPatternInfo (registered) → their Rows
+                // (masks) + Reward get resolved by SerializeGarageCleanupPatternInfo.
+                if (name == nameof(GarageCleanupEventInfo.PatternSets))
+                {
+                    writer.WritePropertyName(name);
+                    writer.WriteStartArray();
+
+                    var sets = _config.GarageCleanupPatternSets;
+                    foreach (var r in (IList<MetaRef<GarageCleanupPatternSetInfo>>)value)
+                    {
+                        if (r?.KeyObject is GarageCleanupPatternSetId id && sets.TryGetValue(id, out var setInfo))
+                            WriteObject(writer, setInfo.GetType(), setInfo, serializer);
+                        else
+                            WriteValue(writer, r?.KeyObject, serializer);   // fallback: bare id
+                    }
+
+                    writer.WriteEndArray();
+
+                    return;
+                }
+
+                // Resolve the per-board slot-fill rewards (the per-cleared-slot reward) from refs.
+                if (name == nameof(GarageCleanupEventInfo.SlotFillRewards))
+                {
+                    writer.WritePropertyName(name);
+                    writer.WriteStartArray();
+
+                    var rewards = _config.GarageCleanupRewards;
+                    foreach (var r in (IList<MetaRef<GarageCleanupRewardInfo>>)value)
+                    {
+                        if (r?.KeyObject is GarageCleanupRewardId id && rewards.TryGetValue(id, out var rewardInfo))
+                            WriteObject(writer, rewardInfo.GetType(), rewardInfo, serializer);
+                        else
+                            WriteValue(writer, r?.KeyObject, serializer);   // fallback: bare id
+                    }
 
                     writer.WriteEndArray();
 

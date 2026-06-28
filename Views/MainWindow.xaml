@@ -47,6 +47,8 @@
                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                             <TextBlock x:Name="txtVersionStatus"
                                        FontSize="11" FontWeight="Medium"
+                                       Background="Transparent"
+                                       ToolTipService.InitialShowDelay="300"
                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                        Visibility="Collapsed" Margin="0,2,0,0" />
                             <TextBlock x:Name="txtDataStatus" Text="No data loaded"
@@ -203,14 +205,59 @@
                         </Border>
                     </Grid>
 
-                    <!-- Version info -->
-                    <StackPanel Grid.Row="2" HorizontalAlignment="Center" Margin="0,0,0,6">
-                        <TextBlock x:Name="txtSidebarVersion" FontSize="10"
-                                   Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                                   HorizontalAlignment="Center" />
-                        <TextBlock Text="by Jouki" FontSize="10"
-                                   Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                                   HorizontalAlignment="Center" Margin="0,2,0,0" />
+                    <!-- Footer: background upload widget + version info -->
+                    <StackPanel Grid.Row="2">
+                        <!-- Background upload widget (shown while an upload runs in the background) -->
+                        <Border x:Name="backgroundUploadWidget"
+                                Visibility="Collapsed"
+                                Background="{DynamicResource SubtleFillColorSecondaryBrush}"
+                                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="6"
+                                Padding="10,8"
+                                Margin="0,0,0,8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,2">
+                                        <ui:SymbolIcon Symbol="ArrowUpload24" FontSize="12"
+                                                       Foreground="{DynamicResource AccentFillColorDefaultBrush}"
+                                                       Margin="0,0,4,0" VerticalAlignment="Center" />
+                                        <TextBlock Text="Uploading..." FontSize="11" FontWeight="SemiBold"
+                                                   Foreground="{DynamicResource AccentFillColorDefaultBrush}"
+                                                   VerticalAlignment="Center" />
+                                    </StackPanel>
+                                    <TextBlock x:Name="txtBackgroundUpload"
+                                               FontSize="10"
+                                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                               TextTrimming="CharacterEllipsis"
+                                               MaxWidth="160" />
+                                </StackPanel>
+                                <ui:Button x:Name="btnReopenUpload"
+                                           Grid.Column="1"
+                                           Appearance="Secondary"
+                                           ToolTip="Re-open upload window"
+                                           Padding="6,4"
+                                           Margin="6,0,0,0"
+                                           VerticalAlignment="Center"
+                                           Click="BtnReopenUpload_Click">
+                                    <ui:SymbolIcon Symbol="WindowNew24" FontSize="14" />
+                                </ui:Button>
+                            </Grid>
+                        </Border>
+
+                        <!-- Version info -->
+                        <StackPanel HorizontalAlignment="Center" Margin="0,0,0,6">
+                            <TextBlock x:Name="txtSidebarVersion" FontSize="10"
+                                       Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                       HorizontalAlignment="Center" />
+                            <TextBlock Text="by Jouki" FontSize="10"
+                                       Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                       HorizontalAlignment="Center" Margin="0,2,0,0" />
+                        </StackPanel>
                     </StackPanel>
                 </Grid>
             </Border>

@@ -46,6 +46,17 @@ public partial class WikiDataParserPage : UserControl
 
     // Events schedule state
     private string? _lastEventsLua;
+    // Garage Cleanup grids (detected during Generate Events; surfaced in the Update dialog)
+    private string? _lastGcGridsLua;
+    private List<GarageCleanupGridService.GridChange>? _lastGcChanges;
+    private int _lastGcRewardCount;   // # of GC events with resolved reward tables (0 until events.json re-dumped)
+
+    // Pending push state — captured during Generate Events, consumed by Update Wiki (push-only).
+    // Null means Generate Events has not been run (or was aborted), which blocks Update Wiki.
+    private string? _pendingEventsExisting;       // live Module:Datatable/Events content at generate time (null = not found)
+    private string? _pendingVariousContent;       // spliced Module:Datatable/Various to push (null = no GC changes)
+    private int _pendingGcGroupCount;             // # GC EventScheduleGroups appended (for success message)
+    private int _pendingGcWritten;                // # net-new GC airings added (for success message)
 
     // CreatedAt from JSON sources
     private string? _areasCreatedAt;

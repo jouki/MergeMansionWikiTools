@@ -7,6 +7,9 @@ public class CollectibleBoardEvent
     public string EventId { get; set; } = "";
     public string DisplayName { get; set; } = "";
     public string ChainPrefix { get; set; } = "";
+    /// <summary>Visual prefab handle (≈ the event's badge), e.g. "CBE_Flashback2025" — used to find the
+    /// "&lt;PrefabsOverride&gt;_Main_Hub_Event_Badge*.png" in the export folder for the list badge icon.</summary>
+    public string PrefabsOverride { get; set; } = "";
     public DateTime? StartDate { get; set; }
     public TimeSpan? Duration { get; set; }
     public int? DurationDays => Duration.HasValue ? (int)Math.Ceiling(Duration.Value.TotalDays) : null;

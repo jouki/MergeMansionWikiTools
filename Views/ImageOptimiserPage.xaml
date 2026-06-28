@@ -146,6 +146,15 @@
                 <ui:TextBlock x:Name="txtPlaceholder" Text="Drag images here to optimise"
                               HorizontalAlignment="Center" VerticalAlignment="Center" Appearance="Tertiary"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,8,8">
+                    <ui:Button x:Name="btnAspectRatio"
+                               Appearance="Secondary" Height="32" MinWidth="44" Padding="8,0"
+                               Visibility="Collapsed" Click="BtnAspectRatio_Click"
+                               ToolTip="Output canvas: 1:1 square (default). Click to keep the original aspect ratio instead."
+                               ToolTipService.InitialShowDelay="0"
+                               ToolTipService.ShowOnDisabled="True"
+                               Margin="0,0,6,0">
+                        <TextBlock x:Name="txtAspectRatio" Text="1:1" FontWeight="SemiBold" FontSize="13"/>
+                    </ui:Button>
                     <ui:Button x:Name="btnPredictIndices"
                                Content="Map Levels" Icon="{ui:SymbolIcon DocumentData24}"
                                Appearance="Secondary" Height="32" Padding="10,0"

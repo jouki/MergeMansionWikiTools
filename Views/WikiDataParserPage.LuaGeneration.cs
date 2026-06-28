@@ -201,6 +201,17 @@ public partial class WikiDataParserPage
 
     // ── Generate Events schedule ──────────────────────────────────────
 
+    // Result container for the off-UI-thread GC merge step in BtnGenerateEvents_Click.
+    private sealed class GcMergeResult
+    {
+        public string Lua { get; init; } = "";
+        public string? VariousGridsSpliced { get; init; }
+        public int GcGroupCount { get; init; }
+        public int GcWritten { get; init; }
+        public List<GarageCleanupGridService.GridChange>? GcChanges { get; init; }
+        public int GcRewardCount { get; init; }
+    }
+
     private async void BtnGenerateEvents_Click(object sender, RoutedEventArgs e)
     {
         var eventsPath = _main.Settings.EventsJsonPath;
@@ -214,22 +225,132 @@ public partial class WikiDataParserPage
         SetRowBusy(eventsIdle, eventsBusy, txtEventsBusy, true, "Fetching live module…");
         ShowInfo("Loading event schedules...", InfoBarSeverity.Informational);
 
+        // Clear pending push state so Update Wiki cannot push a stale/partial result if we abort.
+        _pendingEventsExisting = null;
+        _pendingVariousContent = null;
+        _pendingGcGroupCount = 0;
+        _pendingGcWritten = 0;
+        _lastGcGridsLua = null;
+        _lastGcChanges = null;
+        _lastGcRewardCount = 0;
+
         try
         {
-            // Fetch the live Module:Datatable/Events so historical runs (which the game config
-            // drops after a re-air) are merged in, not overwritten. Read-only API — no auth.
+            // Step 1: Fetch live modules (read-only, no auth).
+            //   - Module:Datatable/Events — to merge historical runs (content captured as base for
+            //     conflict detection at push time).
+            //   - Module:Datatable/Various — for the GC airings merge/splice.
             var existing = await WikiMappingService.FetchModuleContentAsync("Module:Datatable/Events");
+            var liveVarious = _main.DataService != null
+                ? await WikiMappingService.FetchModuleContentAsync("Module:Datatable/Various")
+                : null;
 
             SetRowBusy(eventsIdle, eventsBusy, txtEventsBusy, true, "Generating schedule…");
 
+            // Step 2 (off UI thread): parse events.json + merge live history → populates
+            // schedule.Groups and schedule.PendingDecisions.
             var schedule = new EventScheduleService();
-            var lua = await Task.Run(async () =>
+            await Task.Run(async () =>
+            {
+                using var _t = AppLogger.Timed("GenerateEventScheduleLua.Load");
+                await schedule.LoadAsync(eventsPath, existing);
+            });
+
+            // Step 3 (UI thread): drift-decision dialog for each ambiguous Seasonal Event re-air.
+            // Only Seasonal Events get a NeedsDecision entry (filtered in EventScheduleService);
+            // all other categories auto-separate silently (variant A, both runs kept, no dialog).
+            foreach (var d in schedule.PendingDecisions.ToList())
+            {
+                var dlg = new EventDriftDialog(d) { Owner = Window.GetWindow(this) };
+                dlg.ShowDialog();
+                if (dlg.Cancelled)
+                {
+                    ShowInfo("Generate Events cancelled.", InfoBarSeverity.Informational);
+                    // Leave Update Wiki disabled (pending state was cleared above).
+                    UpdateEventsWikiButtonState();
+                    return;
+                }
+                schedule.ApplyDriftDecision(d, dlg.IsUpdate);
+            }
+
+            // Step 4 (off UI thread): GC airings merge (mode B) + final Events/Various Lua generation.
+            SetRowBusy(eventsIdle, eventsBusy, txtEventsBusy, true, "Garage Cleanup grids…");
+
+            var gcResult = await Task.Run(() =>
             {
                 using var _t = AppLogger.Timed("GenerateEventScheduleLua");
-                await schedule.LoadAsync(eventsPath, existing);
-                return _luaGen.GenerateEventScheduleLua(schedule.Groups, schedule.CreatedAt);
+
+                // Pass-1 (non-GC) lua — also passed to MergeAirings for parent-run matching.
+                var nonGcLua = _luaGen.GenerateEventScheduleLua(schedule.Groups, schedule.CreatedAt);
+
+                if (_main.DataService == null || liveVarious == null)
+                    return new GcMergeResult { Lua = nonGcLua };
+
+                try
+                {
+                    using var doc = JsonDocument.Parse(File.ReadAllText(eventsPath));
+                    if (!doc.RootElement.TryGetProperty("Data", out var data))
+                        return new GcMergeResult { Lua = nonGcLua };
+
+                    var gcService = new GarageCleanupGridService(_main.DataService, _main.WikiMapping);
+
+                    // Phase-1 grid detection (for the change-list display in the Update dialog only).
+                    var grids = gcService.Build(data);
+                    var rewards = gcService.BuildRewards(data);
+                    var combined = GarageCleanupGridService.Combine(grids, rewards);
+                    var changes = gcService.Detect(combined, liveVarious, existing);
+                    var rewardCount = rewards.Count;
+
+                    // GC airings merge: reconstruct from live → add active dump airings (ADD-ONLY, §2.9).
+                    var existingAirings = GarageCleanupGridService.ReconstructAirings(liveVarious, existing ?? "");
+                    var active = gcService.CollectActiveAirings(data, DateTime.UtcNow);
+                    var merged = gcService.MergeAirings(existingAirings, active, nonGcLua);
+                    var gcWritten = merged.Sum(kv => kv.Value.Count) - existingAirings.Sum(kv => kv.Value.Count);
+
+                    // Append GC groups (A3c: GC run history lives in Datatable/Events).
+                    var gcEventGroups = gcService.BuildGcEventGroups(merged);
+                    var gcGroupCount = gcEventGroups.Count;
+                    schedule.Groups.AddRange(gcEventGroups);
+
+                    // Grids-only block → Module:Datatable/Various (A4).
+                    var gridsBlock = gcService.ComposeGarageCleanupBlocks(merged);
+                    var content = GarageCleanupGridService.SpliceVarious(liveVarious, gridsBlock, "garageCleanupGrids") ?? liveVarious;
+                    content = GarageCleanupGridService.RemoveVar(content, "garageCleanupRuns");
+                    var spliced = content != liveVarious ? content : null;
+
+                    // Final lua now includes GC groups.
+                    var finalLua = gcGroupCount > 0
+                        ? _luaGen.GenerateEventScheduleLua(schedule.Groups, schedule.CreatedAt)
+                        : nonGcLua;
+
+                    return new GcMergeResult
+                    {
+                        Lua = finalLua,
+                        VariousGridsSpliced = spliced,
+                        GcGroupCount = gcGroupCount,
+                        GcWritten = gcWritten,
+                        GcChanges = changes,
+                        GcRewardCount = rewardCount,
+                    };
+                }
+                catch (Exception gcEx)
+                {
+                    AppLogger.Debug($"GC merge failed during Generate Events: {gcEx.Message}");
+                    schedule.Notes.Add($"Garage Cleanup grids: merge failed ({gcEx.Message}).");
+                    return new GcMergeResult { Lua = nonGcLua };
+                }
             });
+
+            var lua = gcResult.Lua;
             _lastEventsLua = lua;
+            _lastGcChanges = gcResult.GcChanges;
+            _lastGcRewardCount = gcResult.GcRewardCount;
+
+            // Capture everything Update Wiki needs to push (no re-fetch, no re-merge at push time).
+            _pendingEventsExisting = existing;
+            _pendingVariousContent = gcResult.VariousGridsSpliced;
+            _pendingGcGroupCount = gcResult.GcGroupCount;
+            _pendingGcWritten = gcResult.GcWritten;
 
             if (existing == null)
                 schedule.Notes.Insert(0, "⚠ Live Module:Datatable/Events not found / unreachable — output has NO merged history. Do not overwrite the live module with this if it already has runs.");
@@ -242,15 +363,9 @@ public partial class WikiDataParserPage
             txtEventsCardLabel.Text =
                 $"Module:Datatable/Events — {lineCount} lines • {FormatSize(bytes)}";
 
-            if (schedule.Notes.Count > 0)
-            {
-                txtEventsNotes.Text = string.Join("\n", schedule.Notes.Select(n => "• " + n));
-                txtEventsNotes.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                txtEventsNotes.Visibility = Visibility.Collapsed;
-            }
+            // Notes are surfaced in the Update dialog's "Data changes" section (like Areas/Items),
+            // not in the main card — keep the card a clean summary.
+            txtEventsNotes.Visibility = Visibility.Collapsed;
 
             eventsSection.Visibility = Visibility.Visible;
             if (_eventsCollapsed)

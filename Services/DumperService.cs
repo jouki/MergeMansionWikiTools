@@ -111,6 +111,34 @@ internal static class DumperService
         }
     }
 
+    /// <summary>
+    /// Picks the config archive with the newest embedded CreatedAt from a directory.
+    /// "Pull from Phone" copies EVERY config version the game has cached under _DATA/C/
+    /// (content-addressed names, all written with the same mtime), so selecting by file
+    /// name or file mtime is non-deterministic and routinely picks a stale archive — the
+    /// root cause of a dump silently missing the current airing (e.g. an event whose Start
+    /// was moved to today only in the newest config build). We must read each archive's
+    /// header CreatedAt and take the latest. Returns null if no readable archive is found.
+    /// </summary>
+    public static string? SelectNewestConfigArchive(string? configDir)
+    {
+        if (string.IsNullOrEmpty(configDir) || !Directory.Exists(configDir)) return null;
+        string? best = null;
+        DateTimeOffset bestAt = DateTimeOffset.MinValue;
+        foreach (var f in Directory.GetFiles(configDir))
+        {
+            var at = ReadConfigCreatedAt(f);
+            if (at.HasValue && (best == null || at.Value > bestAt))
+            {
+                best = f;
+                bestAt = at.Value;
+            }
+        }
+        if (best != null)
+            AppLogger.Info($"SelectNewestConfigArchive: {Path.GetFileName(best)} (CreatedAt {bestAt:yyyy-MM-dd HH:mm:ss}Z) from {Directory.GetFiles(configDir).Length} archive(s)");
+        return best;
+    }
+
     public static async Task<DumpResult> DumpAsync(
         string configPath,
         string? patchPath,
@@ -212,7 +240,7 @@ internal static class DumperService
                 // This ensures patches like WildItem_SME_01_B (only in newer patch snapshot)
                 // get picked up automatically without manual settings.json editing.
                 PatchedConfigArchive patchedArchive;
-                var patchedArchives = new List<(PlayerExperimentId, ExperimentVariantId, PatchedConfigArchive, string[])>();
+                var patchedArchives = new List<(PlayerExperimentId, ExperimentVariantId, PatchedConfigArchive, string[], string FolderLabel)>();
 
                 if (!string.IsNullOrEmpty(patchPath))
                 {
@@ -252,47 +280,57 @@ internal static class DumperService
                         progress?.Report($"Loading patches from {patchFilesToLoad.Count} file(s)...");
                         AppLogger.Info($"Patch files to scan: {patchFilesToLoad.Count}");
 
-                        // Merge across all files. Key is the patch label, value is the deserialized envelope.
+                        // Merge across all files, keeping EVERY distinct-content version of each label.
                         //
-                        // Collision rule (CRITICAL): a fresh "Pull from Phone" writes ALL _DATA/P/ files
-                        // with the SAME mtime, so "newest mtime wins" is non-deterministic — a stale
-                        // variant of a label (e.g. a Rebalance patch missing the latest experiment) can
-                        // arbitrarily overwrite the complete one. Observed 2026-06-05: A Gear Friend
-                        // (SP_RobotPet2026) test rewards existed only in one snapshot's
-                        // Rebalance_SeasonPass_May2026_01_B patch but got clobbered by an older same-label
-                        // stub → 0 changes dumped despite the experiment being live in-game.
+                        // BACKGROUND: a fresh "Pull from Phone" writes multiple snapshots to _DATA/P/, all
+                        // with the same mtime. The same label (e.g. Rebalance_SeasonPass_May2026_01_B) can
+                        // appear in several snapshots with DIFFERENT byte content — one version changes
+                        // event X, another does not. The previous "richer payload wins" heuristic silently
+                        // dropped the smaller version, which could be the only one that changes a specific
+                        // event (e.g. Soccer / SP_WorldCup2026 rewards).
                         //
-                        // Fix: keep, per label, the RICHEST patch — largest raw payload (more patched
-                        // entries = more changes). Tiebreak by newer mtime. Raw byte size is a reliable
-                        // proxy for "completeness" and trivially available pre-deserialize. We bias toward
-                        // the fuller experiment: for a documentation tool, showing a slightly-older richer
-                        // variant beats silently losing the experiment entirely.
-                        var mergedPatches = new Dictionary<string, (PlayerExperimentId ExpId, ExperimentVariantId VarId, GameConfigPatchEnvelope Envelope, string SourceFile, int RawSize, DateTime Mtime)>(StringComparer.Ordinal);
+                        // New rule (2026-06-26):
+                        //   • Dedup key = (label, SHA-256 of raw bytes) — byte-identical copies collapse.
+                        //   • All DISTINCT-CONTENT versions of a label survive into patchedArchives.
+                        //   • Folder naming: the version with the largest raw payload keeps the bare label
+                        //     name (preserving the old primary-wins behaviour for single-version labels);
+                        //     additional distinct versions get __v2, __v3, … suffixes (ordered by
+                        //     descending raw size then ascending source filename for determinism).
+                        //
+                        // The empty-folder cleanup at the end of Phase B still applies: any version whose
+                        // output is byte-identical to master produces no files → empty folder → deleted.
+                        // Net effect: every distinct branch that changes ANY tracked output keeps its folder;
+                        // no branch is ever lost to a size heuristic.
+
+                        // Key: (label, content-hash) → dedup byte-identical copies across snapshots.
+                        var distinctPatches = new Dictionary<string, (PlayerExperimentId ExpId, ExperimentVariantId VarId, byte[] RawBytes, GameConfigPatchEnvelope Envelope, string SourceFile, int RawSize, DateTime Mtime)>(StringComparer.Ordinal);
 
                         foreach (var pf in patchFilesToLoad)
                         {
                             try
                             {
                                 var mtime = File.GetLastWriteTimeUtc(pf);
-                                var specializationPatches = GameConfigSpecializationPatches.FromBytes(File.ReadAllBytes(pf));
-                                var configPatches = specializationPatches.Patches
-                                    .SelectMany(y => y.Value.Select(z => (ExpId: y.Key, VarId: z.Key, RawSize: z.Value?.Length ?? 0, Envelope: GameConfigPatchEnvelope.Deserialize(z.Value))))
-                                    .ToArray();
+                                var fileBytes = File.ReadAllBytes(pf);
+                                var specializationPatches = GameConfigSpecializationPatches.FromBytes(fileBytes);
 
-                                foreach (var (expId, varId, rawSize, envelope) in configPatches)
-                                {
-                                    var label = $"{expId}_{varId}";
-                                    if (mergedPatches.TryGetValue(label, out var prev))
+                                foreach (var (expId, variantMap) in specializationPatches.Patches)
+                                    foreach (var (varId, rawBytes) in variantMap)
                                     {
-                                        // Keep richer (bigger raw payload); tiebreak newer mtime.
-                                        bool replace = rawSize > prev.RawSize
-                                                       || (rawSize == prev.RawSize && mtime > prev.Mtime);
-                                        if (!replace) continue;
-                                        if (rawSize != prev.RawSize)
-                                            AppLogger.Info($"Patch {label}: preferring {Path.GetFileName(pf)} ({rawSize} B) over {prev.SourceFile} ({prev.RawSize} B) — richer payload wins (equal-mtime dedup fix)");
+                                        var label = $"{expId}_{varId}";
+                                        var actualBytes = rawBytes ?? Array.Empty<byte>();
+                                        // Compute SHA-256 of the raw patch bytes for content-based dedup.
+                                        var hashBytes = System.Security.Cryptography.SHA256.HashData(actualBytes);
+                                        var hashHex = Convert.ToHexString(hashBytes);
+                                        var dedupKey = $"{label}\0{hashHex}";
+
+                                        if (!distinctPatches.ContainsKey(dedupKey))
+                                        {
+                                            var envelope = GameConfigPatchEnvelope.Deserialize(actualBytes);
+                                            distinctPatches[dedupKey] = (expId, varId, actualBytes, envelope, Path.GetFileName(pf), actualBytes.Length, mtime);
+                                            AppLogger.Debug($"Patch {label}: new distinct version ({actualBytes.Length} B) from {Path.GetFileName(pf)} [{hashHex[..8]}]");
+                                        }
+                                        // else: byte-identical copy — silently skip (true dedup).
                                     }
-                                    mergedPatches[label] = (expId, varId, envelope, Path.GetFileName(pf), rawSize, mtime);
-                                }
                             }
                             catch (Exception ex)
                             {
@@ -300,18 +338,37 @@ internal static class DumperService
                             }
                         }
 
-                        foreach (var kv in mergedPatches)
-                        {
-                            var (expId, varId, envelope, sourceFile, _, _) = kv.Value;
-                            var pa = new PatchedConfigArchive(archive, new[] { envelope });
-                            var patchEntryNames = envelope.EntryNames.ToArray();
-                            patchedArchives.Add((expId, varId, pa, patchEntryNames));
+                        // Group distinct versions per label; assign folder names.
+                        // Primary version (largest raw size, tiebreak ascending filename) → bare label.
+                        // Additional versions → label__v2, label__v3, …
+                        var byLabel = distinctPatches.Values
+                            .GroupBy(v => $"{v.ExpId}_{v.VarId}", StringComparer.Ordinal)
+                            .ToDictionary(
+                                g => g.Key,
+                                g => g.OrderByDescending(v => v.RawSize).ThenBy(v => v.SourceFile, StringComparer.Ordinal).ToList(),
+                                StringComparer.Ordinal);
 
-                            AppLogger.Info($"Patch {kv.Key} entries: [{string.Join(", ", patchEntryNames)}] (from {sourceFile})");
+                        int totalDistinct = 0;
+                        foreach (var (label, versions) in byLabel)
+                        {
+                            if (versions.Count > 1)
+                                AppLogger.Info($"Patch {label}: {versions.Count} distinct versions kept ({string.Join(", ", versions.Select(v => $"{v.RawSize} B from {v.SourceFile}"))}) — folders: {label}, {string.Join(", ", Enumerable.Range(2, versions.Count - 1).Select(i => $"{label}__v{i}"))}");
+
+                            for (int vi = 0; vi < versions.Count; vi++)
+                            {
+                                var v = versions[vi];
+                                var folderLabel = vi == 0 ? label : $"{label}__v{vi + 1}";
+                                var pa = new PatchedConfigArchive(archive, new[] { v.Envelope });
+                                var patchEntryNames = v.Envelope.EntryNames.ToArray();
+                                patchedArchives.Add((v.ExpId, v.VarId, pa, patchEntryNames, folderLabel));
+
+                                AppLogger.Info($"Patch {folderLabel} entries: [{string.Join(", ", patchEntryNames)}] (from {v.SourceFile})");
+                                totalDistinct++;
+                            }
                         }
 
-                        progress?.Report($"{T()} Loaded {mergedPatches.Count} unique patch(es) across {patchFilesToLoad.Count} file(s)");
-                        AppLogger.Info($"{T()} Patches loaded: {mergedPatches.Count} unique across {patchFilesToLoad.Count} files");
+                        progress?.Report($"{T()} Loaded {totalDistinct} distinct patch version(s) ({byLabel.Count} unique labels) across {patchFilesToLoad.Count} file(s)");
+                        AppLogger.Info($"{T()} Patches loaded: {totalDistinct} distinct versions, {byLabel.Count} labels, across {patchFilesToLoad.Count} files");
                     }
                 }
 
@@ -373,10 +430,10 @@ internal static class DumperService
                 // (any patch that mutates any tracked field survives), tiny throughput cost for the
                 // irrelevant ones.
                 var relevantPatchedArchives = patchedArchives
-                    .Select(x => (x.Item1, x.Item2, x.Item3, x.Item4))
+                    .Select(x => (ExpId: x.Item1, VarId: x.Item2, Archive: x.Item3, EntryNames: x.Item4, FolderLabel: x.FolderLabel))
                     .ToArray();
 
-                AppLogger.Info($"Patch extraction: {relevantPatchedArchives.Length} patches (unfiltered, all branches)");
+                AppLogger.Info($"Patch extraction: {relevantPatchedArchives.Length} distinct patch version(s) (unfiltered, all branches)");
 
                 // 8. Run master dumps first, then patch dumps (patches need baseline content)
                 progress?.Report($"{T()} Dumping game data ({relevantPatchedArchives.Length} patches)...");
@@ -507,10 +564,13 @@ internal static class DumperService
                         }
                     });
 
-                // Patch import+dump tasks (each patch imports & dumps independently)
-                foreach (var (experimentId, variantId, pa, patchEntryNames) in relevantPatchedArchives)
+                // Patch import+dump tasks (each patch imports & dumps independently).
+                // patchLabel is the folder-safe identifier: for single-version labels it equals
+                // "{expId}_{varId}"; for multi-version labels subsequent versions get "__v2", "__v3", …
+                // suffixes so they never collide on the same output folder.
+                foreach (var (experimentId, variantId, pa, patchEntryNames, folderLabel) in relevantPatchedArchives)
                 {
-                    var patchLabel = $"{experimentId}_{variantId}";
+                    var patchLabel = folderLabel;
                     var capturedPa = pa;
                     var capturedEntryNames = patchEntryNames;
 

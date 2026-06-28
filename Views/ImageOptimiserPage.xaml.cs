@@ -26,6 +26,11 @@ internal class OptimiserImage
     public string FilePath { get; set; } = "";
     public BitmapImage? Thumbnail { get; set; }
     public bool IsScissorsActive { get; set; }
+    /// <summary>When true, split output keeps the crop's original aspect ratio instead of centering it on
+    /// a square (1:1) canvas. Default false = the 1:1 canvas rule applies (the standard behavior).</summary>
+    public bool KeepAspectRatio { get; set; }
+    /// <summary>Cached source pixel dimensions (read once via Image.Identify) for the aspect-ratio label.</summary>
+    public (int W, int H)? Dimensions { get; set; }
     public bool IsSplit { get; set; }
     public bool IsOptimized { get; set; }
     public List<string> SplitResultFiles { get; set; } = new();
@@ -606,6 +611,8 @@ public partial class ImageOptimiserPage : UserControl
         splitButtonGroup.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
         refreshButtonGroup.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
         btnToggleRects.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+        btnAspectRatio.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+        UpdateAspectRatioButton();
         UpdatePredictButtonVisibility();
         UpdatePreviewMargins();
 
@@ -820,6 +827,7 @@ public partial class ImageOptimiserPage : UserControl
                 splitButtonGroup.Visibility = Visibility.Collapsed;
                 refreshButtonGroup.Visibility = Visibility.Collapsed;
                 btnToggleRects.Visibility = Visibility.Collapsed;
+                btnAspectRatio.Visibility = Visibility.Collapsed;
                 detectionOverlay.Children.Clear();
                 UpdatePreviewMargins();
             }
@@ -941,6 +949,7 @@ public partial class ImageOptimiserPage : UserControl
         splitButtonGroup.Visibility = Visibility.Collapsed;
         refreshButtonGroup.Visibility = Visibility.Collapsed;
         btnToggleRects.Visibility = Visibility.Collapsed;
+        btnAspectRatio.Visibility = Visibility.Collapsed;
         btnPredictIndices.Visibility = Visibility.Collapsed;
         detectionOverlay.Children.Clear();
         autoLinkBanner.Visibility = Visibility.Collapsed;

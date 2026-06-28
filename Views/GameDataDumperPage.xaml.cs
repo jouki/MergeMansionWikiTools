@@ -25,11 +25,28 @@ public partial class GameDataDumperPage : UserControl
     private string? _lastDumpLogPath;
     private DumperService.DumpResult? _lastDumpResult;
     private string? _lastDumpOutputDir;
+    // Auto-dismiss timer for the bottom result info bar (success/info messages fade after a few seconds).
+    private readonly System.Windows.Threading.DispatcherTimer _resultBarTimer =
+        new() { Interval = System.TimeSpan.FromSeconds(6) };
 
     public GameDataDumperPage(MainWindow main)
     {
         _main = main;
         InitializeComponent();
+
+        // Auto-dismiss the bottom result info bar a few seconds after it opens (success/info only;
+        // errors/warnings stay open so the user can read them).
+        _resultBarTimer.Tick += (_, _) => { _resultBarTimer.Stop(); resultInfoBar.IsOpen = false; };
+        var resultBarOpen = System.ComponentModel.DependencyPropertyDescriptor.FromProperty(
+            Wpf.Ui.Controls.InfoBar.IsOpenProperty, typeof(Wpf.Ui.Controls.InfoBar));
+        resultBarOpen?.AddValueChanged(resultInfoBar, (_, _) =>
+        {
+            if (resultInfoBar.IsOpen
+                && resultInfoBar.Severity is Wpf.Ui.Controls.InfoBarSeverity.Success
+                                          or Wpf.Ui.Controls.InfoBarSeverity.Informational)
+            { _resultBarTimer.Stop(); _resultBarTimer.Start(); }
+            else { _resultBarTimer.Stop(); }
+        });
 
         // Load saved paths (clear if file no longer exists)
         if (!string.IsNullOrEmpty(_main.Settings.DumperConfigPath))
@@ -62,6 +79,7 @@ public partial class GameDataDumperPage : UserControl
         chkDialogues.IsChecked = _main.Settings.DumpDialogues;
         chkCards.IsChecked = _main.Settings.DumpCards;
         chkPets.IsChecked = _main.Settings.DumpPets;
+        chkExperimental.IsChecked = _main.Settings.DumpExperimental;
         // Event filters
         chkEvLuckyCatch.IsChecked = _main.Settings.EventLuckyCatch;
         chkEvLuckySnap.IsChecked = _main.Settings.EventLuckySnap;
@@ -78,6 +96,7 @@ public partial class GameDataDumperPage : UserControl
         chkEvOthers.IsChecked = _main.Settings.EventOthers;
         chkEvUncategorised.IsChecked = _main.Settings.EventUncategorised;
         chkEvSoloMilestone.IsChecked = _main.Settings.EventSoloMilestone;
+        chkEvMixABooster.IsChecked = _main.Settings.EventMixABooster;
         expEventCategories.IsExpanded = _main.Settings.EventSubExpanded;
         _suppressSave = false;
 
@@ -106,15 +125,16 @@ public partial class GameDataDumperPage : UserControl
             var dataDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "_DATA");
 
             // Read current UI state on the UI thread before going off-thread
-            bool needConfig = string.IsNullOrEmpty(GetPathText(txtConfigPath));
+            string currentConfig = GetPathText(txtConfigPath);
+            bool needConfig = string.IsNullOrEmpty(currentConfig);
             bool needPatch = string.IsNullOrEmpty(GetPathText(txtPatchPath));
             bool needLanguage = string.IsNullOrEmpty(GetPathText(txtLanguagePath));
 
             // Directory scanning off the UI thread
-            var (dataDirExists, configFile, patchFile, languageFile) = await Task.Run(() =>
+            var (dataDirExists, configFile, configOverride, patchFile, languageFile) = await Task.Run(() =>
             {
                 if (!Directory.Exists(dataDir))
-                    return (false, (string?)null, (string?)null, (string?)null);
+                    return (false, (string?)null, false, (string?)null, (string?)null);
 
                 string? FindSingleFile(string subDir)
                 {
@@ -124,8 +144,42 @@ public partial class GameDataDumperPage : UserControl
                     return files.Length == 1 ? files[0] : null;
                 }
 
+                // Config: the game caches MULTIPLE archive versions under _DATA/C (all written
+                // with the same mtime on a fresh pull), so we must pick the one with the newest
+                // embedded CreatedAt — never the first-enumerated. We also override a stale saved
+                // path that still points at an OLDER archive in this same cache folder: that is the
+                // exact failure mode where a re-pull adds a newer build but DumperConfigPath stays
+                // pinned to the previous file, so every dump silently uses outdated config.
+                var cDir = Path.Combine(dataDir, "C");
+                string? newestConfig = DumperService.SelectNewestConfigArchive(cDir);
+                string? cfg = null;
+                bool ovr = false;
+                if (needConfig)
+                {
+                    cfg = newestConfig;
+                }
+                else if (newestConfig != null && !string.IsNullOrEmpty(currentConfig))
+                {
+                    var cDirFull = Path.GetFullPath(cDir);
+                    var curFull = Path.GetFullPath(currentConfig);
+                    var newFull = Path.GetFullPath(newestConfig);
+                    // Must live directly in the _DATA/C cache folder (not merely share a prefix).
+                    bool inCache = string.Equals(Path.GetDirectoryName(curFull), cDirFull, StringComparison.OrdinalIgnoreCase);
+                    if (inCache && !string.Equals(curFull, newFull, StringComparison.OrdinalIgnoreCase))
+                    {
+                        var curAt = DumperService.ReadConfigCreatedAt(currentConfig);
+                        var newAt = DumperService.ReadConfigCreatedAt(newestConfig);
+                        if (newAt.HasValue && (curAt == null || newAt > curAt))
+                        {
+                            cfg = newestConfig;
+                            ovr = true;
+                        }
+                    }
+                }
+
                 return (true,
-                    needConfig ? FindSingleFile("C") : null,      // Config: _DATA/C/
+                    cfg,                                          // Config: _DATA/C/ (newest by CreatedAt)
+                    ovr,
                     needPatch ? FindSingleFile("P") : null,       // Patch: _DATA/P/
                     needLanguage ? FindSingleFile("L") : null);   // Language: _DATA/L/
             });
@@ -137,10 +191,17 @@ public partial class GameDataDumperPage : UserControl
             }
 
             bool anyDetected = false;
+            string? overrideMsg = null;
             if (configFile != null)
             {
                 SetPathText(txtConfigPath, configFile);
                 anyDetected = true;
+                if (configOverride)
+                {
+                    var at = DumperService.ReadConfigCreatedAt(configFile);
+                    overrideMsg = $"Config switched to newest archive (CreatedAt {at:yyyy-MM-dd HH:mm}Z) — a re-pull added a newer build.";
+                    AppLogger.Info($"Auto-detect: overrode stale config with newest archive {Path.GetFileName(configFile)} (CreatedAt {at:u})");
+                }
             }
             if (patchFile != null)
             {
@@ -154,7 +215,9 @@ public partial class GameDataDumperPage : UserControl
             }
             if (anyDetected) SavePaths();
 
-            txtAutoDetect.Text = anyDetected ? "Some paths were auto-detected from _DATA/ folder." : "";
+            // The override notice wins over the generic message — it's the actionable one.
+            txtAutoDetect.Text = overrideMsg
+                ?? (anyDetected ? "Some paths were auto-detected from _DATA/ folder." : "");
         }
         catch (Exception ex)
         {
@@ -418,7 +481,12 @@ public partial class GameDataDumperPage : UserControl
         _isExtracting = true;
         SetButtonsEnabled(false);
         resultInfoBar.IsOpen = false;
+        freshnessBar.IsOpen = false;
         txtLog.Text = "";
+
+        // Snapshot the CreatedAt of the data CURRENTLY LOADED in the app, BEFORE the pull overwrites
+        // _DATA — the freshness check compares the phone's newest config against this.
+        var loadedBeforePull = _main.GetLoadedDataCreatedAtUtc();
 
         var dataDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "_DATA");
 
@@ -447,7 +515,8 @@ public partial class GameDataDumperPage : UserControl
                 return;
             }
 
-            // Auto-fill paths
+            // Auto-fill paths. result.ConfigFilePath is already the newest archive by CreatedAt
+            // (PhoneDetectionService selects it — the phone caches several config versions).
             if (result.ConfigFilePath != null)
                 SetPathText(txtConfigPath, result.ConfigFilePath);
             if (result.PatchFilePath != null)
@@ -472,6 +541,9 @@ public partial class GameDataDumperPage : UserControl
 
             Increment(s => s.PhonePulls++);
             AppLogger.Info($"Phone pull completed from {result.DeviceName}: config={result.ConfigFilePath != null}, patches={result.PatchFileCount}, lang={result.LanguageFilePath != null}");
+
+            // Freshness check — compare pulled config's CreatedAt against the latest existing dump.
+            await AppendFreshnessComparisonAsync(result.ConfigFilePath, loadedBeforePull);
         }
         catch (Exception ex)
         {
@@ -492,6 +564,65 @@ public partial class GameDataDumperPage : UserControl
         }
     }
 
+    // ── Freshness comparison (Pull from Phone) ─────────────────────
+
+    /// <summary>
+    /// Appends a freshness line to resultInfoBar after a phone pull.
+    /// Compares the pulled config's embedded CreatedAt against the newest
+    /// existing dump in the current version directory.
+    /// Sets Severity to Success when newer data is available; otherwise Informational.
+    /// </summary>
+    private async Task AppendFreshnessComparisonAsync(string? configFilePath, DateTime? loadedAtUtc)
+    {
+        // Read the newest pulled config's CreatedAt (fast — archive header only), off the UI thread.
+        var pulledAt = configFilePath != null
+            ? await Task.Run(() => DumperService.ReadConfigCreatedAt(configFilePath))
+            : null;
+
+        if (pulledAt == null)
+        {
+            AppLogger.Debug("AppendFreshnessComparison: pulledAt is null, skipping.");
+            freshnessBar.IsOpen = false;
+            return;
+        }
+
+        // Compare the phone's newest config against the data CURRENTLY LOADED in the app (snapshotted
+        // before the pull). Both are UTC instants. The old dump-folder scan parsed the dump's
+        // events.json CreatedAt (no 'Z' suffix) as LOCAL time, so a same-instant dump always read 2h
+        // older (CEST) and reported "newer" forever — loaded CreatedAt is UTC-normalized, fixing it.
+        const string fmt = "dd MMM yyyy HH:mm";
+        var pulledUtc = pulledAt.Value.UtcDateTime;
+        var pulledStr = pulledUtc.ToString(fmt);
+
+        if (loadedAtUtc == null)
+        {
+            freshnessBar.Title    = "Pulled config";
+            freshnessBar.Message  = $"From {pulledStr}Z (no loaded data to compare against).";
+            freshnessBar.Severity = Wpf.Ui.Controls.InfoBarSeverity.Informational;
+        }
+        else
+        {
+            var loadedStr = loadedAtUtc.Value.ToString(fmt);
+            // >1s tolerance kills sub-second formatting jitter (configs differ by minutes in practice).
+            if ((pulledUtc - loadedAtUtc.Value).TotalSeconds > 1)
+            {
+                freshnessBar.Title    = "Newer data found";
+                freshnessBar.Message  = $"Phone config ({pulledStr}Z) is newer than your loaded data ({loadedStr}Z). Re-dump to capture it.";
+                freshnessBar.Severity = Wpf.Ui.Controls.InfoBarSeverity.Success;
+            }
+            else
+            {
+                freshnessBar.Title    = "Up to date";
+                freshnessBar.Message  = $"Your loaded data ({loadedStr}Z) is current — the phone has no newer config.";
+                freshnessBar.Severity = Wpf.Ui.Controls.InfoBarSeverity.Informational;
+            }
+        }
+
+        AppLogger.Debug($"AppendFreshnessComparison: pulledAt={pulledUtc:u}, loadedAt={loadedAtUtc?.ToString("u") ?? "none"} → {freshnessBar.Title}: {freshnessBar.Message}");
+
+        freshnessBar.IsOpen = true;
+    }
+
     // ── Checkbox persistence ──────────────────────────────────────
 
     private void DumpCheckbox_Changed(object sender, RoutedEventArgs e)
@@ -503,6 +634,7 @@ public partial class GameDataDumperPage : UserControl
         _main.Settings.DumpDialogues = chkDialogues.IsChecked == true;
         _main.Settings.DumpCards = chkCards.IsChecked == true;
         _main.Settings.DumpPets = chkPets.IsChecked == true;
+        _main.Settings.DumpExperimental = chkExperimental.IsChecked == true;
         _main.SaveSettings();
     }
 
@@ -531,6 +663,7 @@ public partial class GameDataDumperPage : UserControl
         _main.Settings.EventOthers = chkEvOthers.IsChecked == true;
         _main.Settings.EventUncategorised = chkEvUncategorised.IsChecked == true;
         _main.Settings.EventSoloMilestone = chkEvSoloMilestone.IsChecked == true;
+        _main.Settings.EventMixABooster = chkEvMixABooster.IsChecked == true;
         _main.SaveSettings();
     }
 
@@ -551,6 +684,7 @@ public partial class GameDataDumperPage : UserControl
         chkEvLegacy.IsChecked = value;
         chkEvOthers.IsChecked = value;
         chkEvUncategorised.IsChecked = value;
+        chkEvMixABooster.IsChecked = value;
         _suppressSave = false;
         EventSubCheckbox_Changed(this, new RoutedEventArgs());
     }
@@ -575,6 +709,7 @@ public partial class GameDataDumperPage : UserControl
         chkEvLegacy.IsChecked = false;
         chkEvOthers.IsChecked = false;
         chkEvUncategorised.IsChecked = true;
+        chkEvMixABooster.IsChecked = true;
         _suppressSave = false;
         EventSubCheckbox_Changed(this, new RoutedEventArgs());
     }
@@ -595,6 +730,7 @@ public partial class GameDataDumperPage : UserControl
         if (chkDialogues.IsChecked == true) mode |= DumperService.DumpMode.Dialogues;
         if (chkCards.IsChecked == true) mode |= DumperService.DumpMode.CardCollection;
         if (chkPets.IsChecked == true) mode |= DumperService.DumpMode.Pets;
+        if (chkExperimental.IsChecked == true) mode |= DumperService.DumpMode.Experimental;
         return mode;
     }
 
@@ -616,6 +752,7 @@ public partial class GameDataDumperPage : UserControl
         if (chkEvOthers.IsChecked == true) f |= EventFilters.Others;
         if (chkEvUncategorised.IsChecked == true) f |= EventFilters.Uncategorised;
         if (chkEvSoloMilestone.IsChecked == true) f |= EventFilters.SoloMilestone;
+        if (chkEvMixABooster.IsChecked == true) f |= EventFilters.MixABooster;
         return f;
     }
 
@@ -657,49 +794,6 @@ public partial class GameDataDumperPage : UserControl
         };
         menu.Items.Add(item);
         OpenSplitMenu(menu, btnDumpMenu);
-    }
-
-    private async void BtnDumpExperimental_Click(object sender, RoutedEventArgs e)
-    {
-        // Experimental dump goes into existing Dump/Experimental/ — use current active dump path directly
-        var basePath = _main.Settings.ImageExporterBasePath;
-        var version = _main.Settings.SelectedApkVersion;
-        if (string.IsNullOrEmpty(basePath) || string.IsNullOrEmpty(version))
-        {
-            resultInfoBar.Title = "Output directory cannot be determined";
-            resultInfoBar.Message = "Please set a workspace path and APK version in Settings.";
-            resultInfoBar.Severity = Wpf.Ui.Controls.InfoBarSeverity.Error;
-            resultInfoBar.IsOpen = true;
-            return;
-        }
-        // Find the highest existing Dump folder (Dump 4 > Dump 3 > Dump 2 > Dump), or create "Dump"
-        var versionDir = Path.Combine(basePath, version);
-        var outputPath = Path.Combine(versionDir, "Dump");
-        if (Directory.Exists(versionDir))
-        {
-            var dumpDirs = Directory.GetDirectories(versionDir, "Dump*")
-                .Where(d => System.Text.RegularExpressions.Regex.IsMatch(Path.GetFileName(d), @"^Dump( \d+)?$"))
-                .OrderByDescending(d => d.Length).ThenByDescending(d => d)
-                .ToList();
-            if (dumpDirs.Count > 0)
-                outputPath = dumpDirs[0];
-        }
-
-        var expDir = Path.Combine(outputPath, "Experimental");
-        // Only ask about overwrite if Experimental subfolder already exists
-        if (Directory.Exists(expDir))
-        {
-            var result = await new Wpf.Ui.Controls.MessageBox
-            {
-                Title = "Experimental Dump Exists",
-                Content = $"An Experimental subfolder already exists in:\n{expDir}\n\nOverwrite it?",
-                PrimaryButtonText = "Overwrite",
-                CloseButtonText = "Cancel",
-                Owner = Window.GetWindow(this)
-            }.ShowDialogAsync();
-            if (result != Wpf.Ui.Controls.MessageBoxResult.Primary) return;
-        }
-        await RunDumpAsync(DumperService.DumpMode.Experimental, outputPath);
     }
 
     private async Task RunDumpAsync(DumperService.DumpMode mode, string? customOutputDir = null)
@@ -825,10 +919,9 @@ public partial class GameDataDumperPage : UserControl
                 resultInfoBar.Message = $"Generated: {string.Join(", ", files)}";
                 resultInfoBar.Severity = Wpf.Ui.Controls.InfoBarSeverity.Success;
 
-                // Show Load Dumped Files button — keep visible after experimental dump if it was already shown
-                if (mode != DumperService.DumpMode.Experimental)
+                // Show Load Dumped Files button when at least one non-Experimental category was dumped
+                if ((mode & ~DumperService.DumpMode.Experimental) != DumperService.DumpMode.None)
                     btnUseDumpFiles.Visibility = Visibility.Visible;
-                // Don't hide button after experimental dump — main dump files are still valid
 
                 Increment(s => s.DataDumps++);
 
@@ -882,8 +975,8 @@ public partial class GameDataDumperPage : UserControl
         chkDialogues.IsEnabled = enabled;
         chkCards.IsEnabled = enabled;
         chkPets.IsEnabled = enabled;
+        chkExperimental.IsEnabled = enabled;
         expEventCategories.IsEnabled = enabled;
-        btnDumpExperimental.IsEnabled = enabled;
     }
 
     // ── Open Dump Folder ──────────────────────────────────────────

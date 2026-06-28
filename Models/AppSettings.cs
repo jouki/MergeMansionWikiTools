@@ -4,7 +4,7 @@ namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.23.0";
+    public const string Version = "v0.23.20";
 
     // Full version with build timestamp, e.g. "v0.18.7 (build 20260322-1200)"
     public static string Build { get; } = GetBuild();
@@ -107,9 +107,11 @@ public class AppSettings
     public bool DumpCards { get; set; } = true;
     public bool DumpDialogues { get; set; } = true;
     public bool DumpPets { get; set; } = true;
+    public bool DumpExperimental { get; set; } = false; // optional; off by default
     public bool DumpAutoNewFolder { get; set; } = true; // auto-create Dump 2/3/... instead of overwriting
 
     // Event filters
+    public bool EventMixABooster { get; set; } = true;
     public bool EventLuckyCatch { get; set; } = true;
     public bool EventLuckySnap { get; set; } = true;
     public bool EventSeasonal { get; set; } = true;

@@ -74,6 +74,15 @@ public partial class WikiUploadDialog : FluentWindow
     private CancellationTokenSource? _resolveCts;
     private CancellationTokenSource? _uploadCts;
     private bool _isUploading;
+    private bool _isBackgrounded;       // true while the window is hidden and upload runs in background
+    private string _lastProgressText = "";  // last "Uploading X/Y..." text; used by sidebar widget
+
+    // Upload cancel / revert state
+    private readonly List<WikiMappingService.UploadedFile> _uploadedLog = new();
+    private int _uploadIndex;
+    private int _uploadSkipped;
+    private bool _uploadForceAll;
+    private bool _uploadSkipAll;
 
     public int UploadedCount { get; private set; }
 
@@ -360,6 +369,7 @@ public partial class WikiUploadDialog : FluentWindow
         headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto }); // label
         headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }); // autocomplete
         headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto }); // suppress level
+        headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto }); // force all
 
         // Group-level enable checkbox
         var groupEnableCheck = new CheckBox
@@ -421,6 +431,19 @@ public partial class WikiUploadDialog : FluentWindow
         ToolTipService.SetInitialShowDelay(groupSuppressCheck, 0);
         Grid.SetColumn(groupSuppressCheck, 3);
         headerGrid.Children.Add(groupSuppressCheck);
+
+        // Group-level force-overwrite checkbox
+        var forceAllCheck = new CheckBox
+        {
+            Content = "Force All",
+            FontSize = 11,
+            VerticalAlignment = VerticalAlignment.Center,
+            Margin = new Thickness(8, 0, 0, 0),
+            ToolTip = "Force-overwrite all files in this group even if they already exist on the wiki"
+        };
+        ToolTipService.SetInitialShowDelay(forceAllCheck, 0);
+        Grid.SetColumn(forceAllCheck, 4);
+        headerGrid.Children.Add(forceAllCheck);
 
         headerCard.Child = headerGrid;
         uploadRowsPanel.Children.Add(headerCard);
@@ -633,6 +656,24 @@ public partial class WikiUploadDialog : FluentWindow
             foreach (var sr in subRows)
             {
                 if (sr.EnabledCheckBox != null) sr.EnabledCheckBox.IsChecked = false;
+            }
+        };
+
+        // Group-level force-overwrite toggle → sets/clears Force on every sub-row
+        forceAllCheck.Checked += (_, _) =>
+        {
+            foreach (var sr in subRows)
+            {
+                if (sr.ForceCheckBox != null) sr.ForceCheckBox.IsChecked = true;
+                else sr.ForceUpdate = true;
+            }
+        };
+        forceAllCheck.Unchecked += (_, _) =>
+        {
+            foreach (var sr in subRows)
+            {
+                if (sr.ForceCheckBox != null) sr.ForceCheckBox.IsChecked = false;
+                else sr.ForceUpdate = false;
             }
         };
 
@@ -1109,18 +1150,17 @@ public partial class WikiUploadDialog : FluentWindow
         }
 
         btnUpload.IsEnabled = false;
+        btnCancelUpload.Visibility = Visibility.Visible;
         progressBar.Visibility = Visibility.Visible;
         progressBar.Maximum = toUpload.Count;
         progressBar.Value = 0;
 
         _isUploading = true;
-        _uploadCts = new CancellationTokenSource();
-        var ct = _uploadCts.Token;
-
-        int uploaded = 0;
-        int skipped = 0;
-        bool forceAll = false;
-        bool skipAll = false;
+        _uploadIndex = 0;
+        _uploadedLog.Clear();
+        _uploadSkipped = 0;
+        _uploadForceAll = false;
+        _uploadSkipAll = false;
 
         try
         {
@@ -1129,116 +1169,153 @@ public partial class WikiUploadDialog : FluentWindow
                 settings.WikiUsername, settings.WikiPassword);
             var csrfToken = await WikiMappingService.GetCsrfTokenAsync(client);
 
-            for (int idx = 0; idx < toUpload.Count; idx++)
+            bool completed = false;
+            while (!completed)
             {
-                if (ct.IsCancellationRequested) break;
+                _uploadCts = new CancellationTokenSource();
+                completed = await RunUploadLoopAsync(toUpload, client, csrfToken, _uploadCts.Token);
 
-                var row = toUpload[idx];
-                var wikiFilename = row.ResolvedWikiFilename!;
-                int remaining = toUpload.Count - idx - 1;
+                if (completed) break;
 
-                infoBar.Message = $"Uploading {wikiFilename} ({idx + 1}/{toUpload.Count})...";
-                infoBar.Severity = InfoBarSeverity.Informational;
-                infoBar.IsOpen = true;
-                await Task.Yield();
-
-                // Handle conflicts: file already exists on wiki
-                if (row.FileExistsOnWiki && !forceAll && !row.ForceUpdate)
+                // Nothing has actually been uploaded yet (only skips/none) — there is nothing to revert
+                // or resume into, so don't bother the user with the 3-way dialog: just abort + notify.
+                if (_uploadedLog.Count == 0)
                 {
-                    if (skipAll)
-                    {
-                        skipped++;
-                        progressBar.Value = uploaded + skipped;
-                        continue;
-                    }
-
-                    // Show conflict dialog
-                    EnsureWindowVisible(this);
-                    var dlg = new UploadConflictDialog(wikiFilename, remaining, row.FilePath, row.IsPartOfSplit, _main.Settings.WikiUsername)
-                        { Owner = this };
-                    dlg.ShowDialog();
-
-                    switch (dlg.Choice)
-                    {
-                        case UploadConflictChoice.Force:
-                            // Upload this one with force
-                            break;
-                        case UploadConflictChoice.ForceAll:
-                            forceAll = true;
-                            break;
-                        case UploadConflictChoice.Skip:
-                            skipped++;
-                            progressBar.Value = uploaded + skipped;
-                            continue;
-                        case UploadConflictChoice.SkipAll:
-                            skipAll = true;
-                            skipped++;
-                            progressBar.Value = uploaded + skipped;
-                            continue;
-                        default: // Cancel
-                            goto endUpload;
-                    }
-                }
-
-                try
-                {
-                    var fileData = await File.ReadAllBytesAsync(row.FilePath, ct);
-                    bool ignore = forceAll || row.FileExistsOnWiki;
-                    // Set file description page with {{Permission}} license for new uploads
-                    string? description = !row.FileExistsOnWiki ? "{{Permission}}" : null;
-                    await WikiMappingService.UploadFileAsync(client, csrfToken, wikiFilename, fileData,
-                        description: description, ignoreWarnings: ignore);
-                    uploaded++;
-                }
-                catch (WikiMappingService.WikiUploadWarningException)
-                {
-                    // File exists (not yet detected) — force upload
-                    try
-                    {
-                        var fileData = await File.ReadAllBytesAsync(row.FilePath, ct);
-                        await WikiMappingService.UploadFileAsync(client, csrfToken, wikiFilename, fileData,
-                            ignoreWarnings: true);
-                        uploaded++;
-                    }
-                    catch (Exception ex) when (ex.Message.Contains("exact duplicate"))
-                    {
-                        skipped++;
-                    }
-                }
-                catch (OperationCanceledException)
-                {
+                    infoBar.Title = "Upload cancelled";
+                    infoBar.Message = "The upload was interrupted before any image was uploaded.";
+                    infoBar.Severity = InfoBarSeverity.Informational;
+                    infoBar.IsOpen = true;
                     break;
                 }
-                catch (Exception ex) when (ex.Message.Contains("exact duplicate"))
+
+                // Upload was cancelled — ask via a native Wpf.Ui MessageBox (matches the app's other
+                // dialogs e.g. the dump overwrite prompt, and auto-sizes — no FluentWindow height fights).
+                var interruptedFile = _uploadIndex < toUpload.Count
+                    ? toUpload[_uploadIndex].ResolvedWikiFilename
+                    : null;
+
+                // Custom-styled content (varied sizes/colours, left-aligned) inside the MessageBox —
+                // keeps the previous text look while gaining the MessageBox footer + auto-sizing.
+                var cancelContent = new StackPanel();
+                var progressLine = $"{_uploadedLog.Count} of {toUpload.Count} images uploaded.";
+                if (_uploadSkipped > 0) progressLine += $" {_uploadSkipped} skipped (already identical on the wiki).";
+                var tbProgress = new TextBlock
                 {
-                    skipped++;
+                    Text = progressLine,
+                    FontSize = 13,
+                    TextWrapping = TextWrapping.Wrap
+                };
+                tbProgress.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorSecondaryBrush");
+                cancelContent.Children.Add(tbProgress);
+                if (interruptedFile != null)
+                {
+                    var tbInterrupted = new TextBlock
+                    {
+                        Text = $"The current image upload ({interruptedFile}) was interrupted and will be re-uploaded if you continue.",
+                        FontSize = 12,
+                        TextWrapping = TextWrapping.Wrap,
+                        Margin = new Thickness(0, 10, 0, 0)
+                    };
+                    tbInterrupted.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorTertiaryBrush");
+                    cancelContent.Children.Add(tbInterrupted);
                 }
-                progressBar.Value = uploaded + skipped;
+
+                var cancelBox = new Wpf.Ui.Controls.MessageBox
+                {
+                    Title = "Do you really want to cancel the upload?",
+                    Content = cancelContent,
+                    PrimaryButtonText = "Continue",
+                    PrimaryButtonAppearance = Wpf.Ui.Controls.ControlAppearance.Primary,
+                    SecondaryButtonText = "Stop & revert",
+                    SecondaryButtonAppearance = Wpf.Ui.Controls.ControlAppearance.Danger,
+                    CloseButtonText = "Stop",
+                    Owner = this
+                };
+                Wpf.Ui.Appearance.ApplicationThemeManager.Apply(cancelBox);
+                var cancelResult = await cancelBox.ShowDialogAsync();
+
+                if (cancelResult == Wpf.Ui.Controls.MessageBoxResult.Primary)
+                {
+                    // Continue — resume; RunUploadLoopAsync re-uploads the interrupted image because
+                    // _uploadIndex was NOT advanced when the cancellation happened.
+                    continue;
+                }
+
+                if (cancelResult == Wpf.Ui.Controls.MessageBoxResult.Secondary)
+                {
+                    // Stop & revert
+                    var progress = new Progress<string>(m =>
+                    {
+                        infoBar.Message = m;
+                        infoBar.IsOpen = true;
+                    });
+                    var outcome = await WikiMappingService.RevertUploadsAsync(
+                        client, csrfToken, _uploadedLog, progress);
+                    infoBar.Title = "Upload reverted";
+                    if (outcome.Reverted + outcome.Deleted + outcome.Tagged + outcome.Failed == 0
+                        && outcome.Unchanged > 0)
+                    {
+                        // Every "uploaded" file was a byte-identical duplicate — the wiki created no
+                        // new version, so there was genuinely nothing to undo. Not a failure.
+                        infoBar.Message =
+                            $"Nothing to revert — {outcome.Unchanged} upload(s) didn't change anything " +
+                            "(identical to the copy already on the wiki).";
+                        infoBar.Severity = InfoBarSeverity.Informational;
+                    }
+                    else
+                    {
+                        var parts = new List<string>();
+                        if (outcome.Reverted > 0) parts.Add($"reverted {outcome.Reverted}");
+                        if (outcome.Deleted > 0) parts.Add($"deleted {outcome.Deleted}");
+                        if (outcome.Tagged > 0) parts.Add($"tagged {outcome.Tagged} for deletion");
+                        if (outcome.Unchanged > 0) parts.Add($"{outcome.Unchanged} unchanged");
+                        if (outcome.Failed > 0) parts.Add($"{outcome.Failed} failed");
+                        var joined = parts.Count > 0 ? string.Join(", ", parts) : "nothing to revert";
+                        infoBar.Message = char.ToUpper(joined[0]) + joined[1..] + ".";
+                        infoBar.Severity = outcome.Failed > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success;
+                    }
+                    infoBar.IsOpen = true;
+                    _uploadedLog.Clear();
+                }
+                else
+                {
+                    // "Stop" button or X — stop without reverting; keep already-uploaded files.
+                    infoBar.Title = "Upload stopped";
+                    infoBar.Message = $"{_uploadedLog.Count} image(s) uploaded.";
+                    if (_uploadSkipped > 0) infoBar.Message += $" Skipped {_uploadSkipped}.";
+                    infoBar.Severity = InfoBarSeverity.Informational;
+                    infoBar.IsOpen = true;
+                }
+
+                break; // Stop or Revert — exit the while loop
             }
-            endUpload:
 
-            var msg = ct.IsCancellationRequested ? "Upload cancelled. " : "";
-            msg += $"Uploaded {uploaded} images.";
-            if (skipped > 0) msg += $" Skipped {skipped}.";
-            infoBar.Message = msg;
-            infoBar.Severity = ct.IsCancellationRequested ? InfoBarSeverity.Warning : InfoBarSeverity.Success;
-            infoBar.IsOpen = true;
+            if (completed)
+            {
+                // Normal completion — show the usual success summary
+                int uploaded = _uploadedLog.Count;
+                var msg = $"Uploaded {uploaded} images.";
+                if (_uploadSkipped > 0) msg += $" Skipped {_uploadSkipped}.";
+                infoBar.Title = "";
+                infoBar.Message = msg;
+                infoBar.Severity = InfoBarSeverity.Success;
+                infoBar.IsOpen = true;
 
-            UploadedCount = uploaded;
-            if (uploaded > 0)
-                Increment(s => s.WikiImagesUploaded += uploaded);
-        }
-        catch (OperationCanceledException)
-        {
-            var msg = $"Upload cancelled. Uploaded {uploaded} images.";
-            if (skipped > 0) msg += $" Skipped {skipped}.";
-            infoBar.Message = msg;
-            infoBar.Severity = InfoBarSeverity.Warning;
-            infoBar.IsOpen = true;
-            UploadedCount = uploaded;
+                UploadedCount = uploaded;
+                if (uploaded > 0)
+                    Increment(s => s.WikiImagesUploaded += uploaded);
+            }
+            else
+            {
+                // Stopped or reverted — still record UploadedCount so callers know what landed
+                UploadedCount = _uploadedLog.Count;
+                if (_uploadedLog.Count > 0)
+                    Increment(s => s.WikiImagesUploaded += _uploadedLog.Count);
+            }
         }
         catch (Exception ex)
         {
+            infoBar.Title = "";
             infoBar.Message = $"Upload failed: {ex.Message}";
             infoBar.Severity = InfoBarSeverity.Error;
             infoBar.IsOpen = true;
@@ -1246,39 +1323,188 @@ public partial class WikiUploadDialog : FluentWindow
         finally
         {
             _isUploading = false;
+            _uploadCts?.Dispose();
             _uploadCts = null;
+            btnCancelUpload.Visibility = Visibility.Collapsed;
             progressBar.Visibility = Visibility.Collapsed;
             btnUpload.IsEnabled = true;
+
+            // If the window was backgrounded, surface the outcome in the main window and close cleanly.
+            if (_isBackgrounded)
+            {
+                _isBackgrounded = false;
+                _main.HideBackgroundUpload();
+
+                // Build a short outcome message for the main window status bar.
+                string outcomeMsg;
+                if (UploadedCount > 0 || _uploadedLog.Count > 0)
+                {
+                    int n = UploadedCount > 0 ? UploadedCount : _uploadedLog.Count;
+                    outcomeMsg = $"Background upload complete — {n} image(s) uploaded.";
+                    if (_uploadSkipped > 0) outcomeMsg += $" Skipped {_uploadSkipped}.";
+                }
+                else
+                {
+                    outcomeMsg = "Background upload finished (0 images uploaded).";
+                }
+                _main.ShowStatus(outcomeMsg, InfoBarSeverity.Success);
+
+                // Close the now-hidden window for real (_isUploading=false so OnClosing lets it through).
+                Close();
+            }
         }
     }
 
+    /// <summary>
+    /// Executes (or resumes) the per-image upload loop starting at <see cref="_uploadIndex"/>.
+    /// Returns <c>true</c> when all images finish normally; <c>false</c> when cancelled mid-batch.
+    /// On cancellation, <see cref="_uploadIndex"/> is left pointing at the interrupted image so
+    /// a subsequent call re-uploads it — the image is never logged as done unless the upload
+    /// actually completes.
+    /// </summary>
+    private async Task<bool> RunUploadLoopAsync(
+        List<UploadRow> toUpload,
+        HttpClient client,
+        string csrfToken,
+        CancellationToken ct)
+    {
+        for (; _uploadIndex < toUpload.Count; _uploadIndex++)
+        {
+            if (ct.IsCancellationRequested) return false;
+
+            var row = toUpload[_uploadIndex];
+            var wikiFilename = row.ResolvedWikiFilename!;
+            int remaining = toUpload.Count - _uploadIndex - 1;
+
+            _lastProgressText = $"Uploading {wikiFilename} ({_uploadIndex + 1}/{toUpload.Count})...";
+            infoBar.Title = "";
+            infoBar.Message = _lastProgressText;
+            infoBar.Severity = InfoBarSeverity.Informational;
+            infoBar.IsOpen = true;
+            if (_isBackgrounded)
+                _main.UpdateBackgroundUploadProgress(_lastProgressText);
+            await Task.Yield();
+
+            if (ct.IsCancellationRequested) return false;
+
+            // Handle conflicts: file already exists on wiki
+            if (row.FileExistsOnWiki && !_uploadForceAll && !row.ForceUpdate)
+            {
+                if (_uploadSkipAll)
+                {
+                    _uploadSkipped++;
+                    progressBar.Value = _uploadedLog.Count + _uploadSkipped;
+                    continue;
+                }
+
+                // Show conflict dialog
+                EnsureWindowVisible(this);
+                var dlg = new UploadConflictDialog(wikiFilename, remaining, row.FilePath, row.IsPartOfSplit, _main.Settings.WikiUsername)
+                    { Owner = this };
+                dlg.ShowDialog();
+
+                switch (dlg.Choice)
+                {
+                    case UploadConflictChoice.Force:
+                        // Upload this one with force — fall through
+                        break;
+                    case UploadConflictChoice.ForceAll:
+                        _uploadForceAll = true;
+                        break;
+                    case UploadConflictChoice.Skip:
+                        _uploadSkipped++;
+                        progressBar.Value = _uploadedLog.Count + _uploadSkipped;
+                        continue; // advance _uploadIndex via for-loop
+                    case UploadConflictChoice.SkipAll:
+                        _uploadSkipAll = true;
+                        _uploadSkipped++;
+                        progressBar.Value = _uploadedLog.Count + _uploadSkipped;
+                        continue;
+                    default: // Cancel — treat as user-initiated cancel (no CT involved)
+                        return false;
+                }
+            }
+
+            // Perform the actual upload; wrap in try/catch so a mid-image cancel
+            // does NOT advance _uploadIndex and does NOT log the file as done.
+            try
+            {
+                var fileData = await File.ReadAllBytesAsync(row.FilePath, ct);
+                // Honour the per-row / "Force All" checkboxes (row.ForceUpdate) too — previously only the
+                // mid-loop conflict dialog's _uploadForceAll counted, so ticking Force did not force.
+                bool ignore = _uploadForceAll || row.ForceUpdate || row.FileExistsOnWiki;
+                // Set file description page with {{Permission}} license for new uploads
+                string? description = !row.FileExistsOnWiki ? "{{Permission}}" : null;
+                await WikiMappingService.UploadFileAsync(client, csrfToken, wikiFilename, fileData,
+                    description: description, ignoreWarnings: ignore);
+
+                // Only log when fully done — this is what RevertUploadsAsync consumes
+                _uploadedLog.Add(new WikiMappingService.UploadedFile(wikiFilename, row.FileExistsOnWiki));
+            }
+            catch (WikiMappingService.WikiUploadWarningException)
+            {
+                // A warning fired (file exists, duplicate-of-another, was-deleted, …) — force past it.
+                // CRITICAL: log the REAL existed-before state (row.FileExistsOnWiki), NOT a hardcoded true.
+                // A new file can warn (e.g. duplicate-of-another / previously-deleted name); marking it
+                // ExistedBefore=true would make revert call filerevert (no archive → fails) instead of
+                // deleting the new upload. (Root cause of the MaintenanceSupplies01-03 revert failure.)
+                try
+                {
+                    var fileData = await File.ReadAllBytesAsync(row.FilePath, ct);
+                    await WikiMappingService.UploadFileAsync(client, csrfToken, wikiFilename, fileData,
+                        ignoreWarnings: true);
+                    _uploadedLog.Add(new WikiMappingService.UploadedFile(wikiFilename, row.FileExistsOnWiki));
+                }
+                catch (OperationCanceledException)
+                {
+                    return false; // interrupted during the retry — don't advance
+                }
+                catch (Exception ex) when (ex.Message.Contains("exact duplicate"))
+                {
+                    _uploadSkipped++;
+                }
+            }
+            catch (OperationCanceledException)
+            {
+                // Mid-image cancellation: _uploadIndex stays here so the next run re-uploads this image
+                return false;
+            }
+            catch (Exception ex) when (ex.Message.Contains("exact duplicate"))
+            {
+                _uploadSkipped++;
+            }
+
+            progressBar.Value = _uploadedLog.Count + _uploadSkipped;
+        }
+
+        return true; // all images processed
+    }
+
+    private void BtnCancelUpload_Click(object sender, RoutedEventArgs e) => _uploadCts?.Cancel();
+
     private void BtnClose_Click(object sender, RoutedEventArgs e) => Close();
 
-    protected override async void OnClosing(System.ComponentModel.CancelEventArgs e)
+    protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
     {
         if (_isUploading)
         {
+            // Hide the window and show a sidebar progress widget instead of cancelling.
             e.Cancel = true;
-            var msgBox = new Wpf.Ui.Controls.MessageBox
-            {
-                Title = "Upload in progress",
-                Content = "An upload is currently in progress. Do you want to cancel it?",
-                PrimaryButtonText = "Cancel Upload",
-                CloseButtonText = "Continue Uploading",
-                MinWidth = 400,
-                Owner = this
-            };
-            ApplicationThemeManager.Apply(msgBox);
-            var result = await msgBox.ShowDialogAsync();
-            if (result == Wpf.Ui.Controls.MessageBoxResult.Primary)
-            {
-                _uploadCts?.Cancel();
-                _isUploading = false;
-                Close();
-            }
+            _isBackgrounded = true;
+            Hide();
+            _main.ShowBackgroundUpload(this, _lastProgressText);
             return;
         }
         base.OnClosing(e);
+    }
+
+    protected override void OnActivated(EventArgs e)
+    {
+        base.OnActivated(e);
+        // When the window is shown again by MainWindow.BtnReopenUpload_Click, re-attach
+        // progress updates to the in-dialog UI instead of the sidebar widget.
+        if (_isBackgrounded)
+            _isBackgrounded = false;
     }
 
     private static void EnsureWindowVisible(Window? window)

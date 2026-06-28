@@ -1,0 +1,41 @@
+<ui:FluentWindow x:Class="MergeMansionWikiTools.Views.SectionPickerDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        Title="Choose Section" Height="240" Width="460"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <ui:TitleBar Grid.Row="0" Title="Choose Section" Height="36" />
+
+        <Grid Grid.Row="1" Margin="24,12,24,18">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" FontSize="14" FontWeight="SemiBold" TextWrapping="Wrap"
+                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                       Text="No 'Rewards' or 'Progress Bar' section found." />
+            <TextBlock Grid.Row="1" FontSize="12" TextWrapping="Wrap" Margin="0,4,0,12"
+                       Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                       Text="Choose the section to insert the Garage Cleanup section after:" />
+
+            <ComboBox x:Name="cmbSections" Grid.Row="2" VerticalAlignment="Top"
+                      HorizontalAlignment="Stretch" />
+
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+                <ui:Button Content="Insert" Appearance="Primary" Click="BtnOk_Click" Margin="0,0,8,0" />
+                <ui:Button Content="Cancel" Appearance="Secondary" Click="BtnCancel_Click" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</ui:FluentWindow>

@@ -213,6 +213,8 @@ public partial class ImageOptimiserPage
                 splitButtonGroup.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
                 refreshButtonGroup.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
                 btnToggleRects.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+                btnAspectRatio.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+                UpdateAspectRatioButton();
                 RebuildThumbnailStrip();
             }
         }

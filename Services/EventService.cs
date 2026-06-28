@@ -88,6 +88,7 @@ public class EventService
                 EventId = eventId,
                 DisplayName = displayName,
                 ChainPrefix = eventId + "_",
+                PrefabsOverride = GetString(board, "PrefabsOverride"),
                 StartDate = startDate,
                 Duration = duration,
                 BoardItemTypes = boardItems,

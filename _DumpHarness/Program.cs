@@ -103,6 +103,37 @@ internal static class Program
             return ProbeBoard(args[1], args[2], args.Length >= 4 ? args[3] : "");
         }
 
+        if (args.Length >= 2 && args[0] == "--probe-createdat")
+        {
+            // --probe-createdat <C dir>  — read each archive's header CreatedAt WITHOUT
+            // MetaplayCore.Initialize, to prove the selection can run during Pull from Phone
+            // (which may happen before any dump has initialized Metaplay).
+            foreach (var f in Directory.GetFiles(args[1]).OrderBy(x => x))
+            {
+                try
+                {
+                    var a = Metaplay.Core.Config.ConfigArchive.FromBytes(File.ReadAllBytes(f));
+                    var dt = DateTimeOffset.FromUnixTimeMilliseconds(a.CreatedAt.MillisecondsSinceEpoch);
+                    Console.WriteLine($"{Path.GetFileName(f)}  CreatedAt={dt:yyyy-MM-dd HH:mm:ss}Z  (NO init)");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"{Path.GetFileName(f)}  FAILED (no init): {ex.GetType().Name}: {ex.Message}");
+                }
+            }
+            return 0;
+        }
+
+        if (args.Length >= 3 && args[0] == "--probe-schedule")
+        {
+            // --probe-schedule <C dir (or single config file)> <eventIdSubstring>
+            // For every config archive: print archive.CreatedAt (header) + for each matching
+            // CollectibleBoardEvent the full schedule incl. Recurrence/NumRepeats (the two
+            // MetaMembers the JSON dump drops). Proves data integrity (newest archive) and
+            // whether a config-level recurrence drives re-airings.
+            return ProbeSchedule(args[1], args[2]);
+        }
+
         if (args.Length < 3)
         {
             Console.Error.WriteLine("Usage: DumpHarness <configPath> <languagePath> <outputDir>");
@@ -402,53 +433,65 @@ internal static class Program
                     patchFiles.Add(patchPath);
 
                 Console.WriteLine($"[5] Loading {patchFiles.Count} patch file(s)...");
-                // Equal-mtime dedup fix (mirror DumperService): fresh pull writes all snapshots with
-                // the same mtime → "last write wins" is non-deterministic and can clobber the complete
-                // patch with a stale stub. Keep the RICHEST payload (largest raw bytes) per label;
-                // tiebreak newer mtime. See memory/dumper-equal-mtime-dedup-bug.md.
-                var merged = new Dictionary<string, (Metaplay.Core.Player.PlayerExperimentId, Metaplay.Core.Player.ExperimentVariantId, Metaplay.Core.Config.GameConfigPatchEnvelope, int RawSize, DateTime Mtime)>(StringComparer.Ordinal);
+                // Keep EVERY distinct-content version of each label (2026-06-26, mirrors DumperService fix).
+                // Dedup key = (label, SHA-256 of raw bytes) — byte-identical copies across snapshots collapse.
+                // The same label can appear in multiple snapshots with DIFFERENT content; the old
+                // "richer payload wins" heuristic silently dropped the smaller version even when it was the
+                // only one changing a specific event. Now all distinct versions survive with unique subfolders:
+                // primary (largest raw size) → bare label; extras → label__v2, label__v3, …
+                var distinctPatches = new Dictionary<string, (Metaplay.Core.Player.PlayerExperimentId ExpId, Metaplay.Core.Player.ExperimentVariantId VarId, byte[] RawBytes, Metaplay.Core.Config.GameConfigPatchEnvelope Envelope, int RawSize)>(StringComparer.Ordinal);
                 foreach (var pf in patchFiles)
                 {
-                    var mtime = File.GetLastWriteTimeUtc(pf);
                     var specPatches = Metaplay.Core.Config.GameConfigSpecializationPatches.FromBytes(File.ReadAllBytes(pf));
                     foreach (var (expId, vs) in specPatches.Patches)
                         foreach (var (varId, bytes) in vs)
                         {
                             var label = $"{expId}_{varId}";
-                            int rawSize = bytes?.Length ?? 0;
-                            if (merged.TryGetValue(label, out var prev))
+                            var actualBytes = bytes ?? Array.Empty<byte>();
+                            var hashHex = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(actualBytes));
+                            var dedupKey = $"{label}\0{hashHex}";
+                            if (!distinctPatches.ContainsKey(dedupKey))
                             {
-                                bool replace = rawSize > prev.RawSize || (rawSize == prev.RawSize && mtime > prev.Mtime);
-                                if (!replace) continue;
-                                if (rawSize != prev.RawSize)
-                                    Console.WriteLine($"        [dedup] {label}: richer payload {rawSize} B > {prev.RawSize} B wins");
+                                distinctPatches[dedupKey] = (expId, varId, actualBytes, Metaplay.Core.Config.GameConfigPatchEnvelope.Deserialize(actualBytes), actualBytes.Length);
+                                Console.WriteLine($"        [distinct] {label}: {actualBytes.Length} B [{hashHex[..8]}] from {Path.GetFileName(pf)}");
                             }
-                            merged[label] = (expId, varId, Metaplay.Core.Config.GameConfigPatchEnvelope.Deserialize(bytes), rawSize, mtime);
                         }
                 }
-                var configPatches = merged.Values.Select(v => (v.Item1, v.Item2, v.Item3)).ToArray();
-                Console.WriteLine($"        Found {configPatches.Length} unique patches across {patchFiles.Count} file(s)");
 
-                foreach (var (expId, varId, env) in configPatches)
+                // Group per label, assign folder names.
+                var byLabel = distinctPatches.Values
+                    .GroupBy(v => $"{v.ExpId}_{v.VarId}", StringComparer.Ordinal)
+                    .ToDictionary(g => g.Key, g => g.OrderByDescending(v => v.RawSize).ToList(), StringComparer.Ordinal);
+
+                int totalDistinct = byLabel.Values.Sum(v => v.Count);
+                Console.WriteLine($"        Found {totalDistinct} distinct patch version(s), {byLabel.Count} unique label(s) across {patchFiles.Count} file(s)");
+                foreach (var (lbl, vs) in byLabel.Where(kv => kv.Value.Count > 1))
+                    Console.WriteLine($"        [multi-version] {lbl}: {vs.Count} versions — folders: {lbl}, {string.Join(", ", Enumerable.Range(2, vs.Count - 1).Select(i => $"{lbl}__v{i}"))}");
+
+                // Build flat list with folder labels assigned.
+                var configPatches = byLabel
+                    .SelectMany(kv => kv.Value.Select((v, i) => (ExpId: v.ExpId, VarId: v.VarId, Env: v.Envelope, FolderLabel: i == 0 ? kv.Key : $"{kv.Key}__v{i + 1}")))
+                    .ToArray();
+
+                foreach (var (expId, varId, env, folderLabel) in configPatches)
                 {
-                    var label = $"{expId}_{varId}";
                     var entries = env.EntryNames.ToArray();
-                    Console.WriteLine($"  Patch {label}: entries=[{string.Join(",", entries)}]");
+                    Console.WriteLine($"  Patch {folderLabel}: entries=[{string.Join(",", entries)}]");
 
                     var pa = new PatchedConfigArchive(archive, new[] { env });
                     try
                     {
                         var patchedConfig = SharedGameConfig.ImportPatchedFrom(masterConfig, pa, entries);
-                        var subDir = Path.Combine(outputDir, label);
+                        var subDir = Path.Combine(outputDir, folderLabel);
                         Directory.CreateDirectory(subDir);
                         var subPath = Path.Combine(subDir, "events.json");
                         new EventDumper().WriteJson(subPath, patchedConfig);
                         var size = new FileInfo(subPath).Length / 1024;
-                        Console.WriteLine($"     -> {label}/events.json OK ({size} KB)");
+                        Console.WriteLine($"     -> {folderLabel}/events.json OK ({size} KB)");
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"     !! {label} FAILED: {ex.GetType().Name}: {ex.Message}");
+                        Console.WriteLine($"     !! {folderLabel} FAILED: {ex.GetType().Name}: {ex.Message}");
                         // Walk full exception chain + print full stack traces
                         var e = ex;
                         int depth = 0;
@@ -498,6 +541,116 @@ internal static class Program
             Console.Error.WriteLine(ex.StackTrace);
             return 1;
         }
+    }
+
+    // ── --probe-schedule: per config archive in C/, print CreatedAt + matching CBE schedules ──
+    private static int ProbeSchedule(string cDirOrFile, string substr)
+    {
+        var files = new List<string>();
+        if (Directory.Exists(cDirOrFile)) files.AddRange(Directory.GetFiles(cDirOrFile).OrderBy(f => f));
+        else if (File.Exists(cDirOrFile)) files.Add(cDirOrFile);
+        if (files.Count == 0) { Console.Error.WriteLine($"No config files at {cDirOrFile}"); return 2; }
+
+        Console.WriteLine($"=== --probe-schedule (substr='{substr}') over {files.Count} archive(s) ===\n");
+        try
+        {
+            MetaplayCore.Initialize();
+
+            (string File, DateTimeOffset? CreatedAt) newest = (null, null);
+            foreach (var f in files)
+            {
+                var name = Path.GetFileName(f);
+                DateTimeOffset? createdAt = null;
+                Metaplay.Core.Config.ConfigArchive archive = null;
+                try
+                {
+                    var bytes = File.ReadAllBytes(f);
+                    archive = Metaplay.Core.Config.ConfigArchive.FromBytes(bytes);
+                    createdAt = DateTimeOffset.FromUnixTimeMilliseconds(archive.CreatedAt.MillisecondsSinceEpoch);
+                }
+                catch (Exception ex) { Console.WriteLine($"[{name}] header read FAILED: {ex.Message}"); continue; }
+
+                if (createdAt.HasValue && (newest.CreatedAt == null || createdAt > newest.CreatedAt))
+                    newest = (name, createdAt);
+
+                Console.WriteLine($"### Archive {name}");
+                Console.WriteLine($"    CreatedAt (header) = {createdAt:yyyy-MM-dd HH:mm:ss} UTC   entries={archive.Entries.Count}");
+
+                GameLogic.Config.SharedGameConfig cfg;
+                try
+                {
+                    var pa = Metaplay.Core.Config.PatchedConfigArchive.WithNoPatches(archive);
+                    cfg = (GameLogic.Config.SharedGameConfig)Metaplay.Core.Config.GameConfigFactory.Instance.ImportSharedGameConfig(pa);
+                    ClientGlobal.SharedGameConfig = cfg;
+                }
+                catch (Exception ex) { Console.WriteLine($"    import FAILED: {ex.GetType().Name}: {ex.Message}\n"); continue; }
+
+                int hits = 0;
+                foreach (var kv in cfg.CollectibleBoardEvents.EnumerateAll())
+                {
+                    var key = kv.Key.ToString();
+                    if (!string.IsNullOrEmpty(substr) && key.IndexOf(substr, StringComparison.OrdinalIgnoreCase) < 0) continue;
+                    hits++;
+                    var info = kv.Value;
+                    var ap = GetMember(info, "ActivableParams");
+                    var isEnabled = GetMember(ap, "IsEnabled");
+                    var allowAdj = GetMember(ap, "AllowActivationAdjustment");
+                    var sched = GetMember(ap, "Schedule");
+                    Console.WriteLine($"    • {key}");
+                    Console.WriteLine($"        IsEnabled={isEnabled}  AllowActivationAdjustment={allowAdj}  Schedule={sched?.GetType().Name ?? "null"}");
+                    if (sched != null)
+                    {
+                        foreach (var prop in new[] { "Start", "Duration", "EndingSoon", "Preview", "Review", "Recurrence", "NumRepeats", "TimeMode" })
+                        {
+                            var v = GetMember(sched, prop);
+                            Console.WriteLine($"        {prop,-12} = {Describe(v)}");
+                        }
+                    }
+                }
+                if (hits == 0) Console.WriteLine($"    (no CollectibleBoardEvent matching '{substr}')");
+                Console.WriteLine();
+            }
+
+            Console.WriteLine($"=== NEWEST archive by header CreatedAt: {newest.File}  @ {newest.CreatedAt:yyyy-MM-dd HH:mm:ss} UTC ===");
+            return 0;
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"FATAL: {ex.GetType().Name}: {ex.Message}\n{ex.StackTrace}");
+            return 1;
+        }
+    }
+
+    /// <summary>Read a public property or field by name via reflection (handles both kinds).</summary>
+    private static object GetMember(object obj, string name)
+    {
+        if (obj == null) return null;
+        var t = obj.GetType();
+        var p = t.GetProperty(name, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+        if (p != null) { try { return p.GetValue(obj); } catch { return "<err>"; } }
+        var fld = t.GetField(name, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+        if (fld != null) { try { return fld.GetValue(obj); } catch { return "<err>"; } }
+        return null;
+    }
+
+    /// <summary>Stringify a calendar value (MetaCalendarDateTime/Period) by reflecting its non-zero parts.</summary>
+    private static string Describe(object v)
+    {
+        if (v == null) return "null";
+        var t = v.GetType();
+        if (t.IsPrimitive || v is string || v is Enum) return v.ToString();
+        var parts = new List<string>();
+        foreach (var p in t.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance))
+        {
+            if (p.GetIndexParameters().Length > 0) continue;
+            object val; try { val = p.GetValue(v); } catch { continue; }
+            if (val == null) continue;
+            if (val is int iv && iv == 0) continue;
+            if (val.GetType().IsPrimitive || val is string || val is Enum)
+                parts.Add($"{p.Name}={val}");
+        }
+        var s = string.Join(" ", parts);
+        return string.IsNullOrEmpty(s) ? $"<{t.Name}:{v}>" : $"{t.Name}({s})";
     }
 
     private static int ProbeBubble(string dataDir, string itemPrefix, string languagePath)

@@ -843,17 +843,22 @@ public class DataService
     /// </summary>
     public string ResolveChainDisplayNameFromItemType(string itemType, WikiMappingCache? wikiMapping)
     {
-        // Wiki mapping has highest priority (after custom)
-        if (wikiMapping != null &&
-            wikiMapping.Mappings.TryGetValue(itemType, out var entry) &&
-            !string.IsNullOrEmpty(entry.ChainName))
+        var chainKey = ResolveChainKeyFromItemType(itemType);
+
+        // Module:Datatable/Items/Mapping (multinameMappings, cached in wikiMapping) disambiguates chains whose
+        // game name collides with another item — e.g. "Batteries" → "Batteries (Flashback Rewind 2025)". Its
+        // keys are the chain ConfigKey (e.g. "CBE_Flashback2025_Battery_01") OR a specific item id, so check
+        // the resolved chainKey FIRST (covers reward/grid items carrying a level suffix), then the raw item id.
+        // The mapped chainName wins over the game's raw chain name (after a custom-name override).
+        if (wikiMapping != null
+            && ((wikiMapping.Mappings.TryGetValue(chainKey, out var entry)
+                    || wikiMapping.Mappings.TryGetValue(itemType, out entry))
+                && !string.IsNullOrEmpty(entry.ChainName)))
         {
-            var ck = ResolveChainKeyFromItemType(itemType);
-            var custom = _nameService.GetCustomName(ck);
+            var custom = _nameService.GetCustomName(chainKey);
             return !string.IsNullOrEmpty(custom) ? custom : entry.ChainName;
         }
 
-        var chainKey = ResolveChainKeyFromItemType(itemType);
         return ResolveChainDisplayName(chainKey);
     }
 

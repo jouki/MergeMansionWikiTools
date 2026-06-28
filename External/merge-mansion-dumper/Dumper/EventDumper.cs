@@ -4,14 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.GameLogic.GameEvents;
+using Code.GameLogic.GameEvents.CardCollectionSupportingEvent;
 using Code.GameLogic.GameEvents.SoloMilestone;
 using GameLogic.Config;
+using GameLogic.MixABooster;
 using merge_mansion_dumper.Dumper.Base;
 using merge_mansion_dumper.Dumper.Json;
 using Metaplay.Core.Localization;
 using Metaplay.Unity;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 
 namespace merge_mansion_dumper.Dumper
 {
@@ -24,6 +27,7 @@ namespace merge_mansion_dumper.Dumper
         Seasonal = 1 << 2,
         ReArchaeology = 1 << 3,
         HorizonsCup = 1 << 4,
+        MixABooster = 1 << 5,
         RollTheDice = 1 << 6,
         GarageCleanup = 1 << 7,
         Mysteries = 1 << 8,
@@ -35,7 +39,7 @@ namespace merge_mansion_dumper.Dumper
         Others = 1 << 14,
         SoloMilestone = 1 << 15,
         All = LuckyCatch | LuckySnap | Seasonal | ReArchaeology | HorizonsCup
-            | RollTheDice | GarageCleanup | Mysteries | BoultonLeague
+            | MixABooster | RollTheDice | GarageCleanup | Mysteries | BoultonLeague
             | Legacy | Uncategorised | BakeOff | Bonanza | Others
             | SoloMilestone
     }
@@ -99,8 +103,8 @@ namespace merge_mansion_dumper.Dumper
                     return new Dictionary<string, object>
                     {
                         ["ConfigKey"] = evt.ConfigKey?.ToString(),
-                        ["DisplayName"] = Localize(evt.DisplayName) ?? evt.DisplayName,
-                        ["DisplayNameLocId"] = evt.DisplayName,
+                        ["Name"] = Localize(evt.DisplayName) ?? evt.DisplayName,
+                        ["NameLocId"] = evt.DisplayName,
                         ["Description"] = Localize(evt.Description) ?? evt.Description,
                         ["DescriptionLocId"] = evt.Description,
                         ["ActivableParams"] = evt.ActivableParams,
@@ -123,6 +127,27 @@ namespace merge_mansion_dumper.Dumper
                 .Select(x => BuildProgressionPackPayload((GameLogic.ProgressivePacks.ProgressionPack)x.Value))
                 .ToArray() ?? Array.Empty<object>();
 
+            // CardCollectionSupportingEvents ("Clue Rush") — weekly CC supporting event. Not under
+            // any *Event filter; always exported so the event schedule can surface it. Per-event
+            // NameLocId ("CCSE_1") and DisplayName ("CCSE XL Boom") are internal stubs — the real
+            // UI title is the shared loc key "CCSE_title" → "Clue Rush".
+            events["CardCollectionSupportingEvents"] = config.CardCollectionSupportingEvents?.EnumerateAll()
+                .Select(x =>
+                {
+                    var evt = (CardCollectionSupportingEventInfo)x.Value;
+                    return new Dictionary<string, object>
+                    {
+                        ["ConfigKey"] = evt.ConfigKey?.ToString(),
+                        ["Name"] = Localize(evt.NameLocId) ?? Localize("CCSE_title") ?? evt.DisplayName,
+                        ["NameLocId"] = evt.NameLocId,
+                        ["Description"] = evt.Description,
+                        ["ActivableParams"] = evt.ActivableParams,
+                        ["CategoryInfo"] = evt.CategoryInfo,
+                        ["GroupId"] = evt.GroupId?.ToString(),
+                        ["Priority"] = evt.Priority,
+                    };
+                }).ToArray() ?? Array.Empty<object>();
+
             // GarageCleanups → GarageCleanup filter.
             // PrefabsOverride ([MetaMember] private, ≈ the event's badge prefab) is already
             // serialized by the default resolver, so no extra projection is needed here.
@@ -134,11 +159,56 @@ namespace merge_mansion_dumper.Dumper
             // resolver if set, but they are null for every current CSE event, so nothing to add.
             if (HasAnyFlag(EventFilters.ReArchaeology | EventFilters.HorizonsCup | EventFilters.RollTheDice | EventFilters.Uncategorised))
             {
-                var filtered = config.CoreSupportEvents?.EnumerateAll()
-                    .Where(x => MatchesCoreFilter(x.Key.ToString()))
-                    .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
-                if (filtered.Length > 0)
-                    events["CoreSupportEvents"] = filtered;
+                // Some CoreSupportEvents carry an internal dev stub in DisplayName ("Re-Archeology",
+                // "Classic Races") that is NOT a loc key. The real localized title lives under
+                // `{base}_Name`, where {base} is the ConfigKey without its trailing round number
+                // (CR_Sailing_06 → CR_Sailing_Name → "Hopewell Bay Horizons Cup"). DigEvents share a
+                // single generic title across their per-round biome themes (DE_StoneAge_Name etc. do
+                // NOT exist), so they fall back to DE_Generic_Name → "Maddie's Re-Archaeology".
+                // The resolved title is emitted as "Name" (consistent with the other event types);
+                // the raw config DisplayName stub is dropped from output. Field order: ConfigKey, Name, Description, ...
+                var serializer = JsonSerializer.Create(CreateSettings(config));
+
+                var coreEvents = (config.CoreSupportEvents?.EnumerateAll()
+                        .Where(x => MatchesCoreFilter(x.Key.ToString()))
+                        .Select(x => x.Value as CoreSupportEventInfo) ?? Enumerable.Empty<CoreSupportEventInfo>())
+                    .Where(evt => evt != null)
+                    .Select(evt =>
+                    {
+                        var raw = evt.DisplayName;
+                        var resolved = raw;
+                        if (evt.EventType == CoreSupportEventType.DigEvent
+                            || evt.EventType == CoreSupportEventType.ClassicRaces)
+                        {
+                            var ck = evt.ConfigKey?.ToString() ?? "";
+                            var us = ck.LastIndexOf('_');
+                            var baseKey = (us > 0 && ck.Substring(us + 1).All(char.IsDigit))
+                                ? ck.Substring(0, us) : ck;
+
+                            var localized = (baseKey.Length > 0 ? Localize($"{baseKey}_Name") : null)
+                                ?? (evt.EventType == CoreSupportEventType.DigEvent ? Localize("DE_Generic_Name") : null);
+                            if (!string.IsNullOrEmpty(localized))
+                                resolved = localized;
+                        }
+
+                        // Serialize with the dump's own settings to preserve every field + nested
+                        // shapes, then re-emit with the localized title in "Name" (consistent with
+                        // the other event types). The raw config DisplayName stub is dropped from
+                        // output — it is still read above for the DigEvent/ClassicRaces resolution.
+                        var jo = JObject.FromObject(evt, serializer);
+                        var ordered = new JObject();
+                        if (jo["ConfigKey"] != null) ordered["ConfigKey"] = jo["ConfigKey"];
+                        ordered["Name"] = resolved;
+                        if (jo["Description"] != null) ordered["Description"] = jo["Description"];
+                        foreach (var prop in jo.Properties())
+                            if (prop.Name != "DisplayName" && ordered[prop.Name] == null)
+                                ordered[prop.Name] = prop.Value;
+                        return (object)ordered;
+                    })
+                    .ToArray();
+
+                if (coreEvents.Length > 0)
+                    events["CoreSupportEvents"] = coreEvents;
             }
 
             // BoultonLeague
@@ -151,7 +221,7 @@ namespace merge_mansion_dumper.Dumper
                     {
                         ["EventId"] = evt.EventId?.ToString(),
                         ["NameLocId"] = evt.NameLocId,
-                        ["DisplayName"] = Localize(evt.NameLocId) ?? evt.DisplayName,
+                        ["Name"] = Localize(evt.NameLocId) ?? evt.DisplayName,
                         ["Description"] = evt.Description,
                         ["ActivableParams"] = evt.ActivableParams,
                         ["CategoryInfo"] = evt.CategoryInfo,
@@ -169,7 +239,7 @@ namespace merge_mansion_dumper.Dumper
                     {
                         ["StageId"] = stage.StageId?.ToString(),
                         ["NameLocId"] = stage.NameLocId,
-                        ["DisplayName"] = Localize(stage.NameLocId),
+                        ["Name"] = Localize(stage.NameLocId),
                         ["DemotionScoreThreshold"] = stage.DemotionScoreThreshold,
                         ["PromotionScoreThreshold"] = stage.PromotionScoreThreshold,
                         ["FinishReward"] = stage.FinishReward,
@@ -232,7 +302,7 @@ namespace merge_mansion_dumper.Dumper
                         {
                             ["ConfigKey"] = evt.ConfigKey?.ToString(),
                             ["NameLocId"] = evt.NameLocId,
-                            ["DisplayName"] = Localize(evt.NameLocId) ?? evt.DisplayName,
+                            ["Name"] = Localize(evt.NameLocId) ?? evt.DisplayName,
                             ["Description"] = evt.Description,
                             ["ActivableParams"] = evt.ActivableParams,
                             ["CategoryInfo"] = evt.CategoryInfo,
@@ -259,6 +329,78 @@ namespace merge_mansion_dumper.Dumper
                             ["RewardSegment"] = ms.RewardSegment?.Select(s => s?.ToString()).ToArray(),
                         };
                     }).ToArray() ?? Array.Empty<object>();
+            }
+
+            // MixABooster (Mix and Booster) events — a CoreSupport-style event where the player
+            // collects ingredients, mixes them in recipes, and earns rewards.
+            // Three libraries are exported together, all gated on the same flag:
+            //   MixABoosterEvents   — per-event metadata (schedule, initial ingredients, recipe refs)
+            //   MixABoosterRecipes  — recipe definitions (required ingredients + reward + secret flag)
+            //   MixABoosterIngredients — ingredient definitions (cost only)
+            // RecipeRefs is private on MixABoosterEventInfo; the public Recipes property exposes
+            // the resolved MixABoosterRecipe objects. RequiredIngredients is private on
+            // MixABoosterRecipe; the public IngredientIds property (Dictionary<Id,int>) exposes it.
+            if (_filters.HasFlag(EventFilters.MixABooster))
+            {
+                events["MixABoosterEvents"] = config.MixABoosterEvents?.EnumerateAll().Select(x =>
+                {
+                    var evt = (MixABoosterEventInfo)x.Value;
+                    // The game localises this as "Mix A Booster event"; normalise to the canonical
+                    // display name "Mix a Booster" (drop the " event" suffix + lowercase the article).
+                    var mbName = Localize(evt.DisplayName) ?? evt.DisplayName;
+                    if (!string.IsNullOrEmpty(mbName))
+                        mbName = mbName.Replace(" event", "", StringComparison.OrdinalIgnoreCase)
+                                       .Replace("Mix A Booster", "Mix a Booster");
+                    return new Dictionary<string, object>
+                    {
+                        ["ConfigKey"] = evt.ConfigKey?.ToString(),
+                        ["Name"] = mbName,
+                        ["Description"] = Localize(evt.Description) ?? evt.Description,
+                        ["ActivableParams"] = evt.ActivableParams,
+                        ["CategoryInfo"] = evt.CategoryInfo,
+                        ["UnlockRequirement"] = evt.UnlockRequirement,
+                        ["PlacementId"] = evt.PlacementId?.ToString(),
+                        // The event config carries NO icon/prefab reference (unlike seasonal CBEs). The
+                        // event badge is the generic Mix a Booster asset, identical for every run, so we
+                        // hardcode the addressable handle here — the schedule data then carries it
+                        // (BadgeField "AssetOverride" in EventScheduleService) instead of forcing a blind
+                        // asset-bundle hunt. File: MAB_MHB_Generic.png (events/mixabooster/mab_generic).
+                        ["AssetOverride"] = "MAB_MHB_Generic",
+                        ["InitialIngredients"] = evt.InitialIngredients?
+                            .ToDictionary(kv => kv.Key?.ToString(), kv => (object)kv.Value),
+                        ["Recipes"] = evt.Recipes?.Select(r => new Dictionary<string, object>
+                        {
+                            ["ConfigKey"] = r.ConfigKey?.ToString(),
+                            ["RequiredIngredients"] = r.IngredientIds?
+                                .ToDictionary(kv => kv.Key?.ToString(), kv => (object)kv.Value),
+                            ["Reward"] = r.Reward,
+                            ["IsSecret"] = r.IsSecret,
+                        }).ToArray(),
+                    };
+                }).ToArray() ?? Array.Empty<object>();
+
+                events["MixABoosterRecipes"] = config.MixABoosterRecipes?.EnumerateAll().Select(x =>
+                {
+                    var r = (MixABoosterRecipe)x.Value;
+                    return new Dictionary<string, object>
+                    {
+                        ["ConfigKey"] = r.ConfigKey?.ToString(),
+                        ["RequiredIngredients"] = r.IngredientIds?
+                            .ToDictionary(kv => kv.Key?.ToString(), kv => (object)kv.Value),
+                        ["Reward"] = r.Reward,
+                        ["IsSecret"] = r.IsSecret,
+                    };
+                }).ToArray() ?? Array.Empty<object>();
+
+                events["MixABoosterIngredients"] = config.MixABoosterIngredients?.EnumerateAll().Select(x =>
+                {
+                    var ing = (MixABoosterIngredient)x.Value;
+                    return new Dictionary<string, object>
+                    {
+                        ["ConfigKey"] = ing.ConfigKey?.ToString(),
+                        ["Cost"] = ing.Cost,
+                    };
+                }).ToArray() ?? Array.Empty<object>();
             }
 
             return events;

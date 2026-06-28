@@ -301,6 +301,8 @@ public partial class ImageOptimiserPage
             splitButtonGroup.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
             refreshButtonGroup.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
             btnToggleRects.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+            btnAspectRatio.Visibility = anyScissors ? Visibility.Visible : Visibility.Collapsed;
+            UpdateAspectRatioButton();
             UpdatePredictButtonVisibility();
             UpdatePreviewMargins();
         }
@@ -323,6 +325,51 @@ public partial class ImageOptimiserPage
     {
         _overlayVisMode = (_overlayVisMode + 1) % 3;
         ApplyOverlayVisibility();
+    }
+
+    /// <summary>Toggles the selected image's output aspect-ratio mode: 1:1 square canvas (default) vs.
+    /// keeping the crop's original aspect ratio. Per-image; new images always start at 1:1.</summary>
+    private void BtnAspectRatio_Click(object sender, RoutedEventArgs e)
+    {
+        if (_selectedImage == null) return;
+        _selectedImage.KeepAspectRatio = !_selectedImage.KeepAspectRatio;
+        UpdateAspectRatioButton();
+    }
+
+    /// <summary>Reflects the selected image's <see cref="OptimiserImage.KeepAspectRatio"/> on the toggle:
+    /// "1:1" (square canvas) or the image's actual reduced integer ratio (keep original). Highlights
+    /// the non-default state.</summary>
+    private void UpdateAspectRatioButton()
+    {
+        bool keep = _selectedImage?.KeepAspectRatio == true;
+        txtAspectRatio.Text = keep ? RatioLabelFor(_selectedImage!) : "1:1";
+        btnAspectRatio.ToolTip = keep
+            ? "Keeping original aspect ratio (no 1:1 canvas). Click for 1:1 square output."
+            : "Output canvas: 1:1 square (default). Click to keep the original aspect ratio instead.";
+        // Highlight the non-default (keep-AR) state in gold, matching the active-toggle convention.
+        if (keep) txtAspectRatio.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0xFF, 0xD7, 0x00));
+        else txtAspectRatio.ClearValue(ForegroundProperty);
+    }
+
+    /// <summary>The image's aspect ratio reduced to smallest integers ("16:9", "4:3", …). Reads the source
+    /// dimensions once (header-only via Image.Identify) and caches them. Falls back to "AR" if unreadable.</summary>
+    private static string RatioLabelFor(OptimiserImage oi)
+    {
+        if (oi.Dimensions == null)
+        {
+            try { var info = Image.Identify(oi.FilePath); oi.Dimensions = (info.Width, info.Height); }
+            catch { return "AR"; }
+        }
+        var (w, h) = oi.Dimensions.Value;
+        if (w <= 0 || h <= 0) return "AR";
+        int g = Gcd(w, h);
+        return $"{w / g}:{h / g}";
+    }
+
+    private static int Gcd(int a, int b)
+    {
+        while (b != 0) { (a, b) = (b, a % b); }
+        return a == 0 ? 1 : a;
     }
 
     private void ApplyOverlayVisibility()

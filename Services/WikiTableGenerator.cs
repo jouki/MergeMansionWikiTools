@@ -2066,8 +2066,11 @@ public class WikiTableGenerator
         string subject = isMulti
             ? $"{{{{Item/Group|{nameRef}|{maxLevel}{displayNameSuffix}}}}}"
             : $"{{{{Item|{nameRef}{displayNameSuffix}}}}}";
-        string verb = isMulti ? "are items" : "is an item";
-        string usedPronoun = isMulti ? "They are" : "It is";
+        // Verb + pronoun are always singular — the chain is referred to as one item type
+        // regardless of level count ("Tools is an item ... It is used"). The subject template
+        // (Item/Group vs Item) still varies by level count; only the grammatical number is fixed.
+        const string verb = "is an item";
+        const string usedPronoun = "It is";
 
         // Classify chain — event chain takes precedence (event items are temporary by definition
         // but the event sentence is more specific).
@@ -2079,8 +2082,7 @@ public class WikiTableGenerator
         }
         else if (chain.Items.Any(i => i.IsTemporary) && areas != null)
         {
-            var chainItemTypes = chain.Items.Select(i => i.ItemType).Where(t => !string.IsNullOrEmpty(t)).ToList();
-            var matchingAreas = AreasService.FindAreasRequiringChain(chainItemTypes!, areas);
+            var matchingAreas = AreasService.FindAreasForTemporaryChain(chain, areas);
             if (matchingAreas.Count > 0)
             {
                 var areaRefs = string.Join(", ", matchingAreas.Select(a => $"{{{{Area|{a.DisplayName}}}}}"));

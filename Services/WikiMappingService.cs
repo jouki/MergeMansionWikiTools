@@ -29,9 +29,21 @@ public class WikiMappingEntry
     /// <summary>Whether a field exists in the mapping (any value including nil).</summary>
     public bool Has(string field) => Fields.ContainsKey(field);
 
-    private string? GetString(string field) => Fields.TryGetValue(field, out var v) && v is string s ? s : null;
-    private double? GetDouble(string field) => Fields.TryGetValue(field, out var v) && v is double d ? d : null;
-    private bool GetBool(string field) => Fields.TryGetValue(field, out var v) && v is true;
+    // Values are primitives when parsed from the live Lua module, but System.Text.Json deserializes the
+    // persisted cache (Dictionary<string, object?>) into JsonElement — so accept both forms, else the cache
+    // load silently loses every chainName/level/flag (disambiguation like "Batteries (Flashback Rewind 2025)").
+    private string? GetString(string field) => Fields.TryGetValue(field, out var v)
+        ? (v is string s ? s
+           : v is System.Text.Json.JsonElement { ValueKind: System.Text.Json.JsonValueKind.String } je ? je.GetString()
+           : null)
+        : null;
+    private double? GetDouble(string field) => Fields.TryGetValue(field, out var v)
+        ? (v is double d ? d
+           : v is System.Text.Json.JsonElement { ValueKind: System.Text.Json.JsonValueKind.Number } je ? je.GetDouble()
+           : (double?)null)
+        : null;
+    private bool GetBool(string field) => Fields.TryGetValue(field, out var v)
+        && (v is true || v is System.Text.Json.JsonElement { ValueKind: System.Text.Json.JsonValueKind.True });
 }
 
 public class WikiMappingCache
@@ -1991,6 +2003,33 @@ public static class WikiMappingService
     }
 
     /// <summary>
+    /// Purges a page's parser cache and forces a fresh re-render. Needed after writing
+    /// Module:Datatable/* data that a page consumes via <c>mw.loadData</c> — without a purge the page can
+    /// keep showing a stale render (e.g. "Lua error … attempt to index field '?'") built before the data
+    /// existed. Best-effort: logs and swallows failures (purge isn't critical to the upload itself).
+    /// </summary>
+    public static async Task PurgeAsync(HttpClient client, string title)
+    {
+        try
+        {
+            AppLogger.Info($"Purge: {title}");
+            var body = new FormUrlEncodedContent(new Dictionary<string, string>
+            {
+                ["action"] = "purge",
+                ["titles"] = title,
+                ["forcelinkupdate"] = "1",
+                ["format"] = "json",
+            });
+            var resp = await client.PostAsync(BaseApiUrl, body);
+            var raw = await resp.Content.ReadAsStringAsync();
+            using var doc = JsonDocument.Parse(raw);
+            if (doc.RootElement.TryGetProperty("error", out var error))
+                AppLogger.Warn($"Purge failed on \"{title}\": {error.GetProperty("info").GetString()}");
+        }
+        catch (Exception ex) { AppLogger.Warn($"Purge failed on \"{title}\": {ex.Message}"); }
+    }
+
+    /// <summary>
     /// Generates the arbiter Lua module that requires and combines area data chunks.
     /// </summary>
     public static string GenerateAreasArbiterLua(int chunkCount)
@@ -2318,5 +2357,310 @@ public static class WikiMappingService
 
         await EditModuleAsync(client, csrfToken, "Modules", newWikitext,
             $"Update Items submodule links ({chunkCount} chunks) (via MergeMansionWikiTools)");
+    }
+
+    // ── Revert / Delete API ──────────────────────────────────────────────
+
+    /// <summary>
+    /// Checks whether the authenticated user has the "delete" right on the wiki.
+    /// Returns false on any error (network, parse, etc.) — caller falls back to tagging.
+    /// </summary>
+    public static async Task<bool> HasDeleteRightAsync(HttpClient client)
+    {
+        try
+        {
+            var json = await client.GetStringAsync(
+                $"{BaseApiUrl}?action=query&meta=userinfo&uiprop=rights&format=json");
+            var doc = JsonDocument.Parse(json);
+            var rights = doc.RootElement
+                .GetProperty("query").GetProperty("userinfo")
+                .GetProperty("rights");
+
+            bool hasDelete = false;
+            foreach (var right in rights.EnumerateArray())
+            {
+                if (right.GetString() == "delete")
+                {
+                    hasDelete = true;
+                    break;
+                }
+            }
+
+            AppLogger.Info($"HasDeleteRight: {hasDelete}");
+            return hasDelete;
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Warn($"HasDeleteRightAsync failed: {ex.Message}");
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Reverts a file to its most recent archived (previous) version using action=filerevert.
+    /// The filename may include or omit a "File:"/"Soubor:" prefix — it is stripped automatically.
+    /// Returns false if there is no archived version to revert to, or on any API error.
+    /// </summary>
+    public static async Task<RevertFileResult> RevertFileAsync(HttpClient client, string csrfToken, string filename)
+    {
+        // Strip any namespace prefix so the API receives the bare filename.
+        var bareName = filename;
+        if (bareName.StartsWith("File:", StringComparison.OrdinalIgnoreCase))
+            bareName = bareName["File:".Length..];
+        else if (bareName.StartsWith("Soubor:", StringComparison.OrdinalIgnoreCase))
+            bareName = bareName["Soubor:".Length..];
+
+        // Query up to 5 imageinfo entries; archived versions carry an "archivename" field.
+        var queryUrl = $"{BaseApiUrl}?action=query" +
+                       $"&prop=imageinfo&iiprop=archivename%7Ctimestamp&iilimit=5" +
+                       $"&titles=File:{Uri.EscapeDataString(bareName)}&format=json";
+        try
+        {
+            var qJson = await client.GetStringAsync(queryUrl);
+            var qDoc = JsonDocument.Parse(qJson);
+            var qPages = qDoc.RootElement.GetProperty("query").GetProperty("pages");
+
+            string? archiveName = null;
+            foreach (var page in qPages.EnumerateObject())
+            {
+                if (!page.Value.TryGetProperty("imageinfo", out var infos)) continue;
+                foreach (var info in infos.EnumerateArray())
+                {
+                    // The current (top) version has no archivename; archived versions do.
+                    if (info.TryGetProperty("archivename", out var an))
+                    {
+                        archiveName = an.GetString();
+                        break;
+                    }
+                }
+                break;
+            }
+
+            if (string.IsNullOrEmpty(archiveName))
+            {
+                AppLogger.Info($"RevertFile: no archived version for \"{bareName}\" — upload created no new version (duplicate); nothing to revert.");
+                return RevertFileResult.NoChange;
+            }
+
+            var body = new FormUrlEncodedContent(new Dictionary<string, string>
+            {
+                ["action"] = "filerevert",
+                ["filename"] = bareName,
+                ["archivename"] = archiveName,
+                ["comment"] = "Reverted upload",
+                ["token"] = csrfToken,
+                ["format"] = "json",
+            });
+            var resp = await client.PostAsync(BaseApiUrl, body);
+            var raw = await resp.Content.ReadAsStringAsync();
+            var doc = JsonDocument.Parse(raw);
+
+            if (doc.RootElement.TryGetProperty("error", out var error))
+            {
+                AppLogger.Warn($"RevertFile \"{bareName}\" failed: {error.GetProperty("info").GetString()}");
+                return RevertFileResult.Failed;
+            }
+
+            if (doc.RootElement.TryGetProperty("filerevert", out var fr)
+                && fr.TryGetProperty("result", out var res)
+                && res.GetString() == "Success")
+            {
+                AppLogger.Info($"RevertFile \"{bareName}\" → Success (archivename={archiveName})");
+                return RevertFileResult.Reverted;
+            }
+
+            AppLogger.Warn($"RevertFile \"{bareName}\" — unexpected response: {raw[..Math.Min(200, raw.Length)]}");
+            return RevertFileResult.Failed;
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Warn($"RevertFile \"{bareName}\" exception: {ex.Message}");
+            return RevertFileResult.Failed;
+        }
+    }
+
+    /// <summary>
+    /// Deletes a wiki page using action=delete.
+    /// Returns true if the "delete" object is present in the response (API success).
+    /// On permission errors (permissiondenied / cantdelete) logs a warning and returns false — do NOT throw.
+    /// </summary>
+    public static async Task<bool> DeletePageAsync(
+        HttpClient client, string csrfToken, string title, string reason)
+    {
+        try
+        {
+            var body = new FormUrlEncodedContent(new Dictionary<string, string>
+            {
+                ["action"] = "delete",
+                ["title"] = title,
+                ["reason"] = reason,
+                ["token"] = csrfToken,
+                ["format"] = "json",
+            });
+            var resp = await client.PostAsync(BaseApiUrl, body);
+            var raw = await resp.Content.ReadAsStringAsync();
+            var doc = JsonDocument.Parse(raw);
+
+            if (doc.RootElement.TryGetProperty("error", out var error))
+            {
+                var code = error.TryGetProperty("code", out var c) ? c.GetString() ?? "" : "";
+                var info = error.TryGetProperty("info", out var i) ? i.GetString() ?? "" : "";
+                if (code is "permissiondenied" or "cantdelete")
+                {
+                    AppLogger.Warn($"DeletePage \"{title}\" — no permission ({code}): {info}");
+                    return false;
+                }
+                AppLogger.Warn($"DeletePage \"{title}\" failed ({code}): {info}");
+                return false;
+            }
+
+            if (doc.RootElement.TryGetProperty("delete", out _))
+            {
+                AppLogger.Info($"DeletePage \"{title}\" → Success");
+                return true;
+            }
+
+            AppLogger.Warn($"DeletePage \"{title}\" — unexpected response: {raw[..Math.Min(200, raw.Length)]}");
+            return false;
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Warn($"DeletePage \"{title}\" exception: {ex.Message}");
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Tags a page for deletion by prepending {{delete|reason}} using action=edit.
+    /// Returns true if edit.result == "Success".
+    /// </summary>
+    public static async Task<bool> TagForDeletionAsync(
+        HttpClient client, string csrfToken, string title, string reason)
+    {
+        try
+        {
+            var body = new FormUrlEncodedContent(new Dictionary<string, string>
+            {
+                ["action"] = "edit",
+                ["title"] = title,
+                ["prependtext"] = $"{{{{delete|{reason}}}}}\n",
+                ["token"] = csrfToken,
+                ["bot"] = "1",
+                ["format"] = "json",
+            });
+            var resp = await client.PostAsync(BaseApiUrl, body);
+            var raw = await resp.Content.ReadAsStringAsync();
+            var doc = JsonDocument.Parse(raw);
+
+            if (doc.RootElement.TryGetProperty("error", out var error))
+            {
+                AppLogger.Warn($"TagForDeletion \"{title}\" failed: {error.GetProperty("info").GetString()}");
+                return false;
+            }
+
+            if (doc.RootElement.TryGetProperty("edit", out var edit)
+                && edit.TryGetProperty("result", out var res)
+                && res.GetString() == "Success")
+            {
+                AppLogger.Info($"TagForDeletion \"{title}\" → Success");
+                return true;
+            }
+
+            AppLogger.Warn($"TagForDeletion \"{title}\" — unexpected response: {raw[..Math.Min(200, raw.Length)]}");
+            return false;
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Warn($"TagForDeletion \"{title}\" exception: {ex.Message}");
+            return false;
+        }
+    }
+
+    /// <summary>Carries the wiki filename and whether the file existed on the wiki before the upload.</summary>
+    public sealed record UploadedFile(string WikiFilename, bool ExistedBefore);
+
+    /// <summary>Tally of revert outcomes for a batch of uploaded files.</summary>
+    public sealed record RevertOutcome(
+        int Reverted, int Deleted, int Tagged, int Failed,
+        List<string> TaggedTitles, int Unchanged = 0);
+
+    /// <summary>Outcome of reverting one overwritten file.</summary>
+    public enum RevertFileResult
+    {
+        /// <summary>Restored to the previous version.</summary>
+        Reverted,
+        /// <summary>No archived version exists — our upload created no new version (a byte-identical
+        /// duplicate the wiki accepted without change), so there is nothing to revert. NOT a failure.</summary>
+        NoChange,
+        /// <summary>The revert API call errored.</summary>
+        Failed
+    }
+
+    /// <summary>
+    /// Reverts a batch of file uploads in reverse order.
+    /// — ExistedBefore=true  → filerevert (restore previous version).
+    /// — ExistedBefore=false → delete (if user has the right) or tag for deletion.
+    /// Never throws on a per-file failure; failures are counted in the tally.
+    /// </summary>
+    public static async Task<RevertOutcome> RevertUploadsAsync(
+        HttpClient client, string csrfToken,
+        IReadOnlyList<UploadedFile> uploaded,
+        IProgress<string>? progress = null)
+    {
+        int reverted = 0, deleted = 0, tagged = 0, failed = 0, unchanged = 0;
+        var taggedTitles = new List<string>();
+
+        bool hasDelete = await HasDeleteRightAsync(client);
+
+        // Process in reverse so the most-recent upload is undone first.
+        for (int i = uploaded.Count - 1; i >= 0; i--)
+        {
+            var file = uploaded[i];
+            progress?.Report($"Reverting {file.WikiFilename}…");
+
+            try
+            {
+                if (file.ExistedBefore)
+                {
+                    // File existed before — revert to the previous version.
+                    var r = await RevertFileAsync(client, csrfToken, file.WikiFilename);
+                    if (r == RevertFileResult.Reverted) reverted++;
+                    else if (r == RevertFileResult.NoChange) unchanged++; // duplicate upload — nothing changed
+                    else failed++;
+                }
+                else if (hasDelete)
+                {
+                    // New file and we have delete rights — delete it entirely.
+                    bool ok = await DeletePageAsync(
+                        client, csrfToken, $"File:{file.WikiFilename}", "Reverted upload");
+                    if (ok)
+                        deleted++;
+                    else
+                    {
+                        // Delete failed (e.g. server-side race) — fall back to tagging.
+                        bool tagged_ = await TagForDeletionAsync(
+                            client, csrfToken, $"File:{file.WikiFilename}", "Reverted upload");
+                        if (tagged_) { tagged++; taggedTitles.Add($"File:{file.WikiFilename}"); }
+                        else failed++;
+                    }
+                }
+                else
+                {
+                    // New file but no delete right — tag for deletion.
+                    bool ok = await TagForDeletionAsync(
+                        client, csrfToken, $"File:{file.WikiFilename}", "Reverted upload");
+                    if (ok) { tagged++; taggedTitles.Add($"File:{file.WikiFilename}"); }
+                    else failed++;
+                }
+            }
+            catch (Exception ex)
+            {
+                AppLogger.Warn($"RevertUploads: unexpected exception for \"{file.WikiFilename}\": {ex.Message}");
+                failed++;
+            }
+        }
+
+        AppLogger.Info($"RevertUploads complete — reverted={reverted} deleted={deleted} tagged={tagged} unchanged={unchanged} failed={failed}");
+        return new RevertOutcome(reverted, deleted, tagged, failed, taggedTitles, unchanged);
     }
 }

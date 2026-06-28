@@ -394,3 +394,6 @@ crashreporter.token
 
 # Side-dump test outputs (large, never commit)
 _DumpHarness/_test_output*/
+
+# Superpowers plugin scratch (SDD ledger, sub-agent state) — tooling, not project content
+.superpowers/

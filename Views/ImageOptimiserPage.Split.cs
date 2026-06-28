@@ -560,7 +560,7 @@ public partial class ImageOptimiserPage
             }
 
             // Gather all objects from all scissors-active images in the cluster
-            var allOrdered = new List<(Rectangle Full, Rectangle Main, string SourcePath, float Rotation)>();
+            var allOrdered = new List<(Rectangle Full, Rectangle Main, string SourcePath, float Rotation, bool KeepAspectRatio)>();
 
             // Count non-skip suffixes for merge logic
             int nonSkipCount = suffixes.Count(s => s != "-");
@@ -592,7 +592,7 @@ public partial class ImageOptimiserPage
                     var obj = GetEffectiveObject(oi, j, ordered[j], ordAlgo, ordAtlas);
                     float rot = (oi.ObjectRotations != null && j < oi.ObjectRotations.Length)
                         ? oi.ObjectRotations[j] : 0f;
-                    allOrdered.Add((obj.Full, obj.Main, oi.FilePath, rot));
+                    allOrdered.Add((obj.Full, obj.Main, oi.FilePath, rot, oi.KeepAspectRatio));
                 }
             }
 
@@ -808,7 +808,7 @@ public partial class ImageOptimiserPage
                         : System.IO.Path.Combine(dir, ImageSplitLogic.SplitFileName(name, suffixes[i]));
 
                     // Use shared CropAndSave (identical to FlowchartImageService)
-                    ImageProcessingService.CropAndSave(sourceImage, obj.Full, obj.Main, fullPath, obj.Rotation);
+                    ImageProcessingService.CropAndSave(sourceImage, obj.Full, obj.Main, fullPath, obj.Rotation, obj.KeepAspectRatio);
 
                     allResultFiles.Add(fullPath);
                 }

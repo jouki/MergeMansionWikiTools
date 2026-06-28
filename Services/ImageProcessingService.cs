@@ -227,13 +227,21 @@ internal static class ImageProcessingService
     /// centers on a square canvas, and saves as PNG.
     /// </summary>
     public static void CropAndSave(Image<Rgba32> source, Rectangle full, Rectangle main,
-        string outPath, float rotation = 0f)
+        string outPath, float rotation = 0f, bool keepAspectRatio = false)
     {
         using var crop = source.Clone(x => x.Crop(full));
 
         bool isRotated = rotation != 0f;
         if (isRotated)
             crop.Mutate(x => x.Rotate(rotation));
+
+        // Keep original aspect ratio: save the crop as-is, skipping the square (1:1) canvas centering.
+        if (keepAspectRatio)
+        {
+            using var arFs = new FileStream(outPath, FileMode.Create, FileAccess.Write, FileShare.None);
+            crop.SaveAsPng(arFs);
+            return;
+        }
 
         int size = GetCanvasSize(crop.Width, crop.Height);
         using var canvas = new Image<Rgba32>(size, size);

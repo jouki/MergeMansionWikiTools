@@ -129,7 +129,10 @@
             <!-- ══ AUTO-DETECT ════════════════════════════════════════ -->
             <TextBlock x:Name="txtAutoDetect" FontSize="12" TextWrapping="Wrap"
                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                       Margin="4,-10,0,12" />
+                       Margin="4,-10,0,4" />
+
+            <!-- Freshness comparison result (shown after Pull from Phone) -->
+            <ui:InfoBar x:Name="freshnessBar" IsOpen="False" IsClosable="True" Margin="0,8,0,8" />
 
             <!-- ══ MAIN DUMP ═════════════════════════════════════════════ -->
             <TextBlock Text="Main Dump" FontSize="16" FontWeight="SemiBold"
@@ -141,6 +144,10 @@
                     Margin="0,0,0,16">
                 <StackPanel Margin="16,14,16,14">
                     <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
@@ -152,36 +159,49 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <CheckBox x:Name="chkChains" Grid.Column="0" Content="Chains"
+                        <!-- Row 0: main dump checkboxes + split Dump button -->
+                        <CheckBox x:Name="chkChains" Grid.Row="0" Grid.Column="0" Content="Chains"
                                   VerticalAlignment="Center" Checked="DumpCheckbox_Changed" Unchecked="DumpCheckbox_Changed" />
-                        <CheckBox x:Name="chkAreas" Grid.Column="1" Content="Areas"
+                        <CheckBox x:Name="chkAreas" Grid.Row="0" Grid.Column="1" Content="Areas"
                                   VerticalAlignment="Center" Margin="12,0,0,0"
                                   Checked="DumpCheckbox_Changed" Unchecked="DumpCheckbox_Changed" />
-                        <CheckBox x:Name="chkEvents" Grid.Column="2" Content="Events"
+                        <CheckBox x:Name="chkEvents" Grid.Row="0" Grid.Column="2" Content="Events"
                                   VerticalAlignment="Center" Margin="12,0,0,0"
                                   Checked="chkEvents_Changed" Unchecked="chkEvents_Changed" />
-                        <CheckBox x:Name="chkDialogues" Grid.Column="3" Content="Dialogues"
+                        <CheckBox x:Name="chkDialogues" Grid.Row="0" Grid.Column="3" Content="Dialogues"
                                   VerticalAlignment="Center" Margin="12,0,0,0"
                                   Checked="DumpCheckbox_Changed" Unchecked="DumpCheckbox_Changed" />
-                        <CheckBox x:Name="chkCards" Grid.Column="4" Content="Cards"
+                        <CheckBox x:Name="chkCards" Grid.Row="0" Grid.Column="4" Content="Cards"
                                   VerticalAlignment="Center" Margin="12,0,0,0"
                                   Checked="DumpCheckbox_Changed" Unchecked="DumpCheckbox_Changed" />
-                        <CheckBox x:Name="chkPets" Grid.Column="5" Content="Pets"
+                        <CheckBox x:Name="chkPets" Grid.Row="0" Grid.Column="5" Content="Pets"
                                   VerticalAlignment="Center" Margin="12,0,0,0"
                                   Checked="DumpCheckbox_Changed" Unchecked="DumpCheckbox_Changed" />
-                        <!-- Split Dump button -->
-                        <ui:Button x:Name="btnDump" Grid.Column="6"
+                        <!-- Split Dump button (spans both rows) -->
+                        <ui:Button x:Name="btnDump" Grid.Row="0" Grid.RowSpan="2" Grid.Column="6"
                                    Content="Dump" Appearance="Primary" Height="38" Padding="20,0"
+                                   VerticalAlignment="Top"
                                    Click="BtnDump_Click" />
-                        <Border x:Name="btnDumpSep" Grid.Column="7"
+                        <Border x:Name="btnDumpSep" Grid.Row="0" Grid.RowSpan="2" Grid.Column="7"
                                 Width="1" Height="38"
-                                VerticalAlignment="Center" />
-                        <ui:Button x:Name="btnDumpMenu" Grid.Column="8"
+                                VerticalAlignment="Top" />
+                        <ui:Button x:Name="btnDumpMenu" Grid.Row="0" Grid.RowSpan="2" Grid.Column="8"
                                    Appearance="Primary" Height="38" Width="30" Padding="0"
+                                   VerticalAlignment="Top"
                                    Click="BtnDumpMenu_Click">
                             <ui:SymbolIcon Symbol="ChevronDown24" FontSize="12"
                                           Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}" />
                         </ui:Button>
+                        <!-- Row 1: Experimental checkbox -->
+                        <CheckBox x:Name="chkExperimental" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6"
+                                  Content="Experimental" Margin="0,6,0,0"
+                                  VerticalAlignment="Center"
+                                  ToolTipService.InitialShowDelay="0"
+                                  Checked="DumpCheckbox_Changed" Unchecked="DumpCheckbox_Changed">
+                            <CheckBox.ToolTip>
+                                <TextBlock Text="Dumps additional data (DigEvent, Pets, Offers, DailyChallenges). Each section is saved as a separate JSON file." />
+                            </CheckBox.ToolTip>
+                        </CheckBox>
                     </Grid>
 
                     <!-- Events sub-checkboxes (Expander) -->
@@ -201,6 +221,7 @@
                             </StackPanel>
                             <Grid Margin="16,2,0,4">
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
@@ -317,34 +338,19 @@
                                         <TextBlock Text="Events without specific classification:&#x0a;Builder events, etc." />
                                     </CheckBox.ToolTip>
                                 </CheckBox>
+                                <!-- Row 3 -->
+                                <CheckBox x:Name="chkEvMixABooster" Grid.Row="3" Grid.Column="0"
+                                          Content="Mix a Booster" FontSize="11"
+                                          ToolTipService.InitialShowDelay="0"
+                                          Checked="EventSubCheckbox_Changed" Unchecked="EventSubCheckbox_Changed">
+                                    <CheckBox.ToolTip>
+                                        <TextBlock Text="Mix and Booster events:&#x0a;Player collects ingredients, mixes recipes,&#x0a;and earns rewards (MixABoosterEvent)." />
+                                    </CheckBox.ToolTip>
+                                </CheckBox>
                             </Grid>
                         </StackPanel>
                     </Expander>
                 </StackPanel>
-            </Border>
-
-            <!-- ══ EXPERIMENTAL DUMP ══════════════════════════════════════ -->
-            <TextBlock Text="Experimental Dump" FontSize="16" FontWeight="SemiBold"
-                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                       Margin="4,8,0,10" />
-            <Border Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    CornerRadius="8"
-                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1"
-                    Margin="0,0,0,16">
-                <Grid Margin="16,14,16,14">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" FontSize="12" TextWrapping="Wrap" Margin="0,0,16,0"
-                               VerticalAlignment="Center"
-                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                               Text="Dumps additional data (DigEvent, Pets, Offers, DailyChallenges). Each section is saved as a separate JSON file." />
-                    <ui:Button x:Name="btnDumpExperimental" Grid.Column="1" Content="Dump"
-                               Appearance="Secondary" Height="38" Padding="20,0"
-                               VerticalAlignment="Center"
-                               Click="BtnDumpExperimental_Click" />
-                </Grid>
             </Border>
 
             <!-- ══ PROGRESS LOG ════════════════════════════════════════ -->

@@ -1,6 +1,7 @@
 using System.IO;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using MergeMansionWikiTools.Models;
 
 namespace MergeMansionWikiTools.Services;
 
@@ -78,6 +79,37 @@ public class AreasService
                 result.Add(area);
         }
         return result;
+    }
+
+    /// <summary>
+    /// Resolves the area(s) a temporary item belongs to, for the Infobox Section intro sentence
+    /// ("... used on the Main Board in {{Area|X}}") and autocomplete temp-area hints.
+    /// <para>
+    /// Consumed temp items (e.g. Cinema Snacks) appear directly in a hotspot's requirements, so
+    /// their own item types match via <see cref="FindAreasRequiringChain"/>. Generator/spawner
+    /// temp items (e.g. Messy Shelf) are NEVER required themselves — they are GRANTED as a hotspot
+    /// reward (Old Messy Shelf is rewarded by the Attic's "Remove Boxes" task). When the direct
+    /// requirement match is empty we therefore fall back to matching the chain's own item types
+    /// against task rewards (<see cref="LuaTask.ItemReward"/>).
+    /// </para>
+    /// </summary>
+    public static List<LuaArea> FindAreasForTemporaryChain(
+        ParsedChain chain, IReadOnlyList<LuaArea> areas)
+    {
+        var ownTypes = chain.Items
+            .Select(i => i.ItemType)
+            .Where(t => !string.IsNullOrEmpty(t))
+            .ToList();
+        var direct = FindAreasRequiringChain(ownTypes!, areas);
+        if (direct.Count > 0) return direct;
+
+        // Reward fallback: a temp item that no task requires may instead be granted as a hotspot
+        // reward → map it to the area whose task rewards it.
+        var typeSet = new HashSet<string>(ownTypes!, StringComparer.OrdinalIgnoreCase);
+        return areas
+            .Where(a => a.Tasks.Any(t =>
+                !string.IsNullOrEmpty(t.ItemReward) && typeSet.Contains(t.ItemReward!)))
+            .ToList();
     }
 
     public async Task LoadAsync(string filePath)
