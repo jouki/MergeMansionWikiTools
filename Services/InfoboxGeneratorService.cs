@@ -116,23 +116,28 @@ public class InfoboxGeneratorService
             fields.Add(("title1", "{{#var:DisplayTitle}}"));
 
         // ── image1 (gallery) ──
+        // Use the chain's ACTUAL min/max levels — a chain may have a single item at level 4 (no
+        // level 1), so we must not hardcode "Level 1" nor assume more than one image exists.
+        int minLvl = chain.Items.Min(i => i.Level);
         int maxLvl = chain.Items.Max(i => i.Level);
         var imgName = opts.HardcodeGalleryImage
             ? (opts.KeepFullName ? chain.DisplayName : baseName)
             : "{{PAGENAME}}";
-        if (maxLvl > 1)
+        if (minLvl != maxLvl)
         {
+            // First and last item images (Lua invoke keeps the max correct even if data shifts).
             var gallerySb = new StringBuilder();
             gallerySb.AppendLine();
             gallerySb.AppendLine("{{#tag:gallery|");
-            gallerySb.AppendLine($"  {{{{ItemNameToFilename|{imgName}|1}}}}{{{{!}}}} Level 1");
+            gallerySb.AppendLine($"  {{{{ItemNameToFilename|{imgName}|{minLvl}}}}}{{{{!}}}} Level {minLvl}");
             gallerySb.AppendLine($"  {{{{ItemNameToFilename|{imgName}|{{{{#Invoke:Items|GetItemMaxLevelFromChainName}}}}}}}}{{{{!}}}} Level {{{{#Invoke:Items|GetItemMaxLevelFromChainName}}}}");
             gallerySb.Append("}}");
             fields.Add(("image1", gallerySb.ToString()));
         }
         else
         {
-            fields.Add(("image1", $"{{{{#tag:gallery|{{{{ItemNameToFilename|{imgName}|1}}}}}}}}"));
+            // Single item (one level, possibly not level 1) → one image at that level.
+            fields.Add(("image1", $"{{{{#tag:gallery|{{{{ItemNameToFilename|{imgName}|{minLvl}}}}}}}}}"));
         }
 
         // ── type ──

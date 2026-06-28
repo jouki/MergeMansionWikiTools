@@ -1893,18 +1893,21 @@ public class WikiTableGenerator
         bool hasAnyDesc = chain.Items.Any(i => !string.IsNullOrEmpty(i.Description));
         if (!hasAnyDesc) return null;
 
-        int maxLevel = chain.Items.Max(i => i.Level);
-        if (maxLevel <= 0) return null;
+        // Iterate the chain's ACTUAL levels (a chain may have a single item at level 4, or skip
+        // levels) — never assume a contiguous 1..maxLevel range.
+        var levels = chain.Items.Select(i => i.Level).Where(l => l > 0).Distinct().OrderBy(l => l).ToList();
+        if (levels.Count == 0) return null;
 
         string nameRef = hardcodedName ?? "{{PAGENAME}}";
         string descArg = hardcodedName != null ? $"|{hardcodedName}" : "";
 
         var sb = new StringBuilder();
         sb.AppendLine("== Item Descriptions ==");
-        for (int lvl = 1; lvl <= maxLevel; lvl++)
+        for (int i = 0; i < levels.Count; i++)
         {
+            int lvl = levels[i];
             sb.AppendLine($"{{{{Item/Icon|{nameRef}|{lvl}}}}} {{{{#Invoke:Items|GetItemDescFromChainName|{lvl}{descArg}}}}}");
-            if (lvl < maxLevel)
+            if (i < levels.Count - 1)
                 sb.AppendLine();
         }
         return sb.ToString();
@@ -2050,6 +2053,7 @@ public class WikiTableGenerator
     {
         if (chain.Items.Count == 0) return null;
 
+        int minLevel = chain.Items.Min(i => i.Level);
         int maxLevel = chain.Items.Max(i => i.Level);
         int distinctLevels = chain.Items.Select(i => i.Level).Distinct().Count();
         bool isMulti = distinctLevels > 1;
@@ -2063,9 +2067,12 @@ public class WikiTableGenerator
             && chain.DisplayName.TrimEnd().EndsWith(")") && chain.DisplayName.Contains('(');
         string displayNameSuffix = hasParen ? "|displayName={{#var:DisplayTitle}}" : "";
 
+        // {{Item|name}} defaults to level 1, which renders no image when the chain has no level-1
+        // item (e.g. a single item at level 4). Pin the actual min level so the image resolves.
+        string singleLevelSuffix = minLevel != 1 ? $"|{minLevel}" : "";
         string subject = isMulti
             ? $"{{{{Item/Group|{nameRef}|{maxLevel}{displayNameSuffix}}}}}"
-            : $"{{{{Item|{nameRef}{displayNameSuffix}}}}}";
+            : $"{{{{Item|{nameRef}{singleLevelSuffix}{displayNameSuffix}}}}}";
         // Verb + pronoun are always singular — the chain is referred to as one item type
         // regardless of level count ("Tools is an item ... It is used"). The subject template
         // (Item/Group vs Item) still varies by level count; only the grammatical number is fixed.
