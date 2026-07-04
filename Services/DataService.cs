@@ -229,6 +229,18 @@ public class DataService
         }
     }
 
+    /// <summary>
+    /// True when any tag marks the item as a temporary (area-bound) item. Temp-area tags encode the
+    /// area two ways: prefix "Temp&lt;Area&gt;" (TempCinema, TempAttic — the common case) and suffix
+    /// "&lt;Area&gt;Temp" (MaintenanceRoomTemp, ConservatoryTemp). Matching only the prefix dropped
+    /// the suffix form, so those chains lost their temporary flag and the intro never resolved
+    /// their area.
+    /// </summary>
+    public static bool HasTemporaryTag(IEnumerable<string> tags) =>
+        tags.Any(t =>
+            t.StartsWith("Temp", StringComparison.Ordinal) ||
+            t.EndsWith("Temp", StringComparison.Ordinal));
+
     private ParsedItem? ParseItem(JsonElement item)
     {
         var pi = new ParsedItem
@@ -252,7 +264,7 @@ public class DataService
                 .Cast<string>()
                 .ToList();
             pi.Tags = tags;
-            pi.IsTemporary = tags.Any(t => t.StartsWith("Temp"));
+            pi.IsTemporary = HasTemporaryTag(tags);
             pi.IsTestTag = tags.Any(t => string.Equals(t, "Test", StringComparison.OrdinalIgnoreCase));
         }
 

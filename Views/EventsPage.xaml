@@ -4,10 +4,11 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:views="clr-namespace:MergeMansionWikiTools.Views">
 
-    <Grid Margin="24,16,24,0">
+    <Grid Margin="24,16,24,16">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
@@ -31,12 +32,16 @@
                         Icon="{ui:SymbolIcon Search24}"
                         TextChanged="TxtSearch_TextChanged"/>
 
-            <TextBlock x:Name="txtSummary" Grid.Column="2"
-                       VerticalAlignment="Center"
-                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+            <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                <CheckBox x:Name="chkShowDisabled" Content="Show disabled"
+                          Margin="0,0,16,0" VerticalAlignment="Center"
+                          Checked="ChkShowDisabled_Changed" Unchecked="ChkShowDisabled_Changed"/>
+                <TextBlock x:Name="txtSummary" VerticalAlignment="Center"
+                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+            </StackPanel>
         </Grid>
 
-        <!-- Row 1: Split content -->
+        <!-- Row 1: Split content (left list + right detail/flowchart, equal height) -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="320"/>
@@ -79,6 +84,10 @@
                                     <Style TargetType="Border">
                                         <Setter Property="Background" Value="Transparent"/>
                                         <Style.Triggers>
+                                            <!-- Disabled event: ztlumit celou kartu -->
+                                            <DataTrigger Binding="{Binding IsDisabled}" Value="True">
+                                                <Setter Property="Opacity" Value="0.45"/>
+                                            </DataTrigger>
                                             <!-- Hover jen pokud karta není vybraná (1:1 s původním MouseEnter/Leave) -->
                                             <MultiDataTrigger>
                                                 <MultiDataTrigger.Conditions>
@@ -106,10 +115,20 @@
                                                RenderOptions.BitmapScalingMode="HighQuality"/>
                                     </Border>
                                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                        <TextBlock Text="{Binding DisplayName}"
-                                                   FontSize="14" FontWeight="SemiBold"
-                                                   TextTrimming="CharacterEllipsis"
-                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding DisplayName}"
+                                                       FontSize="14" FontWeight="SemiBold"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                            <!-- Disabled chip -->
+                                            <Border Margin="6,0,0,0" Padding="5,0" VerticalAlignment="Center"
+                                                    CornerRadius="3"
+                                                    Background="{DynamicResource SystemFillColorCautionBackgroundBrush}"
+                                                    Visibility="{Binding IsDisabled, Converter={StaticResource BoolToVis}}">
+                                                <TextBlock Text="disabled" FontSize="9" FontWeight="SemiBold"
+                                                           Foreground="{DynamicResource SystemFillColorCautionBrush}"/>
+                                            </Border>
+                                        </StackPanel>
                                         <TextBlock Text="{Binding InfoText}"
                                                    FontSize="11"
                                                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"/>
@@ -140,7 +159,6 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <!-- Event header -->
@@ -168,29 +186,35 @@
                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="14"/>
                 </Border>
-
-                <!-- Buttons -->
-                <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,12,0,8"
-                            HorizontalAlignment="Right">
-                    <ui:Button x:Name="btnGenerateGc" Content="Generate Garage Cleanup"
-                               Icon="{ui:SymbolIcon Grid24}"
-                               Click="BtnGenerateGc_Click"
-                               IsEnabled="False" Margin="0,0,8,0"/>
-                    <ui:Button x:Name="btnGenerateFlowchart" Content="Generate Flowchart"
-                               Icon="{ui:SymbolIcon FlowchartCircle24}"
-                               Appearance="Primary" Click="BtnGenerateFlowchart_Click"
-                               IsEnabled="False" Margin="0,0,8,0"/>
-                    <ui:Button x:Name="btnSaveSvg" Content="Save SVG"
-                               Icon="{ui:SymbolIcon Save24}"
-                               Click="BtnSaveSvg_Click" IsEnabled="False" Margin="0,0,8,0"/>
-                    <ui:Button x:Name="btnOpenFlowchart" Content="Open"
-                               Icon="{ui:SymbolIcon Open24}"
-                               Click="BtnOpenFlowchart_Click" IsEnabled="False"/>
-                </StackPanel>
             </Grid>
         </Grid>
 
-        <!-- Row 2: InfoBar -->
-        <ui:InfoBar x:Name="infoBar" Grid.Row="2" IsOpen="False" IsClosable="True" Margin="0,8,0,8"/>
+        <!-- Row 2: Buttons (own row, aligned under the right panel so the list ends level with it) -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,12,0,0"
+                        HorizontalAlignment="Right">
+                <ui:Button x:Name="btnGenerateGc" Content="Generate Garage Cleanup"
+                           Icon="{ui:SymbolIcon Grid24}"
+                           Click="BtnGenerateGc_Click"
+                           IsEnabled="False" Margin="0,0,8,0"/>
+                <ui:Button x:Name="btnGenerateFlowchart" Content="Generate Flowchart"
+                           Icon="{ui:SymbolIcon FlowchartCircle24}"
+                           Appearance="Primary" Click="BtnGenerateFlowchart_Click"
+                           IsEnabled="False" Margin="0,0,8,0"/>
+                <ui:Button x:Name="btnSaveSvg" Content="Save SVG"
+                           Icon="{ui:SymbolIcon Save24}"
+                           Click="BtnSaveSvg_Click" IsEnabled="False" Margin="0,0,8,0"/>
+                <ui:Button x:Name="btnOpenFlowchart" Content="Open"
+                           Icon="{ui:SymbolIcon Open24}"
+                           Click="BtnOpenFlowchart_Click" IsEnabled="False"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Row 3: InfoBar -->
+        <ui:InfoBar x:Name="infoBar" Grid.Row="3" IsOpen="False" IsClosable="True" Margin="0,8,0,0"/>
     </Grid>
 </UserControl>

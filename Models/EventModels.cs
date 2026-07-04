@@ -14,6 +14,10 @@ public class CollectibleBoardEvent
     public TimeSpan? Duration { get; set; }
     public int? DurationDays => Duration.HasValue ? (int)Math.Ceiling(Duration.Value.TotalDays) : null;
 
+    /// <summary>ActivableParams.IsEnabled — false = disabled board (A/B variant "B", retired re-air).
+    /// Hidden from the Events list by default; the "Show disabled" toggle reveals them.</summary>
+    public bool IsEnabled { get; set; } = true;
+
     /// <summary>Item types found on the event board (seed for flood-fill chain detection).</summary>
     public HashSet<string> BoardItemTypes { get; set; } = new(StringComparer.OrdinalIgnoreCase);
 

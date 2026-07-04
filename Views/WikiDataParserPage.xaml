@@ -112,7 +112,7 @@
                             <ui:Button x:Name="btnGenerateAreas" Grid.Column="1"
                                        Content="Generate Areas"
                                        Appearance="Primary"
-                                       Height="38" MinWidth="150" Padding="16,0"
+                                       Height="38" MinWidth="190" Padding="16,0"
                                        Click="BtnGenerateAreas_Click" />
                         </Grid>
 
@@ -147,8 +147,29 @@
                             <ui:Button x:Name="btnGenerateItems" Grid.Column="1"
                                        Content="Generate Items"
                                        Appearance="Primary"
-                                       Height="38" MinWidth="150" Padding="16,0"
+                                       Height="38" MinWidth="190" Padding="16,0"
                                        Click="BtnGenerateItems_Click" />
+                        </Grid>
+
+                        <Separator Opacity="0.15" Margin="0" />
+
+                        <!-- Uses Index row -->
+                        <Grid Margin="16,10,16,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" VerticalAlignment="Center" Margin="0,0,16,0">
+                                <TextBlock x:Name="txtUsesIndexStatus"
+                                           Text="Uses Index: area-requirement index for GetAllItemUses (built from Items + Areas)"
+                                           FontSize="13"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            </Grid>
+                            <ui:Button x:Name="btnGenerateUsesIndex" Grid.Column="1"
+                                       Content="Generate Uses Index"
+                                       Appearance="Primary"
+                                       Height="38" MinWidth="190" Padding="16,0"
+                                       Click="BtnGenerateUsesIndex_Click" />
                         </Grid>
 
                         <Separator Opacity="0.15" Margin="0" />
@@ -182,7 +203,7 @@
                             <ui:Button x:Name="btnGenerateEvents" Grid.Column="1"
                                        Content="Generate Events"
                                        Appearance="Primary"
-                                       Height="38" MinWidth="150" Padding="16,0"
+                                       Height="38" MinWidth="190" Padding="16,0"
                                        Click="BtnGenerateEvents_Click" />
                         </Grid>
 
@@ -353,6 +374,56 @@
                                          HorizontalScrollBarVisibility="Auto" />
                             </StackPanel>
                         </Border>
+                    </StackPanel>
+
+                </StackPanel>
+
+                <!-- ── Uses index section (generated locally, then pushed) ── -->
+                <StackPanel x:Name="usesIndexSection" Visibility="Collapsed">
+
+                    <!-- Section header -->
+                    <Grid Margin="4,16,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Uses Index" Grid.Column="0"
+                                   FontSize="16" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                   VerticalAlignment="Center" />
+                        <ui:SymbolIcon x:Name="iconUsesIndexState" Grid.Column="1"
+                                       Visibility="Collapsed"
+                                       FontSize="20" VerticalAlignment="Center" Margin="8,0,0,0"
+                                       ToolTipService.InitialShowDelay="0"
+                                       ToolTipService.ShowOnDisabled="True" />
+                        <ui:Button x:Name="btnUpdateUsesIndex" Grid.Column="2"
+                                   Appearance="Primary"
+                                   Height="32" Padding="12,0"
+                                   Click="BtnUpdateUsesIndex_Click"
+                                   VerticalAlignment="Center" Margin="8,0,0,0"
+                                   ToolTipService.InitialShowDelay="0"
+                                   ToolTipService.ShowOnDisabled="True">
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Symbol="ArrowUpload24" FontSize="14" Margin="0,0,6,0"
+                                              Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}" />
+                                <TextBlock Text="Update Wiki" VerticalAlignment="Center"
+                                           Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}" />
+                            </StackPanel>
+                        </ui:Button>
+                        <Button x:Name="btnCollapseUsesIndex" Grid.Column="3"
+                                Style="{StaticResource IconButtonStyle}"
+                                Click="BtnCollapseUsesIndex_Click"
+                                VerticalAlignment="Center" Margin="8,0,0,0">
+                            <ui:SymbolIcon x:Name="iconCollapseUsesIndex" Symbol="ChevronUp24" FontSize="16"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                        </Button>
+                    </Grid>
+
+                    <!-- Collapsible content (one Lua preview card per shard + /Areas, like Areas/Items) -->
+                    <StackPanel x:Name="usesIndexContent">
+                        <StackPanel x:Name="usesIndexChunksContainer" />
                     </StackPanel>
 
                 </StackPanel>

@@ -18,12 +18,6 @@ public partial class MysteryDiffDialog : Wpf.Ui.Controls.FluentWindow
     private readonly DialogueService? _dialogueService;
     private bool _suppressScrollSync;
 
-    // Diff colors
-    private static readonly Brush BrushAddedBg = new SolidColorBrush(Color.FromArgb(0x25, 0x30, 0xC0, 0x30));
-    private static readonly Brush BrushRemovedBg = new SolidColorBrush(Color.FromArgb(0x25, 0xD0, 0x40, 0x40));
-    private static readonly Brush BrushAddedFg = new SolidColorBrush(Color.FromRgb(0x40, 0xD0, 0x40));
-    private static readonly Brush BrushRemovedFg = new SolidColorBrush(Color.FromRgb(0xE0, 0x50, 0x50));
-
     public MysteryDiffDialog(
         MainWindow main, MysteryEvent mystery, MysteryDiffScope scope,
         MysteryItemMapping? mapping, DialogueService? dialogueService)
@@ -105,102 +99,8 @@ public partial class MysteryDiffDialog : Wpf.Ui.Controls.FluentWindow
         }
     }
 
-    private void BuildDiffView(List<DiffLine> diffs)
-    {
-        pnlLeft.Children.Clear();
-        pnlRight.Children.Clear();
-
-        foreach (var diff in diffs)
-        {
-            switch (diff.Type)
-            {
-                case DiffLineType.Match:
-                    pnlLeft.Children.Add(CreateDiffLine(diff.Text, DiffLineType.Match));
-                    pnlRight.Children.Add(CreateDiffLine(diff.Text, DiffLineType.Match));
-                    break;
-
-                case DiffLineType.Removed:
-                    // Only in wiki (left) — show red on left, empty placeholder on right
-                    pnlLeft.Children.Add(CreateDiffLine(diff.Text, DiffLineType.Removed));
-                    pnlRight.Children.Add(CreateDiffPlaceholder(DiffLineType.Removed));
-                    break;
-
-                case DiffLineType.Added:
-                    // Only in generated (right) — empty placeholder on left, green on right
-                    pnlLeft.Children.Add(CreateDiffPlaceholder(DiffLineType.Added));
-                    pnlRight.Children.Add(CreateDiffLine(diff.Text, DiffLineType.Added));
-                    break;
-
-                case DiffLineType.Modified:
-                    // Both sides differ — show old on left (red), new on right (green)
-                    pnlLeft.Children.Add(CreateDiffLine(diff.OldText ?? "", DiffLineType.Removed));
-                    pnlRight.Children.Add(CreateDiffLine(diff.Text, DiffLineType.Added));
-                    break;
-            }
-        }
-    }
-
-    private static Border CreateDiffLine(string text, DiffLineType type)
-    {
-        var border = new Border
-        {
-            Padding = new Thickness(4, 1, 4, 1),
-            Margin = new Thickness(0, 0, 0, 1),
-            CornerRadius = new CornerRadius(2)
-        };
-
-        var tb = new TextBlock
-        {
-            Text = string.IsNullOrEmpty(text) ? " " : text,
-            FontFamily = new FontFamily("Consolas"),
-            FontSize = 12,
-            TextWrapping = TextWrapping.NoWrap
-        };
-
-        switch (type)
-        {
-            case DiffLineType.Added:
-                border.Background = BrushAddedBg;
-                tb.Foreground = BrushAddedFg;
-                break;
-            case DiffLineType.Removed:
-                border.Background = BrushRemovedBg;
-                tb.Foreground = BrushRemovedFg;
-                break;
-            default:
-                tb.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorSecondaryBrush");
-                break;
-        }
-
-        border.Child = tb;
-        return border;
-    }
-
-    private static Border CreateDiffPlaceholder(DiffLineType type)
-    {
-        var border = new Border
-        {
-            Padding = new Thickness(4, 1, 4, 1),
-            Margin = new Thickness(0, 0, 0, 1),
-            CornerRadius = new CornerRadius(2),
-            Opacity = 0.3
-        };
-
-        var tb = new TextBlock
-        {
-            Text = " ",
-            FontFamily = new FontFamily("Consolas"),
-            FontSize = 12
-        };
-
-        // Faint background to show the line exists on the other side
-        border.Background = type == DiffLineType.Added
-            ? BrushAddedBg
-            : BrushRemovedBg;
-
-        border.Child = tb;
-        return border;
-    }
+    private void BuildDiffView(List<DiffLine> diffs) =>
+        DiffViewHelper.BuildDiffView(pnlLeft, pnlRight, diffs);
 
     // ── Synchronized scrolling ──────────────────────────────────
 

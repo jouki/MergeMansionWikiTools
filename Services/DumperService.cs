@@ -146,6 +146,7 @@ internal static class DumperService
         string outputDir,
         DumpMode mode = DumpMode.All,
         EventFilters eventFilters = EventFilters.All,
+        bool includeStaleBranches = true,
         IProgress<string>? progress = null)
     {
         return await Task.Run(() =>
@@ -304,6 +305,9 @@ internal static class DumperService
 
                         // Key: (label, content-hash) → dedup byte-identical copies across snapshots.
                         var distinctPatches = new Dictionary<string, (PlayerExperimentId ExpId, ExperimentVariantId VarId, byte[] RawBytes, GameConfigPatchEnvelope Envelope, string SourceFile, int RawSize, DateTime Mtime)>(StringComparer.Ordinal);
+                        // Per-file experiment-id sets — used to identify the "current" patch blob
+                        // (the one covering the account's live memberships) for stale-branch filtering.
+                        var fileExpIds = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
 
                         foreach (var pf in patchFilesToLoad)
                         {
@@ -312,6 +316,8 @@ internal static class DumperService
                                 var mtime = File.GetLastWriteTimeUtc(pf);
                                 var fileBytes = File.ReadAllBytes(pf);
                                 var specializationPatches = GameConfigSpecializationPatches.FromBytes(fileBytes);
+                                fileExpIds[pf] = new HashSet<string>(
+                                    specializationPatches.Patches.Keys.Select(k => k.ToString() ?? ""), StringComparer.Ordinal);
 
                                 foreach (var (expId, variantMap) in specializationPatches.Patches)
                                     foreach (var (varId, rawBytes) in variantMap)
@@ -369,6 +375,44 @@ internal static class DumperService
 
                         progress?.Report($"{T()} Loaded {totalDistinct} distinct patch version(s) ({byLabel.Count} unique labels) across {patchFilesToLoad.Count} file(s)");
                         AppLogger.Info($"{T()} Patches loaded: {totalDistinct} distinct versions, {byLabel.Count} labels, across {patchFilesToLoad.Count} files");
+
+                        // Stale-branch filter: _DATA/P is a content-addressed cache that never deletes
+                        // old snapshots, so the union can contain branches no longer live (e.g.
+                        // NewSegments_01 superseded by _02). The account's LastSessionGameConfig.dat
+                        // memberships are the authoritative "current" set. The patch blob(s) that cover
+                        // ALL current memberships are the live snapshots; branches present only in
+                        // non-covering (older) blobs are stale. When includeStaleBranches is false, keep
+                        // only branches whose experiment id lives in a covering (current) blob.
+                        if (!includeStaleBranches)
+                        {
+                            var datPath = AbGroupsService.ResolveDatPathFromConfig(configPath);
+                            var memberships = AbGroupsService.TryParseMembershipsFromFile(datPath);
+                            if (memberships != null && memberships.Count > 0)
+                            {
+                                var live = new HashSet<string>(memberships.Select(m => m.Experiment), StringComparer.Ordinal);
+                                var coveringFiles = fileExpIds.Where(kv => live.IsSubsetOf(kv.Value)).Select(kv => kv.Key).ToList();
+                                if (coveringFiles.Count > 0)
+                                {
+                                    var currentExps = new HashSet<string>(StringComparer.Ordinal);
+                                    foreach (var f in coveringFiles) currentExps.UnionWith(fileExpIds[f]);
+                                    var removed = patchedArchives.Where(p => !currentExps.Contains(p.Item1.ToString() ?? "")).Select(p => p.Item5).ToList();
+                                    patchedArchives.RemoveAll(p => !currentExps.Contains(p.Item1.ToString() ?? ""));
+                                    if (removed.Count > 0)
+                                    {
+                                        progress?.Report($"{T()} Excluded {removed.Count} non-live branch(es): {string.Join(", ", removed)}");
+                                        AppLogger.Info($"{T()} Stale-branch filter: excluded {removed.Count} ({string.Join(", ", removed)}); {coveringFiles.Count} covering blob(s)");
+                                    }
+                                }
+                                else
+                                {
+                                    Log("WARN", "Cannot filter non-live branches: no patch blob covers all account memberships — exporting all branches.");
+                                }
+                            }
+                            else
+                            {
+                                Log("WARN", "Cannot filter non-live branches: LastSessionGameConfig.dat unavailable — exporting all branches.");
+                            }
+                        }
                     }
                 }
 
@@ -634,6 +678,30 @@ internal static class DumperService
                 finally
                 {
                     Console.SetOut(originalOut);
+                }
+
+                // ── Metadata.txt: created/game/unity version header + AB memberships + patch catalog ──
+                try
+                {
+                    var datPath = AbGroupsService.ResolveDatPathFromConfig(configPath);
+                    var memberships = AbGroupsService.TryParseMembershipsFromFile(datPath);
+                    var catalog = patchedArchives
+                        .Select(p => (p.Item1.ToString() ?? "", p.Item2.ToString() ?? ""))
+                        .ToList();
+                    var createdAt = DiscordDumpService.ReadCreatedAtFromDump(outputDir);
+                    var gameVersion = AbGroupsService.ReadValueFile(
+                        AbGroupsService.ResolveDataFile(configPath, PhoneDetectionService.GameVersionFileName));
+                    var unityVersion = AbGroupsService.ReadValueFile(
+                        AbGroupsService.ResolveDataFile(configPath, PhoneDetectionService.UnityVersionFileName));
+                    var metaPath = Path.Combine(outputDir, AbGroupsService.OutputFileName);
+                    AbGroupsService.Write(metaPath, createdAt, gameVersion, unityVersion, memberships, catalog);
+                    var memCount = memberships?.Count ?? 0;
+                    progress?.Report($"{T()} {AbGroupsService.OutputFileName} written (game {gameVersion ?? "?"}, {memCount} memberships, {catalog.Select(c => c.Item1).Distinct().Count()} catalog experiments)");
+                    AppLogger.Info($"{T()} {AbGroupsService.OutputFileName}: createdAt={createdAt ?? "?"}, game={gameVersion ?? "?"}, unity={unityVersion ?? "?"}, {memCount} memberships, {catalog.Count} catalog entries (dat: {(datPath != null && File.Exists(datPath) ? "found" : "missing")})");
+                }
+                catch (Exception ex)
+                {
+                    Log("WARN", $"Metadata.txt generation failed: {ex.Message}", ex);
                 }
 
                 progress?.Report($"{T()} Done. Total: {sw.ElapsedMilliseconds}ms");

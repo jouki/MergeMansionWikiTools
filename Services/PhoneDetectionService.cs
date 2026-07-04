@@ -18,6 +18,12 @@ internal static class PhoneDetectionService
     private static readonly string[] KnownPackages = ["com.everywear.game5"];
     private static readonly string[] FallbackPrefixes = ["com.metacore."];
 
+    /// <summary>Local file (under _DATA) the pull writes the game's client version (app_ver) to.</summary>
+    public const string GameVersionFileName = "game_version.txt";
+
+    /// <summary>Local file (under _DATA) the pull writes the Unity engine version (engine_ver) to.</summary>
+    public const string UnityVersionFileName = "unity_version.txt";
+
     public static async Task<ExtractionResult> ExtractGameDataAsync(
         string dataDir,
         IProgress<string>? progress = null,
@@ -267,6 +273,59 @@ internal static class PhoneDetectionService
                             progress?.Report("  No language files found (optional).");
                         }
 
+                        // Last-session game config — lists the account's AB-experiment memberships.
+                        // Not part of the standard config/patch/lang set; pulled so the dump can emit
+                        // "AB Groups.txt". Saved next to C/P/L as _DATA\LastSessionGameConfig.dat.
+                        var localDat = Path.Combine(dataDir, AbGroupsService.LastSessionFileName);
+                        try
+                        {
+                            var remoteDat = cachePath + @"\" + AbGroupsService.RemoteFileName;
+                            if (FileExistsSafe(device, remoteDat))
+                            {
+                                DownloadFile(device, remoteDat, localDat);
+                                progress?.Report($"  AB groups: {AbGroupsService.LastSessionFileName} ({FormatSize(new FileInfo(localDat).Length)})");
+                            }
+                            else
+                            {
+                                // No file on device → drop any stale local copy so AB Groups.txt isn't misleading.
+                                if (File.Exists(localDat)) File.Delete(localDat);
+                                progress?.Report("  AB groups file not found on device (AB Groups.txt will list the patch catalog only).");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            warnings.Add($"Could not pull {AbGroupsService.RemoteFileName}: {ex.Message}");
+                        }
+
+                        // Game version — Unity Analytics persists "app_ver" (e.g. "26.05.01") to
+                        // files\Unity\<projectGuid>\Analytics\values. This is the reliable client
+                        // version (the pulled config/patch blobs are server data and carry no client
+                        // version). Captured at pull time → _DATA\game_version.txt so the dump/Discord
+                        // publish can read it even when the phone is disconnected.
+                        var gvPath = Path.Combine(dataDir, GameVersionFileName);
+                        var uvPath = Path.Combine(dataDir, UnityVersionFileName);
+                        try
+                        {
+                            var (appVer, engineVer) = TryExtractGameVersion(device, packagePath);
+                            if (!string.IsNullOrEmpty(appVer))
+                            {
+                                File.WriteAllText(gvPath, appVer);
+                                progress?.Report($"  Game version: {appVer}" +
+                                    (string.IsNullOrEmpty(engineVer) ? "" : $" (Unity {engineVer})"));
+                            }
+                            else if (File.Exists(gvPath)) File.Delete(gvPath); // drop stale
+
+                            if (!string.IsNullOrEmpty(engineVer)) File.WriteAllText(uvPath, engineVer);
+                            else if (File.Exists(uvPath)) File.Delete(uvPath);
+
+                            if (string.IsNullOrEmpty(appVer) && string.IsNullOrEmpty(engineVer))
+                                progress?.Report("  Game/Unity version not found in phone files.");
+                        }
+                        catch (Exception ex)
+                        {
+                            warnings.Add($"Could not read game version: {ex.Message}");
+                        }
+
                         progress?.Report("Extraction complete.");
                         return new ExtractionResult(configFilePath, patchFilePath, patchFileCount, languageFilePath, deviceName, warnings);
                     }
@@ -294,6 +353,47 @@ internal static class PhoneDetectionService
     {
         try { return device.DirectoryExists(path); }
         catch { return false; }
+    }
+
+    private static bool FileExistsSafe(MediaDevice device, string path)
+    {
+        try { return device.FileExists(path); }
+        catch { return false; }
+    }
+
+    /// <summary>
+    /// Reads the game's client version ("app_ver", e.g. "26.05.01") and Unity engine version
+    /// ("engine_ver", e.g. "6000.3.6f1") from the Unity Analytics values file:
+    /// files\Unity\&lt;projectGuid&gt;\Analytics\values (small JSON). The project GUID subfolder is
+    /// enumerated so we don't hardcode it. Returns (null, null) if not found.
+    /// </summary>
+    private static (string? AppVer, string? EngineVer) TryExtractGameVersion(MediaDevice device, string packagePath)
+    {
+        var unityDir = packagePath + @"\files\Unity";
+        if (!DirectoryExistsSafe(device, unityDir)) return (null, null);
+
+        string[] subs;
+        try { subs = device.GetDirectories(unityDir); }
+        catch { return (null, null); }
+
+        foreach (var sub in subs)
+        {
+            var valuesPath = sub + @"\Analytics\values";
+            if (!FileExistsSafe(device, valuesPath)) continue;
+            try
+            {
+                using var ms = new MemoryStream();
+                device.DownloadFile(valuesPath, ms);
+                var json = System.Text.Encoding.UTF8.GetString(ms.ToArray());
+                var app = System.Text.RegularExpressions.Regex.Match(json, "\"app_ver\"\\s*:\\s*\"([^\"]+)\"");
+                var eng = System.Text.RegularExpressions.Regex.Match(json, "\"engine_ver\"\\s*:\\s*\"([^\"]+)\"");
+                if (app.Success || eng.Success)
+                    return (app.Success ? app.Groups[1].Value.Trim() : null,
+                            eng.Success ? eng.Groups[1].Value.Trim() : null);
+            }
+            catch { /* try next */ }
+        }
+        return (null, null);
     }
 
     private static string[] GetFilesSafe(MediaDevice device, string path)

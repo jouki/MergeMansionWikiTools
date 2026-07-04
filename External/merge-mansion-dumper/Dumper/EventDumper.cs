@@ -36,12 +36,13 @@ namespace merge_mansion_dumper.Dumper
         Uncategorised = 1 << 11,
         BakeOff = 1 << 12,
         Bonanza = 1 << 13,
-        Others = 1 << 14,
+        Shops = 1 << 14,
         SoloMilestone = 1 << 15,
+        DailyTrades = 1 << 16,
         All = LuckyCatch | LuckySnap | Seasonal | ReArchaeology | HorizonsCup
             | MixABooster | RollTheDice | GarageCleanup | Mysteries | BoultonLeague
-            | Legacy | Uncategorised | BakeOff | Bonanza | Others
-            | SoloMilestone
+            | Legacy | Uncategorised | BakeOff | Bonanza | Shops
+            | SoloMilestone | DailyTrades
     }
 
     public class EventDumper : JsonDumper<IDictionary<string, object>>
@@ -259,12 +260,24 @@ namespace merge_mansion_dumper.Dumper
                     events["Leaderboards"] = filtered;
             }
 
-            // Others: Shops, DailyTasks
-            if (_filters.HasFlag(EventFilters.Others))
+            // Shops
+            if (_filters.HasFlag(EventFilters.Shops))
             {
                 events["Shops"] = config.ShopEvents?.EnumerateAll().Select(x => x.Value).ToArray() ?? Array.Empty<object>();
+            }
+
+            // Daily Trades (internally DailyTasks = legacy V1, DailyTasksV2 = current).
+            // DailyTasksV2MergeChains carries the per-chain trade eligibility (CanBeRequirement /
+            // CanBeReward / Min-MaxLevel / multipliers / hotspot+producer gates); Settings holds the
+            // global tuning (streak, refresh/buyout/extension pricing, diminishing, sorting ranges).
+            if (_filters.HasFlag(EventFilters.DailyTrades))
+            {
                 events["DailyTasks"] = config.DailyTasks?.EnumerateAll().Select(x => x.Value).ToArray() ?? Array.Empty<object>();
                 events["DailyTasksV2"] = config.DailyTasksV2?.EnumerateAll().Select(x => x.Value).ToArray() ?? Array.Empty<object>();
+                events["DailyTasksV2MergeChains"] = config.DailyTasksV2MergeChains?.EnumerateAll().Select(x => x.Value).ToArray() ?? Array.Empty<object>();
+                events["DailyTasksV2CompletionRewards"] = config.DailyTasksV2CompletionRewards?.EnumerateAll().Select(x => x.Value).ToArray() ?? Array.Empty<object>();
+                if (config.DailyTasksV2Settings != null)
+                    events["DailyTasksV2Settings"] = config.DailyTasksV2Settings;
             }
 
             // EventLevels — resolved per-level data referenced by ProgressionEvent / Season Pass / etc.

@@ -4,7 +4,7 @@ namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.23.21";
+    public const string Version = "v0.23.48";
 
     // Full version with build timestamp, e.g. "v0.18.7 (build 20260322-1200)"
     public static string Build { get; } = GetBuild();
@@ -109,6 +109,10 @@ public class AppSettings
     public bool DumpPets { get; set; } = true;
     public bool DumpExperimental { get; set; } = false; // optional; off by default
     public bool DumpAutoNewFolder { get; set; } = true; // auto-create Dump 2/3/... instead of overwriting
+    // When false (default): export only CURRENTLY-LIVE AB branches (the patch blob covering the
+    // account's LastSessionGameConfig memberships). When true: export ALL cached branches, including
+    // stale ones from older _DATA/P snapshots (e.g. NewSegments_01 superseded by _02).
+    public bool DumpIncludeStaleBranches { get; set; } = false;
 
     // Event filters
     public bool EventMixABooster { get; set; } = true;
@@ -124,7 +128,8 @@ public class AppSettings
     public bool EventLegacy { get; set; } = true;
     public bool EventBakeOff { get; set; } = true;
     public bool EventBonanza { get; set; } = true;
-    public bool EventOthers { get; set; } = true;
+    public bool EventShops { get; set; } = true;
+    public bool EventDailyTrades { get; set; } = true;
     public bool EventUncategorised { get; set; } = true;
     public bool EventSoloMilestone { get; set; } = true;
     public bool EventSubExpanded { get; set; } = false;

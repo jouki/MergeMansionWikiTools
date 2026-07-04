@@ -317,9 +317,9 @@
                                         <TextBlock Text="Legacy board events:&#x0a;Lost Gemstones (Gem Mining)&#x0a;The Great Escape (Jailbreak)" />
                                     </CheckBox.ToolTip>
                                 </CheckBox>
-                                <CheckBox x:Name="chkEvOthers" Grid.Row="2" Grid.Column="2"
-                                          Content="Others" FontSize="11" Margin="8,0,0,0"
-                                          ToolTip="Shops, Daily Tasks"
+                                <CheckBox x:Name="chkEvShops" Grid.Row="2" Grid.Column="2"
+                                          Content="Shops" FontSize="11" Margin="8,0,0,0"
+                                          ToolTip="Shop events"
                                           ToolTipService.InitialShowDelay="0"
                                           Checked="EventSubCheckbox_Changed" Unchecked="EventSubCheckbox_Changed" />
                                 <CheckBox x:Name="chkEvSoloMilestone" Grid.Row="2" Grid.Column="4"
@@ -345,6 +345,14 @@
                                           Checked="EventSubCheckbox_Changed" Unchecked="EventSubCheckbox_Changed">
                                     <CheckBox.ToolTip>
                                         <TextBlock Text="Mix and Booster events:&#x0a;Player collects ingredients, mixes recipes,&#x0a;and earns rewards (MixABoosterEvent)." />
+                                    </CheckBox.ToolTip>
+                                </CheckBox>
+                                <CheckBox x:Name="chkEvDailyTrades" Grid.Row="3" Grid.Column="1"
+                                          Content="Daily Trades" FontSize="11" Margin="8,0,0,0"
+                                          ToolTipService.InitialShowDelay="0"
+                                          Checked="EventSubCheckbox_Changed" Unchecked="EventSubCheckbox_Changed">
+                                    <CheckBox.ToolTip>
+                                        <TextBlock Text="Daily Trade mechanic (internally DailyTasksV2):&#x0a;task definitions, merge-chain eligibility,&#x0a;completion rewards (chests) and settings." />
                                     </CheckBox.ToolTip>
                                 </CheckBox>
                             </Grid>

@@ -334,7 +334,12 @@ public class EventScheduleService
         if (placeholders > 0)
             Notes.Add($"{placeholders} placeholder run(s) dropped (Jan 1 08:00 UTC template slots).");
 
-        // 3) Merge identical (name, start) duplicates — A/B segment variants of the same run
+        // 3) Merge identical (name, start) duplicates — A/B segment variants of the same run.
+        //    Applies ONLY to the exact same start instant (re-airs have a different start and are
+        //    never merged). The ENABLED variant wins: A/B tests ship an enabled A + disabled B with
+        //    the same schedule (e.g. Legacy Lane CBE_AmeliaBoulton2024 + …2024B), and which one the
+        //    dump lists first is arbitrary — without this the run could be flagged disabled (and
+        //    hidden by the wiki calendar) even though the event aired.
         var merged = 0;
         var byKey = new Dictionary<(string, DateTime), (string Name, string Category, EventScheduleRun Run)>();
         foreach (var r in kept)
@@ -344,6 +349,8 @@ public class EventScheduleService
             {
                 merged++;
                 Notes.Add($"Duplicate run merged: \"{r.Name}\" {r.Run.Start:yyyy-MM-dd} ({existing.Run.SourceId} + {r.Run.SourceId}).");
+                if (existing.Run.Disabled && !r.Run.Disabled)
+                    byKey[key] = r;   // enabled variant supersedes the disabled A/B twin
                 continue;
             }
             byKey[key] = r;
@@ -400,12 +407,19 @@ public class EventScheduleService
         var renamedSkipped = 0;
         var driftPreDecided = 0;
 
-        // Every (start, duration) the dump already covers. A module run matching one is the SAME
-        // airing the dump now carries under a (possibly renamed) name — skip it so a generator
-        // rename (e.g. "Garage Cleanup" → "Flashback Rewind Garage Cleanup") doesn't duplicate it.
-        var dumpStartDur = new HashSet<(DateTime, long)>();
+        // Every (start, duration) the dump already covers → the dump names carrying it. A module run
+        // matching one is the SAME airing the dump now carries under a (possibly renamed) name — skip
+        // it so a generator rename (e.g. "Garage Cleanup" → "Flashback Rewind Garage Cleanup") doesn't
+        // duplicate it. The names are kept so the skip can require RELATED names: two DIFFERENT events
+        // that merely share a start instant + duration (batch 08:00 scheduling, standard 3d/5d lengths)
+        // must NOT eat each other's history — only a rename (one name contains the other) qualifies.
+        var dumpStartDur = new Dictionary<(DateTime, long), List<string>>();
         foreach (var v in byKey.Values)
-            dumpStartDur.Add((v.Run.Start, v.Run.Duration.Ticks));
+        {
+            var sd = (v.Run.Start, v.Run.Duration.Ticks);
+            if (!dumpStartDur.TryGetValue(sd, out var names)) dumpStartDur[sd] = names = new List<string>();
+            names.Add(v.Name);
+        }
 
         foreach (var entryObj in eventsTbl.Array)
         {
@@ -455,8 +469,13 @@ public class EventScheduleService
                             byKey[key] = (dumpRun.Name, dumpRun.Category, dumpRun.Run with { OnFireVariant = true });
                         continue;
                     }
-                    // Same airing already in the dump under a different (renamed) name → skip.
-                    if (dumpStartDur.Contains((start, duration.Ticks)))
+                    // Same airing already in the dump under a RELATED (renamed) name → skip. Unrelated
+                    // names sharing the slot are a coincidence (e.g. a historical "Voyance's Visions"
+                    // run vs a dump "Summer Lucky Catch" run, both 08:00 + 3d) — keep those.
+                    if (dumpStartDur.TryGetValue((start, duration.Ticks), out var slotNames)
+                        && slotNames.Any(dn =>
+                            dn.Contains(name, StringComparison.OrdinalIgnoreCase)
+                            || name.Contains(dn, StringComparison.OrdinalIgnoreCase)))
                     {
                         renamedSkipped++;
                         continue;

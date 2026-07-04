@@ -234,13 +234,14 @@ public sealed class GarageCleanupGridService
         {
             if (airings.Count == 0) continue;
             var ordered = airings.OrderBy(a => a.Start).ToList();
+            var runs = BuildEventRuns(ordered.Select(a => (a.Start, a.Grid)).ToList());
+            var reairStarts = runs.Where(r => r.IdenticalTo != null).Select(r => r.Start.Date).ToHashSet();
             var roundInputs = ordered.Select((a, i) =>
                 new GarageCleanupHistory.GcRoundInput(i.ToString(CultureInfo.InvariantCulture), baseName, a.Start)).ToList();
             var rounds = GarageCleanupHistory.GroupRounds(roundInputs);
             var variants = ordered.Select((a, i) =>
                 new GarageCleanupHistory.GcVariant(a.Start, rounds[i.ToString(CultureInfo.InvariantCulture)])).ToList();
-            var names = GarageCleanupHistory.DeriveVariantNames(baseName, variants);
-            var runs = BuildEventRuns(ordered.Select(a => (a.Start, a.Grid)).ToList());
+            var names = GarageCleanupHistory.DeriveVariantNames(baseName, variants, reairStarts);
             for (int i = 0; i < ordered.Count; i++)
             {
                 var run = runs.First(r => r.Start == ordered[i].Start);
@@ -926,12 +927,13 @@ public sealed class GarageCleanupGridService
             var parsed = runList.OrderBy(r => r.Start).ToList();
             if (parsed.Count == 0) continue;
 
+            var reairStarts = parsed.Where(r => r.IdenticalTo != null).Select(r => r.Start.Date).ToHashSet();
             var roundInputs = parsed.Select((r, i) =>
                 new GarageCleanupHistory.GcRoundInput(i.ToString(CultureInfo.InvariantCulture), baseName, r.Start)).ToList();
             var rounds = GarageCleanupHistory.GroupRounds(roundInputs);
             var variants = parsed.Select((r, i) =>
                 new GarageCleanupHistory.GcVariant(r.Start, rounds[i.ToString(CultureInfo.InvariantCulture)])).ToList();
-            var names = GarageCleanupHistory.DeriveVariantNames(baseName, variants);
+            var names = GarageCleanupHistory.DeriveVariantNames(baseName, variants, reairStarts);
             var nameByStart = new Dictionary<DateTime, string>();
             for (int i = 0; i < parsed.Count; i++) nameByStart[parsed[i].Start] = names[variants[i]];
 
@@ -1249,11 +1251,19 @@ public sealed class GarageCleanupGridService
                 var lm = AiringSuffixRe.Match(g.Key);
                 var label = lm.Success ? lm.Groups[1].Value : "";       // "2024" / "March 2025" / ""
                 var ym = Regex.Match(label, @"\d{4}");
+                // "(Month YYYY)" labels sort by the actual month — ordinal name order would put
+                // "February" above "December" within one year (F > D) despite being older.
+                int sortMonth = 0;
+                var mm = Regex.Match(label, @"^([A-Za-z]+) \d{4}$");
+                if (mm.Success && DateTime.TryParseExact(mm.Groups[1].Value, "MMMM",
+                        CultureInfo.InvariantCulture, DateTimeStyles.None, out var md))
+                    sortMonth = md.Month;
                 return new
                 {
                     AiringName = g.Key,
                     Label = label,
                     SortYear = ym.Success ? int.Parse(ym.Value, CultureInfo.InvariantCulture) : 0,
+                    SortMonth = sortMonth,
                     Rounds = g.OrderBy(v =>
                     {
                         var rm = RoundSuffixRe.Match(v.Name);
@@ -1262,7 +1272,8 @@ public sealed class GarageCleanupGridService
                     LevelCount = g.Max(v => v.LevelCount),
                 };
             })
-            .OrderByDescending(a => a.SortYear).ThenByDescending(a => a.AiringName, StringComparer.Ordinal)
+            .OrderByDescending(a => a.SortYear).ThenByDescending(a => a.SortMonth)
+            .ThenByDescending(a => a.AiringName, StringComparer.Ordinal)
             .ToList();
 
         bool plain = airings.Count == 1 && airings[0].Label == "";

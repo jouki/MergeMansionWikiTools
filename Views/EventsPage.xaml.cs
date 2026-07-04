@@ -86,6 +86,10 @@ public partial class EventsPage : UserControl
                 e.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase) ||
                 e.EventId.Contains(searchText, StringComparison.OrdinalIgnoreCase));
 
+        // Disabled boards (A/B variant "B", retired re-airs) are hidden unless the toggle is on.
+        if (chkShowDisabled?.IsChecked != true)
+            filtered = filtered.Where(e => e.IsEnabled);
+
         var events = filtered.ToList();
         txtSummary.Text = $"{events.Count} event{(events.Count != 1 ? "s" : "")}";
 
@@ -532,6 +536,13 @@ public partial class EventsPage : UserControl
         _searchDebounce.Trigger(BuildEventList);
     }
 
+    /// <summary>"Show disabled" toggle — rebuilds the list to include/exclude disabled boards.</summary>
+    private void ChkShowDisabled_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_eventService == null) return;   // ignore the initial XAML-load Unchecked event
+        BuildEventList();
+    }
+
     private void ShowInfo(string message, InfoBarSeverity severity)
     {
         infoBar.Message = message;
@@ -554,6 +565,9 @@ public sealed class EventCardItem : System.ComponentModel.INotifyPropertyChanged
     public CollectibleBoardEvent Event { get; }
     public string DisplayName => Event.DisplayName;
     public string InfoText { get; }
+
+    /// <summary>Disabled board (A/B variant "B" / retired re-air) — dims the card + shows a "disabled" chip.</summary>
+    public bool IsDisabled => !Event.IsEnabled;
 
     private bool _isSelected;
     /// <summary>True když Event == aktuálně vybraný event — potlačuje hover efekt

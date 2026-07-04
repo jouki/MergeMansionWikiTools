@@ -15,8 +15,14 @@ public static class GarageCleanupHistory
 
     /// <summary>Derives the wiki/Various key per variant (§3.2): single airing → plain; distinct years →
     /// "(YYYY)"; 2+ airings in one year → "(Month YYYY)"; an airing's rounds append " Round N". Months
-    /// English (InvariantCulture).</summary>
-    public static Dictionary<GcVariant, string> DeriveVariantNames(string baseName, IReadOnlyList<GcVariant> variants)
+    /// English (InvariantCulture).
+    /// <para><paramref name="identicalReairStarts"/> (optional) = the starts of airings that reuse an earlier
+    /// run's grid verbatim (identicalTo re-airs). Those hold NO grid of their own, so they are excluded from
+    /// the airing-count that drives the "Month Year" disambiguation — an identical re-air in the same year
+    /// must NOT force its holder from "(2026)" to "(May 2026)". A re-air still gets a name (mirroring what its
+    /// year resolves to), but that name is never emitted as a grid key.</para></summary>
+    public static Dictionary<GcVariant, string> DeriveVariantNames(
+        string baseName, IReadOnlyList<GcVariant> variants, ISet<DateTime>? identicalReairStarts = null)
     {
         var result = new Dictionary<GcVariant, string>();
 
@@ -26,7 +32,11 @@ public static class GarageCleanupHistory
             return variants.Where(x => AiringKey(variants, x) == key).OrderBy(x => x.Start).First().Start;
         }
 
-        var airingDates = variants.Select(AiringStart).Distinct().OrderBy(d => d).ToList();
+        bool IsReair(GcVariant v) => identicalReairStarts != null && identicalReairStarts.Contains(v.Start.Date);
+
+        // Count only grid-holding airings (exclude identicalTo re-airs) for the naming decision, so an
+        // identical re-air can never bump its holder into "Month Year" or invent a new distinct year.
+        var airingDates = variants.Where(v => !IsReair(v)).Select(AiringStart).Distinct().OrderBy(d => d).ToList();
         int airingCount = airingDates.Count;
         var yearCounts = airingDates.GroupBy(d => d.Year).ToDictionary(g => g.Key, g => g.Count());
 
@@ -34,8 +44,8 @@ public static class GarageCleanupHistory
         {
             var airingStart = AiringStart(v);
             string suffix;
-            if (airingCount <= 1) suffix = "";                                  // single airing → plain
-            else if (yearCounts[airingStart.Year] >= 2)                         // same-year collision → Month Year
+            if (airingCount <= 1) suffix = "";                                  // single grid-holding airing → plain
+            else if (yearCounts.GetValueOrDefault(airingStart.Year) >= 2)       // same-year collision → Month Year
                 suffix = $" ({airingStart.ToString("MMMM", CultureInfo.InvariantCulture)} {airingStart.Year})";
             else suffix = $" ({airingStart.Year})";                             // distinct year
             string round = v.RoundIndex > 0 ? $" Round {v.RoundIndex}" : "";

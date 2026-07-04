@@ -95,20 +95,64 @@ internal static class DiscordDumpService
                     var phoneDir = Path.Combine(Path.GetTempPath(), $"phone_raw_{now:HHmmss}",
                         "Phone Raw Files");
 
-                    foreach (var sub in new[] { "C", "P", "L" })
+                    // C: newest config archive by embedded CreatedAt (= the one the dumper actually
+                    //    uses). Pulled files share the same mtime, so OrderBy(mtime) was non-deterministic.
+                    var cDir = Path.Combine(dataDir, "C");
+                    if (Directory.Exists(cDir))
                     {
-                        var srcDir = Path.Combine(dataDir, sub);
-                        if (!Directory.Exists(srcDir)) continue;
+                        var newestConfig = DumperService.SelectNewestConfigArchive(cDir)
+                            ?? Directory.GetFiles(cDir).FirstOrDefault();
+                        if (newestConfig != null)
+                        {
+                            var destDir = Path.Combine(phoneDir, "C");
+                            Directory.CreateDirectory(destDir);
+                            File.Copy(newestConfig, Path.Combine(destDir, Path.GetFileName(newestConfig)));
+                            hasAny = true;
+                        }
+                    }
 
-                        var newestFile = Directory.GetFiles(srcDir)
+                    // P: ALL patch files — the dump unions every snapshot (multi-snapshot AB discovery),
+                    //    so a faithful re-dump needs them all, not just the newest one.
+                    var pDir = Path.Combine(dataDir, "P");
+                    if (Directory.Exists(pDir))
+                    {
+                        var patchFiles = Directory.GetFiles(pDir);
+                        if (patchFiles.Length > 0)
+                        {
+                            var destDir = Path.Combine(phoneDir, "P");
+                            Directory.CreateDirectory(destDir);
+                            foreach (var pf in patchFiles)
+                                File.Copy(pf, Path.Combine(destDir, Path.GetFileName(pf)));
+                            hasAny = true;
+                        }
+                    }
+
+                    // L: language (single file).
+                    var lDir = Path.Combine(dataDir, "L");
+                    if (Directory.Exists(lDir))
+                    {
+                        var newestLang = Directory.GetFiles(lDir)
                             .OrderByDescending(f => new FileInfo(f).LastWriteTimeUtc)
                             .FirstOrDefault();
-                        if (newestFile == null) continue;
+                        if (newestLang != null)
+                        {
+                            var destDir = Path.Combine(phoneDir, "L");
+                            Directory.CreateDirectory(destDir);
+                            File.Copy(newestLang, Path.Combine(destDir, Path.GetFileName(newestLang)));
+                            hasAny = true;
+                        }
+                    }
 
-                        var destDir = Path.Combine(phoneDir, sub);
-                        Directory.CreateDirectory(destDir);
-                        File.Copy(newestFile, Path.Combine(destDir, Path.GetFileName(newestFile)));
-                        hasAny = true;
+                    // Extra metadata files (at the root of Phone Raw Files): AB memberships + game version.
+                    foreach (var extra in new[] { AbGroupsService.LastSessionFileName, PhoneDetectionService.GameVersionFileName, PhoneDetectionService.UnityVersionFileName })
+                    {
+                        var src = Path.Combine(dataDir, extra);
+                        if (File.Exists(src))
+                        {
+                            Directory.CreateDirectory(phoneDir);
+                            File.Copy(src, Path.Combine(phoneDir, extra), overwrite: true);
+                            hasAny = true;
+                        }
                     }
 
                     if (hasAny)
@@ -134,9 +178,10 @@ internal static class DiscordDumpService
                 DirectoryStructure = true,
                 PreserveDirectoryRoot = false
             };
-            compressor.CompressDirectory(combinedDir ?? dumpDir, zipPath);
-            if (combinedDir != null)
-                try { Directory.Delete(combinedDir, true); } catch { }
+            // Source for compression = combined (dump + Phone Raw Files) when available.
+            // Kept on disk until after the size-retry so Phone Raw Files survive the retry too.
+            var sourceDir = combinedDir ?? dumpDir;
+            compressor.CompressDirectory(sourceDir, zipPath);
 
             var archiveSize = new FileInfo(zipPath).Length;
             progress?.Report($"7z created: {archiveName} ({archiveSize / (1024 * 1024.0):F1} MB)");
@@ -144,16 +189,17 @@ internal static class DiscordDumpService
             // Discord file size limit depends on server boost tier (8 MB for tier 0)
             if (archiveSize > 8 * 1024 * 1024)
             {
-                // Retry without Experimental/ subfolder
+                // Retry without Experimental/ subfolder — but keep Phone Raw Files (re-dump source).
                 progress?.Report("7z too large — retrying without Experimental/ folder…");
                 File.Delete(zipPath);
 
-                // Copy files to temp dir excluding Experimental/
+                // Copy files to temp dir excluding Experimental/ (relative to sourceDir, so the
+                // Phone Raw Files folder in combinedDir is preserved).
                 var tempDir = Path.Combine(Path.GetTempPath(), $"dump_filtered_{now:HHmmss}");
                 if (Directory.Exists(tempDir)) Directory.Delete(tempDir, true);
-                foreach (var file in Directory.EnumerateFiles(dumpDir, "*", SearchOption.AllDirectories))
+                foreach (var file in Directory.EnumerateFiles(sourceDir, "*", SearchOption.AllDirectories))
                 {
-                    var rel = Path.GetRelativePath(dumpDir, file).Replace('\\', '/');
+                    var rel = Path.GetRelativePath(sourceDir, file).Replace('\\', '/');
                     if (rel.StartsWith("Experimental/", StringComparison.OrdinalIgnoreCase))
                         continue;
                     var dest = Path.Combine(tempDir, rel.Replace('/', Path.DirectorySeparatorChar));
@@ -166,6 +212,9 @@ internal static class DiscordDumpService
                 progress?.Report($"7z without Experimental: {archiveSize / (1024 * 1024.0):F1} MB");
             }
 
+            if (combinedDir != null)
+                try { Directory.Delete(combinedDir, true); } catch { }
+
             if (archiveSize > 25 * 1024 * 1024)
             {
                 progress?.Report("ERROR: Archive still exceeds 25 MB Discord limit.");
@@ -175,6 +224,17 @@ internal static class DiscordDumpService
             // 2. Build message
             var messageText = $"New dumps from {now:dd.MM.yyyy HH:mm}{now:zzz}.\n" +
                               $"The data itself was created at {createdAt}";
+
+            // Game Version (game client version, captured from the phone's Unity Analytics at pull time).
+            var gameVersionFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "_DATA",
+                PhoneDetectionService.GameVersionFileName);
+            if (File.Exists(gameVersionFile))
+            {
+                var gv = File.ReadAllText(gameVersionFile).Trim();
+                if (!string.IsNullOrEmpty(gv))
+                    messageText += $"\nGame Version: {gv}";
+            }
+            messageText += $"\nMMWT Version: {MergeMansionWikiTools.Models.AppVersion.Version}";
 
             // 3. Resolve channel type and upload
             progress?.Report("Uploading to Discord…");
@@ -367,6 +427,28 @@ internal static class DiscordDumpService
         AppLogger.Warn($"ParseCreatedAtFromMessage: failed to parse [{timestamp}] " +
                         $"(len={timestamp.Length}, hex={Convert.ToHexString(System.Text.Encoding.UTF8.GetBytes(timestamp))})");
         return null;
+    }
+
+    /// <summary>
+    /// Parses "Game Version: {version}" from a Discord dump message (added v0.23.38).
+    /// Returns null for older messages that don't carry the line (backward compatible).
+    /// </summary>
+    internal static string? ParseGameVersionFromMessage(string content)
+    {
+        const string marker = "Game Version:";
+        var idx = content.IndexOf(marker, StringComparison.OrdinalIgnoreCase);
+        if (idx < 0) return null;
+
+        var v = content[(idx + marker.Length)..].Trim();
+        var newlineIdx = v.IndexOf('\n');
+        if (newlineIdx >= 0) v = v[..newlineIdx].Trim();
+
+        // Strip invisible/zero-width chars + un-escape Discord editor escaping ("26\.05\.01")
+        v = new string(v.Where(c => c <= 127).ToArray()).Trim();
+        v = v.Replace("\\.", ".").Replace("\\:", ":");
+        v = v.TrimEnd('.', ',', ';', ' ');
+
+        return string.IsNullOrEmpty(v) ? null : v;
     }
 
     private static async Task ForwardToChannelsAsync(

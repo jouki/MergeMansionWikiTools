@@ -1272,8 +1272,8 @@ public partial class SettingsPage : UserControl
         {
             var effectiveDate = dump.DataCreatedAt ?? dump.MessageTimestamp;
             var dateStr = effectiveDate.ToString("yyyy-MM-dd");
-            var match = ApkDownloadService.MatchVersionByDate(_apkVersions, effectiveDate);
-            var versionStr = match != null ? $" → v{match.Version}" : "";
+            var resolvedVer = ResolveDumpVersion(dump, _apkVersions);
+            var versionStr = resolvedVer != null ? $" → v{resolvedVer}" : "";
             var checkmark = localTimestamps.Contains(effectiveDate) ? " ✔" : "";
             var prefix = dump.DataCreatedAt == null ? "~" : "";
             cmbDiscordDumps.Items.Add($"{prefix}{dateStr}{versionStr}{checkmark}");
@@ -1410,12 +1410,8 @@ public partial class SettingsPage : UserControl
             {
                 var effectiveDate = dump.DataCreatedAt ?? dump.MessageTimestamp;
                 var dateStr = effectiveDate.ToString("yyyy-MM-dd");
-                var versionStr = "";
-                if (versions != null)
-                {
-                    var match = ApkDownloadService.MatchVersionByDate(versions, effectiveDate);
-                    if (match != null) versionStr = $" → v{match.Version}";
-                }
+                var resolvedVer = ResolveDumpVersion(dump, versions);
+                var versionStr = resolvedVer != null ? $" → v{resolvedVer}" : "";
                 var checkmark = localTs.Contains(effectiveDate) ? " ✔" : "";
                 var prefix = dump.DataCreatedAt == null ? "~" : "";
                 list.Add($"{prefix}{dateStr}{versionStr}{checkmark}");
@@ -1572,12 +1568,8 @@ public partial class SettingsPage : UserControl
                 // Use DataCreatedAt (from message text), fallback to message posted date
                 var effectiveDate = dump.DataCreatedAt ?? dump.MessageTimestamp;
                 var dateStr = effectiveDate.ToString("yyyy-MM-dd");
-                var versionStr = "";
-                if (_apkVersions != null)
-                {
-                    var match = ApkDownloadService.MatchVersionByDate(_apkVersions, effectiveDate);
-                    if (match != null) versionStr = $" → v{match.Version}";
-                }
+                var resolvedVer = ResolveDumpVersion(dump, _apkVersions);
+                var versionStr = resolvedVer != null ? $" → v{resolvedVer}" : "";
                 var checkmark = localTimestamps.Contains(effectiveDate) ? " ✔" : "";
                 // Mark entries where DataCreatedAt couldn't be parsed (message date used as fallback)
                 var prefix = dump.DataCreatedAt == null ? "~" : "";
@@ -1613,6 +1605,21 @@ public partial class SettingsPage : UserControl
         }
     }
 
+    /// <summary>
+    /// Resolves a Discord dump's game version: prefer the version from the dump's comment
+    /// ("Game Version: X", v0.23.38+); fall back to date-matching against APK release dates
+    /// for older dumps that don't carry the line.
+    /// </summary>
+    private static string? ResolveDumpVersion(
+        DiscordDumpDownloadService.DiscordDumpInfo dump,
+        List<ApkDownloadService.ApkVersionInfo>? versions)
+    {
+        if (!string.IsNullOrEmpty(dump.GameVersion)) return dump.GameVersion;
+        if (versions == null) return null;
+        var effectiveDate = dump.DataCreatedAt ?? dump.MessageTimestamp;
+        return ApkDownloadService.MatchVersionByDate(versions, effectiveDate)?.Version;
+    }
+
     private async void BtnDownloadDump_Click(object sender, RoutedEventArgs e)
     {
         // 1. Validate workspace
@@ -1629,14 +1636,10 @@ public partial class SettingsPage : UserControl
         var dump = _discordDumps[idx];
         if (dump.AttachmentUrl == null) return;
 
-        // 3. Determine version — auto-detect from dump date via APK release dates
-        string? version = null;
+        // 3. Determine version — prefer the version from the Discord comment ("Game Version: X");
+        // fall back to date-matching APK release dates for older dumps without the line.
+        string? version = ResolveDumpVersion(dump, _apkVersions);
         var effectiveDate = dump.DataCreatedAt ?? dump.MessageTimestamp;
-        if (_apkVersions != null)
-        {
-            var match = ApkDownloadService.MatchVersionByDate(_apkVersions, effectiveDate);
-            if (match != null) version = match.Version;
-        }
 
         if (string.IsNullOrEmpty(version))
         {
@@ -1655,6 +1658,29 @@ public partial class SettingsPage : UserControl
         }
 
         var isUnknown = version == "Unknown Version";
+
+        // 3b. Version-mismatch dialog — if the dump's assigned (date-matched) version differs from
+        // the current working version, let the user choose the extraction target + whether to switch.
+        bool mismatchDecisionMade = false;
+        bool switchWorkingVersion = false;
+        var currentWorkingVersion = _main.Settings.SelectedApkVersion;
+        if (!isUnknown && !string.IsNullOrEmpty(currentWorkingVersion) &&
+            !string.Equals(version, currentWorkingVersion, StringComparison.OrdinalIgnoreCase))
+        {
+            var existingVersions = Directory.Exists(basePath)
+                ? Directory.GetDirectories(basePath)
+                    .Select(Path.GetFileName).Where(n => !string.IsNullOrEmpty(n)).Cast<string>().ToList()
+                : new List<string>();
+            var targetDlg = new DumpExtractTargetDialog(version, currentWorkingVersion, existingVersions)
+            {
+                Owner = Window.GetWindow(this)
+            };
+            if (targetDlg.ShowDialog() != true) return; // cancelled
+            version = targetDlg.TargetVersion;
+            switchWorkingVersion = targetDlg.SwitchWorkingVersion;
+            mismatchDecisionMade = true;
+        }
+
         var versionDir = Path.Combine(basePath, version);
 
         // 4. Check collision (same CreatedAt already exists locally)
@@ -1732,52 +1758,76 @@ public partial class SettingsPage : UserControl
             txtDumpDownloadStatus.SetResourceReference(
                 TextBlock.ForegroundProperty, "SystemFillColorSuccessBrush");
 
-            var setActiveBox = new Wpf.Ui.Controls.MessageBox
+            if (mismatchDecisionMade)
             {
-                Title = "Download Complete",
-                Content = $"Dump (v{version}) extracted to {Path.GetFileName(basePath)}/{version}/{dumpFolder}/",
-                PrimaryButtonText = "Switch version and load",
-                SecondaryButtonText = "Load files only",
-                CloseButtonText = "Keep files",
-                MinWidth = 450,
-                Owner = Window.GetWindow(this)
-            };
-            setActiveBox.Loaded += (sender, _) =>
-            {
-                try
+                // The mismatch dialog already decided the target + whether to switch.
+                if (switchWorkingVersion)
                 {
-                    var box = (Wpf.Ui.Controls.MessageBox)sender;
-                    if (box.Template.FindName("PrimaryColumn", box) is ColumnDefinition primaryCol)
-                        primaryCol.Width = new GridLength(1.6, GridUnitType.Star);
+                    _main.Settings.SelectedApkVersion = version;
+                    _main.Settings.ActiveDumpFolder = dumpFolder;
+                    _main.SaveSettings();
+
+                    if (_apkVersions != null)
+                    {
+                        var versionIdx = _apkVersions.FindIndex(v => v.Version == version);
+                        if (versionIdx >= 0)
+                            cmbApkVersion.SelectedIndex = versionIdx;
+                    }
+
+                    await AssignDumpFilePathsAsync(extractDir);
+                    _main.RaiseApkVersionChanged();
                 }
-                catch { }
-            };
-            Wpf.Ui.Appearance.ApplicationThemeManager.Apply(setActiveBox);
-            var setResult = await setActiveBox.ShowDialogAsync();
-
-            if (setResult == Wpf.Ui.Controls.MessageBoxResult.Primary)
-            {
-                // Switch Game Version + load dump files
-                _main.Settings.SelectedApkVersion = version;
-                _main.Settings.ActiveDumpFolder = dumpFolder;
-                _main.SaveSettings();
-
-                if (_apkVersions != null)
-                {
-                    var versionIdx = _apkVersions.FindIndex(v => v.Version == version);
-                    if (versionIdx >= 0)
-                        cmbApkVersion.SelectedIndex = versionIdx;
-                }
-
-                await AssignDumpFilePathsAsync(extractDir);
-                _main.RaiseApkVersionChanged();
+                // else: extracted to the chosen version without switching — leave working version as-is.
             }
-            else if (setResult == Wpf.Ui.Controls.MessageBoxResult.Secondary)
+            else
             {
-                // Load dump files without switching version
-                _main.Settings.ActiveDumpFolder = dumpFolder;
-                _main.SaveSettings();
-                await AssignDumpFilePathsAsync(extractDir);
+                var setActiveBox = new Wpf.Ui.Controls.MessageBox
+                {
+                    Title = "Download Complete",
+                    Content = $"Dump (v{version}) extracted to {Path.GetFileName(basePath)}/{version}/{dumpFolder}/",
+                    PrimaryButtonText = "Switch version and load",
+                    SecondaryButtonText = "Load files only",
+                    CloseButtonText = "Keep files",
+                    MinWidth = 450,
+                    Owner = Window.GetWindow(this)
+                };
+                setActiveBox.Loaded += (sender, _) =>
+                {
+                    try
+                    {
+                        var box = (Wpf.Ui.Controls.MessageBox)sender;
+                        if (box.Template.FindName("PrimaryColumn", box) is ColumnDefinition primaryCol)
+                            primaryCol.Width = new GridLength(1.6, GridUnitType.Star);
+                    }
+                    catch { }
+                };
+                Wpf.Ui.Appearance.ApplicationThemeManager.Apply(setActiveBox);
+                var setResult = await setActiveBox.ShowDialogAsync();
+
+                if (setResult == Wpf.Ui.Controls.MessageBoxResult.Primary)
+                {
+                    // Switch Game Version + load dump files
+                    _main.Settings.SelectedApkVersion = version;
+                    _main.Settings.ActiveDumpFolder = dumpFolder;
+                    _main.SaveSettings();
+
+                    if (_apkVersions != null)
+                    {
+                        var versionIdx = _apkVersions.FindIndex(v => v.Version == version);
+                        if (versionIdx >= 0)
+                            cmbApkVersion.SelectedIndex = versionIdx;
+                    }
+
+                    await AssignDumpFilePathsAsync(extractDir);
+                    _main.RaiseApkVersionChanged();
+                }
+                else if (setResult == Wpf.Ui.Controls.MessageBoxResult.Secondary)
+                {
+                    // Load dump files without switching version
+                    _main.Settings.ActiveDumpFolder = dumpFolder;
+                    _main.SaveSettings();
+                    await AssignDumpFilePathsAsync(extractDir);
+                }
             }
 
             await ScanLocalDumpsAsync();

@@ -52,6 +52,16 @@ public class WikiMappingCache
     public Dictionary<string, WikiMappingEntry> Mappings { get; set; } = new();
 }
 
+/// <summary>The wiki page changed between our fetch (basetimestamp) and our push — MediaWiki rejected
+/// the edit instead of letting us overwrite the concurrent change. Nothing was written; the caller
+/// should tell the user to regenerate (re-fetch) and push again.</summary>
+public sealed class WikiEditConflictException : Exception
+{
+    public WikiEditConflictException(string title)
+        : base($"\"{title}\" changed on the wiki after the data was generated — nothing was overwritten. " +
+               "Re-run Generate to pick up the latest live content, then push again.") { }
+}
+
 public static class WikiMappingService
 {
     private static readonly string CachePath = Path.Combine(
@@ -1750,6 +1760,38 @@ public static class WikiMappingService
     }
 
     /// <summary>
+    /// Fetches a wiki module's content together with its revision timestamp (for
+    /// <c>basetimestamp</c> edit-conflict protection — see <see cref="EditModuleAsync"/>).
+    /// Returns (null, null) if the module doesn't exist or the fetch fails.
+    /// </summary>
+    public static async Task<(string? Content, string? Timestamp)> FetchModuleWithTimestampAsync(string moduleTitle)
+    {
+        try
+        {
+            var url = $"{BaseApiUrl}?action=query" +
+                      $"&titles={Uri.EscapeDataString(moduleTitle)}" +
+                      "&prop=revisions&rvprop=content|timestamp&rvslots=main&format=json";
+            var json = await Http.GetStringAsync(url);
+            var doc = JsonDocument.Parse(json);
+
+            var pages = doc.RootElement.GetProperty("query").GetProperty("pages");
+            foreach (var page in pages.EnumerateObject())
+            {
+                if (page.Value.TryGetProperty("missing", out _)) return (null, null);
+                if (page.Value.TryGetProperty("revisions", out var revs) && revs.GetArrayLength() > 0)
+                {
+                    var content = revs[0].GetProperty("slots").GetProperty("main")
+                        .GetProperty("*").GetString();
+                    var ts = revs[0].TryGetProperty("timestamp", out var t) ? t.GetString() : null;
+                    return (content, ts);
+                }
+            }
+        }
+        catch (Exception ex) { AppLogger.Error($"FetchModuleWithTimestampAsync({moduleTitle}) failed", ex); }
+        return (null, null);
+    }
+
+    /// <summary>
     /// Extracts the createdAt date from a module content's first line comment.
     /// </summary>
     public static string? ExtractCreatedAtFromContent(string? content)
@@ -1971,14 +2013,19 @@ public static class WikiMappingService
     /// <summary>
     /// Edits (creates or overwrites) a Lua module page on the wiki.
     /// Returns the edit result string ("Success" / "nochange").
+    /// <para><paramref name="baseTimestamp"/> (optional): the revision timestamp the pushed content was
+    /// computed FROM (from <see cref="FetchModuleWithTimestampAsync"/>). When set, MediaWiki rejects the
+    /// edit with <c>editconflict</c> if the page changed in between — instead of silently overwriting
+    /// the concurrent edit. Throws <see cref="WikiEditConflictException"/> in that case.</para>
     /// </summary>
     public static async Task<string> EditModuleAsync(
         HttpClient client, string csrfToken,
-        string title, string content, string summary)
+        string title, string content, string summary,
+        string? baseTimestamp = null)
     {
         AppLogger.Info($"EditModule: {title}");
         using var _t = AppLogger.Timed($"EditModuleAsync({title})");
-        var editContent = new FormUrlEncodedContent(new Dictionary<string, string>
+        var fields = new Dictionary<string, string>
         {
             ["action"] = "edit",
             ["title"] = title,
@@ -1987,13 +2034,21 @@ public static class WikiMappingService
             ["summary"] = summary,
             ["bot"] = "1",
             ["format"] = "json",
-        });
+        };
+        if (!string.IsNullOrEmpty(baseTimestamp))
+            fields["basetimestamp"] = baseTimestamp;
+        var editContent = new FormUrlEncodedContent(fields);
         var resp = await client.PostAsync(BaseApiUrl, editContent);
         var raw = await resp.Content.ReadAsStringAsync();
         var doc = JsonDocument.Parse(raw);
 
         if (doc.RootElement.TryGetProperty("error", out var error))
+        {
+            var code = error.TryGetProperty("code", out var c) ? c.GetString() : null;
+            if (string.Equals(code, "editconflict", StringComparison.Ordinal))
+                throw new WikiEditConflictException(title);
             throw new Exception($"Edit failed on \"{title}\": {error.GetProperty("info").GetString()}");
+        }
 
         if (doc.RootElement.TryGetProperty("edit", out var edit)
             && edit.TryGetProperty("result", out var result))
@@ -2314,6 +2369,9 @@ public static class WikiMappingService
         // Preserve non-numeric submodule lines (e.g. Mapping, Archive). Numeric chunks are
         // regenerated below — non-numeric ones are kept verbatim with whatever description the
         // wiki maintainer wrote.
+        // Preserve non-numeric sub-entries (Mapping, Archive, the UsesIndex parent + subpages). The
+        // UsesIndex lines stay so they're never lost; UpdateModulesUsesIndexAsync (run from the index
+        // push) re-emits them at the end with current ranges, fixing their position after the chunks.
         var preserved = new List<string>();
         var hasArchiveLink = false;
         for (int i = subStart; i < subEnd; i++)
@@ -2357,6 +2415,58 @@ public static class WikiMappingService
 
         await EditModuleAsync(client, csrfToken, "Modules", newWikitext,
             $"Update Items submodule links ({chunkCount} chunks) (via MergeMansionWikiTools)");
+    }
+
+    /// <summary>
+    /// Maintains the individual UsesIndex submodule lines on the "Modules" page (one bullet per shard
+    /// with its letter range + the /Areas presence module), listed like Datatable/Areas/1..N and
+    /// Datatable/Items/1..N. Called when the index is pushed (it knows the current shard ranges).
+    /// </summary>
+    public static async Task UpdateModulesUsesIndexAsync(
+        HttpClient client, string csrfToken, IReadOnlyList<(int num, char lo, char hi)> shards)
+    {
+        var url = $"{BaseApiUrl}?action=query&titles={Uri.EscapeDataString("Modules")}" +
+                  "&prop=revisions&rvprop=content&rvslots=main&format=json";
+        var json = await Http.GetStringAsync(url);
+        var doc = JsonDocument.Parse(json);
+        string? wikitext = null;
+        foreach (var page in doc.RootElement.GetProperty("query").GetProperty("pages").EnumerateObject())
+        {
+            if (page.Value.TryGetProperty("missing", out _)) return;
+            if (page.Value.TryGetProperty("revisions", out var revs) && revs.GetArrayLength() > 0)
+                wikitext = revs[0].GetProperty("slots").GetProperty("main").GetProperty("*").GetString();
+        }
+        if (string.IsNullOrEmpty(wikitext)) return;
+
+        var lines = wikitext.Split('\n').ToList();
+        // Drop any existing UsesIndex lines (non-link parent + linked subpages, old single line, etc.).
+        lines.RemoveAll(l => l.Contains("Module:Datatable/Items/UsesIndex", StringComparison.Ordinal)
+                          || l.Contains("'''Datatable/Items/UsesIndex'''", StringComparison.Ordinal));
+        // Place AFTER the LAST numbered Datatable/Items/N line (fallback: after Archive).
+        int at = -1;
+        for (int i = 0; i < lines.Count; i++)
+            if (Regex.IsMatch(lines[i], @"\[\[Module:Datatable/Items/\d+\|")) at = i;
+        if (at < 0) at = lines.FindIndex(l => l.Contains("[[Module:Datatable/Items/Archive", StringComparison.Ordinal));
+        if (at < 0) return;
+
+        // Non-link parent (no Module:Datatable/Items/UsesIndex page exists — Module:Items reads the
+        // relevant shard directly via a first-letter router), then the subpages nested one level deeper.
+        var newLines = new List<string>
+        {
+            "** '''Datatable/Items/UsesIndex''' — Precomputed area-requirement index (chain → areas/levels/amounts + per-area chain presence) letting Module:Items.GetAllItemUses skip scanning the full Areas datatable. Sharded by chain first letter."
+        };
+        foreach (var (num, lo, hi) in shards.OrderBy(s => s.num))
+        {
+            var rng = lo == hi ? $"chains {lo}" : $"chains {lo}–{hi}";
+            newLines.Add($"*** '''[[Module:Datatable/Items/UsesIndex/{num}|Datatable/Items/UsesIndex/{num}]]''' — {rng}");
+        }
+        newLines.Add("*** '''[[Module:Datatable/Items/UsesIndex/Areas|Datatable/Items/UsesIndex/Areas]]''' — per-area chain presence (for GetAllItemUses)");
+        lines.InsertRange(at + 1, newLines);
+
+        var newWikitext = string.Join('\n', lines);
+        if (newWikitext == wikitext) return;
+        await EditModuleAsync(client, csrfToken, "Modules", newWikitext,
+            "Update UsesIndex submodule links (via MergeMansionWikiTools)");
     }
 
     // ── Revert / Delete API ──────────────────────────────────────────────

@@ -36,6 +36,41 @@ public class GarageCleanupHistoryTests
     }
 
     [Fact]
+    public void DeriveVariantNames_SameYearReairIdentical_DoesNotForceMonthYear()
+    {
+        // Legacy Lane: 2024, 2025, May-2026 holder + June-2026 identical re-air. The identical re-air must
+        // NOT count as a second 2026 airing → the holder stays "(2026)", not "(May 2026)".
+        var vs = new[] { V("2024-07-07"), V("2025-08-03"), V("2026-05-31"), V("2026-06-27") };
+        var reair = new HashSet<DateTime> { DateTime.Parse("2026-06-27") };
+        var names = GarageCleanupHistory.DeriveVariantNames("Legacy Lane Garage Cleanup", vs, reair);
+        Assert.Equal("Legacy Lane Garage Cleanup (2024)", names[vs[0]]);
+        Assert.Equal("Legacy Lane Garage Cleanup (2025)", names[vs[1]]);
+        Assert.Equal("Legacy Lane Garage Cleanup (2026)", names[vs[2]]);   // holder keeps plain year
+        Assert.Equal("Legacy Lane Garage Cleanup (2026)", names[vs[3]]);   // re-air mirrors holder, not "(June 2026)"
+    }
+
+    [Fact]
+    public void DeriveVariantNames_SameYearDistinctGrids_StillMonthYear()
+    {
+        // Two DISTINCT 2026 grids (neither is a re-air) → legitimate Month-Year disambiguation is kept.
+        var vs = new[] { V("2026-05-31"), V("2026-11-20") };
+        var names = GarageCleanupHistory.DeriveVariantNames("X Garage Cleanup", vs, new HashSet<DateTime>());
+        Assert.Equal("X Garage Cleanup (May 2026)", names[vs[0]]);
+        Assert.Equal("X Garage Cleanup (November 2026)", names[vs[1]]);
+    }
+
+    [Fact]
+    public void DeriveVariantNames_OnlyYearWithIdenticalReair_StaysPlain()
+    {
+        // Sole airing (May 2026) + identical June re-air → only one distinct grid ever → plain, no suffix.
+        var vs = new[] { V("2026-05-31"), V("2026-06-27") };
+        var reair = new HashSet<DateTime> { DateTime.Parse("2026-06-27") };
+        var names = GarageCleanupHistory.DeriveVariantNames("X Garage Cleanup", vs, reair);
+        Assert.Equal("X Garage Cleanup", names[vs[0]]);
+        Assert.Equal("X Garage Cleanup", names[vs[1]]);
+    }
+
+    [Fact]
     public void DeriveVariantNames_MultiRound_AppendsRoundN()
     {
         var vs = new[] { V("2024-07-07", 1), V("2024-07-12", 2) };

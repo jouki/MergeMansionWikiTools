@@ -25,7 +25,8 @@ internal static class DiscordDumpDownloadService
         DateTimeOffset? DataCreatedAt,
         string? AttachmentUrl,
         string? AttachmentFilename,
-        long AttachmentSize);
+        long AttachmentSize,
+        string? GameVersion = null);
 
     // ── Public API ──
 
@@ -251,6 +252,7 @@ internal static class DiscordDumpDownloadService
 
         var content = msg.GetProperty("content").GetString() ?? "";
         var dataCreatedAt = DiscordDumpService.ParseCreatedAtFromMessage(content);
+        var gameVersion = DiscordDumpService.ParseGameVersionFromMessage(content);
 
         var id = msg.GetProperty("id").GetString() ?? "";
 
@@ -262,7 +264,7 @@ internal static class DiscordDumpDownloadService
                            $"file={attachName}, content=[{content}], hex=[{contentHex}]");
         }
 
-        return new DiscordDumpInfo(id, msgTimestamp, dataCreatedAt, attachUrl, attachName, attachSize);
+        return new DiscordDumpInfo(id, msgTimestamp, dataCreatedAt, attachUrl, attachName, attachSize, gameVersion);
     }
 
     /// <summary>

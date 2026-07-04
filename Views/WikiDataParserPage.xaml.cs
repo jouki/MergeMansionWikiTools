@@ -55,6 +55,9 @@ public partial class WikiDataParserPage : UserControl
     // Null means Generate Events has not been run (or was aborted), which blocks Update Wiki.
     private string? _pendingEventsExisting;       // live Module:Datatable/Events content at generate time (null = not found)
     private string? _pendingVariousContent;       // spliced Module:Datatable/Various to push (null = no GC changes)
+    private string? _pendingEventsBaseTs;         // revision timestamp of fetched Events (basetimestamp conflict guard)
+    private string? _pendingVariousBaseTs;        // revision timestamp of fetched Various (basetimestamp conflict guard)
+    private List<string>? _pendingGcChangedBases; // GC bases whose grid keys changed → auto-update their event pages
     private int _pendingGcGroupCount;             // # GC EventScheduleGroups appended (for success message)
     private int _pendingGcWritten;                // # net-new GC airings added (for success message)
 

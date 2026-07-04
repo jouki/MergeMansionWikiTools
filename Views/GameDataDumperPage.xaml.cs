@@ -93,7 +93,8 @@ public partial class GameDataDumperPage : UserControl
         chkEvBakeOff.IsChecked = _main.Settings.EventBakeOff;
         chkEvBonanza.IsChecked = _main.Settings.EventBonanza;
         chkEvLegacy.IsChecked = _main.Settings.EventLegacy;
-        chkEvOthers.IsChecked = _main.Settings.EventOthers;
+        chkEvShops.IsChecked = _main.Settings.EventShops;
+        chkEvDailyTrades.IsChecked = _main.Settings.EventDailyTrades;
         chkEvUncategorised.IsChecked = _main.Settings.EventUncategorised;
         chkEvSoloMilestone.IsChecked = _main.Settings.EventSoloMilestone;
         chkEvMixABooster.IsChecked = _main.Settings.EventMixABooster;
@@ -660,7 +661,8 @@ public partial class GameDataDumperPage : UserControl
         _main.Settings.EventBakeOff = chkEvBakeOff.IsChecked == true;
         _main.Settings.EventBonanza = chkEvBonanza.IsChecked == true;
         _main.Settings.EventLegacy = chkEvLegacy.IsChecked == true;
-        _main.Settings.EventOthers = chkEvOthers.IsChecked == true;
+        _main.Settings.EventShops = chkEvShops.IsChecked == true;
+        _main.Settings.EventDailyTrades = chkEvDailyTrades.IsChecked == true;
         _main.Settings.EventUncategorised = chkEvUncategorised.IsChecked == true;
         _main.Settings.EventSoloMilestone = chkEvSoloMilestone.IsChecked == true;
         _main.Settings.EventMixABooster = chkEvMixABooster.IsChecked == true;
@@ -682,7 +684,8 @@ public partial class GameDataDumperPage : UserControl
         chkEvHorizonsCup.IsChecked = value;
         chkEvRollTheDice.IsChecked = value;
         chkEvLegacy.IsChecked = value;
-        chkEvOthers.IsChecked = value;
+        chkEvShops.IsChecked = value;
+        chkEvDailyTrades.IsChecked = value;
         chkEvUncategorised.IsChecked = value;
         chkEvMixABooster.IsChecked = value;
         _suppressSave = false;
@@ -707,7 +710,8 @@ public partial class GameDataDumperPage : UserControl
         chkEvHorizonsCup.IsChecked = true;
         chkEvRollTheDice.IsChecked = true;
         chkEvLegacy.IsChecked = false;
-        chkEvOthers.IsChecked = false;
+        chkEvShops.IsChecked = false;
+        chkEvDailyTrades.IsChecked = false;
         chkEvUncategorised.IsChecked = true;
         chkEvMixABooster.IsChecked = true;
         _suppressSave = false;
@@ -749,7 +753,8 @@ public partial class GameDataDumperPage : UserControl
         if (chkEvBakeOff.IsChecked == true) f |= EventFilters.BakeOff;
         if (chkEvBonanza.IsChecked == true) f |= EventFilters.Bonanza;
         if (chkEvLegacy.IsChecked == true) f |= EventFilters.Legacy;
-        if (chkEvOthers.IsChecked == true) f |= EventFilters.Others;
+        if (chkEvShops.IsChecked == true) f |= EventFilters.Shops;
+        if (chkEvDailyTrades.IsChecked == true) f |= EventFilters.DailyTrades;
         if (chkEvUncategorised.IsChecked == true) f |= EventFilters.Uncategorised;
         if (chkEvSoloMilestone.IsChecked == true) f |= EventFilters.SoloMilestone;
         if (chkEvMixABooster.IsChecked == true) f |= EventFilters.MixABooster;
@@ -785,6 +790,35 @@ public partial class GameDataDumperPage : UserControl
         }
 
         var menu = new ContextMenu();
+
+        // Include non-live branches — checkable toggle (persisted). Off (default): dump only the
+        // currently-live AB branches; on: also export stale branches cached from older snapshots.
+        var chkStale = new CheckBox
+        {
+            Content = "Include non-live branches",
+            IsChecked = _main.Settings.DumpIncludeStaleBranches,
+            Margin = new Thickness(0, 2, 8, 2),
+        };
+        var tipPanel = new StackPanel { MaxWidth = 320 };
+        tipPanel.Children.Add(new TextBlock
+        {
+            Text = "Off (default): export only currently-live AB branches — the patch snapshot matching your account's active experiments (from LastSessionGameConfig).",
+            TextWrapping = TextWrapping.Wrap
+        });
+        tipPanel.Children.Add(new TextBlock
+        {
+            Text = "On: also export stale branches cached from older snapshots (an experiment that has since ended or been superseded).",
+            TextWrapping = TextWrapping.Wrap,
+            Margin = new Thickness(0, 4, 0, 0),
+            Opacity = 0.7
+        });
+        chkStale.ToolTip = tipPanel;
+        ToolTipService.SetInitialShowDelay(chkStale, 0);
+        chkStale.Checked += (_, _) => { _main.Settings.DumpIncludeStaleBranches = true; _main.SaveSettings(); };
+        chkStale.Unchecked += (_, _) => { _main.Settings.DumpIncludeStaleBranches = false; _main.SaveSettings(); };
+        menu.Items.Add(chkStale);
+        menu.Items.Add(new Separator());
+
         var item = new MenuItem { Header = "Dump to custom folder..." };
         item.Click += async (_, _) =>
         {
@@ -877,6 +911,7 @@ public partial class GameDataDumperPage : UserControl
                 outputPath,
                 mode,
                 GetSelectedEventFilters(),
+                _main.Settings.DumpIncludeStaleBranches,
                 progress);
 
             _lastDumpResult = result;

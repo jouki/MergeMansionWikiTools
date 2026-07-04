@@ -367,6 +367,15 @@ public partial class WikiDataParserPage
             }
 
             ShowInfo($"Wiki updated — {string.Join(", ", parts)}.", InfoBarSeverity.Success);
+
+            // Index = f(Items, Areas) — regenerate after an Areas push, then re-check freshness so the
+            // warning icon updates (or hides once everything is back in sync).
+            try
+            {
+                await RegenerateUsesIndexAsync();
+                await RefreshUsesIndexStateAsync();
+            }
+            catch (Exception ix) { AppLogger.Warn($"Uses index regen after areas push failed: {ix.Message}"); }
         }
         catch (Exception ex)
         {
@@ -478,8 +487,9 @@ public partial class WikiDataParserPage
     /// Pushes the pre-generated Events + Various content to the wiki.
     /// The merge pipeline (drift decisions, GC airings merge, Lua generation) runs in
     /// "Generate Events" — this method is a pure push of what was already computed.
-    /// Conflict safety: the base content fetched at generate time is used to detect concurrent
-    /// edits (EditModuleAsync passes baserevid so the wiki rejects a stale push).
+    /// Conflict safety: the revision timestamps captured at generate time are passed as
+    /// <c>basetimestamp</c>, so a module edited between Generate and this push is rejected by
+    /// MediaWiki (editconflict) instead of silently overwritten (the 2026-07-01 Frosty incident).
     /// </summary>
     private async void BtnUpdateEventsWiki_Click(object sender, RoutedEventArgs e)
     {
@@ -499,6 +509,9 @@ public partial class WikiDataParserPage
         var lua = _lastEventsLua;
         var existing = _pendingEventsExisting;
         var variousGridsSpliced = _pendingVariousContent;
+        var eventsBaseTs = _pendingEventsBaseTs;
+        var variousBaseTs = _pendingVariousBaseTs;
+        var gcChangedBases = _pendingGcChangedBases;
         var gcGroupCount = _pendingGcGroupCount;
         var gcWritten = _pendingGcWritten;
 
@@ -541,10 +554,13 @@ public partial class WikiDataParserPage
             ShowInfo($"{action} {EventsModuleTitle}...", InfoBarSeverity.Informational);
 
             // Push Events module. The Lua was generated from the live module state captured at
-            // Generate Events time — the content is self-consistent (GC included) and ready to push.
+            // Generate Events time — basetimestamp makes MediaWiki reject the push if the module
+            // changed since that capture (editconflict), so a stale snapshot can never clobber
+            // a concurrent edit.
             await WikiMappingService.EditModuleAsync(
                 client, csrfToken, EventsModuleTitle, lua,
-                $"{action} event schedule data (via MergeMansionWikiTools)");
+                $"{action} event schedule data (via MergeMansionWikiTools)",
+                baseTimestamp: eventsBaseTs);
 
             // (A4) Garage Cleanup GRIDS → Module:Datatable/Various.
             // The spliced content was computed during Generate Events (base = liveVarious at generate time).
@@ -553,14 +569,44 @@ public partial class WikiDataParserPage
             {
                 ShowInfo($"Updating Module:Datatable/Various (Garage Cleanup grids, +{gcWritten} new airing(s))…", InfoBarSeverity.Informational);
                 await WikiMappingService.EditModuleAsync(client, csrfToken, "Module:Datatable/Various", variousGridsSpliced,
-                    $"Update Garage Cleanup grids (+{gcWritten} airing(s), via MergeMansionWikiTools)");
+                    $"Update Garage Cleanup grids (+{gcWritten} airing(s), via MergeMansionWikiTools)",
+                    baseTimestamp: variousBaseTs);
                 gcVariousWritten = true;
+            }
+
+            // (2b page-edit) Auto-refresh the == Garage Cleanup == section of event pages whose grid
+            // KEYS changed — those pages embed the keys in invokes, so a renamed/added variant would
+            // otherwise leave them calling a key that no longer exists (Lua error). Page missing →
+            // skipped (spec GarageCleanupGrids.md); section handling mirrors the manual per-event flow.
+            string gcPagesSummary = "";
+            if (gcVariousWritten && gcChangedBases is { Count: > 0 })
+            {
+                var (updated, skipped, failed) = await AutoUpdateGcPagesAsync(
+                    client, csrfToken, variousGridsSpliced!, gcChangedBases);
+                if (updated + skipped + failed > 0)
+                    gcPagesSummary = $" GC sections: {updated} page(s) updated"
+                        + (skipped > 0 ? $", {skipped} skipped" : "")
+                        + (failed > 0 ? $", {failed} FAILED (see log)" : "") + ".";
             }
 
             ShowInfo($"Wiki updated — {EventsModuleTitle} ({lineCount} lines"
                 + (gcGroupCount > 0 ? $", {gcGroupCount} GC group(s)" : "") + ")"
-                + (gcVariousWritten ? $" + Datatable/Various (grids, +{gcWritten} GC airing(s))." : "."),
+                + (gcVariousWritten ? $" + Datatable/Various (grids, +{gcWritten} GC airing(s))." : ".")
+                + gcPagesSummary,
                 InfoBarSeverity.Success);
+        }
+        catch (WikiEditConflictException ex)
+        {
+            // The live module changed between Generate Events and this push — nothing was written.
+            AppLogger.Error("UpdateEventsWiki edit conflict", ex);
+            ShowInfo($"⚠ {ex.Message}", InfoBarSeverity.Warning);
+            // Invalidate the pending state so the stale content can't be pushed again by accident.
+            _lastEventsLua = null;
+            _pendingEventsExisting = null;
+            _pendingVariousContent = null;
+            _pendingEventsBaseTs = null;
+            _pendingVariousBaseTs = null;
+            _pendingGcChangedBases = null;
         }
         catch (Exception ex)
         {
@@ -573,6 +619,86 @@ public partial class WikiDataParserPage
             SetGenerateButtonsEnabled(true);
             UpdateEventsWikiButtonState();
         }
+    }
+
+    /// <summary>
+    /// (2b page-edit) Refreshes the <c>== Garage Cleanup ==</c> section on the event pages of the given
+    /// GC base names, using the freshly-pushed grid keys from <paramref name="variousSpliced"/>. Each
+    /// affected page shows a <see cref="GcPageUpdateDialog"/> (drift-dialog style) with a red/green diff
+    /// of the current vs. new section — the user confirms or skips per page. Page missing → skip; no known
+    /// insert anchor → skip (the manual flow's section picker covers that case); confirmed pages get the
+    /// section surgically replaced/inserted + purged. Per-page failures are logged and don't stop the rest.
+    /// </summary>
+    private async Task<(int Updated, int Skipped, int Failed)> AutoUpdateGcPagesAsync(
+        HttpClient client, string csrfToken, string variousSpliced, List<string> changedBases)
+    {
+        int updated = 0, skipped = 0, failed = 0;
+        var grids = GarageCleanupGridService.ParseLive(variousSpliced);
+        int index = 0;
+
+        foreach (var baseName in changedBases)
+        {
+            index++;
+            var pageTitle = GarageCleanupNameService.DeriveParent(baseName);
+            try
+            {
+                ShowInfo($"Checking Garage Cleanup section on “{pageTitle}”…", InfoBarSeverity.Informational);
+
+                var variants = grids
+                    .Where(kv => GarageCleanupGridService.StripVariantSuffix(kv.Key) == baseName)
+                    .Select(kv => new GarageCleanupGridService.GcSectionVariant { Name = kv.Key, LevelCount = kv.Value.Count })
+                    .ToList();
+                if (variants.Count == 0) { skipped++; continue; }   // base vanished from grids — nothing to render
+
+                var section = GarageCleanupGridService.GenerateSectionWikitext(baseName, variants);
+                var page = await MysteryWikiService.FetchPageContentAsync(pageTitle);
+                if (page == null)
+                {
+                    AppLogger.Info($"GC auto page-update: \"{pageTitle}\" doesn't exist — skipped.");
+                    skipped++;
+                    continue;
+                }
+
+                var (content, action) = GarageCleanupGridService.SpliceEventPageSection(page, section);
+                if (content == null)
+                {
+                    // No == Garage Cleanup == section and no Rewards/Progress Bar anchor — needs the manual
+                    // flow's section picker (Events tab → Generate Garage Cleanup), don't guess here.
+                    AppLogger.Info($"GC auto page-update: \"{pageTitle}\" has no section anchor — skipped (use the Events tab).");
+                    skipped++;
+                    continue;
+                }
+                if (content.TrimEnd() == page.TrimEnd()) { skipped++; continue; }   // already up to date
+
+                // Diff just the GC section (old vs. what the splice will produce, incl. preserved prose)
+                // and let the user confirm/skip per page — drift-dialog pattern, Mysteries diff look.
+                var oldSection = GarageCleanupGridService.ExtractGcSection(page) ?? "";
+                var newSection = GarageCleanupGridService.ExtractGcSection(content) ?? section;
+                var diffs = MysteryWikiService.ComputeLineDiffs(oldSection, newSection);
+                var dlg = new GcPageUpdateDialog(pageTitle, action, diffs, index, changedBases.Count)
+                    { Owner = Window.GetWindow(this) };
+                dlg.ShowDialog();
+                if (!dlg.Confirmed)
+                {
+                    AppLogger.Info($"GC auto page-update: \"{pageTitle}\" skipped by user.");
+                    skipped++;
+                    continue;
+                }
+
+                ShowInfo($"Updating Garage Cleanup section on “{pageTitle}”…", InfoBarSeverity.Informational);
+                await WikiMappingService.EditModuleAsync(client, csrfToken, pageTitle, content,
+                    "Update Garage Cleanup section — grid keys changed (via MergeMansionWikiTools)");
+                await WikiMappingService.PurgeAsync(client, pageTitle);
+                AppLogger.Info($"GC auto page-update: \"{pageTitle}\" — {action}.");
+                updated++;
+            }
+            catch (Exception ex)
+            {
+                AppLogger.Error($"GC auto page-update failed for \"{pageTitle}\"", ex);
+                failed++;
+            }
+        }
+        return (updated, skipped, failed);
     }
 
     private UIElement BuildEventsUpdatePreviewPushOnly(bool moduleExists, int lineCount, string sizeStr)
@@ -1176,6 +1302,15 @@ public partial class WikiDataParserPage
 
                 ShowInfo($"Wiki updated — {string.Join(", ", parts)}.", InfoBarSeverity.Success);
             }
+
+            // Index = f(Items, Areas) — regenerate after an Items push, then re-check freshness so the
+            // warning icon updates (or hides once everything is back in sync).
+            try
+            {
+                await RegenerateUsesIndexAsync();
+                await RefreshUsesIndexStateAsync();
+            }
+            catch (Exception ix) { AppLogger.Warn($"Uses index regen after items push failed: {ix.Message}"); }
         }
         catch (Exception ex)
         {

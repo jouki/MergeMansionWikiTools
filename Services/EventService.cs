@@ -43,20 +43,25 @@ public class EventService
             if (string.IsNullOrEmpty(displayName))
                 displayName = eventId;
 
-            // Parse schedule
+            // Parse schedule + enabled flag
             DateTime? startDate = null;
             TimeSpan? duration = null;
-            if (board.TryGetProperty("ActivableParams", out var ap) &&
-                ap.TryGetProperty("Schedule", out var sched))
+            bool isEnabled = true;
+            if (board.TryGetProperty("ActivableParams", out var ap))
             {
-                if (sched.TryGetProperty("Start", out var startEl))
+                if (ap.TryGetProperty("IsEnabled", out var enEl) && enEl.ValueKind == JsonValueKind.False)
+                    isEnabled = false;
+                if (ap.TryGetProperty("Schedule", out var sched))
                 {
-                    var startStr = startEl.GetString();
-                    if (DateTime.TryParse(startStr, out var dt))
-                        startDate = dt;
+                    if (sched.TryGetProperty("Start", out var startEl))
+                    {
+                        var startStr = startEl.GetString();
+                        if (DateTime.TryParse(startStr, out var dt))
+                            startDate = dt;
+                    }
+                    if (sched.TryGetProperty("Duration", out var durEl))
+                        duration = ParseDuration(durEl.GetString());
                 }
-                if (sched.TryGetProperty("Duration", out var durEl))
-                    duration = ParseDuration(durEl.GetString());
             }
 
             // Parse board items (seed for flood-fill chain detection).
@@ -91,6 +96,7 @@ public class EventService
                 PrefabsOverride = GetString(board, "PrefabsOverride"),
                 StartDate = startDate,
                 Duration = duration,
+                IsEnabled = isEnabled,
                 BoardItemTypes = boardItems,
             });
         }
