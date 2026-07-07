@@ -105,6 +105,21 @@ public partial class SettingsPage : UserControl
         txtDialoguesPath.Text = _main.Settings.DialoguesJsonPath;
         txtPetsPath.Text = _main.Settings.PetsJsonPath;
         txtCardCollectionPath.Text = _main.Settings.CardCollectionJsonPath;
+
+        // Re-sync Game Version combobox from settings (e.g. after GameUpdateDialog switched
+        // Settings.SelectedApkVersion while this page's combobox still shows the old version).
+        var saved = _main.Settings.SelectedApkVersion;
+        if (_apkVersions != null && !string.IsNullOrEmpty(saved))
+        {
+            for (int i = 0; i < _apkVersions.Count; i++)
+            {
+                if (_apkVersions[i].Version == saved)
+                {
+                    if (cmbApkVersion.SelectedIndex != i) cmbApkVersion.SelectedIndex = i;
+                    break;
+                }
+            }
+        }
     }
 
     // ── Tab bar ──
@@ -1272,7 +1287,7 @@ public partial class SettingsPage : UserControl
         {
             var effectiveDate = dump.DataCreatedAt ?? dump.MessageTimestamp;
             var dateStr = effectiveDate.ToString("yyyy-MM-dd");
-            var resolvedVer = ResolveDumpVersion(dump, _apkVersions);
+            var resolvedVer = DiscordDumpDownloadService.ResolveDumpVersion(dump, _apkVersions);
             var versionStr = resolvedVer != null ? $" → v{resolvedVer}" : "";
             var checkmark = localTimestamps.Contains(effectiveDate) ? " ✔" : "";
             var prefix = dump.DataCreatedAt == null ? "~" : "";
@@ -1410,7 +1425,7 @@ public partial class SettingsPage : UserControl
             {
                 var effectiveDate = dump.DataCreatedAt ?? dump.MessageTimestamp;
                 var dateStr = effectiveDate.ToString("yyyy-MM-dd");
-                var resolvedVer = ResolveDumpVersion(dump, versions);
+                var resolvedVer = DiscordDumpDownloadService.ResolveDumpVersion(dump, versions);
                 var versionStr = resolvedVer != null ? $" → v{resolvedVer}" : "";
                 var checkmark = localTs.Contains(effectiveDate) ? " ✔" : "";
                 var prefix = dump.DataCreatedAt == null ? "~" : "";
@@ -1476,44 +1491,8 @@ public partial class SettingsPage : UserControl
 
     private async Task AssignDumpFilePathsAsync(string dumpDir)
     {
-        var fileMappings = new (string fileName, Action<string> setter)[]
-        {
-            ("chain_item_odds.json", p => { txtChainPath.Text = p; SaveChainPath(p); }),
-            ("areas.json", p => { txtAreasPath.Text = p; _main.SetAreasPath(p); }),
-            ("events.json", p => { txtEventsPath.Text = p; _main.SetEventsPath(p); }),
-            ("dialogues.json", p => { txtDialoguesPath.Text = p; _main.SetDialoguesPath(p); }),
-            ("card_collection.json", p => { txtCardCollectionPath.Text = p; _main.SetCardCollectionPath(p); }),
-        };
-
-        foreach (var (fileName, setter) in fileMappings)
-        {
-            var path = Path.Combine(dumpDir, fileName);
-            if (File.Exists(path))
-                setter(path);
-        }
-
-        // Pets.json: check main Dump/ first, fallback to Experimental/
-        var petsPath = Path.Combine(dumpDir, "Pets.json");
-        if (!File.Exists(petsPath))
-            petsPath = Path.Combine(dumpDir, "Experimental", "Pets.json");
-        if (File.Exists(petsPath))
-        {
-            txtPetsPath.Text = petsPath;
-            _main.SetPetsPath(petsPath);
-        }
-
-        // Warn if Experimental/ is missing (Discord dump without it)
-        if (!Directory.Exists(Path.Combine(dumpDir, "Experimental")))
-        {
-            if (!File.Exists(Path.Combine(dumpDir, "Pets.json")))
-                _main.ShowStatus("This dump does not include Experimental/ folder. Pet names may show as IDs.",
-                    Wpf.Ui.Controls.InfoBarSeverity.Warning);
-        }
-
-        // Reload chain data
-        var chainPath = Path.Combine(dumpDir, "chain_item_odds.json");
-        if (File.Exists(chainPath))
-            await _main.LoadDataAsync(chainPath);
+        await _main.AssignDumpFilePathsAsync(dumpDir);
+        RefreshPaths(); // sync path textboxes with the settings MainWindow just wrote
     }
 
     // ── Discord dump download ──
@@ -1568,7 +1547,7 @@ public partial class SettingsPage : UserControl
                 // Use DataCreatedAt (from message text), fallback to message posted date
                 var effectiveDate = dump.DataCreatedAt ?? dump.MessageTimestamp;
                 var dateStr = effectiveDate.ToString("yyyy-MM-dd");
-                var resolvedVer = ResolveDumpVersion(dump, _apkVersions);
+                var resolvedVer = DiscordDumpDownloadService.ResolveDumpVersion(dump, _apkVersions);
                 var versionStr = resolvedVer != null ? $" → v{resolvedVer}" : "";
                 var checkmark = localTimestamps.Contains(effectiveDate) ? " ✔" : "";
                 // Mark entries where DataCreatedAt couldn't be parsed (message date used as fallback)
@@ -1605,21 +1584,6 @@ public partial class SettingsPage : UserControl
         }
     }
 
-    /// <summary>
-    /// Resolves a Discord dump's game version: prefer the version from the dump's comment
-    /// ("Game Version: X", v0.23.38+); fall back to date-matching against APK release dates
-    /// for older dumps that don't carry the line.
-    /// </summary>
-    private static string? ResolveDumpVersion(
-        DiscordDumpDownloadService.DiscordDumpInfo dump,
-        List<ApkDownloadService.ApkVersionInfo>? versions)
-    {
-        if (!string.IsNullOrEmpty(dump.GameVersion)) return dump.GameVersion;
-        if (versions == null) return null;
-        var effectiveDate = dump.DataCreatedAt ?? dump.MessageTimestamp;
-        return ApkDownloadService.MatchVersionByDate(versions, effectiveDate)?.Version;
-    }
-
     private async void BtnDownloadDump_Click(object sender, RoutedEventArgs e)
     {
         // 1. Validate workspace
@@ -1638,7 +1602,7 @@ public partial class SettingsPage : UserControl
 
         // 3. Determine version — prefer the version from the Discord comment ("Game Version: X");
         // fall back to date-matching APK release dates for older dumps without the line.
-        string? version = ResolveDumpVersion(dump, _apkVersions);
+        string? version = DiscordDumpDownloadService.ResolveDumpVersion(dump, _apkVersions);
         var effectiveDate = dump.DataCreatedAt ?? dump.MessageTimestamp;
 
         if (string.IsNullOrEmpty(version))

@@ -32,11 +32,12 @@ internal static class ImageSplitLogic
     /// Orders atlas sprites in the canonical prediction order: Unity Y descending, X ascending.
     /// Same ordering as ImageProcessingService.PredictFromSpriteMetadata step 1.
     /// </summary>
+    // Row-tolerant reading order (visual rows top→bottom, within a row left→right). Delegates to the
+    // single shared implementation so the IO's atlas objects, the level prediction, and the flood-fill
+    // display all order sprites identically — otherwise a few px of Y difference between sprites in one
+    // visual row would misalign the index string (e.g. CSE_SoloMilestone_Chest).
     public static List<SpriteInfo> OrderSpritesUnity(IEnumerable<SpriteInfo> sprites)
-        => sprites
-            .OrderByDescending(s => s.RectY)
-            .ThenBy(s => s.RectX)
-            .ToList();
+        => SpriteMetadataService.OrderSpritesReadingRows(sprites.ToList());
 
     /// <summary>
     /// Converts atlas sprite rects (Unity bottom-left origin) to image-space rectangles
@@ -53,4 +54,31 @@ internal static class ImageSplitLogic
             var rect = new Rectangle(x, y, w, h);
             return (Full: rect, Main: rect);
         }).ToList();
+
+    /// <summary>
+    /// Finds the candidate whose Full rect overlaps the reference's Full rect the most
+    /// (by intersection area). Null when nothing overlaps. Used by the per-object
+    /// detection-source toggle: detection lists (merged DetectedObjects vs raw
+    /// Algorithm/Atlas objects) can differ in count AND ordering, so the alternative
+    /// box for an item must be found spatially — mapping by ordered index corrupted
+    /// neighbouring items' boxes.
+    /// </summary>
+    public static (Rectangle Full, Rectangle Main)? PickBestOverlap(
+        (Rectangle Full, Rectangle Main) reference,
+        IReadOnlyList<(Rectangle Full, Rectangle Main)> candidates)
+    {
+        (Rectangle Full, Rectangle Main)? best = null;
+        long bestArea = 0;
+        foreach (var c in candidates)
+        {
+            var inter = Rectangle.Intersect(reference.Full, c.Full);
+            long area = inter.IsEmpty ? 0 : (long)inter.Width * inter.Height;
+            if (area > bestArea)
+            {
+                bestArea = area;
+                best = c;
+            }
+        }
+        return best;
+    }
 }

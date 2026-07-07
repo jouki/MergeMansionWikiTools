@@ -541,15 +541,26 @@ public partial class ImageOptimiserPage
         List<(Rectangle Full, Rectangle Main)>? orderedAlgo,
         List<(Rectangle Full, Rectangle Main)>? orderedAtlas)
     {
-        if (oi.PerObjectDetectionSource == null || orderedAlgo == null || orderedAtlas == null)
+        if (oi.PerObjectDetectionSource == null)
             return defaultObj;
         if (orderedIndex < 0 || orderedIndex >= oi.PerObjectDetectionSource.Length)
             return defaultObj;
-        if (orderedIndex >= orderedAlgo.Count || orderedIndex >= orderedAtlas.Count)
-            return defaultObj;
 
         var source = oi.PerObjectDetectionSource[orderedIndex];
-        return source == DetectionSource.Atlas ? orderedAtlas[orderedIndex] : orderedAlgo[orderedIndex];
+
+        // Objects still on the default source keep the DISPLAYED default box. The alternative
+        // lists can have a different count AND ordering than DetectedObjects (chain mode merges
+        // to the expected item count), so indexing into them for non-toggled objects corrupted
+        // neighbouring boxes the moment any single object was toggled.
+        if (source == oi.DefaultDetectionSource)
+            return defaultObj;
+
+        // Toggled object: find its counterpart in the alternative list SPATIALLY (largest
+        // overlap with the displayed box), never by ordered index.
+        var altList = source == DetectionSource.Atlas ? orderedAtlas : orderedAlgo;
+        if (altList == null || altList.Count == 0)
+            return defaultObj;
+        return ImageSplitLogic.PickBestOverlap(defaultObj, altList) ?? defaultObj;
     }
 
     private void ToggleObjectSource(OptimiserImage oi, int orderedIndex)

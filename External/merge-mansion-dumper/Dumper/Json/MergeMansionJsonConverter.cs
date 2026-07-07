@@ -21,6 +21,7 @@ namespace merge_mansion_dumper.Dumper.Json
                 new MetaMergeChainSerializer(resolver, dropsAsPercent, output),
                 new MetaAreaSerializer(resolver, output),
                 new MetaEventSerializer(resolver),
+                new MetaDailyChallengesSerializer(),
             };
         }
 

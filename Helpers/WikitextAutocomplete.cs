@@ -848,30 +848,6 @@ public class WikitextAutocomplete
         return template;
     }
 
-    /// <summary>Loads a BitmapImage from a file path at FULL resolution. We can't downscale at
-    /// decode time because the sprite Viewbox uses absolute pixel coords from the original image
-    /// — decoding to 24px would put the sub-rect way outside the decoded bounds. WPF caches
-    /// BitmapImages globally by Uri, so duplicates are not a memory issue.</summary>
-    private class PathToBitmapConverter : IValueConverter
-    {
-        public object? Convert(object? value, Type targetType, object? parameter, System.Globalization.CultureInfo culture)
-        {
-            if (value is not string path || string.IsNullOrEmpty(path) || !File.Exists(path)) return null;
-            try
-            {
-                var bmp = new BitmapImage();
-                bmp.BeginInit();
-                bmp.CacheOption = BitmapCacheOption.OnLoad;
-                bmp.UriSource = new Uri(path, UriKind.Absolute);
-                bmp.EndInit();
-                bmp.Freeze();
-                return bmp;
-            }
-            catch { return null; }
-        }
-        public object? ConvertBack(object? v, Type t, object? p, System.Globalization.CultureInfo c) => null;
-    }
-
     private class NullToCollapsedConverter : IValueConverter
     {
         public object Convert(object? value, Type t, object? p, System.Globalization.CultureInfo c) =>
@@ -885,72 +861,15 @@ public class WikitextAutocomplete
     /// IS the crop. Without a rect, full image fits to the box.</summary>
     private class SuggestionToImageBrushConverter : IValueConverter
     {
-        private static readonly PathToBitmapConverter _bitmapConv = new();
         public object? Convert(object? value, Type targetType, object? parameter, System.Globalization.CultureInfo culture)
         {
             if (value is not SuggestionItem si || string.IsNullOrEmpty(si.ImagePath)) return null;
-            if (_bitmapConv.Convert(si.ImagePath, targetType, parameter, culture) is not BitmapSource src) return null;
 
-            Rect? abs = null;
-            if (si.AtlasRect.HasValue)
-            {
-                var ar = si.AtlasRect.Value;
-                double topY = src.PixelHeight - ar.Y - ar.Height;
-                abs = new Rect(ar.X, topY, ar.Width, ar.Height);
-            }
-            else if (si.FractionalRect.HasValue)
-            {
-                // For non-square source images (e.g. Area_InfoPopupBg PNGs which are wider
-                // than tall) we want a CENTERED SQUARE crop so the thumbnail renders 1:1
-                // without letterboxing. Use the shorter dimension as the side, then scale by
-                // the fractional rect's Width as the size pct.
-                var fr = si.FractionalRect.Value;
-                double side = Math.Min(src.PixelWidth, src.PixelHeight) * fr.Width;
-                double cx = src.PixelWidth / 2.0;
-                double cy = src.PixelHeight / 2.0;
-                abs = new Rect(cx - side / 2.0, cy - side / 2.0, side, side);
-            }
-
-            if (abs.HasValue)
-            {
-                var r = abs.Value;
-                int x = (int)Math.Max(0, Math.Floor(r.X));
-                int y = (int)Math.Max(0, Math.Floor(r.Y));
-                int w = (int)Math.Min(src.PixelWidth - x, Math.Ceiling(r.Width));
-                int h = (int)Math.Min(src.PixelHeight - y, Math.Ceiling(r.Height));
-                if (w > 0 && h > 0)
-                {
-                    try
-                    {
-                        var cropped = new CroppedBitmap(src, new Int32Rect(x, y, w, h));
-                        cropped.Freeze();
-                        src = cropped;
-                    }
-                    catch { /* fall back to full image */ }
-                }
-            }
-
-            // Un-rotate sprite if it was stored rotated 90° in the atlas (Unity packing).
-            // Most atlases use 90° CCW rotation when packing → we rotate 90° CW (= 90°) to display.
-            if (si.IsRotated)
-            {
-                try
-                {
-                    var rotated = new TransformedBitmap(src, new RotateTransform(90));
-                    rotated.Freeze();
-                    src = rotated;
-                }
-                catch { /* fall back to un-rotated */ }
-            }
-
-            var brush = new ImageBrush(src)
-            {
-                Stretch = Stretch.Uniform,
-                AlignmentX = AlignmentX.Center,
-                AlignmentY = AlignmentY.Center,
-            };
-            brush.Freeze();
-            return brush;
+            // All crop/rotate variants share SpriteImageBrushBuilder (single source of truth).
+            // FractionalRect = area center-square crop; otherwise atlas-rect / full-image sprite.
+            return si.FractionalRect.HasValue
+                ? SpriteImageBrushBuilder.BuildFractional(si.ImagePath, si.FractionalRect.Value)
+                : SpriteImageBrushBuilder.Build(si.ImagePath, si.AtlasRect, si.IsRotated);
         }
         public object? ConvertBack(object? v, Type t, object? p, System.Globalization.CultureInfo c) => null;
     }

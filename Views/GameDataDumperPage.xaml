@@ -291,8 +291,8 @@
                                     </CheckBox.ToolTip>
                                 </CheckBox>
                                 <CheckBox x:Name="chkEvBoultonLeague" Grid.Row="1" Grid.Column="3"
-                                          Content="Boulton League" FontSize="11" Margin="8,0,0,0"
-                                          ToolTip="Boulton League competitive events and stages"
+                                          Content="Boulton Legacy" FontSize="11" Margin="8,0,0,0"
+                                          ToolTip="Boulton Legacy league events and stages"
                                           ToolTipService.InitialShowDelay="0"
                                           Checked="EventSubCheckbox_Changed" Unchecked="EventSubCheckbox_Changed" />
                                 <CheckBox x:Name="chkEvHorizonsCup" Grid.Row="1" Grid.Column="4"
@@ -323,7 +323,7 @@
                                           ToolTipService.InitialShowDelay="0"
                                           Checked="EventSubCheckbox_Changed" Unchecked="EventSubCheckbox_Changed" />
                                 <CheckBox x:Name="chkEvSoloMilestone" Grid.Row="2" Grid.Column="4"
-                                          Content="Solo Milestone" FontSize="11" Margin="8,0,0,0"
+                                          Content="Teatime Delight" FontSize="11" Margin="8,0,0,0"
                                           ToolTipService.InitialShowDelay="0"
                                           Checked="EventSubCheckbox_Changed" Unchecked="EventSubCheckbox_Changed">
                                     <CheckBox.ToolTip>
@@ -353,6 +353,14 @@
                                           Checked="EventSubCheckbox_Changed" Unchecked="EventSubCheckbox_Changed">
                                     <CheckBox.ToolTip>
                                         <TextBlock Text="Daily Trade mechanic (internally DailyTasksV2):&#x0a;task definitions, merge-chain eligibility,&#x0a;completion rewards (chests) and settings." />
+                                    </CheckBox.ToolTip>
+                                </CheckBox>
+                                <CheckBox x:Name="chkEvDailyScoop" Grid.Row="3" Grid.Column="2"
+                                          Content="The Daily Scoop" FontSize="11" Margin="8,0,0,0"
+                                          ToolTipService.InitialShowDelay="0"
+                                          Checked="EventSubCheckbox_Changed" Unchecked="EventSubCheckbox_Changed">
+                                    <CheckBox.ToolTip>
+                                        <TextBlock Text="The Daily Scoop weekly daily-task event&#x0a;(internally DailyChallenges, incl. the legacy&#x0a;DailyScoop V1 libraries): week types and their&#x0a;segment selection, milestone ladders with&#x0a;rewards, day compositions with day boxes and&#x0a;all objectives incl. reward pools and fallbacks." />
                                     </CheckBox.ToolTip>
                                 </CheckBox>
                             </Grid>

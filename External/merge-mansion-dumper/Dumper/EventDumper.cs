@@ -1,4 +1,4 @@
-// Modified by Jouki (2026) — EventFilters: per-event filtering by EventId prefix
+﻿// Modified by Jouki (2026) — EventFilters: per-event filtering by EventId prefix
 // Replaces old EventCategories (per-config-type) with game-event-based filters
 using System;
 using System.Collections.Generic;
@@ -39,10 +39,11 @@ namespace merge_mansion_dumper.Dumper
         Shops = 1 << 14,
         SoloMilestone = 1 << 15,
         DailyTrades = 1 << 16,
+        DailyScoop = 1 << 17,
         All = LuckyCatch | LuckySnap | Seasonal | ReArchaeology | HorizonsCup
             | MixABooster | RollTheDice | GarageCleanup | Mysteries | BoultonLeague
             | Legacy | Uncategorised | BakeOff | Bonanza | Shops
-            | SoloMilestone | DailyTrades
+            | SoloMilestone | DailyTrades | DailyScoop
     }
 
     public class EventDumper : JsonDumper<IDictionary<string, object>>
@@ -287,9 +288,11 @@ namespace merge_mansion_dumper.Dumper
             events["EventLevels"] = config.EventLevels?.EnumerateAll()
                 .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
 
-            // DailyScoop — five interlinked libraries (Milestones / StandardObjectives /
-            // SpecialObjectives / Days / Weeks). Wild Item AB-patch WildItem_DailyScoop_V2_01_B
-            // touches DailyScoopStandardObjectives. Always exported for visibility.
+            // The Daily Scoop (filterable since v0.23.53) — V1 DailyScoop* libraries plus the
+            // V2 DailyChallenges* replacement (live since 2026-06-29). Wild Item AB-patch
+            // WildItem_DailyScoop_V2_01_B touches DailyScoopStandardObjectives.
+            if (_filters.HasFlag(EventFilters.DailyScoop))
+            {
             events["DailyScoopMilestones"] = config.DailyScoopMilestones?.EnumerateAll()
                 .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
             events["DailyScoopStandardObjectives"] = config.DailyScoopStandardObjectives?.EnumerateAll()
@@ -300,6 +303,34 @@ namespace merge_mansion_dumper.Dumper
                 .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
             events["DailyScoopWeeks"] = config.DailyScoopWeeks?.EnumerateAll()
                 .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
+
+            // DailyChallenges (The Daily Scoop V2, live since 2026-06-29) — nine interlinked
+            // libraries that were previously NOT exported (only reachable via the DumpHarness
+            // --probe-daily-challenges console probe). The weekly schedule itself lives in
+            // CoreSupportEvents (EventType=DailyChallengesEvent) and is exported above; these
+            // libraries carry the content: week selection maps, weeks with milestone ladders
+            // (Rewards + RewardSegment selection), day compositions incl. the day-completion
+            // box, and the standard/special objectives with reward pools and fallback chains.
+            // Several types hold PRIVATE [MetaMember]s — serialized completely via
+            // MetaDailyChallengesSerializer (see its remarks). Always exported.
+            events["DailyChallengesMinigames"] = config.DailyChallengesMinigames?.EnumerateAll()
+                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
+            events["DailyChallengesWeeksByMinigameId"] = config.DailyChallengesWeeksByMinigameId?.EnumerateAll()
+                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
+            events["DailyChallengesWeeksByPreviousCompletion"] = config.DailyChallengesWeeksByPreviousCompletion?.EnumerateAll()
+                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
+            events["DailyChallengesEventSettings"] = config.DailyChallengesEventSettings;
+            events["DailyChallengesWeeks"] = config.DailyChallengesWeeks?.EnumerateAll()
+                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
+            events["DailyChallengesDays"] = config.DailyChallengesDays?.EnumerateAll()
+                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
+            events["DailyChallengesStandardObjectives"] = config.DailyChallengesStandardObjectives?.EnumerateAll()
+                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
+            events["DailyChallengesSpecialObjectives"] = config.DailyChallengesSpecialObjectives?.EnumerateAll()
+                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
+            events["DailyChallengesMilestones"] = config.DailyChallengesMilestones?.EnumerateAll()
+                .Select(x => x.Value).ToArray() ?? Array.Empty<object>();
+            }
 
             // SoloMilestone events (Teatime Delight etc. — weekend events with milestone levels;
             // task completion in areas grants SoloMilestoneHotspotValue points → level up)

@@ -25,6 +25,17 @@ public record RemovedCommentedEntry(
     string Name,
     double OrderingIndex);
 
+public record RenamedEntry(
+    string OldName,                       // stale key currently in the mapping
+    string NewName,                       // area's current display name from areas.json
+    double OrderingIndex,                 // kept as-is — rename never moves the slot
+    bool IsCommented);                    // row is a `--["..."]` in-prep entry
+
+public record StaleEntry(
+    string Name,                          // mapping key with no counterpart in areas.json
+    double OrderingIndex,
+    bool IsCommented);
+
 // ── Service ──────────────────────────────────────────────────────────
 
 public static class AreaOrderingService
@@ -83,7 +94,66 @@ public static class AreaOrderingService
             if (parts.Length >= 2)
                 return Regex.Replace(parts[1], @"([A-Z])", " $1").Trim();
         }
-        return name;
+        // Trim: game data occasionally ships names with stray whitespace (" Walk-in Closet",
+        // 26.06.01) — untrimmed they never match mapping keys and read as stale rows.
+        return name.Trim();
+    }
+
+    /// <summary>
+    /// Fallback display name derived from an AreaId by splitting camelCase
+    /// ("FirstFloorPantry" → "First Floor Pantry"). This is exactly what BuildDisplayName
+    /// produced for areas whose localization was missing at dump time — and therefore the
+    /// key to detecting renames: a stale mapping row whose name equals this fallback for
+    /// some unmapped area belongs to that area (its real localization arrived later).
+    /// </summary>
+    public static string FallbackNameFromAreaId(string areaId)
+        => Regex.Replace(areaId, @"([A-Z])", " $1").Trim();
+
+    /// <summary>
+    /// Detects mapping rows (active + commented) whose names no longer exist in areas.json.
+    /// A stale row whose name equals <see cref="FallbackNameFromAreaId"/> of some area missing
+    /// from the mapping is a RENAME (e.g. "First Floor Pantry" → "Pantry") and keeps its
+    /// orderingIndex under the new name. Any other stale row is a DELETE.
+    /// </summary>
+    public static (List<RenamedEntry> Renames, List<StaleEntry> Deletes) DetectStaleEntries(
+        IReadOnlyList<AreaUnlockInfo> allAreas,
+        IReadOnlyDictionary<string, double> activeOrdering,
+        IReadOnlyList<RemovedCommentedEntry> commentedEntries)
+    {
+        var currentNames = new HashSet<string>(allAreas.Select(a => a.Name), StringComparer.Ordinal);
+
+        // Rename targets = areas NOT present in the mapping under their current name
+        var mappedNames = new HashSet<string>(activeOrdering.Keys, StringComparer.Ordinal);
+        foreach (var c in commentedEntries) mappedNames.Add(c.Name);
+        var unmappedAreas = allAreas.Where(a => !mappedNames.Contains(a.Name)).ToList();
+
+        var renames = new List<RenamedEntry>();
+        var deletes = new List<StaleEntry>();
+        var claimedTargets = new HashSet<string>(StringComparer.Ordinal);
+
+        void Classify(string name, double idx, bool isCommented)
+        {
+            if (currentNames.Contains(name) || SkipNames.Contains(name)) return;
+            var match = unmappedAreas.FirstOrDefault(a =>
+                !claimedTargets.Contains(a.Name) &&
+                string.Equals(FallbackNameFromAreaId(a.AreaId), name, StringComparison.Ordinal));
+            if (match != null)
+            {
+                claimedTargets.Add(match.Name);
+                renames.Add(new RenamedEntry(name, match.Name, idx, isCommented));
+            }
+            else
+            {
+                deletes.Add(new StaleEntry(name, idx, isCommented));
+            }
+        }
+
+        foreach (var kv in activeOrdering.OrderBy(kv => kv.Value))
+            Classify(kv.Key, kv.Value, isCommented: false);
+        foreach (var c in commentedEntries)
+            Classify(c.Name, c.OrderingIndex, isCommented: true);
+
+        return (renames, deletes);
     }
 
     /// <summary>
@@ -234,13 +304,146 @@ public static class AreaOrderingService
     /// 2. Inserts new entries after the last legit `["..."] = {orderingIndex = N},` row inside the `p` table.
     /// Other comment styles (`-- text`, block comments `--[[...]]`) are left untouched.
     /// </summary>
-    public static string PatchModuleContent(string moduleContent, IReadOnlyList<DeducedEntry> entries)
+    /// <summary>
+    /// Applies a rename to a single module row line, preserving the whole value part and the
+    /// '=' column where the name length allows it. Returns null when the line is not that row.
+    /// The active pattern can't match commented rows (`--` breaks `^[ \t]*\[`) and vice versa.
+    /// </summary>
+    public static string? TryRenameRowLine(string line, RenamedEntry ren)
     {
-        if (entries.Count == 0) return moduleContent;
+        var rx = new Regex(
+            @"^(?<lead>[ \t]*" + (ren.IsCommented ? "--" : "") + @")\[""" +
+            Regex.Escape(ren.OldName) + @"""\](?<gap>[ \t]*)(?<rest>=.*)$");
+        var m = rx.Match(line);
+        if (!m.Success) return null;
+        int newGap = Math.Max(1,
+            m.Groups["gap"].Value.Length + ren.OldName.Length - ren.NewName.Length);
+        return m.Groups["lead"].Value + "[\"" + ren.NewName + "\"]" +
+               new string(' ', newGap) + m.Groups["rest"].Value;
+    }
+
+    /// <summary>
+    /// Builds a unified-diff view of the mapping module for the ordering dialog: real module
+    /// rows in file order (which is orderingIndex order), changed rows marked Added/Removed,
+    /// unchanged rows between the first and last change kept as Match context (e.g. an in-prep
+    /// commented row sitting between a rename and the new additions). Rows outside the changed
+    /// span are omitted. Mirrors exactly what <see cref="PatchModuleContent"/> will do.
+    /// Reuses <see cref="Models.DiffLine"/> (Mystery diff model) — Match = unchanged context.
+    /// </summary>
+    public static List<Models.DiffLine> BuildDiffPreview(
+        string moduleContent,
+        IReadOnlyList<DeducedEntry> entries,
+        IReadOnlyList<RenamedEntry> renames,
+        IReadOnlyList<StaleEntry> deletes)
+    {
+        var lines = moduleContent.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
+        var rowRx = new Regex(
+            @"^[ \t]*(?<c>--)?\[""(?<n>[^""]+)""\]\s*=\s*\{[^}]*orderingIndex\s*=\s*[0-9.]+[^}]*\}\s*,?\s*$",
+            RegexOptions.Compiled);
+
+        static Models.DiffLine Line(Models.DiffLineType type, string text)
+            => new() { Type = type, Text = text };
+
+        var renameByKey = renames.ToDictionary(r => (r.OldName, r.IsCommented));
+        var deleteKeys = new HashSet<(string, bool)>(deletes.Select(d => (d.Name, d.IsCommented)));
+        var replacedCommented = new HashSet<string>(entries.Select(e => e.Name), StringComparer.Ordinal);
+
+        var annotated = new List<Models.DiffLine>();
+        int insertAfter = -1; // last surviving mapping row (mirrors PatchModuleContent's insertion point)
+        foreach (var line in lines)
+        {
+            var m = rowRx.Match(line);
+            if (!m.Success)
+            {
+                annotated.Add(Line(Models.DiffLineType.Match, line));
+                continue;
+            }
+            var name = m.Groups["n"].Value;
+            var commented = m.Groups["c"].Success;
+
+            if (deleteKeys.Contains((name, commented)))
+            {
+                annotated.Add(Line(Models.DiffLineType.Removed, line));
+            }
+            else if (renameByKey.TryGetValue((name, commented), out var ren))
+            {
+                annotated.Add(Line(Models.DiffLineType.Removed, line));
+                annotated.Add(Line(Models.DiffLineType.Added, TryRenameRowLine(line, ren) ?? line));
+                insertAfter = annotated.Count - 1;
+            }
+            else if (commented && replacedCommented.Contains(name))
+            {
+                // Cleared in-prep row being re-inserted with a fresh index (shows as add below)
+                annotated.Add(Line(Models.DiffLineType.Removed, line));
+            }
+            else
+            {
+                annotated.Add(Line(Models.DiffLineType.Match, line));
+                insertAfter = annotated.Count - 1;
+            }
+        }
+
+        if (entries.Count > 0)
+        {
+            var addLines = GeneratePreviewLua(entries).TrimEnd('\r', '\n')
+                .Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
+            annotated.InsertRange(insertAfter + 1,
+                addLines.Select(l => Line(Models.DiffLineType.Added, l)));
+        }
+
+        // Window: only the span from the first to the last change (keeps in-between context)
+        int first = annotated.FindIndex(d => d.Type != Models.DiffLineType.Match);
+        if (first < 0) return new List<Models.DiffLine>();
+        int last = annotated.FindLastIndex(d => d.Type != Models.DiffLineType.Match);
+        return annotated.GetRange(first, last - first + 1);
+    }
+
+    public static string PatchModuleContent(string moduleContent, IReadOnlyList<DeducedEntry> entries)
+        => PatchModuleContent(moduleContent, entries, Array.Empty<RenamedEntry>(), Array.Empty<StaleEntry>());
+
+    /// <summary>
+    /// Full patcher: renames stale rows in place (keeping index + extra fields like right/bot),
+    /// deletes stale rows with no counterpart in game data, then applies the original
+    /// add/clear-commented logic. All passes are line-anchored — other comment styles untouched.
+    /// </summary>
+    public static string PatchModuleContent(
+        string moduleContent,
+        IReadOnlyList<DeducedEntry> entries,
+        IReadOnlyList<RenamedEntry> renames,
+        IReadOnlyList<StaleEntry> deletes)
+    {
+        if (entries.Count == 0 && renames.Count == 0 && deletes.Count == 0) return moduleContent;
 
         // Detect EOL style
         var newline = moduleContent.Contains("\r\n") ? "\r\n" : "\n";
         var lines = moduleContent.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None).ToList();
+
+        // Pass 0a: renames — swap the key in place, keep the whole value part (incl. extras like
+        // right/bot offsets). Padding is adjusted so the '=' column moves as little as possible.
+        // Active pattern can't match commented rows (the `--` breaks `^[ \t]*\[`), and vice versa.
+        foreach (var ren in renames)
+        {
+            for (int i = 0; i < lines.Count; i++)
+            {
+                var renamed = TryRenameRowLine(lines[i], ren);
+                if (renamed == null) continue;
+                lines[i] = renamed;
+                break;
+            }
+        }
+
+        // Pass 0b: deletes — drop stale rows entirely (active or commented per entry)
+        foreach (var del in deletes)
+        {
+            var rx = new Regex(
+                @"^[ \t]*" + (del.IsCommented ? "--" : "") + @"\[""" +
+                Regex.Escape(del.Name) + @"""\]\s*=\s*\{[^}]*orderingIndex\s*=\s*[0-9.]+[^}]*\}\s*,?\s*$");
+            for (int i = lines.Count - 1; i >= 0; i--)
+                if (rx.IsMatch(lines[i])) lines.RemoveAt(i);
+        }
+
+        if (entries.Count == 0)
+            return string.Join(newline, lines);
 
         // Robust comment-row detection: line is `<spaces/tabs>--["NAME"] = {... orderingIndex = N ...},?`
         // Does NOT match `-- text` (no `[` after `--`) or `--[[` (block comment opener — second char is `[` not `"`)
@@ -262,21 +465,24 @@ public static class AreaOrderingService
                 lines.RemoveAt(i);
         }
 
-        // Pass 2: find the last legit row → that's the insertion point (insert after it)
-        int lastLegitIdx = -1;
+        // Pass 2: find the last mapping row (active OR commented) → insertion point. New entries
+        // always carry indices above the existing max, so inserting after trailing in-prep
+        // commented rows keeps the file orderingIndex-sorted (before, adds landed between the
+        // last active row and trailing commented rows).
+        int lastRowIdx = -1;
         for (int i = 0; i < lines.Count; i++)
-            if (legitRowRegex.IsMatch(lines[i])) lastLegitIdx = i;
-        if (lastLegitIdx < 0)
+            if (legitRowRegex.IsMatch(lines[i]) || commentedRowRegex.IsMatch(lines[i])) lastRowIdx = i;
+        if (lastRowIdx < 0)
             // Fallback: append before final `}` of `p` table; if none, append at end
-            lastLegitIdx = lines.Count - 1;
+            lastRowIdx = lines.Count - 1;
 
         // Build new lines (without trailing newline since we'll insert as separate list elements)
         var preview = GeneratePreviewLua(entries);
         // Strip trailing newline and split, so we get clean lines
         var newLines = preview.TrimEnd('\r', '\n').Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
 
-        // Insert after lastLegitIdx (so the new lines come right after the last legit row)
-        lines.InsertRange(lastLegitIdx + 1, newLines);
+        // Insert after lastRowIdx (so the new lines come right after the last mapping row)
+        lines.InsertRange(lastRowIdx + 1, newLines);
 
         return string.Join(newline, lines);
     }

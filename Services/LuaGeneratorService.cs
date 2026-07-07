@@ -1189,6 +1189,11 @@ public class LuaGeneratorService
         sb.AppendLine("--                  icon via Module:Utils Icon(name), not this field.");
         sb.AppendLine("--   parent      -- (Garage Cleanups only) the seasonal event this accompanies;");
         sb.AppendLine("--                  the widget nests the cleanup under that event.");
+        sb.AppendLine("--   prefix      -- (optional; CollectibleBoards events only) id-family prefix of the");
+        sb.AppendLine("--                  game event id (\"CBE\"/\"LDE\"/\"LC\"/\"LS\"/\"SE\"). Module:DailyScoop");
+        sb.AppendLine("--                  uses it to resolve Daily Scoop tasks whose params are ID-PREFIX");
+        sb.AppendLine("--                  filters (CBE_ matches CBE_* events only, not LDE_*). Preserved");
+        sb.AppendLine("--                  by regeneration on historical entries.");
         sb.AppendLine("--   runs        -- list of scheduled runs. A run is either:");
         sb.AppendLine("--                  * a single occurrence:");
         sb.AppendLine("--                      { start = {year=, month=, day=, hour=, min=}, durationDays = N }");
@@ -1222,6 +1227,8 @@ public class LuaGeneratorService
             sb.AppendLine($"\t\t\tcategory = \"{Esc(g.Category)}\",");
             if (!string.IsNullOrEmpty(g.Badge))
                 sb.AppendLine($"\t\t\tbadge = \"{Esc(g.Badge)}\",");
+            if (!string.IsNullOrEmpty(g.Prefix))
+                sb.AppendLine($"\t\t\tprefix = \"{Esc(g.Prefix)}\",");
             sb.AppendLine("\t\t\truns = {");
 
             // Column alignment within this event's run list: pad month/day/hour/min so the

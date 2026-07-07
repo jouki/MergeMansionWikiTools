@@ -21,12 +21,35 @@ internal static class DiscordDumpService
 
     // ── Public API ──
 
+    /// <summary>Newest dump post on the channel: message coordinates + parsed metadata.</summary>
+    public record LastPublishedInfo(
+        string MessageId,
+        string ChannelId,
+        DateTimeOffset? CreatedAt,      // data timestamp from "The data itself was created at …"
+        string? MmwtVersion,            // from "MMWT Version: …" (null on pre-v0.23.38 posts)
+        string Content);                // raw message content (for in-place content updates)
+
+    public enum PublishMode
+    {
+        None,             // nothing to do (same data + same/older app version)
+        NewPost,          // data newer than the last published dump → post a new message
+        UpdateExisting,   // same data, newer MMWT → replace archive + MMWT line on the existing post
+    }
+
     /// <summary>
     /// Reads the most recent message in the channel and extracts the "created at" timestamp
     /// from the second line (format: "The data itself was created at {ISO8601}").
     /// Returns null if no messages found or parsing fails.
     /// </summary>
     public static async Task<DateTimeOffset?> GetLastPublishedDateAsync(string botToken, string channelId)
+        => (await GetLastPublishedInfoAsync(botToken, channelId))?.CreatedAt;
+
+    /// <summary>
+    /// Like <see cref="GetLastPublishedDateAsync"/> but returns the full info about the newest
+    /// dump post (message id/channel, data timestamp, MMWT version, raw content) — needed for
+    /// the update-in-place publish mode.
+    /// </summary>
+    public static async Task<LastPublishedInfo?> GetLastPublishedInfoAsync(string botToken, string channelId)
     {
         var request = new HttpRequestMessage(HttpMethod.Get,
             $"{BaseUrl}/channels/{channelId}/messages?limit=5");
@@ -46,17 +69,64 @@ internal static class DiscordDumpService
         if (messages.ValueKind != JsonValueKind.Array || messages.GetArrayLength() == 0)
             return null;
 
-        // Search recent messages for the "created at" pattern
+        // Search recent messages (newest first) for the "created at" pattern
         foreach (var msg in messages.EnumerateArray())
         {
             var content = msg.GetProperty("content").GetString();
             if (string.IsNullOrEmpty(content)) continue;
 
             var parsed = ParseCreatedAtFromMessage(content);
-            if (parsed.HasValue) return parsed;
+            if (!parsed.HasValue) continue;
+
+            return new LastPublishedInfo(
+                msg.GetProperty("id").GetString() ?? "",
+                msg.GetProperty("channel_id").GetString() ?? "",
+                parsed,
+                ParseMmwtVersionFromMessage(content),
+                content);
         }
 
         return null;
+    }
+
+    /// <summary>
+    /// Decides what the Publish button should do for a dump with the given CreatedAt:
+    /// newer data → NewPost; same data but newer running MMWT version than the one recorded
+    /// on the post (missing line counts as older) → UpdateExisting; anything else → None.
+    /// </summary>
+    public static PublishMode DecidePublishMode(
+        string? dumpCreatedAt, LastPublishedInfo? lastPublished, string currentAppVersion)
+    {
+        if (string.IsNullOrEmpty(dumpCreatedAt)) return PublishMode.None;
+        if (lastPublished?.CreatedAt == null) return PublishMode.NewPost;
+
+        if (!DateTimeOffset.TryParse(dumpCreatedAt, CultureInfo.InvariantCulture,
+                DateTimeStyles.RoundtripKind, out var dumpDate))
+            return PublishMode.None;
+
+        if (dumpDate > lastPublished.CreatedAt.Value) return PublishMode.NewPost;
+        if (dumpDate < lastPublished.CreatedAt.Value) return PublishMode.None;
+
+        // Same data timestamp — offer an in-place update when the app is newer than the
+        // version recorded on the post ("MMWT Version:" missing = old post = always older).
+        var published = lastPublished.MmwtVersion;
+        if (string.IsNullOrEmpty(published)) return PublishMode.UpdateExisting;
+        return ApkDownloadService.CompareVersions(
+                   currentAppVersion.TrimStart('v', 'V'), published.TrimStart('v', 'V')) > 0
+            ? PublishMode.UpdateExisting
+            : PublishMode.None;
+    }
+
+    /// <summary>
+    /// Returns the post content with the "MMWT Version:" line value replaced (or the line
+    /// appended when the post predates it). Everything else is kept verbatim.
+    /// </summary>
+    public static string BuildUpdatedContent(string originalContent, string newMmwtVersion)
+    {
+        var rx = new System.Text.RegularExpressions.Regex(@"(MMWT Version:).*");
+        if (rx.IsMatch(originalContent))
+            return rx.Replace(originalContent, $"$1 {newMmwtVersion}", 1);
+        return originalContent.TrimEnd('\n', '\r') + $"\nMMWT Version: {newMmwtVersion}";
     }
 
     /// <summary>
@@ -66,23 +136,18 @@ internal static class DiscordDumpService
     private static readonly string[] ForwardChannelIds = ["783385526387998743"];
 
     /// <summary>
-    /// Creates a ZIP from the dump folder and uploads it to the Discord channel with a message.
-    /// Also forwards to additional channels.
+    /// Creates the dump 7z archive (LZMA2 ultra, incl. Phone Raw Files, with the
+    /// too-large retry without Experimental/). Returns null when the archive can't fit
+    /// the 25 MB Discord limit. Caller owns (and must delete) the returned temp file.
     /// </summary>
-    public static async Task<bool> PublishDumpAsync(
-        string botToken, string channelId, string dumpDir, string createdAt,
-        IProgress<string>? progress = null)
+    private static (string ZipPath, string ZipName)? BuildArchive(
+        string dumpDir, DateTimeOffset now, IProgress<string>? progress)
     {
-        // 1. Create 7z archive with LZMA2 ultra compression
         progress?.Report("Creating 7z archive…");
-        var now = DateTimeOffset.Now;
         var archiveName = $"dump_{now:dd_MM_yyyy_HH_mm}.7z";
         var zipPath = Path.Combine(Path.GetTempPath(), archiveName);
-        var zipName = archiveName;
 
-        try
-        {
-            if (File.Exists(zipPath)) File.Delete(zipPath);
+        if (File.Exists(zipPath)) File.Delete(zipPath);
 
             // Include Phone Raw Files (C/P/L — newest file from each) if available
             string? combinedDir = null;
@@ -218,9 +283,28 @@ internal static class DiscordDumpService
             if (archiveSize > 25 * 1024 * 1024)
             {
                 progress?.Report("ERROR: Archive still exceeds 25 MB Discord limit.");
-                return false;
+                try { File.Delete(zipPath); } catch { }
+                return null;
             }
 
+        return (zipPath, archiveName);
+    }
+
+    /// <summary>
+    /// Creates a ZIP from the dump folder and uploads it to the Discord channel with a message.
+    /// Also forwards to additional channels.
+    /// </summary>
+    public static async Task<bool> PublishDumpAsync(
+        string botToken, string channelId, string dumpDir, string createdAt,
+        IProgress<string>? progress = null)
+    {
+        var now = DateTimeOffset.Now;
+        var archive = BuildArchive(dumpDir, now, progress);
+        if (archive == null) return false;
+        var (zipPath, zipName) = archive.Value;
+
+        try
+        {
             // 2. Build message
             var messageText = $"New dumps from {now:dd.MM.yyyy HH:mm}{now:zzz}.\n" +
                               $"The data itself was created at {createdAt}";
@@ -349,6 +433,71 @@ internal static class DiscordDumpService
     }
 
     /// <summary>
+    /// Update-in-place publish: same data timestamp already on Discord, but the running MMWT
+    /// is newer — PATCHes the existing post: replaces the attached archive (attachments=[] +
+    /// new files[0]) and swaps the "MMWT Version:" line in the content. The bot must be the
+    /// author of the message (dump posts are). Forwards are snapshots and are NOT re-sent.
+    /// </summary>
+    public static async Task<bool> UpdateDumpMessageAsync(
+        string botToken, LastPublishedInfo target, string dumpDir,
+        IProgress<string>? progress = null)
+    {
+        var now = DateTimeOffset.Now;
+        var archive = BuildArchive(dumpDir, now, progress);
+        if (archive == null) return false;
+        var (zipPath, zipName) = archive.Value;
+
+        try
+        {
+            var newContent = BuildUpdatedContent(target.Content,
+                MergeMansionWikiTools.Models.AppVersion.Version);
+
+            progress?.Report("Updating existing Discord post…");
+            var fileBytes = await File.ReadAllBytesAsync(zipPath);
+
+            using var form = new MultipartFormDataContent();
+            // payload_json with attachments=[] drops the old archive; files[0] attaches the new one
+            var payload = JsonSerializer.Serialize(new
+            {
+                content = newContent,
+                attachments = Array.Empty<object>()
+            });
+            form.Add(new StringContent(payload, Encoding.UTF8, "application/json"), "payload_json");
+
+            var fc = new ByteArrayContent(fileBytes);
+            fc.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            form.Add(fc, "files[0]", zipName);
+
+            var request = new HttpRequestMessage(HttpMethod.Patch,
+                $"{BaseUrl}/channels/{target.ChannelId}/messages/{target.MessageId}");
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bot", botToken);
+            request.Content = form;
+
+            var response = await _http.SendAsync(request);
+            if (!response.IsSuccessStatusCode)
+            {
+                var body = await response.Content.ReadAsStringAsync();
+                progress?.Report($"Discord API error: {response.StatusCode} — {body}");
+                AppLogger.Warn($"Discord dump update failed: {response.StatusCode} — {body}");
+                return false;
+            }
+
+            progress?.Report("Existing post updated (archive + MMWT version).");
+            AppLogger.Info($"Discord dump post {target.MessageId} updated with {zipName}");
+
+            // Forwards are immutable snapshots — editing the original doesn't propagate.
+            // Delete the stale forward(s) for this data and re-forward the updated original.
+            await RefreshForwardsAsync(botToken, target.MessageId, target.ChannelId,
+                target.CreatedAt, progress);
+            return true;
+        }
+        finally
+        {
+            try { if (File.Exists(zipPath)) File.Delete(zipPath); } catch { }
+        }
+    }
+
+    /// <summary>
     /// Reads CreatedAt from a dump JSON file (root-level property).
     /// </summary>
     public static string? ReadCreatedAtFromDump(string dumpDir)
@@ -451,25 +600,148 @@ internal static class DiscordDumpService
         return string.IsNullOrEmpty(v) ? null : v;
     }
 
+    /// <summary>
+    /// Parses "MMWT Version: {version}" from a Discord dump message (the app version that
+    /// produced the dump). Returns null for posts that predate the line.
+    /// </summary>
+    internal static string? ParseMmwtVersionFromMessage(string content)
+    {
+        const string marker = "MMWT Version:";
+        var idx = content.IndexOf(marker, StringComparison.OrdinalIgnoreCase);
+        if (idx < 0) return null;
+
+        var v = content[(idx + marker.Length)..].Trim();
+        var newlineIdx = v.IndexOf('\n');
+        if (newlineIdx >= 0) v = v[..newlineIdx].Trim();
+
+        // Strip invisible/zero-width chars + un-escape Discord editor escaping ("v0\.23\.52")
+        v = new string(v.Where(c => c <= 127).ToArray()).Trim();
+        v = v.Replace("\\.", ".").Replace("\\:", ":");
+        v = v.TrimEnd('.', ',', ';', ' ');
+
+        return string.IsNullOrEmpty(v) ? null : v;
+    }
+
+    /// <summary>
+    /// True when a forwarded message's snapshot content describes the same dump data
+    /// (identical "created at" timestamp). Used to locate the stale forward to replace:
+    /// Discord forwards are immutable snapshots, so an edited original does NOT propagate —
+    /// the only way to refresh a forward is delete + re-forward.
+    /// </summary>
+    internal static bool ForwardSnapshotMatchesData(string? snapshotContent, DateTimeOffset targetCreatedAt)
+    {
+        if (string.IsNullOrEmpty(snapshotContent)) return false;
+        var parsed = ParseCreatedAtFromMessage(snapshotContent);
+        return parsed.HasValue && parsed.Value == targetCreatedAt;
+    }
+
+    /// <summary>
+    /// Builds the re-upload note posted alongside a refreshed forward. Embeds the data timestamp
+    /// via the same "The data itself was created at …" phrase the parser recognizes, so the NEXT
+    /// update can find and delete this note too. Null when no timestamp is known.
+    /// </summary>
+    internal static string? BuildForwardNote(DateTimeOffset? dataCreatedAt)
+        => dataCreatedAt.HasValue
+            ? "🔄 Updated re-upload of the original dump post — refreshed to fix missing/incomplete data.\n" +
+              $"(The data itself was created at {dataCreatedAt.Value:yyyy-MM-ddTHH:mm:ss.fffzzz})"
+            : null;
+
+    /// <summary>
+    /// Refreshes the forwarded copies after an in-place update of the original: deletes each
+    /// forward channel's stale forward AND stale note for this data timestamp, then posts a fresh
+    /// note + forwards the (now-updated) original so the snapshot captures the new archive.
+    /// Discord forbids content ON a forward (error 160011) — the note is a separate message,
+    /// exactly how the Discord client sends the "optional message" when forwarding. Non-fatal per channel.
+    /// </summary>
+    private static async Task RefreshForwardsAsync(
+        string botToken, string sourceMessageId, string sourceChannelId,
+        DateTimeOffset? dataCreatedAt, IProgress<string>? progress)
+    {
+        if (dataCreatedAt.HasValue)
+        {
+            foreach (var fwdId in ForwardChannelIds)
+            {
+                try
+                {
+                    var req = new HttpRequestMessage(HttpMethod.Get,
+                        $"{BaseUrl}/channels/{fwdId}/messages?limit=50");
+                    req.Headers.Authorization = new AuthenticationHeaderValue("Bot", botToken);
+                    var res = await _http.SendAsync(req);
+                    if (!res.IsSuccessStatusCode) continue;
+
+                    var json = await res.Content.ReadAsStringAsync();
+                    using var doc = JsonDocument.Parse(json);
+                    if (doc.RootElement.ValueKind != JsonValueKind.Array) continue;
+
+                    foreach (var msg in doc.RootElement.EnumerateArray())
+                    {
+                        // Match either a forward (its snapshot content) OR our own note (its content).
+                        string? matchContent = null;
+                        if (msg.TryGetProperty("message_snapshots", out var snaps) &&
+                            snaps.ValueKind == JsonValueKind.Array)
+                        {
+                            foreach (var snap in snaps.EnumerateArray())
+                                if (snap.TryGetProperty("message", out var sm) &&
+                                    sm.TryGetProperty("content", out var c))
+                                { matchContent = c.GetString(); break; }
+                        }
+                        else if (msg.TryGetProperty("content", out var oc))
+                        {
+                            matchContent = oc.GetString();
+                        }
+
+                        if (!ForwardSnapshotMatchesData(matchContent, dataCreatedAt.Value)) continue;
+
+                        var msgId = msg.GetProperty("id").GetString();
+                        var delReq = new HttpRequestMessage(HttpMethod.Delete,
+                            $"{BaseUrl}/channels/{fwdId}/messages/{msgId}");
+                        delReq.Headers.Authorization = new AuthenticationHeaderValue("Bot", botToken);
+                        var delRes = await _http.SendAsync(delReq);
+                        if (delRes.IsSuccessStatusCode)
+                            progress?.Report($"Removed stale forward/note in {fwdId}.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    progress?.Report($"Forward refresh (delete) in {fwdId} error: {ex.Message}");
+                }
+            }
+        }
+
+        // Post note (separate message) + forward the updated original.
+        await ForwardToChannelsAsync(botToken, sourceMessageId, sourceChannelId, progress,
+            note: BuildForwardNote(dataCreatedAt));
+    }
+
     private static async Task ForwardToChannelsAsync(
         string botToken, string messageId, string sourceChannelId,
-        IProgress<string>? progress)
+        IProgress<string>? progress, string? note = null)
     {
         foreach (var fwdId in ForwardChannelIds)
         {
             try
             {
+                // Note first, as its OWN message — Discord forbids content on a forward (error
+                // 160011). This mirrors the client: the "optional message" when forwarding is a
+                // separate message, not content embedded in the forward. Best-effort.
+                if (!string.IsNullOrEmpty(note))
+                {
+                    var notePayload = JsonSerializer.Serialize(new { content = note });
+                    var noteReq = new HttpRequestMessage(HttpMethod.Post,
+                        $"{BaseUrl}/channels/{fwdId}/messages");
+                    noteReq.Headers.Authorization = new AuthenticationHeaderValue("Bot", botToken);
+                    noteReq.Content = new StringContent(notePayload, Encoding.UTF8, "application/json");
+                    var noteRes = await _http.SendAsync(noteReq);
+                    if (!noteRes.IsSuccessStatusCode)
+                        progress?.Report($"Note to {fwdId} failed: {noteRes.StatusCode}");
+                }
+
                 progress?.Report($"Forwarding to channel {fwdId}…");
 
-                // Discord forward: message_reference with type 1 (FORWARD)
+                // Discord forward: message_reference with type 1 (FORWARD), no content.
                 var payload = JsonSerializer.Serialize(new
                 {
-                    message_reference = new
-                    {
-                        type = 1, // FORWARD
-                        channel_id = sourceChannelId,
-                        message_id = messageId
-                    }
+                    message_reference = new { type = 1, channel_id = sourceChannelId, message_id = messageId }
                 });
 
                 var fwdReq = new HttpRequestMessage(HttpMethod.Post,

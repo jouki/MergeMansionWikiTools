@@ -321,6 +321,29 @@ internal static class SpriteMetadataService
     /// Returns an array of level numbers in sprite reading order (top→bottom, left→right),
     /// with 0 for unmatched sprites. Returns null if no skin mappings are available for this texture.
     /// </summary>
+    /// <summary>Reading-order sort matching the flood-fill display (<see cref="ImageProcessingService"/>
+    /// OrderObjects/SplitIntoObjectRows): visual rows top→bottom, within a row left→right, with a
+    /// row tolerance so a few px of Y difference doesn't split one visual row. Works in atlas Unity
+    /// coords (RectY up), so rows go by RectY descending (top of image first).</summary>
+    internal static List<SpriteInfo> OrderSpritesReadingRows(List<SpriteInfo> sprites)
+    {
+        if (sprites.Count <= 1) return sprites;
+        var byCenter = sprites.OrderByDescending(s => s.RectY + s.RectHeight / 2.0).ToList();
+        var rows = new List<List<SpriteInfo>>();
+        var cur = new List<SpriteInfo> { byCenter[0] };
+        for (int i = 1; i < byCenter.Count; i++)
+        {
+            double prevCenter = cur[^1].RectY + cur[^1].RectHeight / 2.0;
+            double currCenter = byCenter[i].RectY + byCenter[i].RectHeight / 2.0;
+            double gap = prevCenter - currCenter; // descending → prev ≥ curr
+            double threshold = System.Math.Max(cur[^1].RectHeight, byCenter[i].RectHeight) / 2.0;
+            if (gap > threshold) { rows.Add(cur); cur = new List<SpriteInfo>(); }
+            cur.Add(byCenter[i]);
+        }
+        rows.Add(cur);
+        return rows.SelectMany(r => r.OrderBy(s => s.RectX)).ToList();
+    }
+
     public static int[]? PredictIndicesFromSkinMapping(
         List<SpriteInfo> sprites, List<ParsedItem> chainItems,
         List<SkinMapping> allSkinMappings, string textureName)
@@ -339,11 +362,13 @@ internal static class SpriteMetadataService
 
         AppLogger.Info($"Found {relevantMappings.Count} skin mappings for texture '{textureName}'");
 
-        // Sort sprites in reading order: Y desc (top first), X asc (left first)
-        var ordered = sprites
-            .OrderByDescending(s => s.RectY)
-            .ThenBy(s => s.RectX)
-            .ToList();
+        // Order sprites the SAME way the flood-fill display does (OrderObjects/SplitIntoObjectRows):
+        // group into visual rows by vertical-center gap (≤ half the taller sprite = same row), rows
+        // top→bottom (Unity RectY desc = top of image first), within a row left→right (RectX asc).
+        // A few px of Y difference must NOT reorder sprites that are visually in the same row — e.g.
+        // CSE_SoloMilestone_Chest has RectY 2 vs 14, and pure "RectY desc, RectX asc" pushed the
+        // left-most chest to the end, so the index string pointed at the wrong slot.
+        var ordered = OrderSpritesReadingRows(sprites);
 
         var results = new int[ordered.Count];
 
@@ -354,12 +379,29 @@ internal static class SpriteMetadataService
             spriteToSkin.TryAdd(m.SpriteName, m.SkinName);
         }
 
-        // Build SkinName → chain item Level lookup
+        // Build SkinName → chain item Level lookup. Two guards for over-inclusive wiki merges (many
+        // same-named boxes → one chain, e.g. "Teatime Reward Box" = primary CSE_SoloMilestone_Chest1
+        // + 8 aliases, where one alias maps to a DIFFERENT chest sprite):
+        //   1. Per level, prefer the PRIMARY (non-alias) items — the wiki's canonical item defines the
+        //      chain's sprite. Aliases are alternative names that may point at other sprites; fall back
+        //      to them only when a level has no primary item.
+        //   2. Within the chosen pool, the MAJORITY SkinName per level wins; a strict minority sprite
+        //      belongs to a different box → dashed. Ties are kept in full so genuine same-level
+        //      variants (e.g. Flower Bed L6 A/B/C, 1 item each) don't lose sprites.
         var skinToLevel = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
-        foreach (var item in chainItems)
+        foreach (var levelGroup in chainItems
+            .Where(i => !string.IsNullOrEmpty(i.SkinName))
+            .GroupBy(i => i.Level))
         {
-            if (!string.IsNullOrEmpty(item.SkinName))
-                skinToLevel.TryAdd(item.SkinName, item.Level);
+            var pool = levelGroup.Where(i => !i.IsAlias).ToList();
+            if (pool.Count == 0) pool = levelGroup.ToList();
+            var counts = pool
+                .GroupBy(i => i.SkinName!, StringComparer.OrdinalIgnoreCase)
+                .Select(g => (Skin: g.Key, Count: g.Count()))
+                .ToList();
+            int maxCount = counts.Max(c => c.Count);
+            foreach (var c in counts.Where(c => c.Count == maxCount))
+                skinToLevel[c.Skin] = levelGroup.Key;
         }
 
         int matched = 0;

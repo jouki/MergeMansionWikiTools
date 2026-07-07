@@ -122,6 +122,12 @@
                                       IsHitTestVisible="False" Focusable="False"
                                       Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed" />
                         </Border>
+                        <Border Style="{StaticResource FilterRow}"
+                                MouseLeftButtonDown="FilterRow_Click">
+                            <CheckBox x:Name="chkStragglers" Content="Unmapped"
+                                      IsHitTestVisible="False" Focusable="False"
+                                      Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed" />
+                        </Border>
                     </StackPanel>
                     </Border>
                 </Border>
@@ -160,15 +166,34 @@
             </StackPanel>
         </Grid>
 
-        <!-- Filter hint -->
-        <StackPanel x:Name="filterHint" Grid.Row="2" Orientation="Horizontal"
-                    Margin="4,0,4,8" Visibility="Collapsed">
-            <ui:SymbolIcon Symbol="Info16" FontSize="14"
-                           Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                           VerticalAlignment="Center" />
-            <TextBlock x:Name="txtFilterHint" Margin="6,0,0,0"
-                       FontSize="12" VerticalAlignment="Center"
-                       Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+        <!-- Hints (Row 2): unmapped-straggler banner + filter hint -->
+        <StackPanel Grid.Row="2" Orientation="Vertical">
+            <!-- Unmapped straggler banner — clickable, toggles the Unmapped filter -->
+            <Border x:Name="stragglerBanner" Margin="4,0,4,8" Padding="10,6"
+                    Background="#332E1400" BorderBrush="#B85C00" BorderThickness="1"
+                    CornerRadius="6" Cursor="Hand" Visibility="Collapsed"
+                    MouseLeftButtonDown="StragglerBanner_Click">
+                <StackPanel Orientation="Horizontal">
+                    <ui:SymbolIcon Symbol="Warning16" FontSize="14" Foreground="#E08A2E"
+                                   VerticalAlignment="Center" />
+                    <TextBlock x:Name="txtStragglerBanner" Margin="8,0,0,0"
+                               FontSize="12" VerticalAlignment="Center"
+                               Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                    <TextBlock Text="Review →" Margin="10,0,0,0" FontSize="12" FontWeight="SemiBold"
+                               VerticalAlignment="Center" Foreground="#E08A2E" />
+                </StackPanel>
+            </Border>
+
+            <!-- Filter hint -->
+            <StackPanel x:Name="filterHint" Orientation="Horizontal"
+                        Margin="4,0,4,8" Visibility="Collapsed">
+                <ui:SymbolIcon Symbol="Info16" FontSize="14"
+                               Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                               VerticalAlignment="Center" />
+                <TextBlock x:Name="txtFilterHint" Margin="6,0,0,0"
+                           FontSize="12" VerticalAlignment="Center"
+                           Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+            </StackPanel>
         </StackPanel>
 
         <!-- Chain list -->
@@ -281,6 +306,17 @@
                                                             Converter={StaticResource BoolToVis}}">
                                                     <TextBlock Text="Wiki" FontSize="9" FontWeight="SemiBold"
                                                                Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}" />
+                                                </Border>
+                                                <!-- Unmapped straggler badge -->
+                                                <Border Background="#B85C00"
+                                                        CornerRadius="3" Padding="5,1" Margin="8,0,0,0"
+                                                        VerticalAlignment="Center"
+                                                        ToolTipService.InitialShowDelay="0"
+                                                        ToolTip="{Binding StragglerTooltip}"
+                                                        Visibility="{Binding IsUnmappedStraggler,
+                                                            Converter={StaticResource BoolToVis}}">
+                                                    <TextBlock Text="Unmapped" FontSize="9" FontWeight="SemiBold"
+                                                               Foreground="White" />
                                                 </Border>
                                             </StackPanel>
                                             <TextBlock Text="{Binding ConfigKey}"

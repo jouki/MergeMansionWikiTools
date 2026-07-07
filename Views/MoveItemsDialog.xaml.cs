@@ -51,8 +51,9 @@ public partial class MoveItemsDialog : FluentWindow
 
     // ── Backlinks state ──
     private CancellationTokenSource? _backlinksCts;
-    private List<string> _allBacklinks = new();
-    private List<BacklinkItem> _currentPageItems = new();
+    // One persistent BacklinkItem per backlink — check state survives page switches;
+    // pagination only changes which slice is displayed.
+    private List<BacklinkItem> _allBacklinkItems = new();
     private bool _backlinksReady; // true when Loaded or Empty
     private int _backlinksPage;
     private const int BacklinksPerPage = 15;
@@ -629,7 +630,7 @@ public partial class MoveItemsDialog : FluentWindow
                 txtBacklinksEmpty.Visibility = Visibility.Collapsed;
                 backlinksList.Visibility = Visibility.Visible;
                 backlinksActions.Visibility = Visibility.Visible;
-                backlinksPagination.Visibility = _allBacklinks.Count > BacklinksPerPage
+                backlinksPagination.Visibility = _allBacklinkItems.Count > BacklinksPerPage
                     ? Visibility.Visible : Visibility.Collapsed;
                 _backlinksReady = true;
                 UpdateBacklinksDimming();
@@ -680,7 +681,9 @@ public partial class MoveItemsDialog : FluentWindow
 
             if (ct.IsCancellationRequested) return;
 
-            _allBacklinks = backlinks;
+            _allBacklinkItems = backlinks
+                .Select(t => new BacklinkItem { Title = t, IsChecked = false })
+                .ToList();
 
             if (backlinks.Count == 0)
             {
@@ -710,19 +713,14 @@ public partial class MoveItemsDialog : FluentWindow
 
     private void ShowBacklinksPage(int page)
     {
-        var totalPages = Math.Max(1, (int)Math.Ceiling((double)_allBacklinks.Count / BacklinksPerPage));
+        var totalPages = Math.Max(1, (int)Math.Ceiling((double)_allBacklinkItems.Count / BacklinksPerPage));
         page = Math.Clamp(page, 0, totalPages - 1);
         _backlinksPage = page;
 
         var start = page * BacklinksPerPage;
-        var count = Math.Min(BacklinksPerPage, _allBacklinks.Count - start);
+        var count = Math.Min(BacklinksPerPage, _allBacklinkItems.Count - start);
 
-        _currentPageItems = _allBacklinks
-            .Skip(start).Take(count)
-            .Select(t => new BacklinkItem { Title = t, IsChecked = false })
-            .ToList();
-
-        backlinksList.ItemsSource = _currentPageItems;
+        backlinksList.ItemsSource = _allBacklinkItems.Skip(start).Take(count).ToList();
 
         // Update pagination UI
         txtBacklinksPageInfo.Text = $"Page {page + 1} of {totalPages}";
@@ -732,13 +730,14 @@ public partial class MoveItemsDialog : FluentWindow
 
     private void BtnBacklinksSelectAll_Click(object sender, RoutedEventArgs e)
     {
-        foreach (var item in _currentPageItems)
+        // All pages, not just the visible one — the header advertises the full count.
+        foreach (var item in _allBacklinkItems)
             item.IsChecked = true;
     }
 
     private void BtnBacklinksDeselectAll_Click(object sender, RoutedEventArgs e)
     {
-        foreach (var item in _currentPageItems)
+        foreach (var item in _allBacklinkItems)
             item.IsChecked = false;
     }
 
@@ -750,19 +749,18 @@ public partial class MoveItemsDialog : FluentWindow
 
     private void BtnBacklinksNext_Click(object sender, RoutedEventArgs e)
     {
-        var totalPages = (int)Math.Ceiling((double)_allBacklinks.Count / BacklinksPerPage);
+        var totalPages = (int)Math.Ceiling((double)_allBacklinkItems.Count / BacklinksPerPage);
         if (_backlinksPage < totalPages - 1)
             ShowBacklinksPage(_backlinksPage + 1);
     }
 
     /// <summary>
-    /// Collects all checked backlink titles from the current page.
-    /// Items on non-visited pages are unchecked by default.
+    /// Collects checked backlink titles across ALL pages, not just the visible one.
     /// </summary>
     private List<string> GetCheckedBacklinks()
     {
         var result = new List<string>();
-        foreach (var item in _currentPageItems)
+        foreach (var item in _allBacklinkItems)
         {
             if (item.IsChecked)
                 result.Add(item.Title);

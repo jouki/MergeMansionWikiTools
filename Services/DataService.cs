@@ -252,6 +252,11 @@ public class DataService
             NumericConfigKey = GetStringOrNumber(item, "ConfigKey"),
             SellCoins = GetInt(item, "SellCoins"),
             Unsellable = GetBool(item, "Unsellable"),
+            RequiredItemValue = item.TryGetProperty("RequiredItemValue", out var reqV)
+                && reqV.ValueKind == JsonValueKind.Number ? reqV.GetInt32() : null,
+            RewardItemValue = item.TryGetProperty("RewardItemValue", out var rwdV)
+                && rwdV.ValueKind == JsonValueKind.Number ? rwdV.GetInt32() : null,
+            PoolTag = GetString(item, "PoolTag"),
             Description = GetString(item, "Description"),
             SkinName = GetString(item, "SkinName"),
         };

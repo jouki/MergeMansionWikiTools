@@ -292,11 +292,10 @@ internal static class ImageProcessingService
     {
         if (textureSprites.Count == 0) return null;
 
-        // Step 1: Sort sprites (Unity Y desc, X asc) — same as Image Optimiser
-        var orderedSprites = textureSprites
-            .OrderByDescending(s => s.RectY)
-            .ThenBy(s => s.RectX)
-            .ToList();
+        // Step 1: Sort sprites into reading rows (row-tolerant left→right) — MUST match the ordering
+        // inside PredictIndicesFromSkinMapping so its indices[] line up with these positions, and match
+        // the flood-fill display. Pure "RectY desc, X asc" split visually-one-row sprites by a few px.
+        var orderedSprites = SpriteMetadataService.OrderSpritesReadingRows(textureSprites);
 
         // Step 2: Build sprite index → level mapping
         int[] indices;

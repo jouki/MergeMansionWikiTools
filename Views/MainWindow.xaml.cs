@@ -54,6 +54,12 @@ public partial class MainWindow : FluentWindow
         await svc.LoadAsync(path);
         return svc;
     });
+    private readonly AsyncDataCache<DailyTradeService> _dailyTradeServiceCache = new(async path =>
+    {
+        var svc = new DailyTradeService();
+        await svc.LoadAsync(path);
+        return svc;
+    });
     private readonly AsyncDataCache<EventService> _eventServiceCache = new(async path =>
     {
         var svc = new EventService();
@@ -89,6 +95,15 @@ public partial class MainWindow : FluentWindow
         var path = Settings.AreasJsonPath;
         if (string.IsNullOrEmpty(path) || !File.Exists(path)) return null;
         return await _areasServiceCache.GetOrLoadAsync(path);
+    }
+
+    /// <summary>Shared, cached DailyTradeService from Settings.EventsJsonPath. Null when the
+    /// path is unset/missing. The service's HasData is false if the dump lacks Daily Trade data.</summary>
+    public async Task<DailyTradeService?> GetDailyTradeServiceAsync()
+    {
+        var path = Settings.EventsJsonPath;
+        if (string.IsNullOrEmpty(path) || !File.Exists(path)) return null;
+        return await _dailyTradeServiceCache.GetOrLoadAsync(path);
     }
 
     /// <summary>Shared, cached EventService loaded from Settings.EventsJsonPath, with
@@ -202,6 +217,7 @@ public partial class MainWindow : FluentWindow
         // the primary invalidation hooks; this covers any extraction flow that bypasses
         // them). Cheap — caches re-parse lazily on next access.
         _areasServiceCache.Invalidate();
+        _dailyTradeServiceCache.Invalidate();
         _eventServiceCache.Invalidate();
         _dialogueServiceCache.Invalidate();
         _mysteryServiceCache.Invalidate();
@@ -280,10 +296,15 @@ public partial class MainWindow : FluentWindow
         ShowChainsPage();
 
 
-        // Auto-update check: at startup + every 15 minutes
+        // Auto-update check: at startup + every 15 minutes (app update + game version)
         _ = CheckForUpdateAsync();
+        _ = CheckForNewGameVersionAsync();
         _updateTimer = new DispatcherTimer { Interval = TimeSpan.FromMinutes(15) };
-        _updateTimer.Tick += async (_, _) => await CheckForUpdateAsync();
+        _updateTimer.Tick += async (_, _) =>
+        {
+            await CheckForUpdateAsync();
+            await CheckForNewGameVersionAsync();
+        };
         _updateTimer.Start();
     }
 
@@ -488,8 +509,9 @@ public partial class MainWindow : FluentWindow
             case 7: ShowGameDataDumperPage(); break;
             case 8: ShowAreaFlowchartsPage(); break;
             case 9: ShowClueCollectionPage(); break;
-            case 10: ShowSettingsPage(); break;
-            case 11: ShowAboutPage(); break;
+            case 10: ShowPredictorPage(); break;
+            case 11: ShowSettingsPage(); break;
+            case 12: ShowAboutPage(); break;
         }
 
         UpdateNavIndicator();
@@ -565,6 +587,14 @@ public partial class MainWindow : FluentWindow
     {
         _clueCollectionPage ??= new ClueCollectionPage(this);
         contentArea.Content = _clueCollectionPage;
+    }
+
+    private PredictorPage? _predictorPage;
+    private void ShowPredictorPage()
+    {
+        _predictorPage ??= new PredictorPage(this);
+        contentArea.Content = _predictorPage;
+        _predictorPage.OnPageShown();
     }
 
     private void ShowSettingsPage()
@@ -892,28 +922,24 @@ public partial class MainWindow : FluentWindow
         // Each entry: (item, effectiveChainName, sourceChain)
         var flatItems = new List<(ParsedItem Item, string EffectiveChainName, ParsedChain SourceChain)>();
 
+        // Source chains that were (at least partially) adopted onto the wiki — i.e. have ≥1 item with
+        // an explicit wiki chainName. Used by Phase 3.5 to detect unmapped stragglers.
+        var adoptedSourceKeys = new HashSet<string>(StringComparer.Ordinal);
+
         foreach (var chain in DataService.Chains)
         {
-            // Determine chain-level wiki default name:
-            // if ALL wiki-mapped items in this chain agree on one chainName → that name
-            var wikiNames = chain.Items
-                .Where(i => itemWikiChainName.ContainsKey(i))
-                .Select(i => itemWikiChainName[i])
-                .Distinct(StringComparer.Ordinal)
-                .ToList();
-
-            string? chainWikiDefault = wikiNames.Count == 1 ? wikiNames[0] : null;
+            bool chainAdopted = chain.Items.Any(i => itemWikiChainName.ContainsKey(i));
+            if (chainAdopted) adoptedSourceKeys.Add(chain.ConfigKey);
 
             foreach (var item in chain.Items)
             {
-                // Item's own wiki chainName takes priority, then chain-level wiki default, then original DisplayName
-                string effectiveName;
-                if (itemWikiChainName.TryGetValue(item, out var itemSpecific))
-                    effectiveName = itemSpecific;
-                else if (chainWikiDefault != null)
-                    effectiveName = chainWikiDefault;
-                else
-                    effectiveName = chain.DisplayName;
+                // The wiki mapping's chainName is the SOLE source of wiki chain membership: an item that
+                // carries one joins that chain; an item without one keeps its original game chain name.
+                // No "chain-level default" inference — that used to vacuum unmapped items (e.g. a newly
+                // added top level) into a renamed wiki chain, silently hiding that they lack a mapping.
+                string effectiveName = itemWikiChainName.TryGetValue(item, out var itemSpecific)
+                    ? itemSpecific
+                    : chain.DisplayName;
 
                 item.SourceChainKey = chain.ConfigKey;
                 flatItems.Add((item, effectiveName, chain));
@@ -961,6 +987,34 @@ public partial class MainWindow : FluentWindow
             };
 
             newChains.Add(newChain);
+        }
+
+        // ── Phase 3.5: Detect unmapped stragglers ──
+        // A "straggler" chain is a data-named remainder (IsNameFromWiki == false) that contains items
+        // whose game source chain was partially adopted onto the wiki (some siblings carry a wiki
+        // chainName and moved into a renamed chain). Because grouping is by name string, unmapped items
+        // whose data name EQUALS the wiki name already re-joined the wiki chain (which is IsNameFromWiki
+        // == true) — so those are never flagged. Only genuine splits (data name ≠ wiki name) surface.
+        if (adoptedSourceKeys.Count > 0)
+        {
+            // Map each adopted source chain to the wiki name its mapped items ended up under.
+            var wikiNameBySource = new Dictionary<string, string>(StringComparer.Ordinal);
+            foreach (var chain in newChains.Where(c => c.IsNameFromWiki))
+                foreach (var item in chain.Items)
+                    if (adoptedSourceKeys.Contains(item.SourceChainKey))
+                        wikiNameBySource[item.SourceChainKey] = chain.DisplayName;
+
+            foreach (var chain in newChains.Where(c => !c.IsNameFromWiki))
+            {
+                var parentKey = chain.Items
+                    .Select(i => i.SourceChainKey)
+                    .FirstOrDefault(k => wikiNameBySource.ContainsKey(k));
+                if (parentKey != null)
+                {
+                    chain.IsUnmappedStraggler = true;
+                    chain.StragglerParentWikiName = wikiNameBySource[parentKey];
+                }
+            }
         }
 
         // ── Phase 4: Replace DataService.Chains + update dictionaries ──
@@ -1291,6 +1345,9 @@ public partial class MainWindow : FluentWindow
 
     private ReleaseInfo? _pendingUpdate;
 
+    // Game version the user chose "Later" for — don't re-offer until app restart.
+    public string? SessionDeclinedGameVersion { get; set; }
+
     public async Task CheckForUpdateAsync()
     {
         var release = await UpdateService.CheckForUpdateAsync();
@@ -1307,6 +1364,42 @@ public partial class MainWindow : FluentWindow
     {
         var dialog = new UpdateDialog(release) { Owner = this };
         dialog.Show();
+    }
+
+    // ── Game version update offer ──
+
+    private GameUpdateDialog? _gameUpdateDialog;
+
+    /// <summary>
+    /// Checks whether a newer game version than SelectedApkVersion is available and,
+    /// if so, shows the update offer dialog. Silent on network errors (no nagging).
+    /// </summary>
+    private async Task CheckForNewGameVersionAsync()
+    {
+        try
+        {
+            if (string.IsNullOrEmpty(Settings.ImageExporterBasePath) ||
+                string.IsNullOrEmpty(Settings.SelectedApkVersion))
+                return; // workspace not set up yet — SetupWizard territory
+            if (_gameUpdateDialog is { IsVisible: true })
+                return; // offer already on screen
+
+            var check = await GameVersionUpdateService.CheckForNewGameVersionAsync(
+                Settings.SelectedApkVersion, Settings.LastDeclinedGameVersion);
+            if (check == null) return;
+            if (string.Equals(check.Latest.Version, SessionDeclinedGameVersion,
+                    StringComparison.OrdinalIgnoreCase))
+                return; // user said "Later" this session
+
+            AppLogger.Info($"[GameUpdate] New game version {check.Latest.Version} " +
+                           $"(current {Settings.SelectedApkVersion}) — offering update.");
+            _gameUpdateDialog = new GameUpdateDialog(this, check) { Owner = this };
+            _gameUpdateDialog.Show();
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Warn($"[GameUpdate] Version check failed: {ex.Message}");
+        }
     }
 
     /// <summary>
@@ -1349,6 +1442,91 @@ public partial class MainWindow : FluentWindow
         }
 
         if (changed) SaveSettings();
+    }
+
+    /// <summary>
+    /// Assigns all dump file paths (chain/areas/events/dialogues/pets/card_collection)
+    /// from an extracted dump directory, saves settings and reloads chain data.
+    /// Shared by SettingsPage (Discord dump download) and GameUpdateDialog.
+    /// </summary>
+    public async Task AssignDumpFilePathsAsync(string dumpDir)
+    {
+        var chainPath = Path.Combine(dumpDir, "chain_item_odds.json");
+        if (File.Exists(chainPath))
+        {
+            Settings.ChainItemOddsPath = chainPath;
+            SaveSettings();
+        }
+
+        var areasPath = Path.Combine(dumpDir, "areas.json");
+        if (File.Exists(areasPath)) SetAreasPath(areasPath);
+
+        var eventsPath = Path.Combine(dumpDir, "events.json");
+        if (File.Exists(eventsPath)) SetEventsPath(eventsPath);
+
+        var dialoguesPath = Path.Combine(dumpDir, "dialogues.json");
+        if (File.Exists(dialoguesPath)) SetDialoguesPath(dialoguesPath);
+
+        var cardCollectionPath = Path.Combine(dumpDir, "card_collection.json");
+        if (File.Exists(cardCollectionPath)) SetCardCollectionPath(cardCollectionPath);
+
+        // Pets.json: check main Dump/ first, fallback to Experimental/
+        var petsPath = Path.Combine(dumpDir, "Pets.json");
+        if (!File.Exists(petsPath))
+            petsPath = Path.Combine(dumpDir, "Experimental", "Pets.json");
+        if (File.Exists(petsPath)) SetPetsPath(petsPath);
+
+        // Warn if Experimental/ is missing (Discord dump without it)
+        if (!Directory.Exists(Path.Combine(dumpDir, "Experimental")) &&
+            !File.Exists(Path.Combine(dumpDir, "Pets.json")))
+        {
+            ShowStatus("This dump does not include Experimental/ folder. Pet names may show as IDs.",
+                InfoBarSeverity.Warning);
+        }
+
+        if (File.Exists(chainPath))
+            await LoadDataAsync(chainPath);
+    }
+
+    /// <summary>
+    /// Clears all dump file paths + the active dump folder. Used when switching to a
+    /// game version that has no dump yet (the old paths point at the previous version).
+    /// Also clears the dumper input files (they come from the previous version's phone
+    /// pull — dumping them into the new version's folder would mislabel the data) and
+    /// resets the in-memory data so the sidebar/pages don't keep showing the old dump.
+    /// </summary>
+    public void ClearDumpFilePaths()
+    {
+        Settings.ChainItemOddsPath = "";
+        Settings.AreasJsonPath = "";
+        Settings.EventsJsonPath = "";
+        Settings.DialoguesJsonPath = "";
+        Settings.PetsJsonPath = "";
+        Settings.CardCollectionJsonPath = "";
+        Settings.ActiveDumpFolder = "";
+        Settings.DumperConfigPath = "";
+        Settings.DumperPatchPath = "";
+        Settings.DumperLanguagePath = "";
+        SaveSettings();
+        RefreshSettingsPaths();
+        _gameDataDumperPage?.ClearInputPaths();
+        ClearLoadedData();
+    }
+
+    /// <summary>
+    /// Resets the in-memory game data (chains/items/mysteries) to an empty state and
+    /// refreshes the sidebar + subscribed pages, so no stale old-version data stays
+    /// visible after a version switch without a dump.
+    /// </summary>
+    private void ClearLoadedData()
+    {
+        DataService = new DataService(ChainNameService); // empty, never loaded
+        MysteryService = null;
+        MysteryServiceLoadedPath = null;
+        HasVariantDirectories = false;
+        UpdateSidebarStatus();
+        _chainPage?.OnDataLoaded();
+        ChainDataLoaded?.Invoke();
     }
 
     /// <summary>
@@ -1466,7 +1644,7 @@ public partial class MainWindow : FluentWindow
 
     public void NavigateToSettingsHighlightApk()
     {
-        navList.SelectedIndex = 10;
+        navList.SelectedIndex = 11;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightApkSection(),
             System.Windows.Threading.DispatcherPriority.Input);
@@ -1474,7 +1652,7 @@ public partial class MainWindow : FluentWindow
 
     public void NavigateToSettingsHighlightChainFile()
     {
-        navList.SelectedIndex = 10;
+        navList.SelectedIndex = 11;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightChainSection(),
             System.Windows.Threading.DispatcherPriority.Input);
@@ -1482,7 +1660,7 @@ public partial class MainWindow : FluentWindow
 
     public void NavigateToSettingsHighlightAreas()
     {
-        navList.SelectedIndex = 10;
+        navList.SelectedIndex = 11;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightAreasSection(),
             System.Windows.Threading.DispatcherPriority.Input);
@@ -1490,7 +1668,7 @@ public partial class MainWindow : FluentWindow
 
     public void NavigateToSettingsHighlightWikiMapping()
     {
-        navList.SelectedIndex = 10;
+        navList.SelectedIndex = 11;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightWikiMappingSection(),
             System.Windows.Threading.DispatcherPriority.Input);
@@ -1498,7 +1676,7 @@ public partial class MainWindow : FluentWindow
 
     public void NavigateToSettingsHighlightEvents()
     {
-        navList.SelectedIndex = 10;
+        navList.SelectedIndex = 11;
         Dispatcher.InvokeAsync(
             () => _settingsPage?.HighlightEventsSection(),
             System.Windows.Threading.DispatcherPriority.Input);

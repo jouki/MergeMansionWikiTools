@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -236,6 +236,22 @@ internal static class Program
             // (e.g. "DailyChallenges" → DailyChallenges_03_B), since the account may see the
             // system only through an AB branch.
             return ProbeDailyChallenges(args[1], args[2], args.Length >= 4 ? args[3] : null);
+        }
+        if (args.Length >= 2 && args[0] == "--probe-segments")
+        {
+            // --probe-segments <configPath> [<idFilter>]
+            // Prints PlayerSegments definitions: id, display name and the basic condition
+            // (property requirements with min/max + segment references). Use to answer
+            // "what are the exact bounds of segment X" (e.g. Spenders_LT_500).
+            return ProbeSegments(args[1], args.Length >= 3 ? args[2] : null);
+        }
+        if (args.Length >= 2 && args[0] == "--probe-inventory")
+        {
+            // --probe-inventory <configPath>
+            // Prints the InventorySlots library (garage/pocket inventory): slot id, currency
+            // and cost per slot. Cost=0 rows = slots the player starts with for free.
+            // Used to answer "how many base inventory slots are there" for the Predictor.
+            return ProbeInventory(args[1]);
         }
         if (args.Length >= 2 && args[0] == "--probe-daily-scoop")
         {
@@ -1301,7 +1317,14 @@ internal static class Program
         foreach (var kv in cfg.DailyChallengesDays.EnumerateAll())
         {
             var day = kv.Value;
+            // Day completion reward lives in PRIVATE MetaMembers (Rewards + RewardSegment) —
+            // this is where the daily box type (DailyChest1 vs DailyChest2) is defined.
+            var dayRewards = GetAnyMember(day, "Rewards") as System.Collections.IEnumerable;
+            var dayRewardSeg = GetAnyMember(day, "RewardSegment") as System.Collections.IEnumerable;
+            var drStr = dayRewards == null ? "-" : string.Join(" + ", dayRewards.Cast<object>().Select(DescribeReward));
+            var drSegStr = string.Join(",", Enumerate(dayRewardSeg));
             Console.WriteLine($"  {kv.Key,-40} minPerGroup=[{string.Join(",", Enumerate(GetMember(day, "MinObjectivesPerGroup") as System.Collections.IEnumerable))}]  specialGroups=[{string.Join(",", Enumerate(GetMember(day, "SpecialObjectiveGroups") as System.Collections.IEnumerable))}]  targetMilestoneIdx={GetMember(day, "TargetMilestoneIndex")}  reqCompletedForDayReward={GetMember(day, "RequiredCompletedObjectivesForDayReward")}");
+            Console.WriteLine($"      dayReward: {drStr}{(drSegStr.Length > 0 ? $"   segFilter=[{drSegStr}]" : "")}");
             var stdRefs = GetMember(day, "StandardObjectives") as System.Collections.IEnumerable;
             Console.WriteLine($"      std=[{string.Join(", ", Enumerate(stdRefs))}]");
         }
@@ -1386,6 +1409,72 @@ internal static class Program
     }
 
     // ── --probe-daily-scoop: per config archive, DailyScoopEvents (not in JSON dump) + week summary ──
+    private static int ProbeSegments(string configPath, string idFilter)
+    {
+        MetaplayCore.Initialize();
+        var archive = Metaplay.Core.Config.ConfigArchive.FromBytes(File.ReadAllBytes(configPath));
+        var patched = PatchedConfigArchive.WithNoPatches(archive);
+        var cfg = (SharedGameConfig)GameConfigFactory.Instance.ImportSharedGameConfig(patched);
+        if (cfg.PlayerSegments == null) { Console.Error.WriteLine("PlayerSegments library missing"); return 2; }
+
+        foreach (var kv in cfg.PlayerSegments.EnumerateAll())
+        {
+            var seg = (Metaplay.Core.Player.PlayerSegmentInfoBase)kv.Value;
+            var id = seg.ConfigKey?.ToString() ?? "?";
+            if (!string.IsNullOrEmpty(idFilter) && !id.Contains(idFilter, StringComparison.OrdinalIgnoreCase))
+                continue;
+            Console.WriteLine($"  {id,-40} display='{seg.DisplayName}'");
+            if (seg.PlayerCondition is Metaplay.Core.Player.PlayerSegmentBasicCondition bc)
+            {
+                foreach (var r in bc.PropertyRequirements ?? new List<Metaplay.Core.Player.PlayerPropertyRequirement>())
+                    Console.WriteLine($"      prop {r.Id,-40} min={ConstVal(r.Min)}  max={ConstVal(r.Max)}");
+                if (bc.RequireAnySegment is { Count: > 0 })
+                    Console.WriteLine($"      requireAny=[{string.Join(", ", bc.RequireAnySegment)}]");
+                if (bc.RequireAllSegments is { Count: > 0 })
+                    Console.WriteLine($"      requireAll=[{string.Join(", ", bc.RequireAllSegments)}]");
+            }
+            else
+                Console.WriteLine($"      condition={seg.PlayerCondition?.GetType().Name ?? "null"}");
+        }
+        return 0;
+    }
+
+    private static int ProbeInventory(string configPath)
+    {
+        MetaplayCore.Initialize();
+        var archive = Metaplay.Core.Config.ConfigArchive.FromBytes(File.ReadAllBytes(configPath));
+        var patched = PatchedConfigArchive.WithNoPatches(archive);
+        var cfg = (SharedGameConfig)GameConfigFactory.Instance.ImportSharedGameConfig(patched);
+        if (cfg.InventorySlots == null) { Console.Error.WriteLine("InventorySlots library missing"); return 2; }
+
+        int free = 0, paid = 0;
+        Console.WriteLine("=== InventorySlots (garage/pocket inventory) ===");
+        foreach (var kv in cfg.InventorySlots.EnumerateAll())
+        {
+            var slot = (GameLogic.Config.InventorySlotsConfig)kv.Value;
+            Console.WriteLine($"  {slot.ConfigKey,-24} currency={slot.Currency,-10} cost={slot.Cost}");
+            if (slot.Cost == 0) free++; else paid++;
+        }
+        Console.WriteLine($"\nTotal slots: {free + paid}  (free/base: {free}, purchasable: {paid})");
+        return 0;
+    }
+
+    // PlayerPropertyConstant subtypes (F64Constant/LongConstant/BoolConstant/...) hide the
+    // value in a private field — unwrap via reflection for readable probe output.
+    private static string ConstVal(object c)
+    {
+        if (c == null) return "null";
+        var t = c.GetType();
+        foreach (var name in new[] { "ConstantValue", "Value", "_value", "value" })
+        {
+            var f = t.GetField(name, System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic);
+            if (f != null) return f.GetValue(c)?.ToString() ?? "null";
+            var pr = t.GetProperty(name, System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic);
+            if (pr != null) return pr.GetValue(c)?.ToString() ?? "null";
+        }
+        return c.ToString();
+    }
+
     private static int ProbeDailyScoop(string cDirOrFile, string languagePath)
     {
         var files = new List<string>();

@@ -13,7 +13,7 @@
         <!-- Fixed header (stays visible while scrolling) -->
         <StackPanel Grid.Row="0" MaxWidth="1000" HorizontalAlignment="Stretch" Margin="24,16,24,0">
 
-            <TextBlock Text="Mysteries" FontSize="28" FontWeight="SemiBold"
+            <TextBlock Text="Season Passes" FontSize="28" FontWeight="SemiBold"
                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                        Margin="4,0,0,20" />
 
@@ -40,7 +40,7 @@
                 </Grid.ColumnDefinitions>
 
                 <ui:TextBox x:Name="txtSearch" Grid.Column="0"
-                            PlaceholderText="Search mysteries..."
+                            PlaceholderText="Search season passes..."
                             TextChanged="TxtSearch_TextChanged"
                             Margin="0,0,10,0"
                             Icon="{ui:SymbolIcon Search24}" />

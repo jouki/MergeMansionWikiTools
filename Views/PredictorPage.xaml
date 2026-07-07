@@ -1,0 +1,495 @@
+<UserControl x:Class="MergeMansionWikiTools.Views.PredictorPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+
+    <UserControl.Resources>
+        <!-- Slider with an accent fill left of the thumb + tick marks below. -->
+        <Style x:Key="FillSlider" TargetType="Slider">
+            <Setter Property="Height" Value="34"/>
+            <Setter Property="IsSnapToTickEnabled" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Slider">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" Height="18" VerticalAlignment="Center">
+                                <Border Height="4" CornerRadius="2" VerticalAlignment="Center"
+                                        Background="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+                                <Track x:Name="PART_Track">
+                                    <Track.DecreaseRepeatButton>
+                                        <RepeatButton OverridesDefaultStyle="True" Focusable="False"
+                                                      Command="Slider.DecreaseLarge">
+                                            <RepeatButton.Template>
+                                                <ControlTemplate TargetType="RepeatButton">
+                                                    <Border Height="4" CornerRadius="2" VerticalAlignment="Center"
+                                                            HorizontalAlignment="Stretch"
+                                                            Background="{DynamicResource AccentFillColorDefaultBrush}"/>
+                                                </ControlTemplate>
+                                            </RepeatButton.Template>
+                                        </RepeatButton>
+                                    </Track.DecreaseRepeatButton>
+                                    <Track.IncreaseRepeatButton>
+                                        <RepeatButton OverridesDefaultStyle="True" Focusable="False"
+                                                      Command="Slider.IncreaseLarge">
+                                            <RepeatButton.Template>
+                                                <ControlTemplate TargetType="RepeatButton">
+                                                    <Border Background="Transparent"/>
+                                                </ControlTemplate>
+                                            </RepeatButton.Template>
+                                        </RepeatButton>
+                                    </Track.IncreaseRepeatButton>
+                                    <Track.Thumb>
+                                        <Thumb OverridesDefaultStyle="True" Width="16" Height="16">
+                                            <Thumb.Template>
+                                                <ControlTemplate TargetType="Thumb">
+                                                    <Ellipse Width="16" Height="16"
+                                                             Fill="{DynamicResource AccentFillColorDefaultBrush}"/>
+                                                </ControlTemplate>
+                                            </Thumb.Template>
+                                        </Thumb>
+                                    </Track.Thumb>
+                                </Track>
+                            </Grid>
+                            <TickBar Grid.Row="1" Height="4" Placement="Bottom" Margin="0,3,0,0"
+                                     Fill="{DynamicResource TextFillColorTertiaryBrush}"
+                                     Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}"
+                                     TickFrequency="{TemplateBinding TickFrequency}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Shared tile template for the board grid AND the inventory grid (same interactions). -->
+        <DataTemplate x:Key="BoardTileTemplate">
+            <Button Click="Cell_Click" Tag="{Binding}" Width="42" Height="42"
+                    Margin="2" Padding="0" Cursor="Hand"
+                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                    PreviewMouseLeftButtonDown="Cell_MouseDown"
+                    PreviewMouseMove="Cell_MouseMove"
+                    MouseRightButtonUp="Cell_RightClick"
+                    ToolTip="Left-click to set · right-click to clear · drag to move (Ctrl = copy)"
+                    Background="{DynamicResource SubtleFillColorSecondaryBrush}"
+                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1">
+                <Grid Width="38" Height="38">
+                    <Border Background="{Binding Icon}" ClipToBounds="True"/>
+                    <TextBlock Text="+" FontSize="18"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Visibility="{Binding EmptyVisibility}"
+                               Foreground="{DynamicResource TextFillColorTertiaryBrush}"/>
+                    <Border Visibility="{Binding ItemVisibility}"
+                            HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                            Background="#CC000000" CornerRadius="3" Padding="3,0" Margin="0,0,1,1">
+                        <TextBlock Text="{Binding LevelText}" FontSize="10" FontWeight="Bold"
+                                   Foreground="White"/>
+                    </Border>
+                </Grid>
+            </Button>
+        </DataTemplate>
+
+        <DataTemplate x:Key="CandidateTemplate">
+            <Border Background="{DynamicResource SubtleFillColorSecondaryBrush}" CornerRadius="4"
+                    Padding="6,4" Margin="0,0,0,4">
+                <StackPanel Orientation="Horizontal">
+                    <Border Width="28" Height="28" Margin="0,0,8,0" ClipToBounds="True"
+                            Background="{Binding Icon}"/>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="{Binding Name}" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Level, StringFormat='L{0}'}" FontSize="11"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                            <TextBlock Text="{Binding Value, StringFormat=' · val {0}'}" FontSize="11"
+                                       Foreground="{DynamicResource TextFillColorTertiaryBrush}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="RejectionTemplate">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                <Border Width="22" Height="22" Margin="0,0,6,0" ClipToBounds="True"
+                        Background="{Binding Icon}"/>
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Name}" FontSize="12"
+                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Text="{Binding LevelReason}" FontSize="11" TextWrapping="Wrap"
+                               Foreground="{DynamicResource TextFillColorTertiaryBrush}"/>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid Margin="24,16,24,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,12">
+            <TextBlock Text="Daily Trade Predictor" FontSize="28" FontWeight="SemiBold"
+                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+            <TextBlock Text="[EXPERIMENTAL]" FontSize="14" VerticalAlignment="Bottom" Margin="8,0,0,4"
+                       Foreground="{DynamicResource TextFillColorTertiaryBrush}"/>
+        </StackPanel>
+
+        <!-- Info bar -->
+        <ui:InfoBar Grid.Row="1" x:Name="infoBar" Severity="Informational" IsOpen="True" IsClosable="False"
+                    Margin="0,0,0,12"
+                    Title="Phase 1 — candidate lists, not a single trade"
+                    Message="Click board tiles to add the items you hold, then set your progress. Shows which items are eligible as requirement/reward for the selected step, and which are excluded (and why)."/>
+
+        <!-- Split content -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Left: board grid + progress -->
+            <Border Grid.Column="0" CornerRadius="8" Margin="0,0,12,0" Padding="0"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                <ScrollViewer x:Name="leftScroll" VerticalScrollBarVisibility="Auto" Padding="0">
+                    <StackPanel x:Name="leftPanel" Margin="16,16,14,16">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                            <TextBlock Text="Board" FontSize="16" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                            <TextBlock Text="— click a tile to place an item" FontSize="12" Margin="8,0,0,0"
+                                       VerticalAlignment="Bottom"
+                                       Foreground="{DynamicResource TextFillColorTertiaryBrush}"/>
+                        </StackPanel>
+
+                        <ItemsControl x:Name="boardGrid" AllowDrop="True"
+                                      DragOver="Grid_DragOver" Drop="Grid_Drop"
+                                      ItemTemplate="{StaticResource BoardTileTemplate}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="7"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+
+                        <!-- Basic (pocket) inventory — part of the same garage pool as the board. -->
+                        <StackPanel Orientation="Horizontal" Margin="0,14,0,4">
+                            <TextBlock Text="Inventory" FontSize="16" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                            <TextBlock Text="— items stored here still count for trades" FontSize="12" Margin="8,0,0,0"
+                                       VerticalAlignment="Bottom"
+                                       Foreground="{DynamicResource TextFillColorTertiaryBrush}"/>
+                        </StackPanel>
+                        <DockPanel LastChildFill="False" Margin="0,0,0,2">
+                            <TextBlock DockPanel.Dock="Left" Text="Slots owned" VerticalAlignment="Center"
+                                       ToolTip="7 free + up to 43 purchasable with coins (game max 50)"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                                <Button Content="−" Padding="8,0" FontSize="14" Click="InvSlots_Minus"/>
+                                <TextBlock x:Name="txtInvSlots" Text="7" Width="26" TextAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                <Button Content="＋" Padding="8,0" FontSize="14" Click="InvSlots_Plus"/>
+                            </StackPanel>
+                        </DockPanel>
+                        <DockPanel LastChildFill="False" Margin="0,4,0,6">
+                            <TextBlock DockPanel.Dock="Left" Text="Season Pass bonus" VerticalAlignment="Center"
+                                       ToolTip="Temporary perk slots: +3 (Super Pass) or +6 (Premium Pass)"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                            <ComboBox x:Name="cmbSpBonus" DockPanel.Dock="Right" Width="160"
+                                      SelectionChanged="SpBonus_Changed"
+                                      PreviewMouseWheel="Combo_PreviewMouseWheel">
+                                <ComboBoxItem Content="None"/>
+                                <ComboBoxItem Content="+3 (Super)"/>
+                                <ComboBoxItem Content="+6 (Premium)"/>
+                            </ComboBox>
+                        </DockPanel>
+                        <ItemsControl x:Name="invGrid" AllowDrop="True"
+                                      DragOver="Grid_DragOver" Drop="Grid_Drop"
+                                      ItemTemplate="{StaticResource BoardTileTemplate}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="7"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+
+                        <!-- Season Pass bonus slots — visually separated from the base inventory. -->
+                        <StackPanel x:Name="spSection" Visibility="Collapsed">
+                            <Border Height="1" Margin="6,10,6,8"
+                                    Background="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+                            <TextBlock Text="Season Pass bonus slots" FontSize="11" Margin="2,0,0,4"
+                                       Foreground="{DynamicResource TextFillColorTertiaryBrush}"/>
+                            <ItemsControl x:Name="invSpGrid" AllowDrop="True"
+                                          DragOver="Grid_DragOver" Drop="Grid_Drop"
+                                          ItemTemplate="{StaticResource BoardTileTemplate}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="7"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </StackPanel>
+
+                        <TextBlock Text="Progress" FontSize="16" FontWeight="SemiBold" Margin="0,16,0,8"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                        <TextBlock Text="Current area" Margin="0,0,0,2"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                        <ComboBox x:Name="cmbArea" Margin="0,0,0,10" SelectedValuePath="InternalName"
+                                  SelectionChanged="Area_Changed" PreviewMouseWheel="Combo_PreviewMouseWheel">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Width="24" Height="24" Margin="0,0,8,0" ClipToBounds="True"
+                                                Background="{Binding Icon}"/>
+                                        <TextBlock Text="{Binding DisplayName}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                        <TextBlock Text="Active tasks" Margin="0,0,0,2"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                        <TextBlock Text="add the tasks you currently see in-game" FontSize="11" Margin="0,0,0,6"
+                                   Foreground="{DynamicResource TextFillColorTertiaryBrush}"/>
+
+                        <!-- Selected active tasks (removable) -->
+                        <ItemsControl x:Name="lstActiveTasks">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border CornerRadius="4" Padding="8,5" Margin="0,0,0,4"
+                                            Background="{DynamicResource SubtleFillColorSecondaryBrush}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding Header}" TextWrapping="Wrap" FontSize="12"
+                                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                                <ItemsControl ItemsSource="{Binding ReqIcons}" Margin="0,2,0,0">
+                                                    <ItemsControl.ItemsPanel>
+                                                        <ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate>
+                                                    </ItemsControl.ItemsPanel>
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Border Width="22" Height="22" Margin="0,0,3,0"
+                                                                    ClipToBounds="True" Background="{Binding}"/>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                            </StackPanel>
+                                            <Button Grid.Column="1" Content="✕" Padding="7,2" FontSize="11"
+                                                    VerticalAlignment="Top" Cursor="Hand"
+                                                    Click="RemoveActiveTask_Click" Tag="{Binding}"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <!-- Add-a-task dropdown -->
+                        <TextBlock Text="＋ Add active task" FontSize="12" Margin="0,0,0,2"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                        <ComboBox x:Name="cmbAddTask" Margin="0,0,0,10" SelectionChanged="AddTask_Changed"
+                                  PreviewMouseWheel="Combo_PreviewMouseWheel"
+                                  ToolTip="Add a task you currently see in-game">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Header}" VerticalAlignment="Center"/>
+                                        <ItemsControl ItemsSource="{Binding ReqIcons}" Margin="8,0,0,0"
+                                                      VerticalAlignment="Center">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border Width="18" Height="18" Margin="0,0,2,0"
+                                                            ClipToBounds="True" Background="{Binding}"/>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                        <TextBlock Text="Trade slot" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,8"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+
+                        <DockPanel LastChildFill="False" Margin="0,0,0,2">
+                            <TextBlock DockPanel.Dock="Left" Text="Streak"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                            <TextBlock x:Name="txtStreakVal" DockPanel.Dock="Right" Text="0"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                        </DockPanel>
+                        <Slider x:Name="sldStreak" Minimum="0" Maximum="4" TickFrequency="1"
+                                Style="{StaticResource FillSlider}" Margin="0,0,0,10"
+                                ValueChanged="Slider_Changed"/>
+
+                        <!-- Queue 1 -->
+                        <TextBlock Text="Queue 1" FontWeight="SemiBold" Margin="0,4,0,2"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                        <DockPanel LastChildFill="False" Margin="0,0,0,2">
+                            <TextBlock DockPanel.Dock="Left" Text="Current trade"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                            <TextBlock x:Name="txtStep1Val" DockPanel.Dock="Right" Text="1"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                        </DockPanel>
+                        <Slider x:Name="sldStep1" Minimum="0" Maximum="5" TickFrequency="1"
+                                Style="{StaticResource FillSlider}" Margin="0,0,0,4"
+                                ValueChanged="Slider_Changed"/>
+                        <DockPanel LastChildFill="False" Margin="0,0,0,4">
+                            <TextBlock DockPanel.Dock="Left" Text="Refreshes used" VerticalAlignment="Center"
+                                       ToolTip="How many times this trade was refreshed — sets the next refresh price and worsens the diminishing penalty"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                                <Button Content="−" Padding="8,0" FontSize="14" Click="Refresh1_Minus"/>
+                                <TextBlock x:Name="txtRefresh1" Text="0" Width="26" TextAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                <Button Content="＋" Padding="8,0" FontSize="14" Click="Refresh1_Plus"/>
+                            </StackPanel>
+                        </DockPanel>
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="8"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" x:Name="btnQ1Req" Click="TradeItem_Click" Tag="q1req"
+                                    HorizontalContentAlignment="Left" Padding="6,4"
+                                    ToolTip="The requirement item this trade currently asks for (right-click to clear)"
+                                    MouseRightButtonUp="TradeItem_Clear"/>
+                            <Button Grid.Column="2" x:Name="btnQ1Rwd" Click="TradeItem_Click" Tag="q1rwd"
+                                    HorizontalContentAlignment="Left" Padding="6,4"
+                                    ToolTip="The reward item this trade currently offers (right-click to clear)"
+                                    MouseRightButtonUp="TradeItem_Clear"/>
+                        </Grid>
+
+                        <!-- Queue 2 -->
+                        <TextBlock Text="Queue 2" FontWeight="SemiBold" Margin="0,0,0,2"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                        <DockPanel LastChildFill="False" Margin="0,0,0,2">
+                            <TextBlock DockPanel.Dock="Left" Text="Current trade"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                            <TextBlock x:Name="txtStep2Val" DockPanel.Dock="Right" Text="1"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                        </DockPanel>
+                        <Slider x:Name="sldStep2" Minimum="0" Maximum="5" TickFrequency="1"
+                                Style="{StaticResource FillSlider}" Margin="0,0,0,4"
+                                ValueChanged="Slider_Changed"/>
+                        <DockPanel LastChildFill="False" Margin="0,0,0,4">
+                            <TextBlock DockPanel.Dock="Left" Text="Refreshes used" VerticalAlignment="Center"
+                                       ToolTip="How many times this trade was refreshed — sets the next refresh price and worsens the diminishing penalty"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                                <Button Content="−" Padding="8,0" FontSize="14" Click="Refresh2_Minus"/>
+                                <TextBlock x:Name="txtRefresh2" Text="0" Width="26" TextAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                <Button Content="＋" Padding="8,0" FontSize="14" Click="Refresh2_Plus"/>
+                            </StackPanel>
+                        </DockPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="8"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" x:Name="btnQ2Req" Click="TradeItem_Click" Tag="q2req"
+                                    HorizontalContentAlignment="Left" Padding="6,4"
+                                    ToolTip="The requirement item this trade currently asks for (right-click to clear)"
+                                    MouseRightButtonUp="TradeItem_Clear"/>
+                            <Button Grid.Column="2" x:Name="btnQ2Rwd" Click="TradeItem_Click" Tag="q2rwd"
+                                    HorizontalContentAlignment="Left" Padding="6,4"
+                                    ToolTip="The reward item this trade currently offers (right-click to clear)"
+                                    MouseRightButtonUp="TradeItem_Clear"/>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <!-- Right: output -->
+            <Border Grid.Column="1" CornerRadius="8" Padding="16"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <StackPanel Margin="0,0,0,12">
+                            <TextBlock x:Name="txtQueue1" FontSize="14" TextWrapping="Wrap"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                            <TextBlock x:Name="txtQueue2" FontSize="14" TextWrapping="Wrap" Margin="0,4,0,0"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                            <TextBlock x:Name="txtNote" FontSize="12" TextWrapping="Wrap" Margin="0,6,0,0"
+                                       Foreground="{DynamicResource TextFillColorTertiaryBrush}"/>
+                        </StackPanel>
+
+                        <TextBlock Text="Requirement candidates" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,6"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                                <TextBlock Text="High priority" FontWeight="SemiBold" Margin="0,0,0,4"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                                <ItemsControl x:Name="lstReqHigh" ItemTemplate="{StaticResource CandidateTemplate}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="8,0,0,0">
+                                <TextBlock Text="Normal" FontWeight="SemiBold" Margin="0,0,0,4"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                                <ItemsControl x:Name="lstReqNormal" ItemTemplate="{StaticResource CandidateTemplate}"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <TextBlock Text="Reward candidates" FontSize="16" FontWeight="SemiBold" Margin="0,16,0,6"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                                <TextBlock Text="High (hotspot-needed)" FontWeight="SemiBold" Margin="0,0,0,4"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                                <ItemsControl x:Name="lstRwdHigh" ItemTemplate="{StaticResource CandidateTemplate}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="8,0,0,0">
+                                <TextBlock Text="Normal" FontWeight="SemiBold" Margin="0,0,0,4"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                                <ItemsControl x:Name="lstRwdNormal" ItemTemplate="{StaticResource CandidateTemplate}"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <Expander Header="Excluded (why)" Margin="0,16,0,0" IsExpanded="False">
+                            <Grid Margin="0,8,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                                    <TextBlock Text="Requirements" FontWeight="SemiBold" Margin="0,0,0,4"
+                                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                                    <ItemsControl x:Name="lstRejReq" ItemTemplate="{StaticResource RejectionTemplate}"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Margin="8,0,0,0">
+                                    <TextBlock Text="Rewards" FontWeight="SemiBold" Margin="0,0,0,4"
+                                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                                    <ItemsControl x:Name="lstRejRwd" ItemTemplate="{StaticResource RejectionTemplate}"/>
+                                </StackPanel>
+                            </Grid>
+                        </Expander>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

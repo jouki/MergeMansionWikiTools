@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -97,6 +97,7 @@ public partial class GameDataDumperPage : UserControl
         chkEvDailyTrades.IsChecked = _main.Settings.EventDailyTrades;
         chkEvUncategorised.IsChecked = _main.Settings.EventUncategorised;
         chkEvSoloMilestone.IsChecked = _main.Settings.EventSoloMilestone;
+        chkEvDailyScoop.IsChecked = _main.Settings.EventDailyScoop;
         chkEvMixABooster.IsChecked = _main.Settings.EventMixABooster;
         expEventCategories.IsExpanded = _main.Settings.EventSubExpanded;
         _suppressSave = false;
@@ -113,116 +114,60 @@ public partial class GameDataDumperPage : UserControl
         // Show Open Dump Folder if dump dir exists
         UpdateDumpFolderVisibility();
 
-        // Auto-detect from _DATA folder
-        TryAutoDetect();
+        // Stale-config check (auto-FILL of empty boxes was removed on user request —
+        // inputs are set manually or via Pull from Phone only)
+        TryUpgradeStaleConfig();
     }
 
-    // ── Auto-detect ──────────────────────────────────────────────
+    // ── Stale-config override ─────────────────────────────────────
 
-    private async void TryAutoDetect()
+    /// <summary>
+    /// If the Config archive box already points into the _DATA/C pull cache and a re-pull
+    /// added a NEWER archive there (the game caches multiple config versions, all with the
+    /// same mtime), switches the path to the newest by embedded CreatedAt — otherwise every
+    /// dump would silently use the outdated config. This never FILLS empty boxes: after a
+    /// game-version switch cleared the inputs, they stay empty until the user pulls or browses.
+    /// </summary>
+    private async void TryUpgradeStaleConfig()
     {
         try
         {
             var dataDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "_DATA");
-
-            // Read current UI state on the UI thread before going off-thread
             string currentConfig = GetPathText(txtConfigPath);
-            bool needConfig = string.IsNullOrEmpty(currentConfig);
-            bool needPatch = string.IsNullOrEmpty(GetPathText(txtPatchPath));
-            bool needLanguage = string.IsNullOrEmpty(GetPathText(txtLanguagePath));
+            if (string.IsNullOrEmpty(currentConfig)) return;
 
-            // Directory scanning off the UI thread
-            var (dataDirExists, configFile, configOverride, patchFile, languageFile) = await Task.Run(() =>
+            var newConfig = await Task.Run(() =>
             {
-                if (!Directory.Exists(dataDir))
-                    return (false, (string?)null, false, (string?)null, (string?)null);
-
-                string? FindSingleFile(string subDir)
-                {
-                    var dir = Path.Combine(dataDir, subDir);
-                    if (!Directory.Exists(dir)) return null;
-                    var files = Directory.GetFiles(dir);
-                    return files.Length == 1 ? files[0] : null;
-                }
-
-                // Config: the game caches MULTIPLE archive versions under _DATA/C (all written
-                // with the same mtime on a fresh pull), so we must pick the one with the newest
-                // embedded CreatedAt — never the first-enumerated. We also override a stale saved
-                // path that still points at an OLDER archive in this same cache folder: that is the
-                // exact failure mode where a re-pull adds a newer build but DumperConfigPath stays
-                // pinned to the previous file, so every dump silently uses outdated config.
                 var cDir = Path.Combine(dataDir, "C");
-                string? newestConfig = DumperService.SelectNewestConfigArchive(cDir);
-                string? cfg = null;
-                bool ovr = false;
-                if (needConfig)
-                {
-                    cfg = newestConfig;
-                }
-                else if (newestConfig != null && !string.IsNullOrEmpty(currentConfig))
-                {
-                    var cDirFull = Path.GetFullPath(cDir);
-                    var curFull = Path.GetFullPath(currentConfig);
-                    var newFull = Path.GetFullPath(newestConfig);
-                    // Must live directly in the _DATA/C cache folder (not merely share a prefix).
-                    bool inCache = string.Equals(Path.GetDirectoryName(curFull), cDirFull, StringComparison.OrdinalIgnoreCase);
-                    if (inCache && !string.Equals(curFull, newFull, StringComparison.OrdinalIgnoreCase))
-                    {
-                        var curAt = DumperService.ReadConfigCreatedAt(currentConfig);
-                        var newAt = DumperService.ReadConfigCreatedAt(newestConfig);
-                        if (newAt.HasValue && (curAt == null || newAt > curAt))
-                        {
-                            cfg = newestConfig;
-                            ovr = true;
-                        }
-                    }
-                }
+                if (!Directory.Exists(cDir)) return null;
+                var newestConfig = DumperService.SelectNewestConfigArchive(cDir);
+                if (newestConfig == null) return null;
 
-                return (true,
-                    cfg,                                          // Config: _DATA/C/ (newest by CreatedAt)
-                    ovr,
-                    needPatch ? FindSingleFile("P") : null,       // Patch: _DATA/P/
-                    needLanguage ? FindSingleFile("L") : null);   // Language: _DATA/L/
+                var cDirFull = Path.GetFullPath(cDir);
+                var curFull = Path.GetFullPath(currentConfig);
+                var newFull = Path.GetFullPath(newestConfig);
+                // Must live directly in the _DATA/C cache folder (not merely share a prefix).
+                bool inCache = string.Equals(Path.GetDirectoryName(curFull), cDirFull, StringComparison.OrdinalIgnoreCase);
+                if (!inCache || string.Equals(curFull, newFull, StringComparison.OrdinalIgnoreCase))
+                    return null;
+
+                var curAt = DumperService.ReadConfigCreatedAt(currentConfig);
+                var newAt = DumperService.ReadConfigCreatedAt(newestConfig);
+                return newAt.HasValue && (curAt == null || newAt > curAt) ? newestConfig : null;
             });
 
-            if (!dataDirExists)
+            if (newConfig != null)
             {
-                txtAutoDetect.Text = "";
-                return;
+                SetPathText(txtConfigPath, newConfig);
+                SavePaths();
+                var at = DumperService.ReadConfigCreatedAt(newConfig);
+                txtAutoDetect.Text = $"Config switched to newest archive (CreatedAt {at:yyyy-MM-dd HH:mm}Z) — a re-pull added a newer build.";
+                AppLogger.Info($"Stale-config check: overrode stale config with newest archive {Path.GetFileName(newConfig)} (CreatedAt {at:u})");
             }
-
-            bool anyDetected = false;
-            string? overrideMsg = null;
-            if (configFile != null)
-            {
-                SetPathText(txtConfigPath, configFile);
-                anyDetected = true;
-                if (configOverride)
-                {
-                    var at = DumperService.ReadConfigCreatedAt(configFile);
-                    overrideMsg = $"Config switched to newest archive (CreatedAt {at:yyyy-MM-dd HH:mm}Z) — a re-pull added a newer build.";
-                    AppLogger.Info($"Auto-detect: overrode stale config with newest archive {Path.GetFileName(configFile)} (CreatedAt {at:u})");
-                }
-            }
-            if (patchFile != null)
-            {
-                SetPathText(txtPatchPath, patchFile);
-                anyDetected = true;
-            }
-            if (languageFile != null)
-            {
-                SetPathText(txtLanguagePath, languageFile);
-                anyDetected = true;
-            }
-            if (anyDetected) SavePaths();
-
-            // The override notice wins over the generic message — it's the actionable one.
-            txtAutoDetect.Text = overrideMsg
-                ?? (anyDetected ? "Some paths were auto-detected from _DATA/ folder." : "");
         }
         catch (Exception ex)
         {
-            AppLogger.Warn($"Auto-detect from _DATA failed: {ex.Message}");
+            AppLogger.Warn($"Stale-config check failed: {ex.Message}");
         }
     }
 
@@ -244,6 +189,25 @@ public partial class GameDataDumperPage : UserControl
         if (text == _placeholderConfig || text == _placeholderPatch || text == _placeholderLang)
             return "";
         return text;
+    }
+
+    /// <summary>
+    /// Resets the three input-file boxes back to their placeholders. Called by MainWindow
+    /// when the working game version switches without a dump — the previous phone pull
+    /// belongs to the old version and must not be dumped under the new one.
+    /// </summary>
+    public void ClearInputPaths()
+    {
+        ResetPathText(txtConfigPath, _placeholderConfig);
+        ResetPathText(txtPatchPath, _placeholderPatch);
+        ResetPathText(txtLanguagePath, _placeholderLang);
+        txtAutoDetect.Text = "Input files cleared — the working game version changed. Pull from phone again.";
+    }
+
+    private static void ResetPathText(TextBox tb, string placeholder)
+    {
+        tb.Text = placeholder;
+        tb.SetResourceReference(TextBox.ForegroundProperty, "TextFillColorSecondaryBrush");
     }
 
     private void SavePaths()
@@ -665,6 +629,7 @@ public partial class GameDataDumperPage : UserControl
         _main.Settings.EventDailyTrades = chkEvDailyTrades.IsChecked == true;
         _main.Settings.EventUncategorised = chkEvUncategorised.IsChecked == true;
         _main.Settings.EventSoloMilestone = chkEvSoloMilestone.IsChecked == true;
+        _main.Settings.EventDailyScoop = chkEvDailyScoop.IsChecked == true;
         _main.Settings.EventMixABooster = chkEvMixABooster.IsChecked == true;
         _main.SaveSettings();
     }
@@ -688,6 +653,8 @@ public partial class GameDataDumperPage : UserControl
         chkEvDailyTrades.IsChecked = value;
         chkEvUncategorised.IsChecked = value;
         chkEvMixABooster.IsChecked = value;
+        chkEvSoloMilestone.IsChecked = value;
+        chkEvDailyScoop.IsChecked = value;
         _suppressSave = false;
         EventSubCheckbox_Changed(this, new RoutedEventArgs());
     }
@@ -706,14 +673,16 @@ public partial class GameDataDumperPage : UserControl
         chkEvLuckyCatch.IsChecked = true;
         chkEvLuckySnap.IsChecked = true;
         chkEvReArchaeology.IsChecked = true;
-        chkEvBoultonLeague.IsChecked = false;
+        chkEvBoultonLeague.IsChecked = true;
         chkEvHorizonsCup.IsChecked = true;
         chkEvRollTheDice.IsChecked = true;
         chkEvLegacy.IsChecked = false;
         chkEvShops.IsChecked = false;
-        chkEvDailyTrades.IsChecked = false;
+        chkEvDailyTrades.IsChecked = true;
         chkEvUncategorised.IsChecked = true;
         chkEvMixABooster.IsChecked = true;
+        chkEvSoloMilestone.IsChecked = true;
+        chkEvDailyScoop.IsChecked = true;
         _suppressSave = false;
         EventSubCheckbox_Changed(this, new RoutedEventArgs());
     }
@@ -757,6 +726,7 @@ public partial class GameDataDumperPage : UserControl
         if (chkEvDailyTrades.IsChecked == true) f |= EventFilters.DailyTrades;
         if (chkEvUncategorised.IsChecked == true) f |= EventFilters.Uncategorised;
         if (chkEvSoloMilestone.IsChecked == true) f |= EventFilters.SoloMilestone;
+        if (chkEvDailyScoop.IsChecked == true) f |= EventFilters.DailyScoop;
         if (chkEvMixABooster.IsChecked == true) f |= EventFilters.MixABooster;
         return f;
     }
@@ -1222,6 +1192,8 @@ public partial class GameDataDumperPage : UserControl
     // ── Discord Publish ─────────────────────────────────────────
 
     private string? _pendingPublishDir;
+    private DiscordDumpService.PublishMode _pendingPublishMode = DiscordDumpService.PublishMode.None;
+    private DiscordDumpService.LastPublishedInfo? _pendingUpdateTarget;
 
     private void SetPublishEnabled(bool enabled)
     {
@@ -1248,21 +1220,33 @@ public partial class GameDataDumperPage : UserControl
 
         try
         {
-            var lastPublished = await DiscordDumpService.GetLastPublishedDateAsync(token, channelId);
-            if (DiscordDumpService.IsDumpNewer(createdAt, lastPublished))
-            {
-                _pendingPublishDir = dumpDir;
-                SetPublishEnabled(true);
+            var lastPublished = await DiscordDumpService.GetLastPublishedInfoAsync(token, channelId);
+            var mode = DiscordDumpService.DecidePublishMode(createdAt, lastPublished, AppVersion.Version);
+            _pendingPublishMode = mode;
+            _pendingUpdateTarget = mode == DiscordDumpService.PublishMode.UpdateExisting ? lastPublished : null;
 
-                if (lastPublished == null)
-                    btnPublishDiscord.ToolTip = "New dump available — no previous publish found";
-                else
-                    btnPublishDiscord.ToolTip = $"Dump is newer than last publish ({lastPublished:yyyy-MM-dd HH:mm})";
-            }
-            else
+            switch (mode)
             {
-                SetPublishEnabled(false);
-                btnPublishDiscord.ToolTip = "Dump is not newer than last published version";
+                case DiscordDumpService.PublishMode.NewPost:
+                    _pendingPublishDir = dumpDir;
+                    SetPublishEnabled(true);
+                    btnPublishDiscord.ToolTip = lastPublished?.CreatedAt == null
+                        ? "New dump available — no previous publish found"
+                        : $"Dump is newer than last publish ({lastPublished.CreatedAt:yyyy-MM-dd HH:mm})";
+                    break;
+
+                case DiscordDumpService.PublishMode.UpdateExisting:
+                    _pendingPublishDir = dumpDir;
+                    SetPublishEnabled(true);
+                    btnPublishDiscord.ToolTip =
+                        $"Same data already published by MMWT {lastPublished!.MmwtVersion ?? "(unknown)"} — " +
+                        $"click to UPDATE that post's archive with {AppVersion.Version}";
+                    break;
+
+                default:
+                    SetPublishEnabled(false);
+                    btnPublishDiscord.ToolTip = "Dump is not newer than last published version (and MMWT version matches)";
+                    break;
             }
         }
         catch (Exception ex)
@@ -1350,12 +1334,20 @@ public partial class GameDataDumperPage : UserControl
         var createdAt = DiscordDumpService.ReadCreatedAtFromDump(_pendingPublishDir);
         if (createdAt == null) return;
 
+        var isUpdate = _pendingPublishMode == DiscordDumpService.PublishMode.UpdateExisting &&
+                       _pendingUpdateTarget != null;
+
         // Confirm before publishing
         var msgBox = new Wpf.Ui.Controls.MessageBox
         {
-            Title = "Publish to Discord",
-            Content = $"Upload dump ZIP to Discord?\n\nCreated at: {createdAt}\nFolder: {System.IO.Path.GetFileName(_pendingPublishDir)}",
-            PrimaryButtonText = "Publish",
+            Title = isUpdate ? "Update Discord Post" : "Publish to Discord",
+            Content = isUpdate
+                ? $"The same data ({createdAt}) is already on Discord, published by MMWT " +
+                  $"{_pendingUpdateTarget!.MmwtVersion ?? "(unknown)"}.\n\n" +
+                  $"UPDATE that post in place? The attached archive gets replaced and the " +
+                  $"MMWT version bumps to {AppVersion.Version}. No new post is created."
+                : $"Upload dump ZIP to Discord?\n\nCreated at: {createdAt}\nFolder: {System.IO.Path.GetFileName(_pendingPublishDir)}",
+            PrimaryButtonText = isUpdate ? "Update Post" : "Publish",
             CloseButtonText = "Cancel",
             Owner = Window.GetWindow(this)
         };
@@ -1377,16 +1369,23 @@ public partial class GameDataDumperPage : UserControl
 
         try
         {
-            var success = await DiscordDumpService.PublishDumpAsync(
-                token, channelId, _pendingPublishDir, createdAt, progress);
+            var success = isUpdate
+                ? await DiscordDumpService.UpdateDumpMessageAsync(
+                    token, _pendingUpdateTarget!, _pendingPublishDir, progress)
+                : await DiscordDumpService.PublishDumpAsync(
+                    token, channelId, _pendingPublishDir, createdAt, progress);
 
             if (success)
             {
-                resultInfoBar.Title = "Published to Discord";
-                resultInfoBar.Message = "Dump ZIP uploaded successfully.";
+                resultInfoBar.Title = isUpdate ? "Discord post updated" : "Published to Discord";
+                resultInfoBar.Message = isUpdate
+                    ? $"Existing post updated — archive replaced, MMWT version set to {AppVersion.Version}."
+                    : "Dump ZIP uploaded successfully.";
                 resultInfoBar.Severity = Wpf.Ui.Controls.InfoBarSeverity.Success;
                 resultInfoBar.IsOpen = true;
                 btnPublishDiscord.ToolTip = "Already published";
+                _pendingPublishMode = DiscordDumpService.PublishMode.None;
+                _pendingUpdateTarget = null;
             }
             else
             {

@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Text.Json;
 using MergeMansionWikiTools.Models;
 
@@ -289,9 +289,15 @@ public class MysteryService
 
             // Parse hourglass duration override
             if (item.TryGetProperty("OverrideItemFeatures", out var overrides)
+                && overrides.ValueKind == JsonValueKind.Object
                 && overrides.TryGetProperty("TimeContainerInitialTime", out var timeContainer))
             {
-                reward.DurationMs = GetLong(timeContainer, "Milliseconds");
+                // MetaDuration serializes as a plain millisecond NUMBER in current dumps;
+                // legacy dumps inlined an object with a Milliseconds member. TryGetProperty
+                // on a number element throws, so branch on the value kind first.
+                reward.DurationMs = timeContainer.ValueKind == JsonValueKind.Number
+                    ? timeContainer.GetInt64()
+                    : GetLong(timeContainer, "Milliseconds");
             }
 
             rewards.Add(reward);

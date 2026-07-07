@@ -116,6 +116,32 @@ internal static class ApkDownloadService
         }
     }
 
+    /// <summary>
+    /// Turns a Content-Disposition filename into a safe local file name. CDN values arrive
+    /// URL-encoded with query junk appended after the extension
+    /// ("Merge+Mansion%3A+Puzzles+%26+Story_26.06.01_APKPure.xapk&amp;full_screen=true") —
+    /// decode, cut everything after the archive extension, and strip invalid path chars.
+    /// Falls back to "merge-mansion-{version}.xapk" when no usable name remains — the
+    /// extension must survive intact or CheckApkExistence ("*.apk"/"*.xapk") won't find the file.
+    /// </summary>
+    internal static string SanitizeApkFileName(string? rawName, string version)
+    {
+        if (!string.IsNullOrWhiteSpace(rawName))
+        {
+            var name = rawName.Trim().Trim('"');
+            try { name = Uri.UnescapeDataString(name); } catch { /* keep raw */ }
+            name = name.Replace('+', ' ');
+
+            var m = Regex.Match(name, @"^.*?\.(?:xapk|apk|zip)", RegexOptions.IgnoreCase);
+            if (m.Success)
+            {
+                var cleaned = string.Join("_", m.Value.Split(Path.GetInvalidFileNameChars())).Trim();
+                if (cleaned.Length > 5) return cleaned;
+            }
+        }
+        return $"merge-mansion-{version}.xapk";
+    }
+
     private static async Task<(string version, string filePath)> SaveResponseToFileAsync(
         HttpResponseMessage response, string basePath, string? version,
         Action<string>? onStatus, CancellationToken ct)
@@ -141,8 +167,7 @@ internal static class ApkDownloadService
         var versionDir = Path.Combine(basePath, version);
         Directory.CreateDirectory(versionDir);
 
-        var fileName = cdFileName ?? $"merge-mansion-{version}.apk";
-        fileName = string.Join("_", fileName.Split(Path.GetInvalidFileNameChars()));
+        var fileName = SanitizeApkFileName(cdFileName, version);
         var filePath = Path.Combine(versionDir, fileName);
 
         var totalBytes = response.Content.Headers.ContentLength;
@@ -344,7 +369,7 @@ internal static class ApkDownloadService
     /// Returns &gt;0 if a is newer, &lt;0 if b is newer, 0 if equal. Non-numeric or missing
     /// components are treated as 0; any unparseable remainder falls back to ordinal compare.
     /// </summary>
-    private static int CompareVersions(string a, string b)
+    internal static int CompareVersions(string a, string b)
     {
         var pa = a.Split('.');
         var pb = b.Split('.');
@@ -689,9 +714,7 @@ internal static class ApkDownloadService
 
             // Success — determine final filename from Content-Disposition or use default
             var cdMatch = Regex.Match(stdout, @"filename=""?([^""\r\n]+)""?");
-            var fileName = cdMatch.Success
-                ? string.Join("_", cdMatch.Groups[1].Value.Trim().Split(Path.GetInvalidFileNameChars()))
-                : $"merge-mansion-{version}.xapk";
+            var fileName = SanitizeApkFileName(cdMatch.Success ? cdMatch.Groups[1].Value : null, version);
 
             var finalPath = Path.Combine(Path.GetDirectoryName(tempFile)!, fileName);
             if (File.Exists(finalPath)) File.Delete(finalPath);

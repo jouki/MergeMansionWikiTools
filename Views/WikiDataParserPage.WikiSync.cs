@@ -286,7 +286,7 @@ public partial class WikiDataParserPage
             parts.Add("arbiter updated");
             parts.Add("Modules page updated");
 
-            // 10. Check for areas missing from ordering mapping
+            // 10. Check for areas missing from ordering mapping + stale/renamed mapping rows
             if (_areaOrdering != null)
             {
                 var allLocalKeys = new HashSet<string>();
@@ -298,32 +298,67 @@ public partial class WikiDataParserPage
                     .Where(k => !_areaOrdering.ContainsKey(k) && !AreaOrderingService.SkipNames.Contains(k))
                     .OrderBy(k => k)
                     .ToList();
-                if (unmapped.Count > 0)
+
+                // Stale/rename detection needs areas.json + the current module content — probe them
+                // up front (cheap) so the dialog also opens when there is nothing to ADD but a stale
+                // row to rename/delete (e.g. localization arrived: "First Floor Pantry" → "Pantry").
+                List<AreaUnlockInfo>? allAreasProbe = null;
+                string? moduleContent = null;
+                var existingCommented = new List<RemovedCommentedEntry>();
+                // POZOR: plná kvalifikace — WikiDataParserPage má vlastní (nesouvisející) nested typ RenamedEntry
+                var renames = new List<MergeMansionWikiTools.Services.RenamedEntry>();
+                var staleDeletes = new List<MergeMansionWikiTools.Services.StaleEntry>();
+                try
+                {
+                    allAreasProbe = await AreaOrderingService.LoadFromAreasJsonAsync(_main.Settings.AreasJsonPath);
+                    moduleContent = await WikiMappingService.FetchModuleContentAsync("Module:Datatable/Areas/Mapping");
+                    existingCommented = moduleContent != null
+                        ? AreaOrderingService.ExtractCommentedEntries(moduleContent)
+                        : new List<RemovedCommentedEntry>();
+                    (renames, staleDeletes) = AreaOrderingService.DetectStaleEntries(
+                        allAreasProbe, _areaOrdering, existingCommented);
+                }
+                catch (Exception ex)
+                {
+                    AppLogger.Warn($"Area stale/rename detection failed: {ex.Message}");
+                }
+
+                if (unmapped.Count > 0 || renames.Count > 0 || staleDeletes.Count > 0)
                 {
                     ShowInfo($"Wiki updated — {string.Join(", ", parts)}.", InfoBarSeverity.Success);
 
                     // Load area unlock info and deduce ordering indices
-                    var areasPath = _main.Settings.AreasJsonPath;
                     List<AreaUnlockInfo> allAreas;
-                    try
+                    if (allAreasProbe != null)
                     {
-                        allAreas = await AreaOrderingService.LoadFromAreasJsonAsync(areasPath);
+                        allAreas = allAreasProbe;
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        ShowInfo($"Failed to load areas.json for ordering deduction: {ex.Message}", InfoBarSeverity.Error);
-                        return;
+                        try
+                        {
+                            allAreas = await AreaOrderingService.LoadFromAreasJsonAsync(_main.Settings.AreasJsonPath);
+                        }
+                        catch (Exception ex)
+                        {
+                            ShowInfo($"Failed to load areas.json for ordering deduction: {ex.Message}", InfoBarSeverity.Error);
+                            return;
+                        }
                     }
 
-                    var deduced = AreaOrderingService.Deduce(allAreas, _areaOrdering, unmapped);
+                    // Renamed areas keep their orderingIndex under the NEW name: exclude them from
+                    // additions and seed the ordering with the new name so children (whose parent
+                    // AreaId resolves to the new display name) and nextIdx compute correctly.
+                    var effectiveOrdering = new Dictionary<string, double>(_areaOrdering, StringComparer.Ordinal);
+                    foreach (var ren in renames.Where(r => !r.IsCommented))
+                    {
+                        effectiveOrdering.Remove(ren.OldName);
+                        effectiveOrdering[ren.NewName] = ren.OrderingIndex;
+                    }
+                    var renameTargets = new HashSet<string>(renames.Select(r => r.NewName), StringComparer.Ordinal);
+                    var unmappedEffective = unmapped.Where(n => !renameTargets.Contains(n)).ToList();
 
-                    // Fetch current module content to compute REMOVE diff (existing commented entries
-                    // that will be cleared by the patch). We do this in the host page so the dialog
-                    // can render the diff immediately on open.
-                    var moduleContent = await WikiMappingService.FetchModuleContentAsync("Module:Datatable/Areas/Mapping");
-                    var existingCommented = moduleContent != null
-                        ? AreaOrderingService.ExtractCommentedEntries(moduleContent)
-                        : new List<RemovedCommentedEntry>();
+                    var deduced = AreaOrderingService.Deduce(allAreas, effectiveOrdering, unmappedEffective);
 
                     // KONVENCE (2026-06-11): patch maže jen komentované řádky oblastí, které znovu vkládá —
                     // diff proto ukazuje removals jen pro ně. Navíc no-op filtr: deduced COMMENTED entry,
@@ -344,15 +379,19 @@ public partial class WikiDataParserPage
                         .Where(r => deducedByName.ContainsKey(r.Name) && !noOpNames.Contains(r.Name))
                         .ToList();
 
-                    if (deduced.Count == 0 && existingCommented.Count == 0)
+                    if (deduced.Count == 0 && existingCommented.Count == 0 &&
+                        renames.Count == 0 && staleDeletes.Count == 0)
                     {
-                        // Nothing to add and nothing to clear → silent return (vše už na wiki sedí)
+                        // Nothing to add, clear, rename or delete → silent return (vše už na wiki sedí)
                         return;
                     }
 
                     var dlg = new MissingOrderingDialog(
                         deduced,
                         existingCommented,
+                        renames,
+                        staleDeletes,
+                        moduleContent,
                         _main.Settings.WikiUsername,
                         _main.Settings.WikiPassword)
                     {

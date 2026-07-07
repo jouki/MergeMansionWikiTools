@@ -32,6 +32,10 @@ public class ChainViewModel : INotifyPropertyChanged
     public bool ShowUploadButton => _main.Settings.WikiVerified;
     public bool ShowCompareButton => _main.HasVariantDirectories;
     public bool HasLevelCollisions => Source.HasLevelCollisions;
+    public bool IsUnmappedStraggler => Source.IsUnmappedStraggler;
+    public string StragglerTooltip => Source.StragglerParentWikiName is { Length: > 0 } parent
+        ? $"Not in wiki mapping — split from \"{parent}\". Move these items to add their mapping."
+        : "Not in wiki mapping — sibling items in this game chain are already on the wiki.";
 
     private bool? _hasVariantDiffs;
     /// <summary>null = not yet scanned, true = has diffs, false = no diffs.</summary>
@@ -273,6 +277,7 @@ public partial class ChainBrowserPage : UserControl
         chkEvent.IsChecked = s.FilterEvent;
         chkNamed.IsChecked = s.FilterNamed;
         chkCollisions.IsChecked = s.FilterCollisions;
+        chkStragglers.IsChecked = s.FilterStragglers;
         UpdateFilterButtonText();
 
         if (_main.DataService != null)
@@ -367,6 +372,7 @@ public partial class ChainBrowserPage : UserControl
         s.FilterEvent = chkEvent.IsChecked == true;
         s.FilterNamed = chkNamed.IsChecked == true;
         s.FilterCollisions = chkCollisions.IsChecked == true;
+        s.FilterStragglers = chkStragglers.IsChecked == true;
         _main.SaveSettings();
     }
 
@@ -417,7 +423,8 @@ public partial class ChainBrowserPage : UserControl
         bool fNamed = chkNamed?.IsChecked == true;
         bool fCollisions = chkCollisions?.IsChecked == true;
         bool fABDiffs = chkABDiffs?.IsChecked == true;
-        bool anyFilter = fGen || fSpawn || fProd || fEvent || fNamed || fCollisions || fABDiffs;
+        bool fStragglers = chkStragglers?.IsChecked == true;
+        bool anyFilter = fGen || fSpawn || fProd || fEvent || fNamed || fCollisions || fABDiffs || fStragglers;
 
         if (anyFilter)
         {
@@ -428,12 +435,30 @@ public partial class ChainBrowserPage : UserControl
             if (fNamed) filtered = filtered.Where(c => c.Source.HasHumanReadableName);
             if (fCollisions) filtered = filtered.Where(c => c.Source.HasLevelCollisions);
             if (fABDiffs) filtered = filtered.Where(c => c.HasVariantDiffs == true);
+            if (fStragglers) filtered = filtered.Where(c => c.Source.IsUnmappedStraggler);
         }
 
         var result = filtered.ToList();
         AppLogger.Info($"FilterChains: {result.Count}/{_allChains.Count} matches, setting ItemsSource...");
         lvChains.ItemsSource = result;
         txtChainCount.Text = $"{result.Count} / {_allChains.Count} chains";
+
+        // Unmapped-straggler banner — surfaced so partially-adopted chains with items missing from the
+        // wiki mapping aren't overlooked. Hidden while the Unmapped filter is on (list already shows them).
+        var stragglerCount = _allChains.Count(c => c.Source.IsUnmappedStraggler);
+        if (stragglerBanner != null)
+        {
+            if (stragglerCount > 0 && !fStragglers)
+            {
+                txtStragglerBanner.Text = $"{stragglerCount} chain{(stragglerCount != 1 ? "s have" : " has")} " +
+                    "items missing from the wiki mapping";
+                stragglerBanner.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                stragglerBanner.Visibility = Visibility.Collapsed;
+            }
+        }
 
         // Show hint when search matches exist but are hidden by filters
         if (anyFilter && tokens.Length > 0)
@@ -578,6 +603,12 @@ public partial class ChainBrowserPage : UserControl
 
     }
 
+    private void StragglerBanner_Click(object sender, MouseButtonEventArgs e)
+    {
+        // Turn on the Unmapped filter so the user sees exactly the flagged chains to review.
+        if (chkStragglers != null) chkStragglers.IsChecked = true;
+    }
+
     private void FilterRow_Click(object sender, MouseButtonEventArgs e)
     {
         if (sender is Border border)
@@ -600,6 +631,7 @@ public partial class ChainBrowserPage : UserControl
         if (chkNamed?.IsChecked == true) count++;
         if (chkCollisions?.IsChecked == true) count++;
         if (chkABDiffs?.IsChecked == true) count++;
+        if (chkStragglers?.IsChecked == true) count++;
 
         txtFiltersLabel.Text = count > 0 ? $"Filters ({count})" : "Filters";
     }

@@ -3,7 +3,7 @@
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
                  Title="Missing Ordering Indices"
-                 Width="820" MinHeight="380"
+                 Width="820"
                  SizeToContent="Height"
                  WindowStartupLocation="CenterOwner"
                  ResizeMode="NoResize"
@@ -41,7 +41,7 @@
                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                        TextWrapping="Wrap"
                        Margin="0,0,0,10"
-                       Text="Indices are deduced from UnlockRequirements (fallback TeaseRequirements). Click the preview to copy the additions, or use Update Module to push changes directly. + = added, - = removed (existing commented in-prep entries that will be cleared)." />
+                       Text="Indices are deduced from UnlockRequirements (fallback TeaseRequirements). Click the preview to copy the additions, or use Update Module to push changes directly. Green (+) = added, red (-) = removed, unmarked = unchanged rows shown for context." />
 
             <!-- Preview pane (click-to-copy of additions only) -->
             <Border Grid.Row="2"
@@ -55,7 +55,8 @@
                     Cursor="Hand"
                     MouseLeftButtonUp="PreviewBorder_MouseLeftButtonUp"
                     ToolTip="Click to copy additions to clipboard">
-                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                <ScrollViewer x:Name="previewScroll"
+                              VerticalScrollBarVisibility="Auto"
                               HorizontalScrollBarVisibility="Auto"
                               MaxHeight="320">
                     <TextBlock x:Name="txtPreview"

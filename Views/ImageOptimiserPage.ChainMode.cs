@@ -276,6 +276,28 @@ public partial class ImageOptimiserPage
         }
     }
 
+    /// <summary>Loads several atlas PNGs and links them into ONE cluster so the multi-image combined
+    /// preview + indexing (BuildCombinedPreview) treats them as one sheet. Used for multi-texture
+    /// chains whose items live in separate atlases.</summary>
+    private void LoadTexturesAsCluster(string[] paths, string? indexString = null)
+    {
+        AddImages(paths);
+        var newClusters = _clusters
+            .Where(c => c.Images.Count == 1 &&
+                paths.Contains(c.Images[0].FilePath, StringComparer.OrdinalIgnoreCase))
+            .ToList();
+        for (int i = 1; i < newClusters.Count; i++)
+            MergeClusters(newClusters[0], newClusters[i]);
+        if (newClusters.Count > 0)
+            SelectImage(newClusters[0].Images[0]);
+
+        // Apply the known per-image indices AFTER EnterChainMode's synchronous TryAutoPredict
+        // (which, seeing one sprite per texture, can't order across images) so ours wins.
+        if (!string.IsNullOrEmpty(indexString))
+            Dispatcher.BeginInvoke(new System.Action(() => inputIndices.Text = indexString),
+                System.Windows.Threading.DispatcherPriority.Background);
+    }
+
     private void TrySuggestChainImage(ParsedChain chain)
     {
         _suggestedImagePath = null;
@@ -308,6 +330,38 @@ public partial class ImageOptimiserPage
         }
 
         var allSkinMappings = SpriteMetadataService.LoadSkinMappings(exportDir);
+
+        // ── Multi-texture chain: items span >1 atlas (InfiniteEnergy → UnlimitedEnergyA/C/D, or a
+        // wiki-merge of originally separate chains). Load ALL their textures as one linked cluster so
+        // the existing multi-image combine (BuildCombinedPreview) + per-image indexing handle it. ──
+        var itemTexRefs = AtlasStitcher.ResolveItemTextures(chain,
+            pt => SpriteMetadataService.ResolveSkeletonForPoolTag(pt, exportDir));
+        if (AtlasStitcher.IsMultiTexture(itemTexRefs))
+        {
+            var texPaths = new List<string>();
+            foreach (var tex in AtlasStitcher.DistinctTextures(itemTexRefs))
+                foreach (var dir in searchDirs)
+                {
+                    var p = System.IO.Path.Combine(dir, $"{tex}.png");
+                    if (File.Exists(p)) { texPaths.Add(p); break; }
+                }
+            if (texPaths.Count >= 2)
+            {
+                // Each texture holds one sprite, so per-texture auto-prediction can't derive the
+                // cross-image order. We know it from the data: texture → item display level (PoolTag
+                // map). Pre-fill the index string in the SAME order the textures were loaded/laid out
+                // (DistinctTextures = ascending level) so the combined split is indexed 1 2 3.
+                var texToLevel = itemTexRefs
+                    .GroupBy(r => r.TextureName, StringComparer.OrdinalIgnoreCase)
+                    .ToDictionary(g => g.Key, g => g.Min(r => r.Level), StringComparer.OrdinalIgnoreCase);
+                var indexString = string.Join(" ",
+                    AtlasStitcher.DistinctTextures(itemTexRefs).Select(t => texToLevel[t]));
+
+                AppLogger.Info($"[IO-CHAIN] '{chain.ConfigKey}': multi-texture → loading {texPaths.Count} atlases, indices '{indexString}'");
+                LoadTexturesAsCluster(texPaths.ToArray(), indexString);
+                return;
+            }
+        }
 
         // ── Priority 2: ItemType → SpriteName in skin mappings → skeleton ──
         var itemTypeTexture = SpriteMetadataService.FindTextureForChainFromItemTypes(

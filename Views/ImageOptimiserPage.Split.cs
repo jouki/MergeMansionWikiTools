@@ -413,7 +413,6 @@ public partial class ImageOptimiserPage
         var rotationsList = new List<float>();
         var keptPositions = new List<(Rectangle Full, Rectangle Main)>();
         int matched = 0;
-        var usedLevels = new HashSet<int>();
         var usedSpriteIndices = new HashSet<int>();
 
         for (int objIdx = 0; objIdx < orderedAtlas.Count; objIdx++)
@@ -439,42 +438,31 @@ public partial class ImageOptimiserPage
             usedSpriteIndices.Add(bestIdx);
 
             int level = indices[bestIdx];
-            if (level > 0 && usedLevels.Contains(level))
-                continue; // Skip duplicate — same item, different sprite (e.g. front+back)
 
-            if (level > 0)
+            // Dedup by OVERLAP, not by level. A sprite that overlaps an already-kept one is a
+            // secondary view (front/back/shadow) of the SAME item → skip it. But distinct,
+            // non-overlapping sprites keep their own slot EVEN when they share a level number —
+            // in a multi-chain atlas different items map to different sprites at the same level
+            // (e.g. CSE_SoloMilestone_Chest: two chests both "level 1"). The old level-dedup dropped
+            // the second such sprite, so the index string lost a slot ("- 1" instead of "- 1 1").
+            bool overlapsKept = false;
+            foreach (var kept in keptPositions)
             {
-                usedLevels.Add(level);
-                parts.Add(level.ToString());
-                matched++;
-            }
-            else
-            {
-                // Unmatched sprite — check if it overlaps with an already-kept sprite.
-                // If so, it's a secondary view (back/shadow) of the same item → skip.
-                bool overlapsKept = false;
-                foreach (var kept in keptPositions)
+                int oL = Math.Max(obj.Full.Left, kept.Full.Left);
+                int oR = Math.Min(obj.Full.Left + obj.Full.Width, kept.Full.Left + kept.Full.Width);
+                int oT = Math.Max(obj.Full.Top, kept.Full.Top);
+                int oB = Math.Min(obj.Full.Top + obj.Full.Height, kept.Full.Top + kept.Full.Height);
+                if (oR > oL && oB > oT)
                 {
-                    int oL = Math.Max(obj.Full.Left, kept.Full.Left);
-                    int oR = Math.Min(obj.Full.Left + obj.Full.Width, kept.Full.Left + kept.Full.Width);
-                    int oT = Math.Max(obj.Full.Top, kept.Full.Top);
-                    int oB = Math.Min(obj.Full.Top + obj.Full.Height, kept.Full.Top + kept.Full.Height);
-
-                    if (oR > oL && oB > oT)
-                    {
-                        int overlapArea = (oR - oL) * (oB - oT);
-                        int spriteArea = obj.Full.Width * obj.Full.Height;
-                        if (spriteArea > 0 && (double)overlapArea / spriteArea > 0.3)
-                        {
-                            overlapsKept = true;
-                            break;
-                        }
-                    }
+                    int overlapArea = (oR - oL) * (oB - oT);
+                    int spriteArea = obj.Full.Width * obj.Full.Height;
+                    if (spriteArea > 0 && (double)overlapArea / spriteArea > 0.3) { overlapsKept = true; break; }
                 }
-                if (overlapsKept) continue;
-
-                parts.Add("-");
             }
+            if (overlapsKept) continue;
+
+            if (level > 0) { parts.Add(level.ToString()); matched++; }
+            else parts.Add("-");
 
             rotationsList.Add(orderedSprites[bestIdx].Rotated ? 90f : 0f);
             keptPositions.Add(obj);

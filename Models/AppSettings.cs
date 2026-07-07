@@ -1,10 +1,10 @@
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.23.48";
+    public const string Version = "v0.24.0";
 
     // Full version with build timestamp, e.g. "v0.18.7 (build 20260322-1200)"
     public static string Build { get; } = GetBuild();
@@ -57,6 +57,10 @@ public class AppSettings
     // Image Extractor
     public string ImageExporterBasePath { get; set; } = "";
     public string SelectedApkVersion { get; set; } = "";
+
+    // Game version the user chose "Skip this version" for in the update offer —
+    // don't offer it again until an even newer version appears.
+    public string LastDeclinedGameVersion { get; set; } = "";
     public string ActiveDumpFolder { get; set; } = "";  // "Dump", "Dump 2", etc.
 
     // Area Flowcharts
@@ -74,6 +78,7 @@ public class AppSettings
     public bool FilterEvent { get; set; }
     public bool FilterNamed { get; set; }
     public bool FilterCollisions { get; set; }
+    public bool FilterStragglers { get; set; }
 
     // Wiki — user must verify their own Fandom account to unlock wiki editing
     public string WikiUsername { get; set; } = "";
@@ -132,6 +137,7 @@ public class AppSettings
     public bool EventDailyTrades { get; set; } = true;
     public bool EventUncategorised { get; set; } = true;
     public bool EventSoloMilestone { get; set; } = true;
+    public bool EventDailyScoop { get; set; } = true;
     public bool EventSubExpanded { get; set; } = false;
 
     // Discord — dump distribution

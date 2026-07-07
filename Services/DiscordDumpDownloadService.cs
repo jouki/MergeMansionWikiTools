@@ -60,6 +60,20 @@ internal static class DiscordDumpDownloadService
         return results;
     }
 
+    /// <summary>
+    /// Resolves a Discord dump's game version: prefer the version from the dump's comment
+    /// ("Game Version: X", v0.23.38+); fall back to date-matching against APK release dates
+    /// for older dumps that don't carry the line.
+    /// </summary>
+    public static string? ResolveDumpVersion(
+        DiscordDumpInfo dump, List<ApkDownloadService.ApkVersionInfo>? versions)
+    {
+        if (!string.IsNullOrEmpty(dump.GameVersion)) return dump.GameVersion;
+        if (versions == null) return null;
+        var effectiveDate = dump.DataCreatedAt ?? dump.MessageTimestamp;
+        return ApkDownloadService.MatchVersionByDate(versions, effectiveDate)?.Version;
+    }
+
     private static async Task<bool> IsForumChannelAsync(
         string botToken, string channelId, CancellationToken ct)
     {

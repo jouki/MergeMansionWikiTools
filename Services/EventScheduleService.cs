@@ -10,7 +10,7 @@ namespace MergeMansionWikiTools.Services;
 /// the run that carries the "On Fire" booster; it is NOT in the game dump, so the merge must
 /// preserve it across regenerations.
 /// </summary>
-public sealed record EventScheduleRun(DateTime Start, TimeSpan Duration, string SourceId, bool OnFireVariant = false, string? Badge = null, string? Parent = null, bool Disabled = false, string? IdenticalTo = null);
+public sealed record EventScheduleRun(DateTime Start, TimeSpan Duration, string SourceId, bool OnFireVariant = false, string? Badge = null, string? Parent = null, bool Disabled = false, string? IdenticalTo = null, string? Prefix = null);
 
 /// <summary>
 /// A live-module run that the drift classifier cannot auto-resolve: the dump has a run for the
@@ -28,6 +28,14 @@ public sealed class EventScheduleGroup
     public string? Badge { get; set; }
     /// <summary>For sub-events (Garage Cleanup): the seasonal event this accompanies; the widget nests under it. Null otherwise.</summary>
     public string? Parent { get; set; }
+    /// <summary>
+    /// Event-id family prefix (CollectibleBoards only: "CBE"/"LDE"/"LC"/"LS"/"SE"), derived from the
+    /// game id before the first '_'. Emitted to Module:Datatable/Events so Lua (Module:DailyScoop
+    /// fallback resolution) can match Daily Scoop tasks whose params are ID-PREFIX filters
+    /// (e.g. CompleteNCollectibleBoardEventMilestone param "CBE_" matches CBE_* events only,
+    /// NOT LDE_*). Preserved by the merge on historical entries. Null for other libraries.
+    /// </summary>
+    public string? Prefix { get; set; }
     public List<EventScheduleRun> Runs { get; } = new();
 }
 
@@ -284,6 +292,15 @@ public class EventScheduleService
 
                 var badge = spec.BadgeField != null ? GetString(e, spec.BadgeField) : "";
 
+                // Id-family prefix (CBE_/LDE_/LC_/LS_/SE_) — only CollectibleBoards ids form these
+                // families; other libraries' ConfigKeys would yield meaningless prefixes.
+                string? prefix = null;
+                if (spec.Library == "CollectibleBoards")
+                {
+                    var us = id.IndexOf('_');
+                    if (us > 0) prefix = id[..us];
+                }
+
                 // Auto-detect the On Fire booster week (Teatime Delight): any of the event's
                 // Milestones grants a RewardOnFire. Other libraries have no Milestones → false.
                 bool onFireVariant = onFireMilestones.Count > 0
@@ -299,7 +316,8 @@ public class EventScheduleService
                             OnFireVariant: onFireVariant,
                             Badge: string.IsNullOrEmpty(badge) ? null : badge,
                             Parent: parent,
-                            Disabled: !isEnabled)));
+                            Disabled: !isEnabled,
+                            Prefix: prefix)));
             }
         }
 
@@ -380,6 +398,7 @@ public class EventScheduleService
             // earlier runs predate the prefab field).
             group.Badge = group.Runs.FirstOrDefault(r => !string.IsNullOrEmpty(r.Badge))?.Badge;
             group.Parent = group.Runs.FirstOrDefault(r => !string.IsNullOrEmpty(r.Parent))?.Parent;
+            group.Prefix = group.Runs.FirstOrDefault(r => !string.IsNullOrEmpty(r.Prefix))?.Prefix;
             Groups.Add(group);
         }
     }
@@ -442,6 +461,7 @@ public class EventScheduleService
 
             var entryBadge = entry.Str("badge");
             var entryParent = entry.Str("parent");
+            var entryPrefix = entry.Str("prefix");
 
             // All run starts this event ALREADY has on the wiki (recurrences expanded). If a dump run
             // that looks like a forward drift of one live run ALSO already exists here as its own run,
@@ -557,7 +577,8 @@ public class EventScheduleService
                     byKey[key] = (name, category, new EventScheduleRun(start, duration, "historical", onFire,
                         string.IsNullOrEmpty(entryBadge) ? null : entryBadge,
                         string.IsNullOrEmpty(entryParent) ? null : entryParent,
-                        runDisabled));
+                        runDisabled,
+                        Prefix: string.IsNullOrEmpty(entryPrefix) ? null : entryPrefix));
                     preservedRuns++;
                     if (!nameCategory.ContainsKey(name)) nameCategory[name] = category;
                 }

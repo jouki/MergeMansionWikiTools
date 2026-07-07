@@ -171,6 +171,20 @@ public class ParsedChain
     /// <summary>Whether two or more items share the same level in this chain.</summary>
     public bool HasLevelCollisions { get; set; }
 
+    /// <summary>
+    /// True when this chain is the data-named remainder of a game source chain that was PARTIALLY
+    /// adopted onto the wiki: some sibling items carry a wiki <c>chainName</c> (and moved into a
+    /// renamed wiki chain) while the items here have no mapping of their own, so they fell back to the
+    /// original game name. Signals a gap — these items are missing from the wiki mapping. Detected in
+    /// <c>ApplyWikiMappingToChains</c>; only set when the source chain genuinely SPLIT (data name ≠
+    /// wiki name), never when unmapped items simply rejoined a same-named chain.
+    /// </summary>
+    public bool IsUnmappedStraggler { get; set; }
+
+    /// <summary>When <see cref="IsUnmappedStraggler"/> is true, the wiki chain name the mapped siblings
+    /// moved into (e.g. "Orange Flower" for the "A beautiful Orange Flower" remainder). Used for the badge tooltip.</summary>
+    public string? StragglerParentWikiName { get; set; }
+
     public List<ParsedItem> Items { get; set; } = new();
 
     /// <summary>Compact summary like "12 levels, Generator"</summary>
@@ -223,6 +237,16 @@ public class ParsedItem
     public string ItemType { get; set; } = "";
     public int SellCoins { get; set; }
     public bool Unsellable { get; set; }
+
+    // Daily Trade (DailyTasksV2) bubble values — present only for bubble-able items
+    // (dumper writes them from BubbleFeatures; null = item can never be a trade req/reward).
+    public int? RequiredItemValue { get; set; }
+    public int? RewardItemValue { get; set; }
+
+    /// <summary>Per-item PoolTag (visual asset key). Usually equal across a chain, but for chains
+    /// whose items live in separate atlases (e.g. InfiniteEnergy: LimitedItemInfiniteEnergyA/B/C →
+    /// UnlimitedEnergyD/C/A) each item has its OWN PoolTag → its own texture.</summary>
+    public string PoolTag { get; set; } = "";
 
     // Generator info
     public bool IsGenerator { get; set; }
