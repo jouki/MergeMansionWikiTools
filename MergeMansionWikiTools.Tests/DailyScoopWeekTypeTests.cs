@@ -81,4 +81,21 @@ public class DailyScoopWeekTypeTests : IDisposable
         Assert.Equal("Super", scoop.Runs.Single(r => r.Start.Month == 7).WeekType);
         Assert.DoesNotContain(svc.Groups, g => g.Name.Contains("DailyTasks"));
     }
+
+    // ── merge-preserve ──────────────────────────────────────────────────────────
+
+    [Fact]
+    public async Task Historical_DailyScoop_run_preserves_weekType()
+    {
+        // Dump has no Daily Scoop runs at all (unrelated CoreSupportEvent only) — the historical
+        // "The Daily Scoop" run lives ONLY in the live module and must survive the merge.
+        var path = WriteDumpJson(("DailyTasksV2", null, new DateTime(2026, 6, 1, 8, 0, 0, DateTimeKind.Utc)));
+        var live = @"return { events = { { name = ""The Daily Scoop"", category = ""Core Support Event"", runs = { { start = { year = 2026, month = 5, day = 25, hour = 8, min = 5 }, durationDays = 7, weekType = ""Hard"" } } } } }";
+        var svc = new EventScheduleService();
+
+        await svc.LoadAsync(path, live);
+
+        var run = svc.Groups.Single(g => g.Name == "The Daily Scoop").Runs.Single();
+        Assert.Equal("Hard", run.WeekType);
+    }
 }

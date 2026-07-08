@@ -496,6 +496,7 @@ public class EventScheduleService
                 if (runObj is not LuaTable run) continue;
                 var onFire = run.Get("onFireVariant") is true;
                 var runDisabled = run.Get("disabled") is true;
+                var runWeekType = run.Str("weekType");
                 foreach (var (start, duration) in ExpandModuleRun(run))
                 {
                     var key = (name, start);
@@ -596,7 +597,8 @@ public class EventScheduleService
                         string.IsNullOrEmpty(entryBadge) ? null : entryBadge,
                         string.IsNullOrEmpty(entryParent) ? null : entryParent,
                         runDisabled,
-                        Prefix: string.IsNullOrEmpty(entryPrefix) ? null : entryPrefix));
+                        Prefix: string.IsNullOrEmpty(entryPrefix) ? null : entryPrefix,
+                        WeekType: string.IsNullOrEmpty(runWeekType) ? null : runWeekType));
                     preservedRuns++;
                     if (!nameCategory.ContainsKey(name)) nameCategory[name] = category;
                 }
