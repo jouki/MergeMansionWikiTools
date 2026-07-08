@@ -10,7 +10,7 @@ namespace MergeMansionWikiTools.Services;
 /// the run that carries the "On Fire" booster; it is NOT in the game dump, so the merge must
 /// preserve it across regenerations.
 /// </summary>
-public sealed record EventScheduleRun(DateTime Start, TimeSpan Duration, string SourceId, bool OnFireVariant = false, string? Badge = null, string? Parent = null, bool Disabled = false, string? IdenticalTo = null, string? Prefix = null);
+public sealed record EventScheduleRun(DateTime Start, TimeSpan Duration, string SourceId, bool OnFireVariant = false, string? Badge = null, string? Parent = null, bool Disabled = false, string? IdenticalTo = null, string? Prefix = null, string? WeekType = null);
 
 /// <summary>
 /// A live-module run that the drift classifier cannot auto-resolve: the dump has a run for the
