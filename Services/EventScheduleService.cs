@@ -113,6 +113,20 @@ public class EventScheduleService
     /// Display-name corrections (the dump's DisplayName is wrong/internal for these).
     /// Keyed by the resolved name AFTER trim + "Season Pass - " strip.
     /// </summary>
+    /// <summary>
+    /// Maps a DailyChallenges_NN CoreSupportEvent's MinigameId to its Daily Scoop week type.
+    /// The game's MinigameId (EasyWeek/MedWeek/HardWeek/SuperWeek) determines the milestone
+    /// ladder, final reward and task composition of the week — see Game/DailyScoop.md.
+    /// </summary>
+    private static string? WeekTypeFromMinigame(string? minigameId) => minigameId switch
+    {
+        "EasyWeek" => "Easy",
+        "MedWeek" => "Medium",
+        "HardWeek" => "Hard",
+        "SuperWeek" => "Super",
+        _ => null,
+    };
+
     private static readonly Dictionary<string, string> NameOverrides = new(StringComparer.Ordinal)
     {
         // (empty) DigEvents ("Maddie's Re-Archaeology") and ClassicRaces ("Hopewell Bay Horizons
@@ -241,13 +255,14 @@ public class EventScheduleService
                 if (string.IsNullOrEmpty(id)) id = GetString(e, "ConfigKey");
                 if (string.IsNullOrEmpty(id)) id = GetString(e, "GroupId");
 
-                // DailyChallenges_* / DailyTasks are internal daily-task CoreSupportEvents (Name=None,
-                // so the display name falls back to the raw id) — NOT user-facing events: no wiki page,
-                // they render as red raw codenames in the widget. Skip them at the source. (The live-
-                // module merge has a matching guard for any that already leaked into the module.)
-                if (id.StartsWith("DailyChallenges", StringComparison.OrdinalIgnoreCase)
-                    || id.StartsWith("DailyTasks", StringComparison.OrdinalIgnoreCase))
+                // DailyTasks* are internal daily-trade CoreSupportEvents (not user-facing) — skip.
+                if (id.StartsWith("DailyTasks", StringComparison.OrdinalIgnoreCase))
                     continue;
+                // DailyChallenges_NN weekly events ARE user-facing as "The Daily Scoop": each is one run,
+                // its MinigameId (EasyWeek/MedWeek/HardWeek/SuperWeek) gives the week type. DisplayName is
+                // None in the dump, so the name is forced below.
+                bool isDailyScoop = id.StartsWith("DailyChallenges", StringComparison.OrdinalIgnoreCase);
+                string? dailyScoopWeekType = isDailyScoop ? WeekTypeFromMinigame(GetString(e, "MinigameId")) : null;
 
                 // Disabled entries (IsEnabled = false) are ALL kept and flagged `disabled` so the
                 // wiki can filter them with |hideDisabled=true|. Past = already-aired history;
@@ -271,6 +286,8 @@ public class EventScheduleService
 
                 // Known display-name corrections (wrong/internal name in the dump).
                 if (NameOverrides.TryGetValue(name, out var corrected)) name = corrected;
+
+                if (isDailyScoop) name = "The Daily Scoop";
 
                 // Garage Cleanups: tie to the seasonal event they accompany via id suffix
                 // (GC_Flashback2025 → "Flashback Rewind"); name them "<Parent> Garage Cleanup".
@@ -317,7 +334,8 @@ public class EventScheduleService
                             Badge: string.IsNullOrEmpty(badge) ? null : badge,
                             Parent: parent,
                             Disabled: !isEnabled,
-                            Prefix: prefix)));
+                            Prefix: prefix,
+                            WeekType: dailyScoopWeekType)));
             }
         }
 
