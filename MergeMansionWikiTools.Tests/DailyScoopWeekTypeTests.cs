@@ -98,4 +98,20 @@ public class DailyScoopWeekTypeTests : IDisposable
         var run = svc.Groups.Single(g => g.Name == "The Daily Scoop").Runs.Single();
         Assert.Equal("Hard", run.WeekType);
     }
+
+    // ── Lua emit ────────────────────────────────────────────────────────────────
+
+    [Fact]
+    public void GeneratedLua_emits_weekType_and_rewardMap()
+    {
+        var groups = new List<EventScheduleGroup> {
+            new() { Name = "The Daily Scoop", Category = "Core Support Event",
+                Runs = { new EventScheduleRun(new DateTime(2026,7,6,8,5,0), TimeSpan.FromDays(7), "DailyChallenges_11", WeekType: "Super") } }
+        };
+        var lua = new LuaGeneratorService().GenerateEventScheduleLua(groups, createdAt: null);
+        Assert.Contains("weekType = \"Super\"", lua);
+        Assert.Contains("dailyScoopWeekRewards = {", lua);
+        Assert.Contains("Super  = { \"Fancy Blue Chest\", 2 }", lua);
+        Assert.Contains("Hard   = { \"Red Chest\", 2 }", lua);
+    }
 }

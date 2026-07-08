@@ -1194,6 +1194,9 @@ public class LuaGeneratorService
         sb.AppendLine("--                  uses it to resolve Daily Scoop tasks whose params are ID-PREFIX");
         sb.AppendLine("--                  filters (CBE_ matches CBE_* events only, not LDE_*). Preserved");
         sb.AppendLine("--                  by regeneration on historical entries.");
+        sb.AppendLine("--   weekType    -- (Daily Scoop runs only) week type Easy/Medium/Hard/Super, from the");
+        sb.AppendLine("--                  game MinigameId. Module:Events derives the reward icon and");
+        sb.AppendLine("--                  Module:DailyScoop its labels/tabs from it.");
         sb.AppendLine("--   runs        -- list of scheduled runs. A run is either:");
         sb.AppendLine("--                  * a single occurrence:");
         sb.AppendLine("--                      { start = {year=, month=, day=, hour=, min=}, durationDays = N }");
@@ -1262,13 +1265,22 @@ public class LuaGeneratorService
                 }
                 var flags = (run.OnFireVariant ? ", onFireVariant = true" : "")
                           + (run.Disabled ? ", disabled = true" : "")
-                          + (string.IsNullOrEmpty(run.IdenticalTo) ? "" : $", identicalTo = \"{run.IdenticalTo}\"");
+                          + (string.IsNullOrEmpty(run.IdenticalTo) ? "" : $", identicalTo = \"{run.IdenticalTo}\"")
+                          + (string.IsNullOrEmpty(run.WeekType) ? "" : $", weekType = \"{run.WeekType}\"");
                 sb.AppendLine($"\t\t\t\t{{ start = {{ {start} }}, durationDays = {FormatDurationDays(run.Duration)}{flags} }},");
             }
             sb.AppendLine("\t\t\t},");
             sb.AppendLine("\t\t},");
         }
 
+        sb.AppendLine("\t},");
+        sb.AppendLine("\t-- Daily Scoop final weekly-milestone reward per week type (a pure function of");
+        sb.AppendLine("\t-- the run's weekType); Module:Events renders the run's schedule-widget icon from it.");
+        sb.AppendLine("\tdailyScoopWeekRewards = {");
+        sb.AppendLine("\t\tEasy   = { \"Clues Envelope\", 5 },");
+        sb.AppendLine("\t\tMedium = { \"Clues Envelope\", 5 },");
+        sb.AppendLine("\t\tHard   = { \"Red Chest\", 2 },");
+        sb.AppendLine("\t\tSuper  = { \"Fancy Blue Chest\", 2 },");
         sb.AppendLine("\t},");
         sb.AppendLine("}");
         return sb.ToString();
