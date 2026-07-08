@@ -502,6 +502,10 @@ public static partial class MysteryWikiService
 		{
 			text12 = text12 + ", startDate = \"" + text2 + "\"";
 		}
+		if (!string.IsNullOrEmpty(mystery.EventItemName))
+		{
+			text12 = text12 + ", eventItem = \"" + mystery.EventItemName + "\"";
+		}
 		text12 += " },";
 		string text13 = text10.Substring(0, num8);
 		string text14 = text12;
@@ -878,6 +882,10 @@ public static partial class MysteryWikiService
 			if (!string.IsNullOrEmpty(luaDateStr))
 			{
 				luaEntry = luaEntry + ", startDate = \"" + luaDateStr + "\"";
+			}
+			if (!string.IsNullOrEmpty(mystery.EventItemName))
+			{
+				luaEntry = luaEntry + ", eventItem = \"" + mystery.EventItemName + "\"";
 			}
 			luaEntry += " },";
 			int mysteryYear = mystery.StartDate?.Year ?? DateTime.Now.Year;
