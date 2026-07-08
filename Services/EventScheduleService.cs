@@ -110,10 +110,6 @@ public class EventScheduleService
     };
 
     /// <summary>
-    /// Display-name corrections (the dump's DisplayName is wrong/internal for these).
-    /// Keyed by the resolved name AFTER trim + "Season Pass - " strip.
-    /// </summary>
-    /// <summary>
     /// Maps a DailyChallenges_NN CoreSupportEvent's MinigameId to its Daily Scoop week type.
     /// The game's MinigameId (EasyWeek/MedWeek/HardWeek/SuperWeek) determines the milestone
     /// ladder, final reward and task composition of the week — see Game/DailyScoop.md.
@@ -127,6 +123,10 @@ public class EventScheduleService
         _ => null,
     };
 
+    /// <summary>
+    /// Display-name corrections (the dump's DisplayName is wrong/internal for these).
+    /// Keyed by the resolved name AFTER trim + "Season Pass - " strip.
+    /// </summary>
     private static readonly Dictionary<string, string> NameOverrides = new(StringComparer.Ordinal)
     {
         // (empty) DigEvents ("Maddie's Re-Archaeology") and ClassicRaces ("Hopewell Bay Horizons
@@ -467,10 +467,11 @@ public class EventScheduleService
             // A3b: Garage Cleanup runs are owned by the GC pass (BuildGcEventGroups), not pass-1 — never
             // re-introduce GC entries from the live module here, or they'd duplicate the GC-pass output.
             if (string.Equals(category, "Garage Cleanup", StringComparison.Ordinal)) continue;
-            // DailyChallenges_* / DailyTasks are internal daily-task configs, NOT user-facing events:
-            // no wiki page (they render as raw red codenames in the widget). They leaked into the live
-            // module from an external edit; the schedule pass never emits them (not in Libs). Drop them
-            // here so a regen purges them from Module:Datatable/Events. (Re-enable later by removing this.)
+            // Raw-codename leftovers literally named "DailyChallenges_*" / "DailyTasks*": a live entry
+            // under one of those internal ids (from a pre-"The Daily Scoop" edit, or a DailyTasks config)
+            // is not a user-facing event — drop it so a regen purges it. This is orthogonal to the new
+            // Daily Scoop generation: DailyChallenges_NN weekly events are now emitted as "The Daily
+            // Scoop" (category "Core Support Event"), which never matches this name/category guard.
             if (name.StartsWith("DailyChallenges", StringComparison.OrdinalIgnoreCase)
                 || name.StartsWith("DailyTasks", StringComparison.OrdinalIgnoreCase)
                 || category.StartsWith("DailyChallenges", StringComparison.OrdinalIgnoreCase)) continue;
