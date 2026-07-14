@@ -363,6 +363,14 @@
                                         <TextBlock Text="The Daily Scoop weekly daily-task event&#x0a;(internally DailyChallenges, incl. the legacy&#x0a;DailyScoop V1 libraries): week types and their&#x0a;segment selection, milestone ladders with&#x0a;rewards, day compositions with day boxes and&#x0a;all objectives incl. reward pools and fallbacks." />
                                     </CheckBox.ToolTip>
                                 </CheckBox>
+                                <CheckBox x:Name="chkEvAutoMerge" Grid.Row="3" Grid.Column="3"
+                                          Content="Auto-Merge" FontSize="11" Margin="8,0,0,0"
+                                          ToolTipService.InitialShowDelay="0"
+                                          Checked="EventSubCheckbox_Changed" Unchecked="EventSubCheckbox_Changed">
+                                    <CheckBox.ToolTip>
+                                        <TextBlock Text="Auto-Merge event windows (AutoMerge*):&#x0a;core-support event that enables auto-merge&#x0a;for a short period, recurring several times&#x0a;daily on a global calendar schedule." />
+                                    </CheckBox.ToolTip>
+                                </CheckBox>
                             </Grid>
                         </StackPanel>
                     </Expander>

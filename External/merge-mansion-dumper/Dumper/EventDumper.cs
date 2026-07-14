@@ -40,10 +40,11 @@ namespace merge_mansion_dumper.Dumper
         SoloMilestone = 1 << 15,
         DailyTrades = 1 << 16,
         DailyScoop = 1 << 17,
+        AutoMerge = 1 << 18,
         All = LuckyCatch | LuckySnap | Seasonal | ReArchaeology | HorizonsCup
             | MixABooster | RollTheDice | GarageCleanup | Mysteries | BoultonLeague
             | Legacy | Uncategorised | BakeOff | Bonanza | Shops
-            | SoloMilestone | DailyTrades | DailyScoop
+            | SoloMilestone | DailyTrades | DailyScoop | AutoMerge
     }
 
     public class EventDumper : JsonDumper<IDictionary<string, object>>
@@ -159,7 +160,7 @@ namespace merge_mansion_dumper.Dumper
             // CoreSupportEvents — sub-filtered by EventId prefix.
             // AssetOverride/LocOverride ([MetaMember] private) would be surfaced by the default
             // resolver if set, but they are null for every current CSE event, so nothing to add.
-            if (HasAnyFlag(EventFilters.ReArchaeology | EventFilters.HorizonsCup | EventFilters.RollTheDice | EventFilters.Uncategorised))
+            if (HasAnyFlag(EventFilters.ReArchaeology | EventFilters.HorizonsCup | EventFilters.RollTheDice | EventFilters.Uncategorised | EventFilters.AutoMerge))
             {
                 // Some CoreSupportEvents carry an internal dev stub in DisplayName ("Re-Archeology",
                 // "Classic Races") that is NOT a loc key. The real localized title lives under
@@ -554,9 +555,9 @@ namespace merge_mansion_dumper.Dumper
             if (id.StartsWith("CR_"))
                 return _filters.HasFlag(EventFilters.HorizonsCup);
 
-            // Auto Merge: always excluded from dump
+            // Auto Merge: several-times-daily auto-merge event windows (AutoMerge*)
             if (id.StartsWith("AutoMerge"))
-                return false;
+                return _filters.HasFlag(EventFilters.AutoMerge);
 
             // Roll The Dice: CSE_Dinner* or *RollTheDice*
             if (id.StartsWith("CSE_Dinner") || id.IndexOf("RollTheDice", StringComparison.OrdinalIgnoreCase) >= 0)

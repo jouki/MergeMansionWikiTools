@@ -17,6 +17,7 @@ using GameLogic.Player.Items.Order;
 using Metaplay.Core.Math;
 using GameLogic.Player.Items.Sink;
 using GameLogic.Player.Items.Spawning;
+using GameLogic.Player.Items.Fishing;
 
 namespace merge_mansion_dumper.Dumper.Json.Metaplay
 {
@@ -727,6 +728,31 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
 
                 var sellPrice = item.GetItemSellPrice(_config.SharedGlobals);
                 WriteProperty(writer, "SellCoins", sellPrice, serializer);
+
+                // Failed-photo / water-droplet side-drop COUNT scales with the catch:
+                // FishingSettings.SmallFishWaterDropletCounts (catches) + NonFishWaterDropletCounts
+                // (the "miss" items) map catch ConfigKey -> droplet count (rarer = more). Emit the
+                // min/max across this rod's catches so the wiki can show the range (e.g. 1-10x).
+                if (item.FishingRodFeatures is FishingRodFeatures rod && rod.IsFishingRod
+                    && rod.ItemOdds != null && _config.FishingSettings is { } fs)
+                {
+                    int? min = null, max = null;
+                    foreach (var o in rod.ItemOdds)
+                    {
+                        var ck = o?.Type?.GetDef(_config)?.ConfigKey ?? 0;
+                        if (ck == 0) continue;
+                        int? cnt = null;
+                        if (fs.SmallFishWaterDropletCounts != null && fs.SmallFishWaterDropletCounts.TryGetValue(ck, out var s)) cnt = s;
+                        else if (fs.NonFishWaterDropletCounts != null && fs.NonFishWaterDropletCounts.TryGetValue(ck, out var n)) cnt = n;
+                        if (cnt.HasValue)
+                        {
+                            min = min.HasValue ? System.Math.Min(min.Value, cnt.Value) : cnt;
+                            max = max.HasValue ? System.Math.Max(max.Value, cnt.Value) : cnt;
+                        }
+                    }
+                    if (min.HasValue) WriteProperty(writer, "WaterDropletCountMin", min.Value, serializer);
+                    if (max.HasValue) WriteProperty(writer, "WaterDropletCountMax", max.Value, serializer);
+                }
 
                 if (item.BubbleFeatures != null)
                 {

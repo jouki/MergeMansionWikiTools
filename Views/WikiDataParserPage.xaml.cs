@@ -46,6 +46,8 @@ public partial class WikiDataParserPage : UserControl
 
     // Events schedule state
     private string? _lastEventsLua;
+    // Semantic diff of the Events module (old live vs newly generated); rendered in the Update dialog.
+    private EventsChangeSet? _lastEventsChanges;
     // Garage Cleanup grids (detected during Generate Events; surfaced in the Update dialog)
     private string? _lastGcGridsLua;
     private List<GarageCleanupGridService.GridChange>? _lastGcChanges;

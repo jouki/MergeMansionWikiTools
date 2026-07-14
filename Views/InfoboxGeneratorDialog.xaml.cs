@@ -37,10 +37,11 @@ public partial class InfoboxGeneratorDialog : FluentWindow
         // once the data arrives (previously these loads blocked the UI thread).
         _ = InitializeDataAsync();
 
-        // Hide "keep full name" if there's no parenthetical; pre-check for non-event chains
+        // Hide "keep full name" if there's no parenthetical; otherwise pre-check it — the parenthetical
+        // is disambiguation (incl. event suffix) the gallery image filename needs to hit the right File pages.
         if (!chain.DisplayName.Contains('('))
             chkKeepFullName.Visibility = Visibility.Collapsed;
-        else if (!chain.IsEventChain)
+        else
             chkKeepFullName.IsChecked = true;
 
         // Check for missing wiki name

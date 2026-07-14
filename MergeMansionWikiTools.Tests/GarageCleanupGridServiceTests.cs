@@ -17,6 +17,33 @@ public class GarageCleanupGridServiceTests
     [Fact]
     public void Smoke() => Assert.True(true);
 
+    // ── GC event group parent (v0.24.25) ──────────────────────────────────
+
+    [Fact]
+    public void BuildGcEventGroups_derivesParentFromName()
+    {
+        var svc = MakeService();
+        var airings = new Dictionary<string, List<GarageCleanupGridService.GcAiring>>
+        {
+            ["Legacy Lane Garage Cleanup"] = new()
+            {
+                new GarageCleanupGridService.GcAiring(
+                    new System.DateTime(2026, 7, 26, 8, 0, 0), 3, false, new List<GarageCleanupGridService.GcLevel>())
+            },
+            // Generic cleanup with no seasonal host → no parent.
+            ["Garage Cleanup"] = new()
+            {
+                new GarageCleanupGridService.GcAiring(
+                    new System.DateTime(2026, 1, 1, 8, 0, 0), 3, false, new List<GarageCleanupGridService.GcLevel>())
+            },
+        };
+
+        var groups = svc.BuildGcEventGroups(airings);
+
+        Assert.Equal("Legacy Lane", groups.Single(g => g.Name == "Legacy Lane Garage Cleanup").Parent);
+        Assert.Null(groups.Single(g => g.Name == "Garage Cleanup").Parent);
+    }
+
     // ── Task 1: RewardsBodyLua ────────────────────────────────────────────
 
     [Fact]
@@ -362,7 +389,7 @@ public class GarageCleanupGridServiceTests
         var g = Assert.Single(groups);
         Assert.Equal("X Garage Cleanup", g.Name);
         Assert.Equal("Garage Cleanup", g.Category);
-        Assert.Null(g.Parent);
+        Assert.Equal("X", g.Parent);   // parent recovered from the name (v0.24.25 nesting fix)
 
         // runs are in chronological order (BuildGcEventGroups sorts ascending)
         var first = g.Runs.First(r => r.Start == System.DateTime.Parse("2025-08-03"));

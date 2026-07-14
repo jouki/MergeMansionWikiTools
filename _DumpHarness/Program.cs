@@ -29,6 +29,13 @@ internal static class Program
         {
             return ProbeBundles(args[1]);
         }
+        if (args.Length >= 2 && args[0] == "--probe-fishing")
+        {
+            // --probe-fishing <configPath> [<languagePath>]
+            // Prints FishingSettings (GameConfigKeyValue): SmallFish/NonFish WaterDropletCounts
+            // (splash type → droplet count) + weight-category odds/size arrays.
+            return ProbeFishing(args[1], args.Length >= 3 ? args[2] : null);
+        }
         if (args.Length >= 2 && args[0] == "--probe-one")
         {
             return ProbeOneBundle(args[1]);
@@ -1341,6 +1348,7 @@ internal static class Program
             var fallbacks = GetMember(o, "FallbackObjectiveIdReferencesList") as System.Collections.IEnumerable;
             var fbStr = string.Join(", ", Enumerate(fallbacks));
             if (fbStr.Length > 0) Console.WriteLine($"      fallbacks=[{fbStr}]");
+            DescribeRequirements(GetAnyMember(o, "_requirements"), "      ");
         }
 
         // 6) Special objectives
@@ -1355,6 +1363,7 @@ internal static class Program
             Console.WriteLine($"  {kv.Key,-46} group={GetMember(o, "ObjectiveGroup"),-5} type={GetMember(o, "ObjectiveType"),-18} params=[{string.Join(",", Enumerate(pars))}] reqs=[{string.Join(",", Enumerate(reqs))}] loc={GetMember(o, "LocId")}");
             Console.WriteLine($"      groupWeightBySegment={{{string.Join(", ", Enumerate(weights))}}}");
             DescribeRewardPool(GetMember(o, "RewardsPoolData"), "      ");
+            DescribeRequirements(GetAnyMember(o, "_requirements"), "      ");
         }
         Console.WriteLine();
     }
@@ -1393,6 +1402,34 @@ internal static class Program
         }
     }
 
+    /// <summary>Print an objective's PlayerRequirement list (private _requirements MetaMember) —
+    /// this is where per-player availability gating (e.g. PlayerItemRequirement) would live.</summary>
+    private static void DescribeRequirements(object reqs, string indent)
+    {
+        if (reqs is not System.Collections.IEnumerable list) return;
+        var parts = new List<string>();
+        foreach (var r in list)
+        {
+            if (r == null) { parts.Add("null"); continue; }
+            var sb = new System.Text.StringBuilder(r.GetType().Name);
+            var fields = new List<string>();
+            foreach (var fname in new[] { "ItemRefs", "ItemTypes", "Requirement", "Amount", "Level", "ChainId", "ItemDef", "_requirementAmount", "ActivableKind", "RegexPattern", "DurationInMilliseconds" })
+            {
+                var v = GetAnyMember(r, fname);
+                if (v == null) continue;
+                if (v is System.Collections.IEnumerable en && v is not string)
+                {
+                    var joined = string.Join(",", Enumerate(en));
+                    if (joined.Length > 0) fields.Add($"{fname}=[{joined}]");
+                }
+                else fields.Add($"{fname}={v}");
+            }
+            if (fields.Count > 0) sb.Append('(').Append(string.Join(" ", fields)).Append(')');
+            parts.Add(sb.ToString());
+        }
+        if (parts.Count > 0) Console.WriteLine($"{indent}requirements=[{string.Join("; ", parts)}]");
+    }
+
     /// <summary>Like GetMember but also reads non-public properties/fields (MetaMember privates).</summary>
     private static object GetAnyMember(object obj, string name)
     {
@@ -1409,6 +1446,74 @@ internal static class Program
     }
 
     // ── --probe-daily-scoop: per config archive, DailyScoopEvents (not in JSON dump) + week summary ──
+    // ── --probe-fishing: FishingSettings splash-type → droplet count + weight arrays ──
+    private static int ProbeFishing(string configPath, string? languagePath)
+    {
+        MetaplayCore.Initialize();
+        var archive = Metaplay.Core.Config.ConfigArchive.FromBytes(File.ReadAllBytes(configPath));
+        var patched = PatchedConfigArchive.WithNoPatches(archive);
+        var cfg = (SharedGameConfig)GameConfigFactory.Instance.ImportSharedGameConfig(patched);
+        ClientGlobal.SharedGameConfig = cfg;
+
+        var fs = cfg.FishingSettings;
+        Console.WriteLine("=== FishingSettings ===");
+        if (fs == null) { Console.WriteLine("FishingSettings = null (not populated)"); return 2; }
+
+        // The two droplet-count dicts + weight arrays. Read via reflection so IgnoreDataMember
+        // private/derived backing still surfaces whatever the deserializer set.
+        void DumpMember(string name)
+        {
+            var val = GetAnyMember(fs, name);
+            if (val is System.Collections.IDictionary dict)
+            {
+                var parts = new List<string>();
+                foreach (System.Collections.DictionaryEntry e in dict) parts.Add($"{e.Key}={e.Value}");
+                parts.Sort();
+                Console.WriteLine($"  {name} = {{{string.Join(", ", parts)}}}");
+            }
+            else if (val is System.Collections.IEnumerable en && val is not string)
+            {
+                Console.WriteLine($"  {name} = [{string.Join(", ", Enumerate(en))}]");
+            }
+            else Console.WriteLine($"  {name} = {val}");
+        }
+        // SplashType enum: None=0, VeryTiny=1, Tiny=2, Medium=3, Large=4, VeryLarge=5
+        Console.WriteLine("  (SplashType: 1=VeryTiny 2=Tiny 3=Medium 4=Large 5=VeryLarge)");
+        DumpMember("SmallFishWaterDropletCounts");
+        DumpMember("NonFishWaterDropletCounts");
+        DumpMember("FishWeightCategoryOdds");
+        DumpMember("FishWeightCategorySizePercentages");
+
+        // Dicts are [IgnoreDataMember] in the decompiled DLL → deserializer skips them.
+        // Hexdump the raw FishingSettings.mpc so members 1/2 (the count maps) can be decoded.
+        Console.WriteLine();
+        Console.WriteLine("=== Raw FishingSettings.mpc byte scan ===");
+        try
+        {
+            var entry = archive.Entries.FirstOrDefault(e => e.Name == "FishingSettings.mpc" || e.Name == "FishingSettings");
+            if (entry == null)
+            {
+                Console.WriteLine("FishingSettings entry NOT FOUND. Entries containing 'Fish': "
+                    + string.Join(", ", archive.Entries.Where(e => e.Name.Contains("Fish", StringComparison.OrdinalIgnoreCase)).Select(e => e.Name)));
+            }
+            else
+            {
+                var bytes = entry.Uncompress();
+                Console.WriteLine($"Entry: {entry.Name}, uncompressed={bytes.Length} B");
+                for (int off = 0; off < bytes.Length; off += 32)
+                {
+                    int count = Math.Min(32, bytes.Length - off);
+                    var hex = new string[count]; var asc = new char[count];
+                    for (int i = 0; i < count; i++)
+                    { byte b = bytes[off + i]; hex[i] = b.ToString("x2"); asc[i] = (b >= 32 && b < 127) ? (char)b : '.'; }
+                    Console.WriteLine($"  {off:x4}: {string.Join(" ", hex).PadRight(95)}  {new string(asc)}");
+                }
+            }
+        }
+        catch (Exception ex) { Console.WriteLine($"Raw scan error: {ex.Message}"); }
+        return 0;
+    }
+
     private static int ProbeSegments(string configPath, string idFilter)
     {
         MetaplayCore.Initialize();

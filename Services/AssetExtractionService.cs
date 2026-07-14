@@ -226,7 +226,8 @@ internal static class AssetExtractionService
         int count = 0;
         foreach (var entry in bundleEntries)
         {
-            ct.ThrowIfCancellationRequested();
+            // Cooperative cancel — return the partial count instead of throwing
+            if (ct.IsCancellationRequested) break;
             var fileName = Path.GetFileName(entry.FullName);
             var outPath = Path.Combine(outputDir, fileName);
 
@@ -253,7 +254,7 @@ internal static class AssetExtractionService
 
         foreach (var sp in specialPaths)
         {
-            ct.ThrowIfCancellationRequested();
+            if (ct.IsCancellationRequested) break;
             var entry = zip.Entries.FirstOrDefault(e =>
                 e.FullName.Equals(sp, StringComparison.OrdinalIgnoreCase));
 
@@ -310,7 +311,9 @@ internal static class AssetExtractionService
             var dirInfos = bunInst.file.BlockAndDirInfo.DirectoryInfos;
             for (int i = 0; i < dirInfos.Count; i++)
             {
-                ct.ThrowIfCancellationRequested();
+                // Cooperative cancel — finish with whatever this bundle produced so far
+                // (finally + per-bundle sprite remap still run); no exception-driven flow
+                if (ct.IsCancellationRequested) break;
 
                 AssetsFileInstance? afileInst;
                 try
@@ -344,7 +347,7 @@ internal static class AssetExtractionService
 
                 foreach (var texInfo in textureInfos)
                 {
-                    ct.ThrowIfCancellationRequested();
+                    if (ct.IsCancellationRequested) break;
 
                     string texName = "?";
                     try
@@ -405,6 +408,7 @@ internal static class AssetExtractionService
                             : bundleName;
 
                         string? outPath;
+                        string? identicalMatch = null;
                         lock (_fileLock)
                         {
                             // Check if an identical file already exists (skip duplicates).
@@ -426,6 +430,7 @@ internal static class AssetExtractionService
                                     {
                                         skipped++;
                                         outPath = null;
+                                        identicalMatch = existing;
                                         goto skipWrite;
                                     }
                                 }
@@ -462,8 +467,13 @@ internal static class AssetExtractionService
                         }
                         else if (!textureFileMap.ContainsKey(texName))
                         {
-                            // Duplicate skipped — map to the base name (already exists)
-                            textureFileMap[texName] = Path.GetFileNameWithoutExtension(safeFileName);
+                            // Duplicate skipped — map to the ACTUAL file the identical
+                            // content lives in. The match may be a suffixed variant
+                            // (Name_LS_Shared_2.png), not the plain base name — mapping
+                            // to safeFileName here used to point sprites at a file that
+                            // may belong to a DIFFERENT same-named texture.
+                            textureFileMap[texName] = Path.GetFileNameWithoutExtension(
+                                identicalMatch ?? safeFileName);
                         }
                     }
                     catch (Exception ex)
@@ -819,6 +829,24 @@ internal static class AssetExtractionService
             am.UnloadAll();
         }
 
+        // Resolve sprite TextureNames to actual exported filenames WHILE the bundle
+        // scope still makes the name unambiguous. Unity texture names collide ACROSS
+        // bundles (e.g. two different textures both named "LS_Common_HoodedWarbler":
+        // the item texture in lsdefaultitemslocal and a spine canvas elsewhere) — the
+        // later global name-keyed remap can only keep one winner, so sprites from the
+        // losing bundle ended up pointing at the wrong (or a nonexistent) file. Within
+        // ONE bundle the name→file mapping is exact. Sprites whose texture lives in
+        // another bundle (cross-bundle PPtr / inferred names) stay untouched and fall
+        // through to the global remap as before.
+        for (int i = 0; i < sprites.Count; i++)
+        {
+            if (textureFileMap.TryGetValue(sprites[i].TextureName, out var exportedFile)
+                && !string.Equals(exportedFile, sprites[i].TextureName, StringComparison.Ordinal))
+            {
+                sprites[i] = sprites[i] with { TextureName = exportedFile };
+            }
+        }
+
         return new BundleExtractionResult(textures, skipped, warnings, sprites, skinMappings, textureFileMap,
             bundleSpineAtlasNames, bundleUnmatchedSkeletons);
     }
@@ -1023,10 +1051,17 @@ internal static class AssetExtractionService
 
         var maxParallel = Math.Clamp(Environment.ProcessorCount / 2, 2, 8);
 
+        // Cancellation is cooperative throughout (no CancellationToken in ParallelOptions,
+        // no throw): a fired token makes in-flight bundles finish early with partial
+        // results and queued bundles fall through immediately — the loop then completes
+        // normally and post-processing runs over whatever was extracted. The caller
+        // checks the token to report "cancelled" instead of "done".
         await Parallel.ForEachAsync(bundleFiles,
-            new ParallelOptions { MaxDegreeOfParallelism = maxParallel, CancellationToken = ct },
-            async (bundlePath, token) =>
+            new ParallelOptions { MaxDegreeOfParallelism = maxParallel },
+            async (bundlePath, _) =>
             {
+                if (ct.IsCancellationRequested) return;
+
                 var bundleName = Path.GetFileName(bundlePath);
                 var current = Interlocked.Increment(ref processed);
                 var pct = (int)(current * 100.0 / bundleFiles.Length);
@@ -1037,9 +1072,8 @@ internal static class AssetExtractionService
                 try
                 {
                     result = await Task.Run(() =>
-                        ExtractTexturesFromBundle(bundlePath, tpkPath, outputDir, token), token);
+                        ExtractTexturesFromBundle(bundlePath, tpkPath, outputDir, ct));
                 }
-                catch (OperationCanceledException) { throw; }
                 catch (Exception ex)
                 {
                     Interlocked.Increment(ref failed);
@@ -1101,10 +1135,25 @@ internal static class AssetExtractionService
 
         // Post-process: fix inconsistent naming where first file has no suffix but duplicates do
         // e.g., Popup_Shared_Art.png + Popup_Shared_Art_SP_FerretPet2025.png → rename first to include suffix
-        FixInconsistentDuplicateNames(outputDir, globalTextureMap);
+        var fileRenames = FixInconsistentDuplicateNames(outputDir, globalTextureMap);
 
-        // Post-process sprites: replace Unity texture m_Name with exported PNG filename
         var spriteList = allSprites.ToList();
+
+        // Sprites resolved per-bundle already carry exported filenames — follow any
+        // post-process file renames so they keep pointing at existing files.
+        if (fileRenames.Count > 0)
+        {
+            for (int i = 0; i < spriteList.Count; i++)
+            {
+                if (fileRenames.TryGetValue(spriteList[i].TextureName, out var renamed))
+                    spriteList[i] = spriteList[i] with { TextureName = renamed };
+            }
+        }
+
+        // Fallback for sprites whose texture lives in ANOTHER bundle (cross-bundle PPtr /
+        // inferred names): replace Unity texture m_Name with exported PNG filename.
+        // Name-keyed and first-wins, so inherently ambiguous for colliding names — the
+        // per-bundle resolution in ExtractTexturesFromBundle handles those exactly.
         if (globalTextureMap.Count > 0)
         {
             for (int i = 0; i < spriteList.Count; i++)
@@ -1137,6 +1186,22 @@ internal static class AssetExtractionService
                             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
                         if (existing != null)
                         {
+                            // Cross-RUN rename fixup: this run's post-process may have renamed
+                            // files WRITTEN BY A PREVIOUS RUN (e.g. APK run exports the plain
+                            // "LS_Common_HoodedWarbler.png", the later server-files run collides
+                            // on the same texture name and renames the plain file away). The
+                            // previous run's sprite entries arrive here via the "existing" merge
+                            // branch, so the rename map must be applied to THEM too — otherwise
+                            // they keep pointing at a file that no longer exists.
+                            if (fileRenames.Count > 0 && existing.Sprites != null)
+                            {
+                                for (int i = 0; i < existing.Sprites.Count; i++)
+                                {
+                                    if (fileRenames.TryGetValue(existing.Sprites[i].TextureName, out var rn))
+                                        existing.Sprites[i] = existing.Sprites[i] with { TextureName = rn };
+                                }
+                            }
+
                             // Union sprites by (name, textureName) — FRESH WINS, fall back to existing.
                             // A sprite has two entries in atlas data: atlas-member (textureName=atlas)
                             // and standalone (textureName=name). Both must coexist, so the dedup key
@@ -1737,10 +1802,13 @@ internal static class AssetExtractionService
     /// Post-extraction fix: if a file "X.png" exists AND files "X_suffix.png" also exist,
     /// the plain "X.png" was the first extracted duplicate and needs a suffix too.
     /// Finds the correct suffix from the textureFileMap and renames.
+    /// Returns the applied file renames (old base name → new base name) so the caller
+    /// can fix up sprite records that already carry exported filenames.
     /// </summary>
-    private static void FixInconsistentDuplicateNames(string outputDir,
+    private static Dictionary<string, string> FixInconsistentDuplicateNames(string outputDir,
         System.Collections.Concurrent.ConcurrentDictionary<string, string> textureFileMap)
     {
+        var renames = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         try
         {
             var pngFiles = Directory.GetFiles(outputDir, "*.png")
@@ -1783,10 +1851,12 @@ internal static class AssetExtractionService
                     {
                         File.Delete(plainPath);
                         isDuplicate = true;
-                        // Update textureFileMap: find any entry pointing to baseName
-                        var key = textureFileMap.FirstOrDefault(kv =>
-                            string.Equals(kv.Value, baseName, StringComparison.OrdinalIgnoreCase)).Key;
-                        if (key != null) textureFileMap[key] = sib;
+                        renames[baseName] = sib;
+                        // Update textureFileMap: ALL entries pointing to baseName
+                        // (multiple Unity names can share one file via identical content)
+                        foreach (var kv in textureFileMap.Where(kv =>
+                                string.Equals(kv.Value, baseName, StringComparison.OrdinalIgnoreCase)).ToList())
+                            textureFileMap[kv.Key] = sib;
                         AppLogger.Info($"FixDuplicateNames: deleted duplicate {baseName}.png (identical to {sib}.png)");
                         break;
                     }
@@ -1819,10 +1889,11 @@ internal static class AssetExtractionService
                 var newPath = Path.Combine(outputDir, candidate + ".png");
                 File.Move(plainPath, newPath);
 
-                // Update textureFileMap
-                var texKey = textureFileMap.FirstOrDefault(kv =>
-                    string.Equals(kv.Value, baseName, StringComparison.OrdinalIgnoreCase)).Key;
-                if (texKey != null) textureFileMap[texKey] = candidate;
+                renames[baseName] = candidate;
+                // Update textureFileMap: ALL entries pointing to baseName
+                foreach (var kv in textureFileMap.Where(kv =>
+                        string.Equals(kv.Value, baseName, StringComparison.OrdinalIgnoreCase)).ToList())
+                    textureFileMap[kv.Key] = candidate;
                 pngFiles.Remove(baseName);
                 pngFiles.Add(candidate);
 
@@ -1833,6 +1904,7 @@ internal static class AssetExtractionService
         {
             AppLogger.Warn($"FixInconsistentDuplicateNames failed: {ex.Message}");
         }
+        return renames;
     }
 
     /// Extracts a meaningful suffix from a Unity container path.

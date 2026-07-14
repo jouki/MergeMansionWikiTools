@@ -22,6 +22,31 @@ public partial class ImageOptimiserPage
     private ParsedChain? _activeChain;
     private string? _resolvedFilenameBase;
 
+    // Full path of the detected image file (for the clickable filename + open-folder button)
+    private string? _detectionFilePath;
+
+    /// <summary>Clicking the filename opens the image in the default viewer.</summary>
+    private void LinkImageFile_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (string.IsNullOrEmpty(_detectionFilePath) || !File.Exists(_detectionFilePath)) return;
+        try
+        {
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(_detectionFilePath) { UseShellExecute = true });
+        }
+        catch (System.Exception ex) { AppLogger.Warn($"Open image failed: {ex.Message}"); }
+    }
+
+    /// <summary>Folder button opens Explorer with the file pre-selected.</summary>
+    private void BtnOpenImageFolder_Click(object sender, RoutedEventArgs e)
+    {
+        if (string.IsNullOrEmpty(_detectionFilePath) || !File.Exists(_detectionFilePath)) return;
+        try
+        {
+            System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{_detectionFilePath}\"");
+        }
+        catch (System.Exception ex) { AppLogger.Warn($"Open folder failed: {ex.Message}"); }
+    }
+
     // ── Chain suggestion (from Map Indices) ──
     private ParsedChain? _pendingChainSuggestion;
 
@@ -246,7 +271,7 @@ public partial class ImageOptimiserPage
         _activeChain = null;
         _resolvedFilenameBase = null;
         chainModeBanner.Visibility = Visibility.Collapsed;
-        txtDetectionMethod.Visibility = Visibility.Collapsed;
+        detectionMethodPanel.Visibility = Visibility.Collapsed;
         DismissSuggestion();
         UpdatePredictButtonVisibility();
         UpdatePreviewMargins();
@@ -302,7 +327,7 @@ public partial class ImageOptimiserPage
     {
         _suggestedImagePath = null;
         imageSuggestionBanner.Visibility = Visibility.Collapsed;
-        txtDetectionMethod.Visibility = Visibility.Collapsed;
+        detectionMethodPanel.Visibility = Visibility.Collapsed;
 
         var basePath = _main.Settings.ImageExporterBasePath;
         var version = _main.Settings.SelectedApkVersion;
@@ -326,7 +351,17 @@ public partial class ImageOptimiserPage
         {
             var textureName = SpriteMetadataService.ResolveSkeletonForPoolTag(chain.PoolTag, exportDir);
             if (textureName != null)
+            {
                 candidates.Add(($"{textureName}.png", "PoolConfig"));
+                // PoolConfig yields the UNITY texture name; on cross-bundle name
+                // collisions the extractor stores the texture under a suffixed file.
+                // Sprite metadata knows the actual exported file — add it as the
+                // next candidate so the exact-match pass finds it before any
+                // wildcard fallback can grab a sibling skeleton's file.
+                var exportedFile = SpriteMetadataService.ResolveExportedFileForSkeleton(exportDir, textureName);
+                if (exportedFile != null)
+                    candidates.Add(($"{exportedFile}.png", "PoolConfig → sprite metadata"));
+            }
         }
 
         var allSkinMappings = SpriteMetadataService.LoadSkinMappings(exportDir);
@@ -406,6 +441,12 @@ public partial class ImageOptimiserPage
                 uniqueCandidates.Add(c);
         }
 
+        // Two passes: exact filenames of ALL candidates first, wildcard suffix fallback
+        // only after every exact option failed. The wildcard exists for extractor
+        // conflict-renames (Name_2.png), but it also matches sibling textures of OTHER
+        // chains (LS_Common_HoodedWarbler_*.png → the GoldenFrame skeleton) — it must
+        // never win over a lower-priority candidate whose file exists exactly.
+        foreach (var exactPass in new[] { true, false })
         foreach (var (candidate, method) in uniqueCandidates)
         {
             foreach (var dir in searchDirs)
@@ -413,7 +454,7 @@ public partial class ImageOptimiserPage
                 var fullPath = System.IO.Path.Combine(dir, candidate);
                 if (!File.Exists(fullPath))
                 {
-                    if (!Directory.Exists(dir)) continue;
+                    if (exactPass || !Directory.Exists(dir)) continue;
                     // Extractor may have suffix-renamed the file (e.g. due to naming conflict)
                     var baseName = System.IO.Path.GetFileNameWithoutExtension(candidate);
                     var suffixed = Directory.GetFiles(dir, $"{baseName}_*.png").FirstOrDefault();
@@ -432,8 +473,10 @@ public partial class ImageOptimiserPage
                 if (_main.Settings.DebugMode)
                 {
                     AppLogger.Info($"[IMAGE] Chain '{chain.ConfigKey}': loaded '{candidateFileName}' via {method}");
-                    txtDetectionMethod.Text = $"Image: {candidateFileName}  ·  Method: {method}";
-                    txtDetectionMethod.Visibility = Visibility.Visible;
+                    _detectionFilePath = fullPath;
+                    linkImageFile.Text = candidateFileName;
+                    txtMethodLabel.Text = $"·  Method: {method}";
+                    detectionMethodPanel.Visibility = Visibility.Visible;
                 }
 
                 AddImages(new[] { fullPath });

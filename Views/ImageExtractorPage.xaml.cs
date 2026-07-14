@@ -417,6 +417,16 @@ public partial class ImageExtractorPage : UserControl
                 status => Dispatcher.Invoke(() => txtExtractProgress.Text = status),
                 ct);
 
+            // Cancellation is cooperative (the service returns partial results instead
+            // of throwing) — check the token between steps so we report "cancelled",
+            // not "done"
+            if (ct.IsCancellationRequested)
+            {
+                txtExtractProgress.Text = "";
+                ShowExtractInfo("Extraction cancelled. Partial results may have been saved.", InfoBarSeverity.Informational);
+                return;
+            }
+
             if (bundleCount == 0)
             {
                 ShowExtractInfo("No asset bundles found in the APK.", InfoBarSeverity.Warning);
@@ -437,6 +447,14 @@ public partial class ImageExtractorPage : UserControl
                         txtExtractProgress.Text = $"{pct}% ({current}/{total} bundles, {textures:N0} textures) — {bundleName}";
                     }),
                 ct);
+
+            if (ct.IsCancellationRequested)
+            {
+                SpriteMetadataService.InvalidateCache();
+                txtExtractProgress.Text = "";
+                ShowExtractInfo("Extraction cancelled. Partial results may have been saved.", InfoBarSeverity.Informational);
+                return;
+            }
 
             // 4. Show results
             SpriteMetadataService.InvalidateCache();

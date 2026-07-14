@@ -95,6 +95,9 @@ public class ChainViewModel : INotifyPropertyChanged
     /// <summary>Whether alias grouping checkbox should be visible.</summary>
     public bool ShowGroupAliasCheckbox => HasMultipleSources && HasAliasItems;
 
+    /// <summary>Whether the "Save Variant Labels" button shows — chain has ≥1 variant item.</summary>
+    public bool ShowVariantLabelButton => Items.Any(i => i.IsVariant);
+
     private bool _allItemsChecked;
     /// <summary>Whether all items are currently checked (for Select All binding).</summary>
     public bool AllItemsChecked
@@ -149,7 +152,8 @@ public class ChainViewModel : INotifyPropertyChanged
 
         var distinctSources = Items.Select(i => i.SourceChainKey).Where(k => k.Length > 0).Distinct().Count();
         HasMultipleSources = distinctSources > 1;
-        HasAliasItems = Items.Any(i => i.IsAlias);
+        // variants group the same way as aliases (own "Variants" bucket in alias mode)
+        HasAliasItems = Items.Any(i => i.IsAlias || i.IsVariant);
 
         RebuildItemsView();
     }
@@ -167,18 +171,9 @@ public class ChainViewModel : INotifyPropertyChanged
 
         if (GroupAliases && HasAliasItems)
         {
-            // Remap CheckedGroups: individual alias keys → "Aliases" if all were checked
-            var aliasKeys = Items.Where(i => i.IsAlias).Select(i => i.SourceChainKey).Distinct().ToList();
-            if (aliasKeys.Count > 0 && aliasKeys.All(k => CheckedGroups.Contains(k)))
-            {
-                foreach (var k in aliasKeys) CheckedGroups.Remove(k);
-                CheckedGroups.Add("Aliases");
-            }
-            else
-            {
-                foreach (var k in aliasKeys) CheckedGroups.Remove(k);
-                CheckedGroups.Remove("Aliases");
-            }
+            // Remap CheckedGroups per flag bucket: individual keys → bucket if all were checked
+            RemapFlagBucket(i => i.IsAlias, "Aliases");
+            RemapFlagBucket(i => i.IsVariant && !i.IsAlias, "Variants");
 
             var view = new ListCollectionView(Items);
             view.GroupDescriptions.Add(new PropertyGroupDescription(nameof(ItemViewModel.AliasGroupKey)));
@@ -186,16 +181,38 @@ public class ChainViewModel : INotifyPropertyChanged
         }
         else
         {
-            // Remap CheckedGroups: "Aliases" → expand to individual alias SourceChainKeys
+            // Remap CheckedGroups: buckets → expand back to individual SourceChainKeys
             if (CheckedGroups.Remove("Aliases"))
             {
                 foreach (var k in Items.Where(i => i.IsAlias).Select(i => i.SourceChainKey).Distinct())
+                    CheckedGroups.Add(k);
+            }
+            if (CheckedGroups.Remove("Variants"))
+            {
+                foreach (var k in Items.Where(i => i.IsVariant && !i.IsAlias).Select(i => i.SourceChainKey).Distinct())
                     CheckedGroups.Add(k);
             }
 
             var view = new ListCollectionView(Items);
             view.GroupDescriptions.Add(new PropertyGroupDescription(nameof(ItemViewModel.SourceChainKey)));
             ItemsView = view;
+        }
+    }
+
+    /// <summary>Collapses individual per-source group keys of flagged items into one named
+    /// bucket ("Aliases"/"Variants") when all of them were checked, else clears both forms.</summary>
+    private void RemapFlagBucket(Func<ItemViewModel, bool> flag, string bucket)
+    {
+        var keys = Items.Where(flag).Select(i => i.SourceChainKey).Distinct().ToList();
+        if (keys.Count > 0 && keys.All(k => CheckedGroups.Contains(k)))
+        {
+            foreach (var k in keys) CheckedGroups.Remove(k);
+            CheckedGroups.Add(bucket);
+        }
+        else
+        {
+            foreach (var k in keys) CheckedGroups.Remove(k);
+            CheckedGroups.Remove(bucket);
         }
     }
 }
@@ -213,8 +230,35 @@ public class ItemViewModel : INotifyPropertyChanged
     public bool IsVariant => Source.IsVariant;
     public string? VariantLabel => Source.VariantLabel;
 
-    /// <summary>Grouping key for alias mode: aliases → "Aliases", others → SourceChainKey.</summary>
-    public string AliasGroupKey => Source.IsAlias ? "Aliases" : SourceChainKey;
+    /// <summary>Inline-editable variant label (isVariant = "Spring"). Defaults to the live mapping
+    /// value; edits are committed in a batch by the "Save Labels" button. Empty = plain isVariant = true.</summary>
+    private string? _variantLabelEdit;
+    private bool _variantLabelEditSet;
+    public string VariantLabelEdit
+    {
+        get => _variantLabelEditSet ? (_variantLabelEdit ?? "") : (Source.MappingVariantLabel ?? "");
+        set { _variantLabelEdit = value; _variantLabelEditSet = true; }
+    }
+
+    private string? _variantOrderEdit;
+    private bool _variantOrderEditSet;
+    /// <summary>Inline-editable variant order (variantOrder = N). Empty = unset. Committed by Save Mapping.</summary>
+    public string VariantOrderEdit
+    {
+        get => _variantOrderEditSet ? (_variantOrderEdit ?? "")
+             : (Source.MappingVariantOrder?.ToString() ?? "");
+        set { _variantOrderEdit = value; _variantOrderEditSet = true; }
+    }
+
+    /// <summary>True when the label OR order edit differs from the published mapping value
+    /// — keeps the action bar (with Save Mapping) visible even with nothing checked.</summary>
+    public bool VariantMappingDirty =>
+        Source.IsVariant && (
+            (VariantLabelEdit ?? "").Trim() != (Source.MappingVariantLabel ?? "")
+            || (VariantOrderEdit ?? "").Trim() != (Source.MappingVariantOrder?.ToString() ?? ""));
+
+    /// <summary>Grouping key for alias mode: aliases → "Aliases", variants → "Variants", others → SourceChainKey.</summary>
+    public string AliasGroupKey => Source.IsAlias ? "Aliases" : Source.IsVariant ? "Variants" : SourceChainKey;
 
     private bool _isChecked;
     public bool IsChecked
@@ -537,7 +581,14 @@ public partial class ChainBrowserPage : UserControl
     /// </summary>
     private void TxtItemName_Loaded(object sender, RoutedEventArgs e)
     {
-        if (sender is not TextBlock tb) return;
+        if (sender is TextBlock tb) RenderItemName(tb);
+    }
+
+    /// <summary>Renders an item-name TextBlock: name (with search highlight) + optional variant label +
+    /// distinguishing identifier. The raw ItemType (ID) is shown for aliases/variants always, and for
+    /// every item when the global "Show IDs" toggle is on.</summary>
+    private void RenderItemName(TextBlock tb)
+    {
         if (tb.Tag is not ItemViewModel vm) return;
 
         var search = _currentSearch;
@@ -584,10 +635,10 @@ public partial class ChainBrowserPage : UserControl
             tb.Inlines.Add(labelRun);
         }
 
-        // Show distinguishing identifier for aliases and renamed items
-        if (vm.IsAlias)
+        // Show distinguishing identifier. Aliases/variants ALWAYS show the ItemType so same-named boxes
+        // are distinguishable; every item shows it when the global "Show IDs" toggle is on.
+        if (vm.IsAlias || vm.IsVariant || _main.Settings.ShowItemIds)
         {
-            // Always show ItemType for aliases so they can be distinguished
             var idRun = new Run($"  ({vm.Source.ItemType})") { FontSize = 10 };
             idRun.SetResourceReference(Run.ForegroundProperty, "TextFillColorTertiaryBrush");
             tb.Inlines.Add(idRun);
@@ -600,7 +651,21 @@ public partial class ChainBrowserPage : UserControl
             rawRun.SetResourceReference(Run.ForegroundProperty, "TextFillColorTertiaryBrush");
             tb.Inlines.Add(rawRun);
         }
+    }
 
+    private void ShowIds_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is CheckBox cb) cb.IsChecked = _main.Settings.ShowItemIds;
+    }
+
+    private void ShowIds_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not CheckBox cb) return;
+        _main.Settings.ShowItemIds = cb.IsChecked == true;
+        _main.SaveSettings();
+        // Re-render every visible item-name TextBlock so the change applies without reopening chains.
+        foreach (var t in FindVisualChildren<TextBlock>(this).Where(t => t.Tag is ItemViewModel))
+            RenderItemName(t);
     }
 
     private void StragglerBanner_Click(object sender, MouseButtonEventArgs e)
@@ -729,8 +794,12 @@ public partial class ChainBrowserPage : UserControl
     private void UpdateActionBar(ChainViewModel chainVm, StackPanel actionBar)
     {
         int count = chainVm.Items.Count(i => i.IsChecked);
+        // Unsaved variant-label edits keep the bar (and its Save Labels button) up even
+        // with nothing checked — the labels are edited inline, without checking boxes.
+        bool labelsDirty = chainVm.Items.Any(i => i.VariantMappingDirty);
+        bool hasVariants = chainVm.Items.Any(i => i.IsVariant);
 
-        if (count == 0)
+        if (count == 0 && !labelsDirty)
         {
             actionBar.Visibility = Visibility.Collapsed;
             return;
@@ -738,14 +807,44 @@ public partial class ChainBrowserPage : UserControl
 
         actionBar.Visibility = Visibility.Visible;
 
-        // Update count text
+        // Save Mapping: shown whenever the chain has variants; enabled only when something changed
+        foreach (var child in actionBar.Children)
+        {
+            if (child is Wpf.Ui.Controls.Button sb && sb.Name == "btnSaveLabels")
+            {
+                sb.Visibility = hasVariants ? Visibility.Visible : Visibility.Collapsed;
+                sb.IsEnabled = labelsDirty && _main.Settings.WikiVerified;
+                sb.ToolTip = !_main.Settings.WikiVerified
+                    ? "Wiki connection required"
+                    : labelsDirty ? "Publish variant labels and order to the wiki mapping"
+                    : "No unsaved mapping changes";
+            }
+            // Group Drop Odds by variant: shown for variant chains; reflects current mapping state
+            if (child is System.Windows.Controls.CheckBox gc && gc.Name == "chkGroupOdds")
+            {
+                gc.Visibility = hasVariants ? Visibility.Visible : Visibility.Collapsed;
+                gc.IsChecked = chainVm.Items.Any(i => i.IsVariant && i.Source.MappingGroupOdds);
+                gc.IsEnabled = _main.Settings.WikiVerified;
+            }
+        }
+
+        // Count text: hide the selection-only buttons when nothing is checked (label-only mode)
         foreach (var child in actionBar.Children)
         {
             if (child is TextBlock tb)
             {
-                tb.Text = $"{count} selected";
+                tb.Text = count > 0 ? $"{count} selected" : "Unsaved labels";
                 break;
             }
+        }
+
+        if (count == 0)
+        {
+            // Label-only mode: only Save Labels is relevant
+            foreach (var child in actionBar.Children)
+                if (child is Wpf.Ui.Controls.Button b && b.Name != "btnSaveLabels")
+                    b.Visibility = Visibility.Collapsed;
+            return;
         }
 
         // Set Level visible only for single item; Rename Item for 1+
@@ -1033,12 +1132,18 @@ public partial class ChainBrowserPage : UserControl
     }
 
     /// <summary>
-    /// Gets items matching a group key, handling "Aliases" as a special case.
+    /// Gets items DISPLAYED under a group header. Handles the "Aliases"/"Variants" buckets, and for a
+    /// plain SourceChainKey group matches by the same key the view groups on (<see cref="ItemViewModel.AliasGroupKey"/>
+    /// in alias mode) — otherwise a variant/alias sharing this SourceChainKey (but shown in the "Variants"/
+    /// "Aliases" bucket) would be ticked too when the header checkbox is clicked.
     /// </summary>
     private static IEnumerable<ItemViewModel> GetGroupItems(ChainViewModel chainVm, string groupKey)
     {
-        return groupKey == "Aliases"
-            ? chainVm.Items.Where(i => i.IsAlias)
+        if (groupKey == "Aliases") return chainVm.Items.Where(i => i.IsAlias);
+        if (groupKey == "Variants") return chainVm.Items.Where(i => i.IsVariant && !i.IsAlias);
+        bool aliasMode = chainVm.GroupAliases && chainVm.HasAliasItems;
+        return aliasMode
+            ? chainVm.Items.Where(i => i.AliasGroupKey == groupKey)
             : chainVm.Items.Where(i => i.SourceChainKey == groupKey);
     }
 
@@ -1332,7 +1437,7 @@ public partial class ChainBrowserPage : UserControl
     /// • remove + entry missing→ no-op
     /// Shared by the alias and variant toggles.
     /// </summary>
-    private static string ApplyFlagToggle(string lua, string itemType, string flagName, bool remove)
+    internal static string ApplyFlagToggle(string lua, string itemType, string flagName, bool remove)
     {
         var escapedType = System.Text.RegularExpressions.Regex.Escape(itemType);
         var entryRegex = new System.Text.RegularExpressions.Regex(
@@ -1347,8 +1452,12 @@ public partial class ChainBrowserPage : UserControl
             return lua[..(insertPos + 1)] + luaEntry + lua[(insertPos + 1)..];
         }
 
+        // Match the flag with a bool OR string value — isVariant can be a named label (isVariant = "Autumn").
+        // Without the string alternative a labelled variant looked "unset", so a re-toggle fell through and
+        // APPENDED a second `isVariant = true` → duplicate key → Lua keeps the last one → the label was
+        // silently wiped. Matching the string also lets `remove` strip a labelled variant.
         var flagRegex = new System.Text.RegularExpressions.Regex(
-            @",?\s*" + System.Text.RegularExpressions.Regex.Escape(flagName) + @"\s*=\s*(true|false)");
+            @",?\s*" + System.Text.RegularExpressions.Regex.Escape(flagName) + @"\s*=\s*(""(?:[^""\\]|\\.)*""|true|false)");
         lua = entryRegex.Replace(lua, m =>
         {
             var prefix = m.Groups[1].Value;
@@ -1356,13 +1465,28 @@ public partial class ChainBrowserPage : UserControl
             var suffix = m.Groups[3].Value;
 
             if (remove)
+            {
                 body = flagRegex.Replace(body, "");
-            else if (flagRegex.IsMatch(body))
-                body = flagRegex.Replace(body, $", {flagName} = true");
-            else if (body.Trim().Length == 0)
-                body = $"{flagName} = true";       // empty entry → bare flag, no leading comma
+            }
             else
-                body += $", {flagName} = true";
+            {
+                var existing = flagRegex.Match(body);
+                if (existing.Success)
+                {
+                    // Already set — preserve a string label ("Autumn") and an idempotent true; only a
+                    // literal false is flipped to true. NEVER append a duplicate flag.
+                    if (existing.Groups[1].Value == "false")
+                        body = flagRegex.Replace(body, $", {flagName} = true");
+                }
+                else if (body.Trim().Length == 0)
+                    body = $"{flagName} = true";       // empty entry → bare flag, no leading comma
+                else
+                    body += $", {flagName} = true";
+            }
+            // The flag regex only consumes a PRECEDING comma. When the flag was the entry's
+            // FIRST field ({isAlias = true, chainName = ...}), removal/replacement leaves the
+            // body starting with the next field's comma → invalid Lua ("{, chainName = ...").
+            body = System.Text.RegularExpressions.Regex.Replace(body, @"^\s*,\s*", "");
             return prefix + body + suffix;
         });
 
@@ -1374,6 +1498,295 @@ public partial class ChainBrowserPage : UserControl
             lua = emptyEntryRegex.Replace(lua, "");
         }
         return lua;
+    }
+
+    /// <summary>
+    /// Sets the <c>isVariant</c> value for one item to a NAMED label (<c>isVariant = "Spring"</c>) or,
+    /// when <paramref name="label"/> is empty, back to the plain <c>isVariant = true</c>. Matches an
+    /// existing bool OR string value; creates the entry if missing. Shares the leading-comma fix and
+    /// entry-insert logic with <see cref="ApplyFlagToggle"/>. Never touches other fields.
+    /// </summary>
+    internal static string SetVariantLabel(string lua, string itemType, string label)
+    {
+        // Lua string: escape backslash and double-quote so labels stay valid.
+        string value = string.IsNullOrEmpty(label)
+            ? "true"
+            : "\"" + label.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"";
+
+        var escapedType = System.Text.RegularExpressions.Regex.Escape(itemType);
+        var entryRegex = new System.Text.RegularExpressions.Regex(
+            @"(\[""" + escapedType + @"""\]\s*=\s*\{)([^}]*)(})");
+
+        if (!entryRegex.IsMatch(lua))
+        {
+            int insertPos = lua.LastIndexOf("\n}", StringComparison.Ordinal);
+            if (insertPos < 0) throw new Exception("Could not find insertion point.");
+            string luaEntry = $"\t[\"{itemType}\"] = {{isVariant = {value}}},\n";
+            return lua[..(insertPos + 1)] + luaEntry + lua[(insertPos + 1)..];
+        }
+
+        // Existing isVariant value is bool OR quoted string.
+        var flagRegex = new System.Text.RegularExpressions.Regex(
+            @",?\s*isVariant\s*=\s*(?:true|false|""(?:[^""\\]|\\.)*"")");
+        return entryRegex.Replace(lua, m =>
+        {
+            var prefix = m.Groups[1].Value;
+            var body = m.Groups[2].Value;
+            var suffix = m.Groups[3].Value;
+
+            if (flagRegex.IsMatch(body))
+                body = flagRegex.Replace(body, $", isVariant = {value}");
+            else if (body.Trim().Length == 0)
+                body = $"isVariant = {value}";
+            else
+                body += $", isVariant = {value}";
+            // Same first-field guard as ApplyFlagToggle: the flag regex consumes a PRECEDING comma,
+            // so replacing a leading isVariant leaves the body starting with the next field's comma.
+            body = System.Text.RegularExpressions.Regex.Replace(body, @"^\s*,\s*", "");
+            return prefix + body + suffix;
+        });
+    }
+
+    /// <summary>
+    /// Sets an arbitrary variant mapping field (variantOrder, groupOdds) on one item to a RAW Lua
+    /// value ("3", "true", "\"X\""). Empty <paramref name="luaValue"/> removes the field. Creates the
+    /// entry if missing. Shares the leading-comma fix and entry-insert logic with <see cref="SetVariantLabel"/>.
+    /// </summary>
+    internal static string SetVariantField(string lua, string itemType, string field, string luaValue)
+    {
+        var escapedType = System.Text.RegularExpressions.Regex.Escape(itemType);
+        var escapedField = System.Text.RegularExpressions.Regex.Escape(field);
+        var entryRegex = new System.Text.RegularExpressions.Regex(
+            @"(\[""" + escapedType + @"""\]\s*=\s*\{)([^}]*)(})");
+
+        bool remove = string.IsNullOrEmpty(luaValue);
+
+        if (!entryRegex.IsMatch(lua))
+        {
+            if (remove) return lua; // nothing to remove, no entry
+            int insertPos = lua.LastIndexOf("\n}", StringComparison.Ordinal);
+            if (insertPos < 0) throw new Exception("Could not find insertion point.");
+            string luaEntry = $"\t[\"{itemType}\"] = {{{field} = {luaValue}}},\n";
+            return lua[..(insertPos + 1)] + luaEntry + lua[(insertPos + 1)..];
+        }
+
+        // Match an existing `field = <value>` (number, bool, or quoted string), incl. preceding comma.
+        var fieldRegex = new System.Text.RegularExpressions.Regex(
+            @",?\s*" + escapedField + @"\s*=\s*(?:true|false|-?\d+(?:\.\d+)?|""(?:[^""\\]|\\.)*"")");
+
+        return entryRegex.Replace(lua, m =>
+        {
+            var prefix = m.Groups[1].Value;
+            var body = m.Groups[2].Value;
+            var suffix = m.Groups[3].Value;
+
+            if (remove)
+                body = fieldRegex.Replace(body, "");
+            else if (fieldRegex.IsMatch(body))
+                body = fieldRegex.Replace(body, $", {field} = {luaValue}");
+            else if (body.Trim().Length == 0)
+                body = $"{field} = {luaValue}";
+            else
+                body += $", {field} = {luaValue}";
+
+            // First-field guard: fieldRegex consumes a PRECEDING comma, so removing/replacing a
+            // leading field leaves the body starting with the next field's comma.
+            body = System.Text.RegularExpressions.Regex.Replace(body, @"^\s*,\s*", "");
+            return prefix + body + suffix;
+        });
+    }
+
+    /// <summary>
+    /// Commits pending variant-label edits for the chain: gathers each variant whose inline label
+    /// differs from the live mapping, fetches the module once, applies all in one pass, and publishes
+    /// a single edit. No-op when nothing changed.
+    /// </summary>
+    /// <summary>Enter in a variant-label box commits the binding (LostFocus trigger) without needing
+    /// the user to click away first — so "Save Labels" sees the typed value.</summary>
+    private void VariantLabel_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (sender is not System.Windows.Controls.TextBox tb) return;
+
+        if (e.Key == Key.Enter)
+        {
+            tb.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty)?.UpdateSource();
+            e.Handled = true;
+            return;
+        }
+
+        if (e.Key != Key.Tab) return;
+
+        // Column-wise Tab flow so a whole column fills top→bottom before moving on:
+        //   order → next order  ·  LAST order → FIRST label  ·  label → next label.
+        // Shift+Tab reverses (first label → last order; first order → default focus out).
+        bool isOrder = IsVariantBox(tb, "VariantOrderEdit");
+        bool isLabel = IsVariantBox(tb, "VariantLabelEdit");
+        if (!isOrder && !isLabel) return;
+
+        tb.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty)?.UpdateSource();
+        var list = FindVisualParent<System.Windows.Controls.ItemsControl>(tb);
+        if (list == null) return;
+        var boxes = FindVisualChildren<System.Windows.Controls.TextBox>(list).ToList();
+        var orders = boxes.Where(b => IsVariantBox(b, "VariantOrderEdit")).ToList();
+        var labels = boxes.Where(b => IsVariantBox(b, "VariantLabelEdit")).ToList();
+        bool back = (Keyboard.Modifiers & ModifierKeys.Shift) != 0;
+
+        System.Windows.Controls.TextBox? target;
+        int idx;
+        if (isOrder)
+        {
+            idx = orders.IndexOf(tb);
+            target = back ? (idx > 0 ? orders[idx - 1] : null)
+                          : (idx < orders.Count - 1 ? orders[idx + 1] : labels.FirstOrDefault());
+        }
+        else
+        {
+            idx = labels.IndexOf(tb);
+            target = back ? (idx > 0 ? labels[idx - 1] : orders.LastOrDefault())
+                          : (idx < labels.Count - 1 ? labels[idx + 1] : null);
+        }
+
+        AppLogger.Debug($"[VariantTab] {(isOrder ? "order" : "label")} idx={idx} orders={orders.Count} labels={labels.Count} back={back} → target={(target == null ? "null" : IsVariantBox(target, "VariantOrderEdit") ? "order" : "label")}");
+
+        if (target != null)
+        {
+            bool ok = target.Focus();
+            target.SelectAll();
+            e.Handled = true;
+            AppLogger.Debug($"[VariantTab] Focus() returned {ok}");
+        }
+    }
+
+    private static bool IsVariantBox(System.Windows.Controls.TextBox tb, string bindingPath)
+        => tb.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty)?.ParentBinding?.Path?.Path == bindingPath;
+
+    /// <summary>A committed label edit may have made the chain dirty/clean — refresh the
+    /// action bar so Save Labels appears (or its enabled state updates) without a checkbox.</summary>
+    private void VariantLabel_LostFocus(object sender, RoutedEventArgs e)
+    {
+        var chainVm = GetChainVmFromButton(sender);
+        if (chainVm == null || sender is not FrameworkElement fe) return;
+        var expander = FindVisualParent<Expander>(fe);
+        var actionBar = expander != null ? FindActionBar(expander) : null;
+        if (actionBar != null) UpdateActionBar(chainVm, actionBar);
+    }
+
+    private async void BtnSaveVariantLabels_Click(object sender, RoutedEventArgs e)
+    {
+        var chainVm = GetChainVmFromButton(sender);
+        if (chainVm == null) return;
+
+        int pendingCount = chainVm.Items.Count(i => i.VariantMappingDirty);
+        if (pendingCount == 0)
+        {
+            _main.ShowStatus("No mapping changes to save.", InfoBarSeverity.Informational);
+            return;
+        }
+
+        // Working state: fetch + publish are network round-trips (~1-2 s) — disable the
+        // button and show a persistent "Saving…" status so the click has visible feedback.
+        var btn = sender as Wpf.Ui.Controls.Button;
+        var origContent = btn?.Content;
+        if (btn != null) { btn.IsEnabled = false; btn.Content = "Saving…"; }
+        _main.ShowStatus($"Saving {pendingCount} mapping change(s)…", InfoBarSeverity.Informational);
+
+        try
+        {
+            string lua;
+            try
+            {
+                lua = await MysteryWikiService.FetchPageContentAsync("Module:Datatable/Items/Mapping");
+                if (string.IsNullOrEmpty(lua)) throw new Exception("Could not fetch Items/Mapping module.");
+            }
+            catch (Exception ex)
+            {
+                _main.ShowStatus($"Failed to fetch mapping: {ex.Message}", InfoBarSeverity.Error);
+                return;
+            }
+
+            var newLua = lua;
+            int changeCount = ApplyPendingVariantLabelOrder(chainVm, ref newLua);
+
+            var summary = $"Update variant mapping ({changeCount} change(s)) in {chainVm.Source.DisplayName} (via MergeMansionWikiTools)";
+
+            try
+            {
+                await MysteryWikiService.PublishPageAsync(
+                    _main.Settings.WikiUsername, _main.Settings.WikiPassword,
+                    "Module:Datatable/Items/Mapping", newLua, summary);
+                _main.ShowStatus($"Saved {changeCount} mapping change(s).", InfoBarSeverity.Success);
+                _ = RefreshAfterWikiChange();
+            }
+            catch (Exception ex)
+            {
+                _main.ShowStatus($"Save failed: {ex.Message}", InfoBarSeverity.Error);
+            }
+        }
+        finally
+        {
+            if (btn != null) { btn.Content = origContent; btn.IsEnabled = true; }
+        }
+    }
+
+    /// <summary>Applies each variant's pending inline label + order edits onto the mapping Lua and syncs
+    /// the Source model. Shared by Save Mapping and the Group-Drop-Odds toggle so clicking the checkbox
+    /// never discards labels/orders the user typed but hadn't saved (the toggle publishes + refreshes,
+    /// which would otherwise rebuild the VMs from the mapping that lacks those edits). Returns # fields changed.</summary>
+    private static int ApplyPendingVariantLabelOrder(ChainViewModel chainVm, ref string lua)
+    {
+        int changeCount = 0;
+        foreach (var i in chainVm.Items.Where(x => x.IsVariant))
+        {
+            var label = (i.VariantLabelEdit ?? "").Trim();
+            if (label != (i.Source.MappingVariantLabel ?? ""))
+            { lua = SetVariantLabel(lua, i.Source.ItemType, label); i.Source.MappingVariantLabel = string.IsNullOrEmpty(label) ? null : label; changeCount++; }
+
+            var order = (i.VariantOrderEdit ?? "").Trim();
+            if (order != (i.Source.MappingVariantOrder?.ToString() ?? ""))
+            {
+                // numeric-only, positive; empty (or invalid) removes the field
+                var n = (int.TryParse(order, out var parsed) && parsed > 0) ? (int?)parsed : null;
+                lua = SetVariantField(lua, i.Source.ItemType, "variantOrder", n?.ToString() ?? "");
+                i.Source.MappingVariantOrder = n;
+                changeCount++;
+            }
+        }
+        return changeCount;
+    }
+
+    /// <summary>Toggles groupOdds on all variant items of the chain (one wiki edit).</summary>
+    private async void ChkGroupOdds_Click(object sender, RoutedEventArgs e)
+    {
+        var chainVm = GetChainVmFromButton(sender);
+        if (chainVm == null) return;
+        bool on = (sender as System.Windows.Controls.CheckBox)?.IsChecked == true;
+
+        var variants = chainVm.Items.Where(i => i.IsVariant).ToList();
+        if (variants.Count == 0) return;
+
+        var cb = sender as System.Windows.Controls.CheckBox;
+        if (cb != null) cb.IsEnabled = false;
+        _main.ShowStatus(on ? "Enabling grouped Drop Odds…" : "Disabling grouped Drop Odds…", InfoBarSeverity.Informational);
+        try
+        {
+            var lua = await MysteryWikiService.FetchPageContentAsync("Module:Datatable/Items/Mapping");
+            if (string.IsNullOrEmpty(lua)) throw new Exception("Could not fetch Items/Mapping module.");
+            var newLua = lua;
+            foreach (var i in variants)
+                newLua = SetVariantField(newLua, i.Source.ItemType, "groupOdds", on ? "true" : "");
+            // Flush pending inline label/order edits in the SAME publish — otherwise the refresh below
+            // rebuilds the VMs from a mapping that lacks them and the user's typed labels/orders are lost.
+            int flushed = ApplyPendingVariantLabelOrder(chainVm, ref newLua);
+            var extra = flushed > 0 ? $" + {flushed} label/order change(s)" : "";
+            await MysteryWikiService.PublishPageAsync(_main.Settings.WikiUsername, _main.Settings.WikiPassword,
+                "Module:Datatable/Items/Mapping", newLua,
+                $"{(on ? "Enable" : "Disable")} grouped Drop Odds{extra} for {chainVm.Source.DisplayName} (via MergeMansionWikiTools)");
+            foreach (var i in variants) i.Source.MappingGroupOdds = on;
+            _main.ShowStatus(on ? "Grouped Drop Odds enabled." : "Grouped Drop Odds disabled.", InfoBarSeverity.Success);
+            _ = RefreshAfterWikiChange();
+        }
+        catch (Exception ex) { _main.ShowStatus($"Save failed: {ex.Message}", InfoBarSeverity.Error); }
+        finally { if (cb != null) cb.IsEnabled = true; }
     }
 
     private async void BtnRenameItem_Click(object sender, RoutedEventArgs e)

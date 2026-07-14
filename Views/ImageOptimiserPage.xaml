@@ -32,8 +32,29 @@
                                Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
                     <TextBlock x:Name="txtChainItemCount" FontSize="11"
                                Foreground="{DynamicResource TextOnAccentFillColorSecondaryBrush}"/>
-                    <TextBlock x:Name="txtDetectionMethod" FontSize="11" Visibility="Collapsed"
-                               Foreground="{DynamicResource TextOnAccentFillColorSecondaryBrush}"/>
+                    <StackPanel x:Name="detectionMethodPanel" Orientation="Horizontal"
+                                Visibility="Collapsed" Margin="0,1,0,0" Opacity="0.72">
+                        <TextBlock Text="Image: " FontSize="11" VerticalAlignment="Center"
+                                   Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
+                        <TextBlock x:Name="linkImageFile" FontSize="11" FontWeight="SemiBold"
+                                   VerticalAlignment="Center" Cursor="Hand"
+                                   TextDecorations="Underline"
+                                   Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
+                                   ToolTip="Open this image file"
+                                   MouseLeftButtonUp="LinkImageFile_Click"/>
+                        <ui:Button x:Name="btnOpenImageFolder" Margin="6,0,0,0"
+                                   Padding="4,1" Height="20" MinWidth="0"
+                                   Background="#25000000" BorderThickness="0"
+                                   MouseOverBackground="#40000000" PressedBackground="#55000000"
+                                   Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
+                                   ToolTip="Show this file in its folder"
+                                   Click="BtnOpenImageFolder_Click">
+                            <ui:SymbolIcon Symbol="FolderOpen24" FontSize="13"/>
+                        </ui:Button>
+                        <TextBlock x:Name="txtMethodLabel" FontSize="11" VerticalAlignment="Center"
+                                   Margin="8,0,0,0"
+                                   Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
+                    </StackPanel>
                 </StackPanel>
                 <ui:Button Grid.Column="2" Content="Exit" Icon="{ui:SymbolIcon Dismiss24}"
                            Click="BtnExitChainMode_Click"

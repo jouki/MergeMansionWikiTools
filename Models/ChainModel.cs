@@ -302,12 +302,34 @@ public class ParsedItem
     public bool IsChest { get; set; }
     public Dictionary<string, double>? ChestRewardOdds { get; set; }
 
+    /// <summary>ChestFeatures.HowManyToRoll — number of loot rolls when the chest is opened. 0 = unset.</summary>
+    public int ChestRollCount { get; set; }
+
     /// <summary>
     /// ConstantProducer payload (Reward Boxes): ordered (Item, Quantity) pairs from
     /// `ChestFeatures.LootProducer.Constant`. Guaranteed drops, not probabilistic.
     /// Null for non-constant loot (Random / ControlledRandom* / PrefixProducer wrappers).
     /// </summary>
     public List<(string Item, int Quantity)>? ChestRewardItems { get; set; }
+
+    // Fishing-rod features — Lucky Catch rods AND Lucky Snap cameras ("taking a photo"
+    // reuses the fishing cast mechanic). FishingRodFeatures.ItemOdds carries weighted
+    // catch targets; stored here normalized to percentages (itemType → %).
+    public bool IsFishingRod { get; set; }
+    public Dictionary<string, double>? FishingOdds { get; set; }
+
+    /// <summary>
+    /// FishingRodFeatures.WaterDropletOverride — the side-drop item scattered by every
+    /// cast/shot (Lucky Catch: water droplets; Lucky Snap: failed photos, 1–12 per shot).
+    /// The dump stores a NUMERIC item ConfigKey; resolve against ParsedItem.NumericConfigKey.
+    /// </summary>
+    public string? FishingDropletConfigKey { get; set; }
+
+    /// <summary>Droplet/failed-photo COUNT range per shot — scales with the catch (rarer = more;
+    /// FishingSettings.SmallFish/NonFishWaterDropletCounts, dumper-computed min/max across catches).
+    /// Null when not emitted (pre-v0.24.23 dump).</summary>
+    public int? FishingDropletCountMin { get; set; }
+    public int? FishingDropletCountMax { get; set; }
 
     // Lua generation extras
     public string Description { get; set; } = "";
@@ -366,6 +388,20 @@ public class ParsedItem
 
     /// <summary>Area variant label for multi-variant chain levels (e.g. "Sauna").</summary>
     public string? VariantLabel { get; set; }
+
+    /// <summary>
+    /// Display label from the wiki mapping's <c>isVariant = "Spring"</c> (string form). When
+    /// <c>isVariant = true</c> this is null → the wiki falls back to letters A/B/C. Distinct from
+    /// <see cref="VariantLabel"/> (data-derived area label for decay/transform variants).
+    /// </summary>
+    public string? MappingVariantLabel { get; set; }
+
+    /// <summary>Explicit display order among the chain's variants (wiki mapping <c>variantOrder = N</c>).
+    /// Null = unset; renderer falls back to legacy level/name ordering.</summary>
+    public int? MappingVariantOrder { get; set; }
+
+    /// <summary>Wiki mapping <c>groupOdds = true</c> — Drop Odds rows grouped by variant.</summary>
+    public bool MappingGroupOdds { get; set; }
 
     /// <summary>
     /// Multi-target decay-roll odds (targetItemType → percent) from a "roller" item's

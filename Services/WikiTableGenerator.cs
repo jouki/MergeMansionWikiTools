@@ -328,9 +328,16 @@ public class WikiTableGenerator
 
         // Rows
         bool isFirst = true;
-        var renderedVariantLevels = new HashSet<int>();
+        var renderedLevels = new HashSet<int>();
         foreach (var item in items)
         {
+            // Every level renders exactly ONE block, no matter how many items share it.
+            // Without this, IDENTICAL variants (e.g. six seasonal Basic Cameras, all mapped
+            // onto one wiki chain) each emitted a full row — and because the displayed Lvl
+            // is an incrementing #var counter, the table showed phantom levels 6, 7, 8, …
+            // Identical items → one aggregated row; differing items → variant sub-rows below.
+            if (!renderedLevels.Add(item.Level)) continue;
+
             var allLevelItems = itemsByLevel.GetValueOrDefault(item.Level) ?? new List<ParsedItem> { item };
 
             // When a level has explicit isVariant items, THOSE are the variant set: render exactly
@@ -338,15 +345,10 @@ public class WikiTableGenerator
             // "roller" (isAlias, not isVariant), which would otherwise appear as a phantom variant.
             // Levels without any isVariant flag keep the legacy behaviour (all items, incl. aliases).
             var levelItems = allLevelItems.Any(i => i.IsVariant)
-                ? allLevelItems.Where(i => i.IsVariant).ToList()
+                ? SortVariants(allLevelItems.Where(i => i.IsVariant))
                 : allLevelItems;
 
             bool hasSubRows = levelDiffering.ContainsKey(item.Level) && levelItems.Count > 1;
-
-            // A variant level renders ONE block. The loop iterates non-alias items, so a level with
-            // several non-alias variants (e.g. A/B/C all isVariant) would otherwise emit the block
-            // once per item — skip the repeats here.
-            if (hasSubRows && !renderedVariantLevels.Add(item.Level)) continue;
 
             var diff = hasSubRows ? levelDiffering[item.Level] : new HashSet<string>();
             int vc = hasSubRows ? levelItems.Count : 1;
@@ -593,6 +595,26 @@ public class WikiTableGenerator
         if (item.IsGenerator && item.DropOdds != null && item.DropOdds.Count > 0)
         {
             var grouped = GroupDropsByChain(item.DropOdds);
+            foreach (var group in grouped)
+                parts.Add(FormatDropGroup(group));
+        }
+
+        // Fishing-rod catches (FishingRodFeatures.ItemOdds — Lucky Snap cameras, Lucky Catch rods)
+        if (item.IsFishingRod && item.FishingOdds is { Count: > 0 })
+        {
+            // Every shot also scatters the droplet side-drop (water droplets / failed
+            // photos) — deterministic companion, listed before the rolled catch.
+            var dropletType = ResolveDropletItemType(item);
+            if (dropletType != null)
+            {
+                var dropletChain = ResolveChainName(dropletType);
+                var dropletLevel = _data.ResolveLevel(dropletType, _wikiMapping);
+                // Count scales with the catch (rarer = more) → show the range prefix "N–Mx".
+                var countPrefix = FormatDropletCount(item);
+                parts.Add($"{countPrefix}{{{{Item|{dropletChain}|{dropletLevel}}}}}");
+            }
+
+            var grouped = GroupDropsByChain(item.FishingOdds);
             foreach (var group in grouped)
                 parts.Add(FormatDropGroup(group));
         }
@@ -1035,6 +1057,36 @@ public class WikiTableGenerator
         return "{{Dash}}";
     }
 
+    /// <summary>
+    /// Label for a variant sub-row / column. Uses the mapping's named variant label
+    /// (isVariant = "Spring", carried on <see cref="ParsedItem.MappingVariantLabel"/>)
+    /// when set, otherwise falls back to the positional letter A/B/C… Passing the item
+    /// directly keeps callers that only have (index, list) and those that already hold
+    /// the item on one path.
+    /// </summary>
+    private static string VariantColLabel(int index, IReadOnlyList<ParsedItem> variantItems)
+    {
+        if (index >= 0 && index < variantItems.Count)
+        {
+            var lbl = variantItems[index].MappingVariantLabel;
+            if (!string.IsNullOrWhiteSpace(lbl)) return lbl!;
+        }
+        return ((char)('A' + index)).ToString();
+    }
+
+    /// <summary>
+    /// Orders a level's variant items for display: items with a mapping variantOrder come first
+    /// (ascending), then items without, by ItemType (stable legacy order). Mirrors the Lua
+    /// variantSort comparator so Merge Stages and the Lua-rendered odds tables agree.
+    /// </summary>
+    internal static List<ParsedItem> SortVariants(IEnumerable<ParsedItem> items)
+    {
+        return items.OrderBy(i => i.MappingVariantOrder.HasValue ? 0 : 1)
+                    .ThenBy(i => i.MappingVariantOrder ?? int.MaxValue)
+                    .ThenBy(i => i.ItemType, System.StringComparer.Ordinal)
+                    .ToList();
+    }
+
     /// <summary>Returns the variant letter (A, B, C, ...) if the transform target (sink
     /// reward OR cross-chain merge result) is at a level with multiple variants, or null.</summary>
     private string? GetTransformsToVariantLabel(ParsedItem item, ParsedChain currentChain)
@@ -1057,7 +1109,7 @@ public class WikiTableGenerator
                             int idx = targetLevelItems.FindIndex(i =>
                                 string.Equals(i.ItemType, targetItemType, StringComparison.OrdinalIgnoreCase));
                             if (idx >= 0)
-                                return ((char)('A' + idx)).ToString();
+                                return VariantColLabel(idx, targetLevelItems);
                         }
                         return null;
                     }
@@ -1152,9 +1204,36 @@ public class WikiTableGenerator
         return _data.ResolveChainDisplayName(itemTypeOrChainKey);
     }
 
+    /// <summary>
+    /// Resolves FishingRodFeatures.WaterDropletOverride (a NUMERIC item ConfigKey) to the
+    /// droplet item's ItemType by scanning ParsedItem.NumericConfigKey. Null when unset
+    /// or unresolvable.
+    /// </summary>
+    private string? ResolveDropletItemType(ParsedItem rod)
+    {
+        if (string.IsNullOrEmpty(rod.FishingDropletConfigKey)) return null;
+        foreach (var chain in _data.Chains)
+            foreach (var ci in chain.Items)
+                if (ci.NumericConfigKey == rod.FishingDropletConfigKey)
+                    return ci.ItemType;
+        return null;
+    }
+
+    /// <summary>Count prefix for the droplet drop: "" when no count data, "Nx " for a fixed
+    /// count, "N–Mx " for a range (droplet count scales with the catch's rarity).</summary>
+    private static string FormatDropletCount(ParsedItem rod)
+    {
+        if (rod.FishingDropletCountMin is not int min || rod.FishingDropletCountMax is not int max)
+            return "";
+        return min == max ? $"{min}x " : $"{min}–{max}x ";
+    }
+
     private bool HasDrops(ParsedItem item)
     {
         if (item.IsGenerator && item.DropOdds != null && item.DropOdds.Count > 0)
+            return true;
+
+        if (item.IsFishingRod && item.FishingOdds is { Count: > 0 })
             return true;
 
         if (item.IsSpawner && (!string.IsNullOrEmpty(item.SpawnItemType) || (item.SpawnOdds != null && item.SpawnOdds.Count > 0)))
@@ -1233,7 +1312,7 @@ public class WikiTableGenerator
         bool hasNestedTable = nestedDecayTable != null;
 
         // Drops
-        if (hasVariants && firstSplitCol == "Drops") sb.AppendLine($"| {(char)('A' + v)}");
+        if (hasVariants && firstSplitCol == "Drops") sb.AppendLine($"| {VariantColLabel(v, levelItems)}");
         if (showDrops)
         {
             if (diff.Contains("Drops"))
@@ -1249,7 +1328,7 @@ public class WikiTableGenerator
             sb.AppendLine($"| rowspan = {totalRows} | {BuildOrderDropsPerTaskCell(primary)}");
 
         // Drop Values
-        if (hasVariants && firstSplitCol == "DropValues") sb.AppendLine($"| {(char)('A' + v)}");
+        if (hasVariants && firstSplitCol == "DropValues") sb.AppendLine($"| {VariantColLabel(v, levelItems)}");
         if (showDropValues)
         {
             if (diff.Contains("DropValues"))
@@ -1284,7 +1363,7 @@ public class WikiTableGenerator
         else
         {
             // Decays Into
-            if (hasVariants && firstSplitCol == "DecaysInto") sb.AppendLine($"| {(char)('A' + v)}");
+            if (hasVariants && firstSplitCol == "DecaysInto") sb.AppendLine($"| {VariantColLabel(v, levelItems)}");
             if (showDecaysInto)
             {
                 if (decayGroups != null)
@@ -1300,7 +1379,7 @@ public class WikiTableGenerator
             }
 
             // Decay Odds (2 sub-columns when hasAnyDecayExpansion: Variant + Odds)
-            if (hasVariants && firstSplitCol == "DecayOdds") sb.AppendLine($"| {(char)('A' + v)}");
+            if (hasVariants && firstSplitCol == "DecayOdds") sb.AppendLine($"| {VariantColLabel(v, levelItems)}");
             if (showDecayOdds)
             {
                 if (decayGroups != null)
@@ -1313,13 +1392,13 @@ public class WikiTableGenerator
                     {
                         if (v == 0)
                         {
-                            sb.AppendLine($"| rowspan = {vc} | {(char)('A' + v)}");
+                            sb.AppendLine($"| rowspan = {vc} | {VariantColLabel(v, levelItems)}");
                             sb.AppendLine($"| rowspan = {vc} | {targetOdds}");
                         }
                     }
                     else
                     {
-                        sb.AppendLine($"| {(char)('A' + v)}");
+                        sb.AppendLine($"| {VariantColLabel(v, levelItems)}");
                         sb.AppendLine($"| {targetOdds}");
                     }
                 }
@@ -1342,7 +1421,7 @@ public class WikiTableGenerator
         }
 
         // Charge Time
-        if (hasVariants && firstSplitCol == "ChargeTime") sb.AppendLine($"| {(char)('A' + v)}");
+        if (hasVariants && firstSplitCol == "ChargeTime") sb.AppendLine($"| {VariantColLabel(v, levelItems)}");
         if (showChargeTime)
         {
             if (diff.Contains("ChargeTime"))
@@ -1352,7 +1431,7 @@ public class WikiTableGenerator
         }
 
         // Recharge Time
-        if (hasVariants && firstSplitCol == "RechargeTime") sb.AppendLine($"| {(char)('A' + v)}");
+        if (hasVariants && firstSplitCol == "RechargeTime") sb.AppendLine($"| {VariantColLabel(v, levelItems)}");
         if (showRechargeTime)
         {
             if (diff.Contains("RechargeTime"))
@@ -1362,7 +1441,7 @@ public class WikiTableGenerator
         }
 
         // Speed Up Cost
-        if (hasVariants && firstSplitCol == "SpeedUpCost") sb.AppendLine($"| {(char)('A' + v)}");
+        if (hasVariants && firstSplitCol == "SpeedUpCost") sb.AppendLine($"| {VariantColLabel(v, levelItems)}");
         if (showSpeedUpCost)
         {
             if (diff.Contains("SpeedUpCost"))
@@ -1779,6 +1858,9 @@ public class WikiTableGenerator
     public string PostProcessGameplayTips(string wikitext, string? currentChainName = null)
     {
         if (string.IsNullOrEmpty(wikitext)) return wikitext;
+        // The fetched section body often starts with a blank line (wiki source has "== Gameplay Tips ==\n\n* …").
+        // Strip leading blank lines so the emitted section has the first tip directly under the heading.
+        wikitext = wikitext.TrimStart('\n', '\r', ' ', '\t');
         var nameToMaxLevel = BuildNameToMaxLevelDict();
 
         // (1) "* foo" spacing — insert one space after the bullet asterisks when the content
@@ -1916,8 +1998,11 @@ public class WikiTableGenerator
     /// <summary>
     /// Drop Odds section (=== Drop Odds ===). Emits when any item in chain has randomized
     /// production: DropOdds (generators), SpawnOdds (spawners), or DecayAfterLastCycleOdds
-    /// (randomized end-cycle outcome). Pure ConstantProducer decay (DecayProducer / ItemProducer)
-    /// is deterministic — no Drop Odds needed there.
+    /// (randomized end-cycle outcome) — or when the chain has a chest with parsed loot
+    /// (ChestFeatures.LootProducer): the SAME invoke renders chest contents on chest pages
+    /// (Lua falls through to the chest-loot table when the chain has no generators).
+    /// Pure ConstantProducer decay (DecayProducer / ItemProducer) is deterministic — no
+    /// Drop Odds needed there.
     /// </summary>
     public string? GenerateDropOddsSection(ParsedChain chain, string? hardcodedName = null)
     {
@@ -1928,7 +2013,12 @@ public class WikiTableGenerator
             i.HasRandomDrop ||
             (i.SpawnOdds != null && i.SpawnOdds.Count > 0) ||
             (i.DecayAfterLastCycleOdds != null && i.DecayAfterLastCycleOdds.Count > 0));
-        if (!hasRandomOdds) return null;
+        bool hasChestLoot = chain.Items.Any(i =>
+            i.IsChest &&
+            (i.ChestRewardOdds is { Count: > 0 } || i.ChestRewardItems is { Count: > 0 }));
+        bool hasFishingOdds = chain.Items.Any(i =>
+            i.IsFishingRod && i.FishingOdds is { Count: > 0 });
+        if (!hasRandomOdds && !hasChestLoot && !hasFishingOdds) return null;
 
         string arg = hardcodedName != null ? $"|{hardcodedName}" : "";
         var sb = new StringBuilder();
@@ -1990,6 +2080,12 @@ public class WikiTableGenerator
     /// </summary>
     public string? GenerateUsesSection(ParsedChain chain, IReadOnlyList<ParsedChain> allChains, IReadOnlyList<LuaArea>? areas, string? hardcodedName = null)
     {
+        // Event chains (LS_/LC_/LDE_/CBE_/…) don't get a Uses section: an event item's downstream
+        // consumption is event-internal (e.g. Pro Camera → its own Trophy Case sink) and not a
+        // meaningful cross-content "use" for the wiki. Returning null here also unchecks/hides the
+        // "Include Uses section" toggle (hasUses = GenerateUsesSection(...) != null).
+        if (chain.IsEventChain) return null;
+
         var myItemTypes = chain.Items
             .Where(i => !string.IsNullOrEmpty(i.ItemType))
             .Select(i => i.ItemType!)

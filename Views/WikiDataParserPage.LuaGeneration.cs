@@ -240,6 +240,7 @@ public partial class WikiDataParserPage
         _pendingGcWritten = 0;
         _lastGcGridsLua = null;
         _lastGcChanges = null;
+        _lastEventsChanges = null;
         _lastGcRewardCount = 0;
 
         try
@@ -290,7 +291,7 @@ public partial class WikiDataParserPage
                 using var _t = AppLogger.Timed("GenerateEventScheduleLua");
 
                 // Pass-1 (non-GC) lua — also passed to MergeAirings for parent-run matching.
-                var nonGcLua = _luaGen.GenerateEventScheduleLua(schedule.Groups, schedule.CreatedAt);
+                var nonGcLua = _luaGen.GenerateEventScheduleLua(schedule.Groups, schedule.AutoMergeWindows, schedule.CreatedAt);
 
                 if (_main.DataService == null || liveVarious == null)
                     return new GcMergeResult { Lua = nonGcLua };
@@ -353,7 +354,7 @@ public partial class WikiDataParserPage
 
                     // Final lua now includes GC groups.
                     var finalLua = gcGroupCount > 0
-                        ? _luaGen.GenerateEventScheduleLua(schedule.Groups, schedule.CreatedAt)
+                        ? _luaGen.GenerateEventScheduleLua(schedule.Groups, schedule.AutoMergeWindows, schedule.CreatedAt)
                         : nonGcLua;
 
                     return new GcMergeResult
@@ -377,6 +378,8 @@ public partial class WikiDataParserPage
 
             var lua = gcResult.Lua;
             _lastEventsLua = lua;
+            // Semantic diff old (live) vs new — powers the Events review in the Update dialog.
+            _lastEventsChanges = EventScheduleDiff.Compute(existing, lua);
             _lastGcChanges = gcResult.GcChanges;
             _lastGcRewardCount = gcResult.GcRewardCount;
 

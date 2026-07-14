@@ -32,4 +32,26 @@ public class EventScheduleLuaEmitTests
         Assert.Contains("identicalTo = \"18.10.2024\"", lua);
         Assert.DoesNotContain("parent =", lua);
     }
+
+    [Fact]
+    public void Emit_includesParent_forGarageCleanup()
+    {
+        // A Garage Cleanup whose window overlaps two seasonal events must carry an explicit
+        // `parent` so Module:Events nests it under the right one instead of date-overlap guessing.
+        var group = new EventScheduleGroup
+        {
+            Name = "Legacy Lane Garage Cleanup",
+            Category = "Garage Cleanup",
+            Parent = "Legacy Lane"
+        };
+        group.Runs.Add(new EventScheduleRun(
+            Start: new DateTime(2026, 7, 26, 8, 0, 0),
+            Duration: TimeSpan.FromDays(3),
+            SourceId: "GC_AmeliaBoulton2024",
+            Parent: "Legacy Lane"));
+
+        var lua = new LuaGeneratorService().GenerateEventScheduleLua(new List<EventScheduleGroup> { group }, "2026-06-25T00:00:00");
+
+        Assert.Contains("parent = \"Legacy Lane\",", lua);
+    }
 }

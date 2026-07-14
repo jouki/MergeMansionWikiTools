@@ -13,6 +13,15 @@ namespace MergeMansionWikiTools.Services;
 public sealed record EventScheduleRun(DateTime Start, TimeSpan Duration, string SourceId, bool OnFireVariant = false, string? Badge = null, string? Parent = null, bool Disabled = false, string? IdenticalTo = null, string? Prefix = null, string? WeekType = null);
 
 /// <summary>
+/// One Auto-Merge Madness window pattern: an anchor <paramref name="Start"/> (UTC), the active
+/// window <paramref name="Duration"/> (the game's Lifetime — ~1h, NOT the longer Schedule.Duration),
+/// and the <paramref name="Interval"/> at which it recurs (daily). The four enabled AutoMerge_Daily
+/// entries tile the day (00/06/12/18 UTC); Module:Events renders only the current-or-next window from
+/// these instead of expanding every occurrence (which would swamp the schedule with ~720 runs).
+/// </summary>
+public sealed record AutoMergeWindow(DateTime Start, TimeSpan Duration, TimeSpan Interval);
+
+/// <summary>
 /// A live-module run that the drift classifier cannot auto-resolve: the dump has a run for the
 /// same event that starts beyond the existing run's duration but within the separate threshold.
 /// A human must decide whether to treat it as the same run (update) or a new separate run.
@@ -55,6 +64,13 @@ public class EventScheduleService
 {
     public string? CreatedAt { get; private set; }
     public List<EventScheduleGroup> Groups { get; } = new();
+
+    /// <summary>
+    /// Auto-Merge Madness daily windows captured from the enabled AutoMerge_* CoreSupportEvents.
+    /// Emitted as a compact <c>autoMerge</c> pattern (not expanded runs) so the widget renders only
+    /// the current/next window. Cleared and repopulated on each <see cref="LoadAsync"/>.
+    /// </summary>
+    public List<AutoMergeWindow> AutoMergeWindows { get; } = new();
 
     /// <summary>Human-readable log of skipped/merged entries and unlocalized names (for UI review).</summary>
     public List<string> Notes { get; } = new();
@@ -156,6 +172,7 @@ public class EventScheduleService
         Groups.Clear();
         Notes.Clear();
         PendingDecisions.Clear();
+        AutoMergeWindows.Clear();
         CreatedAt = null;
 
         await using var stream = File.OpenRead(filePath);
@@ -258,6 +275,22 @@ public class EventScheduleService
                 // DailyTasks* are internal daily-trade CoreSupportEvents (not user-facing) — skip.
                 if (id.StartsWith("DailyTasks", StringComparison.OrdinalIgnoreCase))
                     continue;
+                // Auto-Merge Madness: four enabled AutoMerge_Daily windows tile the day (00/06/12/18
+                // UTC, ~1h each via Lifetime, recurring daily). Expanding them as normal recurring runs
+                // would produce ~720 occurrences over the horizon and swamp the schedule, so instead
+                // capture the compact pattern for a dedicated `autoMerge` field that Module:Events uses
+                // to render only the current/next window. Disabled legacy AutoMerge_01..04 one-offs drop.
+                if (id.StartsWith("AutoMerge", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (isEnabled && !string.IsNullOrEmpty(recurrence))
+                    {
+                        var (_, _, pd, ph, pmin, ps) = ParsePeriod(recurrence);
+                        var interval = new TimeSpan(pd, ph, pmin, ps);
+                        if (interval > TimeSpan.Zero)
+                            AutoMergeWindows.Add(new AutoMergeWindow(start.Value, duration.Value, interval));
+                    }
+                    continue;
+                }
                 // DailyChallenges_NN weekly events ARE user-facing as "The Daily Scoop": each is one run,
                 // its MinigameId (EasyWeek/MedWeek/HardWeek/SuperWeek) gives the week type. DisplayName is
                 // None in the dump, so the name is forced below.
@@ -632,7 +665,7 @@ public class EventScheduleService
     /// or <c>count</c> occurrences; otherwise it is a single occurrence. Mirrors the Lua
     /// <c>expandEntry</c> in Module:Events.
     /// </summary>
-    private static IEnumerable<(DateTime Start, TimeSpan Duration)> ExpandModuleRun(LuaTable run)
+    internal static IEnumerable<(DateTime Start, TimeSpan Duration)> ExpandModuleRun(LuaTable run)
     {
         var startTbl = run.Tbl("start");
         if (startTbl == null) yield break;

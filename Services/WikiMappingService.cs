@@ -21,7 +21,19 @@ public class WikiMappingEntry
     public bool Fueled => GetBool("fueled");
     public bool IgnoreInTask => GetBool("ignoreInTask");
     public bool IsAlias => GetBool("isAlias");
-    public bool IsVariant => GetBool("isVariant");
+    // isVariant is bool OR string: `true` = unlabelled variant (wiki shows A/B/C), a string
+    // (e.g. "Spring") = a named variant — truthy AND carries its display label.
+    public bool IsVariant => GetBool("isVariant") || !string.IsNullOrEmpty(GetString("isVariant"));
+    /// <summary>The label from <c>isVariant = "Spring"</c>; null when the flag is a plain bool.</summary>
+    public string? VariantLabel => GetString("isVariant");
+
+    /// <summary>Explicit display order of this variant among its chain's variants (1-based).
+    /// Null when unset — the renderer falls back to legacy level/name ordering.</summary>
+    public int? VariantOrder => GetDouble("variantOrder") is double d ? (int)d : null;
+
+    /// <summary>When true on any variant of a chain, the Drop Odds rows are grouped by variant
+    /// (secondary: odds descending) instead of odds across all variants.</summary>
+    public bool GroupOdds => GetBool("groupOdds");
 
     /// <summary>Whether a field was explicitly set to nil in the mapping (e.g., fuels = nil).</summary>
     public bool IsNil(string field) => Fields.TryGetValue(field, out var v) && v == null;

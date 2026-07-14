@@ -432,7 +432,19 @@ public class LuaGeneratorService
         /// <summary>Total HowManyCycles for finite generators/spawners (>0). Used by wiki Lua to compute lifetime maxDrops = dropsPerCharge × cycles. 0 = infinite or unset.</summary>
         int Cycles,
         /// <summary>Multi-target decay-roll odds (targetItemType → percent) for a "roller" item. Emitted as decayInto = {{id, value}, …}; the Decay Odds section reads it + the mapping's isVariant flags.</summary>
-        Dictionary<string, double>? DecayIntoOdds = null);
+        Dictionary<string, double>? DecayIntoOdds = null,
+        /// <summary>Chest flag (ChestFeatures.IsChest). Loot lives in ChestConstant (guaranteed ordered payload) or ChestLoot (per-roll odds).</summary>
+        bool IsChest = false,
+        /// <summary>ChestFeatures.HowManyToRoll — number of loot rolls when the chest is opened. 0 = unset.</summary>
+        int ChestRolls = 0,
+        /// <summary>Random/ControlledRandom(Sequence) chest loot odds (itemType → percent per roll). Null for constant boxes.</summary>
+        Dictionary<string, double>? ChestLoot = null,
+        /// <summary>ConstantProducer chest payload — ordered guaranteed (Item, Quantity) list. Order matters, keep as-is.</summary>
+        List<(string Item, int Quantity)>? ChestConstant = null,
+        /// <summary>FishingRodFeatures.IsFishingRod — Lucky Catch rods and Lucky Snap cameras ("photo shot" = cast).
+        /// Their catch odds are emitted through the shared Odds field; this flag lets Lua route them to the
+        /// variant-aware loot layout instead of the generator odds matrix.</summary>
+        bool IsFishingRod = false);
 
     /// <summary>
     /// True iff the item is a "truly infinite producer" — stable main source for its drops/spawns.
@@ -901,7 +913,9 @@ public class LuaGeneratorService
                     item.IsGenerator,
                     item.IsTemporary,
                     chainName,
-                    item.IsGenerator ? item.DropOdds : null,
+                    item.IsGenerator ? item.DropOdds
+                        : item.IsFishingRod ? item.FishingOdds
+                        : null,
                     item.Description,
                     item.HasBubble,
                     item.BubbleDurationMs,
@@ -920,7 +934,13 @@ public class LuaGeneratorService
                     mergeResult,
                     item.DecayAfterLastCycleOdds,
                     cycles,
-                    item.DecayIntoOdds));
+                    item.DecayIntoOdds,
+                    item.IsChest,
+                    item.ChestRollCount,
+                    // constant boxes also carry synthesized 100% odds — suppress those in favour of the ordered payload
+                    item.ChestRewardItems is { Count: > 0 } ? null : item.ChestRewardOdds,
+                    item.ChestRewardItems,
+                    item.IsFishingRod));
             }
         }
         return list;
@@ -941,6 +961,7 @@ public class LuaGeneratorService
             sb.Append($"level = {it.Level}, ");
 
             if (it.IsGenerator) sb.Append("isGen = true, ");
+            if (it.IsFishingRod) sb.Append("isFishingRod = true, ");
             if (it.IsTemporary) sb.Append("isTemp = true, ");
             if (it.SpeedUpCostGems.HasValue) sb.Append($"skipPrice = {it.SpeedUpCostGems.Value}, ");
             if (it.RechargeTimeMs > 0) sb.Append($"rechargeTime = {it.RechargeTimeMs}, ");
@@ -1023,6 +1044,32 @@ public class LuaGeneratorService
                 sb.Append(string.Join(", ", ordered.Select(kv =>
                     $"{{id = \"{Esc(kv.Key)}\", value = {kv.Value.ToString(CultureInfo.InvariantCulture)}}}")));
                 sb.Append("}, ");
+            }
+
+            // Chest loot (ChestFeatures.LootProducer): a constant box emits the ORDERED
+            // guaranteed payload (chestConstant), a random chest per-roll odds (chestLoot);
+            // chestRolls = HowManyToRoll. Rendered by Module:Items chest-loot section.
+            if (it.IsChest)
+            {
+                sb.Append("isChest = true, ");
+                if (it.ChestRolls > 0) sb.Append($"chestRolls = {it.ChestRolls}, ");
+                if (it.ChestConstant is { Count: > 0 })
+                {
+                    sb.Append("chestConstant = {");
+                    sb.Append(string.Join(", ", it.ChestConstant.Select(ci =>
+                        $"{{id = \"{Esc(ci.Item)}\", qty = {ci.Quantity}}}")));
+                    sb.Append("}, ");
+                }
+                else if (it.ChestLoot is { Count: > 0 })
+                {
+                    var orderedChest = it.ChestLoot
+                        .OrderByDescending(kv => kv.Value)
+                        .ThenBy(kv => kv.Key, StringComparer.Ordinal);
+                    sb.Append("chestLoot = {");
+                    sb.Append(string.Join(", ", orderedChest.Select(kv =>
+                        $"{{id = \"{Esc(kv.Key)}\", value = {kv.Value.ToString(CultureInfo.InvariantCulture)}}}")));
+                    sb.Append("}, ");
+                }
             }
 
             // desc — real newlines become Lua string concatenation with 'br'
@@ -1172,7 +1219,12 @@ public class LuaGeneratorService
     /// Format contract (consumed by Module:Events): entries with name/category/runs,
     /// runs as explicit instances { start = {y,m,d,h,min}, durationDays = N }, all UTC.
     /// </summary>
+    /// <summary>Overload without an Auto-Merge pattern (emits no <c>autoMerge</c> block) — used by
+    /// tests and the replay harness that don't exercise Auto-Merge extraction.</summary>
     public string GenerateEventScheduleLua(List<EventScheduleGroup> groups, string? createdAt)
+        => GenerateEventScheduleLua(groups, System.Array.Empty<AutoMergeWindow>(), createdAt);
+
+    public string GenerateEventScheduleLua(List<EventScheduleGroup> groups, IReadOnlyList<AutoMergeWindow> autoMerge, string? createdAt)
     {
         var sb = new StringBuilder();
         sb.AppendLine("-- Module:Datatable/Events");
@@ -1230,6 +1282,12 @@ public class LuaGeneratorService
             sb.AppendLine($"\t\t\tcategory = \"{Esc(g.Category)}\",");
             if (!string.IsNullOrEmpty(g.Badge))
                 sb.AppendLine($"\t\t\tbadge = \"{Esc(g.Badge)}\",");
+            // Garage Cleanups: the seasonal event they accompany. Without this, Module:Events
+            // falls back to date-overlap nesting and a cleanup whose window overlaps TWO seasonal
+            // events attaches to the wrong one (e.g. Legacy Lane GC 26–29 Jul overlaps both
+            // Summer Lucky Snap 23–27 and Legacy Lane 24–29 → nested under whichever comes first).
+            if (!string.IsNullOrEmpty(g.Parent))
+                sb.AppendLine($"\t\t\tparent = \"{Esc(g.Parent)}\",");
             if (!string.IsNullOrEmpty(g.Prefix))
                 sb.AppendLine($"\t\t\tprefix = \"{Esc(g.Prefix)}\",");
             sb.AppendLine("\t\t\truns = {");
@@ -1282,6 +1340,28 @@ public class LuaGeneratorService
         sb.AppendLine("\t\tHard   = { \"Red Chest\", 2 },");
         sb.AppendLine("\t\tSuper  = { \"Fancy Blue Chest\", 2 },");
         sb.AppendLine("\t},");
+
+        // Auto-Merge Madness daily windows (compact pattern, NOT expanded runs). Module:Events
+        // computes the current-or-next window from these and renders one compact row at the very top;
+        // MediaWiki:Events.js recomputes it live (several windows a day → the server snapshot goes stale).
+        if (autoMerge != null && autoMerge.Count > 0)
+        {
+            sb.AppendLine("\t-- Auto-Merge Madness: daily windows during which auto-merge is active (~1h each,");
+            sb.AppendLine("\t-- several times a day). Module:Events renders ONLY the current/next window as a");
+            sb.AppendLine("\t-- compact top row; MediaWiki:Events.js recomputes it live. durationSec/intervalSec");
+            sb.AppendLine("\t-- are seconds; start is the UTC anchor of the first occurrence.");
+            sb.AppendLine("\tautoMerge = {");
+            sb.AppendLine("\t\tname = \"Auto-Merge\",");
+            sb.AppendLine("\t\twindows = {");
+            foreach (var w in autoMerge)
+            {
+                var s = w.Start;
+                sb.AppendLine($"\t\t\t{{ start = {{ year = {s.Year}, month = {s.Month}, day = {s.Day}, hour = {s.Hour}, min = {s.Minute} }}, durationSec = {(long)w.Duration.TotalSeconds}, intervalSec = {(long)w.Interval.TotalSeconds} }},");
+            }
+            sb.AppendLine("\t\t},");
+            sb.AppendLine("\t},");
+        }
+
         sb.AppendLine("}");
         return sb.ToString();
     }

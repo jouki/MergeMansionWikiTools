@@ -98,6 +98,7 @@ public partial class GameDataDumperPage : UserControl
         chkEvUncategorised.IsChecked = _main.Settings.EventUncategorised;
         chkEvSoloMilestone.IsChecked = _main.Settings.EventSoloMilestone;
         chkEvDailyScoop.IsChecked = _main.Settings.EventDailyScoop;
+        chkEvAutoMerge.IsChecked = _main.Settings.EventAutoMerge;
         chkEvMixABooster.IsChecked = _main.Settings.EventMixABooster;
         expEventCategories.IsExpanded = _main.Settings.EventSubExpanded;
         _suppressSave = false;
@@ -630,6 +631,7 @@ public partial class GameDataDumperPage : UserControl
         _main.Settings.EventUncategorised = chkEvUncategorised.IsChecked == true;
         _main.Settings.EventSoloMilestone = chkEvSoloMilestone.IsChecked == true;
         _main.Settings.EventDailyScoop = chkEvDailyScoop.IsChecked == true;
+        _main.Settings.EventAutoMerge = chkEvAutoMerge.IsChecked == true;
         _main.Settings.EventMixABooster = chkEvMixABooster.IsChecked == true;
         _main.SaveSettings();
     }
@@ -655,6 +657,7 @@ public partial class GameDataDumperPage : UserControl
         chkEvMixABooster.IsChecked = value;
         chkEvSoloMilestone.IsChecked = value;
         chkEvDailyScoop.IsChecked = value;
+        chkEvAutoMerge.IsChecked = value;
         _suppressSave = false;
         EventSubCheckbox_Changed(this, new RoutedEventArgs());
     }
@@ -683,6 +686,7 @@ public partial class GameDataDumperPage : UserControl
         chkEvMixABooster.IsChecked = true;
         chkEvSoloMilestone.IsChecked = true;
         chkEvDailyScoop.IsChecked = true;
+        chkEvAutoMerge.IsChecked = true;
         _suppressSave = false;
         EventSubCheckbox_Changed(this, new RoutedEventArgs());
     }
@@ -727,6 +731,7 @@ public partial class GameDataDumperPage : UserControl
         if (chkEvUncategorised.IsChecked == true) f |= EventFilters.Uncategorised;
         if (chkEvSoloMilestone.IsChecked == true) f |= EventFilters.SoloMilestone;
         if (chkEvDailyScoop.IsChecked == true) f |= EventFilters.DailyScoop;
+        if (chkEvAutoMerge.IsChecked == true) f |= EventFilters.AutoMerge;
         if (chkEvMixABooster.IsChecked == true) f |= EventFilters.MixABooster;
         return f;
     }

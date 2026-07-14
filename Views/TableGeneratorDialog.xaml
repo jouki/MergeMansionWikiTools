@@ -312,18 +312,27 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <ui:InfoBar x:Name="warningBar" Grid.Column="0" IsOpen="False"
                             IsClosable="True" VerticalAlignment="Stretch"
                             Margin="0,0,12,0" />
 
-                <ui:Button Grid.Column="1" Content="Copy to Clipboard"
+                <ui:Button Grid.Column="1" Content="Open Edit Page"
+                           x:Name="btnOpenEditPage"
+                           Icon="{ui:SymbolIcon Open24}"
+                           Appearance="Secondary" Click="BtnOpenEditPage_Click"
+                           VerticalAlignment="Stretch"
+                           ToolTip="Open this chain's wiki page in edit mode in your browser (uses the mapped wiki page name)"
+                           ToolTipService.InitialShowDelay="150"
+                           Margin="0,1,8,2" />
+                <ui:Button Grid.Column="2" Content="Copy to Clipboard"
                            x:Name="btnCopy"
                            Appearance="Secondary" Click="BtnCopy_Click"
                            VerticalAlignment="Stretch"
                            Margin="0,1,8,2" IsEnabled="False" />
-                <ui:Button Grid.Column="2" Content="Close"
+                <ui:Button Grid.Column="3" Content="Close"
                            Appearance="Secondary" Click="BtnClose_Click"
                            VerticalAlignment="Stretch"
                            Margin="0,1,0,2" />

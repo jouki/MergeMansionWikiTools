@@ -910,7 +910,12 @@ public partial class MainWindow : FluentWindow
 
                 // Track variant flag (explicit display variant — also defers collision like alias)
                 if (entry.IsVariant)
+                {
                     item.IsVariant = true;
+                    item.MappingVariantLabel = entry.VariantLabel; // isVariant = "Spring" → "Spring"
+                    item.MappingVariantOrder = entry.VariantOrder;
+                    item.MappingGroupOdds = entry.GroupOdds;
+                }
 
                 // Record wiki chainName for Phase 2
                 if (!string.IsNullOrEmpty(entry.ChainName))

@@ -240,7 +240,7 @@ public class AreasService
         return false;
     }
 
-    private static Dictionary<string, int> ParseHotspotRequirements(JsonElement hs)
+    internal static Dictionary<string, int> ParseHotspotRequirements(JsonElement hs)
     {
         var reqs = new Dictionary<string, int>(StringComparer.Ordinal);
 

@@ -10,10 +10,10 @@ namespace GameLogic.Player.Items.Fishing
     [MetaSerializable]
     public class FishingSettings : GameConfigKeyValue<FishingSettings>, IValidatable, IFishingSettings
     {
-        [IgnoreDataMember]
+        [MetaMember(1, (MetaMemberFlags)0)]
         public Dictionary<int, int> SmallFishWaterDropletCounts { get; set; }
 
-        [IgnoreDataMember]
+        [MetaMember(2, (MetaMemberFlags)0)]
         public Dictionary<int, int> NonFishWaterDropletCounts { get; set; }
 
         [MetaMember(3, (MetaMemberFlags)0)]

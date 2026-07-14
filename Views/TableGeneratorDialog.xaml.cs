@@ -21,6 +21,7 @@ public partial class TableGeneratorDialog : FluentWindow
     private readonly ParsedChain _chain;
     private ParsedChain _effectiveChain;   // filtered chain for generation
     private string _tableName;
+    private string _wikiName = "";   // resolved wiki page name (honours chain→chainName mapping)
     private string? _wikiNameWarning;
     private List<LuaArea>? _areas;
     private EventService? _eventService;
@@ -89,8 +90,10 @@ public partial class TableGeneratorDialog : FluentWindow
         chkIncludeStatistics.IsChecked = main.Settings.TableGeneratorIncludeStatistics;
 
         // Infobox Options defaults (mirror InfoboxGeneratorDialog ctor behavior):
-        // KeepFullName auto-on for parenthetical non-event chains; others off by default.
-        chkInfoboxKeepFullName.IsChecked = chain.DisplayName.Contains('(') && !chain.IsEventChain;
+        // KeepFullName auto-on for ANY parenthetical chain — the "(Event)" suffix is disambiguation that
+        // keeps names unique across chains, so the gallery image filename must carry it to hit the right
+        // File pages (event items were wrongly stripped → showed a same-base-name chain's images).
+        chkInfoboxKeepFullName.IsChecked = chain.DisplayName.Contains('(');
         // Visibility tied to Infobox Section checkbox
         UpdateInfoboxOptionsVisibility();
 
@@ -114,15 +117,15 @@ public partial class TableGeneratorDialog : FluentWindow
         chkIncludeUses.IsChecked = hasUses && main.Settings.TableGeneratorIncludeUses;
 
         // Kick off async Gameplay Tips fetch (page name = resolved wiki chain name)
-        var wikiName = probeGenerator.GetWikiChainName(chain);
-        _ = FetchGameTipsAsync(wikiName);
+        _wikiName = probeGenerator.GetWikiChainName(chain);
+        _ = FetchGameTipsAsync(_wikiName);
 
         // Autocomplete for the editable output box. Current chain name set immediately so the
         // {{Item/Group|… hardcoded shortcut works from the first keystroke. The larger chain-name
         // list is sorted off-thread (a few thousand entries) — autocomplete is functional for
         // templates before it finishes, then transparently gains item suggestions.
         _autocomplete = new WikitextAutocomplete(txtOutput);
-        _autocomplete.SetCurrentChainName(wikiName);
+        _autocomplete.SetCurrentChainName(_wikiName);
         // Parenthetical chain (e.g. "Tools (Beach Shack)") → DisplayTitle vardefine is emitted
         // into the infobox section; autocomplete uses this flag to auto-inject
         // |displayName={{#var:DisplayTitle}} when closing Item-shape templates with }}.
@@ -912,4 +915,33 @@ public partial class TableGeneratorDialog : FluentWindow
     }
 
     private void BtnClose_Click(object sender, RoutedEventArgs e) => Close();
+
+    // Opens the chain's wiki page directly in edit mode in the default browser. The page name is the
+    // RESOLVED wiki chain name (`GetWikiChainName`), so a chain mapped to a different chainName opens
+    // the correct page (not the raw ConfigKey/display name).
+    private void BtnOpenEditPage_Click(object sender, RoutedEventArgs e)
+    {
+        var pageName = _wikiName;
+        if (string.IsNullOrWhiteSpace(pageName))
+        {
+            warningBar.Title = "No wiki page name";
+            warningBar.Message = "Could not resolve a wiki page name for this chain.";
+            warningBar.Severity = InfoBarSeverity.Warning;
+            warningBar.IsOpen = true;
+            return;
+        }
+        try
+        {
+            var url = "https://merge-mansion.fandom.com/wiki/"
+                + Uri.EscapeDataString(pageName.Replace(' ', '_')) + "?action=edit";
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(url) { UseShellExecute = true });
+        }
+        catch (Exception ex)
+        {
+            warningBar.Title = "Could not open edit page";
+            warningBar.Message = ex.Message;
+            warningBar.Severity = InfoBarSeverity.Error;
+            warningBar.IsOpen = true;
+        }
+    }
 }

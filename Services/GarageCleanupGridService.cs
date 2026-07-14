@@ -253,11 +253,17 @@ public sealed class GarageCleanupGridService
 
     /// <summary>Builds the GC <see cref="EventScheduleGroup"/>s for Module:Datatable/Events (A3c). For each base
     /// name: sort airings chronologically, run <see cref="BuildEventRuns"/> (computes <c>identicalTo</c> against
-    /// the earliest identical-grid holder), and emit ONE group (Category "Garage Cleanup", no Parent — the parent
-    /// is derived from the name) whose runs carry Start, Duration (from DurationDays), Disabled, and IdenticalTo
-    /// ("DD.MM.YYYY", null for the grid holder). This replaces the old <c>garageCleanupRuns</c> table (A4).</summary>
+    /// the earliest identical-grid holder), and emit ONE group (Category "Garage Cleanup") whose runs carry Start,
+    /// Duration (from DurationDays), Disabled, and IdenticalTo ("DD.MM.YYYY", null for the grid holder). The
+    /// group's <see cref="EventScheduleGroup.Parent"/> is the accompanying seasonal event, recovered by stripping
+    /// the " Garage Cleanup" suffix from the base name (the name was originally built as
+    /// <c>&lt;seasonalName&gt; + " Garage Cleanup"</c>, so this yields exactly that seasonal event's Name).
+    /// Module:Events nests the cleanup under it via the explicit <c>parent</c> field — WITHOUT it the widget
+    /// falls back to date-overlap and mis-nests a cleanup whose window overlaps two seasonal events.
+    /// This replaces the old <c>garageCleanupRuns</c> table (A4).</summary>
     public List<EventScheduleGroup> BuildGcEventGroups(Dictionary<string, List<GcAiring>> mergedAirings)
     {
+        const string gcSuffix = " Garage Cleanup";
         var groups = new List<EventScheduleGroup>();
         foreach (var (baseName, airings) in mergedAirings)
         {
@@ -266,7 +272,14 @@ public sealed class GarageCleanupGridService
             var runs = BuildEventRuns(ordered.Select(a => (a.Start, a.Grid)).ToList());
             var idByStart = runs.ToDictionary(r => r.Start, r => r.IdenticalTo);
 
-            var group = new EventScheduleGroup { Name = baseName, Category = "Garage Cleanup" };
+            // Recover the seasonal parent from the display name; blank (a generic "Garage Cleanup" with no
+            // seasonal host) → null, so no parent is emitted and the widget gives it its own segment.
+            var parent = baseName.EndsWith(gcSuffix, StringComparison.Ordinal)
+                ? baseName[..^gcSuffix.Length].Trim()
+                : null;
+            if (string.IsNullOrEmpty(parent)) parent = null;
+
+            var group = new EventScheduleGroup { Name = baseName, Category = "Garage Cleanup", Parent = parent };
             foreach (var a in ordered)
                 group.Runs.Add(new EventScheduleRun(
                     a.Start, TimeSpan.FromDays(a.DurationDays), "gc",

@@ -9,7 +9,10 @@ public class InfoboxGeneratorOptions
     public bool IsStarter { get; set; }
     public bool IsPoints { get; set; }
     public bool IsDepleting { get; set; }   // manual override
-    public bool KeepFullName { get; set; }  // keep parenthetical in title
+    // Keep the parenthetical (event) disambiguation in the gallery image filename + TaskLink so they
+    // resolve to THIS chain's File pages, not a same-base-name chain's. Does NOT change the visible
+    // title (title1 is always {{#var:DisplayTitle}} = stripped). Default on for any parenthetical chain.
+    public bool KeepFullName { get; set; }
     public bool HardcodeGalleryImage { get; set; } // use item name instead of {{PAGENAME}} in gallery
     public string? EventName { get; set; }  // when non-null, prepended as {{#vardefine:EventName|...}} above the Infobox
 }
@@ -348,11 +351,15 @@ public class InfoboxGeneratorService
                     continue;
 
                 // Drop/Spawn sources (incl. ChestFeatures.LootProducer for chests like
-                // Brown Chest, Mystery Chest, Reward Boxes — items they drop on opening).
+                // Brown Chest, Mystery Chest, Reward Boxes — items they drop on opening,
+                // and FishingRodFeatures — Lucky Snap camera catches + droplet side-drops).
                 bool drops = (item.DropOdds?.Keys.Any(k => myItemTypes.Contains(k)) == true) ||
                              (item.SpawnOdds?.Keys.Any(k => myItemTypes.Contains(k)) == true) ||
                              (item.SpawnItemType != null && myItemTypes.Contains(item.SpawnItemType)) ||
-                             (item.ChestRewardOdds?.Keys.Any(k => myItemTypes.Contains(k)) == true);
+                             (item.ChestRewardOdds?.Keys.Any(k => myItemTypes.Contains(k)) == true) ||
+                             (item.FishingOdds?.Keys.Any(k => myItemTypes.Contains(k)) == true) ||
+                             (!string.IsNullOrEmpty(item.FishingDropletConfigKey)
+                                 && chain.Items.Any(mi => mi.NumericConfigKey == item.FishingDropletConfigKey));
 
                 // Sink reward source (other chain transforms INTO this chain's items)
                 bool transforms = item.IsSink && !IsSinkSuppressed(item)
@@ -508,6 +515,17 @@ public class InfoboxGeneratorService
             if (item.DropOdds != null)  foreach (var k in item.DropOdds.Keys)  allOdds.Add(k);
             if (item.SpawnOdds != null) foreach (var k in item.SpawnOdds.Keys) allOdds.Add(k);
             if (item.SpawnItemType != null) allOdds.Add(item.SpawnItemType);
+            // Fishing-rod catches (Lucky Snap cameras, Lucky Catch rods) — same drops the
+            // Merge Stages Drops cell lists; without this the camera's infobox has no drops.
+            if (item.FishingOdds != null) foreach (var k in item.FishingOdds.Keys) allOdds.Add(k);
+            // Droplet side-drop (failed photo / water droplet): a NUMERIC ConfigKey → resolve
+            // to the owning item's ItemType so it groups like any other drop.
+            if (!string.IsNullOrEmpty(item.FishingDropletConfigKey))
+            {
+                var dropletItem = allChains.SelectMany(c => c.Items)
+                    .FirstOrDefault(i => i.NumericConfigKey == item.FishingDropletConfigKey);
+                if (!string.IsNullOrEmpty(dropletItem?.ItemType)) allOdds.Add(dropletItem!.ItemType);
+            }
             // OrderFeatures rewards (e.g. Distillation Apparatus task rewards = Perfumes / Perfume Collection)
             if (item.OrderTasks != null)
                 foreach (var t in item.OrderTasks)

@@ -226,7 +226,7 @@ namespace GameLogic.Player.Items
         [MetaMember(41, (MetaMemberFlags)0)]
         private FramesFeatures _FramesFeatures;
         [IgnoreDataMember]
-        public IFishingRodFeatures FishingRodFeatures { get; }
+        public IFishingRodFeatures FishingRodFeatures => _FishingRodFeatures;
 
         [IgnoreDataMember]
         public IWeightFeatures WeightFeatures { get; }

@@ -529,6 +529,35 @@ internal static class SpriteMetadataService
     }
 
     /// <summary>
+    /// Resolves the exported PNG (base name, no extension) that actually holds a
+    /// skeleton's item sprites. PoolConfig gives UNITY texture names, but the extractor
+    /// may have stored the texture under a suffixed filename (cross-bundle name
+    /// collisions, e.g. "LS_Common_HoodedWarbler" → "LS_Common_HoodedWarbler_LS_Shared_2.png").
+    /// Sprite metadata records the actual exported file per sprite, so
+    /// skeleton → skin sprites → sprite.TextureName gives the real file even when
+    /// "{skeleton}.png" does not exist on disk. Returns null when the skeleton has no
+    /// skin sprites or they all claim the plain skeleton name anyway.
+    /// </summary>
+    public static string? ResolveExportedFileForSkeleton(string exportDir, string skeletonName)
+    {
+        var skins = LoadSkinMappings(exportDir);
+        var spriteNames = skins
+            .Where(m => string.Equals(m.SkeletonName, skeletonName, StringComparison.OrdinalIgnoreCase))
+            .Select(m => m.SpriteName)
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+        if (spriteNames.Count == 0) return null;
+
+        var sprites = Load(exportDir);
+        return sprites
+            .Where(s => spriteNames.Contains(s.Name)
+                && !string.Equals(s.TextureName, skeletonName, StringComparison.OrdinalIgnoreCase))
+            .GroupBy(s => s.TextureName, StringComparer.OrdinalIgnoreCase)
+            .OrderByDescending(g => g.Count())
+            .Select(g => g.Key)
+            .FirstOrDefault();
+    }
+
+    /// <summary>
     /// Reverse lookup: given a texture/skeleton name, find chains that use it.
     /// Returns the SkinNames defined in the skeleton, which can be matched against chain items.
     /// </summary>

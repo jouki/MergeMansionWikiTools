@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -633,6 +634,7 @@ public partial class WikiDataParserPage
                 + (gcVariousWritten ? $" + Datatable/Various (grids, +{gcWritten} GC airing(s))." : ".")
                 + gcPagesSummary,
                 InfoBarSeverity.Success);
+            _autoRefreshAfterPush = true;   // re-generate below so the changelog reflects the pushed state
         }
         catch (WikiEditConflictException ex)
         {
@@ -641,6 +643,7 @@ public partial class WikiDataParserPage
             ShowInfo($"⚠ {ex.Message}", InfoBarSeverity.Warning);
             // Invalidate the pending state so the stale content can't be pushed again by accident.
             _lastEventsLua = null;
+            _lastEventsChanges = null;
             _pendingEventsExisting = null;
             _pendingVariousContent = null;
             _pendingEventsBaseTs = null;
@@ -658,7 +661,20 @@ public partial class WikiDataParserPage
             SetGenerateButtonsEnabled(true);
             UpdateEventsWikiButtonState();
         }
+
+        // Auto-refresh: after a successful push the live modules changed, so re-generate to refresh the
+        // changelog to the post-push state (parents now live, resolved GC versions now present). Without
+        // this the preview keeps showing the stale pre-push diff until the user regenerates by hand.
+        if (_autoRefreshAfterPush)
+        {
+            _autoRefreshAfterPush = false;
+            ShowInfo("Refreshing changelog from the updated wiki…", InfoBarSeverity.Informational);
+            BtnGenerateEvents_Click(this, new RoutedEventArgs());
+        }
     }
+
+    // Set true by a successful Events push so the finally-block can trigger a regenerate (auto-refresh).
+    private bool _autoRefreshAfterPush;
 
     /// <summary>
     /// (2b page-edit) Refreshes the <c>== Garage Cleanup ==</c> section on the event pages of the given
@@ -748,10 +764,14 @@ public partial class WikiDataParserPage
 
         var root = new StackPanel { Margin = new Thickness(0, 0, 0, 4) };
 
+        // Year-unresolved GC changes are SKIPPED (nothing written) — they're not changes, they're a
+        // "set the year manually" warning that reappears every push. Exclude them from the change counts
+        // and list them separately below so the changelog only counts what actually gets written.
         int gcNew = _lastGcChanges?.Count(c => c.Action == GarageCleanupGridService.GridAction.New) ?? 0;
-        int gcSplit = _lastGcChanges?.Count(c => c.Action is GarageCleanupGridService.GridAction.Split
+        int gcSplit = _lastGcChanges?.Count(c => !c.YearUnresolved && c.Action is GarageCleanupGridService.GridAction.Split
             or GarageCleanupGridService.GridAction.AddVersion) ?? 0;
-        int gcNote = _lastGcChanges?.Count(c => c.Action == GarageCleanupGridService.GridAction.NoteIdentical) ?? 0;
+        int gcNote = _lastGcChanges?.Count(c => !c.YearUnresolved && c.Action == GarageCleanupGridService.GridAction.NoteIdentical) ?? 0;
+        int gcSkipped = _lastGcChanges?.Count(c => c.YearUnresolved) ?? 0;
         int gcData = gcNew + gcSplit;
         bool gcRewards = _lastGcRewardCount > 0;
         bool hasVarious = _pendingVariousContent != null;
@@ -768,11 +788,23 @@ public partial class WikiDataParserPage
             Background = (Brush)FindResource("ControlStrokeColorDefaultBrush")
         });
 
+        // Events schedule change summary (new events / new runs / field changes such as the GC parent).
+        var evc = _lastEventsChanges;
+        int evNewEvents = evc?.NewEvents.Count ?? 0;
+        int evNewRuns = evc?.NewRuns.Count ?? 0;
+        int evFields = evc?.FieldChanges.Count ?? 0;
+        int evRemoved = (evc?.RemovedEvents.Count ?? 0) + (evc?.RemovedRuns.Count ?? 0);
+        bool evHasChanges = evc?.HasChanges == true;
+
         AddDialogStepCard(root,
             moduleExists ? "📝" : "➕",
             $"{(moduleExists ? "Update" : "Create")} {EventsModuleTitle}",
             $"{lineCount} lines · {sizeStr}",
-            moduleExists ? "Overwrite existing module — historical runs already merged, nothing dropped" : "New data module",
+            !moduleExists ? "New data module"
+                : evHasChanges
+                    ? $"{evNewEvents} new event(s) · {evNewRuns} new run(s) · {evFields} field change(s)"
+                        + (evRemoved > 0 ? $" · {evRemoved} removed" : "")
+                    : "No schedule changes — historical runs preserved, nothing dropped",
             "https://merge-mansion.fandom.com/wiki/" + EventsModuleTitle);
 
         if (hasVarious)
@@ -783,11 +815,13 @@ public partial class WikiDataParserPage
             if (gcRewards) d1Parts.Add($"{_lastGcRewardCount} reward table(s)");
             AddDialogStepCard(root, "📝", "Update Module:Datatable/Various",
                 (d1Parts.Count > 0 ? "Update " + string.Join(" · ", d1Parts) : "Update Garage Cleanup data"),
-                "Historical year-suffixed grids preserved" + (gcNote > 0 ? $" · {gcNote} re-air identical to an older year (page note only)" : ""),
+                gcNote > 0 ? $"{gcNote} re-air identical to an older year (page note only)" : null,
                 "https://merge-mansion.fandom.com/wiki/Module:Datatable/Various");
         }
 
         var changeParts = new List<string>();
+        if (evHasChanges)
+            changeParts.Add($"{evNewEvents} new · {evNewRuns} run · {evFields} field event schedule change(s)");
         if (gcData + gcNote > 0) changeParts.Add($"{gcNew} new · {gcSplit} split · {gcNote} note GC grid(s)");
 
         if (changeParts.Count > 0)
@@ -798,29 +832,125 @@ public partial class WikiDataParserPage
                 Margin = new Thickness(0, 10, 0, 4)
             });
 
+        // ── Events schedule: semantic change list + collapsible raw diff ──
+        if (evHasChanges && evc != null)
+        {
+            static string Ymd(DateTime d) => d.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+            static string Dur(TimeSpan t) => $"+{(int)Math.Round(t.TotalDays)}d";
+            static string Range(DateTime? a, DateTime? b) =>
+                a == null ? "no runs"
+                : b == null || a == b ? Ymd(a.Value)
+                : $"{Ymd(a.Value)} → {Ymd(b.Value)}";
+
+            var evContent = new StackPanel { Margin = new Thickness(18, 2, 0, 4) };
+
+            // Green (added) / red (removed) rows with a faint tinted background — same colours as the
+            // side-by-side diff views (DiffViewHelper), so the change list reads like a diff.
+            Border DiffRow(Brush? bg)
+            {
+                var b = new Border
+                {
+                    Background = bg, CornerRadius = new CornerRadius(3),
+                    Padding = new Thickness(6, 2, 6, 2), Margin = new Thickness(0, 1, 0, 1)
+                };
+                evContent.Children.Add(b);
+                return b;
+            }
+            void Added(string text) => DiffRow(DiffViewHelper.AddedBackground).Child = new WpfTextBlock
+                { Text = text, FontSize = 11, Foreground = DiffViewHelper.AddedForeground, TextWrapping = TextWrapping.Wrap };
+            void Removed(string text) => DiffRow(DiffViewHelper.RemovedBackground).Child = new WpfTextBlock
+                { Text = text, FontSize = 11, Foreground = DiffViewHelper.RemovedForeground, TextWrapping = TextWrapping.Wrap };
+            // A value change: label neutral, old value red, new value green — inline, one row.
+            void Changed(string label, string oldVal, string newVal)
+            {
+                var tb = new WpfTextBlock { FontSize = 11, Foreground = secondary, TextWrapping = TextWrapping.Wrap };
+                tb.Inlines.Add(new System.Windows.Documents.Run(label));
+                tb.Inlines.Add(new System.Windows.Documents.Run(oldVal) { Foreground = DiffViewHelper.RemovedForeground });
+                tb.Inlines.Add(new System.Windows.Documents.Run(" → ") { Foreground = secondary });
+                tb.Inlines.Add(new System.Windows.Documents.Run(newVal) { Foreground = DiffViewHelper.AddedForeground });
+                DiffRow(null).Child = tb;
+            }
+
+            foreach (var e in evc.NewEvents)
+                Added($"+ new event: {e.Name} ({e.RunCount} run(s), {Range(e.FirstStart, e.LastStart)})");
+            foreach (var r in evc.NewRuns)
+                Added($"+ new run: {r.EventName} — {Ymd(r.Start)} ({Dur(r.Duration)})");
+            foreach (var f in evc.FieldChanges)
+            {
+                var at = f.RunStart is { } rs ? $" @ {Ymd(rs)}" : "";
+                if (string.IsNullOrEmpty(f.OldValue))          // field first written (e.g. GC parent) = an ADD
+                    Added($"+ {f.Field} set: {f.EventName}{at} → {f.NewValue}");
+                else if (string.IsNullOrEmpty(f.NewValue))     // field removed
+                    Removed($"− {f.Field} cleared: {f.EventName}{at} (was {f.OldValue})");
+                else                                           // value changed → old red, new green inline
+                    Changed($"~ {f.Field}: {f.EventName}{at} — ", f.OldValue, f.NewValue);
+            }
+            foreach (var e in evc.RemovedEvents)
+                Removed($"− removed event: {e.Name} ({e.RunCount} run(s))");
+            foreach (var r in evc.RemovedRuns)
+                Removed($"− removed run: {r.EventName} — {Ymd(r.Start)}");
+
+            AddCollapsibleSection(root,
+                $"Events schedule ({evNewEvents} new · {evNewRuns} run · {evFields} field"
+                    + (evRemoved > 0 ? $" · {evRemoved} removed)" : ")"),
+                gold, secondary, evContent, defaultExpanded: true);
+        }
+
         if (gcData + gcNote > 0 && _lastGcChanges != null)
         {
             var gcContent = new StackPanel { Margin = new Thickness(18, 2, 0, 4) };
-            void Line(string text) => gcContent.Children.Add(new WpfTextBlock
-                { Text = text, FontSize = 11, Foreground = tertiary, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 1, 0, 1) });
+            void Added(string text) => gcContent.Children.Add(new Border
+            {
+                Background = DiffViewHelper.AddedBackground, CornerRadius = new CornerRadius(3),
+                Padding = new Thickness(6, 2, 6, 2), Margin = new Thickness(0, 1, 0, 1),
+                Child = new WpfTextBlock { Text = text, FontSize = 11, Foreground = DiffViewHelper.AddedForeground, TextWrapping = TextWrapping.Wrap }
+            });
+            void Note(string text) => gcContent.Children.Add(new WpfTextBlock
+                { Text = text, FontSize = 11, Foreground = tertiary, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 1, 0, 1) });
 
-            foreach (var c in _lastGcChanges.Where(c => c.Action == GarageCleanupGridService.GridAction.Split))
-                Line(c.YearUnresolved
-                    ? $"⚠ split: {c.EventName} — year unresolved from Datatable/Events (skipped, set manually)"
-                    : $"⟲ split: {c.EventName} — plain → ({c.OldYear}) · new ({c.NewYear})  [{c.Detail}]");
-            foreach (var c in _lastGcChanges.Where(c => c.Action == GarageCleanupGridService.GridAction.AddVersion))
-                Line(c.YearUnresolved
-                    ? $"⚠ add: {c.EventName} — year unresolved from Datatable/Events (skipped, set manually)"
-                    : $"＋ version: {c.EventName} ({c.NewYear})  [{c.Detail}]");
-            foreach (var c in _lastGcChanges.Where(c => c.Action == GarageCleanupGridService.GridAction.NoteIdentical))
-                Line($"≡ note: {c.EventName} — {c.NewYear} identical to {c.IdenticalToYear} (page note only)");
+            // Only WRITTEN changes here (year-resolved). Split migrates plain → (oldYear) + adds (newYear).
+            foreach (var c in _lastGcChanges.Where(c => !c.YearUnresolved && c.Action == GarageCleanupGridService.GridAction.Split))
+                Added($"+ version: {c.EventName} — split into ({c.OldYear}) + ({c.NewYear})  [{c.Detail}]");
+            foreach (var c in _lastGcChanges.Where(c => !c.YearUnresolved && c.Action == GarageCleanupGridService.GridAction.AddVersion))
+                Added($"+ version: {c.EventName} ({c.NewYear})  [{c.Detail}]");
+            foreach (var c in _lastGcChanges.Where(c => !c.YearUnresolved && c.Action == GarageCleanupGridService.GridAction.NoteIdentical))
+                Note($"≡ note: {c.EventName} — {c.NewYear} identical to {c.IdenticalToYear} (page note only)");
             foreach (var c in _lastGcChanges.Where(c => c.Action == GarageCleanupGridService.GridAction.New))
-                Line($"+ new: {c.EventName}");
+                Added($"+ new: {c.EventName}");
 
             AddCollapsibleSection(root, $"Garage Cleanup grids ({gcNew} new · {gcSplit} split · {gcNote} note)", gold, secondary, gcContent);
         }
 
-        return root;
+        // Year-unresolved GC grids: NOT written (skipped) — surfaced separately as a persistent
+        // "needs manual attention" note so they don't masquerade as per-push changes.
+        if (gcSkipped > 0 && _lastGcChanges != null)
+        {
+            var skipContent = new StackPanel { Margin = new Thickness(18, 2, 0, 4) };
+            foreach (var c in _lastGcChanges.Where(c => c.YearUnresolved))
+                skipContent.Children.Add(new WpfTextBlock
+                {
+                    // Detail = FirstDifference(dump, live wiki grid) — "wiki → dump" for the first diverging cell.
+                    // Surfaced so the actual mismatch (often just a chain-name resolution difference, wiki → dump)
+                    // is visible instead of the vague "year unresolved".
+                    Text = $"⚠ {c.EventName} — grid differs from wiki"
+                        + (string.IsNullOrEmpty(c.Detail) ? "" : $": {c.Detail}")
+                        + "; not written (year unresolved) — resolve on the wiki manually.",
+                    FontSize = 11, Foreground = tertiary, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 1, 0, 1)
+                });
+            AddCollapsibleSection(root,
+                $"⚠ Needs manual attention — {gcSkipped} GC grid(s) not written (year unresolved)",
+                new SolidColorBrush(Color.FromRgb(0xC9, 0x8A, 0x2B)), secondary, skipContent);
+        }
+
+        // Scroll the whole preview so a long change list (e.g. many GC parents set) can't hide behind
+        // the dialog's action buttons. Capped below the dialog's own 88% so title + buttons stay visible.
+        return new ScrollViewer
+        {
+            Content = root,
+            MaxHeight = SystemParameters.WorkArea.Height * 0.72,
+            VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+            HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled
+        };
     }
 
     /// <summary>
@@ -1145,7 +1275,13 @@ public partial class WikiDataParserPage
                     {
                         foreach (var id in _lastMappingHandledIds)
                         {
-                            // Try to extract chainName from the patched mapping content
+                            // Only report mapping-handled ids whose mapping entry ACTUALLY changes
+                            // this run (got enriched with new fields). Items already fully covered by
+                            // an existing mapping override (e.g. the CBE_SweetMess_Points_* point
+                            // items, whose category localization is permanently #missing#) are pure
+                            // no-ops — mapping module isn't re-posted for them, nothing changes on the
+                            // wiki. Listing them every run as "archived" was misleading noise.
+                            if (!enrichedInners.ContainsKey(id)) continue;
                             var chain = ExtractChainNameFromEntry(_lastWikiItemEntries.GetValueOrDefault(id, ""));
                             archivedList.Add(new ArchivedEntry(id, "mapping", chain));
                         }

@@ -18,6 +18,12 @@ internal static class DiffViewHelper
     private static readonly Brush BrushAddedFg = new SolidColorBrush(Color.FromRgb(0x40, 0xD0, 0x40));
     private static readonly Brush BrushRemovedFg = new SolidColorBrush(Color.FromRgb(0xE0, 0x50, 0x50));
 
+    /// <summary>Shared diff colors so other views (e.g. the Events change list) match the diff look.</summary>
+    public static Brush AddedForeground => BrushAddedFg;
+    public static Brush RemovedForeground => BrushRemovedFg;
+    public static Brush AddedBackground => BrushAddedBg;
+    public static Brush RemovedBackground => BrushRemovedBg;
+
     /// <summary>Fills the two panels with aligned diff rows (placeholders keep the sides in sync).</summary>
     public static void BuildDiffView(Panel left, Panel right, List<DiffLine> diffs)
     {

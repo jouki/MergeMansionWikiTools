@@ -241,7 +241,7 @@ public class DataService
             t.StartsWith("Temp", StringComparison.Ordinal) ||
             t.EndsWith("Temp", StringComparison.Ordinal));
 
-    private ParsedItem? ParseItem(JsonElement item)
+    internal ParsedItem? ParseItem(JsonElement item)
     {
         var pi = new ParsedItem
         {
@@ -424,6 +424,10 @@ public class DataService
         if (item.TryGetProperty("ChestFeatures", out var chest) && GetBool(chest, "IsChest"))
         {
             pi.IsChest = true;
+            if (chest.TryGetProperty("HowManyToRoll", out var rollsEl)
+                && rollsEl.ValueKind == JsonValueKind.Number
+                && rollsEl.TryGetInt32(out var rolls))
+                pi.ChestRollCount = rolls;
             if (chest.TryGetProperty("LootProducer", out var lootProd)
                 && lootProd.ValueKind == JsonValueKind.Object)
             {
@@ -471,6 +475,48 @@ public class DataService
                 if (chestItems != null && chestItems.Count > 0)
                     pi.ChestRewardItems = chestItems;
             }
+        }
+
+        // ── FishingRodFeatures (Lucky Catch rods, Lucky Snap cameras) ──
+        // "Taking a photo" reuses the fishing cast mechanic; catch targets live in
+        // ItemOdds as [{Type: {ItemType,…}, Weight}, …]. Normalize weights → percent.
+        if (item.TryGetProperty("FishingRodFeatures", out var rod) && GetBool(rod, "IsFishingRod"))
+        {
+            pi.IsFishingRod = true;
+            if (rod.TryGetProperty("ItemOdds", out var rodOdds) && rodOdds.ValueKind == JsonValueKind.Array)
+            {
+                var weighted = new List<(string ItemType, double Weight)>();
+                foreach (var entry in rodOdds.EnumerateArray())
+                {
+                    if (entry.ValueKind != JsonValueKind.Object) continue;
+                    string? target = entry.TryGetProperty("Type", out var t) && t.ValueKind == JsonValueKind.Object
+                        ? GetString(t, "ItemType")
+                        : null;
+                    var weight = GetDouble(entry, "Weight");
+                    if (!string.IsNullOrEmpty(target) && weight > 0)
+                        weighted.Add((target, weight));
+                }
+                var total = weighted.Sum(w => w.Weight);
+                if (total > 0)
+                {
+                    pi.FishingOdds = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase);
+                    foreach (var (target, weight) in weighted)
+                        pi.FishingOdds[target] = pi.FishingOdds.GetValueOrDefault(target) + weight / total * 100.0;
+                }
+            }
+
+            // Side drop scattered by every shot (water droplets / failed photos) —
+            // a NUMERIC item ConfigKey, not an ItemType string.
+            var droplet = GetStringOrNumber(rod, "WaterDropletOverride");
+            if (!string.IsNullOrEmpty(droplet) && droplet != "0")
+                pi.FishingDropletConfigKey = droplet;
+
+            // Droplet COUNT range (dumper-computed from FishingSettings; scales with catch rarity).
+            // Emitted at ITEM level (sibling of FishingRodFeatures), not inside `rod`.
+            if (item.TryGetProperty("WaterDropletCountMin", out var dmin) && dmin.ValueKind == JsonValueKind.Number)
+                pi.FishingDropletCountMin = dmin.GetInt32();
+            if (item.TryGetProperty("WaterDropletCountMax", out var dmax) && dmax.ValueKind == JsonValueKind.Number)
+                pi.FishingDropletCountMax = dmax.GetInt32();
         }
 
         // ── SinkFeatures (Transformative Item) ──

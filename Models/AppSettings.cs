@@ -4,7 +4,7 @@ namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.24.0";
+    public const string Version = "v0.24.39";
 
     // Full version with build timestamp, e.g. "v0.18.7 (build 20260322-1200)"
     public static string Build { get; } = GetBuild();
@@ -70,6 +70,9 @@ public class AppSettings
     // "Default" — safe algorithm (shows all tasks incl. parent IllustrationTask/CardStack phases).
     // "Experimental" — adds synthetic leaf→parent edges and minigame group bounding rects.
     public string FlowchartAlgorithm { get; set; } = "Default";
+
+    // Chain Browser — show each item's raw ItemType (ID) after its name (global toggle, persisted).
+    public bool ShowItemIds { get; set; } = false;
 
     // Chain Browser filters
     public bool FilterGenerators { get; set; }
@@ -138,6 +141,7 @@ public class AppSettings
     public bool EventUncategorised { get; set; } = true;
     public bool EventSoloMilestone { get; set; } = true;
     public bool EventDailyScoop { get; set; } = true;
+    public bool EventAutoMerge { get; set; } = true;
     public bool EventSubExpanded { get; set; } = false;
 
     // Discord — dump distribution

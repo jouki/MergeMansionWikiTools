@@ -378,12 +378,18 @@
                                     <StackPanel>
                                         <!-- Top controls row -->
                                         <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
-                                            <CheckBox Content="Group Alias Items"
+                                            <CheckBox Content="Group Alias/Variant Items"
                                                       IsChecked="{Binding GroupAliases, Mode=TwoWay}"
                                                       Visibility="{Binding ShowGroupAliasCheckbox,
                                                           Converter={StaticResource BoolToVis}}"
                                                       FontSize="11" Margin="0,0,12,0"
                                                       Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                                            <!-- Global toggle (persisted): show each item's raw ItemType (ID) after its name. -->
+                                            <CheckBox Content="Show IDs"
+                                                      FontSize="11" Margin="0,0,12,0"
+                                                      Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                                      Loaded="ShowIds_Loaded"
+                                                      Click="ShowIds_Click" />
                                             <CheckBox Content="Select All"
                                                       FontSize="11"
                                                       IsChecked="{Binding AllItemsChecked, Mode=TwoWay}"
@@ -442,6 +448,7 @@
                                                             <ColumnDefinition Width="Auto" />
                                                             <ColumnDefinition Width="*" />
                                                             <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition Width="Auto" />
                                                         </Grid.ColumnDefinitions>
 
                                                         <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}"
@@ -465,7 +472,25 @@
                                                                    VerticalAlignment="Center"
                                                                    Tag="{Binding}"
                                                                    Loaded="TxtItemName_Loaded" />
-                                                        <TextBlock Grid.Column="4"
+                                                        <!-- Inline variant editors: label (isVariant = "Spring") + order (variantOrder = N). Empty label = A/B/C. -->
+                                                        <StackPanel Grid.Column="4" Orientation="Horizontal"
+                                                                    Visibility="{Binding IsVariant, Converter={StaticResource BoolToVis}}">
+                                                            <TextBox Text="{Binding VariantOrderEdit, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                                                     Width="34" Height="22" FontSize="11"
+                                                                     Padding="4,0" Margin="0,0,4,0"
+                                                                     VerticalContentAlignment="Center"
+                                                                     ToolTip="Display order (1,2,3…). Empty = default."
+                                                                     KeyDown="VariantLabel_KeyDown"
+                                                                     LostFocus="VariantLabel_LostFocus" />
+                                                            <TextBox Text="{Binding VariantLabelEdit, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                                                     Width="96" Height="22" FontSize="11"
+                                                                     Padding="4,0" Margin="0,0,6,0"
+                                                                     VerticalContentAlignment="Center"
+                                                                     ToolTip="Variant label (e.g. Spring). Empty = A/B/C. Click Save Mapping to publish."
+                                                                     KeyDown="VariantLabel_KeyDown"
+                                                                     LostFocus="VariantLabel_LostFocus" />
+                                                        </StackPanel>
+                                                        <TextBlock Grid.Column="5"
                                                                    Text="{Binding TypeBadge}"
                                                                    Foreground="{DynamicResource TextFillColorTertiaryBrush}" FontSize="9"
                                                                    FontWeight="SemiBold"
@@ -507,10 +532,23 @@
                                                        ToolTipService.ShowOnDisabled="True" />
                                             <ui:Button x:Name="btnToggleVariant" Content="Set as Variant"
                                                        Icon="{ui:SymbolIcon BranchFork24}"
-                                                       Appearance="Secondary" Padding="12,6"
+                                                       Appearance="Secondary" Padding="12,6" Margin="0,0,6,0"
                                                        Visibility="Collapsed"
                                                        Click="BtnToggleVariant_Click"
                                                        ToolTipService.ShowOnDisabled="True" />
+                                            <ui:Button x:Name="btnSaveLabels" Content="Save Mapping"
+                                                       Icon="{ui:SymbolIcon Save24}"
+                                                       Appearance="Secondary" Padding="12,6"
+                                                       Visibility="Collapsed"
+                                                       ToolTip="Publish variant labels and order to the wiki mapping"
+                                                       ToolTipService.InitialShowDelay="0"
+                                                       ToolTipService.ShowOnDisabled="True"
+                                                       Click="BtnSaveVariantLabels_Click" Tag="{Binding}" />
+                                            <CheckBox x:Name="chkGroupOdds" Content="Group Drop Odds by variant"
+                                                      FontSize="11" Margin="10,0,0,0" VerticalAlignment="Center"
+                                                      Visibility="Collapsed"
+                                                      Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                                      Click="ChkGroupOdds_Click" Tag="{Binding}" />
                                         </StackPanel>
                                     </StackPanel>
                                 </Border>

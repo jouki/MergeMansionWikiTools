@@ -339,6 +339,49 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
 
                     return;
                 }
+
+                if (name == "CardStackRef")
+                {
+                    // CardStackRef is now a bare CardStackId reference; the play cards (the
+                    // minigame task's real requirement) live in SharedGameConfig.CardStacks.
+                    // Resolve it and emit the OLD inline shape { Cards: [{ ItemDef: { ItemType },
+                    // Row }] } so AreasService.ParseCardStackCards (row grouping + pair
+                    // cancellation) keeps working unchanged. The bare id alone carries no items,
+                    // which is why minigame tasks (Spy Room, Library, Speakeasy, Lounge) were
+                    // rendering with an empty requirement column. KeyObject is safe here (unlike
+                    // MetaRef.Ref, which throws when the reference is not yet resolved).
+                    var csId = (value as IMetaRef)?.KeyObject as GameLogic.Hotspots.CardStack.CardStackId;
+                    var csInfo = (csId != null && _config.CardStacks != null)
+                        ? _config.CardStacks.GetInfoByKey(csId) as GameLogic.Hotspots.CardStack.CardStackInfo
+                        : null;
+                    if (csInfo?.Cards != null)
+                    {
+                        writer.WritePropertyName(name);
+                        writer.WriteStartObject();
+                        writer.WritePropertyName("Cards");
+                        writer.WriteStartArray();
+                        foreach (var card in csInfo.Cards)
+                        {
+                            writer.WriteStartObject();
+                            writer.WritePropertyName("ItemDef");
+                            writer.WriteStartObject();
+                            writer.WritePropertyName("ItemType");
+                            writer.WriteValue(card.ItemDef?.GetDef(_config)?.ItemType);
+                            writer.WriteEndObject();
+                            writer.WritePropertyName("Row");
+                            writer.WriteValue(card.Row);
+                            writer.WriteEndObject();
+                        }
+                        writer.WriteEndArray();
+                        writer.WriteEndObject();
+                    }
+                    else
+                    {
+                        // No resolvable card stack — keep the bare reference so nothing is lost.
+                        WriteProperty(writer, name, csId, serializer);
+                    }
+                    return;
+                }
             }
 
             base.WriteObjectMember(writer, name, type, value, serializer);
