@@ -397,3 +397,7 @@ _DumpHarness/_test_output*/
 
 # Superpowers plugin scratch (SDD ledger, sub-agent state) — tooling, not project content
 .superpowers/
+
+# Dialogue Codex derived data (regenerable)
+Codex/_cache/
+Codex/viewer.html

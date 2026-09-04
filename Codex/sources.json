@@ -1,0 +1,914 @@
+{
+ "versions": {
+  "22.02.06": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\22.02.06\\com.everywear.game5-22.02.06-APK4Fun.com.apk",
+   "loc": "apk",
+   "embeddedConfig": true,
+   "configArchives": [],
+   "dumps": []
+  },
+  "23.06.02": {
+   "apk": null,
+   "loc": null,
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\23.06.02\\Dump",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "23.09.02": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\23.09.02\\merge-mansion-23-09-02.apk",
+   "loc": "apk",
+   "embeddedConfig": true,
+   "configArchives": [],
+   "dumps": []
+  },
+  "23.11.02": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\23.11.02\\merge-mansion-23-11-02.apk",
+   "loc": "apk",
+   "embeddedConfig": true,
+   "configArchives": [],
+   "dumps": []
+  },
+  "23.12.01": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\23.12.01\\Merge Mansion_ Mystery & Story_23.12.01_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": []
+  },
+  "24.01.01": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\24.01.01\\Merge Mansion_ Mystery & Story_24.01.01_APKPure.apk",
+   "loc": "apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": []
+  },
+  "24.04.01": {
+   "apk": null,
+   "loc": null,
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\24.04.01\\Dump",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "24.05.06": {
+   "apk": null,
+   "loc": null,
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\24.05.06\\Dump",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\24.05.06\\Dump 2",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\24.05.06\\Dump 3",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events - kopie.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "24.07.01": {
+   "apk": null,
+   "loc": null,
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\24.07.01\\Dump",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "24.09.02": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\24.09.02\\Merge Mansion_ Puzzles & Story_24.09.02_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\24.09.02\\Dump",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "24.09.03": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\24.09.03\\Merge Mansion_ Puzzles & Story_24.09.03_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\24.09.03\\Dump",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "24.10.01": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\24.10.01\\Merge Mansion_ Puzzles & Story_24.10.01_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": []
+  },
+  "24.11.02": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\24.11.02\\Merge Mansion_ Puzzles & Story_24.11.02_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\24.11.02\\Dump",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "25.01.03": {
+   "apk": null,
+   "loc": null,
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.01.03\\Dump",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "25.02.01": {
+   "apk": null,
+   "loc": null,
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.02.01\\Dump",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "25.02.02": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.02.02\\Merge Mansion_ Puzzles & Story_25.02.02_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": []
+  },
+  "25.02.03": {
+   "apk": null,
+   "loc": null,
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.02.03\\Dump",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "25.03.01": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.03.01\\UnityDataAssetPack.apk",
+   "loc": "apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": []
+  },
+  "25.03.02": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.03.02\\UnityDataAssetPack.apk",
+   "loc": "apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": []
+  },
+  "25.04.01": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.04.01\\Merge Mansion_ Mystery & Story_25.04.01_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": []
+  },
+  "25.04.02": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.04.02\\Merge Mansion_ Mystery & Story_25.04.02_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.04.02\\Dump",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "25.04.03": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.04.03\\Merge Mansion_ Mystery & Story_25.04.03_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.04.03\\Dump",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "25.05.01": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.05.01\\Merge Mansion_ Mystery & Story_25.05.01_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [
+    "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.05.01\\30D6A7323A8456FC-51448A234D5F61D9",
+    "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.05.01\\3D28A6958C8C566D-F0FA49FA9C5DB45F"
+   ],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.05.01\\Dump",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.05.01\\Dump EXTRA",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "25.06.01": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.06.01\\Merge Mansion_ Mystery & Story_25.06.01_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [
+    "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.06.01\\B08303BA4AFC29FF-C94EBB336F7F2810"
+   ],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.06.01\\Dump",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "25.06.02": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.06.02\\Merge Mansion_ Mystery & Story_25.06.02_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.06.02\\Dump",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "25.07.01": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.07.01\\Merge Mansion_ Mystery & Story_25.07.01_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.07.01\\Dump",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.07.01\\Dump 2",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "25.08.01": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.08.01\\Merge Mansion_ Mystery & Story_25.08.01_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.08.01\\Dump",
+     "files": [
+      "areas.json",
+      "chain_item_odds - kopie.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.08.01\\Dump 2",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "25.08.02": {
+   "apk": null,
+   "loc": null,
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.08.02\\Dump",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "25.09.01": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.09.01\\Merge Mansion_ Mystery & Story_25.09.01_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.09.01\\Dump",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "25.09.02": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.09.02\\Merge Mansion_ Mystery & Story_25.09.02_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.09.02\\Dump",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "25.10.01": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.10.01\\Merge Mansion_ Mystery & Story_25.10.01_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.10.01\\Dump",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "25.10.03": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.10.03\\Merge Mansion_ Mystery & Story_25.10.03_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\25.10.03\\Dump",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "26.01.01": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.01.01\\Merge Mansion_ Puzzles & Story_26.01.01_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": []
+  },
+  "26.01.02": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.01.02\\Merge Mansion_ Mystery & Story_26.01.02_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.01.02\\Dump",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.01.02\\Dump 2",
+     "files": [
+      "areas.json",
+      "chain_item_odds.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "26.02.01": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.02.01\\Merge Mansion_ Puzzles & Story_26.02.01_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.02.01\\Dump",
+     "files": [
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.02.01\\Dump 2",
+     "files": [
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.02.01\\Dump 3",
+     "files": [
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.02.01\\dump test",
+     "files": [
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "events.json",
+      "experimental.json"
+     ]
+    }
+   ]
+  },
+  "26.02.02": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.02.02\\Merge Mansion_ Puzzles & Story_26.02.02_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.02.02\\Dump",
+     "files": [
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "26.02.03": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.02.03\\Merge Mansion_ Puzzles & Story_26.02.03_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.02.03\\Dump",
+     "files": [
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "26.03.01": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.03.01\\Merge Mansion_ Puzzles & Story_26.03.01_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.03.01\\Dump",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.03.01\\Dump 2",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.03.01\\Dump 3",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.03.01\\Dump 4",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.03.01\\Dump 5",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "26.04.01": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.04.01\\Merge Mansion_ Puzzles & Story_26.04.01_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.04.01\\Dump",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.04.01\\Dump 2",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.04.01\\Dump 3",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.04.01\\Dump 4",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.04.01\\Dump 5",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.04.01\\Dump 6",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.04.01\\Dump 6_bkup",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "26.04.02": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.04.02\\Merge Mansion_ Puzzles & Story_26.04.02_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.04.02\\Dump",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "26.05.01": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.05.01\\Merge Mansion_ Puzzles & Story_26.05.01_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.05.01\\Dump",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.05.01\\Dump 2",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.05.01\\Dump 3",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "26.06.01": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.06.01\\Merge Mansion_ Puzzles & Story_26.06.01_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.06.01\\Dump",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "26.06.02": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.06.02\\Merge Mansion_ Puzzles & Story_26.06.02_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.06.02\\Dump",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.06.02\\Dump 2",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.06.02\\Dump 3",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    },
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.06.02\\Dump 4",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    }
+   ]
+  },
+  "26.07.01": {
+   "apk": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.07.01\\Merge Mansion_ Puzzles & Story_26.07.01_APKPure.xapk",
+   "loc": "inner:UnityDataAssetPack.apk",
+   "embeddedConfig": false,
+   "configArchives": [],
+   "dumps": [
+    {
+     "folder": "D:\\_BACKUP_2.0\\Adobe Photoshop - Savy\\Merge Mansion\\APKs\\26.07.01\\Dump",
+     "files": [
+      "Pets.json",
+      "areas.json",
+      "card_collection.json",
+      "chain_item_odds.json",
+      "dialogues.json",
+      "events.json"
+     ]
+    }
+   ]
+  }
+ },
+ "missingMonths": [
+  "2022-03",
+  "2022-04",
+  "2022-05",
+  "2022-06",
+  "2022-07",
+  "2022-08",
+  "2022-09",
+  "2022-10",
+  "2022-11",
+  "2022-12",
+  "2023-01",
+  "2023-02",
+  "2023-03",
+  "2023-04",
+  "2023-05",
+  "2023-07",
+  "2023-08",
+  "2023-10",
+  "2024-02",
+  "2024-03",
+  "2024-06",
+  "2024-08",
+  "2024-12",
+  "2025-11",
+  "2025-12"
+ ]
+}

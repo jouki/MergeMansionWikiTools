@@ -1,0 +1,58 @@
+# -*- coding: utf-8 -*-
+"""codex.json -> Codex/_cache/viewer.html (single-file browser; gitignored). Run: python Codex/build/render_viewer.py"""
+import json
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(__file__))
+import common  # noqa: E402
+import render_md  # noqa: E402
+
+
+def adapt(codex):
+    cur = codex["versions"][-1]
+    chars = codex["characters"]
+    stories, removed = [], []
+    for sid, s in codex["stories"].items():
+        ids = render_md.latest(s["lines"]) or []
+        lines = []
+        for lid in ids:
+            l = codex["lines"].get(lid) or {}
+            sp = render_md.latest(l.get("speaker") or [])
+            st = render_md.latest(l.get("state") or [])
+            texts = [r for r in (l.get("text") or []) if r["value"] not in (None, "")]
+            changes = [{"version": q["from"], "from": p["value"], "to": q["value"]} for p, q in zip(texts[:-1], texts[1:])]
+            lines.append({"id": lid, "speaker": sp, "speakerName": chars.get(sp, {}).get("name", sp) if sp else None,
+                          "state": st if st and st not in ("Default", "NoChange") else None, "text": render_md.latest(l.get("text") or []) or "",
+                          "changes": changes, "firstSeen": (l.get("seen") or {}).get("first")})
+        if s.get("seen") and s["seen"]["last"] != cur:
+            removed.append({"id": sid, "lastSeen": s["seen"]["last"], "lines": [{"id": x["id"], "text": x["text"]} for x in lines]})
+        else:
+            trig = [dict(t) for t in s["triggers"]] or [{"kind": "unknown", "hint": "?"}]
+            for t in trig:
+                if t["kind"] == "itemDiscovered":
+                    t.update({"kind": "item", "event": t.get("chain"), "items": [t.get("itemName") or t.get("item")]})
+            stories.append({"id": sid, "triggers": trig, "lines": lines, "firstSeen": (s.get("seen") or {}).get("first")})
+    n_lines = sum(1 for l in codex["lines"].values() if l["seen"] and l["seen"]["last"] == cur)
+    summary = {"version": cur, "historyVersions": codex["versions"], "lines": n_lines, "stories": len(stories),
+               "characters": len(chars), "unmatchedGroups": len(codex["gaps"]["unknownTriggerStories"]), "removedStories": len(removed)}
+    characters = sorted(({"id": c, "name": d["name"], "lines": d["linesTotal"], "stories": len(d["stories"])} for c, d in chars.items()),
+                        key=lambda x: -x["lines"])
+    return {"summary": summary, "characters": characters, "characterNames": {c: d["name"] for c, d in chars.items()},
+            "stories": stories, "removedStories": removed}
+
+
+def main():
+    codex = common.read_json(os.path.join(common.CODEX, "codex.json"))
+    data = json.dumps(adapt(codex), ensure_ascii=False, separators=(",", ":")).replace("</script", "<\\/script")
+    with open(os.path.join(os.path.dirname(__file__), "viewer_template.html"), encoding="utf-8") as f:
+        tpl = f.read()
+    out = os.path.join(common.CACHE, "viewer.html")
+    os.makedirs(common.CACHE, exist_ok=True)
+    with open(out, "w", encoding="utf-8", newline="\n") as f:
+        f.write(tpl.replace("__DATA__", data))
+    print("viewer:", out, os.path.getsize(out), "bytes")
+
+
+if __name__ == "__main__":
+    main()
