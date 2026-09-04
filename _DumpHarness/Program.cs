@@ -61,6 +61,12 @@ internal static class Program
             // --probe-hotspot-map <xapk|apk|global-metadata.dat> [<HotspotId.cs to diff against>]
             return ProbeHotspotMap(args[1], args.Length >= 3 ? args[2] : null);
         }
+        if (args.Length >= 3 && args[0] == "--dump-loc")
+        {
+            // --dump-loc <mpcOrLFile> <out.json>  — every translation of one language file as JSON.
+            // Accepts a Metaplay L-file (name = ContentHash) or an APK assets/Localizations/en.mpc.
+            return DumpLoc(args[1], args[2]);
+        }
         if (args.Length >= 4 && args[0] == "--probe-loc")
         {
             // --probe-loc <configPath> <languagePath> <regexPattern>
@@ -2913,6 +2919,39 @@ internal static class Program
         }
     }
 
+    private static int DumpLoc(string languagePath, string outPath)
+    {
+        Console.WriteLine("=== DumpLoc ===");
+        Console.WriteLine($"Language: {languagePath}");
+        try
+        {
+            MetaplayCore.Initialize();
+            if (string.IsNullOrEmpty(languagePath) || !File.Exists(languagePath))
+            {
+                Console.Error.WriteLine($"Language file not found: {languagePath}");
+                return 2;
+            }
+            // L-files are named by their ContentHash; an en.mpc pulled out of an APK is not — the hash
+            // is only metadata for ImportBinary, so fall back to ContentHash.None.
+            ContentHash langHash;
+            try { langHash = ContentHash.ParseString(Path.GetFileName(languagePath)); }
+            catch { langHash = ContentHash.None; }
+            var lang = LocalizationLanguage.ImportBinary(langHash, File.ReadAllBytes(languagePath));
+            var dict = new SortedDictionary<string, string>(StringComparer.Ordinal);
+            foreach (var kv in lang.Translations)
+                dict[kv.Key.Value] = kv.Value;
+            Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(outPath)));
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(dict, Newtonsoft.Json.Formatting.Indented);
+            File.WriteAllText(outPath, json, new System.Text.UTF8Encoding(false));
+            Console.WriteLine($"Translations: {dict.Count} -> {outPath}");
+            return 0;
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"FATAL: {ex.GetType().Name}: {ex.Message}");
+            return 1;
+        }
+    }
     private static int DumpChain(string configPath, string languagePath, string outputDir)
     {
         Console.WriteLine("=== DumpHarness --dump-chain (chain_item_odds.json only) ===");
