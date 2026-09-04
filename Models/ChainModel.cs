@@ -312,6 +312,14 @@ public class ParsedItem
     /// </summary>
     public List<(string Item, int Quantity)>? ChestRewardItems { get; set; }
 
+    /// <summary>
+    /// PrefixProducer guaranteed prefix (`ChestFeatures.LootProducer.Prefix`): ordered
+    /// (Item, Quantity) pairs dropped BEFORE the random BaseProducer rolls take over — a
+    /// per-player marker tracks progress, so this is a one-time sequence (e.g. Daily Trades
+    /// card chest: 4× 1★ + 1× 2★ envelope, then random materials). Null when absent.
+    /// </summary>
+    public List<(string Item, int Quantity)>? ChestPrefixItems { get; set; }
+
     // Fishing-rod features — Lucky Catch rods AND Lucky Snap cameras ("taking a photo"
     // reuses the fishing cast mechanic). FishingRodFeatures.ItemOdds carries weighted
     // catch targets; stored here normalized to percentages (itemType → %).
@@ -364,9 +372,23 @@ public class ParsedItem
 
     /// <summary>Full task list with per-task odds, weight, requirements, rewards.
     /// Preserved separately from aggregated OrderRequiredItems/OrderRewardItems so the wiki
-    /// Tasks table generator can render per-task rows (range-collapsing identical tuples
-    /// based on integer slot weights, mimicking Distillation Apparatus wiki style).</summary>
+    /// Tasks table generator can render per-task rows.</summary>
     public List<ParsedTask>? OrderTasks { get; set; }
+
+    /// <summary>OrderProducer wrapper name from JSON: "Constant", "ControlledRandom" or
+    /// "ControlledPredefinedSequence". Decides how the wiki Tasks table is rendered, because the
+    /// wrapper is what determines whether the next order is picked in sequence or rolled:
+    /// <list type="bullet">
+    /// <item><c>ControlledRandom</c> — Produce() rolls through WeightedDistributionStates and
+    /// AdvanceSequenceIndex() is empty, so there is no order and no cycle. OddsWeight is a
+    /// probability weight; the table shows <see cref="ParsedTask.Odds"/> percentages.</item>
+    /// <item><c>Constant</c> / <c>ControlledPredefinedSequence</c> — Produce(orderIndex) indexes
+    /// the task list directly and OrderCount is the task count (never the weight sum), so tasks
+    /// run in declaration order, one row each, repeating after the last one.</item>
+    /// </list>
+    /// Verified against ISIL of 26.05.01 libil2cpp; empty when the JSON had no recognized wrapper.
+    /// </summary>
+    public string OrderProducerKind { get; set; } = "";
 
     /// <summary>Numeric ConfigKey from JSON item (used by SinkFeatures ScoreTargets)</summary>
     public string NumericConfigKey { get; set; } = "";

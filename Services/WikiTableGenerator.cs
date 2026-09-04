@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 using MergeMansionWikiTools.Models;
@@ -108,9 +109,10 @@ public class WikiTableGenerator
         var levelDiffering = new Dictionary<int, HashSet<string>>();
         foreach (var (level, lvlItems) in itemsByLevel)
         {
-            if (lvlItems.Count > 1)
+            var variantSet = VariantSetForLevel(lvlItems);
+            if (variantSet.Count > 1)
             {
-                var diff = GetDifferingColumns(lvlItems);
+                var diff = GetDifferingColumns(variantSet);
                 if (diff.Count > 0)
                     levelDiffering[level] = diff;
             }
@@ -135,7 +137,9 @@ public class WikiTableGenerator
                 foreach (var ch in _data.Chains)
                     foreach (var ci in ch.Items)
                         if (string.Equals(ci.ItemType, targetType, StringComparison.OrdinalIgnoreCase))
-                            if (ch.Items.Count(i => i.Level == ci.Level) > 1)
+                            // same variant rule as the target's own page would apply — an alias
+                            // sharing the target level is not a variant of it
+                            if (VariantSetForLevel(ch.Items.Where(i => i.Level == ci.Level).ToList()).Count > 1)
                             { showTransformsToVariant = true; goto ttVarDone; }
             }
             ttVarDone:;
@@ -340,13 +344,9 @@ public class WikiTableGenerator
 
             var allLevelItems = itemsByLevel.GetValueOrDefault(item.Level) ?? new List<ParsedItem> { item };
 
-            // When a level has explicit isVariant items, THOSE are the variant set: render exactly
-            // them and drop everything else at that level — notably a pure-hide alias like a decay
-            // "roller" (isAlias, not isVariant), which would otherwise appear as a phantom variant.
-            // Levels without any isVariant flag keep the legacy behaviour (all items, incl. aliases).
-            var levelItems = allLevelItems.Any(i => i.IsVariant)
-                ? SortVariants(allLevelItems.Where(i => i.IsVariant))
-                : allLevelItems;
+            // Same rule that drove the detection above — one helper, so what gets counted as a
+            // variant and what gets rendered as one can never drift apart.
+            var levelItems = VariantSetForLevel(allLevelItems);
 
             bool hasSubRows = levelDiffering.ContainsKey(item.Level) && levelItems.Count > 1;
 
@@ -1087,6 +1087,27 @@ public class WikiTableGenerator
                     .ToList();
     }
 
+    /// <summary>
+    /// The items of one level that count as its variants — the single source of truth for both
+    /// variant DETECTION (does this level split?) and RENDERING (which sub-rows come out).
+    /// <list type="bullet">
+    /// <item>Explicit <c>isVariant</c> items present → exactly those, sorted; everything else at
+    /// the level is dropped (e.g. a pure-hide decay "roller" flagged isAlias, not isVariant).</item>
+    /// <item>Otherwise → every non-alias item. An alias is a second ItemType for a row that
+    /// already exists; it feeds cell aggregation and column visibility, but must never split a
+    /// level, however much its data differs (Charred Wood: SaunaCharredWoodReady_01).</item>
+    /// <item>Alias-only level → the aliases themselves, so the level still renders a row.</item>
+    /// </list>
+    /// </summary>
+    internal static List<ParsedItem> VariantSetForLevel(List<ParsedItem> levelItems)
+    {
+        var explicitVariants = levelItems.Where(i => i.IsVariant).ToList();
+        if (explicitVariants.Count > 0) return SortVariants(explicitVariants);
+
+        var nonAlias = levelItems.Where(i => !i.IsAlias).ToList();
+        return nonAlias.Count > 0 ? nonAlias : levelItems;
+    }
+
     /// <summary>Returns the variant letter (A, B, C, ...) if the transform target (sink
     /// reward OR cross-chain merge result) is at a level with multiple variants, or null.</summary>
     private string? GetTransformsToVariantLabel(ParsedItem item, ParsedChain currentChain)
@@ -1100,8 +1121,10 @@ public class WikiTableGenerator
                 foreach (var ci in chain.Items)
                     if (string.Equals(ci.ItemType, targetItemType, StringComparison.OrdinalIgnoreCase))
                     {
-                        var targetLevelItems = chain.Items
-                            .Where(i => i.Level == ci.Level)
+                        // VariantSetForLevel first so an alias on the target level can't invent a
+                        // variant letter; existing OrderBy kept so labels don't shift elsewhere.
+                        var targetLevelItems = VariantSetForLevel(
+                                chain.Items.Where(i => i.Level == ci.Level).ToList())
                             .OrderBy(i => i.ItemType)
                             .ToList();
                         if (targetLevelItems.Count > 1)
@@ -1770,18 +1793,23 @@ public class WikiTableGenerator
     // ── Order Tasks wikitext ─────────────────────────────────────────
     /// <summary>
     /// Generates the "Tasks" section wikitext for an item that has OrderFeatures (e.g.
-    /// Distillation Apparatus, Vending Machine). Mimics the hand-written style on
-    /// Distillation Apparatus wiki page: heading, "fixed order" intro, table with
-    /// `Task | Required... | Reward` columns. Range-collapses consecutive identical
-    /// (Required, Rewards) tuples using cumulative integer slot weights.
+    /// Distillation Apparatus, Vending Machine, Empty Jam Jars). Layout follows
+    /// <see cref="ParsedItem.OrderProducerKind"/>, because the producer wrapper is what decides
+    /// how the game picks the next order:
+    /// <list type="bullet">
+    /// <item><c>ControlledRandom</c> — each order is rolled, so there is neither an order nor a
+    /// cycle. Emits a `Chance | Required… | Reward` table carrying the config percentages.</item>
+    /// <item>everything else — orders run in declaration order and repeat, one row per task.
+    /// Emits `Task | Required… | Reward` numbered 1..N. OddsWeight deliberately does NOT expand
+    /// into cumulative slot ranges: the game indexes the task list directly and its OrderCount is
+    /// the task count, so a Constant producer with weights 3/5/1/1/1/5 still cycles 6 orders.</item>
+    /// </list>
     /// </summary>
     public string? GenerateOrderTasksTable(ParsedItem item)
     {
         if (!item.IsOrder || item.OrderTasks is not { Count: > 0 } tasks) return null;
 
-        // Range collapsing only works when ALL weights are positive integers; otherwise
-        // each task gets its own row labeled by 1-based index.
-        bool allIntWeights = tasks.All(t => t.OddsWeight > 0 && Math.Abs(t.OddsWeight - Math.Round(t.OddsWeight)) < 1e-6);
+        bool isRolled = string.Equals(item.OrderProducerKind, "ControlledRandom", StringComparison.Ordinal);
 
         // Determine column count for "Required" — max # of required slots across tasks.
         int requiredCols = tasks.Max(t => t.Required.Count);
@@ -1789,10 +1817,12 @@ public class WikiTableGenerator
 
         var sb = new StringBuilder();
         sb.AppendLine("=== Tasks ===");
-        sb.AppendLine("The tasks are in a fixed order and repeat once a player completes all the listed tasks.");
+        sb.AppendLine(isRolled
+            ? "The next task is picked at random. Over many tasks the chances even out to the listed values."
+            : "The tasks are in a fixed order and repeat once a player completes all the listed tasks.");
         sb.AppendLine("{| class=\"article-table\"");
         sb.AppendLine("|+ <u>{{PAGENAME}}</u>");
-        sb.AppendLine("! Task");
+        sb.AppendLine(isRolled ? "! Chance" : "! Task");
         if (requiredCols == 1)
             sb.AppendLine("! Item");
         else
@@ -1800,16 +1830,14 @@ public class WikiTableGenerator
                 sb.AppendLine($"! Item {i}");
         sb.AppendLine("! Reward");
 
-        int slotStart = 1;
         for (int i = 0; i < tasks.Count; i++)
         {
             var t = tasks[i];
-            int slotsInThisTask = allIntWeights ? (int)Math.Round(t.OddsWeight) : 1;
-            int slotEnd = slotStart + slotsInThisTask - 1;
 
-            string label = slotsInThisTask == 1
-                ? slotStart.ToString()
-                : $"{slotStart} - {slotEnd}";
+            // Rolled producers label rows by chance; sequential ones by their 1-based position.
+            string label = isRolled
+                ? FormatOddsPercent(t.Odds)
+                : (i + 1).ToString();
 
             sb.AppendLine("|-");
             sb.AppendLine($"! {label}");
@@ -1838,12 +1866,21 @@ public class WikiTableGenerator
                 var rewardParts = t.Rewards.Select(r => FormatItemRef(r.ItemType, r.Amount));
                 sb.AppendLine($"| {string.Join("<br>", rewardParts)}");
             }
-
-            slotStart = slotEnd + 1;
         }
 
         sb.AppendLine("|}");
         return sb.ToString();
+    }
+
+    /// <summary>
+    /// Formats an order task chance for the Tasks table. Config values repeat (4 of 15 weights →
+    /// 26.666…%), so trim to at most two decimals and drop trailing zeros: 60 → "60%",
+    /// 26.666… → "26.67%", 6.666… → "6.67%".
+    /// </summary>
+    private static string FormatOddsPercent(double odds)
+    {
+        var rounded = Math.Round(odds, 2, MidpointRounding.AwayFromZero);
+        return rounded.ToString("0.##", CultureInfo.InvariantCulture) + "%";
     }
 
     /// <summary>
@@ -2074,7 +2111,11 @@ public class WikiTableGenerator
     /// Uses section (== Uses ==). Emits when chain has any downstream consumption:
     /// (1) ItemType referenced in any task.Requirements across all areas,
     /// (2) ItemType referenced in another chain's OrderRequiredItems,
-    /// (3) NumericConfigKey referenced in another chain's SinkRequirementConfigKeys.
+    /// (3) NumericConfigKey referenced in another chain's SinkRequirementConfigKeys,
+    /// (4) chain items drop/decay/merge into ANOTHER chain that tasks require —
+    ///     purely indirect consumption (e.g. Stash of Spare Parts is never a task
+    ///     requirement itself, but its instances are tapped for Machine/Electronic
+    ///     Parts requirements; the Lua solver attributes those uses).
     /// Indirect/transitive uses are computed by the wiki Lua solver itself
     /// ({{#Invoke:Items|GetAllItemUses}}) — this gating only decides whether to emit the section.
     /// </summary>
@@ -2123,7 +2164,31 @@ public class WikiTableGenerator
                 (i.IsOrder && i.OrderRequiredItems != null
                     && i.OrderRequiredItems.Keys.Any(k => myItemTypes.Contains(k))));
 
-        if (!usedInTask && !usedAsRequirement) return null;
+        bool usedAsProducer = false;
+        if (!usedInTask && !usedAsRequirement && areas != null)
+        {
+            var reqTypes = areas.SelectMany(a => a.Tasks)
+                .SelectMany(t => t.Requirements.Keys)
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+            var typeToChain = new Dictionary<string, ParsedChain>(StringComparer.OrdinalIgnoreCase);
+            foreach (var c in allChains)
+                foreach (var it in c.Items)
+                    if (!string.IsNullOrEmpty(it.ItemType))
+                        typeToChain.TryAdd(it.ItemType!, c);
+
+            bool TargetCounts(string? tgt) =>
+                !string.IsNullOrEmpty(tgt)
+                && typeToChain.TryGetValue(tgt!, out var tc) && tc != chain
+                && tc.Items.Any(i => i.ItemType != null && reqTypes.Contains(i.ItemType));
+
+            usedAsProducer = chain.Items.Any(i =>
+                (i.DropOdds?.Keys.Any(TargetCounts) ?? false)
+                || TargetCounts(i.DecayAfterLastCycleItemType)
+                || (i.DecayAfterLastCycleOdds?.Keys.Any(TargetCounts) ?? false)
+                || TargetCounts(i.MergeResultItemType));
+        }
+
+        if (!usedInTask && !usedAsRequirement && !usedAsProducer) return null;
 
         string arg = hardcodedName != null ? $"|{hardcodedName}" : "";
         var sb = new StringBuilder();

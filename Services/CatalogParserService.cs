@@ -109,4 +109,68 @@ internal static class CatalogParserService
         return new CatalogResult(sorted, totalLocations);
     }
 
+    private static readonly System.Text.RegularExpressions.Regex GuidKeyRx =
+        new(@"^[0-9a-fA-F]{32}$", System.Text.RegularExpressions.RegexOptions.Compiled);
+
+    /// <summary>
+    /// Addressables asset GUID → asset name (InternalId file name without extension), e.g.
+    /// "25fb1b52ef24d496d99e97c4a5a529c1" → "AdventCalendar2023_Calendar". Since 26.07.01 the
+    /// PoolConfig stores prefabs as <c>AssetReferenceT</c> (GUID only) instead of a path, so the
+    /// PoolTag → prefab mapping needs this lookup. A GUID key can carry several locations
+    /// (prefab + sub-assets); the <c>.prefab</c> one wins, otherwise the first.
+    /// </summary>
+    public static Dictionary<string, string> BuildGuidToAssetNameMap(string catalogPath)
+    {
+        var bytes = File.ReadAllBytes(catalogPath);
+        ContentCatalogData ccd;
+        using (var ms = new MemoryStream(bytes))
+        {
+            var fileType = AddressablesCatalogFileParser.GetCatalogFileType(ms);
+            ccd = fileType == CatalogFileType.Binary
+                ? AddressablesCatalogFileParser.FromBinaryData(bytes)
+                : AddressablesCatalogFileParser.FromJsonString(File.ReadAllText(catalogPath));
+        }
+
+        // Pass 1: InternalId → ADDRESS name. A location is reachable through several keys: its
+        // GUID and its address (the "Assets/…/X.prefab" string). The address is what the game
+        // (and the pre-26.07.01 prefabRef.Path) used, and it is the skeleton/texture name even
+        // when the prefab FILE was renamed: Pantry → address ".../Pantry_Fruit/Pantry_Fruit.prefab",
+        // InternalId ".../Pantry_Fruit/FirstFloorPantry_Fruit.prefab", texture "Pantry_Fruit.png".
+        var addressByInternalId = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var key in ccd.Resources.Keys)
+        {
+            if (key is not string address || GuidKeyRx.IsMatch(address)
+                || !address.EndsWith(".prefab", StringComparison.OrdinalIgnoreCase)) continue;
+            var addrName = Path.GetFileNameWithoutExtension(address);
+            if (string.IsNullOrEmpty(addrName)) continue;
+            foreach (var rsrc in ccd.Resources[key])
+                if (!string.IsNullOrEmpty(rsrc.InternalId))
+                    addressByInternalId.TryAdd(rsrc.InternalId, addrName);
+        }
+
+        // Pass 2: GUID → name (address name preferred, InternalId file name as fallback)
+        var map = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        int viaAddress = 0;
+        foreach (var key in ccd.Resources.Keys)
+        {
+            if (key is not string guid || !GuidKeyRx.IsMatch(guid)) continue;
+            string? best = null;
+            bool bestIsPrefab = false;
+            foreach (var rsrc in ccd.Resources[key])
+            {
+                var id = rsrc.InternalId;
+                if (string.IsNullOrEmpty(id) || id.StartsWith("http", StringComparison.OrdinalIgnoreCase)) continue;
+                bool isPrefab = id.EndsWith(".prefab", StringComparison.OrdinalIgnoreCase);
+                if (best != null && (bestIsPrefab || !isPrefab)) continue;
+                if (addressByInternalId.TryGetValue(id, out var addrName)) { best = addrName; viaAddress++; }
+                else best = Path.GetFileNameWithoutExtension(id);
+                bestIsPrefab = isPrefab;
+                if (isPrefab) break;
+            }
+            if (!string.IsNullOrEmpty(best)) map[guid] = best;
+        }
+        AppLogger.Info($"[CATALOG] GUID → asset name map: {map.Count} entries ({viaAddress} via address key) from {Path.GetFileName(catalogPath)}");
+        return map;
+    }
+
 }

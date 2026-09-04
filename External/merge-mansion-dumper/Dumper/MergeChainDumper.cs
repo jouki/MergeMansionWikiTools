@@ -32,7 +32,7 @@ namespace merge_mansion_dumper.Dumper
                 Converters =
                 {
                     new MergeMansionJsonConverter(config, Output, _dropsAsPercent),
-                    new StringEnumConverter()
+                    new HotspotAwareStringEnumConverter()
                 }
             };
         }

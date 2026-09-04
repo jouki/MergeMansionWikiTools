@@ -310,14 +310,9 @@ internal static class DiscordDumpService
                               $"The data itself was created at {createdAt}";
 
             // Game Version (game client version, captured from the phone's Unity Analytics at pull time).
-            var gameVersionFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "_DATA",
-                PhoneDetectionService.GameVersionFileName);
-            if (File.Exists(gameVersionFile))
-            {
-                var gv = File.ReadAllText(gameVersionFile).Trim();
-                if (!string.IsNullOrEmpty(gv))
-                    messageText += $"\nGame Version: {gv}";
-            }
+            var gv = PhoneDetectionService.ReadPulledGameVersion();
+            if (!string.IsNullOrEmpty(gv))
+                messageText += $"\nGame Version: {gv}";
             messageText += $"\nMMWT Version: {MergeMansionWikiTools.Models.AppVersion.Version}";
 
             // 3. Resolve channel type and upload

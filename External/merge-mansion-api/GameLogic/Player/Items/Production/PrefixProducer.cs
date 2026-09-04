@@ -17,9 +17,13 @@ namespace GameLogic.Player.Items.Production
         [MetaMember(1, (MetaMemberFlags)0)]
         public string Marker { get; set; } // 0x10
 
+        // Decompiled as private, exposed for the dumper: the PREFIX item sequence produced before
+        // BaseProducer takes over (per-player Marker index tracks progress). Without this the chest
+        // JSON only carried Marker+BaseProducer and the guaranteed prefix drops were invisible
+        // (e.g. Daily Trades card chests: 4x 1-star + 1x 2-star envelopes before the random rolls).
         [MetaMember(2, (MetaMemberFlags)0)]
         [MetaOnMemberDeserializationFailure("FixItemListRef")]
-        private List<ItemDef> Items { get; set; } // 0x18
+        public List<ItemDef> Items { get; set; } // 0x18
 
         [MetaMember(3, (MetaMemberFlags)0)]
         public IItemSpawner BaseProducer { get; set; } // 0x20

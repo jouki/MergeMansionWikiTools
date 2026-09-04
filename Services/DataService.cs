@@ -436,6 +436,12 @@ public class DataService
                 JsonElement src = lootProd;
                 if (lootProd.TryGetProperty("BaseProducer", out var bp) && bp.ValueKind == JsonValueKind.Object)
                     src = bp;
+
+                // PrefixProducer guaranteed prefix (dropped before the BaseProducer rolls; the dumper
+                // emits it as an ordered {Item, Quantity} array — same shape as Constant).
+                var prefixItems = GetConstantList(lootProd, "Prefix");
+                if (prefixItems.Count > 0)
+                    pi.ChestPrefixItems = prefixItems;
                 Dictionary<string, double>? chestOdds = null;
                 List<(string Item, int Quantity)>? chestItems = null;
 
@@ -549,7 +555,10 @@ public class DataService
             var rewards = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
             var perTaskList = new List<ParsedTask>();
 
-            // OrderProducer can be Constant, ControlledRandom, or ControlledPredefinedSequence
+            // OrderProducer can be Constant, ControlledRandom, or ControlledPredefinedSequence.
+            // Task data is shaped identically across all three, but the wrapper decides whether the
+            // game runs the tasks in sequence or rolls them (see ParsedItem.OrderProducerKind), so
+            // record which one it was.
             if (order.TryGetProperty("OrderProducer", out var op))
             {
                 // Try each variant — all have "Tasks" arrays with "Required" and "Rewards"
@@ -557,6 +566,8 @@ public class DataService
                 {
                     if (!op.TryGetProperty(variant, out var v)) continue;
                     if (!v.TryGetProperty("Tasks", out var tasks) || tasks.ValueKind != JsonValueKind.Array) continue;
+
+                    pi.OrderProducerKind = variant;
 
                     foreach (var task in tasks.EnumerateArray())
                     {

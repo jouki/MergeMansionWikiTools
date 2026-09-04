@@ -56,7 +56,7 @@ namespace merge_mansion_dumper.Dumper.Support
                 case HotspotCompletedRequirement hcr:
                     return new List<KeyValuePair<RequirementType, RequireModel>>
                     {
-                        new(RequirementType.HotspotUnlocked, new RequireModel { Value = hcr.GetRequiredHotspot().ConfigKey.ToString() })
+                        new(RequirementType.HotspotUnlocked, new RequireModel { Value = GameLogic.HotspotIdNames.Resolve(hcr.GetRequiredHotspot().ConfigKey) })
                     };
 
                 case PlayerItemRequirement pir:

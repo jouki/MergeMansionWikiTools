@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using MergeMansionWikiTools.Models;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
@@ -123,7 +123,7 @@ internal static class FlowchartImageService
                 using var img = Image.Load<Rgba32>(atlasPath);
 
                 // Use atlas-based prediction (identical to Image Optimiser)
-                var textureSprites = SpriteMetadataService.GetSpritesForTexture(allSprites, textureName);
+                var textureSprites = SpriteMetadataService.FilterToImage(SpriteMetadataService.GetSpritesForTexture(allSprites, textureName), img.Width, img.Height);
                 var chainItems = chain.Items.OrderBy(i => i.Level).ToList();
 
                 var levelMap = BuildLevelMap(img, textureSprites, allSkinMappings, textureName, chainKey, chainItems);
@@ -320,7 +320,7 @@ internal static class FlowchartImageService
         try
         {
             using var img = Image.Load<Rgba32>(atlasPath);
-            var textureSprites = SpriteMetadataService.GetSpritesForTexture(allSprites, textureName);
+            var textureSprites = SpriteMetadataService.FilterToImage(SpriteMetadataService.GetSpritesForTexture(allSprites, textureName), img.Width, img.Height);
             var chainItems = chain.Items.OrderBy(i => i.Level).ToList();
 
             var levelMap = BuildLevelMap(img, textureSprites, allSkinMappings, textureName, chain.ConfigKey, chainItems);

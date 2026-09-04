@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -215,7 +215,15 @@ public partial class ImageOptimiserPage
         if (_selectedCluster == null) return false;
 
         var scissorsImages = _selectedCluster.Images.Where(i => i.IsScissorsActive).ToList();
-        if (scissorsImages.Count == 0) return false;
+        if (scissorsImages.Count == 0)
+        {
+            AppLogger.Info($"[PREDICT] skipped — no scissors-active image (chain '{_activeChain?.ConfigKey ?? "-"}', "
+                + $"{_selectedCluster.Images.Count} image(s) in cluster)");
+            return false;
+        }
+        AppLogger.Info($"[PREDICT] start: image '{System.IO.Path.GetFileName(scissorsImages[0].FilePath)}', "
+            + $"chain '{_activeChain?.ConfigKey ?? "-"}' ({_activeChain?.Items.Count ?? 0} items), "
+            + $"{scissorsImages[0].DetectedObjects.Count} detected object(s)");
 
         var imageFileName = System.IO.Path.GetFileNameWithoutExtension(scissorsImages[0].FilePath);
 
@@ -245,7 +253,7 @@ public partial class ImageOptimiserPage
             return false;
         }
 
-        var textureSprites = SpriteMetadataService.GetSpritesForTexture(allSprites, imageFileName);
+        var textureSprites = SpriteMetadataService.GetSpritesForImage(allSprites, imageFileName, scissorsImages[0].FilePath);
 
         if (textureSprites.Count > 0)
         {
@@ -283,6 +291,7 @@ public partial class ImageOptimiserPage
 
             inputIndices.Text = string.Join(" ", parts);
             _selectedCluster.IndexText = inputIndices.Text;
+            RememberAutoPrediction();
 
             if (showWarnings)
             {
@@ -371,6 +380,7 @@ public partial class ImageOptimiserPage
             var fallbackParts = indices.Select(l => l > 0 ? l.ToString() : "-").ToList();
             inputIndices.Text = string.Join(" ", fallbackParts);
             _selectedCluster.IndexText = inputIndices.Text;
+            RememberAutoPrediction();
             infoBar.Message = $"Sprite metadata: {indices.Count(l => l > 0)}/{indices.Length} matched (no detection overlay).";
             infoBar.Severity = InfoBarSeverity.Warning;
             infoBar.IsOpen = true;
@@ -493,6 +503,7 @@ public partial class ImageOptimiserPage
             inputIndices.Text = string.Join(" ", parts);
         }
         _selectedCluster.IndexText = inputIndices.Text;
+        RememberAutoPrediction();
 
         var chainInfo = _activeChain != null ? $" for chain '{_activeChain.ConfigKey}'" : "";
         var method = deterministic ? "skin mapping" : "heuristic";
@@ -507,12 +518,34 @@ public partial class ImageOptimiserPage
     /// <summary>
     /// Auto-predicts indices if they are empty (doesn't overwrite user input).
     /// </summary>
+    /// <summary>Index text this page auto-predicted last, and the chain it was predicted FOR.</summary>
+    private string? _autoPredictedText;
+    private string? _autoPredictedChainKey;
+
+    /// <summary>Marks the current index text as ours (auto-predicted) for the active chain.</summary>
+    private void RememberAutoPrediction()
+    {
+        _autoPredictedText = _selectedCluster?.IndexText;
+        _autoPredictedChainKey = _activeChain?.ConfigKey ?? "";
+        AppLogger.Info($"[PREDICT] result '{_autoPredictedText}' for chain '{_autoPredictedChainKey}'");
+    }
+
     private void TryAutoPredict()
     {
         if (_selectedCluster == null) return;
 
-        // Don't overwrite existing user input
-        if (!string.IsNullOrWhiteSpace(_selectedCluster.IndexText)) return;
+        // Don't overwrite existing input — EXCEPT our own auto-prediction made for a
+        // DIFFERENT chain. Entry points differ in order: Item Chains sets the chain first
+        // and loads the image after, while Prepare/Season Pass adds the file first, which
+        // auto-enters chain mode by PoolTag and predicts there; the chain Prepare then hands
+        // over would never drive the prediction (stale levels, e.g. "- - - 1").
+        var chainKey = _activeChain?.ConfigKey ?? "";
+        if (!ImageSplitLogic.ShouldAutoPredict(
+                _selectedCluster.IndexText, _autoPredictedText, _autoPredictedChainKey, chainKey))
+            return;
+        if (!string.IsNullOrWhiteSpace(_selectedCluster.IndexText))
+            AppLogger.Info($"[PREDICT] re-running: text '{_selectedCluster.IndexText}' was predicted for chain "
+                + $"'{_autoPredictedChainKey}', active chain is now '{chainKey}'");
 
         var scissorsImages = _selectedCluster.Images.Where(i => i.IsScissorsActive).ToList();
         if (scissorsImages.Count == 0) return;

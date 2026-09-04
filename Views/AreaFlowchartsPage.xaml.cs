@@ -296,12 +296,14 @@ public partial class AreaFlowchartsPage : UserControl
         Grid.SetColumn(namePanel, 1);
         grid.Children.Add(namePanel);
 
-        // Open buttons (SVG + HTML)
+        // Open buttons (SVG + HTML) — Tag identifies the panel for ShowOpenButtonInCard
+        // (the card grid holds another StackPanel, namePanel, so "first StackPanel" is wrong)
         var openPanel = new StackPanel
         {
             Orientation = Orientation.Horizontal,
             Margin = new Thickness(8, 0, 0, 0),
-            Visibility = Visibility.Collapsed
+            Visibility = Visibility.Collapsed,
+            Tag = "openPanel"
         };
         var btnOpenSvg = new Wpf.Ui.Controls.Button
         {
@@ -1337,7 +1339,10 @@ public partial class AreaFlowchartsPage : UserControl
     {
         if (genBtn.Parent is Grid genContainer && genContainer.Parent is Grid cardGrid)
         {
-            var openPanel = cardGrid.Children.OfType<StackPanel>().FirstOrDefault();
+            // Match by Tag — the first StackPanel in the card is namePanel (name + task count),
+            // so an untagged FirstOrDefault() used to "show" the always-visible name instead.
+            var openPanel = cardGrid.Children.OfType<StackPanel>()
+                .FirstOrDefault(p => Equals(p.Tag, "openPanel"));
             if (openPanel != null) openPanel.Visibility = Visibility.Visible;
         }
     }

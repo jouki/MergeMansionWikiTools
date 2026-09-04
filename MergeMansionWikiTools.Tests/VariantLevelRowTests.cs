@@ -72,4 +72,65 @@ public class VariantLevelRowTests
         Assert.Contains("| A", table);
         Assert.Contains("| B", table);
     }
+
+    /// <summary>
+    /// An alias is a second ItemType for an item that already has a row — it must never split
+    /// that level into variants, however much its data differs. Regression for Charred Wood
+    /// (user report 2026-08-07): SaunaCharredWoodReady_01 was flagged isAlias in the mapping,
+    /// yet the page generated with a Variant column and A/B sub-rows, because variant detection
+    /// grouped `allItems` (aliases included) instead of `items` (aliases stripped).
+    /// </summary>
+    [Fact]
+    public void AliasOnSameLevel_NeverSplitsTheLevelIntoVariants()
+    {
+        var chain = new ParsedChain { ConfigKey = "SaunaCharredWood", DisplayName = "Charred Wood" };
+
+        var real = Item("SaunaCharredWood_01", 1);
+        var alias = Item("SaunaCharredWoodReady_01", 1);
+        alias.IsAlias = true;
+        // data that differs as hard as possible: only the alias generates and decays
+        alias.IsGenerator = true;
+        alias.ActivationAmountInCycle = 1;
+        alias.DropOdds = new Dictionary<string, double> { ["SaunaRebalanceRecycledWood_01"] = 100.0 };
+        alias.DecayAfterLastCycleItemType = "SaunaRebalanceRecycledWood_01";
+        chain.Items.Add(real);
+        chain.Items.Add(alias);
+
+        var table = NewGen().Generate(chain, "Charred Wood", lowPrices: false);
+
+        Assert.Equal(1, CountLevelRows(table));
+        Assert.DoesNotContain("! Variant", table);
+    }
+
+    /// <summary>
+    /// The Transforms To Variant column counts variants of the TARGET level; an alias sitting on
+    /// that level is not a variant either. Same user report: Charred Debris transforms into
+    /// Charred Wood L1, whose level held one real item + one alias, which lit up a second
+    /// (duplicate, unlabelled) Variant header on the generated page.
+    /// </summary>
+    [Fact]
+    public void AliasOnTransformTargetLevel_DoesNotAddTransformsToVariantColumn()
+    {
+        var data = new DataService(new ChainNameService());
+
+        var target = new ParsedChain { ConfigKey = "SaunaCharredWood", DisplayName = "Charred Wood" };
+        var targetReal = Item("SaunaCharredWood_01", 1);
+        var targetAlias = Item("SaunaCharredWoodReady_01", 1);
+        targetAlias.IsAlias = true;
+        target.Items.Add(targetReal);
+        target.Items.Add(targetAlias);
+
+        var source = new ParsedChain { ConfigKey = "SaunaCharredWoodNails", DisplayName = "Charred Debris" };
+        var sink = Item("SaunaCharredWoodNails_01", 1);
+        sink.IsSink = true;
+        sink.SinkRewardItemType = "SaunaCharredWood_01";
+        source.Items.Add(sink);
+
+        data.Chains.Add(target);
+        data.Chains.Add(source);
+
+        var table = new WikiTableGenerator(data).Generate(source, "Charred Debris", lowPrices: false);
+
+        Assert.DoesNotContain("! Variant", table);
+    }
 }

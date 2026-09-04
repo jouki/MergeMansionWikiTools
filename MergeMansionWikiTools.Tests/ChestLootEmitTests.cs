@@ -92,6 +92,37 @@ public class ChestLootEmitTests
     }
 
     [Fact]
+    public void PrefixChest_EmitsChestPrefixAndRandomLoot()
+    {
+        // PrefixProducer chest (Daily Trades card chest): guaranteed prefix drops first
+        // (4x 1-star + 1x 2-star envelope, ORDER preserved), remaining rolls from the random
+        // BaseProducer. Both must surface: chestPrefix (ordered qty list) + chestLoot (odds).
+        var chest = Item("DailyTasksV2ChestCardsProducers3_01");
+        chest.IsChest = true;
+        chest.ChestRollCount = 7;
+        chest.ChestPrefixItems = new List<(string, int)>
+        {
+            ("TCE_CardPackBasic_1Stars_01", 4),
+            ("TCE_CardPackBasic_2Stars_01", 1),
+        };
+        chest.ChestRewardOdds = new Dictionary<string, double>
+        {
+            ["BroomCabinet_01"] = 12.820512820512821,
+            ["Toolbox_01"] = 12.820512820512821,
+        };
+
+        var lua = new LuaGeneratorService().GenerateCombinedItemsAndChainNamesLua(
+            new List<ParsedChain> { Chain(chest) });
+
+        Assert.Contains("chestRolls = 7", lua);
+        Assert.Contains(
+            "chestPrefix = {{id = \"TCE_CardPackBasic_1Stars_01\", qty = 4}, " +
+            "{id = \"TCE_CardPackBasic_2Stars_01\", qty = 1}}",
+            lua);
+        Assert.Contains("chestLoot = {", lua);   // random part still emitted alongside the prefix
+    }
+
+    [Fact]
     public void NonChest_HasNoChestFields()
     {
         var lua = new LuaGeneratorService().GenerateCombinedItemsAndChainNamesLua(

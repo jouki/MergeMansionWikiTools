@@ -227,6 +227,37 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
 
                 WriteProperty(writer, "Marker", pp.Marker, serializer);
 
+                // The guaranteed prefix sequence produced BEFORE BaseProducer takes over (the
+                // per-player Marker index tracks how many were already given). Same {Item, Quantity}
+                // shape as Constant; consecutive same-item runs are collapsed (order preserved).
+                // E.g. Daily Trades card chest: 4x 1-star + 1x 2-star envelope, then random rolls.
+                if (pp.Items != null && pp.Items.Count > 0)
+                {
+                    writer.WritePropertyName("Prefix");
+                    writer.WriteStartArray();
+                    string prevType = null;
+                    int runQty = 0;
+                    void FlushRun()
+                    {
+                        if (prevType == null || runQty == 0) return;
+                        writer.WriteStartObject();
+                        WriteProperty(writer, "Item", prevType, serializer);
+                        WriteProperty(writer, "Quantity", runQty, serializer);
+                        writer.WriteEndObject();
+                    }
+                    foreach (var it in pp.Items)
+                    {
+                        var itemType = it?.GetDef(_config)?.ItemType;
+                        if (string.IsNullOrEmpty(itemType)) continue;
+                        if (itemType == prevType) { runQty++; continue; }
+                        FlushRun();
+                        prevType = itemType;
+                        runQty = 1;
+                    }
+                    FlushRun();
+                    writer.WriteEndArray();
+                }
+
                 if (pp.BaseProducer != null || serializer.NullValueHandling != NullValueHandling.Ignore)
                 {
                     writer.WritePropertyName("BaseProducer");

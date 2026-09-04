@@ -168,6 +168,62 @@ internal static class SpriteMetadataService
     }
 
     /// <summary>
+    /// Sprites of <paramref name="textureName"/> that actually belong to the exported PNG at
+    /// <paramref name="imagePath"/> — see <see cref="FilterToImage"/>. Use this (not
+    /// <see cref="GetSpritesForTexture"/>) whenever the sprites are matched against objects in
+    /// a concrete image.
+    /// </summary>
+    public static List<SpriteInfo> GetSpritesForImage(List<SpriteInfo> all, string textureName, string imagePath)
+    {
+        var sprites = GetSpritesForTexture(all, textureName);
+        if (sprites.Count <= 1) return sprites;
+        try
+        {
+            var info = SixLabors.ImageSharp.Image.Identify(imagePath);
+            return FilterToImage(sprites, info.Width, info.Height);
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Warn($"[SPRITES] Can't read size of {Path.GetFileName(imagePath)} ({ex.Message}) — sprite list unfiltered");
+            return sprites;
+        }
+    }
+
+    /// <summary>
+    /// Drops sprite records that share the texture NAME but come from a different Unity texture
+    /// (cross-bundle name collision that the atlas-data merge kept). Signature of such a foreign
+    /// sprite: a standalone (non-atlas) sprite whose rect is its whole own canvas at (0,0) while
+    /// that canvas is NOT the size of this image — e.g. 26.07.01 'Pantry_Jam' (0,0,128×78, canvas
+    /// 128) sitting next to the real Pantry_Jam_1/2/3 (96×100) in the 296×104 Pantry_Jam.png; or
+    /// 'Pantry_Jar_01..03' (57 px canvases) next to Pantry_Jar_1 in the 128×136 Pantry_Jar.png.
+    /// Left in, such a phantom becomes an extra "object", overlaps a real sprite and knocks it out
+    /// of the level prediction ("- 1 2" instead of "3 1 2"). Sprites outside the image bounds are
+    /// dropped for the same reason. A texture with a single sprite is never filtered.
+    /// </summary>
+    public static List<SpriteInfo> FilterToImage(List<SpriteInfo> sprites, int imageWidth, int imageHeight)
+    {
+        if (sprites.Count <= 1) return sprites;
+        var kept = new List<SpriteInfo>(sprites.Count);
+        var dropped = new List<string>();
+        foreach (var s in sprites)
+        {
+            bool outside = s.RectX + s.RectWidth > imageWidth + 0.5f || s.RectY + s.RectHeight > imageHeight + 0.5f;
+            bool foreignStandalone = s.CanvasWidth.HasValue && s.CanvasHeight.HasValue
+                && s.RectX == 0 && s.RectY == 0
+                && Math.Abs(s.RectWidth - s.CanvasWidth.Value) < 0.5f && Math.Abs(s.RectHeight - s.CanvasHeight.Value) < 0.5f
+                && (Math.Abs(s.CanvasWidth.Value - imageWidth) >= 0.5f || Math.Abs(s.CanvasHeight.Value - imageHeight) >= 0.5f);
+            if (outside || foreignStandalone) dropped.Add($"{s.Name} ({s.RectWidth}×{s.RectHeight}@{s.RectX},{s.RectY}{(outside ? ", outside" : ", foreign canvas")})");
+            else kept.Add(s);
+        }
+        if (dropped.Count > 0 && kept.Count > 0)
+        {
+            AppLogger.Info($"[SPRITES] {sprites[0].TextureName} ({imageWidth}×{imageHeight}): dropped {dropped.Count} foreign sprite(s): {string.Join(", ", dropped)}");
+            return kept;
+        }
+        return sprites; // never drop everything — an all-foreign list means our heuristic is wrong, keep old behaviour
+    }
+
+    /// <summary>
     /// Loads the PoolTag → prefab name mapping from image_atlas_data.json.
     /// This data is extracted from the game's GameObjectPoolConfig ScriptableObject
     /// and provides the definitive PoolTag → prefab/skeleton name mapping.
@@ -177,7 +233,54 @@ internal static class SpriteMetadataService
         var data = LoadAtlasData(exportDir);
         if (data.PoolTagMapping != null && data.PoolTagMapping.Count > 0)
             return data.PoolTagMapping;
-        return new Dictionary<string, string>();
+        return TryRepairPoolTagMapping(exportDir) ?? new Dictionary<string, string>();
+    }
+
+    private static readonly HashSet<string> _repairAttempted = new(StringComparer.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// Self-heal: an image_atlas_data.json with an empty pool mapping (26.07.01 shipped
+    /// GUID-based prefab refs the old extractor couldn't read → 0 entries) is repaired in place
+    /// by re-running only the PoolConfig step (startup_scenes_all.bundle + catalog.bin, ~0.5 s)
+    /// instead of a full PNG re-extraction. Tried once per atlas file per session; needs
+    /// "&lt;version&gt;/Game Files/APK/startup_scenes_all.bundle" and "&lt;workspace&gt;/classdata.tpk".
+    /// </summary>
+    private static Dictionary<string, string>? TryRepairPoolTagMapping(string exportDir)
+    {
+        var atlasPath = GetAtlasDataPath(exportDir);
+        if (!_repairAttempted.Add(atlasPath) || !File.Exists(atlasPath)) return null;
+
+        var versionDir = Path.GetDirectoryName(exportDir);
+        var baseDir = versionDir != null ? Path.GetDirectoryName(versionDir) : null;
+        if (versionDir == null || baseDir == null) return null;
+        var bundleDir = Path.Combine(versionDir, "Game Files", "APK");
+        var tpk = Path.Combine(baseDir, "classdata.tpk");
+        if (!File.Exists(Path.Combine(bundleDir, "startup_scenes_all.bundle")) || !File.Exists(tpk))
+        {
+            AppLogger.Warn($"[POOL] image_atlas_data.json has no pool tag mapping and bundle/tpk to rebuild it are missing ({bundleDir}) — chain images resolve by fallbacks only");
+            return null;
+        }
+
+        try
+        {
+            AppLogger.Info($"[POOL] image_atlas_data.json has no pool tag mapping — rebuilding from {bundleDir}");
+            var mapping = AssetExtractionService.ExtractPoolTagMapping(bundleDir, tpk, exportDir);
+            if (mapping.Count == 0) return null;
+
+            var current = JsonSerializer.Deserialize<AtlasData>(File.ReadAllText(atlasPath), _jsonOpts)
+                ?? new AtlasData(new List<SpriteInfo>(), new List<SkinMapping>());
+            var repaired = new AtlasData(current.Sprites, current.SkinMappings, mapping);
+            File.WriteAllText(atlasPath, JsonSerializer.Serialize(repaired, _jsonOpts));
+            _cache = repaired;
+            _cachePath = atlasPath;
+            AppLogger.Info($"[POOL] Repaired image_atlas_data.json with {mapping.Count} pool tags");
+            return mapping;
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Error("[POOL] pool tag mapping repair failed", ex);
+            return null;
+        }
     }
 
     /// <summary>

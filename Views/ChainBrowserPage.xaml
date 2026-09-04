@@ -472,6 +472,23 @@
                                                                    VerticalAlignment="Center"
                                                                    Tag="{Binding}"
                                                                    Loaded="TxtItemName_Loaded" />
+                                                        <!-- Static default-letter badge for NON-variant boxes that still get a wiki column
+                                                             (plain chests) when a variant exists at their level. Mirrors the variant editor
+                                                             layout (order-box spacer + label-box width + hidden VAR replica compensating the
+                                                             col-5 badge) so the letter aligns with the label watermarks. -->
+                                                        <StackPanel Grid.Column="4" Orientation="Horizontal"
+                                                                    Visibility="{Binding ShowStaticLetter, Converter={StaticResource BoolToVis}}">
+                                                            <Border Width="38" />
+                                                            <TextBlock Text="{Binding VariantLetterHint}"
+                                                                       Width="96" Padding="4,0" Margin="0,0,6,0"
+                                                                       FontSize="11"
+                                                                       Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                                                       VerticalAlignment="Center"
+                                                                       ToolTip="Default column letter on the wiki (this box has no label field — it is not a variant)" />
+                                                            <TextBlock Text="VAR" FontSize="9" FontWeight="SemiBold"
+                                                                       Padding="0,0,4,0" Visibility="Hidden"
+                                                                       VerticalAlignment="Center" />
+                                                        </StackPanel>
                                                         <!-- Inline variant editors: label (isVariant = "Spring") + order (variantOrder = N). Empty label = A/B/C. -->
                                                         <StackPanel Grid.Column="4" Orientation="Horizontal"
                                                                     Visibility="{Binding IsVariant, Converter={StaticResource BoolToVis}}">
@@ -482,11 +499,14 @@
                                                                      ToolTip="Display order (1,2,3…). Empty = default."
                                                                      KeyDown="VariantLabel_KeyDown"
                                                                      LostFocus="VariantLabel_LostFocus" />
-                                                            <TextBox Text="{Binding VariantLabelEdit, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                                            <!-- ui:TextBox for PlaceholderText: an empty label shows the positional letter the
+                                                                 wiki will assign (computed to mirror Module:Items ordering) as a watermark. -->
+                                                            <ui:TextBox Text="{Binding VariantLabelEdit, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                                                     PlaceholderText="{Binding VariantLetterHint}"
                                                                      Width="96" Height="22" FontSize="11"
                                                                      Padding="4,0" Margin="0,0,6,0"
                                                                      VerticalContentAlignment="Center"
-                                                                     ToolTip="Variant label (e.g. Spring). Empty = A/B/C. Click Save Mapping to publish."
+                                                                     ToolTip="Variant label (e.g. Spring). Empty = the watermarked default letter. Click Save Mapping to publish."
                                                                      KeyDown="VariantLabel_KeyDown"
                                                                      LostFocus="VariantLabel_LostFocus" />
                                                         </StackPanel>

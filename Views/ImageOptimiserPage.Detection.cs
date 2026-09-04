@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -492,7 +492,7 @@ public partial class ImageOptimiserPage
         foreach (var oi in _selectedCluster.Images.Where(i => i.IsScissorsActive))
         {
             var imageFileName = System.IO.Path.GetFileNameWithoutExtension(oi.FilePath);
-            var textureSprites = SpriteMetadataService.GetSpritesForTexture(allSprites, imageFileName);
+            var textureSprites = SpriteMetadataService.GetSpritesForImage(allSprites, imageFileName, oi.FilePath);
             if (textureSprites.Count == 0) continue;
 
             // Get image height for coordinate conversion

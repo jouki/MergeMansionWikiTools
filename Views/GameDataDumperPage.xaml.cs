@@ -879,6 +879,22 @@ public partial class GameDataDumperPage : UserControl
                 try { logWriter?.WriteLine(msg); } catch { }
             });
 
+            // Pre-dump: load the current game's HotspotId names from the XAPK's global-metadata
+            // (cached per version) so new-area tasks never dump as integer Ids. Falls back to the
+            // compiled enum with a warning — never blocks the dump.
+            try
+            {
+                var mapResult = await HotspotIdMapService.EnsureLoadedAsync(
+                    configPath, _main.Settings.ImageExporterBasePath, _main.Settings.SelectedApkVersion, progress);
+                if (!mapResult.Loaded && mapResult.Warning != null)
+                    try { logWriter?.WriteLine($"[WARN] {mapResult.Warning}"); } catch { }
+            }
+            catch (Exception ex)
+            {
+                AppLogger.Error("HotspotId map pre-step failed", ex);
+                ((IProgress<string>)progress).Report($"[WARN] HotspotId map: {ex.Message} — using compiled enum.");
+            }
+
             var result = await DumperService.DumpAsync(
                 configPath,
                 GetPathText(txtPatchPath),

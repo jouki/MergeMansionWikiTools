@@ -1,4 +1,4 @@
-using Rectangle = SixLabors.ImageSharp.Rectangle;
+﻿using Rectangle = SixLabors.ImageSharp.Rectangle;
 using static MergeMansionWikiTools.Services.AssetExtractionService;
 
 namespace MergeMansionWikiTools.Services;
@@ -18,6 +18,27 @@ internal static class ImageSplitLogic
     /// Parses the level/index input text into tokens (e.g. "4 - 2 3 1" → ["4","-","2","3","1"]).
     /// Accepts spaces, commas and newlines as separators; empty entries are removed.
     /// </summary>
+    /// <summary>
+    /// Whether an auto-prediction may overwrite the index text that is already there.
+    /// Yes when the box is empty, or when it still holds OUR last auto-prediction and that
+    /// prediction was made for a different chain than the one now active.
+    ///
+    /// Entry points reach the Image Optimiser in different orders: Item Chains sets the chain
+    /// first and loads the atlas after, while Prepare / Season Passes adds the file first —
+    /// which auto-enters chain mode by PoolTag and predicts there — and only then hands over
+    /// its own chain. Without this the handed-over chain could never drive the prediction and
+    /// the stale levels stayed on screen (Bubbling Brews showed "- - - 1").
+    /// A text the user typed (or edited) is never overwritten.
+    /// </summary>
+    public static bool ShouldAutoPredict(
+        string? currentText, string? autoPredictedText, string? autoPredictedChainKey, string? activeChainKey)
+    {
+        if (string.IsNullOrWhiteSpace(currentText)) return true;
+        if (autoPredictedText == null) return false;
+        if (!string.Equals(currentText, autoPredictedText, StringComparison.Ordinal)) return false;
+        return !string.Equals(autoPredictedChainKey ?? "", activeChainKey ?? "", StringComparison.Ordinal);
+    }
+
     public static string[] ParseIndexTokens(string text)
         => text.Split(IndexSeparators, StringSplitOptions.RemoveEmptyEntries);
 

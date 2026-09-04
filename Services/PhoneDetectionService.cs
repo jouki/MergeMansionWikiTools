@@ -24,6 +24,15 @@ internal static class PhoneDetectionService
     /// <summary>Local file (under _DATA) the pull writes the Unity engine version (engine_ver) to.</summary>
     public const string UnityVersionFileName = "unity_version.txt";
 
+    /// <summary>
+    /// Game client version captured by the last phone pull (_DATA\game_version.txt);
+    /// null when the file is missing/empty. Same source the Discord dump publish stamps
+    /// into its message — reused for generated Lua module headers.
+    /// </summary>
+    public static string? ReadPulledGameVersion()
+        => AbGroupsService.ReadValueFile(Path.Combine(
+            AppDomain.CurrentDomain.BaseDirectory, "_DATA", GameVersionFileName));
+
     public static async Task<ExtractionResult> ExtractGameDataAsync(
         string dataDir,
         IProgress<string>? progress = null,

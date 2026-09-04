@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -349,7 +349,6 @@ public static class AreaOrderingService
         var replacedCommented = new HashSet<string>(entries.Select(e => e.Name), StringComparer.Ordinal);
 
         var annotated = new List<Models.DiffLine>();
-        int insertAfter = -1; // last surviving mapping row (mirrors PatchModuleContent's insertion point)
         foreach (var line in lines)
         {
             var m = rowRx.Match(line);
@@ -369,7 +368,6 @@ public static class AreaOrderingService
             {
                 annotated.Add(Line(Models.DiffLineType.Removed, line));
                 annotated.Add(Line(Models.DiffLineType.Added, TryRenameRowLine(line, ren) ?? line));
-                insertAfter = annotated.Count - 1;
             }
             else if (commented && replacedCommented.Contains(name))
             {
@@ -379,16 +377,22 @@ public static class AreaOrderingService
             else
             {
                 annotated.Add(Line(Models.DiffLineType.Match, line));
-                insertAfter = annotated.Count - 1;
             }
         }
 
         if (entries.Count > 0)
         {
+            // Each add lands at its orderingIndex slot among surviving rows (Removed rows are
+            // ignored — an uncommented Parlor 62 must stay above the in-prep Atelier 63).
             var addLines = GeneratePreviewLua(entries).TrimEnd('\r', '\n')
                 .Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
-            annotated.InsertRange(insertAfter + 1,
-                addLines.Select(l => Line(Models.DiffLineType.Added, l)));
+            for (int i = 0; i < entries.Count; i++)
+            {
+                int at = FindInsertIndexByOrdering(annotated,
+                    d => d.Type == Models.DiffLineType.Removed ? null : d.Text,
+                    entries[i].OrderingIndex, fallback: annotated.Count);
+                annotated.Insert(at, Line(Models.DiffLineType.Added, addLines[i]));
+            }
         }
 
         // Window: only the span from the first to the last change (keeps in-between context)
@@ -465,29 +469,52 @@ public static class AreaOrderingService
                 lines.RemoveAt(i);
         }
 
-        // Pass 2: find the last mapping row (active OR commented) → insertion point. New entries
-        // always carry indices above the existing max, so inserting after trailing in-prep
-        // commented rows keeps the file orderingIndex-sorted (before, adds landed between the
-        // last active row and trailing commented rows).
-        int lastRowIdx = -1;
-        for (int i = 0; i < lines.Count; i++)
-            if (legitRowRegex.IsMatch(lines[i]) || commentedRowRegex.IsMatch(lines[i])) lastRowIdx = i;
-        if (lastRowIdx < 0)
-            // Fallback: append before final `}` of `p` table; if none, append at end
-            lastRowIdx = lines.Count - 1;
-
-        // Build new lines (without trailing newline since we'll insert as separate list elements)
-        var preview = GeneratePreviewLua(entries);
-        // Strip trailing newline and split, so we get clean lines
-        var newLines = preview.TrimEnd('\r', '\n').Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
-
-        // Insert after lastRowIdx (so the new lines come right after the last mapping row)
-        lines.InsertRange(lastRowIdx + 1, newLines);
+        // Pass 2: insert each new row at its orderingIndex slot — before the first mapping row
+        // (active OR commented) with a larger index, else after the last mapping row. Keeps the
+        // file orderingIndex-sorted even when an in-prep row is uncommented with its index kept
+        // (Parlor 62 must stay above the still-commented Atelier 63), not just for fresh
+        // above-max indices. Fallback with no rows at all: append at end.
+        var newLines = GeneratePreviewLua(entries).TrimEnd('\r', '\n')
+            .Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
+        for (int i = 0; i < entries.Count; i++)
+        {
+            int at = FindInsertIndexByOrdering(lines, l => l, entries[i].OrderingIndex, fallback: lines.Count);
+            lines.Insert(at, newLines[i]);
+        }
 
         return string.Join(newline, lines);
     }
 
     // ── Helpers ──────────────────────────────────────────────────────
+
+    /// <summary>Mapping row (active or `--` in-prep) with its orderingIndex captured as group "i".</summary>
+    private static readonly Regex MappingRowWithIndexRx = new(
+        @"^[ \t]*(?<c>--)?\[""(?<n>[^""]+)""\]\s*=\s*\{[^}]*orderingIndex\s*=\s*(?<i>[0-9.]+)[^}]*\}\s*,?\s*$",
+        RegexOptions.Compiled);
+
+    /// <summary>
+    /// Single source of truth for where a new mapping row belongs (used by both the patcher and
+    /// the diff preview): index of the first surviving mapping row whose orderingIndex is greater
+    /// than <paramref name="orderingIndex"/>; if none, right after the last mapping row; if the
+    /// module has no rows at all, <paramref name="fallback"/>. <paramref name="textOf"/> returns
+    /// null for rows that don't survive (e.g. Removed diff lines) so they never anchor the slot.
+    /// </summary>
+    internal static int FindInsertIndexByOrdering<T>(
+        IList<T> rows, Func<T, string?> textOf, double orderingIndex, int fallback)
+    {
+        int lastRow = -1;
+        for (int i = 0; i < rows.Count; i++)
+        {
+            var text = textOf(rows[i]);
+            if (text == null) continue;
+            var m = MappingRowWithIndexRx.Match(text);
+            if (!m.Success) continue;
+            var idx = double.Parse(m.Groups["i"].Value, System.Globalization.CultureInfo.InvariantCulture);
+            if (idx > orderingIndex) return i;
+            lastRow = i;
+        }
+        return lastRow >= 0 ? lastRow + 1 : fallback;
+    }
 
     private static (string? Parent, string? Date, bool Impossible) ExtractFirstParentAndDate(JsonElement el, string listProp)
     {

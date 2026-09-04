@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using MergeMansionWikiTools.Services;
 using Models = MergeMansionWikiTools.Models;
@@ -258,5 +258,45 @@ public class AreaOrderingServiceTests
         var d = Assert.Single(diff);
         Assert.Equal(Models.DiffLineType.Removed, d.Type);
         Assert.Contains("Old Cellar", d.Text);
+    }
+    // ── Uncomment keeps orderingIndex order (Parlor 62 must stay above Atelier 63) ──
+
+    private const string ModuleInPrep = "local p = {\n" +
+        "\t[\"Kitchen\"]   = {orderingIndex = 59},\n" +
+        "\t--[\"Parlor\"]  = {orderingIndex = 62},\n" +
+        "\t--[\"Atelier\"] = {orderingIndex = 63},\n" +
+        "}\n" +
+        "return p";
+
+    [Fact]
+    public void Patch_uncommented_entry_is_inserted_by_orderingIndex_not_appended()
+    {
+        var adds = new List<DeducedEntry> { new("Parlor", 62, false), new("Darkroom", 64, true) };
+        var patched = AreaOrderingService.PatchModuleContent(ModuleInPrep, adds);
+        var lines = patched.Split('\n');
+
+        int parlor = System.Array.FindIndex(lines, l => l.Contains("[\"Parlor\"]") && !l.Contains("--"));
+        int atelier = System.Array.FindIndex(lines, l => l.Contains("Atelier"));
+        int darkroom = System.Array.FindIndex(lines, l => l.Contains("Darkroom"));
+        Assert.DoesNotContain(lines, l => l.Contains("--[\"Parlor\"]"));
+        Assert.True(parlor < atelier, patched);
+        Assert.True(atelier < darkroom, patched);
+    }
+
+    [Fact]
+    public void DiffPreview_uncommented_entry_is_shown_by_orderingIndex()
+    {
+        var adds = new List<DeducedEntry> { new("Parlor", 62, false), new("Darkroom", 64, true) };
+        var diff = AreaOrderingService.BuildDiffPreview(
+            ModuleInPrep, adds, new List<RenamedEntry>(), new List<StaleEntry>());
+
+        var removedParlor = diff.Single(d => d.Type == Models.DiffLineType.Removed);
+        var addedParlor = diff.Single(d => d.Type == Models.DiffLineType.Added && d.Text.Contains("Parlor"));
+        var atelier = diff.Single(d => d.Text.Contains("Atelier"));
+        var darkroom = diff.Single(d => d.Text.Contains("Darkroom"));
+        Assert.Equal(Models.DiffLineType.Match, atelier.Type);
+        Assert.True(diff.IndexOf(removedParlor) < diff.IndexOf(addedParlor));
+        Assert.True(diff.IndexOf(addedParlor) < diff.IndexOf(atelier));
+        Assert.True(diff.IndexOf(atelier) < diff.IndexOf(darkroom));
     }
 }

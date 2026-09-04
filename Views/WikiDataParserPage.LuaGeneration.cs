@@ -291,7 +291,8 @@ public partial class WikiDataParserPage
                 using var _t = AppLogger.Timed("GenerateEventScheduleLua");
 
                 // Pass-1 (non-GC) lua — also passed to MergeAirings for parent-run matching.
-                var nonGcLua = _luaGen.GenerateEventScheduleLua(schedule.Groups, schedule.AutoMergeWindows, schedule.CreatedAt);
+                var pulledGameVersion = PhoneDetectionService.ReadPulledGameVersion();
+                var nonGcLua = _luaGen.GenerateEventScheduleLua(schedule.Groups, schedule.AutoMergeWindows, schedule.CreatedAt, pulledGameVersion);
 
                 if (_main.DataService == null || liveVarious == null)
                     return new GcMergeResult { Lua = nonGcLua };
@@ -354,7 +355,7 @@ public partial class WikiDataParserPage
 
                     // Final lua now includes GC groups.
                     var finalLua = gcGroupCount > 0
-                        ? _luaGen.GenerateEventScheduleLua(schedule.Groups, schedule.AutoMergeWindows, schedule.CreatedAt)
+                        ? _luaGen.GenerateEventScheduleLua(schedule.Groups, schedule.AutoMergeWindows, schedule.CreatedAt, pulledGameVersion)
                         : nonGcLua;
 
                     return new GcMergeResult

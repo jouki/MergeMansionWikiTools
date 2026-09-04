@@ -2875,20 +2875,24 @@ internal class FlowchartService
     /// Wraps SVG content in an interactive HTML document with click-to-complete
     /// task tracking, progress bar, and localStorage persistence.
     /// </summary>
-    private static string WrapAsInteractiveHtml(string svgContent, string areaName, int totalNodes)
+    internal static string WrapAsInteractiveHtml(string svgContent, string areaName, int totalNodes)
     {
         var sb = new StringBuilder();
         sb.AppendLine("<!DOCTYPE html>");
         sb.AppendLine("<html lang=\"en\">");
         sb.AppendLine("<head>");
         sb.AppendLine("<meta charset=\"UTF-8\">");
-        sb.AppendLine("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">");
+        // Native browser zoom (v0.24.49 experiment): the page is as large as the SVG, so the
+        // mobile browser itself allows pinch-zoom-out; minimum-scale widens the allowed range.
+        sb.AppendLine("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, minimum-scale=0.1\">");
         sb.AppendLine($"<title>{Esc(areaName)} — Task Flowchart</title>");
         sb.AppendLine("<style>");
         sb.AppendLine("  * { box-sizing: border-box; }");
-        sb.AppendLine("  html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #FBF4E8; font-family: 'Trebuchet MS', Arial, sans-serif; }");
-        sb.AppendLine("  #app { position: relative; width: 100%; height: 100%; }");
-        sb.AppendLine("  #scroll-container { width: 100%; height: 100%; overflow: auto; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }");
+        // Native zoom: body must NOT be clipped to the screen (no height:100% + overflow:hidden,
+        // no overflow:auto scroll box) — otherwise the page always "fits" and the browser clamps
+        // pinch-zoom-out at 1.0. The page itself scrolls; #scroll-container stays as a plain wrapper.
+        sb.AppendLine("  html, body { margin: 0; padding: 0; background: #FBF4E8; font-family: 'Trebuchet MS', Arial, sans-serif; }");
+        sb.AppendLine("  #app { position: relative; }");
         sb.AppendLine("  #top-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 200; pointer-events: none; }");
         sb.AppendLine("  #progress-bar { height: 4px; background: rgba(74,53,32,0.08); }");
         sb.AppendLine("  #progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #6BBF4A, #4CAF50, #43A047); transition: width 0.4s ease; border-radius: 0 2px 2px 0; }");
@@ -2896,6 +2900,11 @@ internal class FlowchartService
         sb.AppendLine("  #progress-text { font-size: 13px; color: #6B5B3E; background: rgba(251,244,232,0.85); padding: 4px 12px; border-radius: 8px; box-shadow: 0 1px 6px rgba(74,53,32,0.15); user-select: none; pointer-events: auto; }");
         sb.AppendLine("  #btn-reset { font-size: 11px; color: #8B6B4E; background: rgba(251,244,232,0.85); padding: 4px 10px; border-radius: 6px; border: 1px solid #D4C0A0; cursor: pointer; box-shadow: 0 1px 4px rgba(74,53,32,0.12); pointer-events: auto; }");
         sb.AppendLine("  #btn-reset:hover { background: #FFF0D8; color: #6B4B2E; }");
+        // v0.24.49: custom pan+zoom (v0.24.47-48) disabled while trying native browser zoom — kept for revert.
+        // sb.AppendLine("  #zoom-controls { position: fixed; right: 12px; bottom: 16px; z-index: 200; display: flex; flex-direction: column; gap: 6px; }");
+        // sb.AppendLine("  .zoom-btn { width: 38px; height: 38px; font-size: 18px; line-height: 1; color: #8B6B4E; background: rgba(251,244,232,0.92); border: 1px solid #D4C0A0; border-radius: 8px; cursor: pointer; box-shadow: 0 1px 6px rgba(74,53,32,0.18); user-select: none; -webkit-user-select: none; }");
+        // sb.AppendLine("  .zoom-btn:hover { background: #FFF0D8; color: #6B4B2E; }");
+        // sb.AppendLine("  #btn-zoom-fit { font-size: 11px; }");
         sb.AppendLine("</style>");
         sb.AppendLine("</head>");
         sb.AppendLine("<body>");
@@ -2906,6 +2915,12 @@ internal class FlowchartService
         sb.AppendLine("    <div id=\"progress-text\">0 / 0</div>");
         sb.AppendLine("  </div>");
         sb.AppendLine("</div>");
+        // v0.24.49: zoom buttons disabled (native browser zoom experiment) — kept for revert.
+        // sb.AppendLine("<div id=\"zoom-controls\">");
+        // sb.AppendLine("  <button class=\"zoom-btn\" id=\"btn-zoom-in\" title=\"Zoom in\">+</button>");
+        // sb.AppendLine("  <button class=\"zoom-btn\" id=\"btn-zoom-out\" title=\"Zoom out\">&#8722;</button>");
+        // sb.AppendLine("  <button class=\"zoom-btn\" id=\"btn-zoom-fit\" title=\"Fit flowchart width\">Fit</button>");
+        // sb.AppendLine("</div>");
         sb.AppendLine("<div id=\"app\">");
         sb.AppendLine("<div id=\"scroll-container\">");
         sb.Append(svgContent);
@@ -2981,6 +2996,107 @@ internal class FlowchartService
         sb.AppendLine();
         sb.AppendLine("  refresh();");
         sb.AppendLine();
+        /* v0.24.49: custom pan+zoom JS (v0.24.47-48) disabled while trying native browser zoom — kept for revert.
+        sb.AppendLine("  // Pan+zoom: mobile viewport (width=device-width) + overflow:auto container means");
+        sb.AppendLine("  // the page always fits the screen, so native pinch-zoom-out is clamped at 1.0.");
+        sb.AppendLine("  // Zoom by resizing the SVG's CSS box (viewBox keeps it crisp) — scroll range follows.");
+        sb.AppendLine("  var sc = document.getElementById('scroll-container');");
+        sb.AppendLine("  var svgEl = sc.querySelector('svg');");
+        sb.AppendLine("  var baseW = svgEl ? parseFloat(svgEl.getAttribute('width')) : 0;");
+        sb.AppendLine("  var baseH = svgEl ? parseFloat(svgEl.getAttribute('height')) : 0;");
+        sb.AppendLine("  if (svgEl && baseW > 0 && baseH > 0) {");
+        sb.AppendLine("    var scale = 1;");
+        sb.AppendLine("    var MAX_ZOOM = 3;");
+        sb.AppendLine("    // Width-only fit: area flowcharts are extremely tall — fitting both dimensions");
+        sb.AppendLine("    // would shrink them to an unreadable sliver.");
+        sb.AppendLine("    function fitWidthScale() { return sc.clientWidth / baseW; }");
+        sb.AppendLine("    function minZoom() { return Math.min(1, fitWidthScale()); }");
+        sb.AppendLine("    function clampZoom(s) { return Math.max(minZoom(), Math.min(MAX_ZOOM, s)); }");
+        sb.AppendLine("    // Commit = real layout resize (scroll range follows). Doing this on every pinch");
+        sb.AppendLine("    // frame repaints the whole SVG and stutters — so it runs once, at gesture end.");
+        sb.AppendLine("    function commitZoom(s, cx, cy) {");
+        sb.AppendLine("      s = clampZoom(s);");
+        sb.AppendLine("      if (cx === undefined) { cx = sc.clientWidth / 2; cy = sc.clientHeight / 2; }");
+        sb.AppendLine("      var ux = (sc.scrollLeft + cx) / scale;  // content point (unscaled units) kept under (cx,cy)");
+        sb.AppendLine("      var uy = (sc.scrollTop + cy) / scale;");
+        sb.AppendLine("      scale = s;");
+        sb.AppendLine("      svgEl.style.width = (baseW * scale) + 'px';");
+        sb.AppendLine("      svgEl.style.height = (baseH * scale) + 'px';");
+        sb.AppendLine("      sc.style.scrollBehavior = 'auto';  // keep focal point steady (no smooth animation)");
+        sb.AppendLine("      sc.scrollLeft = ux * scale - cx;");
+        sb.AppendLine("      sc.scrollTop = uy * scale - cy;");
+        sb.AppendLine("      sc.style.scrollBehavior = '';");
+        sb.AppendLine("    }");
+        sb.AppendLine("    // During a gesture only a composited CSS transform changes (GPU-scaled snapshot,");
+        sb.AppendLine("    // rAF-throttled) — no per-frame relayout, so pinch stays smooth even zoomed out.");
+        sb.AppendLine("    var gesture = null;");
+        sb.AppendLine("    function gestureStart(cx, cy) {");
+        sb.AppendLine("      gesture = { s0: scale, cx: cx, cy: cy, k: 1, raf: 0, idleTimer: 0 };");
+        sb.AppendLine("      svgEl.style.willChange = 'transform';");
+        sb.AppendLine("      svgEl.style.transformOrigin = (sc.scrollLeft + cx) + 'px ' + (sc.scrollTop + cy) + 'px';");
+        sb.AppendLine("    }");
+        sb.AppendLine("    function gestureUpdate(k) {");
+        sb.AppendLine("      if (!gesture) return;");
+        sb.AppendLine("      gesture.k = clampZoom(gesture.s0 * k) / gesture.s0;");
+        sb.AppendLine("      if (!gesture.raf) gesture.raf = requestAnimationFrame(function() {");
+        sb.AppendLine("        if (!gesture) return;");
+        sb.AppendLine("        gesture.raf = 0;");
+        sb.AppendLine("        svgEl.style.transform = 'scale(' + gesture.k + ')';");
+        sb.AppendLine("      });");
+        sb.AppendLine("    }");
+        sb.AppendLine("    function gestureEnd() {");
+        sb.AppendLine("      if (!gesture) return;");
+        sb.AppendLine("      var g = gesture; gesture = null;");
+        sb.AppendLine("      if (g.raf) cancelAnimationFrame(g.raf);");
+        sb.AppendLine("      if (g.idleTimer) clearTimeout(g.idleTimer);");
+        sb.AppendLine("      svgEl.style.transform = '';");
+        sb.AppendLine("      svgEl.style.transformOrigin = '';");
+        sb.AppendLine("      svgEl.style.willChange = '';");
+        sb.AppendLine("      commitZoom(g.s0 * g.k, g.cx, g.cy);");
+        sb.AppendLine("    }");
+        sb.AppendLine("    document.getElementById('btn-zoom-in').addEventListener('click', function() { commitZoom(scale * 1.3); });");
+        sb.AppendLine("    document.getElementById('btn-zoom-out').addEventListener('click', function() { commitZoom(scale / 1.3); });");
+        sb.AppendLine("    document.getElementById('btn-zoom-fit').addEventListener('click', function() { commitZoom(fitWidthScale()); });");
+        sb.AppendLine("    // Ctrl+wheel (desktop) / trackpad pinch: gesture starts on first event, commits after idle");
+        sb.AppendLine("    var wheelK = 1;");
+        sb.AppendLine("    sc.addEventListener('wheel', function(e) {");
+        sb.AppendLine("      if (!e.ctrlKey) return;");
+        sb.AppendLine("      e.preventDefault();");
+        sb.AppendLine("      if (!gesture) {");
+        sb.AppendLine("        wheelK = 1;");
+        sb.AppendLine("        var r = sc.getBoundingClientRect();");
+        sb.AppendLine("        gestureStart(e.clientX - r.left, e.clientY - r.top);");
+        sb.AppendLine("      }");
+        sb.AppendLine("      wheelK *= Math.pow(1.0015, -e.deltaY);");
+        sb.AppendLine("      gestureUpdate(wheelK);");
+        sb.AppendLine("      if (gesture.idleTimer) clearTimeout(gesture.idleTimer);");
+        sb.AppendLine("      gesture.idleTimer = setTimeout(gestureEnd, 200);");
+        sb.AppendLine("    }, { passive: false });");
+        sb.AppendLine("    // Touch pinch — touch-action: pan-x pan-y keeps 1-finger pans native, 2-finger reaches us");
+        sb.AppendLine("    var pinchDist = 0;");
+        sb.AppendLine("    function touchDist(t) {");
+        sb.AppendLine("      var dx = t[0].clientX - t[1].clientX, dy = t[0].clientY - t[1].clientY;");
+        sb.AppendLine("      return Math.sqrt(dx * dx + dy * dy);");
+        sb.AppendLine("    }");
+        sb.AppendLine("    sc.addEventListener('touchstart', function(e) {");
+        sb.AppendLine("      if (e.touches.length === 2) {");
+        sb.AppendLine("        pinchDist = touchDist(e.touches);");
+        sb.AppendLine("        var r = sc.getBoundingClientRect();");
+        sb.AppendLine("        gestureStart((e.touches[0].clientX + e.touches[1].clientX) / 2 - r.left,");
+        sb.AppendLine("                     (e.touches[0].clientY + e.touches[1].clientY) / 2 - r.top);");
+        sb.AppendLine("      }");
+        sb.AppendLine("    }, { passive: true });");
+        sb.AppendLine("    sc.addEventListener('touchmove', function(e) {");
+        sb.AppendLine("      if (e.touches.length !== 2 || !pinchDist || !gesture) return;");
+        sb.AppendLine("      e.preventDefault();");
+        sb.AppendLine("      gestureUpdate(touchDist(e.touches) / pinchDist);");
+        sb.AppendLine("    }, { passive: false });");
+        sb.AppendLine("    sc.addEventListener('touchend', function(e) {");
+        sb.AppendLine("      if (e.touches.length < 2 && pinchDist) { pinchDist = 0; gestureEnd(); }");
+        sb.AppendLine("    });");
+        sb.AppendLine("  }");
+        */
+        sb.AppendLine();
         sb.AppendLine("  // Anchor highlight: glow animation when navigating to a node via link");
         sb.AppendLine("  function highlightAnchor() {");
         sb.AppendLine("    var h = location.hash;");
@@ -2988,13 +3104,9 @@ internal class FlowchartService
         sb.AppendLine("    var idx = h.substring(6);");
         sb.AppendLine("    var g = document.getElementById('ng-' + idx);");
         sb.AppendLine("    if (!g) return;");
-        sb.AppendLine("    // Scroll node into center of viewport (works for horizontal + vertical)");
-        sb.AppendLine("    var sc = document.getElementById('scroll-container');");
-        sb.AppendLine("    var rect = g.getBoundingClientRect();");
-        sb.AppendLine("    var scRect = sc.getBoundingClientRect();");
-        sb.AppendLine("    var cx = rect.left - scRect.left + sc.scrollLeft + rect.width / 2 - sc.clientWidth / 2;");
-        sb.AppendLine("    var cy2 = rect.top - scRect.top + sc.scrollTop + rect.height / 2 - sc.clientHeight / 2;");
-        sb.AppendLine("    sc.scrollTo({ left: Math.max(0, cx), top: Math.max(0, cy2), behavior: 'smooth' });");
+        sb.AppendLine("    // Scroll node into center of viewport — the PAGE scrolls now (native zoom mode),");
+        sb.AppendLine("    // not #scroll-container, so scrollIntoView is the right primitive.");
+        sb.AppendLine("    g.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });");
         sb.AppendLine("    document.querySelectorAll('.anchor-highlight').forEach(function(el) { el.classList.remove('anchor-highlight'); });");
         sb.AppendLine("    void g.offsetWidth;");
         sb.AppendLine("    g.classList.add('anchor-highlight');");

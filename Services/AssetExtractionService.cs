@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.IO.Compression;
 using System.Net.Http;
 using System.Text.Json;
@@ -933,6 +933,8 @@ internal static class AssetExtractionService
 
                     var monoName = bf["m_Name"]?.AsString ?? "(unnamed)";
                     AppLogger.Info($"[POOL] Found PoolConfig '{monoName}' with {poolsArr.Children.Count} entries");
+                    Dictionary<string, string>? guidToName = null; // lazy: only when entries carry GUID refs
+                    int unresolvedGuids = 0;
 
                     foreach (var entry in poolsArr.Children)
                     {
@@ -941,14 +943,33 @@ internal static class AssetExtractionService
                             var itemTag = entry["itemTag"]?.AsString ?? "";
                             if (string.IsNullOrEmpty(itemTag)) continue;
 
-                            // prefabRef is an AssetReference — try multiple field access patterns
-                            var prefabRef = entry["prefabRef"];
-                            if (prefabRef.IsDummy) continue;
-
                             string prefabName = "";
+
+                            // Pattern 0 (26.07.01+): "prefabAssetReference" is an Addressables
+                            // AssetReferenceT — only m_AssetGUID, no path. Resolve the GUID through
+                            // the Addressables catalog (catalog.bin next to the version's XAPK).
+                            var assetRef = entry["prefabAssetReference"];
+                            if (!assetRef.IsDummy)
+                            {
+                                var guid = assetRef["m_AssetGUID"]?.AsString ?? "";
+                                if (!string.IsNullOrEmpty(guid))
+                                {
+                                    guidToName ??= LoadGuidToAssetNameMap(bundleDir, outputDir);
+                                    if (!guidToName.TryGetValue(guid, out prefabName!))
+                                    {
+                                        prefabName = "";
+                                        unresolvedGuids++;
+                                    }
+                                }
+                            }
+
+                            // prefabRef (≤ 26.06.02) is an AssetReference with a Path — try multiple field access patterns
+                            var prefabRef = entry["prefabRef"];
+                            if (prefabRef.IsDummy && string.IsNullOrEmpty(prefabName)) continue;
 
                             // Pattern 1: AssetReference with nested string fields (Path, m_AssetGUID, etc.)
                             // Walk all children looking for a string that looks like an asset path
+                            if (string.IsNullOrEmpty(prefabName) && !prefabRef.IsDummy)
                             foreach (var refChild in prefabRef.Children)
                             {
                                 if (refChild.TypeName != "string") continue;
@@ -961,7 +982,7 @@ internal static class AssetExtractionService
                             }
 
                             // Pattern 2: If no .prefab path found, check for a direct path/name string
-                            if (string.IsNullOrEmpty(prefabName))
+                            if (string.IsNullOrEmpty(prefabName) && !prefabRef.IsDummy)
                             {
                                 foreach (var refChild in prefabRef.Children)
                                 {
@@ -981,7 +1002,7 @@ internal static class AssetExtractionService
                             }
 
                             // Pattern 3: prefabRef is a PPtr — resolve via GetExtAsset
-                            if (string.IsNullOrEmpty(prefabName) && prefabRef.TypeName.StartsWith("PPtr"))
+                            if (string.IsNullOrEmpty(prefabName) && !prefabRef.IsDummy && prefabRef.TypeName.StartsWith("PPtr"))
                             {
                                 try
                                 {
@@ -1007,7 +1028,8 @@ internal static class AssetExtractionService
                         catch { }
                     }
 
-                    AppLogger.Info($"[POOL] Extracted {mapping.Count} pool entries from '{monoName}'");
+                    AppLogger.Info($"[POOL] Extracted {mapping.Count} pool entries from '{monoName}'" +
+                        (unresolvedGuids > 0 ? $" ({unresolvedGuids} GUID refs not found in catalog)" : ""));
                     var samples = mapping.Take(5).Select(kv => $"{kv.Key} → {kv.Value}");
                     AppLogger.Info($"[POOL] Sample: {string.Join(", ", samples)}");
                 }
@@ -1017,6 +1039,31 @@ internal static class AssetExtractionService
 
         AppLogger.Info($"[POOL] Extracted {mapping.Count} pool tag mappings");
         return mapping;
+    }
+
+    /// <summary>
+    /// Finds the version's Addressables catalog (catalog.bin, extracted next to the XAPK by the
+    /// Image Extractor) by walking up from the bundle dir, then from the output dir, and builds
+    /// the GUID → asset name map. Empty map (with a warning) when no catalog is found.
+    /// </summary>
+    private static Dictionary<string, string> LoadGuidToAssetNameMap(string bundleDir, string outputDir)
+    {
+        foreach (var start in new[] { bundleDir, outputDir })
+        {
+            var dir = start;
+            for (int i = 0; i < 4 && !string.IsNullOrEmpty(dir); i++)
+            {
+                var candidate = Path.Combine(dir, "catalog.bin");
+                if (File.Exists(candidate))
+                {
+                    try { return CatalogParserService.BuildGuidToAssetNameMap(candidate); }
+                    catch (Exception ex) { AppLogger.Warn($"[POOL] catalog.bin at {candidate} unreadable: {ex.Message}"); }
+                }
+                dir = Path.GetDirectoryName(dir) ?? "";
+            }
+        }
+        AppLogger.Warn($"[POOL] catalog.bin not found near '{bundleDir}' / '{outputDir}' — GUID prefab refs (26.07.01+) can't be resolved; run the Image Extractor catalog step first");
+        return new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
     }
 
     // ── Extract all bundles in parallel ──────────────────────────────

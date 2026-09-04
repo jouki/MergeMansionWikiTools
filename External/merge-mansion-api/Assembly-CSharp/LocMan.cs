@@ -112,7 +112,7 @@ public static class LocMan
 
     public static string GetHotspotDescriptionLocId(HotspotId hotspotId)
     {
-        return $"HotspotDescription_{hotspotId}";
+        return $"HotspotDescription_{HotspotIdNames.Resolve(hotspotId)}";
     }
 
     // CUSTOM: From v26.04.01 some hotspots use bare enum-name keys (no "HotspotDescription_" prefix).
@@ -120,23 +120,24 @@ public static class LocMan
     // Reports true if either prefixed or bare key exists.
     public static bool HasHotspotDescription(HotspotId hotspotId)
     {
-        if (!Enum.IsDefined(hotspotId))
+        // CUSTOM: runtime name map (HotspotIdNames) first, compiled enum as fallback
+        if (!HotspotIdNames.IsKnown(hotspotId))
             return false;
         if (HasString(GetHotspotDescriptionLocId(hotspotId)))
             return true;
-        return HasString(hotspotId.ToString());
+        return HasString(HotspotIdNames.Resolve(hotspotId));
     }
 
     public static string GetHotspotDescription(HotspotId hotspotId)
     {
-        // CUSTOM: Check if hotspot is defined
-        if (!Enum.IsDefined(hotspotId))
+        // CUSTOM: Check if hotspot is known (runtime map or compiled enum)
+        if (!HotspotIdNames.IsKnown(hotspotId))
             return string.Empty;
 
         // CUSTOM: Try prefixed key first ("HotspotDescription_{Id}"), then bare "{Id}" fallback (v26.04.01+).
         if (TryGet(GetHotspotDescriptionLocId(hotspotId), out var translation))
             return translation;
-        if (TryGet(hotspotId.ToString(), out translation))
+        if (TryGet(HotspotIdNames.Resolve(hotspotId), out translation))
             return translation;
         return string.Empty;
     }

@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -1618,7 +1618,6 @@ public partial class MainWindow : FluentWindow
     {
         _imageOptimiserPage ??= new ImageOptimiserPage(this);
         _imageOptimiserPage.ClearAll();
-        _imageOptimiserPage.ForceAlgorithmDetection = true; // prevent atlas override
         _imageOptimiserPage.AddFileFromPath(filePath);
         _imageOptimiserPage.SetMysteryReturnMode(onComplete);
         contentArea.Content = _imageOptimiserPage;
@@ -1633,7 +1632,6 @@ public partial class MainWindow : FluentWindow
     {
         _imageOptimiserPage ??= new ImageOptimiserPage(this);
         _imageOptimiserPage.ClearAll();
-        _imageOptimiserPage.ForceAlgorithmDetection = true;
         _imageOptimiserPage.AddFileFromPath(filePath);
         _imageOptimiserPage.SetMysteryReturnMode(onComplete, "Back to Mysteries");
         if (chain != null)

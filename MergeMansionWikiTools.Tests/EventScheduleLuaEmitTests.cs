@@ -54,4 +54,27 @@ public class EventScheduleLuaEmitTests
 
         Assert.Contains("parent = \"Legacy Lane\",", lua);
     }
+
+    [Fact]
+    public void Emit_headerLinesFirst_withGameVersion()
+    {
+        // createdAt/mmwtVersion (+ gameVersion) must be the very FIRST lines of the module:
+        // the wiki-merge readers (WikiMappingService.ExtractCreatedAt) parse them from line 1.
+        var lua = new LuaGeneratorService().GenerateEventScheduleLua(
+            new List<EventScheduleGroup>(), Array.Empty<AutoMergeWindow>(),
+            "2026-07-14T06:03:23.819", "26.06.01");
+
+        var lines = lua.Split('\n');
+        Assert.Equal("-- createdAt: 2026-07-14T06:03:23.819", lines[0].TrimEnd());
+        Assert.StartsWith("-- mmwtVersion: v", lines[1]);
+        Assert.Equal("-- gameVersion: 26.06.01", lines[2].TrimEnd());
+    }
+
+    [Fact]
+    public void Emit_omitsGameVersionLine_whenUnknown()
+    {
+        var lua = new LuaGeneratorService().GenerateEventScheduleLua(
+            new List<EventScheduleGroup>(), "2026-07-14T06:03:23.819");
+        Assert.DoesNotContain("-- gameVersion:", lua);
+    }
 }

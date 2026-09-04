@@ -36,6 +36,17 @@ internal static class Program
             // (splash type → droplet count) + weight-category odds/size arrays.
             return ProbeFishing(args[1], args.Length >= 3 ? args[2] : null);
         }
+        if (args.Length >= 3 && args[0] == "--probe-chest")
+        {
+            // --probe-chest <configPath> <itemTypeSubstring>
+            // Prints ChestFeatures loot structure for matching items: HowManyToRoll, producer type,
+            // and for PrefixProducer the guaranteed prefix Items sequence (resolved ItemTypes).
+            return ProbeChest(args[1], args[2]);
+        }
+        if (args.Length >= 3 && args[0] == "--probe-pool")
+        {
+            return ProbePool(args[1], args[2], args.Length >= 4 ? int.Parse(args[3]) : 2);
+        }
         if (args.Length >= 2 && args[0] == "--probe-one")
         {
             return ProbeOneBundle(args[1]);
@@ -44,6 +55,11 @@ internal static class Program
         {
             // --extract-minigame-icons <gameFilesRoot> <outputDir> <tpkPath>
             return ExtractIcons(args[1], args[2], args[3]);
+        }
+        if (args.Length >= 2 && args[0] == "--probe-hotspot-map")
+        {
+            // --probe-hotspot-map <xapk|apk|global-metadata.dat> [<HotspotId.cs to diff against>]
+            return ProbeHotspotMap(args[1], args.Length >= 3 ? args[2] : null);
         }
         if (args.Length >= 4 && args[0] == "--probe-loc")
         {
@@ -282,6 +298,22 @@ internal static class Program
         string configPath = args[0];
         string languagePath = args[1];
         string outputDir = args[2];
+
+        // Optional: --hotspot-map <xapk|apk|global-metadata.dat> — load HotspotId names from the
+        // game binary's metadata before dumping (mirrors HotspotIdMapService in the app). Lets a
+        // side dump prove the runtime map path even when the compiled enum is stale.
+        int mapArg = Array.IndexOf(args, "--hotspot-map");
+        if (mapArg >= 0 && mapArg + 1 < args.Length)
+        {
+            var src = args[mapArg + 1];
+            var bytes = src.EndsWith(".dat", StringComparison.OrdinalIgnoreCase)
+                ? File.ReadAllBytes(src)
+                : GameLogic.Il2Cpp.Il2CppMetadataEnumReader.ExtractGlobalMetadata(src);
+            var members = GameLogic.Il2Cpp.Il2CppMetadataEnumReader.ReadEnum(bytes, "HotspotId");
+            GameLogic.HotspotIdNames.Load(
+                members.Select(m => new KeyValuePair<int, string>(m.Value, m.Name)), Path.GetFileName(src));
+            Console.WriteLine($"HotspotId map loaded: {GameLogic.HotspotIdNames.LoadedCount} members from {Path.GetFileName(src)}");
+        }
 
         if (!File.Exists(configPath))
         {
@@ -1446,6 +1478,45 @@ internal static class Program
     }
 
     // ── --probe-daily-scoop: per config archive, DailyScoopEvents (not in JSON dump) + week summary ──
+    // ── --probe-chest: ChestFeatures loot structure incl. PrefixProducer prefix items ──
+    private static int ProbeChest(string configPath, string itemTypeSubstring)
+    {
+        MetaplayCore.Initialize();
+        var archive = Metaplay.Core.Config.ConfigArchive.FromBytes(File.ReadAllBytes(configPath));
+        var patched = PatchedConfigArchive.WithNoPatches(archive);
+        var cfg = (SharedGameConfig)GameConfigFactory.Instance.ImportSharedGameConfig(patched);
+        ClientGlobal.SharedGameConfig = cfg;
+
+        int hits = 0;
+        foreach (var item in cfg.Items.Values)
+        {
+            if (item?.ItemType == null || !item.ItemType.Contains(itemTypeSubstring, StringComparison.OrdinalIgnoreCase))
+                continue;
+            var chest = item.ChestFeatures;
+            if (chest == null || !chest.IsChest) continue;
+            hits++;
+            Console.WriteLine($"=== {item.ItemType} ===");
+            Console.WriteLine($"  HowManyToRoll = {chest.HowManyToRoll}");
+            var lp = chest.LootProducer;
+            Console.WriteLine($"  LootProducer  = {lp?.GetType().Name ?? "null"}");
+            if (lp is GameLogic.Player.Items.Production.PrefixProducer pp)
+            {
+                Console.WriteLine($"  Marker        = {pp.Marker}");
+                var items = pp.Items;
+                if (items == null) Console.WriteLine("  Prefix Items  = null");
+                else
+                {
+                    Console.WriteLine($"  Prefix Items  ({items.Count}):");
+                    foreach (var it in items)
+                        Console.WriteLine($"    {it?.GetDef(cfg)?.ItemType ?? "(unresolved)"}");
+                }
+                Console.WriteLine($"  BaseProducer  = {pp.BaseProducer?.GetType().Name ?? "null"}");
+            }
+        }
+        Console.WriteLine($"\n{hits} chest item(s) matched \"{itemTypeSubstring}\".");
+        return hits > 0 ? 0 : 2;
+    }
+
     // ── --probe-fishing: FishingSettings splash-type → droplet count + weight arrays ──
     private static int ProbeFishing(string configPath, string? languagePath)
     {
@@ -2439,6 +2510,62 @@ internal static class Program
         return 0;
     }
 
+    /// <summary>
+    /// --probe-pool &lt;startup_scenes_all.bundle&gt; &lt;classdata.tpk&gt; [maxEntries]
+    /// Dumps the field tree of the PoolConfig MonoBehaviour's first "pools" entries (names, type
+    /// names, string values) — use when the app logs "Extracted 0 pool entries" after a game
+    /// update to see which field got renamed (itemTag / prefabRef).
+    /// </summary>
+    private static int ProbePool(string bundlePath, string tpkPath, int maxEntries)
+    {
+        var am = new AssetsManager();
+        am.LoadClassPackage(tpkPath);
+        var bunInst = am.LoadBundleFile(bundlePath, unpackIfPacked: true);
+        var dirInfos = bunInst.file.BlockAndDirInfo.DirectoryInfos;
+        for (int fi = 0; fi < dirInfos.Count; fi++)
+        {
+            AssetsFileInstance? afileInst;
+            try { afileInst = am.LoadAssetsFileFromBundle(bunInst, fi); } catch { continue; }
+            if (afileInst?.file == null) continue;
+            am.LoadClassDatabaseFromPackage(afileInst.file.Metadata.UnityVersion);
+            foreach (var monoInfo in afileInst.file.GetAssetsOfType(AssetClassID.MonoBehaviour))
+            {
+                AssetTypeValueField? bf;
+                try { bf = am.GetBaseField(afileInst, monoInfo); } catch { continue; }
+                if (bf == null || bf.IsDummy) continue;
+                var pools = bf["pools"];
+                if (pools.IsDummy) continue;
+                var arr = pools["Array"];
+                if (arr.IsDummy || arr.Children.Count == 0) continue;
+                Console.WriteLine($"MonoBehaviour '{bf["m_Name"]?.AsString}' pools={arr.Children.Count} (Unity {afileInst.file.Metadata.UnityVersion})");
+                Console.WriteLine("Top-level fields: " + string.Join(", ", bf.Children.Select(c => $"{c.FieldName}:{c.TypeName}")));
+                for (int i = 0; i < Math.Min(maxEntries, arr.Children.Count); i++)
+                {
+                    Console.WriteLine($"--- pools[{i}]");
+                    DumpField(arr.Children[i], 1, 4);
+                }
+                return 0;
+            }
+        }
+        Console.WriteLine("No MonoBehaviour with a 'pools' array found.");
+        return 1;
+
+        static void DumpField(AssetTypeValueField f, int depth, int maxDepth)
+        {
+            var indent = new string(' ', depth * 2);
+            string val = "";
+            try
+            {
+                if (f.TypeName == "string") val = $" = \"{f.AsString}\"";
+                else if (f.Value != null && f.Children.Count == 0) val = $" = {f.AsString}";
+            }
+            catch { }
+            Console.WriteLine($"{indent}{f.FieldName}:{f.TypeName}{val}");
+            if (depth >= maxDepth) return;
+            foreach (var c in f.Children.Take(12)) DumpField(c, depth + 1, maxDepth);
+        }
+    }
+
     private static int ProbeOneBundle(string bundlePath)
     {
         if (!File.Exists(bundlePath)) { Console.Error.WriteLine($"Not found: {bundlePath}"); return 2; }
@@ -2704,6 +2831,41 @@ internal static class Program
 
     // Probe LocMan — load language file and list all translation keys matching regex pattern.
     // Useful for diagnosing missing HotspotDescription_* keys after enum rebuild.
+    /// <summary>
+    /// Reads the HotspotId enum straight from global-metadata.dat (inside an APK/XAPK or a raw
+    /// .dat) via Il2CppMetadataEnumReader — the same code path the app uses before every dump.
+    /// Optional second arg: a HotspotId.cs (Cpp2IL or repo stub) to diff against.
+    /// </summary>
+    private static int ProbeHotspotMap(string source, string? enumCsPath)
+    {
+        var sw = System.Diagnostics.Stopwatch.StartNew();
+        byte[] bytes = source.EndsWith(".dat", StringComparison.OrdinalIgnoreCase)
+            ? File.ReadAllBytes(source)
+            : GameLogic.Il2Cpp.Il2CppMetadataEnumReader.ExtractGlobalMetadata(source);
+        var version = GameLogic.Il2Cpp.Il2CppMetadataEnumReader.ReadVersion(bytes);
+        var members = GameLogic.Il2Cpp.Il2CppMetadataEnumReader.ReadEnum(bytes, "HotspotId");
+        Console.WriteLine($"metadata v{version}, {bytes.Length / 1024 / 1024} MB, HotspotId members: {members.Count} ({sw.ElapsedMilliseconds} ms)");
+        Console.WriteLine($"  first: {members[0].Name} = {members[0].Value}");
+        Console.WriteLine($"  last:  {members[^1].Name} = {members[^1].Value}");
+
+        if (enumCsPath != null)
+        {
+            var rx = new System.Text.RegularExpressions.Regex(@"^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(-?\d+),?\s*$", System.Text.RegularExpressions.RegexOptions.Multiline);
+            var stub = new Dictionary<string, int>();
+            foreach (System.Text.RegularExpressions.Match m in rx.Matches(File.ReadAllText(enumCsPath)))
+                stub[m.Groups[1].Value] = int.Parse(m.Groups[2].Value);
+            var fresh = members.ToDictionary(m => m.Name, m => m.Value);
+            var added = fresh.Keys.Where(k => !stub.ContainsKey(k)).ToList();
+            var removed = stub.Keys.Where(k => !fresh.ContainsKey(k)).ToList();
+            var renumbered = fresh.Where(kv => stub.TryGetValue(kv.Key, out var v) && v != kv.Value).ToList();
+            Console.WriteLine($"diff vs {Path.GetFileName(enumCsPath)} ({stub.Count} members): +{added.Count} new, -{removed.Count} removed, {renumbered.Count} renumbered");
+            foreach (var a in added.Take(10)) Console.WriteLine($"  + {a} = {fresh[a]}");
+            foreach (var r in removed.Take(10)) Console.WriteLine($"  - {r}");
+            foreach (var (k, v) in renumbered.Take(10)) Console.WriteLine($"  ~ {k}: {stub[k]} -> {v}");
+        }
+        return 0;
+    }
+
     private static int ProbeLoc(string configPath, string languagePath, string pattern)
     {
         Console.WriteLine($"=== ProbeLoc ===");

@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -906,9 +906,6 @@ public partial class ImageOptimiserPage : UserControl
     }
 
     private Action<List<string>>? _mysteryReturnCallback;
-
-    /// <summary>When true, AddImages will use Algorithm detection instead of Atlas.</summary>
-    public bool ForceAlgorithmDetection { get; set; }
 
     /// <summary>
     /// Configures the Image Optimiser to show "Back to Mysteries" instead of "Upload to Wiki",

@@ -1,4 +1,4 @@
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text;
 using MergeMansionWikiTools.Models;
 
@@ -12,14 +12,18 @@ public record ItemChunksResult(
 public class LuaGeneratorService
 {
     /// <summary>
-    /// Builds the standard Lua header comments (createdAt + mmwtVersion).
+    /// Builds the standard Lua header comments (createdAt + mmwtVersion + optional gameVersion).
+    /// MUST be the very first lines of every generated module: the wiki-merge readers
+    /// (WikiMappingService.ExtractCreatedAt/ExtractMmwtVersion) parse them from line 1.
     /// </summary>
-    private static string BuildLuaHeader(string? createdAt)
+    private static string BuildLuaHeader(string? createdAt, string? gameVersion = null)
     {
         var sb = new StringBuilder();
         if (!string.IsNullOrEmpty(createdAt))
             sb.Append($"-- createdAt: {createdAt}\n");
         sb.Append($"-- mmwtVersion: {AppVersion.Version}\n");
+        if (!string.IsNullOrEmpty(gameVersion))
+            sb.Append($"-- gameVersion: {gameVersion}\n");
         return sb.ToString();
     }
 
@@ -441,10 +445,17 @@ public class LuaGeneratorService
         Dictionary<string, double>? ChestLoot = null,
         /// <summary>ConstantProducer chest payload — ordered guaranteed (Item, Quantity) list. Order matters, keep as-is.</summary>
         List<(string Item, int Quantity)>? ChestConstant = null,
+        /// <summary>PrefixProducer guaranteed prefix — ordered (Item, Quantity) list dropped BEFORE the random
+        /// BaseProducer rolls (per-player marker sequence). Emitted as chestPrefix alongside chestLoot.</summary>
+        List<(string Item, int Quantity)>? ChestPrefix = null,
         /// <summary>FishingRodFeatures.IsFishingRod — Lucky Catch rods and Lucky Snap cameras ("photo shot" = cast).
         /// Their catch odds are emitted through the shared Odds field; this flag lets Lua route them to the
         /// variant-aware loot layout instead of the generator odds matrix.</summary>
-        bool IsFishingRod = false);
+        bool IsFishingRod = false,
+        /// <summary>OrderFeatures recipes (Empty Jam Jar, 26.07.01+): each task = odds (percent), required (item, amount)
+        /// list and rewards (item, amount) list. Emitted as orderTasks = {{odds, req = {{id, amt}…}, rew = {{id, amt}…}}…}
+        /// so the wiki Area Requirements solver can price a required chain that only an order produces.</summary>
+        List<ParsedTask>? OrderTasks = null);
 
     /// <summary>
     /// True iff the item is a "truly infinite producer" — stable main source for its drops/spawns.
@@ -940,7 +951,9 @@ public class LuaGeneratorService
                     // constant boxes also carry synthesized 100% odds — suppress those in favour of the ordered payload
                     item.ChestRewardItems is { Count: > 0 } ? null : item.ChestRewardOdds,
                     item.ChestRewardItems,
-                    item.IsFishingRod));
+                    item.ChestPrefixItems,
+                    item.IsFishingRod,
+                    item.OrderTasks));
             }
         }
         return list;
@@ -962,6 +975,17 @@ public class LuaGeneratorService
 
             if (it.IsGenerator) sb.Append("isGen = true, ");
             if (it.IsFishingRod) sb.Append("isFishingRod = true, ");
+            // Order recipes (OrderFeatures). Odds are the game's percent values in declaration order;
+            // the wiki solver weights recipes by them (weighted-average cost per order).
+            if (it.OrderTasks is { Count: > 0 })
+            {
+                sb.Append("isOrder = true, orderTasks = {");
+                sb.Append(string.Join(", ", it.OrderTasks.Select(t =>
+                    "{odds = " + t.Odds.ToString(CultureInfo.InvariantCulture)
+                    + ", req = {" + string.Join(", ", t.Required.Select(r => $"{{id = \"{Esc(r.ItemType)}\", amt = {r.Amount}}}")) + "}"
+                    + ", rew = {" + string.Join(", ", t.Rewards.Select(r => $"{{id = \"{Esc(r.ItemType)}\", amt = {r.Amount}}}")) + "}}")));
+                sb.Append("}, ");
+            }
             if (it.IsTemporary) sb.Append("isTemp = true, ");
             if (it.SpeedUpCostGems.HasValue) sb.Append($"skipPrice = {it.SpeedUpCostGems.Value}, ");
             if (it.RechargeTimeMs > 0) sb.Append($"rechargeTime = {it.RechargeTimeMs}, ");
@@ -1053,6 +1077,15 @@ public class LuaGeneratorService
             {
                 sb.Append("isChest = true, ");
                 if (it.ChestRolls > 0) sb.Append($"chestRolls = {it.ChestRolls}, ");
+                // Guaranteed PrefixProducer sequence (before the random rolls) — ordered, alongside
+                // chestLoot: e.g. Daily Trades card chest = 4×+1× envelopes then 2 random rolls.
+                if (it.ChestPrefix is { Count: > 0 })
+                {
+                    sb.Append("chestPrefix = {");
+                    sb.Append(string.Join(", ", it.ChestPrefix.Select(ci =>
+                        $"{{id = \"{Esc(ci.Item)}\", qty = {ci.Quantity}}}")));
+                    sb.Append("}, ");
+                }
                 if (it.ChestConstant is { Count: > 0 })
                 {
                     sb.Append("chestConstant = {");
@@ -1224,9 +1257,10 @@ public class LuaGeneratorService
     public string GenerateEventScheduleLua(List<EventScheduleGroup> groups, string? createdAt)
         => GenerateEventScheduleLua(groups, System.Array.Empty<AutoMergeWindow>(), createdAt);
 
-    public string GenerateEventScheduleLua(List<EventScheduleGroup> groups, IReadOnlyList<AutoMergeWindow> autoMerge, string? createdAt)
+    public string GenerateEventScheduleLua(List<EventScheduleGroup> groups, IReadOnlyList<AutoMergeWindow> autoMerge, string? createdAt, string? gameVersion = null)
     {
         var sb = new StringBuilder();
+        sb.Append(BuildLuaHeader(createdAt, gameVersion));
         sb.AppendLine("-- Module:Datatable/Events");
         sb.AppendLine("-- Schedule data for timed Events, consumed by Module:Events to render");
         sb.AppendLine("-- per-event schedules and the global upcoming-events calendar.");
@@ -1241,11 +1275,13 @@ public class LuaGeneratorService
         sb.AppendLine("--                  icon via Module:Utils Icon(name), not this field.");
         sb.AppendLine("--   parent      -- (Garage Cleanups only) the seasonal event this accompanies;");
         sb.AppendLine("--                  the widget nests the cleanup under that event.");
-        sb.AppendLine("--   prefix      -- (optional; CollectibleBoards events only) id-family prefix of the");
-        sb.AppendLine("--                  game event id (\"CBE\"/\"LDE\"/\"LC\"/\"LS\"/\"SE\"). Module:DailyScoop");
-        sb.AppendLine("--                  uses it to resolve Daily Scoop tasks whose params are ID-PREFIX");
-        sb.AppendLine("--                  filters (CBE_ matches CBE_* events only, not LDE_*). Preserved");
-        sb.AppendLine("--                  by regeneration on historical entries.");
+        sb.AppendLine("--   prefix      -- (optional) id-family prefix of the game event id, before the first");
+        sb.AppendLine("--                  '_' (\"CBE\"/\"LDE\"/\"LC\"/\"LS\"/\"LBE\"/\"BLE\"/\"CR\"/\"DE\"/\"MyTea\"/...).");
+        sb.AppendLine("--                  Module:DailyScoop resolves Daily Scoop task gates on it: param");
+        sb.AppendLine("--                  ID-PREFIX filters (CBE_ matches CBE_* events only, not LDE_*)");
+        sb.AppendLine("--                  and per-task requirement gates (LBE_ matches The Great Bake-off,");
+        sb.AppendLine("--                  never Boulton Legacy = BLE_*). Preserved by regeneration on");
+        sb.AppendLine("--                  historical entries.");
         sb.AppendLine("--   weekType    -- (Daily Scoop runs only) week type Easy/Medium/Hard/Super, from the");
         sb.AppendLine("--                  game MinigameId. Module:Events derives the reward icon and");
         sb.AppendLine("--                  Module:DailyScoop its labels/tabs from it.");
@@ -1268,7 +1304,6 @@ public class LuaGeneratorService
         sb.AppendLine("-- The game config only keeps the LATEST scheduled run per event entry, so");
         sb.AppendLine("-- re-aired events lose their old dates on regeneration. Historical runs must");
         sb.AppendLine("-- be preserved by merging (never blanket-overwrite this module).");
-        sb.Append(BuildLuaHeader(createdAt));
         sb.AppendLine();
         sb.AppendLine("-- Events are ordered newest-first (by most recent run); the category");
         sb.AppendLine("-- field groups them in the rendered calendar, not here.");

@@ -155,7 +155,60 @@ public class ChainViewModel : INotifyPropertyChanged
         // variants group the same way as aliases (own "Variants" bucket in alias mode)
         HasAliasItems = Items.Any(i => i.IsAlias || i.IsVariant);
 
+        ComputeVariantLetterHints();
         RebuildItemsView();
+    }
+
+    /// <summary>
+    /// Watermarks each variant's empty label box with the positional letter the wiki will assign.
+    /// Mirrors the Module:Items ordering (deterministic since rev 49880):
+    /// • chest/rod chains — ALL boxes (incl. non-variant plain chests, excl. aliases) sorted by
+    ///   variantOrder-first (asc) → level → name → itemType; letter = position (A + index).
+    /// • other chains — variants only, shared WikiTableGenerator.SortVariants order.
+    /// Letters shift when variantOrder edits are SAVED (VMs rebuild from the refreshed mapping).
+    /// </summary>
+    private void ComputeVariantLetterHints()
+    {
+        static string Letter(int i) => i < 26 ? ((char)('A' + i)).ToString() : "A" + (char)('A' + i - 26);
+
+        // Chest-loot table columns: every chest/fishing-rod item of the chain is a box.
+        var boxes = Items.Where(i => !i.IsAlias && (i.Source.IsChest || i.Source.IsFishingRod))
+            .OrderBy(i => i.Source.MappingVariantOrder.HasValue ? 0 : 1)
+            .ThenBy(i => i.Source.MappingVariantOrder ?? int.MaxValue)
+            .ThenBy(i => i.Source.Level)
+            .ThenBy(i => i.Source.Name, StringComparer.Ordinal)
+            .ThenBy(i => i.ItemType, StringComparer.Ordinal)
+            .ToList();
+        if (boxes.Count >= 2)
+        {
+            // Letters only where disambiguation is needed (mirrors Module:Items rev 49888):
+            // a positional letter shows ONLY when another box shares the same level — a single
+            // box per tier is already identified by its icon/level and gets no letter.
+            var perLevel = boxes.GroupBy(b => b.Source.Level).ToDictionary(g => g.Key, g => g.Count());
+            for (int i = 0; i < boxes.Count; i++)
+                if (perLevel[boxes[i].Source.Level] > 1)
+                    boxes[i].VariantLetterHint = Letter(i);
+            // Non-variant boxes (plain chests) have no label field, but they still occupy a wiki
+            // column — show their letter as a static badge when a variant exists at their level,
+            // so the app row ↔ wiki column mapping is complete (e.g. plain Red chest = G).
+            foreach (var b in boxes.Where(b => !b.IsVariant && b.VariantLetterHint.Length > 0))
+                b.ShowStaticLetter = boxes.Any(v => v.IsVariant && v.Source.Level == b.Source.Level);
+            return;
+        }
+
+        // No chest table — positional letters among the variant items (Decay Odds / Merge Stages
+        // variant columns use the shared variantSort = SortVariants order). Same per-level rule:
+        // a lone variant on its level needs no letter.
+        var variants = Items.Where(i => i.IsVariant && !i.IsAlias).ToList();
+        if (variants.Count < 2) return;
+        var perLevelV = variants.GroupBy(v => v.Source.Level).ToDictionary(g => g.Key, g => g.Count());
+        var sorted = WikiTableGenerator.SortVariants(variants.Select(v => v.Source));
+        for (int i = 0; i < sorted.Count; i++)
+        {
+            if (perLevelV.GetValueOrDefault(sorted[i].Level) <= 1) continue;
+            var vm = variants.FirstOrDefault(v => ReferenceEquals(v.Source, sorted[i]));
+            if (vm != null) vm.VariantLetterHint = Letter(i);
+        }
     }
 
     private void RebuildItemsView()
@@ -250,6 +303,15 @@ public class ItemViewModel : INotifyPropertyChanged
         set { _variantOrderEdit = value; _variantOrderEditSet = true; }
     }
 
+    /// <summary>Watermark for the empty label box: the positional letter the wiki assigns when no
+    /// label is set (mirrors Module:Items chest-column sort — deterministic since rev 49880).
+    /// Computed by <see cref="ChainViewModel"/> after items are built; empty when not applicable.</summary>
+    public string VariantLetterHint { get; set; } = "";
+
+    /// <summary>Show <see cref="VariantLetterHint"/> as a STATIC badge (no edit field) — set on
+    /// non-variant chest boxes that still occupy a wiki column, when a variant exists at their level.</summary>
+    public bool ShowStaticLetter { get; set; }
+
     /// <summary>True when the label OR order edit differs from the published mapping value
     /// — keeps the action bar (with Save Mapping) visible even with nothing checked.</summary>
     public bool VariantMappingDirty =>
@@ -272,10 +334,15 @@ public class ItemViewModel : INotifyPropertyChanged
         get
         {
             var parts = new List<string>();
+            // Classification flags first — they decide whether the item gets its own wiki row,
+            // so they matter more at a glance than what the item does. ALIAS had no badge at all
+            // before: its only cue was "always show the ItemType", which the global Show IDs
+            // toggle makes invisible by showing IDs on every item.
+            if (Source.IsAlias) parts.Add("ALIAS");
+            if (Source.IsVariant) parts.Add("VAR");
             if (Source.IsGenerator) parts.Add("GEN");
             if (Source.IsSpawner) parts.Add("SPAWN");
             if (Source.HasDecay) parts.Add("DECAY");
-            if (Source.IsVariant) parts.Add("VAR");
             return parts.Count > 0 ? string.Join(" ", parts) : "";
         }
     }

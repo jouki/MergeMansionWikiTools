@@ -38,11 +38,14 @@ public sealed class EventScheduleGroup
     /// <summary>For sub-events (Garage Cleanup): the seasonal event this accompanies; the widget nests under it. Null otherwise.</summary>
     public string? Parent { get; set; }
     /// <summary>
-    /// Event-id family prefix (CollectibleBoards only: "CBE"/"LDE"/"LC"/"LS"/"SE"), derived from the
-    /// game id before the first '_'. Emitted to Module:Datatable/Events so Lua (Module:DailyScoop
-    /// fallback resolution) can match Daily Scoop tasks whose params are ID-PREFIX filters
-    /// (e.g. CompleteNCollectibleBoardEventMilestone param "CBE_" matches CBE_* events only,
-    /// NOT LDE_*). Preserved by the merge on historical entries. Null for other libraries.
+    /// Event-id family prefix ("CBE"/"LDE"/"LC"/"LS"/"LBE"/"BLE"/"CR"/"DE"/"MyTea"/…), derived from
+    /// the game id before the first '_' for EVERY library. Emitted to Module:Datatable/Events so Lua
+    /// (Module:DailyScoop fallback resolution) can match Daily Scoop task gates purely on data —
+    /// both param ID-PREFIX filters (CompleteNCollectibleBoardEventMilestone "CBE_" matches CBE_*
+    /// only, NOT LDE_*) and per-task requirement gates (RegexPattern "LBE_" matches The Great
+    /// Bake-off = LBE_BakeOff, never Boulton Legacy = BLE_*). Families with no gate (MixABoost,
+    /// DailyChallenges…) are harmless: matching is an exact compare against the wanted family.
+    /// Preserved by the merge on historical entries. Null when the id has no '_'.
     /// </summary>
     public string? Prefix { get; set; }
     public List<EventScheduleRun> Runs { get; } = new();
@@ -342,14 +345,10 @@ public class EventScheduleService
 
                 var badge = spec.BadgeField != null ? GetString(e, spec.BadgeField) : "";
 
-                // Id-family prefix (CBE_/LDE_/LC_/LS_/SE_) — only CollectibleBoards ids form these
-                // families; other libraries' ConfigKeys would yield meaningless prefixes.
-                string? prefix = null;
-                if (spec.Library == "CollectibleBoards")
-                {
-                    var us = id.IndexOf('_');
-                    if (us > 0) prefix = id[..us];
-                }
+                // Id-family prefix (CBE_/LDE_/LC_/LS_/LBE_/BLE_/CR_/DE_/MyTea_/…) for every library —
+                // Module:DailyScoop matches event gates on it (see EventScheduleGroup.Prefix docs).
+                var us = id.IndexOf('_');
+                string? prefix = us > 0 ? id[..us] : null;
 
                 // Auto-detect the On Fire booster week (Teatime Delight): any of the event's
                 // Milestones grants a RewardOnFire. Other libraries have no Milestones → false.

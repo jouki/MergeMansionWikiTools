@@ -60,7 +60,7 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
 
         private void SerializeHotspotDef(JsonWriter writer, HotspotDef hotspotDef, JsonSerializer serializer)
         {
-            if (!Enum.IsDefined(hotspotDef.ConfigKey))
+            if (!HotspotIdNames.IsKnown(hotspotDef.ConfigKey))
                 _output.Warning(DumperGlobals.VersionBumped ? "HotspotId {0} unknown" : "[Metacore] HotspotId {0} unknown", hotspotDef.ConfigKey);
 
             if (hotspotDef.ConfigKey == HotspotId.None)
@@ -74,7 +74,7 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
 
         private void SerializeHotspot(JsonWriter writer, HotspotDefinition hotspot, JsonSerializer serializer)
         {
-            if (!Enum.IsDefined(hotspot.ConfigKey))
+            if (!HotspotIdNames.IsKnown(hotspot.ConfigKey))
                 _output.Warning(DumperGlobals.VersionBumped ? "HotspotId {0} unknown" : "[Metacore] HotspotId {0} unknown", hotspot.ConfigKey);
 
             if (hotspot.ConfigKey == HotspotId.None)
@@ -132,7 +132,7 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
                 return LocMan.GetHotspotDescription(hotspot.Id);
 
             var groupId = hotspot.MultistepGroupId?.ToString();
-            if (string.IsNullOrEmpty(groupId) || groupId == hotspot.Id.ToString())
+            if (string.IsNullOrEmpty(groupId) || groupId == HotspotIdNames.Resolve(hotspot.Id))
                 return null;
 
             var members = _config.HotspotDefinitions.EnumerateAll()
@@ -170,7 +170,7 @@ namespace merge_mansion_dumper.Dumper.Json.Metaplay
 
             var description = ResolveHotspotDescription(hotspot)?.Replace('"', '\'') ?? string.Empty;
 
-            var res = hotspot.ConfigKey + Environment.NewLine + description;
+            var res = HotspotIdNames.Resolve(hotspot.ConfigKey) + Environment.NewLine + description;
 
             foreach (var req in hotspot.RequirementsList)
             {
