@@ -4,6 +4,7 @@ Run: python Codex/build/portraits.py   -> Codex/_cache/portraits/<CharacterId>__
 Source: APKs/<newest>/image_atlas_data.json (sprite rects) + APKs/<newest>/Export - PNGs/**/<textureName>.png.
 Sprite naming in the game: <Character><State> (MaddieWorried), <Character>_<State> (McLeod_Doubtful); Default = <Character>Default
 or the bare character name. Nothing is stored in git (derived from the user's asset export)."""
+import collections
 import json
 import os
 import re
@@ -19,6 +20,7 @@ except ImportError:                                     # PIL 12 is installed on
 
 SIZE = 160
 STATE_FALLBACKS = {"NoChange": "Default", None: "Default", "": "Default"}
+SEASONAL = re.compile(r"(Winter|Summer|Spring|Autumn|Xmas|Christmas|Halloween|Easter|Valentine|Season|Skin|Outfit|Event|_20\d\d|Beach|Party|Paris|Japan)", re.I)
 
 
 def newest_version_dir():
@@ -46,8 +48,8 @@ def sprite_candidates(cid, name, state):
     out = []
     for b in dict.fromkeys(base_ids):
         if state == "Default":
-            out += [f"{b}Default", f"{b}_Default", f"{b}-Default", b]
-        out += [f"{b}{state}", f"{b}_{state}", f"{b}-{state}"]
+            out += [f"{b}Default", f"{b}-Default", b, f"{b}_Default"]
+        out += [f"{b}{state}", f"{b}-{state}", f"{b}_{state}"]
     return out
 
 
@@ -74,7 +76,7 @@ def main():
         return 1
     codex = common.read_json(os.path.join(common.CODEX, "codex.json"))
     # newest version first; older versions with an atlas + PNG export fill in characters that left the game (Jailbreak cast)
-    sprites, pngs = {}, {}
+    all_sprites, pngs = collections.defaultdict(list), {}
     sources = []
     for v in reversed(common.versions()):
         vd = os.path.join(common.APKS, v)
@@ -83,10 +85,24 @@ def main():
         if os.path.exists(atlas_p) and exp:
             sources.append(v)
             for sp in common.read_json(atlas_p).get("sprites") or []:
-                sprites.setdefault(sp["name"], sp)
+                all_sprites[sp["name"]].append(sp)
             for k, p in png_index(exp).items():
                 pngs.setdefault(k, p)
     print("asset sources (newest first):", sources)
+
+    def sprite_score(sp):
+        """Lower is better: the plain outfit texture beats seasonal / event skins (…_Winter2023, …_Xmas, …_Skin…)."""
+        t = sp["textureName"] or ""
+        n = sp["name"]
+        if t in (n, n + "_Default"):
+            return 0
+        if SEASONAL.search(t):
+            return 3
+        return 2                                           # another outfit bundle (Beard, Hot, Golf, Clean…): only if no plain one
+
+    # every variant of a sprite name, best outfit first (plain / _Default bundle, then other outfits, seasonal skins last);
+    # the crop later takes the first variant whose texture PNG is actually exported
+    sprites = {n: sorted(lst, key=sprite_score) for n, lst in all_sprites.items()}
     states = set()
     for l in codex["lines"].values():
         for r in l.get("state") or []:
@@ -101,13 +117,13 @@ def main():
     for cid, c in codex["characters"].items():
         for state in states:
             for cand in sprite_candidates(cid, c["name"], state):
-                sp = sprites.get(cand)
+                variants = sprites.get(cand) or []
+                sp = next((v for v in variants if pngs.get(v["textureName"]) or pngs.get(v["name"])), None)
                 if not sp:
+                    for v in variants:
+                        missing_png.add(v["textureName"])
                     continue
                 png = pngs.get(sp["textureName"]) or pngs.get(sp["name"])
-                if not png:
-                    missing_png.add(sp["textureName"])
-                    continue
                 dst = os.path.join(out_dir, f"{cid}__{state}.png")
                 if not os.path.exists(dst):
                     img = crop(png, sp)
