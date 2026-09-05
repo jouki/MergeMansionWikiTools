@@ -87,10 +87,18 @@ main.size-l{--pw:150px;--fs:18px;--maxw:1320px}
 .script{padding:12px 18px 14px;font-family:var(--mono);font-size:var(--fs);line-height:1.5}
 .ln{display:grid;grid-template-columns:150px 1fr;gap:0 14px;padding:3px 0;align-items:baseline}
 .ln.stage{grid-template-columns:var(--pw) 1fr var(--pw);align-items:center;gap:0 14px;padding:6px 0}
-.ln.stage .who{grid-column:2;font-size:calc(var(--fs) * .82);letter-spacing:.06em;margin-bottom:2px}
+.ln.stage .bub{grid-column:2;grid-row:1;position:relative;max-width:82%;background:var(--surface-2);border:1px solid var(--line);border-radius:16px;padding:8px 14px 9px}
+.ln.stage .bub.l{justify-self:start;border-bottom-left-radius:4px}
+.ln.stage .bub.r{justify-self:end;border-bottom-right-radius:4px;text-align:right}
+.ln.stage .bub.r .who{justify-content:flex-end}
+.ln.stage .bub::after{content:'';position:absolute;bottom:10px;width:0;height:0;border:8px solid transparent}
+.ln.stage .bub.l::after{left:-15px;border-right-color:var(--surface-2)}
+.ln.stage .bub.r::after{right:-15px;border-left-color:var(--surface-2)}
+.ln.stage .bub.n{justify-self:center;border-style:dashed;text-align:center}
+.ln.stage .who{display:flex;gap:8px;align-items:baseline;font-size:calc(var(--fs) * .82);letter-spacing:.06em;margin-bottom:3px;white-space:normal}
 .ln.stage .who small{display:inline;margin-left:8px}
-.ln.stage .txt{grid-column:2;max-width:none}
-.ln.stage .side{grid-row:1/3;width:var(--pw);height:var(--pw);display:flex;align-items:flex-end;justify-content:center}
+.ln.stage .txt{max-width:none}
+.ln.stage .side{grid-row:1;width:var(--pw);height:var(--pw);display:flex;align-items:flex-end;justify-content:center}
 .ln.stage .side.l{grid-column:1} .ln.stage .side.r{grid-column:3}
 .ln.stage .side img{width:var(--pw);height:var(--pw);object-fit:contain;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
 .ln.stage .side.mute img{opacity:.38;filter:grayscale(.6)}
@@ -263,7 +271,8 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
       const chg = visChanges(l).map(c => `<span class="chg">${esc(c.version)}${c.kind==='cosmetic'?' (cosmetic)':''}: <s>${esc(c.from||'∅')}</s></span>`).join('');
       if (l.text && (l.left || l.right)) {
         const st = l.state || 'Default';
-        return `<div class="ln stage">${sideHtml(l.left, l.side==='L'?st:'Default', 'l', l.side==='L')}<div class="who">${who}</div><div class="txt">${hl(l.text,q)}${chg}</div>${sideHtml(l.right, l.side==='R'?st:'Default', 'r', l.side==='R')}</div>`;
+        const bside = l.side==='L' ? 'l' : (l.side==='R' ? 'r' : 'n');
+        return `<div class="ln stage">${sideHtml(l.left, l.side==='L'?st:'Default', 'l', l.side==='L')}<div class="bub ${bside}"><div class="who">${who}</div><div class="txt">${hl(l.text,q)}${chg}</div></div>${sideHtml(l.right, l.side==='R'?st:'Default', 'r', l.side==='R')}</div>`;
       }
       return `<div class="ln ${l.text?'':'empty'} ${l.speaker?'':'narr'}"><div class="who">${who}</div><div class="txt">${l.text?hl(l.text,q):esc(l.id)}${chg}</div></div>`;
     }).join('');
