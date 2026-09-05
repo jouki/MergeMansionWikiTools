@@ -91,6 +91,16 @@ Every story in which Pearl speaks.
 **MASON** (Encouraging): I had to sell my school desk to get to some of them!
 **PEARL** (Surprised): You did WHAT?!
 
+### Easter 2025 — item discovered: Garden Bunny
+`CBE_Easter2025_EasterDecorations_04_Dialogue` · seen 25.05.01–26.03.01
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Decos_04'], items=['Garden Bunny'], moment=item discovered (versions 25.05.01–26.03.01)
+
+**PEARL**: Mason?
+**PEARL** (Doubtful): Come out already. We have to take a photo of you in your costume!
+**MASON** (Annoyed): I'd prefer it if you didn't.
+**PEARL** (Encouraging): Please? Pleeeeeease?
+**MASON** (Thinking): Fine. I can't help my cuteness!
+
 ### Frosty Secrets — item discovered: Pocket Knife
 `CBE_FrostySecrets2024_BackpackSupplies_03_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_BackpackSupplies_03'], items=['Pocket Knife'], moment=item discovered (versions 25.05.01–26.07.01)
@@ -191,7 +201,7 @@ Every story in which Pearl speaks.
 **PEARL** (Encouraging): Not if you’re wearing enough layers. See - I’m learning!
 
 ### Frosty Secrets — entering board
-`CBE_FrostySecrets2024_Intro_Dialogue` · seen 25.10.01–26.07.01
+`CBE_FrostySecrets2024_Intro_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Frosty Secrets, eventId=CBE_FrostySecrets2024, eventType=Collectible Board Event, moment=entering board (versions 25.10.01–26.07.01)
 
 **MADDIE** (Joyous): What an amazing day! Don’t you just love winter?  
@@ -225,7 +235,6 @@ Every story in which Pearl speaks.
 **MADDIE** (Encouraging): Well, I didn’t want to spoil the surprise - it’s part of the full winter experience package!  
   _earlier:_ ~~Everything was still there, in perfect order. He clearly intended to go back but never did.~~ (until 25.10.01)
 **MADDIE** (Doubtful): What happened to him, Grandma?
-**GRANDMA** (Relaxed): That's enough secrets for one day, dearie. I... I will tell you one day, but let's try that apple pie.
 
 ### Frosty Secrets — item discovered: Winter Shed
 `CBE_FrostySecrets2024_Shed_Dialogue` · seen 25.05.01–26.07.01
@@ -459,7 +468,7 @@ Every story in which Pearl speaks.
 **JACKIE** (Surprised): Someone is definitely hiding something - are those bullet holes??
 
 ### Recycle Runway — event start
-`CBE_RecycleRunway2024_IntroDialogue_Dialogue` · seen 26.04.02–26.07.01
+`CBE_RecycleRunway2024_IntroDialogue_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Recycle Runway, eventId=CBE_RecycleRunway2024, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **PEARL**: How's life at the newspaper, Jackie?
@@ -537,9 +546,9 @@ Every story in which Pearl speaks.
 **JACKIE** (Doubtful): A wig? This is starting to look like a collection of disguises...
 **PEARL** (Doubtful): Why would there be a trunk full of old disguises in the Mansion?
 
-### CBE VoyancesVisions CharacterItems 02B Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_CharacterItems_02B_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Encouraging): Mmmm... Mmmmmmmmm... I can see you are a successful...
 **PEARL**: Event planner! I used to work in the corporate world, but I prefer small town life.
@@ -553,9 +562,9 @@ Every story in which Pearl speaks.
 **PEARL** (Encouraging): You're pretty good at this!
 **LADY VOYANCE** (Charming): I am MERELY a conduit, my dear.
 
-### CBE VoyancesVisions CharacterItems 10B Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_CharacterItems_10B_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Hmmm, interesting...
 **PEARL**: What is it?
@@ -569,9 +578,9 @@ Every story in which Pearl speaks.
 **LADY VOYANCE** (Thinking): I have INDEED. He tried to sneak into my caravan, once.
 **PEARL** (Doubtful): Yeah... Sorry about that.
 
-### CBE VoyancesVisions MalzarAActive 01B Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_MalzarAActive_01B_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: SILENCE! Malzar will now begin.
 **MALZAR**: <i>A whispered thought, a shifting glance. Plans arise as shadows dance.</i>
@@ -579,18 +588,18 @@ Every story in which Pearl speaks.
 **PEARL** (Thinking): But it does sound an awful lot like a certain older lady I know.
 **LADY VOYANCE** (Thinking): Uh-huh. But when it comes to secrets, I must advise caution!
 
-### CBE VoyancesVisions MalzarBActive 01B Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_MalzarBActive_01B_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MALZAR**: <i>The truth revealed, yet none behold. Hidden deep within the bold.</i>
 **PEARL** (Thinking): OK, I'm lost. What does he mean?
 **LADY VOYANCE**: That is for YOU to find out, dear!
 **LADY VOYANCE** (Thinking): In any case, I'm only right nine times out of ten.
 
-### CBE VoyancesVisions MalzarCActive 01B Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_MalzarCActive_01B_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Calling): Speak, Malzar!
 **MALZAR**: <i>A shadow waits as coins are weighed. In silent loss, their fortune fades.</i>
@@ -600,9 +609,9 @@ Every story in which Pearl speaks.
 **LADY VOYANCE** (Thinking): But your foreboding feeling may NOT be quite unfounded.
 **LADY VOYANCE** (Thinking): The stars tell me there is something strange afoot here...
 
-### CBE VoyancesVisions OminousSecrets 02B Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_OminousSecrets_02B_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Shhhh!
 **PEARL** (Doubtful): I didn't say anything...
@@ -614,9 +623,9 @@ Every story in which Pearl speaks.
 **LADY VOYANCE** (Charming): If you wish to hear more, a small extra fee allows you to consult Malzar!
 **PEARL** (Doubtful): Malzar?
 
-### CBE VoyancesVisions OminousSecrets 03B Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_OminousSecrets_03B_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Calling): You must find cosmic clarity!
 **PEARL** (Doubtful): What does that mean?
@@ -624,9 +633,9 @@ Every story in which Pearl speaks.
 **PEARL** (Thinking): Betrayal? So where do I look for it?
 **LADY VOYANCE**: I don't have ALL the answers, my dear.
 
-### CBE VoyancesVisions OminousSecrets 07B Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_OminousSecrets_07B_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: I can see... There is--
 **LADY VOYANCE** (Surprised): *GASP!*
@@ -636,9 +645,9 @@ Every story in which Pearl speaks.
 **LADY VOYANCE** (Doubtful): Money, my dear.
 **LADY VOYANCE** (Doubtful): Someone stands to lose big.
 
-### CBE VoyancesVisions TarotTableActiveNormal 01B Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_TarotTableActiveNormal_01B_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Ah, a new customer!
 **PEARL**: A friend of mine said you were able to help her with a personal thing, so...
@@ -651,7 +660,7 @@ Every story in which Pearl speaks.
 **LADY VOYANCE** (Charming): Then it is time to consult the stars...
 
 ### The Great Bush Bonanza! — entering board
-`LBE_BushBonanzaIntro` · seen 24.04.01–26.07.01
+`LBE_BushBonanzaIntro` · seen 23.09.02–26.07.01
 - trigger: event, event=The Great Bush Bonanza!, eventId=LBE_BushBonanza, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–26.07.01)
 
 **PEARL**: Welcome everyone to the Great Bush Bonanza! Hopewell Bay’s premier topiary event!
@@ -667,6 +676,19 @@ Every story in which Pearl speaks.
 **MADDIE** (Charming): You and Grandma really have a competitive streak, but alright.
 **MADDIE** (Relaxed): You’re on!
 **PEARL** (Encouraging): That’s the spirit!
+
+### The Great Pumpkin Palooza — entering board
+`LBE_Halloween2023Intro` · seen 23.09.02–26.07.01
+- trigger: event, event=The Great Pumpkin Palooza, eventId=LBE_Halloween2023, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–26.01.02)
+
+**PEARL**: Welcome everyone to the Great Pumpkin Palooza! Hopewell Bay’s spooky jack o’lantern event!
+**PEARL**: It’s time to get creative and see what types of ghoulish masterpieces you can create!
+**EMILIO**: Pumpkin carving? Ha, haven’t done that in ages! Hopewell Bay sure does like keeping to traditions.
+**RODDY** (Relaxed): Definitely! And it’s a fun way to have a bit of friendly sport. Want to join in?
+**EMILIO** (Thinking): I- I don’t know... Last time I carved a pumpkin was with my mother... When I was seven.
+**RODDY** (Encouraging): PERFECT! Here, grab a knife and start carving!
+**RODDY** (Encouraging): May the best jack o’lantern win!
+**PEARL**: Wonderful! Let’s get this spooky Palooza started!
 
 ### LBE_May2023 — entering board
 `LBE_May2023Intro` · seen 23.06.02–26.07.01
@@ -692,7 +714,7 @@ Every story in which Pearl speaks.
   _(1 cosmetic edit not shown)_
 
 ### The Great Bake-off — event end
-`LBE_May2023Outro` · seen 24.04.01–26.07.01
+`LBE_May2023Outro` · seen 23.09.02–26.07.01
 - trigger: event, event=The Great Bake-off, eventId=LBE_May2023, eventType=Leaderboard Event, moment=event end (versions 24.04.01–26.07.01)
 
 **PEARL** (Encouraging): Well done everyone! I've never seen such amazing cakes!
@@ -703,6 +725,31 @@ Every story in which Pearl speaks.
 **PEARL** (Thinking): Is that another Finnish saying? 
 **HEIKKI** (Charming): I guess so... It means hello and goodbye. 
 **PEARL** (Encouraging): Oh! Well then to everyone, Moro!
+
+### Floral Frenzy — entering board
+`LBE_Valentines2024_Intro_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Floral Frenzy, eventId=LBE_Valentines2024, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–26.01.02)
+
+**PEARL**: Welcome to Floral Frenzy, a competition where we find out who makes the most magnificent flower arrangements in Hopewell Bay!
+**PEARL**: Our contenders are Deb, a lover of the more exotic flowers...
+**DEB** (Charming): I do have a penchant for the unusual.
+**PEARL** (Encouraging): Err, yes. And Julius who specializes in the gentle Japanese art of Ikebana. I can't wait to see what kind of creations you will produce!
+**ANTIQUEDEALER** (Charming): Salutations! Did you know that the history of Ikebana reaches back over 600 years?
+**PEARL**: Very interesting, indeed! And our last contender is... Jackie!
+**JACKIE** (Doubtful): Pearl, I told you I'm too busy to take part in a silly competition. I've never even tried flower arranging before!
+**PEARL** (Thinking): Haha, you're so funny!
+**PEARL** (Encouraging): Let's get to it, people. The competition is officially on - may the best amateur florist win!
+
+### Floral Frenzy — event end
+`LBE_Valentines2024_Outro_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Floral Frenzy, eventId=LBE_Valentines2024, eventType=Leaderboard Event, moment=event end (versions 24.04.01–26.01.02)
+
+**PEARL** (Surprised): What a competition we've had! I had no idea we have such flower arranging talent in our little town.
+**PEARL** (Encouraging): Aaand the winner is... Jackie!
+**JACKIE** (Surprised): W-what?? I really didn't expect this...
+**JACKIE** (Encouraging): I'd like to thank my fellow contenders for educating and inspiring me. I never knew I had it in me to get excited about flower arranging!
+**DEB** (Doubtful): Next time, we can see if it was just beginner's luck... but congratulations, Jackie. You did well!
+**JACKIE** (Doubtful): Thank you, Deb!
 
 ### The Fa-la-la-la Follies — item discovered: Mulled Hopeberry Juice Mug
 `LDE_HolidayCarols2023_DeckTheHalls_07_Dialogue` · seen 25.05.01–26.07.01
@@ -776,16 +823,6 @@ Every story in which Pearl speaks.
 **PEARL** (Encouraging): At this point, I don't care. Will you do it?
 **RODDY** (Charming): OK, I'll do it.
 
-### Love on the Vine — event start
-`LDE_Hopeberry2025_Intro_Dialogue` · seen 26.04.02–26.07.01
-- trigger: event, event=Love on the Vine, eventId=LDE_Hopeberry2025, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
-
-**RODDY** (Encouraging): I can't believe it's already time for the annual Hopeberry festival!
-**RODDY** (Encouraging): It's my favorite celebration of the whole year, hands down.
-**RODDY** (Hesitant): This year will be pretty different though - now that I'm not with Jackie anymore.
-**RODDY** (Hesitant): This break-up has been way worse than I expected...
-**RODDY** (Joyous): A glass of fresh hopeberry juice is just what I need right now. Onwards and upwards!
-
 ### Love on the Vine — item discovered: Wooden Box
 `LDE_Hopeberry2025_ReusableFurniture1_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2025, itemKeys=['LDE_Hopeberry2024_ReusableFurniture_01'], items=['Wooden Box'], moment=item discovered (versions 25.05.01–26.07.01)
@@ -798,23 +835,9 @@ Every story in which Pearl speaks.
 **PEARL** (Thinking): He did me a big favor!
 **MADDIE** (Thinking): I think he did a lot more than we realize.
 
-### Circus Caper — item discovered: Small Circus Program
-`LDE_Rumors2025_Brochures_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Brochures_03'], items=['Small Circus Program'], moment=item discovered (versions 25.05.01–26.07.01)
-
-**RODDY** (Thinking): We need to think of an act that will really stop people in their tracks. Like...  
-  _earlier:_ ~~Have you seen Fiona anywhere?~~ (until 25.09.01)
-**MASON** (Joyous): A knife wheel!  
-  _earlier:_ ~~She said she was going to the dress rehearsal, but I can't find her anywhere.~~ (until 25.09.01)
-**HANK** (Thinking): That sounds... dangerous.  
-  _earlier:_ ~~I ran out of circus brochures, but I know I saw more of them somewhere.~~ (until 25.09.01)
-**HANK** (Thinking): No, haven't seen her... She's probably just getting ready for the show.
-**MADDIE**: Of course. But I don't want to disturb her...
-**PEARL** (Doubtful): I'm sure she won't mind if you get more brochures from her wagon.
-
-### LDE Rumors2025 TC1 Dialogue
+### Circus Caper — part of the event (exact trigger not dumped)
 `LDE_Rumors2025_TC1_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Circus Caper, eventId=LDE_Rumors2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **PEARL** (Thinking): Could you settle an argument, Ursula?
 **PEARL** (Thinking): We've been trying to figure out what you did in the Circus.
@@ -861,6 +884,22 @@ Every story in which Pearl speaks.
 **MADDIE** (Relaxed): Where's Roddy? He'd love this.
 **JACKIE** (Encouraging): I know - he totally would! He'll be here soon. You wanna join us for a cup of Hopeberry juice?
 **MADDIE** (Surprised): Umm, I promised to help Grandma with the BBQ...
+
+### Cherry's Mystery Meat — intro
+`SP_CherrysMysteryMeat2024_Intro_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Cherry's Mystery Meat, eventId=SP_CherrysMysteryMeat2024, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**GRANDMA**: Pearl! What brings you here?
+**PEARL** (Encouraging): Official party organizing committee business, of course, Ursula.
+**PEARL** (Encouraging): Hopewell Bay's 100th anniversary is coming, and it deserves a BIG celebration.
+**PEARL** (Doubtful): Now, I understand that, err... with Hank gone it's not quite the festive atmosphere we wanted, but maybe this can help get our minds off that for a while.
+**GRANDMA** (Doubtful): I could not agree more. Besides, I am sure Hank is fine. Maybe he just got cold feet!
+**PEARL** (Thinking): A-after the wedding ceremony?
+**GRANDMA** (Charming): Who knows! But what have you got planned for the town centennial?
+**PEARL** (Encouraging): We're going to bake the world's biggest meat pie, based on a recipe from the town's founders.
+**PEARL** (Encouraging): Cherry will do the baking, but could we organize the celebration in your backyard? The mansion would make such a wonderful backdrop.
+**GRANDMA** (Thinking): The world's biggest meat pie, you say?
+**GRANDMA** (Thinking): Sounds perfect!
 
 ### Halloween Howling — outro
 `SP_GhostDog2025_AllRewardsCompleted_Dialogue` · seen 25.08.01–26.07.01
@@ -1044,9 +1083,9 @@ Every story in which Pearl speaks.
 **JACKIE** (Surprised): So now we just need to...
 **PEARL**: Enjoy the festival!
 
-### SP Hopefest2026 Decoration Slot38 Dialogue
-`SP_Hopefest2026_Decoration_Slot38_Dialogue` · seen 26.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Hopefest Music Festival — part of the event (exact trigger not dumped)
+`SP_Hopefest2026_Decoration_Slot38_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Hopefest Music Festival, eventId=SP_Hopefest2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **PEARL** (Encouraging): Look at this place! Lights, music, people everywhere… we actually pulled it off.
 **PEARL** (Thinking): I’ll admit, I was expecting at least three disasters by now.
@@ -1072,9 +1111,9 @@ Every story in which Pearl speaks.
 **PEARL** (Encouraging): So that’s a yes?
 **JACKIE** (Encouraging): That’s a “yes, before this turns into complete chaos.”
 
-### SP Misery2025 AllRewardsCompleted
-`SP_Misery2025_AllRewardsCompleted` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Something Ours — part of the event (exact trigger not dumped)
+`SP_Misery2025_AllRewardsCompleted` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Something Ours, eventId=SP_Misery2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Something Ours — outro
@@ -1106,9 +1145,9 @@ Every story in which Pearl speaks.
 **MASON** (Annoyed): How else would I get dirty?!
 **PEARL** (Thinking): That explains a lot, actually...
 
-### SP Misery2025 Intro
-`SP_Misery2025_Intro` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Something Ours — part of the event (exact trigger not dumped)
+`SP_Misery2025_Intro` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Something Ours, eventId=SP_Misery2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Something Ours — intro
@@ -1192,9 +1231,9 @@ Every story in which Pearl speaks.
 **MASON** (Charming): I think he's having a nap!
 **PEARL** (Doubtful): I think I need a nap...
 
-### SP PigPet2025 TA1 Dialogue
+### A Pig Birthday Surprise — part of the event (exact trigger not dumped)
 `SP_PigPet2025_TA1_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=A Pig Birthday Surprise, eventId=SP_PigPet2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **PEARL** (Encouraging): I owe you BIG time for this, Maddie.
 **MADDIE** (Relaxed): Don't worry about it. I'm happy to help!
@@ -1206,9 +1245,9 @@ Every story in which Pearl speaks.
 **MADDIE**: What?
 **MASON** (Relaxed): Tofu!
 
-### SP PigPet2025 TA2 Dialogue
+### A Pig Birthday Surprise — part of the event (exact trigger not dumped)
 `SP_PigPet2025_TA2_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=A Pig Birthday Surprise, eventId=SP_PigPet2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: Listen, I was just wondering... Where does Charlotte work?
 **MADDIE** (Thinking): She must be super busy - I mean, I've never met her, and I've known you forever.
@@ -1249,6 +1288,20 @@ Every story in which Pearl speaks.
 **BELLA** (Thinking): Mason's dream birthday party, huh? I bet I can make it even bigger and better.
 **BELLA** (Doubtful): Maddie will have to admit that I am more fun!
 
+### Valentine's Mystery — outro
+`SP_ValentinesMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Valentine's Mystery, eventId=SP_ValentinesMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**PEARL** (Surprised): Mason?? How much did you spend on all these presents?
+**MASON** (Discouraged): Some... but YOU told me to get something "special" for everyone. And I didn't get a sports car or exotic animals!
+**MASON** (Discouraged): And I was really tempted...
+**PEARL** (Annoyed): The thought is lovely, but it's all just WAY too much. We'll have to return them...
+**RODDY** (Relaxed): But your friendship is enough for us, Mason. It doesn't cost anything, but it's more valuable than any fancy present.
+**MASON** (Charming): Aww, shucks! Thanks, guys. I guess Valentine's Day doesn't have to be about just yucky love or expensive gifts.
+**MASON** (Relaxed): It's great to have friends!
+**MADDIE** (Relaxed): It is! But seriously, though...
+**MADDIE** (Thinking): Was that diamond ring actually Hank's? What's he planning??
+
 ### Valentine's Mystery — decoration SP_ValentinesMystery2024_Decoration_Slot29
 `SP_ValentinesMystery2024_Decoration_Slot29_Dialogue` · seen 25.05.01–26.07.01
 - trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot29, event=Valentine's Mystery, eventKey=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
@@ -1261,3 +1314,18 @@ Every story in which Pearl speaks.
 **HANK** (Thinking): Nooo... I-I just think a ring like this is way too expensive for a little Valentine's present.
 **PEARL** (Surprised): He's not wrong. Mason??
 **MASON** (Worried): Yes, Mom?
+
+### Valentine's Mystery — intro
+`SP_ValentinesMystery2024_Intro_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Valentine's Mystery, eventId=SP_ValentinesMystery2024, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**PEARL**: Maaaason?
+**MASON** (Thinking): Yes, Mom? You sound like you're about to ask me to do something boring.
+**PEARL** (Encouraging): I promised to organize a little Valentine's party at Grandma Ursula's place, but there's so much to do. Could you help me?
+**MASON** (Annoyed): A Valentine's party? I knew it!
+**PEARL** (Doubtful): Please? I need to get a little present for everyone. Could you pick them and order them on my credit card?
+**MASON**: So I would get to choose a present for everyone?
+**PEARL** (Thinking): Yes, something special to each of our friends - but within reason! No sports cars or exotic animals.
+**MASON** (Encouraging): So, no frilly hearts and the rest of that romantic stuff? I guess I can do that.
+**PEARL** (Relaxed): Great! I'll get everything else ready. I think this will be fun!
+**MASON** (Joyous): Yes, it will...

@@ -11,7 +11,6 @@ Every story in which Babylon speaks.
 
 ### CarriageHarness
 `CarriageHarness` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Encouraging): How about a little race around the Stables, Babylon?
 **BABYLON** (Angry): *Brrr* *Neigh!*
@@ -27,7 +26,6 @@ Every story in which Babylon speaks.
 
 ### StablesextIntro
 `StablesextIntro` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **WINSTON** (Joyous): Here we are, ma'am. The family ranch...
 **MADDIE** (Surprised): It's huge! How did I have no idea this existed?
@@ -43,7 +41,6 @@ Every story in which Babylon speaks.
 
 ### Stablesext 03
 `Stablesext_03` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **WINSTON**: That brings us back to this filly here, descendant of the great Boulton Blues.
 **WINSTON** (Encouraging): I guess you could say she found her way back home.
@@ -61,7 +58,6 @@ Every story in which Babylon speaks.
 
 ### Stablesext 04
 `Stablesext_04` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **WINSTON**: Now that that's settled, I'll leave you two to get better acquainted.
 **MADDIE** (Surprised): What?! But, Winston, the mansion-
@@ -73,7 +69,6 @@ Every story in which Babylon speaks.
 
 ### Stablesext 05
 `Stablesext_05` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Thinking): You must be absolutely famished if you were after Grandma's petunias.
 **MADDIE** (Discouraged): Poor thing, all alone and hungry-
@@ -106,7 +101,6 @@ Every story in which Babylon speaks.
 
 ### Stablesext 07
 `Stablesext_07` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE**: There's plenty of water here to get you all clean.
 **BABYLON** (Annoyed): *Harrumph*
@@ -123,7 +117,6 @@ Every story in which Babylon speaks.
 
 ### Stablesext 09
 `Stablesext_09` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Encouraging): Alright! Let's get you across this bridge so that we can-
 **MADDIE** (Frustrated): Um, why aren't you following me, Babylon?
@@ -135,7 +128,6 @@ Every story in which Babylon speaks.
 
 ### Stablesext 11
 `Stablesext_11` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Joyous): We did it! 
 **MADDIE** (Joyous): Woohoo! 
@@ -163,7 +155,6 @@ Every story in which Babylon speaks.
 
 ### Stablesext 13
 `Stablesext_13` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE**: I don't know about you, but I'm dead beat!
 **BABYLON**: Neigh... *Yawn*
@@ -228,7 +219,6 @@ Every story in which Babylon speaks.
 
 ### Stablesinterior04
 `Stablesinterior04` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **LEONARD** (Annoyed): No, you are the one that is blind, little girl.
 **BRUNO** (Annoyed): *Ahem!* You mentioned something about a Boulton Blue?
@@ -244,7 +234,6 @@ Every story in which Babylon speaks.
 
 ### Stablesinterior06
 `Stablesinterior06` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): Wha- This place is trashed!
 **MADDIE** (Surprised): There's hoof prints everywhere! It looks like a horse went on an angry rampage...
@@ -277,7 +266,6 @@ Every story in which Babylon speaks.
 
 ### Stablesinterior10
 `Stablesinterior10` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **DEB** (Doubtful): Well, hello, darling!
 **MADDIE** (Surprised): Deb! You're here!
@@ -345,7 +333,6 @@ Every story in which Babylon speaks.
 
 ### Stablesinterior Slowfeeder
 `Stablesinterior_Slowfeeder` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Encouraging): An equine slow feeder, just so you don’t gorge yourself!
 **BABYLON** (Frustrated): *Hmph!*
@@ -356,7 +343,6 @@ Every story in which Babylon speaks.
 
 ### Stablesinterior Watertrough
 `Stablesinterior_Watertrough` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Encouraging): Isn't this trough great, Babylon?
 **MADDIE** (Relaxed): Now, you have one indoors too!
@@ -382,7 +368,6 @@ Every story in which Babylon speaks.
 
 ### WarningSign
 `WarningSign` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE**: Now, don't get nervous, Babylon! This isn't for you.
 **MADDIE** (Encouraging): This is just to keep the other critters from coming inside to steal all your treats!

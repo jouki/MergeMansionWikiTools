@@ -2,7 +2,7 @@
 
 
 ### Pier: Remove bushes
-`Charlie_Calling` · seen 24.04.01–26.07.01
+`Charlie_Calling` · seen 23.09.02–26.07.01
 - trigger: area, area=Pier, areaId=YachtPier, hotspotId=YachtPierEntryRemoveBushes, phase=task completed, task=Remove bushes (versions 24.04.01–26.07.01)
 
 **MADDIE**: This whole family estate is so amazing... 
@@ -14,7 +14,7 @@
 **???** (Talking): This is your Grandpa Charlie.
 
 ### Pier: Fix bridge
-`Charlie_Calling_Outro` · seen 24.04.01–26.07.01
+`Charlie_Calling_Outro` · seen 23.09.02–26.07.01
 - trigger: area, area=Pier, areaId=YachtPier, hotspotId=YachtPierBridgerFixBrokenParts, phase=task completed, task=Fix bridge (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Uh, Grandma - I got a phone call earlier from someone claiming that they were Grandpa Charlie...
@@ -24,7 +24,7 @@
 **MADDIE** (Worried): Ugh, Grandma! 
 
 ### Pier: Add flying flag
-`ScavengerHunt_Intro` · seen 24.04.01–26.07.01
+`ScavengerHunt_Intro` · seen 23.09.02–26.07.01
 - trigger: area, area=Pier, areaId=YachtPier, hotspotId=YachtPierFastBoatAddFlyingFlag, phase=task completed, task=Add flying flag (versions 24.04.01–26.07.01)
 
 **GRANDMA**: Here you are, dearie. Looks like some mail came for you.
@@ -36,7 +36,7 @@
 **MADDIE** (Thinking): No way! I can't wait to begin this - and I know just where to start looking.
 
 ### Pier: YachtPierUnlock
-`YachtPierUnlock` · seen 24.04.01–26.07.01
+`YachtPierUnlock` · seen 23.09.02–26.07.01
 - trigger: area, area=Pier, areaId=YachtPier, hotspotId=MansionRightFillerUnlockYachtPier, phase=task appears (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): What secrets are there to be found from this direction...

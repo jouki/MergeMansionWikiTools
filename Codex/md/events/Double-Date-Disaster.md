@@ -202,7 +202,7 @@
 **RODDY** (Relaxed): I got the perfect sides recipe!
 
 ### Double Date Disaster — event start
-`SE_DoubleDateDisaster2024_IntroDialogue_Dialogue` · seen 26.04.02–26.07.01
+`SE_DoubleDateDisaster2024_IntroDialogue_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Double Date Disaster, eventId=SE_DoubleDateDisaster2024, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **EMILIO** (Encouraging): Ah, Maddie. It still astonishes me how you make every day feel like the best day of my life.
@@ -217,6 +217,24 @@
 **EMILIO**: Hey, Roddy! Can I talk to you for a sec?
 **RODDY** (Relaxed): What’s up, buddy?
 **EMILIO** (Surprised): I totally forgot it was Valentine’s Day!
+
+### Double Date Disaster — part of the event (exact trigger not dumped)
+`SE_DoubleDateDisaster2024_OutroDialogue_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Double Date Disaster, eventId=SE_DoubleDateDisaster2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**JACKIE** (Surprised): Bolivia?!
+**MADDIE** (Annoyed): That’s what he said!
+**JACKIE** (Annoyed): But there are no oceans next to Bolivia!
+**MADDIE** (Frustrated): And that’s what I said!
+**JACKIE**: I’m sorry, Maddie. Nobody deserves to get dumped on Valentine’s Day.
+**MADDIE** (Encouraging): It’s alright... I guess we can salvage this somehow and turn it into a girls’ night out? What do you say?!
+**JACKIE** (Surprised): Oh... Uuh... I’m actually going to the movies with Roddy tonight.
+**MADDIE** (Surprised): Roddy?! Oh, I thought...
+**JACKIE** (Encouraging): I can call it off? I’ll be happy to hang out!
+**MADDIE**: No, no! Please, one ruined date on Valentine’s is enough. I don’t want to ruin it for others.
+**JACKIE**: You sure?
+**MADDIE** (Worried): Yeah, of course! You go have fun. I’ll just...
+**MADDIE** (Discouraged): Clean all this up, then.
 
 ### Double Date Disaster — item discovered: The Whole Token Machine
 `SE_DoubleDateDisaster2024_PrizeToken_Dialogue` · seen 25.05.01–26.07.01

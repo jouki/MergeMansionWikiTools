@@ -1,6 +1,19 @@
 # Holiday Mystery
 
 
+### Holiday Mystery — outro
+`SP_MasonsMystery2023_AllRewardsCompleted_Dialogue` · seen 23.11.02–26.07.01
+- trigger: event, event=Holiday Mystery, eventId=SP_MasonsMystery2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**GRANDMA**: Oh Mason...
+**GRANDMA** (Relaxed): Why would you go through all this trouble, dearie?
+**MASON** (Relaxed): Well... You know... I’ve had so much fun around here in the past year... The spooky summer camp, the swimming pool.
+**MASON** (Encouraging): Not to mention the awesome pirate ship! I just...
+**MASON** (Doubtful): I just wanted to give something back.
+**GRANDMA** (Encouraging): Well, I love it! Thank you.
+**MASON** (Encouraging): Happy holidays, Grandma!
+**GRANDMA** (Joyous): Happy holidays, Mason!
+
 ### Holiday Mystery — decoration SP_MasonsMystery2023_Decoration_Slot25
 `SP_MasonsMystery2023_Decoration_Slot25_Dialogue` · seen 23.11.02–26.07.01
 - trigger: decoration, decoration=SP_MasonsMystery2023_Decoration_Slot25, event=Holiday Mystery, eventKey=SP_MasonsMystery2023, moment=decoration placed (versions 23.11.02–26.07.01)
@@ -60,6 +73,21 @@
 **MASON** (Surprised): Really?
 **MADDIE** (Relaxed): You bet, Mason! It’s really rare to fool Grandma!
 **MASON** (Joyous): Oh, cool!
+
+### Holiday Mystery — intro
+`SP_MasonsMystery2023_Intro_Dialogue` · seen 23.11.02–26.07.01
+- trigger: event, event=Holiday Mystery, eventId=SP_MasonsMystery2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**MADDIE** (Relaxed): Looks like it’s the holiday season again, Grandma!
+**GRANDMA** (Encouraging): Yes, dearie! I can’t wait to make my special holiday pie!
+**MADDIE** (Surprised): Ooh! Is it the one with cinnamon, hopeberries and oranges?!
+**GRANDMA** (Charming): That’s the one! I know little Mason has always wanted to try it, so I thought I’d surprise him.
+**MADDIE** (Charming): That’s sweet.
+**GRANDMA** (Joyous): Not as sweet as my pie, dearie!
+**GRANDMA** (Relaxed): Brrr... It’s getting cold, let’s head inside...
+**MASON** (Doubtful): Oh, man... Grandma has been so awesome this year! And now she’s making me pie?!
+**MASON** (Thinking): I wonder what she would want for this holiday season?
+**MASON** (Thinking): Hmm....
 
 ### Holiday Mystery — item discovered: Holiday Snowflake
 `SP_MasonsMystery2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.11.02–26.07.01

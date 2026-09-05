@@ -25,3 +25,35 @@
 **MADDIE** (Thinking): By the way, I think you're right about Grandma and her smartphone.
 **MADDIE** (Thinking): I overheard her talking about someone causing problems online. Someone she's trying to stop.
 **JACKIE** (Thinking): That's a great clue, Maddie! I'll do some more digging online - and you keep your eyes and ears open.
+
+### Raccoon Riddle — part of the event (exact trigger not dumped)
+`SP_RaccoonPet2025_TA1_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Raccoon Riddle, eventId=SP_RaccoonPet2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**GRANDMA** (Frustrated): When are you getting rid of that raccoon?
+**MADDIE** (Encouraging): His name is Patches.
+**GRANDMA** (Surprised): You named him?
+**MADDIE**: The ringmaster told me. I called her, and she told me that Patches has been traveling with the circus for a good while now.
+**MADDIE**: He loves show business, but he's getting old.
+**GRANDMA** (Annoyed): Aren't we all...
+**MADDIE** (Worried): I could easily build a little home for him.
+**GRANDMA** (Thinking): I see you have already done it. Maddie dear, I really feel that inviting a raccoon to...
+**MADDIE** (Worried): Patches, do the face.
+**PET** (Worried): --
+**GRANDMA** (Charming): Ohhh... fine! But no more stealing!
+
+### Raccoon Riddle — part of the event (exact trigger not dumped)
+`SP_RaccoonPet2025_TA2_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Raccoon Riddle, eventId=SP_RaccoonPet2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Relaxed): What do you think, Patches? Does this meet your exacting standards?
+**PET**: *Chirrrrp!*
+**MADDIE** (Relaxed): I'm glad to hear it! It was a really fun little project.
+**MADDIE** (Worried): I can't stop thinking about Grandma and whatever she's doing online.
+**MADDIE** (Worried): What should I do?
+**PET** (Thinking): *Bark?*
+**MADDIE** (Thinking): Yep. I should talk to her, just ask her straight.
+**MADDIE** (Thinking): But what if she dodges my questions like she always does?
+**PET** (Ready): *Chirp!*
+**MADDIE** (Encouraging): True - I have to ask at least.
+**MADDIE** (Encouraging): Thanks, Patches! You're a great listener.

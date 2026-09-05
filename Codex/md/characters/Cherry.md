@@ -1,6 +1,20 @@
 # Cherry
 Every story in which Cherry speaks.
 
+### Easter 2025 — item discovered: Cherry
+`CBE_Easter2025_Character_02_Dialogue` · seen 25.05.01–26.03.01
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Character2_01'], items=['Cherry'], moment=item discovered (versions 25.05.01–26.03.01)
+
+**MADDIE** (Joyous): Cherry, you're just the person I was looking for!
+**CHERRY**: What I can do for you, Maddie?
+**CHERRY** (Encouraging): Are you looking for a delicious dessert or maybe some advice? Are you baking something?
+**MADDIE** (Thinking): I'm trying to get everything ready for the big egg hunt. I just don't have all the ingredients I think I need.
+**MADDIE** (Thinking): Could I maybe borrow a cup - or ten - of sugar?
+**CHERRY** (Thinking): Sure thing!
+**CHERRY**: What are you making anyway?
+**MADDIE** (Hesitant): Just candy, chocolates and cakes.
+**CHERRY** (Surprised): Then you'll need more than just sugar!
+
 ### Sweet Mess Express — item discovered: Spring Candle
 `CBE_SweetMess_Character_02_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Sweet Mess Express, eventKey=CBE_SweetMess, itemKeys=['CBE_SweetMess_Decos_01'], items=['Spring Candle'], moment=item discovered (versions 26.03.01–26.07.01)
@@ -121,6 +135,20 @@ Every story in which Cherry speaks.
 **CHERRY**: Look at all this glorious gingerbread! I can't believe we made it all... together!
 **GRANDMA** (Joyous): Christmas does funny things to people.
 
+### Gingerbread Jamboree — entering board
+`LBE_Xmas2023_IntroDialogue_Dialogue` · seen 23.11.02–26.07.01
+- trigger: event, event=Gingerbread Jamboree, eventId=LBE_Xmas2023, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–24.09.03)
+- trigger: event, event=Gingerbread Jamboree, eventId=LBE_Xmas2024, eventType=Leaderboard Event, moment=entering board (versions 24.11.02–26.01.02)
+
+**CHERRY**: It's the season of good cheer... and gingerbread! But who makes it the most scrumptious? Let's find out!
+**CHERRY**: Although everyone knows my gingerbread is the tastiest...
+**GRANDMA** (Frustrated): Maybe we'll let the people decide, Cherry? Besides, mine has been a firm favorite for decades.
+**MADDIE** (Encouraging): Look! I found something interesting in the Boulton attic! It looks like a really old recipe book.
+**GRANDMA** (Surprised): What does it say here? "The Best Gingerbread Recipe Ever Written?"
+**CHERRY** (Doubtful): Someone has scribbled stuff around it... "Add a pinch of magic and stir through"?
+**CHERRY** (Doubtful): What do you say if we skip the competition this year and bake together with this recipe instead?
+**GRANDMA** (Encouraging): I suppose it is the season for peace and goodwill to all bakers... Why not?
+
 ### Gingerbread Jamboree — item discovered: Cold Oven
 `LBE_Xmas2023_MediumOvenInactive_01_Dialogue` · seen 23.11.02–26.07.01
 - trigger: item, event=Gingerbread Jamboree, eventKey=LBE_Xmas2023, itemKeys=['LBE_Xmas2023_MediumOvenInactive_01'], items=['Cold Oven'], moment=item discovered (versions 23.11.02–26.07.01)
@@ -141,12 +169,46 @@ Every story in which Cherry speaks.
 
 **CHERRY** (Encouraging): When it comes to decorating gingerbread, less is definitely NOT more!
 
+### Gingerbread Jamboree — event end
+`LBE_Xmas2023_OutroDialogue_Dialogue` · seen 23.11.02–26.07.01
+- trigger: event, event=Gingerbread Jamboree, eventId=LBE_Xmas2023, eventType=Leaderboard Event, moment=event end (versions 24.04.01–24.09.03)
+- trigger: event, event=Gingerbread Jamboree, eventId=LBE_Xmas2024, eventType=Leaderboard Event, moment=event end (versions 24.11.02–26.01.02)
+
+**CHERRY**: The book might just be right. This gingerbread is GREAT!
+**GRANDMA** (Doubtful): Hmm, you are right. It is making me feel... all warm and fuzzy inside.
+**CHERRY** (Encouraging): Maybe there really is a pinch of magic in there...
+**GRANDMA** (Joyous): Ha-ha! Maybe there is!
+**CHERRY** (Thinking): But next year, I will show you the best gingerbread recipe...
+**GRANDMA**: Just have another gingerbread and enjoy the moment, will you!
+
 ### Gingerbread Jamboree — item discovered: Cold Microwave Oven
 `LBE_Xmas2023_SmalIOvenInactive_01_Dialogue` · seen 23.11.02–26.07.01
 - trigger: item, event=Gingerbread Jamboree, eventKey=LBE_Xmas2023, itemKeys=['LBE_Xmas2023_SmalIOvenInactive_01'], items=['Cold Microwave Oven'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **CHERRY** (Doubtful): This thing does not seem to be working.
 **GRANDMA** (Encouraging): Did you try turning it on and off again?
+
+### Green Acres Quest — item discovered: Cherry
+`LDE_GreenAcresQuest2024_CharacterCherry_02_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterCherry_02'], items=['Cherry'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**CHERRY**: Hey there! Could you help an old girl out?
+**MADDIE** (Encouraging): No problem, Cherry!
+
+### Green Acres Quest — item discovered: Basket of Vegetables
+`LDE_GreenAcresQuest2024_Veggies_08_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Veggies_08'], items=['Basket of Vegetables'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**CHERRY** (Joyous): You got some fantastic vegetables growing here, Maddie!
+**MADDIE** (Encouraging): Take as many as you wish! This is a community garden.
+**CHERRY** (Encouraging): Alright, veggies. You’re coming with me!
+
+### Green Acres Quest — item discovered: Cherry
+`LDE_GreenAcresQuest2024_v2_CharacterCherry_02_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterCherry_02'], items=['Cherry'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**EMILIO** (Surprised): Cherry, I'm desperate. Could you help me with this garden?
+**CHERRY** (Doubtful): Wow! I can try, but I'm not much of a gardener.
 
 ### Green Acres Quest — item discovered: Cherry
 `LDE_GreenAcresQuest_CharacterCherry_02_Dialogue` · seen 26.05.01–26.07.01
@@ -198,6 +260,36 @@ Every story in which Cherry speaks.
 
 **CHERRY** (Joyous): Now this is a pen!
 **CHERRY** (Joyous): It's perfect for writing the best recipes!
+
+### Jam Session 2023 — outro
+`PE_JamSession2023_DialogueForCompletingAllTheMainRewards` · seen 23.09.02–26.07.01
+- trigger: event, event=Jam Session 2023, eventId=PE_JamSession2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+
+### PE_JamSession2023 — intro
+`PE_JamSession2023_InitialDialogue` · seen 23.06.02–26.07.01
+- trigger: event, eventId=PE_JamSession2023, eventType=Mystery / Progression, moment=intro (versions 23.06.02–23.06.02)
+- trigger: event, event=Jam Session 2023, eventId=PE_JamSession2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_19
+`SE_HopeberryFestival2023_Decoration_Slot19_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_19, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**MASON**: Hopeberry jam! I love this stuff! 
+**CHERRY**: Have a jar, sugar. On the house!
+**MASON** (Joyous): Awesome! 
+**MADDIE**: Hello, Cherry! Ooh! Is this the jam I helped you make?
+**CHERRY** (Encouraging): Er... Yes! Yes it is!
+**MADDIE** (Encouraging): Mmmm! I don't remember it tasting this delicious.
+**CHERRY** (Encouraging): Sometimes things improve over time.
+
+### Hopeberry Festival — item discovered: Sundae
+`SE_HopeberryFestival2023_HopeberryIceCream_05_Dialogue` · seen 23.09.02–25.06.01
+- trigger: item, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, itemKeys=['HopeberryIceCream_05'], items=['Sundae'], moment=item discovered (versions 23.09.02–25.06.01)
+
+**DEB** (Charming): I'd say you outdid yourself on this one, Cherry!
+**CHERRY** (Encouraging): Why thank you, sugar!
 
 ### Season Pass - Buzzing with Purpose — decoration SP_Apiary2026_Decoration_Slot29
 `SP_Apiary2026_Decoration_Slot29_Dialogue` · seen 26.03.01–26.07.01
@@ -334,6 +426,19 @@ Every story in which Cherry speaks.
 **GRANDMA** (Doubtful): You know, I think I have got you covered... 
 **GRANDMA** (Joyous): Don't worry, dearie. It's ALL vegan!
 
+### Pie Wars — outro
+`SP_PieWars2023_AllRewardsCompleted_Dialogue` · seen 23.09.02–26.07.01
+- trigger: event, event=Pie Wars, eventId=SP_PieWars2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**MADDIE** (Joyous): The votes are in... Who wants to do the honors?
+**GRANDMA**: You do it, dearie.
+**CHERRY**: It would only be fair!
+**MADDIE**: *Opens envelope* 
+**MADDIE**: It's close, but the winner is...
+**MADDIE** (Joyous): Grandma! Congratulations!
+**CHERRY** (Encouraging): Congratulations, sugar! I guess I still have a lot to learn...
+**GRANDMA** (Relaxed): Not too much, dearie. You can bake with the best of them, but sometimes you just can't beat the classics!
+
 ### Pie Wars — decoration SP_PieWars2023_Decoration_Slot26
 `SP_PieWars2023_Decoration_Slot26_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot26, event=Pie Wars, eventKey=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
@@ -358,6 +463,21 @@ Every story in which Cherry speaks.
 **GRANDMA** (Frustrated): I did no such thing! You sabotaged my oven!
 **CHERRY** (Annoyed): No I didn't!
 **MADDIE** (Thinking): What's going on here?
+
+### SP_PieWars2023 — intro
+`SP_PieWars2023_Intro_Dialogue` · seen 23.06.02–26.07.01
+- trigger: event, eventId=SP_PieWars2023, eventType=Mystery / Progression, moment=intro (versions 23.06.02–23.06.02)
+- trigger: event, event=Pie Wars, eventId=SP_PieWars2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**MADDIE**: Hi Cherry! Need more help making jam for your bakery?
+**CHERRY** (Encouraging): Oh, sugar... Something better! I brought you my new and improved Hopeberry pie! Have a taste...
+**MADDIE** (Joyous): ...Oh my gosh, that's amazing! That's the best thing I've ever tasted!
+**GRANDMA**: What is, dearie?
+**MADDIE** (Encouraging): Oh, Grandma, you have to taste this! It's phenomenal. 
+**GRANDMA** (Worried): Really? You've always said my pies were the best...
+**CHERRY**: Looks like you've got a bit of competition, sugar!
+**GRANDMA** (Frustrated): How about we make it official then, dearie?
+**CHERRY** (Annoyed): Alright, you're on! Let the people decide. The best tasting pie wins! 
 
 ### Pie Wars — item discovered: SP_PieWars2023_CollectableItems_04
 `SP_PieWars2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.09.02–26.07.01

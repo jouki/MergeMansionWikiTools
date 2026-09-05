@@ -1,6 +1,19 @@
 # Deb’s Mystery
 
 
+### Deb’s Mystery — outro
+`SP_DebsMystery2023AllRewardsCompleted` · seen 23.09.02–26.07.01
+- trigger: event, event=Deb’s Mystery, eventId=SP_DebsMystery2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**DEB** (Discouraged): Well... That’s it. Guess we have to wait another 10 years for the next one.
+**MADDIE** (Encouraging): But good things come to those who wait, right?
+**DEB** (Doubtful): If I were you, sweetie... I wouldn’t be waiting too long, though.
+**MADDIE** (Surprised): Wh- What do you mean by that?
+**DEB** (Annoyed): The Titan Arum may only bloom every 10 years, but when it does, it’s only for a few precious days.
+**DEB** (Annoyed): It doesn’t dwell on the past and wait for a better time. It takes those rare days and makes them hers!
+**MADDIE** (Charming): Huh... Carpe diem?
+**DEB**: Precisely, sweetie. Precisely.
+
 ### Deb’s Mystery — decoration SP_DebsMystery2023_Decoration_Slot25
 `SP_DebsMystery2023Decoration_Slot25` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot25, event=Deb’s Mystery, eventKey=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
@@ -63,6 +76,19 @@
 **MADDIE**: Looking for what?
 **DEB** (Charming): ... What’s that? Oh, LOVE of course!
 **MADDIE** (Doubtful): Of course.
+
+### Deb’s Mystery — intro
+`SP_DebsMystery2023Intro` · seen 23.09.02–26.07.01
+- trigger: event, event=Deb’s Mystery, eventId=SP_DebsMystery2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**DEB**: Maddie, sweetie! So good of you to join me in this little endeavor.
+**MADDIE** (Encouraging): It’s no problem aunt Deb, anything to help!
+**DEB** (Joyous): That’s wonderful, because something amazing is about to happen!
+**MADDIE**: Oh?
+**DEB** (Charming): Yes, my Titan Arum is blooming!
+**MADDIE** (Doubtful): Er... What?
+**DEB** (Joyous): My corpse flower! She’s blooming! Hasn’t done that in 10 years! We need to show the WORLD!
+**MADDIE** (Surprised): CORPSE FLOWER?!
 
 ### Deb’s Mystery — item discovered: Inflorescence
 `SP_DebsMystery2023LastCollectibleItemDiscovered` · seen 23.09.02–26.07.01

@@ -14,6 +14,16 @@
 **MADDIE** (Doubtful): You should be more careful about where you leave it, Grandma.
 **GRANDMA** (Charming): Don't worry -- I won't lose it again.
 
+### Smartphone Pickle — part of the event (exact trigger not dumped)
+`SP_Pickleball2025_Decoration_Slot32_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Smartphone Pickle, eventId=SP_Pickleball2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**DEB** (Encouraging): Where is this pickleball tournament taking place?
+**DEB** (Encouraging): I hope Ursula is prepared to bow down to a superior opposition!
+**ANTIQUEDEALER** (Worried): Salutations, Maddie! Ursula invited us to play in her little tournament, but I am afraid competitive spirit is already overshadowing the fun.
+**MADDIE** (Thinking): Looks like Deb and Grandma will have a tense match...
+**ANTIQUEDEALER** (Thinking): They have a history of competition, and I doubt it won't be resolved in the pickleball courts.
+
 ### Smartphone Pickle — decoration SP_Pickleball2025_Decoration_Slot33
 `SP_Pickleball2025_Decoration_Slot33_Dialogue` · seen 25.05.01–26.07.01
 - trigger: decoration, decoration=SP_Pickleball2025_Decoration_Slot33, event=Smartphone Pickle, eventKey=SP_Pickleball2025, moment=decoration placed (versions 25.05.01–26.07.01)

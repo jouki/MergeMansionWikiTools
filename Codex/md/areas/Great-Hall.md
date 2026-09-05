@@ -2,7 +2,7 @@
 
 
 ### Great Hall: Search for the key
-`Greathall01_Frontdoor` · seen 24.04.01–26.07.01
+`Greathall01_Frontdoor` · seen 23.09.02–26.07.01
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallKeyTask, phase=task completed, task=Search for the key (versions 24.04.01–26.07.01)
 
 **MADDIE** (Frustrated): I can't believe the key was under the mat this whole time!
@@ -14,7 +14,7 @@
 **MADDIE** (Thinking): ...
 
 ### Great Hall: Open the door
-`Greathall02_Inside` · seen 24.04.01–26.07.01
+`Greathall02_Inside` · seen 23.09.02–26.07.01
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallOpenMansionA0, phase=task completed, task=Open the door (versions 24.04.01–25.01.03)
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemovestepdebrisA1, phase=task completed, task=Remove step debris (versions 25.02.01–26.07.01)
 
@@ -26,7 +26,7 @@
 **MADDIE** (Surprised): Huh?! Who are you?!
 
 ### Great Hall: Remove step debris
-`Greathall03_Continues` · seen 24.04.01–26.07.01
+`Greathall03_Continues` · seen 23.09.02–26.07.01
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemovestepdebrisA1, phase=task completed, task=Remove step debris (versions 24.04.01–25.01.03)
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemoveDustSheetA2, phase=task completed, task=Remove dust sheet (versions 25.02.01–26.07.01)
 
@@ -40,7 +40,7 @@
 **VICTORIA** (Doubtful): And missy... I ain't happy with what I'm seeing!
 
 ### Great Hall: Remove dust sheet
-`Greathall04_Continues` · seen 24.04.01–26.07.01
+`Greathall04_Continues` · seen 23.09.02–26.07.01
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemoveDustSheetA2, phase=task completed, task=Remove dust sheet (versions 24.04.01–25.01.03)
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemovedebristopofstepsA3, phase=task completed, task=Remove debris at the top of the steps (versions 25.02.01–26.07.01)
 
@@ -53,7 +53,7 @@
 **VICTORIA** (Relaxed): And when you do... I'll be here. Claiming it for the council. Expect to see Holden a bit more from now on! Ciao!
 
 ### Great Hall: Remove debris at the top of the steps
-`Greathall05_Upset` · seen 24.04.01–26.07.01
+`Greathall05_Upset` · seen 23.09.02–26.07.01
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemovedebristopofstepsA3, phase=task completed, task=Remove debris at the top of the steps (versions 24.04.01–25.01.03)
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallPlacerestoreddeskA7, phase=task completed, task=Place restored desk (versions 25.02.01–26.07.01)
 
@@ -68,7 +68,7 @@
 **GRANDMA** (Charming): ...I do have another story I can tell you about the great hall!
 
 ### Great Hall: Fix and place the red hat back
-`Greathall06_Charlie` · seen 24.04.01–26.07.01
+`Greathall06_Charlie` · seen 23.09.02–26.07.01
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallPlaceGHallHatRedBc6, phase=task completed, task=Fix and place the red hat back (versions 24.04.01–26.07.01)
 
 **GRANDMA** (Encouraging): Your Grandpa Charlie never liked this room when we first got married.
@@ -80,7 +80,7 @@
 **MADDIE** (Relaxed): I'm glad he liked it in the end. Hopefully he'd like what I'm doing with it now!
 
 ### Great Hall: Dust and remove old desk
-`Greathall08_Missing_Letter` · seen 24.04.01–26.07.01
+`Greathall08_Missing_Letter` · seen 23.09.02–26.07.01
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemoveOldDeskA5, phase=task appears, task=Dust and remove old desk (versions 24.04.01–26.07.01)
 
 **MADDIE** (Doubtful): That's strange...
@@ -88,7 +88,7 @@
 **MADDIE** (Thinking): Hmm, could it have been a letter?
 
 ### Great Hall: Clean and remove coat stand
-`Greathall09_Footprints` · seen 24.04.01–26.07.01
+`Greathall09_Footprints` · seen 23.09.02–26.07.01
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemoveCoatStandB4, phase=task appears, task=Clean and remove coat stand (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): There's footprints in the dust!
@@ -96,7 +96,7 @@
 **MADDIE** (Thinking): Maybe I should keep an eye out, just in case...
 
 ### Great Hall: Clean the dust and the cobwebs
-`Greathall10_Grandfather_Clock` · seen 24.04.01–26.07.01
+`Greathall10_Grandfather_Clock` · seen 23.09.02–26.07.01
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemoveDustCobwebsClockDa1, phase=task completed, task=Clean the dust and the cobwebs (versions 24.04.01–26.07.01)
 
 **MADDIE**: This grandfather clock looks like it's in pretty bad shape...
@@ -104,14 +104,14 @@
 **MADDIE** (Discouraged): Maddie... you're starting to lose it...
 
 ### Great Hall: Clean and place the old painting back
-`Greathall11_Old_Painting` · seen 24.04.01–26.07.01
+`Greathall11_Old_Painting` · seen 23.09.02–26.07.01
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallPlaceGHallPortraitBf3, phase=task completed, task=Clean and place the old painting back (versions 24.04.01–26.07.01)
 
 **MADDIE**: Ignatius and Agatha Boulton...
 **MADDIE** (Relaxed): They looked very happy together.
 
 ### Great Hall: Fix and place the old intercom back
-`Greathall12_Intercom` · seen 24.04.01–26.07.01
+`Greathall12_Intercom` · seen 23.09.02–26.07.01
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallPlaceGHallIntercomBh5, phase=task appears, task=Fix and place the old intercom back (versions 24.04.01–26.07.01)
 
 **MADDIE** (Joyous): Oh wow! An old B3 Intercom system from the 1920's!
@@ -119,7 +119,7 @@
 **MADDIE**: Little did she know, it sparked my love for engineering and invention!
 
 ### Great Hall: Polish the knight armor
-`Greathall13_Armor` · seen 24.04.01–26.07.01
+`Greathall13_Armor` · seen 23.09.02–26.07.01
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallPlaceGHallArmourLeftPolishedD6, phase=task completed, task=Polish the knight armor (versions 24.04.01–26.07.01)
 
 **MADDIE**: This armor looks old...
@@ -127,7 +127,7 @@
 **MADDIE** (Charming): I always wanted to be a knight...
 
 ### Great Hall: Search the Clock
-`GreathallOutro_Key_Found` · seen 24.04.01–26.07.01
+`GreathallOutro_Key_Found` · seen 23.09.02–26.07.01
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallCorridorKeyTask, phase=task completed, task=Search the Clock (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Hmmm... I wonder if this key fits that door upstairs?

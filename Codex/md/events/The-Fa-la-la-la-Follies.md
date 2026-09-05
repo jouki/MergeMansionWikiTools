@@ -67,7 +67,7 @@
 **MADDIE** (Joyous): And plenty of them!
 
 ### The Fa-la-la-la Follies — event start
-`LDE_HolidayCarols2023_EventIntro_Dialogue` · seen 26.04.02–26.07.01
+`LDE_HolidayCarols2023_EventIntro_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=The Fa-la-la-la Follies, eventId=LDE_HolidayCarols2023, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **MADDIE**: Dashing through the snow, do-do-doo-bee-doo...
@@ -176,6 +176,80 @@
 
 **MADDIE** (Relaxed): I think we have enough stockings for everyone.
 **MASON** (Charming): Can mine be extra big?
+
+### The Fa-la-la-la Follies — part of the event (exact trigger not dumped)
+`LDE_HolidayCarols2023_LayerDecoration_01_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=The Fa-la-la-la Follies, eventId=LDE_HolidayCarols2023, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**GRANDMA** (Relaxed): Where will our troupe perform?
+**MADDIE** (Thinking): We can go from door to door, but that's a lot of doors...
+**GRANDMA** (Relaxed): Maybe we could build a stage... And I know the perfect place for it!
+
+### The Fa-la-la-la Follies — part of the event (exact trigger not dumped)
+`LDE_HolidayCarols2023_LayerDecoration_03_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=The Fa-la-la-la Follies, eventId=LDE_HolidayCarols2023, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**EMILIO** (Encouraging): This is starting to look wonderful, Maddie!
+**MADDIE**: Thank you, Emilio. I was actually hoping to see you...
+**EMILIO** (Surprised): You were?
+**MADDIE** (Charming): Yeah, you'll never believe what Lady Voyance said...
+
+### The Fa-la-la-la Follies — part of the event (exact trigger not dumped)
+`LDE_HolidayCarols2023_LayerDecoration_05_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=The Fa-la-la-la Follies, eventId=LDE_HolidayCarols2023, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE**: Maddie, I know you're super busy with the caroling troupe, but I had an idea...
+**MADDIE**: What is it, Mason? Don't worry - you'll get some candy apples.
+**MASON** (Thinking): Oh, great! But actually this is about something else...
+**MADDIE** (Relaxed): I thought we could all write a post card - you know, like season's greetings! But they're not addressed to anyone in particular.
+**MASON** (Joyous): We'll all just put them in a mailbox and then see which one we get.
+**MADDIE** (Encouraging): That's an excellent idea! I'll get the mailbox; you ask everyone to send a card!
+
+### The Fa-la-la-la Follies — part of the event (exact trigger not dumped)
+`LDE_HolidayCarols2023_LayerDecoration_07_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=The Fa-la-la-la Follies, eventId=LDE_HolidayCarols2023, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE**: All this stage needs now is the instruments!
+**JACKIE** (Thinking): But who's going to play them?
+**MADDIE** (Relaxed): ...
+**JACKIE** (Surprised): Oooooh, right!
+**JACKIE** (Encouraging): I guess I am pretty good with the tambourine!
+
+### The Fa-la-la-la Follies — part of the event (exact trigger not dumped)
+`LDE_HolidayCarols2023_LayerDecoration_10_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=The Fa-la-la-la Follies, eventId=LDE_HolidayCarols2023, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE**: What a wonderful set-up, Maddie!
+**MADDIE**: It's just...
+**ANTIQUEDEALER** (Discouraged): What?
+**MADDIE** (Surprised): I suffer from terrible stage fright!
+
+### The Fa-la-la-la Follies — part of the event (exact trigger not dumped)
+`LDE_HolidayCarols2023_LayerDecoration_13_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=The Fa-la-la-la Follies, eventId=LDE_HolidayCarols2023, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MASON** (Thinking): Is that mistletoe?
+**MADDIE** (Surprised): Yeah, it is! I wonder who hung it there...
+**MASON**: Apparently, you can kiss someone when you're standing under that stuff.
+**MADDIE** (Surprised): T-that's true!
+**MASON** (Thinking): Why are you turning red?
+
+### The Fa-la-la-la Follies — part of the event (exact trigger not dumped)
+`LDE_HolidayCarols2023_LayerDecoration_15_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=The Fa-la-la-la Follies, eventId=LDE_HolidayCarols2023, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MASON** (Worried): Grandma Ursula!
+**GRANDMA**: Whatever is going on, Mason?
+**MASON** (Surprised): You'll never believe what I just saw!
+**GRANDMA** (Doubtful): What?
+**MASON**: Maddie! And Emilio! KISSING! Yuck!
+**GRANDMA** (Surprised): Well, well, well... The mistletoe worked!
+
+### The Fa-la-la-la Follies — part of the event (exact trigger not dumped)
+`LDE_HolidayCarols2023_LoopExplainer_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=The Fa-la-la-la Follies, eventId=LDE_HolidayCarols2023, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Joyous): Good job! Remember, the best way to advance in the event is to <color=#4E8EC8>Create a caroling stage</color>, <color=#4E8EC8>get instruments</color> and <color=#4E8EC8>band outfits</color> and voila, points galore
 
 ### The Fa-la-la-la Follies — item discovered: Paper Crown
 `LDE_HolidayCarols2023_ReverseCracker_06_Dialogue` · seen 25.05.01–26.07.01

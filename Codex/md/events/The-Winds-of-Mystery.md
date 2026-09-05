@@ -1,6 +1,17 @@
 # The Winds of Mystery
 
 
+### The Winds of Mystery — outro
+`SP_TheWindOfMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=The Winds of Mystery, eventId=SP_TheWindOfMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**LADY VOYANCE** (Talking): Maddie! I have grave news for you!
+**MADDIE** (Surprised): Lady Voyance! What are you doing here?
+**LADY VOYANCE** (Talking): Maddie, I come with bad tidings! I was doing my usual reading, when I was struck with a VISION!
+**LADY VOYANCE** (Calling): A storm is coming!
+**MADDIE** (Doubtful): Yes, I know! I know! I’m packing everything up and heading inside. You’re the third per-
+**LADY VOYANCE** (Talking): No, Maddie! That’s not the storm I’m talking about!
+
 ### The Winds of Mystery — decoration SP_TheWindOfMystery2024_Decoration_Slot32
 `SP_TheWindOfMystery2024_Decoration_Slot32_Dialogue` · seen 25.05.01–26.07.01
 - trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot32, event=The Winds of Mystery, eventKey=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)

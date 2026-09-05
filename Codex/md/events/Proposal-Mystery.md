@@ -1,6 +1,19 @@
 # Proposal Mystery
 
 
+### Proposal Mystery — outro
+`SP_HanksMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Proposal Mystery, eventId=SP_HanksMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**GRANDMA** (Relaxed): Deb, there is something you should see...
+**DEB** (Surprised): What's all this in your front yard? If this is your idea of a joke, Ursula, I swear...
+**HANK** (Charming): No, Deb - this is all for you.
+**DEB** (Surprised): Hank?? You did all of this... for me?
+**DEB** (Worried): But why? I thought you were gearing up to leave Hopewell Bay - and me.
+**HANK** (Surprised): Leave you, Deb? Never!
+**HANK**: Actually, there's something I want to ask...
+**HANK**: Would you make me the happiest man in the world and be my wife?
+
 ### Proposal Mystery — decoration SP_HanksMystery2024_Decoration_Slot25
 `SP_HanksMystery2024_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
 - trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot25, event=Proposal Mystery, eventKey=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
@@ -54,6 +67,18 @@
 **MADDIE** (Surprised): So the ring was yours!
 **MADDIE** (Surprised): But... is it an engagement ring??
 **HANK** (Charming): Funny you should ask...
+
+### Proposal Mystery — intro
+`SP_HanksMystery2024_Intro_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Proposal Mystery, eventId=SP_HanksMystery2024, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**GRANDMA**: What a Valentine's Day we had!
+**MADDIE** (Discouraged): No kidding...
+**MADDIE** (Doubtful): But don't you think that there's been some weird stuff going on lately?
+**GRANDMA** (Thinking): Hmm, you mean the burned teddy? That certainly was odd...
+**MADDIE** (Thinking): Yeah - and the diamond ring found among the Valentine's presents Mason bought for all of us.
+**GRANDMA** (Doubtful): Valentine's does make people act funny, but now that you mention it...
+**GRANDMA** (Doubtful): There is certainly something odd about all of this!
 
 ### Proposal Mystery — item discovered: Diamond Ring
 `SP_HanksMystery2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01

@@ -1,6 +1,30 @@
 # The Great Pumpkin Palooza
 
 
+### The Great Pumpkin Palooza — entering board
+`LBE_Halloween2023Intro` · seen 23.09.02–26.07.01
+- trigger: event, event=The Great Pumpkin Palooza, eventId=LBE_Halloween2023, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–26.01.02)
+
+**PEARL**: Welcome everyone to the Great Pumpkin Palooza! Hopewell Bay’s spooky jack o’lantern event!
+**PEARL**: It’s time to get creative and see what types of ghoulish masterpieces you can create!
+**EMILIO**: Pumpkin carving? Ha, haven’t done that in ages! Hopewell Bay sure does like keeping to traditions.
+**RODDY** (Relaxed): Definitely! And it’s a fun way to have a bit of friendly sport. Want to join in?
+**EMILIO** (Thinking): I- I don’t know... Last time I carved a pumpkin was with my mother... When I was seven.
+**RODDY** (Encouraging): PERFECT! Here, grab a knife and start carving!
+**RODDY** (Encouraging): May the best jack o’lantern win!
+**PEARL**: Wonderful! Let’s get this spooky Palooza started!
+
+### The Great Pumpkin Palooza — event end
+`LBE_Halloween2023Outro` · seen 23.09.02–26.07.01
+- trigger: event, event=The Great Pumpkin Palooza, eventId=LBE_Halloween2023, eventType=Leaderboard Event, moment=event end (versions 24.04.01–26.01.02)
+
+**EMILIO**: That was fun! Amy is going to love these!
+**RODDY** (Doubtful): I thought you said the last time you carved a pumpkin was when you were seven?!
+**EMILIO** (Encouraging): It’s true, but I do ice sculpting as a pastime.
+**RODDY** (Discouraged): Geeze... What don’t you do?
+**EMILIO**: Don’t worry about it, buddy! I’m sure you’ll win next time.
+**RODDY**: Gosh... Thanks.
+
 ### The Great Pumpkin Palooza — item discovered: Pumpkin Carriage
 `LBE_Halloween2023Pumpkin10` · seen 23.09.02–26.07.01
 - trigger: item, event=The Great Pumpkin Palooza, eventKey=LBE_Halloween2023, itemKeys=['LBE_Halloween2023_Pumpkin_10'], items=['Pumpkin Carriage'], moment=item discovered (versions 23.09.02–26.07.01)

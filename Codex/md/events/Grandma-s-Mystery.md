@@ -1,6 +1,25 @@
 # Grandma's Mystery
 
 
+### Grandma's Mystery — outro
+`SP_GrandmasMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Grandma's Mystery, eventId=SP_GrandmasMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**GRANDMA** (Frustrated): I assure you, I did NOT kill poor Hank.
+**GRANDMA** (Frustrated): I did speak to him before he left, but he is still in one piece, as far as I know.
+**DEB** (Frustrated): So where is my Hank?? 
+**HANK** (Charming): Hello, Deb.
+**DEB** (Surprised): HANK?? Is that a baby you have with you?
+**HANK** (Thinking): You must be totally confused about what happened to me!
+**HANK** (Thinking): See, Ursula found out that my ex-girlfriend had had a baby and sent me to make things right... I asked her not to tell you, 'cos I was wanted to get everything in order first.
+**HANK** (Encouraging): So here I am! It's your baby, Deb.
+**DEB** (Thinking): I don't think that's how it works, Hank...
+**GRANDMA** (Thinking): I learned about this child through Reginald's letter and told Hank. He begged me to keep his secret, so I did.
+**GRANDMA** (Encouraging): Hank is a gentleman at his core, so I knew that he would do what was right.
+**MADDIE** (Surprised): My head is spinning.
+**MADDIE** (Surprised): So... everyone's alive, Hank's back, and everything's fine?
+**GRANDMA** (Joyous): Looks like it!
+
 ### Grandma's Mystery — decoration SP_GrandmasMystery2024_Decoration_Slot33
 `SP_GrandmasMystery2024_Decoration_Slot33_Dialogue` · seen 25.05.01–26.07.01
 - trigger: decoration, decoration=SP_GrandmasMystery2024_Decoration_Slot33, event=Grandma's Mystery, eventKey=SP_GrandmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
@@ -53,6 +72,17 @@
 **GRANDMA** (Thinking): Secondly, the bone Goldie found was an old Halloween decoration. Now if I really HAD done what you accuse me of, you would not suspect a thing...
 **MADDIE** (Thinking): So, where IS Hank?
 **GRANDMA** (Discouraged): That is a more complicated question, dearie...
+
+### Grandma's Mystery — intro
+`SP_GrandmasMystery2024_IntroDialogue_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Grandma's Mystery, eventId=SP_GrandmasMystery2024, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**JACKIE**: Are we gonna talk about the bone?
+**MADDIE** (Thinking): The bone Goldie dug up in Grandma's yard? Yeah, that was creepy!
+**JACKIE** (Thinking): First Ursula comes up with all that vegan meat for Cherry's pie, and then Goldie digs up something that looks like a human bone...
+**JACKIE** (Thinking): On top of that, Ursula was the last one seen talking to Hank!
+**JACKIE**: And you need to tell Deb -- she's worried sick about Hank!
+**MADDIE** (Worried): *Gulp* I guess it's the only way...
 
 ### Grandma's Mystery — item discovered: Mask of Comedy
 `SP_GrandmasMystery2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01

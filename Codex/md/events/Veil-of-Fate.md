@@ -1,6 +1,15 @@
 # Veil of Fate
 
 
+### Veil of Fate — part of the event (exact trigger not dumped)
+`CBE_VeilOfFate2023_ActiveSnowglobe_Dialogue` · seen 23.11.02–26.07.01
+- trigger: event, eventType=event story, event=Veil of Fate, eventId=CBE_VeilOfFate2023, moment=part of the event (exact trigger not dumped) (versions 23.11.02–26.07.01)
+
+**LADY VOYANCE**: Aaaah! The snow is falling - the veil of fate is LIFTING!
+**LADY VOYANCE** (Talking): I seeeee..
+**MADDIE** (Thinking): W-what do you see?
+**LADY VOYANCE** (Talking): Patience! I seeee that.... the winter is coming?
+
 ### Veil of Fate — item discovered: Arm Cast
 `CBE_VeilOfFate2023_ArmCast_Dialogue` · seen 23.11.02–26.07.01
 - trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_Arthur_05'], items=['Arm Cast'], moment=item discovered (versions 23.11.02–26.07.01)
@@ -22,6 +31,66 @@
 **MADDIE**: The house inside your snow globe is cute!
 **LADY VOYANCE**: Not cute, my child! It is mysterious and enigmatic!
 
+### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot01
+`CBE_VeilOfFate2023_Decoration_Slot01_Dialogue` · seen 23.11.02–26.07.01
+- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot01, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
+
+**RODDY** (Relaxed): Is it true? Is Lady Voyance back to divine our futures?
+**MADDIE**: Hey, Roddy! She is indeed. Are you going to ask her to tell your fortune?
+**RODDY** (Charming): She predicted something pretty interesting for me last time - maybe something romantic.
+**RODDY** (Charming): I just wonder if she meant what I THOUGHT she meant... Do you think...
+**MADDIE** (Encouraging): Maybe you'll find someone who shares your love of hard hats and architecture!
+**RODDY** (Surprised): Oh, yeah! Maybe...
+**MADDIE** (Relaxed): She really is a character, isn't she!
+**RODDY** (Discouraged): She sure is.
+
+### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot04
+`CBE_VeilOfFate2023_Decoration_Slot04_Dialogue` · seen 23.11.02–26.07.01
+- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot04, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
+
+**RODDY** (Relaxed): Do you have time for another client, Lady Voyance?
+**LADY VOYANCE**: Of course! I am here to help ALL who want a glimpse of their fate!
+**RODDY** (Charming): Great! You told my fortune last time you were here and...
+**LADY VOYANCE**: And WHAT, my boy?
+**RODDY** (Charming): You said that I've waited for a long time and that my wait would be over soon?
+**LADY VOYANCE** (Talking): Did I really? Let's see what the globe conveys...
+**LADY VOYANCE** (Talking): Mmmm... Ooohhh... Nnnghhh...
+**LADY VOYANCE**: No. I think I must have read the globe upside down - it happens!
+**RODDY** (Surprised): Are you sure? Could you double-check?
+**LADY VOYANCE** (Talking): Hmm... I see SOMETHING powerful headed your way... Possibly indigestion...
+**LADY VOYANCE** (Talking): Something to look forward to, anyway!
+
+### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot06
+`CBE_VeilOfFate2023_Decoration_Slot06_Dialogue` · seen 23.11.02–26.07.01
+- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot06, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
+
+**LADY VOYANCE**: So, Maddie... You've come to hear what the snowglobe knows?
+**MADDIE** (Charming): I guess I have...
+**MADDIE** (Charming): Last time you mentioned that you sensed love in my future...
+**LADY VOYANCE**: I only interpret the signs in the globe... What it is telling me this time?
+
+### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot07
+`CBE_VeilOfFate2023_Decoration_Slot07_Dialogue` · seen 23.11.02–26.07.01
+- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot07, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
+
+**LADY VOYANCE**: So you want to know about love! Let's me see...
+**LADY VOYANCE** (Talking): Oh, sands past, present and future - show me what AWAITS my young friend!
+**LADY VOYANCE** (Talking): I see... someone tall, dark and HANDSOME... and his name is ummm...
+**MADDIE** (Surprised): Umm... Emilio??
+**LADY VOYANCE**: O-oh yes, it IS Emilio!
+**LADY VOYANCE**: Do you KNOW someone called Emilio?
+**MADDIE** (Charming): Yeah, kind of... But now what should I do?
+
+### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot08
+`CBE_VeilOfFate2023_Decoration_Slot08_Dialogue` · seen 23.11.02–26.07.01
+- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot08, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
+
+**LADY VOYANCE** (Talking): ALAS, the sands of the globe have seized!
+**MADDIE**: Thank you, Lady Voyance! I think I got what I wanted.
+**LADY VOYANCE**: The pleasure is ALL mine, my child! Go forth and seek your happiness with Emilio!
+**MADDIE** (Relaxed): Thanks, Lady Voyance!
+**LADY VOYANCE** (Thinking): Oh, what is this? The sands are stirring, forming a name... Arthur? It is probably nothing.
+
 ### Veil of Fate — item discovered: Dormant Snow Globe
 `CBE_VeilOfFate2023_InactiveSnowglobe_Dialogue` · seen 23.11.02–26.07.01
 - trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_CrystalBall_01'], items=['Dormant Snow Globe'], moment=item discovered (versions 23.11.02–26.07.01)
@@ -31,7 +100,7 @@
 **LADY VOYANCE**: Oh NO, my child! It just needs a good shake!
 
 ### Veil of Fate — event start
-`CBE_VeilOfFate2023_IntroDialogue_Dialogue` · seen 26.04.02–26.07.01
+`CBE_VeilOfFate2023_IntroDialogue_Dialogue` · seen 23.11.02–26.07.01
 - trigger: event, event=Veil of Fate, eventId=CBE_VeilOfFate2023, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **GRANDMA** (Charming): Lady Voyance! How are the snows of fate swirling these days?
@@ -89,7 +158,7 @@
 **MADDIE** (Thinking): But why would those old events appear in my future?
 
 ### Veil of Fate — event end
-`CBE_VeilOfFate2023_OutroDialogue_Dialogue` · seen 24.04.01–26.07.01
+`CBE_VeilOfFate2023_OutroDialogue_Dialogue` · seen 23.11.02–26.07.01
 - trigger: event, event=Veil of Fate, eventId=CBE_VeilOfFate2023, eventType=Collectible Board Event, moment=event end (versions 24.04.01–26.07.01)
 
 **GRANDMA**: Sooo, did Lady Voyance tell you something exciting?
@@ -141,6 +210,14 @@
 - trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_TarotCard_08'], items=['"The Partners"'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE**: The cards are as right as their reader. So you have absolutely nothing to worry about!
+
+### Veil of Fate — part of the event (exact trigger not dumped)
+`CBE_VeilOfFate2024_ActiveSnowglobe_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Veil of Fate, eventId=CBE_VeilOfFate2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**LADY VOYANCE**: Do you want to look into the past, present, or future?
+**MADDIE** (Thinking): I j-just want to know why this keeps happening to me...
+**LADY VOYANCE** (Talking): A BIG question, Dearest. Let's see where the globe takes us.
 
 ### Veil of Fate — item discovered: Open Astrology Book
 `CBE_VeilOfFate2024_BookOfStars_Dialogue` · seen 25.05.01–26.07.01
@@ -223,7 +300,7 @@
 **LADY VOYANCE** (Talking): Worry not. Lady Voyance never tells.
 
 ### Veil of Fate — event start
-`CBE_VeilOfFate2024_IntroDialogue_Dialogue` · seen 26.04.02–26.07.01
+`CBE_VeilOfFate2024_IntroDialogue_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Veil of Fate, eventId=CBE_VeilOfFate2024, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **MADDIE** (Annoyed): I can't believe this! Emilio is gone, and I'm alone... AGAIN!

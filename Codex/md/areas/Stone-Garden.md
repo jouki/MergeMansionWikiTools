@@ -2,13 +2,13 @@
 
 
 ### Stone Garden: JapaneseGardenUnlock
-`JapaneseGardenUnlock` · seen 24.04.01–26.07.01
+`JapaneseGardenUnlock` · seen 23.09.02–26.07.01
 - trigger: area, area=Stone Garden, areaId=JapaneseGarden, hotspotId=MansionHallRightUnlockJapaneseGarden, phase=task appears (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): I wonder what I might find from this direction after I've completed the Pool House Patio.
 
 ### Stone Garden: Remove overgrowth
-`JapaneseGarden_Intro` · seen 24.04.01–26.07.01
+`JapaneseGarden_Intro` · seen 23.09.02–26.07.01
 - trigger: area, area=Stone Garden, areaId=JapaneseGarden, hotspotId=MansionHallRightPathToGardenClearOvergrown, phase=task completed, task=Remove overgrowth (versions 24.04.01–26.07.01)
 
 **MADDIE** (Doubtful): I still can't believe the police arrested Grandma. I wonder what evidence they have against her...
@@ -25,7 +25,7 @@
 **JACKIE**: All right, but I can give you a chance to tell your story. I'll leave you my card.
 
 ### Stone Garden: Fix piping
-`JapaneseGarden_Outro` · seen 24.04.01–26.07.01
+`JapaneseGarden_Outro` · seen 23.09.02–26.07.01
 - trigger: area, area=Stone Garden, areaId=JapaneseGarden, hotspotId=JapaneseGardenFinishLantern, phase=task completed, task=Fix piping (versions 24.04.01–26.07.01)
 
 **MADDIE**: Rufus! Rufus, come home! I've got your dinner ready for you!

@@ -3,7 +3,6 @@ Every story in which Winston speaks.
 
 ### BathroomIntro
 `BathroomIntro` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE**: There! Got the door open with the crowbar!
 **MADDIE**: Now, to see where that water is coming fro-
@@ -17,8 +16,7 @@ Every story in which Winston speaks.
 **MADDIE** (Worried): *Sigh* I think you're right...
 
 ### BoultonBoulevard 04
-`BoultonBoulevard_04` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`BoultonBoulevard_04` · seen 26.07.01–26.07.01
 
 **MADDIE** (Thinking): Hmm... I don’t know much about this place!
 **MADDIE** (Thinking): Apart from what I’ve read, of course.
@@ -33,8 +31,7 @@ Every story in which Winston speaks.
 **MADDIE** (Talking): Yes, of course! I was wondering if you could join me at the tin can factory?
 
 ### BoultonBoulevard 05
-`BoultonBoulevard_05` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`BoultonBoulevard_05` · seen 26.07.01–26.07.01
 
 **WINSTON**: How may I be of service, Ma’am?
 **MADDIE** (Encouraging): I’ve decided to fix up the old factory! And was wondering if you could tell me a little about it?
@@ -65,8 +62,7 @@ Every story in which Winston speaks.
   _(1 cosmetic edit not shown)_
 
 ### BoultonBoulevard 07
-`BoultonBoulevard_07` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`BoultonBoulevard_07` · seen 26.07.01–26.07.01
 
 **MADDIE** (Surprised): Hey! There seems to be a plaque hidden under these bushes!
 **WINSTON** (Encouraging): Well spotted, Ma’am. That would be their time capsule.
@@ -81,8 +77,7 @@ Every story in which Winston speaks.
 **MADDIE** (Joyous): Let’s find out what’s inside!
 
 ### BoultonBoulevard 08
-`BoultonBoulevard_08` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`BoultonBoulevard_08` · seen 26.07.01–26.07.01
 
 **MADDIE** (Joyous): Oh wow! There’s so much stuff in here!
 **MADDIE**: Old tin cans, newspaper clippings, even letters from residents! This is incredible!
@@ -98,8 +93,7 @@ Every story in which Winston speaks.
 **MADDIE** (Doubtful): Oh, ha ha.
 
 ### BoultonBoulevard 09
-`BoultonBoulevard_09` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`BoultonBoulevard_09` · seen 26.07.01–26.07.01
 
 **MADDIE** (Doubtful): Hmmm.. Looks like the remains of a bell.
 **WINSTON** (Charming): Indeed, Ma’am. That was Agatha’s. She cast it herself, you know? Pure tin, and it rang twice a day.  
@@ -126,8 +120,7 @@ Every story in which Winston speaks.
 **MADDIE** (Joyous): And enjoying the boulevard at their own leisure.
 
 ### BoultonBoulevard 11
-`BoultonBoulevard_11` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`BoultonBoulevard_11` · seen 26.07.01–26.07.01
 
 **MADDIE** (Doubtful): The water wheel’s completely jammed. It’s just packed with leaves and debris.
 **WINSTON** (Discouraged): It is quite unfortunate. That wheel used to power a third of the machinery inside.
@@ -143,8 +136,7 @@ Every story in which Winston speaks.
 **WINSTON** (Joyous): A wonderful idea, Ma’am.
 
 ### BoultonBoulevard 12
-`BoultonBoulevard_12` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`BoultonBoulevard_12` · seen 26.07.01–26.07.01
 
 **MADDIE** (Joyous): An old fire truck!  
   _(1 cosmetic edit not shown)_
@@ -157,8 +149,7 @@ Every story in which Winston speaks.
 **MADDIE** (Relaxed): It’s going up again. A great reminder of the history of this place.
 
 ### BoultonBoulevard 13
-`BoultonBoulevard_13` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`BoultonBoulevard_13` · seen 26.07.01–26.07.01
 
 **MADDIE**: I knew this place mattered, but I didn’t realize how much until now.
 **WINSTON** (Thinking): Most things don’t reveal their value until someone bothers to look closely, Ma’am.
@@ -305,7 +296,7 @@ Every story in which Winston speaks.
 **WINSTON** (Surprised): Certainly not! I am a butler, not a referee.
 
 ### Conservatory: Break the lock
-`ConservatoryArea_Intro` · seen 24.04.01–26.07.01
+`ConservatoryArea_Intro` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryOpenConservatoryA1, phase=task completed, task=Break the lock (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Okay Conservatory, let's see why Grandpa sketched you!
@@ -318,7 +309,7 @@ Every story in which Winston speaks.
   _(1 cosmetic edit not shown)_
 
 ### Conservatory: Remove dirt
-`ConservatoryArea_Scene1` · seen 24.04.01–26.07.01
+`ConservatoryArea_Scene1` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryRemoveDirtAA2, phase=task completed, task=Remove dirt (versions 24.04.01–26.07.01)
 
 **MADDIE** (Doubtful): Well? Why are you here, Winston, if it's not for great-uncle Leonard?  
@@ -331,7 +322,7 @@ Every story in which Winston speaks.
   _(1 cosmetic edit not shown)_
 
 ### Conservatory: Clean snail statue
-`ConservatoryArea_Scene2` · seen 24.04.01–26.07.01
+`ConservatoryArea_Scene2` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryPlaceSnailStatueAA4, phase=task completed, task=Clean snail statue (versions 24.04.01–26.07.01)
 
 **MADDIE** (Worried): You said I wouldn't like the reason you're here. What is it, if it isn't to steal for Leonard?
@@ -342,7 +333,7 @@ Every story in which Winston speaks.
   _(1 cosmetic edit not shown)_
 
 ### Conservatory: Remove broken glass
-`ConservatoryArea_Scene3` · seen 24.04.01–26.07.01
+`ConservatoryArea_Scene3` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryRemoveGlassAB1, phase=task completed, task=Remove broken glass (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): What is that smell? Is it coming from that huge flower?
@@ -357,7 +348,7 @@ Every story in which Winston speaks.
   _(1 cosmetic edit not shown)_
 
 ### Conservatory: Place soil
-`ConservatoryArea_Scene4` · seen 24.04.01–26.07.01
+`ConservatoryArea_Scene4` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryPlaceSoilCA2, phase=task completed, task=Place soil (versions 24.04.01–24.09.03)
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryRemoveFloorTileDamageAB2, phase=task completed, task=Patch the floor (versions 24.11.02–26.07.01)
 
@@ -367,7 +358,7 @@ Every story in which Winston speaks.
   _(1 cosmetic edit not shown)_
 
 ### Conservatory: Place pots
-`ConservatoryArea_Scene5` · seen 24.04.01–26.07.01
+`ConservatoryArea_Scene5` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryPlacePotsBA3, phase=task completed, task=Place pots (versions 24.04.01–26.07.01)
 
 **MADDIE**: Sounds... dark. But fine! We'll get back to this later! Meanwhile, can you please tell me something Winston: Did you ever speak to my grandpa Charlie?
@@ -377,7 +368,7 @@ Every story in which Winston speaks.
 **WINSTON** (Joyous): He's alive?! I knew it!
 
 ### Conservatory: Cut sturdy dead fern
-`ConservatoryArea_Scene6` · seen 24.04.01–26.07.01
+`ConservatoryArea_Scene6` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryRemoveDeadFernBA6, phase=task completed, task=Cut sturdy dead fern (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): You said you knew Charlie was alive? How would you know that?
@@ -387,7 +378,7 @@ Every story in which Winston speaks.
 **WINSTON** (Worried): I'm sorry, but I don't. 
 
 ### Conservatory: Remove lid and place a barrel
-`ConservatoryArea_Scene7` · seen 24.04.01–26.07.01
+`ConservatoryArea_Scene7` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryPlaceHalfBarrelBA7, phase=task completed, task=Remove lid and place a barrel (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): What about the Conservatory, Winston? Do you know what's special about this place?
@@ -470,7 +461,6 @@ Every story in which Winston speaks.
 
 ### Dancefloor 07
 `Dancefloor_07` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Doubtful): Grandma, what was she talking about? A second watch? I've only seen one...
 **GRANDMA** (Frustrated): Winston, we need to check all the windows and doors. Make sure all the locks are still in good condition.
@@ -485,7 +475,6 @@ Every story in which Winston speaks.
 
 ### Dancefloor Intro
 `Dancefloor_Intro` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **SULLIVAN** (Encouraging): ...and I know that YOU have something to do with it!
 **GRANDMA** (Annoyed): You’re dangerously close to crossing a line, detective...
@@ -499,7 +488,6 @@ Every story in which Winston speaks.
 
 ### DiningRoom02
 `DiningRoom02` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **WINSTON**: I see your endeavors to reclaim the grandeur of your past home have come to a head, Ma'am. 
 **WINSTON** (Doubtful): While your efforts in restoring the other rooms are admirable, I honestly believe that this room is a lost cause...
@@ -510,7 +498,6 @@ Every story in which Winston speaks.
 
 ### DiningRoom03
 `DiningRoom03` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **WINSTON** (Thinking): Deb...
 **DEB** (Annoyed): Winston.
@@ -527,8 +514,7 @@ Every story in which Winston speaks.
 **WINSTON** (Surprised): My apologies Ma'am. I let my emotions get the better of me. Please, if you'd excuse me...
 
 ### FactoryReception 02
-`FactoryReception_02` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryReception_02` · seen 26.07.01–26.07.01
 
 **MADDIE** (Discouraged): Oof... This is A LOT of junk mail!
 **MADDIE**: Hmm... What’s this?
@@ -543,8 +529,7 @@ Every story in which Winston speaks.
 **MADDIE** (Discouraged): Oh Leonard...
 
 ### FactoryReception 04
-`FactoryReception_04` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryReception_04` · seen 26.07.01–26.07.01
 
 **MADDIE** (Encouraging): Oh, cool! An old employee time clock!
 **WINSTON**: This one is quite unique, actually. Ignatius designed it himself. Supposedly, it kept perfect time.
@@ -558,8 +543,7 @@ Every story in which Winston speaks.
 **WINSTON** (Relaxed): Ah, indeed!
 
 ### FactoryReception 05
-`FactoryReception_05` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryReception_05` · seen 26.07.01–26.07.01
 
 **MADDIE** (Thinking): These photos must have been from the factory’s grand opening and ribbon-cutting ceremony.
 **WINSTON** (Thinking): It was a grand day, Ma’am. Everyone from Hopewell Bay was there.
@@ -571,8 +555,7 @@ Every story in which Winston speaks.
 **WINSTON** (Charming): But of course, Ma’am.
 
 ### FactoryReception Intro
-`FactoryReception_Intro` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryReception_Intro` · seen 26.07.01–26.07.01
 
 **WINSTON** (Charming): ...And here we go, Ma’am.
 **WINSTON** (Encouraging): The reception of the Boulton Tin Can Factory!
@@ -609,8 +592,7 @@ Every story in which Winston speaks.
 **WINSTON**: As you say, ma'am. I'll prepare for the inevitable queue of overtime claims.
 
 ### FirstFloorKitchen 13
-`FirstFloorKitchen_13` · seen 26.06.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FirstFloorKitchen_13` · seen 26.07.01–26.07.01
 
 **MADDIE** (Discouraged): *sigh*
 **MADDIE** (Discouraged): What a mess...
@@ -689,7 +671,6 @@ Every story in which Winston speaks.
 
 ### FirstFloorPantry 13
 `FirstFloorPantry_13` · seen 26.07.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Doubtful): Victoria's finally gone...she got very worked up. I wonder...
 **MADDIE** (Doubtful): Is anything she said true?
@@ -752,7 +733,6 @@ Every story in which Winston speaks.
 
 ### Gallery09
 `Gallery09` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Frustrated): Arrgh! I am beyond mad! How could she?!
 **MADDIE** (Frustrated): I don't deserve to be treated like a child!
@@ -767,7 +747,6 @@ Every story in which Winston speaks.
 
 ### GalleryIntro
 `GalleryIntro` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE**: I can't believe I found the key to the gallery in the dining room and I'm only just unlocking it!
 **MADDIE**: It's such a relief to see dry floors again....
@@ -777,7 +756,7 @@ Every story in which Winston speaks.
 **WINSTON**: Noted, ma'am. 
 
 ### Hallway: Clean cobwebs and plank
-`HallwayHallway03` · seen 24.04.01–26.07.01
+`HallwayHallway03` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayRemoveCobewebsandPlankA5, phase=task completed, task=Clean cobwebs and plank (versions 24.04.01–26.07.01)
 
 **MADDIE**: Say, Jackie... Do you know anything about, uh, my family's financial problems?
@@ -790,7 +769,7 @@ Every story in which Winston speaks.
 **WINSTON** (Surprised): I beg your pardon, but that is  <b>entirely</b> inaccurate!
 
 ### Hallway: Remove dust sheet
-`HallwayHallway04` · seen 24.04.01–26.07.01
+`HallwayHallway04` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayRemoveFoodDogClothA6, phase=task completed, task=Remove dust sheet (versions 24.04.01–26.07.01)
 
 **JACKIE** (Doubtful): I'm sorry, whoever you are, but everyone knows that it was Leonard who-
@@ -830,7 +809,7 @@ Every story in which Winston speaks.
   _(1 cosmetic edit not shown)_
 
 ### The Great Bake-off — event end
-`LBE_May2023Outro` · seen 24.04.01–26.07.01
+`LBE_May2023Outro` · seen 23.09.02–26.07.01
 - trigger: event, event=The Great Bake-off, eventId=LBE_May2023, eventType=Leaderboard Event, moment=event end (versions 24.04.01–26.07.01)
 
 **PEARL** (Encouraging): Well done everyone! I've never seen such amazing cakes!
@@ -850,7 +829,6 @@ Every story in which Winston speaks.
 
 ### Lounge16
 `Lounge16` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **WINSTON**: Ma'am... It seems I found the intruder that was munching on all the foliage...
 **MADDIE**: Brilliant! So what was it?
@@ -864,7 +842,7 @@ Every story in which Winston speaks.
 **MADDIE** (Encouraging): Don't worry, Winston, I'm on it!
 
 ### Maintenance Room: Carry away the debris
-`MaintenanceRoom_BlackmailingBrother` · seen 24.04.01–26.07.01
+`MaintenanceRoom_BlackmailingBrother` · seen 23.09.02–26.07.01
 - trigger: area, area=Maintenance Room, areaId=MaintenanceRoom, hotspotId=ButlersRemoveTileBrickDebrisAF2, phase=task completed, task=Carry away the debris (versions 24.04.01–26.07.01)
 
 **WINSTON** (Worried): Here's the truth... Your brother Leonard has been blackmailing me for many, many years.
@@ -878,7 +856,7 @@ Every story in which Winston speaks.
 **MADDIE** (Surprised): What are you going to do, Grandma?
 
 ### Maintenance Room: Break the lock
-`MaintenanceRoom_ButlerFirstSeen` · seen 24.04.01–26.07.01
+`MaintenanceRoom_ButlerFirstSeen` · seen 23.09.02–26.07.01
 - trigger: area, area=Maintenance Room, areaId=MaintenanceRoom, hotspotId=ButlersOpenButlersMaintenanceRoomD1, phase=task completed, task=Break the lock (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Oh my! Who are you, and what are you doing in my house?
@@ -891,7 +869,7 @@ Every story in which Winston speaks.
 **MADDIE** (Annoyed): Not so fast! You'd better explain yourself, and quickly.
 
 ### Maintenance Room: Clean up the debris
-`MaintenanceRoom_LeonardBoulton` · seen 24.04.01–26.07.01
+`MaintenanceRoom_LeonardBoulton` · seen 23.09.02–26.07.01
 - trigger: area, area=Maintenance Room, areaId=MaintenanceRoom, hotspotId=ButlersRemoveDebrisA1, phase=task completed, task=Clean up the debris (versions 24.04.01–26.07.01)
 
 **MADDIE** (Annoyed): Well? Who are you, and why are you stealing silverware from my family house?
@@ -903,7 +881,7 @@ Every story in which Winston speaks.
 **MADDIE** (Annoyed): I'm going to get her over here to settle this!
 
 ### Maintenance Room: Clean the floor
-`MaintenanceRoom_NotTheButlerUrsulaRemembers` · seen 24.04.01–26.07.01
+`MaintenanceRoom_NotTheButlerUrsulaRemembers` · seen 23.09.02–26.07.01
 - trigger: area, area=Maintenance Room, areaId=MaintenanceRoom, hotspotId=ButlersRemoveFloorDirtAF1, phase=task completed, task=Clean the floor (versions 24.04.01–26.07.01)
 
 **WINSTON** (Surprised): Do you hear that noise? It sounds like a, ahem, cat! In distress! You should go and find it.
@@ -917,7 +895,7 @@ Every story in which Winston speaks.
 **WINSTON** (Worried): Oh, fine! I'll tell you everything. But you're not going to like it.
 
 ### Maintenance Room: Gather the leaves
-`MaintenanceRoom_UrsulaMeetsWinston` · seen 24.04.01–26.07.01
+`MaintenanceRoom_UrsulaMeetsWinston` · seen 23.09.02–26.07.01
 - trigger: area, area=Maintenance Room, areaId=MaintenanceRoom, hotspotId=ButlersRemoveLeavesA2, phase=task completed, task=Gather the leaves (versions 24.04.01–26.07.01)
 
 **MADDIE** (Annoyed): There you are, Grandma! I caught this guy stealing our candlesticks. He says his name is--
@@ -933,7 +911,7 @@ Every story in which Winston speaks.
 **MADDIE** (Annoyed): You'd better spill the beans, or I really will call the cops.
 
 ### Maintenance Room: Pick the debris up
-`MaintenanceRoom_WinstonVanishes` · seen 24.04.01–26.07.01
+`MaintenanceRoom_WinstonVanishes` · seen 23.09.02–26.07.01
 - trigger: area, area=Maintenance Room, areaId=MaintenanceRoom, hotspotId=ButlersRemoveDebrisAE1, phase=task completed, task=Pick the debris up (versions 24.04.01–26.07.01)
 
 **MADDIE** (Worried): Should we call the police about Winston's theft, Grandma?
@@ -958,7 +936,6 @@ Every story in which Winston speaks.
 
 ### Musicianroom02
 `Musicianroom02` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **WINSTON** (Relaxed): You called, ma’am? I assume this has something to do with the construction workers outside...
 **MADDIE** (Doubtful): Yes! Winston, do you think you can deal with the mayor's cronies and tell me what they’re up to?
@@ -1049,7 +1026,6 @@ Every story in which Winston speaks.
 
 ### Perfumery06
 `Perfumery06` · seen 25.06.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **WINSTON**: Is everything alright, Ma’am?
 **MADDIE** (Worried): Oh, Winston... It’s alright. Just Leonard.
@@ -1062,7 +1038,6 @@ Every story in which Winston speaks.
 
 ### Perfumery07
 `Perfumery07` · seen 25.06.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **WINSTON** (Discouraged): It is a sad story, but yes, I know it.
 **MADDIE**: Tell me, please.
@@ -1089,9 +1064,28 @@ Every story in which Winston speaks.
 **WINSTON**: I think it's just a piranha ma'am. Rather large one, though.
 **MADDIE** (Thinking): Fascinating!
 
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_22
+`SE_HopeberryFestival2023_Decoration_Slot22_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_22, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**DEB** (Thinking): This thing has always given me the creeps...
+**WINSTON**: Then it is doing its job, ma'am.
+**DEB** (Relaxed): Come to think of it, it <b>does</b> resemble Mr. Winston, doesn't it?!
+**GRANDMA** (Encouraging): Ha ha!
+**WINSTON** (Doubtful): Hmph!
+
+### SEValentines2023 — decoration SE_Valentines2023_Decoration_18
+`SE_Valentines2023_DessertCart` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_Valentines2023_Decoration_18, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+
 ### SE Valentines2023 Outro Dialogue
 `SE_Valentines2023_Outro_Dialogue` · seen 23.09.02–25.06.01
-- trigger: unknown, hint=Seasonal event (versions None–None)
+
+
+### SEValentines2023 — decoration SE_Valentines2023_Decoration_16
+`SE_Valentines2023_ValentineDinnerTable` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_Valentines2023_Decoration_16, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 
 ### Spy Room: Get things ready
@@ -1152,7 +1146,6 @@ Every story in which Winston speaks.
 
 ### StablesextIntro
 `StablesextIntro` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **WINSTON** (Joyous): Here we are, ma'am. The family ranch...
 **MADDIE** (Surprised): It's huge! How did I have no idea this existed?
@@ -1185,7 +1178,6 @@ Every story in which Winston speaks.
 
 ### Stablesext 03
 `Stablesext_03` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **WINSTON**: That brings us back to this filly here, descendant of the great Boulton Blues.
 **WINSTON** (Encouraging): I guess you could say she found her way back home.
@@ -1203,7 +1195,6 @@ Every story in which Winston speaks.
 
 ### Stablesext 04
 `Stablesext_04` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **WINSTON**: Now that that's settled, I'll leave you two to get better acquainted.
 **MADDIE** (Surprised): What?! But, Winston, the mansion-
@@ -1215,7 +1206,6 @@ Every story in which Winston speaks.
 
 ### Stablesinterior02
 `Stablesinterior02` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **WINSTON** (Worried): I tried to reason with them, Ma’am. But-
 **LEONARD**: Oh please, Winston...
@@ -1230,7 +1220,6 @@ Every story in which Winston speaks.
 
 ### Stablesinterior05
 `Stablesinterior05` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Doubtful): I don’t care what Leonard has promised you, but I want the both of you out of here.
 **MADDIE** (Annoyed): Now!
@@ -1265,7 +1254,6 @@ Every story in which Winston speaks.
 
 ### WinstonCharacterTask2
 `WinstonCharacterTask2` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE**: Oh, my... This stain will not come off!
 **WINSTON** (Thinking): Hmm, I don’t think we will have enough time before the guests arrive. We need to paint over it.

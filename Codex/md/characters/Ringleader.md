@@ -20,7 +20,6 @@ Every story in which Ringleader speaks.
 **MASON** (Thinking): Guys, we can do better!  
   _earlier:_ ~~We are, dearie, but I know her better than you think.~~ (until 25.09.01)
 **MASON** (Thinking): I know she is impressive, but she has a lot of secrets.
-**MADDIE** (Relaxed): Thanks for the heads up, Grandma, but I think you might just be paranoid!
 
 ### Circus Caper — item discovered: Crumpled Programs
 `LDE_Rumors2025_Brochures_07_Dialogue` · seen 25.05.01–26.07.01
@@ -108,51 +107,6 @@ Every story in which Ringleader speaks.
 **RINGLEADER** (Relaxed): It would be my pleasure!  
   _earlier:_ ~~I've read so much about your circus.~~ (until 25.09.01)
 **RINGLEADER** (Relaxed): Thank you, Maddie. You're so kind!
-**MADDIE** (Encouraging): Let me know if there's anything I can do to help you while you're here. I can organize clown noses or hand out flyers.
-**RINGLEADER** (Relaxed): I might just take you up on your offer!
-
-### Circus Caper — item discovered: Circus Wagon
-`LDE_Rumors2025_CircusWagon_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CircusWagon_01'], items=['Circus Wagon'], moment=item discovered (versions 25.05.01–26.07.01)
-
-**MASON** (Thinking): Juggling, fortunetelling and simple magic tricks are fun, but we need something more challenging.  
-  _earlier:_ ~~Ursula Boulton, as I live and breathe! How long has it been?~~ (until 25.09.01)
-**RODDY** (Thinking): Like what?  
-  _earlier:_ ~~Too long to remember. It is nice to see you again, Fiona.~~ (until 25.09.01)
-**MASON** (Joyous): Like tightrope-walking!  
-  _earlier:_ ~~You look well. Still traveling and performing, I see.~~ (until 25.09.01)
-**MASON** (Joyous): You two know each other??
-**RINGLEADER** (Relaxed): Oh, yes. We go WAY back. Don't we, Ursula?
-**RINGLEADER** (Relaxed): We slept in the same wagon back in the day. We trained together and shared so many stories.
-**RINGLEADER** (Relaxed): About this place too!
-**RINGLEADER** (Surprised): The Mansion looks so much better! Someone's been working hard to turn it around.
-**RINGLEADER**: Is it still full of old stuff?
-**MADDIE** (Charming): Like you wouldn't believe.
-
-### Circus Caper — item discovered: Escape Vehicle
-`LDE_Rumors2025_HeistPlan_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_HeistPlan_06'], items=['Escape Vehicle'], moment=item discovered (versions 25.05.01–26.07.01)
-
-**RODDY**: So are you going to show us how your trick works?  
-  _earlier:_ ~~Stop right there, Fiona! I know what you're doing.~~ (until 25.09.01)
-**MASON** (Charming): Actually, the trick is for you two!  
-  _earlier:_ ~~I just can't believe you'd take advantage of our hospitality like this!~~ (until 25.09.01)
-**RODDY** (Surprised): For us? Are you going to use those chains on us??  
-  _earlier:_ ~~I told you. In this business, you sometimes have to break the rules.~~ (until 25.09.01)
-**MASON** (Joyous): Yes, and it’ll be great! I have the key here.  
-  _earlier:_ ~~I wish I hadn't guessed this, Fiona. I wanted to give you the benefit of the doubt.~~ (until 25.09.01)
-**HANK** (Charming): Umm, is your trick safe?  
-  _earlier:_ ~~I almost pulled it off, too!~~ (until 25.09.01)
-**MASON**: TOTALLY safe.  
-  _earlier:_ ~~I'd be on my jolly way by now if it weren't for your meddling granddaughter!~~ (until 25.09.01)  
-  _(1 cosmetic edit not shown)_
-**HANK** (Joyous): OK, then. Just don’t lose the key, little guy!  
-  _earlier:_ ~~Just tell me, where is it?~~ (until 25.09.01)
-**HANK** (Joyous): What?
-**RINGLEADER** (Surprised): The damned Boultonite!
-**GRANDMA** (Surprised): So that's what you were after...
-**RINGLEADER** (Doubtful): You didn't think I want to tour with the Circus for the rest of my life, did you?
-**GRANDMA** (Frustrated): Well, you can think about that for a nice long while - behind bars!
 
 ### Circus Caper — event end
 `LDE_Rumors2025_Outro_Dialogue` · seen 25.02.01–26.07.01
@@ -170,9 +124,9 @@ Every story in which Ringleader speaks.
   _earlier:_ ~~No, I still love the circus. But next time they can pitch their tents somewhere else!~~ (until 25.09.01)
 **RINGLEADER** (Relaxed): You would make the perfect clown act!
 
-### LDE Rumors2025 TA3 Dialogue
+### Circus Caper — part of the event (exact trigger not dumped)
 `LDE_Rumors2025_TA3_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Circus Caper, eventId=LDE_Rumors2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **MADDIE**: Do you think this location would be good for the circus?
 **RINGLEADER** (Doubtful): Let's see...
@@ -208,24 +162,6 @@ Every story in which Ringleader speaks.
   _earlier:_ ~~She was definitely the knife-thrower.~~ (until 25.09.01)
 **MADDIE**: I get it. It’s tough to keep everything going when the world seems to be against you.
 **MADDIE**: After working at the mansion for this long, I know how that feels.
-
-### Circus Caper — item discovered: Lock Pick Set
-`LDE_Rumors2025_ThiefProps_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_ThiefProps_07'], items=['Lock Pick Set'], moment=item discovered (versions 25.05.01–26.07.01)
-
-**MASON** (Joyous): These could be perfect for our act!  
-  _earlier:_ ~~Is there something hidden in the bushes?~~ (until 25.09.01)
-**RODDY** (Encouraging): It’s a shame the costume is about five sizes too small for Hank, and ten sizes too big for me.  
-  _earlier:_ ~~A set of lock picks!~~ (until 25.09.01)
-**RODDY** (Encouraging): What kind of a trick could they be used for?  
-  _earlier:_ ~~Maybe Grandma wasn't just being paranoid... Maybe there IS something going on.~~ (until 25.09.01)
-**RODDY** (Encouraging): Fiona!
-**MADDIE** (Thinking): Look what I found.
-**RINGLEADER** (Surprised): Lock-picks? Where did you find those?
-**MADDIE** (Thinking): They were hidden in some bushes right next to the Mansion.
-**MADDIE** (Worried): I don't want to sound suspicious, but do you think there's someone in your troupe who could be planning a robbery here at the Mansion?
-**RINGLEADER** (Surprised): What a shocking thought! I promise to make sure no one in my circus steps out of line.
-**RINGLEADER** (Surprised): After all, you've been so welcoming to us.
 
 ### Carousel of Confessions — intro
 `SP_Ringmaster2025_Intro_Dialogue` · seen 25.04.02–26.07.01

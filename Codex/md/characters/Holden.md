@@ -176,7 +176,7 @@ Every story in which Holden speaks.
 **HOLDEN** (Encouraging): Hmph. Looks like I'll be returning soon...
 
 ### Lighthouse: Clean and place the old bridge post
-`Lighthouse1_Wizard` · seen 24.04.01–26.07.01
+`Lighthouse1_Wizard` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthousePlaceFixBridgePostA4, phase=task completed, task=Clean and place the old bridge post (versions 24.04.01–26.07.01)
 
 **HOLDEN** (Thinking): Alright, listen up. Here's everything I know about the wizard in the lighthouse...
@@ -188,7 +188,7 @@ Every story in which Holden speaks.
 **MADDIE** (Thinking): Ugh! Okay. Someone hiding up at the Lighthouse for years could be Grandpa Charlie! Let's find out.
 
 ### Lighthouse: Remove rocks
-`LighthouseIntro` · seen 24.04.01–26.07.01
+`LighthouseIntro` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthouseRemoveRocksA1, phase=task completed, task=Remove rocks (versions 24.04.01–26.07.01)
 
 **MADDIE** (Doubtful): I feel strange about this. Could my grandpa really be hiding out at the Lighthouse?
@@ -251,7 +251,6 @@ Every story in which Holden speaks.
 
 ### Office12
 `Office12` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): What?! Y-you can’t do that!
 **SULLIVAN** (Joyous): Oh Maddie...
@@ -261,7 +260,6 @@ Every story in which Holden speaks.
 
 ### Office13
 `Office13` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **HOLDEN** (Encouraging): Hey, can you say that again? I’ll take another photo from a different angle!
 **SULLIVAN** (Surprised): Who... Who are you?!
@@ -278,7 +276,6 @@ Every story in which Holden speaks.
 
 ### Office14
 `Office14` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Encouraging): Holden! I can’t believe I’m happy to see you!
 **MADDIE** (Doubtful): But... Why are you here?
@@ -292,7 +289,6 @@ Every story in which Holden speaks.
 
 ### Office15
 `Office15` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **RODDY** (Worried): Maddie, what she said about criminals is right, but...
 **MADDIE** (Doubtful): What?! Was she telling the truth? Is this what Arthur was-
@@ -306,7 +302,7 @@ Every story in which Holden speaks.
 **MADDIE** (Annoyed): Uh, huh...
 
 ### Scavenger Hunt: Clean and search the underwater stones
-`ScavengerHunt_Gardenright` · seen 24.04.01–26.07.01
+`ScavengerHunt_Gardenright` · seen 23.09.02–26.07.01
 - trigger: area, area=Scavenger Hunt, areaId=ScavengerHunt, hotspotId=ScavengerHuntGardenRightCleanFountain, phase=task completed, task=Clean and search the underwater stones (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Here we are - the fountain where Grandpa proposed to Grandma! This must be what the 'ring' carving meant.
@@ -318,7 +314,7 @@ Every story in which Holden speaks.
 **HOLDEN** (Charming): No problem - I'll just take some selfies with this old statue, then get some shots around the grounds.
 
 ### Scavenger Hunt: Scrape and search the well stones
-`ScavengerHunt_Oldwell` · seen 24.04.01–26.07.01
+`ScavengerHunt_Oldwell` · seen 23.09.02–26.07.01
 - trigger: area, area=Scavenger Hunt, areaId=ScavengerHunt, hotspotId=ScavengerHuntOldWellCleanWell, phase=task completed, task=Scrape and search the well stones (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): I see something here! There's a letter. I think it's an 'L!'
@@ -336,7 +332,6 @@ Every story in which Holden speaks.
 
 ### Study02
 `Study02` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **HOLDEN** (Joyous): A ha! The scene of the crime...
 **JACKIE** (Surprised): Hey, you’re not allowed to be in here!
@@ -346,7 +341,6 @@ Every story in which Holden speaks.
 
 ### Study03
 `Study03` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): Hey, what’s this?!
 **JACKIE**: It looks like a ledger of some sort? But for what?
@@ -361,7 +355,6 @@ Every story in which Holden speaks.
 
 ### Study04
 `Study04` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **JACKIE** (Annoyed): Holden! I thought I told you to back off!
 **MADDIE** (Discouraged): This can’t be right...

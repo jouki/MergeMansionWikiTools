@@ -2,7 +2,7 @@
 
 
 ### Pool House Patio: Open jammed Patio door
-`BBQArea_Intro` · seen 24.04.01–26.07.01
+`BBQArea_Intro` · seen 23.09.02–26.07.01
 - trigger: area, area=Pool House Patio, areaId=BBQArea, hotspotId=PoolHouseOpenBBQArea, phase=task completed, task=Open jammed Patio door (versions 24.04.01–26.07.01)
 
 **MADDIE**: You wanted to see me, Grandma? What's going on?
@@ -15,7 +15,7 @@
 **MADDIE** (Joyous): Well, we should fix it up! I promise that I'll make it look beautiful for you.
 
 ### Pool House Patio: Clean pavement
-`BBQArea_Outro` · seen 24.04.01–26.07.01
+`BBQArea_Outro` · seen 23.09.02–26.07.01
 - trigger: area, area=Pool House Patio, areaId=BBQArea, hotspotId=BBQAreaSidePathWashPavement, phase=task completed, task=Clean pavement (versions 24.04.01–26.07.01)
 
 **GRANDMA** (Encouraging): Maddie, you've outdone yourself! It's as if you've turned back time.

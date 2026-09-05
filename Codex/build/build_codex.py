@@ -144,12 +144,13 @@ def loc_text(loc, lid, loc_id):
 
 def load_version(ver):
     """Everything we have for one version: loc dict + structure dicts (None when missing)."""
-    d = {"loc": None, "dialogues": None, "areas": None, "events": None, "chains": None}
+    d = {"loc": None, "dialogues": None, "areas": None, "events": None, "chains": None, "stories": None}
     p = os.path.join(common.CACHE, "loc", ver + ".json")
     if os.path.exists(p):
         d["loc"] = common.read_json(p)
     sd = os.path.join(common.CACHE, "structure", ver)
-    for name, key in (("dialogues.json", "dialogues"), ("areas.json", "areas"), ("events.json", "events"), ("chain_item_odds.json", "chains")):
+    for name, key in (("dialogues.json", "dialogues"), ("areas.json", "areas"), ("events.json", "events"), ("chain_item_odds.json", "chains"),
+                      ("stories.json", "stories")):
         fp = os.path.join(sd, name)
         if os.path.exists(fp):
             try:
@@ -187,6 +188,11 @@ def build():
     story_defs_by_ver = {}
     for v in vers:
         defs = {}
+        # StoryElements exported straight from the config (DumpHarness --dump-stories) are authoritative;
+        # TriggerDialogue payloads found in areas/events/chains only fill in what the config export lacks.
+        for sid, st in ((per[v]["stories"] or {}).get("Stories") or {}).items():
+            if st.get("DialogItems"):
+                defs[sid] = list(st["DialogItems"])
         story_defs_from_actions(per[v]["areas"], defs)
         story_defs_from_actions(per[v]["events"], defs)
         story_defs_from_actions(per[v]["chains"], defs)
@@ -352,6 +358,21 @@ def build():
             covered.update(ids or [])
         stories[sid] = {"lines": common.runs(order_pairs), "triggers": triggers,
                         "seen": {"first": seen[0], "last": seen[-1]} if seen else None}
+    # stories the config defines but nothing we dump triggers (event side stories, tutorial): attribute them
+    # to their event by the id prefix (SBE_Jailbreak_… -> The Great Escape (Jailbreak)) so the event stays whole
+    for sid, st in stories.items():
+        if st["triggers"]:
+            continue
+        tokens = sid.split("_")
+        if len(tokens) >= 3:
+            run_key = tokens[0] + "_" + tokens[1]
+            name = event_display.get(run_key) or event_display.get(run_key + "_Name")
+            if not name:
+                name = resolve_event_name(run_key)
+            if name != run_key:
+                st["triggers"] = [{"kind": "event", "eventType": "event story", "event": name, "eventId": run_key,
+                                   "moment": "part of the event (exact trigger not dumped)",
+                                   "from": (st.get("seen") or {}).get("first"), "to": (st.get("seen") or {}).get("last")}]
     for g, ids in groups.items():
         if g in stories or any(i in covered for i in ids):
             continue
@@ -439,7 +460,8 @@ def build():
     # 5) characters (from the latest speaker of each line in each story's latest order)
     chars = collections.defaultdict(lambda: {"linesTotal": 0, "stories": set()})
     for sid, s in stories.items():
-        for lid in s["lines"][-1]["value"] or []:
+        current_ids = next((r["value"] for r in reversed(s["lines"]) if r["value"]), [])   # last non-empty run (removed stories too)
+        for lid in current_ids:
             sp = lines.get(lid, {}).get("speaker") or []
             if sp and sp[-1]["value"]:
                 chars[sp[-1]["value"]]["linesTotal"] += 1

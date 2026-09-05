@@ -2,14 +2,14 @@
 
 
 ### Bathroom: Dry the floor
-`AshAmbulance` · seen 24.04.01–26.07.01
+`AshAmbulance` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomRemoveWaterFromBathroomFloorAa1, phase=task completed, task=Dry the floor (versions 24.04.01–26.07.01)
 
 **MADDIE**: Hmm, I might as well start fixing a few things here before Ash returns!
 **MADDIE**: It shouldn't be too hard, right? I've got this!
 
 ### Bathroom: Assisting Ash
-`AshCharacterFinalTask` · seen 24.04.01–26.07.01
+`AshCharacterFinalTask` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomCharacterTaskH20, phase=task completed, task=Assisting Ash (versions 24.04.01–26.07.01)
 
 **ASH** (Encouraging): Thanks for all the hard work, Maddie!
@@ -17,7 +17,7 @@
 **MADDIE** (Thinking): Sure thing! There were some strange requests though...
 
 ### Bathroom: Assisting Ash
-`AshCharacterTasks1` · seen 24.04.01–26.07.01
+`AshCharacterTasks1` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomCharacterTaskH5, phase=task completed, task=Assisting Ash (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): What do you need wax for?
@@ -25,7 +25,7 @@
 **MADDIE**: Oh right, makes sense!
 
 ### Bathroom: Assisting Ash
-`AshCharacterTasks2` · seen 24.04.01–26.07.01
+`AshCharacterTasks2` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomCharacterTaskH9, phase=task completed, task=Assisting Ash (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): A tape measure? Are you installing something?
@@ -34,7 +34,7 @@
 **MADDIE**: Oh, sounds nice!
 
 ### Bathroom: Assisting Ash
-`AshCharacterTasksIntro` · seen 24.04.01–26.07.01
+`AshCharacterTasksIntro` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomCharacterTaskH1, phase=task completed, task=Assisting Ash (versions 24.04.01–26.07.01)
 
 **ASH** (Worried): Maddie, I have a bit of a favor to ask you. 
@@ -47,7 +47,7 @@
 **ASH** (Joyous): You're the best! I guarantee that it'll be worth it!
 
 ### Bathroom: Fix the leak
-`Bathroom05` · seen 24.04.01–26.07.01
+`Bathroom05` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomSwapLeakBi4, phase=task completed, task=Fix the leak (versions 24.04.01–26.07.01)
 
 **ASH**: You know... I'm a HUGE fan of Skatie Katie!
@@ -58,7 +58,7 @@
 **ASH** (Surprised): REALLY? That would be so cool!
 
 ### Bathroom: Dry the water
-`Bathroom06` · seen 24.04.01–26.07.01
+`Bathroom06` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomRemoveWaterBj1, phase=task completed, task=Dry the water (versions 24.04.01–26.07.01)
 
 **MADDIE**: *Ring Ring*
@@ -73,7 +73,7 @@
 **ASH** (Surprised): Victoria? Oh, man, never get on her wrong side!
 
 ### Bathroom: Screw the floor planks back
-`Bathroom07` · seen 24.04.01–26.07.01
+`Bathroom07` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomPlaceBathroomFloorPlanks10C3, phase=task completed, task=Screw the floor planks back (versions 24.04.01–26.07.01)
 
 **MADDIE**: What do you know about Victoria?
@@ -89,7 +89,7 @@
 **MADDIE** (Surprised): Then what happened?!
 
 ### Bathroom: Add the floor tiles back
-`Bathroom08` · seen 24.04.01–26.07.01
+`Bathroom08` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomPlaceFloorTilesC5, phase=task completed, task=Add the floor tiles back (versions 24.04.01–26.07.01)
 
 **MADDIE**: Did the fight get worse?
@@ -101,7 +101,7 @@
 **MADDIE** (Thinking): Why would the mayor and Victoria have plans for our mansion?!
 
 ### Bathroom: Plant a new plant
-`Bathroom09` · seen 24.04.01–26.07.01
+`Bathroom09` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomPlaceBRFernLargeD5, phase=task completed, task=Plant a new plant (versions 24.04.01–26.07.01)
 
 **ASH**: Alright! Almost done. Just one last thing left!
@@ -113,21 +113,21 @@
 **MADDIE** (Thinking): Hmmm. Wonder what it is?!
 
 ### Bathroom: Place fixed rug
-`BlueRug` · seen 24.04.01–26.07.01
+`BlueRug` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomPlaceBRRugFb3, phase=task completed, task=Place fixed rug (versions 24.04.01–26.07.01)
 
 **MADDIE** (Relaxed): The floor was pretty cold, but nothing a nice warm rug can't fix!
 **ASH**: Ooh, that's very comfy...
 
 ### Bathroom: Fix the toilet seat
-`GoldenToilet` · seen 24.04.01–26.07.01
+`GoldenToilet` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomRemoveFixToiletCa5, phase=task completed, task=Fix the toilet seat (versions 24.04.01–26.07.01)
 
 **MADDIE** (Encouraging): Well... I have a golden toilet now.
 **ASH**: May it serve you well.
 
 ### Bathroom: Place fixed sink pipes
-`SinkAndMirror` · seen 24.04.01–26.07.01
+`SinkAndMirror` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomPlaceFixedSinkPipesE5, phase=task completed, task=Place fixed sink pipes (versions 24.04.01–26.07.01)
 
 **MADDIE** (Charming): Phew! That was a lot more complicated than I thought!
@@ -136,7 +136,7 @@
 **ASH** (Joyous): See? You're learning!
 
 ### Bathroom: Make it shine
-`Statue` · seen 24.04.01–26.07.01
+`Statue` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomPlaceBRStatueStage6Cd6, phase=task completed, task=Make it shine (versions 24.04.01–26.07.01)
 
 **ASH** (Joyous): Wow! What a bombshell! 

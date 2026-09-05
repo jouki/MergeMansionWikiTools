@@ -306,6 +306,44 @@
 **MASON**: And pinecones and walnuts!
 **GRANDMA** (Encouraging): Wonderful! Now we just need to find the perfect tree!
 
+### Holiday Oddities — part of the event (exact trigger not dumped)
+`LDE_HolidayOddities2025_TA2_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Holiday Oddities, eventId=LDE_HolidayOddities2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Relaxed): Hello, Grandma! I just had the most glorious nap! I feel so totally rested and recharged.
+**GRANDMA**: I am glad to hear it, dearie.
+**MADDIE**: I think I’m going to start the holiday preparations. We need a tree and the Mansion needs to be decorated, and...
+**GRANDMA** (Thinking): Actually, I think you should go and take a nice bath. I got you some of those lavender bath salts you like so much.
+**MADDIE** (Surprised): You did? Well... I guess I could do that. Are you sure?
+**GRANDMA** (Relaxed): Quite sure. Go, go!
+**MADDIE** (Relaxed): Twist my arm!
+
+### Holiday Oddities — part of the event (exact trigger not dumped)
+`LDE_HolidayOddities2025_TC1_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Holiday Oddities, eventId=LDE_HolidayOddities2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Surprised): Have you already started preparing the food for the holiday dinner?
+**MADDIE** (Thinking): I thought I was going to help you.
+**GRANDMA** (Encouraging): I was just making you a little snack. Are you hungry?
+**MADDIE** (Charming): I guess I could have a little something, but--
+**GRANDMA** (Relaxed): Would you like some of my Hopeberry cobbler?
+**MADDIE** (Joyous): It’s my favorite!
+**GRANDMA** (Charming): Oh, is it? I completely forgot...
+
+### Holiday Oddities — part of the event (exact trigger not dumped)
+`LDE_HolidayOddities2025_TC3_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Holiday Oddities, eventId=LDE_HolidayOddities2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Surprised): What is this?? The tree is up and decorated, there are presents, and there’s even some... Is that soup?
+**MADDIE** (Relaxed): It’s like a...
+**MASON** (Relaxed): Holiday miracle?
+**MADDIE** (Encouraging): Exactly. Did you do all of this?
+**HANK**: We did!
+**HANK**: Hey, you’ve been grinding non-stop, so we figured you deserve a breather. We got everything handled with Ursula!
+**MADDIE** (Relaxed): I-I’m speechless. Thank you so much!
+**MADDIE** (Thinking): B-but, what’s the time? Am I going crazy, or are all the clocks showing a different time?
+**RODDY** (Relaxed): That’s a long story!
+
 ### Holiday Oddities — item discovered: LDE_HolidayOddities2025_Timepieces_04
 `LDE_HolidayOddities2025_Timepieces_04_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_Timepieces_04'], items=['LDE_HolidayOddities2025_Timepieces_04'], moment=item discovered (versions 26.03.01–26.07.01)

@@ -14,6 +14,19 @@
 **MADDIE** (Relaxed): It doesn't sound like a high-speed game if Julius and Deb are involved...
 **GRANDMA** (Charming): Very funny - but you might be surprised!
 
+### Secrets of Serenity — part of the event (exact trigger not dumped)
+`SP_Yoga2025_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Secrets of Serenity, eventId=SP_Yoga2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**GRANDMA** (Thinking): So you're going to organize a yoga retreat? Did Pearl put you up to it?
+**MADDIE** (Relaxed): No, I've seen them on social media, and I've always wanted to go.
+**MADDIE** (Encouraging): We have all this beautiful space, so it makes perfect sense to have one here.
+**GRANDMA** (Charming): If you say so.
+**MADDIE** (Charming): You might also like it.
+**GRANDMA** (Surprised): Me?? I am not quite sure that I am bendy enough.
+**MADDIE** (Relaxed): But will you try at least? It's so good for finding your balance.
+**GRANDMA** (Relaxed): I suppose it can't hurt.
+
 ### Secrets of Serenity — decoration SP_Yoga2025_Decoration_Slot26
 `SP_Yoga2025_Decoration_Slot26_Dialogue` · seen 25.05.01–26.07.01
 - trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot26, event=Secrets of Serenity, eventKey=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)

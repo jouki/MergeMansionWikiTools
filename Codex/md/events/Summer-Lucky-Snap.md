@@ -25,3 +25,24 @@
 **ANTIQUEDEALER** (Thinking): Perhaps someone in the younger generation, then?
 **MADDIE**: Maybe! Or maybe we will just keep it as our special thing, eh, Julius?
 **ANTIQUEDEALER** (Joyous): Nothing would delight me more, Maddie.
+
+### Summer Lucky Snap — entering board
+`LS_Summer_Intro_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, event=Summer Lucky Snap, eventId=LS_Summer, eventType=Collectible Board Event, moment=entering board (versions 25.05.01–26.03.01)
+- trigger: event, event=Summer Lucky Snap, eventId=LS_Summer_02, eventType=Collectible Board Event, moment=entering board (versions 25.05.01–25.06.02)
+- trigger: event, event=Summer Lucky Snap, eventId=LS_Summer_03, eventType=Collectible Board Event, moment=entering board (versions 25.05.01–25.06.02)
+- trigger: event, event=Summer Lucky Snap, eventId=LS_Summer_04, eventType=Collectible Board Event, moment=entering board (versions 25.05.01–25.06.01)
+- trigger: event, event=Summer Lucky Snap, eventId=LS_Summer_05, eventType=Collectible Board Event, moment=entering board (versions 25.06.02–25.06.02)
+
+**ANTIQUEDEALER** (Charming): Binoculars at the ready, Maddie. Let's go birding!
+**MADDIE** (Worried): I'm not sure there's any point...
+**ANTIQUEDEALER** (Worried): What on earth do you mean?
+**MADDIE** (Thinking): Well, it's like all the birds have disappeared!
+**ANTIQUEDEALER** (Relaxed): Oh, no, my dear! They haven't disappeared... but they are laying low.
+**ANTIQUEDEALER** (Relaxed): You see, they did the hard work of migrating back and then formed families.
+**ANTIQUEDEALER**: Now they are molting...
+**MADDIE** (Thinking): Molting? Losing their feathers?
+**ANTIQUEDEALER** (Charming): Exactly! And they will emerge looking quite different.
+**ANTIQUEDEALER** (Charming): You just need to know where to look!
+**MADDIE** (Charming): So it's like we're levelling up?
+**ANTIQUEDEALER** (Thinking): I'm not sure what you mean, but let's say yes!

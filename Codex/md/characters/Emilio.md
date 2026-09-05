@@ -11,8 +11,6 @@ Every story in which Emilio speaks.
 **RODDY** (Worried): That had better be the last one - we’re running out of space!  
   _earlier:_ ~~There are these cookies my granny used to make...~~ (until 25.10.01)
 **KAZUKO**: What did they taste like?
-**BELLA** (Relaxed): Oh, they tasted good!
-**KAZUKO** (Thinking): Hmm... I think we'll need a little bit of help from someone who knows a thing or two about baking.
 
 ### Bella's Holiday Workshop — item discovered: Baking Equipment
 `CBE_HolidayWorkshop2024_Candles_05_Dialogue` · seen 25.05.01–26.07.01
@@ -46,7 +44,6 @@ Every story in which Emilio speaks.
 **EMILIO** (Thinking): Although I don’t know where she finds the time to produce all of these crafts!  
   _earlier:_ ~~But what are you hoping to get for Xmas?~~ (until 25.10.01)
 **EMILIO** (Encouraging): Just peace on earth and joy to all the animals.
-**BELLA** (Doubtful): Ugh... of course you do.
 
 ### Bella's Holiday Workshop — item discovered: Jackie
 `CBE_HolidayWorkshop2024_CharacterJackie_01_Dialogue` · seen 25.05.01–26.07.01
@@ -82,13 +79,6 @@ Every story in which Emilio speaks.
 **EMILIO** (Relaxed): Or teapots!  
   _earlier:_ ~~Umm... *sigh*~~ (until 25.10.01)
 **BELLA** (Thinking): Thank you for welcoming me here in Hopewell Bay.
-**BELLA** (Doubtful): You've all been so great, but I guess I haven't been as nice as I could've been.  
-  _(1 cosmetic edit not shown)_
-**BELLA** (Doubtful): Now I just want to spread holiday cheer to everyone in Hopewell Bay... as a way to apologize.
-**BELLA**: Your little town is so sweet, and your projects are really quirky.
-**BELLA**: I know Emilio cares about you a lot, and I want him to be happy, so...
-**MADDIE** (Surprised): O-oh, sure. I-- I mean WE all care about Emilio, too.
-**BELLA** (Relaxed): Of course you do.
 
 ### Bella's Holiday Workshop — item discovered: Roddy
 `CBE_HolidayWorkshop2024_CharacterRoddy_01_Dialogue` · seen 25.05.01–26.07.01
@@ -104,8 +94,6 @@ Every story in which Emilio speaks.
 **RODDY** (Charming): I wonder if Maddie could spare a shed or a secret room for it all?  
   _earlier:_ ~~I'm speechless! Thank you so much!~~ (until 25.10.01)
 **BELLA**: It's a surprise, so you'll have to open it. Oh, I'll just tell you what it is!
-**BELLA** (Relaxed): It's a scarf!
-**RODDY** (Worried): Well that is thoughtful. And what a b-beautiful scarf it is!
 
 ### Bella's Holiday Workshop — item discovered: Tray of Polvorones
 `CBE_HolidayWorkshop2024_Cookies_06_Dialogue` · seen 25.05.01–26.07.01
@@ -124,28 +112,23 @@ Every story in which Emilio speaks.
 **BELLA** (Thinking): So... my online store actually was...
 **BELLA** (Relaxed): A huge success!
 
-### Bella's Holiday Workshop — item discovered: 86424485
-`CBE_HolidayWorkshop2024_CraftingTable_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['86424485'], items=['86424485'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CraftingSuppliesA_06'], items=['CBE_HolidayWorkshop2024_CraftingSuppliesA_06'], moment=item discovered (versions 26.03.01–26.07.01)
+### Bella's Holiday Workshop — decoration CBE_HolidayWorkshop2024_Decoration_Slot14
+`CBE_HolidayWorkshop2024_Decoration_Slot_14_Dialogue` · seen 25.05.01–25.06.01
+- trigger: decoration, decoration=CBE_HolidayWorkshop2024_Decoration_Slot14, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, moment=decoration placed (versions 25.05.01–25.06.01)
 
-**BELLA** (Relaxed): Roddy! Do you know a lot about computers?  
-  _earlier:_ ~~So, what kind of presents are you planning to buy?~~ (until 25.10.01)
-**RODDY**: I know a little bit. Why?  
-  _earlier:_ ~~I won't be buying anything -- I will MAKE presents for everyone!~~ (until 25.10.01)
-**BELLA**: Well, I happen to have a little project I need some help with.  
-  _earlier:_ ~~Ah, hand-crafted presents! I'm actually quite a dab hand with a pottery wheel, myself.~~ (until 25.10.01)
-**RODDY** (Thinking): Umm, OK... What's this project?  
-  _earlier:_ ~~Just give it a rest, Emilio! I know you're good at everything.~~ (until 25.10.01)
-**BELLA** (Ready): Just a little website... Please help me, Roddy! Please???  
-  _earlier:_ ~~Ahem...~~ (until 25.10.01)
-**RODDY** (Charming): OK, I guess I can take a look.  
-  _earlier:_ ~~What are you making?~~ (until 25.10.01)
-**BELLA** (Relaxed): I knew I could rely on you!  
-  _earlier:_ ~~Pottery, knitted hats, scarves, and socks, and scented candles!~~ (until 25.10.01)
-**EMILIO** (Surprised): And you know how to make them?
-**BELLA**: I will learn, and Kazuko promised to help.
-**EMILIO** (Thinking): Right...
+**EMILIO**: Maddie, I'm glad I caught you!
+**MADDIE** (Doubtful): Really? I thought you're busy with your fish and your research and... Bella.
+**EMILIO** (Doubtful): What...?
+**MADDIE** (Thinking): And I've been tied up as well!
+**MADDIE** (Thinking): The Mansion keeps me so busy, even at this time of year.
+**EMILIO** (Encouraging): Maybe you've misunderstood mine and Bella's relationship...
+**BELLA**: Hey, guys! 
+**BELLA**: I've just delivered all of my presents. I think everyone really LOVED them!
+**BELLA** (Doubtful): Come on, Emilio -- you promised to help me with that thing.
+**EMILIO** (Doubtful): What thing?
+**BELLA** (Doubtful): That THING I told you about. Remember??
+**EMILIO** (Surprised): Ummm, right. See you around, Maddie!
+**MADDIE** (Discouraged): See you.
 
 ### Bella's Holiday Workshop — event end
 `CBE_HolidayWorkshop2024_EventOutro_Dialogue` · seen 24.11.02–26.07.01
@@ -160,34 +143,6 @@ Every story in which Emilio speaks.
 **RODDY** (Relaxed): The holidays are never not chaotic around here, but at least they're always memorable.  
   _earlier:_ ~~How could they not like you?~~ (until 25.10.01)
 **BELLA** (Relaxed): I know!
-**BELLA** (Thinking): It's kinda sweet how Maddie has a crush on you, though!
-**EMILIO** (Surprised): Wh-what do you mean?
-**BELLA** (Relaxed): Don't worry - I won't tell anyone!
-
-### Bella's Holiday Workshop — entering board
-`CBE_HolidayWorkshop2024_Intro_Dialogue` · seen 25.10.01–26.07.01
-- trigger: event, event=Bella's Holiday Workshop, eventId=CBE_HolidayWorkshop2024, eventType=Collectible Board Event, moment=entering board (versions 25.10.01–26.07.01)
-
-**BELLA**: La-la-la-laaa! The new batch of teapots is in the kiln, and I just got the new yarn for my special beanies. The holiday season is looking up!  
-  _earlier:_ ~~Don't you just love the holidays? The food, the decorations, the presents...~~ (until 25.10.01)
-**BELLA**: I bet everyone's gonna be beside themselves with happiness when they find all of my goodies under their trees.  
-  _earlier:_ ~~Of course, I do. But Bella...~~ (until 25.10.01)
-**BELLA** (Relaxed): It’s such a blessing to have the gift of making and crafting, and the ability to spread holiday cheer with my beautiful creations.  
-  _earlier:_ ~~Do you think there will be some fun holiday activity at the Mansion?~~ (until 25.10.01)
-**BELLA** (Thinking): In fact... I should make them available to everyone!  
-  _earlier:_ ~~No doubt, but listen...~~ (until 25.10.01)
-**BELLA** (Thinking): I could open an online store. It’s pretty easy, right?  
-  _earlier:_ ~~Yes, Emilio?~~ (until 25.10.01)
-**BELLA** (Doubtful): I just need to find someone to set up the website, take some great selfies, and let my crafts do the rest.  
-  _earlier:_ ~~I've been meaning to speak with you about something.~~ (until 25.10.01)
-**BELLA** (Doubtful): But I don’t know anything about websites - and neither does Emilio. Biology degrees are so not transferable skills...  
-  _earlier:_ ~~Oh?~~ (until 25.10.01)
-**BELLA**: Who could I ask? Ah, I think I know the perfect person for the job!  
-  _earlier:_ ~~Maddie and her friends generously welcomed you here in Hopewell Bay, but I'm afraid you didn't make the best impression.~~ (until 25.10.01)
-**BELLA** (Doubtful): I know, but I was sooo jetlagged from the flight and...
-**EMILIO** (Encouraging): Bella...
-**BELLA** (Thinking): Fine. Maybe I could try to repay their hospitality somehow...
-**EMILIO** (Encouraging): That sounds like a wonderful idea!
 
 ### Bella's Holiday Workshop — item discovered: Teapot
 `CBE_HolidayWorkshop2024_Pottery_05_Dialogue` · seen 25.05.01–26.07.01
@@ -218,7 +173,6 @@ Every story in which Emilio speaks.
 **RODDY** (Frustrated): I guess my plan wasn’t totally water-tight after all...  
   _earlier:_ ~~You know what I've noticed? In this town, you never know what you'll find in an old tin can!~~ (until 25.10.01)
 **BELLA** (Relaxed): See! This one says "syrup", but it's an old recipe!
-**BELLA** (Thinking): "The secret to the perfect polvorones!"
 
 ### The Joys of the Sea — item discovered: Deluxe Aquarium
 `CBE_JoysOfTheSea2023_Aquarium_Dialogue` · seen 23.09.02–26.07.01
@@ -440,9 +394,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Thinking): But remember, it’s not enough to just throw them back in the water.
 **EMILIO** (Encouraging): Take appropriate action before, during and after landing a fish!
 
-### CBE JoysOfTheSea2023 FishingShack Dialogue
+### The Joys of the Sea — part of the event (exact trigger not dumped)
 `CBE_JoysOfTheSea2023_FishingShack_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=The Joys of the Sea, eventId=CBE_JoysOfTheSea2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **EMILIO**: Instead of taking all your tackle gear back with you, renting a fishing shack for storage is very convenient.
 **EMILIO**: It can also help you maintain sustainable fishing practices when near regulated fishing areas!
@@ -507,7 +461,6 @@ Every story in which Emilio speaks.
 
 ### CSE Classic RacesIntro
 `CSE_Classic_RacesIntro` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Core Support Event (versions None–None)
 
 **MADDIE** (Joyous): Today is the day, Roddy! We're going to sail for the Horizon Cup!
 **RODDY** (Annoyed): Never been much of a sailor myself, but your enthusiasm is inspiring.
@@ -518,9 +471,32 @@ Every story in which Emilio speaks.
 
 ### CSE Classic RacesRound2Loss
 `CSE_Classic_RacesRound2Loss` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Core Support Event (versions None–None)
 
 **EMILIO** (Encouraging): Better luck next time!
+
+### The Great Pumpkin Palooza — entering board
+`LBE_Halloween2023Intro` · seen 23.09.02–26.07.01
+- trigger: event, event=The Great Pumpkin Palooza, eventId=LBE_Halloween2023, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–26.01.02)
+
+**PEARL**: Welcome everyone to the Great Pumpkin Palooza! Hopewell Bay’s spooky jack o’lantern event!
+**PEARL**: It’s time to get creative and see what types of ghoulish masterpieces you can create!
+**EMILIO**: Pumpkin carving? Ha, haven’t done that in ages! Hopewell Bay sure does like keeping to traditions.
+**RODDY** (Relaxed): Definitely! And it’s a fun way to have a bit of friendly sport. Want to join in?
+**EMILIO** (Thinking): I- I don’t know... Last time I carved a pumpkin was with my mother... When I was seven.
+**RODDY** (Encouraging): PERFECT! Here, grab a knife and start carving!
+**RODDY** (Encouraging): May the best jack o’lantern win!
+**PEARL**: Wonderful! Let’s get this spooky Palooza started!
+
+### The Great Pumpkin Palooza — event end
+`LBE_Halloween2023Outro` · seen 23.09.02–26.07.01
+- trigger: event, event=The Great Pumpkin Palooza, eventId=LBE_Halloween2023, eventType=Leaderboard Event, moment=event end (versions 24.04.01–26.01.02)
+
+**EMILIO**: That was fun! Amy is going to love these!
+**RODDY** (Doubtful): I thought you said the last time you carved a pumpkin was when you were seven?!
+**EMILIO** (Encouraging): It’s true, but I do ice sculpting as a pastime.
+**RODDY** (Discouraged): Geeze... What don’t you do?
+**EMILIO**: Don’t worry about it, buddy! I’m sure you’ll win next time.
+**RODDY**: Gosh... Thanks.
 
 ### The Great Pumpkin Palooza — item discovered: Big Jack-o'-lantern
 `LBE_Halloween2023Pumpkin7` · seen 23.09.02–26.07.01
@@ -550,28 +526,23 @@ Every story in which Emilio speaks.
 **MADDIE** (Charming): Oh!
 
 ### LC Summer2026 CompetitionFishingRodRare Dialogue
-`LC_Summer2026_CompetitionFishingRodRare_Dialogue` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
+`LC_Summer2026_CompetitionFishingRodRare_Dialogue` · seen 26.07.01–26.07.01
 
 
 ### LC Summer2026 FishingClothes Dialogue
-`LC_Summer2026_FishingClothes_Dialogue` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
+`LC_Summer2026_FishingClothes_Dialogue` · seen 26.07.01–26.07.01
 
 
 ### LC Summer2026 FishingRodCommon Dialogue
-`LC_Summer2026_FishingRodCommon_Dialogue` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
+`LC_Summer2026_FishingRodCommon_Dialogue` · seen 26.07.01–26.07.01
 
 
 ### LC Summer2026 FishingToolContainers Dialogue
-`LC_Summer2026_FishingToolContainers_Dialogue` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
+`LC_Summer2026_FishingToolContainers_Dialogue` · seen 26.07.01–26.07.01
 
 
 ### LC Summer2026 GoldenFishingRodEpic Dialogue
-`LC_Summer2026_GoldenFishingRodEpic_Dialogue` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
+`LC_Summer2026_GoldenFishingRodEpic_Dialogue` · seen 26.07.01–26.07.01
 
 
 ### Lucky Catch — item discovered: LC_Summer2026_FishingClothes_01
@@ -746,9 +717,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Encouraging): Lemon Sharks are very social - although this one is quite far from its habitat. Curious.
 **GRANDMA** (Joyous): Oh-ho, this isn't anything yet. You should see what we've dredged out of the depths here, my dear...
 
-### LDE GreenAcresQuest2024 Intro Dialogue
-`LDE_GreenAcresQuest2024_Intro_Dialogue` · seen 25.05.01–26.04.02
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+### Green Acres Quest — part of the event (exact trigger not dumped)
+`LDE_GreenAcresQuest2024_Intro_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Hello, dearie! What are you up to?
 **MADDIE**: With everything that’s happened so far, I think it’s time we give a little back to people of Hopewell Bay.
@@ -765,9 +736,9 @@ Every story in which Emilio speaks.
 **BELLA** (Relaxed): Hello Maddie! I’ve heard so MUCH about you! You’re much cuter in person! But shorter than I expected.
 **MADDIE** (Doubtful): Nice to meet you! You’re exactly what I expected!
 
-### LDE GreenAcresQuest2024 TA1 Dialogue
-`LDE_GreenAcresQuest2024_TA1_Dialogue` · seen 25.05.01–26.04.02
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+### Green Acres Quest — part of the event (exact trigger not dumped)
+`LDE_GreenAcresQuest2024_TA1_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **EMILIO**: Maddie?
 **MADDIE** (Surprised): Oh... Hi.
@@ -780,6 +751,152 @@ Every story in which Emilio speaks.
 **MADDIE** (Annoyed): She called you?!
 **EMILIO** (Surprised): We’re just friends!
 **MADDIE** (Frustrated): Ugh... I’m sorry Emilio, I don’t have time for this.
+
+### Green Acres Quest — entering board
+`LDE_GreenAcresQuest2024_v2_BoardIntro_Dialogue` · seen 25.08.01–26.04.02
+- trigger: event, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, eventType=Collectible Board Event, moment=entering board (versions 25.08.01–26.04.02)
+
+**EMILIO**: OK, I've got the plans Maddie drew for the garden, and all the equipment I need.
+**EMILIO** (Thinking): Gardening can't be that hard... Can it?
+**EMILIO** (Thinking): It's just a little biodiverse green space with a variety of fruit and vegetables.
+**EMILIO** (Doubtful): Buck up, Emilio. You can build a pirate ship, and you've swum with sharks. You won't back down from a challenge!
+**EMILIO** (Annoyed): *Sigh* Why do I keep talking to myself?
+
+### Green Acres Quest — item discovered: Cherry
+`LDE_GreenAcresQuest2024_v2_CharacterCherry_02_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterCherry_02'], items=['Cherry'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**EMILIO** (Surprised): Cherry, I'm desperate. Could you help me with this garden?
+**CHERRY** (Doubtful): Wow! I can try, but I'm not much of a gardener.
+
+### Green Acres Quest — item discovered: Deb
+`LDE_GreenAcresQuest2024_v2_CharacterDeb_02_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterDeb_02'], items=['Deb'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**DEB**: You look like you need some help, my dear!
+**EMILIO** (Surprised): How did you know?
+
+### Green Acres Quest — item discovered: Grandma
+`LDE_GreenAcresQuest2024_v2_CharacterGrandma_02_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterGrandma_02'], items=['Grandma'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**GRANDMA** (Thinking): Hmmm... You do not know much about gardening, do you?
+**EMILIO** (Thinking): Not really...
+**GRANDMA** (Charming): I guessed as much. Let me show you!
+
+### Green Acres Quest — item discovered: Jackie
+`LDE_GreenAcresQuest2024_v2_CharacterJackie_02_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterJackie_03'], items=['Jackie'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**EMILIO**: Jackie, would you have a moment to help me?
+**JACKIE** (Hesitant): Sure thing - but I don't know much about gardening!
+
+### Green Acres Quest — item discovered: Julius
+`LDE_GreenAcresQuest2024_v2_CharacterJulius_02_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterJulius_02'], items=['Julius'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**EMILIO** (Thinking): Julius, do you know anything about gardening?
+**ANTIQUEDEALER** (Thinking): Well, I have read several books about it. Does that help?
+
+### Green Acres Quest — item discovered: Mason
+`LDE_GreenAcresQuest2024_v2_CharacterMason_02_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterMason_02'], items=['Mason'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**MASON**: Are you building a garden?
+**EMILIO** (Encouraging): I'm trying... I couldn't tempt you to help, could I?
+**MASON** (Encouraging): I guess I owe you one. Hand me a rake!
+
+### Green Acres Quest — item discovered: Poppy
+`LDE_GreenAcresQuest2024_v2_CommonFlowerD_01_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CommonFlowerD_01'], items=['Poppy'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**MADDIE** (Encouraging): If you want to attract pollinators, your garden needs flowers, too!
+**MADDIE** (Encouraging): What's Bella's favorite flower?
+**EMILIO** (Doubtful): I have no idea... That's bad, isn't it?
+
+### Green Acres Quest — item discovered: Friendship Medallion
+`LDE_GreenAcresQuest2024_v2_Friendship_08_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Friendship_08'], items=['Friendship Medallion'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**BELLA**: I've been looking for you, Emilio! I have a surprise for you - a little wedding present.
+**BELLA**: We didn't get a chance to get each other anything before, but I wanted to give you something special.
+**EMILIO** (Surprised): What a great little bracelet! And you made it yourself?
+**BELLA** (Relaxed): I did... Do you like it?
+**EMILIO** (Encouraging): I LOVE it.
+
+### Green Acres Quest — item discovered: Flying Garden Gnome
+`LDE_GreenAcresQuest2024_v2_GardenGnomes_07_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_GardenGnomes_07'], items=['Flying Garden Gnome'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**ANTIQUEDEALER**: Don't forget to add some garden gnomes!
+**EMILIO** (Doubtful): Do I really need garden gnomes? Do you think Bella would like them?
+**ANTIQUEDEALER** (Relaxed): Of course! Everyone likes garden gnomes.
+**EMILIO** (Relaxed): I guess we'll have garden gnomes!
+
+### Green Acres Quest — item discovered: Hedgehog
+`LDE_GreenAcresQuest2024_v2_GoodAnimals_05_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_GoodAnimals_05'], items=['Hedgehog'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**EMILIO** (Encouraging): Is that a... hedgehog?? It's so adorable!
+**EMILIO** (Encouraging): Welcome to Bella's community garden, little guy.
+
+### Green Acres Quest — item discovered: Extra Hot Chilies
+`LDE_GreenAcresQuest2024_v2_GreenhouseChilis_06_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_GreenhouseChilis_06'], items=['Extra Hot Chilies'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**EMILIO** (Thinking): Bella will definitely want some chilies. The hotter, the better!
+**MASON**: What are these? Can I taste them?
+**EMILIO** (Surprised): W-wait! They're...
+**MASON** (Worried): HOLY MOTHER OF LAVA! These are h-h-hot!
+
+### Green Acres Quest — event start
+`LDE_GreenAcresQuest2024_v2_Intro_Dialogue` · seen 26.04.02–26.04.02
+- trigger: event, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.04.02)
+
+**EMILIO**: Maddie, I was wondering if you could lend me a hand...
+**MADDIE** (Relaxed): Of course! What's up?
+**EMILIO** (Thinking): Married life with Bella has been wonderful, but our wedding happened so unexpectedly that I never got to give her a proper wedding gift.
+**EMILIO** (Thinking): I've been thinking about building her a little garden, as her works concentrate on biodiversity.
+**EMILIO** (Relaxed): The problem is, I know nothing about gardening.
+**EMILIO** (Encouraging): I know you've got a green thumb, so... could you help me? I know it's a lot to ask.
+**MADDIE** (Encouraging): It sounds like a great idea. I'm a bit busy around the Mansion, but I can give you some guidance.
+**MADDIE** (Encouraging): And I know quite a few people who can help with the rest!
+
+### Green Acres Quest — event end
+`LDE_GreenAcresQuest2024_v2_Outro_Dialogue` · seen 25.08.01–26.04.02
+- trigger: event, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, eventType=Collectible Board Event, moment=event end (versions 25.08.01–26.04.02)
+
+**EMILIO**: Phew, that was a lot of work! I have a new appreciation for all the work you've done in the Mansion gardens.
+**EMILIO** (Relaxed): With the composts and the pollinators, there's so much to think about!
+**MADDIE** (Relaxed): And Bella seemed pretty happy with her wedding gift.
+**EMILIO** (Thinking): She did, didn't she? But how can I ever beat this gift?
+**MADDIE** (Encouraging): Next year you can build her an aquarium!
+**EMILIO** (Doubtful): That's a great idea! Do you think you could--
+**MADDIE** (Hesitant): Oh, man! I think I can hear Grandma calling me. Sorry, but I have to run!
+
+### Green Acres Quest — item discovered: Hummingbird
+`LDE_GreenAcresQuest2024_v2_Pollinator_05_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Pollinator_05'], items=['Hummingbird'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**EMILIO** (Surprised): Is that a hummingbird?
+**MADDIE** (Relaxed): Your garden is already attracting wildlife!
+**EMILIO** (Relaxed): It's working! The garden is really working!
+
+### Green Acres Quest — item discovered: Magenta Marigold
+`LDE_GreenAcresQuest2024_v2_RareFlowerA_01_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_RareFlowerA_01'], items=['Magenta Marigold'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**EMILIO**: I can't believe how many people have helped me build this garden!
+**EMILIO** (Encouraging): With so many beautiful flowers, everyone can enjoy it.
+**EMILIO** (Thinking): I just hope Bella finds her favorite among them...
+
+### Green Acres Quest — item discovered: Purple Hydrangea
+`LDE_GreenAcresQuest2024_v2_RareFlowerB_01_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_RareFlowerB_01'], items=['Purple Hydrangea'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**GRANDMA**: What is Bella's favorite flower? Could it be the rose? Or tulip?
+**GRANDMA** (Thinking): Maybe the forget-me-not?
+**EMILIO** (Thinking): I still don't know. I feel totally hopeless!
 
 ### LDE GreenAcresQuest2024 v2 TA1 Dialogue
 `LDE_GreenAcresQuest2024_v2_TA1_Dialogue` · seen 26.02.01–26.04.02
@@ -818,6 +935,21 @@ Every story in which Emilio speaks.
 **EMILIO** (Surprised): I-I did?
 **BELLA** (Relaxed): Yes - I love poppies! Thank you, Emilio. You're the best!
 
+### Green Acres Quest — item discovered: Calla Lily
+`LDE_GreenAcresQuest2024_v2_UncommonFlowerA_01_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_UncommonFlowerA_01'], items=['Calla Lily'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**DEB** (Encouraging): I have a wonderful idea for your garden -- something Bella would love!
+**EMILIO** (Surprised): A corpse flower?
+**DEB** (Thinking): How did you know??
+
+### Green Acres Quest — item discovered: Basket of Vegetables
+`LDE_GreenAcresQuest2024_v2_Veggies_08_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Veggies_08'], items=['Basket of Vegetables'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**MADDIE** (Joyous): You've done a fantastic job, Emilio!
+**EMILIO** (Relaxed): I think I'm starting to get the hang of this. Gardening is fun!
+
 ### The Fa-la-la-la Follies — item discovered: Emilio's Present
 `LDE_HolidayCarols2023_HolidayPresent_07_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_HolidayPresent_07'], items=["Emilio's Present"], moment=item discovered (versions 25.05.01–26.07.01)
@@ -825,9 +957,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Thinking): Ah, a singing fish! How interesting...
 **EMILIO** (Thinking): I get it... It's because I'm a marine biologist.
 
-### LDE HolidayCarols2023 LayerDecoration 03 Dialogue
+### The Fa-la-la-la Follies — part of the event (exact trigger not dumped)
 `LDE_HolidayCarols2023_LayerDecoration_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=The Fa-la-la-la Follies, eventId=LDE_HolidayCarols2023, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **EMILIO** (Encouraging): This is starting to look wonderful, Maddie!
 **MADDIE**: Thank you, Emilio. I was actually hoping to see you...
@@ -862,7 +994,7 @@ Every story in which Emilio speaks.
 **EMILIO** (Annoyed): I was shopping with Bella. She is very thorough, so we spent quite a long time at the shoe shop. She can confirm this - she has the shoes to prove it.
 
 ### Pirates of Hopewell Bay — event start
-`LDE_PiratesOfHopewellBay2023_EventIntro_Dialogue` · seen 26.04.02–26.07.01
+`LDE_PiratesOfHopewellBay2023_EventIntro_Dialogue` · seen 23.11.02–26.07.01
 - trigger: event, event=Pirates of Hopewell Bay, eventId=LDE_PiratesOfHopewellBay2023, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **MASON**: Trim the sails and batten down the hatches because adventure awaits!
@@ -879,9 +1011,9 @@ Every story in which Emilio speaks.
 **MADDIE** (Encouraging): Hmm... I'm sure I saw something in the attic. Old papers and stuff...
 **MASON** (Encouraging): Ooooh, I hear adventure calling!
 
-### LDE PiratesOfHopewellBay2023 LayerDecoration 01 Dialogue
+### Pirates of Hopewell Bay — part of the event (exact trigger not dumped)
 `LDE_PiratesOfHopewellBay2023_LayerDecoration_01_Dialogue` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Pirates of Hopewell Bay, eventId=LDE_PiratesOfHopewellBay2023, moment=part of the event (exact trigger not dumped) (versions 23.11.02–26.07.01)
 
 **MASON** (Doubtful): Are you SURE you know what you're doing? There's not a lot of ship left.
 **EMILIO**: We're taking it apart to build it anew!
@@ -890,9 +1022,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Thinking): I think you should always listen to your mother.
 **MASON** (Annoyed): Huh! She says that too...
 
-### LDE PiratesOfHopewellBay2023 LayerDecoration 03 Dialogue
+### Pirates of Hopewell Bay — part of the event (exact trigger not dumped)
 `LDE_PiratesOfHopewellBay2023_LayerDecoration_03_Dialogue` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Pirates of Hopewell Bay, eventId=LDE_PiratesOfHopewellBay2023, moment=part of the event (exact trigger not dumped) (versions 23.11.02–26.07.01)
 
 **EMILIO**: So, young Mason. A good ship needs a strong skeleton.
 **MASON** (Encouraging): That'a a great idea! Skeletons are soooo cool.
@@ -901,9 +1033,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Encouraging): I'm talking about the frame of the ship. See, now we can start to build!
 **MASON**: And then we'll do the skeletons?
 
-### LDE PiratesOfHopewellBay2023 LayerDecoration 05 Dialogue
+### Pirates of Hopewell Bay — part of the event (exact trigger not dumped)
 `LDE_PiratesOfHopewellBay2023_LayerDecoration_05_Dialogue` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Pirates of Hopewell Bay, eventId=LDE_PiratesOfHopewellBay2023, moment=part of the event (exact trigger not dumped) (versions 23.11.02–26.07.01)
 
 **EMILIO** (Encouraging): What do you think? A handsome ship, isn't it?
 **MASON** (Thinking): Yeah, really handsome! Although... It's missing a mast.
@@ -912,9 +1044,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Doubtful): W-what?
 **MASON** (Joyous): Some water for the ship to sail in!
 
-### LDE PiratesOfHopewellBay2023 LayerDecoration 07 Dialogue
+### Pirates of Hopewell Bay — part of the event (exact trigger not dumped)
 `LDE_PiratesOfHopewellBay2023_LayerDecoration_07_Dialogue` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Pirates of Hopewell Bay, eventId=LDE_PiratesOfHopewellBay2023, moment=part of the event (exact trigger not dumped) (versions 23.11.02–26.07.01)
 
 **MASON** (Joyous): Shiver me timbers! It's starting to look like a pirate ship!
 **EMILIO**: You can say that again! I think we've done pretty well here.
@@ -924,9 +1056,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Thinking): It's the... Forget about it. Let's add some color!
 **MASON** (Relaxed): Hehehe! Poop deck...
 
-### LDE PiratesOfHopewellBay2023 LayerDecoration 10 Dialogue
+### Pirates of Hopewell Bay — part of the event (exact trigger not dumped)
 `LDE_PiratesOfHopewellBay2023_LayerDecoration_10_Dialogue` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Pirates of Hopewell Bay, eventId=LDE_PiratesOfHopewellBay2023, moment=part of the event (exact trigger not dumped) (versions 23.11.02–26.07.01)
 
 **EMILIO**: Phew, that was quite a job!
 **MASON** (Encouraging): Aye, Emilio. T'was!
@@ -936,9 +1068,9 @@ Every story in which Emilio speaks.
 **MASON** (Charming): And it needs a pirate flag!
 **EMILIO** (Annoyed): Of course.
 
-### LDE PiratesOfHopewellBay2023 LayerDecoration 13 Dialogue
+### Pirates of Hopewell Bay — part of the event (exact trigger not dumped)
 `LDE_PiratesOfHopewellBay2023_LayerDecoration_13_Dialogue` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Pirates of Hopewell Bay, eventId=LDE_PiratesOfHopewellBay2023, moment=part of the event (exact trigger not dumped) (versions 23.11.02–26.07.01)
 
 **MASON** (Relaxed): There's no mistaking it now.
 **MASON** (Joyous): Pirates sail here, so all landlubbers better beware!
@@ -948,9 +1080,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Doubtful): Don't tell me.
 **MASON** (Worried): ... there's no Monkey Cave.
 
-### LDE PiratesOfHopewellBay2023 LayerDecoration 15 Dialogue
+### Pirates of Hopewell Bay — part of the event (exact trigger not dumped)
 `LDE_PiratesOfHopewellBay2023_LayerDecoration_15_Dialogue` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Pirates of Hopewell Bay, eventId=LDE_PiratesOfHopewellBay2023, moment=part of the event (exact trigger not dumped) (versions 23.11.02–26.07.01)
 
 **MASON**: It's PERFECT!
 **MASON** (Joyous): The ship, the cannons, the lake, the MONKEY CAVE!
@@ -1080,7 +1212,7 @@ Every story in which Emilio speaks.
 **EMILIO** (Encouraging): I got a few tasty recipes.
 
 ### Double Date Disaster — event start
-`SE_DoubleDateDisaster2024_IntroDialogue_Dialogue` · seen 26.04.02–26.07.01
+`SE_DoubleDateDisaster2024_IntroDialogue_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Double Date Disaster, eventId=SE_DoubleDateDisaster2024, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **EMILIO** (Encouraging): Ah, Maddie. It still astonishes me how you make every day feel like the best day of my life.
@@ -1146,6 +1278,26 @@ Every story in which Emilio speaks.
 **EMILIO** (Surprised): Because, man... It’s... It’s you!
 **RODDY** (Relaxed): Oh, please. Could be either of us. Don’t worry about it!
 **EMILIO** (Doubtful): Riiight...
+
+### Amy's Mystery — outro
+`SP_AmyTheCat2023_AllRewardsCompleted_Dialogue` · seen 23.09.02–26.07.01
+- trigger: event, event=Amy's Mystery, eventId=SP_AmyTheCat2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**MADDIE**: <i>*knock knock*</i>
+**MADDIE**: Hello, can I help you?
+**EMILIO**: Hi, I’m Emilio Costa, a marine biologist. You called about some expatriated fish?
+**MADDIE** (Surprised): ...
+**EMILIO** (Encouraging): Ma’am?
+**MADDIE** (Relaxed): Oh, oh yes! Of course, let me show you. There’s been this cat and she’s been-
+**EMILIO** (Surprised): Amy!
+**AMY** (Relaxed): Meow! Purr... Purr...
+**MADDIE** (Encouraging): Ah, she's <b>your</b> cat! That must explain the fish then!
+**EMILIO**: Here they are! Amy... Have you been bringing this beautiful lady my fish?
+**MADDIE** (Charming): Oh! Erhm...
+**EMILIO** (Encouraging): My deepest apologies. She tends to do this with people she likes. You must be a good person at heart.
+**MADDIE** (Relaxed): Oh, you know! It’s nothing. Just happy she’s found her family again.
+**EMILIO**: Thank you, Miss...?
+**MADDIE** (Charming): Maddie! My name is... Maddie.
 
 ### Season Pass - Flavors of Tradition — outro
 `SP_CinqoDeMayo2026_AllRewardsCompleted_Dialogue` · seen 26.03.01–26.07.01
@@ -1256,9 +1408,9 @@ Every story in which Emilio speaks.
 **EMILIO**: Ah! Sorry, no! She switched careers. She pilots commercial airlines now!
 **MADDIE** (Charming): Fascinating...
 
-### SP GoatPet2025 Intro Dialogue
+### Secrets at the Altar — part of the event (exact trigger not dumped)
 `SP_GoatPet2025_Intro_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Secrets at the Altar, eventId=SP_GoatPet2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **BELLA** (Relaxed): Emilio, I just told my parents about our wedding! They're so excited and happy for us!
 **EMILIO** (Annoyed): Oh, great!
@@ -1283,9 +1435,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Encouraging): I always thought love would hit me like a lightning out of a clear blue sky.
 **RODDY** (Charming): Sometimes it does. And sometimes it's been under your nose the whole time.
 
-### SP GoatPet2025 TA1 Dialogue
+### Secrets at the Altar — part of the event (exact trigger not dumped)
 `SP_GoatPet2025_TA1_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Secrets at the Altar, eventId=SP_GoatPet2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **BELLA** (Thinking): Maddie, can we take some photos when the present arrives? I want to capture the moment for my parents.
 **BELLA** (Relaxed): They can't be here for us today, so their wedding present is extra special.
@@ -1302,9 +1454,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Thinking): I think Pablo just fainted.
 **MADDIE** (Hesitant): I think a goat fainting on your wedding day means good luck!
 
-### SP GoatPet2025 TA2 Dialogue
+### Secrets at the Altar — part of the event (exact trigger not dumped)
 `SP_GoatPet2025_TA2_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Secrets at the Altar, eventId=SP_GoatPet2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Relaxed): Welcome everyone! It's a beautiful day to celebrate love, partnership and the union between Bella and Emilio.
 **RODDY** (Relaxed): Next, Emilio will read his vows to Bella.
@@ -1357,9 +1509,9 @@ Every story in which Emilio speaks.
 **JACKIE** (Encouraging): Oh, yeah! Pour me another one!
 **BELLA** (Relaxed): Me too!
 
-### SP Misery2025 Decoration Slot34
-`SP_Misery2025_Decoration_Slot34` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Something Ours — part of the event (exact trigger not dumped)
+`SP_Misery2025_Decoration_Slot34` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Something Ours, eventId=SP_Misery2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Something Ours — decoration SP_Misery2025_Decoration_Slot34

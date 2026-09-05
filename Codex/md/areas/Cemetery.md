@@ -2,7 +2,7 @@
 
 
 ### Cemetery: Fit new gates
-`CemeteryBuildSculptureOrWaterFeature` · seen 24.04.01–26.07.01
+`CemeteryBuildSculptureOrWaterFeature` · seen 23.09.02–26.07.01
 - trigger: area, area=Cemetery, areaId=Cemetery, hotspotId=CemeteryPlaceGatesM9, phase=task completed, task=Fit new gates (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Well?! Does this grave belong to my Grandpa Charlie?
@@ -14,7 +14,7 @@
 **JACKIE** (Doubtful): If there is, I don't know it. Maybe you should check out the old Boulton crypt - it might have more info for you.
 
 ### Cemetery: Uncover stone emblem
-`CemeteryCleanTombstone` · seen 24.04.01–26.07.01
+`CemeteryCleanTombstone` · seen 23.09.02–26.07.01
 - trigger: area, area=Cemetery, areaId=Cemetery, hotspotId=CemeteryRemoveEmblemCoverL1, phase=task completed, task=Uncover stone emblem (versions 24.04.01–26.07.01)
 
 **MADDIE** (Charming): Hi, Roddy! Sorry you caught me in the cemetery.  
@@ -29,7 +29,7 @@
 **MADDIE** (Thinking): This is so confusing. I'd better get Grandma back around here to talk.
 
 ### Cemetery: Clear grass and weeds  (left of steps)
-`CemeteryCleanUpVinesAndWeeds` · seen 24.04.01–26.07.01
+`CemeteryCleanUpVinesAndWeeds` · seen 23.09.02–26.07.01
 - trigger: area, area=Cemetery, areaId=Cemetery, hotspotId=CemeteryRemoveDeadFoliageA1, phase=task completed, task=Clear grass and weeds  (left of steps) (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Why did you never tell me about the cemetery before, Grandma?
@@ -42,7 +42,7 @@
 **MADDIE** (Thinking): That was weird! I'd better stick around here and see what's going on.
 
 ### Cemetery: Place flowers
-`CemeteryClosing` · seen 24.04.01–26.07.01
+`CemeteryClosing` · seen 23.09.02–26.07.01
 - trigger: area, area=Cemetery, areaId=Cemetery, hotspotId=CemeteryPlaceFlowersK17, phase=task completed, task=Place flowers (versions 24.04.01–26.07.01)
 
 **JACKIE** (Thinking): Hey Maddie! Did Clara's story get you down? You look kinda sad.
@@ -56,7 +56,7 @@
 **MADDIE** (Annoyed): Aarrrgg! In order to find the Lighthouse I now need to find Grandma and before that a Tennis court?? Great.
 
 ### Cemetery: Repair C emblem
-`CemeteryFlowersForTheGrave` · seen 24.04.01–26.07.01
+`CemeteryFlowersForTheGrave` · seen 23.09.02–26.07.01
 - trigger: area, area=Cemetery, areaId=Cemetery, hotspotId=CemeteryRemoveBrokenStoneM7, phase=task completed, task=Repair C emblem (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Jackie! I wasn't expecting you. Is everything okay?
@@ -68,7 +68,7 @@
 **JACKIE** (Surprised): I think I know who that is! In fact, I'm sure of it.
 
 ### Cemetery: Unlock the Cemetery
-`CemeteryIntro` · seen 24.04.01–26.07.01
+`CemeteryIntro` · seen 23.09.02–26.07.01
 - trigger: area, area=Cemetery, areaId=Cemetery, hotspotId=UnlockCemetery, phase=task completed, task=Unlock the Cemetery (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): I wonder why Grandpa drew a spooky old cemetery?
@@ -77,7 +77,7 @@
 **MADDIE** (Thinking): I think I'll tidy up while I wait.
 
 ### Cemetery: Build decorative fencing
-`CemeteryRepairCrypt` · seen 24.04.01–26.07.01
+`CemeteryRepairCrypt` · seen 23.09.02–26.07.01
 - trigger: area, area=Cemetery, areaId=Cemetery, hotspotId=CemeteryPlaceRailingsN6, phase=task completed, task=Build decorative fencing (versions 24.04.01–26.07.01)
 
 **GRANDMA** (Doubtful): Why are you fixing up this old thing?

@@ -69,6 +69,19 @@
 **JACKIE** (Surprised): So now we just need to...
 **PEARL**: Enjoy the festival!
 
+### Hopefest Music Festival — part of the event (exact trigger not dumped)
+`SP_Hopefest2026_Decoration_Slot38_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Hopefest Music Festival, eventId=SP_Hopefest2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
+
+**PEARL** (Encouraging): Look at this place! Lights, music, people everywhere… we actually pulled it off.
+**PEARL** (Thinking): I’ll admit, I was expecting at least three disasters by now.
+**JACKIE** (Thinking): The night’s still young.
+**PEARL** (Surprised): Don’t jinx it!
+**JACKIE** (Encouraging): Relax, Pearl. The crowd’s happy, the bands are good, and nobody’s had food poisoning. That’s a successful festival in my book.
+**MADDIE** (Joyous): And listen to everyone singing along. It feels like the whole town showed up.
+**PEARL** (Charming): That’s exactly what I hoped for.
+**MADDIE** (Relaxed): And I think just what Hopewell Bay needed!
+
 ### Hopefest Music Festival — intro
 `SP_Hopefest2026_Intro_Dialogue` · seen 26.05.01–26.07.01
 - trigger: event, event=Hopefest Music Festival, eventId=SP_Hopefest2026, eventType=Mystery / Progression, moment=intro (versions 26.05.01–26.07.01)

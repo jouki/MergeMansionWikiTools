@@ -2,14 +2,14 @@
 
 
 ### Hallway: GreathallCorridor_Locked
-`GreathallCorridor_Locked` · seen 24.04.01–26.07.01
+`GreathallCorridor_Locked` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=CorridorUnlock, phase=task appears (versions 24.04.01–26.07.01)
 
 **MADDIE**: It's locked! I wonder what's in there?
 **MADDIE** (Thinking): Maybe there's something to help me keep Victoria off my back?!
 
 ### Hallway: HallwayHallway01Intro
-`HallwayHallway01Intro` · seen 24.04.01–26.07.01
+`HallwayHallway01Intro` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=CorridorUnlock, phase=task completed (versions 24.04.01–26.07.01)
 
 **MADDIE**: Okay, hallway, what secrets do you hold?!
@@ -18,7 +18,7 @@
 **MADDIE** (Thinking): Probably best to look around first...
 
 ### Hallway: Clean yellow paint and trash
-`HallwayHallway02` · seen 24.04.01–26.07.01
+`HallwayHallway02` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayRemoveYellowPaintA3, phase=task completed, task=Clean yellow paint and trash (versions 24.04.01–26.07.01)
 
 **JACKIE** (Encouraging): Hey Maddie! I hope you don't mind, but I let myself in. I couldn't resist!
@@ -32,7 +32,7 @@
 **MADDIE** (Thinking): What else might I remember..?
 
 ### Hallway: Clean cobwebs and plank
-`HallwayHallway03` · seen 24.04.01–26.07.01
+`HallwayHallway03` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayRemoveCobewebsandPlankA5, phase=task completed, task=Clean cobwebs and plank (versions 24.04.01–26.07.01)
 
 **MADDIE**: Say, Jackie... Do you know anything about, uh, my family's financial problems?
@@ -45,7 +45,7 @@
 **WINSTON** (Surprised): I beg your pardon, but that is  <b>entirely</b> inaccurate!
 
 ### Hallway: Remove dust sheet
-`HallwayHallway04` · seen 24.04.01–26.07.01
+`HallwayHallway04` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayRemoveFoodDogClothA6, phase=task completed, task=Remove dust sheet (versions 24.04.01–26.07.01)
 
 **JACKIE** (Doubtful): I'm sorry, whoever you are, but everyone knows that it was Leonard who-
@@ -56,7 +56,7 @@
 **WINSTON** (Thinking): Perhaps you should ask your grandmother that question, Ma'am...
 
 ### Hallway: Vacuum the map
-`HallwayHallway05` · seen 24.04.01–26.07.01
+`HallwayHallway05` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayRemoveMapDustA7, phase=task completed, task=Vacuum the map (versions 24.04.01–26.07.01)
 
 **JACKIE** (Annoyed): Who was that?!
@@ -66,7 +66,7 @@
 **MADDIE** (Thinking): What isn't she telling me?!
 
 ### Hallway: Remove cobwebs
-`HallwayHallway06` · seen 24.04.01–26.07.01
+`HallwayHallway06` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayRemoveCobwebsD1, phase=task completed, task=Remove cobwebs (versions 24.04.01–26.07.01)
 
 **GRANDMA**: Well dearie, this place is starting to look like its old self again! 
@@ -78,7 +78,7 @@
 **GRANDMA**: Anyway, I got to get going to my free diving class! Can you do me a favor?
 
 ### Hallway: Remove old lamp
-`HallwayHallway07` · seen 24.04.01–26.07.01
+`HallwayHallway07` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayRemoveRundownLampD2, phase=task completed, task=Remove old lamp (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Er... Okay, what favor do you need?
@@ -87,7 +87,7 @@
 **GRANDMA** (Relaxed): Then maybe it's time to have a break? Bye!
 
 ### Hallway: Remove sheet
-`HallwayIgnatiusBust` · seen 24.04.01–26.07.01
+`HallwayIgnatiusBust` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayRemoveSheetEa5, phase=task completed, task=Remove sheet (versions 24.04.01–26.07.01)
 
 **MADDIE**: The man himself. In the uh... Stone. 
@@ -96,7 +96,7 @@
 **JACKIE** (Doubtful): Couldn't keep it though, could he?
 
 ### Hallway: Assemble stand and place the Sword
-`HallwayKatana` · seen 24.04.01–26.07.01
+`HallwayKatana` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayPlaceSamuraiSwordDa3, phase=task completed, task=Assemble stand and place the Sword (versions 24.04.01–26.07.01)
 
 **MADDIE**: This katana must belong to the samurai over there...
@@ -105,7 +105,7 @@
 **GRANDMA** (Encouraging): Me!
 
 ### Hallway: Search the lion mouth
-`HallwayLionStatue` · seen 24.04.01–26.07.01
+`HallwayLionStatue` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayPlaceLionMouthopenEb1, phase=task completed, task=Search the lion mouth (versions 24.04.01–26.07.01)
 
 **MADDIE**: This lion's mouth opened when I pressed that button.
@@ -113,7 +113,7 @@
 **JACKIE** (Surprised): A "study" key!
 
 ### Hallway: Place the ship
-`HallwayModelShip` · seen 24.04.01–26.07.01
+`HallwayModelShip` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayPlaceFixedShipE13, phase=task completed, task=Place the ship (versions 24.04.01–26.07.01)
 
 **JACKIE**: This is a nice model! I guess boats have been in your family since the beginning.  
@@ -123,7 +123,7 @@
 **MADDIE** (Encouraging): Ha! At ease... I learned a few terms while fixing the yacht outside.
 
 ### Hallway: Remove easel
-`HallwayPaintingStation` · seen 24.04.01–26.07.01
+`HallwayPaintingStation` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayRemoveEaselRunDownC4, phase=task appears, task=Remove easel (versions 24.04.01–26.07.01)
 
 **JACKIE** (Thinking): Hmm... This paint looks fresh! 
@@ -131,7 +131,7 @@
 **JACKIE** (Doubtful): Why would someone do that?!
 
 ### Hallway: Push the button
-`HallwayPressingSecretButton` · seen 24.04.01–26.07.01
+`HallwayPressingSecretButton` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayPlaceButtonOnEa10, phase=task completed, task=Push the button (versions 24.04.01–26.07.01)
 
 **MADDIE**: Oops! I think I just pressed the red button!
@@ -140,7 +140,7 @@
 **JACKIE** (Surprised): Did you see that? That lion statue's mouth just opened!
 
 ### Hallway: Attach Samurai helmet
-`HallwaySamuraiArmor` · seen 24.04.01–26.07.01
+`HallwaySamuraiArmor` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayPlaceSamuraiHelmetDa11, phase=task completed, task=Attach Samurai helmet (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Wow! This thing looks really old!

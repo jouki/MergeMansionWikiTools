@@ -1,9 +1,8 @@
 # AntiqueDealer
 Every story in which AntiqueDealer speaks.
 
-### AntiqueDealerConversationStep
-`AntiqueDealerConversationStep` · seen 22.02.06–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+### AntiqueDealerConversationSequence
+`AntiqueDealerConversationSequence` · seen 22.02.06–26.07.01
 
 **ANTIQUEDEALER** (Surprised): I’m sorry I didn’t know the gear was in reverse.
 **MADDIE** (Worried): Are you ok?
@@ -15,9 +14,8 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER**: I’m sorry. Now the gate is damaged and the car is broken.
 **MADDIE**: Maybe my friend Roddy can help with that while I take you to grandma’s.
 
-### AntiqueDealerDriveOffStep
-`AntiqueDealerDriveOffStep` · seen 22.02.06–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+### AntiqueDealerDriveOffSequence
+`AntiqueDealerDriveOffSequence` · seen 22.02.06–26.07.01
 
 **ANTIQUEDEALER** (Thinking): Thank you for your help.
 **MADDIE**: I just wanted to restore the family estate to its former glory!
@@ -316,13 +314,38 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Doubtful): And why is that projector set up at the top of the table?
 **MASON** (Joyous): Maybe we should switch it on and see what happens?
 
-### Flashback Rewind — item discovered: Miniature - Active
-`CBE_Flashback2025_BoardgamesActive_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_BoardgamesActive_01'], items=['Miniature - Active'], moment=item discovered (versions 25.05.01–26.07.01)
+### Easter 2025 — decoration CBE_Easter2025_Decoration_Slot14
+`CBE_Easter2025_Decoration_Slot14_Dialogue` · seen 25.05.01–26.03.01
+- trigger: decoration, decoration=CBE_Easter2025_Decoration_Slot14, event=Easter 2025, eventKey=CBE_Easter2025, moment=decoration placed (versions 25.05.01–26.03.01)
 
-**MADDIE** (Thinking): I wonder if I can get inside the Mansion and take a look around! Maybe I'll just try the door...
-**MADDIE** (Thinking): It's locked. OF COURSE!
-**MADDIE** (Thinking): Some things don't change, it seems.
+**ANTIQUEDEALER**: You know, Agatha and Ignatius always organized an annual egg hunt on the Mansion grounds.
+**MADDIE** (Surprised): Did they? I never knew that!
+**ANTIQUEDEALER** (Charming): Oh, yes! It is written into the annals of the Boultons' history.
+**ANTIQUEDEALER** (Charming): Agatha had a particular recipe for her chocolate treats, that was very popular! All the children from the town would come and have a great time.
+**MADDIE** (Relaxed): Did you ever go, Julius?
+**ANTIQUEDEALER** (Annoyed): Ha-ha, very funny. I am not quite that old, my dear!
+
+### Easter 2025 — item discovered: Bowl of Easter Eggs
+`CBE_Easter2025_EasterEggs_07_Dialogue` · seen 25.05.01–26.03.01
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Eggs_07'], items=['Bowl of Easter Eggs'], moment=item discovered (versions 25.05.01–26.03.01)
+
+**GRANDMA**: Julius, you have to hurry up. We still have dozens of eggs to paint.
+**ANTIQUEDEALER** (Frustrated): You invited me over for some apple pie. I did not sign up for all of this painting!
+**ANTIQUEDEALER** (Surprised): How many eggs do we really need for this egg hunt, Ursula?
+**GRANDMA** (Annoyed): Just keep painting!
+**DEB** (Surprised): What is going on, Ursula? I got your message and rushed right over.
+**GRANDMA** (Encouraging): Deb! At the nick of time, too! Here is a brush and some paints, and there are your eggs.
+**DEB** (Frustrated): What is the meaning of this?
+**GRANDMA** (Encouraging): We are in a hurry, Deb. The sooner you start painting, the sooner we are ready for the egg hunt!
+
+### Easter 2025 — item discovered: Ultimate Easter Basket
+`CBE_Easter2025_EasterEggs_10_Dialogue` · seen 25.05.01–26.03.01
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Eggs_10'], items=['Ultimate Easter Basket'], moment=item discovered (versions 25.05.01–26.03.01)
+
+**ANTIQUEDEALER** (Annoyed): That HAS to be it. I simply cannot paint another egg!
+**GRANDMA** (Relaxed): I think we are done! Thank you both!
+**DEB** (Annoyed): I think I was promised pie in return for my help!
+**ANTIQUEDEALER** (Worried): I think my rheumatism is flaring up...
 
 ### Flashback Rewind — item discovered: Pocket Console
 `CBE_Flashback2025_Consoles_01_Dialogue` · seen 25.05.01–26.07.01
@@ -364,6 +387,40 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Surprised): Do you play the guitar?
 **ANTIQUEDEALER**: Ahem, keytar is my instrument of choice now. I've been practicing a lot, and I think that this time I can hit the right notes.
 **MADDIE** (Hesitant): T-this time?
+
+### Flashback Rewind — decoration CBE_Flashback2025_Decoration_Slot16
+`CBE_Flashback2025_Slot_16_Dialogue` · seen 25.05.01–26.07.01
+- trigger: decoration, decoration=CBE_Flashback2025_Decoration_Slot16, event=Flashback Rewind, eventKey=CBE_Flashback2025, moment=decoration placed (versions 25.05.01–26.04.02)
+
+**MADDIE** (Thinking): What's with the bandstand and the game zone?
+**ANTIQUEDEALER** (Surprised): Jeepers, Ursula. You really aren't yourself today, are you?
+**ANTIQUEDEALER**: You wanted to put on a show to draw more people to the yard sale.
+**MADDIE** (Hesitant): I don't know what's with me today... Who's going to be performing?
+**ANTIQUEDEALER**: Well, Charlie skipped our last band rehearsal, but I think we can do it.
+**ANTIQUEDEALER**: I have also prepared a comedy show as a little back-up plan. I have some terrific jokes ready to go!
+**MADDIE** (Hesitant): What a relief!
+
+### Flashback Rewind — decoration CBE_Flashback2025_Decoration_Slot19
+`CBE_Flashback2025_Slot_19_Dialogue` · seen 25.05.01–26.07.01
+- trigger: decoration, decoration=CBE_Flashback2025_Decoration_Slot19, event=Flashback Rewind, eventKey=CBE_Flashback2025, moment=decoration placed (versions 25.05.01–26.04.02)
+
+**MADDIE** (Surprised): What a cool arcade game! Grandma always says she used to be really good at these. I mean...
+**ANTIQUEDEALER**: Your Grandma played arcade games? She must be an impressive lady!
+**ANTIQUEDEALER**: Actually... I just managed to beat your high score.
+**ANTIQUEDEALER**: It only took 5 hours, and I got blisters on four fingers, but I did it!
+**ANTIQUEDEALER**: Victory sure tastes sweet.
+**ANTIQUEDEALER** (Surprised): Please don't beat it again!
+**MADDIE** (Hesitant): I can't promise anything...
+
+### Flashback Rewind — decoration CBE_Flashback2025_Decoration_Slot23
+`CBE_Flashback2025_Slot_23_Dialogue` · seen 25.05.01–26.07.01
+- trigger: decoration, decoration=CBE_Flashback2025_Decoration_Slot23, event=Flashback Rewind, eventKey=CBE_Flashback2025, moment=decoration placed (versions 25.05.01–26.04.02)
+
+**MADDIE** (Surprised): Rollerskate ramp? This is by far the best yard sale I've ever seen!
+**ANTIQUEDEALER**: That was the goal, and I have to admit it did turn out pretty well.
+**ANTIQUEDEALER** (Surprised): Let's hope we get a good turnout. You really do need some cash to bring this Mansion back up to code.
+**ANTIQUEDEALER** (Surprised): The council have been too harsh to you, in my opinion. How is one person expected to fix up a place this size on their own?
+**MADDIE** (Surprised): Tell me about it...
 
 ### Flashback Rewind — item discovered: Jet Morpher
 `CBE_Flashback2025_Toy_03_Dialogue` · seen 25.05.01–26.07.01
@@ -455,9 +512,9 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Thinking): But will she figure out what her Grandma was up to, I wonder...
 **ANTIQUEDEALER** (Thinking): She writes: “I walked through a thousand torii gates, but couldn’t find the one Grandma was looking for.”
 
-### CBE MaddieInJapan2025 GettingReady 05 Dialogue
-`CBE_MaddieInJapan2025_GettingReady_05_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+### Maddie in Japan — part of the event (exact trigger not dumped)
+`CBE_MaddieInJapan2025_GettingReady_05_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Maddie in Japan, eventId=CBE_MaddieInJapan2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Maddie in Japan — item discovered: Handbag
@@ -495,13 +552,13 @@ Every story in which AntiqueDealer speaks.
 **GRANDMA** (Charming): Well, she is a bright girl. What does she write?
 **GRANDMA** (Relaxed): Let’s see... “Finally in Shibuya. I've found what I was looking for - complete holiday mood. Grandma’s postcards make sense now.”
 
-### CBE MaddieInJapan2025 YasakaPagodaPostcard 01 Dialogue
-`CBE_MaddieInJapan2025_YasakaPagodaPostcard_01_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+### Maddie in Japan — part of the event (exact trigger not dumped)
+`CBE_MaddieInJapan2025_YasakaPagodaPostcard_01_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Maddie in Japan, eventId=CBE_MaddieInJapan2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Maddie In Paris — event start
-`CBE_MaddieInParis2025_Intro_Dialogue` · seen 26.04.02–26.07.01
+`CBE_MaddieInParis2025_Intro_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Maddie In Paris, eventId=CBE_MaddieInParis2025, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **ANTIQUEDEALER** (Relaxed): Maddie! Your Grandma told me you have just returned from your vacation!
@@ -524,7 +581,7 @@ Every story in which AntiqueDealer speaks.
 **MASON** (Worried): A-a ring?
 
 ### Conservatory: Reuse soil from old flowers
-`ConservatoryArea_Scene8JuliusArrives` · seen 24.04.01–26.07.01
+`ConservatoryArea_Scene8JuliusArrives` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryPlaceHalfBarrelSoilBA8, phase=task completed, task=Reuse soil from old flowers (versions 24.04.01–26.07.01)
 
 **MADDIE**: Hi, Julius! This is good timing. I was just about to read this old letter that I found...  
@@ -540,7 +597,6 @@ Every story in which AntiqueDealer speaks.
 
 ### DE CompletedCollection Dialogue
 `DE_CompletedCollection_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
 
 **MADDIE**: According to the catalogue, this should be everything.
 **ANTIQUEDEALER** (Thinking): Not quite... According to some notes I found, there should still be a few more special items.
@@ -549,7 +605,6 @@ Every story in which AntiqueDealer speaks.
 
 ### DE FirstCollectionItem Dialogue
 `DE_FirstCollectionItem_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
 
 **MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Aztec collection was housed.
@@ -557,102 +612,151 @@ Every story in which AntiqueDealer speaks.
 **JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue America
-`DE_FirstCollectionItem_Dialogue_America` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
+`DE_FirstCollectionItem_Dialogue_America` · seen 26.07.01–26.07.01
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Americana collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted the State museum and they’d be thrilled to house this collection!
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue Assyria
-`DE_FirstCollectionItem_Dialogue_Assyria` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
+`DE_FirstCollectionItem_Dialogue_Assyria` · seen 26.07.01–26.07.01
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Assyrian collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted a museum in Turkey and they’d be thrilled to house this collection!
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue Aztec
 `DE_FirstCollectionItem_Dialogue_Aztec` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Aztec collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted a museum in Mexico and they’d be thrilled to house this collection!
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue Celtic
-`DE_FirstCollectionItem_Dialogue_Celtic` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
+`DE_FirstCollectionItem_Dialogue_Celtic` · seen 26.07.01–26.07.01
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Celtic collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted a museum in Ireland and they’d be thrilled to house this collection!
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue Egypt
 `DE_FirstCollectionItem_Dialogue_Egypt` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Egyptian collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted a museum in Egypt and they’d be thrilled to house this collection!
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue Fossil
 `DE_FirstCollectionItem_Dialogue_Fossil` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Paleontology collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted the Natural History Museum in New York and they’d be thrilled to house this collection!
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue Greece
 `DE_FirstCollectionItem_Dialogue_Greece` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Ancient Greece collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted a museum in Greece and they’d be thrilled to house this collection!
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue HeikkiSauna
-`DE_FirstCollectionItem_Dialogue_HeikkiSauna` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
+`DE_FirstCollectionItem_Dialogue_HeikkiSauna` · seen 26.07.01–26.07.01
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Finnish collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted a museum in Finland and they’d be thrilled to house this collection!
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue Japan
-`DE_FirstCollectionItem_Dialogue_Japan` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
+`DE_FirstCollectionItem_Dialogue_Japan` · seen 26.07.01–26.07.01
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Japanese collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted a museum in Japan and they’d be thrilled to house this collection!
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue Medieval
 `DE_FirstCollectionItem_Dialogue_Medieval` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Medieval Europe collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted a series of museums in Europe and they’d be thrilled to house this collection!
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue StoneAge
 `DE_FirstCollectionItem_Dialogue_StoneAge` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Stone Age collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted various European museums and they’d be thrilled to house this collection!  
   _(1 cosmetic edit not shown)_
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue Vikings
-`DE_FirstCollectionItem_Dialogue_Vikings` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
+`DE_FirstCollectionItem_Dialogue_Vikings` · seen 26.07.01–26.07.01
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Viking collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted a museum in Norway and they’d be thrilled to house this collection!
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstSpecialItem Dialogue
 `DE_FirstSpecialItem_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
 
 **MADDIE** (Encouraging): Ooh, Shiny! This item looks really special!  
   _(1 cosmetic edit not shown)_
 **ANTIQUEDEALER** (Surprised): Ah, yes. It’s especially well preserved! Priceless, really.
 **MADDIE** (Encouraging): Then let’s hope we can find more of these!
 
+### Maddie's Re-Archaeology — entering board
+`DE_Intro_Dialogue` · seen 25.02.01–26.07.01
+- trigger: event, event=Maddie's Re-Archaeology, eventId=DE_Jan2024, eventType=Collectible Board Event, moment=entering board (versions 25.02.01–25.02.03)
+
+**MADDIE** (Encouraging): Hey, guys! Wh- What’s going on?!
+**JACKIE** (Encouraging): Hey, Maddie! Didn’t you read the newspaper? I wrote an entire article about it...
+**MADDIE** (Worried): Oh... Er. I must have missed it.
+**JACKIE** (Doubtful): We’re digging up the old Hopewell Bay Archaeological Museum!
+**MADDIE** (Surprised): Museum?! I didn’t know we had a museum!
+**ANTIQUEDEALER** (Relaxed): We did, but it collapsed on its grand opening many years ago.
+**ANTIQUEDEALER** (Thinking): Something about illegal mineshafts below the town...
+**GRANDMA** (Worried): ...
+**GRANDMA** (Frustrated): Oh... Well, surely you won’t find anything of worth anymore, dearie.
+**ANTIQUEDEALER** (Joyous): We’ve already found many! Many pieces are still in great shape.
+**JACKIE** (Encouraging): And the best part is that we’re going to be sending them back to their rightful homes!
+**MADDIE** (Joyous): Oooh, awesome! Let’s help, Grandma!
+**GRANDMA** (Annoyed): Oh alright, dearie...
+
+### Maddie's Re-Archaeology — part of the event (exact trigger not dumped)
+`DE_Jan2024_Intro_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Maddie's Re-Archaeology, eventId=DE_Jan2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Encouraging): Hey, guys! Wh- What’s going on?!
+**JACKIE** (Encouraging): Hey, Maddie! Didn’t you read the newspaper? I wrote an entire article about it...
+**MADDIE** (Worried): Oh... Er. I must have missed it.
+**JACKIE** (Doubtful): We’re digging up the old Hopewell Bay Archaeological Museum!
+**MADDIE** (Surprised): Museum?! I didn’t know we had a museum!
+**ANTIQUEDEALER** (Relaxed): We did, but it collapsed on its grand opening many years ago.
+**ANTIQUEDEALER** (Thinking): Something about illegal mineshafts below the town...
+**GRANDMA** (Frustrated): Oh... Well, surely you won’t find anything of worth anymore, dearie.
+**ANTIQUEDEALER** (Joyous): We’ve already found many! Many pieces are still in great shape.
+**JACKIE** (Encouraging): And the best part is that we’re going to be sending them back to their rightful homes!
+**MADDIE** (Joyous): Oooh, awesome! Let’s help, Grandma!
+**ANTIQUEDEALER** (Thinking): Now be careful, Maddie...
+**ANTIQUEDEALER** (Worried): You need to take great care in clearing away the earth to get to the artifacts within the museum.
+**JACKIE** (Worried): Huh... Feels sort of backwards to be digging up what was once in a museum already!
+**MADDIE** (Relaxed): Obviously, what we’re doing here is... Re-archaeology!
+**GRANDMA** (Annoyed): *Groan*
+
 ### DE MiniGameIntro Dialogue
 `DE_MiniGameIntro_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
 
 **ANTIQUEDEALER** (Thinking): Now be careful, Maddie...
 **ANTIQUEDEALER** (Worried): You need to take great care in clearing away the earth to get to the artifacts within the museum.
@@ -663,14 +767,12 @@ Every story in which AntiqueDealer speaks.
 
 ### DE Pickaxe Dialogue
 `DE_Pickaxe_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
 
 **MADDIE** (Encouraging): Ooh! A complete set of tools! This will definitely do the trick!
 **ANTIQUEDEALER** (Charming): Yessiree, these will definitely help break the ground over the dig site!
 
 ### FactoryFloor 02
-`FactoryFloor_02` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryFloor_02` · seen 26.07.01–26.07.01
 
 **MADDIE** (Doubtful): Hmmm...  
   _earlier:_ ~~Look!~~ (until 26.02.03)
@@ -688,8 +790,7 @@ Every story in which AntiqueDealer speaks.
   _(1 cosmetic edit not shown)_
 
 ### FactoryFloor 04
-`FactoryFloor_04` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryFloor_04` · seen 26.07.01–26.07.01
 
 **MADDIE**: Hey! I think I found the clock hands for the steam clock!  
   _earlier:_ ~~Hey! I think I found a missing gear for the clock!~~ (until 26.02.03)
@@ -705,8 +806,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Charming): As part of the museum, of course. It'll be a great display of Boulton ingenuity.
 
 ### FactoryFloor 05
-`FactoryFloor_05` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryFloor_05` · seen 26.07.01–26.07.01
 
 **MADDIE**: Ooh! I think I found the missing time zones part for the steam clock under this machine...  
   _earlier:_ ~~Ooh! I think I found another gear under this machine...~~ (until 26.02.03)
@@ -725,8 +825,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Surprised): VICTORIA'S?!!
 
 ### FactoryFloor 06
-`FactoryFloor_06` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryFloor_06` · seen 26.07.01–26.07.01
 
 **ANTIQUEDEALER** (Doubtful): Ooh, I think I found a clock part, but I'm not quite sure...  
   _earlier:_ ~~Ooh, I think I found a clock gear?~~ (until 26.02.03)
@@ -742,8 +841,7 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Charming): Never put it past a Boulton to surprise you.
 
 ### FactoryFloor 08
-`FactoryFloor_08` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryFloor_08` · seen 26.07.01–26.07.01
 
 **MADDIE** (Encouraging): Look! I think I found an employee worksheet. Lots of women worked here!  
   _earlier:_ ~~Hey, check out these posters!~~ (until 26.02.03)  
@@ -767,8 +865,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Thinking): But I wonder if something else is going on here?
 
 ### FactoryFloor 09
-`FactoryFloor_09` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryFloor_09` · seen 26.07.01–26.07.01
 
 **MADDIE** (Encouraging): I think I found the last clock piece, Julius!
 **MADDIE** (Thinking): But...
@@ -783,8 +880,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Surprised): A key!
 
 ### FactoryFloor 10
-`FactoryFloor_10` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryFloor_10` · seen 26.07.01–26.07.01
 
 **MADDIE** (Thinking): If it truly IS a key, I wonder what will happen if I move this piece so that the arrow points to the mansion?
 **ANTIQUEDEALER** (Surprised): Oh! Did a secret compartment just open?!
@@ -818,8 +914,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Encouraging): Ha! That's what the message says. Aaaw, how sweet!
 
 ### FactoryFloor 12
-`FactoryFloor_12` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryFloor_12` · seen 26.07.01–26.07.01
 
 **MADDIE** (Joyous): It's ALIVE!
 **ANTIQUEDEALER** (Joyous): Well done, Maddie!
@@ -830,8 +925,7 @@ Every story in which AntiqueDealer speaks.
   _(1 cosmetic edit not shown)_
 
 ### FactoryFloor 13
-`FactoryFloor_13` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryFloor_13` · seen 26.07.01–26.07.01
 
 **ANTIQUEDEALER** (Encouraging): This must be the door to the office! Quite imposing.
 **ANTIQUEDEALER** (Relaxed): Want to find out what's inside?
@@ -879,8 +973,7 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Relaxed): Don't worry. If there is a will. There is a way.
 
 ### FactoryFloor Intro
-`FactoryFloor_Intro` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryFloor_Intro` · seen 26.07.01–26.07.01
 
 **MADDIE** (Surprised): Wow! This must be the factory floor.
 **MADDIE** (Encouraging): There's some really impressive machinery in here!
@@ -893,8 +986,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Doubtful): Hmm... Good point. Maybe the heart of the factory is still beating?
 
 ### FactoryGiftShop 02
-`FactoryGiftShop_02` · seen 26.03.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryGiftShop_02` · seen 26.07.01–26.07.01
 
 **MADDIE**: So, how do you know about fixing stained-glass windows?
 **ANTIQUEDEALER**: Well... a long time ago I did an antique apprenticeship in Florence, Italy.  
@@ -909,8 +1001,7 @@ Every story in which AntiqueDealer speaks.
   _earlier:_ ~~Gift shop! What an excellent idea!~~ (until 26.02.02)
 
 ### FactoryGiftShop 03
-`FactoryGiftShop_03` · seen 26.03.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryGiftShop_03` · seen 26.07.01–26.07.01
 
 **MADDIE** (Relaxed): So this is our Point of Sale system. Also known as the POS.
 **ANTIQUEDEALER** (Annoyed): How appropriate.
@@ -924,8 +1015,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Hesitant): It's already on!
 
 ### FactoryGiftShop 04
-`FactoryGiftShop_04` · seen 26.03.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryGiftShop_04` · seen 26.07.01–26.07.01
 
 **MADDIE** (Charming): Could you tell me more about your time in Florence, Julius?
 **ANTIQUEDEALER**: Oh, Maddie, it was beautiful!
@@ -938,8 +1028,7 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Charming): My first love.
 
 ### FactoryGiftShop 05
-`FactoryGiftShop_05` · seen 26.03.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryGiftShop_05` · seen 26.07.01–26.07.01
 
 **MADDIE**: Tell me about Sofia!
 **ANTIQUEDEALER** (Charming): She was amazing! Senza confronto.
@@ -954,8 +1043,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Encouraging): I believe that too. 
 
 ### FactoryGiftShop 06
-`FactoryGiftShop_06` · seen 26.03.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryGiftShop_06` · seen 26.07.01–26.07.01
 
 **MADDIE**: So, what happened with Sofia?
 **ANTIQUEDEALER**: Well, I was young and only on an apprenticeship.
@@ -969,8 +1057,7 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Worried): From what I've heard of him, maybe that's something not worth fixing...
 
 ### FactoryGiftShop 07
-`FactoryGiftShop_07` · seen 26.03.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryGiftShop_07` · seen 26.07.01–26.07.01
 
 **MADDIE** (Joyous): I just got an idea!
 **MADDIE** (Encouraging): Let's set up an interactive experience where guests get to make new works of art with old scraps we find here?
@@ -981,8 +1068,7 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Charming): I'm glad to hear it.
 
 ### FactoryGiftShop 08
-`FactoryGiftShop_08` · seen 26.03.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryGiftShop_08` · seen 26.07.01–26.07.01
 
 **MADDIE** (Thinking): Hmmm...
 **MADDIE** (Thinking): We have a lot of empty cans here...
@@ -994,8 +1080,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Relaxed): Brilliant!
 
 ### FactoryGiftShop 09
-`FactoryGiftShop_09` · seen 26.03.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryGiftShop_09` · seen 26.07.01–26.07.01
 
 **MADDIE**: You're really getting into the vibe of things, Julius!
 **MADDIE**: Maybe renovation is in your blood!
@@ -1006,8 +1091,7 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Encouraging): I'll know exactly who to call!
 
 ### FactoryGiftShop 10
-`FactoryGiftShop_10` · seen 26.03.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryGiftShop_10` · seen 26.07.01–26.07.01
 
 **MADDIE** (Encouraging): We should all take a selfie together in the large can display!  
   _(1 cosmetic edit not shown)_
@@ -1019,8 +1103,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Charming): Say cheese!
 
 ### FactoryGiftShop 11
-`FactoryGiftShop_11` · seen 26.03.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryGiftShop_11` · seen 26.07.01–26.07.01
 
 **MADDIE** (Surprised): Ah! What was that sound?!
 **ANTIQUEDEALER** (Thinking): Hmm... Sounded like an old steam whistle!
@@ -1031,8 +1114,7 @@ Every story in which AntiqueDealer speaks.
   _earlier:_ ~~Alright. I'll stay and watch over the shop.~~ (until 26.02.02)
 
 ### FactoryGiftShop Intro
-`FactoryGiftShop_Intro` · seen 26.03.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryGiftShop_Intro` · seen 26.07.01–26.07.01
 
 **MADDIE**: Helloo? Julius?
 **MADDIE** (Worried): Are you in here?
@@ -1128,8 +1210,7 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Relaxed): Working on all of these really lit the artist in me again.
 
 ### FactoryReception 10
-`FactoryReception_10` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryReception_10` · seen 26.07.01–26.07.01
 
 **MADDIE** (Thinking): What is this thing... an antique can opener?
 **ANTIQUEDEALER**: Not just antique, Maddie. I believe that is the very first can opener prototype!
@@ -1158,8 +1239,7 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Charming): You're doing a great service to the town's history, Maddie.
 
 ### FactoryReception 13
-`FactoryReception_13` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryReception_13` · seen 26.07.01–26.07.01
 
 **MADDIE** (Relaxed): That's the reception sorted. Floors waxed, displays up, and we even have a brand new ticket dispenser!
 **CB-01** (Joyous): *Beep Bop*
@@ -1237,6 +1317,19 @@ Every story in which AntiqueDealer speaks.
 **MADDIE**: Julius, are you actually offering to work for free?
 **ANTIQUEDEALER** (Charming): Consider it my donation to history.
 
+### Underwater Adventure — entering board
+`GM_Underwater_Intro_Dialogue` · seen 25.06.01–26.01.02
+- trigger: event, event=Underwater Adventure, eventId=GM_Underwater, eventType=Collectible Board Event, moment=entering board (versions 25.06.01–26.01.02)
+
+**MADDIE** (Thinking): You know a lot about the Boulton family history, don't you, Julius?
+**ANTIQUEDEALER** (Charming): You could say that. I have conducted research into your family's heraldry, and let me tell you - it is fascinating!
+**MADDIE** (Relaxed): No doubt... but would you happen to know anything about Ignatius?
+**ANTIQUEDEALER** (Thinking): Are you interested in his travels?
+**MADDIE** (Charming): I can't help it - I'm totally hooked!
+**ANTIQUEDEALER** (Relaxed): I am not surprised. Have you read about how he ended up shipwrecked on a desert island in the middle of the ocean?
+**MADDIE** (Surprised): No! He didn't!
+**ANTIQUEDEALER** (Relaxed): He did, and made it all the way back home.
+
 ### Floral Frenzy — item discovered: Mini Bouquet
 `LBE_Valentines2024_Bouquet_06_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Floral Frenzy, eventKey=LBE_Valentines2024, itemKeys=['LBE_Valentines2024_Bouquet_06'], items=['Mini Bouquet'], moment=item discovered (versions 25.05.01–26.07.01)
@@ -1269,6 +1362,20 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Relaxed): It is more than that, my dear Jackie! Take a moment to appreciate the flowers; find the beauty in each one of them.
 **JACKIE** (Surprised): Hmm... I guess there's a lot more to this than I first thought. Let's try!
 
+### Floral Frenzy — entering board
+`LBE_Valentines2024_Intro_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Floral Frenzy, eventId=LBE_Valentines2024, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–26.01.02)
+
+**PEARL**: Welcome to Floral Frenzy, a competition where we find out who makes the most magnificent flower arrangements in Hopewell Bay!
+**PEARL**: Our contenders are Deb, a lover of the more exotic flowers...
+**DEB** (Charming): I do have a penchant for the unusual.
+**PEARL** (Encouraging): Err, yes. And Julius who specializes in the gentle Japanese art of Ikebana. I can't wait to see what kind of creations you will produce!
+**ANTIQUEDEALER** (Charming): Salutations! Did you know that the history of Ikebana reaches back over 600 years?
+**PEARL**: Very interesting, indeed! And our last contender is... Jackie!
+**JACKIE** (Doubtful): Pearl, I told you I'm too busy to take part in a silly competition. I've never even tried flower arranging before!
+**PEARL** (Thinking): Haha, you're so funny!
+**PEARL** (Encouraging): Let's get to it, people. The competition is officially on - may the best amateur florist win!
+
 ### Grandma's Pool Party — item discovered: Elegant Perfume
 `LDE_GrandmasBirthday2023_PerfumeChain_Dialogue` · seen 23.09.02–26.07.01
 - trigger: item, event=Grandma's Pool Party, eventKey=LDE_GrandmasBirthday2023, itemKeys=['LDE_GrandmasBirthday2023_Perfumes_05'], items=['Elegant Perfume'], moment=item discovered (versions 23.09.02–26.07.01)
@@ -1277,6 +1384,38 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Encouraging): Salutations! Yes, in fact, I did!
 **ANTIQUEDEALER** (Charming): Her favorite perfume! They discontinued it a few years back, but I acquired a few bottles for just such an occasion.
 **MADDIE** (Charming): That’s very thoughtful of you.
+
+### Green Acres Quest — item discovered: Julius
+`LDE_GreenAcresQuest2024_CharacterJulius_02_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterJulius_02'], items=['Julius'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**ANTIQUEDEALER**: Salutations, Maddie! Might I bother you for a second?
+**MADDIE** (Encouraging): Why not?
+
+### Green Acres Quest — item discovered: Hummingbird
+`LDE_GreenAcresQuest2024_Pollinator_05_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Pollinator_05'], items=['Hummingbird'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**ANTIQUEDEALER** (Encouraging): Oh wow, a hummingbird!
+**ANTIQUEDEALER** (Encouraging): I haven’t seen those around these parts in a long time.
+**MADDIE** (Encouraging): Really?
+**ANTIQUEDEALER** (Joyous): Looks like your garden is bringing back the old residence!
+
+### Green Acres Quest — item discovered: Julius
+`LDE_GreenAcresQuest2024_v2_CharacterJulius_02_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterJulius_02'], items=['Julius'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**EMILIO** (Thinking): Julius, do you know anything about gardening?
+**ANTIQUEDEALER** (Thinking): Well, I have read several books about it. Does that help?
+
+### Green Acres Quest — item discovered: Flying Garden Gnome
+`LDE_GreenAcresQuest2024_v2_GardenGnomes_07_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_GardenGnomes_07'], items=['Flying Garden Gnome'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**ANTIQUEDEALER**: Don't forget to add some garden gnomes!
+**EMILIO** (Doubtful): Do I really need garden gnomes? Do you think Bella would like them?
+**ANTIQUEDEALER** (Relaxed): Of course! Everyone likes garden gnomes.
+**EMILIO** (Relaxed): I guess we'll have garden gnomes!
 
 ### Green Acres Quest — item discovered: Julius
 `LDE_GreenAcresQuest_CharacterJulius_02_Dialogue` · seen 26.05.01–26.07.01
@@ -1321,9 +1460,9 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Joyous): You read my mind, Deb!
 **MADDIE** (Thinking): Are you still talking about flowers?
 
-### LDE HolidayCarols2023 LayerDecoration 10 Dialogue
+### The Fa-la-la-la Follies — part of the event (exact trigger not dumped)
 `LDE_HolidayCarols2023_LayerDecoration_10_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=The Fa-la-la-la Follies, eventId=LDE_HolidayCarols2023, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: What a wonderful set-up, Maddie!
 **MADDIE**: It's just...
@@ -1397,9 +1536,9 @@ Every story in which AntiqueDealer speaks.
 **RODDY** (Encouraging): There's so many fun things to do during a picnic!
 **ANTIQUEDEALER** (Encouraging): Good thing I found this old instant camera to remember them by!
 
-### LDE PicnicConfusion2023 AllRewardsCompleted Dialogue
+### Picnic Confusion! — part of the event (exact trigger not dumped)
 `LDE_PicnicConfusion2023_AllRewardsCompleted_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Picnic Confusion!, eventId=LDE_PicnicConfusion2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **RODDY** (Relaxed): I know this wasn't the original idea, but I have to call it a success!
 **ANTIQUEDEALER** (Discouraged): Well... I was still hoping for something a bit more intimate.
@@ -1446,9 +1585,9 @@ Every story in which AntiqueDealer speaks.
 **RODDY** (Surprised): I...  Uh...
 **ANTIQUEDEALER** (Charming): Hahaha! 
 
-### LDE PicnicConfusion2023 Layerdecoration 05 Dialogue
+### Picnic Confusion! — part of the event (exact trigger not dumped)
 `LDE_PicnicConfusion2023_Layerdecoration_05_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Picnic Confusion!, eventId=LDE_PicnicConfusion2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **RODDY** (Doubtful): Helloo? Hello?!
 **ANTIQUEDEALER** (Thinking): Hmmm... Perhaps we're early.
@@ -1458,9 +1597,9 @@ Every story in which AntiqueDealer speaks.
 **RODDY** (Surprised): You asked Mason?! Oh boy... You don't think he might have misheard you?
 **ANTIQUEDEALER** (Worried): Come to think of it, the boy did seem a bit unworldly. Maybe it is best we find him.
 
-### LDE PicnicConfusion2023 Layerdecoration 08 Dialogue
+### Picnic Confusion! — part of the event (exact trigger not dumped)
 `LDE_PicnicConfusion2023_Layerdecoration_08_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Picnic Confusion!, eventId=LDE_PicnicConfusion2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **ANTIQUEDEALER** (Thinking): A ha! Back at the scene of the crime!
 **MASON** (Surprised): Wh- What?
@@ -1475,9 +1614,9 @@ Every story in which AntiqueDealer speaks.
 **RODDY** (Surprised): M- Maddie!
 **MADDIE** (Doubtful): What is going on here?!
 
-### LDE PicnicConfusion2023 Layerdecoration 09 Dialogue
+### Picnic Confusion! — part of the event (exact trigger not dumped)
 `LDE_PicnicConfusion2023_Layerdecoration_09_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Picnic Confusion!, eventId=LDE_PicnicConfusion2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **GRANDMA** (Frustrated): Alright boys, out with it!
 **MADDIE** (Annoyed): Yeah, where is everyone?
@@ -1489,9 +1628,9 @@ Every story in which AntiqueDealer speaks.
 **MASON** (Relaxed): Oh... That's right! Sorry, Mrs. Boulton!
 **GRANDMA**: Ha! That's alright, dearie.
 
-### LDE PicnicConfusion2023 Layerdecoration 10 Dialogue
+### Picnic Confusion! — part of the event (exact trigger not dumped)
 `LDE_PicnicConfusion2023_Layerdecoration_10_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Picnic Confusion!, eventId=LDE_PicnicConfusion2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **RODDY**: So what do we do now? 
 **MADDIE** (Charming): What do you think? Have a picnic of course!
@@ -1500,9 +1639,9 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Encouraging): That's right, stick to the original plan!
 **ANTIQUEDEALER** (Discouraged): But... It was original meant to be just us.
 
-### LDE PicnicConfusion2023 Layerdecoration 12 Dialogue
+### Picnic Confusion! — part of the event (exact trigger not dumped)
 `LDE_PicnicConfusion2023_Layerdecoration_12_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Picnic Confusion!, eventId=LDE_PicnicConfusion2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **ANTIQUEDEALER** (Discouraged): ...
 **MADDIE** (Worried): Is everything alright, Julius?
@@ -1511,46 +1650,34 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Relaxed): Thanks to you...
 **ANTIQUEDEALER** (Charming): Really? Thank you, Maddie!
 
-### LDE PicnicConfusion2023 Layerdecoration 15 Dialogue
+### Picnic Confusion! — part of the event (exact trigger not dumped)
 `LDE_PicnicConfusion2023_Layerdecoration_15_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Picnic Confusion!, eventId=LDE_PicnicConfusion2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE**: That bagel sure looks delicious.
 **ANTIQUEDEALER** (Charming): Thank you! I found some leftover parade balloons in my shop. 
 **MADDIE** (Thinking): What can't be found in there?
 
-### LS Autumn BurrowingOwl Dialogue
-`LS_Autumn_BurrowingOwl_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=LS event (birding / Lotta's Shop?) - event type not dumped (versions None–None)
+### Circus Caper — item discovered: Mini Raffle Ticket
+`LDE_Rumors2025_Lottery_01_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Lottery_01'], items=['Mini Raffle Ticket'], moment=item discovered (versions 25.05.01–25.06.01)
 
-**MADDIE** (Joyous): I can see an owl!
-**MADDIE** (Relaxed): Awww, it’s so cute!
-**ANTIQUEDEALER** (Thinking): What kind of an owl is it?
-**MADDIE** (Thinking): Err... I’m not sure. It’s brown with white spots. It’s not too big.
-**ANTIQUEDEALER** (Doubtful): That sounds like a Burrowing Owl.
-**MADDIE** (Surprised): Burrowing? Does that mean it lives... underground??
-**ANTIQUEDEALER** (Relaxed): It does, indeed!
-**MADDIE** (Thinking): The more you know...
+**ANTIQUEDEALER** (Charming): I bought lots of raffle tickets to make sure I win the biggest prize!
+**ANTIQUEDEALER** (Discouraged): My ticket has never won, but this time the prize will be mine!
+**DEB** (Joyous): Ah, the excitement! I think I will get some raffle tickets, too.
+**ANTIQUEDEALER** (Relaxed): What is it, Ursula? Are you not going to buy a couple of raffle tickets?
+**GRANDMA** (Doubtful): I know this crowd... At the circus, the house always wins.
 
-### LS Autumn CanadaGoose Dialogue
-`LS_Autumn_CanadaGoose_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=LS event (birding / Lotta's Shop?) - event type not dumped (versions None–None)
+### Circus Caper — item discovered: Stuffed Unicorn
+`LDE_Rumors2025_Prizes_11_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Prizes_11'], items=['Stuffed Unicorn'], moment=item discovered (versions 25.05.01–25.06.01)
 
-**ANTIQUEDEALER** (Thinking): You hear that? There must be geese approaching.
-**MADDIE** (Joyous): Yup, I can see a whole flock of Canada Geese flying overhead.
-**MADDIE** (Joyous): What a sight, huh?
-**ANTIQUEDEALER** (Charming): It is one of the joys of bird-watching, my dear!
-
-### LS Autumn Dunlin Dialogue
-`LS_Autumn_Dunlin_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=LS event (birding / Lotta's Shop?) - event type not dumped (versions None–None)
-
-**MADDIE** (Thinking): How common are Dunlins?
-**ANTIQUEDEALER** (Doubtful): Quite common! But they are mostly found on shorelines, like here in Hopewell Bay.
-**MADDIE** (Encouraging): We are pretty well situated for bird-watching here, aren’t we?
-**ANTIQUEDEALER** (Charming): We sure are. But the autumn is my favorite time.
-**MADDIE**: Why’s that?
-**ANTIQUEDEALER** (Relaxed): Fewer mosquitos!
+**MADDIE** (Encouraging): What a show that was!
+**MASON** (Thinking): I really didn't expect the magician to pull a raccoon out of his hat.
+**MADDIE**: What did you think, Julius?
+**ANTIQUEDEALER** (Discouraged): I'm a little bit disappointed.
+**MADDIE** (Surprised): Why?
+**ANTIQUEDEALER** (Frustrated): Deb won the biggest prize in the raffle - and she had only bought one ticket!
 
 ### Autumn Lucky Snap — entering board
 `LS_Autumn_Intro_Dialogue` · seen 25.08.01–26.07.01
@@ -1563,56 +1690,23 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Encouraging): Can we have that hot cocoa in a thermos again?
 **ANTIQUEDEALER** (Charming): Hold my binoculars!
 
-### LS Autumn MandarinDuck Dialogue
-`LS_Autumn_MandarinDuck_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=LS event (birding / Lotta's Shop?) - event type not dumped (versions None–None)
+### Lucky Snap — item discovered: Canada Goose
+`LS_Common_CanadaGoose_01_Dialogue` · seen 26.07.01–26.07.01
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Common_CanadaGoose_01'], items=['Canada Goose'], moment=item discovered (versions 26.03.01–26.07.01)
 
-**ANTIQUEDEALER** (Relaxed): I think I might have a real treat for you, my dear!
-**MADDIE** (Joyous): What is it? A cool eagle or some exotic bird?
-**ANTIQUEDEALER** (Charming): Why don't you take a look!
-**MADDIE** (Surprised): Oh, WOW! What is that bird??
-**ANTIQUEDEALER** (Relaxed): A Mandarin Duck. It’s a very shy bird, but always a joy to spot.
-**MADDIE** (Relaxed): It might be my new favorite!
+**ANTIQUEDEALER** (Thinking): You hear that? There must be geese approaching.
+**MADDIE** (Joyous): Yup, I can see a whole flock of Canada Geese flying overhead.
+**MADDIE** (Joyous): What a sight, huh?
+**ANTIQUEDEALER** (Charming): It is one of the joys of bird-watching, my dear!
 
-### LS Autumn RedcrownedCrane Dialogue
-`LS_Autumn_RedcrownedCrane_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=LS event (birding / Lotta's Shop?) - event type not dumped (versions None–None)
+### Lucky Snap — item discovered: Herring Gull
+`LS_Common_HerringGull_01_Dialogue` · seen 25.05.01–26.07.01
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Common_HerringGull_01'], items=['Herring Gull'], moment=item discovered (versions 25.05.01–26.07.01)
 
-**MADDIE** (Surprised): Oh, wow! Is that a Red-crowned Crane?
-**MADDIE** (Relaxed): I’ve never seen one before.
-**ANTIQUEDEALER** (Charming): They are a very rare sight these days, so this is a very lovely surprise!
-**ANTIQUEDEALER** (Relaxed): Do you see how they almost seem to be dancing?
-**MADDIE** (Thinking): Oh, yeah! Why are they doing that?
-**ANTIQUEDEALER**: It’s a way for them to warn the others of some danger.
-**MADDIE** (Relaxed): Quite inventive, I would say!
-
-### LS Autumn Shoebill Dialogue
-`LS_Autumn_Shoebill_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=LS event (birding / Lotta's Shop?) - event type not dumped (versions None–None)
-
-**ANTIQUEDEALER** (Encouraging): Well, well, well! If it isn’t the shoebill wading in the water, looking for a snack!
-**MADDIE** (Relaxed): What a silly name.
-**ANTIQUEDEALER** (Worried): Do not be fooled! That bill is powerful, with razor-sharp edges and a pointed hook at the end to finish off even a huge fish.
-
-### LS Autumn WillowPtarmigan Dialogue
-`LS_Autumn_WillowPtarmigan_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=LS event (birding / Lotta's Shop?) - event type not dumped (versions None–None)
-
-**MADDIE** (Thinking): I thought I just saw something over there in those trees, but I don’t think it was actually anything.
-**MADDIE** (Surprised): Hang on! There’s definitely something there!
-**ANTIQUEDEALER** (Surprised): Where? Over there, past the shrubbery?
-**MADDIE** (Doubtful): Exactly! No, I think I was wrong, after all.
-**ANTIQUEDEALER** (Encouraging): You weren’t wrong at all! It just happens to be a bird that is a true master of camouflage - a Willow Ptarmigan!
-
-### LS CommonLoon Dialogue
-`LS_CommonLoon_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=LS event (birding / Lotta's Shop?) - event type not dumped (versions None–None)
-
-**MADDIE** (Joyous): I can see a bird in the water. I don't think I've ever spotted it before.
-**ANTIQUEDEALER** (Surprised): Oh? What does it look like?
-**MADDIE** (Surprised): It has a black head, kind of a checkered body and... red eyes?
-**ANTIQUEDEALER** (Thinking): Ah, it is the Common Loon.
-**ANTIQUEDEALER** (Relaxed): The eyes are a little eerie, I know.
+**ANTIQUEDEALER**: There is one bird you can always spot, even at this time of year.
+**MADDIE** (Relaxed): What is it?
+**ANTIQUEDEALER** (Relaxed): The Herring Gull! You can find it in our beautiful Bay, but it also enjoys spending time at garbage dumps and parking lots.
+**MADDIE** (Hesitant): Ewww, sounds... lovely.
 
 ### Easter Lucky Snap — item discovered: Adorable Lamb
 `LS_Easter_Common_Lamb_Dialogue` · seen 26.03.01–26.07.01
@@ -1648,6 +1742,26 @@ Every story in which AntiqueDealer speaks.
 **MASON** (Joyous): Most exotic creature wins!
 **ANTIQUEDEALER** (Thinking): But what are we competing for? Oh...he is already gone...
 
+### Lucky Snap Spring — entering board
+`LS_Easter_Intro_Dialogue` · seen 25.04.02–26.07.01
+- trigger: event, event=Lucky Snap Spring, eventId=LS_Easter, eventType=Collectible Board Event, moment=entering board (versions 25.04.02–26.01.02)
+- trigger: event, event=Easter Lucky Snap, eventId=LS_Easter, eventType=Collectible Board Event, moment=entering board (versions 26.02.01–26.02.03)
+
+**MADDIE** (Joyous): I've done some studying since our last bird-watching trip, and I can't wait to get out there!
+**ANTIQUEDEALER** (Charming): How marvelous! The weather looks most promising, too.
+**MASON** (Charming): Greetings, old people!  
+  _earlier:_ ~~Hello, old people!~~ (until 25.04.01)
+**MADDIE** (Doubtful): We're not that old!
+**MASON** (Thinking): Are you planning for a *bird-watching* day?
+**MADDIE** (Doubtful): Well, yes...
+**MASON** (Relaxed): I rest my case.
+**MASON**: How about you make it more interesting?
+**MADDIE** (Thinking): What do you mean?
+**MASON** (Joyous): Let's see which one of you can spot the most exotic creature.
+**ANTIQUEDEALER** (Thinking): Hmmm... I feel I have an unfair advantage, as I have been bird-watching for much longer.
+**MADDIE** (Encouraging): You might be surprised by how much I've learned. I've had an excellent teacher, after all!
+**ANTIQUEDEALER** (Joyous): Flattery will get you everywhere. Let's do it!
+
 ### Easter Lucky Snap — event end
 `LS_Easter_Outro1_Dialogue` · seen 26.03.01–26.07.01
 - trigger: event, event=Easter Lucky Snap, eventId=LS_Easter, eventType=Collectible Board Event, moment=event end (versions 26.03.01–26.07.01)
@@ -1658,6 +1772,18 @@ Every story in which AntiqueDealer speaks.
 **MASON** (Joyous): What? No! That's stupid. Whoever wins... gets to eat all the Easter eggs they want!
 **MADDIE** (Charming): I think that means we'd better let Pearl pick the winner. Just in case!
 **MASON** (Discouraged): Noooo!
+
+### Lucky Snap Spring — event end
+`LS_Easter_Outro_Dialogue` · seen 25.04.02–26.07.01
+- trigger: event, event=Lucky Snap Spring, eventId=LS_Easter, eventType=Collectible Board Event, moment=event end (versions 25.04.02–26.01.02)
+- trigger: event, event=Easter Lucky Snap, eventId=LS_Easter, eventType=Collectible Board Event, moment=event end (versions 26.02.01–26.02.03)
+
+**MASON**: Let's hear it! Which one of you spotted the most exotic bird?
+**MADDIE** (Encouraging): I only spotted adorable baby animals, but I'm not complaining!
+**ANTIQUEDEALER** (Thinking): I am not sure about birds, but I did spot something that took me quite by surprise.
+**MADDIE** (Surprised): What was it?
+**ANTIQUEDEALER** (Relaxed): A rare winged wonder - Mason!
+**MASON** (Encouraging): What can I say? I photograph really well.
 
 ### Easter Lucky Snap — item discovered: Prickly Puff
 `LS_Easter_Uncommon_Hedgehog_01_Dialogue` · seen 25.05.01–26.07.01
@@ -1670,15 +1796,46 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Surprised): That's no bird!
 **ANTIQUEDEALER** (Surprised): A baby hedgehog!
 
-### LS EuropeanRobin Dialogue
-`LS_EuropeanRobin_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=LS event (birding / Lotta's Shop?) - event type not dumped (versions None–None)
+### Lucky Snap — item discovered: Long-eared Owl
+`LS_Epic_LongEaredOwl_01_Dialogue` · seen 25.05.01–26.07.01
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Epic_LongEaredOwl_01'], items=['Long-eared Owl'], moment=item discovered (versions 25.05.01–26.07.01)
 
-**MADDIE** (Relaxed): Robins are so cute!
-**ANTIQUEDEALER** (Charming): They are! But did you know there are nine subspecies of Robin?
-**MADDIE** (Surprised): So many?!
-**ANTIQUEDEALER** (Relaxed): And that Robins are so widespread that there are hundreds of millions of them across the globe?
-**MADDIE** (Relaxed): Way to go, little Robin!
+**MADDIE** (Thinking): Maybe we should head back - it's already getting dark.
+**ANTIQUEDEALER** (Thinking): Not just yet... I heard there is a Long-eared Owl living in these woods.
+**ANTIQUEDEALER** (Thinking): Can you hear it?
+**MADDIE** (Hesitant): I can. It's a real hoot!
+
+### Lucky Snap — item discovered: Mandarin Duck
+`LS_Epic_MandarinDuck_01_Dialogue` · seen 26.07.01–26.07.01
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Epic_MandarinDuck_01'], items=['Mandarin Duck'], moment=item discovered (versions 26.03.01–26.07.01)
+
+**ANTIQUEDEALER** (Relaxed): I think I might have a real treat for you, my dear!
+**MADDIE** (Joyous): What is it? A cool eagle or some exotic bird?
+**ANTIQUEDEALER** (Charming): Why don't you take a look!
+**MADDIE** (Surprised): Oh, WOW! What is that bird??
+**ANTIQUEDEALER** (Relaxed): A Mandarin Duck. It’s a very shy bird, but always a joy to spot.
+**MADDIE** (Relaxed): It might be my new favorite!
+
+### Lucky Snap — item discovered: Kingfisher
+`LS_Legendary_Kingfisher_01_Dialogue` · seen 25.05.01–26.07.01
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Legendary_Kingfisher_01'], items=['Kingfisher'], moment=item discovered (versions 25.05.01–26.07.01)
+
+**MADDIE** (Thinking): Is that a small bird or a big dragonfly?
+**ANTIQUEDEALER**: It's a Kingfisher. A very colorful and quick little bird.
+**MADDIE** (Relaxed): It has a wonderful plumage, don't you think?
+**ANTIQUEDEALER** (Encouraging): Indeed!
+
+### Lucky Snap — item discovered: Red-crowned Crane
+`LS_Legendary_RedcrownedCrane_01_Dialogue` · seen 26.07.01–26.07.01
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Legendary_RedcrownedCrane_01'], items=['Red-crowned Crane'], moment=item discovered (versions 26.03.01–26.07.01)
+
+**MADDIE** (Surprised): Oh, wow! Is that a Red-crowned Crane?
+**MADDIE** (Relaxed): I’ve never seen one before.
+**ANTIQUEDEALER** (Charming): They are a very rare sight these days, so this is a very lovely surprise!
+**ANTIQUEDEALER** (Relaxed): Do you see how they almost seem to be dancing?
+**MADDIE** (Thinking): Oh, yeah! Why are they doing that?
+**ANTIQUEDEALER**: It’s a way for them to warn the others of some danger.
+**MADDIE** (Relaxed): Quite inventive, I would say!
 
 ### Lucky Snap — item discovered: Amateur Camera
 `LS_LuckySnap2024_AmateurCamera_Dialogue` · seen 25.05.01–26.07.01
@@ -1843,13 +2000,36 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Thinking): There's a strange looking bird on the ground... and another one! They look like they're about to have a fight!
 **ANTIQUEDEALER**: Well spotted! You can add sage grouse to your Life List.
 
-### LS Peacock Dialogue
-`LS_Peacock_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=LS event (birding / Lotta's Shop?) - event type not dumped (versions None–None)
+### Lucky Snap — item discovered: Common Loon
+`LS_Rare_CommonLoon_01_Dialogue` · seen 25.05.01–26.07.01
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Rare_CommonLoon_01'], items=['Common Loon'], moment=item discovered (versions 25.05.01–26.07.01)
 
-**ANTIQUEDEALER** (Relaxed): Peacocks are nature's weathermen. They call out when it is going to rain.
-**MADDIE**: Really?
-**ANTIQUEDEALER** (Discouraged): Yes, indeed - but unfortunately they are not known for their beautiful song.
+**MADDIE** (Joyous): I can see a bird in the water. I don't think I've ever spotted it before.
+**ANTIQUEDEALER** (Surprised): Oh? What does it look like?
+**MADDIE** (Surprised): It has a black head, kind of a checkered body and... red eyes?
+**ANTIQUEDEALER** (Thinking): Ah, it is the Common Loon.
+**ANTIQUEDEALER** (Relaxed): The eyes are a little eerie, I know.
+
+### Lucky Snap — item discovered: Pileated Woodpecker
+`LS_Rare_PileatedWoodpecker_01_Dialogue` · seen 25.05.01–26.07.01
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Rare_PileatedWoodpecker_01'], items=['Pileated Woodpecker'], moment=item discovered (versions 25.05.01–26.07.01)
+
+**MADDIE** (Surprised): Look at that huge hole in the tree trunk!
+**MADDIE** (Thinking): Was that made by a woodpecker?
+**ANTIQUEDEALER** (Encouraging): You have good eyes, my dear. Yes, that is the handiwork of a Pileated Woodpecker.
+**MADDIE** (Surprised): But it's so even and almost... rectangular.
+**ANTIQUEDEALER** (Relaxed): Indeed. And that hole will make a good home for another little animal.
+**MADDIE** (Encouraging): Huh! It must be a good neighbor.
+
+### Lucky Snap — item discovered: Willow Ptarmigan
+`LS_Rare_WillowPtarmigan_01_Dialogue` · seen 26.07.01–26.07.01
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Rare_WillowPtarmigan_01'], items=['Willow Ptarmigan'], moment=item discovered (versions 26.03.01–26.07.01)
+
+**MADDIE** (Thinking): I thought I just saw something over there in those trees, but I don’t think it was actually anything.
+**MADDIE** (Surprised): Hang on! There’s definitely something there!
+**ANTIQUEDEALER** (Surprised): Where? Over there, past the shrubbery?
+**MADDIE** (Doubtful): Exactly! No, I think I was wrong, after all.
+**ANTIQUEDEALER** (Encouraging): You weren’t wrong at all! It just happens to be a bird that is a true master of camouflage - a Willow Ptarmigan!
 
 ### Lucky Snap — item discovered: Mourning Dove
 `LS_Spring_CommonMourningDove_Dialogue` · seen 26.03.01–26.07.01
@@ -1886,7 +2066,6 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Thinking): Because of all the birds migrating back after the long winter.
 **ANTIQUEDEALER** (Relaxed): Every tree is full of life. All you need is a pair of binoculars and an adventurous spirit!
 **MADDIE** (Encouraging): And a pair of shorts?
-**ANTIQUEDEALER** (Worried): Well, let's not scare the birds off back to their winter habitat!
 
 ### Lucky Snap — item discovered: White-breasted Nuthatch
 `LS_Spring_LegendaryWhiteBreastedNuthatch_Dialogue` · seen 26.03.01–26.07.01
@@ -2063,18 +2242,30 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Thinking): Hmmm. If I feed it, do you think it'll bring me little shiny baubles?
 **ANTIQUEDEALER** (Joyous): Perhaps! Or perhaps it will steal some from you!
 
-### LS Summer BlueJay Dialogue
-`LS_Summer_BlueJay_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=LS event (birding / Lotta's Shop?) - event type not dumped (versions None–None)
+### Summer Lucky Snap — entering board
+`LS_Summer_Intro_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, event=Summer Lucky Snap, eventId=LS_Summer, eventType=Collectible Board Event, moment=entering board (versions 25.05.01–26.03.01)
+- trigger: event, event=Summer Lucky Snap, eventId=LS_Summer_02, eventType=Collectible Board Event, moment=entering board (versions 25.05.01–25.06.02)
+- trigger: event, event=Summer Lucky Snap, eventId=LS_Summer_03, eventType=Collectible Board Event, moment=entering board (versions 25.05.01–25.06.02)
+- trigger: event, event=Summer Lucky Snap, eventId=LS_Summer_04, eventType=Collectible Board Event, moment=entering board (versions 25.05.01–25.06.01)
+- trigger: event, event=Summer Lucky Snap, eventId=LS_Summer_05, eventType=Collectible Board Event, moment=entering board (versions 25.06.02–25.06.02)
 
-**MADDIE** (Surprised): I think I just saw a flash of blue in that big oak tree.
-**ANTIQUEDEALER** (Surprised): You might have glimpsed a Blue Jay!
-**ANTIQUEDEALER** (Surprised): Acorns are their favorite treat.
-**ANTIQUEDEALER** (Joyous): Can you hear the song? Yes, that is definitely a Blue Jay.
+**ANTIQUEDEALER** (Charming): Binoculars at the ready, Maddie. Let's go birding!
+**MADDIE** (Worried): I'm not sure there's any point...
+**ANTIQUEDEALER** (Worried): What on earth do you mean?
+**MADDIE** (Thinking): Well, it's like all the birds have disappeared!
+**ANTIQUEDEALER** (Relaxed): Oh, no, my dear! They haven't disappeared... but they are laying low.
+**ANTIQUEDEALER** (Relaxed): You see, they did the hard work of migrating back and then formed families.
+**ANTIQUEDEALER**: Now they are molting...
+**MADDIE** (Thinking): Molting? Losing their feathers?
+**ANTIQUEDEALER** (Charming): Exactly! And they will emerge looking quite different.
+**ANTIQUEDEALER** (Charming): You just need to know where to look!
+**MADDIE** (Charming): So it's like we're levelling up?
+**ANTIQUEDEALER** (Thinking): I'm not sure what you mean, but let's say yes!
 
-### LS Summer Crescent-CapedLophora Dialogue
-`LS_Summer_Crescent-CapedLophora_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=LS event (birding / Lotta's Shop?) - event type not dumped (versions None–None)
+### Lucky Snap — item discovered: Crescent-caped Lophorina
+`LS_Ultimate_CrescentCapedLophora_01_Dialogue` · seen 25.05.01–26.07.01
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Ultimate_CrescentCapedLophora_01'], items=['Crescent-caped Lophorina'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **ANTIQUEDEALER** (Surprised): That black bird over there looks very odd!
 **MADDIE** (Encouraging): Actually, I can tell you it's a Crescent-caped Lophorina.
@@ -2082,53 +2273,74 @@ Every story in which AntiqueDealer speaks.
 **MADDIE**: It is, right? The male uses its black coloring as a part of its courtship ritual.
 **ANTIQUEDEALER** (Charming): And very effective it is, too!
 
-### LS Summer HerringGull Dialogue
-`LS_Summer_HerringGull_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=LS event (birding / Lotta's Shop?) - event type not dumped (versions None–None)
+### Lucky Snap — item discovered: Peacock
+`LS_Ultimate_Peacock_01_Dialogue` · seen 25.05.01–26.07.01
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Ultimate_Peacock_01'], items=['Peacock'], moment=item discovered (versions 25.05.01–26.07.01)
 
-**ANTIQUEDEALER**: There is one bird you can always spot, even at this time of year.
-**MADDIE** (Relaxed): What is it?
-**ANTIQUEDEALER** (Relaxed): The Herring Gull! You can find it in our beautiful Bay, but it also enjoys spending time at garbage dumps and parking lots.
-**MADDIE** (Hesitant): Ewww, sounds... lovely.
+**ANTIQUEDEALER** (Relaxed): Peacocks are nature's weathermen. They call out when it is going to rain.
+**MADDIE**: Really?
+**ANTIQUEDEALER** (Discouraged): Yes, indeed - but unfortunately they are not known for their beautiful song.
 
-### LS Summer Kingfisher Dialogue
-`LS_Summer_Kingfisher_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=LS event (birding / Lotta's Shop?) - event type not dumped (versions None–None)
+### Lucky Snap — item discovered: Shoebill
+`LS_Ultimate_Shoebill_01_Dialogue` · seen 26.07.01–26.07.01
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Ultimate_Shoebill_01'], items=['Shoebill'], moment=item discovered (versions 26.03.01–26.07.01)
 
-**MADDIE** (Thinking): Is that a small bird or a big dragonfly?
-**ANTIQUEDEALER**: It's a Kingfisher. A very colorful and quick little bird.
-**MADDIE** (Relaxed): It has a wonderful plumage, don't you think?
-**ANTIQUEDEALER** (Encouraging): Indeed!
+**ANTIQUEDEALER** (Encouraging): Well, well, well! If it isn’t the shoebill wading in the water, looking for a snack!
+**MADDIE** (Relaxed): What a silly name.
+**ANTIQUEDEALER** (Worried): Do not be fooled! That bill is powerful, with razor-sharp edges and a pointed hook at the end to finish off even a huge fish.
 
-### LS Summer Long-EaredOwl Dialogue
-`LS_Summer_Long-EaredOwl_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=LS event (birding / Lotta's Shop?) - event type not dumped (versions None–None)
+### Lucky Snap — item discovered: Blue Jay
+`LS_Uncommon_BlueJay_01_Dialogue` · seen 25.05.01–26.07.01
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Uncommon_BlueJay_01'], items=['Blue Jay'], moment=item discovered (versions 25.05.01–26.07.01)
 
-**MADDIE** (Thinking): Maybe we should head back - it's already getting dark.
-**ANTIQUEDEALER** (Thinking): Not just yet... I heard there is a Long-eared Owl living in these woods.
-**ANTIQUEDEALER** (Thinking): Can you hear it?
-**MADDIE** (Hesitant): I can. It's a real hoot!
+**MADDIE** (Surprised): I think I just saw a flash of blue in that big oak tree.
+**ANTIQUEDEALER** (Surprised): You might have glimpsed a Blue Jay!
+**ANTIQUEDEALER** (Surprised): Acorns are their favorite treat.
+**ANTIQUEDEALER** (Joyous): Can you hear the song? Yes, that is definitely a Blue Jay.
 
-### LS Summer PeregrineFalcon Dialogue
-`LS_Summer_PeregrineFalcon_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=LS event (birding / Lotta's Shop?) - event type not dumped (versions None–None)
+### Lucky Snap — item discovered: Dunlin
+`LS_Uncommon_Dunlin_01_Dialogue` · seen 26.07.01–26.07.01
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Uncommon_Dunlin_01'], items=['Dunlin'], moment=item discovered (versions 26.03.01–26.07.01)
+
+**MADDIE** (Thinking): How common are Dunlins?
+**ANTIQUEDEALER** (Doubtful): Quite common! But they are mostly found on shorelines, like here in Hopewell Bay.
+**MADDIE** (Encouraging): We are pretty well situated for bird-watching here, aren’t we?
+**ANTIQUEDEALER** (Charming): We sure are. But the autumn is my favorite time.
+**MADDIE**: Why’s that?
+**ANTIQUEDEALER** (Relaxed): Fewer mosquitos!
+
+### Lucky Snap — item discovered: European Robin
+`LS_Uncommon_Robin_01_Dialogue` · seen 25.05.01–26.07.01
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Uncommon_Robin_01'], items=['European Robin'], moment=item discovered (versions 25.05.01–26.07.01)
+
+**MADDIE** (Relaxed): Robins are so cute!
+**ANTIQUEDEALER** (Charming): They are! But did you know there are nine subspecies of Robin?
+**MADDIE** (Surprised): So many?!
+**ANTIQUEDEALER** (Relaxed): And that Robins are so widespread that there are hundreds of millions of them across the globe?
+**MADDIE** (Relaxed): Way to go, little Robin!
+
+### Lucky Snap — item discovered: Burrowing Owl
+`LS_VeryRare_BurrowingOwl_01_Dialogue` · seen 26.07.01–26.07.01
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_VeryRare_BurrowingOwl_01'], items=['Burrowing Owl'], moment=item discovered (versions 26.03.01–26.07.01)
+
+**MADDIE** (Joyous): I can see an owl!
+**MADDIE** (Relaxed): Awww, it’s so cute!
+**ANTIQUEDEALER** (Thinking): What kind of an owl is it?
+**MADDIE** (Thinking): Err... I’m not sure. It’s brown with white spots. It’s not too big.
+**ANTIQUEDEALER** (Doubtful): That sounds like a Burrowing Owl.
+**MADDIE** (Surprised): Burrowing? Does that mean it lives... underground??
+**ANTIQUEDEALER** (Relaxed): It does, indeed!
+**MADDIE** (Thinking): The more you know...
+
+### Lucky Snap — item discovered: Peregrine Falcon
+`LS_VeryRare_PeregrineFalcon_01_Dialogue` · seen 25.05.01–26.07.01
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_VeryRare_PeregrineFalcon_01'], items=['Peregrine Falcon'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): Eek, we're so close to the cliffs. Maybe we should go back... Whoah!!
 **MADDIE** (Surprised): What was that??
 **ANTIQUEDEALER** (Relaxed): The reason I brought you here. It was a Peregrine Falcon - one of the fastest birds in the world!
 **MADDIE** (Doubtful): Are you sure it was a bird? It was so fast it just looked like a flash of brown.
 **ANTIQUEDEALER** (Joyous): Oh, yes! It is a real joy to watch.
-
-### LS Summer PileatedWoodpecker Dialogue
-`LS_Summer_PileatedWoodpecker_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=LS event (birding / Lotta's Shop?) - event type not dumped (versions None–None)
-
-**MADDIE** (Surprised): Look at that huge hole in the tree trunk!
-**MADDIE** (Thinking): Was that made by a woodpecker?
-**ANTIQUEDEALER** (Encouraging): You have good eyes, my dear. Yes, that is the handiwork of a Pileated Woodpecker.
-**MADDIE** (Surprised): But it's so even and almost... rectangular.
-**ANTIQUEDEALER** (Relaxed): Indeed. And that hole will make a good home for another little animal.
-**MADDIE** (Encouraging): Huh! It must be a good neighbor.
 
 ### Lucky Snap — item discovered: Mallard
 `LS_Winter2024_Common_Mallard_01_Dialogue` · seen 25.05.01–26.07.01
@@ -2184,8 +2396,20 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Thinking): Why don't we serve him a little meal to get him closer...
 **MADDIE** (Relaxed): I think it's working! I see him - and his great little hairdo!
 
+### Winter Lucky Snap — entering board
+`LS_Winter_Intro_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, event=Winter Lucky Snap, eventId=LS_Winter, eventType=Collectible Board Event, moment=entering board (versions 25.10.01–26.07.01)
+
+**ANTIQUEDEALER** (Charming): Salutations, Maddie! Have you wrapped up warm?
+**MADDIE** (Surprised): Where are we going?
+**ANTIQUEDEALER** (Relaxed): Birding, Maddie! Birding!
+**ANTIQUEDEALER** (Relaxed): There are a great many wonderful birds you can spot even at this time of year.
+**ANTIQUEDEALER** (Relaxed): You just need a pair of binoculars and an adventurous spirit!
+**ANTIQUEDEALER** (Charming): A flask of hot chocolate is also very important.
+**MADDIE** (Encouraging): If there's hot chocolate involved, I'm there!
+
 ### The Maze: Cut overgrown hedge
-`MazeDialogue_A` · seen 24.04.01–26.07.01
+`MazeDialogue_A` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeEntryCutOvergrownHedgeA6, phase=task completed, task=Cut overgrown hedge (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeEntryRemoveMoleHillsA4, phase=task completed, task=Remove mole hills (versions 25.04.03–26.07.01)
 
@@ -2201,7 +2425,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Joyous): Amazing! I'm going to try and build this, but I'd better keep looking around the maze, too!
 
 ### The Maze: Fix arch
-`MazeDialogue_B` · seen 24.04.01–26.07.01
+`MazeDialogue_B` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeEntryLargeArchFixArchTopB11, phase=task completed, task=Fix arch (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePath1PlaceCobblesC5, phase=task completed, task=Place cobblestones (versions 25.04.03–26.07.01)
 
@@ -2214,7 +2438,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Thinking): I don't even understand what it is. I'm going to keep trying to make it, though, and exploring this maze!
 
 ### The Maze: Place cobblestones
-`MazeDialogue_C` · seen 24.04.01–26.07.01
+`MazeDialogue_C` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePath1PlaceCobblesC5, phase=task completed, task=Place cobblestones (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePath1GrowVineF5, phase=task completed, task=Plant vines (versions 25.04.03–26.07.01)
 
@@ -2261,7 +2485,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Joyous): Hmm. I still feel like she's hiding something, but cocoa sounds good!
 
 ### Plaza: Clear pathway
-`Plaza_Intro` · seen 24.04.01–26.07.01
+`Plaza_Intro` · seen 23.09.02–26.07.01
 - trigger: area, area=Plaza, areaId=MansionPlaza, hotspotId=MansionPlazaLowEntryClearRoadBlock, phase=task completed, task=Clear pathway (versions 24.04.01–26.07.01)
 
 **MADDIE**: Things might be bad with Grandma, but at least the mansion grounds are looking better.
@@ -2275,7 +2499,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Thinking): He's right! I shouldn't give up on her. This arrest <i>has</i> to be a mistake!
 
 ### The Pool House: Clean floor
-`PoolHouseAfterarrest2` · seen 24.04.01–26.07.01
+`PoolHouseAfterarrest2` · seen 23.09.02–26.07.01
 - trigger: area, area=The Pool House, areaId=PoolHouse, hotspotId=PoolHouseEntryCleanEntryFloor, phase=task completed, task=Clean floor (versions 24.04.01–26.07.01)
 
 **MADDIE** (Discouraged): I still can't believe they arrested Grandma... I wish I knew what to do to help her...
@@ -2295,7 +2519,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Annoyed): Okay, but hurry up!
 
 ### The Pool House: Remove broken TV
-`PoolHouse_JailBail` · seen 24.04.01–26.07.01
+`PoolHouse_JailBail` · seen 23.09.02–26.07.01
 - trigger: area, area=The Pool House, areaId=PoolHouse, hotspotId=PoolHouseEntryRemoveBrokenTv, phase=task completed, task=Remove broken TV (versions 24.04.01–26.07.01)
 
 **MADDIE** (Worried): Julius, you told me that there might be something we can do to help grandma get out of jail. What was it?
@@ -2309,9 +2533,47 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER**: I'll go and make the call right now.
 **MADDIE** (Doubtful): I'm sensing that Julius too has some dark secrets in his past... 
 
-### SP AlpacaPet2024 TA1 Dialogue
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot08
+`SE_HopeberryFestival2023_Decoration_Slot08_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot08, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**DEB**: My improved juice is excellent as a frozen slushy, smoothie mix or just as a classic refreshing drink! 
+**ANTIQUEDEALER** (Thinking): Mmm! I gotta say, these are all quite delicious, but honestly... What is that smell?!
+**DEB** (Charming): Oh that?! That is what gives my drink its uniqueness. My secret ingredient...
+**ANTIQUEDEALER** (Worried): Unique is an understatement... It almost smells like someone died!
+**DEB** (Frustrated): I see... Well, if you cannot <b>appreciate</b> my exceptional beverage, then I wish you good day.
+**ANTIQUEDEALER** (Discouraged): Oh.. I'm sorry, I didn't mea-
+**DEB** (Annoyed): I said <b>good day!</b>
+
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot14
+`SE_HopeberryFestival2023_Decoration_Slot14_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot14, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**DEB** (Joyous): Come one, come all to the new Hopeberry Festival!
+**DEB** (Joyous): Don't forget to taste my wonderful new hopeberry juice! It's to die for!
+**ANTIQUEDEALER** (Annoyed): You can say that again! It smells like a dead body. 
+**MASON** (Joyous): Reeeeeeeally?!
+**MADDIE** (Doubtful): Good job, Julius...
+**ANTIQUEDEALER** (Doubtful): Why is everyone angry at me today?
+
+### SEValentines2023 — decoration SE_Valentines2023_Decoration_22
+`SE_Valentines2023_LyricalPicnic` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_Valentines2023_Decoration_22, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+
+### SEValentines2023 — decoration ValentinesDay2022_Decoration_13
+`SE_Valentines2023_RomanticMansionFacade` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=ValentinesDay2022_Decoration_13, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+
+### SEValentines2023 — decoration ValentinesDay2022_Decoration_06
+`SE_Valentines2023_RoundBedOfRoses` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=ValentinesDay2022_Decoration_06, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+
+### Woolly Mystery — part of the event (exact trigger not dumped)
 `SP_AlpacaPet2024_TA1_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Woolly Mystery, eventId=SP_AlpacaPet2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **ANTIQUEDEALER** (Doubtful): Salutations, Maddie.
 **MADDIE** (Surprised): Hey, Julius. But you look upset - what's up?
@@ -2323,16 +2585,6 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Discouraged): I do not know, Maddie, but it looked as though like someone had taken a bite out of one with wax apples.
 **MADDIE** (Thinking): Apples?
 **MADDIE** (Surprised): Oh...
-
-### SP AmyPet2025 TA1 Dialogue
-`SP_AmyPet2025_TA1_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
-
-**JACKIE** (Encouraging): You just couldn't say no to Emilio!
-**MADDIE** (Discouraged): No... But Amy is actually a really lovely cat. Look - she's so happy in her new home!
-**JACKIE** (Doubtful): What is your Grandma doing?
-**MADDIE** (Relaxed): Oh, she's "creating content for her social media."
-**JACKIE** (Doubtful): Is she really doing that or is she using Amy as a cover for whatever she is ACTUALLY doing?
 
 ### Festive Feast — decoration SP_CancelledFun2025_Decoration_Slot34
 `SP_CancelledFun2025_Decoration_Slot34_Dialogue` · seen 26.03.01–26.07.01
@@ -2447,9 +2699,9 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Joyous): That's the magic of history!
 **MADDIE** (Joyous): And a great fair.
 
-### SP FerretPet2025 Intro Dialogue
-`SP_FerretPet2025_Intro_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Ferret Fiasco — part of the event (exact trigger not dumped)
+`SP_FerretPet2025_Intro_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Ferret Fiasco, eventId=SP_FerretPet2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **ANTIQUEDEALER** (Worried): Oh, no! It’s happening again!
 **MADDIE**: Julius? What’s going on?!
@@ -2471,9 +2723,9 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Thinking): About a bunch of ferrets running around stealing and causing havoc in a small town during the holiday season?
 **ANTIQUEDEALER** (Relaxed): Well... some artistic liberties were taken, of course.
 
-### SP FerretPet2025 TA2 Dialogue
-`SP_FerretPet2025_TA2_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Ferret Fiasco — part of the event (exact trigger not dumped)
+`SP_FerretPet2025_TA2_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Ferret Fiasco, eventId=SP_FerretPet2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **ANTIQUEDEALER** (Thinking): Alright! I’ve gathered you and Jackie to form the ferret task force!
 **ANTIQUEDEALER** (Charming): We’re going to gather all these little rascals before they steal everything that isn’t nailed down.
@@ -2484,6 +2736,19 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Worried): Well... er...
 **JACKIE**: New homes, right?
 **ANTIQUEDEALER** (Charming): Of course!
+
+### Julius' Mystery — outro
+`SP_JuliusMystery2023_AllRewardsCompleted_Dialogue` · seen 23.09.02–26.07.01
+- trigger: event, event=Julius' Mystery, eventId=SP_JuliusMystery2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**GRANDMA** (Surprised): Even I didn’t know my family did so much traveling! They hardly ever spoke about such things...
+**MADDIE** (Annoyed): Annoying, isn’t it?
+**GRANDMA** (Charming): Oh, dearie, I tell you things all the time! You just have to ask the right questions...
+**MADDIE** (Doubtful): Riiight...
+**GRANDMA**: Julius, dearie. I just wanted to thank you for the wonderful gift. I may have been a bit snappy with you earlier, but...
+**ANTIQUEDEALER** (Thinking): But the conversation we had made it utterly clear why it's duck soup, Ursula.
+**GRANDMA** (Encouraging): And the NEW coat of arms is simply lovely!
+**ANTIQUEDEALER** (Joyous): Capital it is!
 
 ### Julius' Mystery — decoration SP_JuliusMystery2023_Decoration_Slot25
 `SP_JuliusMystery2023_Decoration_Slot25_Dialogue` · seen 23.09.02–26.07.01
@@ -2529,6 +2794,21 @@ Every story in which AntiqueDealer speaks.
 **GRANDMA** (Annoyed): Seriously, Julius. Don’t you have anything better to do than dig up my family history?!
 **ANTIQUEDEALER** (Worried): But- But you asked me to-
 **MASON** (Joyous): Did someone say PIRATES?!
+
+### Julius' Mystery — intro
+`SP_JuliusMystery2023_Intro_Dialogue` · seen 23.09.02–26.07.01
+- trigger: event, event=Julius' Mystery, eventId=SP_JuliusMystery2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**ANTIQUEDEALER**: Salutations, Maddie!
+**MADDIE**: Hi, Julius. Quiet day at the antique store?
+**ANTIQUEDEALER** (Encouraging): Quite the contrary, my dear! I came across a wonderful find. Behold; an unpublished journal of the Boulton Family's travels!
+**MADDIE** (Encouraging): How interesting! How did you come across that?
+**ANTIQUEDEALER**: I’ve been doing some research on your family history and came across it in the library...
+**MADDIE** (Thinking): You’re doing research on my family? What for?
+**ANTIQUEDEALER** (Thinking): Well... It’s more of a hobby, actually. I love history, and your family seems to have a fascinating one.
+**MADDIE** (Doubtful): You can say that again! I wish I knew more...
+**ANTIQUEDEALER** (Relaxed): Well, if I find anything interesting, I’ll let you know!
+**MADDIE**: Great!
 
 ### Julius' Mystery — item discovered: SP_JuliusMystery2023_CollectableItems_04
 `SP_JuliusMystery2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.09.02–26.07.01
@@ -2706,9 +2986,9 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Relaxed): You thought it was Julius, didn’t you?
 **GRANDMA** (Annoyed): Yes, I did...
 
-### SP Misery2025 Decoration Slot36
-`SP_Misery2025_Decoration_Slot36` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Something Ours — part of the event (exact trigger not dumped)
+`SP_Misery2025_Decoration_Slot36` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Something Ours, eventId=SP_Misery2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Something Ours — decoration SP_Misery2025_Decoration_Slot36
@@ -2728,9 +3008,9 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Charming): Hey, don’t worry about it, Kiddo.
 **MADDIE** (Charming): I’m glad you like it.
 
-### SP Pickleball2025 Decoration Slot32 Dialogue
+### Smartphone Pickle — part of the event (exact trigger not dumped)
 `SP_Pickleball2025_Decoration_Slot32_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Smartphone Pickle, eventId=SP_Pickleball2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **DEB** (Encouraging): Where is this pickleball tournament taking place?
 **DEB** (Encouraging): I hope Ursula is prepared to bow down to a superior opposition!
@@ -2770,6 +3050,32 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Doubtful): Oh come on, Julius. You expect me to believe that?!
 **ANTIQUEDEALER** (Relaxed): Well... It's a reasonable assumption!
 
+### SEValentines2023 — decoration SP_Valentines2023_Decoration_28
+`SP_Valentines2023_KissingPorch` · seen 23.09.02–26.07.01
+- trigger: decoration, decoration=SP_Valentines2023_Decoration_28, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**MADDIE** (Charming): I can almost picture it… sharing a good night kiss under the porch after a romantic date.
+**GRANDMA** (Joyous): Brings back memories of all the great times I had with your Grandpa Charlie.
+**GRANDMA**: Come to think of it, this is the second time I got a bouquet of flowers with no name.
+**MADDIE** (Thinking): Wasn’t it from Grandpa Charlie?
+**GRANDMA**: Maybe… or it might have been Julius. Speak of the devil--
+**GRANDMA** (Charming): Julius dear, did you send me a Valentine’s bouquet all those years ago?
+**GRANDMA**: Deb spilled the beans about a little crush you might have had.
+**ANTIQUEDEALER** (Discouraged): Uh.. well… haha… you sister did have a wild imagination. I must run, ladies!
+
+### SEValentines2023 — decoration SP_Valentines2023_Decoration_29
+`SP_Valentines2023_RomanticRooftop` · seen 23.09.02–26.07.01
+- trigger: decoration, decoration=SP_Valentines2023_Decoration_29, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**ANTIQUEDEALER** (Encouraging): All set for spotting eligible suitors, I see?
+**GRANDMA** (Encouraging): Hahaha! We do love how this romantic little watchtower turned out.
+**MADDIE** (Encouraging): Maybe now we’ll catch a glimpse of the mysterious flower bouquet sender.
+**ANTIQUEDEALER** (Surprised): Anonymous flower deliveries? Humph! What’s next, chocolate via mail?
+**ANTIQUEDEALER** (Annoyed): We hardly talk about the sacrifice of St. Valentine–
+**ANTIQUEDEALER**: --In fact, Valentine’s Day goes back to ancient Rome and has a rather dark origin.
+**GRANDMA** (Charming): How fascinating! You’re always full of the most interesting facts, Julius.
+**MADDIE** (Thinking): Wish I could hear more but there’s quite a bit of decorating to do. Bye now.
+
 ### Season Pass - Soccer Watch Party — decoration SP_WorldCup2026_Decoration_Slot33
 `SP_WorldCup2026_Decoration_Slot33_Dialogue` · seen 26.04.01–26.07.01
 - trigger: decoration, decoration=SP_WorldCup2026_Decoration_Slot33, event=Season Pass - Soccer Watch Party, eventKey=SP_WorldCup2026, moment=decoration placed (versions 26.04.01–26.07.01)
@@ -2781,7 +3087,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Encouraging): Wait until you hear it...
 
 ### Tennis Court: Remove weeds
-`TennisCourtDialogueA` · seen 24.04.01–26.07.01
+`TennisCourtDialogueA` · seen 23.09.02–26.07.01
 - trigger: area, area=Tennis Court, areaId=TennisCourt, hotspotId=TennisCourtTopRightWallRemoveWeedsC11, phase=task completed, task=Remove weeds (versions 24.04.01–26.07.01)
 
 **MADDIE**: Hi, Julius! What brings you round?  
@@ -2795,9 +3101,19 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Thinking): I, ahem, have no idea! Goodness, is that the time? I must dash...
 **MADDIE** (Thinking): Hmmm, that was strange! Grandma lied about tennis, and Julius ran away. I'm going to call Deb and find out more!
 
+### Valentine2022Decoration06
+`Valentine2022Decoration06` · seen 22.02.06–22.02.06
+
+**ANTIQUEDEALER** (Surprised): Are those Ursula’s roses?
+**MADDIE**: I guess they are! I planted them for Valentine’s Day!
+**ANTIQUEDEALER** (Frustrated): Valentine's Day! Of course! I totally forgot to get flowers for your grandma…
+**MADDIE** (Charming): You can pick a few from here if you like!
+**ANTIQUEDEALER** (Encouraging): Oh wow! Thanks, but I’ll pass… These roses might remind her of those stormy times with--
+**ANTIQUEDEALER**: Oh my, I really shouldn’t talk about that. See you around!
+**MADDIE** (Surprised): Wait!! Grandma had stormy times with who?!
+
 ### Valentine2022Decoration13
 `Valentine2022Decoration13` · seen 22.02.06–22.02.06
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Joyous): Hearts here, hearts there, hearts everywhere!
 **ANTIQUEDEALER** (Surprised): Well, that’s an impressive confession of love!
@@ -2808,21 +3124,8 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Thinking): I’m almost starting to think she knows something that I don’t…
 **ANTIQUEDEALER** (Doubtful): Well, it wouldn't be the first time, right?
 
-### Valentine2022Decoration6
-`Valentine2022Decoration6` · seen 22.02.06–22.02.06
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
-
-**ANTIQUEDEALER** (Surprised): Are those Ursula’s roses?
-**MADDIE**: I guess they are! I planted them for Valentine’s Day!
-**ANTIQUEDEALER** (Frustrated): Valentine's Day! Of course! I totally forgot to get flowers for your grandma…
-**MADDIE** (Charming): You can pick a few from here if you like!
-**ANTIQUEDEALER** (Encouraging): Oh wow! Thanks, but I’ll pass… These roses might remind her of those stormy times with--
-**ANTIQUEDEALER**: Oh my, I really shouldn’t talk about that. See you around!
-**MADDIE** (Surprised): Wait!! Grandma had stormy times with who?!
-
-### Xmas2021Decoration14
-`Xmas2021Decoration14` · seen 22.02.06–22.02.06
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+### XMas2021Decoration14
+`XMas2021Decoration14` · seen 22.02.06–22.02.06
 
 **ANTIQUEDEALER** (Surprised): Wow… I can’t believe that’s the same gate I ran over with my car!
 **MADDIE**: I’m glad you like it! Are you here to see grandma?

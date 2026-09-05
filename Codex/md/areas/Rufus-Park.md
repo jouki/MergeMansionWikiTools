@@ -2,7 +2,7 @@
 
 
 ### Rufus' Park: Place tunnel frame
-`DogAreaFeelGood1` · seen 24.04.01–26.07.01
+`DogAreaFeelGood1` · seen 23.09.02–26.07.01
 - trigger: area, area=Rufus' Park, areaId=DogArea, hotspotId=DogAreaDogTunnelPlaceTunnelFrameF7, phase=task completed, task=Place tunnel frame (versions 24.04.01–26.07.01)
 
 **MADDIE**: You know, it's been really nice to have a pet, Rufus.
@@ -11,7 +11,7 @@
 **MADDIE** (Encouraging): I guess it doesn't matter - because you're here now!
 
 ### Rufus' Park: Place fence dog house
-`DogAreaFeelGood2` · seen 24.04.01–26.07.01
+`DogAreaFeelGood2` · seen 23.09.02–26.07.01
 - trigger: area, area=Rufus' Park, areaId=DogArea, hotspotId=DogAreaDogHousePlaceFenceDogHouseD8, phase=task completed, task=Place fence dog house (versions 24.04.01–26.07.01)
 
 **MADDIE**: Rufus, when I was a little girl I used to think I could speak dog!
@@ -21,7 +21,7 @@
 **MADDIE** (Joyous): And I guess I can't speak dog at all.
 
 ### Rufus' Park: Unlock Rufus' park
-`DogAreaIntro` · seen 24.04.01–26.07.01
+`DogAreaIntro` · seen 23.09.02–26.07.01
 - trigger: area, area=Rufus' Park, areaId=DogArea, hotspotId=DogAreaUnlock, phase=task completed, task=Unlock Rufus' park (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Rufus, you have way too much energy, don't you? You little fur ball... I won't get much done around here with you "helping" me.
@@ -32,7 +32,7 @@
 **MADDIE** (Thinking): I definitely need a new tool to help me out here!
 
 ### Rufus' Park: Place Rufus sign
-`DogAreaOutro` · seen 24.04.01–26.07.01
+`DogAreaOutro` · seen 23.09.02–26.07.01
 - trigger: area, area=Rufus' Park, areaId=DogArea, hotspotId=DogAreaDogHousePlaceRufusSignD16, phase=task completed, task=Place Rufus sign (versions 24.04.01–26.07.01)
 
 **MADDIE**: I'm not sure if you can read but look over here Rufus! I set up a sign with your name on it!
@@ -46,7 +46,7 @@
 **MADDIE** (Joyous): We came, we saw, we helped a dog!
 
 ### Rufus' Park: Dig out dirty paving
-`DogAreaReceiveSaw` · seen 24.04.01–26.07.01
+`DogAreaReceiveSaw` · seen 23.09.02–26.07.01
 - trigger: area, area=Rufus' Park, areaId=DogArea, hotspotId=DogAreaPreparationDigOutDirtyPavingA13, phase=task completed, task=Dig out dirty paving (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): A table saw will be perfect for the job.

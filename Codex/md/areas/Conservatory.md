@@ -2,7 +2,7 @@
 
 
 ### Conservatory: Place painted stone
-`ConservatoryArea_AfterFinishingRaffelsia` · seen 24.04.01–26.07.01
+`ConservatoryArea_AfterFinishingRaffelsia` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryPlaceBlueStoneDG4, phase=task completed, task=Place painted stone (versions 24.04.01–26.07.01)
 
 **MADDIE** (Joyous): Wow! Everything looks wonderful! I'm no horticulturist, but safe to say I did a good job restoring the place.
@@ -13,7 +13,7 @@
 **MADDIE** (Joyous): I'll hide it somewhere here so I can use it later!
 
 ### Conservatory: Break the lock
-`ConservatoryArea_Intro` · seen 24.04.01–26.07.01
+`ConservatoryArea_Intro` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryOpenConservatoryA1, phase=task completed, task=Break the lock (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Okay Conservatory, let's see why Grandpa sketched you!
@@ -26,7 +26,7 @@
   _(1 cosmetic edit not shown)_
 
 ### Conservatory: Wash rug in flowery scent and place it
-`ConservatoryArea_Outro` · seen 24.04.01–26.07.01
+`ConservatoryArea_Outro` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryPlaceRugDE1, phase=task completed, task=Wash rug in flowery scent and place it (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): There just has to be a way to get into the mansion without setting off the traps!
@@ -37,7 +37,7 @@
 **MADDIE**: I <b>will</b> get into the house, and prove Grandma's innocence once and for all!
 
 ### Conservatory: Try to grow rafflesia again
-`ConservatoryArea_Painting` · seen 24.04.01–26.07.01
+`ConservatoryArea_Painting` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryPlaceRafflesiaFlowerCH3, phase=task completed, task=Try to grow rafflesia again (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): I really want to figure out all there is about the corpse flower and who used to plant them here, but now is not the time.  
@@ -47,7 +47,7 @@
 **MADDIE** (Joyous): I feel just like Charlie making sketches and notes. Haha! I guess the apple doesn't fall far from the tree after all.
 
 ### Conservatory: Remove dirt
-`ConservatoryArea_Scene1` · seen 24.04.01–26.07.01
+`ConservatoryArea_Scene1` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryRemoveDirtAA2, phase=task completed, task=Remove dirt (versions 24.04.01–26.07.01)
 
 **MADDIE** (Doubtful): Well? Why are you here, Winston, if it's not for great-uncle Leonard?  
@@ -60,7 +60,7 @@
   _(1 cosmetic edit not shown)_
 
 ### Conservatory: Clean snail statue
-`ConservatoryArea_Scene2` · seen 24.04.01–26.07.01
+`ConservatoryArea_Scene2` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryPlaceSnailStatueAA4, phase=task completed, task=Clean snail statue (versions 24.04.01–26.07.01)
 
 **MADDIE** (Worried): You said I wouldn't like the reason you're here. What is it, if it isn't to steal for Leonard?
@@ -71,7 +71,7 @@
   _(1 cosmetic edit not shown)_
 
 ### Conservatory: Remove broken glass
-`ConservatoryArea_Scene3` · seen 24.04.01–26.07.01
+`ConservatoryArea_Scene3` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryRemoveGlassAB1, phase=task completed, task=Remove broken glass (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): What is that smell? Is it coming from that huge flower?
@@ -86,7 +86,7 @@
   _(1 cosmetic edit not shown)_
 
 ### Conservatory: Place soil
-`ConservatoryArea_Scene4` · seen 24.04.01–26.07.01
+`ConservatoryArea_Scene4` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryPlaceSoilCA2, phase=task completed, task=Place soil (versions 24.04.01–24.09.03)
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryRemoveFloorTileDamageAB2, phase=task completed, task=Patch the floor (versions 24.11.02–26.07.01)
 
@@ -96,7 +96,7 @@
   _(1 cosmetic edit not shown)_
 
 ### Conservatory: Place pots
-`ConservatoryArea_Scene5` · seen 24.04.01–26.07.01
+`ConservatoryArea_Scene5` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryPlacePotsBA3, phase=task completed, task=Place pots (versions 24.04.01–26.07.01)
 
 **MADDIE**: Sounds... dark. But fine! We'll get back to this later! Meanwhile, can you please tell me something Winston: Did you ever speak to my grandpa Charlie?
@@ -106,7 +106,7 @@
 **WINSTON** (Joyous): He's alive?! I knew it!
 
 ### Conservatory: Cut sturdy dead fern
-`ConservatoryArea_Scene6` · seen 24.04.01–26.07.01
+`ConservatoryArea_Scene6` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryRemoveDeadFernBA6, phase=task completed, task=Cut sturdy dead fern (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): You said you knew Charlie was alive? How would you know that?
@@ -116,7 +116,7 @@
 **WINSTON** (Worried): I'm sorry, but I don't. 
 
 ### Conservatory: Remove lid and place a barrel
-`ConservatoryArea_Scene7` · seen 24.04.01–26.07.01
+`ConservatoryArea_Scene7` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryPlaceHalfBarrelBA7, phase=task completed, task=Remove lid and place a barrel (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): What about the Conservatory, Winston? Do you know what's special about this place?
@@ -130,7 +130,7 @@
 **MADDIE** (Thinking): Yes! Here's an old envelope with something inside! Could it be from Grandpa Charlie?
 
 ### Conservatory: Reuse soil from old flowers
-`ConservatoryArea_Scene8JuliusArrives` · seen 24.04.01–26.07.01
+`ConservatoryArea_Scene8JuliusArrives` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryPlaceHalfBarrelSoilBA8, phase=task completed, task=Reuse soil from old flowers (versions 24.04.01–26.07.01)
 
 **MADDIE**: Hi, Julius! This is good timing. I was just about to read this old letter that I found...  
@@ -145,7 +145,7 @@
 **MADDIE**: Then I know just what I have to do. I need to finally get inside the mansion!
 
 ### Conservatory: Remove debris
-`ConservatoryArea_Scene9UrsulaArrives` · seen 24.04.01–26.07.01
+`ConservatoryArea_Scene9UrsulaArrives` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryRemoveShelfDebrisBB2, phase=task completed, task=Remove debris (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Grandma, I have to get inside the mansion. Do you have the key?

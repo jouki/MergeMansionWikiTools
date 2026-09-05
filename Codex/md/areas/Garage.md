@@ -2,7 +2,7 @@
 
 
 ### Garage: Install trunk
-`GarageCarTaskRevealed` · seen 24.04.01–26.07.01
+`GarageCarTaskRevealed` · seen 23.09.02–26.07.01
 - trigger: area, area=Garage, areaId=Garage, hotspotId=GarageCarInstallSpareTire, phase=task completed, task=Install trunk (versions 24.04.01–26.07.01)
 
 **GRANDMA**: I know this old car is a beauty, but there's something missing. Can you spot it?
@@ -12,7 +12,7 @@
 **GRANDMA**: I'm sure you'll figure it out, dear!
 
 ### Garage: GarageUnlock
-`GarageUnlock` · seen 24.04.01–26.07.01
+`GarageUnlock` · seen 23.09.02–26.07.01
 - trigger: area, area=Garage, areaId=Garage, hotspotId=GarageUnlockGarage, phase=task appears (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): After this incident, it feels like I should check what's inside the Garage.

@@ -55,7 +55,7 @@ Every story in which Heikki speaks.
 **HEIKKI** (Joyous): As do I. A new adventure begins!
 
 ### Heikki's Sauna: Put the heater rocks back
-`Kiuas` · seen 24.04.01–26.07.01
+`Kiuas` · seen 23.09.02–26.07.01
 - trigger: area, area=Heikki's Sauna, areaId=SaunaBurn, hotspotId=SaunaBurnPlaceKiuasRocksO4, phase=task completed, task=Put the heater rocks back (versions 24.04.01–26.07.01)
 
 **MADDIE**: This thing should heat the sauna to a nice and toasty temperature of...
@@ -68,6 +68,15 @@ Every story in which Heikki speaks.
 - trigger: item, event=The Great Bake-off, eventKey=LBE_May2023, itemKeys=['LBE_May2023_Cakes_07'], items=['Classic Layer Cake'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **HEIKKI** (Surprised): *Gulp*
+
+### The Great Bake-off — item discovered: Chicken Nest
+`LBE_May2023EggNest` · seen 23.09.02–26.07.01
+- trigger: item, event=The Great Bake-off, eventKey=LBE_May2023, itemKeys=['LBE_May2023_Nest_01'], items=['Chicken Nest'], moment=item discovered (versions 23.09.02–23.11.02)
+
+**JACKIE** (Surprised): A nest? What am I supposed to do with this?!
+**GRANDMA** (Thinking): Hmm... It is a bake-off after all, so I'll probably need a lot of eggs.  
+  _(1 cosmetic edit not shown)_
+**HEIKKI** (Joyous): I might need a chicken coop...
 
 ### LBE_May2023 — entering board
 `LBE_May2023Intro` · seen 23.06.02–26.07.01
@@ -93,7 +102,7 @@ Every story in which Heikki speaks.
   _(1 cosmetic edit not shown)_
 
 ### The Great Bake-off — event end
-`LBE_May2023Outro` · seen 24.04.01–26.07.01
+`LBE_May2023Outro` · seen 23.09.02–26.07.01
 - trigger: event, event=The Great Bake-off, eventId=LBE_May2023, eventType=Leaderboard Event, moment=event end (versions 24.04.01–26.07.01)
 
 **PEARL** (Encouraging): Well done everyone! I've never seen such amazing cakes!
@@ -106,7 +115,7 @@ Every story in which Heikki speaks.
 **PEARL** (Encouraging): Oh! Well then to everyone, Moro!
 
 ### Lighthouse: Move the nest back to its old location
-`Lighthouse10_Ending` · seen 24.04.01–26.07.01
+`Lighthouse10_Ending` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthouseSwapMagPieNestC22, phase=task completed, task=Move the nest back to its old location (versions 24.04.01–26.07.01)
 
 **MADDIE**: How did the riddle go? The one Grandpa Charlie made you memorize?   
@@ -128,8 +137,21 @@ You will find one hidden beneath me.”
 **MADDIE**: Thanks, Heikki, I'll see you later.
 **HEIKKI** (Joyous): Moro! 
 
+### Lighthouse: Place new bridge board
+`Lighthouse2_Attheentrance` · seen 23.09.02–26.07.01
+- trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthousePlaceBridgedeckingBoardA22, phase=task completed, task=Place new bridge board (versions 24.04.01–25.02.03)
+
+**MADDIE** (Encouraging): Alright, Maddie, you can do this! You're about to finally meet your grandpa!
+**MADDIE** (Joyous): Hello? Helloooo? Is anyone there?
+**HEIKKI** (Doubtful): Moro! And you are?
+**MADDIE** (Joyous): It's, well, it's Maddie! Your granddaughter.
+**HEIKKI**: Maddie? I'm not your grandfather, I'm Heikki! But we should lift the cat onto the table together.
+**MADDIE** (Discouraged): Huh?! Who?! What does that mean?
+**HEIKKI** (Joyous): It is a saying in my birth country, Finland! It means we need to talk, so follow me.
+**MADDIE** (Thinking): I'm not sure I should be following a weird stranger, but I really need to find out more!
+
 ### Lighthouse: Remove bird feathers
-`Lighthouse3_Magpies` · seen 24.04.01–26.07.01
+`Lighthouse3_Magpies` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthouseRemoveMagpieFeathersB4, phase=task completed, task=Remove bird feathers (versions 24.04.01–25.02.03)
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthouseRemoveSandDustyC3, phase=task completed, task=Remove planks (versions 25.04.02–26.07.01)
 
@@ -144,7 +166,7 @@ You will find one hidden beneath me.”
 **HEIKKI** (Thinking): You could say that, yes indeed you could. Charlie Boulton saved my life!
 
 ### Lighthouse: Remove bird feathers and leaves
-`Lighthouse4_Bookclub` · seen 24.04.01–26.07.01
+`Lighthouse4_Bookclub` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthouseSwapMagpieFeathersF1, phase=task completed, task=Remove bird feathers and leaves (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): You have to tell me how my grandpa saved you!
@@ -157,7 +179,7 @@ You will find one hidden beneath me.”
 **HEIKKI** (Thinking): Now come with me, I want to show you another place.
 
 ### Lighthouse: Clean pile of twigs and sticks
-`Lighthouse5.1_Storm` · seen 24.04.01–26.07.01
+`Lighthouse5.1_Storm` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthouseSwapMagpieC1, phase=task completed, task=Clean pile of twigs and sticks (versions 24.04.01–25.02.03)
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthousePlacePiersmallwoodC5, phase=task completed, task=Place new pier section (versions 25.04.02–26.07.01)
 
@@ -169,7 +191,7 @@ You will find one hidden beneath me.”
 **HEIKKI** (Worried): My little friends had to relocate to the chimney and now I can't heat up my sauna anymore...
 
 ### Lighthouse: Add missing weathervane
-`Lighthouse5.2_Weathervane` · seen 24.04.01–26.07.01
+`Lighthouse5.2_Weathervane` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthousePlaceHeroRewardWeatherWizardF0, phase=task completed, task=Add missing weathervane (versions 24.04.01–26.07.01)
 
 **HEIKKI** (Joyous): Hey! You fixed the weathervane! 
@@ -181,7 +203,7 @@ You will find one hidden beneath me.”
 **MADDIE** (Thinking): I wonder why Grandpa isn't up there?
 
 ### Lighthouse: Remove reeds
-`Lighthouse5_Birds` · seen 24.04.01–26.07.01
+`Lighthouse5_Birds` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthouseRemoveReedShoreC12, phase=task completed, task=Remove reeds (versions 24.04.01–26.07.01)
 
 **MADDIE**: About the birds...
@@ -199,7 +221,7 @@ You will find one hidden beneath me.”
 **MADDIE** (Thinking): Hmmm. Maybe if I fix up the old nest...
 
 ### Lighthouse: Place lifebuoy
-`Lighthouse6_Atfireplace` · seen 24.04.01–26.07.01
+`Lighthouse6_Atfireplace` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthousePlaceBeachLifeSaverFixed01H9, phase=task completed, task=Place lifebuoy (versions 24.04.01–26.07.01)
 
 **HEIKKI**: Here we go, the place I first met Charlie. We were both very young men at the time.
@@ -210,7 +232,7 @@ You will find one hidden beneath me.”
 **HEIKKI** (Worried): He did. But that was many years later...
 
 ### Lighthouse: Place a pole
-`Lighthouse7_Spoontocorner` · seen 24.04.01–26.07.01
+`Lighthouse7_Spoontocorner` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthousePlaceNetsPostH11, phase=task completed, task=Place a pole (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Will you tell me how Grandpa saved you now?
@@ -223,7 +245,7 @@ You will find one hidden beneath me.”
 **MADDIE**: Look, Heikki, I know we don't really know each other, and you, uh, talk to birds, but I need to tell you something...
 
 ### Lighthouse: Place ball of yarn
-`Lighthouse8_Cinnamon` · seen 24.04.01–26.07.01
+`Lighthouse8_Cinnamon` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthousePlaceBallofYarnPinkH14, phase=task completed, task=Place ball of yarn (versions 24.04.01–26.07.01)
 
 **MADDIE**: Okay. Thing is, Grandpa's not dead! In fact, he sent me on a quest.
@@ -236,7 +258,7 @@ You will find one hidden beneath me.”
 **MADDIE** (Thinking): Alright, Heikki. I'll tell you about Grandpa, then I need to ask you something else...
 
 ### Lighthouse: Place top rocks
-`Lighthouse9_Riddle` · seen 24.04.01–26.07.01
+`Lighthouse9_Riddle` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthousePlaceKummeliTopC20, phase=task completed, task=Place top rocks (versions 24.04.01–26.07.01)
 
 **MADDIE** (Worried): This is a weird question, but did Grandpa tell you how to get into the Boulton mansion?
@@ -248,7 +270,6 @@ You will find one hidden beneath me.”
 
 ### Sauna01
 `Sauna01` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **HEIKKI**: It doesn't help to cry at the market, you know...
 **MADDIE** (Encouraging): Oh alright... What needs to be done?
@@ -259,7 +280,6 @@ You will find one hidden beneath me.”
 
 ### Sauna02
 `Sauna02` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **HEIKKI**: Thank you for all the help so far!
 **MADDIE** (Encouraging): No problem, Heikki! Speaking of which, I noticed your lighthouse is an absolute mess!
@@ -273,7 +293,6 @@ You will find one hidden beneath me.”
 
 ### Sauna03
 `Sauna03` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **HEIKKI**: No niin! You'll need the right type of wood, if you want to build a proper Finnish sauna.
 **MADDIE** (Thinking): I'm sure any type of wood would work.
@@ -286,7 +305,6 @@ You will find one hidden beneath me.”
 
 ### Sauna04
 `Sauna04` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **HEIKKI** (Charming): You know, this reminds me of the time when Charlie accidentally burned the sauna down.
 **MADDIE** (Surprised): What?! 
@@ -305,7 +323,6 @@ You will find one hidden beneath me.”
 
 ### Sauna05
 `Sauna05` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE**: You mentioned lock picks earlier?
 **HEIKKI** (Charming): Ah yes! Your grandfather was a rogue/assassin!
@@ -318,7 +335,6 @@ You will find one hidden beneath me.”
 
 ### Sauna06
 `Sauna06` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **HEIKKI** (Joyous): Every good sauna needs a good "kiuas"!
 **MADDIE** (Encouraging): That's what heats the sauna, right?
@@ -331,7 +347,6 @@ You will find one hidden beneath me.”
 
 ### SaunaIntro
 `SaunaIntro` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): Is everything alright?! Is the lighthouse on fire?  
   _earlier:_ ~~Is everything alright?! What happened?~~ (until 25.02.02)
@@ -347,7 +362,7 @@ You will find one hidden beneath me.”
 **MADDIE** (Surprised): Again?!
 
 ### Heikki's Sauna: Heat up the Sauna
-`SaunaOutro` · seen 24.04.01–26.07.01
+`SaunaOutro` · seen 23.09.02–26.07.01
 - trigger: area, area=Heikki's Sauna, areaId=SaunaBurn, hotspotId=SaunaBurnPlaceSaunaFireplaceOA1, phase=task completed, task=Heat up the Sauna (versions 24.04.01–26.07.01)
 
 **HEIKKI**: Today must be your lucky day because I found those lock picks I was telling you about!
@@ -357,7 +372,7 @@ You will find one hidden beneath me.”
 **MADDIE** (Joyous): Hold on... I know what he means! 
 
 ### Heikki's Sauna: Add vihta to the barrel
-`WaterBasin` · seen 24.04.01–26.07.01
+`WaterBasin` · seen 23.09.02–26.07.01
 - trigger: area, area=Heikki's Sauna, areaId=SaunaBurn, hotspotId=SaunaBurnPlaceBarrelVihta02N11, phase=task completed, task=Add vihta to the barrel (versions 24.04.01–26.07.01)
 
 **MADDIE**: Oooh! This looks inviting! 

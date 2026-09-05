@@ -26,3 +26,24 @@
 **MADDIE** (Surprised): Really? I didn't expect you to get so excited...
 **GRANDMA** (Charming): I could create all kinds of great content for my social media! People love cat videos.
 **MADDIE** (Doubtful): So you say...
+
+### Whiskers & Whispers — part of the event (exact trigger not dumped)
+`SP_AmyPet2025_TA1_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Whiskers & Whispers, eventId=SP_AmyPet2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**JACKIE** (Encouraging): You just couldn't say no to Emilio!
+**MADDIE** (Discouraged): No... But Amy is actually a really lovely cat. Look - she's so happy in her new home!
+**JACKIE** (Doubtful): What is your Grandma doing?
+**MADDIE** (Relaxed): Oh, she's "creating content for her social media."
+**JACKIE** (Doubtful): Is she really doing that or is she using Amy as a cover for whatever she is ACTUALLY doing?
+
+### Whiskers & Whispers — part of the event (exact trigger not dumped)
+`SP_AmyPet2025_TA2_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Whiskers & Whispers, eventId=SP_AmyPet2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Joyous): Ta-da! Isn't it great? I think I've thought of everything, and Amy seems very satisfied.
+**GRANDMA** (Relaxed): She should be! What a wonderful little place.
+**GRANDMA** (Relaxed): Let me just snap a couple of photos of it.
+**MADDIE** (Doubtful): What account is that you've got open on your phone?
+**GRANDMA** (Surprised): Oh, this? I think this phone is acting up, always switching things up...
+**GRANDMA** (Thinking): Here we go. These cat photos will be gold for my followers!

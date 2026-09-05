@@ -60,7 +60,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Doubtful): Grandma!
 
 ### Pool House Patio: Open jammed Patio door
-`BBQArea_Intro` · seen 24.04.01–26.07.01
+`BBQArea_Intro` · seen 23.09.02–26.07.01
 - trigger: area, area=Pool House Patio, areaId=BBQArea, hotspotId=PoolHouseOpenBBQArea, phase=task completed, task=Open jammed Patio door (versions 24.04.01–26.07.01)
 
 **MADDIE**: You wanted to see me, Grandma? What's going on?
@@ -73,7 +73,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Joyous): Well, we should fix it up! I promise that I'll make it look beautiful for you.
 
 ### Pool House Patio: Clean pavement
-`BBQArea_Outro` · seen 24.04.01–26.07.01
+`BBQArea_Outro` · seen 23.09.02–26.07.01
 - trigger: area, area=Pool House Patio, areaId=BBQArea, hotspotId=BBQAreaSidePathWashPavement, phase=task completed, task=Clean pavement (versions 24.04.01–26.07.01)
 
 **GRANDMA** (Encouraging): Maddie, you've outdone yourself! It's as if you've turned back time.
@@ -84,7 +84,7 @@ Every story in which Grandma speaks.
 **GRANDMA** (Frustrated): I don't want to talk about that! Just... let's get back to gardening and forget it.
 
 ### Dining Room: Restore the old baby chair
-`BabyChair` · seen 24.04.01–26.07.01
+`BabyChair` · seen 23.09.02–26.07.01
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomSwapHighchairRundownEb2, phase=task completed, task=Restore the old baby chair (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Grandma, why is there a baby chair here?
@@ -93,7 +93,6 @@ Every story in which Grandma speaks.
 
 ### BeachRightDiscovered
 `BeachRightDiscovered` · seen 22.02.06–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Encouraging): What was this space all about? It's nothing like a grand mansion.
 **GRANDMA** (Thinking): This was where Skatie Katie and Hang Ten hung out. Their little slice of paradise.
@@ -106,7 +105,6 @@ Every story in which Grandma speaks.
 
 ### BeachRightTotemFinished
 `BeachRightTotemFinished` · seen 22.02.06–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Encouraging): Alright, mind blown! So he was a surfer, she was a roller skater, and they came together and made skateboards?
 **GRANDMA** (Surprised): That's right, sweetie. Cousin Katie always said they invented the skateboard.
@@ -118,7 +116,6 @@ Every story in which Grandma speaks.
 
 ### BeachRightWorkshopCleanedUp
 `BeachRightWorkshopCleanedUp` · seen 22.02.06–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE**: What's with all of these surfboards?
 **GRANDMA** (Surprised): Casey was one of the most famous surfers back in the day. He was looking for big waves. He was a legend.
@@ -128,20 +125,19 @@ Every story in which Grandma speaks.
 **GRANDMA** (Discouraged): I can’t answer that right now! Not without first pouring myself a mint julep. Back in a swish!
 **GRANDMA** (Doubtful): In fact, I don't think I want to talk about it right now. Sorry, Maddie.
 
-### Bonus BlackCard
-`Bonus_BlackCard` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Bonus reward dialogue (versions None–None)
+### BonusItems — item discovered: Boulton's Lightning Card, Boulton's Lightning Card
+`BonusBlackCard` · seen 23.09.02–26.07.01
+- trigger: item, event=BonusItems, eventKey=BonusItems, itemKeys=['LevelUpBoosterBlackCard_01', 'EventLevelUpBoosterBlackCard_01'], items=["Boulton's Lightning Card", "Boulton's Lightning Card"], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Joyous): I got this as a present for my birthday. I was told to only use it for emergencies.
 **MADDIE**: I think fixing up this mansion qualifies as an emergency!
 **MADDIE**: Try dragging it onto any item with a lightning symbol on it.
 **MADDIE**: That will increase the item’s level.
-**MADDIE**: Two Lightning Cards can be stacked together to combine their charges.
 **GRANDMA** (Worried): Where did I put my Lightning Card? Or did I loan it to someone?
 
-### Bonus BlueCard
-`Bonus_BlueCard` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Bonus reward dialogue (versions None–None)
+### BonusItems — item discovered: Ursula's Blue Card, Ursula's Blue Card
+`BonusBlueCard` · seen 23.09.02–26.07.01
+- trigger: item, event=BonusItems, eventKey=BonusItems, itemKeys=['LevelUpBoosterBlueCard_01', 'EventLevelUpBoosterBlueCard_01'], items=["Ursula's Blue Card", "Ursula's Blue Card"], moment=item discovered (versions 23.09.02–26.07.01)
 
 **GRANDMA** (Joyous): I really do like the color blue...the color of the bright sky!
 **MADDIE** (Joyous): I prefer orange.
@@ -152,9 +148,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Charming): That's nice but I still prefer orange.
 **GRANDMA** (Encouraging): Darling, you will learn to appreciate blue in time.
 
-### Bonus Scissors
-`Bonus_Scissors` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Bonus reward dialogue (versions None–None)
+### BonusItems — item discovered: Scissors, Scissors
+`BonusScissors` · seen 23.09.02–26.07.01
+- trigger: item, event=BonusItems, eventKey=BonusItems, itemKeys=['LevelDownBoosterScissors_01', 'EventLevelDownBoosterScissors_01'], items=['Scissors', 'Scissors'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Ooh what's this?!? Scissors!
 **MADDIE**: Rumor has it that this will give its owner good fortune. 
@@ -183,7 +179,7 @@ Every story in which Grandma speaks.
 **GRANDMA**: And he has not visited for a while... Maybe you should pay him a visit and make sure he has not expired under a pile of stamps.
 
 ### Legacy Lane — entering board
-`CBE_AmeliaBoulton2024_IntroDialogue_Dialogue` · seen 25.06.01–26.07.01
+`CBE_AmeliaBoulton2024_IntroDialogue_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Legacy Lane, eventId=CBE_AmeliaBoulton2024, eventType=Collectible Board Event, moment=entering board (versions 25.06.01–26.07.01)
 - trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_HistoricalCostumes_05'], items=['Umbrella'], moment=item discovered (versions 26.04.01–26.07.01)
 
@@ -370,7 +366,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Doubtful): I know he was...
 
 ### Spooktacular Backyard Bash — event start
-`CBE_BackyardBash2024_Intro_Dialogue` · seen 26.04.02–26.07.01
+`CBE_BackyardBash2024_Intro_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Spooktacular Backyard Bash, eventId=CBE_BackyardBash2024, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **GRANDMA** (Thinking): The skeletons should go here... And a big, bubbling cauldron here.
@@ -441,6 +437,79 @@ Every story in which Grandma speaks.
 **GRANDMA** (Joyous): Besides, little Mason seems to love it!
 **MADDIE** (Encouraging): He does, doesn't he?
 
+### Easter 2025 — item discovered: Grandma
+`CBE_Easter2025_Character_04_Dialogue` · seen 25.05.01–26.03.01
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Character5_01'], items=['Grandma'], moment=item discovered (versions 25.05.01–26.03.01)
+
+**GRANDMA**: Are your chocolates ready?
+**MADDIE**: Almost! I developed an auxiliary system for the glazing and it's turning out great stuff.
+**GRANDMA** (Charming): I suppose you will build a cake machine next!
+**MADDIE** (Thinking): Hmmm...
+**GRANDMA** (Surprised): I was only joking, dearie!
+**MADDIE** (Encouraging): Why not? I already built a candy machine AND a chocolate machine, so why not a cake machine, too?
+
+### Easter 2025 — item discovered: Chocolate Machine Melting
+`CBE_Easter2025_ChocoMachineProducing_Dialogue` · seen 25.05.01–26.03.01
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_ChocoMachineProducing_01'], items=['Chocolate Machine Melting'], moment=item discovered (versions 25.05.01–26.03.01)
+
+**MADDIE** (Joyous): We're in business!
+**GRANDMA** (Charming): What an impressive contraption! A chocolate machine, I presume?
+**MADDIE** (Relaxed): You presume correctly. What do you think?
+**GRANDMA** (Thinking): Are those parts from Ignatius' old machine?
+**MADDIE** (Thinking): Yes... I did borrow a couple of nuts and bolts... and hoses and levers... but it all runs great, I guarantee it.
+**GRANDMA** (Relaxed): I am sure! So, what recipe are you going to use for the chocolates?
+**MADDIE** (Surprised): Recipe?
+**GRANDMA** (Joyous): You need a recipe to make chocolates, dearie.
+**MADDIE** (Thinking): That does make sense...
+**GRANDMA**: I think I can help. Let's get the old family recipe book.
+**GRANDMA**: If I remember correctly, Agatha - that's Ignatius's wife - had a good recipe for chocolates.
+**GRANDMA** (Charming): It was quite... special!
+
+### Easter 2025 — item discovered: Creative Treats
+`CBE_Easter2025_EasterEggs_05_Dialogue` · seen 25.05.01–26.03.01
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Eggs_05'], items=['Creative Treats'], moment=item discovered (versions 25.05.01–26.03.01)
+
+**MADDIE** (Worried): Grandma, I need you!
+**GRANDMA** (Surprised): What is it, dearie? The chocolate machine didn't blow up, did it?
+**MADDIE** (Thinking): No... the chocolate machine is fine, but I'm in serious trouble. I forgot to paint the eggs for the egg hunt!
+**MADDIE** (Thinking): Could you help me? I got so carried away with the old blueprints and the machines.
+**MADDIE** (Frustrated): I still need to wrap the lollipops and fix a cylinder on the candy machine and...
+**GRANDMA** (Encouraging): Don't worry about the eggs. I will take care of everything!
+
+### Easter 2025 — item discovered: Bowl of Easter Eggs
+`CBE_Easter2025_EasterEggs_07_Dialogue` · seen 25.05.01–26.03.01
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Eggs_07'], items=['Bowl of Easter Eggs'], moment=item discovered (versions 25.05.01–26.03.01)
+
+**GRANDMA**: Julius, you have to hurry up. We still have dozens of eggs to paint.
+**ANTIQUEDEALER** (Frustrated): You invited me over for some apple pie. I did not sign up for all of this painting!
+**ANTIQUEDEALER** (Surprised): How many eggs do we really need for this egg hunt, Ursula?
+**GRANDMA** (Annoyed): Just keep painting!
+**DEB** (Surprised): What is going on, Ursula? I got your message and rushed right over.
+**GRANDMA** (Encouraging): Deb! At the nick of time, too! Here is a brush and some paints, and there are your eggs.
+**DEB** (Frustrated): What is the meaning of this?
+**GRANDMA** (Encouraging): We are in a hurry, Deb. The sooner you start painting, the sooner we are ready for the egg hunt!
+
+### Easter 2025 — item discovered: Ultimate Easter Basket
+`CBE_Easter2025_EasterEggs_10_Dialogue` · seen 25.05.01–26.03.01
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Eggs_10'], items=['Ultimate Easter Basket'], moment=item discovered (versions 25.05.01–26.03.01)
+
+**ANTIQUEDEALER** (Annoyed): That HAS to be it. I simply cannot paint another egg!
+**GRANDMA** (Relaxed): I think we are done! Thank you both!
+**DEB** (Annoyed): I think I was promised pie in return for my help!
+**ANTIQUEDEALER** (Worried): I think my rheumatism is flaring up...
+
+### Easter 2025 — item discovered: Pastry Machine Baking
+`CBE_Easter2025_PastryMachineProducing_Dialogue` · seen 25.05.01–26.03.01
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_PastryMachineProducing_01'], items=['Pastry Machine Baking'], moment=item discovered (versions 25.05.01–26.03.01)
+
+**GRANDMA**: You know this whole thing started with an egg hunt, right?
+**MADDIE** (Encouraging): Yeah, but who am I to stand in the way of progress? It's been a long time since I got to build something really exciting.
+**MADDIE** (Encouraging): Come on, you have to admit - a cake baking machine is a pretty nifty little invention.
+**GRANDMA** (Relaxed): It is very impressive, dearie.
+**GRANDMA** (Thinking): But are you sure the pressurized extrusion manifold won't destabilize the flow equilibrium?
+**MADDIE** (Surprised): That's actually a good question... H-how did you...
+**GRANDMA** (Charming): Anyone can see that the nozzle array is not quite right. Let me show you...
+
 ### Flashback Rewind — entering board
 `CBE_Flashback2025_Intro_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Flashback Rewind, eventId=CBE_Flashback2025, eventType=Collectible Board Event, moment=entering board (versions 25.05.01–26.07.01)
@@ -469,26 +538,13 @@ Every story in which Grandma speaks.
 **MADDIE** (Relaxed): This time you're off the hook. But let's talk about your old 80s clothes!
 **GRANDMA** (Joyous): Now they are something I have no explanation for!
 
-### Frosty Secrets — event end
-`CBE_FrostySecrets2024_Outro_Dialogue` · seen 24.11.02–26.07.01
-- trigger: event, event=Frosty Secrets, eventId=CBE_FrostySecrets2024, eventType=Collectible Board Event, moment=event end (versions 24.11.02–26.07.01)
+### Frosty Secrets — decoration CBE_FrostySecrets2024_Decoration_Slot10
+`CBE_FrostySecrets2024_DecoSlot_10_Dialogue` · seen 25.05.01–25.06.01
+- trigger: decoration, decoration=CBE_FrostySecrets2024_Decoration_Slot10, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, moment=decoration placed (versions 25.05.01–25.06.01)
 
-**PEARL** (Encouraging): Thank you for this little trip. Being up in the mountains wasn't anything like I thought!  
-  _earlier:_ ~~Where have you been? I baked an apple pie, but you were nowhere to be found!~~ (until 25.10.01)
-**MADDIE**: But have you changed your mind about the winter?  
-  _earlier:_ ~~Actually... I found an old map that led to a cabin in the mountains. So I hiked up there to see what I could find.~~ (until 25.10.01)
-**PEARL** (Thinking): It’s still cold and there's a LOT of snow, but I’m starting to see the appeal.  
-  _earlier:_ ~~I think it used to be Grandpa Charlie's. Did you know about it?~~ (until 25.10.01)
-**PEARL** (Thinking): It's a whole vibe - refreshing and peaceful.  
-  _earlier:_ ~~A cabin in the mountains?~~ (until 25.10.01)
-**MADDIE** (Thinking): Completely. I mean, apart from the bears. And wolves.  
-  _earlier:_ ~~Well... You are right. It was Charlie's. He loved the great outdoors, so he used to go there to hike and enjoy the peace and quiet.~~ (until 25.10.01)
-**PEARL** (Surprised): You never told me there were bears and wolves!  
-  _earlier:_ ~~I never went there with him. I don't even know its exact location.~~ (until 25.10.01)
-**MADDIE** (Encouraging): Well, I didn’t want to spoil the surprise - it’s part of the full winter experience package!  
-  _earlier:_ ~~Everything was still there, in perfect order. He clearly intended to go back but never did.~~ (until 25.10.01)
-**MADDIE** (Doubtful): What happened to him, Grandma?
-**GRANDMA** (Relaxed): That's enough secrets for one day, dearie. I... I will tell you one day, but let's try that apple pie.
+**MADDIE** (Encouraging): What do you think? It's supposed to be a carving of you.
+**GRANDMA** (Charming): It is... very artistic! Lovely work, Maddie. I didn't know you were so handy with a saw.
+**MADDIE** (Relaxed): I guess I've picked up some skills while renovating the Mansion.
 
 ### Haunted Halloween — item discovered: Wrapped Lollipop
 `CBE_Halloween2025_Points_03_Dialogue` · seen 26.03.01–26.07.01
@@ -717,16 +773,16 @@ Every story in which Grandma speaks.
 **MADDIE**: There's no hiding from me now, big fish. This rod has your name on it!
 **GRANDMA**: I remember hearing a story once about a fisher catching something very large and rare with a rod like that...
 
-### CBE LuckyCatch GrandmaSuitcase
+### Lucky Catch — part of the event (exact trigger not dumped)
 `CBE_LuckyCatch_GrandmaSuitcase` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Lucky Catch, eventId=CBE_LuckyCatch, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Ugh... This thing is heavy! Wait, a minute! Is this a suitcase?!
 **GRANDMA** (Surprised): OH! Well, it looks like a piece of old junk. You should throw it in the trash when we get back.
 **MADDIE** (Thinking): Does that look like C.B. to you?
 
 ### Lucky Catch — entering board
-`CBE_LuckyCatch_Intro` · seen 24.04.01–26.07.01
+`CBE_LuckyCatch_Intro` · seen 23.09.02–26.07.01
 - trigger: event, event=Lucky Catch, eventId=CBE_LuckyCatch, eventType=Collectible Board Event, moment=entering board (versions 24.04.01–26.07.01)
 
 **MADDIE**: Nothing like going out for a relaxing fishing trip, right Grandma?
@@ -777,18 +833,18 @@ Every story in which Grandma speaks.
 **GRANDMA** (Joyous): Hahaha! You sound like your Grandpa Charlie. 
 **GRANDMA** (Encouraging): He had such big fish stories. Swore he caught the Loch Ness Monster, once.
 
-### CBE LuckyCatch MaxGrandmaNote
+### Lucky Catch — part of the event (exact trigger not dumped)
 `CBE_LuckyCatch_MaxGrandmaNote` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Lucky Catch, eventId=CBE_LuckyCatch, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Grandma! I think I've pieced together what looks like a...
 **MADDIE** (Thinking): A message! Or a riddle? Huh? What does this even mean?!
 **MADDIE** (Thinking): From the depths, secrets gleam unseen, thus from porcelain's embrace, you'll will find treasures previously unseen.
 **GRANDMA** (Frustrated): See? Nonsense! I wouldn't even bother asking around about it...
 
-### CBE LuckyCatch MaxNutsAndBolts
+### Lucky Catch — part of the event (exact trigger not dumped)
 `CBE_LuckyCatch_MaxNutsAndBolts` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Lucky Catch, eventId=CBE_LuckyCatch, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Doubtful): I think we should pick the lock! 
 **GRANDMA** (Doubtful): I doubt there's anything of worth in there...
@@ -829,9 +885,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Joyous): Look at this fish, Grandma! Isn't it great?!
 **GRANDMA** (Charming): It's magnificent! I guess your fancy gear really helped!
 
-### CBE LuckyCatch TornLetterLv1
+### Lucky Catch — part of the event (exact trigger not dumped)
 `CBE_LuckyCatch_TornLetterLv1` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Lucky Catch, eventId=CBE_LuckyCatch, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Discouraged): Aaw... Just a bunch of soggy paper... 
 **MADDIE** (Thinking): Hmm, there's some writing on them, but they're falling apart, fast!
@@ -869,9 +925,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Worried): Are you sure you can pick it up? Maybe you can sit next to it?
 **MADDIE** (Worried): No... No-... I got this! I... Ugh..  HAVE YOU TAKEN THE PICTURE YET?!
 
-### CBE LuckyCatch WorldRecordFish
+### Lucky Catch — part of the event (exact trigger not dumped)
 `CBE_LuckyCatch_WorldRecordFish` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Lucky Catch, eventId=CBE_LuckyCatch, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **GRANDMA** (Thinking): How heavy did you say that fish was?!
 **MADDIE**: How come?
@@ -885,9 +941,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Worried): I swear I almost saw you get pulled off the side twice...
 **MADDIE** (Joyous): I almost did! It was so exciting!
 
-### CBE MaddieInJapan2025 Food 01 Dialogue
-`CBE_MaddieInJapan2025_Food_01_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+### Maddie in Japan — part of the event (exact trigger not dumped)
+`CBE_MaddieInJapan2025_Food_01_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Maddie in Japan, eventId=CBE_MaddieInJapan2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Maddie in Japan — item discovered: Onigiri
@@ -904,9 +960,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Encouraging): What a feast, Grandma! How did you learn to cook this?
 **GRANDMA** (Charming): I picked up a trick or two while I was traveling.
 
-### CBE MaddieInJapan2025 GettingReady 01 Dialogue
-`CBE_MaddieInJapan2025_GettingReady_01_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+### Maddie in Japan — part of the event (exact trigger not dumped)
+`CBE_MaddieInJapan2025_GettingReady_01_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Maddie in Japan, eventId=CBE_MaddieInJapan2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Maddie in Japan — item discovered: Travel Charger
@@ -962,9 +1018,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): Well, she is a bright girl. What does she write?
 **GRANDMA** (Relaxed): Let’s see... “Finally in Shibuya. I've found what I was looking for - complete holiday mood. Grandma’s postcards make sense now.”
 
-### CBE MaddieInJapan2025 Souvenirs 03 Dialogue
-`CBE_MaddieInJapan2025_Souvenirs_03_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+### Maddie in Japan — part of the event (exact trigger not dumped)
+`CBE_MaddieInJapan2025_Souvenirs_03_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Maddie in Japan, eventId=CBE_MaddieInJapan2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Maddie in Japan — item discovered: Daruma Doll
@@ -1104,7 +1160,6 @@ Every story in which Grandma speaks.
 
 ### CBE TheGreatEscapeA CleanerCart1 Dialogue
 `CBE_TheGreatEscapeA_CleanerCart1_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 **GRANDMA**: Hmm... I’ll use this to get around and “clean up”.
 **GRANDMA**: You never know what useful things people throw away.
@@ -1112,7 +1167,6 @@ Every story in which Grandma speaks.
 
 ### CBE TheGreatEscapeA GrandmasCell Dialogue
 `CBE_TheGreatEscapeA_GrandmasCell_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 **GRANDMA** (Charming): Finally! The last bar is off. Time to go!
 **GRANDMA**: Good thing I found these Bolt Cutters! 
@@ -1120,18 +1174,13 @@ Every story in which Grandma speaks.
 
 ### CBE TheGreatEscapeA Intro Dialogue
 `CBE_TheGreatEscapeA_Intro_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 **GRANDMA** (Calling): Well, that was easy enough!
 **GRANDMA** (Calling): I still need to earn my fellow inmate’s trust and I heard this place has been having trouble with their mail...
 **GRANDMA** (Charming): I know! I'll charm them with my baking skills and make sure their letters get sent properly.
-**MADDIE** (Calling): But what?
-**GRANDMA** (Calling): I’m in a bit of a bind right now...
-**GRANDMA** (Calling): Would you be a dear and help me out?
 
 ### CBE TheGreatEscapeA PaperAndPen3 Dialogue
 `CBE_TheGreatEscapeA_PaperAndPen3_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 **GRANDMA**: Hmm... Looks like some of the girls have been writing letters.
 **GRANDMA**: I shouldn’t open them now.
@@ -1140,7 +1189,6 @@ Every story in which Grandma speaks.
 
 ### CBE TheGreatEscapeA PostBox Dialogue
 `CBE_TheGreatEscapeA_PostBox_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 **MADDIE** (Calling): You want me to go through the mail?!
 **GRANDMA** (Calling): Yes, dearie.
@@ -1149,7 +1197,6 @@ Every story in which Grandma speaks.
 
 ### CBE TheGreatEscapeA Socks05 Dialogue
 `CBE_TheGreatEscapeA_Socks05_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 **GRANDMA**: Ah, perfect!
 **GRANDMA**: These jail outfits should contain the ID badges I need to get into the other rooms.
@@ -1157,7 +1204,6 @@ Every story in which Grandma speaks.
 
 ### CBE TheGreatEscapeA StampThirdClass1 Dialogue
 `CBE_TheGreatEscapeA_StampThirdClass1_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 **GRANDMA** (Charming): Let’s make sure these letters make their way to their destination.
 **GRANDMA**: Oh... These remind me of Maddie’s stamp collection!
@@ -1165,7 +1211,6 @@ Every story in which Grandma speaks.
 
 ### CBE TheGreatEscapeA Tools1 Dialogue
 `CBE_TheGreatEscapeA_Tools1_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 **GRANDMA**: Hmm... I’m quite surprised to find these tools!
 **GRANDMA**: Then again, it was so messy, you could hide an elephant in here...
@@ -1173,7 +1218,6 @@ Every story in which Grandma speaks.
 
 ### CBE TheGreatEscapeA Tools5 Dialogue
 `CBE_TheGreatEscapeA_Tools5_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 **GRANDMA**: Finally, some proper tools!
 **GRANDMA**: These Bolt Cutters should do the trick.
@@ -1181,7 +1225,6 @@ Every story in which Grandma speaks.
 
 ### CBE TheGreatEscapeA WardenSafe3 Dialogue
 `CBE_TheGreatEscapeA_WardenSafe3_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 **GRANDMA** (Charming): Excellent!
 **GRANDMA**: This should help me get some leverage in here.
@@ -1189,7 +1232,6 @@ Every story in which Grandma speaks.
 
 ### CBE TheGreatEscapeB CleanerCart1 Dialogue
 `CBE_TheGreatEscapeB_CleanerCart1_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 **GRANDMA**: Hmm... I’ll use this to get around and “clean up”.
 **GRANDMA**: You never know what useful things people throw away.
@@ -1197,7 +1239,6 @@ Every story in which Grandma speaks.
 
 ### CBE TheGreatEscapeB GrandmasCell Dialogue
 `CBE_TheGreatEscapeB_GrandmasCell_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 **GRANDMA** (Charming): Finally! The last bar is off. Time to go!
 **GRANDMA**: Good thing I found these Bolt Cutters! 
@@ -1205,7 +1246,6 @@ Every story in which Grandma speaks.
 
 ### CBE TheGreatEscapeB Intro Dialogue
 `CBE_TheGreatEscapeB_Intro_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 **MADDIE** (Calling): Grandma?! Are you okay?
 **MADDIE** (Calling): When they took you away, I was so worried!
@@ -1216,7 +1256,6 @@ Every story in which Grandma speaks.
 
 ### CBE TheGreatEscapeB PaperAndPen3 Dialogue
 `CBE_TheGreatEscapeB_PaperAndPen3_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 **GRANDMA**: Hmm... Looks like some of the girls have been writing letters.
 **GRANDMA**: I shouldn’t open them now.
@@ -1225,7 +1264,6 @@ Every story in which Grandma speaks.
 
 ### CBE TheGreatEscapeB PostBox Dialogue
 `CBE_TheGreatEscapeB_PostBox_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 **MADDIE** (Calling): You want me to go through the mail?!
 **GRANDMA** (Calling): Yes, dearie.
@@ -1234,7 +1272,6 @@ Every story in which Grandma speaks.
 
 ### CBE TheGreatEscapeB Socks05 Dialogue
 `CBE_TheGreatEscapeB_Socks05_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 **GRANDMA**: Ah, perfect!
 **GRANDMA**: These jail outfits should contain the ID badges I need to get into the other rooms.
@@ -1242,7 +1279,6 @@ Every story in which Grandma speaks.
 
 ### CBE TheGreatEscapeB StampThirdClass1 Dialogue
 `CBE_TheGreatEscapeB_StampThirdClass1_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 **GRANDMA** (Charming): Let’s make sure these letters make their way to their destination.
 **GRANDMA**: Oh... These remind me of Maddie’s stamp collection!
@@ -1250,7 +1286,6 @@ Every story in which Grandma speaks.
 
 ### CBE TheGreatEscapeB Tools1 Dialogue
 `CBE_TheGreatEscapeB_Tools1_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 **GRANDMA**: Hmm... I’m quite surprised to find these tools!
 **GRANDMA**: Then again, it was so messy, you could hide an elephant in here...
@@ -1258,7 +1293,6 @@ Every story in which Grandma speaks.
 
 ### CBE TheGreatEscapeB Tools5 Dialogue
 `CBE_TheGreatEscapeB_Tools5_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 **GRANDMA**: Finally, some proper tools!
 **GRANDMA**: These Bolt Cutters should do the trick.
@@ -1266,64 +1300,107 @@ Every story in which Grandma speaks.
 
 ### CBE TheGreatEscapeB WardenSafe3 Dialogue
 `CBE_TheGreatEscapeB_WardenSafe3_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 **GRANDMA** (Charming): Excellent!
 **GRANDMA**: This should help me get some leverage in here.
 **GRANDMA**: Hmm... Perhaps I should send some of this to Maddie?
 
-### CBE TheGreatEscape GrandmasCell Dialogue
+### The Great Escape — item discovered: Clean Cell
+`CBE_TheGreatEscape_CleanCell1_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape, eventKey=CBE_TheGreatEscape, itemKeys=['CBE_TheGreatEscape_CleanCell_01'], items=['Clean Cell'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA** (Calling): Now that I’ve gained everyone’s trust, it’ll be a lot easier for me to get out of here.
+**GRANDMA** (Calling): My baking skills have led me to the kitchen, where I’m sure I’ll be able to impress the right people.
+**GRANDMA** (Charming): And they’ll hopefully help me get the right “tools” for my ultimate escape!
+
+### The Great Escape — item discovered: Cleaning Cart
+`CBE_TheGreatEscape_CleanerCart1_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape, eventKey=CBE_TheGreatEscape, itemKeys=['CBE_TheGreatEscape_CleanerCart_01'], items=['Cleaning Cart'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA** (Calling): Well, that was easy enough!
+**GRANDMA** (Calling): I still need to earn my fellow inmate’s trust and I heard this place has been having trouble with their mail...
+**GRANDMA** (Charming): I know! I'll charm them with my baking skills and make sure their letters get sent properly.
+
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscape_GrandmasCell_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscape, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA** (Charming): Finally! The last bar is off. Time to go!
 **GRANDMA**: Good thing I found these Bolt Cutters! 
 **GRANDMA**: But I should hide them in case I end up in here again.
 
-### CBE TheGreatEscape PaperAndPen3 Dialogue
+### The Great Escape — entering board
+`CBE_TheGreatEscape_Intro_Dialogue` · seen 24.11.02–25.10.01
+- trigger: event, event=The Great Escape, eventId=CBE_TheGreatEscape, eventType=Collectible Board Event, moment=entering board (versions 24.11.02–25.10.01)
+- trigger: event, event=The Great Escape, eventId=CBE_TheGreatEscape_02, eventType=Collectible Board Event, moment=entering board (versions 25.04.02–25.04.03)
+
+**GRANDMA** (Calling): Oh dear, back again I see...
+**GRANDMA** (Calling): I guess my last attempt didn’t go as well as I’ve hoped!
+**GRANDMA** (Calling): But no matter...
+**GRANDMA** (Charming): This time, I promise I’ll have a better plan!
+**GRANDMA**: First, I need to get a little collateral in this dreadful place. Nothing a case of money couldn't solve...
+**GRANDMA**: Maybe I should make a name for myself by helping around and earn a little on the side...
+
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscape_PaperAndPen3_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscape, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Hmm... Looks like some of the girls have been writing letters.
 **GRANDMA**: I shouldn’t open them now.
 **GRANDMA**: However...
 **GRANDMA** (Charming): I can give Maddie a call and ask her to do it!
 
-### CBE TheGreatEscape PostBox Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscape_PostBox_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscape, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **MADDIE** (Calling): You want me to go through the mail?!
 **GRANDMA** (Calling): Yes, dearie.
 **MADDIE** (Calling): I don’t know how comfortable I feel about this...
 **GRANDMA** (Calling): The mailman owes me a few favors, so you won’t get in any trouble.
 
-### CBE TheGreatEscape StampThirdClass1 Dialogue
+### The Great Escape — item discovered: Jail Outfit
+`CBE_TheGreatEscape_Socks05_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape, eventKey=CBE_TheGreatEscape, itemKeys=['CBE_TheGreatEscape_Socks_05'], items=['Jail Outfit'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: Ah, perfect!
+**GRANDMA**: These jail outfits should contain the ID badges I need to get into the other rooms.
+**GRANDMA** (Charming): But I’ll need to get rid of the evidence!
+
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscape_StampThirdClass1_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscape, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA** (Charming): Let’s make sure these letters make their way to their destination.
 **GRANDMA**: Oh... These remind me of Maddie’s stamp collection!
 **GRANDMA**: She was really into them, too. I should probably save a few for her...
 
-### CBE TheGreatEscape Tools1 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscape_Tools1_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscape, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Hmm... I’m quite surprised to find these tools!
 **GRANDMA**: Then again, it was so messy, you could hide an elephant in here...
 **GRANDMA** (Charming): Well, I’m sure they won’t mind if I borrow them for a while.
 
-### CBE TheGreatEscape WardenSafe3 Dialogue
+### The Great Escape — item discovered: Bolt Cutters
+`CBE_TheGreatEscape_Tools5_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape, eventKey=CBE_TheGreatEscape, itemKeys=['CBE_TheGreatEscape_Tools_05'], items=['Bolt Cutters'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: Finally, some proper tools!
+**GRANDMA**: These Bolt Cutters should do the trick.
+**GRANDMA** (Charming): Nothing like a little upper body workout in jail...
+
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscape_WardenSafe3_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscape, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA** (Charming): Excellent!
 **GRANDMA**: This should help me get some leverage in here.
 **GRANDMA**: Hmm... Perhaps I should send some of this to Maddie?
 
 ### Veil of Fate — event start
-`CBE_VeilOfFate2023_IntroDialogue_Dialogue` · seen 26.04.02–26.07.01
+`CBE_VeilOfFate2023_IntroDialogue_Dialogue` · seen 23.11.02–26.07.01
 - trigger: event, event=Veil of Fate, eventId=CBE_VeilOfFate2023, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **GRANDMA** (Charming): Lady Voyance! How are the snows of fate swirling these days?
@@ -1338,7 +1415,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Charming): Sounds great, but first I'd like to hear about my future... And I have some questions!
 
 ### Veil of Fate — event end
-`CBE_VeilOfFate2023_OutroDialogue_Dialogue` · seen 24.04.01–26.07.01
+`CBE_VeilOfFate2023_OutroDialogue_Dialogue` · seen 23.11.02–26.07.01
 - trigger: event, event=Veil of Fate, eventId=CBE_VeilOfFate2023, eventType=Collectible Board Event, moment=event end (versions 24.04.01–26.07.01)
 
 **GRANDMA**: Sooo, did Lady Voyance tell you something exciting?
@@ -1379,7 +1456,7 @@ Every story in which Grandma speaks.
 **GRANDMA**: Forget the ifs, ands, or buts, Maddie, dearie. It is time for some classic apple pie!
 
 ### Cemetery: Clear grass and weeds  (left of steps)
-`CemeteryCleanUpVinesAndWeeds` · seen 24.04.01–26.07.01
+`CemeteryCleanUpVinesAndWeeds` · seen 23.09.02–26.07.01
 - trigger: area, area=Cemetery, areaId=Cemetery, hotspotId=CemeteryRemoveDeadFoliageA1, phase=task completed, task=Clear grass and weeds  (left of steps) (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Why did you never tell me about the cemetery before, Grandma?
@@ -1392,7 +1469,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Thinking): That was weird! I'd better stick around here and see what's going on.
 
 ### Cemetery: Build decorative fencing
-`CemeteryRepairCrypt` · seen 24.04.01–26.07.01
+`CemeteryRepairCrypt` · seen 23.09.02–26.07.01
 - trigger: area, area=Cemetery, areaId=Cemetery, hotspotId=CemeteryPlaceRailingsN6, phase=task completed, task=Build decorative fencing (versions 24.04.01–26.07.01)
 
 **GRANDMA** (Doubtful): Why are you fixing up this old thing?
@@ -1406,7 +1483,7 @@ Every story in which Grandma speaks.
 **GRANDMA**: And I'm glad you've given her a nicer resting place than she had before, dearie.
 
 ### Pier: Fix bridge
-`Charlie_Calling_Outro` · seen 24.04.01–26.07.01
+`Charlie_Calling_Outro` · seen 23.09.02–26.07.01
 - trigger: area, area=Pier, areaId=YachtPier, hotspotId=YachtPierBridgerFixBrokenParts, phase=task completed, task=Fix bridge (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Uh, Grandma - I got a phone call earlier from someone claiming that they were Grandpa Charlie...
@@ -1416,7 +1493,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Worried): Ugh, Grandma! 
 
 ### Conservatory: Remove debris
-`ConservatoryArea_Scene9UrsulaArrives` · seen 24.04.01–26.07.01
+`ConservatoryArea_Scene9UrsulaArrives` · seen 23.09.02–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryRemoveShelfDebrisBB2, phase=task completed, task=Remove debris (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Grandma, I have to get inside the mansion. Do you have the key?
@@ -1431,16 +1508,53 @@ Every story in which Grandma speaks.
 
 ### DE CompletedCollection Dialogue
 `DE_CompletedCollection_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
 
 **MADDIE**: According to the catalogue, this should be everything.
 **ANTIQUEDEALER** (Thinking): Not quite... According to some notes I found, there should still be a few more special items.
 **MADDIE**: But what we’ve found so far is more than enough to send out already!
 **GRANDMA** (Encouraging): Well, no harm in looking for more, I suppose.
 
+### Maddie's Re-Archaeology — entering board
+`DE_Intro_Dialogue` · seen 25.02.01–26.07.01
+- trigger: event, event=Maddie's Re-Archaeology, eventId=DE_Jan2024, eventType=Collectible Board Event, moment=entering board (versions 25.02.01–25.02.03)
+
+**MADDIE** (Encouraging): Hey, guys! Wh- What’s going on?!
+**JACKIE** (Encouraging): Hey, Maddie! Didn’t you read the newspaper? I wrote an entire article about it...
+**MADDIE** (Worried): Oh... Er. I must have missed it.
+**JACKIE** (Doubtful): We’re digging up the old Hopewell Bay Archaeological Museum!
+**MADDIE** (Surprised): Museum?! I didn’t know we had a museum!
+**ANTIQUEDEALER** (Relaxed): We did, but it collapsed on its grand opening many years ago.
+**ANTIQUEDEALER** (Thinking): Something about illegal mineshafts below the town...
+**GRANDMA** (Worried): ...
+**GRANDMA** (Frustrated): Oh... Well, surely you won’t find anything of worth anymore, dearie.
+**ANTIQUEDEALER** (Joyous): We’ve already found many! Many pieces are still in great shape.
+**JACKIE** (Encouraging): And the best part is that we’re going to be sending them back to their rightful homes!
+**MADDIE** (Joyous): Oooh, awesome! Let’s help, Grandma!
+**GRANDMA** (Annoyed): Oh alright, dearie...
+
+### Maddie's Re-Archaeology — part of the event (exact trigger not dumped)
+`DE_Jan2024_Intro_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Maddie's Re-Archaeology, eventId=DE_Jan2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Encouraging): Hey, guys! Wh- What’s going on?!
+**JACKIE** (Encouraging): Hey, Maddie! Didn’t you read the newspaper? I wrote an entire article about it...
+**MADDIE** (Worried): Oh... Er. I must have missed it.
+**JACKIE** (Doubtful): We’re digging up the old Hopewell Bay Archaeological Museum!
+**MADDIE** (Surprised): Museum?! I didn’t know we had a museum!
+**ANTIQUEDEALER** (Relaxed): We did, but it collapsed on its grand opening many years ago.
+**ANTIQUEDEALER** (Thinking): Something about illegal mineshafts below the town...
+**GRANDMA** (Frustrated): Oh... Well, surely you won’t find anything of worth anymore, dearie.
+**ANTIQUEDEALER** (Joyous): We’ve already found many! Many pieces are still in great shape.
+**JACKIE** (Encouraging): And the best part is that we’re going to be sending them back to their rightful homes!
+**MADDIE** (Joyous): Oooh, awesome! Let’s help, Grandma!
+**ANTIQUEDEALER** (Thinking): Now be careful, Maddie...
+**ANTIQUEDEALER** (Worried): You need to take great care in clearing away the earth to get to the artifacts within the museum.
+**JACKIE** (Worried): Huh... Feels sort of backwards to be digging up what was once in a museum already!
+**MADDIE** (Relaxed): Obviously, what we’re doing here is... Re-archaeology!
+**GRANDMA** (Annoyed): *Groan*
+
 ### DE MiniGameIntro Dialogue
 `DE_MiniGameIntro_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
 
 **ANTIQUEDEALER** (Thinking): Now be careful, Maddie...
 **ANTIQUEDEALER** (Worried): You need to take great care in clearing away the earth to get to the artifacts within the museum.
@@ -1449,9 +1563,18 @@ Every story in which Grandma speaks.
 **MADDIE** (Encouraging): Eh?!
 **GRANDMA** (Annoyed): *Groan*
 
+### Maddie's Re-Archaeology — event end
+`DE_SendingAway_Dialogue` · seen 25.02.01–26.07.01
+- trigger: event, event=Maddie's Re-Archaeology, eventId=DE_Jan2024, eventType=Collectible Board Event, moment=event end (versions 25.02.01–25.02.03)
+
+**MADDIE** (Encouraging): Well, stick a fork in us. We’re done!
+**JACKIE** (Encouraging): Everything has been carefully packed and shipped off to the museum!
+**MADDIE** (Thinking): Hmm...
+**GRANDMA**: What is it, dearie?
+**MADDIE** (Thinking): I wonder what else is down there...
+
 ### Dancefloor 05
 `Dancefloor_05` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **SULLIVAN** (Charming): Criminals? Of course not. Not yet, at least...
 **SULLIVAN** (Relaxed): Innocent until proven guilty and all that.
@@ -1465,7 +1588,6 @@ Every story in which Grandma speaks.
 
 ### Dancefloor 07
 `Dancefloor_07` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Doubtful): Grandma, what was she talking about? A second watch? I've only seen one...
 **GRANDMA** (Frustrated): Winston, we need to check all the windows and doors. Make sure all the locks are still in good condition.
@@ -1480,7 +1602,6 @@ Every story in which Grandma speaks.
 
 ### Dancefloor 08
 `Dancefloor_08` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Thinking): I know I've been a bit coy with you, dearie, but now you must listen carefully...  
   _earlier:_ ~~Hmm, I think it's time to go meet Grandma and find out what she has to say...~~ (until 25.02.02)
@@ -1509,7 +1630,6 @@ Every story in which Grandma speaks.
 
 ### Dancefloor Intro
 `Dancefloor_Intro` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **SULLIVAN** (Encouraging): ...and I know that YOU have something to do with it!
 **GRANDMA** (Annoyed): You’re dangerously close to crossing a line, detective...
@@ -1523,7 +1643,6 @@ Every story in which Grandma speaks.
 
 ### DiningRoom03
 `DiningRoom03` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **WINSTON** (Thinking): Deb...
 **DEB** (Annoyed): Winston.
@@ -1540,7 +1659,7 @@ Every story in which Grandma speaks.
 **WINSTON** (Surprised): My apologies Ma'am. I let my emotions get the better of me. Please, if you'd excuse me...
 
 ### Dining Room: Clean and collect fallen things
-`DiningRoom04` · seen 24.04.01–26.07.01
+`DiningRoom04` · seen 23.09.02–26.07.01
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomRemoveFallenTableItemsB2, phase=task completed, task=Clean and collect fallen things (versions 24.04.01–26.07.01)
 
 **MADDIE**: What was all that about, Grandma? Why were those two fighting?
@@ -1554,7 +1673,6 @@ Every story in which Grandma speaks.
 
 ### DrivewayGateClearedMansionSign
 `DrivewayGateClearedMansionSign` · seen 22.02.06–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Thinking): Beaumont Hall? Why did Grandma keep this place a secret?
 **GRANDMA** (Worried): Your grandfather and I spent a lot of time in these gardens...
@@ -1569,7 +1687,6 @@ Every story in which Grandma speaks.
 
 ### EP1 BluetoothEscapesDialogue
 `EP1_BluetoothEscapesDialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Episode 1 (versions None–None)
 
 **BLUETOOTH**: Hi, Grandma, what's up?
 **GRANDMA**: Well, dearie, I know you said you were willing to wait to get out of here, but what if I told you there was a faster way?
@@ -1579,7 +1696,6 @@ Every story in which Grandma speaks.
 
 ### EP1 GraceEscapesDialogue
 `EP1_GraceEscapesDialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Episode 1 (versions None–None)
 
 **GRACE**: Hi, Grandma! So what was so urgent to get me out of work?
 **GRANDMA**: Well, dearie, I'll be blunt. Do you want to get out of here?
@@ -1588,22 +1704,33 @@ Every story in which Grandma speaks.
 
 ### EP1 GrandmaEscapesDialogue
 `EP1_GrandmaEscapesDialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Episode 1 (versions None–None)
 
 **GRANDMA**: I don't have time to wait here and see if I get bailed out...
 **GRANDMA**: I need to make my escape while I still have the chance! 
 
+### The Great Escape (Jailbreak) — item discovered: Knitting Needle
+`EP1_GrandmaGetTheKnittingNeedle` · seen 25.05.01–26.07.01
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_KnittingNeedle_01'], items=['Knitting Needle'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: This will come in handy.
+
 ### EP1 GrandmaGetsThePie
 `EP1_GrandmaGetsThePie` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Episode 1 (versions None–None)
 
 **GRANDMA**: Hmm, something smells tasty in here... What could it be?
 **GRANDMA**: Oh my, a pie!
 **GRANDMA**: Note: Here is the pie that you ordered. Enjoy.
 
+### The Great Escape (Jailbreak) — item discovered: Knitting Kit
+`EP1_GrandmaStartsKnitting` · seen 25.05.01–26.07.01
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_KnittingInProgress_01'], items=['Knitting Kit'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: Knitting always calms me down, even in jail.
+**GRANDMA**: What should I make? Some socks? Or a scarf, perhaps?
+**GRANDMA**: Or... maybe something really special...
+
 ### EP1 IzzyEscapesDialogue
 `EP1_IzzyEscapesDialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Episode 1 (versions None–None)
 
 **GRANDMA**: Hello, Izzy! I hope I'm not intruding...
 **IZZY**: No... It's okay. I was just seeing if I could make a calendar to see how many days I might have left.
@@ -1613,9 +1740,14 @@ Every story in which Grandma speaks.
 **IZZY**: Y- Yes... Yes I do!
 **GRANDMA**: Then... let's get started!
 
+### The Great Escape (Jailbreak) — item discovered: Warden's Office
+`EP1_KnittingNeedleToOpenWardenOffice` · seen 25.05.01–26.07.01
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_WardenOffice_03'], items=["Warden's Office"], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: Knitting is a great hobby to have! For example, one can knit open the lock... like this!
+
 ### FirstFloorHallway 02
-`FirstFloorHallway_02` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FirstFloorHallway_02` · seen 26.07.01–26.07.01
 
 **MADDIE** (Encouraging): This ship is really impressive!
 **GRANDMA** (Encouraging): Ah yes, The SS Auralis. Clara built this with her father, Ignatius.
@@ -1632,8 +1764,7 @@ Every story in which Grandma speaks.
 **GRANDMA** (Discouraged): No... It wasn't.
 
 ### FirstFloorHallway 03
-`FirstFloorHallway_03` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FirstFloorHallway_03` · seen 26.07.01–26.07.01
 
 **MADDIE** (Doubtful): I'm surprised that Agatha was so hard on her!
 **GRANDMA** (Thinking): To be fair, she was only looking out for her best interests...
@@ -1661,8 +1792,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Charming): Yeah... I definitely would have. 
 
 ### FirstFloorHallway 05
-`FirstFloorHallway_05` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FirstFloorHallway_05` · seen 26.07.01–26.07.01
 
 **MADDIE**: Well... This little reading nook came out really nice!
 **GRANDMA** (Encouraging): It really did, dearie! It's just like I remember it!
@@ -1678,8 +1808,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Relaxed): I bet she would have made an amazing marine biologist!
 
 ### FirstFloorHallway 06
-`FirstFloorHallway_06` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FirstFloorHallway_06` · seen 26.07.01–26.07.01
 
 **MADDIE** (Doubtful): Hmmm...
 **GRANDMA**: What is it, dearie?
@@ -1695,8 +1824,7 @@ Every story in which Grandma speaks.
 **MADDIE**: That's okay, Grandma. I'll continue here!
 
 ### FirstFloorHallway Intro
-`FirstFloorHallway_Intro` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FirstFloorHallway_Intro` · seen 26.07.01–26.07.01
 
 **MADDIE** (Joyous): Yes! A whole new floor to explore and restore!
 **—**: I'll be the first to admit it, dearie. You've done an amazing job so far.
@@ -1709,8 +1837,7 @@ Every story in which Grandma speaks.
   _(1 cosmetic edit not shown)_
 
 ### FirstFloorKitchen 06
-`FirstFloorKitchen_06` · seen 26.06.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FirstFloorKitchen_06` · seen 26.07.01–26.07.01
 
 **GRANDMA**: Hello, dearie.
 **MADDIE** (Surprised): Grandma!
@@ -1724,8 +1851,7 @@ Every story in which Grandma speaks.
 **GRANDMA** (Encouraging): The Boulton family pie recipe!
 
 ### FirstFloorKitchen 07
-`FirstFloorKitchen_07` · seen 26.06.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FirstFloorKitchen_07` · seen 26.07.01–26.07.01
 
 **MADDIE** (Encouraging): You know, it's quite nice to do something as a family again, for a change!
 **GRANDMA** (Relaxed): You're right dearie. We really don't spend enough time together, do we?
@@ -1739,9 +1865,65 @@ Every story in which Grandma speaks.
 **GRANDMA** (Encouraging): How about I take few to the biker club?
 **MADDIE** (Encouraging): I'm sure they'd appreciate it!
 
+### The Lost Gemstones: Arctic Expedition — entering board
+`GM_Arctic2025_Intro_Dialogue` · seen 25.04.02–26.01.02
+- trigger: event, event=The Lost Gemstones: Arctic Expedition, eventId=GM_Arctic2025, eventType=Collectible Board Event, moment=entering board (versions 25.04.02–26.01.02)
+- trigger: event, event=The Lost Gemstones: Arctic Expedition, eventId=GM_Arctic2025_02, eventType=Collectible Board Event, moment=entering board (versions 25.04.02–25.04.03)
+- trigger: event, event=The Lost Gemstones: Arctic Expedition, eventId=GM_Arctic2025_03, eventType=Collectible Board Event, moment=entering board (versions 25.04.02–25.06.02)
+
+**GRANDMA**: Is that Ignatius' old journal?
+**MADDIE** (Relaxed): It is! I just can't put it down. The world was so different then - everything still there to be explored and discovered.
+**GRANDMA** (Relaxed): Which part are you reading now?
+**MADDIE** (Thinking): He's writing about a news story he read about a meteorite that supposedly landed somewhere in the Arctic...
+**MADDIE** (Surprised): He didn't really travel there, too, did he?
+**GRANDMA** (Charming): Keep reading! It is a good story.
+
+### The Lost Gemstones: Mystery of the Machine — entering board
+`GM_MysteryMachine2025Intro` · seen 25.02.01–26.01.02
+- trigger: event, event=The Lost Gemstones: Mystery of the Machine, eventId=GM_MysteryMachine2025, eventType=Collectible Board Event, moment=entering board (versions 25.02.01–26.01.02)
+
+**MADDIE** (Joyous): Grandma! This journal... is something else!
+**MADDIE** (Encouraging): I didn’t know that Boultonite was so powerful.
+**GRANDMA** (Doubtful): Yes, it is. Almost TOO powerful...
+**MADDIE** (Thinking): What do you mean by that?
+**GRANDMA** (Thinking): Hmm...
+**GRANDMA** (Frustrated): I suggest you read up on Ignatius’s experiments with it...
+**GRANDMA** (Frustrated): VERY interesting stuff, dearie.
+
+### The Lost Gemstones: Seas of Adventure — entering board
+`GM_SeaAdventure2025_Intro_Dialogue` · seen 25.01.03–26.01.02
+- trigger: event, event=The Lost Gemstones: Seas of Adventure, eventId=GM_SeaAdventure2025, eventType=Collectible Board Event, moment=entering board (versions 25.01.03–26.01.02)
+
+**GRANDMA** (Joyous): Maddie, dearie. Are you still reading that old journal?
+**MADDIE** (Encouraging): Yes! It’s really fascinating!
+**MADDIE** (Encouraging): I didn’t know that Ignatius Boulton was so...
+**GRANDMA** (Charming): Adventurous?
+**MADDIE** (Relaxed): Yes! I’ve just started reading about his account of finding a supposed sunken treasure!
+**GRANDMA** (Encouraging): Oh, that one! Yes. That’s one of my favorites.
+**GRANDMA**: I can promise you...
+**GRANDMA** (Charming): It only gets better!
+
+### Lost Gemstones — entering board
+`GM_Shared_Dialogues_Intro_Dialogue` · seen 24.07.01–26.01.02
+- trigger: event, event=Lost Gemstones, eventId=CBE_GemMine, eventType=Collectible Board Event, moment=entering board (versions 24.07.01–26.01.02)
+- trigger: event, event=Lost Gemstones, eventId=GM_Generic, eventType=Collectible Board Event, moment=entering board (versions 25.08.01–26.01.02)
+
+**MADDIE**: Grandma, do we have more of Ignatius' old diaries left?  
+  _earlier:_ ~~Grandma!~~ (until 25.07.01)
+**MADDIE** (Relaxed): I need to find out what happens next in his story. I'm TOTALLY hooked!  
+  _earlier:_ ~~What is it, dearie?~~ (until 25.07.01)
+**GRANDMA** (Joyous): There are still plenty more volumes left in the library. The man loved an adventure!  
+  _earlier:_ ~~You won’t believe what I found in the cellar! An old tunnel with tracks! It’s huge!~~ (until 25.07.01)
+**MADDIE** (Thinking): But every page I read, I find more questions than answers. Like, what happened to his collection of gems?  
+  _earlier:_ ~~Oh, that!~~ (until 25.07.01)  
+  _(1 cosmetic edit not shown)_
+**GRANDMA** (Charming): Just keep reading. Maybe you will find the answers in those diaries...  
+  _earlier:_ ~~That?! You know about it?~~ (until 25.07.01)
+**GRANDMA** (Charming): Oh yes, dearie. That’s the old tunnel that lead to the Boulton tin mine!
+**GRANDMA** (Charming): Why don’t you read Ignatius’s journal about it? It tells about the mines “interesting” history!
+
 ### Gallery08
 `Gallery08` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Discouraged): This has to be some sort of twisted joke.
 **MADDIE** (Discouraged): I have so many questions and I'm scared to find out what the answers are.
@@ -1756,7 +1938,6 @@ Every story in which Grandma speaks.
 
 ### Gallery08.2
 `Gallery08.2` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **GRANDMA** (Discouraged): That picture is... not what you think it is.
 **MADDIE** (Annoyed): It looks to me like you're married to a mob boss. Quite happily married.
@@ -1772,7 +1953,6 @@ Every story in which Grandma speaks.
 
 ### GarageCarFinished
 `GarageCarFinished` · seen 22.02.06–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Thinking): Before you have to run off again: is Lindsay the reason the mansion was sealed off?
 **GRANDMA** (Thinking): Lindsay was heartbroken when she came back to Beaumont Hall. She swore never to set foot in New York again.
@@ -1786,7 +1966,6 @@ Every story in which Grandma speaks.
 
 ### GarageCarRevealed
 `GarageCarRevealed` · seen 22.02.06–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): That's quite the car! Or was, I guess?
 **GRANDMA** (Encouraging): It belonged to Lindsay Boulton. She almost drove the family bankrupt.
@@ -1797,7 +1976,7 @@ Every story in which Grandma speaks.
 **MADDIE**: That excuse wasn’t a patch on the last one!
 
 ### Garage: Install trunk
-`GarageCarTaskRevealed` · seen 24.04.01–26.07.01
+`GarageCarTaskRevealed` · seen 23.09.02–26.07.01
 - trigger: area, area=Garage, areaId=Garage, hotspotId=GarageCarInstallSpareTire, phase=task completed, task=Install trunk (versions 24.04.01–26.07.01)
 
 **GRANDMA**: I know this old car is a beauty, but there's something missing. Can you spot it?
@@ -1808,7 +1987,6 @@ Every story in which Grandma speaks.
 
 ### GarageTraderTableRevealed
 `GarageTraderTableRevealed` · seen 22.02.06–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): So Lindsay made money and lost money. What did she do exactly?
 **GRANDMA** (Worried): Lindsay was a canny investor. She moved to New York with a bag of Boulton money to make it big on Wall Street.
@@ -1820,7 +1998,6 @@ Every story in which Grandma speaks.
 
 ### GardenRightFountainFinished
 `GardenRightFountainFinished` · seen 22.02.06–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **GRANDMA**: They used to call Ignatius the Tin Man.
 **MADDIE** (Surprised): Because he didn't have a heart?
@@ -1831,7 +2008,6 @@ Every story in which Grandma speaks.
 
 ### GardenRightFountainRevealed
 `GardenRightFountainRevealed` · seen 22.02.06–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Relaxed): That’s a pretty cool fountain!
 **GRANDMA** (Relaxed): Ignatius was a self-made man. He built his empire from nothing. This fountain is one of the many gifts he received.
@@ -1851,14 +2027,14 @@ Every story in which Grandma speaks.
 **GRANDMA** (Joyous): あらそうよ、昔のことね。ミックスゼリーでも食べながら、色々教えてあげるわ...。
 
 ### Dining Room: Clean dirt from the chair
-`GrandmaChair` · seen 24.04.01–26.07.01
+`GrandmaChair` · seen 23.09.02–26.07.01
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomRemoveDirtfromchairH1, phase=task completed, task=Clean dirt from the chair (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Ooh, this chair looks fancy. Did Grandpa Charlie sit here?
 **GRANDMA** (Charming): Of course not, Dear! This was my chair. I am the head of the family, after all!
 
 ### Great Hall: Search for the key
-`Greathall01_Frontdoor` · seen 24.04.01–26.07.01
+`Greathall01_Frontdoor` · seen 23.09.02–26.07.01
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallKeyTask, phase=task completed, task=Search for the key (versions 24.04.01–26.07.01)
 
 **MADDIE** (Frustrated): I can't believe the key was under the mat this whole time!
@@ -1870,7 +2046,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Thinking): ...
 
 ### Great Hall: Remove debris at the top of the steps
-`Greathall05_Upset` · seen 24.04.01–26.07.01
+`Greathall05_Upset` · seen 23.09.02–26.07.01
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemovedebristopofstepsA3, phase=task completed, task=Remove debris at the top of the steps (versions 24.04.01–25.01.03)
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallPlacerestoreddeskA7, phase=task completed, task=Place restored desk (versions 25.02.01–26.07.01)
 
@@ -1885,7 +2061,7 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): ...I do have another story I can tell you about the great hall!
 
 ### Great Hall: Fix and place the red hat back
-`Greathall06_Charlie` · seen 24.04.01–26.07.01
+`Greathall06_Charlie` · seen 23.09.02–26.07.01
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallPlaceGHallHatRedBc6, phase=task completed, task=Fix and place the red hat back (versions 24.04.01–26.07.01)
 
 **GRANDMA** (Encouraging): Your Grandpa Charlie never liked this room when we first got married.
@@ -1897,7 +2073,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Relaxed): I'm glad he liked it in the end. Hopefully he'd like what I'm doing with it now!
 
 ### Hallway: Remove cobwebs
-`HallwayHallway06` · seen 24.04.01–26.07.01
+`HallwayHallway06` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayRemoveCobwebsD1, phase=task completed, task=Remove cobwebs (versions 24.04.01–26.07.01)
 
 **GRANDMA**: Well dearie, this place is starting to look like its old self again! 
@@ -1909,7 +2085,7 @@ Every story in which Grandma speaks.
 **GRANDMA**: Anyway, I got to get going to my free diving class! Can you do me a favor?
 
 ### Hallway: Remove old lamp
-`HallwayHallway07` · seen 24.04.01–26.07.01
+`HallwayHallway07` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayRemoveRundownLampD2, phase=task completed, task=Remove old lamp (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Er... Okay, what favor do you need?
@@ -1918,7 +2094,7 @@ Every story in which Grandma speaks.
 **GRANDMA** (Relaxed): Then maybe it's time to have a break? Bye!
 
 ### Hallway: Assemble stand and place the Sword
-`HallwayKatana` · seen 24.04.01–26.07.01
+`HallwayKatana` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayPlaceSamuraiSwordDa3, phase=task completed, task=Assemble stand and place the Sword (versions 24.04.01–26.07.01)
 
 **MADDIE**: This katana must belong to the samurai over there...
@@ -1928,7 +2104,6 @@ Every story in which Grandma speaks.
 
 ### Hopeberry2022Intro
 `Hopeberry2022Intro` · seen 23.09.02–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Joyous): Hopeberry Festival! I’ve never heard of it before.
 **GRANDMA**: It used to happen every year, until the Hopeberries all decayed one day...
@@ -1938,7 +2113,6 @@ Every story in which Grandma speaks.
 
 ### Hopeberry2022IntroPart2
 `Hopeberry2022IntroPart2` · seen 23.09.02–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): ...the place where all those Hopeberry Festival gear was being stored all these years!!
 **GRANDMA**: And everything has remained spick and span!
@@ -1961,6 +2135,15 @@ Every story in which Grandma speaks.
 
 **GRANDMA** (Encouraging): Oh dearie, you're not going to win with something that small!
 **GRANDMA** (Encouraging): If you want to win, you must think big!
+
+### The Great Bake-off — item discovered: Chicken Nest
+`LBE_May2023EggNest` · seen 23.09.02–26.07.01
+- trigger: item, event=The Great Bake-off, eventKey=LBE_May2023, itemKeys=['LBE_May2023_Nest_01'], items=['Chicken Nest'], moment=item discovered (versions 23.09.02–23.11.02)
+
+**JACKIE** (Surprised): A nest? What am I supposed to do with this?!
+**GRANDMA** (Thinking): Hmm... It is a bake-off after all, so I'll probably need a lot of eggs.  
+  _(1 cosmetic edit not shown)_
+**HEIKKI** (Joyous): I might need a chicken coop...
 
 ### LBE_May2023 — entering board
 `LBE_May2023Intro` · seen 23.06.02–26.07.01
@@ -2054,6 +2237,20 @@ Every story in which Grandma speaks.
 **CHERRY**: Look at all this glorious gingerbread! I can't believe we made it all... together!
 **GRANDMA** (Joyous): Christmas does funny things to people.
 
+### Gingerbread Jamboree — entering board
+`LBE_Xmas2023_IntroDialogue_Dialogue` · seen 23.11.02–26.07.01
+- trigger: event, event=Gingerbread Jamboree, eventId=LBE_Xmas2023, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–24.09.03)
+- trigger: event, event=Gingerbread Jamboree, eventId=LBE_Xmas2024, eventType=Leaderboard Event, moment=entering board (versions 24.11.02–26.01.02)
+
+**CHERRY**: It's the season of good cheer... and gingerbread! But who makes it the most scrumptious? Let's find out!
+**CHERRY**: Although everyone knows my gingerbread is the tastiest...
+**GRANDMA** (Frustrated): Maybe we'll let the people decide, Cherry? Besides, mine has been a firm favorite for decades.
+**MADDIE** (Encouraging): Look! I found something interesting in the Boulton attic! It looks like a really old recipe book.
+**GRANDMA** (Surprised): What does it say here? "The Best Gingerbread Recipe Ever Written?"
+**CHERRY** (Doubtful): Someone has scribbled stuff around it... "Add a pinch of magic and stir through"?
+**CHERRY** (Doubtful): What do you say if we skip the competition this year and bake together with this recipe instead?
+**GRANDMA** (Encouraging): I suppose it is the season for peace and goodwill to all bakers... Why not?
+
 ### Gingerbread Jamboree — item discovered: Cold Oven
 `LBE_Xmas2023_MediumOvenInactive_01_Dialogue` · seen 23.11.02–26.07.01
 - trigger: item, event=Gingerbread Jamboree, eventKey=LBE_Xmas2023, itemKeys=['LBE_Xmas2023_MediumOvenInactive_01'], items=['Cold Oven'], moment=item discovered (versions 23.11.02–26.07.01)
@@ -2067,6 +2264,18 @@ Every story in which Grandma speaks.
 
 **CHERRY**: I see a light - in the oven, I mean!
 **GRANDMA** (Relaxed): It's working! I hope this gingerbread does not burn...
+
+### Gingerbread Jamboree — event end
+`LBE_Xmas2023_OutroDialogue_Dialogue` · seen 23.11.02–26.07.01
+- trigger: event, event=Gingerbread Jamboree, eventId=LBE_Xmas2023, eventType=Leaderboard Event, moment=event end (versions 24.04.01–24.09.03)
+- trigger: event, event=Gingerbread Jamboree, eventId=LBE_Xmas2024, eventType=Leaderboard Event, moment=event end (versions 24.11.02–26.01.02)
+
+**CHERRY**: The book might just be right. This gingerbread is GREAT!
+**GRANDMA** (Doubtful): Hmm, you are right. It is making me feel... all warm and fuzzy inside.
+**CHERRY** (Encouraging): Maybe there really is a pinch of magic in there...
+**GRANDMA** (Joyous): Ha-ha! Maybe there is!
+**CHERRY** (Thinking): But next year, I will show you the best gingerbread recipe...
+**GRANDMA**: Just have another gingerbread and enjoy the moment, will you!
 
 ### Gingerbread Jamboree — item discovered: Cold Microwave Oven
 `LBE_Xmas2023_SmalIOvenInactive_01_Dialogue` · seen 23.11.02–26.07.01
@@ -2161,9 +2370,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Thinking): Hold on. Am I dreaming??
 **GRANDMA** (Charming): Maybe...
 
-### LC Halloween CommonCrimson-LippedBatfish Dialogue
-`LC_Halloween_CommonCrimson-LippedBatfish_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
+### Lucky Catch — item discovered: Crimson-lipped Batfish
+`LC_Halloween_CommonCrimsonLippedBatfish_Dialogue` · seen 26.07.01–26.07.01
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_CommonCrimsonLippedBatfish_01'], items=['Crimson-lipped Batfish'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Joyous): This is a promising start!
 **MADDIE** (Surprised): I-is it? What is that anyway? A fish or a... bat?
@@ -2198,6 +2407,19 @@ Every story in which Grandma speaks.
 **MADDIE** (Surprised): There's a fish in the boat!
 **GRANDMA** (Encouraging): The terrafish is able to crawl as well as swim. It is a real super fish!
 
+### Halloween Lucky Catch — entering board
+`LC_Halloween_Intro_Dialogue` · seen 24.09.02–26.07.01
+- trigger: event, event=Halloween Lucky Catch, eventId=LC_Halloween, eventType=Collectible Board Event, moment=entering board (versions 24.09.02–25.08.02)
+
+**GRANDMA**: You guessed it -- it's time to...
+**MADDIE** (Worried): ...t-to go fishing?
+**GRANDMA** (Thinking): Are you feeling alright, dearie?
+**MADDIE** (Discouraged): Yeah, just a bit light-headed... Like something seems a bit off somehow...
+**GRANDMA**: We should really get going. There is plenty of fish to catch and release!
+**MADDIE** (Worried): Y-yes, just snap a photo and let them go!
+**GRANDMA** (Encouraging): Are you ready?
+**MADDIE** (Thinking): Err... Let's fish!
+
 ### Lucky Catch — item discovered: Dragon Koi
 `LC_Halloween_LegendaryDragonKoi_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_LegendaryDragonKoi_01'], items=['Dragon Koi'], moment=item discovered (versions 25.05.01–26.07.01)
@@ -2217,6 +2439,18 @@ Every story in which Grandma speaks.
 **GRANDMA** (Thinking): A Blob Fish, dearie! We’re lucky to catch one. Usually they’re only seen...
 **MADDIE** (Annoyed): In your worst nightmares?
 **GRANDMA** (Charming): Very funny!
+
+### Halloween Lucky Catch — event end
+`LC_Halloween_Outro_Dialogue` · seen 24.09.02–26.07.01
+- trigger: event, event=Halloween Lucky Catch, eventId=LC_Halloween, eventType=Collectible Board Event, moment=event end (versions 24.09.02–25.08.02)
+
+**GRANDMA** (Encouraging): Good morning, Maddie!
+**GRANDMA** (Encouraging): You guessed it - it's time to go f---
+**GRANDMA** (Thinking): Are you feeling alright?
+**MADDIE** (Worried): I'm not feeling up for fishing today...
+**MADDIE** (Doubtful): I just had the weirdest dream full of the weirdest fish.
+**MADDIE** (Doubtful): It was so vivid!
+**GRANDMA** (Charming): Sounds like Halloween is playing tricks on you, dearie!
 
 ### Lucky Catch — item discovered: Cutethulhu
 `LC_Halloween_RareCutethulhu_Dialogue` · seen 25.05.01–26.07.01
@@ -2447,28 +2681,23 @@ Every story in which Grandma speaks.
 **GRANDMA** (Encouraging): Oops. Looks like it escaped!
 
 ### LC Summer2026 CompetitionFishingRodRare Dialogue
-`LC_Summer2026_CompetitionFishingRodRare_Dialogue` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
+`LC_Summer2026_CompetitionFishingRodRare_Dialogue` · seen 26.07.01–26.07.01
 
 
 ### LC Summer2026 FishingClothes Dialogue
-`LC_Summer2026_FishingClothes_Dialogue` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
+`LC_Summer2026_FishingClothes_Dialogue` · seen 26.07.01–26.07.01
 
 
 ### LC Summer2026 FishingRodCommon Dialogue
-`LC_Summer2026_FishingRodCommon_Dialogue` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
+`LC_Summer2026_FishingRodCommon_Dialogue` · seen 26.07.01–26.07.01
 
 
 ### LC Summer2026 FishingToolContainers Dialogue
-`LC_Summer2026_FishingToolContainers_Dialogue` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
+`LC_Summer2026_FishingToolContainers_Dialogue` · seen 26.07.01–26.07.01
 
 
 ### LC Summer2026 GoldenFishingRodEpic Dialogue
-`LC_Summer2026_GoldenFishingRodEpic_Dialogue` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
+`LC_Summer2026_GoldenFishingRodEpic_Dialogue` · seen 26.07.01–26.07.01
 
 
 ### Lucky Catch — item discovered: LC_Summer2026_FishingClothes_01
@@ -2675,19 +2904,37 @@ Every story in which Grandma speaks.
 **GRANDMA** (Thinking): Couldn't we just take it home?
 **MADDIE** (Discouraged): No, Grandma. Just no.
 
-### LC Summer MakoShark Dialogue
+### Summer Lucky Catch — entering board
+`LC_Summer_Intro_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Summer Lucky Catch, eventId=LC_Summer, eventType=Collectible Board Event, moment=entering board (versions 24.04.01–26.03.01)
+- trigger: event, event=Summer Lucky Catch, eventId=LC_Summer_02, eventType=Collectible Board Event, moment=entering board (versions 25.05.01–25.06.02)
+- trigger: event, event=Summer Lucky Catch, eventId=LC_Summer_03, eventType=Collectible Board Event, moment=entering board (versions 25.05.01–25.06.02)
+- trigger: event, event=Summer Lucky Catch, eventId=LC_Summer_04, eventType=Collectible Board Event, moment=entering board (versions 25.05.01–25.06.02)
+- trigger: event, event=Summer Lucky Catch, eventId=LC_Summer_05, eventType=Collectible Board Event, moment=entering board (versions 25.06.02–25.06.02)
+- trigger: event, event=Summer Lucky Catch, eventId=LC_Summer_06, eventType=Collectible Board Event, moment=entering board (versions 25.06.02–25.06.02)
+
+**MADDIE** (Encouraging): You guessed it - it's time to go fishing!
+**MADDIE** (Encouraging): Hopewell Bay is full of amazing fish, and this is your chance to reel in some big ones.
+**GRANDMA** (Charming): How big?
+**MADDIE** (Relaxed): You might be surprised!
+**MADDIE**: All you need to do is catch as many different fish as you can, snap a photo and let them go - it's that simple!
+**GRANDMA** (Relaxed): If you say so!
+**MADDIE** (Relaxed): Are you ready?
+**GRANDMA** (Joyous): Let's fish!
+
+### Summer Lucky Catch — part of the event (exact trigger not dumped)
 `LC_Summer_MakoShark_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
+- trigger: event, eventType=event story, event=Summer Lucky Catch, eventId=LC_Summer, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 
-### LC Summer MolaMola Dialogue
+### Summer Lucky Catch — part of the event (exact trigger not dumped)
 `LC_Summer_MolaMola_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
+- trigger: event, eventType=event story, event=Summer Lucky Catch, eventId=LC_Summer, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 
-### LC Summer Snook Dialogue
+### Summer Lucky Catch — part of the event (exact trigger not dumped)
 `LC_Summer_Snook_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
+- trigger: event, eventType=event story, event=Summer Lucky Catch, eventId=LC_Summer, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 
 ### Lucky Catch — item discovered: Shortfin Mako Shark
@@ -2711,9 +2958,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): Actually, it is called a "bill."
 **MADDIE** (Worried): It looks sharp, whatever it's called!
 
-### LC Summer WhiteMarlin Dialogue
+### Summer Lucky Catch — part of the event (exact trigger not dumped)
 `LC_Summer_WhiteMarlin_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
+- trigger: event, eventType=event story, event=Summer Lucky Catch, eventId=LC_Summer, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 
 ### Lucky Catch — item discovered: Black Marlin
@@ -2759,9 +3006,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Surprised): You mean the fastest fish in the ocean? THAT sailfish?
 **GRANDMA** (Joyous): The very same!
 
-### LDE GrandmasBirthday2023 LayerDecoration 05 Dialogue
+### Grandma's Pool Party — part of the event (exact trigger not dumped)
 `LDE_GrandmasBirthday2023_LayerDecoration_05_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Grandma's Pool Party, eventId=LDE_GrandmasBirthday2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Worried): Uh oh...
 **GRANDMA**: Oh Maddie, I was just looking for you and-
@@ -2771,9 +3018,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Frustrated): I see...
 **GRANDMA** (Frustrated): This was my sister’s idea, wasn’t it?
 
-### LDE GrandmasBirthday2023 LayerDecoration 07 Dialogue
+### Grandma's Pool Party — part of the event (exact trigger not dumped)
 `LDE_GrandmasBirthday2023_LayerDecoration_07_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Grandma's Pool Party, eventId=LDE_GrandmasBirthday2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Grandma! I’m surprised to find you here!
 **GRANDMA** (Joyous): How come, dearie? Because of the pool? Oh, don’t worry about that.
@@ -2782,9 +3029,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): Of course! It comes with a lifeguard too!
 **HANK** (Charming): Hello!
 
-### LDE GrandmasBirthday2023 LayerDecoration 12 Dialogue
+### Grandma's Pool Party — part of the event (exact trigger not dumped)
 `LDE_GrandmasBirthday2023_LayerDecoration_12_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Grandma's Pool Party, eventId=LDE_GrandmasBirthday2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **GRANDMA** (Encouraging): I could get used to this pool!
 **DEB** (Joyous): Enjoy it, sis! Happy Birthday!
@@ -2793,9 +3040,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Surprised): ...
 **DEB** (Surprised): Oh, isn’t he funny?! Hanky-boo, sweetie? Can I have a moment in private with you?
 
-### LDE GrandmasBirthday2023 LayerDecoration 15 Dialogue
+### Grandma's Pool Party — part of the event (exact trigger not dumped)
 `LDE_GrandmasBirthday2023_LayerDecoration_15_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Grandma's Pool Party, eventId=LDE_GrandmasBirthday2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE**: *Ring... Ring...*
 **MADDIE** (Talking): Hello, this is Maddie Boulton speaking?
@@ -2819,9 +3066,34 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): Or a True Crime podcast!
 **MADDIE** (Surprised): Er... Really?!
 
-### LDE GreenAcresQuest2024 Intro Dialogue
-`LDE_GreenAcresQuest2024_Intro_Dialogue` · seen 25.05.01–26.04.02
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+### Green Acres Quest — item discovered: Grandma
+`LDE_GreenAcresQuest2024_CharacterGrandma_02_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterGrandma_02'], items=['Grandma'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: Hello, dearie. Could you help me?
+**MADDIE** (Encouraging): Of course, Grandma.
+
+### Green Acres Quest — item discovered: Poppy
+`LDE_GreenAcresQuest2024_CommonFlowerD_01_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CommonFlowerD_01'], items=['Poppy'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MADDIE** (Relaxed): Poppies are so beautiful!
+**GRANDMA** (Charming): And “versatile” too.
+**MADDIE** (Thinking): What do you mean by that?
+
+### Green Acres Quest — item discovered: Extra Hot Chilies
+`LDE_GreenAcresQuest2024_GreenhouseChilis_06_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_GreenhouseChilis_06'], items=['Extra Hot Chilies'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MADDIE** (Encouraging): What have you got there, Grandma?
+**GRANDMA** (Encouraging): Oh this, dearie? Why, it’s a classic Boulton Hot Sauce!
+**GRANDMA** (Charming): I’ve had the recipe for YEARS, but never had the chance to make it. Here, have a taste!
+**MADDIE** (Surprised): Oka---aAAYYA WOW! That's SPICY!
+**GRANDMA** (Joyous): Good!
+
+### Green Acres Quest — part of the event (exact trigger not dumped)
+`LDE_GreenAcresQuest2024_Intro_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Hello, dearie! What are you up to?
 **MADDIE**: With everything that’s happened so far, I think it’s time we give a little back to people of Hopewell Bay.
@@ -2838,9 +3110,31 @@ Every story in which Grandma speaks.
 **BELLA** (Relaxed): Hello Maddie! I’ve heard so MUCH about you! You’re much cuter in person! But shorter than I expected.
 **MADDIE** (Doubtful): Nice to meet you! You’re exactly what I expected!
 
-### LDE GreenAcresQuest2024 TC1 Dialogue
-`LDE_GreenAcresQuest2024_TC1_Dialogue` · seen 25.05.01–26.04.02
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+### Green Acres Quest — event end
+`LDE_GreenAcresQuest2024_Outro_Dialogue` · seen 24.07.01–25.07.01
+- trigger: event, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, eventType=Collectible Board Event, moment=event end (versions 24.07.01–25.07.01)
+
+**GRANDMA** (Encouraging): I would call this a success, dearie!
+**MADDIE** (Discouraged): Thanks Grandma...
+**GRANDMA** (Discouraged): What is it, dearie?
+**MADDIE** (Angry): It’s...
+**GRANDMA** (Worried): Emilio?
+**MADDIE** (Discouraged): Yeah. I thought I was getting over our breakup, but with him coming back...
+**GRANDMA** (Frustrated): Look dearie, I wouldn’t worry about him... Or her.
+**GRANDMA** (Frustrated): You’re much too good for them.
+**MADDIE** (Angry): But it still hurts, Grandma.
+**GRANDMA** (Discouraged): I know... I know...
+
+### Green Acres Quest — item discovered: Purple Hydrangea
+`LDE_GreenAcresQuest2024_RareFlowerB_01_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_RareFlowerB_01'], items=['Purple Hydrangea'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA** (Encouraging): How beautiful, Maddie!
+**GRANDMA** (Charming): And my favourite color too.
+
+### Green Acres Quest — part of the event (exact trigger not dumped)
+`LDE_GreenAcresQuest2024_TC1_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **MADDIE** (Frustrated): Ugh...
 **GRANDMA** (Worried): What’s wrong?
@@ -2849,6 +3143,22 @@ Every story in which Grandma speaks.
 **MADDIE** (Surprised): Man- Mandrake? It's poisonous?
 **GRANDMA**: Yes, dearie.
 **MADDIE** (Thinking): Really? Hmm...
+
+### Green Acres Quest — item discovered: Grandma
+`LDE_GreenAcresQuest2024_v2_CharacterGrandma_02_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterGrandma_02'], items=['Grandma'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**GRANDMA** (Thinking): Hmmm... You do not know much about gardening, do you?
+**EMILIO** (Thinking): Not really...
+**GRANDMA** (Charming): I guessed as much. Let me show you!
+
+### Green Acres Quest — item discovered: Purple Hydrangea
+`LDE_GreenAcresQuest2024_v2_RareFlowerB_01_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_RareFlowerB_01'], items=['Purple Hydrangea'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**GRANDMA**: What is Bella's favorite flower? Could it be the rose? Or tulip?
+**GRANDMA** (Thinking): Maybe the forget-me-not?
+**EMILIO** (Thinking): I still don't know. I feel totally hopeless!
 
 ### Green Acres Quest — item discovered: Grandma
 `LDE_GreenAcresQuest_CharacterGrandma_02_Dialogue` · seen 26.05.01–26.07.01
@@ -2902,7 +3212,7 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): I don't want you to catch a cold. God forbid you all lose your voice!
 
 ### The Fa-la-la-la Follies — event start
-`LDE_HolidayCarols2023_EventIntro_Dialogue` · seen 26.04.02–26.07.01
+`LDE_HolidayCarols2023_EventIntro_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=The Fa-la-la-la Follies, eventId=LDE_HolidayCarols2023, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **MADDIE**: Dashing through the snow, do-do-doo-bee-doo...
@@ -2932,17 +3242,17 @@ Every story in which Grandma speaks.
 **GRANDMA** (Joyous): That looks unmistakeably like a bicycle... I could be wrong!
 **MASON** (Joyous): How did Santa know??
 
-### LDE HolidayCarols2023 LayerDecoration 01 Dialogue
+### The Fa-la-la-la Follies — part of the event (exact trigger not dumped)
 `LDE_HolidayCarols2023_LayerDecoration_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=The Fa-la-la-la Follies, eventId=LDE_HolidayCarols2023, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Relaxed): Where will our troupe perform?
 **MADDIE** (Thinking): We can go from door to door, but that's a lot of doors...
 **GRANDMA** (Relaxed): Maybe we could build a stage... And I know the perfect place for it!
 
-### LDE HolidayCarols2023 LayerDecoration 15 Dialogue
+### The Fa-la-la-la Follies — part of the event (exact trigger not dumped)
 `LDE_HolidayCarols2023_LayerDecoration_15_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=The Fa-la-la-la Follies, eventId=LDE_HolidayCarols2023, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MASON** (Worried): Grandma Ursula!
 **GRANDMA**: Whatever is going on, Mason?
@@ -3205,9 +3515,9 @@ Every story in which Grandma speaks.
 **MASON**: And pinecones and walnuts!
 **GRANDMA** (Encouraging): Wonderful! Now we just need to find the perfect tree!
 
-### LDE HolidayOddities2025 TA2 Dialogue
-`LDE_HolidayOddities2025_TA2_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+### Holiday Oddities — part of the event (exact trigger not dumped)
+`LDE_HolidayOddities2025_TA2_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Holiday Oddities, eventId=LDE_HolidayOddities2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Relaxed): Hello, Grandma! I just had the most glorious nap! I feel so totally rested and recharged.
 **GRANDMA**: I am glad to hear it, dearie.
@@ -3217,9 +3527,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Relaxed): Quite sure. Go, go!
 **MADDIE** (Relaxed): Twist my arm!
 
-### LDE HolidayOddities2025 TC1 Dialogue
-`LDE_HolidayOddities2025_TC1_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+### Holiday Oddities — part of the event (exact trigger not dumped)
+`LDE_HolidayOddities2025_TC1_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Holiday Oddities, eventId=LDE_HolidayOddities2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Surprised): Have you already started preparing the food for the holiday dinner?
 **MADDIE** (Thinking): I thought I was going to help you.
@@ -3314,14 +3624,14 @@ Every story in which Grandma speaks.
 **GRANDMA** (Frustrated): ...
 **RODDY** (Charming): I mean, please rest your foot, Ursula.
 
-### LDE Hopeberry2025 Hopeberry5 Dialogue
+### Love on the Vine — part of the event (exact trigger not dumped)
 `LDE_Hopeberry2025_Hopeberry5_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Love on the Vine, eventId=LDE_Hopeberry2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 
-### LDE MurderAtTheMansion C3 Dialogue
-`LDE_MurderAtTheMansion_C3_Dialogue` · seen 26.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+### Murder at the Mansion — part of the event (exact trigger not dumped)
+`LDE_MurderAtTheMansion_C3_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Murder at the Mansion, eventId=LDE_MurderAtTheMansion, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **GRANDMA** (Charming): How is your investigation going? I thought you must be hungry by now, so I've brought you some apple pie fresh from the oven!
 **RODDY** (Encouraging): Thank you, I'm starving!
@@ -3379,9 +3689,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Thinking): So I need to collect the map pieces. But what happens then?
 **GRANDMA** (Charming): You get a reward for each piece, and if you follow the map, you might just solve the whole mystery!
 
-### LDE PicnicConfusion2023 AllRewardsCompleted Dialogue
+### Picnic Confusion! — part of the event (exact trigger not dumped)
 `LDE_PicnicConfusion2023_AllRewardsCompleted_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Picnic Confusion!, eventId=LDE_PicnicConfusion2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **RODDY** (Relaxed): I know this wasn't the original idea, but I have to call it a success!
 **ANTIQUEDEALER** (Discouraged): Well... I was still hoping for something a bit more intimate.
@@ -3392,7 +3702,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Charming): I know...
 
 ### Picnic Confusion! — event start
-`LDE_PicnicConfusion2023_EventIntro_Dialogue` · seen 26.04.02–26.07.01
+`LDE_PicnicConfusion2023_EventIntro_Dialogue` · seen 23.09.02–26.07.01
 - trigger: event, event=Picnic Confusion!, eventId=LDE_PicnicConfusion2023, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **MADDIE** (Surprised): Grandma! Why is this old rusty truck parked outside our home?!
@@ -3406,9 +3716,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Surprised): I... uh...
 **GRANDMA**: Come on then! We need it up and running before the health inspectors catch a glimpse of it and take her away!
 
-### LDE PicnicConfusion2023 Layerdecoration 01 Dialogue
+### Picnic Confusion! — part of the event (exact trigger not dumped)
 `LDE_PicnicConfusion2023_Layerdecoration_01_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Picnic Confusion!, eventId=LDE_PicnicConfusion2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Relaxed): There! At least it's in working order again.
 **GRANDMA** (Surprised): I didn't know you could fix a car, dearie?!
@@ -3417,18 +3727,18 @@ Every story in which Grandma speaks.
 **GRANDMA** (Thinking): You're right! We should probably give her a shiny new coat of paint!
 **MADDIE** (Joyous): Good idea!
 
-### LDE PicnicConfusion2023 Layerdecoration 02 Dialogue
+### Picnic Confusion! — part of the event (exact trigger not dumped)
 `LDE_PicnicConfusion2023_Layerdecoration_02_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Picnic Confusion!, eventId=LDE_PicnicConfusion2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Doubtful): I still think we should have gone with yellow...
 **GRANDMA**: We don't want people to think it's an ambulance, now do we?
 **MADDIE** (Thinking): Oh alright...
 **GRANDMA** (Encouraging): Besides, blue is such an inviting color!
 
-### LDE PicnicConfusion2023 Layerdecoration 03 Dialogue
+### Picnic Confusion! — part of the event (exact trigger not dumped)
 `LDE_PicnicConfusion2023_Layerdecoration_03_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Picnic Confusion!, eventId=LDE_PicnicConfusion2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Encouraging): Looks like the restaurant window still works! 
 **GRANDMA** (Joyous): Ha! I guess I owe your grandfather ten bucks...
@@ -3437,9 +3747,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Relaxed): I guess Boulton's make things to last!
 **GRANDMA** (Charming): That we do, dearie!
 
-### LDE PicnicConfusion2023 Layerdecoration 04 Dialogue
+### Picnic Confusion! — part of the event (exact trigger not dumped)
 `LDE_PicnicConfusion2023_Layerdecoration_04_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Picnic Confusion!, eventId=LDE_PicnicConfusion2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE**: What's a picnic without a rug! 
 **GRANDMA** (Thinking): Do you think all the people will fit on that?
@@ -3447,18 +3757,18 @@ Every story in which Grandma speaks.
 **GRANDMA**: No... But I guess it might be good idea to get more seats? 
 **MADDIE** (Thinking): And maybe sign to show people where to come? 
 
-### LDE PicnicConfusion2023 Layerdecoration 06 Dialogue
+### Picnic Confusion! — part of the event (exact trigger not dumped)
 `LDE_PicnicConfusion2023_Layerdecoration_06_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Picnic Confusion!, eventId=LDE_PicnicConfusion2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Thinking): Hmm... We're probably going to need more than this.
 **GRANDMA**: At least we have some seats for those who want to eat at the counter.
 **MADDIE** (Surprised): Thats right! What about the food?!
 **GRANDMA** (Charming): Don't worry dearie, I have that all sorted out! 
 
-### LDE PicnicConfusion2023 Layerdecoration 07 Dialogue
+### Picnic Confusion! — part of the event (exact trigger not dumped)
 `LDE_PicnicConfusion2023_Layerdecoration_07_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Picnic Confusion!, eventId=LDE_PicnicConfusion2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Encouraging): I admit, I'm surprised we're not serving pies from the food truck! 
 **GRANDMA** (Frustrated): I'm not a one trick pony, you know. I can make plenty of other delicious things. 
@@ -3467,9 +3777,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: Whatever do you mean, dearie? 
 **MADDIE** (Doubtful): It's just... Nevermind. 
 
-### LDE PicnicConfusion2023 Layerdecoration 08 Dialogue
+### Picnic Confusion! — part of the event (exact trigger not dumped)
 `LDE_PicnicConfusion2023_Layerdecoration_08_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Picnic Confusion!, eventId=LDE_PicnicConfusion2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **ANTIQUEDEALER** (Thinking): A ha! Back at the scene of the crime!
 **MASON** (Surprised): Wh- What?
@@ -3484,9 +3794,9 @@ Every story in which Grandma speaks.
 **RODDY** (Surprised): M- Maddie!
 **MADDIE** (Doubtful): What is going on here?!
 
-### LDE PicnicConfusion2023 Layerdecoration 09 Dialogue
+### Picnic Confusion! — part of the event (exact trigger not dumped)
 `LDE_PicnicConfusion2023_Layerdecoration_09_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Picnic Confusion!, eventId=LDE_PicnicConfusion2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **GRANDMA** (Frustrated): Alright boys, out with it!
 **MADDIE** (Annoyed): Yeah, where is everyone?
@@ -3498,9 +3808,9 @@ Every story in which Grandma speaks.
 **MASON** (Relaxed): Oh... That's right! Sorry, Mrs. Boulton!
 **GRANDMA**: Ha! That's alright, dearie.
 
-### LDE PicnicConfusion2023 Layerdecoration 10 Dialogue
+### Picnic Confusion! — part of the event (exact trigger not dumped)
 `LDE_PicnicConfusion2023_Layerdecoration_10_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Picnic Confusion!, eventId=LDE_PicnicConfusion2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **RODDY**: So what do we do now? 
 **MADDIE** (Charming): What do you think? Have a picnic of course!
@@ -3509,18 +3819,18 @@ Every story in which Grandma speaks.
 **MADDIE** (Encouraging): That's right, stick to the original plan!
 **ANTIQUEDEALER** (Discouraged): But... It was original meant to be just us.
 
-### LDE PicnicConfusion2023 Layerdecoration 11 Dialogue
+### Picnic Confusion! — part of the event (exact trigger not dumped)
 `LDE_PicnicConfusion2023_Layerdecoration_11_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Picnic Confusion!, eventId=LDE_PicnicConfusion2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **GRANDMA**: That's good Roddy! Make sure those flags are really high!
 **RODDY** (Relaxed): Yes, ma'am!
 **GRANDMA** (Charming): Oh please, dearie! Call me Grandma!
 **RODDY** (Charming): Yes, ma'am! Erhm... Grandma!
 
-### LDE PicnicConfusion2023 Layerdecoration 14 Dialogue
+### Picnic Confusion! — part of the event (exact trigger not dumped)
 `LDE_PicnicConfusion2023_Layerdecoration_14_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Picnic Confusion!, eventId=LDE_PicnicConfusion2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Wow! Who did the decal work?
 **GRANDMA** (Encouraging): Julius! He's a wonder with a paintbrush!
@@ -3540,34 +3850,19 @@ Every story in which Grandma speaks.
 **MASON** (Joyous): Nnnnggh, that's AMAZING. I think there's something I need to go do... See you later, Grandma Ursula!
 **GRANDMA** (Charming): Happy trails, Mason!
 
-### Circus Caper — item discovered: Escape Vehicle
-`LDE_Rumors2025_HeistPlan_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_HeistPlan_06'], items=['Escape Vehicle'], moment=item discovered (versions 25.05.01–26.07.01)
+### Circus Caper — item discovered: Mini Raffle Ticket
+`LDE_Rumors2025_Lottery_01_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Lottery_01'], items=['Mini Raffle Ticket'], moment=item discovered (versions 25.05.01–25.06.01)
 
-**RODDY**: So are you going to show us how your trick works?  
-  _earlier:_ ~~Stop right there, Fiona! I know what you're doing.~~ (until 25.09.01)
-**MASON** (Charming): Actually, the trick is for you two!  
-  _earlier:_ ~~I just can't believe you'd take advantage of our hospitality like this!~~ (until 25.09.01)
-**RODDY** (Surprised): For us? Are you going to use those chains on us??  
-  _earlier:_ ~~I told you. In this business, you sometimes have to break the rules.~~ (until 25.09.01)
-**MASON** (Joyous): Yes, and it’ll be great! I have the key here.  
-  _earlier:_ ~~I wish I hadn't guessed this, Fiona. I wanted to give you the benefit of the doubt.~~ (until 25.09.01)
-**HANK** (Charming): Umm, is your trick safe?  
-  _earlier:_ ~~I almost pulled it off, too!~~ (until 25.09.01)
-**MASON**: TOTALLY safe.  
-  _earlier:_ ~~I'd be on my jolly way by now if it weren't for your meddling granddaughter!~~ (until 25.09.01)  
-  _(1 cosmetic edit not shown)_
-**HANK** (Joyous): OK, then. Just don’t lose the key, little guy!  
-  _earlier:_ ~~Just tell me, where is it?~~ (until 25.09.01)
-**HANK** (Joyous): What?
-**RINGLEADER** (Surprised): The damned Boultonite!
-**GRANDMA** (Surprised): So that's what you were after...
-**RINGLEADER** (Doubtful): You didn't think I want to tour with the Circus for the rest of my life, did you?
-**GRANDMA** (Frustrated): Well, you can think about that for a nice long while - behind bars!
+**ANTIQUEDEALER** (Charming): I bought lots of raffle tickets to make sure I win the biggest prize!
+**ANTIQUEDEALER** (Discouraged): My ticket has never won, but this time the prize will be mine!
+**DEB** (Joyous): Ah, the excitement! I think I will get some raffle tickets, too.
+**ANTIQUEDEALER** (Relaxed): What is it, Ursula? Are you not going to buy a couple of raffle tickets?
+**GRANDMA** (Doubtful): I know this crowd... At the circus, the house always wins.
 
-### LDE Rumors2025 TA5 Dialogue
+### Circus Caper — part of the event (exact trigger not dumped)
 `LDE_Rumors2025_TA5_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Circus Caper, eventId=LDE_Rumors2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **MASON** (Charming): What do you remember of your time in the circus, Ursula?
 **GRANDMA** (Thinking): It was too long ago...
@@ -3576,9 +3871,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: I can tell you that the circus is a very exciting and sometimes dangerous place.
 **MASON** (Joyous): Wow... Do you think I'm too young to join?
 
-### LDE Rumors2025 TC1 Dialogue
+### Circus Caper — part of the event (exact trigger not dumped)
 `LDE_Rumors2025_TC1_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Circus Caper, eventId=LDE_Rumors2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **PEARL** (Thinking): Could you settle an argument, Ursula?
 **PEARL** (Thinking): We've been trying to figure out what you did in the Circus.
@@ -3588,24 +3883,8 @@ Every story in which Grandma speaks.
 **GRANDMA**: Yes. What is it?
 **GRANDMA** (Joyous): No one guessed it right, did they?
 
-### Circus Caper — item discovered: Duffel Bag
-`LDE_Rumors2025_ThiefProps_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_ThiefProps_04'], items=['Duffel Bag'], moment=item discovered (versions 25.05.01–26.07.01)
-
-**RODDY** (Surprised): How did you pry open the door of the green caravan so quickly?  
-  _earlier:_ ~~I do not want to worry you, dearie, but there has been some weird activity around the Mansion.~~ (until 25.09.01)
-**MASON**: I have many skills. Let’s see what’s in these boxes.  
-  _earlier:_ ~~Are you talking about... the circus?~~ (until 25.09.01)
-**RODDY** (Thinking): Are they a costume for a cat burglar?  
-  _earlier:_ ~~No, but I wouldn't be surprised if they had something to do with it.~~ (until 25.09.01)
-**MASON** (Thinking): It sure looks that way!  
-  _earlier:_ ~~I am serious, dear. Things have been moved around, but nothing seems to be missing.~~ (until 25.09.01)
-**MASON** (Thinking): See? You're just being paranoid.
-**GRANDMA** (Annoyed): Let's hope so...
-
 ### Library08
 `Library08` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Frustrated): Wha... Wha...
 **RODDY** (Doubtful): Excuse me, but who are you?
@@ -3621,7 +3900,6 @@ Every story in which Grandma speaks.
 
 ### Library09
 `Library09` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): Is that true Grandma?!
 **GRANDMA** (Annoyed): Yes... It’s true.
@@ -3638,7 +3916,6 @@ Every story in which Grandma speaks.
 
 ### Library10
 `Library10` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **ARTHUR** (Charming): Mads...
 **MADDIE** (Doubtful): You left me, Arthur. I can’t just forget that.
@@ -3654,7 +3931,6 @@ Every story in which Grandma speaks.
 
 ### Lounge04
 `Lounge04` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **GRANDMA** (Worried): Maddie, dearie.
 **MADDIE** (Doubtful): Grandma.
@@ -3669,7 +3945,6 @@ Every story in which Grandma speaks.
 
 ### Lounge05
 `Lounge05` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **GRANDMA** (Worried): That picture, that day, was not one I take lightly.
 **MADDIE** (Thinking): Were you actually married to someone else? Are you both... still married?
@@ -3680,7 +3955,6 @@ Every story in which Grandma speaks.
 
 ### Lounge06
 `Lounge06` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **GRANDMA**: It was a few years before I met your Grandpa Charlie.
 **GRANDMA**: This family, we were in a lot of financial trouble.
@@ -3693,7 +3967,6 @@ Every story in which Grandma speaks.
 
 ### Lounge07
 `Lounge07` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Discouraged): I'm sorry I wasn't more understanding before. I feel terrible!
 **GRANDMA** (Relaxed): Our past is what makes us who we are, dearie. And maybe it's good for you to know.
@@ -3703,9 +3976,77 @@ Every story in which Grandma speaks.
 **MADDIE**: I'm glad we reconciled, Grandma. I hope we can continue to be more open with each other.
 **MADDIE**: I hope so too, dearie.
 
-### MBE DeckTheHalls2023 Intro
+### Deck the Halls, Clear the Webs — item discovered: Bike Helmet
+`MBE_DeckTheHalls2023_BirthdayGrandmaAccessories_07_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_BirthdayGrandmaAccessories_07'], items=['Bike Helmet'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA** (Charming): They say that fashion comes back in cycles.
+**MADDIE** (Relaxed): Then this stuff should be pretty trendy soon!
+**GRANDMA** (Encouraging): You can't beat the classics, dearie!
+
+### Deck the Halls, Clear the Webs — item discovered: Ring Box
+`MBE_DeckTheHalls2023_BirthdayJewelry_02_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_BirthdayJewelry_02'], items=['Ring Box'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MADDIE** (Thinking): What's this... Looks liks something's fallen behind the boxes...
+**MADDIE** (Thinking): Got it! This doesn't look like it belongs in a dusty basement...
+**GRANDMA** (Surprised): What is it?
+**GRANDMA** (Surprised): I've been looking for this everywhere!!
+
+### Deck the Halls, Clear the Webs — item discovered: Wristwatch Box
+`MBE_DeckTheHalls2023_BirthdayJewelry_05_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_BirthdayJewelry_05'], items=['Wristwatch Box'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MADDIE** (Joyous): Look what I found in a box with all the bags and hats! What a beautiful watch.
+**GRANDMA** (Thinking): I remember that one! If I remember correctly, you can dive to 100 meters while wearing it!
+**MADDIE** (Relaxed): Maybe someone has more use for it than you, Grandma...
+
+### Deck the Halls, Clear the Webs — item discovered: Mysterious Basement Door
+`MBE_DeckTheHalls2023_EntranceNext_03_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_EntranceNext_03'], items=['Mysterious Basement Door'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MADDIE** (Surprised): Another door!
+**MADDIE** (Surprised): Do you have the key to open it, Grandma?
+**GRANDMA** (Joyous): Of course I do, dearie.
+**MADDIE** (Thinking): I wonder what's on the other side! Family secrets, lost treasures...
+**GRANDMA** (Doubtful): Apart from all the dust and cobwebs?
+
+### Deck the Halls, Clear the Webs — item discovered: Fancy Cabinet
+`MBE_DeckTheHalls2023_FancyCabinet_01_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_FancyCabinet_01'], items=['Fancy Cabinet'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MADDIE** (Surprised): Wow! This room is FULL of stuff.
+**GRANDMA** (Thinking): I think it's time we clear some space in here.
+**MADDIE** (Thinking): But all of this stuff is perfectly good... Do we have to give it away?
+**GRANDMA** (Charming): Reduce, reuse, recycle, Maddie!
+
+### Deck the Halls, Clear the Webs — item discovered: Inflatable Pool Slide
+`MBE_DeckTheHalls2023_Floaties_07_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_Floaties_07'], items=['Inflatable Pool Slide'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MADDIE** (Joyous): Do you remember what a great time we had at your birthday party?
+**GRANDMA**: Mmm, yes. Even though I said I didn't really need a party...
+**MADDIE** (Relaxed): You had a great time, I know it!
+**GRANDMA** (Charming): I admit, I have had worse!
+
+### Deck the Halls, Clear the Webs — item discovered: Xmas Gift
+`MBE_DeckTheHalls2023_GiftBox_03_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_GiftBox_03'], items=['Xmas Gift'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MADDIE**: Oh, boy. There's a lot to wrap!
+**GRANDMA** (Encouraging): But we did find a LOT of treasures to give away. Now they can be treasured by someone else!
+
+### Deck the Halls, Clear the Webs — item discovered: Santa’s House
+`MBE_DeckTheHalls2023_House_01_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_House_01'], items=['Santa’s House'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MADDIE** (Surprised): Another door!! This place IS like a maze!
+**GRANDMA** (Surprised): A house like this doesn't give up its secrets easily. You should know that, dearie!
+**MADDIE** (Thinking): Well, the only way is forward.
+
+### Deck the Halls, Clear the Webs — part of the event (exact trigger not dumped)
 `MBE_DeckTheHalls2023_Intro` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=Deck the Halls, Clear the Webs, eventId=MBE_DeckTheHalls2023, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **MADDIE** (Relaxed): I think it's that time of year again...
 **GRANDMA**: What, dearie?
@@ -3716,44 +4057,116 @@ Every story in which Grandma speaks.
 **MADDIE** (Encouraging): You may be right, but we need to find the decorations.
 **MADDIE** (Encouraging): Come on, get your flashlight. It'll be an adventure, and who knows what we'll find...
 
+### Deck the Halls, Clear the Webs — item discovered: Half-wrapped Gift
+`MBE_DeckTheHalls2023_PackingSack_04_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_PackingSackProducing_01'], items=['Half-wrapped Gift'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MADDIE** (Joyous): Tape, ribbon, paper... Here's everything we need to wrap the presents.
+**GRANDMA** (Charming): You know, I am excellent at wrapping presents. Do you want to have a little wrapping race?
+**MADDIE**: I don't think that's in the spirit of the season, Grandma!
+
+### Deck the Halls, Clear the Webs — item discovered: Elegant Perfume
+`MBE_DeckTheHalls2023_Perfumes_05_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_Perfumes_05'], items=['Elegant Perfume'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MADDIE** (Surprised): What an elegant bottle! Wasn't this a birthday present from Julius?
+**GRANDMA**: It was! He does have impeccable taste.
+**MADDIE** (Joyous): Someone is going to be so happy to have this!
+
+### Deck the Halls, Clear the Webs — item discovered: Mr. Antlers
+`MBE_DeckTheHalls2023_Plushies_06_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_Plushies_06'], items=['Mr. Antlers'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MADDIE** (Surprised): Look at all of these old toys!
+**GRANDMA** (Encouraging): I've got an idea! Why don't we wrap these up and give them to Mason's class? That nice boy deserves a little holiday surprise!
+**GRANDMA**: Let's do it!
+
+### Deck the Halls, Clear the Webs — item discovered: Recording Equipment
+`MBE_DeckTheHalls2023_PodcastEquipment_07_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_PodcastEquipment_07'], items=['Recording Equipment'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MADDIE**: I think 'podcaster' is the number one dream profession among 12-year-olds today.
+**GRANDMA** (Surprised): Is it really??
+**MADDIE** (Relaxed): Well, maybe not. But hopefully someone will get some use out of this stuff!
+
+### Deck the Halls, Clear the Webs — item discovered: Santa’s Sleigh Full
+`MBE_DeckTheHalls2023_Sleigh_02_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_Sleigh_02'], items=['Santa’s Sleigh Full'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MADDIE** (Relaxed): All done!
+**MADDIE** (Relaxed): The basement is a little bit neater, we've got plenty of great presents all wrapped up, and we found the decorations.
+**GRANDMA** (Relaxed): Not bad, I have to admit.
+
+### Deck the Halls, Clear the Webs — item discovered: Elf Puppet
+`MBE_DeckTheHalls2023_Toys_06_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_Toys_06'], items=['Elf Puppet'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MADDIE** (Joyous): Spinning tops, toy trains, puppets... This basement is like Santa's workshop.
+**GRANDMA** (Relaxed): It does seem like it!
+**MADDIE**: Let's wrap it all up for a holiday delivery!
+
+### Deck the Halls, Clear the Webs — item discovered: Eggnog
+`MBE_DeckTheHalls2023_Treats_01_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_Treats_01'], items=['Eggnog'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MADDIE** (Relaxed): You know what would be perfect right now?
+**GRANDMA** (Charming): A mug of eggnog?
+**MADDIE** (Joyous): Yes, with an extra candy cane!
+**MADDIE** (Joyous): This really is the best holiday. Even the treats are better!
+**GRANDMA** (Encouraging): I completely agree. Here's to the holidays, Maddie!
+**MADDIE**: Let's make it the best yet!
+
+### Deck the Halls, Clear the Webs — item discovered: Ready for the North
+`MBE_DeckTheHalls2023_XmasClothes_09_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_XmasClothes_09'], items=['Ready for the North'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: People complain about winter being cold...
+**MADDIE**: But?
+**GRANDMA** (Joyous): They are just not dressed approriately!
+
+### Deck the Halls, Clear the Webs — item discovered: All the Trimmings
+`MBE_DeckTheHalls2023_XmasPostcard_07_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_XmasPostcard_07'], items=['All the Trimmings'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MADDIE**: We have a whole bunch of lovely holiday cards, too.
+**MADDIE**: There's enough here to send a greeting to all of our friends.
+**GRANDMA** (Charming): Let's send them. After all, good friends are card to find!
+
+### Deck the Halls, Clear the Webs — item discovered: Young Evergreen
+`MBE_DeckTheHalls2023_XmasTree_03_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_XmasTree_03'], items=['Young Evergreen'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MADDIE** (Joyous): Here we go!
+**GRANDMA** (Charming): That tree looks awfully small...
+**MADDIE** (Encouraging): Well, yes, but we're on the right track.
+**MADDIE** (Encouraging): Let's just keep looking!
+
+### Deck the Halls, Clear the Webs — item discovered: Christmas Tree
+`MBE_DeckTheHalls2023_XmasTree_05_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_XmasTree_05'], items=['Christmas Tree'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MADDIE**: This one seems more promising!
+**GRANDMA** (Encouraging): I knew we had a bigger tree! It's better to have a tree you can use year after year, you know, instead of cutting down a brand-new tree every year.
+**MADDIE** (Relaxed): You've got that right, Grandma!
+
+### Deck the Halls, Clear the Webs — item discovered: Classy Christmas Tree
+`MBE_DeckTheHalls2023_XmasTree_07_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_XmasTree_07'], items=['Classy Christmas Tree'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA** (Thinking): Very nice, indeed! I just think...
+**MADDIE** (Thinking): That it needs more ornaments?
+**GRANDMA** (Charming): Exactly!
+
+### Deck the Halls, Clear the Webs — item discovered: Fabulous Christmas Tree
+`MBE_DeckTheHalls2023_XmasTree_09_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_XmasTree_09'], items=['Fabulous Christmas Tree'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MADDIE** (Relaxed): I think we have everything we need for the tree.
+**GRANDMA**: There's ornaments, tinsel, the star... Looking good to me!
+**MADDIE** (Encouraging): But this is just the start. I'm curious to see what else we'll find...
+
 ### MME MysteryMachineIntro
 `MME_MysteryMachineIntro` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery Machine Event (versions None–None)
-
-**GRANDMA**: Dearie me! It's the old machine I used to play with... TOO many years ago!
-**GRANDMA**: This thing should be long gone by now.
-**GRANDMA**: I wonder if it still works...
-
-### MME MysteryMachineStart
-`MME_MysteryMachineStart` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery Machine Event (versions None–None)
-
-**GRANDMA**: I bet you are wondering what this machine does.
-**GRANDMA**: You thought I was going to tell you?
-**GRANDMA**: Haha! Think again!
-**GRANDMA**: Why don't you press the big green button to find out!
-
-### MME MysteryMachine Intro Dialogue
-`MME_MysteryMachine_Intro_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery Machine Event (versions None–None)
-
-**MADDIE** (Surprised): What's going on?
-**GRANDMA** (Thinking): It's the old machine I used to play with when I was a child... but something's different now...
-**GRANDMA** (Encouraging): I think you've managed to prod the old inventory and order system back to life.
-**GRANDMA** (Encouraging): Maybe you should see if you can make some use of it, dearie?
-
-### MME MysteryMachine Start Dialogue
-`MME_MysteryMachine_Start_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery Machine Event (versions None–None)
-
-**MADDIE** (Thinking): But what exactly does it do?
-**GRANDMA** (Talking): It's one of Ignatius's old inventions... quite brilliant, actually.
-**GRANDMA** (Thinking): But, the order system seems to think the tin can factory is still in operation...
-**GRANDMA** (Encouraging): Why don't you press the big green button to find out!
-
-### MME MysteryMachine default Dialogue
-`MME_MysteryMachine_default_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery Machine Event (versions None–None)
 
 **MADDIE**: *Click*
 **CB-01** (Joyous): BzzzzzzzZZZzz!! G-g-goood aftern- n- n- noon!
@@ -3765,9 +4178,25 @@ Every story in which Grandma speaks.
 **CB-01** (Thinking): M- M- Maddie, w- will you help me?
 **MADDIE** (Relaxed): Sure! Why not!
 
+### MME MysteryMachineStart
+`MME_MysteryMachineStart` · seen 25.05.01–26.07.01
+
+**MADDIE** (Thinking): But what exactly does it do?
+**GRANDMA** (Talking): It's one of Ignatius's old inventions... quite brilliant, actually.
+**GRANDMA** (Thinking): But, the order system seems to think the tin can factory is still in operation...
+**GRANDMA** (Encouraging): Why don't you press the big green button to find out!
+
+### MME MysteryMachine Intro Dialogue
+`MME_MysteryMachine_Intro_Dialogue` · seen 25.05.01–26.07.01
+- trigger: unknown, hint=Mystery Machine Event (versions None–None)
+
+**MADDIE** (Surprised): What's going on?
+**GRANDMA** (Thinking): It's the old machine I used to play with when I was a child... but something's different now...
+**GRANDMA** (Encouraging): I think you've managed to prod the old inventory and order system back to life.
+**GRANDMA** (Encouraging): Maybe you should see if you can make some use of it, dearie?
+
 ### Maddieroom 02
 `Maddieroom_02` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE**: Victoria! What do you want?
 **MADDIE**: It's over!
@@ -3782,7 +4211,6 @@ Every story in which Grandma speaks.
 
 ### Maddieroom 03
 `Maddieroom_03` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Worried): It was Victoria... She's basically vowed revenge upon us. 
 **GRANDMA** (Frustrated): Don't worry about her, dearie. She's had it out for our family for a long time...
@@ -3799,7 +4227,6 @@ Every story in which Grandma speaks.
 
 ### Maddieroom 04
 `Maddieroom_04` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Relaxed): Huh... I remember these toys! 
 **MADDIE** (Encouraging): And over there I would build a huge pillow fort with...
@@ -3815,7 +4242,6 @@ Every story in which Grandma speaks.
 
 ### Maddieroom 05
 `Maddieroom_05` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **GRANDMA**: Michael and Rebecca were the most loving parents you could ever hope for.
 **GRANDMA** (Encouraging): Everything they did was for you Maddie, all their decisions... 
@@ -3834,7 +4260,6 @@ Every story in which Grandma speaks.
 
 ### Maddieroom 06
 `Maddieroom_06` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Worried): Please Grandma... 
 **MADDIE** (Thinking): I sometimes have strange dreams, like I was right there...
@@ -3851,7 +4276,6 @@ Every story in which Grandma speaks.
 
 ### Maddieroom 07
 `Maddieroom_07` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Worried): WE were there?!
 **GRANDMA** (Annoyed): Maddie, you must understand...
@@ -3864,7 +4288,6 @@ Every story in which Grandma speaks.
 
 ### Maddieroom 08
 `Maddieroom_08` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **GRANDMA** (Annoyed): I had a sinking feeling... 
 **GRANDMA** (Discouraged): I stopped and ran out...
@@ -3879,7 +4302,6 @@ Every story in which Grandma speaks.
 
 ### Maddieroom 09
 `Maddieroom_09` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **GRANDMA** (Worried): If we wouldn't have had that fight, Michael would not have charged off.
 **GRANDMA** (Worried): Maybe he would have...
@@ -3893,7 +4315,6 @@ Every story in which Grandma speaks.
 
 ### Maddieroom 10
 `Maddieroom_10` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **GRANDMA** (Worried): Do you hear that? I think it's Winston...
 **MADDIE** (Thinking): Yes, sounds like it's something urgent-
@@ -3904,7 +4325,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Relaxed): T-thank you, Grandma.
 
 ### Maintenance Room: Carry away the debris
-`MaintenanceRoom_BlackmailingBrother` · seen 24.04.01–26.07.01
+`MaintenanceRoom_BlackmailingBrother` · seen 23.09.02–26.07.01
 - trigger: area, area=Maintenance Room, areaId=MaintenanceRoom, hotspotId=ButlersRemoveTileBrickDebrisAF2, phase=task completed, task=Carry away the debris (versions 24.04.01–26.07.01)
 
 **WINSTON** (Worried): Here's the truth... Your brother Leonard has been blackmailing me for many, many years.
@@ -3918,7 +4339,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Surprised): What are you going to do, Grandma?
 
 ### Maintenance Room: Pick the wooden planks up
-`MaintenanceRoom_MaintenanceRoomOutro` · seen 24.04.01–26.07.01
+`MaintenanceRoom_MaintenanceRoomOutro` · seen 23.09.02–26.07.01
 - trigger: area, area=Maintenance Room, areaId=MaintenanceRoom, hotspotId=ButlersRemoveBrokenWoodPilesAC1, phase=task completed, task=Pick the wooden planks up (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Where did Winston go?! It was like he vanished into thin air.
@@ -3931,7 +4352,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Thinking): Why do I get the feeling she's hiding something - again!
 
 ### Maintenance Room: Clean the floor
-`MaintenanceRoom_NotTheButlerUrsulaRemembers` · seen 24.04.01–26.07.01
+`MaintenanceRoom_NotTheButlerUrsulaRemembers` · seen 23.09.02–26.07.01
 - trigger: area, area=Maintenance Room, areaId=MaintenanceRoom, hotspotId=ButlersRemoveFloorDirtAF1, phase=task completed, task=Clean the floor (versions 24.04.01–26.07.01)
 
 **WINSTON** (Surprised): Do you hear that noise? It sounds like a, ahem, cat! In distress! You should go and find it.
@@ -3945,7 +4366,7 @@ Every story in which Grandma speaks.
 **WINSTON** (Worried): Oh, fine! I'll tell you everything. But you're not going to like it.
 
 ### Maintenance Room: Gather the leaves
-`MaintenanceRoom_UrsulaMeetsWinston` · seen 24.04.01–26.07.01
+`MaintenanceRoom_UrsulaMeetsWinston` · seen 23.09.02–26.07.01
 - trigger: area, area=Maintenance Room, areaId=MaintenanceRoom, hotspotId=ButlersRemoveLeavesA2, phase=task completed, task=Gather the leaves (versions 24.04.01–26.07.01)
 
 **MADDIE** (Annoyed): There you are, Grandma! I caught this guy stealing our candlesticks. He says his name is--
@@ -3961,7 +4382,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Annoyed): You'd better spill the beans, or I really will call the cops.
 
 ### Maintenance Room: Pick the debris up
-`MaintenanceRoom_WinstonVanishes` · seen 24.04.01–26.07.01
+`MaintenanceRoom_WinstonVanishes` · seen 23.09.02–26.07.01
 - trigger: area, area=Maintenance Room, areaId=MaintenanceRoom, hotspotId=ButlersRemoveDebrisAE1, phase=task completed, task=Pick the debris up (versions 24.04.01–26.07.01)
 
 **MADDIE** (Worried): Should we call the police about Winston's theft, Grandma?
@@ -3977,7 +4398,6 @@ Every story in which Grandma speaks.
 
 ### MansionDrivewayStatueFinished
 `MansionDrivewayStatueFinished` · seen 22.02.06–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **GRANDMA**: Grandpa Ignatius hasn't looked so good since they built this place, I bet.
 **GRANDMA** (Thinking): When I was a kid, I used to think this statue of Ignatius could see you, wherever you were in the gardens.
@@ -3990,7 +4410,6 @@ Every story in which Grandma speaks.
 
 ### MansionDrivewayStatueRevealed
 `MansionDrivewayStatueRevealed` · seen 22.02.06–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Doubtful): That there is your ancestor, Ignatius Montague Boulton, born on Christmas Day in 1802. He built this mansion.
 **GRANDMA**: Him? That's Ignatius Montague Boulton. He's the one who built this place and made the family fortune.
@@ -4003,7 +4422,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Discouraged): She's hiding something! I just wish I knew what it was - and why!
 
 ### The Grand Drive: Plant flowers
-`MansionDrivewayStatueTaskRevealed` · seen 24.04.01–26.07.01
+`MansionDrivewayStatueTaskRevealed` · seen 23.09.02–26.07.01
 - trigger: area, area=The Grand Drive, areaId=Driveway, hotspotId=DrivewayStatuePlantFlowers, phase=task completed, task=Plant flowers (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): I wonder what Ignatius Boulton did to deserve a statue?
@@ -4014,7 +4433,6 @@ Every story in which Grandma speaks.
 
 ### MansionRightFillerPoolFinished
 `MansionRightFillerPoolFinished` · seen 22.02.06–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **GRANDMA** (Encouraging): Oh my, I just remembered! I pushed your grandfather into that pool once!
 **MADDIE** (Worried): Huh? Why? Were you mad at him?
@@ -4027,7 +4445,6 @@ Every story in which Grandma speaks.
 
 ### MansionRightFillerStatueFinished
 `MansionRightFillerStatueFinished` · seen 22.02.06–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Thinking): That’s a pretty statue. Must have cost a lot. Tell me more about Ignatius and his tin cans.
 **GRANDMA** (Doubtful): Tinned food was a miraculous invention back then. No one had fridges. Ignatius saw how much demand there was as soon as he sold his first can.
@@ -4037,7 +4454,6 @@ Every story in which Grandma speaks.
 
 ### MapFirstView
 `MapFirstView` · seen 22.02.06–26.07.01
-- trigger: unknown, hint=Tutorial / map intro (versions None–None)
 
 **MADDIE** (Worried): You wanted to see me, Grandma?
 **MADDIE**: It's time for you to find out what’s behind that locked door in my garden wall.
@@ -4047,7 +4463,6 @@ Every story in which Grandma speaks.
 
 ### MapFromMansionToGarage
 `MapFromMansionToGarage` · seen 22.02.06–26.07.01
-- trigger: unknown, hint=Tutorial / map intro (versions None–None)
 
 **MADDIE** (Surprised): A mansion!? What other secrets are you hiding, Grandma?
 **GRANDMA** (Thinking): We can't reach the front door.
@@ -4055,7 +4470,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Encouraging): Let's clear this up so we can start saving the estate! First, we need tools to clear a path in...
 
 ### The Maze: Remove broken vase
-`MazeDialogue_D` · seen 24.04.01–26.07.01
+`MazeDialogue_D` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePath1RemoveBrokenVaseC14, phase=task completed, task=Remove broken vase (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePath2PillarPlaceVineJ10, phase=task completed, task=Plant vines (versions 25.04.03–26.07.01)
 
@@ -4068,7 +4483,7 @@ Every story in which Grandma speaks.
 **GRANDMA** (Joyous): I know the answer! And it's a good one, dearie.
 
 ### The Maze: Remove mud
-`MazeDialogue_E` · seen 24.04.01–26.07.01
+`MazeDialogue_E` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePath2SmallGateRemoveMudL3, phase=task completed, task=Remove mud (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePath2SmallGateGrowVineL7, phase=task completed, task=Plant vines (versions 25.04.03–26.07.01)
 
@@ -4081,7 +4496,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Surprised): You didn't? Why not, Grandma?
 
 ### The Maze: Remove cobwebs
-`MazeDialogue_F` · seen 24.04.01–26.07.01
+`MazeDialogue_F` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePathCenterRemoveCobwebsN9, phase=task completed, task=Remove cobwebs (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeCenterGateCleanAndFixArchO8, phase=task completed, task=Clean and fix arch (versions 25.04.03–26.07.01)
 
@@ -4093,7 +4508,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Thinking): Now that they've gone, I can get back to figuring out what Grandpa wanted me to do here!
 
 ### The Maze: Remove wooden planks
-`MazeIntro` · seen 24.04.01–26.07.01
+`MazeIntro` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeEntryRemoveWoodenPlanksA2, phase=task completed, task=Remove wooden planks (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeEntryPathRemoveBrokenTiles, phase=task completed, task=Remove broken tiles (versions 25.04.03–26.07.01)
 
@@ -4107,7 +4522,6 @@ Every story in which Grandma speaks.
 
 ### Musicianroom08
 `Musicianroom08` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **GRANDMA** (Surprised): Dearie, who are all these people outside in hard hats?
 **GRANDMA** (Charming): For a moment, I thought we were being ambushed by an army of Roddys.
@@ -4122,7 +4536,6 @@ Every story in which Grandma speaks.
 
 ### Musicianroom10
 `Musicianroom10` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **GRANDMA** (Discouraged): Is everything alright with you, dearie? You look like you’ve seen a ghost!
 **MADDIE** (Worried): You could say that. I just received a text from Arthur!
@@ -4143,7 +4556,6 @@ Every story in which Grandma speaks.
 
 ### Musicianroom12
 `Musicianroom12` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Thinking): But what happened to him, Grandma? Does he still make music?
 **GRANDMA** (Discouraged): Oh, I don't think so, dearie. It's not a pleasant story...
@@ -4159,7 +4571,6 @@ Every story in which Grandma speaks.
 
 ### Musicianroom13
 `Musicianroom13` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Annoyed): So if Eddie hadn't signed with that record label, he might still be making music today...
 **MADDIE** (Worried): I-I can't help but sympathize with him. After all, I am in a similar situation.
@@ -4170,7 +4581,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Encouraging): You're right. Thanks, Grandma! I needed to hear this.
 
 ### The Old Well: Remove foliage
-`OldWell_Goldwatch_Intro` · seen 24.04.01–26.07.01
+`OldWell_Goldwatch_Intro` · seen 23.09.02–26.07.01
 - trigger: area, area=The Old Well, areaId=OldWell, hotspotId=OldWellPathwayGateRemoveFoliage, phase=task completed, task=Remove foliage (versions 24.04.01–26.07.01)
 
 **RODDY**: Hey Maddie, I got your message. What can I do?
@@ -4186,7 +4597,6 @@ Every story in which Grandma speaks.
 
 ### OldWell Rescue
 `OldWell_Rescue` · seen 22.02.06–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Joyous): Yay, you're free!
 **MADDIE** (Thinking): Hello boy! Do you have a name? I don't see a collar or tag on you.  
@@ -4228,7 +4638,6 @@ Every story in which Grandma speaks.
 
 ### PE Christmas2022Fifth Gift
 `PE_Christmas2022Fifth_Gift` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Pet event (versions None–None)
 
 **GRANDMA**: Here's a special delivery for you, Maddie!
 **MADDIE** (Worried): Hmm, another gift from "Santa".
@@ -4240,7 +4649,6 @@ Every story in which Grandma speaks.
 
 ### PE Christmas2022First Gift
 `PE_Christmas2022First_Gift` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Pet event (versions None–None)
 
 **GRANDMA** (Charming): Maddie, dearie, this package was sitting by the mailbox for you!
 **MADDIE** (Surprised): For me? I'd better open it and see what's inside!
@@ -4252,7 +4660,6 @@ Every story in which Grandma speaks.
 
 ### PE Christmas2022Fourth Gift
 `PE_Christmas2022Fourth_Gift` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Pet event (versions None–None)
 
 **MADDIE** (Thinking): What's that you have there, Grandma? Did someone give you a gift?
 **GRANDMA** (Encouraging): No, it's for you again, dearie!
@@ -4266,7 +4673,6 @@ Every story in which Grandma speaks.
 
 ### PE Christmas2022Seventh Gift
 `PE_Christmas2022Seventh_Gift` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Pet event (versions None–None)
 
 **GRANDMA** (Worried): Uh, Maddie? I found another package for you.
 **MADDIE** (Worried): Another one?! This is getting silly!
@@ -4279,7 +4685,6 @@ Every story in which Grandma speaks.
 
 ### PE Christmas2022Tenth Gift
 `PE_Christmas2022Tenth_Gift` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Pet event (versions None–None)
 
 **MADDIE** (Encouraging): Another gift! What could it be?
 **GRANDMA** (Thinking): You seem happier about the gifts now, dearie.
@@ -4293,7 +4698,6 @@ Every story in which Grandma speaks.
 
 ### PE Christmas2022Twelfth Gift
 `PE_Christmas2022Twelfth_Gift` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Pet event (versions None–None)
 
 **RODDY** (Charming): Hi, Maddie! I found another gift for you.  
   _(1 cosmetic edit not shown)_
@@ -4309,8 +4713,23 @@ Every story in which Grandma speaks.
 **RODDY**: I - I mean, they - are probably glad the gifts made you smile.
 
 ### The Pool House: Remove the broken painting
-`PoolHouse_GrandmaIsBack` · seen 24.04.01–26.07.01
+`PoolHouse_GrandmaIsBack` · seen 23.09.02–26.07.01
 - trigger: area, area=The Pool House, areaId=PoolHouse, hotspotId=PoolHouseLoungeRemovePainting, phase=task completed, task=Remove the broken painting (versions 24.04.01–26.07.01)
+
+**GRANDMA** (Encouraging): So, what's been going on here?  
+  _earlier:_ ~~...Wow!~~ (until 23.09.02)
+**MADDIE** (Annoyed): What do you mean? What's going on?! Grandma, I just had to bail you out of jail!  
+  _earlier:_ ~~Maddie's really outdone herself here!~~ (until 23.09.02); ~~What do you mean, what's been going on?! Grandma, I just had to bail you out of the police station!~~ (until 23.12.01)
+**MADDIE** (Doubtful): What happened? Why were you arrested?!  
+  _earlier:_ ~~Seeing the place restored to its former glory really takes me back...~~ (until 23.09.02)
+**GRANDMA** (Discouraged): I don't want to talk about it.   
+  _earlier:_ ~~I was sure I would be the one to woo Ursula, but that Charlie...~~ (until 23.09.02)
+**GRANDMA** (Frustrated): But I'll tell you this - someone betrayed your trust, Maddie.  
+  _earlier:_ ~~He just came in and swept her off her feet.~~ (until 23.09.02)
+**ANTIQUEDEALER** (Thinking): But the truth is, I never stopped loving her...
+
+### PoolHouse Outro
+`PoolHouse_Outro` · seen 22.02.06–22.02.06
 
 **GRANDMA** (Encouraging): So, what's been going on here?  
   _earlier:_ ~~...Wow!~~ (until 23.09.02)
@@ -4338,7 +4757,7 @@ Every story in which Grandma speaks.
 **MADDIE**: Okay, sorry Grandma. Tell me another happy story about them instead, please?
 
 ### Romantic Spot: Place butterflies
-`RomanticSpotClosing` · seen 24.04.01–26.07.01
+`RomanticSpotClosing` · seen 23.09.02–26.07.01
 - trigger: area, area=Romantic Spot, areaId=RomanticSpot, hotspotId=LoveStoryPlaceButterfliesN1, phase=task completed, task=Place butterflies (versions 24.04.01–26.07.01)
 
 **GRANDMA** (Relaxed): Thanks for asking me to come and help out here, Maddie.
@@ -4383,7 +4802,7 @@ Every story in which Grandma speaks.
 **GRANDMA** (Discouraged): Well, alright, but I need some time to gather my memories. This isn't easy to talk about, you know.
 
 ### Romantic Spot: Remove stream debris
-`RomanticSpotSmallCreek` · seen 24.04.01–26.07.01
+`RomanticSpotSmallCreek` · seen 23.09.02–26.07.01
 - trigger: area, area=Romantic Spot, areaId=RomanticSpot, hotspotId=LoveStoryRemoveStreamDebrisI1, phase=task completed, task=Remove stream debris (versions 24.04.01–26.07.01)
 
 **MADDIE** (Worried): What's the matter, Grandma? Why do you look so sad?
@@ -4397,7 +4816,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Worried): What made them get back together?
 
 ### Romantic Spot: Place swan head
-`RomanticSpotSmallStatue` · seen 24.04.01–26.07.01
+`RomanticSpotSmallStatue` · seen 23.09.02–26.07.01
 - trigger: area, area=Romantic Spot, areaId=RomanticSpot, hotspotId=LoveStoryPlaceSwanHeadM3, phase=task completed, task=Place swan head (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Well, Grandma? What made my mom and dad get back together?
@@ -4412,7 +4831,7 @@ Every story in which Grandma speaks.
 **GRANDMA** (Encouraging): They were sweet on each other, but they were both even sweeter on you, dearie.
 
 ### Romantic Spot: Remove treehouse cover
-`RomanticSpotTreehouse` · seen 24.04.01–26.07.01
+`RomanticSpotTreehouse` · seen 23.09.02–26.07.01
 - trigger: area, area=Romantic Spot, areaId=RomanticSpot, hotspotId=LoveStoryRemoveTreehouseCoverH5, phase=task completed, task=Remove treehouse cover (versions 24.04.01–26.07.01)
 
 **MADDIE** (Joyous): This treehouse is just adorable. I can't wait to sit up there and read a book.
@@ -4424,9 +4843,18 @@ Every story in which Grandma speaks.
 **MADDIE** (Joyous): How lovely. It's nice to hear how happy they were!
 **GRANDMA** (Worried): They were happy... most of the time...
 
-### SBE Jailbreak 1StCartFromTasks
+### The Great Escape (Jailbreak) — item discovered: Stocked up Storage
+`SBE_Jailbreak_1StActivationOfTheStorageRoom` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_FullStorage_01'], items=['Stocked up Storage'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**OFF. HILL**: Hold it! I thought I told you that you couldn’t-
+**GRANDMA**: Come in without a cart? I know that, dearie, so here it is! All ready for the Storage Room!
+**OFF. HILL**: Oh... Uuuh, okay then. Go on in then!
+**GRANDMA**: Thank you.
+
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_1StCartFromTasks` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRACE**: I see you like exploring the jail, but unfortunately, the Warden runs a pretty tight ship. However, there is a trick I learned when I first started here...
 **KITTY**: Use carts!
@@ -4434,9 +4862,30 @@ Every story in which Grandma speaks.
 **BLUETOOTH**: Well, if you have a filled cart, the guards will let you in, because it looks like you’re working there!
 **GRANDMA**: Brilliant idea, dearie!
 
-### SBE Jailbreak AdamsTalks
+### The Great Escape (Jailbreak) — item discovered: Full Cleaner Cart
+`SBE_Jailbreak_1StCartIsFull` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_CleanerCartFull_01'], items=['Full Cleaner Cart'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: It’s all filled up now.
+
+### The Great Escape (Jailbreak) — item discovered: Ursula "Grandma" Boulton
+`SBE_Jailbreak_1StContrabandBurnerPhoneAppears` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_Prisoner0_02'], items=['Ursula "Grandma" Boulton'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: Well well well...
+**GRANDMA**: A burner phone! Wait, what’s this? It has a note on it saying, “Call me.”
+**GRANDMA**: Curious...
+
+### The Great Escape (Jailbreak) — item discovered: Tired Grandma
+`SBE_Jailbreak_1StTimeGrandmaIsTired` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_Prisoner0_01'], items=['Tired Grandma'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: Oh, dearie me... It’s been a very long day!
+**GRANDMA**: I think it’s time for me to get a little shuteye in my cell...
+
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_AdamsTalks` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **XO ADAMS**: Well, Mrs. Boulton, you sure did a great service for us today!
 **XO ADAMS**: Thanks to you, there was no way for ex-Warden Decker to deny what’s been going on here. He admitted to everything!
@@ -4447,17 +4896,76 @@ Every story in which Grandma speaks.
 **XO ADAMS**: I’m not a miracle worker. Besides, I don’t think it should be too inconvenient for you... With your knitting project and all.
 **GRANDMA**: ... I see.
 
-### SBE Jailbreak FinalWardenConfrontrationIntro
+### The Great Escape (Jailbreak) — item discovered: Full Book Cart
+`SBE_Jailbreak_BookCartFull` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_BookCartFull_01'], items=['Full Book Cart'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: It’s all filled up now.
+
+### The Great Escape (Jailbreak) — item discovered: Empty Cafeteria
+`SBE_Jailbreak_Cafeteria` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_EmptyCafeteria_01'], items=['Empty Cafeteria'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: Eerily quiet... But I should still be able to avoid the guards for now...
+**GRANDMA**: I’m sure a lot of food would liven up the place, however!
+
+### The Great Escape (Jailbreak) — item discovered: Full Food Cart
+`SBE_Jailbreak_CafeteriaCartFull` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_FoodCartFull_01'], items=['Full Food Cart'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: It’s all filled up now.
+
+### The Great Escape (Jailbreak) — item discovered: Full Cleaner Cart
+`SBE_Jailbreak_CleanerCartFull` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_CleanerCartFull_01'], items=['Full Cleaner Cart'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: It’s all filled up now.
+
+### The Great Escape (Jailbreak) — item discovered: 77591440
+`SBE_Jailbreak_DropingGraceIdOnTrashBag` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['77591440'], items=['77591440'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRACE**: Grandma c’mere. I think I trust you enough to show you something.
+**GRANDMA**: Alright dearie, hold your horses!
+**GRACE**: Shhh... Okay, you know these trash bags we collect? Well, they serve another purpose.
+**GRACE**: The Warden is a tough brute, and he doesn’t allow almost anything in here. So we’ve taken it upon ourselves to bring in some more...
+**GRACE**: Favourable items. Here! Have these.
+**GRANDMA**: Thank you, dearie! These will really come in handy!
+
+### The Great Escape (Jailbreak) — item discovered: 21093171
+`SBE_Jailbreak_DroppingGrandmaIdOnPhone` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['21093171'], items=['21093171'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: Hello? You asked me to call you.
+**? ? ?**: Ah, good. You received the phone. It’s very hard to keep things undercover here...
+**GRANDMA**: Undercover?! Who are you?
+**? ? ?**: Executive Correctional Officer Kimberly Adams. This isn’t usually the way I speak with our inmates, but matters have escalated... Look.
+**? ? ?**: You and I both want something and we can help each other. I can get you what you need to leave this place. But in return...
+**? ? ?**: I need you to do something for me.
+**GRANDMA**: Well dearie, it all depends on what that something is. I’m also slightly concerned for you, because you don’t seem to know EXACTLY who you’re talking to...
+**? ? ?**: Why, THE Ursula Boulton, of course. I know ALL about YOU! Help me out with this little thing, and who knows? I may be even generous enough to help you...
+**? ? ?**: Get out of jail.
+**GRANDMA**: ...
+**GRANDMA**: I see.
+**? ? ?**: I’ll be in contact.
+
+### The Great Escape (Jailbreak) — item discovered: Shut Down Factory
+`SBE_Jailbreak_Factory` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_FactoryOff_01'], items=['Shut Down Factory'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: I’m sure this place will be busy when they have some scrap metal to work with.
+
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_FinalWardenConfrontrationIntro` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **WARDEN DECKER**: I don’t know how you fooled my guards, but I doubt there is anything you can do to harm me.
 **WARDEN DECKER**: Don’t forget... THIS IS MY DOMAIN.
 **GRANDMA**: Not for long dearie...
 
-### SBE Jailbreak GrandmaAsksBluetoothAboutLeaving
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_GrandmaAsksBluetoothAboutLeaving` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **BLUETOOTH**: I can’t believe they got the Warden! Wow!
 **GRANDMA**: He was incredibly corrupt, dearie.
@@ -4467,9 +4975,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: Wouldn’t you want to join them?
 **BLUETOOTH**: Me? Naah, I can wait. I got a fun enough job to pass the time, and now I can tease the guards!
 
-### SBE Jailbreak GrandmaAsksGraceAboutLeaving
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_GrandmaAsksGraceAboutLeaving` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: How are you doing, dearie?
 **GRACE**: Just great! Here I was, thinking that we’d all get to leave after this mess and I just found out it’ll take till the end of the year to clear my name.
@@ -4478,27 +4986,39 @@ Every story in which Grandma speaks.
 **GRACE**: Probably go see my sister again and give her a big hug...
 **GRACE**: I’d do that right away if I could...
 
-### SBE Jailbreak GrandmaAsksIzzyAboutLeaving
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_GrandmaAsksIzzyAboutLeaving` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **IZZY**: Hi...
 **GRANDMA**: Oh Izzy... I’m sorry you aren’t one of the first to leave.
 **IZZY**: It’s okay, I guess. After the Warden’s arrest, my father started getting a bit of headway on my situation. There’s even evidence that my case may even be fraudulent!
 **IZZY**: But... End of the year? It is quite a long time to wait if you ask me...
 
-### SBE Jailbreak GrandmaCellInOperationJailbreak
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_GrandmaCellInOperationJailbreak` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Wonderful, the cell is nice and clean for the day!  
   _(1 cosmetic edit not shown)_
 **GRACE**: You know, I’ve never seen it like this before. It’s down right homely!
 **GRANDMA**: Thank you dearie!
 
-### SBE Jailbreak GrandmaTalksToAdamsAboutEscapePlan
+### The Great Escape (Jailbreak) — item discovered: Woolen Decoy Grandma
+`SBE_Jailbreak_GrandmaDecoyAndChooseWhoGetsToEscape` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_Decoy_01'], items=['Woolen Decoy Grandma'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: Finally... My decoy is ready.
+**GRANDMA**: In the morning, when the guards come and find my cell empty, apart from my decoy. They’ll think I’ve escaped.
+**GRANDMA**: What they won’t know is, I’ll be hiding in the decoy! So when they throw the decoy out in the trash, that’ll be my escape.
+**GRANDMA**: Good thing I sabotaged the trash compactor... But...
+**GRANDMA**: What about Grace, Izzy and Bluetooth? They deserve to escape as much as I do!
+**GRANDMA**: I could tell them about my escape plan. But only one of them could hide in the decoy...
+**GRANDMA**: So I need to be sure about this... Do I go... Or do I give my spot to someone else? Who do I pick?!
+
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_GrandmaTalksToAdamsAboutEscapePlan` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **XO ADAMS**: So, it looks like you’ve met the illustrious warden.
 **GRANDMA**: Unfortunately, yes. But thankfully, I know the type. His hubris will be his downfall, dearie.
@@ -4509,88 +5029,88 @@ Every story in which Grandma speaks.
 **XO ADAMS**: Wool? That’s it?!
 **GRANDMA**: And... Some pie.
 
-### SBE Jailbreak Grandmatask1
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_Grandmatask1` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: I guess it all started when they threw me in jail after the police believed that the gold watch Maddie found linked me to the death of Charlie!  
   _(1 cosmetic edit not shown)_
 
-### SBE Jailbreak Grandmatask2
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_Grandmatask2` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Of course, there was a connection to me. I gave him that watch! But I was soon going to find out another reason why they threw me into this particular jail...
 
-### SBE Jailbreak Grandmatask3
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_Grandmatask3` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Being in jail wasn’t so bad. So in order to pass the time, I took up a job as a cleaner. These messy cells don’t clean themselves.
 **GRANDMA**: Seemed oddly appropriate, since I had to sort out the mess that got me thrown me in jail as well. Thankfully, Julius was there to help me on that front.
 **GRANDMA**: So, while I waited, I thought it best to make as many friends as possible. And that is when I met Grace...
 **GRANDMA**: Step 3. Create a decoy. With the items I can get from each location and with the help of my allies, I’ll make a convincing decoy of myself.
 
-### SBE Jailbreak Guard2Intro
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_Guard2Intro` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **OFF. LEWIS**: Warden Decker was very specific to keep an eye on you, Mrs. Boulton.
 **GRANDMA**: Oh? I’m not the only one you’re keeping an eye on, am I Officer Lewis?
 **OFF. LEWIS**: Wh... What do you mean by that?!
 
-### SBE Jailbreak Guard2Outro
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_Guard2Outro` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **OFF. LEWIS**: How?! How did you know that I have a crush on Lt. Johnson?
 **GRANDMA**: I have my ways, dearie. Now... I need you to tell me everything about the Warden.
 **OFF. LEWIS**: Alright... Alright, I’ll talk!
 
-### SBE Jailbreak Guard2TaskA
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_Guard2TaskA` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Oh, please... I’ve seen the way you look at him.
 **GRANDMA**: Not to mention the sweet notes you sometimes leave.
 **OFF. LEWIS**: I... I don’t know what you’re talking about!
 
-### SBE Jailbreak Guard2TaskB
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_Guard2TaskB` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **OFF. LEWIS**: You can’t threaten me! I’m a guard.
 **GRANDMA**: Oh dearie, I’m not threatening. I’m just stating obvious facts.
 **GRANDMA**: Which begs the question. Do you think Lt. Johnson knows about this?
 
-### SBE Jailbreak Guard3Intro
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_Guard3Intro` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **OFF. HILL**: *Yawn* Okay, I’ve been tasked to follow you around, but to be honest, I’m way too tired. So how about I just sit here and you do nothing illegal?
 **GRANDMA**: Oh, dearie... I wouldn’t dream of such a thing.
 **OFF. HILL**: ZzzzZZzzz- Huh, what?
 
-### SBE Jailbreak Guard3Outro
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_Guard3Outro` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **OFF. HILL**: ZzzzzZZzzzzz...
 **GRANDMA**: Dearie, I really need you to wake up. You shouldn’t be sleeping on the job, you know. Might look bad.
 **OFF. HILL**: Huh what?! Oh no! Not again! I can’t get a third strike! Please, I’ll do anything!
 
-### SBE Jailbreak Guard3TaskA
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_Guard3TaskA` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Ma’am?
 **OFF. HILL**: ZzzzzzzZzz...
 **GRANDMA**: MA’AM!
 **OFF. HILL**: Oh! Yes? I was just resting my eyes. The air is pretty dry in here...
 
-### SBE Jailbreak Guard3TaskB
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_Guard3TaskB` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **OFF. HILL**: ZzzzzZZzzzz...
 **GRACE**: So how long has she been like that?
@@ -4598,48 +5118,72 @@ Every story in which Grandma speaks.
 **GRACE**: With guards like there, I often wonder why we don’t just walk out of here...
 **OFF. HILL**: ZzzzzzZzzz....
 
-### SBE Jailbreak GuardIntro
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_GuardIntro` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **LT. JOHNSON**: You don’t scare me, Grandma! You may be popular amongst the other inmates, but that means nothing to me.
 **LT. JOHNSON**: In here, I am the law.
 **GRANDMA**: We shall see about that, dearie.
 
-### SBE Jailbreak GuardOutro
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_GuardOutro` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **LT. JOHNSON**: Alright, alright! You win Grandma! I don’t know how you learned all that about me, but I can’t let people know. I’ll lose my job!
 **GRANDMA**: Then you won’t mind helping me take down the Warden.
 **LT. JOHNSON**: You want me to what?!
 
-### SBE Jailbreak GuardTaskA
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_GuardTaskA` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Lt. Johnson... You seem to be doing well for yourself.
 **LT. JOHNSON**: And what would YOU know about that?
 **GRANDMA**: You’d be surprised...
 
-### SBE Jailbreak GuardTaskB
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_GuardTaskB` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **LT. JOHNSON**: Okay, I’ll bite. What do you think you know?
 **GRANDMA**: Oh, nothing much... Only that you “may” have bought a sailboat and “may” have forgotten to pay your taxes...
 **LT. JOHNSON**: Wh- What?!
 
-### SBE Jailbreak MergingLocationDialogue
+### The Great Escape (Jailbreak) — item discovered: Jail Bell
+`SBE_Jailbreak_JailboardIntro` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_MorningBell_03'], items=['Jail Bell'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: *Writing in journal*
+**GRANDMA**: Dear Journal,
+**GRANDMA**: I’ve decided to write an account of my short time in jail.
+**GRANDMA**: I must admit that it was a strange time, and I met a lot of interesting people.
+**GRANDMA**: However, I didn’t quite expect it to end the way it did! But perhaps it would be best if I start at the beginning...
+**GRANDMA**: <i>No matter how lovely things are in here, I have to leave. I need to get back to Maddie before she gets herself into trouble! </i>
+
+### The Great Escape (Jailbreak) — item discovered: Closed Library
+`SBE_Jailbreak_Library` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_LibraryOff_01'], items=['Closed Library'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: Never underestimate a good library. They often contain more information than just books...
+
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_MergingLocationDialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: I should really explore this jail. This jail cell shouldn’t be the only thing I know about this place. Besides...
 **GRANDMA**: Maybe I’ll find something useful in them.
 
-### SBE Jailbreak P1Complete
+### The Great Escape (Jailbreak) — item discovered: Evidence of Corruption
+`SBE_Jailbreak_MoneybagDialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_SpecialSecret_01'], items=['Evidence of Corruption'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: This is it! Proof that the Warden is taking bribes to keep people in jail illegally!
+**GRANDMA**: Let’s show him that his time is up.
+
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P1Complete` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRACE**: Yes, my sister is Jackie Martin! She works for the Boulton Bugle.
 **GRANDMA**: Oh dearie, I know her! She is good friends with my granddaughter Maddie!
@@ -4649,9 +5193,9 @@ Every story in which Grandma speaks.
 **GRACE**: I think the Warden is in on it, too, because I’ve been stuck here for months. My lawyer even says he can’t find any legal paperwork to say I should be in here, except... Here I am!
 **GRANDMA**: Well... That just won’t do, will it, dearie?
 
-### SBE Jailbreak P1GangUnlock
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P1GangUnlock` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **? ? ?**: So, it looks like you’re making friends...
 **GRANDMA**: Yes, and it looks like you’re illegally holding people against their will!
@@ -4661,9 +5205,9 @@ Every story in which Grandma speaks.
 **? ? ?**: He is taking money from people in power to make their rivals disappear. I cannot, in good conscience, let this continue. That’s why I need your help.
 **GRANDMA**: I’ll call you later with more information. For now, go meet with “Kitty” Palmer. She works in the Storage Room. You’ll find that she may share something with Grace...
 
-### SBE Jailbreak P1Intro
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P1Intro` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Excuse me, dearie...
 **GRACE**: What is it?
@@ -4674,18 +5218,18 @@ Every story in which Grandma speaks.
 **GRANDMA**: Let me help you!
 **GRACE**: Alright then... try to keep up!
 
-### SBE Jailbreak P1TaskA
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P1TaskA` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRACE**: So what are you in for, Grandma?
 **GRACE**: You don’t seem the type to end up in a place like this...
 **GRANDMA**: It’s all big a misunderstanding... They arrested me in front of my mansion and-
 **GRACE**: Mansion?!
 
-### SBE Jailbreak P1TaskB
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P1TaskB` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRACE**: That’s one amazing story! If I weren’t in here, I’d probably write a piece on you!
 **GRANDMA**: Are you a writer, dearie?
@@ -4693,18 +5237,18 @@ Every story in which Grandma speaks.
 **GRACE**: My sister isn’t half bad either! Jackie has taken up the mantle while I’m here being framed.
 **GRANDMA**: Framed? Wait, did you say your sister was Jackie? As in Jackie Martin?
 
-### SBE Jailbreak P2Complete
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P2Complete` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: So, are you telling me... you’re only in here for scratching a car?
 **KITTY**: Yup! Pretty much. I’m still waiting to see my lawyer. But no one’s come yet.
 **GRANDMA**: I’m getting the feeling that your story isn’t unique here...
 **KITTY**: Yeah, that’s the running joke we have. Everyone is innocent! Hahahahaha!
 
-### SBE Jailbreak P2GangUnlock
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P2GangUnlock` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **? ? ?**: I’m pretty sure you can see the problem I’m dealing with now.
 **GRANDMA**: What I see is that the Warden is on the wrong side of these bars...
@@ -4712,9 +5256,9 @@ Every story in which Grandma speaks.
 **? ? ?**: That’s why I need someone like you... on the inside. To... persuade them. While you gather evidence of all the false incarcerations, of course.
 **? ? ?**: You should speak to “Mama” Kowalski, who runs the cafeteria! Find out her story and see if we use it as more evidence...
 
-### SBE Jailbreak P2Intro
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P2Intro` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **KITTY**: Ah! You must be Ur- no wait... Grace said to call you Grandma!
 **GRANDMA**: Yes, dearie! But I don’t mind introducing myse-
@@ -4727,9 +5271,9 @@ Every story in which Grandma speaks.
 **KITTY**: People say I speak too much...
 **GRANDMA**: Nonsense, dearie!
 
-### SBE Jailbreak P2TaskA
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P2TaskA` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Tell me, dearie... Why are YOU in here?
 **KITTY**: Me?! Ha! The sheriff thought I boosted a car! Can you believe that? Me?!
@@ -4737,9 +5281,9 @@ Every story in which Grandma speaks.
 **KITTY**: Next thing I know, the PD was knocking on my door and dragging me in here! I didn’t even get my phone call!
 **GRANDMA**: Hmm... Sounds familiar.
 
-### SBE Jailbreak P2TaskB
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P2TaskB` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **KITTY**: Wow, Grandma! You sure know how to get things going!
 **GRANDMA**: Not my first rodeo. I know how to get around, dearie.
@@ -4747,9 +5291,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: Let’s get to work, dearie!
 **KITTY**: Exactly!
 
-### SBE Jailbreak P3Complete
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P3Complete` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **MAMA**: Well, butter my backside and call me a biscuit!
 **GRANDMA**: Uhm...
@@ -4761,9 +5305,9 @@ Every story in which Grandma speaks.
 **MAMA**: She’s one of my girls who runs the recyclin’ factory. She needs a hand and we have a lot of trash from lunch that needs to be taken there.
 **MAMA**: But don’t be a stranger now!
 
-### SBE Jailbreak P3GangUnlock
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P3GangUnlock` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **? ? ?**: Found out anything interesting?
 **GRANDMA**: Yes... It sounds like Bruno and his wife Victoria seem to have a connection to this place. Both have caused people to end up here.
@@ -4773,9 +5317,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: What?!
 **? ? ?**: That’s why I’m willing to help you to... Not entirely legally, escape this jail.
 
-### SBE Jailbreak P3Intro
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P3Intro` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **MAMA**: Well, aren’t you sweeter than a cherry pie!
 **MAMA**: C’mere darlin’! Let Mama give ya a big ol’ hug!
@@ -4786,18 +5330,18 @@ Every story in which Grandma speaks.
 **MAMA**: Oh my, where are my manners? I’m Mama Kowalski!
 **MAMA**: But you can call me Mama. Everyone does!
 
-### SBE Jailbreak P3TaskA
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P3TaskA` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **MAMA**: You ain’t never tasted food like ol’ Mama’s Kitchin’!
 **MAMA**: Sometimes my girls might get their feathers all ruffled up because there ain’t enough corn bread. You ever taste my corn bread? Of course you haven’t, darlin’!
 **MAMA**: Here... Have a big ol’ bite.
 **GRANDMA**: Oh... Th- Thank you!
 
-### SBE Jailbreak P3TaskB
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P3TaskB` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **MAMA**: You got gumption, darlin’! Never seen someone your age in here.
 **GRANDMA**: Oh, it’s all a mistake, dearie. One could even say that I’m being framed!
@@ -4809,9 +5353,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: Did you say horns? This lady wasn’t Victoria Golightly by any chance, was it?
 **MAMA**: You know, darlin, it very well may have been!
 
-### SBE Jailbreak P4Complete
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P4Complete` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: So it looks like you and Grace were sent in here because you found something you shouldn’t have...
 **GRANDMA**: And people in power sent in the others because of petty whims!
@@ -4821,9 +5365,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: It means I have a lot of work to do! Tell me...
 **GRANDMA**: Who should I talk to that knows all the secrets around here?
 
-### SBE Jailbreak P4GangUnlock
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P4GangUnlock` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Alright. I’ll help you take down Warden Decker.
 **? ? ?**: That’s excellent news. How abo-
@@ -4837,9 +5381,9 @@ Every story in which Grandma speaks.
 **? ? ?**: I’m sorry, I can’t allow that either. I got my reputation to consider here.
 **? ? ?**: You’re resourceful... You’ll figure it out.
 
-### SBE Jailbreak P4Intro
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P4Intro` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **BLUETOOTH**: Hi! You must be Ursula!
 **GRANDMA**: Yes, dearie! But you can call me Grandma.
@@ -4850,18 +5394,18 @@ Every story in which Grandma speaks.
 **BLUETOOTH**: Okay, I can work with that!
 **BLUETOOTH**: Welcome to the recycling factory.
 
-### SBE Jailbreak P4TaskA
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P4TaskA` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **BLUETOOTH**: ...Are you telling me that they threw in an old lady because of a gold watch?! Well, ain’t that a stretch!
 **GRANDMA**: It seems to me, dearie, that this is a common problem around here.
 **BLUETOOTH**: Ah yeah... Well, not for me. I guess I’m the only one who deserves to be in here.
 **GRANDMA**: What? Why? What did you do?!
 
-### SBE Jailbreak P4TaskB
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P4TaskB` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **BLUETOOTH**: I guess I’m good with computers, you know.
 **BLUETOOTH**: I can get into places others can’t. That sort of thing.
@@ -4870,9 +5414,9 @@ Every story in which Grandma speaks.
 **BLUETOOTH**: Shhh! These walls have ears, you know. Yes, Grace. That’s probably why she’s in here. Because of me. I broke into the system, but she only got the data I stole.
 **BLUETOOTH**: But I tell you... What I saw in that data? Those people should be in here, instead of us!
 
-### SBE Jailbreak P5Complete
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P5Complete` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: While you might not have a need for this information, I’m sure I can find a use for it, dearie.
 **C.J.**: I’m happy to help, Grandma!
@@ -4880,9 +5424,9 @@ Every story in which Grandma speaks.
 **C.J.**: Let’s just make sure none of that then leads back to me, okay?
 **C.J.**: Wh- What do you mean by that?
 
-### SBE Jailbreak P5GangUnlock
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P5GangUnlock` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **? ? ?**: I heard you’ve gathered some dirt on the guards? Shouldn’t you be focusing on the Warden?
 **GRANDMA**: I have my methods, dearie. Besides, I may need their cooperation for what I have in mind...
@@ -4890,9 +5434,9 @@ Every story in which Grandma speaks.
 **? ? ?**: But if you want to go down that route, then I suggest you talk to Iseul Park...
 **? ? ?**: But for now, I believe I have enough access to the jail in order to advance my escape plans.
 
-### SBE Jailbreak P5Intro
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P5Intro` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **C.J.**: Ah... Grandma. Did I get that right?
 **GRANDMA**: Yes, dearie. I heard from Bluetooth that you run the library?
@@ -4904,9 +5448,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: How interesting, it looks like I came to the right place!
 **GRANDMA**: Tell me... How WELL do you know the jail staff?
 
-### SBE Jailbreak P5TaskA
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P5TaskA` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **C.J.**: You’d be surprised how much I DO know about the guards...
 **C.J.**: You see, they like to use the library as their private club house. I guess they don’t enjoy being in the office rec room with the Warden nearby and all.
@@ -4915,9 +5459,9 @@ Every story in which Grandma speaks.
 **C.J.**: Sure thing! Just don’t be surprised if you find some interesting stuff in the books. People in here like to use the books as an unofficial messaging service.
 **C.J.**: Even THE GUARDS like to use them from time to time, when they don’t want their conversations on the record.
 
-### SBE Jailbreak P5TaskB
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P5TaskB` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Dearie me! You can’t believe what I’ve found in here!
 **C.J.**: Oh, I’m pretty sure I can...
@@ -4927,9 +5471,9 @@ Every story in which Grandma speaks.
 **C.J.**: I spray painted the court house. It was due some color.
 **GRANDMA**: Heh! That it does, dearie.
 
-### SBE Jailbreak P6Complete
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P6Complete` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Dearie, I know you’re not supposed to be in here... It looks like none of us are. So if you want to, you could help me get us out of here?
 **IZZY**: How? What can I do?
@@ -4940,9 +5484,9 @@ Every story in which Grandma speaks.
 **IZZY**: Sure. Why not! What else have I got to lose? Besides, it would be nice to get a little payback!
 **GRANDMA**: Why, of course dearie!
 
-### SBE Jailbreak P6GangUnlock
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P6GangUnlock` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **WARDEN DECKER**: Hello, Mrs. Boulton. It is a pleasure to finally meet you. I hope you’ve enjoyed your stay so far?
 **GRANDMA**: Actually, I would like to see the manager and lodge a complaint.
@@ -4952,9 +5496,9 @@ Every story in which Grandma speaks.
 **WARDEN DECKER**: So, just to be safe, I’m going to have my top guards monitor you from now on.
 **GRANDMA**: Whatever makes you feel safer, dearie...
 
-### SBE Jailbreak P6Intro
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P6Intro` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Hello, dearie. I’ve seen you around a couple of times. I was wondering if we could talk?
 **IZZY**: Who... Me?
@@ -4965,18 +5509,18 @@ Every story in which Grandma speaks.
 **IZZY**: I- I should go!
 **GRANDMA**: No, wait!... Aaw. Poor thing.
 
-### SBE Jailbreak P6TaskA
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P6TaskA` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **IZZY**: You again, what do you want?
 **GRANDMA**: Let me introduce myself. I’m Ursula Boulton, but people call me Grandma around here, dearie.
 **IZZY**: Well, okay then, GRANDMA. What do you want?
 **GRANDMA**: I need your help with the guards...
 
-### SBE Jailbreak P6TaskB
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P6TaskB` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **IZZY**: No way, I ain’t helping you with them! They told me specifically not to talk to anyone, and that’s what I’ll do.
 **GRANDMA**: But dearie, that isn’t right! Why are you in here?
@@ -4984,9 +5528,38 @@ Every story in which Grandma speaks.
 **GRANDMA**: That’s awful, dearie!
 **IZZY**: Yeah, well... What can you do? I’ve also been ordered to keep my mouth shut about it, so...
 
-### SBE Jailbreak WardenChat1
+### The Great Escape (Jailbreak) — item discovered: Safe
+`SBE_Jailbreak_SafeboxDialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_WardenSafe_01'], items=['Safe'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: Hmm... Whatever secrets he’s hiding must be in there!
+**GRANDMA**: All I need to do now is get inside.
+
+### The Great Escape (Jailbreak) — item discovered: Filled Storage Cart
+`SBE_Jailbreak_ScrapCartFull` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_StorageCartFull_01'], items=['Filled Storage Cart'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: It’s all filled up now.
+
+### The Great Escape (Jailbreak) — item discovered: Blackmail
+`SBE_Jailbreak_SpecialLetterDialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_SecretFiles_01'], items=['Blackmail'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: I should have enough evidence here to “persuade” some of the guards now.
+**GRANDMA**: I should have enough evidence here to “persuade” some of the guards now.
+
+### The Great Escape (Jailbreak) — item discovered: Empty Storage
+`SBE_Jailbreak_Storage` · seen 25.05.01–25.06.01
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_EmptyStorage_01'], items=['Empty Storage'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**GRANDMA**: Hmm... Looks like a useful location, but I might-
+**OFF. HILL**: Hey! You can’t be in here unless you work here or you’re bringing in a cart!
+**GRANDMA**: Oh dearie me, I’m dreadfully sorry...
+**GRANDMA**: Hmm... A cart, you say...
+
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_WardenChat1` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **WARDEN DECKER**: I’ve been reading up on you Ursula... Or is it Grandma? Would you prefer Grandma?
 **GRANDMA**: Not from you.
@@ -4994,9 +5567,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: Thanks, but you don’t need to show me any special treatment. I’m more than capable of handling this place...
 **GRANDMA**: And you.
 
-### SBE Jailbreak WardenChat2
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_WardenChat2` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **WARDEN DECKER**: I hope my guards haven’t been pestering you too much, my dear.
 **GRANDMA**: Oh, not at all. In fact, some have been downright helpful!
@@ -5005,9 +5578,9 @@ Every story in which Grandma speaks.
 **WARDEN DECKER**: Let’s see how funny you are after a few years in here.
 **GRANDMA**: I may not be as funny. But you, Warden Decker, will always be a fool.
 
-### SBE Jailbreak WardenChat3
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_WardenChat3` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **WARDEN DECKER**: You know... I thought you would be easier to control...
 **GRANDMA**: That was your first mistake, dearie.
@@ -5016,9 +5589,9 @@ Every story in which Grandma speaks.
 **WARDEN DECKER**: Tell me, how is your grand daughter doing these days?
 **GRANDMA**: Ah... Your second mistake.
 
-### SBE Jailbreak WardenOutro
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_WardenOutro` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **WARDEN DECKER**: Wha- What’s that?!
 **GRANDMA**: I believe you know what it is, dearie...
@@ -5032,9 +5605,9 @@ Every story in which Grandma speaks.
 **WARDEN DECKER**: NO! Let go of me! LET GO!!!
 **WARDEN DECKER**: Noooo!
 
-### SBE Jailbreak XoAdamsMeetsGrandmaAtOffice
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_XoAdamsMeetsGrandmaAtOffice` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **XO ADAMS**: You really know how to surprise people, Grandma. I really didn’t expect you to uncover so much information.
 **GRANDMA**: To be honest, dearie, it wasn’t that difficult. Corruption usually leaves a mess behind it. I just happen to be a good cleaner.
@@ -5042,9 +5615,69 @@ Every story in which Grandma speaks.
 **GRANDMA**: Not yet. I need to find more pieces of vital evidence before we can take him down.  
   _(1 cosmetic edit not shown)_
 
-### SE HopeberryFestival2023 IntroPart1 Dialogue
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot05
+`SE_HopeberryFestival2023_Decoration_Slot05_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot05, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**DEB** (Joyous): May I introduce you to the Hopeberry Juice Woman!
+**DEB** (Encouraging): The new face to the new and <b>improved</b> hopeberry juice! Go on... Have a taste.
+**MADDIE** (Worried): *sip* Oh! Eehh... That's... different.
+**GRANDMA** (Worried): My gosh, Deb... What did you put in this?! This isn't my recipe!
+**DEB** (Doubtful): It isn't sis, you write recipes like a mad scientist. I'm an artist!
+**GRANDMA** (Surprised): I mean... It isn't bad! It just has a-
+**DEB** (Relaxed): A wonderful bouquet? <b>That</b> is the secret ingredient! 
+
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot15
+`SE_HopeberryFestival2023_Decoration_Slot15_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot15, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**GRANDMA** (Joyous): I'm proud of you Deb... You may not be the best juice maker, but you sure do know how to throw a festival!
+**DEB** (Worried): Really?
+**GRANDMA** (Relaxed): Yes, really. It's nice to see so many happy faces here again! It almost makes one forget the...
+**DEB** (Relaxed): *sigh* It does... But, do you know what the best part of all of this was?
+**GRANDMA** (Charming): ...
+**DEB** (Charming): Doing something with my sister again!
+**GRANDMA** (Relaxed): Yes... It is nice, isn't it?
+
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_18
+`SE_HopeberryFestival2023_Decoration_Slot18_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_18, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**GRANDMA** (Relaxed): I'm impressed Deb! Didn't expect you to nail the recipe! This tastes just like it!
+**DEB** (Worried): ...
+**GRANDMA** (Annoyed): It's not your recipe, is it?
+**DEB** (Discouraged): No, it isn't! I found some frozen concentrate from last year...
+**DEB** (Discouraged): Oh, sis... I really need your help! This is a lot harder than I thought it would be.
+**GRANDMA** (Encouraging): It's alright, dearie. I have the recipe right here. Just follow it closely and you can't go wrong!
+**DEB** (Joyous): You're an angel, sis!
+**GRANDMA** (Encouraging): It's nice to hear that someone thinks so!
+
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_22
+`SE_HopeberryFestival2023_Decoration_Slot22_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_22, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**DEB** (Thinking): This thing has always given me the creeps...
+**WINSTON**: Then it is doing its job, ma'am.
+**DEB** (Relaxed): Come to think of it, it <b>does</b> resemble Mr. Winston, doesn't it?!
+**GRANDMA** (Encouraging): Ha ha!
+**WINSTON** (Doubtful): Hmph!
+
+### Hopeberry Festival — item discovered: Hopeberry Event Gate
+`SE_HopeberryFestival2023_DoorTutorial_Dialogue` · seen 23.09.02–25.06.01
+- trigger: item, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, itemKeys=['HopeberryEntranceEnter_01'], items=['Hopeberry Event Gate'], moment=item discovered (versions 23.09.02–25.06.01)
+
+**GRANDMA** (Worried): Really?! It isn't the easiest recipe you know...
+
+### Hopeberry Festival — item discovered: SE_HopeberryFestival2023_HopeberryPie_06
+`SE_HopeberryFestival2023_HopeberryPie_06_Dialogue` · seen 23.09.02–25.06.01
+- trigger: item, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, itemKeys=['SE_HopeberryFestival2023_HopeberryPie_06'], items=['SE_HopeberryFestival2023_HopeberryPie_06'], moment=item discovered (versions 23.09.02–25.06.01)
+
+**DEB**: Thank you for letting me have some of your pies, sis!
+**GRANDMA** (Relaxed): It's no problem, dearie! I'm always happy to have an excuse to bake more pies.
+
+### Hopeberry Festival — part of the event (exact trigger not dumped)
 `SE_HopeberryFestival2023_IntroPart1_Dialogue` · seen 23.09.02–25.06.01
-- trigger: unknown, hint=Seasonal event (versions None–None)
+- trigger: event, eventType=event story, event=Hopeberry Festival, eventId=SE_HopeberryFestival2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–25.06.01)
 
 **DEB** (Joyous): Well sis, it's that time of year again!
 **GRANDMA** (Thinking): What time is that, Deb?
@@ -5052,18 +5685,85 @@ Every story in which Grandma speaks.
 **GRANDMA** (Surprised): Oh my! I totally forgot! So much has happened, I didn't even remember to get the juice ready! 
 **DEB** (Encouraging): Never fear, Deb is here! Let me do it, sis! I've always wanted to give it a go, and as you know, I am a connoisseur of fine beverages...
 
+### Hopeberry Festival — item discovered: Hopeberry Event Gate
+`SE_HopeberryFestival2023_IntroPart2_Dialogue` · seen 23.09.02–25.06.01
+- trigger: item, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, itemKeys=['HopeberryEntranceExit_01'], items=['Hopeberry Event Gate'], moment=item discovered (versions 23.09.02–25.06.01)
+
+**DEB** (Charming): How hard can it be? Squeeze a few berries, collect the juice, bottle it and Bob's your uncle!
+**GRANDMA** (Doubtful): Well... A little more than that, dearie. It has thirty two flavors after all. Maybe I should get the recipe for you just in case...
+**DEB** (Annoyed): No, no... I insist on doing it my own way!
+**GRANDMA** (Worried): If you insist...
+
 ### SE RemasterSideEntranceIntro
 `SE_RemasterSideEntranceIntro` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=Seasonal event (versions None–None)
 
 **MADDIE** (Thinking): Hmm... I wonder why this spot is known as a side entrance?
 **GRANDMA**: Well, dearie, the house help used this as their entrance to the mansion.
 **MADDIE** (Surprised): Grandma! You frightened me!
 **GRANDMA** (Charming): Maddie, dearie, I've told you many a time to keep your wits about you.
 
+### SEValentines2023 — decoration ValentinesDay2022_Decoration_05
+`SE_Valentines2023_CupidStatue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=ValentinesDay2022_Decoration_05, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+
+### SEValentines2023 — item discovered: SEValentines2023EnjoySpa_07
+`SE_Valentines2023_Enjoyspa_07` · seen 23.09.02–25.06.01
+- trigger: item, event=SEValentines2023, eventKey=SEValentines2023, itemKeys=['SEValentines2023EnjoySpa_07'], items=['SEValentines2023EnjoySpa_07'], moment=item discovered (versions 23.09.02–25.06.01)
+
+
+### SEValentines2023 — decoration ValentinesDay2022_Decoration_07
+`SE_Valentines2023_GardenDinnerForTwo` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=ValentinesDay2022_Decoration_07, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+
+### SEValentines2023 — decoration ValentinesDay2022_Decoration_15
+`SE_Valentines2023_IgnatiusStatue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=ValentinesDay2022_Decoration_15, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+
+### SEValentines2023 — decoration SE_Valentines2023_Decoration_21
+`SE_Valentines2023_LoverLane` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_Valentines2023_Decoration_21, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+
+### SEValentines2023 — item discovered: SEValentines2023MakeUpGift_06
+`SE_Valentines2023_Makeupgift_06` · seen 23.09.02–25.06.01
+- trigger: item, event=SEValentines2023, eventKey=SEValentines2023, itemKeys=['SEValentines2023MakeUpGift_06'], items=['SEValentines2023MakeUpGift_06'], moment=item discovered (versions 23.09.02–25.06.01)
+
+
 ### SE Valentines2023 Opening Dialogue
 `SE_Valentines2023_Opening_Dialogue` · seen 23.09.02–25.06.01
-- trigger: unknown, hint=Seasonal event (versions None–None)
+
+
+### SEValentines2023 — decoration SE_Valentines2023_Decoration_17
+`SE_Valentines2023_PinkCandyTree` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_Valentines2023_Decoration_17, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+
+### SEValentines2023 — decoration ValentinesDay2022_Decoration_04
+`SE_Valentines2023_PinkLamps` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=ValentinesDay2022_Decoration_04, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+
+### SEValentines2023 — decoration SE_Valentines2023_Decoration_24
+`SE_Valentines2023_RightHeartFence` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_Valentines2023_Decoration_24, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+
+### SEValentines2023 — item discovered: SEValentines2023Shoes_07
+`SE_Valentines2023_Shoes_07` · seen 23.09.02–25.06.01
+- trigger: item, event=SEValentines2023, eventKey=SEValentines2023, itemKeys=['SEValentines2023Shoes_07'], items=['SEValentines2023Shoes_07'], moment=item discovered (versions 23.09.02–25.06.01)
+
+
+### SEValentines2023 — decoration SE_Valentines2023_Decoration_19
+`SE_Valentines2023_SpeedDatingTable` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_Valentines2023_Decoration_19, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+
+### SEValentines2023 — decoration SE_Valentines2023_Decoration_16
+`SE_Valentines2023_ValentineDinnerTable` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_Valentines2023_Decoration_16, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 
 ### All Hallow's Eve — outro
@@ -5172,9 +5872,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): I could create all kinds of great content for my social media! People love cat videos.
 **MADDIE** (Doubtful): So you say...
 
-### SP AmyPet2025 TA2 Dialogue
+### Whiskers & Whispers — part of the event (exact trigger not dumped)
 `SP_AmyPet2025_TA2_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Whiskers & Whispers, eventId=SP_AmyPet2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Joyous): Ta-da! Isn't it great? I think I've thought of everything, and Amy seems very satisfied.
 **GRANDMA** (Relaxed): She should be! What a wonderful little place.
@@ -5204,6 +5904,24 @@ Every story in which Grandma speaks.
 **GRANDMA** (Relaxed): Not at all, dearie. If little Amy is going to be living with us, she should know which house is her home.
 **MADDIE**: But she belongs to someone else. Once I found out who she belongs to, I’ll be giving her back.
 **GRANDMA** (Discouraged): Aaaw...
+
+### SP_AmyTheCat2023 — intro
+`SP_AmyTheCat2023_Intro_Dialogue` · seen 23.06.02–26.07.01
+- trigger: event, eventId=SP_AmyTheCat2023, eventType=Mystery / Progression, moment=intro (versions 23.06.02–23.06.02)
+- trigger: event, event=Amy's Mystery, eventId=SP_AmyTheCat2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**AMY**: Meow...
+**MADDIE** (Surprised): Huh?!
+**AMY** (Relaxed): Purr... Purr...
+**MADDIE** (Charming): Oh! Hello there! What’s your name? Let’s find your name tag...
+**MADDIE** (Charming): Amy! What a beautiful name!
+**DOG** (Frustrated): Ruff! Ruff! Ruff!
+**AMY** (Surprised): !!!!!
+**MADDIE** (Surprised): No wait! Oh Rufus... You scared her away!
+**GRANDMA**: Is everything alright, dearie?
+**MADDIE** (Thinking): I found a cat, but Rufus scared her away. Say...
+**MADDIE** (Thinking): You wouldn’t happen to have a secret kitty cat, would you?
+**GRANDMA** (Encouraging): Hahaha! ...not anymore.
 
 ### Amy's Mystery — item discovered: SP_AmyTheCat2023_CollectableItems_04
 `SP_AmyTheCat2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.09.02–26.07.01
@@ -5412,6 +6130,22 @@ Every story in which Grandma speaks.
 **DEB** (Thinking): Mmmm... There is something... strangely familiar about this flavor.
 **MADDIE** (Thinking): That IS strange!
 
+### Cherry's Mystery Meat — intro
+`SP_CherrysMysteryMeat2024_Intro_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Cherry's Mystery Meat, eventId=SP_CherrysMysteryMeat2024, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**GRANDMA**: Pearl! What brings you here?
+**PEARL** (Encouraging): Official party organizing committee business, of course, Ursula.
+**PEARL** (Encouraging): Hopewell Bay's 100th anniversary is coming, and it deserves a BIG celebration.
+**PEARL** (Doubtful): Now, I understand that, err... with Hank gone it's not quite the festive atmosphere we wanted, but maybe this can help get our minds off that for a while.
+**GRANDMA** (Doubtful): I could not agree more. Besides, I am sure Hank is fine. Maybe he just got cold feet!
+**PEARL** (Thinking): A-after the wedding ceremony?
+**GRANDMA** (Charming): Who knows! But what have you got planned for the town centennial?
+**PEARL** (Encouraging): We're going to bake the world's biggest meat pie, based on a recipe from the town's founders.
+**PEARL** (Encouraging): Cherry will do the baking, but could we organize the celebration in your backyard? The mansion would make such a wonderful backdrop.
+**GRANDMA** (Thinking): The world's biggest meat pie, you say?
+**GRANDMA** (Thinking): Sounds perfect!
+
 ### Cherry's Mystery Meat — item discovered: Big BBQ
 `SP_CherrysMysteryMeat2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Cherry's Mystery Meat, eventKey=SP_CherrysMysteryMeat2024, itemKeys=['SP_CherrysMysteryMeat2024_CollectableItems_04'], items=['Big BBQ'], moment=item discovered (versions 25.05.01–26.07.01)
@@ -5580,9 +6314,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Doubtful): Klepto! Bandit!
 **PET** (Joyous): *Dook dook!*
 
-### SP FerretPet2025 TA1 Dialogue
-`SP_FerretPet2025_TA1_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Ferret Fiasco — part of the event (exact trigger not dumped)
+`SP_FerretPet2025_TA1_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Ferret Fiasco, eventId=SP_FerretPet2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **GRANDMA**: Hello, dearie!
 **GRANDMA** (Thinking): The strangest thing has happened! I can’t seem to find-
@@ -5609,6 +6343,25 @@ Every story in which Grandma speaks.
 **MADDIE** (Relaxed): Not even the hungriest goat would want to take a bite out of that!
 **GRANDMA** (Charming): Come on, let's go and have a cup of tea and some apple pie.
 **MADDIE** (Relaxed): Sounds good. I've had enough drama for one day!
+
+### Grandma's Mystery — outro
+`SP_GrandmasMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Grandma's Mystery, eventId=SP_GrandmasMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**GRANDMA** (Frustrated): I assure you, I did NOT kill poor Hank.
+**GRANDMA** (Frustrated): I did speak to him before he left, but he is still in one piece, as far as I know.
+**DEB** (Frustrated): So where is my Hank?? 
+**HANK** (Charming): Hello, Deb.
+**DEB** (Surprised): HANK?? Is that a baby you have with you?
+**HANK** (Thinking): You must be totally confused about what happened to me!
+**HANK** (Thinking): See, Ursula found out that my ex-girlfriend had had a baby and sent me to make things right... I asked her not to tell you, 'cos I was wanted to get everything in order first.
+**HANK** (Encouraging): So here I am! It's your baby, Deb.
+**DEB** (Thinking): I don't think that's how it works, Hank...
+**GRANDMA** (Thinking): I learned about this child through Reginald's letter and told Hank. He begged me to keep his secret, so I did.
+**GRANDMA** (Encouraging): Hank is a gentleman at his core, so I knew that he would do what was right.
+**MADDIE** (Surprised): My head is spinning.
+**MADDIE** (Surprised): So... everyone's alive, Hank's back, and everything's fine?
+**GRANDMA** (Joyous): Looks like it!
 
 ### Grandma's Mystery — decoration SP_GrandmasMystery2024_Decoration_Slot36
 `SP_GrandmasMystery2024_Decoration_Slot36_Dialogue` · seen 25.05.01–26.07.01
@@ -5650,6 +6403,18 @@ Every story in which Grandma speaks.
 **MADDIE** (Surprised): Yikes! Errr... who are you?
 **KAZUKO** (Joyous): This is my cockatoo, Sgt. Pepper. I'm afraid he is pretty nosey...
 **SGT. PEPPER** (Charming): Aaaall you need is a... CRRRACKER!
+
+### Grannies of Anarchy — outro
+`SP_GranniesOfAnarchy2023_AllRewardsCompleted_Dialogue` · seen 23.11.02–26.07.01
+- trigger: event, event=Grannies of Anarchy, eventId=SP_GranniesOfAnarchy2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**GRANDMA** (Charming): It's time for us to get our domes on and grab a handful.
+**MADDIE** (Thinking): ...
+**GRANDMA** (Joyous): That means that we are going take off for a drive, dearie.
+**MADDIE** (Relaxed): I gathered that, Grandma. You and your friends are quite an impressive bunch!
+**GRANDMA** (Relaxed): Thank you! You can forget about any crimes. The Grannies of Anarchy always ride on the right side of the law.
+**MADDIE** (Doubtful): I still feel like you're not telling me everything. There's more to your skillfully knitted patches than you let on...
+**GRANDMA** (Joyous): Some of us were just born to be wild, Maddie, dearest.
 
 ### Grannies of Anarchy — decoration SP_GranniesOfAnarchy2023_Decoration_Slot25
 `SP_GranniesOfAnarchy2023_Decoration_Slot25_Dialogue` · seen 23.11.02–26.07.01
@@ -5706,6 +6471,47 @@ Every story in which Grandma speaks.
 **MADDIE** (Thinking): I guess that could've been it, but...
 **GRANDMA** (Joyous): That's settled then!
 
+### Halloween Mystery — outro
+`SP_Halloween2024_AllRewardsCompleted_Dialogue` · seen 24.07.01–26.07.01
+- trigger: event, event=Halloween Mystery, eventId=SP_Halloween2024, eventType=Mystery / Progression, moment=outro (versions 24.07.01–24.11.02)
+
+**GRANDMA** (Doubtful): That was a strange business about the newspaper ad, wasn't it?
+**DEB** (Doubtful): It certainly was.
+**GRANDMA** (Annoyed): I was hoping to put all of the commotion behind us and start clearing the Boulton name, but someone seems intent on causing trouble.
+**DEB** (Thinking): I'm sure it was an honest mistake!
+**GRANDMA** (Thinking): A very strange mistake, I would say, and I do intend to look into it.
+**GRANDMA** (Thinking): Now I have to run, or my apple pie will burn in the oven. See you later!
+**DEB** (Worried): I have a terrible feeling...
+**DEB** (Worried): ...that I might know who is behind this.
+
+### Halloween Mystery — intro
+`SP_Halloween2024_IntroDialogue_Dialogue` · seen 24.07.01–26.07.01
+- trigger: event, event=Halloween Mystery, eventId=SP_Halloween2024, eventType=Mystery / Progression, moment=intro (versions 24.07.01–24.11.02)
+
+**MADDIE** (Frustrated): Oh, man...
+**GRANDMA**: What is it, dearie?
+**MADDIE** (Discouraged): I just realized that I'd promised to organize a ghost tour at the Mansion for Halloween.
+**MADDIE** (Discouraged): You know, before the storm and the cans full of secrets...
+**GRANDMA** (Thinking): Maybe it is not such a bad idea.
+**MADDIE** (Worried): I'm not sure how many people would want to come...
+**MADDIE** (Worried): And I'm not sure I really want to see anyone, either!
+**MADDIE** (Thinking): I'm still upset with Jackie for writing in the newspaper about our family. Now everyone's got it in for us!
+**GRANDMA** (Charming): The first step out of any mess is to make amends, Maddie dear. Maybe this is just the thing!
+**GRANDMA** (Charming): Let's get all the skeletons out of the closet!
+
+### Proposal Mystery — outro
+`SP_HanksMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Proposal Mystery, eventId=SP_HanksMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**GRANDMA** (Relaxed): Deb, there is something you should see...
+**DEB** (Surprised): What's all this in your front yard? If this is your idea of a joke, Ursula, I swear...
+**HANK** (Charming): No, Deb - this is all for you.
+**DEB** (Surprised): Hank?? You did all of this... for me?
+**DEB** (Worried): But why? I thought you were gearing up to leave Hopewell Bay - and me.
+**HANK** (Surprised): Leave you, Deb? Never!
+**HANK**: Actually, there's something I want to ask...
+**HANK**: Would you make me the happiest man in the world and be my wife?
+
 ### Proposal Mystery — decoration SP_HanksMystery2024_Decoration_Slot25
 `SP_HanksMystery2024_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
 - trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot25, event=Proposal Mystery, eventKey=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
@@ -5749,12 +6555,37 @@ Every story in which Grandma speaks.
 **MADDIE** (Surprised): But... is it an engagement ring??
 **HANK** (Charming): Funny you should ask...
 
+### Proposal Mystery — intro
+`SP_HanksMystery2024_Intro_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Proposal Mystery, eventId=SP_HanksMystery2024, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**GRANDMA**: What a Valentine's Day we had!
+**MADDIE** (Discouraged): No kidding...
+**MADDIE** (Doubtful): But don't you think that there's been some weird stuff going on lately?
+**GRANDMA** (Thinking): Hmm, you mean the burned teddy? That certainly was odd...
+**MADDIE** (Thinking): Yeah - and the diamond ring found among the Valentine's presents Mason bought for all of us.
+**GRANDMA** (Doubtful): Valentine's does make people act funny, but now that you mention it...
+**GRANDMA** (Doubtful): There is certainly something odd about all of this!
+
 ### Proposal Mystery — item discovered: Diamond Ring
 `SP_HanksMystery2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Proposal Mystery, eventKey=SP_HanksMystery2024, itemKeys=['SP_HanksMystery2024_CollectableItems_04'], items=['Diamond Ring'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Thinking): I have a feeling that the ring was no coincidence. Someone is planning something big!
 **GRANDMA** (Thinking): And I think I know who it is...
+
+### Julius' Mystery — outro
+`SP_JuliusMystery2023_AllRewardsCompleted_Dialogue` · seen 23.09.02–26.07.01
+- trigger: event, event=Julius' Mystery, eventId=SP_JuliusMystery2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**GRANDMA** (Surprised): Even I didn’t know my family did so much traveling! They hardly ever spoke about such things...
+**MADDIE** (Annoyed): Annoying, isn’t it?
+**GRANDMA** (Charming): Oh, dearie, I tell you things all the time! You just have to ask the right questions...
+**MADDIE** (Doubtful): Riiight...
+**GRANDMA**: Julius, dearie. I just wanted to thank you for the wonderful gift. I may have been a bit snappy with you earlier, but...
+**ANTIQUEDEALER** (Thinking): But the conversation we had made it utterly clear why it's duck soup, Ursula.
+**GRANDMA** (Encouraging): And the NEW coat of arms is simply lovely!
+**ANTIQUEDEALER** (Joyous): Capital it is!
 
 ### Julius' Mystery — decoration SP_JuliusMystery2023_Decoration_Slot26
 `SP_JuliusMystery2023_Decoration_Slot26_Dialogue` · seen 23.09.02–26.07.01
@@ -5790,6 +6621,35 @@ Every story in which Grandma speaks.
 **MADDIE** (Doubtful): About who? Pirates?!
 **GRANDMA** (Doubtful): I think I'll have to speak with him. I'll be right back...
 **MADDIE** (Surprised): Speak with him? Why? Are there PIRATES in our family?!
+
+### Lady Voyance's Mystery — outro
+`SP_LadyVoyanceMystery2023_AllRewardsCompleted_Dialogue` · seen 23.09.02–26.07.01
+- trigger: event, event=Lady Voyance's Mystery, eventId=SP_LadyVoyanceMystery2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**MADDIE** (Encouraging): That Lady Voyance sure is a character!
+**GRANDMA**: Yes, she is, dearie. Did she give you a reading?
+**MADDIE**: Yes! She said I was about to find love! Or it... Me? I couldn’t quite understand what she meant.
+**GRANDMA** (Joyous): Yes, she can be very confusing sometimes. I guess it has something to do with her 20% accuracy rate.
+**MADDIE** (Surprised): 20%?!
+**GRANDMA** (Charming): Yes, but in that 20%, she’s right all the time.
+**MADDIE** (Doubtful): I don’t think that’s how it works, Grandma.
+**GRANDMA**: Shh... Don’t tell her that!
+
+### Lady Voyance's Mystery — intro
+`SP_LadyVoyanceMystery2023_Intro_Dialogue` · seen 23.09.02–26.07.01
+- trigger: event, event=Lady Voyance's Mystery, eventId=SP_LadyVoyanceMystery2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**MADDIE**: Hello, can I help you?
+**LADY VOYANCE** (Talking): No, my child... It is I who has come to help... YOU!
+**MADDIE** (Surprised): Oh... Kay...
+**GRANDMA**: Maddie, dearie! I see you have met my old friend, Lady Voyance.
+**GRANDMA** (Charming): She’s a psychic, you know!
+**MADDIE** (Joyous): Really? How interesting! Came here to give Grandma a reading?
+**LADY VOYANCE** (Talking): For heaven’s sake, no! I have come to help all of Hopewell Bay! I sense a great change in the future!
+**LADY VOYANCE**: Ursula has graciously let me set up my services temporarily, so that I may help everyone in need.
+**LADY VOYANCE** (Talking): ... Especially you, Maddie. I can sense that something amazing is in store for you.
+**MADDIE** (Surprised): Really?!
+**LADY VOYANCE** (Talking): Yes, my child! Love is in the air!
 
 ### Lights for the Lost — outro
 `SP_LostLights2026_AllRewardsCompleted_Dialogue` · seen 26.07.01–26.07.01
@@ -5987,6 +6847,19 @@ Every story in which Grandma speaks.
 **MADDIE**: No, I mean talk to him. He deserves to know how you feel. Be honest.
 **GRANDMA** (Surprised): Ho- honest?!
 
+### Holiday Mystery — outro
+`SP_MasonsMystery2023_AllRewardsCompleted_Dialogue` · seen 23.11.02–26.07.01
+- trigger: event, event=Holiday Mystery, eventId=SP_MasonsMystery2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**GRANDMA**: Oh Mason...
+**GRANDMA** (Relaxed): Why would you go through all this trouble, dearie?
+**MASON** (Relaxed): Well... You know... I’ve had so much fun around here in the past year... The spooky summer camp, the swimming pool.
+**MASON** (Encouraging): Not to mention the awesome pirate ship! I just...
+**MASON** (Doubtful): I just wanted to give something back.
+**GRANDMA** (Encouraging): Well, I love it! Thank you.
+**MASON** (Encouraging): Happy holidays, Grandma!
+**GRANDMA** (Joyous): Happy holidays, Mason!
+
 ### Holiday Mystery — decoration SP_MasonsMystery2023_Decoration_Slot25
 `SP_MasonsMystery2023_Decoration_Slot25_Dialogue` · seen 23.11.02–26.07.01
 - trigger: decoration, decoration=SP_MasonsMystery2023_Decoration_Slot25, event=Holiday Mystery, eventKey=SP_MasonsMystery2023, moment=decoration placed (versions 23.11.02–26.07.01)
@@ -6034,6 +6907,21 @@ Every story in which Grandma speaks.
 **MADDIE** (Relaxed): You bet, Mason! It’s really rare to fool Grandma!
 **MASON** (Joyous): Oh, cool!
 
+### Holiday Mystery — intro
+`SP_MasonsMystery2023_Intro_Dialogue` · seen 23.11.02–26.07.01
+- trigger: event, event=Holiday Mystery, eventId=SP_MasonsMystery2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**MADDIE** (Relaxed): Looks like it’s the holiday season again, Grandma!
+**GRANDMA** (Encouraging): Yes, dearie! I can’t wait to make my special holiday pie!
+**MADDIE** (Surprised): Ooh! Is it the one with cinnamon, hopeberries and oranges?!
+**GRANDMA** (Charming): That’s the one! I know little Mason has always wanted to try it, so I thought I’d surprise him.
+**MADDIE** (Charming): That’s sweet.
+**GRANDMA** (Joyous): Not as sweet as my pie, dearie!
+**GRANDMA** (Relaxed): Brrr... It’s getting cold, let’s head inside...
+**MASON** (Doubtful): Oh, man... Grandma has been so awesome this year! And now she’s making me pie?!
+**MASON** (Thinking): I wonder what she would want for this holiday season?
+**MASON** (Thinking): Hmm....
+
 ### Holiday Mystery — item discovered: Holiday Snowflake
 `SP_MasonsMystery2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.11.02–26.07.01
 - trigger: item, event=Holiday Mystery, eventKey=SP_MasonsMystery2023, itemKeys=['SP_MasonsMystery2023_CollectableItems_04'], items=['Holiday Snowflake'], moment=item discovered (versions 23.11.02–26.07.01)
@@ -6041,9 +6929,25 @@ Every story in which Grandma speaks.
 **MADDIE** (Encouraging): These ornaments will look great on our tree, Grandma!
 **GRANDMA** (Charming): Can’t go wrong with the classics, dearie.
 
-### SP MiniHorseMystery2024 LayerDecoration 01 Dialogue
+### Mini Horse Mystery — outro
+`SP_MiniHorseMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Mini Horse Mystery, eventId=SP_MiniHorseMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**DEB** (Frustrated): Hank?
+**HANK**: Yeah, Debby-poo?
+**DEB** (Doubtful): Is there anything you would like to tell me - before we tie the knot?
+**HANK** (Thinking): Ummm... No?
+**DEB** (Frustrated): My ex-husband Reginald thinks otherwise! "Your husband-to-be is hiding something from you..."
+**HANK** (Surprised): I-I don't know what he's talking about. Honest! He must be jealous of our love!
+**DEB** (Thinking): Hrrrmm, maybe. I think the seating chart requires my attention... But this conversation is not over!
+**HANK** (Thinking): OK, my sweet corpse flower.
+**GRANDMA** (Frustrated): Hank, may I steal you for a minute?
+**HANK**: Sure, Ursula. What's up?
+**GRANDMA** (Thinking): Come with me...
+
+### Mini Horse Mystery — part of the event (exact trigger not dumped)
 `SP_MiniHorseMystery2024_LayerDecoration_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Mini Horse Mystery, eventId=SP_MiniHorseMystery2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Listen, Deb... Did you read the whole letter?
 **DEB** (Charming): It was lovely, wasn't it?
@@ -6053,9 +6957,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Doubtful): What in the world is going on?
 **DEB** (Frustrated): Hank's got some explaining to do, that's what!
 
-### SP Misery2025 Decoration Slot35
-`SP_Misery2025_Decoration_Slot35` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Something Ours — part of the event (exact trigger not dumped)
+`SP_Misery2025_Decoration_Slot35` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Something Ours, eventId=SP_Misery2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Something Ours — decoration SP_Misery2025_Decoration_Slot35
@@ -6206,6 +7110,19 @@ Every story in which Grandma speaks.
 **GRANDMA** (Thinking): So? Will you play with me?
 **MADDIE** (Relaxed): You bet I will. It's a new year, I'm a whole new me, and the new me doesn't shy away from a challenge!
 
+### Pie Wars — outro
+`SP_PieWars2023_AllRewardsCompleted_Dialogue` · seen 23.09.02–26.07.01
+- trigger: event, event=Pie Wars, eventId=SP_PieWars2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**MADDIE** (Joyous): The votes are in... Who wants to do the honors?
+**GRANDMA**: You do it, dearie.
+**CHERRY**: It would only be fair!
+**MADDIE**: *Opens envelope* 
+**MADDIE**: It's close, but the winner is...
+**MADDIE** (Joyous): Grandma! Congratulations!
+**CHERRY** (Encouraging): Congratulations, sugar! I guess I still have a lot to learn...
+**GRANDMA** (Relaxed): Not too much, dearie. You can bake with the best of them, but sometimes you just can't beat the classics!
+
 ### Pie Wars — decoration SP_PieWars2023_Decoration_Slot25
 `SP_PieWars2023_Decoration_Slot25_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot25, event=Pie Wars, eventKey=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
@@ -6255,6 +7172,21 @@ Every story in which Grandma speaks.
 **CHERRY** (Annoyed): No I didn't!
 **MADDIE** (Thinking): What's going on here?
 
+### SP_PieWars2023 — intro
+`SP_PieWars2023_Intro_Dialogue` · seen 23.06.02–26.07.01
+- trigger: event, eventId=SP_PieWars2023, eventType=Mystery / Progression, moment=intro (versions 23.06.02–23.06.02)
+- trigger: event, event=Pie Wars, eventId=SP_PieWars2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**MADDIE**: Hi Cherry! Need more help making jam for your bakery?
+**CHERRY** (Encouraging): Oh, sugar... Something better! I brought you my new and improved Hopeberry pie! Have a taste...
+**MADDIE** (Joyous): ...Oh my gosh, that's amazing! That's the best thing I've ever tasted!
+**GRANDMA**: What is, dearie?
+**MADDIE** (Encouraging): Oh, Grandma, you have to taste this! It's phenomenal. 
+**GRANDMA** (Worried): Really? You've always said my pies were the best...
+**CHERRY**: Looks like you've got a bit of competition, sugar!
+**GRANDMA** (Frustrated): How about we make it official then, dearie?
+**CHERRY** (Annoyed): Alright, you're on! Let the people decide. The best tasting pie wins! 
+
 ### Pie Wars — item discovered: SP_PieWars2023_CollectableItems_04
 `SP_PieWars2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.09.02–26.07.01
 - trigger: item, event=Pie Wars, eventKey=SP_PieWars2023, itemKeys=['SP_PieWars2023_CollectableItems_04'], items=['SP_PieWars2023_CollectableItems_04'], moment=item discovered (versions 23.09.02–26.07.01)
@@ -6282,9 +7214,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Surprised): What do you mean?
 **GRANDMA** (Thinking): You should ask Pearl...
 
-### SP RaccoonPet2025 TA1 Dialogue
+### Raccoon Riddle — part of the event (exact trigger not dumped)
 `SP_RaccoonPet2025_TA1_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Raccoon Riddle, eventId=SP_RaccoonPet2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Frustrated): When are you getting rid of that raccoon?
 **MADDIE** (Encouraging): His name is Patches.
@@ -6353,6 +7285,18 @@ Every story in which Grandma speaks.
   _(1 cosmetic edit not shown)_
 **MADDIE** (Thinking): What was she talking about?
 
+### Roddy's Mystery — outro
+`SP_RoddysMystery2023_AllRewardsCompleted_Dialogue` · seen 23.09.02–26.07.01
+- trigger: event, event=Roddy's Mystery, eventId=SP_RoddysMystery2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**GRANDMA** (Discouraged): I'm sorry Roddy. All I wanted to do was bring a little fun to your summer camp...
+**RODDY** (Doubtful): Fun?! You scared me half to death! 
+**GRANDMA** (Doubtful): Well, I wasn't expecting you to have a crippling fear of ghosts!
+**RODDY** (Charming): I guess I wanted to keep that secret. It's a bit embarrassing.
+**GRANDMA** (Charming): How about you, Mason, dearie? Did you have fun?
+**MASON** (Joyous): BEST. SUMMER CAMP. EVER!!! It had everything: camping, marshmallows, GHOSTS!
+**RODDY** (Relaxed): Well... There you go then!
+
 ### Roddy's Mystery — decoration SP_RoddysMystery2023_Decoration_Slot26
 `SP_RoddysMystery2023_Decoration_Slot26_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_RoddysMystery2023_Decoration_Slot26, event=Roddy's Mystery, eventKey=SP_RoddysMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
@@ -6377,6 +7321,21 @@ Every story in which Grandma speaks.
 **GRANDMA** (Worried): I'm sorry, dearie, I believe my joke has gone a little too far!
 **RODDY** (Doubtful): JOKE?!
 
+### SP_RoddysMystery2023 — intro
+`SP_RoddysMystery2023_Intro_Dialogue` · seen 23.06.02–26.07.01
+- trigger: event, eventId=SP_RoddysMystery2023, eventType=Mystery / Progression, moment=intro (versions 23.06.02–23.06.02)
+- trigger: event, event=Roddy's Mystery, eventId=SP_RoddysMystery2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**RODDY** (Relaxed): Thanks again for letting me run summer camp at your cottage, Mrs. Boulton.
+**GRANDMA**: Not a problem, dearie! I think it's really important that our younger generation still learns wilderness skills!
+**RODDY** (Encouraging): I couldn't agree more! Ah! Here comes our newest camper!
+**RODDY** (Relaxed): Hello Mason!
+**MASON** (Discouraged): Hi...
+**RODDY**: Cheer up, Mason! I promise, you'll be having so much fun that by the time it ends, you won't want to leave!
+**MASON** (Doubtful): I guess...
+**RODDY** (Thinking): Huh... I wonder what's gotten him so down? 
+**GRANDMA** (Relaxed): Well, let me know if I can help, dearie.
+
 ### Rumors in the Ring — outro
 `SP_RumorsRing2025_AllRewardsCompleted_Dialogue` · seen 25.02.01–26.07.01
 - trigger: event, event=Rumors in the Ring, eventId=SP_RumorsRing2025, eventType=Mystery / Progression, moment=outro (versions 25.02.01–26.07.01)
@@ -6391,9 +7350,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Frustrated): But who was Grandma talking about?
 **MADDIE** (Frustrated): So many questions, so few answers...
 
-### SP RumorsRing2025 Deco 25 Dialogue
-`SP_RumorsRing2025_Deco_25_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Rumors in the Ring — decoration SP_RumorsRing2025_Decoration_Slot25
+`SP_RumorsRing2025_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
+- trigger: decoration, decoration=SP_RumorsRing2025_Decoration_Slot25, event=Rumors in the Ring, eventKey=SP_RumorsRing2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Frustrated): A big truck just dropped off a whole shipment of big crates on my front lawn!
 **GRANDMA** (Frustrated): Did you happen to order a dozen colorful wigs, trapezes and a knife wheel?
@@ -6520,6 +7479,28 @@ Every story in which Grandma speaks.
 **GRANDMA** (Relaxed): Honestly dearie, you've been so busy fixing up the Mansion, I thought it would be nice to do something else for a while!
 **MADDIE** (Relaxed): Yes it was! ...But you didn't answer my question.
 **GRANDMA**: Making a kite and baking a pie are surprisingly similar, dearie...
+
+### SP_SpringSeason2023 — intro
+`SP_SpringSeason2023_EventOpeningDialogue` · seen 23.06.02–26.07.01
+- trigger: event, eventId=SP_SpringSeason2023, eventType=Mystery / Progression, moment=intro (versions 23.06.02–23.06.02)
+- trigger: event, event=Spring Season, eventId=SP_SpringSeason2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**MADDIE** (Joyous): A kite festival! How wonderful!
+**GRANDMA** (Relaxed): Not only a festival, dear but remember, a competition as well! I'm sure we'll win it this year, you'll see!
+**JACKIE**: Would make for a nice story too!
+**MADDIE** (Surprised): Roddy! You're here for the kite festival as well?
+**RODDY** (Charming): Yeah! I- Uuh... I was thinking we could team up?
+**JACKIE** (Surprised): Actually, I was thinking WE could team up!
+**MADDIE** (Worried): Oh no! I'm sorry, but I already promised to help Grandma!
+**JACKIE** (Doubtful): Oh...
+**RODDY** (Annoyed): Great...
+**GRANDMA** (Charming): Oh, it's alright dear, I'm sure I can handle this alone. Why don't you and Roddy-
+**MADDIE** (Joyous): Heeeey! I got a great idea! Why don't YOU TWO team up?!
+**MADDIE** (Encouraging): I'm sure you have a lot in common and would make a great kite together!
+**JACKIE** (Annoyed): Are you kidding?! He can barely build a house, let alone a kite!
+**RODDY** (Annoyed): Hey!
+**MADDIE** (Relaxed): They look cute together, don't you think Grandma?
+**GRANDMA** (Annoyed): Sometimes, I think you need thicker glasses than me, sweetie...
 
 ### Stray Bones Mystery — item discovered: Dog Collar
 `SP_StrayBonesMystery2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
@@ -6673,6 +7654,19 @@ Every story in which Grandma speaks.
 **MADDIE** (Relaxed): Just a wonderful summer breeze, Grandma! Enjoy it...
 **GRANDMA** (Frustrated): Well, I guess it won’t hurt to rake all these loose leaves away.
 
+### SEValentines2023 — decoration SP_Valentines2023_Decoration_26
+`SP_Valentines2023_CupidsCove` · seen 23.09.02–26.07.01
+- trigger: decoration, decoration=SP_Valentines2023_Decoration_26, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**MADDIE** (Charming): Ooh… I could snuggle up here until Xmas!
+**GRANDMA** (Joyous): I must admit Maddie, you’ve really outdone yourself with the decorations.
+**MADDIE** (Encouraging): How about another story from your infamous dating life?
+**GRANDMA**: I did meet this feller on a singles site and I was sure he’s the one--
+**GRANDMA** (Discouraged): --until I realized he was easily scared.
+**GRANDMA** (Annoyed): He wasn’t up for pranks, stayed in during Halloween and hated scary movies.
+**GRANDMA**: Naturally, I had to stay away from him.
+**MADDIE** (Joyous): I think we can cross him out from your list of secret admirers.
+
 ### ProgressionEventItems — item discovered: SPValentines2023Roses_04
 `SP_Valentines2023_EndOfChainDialogue` · seen 23.09.02–26.07.01
 - trigger: item, event=ProgressionEventItems, eventKey=ProgressionEventItems, itemKeys=['SPValentines2023Roses_04'], items=['SPValentines2023Roses_04'], moment=item discovered (versions 23.09.02–26.07.01)
@@ -6682,6 +7676,71 @@ Every story in which Grandma speaks.
 **GRANDMA** (Relaxed): Well dearie, I’m just happy to know that someone out there admires me.
 **MADDIE** (Relaxed): C’mon grandma, I know you… I bet you already have cooked up a plan to lure out this feller!
 **GRANDMA**: You’ll just have to wait and see.
+
+### Sweethearts' Season — outro
+`SP_Valentines2023_EventEndDialogue` · seen 23.09.02–26.07.01
+- trigger: event, event=Sweethearts' Season, eventId=SP_Valentines2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**MADDIE** (Joyous): Ooh, Grandma! Doesn’t this place look like the sweetest–pink–candy floss dream?
+**GRANDMA** (Encouraging): Hahaha! Seems like you’re fully in the spirit of Valentine’s.
+**MADDIE** (Charming): Team Cupid all the way! Now, let’s find out who your mystery beau is--
+**GRANDMA**: --Or we could look into a certain building inspector who clearly has eyes for you.
+**MADDIE** (Surprised): Grandma!
+
+### SP_Valentines2023 — intro
+`SP_Valentines2023_EventOpeningDialogue` · seen 23.06.02–26.07.01
+- trigger: event, eventId=SP_Valentines2023, eventType=Mystery / Progression, moment=intro (versions 23.06.02–23.06.02)
+- trigger: event, event=Sweethearts' Season, eventId=SP_Valentines2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**MADDIE** (Relaxed): What have you got there Grandma?
+**GRANDMA** (Charming): It’s… a Valentine’s Bouquet! For me!
+**GRANDMA** (Joyous): I haven't had one of these since Charlie was around.
+**MADDIE** (Relaxed): Let's see, the card says: "Lillies for my Lily".
+**GRANDMA** (Joyous): But these are roses, not lilies! How strange!
+**MADDIE** (Encouraging): Who are they from? Grandma, do you have a secret admirer?!
+**GRANDMA** (Relaxed): Perhaps a gentleman I went on a date with, and before you ask--
+**GRANDMA**: --I’ll dish a story or two if you help me decorate for Valentine’s Day!
+**MADDIE** (Joyous): Deal!
+
+### SEValentines2023 — decoration SP_Valentines2023_Decoration_28
+`SP_Valentines2023_KissingPorch` · seen 23.09.02–26.07.01
+- trigger: decoration, decoration=SP_Valentines2023_Decoration_28, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**MADDIE** (Charming): I can almost picture it… sharing a good night kiss under the porch after a romantic date.
+**GRANDMA** (Joyous): Brings back memories of all the great times I had with your Grandpa Charlie.
+**GRANDMA**: Come to think of it, this is the second time I got a bouquet of flowers with no name.
+**MADDIE** (Thinking): Wasn’t it from Grandpa Charlie?
+**GRANDMA**: Maybe… or it might have been Julius. Speak of the devil--
+**GRANDMA** (Charming): Julius dear, did you send me a Valentine’s bouquet all those years ago?
+**GRANDMA**: Deb spilled the beans about a little crush you might have had.
+**ANTIQUEDEALER** (Discouraged): Uh.. well… haha… you sister did have a wild imagination. I must run, ladies!
+
+### SEValentines2023 — decoration SP_Valentines2023_Decoration_27
+`SP_Valentines2023_PinkHeartTree` · seen 23.09.02–26.07.01
+- trigger: decoration, decoration=SP_Valentines2023_Decoration_27, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**GRANDMA** (Joyous): My, this tree looks like it's made of pink candy! How on earth did you pull that off dearie?
+**MADDIE** (Charming): Inspired by my love for love, Grandma.
+**MADDIE** (Encouraging): I think I’ve earned another juicy dating story--
+**GRANDMA**: Let me have a think… well, Deb once set me up on a blind date.
+**GRANDMA** (Relaxed): I met him down at the little tea shop in Hopewell Bay and all was going really well--
+**MADDIE** (Encouraging): --‘Cause a sister knows best, right?
+**GRANDMA** (Worried): You’d think so. But then he told me the most terrible thing--
+**MADDIE** (Surprised): What did he say?!
+**GRANDMA** (Discouraged): That he doesn’t like pies, at all. The nerve! That was that.
+
+### SEValentines2023 — decoration SP_Valentines2023_Decoration_29
+`SP_Valentines2023_RomanticRooftop` · seen 23.09.02–26.07.01
+- trigger: decoration, decoration=SP_Valentines2023_Decoration_29, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**ANTIQUEDEALER** (Encouraging): All set for spotting eligible suitors, I see?
+**GRANDMA** (Encouraging): Hahaha! We do love how this romantic little watchtower turned out.
+**MADDIE** (Encouraging): Maybe now we’ll catch a glimpse of the mysterious flower bouquet sender.
+**ANTIQUEDEALER** (Surprised): Anonymous flower deliveries? Humph! What’s next, chocolate via mail?
+**ANTIQUEDEALER** (Annoyed): We hardly talk about the sacrifice of St. Valentine–
+**ANTIQUEDEALER**: --In fact, Valentine’s Day goes back to ancient Rome and has a rather dark origin.
+**GRANDMA** (Charming): How fascinating! You’re always full of the most interesting facts, Julius.
+**MADDIE** (Thinking): Wish I could hear more but there’s quite a bit of decorating to do. Bye now.
 
 ### Valentine's Mystery — decoration SP_ValentinesMystery2024_Decoration_Slot25
 `SP_ValentinesMystery2024_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
@@ -6912,9 +7971,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Relaxed): It doesn't sound like a high-speed game if Julius and Deb are involved...
 **GRANDMA** (Charming): Very funny - but you might be surprised!
 
-### SP Yoga2025 Decoration Slot25 Dialogue
+### Secrets of Serenity — part of the event (exact trigger not dumped)
 `SP_Yoga2025_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Secrets of Serenity, eventId=SP_Yoga2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Thinking): So you're going to organize a yoga retreat? Did Pearl put you up to it?
 **MADDIE** (Relaxed): No, I've seen them on social media, and I've always wanted to go.
@@ -6984,7 +8043,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Relaxed): Funny you should ask! I'm going to organize a yoga retreat!
 
 ### Pier: Add flying flag
-`ScavengerHunt_Intro` · seen 24.04.01–26.07.01
+`ScavengerHunt_Intro` · seen 23.09.02–26.07.01
 - trigger: area, area=Pier, areaId=YachtPier, hotspotId=YachtPierFastBoatAddFlyingFlag, phase=task completed, task=Add flying flag (versions 24.04.01–26.07.01)
 
 **GRANDMA**: Here you are, dearie. Looks like some mail came for you.
@@ -6997,7 +8056,6 @@ Every story in which Grandma speaks.
 
 ### SeasonFall23 Intro
 `SeasonFall23_Intro` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **GRANDMA**: Maddie dearie, I’ve got a feeling in my bones that it’s the perfect season for apple pie!
 **MADDIE** (Thinking): Really? But you’ve always said apple pies are great during fall and it doesn’t feel like that at all!
@@ -7013,7 +8071,6 @@ Every story in which Grandma speaks.
 
 ### Study05
 `Study05` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE**: Thanks Jackie! It’s kinda cool to have a reporter as a friend.
 **JACKIE** (Encouraging): I’ll be honest though, all this would make for one heck of a story!
@@ -7027,7 +8084,6 @@ Every story in which Grandma speaks.
 
 ### Study06
 `Study06` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): Grandma!
 **JACKIE** (Encouraging): Oh, it’s nothing, Ms. Boulton. We were just looking around an-
@@ -7040,7 +8096,6 @@ Every story in which Grandma speaks.
 
 ### Study07
 `Study07` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Worried): Grandma, why did you do it?
 **GRANDMA** (Frustrated): I did what I had to dearie. For the family. Just like what you’re doing now.
@@ -7063,7 +8118,7 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): You get a reward for each piece, and if you follow the map, you might just solve the whole mystery!
 
 ### Tennis Court: Remove old court markings
-`TennisCourtDialogueC` · seen 24.04.01–26.07.01
+`TennisCourtDialogueC` · seen 23.09.02–26.07.01
 - trigger: area, area=Tennis Court, areaId=TennisCourt, hotspotId=TennisCourtSurfaceRemoveCourtMarkingsJ6, phase=task completed, task=Remove old court markings (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Grandma! And Great Aunt Deb! I didn't expect to see both of you.
@@ -7079,7 +8134,7 @@ Every story in which Grandma speaks.
 **MADDIE**: How can I say no to that?
 
 ### Tennis Court: Place tennis trophy
-`TennisCourtDialogueD` · seen 24.04.01–26.07.01
+`TennisCourtDialogueD` · seen 23.09.02–26.07.01
 - trigger: area, area=Tennis Court, areaId=TennisCourt, hotspotId=TennisCourtClubHousePlaceTennisTrophyH13, phase=task completed, task=Place tennis trophy (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): I found something! Is this it - the family treasure?! A dirty old trophy with a note wrapped round it?
@@ -7095,7 +8150,7 @@ Every story in which Grandma speaks.
 **MADDIE**: But now to the Lighthouse! Since no-one is helping me to find it I'll just go to the shore and look for it myself!
 
 ### Tennis Court: Remove dirt
-`TennisCourtIntro` · seen 24.04.01–26.07.01
+`TennisCourtIntro` · seen 23.09.02–26.07.01
 - trigger: area, area=Tennis Court, areaId=TennisCourt, hotspotId=TennisCourtEntryRemoveDirtA3, phase=task completed, task=Remove dirt (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Wow! I had no idea there was a whole tennis court here.
@@ -7110,7 +8165,6 @@ Every story in which Grandma speaks.
 
 ### Tomb03
 `Tomb03` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **GRANDMA**: I see you've found the family tomb, dearie...
 **MADDIE** (Surprised): Grandma! You gave me a fright!
@@ -7124,7 +8178,6 @@ Every story in which Grandma speaks.
 
 ### Tomb04
 `Tomb04` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **GRANDMA**: This brave young man was Sergeant John Boulton!
 **GRANDMA**: He was the first of the Boultons to fight for the country at the age of eighteen.
@@ -7174,7 +8227,6 @@ Every story in which Grandma speaks.
 
 ### Tomb08
 `Tomb08` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): Oh my... This is beautiful! 
 **GRANDMA** (Surprised): Incredible! I... I remember hearing about the "Family Tree" but I never realized it was an actual tree!
@@ -7206,7 +8258,6 @@ Every story in which Grandma speaks.
 
 ### Tomb11
 `Tomb11` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): Wait... This one is different!
 **GRANDMA** (Discouraged): I... Think I know what this represents...
@@ -7267,7 +8318,6 @@ Every story in which Grandma speaks.
 
 ### Tomb16
 `Tomb16` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **GRANDMA** (Thinking): Dearie, I'm afraid I'll have to let you continue on your own.
 **GRANDMA** (Thinking): My book club starts soon...
@@ -7351,20 +8401,8 @@ Every story in which Grandma speaks.
 **MADDIE** (Worried): That's almost ominous.
 **MADDIE** (Thinking): It feels like Grandpa Charlie's trying to communicate to us...
 
-### Valentine2022Decoration15
-`Valentine2022Decoration15` · seen 22.02.06–22.02.06
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
-
-**MADDIE** (Joyous): A statue with a chocolate box in its hand – I’m a genius!
-**GRANDMA**: Just be careful that no one steals it!
-**MADDIE** (Thinking): What? Why would someone steal chocolate?
-**GRANDMA** (Doubtful): It’s not the chocolate I’m worried about but the di–
-**GRANDMA** (Encouraging): Oh well, maybe I’m worrying for nothing!
-**MADDIE** (Surprised): Dinner? Diary? Diapers?? What were you about to say, grandma…
-
-### Valentine2022Decoration4
-`Valentine2022Decoration4` · seen 22.02.06–22.02.06
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+### Valentine2022Decoration04
+`Valentine2022Decoration04` · seen 22.02.06–22.02.06
 
 **MADDIE** (Joyous): I love these lamps! I can already feel the romance in the air!
 **GRANDMA**: Are you planning on romancing that good looking building inspector?
@@ -7372,9 +8410,8 @@ Every story in which Grandma speaks.
 **GRANDMA** (Joyous): If you don’t make a move on him, maybe I will!
 **MADDIE** (Frustrated): No! No! No no no! Please grandma, don’t spur my imagination like that!!
 
-### Valentine2022Decoration5
-`Valentine2022Decoration5` · seen 22.02.06–22.02.06
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+### Valentine2022Decoration05
+`Valentine2022Decoration05` · seen 22.02.06–22.02.06
 
 **MADDIE** (Charming): Maybe I’ll get struck by Cupid’s arrow this Valentine’s da--
 **MADDIE** (Surprised): OUCH!!! What was that?
@@ -7382,9 +8419,8 @@ Every story in which Grandma speaks.
 **MADDIE** (Annoyed): Grandma! I didn’t mean it THAT literally…
 **GRANDMA** (Joyous): Haha! Don’t worry, it was just a toy arrow this time! Hope it makes you lucky in love!
 
-### Valentine2022Decoration7
-`Valentine2022Decoration7` · seen 22.02.06–22.02.06
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+### Valentine2022Decoration07
+`Valentine2022Decoration07` · seen 22.02.06–22.02.06
 
 **GRANDMA** (Joyous): Wow, you’re going all-in with Valentine’s Day decorations!
 **MADDIE** (Charming): Thank you! I’m trying my bes--
@@ -7393,9 +8429,27 @@ Every story in which Grandma speaks.
 **GRANDMA** (Joyous): I know, I know, you’re taking it slow.
 **GRANDMA**: Just don’t let him slip away…
 
-### Valentine2022IntroPart2UrsulaAndMaddie
-`Valentine2022IntroPart2UrsulaAndMaddie` · seen 22.02.06–22.02.06
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+### Valentine2022Decoration15
+`Valentine2022Decoration15` · seen 22.02.06–22.02.06
+
+**MADDIE** (Joyous): A statue with a chocolate box in its hand – I’m a genius!
+**GRANDMA**: Just be careful that no one steals it!
+**MADDIE** (Thinking): What? Why would someone steal chocolate?
+**GRANDMA** (Doubtful): It’s not the chocolate I’m worried about but the di–
+**GRANDMA** (Encouraging): Oh well, maybe I’m worrying for nothing!
+**MADDIE** (Surprised): Dinner? Diary? Diapers?? What were you about to say, grandma…
+
+### Valentine2022Intro
+`Valentine2022Intro` · seen 22.02.06–22.02.06
+
+**MADDIE** (Joyous): Valentine’s Day! Yay! Another good reason for garden decorations!
+**GRANDMA**: That’s right, sweetheart. But work before play!
+**GRANDMA** (Encouraging): The garden would look so beautiful if the side gate would be polished.
+**GRANDMA** (Worried): But I’m already a bent, old woman…
+**MADDIE**: Don’t worry, grandma! I can clean the gate!
+
+### Valentine2022StairsTutorialAttic
+`Valentine2022StairsTutorialAttic` · seen 22.02.06–22.02.06
 
 **MADDIE** (Surprised): Whose love nest is this, grandma??
 **GRANDMA** (Encouraging): Oh me and… well you know, those are such good memories!
@@ -7405,19 +8459,8 @@ Every story in which Grandma speaks.
 **MADDIE** (Doubtful): Not the first time I smell a mystery…
 **MADDIE** (Charming): And roses! Let's check if there are any romantic garden decorations for Valentine's Day!
 
-### Valentine2022IntroUrsulaAndMaddie
-`Valentine2022IntroUrsulaAndMaddie` · seen 22.02.06–22.02.06
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
-
-**MADDIE** (Joyous): Valentine’s Day! Yay! Another good reason for garden decorations!
-**GRANDMA**: That’s right, sweetheart. But work before play!
-**GRANDMA** (Encouraging): The garden would look so beautiful if the side gate would be polished.
-**GRANDMA** (Worried): But I’m already a bent, old woman…
-**MADDIE**: Don’t worry, grandma! I can clean the gate!
-
 ### WaterGardenStatueFinished
 `WaterGardenStatueFinished` · seen 22.02.06–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **GRANDMA** (Worried): I first met Grandpa Charlie right here beneath this frog.
 **MADDIE** (Surprised): You met him in the garden?
@@ -7428,7 +8471,6 @@ Every story in which Grandma speaks.
 
 ### WaterGardenStatueRevealed
 `WaterGardenStatueRevealed` · seen 22.02.06–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE**: Wow, a giant frog!
 **GRANDMA** (Doubtful): My grandfather said it came from Japan, a gift to Ignatius.
@@ -7438,9 +8480,25 @@ Every story in which Grandma speaks.
 **GRANDMA**: Whoops! I've gotta run. My online knitting club starts in a few minutes!
 **GRANDMA**: She is so trying to avoid my questions...
 
-### Xmas2021Decoration10
-`Xmas2021Decoration10` · seen 22.02.06–22.02.06
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+### XMas2021Decoration02
+`XMas2021Decoration02` · seen 22.02.06–22.02.06
+
+**GRANDMA**: So, how did my gingerbread cookies do?
+**MADDIE** (Joyous): I have never seen a gingerbread house this big!!
+**GRANDMA** (Joyous): It would be even bigger if you didn’t eat most of the cookie dough!
+**MADDIE** (Charming): Grandma! You know cookie dough is my guilty Christmas pleasure!
+
+### XMas2021Decoration05
+`XMas2021Decoration05` · seen 22.02.06–22.02.06
+
+**GRANDMA** (Encouraging): Oh that penguin and I go a loooong way…
+**MADDIE**: I think it makes a nice decoration!
+**GRANDMA** (Joyous): It does! Although we originally used it for smuggling… candy.
+**GRANDMA**: Speaking of which, I'd better go and make sure we have some for Christmas.
+**MADDIE** (Doubtful): Smuggling candy? Inside a penguin? There’s something fishy here…
+
+### XMas2021Decoration10
+`XMas2021Decoration10` · seen 22.02.06–22.02.06
 
 **MADDIE** (Charming): Wooow… A White Christmas would be so magical to experience…
 **GRANDMA** (Encouraging): That’s true! It’s so romantic when the snow falls quietly.
@@ -7450,9 +8508,8 @@ Every story in which Grandma speaks.
 **GRANDMA**: Now I’ll pay a little visit to our neighbors, to borrow some sugar.
 **MADDIE** (Annoyed): Grandma!! You can’t run away from these questions forever...
 
-### Xmas2021Decoration11
-`Xmas2021Decoration11` · seen 22.02.06–22.02.06
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+### XMas2021Decoration11
+`XMas2021Decoration11` · seen 22.02.06–22.02.06
 
 **GRANDMA** (Joyous): “Jingle bells, jingle bells, jingle all the way!” 
 **MADDIE** (Joyous): “Oh what fun it is to ride, in a one-horse open sleigh--”
@@ -7461,9 +8518,8 @@ Every story in which Grandma speaks.
 **GRANDMA** (Joyous): ...Probably just some joke by the locals! Haha!
 **MADDIE** (Doubtful): Locals had a weird sense of humour, if that’s true...
 
-### Xmas2021Decoration12
-`Xmas2021Decoration12` · seen 22.02.06–22.02.06
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+### XMas2021Decoration12
+`XMas2021Decoration12` · seen 22.02.06–22.02.06
 
 **GRANDMA** (Joyous): Knock knock!
 **MADDIE**: Who’s there?
@@ -7472,9 +8528,8 @@ Every story in which Grandma speaks.
 **GRANDMA** (Joyous): “O Christmas tree! O Christmas tree! How lovely are thy branches!"
 **MADDIE** (Discouraged): “O Grandma jokes, o grandma jokes, how passé are they every year… "
 
-### Xmas2021Decoration13
-`Xmas2021Decoration13` · seen 22.02.06–22.02.06
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+### XMas2021Decoration13
+`XMas2021Decoration13` · seen 22.02.06–22.02.06
 
 **GRANDMA** (Encouraging): Oh, did you hang that mistletoe for someone special?
 **MADDIE** (Charming): Mistletoe? What? No no no...
@@ -7483,9 +8538,8 @@ Every story in which Grandma speaks.
 **GRANDMA** (Joyous): I’ll leave you to it! Just keep on decorating with love!
 **MADDIE** (Frustrated): Grandma!!
 
-### Xmas2021Decoration15
-`Xmas2021Decoration15` · seen 22.02.06–22.02.06
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+### XMas2021Decoration15
+`XMas2021Decoration15` · seen 22.02.06–22.02.06
 
 **GRANDMA** (Joyous): Where did you find grandpa Charlie’s Christmas sweater?
 **MADDIE**: It was tossed in with the decorations. Is it really grandpa Charlie’s?
@@ -7494,40 +8548,8 @@ Every story in which Grandma speaks.
 **GRANDMA**: I must go check on the turkey in the oven.
 **MADDIE** (Frustrated): You always leave me hanging!
 
-### Xmas2021Decoration2
-`Xmas2021Decoration2` · seen 22.02.06–22.02.06
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
-
-**GRANDMA**: So, how did my gingerbread cookies do?
-**MADDIE** (Joyous): I have never seen a gingerbread house this big!!
-**GRANDMA** (Joyous): It would be even bigger if you didn’t eat most of the cookie dough!
-**MADDIE** (Charming): Grandma! You know cookie dough is my guilty Christmas pleasure!
-
-### Xmas2021Decoration5
-`Xmas2021Decoration5` · seen 22.02.06–22.02.06
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
-
-**GRANDMA** (Encouraging): Oh that penguin and I go a loooong way…
-**MADDIE**: I think it makes a nice decoration!
-**GRANDMA** (Joyous): It does! Although we originally used it for smuggling… candy.
-**GRANDMA**: Speaking of which, I'd better go and make sure we have some for Christmas.
-**MADDIE** (Doubtful): Smuggling candy? Inside a penguin? There’s something fishy here…
-
-### Xmas2021IntroPart2UrsulaAndMaddie
-`Xmas2021IntroPart2UrsulaAndMaddie` · seen 22.02.06–22.02.06
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
-
-**MADDIE** (Surprised): This garage has an attic!!!
-**GRANDMA**: I can’t remember the last time I climbed up here. It must--
-**MADDIE** (Doubtful): Wasn’t your back sore, grandma?
-**GRANDMA** (Encouraging): ...It must have been Christmas 1979, when we organised the Holiday Ball for the last time.
-**MADDIE** (Thinking): Holiday Ball? Was that the Boulton’s Christmas tradition you have talked about?
-**GRANDMA**: Yes, the whole village came over. The decorated mansion was like a palace from a storybook!
-**MADDIE** (Joyous): Wow!! Maybe your decorations are still here – let’s look around!
-
-### Xmas2021IntroUrsulaAndMaddie
-`Xmas2021IntroUrsulaAndMaddie` · seen 22.02.06–22.02.06
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+### XMas2021Intro
+`XMas2021Intro` · seen 22.02.06–22.02.06
 
 **MADDIE** (Joyous): Time for Winter Holiday decorations, grandma!
 **GRANDMA**: Work before play, Maddie. Our garage could use some cleaning.
@@ -7536,3 +8558,14 @@ Every story in which Grandma speaks.
 **GRANDMA** (Encouraging): Ah, I knew I could trust you! Have fun!
 **MADDIE** (Doubtful): Pretty quick exit for someone with a sore back!
 **MADDIE**: Well, let’s start with those dusty curtains!
+
+### XMas2021StairsTutorialAttic
+`XMas2021StairsTutorialAttic` · seen 22.02.06–22.02.06
+
+**MADDIE** (Surprised): This garage has an attic!!!
+**GRANDMA**: I can’t remember the last time I climbed up here. It must--
+**MADDIE** (Doubtful): Wasn’t your back sore, grandma?
+**GRANDMA** (Encouraging): ...It must have been Christmas 1979, when we organised the Holiday Ball for the last time.
+**MADDIE** (Thinking): Holiday Ball? Was that the Boulton’s Christmas tradition you have talked about?
+**GRANDMA**: Yes, the whole village came over. The decorated mansion was like a palace from a storybook!
+**MADDIE** (Joyous): Wow!! Maybe your decorations are still here – let’s look around!

@@ -111,7 +111,7 @@
 **MADDIE** (Doubtful): I know he was...
 
 ### Spooktacular Backyard Bash — event start
-`CBE_BackyardBash2024_Intro_Dialogue` · seen 26.04.02–26.07.01
+`CBE_BackyardBash2024_Intro_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Spooktacular Backyard Bash, eventId=CBE_BackyardBash2024, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **GRANDMA** (Thinking): The skeletons should go here... And a big, bubbling cauldron here.
@@ -198,6 +198,16 @@
 **MASON** (Encouraging): I get it. I used to be scared of ghosts, too.
 **RODDY** (Discouraged): Really?
 **MASON**: When I was five.
+
+### Spooktacular Backyard Bash — part of the event (exact trigger not dumped)
+`CBE_BackyardBash2024_Supermarket_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Spooktacular Backyard Bash, eventId=CBE_BackyardBash2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MASON** (Thinking): Maddie, it's really important that you don't skimp on the treats.
+**MASON** (Thinking): You need a LOT of treats.
+**MADDIE** (Relaxed): Oh, yeah?
+**MASON** (Relaxed): Cause if you don't have enough treats, you might get a trick!
+**MASON** (Relaxed): I mean, it IS Halloween!
 
 ### Spooktacular Backyard Bash — item discovered: Toilet Papered House
 `CBE_BackyardBash2024_ToiletPaperedHouse_Dialogue` · seen 25.05.01–26.07.01

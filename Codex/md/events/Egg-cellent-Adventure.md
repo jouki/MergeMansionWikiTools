@@ -146,7 +146,7 @@
 **MASON** (Surprised): N-nothing at all, Grandma Ursula! Nothing at all!
 
 ### Egg-cellent Adventure — event start
-`CBE_MasonsEggHunt2024_IntroDialogue_Dialogue` · seen 26.04.02–26.07.01
+`CBE_MasonsEggHunt2024_IntroDialogue_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Egg-cellent Adventure, eventId=CBE_MasonsEggHunt2024, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **MASON** (Frustrated): Another Easter, another egg hunt... And of course it's my job to make it awesome - AGAIN!
@@ -187,6 +187,22 @@
 
 **MASON**: This is gonna be their map - but it's all written in CODE!
 **MASON** (Thinking): They'll have to be real Easter detectives to figure this out. 
+
+### Egg-cellent Adventure — part of the event (exact trigger not dumped)
+`CBE_MasonsEggHunt2024_OutroDialogue_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Egg-cellent Adventure, eventId=CBE_MasonsEggHunt2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE**: We finally found all the eggs, Mason!
+**MADDIE** (Relaxed): The ones hidden in the floor hatch were a nice touch... How did you find that thing, anyway?
+**MASON** (Relaxed): I'll never reveal my secrets.
+**HANK** (Surprised): How about my ring?? Did you find it?
+**MASON** (Discouraged): Is it this one? It was the prize for the best egg hunter.
+**MASON** (Discouraged): I'm sorry, Hank! I didn't mean to take your ring. I didn't realize it was yours...
+**HANK** (Encouraging): That's it! Aaah, what a relief... Thanks, Mason.
+**MASON** (Thinking): What's the ring for anyway?
+**HANK** (Thinking): Errr... I... Well, see... E-enough about me!
+**HANK** (Charming): What a great egg hunt, Mason! It'll be hard for you to outdo it again next year.
+**MASON** (Surprised): N-next year?
 
 ### Egg-cellent Adventure — item discovered: Arcade Machine
 `CBE_MasonsEggHunt2024_VideoGame_04_Dialogue` · seen 25.05.01–26.07.01

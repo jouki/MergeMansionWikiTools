@@ -1,6 +1,21 @@
 # Pet
 Every story in which Pet speaks.
 
+### Woolly Mystery — outro
+`SP_AlpacaPet2024_AllRewardsCompleted_Dialogue` · seen 24.09.02–26.07.01
+- trigger: event, event=Woolly Mystery, eventId=SP_AlpacaPet2024, eventType=Mystery / Progression, moment=outro (versions 24.09.02–24.11.02)
+
+**MADDIE** (Thinking): There's something fishy going on, Buddy!
+**PET**: *Snort!*
+**MADDIE** (Doubtful): First SOMEONE changed the newspaper ad for my ghost tour at Halloween.
+**MADDIE** (Doubtful): Did someone leave Buddy at Cherry's house on purpose - knowing it would cause trouble?
+**PET** (Thinking): *Hummm*
+**MADDIE** (Frustrated): That's so far-fetched it just might be likely...
+**MADDIE** (Frustrated): Everyone is still so on edge from the storm and the secrets in the tin cans, that it's TOO easy to rile everyone up.
+**MADDIE** (Relaxed): Thanks for listening, Buddy.
+**PET** (Relaxed): *Snort!*
+**MADDIE** (Thinking): I need to find out what's going on in this town.
+
 ### Season Pass - Fluff Overload — outro
 `SP_BunnyPet2026_AllRewardsCompleted_Dialogue` · seen 26.02.01–26.07.01
 - trigger: event, event=Season Pass - Fluff Overload, eventId=SP_BunnyPet2026, eventType=Mystery / Progression, moment=outro (versions 26.02.01–26.07.01)
@@ -16,9 +31,9 @@ Every story in which Pet speaks.
 **MADDIE** (Doubtful): Roddy!
 **RODDY** (Worried): Er... Sorry?
 
-### SP BunnyPet2026 TA1 Dialogue
-`SP_BunnyPet2026_TA1_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Season Pass - Fluff Overload — part of the event (exact trigger not dumped)
+`SP_BunnyPet2026_TA1_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Season Pass - Fluff Overload, eventId=SP_BunnyPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **JACKIE** (Hesitant): So, uuh... Don't freak out.
 **MADDIE**: Why would I fre-
@@ -31,9 +46,9 @@ Every story in which Pet speaks.
 **MADDIE** (Encouraging): He's really cute!
 **PET** (Joyous): *squeak squeak nibble*
 
-### SP BunnyPet2026 TA2 Dialogue
-`SP_BunnyPet2026_TA2_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Season Pass - Fluff Overload — part of the event (exact trigger not dumped)
+`SP_BunnyPet2026_TA2_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Season Pass - Fluff Overload, eventId=SP_BunnyPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: He's so fluffy!!!
 **JACKIE** (Joyous): He sure is!
@@ -44,9 +59,9 @@ Every story in which Pet speaks.
 **PET** (Joyous): *squak*
 **JACKIE** (Encouraging): He forgives you.
 
-### SP BunnyPet2026 TA3 Dialogue
-`SP_BunnyPet2026_TA3_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Season Pass - Fluff Overload — part of the event (exact trigger not dumped)
+`SP_BunnyPet2026_TA3_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Season Pass - Fluff Overload, eventId=SP_BunnyPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **JACKIE** (Encouraging): Wow! This bunny pen is looking really amazing!
 **MADDIE**: Thanks! Hey... I have a question.
@@ -70,9 +85,9 @@ Every story in which Pet speaks.
 **RODDY** (Relaxed): Ha!
 **PET** (Joyous): Moo! *huff huff huff*
 
-### SP CowPet2026 TA1 Dialogue
-`SP_CowPet2026_TA1_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Udderly Adorable — part of the event (exact trigger not dumped)
+`SP_CowPet2026_TA1_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Udderly Adorable, eventId=SP_CowPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Doubtful): I’m telling you, Roddy, I don’t have space for a cow...
 **RODDY** (Relaxed): I know, I know. But you might have space for this one!
@@ -88,9 +103,9 @@ Every story in which Pet speaks.
 **PET** (Joyous): Mooooo!
 **MADDIE** (Relaxed): So cute!
 
-### SP CowPet2026 TA2 Dialogue
-`SP_CowPet2026_TA2_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Udderly Adorable — part of the event (exact trigger not dumped)
+`SP_CowPet2026_TA2_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Udderly Adorable, eventId=SP_CowPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY**: Hey, Maddie! How is our little friend doing?
 **MADDIE** (Encouraging): See for yourself!
@@ -102,9 +117,9 @@ Every story in which Pet speaks.
 **MADDIE** (Encouraging): It’s alright. Roddy can come by and visit you whenever you like!
 **PET** (Joyous): MOO!!!
 
-### SP CowPet2026 TA3 Dialogue
-`SP_CowPet2026_TA3_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Udderly Adorable — part of the event (exact trigger not dumped)
+`SP_CowPet2026_TA3_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Udderly Adorable, eventId=SP_CowPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY** (Surprised): ...So he has to fight the bad guy in New York!
 **PET** (Surprised): Moo!
@@ -131,9 +146,9 @@ Every story in which Pet speaks.
 **MADDIE** (Doubtful): Klepto! Bandit!
 **PET** (Joyous): *Dook dook!*
 
-### SP FerretPet2025 TA1 Dialogue
-`SP_FerretPet2025_TA1_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Ferret Fiasco — part of the event (exact trigger not dumped)
+`SP_FerretPet2025_TA1_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Ferret Fiasco, eventId=SP_FerretPet2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **GRANDMA**: Hello, dearie!
 **GRANDMA** (Thinking): The strangest thing has happened! I can’t seem to find-
@@ -146,9 +161,9 @@ Every story in which Pet speaks.
 **PET** (Joyous): *Dook dook*
 **MADDIE** (Joyous): Looks like they approve!
 
-### SP FerretPet2025 TA3 Dialogue
-`SP_FerretPet2025_TA3_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Ferret Fiasco — part of the event (exact trigger not dumped)
+`SP_FerretPet2025_TA3_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Ferret Fiasco, eventId=SP_FerretPet2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): That's it! All the ferrets have been rounded up and found new homes!
 **PET** (Doubtful): *Dook?*
@@ -168,9 +183,9 @@ Every story in which Pet speaks.
 **PET** (Doubtful): Ruff.
 **MADDIE** (Relaxed): Alright, alright. You’re a pro, I get it.
 
-### SP GhostDog2025 TA1 Dialogue
-`SP_GhostDog2025_TA1_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Halloween Howling — part of the event (exact trigger not dumped)
+`SP_GhostDog2025_TA1_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Halloween Howling, eventId=SP_GhostDog2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MASON** (Worried): Maddie, Maddie!
 **MADDIE** (Surprised): Mason! What is it?!
@@ -188,9 +203,9 @@ Every story in which Pet speaks.
 **MADDIE** (Encouraging): How about we call you Boo?
 **MASON** (Charming): Yeah! Oh boy, my very own paranormal pooch!
 
-### SP GhostDog2025 TA2 Dialogue
-`SP_GhostDog2025_TA2_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Halloween Howling — part of the event (exact trigger not dumped)
+`SP_GhostDog2025_TA2_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Halloween Howling, eventId=SP_GhostDog2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MASON**: OooooOOOOOoooohhh....
 **PET** (Surprised): AwOooooOOOooooOO...
@@ -206,9 +221,9 @@ Every story in which Pet speaks.
 **MADDIE** (Thinking): Hmm... Maybe I should have an exorcist on speed dial.
 **MASON** (Frustrated): I heard that!
 
-### SP GhostDog2025 TA3 Dialogue
-`SP_GhostDog2025_TA3_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Halloween Howling — part of the event (exact trigger not dumped)
+`SP_GhostDog2025_TA3_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Halloween Howling, eventId=SP_GhostDog2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Relaxed): Well, it looks like you two have been having a downright ghoulish time!
 **MASON** (Encouraging): Yeah! It’s been so much fun, but...
@@ -222,9 +237,9 @@ Every story in which Pet speaks.
 **MASON** (Surprised): Really?!!
 **MASON** (Joyous): Yippee!
 
-### SP GoatPet2025 TA1 Dialogue
+### Secrets at the Altar — part of the event (exact trigger not dumped)
 `SP_GoatPet2025_TA1_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Secrets at the Altar, eventId=SP_GoatPet2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **BELLA** (Thinking): Maddie, can we take some photos when the present arrives? I want to capture the moment for my parents.
 **BELLA** (Relaxed): They can't be here for us today, so their wedding present is extra special.
@@ -241,9 +256,9 @@ Every story in which Pet speaks.
 **EMILIO** (Thinking): I think Pablo just fainted.
 **MADDIE** (Hesitant): I think a goat fainting on your wedding day means good luck!
 
-### SP GoatPet2025 TA2 Dialogue
+### Secrets at the Altar — part of the event (exact trigger not dumped)
 `SP_GoatPet2025_TA2_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Secrets at the Altar, eventId=SP_GoatPet2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Relaxed): Welcome everyone! It's a beautiful day to celebrate love, partnership and the union between Bella and Emilio.
 **RODDY** (Relaxed): Next, Emilio will read his vows to Bella.
@@ -270,9 +285,9 @@ Every story in which Pet speaks.
 **MADDIE**: And we happened to be in the right place at the right time!
 **JACKIE** (Encouraging): Turns out Hopewell Bay’s pretty good at keeping cold-blooded guests warm.
 
-### SP IguanaPet2026 TA1 Dialogue
-`SP_IguanaPet2026_TA1_Dialogue` · seen 26.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Green with Envy — part of the event (exact trigger not dumped)
+`SP_IguanaPet2026_TA1_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Green with Envy, eventId=SP_IguanaPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Joyous): Look at you climbing already!
 **PET**: *Chirp*
@@ -284,9 +299,9 @@ Every story in which Pet speaks.
 **JACKIE** (Thinking): Hmmm… I don’t think so. He really seems to enjoy that basking rock.
 **MADDIE** (Relaxed): I guess that means he’s staying with us for now.
 
-### SP IguanaPet2026 TA2 Dialogue
-`SP_IguanaPet2026_TA2_Dialogue` · seen 26.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Green with Envy — part of the event (exact trigger not dumped)
+`SP_IguanaPet2026_TA2_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Green with Envy, eventId=SP_IguanaPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **JACKIE** (Relaxed): Maddie, your iguana is loose again.
 **MADDIE** (Relaxed): He’s not loose. He’s exploring.
@@ -297,9 +312,9 @@ Every story in which Pet speaks.
 **PET** (Doubtful): ...
 **JACKIE** (Thinking): Why do I suddenly feel judged by a reptile?
 
-### SP IguanaPet2026 TA3 Dialogue
-`SP_IguanaPet2026_TA3_Dialogue` · seen 26.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Green with Envy — part of the event (exact trigger not dumped)
+`SP_IguanaPet2026_TA3_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Green with Envy, eventId=SP_IguanaPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Worried): The temperature’s dropping again tonight. I’m worried the enclosure still isn’t warm enough.
 **PET** (Doubtful): ...
@@ -310,9 +325,9 @@ Every story in which Pet speaks.
 **JACKIE** (Thinking): Rascal?
 **MADDIE** (Relaxed): Well, he needed a name!
 
-### SP Misery2025 Decoration Slot34
-`SP_Misery2025_Decoration_Slot34` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Something Ours — part of the event (exact trigger not dumped)
+`SP_Misery2025_Decoration_Slot34` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Something Ours, eventId=SP_Misery2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Something Ours — decoration SP_Misery2025_Decoration_Slot34
@@ -345,9 +360,9 @@ Every story in which Pet speaks.
 **MASON** (Charming): I think he's having a nap!
 **PEARL** (Doubtful): I think I need a nap...
 
-### SP RaccoonPet2025 TA1 Dialogue
+### Raccoon Riddle — part of the event (exact trigger not dumped)
 `SP_RaccoonPet2025_TA1_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Raccoon Riddle, eventId=SP_RaccoonPet2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Frustrated): When are you getting rid of that raccoon?
 **MADDIE** (Encouraging): His name is Patches.
@@ -361,9 +376,9 @@ Every story in which Pet speaks.
 **PET** (Worried): --
 **GRANDMA** (Charming): Ohhh... fine! But no more stealing!
 
-### SP RaccoonPet2025 TA2 Dialogue
+### Raccoon Riddle — part of the event (exact trigger not dumped)
 `SP_RaccoonPet2025_TA2_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Raccoon Riddle, eventId=SP_RaccoonPet2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): What do you think, Patches? Does this meet your exacting standards?
 **PET**: *Chirrrrp!*
@@ -398,9 +413,9 @@ Every story in which Pet speaks.
 **PET** (Worried): *Whistle* Maddie?
 **MADDIE** (Charming): Of course, kiddo. Gizmo will be safe with me!
 
-### SP RobotPet2026 TA1 Dialogue
-`SP_RobotPet2026_TA1_Dialogue` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Season Pass - A Gear Friend — part of the event (exact trigger not dumped)
+`SP_RobotPet2026_TA1_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Season Pass - A Gear Friend, eventId=SP_RobotPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): Ready, Mason?
 **MASON** (Worried): What if he doesn't turn on?!
@@ -417,9 +432,9 @@ Every story in which Pet speaks.
 **PET** (Joyous): *Chht...* *Beep!* Giiiizmooo...
 **MASON** (Surprised): IT CAN TALK!
 
-### SP RobotPet2026 TA2 Dialogue
-`SP_RobotPet2026_TA2_Dialogue` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Season Pass - A Gear Friend — part of the event (exact trigger not dumped)
+`SP_RobotPet2026_TA2_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Season Pass - A Gear Friend, eventId=SP_RobotPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MASON** (Thinking): Hey Maddie, how's Gizmo doing?
 **MADDIE** (Encouraging): Great! He's actually been a real help around the mansion lately.
@@ -431,9 +446,9 @@ Every story in which Pet speaks.
 **MADDIE** (Relaxed): That's right, little buddy.
 **MASON**: He's so cool!
 
-### SP RobotPet2026 TA3 Dialogue
-`SP_RobotPet2026_TA3_Dialogue` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Season Pass - A Gear Friend — part of the event (exact trigger not dumped)
+`SP_RobotPet2026_TA3_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Season Pass - A Gear Friend, eventId=SP_RobotPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MASON** (Doubtful): Maddie?
 **MADDIE** (Doubtful): What's wrong? Did something happen to Gizmo?
@@ -445,9 +460,9 @@ Every story in which Pet speaks.
 **PET** (Joyous): Giiizmo! *Whistle* *Beep*
 **MASON** (Charming): Thanks, Maddie! I'll use that for my presentation!
 
-### SP StrayBonesMystery2024 LayerDecoration 02 Dialogue
+### Stray Bones Mystery — part of the event (exact trigger not dumped)
 `SP_StrayBonesMystery2024_LayerDecoration_02_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Stray Bones Mystery, eventId=SP_StrayBonesMystery2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **JACKIE**: Roddy told me you got a new pet, so I had to come see if for myself - I looove dogs!
 **MADDIE** (Surprised): News travels fast, huh? Meet Goldie!

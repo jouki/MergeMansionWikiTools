@@ -2,7 +2,7 @@
 
 
 ### The Maze: Remove broken tiles
-`MazeConcreteMixerGiven` · seen 24.04.01–26.07.01
+`MazeConcreteMixerGiven` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeEntryPathRemoveBrokenTiles, phase=task completed, task=Remove broken tiles (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeEntryPathRemoveBrokenCobbles, phase=task completed, task=Remove broken cobblestones (versions 25.04.03–26.07.01)
 
@@ -11,7 +11,7 @@
 **MADDIE** (Thinking): I must remember to return it once I'm done here.
 
 ### The Maze: Add top arch & return Concrete Mixer
-`MazeConcreteMixerReturn` · seen 24.04.01–26.07.01
+`MazeConcreteMixerReturn` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeEndLargeGateAddArchTop_D10, phase=task completed, task=Add top arch & return Concrete Mixer (versions 24.04.01–24.09.03)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeEndLargeGateAddArchTop_D10, phase=task completed, task=Add the top arch and return the Concrete Mixer (versions 24.11.02–24.11.02)
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryUnlock, phase=task completed, task=Unlock the Conservatory (versions 25.01.03–26.07.01)
@@ -20,7 +20,7 @@
 **MADDIE** (Thinking): Why does letting go of things feel always so hard...
 
 ### The Maze: Cut overgrown hedge
-`MazeDialogue_A` · seen 24.04.01–26.07.01
+`MazeDialogue_A` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeEntryCutOvergrownHedgeA6, phase=task completed, task=Cut overgrown hedge (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeEntryRemoveMoleHillsA4, phase=task completed, task=Remove mole hills (versions 25.04.03–26.07.01)
 
@@ -36,7 +36,7 @@
 **MADDIE** (Joyous): Amazing! I'm going to try and build this, but I'd better keep looking around the maze, too!
 
 ### The Maze: Fix arch
-`MazeDialogue_B` · seen 24.04.01–26.07.01
+`MazeDialogue_B` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeEntryLargeArchFixArchTopB11, phase=task completed, task=Fix arch (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePath1PlaceCobblesC5, phase=task completed, task=Place cobblestones (versions 25.04.03–26.07.01)
 
@@ -49,7 +49,7 @@
 **MADDIE** (Thinking): I don't even understand what it is. I'm going to keep trying to make it, though, and exploring this maze!
 
 ### The Maze: Place cobblestones
-`MazeDialogue_C` · seen 24.04.01–26.07.01
+`MazeDialogue_C` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePath1PlaceCobblesC5, phase=task completed, task=Place cobblestones (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePath1GrowVineF5, phase=task completed, task=Plant vines (versions 25.04.03–26.07.01)
 
@@ -63,7 +63,7 @@
 **MADDIE**: Uh, okay! I'm just going around the maze. You can join me if you like.
 
 ### The Maze: Remove broken vase
-`MazeDialogue_D` · seen 24.04.01–26.07.01
+`MazeDialogue_D` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePath1RemoveBrokenVaseC14, phase=task completed, task=Remove broken vase (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePath2PillarPlaceVineJ10, phase=task completed, task=Plant vines (versions 25.04.03–26.07.01)
 
@@ -76,7 +76,7 @@
 **GRANDMA** (Joyous): I know the answer! And it's a good one, dearie.
 
 ### The Maze: Remove mud
-`MazeDialogue_E` · seen 24.04.01–26.07.01
+`MazeDialogue_E` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePath2SmallGateRemoveMudL3, phase=task completed, task=Remove mud (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePath2SmallGateGrowVineL7, phase=task completed, task=Plant vines (versions 25.04.03–26.07.01)
 
@@ -89,7 +89,7 @@
 **MADDIE** (Surprised): You didn't? Why not, Grandma?
 
 ### The Maze: Remove cobwebs
-`MazeDialogue_F` · seen 24.04.01–26.07.01
+`MazeDialogue_F` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePathCenterRemoveCobwebsN9, phase=task completed, task=Remove cobwebs (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeCenterGateCleanAndFixArchO8, phase=task completed, task=Clean and fix arch (versions 25.04.03–26.07.01)
 
@@ -101,7 +101,7 @@
 **MADDIE** (Thinking): Now that they've gone, I can get back to figuring out what Grandpa wanted me to do here!
 
 ### The Maze: Clean and fix arch
-`MazeDialogue_G` · seen 24.04.01–26.07.01
+`MazeDialogue_G` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeCenterGateCleanAndFixArchO8, phase=task completed, task=Clean and fix arch (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeFountainGatePlaceGrowVine_B5, phase=task completed, task=Plant vines (versions 25.04.03–26.07.01)
 
@@ -115,7 +115,7 @@
 **RODDY** (Discouraged): You might not want to hear my opinion on it, though.
 
 ### The Maze: Fill water
-`MazeDialogue_H` · seen 24.04.01–26.07.01
+`MazeDialogue_H` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeFixableSunDialFillWaterP8, phase=task completed, task=Fill water (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePath3SmallGatePlaceVineS7, phase=task completed, task=Plant vines (versions 25.04.03–26.07.01)
 
@@ -128,7 +128,7 @@
 **MADDIE** (Joyous): Oh my! This has given me an idea, and I think I should go to the old conservatory next!
 
 ### The Maze: Remove wooden planks
-`MazeIntro` · seen 24.04.01–26.07.01
+`MazeIntro` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeEntryRemoveWoodenPlanksA2, phase=task completed, task=Remove wooden planks (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeEntryPathRemoveBrokenTiles, phase=task completed, task=Remove broken tiles (versions 25.04.03–26.07.01)
 
@@ -141,7 +141,7 @@
 **MADDIE** (Thinking): Hmm. Sorry Grandma, but this is too important! I'm going to find out what's in this maze.
 
 ### The Maze: Place flowers
-`MazeOutro` · seen 24.04.01–26.07.01
+`MazeOutro` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeEndLargeGatePlaceLilyFlowers_D12, phase=task completed, task=Place flowers (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeFixableSunDialFillWaterP8, phase=task completed, task=Fill water (versions 25.04.03–26.07.01)
 

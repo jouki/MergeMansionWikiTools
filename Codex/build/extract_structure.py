@@ -70,6 +70,38 @@ def dump_from_config(exe, config_path, lang_mpc, out_dir):
     return ok, (r.stdout + r.stderr)[-1500:]
 
 
+def live_config_path():
+    """Newest config archive the app itself uses (settings.json DumperConfigPath) — for the newest version."""
+    settings = os.path.join(common.REPO, "bin", "Debug", "net9.0-windows10.0.19041.0", "win-x64", "settings.json")
+    try:
+        p = common.read_json(settings).get("DumperConfigPath")
+        return p if p and os.path.exists(p) else None
+    except Exception:
+        return None
+
+
+def ensure_stories(exe, ver, e, out, newest):
+    """StoryElements (story id -> ordered dialog ids) via --dump-stories for every version that has a config:
+    a config archive, an embedded SharedGameConfig.mpa, or — for the newest version — the app's live config."""
+    dst = os.path.join(out, "stories.json")
+    if os.path.exists(dst):
+        return "cached"
+    cfg = None
+    if e["configArchives"]:
+        cfg = newest_config(e["configArchives"])
+    elif e["embeddedConfig"] and e["apk"]:
+        cfg = os.path.join(out, "SharedGameConfig.mpa")
+        if not os.path.exists(cfg):
+            with open(cfg, "wb") as f:
+                f.write(embedded_config(e["apk"]))
+    elif ver == newest:
+        cfg = live_config_path()
+    if not cfg:
+        return "no config"
+    r = subprocess.run([exe, "--dump-stories", cfg, dst], capture_output=True, text=True, encoding="utf-8", errors="replace")
+    return "ok" if r.returncode == 0 and os.path.exists(dst) else "FAILED " + (r.stderr or r.stdout)[-200:]
+
+
 def copy_dump(folder, out):
     for f in WANTED:
         if os.path.exists(os.path.join(folder, f)):
@@ -80,12 +112,14 @@ def main(only=None):
     inv = common.read_json(os.path.join(common.CODEX, "sources.json"))
     exe = extract_loc.build_harness()
     report = {}
+    newest = max(inv["versions"])
     for ver, e in inv["versions"].items():
         if only and ver not in only:
             continue
         out = os.path.join(common.CACHE, "structure", ver)
         if os.path.exists(os.path.join(out, "source.json")):
-            print(f"{ver}: cached")
+            st = ensure_stories(exe, ver, e, out, newest)     # stories.json is independent of the cached dumps
+            print(f"{ver}: cached (stories: {st})")
             continue
         os.makedirs(out, exist_ok=True)
         lang = os.path.join(common.CACHE, "loc", ver + ".en.mpc")
@@ -119,9 +153,10 @@ def main(only=None):
         if src is None:
             src = {"kind": "none"}
         common.write_json(os.path.join(out, "source.json"), src)
+        st = ensure_stories(exe, ver, e, out, newest)
         have = [f for f in WANTED if os.path.exists(os.path.join(out, f))]
         report[ver] = (src["kind"], src.get("ok"), have)
-        print(f"{ver}: {src['kind']} ok={src.get('ok')} files={have}")
+        print(f"{ver}: {src['kind']} ok={src.get('ok')} files={have} stories={st}")
     return report
 
 

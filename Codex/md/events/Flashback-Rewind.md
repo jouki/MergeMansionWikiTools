@@ -147,6 +147,40 @@
 **MADDIE** (Relaxed): This time you're off the hook. But let's talk about your old 80s clothes!
 **GRANDMA** (Joyous): Now they are something I have no explanation for!
 
+### Flashback Rewind — decoration CBE_Flashback2025_Decoration_Slot16
+`CBE_Flashback2025_Slot_16_Dialogue` · seen 25.05.01–26.07.01
+- trigger: decoration, decoration=CBE_Flashback2025_Decoration_Slot16, event=Flashback Rewind, eventKey=CBE_Flashback2025, moment=decoration placed (versions 25.05.01–26.04.02)
+
+**MADDIE** (Thinking): What's with the bandstand and the game zone?
+**ANTIQUEDEALER** (Surprised): Jeepers, Ursula. You really aren't yourself today, are you?
+**ANTIQUEDEALER**: You wanted to put on a show to draw more people to the yard sale.
+**MADDIE** (Hesitant): I don't know what's with me today... Who's going to be performing?
+**ANTIQUEDEALER**: Well, Charlie skipped our last band rehearsal, but I think we can do it.
+**ANTIQUEDEALER**: I have also prepared a comedy show as a little back-up plan. I have some terrific jokes ready to go!
+**MADDIE** (Hesitant): What a relief!
+
+### Flashback Rewind — decoration CBE_Flashback2025_Decoration_Slot19
+`CBE_Flashback2025_Slot_19_Dialogue` · seen 25.05.01–26.07.01
+- trigger: decoration, decoration=CBE_Flashback2025_Decoration_Slot19, event=Flashback Rewind, eventKey=CBE_Flashback2025, moment=decoration placed (versions 25.05.01–26.04.02)
+
+**MADDIE** (Surprised): What a cool arcade game! Grandma always says she used to be really good at these. I mean...
+**ANTIQUEDEALER**: Your Grandma played arcade games? She must be an impressive lady!
+**ANTIQUEDEALER**: Actually... I just managed to beat your high score.
+**ANTIQUEDEALER**: It only took 5 hours, and I got blisters on four fingers, but I did it!
+**ANTIQUEDEALER**: Victory sure tastes sweet.
+**ANTIQUEDEALER** (Surprised): Please don't beat it again!
+**MADDIE** (Hesitant): I can't promise anything...
+
+### Flashback Rewind — decoration CBE_Flashback2025_Decoration_Slot23
+`CBE_Flashback2025_Slot_23_Dialogue` · seen 25.05.01–26.07.01
+- trigger: decoration, decoration=CBE_Flashback2025_Decoration_Slot23, event=Flashback Rewind, eventKey=CBE_Flashback2025, moment=decoration placed (versions 25.05.01–26.04.02)
+
+**MADDIE** (Surprised): Rollerskate ramp? This is by far the best yard sale I've ever seen!
+**ANTIQUEDEALER**: That was the goal, and I have to admit it did turn out pretty well.
+**ANTIQUEDEALER** (Surprised): Let's hope we get a good turnout. You really do need some cash to bring this Mansion back up to code.
+**ANTIQUEDEALER** (Surprised): The council have been too harsh to you, in my opinion. How is one person expected to fix up a place this size on their own?
+**MADDIE** (Surprised): Tell me about it...
+
 ### Flashback Rewind — item discovered: TV Set - Active
 `CBE_Flashback2025_TV_Active_01_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_TVActive_01'], items=['TV Set - Active'], moment=item discovered (versions 25.05.01–26.07.01)

@@ -2,7 +2,7 @@
 
 
 ### Side Entrance: Take down the old swing
-`SE_RemasterSideEntrance03` · seen 24.04.01–26.07.01
+`SE_RemasterSideEntrance03` · seen 23.11.02–26.07.01
 - trigger: area, area=Side Entrance, areaId=MansionSideEntrance, hotspotId=MansionSideEntranceRemoveSwingLoveletterA5, phase=task completed, task=Take down the old swing (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Another letter! The handwriting looks different...
@@ -13,7 +13,7 @@
 **MADDIE** (Thinking): It sounds like a forbidden romance, though. These letters must be between two servants from the mansion!
 
 ### Side Entrance: Water the tree
-`SE_RemasterSideEntrance05` · seen 24.04.01–26.07.01
+`SE_RemasterSideEntrance05` · seen 23.11.02–26.07.01
 - trigger: area, area=Side Entrance, areaId=MansionSideEntrance, hotspotId=MansionSideEntrancePlaceOakFoliageBehindTrunkCleanA9, phase=task completed, task=Water the tree (versions 24.04.01–26.07.01)
 
 **MADDIE** (Worried): I found a letter that was stuck to the previous one! It seems sadder than the others. Words have been scratched out...
@@ -24,7 +24,7 @@
 **MADDIE** (Surprised): Winnie? Hmm, whoever could that be?
 
 ### Side Entrance: SideEntranceUnlock
-`SideEntranceUnlock` · seen 24.04.01–26.07.01
+`SideEntranceUnlock` · seen 23.09.02–26.07.01
 - trigger: area, area=Side Entrance, areaId=MansionSideEntrance, hotspotId=GardenRight20UnlockMansionSideEntrance, phase=task appears (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): This is where I should head next...after this beach is done.

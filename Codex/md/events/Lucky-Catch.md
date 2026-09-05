@@ -72,8 +72,16 @@
 **MADDIE**: There's no hiding from me now, big fish. This rod has your name on it!
 **GRANDMA**: I remember hearing a story once about a fisher catching something very large and rare with a rod like that...
 
+### Lucky Catch — part of the event (exact trigger not dumped)
+`CBE_LuckyCatch_GrandmaSuitcase` · seen 23.09.02–26.07.01
+- trigger: event, eventType=event story, event=Lucky Catch, eventId=CBE_LuckyCatch, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE** (Surprised): Ugh... This thing is heavy! Wait, a minute! Is this a suitcase?!
+**GRANDMA** (Surprised): OH! Well, it looks like a piece of old junk. You should throw it in the trash when we get back.
+**MADDIE** (Thinking): Does that look like C.B. to you?
+
 ### Lucky Catch — entering board
-`CBE_LuckyCatch_Intro` · seen 24.04.01–26.07.01
+`CBE_LuckyCatch_Intro` · seen 23.09.02–26.07.01
 - trigger: event, event=Lucky Catch, eventId=CBE_LuckyCatch, eventType=Collectible Board Event, moment=entering board (versions 24.04.01–26.07.01)
 
 **MADDIE**: Nothing like going out for a relaxing fishing trip, right Grandma?
@@ -124,6 +132,23 @@
 **GRANDMA** (Joyous): Hahaha! You sound like your Grandpa Charlie. 
 **GRANDMA** (Encouraging): He had such big fish stories. Swore he caught the Loch Ness Monster, once.
 
+### Lucky Catch — part of the event (exact trigger not dumped)
+`CBE_LuckyCatch_MaxGrandmaNote` · seen 23.09.02–26.07.01
+- trigger: event, eventType=event story, event=Lucky Catch, eventId=CBE_LuckyCatch, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE** (Surprised): Grandma! I think I've pieced together what looks like a...
+**MADDIE** (Thinking): A message! Or a riddle? Huh? What does this even mean?!
+**MADDIE** (Thinking): From the depths, secrets gleam unseen, thus from porcelain's embrace, you'll will find treasures previously unseen.
+**GRANDMA** (Frustrated): See? Nonsense! I wouldn't even bother asking around about it...
+
+### Lucky Catch — part of the event (exact trigger not dumped)
+`CBE_LuckyCatch_MaxNutsAndBolts` · seen 23.09.02–26.07.01
+- trigger: event, eventType=event story, event=Lucky Catch, eventId=CBE_LuckyCatch, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE** (Doubtful): I think we should pick the lock! 
+**GRANDMA** (Doubtful): I doubt there's anything of worth in there...
+**MADDIE**: Don't be like that! Maybe this has something important inside!
+
 ### Lucky Catch — item discovered: Professional Fishing Rod
 `CBE_LuckyCatch_RareCompetitionRod` · seen 23.09.02–26.07.01
 - trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_CompetitionFishingRodRare_01'], items=['Professional Fishing Rod'], moment=item discovered (versions 23.09.02–26.07.01)
@@ -159,6 +184,14 @@
 **MADDIE** (Joyous): Look at this fish, Grandma! Isn't it great?!
 **GRANDMA** (Charming): It's magnificent! I guess your fancy gear really helped!
 
+### Lucky Catch — part of the event (exact trigger not dumped)
+`CBE_LuckyCatch_TornLetterLv1` · seen 23.09.02–26.07.01
+- trigger: event, eventType=event story, event=Lucky Catch, eventId=CBE_LuckyCatch, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE** (Discouraged): Aaw... Just a bunch of soggy paper... 
+**MADDIE** (Thinking): Hmm, there's some writing on them, but they're falling apart, fast!
+**GRANDMA** (Charming): Old wet paper tends to do that, dearie!
+
 ### Lucky Catch — item discovered: Silver Fishing Trophy
 `CBE_LuckyCatch_TrophyLv6` · seen 23.09.02–26.07.01
 - trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_FishingTrophies_06'], items=['Silver Fishing Trophy'], moment=item discovered (versions 23.09.02–26.07.01)
@@ -190,6 +223,14 @@
 **MADDIE**: This fish looks really fast! I'm surprised I caught it.
 **GRANDMA** (Worried): Are you sure you can pick it up? Maybe you can sit next to it?
 **MADDIE** (Worried): No... No-... I got this! I... Ugh..  HAVE YOU TAKEN THE PICTURE YET?!
+
+### Lucky Catch — part of the event (exact trigger not dumped)
+`CBE_LuckyCatch_WorldRecordFish` · seen 23.09.02–26.07.01
+- trigger: event, eventType=event story, event=Lucky Catch, eventId=CBE_LuckyCatch, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
+
+**GRANDMA** (Thinking): How heavy did you say that fish was?!
+**MADDIE**: How come?
+**GRANDMA** (Surprised): Well, according to the fish guide, you just beat the world record!
 
 ### Lucky Catch — item discovered: Yellowfin Tuna
 `CBE_LuckyCatch_YellowfinTuna` · seen 23.09.02–26.07.01
@@ -241,10 +282,13 @@
 **GRANDMA** (Charming): Maybe...
 
 ### Lucky Catch — item discovered: Crimson-lipped Batfish
-`LC_Halloween_CommonCrimsonLippedBatfish_Dialogue`
+`LC_Halloween_CommonCrimsonLippedBatfish_Dialogue` · seen 26.07.01–26.07.01
 - trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_CommonCrimsonLippedBatfish_01'], items=['Crimson-lipped Batfish'], moment=item discovered (versions 26.03.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA** (Joyous): This is a promising start!
+**MADDIE** (Surprised): I-is it? What is that anyway? A fish or a... bat?
+**GRANDMA** (Encouraging): A Crimson-lipped Batfish! Look at those ears!
+**MADDIE** (Worried): A fish with ears?
 
 ### Lucky Catch — item discovered: Mummy Fish
 `LC_Halloween_CommonMummyFish_Dialogue` · seen 25.05.01–26.07.01

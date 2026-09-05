@@ -3,7 +3,6 @@ Every story in which Mason speaks.
 
 ### AdStampCardEventTest Intro Dialogue
 `AdStampCardEventTest_Intro_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MASON**: Are you ready to start a stamp collection?
 **MASON** (Relaxed): And I don't mean the old, dusty paper stamps Julius loves...
@@ -212,9 +211,9 @@ Every story in which Mason speaks.
 **RODDY** (Discouraged): Really?
 **MASON**: When I was five.
 
-### CBE BackyardBash2024 Supermarket Dialogue
+### Spooktacular Backyard Bash — part of the event (exact trigger not dumped)
 `CBE_BackyardBash2024_Supermarket_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Spooktacular Backyard Bash, eventId=CBE_BackyardBash2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MASON** (Thinking): Maddie, it's really important that you don't skimp on the treats.
 **MASON** (Thinking): You need a LOT of treats.
@@ -308,9 +307,9 @@ Every story in which Mason speaks.
 **MASON** (Discouraged): ...
 **MASON** (Doubtful): Fourteen.
 
-### CBE Easter2023 DecoratedTree
+### Egg Hunt 2023 — part of the event (exact trigger not dumped)
 `CBE_Easter2023_DecoratedTree` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Egg Hunt 2023, eventId=CBE_Easter2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **MASON** (Annoyed): Ungh... Argh!
 **MADDIE** (Encouraging): Need some help there, Mason?
@@ -381,9 +380,9 @@ Every story in which Mason speaks.
 **MADDIE** (Encouraging): I love it! Gonna put it right up here on the wall!
 **MASON** (Worried): No! Please, everyone will see!
 
-### CBE Easter2023 MasonPlaceholder
+### Egg Hunt 2023 — part of the event (exact trigger not dumped)
 `CBE_Easter2023_MasonPlaceholder` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Egg Hunt 2023, eventId=CBE_Easter2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **MASON** (Joyous): Wow what's this?! 
 **MASON** (Worried): Dialogues TBD!
@@ -477,6 +476,124 @@ Every story in which Mason speaks.
 **MASON** (Surprised): I don't believe it...
 **MASON** (Surprised): They all fit together!
 **MASON** (Joyous): It's beautiful! And mine... ALL MINE! 
+
+### Easter 2025 — item discovered: Spilled Chocolate
+`CBE_Easter2025_BrokenMachine_05_Dialogue` · seen 25.05.01–26.03.01
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_BrokenMachine_05'], items=['Spilled Chocolate'], moment=item discovered (versions 25.05.01–26.03.01)
+
+**MADDIE**: Roddy, do you have a second?
+**RODDY** (Ready): Sure! How can I help?
+**MADDIE** (Thinking): A flux anomaly in the cocoa particle suspension matrix disrupts the harmonic shear resonance of the tempering coils, causing unpredictable high-velocity chocolate ejection events.
+**RODDY** (Thinking): S-say what?
+**MADDIE** (Relaxed): I think I know how to fix it. Can you just hold a couple of things for a minute?
+**MADDIE** (Relaxed): It shouldn't take long, just a little twist and a minor push...
+**MADDIE** (Surprised): Whoooops!
+**MADDIE** (Hesitant): Roddy! Are you OK?
+**RODDY** (Surprised): W-what happened?
+**MASON** (Joyous): Cool! A chocolate Roddy!
+
+### Easter 2025 — item discovered: Tin Can
+`CBE_Easter2025_Can_01_Dialogue` · seen 25.05.01–26.03.01
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Can_01'], items=['Tin Can'], moment=item discovered (versions 25.05.01–26.03.01)
+
+**MASON** (Charming): Did you make this lollipop? Did you REALLY?
+**MADDIE** (Encouraging): Yep! With the brand new candy machine I just built!
+**MASON** (Surprised): You BUILT a candy machine?! That's my greatest dream!
+**MADDIE** (Relaxed): I used Ignatius Boulton's old drawings - remember, the ones found in the old tin can factory?
+**MASON** (Thinking): Oh yeah! I found more of those in some of the tin cans left lying around.
+**MADDIE** (Surprised): Do you still have them?
+**MASON** (Joyous): Of course! I'll get them for you right now! Maybe you can build even more cool machines.
+**MASON** (Joyous): Maybe a toffee machine! Ooh, or a cake machine!
+**MADDIE** (Encouraging): I'll see what I can do.
+
+### Easter 2025 — item discovered: Mason
+`CBE_Easter2025_Character_01_Dialogue` · seen 25.05.01–26.03.01
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Character1_01'], items=['Mason'], moment=item discovered (versions 25.05.01–26.03.01)
+
+**MADDIE** (Thinking): Mason, you know how I promised you chocolates?
+**MASON** (Charming): Yeah?
+**MADDIE** (Relaxed): What do you think about lollipops?
+**MASON** (Joyous): I LOVE lollipops!
+**MADDIE** (Relaxed): That's what I thought.
+
+### Easter 2025 — item discovered: Cabinet
+`CBE_Easter2025_Cupboard_01_Dialogue` · seen 25.05.01–26.03.01
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Cupboard_01'], items=['Cabinet'], moment=item discovered (versions 25.05.01–26.03.01)
+
+**MASON** (Encouraging): I can't believe you built these machines to make candy and chocolates and... all kinds of treats!
+**MASON** (Encouraging): I couldn't imagine anything better, honestly!
+**MASON** (Charming): Is there anything I can do to repay you? I'll do anything!
+**MADDIE** (Charming): Anything?
+**MASON**: Anything!
+**MADDIE** (Relaxed): There is one thing...
+**MASON**: What?
+**MASON** (Worried): You don't mean...
+**MADDIE** (Joyous): Can you wear your bunny costume?
+**MASON** (Annoyed): *Sigh*
+**MASON** (Annoyed): Okay, I'll wear it.
+
+### Easter 2025 — decoration CBE_Easter2025_Decoration_Slot10
+`CBE_Easter2025_Decoration_Slot10_Dialogue` · seen 25.05.01–26.03.01
+- trigger: decoration, decoration=CBE_Easter2025_Decoration_Slot10, event=Easter 2025, eventKey=CBE_Easter2025, moment=decoration placed (versions 25.05.01–26.03.01)
+
+**MASON** (Annoyed): I can't believe I had to put this costume on again...
+**MASON** (Annoyed): Next year, someone else can wear it, because I'm not dressing up like a bunny AGAIN! I'm just too old and cool...
+**MASON** (Annoyed): And no one else has to get dressed up for the egg hunt!
+**MASON** (Thinking): Oh, I was wrong!
+**MASON** (Thinking): Your costume is WAY better than mine!
+
+### Easter 2025 — item discovered: Garden Bunny
+`CBE_Easter2025_EasterDecorations_04_Dialogue` · seen 25.05.01–26.03.01
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Decos_04'], items=['Garden Bunny'], moment=item discovered (versions 25.05.01–26.03.01)
+
+**PEARL**: Mason?
+**PEARL** (Doubtful): Come out already. We have to take a photo of you in your costume!
+**MASON** (Annoyed): I'd prefer it if you didn't.
+**PEARL** (Encouraging): Please? Pleeeeeease?
+**MASON** (Thinking): Fine. I can't help my cuteness!
+
+### Sweet Mess Express — entering board
+`CBE_Easter2025_Intro_Dialogue` · seen 25.04.02–26.03.01
+- trigger: event, event=Sweet Mess Express, eventId=CBE_Easter2025, eventType=Collectible Board Event, moment=entering board (versions 25.04.02–26.02.03)
+- trigger: event, event=Easter 2025, eventId=CBE_Easter2025, eventType=Collectible Board Event, moment=entering board (versions 26.03.01–26.03.01)
+
+**MASON** (Joyous): I'm SO excited!
+**MADDIE** (Relaxed): What are you SO excited about?
+**MASON** (Relaxed): D'uh! Your egg hunt, of course! And you promised to make it bigger and better than EVER before!
+**MADDIE** (Surprised): My egg hunt... of course!
+**MASON** (Charming): I bet you've got all kinds of surprises ready, right?
+**MADDIE** (Hesitant): Right...
+**MASON** (Encouraging): Maybe I'll finally get my dream - an egg hunt with not just chocolate but candy and amazing cakes, too!
+**MASON** (Encouraging): Well, I'll let you back to it!
+**MADDIE** (Discouraged): Oh, no... I completely forgot about the egg hunt!
+**MADDIE** (Discouraged): It's way too late to get everything done now! Unless...
+**MADDIE** (Thinking): I have a whole stack of Ignatius' old blueprints. Maybe I could tweak them and build something.
+**MADDIE** (Joyous): A chocolate-candy-pastry machine!
+
+### Sweet Mess Express — event end
+`CBE_Easter2025_Outro_Dialogue` · seen 25.04.02–26.03.01
+- trigger: event, event=Sweet Mess Express, eventId=CBE_Easter2025, eventType=Collectible Board Event, moment=event end (versions 25.04.02–26.02.03)
+- trigger: event, event=Easter 2025, eventId=CBE_Easter2025, eventType=Collectible Board Event, moment=event end (versions 26.03.01–26.03.01)
+
+**MADDIE**: How was your egg hunt? Did you get all the chocolate you wanted?
+**MASON** (Joyous): Oh, I did! Your chocolates were just out of this world!
+**MASON** (Joyous): Your machines were amazing - and you were like some mad chocolate scientist!
+**MASON** (Relaxed): By the way... what are you gonna do with the machines?
+**MADDIE** (Thinking): Why do you ask?
+**MASON** (Thinking): Well, I could take them out of your hands, if you wanted.
+**MADDIE** (Thinking): Maybe that's not safe, considering what happened to Roddy. The machines are just prototypes with a lot of kinks!
+**MADDIE** (Relaxed): He got covered in chocolate! That's a happy accident, if you ask me...
+
+### Frosty Secrets — decoration CBE_FrostySecrets2024_Decoration_Slot01
+`CBE_FrostySecrets2024_DecoSlot_01_Dialogue` · seen 25.05.01–25.06.01
+- trigger: decoration, decoration=CBE_FrostySecrets2024_Decoration_Slot01, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, moment=decoration placed (versions 25.05.01–25.06.01)
+
+**MASON** (Surprised): Wow! Did you make these, Maddie??
+**MADDIE**: Yeah, I wanted to try something new. And the Grand Drive was crying for some winter magic!
+**MASON** (Thinking): Is ice sculpting hard?
+**MADDIE** (Relaxed): You'd be surprised!
+**MASON** (Charming): Can I try? Please? Pretty please? It looks SO fun!
+**MADDIE** (Doubtful): Why not. But careful with the tools, Mason!
 
 ### Haunted Halloween — item discovered: Possessed Candles
 `CBE_Halloween2025_CandleGhost_01_Dialogue` · seen 26.03.01–26.07.01
@@ -810,8 +927,6 @@ Every story in which Mason speaks.
 **RODDY** (Charming): Let me ask you first: are you interested in some less-than-premium holiday crafts?  
   _earlier:_ ~~Sure... Hold on. You don't mean your homemade pottery?~~ (until 25.10.01)
 **BELLA** (Doubtful): Maybe, maybe not. It's not very nice to make fun of other people's work, you know.
-**MASON** (Joyous): *Sigh* You're right. I would love a teapot for Xmas.
-**BELLA** (Thinking): Hmmm...
 
 ### Maddie In Paris — decoration CBE_MaddieInParis2025_Decoration_Slot14
 `CBE_MaddieInParis2025_Slot_14_Dialogue` · seen 25.05.01–26.07.01
@@ -946,7 +1061,7 @@ Every story in which Mason speaks.
 **MASON** (Surprised): N-nothing at all, Grandma Ursula! Nothing at all!
 
 ### Egg-cellent Adventure — event start
-`CBE_MasonsEggHunt2024_IntroDialogue_Dialogue` · seen 26.04.02–26.07.01
+`CBE_MasonsEggHunt2024_IntroDialogue_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Egg-cellent Adventure, eventId=CBE_MasonsEggHunt2024, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **MASON** (Frustrated): Another Easter, another egg hunt... And of course it's my job to make it awesome - AGAIN!
@@ -988,9 +1103,9 @@ Every story in which Mason speaks.
 **MASON**: This is gonna be their map - but it's all written in CODE!
 **MASON** (Thinking): They'll have to be real Easter detectives to figure this out. 
 
-### CBE MasonsEggHunt2024 OutroDialogue Dialogue
+### Egg-cellent Adventure — part of the event (exact trigger not dumped)
 `CBE_MasonsEggHunt2024_OutroDialogue_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Egg-cellent Adventure, eventId=CBE_MasonsEggHunt2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: We finally found all the eggs, Mason!
 **MADDIE** (Relaxed): The ones hidden in the floor hatch were a nice touch... How did you find that thing, anyway?
@@ -1078,6 +1193,18 @@ Every story in which Mason speaks.
 **MASON** (Thinking): There is just one thing...
 **MASON**: We'll need bigger baskets.
 
+### Hidden Holiday Gems — entering board
+`GM_Xmas2024_Intro_Dialogue` · seen 24.11.02–26.01.02
+- trigger: event, event=Hidden Holiday Gems, eventId=GM_Xmas2024, eventType=Collectible Board Event, moment=entering board (versions 24.11.02–26.01.02)
+
+**MASON**: Maddie! Maddie!
+**MADDIE** (Surprised): Wow, calm down Mason. What's got you so excited?
+**MASON** (Joyous): I- I just heard there are mines under Hopewell Bay, FILLED with treasure and and...
+**MASON** (Relaxed): And jewels and all sorts of cool stuff! Maybe I could ask Santa for some of them!
+**MADDIE** (Thinking): You know, I did find something in Ignatius's journal on the mines about the holiday season.
+**MADDIE** (Encouraging): He loved reading it to his children. Do you want to hear it?
+**MASON** (Encouraging): Yeah!
+
 ### Grandma's Pool Party — item discovered: Inflatable Pool Slide
 `LDE_GrandmasBirthday2023_FloatChain_Dialogue` · seen 23.09.02–26.07.01
 - trigger: item, event=Grandma's Pool Party, eventKey=LDE_GrandmasBirthday2023, itemKeys=['LDE_GrandmasBirthday2023_Floaties_07'], items=['Inflatable Pool Slide'], moment=item discovered (versions 23.09.02–26.07.01)
@@ -1087,6 +1214,54 @@ Every story in which Mason speaks.
 **MADDIE** (Surprised): Oh, wow... Do you think that’ll even fit into the pool?!
 **MASON** (Annoyed): How small a pool we talking here, lady?
 **MADDIE** (Surprised): Well, er...
+
+### Green Acres Quest — item discovered: Mason
+`LDE_GreenAcresQuest2024_CharacterMason_02_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterMason_02'], items=['Mason'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MASON**: Maddie, Maddie! I don’t know what I’m doing...
+**MADDIE** (Encouraging): Don’t worry, I’ll help you out.
+
+### Green Acres Quest — item discovered: Friendship Medallion
+`LDE_GreenAcresQuest2024_Friendship_08_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Friendship_08'], items=['Friendship Medallion'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**BELLA** (Doubtful): Hello... What do you want?
+**MASON** (Charming): Hi, my name is Mason and I... I made this medallion for you.
+**BELLA** (Doubtful): Oh... Thanks.
+**MASON** (Discouraged): Just a little 'Welcome to Hopewell Bay' gift for you!
+
+### Green Acres Quest — item discovered: Hedgehog
+`LDE_GreenAcresQuest2024_GoodAnimals_05_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_GoodAnimals_05'], items=['Hedgehog'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MASON** (Frustrated): Hmph...
+**MADDIE** (Doubtful): What’s wrong, Mason?
+**MASON** (Annoyed): I thought hedgehogs were fast...
+
+### Green Acres Quest — item discovered: Bella
+`LDE_GreenAcresQuest2024_v2_CharacterBella_02_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterBella_02'], items=['Bella'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**BELLA**: You're helping at the garden, too? This community really pulls together...
+**MASON** (Surprised): That's how we roll!
+
+### Green Acres Quest — item discovered: Mason
+`LDE_GreenAcresQuest2024_v2_CharacterMason_02_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterMason_02'], items=['Mason'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**MASON**: Are you building a garden?
+**EMILIO** (Encouraging): I'm trying... I couldn't tempt you to help, could I?
+**MASON** (Encouraging): I guess I owe you one. Hand me a rake!
+
+### Green Acres Quest — item discovered: Extra Hot Chilies
+`LDE_GreenAcresQuest2024_v2_GreenhouseChilis_06_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_GreenhouseChilis_06'], items=['Extra Hot Chilies'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**EMILIO** (Thinking): Bella will definitely want some chilies. The hotter, the better!
+**MASON**: What are these? Can I taste them?
+**EMILIO** (Surprised): W-wait! They're...
+**MASON** (Worried): HOLY MOTHER OF LAVA! These are h-h-hot!
 
 ### Green Acres Quest — item discovered: Mason
 `LDE_GreenAcresQuest_CharacterMason_02_Dialogue` · seen 26.05.01–26.07.01
@@ -1150,9 +1325,9 @@ Every story in which Mason speaks.
 **MADDIE** (Relaxed): I think we have enough stockings for everyone.
 **MASON** (Charming): Can mine be extra big?
 
-### LDE HolidayCarols2023 LayerDecoration 05 Dialogue
+### The Fa-la-la-la Follies — part of the event (exact trigger not dumped)
 `LDE_HolidayCarols2023_LayerDecoration_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=The Fa-la-la-la Follies, eventId=LDE_HolidayCarols2023, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: Maddie, I know you're super busy with the caroling troupe, but I had an idea...
 **MADDIE**: What is it, Mason? Don't worry - you'll get some candy apples.
@@ -1161,9 +1336,9 @@ Every story in which Mason speaks.
 **MASON** (Joyous): We'll all just put them in a mailbox and then see which one we get.
 **MADDIE** (Encouraging): That's an excellent idea! I'll get the mailbox; you ask everyone to send a card!
 
-### LDE HolidayCarols2023 LayerDecoration 13 Dialogue
+### The Fa-la-la-la Follies — part of the event (exact trigger not dumped)
 `LDE_HolidayCarols2023_LayerDecoration_13_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=The Fa-la-la-la Follies, eventId=LDE_HolidayCarols2023, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MASON** (Thinking): Is that mistletoe?
 **MADDIE** (Surprised): Yeah, it is! I wonder who hung it there...
@@ -1171,9 +1346,9 @@ Every story in which Mason speaks.
 **MADDIE** (Surprised): T-that's true!
 **MASON** (Thinking): Why are you turning red?
 
-### LDE HolidayCarols2023 LayerDecoration 15 Dialogue
+### The Fa-la-la-la Follies — part of the event (exact trigger not dumped)
 `LDE_HolidayCarols2023_LayerDecoration_15_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=The Fa-la-la-la Follies, eventId=LDE_HolidayCarols2023, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MASON** (Worried): Grandma Ursula!
 **GRANDMA**: Whatever is going on, Mason?
@@ -1423,9 +1598,9 @@ Every story in which Mason speaks.
 **MASON**: And pinecones and walnuts!
 **GRANDMA** (Encouraging): Wonderful! Now we just need to find the perfect tree!
 
-### LDE HolidayOddities2025 TC3 Dialogue
-`LDE_HolidayOddities2025_TC3_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+### Holiday Oddities — part of the event (exact trigger not dumped)
+`LDE_HolidayOddities2025_TC3_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Holiday Oddities, eventId=LDE_HolidayOddities2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Surprised): What is this?? The tree is up and decorated, there are presents, and there’s even some... Is that soup?
 **MADDIE** (Relaxed): It’s like a...
@@ -1465,9 +1640,9 @@ Every story in which Mason speaks.
 **GRANDMA** (Relaxed): First, you need to chop some firewood.
 **GRANDMA** (Relaxed): You will find all the tools here, in the shed.
 
-### LDE PicnicConfusion2023 Layerdecoration 08 Dialogue
+### Picnic Confusion! — part of the event (exact trigger not dumped)
 `LDE_PicnicConfusion2023_Layerdecoration_08_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Picnic Confusion!, eventId=LDE_PicnicConfusion2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **ANTIQUEDEALER** (Thinking): A ha! Back at the scene of the crime!
 **MASON** (Surprised): Wh- What?
@@ -1482,9 +1657,9 @@ Every story in which Mason speaks.
 **RODDY** (Surprised): M- Maddie!
 **MADDIE** (Doubtful): What is going on here?!
 
-### LDE PicnicConfusion2023 Layerdecoration 09 Dialogue
+### Picnic Confusion! — part of the event (exact trigger not dumped)
 `LDE_PicnicConfusion2023_Layerdecoration_09_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Picnic Confusion!, eventId=LDE_PicnicConfusion2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **GRANDMA** (Frustrated): Alright boys, out with it!
 **MADDIE** (Annoyed): Yeah, where is everyone?
@@ -1517,7 +1692,7 @@ Every story in which Mason speaks.
 **MASON** (Worried): But if there's a treasure, there could be treasure hunters! I better be fast.
 
 ### Pirates of Hopewell Bay — entering board
-`LDE_PiratesOfHopewellBay2023_BoardIntro_Dialogue` · seen 24.04.01–26.07.01
+`LDE_PiratesOfHopewellBay2023_BoardIntro_Dialogue` · seen 23.11.02–26.07.01
 - trigger: event, event=Pirates of Hopewell Bay, eventId=LDE_PiratesOfHopewellBay2023, eventType=Collectible Board Event, moment=entering board (versions 24.04.01–26.07.01)
 
 **MASON** (Thinking): I bet the Boulton attic is super old and dusty. Which means that it's FULL of cool old stuff...
@@ -1543,7 +1718,7 @@ Every story in which Mason speaks.
 **MASON**: A-HA! The costume store! I hope they have eye patches...
 
 ### Pirates of Hopewell Bay — event start
-`LDE_PiratesOfHopewellBay2023_EventIntro_Dialogue` · seen 26.04.02–26.07.01
+`LDE_PiratesOfHopewellBay2023_EventIntro_Dialogue` · seen 23.11.02–26.07.01
 - trigger: event, event=Pirates of Hopewell Bay, eventId=LDE_PiratesOfHopewellBay2023, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **MASON**: Trim the sails and batten down the hatches because adventure awaits!
@@ -1560,9 +1735,9 @@ Every story in which Mason speaks.
 **MADDIE** (Encouraging): Hmm... I'm sure I saw something in the attic. Old papers and stuff...
 **MASON** (Encouraging): Ooooh, I hear adventure calling!
 
-### LDE PiratesOfHopewellBay2023 LayerDecoration 01 Dialogue
+### Pirates of Hopewell Bay — part of the event (exact trigger not dumped)
 `LDE_PiratesOfHopewellBay2023_LayerDecoration_01_Dialogue` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Pirates of Hopewell Bay, eventId=LDE_PiratesOfHopewellBay2023, moment=part of the event (exact trigger not dumped) (versions 23.11.02–26.07.01)
 
 **MASON** (Doubtful): Are you SURE you know what you're doing? There's not a lot of ship left.
 **EMILIO**: We're taking it apart to build it anew!
@@ -1571,9 +1746,9 @@ Every story in which Mason speaks.
 **EMILIO** (Thinking): I think you should always listen to your mother.
 **MASON** (Annoyed): Huh! She says that too...
 
-### LDE PiratesOfHopewellBay2023 LayerDecoration 03 Dialogue
+### Pirates of Hopewell Bay — part of the event (exact trigger not dumped)
 `LDE_PiratesOfHopewellBay2023_LayerDecoration_03_Dialogue` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Pirates of Hopewell Bay, eventId=LDE_PiratesOfHopewellBay2023, moment=part of the event (exact trigger not dumped) (versions 23.11.02–26.07.01)
 
 **EMILIO**: So, young Mason. A good ship needs a strong skeleton.
 **MASON** (Encouraging): That'a a great idea! Skeletons are soooo cool.
@@ -1582,9 +1757,9 @@ Every story in which Mason speaks.
 **EMILIO** (Encouraging): I'm talking about the frame of the ship. See, now we can start to build!
 **MASON**: And then we'll do the skeletons?
 
-### LDE PiratesOfHopewellBay2023 LayerDecoration 05 Dialogue
+### Pirates of Hopewell Bay — part of the event (exact trigger not dumped)
 `LDE_PiratesOfHopewellBay2023_LayerDecoration_05_Dialogue` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Pirates of Hopewell Bay, eventId=LDE_PiratesOfHopewellBay2023, moment=part of the event (exact trigger not dumped) (versions 23.11.02–26.07.01)
 
 **EMILIO** (Encouraging): What do you think? A handsome ship, isn't it?
 **MASON** (Thinking): Yeah, really handsome! Although... It's missing a mast.
@@ -1593,9 +1768,9 @@ Every story in which Mason speaks.
 **EMILIO** (Doubtful): W-what?
 **MASON** (Joyous): Some water for the ship to sail in!
 
-### LDE PiratesOfHopewellBay2023 LayerDecoration 07 Dialogue
+### Pirates of Hopewell Bay — part of the event (exact trigger not dumped)
 `LDE_PiratesOfHopewellBay2023_LayerDecoration_07_Dialogue` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Pirates of Hopewell Bay, eventId=LDE_PiratesOfHopewellBay2023, moment=part of the event (exact trigger not dumped) (versions 23.11.02–26.07.01)
 
 **MASON** (Joyous): Shiver me timbers! It's starting to look like a pirate ship!
 **EMILIO**: You can say that again! I think we've done pretty well here.
@@ -1605,9 +1780,9 @@ Every story in which Mason speaks.
 **EMILIO** (Thinking): It's the... Forget about it. Let's add some color!
 **MASON** (Relaxed): Hehehe! Poop deck...
 
-### LDE PiratesOfHopewellBay2023 LayerDecoration 10 Dialogue
+### Pirates of Hopewell Bay — part of the event (exact trigger not dumped)
 `LDE_PiratesOfHopewellBay2023_LayerDecoration_10_Dialogue` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Pirates of Hopewell Bay, eventId=LDE_PiratesOfHopewellBay2023, moment=part of the event (exact trigger not dumped) (versions 23.11.02–26.07.01)
 
 **EMILIO**: Phew, that was quite a job!
 **MASON** (Encouraging): Aye, Emilio. T'was!
@@ -1617,9 +1792,9 @@ Every story in which Mason speaks.
 **MASON** (Charming): And it needs a pirate flag!
 **EMILIO** (Annoyed): Of course.
 
-### LDE PiratesOfHopewellBay2023 LayerDecoration 13 Dialogue
+### Pirates of Hopewell Bay — part of the event (exact trigger not dumped)
 `LDE_PiratesOfHopewellBay2023_LayerDecoration_13_Dialogue` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Pirates of Hopewell Bay, eventId=LDE_PiratesOfHopewellBay2023, moment=part of the event (exact trigger not dumped) (versions 23.11.02–26.07.01)
 
 **MASON** (Relaxed): There's no mistaking it now.
 **MASON** (Joyous): Pirates sail here, so all landlubbers better beware!
@@ -1629,9 +1804,9 @@ Every story in which Mason speaks.
 **EMILIO** (Doubtful): Don't tell me.
 **MASON** (Worried): ... there's no Monkey Cave.
 
-### LDE PiratesOfHopewellBay2023 LayerDecoration 15 Dialogue
+### Pirates of Hopewell Bay — part of the event (exact trigger not dumped)
 `LDE_PiratesOfHopewellBay2023_LayerDecoration_15_Dialogue` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Pirates of Hopewell Bay, eventId=LDE_PiratesOfHopewellBay2023, moment=part of the event (exact trigger not dumped) (versions 23.11.02–26.07.01)
 
 **MASON**: It's PERFECT!
 **MASON** (Joyous): The ship, the cannons, the lake, the MONKEY CAVE!
@@ -1877,7 +2052,7 @@ Every story in which Mason speaks.
 **MASON** (Relaxed): We need the right outfits if we wanna pass for real pirates, of course!
 
 ### Pirates of Hopewell Bay  — event start
-`LDE_PiratesOfHopewellBay2024_EventIntro_Dialogue` · seen 26.04.02–26.07.01
+`LDE_PiratesOfHopewellBay2024_EventIntro_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Pirates of Hopewell Bay , eventId=LDE_PiratesOfHopewellBay2024, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **MASON**: Wood, nails, rope, an anchor... What else do I need to build a MEGA pirate ship?
@@ -1893,27 +2068,27 @@ Every story in which Mason speaks.
 **MASON** (Charming): What's that?
 **RODDY** (Relaxed): Never mind. I'll help you. Where do we begin?
 
-### LDE PiratesOfHopewellBay2024 LayerDecoration 03 Dialogue
+### Pirates of Hopewell Bay  — part of the event (exact trigger not dumped)
 `LDE_PiratesOfHopewellBay2024_LayerDecoration_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Pirates of Hopewell Bay , eventId=LDE_PiratesOfHopewellBay2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Doubtful): So how did Emilio do this exactly?
 **MASON** (Worried): He made it look super easy... but it's not! It's super hard!
 **RODDY** (Thinking): I'm sure we can figure it out...
 **RODDY** (Thinking): Let's just draw some plans and write a list of supplies. Organization is the key to every successful building project.
 
-### LDE PiratesOfHopewellBay2024 LayerDecoration 05 Dialogue
+### Pirates of Hopewell Bay  — part of the event (exact trigger not dumped)
 `LDE_PiratesOfHopewellBay2024_LayerDecoration_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Pirates of Hopewell Bay , eventId=LDE_PiratesOfHopewellBay2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Relaxed): Ha! We did it! The frame is ready and really solid!
 **RODDY** (Charming): You see, I found out that wooden vessels are susceptible to both hogging and sagging, and that bends the deck convexly...
 **MASON** (Surprised): Whoa, whoa! That's a lot of weird words I don't understand. When do we add the mast?
 **RODDY** (Relaxed): All in good time, Mason!
 
-### LDE PiratesOfHopewellBay2024 LayerDecoration 07 Dialogue
+### Pirates of Hopewell Bay  — part of the event (exact trigger not dumped)
 `LDE_PiratesOfHopewellBay2024_LayerDecoration_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Pirates of Hopewell Bay , eventId=LDE_PiratesOfHopewellBay2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MASON** (Charming): Emilio dug a little pond for the ship to sail in. Could we have one, too?
 **RODDY**: A pond??
@@ -1922,9 +2097,9 @@ Every story in which Mason speaks.
 **RODDY** (Thinking): I'll make the application for the surveys and the building licence, but...
 **RODDY** (Relaxed): I think we can do it!
 
-### LDE PiratesOfHopewellBay2024 LayerDecoration 10 Dialogue
+### Pirates of Hopewell Bay  — part of the event (exact trigger not dumped)
 `LDE_PiratesOfHopewellBay2024_LayerDecoration_10_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Pirates of Hopewell Bay , eventId=LDE_PiratesOfHopewellBay2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY**: According to my books, it's now time to build the... poop deck. Did I read that right?
 **MASON**: Teehee!
@@ -1933,9 +2108,9 @@ Every story in which Mason speaks.
 **RODDY** (Discouraged): Mason!
 **MASON** (Relaxed): Ahahahah!
 
-### LDE PiratesOfHopewellBay2024 LayerDecoration 13 Dialogue
+### Pirates of Hopewell Bay  — part of the event (exact trigger not dumped)
 `LDE_PiratesOfHopewellBay2024_LayerDecoration_13_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Pirates of Hopewell Bay , eventId=LDE_PiratesOfHopewellBay2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Surprised): Phewww! What a job that was!
 **RODDY** (Surprised): I never knew hoisting sails could be so hard. And those cannons weigh a ton!
@@ -1944,9 +2119,9 @@ Every story in which Mason speaks.
 **MASON** (Thinking): Emilio built them when I asked.
 **RODDY** (Doubtful): Let's get to work, then.
 
-### LDE PiratesOfHopewellBay2024 LayerDecoration 15 Dialogue
+### Pirates of Hopewell Bay  — part of the event (exact trigger not dumped)
 `LDE_PiratesOfHopewellBay2024_LayerDecoration_15_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Pirates of Hopewell Bay , eventId=LDE_PiratesOfHopewellBay2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Encouraging): I can't believe we've built this thing. It's GLORIOUS!
 **RODDY** (Encouraging): The sails are up, the monkey waterfall is ready, and you can sail off to adventure!
@@ -2072,9 +2247,9 @@ Every story in which Mason speaks.
 **RODDY** (Thinking): They look kinda valuable...
 **MASON** (Thinking): Forget about them. Who cares about some dusty antiques, when we're searching for ACTUAL pirate treasure!
 
-### LDE PiratesOfHopewellBay2024  Dialogue
+### Pirates of Hopewell Bay  — part of the event (exact trigger not dumped)
 `LDE_PiratesOfHopewellBay2024__Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Pirates of Hopewell Bay , eventId=LDE_PiratesOfHopewellBay2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Surprised): Err, s-sure! So is it a REAL treasure?
 **MASON**: As real as the Mansion itself, Roddy.
@@ -2098,7 +2273,6 @@ Every story in which Mason speaks.
 **MASON** (Thinking): Guys, we can do better!  
   _earlier:_ ~~We are, dearie, but I know her better than you think.~~ (until 25.09.01)
 **MASON** (Thinking): I know she is impressive, but she has a lot of secrets.
-**MADDIE** (Relaxed): Thanks for the heads up, Grandma, but I think you might just be paranoid!
 
 ### Circus Caper — item discovered: Small Circus Program
 `LDE_Rumors2025_Brochures_03_Dialogue` · seen 25.05.01–26.07.01
@@ -2111,8 +2285,6 @@ Every story in which Mason speaks.
 **HANK** (Thinking): That sounds... dangerous.  
   _earlier:_ ~~I ran out of circus brochures, but I know I saw more of them somewhere.~~ (until 25.09.01)
 **HANK** (Thinking): No, haven't seen her... She's probably just getting ready for the show.
-**MADDIE**: Of course. But I don't want to disturb her...
-**PEARL** (Doubtful): I'm sure she won't mind if you get more brochures from her wagon.
 
 ### Circus Caper — item discovered: Crumpled Programs
 `LDE_Rumors2025_Brochures_07_Dialogue` · seen 25.05.01–26.07.01
@@ -2207,6 +2379,16 @@ Every story in which Mason speaks.
 **RINGLEADER** (Doubtful): I must warn you - it’s harder than it looks. Our performers are the best in the world, and they work very hard to hone their craft.
 **MASON** (Joyous): We’re ready!
 
+### Circus Caper — item discovered: Unicycle
+`LDE_Rumors2025_CircusProps_07_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CircusProps_07'], items=['Unicycle'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MASON**: You were right! The circus is in town!
+**MASON** (Joyous): I saw them setting up the big top right in front of the Mansion.
+**MADDIE** (Relaxed): It's pretty cool, isn't it?
+**MASON** (Thinking): It sure is. But I just have one question.
+**MASON** (Thinking): How in tarnation do you ride a bike with just one wheel?
+
 ### Circus Caper — item discovered: Hot Air Balloon
 `LDE_Rumors2025_CircusProps_10_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CircusProps_10'], items=['Hot Air Balloon'], moment=item discovered (versions 25.05.01–26.07.01)
@@ -2231,12 +2413,6 @@ Every story in which Mason speaks.
 **MASON** (Joyous): Like tightrope-walking!  
   _earlier:_ ~~You look well. Still traveling and performing, I see.~~ (until 25.09.01)
 **MASON** (Joyous): You two know each other??
-**RINGLEADER** (Relaxed): Oh, yes. We go WAY back. Don't we, Ursula?
-**RINGLEADER** (Relaxed): We slept in the same wagon back in the day. We trained together and shared so many stories.
-**RINGLEADER** (Relaxed): About this place too!
-**RINGLEADER** (Surprised): The Mansion looks so much better! Someone's been working hard to turn it around.
-**RINGLEADER**: Is it still full of old stuff?
-**MADDIE** (Charming): Like you wouldn't believe.
 
 ### Circus Caper — item discovered: Malzar
 `LDE_Rumors2025_Fortunetelling_04_Dialogue` · seen 25.05.01–26.07.01
@@ -2289,13 +2465,9 @@ Every story in which Mason speaks.
 **HANK** (Joyous): OK, then. Just don’t lose the key, little guy!  
   _earlier:_ ~~Just tell me, where is it?~~ (until 25.09.01)
 **HANK** (Joyous): What?
-**RINGLEADER** (Surprised): The damned Boultonite!
-**GRANDMA** (Surprised): So that's what you were after...
-**RINGLEADER** (Doubtful): You didn't think I want to tour with the Circus for the rest of my life, did you?
-**GRANDMA** (Frustrated): Well, you can think about that for a nice long while - behind bars!
 
 ### Circus Caper — event start
-`LDE_Rumors2025_Intro_Dialogue` · seen 26.04.02–26.07.01
+`LDE_Rumors2025_Intro_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Circus Caper, eventId=LDE_Rumors2025, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **MASON**: Does the name Fiona DuVal ring a bell?  
@@ -2362,6 +2534,17 @@ Every story in which Mason speaks.
   _earlier:_ ~~There's a list of things in the Mansion, but some of them have been crossed out.~~ (until 25.09.01)
 **RODDY** (Surprised): It's almost like some kind of... shopping list for a thief!
 
+### Circus Caper — item discovered: Stuffed Unicorn
+`LDE_Rumors2025_Prizes_11_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Prizes_11'], items=['Stuffed Unicorn'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MADDIE** (Encouraging): What a show that was!
+**MASON** (Thinking): I really didn't expect the magician to pull a raccoon out of his hat.
+**MADDIE**: What did you think, Julius?
+**ANTIQUEDEALER** (Discouraged): I'm a little bit disappointed.
+**MADDIE** (Surprised): Why?
+**ANTIQUEDEALER** (Frustrated): Deb won the biggest prize in the raffle - and she had only bought one ticket!
+
 ### Circus Caper — item discovered: Wardrobe
 `LDE_Rumors2025_RingmasterSuit_05_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_RingmasterSuit_05'], items=['Wardrobe'], moment=item discovered (versions 25.05.01–26.07.01)
@@ -2397,9 +2580,9 @@ Every story in which Mason speaks.
   _earlier:_ ~~They must be after something specific. But what?~~ (until 25.09.01)
 **RODDY** (Doubtful): Absolutely not!
 
-### LDE Rumors2025 TA5 Dialogue
+### Circus Caper — part of the event (exact trigger not dumped)
 `LDE_Rumors2025_TA5_Dialogue` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Circus Caper, eventId=LDE_Rumors2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **MASON** (Charming): What do you remember of your time in the circus, Ursula?
 **GRANDMA** (Thinking): It was too long ago...
@@ -2421,7 +2604,6 @@ Every story in which Mason speaks.
 **MASON** (Thinking): It sure looks that way!  
   _earlier:_ ~~I am serious, dear. Things have been moved around, but nothing seems to be missing.~~ (until 25.09.01)
 **MASON** (Thinking): See? You're just being paranoid.
-**GRANDMA** (Annoyed): Let's hope so...
 
 ### Circus Caper — item discovered: Lock Pick Set
 `LDE_Rumors2025_ThiefProps_07_Dialogue` · seen 25.05.01–26.07.01
@@ -2434,12 +2616,6 @@ Every story in which Mason speaks.
 **RODDY** (Encouraging): What kind of a trick could they be used for?  
   _earlier:_ ~~Maybe Grandma wasn't just being paranoid... Maybe there IS something going on.~~ (until 25.09.01)
 **RODDY** (Encouraging): Fiona!
-**MADDIE** (Thinking): Look what I found.
-**RINGLEADER** (Surprised): Lock-picks? Where did you find those?
-**MADDIE** (Thinking): They were hidden in some bushes right next to the Mansion.
-**MADDIE** (Worried): I don't want to sound suspicious, but do you think there's someone in your troupe who could be planning a robbery here at the Mansion?
-**RINGLEADER** (Surprised): What a shocking thought! I promise to make sure no one in my circus steps out of line.
-**RINGLEADER** (Surprised): After all, you've been so welcoming to us.
 
 ### Easter Lucky Snap — entering board
 `LS_Easter_Intro1_Dialogue` · seen 26.03.01–26.07.01
@@ -2456,6 +2632,26 @@ Every story in which Mason speaks.
 **MASON** (Joyous): Most exotic creature wins!
 **ANTIQUEDEALER** (Thinking): But what are we competing for? Oh...he is already gone...
 
+### Lucky Snap Spring — entering board
+`LS_Easter_Intro_Dialogue` · seen 25.04.02–26.07.01
+- trigger: event, event=Lucky Snap Spring, eventId=LS_Easter, eventType=Collectible Board Event, moment=entering board (versions 25.04.02–26.01.02)
+- trigger: event, event=Easter Lucky Snap, eventId=LS_Easter, eventType=Collectible Board Event, moment=entering board (versions 26.02.01–26.02.03)
+
+**MADDIE** (Joyous): I've done some studying since our last bird-watching trip, and I can't wait to get out there!
+**ANTIQUEDEALER** (Charming): How marvelous! The weather looks most promising, too.
+**MASON** (Charming): Greetings, old people!  
+  _earlier:_ ~~Hello, old people!~~ (until 25.04.01)
+**MADDIE** (Doubtful): We're not that old!
+**MASON** (Thinking): Are you planning for a *bird-watching* day?
+**MADDIE** (Doubtful): Well, yes...
+**MASON** (Relaxed): I rest my case.
+**MASON**: How about you make it more interesting?
+**MADDIE** (Thinking): What do you mean?
+**MASON** (Joyous): Let's see which one of you can spot the most exotic creature.
+**ANTIQUEDEALER** (Thinking): Hmmm... I feel I have an unfair advantage, as I have been bird-watching for much longer.
+**MADDIE** (Encouraging): You might be surprised by how much I've learned. I've had an excellent teacher, after all!
+**ANTIQUEDEALER** (Joyous): Flattery will get you everywhere. Let's do it!
+
 ### Easter Lucky Snap — event end
 `LS_Easter_Outro1_Dialogue` · seen 26.03.01–26.07.01
 - trigger: event, event=Easter Lucky Snap, eventId=LS_Easter, eventType=Collectible Board Event, moment=event end (versions 26.03.01–26.07.01)
@@ -2466,6 +2662,18 @@ Every story in which Mason speaks.
 **MASON** (Joyous): What? No! That's stupid. Whoever wins... gets to eat all the Easter eggs they want!
 **MADDIE** (Charming): I think that means we'd better let Pearl pick the winner. Just in case!
 **MASON** (Discouraged): Noooo!
+
+### Lucky Snap Spring — event end
+`LS_Easter_Outro_Dialogue` · seen 25.04.02–26.07.01
+- trigger: event, event=Lucky Snap Spring, eventId=LS_Easter, eventType=Collectible Board Event, moment=event end (versions 25.04.02–26.01.02)
+- trigger: event, event=Easter Lucky Snap, eventId=LS_Easter, eventType=Collectible Board Event, moment=event end (versions 26.02.01–26.02.03)
+
+**MASON**: Let's hear it! Which one of you spotted the most exotic bird?
+**MADDIE** (Encouraging): I only spotted adorable baby animals, but I'm not complaining!
+**ANTIQUEDEALER** (Thinking): I am not sure about birds, but I did spot something that took me quite by surprise.
+**MADDIE** (Surprised): What was it?
+**ANTIQUEDEALER** (Relaxed): A rare winged wonder - Mason!
+**MASON** (Encouraging): What can I say? I photograph really well.
 
 ### Easter Lucky Snap — item discovered: Rad Raccoon
 `LS_Easter_Rare_Raccoon_Dialogue` · seen 26.03.01–26.07.01
@@ -2493,6 +2701,48 @@ Every story in which Mason speaks.
 **MASON** (Joyous): AND I read that birds are like tiny dinosaurs!
 **MASON** (Thinking): My senses are tingling... There's something in a tree over there!
 **MASON** (Charming): The cutest little dinosaurs ever!!
+
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot01
+`SE_HopeberryFestival2023_Decoration_Slot01_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot01, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**MASON** (Joyous): Wow! Look at the size of those berries!
+**MADDIE** (Encouraging): They're just Hopeberries Mason.
+**MASON** (Annoyed): I know that, lady! 
+**MADDIE** (Annoyed): It's Maddie!
+**MASON** (Annoyed): I know that too!
+
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot07
+`SE_HopeberryFestival2023_Decoration_Slot07_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot07, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**DEB**: Having fun there, Mason?
+**MASON** (Joyous): Yeah! This is great! 
+**DEB** (Encouraging): This is how they used to make juice in the old days. With their bare feet!
+**MASON** (Worried): Cool! I guess I should take my socks off then? 
+
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot14
+`SE_HopeberryFestival2023_Decoration_Slot14_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot14, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**DEB** (Joyous): Come one, come all to the new Hopeberry Festival!
+**DEB** (Joyous): Don't forget to taste my wonderful new hopeberry juice! It's to die for!
+**ANTIQUEDEALER** (Annoyed): You can say that again! It smells like a dead body. 
+**MASON** (Joyous): Reeeeeeeally?!
+**MADDIE** (Doubtful): Good job, Julius...
+**ANTIQUEDEALER** (Doubtful): Why is everyone angry at me today?
+
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_19
+`SE_HopeberryFestival2023_Decoration_Slot19_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_19, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**MASON**: Hopeberry jam! I love this stuff! 
+**CHERRY**: Have a jar, sugar. On the house!
+**MASON** (Joyous): Awesome! 
+**MADDIE**: Hello, Cherry! Ooh! Is this the jam I helped you make?
+**CHERRY** (Encouraging): Er... Yes! Yes it is!
+**MADDIE** (Encouraging): Mmmm! I don't remember it tasting this delicious.
+**CHERRY** (Encouraging): Sometimes things improve over time.
 
 ### Festive Feast — decoration SP_CancelledFun2025_Decoration_Slot35
 `SP_CancelledFun2025_Decoration_Slot35_Dialogue` · seen 26.03.01–26.07.01
@@ -2526,9 +2776,9 @@ Every story in which Mason speaks.
 **ANTIQUEDEALER** (Encouraging): A noble title.
 **MASON** (Charming): Thank you. I gave it to myself.
 
-### SP GhostDog2025 Intro Dialogue
-`SP_GhostDog2025_Intro_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Halloween Howling — part of the event (exact trigger not dumped)
+`SP_GhostDog2025_Intro_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Halloween Howling, eventId=SP_GhostDog2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: Hello, Mason!
 **MASON** (Discouraged): ...
@@ -2544,9 +2794,9 @@ Every story in which Mason speaks.
 **MADDIE** (Joyous): Rufus! Just the dog I was looking for...
 **DOG** (Doubtful): Ruff?
 
-### SP GhostDog2025 TA1 Dialogue
-`SP_GhostDog2025_TA1_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Halloween Howling — part of the event (exact trigger not dumped)
+`SP_GhostDog2025_TA1_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Halloween Howling, eventId=SP_GhostDog2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MASON** (Worried): Maddie, Maddie!
 **MADDIE** (Surprised): Mason! What is it?!
@@ -2564,9 +2814,9 @@ Every story in which Mason speaks.
 **MADDIE** (Encouraging): How about we call you Boo?
 **MASON** (Charming): Yeah! Oh boy, my very own paranormal pooch!
 
-### SP GhostDog2025 TA2 Dialogue
-`SP_GhostDog2025_TA2_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Halloween Howling — part of the event (exact trigger not dumped)
+`SP_GhostDog2025_TA2_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Halloween Howling, eventId=SP_GhostDog2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MASON**: OooooOOOOOoooohhh....
 **PET** (Surprised): AwOooooOOOooooOO...
@@ -2582,9 +2832,9 @@ Every story in which Mason speaks.
 **MADDIE** (Thinking): Hmm... Maybe I should have an exorcist on speed dial.
 **MASON** (Frustrated): I heard that!
 
-### SP GhostDog2025 TA3 Dialogue
-`SP_GhostDog2025_TA3_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Halloween Howling — part of the event (exact trigger not dumped)
+`SP_GhostDog2025_TA3_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Halloween Howling, eventId=SP_GhostDog2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Relaxed): Well, it looks like you two have been having a downright ghoulish time!
 **MASON** (Encouraging): Yeah! It’s been so much fun, but...
@@ -2609,6 +2859,19 @@ Every story in which Mason speaks.
 **ANTIQUEDEALER** (Worried): But- But you asked me to-
 **MASON** (Joyous): Did someone say PIRATES?!
 
+### Holiday Mystery — outro
+`SP_MasonsMystery2023_AllRewardsCompleted_Dialogue` · seen 23.11.02–26.07.01
+- trigger: event, event=Holiday Mystery, eventId=SP_MasonsMystery2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**GRANDMA**: Oh Mason...
+**GRANDMA** (Relaxed): Why would you go through all this trouble, dearie?
+**MASON** (Relaxed): Well... You know... I’ve had so much fun around here in the past year... The spooky summer camp, the swimming pool.
+**MASON** (Encouraging): Not to mention the awesome pirate ship! I just...
+**MASON** (Doubtful): I just wanted to give something back.
+**GRANDMA** (Encouraging): Well, I love it! Thank you.
+**MASON** (Encouraging): Happy holidays, Grandma!
+**GRANDMA** (Joyous): Happy holidays, Mason!
+
 ### Holiday Mystery — decoration SP_MasonsMystery2023_Decoration_Slot29
 `SP_MasonsMystery2023_Decoration_Slot29_Dialogue` · seen 23.11.02–26.07.01
 - trigger: decoration, decoration=SP_MasonsMystery2023_Decoration_Slot29, event=Holiday Mystery, eventKey=SP_MasonsMystery2023, moment=decoration placed (versions 23.11.02–26.07.01)
@@ -2621,9 +2884,24 @@ Every story in which Mason speaks.
 **MADDIE** (Relaxed): You bet, Mason! It’s really rare to fool Grandma!
 **MASON** (Joyous): Oh, cool!
 
-### SP Misery2025 AllRewardsCompleted
-`SP_Misery2025_AllRewardsCompleted` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Holiday Mystery — intro
+`SP_MasonsMystery2023_Intro_Dialogue` · seen 23.11.02–26.07.01
+- trigger: event, event=Holiday Mystery, eventId=SP_MasonsMystery2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**MADDIE** (Relaxed): Looks like it’s the holiday season again, Grandma!
+**GRANDMA** (Encouraging): Yes, dearie! I can’t wait to make my special holiday pie!
+**MADDIE** (Surprised): Ooh! Is it the one with cinnamon, hopeberries and oranges?!
+**GRANDMA** (Charming): That’s the one! I know little Mason has always wanted to try it, so I thought I’d surprise him.
+**MADDIE** (Charming): That’s sweet.
+**GRANDMA** (Joyous): Not as sweet as my pie, dearie!
+**GRANDMA** (Relaxed): Brrr... It’s getting cold, let’s head inside...
+**MASON** (Doubtful): Oh, man... Grandma has been so awesome this year! And now she’s making me pie?!
+**MASON** (Thinking): I wonder what she would want for this holiday season?
+**MASON** (Thinking): Hmm....
+
+### Something Ours — part of the event (exact trigger not dumped)
+`SP_Misery2025_AllRewardsCompleted` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Something Ours, eventId=SP_Misery2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Something Ours — outro
@@ -2642,9 +2920,9 @@ Every story in which Mason speaks.
 **MASON** (Relaxed): ...
 **MADDIE** (Relaxed): How could you ever say no to that?
 
-### SP Misery2025 Decoration Slot33
-`SP_Misery2025_Decoration_Slot33` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Something Ours — part of the event (exact trigger not dumped)
+`SP_Misery2025_Decoration_Slot33` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Something Ours, eventId=SP_Misery2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Something Ours — decoration SP_Misery2025_Decoration_Slot33
@@ -2664,9 +2942,9 @@ Every story in which Mason speaks.
 **RODDY** (Encouraging): Want to see me burn my eyebrows?
 **MASON** (Relaxed): Heh heh!
 
-### SP Misery2025 Decoration Slot34
-`SP_Misery2025_Decoration_Slot34` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Something Ours — part of the event (exact trigger not dumped)
+`SP_Misery2025_Decoration_Slot34` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Something Ours, eventId=SP_Misery2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Something Ours — decoration SP_Misery2025_Decoration_Slot34
@@ -2683,9 +2961,9 @@ Every story in which Mason speaks.
 **BELLA** (Doubtful): And painting it.
 **MASON** (Encouraging): Okay, it was a team effort!
 
-### SP Misery2025 Decoration Slot35
-`SP_Misery2025_Decoration_Slot35` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Something Ours — part of the event (exact trigger not dumped)
+`SP_Misery2025_Decoration_Slot35` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Something Ours, eventId=SP_Misery2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Something Ours — decoration SP_Misery2025_Decoration_Slot35
@@ -2701,9 +2979,9 @@ Every story in which Mason speaks.
 **MASON** (Annoyed): How else would I get dirty?!
 **PEARL** (Thinking): That explains a lot, actually...
 
-### SP Misery2025 Decoration Slot36
-`SP_Misery2025_Decoration_Slot36` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Something Ours — part of the event (exact trigger not dumped)
+`SP_Misery2025_Decoration_Slot36` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Something Ours, eventId=SP_Misery2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Something Ours — decoration SP_Misery2025_Decoration_Slot36
@@ -2723,9 +3001,9 @@ Every story in which Mason speaks.
 **MADDIE** (Charming): Hey, don’t worry about it, Kiddo.
 **MADDIE** (Charming): I’m glad you like it.
 
-### SP Misery2025 Decoration Slot37
-`SP_Misery2025_Decoration_Slot37` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Something Ours — part of the event (exact trigger not dumped)
+`SP_Misery2025_Decoration_Slot37` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Something Ours, eventId=SP_Misery2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Something Ours — decoration SP_Misery2025_Decoration_Slot37
@@ -2739,9 +3017,9 @@ Every story in which Mason speaks.
 **MADDIE** (Encouraging): Can I play too?
 **MASON** (Joyous): Yeah!
 
-### SP Misery2025 LastCollectibleItemDiscovered
-`SP_Misery2025_LastCollectibleItemDiscovered` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Something Ours — part of the event (exact trigger not dumped)
+`SP_Misery2025_LastCollectibleItemDiscovered` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Something Ours, eventId=SP_Misery2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Something Ours — item discovered: Treehouse Ladder
@@ -2854,9 +3132,9 @@ Every story in which Mason speaks.
 **MASON** (Charming): I think he's having a nap!
 **PEARL** (Doubtful): I think I need a nap...
 
-### SP PigPet2025 TA1 Dialogue
+### A Pig Birthday Surprise — part of the event (exact trigger not dumped)
 `SP_PigPet2025_TA1_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=A Pig Birthday Surprise, eventId=SP_PigPet2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **PEARL** (Encouraging): I owe you BIG time for this, Maddie.
 **MADDIE** (Relaxed): Don't worry about it. I'm happy to help!
@@ -2868,9 +3146,9 @@ Every story in which Mason speaks.
 **MADDIE**: What?
 **MASON** (Relaxed): Tofu!
 
-### SP PigPet2025 TA2 Dialogue
+### A Pig Birthday Surprise — part of the event (exact trigger not dumped)
 `SP_PigPet2025_TA2_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=A Pig Birthday Surprise, eventId=SP_PigPet2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: Listen, I was just wondering... Where does Charlotte work?
 **MADDIE** (Thinking): She must be super busy - I mean, I've never met her, and I've known you forever.
@@ -2902,9 +3180,9 @@ Every story in which Mason speaks.
 **PET** (Worried): *Whistle* Maddie?
 **MADDIE** (Charming): Of course, kiddo. Gizmo will be safe with me!
 
-### SP RobotPet2026 Intro Dialogue
-`SP_RobotPet2026_Intro_Dialogue` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Season Pass - A Gear Friend — part of the event (exact trigger not dumped)
+`SP_RobotPet2026_Intro_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Season Pass - A Gear Friend, eventId=SP_RobotPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: Hello, Mason! You look excited!
 **MASON** (Joyous): Oh boy, am I! It's our school science fair this month!
@@ -2925,9 +3203,9 @@ Every story in which Mason speaks.
 **MADDIE** (Relaxed): Ha! While those would be awesome, how about we turn it on first?
 **MASON** (Doubtful): Oh, alright.
 
-### SP RobotPet2026 TA1 Dialogue
-`SP_RobotPet2026_TA1_Dialogue` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Season Pass - A Gear Friend — part of the event (exact trigger not dumped)
+`SP_RobotPet2026_TA1_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Season Pass - A Gear Friend, eventId=SP_RobotPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): Ready, Mason?
 **MASON** (Worried): What if he doesn't turn on?!
@@ -2944,9 +3222,9 @@ Every story in which Mason speaks.
 **PET** (Joyous): *Chht...* *Beep!* Giiiizmooo...
 **MASON** (Surprised): IT CAN TALK!
 
-### SP RobotPet2026 TA2 Dialogue
-`SP_RobotPet2026_TA2_Dialogue` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Season Pass - A Gear Friend — part of the event (exact trigger not dumped)
+`SP_RobotPet2026_TA2_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Season Pass - A Gear Friend, eventId=SP_RobotPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MASON** (Thinking): Hey Maddie, how's Gizmo doing?
 **MADDIE** (Encouraging): Great! He's actually been a real help around the mansion lately.
@@ -2958,9 +3236,9 @@ Every story in which Mason speaks.
 **MADDIE** (Relaxed): That's right, little buddy.
 **MASON**: He's so cool!
 
-### SP RobotPet2026 TA3 Dialogue
-`SP_RobotPet2026_TA3_Dialogue` · seen 26.04.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Season Pass - A Gear Friend — part of the event (exact trigger not dumped)
+`SP_RobotPet2026_TA3_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Season Pass - A Gear Friend, eventId=SP_RobotPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MASON** (Doubtful): Maddie?
 **MADDIE** (Doubtful): What's wrong? Did something happen to Gizmo?
@@ -2971,6 +3249,18 @@ Every story in which Mason speaks.
 **MASON** (Joyous): Hey! That spells GIZMO!
 **PET** (Joyous): Giiizmo! *Whistle* *Beep*
 **MASON** (Charming): Thanks, Maddie! I'll use that for my presentation!
+
+### Roddy's Mystery — outro
+`SP_RoddysMystery2023_AllRewardsCompleted_Dialogue` · seen 23.09.02–26.07.01
+- trigger: event, event=Roddy's Mystery, eventId=SP_RoddysMystery2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**GRANDMA** (Discouraged): I'm sorry Roddy. All I wanted to do was bring a little fun to your summer camp...
+**RODDY** (Doubtful): Fun?! You scared me half to death! 
+**GRANDMA** (Doubtful): Well, I wasn't expecting you to have a crippling fear of ghosts!
+**RODDY** (Charming): I guess I wanted to keep that secret. It's a bit embarrassing.
+**GRANDMA** (Charming): How about you, Mason, dearie? Did you have fun?
+**MASON** (Joyous): BEST. SUMMER CAMP. EVER!!! It had everything: camping, marshmallows, GHOSTS!
+**RODDY** (Relaxed): Well... There you go then!
 
 ### Roddy's Mystery — decoration SP_RoddysMystery2023_Decoration_Slot26
 `SP_RoddysMystery2023_Decoration_Slot26_Dialogue` · seen 23.09.02–26.07.01
@@ -3020,6 +3310,21 @@ Every story in which Mason speaks.
 **RODDY** (Surprised): Mrs. Boulton! wh- What are you doing here?
 **GRANDMA** (Worried): I'm sorry, dearie, I believe my joke has gone a little too far!
 **RODDY** (Doubtful): JOKE?!
+
+### SP_RoddysMystery2023 — intro
+`SP_RoddysMystery2023_Intro_Dialogue` · seen 23.06.02–26.07.01
+- trigger: event, eventId=SP_RoddysMystery2023, eventType=Mystery / Progression, moment=intro (versions 23.06.02–23.06.02)
+- trigger: event, event=Roddy's Mystery, eventId=SP_RoddysMystery2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**RODDY** (Relaxed): Thanks again for letting me run summer camp at your cottage, Mrs. Boulton.
+**GRANDMA**: Not a problem, dearie! I think it's really important that our younger generation still learns wilderness skills!
+**RODDY** (Encouraging): I couldn't agree more! Ah! Here comes our newest camper!
+**RODDY** (Relaxed): Hello Mason!
+**MASON** (Discouraged): Hi...
+**RODDY**: Cheer up, Mason! I promise, you'll be having so much fun that by the time it ends, you won't want to leave!
+**MASON** (Doubtful): I guess...
+**RODDY** (Thinking): Huh... I wonder what's gotten him so down? 
+**GRANDMA** (Relaxed): Well, let me know if I can help, dearie.
 
 ### Roddy's Mystery — item discovered: SP_RoddysMystery2023_CollectableItems_04
 `SP_RoddysMystery2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.09.02–26.07.01
@@ -3136,6 +3441,20 @@ Every story in which Mason speaks.
 **MASON** (Doubtful): Bye...
 **MADDIE** (Doubtful): But it won’t rain! The newspaper promised perfect weather!
 
+### Valentine's Mystery — outro
+`SP_ValentinesMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Valentine's Mystery, eventId=SP_ValentinesMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**PEARL** (Surprised): Mason?? How much did you spend on all these presents?
+**MASON** (Discouraged): Some... but YOU told me to get something "special" for everyone. And I didn't get a sports car or exotic animals!
+**MASON** (Discouraged): And I was really tempted...
+**PEARL** (Annoyed): The thought is lovely, but it's all just WAY too much. We'll have to return them...
+**RODDY** (Relaxed): But your friendship is enough for us, Mason. It doesn't cost anything, but it's more valuable than any fancy present.
+**MASON** (Charming): Aww, shucks! Thanks, guys. I guess Valentine's Day doesn't have to be about just yucky love or expensive gifts.
+**MASON** (Relaxed): It's great to have friends!
+**MADDIE** (Relaxed): It is! But seriously, though...
+**MADDIE** (Thinking): Was that diamond ring actually Hank's? What's he planning??
+
 ### Valentine's Mystery — decoration SP_ValentinesMystery2024_Decoration_Slot25
 `SP_ValentinesMystery2024_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
 - trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot25, event=Valentine's Mystery, eventKey=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
@@ -3188,6 +3507,21 @@ Every story in which Mason speaks.
 **HANK** (Thinking): Nooo... I-I just think a ring like this is way too expensive for a little Valentine's present.
 **PEARL** (Surprised): He's not wrong. Mason??
 **MASON** (Worried): Yes, Mom?
+
+### Valentine's Mystery — intro
+`SP_ValentinesMystery2024_Intro_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Valentine's Mystery, eventId=SP_ValentinesMystery2024, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**PEARL**: Maaaason?
+**MASON** (Thinking): Yes, Mom? You sound like you're about to ask me to do something boring.
+**PEARL** (Encouraging): I promised to organize a little Valentine's party at Grandma Ursula's place, but there's so much to do. Could you help me?
+**MASON** (Annoyed): A Valentine's party? I knew it!
+**PEARL** (Doubtful): Please? I need to get a little present for everyone. Could you pick them and order them on my credit card?
+**MASON**: So I would get to choose a present for everyone?
+**PEARL** (Thinking): Yes, something special to each of our friends - but within reason! No sports cars or exotic animals.
+**MASON** (Encouraging): So, no frilly hearts and the rest of that romantic stuff? I guess I can do that.
+**PEARL** (Relaxed): Great! I'll get everything else ready. I think this will be fun!
+**MASON** (Joyous): Yes, it will...
 
 ### Valentine's Mystery — item discovered: Valentine's Surprise
 `SP_ValentinesMystery2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01

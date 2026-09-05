@@ -1,6 +1,18 @@
 # Cherry's Mystery Meat
 
 
+### Cherry's Mystery Meat — outro
+`SP_CherrysMysteryMeat2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Cherry's Mystery Meat, eventId=SP_CherrysMysteryMeat2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**JACKIE**: Listen... Do you think there's something weird about this mystery meat business?
+**JACKIE**: Your grandma just happened to have a fridge full of meat...
+**MADDIE** (Worried): Vegan meat!
+**JACKIE** (Doubtful): ...AND a huge pie dish?
+**MADDIE** (Worried): You don't think...
+**JACKIE** (Thinking): I'm just putting two and two together here. There's no smoke without fire - especially at a BBQ.
+**MADDIE** (Surprised): C-could it be HANK in that pie??
+
 ### Cherry's Mystery Meat — decoration SP_CherrysMysteryMeat2024_Decoration_Slot32
 `SP_CherrysMysteryMeat2024_Decoration_Slot32_Dialogue` · seen 25.05.01–26.07.01
 - trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot32, event=Cherry's Mystery Meat, eventKey=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
@@ -66,6 +78,22 @@
 **GRANDMA** (Encouraging): I'm sure he's fine, wherever he is. Here, Deb. Have a piece of pie!
 **DEB** (Thinking): Mmmm... There is something... strangely familiar about this flavor.
 **MADDIE** (Thinking): That IS strange!
+
+### Cherry's Mystery Meat — intro
+`SP_CherrysMysteryMeat2024_Intro_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Cherry's Mystery Meat, eventId=SP_CherrysMysteryMeat2024, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**GRANDMA**: Pearl! What brings you here?
+**PEARL** (Encouraging): Official party organizing committee business, of course, Ursula.
+**PEARL** (Encouraging): Hopewell Bay's 100th anniversary is coming, and it deserves a BIG celebration.
+**PEARL** (Doubtful): Now, I understand that, err... with Hank gone it's not quite the festive atmosphere we wanted, but maybe this can help get our minds off that for a while.
+**GRANDMA** (Doubtful): I could not agree more. Besides, I am sure Hank is fine. Maybe he just got cold feet!
+**PEARL** (Thinking): A-after the wedding ceremony?
+**GRANDMA** (Charming): Who knows! But what have you got planned for the town centennial?
+**PEARL** (Encouraging): We're going to bake the world's biggest meat pie, based on a recipe from the town's founders.
+**PEARL** (Encouraging): Cherry will do the baking, but could we organize the celebration in your backyard? The mansion would make such a wonderful backdrop.
+**GRANDMA** (Thinking): The world's biggest meat pie, you say?
+**GRANDMA** (Thinking): Sounds perfect!
 
 ### Cherry's Mystery Meat — item discovered: Big BBQ
 `SP_CherrysMysteryMeat2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01

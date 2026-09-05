@@ -1,6 +1,19 @@
 # The Mysteries Unveiled
 
 
+### The Mysteries Unveiled — outro
+`SP_MysteriesUnveiled2024_AllRewardsCompleted_Dialogue` · seen 24.07.01–26.07.01
+- trigger: event, event=The Mysteries Unveiled, eventId=SP_MysteriesUnveiled2024, eventType=Mystery / Progression, moment=outro (versions 24.07.01–24.11.02)
+
+**RODDY** (Relaxed): Well... At least all the cans are gone. Feel any better?
+**MADDIE**: Yeah... A little. I just needed to let out some frustration.
+**MADDIE** (Encouraging): What better way than to use all these cans for some art!
+**RODDY** (Thinking): Art?
+**MADDIE** (Annoyed): Hey...
+**RODDY** (Charming): Just kidding!
+**MADDIE** (Charming): Boy... What a year, right?
+**RODDY** (Thinking): Something tells me it’ll only get crazier...
+
 ### The Mysteries Unveiled — decoration SP_MysteriesUnveiled2024_Decoration_Slot25
 `SP_MysteriesUnveiled2024_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
 - trigger: decoration, decoration=SP_MysteriesUnveiled2024_Decoration_Slot25, event=The Mysteries Unveiled, eventKey=SP_MysteriesUnveiled2024, moment=decoration placed (versions 25.05.01–26.07.01)

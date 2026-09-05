@@ -44,7 +44,7 @@
 **MADDIE** (Relaxed): Excuse me, sir. I'll have the whole platter, <i>s'il vous plaît!</i>
 
 ### Maddie In Paris — event start
-`CBE_MaddieInParis2025_Intro_Dialogue` · seen 26.04.02–26.07.01
+`CBE_MaddieInParis2025_Intro_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Maddie In Paris, eventId=CBE_MaddieInParis2025, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **ANTIQUEDEALER** (Relaxed): Maddie! Your Grandma told me you have just returned from your vacation!

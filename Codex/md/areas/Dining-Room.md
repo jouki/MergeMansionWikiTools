@@ -2,7 +2,7 @@
 
 
 ### Dining Room: Restore the old baby chair
-`BabyChair` · seen 24.04.01–26.07.01
+`BabyChair` · seen 23.09.02–26.07.01
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomSwapHighchairRundownEb2, phase=task completed, task=Restore the old baby chair (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Grandma, why is there a baby chair here?
@@ -10,7 +10,7 @@
 **MADDIE** (Surprised): No way! But, come to think of it, I do have some vague memories of this room...
 
 ### Dining Room: Clean and collect fallen things
-`DiningRoom04` · seen 24.04.01–26.07.01
+`DiningRoom04` · seen 23.09.02–26.07.01
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomRemoveFallenTableItemsB2, phase=task completed, task=Clean and collect fallen things (versions 24.04.01–26.07.01)
 
 **MADDIE**: What was all that about, Grandma? Why were those two fighting?
@@ -23,7 +23,7 @@
 **MADDIE** (Surprised): What?!
 
 ### Dining Room: Polish and place the chair back
-`DiningRoom05` · seen 24.04.01–26.07.01
+`DiningRoom05` · seen 23.09.02–26.07.01
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomPlaceChairB5, phase=task completed, task=Polish and place the chair back (versions 24.04.01–26.07.01)
 
 **RODDY**: Hi, Maddie, Winston let me in and... wait, is everything okay? You look upset.  
@@ -37,7 +37,7 @@
 **RODDY** (Discouraged): ... You'd be surprised.
 
 ### Dining Room: Restock the old trolley
-`DiningRoom06` · seen 24.04.01–26.07.01
+`DiningRoom06` · seen 23.09.02–26.07.01
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomPlaceCleanTrolleyContentsB8, phase=task completed, task=Restock the old trolley (versions 24.04.01–26.07.01)
 
 **MADDIE**: I find it hard to believe that a president was within these very walls!
@@ -48,7 +48,7 @@
 **DEB** (Charming): We'll never know, but it's nice to imagine!
 
 ### Dining Room: Clean the family photo
-`FamilyPicture` · seen 24.04.01–26.07.01
+`FamilyPicture` · seen 23.09.02–26.07.01
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomSwapRundownPhotoCa7, phase=task completed, task=Clean the family photo (versions 24.04.01–26.07.01)
 
 **MADDIE**: Aww! The whole family together. There's grandpa and Leonard and... wait!
@@ -56,57 +56,57 @@
 **MADDIE** (Thinking): Hmm... I wonder if this has something to do with Winston's outburst!
 
 ### Dining Room: Clean dirt from the chair
-`GrandmaChair` · seen 24.04.01–26.07.01
+`GrandmaChair` · seen 23.09.02–26.07.01
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomRemoveDirtfromchairH1, phase=task completed, task=Clean dirt from the chair (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Ooh, this chair looks fancy. Did Grandpa Charlie sit here?
 **GRANDMA** (Charming): Of course not, Dear! This was my chair. I am the head of the family, after all!
 
 ### Dining Room: Clean and place the old dog bed back
-`PetBed` · seen 24.04.01–26.07.01
+`PetBed` · seen 23.09.02–26.07.01
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomPlaceSwapCleanDogBedG6, phase=task completed, task=Clean and place the old dog bed back (versions 24.04.01–26.07.01)
 
 **MADDIE** (Charming): Now that I've restored this pet bed to its original fluffy state, I'm sure Rufus would love to use it!
 **MADDIE** (Charming): He does like to be on the lookout for food scraps, so I can see this being his new favorite spot!
 
 ### Dining Room: Another try
-`PianoBroken1` · seen 24.04.01–26.07.01
+`PianoBroken1` · seen 23.09.02–26.07.01
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomTryToPlayPianoAgainAa4b, phase=task appears, task=Another try (versions 24.04.01–26.07.01)
 
 **MADDIE** (Frustrated): Oof! That note sounds pretty bad, I think it needs a little more tuning!
 
 ### Dining Room: Play some more
-`PianoBroken2` · seen 24.04.01–26.07.01
+`PianoBroken2` · seen 23.09.02–26.07.01
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomTunePianoAa9c, phase=task appears, task=Play some more (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Hmm... not quite there yet, the notes still sound a bit muffled.
 
 ### Dining Room: How does it sound now?
-`PianoBroken3` · seen 24.04.01–26.07.01
+`PianoBroken3` · seen 23.09.02–26.07.01
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomPlayPianoAa6b, phase=task completed, task=How does it sound now? (versions 24.04.01–26.07.01)
 
 **MADDIE** (Encouraging): Nearly there! I can hear a slight improvement. The notes and tones sound so much richer!
 
 ### Dining Room: Test the piano
-`PianoBroken4` · seen 24.04.01–26.07.01
+`PianoBroken4` · seen 23.09.02–26.07.01
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomPlayPianoAa5b, phase=task completed, task=Test the piano (versions 24.04.01–26.07.01)
 
 **MADDIE** (Encouraging): Erm, that note was way off-key!
 
 ### Dining Room: More tuning
-`PianoBroken5` · seen 24.04.01–26.07.01
+`PianoBroken5` · seen 23.09.02–26.07.01
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomTunePianoAa9a, phase=task completed, task=More tuning (versions 24.04.01–26.07.01)
 
 **MADDIE** (Encouraging): The notes sound so much smoother now!
 
 ### Dining Room: Fix the stool
-`PianoTuningIntro` · seen 24.04.01–26.07.01
+`PianoTuningIntro` · seen 23.09.02–26.07.01
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomPlaceRestoredStoolAa5, phase=task appears, task=Fix the stool (versions 24.04.01–26.07.01)
 
 **MADDIE** (Encouraging): This grand piano certainly isn't "grand", anymore but a little love and a lot of tuning can do wonders!
 
 ### Dining Room: Polish the trophy
-`Trophy` · seen 24.04.01–26.07.01
+`Trophy` · seen 23.09.02–26.07.01
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomSwapRundownTrophyGb2, phase=task completed, task=Polish the trophy (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Ooh, there's a trophy on display here!
@@ -116,7 +116,7 @@
 **MADDIE** (Joyous): Wow, Deb! That's amazing!
 
 ### Dining Room: Carefully lift and clean the urn
-`Urn` · seen 24.04.01–26.07.01
+`Urn` · seen 23.09.02–26.07.01
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomSwapFallenUrnHa11, phase=task completed, task=Carefully lift and clean the urn (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): I wonder whose ashes are in here...

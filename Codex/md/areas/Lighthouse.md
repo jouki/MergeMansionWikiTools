@@ -2,7 +2,7 @@
 
 
 ### Lighthouse: Move the nest back to its old location
-`Lighthouse10_Ending` · seen 24.04.01–26.07.01
+`Lighthouse10_Ending` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthouseSwapMagPieNestC22, phase=task completed, task=Move the nest back to its old location (versions 24.04.01–26.07.01)
 
 **MADDIE**: How did the riddle go? The one Grandpa Charlie made you memorize?   
@@ -25,7 +25,7 @@ You will find one hidden beneath me.”
 **HEIKKI** (Joyous): Moro! 
 
 ### Lighthouse: Clean and place the old bridge post
-`Lighthouse1_Wizard` · seen 24.04.01–26.07.01
+`Lighthouse1_Wizard` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthousePlaceFixBridgePostA4, phase=task completed, task=Clean and place the old bridge post (versions 24.04.01–26.07.01)
 
 **HOLDEN** (Thinking): Alright, listen up. Here's everything I know about the wizard in the lighthouse...
@@ -36,8 +36,21 @@ You will find one hidden beneath me.”
 **HOLDEN** (Charming): My boss really has it in for you, and you <b>don't</b> want to make an enemy of her. Bye!
 **MADDIE** (Thinking): Ugh! Okay. Someone hiding up at the Lighthouse for years could be Grandpa Charlie! Let's find out.
 
+### Lighthouse: Place new bridge board
+`Lighthouse2_Attheentrance` · seen 23.09.02–26.07.01
+- trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthousePlaceBridgedeckingBoardA22, phase=task completed, task=Place new bridge board (versions 24.04.01–25.02.03)
+
+**MADDIE** (Encouraging): Alright, Maddie, you can do this! You're about to finally meet your grandpa!
+**MADDIE** (Joyous): Hello? Helloooo? Is anyone there?
+**HEIKKI** (Doubtful): Moro! And you are?
+**MADDIE** (Joyous): It's, well, it's Maddie! Your granddaughter.
+**HEIKKI**: Maddie? I'm not your grandfather, I'm Heikki! But we should lift the cat onto the table together.
+**MADDIE** (Discouraged): Huh?! Who?! What does that mean?
+**HEIKKI** (Joyous): It is a saying in my birth country, Finland! It means we need to talk, so follow me.
+**MADDIE** (Thinking): I'm not sure I should be following a weird stranger, but I really need to find out more!
+
 ### Lighthouse: Remove bird feathers
-`Lighthouse3_Magpies` · seen 24.04.01–26.07.01
+`Lighthouse3_Magpies` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthouseRemoveMagpieFeathersB4, phase=task completed, task=Remove bird feathers (versions 24.04.01–25.02.03)
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthouseRemoveSandDustyC3, phase=task completed, task=Remove planks (versions 25.04.02–26.07.01)
 
@@ -52,7 +65,7 @@ You will find one hidden beneath me.”
 **HEIKKI** (Thinking): You could say that, yes indeed you could. Charlie Boulton saved my life!
 
 ### Lighthouse: Remove bird feathers and leaves
-`Lighthouse4_Bookclub` · seen 24.04.01–26.07.01
+`Lighthouse4_Bookclub` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthouseSwapMagpieFeathersF1, phase=task completed, task=Remove bird feathers and leaves (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): You have to tell me how my grandpa saved you!
@@ -65,7 +78,7 @@ You will find one hidden beneath me.”
 **HEIKKI** (Thinking): Now come with me, I want to show you another place.
 
 ### Lighthouse: Clean pile of twigs and sticks
-`Lighthouse5.1_Storm` · seen 24.04.01–26.07.01
+`Lighthouse5.1_Storm` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthouseSwapMagpieC1, phase=task completed, task=Clean pile of twigs and sticks (versions 24.04.01–25.02.03)
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthousePlacePiersmallwoodC5, phase=task completed, task=Place new pier section (versions 25.04.02–26.07.01)
 
@@ -77,7 +90,7 @@ You will find one hidden beneath me.”
 **HEIKKI** (Worried): My little friends had to relocate to the chimney and now I can't heat up my sauna anymore...
 
 ### Lighthouse: Add missing weathervane
-`Lighthouse5.2_Weathervane` · seen 24.04.01–26.07.01
+`Lighthouse5.2_Weathervane` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthousePlaceHeroRewardWeatherWizardF0, phase=task completed, task=Add missing weathervane (versions 24.04.01–26.07.01)
 
 **HEIKKI** (Joyous): Hey! You fixed the weathervane! 
@@ -89,7 +102,7 @@ You will find one hidden beneath me.”
 **MADDIE** (Thinking): I wonder why Grandpa isn't up there?
 
 ### Lighthouse: Remove reeds
-`Lighthouse5_Birds` · seen 24.04.01–26.07.01
+`Lighthouse5_Birds` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthouseRemoveReedShoreC12, phase=task completed, task=Remove reeds (versions 24.04.01–26.07.01)
 
 **MADDIE**: About the birds...
@@ -107,7 +120,7 @@ You will find one hidden beneath me.”
 **MADDIE** (Thinking): Hmmm. Maybe if I fix up the old nest...
 
 ### Lighthouse: Place lifebuoy
-`Lighthouse6_Atfireplace` · seen 24.04.01–26.07.01
+`Lighthouse6_Atfireplace` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthousePlaceBeachLifeSaverFixed01H9, phase=task completed, task=Place lifebuoy (versions 24.04.01–26.07.01)
 
 **HEIKKI**: Here we go, the place I first met Charlie. We were both very young men at the time.
@@ -118,7 +131,7 @@ You will find one hidden beneath me.”
 **HEIKKI** (Worried): He did. But that was many years later...
 
 ### Lighthouse: Place a pole
-`Lighthouse7_Spoontocorner` · seen 24.04.01–26.07.01
+`Lighthouse7_Spoontocorner` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthousePlaceNetsPostH11, phase=task completed, task=Place a pole (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Will you tell me how Grandpa saved you now?
@@ -131,7 +144,7 @@ You will find one hidden beneath me.”
 **MADDIE**: Look, Heikki, I know we don't really know each other, and you, uh, talk to birds, but I need to tell you something...
 
 ### Lighthouse: Place ball of yarn
-`Lighthouse8_Cinnamon` · seen 24.04.01–26.07.01
+`Lighthouse8_Cinnamon` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthousePlaceBallofYarnPinkH14, phase=task completed, task=Place ball of yarn (versions 24.04.01–26.07.01)
 
 **MADDIE**: Okay. Thing is, Grandpa's not dead! In fact, he sent me on a quest.
@@ -144,7 +157,7 @@ You will find one hidden beneath me.”
 **MADDIE** (Thinking): Alright, Heikki. I'll tell you about Grandpa, then I need to ask you something else...
 
 ### Lighthouse: Place top rocks
-`Lighthouse9_Riddle` · seen 24.04.01–26.07.01
+`Lighthouse9_Riddle` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthousePlaceKummeliTopC20, phase=task completed, task=Place top rocks (versions 24.04.01–26.07.01)
 
 **MADDIE** (Worried): This is a weird question, but did Grandpa tell you how to get into the Boulton mansion?
@@ -155,7 +168,7 @@ You will find one hidden beneath me.”
 **MADDIE** (Joyous): A riddle? Could it be another clue?
 
 ### Lighthouse: Remove rocks
-`LighthouseIntro` · seen 24.04.01–26.07.01
+`LighthouseIntro` · seen 23.09.02–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthouseRemoveRocksA1, phase=task completed, task=Remove rocks (versions 24.04.01–26.07.01)
 
 **MADDIE** (Doubtful): I feel strange about this. Could my grandpa really be hiding out at the Lighthouse?

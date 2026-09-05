@@ -1,9 +1,9 @@
 # Bruno
 Every story in which Bruno speaks.
 
-### LDE GrandmasBirthday2023 LayerDecoration 15 Dialogue
+### Grandma's Pool Party — part of the event (exact trigger not dumped)
 `LDE_GrandmasBirthday2023_LayerDecoration_15_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Grandma's Pool Party, eventId=LDE_GrandmasBirthday2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE**: *Ring... Ring...*
 **MADDIE** (Talking): Hello, this is Maddie Boulton speaking?
@@ -18,7 +18,6 @@ Every story in which Bruno speaks.
 
 ### Landing1
 `Landing1` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Frustrated): Ugh... Why am I even doing this anymore?
 **MADDIE** (Doubtful): Why am I helping Grandma if she won’t even let me?!
@@ -32,7 +31,6 @@ Every story in which Bruno speaks.
 
 ### Landing2
 `Landing2` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Doubtful): Mayor?! That makes you Victoria’s husband, doesn’t it?
 **BRUNO** (Charming): Indeed...
@@ -42,7 +40,6 @@ Every story in which Bruno speaks.
 
 ### Landing3
 `Landing3` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Annoyed): What proposition could you possibly have that would interest me?!
 **BRUNO** (Joyous): This mansion of yours... I'm interested in taking it off your hands.
@@ -56,7 +53,6 @@ Every story in which Bruno speaks.
 
 ### Landing4
 `Landing4` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Discouraged): There's a difference between a house and home, Mr. Golightly. This place means a lot to my family.
 **BRUNO** (Charming): Please, call me Bruno.
@@ -71,7 +67,6 @@ Every story in which Bruno speaks.
 
 ### Landing5
 `Landing5` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): Y-you could make it all go away? I don’t know what to say...
 **BRUNO** (Joyous): Yes, would be a start.
@@ -84,7 +79,6 @@ Every story in which Bruno speaks.
 
 ### Library03
 `Library03` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **BRUNO**: Maddie.
 **MADDIE** (Annoyed): Bruno.
@@ -99,7 +93,6 @@ Every story in which Bruno speaks.
 
 ### Library04
 `Library04` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **BRUNO** (Frustrated): Look... I’m running out of patience here, so I’ll do you a favor.
 **BRUNO** (Annoyed): I’ll offer you one last time the chance to sign it, and I’ll make sure your grandmother’s investigation will end.
@@ -117,7 +110,6 @@ Every story in which Bruno speaks.
 
 ### Library05
 `Library05` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **RODDY** (Surprised): Don’t sign, Maddie! I found it! I found the proof!
 **BRUNO** (Surprised): What are you talking about?!
@@ -135,7 +127,6 @@ Every story in which Bruno speaks.
 
 ### Library06
 `Library06` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **BRUNO** (Annoyed): This isn’t over... I’ll make sure all of you go to prison for this!
 **RODDY** (Relaxed): I think you might have that a bit backwards, Mayor.
@@ -152,7 +143,6 @@ Every story in which Bruno speaks.
 
 ### Lounge12
 `Lounge12` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **BRUNO** (Relaxed): Ah, Maddie! Good to see you!
 **MADDIE** (Annoyed): ...
@@ -168,7 +158,6 @@ Every story in which Bruno speaks.
 
 ### Lounge13
 `Lounge13` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **BRUNO** (Doubtful): You'd be smart to be afraid of me. You don't know the kind of friends I have.
 **MADDIE** (Annoyed): The answer is NO, Mayor. I'm not selling.
@@ -179,7 +168,6 @@ Every story in which Bruno speaks.
 
 ### Lounge14
 `Lounge14` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **BRUNO** (Doubtful): I'm tired of playing games, Maddie. So I'll make this simple.
 **BRUNO** (Charming): Give me Beaumont Hall and maybe I'll leave you with just enough to hire a semi-competent lawyer.
@@ -191,7 +179,6 @@ Every story in which Bruno speaks.
 
 ### Speakeasy16
 `Speakeasy16` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): What!! That's amazing! The fridge is finally open!
 **MADDIE** (Surprised): And it's the path to another room? Who would've thought!
@@ -212,7 +199,6 @@ Every story in which Bruno speaks.
 
 ### Stablesinterior02
 `Stablesinterior02` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **WINSTON** (Worried): I tried to reason with them, Ma’am. But-
 **LEONARD**: Oh please, Winston...
@@ -227,7 +213,6 @@ Every story in which Bruno speaks.
 
 ### Stablesinterior03
 `Stablesinterior03` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Doubtful): First you bring in your goons to the Mansion and now this?
 **BRUNO** (Relaxed): If you must know, Leonard invited me.
@@ -243,7 +228,6 @@ Every story in which Bruno speaks.
 
 ### Stablesinterior04
 `Stablesinterior04` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **LEONARD** (Annoyed): No, you are the one that is blind, little girl.
 **BRUNO** (Annoyed): *Ahem!* You mentioned something about a Boulton Blue?
@@ -259,7 +243,6 @@ Every story in which Bruno speaks.
 
 ### Stablesinterior Intro
 `Stablesinterior_Intro` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **LEONARD** (Encouraging): -and this is where the paddocks should be!
 **BRUNO**: Amazing! You’ve really thought this through.

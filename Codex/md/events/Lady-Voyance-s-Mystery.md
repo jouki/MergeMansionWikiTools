@@ -1,6 +1,19 @@
 # Lady Voyance's Mystery
 
 
+### Lady Voyance's Mystery — outro
+`SP_LadyVoyanceMystery2023_AllRewardsCompleted_Dialogue` · seen 23.09.02–26.07.01
+- trigger: event, event=Lady Voyance's Mystery, eventId=SP_LadyVoyanceMystery2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**MADDIE** (Encouraging): That Lady Voyance sure is a character!
+**GRANDMA**: Yes, she is, dearie. Did she give you a reading?
+**MADDIE**: Yes! She said I was about to find love! Or it... Me? I couldn’t quite understand what she meant.
+**GRANDMA** (Joyous): Yes, she can be very confusing sometimes. I guess it has something to do with her 20% accuracy rate.
+**MADDIE** (Surprised): 20%?!
+**GRANDMA** (Charming): Yes, but in that 20%, she’s right all the time.
+**MADDIE** (Doubtful): I don’t think that’s how it works, Grandma.
+**GRANDMA**: Shh... Don’t tell her that!
+
 ### Lady Voyance's Mystery — decoration SP_LadyVoyanceMystery2023_Decoration_Slot25
 `SP_LadyVoyanceMystery2023_Decoration_Slot25_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_LadyVoyanceMystery2023_Decoration_Slot25, event=Lady Voyance's Mystery, eventKey=SP_LadyVoyanceMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
@@ -74,6 +87,22 @@
 **LADY VOYANCE** (Thinking): Heed my words Victoria... I see GREEEEAT DAAAANGER in your future!
 **VICTORIA** (Joyous): Hahahahahahahaha!!!!
 **VICTORIA** (Relaxed): It is quite entertaining. I’ll give you that!
+
+### Lady Voyance's Mystery — intro
+`SP_LadyVoyanceMystery2023_Intro_Dialogue` · seen 23.09.02–26.07.01
+- trigger: event, event=Lady Voyance's Mystery, eventId=SP_LadyVoyanceMystery2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**MADDIE**: Hello, can I help you?
+**LADY VOYANCE** (Talking): No, my child... It is I who has come to help... YOU!
+**MADDIE** (Surprised): Oh... Kay...
+**GRANDMA**: Maddie, dearie! I see you have met my old friend, Lady Voyance.
+**GRANDMA** (Charming): She’s a psychic, you know!
+**MADDIE** (Joyous): Really? How interesting! Came here to give Grandma a reading?
+**LADY VOYANCE** (Talking): For heaven’s sake, no! I have come to help all of Hopewell Bay! I sense a great change in the future!
+**LADY VOYANCE**: Ursula has graciously let me set up my services temporarily, so that I may help everyone in need.
+**LADY VOYANCE** (Talking): ... Especially you, Maddie. I can sense that something amazing is in store for you.
+**MADDIE** (Surprised): Really?!
+**LADY VOYANCE** (Talking): Yes, my child! Love is in the air!
 
 ### Lady Voyance's Mystery — item discovered: Mystical Snow Globe
 `SP_LadyVoyanceMystery2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.09.02–26.07.01

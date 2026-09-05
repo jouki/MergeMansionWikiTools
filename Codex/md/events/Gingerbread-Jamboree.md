@@ -88,6 +88,20 @@
 **CHERRY**: Look at all this glorious gingerbread! I can't believe we made it all... together!
 **GRANDMA** (Joyous): Christmas does funny things to people.
 
+### Gingerbread Jamboree — entering board
+`LBE_Xmas2023_IntroDialogue_Dialogue` · seen 23.11.02–26.07.01
+- trigger: event, event=Gingerbread Jamboree, eventId=LBE_Xmas2023, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–24.09.03)
+- trigger: event, event=Gingerbread Jamboree, eventId=LBE_Xmas2024, eventType=Leaderboard Event, moment=entering board (versions 24.11.02–26.01.02)
+
+**CHERRY**: It's the season of good cheer... and gingerbread! But who makes it the most scrumptious? Let's find out!
+**CHERRY**: Although everyone knows my gingerbread is the tastiest...
+**GRANDMA** (Frustrated): Maybe we'll let the people decide, Cherry? Besides, mine has been a firm favorite for decades.
+**MADDIE** (Encouraging): Look! I found something interesting in the Boulton attic! It looks like a really old recipe book.
+**GRANDMA** (Surprised): What does it say here? "The Best Gingerbread Recipe Ever Written?"
+**CHERRY** (Doubtful): Someone has scribbled stuff around it... "Add a pinch of magic and stir through"?
+**CHERRY** (Doubtful): What do you say if we skip the competition this year and bake together with this recipe instead?
+**GRANDMA** (Encouraging): I suppose it is the season for peace and goodwill to all bakers... Why not?
+
 ### Gingerbread Jamboree — item discovered: Cold Oven
 `LBE_Xmas2023_MediumOvenInactive_01_Dialogue` · seen 23.11.02–26.07.01
 - trigger: item, event=Gingerbread Jamboree, eventKey=LBE_Xmas2023, itemKeys=['LBE_Xmas2023_MediumOvenInactive_01'], items=['Cold Oven'], moment=item discovered (versions 23.11.02–26.07.01)
@@ -107,6 +121,18 @@
 - trigger: item, event=Gingerbread Jamboree, eventKey=LBE_Xmas2023, itemKeys=['LBE_Xmas2023_NormalGingerBreadTable_01'], items=['Decorating Table'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **CHERRY** (Encouraging): When it comes to decorating gingerbread, less is definitely NOT more!
+
+### Gingerbread Jamboree — event end
+`LBE_Xmas2023_OutroDialogue_Dialogue` · seen 23.11.02–26.07.01
+- trigger: event, event=Gingerbread Jamboree, eventId=LBE_Xmas2023, eventType=Leaderboard Event, moment=event end (versions 24.04.01–24.09.03)
+- trigger: event, event=Gingerbread Jamboree, eventId=LBE_Xmas2024, eventType=Leaderboard Event, moment=event end (versions 24.11.02–26.01.02)
+
+**CHERRY**: The book might just be right. This gingerbread is GREAT!
+**GRANDMA** (Doubtful): Hmm, you are right. It is making me feel... all warm and fuzzy inside.
+**CHERRY** (Encouraging): Maybe there really is a pinch of magic in there...
+**GRANDMA** (Joyous): Ha-ha! Maybe there is!
+**CHERRY** (Thinking): But next year, I will show you the best gingerbread recipe...
+**GRANDMA**: Just have another gingerbread and enjoy the moment, will you!
 
 ### Gingerbread Jamboree — item discovered: Cold Microwave Oven
 `LBE_Xmas2023_SmalIOvenInactive_01_Dialogue` · seen 23.11.02–26.07.01

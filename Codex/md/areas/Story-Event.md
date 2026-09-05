@@ -2,7 +2,7 @@
 
 
 ### Story Event: Fix sign
-`BeachRightTotemTaskRevealed` · seen 24.04.01–26.07.01
+`BeachRightTotemTaskRevealed` · seen 23.09.02–26.07.01
 - trigger: area, area=Story Event, areaId=StoryEvent, hotspotId=BeachRightTotemFixSign, phase=task appears, task=Fix sign (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): I need to fix up this sign, then I can finish the beach.

@@ -15,7 +15,7 @@ Every story in which Dog speaks.
 **MADDIE** (Frustrated): MASON!!!
 
 ### Rufus' Park: Place tunnel frame
-`DogAreaFeelGood1` · seen 24.04.01–26.07.01
+`DogAreaFeelGood1` · seen 23.09.02–26.07.01
 - trigger: area, area=Rufus' Park, areaId=DogArea, hotspotId=DogAreaDogTunnelPlaceTunnelFrameF7, phase=task completed, task=Place tunnel frame (versions 24.04.01–26.07.01)
 
 **MADDIE**: You know, it's been really nice to have a pet, Rufus.
@@ -24,7 +24,7 @@ Every story in which Dog speaks.
 **MADDIE** (Encouraging): I guess it doesn't matter - because you're here now!
 
 ### Rufus' Park: Place fence dog house
-`DogAreaFeelGood2` · seen 24.04.01–26.07.01
+`DogAreaFeelGood2` · seen 23.09.02–26.07.01
 - trigger: area, area=Rufus' Park, areaId=DogArea, hotspotId=DogAreaDogHousePlaceFenceDogHouseD8, phase=task completed, task=Place fence dog house (versions 24.04.01–26.07.01)
 
 **MADDIE**: Rufus, when I was a little girl I used to think I could speak dog!
@@ -34,7 +34,7 @@ Every story in which Dog speaks.
 **MADDIE** (Joyous): And I guess I can't speak dog at all.
 
 ### Rufus' Park: Unlock Rufus' park
-`DogAreaIntro` · seen 24.04.01–26.07.01
+`DogAreaIntro` · seen 23.09.02–26.07.01
 - trigger: area, area=Rufus' Park, areaId=DogArea, hotspotId=DogAreaUnlock, phase=task completed, task=Unlock Rufus' park (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Rufus, you have way too much energy, don't you? You little fur ball... I won't get much done around here with you "helping" me.
@@ -45,7 +45,7 @@ Every story in which Dog speaks.
 **MADDIE** (Thinking): I definitely need a new tool to help me out here!
 
 ### Rufus' Park: Place Rufus sign
-`DogAreaOutro` · seen 24.04.01–26.07.01
+`DogAreaOutro` · seen 23.09.02–26.07.01
 - trigger: area, area=Rufus' Park, areaId=DogArea, hotspotId=DogAreaDogHousePlaceRufusSignD16, phase=task completed, task=Place Rufus sign (versions 24.04.01–26.07.01)
 
 **MADDIE**: I'm not sure if you can read but look over here Rufus! I set up a sign with your name on it!
@@ -66,7 +66,7 @@ Every story in which Dog speaks.
 **MADDIE** (Joyous): Looks like Rufus got his wish!
 
 ### The Maze: Fix arch
-`MazeDialogue_B` · seen 24.04.01–26.07.01
+`MazeDialogue_B` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeEntryLargeArchFixArchTopB11, phase=task completed, task=Fix arch (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePath1PlaceCobblesC5, phase=task completed, task=Place cobblestones (versions 25.04.03–26.07.01)
 
@@ -80,7 +80,6 @@ Every story in which Dog speaks.
 
 ### OldWell Rescue
 `OldWell_Rescue` · seen 22.02.06–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Joyous): Yay, you're free!
 **MADDIE** (Thinking): Hello boy! Do you have a name? I don't see a collar or tag on you.  
@@ -99,7 +98,6 @@ Every story in which Dog speaks.
 
 ### PE Christmas2022Fourth Gift
 `PE_Christmas2022Fourth_Gift` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Pet event (versions None–None)
 
 **MADDIE** (Thinking): What's that you have there, Grandma? Did someone give you a gift?
 **GRANDMA** (Encouraging): No, it's for you again, dearie!
@@ -113,7 +111,6 @@ Every story in which Dog speaks.
 
 ### PE Christmas2022Ninth Gift
 `PE_Christmas2022Ninth_Gift` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Pet event (versions None–None)
 
 **DOG** (Joyous): Ruff! Ruff!
 **MADDIE** (Surprised): Rufus! What do you have in your mouth, boy?
@@ -127,7 +124,6 @@ Every story in which Dog speaks.
 
 ### PE Christmas2022Second Gift
 `PE_Christmas2022Second_Gift` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Pet event (versions None–None)
 
 **RODDY**: Hi, Maddie! What, uh, do you have there?  
   _(1 cosmetic edit not shown)_
@@ -140,7 +136,7 @@ Every story in which Dog speaks.
 **DOG** (Joyous): Ruff!
 
 ### Plaza: Clear path
-`Plaza_Outro` · seen 24.04.01–26.07.01
+`Plaza_Outro` · seen 23.09.02–26.07.01
 - trigger: area, area=Plaza, areaId=MansionPlaza, hotspotId=MansionPlazaPathToFrontYardClearWay, phase=task completed, task=Clear path (versions 24.04.01–26.07.01)
 
 **MADDIE** (Doubtful): Oh, Rufus. Things aren't looking too good around here right now.
@@ -151,7 +147,7 @@ Every story in which Dog speaks.
 **MADDIE**: I'll take that as encouragement! Okay, Rufus, let's help Grandma - whether she wants us to, or not.
 
 ### Pool Area: Plant flowers
-`Pool_Outro` · seen 24.04.01–26.07.01
+`Pool_Outro` · seen 23.09.02–26.07.01
 - trigger: area, area=Pool Area, areaId=SwimmingPool, hotspotId=SwimmingPoolStairsAddFlowers, phase=task completed, task=Plant flowers (versions 24.04.01–26.07.01)
 
 **DOG** (Doubtful): Grr...
@@ -167,9 +163,32 @@ Every story in which Dog speaks.
 **MADDIE** (Joyous): That's not a surprise! At least they can see I'm doing good things here. Thanks, Roddy.
 **RODDY** (Encouraging): You're welcome! I couldn't help much with the gold watch, but at least I can keep you updated on the council.
 
-### SP GhostDog2025 Intro Dialogue
-`SP_GhostDog2025_Intro_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### SEValentines2023 — decoration ValentinesDay2022_Decoration_08
+`SE_Valentines2023_GardenGate` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=ValentinesDay2022_Decoration_08, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+
+### SP_AmyTheCat2023 — intro
+`SP_AmyTheCat2023_Intro_Dialogue` · seen 23.06.02–26.07.01
+- trigger: event, eventId=SP_AmyTheCat2023, eventType=Mystery / Progression, moment=intro (versions 23.06.02–23.06.02)
+- trigger: event, event=Amy's Mystery, eventId=SP_AmyTheCat2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**AMY**: Meow...
+**MADDIE** (Surprised): Huh?!
+**AMY** (Relaxed): Purr... Purr...
+**MADDIE** (Charming): Oh! Hello there! What’s your name? Let’s find your name tag...
+**MADDIE** (Charming): Amy! What a beautiful name!
+**DOG** (Frustrated): Ruff! Ruff! Ruff!
+**AMY** (Surprised): !!!!!
+**MADDIE** (Surprised): No wait! Oh Rufus... You scared her away!
+**GRANDMA**: Is everything alright, dearie?
+**MADDIE** (Thinking): I found a cat, but Rufus scared her away. Say...
+**MADDIE** (Thinking): You wouldn’t happen to have a secret kitty cat, would you?
+**GRANDMA** (Encouraging): Hahaha! ...not anymore.
+
+### Halloween Howling — part of the event (exact trigger not dumped)
+`SP_GhostDog2025_Intro_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Halloween Howling, eventId=SP_GhostDog2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: Hello, Mason!
 **MASON** (Discouraged): ...
@@ -185,9 +204,8 @@ Every story in which Dog speaks.
 **MADDIE** (Joyous): Rufus! Just the dog I was looking for...
 **DOG** (Doubtful): Ruff?
 
-### Valentine2022Decoration8
-`Valentine2022Decoration8` · seen 22.02.06–22.02.06
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+### Valentine2022Decoration08
+`Valentine2022Decoration08` · seen 22.02.06–22.02.06
 
 **MADDIE** (Doubtful): There’s some kind of a package at the gate…
 **MADDIE** (Joyous): Oooh!! It's a beautiful bouquet of flowers and chocolates! 
@@ -197,9 +215,8 @@ Every story in which Dog speaks.
 **DOG** (Joyous): Woooof!
 **MADDIE** (Frustrated): I guess my secret admirer will remain a secret for a while…
 
-### Xmas2021Decoration8
-`Xmas2021Decoration8` · seen 22.02.06–22.02.06
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+### XMas2021Decoration08
+`XMas2021Decoration08` · seen 22.02.06–22.02.06
 
 **DOG**: Ruff ruff!
 **MADDIE**: What is it, Rufus? Don’t you like reindeers?

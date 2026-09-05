@@ -2,7 +2,7 @@
 
 
 ### Romantic Spot: Place butterflies
-`RomanticSpotClosing` · seen 24.04.01–26.07.01
+`RomanticSpotClosing` · seen 23.09.02–26.07.01
 - trigger: area, area=Romantic Spot, areaId=RomanticSpot, hotspotId=LoveStoryPlaceButterfliesN1, phase=task completed, task=Place butterflies (versions 24.04.01–26.07.01)
 
 **GRANDMA** (Relaxed): Thanks for asking me to come and help out here, Maddie.
@@ -15,7 +15,7 @@
 **MADDIE** (Thinking): Huh. She might not want to talk about it, but one day, I will find out what happened to my mom and dad!
 
 ### Romantic Spot: Remove stream debris
-`RomanticSpotSmallCreek` · seen 24.04.01–26.07.01
+`RomanticSpotSmallCreek` · seen 23.09.02–26.07.01
 - trigger: area, area=Romantic Spot, areaId=RomanticSpot, hotspotId=LoveStoryRemoveStreamDebrisI1, phase=task completed, task=Remove stream debris (versions 24.04.01–26.07.01)
 
 **MADDIE** (Worried): What's the matter, Grandma? Why do you look so sad?
@@ -29,7 +29,7 @@
 **MADDIE** (Worried): What made them get back together?
 
 ### Romantic Spot: Place swan head
-`RomanticSpotSmallStatue` · seen 24.04.01–26.07.01
+`RomanticSpotSmallStatue` · seen 23.09.02–26.07.01
 - trigger: area, area=Romantic Spot, areaId=RomanticSpot, hotspotId=LoveStoryPlaceSwanHeadM3, phase=task completed, task=Place swan head (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Well, Grandma? What made my mom and dad get back together?
@@ -44,7 +44,7 @@
 **GRANDMA** (Encouraging): They were sweet on each other, but they were both even sweeter on you, dearie.
 
 ### Romantic Spot: Remove treehouse cover
-`RomanticSpotTreehouse` · seen 24.04.01–26.07.01
+`RomanticSpotTreehouse` · seen 23.09.02–26.07.01
 - trigger: area, area=Romantic Spot, areaId=RomanticSpot, hotspotId=LoveStoryRemoveTreehouseCoverH5, phase=task completed, task=Remove treehouse cover (versions 24.04.01–26.07.01)
 
 **MADDIE** (Joyous): This treehouse is just adorable. I can't wait to sit up there and read a book.

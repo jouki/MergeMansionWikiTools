@@ -2,7 +2,7 @@
 
 
 ### The Pool House: Clean floor
-`PoolHouseAfterarrest2` · seen 24.04.01–26.07.01
+`PoolHouseAfterarrest2` · seen 23.09.02–26.07.01
 - trigger: area, area=The Pool House, areaId=PoolHouse, hotspotId=PoolHouseEntryCleanEntryFloor, phase=task completed, task=Clean floor (versions 24.04.01–26.07.01)
 
 **MADDIE** (Discouraged): I still can't believe they arrested Grandma... I wish I knew what to do to help her...
@@ -22,7 +22,7 @@
 **MADDIE** (Annoyed): Okay, but hurry up!
 
 ### The Pool House: Remove the broken painting
-`PoolHouse_GrandmaIsBack` · seen 24.04.01–26.07.01
+`PoolHouse_GrandmaIsBack` · seen 23.09.02–26.07.01
 - trigger: area, area=The Pool House, areaId=PoolHouse, hotspotId=PoolHouseLoungeRemovePainting, phase=task completed, task=Remove the broken painting (versions 24.04.01–26.07.01)
 
 **GRANDMA** (Encouraging): So, what's been going on here?  
@@ -38,7 +38,7 @@
 **ANTIQUEDEALER** (Thinking): But the truth is, I never stopped loving her...
 
 ### The Pool House: Open jammed Pool House door
-`PoolHouse_Intro` · seen 24.04.01–26.07.01
+`PoolHouse_Intro` · seen 22.02.06–26.07.01
 - trigger: area, area=The Pool House, areaId=PoolHouse, hotspotId=PoolHouseOpenHouse, phase=task completed, task=Open jammed Pool House door (versions 24.04.01–26.07.01)
 
 **MADDIE**: I've been thinking about turning this old pool house into a party area!  
@@ -63,7 +63,7 @@
 **MADDIE** (Worried): Wait. Do I hear... Sirens? Yes - definitely sirens. But why are they coming closer and closer? 
 
 ### The Pool House: Remove broken TV
-`PoolHouse_JailBail` · seen 24.04.01–26.07.01
+`PoolHouse_JailBail` · seen 23.09.02–26.07.01
 - trigger: area, area=The Pool House, areaId=PoolHouse, hotspotId=PoolHouseEntryRemoveBrokenTv, phase=task completed, task=Remove broken TV (versions 24.04.01–26.07.01)
 
 **MADDIE** (Worried): Julius, you told me that there might be something we can do to help grandma get out of jail. What was it?

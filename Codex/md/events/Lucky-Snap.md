@@ -2,40 +2,63 @@
 
 
 ### Lucky Snap — item discovered: Canada Goose
-`LS_Common_CanadaGoose_01_Dialogue`
+`LS_Common_CanadaGoose_01_Dialogue` · seen 26.07.01–26.07.01
 - trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Common_CanadaGoose_01'], items=['Canada Goose'], moment=item discovered (versions 26.03.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**ANTIQUEDEALER** (Thinking): You hear that? There must be geese approaching.
+**MADDIE** (Joyous): Yup, I can see a whole flock of Canada Geese flying overhead.
+**MADDIE** (Joyous): What a sight, huh?
+**ANTIQUEDEALER** (Charming): It is one of the joys of bird-watching, my dear!
 
 ### Lucky Snap — item discovered: Herring Gull
-`LS_Common_HerringGull_01_Dialogue`
+`LS_Common_HerringGull_01_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Common_HerringGull_01'], items=['Herring Gull'], moment=item discovered (versions 25.05.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**ANTIQUEDEALER**: There is one bird you can always spot, even at this time of year.
+**MADDIE** (Relaxed): What is it?
+**ANTIQUEDEALER** (Relaxed): The Herring Gull! You can find it in our beautiful Bay, but it also enjoys spending time at garbage dumps and parking lots.
+**MADDIE** (Hesitant): Ewww, sounds... lovely.
 
 ### Lucky Snap — item discovered: Long-eared Owl
-`LS_Epic_LongEaredOwl_01_Dialogue`
+`LS_Epic_LongEaredOwl_01_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Epic_LongEaredOwl_01'], items=['Long-eared Owl'], moment=item discovered (versions 25.05.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Thinking): Maybe we should head back - it's already getting dark.
+**ANTIQUEDEALER** (Thinking): Not just yet... I heard there is a Long-eared Owl living in these woods.
+**ANTIQUEDEALER** (Thinking): Can you hear it?
+**MADDIE** (Hesitant): I can. It's a real hoot!
 
 ### Lucky Snap — item discovered: Mandarin Duck
-`LS_Epic_MandarinDuck_01_Dialogue`
+`LS_Epic_MandarinDuck_01_Dialogue` · seen 26.07.01–26.07.01
 - trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Epic_MandarinDuck_01'], items=['Mandarin Duck'], moment=item discovered (versions 26.03.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**ANTIQUEDEALER** (Relaxed): I think I might have a real treat for you, my dear!
+**MADDIE** (Joyous): What is it? A cool eagle or some exotic bird?
+**ANTIQUEDEALER** (Charming): Why don't you take a look!
+**MADDIE** (Surprised): Oh, WOW! What is that bird??
+**ANTIQUEDEALER** (Relaxed): A Mandarin Duck. It’s a very shy bird, but always a joy to spot.
+**MADDIE** (Relaxed): It might be my new favorite!
 
 ### Lucky Snap — item discovered: Kingfisher
-`LS_Legendary_Kingfisher_01_Dialogue`
+`LS_Legendary_Kingfisher_01_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Legendary_Kingfisher_01'], items=['Kingfisher'], moment=item discovered (versions 25.05.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Thinking): Is that a small bird or a big dragonfly?
+**ANTIQUEDEALER**: It's a Kingfisher. A very colorful and quick little bird.
+**MADDIE** (Relaxed): It has a wonderful plumage, don't you think?
+**ANTIQUEDEALER** (Encouraging): Indeed!
 
 ### Lucky Snap — item discovered: Red-crowned Crane
-`LS_Legendary_RedcrownedCrane_01_Dialogue`
+`LS_Legendary_RedcrownedCrane_01_Dialogue` · seen 26.07.01–26.07.01
 - trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Legendary_RedcrownedCrane_01'], items=['Red-crowned Crane'], moment=item discovered (versions 26.03.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Surprised): Oh, wow! Is that a Red-crowned Crane?
+**MADDIE** (Relaxed): I’ve never seen one before.
+**ANTIQUEDEALER** (Charming): They are a very rare sight these days, so this is a very lovely surprise!
+**ANTIQUEDEALER** (Relaxed): Do you see how they almost seem to be dancing?
+**MADDIE** (Thinking): Oh, yeah! Why are they doing that?
+**ANTIQUEDEALER**: It’s a way for them to warn the others of some danger.
+**MADDIE** (Relaxed): Quite inventive, I would say!
 
 ### Lucky Snap — item discovered: Amateur Camera
 `LS_LuckySnap2024_AmateurCamera_Dialogue` · seen 25.05.01–26.07.01
@@ -201,22 +224,35 @@ _Referenced by the game, but no lines matched this id._
 **ANTIQUEDEALER**: Well spotted! You can add sage grouse to your Life List.
 
 ### Lucky Snap — item discovered: Common Loon
-`LS_Rare_CommonLoon_01_Dialogue`
+`LS_Rare_CommonLoon_01_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Rare_CommonLoon_01'], items=['Common Loon'], moment=item discovered (versions 25.05.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Joyous): I can see a bird in the water. I don't think I've ever spotted it before.
+**ANTIQUEDEALER** (Surprised): Oh? What does it look like?
+**MADDIE** (Surprised): It has a black head, kind of a checkered body and... red eyes?
+**ANTIQUEDEALER** (Thinking): Ah, it is the Common Loon.
+**ANTIQUEDEALER** (Relaxed): The eyes are a little eerie, I know.
 
 ### Lucky Snap — item discovered: Pileated Woodpecker
-`LS_Rare_PileatedWoodpecker_01_Dialogue`
+`LS_Rare_PileatedWoodpecker_01_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Rare_PileatedWoodpecker_01'], items=['Pileated Woodpecker'], moment=item discovered (versions 25.05.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Surprised): Look at that huge hole in the tree trunk!
+**MADDIE** (Thinking): Was that made by a woodpecker?
+**ANTIQUEDEALER** (Encouraging): You have good eyes, my dear. Yes, that is the handiwork of a Pileated Woodpecker.
+**MADDIE** (Surprised): But it's so even and almost... rectangular.
+**ANTIQUEDEALER** (Relaxed): Indeed. And that hole will make a good home for another little animal.
+**MADDIE** (Encouraging): Huh! It must be a good neighbor.
 
 ### Lucky Snap — item discovered: Willow Ptarmigan
-`LS_Rare_WillowPtarmigan_01_Dialogue`
+`LS_Rare_WillowPtarmigan_01_Dialogue` · seen 26.07.01–26.07.01
 - trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Rare_WillowPtarmigan_01'], items=['Willow Ptarmigan'], moment=item discovered (versions 26.03.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Thinking): I thought I just saw something over there in those trees, but I don’t think it was actually anything.
+**MADDIE** (Surprised): Hang on! There’s definitely something there!
+**ANTIQUEDEALER** (Surprised): Where? Over there, past the shrubbery?
+**MADDIE** (Doubtful): Exactly! No, I think I was wrong, after all.
+**ANTIQUEDEALER** (Encouraging): You weren’t wrong at all! It just happens to be a bird that is a true master of camouflage - a Willow Ptarmigan!
 
 ### Lucky Snap — item discovered: Mourning Dove
 `LS_Spring_CommonMourningDove_Dialogue` · seen 26.03.01–26.07.01
@@ -376,52 +412,83 @@ _Referenced by the game, but no lines matched this id._
 **ANTIQUEDEALER** (Joyous): Perhaps! Or perhaps it will steal some from you!
 
 ### Lucky Snap — item discovered: Crescent-caped Lophorina
-`LS_Ultimate_CrescentCapedLophora_01_Dialogue`
+`LS_Ultimate_CrescentCapedLophora_01_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Ultimate_CrescentCapedLophora_01'], items=['Crescent-caped Lophorina'], moment=item discovered (versions 25.05.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**ANTIQUEDEALER** (Surprised): That black bird over there looks very odd!
+**MADDIE** (Encouraging): Actually, I can tell you it's a Crescent-caped Lophorina.
+**ANTIQUEDEALER** (Relaxed): Well, well! You are right! What an amazing display.
+**MADDIE**: It is, right? The male uses its black coloring as a part of its courtship ritual.
+**ANTIQUEDEALER** (Charming): And very effective it is, too!
 
 ### Lucky Snap — item discovered: Peacock
-`LS_Ultimate_Peacock_01_Dialogue`
+`LS_Ultimate_Peacock_01_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Ultimate_Peacock_01'], items=['Peacock'], moment=item discovered (versions 25.05.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**ANTIQUEDEALER** (Relaxed): Peacocks are nature's weathermen. They call out when it is going to rain.
+**MADDIE**: Really?
+**ANTIQUEDEALER** (Discouraged): Yes, indeed - but unfortunately they are not known for their beautiful song.
 
 ### Lucky Snap — item discovered: Shoebill
-`LS_Ultimate_Shoebill_01_Dialogue`
+`LS_Ultimate_Shoebill_01_Dialogue` · seen 26.07.01–26.07.01
 - trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Ultimate_Shoebill_01'], items=['Shoebill'], moment=item discovered (versions 26.03.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**ANTIQUEDEALER** (Encouraging): Well, well, well! If it isn’t the shoebill wading in the water, looking for a snack!
+**MADDIE** (Relaxed): What a silly name.
+**ANTIQUEDEALER** (Worried): Do not be fooled! That bill is powerful, with razor-sharp edges and a pointed hook at the end to finish off even a huge fish.
 
 ### Lucky Snap — item discovered: Blue Jay
-`LS_Uncommon_BlueJay_01_Dialogue`
+`LS_Uncommon_BlueJay_01_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Uncommon_BlueJay_01'], items=['Blue Jay'], moment=item discovered (versions 25.05.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Surprised): I think I just saw a flash of blue in that big oak tree.
+**ANTIQUEDEALER** (Surprised): You might have glimpsed a Blue Jay!
+**ANTIQUEDEALER** (Surprised): Acorns are their favorite treat.
+**ANTIQUEDEALER** (Joyous): Can you hear the song? Yes, that is definitely a Blue Jay.
 
 ### Lucky Snap — item discovered: Dunlin
-`LS_Uncommon_Dunlin_01_Dialogue`
+`LS_Uncommon_Dunlin_01_Dialogue` · seen 26.07.01–26.07.01
 - trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Uncommon_Dunlin_01'], items=['Dunlin'], moment=item discovered (versions 26.03.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Thinking): How common are Dunlins?
+**ANTIQUEDEALER** (Doubtful): Quite common! But they are mostly found on shorelines, like here in Hopewell Bay.
+**MADDIE** (Encouraging): We are pretty well situated for bird-watching here, aren’t we?
+**ANTIQUEDEALER** (Charming): We sure are. But the autumn is my favorite time.
+**MADDIE**: Why’s that?
+**ANTIQUEDEALER** (Relaxed): Fewer mosquitos!
 
 ### Lucky Snap — item discovered: European Robin
-`LS_Uncommon_Robin_01_Dialogue`
+`LS_Uncommon_Robin_01_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Uncommon_Robin_01'], items=['European Robin'], moment=item discovered (versions 25.05.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Relaxed): Robins are so cute!
+**ANTIQUEDEALER** (Charming): They are! But did you know there are nine subspecies of Robin?
+**MADDIE** (Surprised): So many?!
+**ANTIQUEDEALER** (Relaxed): And that Robins are so widespread that there are hundreds of millions of them across the globe?
+**MADDIE** (Relaxed): Way to go, little Robin!
 
 ### Lucky Snap — item discovered: Burrowing Owl
-`LS_VeryRare_BurrowingOwl_01_Dialogue`
+`LS_VeryRare_BurrowingOwl_01_Dialogue` · seen 26.07.01–26.07.01
 - trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_VeryRare_BurrowingOwl_01'], items=['Burrowing Owl'], moment=item discovered (versions 26.03.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Joyous): I can see an owl!
+**MADDIE** (Relaxed): Awww, it’s so cute!
+**ANTIQUEDEALER** (Thinking): What kind of an owl is it?
+**MADDIE** (Thinking): Err... I’m not sure. It’s brown with white spots. It’s not too big.
+**ANTIQUEDEALER** (Doubtful): That sounds like a Burrowing Owl.
+**MADDIE** (Surprised): Burrowing? Does that mean it lives... underground??
+**ANTIQUEDEALER** (Relaxed): It does, indeed!
+**MADDIE** (Thinking): The more you know...
 
 ### Lucky Snap — item discovered: Peregrine Falcon
-`LS_VeryRare_PeregrineFalcon_01_Dialogue`
+`LS_VeryRare_PeregrineFalcon_01_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_VeryRare_PeregrineFalcon_01'], items=['Peregrine Falcon'], moment=item discovered (versions 25.05.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Worried): Eek, we're so close to the cliffs. Maybe we should go back... Whoah!!
+**MADDIE** (Surprised): What was that??
+**ANTIQUEDEALER** (Relaxed): The reason I brought you here. It was a Peregrine Falcon - one of the fastest birds in the world!
+**MADDIE** (Doubtful): Are you sure it was a bird? It was so fast it just looked like a flash of brown.
+**ANTIQUEDEALER** (Joyous): Oh, yes! It is a real joy to watch.
 
 ### Lucky Snap — item discovered: Mallard
 `LS_Winter2024_Common_Mallard_01_Dialogue` · seen 25.05.01–26.07.01

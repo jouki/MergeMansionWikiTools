@@ -2,7 +2,7 @@
 
 
 ### The Grand Drive: Plant flowers
-`MansionDrivewayStatueTaskRevealed` · seen 24.04.01–26.07.01
+`MansionDrivewayStatueTaskRevealed` · seen 23.09.02–26.07.01
 - trigger: area, area=The Grand Drive, areaId=Driveway, hotspotId=DrivewayStatuePlantFlowers, phase=task completed, task=Plant flowers (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): I wonder what Ignatius Boulton did to deserve a statue?

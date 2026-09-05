@@ -97,3 +97,129 @@
 **JACKIE** (Annoyed): He did?
 **MADDIE** (Thinking): Yeah! I guess he just wanted an excuse to eat some tasty food with good company.
 **JACKIE** (Doubtful): Right... Sure.
+
+### Third Wheel Tango — part of the event (exact trigger not dumped)
+`LDE_PicnicConfusion2024_TA0_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Third Wheel Tango, eventId=LDE_PicnicConfusion2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE**: Time to take this old hunk of junk out of the garage and fix 'er up!
+**MADDIE** (Thinking): Not exactly what I thought my engineering degree would be used for...
+**MADDIE** (Encouraging): But you work with what you got!
+
+### Third Wheel Tango — part of the event (exact trigger not dumped)
+`LDE_PicnicConfusion2024_TA1_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Third Wheel Tango, eventId=LDE_PicnicConfusion2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Encouraging): There we go...
+**MADDIE** (Relaxed): Purring like a kitten!
+**MADDIE** (Doubtful): Hmm... Doesn't look too hot though...
+
+### Third Wheel Tango — part of the event (exact trigger not dumped)
+`LDE_PicnicConfusion2024_TA2_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Third Wheel Tango, eventId=LDE_PicnicConfusion2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Joyous): Nice! Nothing like a fresh coat of paint to make things look as good as new!
+**MADDIE** (Worried): ...
+**MADDIE** (Discouraged): *sigh*  Should have painted it yellow...
+
+### Third Wheel Tango — part of the event (exact trigger not dumped)
+`LDE_PicnicConfusion2024_TA3_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Third Wheel Tango, eventId=LDE_PicnicConfusion2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE**: *Ungh!* There we go! Now it's open!
+**MADDIE** (Surprised): Yikes! This wood needs some work done on it...
+**MADDIE** (Frustrated): Are those worm holes?!
+
+### Third Wheel Tango — part of the event (exact trigger not dumped)
+`LDE_PicnicConfusion2024_TA4_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Third Wheel Tango, eventId=LDE_PicnicConfusion2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE**: A good rug to tie the erm...
+**MADDIE** (Thinking): Yard up?
+**MADDIE** (Relaxed): Pfft... Grandma won't miss it. 
+
+### Third Wheel Tango — part of the event (exact trigger not dumped)
+`LDE_PicnicConfusion2024_TA5_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Third Wheel Tango, eventId=LDE_PicnicConfusion2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE**: Let's make sure that everyone can see this is a food truck!
+**MADDIE** (Thinking): But what should I write on it? 
+**MADDIE** (Thinking): Food Truck? No... Maddie's Food Truck? Nah... Geez, advertizing is hard!
+
+### Third Wheel Tango — part of the event (exact trigger not dumped)
+`LDE_PicnicConfusion2024_TA6_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Third Wheel Tango, eventId=LDE_PicnicConfusion2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Encouraging): A couple of nice stools for people who'd want to stay a while!
+**MADDIE** (Relaxed): Would be nice to have some company, and besides...
+**MADDIE** (Charming): It'll draw more people in to buy some delicious food!
+
+### Third Wheel Tango — part of the event (exact trigger not dumped)
+`LDE_PicnicConfusion2024_TA7_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Third Wheel Tango, eventId=LDE_PicnicConfusion2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE**: Let's see now... What's on the menu?
+**MADDIE** (Thinking): Hmm... Actually, that's a good question, Maddie.
+**MADDIE** (Surprised): What IS on the menu?!
+
+### Third Wheel Tango — part of the event (exact trigger not dumped)
+`LDE_PicnicConfusion2024_TB1_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Third Wheel Tango, eventId=LDE_PicnicConfusion2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Relaxed): Time for a bit of shade.
+**MADDIE** (Encouraging): Rain or shine, my customers must be protected!
+
+### Third Wheel Tango — part of the event (exact trigger not dumped)
+`LDE_PicnicConfusion2024_TB2_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Third Wheel Tango, eventId=LDE_PicnicConfusion2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE**: Yes! A few more tables and we're done! 
+**MADDIE** (Relaxed): Wow... Sometimes I even impress myself...
+**MADDIE** (Encouraging): I should keep this food truck around, you know... Just in case!
+
+### Third Wheel Tango — part of the event (exact trigger not dumped)
+`LDE_PicnicConfusion2024_TB3_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Third Wheel Tango, eventId=LDE_PicnicConfusion2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Encouraging): Liven it up with some flowers! 
+**MADDIE** (Relaxed): Pretty cute if you ask me.
+
+### Third Wheel Tango — part of the event (exact trigger not dumped)
+`LDE_PicnicConfusion2024_TB4_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Third Wheel Tango, eventId=LDE_PicnicConfusion2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Thinking): Hmm... 
+**MADDIE** (Thinking): Am I getting a bit carried away with these pennant flags?
+**MADDIE** (Joyous): Naah! I need more! MORE!
+
+### Third Wheel Tango — part of the event (exact trigger not dumped)
+`LDE_PicnicConfusion2024_TB5_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Third Wheel Tango, eventId=LDE_PicnicConfusion2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE**: Let's add a small self service trailer!
+**MADDIE** (Encouraging): For quick pick-ups and healthy snacks. 
+**MADDIE** (Thinking): Hmm... It's actually big enough to fit Mason in here... MASON! I got a job for you!!!!
+
+### Third Wheel Tango — part of the event (exact trigger not dumped)
+`LDE_PicnicConfusion2024_TC1_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Third Wheel Tango, eventId=LDE_PicnicConfusion2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Worried): I'm terrible at decal work...
+**MADDIE** (Encouraging): But good thing I got Julius to do it for me!
+**MADDIE**: He's a master with a paintbrush.
+
+### Third Wheel Tango — part of the event (exact trigger not dumped)
+`LDE_PicnicConfusion2024_TC2_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Third Wheel Tango, eventId=LDE_PicnicConfusion2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE**: Julius managed to find me some old parade balloons that work great to promote the food truck!
+**MADDIE** (Thinking): Though it makes me wonder what a giant bagel balloon was for...
+**MADDIE** (Doubtful): ...And why did Julius have it?!
+
+### Third Wheel Tango — part of the event (exact trigger not dumped)
+`LDE_PicnicConfusion2024_TC3_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Third Wheel Tango, eventId=LDE_PicnicConfusion2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Encouraging): Who knows how far into the night my food truck will be operating...
+**MADDIE**: Better to put up some lights to allow people to still enjoy themselves after sunset.
+**MADDIE** (Charming): Mmmm, how cozy!

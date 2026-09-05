@@ -2,13 +2,13 @@
 
 
 ### Plaza: PlazaUnlock
-`PlazaUnlock` · seen 24.04.01–26.07.01
+`PlazaUnlock` · seen 23.09.02–26.07.01
 - trigger: area, area=Plaza, areaId=MansionPlaza, hotspotId=MansionPlazaUnlockMansionPlaza, phase=task appears (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): After my current tasks are done, this looks like a direction I should continue next
 
 ### Plaza: Clear pathway
-`Plaza_Intro` · seen 24.04.01–26.07.01
+`Plaza_Intro` · seen 23.09.02–26.07.01
 - trigger: area, area=Plaza, areaId=MansionPlaza, hotspotId=MansionPlazaLowEntryClearRoadBlock, phase=task completed, task=Clear pathway (versions 24.04.01–26.07.01)
 
 **MADDIE**: Things might be bad with Grandma, but at least the mansion grounds are looking better.
@@ -22,7 +22,7 @@
 **MADDIE** (Thinking): He's right! I shouldn't give up on her. This arrest <i>has</i> to be a mistake!
 
 ### Plaza: Clear path
-`Plaza_Outro` · seen 24.04.01–26.07.01
+`Plaza_Outro` · seen 23.09.02–26.07.01
 - trigger: area, area=Plaza, areaId=MansionPlaza, hotspotId=MansionPlazaPathToFrontYardClearWay, phase=task completed, task=Clear path (versions 24.04.01–26.07.01)
 
 **MADDIE** (Doubtful): Oh, Rufus. Things aren't looking too good around here right now.

@@ -3,7 +3,6 @@ Every story in which Sullivan speaks.
 
 ### Dancefloor 03
 `Dancefloor_03` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **SULLIVAN** (Charming): Ha! You think I’M the one breaking the law? Look at this place...
 **SULLIVAN** (Annoyed): An illegal casino operation if I ever saw one. And I’ve seen many!
@@ -16,7 +15,6 @@ Every story in which Sullivan speaks.
 
 ### Dancefloor 05
 `Dancefloor_05` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **SULLIVAN** (Charming): Criminals? Of course not. Not yet, at least...
 **SULLIVAN** (Relaxed): Innocent until proven guilty and all that.
@@ -30,7 +28,6 @@ Every story in which Sullivan speaks.
 
 ### Dancefloor Intro
 `Dancefloor_Intro` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **SULLIVAN** (Encouraging): ...and I know that YOU have something to do with it!
 **GRANDMA** (Annoyed): You’re dangerously close to crossing a line, detective...
@@ -44,7 +41,6 @@ Every story in which Sullivan speaks.
 
 ### Gallery02
 `Gallery02` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **RODDY** (Joyous): There you are, Maddie! Ooh, what is that cool, glowing statue, and why is it missing a head?
 **MADDIE** (Thinking): I'm not sure. I'm wondering if it's something evil that Lindsay brought back from the depths of the ocean.
@@ -56,7 +52,6 @@ Every story in which Sullivan speaks.
 
 ### Gallery03
 `Gallery03` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **SULLIVAN** (Annoyed): Roddy, it's been a while. I see you continue to fraternize with the wrong crowd...
 **MADDIE** (Frustrated): W-who are you? What's going on?
@@ -71,7 +66,6 @@ Every story in which Sullivan speaks.
 
 ### Gallery04
 `Gallery04` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **SULLIVAN**: Ever heard of Tim Rockford?  
   _earlier:_ ~~Do you remember Detective Rockford?~~ (until 24.09.02)
@@ -89,7 +83,6 @@ Every story in which Sullivan speaks.
 
 ### Gallery05
 `Gallery05` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Discouraged): Kate, are you sure this isn't some kind of mistake? 
 **SULLIVAN** (Annoyed): That's Detective Sullivan to you, and I don't make mistakes, Roddy. You're well aware.
@@ -104,7 +97,6 @@ Every story in which Sullivan speaks.
 
 ### Office09
 `Office09` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Doubtful): No. You tell me right now why I should accept your apology.
 **MADDIE** (Frustrated): Tell me what is going on with you!
@@ -117,7 +109,6 @@ Every story in which Sullivan speaks.
 
 ### Office10
 `Office10` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Doubtful): Stealing evidence? Why would I ever want to incriminate myself like that?
 **SULLIVAN** (Encouraging): Obviously not! That’s why you had your criminal grandmother steal it for you!
@@ -129,7 +120,6 @@ Every story in which Sullivan speaks.
 
 ### Office11
 `Office11` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **SULLIVAN** (Charming): What is it, Roddy?
 **SULLIVAN** (Doubtful): Afraid you’ll disappoint little Maddie over there?
@@ -143,7 +133,6 @@ Every story in which Sullivan speaks.
 
 ### Office12
 `Office12` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): What?! Y-you can’t do that!
 **SULLIVAN** (Joyous): Oh Maddie...
@@ -153,7 +142,6 @@ Every story in which Sullivan speaks.
 
 ### Office13
 `Office13` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **HOLDEN** (Encouraging): Hey, can you say that again? I’ll take another photo from a different angle!
 **SULLIVAN** (Surprised): Who... Who are you?!

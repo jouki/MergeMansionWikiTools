@@ -2,7 +2,7 @@
 
 
 ### Study: Remove jammed globe cover
-`StudyChessGlobe` · seen 24.04.01–26.07.01
+`StudyChessGlobe` · seen 23.09.02–26.07.01
 - trigger: area, area=Study, areaId=Study, hotspotId=StudyRemoveStudyGlobeLidDownD10, phase=task completed, task=Remove jammed globe cover (versions 24.04.01–26.07.01)
 
 **MADDIE**: Ever played chess, Jackie?
@@ -12,7 +12,7 @@
 **MADDIE** (Thinking): I guess not...
 
 ### Study: Polish rundown table and barrel
-`StudyMiniBarrel` · seen 24.04.01–26.07.01
+`StudyMiniBarrel` · seen 23.09.02–26.07.01
 - trigger: area, area=Study, areaId=Study, hotspotId=StudySwaprundowntableandbarrelA9, phase=task completed, task=Polish rundown table and barrel (versions 24.04.01–26.07.01)
 
 **MADDIE** (Joyous): It’s my old piggy bank! Er... Barrel bank?
@@ -20,7 +20,7 @@
 **MADDIE**: No. Just happy memories!
 
 ### Study: Dust the Owl
-`StudyOwlStatue` · seen 24.04.01–26.07.01
+`StudyOwlStatue` · seen 23.09.02–26.07.01
 - trigger: area, area=Study, areaId=Study, hotspotId=StudySwapStudyOwlRunDownFa12, phase=task completed, task=Dust the Owl (versions 24.04.01–26.07.01)
 
 **JACKIE** (Annoyed): Eeh... It’s one of those weird statues that makes it look like it’s constantly staring at you.
@@ -29,7 +29,7 @@
 **MADDIE** (Encouraging): I can make bad jokes too, you know!
 
 ### Study: Fix and place the records back
-`StudyRecordPlayer` · seen 24.04.01–26.07.01
+`StudyRecordPlayer` · seen 23.09.02–26.07.01
 - trigger: area, area=Study, areaId=Study, hotspotId=StudyPlaceRecordStackBa6, phase=task completed, task=Fix and place the records back (versions 24.04.01–26.07.01)
 
 **JACKIE** (Thinking): Never heard of any of these bands...
@@ -39,7 +39,7 @@
 **JACKIE** (Surprised): Wow! This is a demo recording as well! How did this end up here?
 
 ### Study: Clean and place Wizard statue
-`StudyWizardStatue` · seen 24.04.01–26.07.01
+`StudyWizardStatue` · seen 23.09.02–26.07.01
 - trigger: area, area=Study, areaId=Study, hotspotId=StudyPlaceStudyBookCaseWizardStatueFa4, phase=task completed, task=Clean and place Wizard statue (versions 24.04.01–26.07.01)
 
 **MADDIE** (Encouraging): Hey, I know this guy!

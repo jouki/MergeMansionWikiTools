@@ -269,7 +269,7 @@ Every story in which Jackie speaks.
 **JACKIE** (Surprised): Someone is definitely hiding something - are those bullet holes??
 
 ### Recycle Runway — event start
-`CBE_RecycleRunway2024_IntroDialogue_Dialogue` · seen 26.04.02–26.07.01
+`CBE_RecycleRunway2024_IntroDialogue_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Recycle Runway, eventId=CBE_RecycleRunway2024, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **PEARL**: How's life at the newspaper, Jackie?
@@ -386,9 +386,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Annoyed): Great advice.
 **LADY VOYANCE** (Talking): The universe favors the brave, my dear!
 
-### CBE VoyancesVisions CharacterItems 08 Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_CharacterItems_08_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Encouraging): I see SOMETHING...
 **LADY VOYANCE** (Encouraging): I see YOU, Jackie.
@@ -398,9 +398,9 @@ Every story in which Jackie speaks.
 **LADY VOYANCE** (Calling): What family secrets YOU are hiding from the world?
 **JACKIE** (Surprised): *Gulp* I don't know what you mean!
 
-### CBE VoyancesVisions CharacterItems 10 Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_CharacterItems_10_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Calling): A-ha! I see a yellow jumper.
 **JACKIE**: A yellow jumper? Maddie wears a yellow jumper...
@@ -409,24 +409,24 @@ Every story in which Jackie speaks.
 **JACKIE** (Surprised): Can you see something about the family? About the Mansion?
 **LADY VOYANCE** (Calling): Ah, a cosmic MIST has fogged my vision...
 
-### CBE VoyancesVisions MalzarAActive 01 Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_MalzarAActive_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MALZAR**: <i>A roll of film, its memories unseen, Like friendships deep, developing in between.</i>
 **JACKIE** (Thinking): What does that mean??
 **LADY VOYANCE** (Thinking): Patience! Let's see what else he has to say...
 
-### CBE VoyancesVisions MalzarBActive 01 Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_MalzarBActive_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MALZAR**: <i>A book with a hollow, where trinkets reside. Is it knowledge we seek, or treasures we hide?</i>
 **JACKIE** (Thinking): Is it knowledge we seek, or treasures we hide... Good question, Malzar!
 
-### CBE VoyancesVisions MalzarCActive 01 Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_MalzarCActive_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MALZAR**: <i>A tattered sack, fortunes play hide and seek. Grandma's knitting? Or a bank's quiet leak?</i>
 **LADY VOYANCE** (Thinking): How mysterious!
@@ -439,9 +439,9 @@ Every story in which Jackie speaks.
 **LADY VOYANCE**: No, your MIND'S eye, my dear. 
 **JACKIE** (Thinking): *Sigh* Of course. Well, thank you. This was interesting, as always!
 
-### CBE VoyancesVisions OminousSecrets 01 Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_OminousSecrets_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Talking): I see a roll of film...
 **JACKIE**: Like photos?
@@ -458,9 +458,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Doubtful): Figures. Fine, I'll pay.
 **LADY VOYANCE**: Excellent! Just insert the coin and let the magic happen!
 
-### CBE VoyancesVisions OminousSecrets 04 Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_OminousSecrets_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Encouraging): There's a book... but not an ordinary one.
 **LADY VOYANCE** (Encouraging): This one has a hole carved inside it!
@@ -468,9 +468,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Annoyed): You don't say!
 **LADY VOYANCE**: You should be glad I didn't see a lunchbox! The universe DETESTS a lunchbox.
 
-### CBE VoyancesVisions OminousSecrets 07 Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_OminousSecrets_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: This one I see clearly. I see money.  
   _earlier:_ ~~Ah, now this is juicy! A bag filled with MONEY.~~ (until 25.02.02)
@@ -483,9 +483,9 @@ Every story in which Jackie speaks.
 **LADY VOYANCE** (Thinking): Did I come close?  
   _earlier:_ ~~It's very difficult to tell.~~ (until 25.02.02)
 
-### CBE VoyancesVisions TarotTableActiveNormal 01 Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_TarotTableActiveNormal_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Jackie, what a surprise! What brings you here?
 **LADY VOYANCE**: My senses tell me you are looking for romantic advice!
@@ -495,13 +495,13 @@ Every story in which Jackie speaks.
 **JACKIE**: I'm going to find out what she's hiding, and it occured to me that you could maybe tell me a thing or two!
 **LADY VOYANCE** (Thinking): That's quite a request, my dear, but let's see what we can see...
 
-### CBE VoyancesVisions TarotTableActive Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_TarotTableActive_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 
 ### Cemetery: Fit new gates
-`CemeteryBuildSculptureOrWaterFeature` · seen 24.04.01–26.07.01
+`CemeteryBuildSculptureOrWaterFeature` · seen 23.09.02–26.07.01
 - trigger: area, area=Cemetery, areaId=Cemetery, hotspotId=CemeteryPlaceGatesM9, phase=task completed, task=Fit new gates (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Well?! Does this grave belong to my Grandpa Charlie?
@@ -513,7 +513,7 @@ Every story in which Jackie speaks.
 **JACKIE** (Doubtful): If there is, I don't know it. Maybe you should check out the old Boulton crypt - it might have more info for you.
 
 ### Cemetery: Place flowers
-`CemeteryClosing` · seen 24.04.01–26.07.01
+`CemeteryClosing` · seen 23.09.02–26.07.01
 - trigger: area, area=Cemetery, areaId=Cemetery, hotspotId=CemeteryPlaceFlowersK17, phase=task completed, task=Place flowers (versions 24.04.01–26.07.01)
 
 **JACKIE** (Thinking): Hey Maddie! Did Clara's story get you down? You look kinda sad.
@@ -527,7 +527,7 @@ Every story in which Jackie speaks.
 **MADDIE** (Annoyed): Aarrrgg! In order to find the Lighthouse I now need to find Grandma and before that a Tennis court?? Great.
 
 ### Cemetery: Repair C emblem
-`CemeteryFlowersForTheGrave` · seen 24.04.01–26.07.01
+`CemeteryFlowersForTheGrave` · seen 23.09.02–26.07.01
 - trigger: area, area=Cemetery, areaId=Cemetery, hotspotId=CemeteryRemoveBrokenStoneM7, phase=task completed, task=Repair C emblem (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Jackie! I wasn't expecting you. Is everything okay?
@@ -538,20 +538,8 @@ Every story in which Jackie speaks.
 **MADDIE** (Thinking): It's a C. Boulton - do you know them? I wondered if it could be my Grandpa, Charlie...
 **JACKIE** (Surprised): I think I know who that is! In fact, I'm sure of it.
 
-### Computer
-`Computer` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
-
-**MADDIE** (Surprised): This is an old computer!
-**JACKIE** (Encouraging): Old but reliable! We still use these at work!
-**MADDIE**: You use these ancient machines at the Bugle?
-**JACKIE**: Our funding has never been the greatest, but if it ain’t broke...
-**MADDIE** (Thinking): Hmmm... It needs a password. I wonder if...
-**JACKIE** (Surprised): The code in the ledger is actually the password?
-
 ### DE FirstCollectionItem Dialogue
 `DE_FirstCollectionItem_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
 
 **MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Aztec collection was housed.
@@ -559,93 +547,143 @@ Every story in which Jackie speaks.
 **JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue America
-`DE_FirstCollectionItem_Dialogue_America` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
+`DE_FirstCollectionItem_Dialogue_America` · seen 26.07.01–26.07.01
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Americana collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted the State museum and they’d be thrilled to house this collection!
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue Assyria
-`DE_FirstCollectionItem_Dialogue_Assyria` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
+`DE_FirstCollectionItem_Dialogue_Assyria` · seen 26.07.01–26.07.01
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Assyrian collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted a museum in Turkey and they’d be thrilled to house this collection!
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue Aztec
 `DE_FirstCollectionItem_Dialogue_Aztec` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Aztec collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted a museum in Mexico and they’d be thrilled to house this collection!
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue Celtic
-`DE_FirstCollectionItem_Dialogue_Celtic` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
+`DE_FirstCollectionItem_Dialogue_Celtic` · seen 26.07.01–26.07.01
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Celtic collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted a museum in Ireland and they’d be thrilled to house this collection!
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue Egypt
 `DE_FirstCollectionItem_Dialogue_Egypt` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Egyptian collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted a museum in Egypt and they’d be thrilled to house this collection!
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue Fossil
 `DE_FirstCollectionItem_Dialogue_Fossil` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Paleontology collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted the Natural History Museum in New York and they’d be thrilled to house this collection!
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue Greece
 `DE_FirstCollectionItem_Dialogue_Greece` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Ancient Greece collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted a museum in Greece and they’d be thrilled to house this collection!
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue HeikkiSauna
-`DE_FirstCollectionItem_Dialogue_HeikkiSauna` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
+`DE_FirstCollectionItem_Dialogue_HeikkiSauna` · seen 26.07.01–26.07.01
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Finnish collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted a museum in Finland and they’d be thrilled to house this collection!
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue Japan
-`DE_FirstCollectionItem_Dialogue_Japan` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
+`DE_FirstCollectionItem_Dialogue_Japan` · seen 26.07.01–26.07.01
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Japanese collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted a museum in Japan and they’d be thrilled to house this collection!
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue Medieval
 `DE_FirstCollectionItem_Dialogue_Medieval` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Medieval Europe collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted a series of museums in Europe and they’d be thrilled to house this collection!
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue StoneAge
 `DE_FirstCollectionItem_Dialogue_StoneAge` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Stone Age collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted various European museums and they’d be thrilled to house this collection!  
   _(1 cosmetic edit not shown)_
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
 
 ### DE FirstCollectionItem Dialogue Vikings
-`DE_FirstCollectionItem_Dialogue_Vikings` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
+`DE_FirstCollectionItem_Dialogue_Vikings` · seen 26.07.01–26.07.01
 
+**MADDIE** (Surprised): Well... This certainly isn’t from Hopewell Bay!
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Viking collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted a museum in Norway and they’d be thrilled to house this collection!
+**JACKIE** (Encouraging): Now we just need to find it all and ship it back to them!
+
+### Maddie's Re-Archaeology — entering board
+`DE_Intro_Dialogue` · seen 25.02.01–26.07.01
+- trigger: event, event=Maddie's Re-Archaeology, eventId=DE_Jan2024, eventType=Collectible Board Event, moment=entering board (versions 25.02.01–25.02.03)
+
+**MADDIE** (Encouraging): Hey, guys! Wh- What’s going on?!
+**JACKIE** (Encouraging): Hey, Maddie! Didn’t you read the newspaper? I wrote an entire article about it...
+**MADDIE** (Worried): Oh... Er. I must have missed it.
+**JACKIE** (Doubtful): We’re digging up the old Hopewell Bay Archaeological Museum!
+**MADDIE** (Surprised): Museum?! I didn’t know we had a museum!
+**ANTIQUEDEALER** (Relaxed): We did, but it collapsed on its grand opening many years ago.
+**ANTIQUEDEALER** (Thinking): Something about illegal mineshafts below the town...
+**GRANDMA** (Worried): ...
+**GRANDMA** (Frustrated): Oh... Well, surely you won’t find anything of worth anymore, dearie.
+**ANTIQUEDEALER** (Joyous): We’ve already found many! Many pieces are still in great shape.
+**JACKIE** (Encouraging): And the best part is that we’re going to be sending them back to their rightful homes!
+**MADDIE** (Joyous): Oooh, awesome! Let’s help, Grandma!
+**GRANDMA** (Annoyed): Oh alright, dearie...
+
+### Maddie's Re-Archaeology — part of the event (exact trigger not dumped)
+`DE_Jan2024_Intro_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Maddie's Re-Archaeology, eventId=DE_Jan2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Encouraging): Hey, guys! Wh- What’s going on?!
+**JACKIE** (Encouraging): Hey, Maddie! Didn’t you read the newspaper? I wrote an entire article about it...
+**MADDIE** (Worried): Oh... Er. I must have missed it.
+**JACKIE** (Doubtful): We’re digging up the old Hopewell Bay Archaeological Museum!
+**MADDIE** (Surprised): Museum?! I didn’t know we had a museum!
+**ANTIQUEDEALER** (Relaxed): We did, but it collapsed on its grand opening many years ago.
+**ANTIQUEDEALER** (Thinking): Something about illegal mineshafts below the town...
+**GRANDMA** (Frustrated): Oh... Well, surely you won’t find anything of worth anymore, dearie.
+**ANTIQUEDEALER** (Joyous): We’ve already found many! Many pieces are still in great shape.
+**JACKIE** (Encouraging): And the best part is that we’re going to be sending them back to their rightful homes!
+**MADDIE** (Joyous): Oooh, awesome! Let’s help, Grandma!
+**ANTIQUEDEALER** (Thinking): Now be careful, Maddie...
+**ANTIQUEDEALER** (Worried): You need to take great care in clearing away the earth to get to the artifacts within the museum.
+**JACKIE** (Worried): Huh... Feels sort of backwards to be digging up what was once in a museum already!
+**MADDIE** (Relaxed): Obviously, what we’re doing here is... Re-archaeology!
+**GRANDMA** (Annoyed): *Groan*
 
 ### DE MiniGameIntro Dialogue
 `DE_MiniGameIntro_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Dig Event (versions None–None)
 
 **ANTIQUEDEALER** (Thinking): Now be careful, Maddie...
 **ANTIQUEDEALER** (Worried): You need to take great care in clearing away the earth to get to the artifacts within the museum.
@@ -654,9 +692,18 @@ Every story in which Jackie speaks.
 **MADDIE** (Encouraging): Eh?!
 **GRANDMA** (Annoyed): *Groan*
 
+### Maddie's Re-Archaeology — event end
+`DE_SendingAway_Dialogue` · seen 25.02.01–26.07.01
+- trigger: event, event=Maddie's Re-Archaeology, eventId=DE_Jan2024, eventType=Collectible Board Event, moment=event end (versions 25.02.01–25.02.03)
+
+**MADDIE** (Encouraging): Well, stick a fork in us. We’re done!
+**JACKIE** (Encouraging): Everything has been carefully packed and shipped off to the museum!
+**MADDIE** (Thinking): Hmm...
+**GRANDMA**: What is it, dearie?
+**MADDIE** (Thinking): I wonder what else is down there...
+
 ### FirstFloorPantry 05
 `FirstFloorPantry_05` · seen 26.07.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Frustrated): Ugh. To think I almost felt sorry for Arthur...
 **JACKIE**: Maddie!
@@ -673,7 +720,6 @@ Every story in which Jackie speaks.
 
 ### FirstFloorPantry 06
 `FirstFloorPantry_06` · seen 26.07.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): That's an amazing find Jackie. Did you bring this to the police?
 **JACKIE** (Charming): No. Not yet. I have to figure out who she was actually investigating. And this draft isn't proof enough.
@@ -692,7 +738,7 @@ Every story in which Jackie speaks.
 **MADDIE** (Discouraged): Ugh. Could this day get any worse?
 
 ### Hallway: Clean yellow paint and trash
-`HallwayHallway02` · seen 24.04.01–26.07.01
+`HallwayHallway02` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayRemoveYellowPaintA3, phase=task completed, task=Clean yellow paint and trash (versions 24.04.01–26.07.01)
 
 **JACKIE** (Encouraging): Hey Maddie! I hope you don't mind, but I let myself in. I couldn't resist!
@@ -706,7 +752,7 @@ Every story in which Jackie speaks.
 **MADDIE** (Thinking): What else might I remember..?
 
 ### Hallway: Clean cobwebs and plank
-`HallwayHallway03` · seen 24.04.01–26.07.01
+`HallwayHallway03` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayRemoveCobewebsandPlankA5, phase=task completed, task=Clean cobwebs and plank (versions 24.04.01–26.07.01)
 
 **MADDIE**: Say, Jackie... Do you know anything about, uh, my family's financial problems?
@@ -719,7 +765,7 @@ Every story in which Jackie speaks.
 **WINSTON** (Surprised): I beg your pardon, but that is  <b>entirely</b> inaccurate!
 
 ### Hallway: Remove dust sheet
-`HallwayHallway04` · seen 24.04.01–26.07.01
+`HallwayHallway04` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayRemoveFoodDogClothA6, phase=task completed, task=Remove dust sheet (versions 24.04.01–26.07.01)
 
 **JACKIE** (Doubtful): I'm sorry, whoever you are, but everyone knows that it was Leonard who-
@@ -730,7 +776,7 @@ Every story in which Jackie speaks.
 **WINSTON** (Thinking): Perhaps you should ask your grandmother that question, Ma'am...
 
 ### Hallway: Vacuum the map
-`HallwayHallway05` · seen 24.04.01–26.07.01
+`HallwayHallway05` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayRemoveMapDustA7, phase=task completed, task=Vacuum the map (versions 24.04.01–26.07.01)
 
 **JACKIE** (Annoyed): Who was that?!
@@ -740,7 +786,7 @@ Every story in which Jackie speaks.
 **MADDIE** (Thinking): What isn't she telling me?!
 
 ### Hallway: Remove sheet
-`HallwayIgnatiusBust` · seen 24.04.01–26.07.01
+`HallwayIgnatiusBust` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayRemoveSheetEa5, phase=task completed, task=Remove sheet (versions 24.04.01–26.07.01)
 
 **MADDIE**: The man himself. In the uh... Stone. 
@@ -749,7 +795,7 @@ Every story in which Jackie speaks.
 **JACKIE** (Doubtful): Couldn't keep it though, could he?
 
 ### Hallway: Search the lion mouth
-`HallwayLionStatue` · seen 24.04.01–26.07.01
+`HallwayLionStatue` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayPlaceLionMouthopenEb1, phase=task completed, task=Search the lion mouth (versions 24.04.01–26.07.01)
 
 **MADDIE**: This lion's mouth opened when I pressed that button.
@@ -757,7 +803,7 @@ Every story in which Jackie speaks.
 **JACKIE** (Surprised): A "study" key!
 
 ### Hallway: Place the ship
-`HallwayModelShip` · seen 24.04.01–26.07.01
+`HallwayModelShip` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayPlaceFixedShipE13, phase=task completed, task=Place the ship (versions 24.04.01–26.07.01)
 
 **JACKIE**: This is a nice model! I guess boats have been in your family since the beginning.  
@@ -768,14 +814,13 @@ Every story in which Jackie speaks.
 
 ### HallwayOutro
 `HallwayOutro` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Joyous): Looks like the key we found, fits this lock! It must be the study...
 **JACKIE** (Thinking): What do you think is in there?
 **MADDIE** (Encouraging): Hopefully something that can help Grandma!
 
 ### Hallway: Remove easel
-`HallwayPaintingStation` · seen 24.04.01–26.07.01
+`HallwayPaintingStation` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayRemoveEaselRunDownC4, phase=task appears, task=Remove easel (versions 24.04.01–26.07.01)
 
 **JACKIE** (Thinking): Hmm... This paint looks fresh! 
@@ -783,7 +828,7 @@ Every story in which Jackie speaks.
 **JACKIE** (Doubtful): Why would someone do that?!
 
 ### Hallway: Push the button
-`HallwayPressingSecretButton` · seen 24.04.01–26.07.01
+`HallwayPressingSecretButton` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayPlaceButtonOnEa10, phase=task completed, task=Push the button (versions 24.04.01–26.07.01)
 
 **MADDIE**: Oops! I think I just pressed the red button!
@@ -792,24 +837,15 @@ Every story in which Jackie speaks.
 **JACKIE** (Surprised): Did you see that? That lion statue's mouth just opened!
 
 ### Hallway: Attach Samurai helmet
-`HallwaySamuraiArmor` · seen 24.04.01–26.07.01
+`HallwaySamuraiArmor` · seen 23.09.02–26.07.01
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayPlaceSamuraiHelmetDa11, phase=task completed, task=Attach Samurai helmet (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Wow! This thing looks really old!
 **JACKIE** (Encouraging): I bet it has a huge mystery behind it. 
 **MADDIE** (Thinking): Knowing my family, I wouldn't be surprised. 
 
-### InsertingPassword
-`InsertingPassword` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
-
-**MADDIE** (Joyous): It... It worked! I think I unlocked something!
-**JACKIE** (Doubtful): I can’t believe that was the password...
-**MADDIE** (Surprised): Did you see that? Something moved under the carpet!
-**JACKIE**: Let’s move it out of the way!
-
 ### Stone Garden: Remove overgrowth
-`JapaneseGarden_Intro` · seen 24.04.01–26.07.01
+`JapaneseGarden_Intro` · seen 23.09.02–26.07.01
 - trigger: area, area=Stone Garden, areaId=JapaneseGarden, hotspotId=MansionHallRightPathToGardenClearOvergrown, phase=task completed, task=Remove overgrowth (versions 24.04.01–26.07.01)
 
 **MADDIE** (Doubtful): I still can't believe the police arrested Grandma. I wonder what evidence they have against her...
@@ -830,6 +866,15 @@ Every story in which Jackie speaks.
 - trigger: item, event=The Great Bake-off, eventKey=LBE_May2023, itemKeys=['LBE_May2023_Cakes_01'], items=['Fortune Cookie'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **JACKIE** (Thinking): What a pretty little fortune cookie you made! But it's nothing compared to what I'll be cooking!
+
+### The Great Bake-off — item discovered: Chicken Nest
+`LBE_May2023EggNest` · seen 23.09.02–26.07.01
+- trigger: item, event=The Great Bake-off, eventKey=LBE_May2023, itemKeys=['LBE_May2023_Nest_01'], items=['Chicken Nest'], moment=item discovered (versions 23.09.02–23.11.02)
+
+**JACKIE** (Surprised): A nest? What am I supposed to do with this?!
+**GRANDMA** (Thinking): Hmm... It is a bake-off after all, so I'll probably need a lot of eggs.  
+  _(1 cosmetic edit not shown)_
+**HEIKKI** (Joyous): I might need a chicken coop...
 
 ### LBE_May2023 — entering board
 `LBE_May2023Intro` · seen 23.06.02–26.07.01
@@ -855,7 +900,7 @@ Every story in which Jackie speaks.
   _(1 cosmetic edit not shown)_
 
 ### The Great Bake-off — event end
-`LBE_May2023Outro` · seen 24.04.01–26.07.01
+`LBE_May2023Outro` · seen 23.09.02–26.07.01
 - trigger: event, event=The Great Bake-off, eventId=LBE_May2023, eventType=Leaderboard Event, moment=event end (versions 24.04.01–26.07.01)
 
 **PEARL** (Encouraging): Well done everyone! I've never seen such amazing cakes!
@@ -897,6 +942,31 @@ Every story in which Jackie speaks.
 **ANTIQUEDEALER** (Relaxed): It is more than that, my dear Jackie! Take a moment to appreciate the flowers; find the beauty in each one of them.
 **JACKIE** (Surprised): Hmm... I guess there's a lot more to this than I first thought. Let's try!
 
+### Floral Frenzy — entering board
+`LBE_Valentines2024_Intro_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Floral Frenzy, eventId=LBE_Valentines2024, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–26.01.02)
+
+**PEARL**: Welcome to Floral Frenzy, a competition where we find out who makes the most magnificent flower arrangements in Hopewell Bay!
+**PEARL**: Our contenders are Deb, a lover of the more exotic flowers...
+**DEB** (Charming): I do have a penchant for the unusual.
+**PEARL** (Encouraging): Err, yes. And Julius who specializes in the gentle Japanese art of Ikebana. I can't wait to see what kind of creations you will produce!
+**ANTIQUEDEALER** (Charming): Salutations! Did you know that the history of Ikebana reaches back over 600 years?
+**PEARL**: Very interesting, indeed! And our last contender is... Jackie!
+**JACKIE** (Doubtful): Pearl, I told you I'm too busy to take part in a silly competition. I've never even tried flower arranging before!
+**PEARL** (Thinking): Haha, you're so funny!
+**PEARL** (Encouraging): Let's get to it, people. The competition is officially on - may the best amateur florist win!
+
+### Floral Frenzy — event end
+`LBE_Valentines2024_Outro_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Floral Frenzy, eventId=LBE_Valentines2024, eventType=Leaderboard Event, moment=event end (versions 24.04.01–26.01.02)
+
+**PEARL** (Surprised): What a competition we've had! I had no idea we have such flower arranging talent in our little town.
+**PEARL** (Encouraging): Aaand the winner is... Jackie!
+**JACKIE** (Surprised): W-what?? I really didn't expect this...
+**JACKIE** (Encouraging): I'd like to thank my fellow contenders for educating and inspiring me. I never knew I had it in me to get excited about flower arranging!
+**DEB** (Doubtful): Next time, we can see if it was just beginner's luck... but congratulations, Jackie. You did well!
+**JACKIE** (Doubtful): Thank you, Deb!
+
 ### Grandma's Pool Party — item discovered: Podcasting Kit
 `LDE_GrandmasBirthday2023_PodcastingKitChain_Dialogue` · seen 23.09.02–26.07.01
 - trigger: item, event=Grandma's Pool Party, eventKey=LDE_GrandmasBirthday2023, itemKeys=['LDE_GrandmasBirthday2023_BirthdayCake_08'], items=['Podcasting Kit'], moment=item discovered (versions 23.09.02–26.07.01)
@@ -908,9 +978,16 @@ Every story in which Jackie speaks.
 **JACKIE**: We weren’t using any of this old equipment back at the Bugle, anyway.
 **MADDIE** (Joyous): Thank you, Jackie! I’m sure she’ll love it!
 
-### LDE GreenAcresQuest2024 TA4 Dialogue
-`LDE_GreenAcresQuest2024_TA4_Dialogue` · seen 25.05.01–26.04.02
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+### Green Acres Quest — item discovered: 79979616
+`LDE_GreenAcresQuest2024_CharacterJackie_02_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['79979616'], items=['79979616'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**JACKIE**: Hey, Maddie! Could you help me out for a sec?
+**MADDIE** (Encouraging): Sure thing!
+
+### Green Acres Quest — part of the event (exact trigger not dumped)
+`LDE_GreenAcresQuest2024_TA4_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **JACKIE** (Surprised): Maddie! You won’t believe who I just saw!
 **MADDIE** (Frustrated): Emilio? Yeah... He dropped by earlier with her.
@@ -919,6 +996,13 @@ Every story in which Jackie speaks.
 **JACKIE**: Eeh... This must be really awkward for you.
 **MADDIE** (Annoyed): Oh no, it’s totally fine. Bella and Emilio are “just friends...”
 **JACKIE** (Doubtful): Oh boy... I know that look.
+
+### Green Acres Quest — item discovered: Jackie
+`LDE_GreenAcresQuest2024_v2_CharacterJackie_02_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterJackie_03'], items=['Jackie'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**EMILIO**: Jackie, would you have a moment to help me?
+**JACKIE** (Hesitant): Sure thing - but I don't know much about gardening!
 
 ### Green Acres Quest — item discovered: Jackie
 `LDE_GreenAcresQuest_CharacterJackie_02_Dialogue` · seen 26.05.01–26.07.01
@@ -945,9 +1029,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Encouraging): You can never have too many tape recorders!
 **JACKIE** (Encouraging): I wonder if Santa would give me an exclusive interview...
 
-### LDE HolidayCarols2023 LayerDecoration 07 Dialogue
+### The Fa-la-la-la Follies — part of the event (exact trigger not dumped)
 `LDE_HolidayCarols2023_LayerDecoration_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=The Fa-la-la-la Follies, eventId=LDE_HolidayCarols2023, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: All this stage needs now is the instruments!
 **JACKIE** (Thinking): But who's going to play them?
@@ -984,7 +1068,7 @@ Every story in which Jackie speaks.
 **JACKIE** (Thinking): Besides, she'll probably find a date now that everyone's setting her up on blind dates!
 
 ### Love on the Vine — event start
-`LDE_Hopeberry2024_Intro_Dialogue` · seen 26.04.02–26.07.01
+`LDE_Hopeberry2024_Intro_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Love on the Vine, eventId=LDE_Hopeberry2024, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **JACKIE** (Encouraging): Are you looking forward to the Hopeberry Festival? They say it's the second most romantic event of the year.
@@ -1014,9 +1098,9 @@ Every story in which Jackie speaks.
 **RODDY** (Surprised): M-my dream woman? Just like you, of course!
 **RODDY**: Is that a new blouse??
 
-### LDE Hopeberry2024 TA3 Dialogue
+### Love on the Vine — part of the event (exact trigger not dumped)
 `LDE_Hopeberry2024_TA3_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Love on the Vine, eventId=LDE_Hopeberry2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **JACKIE**: Did you have a good time with Julius' nephew? Was he cool?
 **MADDIE**: Cool? He was... like a younger version of Julius.
@@ -1026,9 +1110,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Encouraging): So, no second date?
 **MADDIE** (Relaxed): Definitely not.
 
-### LDE Hopeberry2024 TA5 Dialogue
+### Love on the Vine — part of the event (exact trigger not dumped)
 `LDE_Hopeberry2024_TA5_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Love on the Vine, eventId=LDE_Hopeberry2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **JACKIE** (Thinking): How was Pearl's cousin? Is he really a clown?
 **MADDIE** (Relaxed): He made the worst jokes...
@@ -1037,9 +1121,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Thinking): Yep. I think I'm gonna throw in the towel... There are almost NO interesting guys in this town.
 **JACKIE** (Encouraging): Don't lose hope! He might be just around the corner.
 
-### LDE Hopeberry2024 TC1 Dialogue
+### Love on the Vine — part of the event (exact trigger not dumped)
 `LDE_Hopeberry2024_TC1_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Love on the Vine, eventId=LDE_Hopeberry2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **JACKIE** (Encouraging): How's it going? Deb really came through!
 **MADDIE** (Relaxed): I'm as surprised as you are! After the two other blind dates, I was ready to be disappointed...
@@ -1048,9 +1132,9 @@ Every story in which Jackie speaks.
 **JACKIE**: Will you see him again?
 **MADDIE** (Charming): I really hope so! Maybe there really is some romantic magic in the hopeberries.
 
-### LDE Hopeberry2025 TA1 Dialogue
+### Love on the Vine — part of the event (exact trigger not dumped)
 `LDE_Hopeberry2025_TA1_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Love on the Vine, eventId=LDE_Hopeberry2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: How are you doing, Jackie?
 **JACKIE**: You know - trying to keep busy and keep my mind off the break-up.
@@ -1059,9 +1143,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Surprised): What do you mean?
 **JACKIE** (Doubtful): Maybe you should ask him.
 
-### LDE MurderAtTheMansion B2 C Dialogue
-`LDE_MurderAtTheMansion_B2_C_Dialogue` · seen 26.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+### Murder at the Mansion — part of the event (exact trigger not dumped)
+`LDE_MurderAtTheMansion_B2_C_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Murder at the Mansion, eventId=LDE_MurderAtTheMansion, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **JACKIE** (Thinking): I feel like there's something staring us right in the face. But what??
 **RODDY** (Thinking): You tell me. Should I consult the tea leaves again?
@@ -1084,9 +1168,9 @@ Every story in which Jackie speaks.
 **RODDY** (Worried): A-are you sure? Why would anyone want to kill Lady Voyance?
 **JACKIE**: That’s what we’re going to find out.
 
-### LDE MurderAtTheMansion C3 Dialogue
-`LDE_MurderAtTheMansion_C3_Dialogue` · seen 26.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+### Murder at the Mansion — part of the event (exact trigger not dumped)
+`LDE_MurderAtTheMansion_C3_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Murder at the Mansion, eventId=LDE_MurderAtTheMansion, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **GRANDMA** (Charming): How is your investigation going? I thought you must be hungry by now, so I've brought you some apple pie fresh from the oven!
 **RODDY** (Encouraging): Thank you, I'm starving!
@@ -1377,9 +1461,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Doubtful): Uh-huh, that's Bella alright. She would not have been happy to read this.  
   _(1 cosmetic edit not shown)_
 
-### LDE MurderAtTheMansion TA1 Dialogue
-`LDE_MurderAtTheMansion_TA1_Dialogue` · seen 26.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+### Murder at the Mansion — part of the event (exact trigger not dumped)
+`LDE_MurderAtTheMansion_TA1_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Murder at the Mansion, eventId=LDE_MurderAtTheMansion, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **JACKIE** (Thinking): So this is where it happened.
 **RODDY** (Worried): Poor Lady Voyance! She must have been terrified.
@@ -1494,7 +1578,6 @@ Every story in which Jackie speaks.
 
 ### Landing6
 `Landing6` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **JACKIE** (Surprised): Hey, wow! Was that Mayor Bruno?!
 **MADDIE** (Worried): Hi, Jackie... Yeah... It was.
@@ -1508,7 +1591,6 @@ Every story in which Jackie speaks.
 
 ### Landing7
 `Landing7` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **JACKIE** (Encouraging): Well, you’ve always had your family’s best interests at heart. So I know you’ll make the right decision.
 **MADDIE** (Worried): Thanks, Jackie!
@@ -1531,7 +1613,6 @@ Every story in which Jackie speaks.
 
 ### LandingTiles4
 `LandingTiles4` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Joyous): Yes! I did it! Wow, that compass made the whole room shake!
 **JACKIE** (Thinking): Hmm, the arrow is still red though...
@@ -1653,26 +1734,15 @@ Every story in which Jackie speaks.
 **JACKIE** (Doubtful): How’d you think? He did an instant hit piece on me right after!
 **JACKIE** (Joyous): I’m actually pretty flattered.
 
-### Outro
-`Outro` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
-
-**MADDIE** (Thinking): It’s a trapdoor! Hmm... This lock has a very strange looking key hole, I wonder if-
-**JACKIE** (Surprised): Do you smell that? Is something on fire?!
-**MADDIE** (Surprised): I'm dreadfully sorry to bother you Miss Boulton but...  
-  _earlier:_ ~~Oh no, look outside! I think it’s the lighthouse!~~ (until 25.02.02)
-**MADDIE** (Surprised): It appears that the lighthouse is on fire.
-
 ### PE Christmas2022EndOfChainDialogue
 `PE_Christmas2022EndOfChainDialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Pet event (versions None–None)
 
 **JACKIE** (Charming): Time to find out who was right about Christmas trees!
 **RODDY** (Charming): Don't be surprised if it's me...
 
-### PE Christmas2022EventEndDialogue
-`PE_Christmas2022EventEndDialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Pet event (versions None–None)
+### Christmas Season — outro
+`PE_Christmas2022_End` · seen 23.09.02–26.07.01
+- trigger: event, event=Christmas Season, eventId=PE_Christmas2022, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
 **JACKIE** (Charming): Okay, Roddy, I know you want to tell me... who was right about the origin of the Christmas tree?
 **RODDY** (Joyous): We were both right! Turns out there are lots of traditions involving Christmas trees.
@@ -1682,9 +1752,10 @@ Every story in which Jackie speaks.
 **RODDY** (Surprised): I didn't mean... I shouldn't have... uh, please don't say anything to her? 
 **JACKIE** (Charming): Well, sure. Keeping your secret will be my Christmas gift to you, Roddy!
 
-### PE Christmas2022InitialDialogue
-`PE_Christmas2022InitialDialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Pet event (versions None–None)
+### PE_Christmas2022 — intro
+`PE_Christmas2022_Intro` · seen 23.09.02–26.07.01
+- trigger: event, eventId=PE_Christmas2022, eventType=Mystery / Progression, moment=intro (versions 23.06.02–23.06.02)
+- trigger: event, event=Christmas Season, eventId=PE_Christmas2022, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
 
 **RODDY**: Hi, Jackie. I'm on my way to see Maddie. What about you?
 **JACKIE**: I'm here for Maddie too! I brought her a golden key ornament for her Christmas tree.
@@ -1753,9 +1824,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Annoyed): Just promise me you’ll never wear that again. EVER.
 **RODDY**: Hahaha...
 
-### SE DoubleDateDisaster2024 OutroDialogue Dialogue
+### Double Date Disaster — part of the event (exact trigger not dumped)
 `SE_DoubleDateDisaster2024_OutroDialogue_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Seasonal event (versions None–None)
+- trigger: event, eventType=event story, event=Double Date Disaster, eventId=SE_DoubleDateDisaster2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **JACKIE** (Surprised): Bolivia?!
 **MADDIE** (Annoyed): That’s what he said!
@@ -1771,6 +1842,14 @@ Every story in which Jackie speaks.
 **MADDIE** (Worried): Yeah, of course! You go have fun. I’ll just...
 **MADDIE** (Discouraged): Clean all this up, then.
 
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot02
+`SE_HopeberryFestival2023_Decoration_Slot02_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot02, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**JACKIE** (Surprised): Are these actual hopeberry bushes?
+**DEB** (Charming): Yes! Like any proper vineyard, one has to show where their product comes from.
+**JACKIE** (Thinking): Vineyard?
+
 ### Woolly Mystery — item discovered: Crystal Apple
 `SP_AlpacaPet2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Woolly Mystery, eventKey=SP_AlpacaPet2024, itemKeys=['SP_AlpacaPet2024_CollectableItems_04'], items=['Crystal Apple'], moment=item discovered (versions 25.05.01–26.07.01)
@@ -1784,9 +1863,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Thinking): I get it.
 **MADDIE** (Relaxed): But you can still help with the raking.
 
-### SP AmyPet2025 TA1 Dialogue
+### Whiskers & Whispers — part of the event (exact trigger not dumped)
 `SP_AmyPet2025_TA1_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Whiskers & Whispers, eventId=SP_AmyPet2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **JACKIE** (Encouraging): You just couldn't say no to Emilio!
 **MADDIE** (Discouraged): No... But Amy is actually a really lovely cat. Look - she's so happy in her new home!
@@ -1856,9 +1935,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Doubtful): Roddy!
 **RODDY** (Worried): Er... Sorry?
 
-### SP BunnyPet2026 Intro Dialogue
-`SP_BunnyPet2026_Intro_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Season Pass - Fluff Overload — part of the event (exact trigger not dumped)
+`SP_BunnyPet2026_Intro_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Season Pass - Fluff Overload, eventId=SP_BunnyPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **JACKIE** (Hesitant): Hello Maddie...
 **MADDIE** (Doubtful): Wait, a minute... I know that look.
@@ -1880,9 +1959,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Joyous): Hahaha! ROUNDED.
 **MADDIE** (Hesitant): Why was that funny?
 
-### SP BunnyPet2026 TA1 Dialogue
-`SP_BunnyPet2026_TA1_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Season Pass - Fluff Overload — part of the event (exact trigger not dumped)
+`SP_BunnyPet2026_TA1_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Season Pass - Fluff Overload, eventId=SP_BunnyPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **JACKIE** (Hesitant): So, uuh... Don't freak out.
 **MADDIE**: Why would I fre-
@@ -1895,9 +1974,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Encouraging): He's really cute!
 **PET** (Joyous): *squeak squeak nibble*
 
-### SP BunnyPet2026 TA2 Dialogue
-`SP_BunnyPet2026_TA2_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Season Pass - Fluff Overload — part of the event (exact trigger not dumped)
+`SP_BunnyPet2026_TA2_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Season Pass - Fluff Overload, eventId=SP_BunnyPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: He's so fluffy!!!
 **JACKIE** (Joyous): He sure is!
@@ -1908,9 +1987,9 @@ Every story in which Jackie speaks.
 **PET** (Joyous): *squak*
 **JACKIE** (Encouraging): He forgives you.
 
-### SP BunnyPet2026 TA3 Dialogue
-`SP_BunnyPet2026_TA3_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Season Pass - Fluff Overload — part of the event (exact trigger not dumped)
+`SP_BunnyPet2026_TA3_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Season Pass - Fluff Overload, eventId=SP_BunnyPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **JACKIE** (Encouraging): Wow! This bunny pen is looking really amazing!
 **MADDIE**: Thanks! Hey... I have a question.
@@ -1920,6 +1999,18 @@ Every story in which Jackie speaks.
 **MADDIE** (Relaxed): Ah.
 **JACKIE** (Hesitant): I couldn't help it when I saw him in the shelter. It's almost like he was reincarnated!
 **PET**: *nibble nibble*
+
+### Cherry's Mystery Meat — outro
+`SP_CherrysMysteryMeat2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Cherry's Mystery Meat, eventId=SP_CherrysMysteryMeat2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**JACKIE**: Listen... Do you think there's something weird about this mystery meat business?
+**JACKIE**: Your grandma just happened to have a fridge full of meat...
+**MADDIE** (Worried): Vegan meat!
+**JACKIE** (Doubtful): ...AND a huge pie dish?
+**MADDIE** (Worried): You don't think...
+**JACKIE** (Thinking): I'm just putting two and two together here. There's no smoke without fire - especially at a BBQ.
+**MADDIE** (Surprised): C-could it be HANK in that pie??
 
 ### Cherry's Mystery Meat — decoration SP_CherrysMysteryMeat2024_Decoration_Slot33
 `SP_CherrysMysteryMeat2024_Decoration_Slot33_Dialogue` · seen 25.05.01–26.07.01
@@ -1965,9 +2056,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Surprised): Maddie... Remember Voyance's premonition? She predicted this!
 **MADDIE** (Thinking): You're right -- first Emilio and Bella's wedding, and now this!
 
-### SP FerretPet2025 TA2 Dialogue
-`SP_FerretPet2025_TA2_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Ferret Fiasco — part of the event (exact trigger not dumped)
+`SP_FerretPet2025_TA2_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Ferret Fiasco, eventId=SP_FerretPet2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **ANTIQUEDEALER** (Thinking): Alright! I’ve gathered you and Jackie to form the ferret task force!
 **ANTIQUEDEALER** (Charming): We’re going to gather all these little rascals before they steal everything that isn’t nailed down.
@@ -2048,6 +2139,17 @@ Every story in which Jackie speaks.
 **JACKIE** (Surprised): Wow! Look at those crystals!
 **MADDIE** (Relaxed): Well, we found our centerpiece.
 
+### Grandma's Mystery — intro
+`SP_GrandmasMystery2024_IntroDialogue_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Grandma's Mystery, eventId=SP_GrandmasMystery2024, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**JACKIE**: Are we gonna talk about the bone?
+**MADDIE** (Thinking): The bone Goldie dug up in Grandma's yard? Yeah, that was creepy!
+**JACKIE** (Thinking): First Ursula comes up with all that vegan meat for Cherry's pie, and then Goldie digs up something that looks like a human bone...
+**JACKIE** (Thinking): On top of that, Ursula was the last one seen talking to Hank!
+**JACKIE**: And you need to tell Deb -- she's worried sick about Hank!
+**MADDIE** (Worried): *Gulp* I guess it's the only way...
+
 ### Grannies of Anarchy — decoration SP_GranniesOfAnarchy2023_Decoration_Slot25
 `SP_GranniesOfAnarchy2023_Decoration_Slot25_Dialogue` · seen 23.11.02–26.07.01
 - trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot25, event=Grannies of Anarchy, eventKey=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
@@ -2086,9 +2188,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Worried): So, you don't think they are really involved in anything shady?
 **JACKIE** (Thinking): I guess not. But what would a biker gang need a recorder for?
 
-### SP GranniesOfAnarchy2023 Intro Dialogue
+### Grannies of Anarchy — part of the event (exact trigger not dumped)
 `SP_GranniesOfAnarchy2023_Intro_Dialogue` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Grannies of Anarchy, eventId=SP_GranniesOfAnarchy2023, moment=part of the event (exact trigger not dumped) (versions 23.11.02–26.07.01)
 
 **JACKIE** (Annoyed): Hey, Maddie! Is everything OK with Grandma Ursula?
 **MADDIE** (Thinking): There are so many ways to answer that... Why do you ask?
@@ -2184,9 +2286,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Surprised): So now we just need to...
 **PEARL**: Enjoy the festival!
 
-### SP Hopefest2026 Decoration Slot38 Dialogue
-`SP_Hopefest2026_Decoration_Slot38_Dialogue` · seen 26.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Hopefest Music Festival — part of the event (exact trigger not dumped)
+`SP_Hopefest2026_Decoration_Slot38_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Hopefest Music Festival, eventId=SP_Hopefest2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **PEARL** (Encouraging): Look at this place! Lights, music, people everywhere… we actually pulled it off.
 **PEARL** (Thinking): I’ll admit, I was expecting at least three disasters by now.
@@ -2234,9 +2336,9 @@ Every story in which Jackie speaks.
 **MADDIE**: And we happened to be in the right place at the right time!
 **JACKIE** (Encouraging): Turns out Hopewell Bay’s pretty good at keeping cold-blooded guests warm.
 
-### SP IguanaPet2026 Intro Dialogue
-`SP_IguanaPet2026_Intro_Dialogue` · seen 26.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Green with Envy — part of the event (exact trigger not dumped)
+`SP_IguanaPet2026_Intro_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Green with Envy, eventId=SP_IguanaPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: Did you see there’s a storm coming? I think it’s going to be a big one, too.
 **JACKIE** (Encouraging): Yeah, I have tons of stuff to do before I can hunker down with a cup of tea and a blanket.
@@ -2256,9 +2358,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Joyous): And moving closer to the heat! That’s the most energy it’s shown all day.
 **JACKIE** (Encouraging): Hey there, little guy. Welcome back.
 
-### SP IguanaPet2026 TA1 Dialogue
-`SP_IguanaPet2026_TA1_Dialogue` · seen 26.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Green with Envy — part of the event (exact trigger not dumped)
+`SP_IguanaPet2026_TA1_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Green with Envy, eventId=SP_IguanaPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Joyous): Look at you climbing already!
 **PET**: *Chirp*
@@ -2270,9 +2372,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Thinking): Hmmm… I don’t think so. He really seems to enjoy that basking rock.
 **MADDIE** (Relaxed): I guess that means he’s staying with us for now.
 
-### SP IguanaPet2026 TA2 Dialogue
-`SP_IguanaPet2026_TA2_Dialogue` · seen 26.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Green with Envy — part of the event (exact trigger not dumped)
+`SP_IguanaPet2026_TA2_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Green with Envy, eventId=SP_IguanaPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **JACKIE** (Relaxed): Maddie, your iguana is loose again.
 **MADDIE** (Relaxed): He’s not loose. He’s exploring.
@@ -2283,9 +2385,9 @@ Every story in which Jackie speaks.
 **PET** (Doubtful): ...
 **JACKIE** (Thinking): Why do I suddenly feel judged by a reptile?
 
-### SP IguanaPet2026 TA3 Dialogue
-`SP_IguanaPet2026_TA3_Dialogue` · seen 26.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Green with Envy — part of the event (exact trigger not dumped)
+`SP_IguanaPet2026_TA3_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Green with Envy, eventId=SP_IguanaPet2026, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Worried): The temperature’s dropping again tonight. I’m worried the enclosure still isn’t warm enough.
 **PET** (Doubtful): ...
@@ -2387,9 +2489,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Surprised): I...
 **MADDIE** (Angry): Just go...
 
-### SP MysteriousMaelstrom2024 TA1 Dialogue
+### The Mysterious Maelstrom — part of the event (exact trigger not dumped)
 `SP_MysteriousMaelstrom2024_TA1_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=The Mysterious Maelstrom, eventId=SP_MysteriousMaelstrom2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **JACKIE**: Hey, Maddie! I was wondering if I could get a few quotes from you!
 **MADDIE** (Encouraging): Quotes? Are you writing something for the Bugle?
@@ -2400,9 +2502,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Thinking): Uhm... no. I wouldn’t know about that. What strange things?
 **JACKIE** (Doubtful): Some old photos, strange writing in code. I heard some people are now trying to crack it.
 
-### SP MysteriousMaelstrom2024 TA2 Dialogue
+### The Mysterious Maelstrom — part of the event (exact trigger not dumped)
 `SP_MysteriousMaelstrom2024_TA2_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=The Mysterious Maelstrom, eventId=SP_MysteriousMaelstrom2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Encouraging): Hi Jackie! How’s the article coming along?
 **JACKIE** (Thinking): Well... I’ve been doing some digging and...
@@ -2419,6 +2521,20 @@ Every story in which Jackie speaks.
 **MADDIE** (Discouraged): I’m sorry! I know... I know. It’s just that-
 **JACKIE** (Doubtful): No, no, I get you. I’ll be seeing you around, Maddie.
 **MADDIE** (Discouraged): *sigh*
+
+### New Year's Resolutions — outro
+`SP_NewYearsResolutions2023_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=New Year's Resolutions, eventId=SP_NewYearsResolutions2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**JACKIE**: Hey, Maddie! Have you seen Roddy around?
+**MADDIE** (Thinking): No! I think he's been really busy.
+**JACKIE** (Encouraging): Yeah, busy working out!
+**MADDIE** (Surprised): What? I haven't noticed!
+**JACKIE**: Of course you haven't. You're all about Emilio now!
+**MADDIE** (Charming): It is going really well. I think next year is gonna be the best ever!
+**JACKIE** (Thinking): You... wouldn't happen to have Roddy's number?
+**MADDIE** (Encouraging): Did you know that Emilio climbed Mount Everest?
+**JACKIE** (Annoyed): Of course he did...
 
 ### No Rest for the Wicked — outro
 `SP_NoRest2025_AllRewardsCompleted_Dialogue` · seen 25.07.01–26.07.01
@@ -2509,9 +2625,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Surprised): Who would do that?
 **JACKIE**: I don't know, but it almost seems personal.
 
-### SP RumorsRing2025 Deco 26 Dialogue
-`SP_RumorsRing2025_Deco_26_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Rumors in the Ring — decoration SP_RumorsRing2025_Decoration_Slot26
+`SP_RumorsRing2025_Decoration_Slot26_Dialogue` · seen 25.05.01–26.07.01
+- trigger: decoration, decoration=SP_RumorsRing2025_Decoration_Slot26, event=Rumors in the Ring, eventKey=SP_RumorsRing2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE** (Thinking): What's all this?? Are you putting on a circus?
 **MADDIE**: Well, you could say that.
@@ -2522,9 +2638,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Thinking): Still obsessed with her smartphone?
 **MADDIE** (Doubtful): Yep. I don't know what to do! It's like living with a phone-addicted teenager.
 
-### SP RumorsRing2025 Deco 28 Dialogue
-`SP_RumorsRing2025_Deco_28_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Rumors in the Ring — decoration SP_RumorsRing2025_Decoration_Slot28
+`SP_RumorsRing2025_Decoration_Slot28_Dialogue` · seen 25.05.01–26.07.01
+- trigger: decoration, decoration=SP_RumorsRing2025_Decoration_Slot28, event=Rumors in the Ring, eventKey=SP_RumorsRing2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): I've got most of the circus stuff in order, and I've set up a little fun fair next to Grandma's house like the ringmaster asked.
 **MADDIE** (Relaxed): I can't wait for the big top to go up!
@@ -2586,9 +2702,55 @@ Every story in which Jackie speaks.
 **JACKIE** (Doubtful): ...
 **MADDIE** (Discouraged): That well, huh?
 
-### SP StrayBonesMystery2024 LayerDecoration 02 Dialogue
+### Spring Season — outro
+`SP_SpringSeason2023_EventEndDialogue` · seen 23.09.02–26.07.01
+- trigger: event, event=Spring Season, eventId=SP_SpringSeason2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**RODDY** (Charming): Tah-daa!
+**MADDIE** (Worried): That's... That's horrifying!
+**JACKIE** (Frustrated): It's his fault! He kept going on about structural integrity this, aerodynamics that...
+**RODDY** (Frustrated): She wanted to make a kite that looked like a pig!
+**JACKIE** (Annoyed): Yes! "When pigs fly..." Don't you get it?!
+**RODDY** (Annoyed): But they don't fly!!
+**JACKIE** (Annoyed): THATS THE POINT!
+**MADDIE** (Doubtful): Cheer up, you two. At least you won first place in the Kids Favorite category!
+**RODDY** (Charming): I was sort of hoping to win something else instead...
+
+### SP_SpringSeason2023 — intro
+`SP_SpringSeason2023_EventOpeningDialogue` · seen 23.06.02–26.07.01
+- trigger: event, eventId=SP_SpringSeason2023, eventType=Mystery / Progression, moment=intro (versions 23.06.02–23.06.02)
+- trigger: event, event=Spring Season, eventId=SP_SpringSeason2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**MADDIE** (Joyous): A kite festival! How wonderful!
+**GRANDMA** (Relaxed): Not only a festival, dear but remember, a competition as well! I'm sure we'll win it this year, you'll see!
+**JACKIE**: Would make for a nice story too!
+**MADDIE** (Surprised): Roddy! You're here for the kite festival as well?
+**RODDY** (Charming): Yeah! I- Uuh... I was thinking we could team up?
+**JACKIE** (Surprised): Actually, I was thinking WE could team up!
+**MADDIE** (Worried): Oh no! I'm sorry, but I already promised to help Grandma!
+**JACKIE** (Doubtful): Oh...
+**RODDY** (Annoyed): Great...
+**GRANDMA** (Charming): Oh, it's alright dear, I'm sure I can handle this alone. Why don't you and Roddy-
+**MADDIE** (Joyous): Heeeey! I got a great idea! Why don't YOU TWO team up?!
+**MADDIE** (Encouraging): I'm sure you have a lot in common and would make a great kite together!
+**JACKIE** (Annoyed): Are you kidding?! He can barely build a house, let alone a kite!
+**RODDY** (Annoyed): Hey!
+**MADDIE** (Relaxed): They look cute together, don't you think Grandma?
+**GRANDMA** (Annoyed): Sometimes, I think you need thicker glasses than me, sweetie...
+
+### Stray Bones Mystery — outro
+`SP_StrayBonesMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Stray Bones Mystery, eventId=SP_StrayBonesMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**MADDIE**: What's that Goldie's got in her mouth?
+**JACKIE** (Thinking): Looks like a big juicy bone.
+**MADDIE** (Thinking): A b-bone?
+**MADDIE** (Thinking): A HUMAN bone?
+**JACKIE** (Surprised): I-it's HANK!!
+
+### Stray Bones Mystery — part of the event (exact trigger not dumped)
 `SP_StrayBonesMystery2024_LayerDecoration_02_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Stray Bones Mystery, eventId=SP_StrayBonesMystery2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **JACKIE**: Roddy told me you got a new pet, so I had to come see if for myself - I looove dogs!
 **MADDIE** (Surprised): News travels fast, huh? Meet Goldie!
@@ -2640,6 +2802,23 @@ Every story in which Jackie speaks.
 **MADDIE** (Surprised): W-what is she talking about?
 **JACKIE** (Surprised): I think she said there will be a wedding and a funeral.
 
+### The Wedding Mystery — outro
+`SP_WeddingMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=The Wedding Mystery, eventId=SP_WeddingMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**MADDIE** (Encouraging): Well, I would call that a very successful wedding!
+**JACKIE** (Encouraging): You did great out there, baby.
+**RODDY** (Relaxed): Thanks, Jackie.
+**MADDIE**: Well, I uuh... Should start clean-
+**DEB** (Worried): Have any of you seen Hank?!
+**MADDIE** (Relaxed): Yeah, sure! He was just here a minute ago.
+**DEB** (Worried): No, he wasn’t... I’ve looked everywhere! Haaank!
+**MADDIE** (Worried): Deb, Deb... Calm down, I’m sure he’s just inside, doing his hair or lifting weights or something...
+**DEB** (Worried): No, his hair is fine and today is leg day. He isn’t answering his phone; I can’t find him, Maddie! HAANK!
+**JACKIE** (Thinking): Wasn’t.... Wasn’t Grandma the last person to speak to him?
+**RODDY** (Worried): I think so...
+**DEB** (Worried): HAAANK!!! Where are you?!
+
 ### The Wedding Mystery — decoration SP_WeddingMystery2024_Decoration_Slot33
 `SP_WeddingMystery2024_Decoration_Slot33_Dialogue` · seen 25.05.01–26.07.01
 - trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot33, event=The Wedding Mystery, eventKey=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
@@ -2680,7 +2859,7 @@ Every story in which Jackie speaks.
 **JACKIE** (Encouraging): Come on, the yoga class is starting and I want the best spots!
 
 ### Scavenger Hunt: Look into the hand of the statue
-`ScavengerHunt_Driveway` · seen 24.04.01–26.07.01
+`ScavengerHunt_Driveway` · seen 23.09.02–26.07.01
 - trigger: area, area=Scavenger Hunt, areaId=ScavengerHunt, hotspotId=ScavengerHuntMansionDrivewayInspectTincan, phase=task completed, task=Look into the hand of the statue (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Okay, the last clue was a picture of a tin can. Here we are! Hey tin can, what secrets do you hold?
@@ -2694,7 +2873,7 @@ Every story in which Jackie speaks.
 **MADDIE** (Relaxed): Really?! Umm.. Sure! Let's go take a look around the plaza and the old well.
 
 ### Scavenger Hunt: Scrape and search the well stones
-`ScavengerHunt_Oldwell` · seen 24.04.01–26.07.01
+`ScavengerHunt_Oldwell` · seen 23.09.02–26.07.01
 - trigger: area, area=Scavenger Hunt, areaId=ScavengerHunt, hotspotId=ScavengerHuntOldWellCleanWell, phase=task completed, task=Scrape and search the well stones (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): I see something here! There's a letter. I think it's an 'L!'
@@ -2711,21 +2890,21 @@ Every story in which Jackie speaks.
 **JACKIE** (Surprised): Uh, nope, that didn't work. It could be... oh! I know what it is - R5UL4! Ursula!
 
 ### Scavenger Hunt: Dig and search the ground
-`ScavengerHunt_OldwellEmpty` · seen 24.04.01–26.07.01
+`ScavengerHunt_OldwellEmpty` · seen 23.09.02–26.07.01
 - trigger: area, area=Scavenger Hunt, areaId=ScavengerHunt, hotspotId=ScavengerHuntOldWellDigGroundLeft, phase=task completed, task=Dig and search the ground (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): I don't think there is anything here...
 **JACKIE** (Thinking): Let's try a different spot.
 
 ### Scavenger Hunt: Search the pond
-`ScavengerHunt_OldwellEmpty2` · seen 24.04.01–26.07.01
+`ScavengerHunt_OldwellEmpty2` · seen 23.09.02–26.07.01
 - trigger: area, area=Scavenger Hunt, areaId=ScavengerHunt, hotspotId=ScavengerHuntOldWellInspectWater, phase=task completed, task=Search the pond (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Nothing here it seems... except so many knives at the bottom of that pond.
 **JACKIE** (Thinking): That's a bit weird.
 
 ### Scavenger Hunt: Open the safe with the code
-`ScavengerHunt_Poolhouse` · seen 24.04.01–26.07.01
+`ScavengerHunt_Poolhouse` · seen 23.09.02–26.07.01
 - trigger: area, area=Scavenger Hunt, areaId=ScavengerHunt, hotspotId=ScavengerHuntPoolHouseOpenFireplaceSafe, phase=task completed, task=Open the safe with the code (versions 24.04.01–26.07.01)
 
 **JACKIE** (Joyous): Well done Maddie, it opened! And is that a... notebook inside?
@@ -2802,7 +2981,6 @@ Every story in which Jackie speaks.
 
 ### Secretsociety 02.1
 `Secretsociety_02.1` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **JACKIE** (Annoyed): Maddie, you're brilliant! I can finally breathe in here.
 **MADDIE** (Thinking): Yeah, but what on earth are those numbers?
@@ -2864,7 +3042,6 @@ Every story in which Jackie speaks.
 
 ### Secretsociety 06.1
 `Secretsociety_06.1` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **JACKIE** (Doubtful): Are you actually planning to stand on this bridge?
 **MADDIE** (Doubtful): How else am I supposed to fix it?
@@ -2874,7 +3051,6 @@ Every story in which Jackie speaks.
 
 ### Secretsociety 06.2
 `Secretsociety_06.2` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Discouraged): Phew! That was close... Thanks, Jackie.
 **JACKIE**: I might have to add "saving lives" to my professional profile!
@@ -2884,7 +3060,6 @@ Every story in which Jackie speaks.
 
 ### Secretsociety 07
 `Secretsociety_07` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **JACKIE** (Relaxed): That was a solid bridge, Maddie! I'm sorry if I was still hesitant to cross it.
 **MADDIE**: I don't blame you after the events we've seen down here...
@@ -2910,7 +3085,6 @@ Every story in which Jackie speaks.
 
 ### Secretsociety 09
 `Secretsociety_09` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): Look! It's the same numbers that were in the pool!
 **JACKIE** (Thinking): Wow, guess it does have a purpose. Do you think it's some sort of puzzle?
@@ -2919,7 +3093,6 @@ Every story in which Jackie speaks.
 
 ### Secretsociety 10
 `Secretsociety_10` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Frustrated): Hmm, I just have to put the last piece of this puzzle together.
 **MADDIE** (Frustrated): If this goes here, then... Hmmm I almost have it...
@@ -2936,12 +3109,10 @@ Every story in which Jackie speaks.
 
 ### Secretsociety 12
 `Secretsociety_12` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 
 ### Secretsociety 12.1
 `Secretsociety_12.1` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **JACKIE** (Surprised): I thought I heard a faint ringing, and I was right! What's a telephone doing here?
 **MADDIE** (Thinking): Let's find out! It's a bit muffled...
@@ -2960,7 +3131,6 @@ Every story in which Jackie speaks.
 
 ### Secretsociety Intro
 `Secretsociety_Intro` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): Wow! I can’t believe this was under the conservatory all this time!
 **JACKIE** (Thinking): How did you know it was here?
@@ -2977,7 +3147,6 @@ Every story in which Jackie speaks.
 
 ### Secretsociety Unlock
 `Secretsociety_Unlock` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **JACKIE**: Hey, Maddie! There you are! I have something to ask-
 **MADDIE** (Joyous): Jackie! I was right, the very same blue gem I discovered is right here at the conservatory!
@@ -3090,7 +3259,6 @@ Every story in which Jackie speaks.
 
 ### Study01Intro
 `Study01Intro` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **JACKIE** (Surprised): Wow! This place is more trashed than the hallway!
 **JACKIE** (Thinking): Is this an office?
@@ -3099,7 +3267,6 @@ Every story in which Jackie speaks.
 
 ### Study02
 `Study02` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **HOLDEN** (Joyous): A ha! The scene of the crime...
 **JACKIE** (Surprised): Hey, you’re not allowed to be in here!
@@ -3109,7 +3276,6 @@ Every story in which Jackie speaks.
 
 ### Study03
 `Study03` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): Hey, what’s this?!
 **JACKIE**: It looks like a ledger of some sort? But for what?
@@ -3124,7 +3290,6 @@ Every story in which Jackie speaks.
 
 ### Study04
 `Study04` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **JACKIE** (Annoyed): Holden! I thought I told you to back off!
 **MADDIE** (Discouraged): This can’t be right...
@@ -3139,7 +3304,6 @@ Every story in which Jackie speaks.
 
 ### Study05
 `Study05` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE**: Thanks Jackie! It’s kinda cool to have a reporter as a friend.
 **JACKIE** (Encouraging): I’ll be honest though, all this would make for one heck of a story!
@@ -3153,7 +3317,6 @@ Every story in which Jackie speaks.
 
 ### Study06
 `Study06` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): Grandma!
 **JACKIE** (Encouraging): Oh, it’s nothing, Ms. Boulton. We were just looking around an-
@@ -3166,7 +3329,6 @@ Every story in which Jackie speaks.
 
 ### Study07
 `Study07` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Worried): Grandma, why did you do it?
 **GRANDMA** (Frustrated): I did what I had to dearie. For the family. Just like what you’re doing now.
@@ -3180,7 +3342,6 @@ Every story in which Jackie speaks.
 
 ### Study08
 `Study08` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Thinking): She... Wants me to burn it?
 **JACKIE** (Thinking): That’s what she said. I guess she doesn’t want people to know either.
@@ -3194,7 +3355,7 @@ Every story in which Jackie speaks.
 **MADDIE** (Thinking): That’s strange! Some sort of code?
 
 ### Study: Remove jammed globe cover
-`StudyChessGlobe` · seen 24.04.01–26.07.01
+`StudyChessGlobe` · seen 23.09.02–26.07.01
 - trigger: area, area=Study, areaId=Study, hotspotId=StudyRemoveStudyGlobeLidDownD10, phase=task completed, task=Remove jammed globe cover (versions 24.04.01–26.07.01)
 
 **MADDIE**: Ever played chess, Jackie?
@@ -3203,16 +3364,53 @@ Every story in which Jackie speaks.
 **JACKIE** (Doubtful): I guess nothing has changed, huh?
 **MADDIE** (Thinking): I guess not...
 
+### StudyComputer
+`StudyComputer` · seen 23.09.02–26.07.01
+
+**MADDIE** (Surprised): This is an old computer!
+**JACKIE** (Encouraging): Old but reliable! We still use these at work!
+**MADDIE**: You use these ancient machines at the Bugle?
+**JACKIE**: Our funding has never been the greatest, but if it ain’t broke...
+**MADDIE** (Thinking): Hmmm... It needs a password. I wonder if...
+**JACKIE** (Surprised): The code in the ledger is actually the password?
+
+### StudyArea — item discovered: Computer Password
+`StudyComputerPassword_01` · seen 23.09.02–26.07.01
+- trigger: item, event=StudyArea, eventKey=StudyArea, itemKeys=['StudyComputerPassword_01'], items=['Computer Password'], moment=item discovered (versions 23.09.02–26.07.01)
+
+**MADDIE** (Joyous): I did it! I figured it out!
+**MADDIE** (Joyous): The password is... 2manySecrets!
+**MADDIE** (Discouraged): ...
+**JACKIE** (Doubtful): Uhmm... Are you sure?
+**MADDIE** (Thinking): Only one way to find out!
+
+### StudyInsertingPassword
+`StudyInsertingPassword` · seen 23.09.02–26.07.01
+
+**MADDIE** (Joyous): It... It worked! I think I unlocked something!
+**JACKIE** (Doubtful): I can’t believe that was the password...
+**MADDIE** (Surprised): Did you see that? Something moved under the carpet!
+**JACKIE**: Let’s move it out of the way!
+
 ### Study: Polish rundown table and barrel
-`StudyMiniBarrel` · seen 24.04.01–26.07.01
+`StudyMiniBarrel` · seen 23.09.02–26.07.01
 - trigger: area, area=Study, areaId=Study, hotspotId=StudySwaprundowntableandbarrelA9, phase=task completed, task=Polish rundown table and barrel (versions 24.04.01–26.07.01)
 
 **MADDIE** (Joyous): It’s my old piggy bank! Er... Barrel bank?
 **JACKIE** (Encouraging): That’s pretty cute. Is it filled with your family's riches?
 **MADDIE**: No. Just happy memories!
 
+### StudyOutro
+`StudyOutro` · seen 23.09.02–26.07.01
+
+**MADDIE** (Thinking): It’s a trapdoor! Hmm... This lock has a very strange looking key hole, I wonder if-
+**JACKIE** (Surprised): Do you smell that? Is something on fire?!
+**MADDIE** (Surprised): I'm dreadfully sorry to bother you Miss Boulton but...  
+  _earlier:_ ~~Oh no, look outside! I think it’s the lighthouse!~~ (until 25.02.02)
+**MADDIE** (Surprised): It appears that the lighthouse is on fire.
+
 ### Study: Dust the Owl
-`StudyOwlStatue` · seen 24.04.01–26.07.01
+`StudyOwlStatue` · seen 23.09.02–26.07.01
 - trigger: area, area=Study, areaId=Study, hotspotId=StudySwapStudyOwlRunDownFa12, phase=task completed, task=Dust the Owl (versions 24.04.01–26.07.01)
 
 **JACKIE** (Annoyed): Eeh... It’s one of those weird statues that makes it look like it’s constantly staring at you.
@@ -3221,7 +3419,7 @@ Every story in which Jackie speaks.
 **MADDIE** (Encouraging): I can make bad jokes too, you know!
 
 ### Study: Fix and place the records back
-`StudyRecordPlayer` · seen 24.04.01–26.07.01
+`StudyRecordPlayer` · seen 23.09.02–26.07.01
 - trigger: area, area=Study, areaId=Study, hotspotId=StudyPlaceRecordStackBa6, phase=task completed, task=Fix and place the records back (versions 24.04.01–26.07.01)
 
 **JACKIE** (Thinking): Never heard of any of these bands...
@@ -3231,26 +3429,15 @@ Every story in which Jackie speaks.
 **JACKIE** (Surprised): Wow! This is a demo recording as well! How did this end up here?
 
 ### Study: Clean and place Wizard statue
-`StudyWizardStatue` · seen 24.04.01–26.07.01
+`StudyWizardStatue` · seen 23.09.02–26.07.01
 - trigger: area, area=Study, areaId=Study, hotspotId=StudyPlaceStudyBookCaseWizardStatueFa4, phase=task completed, task=Clean and place Wizard statue (versions 24.04.01–26.07.01)
 
 **MADDIE** (Encouraging): Hey, I know this guy!
 **JACKIE** (Surprised): You know a wizard?
 **MADDIE** (Relaxed): Yeah! Heikki, the lighthouse keeper. He’s a wizard... erm... Well... Sort of.
 
-### Studycomputerpassword 01
-`Studycomputerpassword_01` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
-
-**MADDIE** (Joyous): I did it! I figured it out!
-**MADDIE** (Joyous): The password is... 2manySecrets!
-**MADDIE** (Discouraged): ...
-**JACKIE** (Doubtful): Uhmm... Are you sure?
-**MADDIE** (Thinking): Only one way to find out!
-
 ### WalkInCloset 02
-`WalkInCloset_02` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`WalkInCloset_02` · seen 26.07.01–26.07.01
 
 **JACKIE** (Doubtful): Maddie! You never did respond to my text!
 **MADDIE** (Surprised): Huh? Oh, hey Jackie! What are you doing here?
@@ -3263,8 +3450,7 @@ Every story in which Jackie speaks.
 **MADDIE** (Worried): Arthur did ask, but I'm not quite sure. All of it just feels... Wrong.
 
 ### WalkInCloset 03
-`WalkInCloset_03` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`WalkInCloset_03` · seen 26.07.01–26.07.01
 
 **MADDIE** (Encouraging): Well, these clothes are definitely owned by Grandma.
 **JACKIE** (Joyous): Your grandmother does have a particular vintage style!
@@ -3291,8 +3477,7 @@ Every story in which Jackie speaks.
 **JACKIE**: ...Okay, a mysterious click wins. For now. But we are still debriefing Arthur later.
 
 ### WalkInCloset 09
-`WalkInCloset_09` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`WalkInCloset_09` · seen 26.07.01–26.07.01
 
 **MADDIE**: Grandpa Charlie's old wardrobe... Let's see what I can find in here.
 **JACKIE** (Surprised): Tailored suits, cashmere peacoats, even his handkerchiefs were monogrammed. Wow, Maddie, he was into this!

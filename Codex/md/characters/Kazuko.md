@@ -1,18 +1,20 @@
 # Kazuko
 Every story in which Kazuko speaks.
 
-### Bella's Holiday Workshop — item discovered: Recipe Book
-`CBE_HolidayWorkshop2024_BakingSupplies_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_BakingSupplies_05'], items=['Recipe Book'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_XmasPresent_08'], items=['Biggest Present'], moment=item discovered (versions 26.03.01–26.07.01)
+### Bella's Holiday Workshop — item discovered: Old Box
+`CBE_HolidayWorkshop2024_BedAndBrerekfast_01_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_RandomPile_02'], items=['Old Box'], moment=item discovered (versions 25.05.01–25.06.01)
 
-**EMILIO** (Thinking): There’s one more delivery of Bella’s packages on the way.  
-  _earlier:_ ~~How about baking? Is there some treat that makes you feel really happy?~~ (until 25.10.01)
-**RODDY** (Worried): That had better be the last one - we’re running out of space!  
-  _earlier:_ ~~There are these cookies my granny used to make...~~ (until 25.10.01)
-**KAZUKO**: What did they taste like?
-**BELLA** (Relaxed): Oh, they tasted good!
-**KAZUKO** (Thinking): Hmm... I think we'll need a little bit of help from someone who knows a thing or two about baking.
+**KAZUKO**: Greetings, Bella! I hope you've been happy with everything at my Bed & Breakfast.
+**KAZUKO**: It's not very luxurious, but I try to make my guests as comfortable as possible.
+**BELLA**: It's been fabulous, Kazuko. 
+**BELLA** (Thinking): I've enjoyed myself in Hopewell Bay. Even if...
+**KAZUKO** (Worried): What's wrong? You look upset.
+**BELLA** (Thinking): I'm afraid I've made a really bad impression on everyone.
+**BELLA** (Thinking): Meeting new people can be scary, and I wanted everyone to like me, but I've just made a big mess.
+**KAZUKO** (Thinking): Maybe you can return their kindness by gifting them something -- something you've made yourself.
+**BELLA**: Err... I don't know about that...
+**KAZUKO** (Joyous): Don't worry! I will help you. And if your intentions are good, so will the outcome be.
 
 ### Maddie in Japan — item discovered: Postcard from Akihabara
 `CBE_MaddieInJapan2025_AkihabaraPostcard_01_Dialogue` · seen 26.03.01–26.07.01
@@ -23,9 +25,9 @@ Every story in which Kazuko speaks.
 **ANTIQUEDEALER** (Relaxed): Go ahead!
 **KAZUKO**: "The claw machines of Akihabara are great, and I can't wait to see more of Japan. Grandma's postcards have been a good guide."
 
-### CBE MaddieInJapan2025 GettingReady 03 Dialogue
-`CBE_MaddieInJapan2025_GettingReady_03_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+### Maddie in Japan — part of the event (exact trigger not dumped)
+`CBE_MaddieInJapan2025_GettingReady_03_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Maddie in Japan, eventId=CBE_MaddieInJapan2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Maddie in Japan — item discovered: Travel Pillow
@@ -80,9 +82,9 @@ Every story in which Kazuko speaks.
 **GRANDMA** (Charming): Well, she is a bright girl. What does she write?
 **GRANDMA** (Relaxed): Let’s see... “Finally in Shibuya. I've found what I was looking for - complete holiday mood. Grandma’s postcards make sense now.”
 
-### CBE MaddieInJapan2025 Souvenirs 01 Dialogue
-`CBE_MaddieInJapan2025_Souvenirs_01_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+### Maddie in Japan — part of the event (exact trigger not dumped)
+`CBE_MaddieInJapan2025_Souvenirs_01_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Maddie in Japan, eventId=CBE_MaddieInJapan2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Maddie in Japan — item discovered: Chopsticks
@@ -119,6 +121,22 @@ Every story in which Kazuko speaks.
 **MADDIE** (Surprised): Yikes! Errr... who are you?
 **KAZUKO** (Joyous): This is my cockatoo, Sgt. Pepper. I'm afraid he is pretty nosey...
 **SGT. PEPPER** (Charming): Aaaall you need is a... CRRRACKER!
+
+### The Mysterious Maelstrom — outro
+`SP_MysteriousMaelstrom2024_AllRewardsCompleted_Dialogue` · seen 24.07.01–26.07.01
+- trigger: event, event=The Mysterious Maelstrom, eventId=SP_MysteriousMaelstrom2024, eventType=Mystery / Progression, moment=outro (versions 24.07.01–24.11.02)
+
+**KAZUKO** (Discouraged): Oh, Maddie-san...
+**MADDIE** (Surprised): Wh- What is it, Kazuko-san?
+**KAZUKO** (Surprised): Have you not read the latest news? My dear Maddie-san, you should really keep up-to-date.
+**KAZUKO** (Worried): *sigh* There is an article just released about the tin can factory and possibly the truth behind it!
+**MADDIE** (Doubtful): Truth? What truth?
+**KAZUKO** (Annoyed): I knew I should not have sold everyone those can openers...
+**MADDIE** (Worried): Kazuko-san, what is going on?!
+**KAZUKO** (Frustrated): Maddie-san, your ancestor Ignatius Boulton was not a good man! They said that he ran the tin can factory as cover to sell secrets!
+**KAZUKO** (Discouraged): Other people's secrets! That’s what’s in the cans, Maddie-san.
+**KAZUKO** (Worried): Everyone’s secrets... And now they know about it.
+**KAZUKO** (Worried): Other people's secrets! That’s what’s in the cans, Maddie-san.
 
 ### The Mysterious Maelstrom — item discovered: Ofuro Tub
 `SP_MysteriousMaelstrom2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01

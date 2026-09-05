@@ -1,6 +1,26 @@
 # Amy's Mystery
 
 
+### Amy's Mystery — outro
+`SP_AmyTheCat2023_AllRewardsCompleted_Dialogue` · seen 23.09.02–26.07.01
+- trigger: event, event=Amy's Mystery, eventId=SP_AmyTheCat2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**MADDIE**: <i>*knock knock*</i>
+**MADDIE**: Hello, can I help you?
+**EMILIO**: Hi, I’m Emilio Costa, a marine biologist. You called about some expatriated fish?
+**MADDIE** (Surprised): ...
+**EMILIO** (Encouraging): Ma’am?
+**MADDIE** (Relaxed): Oh, oh yes! Of course, let me show you. There’s been this cat and she’s been-
+**EMILIO** (Surprised): Amy!
+**AMY** (Relaxed): Meow! Purr... Purr...
+**MADDIE** (Encouraging): Ah, she's <b>your</b> cat! That must explain the fish then!
+**EMILIO**: Here they are! Amy... Have you been bringing this beautiful lady my fish?
+**MADDIE** (Charming): Oh! Erhm...
+**EMILIO** (Encouraging): My deepest apologies. She tends to do this with people she likes. You must be a good person at heart.
+**MADDIE** (Relaxed): Oh, you know! It’s nothing. Just happy she’s found her family again.
+**EMILIO**: Thank you, Miss...?
+**MADDIE** (Charming): Maddie! My name is... Maddie.
+
 ### Amy's Mystery — decoration SP_AmyTheCat2023_Decoration_Slot25
 `SP_AmyTheCat2023_Decoration_Slot25_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot25, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)

@@ -87,6 +87,13 @@
     "diff": []
    },
    {
+    "a": "CBE_Easter2023_DecoratedTree",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
     "a": "CBE_Easter2023_EasterEgg",
     "b": null,
     "verdict": "dropped in CBE_Easter2025",
@@ -144,6 +151,13 @@
    },
    {
     "a": "CBE_Easter2023_LeftStoneFence",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_MasonPlaceholder",
     "b": null,
     "verdict": "dropped in CBE_Easter2025",
     "similarity": null,
@@ -228,20 +242,6 @@
    },
    {
     "a": "CBE_Easter2023_UltimateEggTree",
-    "b": null,
-    "verdict": "dropped in CBE_Easter2025",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "CBE_Easter2023_MasonPlaceholder",
-    "b": null,
-    "verdict": "dropped in CBE_Easter2025",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "CBE_Easter2023_DecoratedTree",
     "b": null,
     "verdict": "dropped in CBE_Easter2025",
     "similarity": null,
@@ -787,14 +787,14 @@
    },
    {
     "a": null,
-    "b": "CBE_TheGreatEscapeB_Intro_Dialogue",
+    "b": "CBE_TheGreatEscapeB_CleanerCart1_Dialogue",
     "verdict": "new in CBE_TheGreatEscapeB",
     "similarity": null,
     "diff": []
    },
    {
     "a": null,
-    "b": "CBE_TheGreatEscapeB_CleanerCart1_Dialogue",
+    "b": "CBE_TheGreatEscapeB_Intro_Dialogue",
     "verdict": "new in CBE_TheGreatEscapeB",
     "similarity": null,
     "diff": []
@@ -826,6 +826,13 @@
    }
   ],
   "pairs": [
+   {
+    "a": "CBE_VeilOfFate2023_ActiveSnowglobe_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
    {
     "a": "CBE_VeilOfFate2023_ArmCast_Dialogue",
     "b": null,
@@ -995,9 +1002,9 @@
     "diff": []
    },
    {
-    "a": "CBE_VeilOfFate2023_ActiveSnowglobe_Dialogue",
-    "b": null,
-    "verdict": "dropped in CBE_VeilOfFate2024",
+    "a": null,
+    "b": "CBE_VeilOfFate2024_ActiveSnowglobe_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
     "similarity": null,
     "diff": []
    },
@@ -1161,13 +1168,6 @@
     "verdict": "new in CBE_VeilOfFate2024",
     "similarity": null,
     "diff": []
-   },
-   {
-    "a": null,
-    "b": "CBE_VeilOfFate2024_ActiveSnowglobe_Dialogue",
-    "verdict": "new in CBE_VeilOfFate2024",
-    "similarity": null,
-    "diff": []
    }
   ],
   "note": "sequel — 2023 (Grandma and Lady Voyance, the snow globe vibrating) → 2024 (Maddie alone again after Emilio left, consulting the veil). Continuation of Maddie's love-life arc; nothing reused."
@@ -1176,14 +1176,14 @@
   "family": "LC_Halloween",
   "verdict": "rewritten",
   "counts": {
-   "dropped": 16,
+   "dropped": 15,
    "new": 2
   },
   "runs": [
    {
     "eventKey": "LC_Halloween",
     "name": "Lucky Catch",
-    "stories": 16,
+    "stories": 15,
     "first": "24.09.02",
     "last": "26.07.01"
    },
@@ -1302,13 +1302,6 @@
     "diff": []
    },
    {
-    "a": "LC_Halloween_CommonCrimson-LippedBatfish_Dialogue",
-    "b": null,
-    "verdict": "dropped in LC_Halloween2025",
-    "similarity": null,
-    "diff": []
-   },
-   {
     "a": null,
     "b": "LC_Halloween2025_Intro_Dialogue",
     "verdict": "new in LC_Halloween2025",
@@ -1344,7 +1337,7 @@
     "eventKey": "LC_Summer2026",
     "name": null,
     "stories": 5,
-    "first": "26.04.01",
+    "first": "26.07.01",
     "last": "26.07.01"
    }
   ],
@@ -1497,14 +1490,7 @@
     "diff": []
    },
    {
-    "a": "LC_Summer_UltimateMakoShark_Dialogue",
-    "b": null,
-    "verdict": "dropped in LC_Summer2026",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LC_Summer_VeryRareWhiteMarlin_Dialogue",
+    "a": "LC_Summer_MakoShark_Dialogue",
     "b": null,
     "verdict": "dropped in LC_Summer2026",
     "similarity": null,
@@ -1518,14 +1504,21 @@
     "diff": []
    },
    {
-    "a": "LC_Summer_MakoShark_Dialogue",
+    "a": "LC_Summer_Snook_Dialogue",
     "b": null,
     "verdict": "dropped in LC_Summer2026",
     "similarity": null,
     "diff": []
    },
    {
-    "a": "LC_Summer_Snook_Dialogue",
+    "a": "LC_Summer_UltimateMakoShark_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_VeryRareWhiteMarlin_Dialogue",
     "b": null,
     "verdict": "dropped in LC_Summer2026",
     "similarity": null,
@@ -1547,14 +1540,7 @@
    },
    {
     "a": null,
-    "b": "LC_Summer2026_FishingToolContainers_Dialogue",
-    "verdict": "new in LC_Summer2026",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LC_Summer2026_FishingRodCommon_Dialogue",
+    "b": "LC_Summer2026_CompetitionFishingRodRare_Dialogue",
     "verdict": "new in LC_Summer2026",
     "similarity": null,
     "diff": []
@@ -1568,14 +1554,21 @@
    },
    {
     "a": null,
-    "b": "LC_Summer2026_GoldenFishingRodEpic_Dialogue",
+    "b": "LC_Summer2026_FishingRodCommon_Dialogue",
     "verdict": "new in LC_Summer2026",
     "similarity": null,
     "diff": []
    },
    {
     "a": null,
-    "b": "LC_Summer2026_CompetitionFishingRodRare_Dialogue",
+    "b": "LC_Summer2026_FishingToolContainers_Dialogue",
+    "verdict": "new in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LC_Summer2026_GoldenFishingRodEpic_Dialogue",
     "verdict": "new in LC_Summer2026",
     "similarity": null,
     "diff": []
@@ -1686,6 +1679,13 @@
     "diff": []
    },
    {
+    "a": "LDE_GreenAcresQuest2024_FlowerCompost_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
     "a": "LDE_GreenAcresQuest2024_Friendship_08_Dialogue",
     "b": null,
     "verdict": "dropped in LDE_GreenAcresQuest",
@@ -1708,6 +1708,13 @@
    },
    {
     "a": "LDE_GreenAcresQuest2024_GreenhouseChilis_06_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_Intro_Dialogue",
     "b": null,
     "verdict": "dropped in LDE_GreenAcresQuest",
     "similarity": null,
@@ -1742,7 +1749,49 @@
     "diff": []
    },
    {
+    "a": "LDE_GreenAcresQuest2024_TA1_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_TA4_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_TA7_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_TC1_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_TC3_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
     "a": "LDE_GreenAcresQuest2024_UncommonFlowerA_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_VeggieCompost_Dialogue",
     "b": null,
     "verdict": "dropped in LDE_GreenAcresQuest",
     "similarity": null,
@@ -1890,62 +1939,6 @@
    },
    {
     "a": "LDE_GreenAcresQuest2024_v2_Veggies_08_Dialogue",
-    "b": null,
-    "verdict": "dropped in LDE_GreenAcresQuest",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LDE_GreenAcresQuest2024_Intro_Dialogue",
-    "b": null,
-    "verdict": "dropped in LDE_GreenAcresQuest",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LDE_GreenAcresQuest2024_TA1_Dialogue",
-    "b": null,
-    "verdict": "dropped in LDE_GreenAcresQuest",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LDE_GreenAcresQuest2024_TA4_Dialogue",
-    "b": null,
-    "verdict": "dropped in LDE_GreenAcresQuest",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LDE_GreenAcresQuest2024_TA7_Dialogue",
-    "b": null,
-    "verdict": "dropped in LDE_GreenAcresQuest",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LDE_GreenAcresQuest2024_TC1_Dialogue",
-    "b": null,
-    "verdict": "dropped in LDE_GreenAcresQuest",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LDE_GreenAcresQuest2024_TC3_Dialogue",
-    "b": null,
-    "verdict": "dropped in LDE_GreenAcresQuest",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LDE_GreenAcresQuest2024_FlowerCompost_Dialogue",
-    "b": null,
-    "verdict": "dropped in LDE_GreenAcresQuest",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LDE_GreenAcresQuest2024_VeggieCompost_Dialogue",
     "b": null,
     "verdict": "dropped in LDE_GreenAcresQuest",
     "similarity": null,
@@ -2287,7 +2280,14 @@
     "diff": []
    },
    {
-    "a": "LDE_Hopeberry2024_Vinegar_05_Dialogue",
+    "a": "LDE_Hopeberry2024_TA1_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_TA3_Dialogue",
     "b": null,
     "verdict": "dropped in LDE_Hopeberry2025",
     "similarity": null,
@@ -2315,14 +2315,7 @@
     "diff": []
    },
    {
-    "a": "LDE_Hopeberry2024_TA1_Dialogue",
-    "b": null,
-    "verdict": "dropped in LDE_Hopeberry2025",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LDE_Hopeberry2024_TA3_Dialogue",
+    "a": "LDE_Hopeberry2024_Vinegar_05_Dialogue",
     "b": null,
     "verdict": "dropped in LDE_Hopeberry2025",
     "similarity": null,
@@ -2407,7 +2400,21 @@
    },
    {
     "a": null,
+    "b": "LDE_Hopeberry2025_GlassSculptures11_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
     "b": "LDE_Hopeberry2025_HarvestingTools5_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_HarvestingTools6_Dialogue",
     "verdict": "new in LDE_Hopeberry2025",
     "similarity": null,
     "diff": []
@@ -2422,6 +2429,13 @@
    {
     "a": null,
     "b": "LDE_Hopeberry2025_Hopeberry4_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_Hopeberry5_Dialogue",
     "verdict": "new in LDE_Hopeberry2025",
     "similarity": null,
     "diff": []
@@ -2463,41 +2477,6 @@
    },
    {
     "a": null,
-    "b": "LDE_Hopeberry2025_Vinegar5_Dialogue",
-    "verdict": "new in LDE_Hopeberry2025",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LDE_Hopeberry2025_HarvestingTools6_Dialogue",
-    "verdict": "new in LDE_Hopeberry2025",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LDE_Hopeberry2025_Hopeberry5_Dialogue",
-    "verdict": "new in LDE_Hopeberry2025",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LDE_Hopeberry2025_Vinegar6_Dialogue",
-    "verdict": "new in LDE_Hopeberry2025",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LDE_Hopeberry2025_GlassSculptures11_Dialogue",
-    "verdict": "new in LDE_Hopeberry2025",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
     "b": "LDE_Hopeberry2025_TA1_Dialogue",
     "verdict": "new in LDE_Hopeberry2025",
     "similarity": null,
@@ -2506,6 +2485,20 @@
    {
     "a": null,
     "b": "LDE_Hopeberry2025_TC1_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_Vinegar5_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_Vinegar6_Dialogue",
     "verdict": "new in LDE_Hopeberry2025",
     "similarity": null,
     "diff": []
@@ -2567,6 +2560,13 @@
     "diff": []
    },
    {
+    "a": "LDE_PicnicConfusion2023_AllRewardsCompleted_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
     "a": "LDE_PicnicConfusion2023_Boardintro_Dialogue",
     "b": null,
     "verdict": "dropped in LDE_PicnicConfusion2024",
@@ -2596,13 +2596,6 @@
    },
    {
     "a": "LDE_PicnicConfusion2023_Firewoodchain_Dialogue",
-    "b": null,
-    "verdict": "dropped in LDE_PicnicConfusion2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LDE_PicnicConfusion2023_AllRewardsCompleted_Dialogue",
     "b": null,
     "verdict": "dropped in LDE_PicnicConfusion2024",
     "similarity": null,
@@ -2693,14 +2686,14 @@
     "diff": []
    },
    {
-    "a": "LDE_PicnicConfusion2023_Layerdecoration_15_Dialogue",
+    "a": "LDE_PicnicConfusion2023_Layerdecoration_13_Dialogue",
     "b": null,
     "verdict": "dropped in LDE_PicnicConfusion2024",
     "similarity": null,
     "diff": []
    },
    {
-    "a": "LDE_PicnicConfusion2023_Layerdecoration_13_Dialogue",
+    "a": "LDE_PicnicConfusion2023_Layerdecoration_15_Dialogue",
     "b": null,
     "verdict": "dropped in LDE_PicnicConfusion2024",
     "similarity": null,
@@ -2771,77 +2764,7 @@
    },
    {
     "a": null,
-    "b": "LDE_PicnicConfusion2024_TC2_Dialogue",
-    "verdict": "new in LDE_PicnicConfusion2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LDE_PicnicConfusion2024_TB1_Dialogue",
-    "verdict": "new in LDE_PicnicConfusion2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LDE_PicnicConfusion2024_TA2_Dialogue",
-    "verdict": "new in LDE_PicnicConfusion2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LDE_PicnicConfusion2024_TA6_Dialogue",
-    "verdict": "new in LDE_PicnicConfusion2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LDE_PicnicConfusion2024_TC3_Dialogue",
-    "verdict": "new in LDE_PicnicConfusion2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LDE_PicnicConfusion2024_TB3_Dialogue",
-    "verdict": "new in LDE_PicnicConfusion2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LDE_PicnicConfusion2024_TB2_Dialogue",
-    "verdict": "new in LDE_PicnicConfusion2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LDE_PicnicConfusion2024_TB4_Dialogue",
-    "verdict": "new in LDE_PicnicConfusion2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LDE_PicnicConfusion2024_TA4_Dialogue",
-    "verdict": "new in LDE_PicnicConfusion2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LDE_PicnicConfusion2024_TA3_Dialogue",
-    "verdict": "new in LDE_PicnicConfusion2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LDE_PicnicConfusion2024_TA7_Dialogue",
+    "b": "LDE_PicnicConfusion2024_TA0_Dialogue",
     "verdict": "new in LDE_PicnicConfusion2024",
     "similarity": null,
     "diff": []
@@ -2855,7 +2778,21 @@
    },
    {
     "a": null,
-    "b": "LDE_PicnicConfusion2024_TB5_Dialogue",
+    "b": "LDE_PicnicConfusion2024_TA2_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TA3_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TA4_Dialogue",
     "verdict": "new in LDE_PicnicConfusion2024",
     "similarity": null,
     "diff": []
@@ -2869,7 +2806,63 @@
    },
    {
     "a": null,
-    "b": "LDE_PicnicConfusion2024_TA0_Dialogue",
+    "b": "LDE_PicnicConfusion2024_TA6_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TA7_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TB1_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TB2_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TB3_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TB4_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TB5_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TC2_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TC3_Dialogue",
     "verdict": "new in LDE_PicnicConfusion2024",
     "similarity": null,
     "diff": []
@@ -2938,6 +2931,55 @@
    },
    {
     "a": "LDE_PiratesOfHopewellBay2023_EventIntro_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_LayerDecoration_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_LayerDecoration_03_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_LayerDecoration_05_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_LayerDecoration_07_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_LayerDecoration_10_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_LayerDecoration_13_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_LayerDecoration_15_Dialogue",
     "b": null,
     "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
     "similarity": null,
@@ -3098,55 +3140,6 @@
     "diff": []
    },
    {
-    "a": "LDE_PiratesOfHopewellBay2023_LayerDecoration_01_Dialogue",
-    "b": null,
-    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LDE_PiratesOfHopewellBay2023_LayerDecoration_03_Dialogue",
-    "b": null,
-    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LDE_PiratesOfHopewellBay2023_LayerDecoration_05_Dialogue",
-    "b": null,
-    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LDE_PiratesOfHopewellBay2023_LayerDecoration_07_Dialogue",
-    "b": null,
-    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LDE_PiratesOfHopewellBay2023_LayerDecoration_10_Dialogue",
-    "b": null,
-    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LDE_PiratesOfHopewellBay2023_LayerDecoration_13_Dialogue",
-    "b": null,
-    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LDE_PiratesOfHopewellBay2023_LayerDecoration_15_Dialogue",
-    "b": null,
-    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
     "a": null,
     "b": "LDE_PiratesOfHopewellBay2024_AntiqueFurniture_10_Dialogue",
     "verdict": "new in LDE_PiratesOfHopewellBay2024",
@@ -3191,6 +3184,55 @@
    {
     "a": null,
     "b": "LDE_PiratesOfHopewellBay2024_EventIntro_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_LayerDecoration_01_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_LayerDecoration_03_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_LayerDecoration_05_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_LayerDecoration_07_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_LayerDecoration_10_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_LayerDecoration_13_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_LayerDecoration_15_Dialogue",
     "verdict": "new in LDE_PiratesOfHopewellBay2024",
     "similarity": null,
     "diff": []
@@ -3295,55 +3337,6 @@
    },
    {
     "a": null,
-    "b": "LDE_PiratesOfHopewellBay2024_LayerDecoration_10_Dialogue",
-    "verdict": "new in LDE_PiratesOfHopewellBay2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LDE_PiratesOfHopewellBay2024_LayerDecoration_01_Dialogue",
-    "verdict": "new in LDE_PiratesOfHopewellBay2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LDE_PiratesOfHopewellBay2024_LayerDecoration_15_Dialogue",
-    "verdict": "new in LDE_PiratesOfHopewellBay2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LDE_PiratesOfHopewellBay2024_LayerDecoration_13_Dialogue",
-    "verdict": "new in LDE_PiratesOfHopewellBay2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LDE_PiratesOfHopewellBay2024_LayerDecoration_03_Dialogue",
-    "verdict": "new in LDE_PiratesOfHopewellBay2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LDE_PiratesOfHopewellBay2024_LayerDecoration_07_Dialogue",
-    "verdict": "new in LDE_PiratesOfHopewellBay2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LDE_PiratesOfHopewellBay2024_LayerDecoration_05_Dialogue",
-    "verdict": "new in LDE_PiratesOfHopewellBay2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
     "b": "LDE_PiratesOfHopewellBay2024__Dialogue",
     "verdict": "new in LDE_PiratesOfHopewellBay2024",
     "similarity": null,
@@ -3356,14 +3349,14 @@
   "family": "LS_Summer",
   "verdict": "rewritten",
   "counts": {
-   "dropped": 8,
+   "dropped": 1,
    "new": 9
   },
   "runs": [
    {
     "eventKey": "LS_Summer",
     "name": "Summer Lucky Snap",
-    "stories": 8,
+    "stories": 1,
     "first": "25.05.01",
     "last": "26.07.01"
    },
@@ -3378,55 +3371,6 @@
   "pairs": [
    {
     "a": "LS_Summer_Intro_Dialogue",
-    "b": null,
-    "verdict": "dropped in LS_Summer2026",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LS_Summer_HerringGull_Dialogue",
-    "b": null,
-    "verdict": "dropped in LS_Summer2026",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LS_Summer_BlueJay_Dialogue",
-    "b": null,
-    "verdict": "dropped in LS_Summer2026",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LS_Summer_PileatedWoodpecker_Dialogue",
-    "b": null,
-    "verdict": "dropped in LS_Summer2026",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LS_Summer_PeregrineFalcon_Dialogue",
-    "b": null,
-    "verdict": "dropped in LS_Summer2026",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LS_Summer_Long-EaredOwl_Dialogue",
-    "b": null,
-    "verdict": "dropped in LS_Summer2026",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LS_Summer_Kingfisher_Dialogue",
-    "b": null,
-    "verdict": "dropped in LS_Summer2026",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": "LS_Summer_Crescent-CapedLophora_Dialogue",
     "b": null,
     "verdict": "dropped in LS_Summer2026",
     "similarity": null,
@@ -3500,67 +3444,60 @@
  },
  {
   "family": "LS_Winter",
-  "verdict": "rewritten",
+  "verdict": "identical",
   "counts": {
-   "dropped": 1,
-   "new": 5
+   "identical": 1,
+   "dropped": 4
   },
   "runs": [
-   {
-    "eventKey": "LS_Winter",
-    "name": "Winter Lucky Snap",
-    "stories": 1,
-    "first": null,
-    "last": null
-   },
    {
     "eventKey": "LS_Winter2024",
     "name": "Lucky Snap",
     "stories": 5,
     "first": "24.11.02",
     "last": "26.07.01"
+   },
+   {
+    "eventKey": "LS_Winter",
+    "name": "Winter Lucky Snap",
+    "stories": 1,
+    "first": "26.07.01",
+    "last": "26.07.01"
    }
   ],
   "pairs": [
    {
-    "a": "LS_Winter_Intro_Dialogue",
+    "a": "LS_Winter2024_Intro_Dialogue",
+    "b": "LS_Winter_Intro_Dialogue",
+    "verdict": "identical",
+    "similarity": 1.0,
+    "diff": []
+   },
+   {
+    "a": "LS_Winter2024_Common_Mallard_01_Dialogue",
     "b": null,
-    "verdict": "dropped in LS_Winter2024",
+    "verdict": "dropped in LS_Winter",
     "similarity": null,
     "diff": []
    },
    {
-    "a": null,
-    "b": "LS_Winter2024_Common_Mallard_01_Dialogue",
-    "verdict": "new in LS_Winter2024",
+    "a": "LS_Winter2024_Epic_LongtailedTit_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in LS_Winter",
     "similarity": null,
     "diff": []
    },
    {
-    "a": null,
-    "b": "LS_Winter2024_Epic_LongtailedTit_01_Dialogue",
-    "verdict": "new in LS_Winter2024",
+    "a": "LS_Winter2024_Legendary_SnowyOwl_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in LS_Winter",
     "similarity": null,
     "diff": []
    },
    {
-    "a": null,
-    "b": "LS_Winter2024_Intro_Dialogue",
-    "verdict": "new in LS_Winter2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LS_Winter2024_Legendary_SnowyOwl_01_Dialogue",
-    "verdict": "new in LS_Winter2024",
-    "similarity": null,
-    "diff": []
-   },
-   {
-    "a": null,
-    "b": "LS_Winter2024_VeryRare_Cardinal_01_Dialogue",
-    "verdict": "new in LS_Winter2024",
+    "a": "LS_Winter2024_VeryRare_Cardinal_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in LS_Winter",
     "similarity": null,
     "diff": []
    }

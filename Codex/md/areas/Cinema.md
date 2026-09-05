@@ -11,6 +11,19 @@
 **MADDIE** (Discouraged): Okay... Get a grip, Maddie. You need to talk to them and get to the bottom of things. 
 **MADDIE** (Discouraged): For now, I need a break. And restoring the cinema is just what the doctor ordered!
 
+### Cinema: Hang photo
+`Cinema12` · seen 25.02.01–26.07.01
+- trigger: area, area=Cinema, areaId=Cinema, hotspotId=CinemaPlacePhotoSecretSocietyIa15, phase=task completed, task=Hang photo (versions 25.02.01–25.04.03)
+- trigger: area, area=Cinema, areaId=Cinema, hotspotId=CinemaPlacePhotoSecretSocietyIa15, phase=task appears, task=Hang photo (versions 25.04.02–25.04.03)
+
+**MADDIE**: This place is scattered with items from the Curiosity Fellowship!
+**MADDIE**: There's the same masks and even some theater costumes!
+**MADDIE**: Oh, look! A photo!
+**MADDIE**: I was hoping to get some answers...
+**MADDIE**: But, everyone in it is wearing these masks.... Creepy.
+**MADDIE**: These must be super important Fellowship members.
+**MADDIE**: They really take secrecy to a whole new level, don't they?
+
 ### Cinema: How'd they reach the chandelier? It's ruined!
 `CinemaCharacterTask02` · seen 25.02.01–26.07.01
 - trigger: area, area=Cinema, areaId=Cinema, hotspotId=CinemaCharacterTask5, phase=task appears, task=How'd they reach the chandelier? It's ruined! (versions 25.02.01–26.07.01)

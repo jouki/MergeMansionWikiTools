@@ -1,41 +1,41 @@
 # Lt. Johnson
 Every story in which Lt. Johnson speaks.
 
-### SBE Jailbreak GuardIntro
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_GuardIntro` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **LT. JOHNSON**: You don’t scare me, Grandma! You may be popular amongst the other inmates, but that means nothing to me.
 **LT. JOHNSON**: In here, I am the law.
 **GRANDMA**: We shall see about that, dearie.
 
-### SBE Jailbreak GuardOutro
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_GuardOutro` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **LT. JOHNSON**: Alright, alright! You win Grandma! I don’t know how you learned all that about me, but I can’t let people know. I’ll lose my job!
 **GRANDMA**: Then you won’t mind helping me take down the Warden.
 **LT. JOHNSON**: You want me to what?!
 
-### SBE Jailbreak GuardTaskA
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_GuardTaskA` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Lt. Johnson... You seem to be doing well for yourself.
 **LT. JOHNSON**: And what would YOU know about that?
 **GRANDMA**: You’d be surprised...
 
-### SBE Jailbreak GuardTaskB
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_GuardTaskB` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **LT. JOHNSON**: Okay, I’ll bite. What do you think you know?
 **GRANDMA**: Oh, nothing much... Only that you “may” have bought a sailboat and “may” have forgotten to pay your taxes...
 **LT. JOHNSON**: Wh- What?!
 
-### SBE Jailbreak WardenOutro
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_WardenOutro` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **WARDEN DECKER**: Wha- What’s that?!
 **GRANDMA**: I believe you know what it is, dearie...

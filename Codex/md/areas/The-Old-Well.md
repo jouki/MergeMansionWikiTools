@@ -2,13 +2,13 @@
 
 
 ### The Old Well: OldWellUnlock
-`OldWellUnlock` · seen 24.04.01–26.07.01
+`OldWellUnlock` · seen 23.09.02–26.07.01
 - trigger: area, area=The Old Well, areaId=OldWell, hotspotId=OldWellUnlockOldWell, phase=task appears (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Looks like I should investigate this area next after I'm ready with the Garage.
 
 ### The Old Well: Remove foliage
-`OldWell_Goldwatch_Intro` · seen 24.04.01–26.07.01
+`OldWell_Goldwatch_Intro` · seen 23.09.02–26.07.01
 - trigger: area, area=The Old Well, areaId=OldWell, hotspotId=OldWellPathwayGateRemoveFoliage, phase=task completed, task=Remove foliage (versions 24.04.01–26.07.01)
 
 **RODDY**: Hey Maddie, I got your message. What can I do?

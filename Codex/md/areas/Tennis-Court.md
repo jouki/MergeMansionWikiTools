@@ -2,7 +2,7 @@
 
 
 ### Tennis Court: Remove weeds
-`TennisCourtDialogueA` · seen 24.04.01–26.07.01
+`TennisCourtDialogueA` · seen 23.09.02–26.07.01
 - trigger: area, area=Tennis Court, areaId=TennisCourt, hotspotId=TennisCourtTopRightWallRemoveWeedsC11, phase=task completed, task=Remove weeds (versions 24.04.01–26.07.01)
 
 **MADDIE**: Hi, Julius! What brings you round?  
@@ -17,7 +17,7 @@
 **MADDIE** (Thinking): Hmmm, that was strange! Grandma lied about tennis, and Julius ran away. I'm going to call Deb and find out more!
 
 ### Tennis Court: Wash back wall
-`TennisCourtDialogueB` · seen 24.04.01–26.07.01
+`TennisCourtDialogueB` · seen 23.09.02–26.07.01
 - trigger: area, area=Tennis Court, areaId=TennisCourt, hotspotId=TennisCourtTopCornerBackWallWashBackWallG1, phase=task completed, task=Wash back wall (versions 24.04.01–26.07.01)
 
 **MADDIE**: Great Aunt Deb! It's so good to see you. Thanks for coming over.
@@ -31,7 +31,7 @@
 **DEB**: Well, I don't want to say too much, but I'm sure it's here. You should look for it - see if you can find <b>my</b> missing treasure!
 
 ### Tennis Court: Remove old court markings
-`TennisCourtDialogueC` · seen 24.04.01–26.07.01
+`TennisCourtDialogueC` · seen 23.09.02–26.07.01
 - trigger: area, area=Tennis Court, areaId=TennisCourt, hotspotId=TennisCourtSurfaceRemoveCourtMarkingsJ6, phase=task completed, task=Remove old court markings (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Grandma! And Great Aunt Deb! I didn't expect to see both of you.
@@ -47,7 +47,7 @@
 **MADDIE**: How can I say no to that?
 
 ### Tennis Court: Place tennis trophy
-`TennisCourtDialogueD` · seen 24.04.01–26.07.01
+`TennisCourtDialogueD` · seen 23.09.02–26.07.01
 - trigger: area, area=Tennis Court, areaId=TennisCourt, hotspotId=TennisCourtClubHousePlaceTennisTrophyH13, phase=task completed, task=Place tennis trophy (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): I found something! Is this it - the family treasure?! A dirty old trophy with a note wrapped round it?
@@ -63,7 +63,7 @@
 **MADDIE**: But now to the Lighthouse! Since no-one is helping me to find it I'll just go to the shore and look for it myself!
 
 ### Tennis Court: Remove dirt
-`TennisCourtIntro` · seen 24.04.01–26.07.01
+`TennisCourtIntro` · seen 23.09.02–26.07.01
 - trigger: area, area=Tennis Court, areaId=TennisCourt, hotspotId=TennisCourtEntryRemoveDirtA3, phase=task completed, task=Remove dirt (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Wow! I had no idea there was a whole tennis court here.

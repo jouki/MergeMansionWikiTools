@@ -2,7 +2,7 @@
 Every story in which Ash speaks.
 
 ### Bathroom: Assisting Ash
-`AshCharacterFinalTask` · seen 24.04.01–26.07.01
+`AshCharacterFinalTask` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomCharacterTaskH20, phase=task completed, task=Assisting Ash (versions 24.04.01–26.07.01)
 
 **ASH** (Encouraging): Thanks for all the hard work, Maddie!
@@ -10,7 +10,7 @@ Every story in which Ash speaks.
 **MADDIE** (Thinking): Sure thing! There were some strange requests though...
 
 ### Bathroom: Assisting Ash
-`AshCharacterTasks1` · seen 24.04.01–26.07.01
+`AshCharacterTasks1` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomCharacterTaskH5, phase=task completed, task=Assisting Ash (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): What do you need wax for?
@@ -18,7 +18,7 @@ Every story in which Ash speaks.
 **MADDIE**: Oh right, makes sense!
 
 ### Bathroom: Assisting Ash
-`AshCharacterTasks2` · seen 24.04.01–26.07.01
+`AshCharacterTasks2` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomCharacterTaskH9, phase=task completed, task=Assisting Ash (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): A tape measure? Are you installing something?
@@ -27,7 +27,7 @@ Every story in which Ash speaks.
 **MADDIE**: Oh, sounds nice!
 
 ### Bathroom: Assisting Ash
-`AshCharacterTasksIntro` · seen 24.04.01–26.07.01
+`AshCharacterTasksIntro` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomCharacterTaskH1, phase=task completed, task=Assisting Ash (versions 24.04.01–26.07.01)
 
 **ASH** (Worried): Maddie, I have a bit of a favor to ask you. 
@@ -41,7 +41,6 @@ Every story in which Ash speaks.
 
 ### Bathroom02
 `Bathroom02` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **ASH** (Surprised): Boy, you weren't kiddin'! You got a gusher here!
 **MADDIE** (Worried): I know! You must be Ash. Is there anything you can do?
@@ -51,7 +50,6 @@ Every story in which Ash speaks.
 
 ### Bathroom03
 `Bathroom03` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **ASH** (Joyous): So! Where were we?
 **MADDIE**: Are you sure you're alright? That fall looked painful. And your leg...
@@ -61,7 +59,6 @@ Every story in which Ash speaks.
 
 ### Bathroom04
 `Bathroom04` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Doubtful): Oh no! Another leak! But, explain to me again why I'm doing all the work?
 **ASH** (Annoyed): It's like this, see... I offer a different type of service. While other plumbers FIX your problem, I do something far more valuable. 
@@ -72,7 +69,7 @@ Every story in which Ash speaks.
 **ASH**: Ha! Just kidding! Pass me the wrench, will ya? Let me help you out a bit...
 
 ### Bathroom: Fix the leak
-`Bathroom05` · seen 24.04.01–26.07.01
+`Bathroom05` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomSwapLeakBi4, phase=task completed, task=Fix the leak (versions 24.04.01–26.07.01)
 
 **ASH**: You know... I'm a HUGE fan of Skatie Katie!
@@ -83,7 +80,7 @@ Every story in which Ash speaks.
 **ASH** (Surprised): REALLY? That would be so cool!
 
 ### Bathroom: Dry the water
-`Bathroom06` · seen 24.04.01–26.07.01
+`Bathroom06` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomRemoveWaterBj1, phase=task completed, task=Dry the water (versions 24.04.01–26.07.01)
 
 **MADDIE**: *Ring Ring*
@@ -98,7 +95,7 @@ Every story in which Ash speaks.
 **ASH** (Surprised): Victoria? Oh, man, never get on her wrong side!
 
 ### Bathroom: Screw the floor planks back
-`Bathroom07` · seen 24.04.01–26.07.01
+`Bathroom07` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomPlaceBathroomFloorPlanks10C3, phase=task completed, task=Screw the floor planks back (versions 24.04.01–26.07.01)
 
 **MADDIE**: What do you know about Victoria?
@@ -114,7 +111,7 @@ Every story in which Ash speaks.
 **MADDIE** (Surprised): Then what happened?!
 
 ### Bathroom: Add the floor tiles back
-`Bathroom08` · seen 24.04.01–26.07.01
+`Bathroom08` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomPlaceFloorTilesC5, phase=task completed, task=Add the floor tiles back (versions 24.04.01–26.07.01)
 
 **MADDIE**: Did the fight get worse?
@@ -126,7 +123,7 @@ Every story in which Ash speaks.
 **MADDIE** (Thinking): Why would the mayor and Victoria have plans for our mansion?!
 
 ### Bathroom: Plant a new plant
-`Bathroom09` · seen 24.04.01–26.07.01
+`Bathroom09` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomPlaceBRFernLargeD5, phase=task completed, task=Plant a new plant (versions 24.04.01–26.07.01)
 
 **ASH**: Alright! Almost done. Just one last thing left!
@@ -139,7 +136,6 @@ Every story in which Ash speaks.
 
 ### Bathroom10Outro
 `Bathroom10Outro` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **ASH** (Joyous): Tadaa!
 **MADDIE** (Joyous): Is that a jacuzzi?! 
@@ -153,15 +149,14 @@ Every story in which Ash speaks.
 **ASH** (Encouraging): *Wink*
 
 ### Bathroom: Place fixed rug
-`BlueRug` · seen 24.04.01–26.07.01
+`BlueRug` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomPlaceBRRugFb3, phase=task completed, task=Place fixed rug (versions 24.04.01–26.07.01)
 
 **MADDIE** (Relaxed): The floor was pretty cold, but nothing a nice warm rug can't fix!
 **ASH**: Ooh, that's very comfy...
 
 ### FactoryGiftShop 10
-`FactoryGiftShop_10` · seen 26.03.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FactoryGiftShop_10` · seen 26.07.01–26.07.01
 
 **MADDIE** (Encouraging): We should all take a selfie together in the large can display!  
   _(1 cosmetic edit not shown)_
@@ -248,7 +243,6 @@ Every story in which Ash speaks.
 
 ### GlassMysteryTubes
 `GlassMysteryTubes` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **ASH** (Surprised): You got some real straaange piping in here, if you ask me...
 **MADDIE** (Surprised): What? What do you mean?
@@ -259,14 +253,13 @@ Every story in which Ash speaks.
 
 ### GlassMysteryTubesActivated
 `GlassMysteryTubesActivated` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **ASH** (Encouraging): Hey! It blew the letter away. I wanted to read that.
 **MADDIE** (Surprised): Maybe you should find where these tubes lead? I'm sure there should be a collection point somewhere?
 **ASH** (Thinking): True, it could be in another room...
 
 ### Bathroom: Fix the toilet seat
-`GoldenToilet` · seen 24.04.01–26.07.01
+`GoldenToilet` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomRemoveFixToiletCa5, phase=task completed, task=Fix the toilet seat (versions 24.04.01–26.07.01)
 
 **MADDIE** (Encouraging): Well... I have a golden toilet now.
@@ -274,7 +267,6 @@ Every story in which Ash speaks.
 
 ### RubberBandsOverall
 `RubberBandsOverall` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): There was a lot of colorful duct tape in your bag!
 **ASH** (Encouraging): And each one has a purpose, trust me. 
@@ -283,7 +275,7 @@ Every story in which Ash speaks.
 **MADDIE** (Surprised): Okay, okay.
 
 ### Bathroom: Place fixed sink pipes
-`SinkAndMirror` · seen 24.04.01–26.07.01
+`SinkAndMirror` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomPlaceFixedSinkPipesE5, phase=task completed, task=Place fixed sink pipes (versions 24.04.01–26.07.01)
 
 **MADDIE** (Charming): Phew! That was a lot more complicated than I thought!
@@ -292,7 +284,7 @@ Every story in which Ash speaks.
 **ASH** (Joyous): See? You're learning!
 
 ### Bathroom: Make it shine
-`Statue` · seen 24.04.01–26.07.01
+`Statue` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomPlaceBRStatueStage6Cd6, phase=task completed, task=Make it shine (versions 24.04.01–26.07.01)
 
 **ASH** (Joyous): Wow! What a bombshell! 
@@ -371,7 +363,6 @@ Every story in which Ash speaks.
 
 ### Toolbag
 `Toolbag` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **ASH**: You'll find all the tools you'll need in my tool bag.
 **MADDIE** (Doubtful): Hmm... These tools look a bit... weird.

@@ -147,7 +147,7 @@
 **MADDIE** (Relaxed): Somehow she turned the place around and gave people hope.
 
 ### Legacy Lane — entering board
-`CBE_AmeliaBoulton2024_IntroDialogue_Dialogue` · seen 25.06.01–26.07.01
+`CBE_AmeliaBoulton2024_IntroDialogue_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Legacy Lane, eventId=CBE_AmeliaBoulton2024, eventType=Collectible Board Event, moment=entering board (versions 25.06.01–26.07.01)
 - trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_HistoricalCostumes_05'], items=['Umbrella'], moment=item discovered (versions 26.04.01–26.07.01)
 

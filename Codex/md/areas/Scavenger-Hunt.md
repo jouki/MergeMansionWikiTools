@@ -2,7 +2,7 @@
 
 
 ### Scavenger Hunt: Clean and search the statue
-`ScavengerHunt_Dogarea` · seen 24.04.01–26.07.01
+`ScavengerHunt_Dogarea` · seen 23.09.02–26.07.01
 - trigger: area, area=Scavenger Hunt, areaId=ScavengerHunt, hotspotId=ScavengerHuntMansionSideEntranceCleanDogStatue, phase=task completed, task=Clean and search the statue (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Let's see, is anything here? Yoo-hoo, clues? Where are you?!
@@ -14,14 +14,14 @@
 **MADDIE** (Thinking): Wait, that was a frog? I thought it was a dog! This changes everything. Follow me!
 
 ### Scavenger Hunt: Dig and search the ground
-`ScavengerHunt_DogareaEmpty` · seen 24.04.01–26.07.01
+`ScavengerHunt_DogareaEmpty` · seen 23.09.02–26.07.01
 - trigger: area, area=Scavenger Hunt, areaId=ScavengerHunt, hotspotId=ScavengerHuntMansionSideEntranceDigGround, phase=task completed, task=Dig and search the ground (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Looks like there is nothing here... 
 **MADDIE**: Let's see if there is something on the statue.
 
 ### Scavenger Hunt: Look into the hand of the statue
-`ScavengerHunt_Driveway` · seen 24.04.01–26.07.01
+`ScavengerHunt_Driveway` · seen 23.09.02–26.07.01
 - trigger: area, area=Scavenger Hunt, areaId=ScavengerHunt, hotspotId=ScavengerHuntMansionDrivewayInspectTincan, phase=task completed, task=Look into the hand of the statue (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Okay, the last clue was a picture of a tin can. Here we are! Hey tin can, what secrets do you hold?
@@ -35,7 +35,7 @@
 **MADDIE** (Relaxed): Really?! Umm.. Sure! Let's go take a look around the plaza and the old well.
 
 ### Scavenger Hunt: Clean and search the statue
-`ScavengerHunt_Flowergarden` · seen 24.04.01–26.07.01
+`ScavengerHunt_Flowergarden` · seen 23.09.02–26.07.01
 - trigger: area, area=Scavenger Hunt, areaId=ScavengerHunt, hotspotId=ScavengerHuntMansionRightFillerCleanStatue, phase=task completed, task=Clean and search the statue (versions 24.04.01–26.07.01)
 
 **MADDIE**: Okay, let's start the scavenger hunt Charlie sent me! The first clue is 'A sad heroine holds a key' and there's nobody sadder than the statue of this nurse!
@@ -44,7 +44,7 @@
 **MADDIE** (Thinking): What could the dog mean? Maybe - Oh! Maybe there's something in the little area Rufus likes to play in!
 
 ### Scavenger Hunt: Clean and search the underwater stones
-`ScavengerHunt_Gardenright` · seen 24.04.01–26.07.01
+`ScavengerHunt_Gardenright` · seen 23.09.02–26.07.01
 - trigger: area, area=Scavenger Hunt, areaId=ScavengerHunt, hotspotId=ScavengerHuntGardenRightCleanFountain, phase=task completed, task=Clean and search the underwater stones (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Here we are - the fountain where Grandpa proposed to Grandma! This must be what the 'ring' carving meant.
@@ -56,7 +56,7 @@
 **HOLDEN** (Charming): No problem - I'll just take some selfies with this old statue, then get some shots around the grounds.
 
 ### Scavenger Hunt: Scrape and search the well stones
-`ScavengerHunt_Oldwell` · seen 24.04.01–26.07.01
+`ScavengerHunt_Oldwell` · seen 23.09.02–26.07.01
 - trigger: area, area=Scavenger Hunt, areaId=ScavengerHunt, hotspotId=ScavengerHuntOldWellCleanWell, phase=task completed, task=Scrape and search the well stones (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): I see something here! There's a letter. I think it's an 'L!'
@@ -73,21 +73,21 @@
 **JACKIE** (Surprised): Uh, nope, that didn't work. It could be... oh! I know what it is - R5UL4! Ursula!
 
 ### Scavenger Hunt: Dig and search the ground
-`ScavengerHunt_OldwellEmpty` · seen 24.04.01–26.07.01
+`ScavengerHunt_OldwellEmpty` · seen 23.09.02–26.07.01
 - trigger: area, area=Scavenger Hunt, areaId=ScavengerHunt, hotspotId=ScavengerHuntOldWellDigGroundLeft, phase=task completed, task=Dig and search the ground (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): I don't think there is anything here...
 **JACKIE** (Thinking): Let's try a different spot.
 
 ### Scavenger Hunt: Search the pond
-`ScavengerHunt_OldwellEmpty2` · seen 24.04.01–26.07.01
+`ScavengerHunt_OldwellEmpty2` · seen 23.09.02–26.07.01
 - trigger: area, area=Scavenger Hunt, areaId=ScavengerHunt, hotspotId=ScavengerHuntOldWellInspectWater, phase=task completed, task=Search the pond (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Nothing here it seems... except so many knives at the bottom of that pond.
 **JACKIE** (Thinking): That's a bit weird.
 
 ### Scavenger Hunt: Open the safe with the code
-`ScavengerHunt_Poolhouse` · seen 24.04.01–26.07.01
+`ScavengerHunt_Poolhouse` · seen 23.09.02–26.07.01
 - trigger: area, area=Scavenger Hunt, areaId=ScavengerHunt, hotspotId=ScavengerHuntPoolHouseOpenFireplaceSafe, phase=task completed, task=Open the safe with the code (versions 24.04.01–26.07.01)
 
 **JACKIE** (Joyous): Well done Maddie, it opened! And is that a... notebook inside?
@@ -96,7 +96,7 @@
 **JACKIE** (Charming): Thanks for letting me help and hang out, Maddie. I hope this notebook leads to whatever you're looking for!
 
 ### Scavenger Hunt: Clean and search the statue
-`ScavengerHunt_Watergarden` · seen 24.04.01–26.07.01
+`ScavengerHunt_Watergarden` · seen 23.09.02–26.07.01
 - trigger: area, area=Scavenger Hunt, areaId=ScavengerHunt, hotspotId=ScavengerHuntWaterGardenCleanFrogStatue, phase=task completed, task=Clean and search the statue (versions 24.04.01–26.07.01)
 
 **MADDIE**: My parents loved playing here with the frogs, and Grandpa Charlie would have known that.

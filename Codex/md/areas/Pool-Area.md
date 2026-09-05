@@ -2,7 +2,7 @@
 
 
 ### Pool Area: Remove tree
-`Pool_Intro` · seen 24.04.01–26.07.01
+`Pool_Intro` · seen 23.09.02–26.07.01
 - trigger: area, area=Pool Area, areaId=SwimmingPool, hotspotId=SwimmingPoolEntryRemovetreeLeftPath, phase=task completed, task=Remove tree (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): I'm going to have to use all my skills to fix up this old pool system!
@@ -17,7 +17,7 @@
 **MADDIE** (Charming): Thanks Roddy! You're such a good friend.  
 
 ### Pool Area: Plant flowers
-`Pool_Outro` · seen 24.04.01–26.07.01
+`Pool_Outro` · seen 23.09.02–26.07.01
 - trigger: area, area=Pool Area, areaId=SwimmingPool, hotspotId=SwimmingPoolStairsAddFlowers, phase=task completed, task=Plant flowers (versions 24.04.01–26.07.01)
 
 **DOG** (Doubtful): Grr...

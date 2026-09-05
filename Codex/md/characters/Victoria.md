@@ -2,7 +2,7 @@
 Every story in which Victoria speaks.
 
 ### Bathroom: Dry the water
-`Bathroom06` · seen 24.04.01–26.07.01
+`Bathroom06` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomRemoveWaterBj1, phase=task completed, task=Dry the water (versions 24.04.01–26.07.01)
 
 **MADDIE**: *Ring Ring*
@@ -60,7 +60,6 @@ Every story in which Victoria speaks.
 
 ### FirstFloorPantry 09
 `FirstFloorPantry_09` · seen 26.07.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE**: *Ring ring*
 **MADDIE** (Talking): Aren't I popular today! Hello?
@@ -83,7 +82,6 @@ Every story in which Victoria speaks.
 
 ### FirstFloorPantry 10
 `FirstFloorPantry_10` · seen 26.07.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **VICTORIA**: I had almost forgotten what a horrible, run-down dump this place is.
 **MADDIE** (Doubtful): Victoria.
@@ -102,7 +100,6 @@ Every story in which Victoria speaks.
 
 ### FirstFloorPantry 11
 `FirstFloorPantry_11` · seen 26.07.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **VICTORIA** (Charming): My great-grandmother, Christine Blackwood, was the true inventor of the tin can.
 **MADDIE** (Surprised): What?!
@@ -116,7 +113,6 @@ Every story in which Victoria speaks.
 
 ### FirstFloorPantry 12
 `FirstFloorPantry_12` · seen 26.07.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Annoyed): No! Agatha wouldn't do something like that!
 **MADDIE**: And they kept making jam together even after Ignatius started tin can production.
@@ -132,7 +128,7 @@ Every story in which Victoria speaks.
 **VICTORIA** (Annoyed): Pah! Your family stole my family's future. And as long as I am a Blackwood, I will make sure the Boultons pay!
 
 ### Great Hall: Open the door
-`Greathall02_Inside` · seen 24.04.01–26.07.01
+`Greathall02_Inside` · seen 23.09.02–26.07.01
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallOpenMansionA0, phase=task completed, task=Open the door (versions 24.04.01–25.01.03)
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemovestepdebrisA1, phase=task completed, task=Remove step debris (versions 25.02.01–26.07.01)
 
@@ -144,7 +140,7 @@ Every story in which Victoria speaks.
 **MADDIE** (Surprised): Huh?! Who are you?!
 
 ### Great Hall: Remove step debris
-`Greathall03_Continues` · seen 24.04.01–26.07.01
+`Greathall03_Continues` · seen 23.09.02–26.07.01
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemovestepdebrisA1, phase=task completed, task=Remove step debris (versions 24.04.01–25.01.03)
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemoveDustSheetA2, phase=task completed, task=Remove dust sheet (versions 25.02.01–26.07.01)
 
@@ -158,7 +154,7 @@ Every story in which Victoria speaks.
 **VICTORIA** (Doubtful): And missy... I ain't happy with what I'm seeing!
 
 ### Great Hall: Remove dust sheet
-`Greathall04_Continues` · seen 24.04.01–26.07.01
+`Greathall04_Continues` · seen 23.09.02–26.07.01
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemoveDustSheetA2, phase=task completed, task=Remove dust sheet (versions 24.04.01–25.01.03)
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemovedebristopofstepsA3, phase=task completed, task=Remove debris at the top of the steps (versions 25.02.01–26.07.01)
 
@@ -172,7 +168,6 @@ Every story in which Victoria speaks.
 
 ### Lounge02
 `Lounge02` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **VICTORIA** (Annoyed): Well, well, well... It looks like Holden was right.
 **MADDIE** (Surprised): Wha-? Victoria!
@@ -185,7 +180,6 @@ Every story in which Victoria speaks.
 
 ### Lounge03
 `Lounge03` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): AHHH! My foot! My foot is stuck in the stairs!!
 **VICTORIA** (Worried): Oh no! Victoria, stay calm and stay still. You might injure yourself...
@@ -202,7 +196,6 @@ Every story in which Victoria speaks.
 
 ### Maddieroom 02
 `Maddieroom_02` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE**: Victoria! What do you want?
 **MADDIE**: It's over!
@@ -217,7 +210,6 @@ Every story in which Victoria speaks.
 
 ### Maddieroom Intro
 `Maddieroom_Intro` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Frustrated): I guess I've avoided this room long enough...
 **MADDIE** (Worried): *Sigh*
@@ -284,6 +276,17 @@ Every story in which Victoria speaks.
 **VICTORIA** (Worried): This won't stop me Maddie! I'll hound you to the ends of the Earth!
 **MADDIE** (Relaxed): Okay, bye.
 **VICTORIA** (Worried): I'LL BE BACK!
+
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_21
+`SE_HopeberryFestival2023_Decoration_Slot21_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_21, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**VICTORIA** (Thinking): I honestly don't see what all the fuss is about...
+**DEB** (Doubtful): Come now, Victoria. You're the new head of city council! You should know all about the Hopeberry Festival!
+**VICTORIA** (Doubtful): It's just some silly event celebrating a shrub. Who cares?
+**DEB** (Encouraging): The people care, Victoria. Besides, this "shrub" is the only one of its kind in the world!
+**VICTORIA** (Thinking): I doubt that, Deb.
+**DEB** (Frustrated): I now see why my sister speaks so "highly" of you...
 
 ### Lady Voyance's Mystery — decoration SP_LadyVoyanceMystery2023_Decoration_Slot29
 `SP_LadyVoyanceMystery2023_Decoration_Slot29_Dialogue` · seen 23.09.02–26.07.01

@@ -78,6 +78,18 @@
 **MASON** (Discouraged): ...
 **MASON** (Doubtful): Fourteen.
 
+### Egg Hunt 2023 — part of the event (exact trigger not dumped)
+`CBE_Easter2023_DecoratedTree` · seen 23.09.02–26.07.01
+- trigger: event, eventType=event story, event=Egg Hunt 2023, eventId=CBE_Easter2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
+
+**MASON** (Annoyed): Ungh... Argh!
+**MADDIE** (Encouraging): Need some help there, Mason?
+**MASON** (Annoyed): The Rabbit has hung these eggs here to mock me! Just at the right height too, so I can't reach them...
+**MADDIE** (Encouraging): Well... I can give you one if you want?
+**MASON** (Frustrated): And ruin the fun?! C'mon, lady, you have no idea how to be a kid! 
+**MADDIE** (Doubtful): That's because I'm not a kid! 
+**MASON** (Annoyed): Obviously!
+
 ### Egg Hunt 2023 — item discovered: Egg in a Cup
 `CBE_Easter2023_EasterEgg` · seen 23.09.02–26.07.01
 - trigger: item, event=Egg Hunt 2023, eventKey=CBE_Easter2023, itemKeys=['CBEEaster2023EasterEggs_02'], items=['Egg in a Cup'], moment=item discovered (versions 23.09.02–26.07.01)
@@ -153,6 +165,13 @@
 **MASON** (Discouraged): Yeah... I just... If you don't like it, you can throw it away.
 **MADDIE** (Encouraging): I love it! Gonna put it right up here on the wall!
 **MASON** (Worried): No! Please, everyone will see!
+
+### Egg Hunt 2023 — part of the event (exact trigger not dumped)
+`CBE_Easter2023_MasonPlaceholder` · seen 23.09.02–26.07.01
+- trigger: event, eventType=event story, event=Egg Hunt 2023, eventId=CBE_Easter2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
+
+**MASON** (Joyous): Wow what's this?! 
+**MASON** (Worried): Dialogues TBD!
 
 ### Egg Hunt 2023 — decoration CBE_Easter2023_Decoration17
 `CBE_Easter2023_NewIntroDialogue` · seen 23.09.02–26.07.01

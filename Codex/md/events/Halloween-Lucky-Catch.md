@@ -26,3 +26,28 @@
 **MADDIE** (Thinking): There is no Count Squidula? Or Werefish?
 **GRANDMA** (Joyous): Not around here, dearie! That must have been quite a dream.
 **MADDIE** (Hesitant): You have no idea!
+
+### Halloween Lucky Catch — entering board
+`LC_Halloween_Intro_Dialogue` · seen 24.09.02–26.07.01
+- trigger: event, event=Halloween Lucky Catch, eventId=LC_Halloween, eventType=Collectible Board Event, moment=entering board (versions 24.09.02–25.08.02)
+
+**GRANDMA**: You guessed it -- it's time to...
+**MADDIE** (Worried): ...t-to go fishing?
+**GRANDMA** (Thinking): Are you feeling alright, dearie?
+**MADDIE** (Discouraged): Yeah, just a bit light-headed... Like something seems a bit off somehow...
+**GRANDMA**: We should really get going. There is plenty of fish to catch and release!
+**MADDIE** (Worried): Y-yes, just snap a photo and let them go!
+**GRANDMA** (Encouraging): Are you ready?
+**MADDIE** (Thinking): Err... Let's fish!
+
+### Halloween Lucky Catch — event end
+`LC_Halloween_Outro_Dialogue` · seen 24.09.02–26.07.01
+- trigger: event, event=Halloween Lucky Catch, eventId=LC_Halloween, eventType=Collectible Board Event, moment=event end (versions 24.09.02–25.08.02)
+
+**GRANDMA** (Encouraging): Good morning, Maddie!
+**GRANDMA** (Encouraging): You guessed it - it's time to go f---
+**GRANDMA** (Thinking): Are you feeling alright?
+**MADDIE** (Worried): I'm not feeling up for fishing today...
+**MADDIE** (Doubtful): I just had the weirdest dream full of the weirdest fish.
+**MADDIE** (Doubtful): It was so vivid!
+**GRANDMA** (Charming): Sounds like Halloween is playing tricks on you, dearie!

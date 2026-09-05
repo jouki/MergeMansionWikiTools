@@ -1,6 +1,40 @@
 # Deb
 Every story in which Deb speaks.
 
+### Easter 2025 — item discovered: Bowl of Easter Eggs
+`CBE_Easter2025_EasterEggs_07_Dialogue` · seen 25.05.01–26.03.01
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Eggs_07'], items=['Bowl of Easter Eggs'], moment=item discovered (versions 25.05.01–26.03.01)
+
+**GRANDMA**: Julius, you have to hurry up. We still have dozens of eggs to paint.
+**ANTIQUEDEALER** (Frustrated): You invited me over for some apple pie. I did not sign up for all of this painting!
+**ANTIQUEDEALER** (Surprised): How many eggs do we really need for this egg hunt, Ursula?
+**GRANDMA** (Annoyed): Just keep painting!
+**DEB** (Surprised): What is going on, Ursula? I got your message and rushed right over.
+**GRANDMA** (Encouraging): Deb! At the nick of time, too! Here is a brush and some paints, and there are your eggs.
+**DEB** (Frustrated): What is the meaning of this?
+**GRANDMA** (Encouraging): We are in a hurry, Deb. The sooner you start painting, the sooner we are ready for the egg hunt!
+
+### Easter 2025 — item discovered: Ultimate Easter Basket
+`CBE_Easter2025_EasterEggs_10_Dialogue` · seen 25.05.01–26.03.01
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Eggs_10'], items=['Ultimate Easter Basket'], moment=item discovered (versions 25.05.01–26.03.01)
+
+**ANTIQUEDEALER** (Annoyed): That HAS to be it. I simply cannot paint another egg!
+**GRANDMA** (Relaxed): I think we are done! Thank you both!
+**DEB** (Annoyed): I think I was promised pie in return for my help!
+**ANTIQUEDEALER** (Worried): I think my rheumatism is flaring up...
+
+### Frosty Secrets — decoration CBE_FrostySecrets2024_Decoration_Slot15
+`CBE_FrostySecrets2024_DecoSlot_15_Dialogue` · seen 25.05.01–25.06.01
+- trigger: decoration, decoration=CBE_FrostySecrets2024_Decoration_Slot15, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, moment=decoration placed (versions 25.05.01–25.06.01)
+
+**DEB** (Encouraging): What beautiful ice sculptures! What brought on this bout of artistic expression, Maddie?
+**MADDIE**: I've been doing a little bit of hiking...
+**DEB** (Doubtful): Hiking?
+**MADDIE** (Encouraging): Yeah, in the mountains. I discovered something and... well, it was kinda eye-opening.
+**DEB** (Thinking): Is that so? Remember to be careful when you head up there...
+**MADDIE** (Relaxed): I know - there are bears and mountain lions. But don't worry! I'm always careful.
+**DEB** (Surprised): Right, bears and mountain lions...
+
 ### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot08
 `CBE_JoysOfTheSea2023_Decoration_Slot08_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot08, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
@@ -124,12 +158,10 @@ Every story in which Deb speaks.
 
 ### DebsRoom01
 `DebsRoom01` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 
 ### DebsRoom02
 `DebsRoom02` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **DEB** (Doubtful): Well... My therapist INSISTED I do an exercise where I “face my past”.
 **DEB**: So what better place than my old room, right?
@@ -141,7 +173,6 @@ Every story in which Deb speaks.
 
 ### DebsRoom03
 `DebsRoom03` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Worried): I guess, I sort of understand how you feel...
 **DEB** (Worried): I suppose you do, sweetie. A bit tragic, don’t you think?
@@ -153,7 +184,6 @@ Every story in which Deb speaks.
 
 ### DebsRoom04
 `DebsRoom04` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **DEB** (Worried): *sigh* All this is really bringing back the memories. I won’t lie.
 **DEB** (Annoyed): But I’m surprised at how angry most of it is making me feel...
@@ -166,7 +196,6 @@ Every story in which Deb speaks.
 
 ### DebsRoom05
 `DebsRoom05` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Thinking): Do you think our family knew why?
 **DEB** (Frustrated): ...
@@ -183,7 +212,6 @@ Every story in which Deb speaks.
 
 ### DebsRoom06
 `DebsRoom06` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Worried): Weren’t you upset?
 **DEB** (Annoyed): Yes, of course. But at my parents for never telling me.
@@ -195,7 +223,6 @@ Every story in which Deb speaks.
 
 ### DebsRoom07
 `DebsRoom07` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **DEB** (Doubtful): I got teased for it in school, you know.  
   _(1 cosmetic edit not shown)_
@@ -210,7 +237,6 @@ Every story in which Deb speaks.
 
 ### DebsRoom08
 `DebsRoom08` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **DEB** (Thinking): As I grew older, I knew there was more behind me being adopted than I was told.
 **DEB** (Thinking): Leonard helped me gather a few clues that led to Europe. So I began sending out letters.
@@ -223,7 +249,6 @@ Every story in which Deb speaks.
 
 ### DebsRoom09
 `DebsRoom09` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **DEB**: I went to Europe, but what I found there...
 **DEB** (Discouraged): Was not what I was expecting.
@@ -235,7 +260,6 @@ Every story in which Deb speaks.
 
 ### DebsRoom10
 `DebsRoom10` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE**: I’m sure Deb. I want to know the whole truth.
 **DEB** (Doubtful): Oh, I know that, sweetie. Everyone does. But are you willing to accept the cost?
@@ -247,7 +271,6 @@ Every story in which Deb speaks.
 
 ### DebsRoom11 Outro
 `DebsRoom11_Outro` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **DEB** (Relaxed): Thank you, Maddie. I guess going through these things and sorting through my past helped.
 **DEB** (Charming): Even if only a little.
@@ -308,7 +331,6 @@ Every story in which Deb speaks.
 
 ### DiningRoom02
 `DiningRoom02` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **WINSTON**: I see your endeavors to reclaim the grandeur of your past home have come to a head, Ma'am. 
 **WINSTON** (Doubtful): While your efforts in restoring the other rooms are admirable, I honestly believe that this room is a lost cause...
@@ -319,7 +341,6 @@ Every story in which Deb speaks.
 
 ### DiningRoom03
 `DiningRoom03` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **WINSTON** (Thinking): Deb...
 **DEB** (Annoyed): Winston.
@@ -336,7 +357,7 @@ Every story in which Deb speaks.
 **WINSTON** (Surprised): My apologies Ma'am. I let my emotions get the better of me. Please, if you'd excuse me...
 
 ### Dining Room: Restock the old trolley
-`DiningRoom06` · seen 24.04.01–26.07.01
+`DiningRoom06` · seen 23.09.02–26.07.01
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomPlaceCleanTrolleyContentsB8, phase=task completed, task=Restock the old trolley (versions 24.04.01–26.07.01)
 
 **MADDIE**: I find it hard to believe that a president was within these very walls!
@@ -377,7 +398,7 @@ Every story in which Deb speaks.
 **DEB** (Discouraged): I... Uh... Wow!
 
 ### The Great Bush Bonanza! — entering board
-`LBE_BushBonanzaIntro` · seen 24.04.01–26.07.01
+`LBE_BushBonanzaIntro` · seen 23.09.02–26.07.01
 - trigger: event, event=The Great Bush Bonanza!, eventId=LBE_BushBonanza, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–26.07.01)
 
 **PEARL**: Welcome everyone to the Great Bush Bonanza! Hopewell Bay’s premier topiary event!
@@ -395,7 +416,7 @@ Every story in which Deb speaks.
 **PEARL** (Encouraging): That’s the spirit!
 
 ### The Great Bush Bonanza! — event end
-`LBE_BushBonanzaOutro` · seen 24.04.01–26.07.01
+`LBE_BushBonanzaOutro` · seen 23.09.02–26.07.01
 - trigger: event, event=The Great Bush Bonanza!, eventId=LBE_BushBonanza, eventType=Leaderboard Event, moment=event end (versions 24.04.01–26.07.01)
 
 **DEB** (Frustrated): While I’m calling it luck, you beat me fair and square!
@@ -434,8 +455,33 @@ Every story in which Deb speaks.
 **ANTIQUEDEALER** (Worried): Well, the size... and smell...
 **ANTIQUEDEALER** (Relaxed): What am I talking about? It is wonderful!
 
+### Floral Frenzy — entering board
+`LBE_Valentines2024_Intro_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Floral Frenzy, eventId=LBE_Valentines2024, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–26.01.02)
+
+**PEARL**: Welcome to Floral Frenzy, a competition where we find out who makes the most magnificent flower arrangements in Hopewell Bay!
+**PEARL**: Our contenders are Deb, a lover of the more exotic flowers...
+**DEB** (Charming): I do have a penchant for the unusual.
+**PEARL** (Encouraging): Err, yes. And Julius who specializes in the gentle Japanese art of Ikebana. I can't wait to see what kind of creations you will produce!
+**ANTIQUEDEALER** (Charming): Salutations! Did you know that the history of Ikebana reaches back over 600 years?
+**PEARL**: Very interesting, indeed! And our last contender is... Jackie!
+**JACKIE** (Doubtful): Pearl, I told you I'm too busy to take part in a silly competition. I've never even tried flower arranging before!
+**PEARL** (Thinking): Haha, you're so funny!
+**PEARL** (Encouraging): Let's get to it, people. The competition is officially on - may the best amateur florist win!
+
+### Floral Frenzy — event end
+`LBE_Valentines2024_Outro_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Floral Frenzy, eventId=LBE_Valentines2024, eventType=Leaderboard Event, moment=event end (versions 24.04.01–26.01.02)
+
+**PEARL** (Surprised): What a competition we've had! I had no idea we have such flower arranging talent in our little town.
+**PEARL** (Encouraging): Aaand the winner is... Jackie!
+**JACKIE** (Surprised): W-what?? I really didn't expect this...
+**JACKIE** (Encouraging): I'd like to thank my fellow contenders for educating and inspiring me. I never knew I had it in me to get excited about flower arranging!
+**DEB** (Doubtful): Next time, we can see if it was just beginner's luck... but congratulations, Jackie. You did well!
+**JACKIE** (Doubtful): Thank you, Deb!
+
 ### Grandma's Pool Party — event start
-`LDE_GrandmasBirthday2023_EventIntro_Dialogue` · seen 26.04.02–26.07.01
+`LDE_GrandmasBirthday2023_EventIntro_Dialogue` · seen 23.09.02–26.07.01
 - trigger: event, event=Grandma's Pool Party, eventId=LDE_GrandmasBirthday2023, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **MADDIE**: Hi, Deb! I came as soon as I could. What’s this about a surprise?
@@ -446,9 +492,9 @@ Every story in which Deb speaks.
 **DEB** (Relaxed): That’s the surprise! Tataa, sweetie! I’m off to get “the help”...
 **MADDIE** (Thinking): I wonder what she means by that?
 
-### LDE GrandmasBirthday2023 LayerDecoration 01 Dialogue
+### Grandma's Pool Party — part of the event (exact trigger not dumped)
 `LDE_GrandmasBirthday2023_LayerDecoration_01_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Grandma's Pool Party, eventId=LDE_GrandmasBirthday2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **HANK** (Joyous): Oh, this is going to be so awesome! You wait and see, I’ve designed the perfect recreational area!
 **HANK** (Charming): After all... pools are my specialty!
@@ -460,9 +506,9 @@ Every story in which Deb speaks.
 **MADDIE** (Doubtful): Really?
 **DEB** (Relaxed): It’s really worth it sweetie... REALLY worth it!
 
-### LDE GrandmasBirthday2023 LayerDecoration 03 Dialogue
+### Grandma's Pool Party — part of the event (exact trigger not dumped)
 `LDE_GrandmasBirthday2023_LayerDecoration_03_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Grandma's Pool Party, eventId=LDE_GrandmasBirthday2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): You’re digging the pool here?!
 **DEB** (Encouraging): Where else, sweetie? It’s only temporary. Hank’s designs rarely last very long, anyway.
@@ -470,9 +516,9 @@ Every story in which Deb speaks.
 **DEB** (Charming): Doesn’t he sound just wonderful?
 **MADDIE** (Thinking): Sounds more like poor design, to me...
 
-### LDE GrandmasBirthday2023 LayerDecoration 10 Dialogue
+### Grandma's Pool Party — part of the event (exact trigger not dumped)
 `LDE_GrandmasBirthday2023_LayerDecoration_10_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Grandma's Pool Party, eventId=LDE_GrandmasBirthday2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **HANK** (Encouraging): The Pool Party is officially open! Have an AWESOME time!
 **DEB** (Joyous): Hi, Maddie! Didn’t my Hanky-boo do such an amazing job?!
@@ -483,9 +529,9 @@ Every story in which Deb speaks.
 **HANK** (Thinking): I guess that’s true. Few are an artist and a piece of art, at the same time.
 **MADDIE** (Doubtful): ...More like a piece of work.
 
-### LDE GrandmasBirthday2023 LayerDecoration 12 Dialogue
+### Grandma's Pool Party — part of the event (exact trigger not dumped)
 `LDE_GrandmasBirthday2023_LayerDecoration_12_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Grandma's Pool Party, eventId=LDE_GrandmasBirthday2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **GRANDMA** (Encouraging): I could get used to this pool!
 **DEB** (Joyous): Enjoy it, sis! Happy Birthday!
@@ -493,6 +539,28 @@ Every story in which Deb speaks.
 **HANK** (Encouraging): Oh, come on! You look awesome! Not a day over a hundred!
 **GRANDMA** (Surprised): ...
 **DEB** (Surprised): Oh, isn’t he funny?! Hanky-boo, sweetie? Can I have a moment in private with you?
+
+### Green Acres Quest — item discovered: Deb
+`LDE_GreenAcresQuest2024_CharacterDeb_02_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterDeb_02'], items=['Deb'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**DEB**: Sweetie! I need your help for a moment!
+**MADDIE** (Encouraging): Of course!
+
+### Green Acres Quest — item discovered: Deb
+`LDE_GreenAcresQuest2024_v2_CharacterDeb_02_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterDeb_02'], items=['Deb'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**DEB**: You look like you need some help, my dear!
+**EMILIO** (Surprised): How did you know?
+
+### Green Acres Quest — item discovered: Calla Lily
+`LDE_GreenAcresQuest2024_v2_UncommonFlowerA_01_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_UncommonFlowerA_01'], items=['Calla Lily'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**DEB** (Encouraging): I have a wonderful idea for your garden -- something Bella would love!
+**EMILIO** (Surprised): A corpse flower?
+**DEB** (Thinking): How did you know??
 
 ### Green Acres Quest — item discovered: Deb
 `LDE_GreenAcresQuest_CharacterDeb_02_Dialogue` · seen 26.05.01–26.07.01
@@ -648,8 +716,18 @@ Every story in which Deb speaks.
 **RODDY** (Worried): J-jackie, the door is open. Something doesn’t feel right.
 **JACKIE** (Surprised): Lady Voy… Aaah! She’s… dead!
 
+### Circus Caper — item discovered: Mini Raffle Ticket
+`LDE_Rumors2025_Lottery_01_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Lottery_01'], items=['Mini Raffle Ticket'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**ANTIQUEDEALER** (Charming): I bought lots of raffle tickets to make sure I win the biggest prize!
+**ANTIQUEDEALER** (Discouraged): My ticket has never won, but this time the prize will be mine!
+**DEB** (Joyous): Ah, the excitement! I think I will get some raffle tickets, too.
+**ANTIQUEDEALER** (Relaxed): What is it, Ursula? Are you not going to buy a couple of raffle tickets?
+**GRANDMA** (Doubtful): I know this crowd... At the circus, the house always wins.
+
 ### The Maze: Place cobblestones
-`MazeDialogue_C` · seen 24.04.01–26.07.01
+`MazeDialogue_C` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePath1PlaceCobblesC5, phase=task completed, task=Place cobblestones (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePath1GrowVineF5, phase=task completed, task=Plant vines (versions 25.04.03–26.07.01)
 
@@ -663,7 +741,7 @@ Every story in which Deb speaks.
 **MADDIE**: Uh, okay! I'm just going around the maze. You can join me if you like.
 
 ### The Maze: Remove broken vase
-`MazeDialogue_D` · seen 24.04.01–26.07.01
+`MazeDialogue_D` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePath1RemoveBrokenVaseC14, phase=task completed, task=Remove broken vase (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePath2PillarPlaceVineJ10, phase=task completed, task=Plant vines (versions 25.04.03–26.07.01)
 
@@ -676,7 +754,7 @@ Every story in which Deb speaks.
 **GRANDMA** (Joyous): I know the answer! And it's a good one, dearie.
 
 ### The Maze: Remove mud
-`MazeDialogue_E` · seen 24.04.01–26.07.01
+`MazeDialogue_E` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePath2SmallGateRemoveMudL3, phase=task completed, task=Remove mud (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePath2SmallGateGrowVineL7, phase=task completed, task=Plant vines (versions 25.04.03–26.07.01)
 
@@ -689,7 +767,7 @@ Every story in which Deb speaks.
 **MADDIE** (Surprised): You didn't? Why not, Grandma?
 
 ### The Maze: Remove cobwebs
-`MazeDialogue_F` · seen 24.04.01–26.07.01
+`MazeDialogue_F` · seen 23.09.02–26.07.01
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazePathCenterRemoveCobwebsN9, phase=task completed, task=Remove cobwebs (versions 24.04.01–25.04.02)
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeCenterGateCleanAndFixArchO8, phase=task completed, task=Clean and fix arch (versions 25.04.03–26.07.01)
 
@@ -700,9 +778,210 @@ Every story in which Deb speaks.
 **DEB** (Surprised): Knitting isn't my style! No, I saw a cute mailman on the way over. I think I'll go and chat with him.
 **MADDIE** (Thinking): Now that they've gone, I can get back to figuring out what Grandpa wanted me to do here!
 
-### SE HopeberryFestival2023 IntroPart1 Dialogue
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot02
+`SE_HopeberryFestival2023_Decoration_Slot02_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot02, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**JACKIE** (Surprised): Are these actual hopeberry bushes?
+**DEB** (Charming): Yes! Like any proper vineyard, one has to show where their product comes from.
+**JACKIE** (Thinking): Vineyard?
+
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot05
+`SE_HopeberryFestival2023_Decoration_Slot05_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot05, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**DEB** (Joyous): May I introduce you to the Hopeberry Juice Woman!
+**DEB** (Encouraging): The new face to the new and <b>improved</b> hopeberry juice! Go on... Have a taste.
+**MADDIE** (Worried): *sip* Oh! Eehh... That's... different.
+**GRANDMA** (Worried): My gosh, Deb... What did you put in this?! This isn't my recipe!
+**DEB** (Doubtful): It isn't sis, you write recipes like a mad scientist. I'm an artist!
+**GRANDMA** (Surprised): I mean... It isn't bad! It just has a-
+**DEB** (Relaxed): A wonderful bouquet? <b>That</b> is the secret ingredient! 
+
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot06
+`SE_HopeberryFestival2023_Decoration_Slot06_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot06, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**MADDIE**: That's a fancy looking statue! Er... What is it?
+**DEB**: It's the hopeberry of course!
+**MADDIE** (Encouraging): Oh! Okay! If I... squint my eyes and...
+**DEB** (Relaxed): Aaanyway, it was custom made by a <b>dashing</b> young artist new to town. I think his name was Hank?
+**MADDIE** (Relaxed): You're going to ask him out, aren't you...
+**DEB** (Charming): Oh please, sweetie... I already have!
+
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot07
+`SE_HopeberryFestival2023_Decoration_Slot07_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot07, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**DEB**: Having fun there, Mason?
+**MASON** (Joyous): Yeah! This is great! 
+**DEB** (Encouraging): This is how they used to make juice in the old days. With their bare feet!
+**MASON** (Worried): Cool! I guess I should take my socks off then? 
+
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot08
+`SE_HopeberryFestival2023_Decoration_Slot08_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot08, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**DEB**: My improved juice is excellent as a frozen slushy, smoothie mix or just as a classic refreshing drink! 
+**ANTIQUEDEALER** (Thinking): Mmm! I gotta say, these are all quite delicious, but honestly... What is that smell?!
+**DEB** (Charming): Oh that?! That is what gives my drink its uniqueness. My secret ingredient...
+**ANTIQUEDEALER** (Worried): Unique is an understatement... It almost smells like someone died!
+**DEB** (Frustrated): I see... Well, if you cannot <b>appreciate</b> my exceptional beverage, then I wish you good day.
+**ANTIQUEDEALER** (Discouraged): Oh.. I'm sorry, I didn't mea-
+**DEB** (Annoyed): I said <b>good day!</b>
+
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot14
+`SE_HopeberryFestival2023_Decoration_Slot14_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot14, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**DEB** (Joyous): Come one, come all to the new Hopeberry Festival!
+**DEB** (Joyous): Don't forget to taste my wonderful new hopeberry juice! It's to die for!
+**ANTIQUEDEALER** (Annoyed): You can say that again! It smells like a dead body. 
+**MASON** (Joyous): Reeeeeeeally?!
+**MADDIE** (Doubtful): Good job, Julius...
+**ANTIQUEDEALER** (Doubtful): Why is everyone angry at me today?
+
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot15
+`SE_HopeberryFestival2023_Decoration_Slot15_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot15, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**GRANDMA** (Joyous): I'm proud of you Deb... You may not be the best juice maker, but you sure do know how to throw a festival!
+**DEB** (Worried): Really?
+**GRANDMA** (Relaxed): Yes, really. It's nice to see so many happy faces here again! It almost makes one forget the...
+**DEB** (Relaxed): *sigh* It does... But, do you know what the best part of all of this was?
+**GRANDMA** (Charming): ...
+**DEB** (Charming): Doing something with my sister again!
+**GRANDMA** (Relaxed): Yes... It is nice, isn't it?
+
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_16
+`SE_HopeberryFestival2023_Decoration_Slot16_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_16, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**MADDIE**: Hi Deb! I heard you wanted to run the Hopeberry Festival this year! 
+**MADDIE**: I was wondering if you needed any help? 
+**DEB**: No need, sweetie, no need! I have it all under control! This wheel will help me find the right flavors.
+**MADDIE** (Charming): Sounds more like <b>luck</b> to me!
+**DEB** (Surprised): No such thing as luck sweetie. It is destiny! My psychic, Lady Voyance, said so... 
+**DEB** (Thinking): All I have to do is spin this wheel and I'll know <b>exactly</b> what ingredients I need.
+**MADDIE** (Encouraging): Okay... Good luck with that.
+**DEB** (Thinking): Thank y- Hey!
+
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_17
+`SE_HopeberryFestival2023_Decoration_Slot17_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_17, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**DEB** (Charming): I really appreciate you helping out, Roddy!
+**RODDY** (Relaxed): No problem, ma'am! I'm always happy to help.
+**DEB** (Relaxed): I know... I guess I'm always in need of strapping young lads, like yourself.
+**RODDY** (Worried): Oh... Erm... Okay.
+**MADDIE** (Doubtful): Hey! I thought you said you didn't need any help!
+**DEB** (Encouraging): Maddie! Sweetie... Of course I need help, but only in the more <b>physical</b> sense. Ha ha!
+**MADDIE** (Annoyed): Right... Anyway, I'll stick around to help you get everything set up...
+**DEB** (Relaxed): Well, Roddy... I think I saw a bit of jealousy in her eyes!
+**RODDY** (Charming): Re- Really?!
+
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_18
+`SE_HopeberryFestival2023_Decoration_Slot18_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_18, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**GRANDMA** (Relaxed): I'm impressed Deb! Didn't expect you to nail the recipe! This tastes just like it!
+**DEB** (Worried): ...
+**GRANDMA** (Annoyed): It's not your recipe, is it?
+**DEB** (Discouraged): No, it isn't! I found some frozen concentrate from last year...
+**DEB** (Discouraged): Oh, sis... I really need your help! This is a lot harder than I thought it would be.
+**GRANDMA** (Encouraging): It's alright, dearie. I have the recipe right here. Just follow it closely and you can't go wrong!
+**DEB** (Joyous): You're an angel, sis!
+**GRANDMA** (Encouraging): It's nice to hear that someone thinks so!
+
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_20
+`SE_HopeberryFestival2023_Decoration_Slot20_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_20, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**MADDIE**: How's the hopeberry juice coming along? 
+**DEB** (Worried): Well... It is quite interesting. The recipe isn't the easiest to follow, you know.
+**MADDIE** (Doubtful): What do you mean? 
+**DEB** (Doubtful): Well, there are so many steps and ingredients and it's... <b>Boring.</b>
+**MADDIE** (Thinking): Boring? It's a recipe, Deb. It's supposed to be boring.
+**DEB** (Thinking): Take a look for yourself then...
+**MADDIE** (Surprised): "Bring your solution to the point of ebullition and let it reach congealment, then dilute your gel in a mixture of citric acid and dihydrogen monoxide..."
+**MADDIE** (Doubtful): Boy, Deb... You weren't kidding! 
+**DEB** (Frustrated): All she had to say was "Boil your mixture until it thickens and add some lemon juice and water." 
+
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_21
+`SE_HopeberryFestival2023_Decoration_Slot21_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_21, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**VICTORIA** (Thinking): I honestly don't see what all the fuss is about...
+**DEB** (Doubtful): Come now, Victoria. You're the new head of city council! You should know all about the Hopeberry Festival!
+**VICTORIA** (Doubtful): It's just some silly event celebrating a shrub. Who cares?
+**DEB** (Encouraging): The people care, Victoria. Besides, this "shrub" is the only one of its kind in the world!
+**VICTORIA** (Thinking): I doubt that, Deb.
+**DEB** (Frustrated): I now see why my sister speaks so "highly" of you...
+
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_22
+`SE_HopeberryFestival2023_Decoration_Slot22_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_22, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**DEB** (Thinking): This thing has always given me the creeps...
+**WINSTON**: Then it is doing its job, ma'am.
+**DEB** (Relaxed): Come to think of it, it <b>does</b> resemble Mr. Winston, doesn't it?!
+**GRANDMA** (Encouraging): Ha ha!
+**WINSTON** (Doubtful): Hmph!
+
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_23
+`SE_HopeberryFestival2023_Decoration_Slot23_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_23, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**MADDIE**: I brought some flowers for you, Deb!
+**DEB** (Joyous): Oooh, daffodils! These will be great for the festival.
+**MADDIE** (Encouraging): I thought so too. I really like daffodils!
+**DEB** (Relaxed): Let me guess... It's the color? 
+**MADDIE** (Surprised): Ye...Yes! How'd you know?!
+
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_24
+`SE_HopeberryFestival2023_Decoration_Slot24_Dialogue` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_24, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+**MADDIE** (Joyous): Hopeberry Juice Man! I love this guy!
+**DEB** (Relaxed): He is charming but nothing like his girlfriend...
+**MADDIE** (Surprised): Girlfriend? What are you talking about? 
+**DEB** (Charming): I may have ordered a custom made Hopeberry Juice Woman...
+**MADDIE** (Relaxed): But... I don't see it anywhere...
+**DEB** (Relaxed): Honey... You ain't seen nothing yet!
+
+### Hopeberry Festival — item discovered: Sundae
+`SE_HopeberryFestival2023_HopeberryIceCream_05_Dialogue` · seen 23.09.02–25.06.01
+- trigger: item, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, itemKeys=['HopeberryIceCream_05'], items=['Sundae'], moment=item discovered (versions 23.09.02–25.06.01)
+
+**DEB** (Charming): I'd say you outdid yourself on this one, Cherry!
+**CHERRY** (Encouraging): Why thank you, sugar!
+
+### Hopeberry Festival — item discovered: SE_HopeberryFestival2023_HopeberryPie_06
+`SE_HopeberryFestival2023_HopeberryPie_06_Dialogue` · seen 23.09.02–25.06.01
+- trigger: item, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, itemKeys=['SE_HopeberryFestival2023_HopeberryPie_06'], items=['SE_HopeberryFestival2023_HopeberryPie_06'], moment=item discovered (versions 23.09.02–25.06.01)
+
+**DEB**: Thank you for letting me have some of your pies, sis!
+**GRANDMA** (Relaxed): It's no problem, dearie! I'm always happy to have an excuse to bake more pies.
+
+### Hopeberry Festival — item discovered: 8435
+`SE_HopeberryFestival2023_HopeberryScarecrow_06_Dialogue` · seen 23.09.02–25.06.01
+- trigger: item, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, itemKeys=['8435'], items=['8435'], moment=item discovered (versions 23.09.02–25.06.01)
+
+**DEB** (Doubtful): Why can't these things be more cheerful? Or... handsome?
+**MADDIE** (Thinking): I don't think their job is to attract anyone, Deb...
+**DEB**: You can say that again! It sure does keep the birds away from these bushes, though. I've never seen them so full of berries!
+
+### Hopeberry Festival — item discovered: Hopeberry Basket
+`SE_HopeberryFestival2023_Hopeberry_05_Dialogue` · seen 23.09.02–25.06.01
+- trigger: item, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, itemKeys=['Hopeberry_05'], items=['Hopeberry Basket'], moment=item discovered (versions 23.09.02–25.06.01)
+
+**DEB**: There! This should be enough hopeberries for now! 
+**MADDIE** (Surprised): Wow, Deb! How'd you manage to pick so many?!
+**DEB** (Relaxed): Cultivation, Maddie. And... I got Roddy to do most of the work. He's such a gentleman, isn't he?
+
+### Hopeberry Festival — part of the event (exact trigger not dumped)
 `SE_HopeberryFestival2023_IntroPart1_Dialogue` · seen 23.09.02–25.06.01
-- trigger: unknown, hint=Seasonal event (versions None–None)
+- trigger: event, eventType=event story, event=Hopeberry Festival, eventId=SE_HopeberryFestival2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–25.06.01)
 
 **DEB** (Joyous): Well sis, it's that time of year again!
 **GRANDMA** (Thinking): What time is that, Deb?
@@ -710,19 +989,36 @@ Every story in which Deb speaks.
 **GRANDMA** (Surprised): Oh my! I totally forgot! So much has happened, I didn't even remember to get the juice ready! 
 **DEB** (Encouraging): Never fear, Deb is here! Let me do it, sis! I've always wanted to give it a go, and as you know, I am a connoisseur of fine beverages...
 
+### Hopeberry Festival — item discovered: Hopeberry Event Gate
+`SE_HopeberryFestival2023_IntroPart2_Dialogue` · seen 23.09.02–25.06.01
+- trigger: item, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, itemKeys=['HopeberryEntranceExit_01'], items=['Hopeberry Event Gate'], moment=item discovered (versions 23.09.02–25.06.01)
+
+**DEB** (Charming): How hard can it be? Squeeze a few berries, collect the juice, bottle it and Bob's your uncle!
+**GRANDMA** (Doubtful): Well... A little more than that, dearie. It has thirty two flavors after all. Maybe I should get the recipe for you just in case...
+**DEB** (Annoyed): No, no... I insist on doing it my own way!
+**GRANDMA** (Worried): If you insist...
+
+### SEValentines2023 — decoration SE_Valentines2023_Decoration_21
+`SE_Valentines2023_LoverLane` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_Valentines2023_Decoration_21, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+
 ### SE Valentines2023 Opening Dialogue
 `SE_Valentines2023_Opening_Dialogue` · seen 23.09.02–25.06.01
-- trigger: unknown, hint=Seasonal event (versions None–None)
 
 
 ### SE Valentines2023 Outro Dialogue
 `SE_Valentines2023_Outro_Dialogue` · seen 23.09.02–25.06.01
-- trigger: unknown, hint=Seasonal event (versions None–None)
 
 
-### SP AlpacaPet2024 TA2 Dialogue
+### SEValentines2023 — decoration SE_Valentines2023_Decoration_16
+`SE_Valentines2023_ValentineDinnerTable` · seen 23.09.02–25.06.01
+- trigger: decoration, decoration=SE_Valentines2023_Decoration_16, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+
+
+### Woolly Mystery — part of the event (exact trigger not dumped)
 `SP_AlpacaPet2024_TA2_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Woolly Mystery, eventId=SP_AlpacaPet2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **DEB** (Worried): Maddie! Something TRULY awful has happened!
 **MADDIE** (Surprised): What is it, Deb?
@@ -735,17 +1031,6 @@ Every story in which Deb speaks.
 **MADDIE** (Thinking): Yes, he's Cherry's, but...
 **DEB** (Frustrated): Cherry's?? I'll be having words with her, then!
 **DEB** (Frustrated): It is one thing to have a... well, adorable alpaca as a pet. It is quite another to let it wander around ruining people's beloved plants!
-
-### SP AmyPet2025 TA2 Dialogue
-`SP_AmyPet2025_TA2_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
-
-**MADDIE** (Joyous): Ta-da! Isn't it great? I think I've thought of everything, and Amy seems very satisfied.
-**GRANDMA** (Relaxed): She should be! What a wonderful little place.
-**GRANDMA** (Relaxed): Let me just snap a couple of photos of it.
-**MADDIE** (Doubtful): What account is that you've got open on your phone?
-**GRANDMA** (Surprised): Oh, this? I think this phone is acting up, always switching things up...
-**GRANDMA** (Thinking): Here we go. These cat photos will be gold for my followers!
 
 ### Amy's Mystery — decoration SP_AmyTheCat2023_Decoration_Slot26
 `SP_AmyTheCat2023_Decoration_Slot26_Dialogue` · seen 23.09.02–26.07.01
@@ -862,6 +1147,19 @@ Every story in which Deb speaks.
 **MADDIE** (Discouraged): But I don't think he enjoyed his mouthful too much...
 **DEB** (Discouraged): This is a dark day, my dear.
 
+### Deb’s Mystery — outro
+`SP_DebsMystery2023AllRewardsCompleted` · seen 23.09.02–26.07.01
+- trigger: event, event=Deb’s Mystery, eventId=SP_DebsMystery2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**DEB** (Discouraged): Well... That’s it. Guess we have to wait another 10 years for the next one.
+**MADDIE** (Encouraging): But good things come to those who wait, right?
+**DEB** (Doubtful): If I were you, sweetie... I wouldn’t be waiting too long, though.
+**MADDIE** (Surprised): Wh- What do you mean by that?
+**DEB** (Annoyed): The Titan Arum may only bloom every 10 years, but when it does, it’s only for a few precious days.
+**DEB** (Annoyed): It doesn’t dwell on the past and wait for a better time. It takes those rare days and makes them hers!
+**MADDIE** (Charming): Huh... Carpe diem?
+**DEB**: Precisely, sweetie. Precisely.
+
 ### Deb’s Mystery — decoration SP_DebsMystery2023_Decoration_Slot25
 `SP_DebsMystery2023Decoration_Slot25` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot25, event=Deb’s Mystery, eventKey=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
@@ -925,6 +1223,19 @@ Every story in which Deb speaks.
 **DEB** (Charming): ... What’s that? Oh, LOVE of course!
 **MADDIE** (Doubtful): Of course.
 
+### Deb’s Mystery — intro
+`SP_DebsMystery2023Intro` · seen 23.09.02–26.07.01
+- trigger: event, event=Deb’s Mystery, eventId=SP_DebsMystery2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**DEB**: Maddie, sweetie! So good of you to join me in this little endeavor.
+**MADDIE** (Encouraging): It’s no problem aunt Deb, anything to help!
+**DEB** (Joyous): That’s wonderful, because something amazing is about to happen!
+**MADDIE**: Oh?
+**DEB** (Charming): Yes, my Titan Arum is blooming!
+**MADDIE** (Doubtful): Er... What?
+**DEB** (Joyous): My corpse flower! She’s blooming! Hasn’t done that in 10 years! We need to show the WORLD!
+**MADDIE** (Surprised): CORPSE FLOWER?!
+
 ### Deb’s Mystery — item discovered: Inflorescence
 `SP_DebsMystery2023LastCollectibleItemDiscovered` · seen 23.09.02–26.07.01
 - trigger: item, event=Deb’s Mystery, eventKey=SP_DebsMystery2023, itemKeys=['SP_DebsMystery2023_CollectableItems_04'], items=['Inflorescence'], moment=item discovered (versions 23.09.02–26.07.01)
@@ -937,6 +1248,25 @@ Every story in which Deb speaks.
 **DEB** (Annoyed): Names are just labels we give each other. They don’t define us...
 **DEB** (Discouraged): Even if we sometimes wish they did.
 **MADDIE** (Thinking): I wonder what she meant by that? Doesn’t she like her name?
+
+### Grandma's Mystery — outro
+`SP_GrandmasMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Grandma's Mystery, eventId=SP_GrandmasMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**GRANDMA** (Frustrated): I assure you, I did NOT kill poor Hank.
+**GRANDMA** (Frustrated): I did speak to him before he left, but he is still in one piece, as far as I know.
+**DEB** (Frustrated): So where is my Hank?? 
+**HANK** (Charming): Hello, Deb.
+**DEB** (Surprised): HANK?? Is that a baby you have with you?
+**HANK** (Thinking): You must be totally confused about what happened to me!
+**HANK** (Thinking): See, Ursula found out that my ex-girlfriend had had a baby and sent me to make things right... I asked her not to tell you, 'cos I was wanted to get everything in order first.
+**HANK** (Encouraging): So here I am! It's your baby, Deb.
+**DEB** (Thinking): I don't think that's how it works, Hank...
+**GRANDMA** (Thinking): I learned about this child through Reginald's letter and told Hank. He begged me to keep his secret, so I did.
+**GRANDMA** (Encouraging): Hank is a gentleman at his core, so I knew that he would do what was right.
+**MADDIE** (Surprised): My head is spinning.
+**MADDIE** (Surprised): So... everyone's alive, Hank's back, and everything's fine?
+**GRANDMA** (Joyous): Looks like it!
 
 ### Grandma's Mystery — decoration SP_GrandmasMystery2024_Decoration_Slot37
 `SP_GrandmasMystery2024_Decoration_Slot37_Dialogue` · seen 25.05.01–26.07.01
@@ -953,6 +1283,32 @@ Every story in which Deb speaks.
 **GRANDMA** (Thinking): Secondly, the bone Goldie found was an old Halloween decoration. Now if I really HAD done what you accuse me of, you would not suspect a thing...
 **MADDIE** (Thinking): So, where IS Hank?
 **GRANDMA** (Discouraged): That is a more complicated question, dearie...
+
+### Halloween Mystery — outro
+`SP_Halloween2024_AllRewardsCompleted_Dialogue` · seen 24.07.01–26.07.01
+- trigger: event, event=Halloween Mystery, eventId=SP_Halloween2024, eventType=Mystery / Progression, moment=outro (versions 24.07.01–24.11.02)
+
+**GRANDMA** (Doubtful): That was a strange business about the newspaper ad, wasn't it?
+**DEB** (Doubtful): It certainly was.
+**GRANDMA** (Annoyed): I was hoping to put all of the commotion behind us and start clearing the Boulton name, but someone seems intent on causing trouble.
+**DEB** (Thinking): I'm sure it was an honest mistake!
+**GRANDMA** (Thinking): A very strange mistake, I would say, and I do intend to look into it.
+**GRANDMA** (Thinking): Now I have to run, or my apple pie will burn in the oven. See you later!
+**DEB** (Worried): I have a terrible feeling...
+**DEB** (Worried): ...that I might know who is behind this.
+
+### Proposal Mystery — outro
+`SP_HanksMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Proposal Mystery, eventId=SP_HanksMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**GRANDMA** (Relaxed): Deb, there is something you should see...
+**DEB** (Surprised): What's all this in your front yard? If this is your idea of a joke, Ursula, I swear...
+**HANK** (Charming): No, Deb - this is all for you.
+**DEB** (Surprised): Hank?? You did all of this... for me?
+**DEB** (Worried): But why? I thought you were gearing up to leave Hopewell Bay - and me.
+**HANK** (Surprised): Leave you, Deb? Never!
+**HANK**: Actually, there's something I want to ask...
+**HANK**: Would you make me the happiest man in the world and be my wife?
 
 ### Proposal Mystery — decoration SP_HanksMystery2024_Decoration_Slot26
 `SP_HanksMystery2024_Decoration_Slot26_Dialogue` · seen 25.05.01–26.07.01
@@ -975,6 +1331,22 @@ Every story in which Deb speaks.
 **GRANDMA**: No.... No, I guess not. But I’m wondering who it might be!
 **DEB** (Relaxed): Well... When they’re done, tell them to do my house too.
 
+### Mini Horse Mystery — outro
+`SP_MiniHorseMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Mini Horse Mystery, eventId=SP_MiniHorseMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**DEB** (Frustrated): Hank?
+**HANK**: Yeah, Debby-poo?
+**DEB** (Doubtful): Is there anything you would like to tell me - before we tie the knot?
+**HANK** (Thinking): Ummm... No?
+**DEB** (Frustrated): My ex-husband Reginald thinks otherwise! "Your husband-to-be is hiding something from you..."
+**HANK** (Surprised): I-I don't know what he's talking about. Honest! He must be jealous of our love!
+**DEB** (Thinking): Hrrrmm, maybe. I think the seating chart requires my attention... But this conversation is not over!
+**HANK** (Thinking): OK, my sweet corpse flower.
+**GRANDMA** (Frustrated): Hank, may I steal you for a minute?
+**HANK**: Sure, Ursula. What's up?
+**GRANDMA** (Thinking): Come with me...
+
 ### Mini Horse Mystery — item discovered: Grooming Bag
 `SP_MiniHorseMystery2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Mini Horse Mystery, eventKey=SP_MiniHorseMystery2024, itemKeys=['SP_MiniHorseMystery2024_CollectableItems_04'], items=['Grooming Bag'], moment=item discovered (versions 25.05.01–26.07.01)
@@ -985,9 +1357,9 @@ Every story in which Deb speaks.
 **DEB** (Charming): How about next month?
 **HANK** (Surprised): Ummm... Whatever you want!
 
-### SP MiniHorseMystery2024 LayerDecoration 01 Dialogue
+### Mini Horse Mystery — part of the event (exact trigger not dumped)
 `SP_MiniHorseMystery2024_LayerDecoration_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Mini Horse Mystery, eventId=SP_MiniHorseMystery2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Listen, Deb... Did you read the whole letter?
 **DEB** (Charming): It was lovely, wasn't it?
@@ -997,9 +1369,9 @@ Every story in which Deb speaks.
 **GRANDMA** (Doubtful): What in the world is going on?
 **DEB** (Frustrated): Hank's got some explaining to do, that's what!
 
-### SP MiniHorseMystery2024 LayerDecoration 02 Dialogue
+### Mini Horse Mystery — part of the event (exact trigger not dumped)
 `SP_MiniHorseMystery2024_LayerDecoration_02_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Mini Horse Mystery, eventId=SP_MiniHorseMystery2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **DEB** (Encouraging): Now this looks like a worthy home for my valiant steed! Reginald would also approve.
 **DEB** (Encouraging): You have thought of everything. There's carrots, too! He does love them.
@@ -1021,9 +1393,9 @@ Every story in which Deb speaks.
 **DEB** (Frustrated): I don’t believe she thinks she gets to come back from a life like that.
 **MADDIE** (Thinking): What does she do?
 
-### SP Pickleball2025 Decoration Slot32 Dialogue
+### Smartphone Pickle — part of the event (exact trigger not dumped)
 `SP_Pickleball2025_Decoration_Slot32_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Smartphone Pickle, eventId=SP_Pickleball2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **DEB** (Encouraging): Where is this pickleball tournament taking place?
 **DEB** (Encouraging): I hope Ursula is prepared to bow down to a superior opposition!
@@ -1087,19 +1459,22 @@ Every story in which Deb speaks.
 **MADDIE** (Surprised): What?!
 **DEB** (Frustrated): What? Oh... That? Never mind, I didn’t say anything. C’mon Hank. I really need to go to sleep...
 
-### The Winds of Mystery — decoration SP_TheWindOfMystery2024_Decoration_Slot34
-`SP_TheWindOfMystery2024_Decoration_Slot34_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot34, event=The Winds of Mystery, eventKey=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+### The Wedding Mystery — outro
+`SP_WeddingMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=The Wedding Mystery, eventId=SP_WeddingMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-**RODDY**: Hey, Maddie!
-**MADDIE** (Encouraging): Hi, Roddy! Just in time; you can help me fertilize these tomatoes!
-**RODDY** (Surprised): Erm... You’re planting tomatoes... Now? Haven’t you seen the weather?
-**MADDIE** (Joyous): Yes! The newspaper promised perfect weather!
-**RODDY** (Thinking): Er... Maddie, it looks like the storm might change course. There’s a good chance it might hit us!
-**MADDIE** (Doubtful): Oh, don’t be so full of doom and gloom. A few gusts of wind and a bit of rain never hurt anybody.
-**RODDY** (Discouraged): Seriously, I have a friend at the weather station, and they’re pretty sure things might go south...
-**RODDY** (Worried): Fast.
-**MADDIE** (Relaxed): I’m sure it’ll be fine!
+**MADDIE** (Encouraging): Well, I would call that a very successful wedding!
+**JACKIE** (Encouraging): You did great out there, baby.
+**RODDY** (Relaxed): Thanks, Jackie.
+**MADDIE**: Well, I uuh... Should start clean-
+**DEB** (Worried): Have any of you seen Hank?!
+**MADDIE** (Relaxed): Yeah, sure! He was just here a minute ago.
+**DEB** (Worried): No, he wasn’t... I’ve looked everywhere! Haaank!
+**MADDIE** (Worried): Deb, Deb... Calm down, I’m sure he’s just inside, doing his hair or lifting weights or something...
+**DEB** (Worried): No, his hair is fine and today is leg day. He isn’t answering his phone; I can’t find him, Maddie! HAANK!
+**JACKIE** (Thinking): Wasn’t.... Wasn’t Grandma the last person to speak to him?
+**RODDY** (Worried): I think so...
+**DEB** (Worried): HAAANK!!! Where are you?!
 
 ### The Wedding Mystery — decoration SP_WeddingMystery2024_Decoration_Slot32
 `SP_WeddingMystery2024_Decoration_Slot32_Dialogue` · seen 25.05.01–26.07.01
@@ -1141,7 +1516,6 @@ Every story in which Deb speaks.
 
 ### Stablesinterior10
 `Stablesinterior10` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **DEB** (Doubtful): Well, hello, darling!
 **MADDIE** (Surprised): Deb! You're here!
@@ -1205,7 +1579,6 @@ Every story in which Deb speaks.
 
 ### Stablesinterior15
 `Stablesinterior15` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **DEB** (Discouraged): You see, Leonard was intent on turning this place into a racecourse.
 **DEB** (Discouraged): A plan I didn't agree with. So, I made sure all the Boulton horses moved to better homes.
@@ -1218,7 +1591,6 @@ Every story in which Deb speaks.
 
 ### Stablesinterior16
 `Stablesinterior16` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **DEB** (Discouraged): Well, I've known him all my life, and he's always cared more about money than family.
 **MADDIE** (Worried): What about Winston?
@@ -1272,7 +1644,6 @@ Every story in which Deb speaks.
 
 ### Stablesinterior Slowfeeder
 `Stablesinterior_Slowfeeder` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Encouraging): An equine slow feeder, just so you don’t gorge yourself!
 **BABYLON** (Frustrated): *Hmph!*
@@ -1364,7 +1735,7 @@ Every story in which Deb speaks.
 **MADDIE** (Surprised): I will?!
 
 ### Tennis Court: Wash back wall
-`TennisCourtDialogueB` · seen 24.04.01–26.07.01
+`TennisCourtDialogueB` · seen 23.09.02–26.07.01
 - trigger: area, area=Tennis Court, areaId=TennisCourt, hotspotId=TennisCourtTopCornerBackWallWashBackWallG1, phase=task completed, task=Wash back wall (versions 24.04.01–26.07.01)
 
 **MADDIE**: Great Aunt Deb! It's so good to see you. Thanks for coming over.
@@ -1378,7 +1749,7 @@ Every story in which Deb speaks.
 **DEB**: Well, I don't want to say too much, but I'm sure it's here. You should look for it - see if you can find <b>my</b> missing treasure!
 
 ### Tennis Court: Remove old court markings
-`TennisCourtDialogueC` · seen 24.04.01–26.07.01
+`TennisCourtDialogueC` · seen 23.09.02–26.07.01
 - trigger: area, area=Tennis Court, areaId=TennisCourt, hotspotId=TennisCourtSurfaceRemoveCourtMarkingsJ6, phase=task completed, task=Remove old court markings (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Grandma! And Great Aunt Deb! I didn't expect to see both of you.
@@ -1394,7 +1765,7 @@ Every story in which Deb speaks.
 **MADDIE**: How can I say no to that?
 
 ### Tennis Court: Place tennis trophy
-`TennisCourtDialogueD` · seen 24.04.01–26.07.01
+`TennisCourtDialogueD` · seen 23.09.02–26.07.01
 - trigger: area, area=Tennis Court, areaId=TennisCourt, hotspotId=TennisCourtClubHousePlaceTennisTrophyH13, phase=task completed, task=Place tennis trophy (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): I found something! Is this it - the family treasure?! A dirty old trophy with a note wrapped round it?
@@ -1410,7 +1781,7 @@ Every story in which Deb speaks.
 **MADDIE**: But now to the Lighthouse! Since no-one is helping me to find it I'll just go to the shore and look for it myself!
 
 ### Tennis Court: Remove dirt
-`TennisCourtIntro` · seen 24.04.01–26.07.01
+`TennisCourtIntro` · seen 23.09.02–26.07.01
 - trigger: area, area=Tennis Court, areaId=TennisCourt, hotspotId=TennisCourtEntryRemoveDirtA3, phase=task completed, task=Remove dirt (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Wow! I had no idea there was a whole tennis court here.
@@ -1424,7 +1795,7 @@ Every story in which Deb speaks.
 **MADDIE** (Frustrated): Why is everyone talking in riddles and no one's telling me the truth!
 
 ### Dining Room: Polish the trophy
-`Trophy` · seen 24.04.01–26.07.01
+`Trophy` · seen 23.09.02–26.07.01
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomSwapRundownTrophyGb2, phase=task completed, task=Polish the trophy (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Ooh, there's a trophy on display here!

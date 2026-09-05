@@ -38,6 +38,15 @@
 
 **MADDIE** (Charming): Aww! They're so cute! 
 
+### The Great Bake-off — item discovered: Chicken Nest
+`LBE_May2023EggNest` · seen 23.09.02–26.07.01
+- trigger: item, event=The Great Bake-off, eventKey=LBE_May2023, itemKeys=['LBE_May2023_Nest_01'], items=['Chicken Nest'], moment=item discovered (versions 23.09.02–23.11.02)
+
+**JACKIE** (Surprised): A nest? What am I supposed to do with this?!
+**GRANDMA** (Thinking): Hmm... It is a bake-off after all, so I'll probably need a lot of eggs.  
+  _(1 cosmetic edit not shown)_
+**HEIKKI** (Joyous): I might need a chicken coop...
+
 ### The Great Bake-off — item discovered: Egg
 `LBE_May2023Eggs` · seen 23.09.02–26.07.01
 - trigger: item, event=The Great Bake-off, eventKey=LBE_May2023, itemKeys=['LBE_May2023_Eggs_01'], items=['Egg'], moment=item discovered (versions 23.09.02–26.07.01)
@@ -45,7 +54,7 @@
 **RODDY**: I'm going to need a lot of these if I'm going to be baking...
 
 ### The Great Bake-off — event end
-`LBE_May2023Outro` · seen 24.04.01–26.07.01
+`LBE_May2023Outro` · seen 23.09.02–26.07.01
 - trigger: event, event=The Great Bake-off, eventId=LBE_May2023, eventType=Leaderboard Event, moment=event end (versions 24.04.01–26.07.01)
 
 **PEARL** (Encouraging): Well done everyone! I've never seen such amazing cakes!

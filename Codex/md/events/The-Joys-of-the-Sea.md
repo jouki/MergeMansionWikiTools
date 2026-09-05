@@ -240,6 +240,14 @@
 **EMILIO** (Thinking): But remember, it’s not enough to just throw them back in the water.
 **EMILIO** (Encouraging): Take appropriate action before, during and after landing a fish!
 
+### The Joys of the Sea — part of the event (exact trigger not dumped)
+`CBE_JoysOfTheSea2023_FishingShack_Dialogue` · seen 23.09.02–26.07.01
+- trigger: event, eventType=event story, event=The Joys of the Sea, eventId=CBE_JoysOfTheSea2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
+
+**EMILIO**: Instead of taking all your tackle gear back with you, renting a fishing shack for storage is very convenient.
+**EMILIO**: It can also help you maintain sustainable fishing practices when near regulated fishing areas!
+**EMILIO** (Encouraging): And... They’re really cozy!
+
 ### The Joys of the Sea — item discovered: Grandma's Boathouse
 `CBE_JoysOfTheSea2023_GrandmasBoathouse_Dialogue` · seen 23.09.02–26.07.01
 - trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_GrandmasBoathouse_04'], items=["Grandma's Boathouse"], moment=item discovered (versions 23.09.02–26.07.01)

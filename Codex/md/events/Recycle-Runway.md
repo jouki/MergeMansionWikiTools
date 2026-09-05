@@ -113,7 +113,7 @@
 **JACKIE** (Surprised): Someone is definitely hiding something - are those bullet holes??
 
 ### Recycle Runway — event start
-`CBE_RecycleRunway2024_IntroDialogue_Dialogue` · seen 26.04.02–26.07.01
+`CBE_RecycleRunway2024_IntroDialogue_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Recycle Runway, eventId=CBE_RecycleRunway2024, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **PEARL**: How's life at the newspaper, Jackie?

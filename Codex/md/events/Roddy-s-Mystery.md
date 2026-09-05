@@ -1,6 +1,18 @@
 # Roddy's Mystery
 
 
+### Roddy's Mystery — outro
+`SP_RoddysMystery2023_AllRewardsCompleted_Dialogue` · seen 23.09.02–26.07.01
+- trigger: event, event=Roddy's Mystery, eventId=SP_RoddysMystery2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**GRANDMA** (Discouraged): I'm sorry Roddy. All I wanted to do was bring a little fun to your summer camp...
+**RODDY** (Doubtful): Fun?! You scared me half to death! 
+**GRANDMA** (Doubtful): Well, I wasn't expecting you to have a crippling fear of ghosts!
+**RODDY** (Charming): I guess I wanted to keep that secret. It's a bit embarrassing.
+**GRANDMA** (Charming): How about you, Mason, dearie? Did you have fun?
+**MASON** (Joyous): BEST. SUMMER CAMP. EVER!!! It had everything: camping, marshmallows, GHOSTS!
+**RODDY** (Relaxed): Well... There you go then!
+
 ### Roddy's Mystery — decoration SP_RoddysMystery2023_Decoration_Slot25
 `SP_RoddysMystery2023_Decoration_Slot25_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_RoddysMystery2023_Decoration_Slot25, event=Roddy's Mystery, eventKey=SP_RoddysMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)

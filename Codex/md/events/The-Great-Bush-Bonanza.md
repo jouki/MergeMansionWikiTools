@@ -32,7 +32,7 @@
 **DEB** (Discouraged): I... Uh... Wow!
 
 ### The Great Bush Bonanza! — entering board
-`LBE_BushBonanzaIntro` · seen 24.04.01–26.07.01
+`LBE_BushBonanzaIntro` · seen 23.09.02–26.07.01
 - trigger: event, event=The Great Bush Bonanza!, eventId=LBE_BushBonanza, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–26.07.01)
 
 **PEARL**: Welcome everyone to the Great Bush Bonanza! Hopewell Bay’s premier topiary event!
@@ -50,7 +50,7 @@
 **PEARL** (Encouraging): That’s the spirit!
 
 ### The Great Bush Bonanza! — event end
-`LBE_BushBonanzaOutro` · seen 24.04.01–26.07.01
+`LBE_BushBonanzaOutro` · seen 23.09.02–26.07.01
 - trigger: event, event=The Great Bush Bonanza!, eventId=LBE_BushBonanza, eventType=Leaderboard Event, moment=event end (versions 24.04.01–26.07.01)
 
 **DEB** (Frustrated): While I’m calling it luck, you beat me fair and square!

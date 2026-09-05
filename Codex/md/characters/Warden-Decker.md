@@ -1,17 +1,17 @@
 # Warden Decker
 Every story in which Warden Decker speaks.
 
-### SBE Jailbreak FinalWardenConfrontrationIntro
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_FinalWardenConfrontrationIntro` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **WARDEN DECKER**: I don’t know how you fooled my guards, but I doubt there is anything you can do to harm me.
 **WARDEN DECKER**: Don’t forget... THIS IS MY DOMAIN.
 **GRANDMA**: Not for long dearie...
 
-### SBE Jailbreak P6GangUnlock
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_P6GangUnlock` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **WARDEN DECKER**: Hello, Mrs. Boulton. It is a pleasure to finally meet you. I hope you’ve enjoyed your stay so far?
 **GRANDMA**: Actually, I would like to see the manager and lodge a complaint.
@@ -21,9 +21,9 @@ Every story in which Warden Decker speaks.
 **WARDEN DECKER**: So, just to be safe, I’m going to have my top guards monitor you from now on.
 **GRANDMA**: Whatever makes you feel safer, dearie...
 
-### SBE Jailbreak WardenChat1
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_WardenChat1` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **WARDEN DECKER**: I’ve been reading up on you Ursula... Or is it Grandma? Would you prefer Grandma?
 **GRANDMA**: Not from you.
@@ -31,9 +31,9 @@ Every story in which Warden Decker speaks.
 **GRANDMA**: Thanks, but you don’t need to show me any special treatment. I’m more than capable of handling this place...
 **GRANDMA**: And you.
 
-### SBE Jailbreak WardenChat2
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_WardenChat2` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **WARDEN DECKER**: I hope my guards haven’t been pestering you too much, my dear.
 **GRANDMA**: Oh, not at all. In fact, some have been downright helpful!
@@ -42,9 +42,9 @@ Every story in which Warden Decker speaks.
 **WARDEN DECKER**: Let’s see how funny you are after a few years in here.
 **GRANDMA**: I may not be as funny. But you, Warden Decker, will always be a fool.
 
-### SBE Jailbreak WardenChat3
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_WardenChat3` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **WARDEN DECKER**: You know... I thought you would be easier to control...
 **GRANDMA**: That was your first mistake, dearie.
@@ -53,9 +53,9 @@ Every story in which Warden Decker speaks.
 **WARDEN DECKER**: Tell me, how is your grand daughter doing these days?
 **GRANDMA**: Ah... Your second mistake.
 
-### SBE Jailbreak WardenOutro
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_WardenOutro` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **WARDEN DECKER**: Wha- What’s that?!
 **GRANDMA**: I believe you know what it is, dearie...

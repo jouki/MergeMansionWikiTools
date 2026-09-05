@@ -3,7 +3,6 @@ Every story in which Arthur speaks.
 
 ### Cinema02
 `Cinema02` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): Hey... this is a cinema!
 **MADDIE** (Doubtful): Or... a stage?
@@ -15,7 +14,6 @@ Every story in which Arthur speaks.
 
 ### Cinema03
 `Cinema03` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **ARTHUR**: I’m sorry, Mads. I just had to come back and see you again.
 **ARTHUR** (Surprised): Your butler let me in.
@@ -33,7 +31,6 @@ Every story in which Arthur speaks.
 
 ### Cinema04
 `Cinema04` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **ARTHUR** (Charming): See? This is what I’m talking about! You and me! Us. I miss... THIS!
 **MADDIE** (Worried): Arthur... I...
@@ -47,7 +44,6 @@ Every story in which Arthur speaks.
 
 ### Cinema05
 `Cinema05` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Annoyed): Hey! I can make my own decisions!
 **RODDY** (Doubtful): Yeah, buzz off.
@@ -62,7 +58,6 @@ Every story in which Arthur speaks.
 
 ### Cinema06
 `Cinema06` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **ARTHUR** (Doubtful): I’m telling you Mads, you shouldn’t trust him.
 **RODDY** (Annoyed): Trust me? What about you?! Quite convenient for you to turn up again, right?...
@@ -75,7 +70,6 @@ Every story in which Arthur speaks.
 
 ### Cinema07
 `Cinema07` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Doubtful): I don’t understand, what are you saying?
 **RODDY** (Worried): Maddie, don’t listen to him. He’s obviously trying to manipulate you.
@@ -92,8 +86,7 @@ Every story in which Arthur speaks.
 **MADDIE** (Frustrated): Ugh. Men.
 
 ### FirstFloorKitchen 03
-`FirstFloorKitchen_03` · seen 26.06.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FirstFloorKitchen_03` · seen 26.07.01–26.07.01
 
 **ARTHUR**: Hello Mads...
 **MADDIE** (Surprised): Arthur! You surprised me!
@@ -125,8 +118,7 @@ Every story in which Arthur speaks.
 **MADDIE** (Annoyed): Besides... He'd never say the things you do.
 
 ### FirstFloorKitchen 05
-`FirstFloorKitchen_05` · seen 26.06.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FirstFloorKitchen_05` · seen 26.07.01–26.07.01
 
 **MADDIE** (Annoyed): Arthur, I'm really busy and-
 **ARTHUR** (Frustrated): Hold that thought. Someone's calling!
@@ -141,8 +133,7 @@ Every story in which Arthur speaks.
 **MADDIE** (Annoyed): Seriously?!
 
 ### FirstFloorKitchen 09
-`FirstFloorKitchen_09` · seen 26.06.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FirstFloorKitchen_09` · seen 26.07.01–26.07.01
 
 **MADDIE** (Relaxed): Maybe we can install an ordering system?
 **RODDY** (Relaxed): Planning on opening a restaurant, Maddie?
@@ -159,8 +150,7 @@ Every story in which Arthur speaks.
 **ARTHUR** (Doubtful): So be a good dumb waiter and fetch me some butter, will you?
 
 ### FirstFloorKitchen 10
-`FirstFloorKitchen_10` · seen 26.06.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FirstFloorKitchen_10` · seen 26.07.01–26.07.01
 
 **RODDY** (Annoyed): It's dumbwaiter, not DUMB WAITER.
 **ARTHUR** (Frustrated): Well, whatever you call yourself, if you're not going to do your job, then you can go.
@@ -187,8 +177,7 @@ Every story in which Arthur speaks.
 **—**: Boys...
 
 ### FirstFloorKitchen 11
-`FirstFloorKitchen_11` · seen 26.06.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FirstFloorKitchen_11` · seen 26.07.01–26.07.01
 
 **ARTHUR** (Doubtful): Alright, hotshot. Prove it.
 **ARTHUR** (Doubtful): Show me your UH-MAAZING skills...
@@ -207,8 +196,7 @@ Every story in which Arthur speaks.
 **MADDIE** (Surprised): Arthur!!!
 
 ### FirstFloorKitchen 12
-`FirstFloorKitchen_12` · seen 26.06.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`FirstFloorKitchen_12` · seen 26.07.01–26.07.01
 
 **ARTHUR** (Surprised): Ow... OW! No, don't touch it, DON'T TOUCH IT!!!  
   _earlier:_ ~~Aaaargh!!~~ (until 26.05.01)
@@ -247,23 +235,19 @@ Every story in which Arthur speaks.
 **MADDIE** (Worried): Poor Arthur.
 
 ### GrandmaRoom 01
-`GrandmaRoom_01` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`GrandmaRoom_01` · seen 26.07.01–26.07.01
 
 
 ### GrandmaRoom 05
-`GrandmaRoom_05` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`GrandmaRoom_05` · seen 26.07.01–26.07.01
 
 
 ### GrandmaRoom 06
-`GrandmaRoom_06` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`GrandmaRoom_06` · seen 26.07.01–26.07.01
 
 
 ### GrandmaRoom 13
-`GrandmaRoom_13` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`GrandmaRoom_13` · seen 26.07.01–26.07.01
 
 
 ### Grandma's Room: Clean shelf
@@ -281,7 +265,6 @@ Every story in which Arthur speaks.
 
 ### Library07
 `Library07` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Charming): Roddy...
 **RODDY** (Charming): Y- Yes?
@@ -292,7 +275,6 @@ Every story in which Arthur speaks.
 
 ### Library08
 `Library08` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Frustrated): Wha... Wha...
 **RODDY** (Doubtful): Excuse me, but who are you?
@@ -308,7 +290,6 @@ Every story in which Arthur speaks.
 
 ### Library09
 `Library09` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): Is that true Grandma?!
 **GRANDMA** (Annoyed): Yes... It’s true.
@@ -325,7 +306,6 @@ Every story in which Arthur speaks.
 
 ### Library10
 `Library10` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **ARTHUR** (Charming): Mads...
 **MADDIE** (Doubtful): You left me, Arthur. I can’t just forget that.
@@ -340,8 +320,7 @@ Every story in which Arthur speaks.
 **MADDIE** (Frustrated): I... I need to think.
 
 ### SpyRoom 08
-`SpyRoom_08` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+`SpyRoom_08` · seen 26.07.01–26.07.01
 
 **MADDIE** (Talking): Arthur! Hey, I’m sort of busy right now and-
 **ARTHUR** (Charming): Mads! I had SUCH A GREAT TIME at the beach!

@@ -1,9 +1,9 @@
 # XO Adams
 Every story in which XO Adams speaks.
 
-### SBE Jailbreak AdamsTalks
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_AdamsTalks` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **XO ADAMS**: Well, Mrs. Boulton, you sure did a great service for us today!
 **XO ADAMS**: Thanks to you, there was no way for ex-Warden Decker to deny what’s been going on here. He admitted to everything!
@@ -14,9 +14,9 @@ Every story in which XO Adams speaks.
 **XO ADAMS**: I’m not a miracle worker. Besides, I don’t think it should be too inconvenient for you... With your knitting project and all.
 **GRANDMA**: ... I see.
 
-### SBE Jailbreak GrandmaTalksToAdamsAboutEscapePlan
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_GrandmaTalksToAdamsAboutEscapePlan` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **XO ADAMS**: So, it looks like you’ve met the illustrious warden.
 **GRANDMA**: Unfortunately, yes. But thankfully, I know the type. His hubris will be his downfall, dearie.
@@ -27,9 +27,9 @@ Every story in which XO Adams speaks.
 **XO ADAMS**: Wool? That’s it?!
 **GRANDMA**: And... Some pie.
 
-### SBE Jailbreak XoAdamsMeetsGrandmaAtOffice
+### The Great Escape (Jailbreak) — part of the event (exact trigger not dumped)
 `SBE_Jailbreak_XoAdamsMeetsGrandmaAtOffice` · seen 25.05.01–25.06.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: event, eventType=event story, event=The Great Escape (Jailbreak), eventId=SBE_Jailbreak, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **XO ADAMS**: You really know how to surprise people, Grandma. I really didn’t expect you to uncover so much information.
 **GRANDMA**: To be honest, dearie, it wasn’t that difficult. Corruption usually leaves a mess behind it. I just happen to be a good cleaner.

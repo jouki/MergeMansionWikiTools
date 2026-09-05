@@ -1,6 +1,19 @@
 # Pie Wars
 
 
+### Pie Wars — outro
+`SP_PieWars2023_AllRewardsCompleted_Dialogue` · seen 23.09.02–26.07.01
+- trigger: event, event=Pie Wars, eventId=SP_PieWars2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**MADDIE** (Joyous): The votes are in... Who wants to do the honors?
+**GRANDMA**: You do it, dearie.
+**CHERRY**: It would only be fair!
+**MADDIE**: *Opens envelope* 
+**MADDIE**: It's close, but the winner is...
+**MADDIE** (Joyous): Grandma! Congratulations!
+**CHERRY** (Encouraging): Congratulations, sugar! I guess I still have a lot to learn...
+**GRANDMA** (Relaxed): Not too much, dearie. You can bake with the best of them, but sometimes you just can't beat the classics!
+
 ### Pie Wars — decoration SP_PieWars2023_Decoration_Slot25
 `SP_PieWars2023_Decoration_Slot25_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot25, event=Pie Wars, eventKey=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)

@@ -47,9 +47,9 @@ Every story in which Hank speaks.
 **HANK** (Charming): Yeah, well... It's not really mine. Or... it wasn't on my finger.
 **MADDIE** (Thinking): OK... It's gotta be around here somewhere. Maybe Mason saw it when he set up the egg hunt!
 
-### CBE MasonsEggHunt2024 OutroDialogue Dialogue
+### Egg-cellent Adventure — part of the event (exact trigger not dumped)
 `CBE_MasonsEggHunt2024_OutroDialogue_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Egg-cellent Adventure, eventId=CBE_MasonsEggHunt2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: We finally found all the eggs, Mason!
 **MADDIE** (Relaxed): The ones hidden in the floor hatch were a nice touch... How did you find that thing, anyway?
@@ -216,9 +216,9 @@ Every story in which Hank speaks.
 **RODDY** (Relaxed): Right. Have a great time at the Easter Extravaganza and bring back some marshmallow foam!
 **MADDIE** (Relaxed): OK, if you say so. Thanks for your help, guys!
 
-### LDE GrandmasBirthday2023 LayerDecoration 01 Dialogue
+### Grandma's Pool Party — part of the event (exact trigger not dumped)
 `LDE_GrandmasBirthday2023_LayerDecoration_01_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Grandma's Pool Party, eventId=LDE_GrandmasBirthday2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **HANK** (Joyous): Oh, this is going to be so awesome! You wait and see, I’ve designed the perfect recreational area!
 **HANK** (Charming): After all... pools are my specialty!
@@ -230,9 +230,9 @@ Every story in which Hank speaks.
 **MADDIE** (Doubtful): Really?
 **DEB** (Relaxed): It’s really worth it sweetie... REALLY worth it!
 
-### LDE GrandmasBirthday2023 LayerDecoration 03 Dialogue
+### Grandma's Pool Party — part of the event (exact trigger not dumped)
 `LDE_GrandmasBirthday2023_LayerDecoration_03_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Grandma's Pool Party, eventId=LDE_GrandmasBirthday2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): You’re digging the pool here?!
 **DEB** (Encouraging): Where else, sweetie? It’s only temporary. Hank’s designs rarely last very long, anyway.
@@ -240,9 +240,9 @@ Every story in which Hank speaks.
 **DEB** (Charming): Doesn’t he sound just wonderful?
 **MADDIE** (Thinking): Sounds more like poor design, to me...
 
-### LDE GrandmasBirthday2023 LayerDecoration 07 Dialogue
+### Grandma's Pool Party — part of the event (exact trigger not dumped)
 `LDE_GrandmasBirthday2023_LayerDecoration_07_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Grandma's Pool Party, eventId=LDE_GrandmasBirthday2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Grandma! I’m surprised to find you here!
 **GRANDMA** (Joyous): How come, dearie? Because of the pool? Oh, don’t worry about that.
@@ -251,9 +251,9 @@ Every story in which Hank speaks.
 **GRANDMA** (Charming): Of course! It comes with a lifeguard too!
 **HANK** (Charming): Hello!
 
-### LDE GrandmasBirthday2023 LayerDecoration 10 Dialogue
+### Grandma's Pool Party — part of the event (exact trigger not dumped)
 `LDE_GrandmasBirthday2023_LayerDecoration_10_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Grandma's Pool Party, eventId=LDE_GrandmasBirthday2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **HANK** (Encouraging): The Pool Party is officially open! Have an AWESOME time!
 **DEB** (Joyous): Hi, Maddie! Didn’t my Hanky-boo do such an amazing job?!
@@ -264,9 +264,9 @@ Every story in which Hank speaks.
 **HANK** (Thinking): I guess that’s true. Few are an artist and a piece of art, at the same time.
 **MADDIE** (Doubtful): ...More like a piece of work.
 
-### LDE GrandmasBirthday2023 LayerDecoration 12 Dialogue
+### Grandma's Pool Party — part of the event (exact trigger not dumped)
 `LDE_GrandmasBirthday2023_LayerDecoration_12_Dialogue` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Grandma's Pool Party, eventId=LDE_GrandmasBirthday2023, moment=part of the event (exact trigger not dumped) (versions 23.09.02–26.07.01)
 
 **GRANDMA** (Encouraging): I could get used to this pool!
 **DEB** (Joyous): Enjoy it, sis! Happy Birthday!
@@ -432,9 +432,9 @@ Every story in which Hank speaks.
 **MASON**: And pinecones and walnuts!
 **GRANDMA** (Encouraging): Wonderful! Now we just need to find the perfect tree!
 
-### LDE HolidayOddities2025 TC3 Dialogue
-`LDE_HolidayOddities2025_TC3_Dialogue` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+### Holiday Oddities — part of the event (exact trigger not dumped)
+`LDE_HolidayOddities2025_TC3_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Holiday Oddities, eventId=LDE_HolidayOddities2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Surprised): What is this?? The tree is up and decorated, there are presents, and there’s even some... Is that soup?
 **MADDIE** (Relaxed): It’s like a...
@@ -490,9 +490,9 @@ Every story in which Hank speaks.
 **RODDY** (Charming): Yeah, but what if someone needs help?
 **HANK** (Joyous): Like I said: Too nice!
 
-### LDE Hopeberry2025 TC1 Dialogue
+### Love on the Vine — part of the event (exact trigger not dumped)
 `LDE_Hopeberry2025_TC1_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Love on the Vine, eventId=LDE_Hopeberry2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **HANK**: Are you looking to start dating again? I know a couple of nice single ladies I could set you up with...
 **RODDY** (Surprised): Dating? Not yet!
@@ -535,7 +535,6 @@ Every story in which Hank speaks.
 **MASON** (Thinking): Guys, we can do better!  
   _earlier:_ ~~We are, dearie, but I know her better than you think.~~ (until 25.09.01)
 **MASON** (Thinking): I know she is impressive, but she has a lot of secrets.
-**MADDIE** (Relaxed): Thanks for the heads up, Grandma, but I think you might just be paranoid!
 
 ### Circus Caper — item discovered: Small Circus Program
 `LDE_Rumors2025_Brochures_03_Dialogue` · seen 25.05.01–26.07.01
@@ -548,8 +547,6 @@ Every story in which Hank speaks.
 **HANK** (Thinking): That sounds... dangerous.  
   _earlier:_ ~~I ran out of circus brochures, but I know I saw more of them somewhere.~~ (until 25.09.01)
 **HANK** (Thinking): No, haven't seen her... She's probably just getting ready for the show.
-**MADDIE**: Of course. But I don't want to disturb her...
-**PEARL** (Doubtful): I'm sure she won't mind if you get more brochures from her wagon.
 
 ### Circus Caper — item discovered: Shooting Gallery
 `LDE_Rumors2025_CarnivalGames_03_Dialogue` · seen 25.05.01–26.07.01
@@ -683,10 +680,6 @@ Every story in which Hank speaks.
 **HANK** (Joyous): OK, then. Just don’t lose the key, little guy!  
   _earlier:_ ~~Just tell me, where is it?~~ (until 25.09.01)
 **HANK** (Joyous): What?
-**RINGLEADER** (Surprised): The damned Boultonite!
-**GRANDMA** (Surprised): So that's what you were after...
-**RINGLEADER** (Doubtful): You didn't think I want to tour with the Circus for the rest of my life, did you?
-**GRANDMA** (Frustrated): Well, you can think about that for a nice long while - behind bars!
 
 ### Circus Caper — item discovered: Magic Hat
 `LDE_Rumors2025_MagicianProps_05_Dialogue` · seen 25.05.01–26.07.01
@@ -722,6 +715,15 @@ Every story in which Hank speaks.
 **MASON** (Relaxed): You do?? What kind of talent?  
   _earlier:_ ~~No, I still love the circus. But next time they can pitch their tents somewhere else!~~ (until 25.09.01)
 **RINGLEADER** (Relaxed): You would make the perfect clown act!
+
+### Circus Caper — item discovered: Set of Tokens
+`LDE_Rumors2025_Prizes_03_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Prizes_03'], items=['Set of Tokens'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**MADDIE**: Are you going to the circus?
+**HANK** (Joyous): You bet I am!
+**HANK** (Charming): But I don't want to see any clowns...
+**HANK** (Charming): Nothing scarier than a clown.
 
 ### Circus Caper — item discovered: Wardrobe
 `LDE_Rumors2025_RingmasterSuit_05_Dialogue` · seen 25.05.01–26.07.01
@@ -790,9 +792,9 @@ Every story in which Hank speaks.
 **HANK** (Thinking): The ref can’t call penalties anymore?
 **RODDY** (Doubtful): Hank, no! Put it back!
 
-### SLBE Football EventEnd Dialogue
+### The Hopewell Bay Challengers — part of the event (exact trigger not dumped)
 `SLBE_Football_EventEnd_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Solo Leaderboard Event (versions None–None)
+- trigger: event, eventType=event story, event=The Hopewell Bay Challengers, eventId=SLBE_Football, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **HANK** (Encouraging): What a game! WHAT. A. GAME!
 **RODDY** (Doubtful): Yeah, yeah... You can gloat about it...
@@ -840,9 +842,9 @@ Every story in which Hank speaks.
 **RODDY** (Thinking): If it’s on a gaming console, sure.
 **HANK** (Thinking): You were always picked last, weren’t you?
 
-### SLBE Football Intro Dialogue
+### The Hopewell Bay Challengers — part of the event (exact trigger not dumped)
 `SLBE_Football_Intro_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Solo Leaderboard Event (versions None–None)
+- trigger: event, eventType=event story, event=The Hopewell Bay Challengers, eventId=SLBE_Football, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY**: Hey Hank, off to see the game?
 **HANK** (Encouraging): Of course! I’ve been a fan of the team since I was a kid!
@@ -852,58 +854,58 @@ Every story in which Hank speaks.
 **HANK** (Annoyed): You mean the winners?
 **RODDY** (Frustrated): We’ll see about that...
 
-### SLBE Football Stage1Complete Dialogue
+### The Hopewell Bay Challengers — part of the event (exact trigger not dumped)
 `SLBE_Football_Stage1Complete_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Solo Leaderboard Event (versions None–None)
+- trigger: event, eventType=event story, event=The Hopewell Bay Challengers, eventId=SLBE_Football, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Relaxed): Looks like your team forgot how to hold the ball!
 **HANK**: At least they’ve seen the end zone. Your team still thinks it’s a rumor!
 
-### SLBE Football Stage1Start Dialogue
+### The Hopewell Bay Challengers — part of the event (exact trigger not dumped)
 `SLBE_Football_Stage1Start_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Solo Leaderboard Event (versions None–None)
+- trigger: event, eventType=event story, event=The Hopewell Bay Challengers, eventId=SLBE_Football, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Relaxed): Time to see how the Hopewell Bay Challengers do it?
 **HANK** (Encouraging): Ha! Time to see them lose, you mean!
 
-### SLBE Football Stage2Complete Dialogue
+### The Hopewell Bay Challengers — part of the event (exact trigger not dumped)
 `SLBE_Football_Stage2Complete_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Solo Leaderboard Event (versions None–None)
+- trigger: event, eventType=event story, event=The Hopewell Bay Challengers, eventId=SLBE_Football, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Relaxed): Nice play! Too bad it’s going to look better in our highlight reel.
 **HANK** (Annoyed): Keep dreaming, buddy! That’s as close as they’ll ever get to a win today!
 
-### SLBE Football Stage2Start Dialogue
+### The Hopewell Bay Challengers — part of the event (exact trigger not dumped)
 `SLBE_Football_Stage2Start_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Solo Leaderboard Event (versions None–None)
+- trigger: event, eventType=event story, event=The Hopewell Bay Challengers, eventId=SLBE_Football, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **HANK** (Surprised): It’s a close game!
 **RODDY** (Encouraging): Come on Challengers, you can do it!
 
-### SLBE Football Stage3Complete Dialogue
+### The Hopewell Bay Challengers — part of the event (exact trigger not dumped)
 `SLBE_Football_Stage3Complete_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Solo Leaderboard Event (versions None–None)
+- trigger: event, eventType=event story, event=The Hopewell Bay Challengers, eventId=SLBE_Football, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **HANK** (Annoyed): Come on, that pass was off target!
 **RODDY**: I’m surprised he can even aim forward after that sack.
 
-### SLBE Football Stage3Start Dialogue
+### The Hopewell Bay Challengers — part of the event (exact trigger not dumped)
 `SLBE_Football_Stage3Start_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Solo Leaderboard Event (versions None–None)
+- trigger: event, eventType=event story, event=The Hopewell Bay Challengers, eventId=SLBE_Football, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Encouraging): Here we go, don’t let me down!
 **HANK** (Annoyed): Hey! THAT WAS A FOUL!
 
-### SLBE Football Stage4Complete Dialogue
+### The Hopewell Bay Challengers — part of the event (exact trigger not dumped)
 `SLBE_Football_Stage4Complete_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Solo Leaderboard Event (versions None–None)
+- trigger: event, eventType=event story, event=The Hopewell Bay Challengers, eventId=SLBE_Football, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **HANK** (Thinking): Psshh... That play was so predictable!
 **RODDY** (Encouraging): Better than your team’s playbook. I think I saw it in the children’s section.
 
-### SLBE Football Stage4Start Dialogue
+### The Hopewell Bay Challengers — part of the event (exact trigger not dumped)
 `SLBE_Football_Stage4Start_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Solo Leaderboard Event (versions None–None)
+- trigger: event, eventType=event story, event=The Hopewell Bay Challengers, eventId=SLBE_Football, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **HANK** (Surprised): This is it!
 **RODDY** (Worried): It’s all or nothing!
@@ -946,6 +948,38 @@ Every story in which Hank speaks.
 **HANK** (Thinking): And here I thought people just wanted to watch me hit things with a hammer.
 **ANTIQUEDEALER** (Doubtful): Please be careful…
 
+### Grandma's Mystery — outro
+`SP_GrandmasMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Grandma's Mystery, eventId=SP_GrandmasMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**GRANDMA** (Frustrated): I assure you, I did NOT kill poor Hank.
+**GRANDMA** (Frustrated): I did speak to him before he left, but he is still in one piece, as far as I know.
+**DEB** (Frustrated): So where is my Hank?? 
+**HANK** (Charming): Hello, Deb.
+**DEB** (Surprised): HANK?? Is that a baby you have with you?
+**HANK** (Thinking): You must be totally confused about what happened to me!
+**HANK** (Thinking): See, Ursula found out that my ex-girlfriend had had a baby and sent me to make things right... I asked her not to tell you, 'cos I was wanted to get everything in order first.
+**HANK** (Encouraging): So here I am! It's your baby, Deb.
+**DEB** (Thinking): I don't think that's how it works, Hank...
+**GRANDMA** (Thinking): I learned about this child through Reginald's letter and told Hank. He begged me to keep his secret, so I did.
+**GRANDMA** (Encouraging): Hank is a gentleman at his core, so I knew that he would do what was right.
+**MADDIE** (Surprised): My head is spinning.
+**MADDIE** (Surprised): So... everyone's alive, Hank's back, and everything's fine?
+**GRANDMA** (Joyous): Looks like it!
+
+### Proposal Mystery — outro
+`SP_HanksMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Proposal Mystery, eventId=SP_HanksMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**GRANDMA** (Relaxed): Deb, there is something you should see...
+**DEB** (Surprised): What's all this in your front yard? If this is your idea of a joke, Ursula, I swear...
+**HANK** (Charming): No, Deb - this is all for you.
+**DEB** (Surprised): Hank?? You did all of this... for me?
+**DEB** (Worried): But why? I thought you were gearing up to leave Hopewell Bay - and me.
+**HANK** (Surprised): Leave you, Deb? Never!
+**HANK**: Actually, there's something I want to ask...
+**HANK**: Would you make me the happiest man in the world and be my wife?
+
 ### Proposal Mystery — decoration SP_HanksMystery2024_Decoration_Slot28
 `SP_HanksMystery2024_Decoration_Slot28_Dialogue` · seen 25.05.01–26.07.01
 - trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot28, event=Proposal Mystery, eventKey=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
@@ -981,6 +1015,22 @@ Every story in which Hank speaks.
 **HANK** (Surprised): Whoah.... This is getting freaky! What are you?
 **LADY VOYANCE**: I am a medium...
 **HANK** (Charming): Awesome! I’m... XXL myself!
+
+### Mini Horse Mystery — outro
+`SP_MiniHorseMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Mini Horse Mystery, eventId=SP_MiniHorseMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**DEB** (Frustrated): Hank?
+**HANK**: Yeah, Debby-poo?
+**DEB** (Doubtful): Is there anything you would like to tell me - before we tie the knot?
+**HANK** (Thinking): Ummm... No?
+**DEB** (Frustrated): My ex-husband Reginald thinks otherwise! "Your husband-to-be is hiding something from you..."
+**HANK** (Surprised): I-I don't know what he's talking about. Honest! He must be jealous of our love!
+**DEB** (Thinking): Hrrrmm, maybe. I think the seating chart requires my attention... But this conversation is not over!
+**HANK** (Thinking): OK, my sweet corpse flower.
+**GRANDMA** (Frustrated): Hank, may I steal you for a minute?
+**HANK**: Sure, Ursula. What's up?
+**GRANDMA** (Thinking): Come with me...
 
 ### Mini Horse Mystery — item discovered: Grooming Bag
 `SP_MiniHorseMystery2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01

@@ -20,7 +20,7 @@ Run-length rule: a new run only when the value differs from the previous run; `v
 ## Regenerate
 1. `python Codex/build/inventory.py` → `sources.json`
 2. `python Codex/build/extract_loc.py` → `_cache/loc/<ver>.json` (builds DumpHarness into `%TEMP%\mmwt_dumpharness` on first run; `--dump-loc` reads Metaplay `.mpc`)
-3. `python Codex/build/extract_structure.py` → `_cache/structure/<ver>/`
+3. `python Codex/build/extract_structure.py` → `_cache/structure/<ver>/` (+ `stories.json` = StoryElements via DumpHarness `--dump-stories` for every version with a config: archives, embedded `.mpa`, and the app's live config for the newest version)
 4. `python Codex/build/build_codex.py` → `strings.json`, `codex.json` (~35 s)
 5. `python Codex/build/render_md.py` → `md/` (also writes `reruns.json` + `md/misc/reruns.md`); `python Codex/build/render_viewer.py` → `_cache/viewer.html`. `python Codex/build/fetch_area_order.py` refreshes the wiki area order when the mapping module changes.
 
@@ -82,8 +82,8 @@ Build summary: 44 versions · 64 296 strings · 21 180 lines (18 965 alive in 26
 
 | Gap | Count | Meaning |
 |---|---|---|
-| `unknownTriggerStories` | 982 | groups of lines no dumped structure points at: main story / tutorial started client-side (562), and event types whose dumper does not export dialogue fields (LDE 95, CBE 71, SP 64, Mystery Machine 19, Dig 17, LS 17, …). Closing this needs the dumper to export `StoryElements` and the dialogue fields of the remaining event types — a separate decision (app change). |
-| `referencedWithoutLines` | 44 | story ids the game references (birding `LS_*_Dialogue`, `Study*`, `Bonus*`) with no line under that name in any version |
+| `unknownTriggerStories` | 22 (was 982 before StoryElements export) | groups of lines no dumped structure points at: main story / tutorial started client-side (562), and event types whose dumper does not export dialogue fields (LDE 95, CBE 71, SP 64, Mystery Machine 19, Dig 17, LS 17, …). Closing this needs the dumper to export `StoryElements` and the dialogue fields of the remaining event types — a separate decision (app change). |
+| `referencedWithoutLines` | 3 (was 44) | story ids the game references (birding `LS_*_Dialogue`, `Study*`, `Bonus*`) with no line under that name in any version |
 | `locMissing` | 3 894 | lines with no text in any version: silent beats (`NoChange` camera/animation steps, ~2 275 in 26.07.01) plus lines whose key is absent from every localization we have |
 | item hashes | — | dumps produced from old configs leave `ItemTypes` in `CollectibleDialogueMapping` as integer hashes (e.g. `8920249`) — shows up in some `misc/removed.md` titles |
 | cutscenes | — | `Cutscenes` config carries only ids and locations; their spoken lines are ordinary DialogItems (`LDE_…_CutsceneDialogue1_Dialogue_01`) and are in `lines`; `slides` holds the remaining slide/cutscene-looking keys that no line references |
@@ -101,7 +101,7 @@ Build summary: 44 versions · 64 296 strings · 21 180 lines (18 965 alive in 26
 
 Families = same event type + core name with the run tag stripped (`CBE_MaddieInParis2025` / `CBE_MaddieInParis`, `CBE_TheGreatEscape` / `…B`, `LDE_Hopeberry2024` / `2025`). Stories of consecutive runs are paired by **content** (best text match ≥ 50 %), not by id suffix — reruns renumber their item slots. Verdict per pair: identical / cosmetic / rewritten; unmatched stories are *new* or *dropped*. Result: 12 families with more than one run, all of them **sequels with a new script** (nothing reused except 8 stories of The Great Escape B and 2 of Green Acres Quest); reruns that changed nothing keep the same event key and therefore never appear as a second run. The hand-written reading of each family is in `build/rerun_notes.json` and shown on the page.
 
-Known gap: stories referenced only through `StoryElements` whose line ids do not share the story id (Jailbreak: `SBE_Jailbreak_BookCartFull` → lines `SBE_Jailbreak_1StCartIsFull_01…`) stay without lines until the dumper exports `StoryElements` (31 of 91 Jailbreak stories).
+**StoryElements are exported** (`DumpHarness --dump-stories`, 2026-09-05): story membership and line order come straight from the config for 22.02.06, 23.09.02, 23.11.02, 25.05.01, 25.06.01 and the live 26.07.01 (2 849 stories). That closed the naming gap (Jailbreak: `SBE_Jailbreak_BookCartFull` → lines `SBE_Jailbreak_1StCartIsFull_01…`; the event now has 95 stories / 405 lines) and cut `unknownTriggerStories` from 982 to 22 and `referencedWithoutLines` from 44 to 3. Stories the config defines but nothing we dump triggers are attributed to their event by id prefix (`kind: event, moment: part of the event`); 665 stories remain without an area/event (main story and tutorial started client-side).
 
 ## Discord screenshots (OCR) — second, lower-trust source
 

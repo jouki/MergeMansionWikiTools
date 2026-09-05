@@ -29,7 +29,11 @@ def adapt(codex):
                           "state": st if st and st not in ("Default", "NoChange") else None, "text": render_md.latest(l.get("text") or []) or "",
                           "changes": changes, "firstSeen": (l.get("seen") or {}).get("first")})
         if s.get("seen") and s["seen"]["last"] != cur:
-            removed.append({"id": sid, "lastSeen": s["seen"]["last"], "lines": lines})   # keep speakers: the character filter must still work
+            trig = [dict(t) for t in s["triggers"]]                 # keep triggers: area/event filter must still find removed stories
+            for t in trig:
+                if t["kind"] == "itemDiscovered":
+                    t.update({"kind": "item", "event": t.get("chain"), "items": [t.get("itemName") or t.get("item")]})
+            removed.append({"id": sid, "lastSeen": s["seen"]["last"], "lines": lines, "triggers": trig})   # speakers kept too
         else:
             trig = [dict(t) for t in s["triggers"]] or [{"kind": "unknown", "hint": "?"}]
             for t in trig:

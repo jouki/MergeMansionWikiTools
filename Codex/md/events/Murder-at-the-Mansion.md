@@ -1,6 +1,21 @@
 # Murder at the Mansion
 
 
+### Murder at the Mansion — part of the event (exact trigger not dumped)
+`LDE_MurderAtTheMansion_B2_C_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Murder at the Mansion, eventId=LDE_MurderAtTheMansion, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
+
+**JACKIE** (Thinking): I feel like there's something staring us right in the face. But what??
+**RODDY** (Thinking): You tell me. Should I consult the tea leaves again?
+**JACKIE**: Are you sure you can drink ANOTHER cup of tea?
+**RODDY** (Discouraged): Yeah, maybe not. Let's go back to Lady Voyance's house and review the timeline one more time.
+**RODDY** (Thinking): In the morning, I came round to help her with some painting. At that time, she was alive and well.
+**JACKIE** (Thinking): Emilio stopped by to bring her cat the fish treats, but didn't stay. Everything was still fine.
+**RODDY** (Thinking): Bella came for a reading and left angry, but Voyance was fine.
+**JACKIE** (Thinking): And we don't know of anyone else coming to the house on that day.
+**RODDY** (Thinking): No, apart from the mailman. And he didn't have any motive to kill her.
+**JACKIE** (Frustrated): Agreed. So what are we missing?
+
 ### Murder at the Mansion — entering board
 `LDE_MurderAtTheMansion_BoardIntro_Dialogue` · seen 26.05.01–26.07.01
 - trigger: event, event=Murder at the Mansion, eventId=LDE_MurderAtTheMansion, eventType=Collectible Board Event, moment=entering board (versions 26.05.01–26.07.01)
@@ -10,6 +25,27 @@
 **JACKIE** (Thinking): Something definitely doesn’t feel right. This isn’t just an accident. This is… a murder!
 **RODDY** (Worried): A-are you sure? Why would anyone want to kill Lady Voyance?
 **JACKIE**: That’s what we’re going to find out.
+
+### Murder at the Mansion — part of the event (exact trigger not dumped)
+`LDE_MurderAtTheMansion_C3_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Murder at the Mansion, eventId=LDE_MurderAtTheMansion, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
+
+**GRANDMA** (Charming): How is your investigation going? I thought you must be hungry by now, so I've brought you some apple pie fresh from the oven!
+**RODDY** (Encouraging): Thank you, I'm starving!
+**JACKIE**: We are so close, but a piece seems to be missing. A lot of people had a potential motive, but everyone we interviewed had an alibi.
+**JACKIE** (Thinking): The only other person who came by her house that day was the mailman. Apparently, a package addressed to you was mistakenly delivered to her house.
+**GRANDMA** (Surprised): Very mysterious. Wait, did you say a package was delivered? Let me see the photos of the crime scene again!
+**JACKIE** (Frustrated): Sure, but I'm not sure you'll find anything there. We've combed through them so many times.
+**GRANDMA** (Thinking): The position of the body, the coloration of the skin...
+**GRANDMA** (Annoyed): And the package was stamped in... *Sigh* It's not the first time I've encountered this.
+**RODDY** (Surprised): What is it??
+**GRANDMA** (Frustrated): Lady Voyance was always curious to a fault, but this time she stuck her nose in the wrong place. She was killed by a poison, delivered in that package.
+**RODDY** (Worried): The package that was addressed to... you??
+**GRANDMA** (Frustrated): I am afraid so. There are people who wish me ill, and this time Lady Voyance happened to be in the wrong place at the wrong time.
+**JACKIE** (Thinking): So who's the killer?
+**GRANDMA** (Doubtful): That, I am afraid, is classified. It wouldn't be safe to you or anyone here to know.
+**RODDY** (Worried): *Gulp*
+**GRANDMA**: Now help yourselves to some apple pie before it gets cold! I have a phone call to make.
 
 ### Murder at the Mansion — item discovered: Cat Trail
 `LDE_MurderAtTheMansion_CatClues3_Dialogue` · seen 26.05.01–26.07.01
@@ -334,6 +370,16 @@
 **GRANDMA** (Encouraging): If you keep looking, I bet you will find more pieces.
 **MADDIE** (Thinking): So I need to collect the map pieces. But what happens then?
 **GRANDMA** (Charming): You get a reward for each piece, and if you follow the map, you might just solve the whole mystery!
+
+### Murder at the Mansion — part of the event (exact trigger not dumped)
+`LDE_MurderAtTheMansion_TA1_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Murder at the Mansion, eventId=LDE_MurderAtTheMansion, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
+
+**JACKIE** (Thinking): So this is where it happened.
+**RODDY** (Worried): Poor Lady Voyance! She must have been terrified.
+**JACKIE**: I guess the real question is whether she already knew this was going to happen.
+**JACKIE** (Thinking): If she did, maybe she left us some clues to lead us towards the right answer.
+**RODDY** (Thinking): Well, let's see what we can find!
 
 ### Murder at the Mansion — item discovered: Broken Mirror
 `LDE_MurderAtTheMansion_UnfortunateEvents5_Dialogue` · seen 26.05.01–26.07.01

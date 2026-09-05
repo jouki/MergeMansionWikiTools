@@ -23,18 +23,20 @@ Every story in which Bella speaks.
 **MADDIE** (Worried): You could say that...
 **BELLA** (Ready): Hmm... These boxes look kinda familiar!
 
-### Bella's Holiday Workshop — item discovered: Recipe Book
-`CBE_HolidayWorkshop2024_BakingSupplies_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_BakingSupplies_05'], items=['Recipe Book'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_XmasPresent_08'], items=['Biggest Present'], moment=item discovered (versions 26.03.01–26.07.01)
+### Bella's Holiday Workshop — item discovered: Old Box
+`CBE_HolidayWorkshop2024_BedAndBrerekfast_01_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_RandomPile_02'], items=['Old Box'], moment=item discovered (versions 25.05.01–25.06.01)
 
-**EMILIO** (Thinking): There’s one more delivery of Bella’s packages on the way.  
-  _earlier:_ ~~How about baking? Is there some treat that makes you feel really happy?~~ (until 25.10.01)
-**RODDY** (Worried): That had better be the last one - we’re running out of space!  
-  _earlier:_ ~~There are these cookies my granny used to make...~~ (until 25.10.01)
-**KAZUKO**: What did they taste like?
-**BELLA** (Relaxed): Oh, they tasted good!
-**KAZUKO** (Thinking): Hmm... I think we'll need a little bit of help from someone who knows a thing or two about baking.
+**KAZUKO**: Greetings, Bella! I hope you've been happy with everything at my Bed & Breakfast.
+**KAZUKO**: It's not very luxurious, but I try to make my guests as comfortable as possible.
+**BELLA**: It's been fabulous, Kazuko. 
+**BELLA** (Thinking): I've enjoyed myself in Hopewell Bay. Even if...
+**KAZUKO** (Worried): What's wrong? You look upset.
+**BELLA** (Thinking): I'm afraid I've made a really bad impression on everyone.
+**BELLA** (Thinking): Meeting new people can be scary, and I wanted everyone to like me, but I've just made a big mess.
+**KAZUKO** (Thinking): Maybe you can return their kindness by gifting them something -- something you've made yourself.
+**BELLA**: Err... I don't know about that...
+**KAZUKO** (Joyous): Don't worry! I will help you. And if your intentions are good, so will the outcome be.
 
 ### Bella's Holiday Workshop — item discovered: 80387529
 `CBE_HolidayWorkshop2024_CandleTable_01_Dialogue` · seen 25.05.01–26.07.01
@@ -53,77 +55,6 @@ Every story in which Bella speaks.
 **BELLA** (Doubtful): What is it, Roddy? I can see you have questions.
 **RODDY** (Worried): Well, not all of your crafts are... How can I put this... they’re not TOTALLY perfect.
 **BELLA** (Thinking): I'm not sure what you mean...
-
-### Bella's Holiday Workshop — item discovered: Emilio
-`CBE_HolidayWorkshop2024_CharacterEmilio_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterEmilio_02'], items=['Emilio'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterEmilio_04'], items=['Emilio'], moment=item discovered (versions 26.03.01–26.07.01)
-
-**EMILIO** (Encouraging): Another order completed. I know what we’re doing isn’t totally honest, but I want Bella to be happy.  
-  _earlier:_ ~~You're doing a great job, Bella!~~ (until 25.10.01)
-**EMILIO** (Encouraging): She has worked so hard this year to fix her relationship with Maddie, and she deserves to feel like a success.  
-  _earlier:_ ~~I am? I guess I've been working pretty hard.~~ (until 25.10.01)
-**EMILIO** (Thinking): Although I don’t know where she finds the time to produce all of these crafts!  
-  _earlier:_ ~~But what are you hoping to get for Xmas?~~ (until 25.10.01)
-**EMILIO** (Encouraging): Just peace on earth and joy to all the animals.
-**BELLA** (Doubtful): Ugh... of course you do.
-
-### Bella's Holiday Workshop — item discovered: Maddie
-`CBE_HolidayWorkshop2024_CharacterMaddie_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterMaddie_02'], items=['Maddie'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterMaddie_07'], items=['Maddie'], moment=item discovered (versions 26.03.01–26.07.01)
-
-**EMILIO** (Encouraging): Thank you for helping us with this crazy project, Maddie.  
-  _earlier:_ ~~Hi, Maddie! I like your sweater. It's... cute!~~ (until 25.10.01)
-**MADDIE** (Relaxed): Happy to help! You can never have too many scented candles.  
-  _earlier:_ ~~Thanks -- I guess. What's up, Bella?~~ (until 25.10.01)
-**EMILIO** (Relaxed): Or teapots!  
-  _earlier:_ ~~Umm... *sigh*~~ (until 25.10.01)
-**BELLA** (Thinking): Thank you for welcoming me here in Hopewell Bay.
-**BELLA** (Doubtful): You've all been so great, but I guess I haven't been as nice as I could've been.  
-  _(1 cosmetic edit not shown)_
-**BELLA** (Doubtful): Now I just want to spread holiday cheer to everyone in Hopewell Bay... as a way to apologize.
-**BELLA**: Your little town is so sweet, and your projects are really quirky.
-**BELLA**: I know Emilio cares about you a lot, and I want him to be happy, so...
-**MADDIE** (Surprised): O-oh, sure. I-- I mean WE all care about Emilio, too.
-**BELLA** (Relaxed): Of course you do.
-
-### Bella's Holiday Workshop — item discovered: Mason
-`CBE_HolidayWorkshop2024_CharacterMason_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterMason_02'], items=['Mason'], moment=item discovered (versions 25.05.01–26.07.01)
-
-**MASON**: What are you up to?  
-  _earlier:_ ~~How are you, little Mason?~~ (until 25.10.01)
-**RODDY**: Just putting away some boxes...  
-  _earlier:_ ~~"Little Mason"...~~ (until 25.10.01)
-**MASON** (Thinking): That’s a LOT of boxes. What’s in them?  
-  _earlier:_ ~~Have you written to Santa?~~ (until 25.10.01)
-**RODDY** (Worried): Nothing in particular... Just old holiday ornaments.  
-  _earlier:_ ~~Of course! I'm wishing for a bunch of goodies.~~ (until 25.10.01)
-**MASON** (Annoyed): Roddy, do you think I was born yesterday? I can tell you’re up to something weird, so you can just tell me what it is.  
-  _earlier:_ ~~Is there anything I could help Santa with?~~ (until 25.10.01)
-**RODDY** (Charming): Let me ask you first: are you interested in some less-than-premium holiday crafts?  
-  _earlier:_ ~~Sure... Hold on. You don't mean your homemade pottery?~~ (until 25.10.01)
-**BELLA** (Doubtful): Maybe, maybe not. It's not very nice to make fun of other people's work, you know.
-**MASON** (Joyous): *Sigh* You're right. I would love a teapot for Xmas.
-**BELLA** (Thinking): Hmmm...
-
-### Bella's Holiday Workshop — item discovered: Roddy
-`CBE_HolidayWorkshop2024_CharacterRoddy_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterRoddy_02'], items=['Roddy'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_GiftGnome_01'], items=['Gnome'], moment=item discovered (versions 26.03.01–26.07.01)
-
-**EMILIO**: How are you doing? I just made another order for socks and scarves.  
-  _earlier:_ ~~Hi, Roddy! I bet you love the holidays. ~~ (until 25.10.01)
-**RODDY** (Relaxed): Same. I’ve also got a dozen ceramic gnomes on the way. I think we’re doing pretty well!  
-  _earlier:_ ~~Well... you got me. I do love this time of year!~~ (until 25.10.01)
-**EMILIO** (Thinking): But where are we going to put all the stuff we’ve ordered? It can’t go to my house, because Bella would find it.  
-  _earlier:_ ~~Great! I've made everyone some presents and, well, I've got one for you, too.~~ (until 25.10.01)
-**RODDY** (Charming): I wonder if Maddie could spare a shed or a secret room for it all?  
-  _earlier:_ ~~I'm speechless! Thank you so much!~~ (until 25.10.01)
-**BELLA**: It's a surprise, so you'll have to open it. Oh, I'll just tell you what it is!
-**BELLA** (Relaxed): It's a scarf!
-**RODDY** (Worried): Well that is thoughtful. And what a b-beautiful scarf it is!
 
 ### Bella's Holiday Workshop — item discovered: Tray of Polvorones
 `CBE_HolidayWorkshop2024_Cookies_06_Dialogue` · seen 25.05.01–26.07.01
@@ -162,8 +93,35 @@ Every story in which Bella speaks.
 **BELLA** (Relaxed): I knew I could rely on you!  
   _earlier:_ ~~Pottery, knitted hats, scarves, and socks, and scented candles!~~ (until 25.10.01)
 **EMILIO** (Surprised): And you know how to make them?
-**BELLA**: I will learn, and Kazuko promised to help.
-**EMILIO** (Thinking): Right...
+
+### Bella's Holiday Workshop — decoration CBE_HolidayWorkshop2024_Decoration_Slot14
+`CBE_HolidayWorkshop2024_Decoration_Slot_14_Dialogue` · seen 25.05.01–25.06.01
+- trigger: decoration, decoration=CBE_HolidayWorkshop2024_Decoration_Slot14, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, moment=decoration placed (versions 25.05.01–25.06.01)
+
+**EMILIO**: Maddie, I'm glad I caught you!
+**MADDIE** (Doubtful): Really? I thought you're busy with your fish and your research and... Bella.
+**EMILIO** (Doubtful): What...?
+**MADDIE** (Thinking): And I've been tied up as well!
+**MADDIE** (Thinking): The Mansion keeps me so busy, even at this time of year.
+**EMILIO** (Encouraging): Maybe you've misunderstood mine and Bella's relationship...
+**BELLA**: Hey, guys! 
+**BELLA**: I've just delivered all of my presents. I think everyone really LOVED them!
+**BELLA** (Doubtful): Come on, Emilio -- you promised to help me with that thing.
+**EMILIO** (Doubtful): What thing?
+**BELLA** (Doubtful): That THING I told you about. Remember??
+**EMILIO** (Surprised): Ummm, right. See you around, Maddie!
+**MADDIE** (Discouraged): See you.
+
+### Bella's Holiday Workshop — decoration CBE_HolidayWorkshop2024_Decoration_Slot21
+`CBE_HolidayWorkshop2024_Decoration_Slot_21_Dialogue` · seen 25.05.01–25.06.01
+- trigger: decoration, decoration=CBE_HolidayWorkshop2024_Decoration_Slot21, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, moment=decoration placed (versions 25.05.01–25.06.01)
+
+**BELLA** (Relaxed): What a coincidence, Roddy!
+**BELLA** (Relaxed): I was just looking for a strong guy to help me with all of my shopping bags.
+**BELLA**: You wouldn't happen to have five minutes, would you?
+**RODDY** (Charming): O-oh, sure thing.
+**RODDY** (Relaxed): You do have a lot of shopping bags! Are they full of holiday surprises?
+**BELLA** (Relaxed): They might just be!
 
 ### Bella's Holiday Workshop — event end
 `CBE_HolidayWorkshop2024_EventOutro_Dialogue` · seen 24.11.02–26.07.01
@@ -178,12 +136,9 @@ Every story in which Bella speaks.
 **RODDY** (Relaxed): The holidays are never not chaotic around here, but at least they're always memorable.  
   _earlier:_ ~~How could they not like you?~~ (until 25.10.01)
 **BELLA** (Relaxed): I know!
-**BELLA** (Thinking): It's kinda sweet how Maddie has a crush on you, though!
-**EMILIO** (Surprised): Wh-what do you mean?
-**BELLA** (Relaxed): Don't worry - I won't tell anyone!
 
 ### Bella's Holiday Workshop — entering board
-`CBE_HolidayWorkshop2024_Intro_Dialogue` · seen 25.10.01–26.07.01
+`CBE_HolidayWorkshop2024_Intro_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Bella's Holiday Workshop, eventId=CBE_HolidayWorkshop2024, eventType=Collectible Board Event, moment=entering board (versions 25.10.01–26.07.01)
 
 **BELLA**: La-la-la-laaa! The new batch of teapots is in the kiln, and I just got the new yarn for my special beanies. The holiday season is looking up!  
@@ -203,9 +158,6 @@ Every story in which Bella speaks.
 **BELLA**: Who could I ask? Ah, I think I know the perfect person for the job!  
   _earlier:_ ~~Maddie and her friends generously welcomed you here in Hopewell Bay, but I'm afraid you didn't make the best impression.~~ (until 25.10.01)
 **BELLA** (Doubtful): I know, but I was sooo jetlagged from the flight and...
-**EMILIO** (Encouraging): Bella...
-**BELLA** (Thinking): Fine. Maybe I could try to repay their hospitality somehow...
-**EMILIO** (Encouraging): That sounds like a wonderful idea!
 
 ### Bella's Holiday Workshop — item discovered: Beanie
 `CBE_HolidayWorkshop2024_Knitting_05_Dialogue` · seen 25.05.01–26.07.01
@@ -271,20 +223,6 @@ Every story in which Bella speaks.
 **MADDIE** (Hesitant): How generous!  
   _earlier:_ ~~But remember to get my good side. And frame it right! Is the light good?~~ (until 25.10.01)
 **EMILIO** (Thinking): I'm not sure...
-**BELLA** (Doubtful): It'll be a long evening!
-
-### Bella's Holiday Workshop — item discovered: Seasonal Secrets
-`CBE_HolidayWorkshop2024_TinCan_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_TinCan_05'], items=['Seasonal Secrets'], moment=item discovered (versions 25.05.01–26.07.01)
-
-**RODDY** (Worried): Emilio, Code Red! Bella is onto us.  
-  _earlier:_ ~~Thank you for helping me with the baking stuff, Ursula!~~ (until 25.10.01)
-**EMILIO** (Surprised): What do you mean?  
-  _earlier:_ ~~It's my pleasure, Bella!~~ (until 25.10.01)
-**RODDY** (Frustrated): I guess my plan wasn’t totally water-tight after all...  
-  _earlier:_ ~~You know what I've noticed? In this town, you never know what you'll find in an old tin can!~~ (until 25.10.01)
-**BELLA** (Relaxed): See! This one says "syrup", but it's an old recipe!
-**BELLA** (Thinking): "The secret to the perfect polvorones!"
 
 ### Bella's Holiday Workshop — item discovered: Biggest Present
 `CBE_HolidayWorkshop2024_XmasPresents_08_Dialogue` · seen 25.05.01–26.07.01
@@ -299,9 +237,25 @@ Every story in which Bella speaks.
   _earlier:_ ~~I had no idea I was so good at crafts!~~ (until 25.10.01)
 **MADDIE** (Relaxed): Sounds... promising!
 
-### LDE GreenAcresQuest2024 Intro Dialogue
-`LDE_GreenAcresQuest2024_Intro_Dialogue` · seen 25.05.01–26.04.02
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+### Green Acres Quest — item discovered: Bella
+`LDE_GreenAcresQuest2024_CharacterBella_02_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterBella_02'], items=['Bella'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**BELLA** (Annoyed): Look at you, being all busy! So cute!
+**MADDIE** (Doubtful): Oh... Hi. Did you need anything?
+
+### Green Acres Quest — item discovered: Friendship Medallion
+`LDE_GreenAcresQuest2024_Friendship_08_Dialogue` · seen 25.05.01–25.06.01
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Friendship_08'], items=['Friendship Medallion'], moment=item discovered (versions 25.05.01–25.06.01)
+
+**BELLA** (Doubtful): Hello... What do you want?
+**MASON** (Charming): Hi, my name is Mason and I... I made this medallion for you.
+**BELLA** (Doubtful): Oh... Thanks.
+**MASON** (Discouraged): Just a little 'Welcome to Hopewell Bay' gift for you!
+
+### Green Acres Quest — part of the event (exact trigger not dumped)
+`LDE_GreenAcresQuest2024_Intro_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Hello, dearie! What are you up to?
 **MADDIE**: With everything that’s happened so far, I think it’s time we give a little back to people of Hopewell Bay.
@@ -318,9 +272,9 @@ Every story in which Bella speaks.
 **BELLA** (Relaxed): Hello Maddie! I’ve heard so MUCH about you! You’re much cuter in person! But shorter than I expected.
 **MADDIE** (Doubtful): Nice to meet you! You’re exactly what I expected!
 
-### LDE GreenAcresQuest2024 TA7 Dialogue
-`LDE_GreenAcresQuest2024_TA7_Dialogue` · seen 25.05.01–26.04.02
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+### Green Acres Quest — part of the event (exact trigger not dumped)
+`LDE_GreenAcresQuest2024_TA7_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **BELLA**: Hello Maddie!
 **MADDIE** (Surprised): Oh! Um, hi!
@@ -330,6 +284,23 @@ Every story in which Bella speaks.
 **BELLA** (Relaxed): Oh, don’t mention it! If you need any HELP at all, you know who to call! I used to run a holistic horticulture center in Europe for a couple of years. We won quite a few awards for it.
 **MADDIE** (Annoyed): Thanks... I’ll keep that in mind.
 **BELLA** (Annoyed): And I LOOVE that yellow on you! Few can rock that color. You go, little girl!
+
+### Green Acres Quest — item discovered: Bella
+`LDE_GreenAcresQuest2024_v2_CharacterBella_02_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterBella_02'], items=['Bella'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**BELLA**: You're helping at the garden, too? This community really pulls together...
+**MASON** (Surprised): That's how we roll!
+
+### Green Acres Quest — item discovered: Friendship Medallion
+`LDE_GreenAcresQuest2024_v2_Friendship_08_Dialogue` · seen 26.03.01–26.04.02
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Friendship_08'], items=['Friendship Medallion'], moment=item discovered (versions 26.03.01–26.04.02)
+
+**BELLA**: I've been looking for you, Emilio! I have a surprise for you - a little wedding present.
+**BELLA**: We didn't get a chance to get each other anything before, but I wanted to give you something special.
+**EMILIO** (Surprised): What a great little bracelet! And you made it yourself?
+**BELLA** (Relaxed): I did... Do you like it?
+**EMILIO** (Encouraging): I LOVE it.
 
 ### LDE GreenAcresQuest2024 v2 TA4 Dialogue
 `LDE_GreenAcresQuest2024_v2_TA4_Dialogue` · seen 26.02.01–26.04.02
@@ -501,9 +472,9 @@ Every story in which Bella speaks.
 **BELLA** (Relaxed): Almost as good as my Abuela's!
 **GRANDMA** (Joyous): I'll take it!
 
-### SP GoatPet2025 Intro Dialogue
+### Secrets at the Altar — part of the event (exact trigger not dumped)
 `SP_GoatPet2025_Intro_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Secrets at the Altar, eventId=SP_GoatPet2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **BELLA** (Relaxed): Emilio, I just told my parents about our wedding! They're so excited and happy for us!
 **EMILIO** (Annoyed): Oh, great!
@@ -516,9 +487,9 @@ Every story in which Bella speaks.
 **EMILIO** (Doubtful): She has, but...
 **BELLA**: I know you're nervous - I am too! But it'll be great, I promise.
 
-### SP GoatPet2025 TA1 Dialogue
+### Secrets at the Altar — part of the event (exact trigger not dumped)
 `SP_GoatPet2025_TA1_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Secrets at the Altar, eventId=SP_GoatPet2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **BELLA** (Thinking): Maddie, can we take some photos when the present arrives? I want to capture the moment for my parents.
 **BELLA** (Relaxed): They can't be here for us today, so their wedding present is extra special.
@@ -535,9 +506,9 @@ Every story in which Bella speaks.
 **EMILIO** (Thinking): I think Pablo just fainted.
 **MADDIE** (Hesitant): I think a goat fainting on your wedding day means good luck!
 
-### SP GoatPet2025 TA2 Dialogue
+### Secrets at the Altar — part of the event (exact trigger not dumped)
 `SP_GoatPet2025_TA2_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Secrets at the Altar, eventId=SP_GoatPet2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Relaxed): Welcome everyone! It's a beautiful day to celebrate love, partnership and the union between Bella and Emilio.
 **RODDY** (Relaxed): Next, Emilio will read his vows to Bella.
@@ -552,9 +523,9 @@ Every story in which Bella speaks.
 **BELLA**: Oh, Emilio! You're the best!
 **RODDY** (Worried): Phew!
 
-### SP GoatPet2025 TA3 Dialogue
+### Secrets at the Altar — part of the event (exact trigger not dumped)
 `SP_GoatPet2025_TA3_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Secrets at the Altar, eventId=SP_GoatPet2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **BELLA**: Thank you for arranging the wedding, Maddie. Everything was so beautiful.
 **BELLA** (Thinking): Just one thing... Do you think Emilio almost said your name during the ceremony?
@@ -590,9 +561,9 @@ Every story in which Bella speaks.
 **JACKIE** (Encouraging): Oh, yeah! Pour me another one!
 **BELLA** (Relaxed): Me too!
 
-### SP Misery2025 Decoration Slot34
-`SP_Misery2025_Decoration_Slot34` · seen 26.02.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+### Something Ours — part of the event (exact trigger not dumped)
+`SP_Misery2025_Decoration_Slot34` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Something Ours, eventId=SP_Misery2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Something Ours — decoration SP_Misery2025_Decoration_Slot34

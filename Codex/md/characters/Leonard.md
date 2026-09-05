@@ -3,7 +3,6 @@ Every story in which Leonard speaks.
 
 ### Library02
 `Library02` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE**: *Ring Ring*
 **MADDIE** (Doubtful): Huh... It’s Leonard. What does HE want?!
@@ -19,7 +18,6 @@ Every story in which Leonard speaks.
 
 ### Perfumery02
 `Perfumery02` · seen 25.06.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **LEONARD**: Ah... I see you’ve found Lindsay's Perfumery.  
   _earlier:_ ~~Ah... I see you’ve found the Perfumery.~~ (until 25.06.01)
@@ -32,7 +30,6 @@ Every story in which Leonard speaks.
 
 ### Perfumery03
 `Perfumery03` · seen 25.06.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **LEONARD** (Thinking): Well, girl. I won’t be around for much longer, thanks to you.
 **LEONARD** (Annoyed): I’m collecting my things, because YOU have thrown me out of my home.
@@ -45,7 +42,6 @@ Every story in which Leonard speaks.
 
 ### Perfumery04
 `Perfumery04` · seen 25.06.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Doubtful): You were selling out your family, Leonard! You didn’t want to save this place!
 **MADDIE** (Annoyed): You wanted to sell it to make a quick buck!
@@ -61,7 +57,6 @@ Every story in which Leonard speaks.
 
 ### Perfumery05
 `Perfumery05` · seen 25.06.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Annoyed): Oh? I guess you didn’t heed your own advice when you told Deb she was adopted!
 **LEONARD**: ...
@@ -79,7 +74,6 @@ Every story in which Leonard speaks.
 
 ### Speakeasy05
 `Speakeasy05` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): Wow!
 **MADDIE** (Surprised): Putting that first fuse in place, activated the-
@@ -91,7 +85,6 @@ Every story in which Leonard speaks.
 
 ### Speakeasy06
 `Speakeasy06` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **LEONARD** (Thinking): Right you are. You must be Maddie. I've heard that you're the one to save us all... Ha!
 **MADDIE** (Surprised): Leonard. What are you doing here?
@@ -102,7 +95,6 @@ Every story in which Leonard speaks.
 
 ### Speakeasy07
 `Speakeasy07` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **LEONARD** (Encouraging): Aaah. The refreshing taste of Hopeberries. I knew Winnie would stash a box in here.
 **LEONARD** (Thinking): Good thing I found it before they tear this wretched place down...
@@ -118,7 +110,6 @@ Every story in which Leonard speaks.
 
 ### Speakeasy08
 `Speakeasy08` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Annoyed): A plan? From what I’ve seen and heard, each and every harebrained plan of yours has failed!
 **MADDIE** (Doubtful): I guess this little “establishment” of yours was also one of your “great ideas.”
@@ -135,7 +126,6 @@ Every story in which Leonard speaks.
 
 ### Speakeasy09
 `Speakeasy09` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): You and Winston! You’re the ones in those letters by the swing! W+L!
 **LEONARD** (Annoyed): Those were PRIVATE! How dare-
@@ -148,7 +138,6 @@ Every story in which Leonard speaks.
 
 ### Speakeasy10
 `Speakeasy10` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **LEONARD** (Doubtful): Not quite the conversation I was expecting to have with my grandniece! I knew you would only cause problems.
 **LEONARD** (Annoyed): In fact, I’m quite inclined to end it right now. You bore me...
@@ -158,7 +147,6 @@ Every story in which Leonard speaks.
 
 ### Stablesinterior02
 `Stablesinterior02` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **WINSTON** (Worried): I tried to reason with them, Ma’am. But-
 **LEONARD**: Oh please, Winston...
@@ -173,7 +161,6 @@ Every story in which Leonard speaks.
 
 ### Stablesinterior03
 `Stablesinterior03` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Doubtful): First you bring in your goons to the Mansion and now this?
 **BRUNO** (Relaxed): If you must know, Leonard invited me.
@@ -189,7 +176,6 @@ Every story in which Leonard speaks.
 
 ### Stablesinterior04
 `Stablesinterior04` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **LEONARD** (Annoyed): No, you are the one that is blind, little girl.
 **BRUNO** (Annoyed): *Ahem!* You mentioned something about a Boulton Blue?
@@ -205,7 +191,6 @@ Every story in which Leonard speaks.
 
 ### Stablesinterior05
 `Stablesinterior05` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Doubtful): I don’t care what Leonard has promised you, but I want the both of you out of here.
 **MADDIE** (Annoyed): Now!
@@ -219,7 +204,6 @@ Every story in which Leonard speaks.
 
 ### Stablesinterior Intro
 `Stablesinterior_Intro` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **LEONARD** (Encouraging): -and this is where the paddocks should be!
 **BRUNO**: Amazing! You’ve really thought this through.

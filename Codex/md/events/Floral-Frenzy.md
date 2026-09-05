@@ -52,3 +52,28 @@
 **JACKIE** (Doubtful): A flower's a flower, right? So a little bit of this and a little bit of that...
 **ANTIQUEDEALER** (Relaxed): It is more than that, my dear Jackie! Take a moment to appreciate the flowers; find the beauty in each one of them.
 **JACKIE** (Surprised): Hmm... I guess there's a lot more to this than I first thought. Let's try!
+
+### Floral Frenzy — entering board
+`LBE_Valentines2024_Intro_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Floral Frenzy, eventId=LBE_Valentines2024, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–26.01.02)
+
+**PEARL**: Welcome to Floral Frenzy, a competition where we find out who makes the most magnificent flower arrangements in Hopewell Bay!
+**PEARL**: Our contenders are Deb, a lover of the more exotic flowers...
+**DEB** (Charming): I do have a penchant for the unusual.
+**PEARL** (Encouraging): Err, yes. And Julius who specializes in the gentle Japanese art of Ikebana. I can't wait to see what kind of creations you will produce!
+**ANTIQUEDEALER** (Charming): Salutations! Did you know that the history of Ikebana reaches back over 600 years?
+**PEARL**: Very interesting, indeed! And our last contender is... Jackie!
+**JACKIE** (Doubtful): Pearl, I told you I'm too busy to take part in a silly competition. I've never even tried flower arranging before!
+**PEARL** (Thinking): Haha, you're so funny!
+**PEARL** (Encouraging): Let's get to it, people. The competition is officially on - may the best amateur florist win!
+
+### Floral Frenzy — event end
+`LBE_Valentines2024_Outro_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Floral Frenzy, eventId=LBE_Valentines2024, eventType=Leaderboard Event, moment=event end (versions 24.04.01–26.01.02)
+
+**PEARL** (Surprised): What a competition we've had! I had no idea we have such flower arranging talent in our little town.
+**PEARL** (Encouraging): Aaand the winner is... Jackie!
+**JACKIE** (Surprised): W-what?? I really didn't expect this...
+**JACKIE** (Encouraging): I'd like to thank my fellow contenders for educating and inspiring me. I never knew I had it in me to get excited about flower arranging!
+**DEB** (Doubtful): Next time, we can see if it was just beginner's luck... but congratulations, Jackie. You did well!
+**JACKIE** (Doubtful): Thank you, Deb!

@@ -126,7 +126,7 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
     + stat(S.unmatchedGroups,'stories without a known trigger','warn') + stat(S.removedStories,'stories removed since '+S.historyVersions[0],'bad');
 
   // ---- indexes
-  const removed = D.removedStories.map(r => ({id:r.id, triggers:[{kind:'removed', lastSeen:r.lastSeen}], lines:r.lines.map(l=>({id:l.id,text:l.text,speaker:null})), removedStory:true, firstSeen:null}));
+  const removed = D.removedStories.map(r => ({id:r.id, triggers:[{kind:'removed', lastSeen:r.lastSeen}].concat(r.triggers||[]), lines:r.lines, removedStory:true, firstSeen:null}));
   const all = D.stories.concat(removed);
   all.forEach(s => {
     s.kind = s.triggers[0].kind;

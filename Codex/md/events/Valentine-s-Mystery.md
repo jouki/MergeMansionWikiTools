@@ -1,6 +1,20 @@
 # Valentine's Mystery
 
 
+### Valentine's Mystery — outro
+`SP_ValentinesMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Valentine's Mystery, eventId=SP_ValentinesMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**PEARL** (Surprised): Mason?? How much did you spend on all these presents?
+**MASON** (Discouraged): Some... but YOU told me to get something "special" for everyone. And I didn't get a sports car or exotic animals!
+**MASON** (Discouraged): And I was really tempted...
+**PEARL** (Annoyed): The thought is lovely, but it's all just WAY too much. We'll have to return them...
+**RODDY** (Relaxed): But your friendship is enough for us, Mason. It doesn't cost anything, but it's more valuable than any fancy present.
+**MASON** (Charming): Aww, shucks! Thanks, guys. I guess Valentine's Day doesn't have to be about just yucky love or expensive gifts.
+**MASON** (Relaxed): It's great to have friends!
+**MADDIE** (Relaxed): It is! But seriously, though...
+**MADDIE** (Thinking): Was that diamond ring actually Hank's? What's he planning??
+
 ### Valentine's Mystery — decoration SP_ValentinesMystery2024_Decoration_Slot25
 `SP_ValentinesMystery2024_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
 - trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot25, event=Valentine's Mystery, eventKey=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
@@ -53,6 +67,21 @@
 **HANK** (Thinking): Nooo... I-I just think a ring like this is way too expensive for a little Valentine's present.
 **PEARL** (Surprised): He's not wrong. Mason??
 **MASON** (Worried): Yes, Mom?
+
+### Valentine's Mystery — intro
+`SP_ValentinesMystery2024_Intro_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=Valentine's Mystery, eventId=SP_ValentinesMystery2024, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**PEARL**: Maaaason?
+**MASON** (Thinking): Yes, Mom? You sound like you're about to ask me to do something boring.
+**PEARL** (Encouraging): I promised to organize a little Valentine's party at Grandma Ursula's place, but there's so much to do. Could you help me?
+**MASON** (Annoyed): A Valentine's party? I knew it!
+**PEARL** (Doubtful): Please? I need to get a little present for everyone. Could you pick them and order them on my credit card?
+**MASON**: So I would get to choose a present for everyone?
+**PEARL** (Thinking): Yes, something special to each of our friends - but within reason! No sports cars or exotic animals.
+**MASON** (Encouraging): So, no frilly hearts and the rest of that romantic stuff? I guess I can do that.
+**PEARL** (Relaxed): Great! I'll get everything else ready. I think this will be fun!
+**MASON** (Joyous): Yes, it will...
 
 ### Valentine's Mystery — item discovered: Valentine's Surprise
 `SP_ValentinesMystery2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01

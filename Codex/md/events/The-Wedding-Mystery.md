@@ -1,6 +1,23 @@
 # The Wedding Mystery
 
 
+### The Wedding Mystery — outro
+`SP_WeddingMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=The Wedding Mystery, eventId=SP_WeddingMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**MADDIE** (Encouraging): Well, I would call that a very successful wedding!
+**JACKIE** (Encouraging): You did great out there, baby.
+**RODDY** (Relaxed): Thanks, Jackie.
+**MADDIE**: Well, I uuh... Should start clean-
+**DEB** (Worried): Have any of you seen Hank?!
+**MADDIE** (Relaxed): Yeah, sure! He was just here a minute ago.
+**DEB** (Worried): No, he wasn’t... I’ve looked everywhere! Haaank!
+**MADDIE** (Worried): Deb, Deb... Calm down, I’m sure he’s just inside, doing his hair or lifting weights or something...
+**DEB** (Worried): No, his hair is fine and today is leg day. He isn’t answering his phone; I can’t find him, Maddie! HAANK!
+**JACKIE** (Thinking): Wasn’t.... Wasn’t Grandma the last person to speak to him?
+**RODDY** (Worried): I think so...
+**DEB** (Worried): HAAANK!!! Where are you?!
+
 ### The Wedding Mystery — decoration SP_WeddingMystery2024_Decoration_Slot32
 `SP_WeddingMystery2024_Decoration_Slot32_Dialogue` · seen 25.05.01–26.07.01
 - trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot32, event=The Wedding Mystery, eventKey=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)

@@ -16,34 +16,68 @@
 **MADDIE** (Frustrated): So many questions, so few answers...
 
 ### Rumors in the Ring — decoration SP_RumorsRing2025_Decoration_Slot25
-`SP_RumorsRing2025_Decoration_Slot25_Dialogue`
+`SP_RumorsRing2025_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
 - trigger: decoration, decoration=SP_RumorsRing2025_Decoration_Slot25, event=Rumors in the Ring, eventKey=SP_RumorsRing2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA** (Frustrated): A big truck just dropped off a whole shipment of big crates on my front lawn!
+**GRANDMA** (Frustrated): Did you happen to order a dozen colorful wigs, trapezes and a knife wheel?
+**MADDIE** (Joyous): It has to be the circus equipment!
+**GRANDMA** (Surprised): Circus equipment??
+**MADDIE** (Encouraging): I told you the ringmaster of a traveling circus asked if they could set up here at the Mansion, and you said yes.
+**GRANDMA** (Doubtful): I never did such a thing!
+**MADDIE** (Doubtful): You did. Remember you were checking the insurance prices, and I asked...
+**GRANDMA** (Annoyed): Aaargh... Maddie!
+**MADDIE** (Hesitant): They have nowhere else to go, and the ringmaster seemed to know you!
+**MADDIE** (Hesitant): Besides, who doesn't love the circus!
 
 ### Rumors in the Ring — decoration SP_RumorsRing2025_Decoration_Slot26
-`SP_RumorsRing2025_Decoration_Slot26_Dialogue`
+`SP_RumorsRing2025_Decoration_Slot26_Dialogue` · seen 25.05.01–26.07.01
 - trigger: decoration, decoration=SP_RumorsRing2025_Decoration_Slot26, event=Rumors in the Ring, eventKey=SP_RumorsRing2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**JACKIE** (Thinking): What's all this?? Are you putting on a circus?
+**MADDIE**: Well, you could say that.
+**JACKIE** (Surprised): Huh?
+**MADDIE** (Encouraging): The Mansion is hosting the touring circus, and we've just accepted the first shipment of equipment.
+**JACKIE** (Doubtful): What does Ursula think about it?
+**MADDIE** (Thinking): She's so into her cat videos and knitting tutorials that she barely paid attention when I told her.
+**JACKIE** (Thinking): Still obsessed with her smartphone?
+**MADDIE** (Doubtful): Yep. I don't know what to do! It's like living with a phone-addicted teenager.
 
 ### Rumors in the Ring — decoration SP_RumorsRing2025_Decoration_Slot27
-`SP_RumorsRing2025_Decoration_Slot27_Dialogue`
+`SP_RumorsRing2025_Decoration_Slot27_Dialogue` · seen 25.05.01–26.07.01
 - trigger: decoration, decoration=SP_RumorsRing2025_Decoration_Slot27, event=Rumors in the Ring, eventKey=SP_RumorsRing2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Relaxed): It's time to get all this circus stuff organized.
+**MADDIE** (Joyous): More ropes, juggling balls and posters!
+**MADDIE** (Thinking): I can't even imagine what it would be like to travel around the country performing wild tricks and wowing audiences everywhere.
+**MADDIE** (Thinking): I love all of it - the fire-eaters, acrobats, magic tricks and knife wheels...
+**MADDIE** (Thinking): If only I could do anything like that, but I'm not a big fan of heights - or fire.
+**MADDIE** (Relaxed): It's probably best to leave it to the professionals.
 
 ### Rumors in the Ring — decoration SP_RumorsRing2025_Decoration_Slot28
-`SP_RumorsRing2025_Decoration_Slot28_Dialogue`
+`SP_RumorsRing2025_Decoration_Slot28_Dialogue` · seen 25.05.01–26.07.01
 - trigger: decoration, decoration=SP_RumorsRing2025_Decoration_Slot28, event=Rumors in the Ring, eventKey=SP_RumorsRing2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Relaxed): I've got most of the circus stuff in order, and I've set up a little fun fair next to Grandma's house like the ringmaster asked.
+**MADDIE** (Relaxed): I can't wait for the big top to go up!
+**MADDIE** (Annoyed): It's been so busy around here with everything and Grandma is no help at all!
+**JACKIE** (Thinking): Talking about your Grandma...
+**MADDIE** (Thinking): What is it now?
+**JACKIE** (Doubtful): This whole business with the smartphone seemed kinda sketchy, so I did some online research.
+**MADDIE** (Worried): Of course you did!
+**MADDIE** (Worried): So, what did you uncover?
+**JACKIE** (Doubtful): Well, there's a whole bunch of people spreading weird rumors about Ursula.
+**JACKIE** (Surprised): Someone said she used to be a member of this very circus!
 
 ### Rumors in the Ring — decoration SP_RumorsRing2025_Decoration_Slot29
-`SP_RumorsRing2025_Decoration_Slot29_Dialogue`
+`SP_RumorsRing2025_Decoration_Slot29_Dialogue` · seen 25.05.01–26.07.01
 - trigger: decoration, decoration=SP_RumorsRing2025_Decoration_Slot29, event=Rumors in the Ring, eventKey=SP_RumorsRing2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Thinking): Could Jackie be onto something with Grandma and her phone?
+**MADDIE** (Thinking): I mean, it's obvious she is up to something. She panicked when she thought she'd lost her phone.
+**MADDIE** (Frustrated): And I think she has multiple accounts on social media. But why?
+**MADDIE** (Frustrated): Either she's doing something sketchy like Jackie suspects, or she is covering up something in order to protect me and the Mansion.
+**MADDIE** (Worried): Jackie is always so suspicious - she's so determined to get to the bottom of Grandma's secrets...
 
 ### Rumors in the Ring — intro
 `SP_RumorsRing2025_Intro_Dialogue` · seen 25.02.01–26.07.01

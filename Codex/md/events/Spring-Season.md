@@ -71,3 +71,17 @@
 **GRANDMA** (Relaxed): Honestly dearie, you've been so busy fixing up the Mansion, I thought it would be nice to do something else for a while!
 **MADDIE** (Relaxed): Yes it was! ...But you didn't answer my question.
 **GRANDMA**: Making a kite and baking a pie are surprisingly similar, dearie...
+
+### Spring Season — outro
+`SP_SpringSeason2023_EventEndDialogue` · seen 23.09.02–26.07.01
+- trigger: event, event=Spring Season, eventId=SP_SpringSeason2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**RODDY** (Charming): Tah-daa!
+**MADDIE** (Worried): That's... That's horrifying!
+**JACKIE** (Frustrated): It's his fault! He kept going on about structural integrity this, aerodynamics that...
+**RODDY** (Frustrated): She wanted to make a kite that looked like a pig!
+**JACKIE** (Annoyed): Yes! "When pigs fly..." Don't you get it?!
+**RODDY** (Annoyed): But they don't fly!!
+**JACKIE** (Annoyed): THATS THE POINT!
+**MADDIE** (Doubtful): Cheer up, you two. At least you won first place in the Kids Favorite category!
+**RODDY** (Charming): I was sort of hoping to win something else instead...

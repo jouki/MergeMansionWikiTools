@@ -35,6 +35,11 @@
 **MADDIE** (Relaxed): I would love to take a piece of Akihabara's magic home with me...
 **MADDIE** (Relaxed): Maybe I could build something similar at the Mansion!
 
+### Maddie in Japan — part of the event (exact trigger not dumped)
+`CBE_MaddieInJapan2025_Food_01_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Maddie in Japan, eventId=CBE_MaddieInJapan2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
+
+
 ### Maddie in Japan — item discovered: Onigiri
 `CBE_MaddieInJapan2025_Food_02_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_Food_02'], items=['Onigiri'], moment=item discovered (versions 26.03.01–26.07.01)
@@ -92,6 +97,11 @@
 **MADDIE** (Doubtful): I wonder if Grandma donated one?
 **MADDIE** (Doubtful): There are just too many to check!
 
+### Maddie in Japan — part of the event (exact trigger not dumped)
+`CBE_MaddieInJapan2025_GettingReady_01_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Maddie in Japan, eventId=CBE_MaddieInJapan2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
+
+
 ### Maddie in Japan — item discovered: Travel Charger
 `CBE_MaddieInJapan2025_GettingReady_02_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_GettingReady_02'], items=['Travel Charger'], moment=item discovered (versions 26.03.01–26.07.01)
@@ -102,6 +112,11 @@
 **GRANDMA** (Frustrated): I never fuss!
 **GRANDMA** (Worried): But you’re going far away, and I just want to make sure you are prepared for everything.
 **MADDIE** (Encouraging): Don’t worry, Grandma. I’ll be OK!
+
+### Maddie in Japan — part of the event (exact trigger not dumped)
+`CBE_MaddieInJapan2025_GettingReady_03_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Maddie in Japan, eventId=CBE_MaddieInJapan2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
+
 
 ### Maddie in Japan — item discovered: Travel Pillow
 `CBE_MaddieInJapan2025_GettingReady_04_Dialogue` · seen 26.03.01–26.07.01
@@ -116,6 +131,11 @@
 **KAZUKO** (Doubtful): However, I always got the feeling she was actually searching for something there. Something she had to keep secret...
 **MADDIE** (Surprised): What?
 **KAZUKO** (Relaxed): She never told me, and I never asked!
+
+### Maddie in Japan — part of the event (exact trigger not dumped)
+`CBE_MaddieInJapan2025_GettingReady_05_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Maddie in Japan, eventId=CBE_MaddieInJapan2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
+
 
 ### Maddie in Japan — item discovered: Handbag
 `CBE_MaddieInJapan2025_GettingReady_06_Dialogue` · seen 26.03.01–26.07.01
@@ -249,6 +269,11 @@
 **MADDIE** (Worried): I... miss Rufus!
 **MADDIE** (Worried): I think I’m starting to get a little bit homesick.
 
+### Maddie in Japan — part of the event (exact trigger not dumped)
+`CBE_MaddieInJapan2025_Souvenirs_01_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Maddie in Japan, eventId=CBE_MaddieInJapan2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
+
+
 ### Maddie in Japan — item discovered: Chopsticks
 `CBE_MaddieInJapan2025_Souvenirs_02_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_Souvenirs_02'], items=['Chopsticks'], moment=item discovered (versions 26.03.01–26.07.01)
@@ -257,6 +282,11 @@
 **MADDIE** (Thinking): I know of it, but I can’t say I’m very good at it...
 **KAZUKO** (Relaxed): Let me show you. It is a great practice of patience and of how to calm the mind.
 **MADDIE** (Doubtful): What are you saying?
+
+### Maddie in Japan — part of the event (exact trigger not dumped)
+`CBE_MaddieInJapan2025_Souvenirs_03_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Maddie in Japan, eventId=CBE_MaddieInJapan2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
+
 
 ### Maddie in Japan — item discovered: Daruma Doll
 `CBE_MaddieInJapan2025_Souvenirs_04_Dialogue` · seen 26.03.01–26.07.01
@@ -275,6 +305,11 @@
 **MADDIE** (Thinking): And I need to take something for my friends, too.
 **MADDIE** (Encouraging): Maybe I should buy an extra suitcase just for the souvenirs!
 
+### Maddie in Japan — part of the event (exact trigger not dumped)
+`CBE_MaddieInJapan2025_Travel_01_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Maddie in Japan, eventId=CBE_MaddieInJapan2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
+
+
 ### Maddie in Japan — item discovered: Stamped Ticket
 `CBE_MaddieInJapan2025_Travel_02_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_Travel_02'], items=['Stamped Ticket'], moment=item discovered (versions 26.03.01–26.07.01)
@@ -291,6 +326,11 @@
 **MADDIE** (Relaxed): On a bike, I feel like I’m blending in better, and I can see all kinds of places other transport just can’t go.
 **MADDIE** (Joyous): Look at me, moving through Tokyo like a pro!
 
+### Maddie in Japan — part of the event (exact trigger not dumped)
+`CBE_MaddieInJapan2025_Travel_05_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Maddie in Japan, eventId=CBE_MaddieInJapan2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
+
+
 ### Maddie in Japan — item discovered: Train
 `CBE_MaddieInJapan2025_Travel_06_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_Travel_06'], items=['Train'], moment=item discovered (versions 26.03.01–26.07.01)
@@ -299,6 +339,11 @@
 **MADDIE** (Relaxed): These old postcards Julius gave me are full of interesting stuff... but they also form a pretty good list of things to visit.
 **MADDIE** (Relaxed): It’s gonna be so cool to visit some of the places Grandma loved to visit while she lived here.
 **MADDIE** (Relaxed): And it’ll be interesting to see what might have drawn her to them.
+
+### Maddie in Japan — part of the event (exact trigger not dumped)
+`CBE_MaddieInJapan2025_YasakaPagodaPostcard_01_Dialogue` · seen 26.07.01–26.07.01
+- trigger: event, eventType=event story, event=Maddie in Japan, eventId=CBE_MaddieInJapan2025, moment=part of the event (exact trigger not dumped) (versions 26.07.01–26.07.01)
+
 
 ### Maddie in Japan — item discovered: Ema
 `CBE_MaddieInJapan2025_YasakaPagodaThings_03_Dialogue` · seen 26.03.01–26.07.01

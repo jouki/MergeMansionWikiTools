@@ -11,9 +11,9 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE** (Encouraging): Ah, good, good. It will be nice to have her home. You never know with all the strange food and the… French-ness.
 **GRANDMA** (Charming): No, you never know!
 
-### CBE VeilOfFate2023 ActiveSnowglobe Dialogue
+### Veil of Fate — part of the event (exact trigger not dumped)
 `CBE_VeilOfFate2023_ActiveSnowglobe_Dialogue` · seen 23.11.02–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Veil of Fate, eventId=CBE_VeilOfFate2023, moment=part of the event (exact trigger not dumped) (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE**: Aaaah! The snow is falling - the veil of fate is LIFTING!
 **LADY VOYANCE** (Talking): I seeeee..
@@ -41,6 +41,53 @@ Every story in which Lady Voyance speaks.
 **MADDIE**: The house inside your snow globe is cute!
 **LADY VOYANCE**: Not cute, my child! It is mysterious and enigmatic!
 
+### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot04
+`CBE_VeilOfFate2023_Decoration_Slot04_Dialogue` · seen 23.11.02–26.07.01
+- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot04, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
+
+**RODDY** (Relaxed): Do you have time for another client, Lady Voyance?
+**LADY VOYANCE**: Of course! I am here to help ALL who want a glimpse of their fate!
+**RODDY** (Charming): Great! You told my fortune last time you were here and...
+**LADY VOYANCE**: And WHAT, my boy?
+**RODDY** (Charming): You said that I've waited for a long time and that my wait would be over soon?
+**LADY VOYANCE** (Talking): Did I really? Let's see what the globe conveys...
+**LADY VOYANCE** (Talking): Mmmm... Ooohhh... Nnnghhh...
+**LADY VOYANCE**: No. I think I must have read the globe upside down - it happens!
+**RODDY** (Surprised): Are you sure? Could you double-check?
+**LADY VOYANCE** (Talking): Hmm... I see SOMETHING powerful headed your way... Possibly indigestion...
+**LADY VOYANCE** (Talking): Something to look forward to, anyway!
+
+### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot06
+`CBE_VeilOfFate2023_Decoration_Slot06_Dialogue` · seen 23.11.02–26.07.01
+- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot06, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
+
+**LADY VOYANCE**: So, Maddie... You've come to hear what the snowglobe knows?
+**MADDIE** (Charming): I guess I have...
+**MADDIE** (Charming): Last time you mentioned that you sensed love in my future...
+**LADY VOYANCE**: I only interpret the signs in the globe... What it is telling me this time?
+
+### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot07
+`CBE_VeilOfFate2023_Decoration_Slot07_Dialogue` · seen 23.11.02–26.07.01
+- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot07, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
+
+**LADY VOYANCE**: So you want to know about love! Let's me see...
+**LADY VOYANCE** (Talking): Oh, sands past, present and future - show me what AWAITS my young friend!
+**LADY VOYANCE** (Talking): I see... someone tall, dark and HANDSOME... and his name is ummm...
+**MADDIE** (Surprised): Umm... Emilio??
+**LADY VOYANCE**: O-oh yes, it IS Emilio!
+**LADY VOYANCE**: Do you KNOW someone called Emilio?
+**MADDIE** (Charming): Yeah, kind of... But now what should I do?
+
+### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot08
+`CBE_VeilOfFate2023_Decoration_Slot08_Dialogue` · seen 23.11.02–26.07.01
+- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot08, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
+
+**LADY VOYANCE** (Talking): ALAS, the sands of the globe have seized!
+**MADDIE**: Thank you, Lady Voyance! I think I got what I wanted.
+**LADY VOYANCE**: The pleasure is ALL mine, my child! Go forth and seek your happiness with Emilio!
+**MADDIE** (Relaxed): Thanks, Lady Voyance!
+**LADY VOYANCE** (Thinking): Oh, what is this? The sands are stirring, forming a name... Arthur? It is probably nothing.
+
 ### Veil of Fate — item discovered: Dormant Snow Globe
 `CBE_VeilOfFate2023_InactiveSnowglobe_Dialogue` · seen 23.11.02–26.07.01
 - trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_CrystalBall_01'], items=['Dormant Snow Globe'], moment=item discovered (versions 23.11.02–26.07.01)
@@ -50,7 +97,7 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE**: Oh NO, my child! It just needs a good shake!
 
 ### Veil of Fate — event start
-`CBE_VeilOfFate2023_IntroDialogue_Dialogue` · seen 26.04.02–26.07.01
+`CBE_VeilOfFate2023_IntroDialogue_Dialogue` · seen 23.11.02–26.07.01
 - trigger: event, event=Veil of Fate, eventId=CBE_VeilOfFate2023, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **GRANDMA** (Charming): Lady Voyance! How are the snows of fate swirling these days?
@@ -146,9 +193,9 @@ Every story in which Lady Voyance speaks.
 
 **LADY VOYANCE**: The cards are as right as their reader. So you have absolutely nothing to worry about!
 
-### CBE VeilOfFate2024 ActiveSnowglobe Dialogue
+### Veil of Fate — part of the event (exact trigger not dumped)
 `CBE_VeilOfFate2024_ActiveSnowglobe_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Veil of Fate, eventId=CBE_VeilOfFate2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Do you want to look into the past, present, or future?
 **MADDIE** (Thinking): I j-just want to know why this keeps happening to me...
@@ -353,9 +400,9 @@ Every story in which Lady Voyance speaks.
 **MADDIE** (Surprised): W- who is it??
 **LADY VOYANCE** (Talking): He hides behind the veil of fate... Ah, I just had some taffy on my globe.
 
-### CBE VoyancesVisions CharacterItems 02B Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_CharacterItems_02B_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Encouraging): Mmmm... Mmmmmmmmm... I can see you are a successful...
 **PEARL**: Event planner! I used to work in the corporate world, but I prefer small town life.
@@ -382,9 +429,9 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE** (Thinking): Isn't she your daughter's partner?
 **DEB** (Encouraging): She is... So there's the cosmic connection, isn't it? Nothing more to it, I am sure.
 
-### CBE VoyancesVisions CharacterItems 08 Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_CharacterItems_08_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Encouraging): I see SOMETHING...
 **LADY VOYANCE** (Encouraging): I see YOU, Jackie.
@@ -406,9 +453,9 @@ Every story in which Lady Voyance speaks.
 **DEB** (Worried): All those odd things - the strange phone calls to Cherry - no one could explain...
 **LADY VOYANCE** (Thinking): You forget - the stars see everything!
 
-### CBE VoyancesVisions CharacterItems 10B Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_CharacterItems_10B_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Hmmm, interesting...
 **PEARL**: What is it?
@@ -422,9 +469,9 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE** (Thinking): I have INDEED. He tried to sneak into my caravan, once.
 **PEARL** (Doubtful): Yeah... Sorry about that.
 
-### CBE VoyancesVisions CharacterItems 10 Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_CharacterItems_10_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Calling): A-ha! I see a yellow jumper.
 **JACKIE**: A yellow jumper? Maddie wears a yellow jumper...
@@ -433,13 +480,13 @@ Every story in which Lady Voyance speaks.
 **JACKIE** (Surprised): Can you see something about the family? About the Mansion?
 **LADY VOYANCE** (Calling): Ah, a cosmic MIST has fogged my vision...
 
-### CBE VoyancesVisions GenericTarotCards Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_GenericTarotCards_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 
 ### Voyance's Visions — entering board
-`CBE_VoyancesVisions_IntroC_Dialogue` · seen 25.07.01–26.07.01
+`CBE_VoyancesVisions_IntroC_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Voyance's Visions, eventId=CBE_VoyancesVisions, eventType=Collectible Board Event, moment=entering board (versions 25.07.01–26.07.01)
 
 **LADY VOYANCE** (Charming): What is that strange cosmic vibration I feel in the air tonight?
@@ -447,17 +494,17 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE** (Thinking): Seriously, what is that vibration??
 **LADY VOYANCE** (Encouraging): Ah, it is just my phone.
 
-### CBE VoyancesVisions IntroDialogueB Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_IntroDialogueB_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: My snow globe is polished, and my Tarot cards are shuffled.
 **LADY VOYANCE** (Calling): Dark clouds are gathering to hide the stars, but I can still read them.
 **LADY VOYANCE** (Calling): Someone is on their way - I can FEEL it!
 
-### CBE VoyancesVisions IntroDialogue Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_IntroDialogue_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Aahh, the stars are SPEAKING to me tonight!
 **LADY VOYANCE**: It is lucky Ursula allowed me to set up shop on her driveway.
@@ -476,9 +523,9 @@ Every story in which Lady Voyance speaks.
 **DEB** (Worried): I fear it may have been discovered...
 **LADY VOYANCE** (Doubtful): Excuse me, but I am the one who should sound cryptic here!
 
-### CBE VoyancesVisions MalzarAActive 01B Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_MalzarAActive_01B_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: SILENCE! Malzar will now begin.
 **MALZAR**: <i>A whispered thought, a shifting glance. Plans arise as shadows dance.</i>
@@ -486,9 +533,9 @@ Every story in which Lady Voyance speaks.
 **PEARL** (Thinking): But it does sound an awful lot like a certain older lady I know.
 **LADY VOYANCE** (Thinking): Uh-huh. But when it comes to secrets, I must advise caution!
 
-### CBE VoyancesVisions MalzarAActive 01 Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_MalzarAActive_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MALZAR**: <i>A roll of film, its memories unseen, Like friendships deep, developing in between.</i>
 **JACKIE** (Thinking): What does that mean??
@@ -503,9 +550,9 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE** (Doubtful): So, more of the same cryptic talk about family ties!
 **LADY VOYANCE** (Doubtful): If I was more of a detective, I could maybe put two and two together...
 
-### CBE VoyancesVisions MalzarBActive 01B Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_MalzarBActive_01B_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MALZAR**: <i>The truth revealed, yet none behold. Hidden deep within the bold.</i>
 **PEARL** (Thinking): OK, I'm lost. What does he mean?
@@ -523,9 +570,9 @@ Every story in which Lady Voyance speaks.
 **DEB** (Thinking): I suppose I am.
 **LADY VOYANCE** (Charming): </i>A secret spilled, a fortune lost, a girl’s fate sealed at such a cost.</i>
 
-### CBE VoyancesVisions MalzarCActive 01B Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_MalzarCActive_01B_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Calling): Speak, Malzar!
 **MALZAR**: <i>A shadow waits as coins are weighed. In silent loss, their fortune fades.</i>
@@ -535,9 +582,9 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE** (Thinking): But your foreboding feeling may NOT be quite unfounded.
 **LADY VOYANCE** (Thinking): The stars tell me there is something strange afoot here...
 
-### CBE VoyancesVisions MalzarCActive 01 Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_MalzarCActive_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MALZAR**: <i>A tattered sack, fortunes play hide and seek. Grandma's knitting? Or a bank's quiet leak?</i>
 **LADY VOYANCE** (Thinking): How mysterious!
@@ -550,9 +597,9 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE**: No, your MIND'S eye, my dear. 
 **JACKIE** (Thinking): *Sigh* Of course. Well, thank you. This was interesting, as always!
 
-### CBE VoyancesVisions OminousSecrets 01 Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_OminousSecrets_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Talking): I see a roll of film...
 **JACKIE**: Like photos?
@@ -569,9 +616,9 @@ Every story in which Lady Voyance speaks.
 **JACKIE** (Doubtful): Figures. Fine, I'll pay.
 **LADY VOYANCE**: Excellent! Just insert the coin and let the magic happen!
 
-### CBE VoyancesVisions OminousSecrets 02B Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_OminousSecrets_02B_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Shhhh!
 **PEARL** (Doubtful): I didn't say anything...
@@ -583,9 +630,9 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE** (Charming): If you wish to hear more, a small extra fee allows you to consult Malzar!
 **PEARL** (Doubtful): Malzar?
 
-### CBE VoyancesVisions OminousSecrets 03B Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_OminousSecrets_03B_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Calling): You must find cosmic clarity!
 **PEARL** (Doubtful): What does that mean?
@@ -593,9 +640,9 @@ Every story in which Lady Voyance speaks.
 **PEARL** (Thinking): Betrayal? So where do I look for it?
 **LADY VOYANCE**: I don't have ALL the answers, my dear.
 
-### CBE VoyancesVisions OminousSecrets 04 Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_OminousSecrets_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Encouraging): There's a book... but not an ordinary one.
 **LADY VOYANCE** (Encouraging): This one has a hole carved inside it!
@@ -624,9 +671,9 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE** (Surprised): They linger... Linger... W-what was I saying?
 **LADY VOYANCE** (Thinking): Did I just fall asleep for a second?
 
-### CBE VoyancesVisions OminousSecrets 07B Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_OminousSecrets_07B_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: I can see... There is--
 **LADY VOYANCE** (Surprised): *GASP!*
@@ -646,9 +693,9 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE** (Encouraging): Sometimes it is a bit hit-and-miss, sometimes it is exactly what you want to hear.
 **LADY VOYANCE** (Encouraging): Am I close?
 
-### CBE VoyancesVisions OminousSecrets 07 Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_OminousSecrets_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: This one I see clearly. I see money.  
   _earlier:_ ~~Ah, now this is juicy! A bag filled with MONEY.~~ (until 25.02.02)
@@ -678,9 +725,9 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE**: Someone is eager to consult the cards!
 **LADY VOYANCE**: Who shall be lifting the veil of fate tonight?
 
-### CBE VoyancesVisions TarotCards 03 Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_TarotCards_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Talking): I feel the cards have something to say!
 **LADY VOYANCE** (Talking): Hmm... Something looms large in the cosmic sphere... but what is it?
@@ -698,9 +745,9 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE** (Encouraging): Of course - I am bound by the cosmic law. Nothing you say here will be revealed to anyone!
 **DEB**: Good. Let's start!
 
-### CBE VoyancesVisions TarotTableActiveNormal 01B Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_TarotTableActiveNormal_01B_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Ah, a new customer!
 **PEARL**: A friend of mine said you were able to help her with a personal thing, so...
@@ -712,9 +759,9 @@ Every story in which Lady Voyance speaks.
 **PEARL** (Surprised): Now it seems like there's drama everywhere!
 **LADY VOYANCE** (Charming): Then it is time to consult the stars...
 
-### CBE VoyancesVisions TarotTableActiveNormal 01 Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_TarotTableActiveNormal_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Jackie, what a surprise! What brings you here?
 **LADY VOYANCE**: My senses tell me you are looking for romantic advice!
@@ -724,9 +771,9 @@ Every story in which Lady Voyance speaks.
 **JACKIE**: I'm going to find out what she's hiding, and it occured to me that you could maybe tell me a thing or two!
 **LADY VOYANCE** (Thinking): That's quite a request, my dear, but let's see what we can see...
 
-### CBE VoyancesVisions TarotTableActive Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_TarotTableActive_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 
 ### Lady Voyance's Mystery — decoration SP_LadyVoyanceMystery2023_Decoration_Slot25
@@ -803,6 +850,22 @@ Every story in which Lady Voyance speaks.
 **VICTORIA** (Joyous): Hahahahahahahaha!!!!
 **VICTORIA** (Relaxed): It is quite entertaining. I’ll give you that!
 
+### Lady Voyance's Mystery — intro
+`SP_LadyVoyanceMystery2023_Intro_Dialogue` · seen 23.09.02–26.07.01
+- trigger: event, event=Lady Voyance's Mystery, eventId=SP_LadyVoyanceMystery2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+
+**MADDIE**: Hello, can I help you?
+**LADY VOYANCE** (Talking): No, my child... It is I who has come to help... YOU!
+**MADDIE** (Surprised): Oh... Kay...
+**GRANDMA**: Maddie, dearie! I see you have met my old friend, Lady Voyance.
+**GRANDMA** (Charming): She’s a psychic, you know!
+**MADDIE** (Joyous): Really? How interesting! Came here to give Grandma a reading?
+**LADY VOYANCE** (Talking): For heaven’s sake, no! I have come to help all of Hopewell Bay! I sense a great change in the future!
+**LADY VOYANCE**: Ursula has graciously let me set up my services temporarily, so that I may help everyone in need.
+**LADY VOYANCE** (Talking): ... Especially you, Maddie. I can sense that something amazing is in store for you.
+**MADDIE** (Surprised): Really?!
+**LADY VOYANCE** (Talking): Yes, my child! Love is in the air!
+
 ### Lady Voyance's Mystery — item discovered: Mystical Snow Globe
 `SP_LadyVoyanceMystery2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.09.02–26.07.01
 - trigger: item, event=Lady Voyance's Mystery, eventKey=SP_LadyVoyanceMystery2023, itemKeys=['SP_LadyVoyanceMystery2023_CollectableItems_04'], items=['Mystical Snow Globe'], moment=item discovered (versions 23.09.02–26.07.01)
@@ -852,6 +915,17 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE** (Charming): I think I have just the thing...a little potion!
 **LADY VOYANCE** (Thinking): Now what was it called... A-ha! Moonstring Serum!
 **LADY VOYANCE** (Charming): I'll pour it into the Hopeberry juice and watch the magic unfold!
+
+### The Winds of Mystery — outro
+`SP_TheWindOfMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–26.07.01
+- trigger: event, event=The Winds of Mystery, eventId=SP_TheWindOfMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+
+**LADY VOYANCE** (Talking): Maddie! I have grave news for you!
+**MADDIE** (Surprised): Lady Voyance! What are you doing here?
+**LADY VOYANCE** (Talking): Maddie, I come with bad tidings! I was doing my usual reading, when I was struck with a VISION!
+**LADY VOYANCE** (Calling): A storm is coming!
+**MADDIE** (Doubtful): Yes, I know! I know! I’m packing everything up and heading inside. You’re the third per-
+**LADY VOYANCE** (Talking): No, Maddie! That’s not the storm I’m talking about!
 
 ### Lady Voyance's Premonition — outro
 `SP_Voyance2025_AllRewardsCompleted_Dialogue` · seen 25.05.01–26.07.01

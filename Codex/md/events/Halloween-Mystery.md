@@ -1,6 +1,19 @@
 # Halloween Mystery
 
 
+### Halloween Mystery — outro
+`SP_Halloween2024_AllRewardsCompleted_Dialogue` · seen 24.07.01–26.07.01
+- trigger: event, event=Halloween Mystery, eventId=SP_Halloween2024, eventType=Mystery / Progression, moment=outro (versions 24.07.01–24.11.02)
+
+**GRANDMA** (Doubtful): That was a strange business about the newspaper ad, wasn't it?
+**DEB** (Doubtful): It certainly was.
+**GRANDMA** (Annoyed): I was hoping to put all of the commotion behind us and start clearing the Boulton name, but someone seems intent on causing trouble.
+**DEB** (Thinking): I'm sure it was an honest mistake!
+**GRANDMA** (Thinking): A very strange mistake, I would say, and I do intend to look into it.
+**GRANDMA** (Thinking): Now I have to run, or my apple pie will burn in the oven. See you later!
+**DEB** (Worried): I have a terrible feeling...
+**DEB** (Worried): ...that I might know who is behind this.
+
 ### Halloween Mystery — decoration SP_Halloween2024_Decoration_Slot25
 `SP_Halloween2024_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
 - trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot25, event=Halloween Mystery, eventKey=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
@@ -72,6 +85,21 @@
 **MADDIE** (Surprised): Then... someone else changed it. But why?
 **MADDIE** (Surprised): And who??
 **JACKIE** (Thinking): This story has more angles than I ever thought...
+
+### Halloween Mystery — intro
+`SP_Halloween2024_IntroDialogue_Dialogue` · seen 24.07.01–26.07.01
+- trigger: event, event=Halloween Mystery, eventId=SP_Halloween2024, eventType=Mystery / Progression, moment=intro (versions 24.07.01–24.11.02)
+
+**MADDIE** (Frustrated): Oh, man...
+**GRANDMA**: What is it, dearie?
+**MADDIE** (Discouraged): I just realized that I'd promised to organize a ghost tour at the Mansion for Halloween.
+**MADDIE** (Discouraged): You know, before the storm and the cans full of secrets...
+**GRANDMA** (Thinking): Maybe it is not such a bad idea.
+**MADDIE** (Worried): I'm not sure how many people would want to come...
+**MADDIE** (Worried): And I'm not sure I really want to see anyone, either!
+**MADDIE** (Thinking): I'm still upset with Jackie for writing in the newspaper about our family. Now everyone's got it in for us!
+**GRANDMA** (Charming): The first step out of any mess is to make amends, Maddie dear. Maybe this is just the thing!
+**GRANDMA** (Charming): Let's get all the skeletons out of the closet!
 
 ### Halloween Mystery — item discovered: The Lady
 `SP_Halloween2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01

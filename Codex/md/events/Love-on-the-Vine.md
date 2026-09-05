@@ -153,7 +153,7 @@
 **MADDIE** (Surprised): That's why Hopeberry Festival is such a romantic event.
 
 ### Love on the Vine — event start
-`LDE_Hopeberry2024_Intro_Dialogue` · seen 26.04.02–26.07.01
+`LDE_Hopeberry2024_Intro_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Love on the Vine, eventId=LDE_Hopeberry2024, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **JACKIE** (Encouraging): Are you looking forward to the Hopeberry Festival? They say it's the second most romantic event of the year.
@@ -200,6 +200,62 @@
 **JACKIE** (Encouraging): Haha! You know you're great. What is your dream woman like?
 **RODDY** (Surprised): M-my dream woman? Just like you, of course!
 **RODDY**: Is that a new blouse??
+
+### Love on the Vine — part of the event (exact trigger not dumped)
+`LDE_Hopeberry2024_TA1_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Love on the Vine, eventId=LDE_Hopeberry2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Worried): The festival is approaching... and there's no sign of romance.
+**MADDIE** (Worried): These blind dates are REALLY bringing me down...
+**MADDIE** (Relaxed): But I don't want to give up! Mr. Right might be just around the corner!
+
+### Love on the Vine — part of the event (exact trigger not dumped)
+`LDE_Hopeberry2024_TA3_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Love on the Vine, eventId=LDE_Hopeberry2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**JACKIE**: Did you have a good time with Julius' nephew? Was he cool?
+**MADDIE**: Cool? He was... like a younger version of Julius.
+**MADDIE**: He spent most of the evening telling me about his stamp collection.
+**JACKIE** (Thinking): That could be... interesting?
+**MADDIE** (Thinking): It was - for him.
+**JACKIE** (Encouraging): So, no second date?
+**MADDIE** (Relaxed): Definitely not.
+
+### Love on the Vine — part of the event (exact trigger not dumped)
+`LDE_Hopeberry2024_TA5_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Love on the Vine, eventId=LDE_Hopeberry2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**JACKIE** (Thinking): How was Pearl's cousin? Is he really a clown?
+**MADDIE** (Relaxed): He made the worst jokes...
+**MADDIE** (Discouraged): Once I pretended to laugh at one of them, he took it as encouragement and never stopped.
+**JACKIE** (Doubtful): Another dud, huh?
+**MADDIE** (Thinking): Yep. I think I'm gonna throw in the towel... There are almost NO interesting guys in this town.
+**JACKIE** (Encouraging): Don't lose hope! He might be just around the corner.
+
+### Love on the Vine — part of the event (exact trigger not dumped)
+`LDE_Hopeberry2024_TC1_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Love on the Vine, eventId=LDE_Hopeberry2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**JACKIE** (Encouraging): How's it going? Deb really came through!
+**MADDIE** (Relaxed): I'm as surprised as you are! After the two other blind dates, I was ready to be disappointed...
+**MADDIE** (Joyous): I don't want to jinx it, but he really is the perfect guy!
+**MADDIE** (Joyous): He just had to go answer an urgent phone call - you know, from work.
+**JACKIE**: Will you see him again?
+**MADDIE** (Charming): I really hope so! Maybe there really is some romantic magic in the hopeberries.
+
+### Love on the Vine — part of the event (exact trigger not dumped)
+`LDE_Hopeberry2024_TC3_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Love on the Vine, eventId=LDE_Hopeberry2024, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE**: *Rrring, rrring!*
+**MADDIE** (Calling): Hi, Michael! Where did you go...?
+**MADDIE** (Charming): You had to leave -- now??
+**MADDIE** (Calling): Duty calls, huh? No... It's okay.
+**MADDIE** (Talking): I had a great time, too! A-and... Yes, I'd love to see you again!
+**MADDIE** (Talking): When can you squeeze me into your busy schedule?
+**MADDIE** (Calling): Oh, November? Yeah, that's great...
+**MADDIE** (Calling): Good luck with your emergency... Bye.
+**MADDIE** (Frustrated): Oh, man!
 
 ### Love on the Vine — item discovered: Oil & Vinegar
 `LDE_Hopeberry2024_Vinegar_05_Dialogue` · seen 25.05.01–26.07.01
@@ -325,6 +381,11 @@
 **RODDY**: Or at least tolerate it.
 **RODDY** (Discouraged): Jackie wouldn't even look at my premium tent, let alone get into it.
 
+### Love on the Vine — part of the event (exact trigger not dumped)
+`LDE_Hopeberry2025_GlassSculptures11_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Love on the Vine, eventId=LDE_Hopeberry2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+
 ### Love on the Vine — item discovered: Fruit Boxes
 `LDE_Hopeberry2025_HarvestingTools5_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2025, itemKeys=['LDE_Hopeberry2024_HarvestingTools_05'], items=['Fruit Boxes'], moment=item discovered (versions 25.05.01–26.07.01)
@@ -337,6 +398,11 @@
 **MADDIE** (Charming): Would you - really?
 **RODDY** (Relaxed): Of course. Just tell me what to do.
 **MADDIE** (Relaxed): I owe you big time!
+
+### Love on the Vine — part of the event (exact trigger not dumped)
+`LDE_Hopeberry2025_HarvestingTools6_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Love on the Vine, eventId=LDE_Hopeberry2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
 
 ### Love on the Vine — item discovered: Bouquet of Herbs
 `LDE_Hopeberry2025_Herbs6_Dialogue` · seen 25.05.01–26.07.01
@@ -370,8 +436,13 @@
 **GRANDMA** (Frustrated): ...
 **RODDY** (Charming): I mean, please rest your foot, Ursula.
 
+### Love on the Vine — part of the event (exact trigger not dumped)
+`LDE_Hopeberry2025_Hopeberry5_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Love on the Vine, eventId=LDE_Hopeberry2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+
 ### Love on the Vine — event start
-`LDE_Hopeberry2025_Intro_Dialogue` · seen 26.04.02–26.07.01
+`LDE_Hopeberry2025_Intro_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Love on the Vine, eventId=LDE_Hopeberry2025, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.07.01)
 
 **RODDY** (Encouraging): I can't believe it's already time for the annual Hopeberry festival!
@@ -434,6 +505,28 @@
 **RODDY** (Charming): Yeah, but what if someone needs help?
 **HANK** (Joyous): Like I said: Too nice!
 
+### Love on the Vine — part of the event (exact trigger not dumped)
+`LDE_Hopeberry2025_TA1_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Love on the Vine, eventId=LDE_Hopeberry2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE**: How are you doing, Jackie?
+**JACKIE**: You know - trying to keep busy and keep my mind off the break-up.
+**MADDIE** (Thinking): Can I ask you, why did you break up with Roddy?
+**JACKIE** (Thinking): It's a long story, but I don't think he was ever really in it for us. His mind was elsewhere.
+**MADDIE** (Surprised): What do you mean?
+**JACKIE** (Doubtful): Maybe you should ask him.
+
+### Love on the Vine — part of the event (exact trigger not dumped)
+`LDE_Hopeberry2025_TC1_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Love on the Vine, eventId=LDE_Hopeberry2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**HANK**: Are you looking to start dating again? I know a couple of nice single ladies I could set you up with...
+**RODDY** (Surprised): Dating? Not yet!
+**RODDY** (Discouraged): Besides, I don't even know what I'm looking for in a relationship.
+**HANK** (Thinking): At least you know what you DON'T want, right?
+**HANK** (Charming): You're a total catch, my friend. It's time you give yourself credit for what a nice guy you are and realize what you DO want.
+**HANK** (Charming): Maybe she's right under your nose.
+
 ### Love on the Vine — item discovered: Oil & Vinegar
 `LDE_Hopeberry2025_Vinegar5_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2025, itemKeys=['LDE_Hopeberry2024_Vinegar_05'], items=['Oil & Vinegar'], moment=item discovered (versions 25.05.01–26.07.01)
@@ -444,3 +537,8 @@
 **RODDY**: I really care about Jackie and I wanted to support her with her career and everything, but... should I have been concentrating on myself?
 **RODDY** (Discouraged): What is it that I ACTUALLY want - in relationships or life?
 **RODDY** (Discouraged): OK, the evidence would suggest that I have some work to do with myself.
+
+### Love on the Vine — part of the event (exact trigger not dumped)
+`LDE_Hopeberry2025_Vinegar6_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Love on the Vine, eventId=LDE_Hopeberry2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+

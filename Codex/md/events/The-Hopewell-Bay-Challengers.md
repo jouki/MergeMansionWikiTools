@@ -33,6 +33,17 @@
 **HANK** (Thinking): The ref can’t call penalties anymore?
 **RODDY** (Doubtful): Hank, no! Put it back!
 
+### The Hopewell Bay Challengers — part of the event (exact trigger not dumped)
+`SLBE_Football_EventEnd_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=The Hopewell Bay Challengers, eventId=SLBE_Football, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**HANK** (Encouraging): What a game! WHAT. A. GAME!
+**RODDY** (Doubtful): Yeah, yeah... You can gloat about it...
+**RODDY** (Doubtful): This time!
+**HANK** (Joyous): Cheer up buddy, it was awesome!
+**RODDY** (Charming): Yeah, it was! See you at the next game?
+**HANK** (Joyous): Of course!
+
 ### The Hopewell Bay Challengers — item discovered: Hopeberry Mascot
 `SLBE_Football_FanSupport_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=The Hopewell Bay Challengers, eventKey=SLBE_Football, itemKeys=['SLBE_Football_FanSupport_05'], items=['Hopeberry Mascot'], moment=item discovered (versions 25.05.01–26.07.01)
@@ -78,3 +89,71 @@
 **HANK**: Hey, wanna play a game after the match?
 **RODDY** (Thinking): If it’s on a gaming console, sure.
 **HANK** (Thinking): You were always picked last, weren’t you?
+
+### The Hopewell Bay Challengers — part of the event (exact trigger not dumped)
+`SLBE_Football_Intro_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=The Hopewell Bay Challengers, eventId=SLBE_Football, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**RODDY**: Hey Hank, off to see the game?
+**HANK** (Encouraging): Of course! I’ve been a fan of the team since I was a kid!
+**RODDY** (Relaxed): Me too! Ever since I saw the first Challengers game I-
+**HANK** (Thinking): Challengers? I’m not a challengers fan! Do I LOOK like a Challengers fan?!
+**RODDY** (Doubtful): Oh, I see... You’re sided with... THEM.
+**HANK** (Annoyed): You mean the winners?
+**RODDY** (Frustrated): We’ll see about that...
+
+### The Hopewell Bay Challengers — part of the event (exact trigger not dumped)
+`SLBE_Football_Stage1Complete_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=The Hopewell Bay Challengers, eventId=SLBE_Football, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**RODDY** (Relaxed): Looks like your team forgot how to hold the ball!
+**HANK**: At least they’ve seen the end zone. Your team still thinks it’s a rumor!
+
+### The Hopewell Bay Challengers — part of the event (exact trigger not dumped)
+`SLBE_Football_Stage1Start_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=The Hopewell Bay Challengers, eventId=SLBE_Football, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**RODDY** (Relaxed): Time to see how the Hopewell Bay Challengers do it?
+**HANK** (Encouraging): Ha! Time to see them lose, you mean!
+
+### The Hopewell Bay Challengers — part of the event (exact trigger not dumped)
+`SLBE_Football_Stage2Complete_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=The Hopewell Bay Challengers, eventId=SLBE_Football, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**RODDY** (Relaxed): Nice play! Too bad it’s going to look better in our highlight reel.
+**HANK** (Annoyed): Keep dreaming, buddy! That’s as close as they’ll ever get to a win today!
+
+### The Hopewell Bay Challengers — part of the event (exact trigger not dumped)
+`SLBE_Football_Stage2Start_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=The Hopewell Bay Challengers, eventId=SLBE_Football, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**HANK** (Surprised): It’s a close game!
+**RODDY** (Encouraging): Come on Challengers, you can do it!
+
+### The Hopewell Bay Challengers — part of the event (exact trigger not dumped)
+`SLBE_Football_Stage3Complete_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=The Hopewell Bay Challengers, eventId=SLBE_Football, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**HANK** (Annoyed): Come on, that pass was off target!
+**RODDY**: I’m surprised he can even aim forward after that sack.
+
+### The Hopewell Bay Challengers — part of the event (exact trigger not dumped)
+`SLBE_Football_Stage3Start_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=The Hopewell Bay Challengers, eventId=SLBE_Football, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**RODDY** (Encouraging): Here we go, don’t let me down!
+**HANK** (Annoyed): Hey! THAT WAS A FOUL!
+
+### The Hopewell Bay Challengers — part of the event (exact trigger not dumped)
+`SLBE_Football_Stage4Complete_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=The Hopewell Bay Challengers, eventId=SLBE_Football, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**HANK** (Thinking): Psshh... That play was so predictable!
+**RODDY** (Encouraging): Better than your team’s playbook. I think I saw it in the children’s section.
+
+### The Hopewell Bay Challengers — part of the event (exact trigger not dumped)
+`SLBE_Football_Stage4Start_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=The Hopewell Bay Challengers, eventId=SLBE_Football, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+**HANK** (Surprised): This is it!
+**RODDY** (Worried): It’s all or nothing!

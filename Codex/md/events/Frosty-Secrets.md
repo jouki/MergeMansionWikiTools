@@ -101,7 +101,7 @@
 **PEARL** (Encouraging): Not if you’re wearing enough layers. See - I’m learning!
 
 ### Frosty Secrets — entering board
-`CBE_FrostySecrets2024_Intro_Dialogue` · seen 25.10.01–26.07.01
+`CBE_FrostySecrets2024_Intro_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, event=Frosty Secrets, eventId=CBE_FrostySecrets2024, eventType=Collectible Board Event, moment=entering board (versions 25.10.01–26.07.01)
 
 **MADDIE** (Joyous): What an amazing day! Don’t you just love winter?  
@@ -135,7 +135,6 @@
 **MADDIE** (Encouraging): Well, I didn’t want to spoil the surprise - it’s part of the full winter experience package!  
   _earlier:_ ~~Everything was still there, in perfect order. He clearly intended to go back but never did.~~ (until 25.10.01)
 **MADDIE** (Doubtful): What happened to him, Grandma?
-**GRANDMA** (Relaxed): That's enough secrets for one day, dearie. I... I will tell you one day, but let's try that apple pie.
 
 ### Frosty Secrets — item discovered: Winter Shed
 `CBE_FrostySecrets2024_Shed_Dialogue` · seen 25.05.01–26.07.01

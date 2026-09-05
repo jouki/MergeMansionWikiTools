@@ -12,9 +12,9 @@ Every story in which Malzar speaks.
 **DEB** (Worried): I fear it may have been discovered...
 **LADY VOYANCE** (Doubtful): Excuse me, but I am the one who should sound cryptic here!
 
-### CBE VoyancesVisions MalzarAActive 01B Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_MalzarAActive_01B_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: SILENCE! Malzar will now begin.
 **MALZAR**: <i>A whispered thought, a shifting glance. Plans arise as shadows dance.</i>
@@ -22,9 +22,9 @@ Every story in which Malzar speaks.
 **PEARL** (Thinking): But it does sound an awful lot like a certain older lady I know.
 **LADY VOYANCE** (Thinking): Uh-huh. But when it comes to secrets, I must advise caution!
 
-### CBE VoyancesVisions MalzarAActive 01 Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_MalzarAActive_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MALZAR**: <i>A roll of film, its memories unseen, Like friendships deep, developing in between.</i>
 **JACKIE** (Thinking): What does that mean??
@@ -39,25 +39,25 @@ Every story in which Malzar speaks.
 **LADY VOYANCE** (Doubtful): So, more of the same cryptic talk about family ties!
 **LADY VOYANCE** (Doubtful): If I was more of a detective, I could maybe put two and two together...
 
-### CBE VoyancesVisions MalzarBActive 01B Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_MalzarBActive_01B_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MALZAR**: <i>The truth revealed, yet none behold. Hidden deep within the bold.</i>
 **PEARL** (Thinking): OK, I'm lost. What does he mean?
 **LADY VOYANCE**: That is for YOU to find out, dear!
 **LADY VOYANCE** (Thinking): In any case, I'm only right nine times out of ten.
 
-### CBE VoyancesVisions MalzarBActive 01 Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_MalzarBActive_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MALZAR**: <i>A book with a hollow, where trinkets reside. Is it knowledge we seek, or treasures we hide?</i>
 **JACKIE** (Thinking): Is it knowledge we seek, or treasures we hide... Good question, Malzar!
 
-### CBE VoyancesVisions MalzarCActive 01B Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_MalzarCActive_01B_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Calling): Speak, Malzar!
 **MALZAR**: <i>A shadow waits as coins are weighed. In silent loss, their fortune fades.</i>
@@ -67,9 +67,9 @@ Every story in which Malzar speaks.
 **LADY VOYANCE** (Thinking): But your foreboding feeling may NOT be quite unfounded.
 **LADY VOYANCE** (Thinking): The stars tell me there is something strange afoot here...
 
-### CBE VoyancesVisions MalzarCActive 01 Dialogue
+### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_MalzarCActive_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Collectible Board Event (versions None–None)
+- trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **MALZAR**: <i>A tattered sack, fortunes play hide and seek. Grandma's knitting? Or a bank's quiet leak?</i>
 **LADY VOYANCE** (Thinking): How mysterious!
