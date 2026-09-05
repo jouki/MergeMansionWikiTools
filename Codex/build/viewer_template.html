@@ -77,6 +77,11 @@ main{overflow:auto;padding:18px 26px 60px}
 .grp{font-family:var(--serif);font-size:15px;color:var(--muted);margin:18px 0 8px;padding-bottom:4px;border-bottom:1px dashed var(--line)}
 .ver{font-family:var(--mono);font-size:11px;color:var(--faint)}
 main{--pw:56px;--fs:13.5px;--maxw:920px}
+.story.big{--pw:150px;--fs:18px;max-width:none}
+.story.big .shead h2{font-size:22px}
+.zoom{margin-left:6px;border:1px solid var(--line);background:var(--ground);color:var(--muted);border-radius:4px;width:26px;height:26px;cursor:pointer;font-size:14px;line-height:1}
+.zoom:hover{border-color:var(--accent);color:var(--accent)}
+.story.big .zoom{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 main.size-m{--pw:96px;--fs:15.5px;--maxw:1100px}
 main.size-l{--pw:150px;--fs:18px;--maxw:1320px}
 .script{padding:12px 18px 14px;font-family:var(--mono);font-size:var(--fs);line-height:1.5}
@@ -264,7 +269,7 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
     }).join('');
     const ver = s.removedStory ? '' : (s.firstSeen ? `<span class="ver">since ${esc(s.firstSeen)}</span>` : '');
     const chrono = s.chrono ? `<span class="trig chrono" title="${esc(s.chrono.evidence)} (${esc(s.chrono.version)})">⏱ ${Math.round(s.chrono.pos*100)} % · ${esc(s.chrono.phase)}</span>` : '';
-    return `<article class="story ${s.removedStory?'removed':''}"><div class="shead"><h2>${hl(title(s),q)}</h2>${s.triggers.map(trig).join('')}${chrono}${ver}<span class="sid">${esc(s.id)}</span></div><div class="script">${body||'<div class="empty">Referenced by the game, but no lines matched this id.</div>'}</div></article>`;
+    return `<article class="story ${s.removedStory?'removed':''} ${bigCards.has(s.id)?'big':''}"><div class="shead"><h2>${hl(title(s),q)}</h2>${s.triggers.map(trig).join('')}${chrono}${ver}<span class="sid">${esc(s.id)}</span><button type="button" class="zoom" data-zoom="${esc(s.id)}" title="Enlarge this dialogue">⤢</button></div><div class="script">${body||'<div class="empty">Referenced by the game, but no lines matched this id.</div>'}</div></article>`;
   }
   function render(reset) {
     if (reset!==false) shown = PAGE;
@@ -284,6 +289,8 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
     }).join('') || '<div class="empty">Nothing matches these filters.</div>';
     if (current.length > shown) { const b=document.createElement('button'); b.className='more'; b.textContent=`Show ${Math.min(PAGE,current.length-shown)} more of ${(current.length-shown).toLocaleString('en-US')} remaining`; b.onclick=()=>{shown+=PAGE;render(false);}; list.appendChild(b); }
   }
+  const bigCards = new Set();
+  list.addEventListener('click', e => { const b = e.target.closest('.zoom'); if (!b) return; const card = b.closest('.story'); const id = b.dataset.zoom; card.classList.toggle('big'); if (card.classList.contains('big')) bigCards.add(id); else bigCards.delete(id); });
   let t; document.getElementById('q').addEventListener('input', () => { clearTimeout(t); t=setTimeout(render,180); });
   ['char','onlyChanged','showEmpty','showCosmetic'].forEach(id => document.getElementById(id).addEventListener('change', () => render()));
   ['scope','showRemoved'].forEach(id => document.getElementById(id).addEventListener('change', () => { fillChars(); render(); }));
