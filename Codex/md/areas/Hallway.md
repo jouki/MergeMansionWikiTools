@@ -27,7 +27,7 @@
 **MADDIE**: It's so dusty, and dark...
 **MADDIE** (Thinking): It's strange, though. It all seems so familiar somehow...
 **MADDIE** (Thinking): I think I dream about this hallway sometimes! 
-**JACKIE** (Thinking): What if it's a <b>memory</b>?
+**JACKIE** (Thinking): What if it's a **memory**?
 **MADDIE** (Surprised): I... I suppose it could be! I was 4 when Grandma and I moved out of here, so I guess it's possible I remember some of it. 
 **MADDIE** (Thinking): What else might I remember..?
 
@@ -42,7 +42,7 @@
 **MADDIE** (Annoyed): That's the one. She said my grandparents nearly ran this place into the ground.
 **JACKIE**: ...I'm sorry to say it, but I don't think she was lying.
 **JACKIE**: People say that your uncle Leonard squandered all the family money and-
-**WINSTON** (Surprised): I beg your pardon, but that is  <b>entirely</b> inaccurate!
+**WINSTON** (Surprised): I beg your pardon, but that is  **entirely** inaccurate!
 
 ### Hallway: Remove dust sheet
 `HallwayHallway04` · seen 23.09.02–26.07.01
@@ -121,6 +121,14 @@
 **MADDIE**: It's a barque, actually. 
 **JACKIE** (Encouraging): My apologies, Captain!
 **MADDIE** (Encouraging): Ha! At ease... I learned a few terms while fixing the yacht outside.
+
+### Hallway: HallwayOutro
+`HallwayOutro` · seen 23.09.02–26.07.01
+- trigger: area, area=Hallway, areaId=HallwayOutro, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE** (Joyous): Looks like the key we found, fits this lock! It must be the study...
+**JACKIE** (Thinking): What do you think is in there?
+**MADDIE** (Encouraging): Hopefully something that can help Grandma!
 
 ### Hallway: Remove easel
 `HallwayPaintingStation` · seen 23.09.02–26.07.01

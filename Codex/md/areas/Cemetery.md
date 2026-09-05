@@ -49,7 +49,7 @@
 **MADDIE** (Discouraged): It's just that I really thought I was going to be able to clear my Grandma's name.
 **MADDIE** (Worried): But every time I think I'm onto something, I hit a dead end!
 **JACKIE** (Worried): I might be able to help... I heard a rumor today about the old Lighthouse on your estate.
-**JACKIE** (Surprised): Someone in town said they thought the reclusive man who lived there might be your Grandpa <b>Charlie</b>!
+**JACKIE** (Surprised): Someone in town said they thought the reclusive man who lived there might be your Grandpa **Charlie**!
 **MADDIE** (Surprised): Then that's where I'm going next!
 **JACKIE** (Thinking): I'm not sure. I've actually only heard rumors about it. Maybe you should ask your Grandma?
 **JACKIE**: I saw her going to the Tennis court on my way here. 

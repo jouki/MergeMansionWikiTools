@@ -9,6 +9,6 @@
 **RODDY** (Joyous): We were both right! Turns out there are lots of traditions involving Christmas trees.
 **JACKIE** (Encouraging): Just like there are lots of Christmas traditions! Personally, I love gift-giving the most.
 **RODDY** (Relaxed): And I enjoy spending time with the people I love, like Maddie.
-**JACKIE** (Surprised): You <b>love</b> Maddie?! I mean, I had a suspicion, but that's huge news! Does she know?!
+**JACKIE** (Surprised): You **love** Maddie?! I mean, I had a suspicion, but that's huge news! Does she know?!
 **RODDY** (Surprised): I didn't mean... I shouldn't have... uh, please don't say anything to her? 
 **JACKIE** (Charming): Well, sure. Keeping your secret will be my Christmas gift to you, Roddy!

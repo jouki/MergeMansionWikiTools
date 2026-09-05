@@ -19,7 +19,7 @@
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemovestepdebrisA1, phase=task completed, task=Remove step debris (versions 25.02.01–26.07.01)
 
 **MADDIE** (Joyous): I can't believe it! I'm in the Boulton family Mansion!
-**MADDIE** (Thinking): I didn't even <b>know</b> there was a mansion, until I accidently saw Grandma's notice...
+**MADDIE** (Thinking): I didn't even **know** there was a mansion, until I accidently saw Grandma's notice...
 **MADDIE** (Joyous): ...But now I'm inside and I can finally find something that can help Grandma!
 **MADDIE** (Doubtful): Although... It does look like I have a lot of work to do in here, also.
 **VICTORIA** (Thinking): So, you finally did it. You finally got inside this crumbling heap...
@@ -33,10 +33,10 @@
 **MADDIE**: Well? Who are you, and what are you doing in my Mansion?
 **VICTORIA** (Discouraged): Oh please... This Mansion belongs to the Hopewell Bay town council! Or at least, it soon will, even in this sorry state...
 **MADDIE** (Annoyed): Let me guess. You're Holden's boss? Something to do with infrastructure?
-**VICTORIA** (Thinking): Wrong again missy... I <b>was</b> Head of the Infrastructure Committee.
-**VICTORIA** (Relaxed): I'm the <b>head</b> of the Town Council. Recently promoted. I think you should kneel or something?
+**VICTORIA** (Thinking): Wrong again missy... I **was** Head of the Infrastructure Committee.
+**VICTORIA** (Relaxed): I'm the **head** of the Town Council. Recently promoted. I think you should kneel or something?
 **MADDIE** (Annoyed): So, you're the one who's been sending Holden around, photographing everything!?
-**VICTORIA** (Thinking): That's right! But then I thought... <i>Victoria, why don't you see it for yourself?</i>
+**VICTORIA** (Thinking): That's right! But then I thought... _Victoria, why don't you see it for yourself?_
 **VICTORIA** (Doubtful): And missy... I ain't happy with what I'm seeing!
 
 ### Great Hall: Remove dust sheet

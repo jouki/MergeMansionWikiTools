@@ -16,8 +16,9 @@ Every story in which Bruno speaks.
 **GRANDMA** (Joyous): Ha! I guess it could have been worse!
 **MADDIE** (Thinking): What do you mean by that?
 
-### Landing1
+### Landing Room: Landing1
 `Landing1` · seen 25.05.01–26.07.01
+- trigger: area, area=Landing Room, areaId=Landing, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Frustrated): Ugh... Why am I even doing this anymore?
 **MADDIE** (Doubtful): Why am I helping Grandma if she won’t even let me?!
@@ -29,8 +30,9 @@ Every story in which Bruno speaks.
 **MADDIE** (Surprised): Who- Who are you?!
 **BRUNO** (Charming): The name is Bruno Golightly. Mayor of Hopewell Bay.
 
-### Landing2
+### Landing Room: Landing2
 `Landing2` · seen 25.05.01–26.07.01
+- trigger: area, area=Landing Room, areaId=Landing, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): Mayor?! That makes you Victoria’s husband, doesn’t it?
 **BRUNO** (Charming): Indeed...
@@ -38,8 +40,9 @@ Every story in which Bruno speaks.
 **BRUNO** (Thinking): Well... Funny you should put it like that.
 **BRUNO** (Joyous): I'm here because I have a proposition for you!
 
-### Landing3
+### Landing Room: Landing3
 `Landing3` · seen 25.05.01–26.07.01
+- trigger: area, area=Landing Room, areaId=Landing, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Annoyed): What proposition could you possibly have that would interest me?!
 **BRUNO** (Joyous): This mansion of yours... I'm interested in taking it off your hands.
@@ -51,8 +54,9 @@ Every story in which Bruno speaks.
 **BRUNO** (Joyous): Ms. Boulton, with the money I’m willing to offer for this place, you could buy ANY house in all of Hopewell Bay!
 **BRUNO** (Joyous): You could start fresh... With your grandmother!
 
-### Landing4
+### Landing Room: Landing4
 `Landing4` · seen 25.05.01–26.07.01
+- trigger: area, area=Landing Room, areaId=Landing, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Discouraged): There's a difference between a house and home, Mr. Golightly. This place means a lot to my family.
 **BRUNO** (Charming): Please, call me Bruno.
@@ -65,8 +69,9 @@ Every story in which Bruno speaks.
 **BRUNO**: I am sure as mayor, I could help the police department see reason and stop this dreadful investigation.
 **BRUNO** (Doubtful): Besides, if I were to acquire Beaumont Hall, I wouldn’t want its heritage to be smeared by scandalous controversy.
 
-### Landing5
+### Landing Room: Landing5
 `Landing5` · seen 25.05.01–26.07.01
+- trigger: area, area=Landing Room, areaId=Landing, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Y-you could make it all go away? I don’t know what to say...
 **BRUNO** (Joyous): Yes, would be a start.

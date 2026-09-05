@@ -24,7 +24,7 @@
 **WINSTON** (Doubtful): This house belongs to the noble Boulton family.
 **WINSTON**: It's been in their family for hundreds of years, and still is!
 **MADDIE**: Exactly - and I'm Maddie Boulton! So you'd better tell me why you're here, and, oh my goodness...
-**MADDIE** (Surprised): Are you <b>stealing</b> silver candlesticks from our house?
+**MADDIE** (Surprised): Are you **stealing** silver candlesticks from our house?
 **WINSTON** (Surprised): Madam, I'm a butler, and a butler never steals. I was simply, ahem, polishing these. Now, if you'll excuse me--
 **MADDIE** (Annoyed): Not so fast! You'd better explain yourself, and quickly.
 
@@ -79,7 +79,7 @@
 - trigger: area, area=Maintenance Room, areaId=MaintenanceRoom, hotspotId=ButlersUnlockArea, phase=task completed, task=Unlock the Maintenance Room (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): What's that noise coming from the old side entrance?! 
-**MADDIE** (Worried): It sounds like someone is <b>inside</b> our mansion!
+**MADDIE** (Worried): It sounds like someone is **inside** our mansion!
 **MADDIE** (Thinking): I'd better go and investigate.
 
 ### Maintenance Room: Pick the wooden planks up

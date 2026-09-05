@@ -413,7 +413,7 @@ Every story in which Jackie speaks.
 `CBE_VoyancesVisions_MalzarAActive_01_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
-**MALZAR**: <i>A roll of film, its memories unseen, Like friendships deep, developing in between.</i>
+**MALZAR**: _A roll of film, its memories unseen, Like friendships deep, developing in between._
 **JACKIE** (Thinking): What does that mean??
 **LADY VOYANCE** (Thinking): Patience! Let's see what else he has to say...
 
@@ -421,14 +421,14 @@ Every story in which Jackie speaks.
 `CBE_VoyancesVisions_MalzarBActive_01_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
-**MALZAR**: <i>A book with a hollow, where trinkets reside. Is it knowledge we seek, or treasures we hide?</i>
+**MALZAR**: _A book with a hollow, where trinkets reside. Is it knowledge we seek, or treasures we hide?_
 **JACKIE** (Thinking): Is it knowledge we seek, or treasures we hide... Good question, Malzar!
 
 ### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_MalzarCActive_01_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
-**MALZAR**: <i>A tattered sack, fortunes play hide and seek. Grandma's knitting? Or a bank's quiet leak?</i>
+**MALZAR**: _A tattered sack, fortunes play hide and seek. Grandma's knitting? Or a bank's quiet leak?_
 **LADY VOYANCE** (Thinking): How mysterious!
 **JACKIE** (Doubtful): But what does it all MEAN?
 **LADY VOYANCE** (Charming): You have happened upon quite the enigma, Jackie.
@@ -520,7 +520,7 @@ Every story in which Jackie speaks.
 **MADDIE** (Discouraged): It's just that I really thought I was going to be able to clear my Grandma's name.
 **MADDIE** (Worried): But every time I think I'm onto something, I hit a dead end!
 **JACKIE** (Worried): I might be able to help... I heard a rumor today about the old Lighthouse on your estate.
-**JACKIE** (Surprised): Someone in town said they thought the reclusive man who lived there might be your Grandpa <b>Charlie</b>!
+**JACKIE** (Surprised): Someone in town said they thought the reclusive man who lived there might be your Grandpa **Charlie**!
 **MADDIE** (Surprised): Then that's where I'm going next!
 **JACKIE** (Thinking): I'm not sure. I've actually only heard rumors about it. Maybe you should ask your Grandma?
 **JACKIE**: I saw her going to the Tennis court on my way here. 
@@ -749,7 +749,7 @@ Every story in which Jackie speaks.
 **MADDIE**: It's so dusty, and dark...
 **MADDIE** (Thinking): It's strange, though. It all seems so familiar somehow...
 **MADDIE** (Thinking): I think I dream about this hallway sometimes! 
-**JACKIE** (Thinking): What if it's a <b>memory</b>?
+**JACKIE** (Thinking): What if it's a **memory**?
 **MADDIE** (Surprised): I... I suppose it could be! I was 4 when Grandma and I moved out of here, so I guess it's possible I remember some of it. 
 **MADDIE** (Thinking): What else might I remember..?
 
@@ -764,7 +764,7 @@ Every story in which Jackie speaks.
 **MADDIE** (Annoyed): That's the one. She said my grandparents nearly ran this place into the ground.
 **JACKIE**: ...I'm sorry to say it, but I don't think she was lying.
 **JACKIE**: People say that your uncle Leonard squandered all the family money and-
-**WINSTON** (Surprised): I beg your pardon, but that is  <b>entirely</b> inaccurate!
+**WINSTON** (Surprised): I beg your pardon, but that is  **entirely** inaccurate!
 
 ### Hallway: Remove dust sheet
 `HallwayHallway04` · seen 23.09.02–26.07.01
@@ -814,8 +814,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Encouraging): My apologies, Captain!
 **MADDIE** (Encouraging): Ha! At ease... I learned a few terms while fixing the yacht outside.
 
-### HallwayOutro
+### Hallway: HallwayOutro
 `HallwayOutro` · seen 23.09.02–26.07.01
+- trigger: area, area=Hallway, areaId=HallwayOutro, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Joyous): Looks like the key we found, fits this lock! It must be the study...
 **JACKIE** (Thinking): What do you think is in there?
@@ -851,7 +852,7 @@ Every story in which Jackie speaks.
 - trigger: area, area=Stone Garden, areaId=JapaneseGarden, hotspotId=MansionHallRightPathToGardenClearOvergrown, phase=task completed, task=Remove overgrowth (versions 24.04.01–26.07.01)
 
 **MADDIE** (Doubtful): I still can't believe the police arrested Grandma. I wonder what evidence they have against her...
-**MADDIE** (Doubtful): And what exactly did she mean by that weird note on her hand? "He is alive" <i>Who</i> is alive?
+**MADDIE** (Doubtful): And what exactly did she mean by that weird note on her hand? "He is alive" _Who_ is alive?
 **MADDIE** (Annoyed): Since Grandma won't talk to me about it, I should get on with things here.
 **MADDIE** (Thinking): Besides, I could use a place meant for contemplation.
 **JACKIE** (Encouraging): Wow, I really like what you've done with the grounds... Maddie, right? Maddie Boulton?
@@ -859,7 +860,7 @@ Every story in which Jackie speaks.
 **JACKIE**: Jackie Martin, reporter for the Hopewell Bay Times. I'd like to ask you a few questions about your grandmother.
 **JACKIE**: I know she was held for questioning due to new evidence that has surfaced in a cold case, and--
 **MADDIE** (Surprised): Wait, what case? What evidence? What do you know?
-**JACKIE**: That's what I want to ask you about. A friend on the force mentioned something about  <i>a gold watch</i>...
+**JACKIE**: That's what I want to ask you about. A friend on the force mentioned something about  _a gold watch_...
 **MADDIE** (Annoyed): I'm sorry, but I can't answer your questions. I'd like you to leave, please.
 **JACKIE**: All right, but I can give you a chance to tell your story. I'll leave you my card.
 
@@ -1578,8 +1579,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Thinking): Yeah! I guess he just wanted an excuse to eat some tasty food with good company.
 **JACKIE** (Doubtful): Right... Sure.
 
-### Landing6
+### Landing Room: Landing6
 `Landing6` · seen 25.05.01–26.07.01
+- trigger: area, area=Landing Room, areaId=Landing, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **JACKIE** (Surprised): Hey, wow! Was that Mayor Bruno?!
 **MADDIE** (Worried): Hi, Jackie... Yeah... It was.
@@ -1591,8 +1593,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Worried): I know... I know. But... if there’s a chance to get Grandma out of this mess and maybe move into a place that isn’t falling apart...
 **MADDIE** (Worried): Isn’t that the reason I came here in the first place?
 
-### Landing7
+### Landing Room: Landing7
 `Landing7` · seen 25.05.01–26.07.01
+- trigger: area, area=Landing Room, areaId=Landing, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **JACKIE** (Encouraging): Well, you’ve always had your family’s best interests at heart. So I know you’ll make the right decision.
 **MADDIE** (Worried): Thanks, Jackie!
@@ -1750,7 +1753,7 @@ Every story in which Jackie speaks.
 **RODDY** (Joyous): We were both right! Turns out there are lots of traditions involving Christmas trees.
 **JACKIE** (Encouraging): Just like there are lots of Christmas traditions! Personally, I love gift-giving the most.
 **RODDY** (Relaxed): And I enjoy spending time with the people I love, like Maddie.
-**JACKIE** (Surprised): You <b>love</b> Maddie?! I mean, I had a suspicion, but that's huge news! Does she know?!
+**JACKIE** (Surprised): You **love** Maddie?! I mean, I had a suspicion, but that's huge news! Does she know?!
 **RODDY** (Surprised): I didn't mean... I shouldn't have... uh, please don't say anything to her? 
 **JACKIE** (Charming): Well, sure. Keeping your secret will be my Christmas gift to you, Roddy!
 
@@ -1765,8 +1768,8 @@ Every story in which Jackie speaks.
 **JACKIE** (Relaxed): Yeah? You sound a bit jealous. Do you want to be her only "friend" around here?
 **RODDY** (Worried): No! I, uh... Are you sure Maddie even has a Christmas tree?
 **JACKIE** (Encouraging): Of course! Yesterday she and I were talking about how the Christmas tree originally came from Germany.
-**RODDY** (Thinking): <i>Actually</i>, ancient Egyptians used trees and wreaths as decorations in their homes and temples.
-**JACKIE** (Thinking): Sure, but it wasn't until Queen Victoria was drawn with a Christmas tree that they <i>really</i> got popular.
+**RODDY** (Thinking): _Actually_, ancient Egyptians used trees and wreaths as decorations in their homes and temples.
+**JACKIE** (Thinking): Sure, but it wasn't until Queen Victoria was drawn with a Christmas tree that they _really_ got popular.
 **RODDY** (Charming): Looks like we need to figure out who's right here. What's the origin of the Christmas tree?
 
 ### Double Date Disaster — decoration SE_DoubleDateDisaster2024_Decoration_Slot02
@@ -2163,8 +2166,8 @@ Every story in which Jackie speaks.
 **GRANDMA** (Relaxed): These are my friends. We are all members of a little hobby group.
 **MADDIE** (Thinking): That's quite the hobby group...
 **GRANDMA** (Joyous): Well, we all enjoy a good kicker with some farkle, but a citizen like you would probably not understand such things.
-**MADDIE** (Surprised): What language was <b>that</b>?
-**GRANDMA**: <b>That </b>was biker slang. This is our biker gang, the Grannies of Anarchy.
+**MADDIE** (Surprised): What language was **that**?
+**GRANDMA**: **That **was biker slang. This is our biker gang, the Grannies of Anarchy.
 **JACKIE** (Doubtful): Ha! So I was right!
 
 ### Grannies of Anarchy — decoration SP_GranniesOfAnarchy2023_Decoration_Slot26
@@ -2210,7 +2213,7 @@ Every story in which Jackie speaks.
 - trigger: item, event=Grannies of Anarchy, eventKey=SP_GranniesOfAnarchy2023, itemKeys=['SP_GranniesOfAnarchy2023_CollectableItems_04'], items=['Leather Jacket'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **MADDIE** (Worried): Did you just hear those ladies whisper something about a murder?
-**JACKIE** (Thinking): They <b>are </b>a biker gang, but murder? Then again, those knitting needles look pretty sharp...
+**JACKIE** (Thinking): They **are **a biker gang, but murder? Then again, those knitting needles look pretty sharp...
 **JACKIE** (Doubtful): What are they doing - drawing up a biker granny hit list?
 **MADDIE** (Doubtful): I think we need to dig a little deeper. Come on, Jackie. Let's see what these biking buddies are up to!
 
@@ -2655,14 +2658,14 @@ Every story in which Jackie speaks.
 **JACKIE** (Doubtful): Well, there's a whole bunch of people spreading weird rumors about Ursula.
 **JACKIE** (Surprised): Someone said she used to be a member of this very circus!
 
-### SP SplashMystery2025 Deco 26 Dialogue
+### Splash of Mystery — part of the event (exact trigger not dumped)
 `SP_SplashMystery2025_Deco_26_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Splash of Mystery, eventId=SP_SplashMystery2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 
-### SP SplashMystery2025 Deco 28 Dialogue
+### Splash of Mystery — part of the event (exact trigger not dumped)
 `SP_SplashMystery2025_Deco_28_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Splash of Mystery, eventId=SP_SplashMystery2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 
 ### Spring Season — decoration SP_SpringSeason2023_Decoration_25
@@ -2911,7 +2914,7 @@ Every story in which Jackie speaks.
 
 **JACKIE** (Joyous): Well done Maddie, it opened! And is that a... notebook inside?
 **MADDIE** (Discouraged): Huh, there's nothing to help Grandma in here! Just lots of drawings and numbers. 
-**MADDIE** (Thinking): But this <b>Maze</b> looks like the one on the grounds, and it has the number '1' written above it. I guess I'll go there next!
+**MADDIE** (Thinking): But this **Maze** looks like the one on the grounds, and it has the number '1' written above it. I guess I'll go there next!
 **JACKIE** (Charming): Thanks for letting me help and hang out, Maddie. I hope this notebook leads to whatever you're looking for!
 
 ### Secret Society: Clean the glass
@@ -3384,8 +3387,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Doubtful): I guess nothing has changed, huh?
 **MADDIE** (Thinking): I guess not...
 
-### StudyComputer
+### Study: StudyComputer
 `StudyComputer` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=StudyComputer, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): This is an old computer!
 **JACKIE** (Encouraging): Old but reliable! We still use these at work!
@@ -3404,8 +3408,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Doubtful): Uhmm... Are you sure?
 **MADDIE** (Thinking): Only one way to find out!
 
-### StudyInsertingPassword
+### Study: StudyInsertingPassword
 `StudyInsertingPassword` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=StudyInsertingPassword, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Joyous): It... It worked! I think I unlocked something!
 **JACKIE** (Doubtful): I can’t believe that was the password...
@@ -3420,8 +3425,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Encouraging): That’s pretty cute. Is it filled with your family's riches?
 **MADDIE**: No. Just happy memories!
 
-### StudyOutro
+### Study: StudyOutro
 `StudyOutro` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=StudyOutro, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Thinking): It’s a trapdoor! Hmm... This lock has a very strange looking key hole, I wonder if-
 **JACKIE** (Surprised): Do you smell that? Is something on fire?!

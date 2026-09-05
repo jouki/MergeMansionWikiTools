@@ -303,6 +303,15 @@
 **WINSTON** (Charming): You truly are a Boulton worthy of their name.
 **MADDIE** (Charming): Anytime, Winston!
 
+### Parents' Room: ParentsRoomOutro
+`ParentsRoomOutro` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoomOutro, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE**: All right... I’ve found what I can in here.
+**MADDIE**: And I’m happy that at least a part of my parents’ memory has been restored.
+**MADDIE** (Thinking): But I think I should head to the tin can factory next.
+**MADDIE** (Thinking): And finally figure out what is actually going on there!
+
 ### Parents' Room: Clean teddy
 `ParentsRoomPOI_BabyMobile` · seen 25.07.01–26.07.01
 - trigger: area, area=Parents' Room, areaId=ParentsRoom, hotspotId=ParentsRoomCribCornerCleanTeddy, phase=task completed, task=Clean teddy (versions 25.07.01–26.07.01)

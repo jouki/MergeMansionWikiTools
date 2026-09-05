@@ -516,7 +516,7 @@ Every story in which Lady Voyance speaks.
 `CBE_VoyancesVisions_MalzarAActiveC_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['CBE_VoyancesVisions_MalzarAActive_01'], items=['Malzar - First Answer'], moment=item discovered (versions 25.05.01–26.07.01)
 
-**MALZAR**: </i>Through tangled roots of kin we tread, unveiling truths long left unsaid.</i>
+**MALZAR**: _Through tangled roots of kin we tread, unveiling truths long left unsaid._
 **LADY VOYANCE** (Thinking): Does that make sense to you? Sounds like family secrets...
 **DEB** (Doubtful): Indeed... That is something us Boultons know a lot about.
 **DEB** (Worried): But there is a secret that reaches even further.
@@ -528,7 +528,7 @@ Every story in which Lady Voyance speaks.
 - trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: SILENCE! Malzar will now begin.
-**MALZAR**: <i>A whispered thought, a shifting glance. Plans arise as shadows dance.</i>
+**MALZAR**: _A whispered thought, a shifting glance. Plans arise as shadows dance._
 **PEARL** (Thinking): Does that mean someone's been planning something? Usually that's me...
 **PEARL** (Thinking): But it does sound an awful lot like a certain older lady I know.
 **LADY VOYANCE** (Thinking): Uh-huh. But when it comes to secrets, I must advise caution!
@@ -537,7 +537,7 @@ Every story in which Lady Voyance speaks.
 `CBE_VoyancesVisions_MalzarAActive_01_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
-**MALZAR**: <i>A roll of film, its memories unseen, Like friendships deep, developing in between.</i>
+**MALZAR**: _A roll of film, its memories unseen, Like friendships deep, developing in between._
 **JACKIE** (Thinking): What does that mean??
 **LADY VOYANCE** (Thinking): Patience! Let's see what else he has to say...
 
@@ -546,7 +546,7 @@ Every story in which Lady Voyance speaks.
 - trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['CBE_VoyancesVisions_MalzarBActive_01'], items=['Malzar - Second Answer'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Let's hear it, Malzar - what is your cosmic message?
-**MALZAR**: </i>Buried deep, the ties that bind, a truth the bloodline must not find.</i>
+**MALZAR**: _Buried deep, the ties that bind, a truth the bloodline must not find._
 **LADY VOYANCE** (Doubtful): So, more of the same cryptic talk about family ties!
 **LADY VOYANCE** (Doubtful): If I was more of a detective, I could maybe put two and two together...
 
@@ -554,7 +554,7 @@ Every story in which Lady Voyance speaks.
 `CBE_VoyancesVisions_MalzarBActive_01B_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
-**MALZAR**: <i>The truth revealed, yet none behold. Hidden deep within the bold.</i>
+**MALZAR**: _The truth revealed, yet none behold. Hidden deep within the bold._
 **PEARL** (Thinking): OK, I'm lost. What does he mean?
 **LADY VOYANCE**: That is for YOU to find out, dear!
 **LADY VOYANCE** (Thinking): In any case, I'm only right nine times out of ten.
@@ -568,14 +568,14 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE** (Encouraging): It is said, however, that sometimes he does get uncomfortably close to the truth.
 **LADY VOYANCE** (Charming): Are you ready for his final message?
 **DEB** (Thinking): I suppose I am.
-**LADY VOYANCE** (Charming): </i>A secret spilled, a fortune lost, a girl’s fate sealed at such a cost.</i>
+**LADY VOYANCE** (Charming): _A secret spilled, a fortune lost, a girl’s fate sealed at such a cost._
 
 ### Voyance's Visions — part of the event (exact trigger not dumped)
 `CBE_VoyancesVisions_MalzarCActive_01B_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Calling): Speak, Malzar!
-**MALZAR**: <i>A shadow waits as coins are weighed. In silent loss, their fortune fades.</i>
+**MALZAR**: _A shadow waits as coins are weighed. In silent loss, their fortune fades._
 **PEARL** (Doubtful): I always knew that the people in this town have secrets, but wow...
 **PEARL** (Doubtful): So someone is afraid of losing their fortune and their position...
 **LADY VOYANCE**: A common fear, my dear.
@@ -586,7 +586,7 @@ Every story in which Lady Voyance speaks.
 `CBE_VoyancesVisions_MalzarCActive_01_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
-**MALZAR**: <i>A tattered sack, fortunes play hide and seek. Grandma's knitting? Or a bank's quiet leak?</i>
+**MALZAR**: _A tattered sack, fortunes play hide and seek. Grandma's knitting? Or a bank's quiet leak?_
 **LADY VOYANCE** (Thinking): How mysterious!
 **JACKIE** (Doubtful): But what does it all MEAN?
 **LADY VOYANCE** (Charming): You have happened upon quite the enigma, Jackie.

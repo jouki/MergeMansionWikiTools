@@ -1,8 +1,9 @@
 # Winston
 Every story in which Winston speaks.
 
-### BathroomIntro
+### Bathroom: BathroomIntro
 `BathroomIntro` · seen 23.11.02–26.07.01
+- trigger: area, area=Bathroom, areaId=BathroomIntro, phase=area story (exact task not dumped) (versions 23.11.02–26.07.01)
 
 **MADDIE**: There! Got the door open with the crowbar!
 **MADDIE**: Now, to see where that water is coming fro-
@@ -764,8 +765,9 @@ Every story in which Winston speaks.
 **MADDIE** (Surprised): Oh, that makes things easier. Thanks, Winston!
 **MADDIE** (Surprised): Nothing can hold me back from discovering the truth now!
 
-### GalleryIntro
+### Gallery: GalleryIntro
 `GalleryIntro` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=GalleryIntro, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: I can't believe I found the key to the gallery in the dining room and I'm only just unlocking it!
 **MADDIE**: It's such a relief to see dry floors again....
@@ -785,7 +787,7 @@ Every story in which Winston speaks.
 **MADDIE** (Annoyed): That's the one. She said my grandparents nearly ran this place into the ground.
 **JACKIE**: ...I'm sorry to say it, but I don't think she was lying.
 **JACKIE**: People say that your uncle Leonard squandered all the family money and-
-**WINSTON** (Surprised): I beg your pardon, but that is  <b>entirely</b> inaccurate!
+**WINSTON** (Surprised): I beg your pardon, but that is  **entirely** inaccurate!
 
 ### Hallway: Remove dust sheet
 `HallwayHallway04` · seen 23.09.02–26.07.01
@@ -844,7 +846,7 @@ Every story in which Winston speaks.
 `LBE_May2023Rooster` · seen 23.09.02–26.07.01
 - trigger: item, event=The Great Bake-off, eventKey=LBE_May2023, itemKeys=['LBE_May2023_Rooster_01'], items=['Rooster'], moment=item discovered (versions 23.09.02–26.07.01)
 
-**WINSTON**: Roosters must have an <b>infinite</b> amount of patience to keep the chickens in line! Or a bunch of <b>hourglasses</b>...
+**WINSTON**: Roosters must have an **infinite** amount of patience to keep the chickens in line! Or a bunch of **hourglasses**...
 
 ### Lounge: Lounge16
 `Lounge16` · seen 25.05.01–26.07.01
@@ -884,7 +886,7 @@ Every story in which Winston speaks.
 **WINSTON** (Doubtful): This house belongs to the noble Boulton family.
 **WINSTON**: It's been in their family for hundreds of years, and still is!
 **MADDIE**: Exactly - and I'm Maddie Boulton! So you'd better tell me why you're here, and, oh my goodness...
-**MADDIE** (Surprised): Are you <b>stealing</b> silver candlesticks from our house?
+**MADDIE** (Surprised): Are you **stealing** silver candlesticks from our house?
 **WINSTON** (Surprised): Madam, I'm a butler, and a butler never steals. I was simply, ahem, polishing these. Now, if you'll excuse me--
 **MADDIE** (Annoyed): Not so fast! You'd better explain yourself, and quickly.
 
@@ -1093,7 +1095,7 @@ Every story in which Winston speaks.
 
 **DEB** (Thinking): This thing has always given me the creeps...
 **WINSTON**: Then it is doing its job, ma'am.
-**DEB** (Relaxed): Come to think of it, it <b>does</b> resemble Mr. Winston, doesn't it?!
+**DEB** (Relaxed): Come to think of it, it **does** resemble Mr. Winston, doesn't it?!
 **GRANDMA** (Encouraging): Ha ha!
 **WINSTON** (Doubtful): Hmph!
 

@@ -302,9 +302,9 @@ Every story in which Bella speaks.
 **BELLA** (Relaxed): I did... Do you like it?
 **EMILIO** (Encouraging): I LOVE it.
 
-### LDE GreenAcresQuest2024 v2 TA4 Dialogue
+### Green Acres Quest — part of the event (exact trigger not dumped)
 `LDE_GreenAcresQuest2024_v2_TA4_Dialogue` · seen 26.02.01–26.04.02
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, moment=part of the event (exact trigger not dumped) (versions 26.02.01–26.04.02)
 
 **BELLA** (Thinking): Are you building a new garden at the Mansion?
 **MADDIE** (Surprised): Errr, yes! I am.
@@ -313,18 +313,18 @@ Every story in which Bella speaks.
 **BELLA** (Relaxed): No, but they're my favorite flowers!
 **MADDIE** (Relaxed): Ah, good to know!
 
-### LDE GreenAcresQuest2024 v2 TC1 Dialogue
+### Green Acres Quest — part of the event (exact trigger not dumped)
 `LDE_GreenAcresQuest2024_v2_TC1_Dialogue` · seen 26.02.01–26.04.02
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, moment=part of the event (exact trigger not dumped) (versions 26.02.01–26.04.02)
 
 **BELLA** (Doubtful): There you are! What on earth are you doing out here with all those rakes and gardening gloves?
 **BELLA** (Doubtful): Are you helping Maddie with her new garden project?
 **EMILIO** (Surprised): Y-yes! She asked me to help, since there's so much work to do.
 **BELLA** (Relaxed): Does she know your family used to call you the "plant assassin" because you used to kill every plant you touched?
 
-### LDE GreenAcresQuest2024 v2 TC3 Dialogue
+### Green Acres Quest — part of the event (exact trigger not dumped)
 `LDE_GreenAcresQuest2024_v2_TC3_Dialogue` · seen 26.02.01–26.04.02
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, moment=part of the event (exact trigger not dumped) (versions 26.02.01–26.04.02)
 
 **EMILIO** (Relaxed): Bella, your surprise is finally ready!
 **BELLA** (Relaxed): What is it? I'm so excited!

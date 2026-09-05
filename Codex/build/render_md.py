@@ -25,6 +25,12 @@ def latest(run_list):
     return None
 
 
+def clean_markup(text):
+    """In-game rich text -> Markdown: <color=#...>x</color> -> **x**, <i>/<b> -> _ / **."""
+    text = re.sub(r"<color=#[0-9A-Fa-f]{6,8}>(.*?)</color>", r"****", text)
+    return re.sub(r"</?i>", "_", text).replace("<b>", "**").replace("</b>", "**")
+
+
 def story_title(sid, story):
     t = story["triggers"][0] if story["triggers"] else {"kind": "unknown"}
     if t["kind"] == "area":
@@ -63,6 +69,7 @@ def story_md(sid, story, codex):
         text = latest(l["text"])
         if not text:
             continue                       # silent beat (camera / animation)
+        text = clean_markup(text)
         sp, st = latest(l["speaker"]), latest(l["state"])
         who = (codex["characters"].get(sp, {}).get("name", sp) if sp else "—").upper()
         line = f"**{who}**" + (f" ({st})" if st and st not in ("Default", "NoChange") else "") + f": {text}"
@@ -153,7 +160,7 @@ def main():
                 t = latest(l.get("text") or [])
                 if t:
                     sp = latest(l.get("speaker") or [])
-                    first.append(f"{(codex['characters'].get(sp, {}).get('name', sp) if sp else '—')}: {t[:110]}")
+                    first.append(f"{(codex['characters'].get(sp, {}).get('name', sp) if sp else '—')}: {clean_markup(t)[:110]}")
             seen = st.get("seen") or {}
             ua.append(f"- `{sid}` ({seen.get('first')}–{seen.get('last')}): " + (" / ".join(first) if first else "_no text_"))
         ua.append("")

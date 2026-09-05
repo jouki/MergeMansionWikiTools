@@ -22,7 +22,7 @@
 
 **DOG** (Doubtful): Grr...
 **MADDIE** (Surprised): What's gotten into you?
-**DOG** (Doubtful): <i>Grrrr!</i>
+**DOG** (Doubtful): _Grrrr!_
 **RODDY** (Surprised): Easy there, killer. I just want to be friends.
 **RODDY** (Thinking): Maybe next time then.
 **MADDIE** (Charming): You might have to fight for that relationship, Roddy!

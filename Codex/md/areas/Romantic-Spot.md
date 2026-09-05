@@ -1,6 +1,19 @@
 # Romantic Spot
 
 
+### Romantic Spot: RomanticSpotCarWithFlowers
+`RomanticSpotCarWithFlowers` · seen 23.09.02–26.07.01
+- trigger: area, area=Romantic Spot, areaId=RomanticSpotCarWithFlowers, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE** (Surprised): Don't tell me someone used to drive this old thing? It's a wreck!
+**GRANDMA**: True, but at one time, it was your father's pride and joy.
+**GRANDMA** (Encouraging): He restored it and took your mom out on their first date in this car!
+**GRANDMA** (Worried): Your Grandpa Charlie wasn't happy. He thought something bad would happen in the car.
+**GRANDMA** (Frustrated): It turned out he should have worried about something else with those two.
+**MADDIE** (Worried): What? Grandma, whatever did happen to my parents?
+**GRANDMA** (Discouraged): This is why I don't like telling you family stories! I don't want to dredge up bad things from the past.
+**MADDIE**: Okay, sorry Grandma. Tell me another happy story about them instead, please?
+
 ### Romantic Spot: Place butterflies
 `RomanticSpotClosing` · seen 23.09.02–26.07.01
 - trigger: area, area=Romantic Spot, areaId=RomanticSpot, hotspotId=LoveStoryPlaceButterfliesN1, phase=task completed, task=Place butterflies (versions 24.04.01–26.07.01)
@@ -11,8 +24,48 @@
 **MADDIE** (Worried): What, uh, what exactly happened to my parents?
 **MADDIE** (Discouraged): I really want to know, Grandma.
 **GRANDMA** (Annoyed): And I really don't want to talk about it, dearie!
-**GRANDMA**: I <b>do</b> want to go and watch a horror film, though. Goodbye!
+**GRANDMA**: I **do** want to go and watch a horror film, though. Goodbye!
 **MADDIE** (Thinking): Huh. She might not want to talk about it, but one day, I will find out what happened to my mom and dad!
+
+### Romantic Spot: RomanticSpotEndOfEventChain
+`RomanticSpotEndOfEventChain` · seen 23.09.02–26.07.01
+- trigger: area, area=Romantic Spot, areaId=RomanticSpotEndOfEventChain, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+
+### Romantic Spot: RomanticSpotFlowerBeds
+`RomanticSpotFlowerBeds` · seen 23.09.02–26.07.01
+- trigger: area, area=Romantic Spot, areaId=RomanticSpotFlowerBeds, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**GRANDMA**: Well, here you go. This is the place my Michael first saw Becky!
+**MADDIE** (Thinking): My parents first met by some flowers?
+**GRANDMA**: That's right. Becky and her family were new in town, and I invited them here one afternoon.
+**GRANDMA** (Thinking): When little Mikey saw Becky, that was it! He was eight years old, and it was love at first sight.
+**GRANDMA** (Encouraging): He tried to give her some flowers, but she just wanted to play hide and seek!
+**GRANDMA** (Thinking): It would be years and years until she felt the same way as him.
+**MADDIE** (Encouraging): Tell me more!
+
+### Romantic Spot: RomanticSpotIntro
+`RomanticSpotIntro` · seen 23.09.02–26.07.01
+- trigger: area, area=Romantic Spot, areaId=RomanticSpotIntro, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+
+### Romantic Spot: RomanticSpotOldTree
+`RomanticSpotOldTree` · seen 23.09.02–26.07.01
+- trigger: area, area=Romantic Spot, areaId=RomanticSpotOldTree, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE** (Surprised): Grandma, do you see this?! It says 'Becky loves Mikey' on it!
+**MADDIE** (Thinking): My Mom must have carved it into the tree!
+**GRANDMA** (Worried): She did. She and Michael used to love coming here together.
+**MADDIE** (Joyous): Really? Oh, Grandma, will you tell me about them? I... I'd love to know more about my parents.
+**GRANDMA** (Discouraged): Well, alright, but I need some time to gather my memories. This isn't easy to talk about, you know.
+
+### Romantic Spot: RomanticSpotOpening
+`RomanticSpotOpening` · seen 23.09.02–26.07.01
+- trigger: area, area=Romantic Spot, areaId=RomanticSpotOpening, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE** (Surprised): What a cute little part of the estate!
+**MADDIE** (Thinking): I wonder if it has any clues about what happened between Grandma and Grandpa?
+**MADDIE**: I'm going to ask Grandma to come here and help me out as I tidy up!
 
 ### Romantic Spot: Remove stream debris
 `RomanticSpotSmallCreek` · seen 23.09.02–26.07.01

@@ -19,7 +19,7 @@
 **MADDIE** (Annoyed): I wish I knew what was going on with her. She's always been secretive, but this?!
 **ANTIQUEDEALER** (Thinking): I'm sure she'll have a good reason for her secrets.
 **ANTIQUEDEALER** (Thinking): She's still your grandmother - whatever happened here. She's the same Ursula you've always known...
-**MADDIE** (Thinking): He's right! I shouldn't give up on her. This arrest <i>has</i> to be a mistake!
+**MADDIE** (Thinking): He's right! I shouldn't give up on her. This arrest _has_ to be a mistake!
 
 ### Plaza: Clear path
 `Plaza_Outro` · seen 23.09.02–26.07.01

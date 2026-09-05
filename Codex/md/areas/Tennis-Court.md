@@ -12,7 +12,7 @@
 **ANTIQUEDEALER** (Thinking): Were you about to play a game?
 **MADDIE** (Frustrated): I... well, I don't know how to play! Grandma never taught me. She says she doesn't like tennis.
 **MADDIE** (Surprised): Hey, look down there! I think there's a photo sticking out of the bush.
-**MADDIE** (Surprised): I don't believe it - this is Grandma and her sister Deb! And they're <b>playing tennis</b>! Why would she lie about hating it?
+**MADDIE** (Surprised): I don't believe it - this is Grandma and her sister Deb! And they're **playing tennis**! Why would she lie about hating it?
 **ANTIQUEDEALER** (Thinking): I, ahem, have no idea! Goodness, is that the time? I must dash...
 **MADDIE** (Thinking): Hmmm, that was strange! Grandma lied about tennis, and Julius ran away. I'm going to call Deb and find out more!
 
@@ -28,7 +28,7 @@
 **DEB** (Doubtful): She didn't tell you, huh? Well, let's just say that your Grandma was a sore loser when it came to tennis!
 **DEB** (Thinking): Tell me, Maddie - what do you know about the family treasure?
 **MADDIE** (Thinking): Uh, nothing, but I'm all ears.
-**DEB**: Well, I don't want to say too much, but I'm sure it's here. You should look for it - see if you can find <b>my</b> missing treasure!
+**DEB**: Well, I don't want to say too much, but I'm sure it's here. You should look for it - see if you can find **my** missing treasure!
 
 ### Tennis Court: Remove old court markings
 `TennisCourtDialogueC` · seen 23.09.02–26.07.01

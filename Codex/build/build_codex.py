@@ -358,10 +358,22 @@ def build():
             covered.update(ids or [])
         stories[sid] = {"lines": common.runs(order_pairs), "triggers": triggers,
                         "seen": {"first": seen[0], "last": seen[-1]} if seen else None}
+    for g, ids in groups.items():
+        if g in stories or any(i in covered for i in ids):
+            continue
+        seen = [v for v in vers if any(v in struct_vers[i] for i in ids)]
+        stories[g] = {"lines": [{"from": seen[0] if seen else vers[0], "value": ids}],
+                      "triggers": [{"kind": "unknown", "hint": classify_prefix(g, prefixes)}],
+                      "seen": {"first": seen[0], "last": seen[-1]} if seen else None}
+
     # stories the config defines but nothing we dump triggers (event side stories, tutorial): attribute them
-    # to their event by the id prefix (SBE_Jailbreak_… -> The Great Escape (Jailbreak)) so the event stays whole
+    # to their event by the id prefix (SBE_Jailbreak_… -> The Great Escape (Jailbreak)) so the event stays whole.
+    # A prefix-guess trigger ("unknown") counts as no trigger here.
+    def unplaced(st):
+        return not st["triggers"] or all(t["kind"] == "unknown" for t in st["triggers"])
+
     for sid, st in stories.items():
-        if st["triggers"]:
+        if not unplaced(st):
             continue
         tokens = sid.split("_")
         if len(tokens) >= 3:
@@ -382,10 +394,13 @@ def build():
     area_by_lower = {aid.lower(): name for aid, name in area_name.items()}
     area_by_lower.update({name.replace(" ", "").replace("'", "").lower(): name for name in area_name.values()})
     for sid, st in stories.items():
-        if st["triggers"]:
+        if not unplaced(st):
             continue
         m = re.match(r"^([A-Za-z]+?)(?:_|\d|$)", sid)
-        hit = area_by_lower.get(m.group(1).lower()) if m else None
+        pre = m.group(1).lower() if m else ""
+        hit = area_by_lower.get(pre) if m else None
+        if not hit and len(pre) > 6:                       # Stablesext / Stablesinterior <-> StablesExterior / Stables
+            hit = next((n for k, n in area_by_lower.items() if len(k) >= 5 and (pre.startswith(k) or k.startswith(pre))), None)
         if hit:
             st["triggers"] = [{"kind": "area", "area": hit, "areaId": m.group(1), "task": None, "hotspotId": None,
                                "phase": "area story (exact task not dumped)",
@@ -394,7 +409,7 @@ def build():
     manual_path = os.path.join(os.path.dirname(__file__), "story_assignments.json")
     manual = {k: v for k, v in common.read_json(manual_path).items() if not k.startswith("_")} if os.path.exists(manual_path) else {}
     for sid, st in stories.items():
-        if st["triggers"]:
+        if not unplaced(st):
             continue
         rule = manual.get(sid) or next((v for k, v in manual.items() if k.endswith("*") and sid.startswith(k[:-1])), None)
         if rule:
@@ -405,13 +420,6 @@ def build():
             elif rule.get("event"):
                 st["triggers"] = [{"kind": "event", "eventType": "event story", "event": rule["event"], "eventId": None,
                                    "moment": "placed by hand" + (f": {rule['note']}" if rule.get("note") else ""), "from": seen.get("first"), "to": seen.get("last")}]
-    for g, ids in groups.items():
-        if g in stories or any(i in covered for i in ids):
-            continue
-        seen = [v for v in vers if any(v in struct_vers[i] for i in ids)]
-        stories[g] = {"lines": [{"from": seen[0] if seen else vers[0], "value": ids}],
-                      "triggers": [{"kind": "unknown", "hint": classify_prefix(g, prefixes)}],
-                      "seen": {"first": seen[0], "last": seen[-1]} if seen else None}
 
     # 3b) "NoChange" on a side = the character who stood on that side in the previous line of the same story
     #     (same for the state). Walk every story in its per-version order and rewrite speaker/state runs.

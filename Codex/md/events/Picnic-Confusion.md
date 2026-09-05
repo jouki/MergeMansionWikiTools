@@ -25,8 +25,8 @@
 - trigger: item, event=Picnic Confusion!, eventKey=LDE_PicnicConfusion2023, itemKeys=['LDE_PicnicConfusion2023_Clothing_07'], items=['LDE_PicnicConfusion2023_Clothing_07'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **RODDY** (Relaxed): I think we should have a whole picnic table set up for them, before they arrive!
-**ANTIQUEDEALER** (Doubtful): Well, if that's the case, I'll go get the <b>cutlery</b>.
-**RODDY** (Thinking): Good idea, I'll grab the <b>food</b> for it!
+**ANTIQUEDEALER** (Doubtful): Well, if that's the case, I'll go get the **cutlery**.
+**RODDY** (Thinking): Good idea, I'll grab the **food** for it!
 
 ### Picnic Confusion! — item discovered: LDE_PicnicConfusion2023_Coal_05
 `LDE_PicnicConfusion2023_Coalchain_Dialogue` · seen 23.09.02–26.07.01
@@ -57,8 +57,8 @@
 
 **RODDY** (Thinking): I guess a small campfire wouldn't hurt, would it Julius? 
 **ANTIQUEDEALER** (Thinking): But we got a hamper full of food!
-**RODDY** (Charming): Yeah, but for roasting <b>marshmallows</b> and cozying up next to the fire in a blanket!
-**ANTIQUEDEALER**: You mean cozying up next to <b>someone</b> by the fire...
+**RODDY** (Charming): Yeah, but for roasting **marshmallows** and cozying up next to the fire in a blanket!
+**ANTIQUEDEALER**: You mean cozying up next to **someone** by the fire...
 **RODDY** (Surprised): I...  Uh...
 **ANTIQUEDEALER** (Charming): Hahaha! 
 

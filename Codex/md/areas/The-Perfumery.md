@@ -249,6 +249,17 @@
 **MADDIE** (Relaxed): Okay, bye.
 **VICTORIA** (Worried): I'LL BE BACK!
 
+### The Perfumery: PerfumeryPOI_LabDesk
+`PerfumeryPOI_LabDesk` · seen 25.06.01–26.07.01
+- trigger: area, area=The Perfumery, areaId=PerfumeryPOI, phase=area story (exact task not dumped) (versions 25.06.01–26.07.01)
+
+**MADDIE**: This has to have been Lindsay's lab!
+**MADDIE** (Joyous): So many beakers and flasks full of interesting liquids...
+**MADDIE** (Surprised): And there's a centrifuge too! She really was ahead of her time.
+**MADDIE** (Relaxed): Her passion and dedication shine through every area of this room!
+**MADDIE** (Encouraging): And this portrait, she looks so academic and brilliant.
+**MADDIE** (Thinking): Ooh! It's signed by someone - Delacourt! Was it a gift? I wonder who that is...
+
 ### The Perfumery: Place even more perfumes
 `PerfumeryPOI_PackagingPreOutro` · seen 25.06.01–26.07.01
 - trigger: area, area=The Perfumery, areaId=Perfumery, hotspotId=PerfumeryPackingTablesPlaceRightPerfumes0, phase=task completed, task=Place even more perfumes (versions 25.06.01–26.07.01)

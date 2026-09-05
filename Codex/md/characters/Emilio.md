@@ -188,7 +188,7 @@ Every story in which Emilio speaks.
 
 **MADDIE**: I’ve always wanted to put a water feature here!
 **EMILIO** (Thinking): It is quite beautiful, Maddie. Although I don’t think it’ll be suitable for fish...
-**MADDIE** (Joyous): Don’t worry, I got a <b>great</b> idea for them!
+**MADDIE** (Joyous): Don’t worry, I got a **great** idea for them!
 **RODDY**: Hey Maddie! How's... Uuh.. What's going on?
 **MADDIE**: Perfect timing, Roddy! Let me introduce you to Emilio!
 **EMILIO** (Encouraging): Hello! Welcome to the joys of the sea! My name is Emilio Costa, marine biologist! Have you come to learn about all the wonderful things found at sea?
@@ -234,11 +234,11 @@ Every story in which Emilio speaks.
 - trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot08, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **DEB** (Relaxed): So what made you decide to become a marine biologist, handsome?
-**EMILIO** (Doubtful): Uhm... You can call me Emilio. <b>Please</b>...
+**EMILIO** (Doubtful): Uhm... You can call me Emilio. **Please**...
 **MADDIE**: Hi, Emilio!  
   _(1 cosmetic edit not shown)_
 **EMILIO** (Surprised): MADDIE! Hi! I was just uuh, showing- uuh, telling your aunt... uuh, what’s her name?!
-**DEB** (Charming): Deb. But <b>you</b> can call me... Anytime.
+**DEB** (Charming): Deb. But **you** can call me... Anytime.
 **MADDIE** (Encouraging): Interesting woman, isn’t she?
 
 ### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot09
@@ -246,7 +246,7 @@ Every story in which Emilio speaks.
 - trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot09, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **GRANDMA** (Discouraged): I’m sorry, dearie. I thought it was junk, so I threw it in the trash!
-**EMILIO** (Encouraging): <i>*sigh*</i> I guess it was junk, Mrs. Boulton. We sort of got carried away with the mystery of it all...
+**EMILIO** (Encouraging): _*sigh*_ I guess it was junk, Mrs. Boulton. We sort of got carried away with the mystery of it all...
 **MADDIE**: Did Grandma throw away your suitcase?
 **EMILIO**: Yes... I guess we’ll never know if it contained a map to a treasure of untold riches, Roddy...
 **RODDY**: I guess so, bud...
@@ -319,7 +319,7 @@ Every story in which Emilio speaks.
 **EMILIO**: While their first line of defense is to inflate into a large and more difficult form to swallow, often with spikes...
 **GRANDMA**: They are also incredibly toxic! Lethal to almost all predators, including humans!
 **EMILIO** (Surprised): Th- That's right! You know your fish Mrs. Boulton!
-**GRANDMA** (Charming): Just the <i>interesting</i> ones, dearie.
+**GRANDMA** (Charming): Just the _interesting_ ones, dearie.
 
 ### The Joys of the Sea — item discovered: Sunfish
 `CBE_JoysOfTheSea2023_Fish6_Dialogue` · seen 23.09.02–26.07.01
@@ -327,7 +327,7 @@ Every story in which Emilio speaks.
 
 **EMILIO**: Sunfish hold the title of heaviest bony fish in the world!
 **EMILIO**: They can weigh up to 4,800 pounds and grow to 11 feet!
-**RODDY** (Doubtful): What <b>don't</b> you know about fish?
+**RODDY** (Doubtful): What **don't** you know about fish?
 **EMILIO** (Encouraging): I've always wished I could speak to them, so I know what they're thinking!
 
 ### The Joys of the Sea — item discovered: Swordfish
@@ -417,7 +417,7 @@ Every story in which Emilio speaks.
 
 **GRANDMA**: Maddie, dearie! Just in time!
 **MADDIE** (Surprised): Oh?
-**GRANDMA**: May I introduce you to <b>Dr.</b> Emilio Costa, Hopewell Bay’s new marine biologist! He runs the aquarium!
+**GRANDMA**: May I introduce you to **Dr.** Emilio Costa, Hopewell Bay’s new marine biologist! He runs the aquarium!
 **GRANDMA** (Charming): And, as I just recently found out, is Amy’s owner!
 **EMILIO** (Encouraging): Please, it’s just Emilio. Only my mother insists on calling me a doctor!
 **MADDIE** (Charming): A pleasure to meet you, just Emilio! How is little Amy?
@@ -898,34 +898,34 @@ Every story in which Emilio speaks.
 **GRANDMA** (Thinking): Maybe the forget-me-not?
 **EMILIO** (Thinking): I still don't know. I feel totally hopeless!
 
-### LDE GreenAcresQuest2024 v2 TA1 Dialogue
+### Green Acres Quest — part of the event (exact trigger not dumped)
 `LDE_GreenAcresQuest2024_v2_TA1_Dialogue` · seen 26.02.01–26.04.02
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, moment=part of the event (exact trigger not dumped) (versions 26.02.01–26.04.02)
 
 **RODDY** (Relaxed): Hey, Emilio! How's married life?
 **EMILIO** (Encouraging): It's truly wonderful. I keep learning new things about Bella, and we're really learning to make compromises, too.
 **EMILIO** (Relaxed): Like she snores, so I use earplugs. I keep talking about fostering stingrays, so she sometimes uses earplugs.
 **RODDY** (Charming): Sounds like you've got it all figured out!
 
-### LDE GreenAcresQuest2024 v2 TA7 Dialogue
+### Green Acres Quest — part of the event (exact trigger not dumped)
 `LDE_GreenAcresQuest2024_v2_TA7_Dialogue` · seen 26.02.01–26.04.02
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, moment=part of the event (exact trigger not dumped) (versions 26.02.01–26.04.02)
 
 **MADDIE** (Relaxed): What's up? It's starting to look like a garden out here!
 **EMILIO** (Doubtful): It's coming along, but I never knew garden work could be so hard!
 
-### LDE GreenAcresQuest2024 v2 TC1 Dialogue
+### Green Acres Quest — part of the event (exact trigger not dumped)
 `LDE_GreenAcresQuest2024_v2_TC1_Dialogue` · seen 26.02.01–26.04.02
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, moment=part of the event (exact trigger not dumped) (versions 26.02.01–26.04.02)
 
 **BELLA** (Doubtful): There you are! What on earth are you doing out here with all those rakes and gardening gloves?
 **BELLA** (Doubtful): Are you helping Maddie with her new garden project?
 **EMILIO** (Surprised): Y-yes! She asked me to help, since there's so much work to do.
 **BELLA** (Relaxed): Does she know your family used to call you the "plant assassin" because you used to kill every plant you touched?
 
-### LDE GreenAcresQuest2024 v2 TC3 Dialogue
+### Green Acres Quest — part of the event (exact trigger not dumped)
 `LDE_GreenAcresQuest2024_v2_TC3_Dialogue` · seen 26.02.01–26.04.02
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, moment=part of the event (exact trigger not dumped) (versions 26.02.01–26.04.02)
 
 **EMILIO** (Relaxed): Bella, your surprise is finally ready!
 **BELLA** (Relaxed): What is it? I'm so excited!
@@ -1283,7 +1283,7 @@ Every story in which Emilio speaks.
 `SP_AmyTheCat2023_AllRewardsCompleted_Dialogue` · seen 23.09.02–26.07.01
 - trigger: event, event=Amy's Mystery, eventId=SP_AmyTheCat2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-**MADDIE**: <i>*knock knock*</i>
+**MADDIE**: _*knock knock*_
 **MADDIE**: Hello, can I help you?
 **EMILIO**: Hi, I’m Emilio Costa, a marine biologist. You called about some expatriated fish?
 **MADDIE** (Surprised): ...
@@ -1291,7 +1291,7 @@ Every story in which Emilio speaks.
 **MADDIE** (Relaxed): Oh, oh yes! Of course, let me show you. There’s been this cat and she’s been-
 **EMILIO** (Surprised): Amy!
 **AMY** (Relaxed): Meow! Purr... Purr...
-**MADDIE** (Encouraging): Ah, she's <b>your</b> cat! That must explain the fish then!
+**MADDIE** (Encouraging): Ah, she's **your** cat! That must explain the fish then!
 **EMILIO**: Here they are! Amy... Have you been bringing this beautiful lady my fish?
 **MADDIE** (Charming): Oh! Erhm...
 **EMILIO** (Encouraging): My deepest apologies. She tends to do this with people she likes. You must be a good person at heart.

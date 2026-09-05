@@ -1065,7 +1065,7 @@ Every story in which Hank speaks.
 - trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot29, event=Valentine's Mystery, eventKey=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): A ring?
-**MASON** (Surprised): I <b>definitely</b> didn't order that!
+**MASON** (Surprised): I **definitely** didn't order that!
 **MADDIE** (Joyous): That's a beautiful ring! It kinda looks like an engagement ring...
 **HANK** (Surprised): I'll take that!
 **MADDIE** (Surprised): Wha... Is it yours, Hank??

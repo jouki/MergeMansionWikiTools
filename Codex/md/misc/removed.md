@@ -1258,13 +1258,15 @@ Present in an older version, absent from the current one.
 
 **MADDIE**: A hidden staircase?! Wonder where it leads...
 
-### Hopeberry2022DoorTutorial
+### Hopeberry Terraces: Hopeberry2022DoorTutorial
 `Hopeberry2022DoorTutorial` · seen 23.09.02–25.06.01
+- trigger: area, area=Hopeberry Terraces, areaId=Hopeberry, phase=area story (exact task not dumped) (versions 23.09.02–25.06.01)
 
 **MADDIE** (Surprised): Wow?! This must be...
 
-### Hopeberry2022Intro
+### Hopeberry Terraces: Hopeberry2022Intro
 `Hopeberry2022Intro` · seen 23.09.02–25.06.01
+- trigger: area, area=Hopeberry Terraces, areaId=Hopeberry, phase=area story (exact task not dumped) (versions 23.09.02–25.06.01)
 
 **MADDIE** (Joyous): Hopeberry Festival! I’ve never heard of it before.
 **GRANDMA**: It used to happen every year, until the Hopeberries all decayed one day...
@@ -1272,8 +1274,9 @@ Present in an older version, absent from the current one.
 **GRANDMA** (Encouraging): Indeed! I bet a secret stash has survived somewhere!
 **GRANDMA**: Why don’t you clean up those twigs to set up a stall while I look for the berries.
 
-### Hopeberry2022IntroPart2
+### Hopeberry Terraces: Hopeberry2022IntroPart2
 `Hopeberry2022IntroPart2` · seen 23.09.02–25.06.01
+- trigger: area, area=Hopeberry Terraces, areaId=Hopeberry, phase=area story (exact task not dumped) (versions 23.09.02–25.06.01)
 
 **MADDIE** (Surprised): ...the place where all those Hopeberry Festival gear was being stored all these years!!
 **GRANDMA**: And everything has remained spick and span!
@@ -1690,18 +1693,18 @@ Present in an older version, absent from the current one.
 **GRANDMA** (Thinking): Maybe the forget-me-not?
 **EMILIO** (Thinking): I still don't know. I feel totally hopeless!
 
-### LDE GreenAcresQuest2024 v2 TA1 Dialogue
+### Green Acres Quest — part of the event (exact trigger not dumped)
 `LDE_GreenAcresQuest2024_v2_TA1_Dialogue` · seen 26.02.01–26.04.02
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, moment=part of the event (exact trigger not dumped) (versions 26.02.01–26.04.02)
 
 **RODDY** (Relaxed): Hey, Emilio! How's married life?
 **EMILIO** (Encouraging): It's truly wonderful. I keep learning new things about Bella, and we're really learning to make compromises, too.
 **EMILIO** (Relaxed): Like she snores, so I use earplugs. I keep talking about fostering stingrays, so she sometimes uses earplugs.
 **RODDY** (Charming): Sounds like you've got it all figured out!
 
-### LDE GreenAcresQuest2024 v2 TA4 Dialogue
+### Green Acres Quest — part of the event (exact trigger not dumped)
 `LDE_GreenAcresQuest2024_v2_TA4_Dialogue` · seen 26.02.01–26.04.02
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, moment=part of the event (exact trigger not dumped) (versions 26.02.01–26.04.02)
 
 **BELLA** (Thinking): Are you building a new garden at the Mansion?
 **MADDIE** (Surprised): Errr, yes! I am.
@@ -1710,25 +1713,25 @@ Present in an older version, absent from the current one.
 **BELLA** (Relaxed): No, but they're my favorite flowers!
 **MADDIE** (Relaxed): Ah, good to know!
 
-### LDE GreenAcresQuest2024 v2 TA7 Dialogue
+### Green Acres Quest — part of the event (exact trigger not dumped)
 `LDE_GreenAcresQuest2024_v2_TA7_Dialogue` · seen 26.02.01–26.04.02
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, moment=part of the event (exact trigger not dumped) (versions 26.02.01–26.04.02)
 
 **MADDIE** (Relaxed): What's up? It's starting to look like a garden out here!
 **EMILIO** (Doubtful): It's coming along, but I never knew garden work could be so hard!
 
-### LDE GreenAcresQuest2024 v2 TC1 Dialogue
+### Green Acres Quest — part of the event (exact trigger not dumped)
 `LDE_GreenAcresQuest2024_v2_TC1_Dialogue` · seen 26.02.01–26.04.02
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, moment=part of the event (exact trigger not dumped) (versions 26.02.01–26.04.02)
 
 **BELLA** (Doubtful): There you are! What on earth are you doing out here with all those rakes and gardening gloves?
 **BELLA** (Doubtful): Are you helping Maddie with her new garden project?
 **EMILIO** (Surprised): Y-yes! She asked me to help, since there's so much work to do.
 **BELLA** (Relaxed): Does she know your family used to call you the "plant assassin" because you used to kill every plant you touched?
 
-### LDE GreenAcresQuest2024 v2 TC3 Dialogue
+### Green Acres Quest — part of the event (exact trigger not dumped)
 `LDE_GreenAcresQuest2024_v2_TC3_Dialogue` · seen 26.02.01–26.04.02
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, moment=part of the event (exact trigger not dumped) (versions 26.02.01–26.04.02)
 
 **EMILIO** (Relaxed): Bella, your surprise is finally ready!
 **BELLA** (Relaxed): What is it? I'm so excited!
@@ -2431,7 +2434,7 @@ Present in an older version, absent from the current one.
 **GRANDMA**: I’ve decided to write an account of my short time in jail.
 **GRANDMA**: I must admit that it was a strange time, and I met a lot of interesting people.
 **GRANDMA**: However, I didn’t quite expect it to end the way it did! But perhaps it would be best if I start at the beginning...
-**GRANDMA**: <i>No matter how lovely things are in here, I have to leave. I need to get back to Maddie before she gets herself into trouble! </i>
+**GRANDMA**: _No matter how lovely things are in here, I have to leave. I need to get back to Maddie before she gets herself into trouble! _
 
 ### The Great Escape (Jailbreak) — item discovered: Tired Kitty
 `SBE_Jailbreak_KittyIsTired` · seen 25.05.01–25.06.01
@@ -2934,12 +2937,12 @@ Present in an older version, absent from the current one.
 - trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot05, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 **DEB** (Joyous): May I introduce you to the Hopeberry Juice Woman!
-**DEB** (Encouraging): The new face to the new and <b>improved</b> hopeberry juice! Go on... Have a taste.
+**DEB** (Encouraging): The new face to the new and **improved** hopeberry juice! Go on... Have a taste.
 **MADDIE** (Worried): *sip* Oh! Eehh... That's... different.
 **GRANDMA** (Worried): My gosh, Deb... What did you put in this?! This isn't my recipe!
 **DEB** (Doubtful): It isn't sis, you write recipes like a mad scientist. I'm an artist!
 **GRANDMA** (Surprised): I mean... It isn't bad! It just has a-
-**DEB** (Relaxed): A wonderful bouquet? <b>That</b> is the secret ingredient! 
+**DEB** (Relaxed): A wonderful bouquet? **That** is the secret ingredient! 
 
 ### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot06
 `SE_HopeberryFestival2023_Decoration_Slot06_Dialogue` · seen 23.09.02–25.06.01
@@ -2948,7 +2951,7 @@ Present in an older version, absent from the current one.
 **MADDIE**: That's a fancy looking statue! Er... What is it?
 **DEB**: It's the hopeberry of course!
 **MADDIE** (Encouraging): Oh! Okay! If I... squint my eyes and...
-**DEB** (Relaxed): Aaanyway, it was custom made by a <b>dashing</b> young artist new to town. I think his name was Hank?
+**DEB** (Relaxed): Aaanyway, it was custom made by a **dashing** young artist new to town. I think his name was Hank?
 **MADDIE** (Relaxed): You're going to ask him out, aren't you...
 **DEB** (Charming): Oh please, sweetie... I already have!
 
@@ -2969,9 +2972,9 @@ Present in an older version, absent from the current one.
 **ANTIQUEDEALER** (Thinking): Mmm! I gotta say, these are all quite delicious, but honestly... What is that smell?!
 **DEB** (Charming): Oh that?! That is what gives my drink its uniqueness. My secret ingredient...
 **ANTIQUEDEALER** (Worried): Unique is an understatement... It almost smells like someone died!
-**DEB** (Frustrated): I see... Well, if you cannot <b>appreciate</b> my exceptional beverage, then I wish you good day.
+**DEB** (Frustrated): I see... Well, if you cannot **appreciate** my exceptional beverage, then I wish you good day.
 **ANTIQUEDEALER** (Discouraged): Oh.. I'm sorry, I didn't mea-
-**DEB** (Annoyed): I said <b>good day!</b>
+**DEB** (Annoyed): I said **good day!**
 
 ### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot09
 `SE_HopeberryFestival2023_Decoration_Slot09_Dialogue` · seen 23.09.02–25.06.01
@@ -3013,9 +3016,9 @@ Present in an older version, absent from the current one.
 **MADDIE**: Hi Deb! I heard you wanted to run the Hopeberry Festival this year! 
 **MADDIE**: I was wondering if you needed any help? 
 **DEB**: No need, sweetie, no need! I have it all under control! This wheel will help me find the right flavors.
-**MADDIE** (Charming): Sounds more like <b>luck</b> to me!
+**MADDIE** (Charming): Sounds more like **luck** to me!
 **DEB** (Surprised): No such thing as luck sweetie. It is destiny! My psychic, Lady Voyance, said so... 
-**DEB** (Thinking): All I have to do is spin this wheel and I'll know <b>exactly</b> what ingredients I need.
+**DEB** (Thinking): All I have to do is spin this wheel and I'll know **exactly** what ingredients I need.
 **MADDIE** (Encouraging): Okay... Good luck with that.
 **DEB** (Thinking): Thank y- Hey!
 
@@ -3028,7 +3031,7 @@ Present in an older version, absent from the current one.
 **DEB** (Relaxed): I know... I guess I'm always in need of strapping young lads, like yourself.
 **RODDY** (Worried): Oh... Erm... Okay.
 **MADDIE** (Doubtful): Hey! I thought you said you didn't need any help!
-**DEB** (Encouraging): Maddie! Sweetie... Of course I need help, but only in the more <b>physical</b> sense. Ha ha!
+**DEB** (Encouraging): Maddie! Sweetie... Of course I need help, but only in the more **physical** sense. Ha ha!
 **MADDIE** (Annoyed): Right... Anyway, I'll stick around to help you get everything set up...
 **DEB** (Relaxed): Well, Roddy... I think I saw a bit of jealousy in her eyes!
 **RODDY** (Charming): Re- Really?!
@@ -3065,7 +3068,7 @@ Present in an older version, absent from the current one.
 **MADDIE**: How's the hopeberry juice coming along? 
 **DEB** (Worried): Well... It is quite interesting. The recipe isn't the easiest to follow, you know.
 **MADDIE** (Doubtful): What do you mean? 
-**DEB** (Doubtful): Well, there are so many steps and ingredients and it's... <b>Boring.</b>
+**DEB** (Doubtful): Well, there are so many steps and ingredients and it's... **Boring.**
 **MADDIE** (Thinking): Boring? It's a recipe, Deb. It's supposed to be boring.
 **DEB** (Thinking): Take a look for yourself then...
 **MADDIE** (Surprised): "Bring your solution to the point of ebullition and let it reach congealment, then dilute your gel in a mixture of citric acid and dihydrogen monoxide..."
@@ -3089,7 +3092,7 @@ Present in an older version, absent from the current one.
 
 **DEB** (Thinking): This thing has always given me the creeps...
 **WINSTON**: Then it is doing its job, ma'am.
-**DEB** (Relaxed): Come to think of it, it <b>does</b> resemble Mr. Winston, doesn't it?!
+**DEB** (Relaxed): Come to think of it, it **does** resemble Mr. Winston, doesn't it?!
 **GRANDMA** (Encouraging): Ha ha!
 **WINSTON** (Doubtful): Hmph!
 

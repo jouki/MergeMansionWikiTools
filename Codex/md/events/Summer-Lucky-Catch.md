@@ -60,6 +60,11 @@
 
 
 ### Summer Lucky Catch — part of the event (exact trigger not dumped)
+`LC_Summer_UltimateMolaMola_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Summer Lucky Catch, eventId=LC_Summer, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+
+### Summer Lucky Catch — part of the event (exact trigger not dumped)
 `LC_Summer_WhiteMarlin_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, eventType=event story, event=Summer Lucky Catch, eventId=LC_Summer, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 

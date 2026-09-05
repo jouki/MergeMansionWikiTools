@@ -1,6 +1,19 @@
 # The Pool House
 
 
+### The Pool House: PoolHouseAfterarrest
+`PoolHouseAfterarrest` · seen 23.09.02–26.07.01
+- trigger: area, area=The Pool House, areaId=PoolHouseAfterarrest, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE** (Surprised): I can't believe it! Grandma was taken away by a cop car!!
+**MADDIE** (Thinking): Where did they take her?
+**MADDIE** (Doubtful): And why?! What has she done?
+**MADDIE** (Thinking): I know Grandma's hiding something but whatever it is it can't be THAT bad!
+**MADDIE** (Doubtful): ...or can it? 
+**MADDIE** (Frustrated): And what did she mean by "he's alive"?! 
+**MADDIE** (Thinking): Was she talking about Charlie!? That can't be... 
+**MADDIE** (Thinking): I better keep this to myself until I know who she meant. 
+
 ### The Pool House: Clean floor
 `PoolHouseAfterarrest2` · seen 23.09.02–26.07.01
 - trigger: area, area=The Pool House, areaId=PoolHouse, hotspotId=PoolHouseEntryCleanEntryFloor, phase=task completed, task=Clean floor (versions 24.04.01–26.07.01)
@@ -71,7 +84,7 @@
 **MADDIE** (Frustrated): So all we can do is just wait? There must be something! Julius, think! Didn't you used to be a lawyer, can't you think of something?  
 **ANTIQUEDEALER** (Thinking): Well, we can bail her out. I just need to call the Bail Bondsman to make sure they will allow it. 
 **MADDIE** (Joyous): Yes! Let's do that! Once she's out she can help us proving her innocence. Thank you, Julius! I'm so happy you have your dark history as a lawyer. 
-**ANTIQUEDEALER** (Discouraged): <i>Dark</i> history indeed...
+**ANTIQUEDEALER** (Discouraged): _Dark_ history indeed...
 **MADDIE** (Thinking): What do you mean? I was only joking.
 **ANTIQUEDEALER**: Umm... Eh. Nothing. Let's just get Ursula out of jail. Gives me the creeps just thinking about her in there all alone. 
 **ANTIQUEDEALER**: I'll go and make the call right now.

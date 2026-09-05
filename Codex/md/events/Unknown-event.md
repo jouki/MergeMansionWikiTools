@@ -28,7 +28,7 @@
 
 **GRANDMA**: Maddie, dearie! Just in time!
 **MADDIE** (Surprised): Oh?
-**GRANDMA**: May I introduce you to <b>Dr.</b> Emilio Costa, Hopewell Bay’s new marine biologist! He runs the aquarium!
+**GRANDMA**: May I introduce you to **Dr.** Emilio Costa, Hopewell Bay’s new marine biologist! He runs the aquarium!
 **GRANDMA** (Charming): And, as I just recently found out, is Amy’s owner!
 **EMILIO** (Encouraging): Please, it’s just Emilio. Only my mother insists on calling me a doctor!
 **MADDIE** (Charming): A pleasure to meet you, just Emilio! How is little Amy?
@@ -105,8 +105,8 @@ _Referenced by the game, but no lines matched this id._
 **JACKIE** (Relaxed): Yeah? You sound a bit jealous. Do you want to be her only "friend" around here?
 **RODDY** (Worried): No! I, uh... Are you sure Maddie even has a Christmas tree?
 **JACKIE** (Encouraging): Of course! Yesterday she and I were talking about how the Christmas tree originally came from Germany.
-**RODDY** (Thinking): <i>Actually</i>, ancient Egyptians used trees and wreaths as decorations in their homes and temples.
-**JACKIE** (Thinking): Sure, but it wasn't until Queen Victoria was drawn with a Christmas tree that they <i>really</i> got popular.
+**RODDY** (Thinking): _Actually_, ancient Egyptians used trees and wreaths as decorations in their homes and temples.
+**JACKIE** (Thinking): Sure, but it wasn't until Queen Victoria was drawn with a Christmas tree that they _really_ got popular.
 **RODDY** (Charming): Looks like we need to figure out who's right here. What's the origin of the Christmas tree?
 
 ### PE_JamSession2023 — intro

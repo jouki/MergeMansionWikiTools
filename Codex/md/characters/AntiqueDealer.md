@@ -1,8 +1,9 @@
 # AntiqueDealer
 Every story in which AntiqueDealer speaks.
 
-### AntiqueDealerConversationSequence
+### The Gate: AntiqueDealerConversationSequence
 `AntiqueDealerConversationSequence` · seen 22.02.06–26.07.01
+- trigger: area, area=The Gate, areaId=AntiqueDealerConversationSequence, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **ANTIQUEDEALER** (Surprised): I’m sorry I didn’t know the gear was in reverse.
 **MADDIE** (Worried): Are you ok?
@@ -14,8 +15,9 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER**: I’m sorry. Now the gate is damaged and the car is broken.
 **MADDIE**: Maybe my friend Roddy can help with that while I take you to grandma’s.
 
-### AntiqueDealerDriveOffSequence
+### The Gate: AntiqueDealerDriveOffSequence
 `AntiqueDealerDriveOffSequence` · seen 22.02.06–26.07.01
+- trigger: area, area=The Gate, areaId=AntiqueDealerDriveOffSequence, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **ANTIQUEDEALER** (Thinking): Thank you for your help.
 **MADDIE**: I just wanted to restore the family estate to its former glory!
@@ -563,7 +565,7 @@ Every story in which AntiqueDealer speaks.
 
 **ANTIQUEDEALER** (Relaxed): Maddie! Your Grandma told me you have just returned from your vacation!
 **ANTIQUEDEALER** (Relaxed): So? How was Paris? 
-**ANTIQUEDEALER** (Charming): Did you have a <i>fantastique </i>vacation?
+**ANTIQUEDEALER** (Charming): Did you have a _fantastique _vacation?
 **MADDIE** (Relaxed): It really was amazing! I loved the food and all the sights... 
 **MADDIE** (Relaxed): It was great to have some time away, I feel like a totally new person!
 **ANTIQUEDEALER** (Surprised): You even look a little bit different. 
@@ -1586,8 +1588,8 @@ Every story in which AntiqueDealer speaks.
 - trigger: item, event=Picnic Confusion!, eventKey=LDE_PicnicConfusion2023, itemKeys=['LDE_PicnicConfusion2023_Clothing_07'], items=['LDE_PicnicConfusion2023_Clothing_07'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **RODDY** (Relaxed): I think we should have a whole picnic table set up for them, before they arrive!
-**ANTIQUEDEALER** (Doubtful): Well, if that's the case, I'll go get the <b>cutlery</b>.
-**RODDY** (Thinking): Good idea, I'll grab the <b>food</b> for it!
+**ANTIQUEDEALER** (Doubtful): Well, if that's the case, I'll go get the **cutlery**.
+**RODDY** (Thinking): Good idea, I'll grab the **food** for it!
 
 ### Picnic Confusion! — item discovered: LDE_PicnicConfusion2023_Coal_05
 `LDE_PicnicConfusion2023_Coalchain_Dialogue` · seen 23.09.02–26.07.01
@@ -1603,8 +1605,8 @@ Every story in which AntiqueDealer speaks.
 
 **RODDY** (Thinking): I guess a small campfire wouldn't hurt, would it Julius? 
 **ANTIQUEDEALER** (Thinking): But we got a hamper full of food!
-**RODDY** (Charming): Yeah, but for roasting <b>marshmallows</b> and cozying up next to the fire in a blanket!
-**ANTIQUEDEALER**: You mean cozying up next to <b>someone</b> by the fire...
+**RODDY** (Charming): Yeah, but for roasting **marshmallows** and cozying up next to the fire in a blanket!
+**ANTIQUEDEALER**: You mean cozying up next to **someone** by the fire...
 **RODDY** (Surprised): I...  Uh...
 **ANTIQUEDEALER** (Charming): Hahaha! 
 
@@ -2010,11 +2012,11 @@ Every story in which AntiqueDealer speaks.
 `LS_LuckySnap2024_RockDove_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_LuckySnap2024_Common_RockDove_01'], items=['Rock Dove'], moment=item discovered (versions 25.05.01–26.07.01)
 
-**ANTIQUEDEALER**: I can see a <i>Columba livia!</i>
+**ANTIQUEDEALER**: I can see a _Columba livia!_
 **MADDIE** (Surprised): Really? Where??
 **ANTIQUEDEALER**: Right there, on the bird feeder.
 **MADDIE** (Thinking): All I can see is a big pigeon.
-**ANTIQUEDEALER** (Surprised): Correct - and in Latin, it is called <i>Columba livia.</i>
+**ANTIQUEDEALER** (Surprised): Correct - and in Latin, it is called _Columba livia._
 
 ### Lucky Snap — item discovered: Sage Grouse
 `LS_LuckySnap2024_SageGrouse_Dialogue` · seen 25.05.01–26.07.01
@@ -2474,14 +2476,14 @@ Every story in which AntiqueDealer speaks.
 **DEB**: He always was a sensitive one. Just us girls now, huh Maddie? You can catch me up on things.
 **MADDIE**: Uh, okay! I'm just going around the maze. You can join me if you like.
 
-### Maze Intro
+### The Maze: Maze_Intro
 `Maze_Intro` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: area, area=The Maze, areaId=Maze, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Annoyed): Ew, those webs are so sticky!
 **ANTIQUEDEALER** (Frustrated): Never mind the webs! Is that a... spider? They're, um, really not my thing.
-**MADDIE** (Annoyed): I guess that's why you've been more of an <i>observer</i> on this set of tasks.
-**ANTIQUEDEALER** (Encouraging): I prefer to think of it as <i>advisor</i>. But... I have an appointment to get to. I'll see you later!
+**MADDIE** (Annoyed): I guess that's why you've been more of an _observer_ on this set of tasks.
+**ANTIQUEDEALER** (Encouraging): I prefer to think of it as _advisor_. But... I have an appointment to get to. I'll see you later!
 **MADDIE** (Thinking): Appointment... Right. 
 
 ### SEChristmas2022 — decoration PE_Christmas2022_Decoration_25
@@ -2519,7 +2521,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Annoyed): I wish I knew what was going on with her. She's always been secretive, but this?!
 **ANTIQUEDEALER** (Thinking): I'm sure she'll have a good reason for her secrets.
 **ANTIQUEDEALER** (Thinking): She's still your grandmother - whatever happened here. She's the same Ursula you've always known...
-**MADDIE** (Thinking): He's right! I shouldn't give up on her. This arrest <i>has</i> to be a mistake!
+**MADDIE** (Thinking): He's right! I shouldn't give up on her. This arrest _has_ to be a mistake!
 
 ### The Pool House: Clean floor
 `PoolHouseAfterarrest2` · seen 23.09.02–26.07.01
@@ -2550,7 +2552,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Frustrated): So all we can do is just wait? There must be something! Julius, think! Didn't you used to be a lawyer, can't you think of something?  
 **ANTIQUEDEALER** (Thinking): Well, we can bail her out. I just need to call the Bail Bondsman to make sure they will allow it. 
 **MADDIE** (Joyous): Yes! Let's do that! Once she's out she can help us proving her innocence. Thank you, Julius! I'm so happy you have your dark history as a lawyer. 
-**ANTIQUEDEALER** (Discouraged): <i>Dark</i> history indeed...
+**ANTIQUEDEALER** (Discouraged): _Dark_ history indeed...
 **MADDIE** (Thinking): What do you mean? I was only joking.
 **ANTIQUEDEALER**: Umm... Eh. Nothing. Let's just get Ursula out of jail. Gives me the creeps just thinking about her in there all alone. 
 **ANTIQUEDEALER**: I'll go and make the call right now.
@@ -2564,9 +2566,9 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Thinking): Mmm! I gotta say, these are all quite delicious, but honestly... What is that smell?!
 **DEB** (Charming): Oh that?! That is what gives my drink its uniqueness. My secret ingredient...
 **ANTIQUEDEALER** (Worried): Unique is an understatement... It almost smells like someone died!
-**DEB** (Frustrated): I see... Well, if you cannot <b>appreciate</b> my exceptional beverage, then I wish you good day.
+**DEB** (Frustrated): I see... Well, if you cannot **appreciate** my exceptional beverage, then I wish you good day.
 **ANTIQUEDEALER** (Discouraged): Oh.. I'm sorry, I didn't mea-
-**DEB** (Annoyed): I said <b>good day!</b>
+**DEB** (Annoyed): I said **good day!**
 
 ### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot14
 `SE_HopeberryFestival2023_Decoration_Slot14_Dialogue` · seen 23.09.02–25.06.01
@@ -3120,7 +3122,7 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Thinking): Were you about to play a game?
 **MADDIE** (Frustrated): I... well, I don't know how to play! Grandma never taught me. She says she doesn't like tennis.
 **MADDIE** (Surprised): Hey, look down there! I think there's a photo sticking out of the bush.
-**MADDIE** (Surprised): I don't believe it - this is Grandma and her sister Deb! And they're <b>playing tennis</b>! Why would she lie about hating it?
+**MADDIE** (Surprised): I don't believe it - this is Grandma and her sister Deb! And they're **playing tennis**! Why would she lie about hating it?
 **ANTIQUEDEALER** (Thinking): I, ahem, have no idea! Goodness, is that the time? I must dash...
 **MADDIE** (Thinking): Hmmm, that was strange! Grandma lied about tennis, and Julius ran away. I'm going to call Deb and find out more!
 

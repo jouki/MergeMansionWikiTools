@@ -70,9 +70,24 @@ main{overflow:auto;padding:18px 26px 60px}
 .trig.unknown{background:var(--amber-soft);color:var(--amber)} .trig.unknown b{color:var(--amber)}
 .trig.removed{background:var(--brick-soft);color:var(--brick)} .trig.removed b{color:var(--brick)}
 .trig.chrono{font-variant-numeric:tabular-nums;cursor:help}
+/* in-game colour tags: keep the hue, force legible lightness on either ground */
+.gcol{color:var(--gc);font-weight:700;filter:brightness(1.15) saturate(1.1)}
+:root:not([data-theme="light"]) .gcol{filter:brightness(1.35) saturate(1.05)}
+.ln .txt i{font-style:italic;opacity:.92}
+.grp{font-family:var(--serif);font-size:15px;color:var(--muted);margin:18px 0 8px;padding-bottom:4px;border-bottom:1px dashed var(--line)}
 .ver{font-family:var(--mono);font-size:11px;color:var(--faint)}
 .script{padding:12px 18px 14px;font-family:var(--mono);font-size:13.5px;line-height:1.5}
 .ln{display:grid;grid-template-columns:150px 1fr;gap:0 14px;padding:3px 0;align-items:baseline}
+.ln.stage{grid-template-columns:56px 1fr 56px;align-items:center;gap:0 12px;padding:5px 0}
+.ln.stage .who{grid-column:2;font-size:11px;letter-spacing:.06em;margin-bottom:2px}
+.ln.stage .who small{display:inline;margin-left:8px}
+.ln.stage .txt{grid-column:2;max-width:none}
+.ln.stage .side{grid-row:1/3;width:56px;height:56px;display:flex;align-items:flex-end;justify-content:center}
+.ln.stage .side.l{grid-column:1} .ln.stage .side.r{grid-column:3}
+.ln.stage .side img{width:56px;height:56px;object-fit:contain;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
+.ln.stage .side.mute img{opacity:.38;filter:grayscale(.6)}
+.ln.stage .side.r img{transform:scaleX(-1)}
+.ln.stage .side .ph{width:44px;height:44px;border-radius:50%;border:1px dashed var(--line);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--faint);text-align:center;line-height:1.1}
 .ln .who{text-transform:uppercase;letter-spacing:.04em;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ln .who small{display:block;font-weight:400;text-transform:none;letter-spacing:0;color:var(--faint);font-size:11px}
 .ln .txt{max-width:66ch}
@@ -117,6 +132,13 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
 (function(){
   const D = JSON.parse(document.getElementById('data').textContent);
   const S = D.summary;
+  const P = D.portraits || {};
+  const portrait = (cid, state) => { const m = P[cid]; if (!m) return null; return m[state] || m['Default'] || Object.values(m)[0] || null; };
+  const sideHtml = (cid, state, cls, speaking) => {
+    if (!cid) return `<div class="side ${cls}"></div>`;
+    const f = portrait(cid, state); const nm = D.characterNames[cid] || cid;
+    return `<div class="side ${cls}${speaking ? '' : ' mute'}" title="${esc(nm)}${state && state !== 'Default' ? ' · ' + esc(state) : ''}">${f ? `<img src="portraits/${f}" alt="${esc(nm)}" loading="lazy">` : `<div class="ph">${esc(nm)}</div>`}</div>`;
+  };
   const KIND_LABEL = {area:'Area task', event:'Event moment', item:'Item discovered', decoration:'Decoration placed', chained:'Follows another dialogue', unknown:'No known trigger yet', removed:'Removed from game'};
   const KIND_ORDER = ['area','event','item','decoration','chained','unknown','removed'];
 
@@ -133,7 +155,7 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
     s.kind = s.triggers[0].kind;
     s.hay = (s.id+' '+s.lines.map(l=>(l.speakerName||'')+' '+l.text).join(' ')+' '+s.triggers.map(t=>[t.area,t.task,t.event,t.eventType,t.items&&t.items.join(' '),t.decoration].filter(Boolean).join(' ')).join(' ')).toLowerCase();
     s.scopes = new Set(); s.triggers.forEach(t => { if (t.area) s.scopes.add('A:'+t.area); if (t.event) s.scopes.add('E:'+t.event); });
-    if (s.unassigned) s.scopes.add('U:'+s.unassigned);
+    if (s.unassigned) s.scopes.add('U:all');
     s.chars = new Set(s.lines.map(l=>l.speaker).filter(Boolean));
     s.hasRewrite = s.lines.some(l => (l.changes||[]).some(c => c.kind !== 'cosmetic'));
     s.hasChange = s.lines.some(l => l.changes && l.changes.length);
@@ -184,9 +206,8 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
   const og1=document.createElement('optgroup'); og1.label='Areas (progression order)';
   areas.forEach(k=>{const o=document.createElement('option');o.value=k;const idx=order[k.slice(2)];o.textContent=`${idx===undefined?'':'#'+Math.round(idx)+' '}${k.slice(2)} (${scopeCount[k]})`;og1.appendChild(o);});
   const og2=document.createElement('optgroup'); og2.label='Events'; evs.forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=`${k.slice(2)} (${scopeCount[k]})`;og2.appendChild(o);});
-  const uns = Object.keys(scopeCount).filter(k=>k.startsWith('U:')).sort((a,b)=>scopeCount[b]-scopeCount[a]||a.localeCompare(b));
-  const og3=document.createElement('optgroup'); og3.label=`Unassigned — needs your call (${uns.reduce((n,k)=>n+scopeCount[k],0)} stories)`;
-  uns.forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=`${k.slice(2)}… (${scopeCount[k]})`;og3.appendChild(o);});
+  const og3=document.createElement('optgroup'); og3.label='Needs your call';
+  if (scopeCount['U:all']) { const o=document.createElement('option'); o.value='U:all'; o.textContent=`Unassigned — all (${scopeCount['U:all']})`; og3.appendChild(o); }
   scopeSel.appendChild(og1); scopeSel.appendChild(og2); scopeSel.appendChild(og3);
 
   document.getElementById('legend').innerHTML =
@@ -196,7 +217,11 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
 
   // ---- render
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  const hl = (text, q) => { if (!q) return esc(text); const i = text.toLowerCase().indexOf(q); if (i<0) return esc(text); return esc(text.slice(0,i))+'<span class="mark">'+esc(text.slice(i,i+q.length))+'</span>'+esc(text.slice(i+q.length)); };
+  // in-game rich text: <color=#338DFF>…</color>, <i>…</i>, <b>…</b> — rendered as real formatting AFTER escaping everything else
+  const rich = html => html
+    .replace(/&lt;color=(#[0-9a-fA-F]{6,8})&gt;([\s\S]*?)&lt;\/color&gt;/g, (m, c, t) => `<span class="gcol" style="--gc:${c}">${t}</span>`)
+    .replace(/&lt;(\/?)(i|b)&gt;/g, '<$1$2>');
+  const hl = (text, q) => { if (!q) return rich(esc(text)); const i = text.toLowerCase().indexOf(q); if (i<0) return rich(esc(text)); return rich(esc(text.slice(0,i))+'<span class="mark">'+esc(text.slice(i,i+q.length))+'</span>'+esc(text.slice(i+q.length))); };
   const trig = t => {
     if (t.kind==='area') return `<span class="trig area">${esc(t.area)} · <b>${esc(t.task||'?')}</b> · ${esc(t.phase)}</span>`;
     if (t.kind==='event') return `<span class="trig"><b>${esc(t.event||t.eventId)}</b> · ${esc(t.eventType)} · ${esc(t.moment)}</span>`;
@@ -223,6 +248,10 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
     const body = lines.map(l => {
       const who = l.speaker ? `${esc(l.speakerName||l.speaker)}${l.state&&l.state!=='Default'?`<small>${esc(l.state)}</small>`:''}` : `<small>${l.text?'narration / no speaker':'beat'}</small>`;
       const chg = visChanges(l).map(c => `<span class="chg">${esc(c.version)}${c.kind==='cosmetic'?' (cosmetic)':''}: <s>${esc(c.from||'∅')}</s></span>`).join('');
+      if (l.text && (l.left || l.right)) {
+        const st = l.state || 'Default';
+        return `<div class="ln stage">${sideHtml(l.left, l.side==='L'?st:'Default', 'l', l.side==='L')}<div class="who">${who}</div><div class="txt">${hl(l.text,q)}${chg}</div>${sideHtml(l.right, l.side==='R'?st:'Default', 'r', l.side==='R')}</div>`;
+      }
       return `<div class="ln ${l.text?'':'empty'} ${l.speaker?'':'narr'}"><div class="who">${who}</div><div class="txt">${l.text?hl(l.text,q):esc(l.id)}${chg}</div></div>`;
     }).join('');
     const ver = s.removedStory ? '' : (s.firstSeen ? `<span class="ver">since ${esc(s.firstSeen)}</span>` : '');
@@ -238,7 +267,13 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
     if (sc) current.sort((a, b) => ((a.chrono ? a.chrono.pos : 2) - (b.chrono ? b.chrono.pos : 2)) || a.id.localeCompare(b.id));
     const nLines = current.reduce((a,s)=>a+s.lines.filter(l=>l.text).length,0);
     bar.innerHTML = `<b>${current.length.toLocaleString('en-US')}</b> stories · <b>${nLines.toLocaleString('en-US')}</b> spoken lines${q?` · matching “${esc(q)}”`:''}`;
-    list.innerHTML = current.slice(0, shown).map(s => storyHtml(s, q, showEmpty, onlyChanged, showCosmetic)).join('') || '<div class="empty">Nothing matches these filters.</div>';
+    if (sc === 'U:all') current.sort((a, b) => (a.unassigned||'').localeCompare(b.unassigned||'') || a.id.localeCompare(b.id, 'en', {numeric:true}));
+    let lastGrp = null;
+    list.innerHTML = current.slice(0, shown).map(s => {
+      let head = '';
+      if (sc === 'U:all' && s.unassigned !== lastGrp) { lastGrp = s.unassigned; head = `<div class="grp">${esc(s.unassigned)}… (${current.filter(x=>x.unassigned===s.unassigned).length})</div>`; }
+      return head + storyHtml(s, q, showEmpty, onlyChanged, showCosmetic);
+    }).join('') || '<div class="empty">Nothing matches these filters.</div>';
     if (current.length > shown) { const b=document.createElement('button'); b.className='more'; b.textContent=`Show ${Math.min(PAGE,current.length-shown)} more of ${(current.length-shown).toLocaleString('en-US')} remaining`; b.onclick=()=>{shown+=PAGE;render(false);}; list.appendChild(b); }
   }
   let t; document.getElementById('q').addEventListener('input', () => { clearTimeout(t); t=setTimeout(render,180); });

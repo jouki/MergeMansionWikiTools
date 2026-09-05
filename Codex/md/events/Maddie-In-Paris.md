@@ -17,7 +17,7 @@
 **MADDIE** (Worried): Is that handsome man trying to offer me a ride in his car? Oh, no...
 **MADDIE** (Worried): But it's a very nice car...
 **MADDIE** (Worried): No, he's a complete stranger!
-**MADDIE**: <i>Non, merci!</i> Err... <i>Je ne veux pas</i>... Sorry - I've got to go!
+**MADDIE**: _Non, merci!_ Err... _Je ne veux pas_... Sorry - I've got to go!
 
 ### Maddie In Paris — item discovered: Beret
 `CBE_MaddieInParis2025_EiffelTower_01_Dialogue` · seen 25.05.01–26.07.01
@@ -41,7 +41,7 @@
 
 **MADDIE** (Worried): How am I supposed to pick just one out of all these yummy treats?
 **MADDIE** (Relaxed): Hang on... I'll take as many as I want!
-**MADDIE** (Relaxed): Excuse me, sir. I'll have the whole platter, <i>s'il vous plaît!</i>
+**MADDIE** (Relaxed): Excuse me, sir. I'll have the whole platter, _s'il vous plaît!_
 
 ### Maddie In Paris — event start
 `CBE_MaddieInParis2025_Intro_Dialogue` · seen 25.05.01–26.07.01
@@ -49,7 +49,7 @@
 
 **ANTIQUEDEALER** (Relaxed): Maddie! Your Grandma told me you have just returned from your vacation!
 **ANTIQUEDEALER** (Relaxed): So? How was Paris? 
-**ANTIQUEDEALER** (Charming): Did you have a <i>fantastique </i>vacation?
+**ANTIQUEDEALER** (Charming): Did you have a _fantastique _vacation?
 **MADDIE** (Relaxed): It really was amazing! I loved the food and all the sights... 
 **MADDIE** (Relaxed): It was great to have some time away, I feel like a totally new person!
 **ANTIQUEDEALER** (Surprised): You even look a little bit different. 
@@ -344,7 +344,7 @@
 **MADDIE** (Relaxed): This city is so vibrant and full of life. I just want to dive in and soak it all up.
 **MADDIE** (Encouraging): But first, I need to get changed.
 **MADDIE** (Encouraging): And the finishing touch...
-**MADDIE** (Relaxed): <i>Voilà!</i>
+**MADDIE** (Relaxed): _Voilà!_
 
 ### Maddie In Paris — item discovered: Cuddly Toy
 `CBE_MaddieInParis_ValentinesMerch_06_Dialogue` · seen 26.03.01–26.07.01

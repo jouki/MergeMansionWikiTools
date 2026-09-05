@@ -24,8 +24,8 @@
 **GRANDMA** (Relaxed): These are my friends. We are all members of a little hobby group.
 **MADDIE** (Thinking): That's quite the hobby group...
 **GRANDMA** (Joyous): Well, we all enjoy a good kicker with some farkle, but a citizen like you would probably not understand such things.
-**MADDIE** (Surprised): What language was <b>that</b>?
-**GRANDMA**: <b>That </b>was biker slang. This is our biker gang, the Grannies of Anarchy.
+**MADDIE** (Surprised): What language was **that**?
+**GRANDMA**: **That **was biker slang. This is our biker gang, the Grannies of Anarchy.
 **JACKIE** (Doubtful): Ha! So I was right!
 
 ### Grannies of Anarchy — decoration SP_GranniesOfAnarchy2023_Decoration_Slot26
@@ -47,7 +47,7 @@
 **GRANDMA** (Doubtful): When we started our motorcycle club, people just did not take us seriously.
 **GRANDMA** (Doubtful): So, we were forced to break the rules every now and again.
 **GRANDMA** (Joyous): We did ruffle some feathers, too.
-**MADDIE** (Thinking): Your biker club looks like a wild bunch! But what exactly do you <b>do</b>?
+**MADDIE** (Thinking): Your biker club looks like a wild bunch! But what exactly do you **do**?
 **GRANDMA**: Burn rubber and stand up against the man, of course!
 **MADDIE** (Doubtful): Oh? So things sometimes get out of hand?
 **GRANDMA** (Doubtful): Whatever do you mean?
@@ -64,7 +64,7 @@
 **GRANDMA** (Doubtful): What kind of crimes did you have in mind?
 **MADDIE** (Worried): Murder?
 **GRANDMA** (Surprised): Murder?? You should get your ears checked, dearie.
-**GRANDMA** (Doubtful): Oh, now I understand. My friend Mama said that we need a new <b>recorder.</b> You must have misheard her!
+**GRANDMA** (Doubtful): Oh, now I understand. My friend Mama said that we need a new **recorder.** You must have misheard her!
 **MADDIE** (Thinking): I guess that could've been it, but...
 **GRANDMA** (Joyous): That's settled then!
 
@@ -99,6 +99,6 @@
 - trigger: item, event=Grannies of Anarchy, eventKey=SP_GranniesOfAnarchy2023, itemKeys=['SP_GranniesOfAnarchy2023_CollectableItems_04'], items=['Leather Jacket'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **MADDIE** (Worried): Did you just hear those ladies whisper something about a murder?
-**JACKIE** (Thinking): They <b>are </b>a biker gang, but murder? Then again, those knitting needles look pretty sharp...
+**JACKIE** (Thinking): They **are **a biker gang, but murder? Then again, those knitting needles look pretty sharp...
 **JACKIE** (Doubtful): What are they doing - drawing up a biker granny hit list?
 **MADDIE** (Doubtful): I think we need to dig a little deeper. Come on, Jackie. Let's see what these biking buddies are up to!

@@ -236,6 +236,15 @@
 **MADDIE** (Doubtful): This room looks like an office of some sort.
 **MADDIE** (Doubtful): I wonder who it belonged to?
 
+### The Office: OfficeOutro
+`OfficeOutro` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=OfficeOutro, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Discouraged): Well, apart from all the drama, it's been great to learn more about Charlie and his inventive mind. I-
+**MADDIE** (Surprised): *CRASH*
+**MADDIE** (Surprised): What was that?! Is that Deb's voice I hear?
+**MADDIE** (Surprised): I need to figure this out. I hope she's not in trouble!
+
 ### The Office: Clear vase piece
 `OfficePOI_FakeBonsai` · seen 25.04.02–26.07.01
 - trigger: area, area=The Office, areaId=Office, hotspotId=OfficeRemoveBonsaiDomeBrokenA2, phase=task completed, task=Clear vase piece (versions 25.04.02–26.07.01)

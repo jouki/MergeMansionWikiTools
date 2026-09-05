@@ -299,6 +299,16 @@
 **MADDIE** (Doubtful): Well, they're not wrong. Looks like there was definitely an investigation.
 **MADDIE** (Thinking): But, wow! This explains why most of the things in this room were upturned. I guess this place was thoroughly searched...
 
+### Lounge: LoungeIntro
+`LoungeIntro` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=LoungeIntro, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Surprised): Wow! This is... not what I expected to find.
+**MADDIE** (Thinking): Is it some sort of secret den? A casino?
+**MADDIE** (Thinking): It looks like this place was thoroughly searched though...
+**MADDIE** (Thinking): And why was the entrance cordoned off with tape? Was there an official investigation, perhaps?
+**MADDIE** (Doubtful): Hmm, let's find out...
+
 ### Lounge: Lounge_Cards_Ftue2_01
 `Lounge_Cards_Ftue2_01` · seen 25.05.01–26.07.01
 - trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)

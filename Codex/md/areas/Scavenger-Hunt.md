@@ -92,7 +92,7 @@
 
 **JACKIE** (Joyous): Well done Maddie, it opened! And is that a... notebook inside?
 **MADDIE** (Discouraged): Huh, there's nothing to help Grandma in here! Just lots of drawings and numbers. 
-**MADDIE** (Thinking): But this <b>Maze</b> looks like the one on the grounds, and it has the number '1' written above it. I guess I'll go there next!
+**MADDIE** (Thinking): But this **Maze** looks like the one on the grounds, and it has the number '1' written above it. I guess I'll go there next!
 **JACKIE** (Charming): Thanks for letting me help and hang out, Maddie. I hope this notebook leads to whatever you're looking for!
 
 ### Scavenger Hunt: Clean and search the statue

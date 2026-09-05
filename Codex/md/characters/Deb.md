@@ -40,11 +40,11 @@ Every story in which Deb speaks.
 - trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot08, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **DEB** (Relaxed): So what made you decide to become a marine biologist, handsome?
-**EMILIO** (Doubtful): Uhm... You can call me Emilio. <b>Please</b>...
+**EMILIO** (Doubtful): Uhm... You can call me Emilio. **Please**...
 **MADDIE**: Hi, Emilio!  
   _(1 cosmetic edit not shown)_
 **EMILIO** (Surprised): MADDIE! Hi! I was just uuh, showing- uuh, telling your aunt... uuh, what’s her name?!
-**DEB** (Charming): Deb. But <b>you</b> can call me... Anytime.
+**DEB** (Charming): Deb. But **you** can call me... Anytime.
 **MADDIE** (Encouraging): Interesting woman, isn’t she?
 
 ### The Joys of the Sea — item discovered: Dolphin
@@ -106,7 +106,7 @@ Every story in which Deb speaks.
 `CBE_VoyancesVisions_MalzarAActiveC_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['CBE_VoyancesVisions_MalzarAActive_01'], items=['Malzar - First Answer'], moment=item discovered (versions 25.05.01–26.07.01)
 
-**MALZAR**: </i>Through tangled roots of kin we tread, unveiling truths long left unsaid.</i>
+**MALZAR**: _Through tangled roots of kin we tread, unveiling truths long left unsaid._
 **LADY VOYANCE** (Thinking): Does that make sense to you? Sounds like family secrets...
 **DEB** (Doubtful): Indeed... That is something us Boultons know a lot about.
 **DEB** (Worried): But there is a secret that reaches even further.
@@ -122,7 +122,7 @@ Every story in which Deb speaks.
 **LADY VOYANCE** (Encouraging): It is said, however, that sometimes he does get uncomfortably close to the truth.
 **LADY VOYANCE** (Charming): Are you ready for his final message?
 **DEB** (Thinking): I suppose I am.
-**LADY VOYANCE** (Charming): </i>A secret spilled, a fortune lost, a girl’s fate sealed at such a cost.</i>
+**LADY VOYANCE** (Charming): _A secret spilled, a fortune lost, a girl’s fate sealed at such a cost._
 
 ### Voyance's Visions — item discovered: Pregnancy Test
 `CBE_VoyancesVisions_OminousSecrets_05C_Dialogue` · seen 25.05.01–26.07.01
@@ -804,12 +804,12 @@ Every story in which Deb speaks.
 - trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot05, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 **DEB** (Joyous): May I introduce you to the Hopeberry Juice Woman!
-**DEB** (Encouraging): The new face to the new and <b>improved</b> hopeberry juice! Go on... Have a taste.
+**DEB** (Encouraging): The new face to the new and **improved** hopeberry juice! Go on... Have a taste.
 **MADDIE** (Worried): *sip* Oh! Eehh... That's... different.
 **GRANDMA** (Worried): My gosh, Deb... What did you put in this?! This isn't my recipe!
 **DEB** (Doubtful): It isn't sis, you write recipes like a mad scientist. I'm an artist!
 **GRANDMA** (Surprised): I mean... It isn't bad! It just has a-
-**DEB** (Relaxed): A wonderful bouquet? <b>That</b> is the secret ingredient! 
+**DEB** (Relaxed): A wonderful bouquet? **That** is the secret ingredient! 
 
 ### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot06
 `SE_HopeberryFestival2023_Decoration_Slot06_Dialogue` · seen 23.09.02–25.06.01
@@ -818,7 +818,7 @@ Every story in which Deb speaks.
 **MADDIE**: That's a fancy looking statue! Er... What is it?
 **DEB**: It's the hopeberry of course!
 **MADDIE** (Encouraging): Oh! Okay! If I... squint my eyes and...
-**DEB** (Relaxed): Aaanyway, it was custom made by a <b>dashing</b> young artist new to town. I think his name was Hank?
+**DEB** (Relaxed): Aaanyway, it was custom made by a **dashing** young artist new to town. I think his name was Hank?
 **MADDIE** (Relaxed): You're going to ask him out, aren't you...
 **DEB** (Charming): Oh please, sweetie... I already have!
 
@@ -839,9 +839,9 @@ Every story in which Deb speaks.
 **ANTIQUEDEALER** (Thinking): Mmm! I gotta say, these are all quite delicious, but honestly... What is that smell?!
 **DEB** (Charming): Oh that?! That is what gives my drink its uniqueness. My secret ingredient...
 **ANTIQUEDEALER** (Worried): Unique is an understatement... It almost smells like someone died!
-**DEB** (Frustrated): I see... Well, if you cannot <b>appreciate</b> my exceptional beverage, then I wish you good day.
+**DEB** (Frustrated): I see... Well, if you cannot **appreciate** my exceptional beverage, then I wish you good day.
 **ANTIQUEDEALER** (Discouraged): Oh.. I'm sorry, I didn't mea-
-**DEB** (Annoyed): I said <b>good day!</b>
+**DEB** (Annoyed): I said **good day!**
 
 ### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot14
 `SE_HopeberryFestival2023_Decoration_Slot14_Dialogue` · seen 23.09.02–25.06.01
@@ -873,9 +873,9 @@ Every story in which Deb speaks.
 **MADDIE**: Hi Deb! I heard you wanted to run the Hopeberry Festival this year! 
 **MADDIE**: I was wondering if you needed any help? 
 **DEB**: No need, sweetie, no need! I have it all under control! This wheel will help me find the right flavors.
-**MADDIE** (Charming): Sounds more like <b>luck</b> to me!
+**MADDIE** (Charming): Sounds more like **luck** to me!
 **DEB** (Surprised): No such thing as luck sweetie. It is destiny! My psychic, Lady Voyance, said so... 
-**DEB** (Thinking): All I have to do is spin this wheel and I'll know <b>exactly</b> what ingredients I need.
+**DEB** (Thinking): All I have to do is spin this wheel and I'll know **exactly** what ingredients I need.
 **MADDIE** (Encouraging): Okay... Good luck with that.
 **DEB** (Thinking): Thank y- Hey!
 
@@ -888,7 +888,7 @@ Every story in which Deb speaks.
 **DEB** (Relaxed): I know... I guess I'm always in need of strapping young lads, like yourself.
 **RODDY** (Worried): Oh... Erm... Okay.
 **MADDIE** (Doubtful): Hey! I thought you said you didn't need any help!
-**DEB** (Encouraging): Maddie! Sweetie... Of course I need help, but only in the more <b>physical</b> sense. Ha ha!
+**DEB** (Encouraging): Maddie! Sweetie... Of course I need help, but only in the more **physical** sense. Ha ha!
 **MADDIE** (Annoyed): Right... Anyway, I'll stick around to help you get everything set up...
 **DEB** (Relaxed): Well, Roddy... I think I saw a bit of jealousy in her eyes!
 **RODDY** (Charming): Re- Really?!
@@ -913,7 +913,7 @@ Every story in which Deb speaks.
 **MADDIE**: How's the hopeberry juice coming along? 
 **DEB** (Worried): Well... It is quite interesting. The recipe isn't the easiest to follow, you know.
 **MADDIE** (Doubtful): What do you mean? 
-**DEB** (Doubtful): Well, there are so many steps and ingredients and it's... <b>Boring.</b>
+**DEB** (Doubtful): Well, there are so many steps and ingredients and it's... **Boring.**
 **MADDIE** (Thinking): Boring? It's a recipe, Deb. It's supposed to be boring.
 **DEB** (Thinking): Take a look for yourself then...
 **MADDIE** (Surprised): "Bring your solution to the point of ebullition and let it reach congealment, then dilute your gel in a mixture of citric acid and dihydrogen monoxide..."
@@ -937,7 +937,7 @@ Every story in which Deb speaks.
 
 **DEB** (Thinking): This thing has always given me the creeps...
 **WINSTON**: Then it is doing its job, ma'am.
-**DEB** (Relaxed): Come to think of it, it <b>does</b> resemble Mr. Winston, doesn't it?!
+**DEB** (Relaxed): Come to think of it, it **does** resemble Mr. Winston, doesn't it?!
 **GRANDMA** (Encouraging): Ha ha!
 **WINSTON** (Doubtful): Hmph!
 
@@ -1050,7 +1050,7 @@ Every story in which Deb speaks.
 - trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot26, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE**: There! I dare any cat to ignore the majesty of...
-**MADDIE** (Joyous): <b>KITTY CASTLE!</b>
+**MADDIE** (Joyous): **KITTY CASTLE!**
 **AMY**: Meow...
 **MADDIE**: A ha! Never in doubt. Now, little Amy, let’s see who your owner is, shall we?
 **DEB**: Looks like the cat dropped something.
@@ -1759,7 +1759,7 @@ Every story in which Deb speaks.
 **DEB** (Doubtful): She didn't tell you, huh? Well, let's just say that your Grandma was a sore loser when it came to tennis!
 **DEB** (Thinking): Tell me, Maddie - what do you know about the family treasure?
 **MADDIE** (Thinking): Uh, nothing, but I'm all ears.
-**DEB**: Well, I don't want to say too much, but I'm sure it's here. You should look for it - see if you can find <b>my</b> missing treasure!
+**DEB**: Well, I don't want to say too much, but I'm sure it's here. You should look for it - see if you can find **my** missing treasure!
 
 ### Tennis Court: Remove old court markings
 `TennisCourtDialogueC` · seen 23.09.02–26.07.01

@@ -234,6 +234,20 @@
 **MADDIE** (Worried): I understand, it is quite... heavy.
 **MADDIE**: Well, I'll make sure to fix it up now so we can visit more often!
 
+### The Tomb: Tomb20_Outro
+`Tomb20_Outro` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Thinking): Where lilies bloom... Wait! This inscription is meant for Grandma to understand!
+**MADDIE** (Surprised): It must be some sort of riddle! It talks about a serpent's gaze... Hey! The snake on this memorial!
+**MADDIE** (Surprised): It's looking at the seal on the floor! A glassy place!
+**MADDIE**: Lets see... It's loose! 
+**MADDIE** (Thinking): What's this? A Journal? Charlie's journal! I think he meant to leave this for Grandma...
+**MADDIE** (Surprised): Hey, wait a minute! It's in code!
+**MADDIE** (Frustrated): Gaah... What is it with my family and codes! 
+**MADDIE** (Thinking): But there is something here that seems to mention another room in the mansion...
+**MADDIE** (Doubtful): I think it's time I got some answers!
+
 ### The Tomb: Inspect the tile
 `Tomb21` · seen 25.02.01–26.07.01
 - trigger: area, area=The Tomb, areaId=Tomb, hotspotId=TombAnimateFrogSwitchStepsWaterGlowState02N10, phase=task completed, task=Inspect the tile (versions 25.02.01–26.07.01)
@@ -404,3 +418,8 @@
 **MADDIE** (Thinking): There are fresh flowers here...
 **MADDIE** (Surprised): Was someone visiting this memorial recently?
 **MADDIE** (Surprised): I wonder who this could be...
+
+### The Tomb: Tomb_20_Outro_Dialogue
+`Tomb_20_Outro_Dialogue` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+

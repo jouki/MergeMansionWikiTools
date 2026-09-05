@@ -34,7 +34,7 @@
 **MADDIE** (Thinking): I wonder if there are any more clues in Grandpa's notebook?
 **MADDIE** (Doubtful): Hmm. There's nothing much, but there is a little sketch of the Cemetery after the Conservatory.
 **MADDIE** (Joyous): I'm going to go there next and see what I can find out!
-**MADDIE**: I <b>will</b> get into the house, and prove Grandma's innocence once and for all!
+**MADDIE**: I **will** get into the house, and prove Grandma's innocence once and for all!
 
 ### Conservatory: Try to grow rafflesia again
 `ConservatoryArea_Painting` · seen 23.09.02–26.07.01

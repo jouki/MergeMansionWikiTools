@@ -21,7 +21,7 @@
 **RODDY** (Relaxed): Oh, hi Maddie! Come to check out "Camp Wilderness"?
 **MADDIE** (Relaxed): Actually, yes! I heard you were running summer camp here this summer, and I didn't quite believe it.
 **RODDY**: Yeah, I usually run summer camp out of state, but some kids couldn't make it this year.
-**RODDY** (Thinking): So I thought, <i>Why not bring summer camp home?</i> So I uhh.. So I did! Your grandma was very generous to let me use her yard!
+**RODDY** (Thinking): So I thought, _Why not bring summer camp home?_ So I uhh.. So I did! Your grandma was very generous to let me use her yard!
 **MADDIE** (Charming): That's so sweet of you!
 **RODDY** (Worried): Really? I wasn't trying to impress you or-
 **MADDIE** (Encouraging): Ha ha! It's a compliment, Roddy! 
@@ -37,7 +37,7 @@
 **MASON** (Joyous): Unless there's some old cursed ghost out at sea, waiting to pull us into the dark depths of the abyss!
 **RODDY** (Surprised): Gosh, I hope not! I was thinking more about seeing the wildlife and taking in the Bay view!
 **MASON** (Annoyed): Ugh, how boooring!
-**GRANDMA** (Surprised): Roddy... <b>WHERE ARE MY ROSES?!</b>
+**GRANDMA** (Surprised): Roddy... **WHERE ARE MY ROSES?!**
 **RODDY** (Worried): Oh, uhm.. We needed space for the canoe and... I asked the kids to move them!
 
 ### Roddy's Mystery — decoration SP_RoddysMystery2023_Decoration_Slot27

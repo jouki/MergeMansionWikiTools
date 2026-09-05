@@ -10,7 +10,7 @@
     - Grandma: Well, that was very interesting, Emilio. You do know a lot about fish.
     - Emilio: That's... my entire PhD and career, so I should hope I do! And I hope you know a bit more, too, now.
 
-Not placeable in 26.07.01 (4): `LC_Summer_Intro_Dialogue`, `LC_Summer_MakoShark_Dialogue`, `LC_Summer_Snook_Dialogue`, `LC_Summer_WhiteMarlin_Dialogue`
+Not placeable in 26.07.01 (5): `LC_Summer_Intro_Dialogue`, `LC_Summer_MakoShark_Dialogue`, `LC_Summer_Snook_Dialogue`, `LC_Summer_WhiteMarlin_Dialogue`, `LC_Summer_UltimateMolaMola_Dialogue`
 
 ## Changes across versions
 - **26.03.01 → 26.04.01**: added 3 (`LC_Summer_2026_Intro_Dialogue`, `LC_Summer_2026_Outro_Dialogue`, `LC_Summer_MolaMola_Dialogue`); removed 1 (`LC_Summer_Intro_Dialogue`)

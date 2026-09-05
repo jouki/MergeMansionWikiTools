@@ -177,6 +177,27 @@
 **MADDIE** (Surprised): Oh, that makes things easier. Thanks, Winston!
 **MADDIE** (Surprised): Nothing can hold me back from discovering the truth now!
 
+### Gallery: GalleryIntro
+`GalleryIntro` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=GalleryIntro, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE**: I can't believe I found the key to the gallery in the dining room and I'm only just unlocking it!
+**MADDIE**: It's such a relief to see dry floors again....
+**MADDIE** (Thinking): This room looks like it was frozen in time though.
+**WINSTON**: I suppose you could say that. It's a room that is steeped in ancient history.
+**MADDIE** (Surprised): Winston! You've got to stop creeping up on people.
+**WINSTON**: Noted, ma'am. 
+
+### Gallery: GalleryTeaser
+`GalleryTeaser` · seen 23.09.02–26.07.01
+- trigger: area, area=Gallery, areaId=GalleryTeaser, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE**: I can't believe there's a piece of history preserved in this very room!
+**MADDIE** (Surprised): Ooh, I see some scribbles behind this photo...
+**MADDIE** (Thinking): I think I can make out a few words. Galley? No, gallery!
+**MADDIE** (Thinking): And there's a sketch here too! It looks like a key and it's different from the others.
+**MADDIE** (Frustrated): The key to the gallery must be somewhere in this room. I'll have to find it first!
+
 ### Gallery: Brighten the photo
 `IgnatiusDodoTalk` · seen 24.04.01–26.07.01
 - trigger: area, area=Gallery, areaId=Gallery, hotspotId=GalleryRemoveGalleryPhoto02RunDownEb10, phase=task completed, task=Brighten the photo (versions 24.04.01–26.07.01)

@@ -24,7 +24,7 @@ Every story in which Maddie speaks.
 ### AnotherPairOfGlovesFound DTOB
 `AnotherPairOfGlovesFound_DTOB` · seen 26.07.01–26.07.01
 
-**MADDIE** (Encouraging): Ah-ha! <color=#338DFF>Gardening gloves</color>.
+**MADDIE** (Encouraging): Ah-ha! ****.
 
 ### AnotherPairOfGlovesNeeded 02
 `AnotherPairOfGlovesNeeded_02` · seen 22.02.06–26.07.01
@@ -35,10 +35,11 @@ Every story in which Maddie speaks.
 ### AnotherPairOfGlovesNeeded 02 DTOB
 `AnotherPairOfGlovesNeeded_02_DTOB` · seen 26.07.01–26.07.01
 
-**MADDIE**: There must be another <color=#338DFF>pair of gloves</color> in here.
+**MADDIE**: There must be another **** in here.
 
-### AntiqueDealerConversationSequence
+### The Gate: AntiqueDealerConversationSequence
 `AntiqueDealerConversationSequence` · seen 22.02.06–26.07.01
+- trigger: area, area=The Gate, areaId=AntiqueDealerConversationSequence, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **ANTIQUEDEALER** (Surprised): I’m sorry I didn’t know the gear was in reverse.
 **MADDIE** (Worried): Are you ok?
@@ -50,8 +51,9 @@ Every story in which Maddie speaks.
 **ANTIQUEDEALER**: I’m sorry. Now the gate is damaged and the car is broken.
 **MADDIE**: Maybe my friend Roddy can help with that while I take you to grandma’s.
 
-### AntiqueDealerDriveOffSequence
+### The Gate: AntiqueDealerDriveOffSequence
 `AntiqueDealerDriveOffSequence` · seen 22.02.06–26.07.01
+- trigger: area, area=The Gate, areaId=AntiqueDealerDriveOffSequence, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **ANTIQUEDEALER** (Thinking): Thank you for your help.
 **MADDIE**: I just wanted to restore the family estate to its former glory!
@@ -62,8 +64,9 @@ Every story in which Maddie speaks.
 **ANTIQUEDEALER** (Worried): Oh, apologies. It really isn't my place to say. I must dash - it's time for my online yoga class.
 **MADDIE** (Thinking): And I must start repairing the garage. With all of these unexpected guests coming and going it would be a good idea to have a proper garage.
 
-### AntiqueDealerIntoSequence
+### The Gate: AntiqueDealerIntoSequence
 `AntiqueDealerIntoSequence` · seen 22.02.06–26.07.01
+- trigger: area, area=The Gate, areaId=AntiqueDealerIntoSequence, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE**: This looks great. Thank you!
 **RODDY** (Thinking): It’s not a big deal. Buildings that are in bad shape are my area of expertise.
@@ -549,8 +552,9 @@ Every story in which Maddie speaks.
 **ASH** (Encouraging): Haha! A thank you will do for now, but just don't forget to pay the bill!
 **ASH** (Encouraging): *Wink*
 
-### BathroomIntro
+### Bathroom: BathroomIntro
 `BathroomIntro` · seen 23.11.02–26.07.01
+- trigger: area, area=Bathroom, areaId=BathroomIntro, phase=area story (exact task not dumped) (versions 23.11.02–26.07.01)
 
 **MADDIE**: There! Got the door open with the crowbar!
 **MADDIE**: Now, to see where that water is coming fro-
@@ -563,8 +567,9 @@ Every story in which Maddie speaks.
 **WINSTON** (Worried): May I recommend that you call a plumber instead, ma'am?
 **MADDIE** (Worried): *Sigh* I think you're right...
 
-### BathroomLeak
+### Bathroom: BathroomLeak
 `BathroomLeak` · seen 23.09.02–26.07.01
+- trigger: area, area=Bathroom, areaId=BathroomLeak, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Joyous): This key looks exactly like the sketch behind the photo!
 **MADDIE** (Joyous): It has to be the gallery key! I can't wait to open it!
@@ -650,8 +655,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Encouraging): So might as well start here!
 **MADDIE** (Joyous): Perhaps I can grab a nice cold juice after all this from their juice bar!
 
-### BeachRightDiscovered
+### Beach House: BeachRightDiscovered
 `BeachRightDiscovered` · seen 22.02.06–26.07.01
+- trigger: area, area=Beach House, areaId=BeachRightDiscovered, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE** (Encouraging): What was this space all about? It's nothing like a grand mansion.
 **GRANDMA** (Thinking): This was where Skatie Katie and Hang Ten hung out. Their little slice of paradise.
@@ -662,8 +668,9 @@ Every story in which Maddie speaks.
 **GRANDMA**: Not now, honey, the cat’s waiting for her bath.
 **MADDIE** (Worried): If I ever needed a reason to think my family was weird...
 
-### BeachRightTotemFinished
+### Beach House: BeachRightTotemFinished
 `BeachRightTotemFinished` · seen 22.02.06–26.07.01
+- trigger: area, area=Beach House, areaId=BeachRightTotemFinished, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE** (Encouraging): Alright, mind blown! So he was a surfer, she was a roller skater, and they came together and made skateboards?
 **GRANDMA** (Surprised): That's right, sweetie. Cousin Katie always said they invented the skateboard.
@@ -681,8 +688,9 @@ Every story in which Maddie speaks.
 **MADDIE**: I'd like to find out more about Skatie Katie and Casey, too.
 **MADDIE** (Thinking): If Grandma won't tell me anything, then I should look around here for clues!
 
-### BeachRightWorkshopCleanedUp
+### Beach House: BeachRightWorkshopCleanedUp
 `BeachRightWorkshopCleanedUp` · seen 22.02.06–26.07.01
+- trigger: area, area=Beach House, areaId=BeachRightWorkshopCleanedUp, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE**: What's with all of these surfboards?
 **GRANDMA** (Surprised): Casey was one of the most famous surfers back in the day. He was looking for big waves. He was a legend.
@@ -3328,7 +3336,7 @@ Every story in which Maddie speaks.
 
 **MADDIE**: I’ve always wanted to put a water feature here!
 **EMILIO** (Thinking): It is quite beautiful, Maddie. Although I don’t think it’ll be suitable for fish...
-**MADDIE** (Joyous): Don’t worry, I got a <b>great</b> idea for them!
+**MADDIE** (Joyous): Don’t worry, I got a **great** idea for them!
 **RODDY**: Hey Maddie! How's... Uuh.. What's going on?
 **MADDIE**: Perfect timing, Roddy! Let me introduce you to Emilio!
 **EMILIO** (Encouraging): Hello! Welcome to the joys of the sea! My name is Emilio Costa, marine biologist! Have you come to learn about all the wonderful things found at sea?
@@ -3384,11 +3392,11 @@ Every story in which Maddie speaks.
 - trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot08, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **DEB** (Relaxed): So what made you decide to become a marine biologist, handsome?
-**EMILIO** (Doubtful): Uhm... You can call me Emilio. <b>Please</b>...
+**EMILIO** (Doubtful): Uhm... You can call me Emilio. **Please**...
 **MADDIE**: Hi, Emilio!  
   _(1 cosmetic edit not shown)_
 **EMILIO** (Surprised): MADDIE! Hi! I was just uuh, showing- uuh, telling your aunt... uuh, what’s her name?!
-**DEB** (Charming): Deb. But <b>you</b> can call me... Anytime.
+**DEB** (Charming): Deb. But **you** can call me... Anytime.
 **MADDIE** (Encouraging): Interesting woman, isn’t she?
 
 ### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot09
@@ -3396,7 +3404,7 @@ Every story in which Maddie speaks.
 - trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot09, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **GRANDMA** (Discouraged): I’m sorry, dearie. I thought it was junk, so I threw it in the trash!
-**EMILIO** (Encouraging): <i>*sigh*</i> I guess it was junk, Mrs. Boulton. We sort of got carried away with the mystery of it all...
+**EMILIO** (Encouraging): _*sigh*_ I guess it was junk, Mrs. Boulton. We sort of got carried away with the mystery of it all...
 **MADDIE**: Did Grandma throw away your suitcase?
 **EMILIO**: Yes... I guess we’ll never know if it contained a map to a treasure of untold riches, Roddy...
 **RODDY**: I guess so, bud...
@@ -3488,7 +3496,7 @@ Every story in which Maddie speaks.
 
 **GRANDMA**: Maddie, dearie! Just in time!
 **MADDIE** (Surprised): Oh?
-**GRANDMA**: May I introduce you to <b>Dr.</b> Emilio Costa, Hopewell Bay’s new marine biologist! He runs the aquarium!
+**GRANDMA**: May I introduce you to **Dr.** Emilio Costa, Hopewell Bay’s new marine biologist! He runs the aquarium!
 **GRANDMA** (Charming): And, as I just recently found out, is Amy’s owner!
 **EMILIO** (Encouraging): Please, it’s just Emilio. Only my mother insists on calling me a doctor!
 **MADDIE** (Charming): A pleasure to meet you, just Emilio! How is little Amy?
@@ -4101,7 +4109,7 @@ Every story in which Maddie speaks.
 **MADDIE** (Worried): Is that handsome man trying to offer me a ride in his car? Oh, no...
 **MADDIE** (Worried): But it's a very nice car...
 **MADDIE** (Worried): No, he's a complete stranger!
-**MADDIE**: <i>Non, merci!</i> Err... <i>Je ne veux pas</i>... Sorry - I've got to go!
+**MADDIE**: _Non, merci!_ Err... _Je ne veux pas_... Sorry - I've got to go!
 
 ### Maddie In Paris — item discovered: Beret
 `CBE_MaddieInParis2025_EiffelTower_01_Dialogue` · seen 25.05.01–26.07.01
@@ -4125,7 +4133,7 @@ Every story in which Maddie speaks.
 
 **MADDIE** (Worried): How am I supposed to pick just one out of all these yummy treats?
 **MADDIE** (Relaxed): Hang on... I'll take as many as I want!
-**MADDIE** (Relaxed): Excuse me, sir. I'll have the whole platter, <i>s'il vous plaît!</i>
+**MADDIE** (Relaxed): Excuse me, sir. I'll have the whole platter, _s'il vous plaît!_
 
 ### Maddie In Paris — event start
 `CBE_MaddieInParis2025_Intro_Dialogue` · seen 25.05.01–26.07.01
@@ -4133,7 +4141,7 @@ Every story in which Maddie speaks.
 
 **ANTIQUEDEALER** (Relaxed): Maddie! Your Grandma told me you have just returned from your vacation!
 **ANTIQUEDEALER** (Relaxed): So? How was Paris? 
-**ANTIQUEDEALER** (Charming): Did you have a <i>fantastique </i>vacation?
+**ANTIQUEDEALER** (Charming): Did you have a _fantastique _vacation?
 **MADDIE** (Relaxed): It really was amazing! I loved the food and all the sights... 
 **MADDIE** (Relaxed): It was great to have some time away, I feel like a totally new person!
 **ANTIQUEDEALER** (Surprised): You even look a little bit different. 
@@ -4393,7 +4401,7 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): This city is so vibrant and full of life. I just want to dive in and soak it all up.
 **MADDIE** (Encouraging): But first, I need to get changed.
 **MADDIE** (Encouraging): And the finishing touch...
-**MADDIE** (Relaxed): <i>Voilà!</i>
+**MADDIE** (Relaxed): _Voilà!_
 
 ### Maddie In Paris — item discovered: Cuddly Toy
 `CBE_MaddieInParis_ValentinesMerch_06_Dialogue` · seen 26.03.01–26.07.01
@@ -5138,7 +5146,7 @@ Every story in which Maddie speaks.
 **MADDIE** (Discouraged): It's just that I really thought I was going to be able to clear my Grandma's name.
 **MADDIE** (Worried): But every time I think I'm onto something, I hit a dead end!
 **JACKIE** (Worried): I might be able to help... I heard a rumor today about the old Lighthouse on your estate.
-**JACKIE** (Surprised): Someone in town said they thought the reclusive man who lived there might be your Grandpa <b>Charlie</b>!
+**JACKIE** (Surprised): Someone in town said they thought the reclusive man who lived there might be your Grandpa **Charlie**!
 **MADDIE** (Surprised): Then that's where I'm going next!
 **JACKIE** (Thinking): I'm not sure. I've actually only heard rumors about it. Maybe you should ask your Grandma?
 **JACKIE**: I saw her going to the Tennis court on my way here. 
@@ -5415,8 +5423,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Discouraged): Why don’t you stop them?
 **WINSTON** (Surprised): Certainly not! I am a butler, not a referee.
 
-### CinemaOutro
+### Cinema: CinemaOutro
 `CinemaOutro` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=CinemaOutro, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): What’s this?!
 **MADDIE** (Thinking): There's a ladder above! Looks like it leads to some sort of attic.
@@ -5459,8 +5468,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): Although, I've never even heard of most of these! Hey... What's this?
 **MADDIE**: "Award Ceremony - Homegrown in Hopewell Bay" Ooh... I should check this out later!
 
-### CinemaPOIGreenRoom
+### Cinema: CinemaPOIGreenRoom
 `CinemaPOIGreenRoom` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=CinemaPOIGreenRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: Wow! A green room. This must have been where the actors got ready when it was still a stage!
 **MADDIE** (Encouraging): Some interesting stuff in here... like those masks. They look like they belong to some exclusive, secret group.  
@@ -5604,7 +5614,7 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): I wonder if there are any more clues in Grandpa's notebook?
 **MADDIE** (Doubtful): Hmm. There's nothing much, but there is a little sketch of the Cemetery after the Conservatory.
 **MADDIE** (Joyous): I'm going to go there next and see what I can find out!
-**MADDIE**: I <b>will</b> get into the house, and prove Grandma's innocence once and for all!
+**MADDIE**: I **will** get into the house, and prove Grandma's innocence once and for all!
 
 ### Conservatory: Try to grow rafflesia again
 `ConservatoryArea_Painting` · seen 23.09.02–26.07.01
@@ -5936,14 +5946,14 @@ But I'm sure this thing will come in handy!
 ### DTOB New Players FTUE 01
 `DTOB_New_Players_FTUE_01` · seen 25.06.01–26.07.01
 
-**MADDIE**: You can see the <color=#338DFF>requirements for your tasks</color> on top of the merge board!  
+**MADDIE**: You can see the **** on top of the merge board!  
   _(1 cosmetic edit not shown)_
 
 ### DTOB New Players FTUE Highlight Card
 `DTOB_New_Players_FTUE_Highlight_Card` · seen 25.06.01–26.07.01
 
-**MADDIE**: Looks like your <color=#338DFF>task is ready</color> to be completed!
- <color=#338DFF>Tap</color> the <color=#338DFF>Complete</color> Button to return to the Mansion grounds.  
+**MADDIE**: Looks like your **** to be completed!
+ **** the **** Button to return to the Mansion grounds.  
   _(2 cosmetic edits not shown)_
 
 ### Dancefloor: Installing lamps should make it easier to see
@@ -6681,8 +6691,9 @@ But I'm sure this thing will come in handy!
 **RODDY** (Thinking): Knowing your Grandma, it's probably jelly or berries!
 **MADDIE** (Discouraged): I hope so! Because if not, this could be more evidence against her...
 
-### DiningRoomIntro
+### Dining Room: DiningRoomIntro
 `DiningRoomIntro` · seen 23.09.02–26.07.01
+- trigger: area, area=Dining Room, areaId=DiningRoomIntro, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): This place is stunning! So much gold and glitz... underneath all the dust and grime, that is.
 **MADDIE**: Good thing no food was left out, or this place would be overrun with rats.
@@ -6766,8 +6777,9 @@ But I'm sure this thing will come in handy!
 **MADDIE** (Thinking): A table saw will be perfect for the job.
 **MADDIE** (Joyous): Ahh, yes. This is a cutting edge invention!
 
-### DrivewayGateClearedMansionSign
+### The Grand Drive: DrivewayGateClearedMansionSign
 `DrivewayGateClearedMansionSign` · seen 22.02.06–26.07.01
+- trigger: area, area=The Grand Drive, areaId=DrivewayGateClearedMansionSign, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE** (Thinking): Beaumont Hall? Why did Grandma keep this place a secret?
 **GRANDMA** (Worried): Your grandfather and I spent a lot of time in these gardens...
@@ -6816,18 +6828,18 @@ But I'm sure this thing will come in handy!
 ### FTUE Claim Max Coins
 `FTUE_Claim_Max_Coins` · seen 23.11.02–26.07.01
 
-**MADDIE**: Let's <color=#338DFF>double Tap</color> the Coins to claim them!
+**MADDIE**: Let's **** the Coins to claim them!
 
 ### FTUE DTOB NewPlayers Pouch
 `FTUE_DTOB_NewPlayers_Pouch` · seen 25.06.01–26.07.01
 
 **MADDIE**: You can find your rewards in the Pouch, even when your Board is full.
-<color=#338DFF>Tap</color> it to get your rewards on the Board.
+**** it to get your rewards on the Board.
 
 ### FTUE DTOB OldPlayers InfoPanel
 `FTUE_DTOB_OldPlayers_InfoPanel` · seen 25.06.01–26.07.01
 
-**MADDIE**: Last but not least, the <color=#338DFF>Items info panel</color> has been moved to the bottom of the screen!
+**MADDIE**: Last but not least, the **** has been moved to the bottom of the screen!
 Hope you like the new layout!  
   _(1 cosmetic edit not shown)_
 
@@ -6840,19 +6852,19 @@ Let me show you around!
 ### FTUE DTOB OldPlayers Pouch
 `FTUE_DTOB_OldPlayers_Pouch` · seen 25.06.01–26.07.01
 
-**MADDIE**: Your <color=#338DFF>Pouch</color> has been moved to the top of the Merge Board.  
+**MADDIE**: Your **** has been moved to the top of the Merge Board.  
   _earlier:_ ~~Your <color=#338DFF>Pouch</color> has moved on top of the merge board.~~ (until 25.05.01)
 
 ### FTUE DTOB OldPlayers Tasks
 `FTUE_DTOB_OldPlayers_Tasks` · seen 25.06.01–26.07.01
 
-**MADDIE**: You can now see your <color=#338DFF>tasks on top of the board!</color>
+**MADDIE**: You can now see your ****
 How handy!
 
 ### FTUE FTUE Merge Coins
 `FTUE_FTUE_Merge_Coins` · seen 23.11.02–26.07.01
 
-**MADDIE**: Wow, so many <color=#338DFF>Coins</color>! These are going to come in handy! Let's Merge them!
+**MADDIE**: Wow, so many ****! These are going to come in handy! Let's Merge them!
 
 ### FTUE First Chest Tutorial OpenChest Dialogue
 `FTUE_First_Chest_Tutorial_OpenChest_Dialogue` · seen 23.11.02–26.07.01
@@ -6867,37 +6879,37 @@ How handy!
 ### FTUE First Chest Tutorial SpeedUp Dialogue
 `FTUE_First_Chest_Tutorial_SpeedUp_Dialogue` · seen 23.11.02–26.07.01
 
-**MADDIE**: This <color=#338DFF>Chest</color> takes a few minutes to open. You can <color=#338DFF>speed up Chests</color> with <color=#338DFF>Gems</color>! This time it is free!
+**MADDIE**: This **** takes a few minutes to open. You can **** with ****! This time it is free!
 
 ### FTUE NewShopButton Board
 `FTUE_NewShopButton_Board` · seen 25.05.01–26.07.01
 
-**MADDIE**: <color=#338DFF>The Shop</color> can now be found at <color=#338DFF>the top of the screen!</color>
+**MADDIE**: **** can now be found at ****
 
 ### FTUE NewShopButton Map
 `FTUE_NewShopButton_Map` · seen 25.05.01–26.07.01
 
-**MADDIE**: You can now access <color=#338DFF>the Shop</color> from the main view as well!
+**MADDIE**: You can now access **** from the main view as well!
 
 ### FTUE Profile Settings
 `FTUE_Profile_Settings` · seen 25.05.01–26.07.01
 
-**MADDIE**: The <color=#338DFF>Settings menu</color> can be found from here!
+**MADDIE**: The **** can be found from here!
 
 ### FTUE Profile Settings Existing
 `FTUE_Profile_Settings_Existing` · seen 25.05.01–26.07.01
 
-**MADDIE**: The <color=#338DFF>Settings menu</color> has been moved under the XP menu!
+**MADDIE**: The **** has been moved under the XP menu!
 
 ### FTUE Shop Highlight Item
 `FTUE_Shop_Highlight_Item` · seen 23.11.02–26.07.01
 
-**MADDIE**: Oh! Just what we need. Let's grab it. Every day you can get a <color=#338DFF>free item</color>! in the Shop!
+**MADDIE**: Oh! Just what we need. Let's grab it. Every day you can get a ****! in the Shop!
 
 ### FTUE ToDoButton Intro
 `FTUE_ToDoButton_Intro` · seen 23.11.02–26.07.01
 
-**MADDIE**: You can also see and <color=#338DFF>complete tasks</color> here, from your garage or the mansion grounds.  
+**MADDIE**: You can also see and **** here, from your garage or the mansion grounds.  
   _earlier:_ ~~You can see all the tasks here!~~ (until 23.11.02)
 
 ### Boulton Boulevard: FactoryBoulevard_Travel
@@ -7913,7 +7925,7 @@ How handy!
 `FastMode_FTUE` · seen 25.05.01–26.07.01
 
 **MADDIE** (Joyous): Good job!
-<color=#338DFF>Supercharge</color> has been unlocked!
+**** has been unlocked!
 
 Let's try it out on the Garage Board.
 
@@ -9354,8 +9366,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Surprised): Oh, that makes things easier. Thanks, Winston!
 **MADDIE** (Surprised): Nothing can hold me back from discovering the truth now!
 
-### GalleryIntro
+### Gallery: GalleryIntro
 `GalleryIntro` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=GalleryIntro, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: I can't believe I found the key to the gallery in the dining room and I'm only just unlocking it!
 **MADDIE**: It's such a relief to see dry floors again....
@@ -9364,8 +9377,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Surprised): Winston! You've got to stop creeping up on people.
 **WINSTON**: Noted, ma'am. 
 
-### GalleryTeaser
+### Gallery: GalleryTeaser
 `GalleryTeaser` · seen 23.09.02–26.07.01
+- trigger: area, area=Gallery, areaId=GalleryTeaser, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE**: I can't believe there's a piece of history preserved in this very room!
 **MADDIE** (Surprised): Ooh, I see some scribbles behind this photo...
@@ -9373,8 +9387,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Thinking): And there's a sketch here too! It looks like a key and it's different from the others.
 **MADDIE** (Frustrated): The key to the gallery must be somewhere in this room. I'll have to find it first!
 
-### GarageCarFinished
+### Garage: GarageCarFinished
 `GarageCarFinished` · seen 22.02.06–26.07.01
+- trigger: area, area=Garage, areaId=GarageCarFinished, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE** (Thinking): Before you have to run off again: is Lindsay the reason the mansion was sealed off?
 **GRANDMA** (Thinking): Lindsay was heartbroken when she came back to Beaumont Hall. She swore never to set foot in New York again.
@@ -9386,8 +9401,9 @@ Let's try it out on the Garage Board.
 **MADDIE**: Should I tell her some of her cakes taste like hats?
 **GRANDMA**: And not the first person trying to save this old estate, either...
 
-### GarageCarRevealed
+### Garage: GarageCarRevealed
 `GarageCarRevealed` · seen 22.02.06–26.07.01
+- trigger: area, area=Garage, areaId=GarageCarRevealed, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE** (Surprised): That's quite the car! Or was, I guess?
 **GRANDMA** (Encouraging): It belonged to Lindsay Boulton. She almost drove the family bankrupt.
@@ -9407,8 +9423,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Thinking): Car hood? Can't you just tell me what it is I’m looking for?
 **GRANDMA**: I'm sure you'll figure it out, dear!
 
-### GarageTraderTableRevealed
+### Garage: GarageTraderTableRevealed
 `GarageTraderTableRevealed` · seen 22.02.06–26.07.01
+- trigger: area, area=Garage, areaId=GarageTraderTableRevealed, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE** (Surprised): So Lindsay made money and lost money. What did she do exactly?
 **GRANDMA** (Worried): Lindsay was a canny investor. She moved to New York with a bag of Boulton money to make it big on Wall Street.
@@ -9453,7 +9470,7 @@ Let's try it out on the Garage Board.
 ### GetRidOfTheLog DTOB
 `GetRidOfTheLog_DTOB` · seen 26.07.01–26.07.01
 
-**MADDIE** (Encouraging): That's the <color=#338DFF>axe</color> we need! Time to channel my inner lumberjack.
+**MADDIE** (Encouraging): That's the **** we need! Time to channel my inner lumberjack.
 
 ### GetSawMergeTools1
 `GetSawMergeTools1` · seen 22.02.06–26.07.01
@@ -9463,7 +9480,7 @@ Let's try it out on the Garage Board.
 ### GetSawMergeTools1 DTOB
 `GetSawMergeTools1_DTOB` · seen 26.07.01–26.07.01
 
-**MADDIE** (Joyous): Ooh, a pair of <color=#338DFF>garden knives</color>. If we <color=#338DFF>merge</color> them, we'll get a <color=#338DFF>garden fork</color>!  
+**MADDIE** (Joyous): Ooh, a pair of ****. If we **** them, we'll get a ****!  
   _earlier:_ ~~Ooh, a pair of <color=#338DFF>box cutters</color>. If we <color=#338DFF>merge</color> them, we'll get a <color=#338DFF>garden fork</color>!~~ (until 25.02.02)
 
 ### GetSawMergeTools2
@@ -9474,7 +9491,7 @@ Let's try it out on the Garage Board.
 ### GetSawMergeTools2 DTOB
 `GetSawMergeTools2_DTOB` · seen 26.07.01–26.07.01
 
-**MADDIE**: We could use another <color=#338DFF>garden fork</color>. Let's <color=#338DFF>merge</color> these <color=#338DFF>garden knives</color>.  
+**MADDIE**: We could use another ****. Let's **** these ****.  
   _earlier:_ ~~We could use another <color=#338DFF>garden fork</color>. Let's <color=#338DFF>merge</color> these <color=#338DFF>box cutters</color>.~~ (until 25.02.02)
 
 ### GetSawMergeTools3
@@ -9486,7 +9503,7 @@ Let's try it out on the Garage Board.
 ### GetSawMergeTools3 DTOB
 `GetSawMergeTools3_DTOB` · seen 26.07.01–26.07.01
 
-**MADDIE** (Joyous): There's our <color=#338DFF>garden fork</color>. Now to <color=#338DFF>merge</color> them together.
+**MADDIE** (Joyous): There's our ****. Now to **** them together.
 
 ### GetSawMergeTools4
 `GetSawMergeTools4` · seen 22.02.06–26.07.01
@@ -9497,7 +9514,7 @@ Let's try it out on the Garage Board.
 ### GetSawMergeTools4 DTOB
 `GetSawMergeTools4_DTOB` · seen 26.07.01–26.07.01
 
-**MADDIE**: That's a pair of <color=#338DFF>pruning shears</color>. Let's <color=#338DFF>merge</color> them to see what we get.
+**MADDIE**: That's a pair of ****. Let's **** them to see what we get.
 
 ### GetSawSpawnMoreItems
 `GetSawSpawnMoreItems` · seen 22.02.06–26.07.01
@@ -9507,7 +9524,7 @@ Let's try it out on the Garage Board.
 ### GetSawSpawnMoreItems DTOB
 `GetSawSpawnMoreItems_DTOB` · seen 26.07.01–26.07.01
 
-**MADDIE**: Let's <color=#338DFF>tap</color> the <color=#338DFF>Tool Barrel</color> for more items!  
+**MADDIE**: Let's **** the **** for more items!  
   _earlier:_ ~~Let's see what else we can find in here.~~ (until 23.11.02)
 
 ### GlassMysteryTubes
@@ -9846,7 +9863,7 @@ The door will shift between the lines.'
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemovestepdebrisA1, phase=task completed, task=Remove step debris (versions 25.02.01–26.07.01)
 
 **MADDIE** (Joyous): I can't believe it! I'm in the Boulton family Mansion!
-**MADDIE** (Thinking): I didn't even <b>know</b> there was a mansion, until I accidently saw Grandma's notice...
+**MADDIE** (Thinking): I didn't even **know** there was a mansion, until I accidently saw Grandma's notice...
 **MADDIE** (Joyous): ...But now I'm inside and I can finally find something that can help Grandma!
 **MADDIE** (Doubtful): Although... It does look like I have a lot of work to do in here, also.
 **VICTORIA** (Thinking): So, you finally did it. You finally got inside this crumbling heap...
@@ -9860,10 +9877,10 @@ The door will shift between the lines.'
 **MADDIE**: Well? Who are you, and what are you doing in my Mansion?
 **VICTORIA** (Discouraged): Oh please... This Mansion belongs to the Hopewell Bay town council! Or at least, it soon will, even in this sorry state...
 **MADDIE** (Annoyed): Let me guess. You're Holden's boss? Something to do with infrastructure?
-**VICTORIA** (Thinking): Wrong again missy... I <b>was</b> Head of the Infrastructure Committee.
-**VICTORIA** (Relaxed): I'm the <b>head</b> of the Town Council. Recently promoted. I think you should kneel or something?
+**VICTORIA** (Thinking): Wrong again missy... I **was** Head of the Infrastructure Committee.
+**VICTORIA** (Relaxed): I'm the **head** of the Town Council. Recently promoted. I think you should kneel or something?
 **MADDIE** (Annoyed): So, you're the one who's been sending Holden around, photographing everything!?
-**VICTORIA** (Thinking): That's right! But then I thought... <i>Victoria, why don't you see it for yourself?</i>
+**VICTORIA** (Thinking): That's right! But then I thought... _Victoria, why don't you see it for yourself?_
 **VICTORIA** (Doubtful): And missy... I ain't happy with what I'm seeing!
 
 ### Great Hall: Remove dust sheet
@@ -10009,7 +10026,7 @@ The door will shift between the lines.'
 **MADDIE**: It's so dusty, and dark...
 **MADDIE** (Thinking): It's strange, though. It all seems so familiar somehow...
 **MADDIE** (Thinking): I think I dream about this hallway sometimes! 
-**JACKIE** (Thinking): What if it's a <b>memory</b>?
+**JACKIE** (Thinking): What if it's a **memory**?
 **MADDIE** (Surprised): I... I suppose it could be! I was 4 when Grandma and I moved out of here, so I guess it's possible I remember some of it. 
 **MADDIE** (Thinking): What else might I remember..?
 
@@ -10024,7 +10041,7 @@ The door will shift between the lines.'
 **MADDIE** (Annoyed): That's the one. She said my grandparents nearly ran this place into the ground.
 **JACKIE**: ...I'm sorry to say it, but I don't think she was lying.
 **JACKIE**: People say that your uncle Leonard squandered all the family money and-
-**WINSTON** (Surprised): I beg your pardon, but that is  <b>entirely</b> inaccurate!
+**WINSTON** (Surprised): I beg your pardon, but that is  **entirely** inaccurate!
 
 ### Hallway: Remove dust sheet
 `HallwayHallway04` · seen 23.09.02–26.07.01
@@ -10104,8 +10121,9 @@ The door will shift between the lines.'
 **JACKIE** (Encouraging): My apologies, Captain!
 **MADDIE** (Encouraging): Ha! At ease... I learned a few terms while fixing the yacht outside.
 
-### HallwayOutro
+### Hallway: HallwayOutro
 `HallwayOutro` · seen 23.09.02–26.07.01
+- trigger: area, area=Hallway, areaId=HallwayOutro, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Joyous): Looks like the key we found, fits this lock! It must be the study...
 **JACKIE** (Thinking): What do you think is in there?
@@ -10203,8 +10221,9 @@ The door will shift between the lines.'
 **MADDIE** (Thinking): What’s that? Is that piano music? Sounds like it’s coming from upstairs... 
 **MADDIE** (Thinking): Grandma mentioned that there's a piano in the dining room. Guess I'll have to investigate that later. One mystery at a time, Maddie!
 
-### HideoutIntro
+### Hideout: HideoutIntro
 `HideoutIntro` · seen 23.09.02–26.07.01
+- trigger: area, area=Hideout, areaId=HideoutIntro, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): It’s a hidden room! One of many, I suppose.
 **MADDIE** (Thinking): Hmm... maybe I should wait for Jackie? It does look pretty dark down there.
@@ -10254,13 +10273,15 @@ The door will shift between the lines.'
 **MADDIE** (Annoyed): Well, I'm happy to disappoint.
 **HOLDEN** (Encouraging): Hmph. Looks like I'll be returning soon...
 
-### Hopeberry2022DoorTutorial
+### Hopeberry Terraces: Hopeberry2022DoorTutorial
 `Hopeberry2022DoorTutorial` · seen 23.09.02–25.06.01
+- trigger: area, area=Hopeberry Terraces, areaId=Hopeberry, phase=area story (exact task not dumped) (versions 23.09.02–25.06.01)
 
 **MADDIE** (Surprised): Wow?! This must be...
 
-### Hopeberry2022Intro
+### Hopeberry Terraces: Hopeberry2022Intro
 `Hopeberry2022Intro` · seen 23.09.02–25.06.01
+- trigger: area, area=Hopeberry Terraces, areaId=Hopeberry, phase=area story (exact task not dumped) (versions 23.09.02–25.06.01)
 
 **MADDIE** (Joyous): Hopeberry Festival! I’ve never heard of it before.
 **GRANDMA**: It used to happen every year, until the Hopeberries all decayed one day...
@@ -10268,8 +10289,9 @@ The door will shift between the lines.'
 **GRANDMA** (Encouraging): Indeed! I bet a secret stash has survived somewhere!
 **GRANDMA**: Why don’t you clean up those twigs to set up a stall while I look for the berries.
 
-### Hopeberry2022IntroPart2
+### Hopeberry Terraces: Hopeberry2022IntroPart2
 `Hopeberry2022IntroPart2` · seen 23.09.02–25.06.01
+- trigger: area, area=Hopeberry Terraces, areaId=Hopeberry, phase=area story (exact task not dumped) (versions 23.09.02–25.06.01)
 
 **MADDIE** (Surprised): ...the place where all those Hopeberry Festival gear was being stored all these years!!
 **GRANDMA**: And everything has remained spick and span!
@@ -10297,82 +10319,82 @@ The door will shift between the lines.'
 ### Item Intro BroomCabinet Active
 `Item_Intro_BroomCabinet_Active` · seen 26.07.01–26.07.01
 
-**MADDIE** (Encouraging): Your <color=#338DFF>Broom Cabinet</color> is ready to use! Tap to see what's inside.
+**MADDIE** (Encouraging): Your **** is ready to use! Tap to see what's inside.
 
 ### Item Intro BroomCabinet Lvl1
 `Item_Intro_BroomCabinet_Lvl1` · seen 26.07.01–26.07.01
 
-**MADDIE** (Encouraging): You found a <color=#338DFF>Broom Cabinet</color>! Merge it to unlock what's inside.
+**MADDIE** (Encouraging): You found a ****! Merge it to unlock what's inside.
 
 ### Item Intro Drawer Active
 `Item_Intro_Drawer_Active` · seen 26.07.01–26.07.01
 
-**MADDIE** (Encouraging): Your <color=#338DFF>Drawer</color> is ready to use! Tap to see what's inside.
+**MADDIE** (Encouraging): Your **** is ready to use! Tap to see what's inside.
 
 ### Item Intro Drawer Alt
 `Item_Intro_Drawer_Alt` · seen 26.07.01–26.07.01
 
-**MADDIE** (Encouraging): Your <color=#338DFF>Drawer</color> is ready to use! It may contain something unexpected.
+**MADDIE** (Encouraging): Your **** is ready to use! It may contain something unexpected.
 
 ### Item Intro Drawer Lvl1
 `Item_Intro_Drawer_Lvl1` · seen 26.07.01–26.07.01
 
-**MADDIE** (Encouraging): You found a <color=#338DFF>Drawer</color>! Merge it to discover what's inside.
+**MADDIE** (Encouraging): You found a ****! Merge it to discover what's inside.
 
 ### Item Intro Flowerpot Active
 `Item_Intro_Flowerpot_Active` · seen 26.07.01–26.07.01
 
-**MADDIE** (Encouraging): Your <color=#338DFF>Flowerpot</color> is ready to use! Tap to see what's inside.
+**MADDIE** (Encouraging): Your **** is ready to use! Tap to see what's inside.
 
 ### Item Intro Flowerpot Lvl1
 `Item_Intro_Flowerpot_Lvl1` · seen 26.07.01–26.07.01
 
-**MADDIE** (Encouraging): You found a <color=#338DFF>Flowerpot</color>! Merge it to make it bloom.
+**MADDIE** (Encouraging): You found a ****! Merge it to make it bloom.
 
 ### Item Intro PlantedBush Active
 `Item_Intro_PlantedBush_Active` · seen 26.07.01–26.07.01
 
-**MADDIE** (Encouraging): Your <color=#338DFF>Planted Bush</color> is ready to use! Tap to see what's inside.
+**MADDIE** (Encouraging): Your **** is ready to use! Tap to see what's inside.
 
 ### Item Intro PlantedBush Lvl1
 `Item_Intro_PlantedBush_Lvl1` · seen 26.07.01–26.07.01
 
-**MADDIE** (Encouraging): You found a <color=#338DFF>Planted Bush</color>! Merge it to help it grow.
+**MADDIE** (Encouraging): You found a ****! Merge it to help it grow.
 
 ### Item Intro StoneGate
 `Item_Intro_StoneGate` · seen 26.07.01–26.07.01
 
-**MADDIE** (Encouraging): You found the <color=#338DFF>Stone Gate!</color> Tap it to search for the <color=#338DFF>Stone Can!</color>
+**MADDIE** (Encouraging): You found the **** Tap it to search for the ****
 
 ### Item Intro Toolbox Active
 `Item_Intro_Toolbox_Active` · seen 26.07.01–26.07.01
 
-**MADDIE** (Encouraging): Your <color=#338DFF>Toolbox</color> is ready to use! Tap to see what's inside.
+**MADDIE** (Encouraging): Your **** is ready to use! Tap to see what's inside.
 
 ### Item Intro Toolbox Lvl1
 `Item_Intro_Toolbox_Lvl1` · seen 26.07.01–26.07.01
 
-**MADDIE** (Encouraging): You found a <color=#338DFF>Toolbox</color>! Merge it to unlock what's inside.
+**MADDIE** (Encouraging): You found a ****! Merge it to unlock what's inside.
 
 ### Item Intro ToyCar Active
 `Item_Intro_ToyCar_Active` · seen 26.07.01–26.07.01
 
-**MADDIE** (Encouraging): Your <color=#338DFF>Toy Car</color> is ready to use! Tap to see what's inside.
+**MADDIE** (Encouraging): Your **** is ready to use! Tap to see what's inside.
 
 ### Item Intro ToyCar Lvl1
 `Item_Intro_ToyCar_Lvl1` · seen 26.07.01–26.07.01
 
-**MADDIE** (Encouraging): You found a <color=#338DFF>Toy Car</color>! Merge it to see what it can power.
+**MADDIE** (Encouraging): You found a ****! Merge it to see what it can power.
 
 ### Item Intro Tree Active
 `Item_Intro_Tree_Active` · seen 26.07.01–26.07.01
 
-**MADDIE** (Encouraging): Your <color=#338DFF>Tree</color> is ready to use! Tap to see what's inside.
+**MADDIE** (Encouraging): Your **** is ready to use! Tap to see what's inside.
 
 ### Item Intro Tree Lvl1
 `Item_Intro_Tree_Lvl1` · seen 26.07.01–26.07.01
 
-**MADDIE** (Encouraging): You found a <color=#338DFF>Tree</color>! Merge it to grow it into something useful.
+**MADDIE** (Encouraging): You found a ****! Merge it to grow it into something useful.
 
 ### Stone Garden: JapaneseGardenUnlock
 `JapaneseGardenUnlock` · seen 23.09.02–26.07.01
@@ -10385,7 +10407,7 @@ The door will shift between the lines.'
 - trigger: area, area=Stone Garden, areaId=JapaneseGarden, hotspotId=MansionHallRightPathToGardenClearOvergrown, phase=task completed, task=Remove overgrowth (versions 24.04.01–26.07.01)
 
 **MADDIE** (Doubtful): I still can't believe the police arrested Grandma. I wonder what evidence they have against her...
-**MADDIE** (Doubtful): And what exactly did she mean by that weird note on her hand? "He is alive" <i>Who</i> is alive?
+**MADDIE** (Doubtful): And what exactly did she mean by that weird note on her hand? "He is alive" _Who_ is alive?
 **MADDIE** (Annoyed): Since Grandma won't talk to me about it, I should get on with things here.
 **MADDIE** (Thinking): Besides, I could use a place meant for contemplation.
 **JACKIE** (Encouraging): Wow, I really like what you've done with the grounds... Maddie, right? Maddie Boulton?
@@ -10393,7 +10415,7 @@ The door will shift between the lines.'
 **JACKIE**: Jackie Martin, reporter for the Hopewell Bay Times. I'd like to ask you a few questions about your grandmother.
 **JACKIE**: I know she was held for questioning due to new evidence that has surfaced in a cold case, and--
 **MADDIE** (Surprised): Wait, what case? What evidence? What do you know?
-**JACKIE**: That's what I want to ask you about. A friend on the force mentioned something about  <i>a gold watch</i>...
+**JACKIE**: That's what I want to ask you about. A friend on the force mentioned something about  _a gold watch_...
 **MADDIE** (Annoyed): I'm sorry, but I can't answer your questions. I'd like you to leave, please.
 **JACKIE**: All right, but I can give you a chance to tell your story. I'll leave you my card.
 
@@ -10989,9 +11011,9 @@ The door will shift between the lines.'
 **GRANDMA** (Joyous): Hold on! You caught a big one, dearie!
 **MADDIE** (Frustrated): Hnnngg... Take... the photo... already!
 
-### LC Summer UltimateMolaMola Dialogue
+### Summer Lucky Catch — part of the event (exact trigger not dumped)
 `LC_Summer_UltimateMolaMola_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
+- trigger: event, eventType=event story, event=Summer Lucky Catch, eventId=LC_Summer, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 
 ### Lucky Catch — item discovered: White Marlin
@@ -11474,9 +11496,9 @@ The door will shift between the lines.'
 **MADDIE** (Relaxed): Your garden is already attracting wildlife!
 **EMILIO** (Relaxed): It's working! The garden is really working!
 
-### LDE GreenAcresQuest2024 v2 TA4 Dialogue
+### Green Acres Quest — part of the event (exact trigger not dumped)
 `LDE_GreenAcresQuest2024_v2_TA4_Dialogue` · seen 26.02.01–26.04.02
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, moment=part of the event (exact trigger not dumped) (versions 26.02.01–26.04.02)
 
 **BELLA** (Thinking): Are you building a new garden at the Mansion?
 **MADDIE** (Surprised): Errr, yes! I am.
@@ -11485,9 +11507,9 @@ The door will shift between the lines.'
 **BELLA** (Relaxed): No, but they're my favorite flowers!
 **MADDIE** (Relaxed): Ah, good to know!
 
-### LDE GreenAcresQuest2024 v2 TA7 Dialogue
+### Green Acres Quest — part of the event (exact trigger not dumped)
 `LDE_GreenAcresQuest2024_v2_TA7_Dialogue` · seen 26.02.01–26.04.02
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, moment=part of the event (exact trigger not dumped) (versions 26.02.01–26.04.02)
 
 **MADDIE** (Relaxed): What's up? It's starting to look like a garden out here!
 **EMILIO** (Doubtful): It's coming along, but I never knew garden work could be so hard!
@@ -11896,7 +11918,7 @@ The door will shift between the lines.'
 `LDE_HolidayCarols2023_LoopExplainer_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, eventType=event story, event=The Fa-la-la-la Follies, eventId=LDE_HolidayCarols2023, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
-**MADDIE** (Joyous): Good job! Remember, the best way to advance in the event is to <color=#4E8EC8>Create a caroling stage</color>, <color=#4E8EC8>get instruments</color> and <color=#4E8EC8>band outfits</color> and voila, points galore
+**MADDIE** (Joyous): Good job! Remember, the best way to advance in the event is to ****, **** and **** and voila, points galore
 
 ### The Fa-la-la-la Follies — item discovered: Paper Crown
 `LDE_HolidayCarols2023_ReverseCracker_06_Dialogue` · seen 25.05.01–26.07.01
@@ -13263,11 +13285,11 @@ The door will shift between the lines.'
 `LS_LuckySnap2024_RockDove_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_LuckySnap2024_Common_RockDove_01'], items=['Rock Dove'], moment=item discovered (versions 25.05.01–26.07.01)
 
-**ANTIQUEDEALER**: I can see a <i>Columba livia!</i>
+**ANTIQUEDEALER**: I can see a _Columba livia!_
 **MADDIE** (Surprised): Really? Where??
 **ANTIQUEDEALER**: Right there, on the bird feeder.
 **MADDIE** (Thinking): All I can see is a big pigeon.
-**ANTIQUEDEALER** (Surprised): Correct - and in Latin, it is called <i>Columba livia.</i>
+**ANTIQUEDEALER** (Surprised): Correct - and in Latin, it is called _Columba livia._
 
 ### Lucky Snap — item discovered: Sage Grouse
 `LS_LuckySnap2024_SageGrouse_Dialogue` · seen 25.05.01–26.07.01
@@ -13692,8 +13714,9 @@ The door will shift between the lines.'
 **MADDIE**: "Get your fortune told! 10 percent off your first reading!"
 **MADDIE** (Doubtful): I dunno... I'm still sort of iffy about someone who can tell your future by reading snow globes!
 
-### Landing1
+### Landing Room: Landing1
 `Landing1` · seen 25.05.01–26.07.01
+- trigger: area, area=Landing Room, areaId=Landing, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Frustrated): Ugh... Why am I even doing this anymore?
 **MADDIE** (Doubtful): Why am I helping Grandma if she won’t even let me?!
@@ -13705,8 +13728,9 @@ The door will shift between the lines.'
 **MADDIE** (Surprised): Who- Who are you?!
 **BRUNO** (Charming): The name is Bruno Golightly. Mayor of Hopewell Bay.
 
-### Landing2
+### Landing Room: Landing2
 `Landing2` · seen 25.05.01–26.07.01
+- trigger: area, area=Landing Room, areaId=Landing, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): Mayor?! That makes you Victoria’s husband, doesn’t it?
 **BRUNO** (Charming): Indeed...
@@ -13714,8 +13738,9 @@ The door will shift between the lines.'
 **BRUNO** (Thinking): Well... Funny you should put it like that.
 **BRUNO** (Joyous): I'm here because I have a proposition for you!
 
-### Landing3
+### Landing Room: Landing3
 `Landing3` · seen 25.05.01–26.07.01
+- trigger: area, area=Landing Room, areaId=Landing, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Annoyed): What proposition could you possibly have that would interest me?!
 **BRUNO** (Joyous): This mansion of yours... I'm interested in taking it off your hands.
@@ -13727,8 +13752,9 @@ The door will shift between the lines.'
 **BRUNO** (Joyous): Ms. Boulton, with the money I’m willing to offer for this place, you could buy ANY house in all of Hopewell Bay!
 **BRUNO** (Joyous): You could start fresh... With your grandmother!
 
-### Landing4
+### Landing Room: Landing4
 `Landing4` · seen 25.05.01–26.07.01
+- trigger: area, area=Landing Room, areaId=Landing, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Discouraged): There's a difference between a house and home, Mr. Golightly. This place means a lot to my family.
 **BRUNO** (Charming): Please, call me Bruno.
@@ -13741,8 +13767,9 @@ The door will shift between the lines.'
 **BRUNO**: I am sure as mayor, I could help the police department see reason and stop this dreadful investigation.
 **BRUNO** (Doubtful): Besides, if I were to acquire Beaumont Hall, I wouldn’t want its heritage to be smeared by scandalous controversy.
 
-### Landing5
+### Landing Room: Landing5
 `Landing5` · seen 25.05.01–26.07.01
+- trigger: area, area=Landing Room, areaId=Landing, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Y-you could make it all go away? I don’t know what to say...
 **BRUNO** (Joyous): Yes, would be a start.
@@ -13753,8 +13780,9 @@ The door will shift between the lines.'
 **BRUNO** (Joyous): By all means. I have to take this call, it's the wife. When you’ve made your decision, don’t hesitate to reach out.
 **BRUNO** (Encouraging): I have big plans for Hopewell Bay. Huge! And they could include you and your family as well!
 
-### Landing6
+### Landing Room: Landing6
 `Landing6` · seen 25.05.01–26.07.01
+- trigger: area, area=Landing Room, areaId=Landing, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **JACKIE** (Surprised): Hey, wow! Was that Mayor Bruno?!
 **MADDIE** (Worried): Hi, Jackie... Yeah... It was.
@@ -13766,8 +13794,9 @@ The door will shift between the lines.'
 **MADDIE** (Worried): I know... I know. But... if there’s a chance to get Grandma out of this mess and maybe move into a place that isn’t falling apart...
 **MADDIE** (Worried): Isn’t that the reason I came here in the first place?
 
-### Landing7
+### Landing Room: Landing7
 `Landing7` · seen 25.05.01–26.07.01
+- trigger: area, area=Landing Room, areaId=Landing, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **JACKIE** (Encouraging): Well, you’ve always had your family’s best interests at heart. So I know you’ll make the right decision.
 **MADDIE** (Worried): Thanks, Jackie!
@@ -14204,7 +14233,7 @@ You will find one hidden beneath me.”
 **HOLDEN** (Surprised): I heard he controls birds, and speaks some weird wizard language. He's a total weirdo, anyway.
 **MADDIE** (Encouraging): You should get on with your photography, Holden. I want to, uh, take a walk up there.
 **HOLDEN**: Alright, but don't say I didn't warn you. And Maddie? You really need to get a jump on the mansion repairs...
-**HOLDEN** (Charming): My boss really has it in for you, and you <b>don't</b> want to make an enemy of her. Bye!
+**HOLDEN** (Charming): My boss really has it in for you, and you **don't** want to make an enemy of her. Bye!
 **MADDIE** (Thinking): Ugh! Okay. Someone hiding up at the Lighthouse for years could be Grandpa Charlie! Let's find out.
 
 ### Lighthouse: Place new bridge board
@@ -14346,7 +14375,7 @@ You will find one hidden beneath me.”
 **HOLDEN** (Worried): Ugh, why are you up here? You're supposed to stay away from the Wizard of the Lighthouse!
 **MADDIE** (Surprised): Wizard? And what are you doing here?
 **HOLDEN**: I've come to take more photos, obviously. Turns out I missed a few spots when I was here last time.
-**HOLDEN** (Charming): I did get some <i>amazing</i> selfies in, though. Anyway, yeah, this place is rumor central and you should stay away!
+**HOLDEN** (Charming): I did get some _amazing_ selfies in, though. Anyway, yeah, this place is rumor central and you should stay away!
 **MADDIE** (Surprised): What rumors?! I need to know more before I go up!
 
 ### LindsayPhoto
@@ -14578,8 +14607,9 @@ You will find one hidden beneath me.”
 **MADDIE** (Doubtful): Well, they're not wrong. Looks like there was definitely an investigation.
 **MADDIE** (Thinking): But, wow! This explains why most of the things in this room were upturned. I guess this place was thoroughly searched...
 
-### LoungeIntro
+### Lounge: LoungeIntro
 `LoungeIntro` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=LoungeIntro, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Wow! This is... not what I expected to find.
 **MADDIE** (Thinking): Is it some sort of secret den? A casino?
@@ -14828,28 +14858,28 @@ Grandma's house looks brand new!
 ### MMM FTUE Hotspot12 Merge Idle1 Guide
 `MMM_FTUE_Hotspot12_Merge_Idle1_Guide` · seen 26.07.01–26.07.01
 
-**MADDIE** (Relaxed): <color=#338DFF>DRAG</color> the <color=#338DFF>Water Bucket</color>
-to <color=#338DFF>MERGE</color> !
+**MADDIE** (Relaxed): **** the ****
+to **** !
 
 ### MMM FTUE Hotspot12 Merge Idle2 Guide
 `MMM_FTUE_Hotspot12_Merge_Idle2_Guide` · seen 26.07.01–26.07.01
 
-**MADDIE** (Relaxed): <color=#338DFF>MERGE</color> the <color=#338DFF>Water Buckets</color>
-to create a <color=#338DFF>Fire Extinguisher</color>.  
+**MADDIE** (Relaxed): **** the ****
+to create a ****.  
   _(1 cosmetic edit not shown)_
 
 ### MMM FTUE Hotspot1 Complete
 `MMM_FTUE_Hotspot1_Complete` · seen 26.07.01–26.07.01
 
 **MADDIE** (Joyous): Awesome!
-This <color=#338DFF>Fire Extinguisher</color> will help slow down the flames.  
+This **** will help slow down the flames.  
   _earlier:_ ~~Hooray!
 This Fire extinguisher should help slow down the flames.~~ (until 25.09.01)
 
 ### MMM FTUE Hotspot1 Map Guide
 `MMM_FTUE_Hotspot1_Map_Guide` · seen 26.07.01–26.07.01
 
-**MADDIE** (Worried): <color=#338DFF>TAP</color> the <color=#338DFF>Fire Extinguisher</color> to help put out the fire.  
+**MADDIE** (Worried): **** the **** to help put out the fire.  
   _(2 cosmetic edits not shown)_
 
 ### MMM FTUE Hotspot2 Complete
@@ -14865,20 +14895,20 @@ It's gonna need a good scrub.
 `MMM_FTUE_Hotspot2_Map_Guide` · seen 26.07.01–26.07.01
 
 **MADDIE** (Relaxed): Almost there!
-<color=#338DFF>TAP</color> the <color=#338DFF>Fire Hose</color> to put out the rest of the fire.  
+**** the **** to put out the rest of the fire.  
   _earlier:_ ~~Almost there!
 <color=#338DFF>TAP</color> the Fire extinguisher to put out the rest of the fire.~~ (until 25.09.01)
 
 ### MMM FTUE Hotspot2 Merge Idle3 Guide
 `MMM_FTUE_Hotspot2_Merge_Idle3_Guide` · seen 26.07.01–26.07.01
 
-**MADDIE** (Relaxed): <color=#338DFF>MERGE</color> the <color=#338DFF>Fire Extinguisher</color>
-to create a <color=#338DFF>Fire Hose</color>.
+**MADDIE** (Relaxed): **** the ****
+to create a ****.
 
 ### MMM FTUE Hotspot3 Complete
 `MMM_FTUE_Hotspot3_Complete` · seen 26.07.01–26.07.01
 
-**MADDIE** (Joyous): This <color=#338DFF>Cleaning cart</color> has everything I need to get rid of these tough stains!  
+**MADDIE** (Joyous): This **** has everything I need to get rid of these tough stains!  
   _earlier:_ ~~This cleaning spray should get rid of these tough stains!~~ (until 25.09.01)
 
 ### MMM FTUE Hotspot3 Intro
@@ -14891,7 +14921,7 @@ It's gonna need a good scrub.
 ### MMM FTUE Hotspot3 Map Guide
 `MMM_FTUE_Hotspot3_Map_Guide` · seen 26.07.01–26.07.01
 
-**MADDIE** (Relaxed): <color=#338DFF>TAP</color> the <color=#338DFF>Cleaning Cart</color>
+**MADDIE** (Relaxed): **** the ****
 to help clean up this mess.  
   _(1 cosmetic edit not shown)_
 
@@ -14899,31 +14929,31 @@ to help clean up this mess.
 `MMM_FTUE_Hotspot3_Merge_Idle1_Guide` · seen 26.07.01–26.07.01
 
 **MADDIE** (Relaxed): The board is full!
-Time to <color=#338DFF>MERGE</color>!
+Time to ****!
 
 ### MMM FTUE Hotspot3 Merge Idle2 Guide
 `MMM_FTUE_Hotspot3_Merge_Idle2_Guide` · seen 26.07.01–26.07.01
 
-**MADDIE** (Relaxed): <color=#338DFF>Merge</color> the <color=#338DFF>Cleaning Towels</color>
-to create <color=#338DFF>Rubber Gloves</color>.  
+**MADDIE** (Relaxed): **** the ****
+to create ****.  
   _earlier:_ ~~DRAG the cleaning rag to MERGE.~~ (until 25.09.01)
 
 ### MMM FTUE Hotspot3 Merge Idle3 Guide
 `MMM_FTUE_Hotspot3_Merge_Idle3_Guide` · seen 26.07.01–26.07.01
 
-**MADDIE** (Relaxed): <color=#338DFF>MERGE</color> the <color=#338DFF>Rubber Gloves</color>
-to create a <color=#338DFF>Cleaning Spray</color>.
+**MADDIE** (Relaxed): **** the ****
+to create a ****.
 
 ### MMM FTUE Hotspot3 Merge Idle4 Guide
 `MMM_FTUE_Hotspot3_Merge_Idle4_Guide` · seen 26.07.01–26.07.01
 
-**MADDIE** (Relaxed): <color=#338DFF>MERGE</color> the <color=#338DFF>Cleaning Spray</color>
-to create a <color=#338DFF>Cleaning Cart</color>.
+**MADDIE** (Relaxed): **** the ****
+to create a ****.
 
 ### MMM FTUE Hotspot3 Produce Guide
 `MMM_FTUE_Hotspot3_Produce_Guide` · seen 26.07.01–26.07.01
 
-**MADDIE** (Relaxed): <color=#338DFF>TAP</color> the <color=#338DFF>Cleaning Bucket</color> to produce items.  
+**MADDIE** (Relaxed): **** the **** to produce items.  
   _(1 cosmetic edit not shown)_
 
 ### MMM FTUE Intro
@@ -15343,7 +15373,7 @@ Let's put it out, quickly!
 **WINSTON** (Doubtful): This house belongs to the noble Boulton family.
 **WINSTON**: It's been in their family for hundreds of years, and still is!
 **MADDIE**: Exactly - and I'm Maddie Boulton! So you'd better tell me why you're here, and, oh my goodness...
-**MADDIE** (Surprised): Are you <b>stealing</b> silver candlesticks from our house?
+**MADDIE** (Surprised): Are you **stealing** silver candlesticks from our house?
 **WINSTON** (Surprised): Madam, I'm a butler, and a butler never steals. I was simply, ahem, polishing these. Now, if you'll excuse me--
 **MADDIE** (Annoyed): Not so fast! You'd better explain yourself, and quickly.
 
@@ -15398,7 +15428,7 @@ Let's put it out, quickly!
 - trigger: area, area=Maintenance Room, areaId=MaintenanceRoom, hotspotId=ButlersUnlockArea, phase=task completed, task=Unlock the Maintenance Room (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): What's that noise coming from the old side entrance?! 
-**MADDIE** (Worried): It sounds like someone is <b>inside</b> our mansion!
+**MADDIE** (Worried): It sounds like someone is **inside** our mansion!
 **MADDIE** (Thinking): I'd better go and investigate.
 
 ### Maintenance Room: Pick the wooden planks up
@@ -15481,7 +15511,7 @@ Let's put it out, quickly!
 **GRANDMA** (Doubtful): Shouldn't you get this fixed up for that building inspector of yours? He's kinda cute, ain't he?  
   _(1 cosmetic edit not shown)_
 **MADDIE**: Great! I want to learn all about Grandpa Charlie, and my parents, and...
-**GRANDMA** (Doubtful): Some secrets are best left <b>buried</b>, Maddie. I'm off to bake.
+**GRANDMA** (Doubtful): Some secrets are best left **buried**, Maddie. I'm off to bake.
 **MADDIE** (Discouraged): She's hiding something! I just wish I knew what it was - and why!
 
 ### The Grand Drive: Plant flowers
@@ -15494,8 +15524,9 @@ Let's put it out, quickly!
 **MADDIE** (Joyous): If he's missing a stone can, I should look for it! But why does he have one?
 **GRANDMA**: Find it and I'll tell you, dearie.
 
-### MansionRightFillerPoolFinished
+### Flower Garden: MansionRightFillerPoolFinished
 `MansionRightFillerPoolFinished` · seen 22.02.06–26.07.01
+- trigger: area, area=Flower Garden, areaId=MansionRightFillerPoolFinished, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **GRANDMA** (Encouraging): Oh my, I just remembered! I pushed your grandfather into that pool once!
 **MADDIE** (Worried): Huh? Why? Were you mad at him?
@@ -15506,8 +15537,9 @@ Let's put it out, quickly!
 **GRANDMA** (Thinking): You keep on talking, I’ll be back in a minute. I came out without my reading glasses and can’t hear a word you’re saying!
 **MADDIE** (Surprised): Um... okay...
 
-### MansionRightFillerStatueFinished
+### Flower Garden: MansionRightFillerStatueFinished
 `MansionRightFillerStatueFinished` · seen 22.02.06–26.07.01
+- trigger: area, area=Flower Garden, areaId=MansionRightFillerStatueFinished, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE** (Thinking): That’s a pretty statue. Must have cost a lot. Tell me more about Ignatius and his tin cans.
 **GRANDMA** (Doubtful): Tinned food was a miraculous invention back then. No one had fridges. Ignatius saw how much demand there was as soon as he sold his first can.
@@ -15697,14 +15729,14 @@ Let's put it out, quickly!
 
 **MADDIE** (Thinking): After my current tasks are done, this looks like a direction I should continue next
 
-### Maze Intro
+### The Maze: Maze_Intro
 `Maze_Intro` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: area, area=The Maze, areaId=Maze, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Annoyed): Ew, those webs are so sticky!
 **ANTIQUEDEALER** (Frustrated): Never mind the webs! Is that a... spider? They're, um, really not my thing.
-**MADDIE** (Annoyed): I guess that's why you've been more of an <i>observer</i> on this set of tasks.
-**ANTIQUEDEALER** (Encouraging): I prefer to think of it as <i>advisor</i>. But... I have an appointment to get to. I'll see you later!
+**MADDIE** (Annoyed): I guess that's why you've been more of an _observer_ on this set of tasks.
+**ANTIQUEDEALER** (Encouraging): I prefer to think of it as _advisor_. But... I have an appointment to get to. I'll see you later!
 **MADDIE** (Thinking): Appointment... Right. 
 
 ### MergeIntroFirstMerge
@@ -15731,7 +15763,7 @@ Let's put it out, quickly!
 ### MergeIntroGlovesLevel2Merge Ideal
 `MergeIntroGlovesLevel2Merge_Ideal` · seen 26.07.01–26.07.01
 
-**MADDIE**: Nice! Just <color=#338DFF>one more merge</color>!
+**MADDIE**: Nice! Just ****!
 
 ### MergeIntroGlovesMaxLevel
 `MergeIntroGlovesMaxLevel` · seen 22.02.06–26.07.01
@@ -15742,12 +15774,12 @@ Let's put it out, quickly!
 ### MergeIntroGlovesMaxLevel DTOB
 `MergeIntroGlovesMaxLevel_DTOB` · seen 26.07.01–26.07.01
 
-**MADDIE** (Encouraging): That's a <color=#338DFF>sturdy pair of gloves</color>! Let's clear the path.
+**MADDIE** (Encouraging): That's a ****! Let's clear the path.
 
 ### MergeIntroPruningShears
 `MergeIntroPruningShears` · seen 26.07.01–26.07.01
 
-**MADDIE** (Encouraging): Those are the <color=#338DFF>pruning shears</color> we need! Let's clear the path!
+**MADDIE** (Encouraging): Those are the **** we need! Let's clear the path!
 
 ### MergeIntroSecondMerge
 `MergeIntroSecondMerge` · seen 22.02.06–26.07.01
@@ -15758,7 +15790,7 @@ Let's put it out, quickly!
 ### MergeIntroSecondMerge Ideal
 `MergeIntroSecondMerge_Ideal` · seen 26.07.01–26.07.01
 
-**MADDIE**: Now let's <color=#338DFF>merge</color> these two.
+**MADDIE**: Now let's **** these two.
 
 ### MergeIntroTapSpawnMore
 `MergeIntroTapSpawnMore` · seen 22.02.06–26.07.01
@@ -15774,7 +15806,7 @@ Let's put it out, quickly!
 ### MergeIntroWheelbarrow
 `MergeIntroWheelbarrow` · seen 26.07.01–26.07.01
 
-**MADDIE**: A <color=#338DFF>Wheelbarrow</color>! That's exactly what we need!
+**MADDIE**: A ****! That's exactly what we need!
 
 ### Gallery: Display the moth
 `Moths` · seen 24.04.01–26.07.01
@@ -15847,8 +15879,9 @@ Let's put it out, quickly!
 **RODDY** (Discouraged): I’m doing my best to check, but a lot of the archived files have been thrown into the basement.
 **RODDY** (Worried): And it’s dark down there...
 
-### MusicianRoomAmplifier
+### Music Studio: MusicianRoomAmplifier
 `MusicianRoomAmplifier` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=MusicianRoomAmplifier, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Wow, this amplifier looks... complicated.
 **MADDIE** (Thinking): This is definitely some high-quality equipment!
@@ -15917,8 +15950,9 @@ Let's put it out, quickly!
 **MADDIE** (Relaxed): I remember fixing Grandma’s old one many times!
 **MADDIE** (Thinking): Although, it tended to eat a lot of tapes afterward...
 
-### MusicianRoomSheets
+### Music Studio: MusicianRoomSheets
 `MusicianRoomSheets` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=MusicianRoomSheets, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: Ooh, what's this? These look like music sheets...
 **MADDIE** (Surprised): I-I think it's the original sheet music for the hit song!
@@ -16381,8 +16415,9 @@ Let's put it out, quickly!
 **MADDIE** (Doubtful): This room looks like an office of some sort.
 **MADDIE** (Doubtful): I wonder who it belonged to?
 
-### OfficeOutro
+### The Office: OfficeOutro
 `OfficeOutro` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=OfficeOutro, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Discouraged): Well, apart from all the drama, it's been great to learn more about Charlie and his inventive mind. I-
 **MADDIE** (Surprised): *CRASH*
@@ -16539,10 +16574,10 @@ Let's put it out, quickly!
 **MADDIE** (Surprised): Pardon? Oh, I'm alright. Wondering where today's "gift" is.
 **RODDY** (Encouraging): I have it here, actually. I, uh, found it outside.
 **MADDIE** (Doubtful): Ooh! Is that a Christmas milkshake?
-**MADDIE** (Surprised): Feels like it weighs about <i>eight ounces</i>, too.
+**MADDIE** (Surprised): Feels like it weighs about _eight ounces_, too.
 **MADDIE** (Annoyed): It tastes delicious! But... oh no! What if it's poisoned?
 **RODDY** (Worried): Poisoned? Maddie, it's definitely not poisoned!
-**RODDY** (Charming): I just think, <i>someone</i> cares enough to send you all these things!
+**RODDY** (Charming): I just think, _someone_ cares enough to send you all these things!
 **MADDIE**: Well, alright. It is really tasty! But I wish I knew who "Santa" was!
 
 ### PE Christmas2022Eleventh Gift
@@ -16676,8 +16711,8 @@ Let's put it out, quickly!
 **GRANDMA** (Thinking): Have you figured out what the gifts mean?
 **MADDIE** (Joyous): Yes! It's gifts for the twelve days of Christmas.
 **RODDY** (Charming): Do you, uh, know who they're from?
-**GRANDMA** (Charming): They must be from your <b>true love</b>.
-**MADDIE** (Thinking): I don't have a true love! And I don't have <i>time</i> for love.
+**GRANDMA** (Charming): They must be from your **true love**.
+**MADDIE** (Thinking): I don't have a true love! And I don't have _time_ for love.
 **MADDIE** (Charming): To be honest, I'd rather imagine they really did come from Santa!
 **RODDY**: I - I mean, they - are probably glad the gifts made you smile.
 
@@ -17006,8 +17041,9 @@ Let's put it out, quickly!
 **WINSTON** (Charming): You truly are a Boulton worthy of their name.
 **MADDIE** (Charming): Anytime, Winston!
 
-### ParentsRoomOutro
+### Parents' Room: ParentsRoomOutro
 `ParentsRoomOutro` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoomOutro, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: All right... I’ve found what I can in here.
 **MADDIE**: And I’m happy that at least a part of my parents’ memory has been restored.
@@ -17344,8 +17380,9 @@ Let's put it out, quickly!
 **MADDIE** (Relaxed): Okay, bye.
 **VICTORIA** (Worried): I'LL BE BACK!
 
-### PerfumeryPOI LabDesk
+### The Perfumery: PerfumeryPOI_LabDesk
 `PerfumeryPOI_LabDesk` · seen 25.06.01–26.07.01
+- trigger: area, area=The Perfumery, areaId=PerfumeryPOI, phase=area story (exact task not dumped) (versions 25.06.01–26.07.01)
 
 **MADDIE**: This has to have been Lindsay's lab!
 **MADDIE** (Joyous): So many beakers and flasks full of interesting liquids...
@@ -17492,7 +17529,7 @@ Let's put it out, quickly!
 **MADDIE** (Annoyed): I wish I knew what was going on with her. She's always been secretive, but this?!
 **ANTIQUEDEALER** (Thinking): I'm sure she'll have a good reason for her secrets.
 **ANTIQUEDEALER** (Thinking): She's still your grandmother - whatever happened here. She's the same Ursula you've always known...
-**MADDIE** (Thinking): He's right! I shouldn't give up on her. This arrest <i>has</i> to be a mistake!
+**MADDIE** (Thinking): He's right! I shouldn't give up on her. This arrest _has_ to be a mistake!
 
 ### Plaza: Clear path
 `Plaza_Outro` · seen 23.09.02–26.07.01
@@ -17513,8 +17550,9 @@ Let's put it out, quickly!
 **MADDIE** (Doubtful): These vines must be poisonous and I'll need to be extra careful.
 **MADDIE** (Doubtful): It seems like someone really wanted to protect this room...
 
-### PoolHouseAfterarrest
+### The Pool House: PoolHouseAfterarrest
 `PoolHouseAfterarrest` · seen 23.09.02–26.07.01
+- trigger: area, area=The Pool House, areaId=PoolHouseAfterarrest, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): I can't believe it! Grandma was taken away by a cop car!!
 **MADDIE** (Thinking): Where did they take her?
@@ -17595,7 +17633,7 @@ Let's put it out, quickly!
 **MADDIE** (Frustrated): So all we can do is just wait? There must be something! Julius, think! Didn't you used to be a lawyer, can't you think of something?  
 **ANTIQUEDEALER** (Thinking): Well, we can bail her out. I just need to call the Bail Bondsman to make sure they will allow it. 
 **MADDIE** (Joyous): Yes! Let's do that! Once she's out she can help us proving her innocence. Thank you, Julius! I'm so happy you have your dark history as a lawyer. 
-**ANTIQUEDEALER** (Discouraged): <i>Dark</i> history indeed...
+**ANTIQUEDEALER** (Discouraged): _Dark_ history indeed...
 **MADDIE** (Thinking): What do you mean? I was only joking.
 **ANTIQUEDEALER**: Umm... Eh. Nothing. Let's just get Ursula out of jail. Gives me the creeps just thinking about her in there all alone. 
 **ANTIQUEDEALER**: I'll go and make the call right now.
@@ -17638,7 +17676,7 @@ Let's put it out, quickly!
 
 **DOG** (Doubtful): Grr...
 **MADDIE** (Surprised): What's gotten into you?
-**DOG** (Doubtful): <i>Grrrr!</i>
+**DOG** (Doubtful): _Grrrr!_
 **RODDY** (Surprised): Easy there, killer. I just want to be friends.
 **RODDY** (Thinking): Maybe next time then.
 **MADDIE** (Charming): You might have to fight for that relationship, Roddy!
@@ -17653,7 +17691,7 @@ Let's put it out, quickly!
 `PouchIntro` · seen 23.11.02–26.07.01
 
 **MADDIE** (Joyous): You can find your rewards in the Pouch, even when your Board is full.
-<color=#338DFF>Tap</color> it to get your rewards on the Board.
+**** it to get your rewards on the Board.
 
 ### ProducerBooster — item discovered: Producer Booster
 `ProducerFtue` · seen 23.11.02–26.07.01
@@ -17666,21 +17704,21 @@ Let's put it out, quickly!
 `ProducerIntroBroomCabinet5` · seen 23.11.02–26.07.01
 - trigger: item, event=ProducerItems, eventKey=ProducerItems, itemKeys=['BroomCabinet_05'], items=['Cabinet Frame'], moment=item discovered (versions 23.11.02–26.07.01)
 
-**MADDIE** (Encouraging): You found a <color=#338DFF>Broom Cabinet</color>!
+**MADDIE** (Encouraging): You found a ****!
 Tap to see what it holds.
 
 ### ProducerItems — item discovered: Drawer Boxes
 `ProducerIntroDrawer4` · seen 23.11.02–26.07.01
 - trigger: item, event=ProducerItems, eventKey=ProducerItems, itemKeys=['Drawer_04'], items=['Drawer Boxes'], moment=item discovered (versions 23.11.02–26.07.01)
 
-**MADDIE** (Encouraging): You found a <color=#338DFF>Drawer</color>!
+**MADDIE** (Encouraging): You found a ****!
 Use the items inside to clear more cobwebs
 
 ### ProducerItems — item discovered: Polished Flower Pot
 `ProducerIntroFlowerpot6` · seen 23.11.02–26.07.01
 - trigger: item, event=ProducerItems, eventKey=ProducerItems, itemKeys=['Flowerpot_06'], items=['Polished Flower Pot'], moment=item discovered (versions 23.11.02–26.07.01)
 
-**MADDIE** (Encouraging): You found a <color=#338DFF>Flowerpot</color>!
+**MADDIE** (Encouraging): You found a ****!
 Tap to see what it holds.
 
 ### ProducerItems — item discovered: Medium Tool Barrel
@@ -17688,42 +17726,42 @@ Tap to see what it holds.
 - trigger: item, event=ProducerItems, eventKey=ProducerItems, itemKeys=['GardenToolBarrel_05'], items=['Medium Tool Barrel'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **MADDIE** (Relaxed): Merging two producers creates an upgraded producer!
-Your <color=#338DFF>Tool Barrel</color> now produces better items.
+Your **** now produces better items.
 
 ### ProducerItems — item discovered: Filled Toolbox
 `ProducerIntroToolbox4` · seen 23.11.02–26.07.01
 - trigger: item, event=ProducerItems, eventKey=ProducerItems, itemKeys=['Toolbox_04'], items=['Filled Toolbox'], moment=item discovered (versions 23.11.02–26.07.01)
 
-**MADDIE** (Encouraging): You found a <color=#338DFF>Toolbox</color>!
+**MADDIE** (Encouraging): You found a ****!
 Tap to see what it holds.
 
 ### ProducerItems — item discovered: Toy Car Project
 `ProducerIntroToyCar5` · seen 23.11.02–26.07.01
 - trigger: item, event=ProducerItems, eventKey=ProducerItems, itemKeys=['ToyCar_05'], items=['Toy Car Project'], moment=item discovered (versions 23.11.02–26.07.01)
 
-**MADDIE** (Encouraging): You found a <color=#338DFF>Toy Car</color>!
+**MADDIE** (Encouraging): You found a ****!
 Tap to see what it holds.
 
 ### ProducerInventory FTUE
 `ProducerInventory_FTUE` · seen 23.11.02–26.07.01
 
-**MADDIE** (Joyous): You unlocked <color=#338DFF>Producer Inventory</color>!  
+**MADDIE** (Joyous): You unlocked ****!  
   _earlier:_ ~~Good job!
 Additional <color=#338DFF>Inventory</color> space was unlocked!
 
 Tap to switch between Inventories~~ (until 24.09.02)
-**MADDIE** (Encouraging): <color=#338DFF>Producer Inventory</color> allows you to store <color=#338DFF>Producers</color> and their parts
+**MADDIE** (Encouraging): **** allows you to store **** and their parts
 
 That will come in handy!
 **MADDIE** (Encouraging): One thing to keep in mind -
-<color=#338DFF>Producers</color> are paused when they are placed in the <color=#338DFF>Inventory!</color>
-**MADDIE** (Encouraging): You can <color=#338DFF>earn more</color> producer inventory slots by <color=#338DFF>progressing</color> in the game.
+**** are paused when they are placed in the ****
+**MADDIE** (Encouraging): You can **** producer inventory slots by **** in the game.
 
 ### ProducerInventory Locked FTUE
 `ProducerInventory_Locked_FTUE` · seen 25.05.01–26.07.01
 
 **MADDIE** (Encouraging): Good job!
-You discovered additional <color=#338DFF>Inventory</color> space!
+You discovered additional **** space!
 
 Play further to fully unlock it
 
@@ -17785,9 +17823,9 @@ Play further to fully unlock it
 **RODDY** (Surprised): Oh no! Maddie, you must know I never meant anything bad to happen to her.
 **MADDIE** (Doubtful): Dress to impress, right? Let's get to it, then!
 
-### RomanticSpotCarWithFlowers
+### Romantic Spot: RomanticSpotCarWithFlowers
 `RomanticSpotCarWithFlowers` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: area, area=Romantic Spot, areaId=RomanticSpotCarWithFlowers, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Don't tell me someone used to drive this old thing? It's a wreck!
 **GRANDMA**: True, but at one time, it was your father's pride and joy.
@@ -17808,17 +17846,17 @@ Play further to fully unlock it
 **MADDIE** (Worried): What, uh, what exactly happened to my parents?
 **MADDIE** (Discouraged): I really want to know, Grandma.
 **GRANDMA** (Annoyed): And I really don't want to talk about it, dearie!
-**GRANDMA**: I <b>do</b> want to go and watch a horror film, though. Goodbye!
+**GRANDMA**: I **do** want to go and watch a horror film, though. Goodbye!
 **MADDIE** (Thinking): Huh. She might not want to talk about it, but one day, I will find out what happened to my mom and dad!
 
-### RomanticSpotEndOfEventChain
+### Romantic Spot: RomanticSpotEndOfEventChain
 `RomanticSpotEndOfEventChain` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: area, area=Romantic Spot, areaId=RomanticSpotEndOfEventChain, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 
-### RomanticSpotFlowerBeds
+### Romantic Spot: RomanticSpotFlowerBeds
 `RomanticSpotFlowerBeds` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: area, area=Romantic Spot, areaId=RomanticSpotFlowerBeds, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **GRANDMA**: Well, here you go. This is the place my Michael first saw Becky!
 **MADDIE** (Thinking): My parents first met by some flowers?
@@ -17828,14 +17866,14 @@ Play further to fully unlock it
 **GRANDMA** (Thinking): It would be years and years until she felt the same way as him.
 **MADDIE** (Encouraging): Tell me more!
 
-### RomanticSpotIntro
+### Romantic Spot: RomanticSpotIntro
 `RomanticSpotIntro` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: area, area=Romantic Spot, areaId=RomanticSpotIntro, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 
-### RomanticSpotOldTree
+### Romantic Spot: RomanticSpotOldTree
 `RomanticSpotOldTree` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: area, area=Romantic Spot, areaId=RomanticSpotOldTree, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Grandma, do you see this?! It says 'Becky loves Mikey' on it!
 **MADDIE** (Thinking): My Mom must have carved it into the tree!
@@ -17843,9 +17881,9 @@ Play further to fully unlock it
 **MADDIE** (Joyous): Really? Oh, Grandma, will you tell me about them? I... I'd love to know more about my parents.
 **GRANDMA** (Discouraged): Well, alright, but I need some time to gather my memories. This isn't easy to talk about, you know.
 
-### RomanticSpotOpening
+### Romantic Spot: RomanticSpotOpening
 `RomanticSpotOpening` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: area, area=Romantic Spot, areaId=RomanticSpotOpening, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): What a cute little part of the estate!
 **MADDIE** (Thinking): I wonder if it has any clues about what happened between Grandma and Grandpa?
@@ -18050,12 +18088,12 @@ Play further to fully unlock it
 - trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot05, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 **DEB** (Joyous): May I introduce you to the Hopeberry Juice Woman!
-**DEB** (Encouraging): The new face to the new and <b>improved</b> hopeberry juice! Go on... Have a taste.
+**DEB** (Encouraging): The new face to the new and **improved** hopeberry juice! Go on... Have a taste.
 **MADDIE** (Worried): *sip* Oh! Eehh... That's... different.
 **GRANDMA** (Worried): My gosh, Deb... What did you put in this?! This isn't my recipe!
 **DEB** (Doubtful): It isn't sis, you write recipes like a mad scientist. I'm an artist!
 **GRANDMA** (Surprised): I mean... It isn't bad! It just has a-
-**DEB** (Relaxed): A wonderful bouquet? <b>That</b> is the secret ingredient! 
+**DEB** (Relaxed): A wonderful bouquet? **That** is the secret ingredient! 
 
 ### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot06
 `SE_HopeberryFestival2023_Decoration_Slot06_Dialogue` · seen 23.09.02–25.06.01
@@ -18064,7 +18102,7 @@ Play further to fully unlock it
 **MADDIE**: That's a fancy looking statue! Er... What is it?
 **DEB**: It's the hopeberry of course!
 **MADDIE** (Encouraging): Oh! Okay! If I... squint my eyes and...
-**DEB** (Relaxed): Aaanyway, it was custom made by a <b>dashing</b> young artist new to town. I think his name was Hank?
+**DEB** (Relaxed): Aaanyway, it was custom made by a **dashing** young artist new to town. I think his name was Hank?
 **MADDIE** (Relaxed): You're going to ask him out, aren't you...
 **DEB** (Charming): Oh please, sweetie... I already have!
 
@@ -18096,9 +18134,9 @@ Play further to fully unlock it
 **MADDIE**: Hi Deb! I heard you wanted to run the Hopeberry Festival this year! 
 **MADDIE**: I was wondering if you needed any help? 
 **DEB**: No need, sweetie, no need! I have it all under control! This wheel will help me find the right flavors.
-**MADDIE** (Charming): Sounds more like <b>luck</b> to me!
+**MADDIE** (Charming): Sounds more like **luck** to me!
 **DEB** (Surprised): No such thing as luck sweetie. It is destiny! My psychic, Lady Voyance, said so... 
-**DEB** (Thinking): All I have to do is spin this wheel and I'll know <b>exactly</b> what ingredients I need.
+**DEB** (Thinking): All I have to do is spin this wheel and I'll know **exactly** what ingredients I need.
 **MADDIE** (Encouraging): Okay... Good luck with that.
 **DEB** (Thinking): Thank y- Hey!
 
@@ -18111,7 +18149,7 @@ Play further to fully unlock it
 **DEB** (Relaxed): I know... I guess I'm always in need of strapping young lads, like yourself.
 **RODDY** (Worried): Oh... Erm... Okay.
 **MADDIE** (Doubtful): Hey! I thought you said you didn't need any help!
-**DEB** (Encouraging): Maddie! Sweetie... Of course I need help, but only in the more <b>physical</b> sense. Ha ha!
+**DEB** (Encouraging): Maddie! Sweetie... Of course I need help, but only in the more **physical** sense. Ha ha!
 **MADDIE** (Annoyed): Right... Anyway, I'll stick around to help you get everything set up...
 **DEB** (Relaxed): Well, Roddy... I think I saw a bit of jealousy in her eyes!
 **RODDY** (Charming): Re- Really?!
@@ -18135,7 +18173,7 @@ Play further to fully unlock it
 **MADDIE**: How's the hopeberry juice coming along? 
 **DEB** (Worried): Well... It is quite interesting. The recipe isn't the easiest to follow, you know.
 **MADDIE** (Doubtful): What do you mean? 
-**DEB** (Doubtful): Well, there are so many steps and ingredients and it's... <b>Boring.</b>
+**DEB** (Doubtful): Well, there are so many steps and ingredients and it's... **Boring.**
 **MADDIE** (Thinking): Boring? It's a recipe, Deb. It's supposed to be boring.
 **DEB** (Thinking): Take a look for yourself then...
 **MADDIE** (Surprised): "Bring your solution to the point of ebullition and let it reach congealment, then dilute your gel in a mixture of citric acid and dihydrogen monoxide..."
@@ -18612,7 +18650,7 @@ Play further to fully unlock it
 `SP_AmyTheCat2023_AllRewardsCompleted_Dialogue` · seen 23.09.02–26.07.01
 - trigger: event, event=Amy's Mystery, eventId=SP_AmyTheCat2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-**MADDIE**: <i>*knock knock*</i>
+**MADDIE**: _*knock knock*_
 **MADDIE**: Hello, can I help you?
 **EMILIO**: Hi, I’m Emilio Costa, a marine biologist. You called about some expatriated fish?
 **MADDIE** (Surprised): ...
@@ -18620,7 +18658,7 @@ Play further to fully unlock it
 **MADDIE** (Relaxed): Oh, oh yes! Of course, let me show you. There’s been this cat and she’s been-
 **EMILIO** (Surprised): Amy!
 **AMY** (Relaxed): Meow! Purr... Purr...
-**MADDIE** (Encouraging): Ah, she's <b>your</b> cat! That must explain the fish then!
+**MADDIE** (Encouraging): Ah, she's **your** cat! That must explain the fish then!
 **EMILIO**: Here they are! Amy... Have you been bringing this beautiful lady my fish?
 **MADDIE** (Charming): Oh! Erhm...
 **EMILIO** (Encouraging): My deepest apologies. She tends to do this with people she likes. You must be a good person at heart.
@@ -18647,7 +18685,7 @@ Play further to fully unlock it
 - trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot26, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE**: There! I dare any cat to ignore the majesty of...
-**MADDIE** (Joyous): <b>KITTY CASTLE!</b>
+**MADDIE** (Joyous): **KITTY CASTLE!**
 **AMY**: Meow...
 **MADDIE**: A ha! Never in doubt. Now, little Amy, let’s see who your owner is, shall we?
 **DEB**: Looks like the cat dropped something.
@@ -19881,8 +19919,8 @@ Play further to fully unlock it
 **GRANDMA** (Relaxed): These are my friends. We are all members of a little hobby group.
 **MADDIE** (Thinking): That's quite the hobby group...
 **GRANDMA** (Joyous): Well, we all enjoy a good kicker with some farkle, but a citizen like you would probably not understand such things.
-**MADDIE** (Surprised): What language was <b>that</b>?
-**GRANDMA**: <b>That </b>was biker slang. This is our biker gang, the Grannies of Anarchy.
+**MADDIE** (Surprised): What language was **that**?
+**GRANDMA**: **That **was biker slang. This is our biker gang, the Grannies of Anarchy.
 **JACKIE** (Doubtful): Ha! So I was right!
 
 ### Grannies of Anarchy — decoration SP_GranniesOfAnarchy2023_Decoration_Slot26
@@ -19904,7 +19942,7 @@ Play further to fully unlock it
 **GRANDMA** (Doubtful): When we started our motorcycle club, people just did not take us seriously.
 **GRANDMA** (Doubtful): So, we were forced to break the rules every now and again.
 **GRANDMA** (Joyous): We did ruffle some feathers, too.
-**MADDIE** (Thinking): Your biker club looks like a wild bunch! But what exactly do you <b>do</b>?
+**MADDIE** (Thinking): Your biker club looks like a wild bunch! But what exactly do you **do**?
 **GRANDMA**: Burn rubber and stand up against the man, of course!
 **MADDIE** (Doubtful): Oh? So things sometimes get out of hand?
 **GRANDMA** (Doubtful): Whatever do you mean?
@@ -19921,7 +19959,7 @@ Play further to fully unlock it
 **GRANDMA** (Doubtful): What kind of crimes did you have in mind?
 **MADDIE** (Worried): Murder?
 **GRANDMA** (Surprised): Murder?? You should get your ears checked, dearie.
-**GRANDMA** (Doubtful): Oh, now I understand. My friend Mama said that we need a new <b>recorder.</b> You must have misheard her!
+**GRANDMA** (Doubtful): Oh, now I understand. My friend Mama said that we need a new **recorder.** You must have misheard her!
 **MADDIE** (Thinking): I guess that could've been it, but...
 **GRANDMA** (Joyous): That's settled then!
 
@@ -19956,7 +19994,7 @@ Play further to fully unlock it
 - trigger: item, event=Grannies of Anarchy, eventKey=SP_GranniesOfAnarchy2023, itemKeys=['SP_GranniesOfAnarchy2023_CollectableItems_04'], items=['Leather Jacket'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **MADDIE** (Worried): Did you just hear those ladies whisper something about a murder?
-**JACKIE** (Thinking): They <b>are </b>a biker gang, but murder? Then again, those knitting needles look pretty sharp...
+**JACKIE** (Thinking): They **are **a biker gang, but murder? Then again, those knitting needles look pretty sharp...
 **JACKIE** (Doubtful): What are they doing - drawing up a biker granny hit list?
 **MADDIE** (Doubtful): I think we need to dig a little deeper. Come on, Jackie. Let's see what these biking buddies are up to!
 
@@ -21753,17 +21791,17 @@ Play further to fully unlock it
 
 **RINGLEADER** (Calling): *Ringggg!*
 **MADDIE** (Calling): Hello?
-**RINGLEADER** (Calling): <i>This is Fiona DuVal, ringmaster of the circus.</i>  
+**RINGLEADER** (Calling): _This is Fiona DuVal, ringmaster of the circus._  
   _(1 cosmetic edit not shown)_
-**RINGLEADER** (Calling): <i>I'm calling to thank you for all of your help... and to let you know that unfortunately there is a TEENY problem.</i>
+**RINGLEADER** (Calling): _I'm calling to thank you for all of your help... and to let you know that unfortunately there is a TEENY problem._
 **MADDIE** (Talking): Phew, at least it's not a BIG problem.
-**RINGLEADER** (Calling): <i>Actually, it is.</i>
-**RINGLEADER** (Calling): <i>To cut a long story short, we won't be able to make it in time for the big show.</i>
+**RINGLEADER** (Calling): _Actually, it is._
+**RINGLEADER** (Calling): _To cut a long story short, we won't be able to make it in time for the big show._
 **MADDIE** (Surprised): W-what?
-**RINGLEADER** (Calling): <i>You wouldn't be able to stand in for us somehow, would you?</i>
-**RINGLEADER** (Calling): <i>I know I'm asking for a lot, but I'm quite desperate.</i>
+**RINGLEADER** (Calling): _You wouldn't be able to stand in for us somehow, would you?_
+**RINGLEADER** (Calling): _I know I'm asking for a lot, but I'm quite desperate._
 **MADDIE** (Talking): But I haven't got the first idea about putting on a circus show!
-**RINGLEADER** (Calling): <i>Ask your Grandma. She'll know.</i>
+**RINGLEADER** (Calling): _Ask your Grandma. She'll know._
 
 ### Carousel of Confessions — item discovered: Gum Balls
 `SP_Ringmaster2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
@@ -21877,7 +21915,7 @@ Play further to fully unlock it
 **RODDY** (Relaxed): Oh, hi Maddie! Come to check out "Camp Wilderness"?
 **MADDIE** (Relaxed): Actually, yes! I heard you were running summer camp here this summer, and I didn't quite believe it.
 **RODDY**: Yeah, I usually run summer camp out of state, but some kids couldn't make it this year.
-**RODDY** (Thinking): So I thought, <i>Why not bring summer camp home?</i> So I uhh.. So I did! Your grandma was very generous to let me use her yard!
+**RODDY** (Thinking): So I thought, _Why not bring summer camp home?_ So I uhh.. So I did! Your grandma was very generous to let me use her yard!
 **MADDIE** (Charming): That's so sweet of you!
 **RODDY** (Worried): Really? I wasn't trying to impress you or-
 **MADDIE** (Encouraging): Ha ha! It's a compliment, Roddy! 
@@ -22004,29 +22042,29 @@ Play further to fully unlock it
 **EMILIO** (Encouraging): Give her a chance. Underneath all the other stuff, she's great really, I promise.
 **MADDIE** (Worried): I'll do my best, I promise.
 
-### SP SplashMystery2025 Deco 25 Dialogue
+### Splash of Mystery — part of the event (exact trigger not dumped)
 `SP_SplashMystery2025_Deco_25_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Splash of Mystery, eventId=SP_SplashMystery2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 
-### SP SplashMystery2025 Deco 26 Dialogue
+### Splash of Mystery — part of the event (exact trigger not dumped)
 `SP_SplashMystery2025_Deco_26_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Splash of Mystery, eventId=SP_SplashMystery2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 
-### SP SplashMystery2025 Deco 27 Dialogue
+### Splash of Mystery — part of the event (exact trigger not dumped)
 `SP_SplashMystery2025_Deco_27_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Splash of Mystery, eventId=SP_SplashMystery2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 
-### SP SplashMystery2025 Deco 28 Dialogue
+### Splash of Mystery — part of the event (exact trigger not dumped)
 `SP_SplashMystery2025_Deco_28_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Splash of Mystery, eventId=SP_SplashMystery2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 
-### SP SplashMystery2025 Deco 29 Dialogue
+### Splash of Mystery — part of the event (exact trigger not dumped)
 `SP_SplashMystery2025_Deco_29_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Splash of Mystery, eventId=SP_SplashMystery2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 
 ### Splash of Mystery — decoration SP_SplashMystery2025_Decoration_Slot34
@@ -22680,7 +22718,7 @@ Play further to fully unlock it
 - trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot29, event=Valentine's Mystery, eventKey=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): A ring?
-**MASON** (Surprised): I <b>definitely</b> didn't order that!
+**MASON** (Surprised): I **definitely** didn't order that!
 **MADDIE** (Joyous): That's a beautiful ring! It kinda looks like an engagement ring...
 **HANK** (Surprised): I'll take that!
 **MADDIE** (Surprised): Wha... Is it yours, Hank??
@@ -23356,7 +23394,7 @@ Play further to fully unlock it
 
 **JACKIE** (Joyous): Well done Maddie, it opened! And is that a... notebook inside?
 **MADDIE** (Discouraged): Huh, there's nothing to help Grandma in here! Just lots of drawings and numbers. 
-**MADDIE** (Thinking): But this <b>Maze</b> looks like the one on the grounds, and it has the number '1' written above it. I guess I'll go there next!
+**MADDIE** (Thinking): But this **Maze** looks like the one on the grounds, and it has the number '1' written above it. I guess I'll go there next!
 **JACKIE** (Charming): Thanks for letting me help and hang out, Maddie. I hope this notebook leads to whatever you're looking for!
 
 ### Scavenger Hunt: Clean and search the statue
@@ -25075,7 +25113,7 @@ Play further to fully unlock it
 ### StartOpeningTheFirstChest DTOB
 `StartOpeningTheFirstChest_DTOB` · seen 26.07.01–26.07.01
 
-**MADDIE**: A <color=#338DFF>treasure chest</color>! This may take a while to open, let's get started!  
+**MADDIE**: A ****! This may take a while to open, let's get started!  
   _earlier:_ ~~Looks like a treasure chest. They can take time to open, so let's start now!~~ (until 23.11.02)
 
 ### Bathroom: Make it shine
@@ -25212,8 +25250,9 @@ Play further to fully unlock it
 **JACKIE** (Doubtful): I guess nothing has changed, huh?
 **MADDIE** (Thinking): I guess not...
 
-### StudyComputer
+### Study: StudyComputer
 `StudyComputer` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=StudyComputer, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): This is an old computer!
 **JACKIE** (Encouraging): Old but reliable! We still use these at work!
@@ -25232,8 +25271,9 @@ Play further to fully unlock it
 **JACKIE** (Doubtful): Uhmm... Are you sure?
 **MADDIE** (Thinking): Only one way to find out!
 
-### StudyInsertingPassword
+### Study: StudyInsertingPassword
 `StudyInsertingPassword` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=StudyInsertingPassword, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Joyous): It... It worked! I think I unlocked something!
 **JACKIE** (Doubtful): I can’t believe that was the password...
@@ -25264,8 +25304,9 @@ Play further to fully unlock it
 **MADDIE** (Surprised): They look like some sort of code that is leading me to something!
 **MADDIE** (Thinking): But where? ...are they page numbers?
 
-### StudyOutro
+### Study: StudyOutro
 `StudyOutro` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=StudyOutro, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Thinking): It’s a trapdoor! Hmm... This lock has a very strange looking key hole, I wonder if-
 **JACKIE** (Surprised): Do you smell that? Is something on fire?!
@@ -25382,7 +25423,7 @@ Play further to fully unlock it
 **ANTIQUEDEALER** (Thinking): Were you about to play a game?
 **MADDIE** (Frustrated): I... well, I don't know how to play! Grandma never taught me. She says she doesn't like tennis.
 **MADDIE** (Surprised): Hey, look down there! I think there's a photo sticking out of the bush.
-**MADDIE** (Surprised): I don't believe it - this is Grandma and her sister Deb! And they're <b>playing tennis</b>! Why would she lie about hating it?
+**MADDIE** (Surprised): I don't believe it - this is Grandma and her sister Deb! And they're **playing tennis**! Why would she lie about hating it?
 **ANTIQUEDEALER** (Thinking): I, ahem, have no idea! Goodness, is that the time? I must dash...
 **MADDIE** (Thinking): Hmmm, that was strange! Grandma lied about tennis, and Julius ran away. I'm going to call Deb and find out more!
 
@@ -25398,7 +25439,7 @@ Play further to fully unlock it
 **DEB** (Doubtful): She didn't tell you, huh? Well, let's just say that your Grandma was a sore loser when it came to tennis!
 **DEB** (Thinking): Tell me, Maddie - what do you know about the family treasure?
 **MADDIE** (Thinking): Uh, nothing, but I'm all ears.
-**DEB**: Well, I don't want to say too much, but I'm sure it's here. You should look for it - see if you can find <b>my</b> missing treasure!
+**DEB**: Well, I don't want to say too much, but I'm sure it's here. You should look for it - see if you can find **my** missing treasure!
 
 ### Tennis Court: Remove old court markings
 `TennisCourtDialogueC` · seen 23.09.02–26.07.01
@@ -25697,9 +25738,9 @@ Play further to fully unlock it
 **MADDIE** (Worried): I understand, it is quite... heavy.
 **MADDIE**: Well, I'll make sure to fix it up now so we can visit more often!
 
-### Tomb20 Outro
+### The Tomb: Tomb20_Outro
 `Tomb20_Outro` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Where lilies bloom... Wait! This inscription is meant for Grandma to understand!
 **MADDIE** (Surprised): It must be some sort of riddle! It talks about a serpent's gaze... Hey! The snake on this memorial!
@@ -25882,9 +25923,9 @@ Play further to fully unlock it
 **MADDIE** (Surprised): Was someone visiting this memorial recently?
 **MADDIE** (Surprised): I wonder who this could be...
 
-### Tomb 20 Outro Dialogue
+### The Tomb: Tomb_20_Outro_Dialogue
 `Tomb_20_Outro_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 
 ### Toolbag
@@ -26459,8 +26500,9 @@ Play further to fully unlock it
 **MADDIE** (Surprised): It's ice cold!
 **HEIKKI** (Surprised): Of course it is! It's the secret to a good sauna, you know...
 
-### WaterGardenStatueFinished
+### Frog Pond Falls: WaterGardenStatueFinished
 `WaterGardenStatueFinished` · seen 22.02.06–26.07.01
+- trigger: area, area=Frog Pond Falls, areaId=WaterGardenStatueFinished, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **GRANDMA** (Worried): I first met Grandpa Charlie right here beneath this frog.
 **MADDIE** (Surprised): You met him in the garden?
@@ -26469,8 +26511,9 @@ Play further to fully unlock it
 **GRANDMA** (Encouraging): It was like a fairy tale. He was my very own frog prince...
 **MADDIE** (Encouraging): ... don't you have a pie in the oven or something?
 
-### WaterGardenStatueRevealed
+### Frog Pond Falls: WaterGardenStatueRevealed
 `WaterGardenStatueRevealed` · seen 22.02.06–26.07.01
+- trigger: area, area=Frog Pond Falls, areaId=WaterGardenStatueRevealed, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE**: Wow, a giant frog!
 **GRANDMA** (Doubtful): My grandfather said it came from Japan, a gift to Ignatius.

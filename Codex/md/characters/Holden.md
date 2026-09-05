@@ -184,7 +184,7 @@ Every story in which Holden speaks.
 **HOLDEN** (Surprised): I heard he controls birds, and speaks some weird wizard language. He's a total weirdo, anyway.
 **MADDIE** (Encouraging): You should get on with your photography, Holden. I want to, uh, take a walk up there.
 **HOLDEN**: Alright, but don't say I didn't warn you. And Maddie? You really need to get a jump on the mansion repairs...
-**HOLDEN** (Charming): My boss really has it in for you, and you <b>don't</b> want to make an enemy of her. Bye!
+**HOLDEN** (Charming): My boss really has it in for you, and you **don't** want to make an enemy of her. Bye!
 **MADDIE** (Thinking): Ugh! Okay. Someone hiding up at the Lighthouse for years could be Grandpa Charlie! Let's find out.
 
 ### Lighthouse: Remove rocks
@@ -195,7 +195,7 @@ Every story in which Holden speaks.
 **HOLDEN** (Worried): Ugh, why are you up here? You're supposed to stay away from the Wizard of the Lighthouse!
 **MADDIE** (Surprised): Wizard? And what are you doing here?
 **HOLDEN**: I've come to take more photos, obviously. Turns out I missed a few spots when I was here last time.
-**HOLDEN** (Charming): I did get some <i>amazing</i> selfies in, though. Anyway, yeah, this place is rumor central and you should stay away!
+**HOLDEN** (Charming): I did get some _amazing_ selfies in, though. Anyway, yeah, this place is rumor central and you should stay away!
 **MADDIE** (Surprised): What rumors?! I need to know more before I go up!
 
 ### Maddie's Room: Ignore Holden

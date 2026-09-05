@@ -169,14 +169,14 @@ Every story in which Ringleader speaks.
 
 **RINGLEADER** (Calling): *Ringggg!*
 **MADDIE** (Calling): Hello?
-**RINGLEADER** (Calling): <i>This is Fiona DuVal, ringmaster of the circus.</i>  
+**RINGLEADER** (Calling): _This is Fiona DuVal, ringmaster of the circus._  
   _(1 cosmetic edit not shown)_
-**RINGLEADER** (Calling): <i>I'm calling to thank you for all of your help... and to let you know that unfortunately there is a TEENY problem.</i>
+**RINGLEADER** (Calling): _I'm calling to thank you for all of your help... and to let you know that unfortunately there is a TEENY problem._
 **MADDIE** (Talking): Phew, at least it's not a BIG problem.
-**RINGLEADER** (Calling): <i>Actually, it is.</i>
-**RINGLEADER** (Calling): <i>To cut a long story short, we won't be able to make it in time for the big show.</i>
+**RINGLEADER** (Calling): _Actually, it is._
+**RINGLEADER** (Calling): _To cut a long story short, we won't be able to make it in time for the big show._
 **MADDIE** (Surprised): W-what?
-**RINGLEADER** (Calling): <i>You wouldn't be able to stand in for us somehow, would you?</i>
-**RINGLEADER** (Calling): <i>I know I'm asking for a lot, but I'm quite desperate.</i>
+**RINGLEADER** (Calling): _You wouldn't be able to stand in for us somehow, would you?_
+**RINGLEADER** (Calling): _I know I'm asking for a lot, but I'm quite desperate._
 **MADDIE** (Talking): But I haven't got the first idea about putting on a circus show!
-**RINGLEADER** (Calling): <i>Ask your Grandma. She'll know.</i>
+**RINGLEADER** (Calling): _Ask your Grandma. She'll know._

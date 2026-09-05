@@ -583,7 +583,7 @@ Every story in which Pearl speaks.
 - trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: SILENCE! Malzar will now begin.
-**MALZAR**: <i>A whispered thought, a shifting glance. Plans arise as shadows dance.</i>
+**MALZAR**: _A whispered thought, a shifting glance. Plans arise as shadows dance._
 **PEARL** (Thinking): Does that mean someone's been planning something? Usually that's me...
 **PEARL** (Thinking): But it does sound an awful lot like a certain older lady I know.
 **LADY VOYANCE** (Thinking): Uh-huh. But when it comes to secrets, I must advise caution!
@@ -592,7 +592,7 @@ Every story in which Pearl speaks.
 `CBE_VoyancesVisions_MalzarBActive_01B_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
-**MALZAR**: <i>The truth revealed, yet none behold. Hidden deep within the bold.</i>
+**MALZAR**: _The truth revealed, yet none behold. Hidden deep within the bold._
 **PEARL** (Thinking): OK, I'm lost. What does he mean?
 **LADY VOYANCE**: That is for YOU to find out, dear!
 **LADY VOYANCE** (Thinking): In any case, I'm only right nine times out of ten.
@@ -602,7 +602,7 @@ Every story in which Pearl speaks.
 - trigger: event, eventType=event story, event=Voyance's Visions, eventId=CBE_VoyancesVisions, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Calling): Speak, Malzar!
-**MALZAR**: <i>A shadow waits as coins are weighed. In silent loss, their fortune fades.</i>
+**MALZAR**: _A shadow waits as coins are weighed. In silent loss, their fortune fades._
 **PEARL** (Doubtful): I always knew that the people in this town have secrets, but wow...
 **PEARL** (Doubtful): So someone is afraid of losing their fortune and their position...
 **LADY VOYANCE**: A common fear, my dear.
@@ -1307,7 +1307,7 @@ Every story in which Pearl speaks.
 - trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot29, event=Valentine's Mystery, eventKey=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): A ring?
-**MASON** (Surprised): I <b>definitely</b> didn't order that!
+**MASON** (Surprised): I **definitely** didn't order that!
 **MADDIE** (Joyous): That's a beautiful ring! It kinda looks like an engagement ring...
 **HANK** (Surprised): I'll take that!
 **MADDIE** (Surprised): Wha... Is it yours, Hank??

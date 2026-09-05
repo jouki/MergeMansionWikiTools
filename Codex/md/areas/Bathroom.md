@@ -159,6 +159,29 @@
 **ASH** (Encouraging): Haha! A thank you will do for now, but just don't forget to pay the bill!
 **ASH** (Encouraging): *Wink*
 
+### Bathroom: BathroomIntro
+`BathroomIntro` · seen 23.11.02–26.07.01
+- trigger: area, area=Bathroom, areaId=BathroomIntro, phase=area story (exact task not dumped) (versions 23.11.02–26.07.01)
+
+**MADDIE**: There! Got the door open with the crowbar!
+**MADDIE**: Now, to see where that water is coming fro-
+**MADDIE** (Surprised): Oh NO!
+**MADDIE** (Discouraged): Nonononono!
+**MADDIE** (Frustrated): Gosh darn it, does anything work in this mansion?!
+**WINSTON** (Doubtful): I see you have a leak, ma'am...
+**MADDIE** (Annoyed): Jeez, what gave you that idea?!
+**WINSTON** (Worried): Sarcasm will not be of much use, I'm afraid...
+**WINSTON** (Worried): May I recommend that you call a plumber instead, ma'am?
+**MADDIE** (Worried): *Sigh* I think you're right...
+
+### Bathroom: BathroomLeak
+`BathroomLeak` · seen 23.09.02–26.07.01
+- trigger: area, area=Bathroom, areaId=BathroomLeak, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE** (Joyous): This key looks exactly like the sketch behind the photo!
+**MADDIE** (Joyous): It has to be the gallery key! I can't wait to open it!
+**MADDIE** (Worried): Wait, do I hear water running? Oh nooo!
+
 ### Bathroom: Place fixed rug
 `BlueRug` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomPlaceBRRugFb3, phase=task completed, task=Place fixed rug (versions 24.04.01–26.07.01)

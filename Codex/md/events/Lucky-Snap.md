@@ -210,11 +210,11 @@
 `LS_LuckySnap2024_RockDove_Dialogue` · seen 25.05.01–26.07.01
 - trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_LuckySnap2024_Common_RockDove_01'], items=['Rock Dove'], moment=item discovered (versions 25.05.01–26.07.01)
 
-**ANTIQUEDEALER**: I can see a <i>Columba livia!</i>
+**ANTIQUEDEALER**: I can see a _Columba livia!_
 **MADDIE** (Surprised): Really? Where??
 **ANTIQUEDEALER**: Right there, on the bird feeder.
 **MADDIE** (Thinking): All I can see is a big pigeon.
-**ANTIQUEDEALER** (Surprised): Correct - and in Latin, it is called <i>Columba livia.</i>
+**ANTIQUEDEALER** (Surprised): Correct - and in Latin, it is called _Columba livia._
 
 ### Lucky Snap — item discovered: Sage Grouse
 `LS_LuckySnap2024_SageGrouse_Dialogue` · seen 25.05.01–26.07.01

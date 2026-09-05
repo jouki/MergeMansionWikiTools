@@ -117,6 +117,100 @@
 **MADDIE** (Annoyed): Well, I'm happy to disappoint.
 **HOLDEN** (Encouraging): Hmph. Looks like I'll be returning soon...
 
+### Landing Room: Landing1
+`Landing1` · seen 25.05.01–26.07.01
+- trigger: area, area=Landing Room, areaId=Landing, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Frustrated): Ugh... Why am I even doing this anymore?
+**MADDIE** (Doubtful): Why am I helping Grandma if she won’t even let me?!
+**MADDIE** (Frustrated): It's so frustrating that she still insists on hiding things! After everything that we've been through!
+**MADDIE** (Discouraged): The mansion is just like this family! The more I discover...
+**MADDIE** (Discouraged): The dirtier the secrets!
+**MADDIE** (Frustrated): Maybe I should just let them tear down the place for good!
+**BRUNO**: Why, hello. I hope I’m not interrupting...
+**MADDIE** (Surprised): Who- Who are you?!
+**BRUNO** (Charming): The name is Bruno Golightly. Mayor of Hopewell Bay.
+
+### Landing Room: Landing2
+`Landing2` · seen 25.05.01–26.07.01
+- trigger: area, area=Landing Room, areaId=Landing, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Doubtful): Mayor?! That makes you Victoria’s husband, doesn’t it?
+**BRUNO** (Charming): Indeed...
+**MADDIE** (Annoyed): And what makes you think you can just waltz in here, like you own the place?
+**BRUNO** (Thinking): Well... Funny you should put it like that.
+**BRUNO** (Joyous): I'm here because I have a proposition for you!
+
+### Landing Room: Landing3
+`Landing3` · seen 25.05.01–26.07.01
+- trigger: area, area=Landing Room, areaId=Landing, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Annoyed): What proposition could you possibly have that would interest me?!
+**BRUNO** (Joyous): This mansion of yours... I'm interested in taking it off your hands.
+**MADDIE** (Doubtful): I knew it! What do you people have against this mansion?! This is OUR property!
+**BRUNO** (Discouraged): Understood, but if I may ask... Why are you so intent on keeping this place?
+**MADDIE** (Surprised): Wh... What?
+**BRUNO** (Thinking): I couldn’t help but overhear you when I arrived, and it seems like you REALLY don’t like it here. Why stay?
+**MADDIE** (Worried): Because... it’s our home.
+**BRUNO** (Joyous): Ms. Boulton, with the money I’m willing to offer for this place, you could buy ANY house in all of Hopewell Bay!
+**BRUNO** (Joyous): You could start fresh... With your grandmother!
+
+### Landing Room: Landing4
+`Landing4` · seen 25.05.01–26.07.01
+- trigger: area, area=Landing Room, areaId=Landing, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Discouraged): There's a difference between a house and home, Mr. Golightly. This place means a lot to my family.
+**BRUNO** (Charming): Please, call me Bruno.
+**BRUNO** (Charming): I can understand the attachment, but I think you misunderstand my intentions. I mean to preserve this wonderful home.
+**MADDIE** (Surprised): What do you mean?
+**BRUNO** (Annoyed): I’m not a heartless businessman, you know. I believe Beaumont Hall is one of Hopewell Bay’s finest historical treasures.
+**BRUNO** (Doubtful): And I wish for it to remain that way.
+**MADDIE** (Worried): But Grandma... She’s um... in a little trouble and...
+**BRUNO** (Worried): I know all about your grandmother’s investigation and the unfortunate trouble she’s in.
+**BRUNO**: I am sure as mayor, I could help the police department see reason and stop this dreadful investigation.
+**BRUNO** (Doubtful): Besides, if I were to acquire Beaumont Hall, I wouldn’t want its heritage to be smeared by scandalous controversy.
+
+### Landing Room: Landing5
+`Landing5` · seen 25.05.01–26.07.01
+- trigger: area, area=Landing Room, areaId=Landing, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Surprised): Y-you could make it all go away? I don’t know what to say...
+**BRUNO** (Joyous): Yes, would be a start.
+**MADDIE** (Discouraged): I have to admit, I’m slightly taken aback by the offer. It wasn’t what I was expecting. But...
+**BRUNO** (Annoyed): Now, Ms. Boulton, I understand this is a huge decision, but I would like to remind you that the investigation will eventually end.
+**BRUNO** (Annoyed): And it’s not looking too good for your grandmother. Time MAY be of the essence.
+**MADDIE** (Worried): I... I understand. Can I think about it?
+**BRUNO** (Joyous): By all means. I have to take this call, it's the wife. When you’ve made your decision, don’t hesitate to reach out.
+**BRUNO** (Encouraging): I have big plans for Hopewell Bay. Huge! And they could include you and your family as well!
+
+### Landing Room: Landing6
+`Landing6` · seen 25.05.01–26.07.01
+- trigger: area, area=Landing Room, areaId=Landing, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**JACKIE** (Surprised): Hey, wow! Was that Mayor Bruno?!
+**MADDIE** (Worried): Hi, Jackie... Yeah... It was.
+**JACKIE** (Annoyed): What was he doing here?!
+**MADDIE** (Doubtful): He offered to buy the place and help with Grandma’s investigation.
+**JACKIE** (Surprised): What?! What did you say?
+**MADDIE** (Thinking): I said I’d think about it.
+**JACKIE** (Thinking): Maddie... Are you sure? Mayor Bruno isn’t someone you should trust. He’s Victoria’s husband, after all.
+**MADDIE** (Worried): I know... I know. But... if there’s a chance to get Grandma out of this mess and maybe move into a place that isn’t falling apart...
+**MADDIE** (Worried): Isn’t that the reason I came here in the first place?
+
+### Landing Room: Landing7
+`Landing7` · seen 25.05.01–26.07.01
+- trigger: area, area=Landing Room, areaId=Landing, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**JACKIE** (Encouraging): Well, you’ve always had your family’s best interests at heart. So I know you’ll make the right decision.
+**MADDIE** (Worried): Thanks, Jackie!
+**JACKIE** (Doubtful): Don’t worry about it, and by the way... what is that smell?
+**MADDIE** (Thinking): Oh, that? I think it may be the aquariums...
+**MADDIE** (Charming): But, don't worry. I'm working on it!
+**MADDIE** (Encouraging): This room is beyond intriguing, Jackie. That compass on the ground... it moves!
+**JACKIE** (Worried): Uh, are you sure you've been getting enough sleep, Maddie?
+**MADDIE** (Joyous): Haha, I know how it sounds. Trust me, this room isn't like the others. Everything is interconnected!
+**JACKIE** (Thinking): I'll have to see it to believe it!
+
 ### Landing Room: Fix the crack
 `LandingAquariums` · seen 24.04.01–26.07.01
 - trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingRoomRemoveCrackAndWater01DD2, phase=task completed, task=Fix the crack (versions 24.04.01–26.07.01)

@@ -215,6 +215,16 @@
 **MADDIE** (Discouraged): Why don’t you stop them?
 **WINSTON** (Surprised): Certainly not! I am a butler, not a referee.
 
+### Cinema: CinemaOutro
+`CinemaOutro` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=CinemaOutro, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Surprised): What’s this?!
+**MADDIE** (Thinking): There's a ladder above! Looks like it leads to some sort of attic.
+**MADDIE** (Thinking): Maybe this is what the journal was talking about...
+**MADDIE** (Doubtful): There’s something up there that could be really important.
+**MADDIE**: I should go have a look.
+
 ### Cinema: Insert blue gems
 `CinemaPOIBlueStones` · seen 25.02.01–26.07.01
 - trigger: area, area=Cinema, areaId=Cinema, hotspotId=CinemaRemovePillarPendantDirtC4, phase=task completed, task=Insert blue gems (versions 25.02.01–26.07.01)
@@ -249,6 +259,17 @@
 **MADDIE** (Encouraging): Looks like an interesting collection of film reels...
 **MADDIE** (Thinking): Although, I've never even heard of most of these! Hey... What's this?
 **MADDIE**: "Award Ceremony - Homegrown in Hopewell Bay" Ooh... I should check this out later!
+
+### Cinema: CinemaPOIGreenRoom
+`CinemaPOIGreenRoom` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=CinemaPOIGreenRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE**: Wow! A green room. This must have been where the actors got ready when it was still a stage!
+**MADDIE** (Encouraging): Some interesting stuff in here... like those masks. They look like they belong to some exclusive, secret group.  
+  _earlier:_ ~~Some interesting stuff in here... Wait! Those are the same masks from the secret society chamber!~~ (until 26.02.03)
+**MADDIE** (Surprised): And a red phone!  
+  _earlier:_ ~~And another red phone!~~ (until 26.02.03)
+**MADDIE** (Thinking): I wonder what they did here...
 
 ### Cinema: Attach head
 `CinemaPOIIndyStatue` · seen 25.02.01–26.07.01

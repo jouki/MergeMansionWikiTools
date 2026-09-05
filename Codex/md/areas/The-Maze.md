@@ -146,3 +146,13 @@
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeFixableSunDialFillWaterP8, phase=task completed, task=Fill water (versions 25.04.03–26.07.01)
 
 **MADDIE** (Joyous): Yay! Finally I made it!
+
+### The Maze: Maze_Intro
+`Maze_Intro` · seen 23.09.02–26.07.01
+- trigger: area, area=The Maze, areaId=Maze, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE** (Annoyed): Ew, those webs are so sticky!
+**ANTIQUEDEALER** (Frustrated): Never mind the webs! Is that a... spider? They're, um, really not my thing.
+**MADDIE** (Annoyed): I guess that's why you've been more of an _observer_ on this set of tasks.
+**ANTIQUEDEALER** (Encouraging): I prefer to think of it as _advisor_. But... I have an appointment to get to. I'll see you later!
+**MADDIE** (Thinking): Appointment... Right. 

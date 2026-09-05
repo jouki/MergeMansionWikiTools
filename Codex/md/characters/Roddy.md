@@ -1,8 +1,9 @@
 # Roddy
 Every story in which Roddy speaks.
 
-### AntiqueDealerDriveOffSequence
+### The Gate: AntiqueDealerDriveOffSequence
 `AntiqueDealerDriveOffSequence` · seen 22.02.06–26.07.01
+- trigger: area, area=The Gate, areaId=AntiqueDealerDriveOffSequence, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **ANTIQUEDEALER** (Thinking): Thank you for your help.
 **MADDIE**: I just wanted to restore the family estate to its former glory!
@@ -13,8 +14,9 @@ Every story in which Roddy speaks.
 **ANTIQUEDEALER** (Worried): Oh, apologies. It really isn't my place to say. I must dash - it's time for my online yoga class.
 **MADDIE** (Thinking): And I must start repairing the garage. With all of these unexpected guests coming and going it would be a good idea to have a proper garage.
 
-### AntiqueDealerIntoSequence
+### The Gate: AntiqueDealerIntoSequence
 `AntiqueDealerIntoSequence` · seen 22.02.06–26.07.01
+- trigger: area, area=The Gate, areaId=AntiqueDealerIntoSequence, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE**: This looks great. Thank you!
 **RODDY** (Thinking): It’s not a big deal. Buildings that are in bad shape are my area of expertise.
@@ -568,7 +570,7 @@ Every story in which Roddy speaks.
 
 **MADDIE**: I’ve always wanted to put a water feature here!
 **EMILIO** (Thinking): It is quite beautiful, Maddie. Although I don’t think it’ll be suitable for fish...
-**MADDIE** (Joyous): Don’t worry, I got a <b>great</b> idea for them!
+**MADDIE** (Joyous): Don’t worry, I got a **great** idea for them!
 **RODDY**: Hey Maddie! How's... Uuh.. What's going on?
 **MADDIE**: Perfect timing, Roddy! Let me introduce you to Emilio!
 **EMILIO** (Encouraging): Hello! Welcome to the joys of the sea! My name is Emilio Costa, marine biologist! Have you come to learn about all the wonderful things found at sea?
@@ -591,7 +593,7 @@ Every story in which Roddy speaks.
 - trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot09, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **GRANDMA** (Discouraged): I’m sorry, dearie. I thought it was junk, so I threw it in the trash!
-**EMILIO** (Encouraging): <i>*sigh*</i> I guess it was junk, Mrs. Boulton. We sort of got carried away with the mystery of it all...
+**EMILIO** (Encouraging): _*sigh*_ I guess it was junk, Mrs. Boulton. We sort of got carried away with the mystery of it all...
 **MADDIE**: Did Grandma throw away your suitcase?
 **EMILIO**: Yes... I guess we’ll never know if it contained a map to a treasure of untold riches, Roddy...
 **RODDY**: I guess so, bud...
@@ -613,7 +615,7 @@ Every story in which Roddy speaks.
 
 **EMILIO**: Sunfish hold the title of heaviest bony fish in the world!
 **EMILIO**: They can weigh up to 4,800 pounds and grow to 11 feet!
-**RODDY** (Doubtful): What <b>don't</b> you know about fish?
+**RODDY** (Doubtful): What **don't** you know about fish?
 **EMILIO** (Encouraging): I've always wished I could speak to them, so I know what they're thinking!
 
 ### The Joys of the Sea — item discovered: Swordfish
@@ -1345,9 +1347,9 @@ Every story in which Roddy speaks.
 **RODDY** (Encouraging): Oh, they really do!
 **RODDY** (Relaxed): Not bad, Maddie... Not bad at all!
 
-### LDE GreenAcresQuest2024 v2 TA1 Dialogue
+### Green Acres Quest — part of the event (exact trigger not dumped)
 `LDE_GreenAcresQuest2024_v2_TA1_Dialogue` · seen 26.02.01–26.04.02
-- trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
+- trigger: event, eventType=event story, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, moment=part of the event (exact trigger not dumped) (versions 26.02.01–26.04.02)
 
 **RODDY** (Relaxed): Hey, Emilio! How's married life?
 **EMILIO** (Encouraging): It's truly wonderful. I keep learning new things about Bella, and we're really learning to make compromises, too.
@@ -2313,8 +2315,8 @@ Every story in which Roddy speaks.
 - trigger: item, event=Picnic Confusion!, eventKey=LDE_PicnicConfusion2023, itemKeys=['LDE_PicnicConfusion2023_Clothing_07'], items=['LDE_PicnicConfusion2023_Clothing_07'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **RODDY** (Relaxed): I think we should have a whole picnic table set up for them, before they arrive!
-**ANTIQUEDEALER** (Doubtful): Well, if that's the case, I'll go get the <b>cutlery</b>.
-**RODDY** (Thinking): Good idea, I'll grab the <b>food</b> for it!
+**ANTIQUEDEALER** (Doubtful): Well, if that's the case, I'll go get the **cutlery**.
+**RODDY** (Thinking): Good idea, I'll grab the **food** for it!
 
 ### Picnic Confusion! — item discovered: LDE_PicnicConfusion2023_Coal_05
 `LDE_PicnicConfusion2023_Coalchain_Dialogue` · seen 23.09.02–26.07.01
@@ -2330,8 +2332,8 @@ Every story in which Roddy speaks.
 
 **RODDY** (Thinking): I guess a small campfire wouldn't hurt, would it Julius? 
 **ANTIQUEDEALER** (Thinking): But we got a hamper full of food!
-**RODDY** (Charming): Yeah, but for roasting <b>marshmallows</b> and cozying up next to the fire in a blanket!
-**ANTIQUEDEALER**: You mean cozying up next to <b>someone</b> by the fire...
+**RODDY** (Charming): Yeah, but for roasting **marshmallows** and cozying up next to the fire in a blanket!
+**ANTIQUEDEALER**: You mean cozying up next to **someone** by the fire...
 **RODDY** (Surprised): I...  Uh...
 **ANTIQUEDEALER** (Charming): Hahaha! 
 
@@ -3250,10 +3252,10 @@ Every story in which Roddy speaks.
 **MADDIE** (Surprised): Pardon? Oh, I'm alright. Wondering where today's "gift" is.
 **RODDY** (Encouraging): I have it here, actually. I, uh, found it outside.
 **MADDIE** (Doubtful): Ooh! Is that a Christmas milkshake?
-**MADDIE** (Surprised): Feels like it weighs about <i>eight ounces</i>, too.
+**MADDIE** (Surprised): Feels like it weighs about _eight ounces_, too.
 **MADDIE** (Annoyed): It tastes delicious! But... oh no! What if it's poisoned?
 **RODDY** (Worried): Poisoned? Maddie, it's definitely not poisoned!
-**RODDY** (Charming): I just think, <i>someone</i> cares enough to send you all these things!
+**RODDY** (Charming): I just think, _someone_ cares enough to send you all these things!
 **MADDIE**: Well, alright. It is really tasty! But I wish I knew who "Santa" was!
 
 ### PE Christmas2022Eleventh Gift
@@ -3320,8 +3322,8 @@ Every story in which Roddy speaks.
 **GRANDMA** (Thinking): Have you figured out what the gifts mean?
 **MADDIE** (Joyous): Yes! It's gifts for the twelve days of Christmas.
 **RODDY** (Charming): Do you, uh, know who they're from?
-**GRANDMA** (Charming): They must be from your <b>true love</b>.
-**MADDIE** (Thinking): I don't have a true love! And I don't have <i>time</i> for love.
+**GRANDMA** (Charming): They must be from your **true love**.
+**MADDIE** (Thinking): I don't have a true love! And I don't have _time_ for love.
 **MADDIE** (Charming): To be honest, I'd rather imagine they really did come from Santa!
 **RODDY**: I - I mean, they - are probably glad the gifts made you smile.
 
@@ -3333,7 +3335,7 @@ Every story in which Roddy speaks.
 **RODDY** (Joyous): We were both right! Turns out there are lots of traditions involving Christmas trees.
 **JACKIE** (Encouraging): Just like there are lots of Christmas traditions! Personally, I love gift-giving the most.
 **RODDY** (Relaxed): And I enjoy spending time with the people I love, like Maddie.
-**JACKIE** (Surprised): You <b>love</b> Maddie?! I mean, I had a suspicion, but that's huge news! Does she know?!
+**JACKIE** (Surprised): You **love** Maddie?! I mean, I had a suspicion, but that's huge news! Does she know?!
 **RODDY** (Surprised): I didn't mean... I shouldn't have... uh, please don't say anything to her? 
 **JACKIE** (Charming): Well, sure. Keeping your secret will be my Christmas gift to you, Roddy!
 
@@ -3348,8 +3350,8 @@ Every story in which Roddy speaks.
 **JACKIE** (Relaxed): Yeah? You sound a bit jealous. Do you want to be her only "friend" around here?
 **RODDY** (Worried): No! I, uh... Are you sure Maddie even has a Christmas tree?
 **JACKIE** (Encouraging): Of course! Yesterday she and I were talking about how the Christmas tree originally came from Germany.
-**RODDY** (Thinking): <i>Actually</i>, ancient Egyptians used trees and wreaths as decorations in their homes and temples.
-**JACKIE** (Thinking): Sure, but it wasn't until Queen Victoria was drawn with a Christmas tree that they <i>really</i> got popular.
+**RODDY** (Thinking): _Actually_, ancient Egyptians used trees and wreaths as decorations in their homes and temples.
+**JACKIE** (Thinking): Sure, but it wasn't until Queen Victoria was drawn with a Christmas tree that they _really_ got popular.
 **RODDY** (Charming): Looks like we need to figure out who's right here. What's the origin of the Christmas tree?
 
 ### Parents' Room: ParentsRoom03
@@ -3497,7 +3499,7 @@ Every story in which Roddy speaks.
 
 **DOG** (Doubtful): Grr...
 **MADDIE** (Surprised): What's gotten into you?
-**DOG** (Doubtful): <i>Grrrr!</i>
+**DOG** (Doubtful): _Grrrr!_
 **RODDY** (Surprised): Easy there, killer. I just want to be friends.
 **RODDY** (Thinking): Maybe next time then.
 **MADDIE** (Charming): You might have to fight for that relationship, Roddy!
@@ -3779,7 +3781,7 @@ Every story in which Roddy speaks.
 **DEB** (Relaxed): I know... I guess I'm always in need of strapping young lads, like yourself.
 **RODDY** (Worried): Oh... Erm... Okay.
 **MADDIE** (Doubtful): Hey! I thought you said you didn't need any help!
-**DEB** (Encouraging): Maddie! Sweetie... Of course I need help, but only in the more <b>physical</b> sense. Ha ha!
+**DEB** (Encouraging): Maddie! Sweetie... Of course I need help, but only in the more **physical** sense. Ha ha!
 **MADDIE** (Annoyed): Right... Anyway, I'll stick around to help you get everything set up...
 **DEB** (Relaxed): Well, Roddy... I think I saw a bit of jealousy in her eyes!
 **RODDY** (Charming): Re- Really?!
@@ -4373,7 +4375,7 @@ Every story in which Roddy speaks.
 **RODDY** (Relaxed): Oh, hi Maddie! Come to check out "Camp Wilderness"?
 **MADDIE** (Relaxed): Actually, yes! I heard you were running summer camp here this summer, and I didn't quite believe it.
 **RODDY**: Yeah, I usually run summer camp out of state, but some kids couldn't make it this year.
-**RODDY** (Thinking): So I thought, <i>Why not bring summer camp home?</i> So I uhh.. So I did! Your grandma was very generous to let me use her yard!
+**RODDY** (Thinking): So I thought, _Why not bring summer camp home?_ So I uhh.. So I did! Your grandma was very generous to let me use her yard!
 **MADDIE** (Charming): That's so sweet of you!
 **RODDY** (Worried): Really? I wasn't trying to impress you or-
 **MADDIE** (Encouraging): Ha ha! It's a compliment, Roddy! 
@@ -4389,7 +4391,7 @@ Every story in which Roddy speaks.
 **MASON** (Joyous): Unless there's some old cursed ghost out at sea, waiting to pull us into the dark depths of the abyss!
 **RODDY** (Surprised): Gosh, I hope not! I was thinking more about seeing the wildlife and taking in the Bay view!
 **MASON** (Annoyed): Ugh, how boooring!
-**GRANDMA** (Surprised): Roddy... <b>WHERE ARE MY ROSES?!</b>
+**GRANDMA** (Surprised): Roddy... **WHERE ARE MY ROSES?!**
 **RODDY** (Worried): Oh, uhm.. We needed space for the canoe and... I asked the kids to move them!
 
 ### Roddy's Mystery — decoration SP_RoddysMystery2023_Decoration_Slot27

@@ -5,7 +5,7 @@
 `SP_AmyTheCat2023_AllRewardsCompleted_Dialogue` · seen 23.09.02–26.07.01
 - trigger: event, event=Amy's Mystery, eventId=SP_AmyTheCat2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-**MADDIE**: <i>*knock knock*</i>
+**MADDIE**: _*knock knock*_
 **MADDIE**: Hello, can I help you?
 **EMILIO**: Hi, I’m Emilio Costa, a marine biologist. You called about some expatriated fish?
 **MADDIE** (Surprised): ...
@@ -13,7 +13,7 @@
 **MADDIE** (Relaxed): Oh, oh yes! Of course, let me show you. There’s been this cat and she’s been-
 **EMILIO** (Surprised): Amy!
 **AMY** (Relaxed): Meow! Purr... Purr...
-**MADDIE** (Encouraging): Ah, she's <b>your</b> cat! That must explain the fish then!
+**MADDIE** (Encouraging): Ah, she's **your** cat! That must explain the fish then!
 **EMILIO**: Here they are! Amy... Have you been bringing this beautiful lady my fish?
 **MADDIE** (Charming): Oh! Erhm...
 **EMILIO** (Encouraging): My deepest apologies. She tends to do this with people she likes. You must be a good person at heart.
@@ -40,7 +40,7 @@
 - trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot26, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE**: There! I dare any cat to ignore the majesty of...
-**MADDIE** (Joyous): <b>KITTY CASTLE!</b>
+**MADDIE** (Joyous): **KITTY CASTLE!**
 **AMY**: Meow...
 **MADDIE**: A ha! Never in doubt. Now, little Amy, let’s see who your owner is, shall we?
 **DEB**: Looks like the cat dropped something.

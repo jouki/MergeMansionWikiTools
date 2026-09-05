@@ -3272,7 +3272,7 @@ Every story in which Mason speaks.
 **MASON** (Joyous): Unless there's some old cursed ghost out at sea, waiting to pull us into the dark depths of the abyss!
 **RODDY** (Surprised): Gosh, I hope not! I was thinking more about seeing the wildlife and taking in the Bay view!
 **MASON** (Annoyed): Ugh, how boooring!
-**GRANDMA** (Surprised): Roddy... <b>WHERE ARE MY ROSES?!</b>
+**GRANDMA** (Surprised): Roddy... **WHERE ARE MY ROSES?!**
 **RODDY** (Worried): Oh, uhm.. We needed space for the canoe and... I asked the kids to move them!
 
 ### Roddy's Mystery — decoration SP_RoddysMystery2023_Decoration_Slot27
@@ -3500,7 +3500,7 @@ Every story in which Mason speaks.
 - trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot29, event=Valentine's Mystery, eventKey=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): A ring?
-**MASON** (Surprised): I <b>definitely</b> didn't order that!
+**MASON** (Surprised): I **definitely** didn't order that!
 **MADDIE** (Joyous): That's a beautiful ring! It kinda looks like an engagement ring...
 **HANK** (Surprised): I'll take that!
 **MADDIE** (Surprised): Wha... Is it yours, Hank??

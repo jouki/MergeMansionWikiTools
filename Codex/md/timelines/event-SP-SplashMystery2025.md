@@ -12,7 +12,7 @@
     - Emilio: Mason's party was excellent. It was nice to see you and Bella work together to bring it all together.
     - Maddie: We weren't exactly working together...
 
-Not placeable in 26.07.01 (5): `SP_SplashMystery2025_Decoration_Slot33_Dialogue`, `SP_SplashMystery2025_Decoration_Slot34_Dialogue`, `SP_SplashMystery2025_Decoration_Slot35_Dialogue`, `SP_SplashMystery2025_Decoration_Slot36_Dialogue`, `SP_SplashMystery2025_Decoration_Slot37_Dialogue`
+Not placeable in 26.07.01 (10): `SP_SplashMystery2025_Decoration_Slot33_Dialogue`, `SP_SplashMystery2025_Decoration_Slot34_Dialogue`, `SP_SplashMystery2025_Decoration_Slot35_Dialogue`, `SP_SplashMystery2025_Decoration_Slot36_Dialogue`, `SP_SplashMystery2025_Decoration_Slot37_Dialogue`, `SP_SplashMystery2025_Deco_25_Dialogue`, `SP_SplashMystery2025_Deco_26_Dialogue`, `SP_SplashMystery2025_Deco_27_Dialogue`, `SP_SplashMystery2025_Deco_28_Dialogue`, `SP_SplashMystery2025_Deco_29_Dialogue`
 
 ## Changes across versions
 - **26.04.01 → 26.04.02**: removed 5 (`SP_SplashMystery2025_Decoration_Slot33_Dialogue`, `SP_SplashMystery2025_Decoration_Slot34_Dialogue`, `SP_SplashMystery2025_Decoration_Slot35_Dialogue`, `SP_SplashMystery2025_Decoration_Slot36_Dialogue`, `SP_SplashMystery2025_Decoration_Slot37_Dialogue`)

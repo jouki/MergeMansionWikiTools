@@ -81,6 +81,15 @@
 **MADDIE** (Thinking): What’s that? Is that piano music? Sounds like it’s coming from upstairs... 
 **MADDIE** (Thinking): Grandma mentioned that there's a piano in the dining room. Guess I'll have to investigate that later. One mystery at a time, Maddie!
 
+### Hideout: HideoutIntro
+`HideoutIntro` · seen 23.09.02–26.07.01
+- trigger: area, area=Hideout, areaId=HideoutIntro, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE** (Surprised): It’s a hidden room! One of many, I suppose.
+**MADDIE** (Thinking): Hmm... maybe I should wait for Jackie? It does look pretty dark down there.
+**MADDIE** (Frustrated): Get it together, Maddie. You got this!
+**MADDIE** (Worried): Okay! Down we go!
+
 ### Hideout: Clean and place the items on the drawer
 `Lipstick` · seen 23.09.02–26.07.01
 - trigger: area, area=Hideout, areaId=Hideout, hotspotId=StudySrPlaceSRDresserMakeUpLipstickGb11, phase=task completed, task=Clean and place the items on the drawer (versions 24.04.01–26.07.01)

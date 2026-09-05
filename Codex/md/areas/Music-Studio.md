@@ -63,6 +63,15 @@
 **RODDY** (Discouraged): I’m doing my best to check, but a lot of the archived files have been thrown into the basement.
 **RODDY** (Worried): And it’s dark down there...
 
+### Music Studio: MusicianRoomAmplifier
+`MusicianRoomAmplifier` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=MusicianRoomAmplifier, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Thinking): Wow, this amplifier looks... complicated.
+**MADDIE** (Thinking): This is definitely some high-quality equipment!
+**MADDIE** (Surprised): It also looks like it was customized...
+**MADDIE** (Doubtful): Huh, the maximum volume on this device is 11? I didn’t know that was possible!
+
 ### Music Studio: Place the trophies
 `MusicianRoomAwards` · seen 24.07.01–26.07.01
 - trigger: area, area=Music Studio, areaId=MusicianRoom, hotspotId=MusicianRoomPlaceShelvingTrophiesBa7, phase=task completed, task=Place the trophies (versions 24.07.01–26.07.01)
@@ -124,6 +133,16 @@
 **MADDIE** (Joyous): Oh, sweet! An old portable cassette player!
 **MADDIE** (Relaxed): I remember fixing Grandma’s old one many times!
 **MADDIE** (Thinking): Although, it tended to eat a lot of tapes afterward...
+
+### Music Studio: MusicianRoomSheets
+`MusicianRoomSheets` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=MusicianRoomSheets, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE**: Ooh, what's this? These look like music sheets...
+**MADDIE** (Surprised): I-I think it's the original sheet music for the hit song!
+**MADDIE** (Surprised): But it's only part of it. The rest seems to be spread around the room.
+**MADDIE**: I wonder if the musician did this in a fit of rage...
+**MADDIE**: I should collect these sheets and put it back together. Maybe I could even try to play the piece!
 
 ### Music Studio: Remove the dust
 `MusicianRoomStudioSection` · seen 24.07.01–26.07.01

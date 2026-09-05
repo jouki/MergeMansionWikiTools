@@ -91,8 +91,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Encouraging): Don't you remember, dearie? This was yours when you were little.
 **MADDIE** (Surprised): No way! But, come to think of it, I do have some vague memories of this room...
 
-### BeachRightDiscovered
+### Beach House: BeachRightDiscovered
 `BeachRightDiscovered` · seen 22.02.06–26.07.01
+- trigger: area, area=Beach House, areaId=BeachRightDiscovered, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE** (Encouraging): What was this space all about? It's nothing like a grand mansion.
 **GRANDMA** (Thinking): This was where Skatie Katie and Hang Ten hung out. Their little slice of paradise.
@@ -103,8 +104,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: Not now, honey, the cat’s waiting for her bath.
 **MADDIE** (Worried): If I ever needed a reason to think my family was weird...
 
-### BeachRightTotemFinished
+### Beach House: BeachRightTotemFinished
 `BeachRightTotemFinished` · seen 22.02.06–26.07.01
+- trigger: area, area=Beach House, areaId=BeachRightTotemFinished, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE** (Encouraging): Alright, mind blown! So he was a surfer, she was a roller skater, and they came together and made skateboards?
 **GRANDMA** (Surprised): That's right, sweetie. Cousin Katie always said they invented the skateboard.
@@ -114,8 +116,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Doubtful): Oh my gosh! I left the bath running! And I put an extra dollop of bubbles in!
 **MADDIE** (Surprised): But you don’t have a bath!
 
-### BeachRightWorkshopCleanedUp
+### Beach House: BeachRightWorkshopCleanedUp
 `BeachRightWorkshopCleanedUp` · seen 22.02.06–26.07.01
+- trigger: area, area=Beach House, areaId=BeachRightWorkshopCleanedUp, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE**: What's with all of these surfboards?
 **GRANDMA** (Surprised): Casey was one of the most famous surfers back in the day. He was looking for big waves. He was a legend.
@@ -598,7 +601,7 @@ Every story in which Grandma speaks.
 - trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot09, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **GRANDMA** (Discouraged): I’m sorry, dearie. I thought it was junk, so I threw it in the trash!
-**EMILIO** (Encouraging): <i>*sigh*</i> I guess it was junk, Mrs. Boulton. We sort of got carried away with the mystery of it all...
+**EMILIO** (Encouraging): _*sigh*_ I guess it was junk, Mrs. Boulton. We sort of got carried away with the mystery of it all...
 **MADDIE**: Did Grandma throw away your suitcase?
 **EMILIO**: Yes... I guess we’ll never know if it contained a map to a treasure of untold riches, Roddy...
 **RODDY**: I guess so, bud...
@@ -630,7 +633,7 @@ Every story in which Grandma speaks.
 **EMILIO**: While their first line of defense is to inflate into a large and more difficult form to swallow, often with spikes...
 **GRANDMA**: They are also incredibly toxic! Lethal to almost all predators, including humans!
 **EMILIO** (Surprised): Th- That's right! You know your fish Mrs. Boulton!
-**GRANDMA** (Charming): Just the <i>interesting</i> ones, dearie.
+**GRANDMA** (Charming): Just the _interesting_ ones, dearie.
 
 ### The Joys of the Sea — item discovered: Swordfish
 `CBE_JoysOfTheSea2023_Fish7_Dialogue` · seen 23.09.02–26.07.01
@@ -668,7 +671,7 @@ Every story in which Grandma speaks.
 
 **GRANDMA**: Maddie, dearie! Just in time!
 **MADDIE** (Surprised): Oh?
-**GRANDMA**: May I introduce you to <b>Dr.</b> Emilio Costa, Hopewell Bay’s new marine biologist! He runs the aquarium!
+**GRANDMA**: May I introduce you to **Dr.** Emilio Costa, Hopewell Bay’s new marine biologist! He runs the aquarium!
 **GRANDMA** (Charming): And, as I just recently found out, is Amy’s owner!
 **EMILIO** (Encouraging): Please, it’s just Emilio. Only my mother insists on calling me a doctor!
 **MADDIE** (Charming): A pleasure to meet you, just Emilio! How is little Amy?
@@ -1696,8 +1699,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Worried): *Sigh* He believes that your aunt Deb does not belong in the family. 
 **MADDIE** (Surprised): What?!
 
-### DrivewayGateClearedMansionSign
+### The Grand Drive: DrivewayGateClearedMansionSign
 `DrivewayGateClearedMansionSign` · seen 22.02.06–26.07.01
+- trigger: area, area=The Grand Drive, areaId=DrivewayGateClearedMansionSign, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE** (Thinking): Beaumont Hall? Why did Grandma keep this place a secret?
 **GRANDMA** (Worried): Your grandfather and I spent a lot of time in these gardens...
@@ -1985,8 +1989,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Surprised): Grandma! No! You can't do this!
 **GRANDMA** (Annoyed): Oh, I can Maddie. I most definitely can.
 
-### GarageCarFinished
+### Garage: GarageCarFinished
 `GarageCarFinished` · seen 22.02.06–26.07.01
+- trigger: area, area=Garage, areaId=GarageCarFinished, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE** (Thinking): Before you have to run off again: is Lindsay the reason the mansion was sealed off?
 **GRANDMA** (Thinking): Lindsay was heartbroken when she came back to Beaumont Hall. She swore never to set foot in New York again.
@@ -1998,8 +2003,9 @@ Every story in which Grandma speaks.
 **MADDIE**: Should I tell her some of her cakes taste like hats?
 **GRANDMA**: And not the first person trying to save this old estate, either...
 
-### GarageCarRevealed
+### Garage: GarageCarRevealed
 `GarageCarRevealed` · seen 22.02.06–26.07.01
+- trigger: area, area=Garage, areaId=GarageCarRevealed, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE** (Surprised): That's quite the car! Or was, I guess?
 **GRANDMA** (Encouraging): It belonged to Lindsay Boulton. She almost drove the family bankrupt.
@@ -2019,8 +2025,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Thinking): Car hood? Can't you just tell me what it is I’m looking for?
 **GRANDMA**: I'm sure you'll figure it out, dear!
 
-### GarageTraderTableRevealed
+### Garage: GarageTraderTableRevealed
 `GarageTraderTableRevealed` · seen 22.02.06–26.07.01
+- trigger: area, area=Garage, areaId=GarageTraderTableRevealed, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE** (Surprised): So Lindsay made money and lost money. What did she do exactly?
 **GRANDMA** (Worried): Lindsay was a canny investor. She moved to New York with a bag of Boulton money to make it big on Wall Street.
@@ -2136,8 +2143,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Surprised): Who?
 **GRANDMA** (Encouraging): Me!
 
-### Hopeberry2022Intro
+### Hopeberry Terraces: Hopeberry2022Intro
 `Hopeberry2022Intro` · seen 23.09.02–25.06.01
+- trigger: area, area=Hopeberry Terraces, areaId=Hopeberry, phase=area story (exact task not dumped) (versions 23.09.02–25.06.01)
 
 **MADDIE** (Joyous): Hopeberry Festival! I’ve never heard of it before.
 **GRANDMA**: It used to happen every year, until the Hopeberries all decayed one day...
@@ -2145,8 +2153,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Encouraging): Indeed! I bet a secret stash has survived somewhere!
 **GRANDMA**: Why don’t you clean up those twigs to set up a stall while I look for the berries.
 
-### Hopeberry2022IntroPart2
+### Hopeberry Terraces: Hopeberry2022IntroPart2
 `Hopeberry2022IntroPart2` · seen 23.09.02–25.06.01
+- trigger: area, area=Hopeberry Terraces, areaId=Hopeberry, phase=area story (exact task not dumped) (versions 23.09.02–25.06.01)
 
 **MADDIE** (Surprised): ...the place where all those Hopeberry Festival gear was being stored all these years!!
 **GRANDMA**: And everything has remained spick and span!
@@ -2979,9 +2988,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Joyous): Hold on! You caught a big one, dearie!
 **MADDIE** (Frustrated): Hnnngg... Take... the photo... already!
 
-### LC Summer UltimateMolaMola Dialogue
+### Summer Lucky Catch — part of the event (exact trigger not dumped)
 `LC_Summer_UltimateMolaMola_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
+- trigger: event, eventType=event story, event=Summer Lucky Catch, eventId=LC_Summer, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 
 ### Lucky Catch — item discovered: White Marlin
@@ -4468,7 +4477,7 @@ Every story in which Grandma speaks.
 **GRANDMA** (Doubtful): Shouldn't you get this fixed up for that building inspector of yours? He's kinda cute, ain't he?  
   _(1 cosmetic edit not shown)_
 **MADDIE**: Great! I want to learn all about Grandpa Charlie, and my parents, and...
-**GRANDMA** (Doubtful): Some secrets are best left <b>buried</b>, Maddie. I'm off to bake.
+**GRANDMA** (Doubtful): Some secrets are best left **buried**, Maddie. I'm off to bake.
 **MADDIE** (Discouraged): She's hiding something! I just wish I knew what it was - and why!
 
 ### The Grand Drive: Plant flowers
@@ -4481,8 +4490,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Joyous): If he's missing a stone can, I should look for it! But why does he have one?
 **GRANDMA**: Find it and I'll tell you, dearie.
 
-### MansionRightFillerPoolFinished
+### Flower Garden: MansionRightFillerPoolFinished
 `MansionRightFillerPoolFinished` · seen 22.02.06–26.07.01
+- trigger: area, area=Flower Garden, areaId=MansionRightFillerPoolFinished, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **GRANDMA** (Encouraging): Oh my, I just remembered! I pushed your grandfather into that pool once!
 **MADDIE** (Worried): Huh? Why? Were you mad at him?
@@ -4493,8 +4503,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Thinking): You keep on talking, I’ll be back in a minute. I came out without my reading glasses and can’t hear a word you’re saying!
 **MADDIE** (Surprised): Um... okay...
 
-### MansionRightFillerStatueFinished
+### Flower Garden: MansionRightFillerStatueFinished
 `MansionRightFillerStatueFinished` · seen 22.02.06–26.07.01
+- trigger: area, area=Flower Garden, areaId=MansionRightFillerStatueFinished, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE** (Thinking): That’s a pretty statue. Must have cost a lot. Tell me more about Ignatius and his tin cans.
 **GRANDMA** (Doubtful): Tinned food was a miraculous invention back then. No one had fridges. Ignatius saw how much demand there was as soon as he sold his first can.
@@ -4762,8 +4773,8 @@ Every story in which Grandma speaks.
 **GRANDMA** (Thinking): Have you figured out what the gifts mean?
 **MADDIE** (Joyous): Yes! It's gifts for the twelve days of Christmas.
 **RODDY** (Charming): Do you, uh, know who they're from?
-**GRANDMA** (Charming): They must be from your <b>true love</b>.
-**MADDIE** (Thinking): I don't have a true love! And I don't have <i>time</i> for love.
+**GRANDMA** (Charming): They must be from your **true love**.
+**MADDIE** (Thinking): I don't have a true love! And I don't have _time_ for love.
 **MADDIE** (Charming): To be honest, I'd rather imagine they really did come from Santa!
 **RODDY**: I - I mean, they - are probably glad the gifts made you smile.
 
@@ -4799,9 +4810,9 @@ Every story in which Grandma speaks.
   _earlier:_ ~~He just came in and swept her off her feet.~~ (until 23.09.02)
 **ANTIQUEDEALER** (Thinking): But the truth is, I never stopped loving her...
 
-### RomanticSpotCarWithFlowers
+### Romantic Spot: RomanticSpotCarWithFlowers
 `RomanticSpotCarWithFlowers` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: area, area=Romantic Spot, areaId=RomanticSpotCarWithFlowers, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Don't tell me someone used to drive this old thing? It's a wreck!
 **GRANDMA**: True, but at one time, it was your father's pride and joy.
@@ -4822,17 +4833,17 @@ Every story in which Grandma speaks.
 **MADDIE** (Worried): What, uh, what exactly happened to my parents?
 **MADDIE** (Discouraged): I really want to know, Grandma.
 **GRANDMA** (Annoyed): And I really don't want to talk about it, dearie!
-**GRANDMA**: I <b>do</b> want to go and watch a horror film, though. Goodbye!
+**GRANDMA**: I **do** want to go and watch a horror film, though. Goodbye!
 **MADDIE** (Thinking): Huh. She might not want to talk about it, but one day, I will find out what happened to my mom and dad!
 
-### RomanticSpotEndOfEventChain
+### Romantic Spot: RomanticSpotEndOfEventChain
 `RomanticSpotEndOfEventChain` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: area, area=Romantic Spot, areaId=RomanticSpotEndOfEventChain, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 
-### RomanticSpotFlowerBeds
+### Romantic Spot: RomanticSpotFlowerBeds
 `RomanticSpotFlowerBeds` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: area, area=Romantic Spot, areaId=RomanticSpotFlowerBeds, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **GRANDMA**: Well, here you go. This is the place my Michael first saw Becky!
 **MADDIE** (Thinking): My parents first met by some flowers?
@@ -4842,14 +4853,14 @@ Every story in which Grandma speaks.
 **GRANDMA** (Thinking): It would be years and years until she felt the same way as him.
 **MADDIE** (Encouraging): Tell me more!
 
-### RomanticSpotIntro
+### Romantic Spot: RomanticSpotIntro
 `RomanticSpotIntro` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: area, area=Romantic Spot, areaId=RomanticSpotIntro, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 
-### RomanticSpotOldTree
+### Romantic Spot: RomanticSpotOldTree
 `RomanticSpotOldTree` · seen 23.09.02–26.07.01
-- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+- trigger: area, area=Romantic Spot, areaId=RomanticSpotOldTree, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Grandma, do you see this?! It says 'Becky loves Mikey' on it!
 **MADDIE** (Thinking): My Mom must have carved it into the tree!
@@ -5215,7 +5226,7 @@ Every story in which Grandma speaks.
 **GRANDMA**: I’ve decided to write an account of my short time in jail.
 **GRANDMA**: I must admit that it was a strange time, and I met a lot of interesting people.
 **GRANDMA**: However, I didn’t quite expect it to end the way it did! But perhaps it would be best if I start at the beginning...
-**GRANDMA**: <i>No matter how lovely things are in here, I have to leave. I need to get back to Maddie before she gets herself into trouble! </i>
+**GRANDMA**: _No matter how lovely things are in here, I have to leave. I need to get back to Maddie before she gets herself into trouble! _
 
 ### The Great Escape (Jailbreak) — item discovered: Closed Library
 `SBE_Jailbreak_Library` · seen 25.05.01–25.06.01
@@ -5676,12 +5687,12 @@ Every story in which Grandma speaks.
 - trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot05, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 **DEB** (Joyous): May I introduce you to the Hopeberry Juice Woman!
-**DEB** (Encouraging): The new face to the new and <b>improved</b> hopeberry juice! Go on... Have a taste.
+**DEB** (Encouraging): The new face to the new and **improved** hopeberry juice! Go on... Have a taste.
 **MADDIE** (Worried): *sip* Oh! Eehh... That's... different.
 **GRANDMA** (Worried): My gosh, Deb... What did you put in this?! This isn't my recipe!
 **DEB** (Doubtful): It isn't sis, you write recipes like a mad scientist. I'm an artist!
 **GRANDMA** (Surprised): I mean... It isn't bad! It just has a-
-**DEB** (Relaxed): A wonderful bouquet? <b>That</b> is the secret ingredient! 
+**DEB** (Relaxed): A wonderful bouquet? **That** is the secret ingredient! 
 
 ### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot15
 `SE_HopeberryFestival2023_Decoration_Slot15_Dialogue` · seen 23.09.02–25.06.01
@@ -5714,7 +5725,7 @@ Every story in which Grandma speaks.
 
 **DEB** (Thinking): This thing has always given me the creeps...
 **WINSTON**: Then it is doing its job, ma'am.
-**DEB** (Relaxed): Come to think of it, it <b>does</b> resemble Mr. Winston, doesn't it?!
+**DEB** (Relaxed): Come to think of it, it **does** resemble Mr. Winston, doesn't it?!
 **GRANDMA** (Encouraging): Ha ha!
 **WINSTON** (Doubtful): Hmph!
 
@@ -6483,8 +6494,8 @@ Every story in which Grandma speaks.
 **GRANDMA** (Relaxed): These are my friends. We are all members of a little hobby group.
 **MADDIE** (Thinking): That's quite the hobby group...
 **GRANDMA** (Joyous): Well, we all enjoy a good kicker with some farkle, but a citizen like you would probably not understand such things.
-**MADDIE** (Surprised): What language was <b>that</b>?
-**GRANDMA**: <b>That </b>was biker slang. This is our biker gang, the Grannies of Anarchy.
+**MADDIE** (Surprised): What language was **that**?
+**GRANDMA**: **That **was biker slang. This is our biker gang, the Grannies of Anarchy.
 **JACKIE** (Doubtful): Ha! So I was right!
 
 ### Grannies of Anarchy — decoration SP_GranniesOfAnarchy2023_Decoration_Slot26
@@ -6506,7 +6517,7 @@ Every story in which Grandma speaks.
 **GRANDMA** (Doubtful): When we started our motorcycle club, people just did not take us seriously.
 **GRANDMA** (Doubtful): So, we were forced to break the rules every now and again.
 **GRANDMA** (Joyous): We did ruffle some feathers, too.
-**MADDIE** (Thinking): Your biker club looks like a wild bunch! But what exactly do you <b>do</b>?
+**MADDIE** (Thinking): Your biker club looks like a wild bunch! But what exactly do you **do**?
 **GRANDMA**: Burn rubber and stand up against the man, of course!
 **MADDIE** (Doubtful): Oh? So things sometimes get out of hand?
 **GRANDMA** (Doubtful): Whatever do you mean?
@@ -6523,7 +6534,7 @@ Every story in which Grandma speaks.
 **GRANDMA** (Doubtful): What kind of crimes did you have in mind?
 **MADDIE** (Worried): Murder?
 **GRANDMA** (Surprised): Murder?? You should get your ears checked, dearie.
-**GRANDMA** (Doubtful): Oh, now I understand. My friend Mama said that we need a new <b>recorder.</b> You must have misheard her!
+**GRANDMA** (Doubtful): Oh, now I understand. My friend Mama said that we need a new **recorder.** You must have misheard her!
 **MADDIE** (Thinking): I guess that could've been it, but...
 **GRANDMA** (Joyous): That's settled then!
 
@@ -7363,7 +7374,7 @@ Every story in which Grandma speaks.
 **MASON** (Joyous): Unless there's some old cursed ghost out at sea, waiting to pull us into the dark depths of the abyss!
 **RODDY** (Surprised): Gosh, I hope not! I was thinking more about seeing the wildlife and taking in the Bay view!
 **MASON** (Annoyed): Ugh, how boooring!
-**GRANDMA** (Surprised): Roddy... <b>WHERE ARE MY ROSES?!</b>
+**GRANDMA** (Surprised): Roddy... **WHERE ARE MY ROSES?!**
 **RODDY** (Worried): Oh, uhm.. We needed space for the canoe and... I asked the kids to move them!
 
 ### Roddy's Mystery — decoration SP_RoddysMystery2023_Decoration_Slot29
@@ -7437,9 +7448,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Annoyed): Yes, yes. Sounds great, dearie. Now let me do this.
 **MADDIE** (Encouraging): Thank you, Grandma!
 
-### SP SplashMystery2025 Deco 25 Dialogue
+### Splash of Mystery — part of the event (exact trigger not dumped)
 `SP_SplashMystery2025_Deco_25_Dialogue` · seen 25.05.01–26.07.01
-- trigger: unknown, hint=Mystery (Progression event) (versions None–None)
+- trigger: event, eventType=event story, event=Splash of Mystery, eventId=SP_SplashMystery2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
 
 ### Season Pass - Signs of Spring — outro
@@ -7825,7 +7836,7 @@ Every story in which Grandma speaks.
 - trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot29, event=Valentine's Mystery, eventKey=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): A ring?
-**MASON** (Surprised): I <b>definitely</b> didn't order that!
+**MASON** (Surprised): I **definitely** didn't order that!
 **MADDIE** (Joyous): That's a beautiful ring! It kinda looks like an engagement ring...
 **HANK** (Surprised): I'll take that!
 **MADDIE** (Surprised): Wha... Is it yours, Hank??
@@ -8523,8 +8534,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Doubtful): Not the first time I smell a mystery…
 **MADDIE** (Charming): And roses! Let's check if there are any romantic garden decorations for Valentine's Day!
 
-### WaterGardenStatueFinished
+### Frog Pond Falls: WaterGardenStatueFinished
 `WaterGardenStatueFinished` · seen 22.02.06–26.07.01
+- trigger: area, area=Frog Pond Falls, areaId=WaterGardenStatueFinished, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **GRANDMA** (Worried): I first met Grandpa Charlie right here beneath this frog.
 **MADDIE** (Surprised): You met him in the garden?
@@ -8533,8 +8545,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Encouraging): It was like a fairy tale. He was my very own frog prince...
 **MADDIE** (Encouraging): ... don't you have a pie in the oven or something?
 
-### WaterGardenStatueRevealed
+### Frog Pond Falls: WaterGardenStatueRevealed
 `WaterGardenStatueRevealed` · seen 22.02.06–26.07.01
+- trigger: area, area=Frog Pond Falls, areaId=WaterGardenStatueRevealed, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE**: Wow, a giant frog!
 **GRANDMA** (Doubtful): My grandfather said it came from Japan, a gift to Ignatius.

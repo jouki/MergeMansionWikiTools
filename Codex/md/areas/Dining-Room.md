@@ -87,6 +87,15 @@
 **RODDY** (Thinking): Knowing your Grandma, it's probably jelly or berries!
 **MADDIE** (Discouraged): I hope so! Because if not, this could be more evidence against her...
 
+### Dining Room: DiningRoomIntro
+`DiningRoomIntro` · seen 23.09.02–26.07.01
+- trigger: area, area=Dining Room, areaId=DiningRoomIntro, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE** (Surprised): This place is stunning! So much gold and glitz... underneath all the dust and grime, that is.
+**MADDIE**: Good thing no food was left out, or this place would be overrun with rats.
+**MADDIE** (Surprised): Eek! I spoke too soon, I think I just saw one in the corner!
+**MADDIE** (Discouraged): EEEEEW!!
+
 ### Dining Room: Clean the family photo
 `FamilyPicture` · seen 23.09.02–26.07.01
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomSwapRundownPhotoCa7, phase=task completed, task=Clean the family photo (versions 24.04.01–26.07.01)

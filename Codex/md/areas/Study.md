@@ -116,6 +116,26 @@
 **JACKIE** (Doubtful): I guess nothing has changed, huh?
 **MADDIE** (Thinking): I guess not...
 
+### Study: StudyComputer
+`StudyComputer` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=StudyComputer, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE** (Surprised): This is an old computer!
+**JACKIE** (Encouraging): Old but reliable! We still use these at work!
+**MADDIE**: You use these ancient machines at the Bugle?
+**JACKIE**: Our funding has never been the greatest, but if it ain’t broke...
+**MADDIE** (Thinking): Hmmm... It needs a password. I wonder if...
+**JACKIE** (Surprised): The code in the ledger is actually the password?
+
+### Study: StudyInsertingPassword
+`StudyInsertingPassword` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=StudyInsertingPassword, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE** (Joyous): It... It worked! I think I unlocked something!
+**JACKIE** (Doubtful): I can’t believe that was the password...
+**MADDIE** (Surprised): Did you see that? Something moved under the carpet!
+**JACKIE**: Let’s move it out of the way!
+
 ### Study: Polish rundown table and barrel
 `StudyMiniBarrel` · seen 23.09.02–26.07.01
 - trigger: area, area=Study, areaId=Study, hotspotId=StudySwaprundowntableandbarrelA9, phase=task completed, task=Polish rundown table and barrel (versions 24.04.01–26.07.01)
@@ -123,6 +143,16 @@
 **MADDIE** (Joyous): It’s my old piggy bank! Er... Barrel bank?
 **JACKIE** (Encouraging): That’s pretty cute. Is it filled with your family's riches?
 **MADDIE**: No. Just happy memories!
+
+### Study: StudyOutro
+`StudyOutro` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=StudyOutro, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE** (Thinking): It’s a trapdoor! Hmm... This lock has a very strange looking key hole, I wonder if-
+**JACKIE** (Surprised): Do you smell that? Is something on fire?!
+**MADDIE** (Surprised): I'm dreadfully sorry to bother you Miss Boulton but...  
+  _earlier:_ ~~Oh no, look outside! I think it’s the lighthouse!~~ (until 25.02.02)
+**MADDIE** (Surprised): It appears that the lighthouse is on fire.
 
 ### Study: Dust the Owl
 `StudyOwlStatue` · seen 23.09.02–26.07.01

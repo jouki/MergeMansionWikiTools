@@ -14,6 +14,31 @@
 **EMILIO** (Encouraging): Give her a chance. Underneath all the other stuff, she's great really, I promise.
 **MADDIE** (Worried): I'll do my best, I promise.
 
+### Splash of Mystery — part of the event (exact trigger not dumped)
+`SP_SplashMystery2025_Deco_25_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Splash of Mystery, eventId=SP_SplashMystery2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+
+### Splash of Mystery — part of the event (exact trigger not dumped)
+`SP_SplashMystery2025_Deco_26_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Splash of Mystery, eventId=SP_SplashMystery2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+
+### Splash of Mystery — part of the event (exact trigger not dumped)
+`SP_SplashMystery2025_Deco_27_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Splash of Mystery, eventId=SP_SplashMystery2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+
+### Splash of Mystery — part of the event (exact trigger not dumped)
+`SP_SplashMystery2025_Deco_28_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Splash of Mystery, eventId=SP_SplashMystery2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+
+### Splash of Mystery — part of the event (exact trigger not dumped)
+`SP_SplashMystery2025_Deco_29_Dialogue` · seen 25.05.01–26.07.01
+- trigger: event, eventType=event story, event=Splash of Mystery, eventId=SP_SplashMystery2025, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
+
+
 ### Splash of Mystery — decoration SP_SplashMystery2025_Decoration_Slot33
 `SP_SplashMystery2025_Decoration_Slot33_Dialogue` · seen 25.05.01–26.07.01
 - trigger: decoration, decoration=SP_SplashMystery2025_Decoration_Slot33, event=Splash of Mystery, eventKey=SP_SplashMystery2025, moment=decoration placed (versions 25.05.01–26.07.01)

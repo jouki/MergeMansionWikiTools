@@ -18,6 +18,7 @@ def adapt(codex):
     for sid, s in codex["stories"].items():
         ids = render_md.latest(s["lines"]) or []
         lines = []
+        cur_side = {"L": None, "R": None}       # NoChange on a side = the character from the previous line of the story
         for lid in ids:
             l = codex["lines"].get(lid) or {}
             sp = render_md.latest(l.get("speaker") or [])
@@ -26,8 +27,13 @@ def adapt(codex):
             # each rewording is classified: cosmetic (typo/punctuation/markup, >= 90 % similar) or rewritten
             changes = [{"version": q["from"], "from": p["value"], "to": q["value"], "kind": reruns.classify_change(p["value"], q["value"])}
                        for p, q in zip(texts[:-1], texts[1:]) if reruns.norm(p["value"]) != reruns.norm(q["value"])]
+            raw_l, raw_r = render_md.latest(l.get("left") or []), render_md.latest(l.get("right") or [])
+            left = cur_side["L"] if raw_l == "NoChange" else (None if raw_l in ("None", "Empty", None) else raw_l)
+            right = cur_side["R"] if raw_r == "NoChange" else (None if raw_r in ("None", "Empty", None) else raw_r)
+            cur_side["L"], cur_side["R"] = left, right
             lines.append({"id": lid, "speaker": sp, "speakerName": chars.get(sp, {}).get("name", sp) if sp else None,
                           "state": st if st and st not in ("Default", "NoChange") else None, "text": render_md.latest(l.get("text") or []) or "",
+                          "left": left, "right": right, "side": "L" if sp and sp == left else ("R" if sp and sp == right else None),
                           "changes": changes, "firstSeen": (l.get("seen") or {}).get("first")})
         if s.get("seen") and s["seen"]["last"] != cur:
             trig = [dict(t) for t in s["triggers"]]                 # keep triggers: area/event filter must still find removed stories
@@ -64,8 +70,11 @@ def adapt(codex):
                         key=lambda x: -x["lines"])
     order_path = os.path.join(os.path.dirname(__file__), "area_order.json")
     area_order = common.read_json(order_path)["order"] if os.path.exists(order_path) else {}
+    # portraits cropped by portraits.py live next to the viewer (Codex/_cache/portraits/), referenced by relative path
+    pidx_path = os.path.join(common.CACHE, "portraits", "index.json")
+    portraits = common.read_json(pidx_path)["portraits"] if os.path.exists(pidx_path) else {}
     return {"summary": summary, "characters": characters, "characterNames": {c: d["name"] for c, d in chars.items()},
-            "stories": stories, "removedStories": removed, "areaOrder": area_order}
+            "stories": stories, "removedStories": removed, "areaOrder": area_order, "portraits": portraits}
 
 
 def main():
