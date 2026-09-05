@@ -61,6 +61,12 @@ internal static class Program
             // --probe-hotspot-map <xapk|apk|global-metadata.dat> [<HotspotId.cs to diff against>]
             return ProbeHotspotMap(args[1], args.Length >= 3 ? args[2] : null);
         }
+        if (args.Length >= 3 && args[0] == "--dump-stories")
+        {
+            // --dump-stories <configPath> <out.json>  — StoryElements: story id -> ordered DialogItem ids
+            // (+ music, follow-up stories triggered on completion). The app's DialogueDumper flattens this away.
+            return DumpStories(args[1], args[2]);
+        }
         if (args.Length >= 3 && args[0] == "--dump-loc")
         {
             // --dump-loc <mpcOrLFile> <out.json>  — every translation of one language file as JSON.
@@ -2910,6 +2916,46 @@ internal static class Program
                 var snippet = v.Length > 80 ? v.Substring(0, 80) + "..." : v;
                 Console.WriteLine($"  {k} = {snippet}");
             }
+            return 0;
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"FATAL: {ex.GetType().Name}: {ex.Message}");
+            return 1;
+        }
+    }
+
+    private static int DumpStories(string configPath, string outPath)
+    {
+        Console.WriteLine("=== DumpStories ===");
+        Console.WriteLine($"Config: {configPath}");
+        try
+        {
+            MetaplayCore.Initialize();
+            var archive = ConfigArchive.FromBytes(File.ReadAllBytes(configPath));
+            var cfg = (SharedGameConfig)GameConfigFactory.Instance.ImportSharedGameConfig(PatchedConfigArchive.WithNoPatches(archive));
+            if (cfg.StoryElements == null)
+            {
+                Console.Error.WriteLine("StoryElements is null (import failed for this entry)");
+                return 3;
+            }
+            var stories = new SortedDictionary<string, object>(StringComparer.Ordinal);
+            foreach (var kv in cfg.StoryElements.EnumerateAll())
+            {
+                var story = (GameLogic.Story.StoryElementInfo)kv.Value;
+                var ids = new List<string>();
+                if (story.DialogItems != null)
+                    foreach (var d in story.DialogItems)
+                        ids.Add(d.Key.ToString());
+                var next = new List<string>();
+                foreach (var action in story.OnComplete ?? Enumerable.Empty<GameLogic.Player.Director.Config.IDirectorAction>())
+                    if (action is GameLogic.Player.Director.Config.TriggerDialogue td && td.StoryDefinitionId != null)
+                        next.Add(td.StoryDefinitionId.ToString());
+                stories[story.ConfigKey.ToString()] = new { DialogItems = ids, Music = story.Music, StealAllSteps = story.StealAllSteps, CompleteStories = next };
+            }
+            Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(outPath)));
+            File.WriteAllText(outPath, Newtonsoft.Json.JsonConvert.SerializeObject(new { Stories = stories }, Newtonsoft.Json.Formatting.Indented), new System.Text.UTF8Encoding(false));
+            Console.WriteLine($"Stories: {stories.Count} -> {outPath}");
             return 0;
         }
         catch (Exception ex)
