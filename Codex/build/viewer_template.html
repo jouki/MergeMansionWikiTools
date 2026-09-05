@@ -296,13 +296,35 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
       if (sc === 'U:all' && s.unassigned !== lastGrp) { lastGrp = s.unassigned; head = `<div class="grp">${esc(s.unassigned)}… (${current.filter(x=>x.unassigned===s.unassigned).length})</div>`; }
       return head + storyHtml(s, q, showEmpty, onlyChanged, showCosmetic);
     }).join('') || '<div class="empty">Nothing matches these filters.</div>';
+    saveState();
     if (current.length > shown) { const b=document.createElement('button'); b.className='more'; b.textContent=`Show ${Math.min(PAGE,current.length-shown)} more of ${(current.length-shown).toLocaleString('en-US')} remaining`; b.onclick=()=>{shown+=PAGE;render(false);}; list.appendChild(b); }
   }
-  const bigCards = new Set();
-  list.addEventListener('click', e => { const b = e.target.closest('.zoom'); if (!b) return; const card = b.closest('.story'); const id = b.dataset.zoom; card.classList.toggle('big'); if (card.classList.contains('big')) bigCards.add(id); else bigCards.delete(id); });
+  const bigCards = new Set((() => { try { return JSON.parse(localStorage.getItem('codexBig') || '[]'); } catch (e) { return []; } })());
+  list.addEventListener('click', e => { const b = e.target.closest('.zoom'); if (!b) return; const card = b.closest('.story'); const id = b.dataset.zoom; card.classList.toggle('big'); if (card.classList.contains('big')) bigCards.add(id); else bigCards.delete(id); saveState(); });
   let t; document.getElementById('q').addEventListener('input', () => { clearTimeout(t); t=setTimeout(render,180); });
   ['char','onlyChanged','showEmpty','showCosmetic'].forEach(id => document.getElementById(id).addEventListener('change', () => render()));
   ['scope','showRemoved'].forEach(id => document.getElementById(id).addEventListener('change', () => { fillChars(); render(); }));
+  // persist the whole UI state across reloads (localStorage of this file's origin)
+  function saveState() {
+    try {
+      localStorage.setItem('codexState', JSON.stringify({
+        q: document.getElementById('q').value, kinds: [...active], char: charSel.value, scope: scopeSel.value,
+        onlyChanged: document.getElementById('onlyChanged').checked, showCosmetic: document.getElementById('showCosmetic').checked,
+        showEmpty: document.getElementById('showEmpty').checked, showRemoved: document.getElementById('showRemoved').checked, charMode }));
+      localStorage.setItem('codexBig', JSON.stringify([...bigCards]));
+    } catch (e) {}
+  }
+  (function restoreState() {
+    let st = null; try { st = JSON.parse(localStorage.getItem('codexState') || 'null'); } catch (e) {}
+    if (!st) return;
+    document.getElementById('q').value = st.q || '';
+    if (Array.isArray(st.kinds)) { active.clear(); st.kinds.forEach(k => active.add(k)); kinds.querySelectorAll('.chip').forEach((el, i) => { const k = KIND_ORDER.filter(x => kindCount[x])[i]; el.classList.toggle('on', active.has(k)); }); }
+    ['onlyChanged','showCosmetic','showEmpty','showRemoved'].forEach(id => { if (typeof st[id] === 'boolean') document.getElementById(id).checked = st[id]; });
+    if (st.scope && [...scopeSel.options].some(o => o.value === st.scope)) scopeSel.value = st.scope;
+    charMode = st.charMode || 'lines';
+    fillChars();
+    if (st.char) charSel.value = [...charSel.options].some(o => o.value === st.char) ? st.char : '';
+  })();
   fillChars();
   render();
 })();
