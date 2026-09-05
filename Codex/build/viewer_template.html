@@ -59,7 +59,7 @@ aside{border-right:1px solid var(--line);background:var(--surface);padding:16px 
 main{overflow:auto;padding:18px 26px 60px}
 .resultbar{display:flex;align-items:baseline;gap:14px;margin-bottom:14px;color:var(--muted);font-size:12.5px}
 .resultbar b{color:var(--ink);font-variant-numeric:tabular-nums}
-.story{background:var(--surface);border:1px solid var(--line);border-radius:6px;margin-bottom:14px;max-width:920px}
+.story{background:var(--surface);border:1px solid var(--line);border-radius:6px;margin-bottom:14px;max-width:var(--maxw)}
 .story.removed{border-color:var(--brick);border-style:dashed}
 .shead{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px;padding:12px 18px 10px;border-bottom:1px solid var(--line)}
 .shead h2{font-family:var(--serif);font-size:16.5px;font-weight:400;margin:0;text-wrap:balance}
@@ -76,18 +76,21 @@ main{overflow:auto;padding:18px 26px 60px}
 .ln .txt i{font-style:italic;opacity:.92}
 .grp{font-family:var(--serif);font-size:15px;color:var(--muted);margin:18px 0 8px;padding-bottom:4px;border-bottom:1px dashed var(--line)}
 .ver{font-family:var(--mono);font-size:11px;color:var(--faint)}
-.script{padding:12px 18px 14px;font-family:var(--mono);font-size:13.5px;line-height:1.5}
+main{--pw:56px;--fs:13.5px;--maxw:920px}
+main.size-m{--pw:96px;--fs:15.5px;--maxw:1100px}
+main.size-l{--pw:150px;--fs:18px;--maxw:1320px}
+.script{padding:12px 18px 14px;font-family:var(--mono);font-size:var(--fs);line-height:1.5}
 .ln{display:grid;grid-template-columns:150px 1fr;gap:0 14px;padding:3px 0;align-items:baseline}
-.ln.stage{grid-template-columns:56px 1fr 56px;align-items:center;gap:0 12px;padding:5px 0}
-.ln.stage .who{grid-column:2;font-size:11px;letter-spacing:.06em;margin-bottom:2px}
+.ln.stage{grid-template-columns:var(--pw) 1fr var(--pw);align-items:center;gap:0 14px;padding:6px 0}
+.ln.stage .who{grid-column:2;font-size:calc(var(--fs) * .82);letter-spacing:.06em;margin-bottom:2px}
 .ln.stage .who small{display:inline;margin-left:8px}
 .ln.stage .txt{grid-column:2;max-width:none}
-.ln.stage .side{grid-row:1/3;width:56px;height:56px;display:flex;align-items:flex-end;justify-content:center}
+.ln.stage .side{grid-row:1/3;width:var(--pw);height:var(--pw);display:flex;align-items:flex-end;justify-content:center}
 .ln.stage .side.l{grid-column:1} .ln.stage .side.r{grid-column:3}
-.ln.stage .side img{width:56px;height:56px;object-fit:contain;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
+.ln.stage .side img{width:var(--pw);height:var(--pw);object-fit:contain;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
 .ln.stage .side.mute img{opacity:.38;filter:grayscale(.6)}
 .ln.stage .side.r img{transform:scaleX(-1)}
-.ln.stage .side .ph{width:44px;height:44px;border-radius:50%;border:1px dashed var(--line);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--faint);text-align:center;line-height:1.1}
+.ln.stage .side .ph{width:calc(var(--pw) * .8);height:calc(var(--pw) * .8);border-radius:50%;border:1px dashed var(--line);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--faint);text-align:center;line-height:1.1}
 .ln .who{text-transform:uppercase;letter-spacing:.04em;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ln .who small{display:block;font-weight:400;text-transform:none;letter-spacing:0;color:var(--faint);font-size:11px}
 .ln .txt{max-width:66ch}
@@ -115,6 +118,7 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
     <div class="fld"><label for="char">Character speaking</label><select id="char"><option value="">Any character</option></select>
       <div class="chips" style="margin-top:6px"><button type="button" class="chip on" id="charSortLines">by lines</button><button type="button" class="chip" id="charSortAz">A–Z</button></div></div>
     <div class="fld"><label for="scope">Area or event</label><select id="scope"><option value="">Anywhere</option></select></div>
+    <div class="fld"><label>Dialogue size</label><div class="chips" id="sizeChips"><button type="button" class="chip on" data-size="s">S</button><button type="button" class="chip" data-size="m">M</button><button type="button" class="chip" data-size="l">L</button></div></div>
     <label class="toggle"><input type="checkbox" id="onlyChanged"> Only lines whose text was rewritten between game versions</label>
     <label class="toggle"><input type="checkbox" id="showCosmetic"> Also show cosmetic edits (typos, punctuation, markup)</label>
     <label class="toggle"><input type="checkbox" id="showEmpty" checked> Show silent lines (no text, camera/animation beats)</label>
@@ -194,6 +198,10 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
     document.getElementById('charSortLines').classList.toggle('on', charMode !== 'az');
     document.getElementById('charSortAz').classList.toggle('on', charMode === 'az');
   }
+  const mainEl = document.querySelector('main');
+  function applySize(sz) { mainEl.classList.remove('size-m','size-l'); if (sz !== 's') mainEl.classList.add('size-' + sz); document.querySelectorAll('#sizeChips .chip').forEach(b => b.classList.toggle('on', b.dataset.size === sz)); try { localStorage.setItem('codexSize', sz); } catch (e) {} }
+  document.querySelectorAll('#sizeChips .chip').forEach(b => b.onclick = () => applySize(b.dataset.size));
+  try { applySize(localStorage.getItem('codexSize') || 's'); } catch (e) { applySize('s'); }
   document.getElementById('charSortLines').onclick = () => fillChars('lines');
   document.getElementById('charSortAz').onclick = () => fillChars('az');
   // areas in game progression order (wiki orderingIndex from Module:Datatable/Areas/Mapping), unknown ones last
