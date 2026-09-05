@@ -27,7 +27,7 @@ def latest(run_list):
 
 def clean_markup(text):
     """In-game rich text -> Markdown: <color=#...>x</color> -> **x**, <i>/<b> -> _ / **."""
-    text = re.sub(r"<color=#[0-9A-Fa-f]{6,8}>(.*?)</color>", r"****", text)
+    text = re.sub(r"<color=#[0-9A-Fa-f]{6,8}>(.*?)</color>", r"**\1**", text)
     return re.sub(r"</?i>", "_", text).replace("<b>", "**").replace("</b>", "**")
 
 

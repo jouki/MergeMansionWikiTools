@@ -249,7 +249,7 @@
 `LDE_HolidayCarols2023_LoopExplainer_Dialogue` · seen 25.05.01–26.07.01
 - trigger: event, eventType=event story, event=The Fa-la-la-la Follies, eventId=LDE_HolidayCarols2023, moment=part of the event (exact trigger not dumped) (versions 25.05.01–26.07.01)
 
-**MADDIE** (Joyous): Good job! Remember, the best way to advance in the event is to ****, **** and **** and voila, points galore
+**MADDIE** (Joyous): Good job! Remember, the best way to advance in the event is to **Create a caroling stage**, **get instruments** and **band outfits** and voila, points galore
 
 ### The Fa-la-la-la Follies — item discovered: Paper Crown
 `LDE_HolidayCarols2023_ReverseCracker_06_Dialogue` · seen 25.05.01–26.07.01

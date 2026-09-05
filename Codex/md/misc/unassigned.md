@@ -5,34 +5,34 @@ Stories the config defines that no dumped trigger, area id or hand rule places. 
 ## MMM (18)
 - `MMM_FTUE_Done` (26.07.01–26.07.01): Maddie: Amazing!
 Grandma's house looks brand new!
-- `MMM_FTUE_Hotspot12_Merge_Idle1_Guide` (26.07.01–26.07.01): Maddie: **** the ****
-to **** !
-- `MMM_FTUE_Hotspot12_Merge_Idle2_Guide` (26.07.01–26.07.01): Maddie: **** the ****
-to create a ****.
+- `MMM_FTUE_Hotspot12_Merge_Idle1_Guide` (26.07.01–26.07.01): Maddie: **DRAG** the **Water Bucket**
+to **MERGE** !
+- `MMM_FTUE_Hotspot12_Merge_Idle2_Guide` (26.07.01–26.07.01): Maddie: **MERGE** the **Water Buckets**
+to create a **Fire Extinguisher**.
 - `MMM_FTUE_Hotspot1_Complete` (26.07.01–26.07.01): Maddie: Awesome!
-This **** will help slow down the flames.
-- `MMM_FTUE_Hotspot1_Map_Guide` (26.07.01–26.07.01): Maddie: **** the **** to help put out the fire.
+This **Fire Extinguisher** will help slow down the flames.
+- `MMM_FTUE_Hotspot1_Map_Guide` (26.07.01–26.07.01): Maddie: **TAP** the **Fire Extinguisher** to help put out the fire.
 - `MMM_FTUE_Hotspot2_Complete` (26.07.01–26.07.01): Maddie: Phew! That was intense.
 The fire's finally out! / Maddie: The fire may be out, but the house is a mess!
 It's gonna need a good scrub.
 - `MMM_FTUE_Hotspot2_Map_Guide` (26.07.01–26.07.01): Maddie: Almost there!
-**** the **** to put out the rest of the fire.
-- `MMM_FTUE_Hotspot2_Merge_Idle3_Guide` (26.07.01–26.07.01): Maddie: **** the ****
-to create a ****.
-- `MMM_FTUE_Hotspot3_Complete` (26.07.01–26.07.01): Maddie: This **** has everything I need to get rid of these tough stains!
+**TAP** the **Fire Hose** to put out the rest of the fire.
+- `MMM_FTUE_Hotspot2_Merge_Idle3_Guide` (26.07.01–26.07.01): Maddie: **MERGE** the **Fire Extinguisher**
+to create a **Fire Hose**.
+- `MMM_FTUE_Hotspot3_Complete` (26.07.01–26.07.01): Maddie: This **Cleaning cart** has everything I need to get rid of these tough stains!
 - `MMM_FTUE_Hotspot3_Intro` (26.07.01–26.07.01): Maddie: The fire may be out, but the house is a mess!
 It's gonna need a good scrub.
-- `MMM_FTUE_Hotspot3_Map_Guide` (26.07.01–26.07.01): Maddie: **** the ****
+- `MMM_FTUE_Hotspot3_Map_Guide` (26.07.01–26.07.01): Maddie: **TAP** the **Cleaning Cart**
 to help clean up this mess.
 - `MMM_FTUE_Hotspot3_Merge_Idle1_Guide` (26.07.01–26.07.01): Maddie: The board is full!
-Time to ****!
-- `MMM_FTUE_Hotspot3_Merge_Idle2_Guide` (26.07.01–26.07.01): Maddie: **** the ****
-to create ****.
-- `MMM_FTUE_Hotspot3_Merge_Idle3_Guide` (26.07.01–26.07.01): Maddie: **** the ****
-to create a ****.
-- `MMM_FTUE_Hotspot3_Merge_Idle4_Guide` (26.07.01–26.07.01): Maddie: **** the ****
-to create a ****.
-- `MMM_FTUE_Hotspot3_Produce_Guide` (26.07.01–26.07.01): Maddie: **** the **** to produce items.
+Time to **MERGE**!
+- `MMM_FTUE_Hotspot3_Merge_Idle2_Guide` (26.07.01–26.07.01): Maddie: **Merge** the **Cleaning Towels**
+to create **Rubber Gloves**.
+- `MMM_FTUE_Hotspot3_Merge_Idle3_Guide` (26.07.01–26.07.01): Maddie: **MERGE** the **Rubber Gloves**
+to create a **Cleaning Spray**.
+- `MMM_FTUE_Hotspot3_Merge_Idle4_Guide` (26.07.01–26.07.01): Maddie: **MERGE** the **Cleaning Spray**
+to create a **Cleaning Cart**.
+- `MMM_FTUE_Hotspot3_Produce_Guide` (26.07.01–26.07.01): Maddie: **TAP** the **Cleaning Bucket** to produce items.
 - `MMM_FTUE_Intro` (26.07.01–26.07.01): Maddie: Is that Grandma’s house?! / Maddie: It's on fire!
 I need to help put it out!
 - `MMM_FTUE_Intro3` (26.02.01–26.07.01): Maddie: Is that Grandma’s house?! It's on fire!
@@ -77,44 +77,44 @@ Let's put it out, quickly!
 - `XMas2021StairsTutorialAttic` (22.02.06–22.02.06): Maddie: This garage has an attic!!! / Grandma: I can’t remember the last time I climbed up here. It must-- / Maddie: Wasn’t your back sore, grandma?
 
 ## FTUE (16)
-- `FTUE_Claim_Max_Coins` (23.11.02–26.07.01): Maddie: Let's **** the Coins to claim them!
+- `FTUE_Claim_Max_Coins` (23.11.02–26.07.01): Maddie: Let's **double Tap** the Coins to claim them!
 - `FTUE_DTOB_NewPlayers_Pouch` (25.06.01–26.07.01): Maddie: You can find your rewards in the Pouch, even when your Board is full.
-**** it to get your rewards on the Boar
-- `FTUE_DTOB_OldPlayers_InfoPanel` (25.06.01–26.07.01): Maddie: Last but not least, the **** has been moved to the bottom of the screen!
-Hope you like the new layout!
+**Tap** it to get your rewards on the Bo
+- `FTUE_DTOB_OldPlayers_InfoPanel` (25.06.01–26.07.01): Maddie: Last but not least, the **Items info panel** has been moved to the bottom of the screen!
+Hope you like the new
 - `FTUE_DTOB_OldPlayers_Intro` (25.06.01–26.07.01): Maddie: We have changed the merge board view a bit!
 Let me show you around!
-- `FTUE_DTOB_OldPlayers_Pouch` (25.06.01–26.07.01): Maddie: Your **** has been moved to the top of the Merge Board.
-- `FTUE_DTOB_OldPlayers_Tasks` (25.06.01–26.07.01): Maddie: You can now see your ****
+- `FTUE_DTOB_OldPlayers_Pouch` (25.06.01–26.07.01): Maddie: Your **Pouch** has been moved to the top of the Merge Board.
+- `FTUE_DTOB_OldPlayers_Tasks` (25.06.01–26.07.01): Maddie: You can now see your **tasks on top of the board!**
 How handy!
-- `FTUE_FTUE_Merge_Coins` (23.11.02–26.07.01): Maddie: Wow, so many ****! These are going to come in handy! Let's Merge them!
+- `FTUE_FTUE_Merge_Coins` (23.11.02–26.07.01): Maddie: Wow, so many **Coins**! These are going to come in handy! Let's Merge them!
 - `FTUE_First_Chest_Tutorial_OpenChest_Dialogue` (23.11.02–26.07.01): Maddie: Let's start opening it by Tapping the button.
 - `FTUE_First_Chest_Tutorial_OpenChest_Dialogue_Alt` (25.06.01–26.07.01): Maddie: Let's start opening it by Tapping the button.
-- `FTUE_First_Chest_Tutorial_SpeedUp_Dialogue` (23.11.02–26.07.01): Maddie: This **** takes a few minutes to open. You can **** with ****! This time it is free!
-- `FTUE_NewShopButton_Board` (25.05.01–26.07.01): Maddie: **** can now be found at ****
-- `FTUE_NewShopButton_Map` (25.05.01–26.07.01): Maddie: You can now access **** from the main view as well!
-- `FTUE_Profile_Settings` (25.05.01–26.07.01): Maddie: The **** can be found from here!
-- `FTUE_Profile_Settings_Existing` (25.05.01–26.07.01): Maddie: The **** has been moved under the XP menu!
-- `FTUE_Shop_Highlight_Item` (23.11.02–26.07.01): Maddie: Oh! Just what we need. Let's grab it. Every day you can get a ****! in the Shop!
-- `FTUE_ToDoButton_Intro` (23.11.02–26.07.01): Maddie: You can also see and **** here, from your garage or the mansion grounds.
+- `FTUE_First_Chest_Tutorial_SpeedUp_Dialogue` (23.11.02–26.07.01): Maddie: This **Chest** takes a few minutes to open. You can **speed up Chests** with **Gems**! This time it is free!
+- `FTUE_NewShopButton_Board` (25.05.01–26.07.01): Maddie: **The Shop** can now be found at **the top of the screen!**
+- `FTUE_NewShopButton_Map` (25.05.01–26.07.01): Maddie: You can now access **the Shop** from the main view as well!
+- `FTUE_Profile_Settings` (25.05.01–26.07.01): Maddie: The **Settings menu** can be found from here!
+- `FTUE_Profile_Settings_Existing` (25.05.01–26.07.01): Maddie: The **Settings menu** has been moved under the XP menu!
+- `FTUE_Shop_Highlight_Item` (23.11.02–26.07.01): Maddie: Oh! Just what we need. Let's grab it. Every day you can get a **free item**! in the Shop!
+- `FTUE_ToDoButton_Intro` (23.11.02–26.07.01): Maddie: You can also see and **complete tasks** here, from your garage or the mansion grounds.
 
 ## Item (16)
-- `Item_Intro_BroomCabinet_Active` (26.07.01–26.07.01): Maddie: Your **** is ready to use! Tap to see what's inside.
-- `Item_Intro_BroomCabinet_Lvl1` (26.07.01–26.07.01): Maddie: You found a ****! Merge it to unlock what's inside.
-- `Item_Intro_Drawer_Active` (26.07.01–26.07.01): Maddie: Your **** is ready to use! Tap to see what's inside.
-- `Item_Intro_Drawer_Alt` (26.07.01–26.07.01): Maddie: Your **** is ready to use! It may contain something unexpected.
-- `Item_Intro_Drawer_Lvl1` (26.07.01–26.07.01): Maddie: You found a ****! Merge it to discover what's inside.
-- `Item_Intro_Flowerpot_Active` (26.07.01–26.07.01): Maddie: Your **** is ready to use! Tap to see what's inside.
-- `Item_Intro_Flowerpot_Lvl1` (26.07.01–26.07.01): Maddie: You found a ****! Merge it to make it bloom.
-- `Item_Intro_PlantedBush_Active` (26.07.01–26.07.01): Maddie: Your **** is ready to use! Tap to see what's inside.
-- `Item_Intro_PlantedBush_Lvl1` (26.07.01–26.07.01): Maddie: You found a ****! Merge it to help it grow.
-- `Item_Intro_StoneGate` (26.07.01–26.07.01): Maddie: You found the **** Tap it to search for the ****
-- `Item_Intro_Toolbox_Active` (26.07.01–26.07.01): Maddie: Your **** is ready to use! Tap to see what's inside.
-- `Item_Intro_Toolbox_Lvl1` (26.07.01–26.07.01): Maddie: You found a ****! Merge it to unlock what's inside.
-- `Item_Intro_ToyCar_Active` (26.07.01–26.07.01): Maddie: Your **** is ready to use! Tap to see what's inside.
-- `Item_Intro_ToyCar_Lvl1` (26.07.01–26.07.01): Maddie: You found a ****! Merge it to see what it can power.
-- `Item_Intro_Tree_Active` (26.07.01–26.07.01): Maddie: Your **** is ready to use! Tap to see what's inside.
-- `Item_Intro_Tree_Lvl1` (26.07.01–26.07.01): Maddie: You found a ****! Merge it to grow it into something useful.
+- `Item_Intro_BroomCabinet_Active` (26.07.01–26.07.01): Maddie: Your **Broom Cabinet** is ready to use! Tap to see what's inside.
+- `Item_Intro_BroomCabinet_Lvl1` (26.07.01–26.07.01): Maddie: You found a **Broom Cabinet**! Merge it to unlock what's inside.
+- `Item_Intro_Drawer_Active` (26.07.01–26.07.01): Maddie: Your **Drawer** is ready to use! Tap to see what's inside.
+- `Item_Intro_Drawer_Alt` (26.07.01–26.07.01): Maddie: Your **Drawer** is ready to use! It may contain something unexpected.
+- `Item_Intro_Drawer_Lvl1` (26.07.01–26.07.01): Maddie: You found a **Drawer**! Merge it to discover what's inside.
+- `Item_Intro_Flowerpot_Active` (26.07.01–26.07.01): Maddie: Your **Flowerpot** is ready to use! Tap to see what's inside.
+- `Item_Intro_Flowerpot_Lvl1` (26.07.01–26.07.01): Maddie: You found a **Flowerpot**! Merge it to make it bloom.
+- `Item_Intro_PlantedBush_Active` (26.07.01–26.07.01): Maddie: Your **Planted Bush** is ready to use! Tap to see what's inside.
+- `Item_Intro_PlantedBush_Lvl1` (26.07.01–26.07.01): Maddie: You found a **Planted Bush**! Merge it to help it grow.
+- `Item_Intro_StoneGate` (26.07.01–26.07.01): Maddie: You found the **Stone Gate!** Tap it to search for the **Stone Can!**
+- `Item_Intro_Toolbox_Active` (26.07.01–26.07.01): Maddie: Your **Toolbox** is ready to use! Tap to see what's inside.
+- `Item_Intro_Toolbox_Lvl1` (26.07.01–26.07.01): Maddie: You found a **Toolbox**! Merge it to unlock what's inside.
+- `Item_Intro_ToyCar_Active` (26.07.01–26.07.01): Maddie: Your **Toy Car** is ready to use! Tap to see what's inside.
+- `Item_Intro_ToyCar_Lvl1` (26.07.01–26.07.01): Maddie: You found a **Toy Car**! Merge it to see what it can power.
+- `Item_Intro_Tree_Active` (26.07.01–26.07.01): Maddie: Your **Tree** is ready to use! Tap to see what's inside.
+- `Item_Intro_Tree_Lvl1` (26.07.01–26.07.01): Maddie: You found a **Tree**! Merge it to grow it into something useful.
 
 ## Valentine (16)
 - `Valentine2022Decoration01` (22.02.06–22.02.06): Roddy: Your decorations make me wish every day was Valentine’s Day! / Maddie: Thanks! Maybe your wish will come true when you find a valentine for life! / Roddy: I think I have found her, Maddie…
@@ -191,13 +191,13 @@ How handy!
 
 ## GetSawMergeTools (8)
 - `GetSawMergeTools1` (22.02.06–26.07.01): Maddie: Let's Merge these garden knives to get a Garden Fork.
-- `GetSawMergeTools1_DTOB` (26.07.01–26.07.01): Maddie: Ooh, a pair of ****. If we **** them, we'll get a ****!
+- `GetSawMergeTools1_DTOB` (26.07.01–26.07.01): Maddie: Ooh, a pair of **garden knives**. If we **merge** them, we'll get a **garden fork**!
 - `GetSawMergeTools2` (22.02.06–26.07.01): Maddie: Let's get another garden fork. Let's try to Merge these knives.
-- `GetSawMergeTools2_DTOB` (26.07.01–26.07.01): Maddie: We could use another ****. Let's **** these ****.
+- `GetSawMergeTools2_DTOB` (26.07.01–26.07.01): Maddie: We could use another **garden fork**. Let's **merge** these **garden knives**.
 - `GetSawMergeTools3` (22.02.06–26.07.01): Maddie: Another garden fork! Let's Merge these garden forks.
-- `GetSawMergeTools3_DTOB` (26.07.01–26.07.01): Maddie: There's our ****. Now to **** them together.
+- `GetSawMergeTools3_DTOB` (26.07.01–26.07.01): Maddie: There's our **garden fork**. Now to **merge** them together.
 - `GetSawMergeTools4` (22.02.06–26.07.01): Maddie: Pruning shears! There must be an axe somewhere in here. Let's Merge these shears.
-- `GetSawMergeTools4_DTOB` (26.07.01–26.07.01): Maddie: That's a pair of ****. Let's **** them to see what we get.
+- `GetSawMergeTools4_DTOB` (26.07.01–26.07.01): Maddie: That's a pair of **pruning shears**. Let's **merge** them to see what we get.
 
 ## Stablesext (8)
 - `Stablesext_03` (25.05.01–26.07.01): Winston: That brings us back to this filly here, descendant of the great Boulton Blues. / Winston: I guess you could say she found her way back home. / Babylon: *Squeee*
@@ -256,7 +256,7 @@ How handy!
 ## MergeIntroGlovesLevel (3)
 - `MergeIntroGlovesLevel1Merge` (22.02.06–26.07.01): Maddie: A gardening glove! If we find a pair, we can use these to clear a path to the mansion!
 - `MergeIntroGlovesLevel2Merge` (22.02.06–26.07.01): Maddie: Almost there. Merge it one more time.
-- `MergeIntroGlovesLevel2Merge_Ideal` (26.07.01–26.07.01): Maddie: Nice! Just ****!
+- `MergeIntroGlovesLevel2Merge_Ideal` (26.07.01–26.07.01): Maddie: Nice! Just **one more merge**!
 
 ## TaskGroupsFTUE (3)
 - `TaskGroupsFTUE1` (25.06.01–26.07.01): Maddie: Complete all the tasks and fill the progress bar to perform a grand renovation!
@@ -265,11 +265,11 @@ How handy!
 
 ## AnotherPairOfGlovesFound (2)
 - `AnotherPairOfGlovesFound` (22.02.06–26.07.01): Maddie: Gardening gloves! First to the door gets all the marbles!
-- `AnotherPairOfGlovesFound_DTOB` (26.07.01–26.07.01): Maddie: Ah-ha! ****.
+- `AnotherPairOfGlovesFound_DTOB` (26.07.01–26.07.01): Maddie: Ah-ha! **Gardening gloves**.
 
 ## AnotherPairOfGlovesNeeded (2)
 - `AnotherPairOfGlovesNeeded_02` (22.02.06–26.07.01): Maddie: Let's see if there are more Gloves in the barrel!
-- `AnotherPairOfGlovesNeeded_02_DTOB` (26.07.01–26.07.01): Maddie: There must be another **** in here.
+- `AnotherPairOfGlovesNeeded_02_DTOB` (26.07.01–26.07.01): Maddie: There must be another **pair of gloves** in here.
 
 ## CurrencyBankIntro (2)
 - `CurrencyBankIntro01` (23.09.02–26.07.01): Maddie: Hey, these must be Grandma's savings from her childhood! I remember her talking about it... I wonder if anythi / Maddie: It's empty..yet! Seems like it can be very useful.
@@ -277,17 +277,17 @@ How handy!
 But I'm sure this thing will come in handy!
 
 ## DTOB (2)
-- `DTOB_New_Players_FTUE_01` (25.06.01–26.07.01): Maddie: You can see the **** on top of the merge board!
-- `DTOB_New_Players_FTUE_Highlight_Card` (25.06.01–26.07.01): Maddie: Looks like your **** to be completed!
- **** the **** Button to return to the Mansion grounds.
+- `DTOB_New_Players_FTUE_01` (25.06.01–26.07.01): Maddie: You can see the **requirements for your tasks** on top of the merge board!
+- `DTOB_New_Players_FTUE_Highlight_Card` (25.06.01–26.07.01): Maddie: Looks like your **task is ready** to be completed!
+ **Tap** the **Complete** Button to return to the Mansion g
 
 ## GetRidOfTheLog (2)
 - `GetRidOfTheLog` (22.02.06–26.07.01): Maddie: There's an axe! Now we can chop up that log!
-- `GetRidOfTheLog_DTOB` (26.07.01–26.07.01): Maddie: That's the **** we need! Time to channel my inner lumberjack.
+- `GetRidOfTheLog_DTOB` (26.07.01–26.07.01): Maddie: That's the **axe** we need! Time to channel my inner lumberjack.
 
 ## GetSawSpawnMoreItems (2)
 - `GetSawSpawnMoreItems` (22.02.06–26.07.01): Maddie: Let's see what else is in the box.
-- `GetSawSpawnMoreItems_DTOB` (26.07.01–26.07.01): Maddie: Let's **** the **** for more items!
+- `GetSawSpawnMoreItems_DTOB` (26.07.01–26.07.01): Maddie: Let's **tap** the **Tool Barrel** for more items!
 
 ## Halloween (2)
 - `Halloween2021Intro` (22.02.06–22.02.06): Maddie: Who's there?
@@ -295,19 +295,19 @@ But I'm sure this thing will come in handy!
 
 ## MergeIntroGlovesMaxLevel (2)
 - `MergeIntroGlovesMaxLevel` (22.02.06–26.07.01): Maddie: We found a pair! Let's go clean the driveway!
-- `MergeIntroGlovesMaxLevel_DTOB` (26.07.01–26.07.01): Maddie: That's a ****! Let's clear the path.
+- `MergeIntroGlovesMaxLevel_DTOB` (26.07.01–26.07.01): Maddie: That's a **sturdy pair of gloves**! Let's clear the path.
 
 ## MergeIntroSecondMerge (2)
 - `MergeIntroSecondMerge` (22.02.06–26.07.01): Maddie: Great! Now let's Merge these two.
-- `MergeIntroSecondMerge_Ideal` (26.07.01–26.07.01): Maddie: Now let's **** these two.
+- `MergeIntroSecondMerge_Ideal` (26.07.01–26.07.01): Maddie: Now let's **merge** these two.
 
 ## ProducerInventory (2)
-- `ProducerInventory_FTUE` (23.11.02–26.07.01): Maddie: You unlocked ****! / Maddie: **** allows you to store **** and their parts
+- `ProducerInventory_FTUE` (23.11.02–26.07.01): Maddie: You unlocked **Producer Inventory**! / Maddie: **Producer Inventory** allows you to store **Producers** and their parts
 
 That will come in handy! / Maddie: One thing to keep in mind -
-**** are paused when they are placed in the ****
+**Producers** are paused when they are placed in the **Inventory!**
 - `ProducerInventory_Locked_FTUE` (25.05.01–26.07.01): Maddie: Good job!
-You discovered additional **** space!
+You discovered additional **Inventory** space!
 
 Play further to fully unlock it
 
@@ -317,7 +317,7 @@ Play further to fully unlock it
 
 ## StartOpeningTheFirstChest (2)
 - `StartOpeningTheFirstChest` (22.02.06–26.07.01): Maddie: A chest! It takes a while to open them, so you'd best start on it now.
-- `StartOpeningTheFirstChest_DTOB` (26.07.01–26.07.01): Maddie: A ****! This may take a while to open, let's get started!
+- `StartOpeningTheFirstChest_DTOB` (26.07.01–26.07.01): Maddie: A **treasure chest**! This may take a while to open, let's get started!
 
 ## AdStampCardEventTest (1)
 - `AdStampCardEventTest_Intro_Dialogue` (25.05.01–26.07.01): Mason: Are you ready to start a stamp collection? / Mason: And I don't mean the old, dusty paper stamps Julius loves... / Mason: This is way cooler than that!
@@ -345,7 +345,7 @@ Play further to fully unlock it
 
 ## FastMode (1)
 - `FastMode_FTUE` (25.05.01–26.07.01): Maddie: Good job!
-**** has been unlocked!
+**Supercharge** has been unlocked!
 
 Let's try it out on the Garage Board.
 
@@ -416,7 +416,7 @@ Let's try it out on the Garage Board.
 - `MergeIntroFirstTap` (22.02.06–26.07.01): Maddie: A barrel of garden tools! Maybe there's something in there we can use. Tap it to find out!
 
 ## MergeIntroPruningShears (1)
-- `MergeIntroPruningShears` (26.07.01–26.07.01): Maddie: Those are the **** we need! Let's clear the path!
+- `MergeIntroPruningShears` (26.07.01–26.07.01): Maddie: Those are the **pruning shears** we need! Let's clear the path!
 
 ## MergeIntroTapSpawnMore (1)
 - `MergeIntroTapSpawnMore` (22.02.06–26.07.01): Maddie: These might come handy! Tap to see what else is in the box!
@@ -425,14 +425,14 @@ Let's try it out on the Garage Board.
 - `MergeIntroThirdMerge` (22.02.06–26.07.01): Maddie: We can clean up dusty barrels by merging them. Try merging these two!
 
 ## MergeIntroWheelbarrow (1)
-- `MergeIntroWheelbarrow` (26.07.01–26.07.01): Maddie: A ****! That's exactly what we need!
+- `MergeIntroWheelbarrow` (26.07.01–26.07.01): Maddie: A **Wheelbarrow**! That's exactly what we need!
 
 ## Passports (1)
 - `Passports` (23.09.02–26.07.01): Maddie: A bunch of passports, all with the same name - “Eric Hal”. / Maddie: Hold on, I think that’s an anagram. If I rearrange it, it spells... / Maddie: Charlie!
 
 ## PouchIntro (1)
 - `PouchIntro` (23.11.02–26.07.01): Maddie: You can find your rewards in the Pouch, even when your Board is full.
-**** it to get your rewards on the Boar
+**Tap** it to get your rewards on the Bo
 
 ## RoddyAppearsFirstTime (1)
 - `RoddyAppearsFirstTime` (22.02.06–26.07.01): Maddie: There's someone at the gate. Did we get our first guest already?
