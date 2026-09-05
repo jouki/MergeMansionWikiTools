@@ -14,3 +14,14 @@
 **JACKIE**: They're getting worse, Maddie. The theories people are throwing around are crazy!
 **JACKIE**: Ursula and the Mansion are getting a lot of unwanted attention.
 **JACKIE**: I'm afraid it'll only be a question of time before someone shows up here up to no good.
+
+### Raccoon Riddle — item discovered: Watermelon Jackpot
+`SP_RaccoonPet2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
+- trigger: item, event=Raccoon Riddle, eventKey=SP_RaccoonPet2025, itemKeys=['SP_RaccoonPet2025_CollectableItems_04'], items=['Watermelon Jackpot'], moment=item discovered (versions 25.05.01–26.07.01)
+
+**MADDIE**: Thanks for helping me with the boxes and crates. When I let the circus set up at the Mansion, I didn't realize how much stuff they would have.
+**JACKIE** (Hesitant): I hear you. There's a whole box full of red clown noses over there!
+**MADDIE** (Relaxed): You never know when you need one!
+**MADDIE** (Thinking): By the way, I think you're right about Grandma and her smartphone.
+**MADDIE** (Thinking): I overheard her talking about someone causing problems online. Someone she's trying to stop.
+**JACKIE** (Thinking): That's a great clue, Maddie! I'll do some more digging online - and you keep your eyes and ears open.

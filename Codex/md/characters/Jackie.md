@@ -11,9 +11,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Encouraging): Haha, sorry, Maddie. Unfortunately, I can't hang around to witness this next attempt. Duty calls!
 **JACKIE** (Worried): And be careful, this room looks like it was made to be hidden...
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Clippings_03
+### Five-Year Secret Celebration — item discovered: Set of Clippings
 `CBE_Anniversary2025_Clippings_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Clippings_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Clippings_03'], items=['Set of Clippings'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **JACKIE** (Doubtful): Fine, I'll tell you a secret.
 **MASON** (Joyous): Yesss! And remember, it has to be juicy - like the one Julius told us!
@@ -22,17 +22,17 @@ Every story in which Jackie speaks.
 **RODDY** (Thinking): And now you're trying to do the same here, at the Mansion?
 **JACKIE**: Something like that. And you all KNOW there's more than meets the eye at this place.
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Furniture_07
+### Five-Year Secret Celebration — item discovered: Dinner Table
 `CBE_Anniversary2025_Furniture_07_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Furniture_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Furniture_07'], items=['Dinner Table'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: The extra special table cloth, cleaned, starched and ironed, and the family porcelain all lined up.
 **MADDIE**: Seems like we're invited to one of the Boultons' legendary parties!
 **JACKIE** (Thinking): Who knows what we're in for, but I have to admit... I'm kinda excited!
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Grandma_07
+### Five-Year Secret Celebration — item discovered: Stack of Volumes
 `CBE_Anniversary2025_Grandma_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Grandma_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Grandma_07'], items=['Stack of Volumes'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA**: My guests, welcome! You have played my game of secrets well, and now it is your turn to ask the questions.
 **GRANDMA**: I will pull them out of the hat, one by one. The first one is...
@@ -57,9 +57,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Thinking): I wonder... Could it be for the 5th anniversary?  
   _earlier:_ ~~That would be a first...~~ (until 25.07.01)
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Jackie_03
+### Five-Year Secret Celebration — item discovered: Notebook
 `CBE_Anniversary2025_Jackie_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Jackie_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Jackie_03'], items=['Notebook'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **ANTIQUEDEALER**: Jackie, what is your secret? What dark history are you hiding?
 **JACKIE**: No dark history here, folks. I don't have any secrets, you know that.
@@ -67,9 +67,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Thinking): True, and you've done a lot of research about it.
 **JACKIE** (Hesitant): So what? I'm telling you - I'm an open book.
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Jackie_07
+### Five-Year Secret Celebration — item discovered: Newspaper
 `CBE_Anniversary2025_Jackie_07_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Jackie_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Jackie_07'], items=['Newspaper'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: What made you want to become a journalist?
 **JACKIE**: I have a hunger for the truth. I wanna believe that good journalism can right wrongs and expose lies.
@@ -77,9 +77,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Surprised): Wow, we're really just laying it all out there!
 **MADDIE** (Thinking): That's how the game works...
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Julius_02
+### Five-Year Secret Celebration — item discovered: Fake Moustache
 `CBE_Anniversary2025_Julius_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Julius_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Julius_02'], items=['Fake Moustache'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **JACKIE**: Julius, you're up!
 **ANTIQUEDEALER** (Thinking): O-oh, right. My secret is... that I really hate peas.
@@ -88,9 +88,9 @@ Every story in which Jackie speaks.
 **ANTIQUEDEALER** (Worried): I never hid the key to the Mansion or burned down the sauna, I assure you!
 **JACKIE** (Surprised): Wait-- But you helped Charlie disappear?
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Maddie_05
+### Five-Year Secret Celebration — item discovered: Wedding Dress
 `CBE_Anniversary2025_Maddie_05_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Maddie_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Maddie_05'], items=['Wedding Dress'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON**: And then it's Maddie's turn. I just can't imagine what secrets you could be hiding!
 **JACKIE**: Come on, tell us!
@@ -103,9 +103,9 @@ Every story in which Jackie speaks.
 **MADDIE**: It was awful, but I'm fine now! The Mansion was exactly the distraction I needed to get over everything.
 **MADDIE** (Encouraging): And I've made great friends in the process.
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_MansionMysteries_05
+### Five-Year Secret Celebration — item discovered: Shield
 `CBE_Anniversary2025_MansionMysteries_05_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_MansionMysteries_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_MansionMysteries_05'], items=['Shield'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON** (Thinking): What are you going to ask her, Jackie? Are your reporter's senses tingling?
 **JACKIE** (Hesitant): I don't even know where to begin! I have about a million questions.
@@ -113,9 +113,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Surprised): What?
 **MASON** (Surprised): Hey, the game hasn't started yet!
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Questions_03
+### Five-Year Secret Celebration — item discovered: Hidden Questions
 `CBE_Anniversary2025_Questions_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Questions_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Questions_03'], items=['Hidden Questions'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **JACKIE** (Surprised): So we can ask her ANYTHING?
 **RODDY** (Worried): Sounds like it... a-and then we owe her one secret each?
@@ -125,9 +125,9 @@ Every story in which Jackie speaks.
 **ANTIQUEDEALER** (Thinking): I suppose so...
 **MASON** (Thinking): This party game is WEIRD.
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Serving_05
+### Five-Year Secret Celebration — item discovered: Cloche
 `CBE_Anniversary2025_Serving_05_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Serving_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Serving_05'], items=['Cloche'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **JACKIE** (Encouraging): Is it your Grandma's birthday? Is that why she's organizing a dinner party?
 **MADDIE** (Thinking): No... and she'd never throw big party for herself anyway.
@@ -145,9 +145,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Surprised): What??
 **JACKIE** (Thinking): The party games were pretty legendary, too.
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Slides_02
+### Five-Year Secret Celebration — item discovered: Box of Slides
 `CBE_Anniversary2025_Slides_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Slides_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Slides_02'], items=['Box of Slides'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Thinking): Is it just the five of us?
 **ANTIQUEDEALER**: Looks that way. The table is only set for five people.
@@ -155,10 +155,10 @@ Every story in which Jackie speaks.
 **MADDIE** (Doubtful): And why is that projector set up at the top of the table?
 **MASON** (Joyous): Maybe we should switch it on and see what happens?
 
-### CBE_HolidayWorkshop2024 — item discovered: 88167359
+### Bella's Holiday Workshop — item discovered: Jackie
 `CBE_HolidayWorkshop2024_CharacterJackie_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['88167359'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_CharacterJackie_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterJackie_02'], items=['Jackie'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterJackie_01'], items=['Jackie'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **EMILIO** (Encouraging): Jackie! How are you doing with your holiday shopping?  
   _earlier:_ ~~Hello, Jackie!~~ (until 25.10.01)
@@ -177,9 +177,9 @@ Every story in which Jackie speaks.
 **EMILIO** (Relaxed): Bella set up an online store for her terrible crafts, and we need to buy everything to spare her feelings.
 **JACKIE** (Joyous): I guess I could buy a quirky beanie to help out!
 
-### CBE_MaddieInParis2025 — decoration CBE_MaddieInParis2025_Decoration_Slot18
+### Maddie In Paris — decoration CBE_MaddieInParis2025_Decoration_Slot18
 `CBE_MaddieInParis2025_Slot_18_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_MaddieInParis2025_Decoration_Slot18, event=CBE_MaddieInParis2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_MaddieInParis2025_Decoration_Slot18, event=Maddie In Paris, eventKey=CBE_MaddieInParis2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE**: What was your favorite thing about Paris, Maddie?
 **MADDIE** (Relaxed): The whole city was just so full of... charm! It was really wonderful.
@@ -189,9 +189,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Encouraging): Oh, yeah. Some family recipe. He's very proud of it! Actually, he did this funny thing...
 **MADDIE** (Hesitant): I'd love to hear all about it, but I'm actually in a rush to... a thing with Grandma. See you later!
 
-### CBE_MasonsEggHunt2024 — decoration CBE_MasonsEggHunt2024_Decoration_Slot15
+### Egg-cellent Adventure — decoration CBE_MasonsEggHunt2024_Decoration_Slot15
 `CBE_MasonsEggHunt2024_Decoration_Slot15_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_MasonsEggHunt2024_Decoration_Slot15, event=CBE_MasonsEggHunt2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_MasonsEggHunt2024_Decoration_Slot15, event=Egg-cellent Adventure, eventKey=CBE_MasonsEggHunt2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): This egg hunt is not what I expected!
 **JACKIE**: I know! Mason really put us to work this year.
@@ -200,18 +200,16 @@ Every story in which Jackie speaks.
 **MADDIE** (Doubtful): And the code to padlock on the purse?
 **JACKIE** (Thinking): I think that boy knows more than we realize...
 
-### CBE_RecycleRunway2024 — item discovered: 73093576
+### Recycle Runway — item discovered: Clothing Rack
 `CBE_RecycleRunway2024_ClothingRack_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['73093576'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_StageDecorations_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_StageDecorations_06'], items=['Clothing Rack'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE** (Doubtful): Who's gonna model all of these outfits in the show? Imagine us on that runway!
 **PEARL** (Encouraging): Well, Julius and Roddy couldn't make it, so...
 
-### CBE_RecycleRunway2024 — item discovered: 83776900
+### Recycle Runway — item discovered: Crafting Desk
 `CBE_RecycleRunway2024_CraftingDesk_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['83776900'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_CraftingTools_09'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_CraftingTools_09'], items=['Crafting Desk'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL**: How's it going with Roddy? Are you two getting serious?
 **JACKIE** (Thinking): I don't know. It's kinda awkward with so much history...
@@ -219,17 +217,17 @@ Every story in which Jackie speaks.
 **PEARL** (Thinking): She's never had the hots for Roddy, has she?
 **JACKIE** (Surprised): I guess not...
 
-### CBE_RecycleRunway2024 — decoration CBE_RecycleRunway2024_Decoration_Slot18
+### Recycle Runway — decoration CBE_RecycleRunway2024_Decoration_Slot18
 `CBE_RecycleRunway2024_Decoration_Slot18_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_RecycleRunway2024_Decoration_Slot18, event=CBE_RecycleRunway2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_RecycleRunway2024_Decoration_Slot18, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL** (Encouraging): Recycled clothes don't have to look like garbage. It's all in how you set it up.
 **PEARL** (Encouraging): This boutique is so cute! Jackie and Maddie, you've both outdone yourselves.
 **JACKIE** (Encouraging): It doesn't look bad, does it?
 
-### CBE_RecycleRunway2024 — decoration CBE_RecycleRunway2024_Decoration_Slot19
+### Recycle Runway — decoration CBE_RecycleRunway2024_Decoration_Slot19
 `CBE_RecycleRunway2024_Decoration_Slot19_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_RecycleRunway2024_Decoration_Slot19, event=CBE_RecycleRunway2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_RecycleRunway2024_Decoration_Slot19, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE**: What do you think about the stuff we found in the trunk? I'm not sure I'm buying the story about an old Halloween costume.
 **PEARL** (Thinking): When I was a kid, people used to talk about the Boultons and their secret business.
@@ -237,37 +235,34 @@ Every story in which Jackie speaks.
 **JACKIE** (Doubtful): I don't know...
 **PEARL** (Surprised): How do you explain the bullet holes in that old hat?
 
-### CBE_RecycleRunway2024 — decoration CBE_RecycleRunway2024_Decoration_Slot24
+### Recycle Runway — decoration CBE_RecycleRunway2024_Decoration_Slot24
 `CBE_RecycleRunway2024_Decoration_Slot24_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_RecycleRunway2024_Decoration_Slot24, event=CBE_RecycleRunway2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_RecycleRunway2024_Decoration_Slot24, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL**: This skip is a real treasure trove!
 **JACKIE**: Yep. We'll be able to find all kinds of materials in here.
 **PEARL** (Doubtful): But we'll wash them first, right?
 **JACKIE** (Encouraging): Of course!
 
-### CBE_RecycleRunway2024 — item discovered: 64111150
+### Recycle Runway — item discovered: Fashion Magazine
 `CBE_RecycleRunway2024_FashionMagazine_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['64111150'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_Photoshoot_11'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_Photoshoot_11'], items=['Fashion Magazine'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Surprised): Our little project actually made it to the pages of a fashion magazine.
 **JACKIE** (Encouraging): Who knew recycled couture would be such a hit?
 
-### CBE_RecycleRunway2024 — item discovered: 88388988
+### Recycle Runway — item discovered: Garden Warrior Couture
 `CBE_RecycleRunway2024_GardenWarriorCouture_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['88388988'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_HauteCouture_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_HauteCouture_08'], items=['Garden Warrior Couture'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE**: So... How are things, you know, since Emilio left?
 **MADDIE** (Surprised): Just fine! I've been concentrating on the Mansion and getting a lot done and... Yeah, it's been great!
 **JACKIE** (Encouraging): Good to hear! You're okay with me seeing Roddy, right? I mean...
 **MADDIE** (Relaxed): W-what -- Of course I am! You guys are so great together. Honestly, don't worry about me!
 
-### CBE_RecycleRunway2024 — item discovered: 41442276
+### Recycle Runway — item discovered: Hat with Holes
 `CBE_RecycleRunway2024_HatWithHoles_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['41442276'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_MysteryItems_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_MysteryItems_05'], items=['Hat with Holes'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Thinking): That Mansion is full of weird secrets...
 **PEARL** (Thinking): I'm pretty sure Maddie doesn't know half of her family's history.
@@ -290,18 +285,16 @@ Every story in which Jackie speaks.
 **PEARL** (Doubtful): And it would give Maddie something to do about after Emilio left her to go help the fish in Bolivia...
 **JACKIE** (Surprised): What are we waiting for??
 
-### CBE_RecycleRunway2024 — item discovered: 88388994
+### Recycle Runway — item discovered: Lightbulb Headpiece
 `CBE_RecycleRunway2024_LightbulbHeadpiece_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['88388994'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_HauteCouture_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_HauteCouture_02'], items=['Lightbulb Headpiece'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Are those lightbulbs in that headpiece?
 **JACKIE** (Encouraging): Yeah, I thought they made a BRIGHT choice.
 
-### CBE_RecycleRunway2024 — item discovered: 73093570
+### Recycle Runway — item discovered: Main Stage
 `CBE_RecycleRunway2024_MainStage_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['73093570'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_StageDecorations_12'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_StageDecorations_12'], items=['Main Stage'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Encouraging): What a show, dearies! Your couture creations really are impressive.
 **JACKIE**: Thank you!
@@ -309,10 +302,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Thinking): We found them in an old trunk in the basement... But what are they, anyway - an old Halloween outfit?
 **GRANDMA** (Surprised): Errr, yes... Just an old Halloween outfit!
 
-### CBE_RecycleRunway2024 — item discovered: 64111152
+### Recycle Runway — item discovered: News Story
 `CBE_RecycleRunway2024_NewsStory_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['64111152'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_Photoshoot_09'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_Photoshoot_09'], items=['News Story'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Did you see that our fashion show's on the NEWS?
 **JACKIE** (Surprised): It must be a slow news day!
@@ -334,62 +326,56 @@ Every story in which Jackie speaks.
 **GRANDMA**: Don't look so shocked, dearie - not everything has a secret meaning.
 **MADDIE** (Relaxed): Come on, let's celebrate! The first round of Hopeberry juice is on me!
 
-### CBE_RecycleRunway2024 — item discovered: 46642823
+### Recycle Runway — item discovered: Project Table Empty
 `CBE_RecycleRunway2024_ProjectTable-Empty_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['46642823'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_ProjectTableEmpty_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_ProjectTableEmpty_01'], items=['Project Table Empty'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE**: Is there anything in the Mansion we could repurpose - old clothes, accessories... Anything?
 **MADDIE** (Thinking): As you know, Grandma's weird about me rooting around in the Mansion, but there's this old trunk full of stuff I just found in the basement.
 **JACKIE** (Encouraging): Cool vintage stuff? Sounds perfect.
 
-### CBE_RecycleRunway2024 — item discovered: 99136322
+### Recycle Runway — item discovered: Recycled Clothes
 `CBE_RecycleRunway2024_RecycledClothes_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['99136322'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_ProjectBoxFabrics_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_ProjectBoxFabrics_01'], items=['Recycled Clothes'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE** (Thinking): People throw away so much cool, usable stuff.
 **PEARL** (Thinking): I had this jumper I used to love... but it had a couple of little holes in it, so I threw it away. I still think about that jumper every day!
 **JACKIE** (Surprised): Every day?
 **PEARL** (Encouraging): Well, maybe not EVERY day, but you get what I mean. Mend, don't spend!
 
-### CBE_RecycleRunway2024 — item discovered: 21071443
+### Recycle Runway — item discovered: Sewing Pattern
 `CBE_RecycleRunway2024_SewingPattern_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['21071443'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_SewingDesigns_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_SewingDesigns_03'], items=['Sewing Pattern'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Thinking): What do you need to turn all this fabric into clothes?
 **JACKIE**: I've drawn some sewing patterns. Now I'll just cut the fabric and start sewing!
 **PEARL** (Surprised): That's it??
 **JACKIE** (Encouraging): It's a lot simpler than you'd think, huh?
 
-### CBE_RecycleRunway2024 — item discovered: 64111154
+### Recycle Runway — item discovered: Social Media Photo
 `CBE_RecycleRunway2024_SocialMediaPhoto_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['64111154'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_Photoshoot_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_Photoshoot_07'], items=['Social Media Photo'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL**: Can I post a photo of you on my social media?
 **JACKIE** (Doubtful): Why not - it's not like this is going viral!
 
-### CBE_RecycleRunway2024 — item discovered: 41442280
+### Recycle Runway — item discovered: Thin Disguise
 `CBE_RecycleRunway2024_SpyNewspaper_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['41442280'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_MysteryItems_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_MysteryItems_01'], items=['Thin Disguise'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Thinking): What's this? An old newspaper?
 **JACKIE** (Thinking): Are those eyeholes?
 
-### CBE_RecycleRunway2024 — item discovered: 41442278
+### Recycle Runway — item discovered: Wig
 `CBE_RecycleRunway2024_Wig_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['41442278'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_MysteryItems_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_MysteryItems_03'], items=['Wig'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE** (Doubtful): A wig? This is starting to look like a collection of disguises...
 **PEARL** (Doubtful): Why would there be a trunk full of old disguises in the Mansion?
 
-### CBE_VeilOfFate2024 — decoration CBE_VeilOfFate2023_Decoration_Slot04
+### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot04
 `CBE_VeilOfFate2024_Decoration_Slot04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot04, event=CBE_VeilOfFate2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot04, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: The skeptic returns to the globe, I see.
 **JACKIE** (Doubtful): A friend of mine said that it... Well, that the globe isn't ALWAYS wrong.
@@ -839,10 +825,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Annoyed): I'm sorry, but I can't answer your questions. I'd like you to leave, please.
 **JACKIE**: All right, but I can give you a chance to tell your story. I'll leave you my card.
 
-### LBE_May2023 — item discovered: 300622
+### The Great Bake-off — item discovered: Fortune Cookie
 `LBE_May2023CakeChain1` · seen 23.09.02–26.07.01
-- trigger: item, event=LBE_May2023, items=['300622'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LBE_May2023, items=['LBE_May2023_Cakes_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Great Bake-off, eventKey=LBE_May2023, itemKeys=['LBE_May2023_Cakes_01'], items=['Fortune Cookie'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **JACKIE** (Thinking): What a pretty little fortune cookie you made! But it's nothing compared to what I'll be cooking!
 
@@ -882,44 +867,39 @@ Every story in which Jackie speaks.
 **HEIKKI** (Charming): I guess so... It means hello and goodbye. 
 **PEARL** (Encouraging): Oh! Well then to everyone, Moro!
 
-### LBE_Valentines2024 — item discovered: 86035664
+### Floral Frenzy — item discovered: Mini Bouquet
 `LBE_Valentines2024_Bouquet_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LBE_Valentines2024, items=['86035664'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LBE_Valentines2024, items=['LBE_Valentines2024_Bouquet_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Floral Frenzy, eventKey=LBE_Valentines2024, itemKeys=['LBE_Valentines2024_Bouquet_06'], items=['Mini Bouquet'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **ANTIQUEDEALER** (Charming): Balanced, colorful, and lush. Not bad, Jackie. Not bad at all!
 **JACKIE** (Thinking): Thanks, Julius! I think I can do better, though...
 
-### LBE_Valentines2024 — item discovered: 86035661
+### Floral Frenzy — item discovered: Grand Bouquet
 `LBE_Valentines2024_Bouquet_09_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LBE_Valentines2024, items=['86035661'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LBE_Valentines2024, items=['LBE_Valentines2024_Bouquet_09'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Floral Frenzy, eventKey=LBE_Valentines2024, itemKeys=['LBE_Valentines2024_Bouquet_09'], items=['Grand Bouquet'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE** (Surprised): You're certainly not holding back. This bouquet is gorgeous!
 **DEB** (Encouraging): Why thank you, Jackie. It's all about confidence!
 
-### LBE_Valentines2024 — item discovered: 86035660
+### Floral Frenzy — item discovered: Celebration Bouquet
 `LBE_Valentines2024_Bouquet_10_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LBE_Valentines2024, items=['86035660'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LBE_Valentines2024, items=['LBE_Valentines2024_Bouquet_10'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Floral Frenzy, eventKey=LBE_Valentines2024, itemKeys=['LBE_Valentines2024_Bouquet_10'], items=['Celebration Bouquet'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **DEB** (Surprised): Are you sure you've never tried flower arranging before, Jackie? You're a natural!
 **JACKIE** (Encouraging): I'm confident I've found a new passion!
 
-### LBE_Valentines2024 — item discovered: 75589934
+### Floral Frenzy — item discovered: Bucket Rack
 `LBE_Valentines2024_Flowerbucket_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LBE_Valentines2024, items=['75589934'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LBE_Valentines2024, items=['LBE_Valentines2024_FlowerBucket_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Floral Frenzy, eventKey=LBE_Valentines2024, itemKeys=['LBE_Valentines2024_FlowerBucket_06'], items=['Bucket Rack'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **ANTIQUEDEALER** (Thinking): Look at all of these magnificent flowers! It is so difficult to choose, don't you think?
 **JACKIE** (Doubtful): A flower's a flower, right? So a little bit of this and a little bit of that...
 **ANTIQUEDEALER** (Relaxed): It is more than that, my dear Jackie! Take a moment to appreciate the flowers; find the beauty in each one of them.
 **JACKIE** (Surprised): Hmm... I guess there's a lot more to this than I first thought. Let's try!
 
-### LDE_GrandmasBirthday2023 — item discovered: 11610223
+### Grandma's Pool Party — item discovered: Podcasting Kit
 `LDE_GrandmasBirthday2023_PodcastingKitChain_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=LDE_GrandmasBirthday2023, items=['11610223'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LDE_GrandmasBirthday2023, items=['LDE_GrandmasBirthday2023_BirthdayCake_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Grandma's Pool Party, eventKey=LDE_GrandmasBirthday2023, itemKeys=['LDE_GrandmasBirthday2023_BirthdayCake_08'], items=['Podcasting Kit'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE**: Hi, Jackie! So what was your idea for me to get Grandma?  
   _earlier:_ ~~Hi Jackie! So what was your idea for me to get Grandma?~~ (until 23.12.01)
@@ -933,9 +913,9 @@ Every story in which Jackie speaks.
 - trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
 
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_CharacterJackie_03
+### Green Acres Quest — item discovered: Jackie
 `LDE_GreenAcresQuest_CharacterJackie_02_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_CharacterJackie_03'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterJackie_03'], items=['Jackie'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE** (Thinking): So, you’re planning to bring back the old vegetable garden?
 **MADDIE** (Relaxed): That’s right!
@@ -943,19 +923,17 @@ Every story in which Jackie speaks.
 **MADDIE** (Encouraging): There is, but together we can make it happen. What do you say - would you help me?
 **JACKIE** (Joyous): You know it! Just tell me what to do.
 
-### LDE_HolidayCarols2023 — item discovered: 79780891
+### The Fa-la-la-la Follies — item discovered: Caroling Stage - Playing
 `LDE_HolidayCarols2023_CarolStageProducing_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['79780891'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_CarolStageProducing_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_CarolStageProducing_01'], items=['Caroling Stage - Playing'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: This is it! Are you ready to sing?
 **JACKIE** (Encouraging): Gulp! Let's do it!
 **MADDIE**: One, two, three, four...
 
-### LDE_HolidayCarols2023 — item discovered: 96623187
+### The Fa-la-la-la Follies — item discovered: Jackie's Present
 `LDE_HolidayCarols2023_HolidayPresent_08_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['96623187'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_HolidayPresent_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_HolidayPresent_08'], items=["Jackie's Present"], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE** (Encouraging): You can never have too many tape recorders!
 **JACKIE** (Encouraging): I wonder if Santa would give me an exclusive interview...
@@ -970,18 +948,16 @@ Every story in which Jackie speaks.
 **JACKIE** (Surprised): Oooooh, right!
 **JACKIE** (Encouraging): I guess I am pretty good with the tambourine!
 
-### LDE_HolidayCarols2023 — item discovered: 77115036
+### The Fa-la-la-la Follies — item discovered: Cracker
 `LDE_HolidayCarols2023_ReverseCracker_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['77115036'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_ReverseCracker_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_ReverseCracker_07'], items=['Cracker'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE** (Thinking): How does this open?
 **GRANDMA** (Charming): We both hold one end and... pull!
 
-### LDE_Hopeberry2024 — item discovered: 75744459
+### Love on the Vine — item discovered: Glass Powder
 `LDE_Hopeberry2024_CrushedBottle_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['75744459'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_CrushedBottle_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_CrushedBottle_04'], items=['Glass Powder'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE**: So what DO you have on your list?
 **MADDIE**: My list?
@@ -989,10 +965,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Thinking): I'm not sure... Just the usual stuff, I guess?
 **JACKIE** (Doubtful): It's time you figure it out, girl. If you don't even know what you're looking for, how can you find it?
 
-### LDE_Hopeberry2024 — item discovered: 919562
+### Love on the Vine — item discovered: Sage
 `LDE_Hopeberry2024_Herbs_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['919562'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_Herbs_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_Herbs_05'], items=['Sage'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Relaxed): Are you looking forward to the Hopeberry Festival?
 **JACKIE** (Encouraging): Oh, yeah! I wanna get into the big vat to squash the berries! How about you?
@@ -1012,20 +987,18 @@ Every story in which Jackie speaks.
 **JACKIE** (Thinking): You can always join us...
 **MADDIE** (Surprised): No, I couldn't. I'd just be a third wheel. You kids have a good time!
 
-### LDE_Hopeberry2024 — item discovered: 43191110
+### Love on the Vine — item discovered: Set of Bottles
 `LDE_Hopeberry2024_ProducedJuice_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['43191110'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_ProducedJuice_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_ProducedJuice_04'], items=['Set of Bottles'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: Jackie...?
 **JACKIE**: What's up?
 **MADDIE** (Doubtful): Did you tell everyone I'm desperate to find a date?
 **JACKIE** (Surprised): I just said that you're not going with anyone...
 
-### LDE_Hopeberry2024 — item discovered: 36957429
+### Love on the Vine — item discovered: Spice Container
 `LDE_Hopeberry2024_Spices_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['36957429'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_Spices_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_Spices_05'], items=['Spice Container'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Relaxed): Do you have a list of qualities you want in a partner?
 **JACKIE**: I'm a realist. Reliable and funny are enough for me.
@@ -1125,64 +1098,64 @@ Every story in which Jackie speaks.
 **RODDY** (Worried): *Gulp*
 **GRANDMA**: Now help yourselves to some apple pie before it gets cold! I have a phone call to make.
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_CatClues_03
+### Murder at the Mansion — item discovered: Cat Trail
 `LDE_MurderAtTheMansion_CatClues3_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_CatClues_03'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_CatClues_03'], items=['Cat Trail'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE** (Thinking): Hang on... There are paw prints everywhere.
 **RODDY** (Surprised): Of course! Voyance's cat saw everything! What is it trying to show us?
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_CatClues_05
+### Murder at the Mansion — item discovered: Cat Treats
 `LDE_MurderAtTheMansion_CatClues5_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_CatClues_05'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_CatClues_05'], items=['Cat Treats'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE** (Thinking): Take a look at this fish treats. They were made in Bolivia.
 **RODDY** (Surprised): Well, that would point to... Emilio!
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_DNAEvidence_02
+### Murder at the Mansion — item discovered: Glass
 `LDE_MurderAtTheMansion_DNAEvidence2_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_DNAEvidence_02'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_DNAEvidence_02'], items=['Glass'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE** (Thinking): It would seem that Lady Voyance had a lot of visitors lately.
 **JACKIE**: There are fingerprints from eight different individuals, including the two of us. The killer must be among them.
 **RODDY** (Worried): This is starting to get a little bit too real...
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_DNAEvidence_06
+### Murder at the Mansion — item discovered: Cat Nest
 `LDE_MurderAtTheMansion_DNAEvidence6_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_DNAEvidence_06'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_DNAEvidence_06'], items=['Cat Nest'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **RODDY** (Thinking): There's one inconclusive print. What IS that??
 **JACKIE** (Thinking): Wait, that looks like a paw print.
 **RODDY** (Thinking): Are you saying that Voyance’s cat is a… person of interest?
 **JACKIE**: We have to consider all alternatives, however unlikely.
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_DNAKit_04
+### Murder at the Mansion — item discovered: Fan
 `LDE_MurderAtTheMansion_DNAKit4_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_DNAKit_04'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_DNAKit_04'], items=['Fan'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE** (Thinking): Voyance's house is full of weird stuff.
 **JACKIE**: It'll be hard to tell what has meaning here and what doesn't.
 **RODDY** (Hesitant): Collecting DNA samples is the only way to find out.
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_DNAKit_07
+### Murder at the Mansion — item discovered: Love Potion
 `LDE_MurderAtTheMansion_DNAKit7_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_DNAKit_07'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_DNAKit_07'], items=['Love Potion'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE** (Thinking): She had a lot of visitors who came to have their fortunes told.
 **RODDY**: Therefore there must be a lot of fingerprints, too!
 **JACKIE** (Annoyed): Huh, the love potion. She was still up to her old tricks.
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_DNAKitActive_01
+### Murder at the Mansion — item discovered: DNA Samples
 `LDE_MurderAtTheMansion_DNAKitActive1_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_DNAKitActive_01'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_DNAKitActive_01'], items=['DNA Samples'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE** (Encouraging): The results of the DNA tests will be coming in soon. Modern forensic science is amazing!
 **RODDY** (Thinking): I wonder if we can see something the police missed?
 **JACKIE** (Doubtful): The police were in too much of a hurry to rule it out as an accidental death. There's more to this case than that.
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_DetectiveTools_05
+### Murder at the Mansion — item discovered: Camera
 `LDE_MurderAtTheMansion_DetectiveTools5_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_DetectiveTools_05'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_DetectiveTools_05'], items=['Camera'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE**: I’m used to digging around for the truth, but this is a whole different ball game. We need to make a note of every detail.
 **JACKIE** (Thinking): Anything here could tell us something about what happened and why. We need to find the murder weapon and even the tiniest clues about who has been here - even a possible motive!
@@ -1195,43 +1168,43 @@ Every story in which Jackie speaks.
 **JACKIE** (Doubtful): Fine… So we know the murder happened sometime during the afternoon.
 **JACKIE**: Come on - it’s time to investigate!
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_DirtPatch_04
+### Murder at the Mansion — item discovered: Exposed Chest
 `LDE_MurderAtTheMansion_DirtPatch4_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_DirtPatch_04'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_DirtPatch_04'], items=['Exposed Chest'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **RODDY** (Surprised): Jackie! There is something buried in here!
 **JACKIE** (Surprised): An old chest... Seems like this town has old chests buried all over the place.
 **JACKIE** (Thinking): Now, how do we open this thing?
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_GardenPlants_04
+### Murder at the Mansion — item discovered: Sunflower
 `LDE_MurderAtTheMansion_GardenPlants4_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_GardenPlants_04'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_GardenPlants_04'], items=['Sunflower'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **RODDY** (Thinking): There could be clues in the garden, too. The killer had to pass through it at some point.
 **JACKIE**: It would be the perfect place if you wanted to hide something...
 **JACKIE** (Thinking): You can bury a lot of secrets in a garden.
 **JACKIE** (Surprised): Just saying - in theory.
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_IncriminatingEvidence_05
+### Murder at the Mansion — item discovered: Map & Instructions
 `LDE_MurderAtTheMansion_IncriminatingEvidence5_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_IncriminatingEvidence_05'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_IncriminatingEvidence_05'], items=['Map & Instructions'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE**: Lady Voyance had strong ties to the Boultons and the Mansion.
 **JACKIE** (Thinking): She probably knew more than most about what REALLY went on there.
 **RODDY** (Thinking): Hmmm... This deserves a closer look!
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_IncriminatingEvidence_08
+### Murder at the Mansion — item discovered: Empty Investigation Board
 `LDE_MurderAtTheMansion_IncriminatingEvidence8_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_IncriminatingEvidence_08'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_IncriminatingEvidence_08'], items=['Empty Investigation Board'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE** (Thinking): Looks like Voyance had a very clear idea of who should get all of her wealth and fortune.
 **JACKIE** (Surprised): And that someone is... Maddie Boulton!
 **RODDY** (Surprised): Did she know that she's the beneficiary of Voyance's will? I can't believe she did.
 **JACKIE**: That would be a powerful motive.
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_Interviews_10
+### Murder at the Mansion — item discovered: Maddie
 `LDE_MurderAtTheMansion_Interviews10_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_Interviews_10'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_Interviews_10'], items=['Maddie'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE**: So, Maddie. Where were you when you found out about Lady Voyance's death?
 **MADDIE** (Thinking): I was at home, as you know. We were waiting for her to arrive for bridge night, but she was late. That was highly unusual, so I asked you to check on her and...
@@ -1242,9 +1215,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Surprised): What?? I had no idea! You have to believe me! I already have a house... a-and pets! And I don't know the first thing about snow globes.
 **MADDIE** (Worried): Lady Voyance was my friend, and her death is a shocking loss to the whole town.
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_Interviews_03
+### Murder at the Mansion — item discovered: Recorder
 `LDE_MurderAtTheMansion_Interviews3_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_Interviews_03'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_Interviews_03'], items=['Recorder'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE** (Thinking): Next we need to talk with everyone who saw her on that last day.  
   _earlier:_ ~~Next we need to talk everyone who saw her on that last day.~~ (until 26.06.01)
@@ -1252,9 +1225,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Thinking): It’s unlikely we’ll get a confession, but someone will slip.
 **JACKIE**: They always do…
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_Interviews_04
+### Murder at the Mansion — item discovered: Grandma
 `LDE_MurderAtTheMansion_Interviews4_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_Interviews_04'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_Interviews_04'], items=['Grandma'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE**: So, Ursula... What was your relationship with Lady Voyance like?
 **GRANDMA** (Discouraged): She was my dear friend, and you know that I would NEVER have done anything to hurt her.
@@ -1265,9 +1238,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Thinking): I see... Where were you in the afternoon on that day?
 **GRANDMA** (Frustrated): I was at home, making canapés for bridge night. Julius was with me, telling me about a new book about the birds of the Amazon.
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_Interviews_06
+### Murder at the Mansion — item discovered: Hank
 `LDE_MurderAtTheMansion_Interviews6_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_Interviews_06'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_Interviews_06'], items=['Hank'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **RODDY**: Hank, how well did you know Lady Voyance?
 **HANK**: We were friends, I guess. I helped her out sometimes - you know, heavy lifting and stuff.
@@ -1280,9 +1253,9 @@ Every story in which Jackie speaks.
 **HANK** (Thinking): I was playing tennis with Deb. It's really fun, but I just can't hit that tiny ball!
 **RODDY** (Thinking): Hmmm... Thank you, Hank.
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_Interviews_08
+### Murder at the Mansion — item discovered: Emilio
 `LDE_MurderAtTheMansion_Interviews8_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_Interviews_08'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_Interviews_08'], items=['Emilio'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **EMILIO** (Surprised): What is going on? Is it really true that Lady Voyance has... passed away?
 **JACKIE** (Thinking): Unfortunately, yes. Did you happen to visit her house in the afternoon of the killing?
@@ -1293,9 +1266,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Thinking): One more question: Where were you in the afternoon?
 **EMILIO** (Annoyed): I was shopping with Bella. She is very thorough, so we spent quite a long time at the shoe shop. She can confirm this - she has the shoes to prove it.
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_Interviews_09
+### Murder at the Mansion — item discovered: The Cat
 `LDE_MurderAtTheMansion_Interviews9_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_Interviews_09'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_Interviews_09'], items=['The Cat'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **RODDY** (Thinking): I think we can rule out Lady Voyance's cat as a suspect. Clearly the cat knows what happened, but she loved Voyance.
 **JACKIE**: You're probably right. Let's take a closer look at everything she's tried to show us. I've got a feeling we might find something there...
@@ -1317,9 +1290,9 @@ Every story in which Jackie speaks.
 **RODDY** (Worried): J-jackie, the door is open. Something doesn’t feel right.
 **JACKIE** (Surprised): Lady Voy… Aaah! She’s… dead!
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_MWKnife_01
+### Murder at the Mansion — item discovered: Murder Weapon #1
 `LDE_MurderAtTheMansion_Knife1_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_MWKnife_01'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_MWKnife_01'], items=['Murder Weapon #1'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **RODDY** (Worried): Ummm... Jackie?
 **RODDY** (Surprised): I think someone has been here. There's a knife hidden in the flowerbed!
@@ -1327,9 +1300,9 @@ Every story in which Jackie speaks.
 **RODDY** (Worried): Y-you don't think...
 **JACKIE** (Thinking): I think we have our first suspect.
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_MWCandlestick_01
+### Murder at the Mansion — item discovered: Murder Weapon #2
 `LDE_MurderAtTheMansion_MWCandlestick1_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_MWCandlestick_01'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_MWCandlestick_01'], items=['Murder Weapon #2'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE** (Thinking): Look what I found under the sofa! This thing has red paint all over it.
 **RODDY** (Surprised): There's a label at the bottom. It's from Julius' antique store!
@@ -1337,35 +1310,35 @@ Every story in which Jackie speaks.
 **JACKIE**: I always thought there's more to the old man than meets the eye.
 **RODDY** (Doubtful): Let's peel back the layers.
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_MWPoison_01
+### Murder at the Mansion — item discovered: Murder Weapon #4
 `LDE_MurderAtTheMansion_MWPoison1_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_MWPoison_01'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_MWPoison_01'], items=['Murder Weapon #4'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE** (Thinking): Roddy, look at this! The label reads pretty ominous to me.
 **RODDY** (Surprised): Voyance was known for making potions, but she wouldn't have used poison.
 **RODDY** (Thinking): That means that this came into her house through someone else. But WHO? And did this poison kill her?
 **JACKIE** (Surprised): According to the fingerprint analysis, this bottle belongs to... Hank!
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_MWYarn_01
+### Murder at the Mansion — item discovered: Murder Weapon #3
 `LDE_MurderAtTheMansion_MWYarn1_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_MWYarn_01'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_MWYarn_01'], items=['Murder Weapon #3'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **RODDY** (Thinking): How did this yarn end up here, all unraveled?
 **JACKIE** (Thinking): Someone could have used it as a murder weapon.
 **RODDY** (Worried): You mean... the cat?
 **JACKIE**: All I'm saying is that we have to put the pieces together - however they fit.
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_OpenBriefcase_01
+### Murder at the Mansion — item discovered: Open Briefcase
 `LDE_MurderAtTheMansion_OpenBriefcase1_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_OpenBriefcase_01'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_OpenBriefcase_01'], items=['Open Briefcase'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **RODDY** (Surprised): The briefcase is finally open. What's this...? Voyance's Last Will and Testament!
 **RODDY** (Surprised): She had way more assets than I ever realized - a house, a caravan, her snow globe business...
 **JACKIE** (Thinking): This could reveal a motive!
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_SeanceTools_03
+### Murder at the Mansion — item discovered: Tea Leaves
 `LDE_MurderAtTheMansion_SeanceTools3_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_SeanceTools_03'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_SeanceTools_03'], items=['Tea Leaves'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **RODDY** (Thinking): Something fishy definitely happened here, but how are we ever going to find out what? We have so many clues and so much potential evidence.
 **JACKIE**: We follow up on everything and rule out the wrong options until we have the answer.
@@ -1374,9 +1347,9 @@ Every story in which Jackie speaks.
   _earlier:_ ~~What do you talking about?~~ (until 26.06.01)
 **RODDY** (Hesitant): I’m talking about the COSMIC investigation.
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_SeanceTools_05
+### Murder at the Mansion — item discovered: Board of Fate
 `LDE_MurderAtTheMansion_SeanceTools5_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_SeanceTools_05'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_SeanceTools_05'], items=['Board of Fate'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **RODDY** (Thinking): You know, a lot of investigators use psychics to break difficult cases.
 **JACKIE** (Hesitant): You do know that you're not a psychic, Roddy?
@@ -1384,9 +1357,9 @@ Every story in which Jackie speaks.
 **RODDY**: You consult the material facts, I'll consult the stars!
 **JACKIE** (Encouraging): Done!
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_StarChart_03
+### Murder at the Mansion — item discovered: Birth Chart
 `LDE_MurderAtTheMansion_StarCharts3_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_StarChart_03'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_StarChart_03'], items=['Birth Chart'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **RODDY** (Thinking): Hmm... I think I found something, Jackie. A bunched-up paper with writing and some drawings on it.
 **RODDY** (Surprised): It's a star chart!
@@ -1407,18 +1380,17 @@ Every story in which Jackie speaks.
 **JACKIE** (Thinking): If she did, maybe she left us some clues to lead us towards the right answer.
 **RODDY** (Thinking): Well, let's see what we can find!
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_VoyancesBelongings_03
+### Murder at the Mansion — item discovered: Pieces
 `LDE_MurderAtTheMansion_VoyancesBelongings3_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_VoyancesBelongings_03'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_VoyancesBelongings_03'], items=['Pieces'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **RODDY** (Thinking): She sure was a strange lady.
 **JACKIE** (Doubtful): I can't say I ever believed any of her "predictions", but I know other people did.
 **RODDY** (Thinking): And people told her all sorts of secrets. I wonder if one of them sealed her fate.
 
-### LDE_PicnicConfusion2024 — item discovered: 72600864
+### Third Wheel Tango — item discovered: Instant Camera
 `LDE_PicnicConfusion2024_Activities_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_PicnicConfusion2024, items=['72600864'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_PicnicConfusion2024, items=['LDE_PicnicConfusion2024_Activities_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Third Wheel Tango, eventKey=LDE_PicnicConfusion2024, itemKeys=['LDE_PicnicConfusion2024_Activities_05'], items=['Instant Camera'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Encouraging): Make sure you have some fun things to do during the picnic!
 **MADDIE** (Doubtful): You don't want Roddy to get bored, do you? ...What do you think she does?
@@ -1435,30 +1407,27 @@ Every story in which Jackie speaks.
 **JACKIE** (Surprised): Uuh, Maddie, you don't have to-
 **MADDIE** (Joyous): No no, this'll be great! He always tried to surprise me, so let's make one for him! 
 
-### LDE_PicnicConfusion2024 — item discovered: 88996666
+### Third Wheel Tango — item discovered: Picnic Table
 `LDE_PicnicConfusion2024_Clothing_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_PicnicConfusion2024, items=['88996666'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_PicnicConfusion2024, items=['LDE_PicnicConfusion2024_Clothing_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Third Wheel Tango, eventKey=LDE_PicnicConfusion2024, itemKeys=['LDE_PicnicConfusion2024_Clothing_07'], items=['Picnic Table'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Encouraging): Ah perfect, we have a great picnic table ready! 
 **MADDIE** (Relaxed): All it needs now is some good food and some cutlery!
 **MADDIE** (Thinking): ...How do you think he met her?
 **JACKIE** (Surprised): Huh? Who?
 
-### LDE_PicnicConfusion2024 — item discovered: 50190090
+### Third Wheel Tango — item discovered: Fabulous Diamond Necklace
 `LDE_PicnicConfusion2024_Coal_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_PicnicConfusion2024, items=['50190090'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_PicnicConfusion2024, items=['LDE_PicnicConfusion2024_Coal_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Third Wheel Tango, eventKey=LDE_PicnicConfusion2024, itemKeys=['LDE_PicnicConfusion2024_Coal_05'], items=['Fabulous Diamond Necklace'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: Don't forget to save some of the coal. I've seen Roddy do some charcoal sketching every now and then.
 **MADDIE** (Encouraging): Sure, they're not like the stuff you can get in the art store, but it's the thought that counts.
 **JACKIE** (Annoyed): You want me to give him.... Coal?
 **MADDIE** (Relaxed): He'll love it, trust me! 
 
-### LDE_PicnicConfusion2024 — item discovered: 40651168
+### Third Wheel Tango — item discovered: Unlit Campfire
 `LDE_PicnicConfusion2024_FireWood_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_PicnicConfusion2024, items=['40651168'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_PicnicConfusion2024, items=['LDE_PicnicConfusion2024_FireWood_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Third Wheel Tango, eventKey=LDE_PicnicConfusion2024, itemKeys=['LDE_PicnicConfusion2024_FireWood_07'], items=['Unlit Campfire'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Charming): Nothing like a nice romantic fire to liven up the picnic, right?
 **JACKIE** (Encouraging): It is quite romantic!
@@ -1467,10 +1436,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Charming): He's lit every fire he's set his eyes on!
 **JACKIE** (Doubtful): All but one...
 
-### LDE_PicnicConfusion2024 — item discovered: 29485281
+### Third Wheel Tango — item discovered: Grandmarshmallow
 `LDE_PicnicConfusion2024_Marshmallow_11_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_PicnicConfusion2024, items=['29485281'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_PicnicConfusion2024, items=['LDE_PicnicConfusion2024_Marshmallow_11'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Third Wheel Tango, eventKey=LDE_PicnicConfusion2024, itemKeys=['LDE_PicnicConfusion2024_Marshmallow_11'], items=['Grandmarshmallow'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): ... I mean honestly, he is TOTALLY free to do what he wants. We're both adults after all!
 **MADDIE** (Doubtful): But isn't it just a little weird that he breaks up with me; moves ALL THE WAY over there and then SUDDENLY meets this OTHER woman?
@@ -1493,10 +1461,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Encouraging): Haha! It's alright Maddie. Just don't get manic again. You scare me when you get... excited.
 **RODDY**: Did I, uuh... Miss something?
 
-### LDE_PicnicConfusion2024 — item discovered: 57139749
+### Third Wheel Tango — item discovered: Social Media Post
 `LDE_PicnicConfusion2024_PhotoAlbum_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_PicnicConfusion2024, items=['57139749'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_PicnicConfusion2024, items=['LDE_PicnicConfusion2024_PhotoAlbum_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Third Wheel Tango, eventKey=LDE_PicnicConfusion2024, itemKeys=['LDE_PicnicConfusion2024_PhotoAlbum_05'], items=['Social Media Post'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE** (Surprised): Maddie, you got to pull yourself together!
 **MADDIE** (Surprised): Whaaat?! What do you mean?
@@ -1507,10 +1474,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Surprised): Jealous?! Me?! Psshh... Please. 
 **JACKIE** (Thinking): *sigh*
 
-### LDE_PicnicConfusion2024 — item discovered: 38619071
+### Third Wheel Tango — item discovered: Picnic Basket
 `LDE_PicnicConfusion2024_PicnicBasket_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_PicnicConfusion2024, items=['38619071'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_PicnicConfusion2024, items=['LDE_PicnicConfusion2024_PicnicBasket_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Third Wheel Tango, eventKey=LDE_PicnicConfusion2024, itemKeys=['LDE_PicnicConfusion2024_PicnicBasket_04'], items=['Picnic Basket'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): Alright! I'm thinking a surprise picnic for just the two of you would really make his day!
 **JACKIE** (Surprised): Really? I thought that-
@@ -1723,9 +1689,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Thinking): Sure, but it wasn't until Queen Victoria was drawn with a Christmas tree that they <i>really</i> got popular.
 **RODDY** (Charming): Looks like we need to figure out who's right here. What's the origin of the Christmas tree?
 
-### SE_DoubleDateDisaster2024 — decoration SE_DoubleDateDisaster2024_Decoration_Slot02
+### Double Date Disaster — decoration SE_DoubleDateDisaster2024_Decoration_Slot02
 `SE_DoubleDateDisaster2024_Decoration_Slot02_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot02, event=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot02, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE** (Surprised): Roddy Took... Are you asking me out on a date?!
 **RODDY** (Worried): Well... Um, it’s just that Emilio is planning this whole double date thing and...
@@ -1735,9 +1701,9 @@ Every story in which Jackie speaks.
 **RODDY** (Encouraging): Great! Grab a putter!
 **JACKIE** (Surprised): Putter?
 
-### SE_DoubleDateDisaster2024 — decoration SE_DoubleDateDisaster2024_Decoration_Slot04
+### Double Date Disaster — decoration SE_DoubleDateDisaster2024_Decoration_Slot04
 `SE_DoubleDateDisaster2024_Decoration_Slot04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot04, event=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot04, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Joyous): Jackie and... Roddy?! Are you the other guests?
 **JACKIE** (Encouraging): Yep! Roddy here asked me out on a date. Can you believe that?
@@ -1746,9 +1712,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Encouraging): Just that under that hard hat lies a pretty great guy!
 **RODDY** (Charming): Re- Really?!
 
-### SE_DoubleDateDisaster2024 — decoration SE_DoubleDateDisaster2024_Decoration_Slot05
+### Double Date Disaster — decoration SE_DoubleDateDisaster2024_Decoration_Slot05
 `SE_DoubleDateDisaster2024_Decoration_Slot05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot05, event=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot05, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE**: Hey, Maddie! Have you seen- RODDY?!
 **RODDY** (Thinking): Hello ladies, fancy a game of golf?
@@ -1756,9 +1722,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Encouraging): Hahaha!
 **RODDY** (Charming): Uuhm... I’ll be right back!
 
-### SE_DoubleDateDisaster2024 — decoration SE_DoubleDateDisaster2024_Decoration_Slot06
+### Double Date Disaster — decoration SE_DoubleDateDisaster2024_Decoration_Slot06
 `SE_DoubleDateDisaster2024_Decoration_Slot06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot06, event=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot06, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): Emilio has really put a lot of effort into this.
 **JACKIE** (Encouraging): Actually, I think it’s mostly been Roddy! I’ve seen him running around and helping Emilio out.
@@ -1767,9 +1733,9 @@ Every story in which Jackie speaks.
 **RODDY** (Worried): Too much?
 **JACKIE** (Doubtful): Too much.
 
-### SE_DoubleDateDisaster2024 — decoration SE_DoubleDateDisaster2024_Decoration_Slot07
+### Double Date Disaster — decoration SE_DoubleDateDisaster2024_Decoration_Slot07
 `SE_DoubleDateDisaster2024_Decoration_Slot07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot07, event=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot07, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **RODDY**: Sup...
 **JACKIE** (Thinking): Okay, Roddy, I gotta ask.
@@ -1798,10 +1764,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Worried): Yeah, of course! You go have fun. I’ll just...
 **MADDIE** (Discouraged): Clean all this up, then.
 
-### SP_AlpacaPet2024 — item discovered: 1557530
+### Woolly Mystery — item discovered: Crystal Apple
 `SP_AlpacaPet2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_AlpacaPet2024, items=['1557530'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_AlpacaPet2024, items=['SP_AlpacaPet2024_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Woolly Mystery, eventKey=SP_AlpacaPet2024, itemKeys=['SP_AlpacaPet2024_CollectableItems_04'], items=['Crystal Apple'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE**: Maddie, what's up?
 **MADDIE**: Hey. Nothing much... Just getting the gardens ready for fall.
@@ -1822,9 +1787,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Relaxed): Oh, she's "creating content for her social media."
 **JACKIE** (Doubtful): Is she really doing that or is she using Amy as a cover for whatever she is ACTUALLY doing?
 
-### SP_Apiary2026 — decoration SP_Apiary2026_Decoration_Slot27
+### Season Pass - Buzzing with Purpose — decoration SP_Apiary2026_Decoration_Slot27
 `SP_Apiary2026_Decoration_Slot27_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Apiary2026_Decoration_Slot27, event=SP_Apiary2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Apiary2026_Decoration_Slot27, event=Season Pass - Buzzing with Purpose, eventKey=SP_Apiary2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): Once we have enough honey, we can start collecting it in here.
 **MADDIE** (Relaxed): Grandma told me that it used to be part of the old apiary.
@@ -1834,9 +1799,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Relaxed): Ha! I love it. Maybe it'll drive up the sales for the honey?
 **JACKIE** (Encouraging): Well, if what your Grandma says is true, I don't think it'll have to!
 
-### SP_Apiary2026 — decoration SP_Apiary2026_Decoration_Slot38
+### Season Pass - Buzzing with Purpose — decoration SP_Apiary2026_Decoration_Slot38
 `SP_Apiary2026_Decoration_Slot38_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Apiary2026_Decoration_Slot38, event=SP_Apiary2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Apiary2026_Decoration_Slot38, event=Season Pass - Buzzing with Purpose, eventKey=SP_Apiary2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **JACKIE** (Charming): Maddie! How's the hive?
 **MADDIE** (Encouraging): Thriving! They're busy little bees, I'm almost all out of honey jars!
@@ -1859,9 +1824,9 @@ Every story in which Jackie speaks.
 **GRANDMA** (Thinking): Probably something to do with the Hopeberry honey it made...
 **MADDIE** (Surprised): What's special about the Hopeberry honey?
 
-### SP_Apiary2026 — item discovered: SP_Apiary2026_CollectableItems_04
+### Season Pass - Buzzing with Purpose — item discovered: Thriving Beehive
 `SP_Apiary2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_Apiary2026, items=['SP_Apiary2026_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Season Pass - Buzzing with Purpose, eventKey=SP_Apiary2026, itemKeys=['SP_Apiary2026_CollectableItems_04'], items=['Thriving Beehive'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): This is incredible!
 **MADDIE** (Encouraging): Where did you manage to get a queen bee for the hive?
@@ -1898,9 +1863,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Hesitant): Well, the thing is... I can't take care of him. So I was kinda thinking...
 **MADDIE** (Relaxed): Hey, don't worry about it. There's plenty of space for a bunny here...
 
-### SP_BunnyPet2026 — item discovered: SP_BunnyPet2026_CollectableItems_04
+### Season Pass - Fluff Overload — item discovered: Harvest Plate
 `SP_BunnyPet2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_BunnyPet2026, items=['SP_BunnyPet2026_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Season Pass - Fluff Overload, eventKey=SP_BunnyPet2026, itemKeys=['SP_BunnyPet2026_CollectableItems_04'], items=['Harvest Plate'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): That's a lot of carrots!
 **JACKIE** (Hesitant): What can I say? He loves them!
@@ -1949,9 +1914,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Hesitant): I couldn't help it when I saw him in the shelter. It's almost like he was reincarnated!
 **PET**: *nibble nibble*
 
-### SP_CherrysMysteryMeat2024 — decoration SP_CherrysMysteryMeat2024_Decoration_Slot33
+### Cherry's Mystery Meat — decoration SP_CherrysMysteryMeat2024_Decoration_Slot33
 `SP_CherrysMysteryMeat2024_Decoration_Slot33_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot33, event=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot33, event=Cherry's Mystery Meat, eventKey=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE**: It's all happening here!
 **JACKIE**: Is everything ready for the giant pie, Cherry? My editor sent me to write a story about it - might even make the front page!
@@ -1960,9 +1925,9 @@ Every story in which Jackie speaks.
 **CHERRY** (Thinking): I guess so...
 **JACKIE** (Thinking): Thanks. Maybe there IS a decent news story here - but it's not about breaking a pie record. I need to do some digging...
 
-### SP_CherrysMysteryMeat2024 — decoration SP_CherrysMysteryMeat2024_Decoration_Slot35
+### Cherry's Mystery Meat — decoration SP_CherrysMysteryMeat2024_Decoration_Slot35
 `SP_CherrysMysteryMeat2024_Decoration_Slot35_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot35, event=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot35, event=Cherry's Mystery Meat, eventKey=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL** (Encouraging): Everyone, the pie's almost ready to come out of the oven!
 **JACKIE**: And it looks delicious - seriously!
@@ -2007,9 +1972,9 @@ Every story in which Jackie speaks.
 **JACKIE**: New homes, right?
 **ANTIQUEDEALER** (Charming): Of course!
 
-### SP_GoodVibrations2026 — decoration SP_GoodVibrations2026_Decoration_Slot25
+### Good Vibrations — decoration SP_GoodVibrations2026_Decoration_Slot25
 `SP_GoodVibrations2026_Decoration_Slot25_Dialogue` · seen 26.06.01–26.07.01
-- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot25, event=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
+- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot25, event=Good Vibrations, eventKey=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
 
 **MADDIE** (Thinking): I keep finding more stones tucked into these boxes. Whoever packed this collection was very thorough.
 **MADDIE** (Thinking): Some of these have notes attached. Dates, locations...
@@ -2018,18 +1983,18 @@ Every story in which Jackie speaks.
 **MADDIE** (Encouraging): Good thing, too. Otherwise, we'd never have found any of this.  
   _earlier:_ ~~Good thing, too. Otherwise we'd never have found any of this.~~ (until 26.06.01)
 
-### SP_GoodVibrations2026 — decoration SP_GoodVibrations2026_Decoration_Slot27
+### Good Vibrations — decoration SP_GoodVibrations2026_Decoration_Slot27
 `SP_GoodVibrations2026_Decoration_Slot27_Dialogue` · seen 26.06.01–26.07.01
-- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot27, event=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
+- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot27, event=Good Vibrations, eventKey=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
 
 **PEARL**: Look at those prisms! The sunlight is scattering rainbows everywhere.
 **JACKIE** (Encouraging): And these jars of colorful pebbles are gorgeous.
 **PEARL** (Thinking): But look at this! This stone has a strange shimmer. I wonder if it's rare...
 **JACKIE** (Thinking): Let's just say unusual rocks have a habit of appearing around this family.
 
-### SP_GoodVibrations2026 — decoration SP_GoodVibrations2026_Decoration_Slot28
+### Good Vibrations — decoration SP_GoodVibrations2026_Decoration_Slot28
 `SP_GoodVibrations2026_Decoration_Slot28_Dialogue` · seen 26.06.01–26.07.01
-- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot28, event=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
+- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot28, event=Good Vibrations, eventKey=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
 
 **PEARL**: More people brought collections! Now we have fossils, shells, beach glass...
 **MADDIE** (Encouraging): And every item has a story behind it.
@@ -2037,9 +2002,9 @@ Every story in which Jackie speaks.
 **PEARL** (Doubtful): And somehow every version is different.
 **JACKIE** (Thinking): That's a mystery worth digging into...
 
-### SP_GoodVibrations2026 — decoration SP_GoodVibrations2026_Decoration_Slot38
+### Good Vibrations — decoration SP_GoodVibrations2026_Decoration_Slot38
 `SP_GoodVibrations2026_Decoration_Slot38_Dialogue` · seen 26.06.01–26.07.01
-- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot38, event=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
+- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot38, event=Good Vibrations, eventKey=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
 
 **MADDIE** (Relaxed): The giant geode is stealing the whole show.
 **PEARL** (Encouraging): That's understandable! Nature doesn't make many treasures like that.
@@ -2062,9 +2027,9 @@ Every story in which Jackie speaks.
 **JACKIE**: I think these treasures deserve to be shown off to the whole town. How about we put on a little showcase?
 **PEARL**: Maybe we'll find some answers along the way!
 
-### SP_GoodVibrations2026 — item discovered: SP_GoodVibrations2026_CollectableItems_04
+### Good Vibrations — item discovered: Crystal Cluster
 `SP_GoodVibrations2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.06.01–26.07.01
-- trigger: item, event=SP_GoodVibrations2026, items=['SP_GoodVibrations2026_CollectableItems_04'], moment=item discovered (versions 26.06.01–26.07.01)
+- trigger: item, event=Good Vibrations, eventKey=SP_GoodVibrations2026, itemKeys=['SP_GoodVibrations2026_CollectableItems_04'], items=['Crystal Cluster'], moment=item discovered (versions 26.06.01–26.07.01)
 
 **MADDIE**: Here's the last box. Wait... why is it so heavy?
 **JACKIE** (Thinking): There's a huge gray rock inside! Let's handle it carefully. It might be fragile.  
@@ -2076,9 +2041,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Surprised): Wow! Look at those crystals!
 **MADDIE** (Relaxed): Well, we found our centerpiece.
 
-### SP_GranniesOfAnarchy2023 — decoration SP_GranniesOfAnarchy2023_Decoration_Slot25
+### Grannies of Anarchy — decoration SP_GranniesOfAnarchy2023_Decoration_Slot25
 `SP_GranniesOfAnarchy2023_Decoration_Slot25_Dialogue` · seen 23.11.02–26.07.01
-- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot25, event=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
+- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot25, event=Grannies of Anarchy, eventKey=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
 
 **GRANDMA** (Charming): Maddie, what on earth are you doing sneaking around?
 **MADDIE** (Encouraging): Err... We were just admiring these impressive motorbikes on your drive.
@@ -2091,9 +2056,9 @@ Every story in which Jackie speaks.
 **GRANDMA**: <b>That </b>was biker slang. This is our biker gang, the Grannies of Anarchy.
 **JACKIE** (Doubtful): Ha! So I was right!
 
-### SP_GranniesOfAnarchy2023 — decoration SP_GranniesOfAnarchy2023_Decoration_Slot26
+### Grannies of Anarchy — decoration SP_GranniesOfAnarchy2023_Decoration_Slot26
 `SP_GranniesOfAnarchy2023_Decoration_Slot26_Dialogue` · seen 23.11.02–26.07.01
-- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot26, event=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
+- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot26, event=Grannies of Anarchy, eventKey=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
 
 **MADDIE**: Tell us more, Grandma! When did you join your biker gang?
 **GRANDMA** (Relaxed): Oh, we've been flying our colors for decades.
@@ -2103,9 +2068,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Joyous): And the knitted decorations on your bikes are really amazing!
 **GRANDMA** (Charming): We do know a thing or two about knitting... and rebellion.
 
-### SP_GranniesOfAnarchy2023 — decoration SP_GranniesOfAnarchy2023_Decoration_Slot29
+### Grannies of Anarchy — decoration SP_GranniesOfAnarchy2023_Decoration_Slot29
 `SP_GranniesOfAnarchy2023_Decoration_Slot29_Dialogue` · seen 23.11.02–26.07.01
-- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot29, event=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
+- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot29, event=Grannies of Anarchy, eventKey=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
 
 **MADDIE**: What a relief! They're just a group of nice old ladies.
 **MADDIE** (Encouraging): Who happen to ride around on big bikes and wear leather jackets!
@@ -2129,19 +2094,18 @@ Every story in which Jackie speaks.
 **JACKIE** (Encouraging): Eavesdropping on your own Grandma, Maddie? I'm so here for it.
 **MADDIE** (Surprised): Uh-oh... Did you hear that? I'm pretty sure one of them just said something about... a MURDER!
 
-### SP_GranniesOfAnarchy2023 — item discovered: 20492348
+### Grannies of Anarchy — item discovered: Leather Jacket
 `SP_GranniesOfAnarchy2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=SP_GranniesOfAnarchy2023, items=['20492348'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=SP_GranniesOfAnarchy2023, items=['SP_GranniesOfAnarchy2023_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Grannies of Anarchy, eventKey=SP_GranniesOfAnarchy2023, itemKeys=['SP_GranniesOfAnarchy2023_CollectableItems_04'], items=['Leather Jacket'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **MADDIE** (Worried): Did you just hear those ladies whisper something about a murder?
 **JACKIE** (Thinking): They <b>are </b>a biker gang, but murder? Then again, those knitting needles look pretty sharp...
 **JACKIE** (Doubtful): What are they doing - drawing up a biker granny hit list?
 **MADDIE** (Doubtful): I think we need to dig a little deeper. Come on, Jackie. Let's see what these biking buddies are up to!
 
-### SP_Halloween2024 — decoration SP_Halloween2024_Decoration_Slot26
+### Halloween Mystery — decoration SP_Halloween2024_Decoration_Slot26
 `SP_Halloween2024_Decoration_Slot26_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot26, event=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot26, event=Halloween Mystery, eventKey=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE**: OK, let's write this ad. What do you want it to say?
 **MADDIE**: I don't know... I'm not sure there's any point.
@@ -2152,9 +2116,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Relaxed): The ad should be upbeat and fun. Don't you agree?
 **JACKIE**: Yeah, let's try that.
 
-### SP_Halloween2024 — decoration SP_Halloween2024_Decoration_Slot38
+### Halloween Mystery — decoration SP_Halloween2024_Decoration_Slot38
 `SP_Halloween2024_Decoration_Slot38_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot38, event=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot38, event=Halloween Mystery, eventKey=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): Care to explain why you decided to change the newspaper ad?
 **MADDIE** (Doubtful): It was supposed to be creepy and funny -- but it was just straight up scary!
@@ -2165,10 +2129,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Surprised): And who??
 **JACKIE** (Thinking): This story has more angles than I ever thought...
 
-### SP_Halloween2024 — item discovered: 22727210
+### Halloween Mystery — item discovered: The Lady
 `SP_Halloween2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_Halloween2024, items=['22727210'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_Halloween2024, items=['SP_Halloween2024_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Halloween Mystery, eventKey=SP_Halloween2024, itemKeys=['SP_Halloween2024_CollectableItems_04'], items=['The Lady'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE**: Hey. Listen, I'm so sorry the exposé about your family... I thought I was just doing my job, but I...
 **JACKIE**: I let my ambition win.
@@ -2193,9 +2156,9 @@ Every story in which Jackie speaks.
 **PEARL** (Thinking): Careful, Maddie. Next year you might want to take to the stage, too!
 **MADDIE** (Hesitant): Ask me again next summer!
 
-### SP_Hopefest2026 — decoration SP_Hopefest2026_Decoration_Slot25
+### Hopefest Music Festival — decoration SP_Hopefest2026_Decoration_Slot25
 `SP_Hopefest2026_Decoration_Slot25_Dialogue` · seen 26.05.01–26.07.01
-- trigger: decoration, decoration=SP_Hopefest2026_Decoration_Slot25, event=SP_Hopefest2026, moment=decoration placed (versions 26.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Hopefest2026_Decoration_Slot25, event=Hopefest Music Festival, eventKey=SP_Hopefest2026, moment=decoration placed (versions 26.05.01–26.07.01)
 
 **MADDIE**: I heard Pearl recruited you to design the stage, Roddy. It's looking excellent!
 **RODDY** (Encouraging): Thank you! I've made all the necessary calculations to make sure it's safe and ready for rocking night.
@@ -2204,9 +2167,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Relaxed): Maddie!
 **MADDIE** (Relaxed): Come on, Jackie! If you wanna rock, you gotta break the rules!
 
-### SP_Hopefest2026 — decoration SP_Hopefest2026_Decoration_Slot29
+### Hopefest Music Festival — decoration SP_Hopefest2026_Decoration_Slot29
 `SP_Hopefest2026_Decoration_Slot29_Dialogue` · seen 26.05.01–26.07.01
-- trigger: decoration, decoration=SP_Hopefest2026_Decoration_Slot29, event=SP_Hopefest2026, moment=decoration placed (versions 26.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Hopefest2026_Decoration_Slot29, event=Hopefest Music Festival, eventKey=SP_Hopefest2026, moment=decoration placed (versions 26.05.01–26.07.01)
 
 **PEARL**: Everything is ready for the festival to begin!
 **JACKIE** (Thinking): But did we get all the permits approved?
@@ -2242,9 +2205,9 @@ Every story in which Jackie speaks.
 **PEARL** (Encouraging): So that’s a yes?
 **JACKIE** (Encouraging): That’s a “yes, before this turns into complete chaos.”
 
-### SP_Hopefest2026 — item discovered: SP_Hopefest2026_CollectableItems_04
+### Hopefest Music Festival — item discovered: Classic Guitar
 `SP_Hopefest2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=SP_Hopefest2026, items=['SP_Hopefest2026_CollectableItems_04'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Hopefest Music Festival, eventKey=SP_Hopefest2026, itemKeys=['SP_Hopefest2026_CollectableItems_04'], items=['Classic Guitar'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE** (Thinking): This place is gonna need a lot of work before you can call it a festival site!
 **JACKIE** (Thinking): We'll need to clear everything away and build a stage, stalls, a backstage area... And what if no one even shows up??
@@ -2277,9 +2240,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Thinking): Oh, it’s freezing cold! Look how sluggish it is. Poor thing probably took a very wrong turn somewhere.
 **MADDIE** (Doubtful): We can’t leave it out here tonight. We have to warm it up somehow.
 
-### SP_IguanaPet2026 — item discovered: SP_IguanaPet2026_CollectableItems_04
+### Green with Envy — item discovered: Iguana Shirt
 `SP_IguanaPet2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=SP_IguanaPet2026, items=['SP_IguanaPet2026_CollectableItems_04'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green with Envy, eventKey=SP_IguanaPet2026, itemKeys=['SP_IguanaPet2026_CollectableItems_04'], items=['Iguana Shirt'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **MADDIE**: Okay… The final heat lamp is up.
 **JACKIE**: Moment of truth. Look – it’s lifting its head!
@@ -2326,9 +2289,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Thinking): Rascal?
 **MADDIE** (Relaxed): Well, he needed a name!
 
-### SP_LadyVoyanceMystery2023 — decoration SP_LadyVoyanceMystery2023_Decoration_Slot25
+### Lady Voyance's Mystery — decoration SP_LadyVoyanceMystery2023_Decoration_Slot25
 `SP_LadyVoyanceMystery2023_Decoration_Slot25_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_LadyVoyanceMystery2023_Decoration_Slot25, event=SP_LadyVoyanceMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_LadyVoyanceMystery2023_Decoration_Slot25, event=Lady Voyance's Mystery, eventKey=SP_LadyVoyanceMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **LADY VOYANCE**: Hello, my child! Come to have your fortune told?
 **JACKIE** (Annoyed): My fortune? No, I just came over to ask if Ma-
@@ -2342,9 +2305,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Doubtful): A reporter.
 **LADY VOYANCE** (Thinking): I sense GREEEAT conflict in your future!
 
-### SP_LovePotion2025 — decoration SP_LovePotion2025_Decoration_Slot26
+### Love Potion — decoration SP_LovePotion2025_Decoration_Slot26
 `SP_LovePotion2025_Decoration_Slot26_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_LovePotion2025_Decoration_Slot26, event=SP_LovePotion2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_LovePotion2025_Decoration_Slot26, event=Love Potion, eventKey=SP_LovePotion2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): What do you think about Emilio?
 **JACKIE**: What do you mean?
@@ -2360,9 +2323,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Angry): That Bella... She's so perfect with her hair and her shorts and her... everything.
 **MADDIE** (Angry): But maybe she's not THAT into Emilio... Maybe they're just friends.
 
-### SP_LovePotion2025 — decoration SP_LovePotion2025_Decoration_Slot27
+### Love Potion — decoration SP_LovePotion2025_Decoration_Slot27
 `SP_LovePotion2025_Decoration_Slot27_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_LovePotion2025_Decoration_Slot27, event=SP_LovePotion2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_LovePotion2025_Decoration_Slot27, event=Love Potion, eventKey=SP_LovePotion2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE**: Where have you been? I've looked for you everywhere!
 **RODDY** (Thinking): Lady Voyance insisted on telling my fortune, so I couldn't get away. Did you see Maddie talking to Emilio earlier?
@@ -2376,10 +2339,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Doubtful): I think we should take a break. Your heart's not in this.
 **JACKIE** (Doubtful): Is it, Roddy?
 
-### SP_LovePotion2025 — item discovered: 96190276
+### Love Potion — item discovered: Moonstring Serum
 `SP_LovePotion2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_LovePotion2025, items=['96190276'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_LovePotion2025, items=['SP_LovePotion2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love Potion, eventKey=SP_LovePotion2025, itemKeys=['SP_LovePotion2025_CollectableItems_04'], items=['Moonstring Serum'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Encouraging): The Hopeberry juice is so delicious this year!
 **MADDIE** (Relaxed): I know! It must be an especially good vintage.
@@ -2389,9 +2351,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Encouraging): Oh, yeah! Pour me another one!
 **BELLA** (Relaxed): Me too!
 
-### SP_MasonsMystery2023 — decoration SP_MasonsMystery2023_Decoration_Slot27
+### Holiday Mystery — decoration SP_MasonsMystery2023_Decoration_Slot27
 `SP_MasonsMystery2023_Decoration_Slot27_Dialogue` · seen 23.11.02–26.07.01
-- trigger: decoration, decoration=SP_MasonsMystery2023_Decoration_Slot27, event=SP_MasonsMystery2023, moment=decoration placed (versions 23.11.02–26.07.01)
+- trigger: decoration, decoration=SP_MasonsMystery2023_Decoration_Slot27, event=Holiday Mystery, eventKey=SP_MasonsMystery2023, moment=decoration placed (versions 23.11.02–26.07.01)
 
 **RODDY** (Doubtful): Hmm... That tree doesn’t look structurally sound.
 **JACKIE** (Thinking): Looks like a croquembouche! I bet they built it around a mold and the structure supports itself.
@@ -2402,9 +2364,9 @@ Every story in which Jackie speaks.
 **JACKIE**: Come on Roddy... My first article was on the architectural designs of Hopewell Bay!
 **RODDY** (Charming): I... I never realized!
 
-### SP_MysteriesUnveiled2024 — decoration SP_MysteriesUnveiled2024_Decoration_Slot25
+### The Mysteries Unveiled — decoration SP_MysteriesUnveiled2024_Decoration_Slot25
 `SP_MysteriesUnveiled2024_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_MysteriesUnveiled2024_Decoration_Slot25, event=SP_MysteriesUnveiled2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_MysteriesUnveiled2024_Decoration_Slot25, event=The Mysteries Unveiled, eventKey=SP_MysteriesUnveiled2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE**: Hi, Maddie...
 **MADDIE** (Annoyed): Jackie.
@@ -2463,9 +2425,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Doubtful): Maybe.
 **MADDIE** (Worried): Maybe...
 
-### SP_NoRest2025 — decoration SP_NoRest2025_Decoration_Slot27
+### No Rest for the Wicked — decoration SP_NoRest2025_Decoration_Slot27
 `SP_NoRest2025_Decoration_Slot27_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_NoRest2025_Decoration_Slot27, event=SP_NoRest2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_NoRest2025_Decoration_Slot27, event=No Rest for the Wicked, eventKey=SP_NoRest2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Calling): *Ring Ring*
 **MADDIE** (Calling): *Bzzz... 19... 5... 3... 18... 5... 20... 1... Bzzz.*
@@ -2477,9 +2439,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Talking): I tried calling her, but I got some strange garbled message and a series of numbers.
 **JACKIE** (Calling): Sure! I know a guy who might help. Just give me her number and I’ll look into it!
 
-### SP_NoRest2025 — decoration SP_NoRest2025_Decoration_Slot29
+### No Rest for the Wicked — decoration SP_NoRest2025_Decoration_Slot29
 `SP_NoRest2025_Decoration_Slot29_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_NoRest2025_Decoration_Slot29, event=SP_NoRest2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_NoRest2025_Decoration_Slot29, event=No Rest for the Wicked, eventKey=SP_NoRest2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Talking): Hey, Jackie!
 **JACKIE** (Calling): Maddie! You won’t believe what we found! This’ll make one heck of a story!
@@ -2489,9 +2451,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Calling): It’s up there Maddie. WAY up there!
 **MADDIE** (Talking): That’s what Deb meant!
 
-### SP_Pickleball2025 — decoration SP_Pickleball2025_Decoration_Slot37
+### Smartphone Pickle — decoration SP_Pickleball2025_Decoration_Slot37
 `SP_Pickleball2025_Decoration_Slot37_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Pickleball2025_Decoration_Slot37, event=SP_Pickleball2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Pickleball2025_Decoration_Slot37, event=Smartphone Pickle, eventKey=SP_Pickleball2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE**: Hey, Jackie! Grandma wanted to invite you to play a game of pickleball.
 **JACKIE** (Thinking): Pickleball? I've never even tried it. Does it involve actual pickles?
@@ -2515,10 +2477,9 @@ Every story in which Jackie speaks.
 **JACKIE**: Ursula and the Mansion are getting a lot of unwanted attention.
 **JACKIE**: I'm afraid it'll only be a question of time before someone shows up here up to no good.
 
-### SP_RaccoonPet2025 — item discovered: 90821206
+### Raccoon Riddle — item discovered: Watermelon Jackpot
 `SP_RaccoonPet2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_RaccoonPet2025, items=['90821206'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_RaccoonPet2025, items=['SP_RaccoonPet2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Raccoon Riddle, eventKey=SP_RaccoonPet2025, itemKeys=['SP_RaccoonPet2025_CollectableItems_04'], items=['Watermelon Jackpot'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: Thanks for helping me with the boxes and crates. When I let the circus set up at the Mansion, I didn't realize how much stuff they would have.
 **JACKIE** (Hesitant): I hear you. There's a whole box full of red clown noses over there!
@@ -2527,9 +2488,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Thinking): I overheard her talking about someone causing problems online. Someone she's trying to stop.
 **JACKIE** (Thinking): That's a great clue, Maddie! I'll do some more digging online - and you keep your eyes and ears open.
 
-### SP_Ringmaster2025 — decoration SP_Ringmaster2025_Decoration_Slot36
+### Carousel of Confessions — decoration SP_Ringmaster2025_Decoration_Slot36
 `SP_Ringmaster2025_Decoration_Slot36_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Ringmaster2025_Decoration_Slot36, event=SP_Ringmaster2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Ringmaster2025_Decoration_Slot36, event=Carousel of Confessions, eventKey=SP_Ringmaster2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE**: Ready for the show?
 **MADDIE**: As ready as I'll ever be. I'm just a little distracted...
@@ -2579,19 +2540,19 @@ Every story in which Jackie speaks.
 - trigger: unknown, hint=Mystery (Progression event) (versions None–None)
 
 
-### SP_SpringSeason2023 — decoration SP_SpringSeason2023_Decoration_25
+### Spring Season — decoration SP_SpringSeason2023_Decoration_25
 `SP_SpringSeason2023_Decoration_25_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_SpringSeason2023_Decoration_25, event=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_SpringSeason2023_Decoration_25, event=Spring Season, eventKey=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_SpringSeason2023 — decoration SP_SpringSeason2023_Decoration_26
+### Spring Season — decoration SP_SpringSeason2023_Decoration_26
 `SP_SpringSeason2023_Decoration_26_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_SpringSeason2023_Decoration_26, event=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_SpringSeason2023_Decoration_26, event=Spring Season, eventKey=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_SpringSeason2023 — decoration SP_SpringSeason2023_Decoration_29
+### Spring Season — decoration SP_SpringSeason2023_Decoration_29
 `SP_SpringSeason2023_Decoration_29_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_SpringSeason2023_Decoration_29, event=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_SpringSeason2023_Decoration_29, event=Spring Season, eventKey=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
 ### SP StrayBonesMystery2024 LayerDecoration 02 Dialogue
@@ -2611,9 +2572,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Surprised): And your Grandma just happened to have it.
 **MADDIE** (Thinking): Exactly. It all just seems kinda... fishy
 
-### SP_Voyance2025 — decoration SP_Voyance2025_Decoration_Slot25
+### Lady Voyance's Premonition — decoration SP_Voyance2025_Decoration_Slot25
 `SP_Voyance2025_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Voyance2025_Decoration_Slot25, event=SP_Voyance2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Voyance2025_Decoration_Slot25, event=Lady Voyance's Premonition, eventKey=SP_Voyance2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE** (Thinking): A wedding? So, who's getting married?
 **MADDIE** (Surprised): Don't look at me!
@@ -2622,9 +2583,9 @@ Every story in which Jackie speaks.
 **RODDY** (Worried): Listen, she's just trying to be mysterious... right?
 **MADDIE** (Worried): Right...
 
-### SP_Voyance2025 — decoration SP_Voyance2025_Decoration_Slot28
+### Lady Voyance's Premonition — decoration SP_Voyance2025_Decoration_Slot28
 `SP_Voyance2025_Decoration_Slot28_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Voyance2025_Decoration_Slot28, event=SP_Voyance2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Voyance2025_Decoration_Slot28, event=Lady Voyance's Premonition, eventKey=SP_Voyance2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE**: I can't believe that just happened. Bella and Emilio are engaged!
 **JACKIE** (Hesitant): Poor Emilio looked like he was about to pass out when Bella said she wanted to have the wedding immediately!
@@ -2634,10 +2595,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Thinking): OK, but remind me again. Why do you have to organize the whole affair? It's their wedding.
 **MADDIE** (Encouraging): They're our friends, and that's what you do for your friends, right?
 
-### SP_Voyance2025 — item discovered: 55771547
+### Lady Voyance's Premonition — item discovered: Faces of Fate
 `SP_Voyance2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_Voyance2025, items=['55771547'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_Voyance2025, items=['SP_Voyance2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lady Voyance's Premonition, eventKey=SP_Voyance2025, itemKeys=['SP_Voyance2025_CollectableItems_04'], items=['Faces of Fate'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): Here we go! We should be seeing something pretty soon.
 **JACKIE** (Joyous): How exciting! I've never seen the northern lights before.
@@ -2649,9 +2609,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Surprised): W-what is she talking about?
 **JACKIE** (Surprised): I think she said there will be a wedding and a funeral.
 
-### SP_WeddingMystery2024 — decoration SP_WeddingMystery2024_Decoration_Slot33
+### The Wedding Mystery — decoration SP_WeddingMystery2024_Decoration_Slot33
 `SP_WeddingMystery2024_Decoration_Slot33_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot33, event=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot33, event=The Wedding Mystery, eventKey=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE**: It’s so nice of you to officiate their wedding, Roddy! I had no idea you could do that!
 **RODDY** (Relaxed): Oh yeah, I officiated at a friend’s wedding after I completed his home.
@@ -2663,9 +2623,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Encouraging): Forgot my dress... What a right pair we make, eh?! Oh, hi Maddie!
 **MADDIE** (Worried): ...Hi.
 
-### SP_Yoga2025 — decoration SP_Yoga2025_Decoration_Slot26
+### Secrets of Serenity — decoration SP_Yoga2025_Decoration_Slot26
 `SP_Yoga2025_Decoration_Slot26_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot26, event=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot26, event=Secrets of Serenity, eventKey=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE** (Encouraging): Ah, these stretches feel great!
 **MADDIE** (Relaxed): They really do. I never knew what a downward dog was before.
@@ -2678,9 +2638,9 @@ Every story in which Jackie speaks.
 **GRANDMA** (Surprised): Fiddlesticks! Your whispering startled me and made me drop my phone.
 **GRANDMA** (Surprised): And now it is broken!
 
-### SP_Yoga2025 — decoration SP_Yoga2025_Decoration_Slot29
+### Secrets of Serenity — decoration SP_Yoga2025_Decoration_Slot29
 `SP_Yoga2025_Decoration_Slot29_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot29, event=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot29, event=Secrets of Serenity, eventKey=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE**: How is Ursula doing with the new phone? Did you have to do everything for her?
 **MADDIE** (Thinking): Actually, she managed to set the whole thing up herself.

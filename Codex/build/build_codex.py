@@ -250,6 +250,54 @@ def build():
                     continue
                 name = loc_name.strip()
             area_name[area["AreaId"]] = name
+    # CollectibleDialoguesInfo keys item/decoration dialogues by the event's config id (or its NameLocId);
+    # show the event's display name so all dialogues of one event land under one entry, keep the key alongside.
+    event_display = {}
+    for v in vers:
+        ev = per[v]["events"]
+        if not isinstance(ev, dict):
+            continue
+        for lib, (idkey, _label, _moments) in EVENT_LIBS.items():
+            for e in ev.get(lib) or []:
+                if isinstance(e, dict) and e.get("Name") and "_" not in e["Name"]:   # skip unlocalised raw names
+                    for key in (e.get(idkey), e.get("NameLocId")):
+                        if key:
+                            event_display[key] = e["Name"]
+    manual = common.read_json(os.path.join(os.path.dirname(__file__), "event_names.json"))
+    event_display.update({k: v for k, v in manual.items() if not k.startswith("_")})
+
+    def resolve_event_name(key):
+        base = re.sub(r"_(Name|Title)$", "", key)          # some keys are the event's name loc key itself
+        name = event_display.get(key) or event_display.get(base)
+        if not name:                                       # event type not dumped: localisation has it in a few shapes
+            for cand in (base + "_Event_Name", base + "_InfoPanel_Title", base + "_Name", base + "_Title", key):
+                runs_ = strings.get(cand) or []
+                name = next((r["value"] for r in reversed(runs_) if r["value"]), None)
+                if name:
+                    break
+        return (name or key).strip()
+    # Item references in CollectibleDialogueMapping are int config hashes in dumps made from old configs
+    # (today's dumper resolves them). Resolve hash -> (ItemType, Name) and ItemType -> Name across ALL
+    # versions (newest non-empty name wins); fall back to the internal ItemType, then to the raw value.
+    item_by_hash, item_name_by_type = {}, {}
+    for v in vers:
+        for ch in per[v]["chains"] or []:
+            if not isinstance(ch, dict):
+                continue
+            for part in ("PrimaryChain", "FallbackChain"):
+                for slot in ch.get(part) or []:
+                    it = (slot or {}).get("Item") or {}
+                    if it.get("ItemType"):
+                        if it.get("ConfigKey") is not None:
+                            item_by_hash[str(it["ConfigKey"])] = it["ItemType"]
+                        if it.get("Name") and "_" not in it["Name"]:
+                            item_name_by_type[it["ItemType"]] = it["Name"]
+
+    def resolve_item(ref):
+        ref = str(ref)
+        itype = item_by_hash.get(ref, ref) if ref.isdigit() else ref
+        return item_name_by_type.get(itype) or itype
+
     trig_by_ver = {}
     all_sids = set()
     for v in vers:
@@ -260,6 +308,14 @@ def build():
                 tr["area"] = area_name[tr["areaId"]]
             elif tr.get("area"):
                 tr["area"] = tr["area"].strip()
+            if tr["kind"] in ("item", "decoration") and tr.get("event"):
+                tr["eventKey"] = tr["event"]
+                tr["event"] = resolve_event_name(tr["event"])
+            if tr["kind"] == "item" and tr.get("items"):
+                tr["itemKeys"] = [item_by_hash.get(str(i), str(i)) if str(i).isdigit() else str(i) for i in tr["items"]]
+                tr["items"] = [resolve_item(i) for i in tr["items"]]
+            elif tr["kind"] == "event" and tr.get("event") and "_" in tr["event"]:   # unlocalised Name in an old dump
+                tr["event"] = resolve_event_name(tr.get("eventId") or tr["event"])
         trig_by_ver[v] = t
         all_sids.update(sid for sid, _ in t)
         all_sids.update(story_defs_by_ver[v])

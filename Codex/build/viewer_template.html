@@ -145,19 +145,29 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
     kinds.appendChild(el);
   });
   // characters: only those that actually speak in a story of this page; sortable by line count or name
+  // Characters cascade with the area/event filter: only those who speak in the selected scope, with counts inside it.
   const charSel = document.getElementById('char');
-  const present = new Set(); all.forEach(s => s.chars.forEach(c => present.add(c)));
-  const charList = D.characters.filter(c => present.has(c.id));
+  let charMode = 'lines';
   function fillChars(mode) {
+    if (mode) charMode = mode;
     const keep = charSel.value;
-    const sorted = charList.slice().sort(mode === 'az' ? (a, b) => a.name.localeCompare(b.name, 'en') : (a, b) => b.lines - a.lines);
+    const sc = document.getElementById('scope').value;
+    const withRemoved = document.getElementById('showRemoved').checked;
+    const inScope = all.filter(s => (!sc || s.scopes.has(sc)) && (withRemoved || !s.removedStory));
+    const lines = {}, stories = {};
+    inScope.forEach(s => {
+      const seen = new Set();
+      s.lines.forEach(l => { if (l.speaker) { lines[l.speaker] = (lines[l.speaker] || 0) + 1; seen.add(l.speaker); } });
+      seen.forEach(c => stories[c] = (stories[c] || 0) + 1);
+    });
+    const list = D.characters.filter(c => lines[c.id]).map(c => ({ id: c.id, name: c.name, lines: lines[c.id], stories: stories[c.id] }));
+    list.sort(charMode === 'az' ? (a, b) => a.name.localeCompare(b.name, 'en') : (a, b) => b.lines - a.lines);
     charSel.innerHTML = '<option value="">Any character</option>';
-    sorted.forEach(c => { const o=document.createElement('option'); o.value=c.id; o.textContent=`${c.name} — ${c.lines.toLocaleString('en-US')} lines, ${c.stories} stories`; charSel.appendChild(o); });
-    charSel.value = keep;
-    document.getElementById('charSortLines').classList.toggle('on', mode !== 'az');
-    document.getElementById('charSortAz').classList.toggle('on', mode === 'az');
+    list.forEach(c => { const o=document.createElement('option'); o.value=c.id; o.textContent=`${c.name} — ${c.lines.toLocaleString('en-US')} lines, ${c.stories} stories`; charSel.appendChild(o); });
+    charSel.value = list.some(c => c.id === keep) ? keep : '';
+    document.getElementById('charSortLines').classList.toggle('on', charMode !== 'az');
+    document.getElementById('charSortAz').classList.toggle('on', charMode === 'az');
   }
-  fillChars('lines');
   document.getElementById('charSortLines').onclick = () => fillChars('lines');
   document.getElementById('charSortAz').onclick = () => fillChars('az');
   // areas in game progression order (wiki orderingIndex from Module:Datatable/Areas/Mapping), unknown ones last
@@ -222,7 +232,9 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
     if (current.length > shown) { const b=document.createElement('button'); b.className='more'; b.textContent=`Show ${Math.min(PAGE,current.length-shown)} more of ${(current.length-shown).toLocaleString('en-US')} remaining`; b.onclick=()=>{shown+=PAGE;render(false);}; list.appendChild(b); }
   }
   let t; document.getElementById('q').addEventListener('input', () => { clearTimeout(t); t=setTimeout(render,180); });
-  ['char','scope','onlyChanged','showEmpty','showRemoved'].forEach(id => document.getElementById(id).addEventListener('change', () => render()));
+  ['char','onlyChanged','showEmpty'].forEach(id => document.getElementById(id).addEventListener('change', () => render()));
+  ['scope','showRemoved'].forEach(id => document.getElementById(id).addEventListener('change', () => { fillChars(); render(); }));
+  fillChars();
   render();
 })();
 </script>

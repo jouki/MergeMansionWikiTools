@@ -1,10 +1,9 @@
 # Ghost
 Every story in which Ghost speaks.
 
-### CBE_BackyardBash2024 — item discovered: 4625231
+### Spooktacular Backyard Bash — item discovered: Backyard Theater Active
 `CBE_BackyardBash2024_BackyardTheaterActive_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_BackyardBash2024, items=['4625231'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_BackyardBash2024, items=['CBE_BackyardBash2024_BackyardTheaterActive_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, itemKeys=['CBE_BackyardBash2024_BackyardTheaterActive_01'], items=['Backyard Theater Active'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: Welcome to our Halloween movie marathon, everyone!
 **MADDIE** (Encouraging): What great costumes, all around.

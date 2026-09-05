@@ -1,9 +1,9 @@
 # Lady Voyance
 Every story in which Lady Voyance speaks.
 
-### CBE_MaddieInParis — decoration CBE_MaddieInParis2026v2_Decoration_Slot23
+### Maddie In Paris — decoration CBE_MaddieInParis2026v2_Decoration_Slot23
 `CBE_MaddieInParis_Slot_23_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=CBE_MaddieInParis2026v2_Decoration_Slot23, event=CBE_MaddieInParis, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=CBE_MaddieInParis2026v2_Decoration_Slot23, event=Maddie In Paris, eventKey=CBE_MaddieInParis, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **LADY VOYANCE** (Surprised): Ursula, the universe is sending me the strangest vibrations. They’re making me feel QUITE uneasy!
 **LADY VOYANCE** (Thinking): Is Maddie back from Paris yet?
@@ -20,34 +20,30 @@ Every story in which Lady Voyance speaks.
 **MADDIE** (Thinking): W-what do you see?
 **LADY VOYANCE** (Talking): Patience! I seeee that.... the winter is coming?
 
-### CBE_VeilOfFate2023 — item discovered: 3082152
+### Veil of Fate — item discovered: Arm Cast
 `CBE_VeilOfFate2023_ArmCast_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['3082152'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_Arthur_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_Arthur_05'], items=['Arm Cast'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE** (Talking): I see... a tasty loaf of bread? No, no... It is an arm cast.
 **LADY VOYANCE** (Talking): You should be careful in the garden, Maddie!
 
-### CBE_VeilOfFate2023 — item discovered: 55091931
+### Veil of Fate — item discovered: Open Astrology Book
 `CBE_VeilOfFate2023_BookOfStars_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['55091931'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_Research_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_Research_07'], items=['Open Astrology Book'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE**: This little book tells me which way the STARS are turning!
 **MADDIE** (Surprised): I'm not sure it works like that...
 
-### CBE_VeilOfFate2023 — item discovered: 68982086
+### Veil of Fate — item discovered: Crystal House
 `CBE_VeilOfFate2023_CrystalHouse_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['68982086'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_CrystalBallBuild_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_CrystalBallBuild_08'], items=['Crystal House'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **MADDIE**: The house inside your snow globe is cute!
 **LADY VOYANCE**: Not cute, my child! It is mysterious and enigmatic!
 
-### CBE_VeilOfFate2023 — item discovered: 54770705
+### Veil of Fate — item discovered: Dormant Snow Globe
 `CBE_VeilOfFate2023_InactiveSnowglobe_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['54770705'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_CrystalBall_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_CrystalBall_01'], items=['Dormant Snow Globe'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE**: Everything is ready, but the globe is still silent...
 **MADDIE** (Surprised): Maybe it's broken?
@@ -68,41 +64,36 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE**: I also offer birth charts and homemade charm bracelets. Pretty AND well priced!
 **MADDIE** (Charming): Sounds great, but first I'd like to hear about my future... And I have some questions!
 
-### CBE_VeilOfFate2023 — item discovered: 77460600
+### Veil of Fate — item discovered: Triple Lit Candle
 `CBE_VeilOfFate2023_LitCandles_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['77460600'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_Candle_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_Candle_04'], items=['Triple Lit Candle'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE**: The flames of my candles shed a light on paths of fate...
 **MADDIE** (Relaxed): And they have a very pleasant scent, too!
 
-### CBE_VeilOfFate2023 — item discovered: 4677681
+### Veil of Fate — item discovered: Drawings
 `CBE_VeilOfFate2023_MaddiesDrawings_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['4677681'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_MaddiesPast_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_MaddiesPast_05'], items=['Drawings'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE** (Talking): You were quite the artist, I see!
 
-### CBE_VeilOfFate2023 — item discovered: 47787384
+### Veil of Fate — item discovered: Key Charm
 `CBE_VeilOfFate2023_MansionKeyCharm_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['47787384'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_CharmBracelet_11'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_CharmBracelet_11'], items=['Key Charm'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE**: I see a big house... a MANSION even! Does that sound familiar?
 **MADDIE** (Frustrated): Erhm... well, yes. 
 **LADY VOYANCE**: Ah, yes.
 
-### CBE_VeilOfFate2023 — item discovered: 38434395
+### Veil of Fate — item discovered: Box of Candles
 `CBE_VeilOfFate2023_MeltedCandles_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['38434395'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_MeltCandle_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_MeltCandle_05'], items=['Box of Candles'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE**: I always bring extra candles!
 
-### CBE_VeilOfFate2023 — item discovered: 3082150
+### Veil of Fate — item discovered: Motorcycle Key
 `CBE_VeilOfFate2023_MotorcycleKeys_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['3082150'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_Arthur_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_Arthur_07'], items=['Motorcycle Key'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE** (Talking): Your future looks VERY interesting - you may grow a BEARD!
 **MADDIE** (Surprised): I hope not! Is there anything else?
@@ -110,55 +101,48 @@ Every story in which Lady Voyance speaks.
 **MADDIE** (Thinking): Sounds oddly familiar... Events I would rather not think about.
 **MADDIE** (Thinking): But why would those old events appear in my future?
 
-### CBE_VeilOfFate2023 — item discovered: 22735223
+### Veil of Fate — item discovered: Ball of the Future
 `CBE_VeilOfFate2023_SnowglobeOfTheFuture_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['22735223'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_CrystalBallFuture_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_CrystalBallFuture_01'], items=['Ball of the Future'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE**: The future is BRIGHT, my child! Bright purple!
 
-### CBE_VeilOfFate2023 — item discovered: 76273052
+### Veil of Fate — item discovered: Ball of the Past
 `CBE_VeilOfFate2023_SnowglobeOfThePast_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['76273052'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_CrystalBallPast_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_CrystalBallPast_01'], items=['Ball of the Past'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE**: Well, well, well... The globe has taken me to the past!
 
-### CBE_VeilOfFate2023 — item discovered: 45258692
+### Veil of Fate — item discovered: Ball of the Present
 `CBE_VeilOfFate2023_SnowglobeOfThePresent_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['45258692'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_CrystalBallPresent_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_CrystalBallPresent_01'], items=['Ball of the Present'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE** (Talking): You must know where you ARE to see where you are GOING, my child!
 
-### CBE_VeilOfFate2023 — item discovered: 86958071
+### Veil of Fate — item discovered: Table of Fate
 `CBE_VeilOfFate2023_TableOfDestiny_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['86958071'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_FortuneTelling_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_FortuneTelling_07'], items=['Table of Fate'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE**: I wonder whether Ursula might let me set up shop on her driveway...
 **GRANDMA** (Frustrated): Ehem!
 **LADY VOYANCE**: Well, maybe not!
 
-### CBE_VeilOfFate2023 — item discovered: 22036603
+### Veil of Fate — item discovered: "The Chef"
 `CBE_VeilOfFate2023_TheChef_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['22036603'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_Constellation_12'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_Constellation_12'], items=['"The Chef"'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE**: Ah, the most handsome constellation in the sky!
 **LADY VOYANCE**: They say it brings good luck to those who see it.
 
-### CBE_VeilOfFate2023 — item discovered: 22036608
+### Veil of Fate — item discovered: "The Little Sister"
 `CBE_VeilOfFate2023_TheLittleSister_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['22036608'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_Constellation_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_Constellation_07'], items=['"The Little Sister"'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE**: The "Little Sister"! Adorable, isn't it!
 
-### CBE_VeilOfFate2023 — item discovered: 9081933
+### Veil of Fate — item discovered: "The Partners"
 `CBE_VeilOfFate2023_ThePartnersTarotCard_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['9081933'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_TarotCard_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_TarotCard_08'], items=['"The Partners"'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE**: The cards are as right as their reader. So you have absolutely nothing to worry about!
 
@@ -170,19 +154,17 @@ Every story in which Lady Voyance speaks.
 **MADDIE** (Thinking): I j-just want to know why this keeps happening to me...
 **LADY VOYANCE** (Talking): A BIG question, Dearest. Let's see where the globe takes us.
 
-### CBE_VeilOfFate2024 — item discovered: 55091931
+### Veil of Fate — item discovered: Open Astrology Book
 `CBE_VeilOfFate2024_BookOfStars_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['55091931'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_Research_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_Research_07'], items=['Open Astrology Book'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Talking): So, if the Moon is in the second house... errrr... and Jupiter is in line with Mars...
 **LADY VOYANCE** (Talking): That means... I think it was on page 124...
 **LADY VOYANCE**: Wrong book!
 
-### CBE_VeilOfFate2024 — item discovered: 68982086
+### Veil of Fate — item discovered: Crystal House
 `CBE_VeilOfFate2024_CrystalHouse_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['68982086'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_CrystalBallBuild_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_CrystalBallBuild_08'], items=['Crystal House'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Soooo, Maddie, dear. What can I help you with today?
 **MADDIE** (Thinking): I've got some questions about what you told me last time.
@@ -194,9 +176,9 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE** (Talking): My dear, heartbreak is a PART of young lo...
 **LADY VOYANCE**: Neeever mind.
 
-### CBE_VeilOfFate2024 — decoration CBE_VeilOfFate2023_Decoration_Slot01
+### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot01
 `CBE_VeilOfFate2024_Decoration_Slot01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot01, event=CBE_VeilOfFate2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot01, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **RODDY** (Relaxed): Hello again, Lady Voyance...
 **LADY VOYANCE**: Roddy, my boy! How can I be of service?
@@ -205,9 +187,9 @@ Every story in which Lady Voyance speaks.
 **RODDY** (Charming): Good! I, well, would like to know if you see... any romance in my future?
 **LADY VOYANCE**: You certainly are a romantic!
 
-### CBE_VeilOfFate2024 — decoration CBE_VeilOfFate2023_Decoration_Slot04
+### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot04
 `CBE_VeilOfFate2024_Decoration_Slot04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot04, event=CBE_VeilOfFate2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot04, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: The skeptic returns to the globe, I see.
 **JACKIE** (Doubtful): A friend of mine said that it... Well, that the globe isn't ALWAYS wrong.
@@ -218,9 +200,9 @@ Every story in which Lady Voyance speaks.
 **JACKIE** (Annoyed): Great advice.
 **LADY VOYANCE** (Talking): The universe favors the brave, my dear!
 
-### CBE_VeilOfFate2024 — decoration CBE_VeilOfFate2023_Decoration_Slot06
+### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot06
 `CBE_VeilOfFate2024_Decoration_Slot06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot06, event=CBE_VeilOfFate2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot06, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Talking): The globe tells me that you have been seeing a certain young lady...
 **RODDY** (Thinking): Yes, ummm, I guess that's Jackie. We've been on a couple of dates, but...
@@ -230,9 +212,9 @@ Every story in which Lady Voyance speaks.
 **RODDY** (Discouraged): That's OK. I already have every reason to be happy, right? Thanks, Lady Voyance.
 **LADY VOYANCE** (Talking): Aaahhhh! Is that... young Maddie? What a cosmic mess!
 
-### CBE_VeilOfFate2024 — decoration CBE_VeilOfFate2023_Decoration_Slot07
+### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot07
 `CBE_VeilOfFate2024_Decoration_Slot07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot07, event=CBE_VeilOfFate2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot07, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: How about you, Ursula? Do you want to peek into the future?
 **GRANDMA** (Charming): The present is just fine for me.
@@ -240,9 +222,9 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE** (Talking): I dreamt that you used to be some kind of a spy! It felt so real...
 **GRANDMA** (Joyous): Hilarious! You should do stand-up comedy, old friend.
 
-### CBE_VeilOfFate2024 — decoration CBE_VeilOfFate2023_Decoration_Slot08
+### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot08
 `CBE_VeilOfFate2024_Decoration_Slot08_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot08, event=CBE_VeilOfFate2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot08, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Deb! You too?
 **DEB** (Doubtful): There's a lot going on, so I thought I might seek some...
@@ -252,65 +234,58 @@ Every story in which Lady Voyance speaks.
 **DEB** (Surprised): Excuse me??
 **LADY VOYANCE** (Talking): Worry not. Lady Voyance never tells.
 
-### CBE_VeilOfFate2024 — item discovered: 77460600
+### Veil of Fate — item discovered: Triple Lit Candle
 `CBE_VeilOfFate2024_LitCandles_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['77460600'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_Candle_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_Candle_04'], items=['Triple Lit Candle'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Talking): The answers are close. I can FEEL it!
 **LADY VOYANCE** (Talking): They are... out THERE!
 
-### CBE_VeilOfFate2024 — item discovered: 4677677
+### Veil of Fate — item discovered: Crafting Station
 `CBE_VeilOfFate2024_MaddiesCraftingStation_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['4677677'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_MaddiesPast_09'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_MaddiesPast_09'], items=['Crafting Station'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: I've loved making and building things since I was little.
 **MADDIE** (Worried): Maybe that's SOMETHING I got from one of my parents...
 **MADDIE** (Worried): I guess I'll never know.
 **LADY VOYANCE**: I do LOVE making crafts myself!
 
-### CBE_VeilOfFate2024 — item discovered: 4677681
+### Veil of Fate — item discovered: Drawings
 `CBE_VeilOfFate2024_MaddiesDrawings_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['4677681'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_MaddiesPast_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_MaddiesPast_05'], items=['Drawings'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Talking): What do you remember from your childhood, my dear?
 **MADDIE** (Thinking): I... I can't remember almost anything...
 **MADDIE** (Worried): My parents were lovely, and I remember being with them, and then... nothing.
 **LADY VOYANCE**: That is NOT very helpful, my dear.
 
-### CBE_VeilOfFate2024 — item discovered: 47787384
+### Veil of Fate — item discovered: Key Charm
 `CBE_VeilOfFate2024_MansionKeyCharm_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['47787384'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_CharmBracelet_11'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_CharmBracelet_11'], items=['Key Charm'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: The Mansion might hold answers for you, my dear.
 **MADDIE** (Thinking): It just brings up more questions!
 **LADY VOYANCE** (Talking): Look further into the past. Clear away the debris of history to seek the TRUTH!
 
-### CBE_VeilOfFate2024 — item discovered: 38434395
+### Veil of Fate — item discovered: Box of Candles
 `CBE_VeilOfFate2024_MeltedCandles_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['38434395'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_MeltCandle_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_MeltCandle_05'], items=['Box of Candles'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Let's set the stage for fate!
 **LADY VOYANCE**: We just need a FEW more candles...
 
-### CBE_VeilOfFate2024 — item discovered: 3082150
+### Veil of Fate — item discovered: Motorcycle Key
 `CBE_VeilOfFate2024_MotorcycleKeys_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['3082150'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_Arthur_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_Arthur_07'], items=['Motorcycle Key'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): I keep dreaming of keys... like car keys. What could that mean? Is it about my parents' car crash??
 **LADY VOYANCE**: Oh, my dear! It could mean an opportunity or new access - even FREEDOM!
 **LADY VOYANCE** (Talking): Or just control and secrets.
 **LADY VOYANCE** (Talking): Fate can be QUITE fickle!
 
-### CBE_VeilOfFate2024 — item discovered: 22735223
+### Veil of Fate — item discovered: Ball of the Future
 `CBE_VeilOfFate2024_SnowglobeOfTheFuture_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['22735223'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_CrystalBallFuture_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_CrystalBallFuture_01'], items=['Ball of the Future'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Talking): I see that you are about to solve a MYSTERY!
 **MADDIE** (Surprised): A... mystery? About what?
@@ -318,20 +293,18 @@ Every story in which Lady Voyance speaks.
 **MADDIE** (Surprised): The mansion and Grandma??
 **LADY VOYANCE** (Talking): The missing rake... It is in the SHED!
 
-### CBE_VeilOfFate2024 — item discovered: 76273052
+### Veil of Fate — item discovered: Ball of the Past
 `CBE_VeilOfFate2024_SnowglobeOfThePast_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['76273052'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_CrystalBallPast_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_CrystalBallPast_01'], items=['Ball of the Past'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Talking): Your parents...
 **MADDIE**: Yeah? Do you see them?
 **LADY VOYANCE** (Talking): You survived that awful car crash that killed them... It must still haunt you.
 **MADDIE** (Surprised): I-I was in the car WITH them??
 
-### CBE_VeilOfFate2024 — item discovered: 45258692
+### Veil of Fate — item discovered: Ball of the Present
 `CBE_VeilOfFate2024_SnowglobeOfThePresent_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['45258692'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_CrystalBallPresent_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_CrystalBallPresent_01'], items=['Ball of the Present'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Talking): I sense some anger in you... A GREAT disturbance!
 **MADDIE** (Annoyed): I AM angry! I finally put myself out there only to be left for some fish!
@@ -340,18 +313,16 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE**: But... there is no ocean in Bolivia.
 **MADDIE** (Frustrated): I KNOW.
 
-### CBE_VeilOfFate2024 — item discovered: 86958071
+### Veil of Fate — item discovered: Table of Fate
 `CBE_VeilOfFate2024_TableOfDestiny_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['86958071'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_FortuneTelling_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_FortuneTelling_07'], items=['Table of Fate'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: You know, telling fortunes requires the right equipment!
 **LADY VOYANCE**: An ill-tuned globe or hastily arranged crystals can REALLY interfere with the outcome!
 
-### CBE_VeilOfFate2024 — item discovered: 22036603
+### Veil of Fate — item discovered: "The Chef"
 `CBE_VeilOfFate2024_TheChef_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['22036603'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_Constellation_12'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_Constellation_12'], items=['"The Chef"'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Who is it that sprinkles your life with magic, my dear?
 **MADDIE** (Thinking): I thought it was Emilio... but I couldn't be more wrong.
@@ -359,27 +330,24 @@ Every story in which Lady Voyance speaks.
 **MADDIE** (Thinking): I can't think of anyone...
 **LADY VOYANCE** (Talking): No one??
 
-### CBE_VeilOfFate2024 — item discovered: 22036608
+### Veil of Fate — item discovered: "The Little Sister"
 `CBE_VeilOfFate2024_TheLittleSister_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['22036608'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_Constellation_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_Constellation_07'], items=['"The Little Sister"'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: The stars COULD offer you the answer.
 **LADY VOYANCE**: Alas, it is a rather cloudy night.
 
-### CBE_VeilOfFate2024 — item discovered: 9081933
+### Veil of Fate — item discovered: "The Partners"
 `CBE_VeilOfFate2024_ThePartnersTarotCard_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['9081933'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_TarotCard_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_TarotCard_08'], items=['"The Partners"'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: What would you say is your GREATEST goal in life?
 **MADDIE**: Apart from having a day off? I... I just want to find love. You know, a love that lasts.
 **LADY VOYANCE**: It may be closer than you think, my dear.
 
-### CBE_VeilOfFate2024 — item discovered: 3082153
+### Veil of Fate — item discovered: Wallet
 `CBE_VeilOfFate2024_Wallet_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['3082153'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_Arthur_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_Arthur_04'], items=['Wallet'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Talking): I think I see a figure EMERGING...
 **MADDIE** (Surprised): W- who is it??
@@ -401,10 +369,9 @@ Every story in which Lady Voyance speaks.
 **PEARL** (Encouraging): You're pretty good at this!
 **LADY VOYANCE** (Charming): I am MERELY a conduit, my dear.
 
-### CBE_VoyancesVisions — item discovered: 69725280
+### Voyance's Visions — item discovered: Dumbbell
 `CBE_VoyancesVisions_CharacterItems_05C_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VoyancesVisions, items=['69725280'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VoyancesVisions, items=['CBE_VoyancesVisions_CharacterItems_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['CBE_VoyancesVisions_CharacterItems_05'], items=['Dumbbell'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Oh, spirits of the sky, speak to meeee!
 **LADY VOYANCE** (Surprised): I am getting something...
@@ -427,10 +394,9 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE** (Calling): What family secrets YOU are hiding from the world?
 **JACKIE** (Surprised): *Gulp* I don't know what you mean!
 
-### CBE_VoyancesVisions — item discovered: 69725276
+### Voyance's Visions — item discovered: Helmet
 `CBE_VoyancesVisions_CharacterItems_09C_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VoyancesVisions, items=['69725276'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VoyancesVisions, items=['CBE_VoyancesVisions_CharacterItems_09'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['CBE_VoyancesVisions_CharacterItems_09'], items=['Helmet'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Surprised): Hmmmmmm... Powers of the past, present and future... SPEAK!
 **LADY VOYANCE** (Surprised): A strange picture is forming... of Mason and Pearl, your family, the Boultons, and something else...
@@ -499,10 +465,9 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE** (Calling): ...and what secrets will be spilled tonight!
 **LADY VOYANCE** (Charming): For a VERY reasonable fee, of course!
 
-### CBE_VoyancesVisions — item discovered: 80336061
+### Voyance's Visions — item discovered: Malzar - First Answer
 `CBE_VoyancesVisions_MalzarAActiveC_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VoyancesVisions, items=['80336061'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VoyancesVisions, items=['CBE_VoyancesVisions_MalzarAActive_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['CBE_VoyancesVisions_MalzarAActive_01'], items=['Malzar - First Answer'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MALZAR**: </i>Through tangled roots of kin we tread, unveiling truths long left unsaid.</i>
 **LADY VOYANCE** (Thinking): Does that make sense to you? Sounds like family secrets...
@@ -529,10 +494,9 @@ Every story in which Lady Voyance speaks.
 **JACKIE** (Thinking): What does that mean??
 **LADY VOYANCE** (Thinking): Patience! Let's see what else he has to say...
 
-### CBE_VoyancesVisions — item discovered: 14237226
+### Voyance's Visions — item discovered: Malzar - Second Answer
 `CBE_VoyancesVisions_MalzarBActiveC_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VoyancesVisions, items=['14237226'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VoyancesVisions, items=['CBE_VoyancesVisions_MalzarBActive_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['CBE_VoyancesVisions_MalzarBActive_01'], items=['Malzar - Second Answer'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Let's hear it, Malzar - what is your cosmic message?
 **MALZAR**: </i>Buried deep, the ties that bind, a truth the bloodline must not find.</i>
@@ -548,10 +512,9 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE**: That is for YOU to find out, dear!
 **LADY VOYANCE** (Thinking): In any case, I'm only right nine times out of ten.
 
-### CBE_VoyancesVisions — item discovered: 19906385
+### Voyance's Visions — item discovered: Malzar - Third Answer
 `CBE_VoyancesVisions_MalzarCActiveC_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VoyancesVisions, items=['19906385'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VoyancesVisions, items=['CBE_VoyancesVisions_MalzarCActive_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['CBE_VoyancesVisions_MalzarCActive_01'], items=['Malzar - Third Answer'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **DEB** (Doubtful): How reliable is Malzar?
 **LADY VOYANCE** (Encouraging): Extremely reliable! You cannot really measure his reliability in absolute terms, of course.
@@ -640,10 +603,9 @@ Every story in which Lady Voyance speaks.
 **JACKIE** (Annoyed): You don't say!
 **LADY VOYANCE**: You should be glad I didn't see a lunchbox! The universe DETESTS a lunchbox.
 
-### CBE_VoyancesVisions — item discovered: 29785786
+### Voyance's Visions — item discovered: Pregnancy Test
 `CBE_VoyancesVisions_OminousSecrets_05C_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VoyancesVisions, items=['29785786'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VoyancesVisions, items=['CBE_VoyancesVisions_PossibleEvidence_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['CBE_VoyancesVisions_PossibleEvidence_05'], items=['Pregnancy Test'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Surprised): I seeee... something. Something that tells me your troubles involve a child.
 **DEB** (Surprised): But whose child?
@@ -651,10 +613,9 @@ Every story in which Lady Voyance speaks.
 **DEB** (Frustrated): Do you mean your peculiar mascot?
 **LADY VOYANCE** (Surprised): He is not a mascot! He is... MALZAR!
 
-### CBE_VoyancesVisions — item discovered: 29785785
+### Voyance's Visions — item discovered: Paper Shredder
 `CBE_VoyancesVisions_OminousSecrets_06C_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VoyancesVisions, items=['29785785'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VoyancesVisions, items=['CBE_VoyancesVisions_PossibleEvidence_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['CBE_VoyancesVisions_PossibleEvidence_06'], items=['Paper Shredder'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Surprised): Mmmm.... MMMMHH...
 **DEB** (Doubtful): Voyance? Are you quite alright?
@@ -675,10 +636,9 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE** (Doubtful): Money, my dear.
 **LADY VOYANCE** (Doubtful): Someone stands to lose big.
 
-### CBE_VoyancesVisions — item discovered: 29785784
+### Voyance's Visions — item discovered: Money Bag
 `CBE_VoyancesVisions_OminousSecrets_07C_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VoyancesVisions, items=['29785784'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VoyancesVisions, items=['CBE_VoyancesVisions_PossibleEvidence_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['CBE_VoyancesVisions_PossibleEvidence_07'], items=['Money Bag'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: This one I see clearly. I see money.
 **LADY VOYANCE**: Yes... A lot of money.
@@ -709,10 +669,10 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE** (Thinking): I wonder what Malzar was talking about... The ways of fate really ARE unknown!
 **LADY VOYANCE** (Thinking): Oh, I forgot to mention I have a sale on my patented magical snow globes...
 
-### CBE_VoyancesVisions — item discovered: 11770638
+### Voyance's Visions — item discovered: 11770638
 `CBE_VoyancesVisions_TarotCardsC_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VoyancesVisions, items=['11770638'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VoyancesVisions, items=['CBE_VoyancesVisions_TarotCards_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['11770638'], items=['11770638'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['CBE_VoyancesVisions_TarotCards_03'], items=['CBE_VoyancesVisions_TarotCards_03'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **LADY VOYANCE**: Mmhhhhmmmmmm... I feel a restless customer approaching.
 **LADY VOYANCE**: Someone is eager to consult the cards!
@@ -727,10 +687,9 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE** (Thinking): Oh, cards, tell me your tale!
 **LADY VOYANCE** (Thinking): Now I just need a customer... Who shall it be?
 
-### CBE_VoyancesVisions — item discovered: 22815197
+### Voyance's Visions — item discovered: Premium Tarot Table
 `CBE_VoyancesVisions_TarotTableActiveC_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VoyancesVisions, items=['22815197'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VoyancesVisions, items=['CBE_VoyancesVisions_TarotTable_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['CBE_VoyancesVisions_TarotTable_06'], items=['Premium Tarot Table'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Surprised): Deb! It is you!
 **DEB** (Doubtful): Err... Yes, it's me.
@@ -770,9 +729,9 @@ Every story in which Lady Voyance speaks.
 - trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 
-### SP_LadyVoyanceMystery2023 — decoration SP_LadyVoyanceMystery2023_Decoration_Slot25
+### Lady Voyance's Mystery — decoration SP_LadyVoyanceMystery2023_Decoration_Slot25
 `SP_LadyVoyanceMystery2023_Decoration_Slot25_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_LadyVoyanceMystery2023_Decoration_Slot25, event=SP_LadyVoyanceMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_LadyVoyanceMystery2023_Decoration_Slot25, event=Lady Voyance's Mystery, eventKey=SP_LadyVoyanceMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **LADY VOYANCE**: Hello, my child! Come to have your fortune told?
 **JACKIE** (Annoyed): My fortune? No, I just came over to ask if Ma-
@@ -786,9 +745,9 @@ Every story in which Lady Voyance speaks.
 **JACKIE** (Doubtful): A reporter.
 **LADY VOYANCE** (Thinking): I sense GREEEAT conflict in your future!
 
-### SP_LadyVoyanceMystery2023 — decoration SP_LadyVoyanceMystery2023_Decoration_Slot26
+### Lady Voyance's Mystery — decoration SP_LadyVoyanceMystery2023_Decoration_Slot26
 `SP_LadyVoyanceMystery2023_Decoration_Slot26_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_LadyVoyanceMystery2023_Decoration_Slot26, event=SP_LadyVoyanceMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_LadyVoyanceMystery2023_Decoration_Slot26, event=Lady Voyance's Mystery, eventKey=SP_LadyVoyanceMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **RODDY** (Worried): Hi... I’m uuuh, here to see the psychic?
 **LADY VOYANCE** (Talking): Yes, my child... I knew you would come.
@@ -800,9 +759,9 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE**: Do not worry, my child... Your wait is almost over.
 **RODDY** (Charming): Oh wow!
 
-### SP_LadyVoyanceMystery2023 — decoration SP_LadyVoyanceMystery2023_Decoration_Slot27
+### Lady Voyance's Mystery — decoration SP_LadyVoyanceMystery2023_Decoration_Slot27
 `SP_LadyVoyanceMystery2023_Decoration_Slot27_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_LadyVoyanceMystery2023_Decoration_Slot27, event=SP_LadyVoyanceMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_LadyVoyanceMystery2023_Decoration_Slot27, event=Lady Voyance's Mystery, eventKey=SP_LadyVoyanceMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **LADY VOYANCE**: Ah, Maddie! Please, step inside.
 **MADDIE**: Hello, Lady Voyance! I guess I’m ready for my reading now.
@@ -818,9 +777,9 @@ Every story in which Lady Voyance speaks.
 **MADDIE** (Surprised): What?! Who?!
 **LADY VOYANCE** (Talking): I... I’m sorry. The globe has gone silent. But it is close, my child. CLOSE.
 
-### SP_LadyVoyanceMystery2023 — decoration SP_LadyVoyanceMystery2023_Decoration_Slot28
+### Lady Voyance's Mystery — decoration SP_LadyVoyanceMystery2023_Decoration_Slot28
 `SP_LadyVoyanceMystery2023_Decoration_Slot28_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_LadyVoyanceMystery2023_Decoration_Slot28, event=SP_LadyVoyanceMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_LadyVoyanceMystery2023_Decoration_Slot28, event=Lady Voyance's Mystery, eventKey=SP_LadyVoyanceMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **HANK**: Hey! Is-
 **LADY VOYANCE** (Talking): Shhh! You are here to ask me a question!
@@ -831,9 +790,9 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE**: I am a medium...
 **HANK** (Charming): Awesome! I’m... XXL myself!
 
-### SP_LadyVoyanceMystery2023 — decoration SP_LadyVoyanceMystery2023_Decoration_Slot29
+### Lady Voyance's Mystery — decoration SP_LadyVoyanceMystery2023_Decoration_Slot29
 `SP_LadyVoyanceMystery2023_Decoration_Slot29_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_LadyVoyanceMystery2023_Decoration_Slot29, event=SP_LadyVoyanceMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_LadyVoyanceMystery2023_Decoration_Slot29, event=Lady Voyance's Mystery, eventKey=SP_LadyVoyanceMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **VICTORIA** (Discouraged): Lady Voyance... I see that you’ve moved your shady operation to this ramshackle hole...
 **VICTORIA** (Doubtful): How fitting!
@@ -844,10 +803,9 @@ Every story in which Lady Voyance speaks.
 **VICTORIA** (Joyous): Hahahahahahahaha!!!!
 **VICTORIA** (Relaxed): It is quite entertaining. I’ll give you that!
 
-### SP_LadyVoyanceMystery2023 — item discovered: 62553792
+### Lady Voyance's Mystery — item discovered: Mystical Snow Globe
 `SP_LadyVoyanceMystery2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=SP_LadyVoyanceMystery2023, items=['62553792'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=SP_LadyVoyanceMystery2023, items=['SP_LadyVoyanceMystery2023_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lady Voyance's Mystery, eventKey=SP_LadyVoyanceMystery2023, itemKeys=['SP_LadyVoyanceMystery2023_CollectableItems_04'], items=['Mystical Snow Globe'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Doubtful): Wait... You read people’s fortunes from...
 **MADDIE** (Surprised): A SNOW GLOBE?!
@@ -865,9 +823,9 @@ Every story in which Lady Voyance speaks.
 **LADY VOYANCE** (Surprised): Mmm, the stars are aligning, the veil of fate lifts...
 **LADY VOYANCE** (Encouraging): I sense some great drama - and even GREATER surprises!
 
-### SP_LovePotion2025 — decoration SP_LovePotion2025_Decoration_Slot29
+### Love Potion — decoration SP_LovePotion2025_Decoration_Slot29
 `SP_LovePotion2025_Decoration_Slot29_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_LovePotion2025_Decoration_Slot29, event=SP_LovePotion2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_LovePotion2025_Decoration_Slot29, event=Love Potion, eventKey=SP_LovePotion2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Hello, dear.
 **EMILIO** (Surprised): Hi, Lady Voyance...
@@ -918,10 +876,9 @@ Every story in which Lady Voyance speaks.
 **GRANDMA**: Maddie invited a group of her friends to come see them in my front yard. You are more than welcome to join us!
 **LADY VOYANCE** (Encouraging): I might just take you up on that! But we might get more than just northern lights...
 
-### SP_Voyance2025 — item discovered: 55771547
+### Lady Voyance's Premonition — item discovered: Faces of Fate
 `SP_Voyance2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_Voyance2025, items=['55771547'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_Voyance2025, items=['SP_Voyance2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lady Voyance's Premonition, eventKey=SP_Voyance2025, itemKeys=['SP_Voyance2025_CollectableItems_04'], items=['Faces of Fate'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): Here we go! We should be seeing something pretty soon.
 **JACKIE** (Joyous): How exciting! I've never seen the northern lights before.

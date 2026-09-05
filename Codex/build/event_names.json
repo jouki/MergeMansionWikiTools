@@ -1,0 +1,11 @@
+{
+  "_comment": "Display names for event keys that carry no localised name in any dump or localization we own. Hand-maintained; sources: Discord wiki-content-discussion thread names, prison cast of the Jailbreak story.",
+  "SBE_Jailbreak": "The Great Escape (Jailbreak)",
+  "MBE_DeckTheHalls2023": "Deck the Halls, Clear the Webs",
+  "CBE_Easter2023": "Egg Hunt 2023",
+  "CBE_Easter2023_Name": "Egg Hunt 2023",
+  "CBE_Easter2025": "Easter 2025",
+  "PE_JamSession2023": "Jam Session 2023",
+  "PE_JamSession2023_Name": "Jam Session 2023",
+  "CBE_SecondaryGoal2025": "Secondary Goal 2025 (unnamed)"
+}

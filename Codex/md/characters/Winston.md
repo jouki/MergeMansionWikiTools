@@ -798,10 +798,9 @@ Every story in which Winston speaks.
 **MADDIE** (Thinking): Mr. Winston, I don't understand, if Leonard is the reason this place is still around, why is it in so bad shape?!
 **WINSTON** (Thinking): Perhaps you should ask your grandmother that question, Ma'am...
 
-### LBE_May2023 — item discovered: 300626
+### The Great Bake-off — item discovered: Glazed Cheesecake
 `LBE_May2023CakeChain5` · seen 23.09.02–26.07.01
-- trigger: item, event=LBE_May2023, items=['300626'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LBE_May2023, items=['LBE_May2023_Cakes_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Great Bake-off, eventKey=LBE_May2023, itemKeys=['LBE_May2023_Cakes_05'], items=['Glazed Cheesecake'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **WINSTON** (Worried): That is impressive, but unrefined, unlike my own. But I do see that I have some competition now. Bravo...
 
@@ -841,10 +840,9 @@ Every story in which Winston speaks.
 **HEIKKI** (Charming): I guess so... It means hello and goodbye. 
 **PEARL** (Encouraging): Oh! Well then to everyone, Moro!
 
-### LBE_May2023 — item discovered: 300632
+### The Great Bake-off — item discovered: Rooster
 `LBE_May2023Rooster` · seen 23.09.02–26.07.01
-- trigger: item, event=LBE_May2023, items=['300632'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LBE_May2023, items=['LBE_May2023_Rooster_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Great Bake-off, eventKey=LBE_May2023, itemKeys=['LBE_May2023_Rooster_01'], items=['Rooster'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **WINSTON**: Roosters must have an <b>infinite</b> amount of patience to keep the chickens in line! Or a bunch of <b>hourglasses</b>...
 

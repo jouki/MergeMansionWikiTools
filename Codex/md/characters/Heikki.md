@@ -63,10 +63,9 @@ Every story in which Heikki speaks.
 **HEIKKI** (Doubtful): Yes... I sometimes do. Nothing like cooking alongside your own food.
 **MADDIE** (Worried): ...
 
-### LBE_May2023 — item discovered: 300628
+### The Great Bake-off — item discovered: Classic Layer Cake
 `LBE_May2023CakeChain7` · seen 23.09.02–26.07.01
-- trigger: item, event=LBE_May2023, items=['300628'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LBE_May2023, items=['LBE_May2023_Cakes_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Great Bake-off, eventKey=LBE_May2023, itemKeys=['LBE_May2023_Cakes_07'], items=['Classic Layer Cake'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **HEIKKI** (Surprised): *Gulp*
 

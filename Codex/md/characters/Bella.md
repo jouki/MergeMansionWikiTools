@@ -1,10 +1,10 @@
 # Bella
 Every story in which Bella speaks.
 
-### CBE_HolidayWorkshop2024 — item discovered: 50994496
+### Bella's Holiday Workshop — item discovered: "The Unicorn"
 `CBE_HolidayWorkshop2024_Art_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['50994496'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_Cookies_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_Art_07'], items=['"The Unicorn"'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_Cookies_04'], items=['Stack of Polvorones'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **BELLA**: Maddie, could I ask for a favor?  
   _earlier:_ ~~These pictures were painted by you?~~ (until 25.10.01)
@@ -23,20 +23,20 @@ Every story in which Bella speaks.
 **MADDIE** (Worried): You could say that...
 **BELLA** (Ready): Hmm... These boxes look kinda familiar!
 
-### CBE_HolidayWorkshop2024 — item discovered: 30382250
+### Bella's Holiday Workshop — item discovered: Recipe Book
 `CBE_HolidayWorkshop2024_BakingSupplies_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['30382250'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_XmasPresent_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_BakingSupplies_05'], items=['Recipe Book'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_XmasPresent_08'], items=['Biggest Present'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **EMILIO** (Thinking): There’s one more delivery of Bella’s packages on the way.  
   _earlier:_ ~~How about baking? Is there some treat that makes you feel really happy?~~ (until 25.10.01)
 **RODDY** (Worried): That had better be the last one - we’re running out of space!  
   _earlier:_ ~~There are these cookies my granny used to make...~~ (until 25.10.01)
 
-### CBE_HolidayWorkshop2024 — item discovered: 80387529
+### Bella's Holiday Workshop — item discovered: 80387529
 `CBE_HolidayWorkshop2024_CandleTable_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['80387529'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_GiftScarf_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['80387529'], items=['80387529'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_GiftScarf_01'], items=['Scarf'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY**: What will you be selling in your online store?  
   _earlier:_ ~~Should I use soy wax or beeswax?~~ (until 25.10.01)
@@ -51,10 +51,10 @@ Every story in which Bella speaks.
 **RODDY** (Worried): Well, not all of your crafts are... How can I put this... they’re not TOTALLY perfect.
 **BELLA** (Thinking): I'm not sure what you mean...
 
-### CBE_HolidayWorkshop2024 — item discovered: 12464466
+### Bella's Holiday Workshop — item discovered: Emilio
 `CBE_HolidayWorkshop2024_CharacterEmilio_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['12464466'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_CharacterEmilio_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterEmilio_02'], items=['Emilio'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterEmilio_04'], items=['Emilio'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **EMILIO** (Encouraging): Another order completed. I know what we’re doing isn’t totally honest, but I want Bella to be happy.  
   _earlier:_ ~~You're doing a great job, Bella!~~ (until 25.10.01)
@@ -63,10 +63,10 @@ Every story in which Bella speaks.
 **EMILIO** (Thinking): Although I don’t know where she finds the time to produce all of these crafts!  
   _earlier:_ ~~But what are you hoping to get for Xmas?~~ (until 25.10.01)
 
-### CBE_HolidayWorkshop2024 — item discovered: 3114758
+### Bella's Holiday Workshop — item discovered: Maddie
 `CBE_HolidayWorkshop2024_CharacterMaddie_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['3114758'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_CharacterMaddie_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterMaddie_02'], items=['Maddie'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterMaddie_07'], items=['Maddie'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **EMILIO** (Encouraging): Thank you for helping us with this crazy project, Maddie.  
   _earlier:_ ~~Hi, Maddie! I like your sweater. It's... cute!~~ (until 25.10.01)
@@ -75,10 +75,9 @@ Every story in which Bella speaks.
 **EMILIO** (Relaxed): Or teapots!  
   _earlier:_ ~~Umm... *sigh*~~ (until 25.10.01)
 
-### CBE_HolidayWorkshop2024 — item discovered: 82795224
+### Bella's Holiday Workshop — item discovered: Mason
 `CBE_HolidayWorkshop2024_CharacterMason_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['82795224'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_CharacterMason_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterMason_02'], items=['Mason'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MASON**: What are you up to?  
   _earlier:_ ~~How are you, little Mason?~~ (until 25.10.01)
@@ -93,10 +92,10 @@ Every story in which Bella speaks.
 **RODDY** (Charming): Let me ask you first: are you interested in some less-than-premium holiday crafts?  
   _earlier:_ ~~Sure... Hold on. You don't mean your homemade pottery?~~ (until 25.10.01)
 
-### CBE_HolidayWorkshop2024 — item discovered: 62974024
+### Bella's Holiday Workshop — item discovered: Roddy
 `CBE_HolidayWorkshop2024_CharacterRoddy_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['62974024'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_GiftGnome_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterRoddy_02'], items=['Roddy'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_GiftGnome_01'], items=['Gnome'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **EMILIO**: How are you doing? I just made another order for socks and scarves.  
   _earlier:_ ~~Hi, Roddy! I bet you love the holidays. ~~ (until 25.10.01)
@@ -107,10 +106,9 @@ Every story in which Bella speaks.
 **RODDY** (Charming): I wonder if Maddie could spare a shed or a secret room for it all?  
   _earlier:_ ~~I'm speechless! Thank you so much!~~ (until 25.10.01)
 
-### CBE_HolidayWorkshop2024 — item discovered: 94872812
+### Bella's Holiday Workshop — item discovered: Tray of Polvorones
 `CBE_HolidayWorkshop2024_Cookies_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['94872812'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_Cookies_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_Cookies_06'], items=['Tray of Polvorones'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **BELLA** (Doubtful): Did YOU buy all of my crafts, Emilio??  
   _earlier:_ ~~The perfect polvorones!~~ (until 25.10.01)
@@ -125,10 +123,10 @@ Every story in which Bella speaks.
 **BELLA** (Thinking): So... my online store actually was...
 **BELLA** (Relaxed): A huge success!
 
-### CBE_HolidayWorkshop2024 — item discovered: 86424485
+### Bella's Holiday Workshop — item discovered: 86424485
 `CBE_HolidayWorkshop2024_CraftingTable_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['86424485'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_CraftingSuppliesA_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['86424485'], items=['86424485'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CraftingSuppliesA_06'], items=['CBE_HolidayWorkshop2024_CraftingSuppliesA_06'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **BELLA** (Relaxed): Roddy! Do you know a lot about computers?  
   _earlier:_ ~~So, what kind of presents are you planning to buy?~~ (until 25.10.01)
@@ -179,10 +177,9 @@ Every story in which Bella speaks.
 **BELLA**: Who could I ask? Ah, I think I know the perfect person for the job!  
   _earlier:_ ~~Maddie and her friends generously welcomed you here in Hopewell Bay, but I'm afraid you didn't make the best impression.~~ (until 25.10.01)
 
-### CBE_HolidayWorkshop2024 — item discovered: 50847864
+### Bella's Holiday Workshop — item discovered: Beanie
 `CBE_HolidayWorkshop2024_Knitting_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['50847864'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_GiftHat_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_GiftHat_01'], items=['Beanie'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY**: I’ve got your page up and running, but this is where the real work starts. Are you sure you’ve got it from here?  
   _earlier:_ ~~I'm not sure how good this hat looks...~~ (until 25.10.01)
@@ -193,10 +190,10 @@ Every story in which Bella speaks.
 **BELLA** (Relaxed): That’s OK. I’ll go whip up some content for social media. My followers won’t let me down!  
   _earlier:_ ~~I'm sure he'll love this.~~ (until 25.10.01)
 
-### CBE_HolidayWorkshop2024 — item discovered: 80932276
+### Bella's Holiday Workshop — item discovered: 80932276
 `CBE_HolidayWorkshop2024_PotteryTable_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['80932276'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_KnittingSet_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['80932276'], items=['80932276'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_KnittingSet_05'], items=['Knitting Supplies'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Thinking): So you’re setting up an online store?  
   _earlier:_ ~~Hi, Bella! Where's Emilio? What are you doing?~~ (until 25.10.01)
@@ -209,10 +206,10 @@ Every story in which Bella speaks.
 **BELLA** (Relaxed): That won’t be a problem! If you could just set up the website, I’ll do the rest!  
   _earlier:_ ~~That's a teapot I just made.~~ (until 25.10.01)
 
-### CBE_HolidayWorkshop2024 — item discovered: 68361111
+### Bella's Holiday Workshop — item discovered: Forgotten Treasures
 `CBE_HolidayWorkshop2024_RandomPile_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['68361111'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_Art_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_RandomPile_05'], items=['Forgotten Treasures'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_Art_07'], items=['"The Unicorn"'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY**: How’s the website, Bella?  
   _earlier:_ ~~You can make treasures from...~~ (until 25.10.01)
@@ -226,10 +223,10 @@ Every story in which Bella speaks.
   _earlier:_ ~~I will show you.~~ (until 25.10.01)
 **BELLA** (Relaxed): But I still don’t know the town very well, so I don’t know the address. I guess someone just has exquisite taste!
 
-### CBE_HolidayWorkshop2024 — item discovered: 60658245
+### Bella's Holiday Workshop — item discovered: Photo Album
 `CBE_HolidayWorkshop2024_SocialMedia_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['60658245'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_CharacterMaddie_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_SocialMedia_05'], items=['Photo Album'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterMaddie_02'], items=['Maddie'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): Bella, are the rumors true? Have you set up an online store for your crafts?  
   _earlier:_ ~~I have to share all these cool new things with my followers on social media...~~ (until 25.10.01)
@@ -242,10 +239,9 @@ Every story in which Bella speaks.
 **MADDIE** (Hesitant): How generous!  
   _earlier:_ ~~But remember to get my good side. And frame it right! Is the light good?~~ (until 25.10.01)
 
-### CBE_HolidayWorkshop2024 — item discovered: 48359
+### Bella's Holiday Workshop — item discovered: Seasonal Secrets
 `CBE_HolidayWorkshop2024_TinCan_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['48359'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_TinCan_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_TinCan_05'], items=['Seasonal Secrets'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Worried): Emilio, Code Red! Bella is onto us.  
   _earlier:_ ~~Thank you for helping me with the baking stuff, Ursula!~~ (until 25.10.01)
@@ -254,10 +250,10 @@ Every story in which Bella speaks.
 **RODDY** (Frustrated): I guess my plan wasn’t totally water-tight after all...  
   _earlier:_ ~~You know what I've noticed? In this town, you never know what you'll find in an old tin can!~~ (until 25.10.01)
 
-### CBE_HolidayWorkshop2024 — item discovered: 98731852
+### Bella's Holiday Workshop — item discovered: Biggest Present
 `CBE_HolidayWorkshop2024_XmasPresents_08_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['98731852'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_XmasPresent_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_XmasPresent_08'], items=['Biggest Present'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_XmasPresent_05'], items=['Classic Package'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **BELLA** (Relaxed): Look at all of these glowing reviews I’ve received!  
   _earlier:_ ~~Phew! Everything is finally ready.~~ (until 25.10.01)
@@ -309,9 +305,9 @@ Every story in which Bella speaks.
 **EMILIO** (Surprised): I-I did?
 **BELLA** (Relaxed): Yes - I love poppies! Thank you, Emilio. You're the best!
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_CharacterBella_02
+### Green Acres Quest — item discovered: Bella
 `LDE_GreenAcresQuest_CharacterBella_02_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_CharacterBella_02'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterBella_02'], items=['Bella'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **MADDIE** (Surprised): Hey, Bella! I didn’t expect an audience while I wrestle with weeds.  
   _earlier:_ ~~Hey Bella! I didn’t expect an audience while I wrestle with weeds.~~ (until 26.05.01)
@@ -322,9 +318,9 @@ Every story in which Bella speaks.
 **BELLA**: Lucky for you, restoring struggling environments is kind of my thing.
 **MADDIE** (Encouraging): Then I’m very glad you just happened to wander by.
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_GreenhouseChilis_06
+### Green Acres Quest — item discovered: Extra Hot Chilies
 `LDE_GreenAcresQuest_GreenhouseChilis_06_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_GreenhouseChilis_06'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_GreenhouseChilis_06'], items=['Extra Hot Chilies'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **MASON** (Relaxed): Hey, Roddy! I bet you can’t eat one of these chilies.
 **RODDY** (Surprised): I I COULD, but I choose not to. Be careful with them - they’re so hot they’ll make your eyes water.
@@ -345,9 +341,9 @@ Every story in which Bella speaks.
 **GRANDMA** (Charming): Not bad for a “bit of a mess,” is it?
 **MADDIE** (Relaxed): Not bad at all.
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_Interviews_05
+### Murder at the Mansion — item discovered: Bella
 `LDE_MurderAtTheMansion_Interviews5_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_Interviews_05'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_Interviews_05'], items=['Bella'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **RODDY** (Charming): Bella, did you ever happen to visit Lady Voyance for... a reading or to hear your fortune?
 **BELLA** (Doubtful): Pfft, I visited her ONCE - just this week - but her prediction was nonsense! She implied that I have a habit of suffocating... Whatever.
@@ -371,9 +367,9 @@ Every story in which Bella speaks.
 **BELLA**: Ha! It's fine. What matters is that I finally got my REVENGE!
 **GRANDMA** (Joyous): Oh! I really do like her!
 
-### SP_CinqoDeMayo2026 — decoration SP_CinqoDeMayo2026_Decoration_Slot33
+### Season Pass - Flavors of Tradition — decoration SP_CinqoDeMayo2026_Decoration_Slot33
 `SP_CinqoDeMayo2026_Decoration_Slot33_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot33, event=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot33, event=Season Pass - Flavors of Tradition, eventKey=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **GRANDMA**: What do you think, dearie?
 **EMILIO** (Joyous): This looks perfect!
@@ -384,9 +380,9 @@ Every story in which Bella speaks.
 **GRANDMA** (Joyous): Oh, dearie! This is only half of it!
 **EMILIO** (Surprised): Half?!
 
-### SP_CinqoDeMayo2026 — decoration SP_CinqoDeMayo2026_Decoration_Slot35
+### Season Pass - Flavors of Tradition — decoration SP_CinqoDeMayo2026_Decoration_Slot35
 `SP_CinqoDeMayo2026_Decoration_Slot35_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot35, event=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot35, event=Season Pass - Flavors of Tradition, eventKey=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): Oooh, nice piñata!
 **BELLA**: Yes! This one is a family heirloom.
@@ -397,9 +393,9 @@ Every story in which Bella speaks.
 **BELLA** (Annoyed): But today... Today is the DAY!
 **GRANDMA** (Charming): Actually dearie, I may have JUST the thing to help you with that!
 
-### SP_CinqoDeMayo2026 — decoration SP_CinqoDeMayo2026_Decoration_Slot36
+### Season Pass - Flavors of Tradition — decoration SP_CinqoDeMayo2026_Decoration_Slot36
 `SP_CinqoDeMayo2026_Decoration_Slot36_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot36, event=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot36, event=Season Pass - Flavors of Tradition, eventKey=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **EMILIO** (Relaxed): Wow! This looks amazing!
 **GRANDMA** (Relaxed): Well, you can thank Maddie for that!
@@ -408,9 +404,9 @@ Every story in which Bella speaks.
 **BELLA**: You did a great job, though!
 **MADDIE** (Relaxed): Thank you, Bella!
 
-### SP_CinqoDeMayo2026 — decoration SP_CinqoDeMayo2026_Decoration_Slot37
+### Season Pass - Flavors of Tradition — decoration SP_CinqoDeMayo2026_Decoration_Slot37
 `SP_CinqoDeMayo2026_Decoration_Slot37_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot37, event=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot37, event=Season Pass - Flavors of Tradition, eventKey=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Joyous): Oooh! A stage! Are you going to play something for us, Emilio?
 **EMILIO** (Relaxed): Well... I was sort of thinking about it.
@@ -434,9 +430,9 @@ Every story in which Bella speaks.
 **EMILIO** (Charming): I would love to try them!
 **BELLA** (Doubtful): I guess...
 
-### SP_CinqoDeMayo2026 — item discovered: SP_CinqoDeMayo2026_CollectableItems_04
+### Season Pass - Flavors of Tradition — item discovered: Homestyle Enchiladas
 `SP_CinqoDeMayo2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_CinqoDeMayo2026, items=['SP_CinqoDeMayo2026_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Season Pass - Flavors of Tradition, eventKey=SP_CinqoDeMayo2026, itemKeys=['SP_CinqoDeMayo2026_CollectableItems_04'], items=['Homestyle Enchiladas'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA**: So, dearie? What do you think?
 **EMILIO** (Surprised): These... These are incredible!
@@ -511,9 +507,9 @@ Every story in which Bella speaks.
 **BELLA** (Annoyed): Can we be friends?
 **MADDIE** (Relaxed): I would love that.
 
-### SP_LovePotion2025 — decoration SP_LovePotion2025_Decoration_Slot28
+### Love Potion — decoration SP_LovePotion2025_Decoration_Slot28
 `SP_LovePotion2025_Decoration_Slot28_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_LovePotion2025_Decoration_Slot28, event=SP_LovePotion2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_LovePotion2025_Decoration_Slot28, event=Love Potion, eventKey=SP_LovePotion2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **BELLA**: Hi, Maddie.
 **MADDIE**: Hello, Bella.
@@ -525,10 +521,9 @@ Every story in which Bella speaks.
 **BELLA** (Thinking): I've seen the way you look at him, and I know he can be very charming.
 **BELLA** (Annoyed): But make no mistake - he's mine.
 
-### SP_LovePotion2025 — item discovered: 96190276
+### Love Potion — item discovered: Moonstring Serum
 `SP_LovePotion2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_LovePotion2025, items=['96190276'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_LovePotion2025, items=['SP_LovePotion2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love Potion, eventKey=SP_LovePotion2025, itemKeys=['SP_LovePotion2025_CollectableItems_04'], items=['Moonstring Serum'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Encouraging): The Hopeberry juice is so delicious this year!
 **MADDIE** (Relaxed): I know! It must be an especially good vintage.
@@ -543,9 +538,9 @@ Every story in which Bella speaks.
 - trigger: unknown, hint=Mystery (Progression event) (versions None–None)
 
 
-### SP_Misery2025 — decoration SP_Misery2025_Decoration_Slot34
+### Something Ours — decoration SP_Misery2025_Decoration_Slot34
 `SP_Misery2025_Decoration_Slot34_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Misery2025_Decoration_Slot34, event=SP_Misery2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Misery2025_Decoration_Slot34, event=Something Ours, eventKey=SP_Misery2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **PET** (Surprised): AwoooOOOooo!
 **MASON** (Joyous): That’s right, Boo!
@@ -557,9 +552,9 @@ Every story in which Bella speaks.
 **BELLA** (Doubtful): And painting it.
 **MASON** (Encouraging): Okay, it was a team effort!
 
-### SP_SplashMystery2025 — decoration SP_SplashMystery2025_Decoration_Slot33
+### Splash of Mystery — decoration SP_SplashMystery2025_Decoration_Slot33
 `SP_SplashMystery2025_Decoration_Slot33_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_SplashMystery2025_Decoration_Slot33, event=SP_SplashMystery2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_SplashMystery2025_Decoration_Slot33, event=Splash of Mystery, eventKey=SP_SplashMystery2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **BELLA**: Hello, Mason! I heard your birthday is coming up soon.
 **MASON**: Yep, and it'll be AWESOME!
@@ -573,9 +568,9 @@ Every story in which Bella speaks.
 **BELLA** (Relaxed): Pool chairs? Done.
 **MASON** (Joyous): Yessss!
 
-### SP_SplashMystery2025 — decoration SP_SplashMystery2025_Decoration_Slot36
+### Splash of Mystery — decoration SP_SplashMystery2025_Decoration_Slot36
 `SP_SplashMystery2025_Decoration_Slot36_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_SplashMystery2025_Decoration_Slot36, event=SP_SplashMystery2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_SplashMystery2025_Decoration_Slot36, event=Splash of Mystery, eventKey=SP_SplashMystery2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL**: Are you ready to see your party?
 **MASON** (Joyous): You can bet your pool floaties I am!
@@ -587,9 +582,9 @@ Every story in which Bella speaks.
 **MADDIE** (Relaxed): You're welcome.
 **BELLA** (Relaxed): It was our pleasure!
 
-### SP_SplashMystery2025 — decoration SP_SplashMystery2025_Decoration_Slot37
+### Splash of Mystery — decoration SP_SplashMystery2025_Decoration_Slot37
 `SP_SplashMystery2025_Decoration_Slot37_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_SplashMystery2025_Decoration_Slot37, event=SP_SplashMystery2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_SplashMystery2025_Decoration_Slot37, event=Splash of Mystery, eventKey=SP_SplashMystery2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **BELLA** (Annoyed): What do you think you're doing?
 **MADDIE** (Doubtful): What do you mean? I was just helping my friend organize a birthday party for her son.
@@ -598,10 +593,9 @@ Every story in which Bella speaks.
 **MADDIE** (Annoyed): ...
 **BELLA** (Doubtful): This isn't over.
 
-### SP_SplashMystery2025 — item discovered: 17871759
+### Splash of Mystery — item discovered: Kick Board
 `SP_SplashMystery2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_SplashMystery2025, items=['17871759'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_SplashMystery2025, items=['SP_SplashMystery2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Splash of Mystery, eventKey=SP_SplashMystery2025, itemKeys=['SP_SplashMystery2025_CollectableItems_04'], items=['Kick Board'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): What have you got planned for Mason's big party?
 **PEARL** (Doubtful): Pfft, you know what he's like.
@@ -615,9 +609,9 @@ Every story in which Bella speaks.
 **BELLA** (Thinking): Mason's dream birthday party, huh? I bet I can make it even bigger and better.
 **BELLA** (Doubtful): Maddie will have to admit that I am more fun!
 
-### SP_Voyance2025 — decoration SP_Voyance2025_Decoration_Slot27
+### Lady Voyance's Premonition — decoration SP_Voyance2025_Decoration_Slot27
 `SP_Voyance2025_Decoration_Slot27_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Voyance2025_Decoration_Slot27, event=SP_Voyance2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Voyance2025_Decoration_Slot27, event=Lady Voyance's Premonition, eventKey=SP_Voyance2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **EMILIO** (Thinking): Lady Voyance is an interesting character, isn't she?
 **RODDY** (Worried): She sure is. It's not very nice - creeping everyone out with a crazy prediction.

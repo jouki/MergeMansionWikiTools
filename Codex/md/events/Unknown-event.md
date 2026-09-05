@@ -4,7 +4,7 @@
 ### CBE_Easter2023 — entering board
 `CBE_Easter2023_IntroDialogue` · seen 23.06.02–26.07.01
 - trigger: event, eventId=CBE_Easter2023, eventType=Collectible Board Event, moment=entering board (versions 23.06.02–23.06.02)
-- trigger: event, event=CBE_Easter2023_Name, eventId=CBE_Easter2023, eventType=Collectible Board Event, moment=entering board (versions 24.04.01–26.07.01)
+- trigger: event, event=Egg Hunt 2023, eventId=CBE_Easter2023, eventType=Collectible Board Event, moment=entering board (versions 24.04.01–26.07.01)
 
 **MASON**: So... This rabbit thinks it can outsmart me, eh?
 **MASON** (Frustrated): Well, little does it know that it has decided to match wits with the greatest detective of all time!
@@ -13,7 +13,7 @@
 ### CBE_Easter2023 — event end
 `CBE_Easter2023_OutroDialogue` · seen 23.06.02–26.07.01
 - trigger: event, eventId=CBE_Easter2023, eventType=Collectible Board Event, moment=event end (versions 23.06.02–23.06.02)
-- trigger: event, event=CBE_Easter2023_Name, eventId=CBE_Easter2023, eventType=Collectible Board Event, moment=event end (versions 24.04.01–26.07.01)
+- trigger: event, event=Egg Hunt 2023, eventId=CBE_Easter2023, eventType=Collectible Board Event, moment=event end (versions 24.04.01–26.07.01)
 
 **MASON** (Joyous): Mom! Look at all the eggs I've found!
 **PEARL** (Encouraging): Oh wow... That's quite a haul you got there!

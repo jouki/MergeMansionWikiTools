@@ -3,7 +3,7 @@
 
 ### SEChristmas2022 — decoration PE_Christmas2022_Decoration_25
 `PE_Christmas2022Deco_Intro` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=PE_Christmas2022_Decoration_25, event=SEChristmas2022, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=PE_Christmas2022_Decoration_25, event=SEChristmas2022, eventKey=SEChristmas2022, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE** (Thinking): Can I help you decorate the house, Grandma?
 **GRANDMA** (Encouraging): No thank you, dearie. I'd prefer that you just... stay away.
@@ -14,7 +14,7 @@
 
 ### SEChristmas2022 — decoration PE_Christmas2022_Decoration_29
 `PE_Christmas2022Deco_Outro` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=PE_Christmas2022_Decoration_29, event=SEChristmas2022, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=PE_Christmas2022_Decoration_29, event=SEChristmas2022, eventKey=SEChristmas2022, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **GRANDMA** (Joyous): Thank you for all your help, Julius!
 **ANTIQUEDEALER**: You're most welcome, Ursula.

@@ -1,10 +1,9 @@
 # Ringleader
 Every story in which Ringleader speaks.
 
-### LDE_Rumors2025 — item discovered: 71602675
+### Circus Caper — item discovered: Circus Flyer
 `LDE_Rumors2025_Advertising_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['71602675'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_Advertising_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Advertising_01'], items=['Circus Flyer'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RINGLEADER**: OK, here are some of the basics of being a circus performer.  
   _earlier:_ ~~Could you be a darling and hand these flyers out in town? It would be such a big help.~~ (until 25.09.01)
@@ -23,10 +22,9 @@ Every story in which Ringleader speaks.
 **—**: I know she is impressive, but she has a lot of secrets.
 **MADDIE** (Relaxed): Thanks for the heads up, Grandma, but I think you might just be paranoid!
 
-### LDE_Rumors2025 — item discovered: 90018207
+### Circus Caper — item discovered: Crumpled Programs
 `LDE_Rumors2025_Brochures_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['90018207'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_Brochures_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Brochures_07'], items=['Crumpled Programs'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RINGLEADER** (Relaxed): I’m afraid you’re not quite far enough to touch the real knives.  
   _earlier:_ ~~Now where are the rest of the programs and brochures?~~ (until 25.09.01)
@@ -36,9 +34,9 @@ Every story in which Ringleader speaks.
   _earlier:_ ~~I guess people who work in the circus are pretty bohemian, but maybe I could help Fiona and straighten the place out.~~ (until 25.09.01)
 **—**: These old crumpled leaflets can probably go in the dumpster.
 
-### LDE_Rumors2025 — item discovered: LDE_Rumors2025_Prizes_07
+### Circus Caper — item discovered: Stuffed Bunny
 `LDE_Rumors2025_CarnivalPrizes_07_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_Prizes_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Prizes_07'], items=['Stuffed Bunny'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RINGLEADER**: What do you think about what it is we do here in the circus?
 **MASON** (Relaxed): It's all super interesting, but I think I'm ready for more challenging stuff.
@@ -47,10 +45,9 @@ Every story in which Ringleader speaks.
 **RINGLEADER** (Relaxed): Does your mom agree?
 **MASON** (Worried): Well... You won't tell her, will you?
 
-### LDE_Rumors2025 — item discovered: 35398648
+### Circus Caper — item discovered: Hula Hoop
 `LDE_Rumors2025_CircusProps_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['35398648'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_CircusProps_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CircusProps_01'], items=['Hula Hoop'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **HANK**: Hey, little man! What are you doing poking around back here?  
   _earlier:_ ~~Grandma, did you hear that the circus folks are in Hopewell Bay?~~ (until 25.09.01)
@@ -66,9 +63,9 @@ Every story in which Ringleader speaks.
 **MASON** (Worried): Uh-oh!
 **HANK** (Annoyed): I thought you said you had permission!
 
-### LDE_Rumors2025 — item discovered: LDE_Rumors2025_CircusProps_06
+### Circus Caper — item discovered: Circus Stand
 `LDE_Rumors2025_CircusProps_06_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_CircusProps_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CircusProps_06'], items=['Circus Stand'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON** (Worried): I’m Mason, and this is Hank.
 **HANK** (Charming): Um, hi...  
@@ -80,10 +77,9 @@ Every story in which Ringleader speaks.
 **RINGLEADER** (Doubtful): I must warn you - it’s harder than it looks. Our performers are the best in the world, and they work very hard to hone their craft.
 **MASON** (Joyous): We’re ready!
 
-### LDE_Rumors2025 — item discovered: 35398639
+### Circus Caper — item discovered: Hot Air Balloon
 `LDE_Rumors2025_CircusProps_10_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['35398639'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_CircusProps_10'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CircusProps_10'], items=['Hot Air Balloon'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RINGLEADER** (Relaxed): We’re still setting everything up, but you can find all the equipment you need in our caravans.  
   _earlier:_ ~~Ever since I got the letter from Fiona, I've been looking forward to seeing her and the whole troupe.~~ (until 25.09.01)
@@ -94,10 +90,9 @@ Every story in which Ringleader speaks.
 **HANK** (Surprised): Mason, listen to the lady. We won’t go in the green caravan, promise!
 **RINGLEADER** (Ready): Well, then. Welcome to the Circus!
 
-### LDE_Rumors2025 — item discovered: 90944266
+### Circus Caper — item discovered: Big Top
 `LDE_Rumors2025_CircusTent_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['90944266'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_CircusTent_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CircusTent_04'], items=['Big Top'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): I wasn’t expecting to see you back in Hopewell Bay so soon.  
   _earlier:_ ~~You must be Maddie!~~ (until 25.09.01)
@@ -117,10 +112,9 @@ Every story in which Ringleader speaks.
 **MADDIE** (Encouraging): Let me know if there's anything I can do to help you while you're here. I can organize clown noses or hand out flyers.
 **RINGLEADER** (Relaxed): I might just take you up on your offer!
 
-### LDE_Rumors2025 — item discovered: 22238213
+### Circus Caper — item discovered: Circus Wagon
 `LDE_Rumors2025_CircusWagon_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['22238213'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_CircusWagon_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CircusWagon_01'], items=['Circus Wagon'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MASON** (Thinking): Juggling, fortunetelling and simple magic tricks are fun, but we need something more challenging.  
   _earlier:_ ~~Ursula Boulton, as I live and breathe! How long has it been?~~ (until 25.09.01)
@@ -136,10 +130,9 @@ Every story in which Ringleader speaks.
 **RINGLEADER**: Is it still full of old stuff?
 **MADDIE** (Charming): Like you wouldn't believe.
 
-### LDE_Rumors2025 — item discovered: 33623528
+### Circus Caper — item discovered: Escape Vehicle
 `LDE_Rumors2025_HeistPlan_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['33623528'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_HeistPlan_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_HeistPlan_06'], items=['Escape Vehicle'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY**: So are you going to show us how your trick works?  
   _earlier:_ ~~Stop right there, Fiona! I know what you're doing.~~ (until 25.09.01)
@@ -186,10 +179,9 @@ Every story in which Ringleader speaks.
 **RINGLEADER** (Doubtful): It's next to your beautiful Mansion, and right by to the road for easy access.
 **RINGLEADER** (Ready): I think it would be perfect!
 
-### LDE_Rumors2025 — item discovered: 41662582
+### Circus Caper — item discovered: Tea & Chat
 `LDE_Rumors2025_TeaGossip_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['41662582'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_TeaGossip_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_TeaGossip_04'], items=['Tea & Chat'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RINGLEADER**: Your friends seem to be excited about the Circus!  
   _earlier:_ ~~I just heard the wildest rumor. Someone said Ursula used to be in the circus!~~ (until 25.09.01)
@@ -200,10 +192,9 @@ Every story in which Ringleader speaks.
 **MADDIE** (Surprised): Hank and Roddy? I’ve got to see this!  
   _earlier:_ ~~Why doesn't that surprise me?~~ (until 25.09.01)
 
-### LDE_Rumors2025 — item discovered: 41662579
+### Circus Caper — item discovered: Empty Wallet
 `LDE_Rumors2025_TeaGossip_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['41662579'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_TeaGossip_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_TeaGossip_07'], items=['Empty Wallet'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RINGLEADER** (Doubtful): Let me apologize again for my past indiscretions. I really thought I had no options but to choose a life of crime to save the Circus.  
   _earlier:_ ~~Did you hear that Ursula used to be in the circus?~~ (until 25.09.01)
@@ -218,10 +209,9 @@ Every story in which Ringleader speaks.
 **MADDIE**: I get it. It’s tough to keep everything going when the world seems to be against you.
 **MADDIE**: After working at the mansion for this long, I know how that feels.
 
-### LDE_Rumors2025 — item discovered: 87660231
+### Circus Caper — item discovered: Lock Pick Set
 `LDE_Rumors2025_ThiefProps_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['87660231'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_ThiefProps_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_ThiefProps_07'], items=['Lock Pick Set'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MASON** (Joyous): These could be perfect for our act!  
   _earlier:_ ~~Is there something hidden in the bushes?~~ (until 25.09.01)

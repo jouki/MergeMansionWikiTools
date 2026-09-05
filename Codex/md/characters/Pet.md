@@ -158,9 +158,9 @@ Every story in which Pet speaks.
 **PET** (Joyous): *Dook dook dook!*
 **MADDIE** (Relaxed): Welcome home!
 
-### SP_GhostDog2025 — item discovered: SP_GhostDog2025_CollectableItems_04
+### Halloween Howling — item discovered: Phantom Chow
 `SP_GhostDog2025_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_GhostDog2025, items=['SP_GhostDog2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Halloween Howling, eventKey=SP_GhostDog2025, itemKeys=['SP_GhostDog2025_CollectableItems_04'], items=['Phantom Chow'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): And your frightful feast is ready, Ru- Er... Boo!
 **PET** (Surprised): AwOooooOOOoo...
@@ -315,9 +315,9 @@ Every story in which Pet speaks.
 - trigger: unknown, hint=Mystery (Progression event) (versions None–None)
 
 
-### SP_Misery2025 — decoration SP_Misery2025_Decoration_Slot34
+### Something Ours — decoration SP_Misery2025_Decoration_Slot34
 `SP_Misery2025_Decoration_Slot34_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Misery2025_Decoration_Slot34, event=SP_Misery2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Misery2025_Decoration_Slot34, event=Something Ours, eventKey=SP_Misery2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **PET** (Surprised): AwoooOOOooo!
 **MASON** (Joyous): That’s right, Boo!

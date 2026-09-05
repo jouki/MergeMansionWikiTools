@@ -1,207 +1,191 @@
 # Stories removed from the game
 Present in an older version, absent from the current one.
 
-### CBE_Easter2025 — item discovered: 8920249
+### Easter 2025 — item discovered: Spilled Chocolate
 `CBE_Easter2025_BrokenMachine_05_Dialogue` · seen 25.05.01–26.03.01
-- trigger: item, event=CBE_Easter2025, items=['8920249'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Easter2025, items=['CBE_Easter2025_BrokenMachine_05'], moment=item discovered (versions 26.03.01–26.03.01)
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_BrokenMachine_05'], items=['Spilled Chocolate'], moment=item discovered (versions 25.05.01–26.03.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_Easter2025 — item discovered: 56525229
+### Easter 2025 — item discovered: Tin Can
 `CBE_Easter2025_Can_01_Dialogue` · seen 25.05.01–26.03.01
-- trigger: item, event=CBE_Easter2025, items=['56525229'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Easter2025, items=['CBE_Easter2025_Can_01'], moment=item discovered (versions 26.03.01–26.03.01)
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Can_01'], items=['Tin Can'], moment=item discovered (versions 25.05.01–26.03.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_Easter2025 — item discovered: 62178719
+### Easter 2025 — item discovered: Candy Machine Turning
 `CBE_Easter2025_CandyMachineProducing_01_Dialogue` · seen 25.05.01–26.03.01
-- trigger: item, event=CBE_Easter2025, items=['62178719'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Easter2025, items=['CBE_Easter2025_CandyMachineProducing_01'], moment=item discovered (versions 26.03.01–26.03.01)
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_CandyMachineProducing_01'], items=['Candy Machine Turning'], moment=item discovered (versions 25.05.01–26.03.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_Easter2025 — item discovered: 47887982
+### Easter 2025 — item discovered: Mason
 `CBE_Easter2025_Character_01_Dialogue` · seen 25.05.01–26.03.01
-- trigger: item, event=CBE_Easter2025, items=['47887982'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Easter2025, items=['CBE_Easter2025_Character1_01'], moment=item discovered (versions 26.03.01–26.03.01)
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Character1_01'], items=['Mason'], moment=item discovered (versions 25.05.01–26.03.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_Easter2025 — item discovered: 45993865
+### Easter 2025 — item discovered: Cherry
 `CBE_Easter2025_Character_02_Dialogue` · seen 25.05.01–26.03.01
-- trigger: item, event=CBE_Easter2025, items=['45993865'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Easter2025, items=['CBE_Easter2025_Character2_01'], moment=item discovered (versions 26.03.01–26.03.01)
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Character2_01'], items=['Cherry'], moment=item discovered (versions 25.05.01–26.03.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_Easter2025 — item discovered: 15065356
+### Easter 2025 — item discovered: Roddy
 `CBE_Easter2025_Character_03_Dialogue` · seen 25.05.01–26.03.01
-- trigger: item, event=CBE_Easter2025, items=['15065356'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Easter2025, items=['CBE_Easter2025_Character3_01'], moment=item discovered (versions 26.03.01–26.03.01)
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Character3_01'], items=['Roddy'], moment=item discovered (versions 25.05.01–26.03.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_Easter2025 — item discovered: 55954309
+### Easter 2025 — item discovered: Grandma
 `CBE_Easter2025_Character_04_Dialogue` · seen 25.05.01–26.03.01
-- trigger: item, event=CBE_Easter2025, items=['55954309'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Easter2025, items=['CBE_Easter2025_Character5_01'], moment=item discovered (versions 26.03.01–26.03.01)
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Character5_01'], items=['Grandma'], moment=item discovered (versions 25.05.01–26.03.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_Easter2025 — item discovered: 91356147
+### Easter 2025 — item discovered: Maddie
 `CBE_Easter2025_Character_05_Dialogue` · seen 25.05.01–26.03.01
-- trigger: item, event=CBE_Easter2025, items=['91356147'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Easter2025, items=['CBE_Easter2025_Character4_01'], moment=item discovered (versions 26.03.01–26.03.01)
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Character4_01'], items=['Maddie'], moment=item discovered (versions 25.05.01–26.03.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_Easter2025 — item discovered: 32521794
+### Easter 2025 — item discovered: Chocolate Machine Melting
 `CBE_Easter2025_ChocoMachineProducing_Dialogue` · seen 25.05.01–26.03.01
-- trigger: item, event=CBE_Easter2025, items=['32521794'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Easter2025, items=['CBE_Easter2025_ChocoMachineProducing_01'], moment=item discovered (versions 26.03.01–26.03.01)
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_ChocoMachineProducing_01'], items=['Chocolate Machine Melting'], moment=item discovered (versions 25.05.01–26.03.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_Easter2025 — item discovered: 82512705
+### Easter 2025 — item discovered: Cabinet
 `CBE_Easter2025_Cupboard_01_Dialogue` · seen 25.05.01–26.03.01
-- trigger: item, event=CBE_Easter2025, items=['82512705'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Easter2025, items=['CBE_Easter2025_Cupboard_01'], moment=item discovered (versions 26.03.01–26.03.01)
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Cupboard_01'], items=['Cabinet'], moment=item discovered (versions 25.05.01–26.03.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_Easter2025 — decoration CBE_Easter2025_Decoration_Slot07
+### Easter 2025 — decoration CBE_Easter2025_Decoration_Slot07
 `CBE_Easter2025_Decoration_Slot07_Dialogue` · seen 25.05.01–26.03.01
-- trigger: decoration, decoration=CBE_Easter2025_Decoration_Slot07, event=CBE_Easter2025, moment=decoration placed (versions 25.05.01–26.03.01)
+- trigger: decoration, decoration=CBE_Easter2025_Decoration_Slot07, event=Easter 2025, eventKey=CBE_Easter2025, moment=decoration placed (versions 25.05.01–26.03.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_Easter2025 — decoration CBE_Easter2025_Decoration_Slot10
+### Easter 2025 — decoration CBE_Easter2025_Decoration_Slot10
 `CBE_Easter2025_Decoration_Slot10_Dialogue` · seen 25.05.01–26.03.01
-- trigger: decoration, decoration=CBE_Easter2025_Decoration_Slot10, event=CBE_Easter2025, moment=decoration placed (versions 25.05.01–26.03.01)
+- trigger: decoration, decoration=CBE_Easter2025_Decoration_Slot10, event=Easter 2025, eventKey=CBE_Easter2025, moment=decoration placed (versions 25.05.01–26.03.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_Easter2025 — decoration CBE_Easter2025_Decoration_Slot14
+### Easter 2025 — decoration CBE_Easter2025_Decoration_Slot14
 `CBE_Easter2025_Decoration_Slot14_Dialogue` · seen 25.05.01–26.03.01
-- trigger: decoration, decoration=CBE_Easter2025_Decoration_Slot14, event=CBE_Easter2025, moment=decoration placed (versions 25.05.01–26.03.01)
+- trigger: decoration, decoration=CBE_Easter2025_Decoration_Slot14, event=Easter 2025, eventKey=CBE_Easter2025, moment=decoration placed (versions 25.05.01–26.03.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_Easter2025 — item discovered: 76970035
+### Easter 2025 — item discovered: Garden Bunny
 `CBE_Easter2025_EasterDecorations_04_Dialogue` · seen 25.05.01–26.03.01
-- trigger: item, event=CBE_Easter2025, items=['76970035'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Easter2025, items=['CBE_Easter2025_Decos_04'], moment=item discovered (versions 26.03.01–26.03.01)
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Decos_04'], items=['Garden Bunny'], moment=item discovered (versions 25.05.01–26.03.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_Easter2025 — item discovered: 76970033
+### Easter 2025 — item discovered: Easter Arrangement
 `CBE_Easter2025_EasterDecorations_06_Dialogue` · seen 25.05.01–26.03.01
-- trigger: item, event=CBE_Easter2025, items=['76970033'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Easter2025, items=['CBE_Easter2025_Decos_06'], moment=item discovered (versions 26.03.01–26.03.01)
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Decos_06'], items=['Easter Arrangement'], moment=item discovered (versions 25.05.01–26.03.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_Easter2025 — item discovered: 16651287
+### Easter 2025 — item discovered: Creative Treats
 `CBE_Easter2025_EasterEggs_05_Dialogue` · seen 25.05.01–26.03.01
-- trigger: item, event=CBE_Easter2025, items=['16651287'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Easter2025, items=['CBE_Easter2025_Eggs_05'], moment=item discovered (versions 26.03.01–26.03.01)
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Eggs_05'], items=['Creative Treats'], moment=item discovered (versions 25.05.01–26.03.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_Easter2025 — item discovered: 16651285
+### Easter 2025 — item discovered: Bowl of Easter Eggs
 `CBE_Easter2025_EasterEggs_07_Dialogue` · seen 25.05.01–26.03.01
-- trigger: item, event=CBE_Easter2025, items=['16651285'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Easter2025, items=['CBE_Easter2025_Eggs_07'], moment=item discovered (versions 26.03.01–26.03.01)
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Eggs_07'], items=['Bowl of Easter Eggs'], moment=item discovered (versions 25.05.01–26.03.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_Easter2025 — item discovered: 16651282
+### Easter 2025 — item discovered: Ultimate Easter Basket
 `CBE_Easter2025_EasterEggs_10_Dialogue` · seen 25.05.01–26.03.01
-- trigger: item, event=CBE_Easter2025, items=['16651282'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Easter2025, items=['CBE_Easter2025_Eggs_10'], moment=item discovered (versions 26.03.01–26.03.01)
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Eggs_10'], items=['Ultimate Easter Basket'], moment=item discovered (versions 25.05.01–26.03.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### Sweet Mess Express — entering board
 `CBE_Easter2025_Intro_Dialogue` · seen 25.04.02–26.03.01
 - trigger: event, event=Sweet Mess Express, eventId=CBE_Easter2025, eventType=Collectible Board Event, moment=entering board (versions 25.04.02–26.02.03)
-- trigger: event, event=CBE_Easter2025, eventId=CBE_Easter2025, eventType=Collectible Board Event, moment=entering board (versions 26.03.01–26.03.01)
+- trigger: event, event=Easter 2025, eventId=CBE_Easter2025, eventType=Collectible Board Event, moment=entering board (versions 26.03.01–26.03.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### Sweet Mess Express — event end
 `CBE_Easter2025_Outro_Dialogue` · seen 25.04.02–26.03.01
 - trigger: event, event=Sweet Mess Express, eventId=CBE_Easter2025, eventType=Collectible Board Event, moment=event end (versions 25.04.02–26.02.03)
-- trigger: event, event=CBE_Easter2025, eventId=CBE_Easter2025, eventType=Collectible Board Event, moment=event end (versions 26.03.01–26.03.01)
+- trigger: event, event=Easter 2025, eventId=CBE_Easter2025, eventType=Collectible Board Event, moment=event end (versions 26.03.01–26.03.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_Easter2025 — item discovered: 45533175
+### Easter 2025 — item discovered: Pastry Machine Baking
 `CBE_Easter2025_PastryMachineProducing_Dialogue` · seen 25.05.01–26.03.01
-- trigger: item, event=CBE_Easter2025, items=['45533175'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Easter2025, items=['CBE_Easter2025_PastryMachineProducing_01'], moment=item discovered (versions 26.03.01–26.03.01)
+- trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_PastryMachineProducing_01'], items=['Pastry Machine Baking'], moment=item discovered (versions 25.05.01–26.03.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_Flashback2025 — decoration CBE_Flashback2025_Decoration_Slot16
+### Flashback Rewind — decoration CBE_Flashback2025_Decoration_Slot16
 `CBE_Flashback2025_Slot_16_Dialogue` · seen 25.05.01–26.04.02
-- trigger: decoration, decoration=CBE_Flashback2025_Decoration_Slot16, event=CBE_Flashback2025, moment=decoration placed (versions 25.05.01–26.04.02)
+- trigger: decoration, decoration=CBE_Flashback2025_Decoration_Slot16, event=Flashback Rewind, eventKey=CBE_Flashback2025, moment=decoration placed (versions 25.05.01–26.04.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_Flashback2025 — decoration CBE_Flashback2025_Decoration_Slot19
+### Flashback Rewind — decoration CBE_Flashback2025_Decoration_Slot19
 `CBE_Flashback2025_Slot_19_Dialogue` · seen 25.05.01–26.04.02
-- trigger: decoration, decoration=CBE_Flashback2025_Decoration_Slot19, event=CBE_Flashback2025, moment=decoration placed (versions 25.05.01–26.04.02)
+- trigger: decoration, decoration=CBE_Flashback2025_Decoration_Slot19, event=Flashback Rewind, eventKey=CBE_Flashback2025, moment=decoration placed (versions 25.05.01–26.04.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_Flashback2025 — decoration CBE_Flashback2025_Decoration_Slot23
+### Flashback Rewind — decoration CBE_Flashback2025_Decoration_Slot23
 `CBE_Flashback2025_Slot_23_Dialogue` · seen 25.05.01–26.04.02
-- trigger: decoration, decoration=CBE_Flashback2025_Decoration_Slot23, event=CBE_Flashback2025, moment=decoration placed (versions 25.05.01–26.04.02)
+- trigger: decoration, decoration=CBE_Flashback2025_Decoration_Slot23, event=Flashback Rewind, eventKey=CBE_Flashback2025, moment=decoration placed (versions 25.05.01–26.04.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_FrostySecrets2024 — item discovered: 94842025
+### Frosty Secrets — item discovered: Charlie's Paper
 `CBE_FrostySecrets2024_Charlie_02_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['94842025'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_Charlie_02'], items=["Charlie's Paper"], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_FrostySecrets2024 — item discovered: 94842023
+### Frosty Secrets — item discovered: Gold Watch
 `CBE_FrostySecrets2024_Charlie_04_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['94842023'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_Charlie_04'], items=['Gold Watch'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_FrostySecrets2024 — item discovered: 94842020
+### Frosty Secrets — item discovered: Frozen Photo
 `CBE_FrostySecrets2024_Charlie_07_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['94842020'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_Charlie_07'], items=['Frozen Photo'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_FrostySecrets2024 — decoration CBE_FrostySecrets2024_Decoration_Slot01
+### Frosty Secrets — decoration CBE_FrostySecrets2024_Decoration_Slot01
 `CBE_FrostySecrets2024_DecoSlot_01_Dialogue` · seen 25.05.01–25.06.01
-- trigger: decoration, decoration=CBE_FrostySecrets2024_Decoration_Slot01, event=CBE_FrostySecrets2024, moment=decoration placed (versions 25.05.01–25.06.01)
+- trigger: decoration, decoration=CBE_FrostySecrets2024_Decoration_Slot01, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, moment=decoration placed (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_FrostySecrets2024 — decoration CBE_FrostySecrets2024_Decoration_Slot07
+### Frosty Secrets — decoration CBE_FrostySecrets2024_Decoration_Slot07
 `CBE_FrostySecrets2024_DecoSlot_07_Dialogue` · seen 25.05.01–25.06.01
-- trigger: decoration, decoration=CBE_FrostySecrets2024_Decoration_Slot07, event=CBE_FrostySecrets2024, moment=decoration placed (versions 25.05.01–25.06.01)
+- trigger: decoration, decoration=CBE_FrostySecrets2024_Decoration_Slot07, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, moment=decoration placed (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_FrostySecrets2024 — decoration CBE_FrostySecrets2024_Decoration_Slot10
+### Frosty Secrets — decoration CBE_FrostySecrets2024_Decoration_Slot10
 `CBE_FrostySecrets2024_DecoSlot_10_Dialogue` · seen 25.05.01–25.06.01
-- trigger: decoration, decoration=CBE_FrostySecrets2024_Decoration_Slot10, event=CBE_FrostySecrets2024, moment=decoration placed (versions 25.05.01–25.06.01)
+- trigger: decoration, decoration=CBE_FrostySecrets2024_Decoration_Slot10, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, moment=decoration placed (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_FrostySecrets2024 — decoration CBE_FrostySecrets2024_Decoration_Slot15
+### Frosty Secrets — decoration CBE_FrostySecrets2024_Decoration_Slot15
 `CBE_FrostySecrets2024_DecoSlot_15_Dialogue` · seen 25.05.01–25.06.01
-- trigger: decoration, decoration=CBE_FrostySecrets2024_Decoration_Slot15, event=CBE_FrostySecrets2024, moment=decoration placed (versions 25.05.01–25.06.01)
+- trigger: decoration, decoration=CBE_FrostySecrets2024_Decoration_Slot15, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, moment=decoration placed (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -210,39 +194,39 @@ _Referenced by the game, but no lines matched this id._
 - trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 
-### CBE_FrostySecrets2024 — item discovered: 16784712
+### Frosty Secrets — item discovered: The Destiny
 `CBE_FrostySecrets2024_IceSculptures_12_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['16784712'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_IceSculptures_12'], items=['The Destiny'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_FrostySecrets2024 — item discovered: 13804022
+### Frosty Secrets — item discovered: Pair of Wooly Socks
 `CBE_FrostySecrets2024_WarmClothes_02_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['13804022'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_WarmClothes_02'], items=['Pair of Wooly Socks'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_FrostySecrets2024 — item discovered: 13804014
+### Frosty Secrets — item discovered: Warm Cardigan
 `CBE_FrostySecrets2024_WarmClothes_10_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['13804014'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_WarmClothes_10'], items=['Warm Cardigan'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_HolidayWorkshop2024 — item discovered: 68361114
+### Bella's Holiday Workshop — item discovered: Old Box
 `CBE_HolidayWorkshop2024_BedAndBrerekfast_01_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['68361114'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_RandomPile_02'], items=['Old Box'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_HolidayWorkshop2024 — decoration CBE_HolidayWorkshop2024_Decoration_Slot14
+### Bella's Holiday Workshop — decoration CBE_HolidayWorkshop2024_Decoration_Slot14
 `CBE_HolidayWorkshop2024_Decoration_Slot_14_Dialogue` · seen 25.05.01–25.06.01
-- trigger: decoration, decoration=CBE_HolidayWorkshop2024_Decoration_Slot14, event=CBE_HolidayWorkshop2024, moment=decoration placed (versions 25.05.01–25.06.01)
+- trigger: decoration, decoration=CBE_HolidayWorkshop2024_Decoration_Slot14, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, moment=decoration placed (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_HolidayWorkshop2024 — decoration CBE_HolidayWorkshop2024_Decoration_Slot21
+### Bella's Holiday Workshop — decoration CBE_HolidayWorkshop2024_Decoration_Slot21
 `CBE_HolidayWorkshop2024_Decoration_Slot_21_Dialogue` · seen 25.05.01–25.06.01
-- trigger: decoration, decoration=CBE_HolidayWorkshop2024_Decoration_Slot21, event=CBE_HolidayWorkshop2024, moment=decoration placed (versions 25.05.01–25.06.01)
+- trigger: decoration, decoration=CBE_HolidayWorkshop2024_Decoration_Slot21, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, moment=decoration placed (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -416,15 +400,15 @@ _Referenced by the game, but no lines matched this id._
 **GRANDMA**: This should help me get some leverage in here.
 **GRANDMA**: Hmm... Perhaps I should send some of this to Maddie?
 
-### CBE_TheGreatEscape — item discovered: 90289954
+### The Great Escape — item discovered: Clean Cell
 `CBE_TheGreatEscape_CleanCell1_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=CBE_TheGreatEscape, items=['90289954'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape, eventKey=CBE_TheGreatEscape, itemKeys=['CBE_TheGreatEscape_CleanCell_01'], items=['Clean Cell'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_TheGreatEscape — item discovered: 84483018
+### The Great Escape — item discovered: Cleaning Cart
 `CBE_TheGreatEscape_CleanerCart1_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=CBE_TheGreatEscape, items=['84483018'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape, eventKey=CBE_TheGreatEscape, itemKeys=['CBE_TheGreatEscape_CleanerCart_01'], items=['Cleaning Cart'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -461,9 +445,9 @@ _Referenced by the game, but no lines matched this id._
 **MADDIE** (Calling): I don’t know how comfortable I feel about this...
 **GRANDMA** (Calling): The mailman owes me a few favors, so you won’t get in any trouble.
 
-### CBE_TheGreatEscape — item discovered: 86834689
+### The Great Escape — item discovered: Jail Outfit
 `CBE_TheGreatEscape_Socks05_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=CBE_TheGreatEscape, items=['86834689'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape, eventKey=CBE_TheGreatEscape, itemKeys=['CBE_TheGreatEscape_Socks_05'], items=['Jail Outfit'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -483,9 +467,9 @@ _Referenced by the game, but no lines matched this id._
 **GRANDMA**: Then again, it was so messy, you could hide an elephant in here...
 **GRANDMA** (Charming): Well, I’m sure they won’t mind if I borrow them for a while.
 
-### CBE_TheGreatEscape — item discovered: 70440890
+### The Great Escape — item discovered: Bolt Cutters
 `CBE_TheGreatEscape_Tools5_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=CBE_TheGreatEscape, items=['70440890'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape, eventKey=CBE_TheGreatEscape, itemKeys=['CBE_TheGreatEscape_Tools_05'], items=['Bolt Cutters'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -497,33 +481,33 @@ _Referenced by the game, but no lines matched this id._
 **GRANDMA**: This should help me get some leverage in here.
 **GRANDMA**: Hmm... Perhaps I should send some of this to Maddie?
 
-### CBE_VeilOfFate2023 — decoration CBE_VeilOfFate2023_Decoration_Slot01
+### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot01
 `CBE_VeilOfFate2023_Decoration_Slot01_Dialogue` · seen 23.11.02–23.11.02
-- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot01, event=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
+- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot01, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_VeilOfFate2023 — decoration CBE_VeilOfFate2023_Decoration_Slot04
+### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot04
 `CBE_VeilOfFate2023_Decoration_Slot04_Dialogue` · seen 23.11.02–23.11.02
-- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot04, event=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
+- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot04, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_VeilOfFate2023 — decoration CBE_VeilOfFate2023_Decoration_Slot06
+### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot06
 `CBE_VeilOfFate2023_Decoration_Slot06_Dialogue` · seen 23.11.02–23.11.02
-- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot06, event=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
+- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot06, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_VeilOfFate2023 — decoration CBE_VeilOfFate2023_Decoration_Slot07
+### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot07
 `CBE_VeilOfFate2023_Decoration_Slot07_Dialogue` · seen 23.11.02–23.11.02
-- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot07, event=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
+- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot07, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_VeilOfFate2023 — decoration CBE_VeilOfFate2023_Decoration_Slot08
+### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot08
 `CBE_VeilOfFate2023_Decoration_Slot08_Dialogue` · seen 23.11.02–23.11.02
-- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot08, event=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
+- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot08, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -546,81 +530,81 @@ _Referenced by the game, but no lines matched this id._
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 13640957
+### The Great Escape (Jailbreak) — item discovered: Knitting Needle
 `EP1_GrandmaGetTheKnittingNeedle` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['13640957'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_KnittingNeedle_01'], items=['Knitting Needle'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 42077882
+### The Great Escape (Jailbreak) — item discovered: Knitting Kit
 `EP1_GrandmaStartsKnitting` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['42077882'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_KnittingInProgress_01'], items=['Knitting Kit'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 6200968
+### The Great Escape (Jailbreak) — item discovered: Safe
 `EP1_IzzyHelpGrandmaToOpenSafeCode` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['6200968'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_WardenSafe_02'], items=['Safe'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 32856559
+### The Great Escape (Jailbreak) — item discovered: Warden's Office
 `EP1_KnittingNeedleToOpenWardenOffice` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['32856559'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_WardenOffice_03'], items=["Warden's Office"], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Arctic2025 — item discovered: 11865955
+### The Lost Gemstones: Arctic Expedition — item discovered: Star Map
 `GM_Arctic2025_Hero1_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_Arctic2025, items=['11865955'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Arctic Expedition, eventKey=GM_Arctic2025, itemKeys=['GM_Arctic2025_Story_01'], items=['Star Map'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Arctic2025 — item discovered: 11865954
+### The Lost Gemstones: Arctic Expedition — item discovered: Coat
 `GM_Arctic2025_Hero2_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_Arctic2025, items=['11865954'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Arctic Expedition, eventKey=GM_Arctic2025, itemKeys=['GM_Arctic2025_Story_02'], items=['Coat'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Arctic2025 — item discovered: 11865953
+### The Lost Gemstones: Arctic Expedition — item discovered: Small Boat
 `GM_Arctic2025_Hero3_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_Arctic2025, items=['11865953'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Arctic Expedition, eventKey=GM_Arctic2025, itemKeys=['GM_Arctic2025_Story_03'], items=['Small Boat'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Arctic2025 — item discovered: 11865952
+### The Lost Gemstones: Arctic Expedition — item discovered: Iceberg
 `GM_Arctic2025_Hero4_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_Arctic2025, items=['11865952'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Arctic Expedition, eventKey=GM_Arctic2025, itemKeys=['GM_Arctic2025_Story_04'], items=['Iceberg'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Arctic2025 — item discovered: 11865951
+### The Lost Gemstones: Arctic Expedition — item discovered: Tent
 `GM_Arctic2025_Hero5_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_Arctic2025, items=['11865951'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Arctic Expedition, eventKey=GM_Arctic2025, itemKeys=['GM_Arctic2025_Story_05'], items=['Tent'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Arctic2025 — item discovered: 11865950
+### The Lost Gemstones: Arctic Expedition — item discovered: Sleigh
 `GM_Arctic2025_Hero6_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_Arctic2025, items=['11865950'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Arctic Expedition, eventKey=GM_Arctic2025, itemKeys=['GM_Arctic2025_Story_06'], items=['Sleigh'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Arctic2025 — item discovered: 11865949
+### The Lost Gemstones: Arctic Expedition — item discovered: Meteorite
 `GM_Arctic2025_Hero7_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_Arctic2025, items=['11865949'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Arctic Expedition, eventKey=GM_Arctic2025, itemKeys=['GM_Arctic2025_Story_07'], items=['Meteorite'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Arctic2025 — item discovered: 11865948
+### The Lost Gemstones: Arctic Expedition — item discovered: Frozen Pickaxe
 `GM_Arctic2025_Hero8_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_Arctic2025, items=['11865948'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Arctic Expedition, eventKey=GM_Arctic2025, itemKeys=['GM_Arctic2025_Story_08'], items=['Frozen Pickaxe'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Arctic2025 — item discovered: 11865947
+### The Lost Gemstones: Arctic Expedition — item discovered: Oven
 `GM_Arctic2025_Hero9_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_Arctic2025, items=['11865947'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Arctic Expedition, eventKey=GM_Arctic2025, itemKeys=['GM_Arctic2025_Story_09'], items=['Oven'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -632,63 +616,63 @@ _Referenced by the game, but no lines matched this id._
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_MysteryMachine2025 — item discovered: 49251048
+### The Lost Gemstones: Mystery of the Machine — item discovered: Travel Case
 `GM_MysteryMachine2025Hero1` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_MysteryMachine2025, items=['49251048'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Mystery of the Machine, eventKey=GM_MysteryMachine2025, itemKeys=['GM_MysteryMachine2025_Story_01'], items=['Travel Case'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_MysteryMachine2025 — item discovered: 97090585
+### The Lost Gemstones: Mystery of the Machine — item discovered: Perfect Red Boultonite
 `GM_MysteryMachine2025Hero10` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_MysteryMachine2025, items=['97090585'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Mystery of the Machine, eventKey=GM_MysteryMachine2025, itemKeys=['CBE_GemMine_HeroGemCut_01'], items=['Perfect Red Boultonite'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_MysteryMachine2025 — item discovered: 49251047
+### The Lost Gemstones: Mystery of the Machine — item discovered: World Fair Globe
 `GM_MysteryMachine2025Hero2` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_MysteryMachine2025, items=['49251047'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Mystery of the Machine, eventKey=GM_MysteryMachine2025, itemKeys=['GM_MysteryMachine2025_Story_02'], items=['World Fair Globe'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_MysteryMachine2025 — item discovered: 49251046
+### The Lost Gemstones: Mystery of the Machine — item discovered: Cogs of Science
 `GM_MysteryMachine2025Hero3` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_MysteryMachine2025, items=['49251046'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Mystery of the Machine, eventKey=GM_MysteryMachine2025, itemKeys=['GM_MysteryMachine2025_Story_03'], items=['Cogs of Science'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_MysteryMachine2025 — item discovered: 49251045
+### The Lost Gemstones: Mystery of the Machine — item discovered: Mark I Prototype
 `GM_MysteryMachine2025Hero4` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_MysteryMachine2025, items=['49251045'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Mystery of the Machine, eventKey=GM_MysteryMachine2025, itemKeys=['GM_MysteryMachine2025_Story_04'], items=['Mark I Prototype'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_MysteryMachine2025 — item discovered: 49251044
+### The Lost Gemstones: Mystery of the Machine — item discovered: First Test
 `GM_MysteryMachine2025Hero5` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_MysteryMachine2025, items=['49251044'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Mystery of the Machine, eventKey=GM_MysteryMachine2025, itemKeys=['GM_MysteryMachine2025_Story_05'], items=['First Test'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_MysteryMachine2025 — item discovered: 49251043
+### The Lost Gemstones: Mystery of the Machine — item discovered: Mark II Prototype
 `GM_MysteryMachine2025Hero6` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_MysteryMachine2025, items=['49251043'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Mystery of the Machine, eventKey=GM_MysteryMachine2025, itemKeys=['GM_MysteryMachine2025_Story_06'], items=['Mark II Prototype'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_MysteryMachine2025 — item discovered: 49251042
+### The Lost Gemstones: Mystery of the Machine — item discovered: Explosive Results
 `GM_MysteryMachine2025Hero7` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_MysteryMachine2025, items=['49251042'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Mystery of the Machine, eventKey=GM_MysteryMachine2025, itemKeys=['GM_MysteryMachine2025_Story_07'], items=['Explosive Results'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_MysteryMachine2025 — item discovered: 49251041
+### The Lost Gemstones: Mystery of the Machine — item discovered: Boultonite Heart
 `GM_MysteryMachine2025Hero8` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_MysteryMachine2025, items=['49251041'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Mystery of the Machine, eventKey=GM_MysteryMachine2025, itemKeys=['GM_MysteryMachine2025_Story_08'], items=['Boultonite Heart'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_MysteryMachine2025 — item discovered: 49251040
+### The Lost Gemstones: Mystery of the Machine — item discovered: Computational Boss 01
 `GM_MysteryMachine2025Hero9` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_MysteryMachine2025, items=['49251040'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Mystery of the Machine, eventKey=GM_MysteryMachine2025, itemKeys=['GM_MysteryMachine2025_Story_09'], items=['Computational Boss 01'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -698,63 +682,63 @@ _Referenced by the game, but no lines matched this id._
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_SeaAdventure2025 — item discovered: 97090585
+### The Lost Gemstones: Seas of Adventure — item discovered: Perfect Red Boultonite
 `GM_SeaAdventure2025_Hero10_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_SeaAdventure2025, items=['97090585'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Seas of Adventure, eventKey=GM_SeaAdventure2025, itemKeys=['CBE_GemMine_HeroGemCut_01'], items=['Perfect Red Boultonite'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_SeaAdventure2025 — item discovered: 83964248
+### The Lost Gemstones: Seas of Adventure — item discovered: A Mysterious Key
 `GM_SeaAdventure2025_Hero1_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_SeaAdventure2025, items=['83964248'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Seas of Adventure, eventKey=GM_SeaAdventure2025, itemKeys=['GM_SeaAdventure2025_Story_01'], items=['A Mysterious Key'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_SeaAdventure2025 — item discovered: 83964247
+### The Lost Gemstones: Seas of Adventure — item discovered: The Archives
 `GM_SeaAdventure2025_Hero2_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_SeaAdventure2025, items=['83964247'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Seas of Adventure, eventKey=GM_SeaAdventure2025, itemKeys=['GM_SeaAdventure2025_Story_02'], items=['The Archives'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_SeaAdventure2025 — item discovered: 83964246
+### The Lost Gemstones: Seas of Adventure — item discovered: Cartography
 `GM_SeaAdventure2025_Hero3_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_SeaAdventure2025, items=['83964246'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Seas of Adventure, eventKey=GM_SeaAdventure2025, itemKeys=['GM_SeaAdventure2025_Story_03'], items=['Cartography'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_SeaAdventure2025 — item discovered: 83964245
+### The Lost Gemstones: Seas of Adventure — item discovered: The SS Boulton
 `GM_SeaAdventure2025_Hero4_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_SeaAdventure2025, items=['83964245'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Seas of Adventure, eventKey=GM_SeaAdventure2025, itemKeys=['GM_SeaAdventure2025_Story_04'], items=['The SS Boulton'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_SeaAdventure2025 — item discovered: 83964244
+### The Lost Gemstones: Seas of Adventure — item discovered: The Forgotten Island
 `GM_SeaAdventure2025_Hero5_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_SeaAdventure2025, items=['83964244'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Seas of Adventure, eventKey=GM_SeaAdventure2025, itemKeys=['GM_SeaAdventure2025_Story_05'], items=['The Forgotten Island'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_SeaAdventure2025 — item discovered: 83964243
+### The Lost Gemstones: Seas of Adventure — item discovered: A Lost Ship
 `GM_SeaAdventure2025_Hero6_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_SeaAdventure2025, items=['83964243'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Seas of Adventure, eventKey=GM_SeaAdventure2025, itemKeys=['GM_SeaAdventure2025_Story_06'], items=['A Lost Ship'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_SeaAdventure2025 — item discovered: 83964242
+### The Lost Gemstones: Seas of Adventure — item discovered: Diving Equipment
 `GM_SeaAdventure2025_Hero7_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_SeaAdventure2025, items=['83964242'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Seas of Adventure, eventKey=GM_SeaAdventure2025, itemKeys=['GM_SeaAdventure2025_Story_07'], items=['Diving Equipment'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_SeaAdventure2025 — item discovered: 83964241
+### The Lost Gemstones: Seas of Adventure — item discovered: Let's Dive!
 `GM_SeaAdventure2025_Hero8_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_SeaAdventure2025, items=['83964241'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Seas of Adventure, eventKey=GM_SeaAdventure2025, itemKeys=['GM_SeaAdventure2025_Story_08'], items=["Let's Dive!"], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_SeaAdventure2025 — item discovered: 83964240
+### The Lost Gemstones: Seas of Adventure — item discovered: Treasure Hoard
 `GM_SeaAdventure2025_Hero9_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_SeaAdventure2025, items=['83964240'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Lost Gemstones: Seas of Adventure, eventKey=GM_SeaAdventure2025, itemKeys=['GM_SeaAdventure2025_Story_09'], items=['Treasure Hoard'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -764,63 +748,63 @@ _Referenced by the game, but no lines matched this id._
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_GemMine — item discovered: 97090585
+### Lost Gemstones — item discovered: Perfect Red Boultonite
 `GM_Shared_Dialogues_Hero10_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=CBE_GemMine, items=['97090585'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Lost Gemstones, eventKey=CBE_GemMine, itemKeys=['CBE_GemMine_HeroGemCut_01'], items=['Perfect Red Boultonite'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_GemMine — item discovered: 71776262
+### Lost Gemstones — item discovered: The Meteor
 `GM_Shared_Dialogues_Hero1_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=CBE_GemMine, items=['71776262'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Lost Gemstones, eventKey=CBE_GemMine, itemKeys=['CBE_GemMine_HeroGem_01'], items=['The Meteor'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_GemMine — item discovered: 71776261
+### Lost Gemstones — item discovered: Impact
 `GM_Shared_Dialogues_Hero2_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=CBE_GemMine, items=['71776261'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Lost Gemstones, eventKey=CBE_GemMine, itemKeys=['CBE_GemMine_HeroGem_02'], items=['Impact'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_GemMine — item discovered: 71776260
+### Lost Gemstones — item discovered: Hopewell Bay
 `GM_Shared_Dialogues_Hero3_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=CBE_GemMine, items=['71776260'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Lost Gemstones, eventKey=CBE_GemMine, itemKeys=['CBE_GemMine_HeroGem_03'], items=['Hopewell Bay'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_GemMine — item discovered: 71776259
+### Lost Gemstones — item discovered: Mine Map
 `GM_Shared_Dialogues_Hero4_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=CBE_GemMine, items=['71776259'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Lost Gemstones, eventKey=CBE_GemMine, itemKeys=['CBE_GemMine_HeroGem_04'], items=['Mine Map'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_GemMine — item discovered: 71776258
+### Lost Gemstones — item discovered: Boulton Tin Mine
 `GM_Shared_Dialogues_Hero5_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=CBE_GemMine, items=['71776258'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Lost Gemstones, eventKey=CBE_GemMine, itemKeys=['CBE_GemMine_HeroGem_05'], items=['Boulton Tin Mine'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_GemMine — item discovered: 71776257
+### Lost Gemstones — item discovered: Tin Ore
 `GM_Shared_Dialogues_Hero6_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=CBE_GemMine, items=['71776257'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Lost Gemstones, eventKey=CBE_GemMine, itemKeys=['CBE_GemMine_HeroGem_06'], items=['Tin Ore'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_GemMine — item discovered: 71776256
+### Lost Gemstones — item discovered: EXTRA! EXTRA!
 `GM_Shared_Dialogues_Hero7_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=CBE_GemMine, items=['71776256'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Lost Gemstones, eventKey=CBE_GemMine, itemKeys=['CBE_GemMine_HeroGem_07'], items=['EXTRA! EXTRA!'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_GemMine — item discovered: 71776255
+### Lost Gemstones — item discovered: Gemstones
 `GM_Shared_Dialogues_Hero8_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=CBE_GemMine, items=['71776255'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Lost Gemstones, eventKey=CBE_GemMine, itemKeys=['CBE_GemMine_HeroGem_08'], items=['Gemstones'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### CBE_GemMine — item discovered: 71776254
+### Lost Gemstones — item discovered: Boultonite Ore
 `GM_Shared_Dialogues_Hero9_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=CBE_GemMine, items=['71776254'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Lost Gemstones, eventKey=CBE_GemMine, itemKeys=['CBE_GemMine_HeroGem_09'], items=['Boultonite Ore'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -887,117 +871,117 @@ _Referenced by the game, but no lines matched this id._
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Underwater — item discovered: 77628126
+### Underwater Adventure — item discovered: Ancient Oil Painting
 `GM_Underwater_Story_01_Dialogue` · seen 25.06.01–25.06.01
-- trigger: item, event=GM_Underwater, items=['77628126'], moment=item discovered (versions 25.06.01–25.06.01)
+- trigger: item, event=Underwater Adventure, eventKey=GM_Underwater, itemKeys=['GM_Underwater_Story_01'], items=['Ancient Oil Painting'], moment=item discovered (versions 25.06.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Underwater — item discovered: 77628125
+### Underwater Adventure — item discovered: Ancient Pearl Necklace
 `GM_Underwater_Story_02_Dialogue` · seen 25.06.01–25.06.01
-- trigger: item, event=GM_Underwater, items=['77628125'], moment=item discovered (versions 25.06.01–25.06.01)
+- trigger: item, event=Underwater Adventure, eventKey=GM_Underwater, itemKeys=['GM_Underwater_Story_02'], items=['Ancient Pearl Necklace'], moment=item discovered (versions 25.06.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Underwater — item discovered: 77628124
+### Underwater Adventure — item discovered: Oceanic Encyclopedia
 `GM_Underwater_Story_03_Dialogue` · seen 25.06.01–25.06.01
-- trigger: item, event=GM_Underwater, items=['77628124'], moment=item discovered (versions 25.06.01–25.06.01)
+- trigger: item, event=Underwater Adventure, eventKey=GM_Underwater, itemKeys=['GM_Underwater_Story_03'], items=['Oceanic Encyclopedia'], moment=item discovered (versions 25.06.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Underwater — item discovered: 77628123
+### Underwater Adventure — item discovered: Correspondence
 `GM_Underwater_Story_04_Dialogue` · seen 25.06.01–25.06.01
-- trigger: item, event=GM_Underwater, items=['77628123'], moment=item discovered (versions 25.06.01–25.06.01)
+- trigger: item, event=Underwater Adventure, eventKey=GM_Underwater, itemKeys=['GM_Underwater_Story_04'], items=['Correspondence'], moment=item discovered (versions 25.06.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Underwater — item discovered: 77628122
+### Underwater Adventure — item discovered: Sea Map
 `GM_Underwater_Story_05_Dialogue` · seen 25.06.01–25.06.01
-- trigger: item, event=GM_Underwater, items=['77628122'], moment=item discovered (versions 25.06.01–25.06.01)
+- trigger: item, event=Underwater Adventure, eventKey=GM_Underwater, itemKeys=['GM_Underwater_Story_05'], items=['Sea Map'], moment=item discovered (versions 25.06.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Underwater — item discovered: 77628121
+### Underwater Adventure — item discovered: Wooden Dinghy
 `GM_Underwater_Story_06_Dialogue` · seen 25.06.01–25.06.01
-- trigger: item, event=GM_Underwater, items=['77628121'], moment=item discovered (versions 25.06.01–25.06.01)
+- trigger: item, event=Underwater Adventure, eventKey=GM_Underwater, itemKeys=['GM_Underwater_Story_06'], items=['Wooden Dinghy'], moment=item discovered (versions 25.06.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Underwater — item discovered: 77628120
+### Underwater Adventure — item discovered: Life Preserver
 `GM_Underwater_Story_07_Dialogue` · seen 25.06.01–25.06.01
-- trigger: item, event=GM_Underwater, items=['77628120'], moment=item discovered (versions 25.06.01–25.06.01)
+- trigger: item, event=Underwater Adventure, eventKey=GM_Underwater, itemKeys=['GM_Underwater_Story_07'], items=['Life Preserver'], moment=item discovered (versions 25.06.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Underwater — item discovered: 77628119
+### Underwater Adventure — item discovered: White Flag
 `GM_Underwater_Story_08_Dialogue` · seen 25.06.01–25.06.01
-- trigger: item, event=GM_Underwater, items=['77628119'], moment=item discovered (versions 25.06.01–25.06.01)
+- trigger: item, event=Underwater Adventure, eventKey=GM_Underwater, itemKeys=['GM_Underwater_Story_08'], items=['White Flag'], moment=item discovered (versions 25.06.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Underwater — item discovered: 77628118
+### Underwater Adventure — item discovered: Grand Conch
 `GM_Underwater_Story_09_Dialogue` · seen 25.06.01–25.06.01
-- trigger: item, event=GM_Underwater, items=['77628118'], moment=item discovered (versions 25.06.01–25.06.01)
+- trigger: item, event=Underwater Adventure, eventKey=GM_Underwater, itemKeys=['GM_Underwater_Story_09'], items=['Grand Conch'], moment=item discovered (versions 25.06.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Underwater — item discovered: 66518956
+### Underwater Adventure — item discovered: Grand Pearl
 `GM_Underwater_Story_10_Dialogue` · seen 25.06.01–25.06.01
-- trigger: item, event=GM_Underwater, items=['66518956'], moment=item discovered (versions 25.06.01–25.06.01)
+- trigger: item, event=Underwater Adventure, eventKey=GM_Underwater, itemKeys=['GM_Underwater_HeroGemCut_01'], items=['Grand Pearl'], moment=item discovered (versions 25.06.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Xmas2024 — item discovered: 93375776
+### Hidden Holiday Gems — item discovered: A Cozy Home
 `GM_Xmas2024_Hero1_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_Xmas2024, items=['93375776'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Hidden Holiday Gems, eventKey=GM_Xmas2024, itemKeys=['GM_Xmas2024_XmasStory_01'], items=['A Cozy Home'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Xmas2024 — item discovered: 93375775
+### Hidden Holiday Gems — item discovered: Festive Fireplace
 `GM_Xmas2024_Hero2_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_Xmas2024, items=['93375775'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Hidden Holiday Gems, eventKey=GM_Xmas2024, itemKeys=['GM_Xmas2024_XmasStory_02'], items=['Festive Fireplace'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Xmas2024 — item discovered: 93375774
+### Hidden Holiday Gems — item discovered: Restfull Sleep
 `GM_Xmas2024_Hero3_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_Xmas2024, items=['93375774'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Hidden Holiday Gems, eventKey=GM_Xmas2024, itemKeys=['GM_Xmas2024_XmasStory_03'], items=['Restfull Sleep'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Xmas2024 — item discovered: 93375773
+### Hidden Holiday Gems — item discovered: A Snowy Night
 `GM_Xmas2024_Hero4_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_Xmas2024, items=['93375773'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Hidden Holiday Gems, eventKey=GM_Xmas2024, itemKeys=['GM_Xmas2024_XmasStory_04'], items=['A Snowy Night'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Xmas2024 — item discovered: 93375772
+### Hidden Holiday Gems — item discovered: St. Ignatius
 `GM_Xmas2024_Hero5_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_Xmas2024, items=['93375772'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Hidden Holiday Gems, eventKey=GM_Xmas2024, itemKeys=['GM_Xmas2024_XmasStory_05'], items=['St. Ignatius'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Xmas2024 — item discovered: 93375771
+### Hidden Holiday Gems — item discovered: Sackful of Gifts
 `GM_Xmas2024_Hero6_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_Xmas2024, items=['93375771'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Hidden Holiday Gems, eventKey=GM_Xmas2024, itemKeys=['GM_Xmas2024_XmasStory_06'], items=['Sackful of Gifts'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Xmas2024 — item discovered: 93375770
+### Hidden Holiday Gems — item discovered: Filled Stockings
 `GM_Xmas2024_Hero7_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_Xmas2024, items=['93375770'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Hidden Holiday Gems, eventKey=GM_Xmas2024, itemKeys=['GM_Xmas2024_XmasStory_07'], items=['Filled Stockings'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Xmas2024 — item discovered: 93375769
+### Hidden Holiday Gems — item discovered: Season Greetings
 `GM_Xmas2024_Hero8_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_Xmas2024, items=['93375769'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Hidden Holiday Gems, eventKey=GM_Xmas2024, itemKeys=['GM_Xmas2024_XmasStory_08'], items=['Season Greetings'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### GM_Xmas2024 — item discovered: 93375768
+### Hidden Holiday Gems — item discovered: One Last Surprise
 `GM_Xmas2024_Hero9_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=GM_Xmas2024, items=['93375768'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Hidden Holiday Gems, eventKey=GM_Xmas2024, itemKeys=['GM_Xmas2024_XmasStory_09'], items=['One Last Surprise'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -1060,9 +1044,9 @@ _Referenced by the game, but no lines matched this id._
 
 _Referenced by the game, but no lines matched this id._
 
-### LBE_May2023 — item discovered: 300604
+### The Great Bake-off — item discovered: Chicken Nest
 `LBE_May2023EggNest` · seen 23.09.02–23.11.02
-- trigger: item, event=LBE_May2023, items=['300604'], moment=item discovered (versions 23.09.02–23.11.02)
+- trigger: item, event=The Great Bake-off, eventKey=LBE_May2023, itemKeys=['LBE_May2023_Nest_01'], items=['Chicken Nest'], moment=item discovered (versions 23.09.02–23.11.02)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -1121,51 +1105,51 @@ _Referenced by the game, but no lines matched this id._
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: 14303582
+### Green Acres Quest — item discovered: Bella
 `LDE_GreenAcresQuest2024_CharacterBella_02_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['14303582'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterBella_02'], items=['Bella'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: 12160578
+### Green Acres Quest — item discovered: Cherry
 `LDE_GreenAcresQuest2024_CharacterCherry_02_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['12160578'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterCherry_02'], items=['Cherry'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: 20760242
+### Green Acres Quest — item discovered: Deb
 `LDE_GreenAcresQuest2024_CharacterDeb_02_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['20760242'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterDeb_02'], items=['Deb'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: 84749406
+### Green Acres Quest — item discovered: Grandma
 `LDE_GreenAcresQuest2024_CharacterGrandma_02_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['84749406'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterGrandma_02'], items=['Grandma'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: 79979616
+### Green Acres Quest — item discovered: 79979616
 `LDE_GreenAcresQuest2024_CharacterJackie_02_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['79979616'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['79979616'], items=['79979616'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: 1449849
+### Green Acres Quest — item discovered: Julius
 `LDE_GreenAcresQuest2024_CharacterJulius_02_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['1449849'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterJulius_02'], items=['Julius'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: 63754215
+### Green Acres Quest — item discovered: Mason
 `LDE_GreenAcresQuest2024_CharacterMason_02_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['63754215'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterMason_02'], items=['Mason'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: 33245101
+### Green Acres Quest — item discovered: Poppy
 `LDE_GreenAcresQuest2024_CommonFlowerD_01_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['33245101'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CommonFlowerD_01'], items=['Poppy'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -1174,27 +1158,27 @@ _Referenced by the game, but no lines matched this id._
 - trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
 
 
-### LDE_GreenAcresQuest2024 — item discovered: 99735426
+### Green Acres Quest — item discovered: Friendship Medallion
 `LDE_GreenAcresQuest2024_Friendship_08_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['99735426'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Friendship_08'], items=['Friendship Medallion'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: 56097964
+### Green Acres Quest — item discovered: Flying Garden Gnome
 `LDE_GreenAcresQuest2024_GardenGnomes_07_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['56097964'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_GardenGnomes_07'], items=['Flying Garden Gnome'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: 98423813
+### Green Acres Quest — item discovered: Hedgehog
 `LDE_GreenAcresQuest2024_GoodAnimals_05_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['98423813'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_GoodAnimals_05'], items=['Hedgehog'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: 97060947
+### Green Acres Quest — item discovered: Extra Hot Chilies
 `LDE_GreenAcresQuest2024_GreenhouseChilis_06_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['97060947'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_GreenhouseChilis_06'], items=['Extra Hot Chilies'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -1209,21 +1193,21 @@ _Referenced by the game, but no lines matched this id._
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: 9839103
+### Green Acres Quest — item discovered: Hummingbird
 `LDE_GreenAcresQuest2024_Pollinator_05_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['9839103'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Pollinator_05'], items=['Hummingbird'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: 50469652
+### Green Acres Quest — item discovered: Magenta Marigold
 `LDE_GreenAcresQuest2024_RareFlowerA_01_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['50469652'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_RareFlowerA_01'], items=['Magenta Marigold'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: 62430813
+### Green Acres Quest — item discovered: Purple Hydrangea
 `LDE_GreenAcresQuest2024_RareFlowerB_01_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['62430813'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_RareFlowerB_01'], items=['Purple Hydrangea'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -1252,9 +1236,9 @@ _Referenced by the game, but no lines matched this id._
 - trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
 
 
-### LDE_GreenAcresQuest2024 — item discovered: 19964148
+### Green Acres Quest — item discovered: Calla Lily
 `LDE_GreenAcresQuest2024_UncommonFlowerA_01_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['19964148'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_UncommonFlowerA_01'], items=['Calla Lily'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -1263,9 +1247,9 @@ _Referenced by the game, but no lines matched this id._
 - trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
 
 
-### LDE_GreenAcresQuest2024 — item discovered: 48756946
+### Green Acres Quest — item discovered: Basket of Vegetables
 `LDE_GreenAcresQuest2024_Veggies_08_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['48756946'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Veggies_08'], items=['Basket of Vegetables'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -1275,81 +1259,81 @@ _Referenced by the game, but no lines matched this id._
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_CharacterBella_02
+### Green Acres Quest — item discovered: Bella
 `LDE_GreenAcresQuest2024_v2_CharacterBella_02_Dialogue` · seen 26.03.01–26.04.02
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_CharacterBella_02'], moment=item discovered (versions 26.03.01–26.04.02)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterBella_02'], items=['Bella'], moment=item discovered (versions 26.03.01–26.04.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_CharacterCherry_02
+### Green Acres Quest — item discovered: Cherry
 `LDE_GreenAcresQuest2024_v2_CharacterCherry_02_Dialogue` · seen 26.03.01–26.04.02
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_CharacterCherry_02'], moment=item discovered (versions 26.03.01–26.04.02)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterCherry_02'], items=['Cherry'], moment=item discovered (versions 26.03.01–26.04.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_CharacterDeb_02
+### Green Acres Quest — item discovered: Deb
 `LDE_GreenAcresQuest2024_v2_CharacterDeb_02_Dialogue` · seen 26.03.01–26.04.02
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_CharacterDeb_02'], moment=item discovered (versions 26.03.01–26.04.02)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterDeb_02'], items=['Deb'], moment=item discovered (versions 26.03.01–26.04.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_CharacterGrandma_02
+### Green Acres Quest — item discovered: Grandma
 `LDE_GreenAcresQuest2024_v2_CharacterGrandma_02_Dialogue` · seen 26.03.01–26.04.02
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_CharacterGrandma_02'], moment=item discovered (versions 26.03.01–26.04.02)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterGrandma_02'], items=['Grandma'], moment=item discovered (versions 26.03.01–26.04.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_CharacterJackie_03
+### Green Acres Quest — item discovered: Jackie
 `LDE_GreenAcresQuest2024_v2_CharacterJackie_02_Dialogue` · seen 26.03.01–26.04.02
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_CharacterJackie_03'], moment=item discovered (versions 26.03.01–26.04.02)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterJackie_03'], items=['Jackie'], moment=item discovered (versions 26.03.01–26.04.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_CharacterJulius_02
+### Green Acres Quest — item discovered: Julius
 `LDE_GreenAcresQuest2024_v2_CharacterJulius_02_Dialogue` · seen 26.03.01–26.04.02
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_CharacterJulius_02'], moment=item discovered (versions 26.03.01–26.04.02)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterJulius_02'], items=['Julius'], moment=item discovered (versions 26.03.01–26.04.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_CharacterMason_02
+### Green Acres Quest — item discovered: Mason
 `LDE_GreenAcresQuest2024_v2_CharacterMason_02_Dialogue` · seen 26.03.01–26.04.02
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_CharacterMason_02'], moment=item discovered (versions 26.03.01–26.04.02)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterMason_02'], items=['Mason'], moment=item discovered (versions 26.03.01–26.04.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_CommonFlowerD_01
+### Green Acres Quest — item discovered: Poppy
 `LDE_GreenAcresQuest2024_v2_CommonFlowerD_01_Dialogue` · seen 26.03.01–26.04.02
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_CommonFlowerD_01'], moment=item discovered (versions 26.03.01–26.04.02)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CommonFlowerD_01'], items=['Poppy'], moment=item discovered (versions 26.03.01–26.04.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_FlowerCompost_Sink_01
+### Green Acres Quest — item discovered: Flower Compost
 `LDE_GreenAcresQuest2024_v2_FlowerCompost_Dialogue` · seen 26.03.01–26.04.02
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_FlowerCompost_Sink_01'], moment=item discovered (versions 26.03.01–26.04.02)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_FlowerCompost_Sink_01'], items=['Flower Compost'], moment=item discovered (versions 26.03.01–26.04.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_Friendship_08
+### Green Acres Quest — item discovered: Friendship Medallion
 `LDE_GreenAcresQuest2024_v2_Friendship_08_Dialogue` · seen 26.03.01–26.04.02
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_Friendship_08'], moment=item discovered (versions 26.03.01–26.04.02)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Friendship_08'], items=['Friendship Medallion'], moment=item discovered (versions 26.03.01–26.04.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_GardenGnomes_07
+### Green Acres Quest — item discovered: Flying Garden Gnome
 `LDE_GreenAcresQuest2024_v2_GardenGnomes_07_Dialogue` · seen 26.03.01–26.04.02
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_GardenGnomes_07'], moment=item discovered (versions 26.03.01–26.04.02)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_GardenGnomes_07'], items=['Flying Garden Gnome'], moment=item discovered (versions 26.03.01–26.04.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_GoodAnimals_05
+### Green Acres Quest — item discovered: Hedgehog
 `LDE_GreenAcresQuest2024_v2_GoodAnimals_05_Dialogue` · seen 26.03.01–26.04.02
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_GoodAnimals_05'], moment=item discovered (versions 26.03.01–26.04.02)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_GoodAnimals_05'], items=['Hedgehog'], moment=item discovered (versions 26.03.01–26.04.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_GreenhouseChilis_06
+### Green Acres Quest — item discovered: Extra Hot Chilies
 `LDE_GreenAcresQuest2024_v2_GreenhouseChilis_06_Dialogue` · seen 26.03.01–26.04.02
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_GreenhouseChilis_06'], moment=item discovered (versions 26.03.01–26.04.02)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_GreenhouseChilis_06'], items=['Extra Hot Chilies'], moment=item discovered (versions 26.03.01–26.04.02)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -1365,21 +1349,21 @@ _Referenced by the game, but no lines matched this id._
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_Pollinator_05
+### Green Acres Quest — item discovered: Hummingbird
 `LDE_GreenAcresQuest2024_v2_Pollinator_05_Dialogue` · seen 26.03.01–26.04.02
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_Pollinator_05'], moment=item discovered (versions 26.03.01–26.04.02)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Pollinator_05'], items=['Hummingbird'], moment=item discovered (versions 26.03.01–26.04.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_RareFlowerA_01
+### Green Acres Quest — item discovered: Magenta Marigold
 `LDE_GreenAcresQuest2024_v2_RareFlowerA_01_Dialogue` · seen 26.03.01–26.04.02
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_RareFlowerA_01'], moment=item discovered (versions 26.03.01–26.04.02)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_RareFlowerA_01'], items=['Magenta Marigold'], moment=item discovered (versions 26.03.01–26.04.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_RareFlowerB_01
+### Green Acres Quest — item discovered: Purple Hydrangea
 `LDE_GreenAcresQuest2024_v2_RareFlowerB_01_Dialogue` · seen 26.03.01–26.04.02
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_RareFlowerB_01'], moment=item discovered (versions 26.03.01–26.04.02)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_RareFlowerB_01'], items=['Purple Hydrangea'], moment=item discovered (versions 26.03.01–26.04.02)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -1431,57 +1415,57 @@ _Referenced by the game, but no lines matched this id._
 **EMILIO** (Surprised): I-I did?
 **BELLA** (Relaxed): Yes - I love poppies! Thank you, Emilio. You're the best!
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_UncommonFlowerA_01
+### Green Acres Quest — item discovered: Calla Lily
 `LDE_GreenAcresQuest2024_v2_UncommonFlowerA_01_Dialogue` · seen 26.03.01–26.04.02
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_UncommonFlowerA_01'], moment=item discovered (versions 26.03.01–26.04.02)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_UncommonFlowerA_01'], items=['Calla Lily'], moment=item discovered (versions 26.03.01–26.04.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_VeggieCompost_Sink_01
+### Green Acres Quest — item discovered: Vegetable Compost
 `LDE_GreenAcresQuest2024_v2_VeggieCompost_Dialogue` · seen 26.03.01–26.04.02
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_VeggieCompost_Sink_01'], moment=item discovered (versions 26.03.01–26.04.02)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_VeggieCompost_Sink_01'], items=['Vegetable Compost'], moment=item discovered (versions 26.03.01–26.04.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_Veggies_08
+### Green Acres Quest — item discovered: Basket of Vegetables
 `LDE_GreenAcresQuest2024_v2_Veggies_08_Dialogue` · seen 26.03.01–26.04.02
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_Veggies_08'], moment=item discovered (versions 26.03.01–26.04.02)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Veggies_08'], items=['Basket of Vegetables'], moment=item discovered (versions 26.03.01–26.04.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_Rumors2025 — item discovered: 35398642
+### Circus Caper — item discovered: Unicycle
 `LDE_Rumors2025_CircusProps_07_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_Rumors2025, items=['35398642'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CircusProps_07'], items=['Unicycle'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_Rumors2025 — item discovered: 65069048
+### Circus Caper — item discovered: Mini Raffle Ticket
 `LDE_Rumors2025_Lottery_01_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_Rumors2025, items=['65069048'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Lottery_01'], items=['Mini Raffle Ticket'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_Rumors2025 — item discovered: 88409870
+### Circus Caper — item discovered: Small Scrap
 `LDE_Rumors2025_PaperScraps_01_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_Rumors2025, items=['88409870'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_PaperScraps_01'], items=['Small Scrap'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_Rumors2025 — item discovered: 91060456
+### Circus Caper — item discovered: Set of Tokens
 `LDE_Rumors2025_Prizes_03_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_Rumors2025, items=['91060456'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Prizes_03'], items=['Set of Tokens'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_Rumors2025 — item discovered: 91060452
+### Circus Caper — item discovered: Stuffed Bunny
 `LDE_Rumors2025_Prizes_07_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_Rumors2025, items=['91060452'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Prizes_07'], items=['Stuffed Bunny'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### LDE_Rumors2025 — item discovered: 91060448
+### Circus Caper — item discovered: Stuffed Unicorn
 `LDE_Rumors2025_Prizes_11_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=LDE_Rumors2025, items=['91060448'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Prizes_11'], items=['Stuffed Unicorn'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -1547,51 +1531,51 @@ _Referenced by the game, but no lines matched this id._
 
 _Referenced by the game, but no lines matched this id._
 
-### MBE_DeckTheHalls2023 — item discovered: 68709216
+### Deck the Halls, Clear the Webs — item discovered: Bike Helmet
 `MBE_DeckTheHalls2023_BirthdayGrandmaAccessories_07_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=MBE_DeckTheHalls2023, items=['68709216'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_BirthdayGrandmaAccessories_07'], items=['Bike Helmet'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### MBE_DeckTheHalls2023 — item discovered: 79596379
+### Deck the Halls, Clear the Webs — item discovered: Ring Box
 `MBE_DeckTheHalls2023_BirthdayJewelry_02_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=MBE_DeckTheHalls2023, items=['79596379'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_BirthdayJewelry_02'], items=['Ring Box'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### MBE_DeckTheHalls2023 — item discovered: 79596376
+### Deck the Halls, Clear the Webs — item discovered: Wristwatch Box
 `MBE_DeckTheHalls2023_BirthdayJewelry_05_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=MBE_DeckTheHalls2023, items=['79596376'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_BirthdayJewelry_05'], items=['Wristwatch Box'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### MBE_DeckTheHalls2023 — item discovered: 7770583
+### Deck the Halls, Clear the Webs — item discovered: Mysterious Basement Door
 `MBE_DeckTheHalls2023_EntranceNext_03_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=MBE_DeckTheHalls2023, items=['7770583'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_EntranceNext_03'], items=['Mysterious Basement Door'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### MBE_DeckTheHalls2023 — item discovered: 71099265
+### Deck the Halls, Clear the Webs — item discovered: Fancy Cabinet
 `MBE_DeckTheHalls2023_FancyCabinet_01_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=MBE_DeckTheHalls2023, items=['71099265'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_FancyCabinet_01'], items=['Fancy Cabinet'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### MBE_DeckTheHalls2023 — item discovered: 43749586
+### Deck the Halls, Clear the Webs — item discovered: Inflatable Pool Slide
 `MBE_DeckTheHalls2023_Floaties_07_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=MBE_DeckTheHalls2023, items=['43749586'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_Floaties_07'], items=['Inflatable Pool Slide'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### MBE_DeckTheHalls2023 — item discovered: 28728179
+### Deck the Halls, Clear the Webs — item discovered: Xmas Gift
 `MBE_DeckTheHalls2023_GiftBox_03_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=MBE_DeckTheHalls2023, items=['28728179'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_GiftBox_03'], items=['Xmas Gift'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### MBE_DeckTheHalls2023 — item discovered: 99734326
+### Deck the Halls, Clear the Webs — item discovered: Santa’s House
 `MBE_DeckTheHalls2023_House_01_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=MBE_DeckTheHalls2023, items=['99734326'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_House_01'], items=['Santa’s House'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -1608,100 +1592,100 @@ _Referenced by the game, but no lines matched this id._
 **MADDIE** (Encouraging): You may be right, but we need to find the decorations.
 **MADDIE** (Encouraging): Come on, get your flashlight. It'll be an adventure, and who knows what we'll find...
 
-### MBE_DeckTheHalls2023 — item discovered: 43840608
+### Deck the Halls, Clear the Webs — item discovered: Half-wrapped Gift
 `MBE_DeckTheHalls2023_PackingSack_04_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=MBE_DeckTheHalls2023, items=['43840608'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_PackingSackProducing_01'], items=['Half-wrapped Gift'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### MBE_DeckTheHalls2023 — item discovered: 52162001
+### Deck the Halls, Clear the Webs — item discovered: Elegant Perfume
 `MBE_DeckTheHalls2023_Perfumes_05_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=MBE_DeckTheHalls2023, items=['52162001'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_Perfumes_05'], items=['Elegant Perfume'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### MBE_DeckTheHalls2023 — item discovered: 25495778
+### Deck the Halls, Clear the Webs — item discovered: Mr. Antlers
 `MBE_DeckTheHalls2023_Plushies_06_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=MBE_DeckTheHalls2023, items=['25495778'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_Plushies_06'], items=['Mr. Antlers'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### MBE_DeckTheHalls2023 — item discovered: 9643430
+### Deck the Halls, Clear the Webs — item discovered: Recording Equipment
 `MBE_DeckTheHalls2023_PodcastEquipment_07_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=MBE_DeckTheHalls2023, items=['9643430'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_PodcastEquipment_07'], items=['Recording Equipment'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### MBE_DeckTheHalls2023 — item discovered: 25581934
+### Deck the Halls, Clear the Webs — item discovered: Santa’s Sleigh Full
 `MBE_DeckTheHalls2023_Sleigh_02_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=MBE_DeckTheHalls2023, items=['25581934'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_Sleigh_02'], items=['Santa’s Sleigh Full'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### MBE_DeckTheHalls2023 — item discovered: 9141564
+### Deck the Halls, Clear the Webs — item discovered: Elf Puppet
 `MBE_DeckTheHalls2023_Toys_06_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=MBE_DeckTheHalls2023, items=['9141564'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_Toys_06'], items=['Elf Puppet'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### MBE_DeckTheHalls2023 — item discovered: 37790058
+### Deck the Halls, Clear the Webs — item discovered: Eggnog
 `MBE_DeckTheHalls2023_Treats_01_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=MBE_DeckTheHalls2023, items=['37790058'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_Treats_01'], items=['Eggnog'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### MBE_DeckTheHalls2023 — item discovered: 17576119
+### Deck the Halls, Clear the Webs — item discovered: Ready for the North
 `MBE_DeckTheHalls2023_XmasClothes_09_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=MBE_DeckTheHalls2023, items=['17576119'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_XmasClothes_09'], items=['Ready for the North'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### MBE_DeckTheHalls2023 — item discovered: 58611495
+### Deck the Halls, Clear the Webs — item discovered: All the Trimmings
 `MBE_DeckTheHalls2023_XmasPostcard_07_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=MBE_DeckTheHalls2023, items=['58611495'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_XmasPostcard_07'], items=['All the Trimmings'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### MBE_DeckTheHalls2023 — item discovered: 85716561
+### Deck the Halls, Clear the Webs — item discovered: Young Evergreen
 `MBE_DeckTheHalls2023_XmasTree_03_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=MBE_DeckTheHalls2023, items=['85716561'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_XmasTree_03'], items=['Young Evergreen'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### MBE_DeckTheHalls2023 — item discovered: 85716559
+### Deck the Halls, Clear the Webs — item discovered: Christmas Tree
 `MBE_DeckTheHalls2023_XmasTree_05_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=MBE_DeckTheHalls2023, items=['85716559'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_XmasTree_05'], items=['Christmas Tree'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### MBE_DeckTheHalls2023 — item discovered: 85716557
+### Deck the Halls, Clear the Webs — item discovered: Classy Christmas Tree
 `MBE_DeckTheHalls2023_XmasTree_07_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=MBE_DeckTheHalls2023, items=['85716557'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_XmasTree_07'], items=['Classy Christmas Tree'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### MBE_DeckTheHalls2023 — item discovered: 85716555
+### Deck the Halls, Clear the Webs — item discovered: Fabulous Christmas Tree
 `MBE_DeckTheHalls2023_XmasTree_09_Dialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=MBE_DeckTheHalls2023, items=['85716555'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_XmasTree_09'], items=['Fabulous Christmas Tree'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### PE_JamSession2023_Name — outro
+### Jam Session 2023 — outro
 `PE_JamSession2023_DialogueForCompletingAllTheMainRewards` · seen 24.04.01–24.11.02
-- trigger: event, event=PE_JamSession2023_Name, eventId=PE_JamSession2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+- trigger: event, event=Jam Session 2023, eventId=PE_JamSession2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
 _Referenced by the game, but no lines matched this id._
 
 ### PE_JamSession2023 — intro
 `PE_JamSession2023_InitialDialogue` · seen 23.06.02–24.11.02
 - trigger: event, eventId=PE_JamSession2023, eventType=Mystery / Progression, moment=intro (versions 23.06.02–23.06.02)
-- trigger: event, event=PE_JamSession2023_Name, eventId=PE_JamSession2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+- trigger: event, event=Jam Session 2023, eventId=PE_JamSession2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 35837323
+### The Great Escape (Jailbreak) — item discovered: Stocked up Storage
 `SBE_Jailbreak_1StActivationOfTheStorageRoom` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['35837323'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_FullStorage_01'], items=['Stocked up Storage'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -1715,27 +1699,27 @@ _Referenced by the game, but no lines matched this id._
 **BLUETOOTH**: Well, if you have a filled cart, the guards will let you in, because it looks like you’re working there!
 **GRANDMA**: Brilliant idea, dearie!
 
-### SBE_Jailbreak — item discovered: 19159133
+### The Great Escape (Jailbreak) — item discovered: Full Cleaner Cart
 `SBE_Jailbreak_1StCartIsFull` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['19159133'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_CleanerCartFull_01'], items=['Full Cleaner Cart'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 57097771
+### The Great Escape (Jailbreak) — item discovered: Ursula "Grandma" Boulton
 `SBE_Jailbreak_1StContrabandBurnerPhoneAppears` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['57097771'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_Prisoner0_02'], items=['Ursula "Grandma" Boulton'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 32487939
+### The Great Escape (Jailbreak) — item discovered: Tired Grace
 `SBE_Jailbreak_1StTimeGraceIsTired` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['32487939'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_Prisoner1_01'], items=['Tired Grace'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 57097772
+### The Great Escape (Jailbreak) — item discovered: Tired Grandma
 `SBE_Jailbreak_1StTimeGrandmaIsTired` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['57097772'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_Prisoner0_01'], items=['Tired Grandma'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -1752,39 +1736,39 @@ _Referenced by the game, but no lines matched this id._
 **XO ADAMS**: I’m not a miracle worker. Besides, I don’t think it should be too inconvenient for you... With your knitting project and all.
 **GRANDMA**: ... I see.
 
-### SBE_Jailbreak — item discovered: 29174252
+### The Great Escape (Jailbreak) — item discovered: Tired Bluetooth
 `SBE_Jailbreak_BluetoothIsTired` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['29174252'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_Prisoner4_01'], items=['Tired Bluetooth'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 88040233
+### The Great Escape (Jailbreak) — item discovered: Operational Factory
 `SBE_Jailbreak_BluetoothOpensTheFactory` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['88040233'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_FactoryOn_02'], items=['Operational Factory'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 52739495
+### The Great Escape (Jailbreak) — item discovered: Empty Cafeteria
 `SBE_Jailbreak_Cafeteria` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['52739495'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_EmptyCafeteria_01'], items=['Empty Cafeteria'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 67942980
+### The Great Escape (Jailbreak) — item discovered: Tired C.J.
 `SBE_Jailbreak_CjIsTired` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['67942980'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_Prisoner5_01'], items=['Tired C.J.'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 91809101
+### The Great Escape (Jailbreak) — item discovered: Open Library
 `SBE_Jailbreak_CjOpensTheLibrary` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['91809101'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_LibraryOn_02'], items=['Open Library'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 24134737
+### The Great Escape (Jailbreak) — item discovered: Read Jail Journal
 `SBE_Jailbreak_DiscoveryOfJournal` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['24134737'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_JailJournal_Enter_01'], items=['Read Jail Journal'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -1795,21 +1779,21 @@ _Referenced by the game, but no lines matched this id._
 **MADDIE**: More pages from Grandma’s journal...
 **MADDIE** (Thinking): I need to find out more!
 
-### SBE_Jailbreak — item discovered: 77591440
+### The Great Escape (Jailbreak) — item discovered: 77591440
 `SBE_Jailbreak_DropingGraceIdOnTrashBag` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['77591440'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['77591440'], items=['77591440'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 21093171
+### The Great Escape (Jailbreak) — item discovered: 21093171
 `SBE_Jailbreak_DroppingGrandmaIdOnPhone` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['21093171'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['21093171'], items=['21093171'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 11095734
+### The Great Escape (Jailbreak) — item discovered: Shut Down Factory
 `SBE_Jailbreak_Factory` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['11095734'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_FactoryOff_01'], items=['Shut Down Factory'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -1862,9 +1846,9 @@ _Referenced by the game, but no lines matched this id._
 **GRACE**: You know, I’ve never seen it like this before. It’s down right homely!
 **GRANDMA**: Thank you dearie!
 
-### SBE_Jailbreak — item discovered: 95022321
+### The Great Escape (Jailbreak) — item discovered: Woolen Decoy Grandma
 `SBE_Jailbreak_GrandmaDecoyAndChooseWhoGetsToEscape` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['95022321'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_Decoy_01'], items=['Woolen Decoy Grandma'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -2002,51 +1986,51 @@ _Referenced by the game, but no lines matched this id._
 **GRANDMA**: Oh, nothing much... Only that you “may” have bought a sailboat and “may” have forgotten to pay your taxes...
 **LT. JOHNSON**: Wh- What?!
 
-### SBE_Jailbreak — item discovered: 49272567
+### The Great Escape (Jailbreak) — item discovered: Tired Izzy
 `SBE_Jailbreak_IzzyIsTired` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['49272567'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_Prisoner6_01'], items=['Tired Izzy'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 32856559
+### The Great Escape (Jailbreak) — item discovered: Warden's Office
 `SBE_Jailbreak_IzzyOpensTheWardensOffice` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['32856559'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_WardenOffice_03'], items=["Warden's Office"], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 43016818
+### The Great Escape (Jailbreak) — item discovered: Jail Bell
 `SBE_Jailbreak_JailboardIntro` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['43016818'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_MorningBell_03'], items=['Jail Bell'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 38141479
+### The Great Escape (Jailbreak) — item discovered: Tired Kitty
 `SBE_Jailbreak_KittyIsTired` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['38141479'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_Prisoner2_01'], items=['Tired Kitty'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 35837322
+### The Great Escape (Jailbreak) — item discovered: Stocked up Storage
 `SBE_Jailbreak_KittyOpensStorageRoom` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['35837322'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_FullStorage_02'], items=['Stocked up Storage'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 72725892
+### The Great Escape (Jailbreak) — item discovered: Closed Library
 `SBE_Jailbreak_Library` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['72725892'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_LibraryOff_01'], items=['Closed Library'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 17769117
+### The Great Escape (Jailbreak) — item discovered: Tired Mama
 `SBE_Jailbreak_MamaIsTired` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['17769117'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_Prisoner3_01'], items=['Tired Mama'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 8560076
+### The Great Escape (Jailbreak) — item discovered: Busy Cafeteria
 `SBE_Jailbreak_MamaOpenTheCafeteria` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['8560076'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_EatingCafeteria_02'], items=['Busy Cafeteria'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -2057,9 +2041,9 @@ _Referenced by the game, but no lines matched this id._
 **GRANDMA**: I should really explore this jail. This jail cell shouldn’t be the only thing I know about this place. Besides...
 **GRANDMA**: Maybe I’ll find something useful in them.
 
-### SBE_Jailbreak — item discovered: 20074953
+### The Great Escape (Jailbreak) — item discovered: Evidence of Corruption
 `SBE_Jailbreak_MoneybagDialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['20074953'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_SpecialSecret_01'], items=['Evidence of Corruption'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -2410,21 +2394,21 @@ _Referenced by the game, but no lines matched this id._
 **GRANDMA**: That’s awful, dearie!
 **IZZY**: Yeah, well... What can you do? I’ve also been ordered to keep my mouth shut about it, so...
 
-### SBE_Jailbreak — item discovered: 6200969
+### The Great Escape (Jailbreak) — item discovered: Safe
 `SBE_Jailbreak_SafeboxDialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['6200969'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_WardenSafe_01'], items=['Safe'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 24874138
+### The Great Escape (Jailbreak) — item discovered: Blackmail
 `SBE_Jailbreak_SpecialLetterDialogue` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['24874138'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_SecretFiles_01'], items=['Blackmail'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SBE_Jailbreak — item discovered: 22464859
+### The Great Escape (Jailbreak) — item discovered: Empty Storage
 `SBE_Jailbreak_Storage` · seen 25.05.01–25.06.01
-- trigger: item, event=SBE_Jailbreak, items=['22464859'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_EmptyStorage_01'], items=['Empty Storage'], moment=item discovered (versions 25.05.01–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -2486,141 +2470,141 @@ _Referenced by the game, but no lines matched this id._
 **GRANDMA**: Not yet. I need to find more pieces of vital evidence before we can take him down.  
   _earlier:_ ~~Not yet. I need to find a find more pieces of vital evidence before we can take him down.~~ (until 24.09.02)
 
-### SE_HopeberryFestival2023 — decoration SE_HopeberryFestival2023_Decoration_Slot01
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot01
 `SE_HopeberryFestival2023_Decoration_Slot01_Dialogue` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot01, event=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot01, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SE_HopeberryFestival2023 — decoration SE_HopeberryFestival2023_Decoration_Slot02
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot02
 `SE_HopeberryFestival2023_Decoration_Slot02_Dialogue` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot02, event=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot02, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SE_HopeberryFestival2023 — decoration SE_HopeberryFestival2023_Decoration_Slot05
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot05
 `SE_HopeberryFestival2023_Decoration_Slot05_Dialogue` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot05, event=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot05, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SE_HopeberryFestival2023 — decoration SE_HopeberryFestival2023_Decoration_Slot06
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot06
 `SE_HopeberryFestival2023_Decoration_Slot06_Dialogue` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot06, event=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot06, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SE_HopeberryFestival2023 — decoration SE_HopeberryFestival2023_Decoration_Slot07
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot07
 `SE_HopeberryFestival2023_Decoration_Slot07_Dialogue` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot07, event=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot07, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SE_HopeberryFestival2023 — decoration SE_HopeberryFestival2023_Decoration_Slot08
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot08
 `SE_HopeberryFestival2023_Decoration_Slot08_Dialogue` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot08, event=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot08, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SE_HopeberryFestival2023 — decoration SE_HopeberryFestival2023_Decoration_Slot09
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot09
 `SE_HopeberryFestival2023_Decoration_Slot09_Dialogue` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot09, event=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot09, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SE_HopeberryFestival2023 — decoration SE_HopeberryFestival2023_Decoration_Slot14
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot14
 `SE_HopeberryFestival2023_Decoration_Slot14_Dialogue` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot14, event=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot14, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SE_HopeberryFestival2023 — decoration SE_HopeberryFestival2023_Decoration_Slot15
+### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot15
 `SE_HopeberryFestival2023_Decoration_Slot15_Dialogue` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot15, event=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot15, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SE_HopeberryFestival2023 — decoration HopeberryFestival2022_Decoration_16
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_16
 `SE_HopeberryFestival2023_Decoration_Slot16_Dialogue` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=HopeberryFestival2022_Decoration_16, event=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_16, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SE_HopeberryFestival2023 — decoration HopeberryFestival2022_Decoration_17
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_17
 `SE_HopeberryFestival2023_Decoration_Slot17_Dialogue` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=HopeberryFestival2022_Decoration_17, event=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_17, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SE_HopeberryFestival2023 — decoration HopeberryFestival2022_Decoration_18
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_18
 `SE_HopeberryFestival2023_Decoration_Slot18_Dialogue` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=HopeberryFestival2022_Decoration_18, event=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_18, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SE_HopeberryFestival2023 — decoration HopeberryFestival2022_Decoration_19
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_19
 `SE_HopeberryFestival2023_Decoration_Slot19_Dialogue` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=HopeberryFestival2022_Decoration_19, event=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_19, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SE_HopeberryFestival2023 — decoration HopeberryFestival2022_Decoration_20
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_20
 `SE_HopeberryFestival2023_Decoration_Slot20_Dialogue` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=HopeberryFestival2022_Decoration_20, event=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_20, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SE_HopeberryFestival2023 — decoration HopeberryFestival2022_Decoration_21
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_21
 `SE_HopeberryFestival2023_Decoration_Slot21_Dialogue` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=HopeberryFestival2022_Decoration_21, event=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_21, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SE_HopeberryFestival2023 — decoration HopeberryFestival2022_Decoration_22
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_22
 `SE_HopeberryFestival2023_Decoration_Slot22_Dialogue` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=HopeberryFestival2022_Decoration_22, event=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_22, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SE_HopeberryFestival2023 — decoration HopeberryFestival2022_Decoration_23
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_23
 `SE_HopeberryFestival2023_Decoration_Slot23_Dialogue` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=HopeberryFestival2022_Decoration_23, event=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_23, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SE_HopeberryFestival2023 — decoration HopeberryFestival2022_Decoration_24
+### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_24
 `SE_HopeberryFestival2023_Decoration_Slot24_Dialogue` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=HopeberryFestival2022_Decoration_24, event=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=HopeberryFestival2022_Decoration_24, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SE_HopeberryFestival2023 — item discovered: 8490
+### Hopeberry Festival — item discovered: Hopeberry Event Gate
 `SE_HopeberryFestival2023_DoorTutorial_Dialogue` · seen 23.09.02–25.06.01
-- trigger: item, event=SE_HopeberryFestival2023, items=['8490'], moment=item discovered (versions 23.09.02–25.06.01)
+- trigger: item, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, itemKeys=['HopeberryEntranceEnter_01'], items=['Hopeberry Event Gate'], moment=item discovered (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SE_HopeberryFestival2023 — item discovered: 8314
+### Hopeberry Festival — item discovered: Sundae
 `SE_HopeberryFestival2023_HopeberryIceCream_05_Dialogue` · seen 23.09.02–25.06.01
-- trigger: item, event=SE_HopeberryFestival2023, items=['8314'], moment=item discovered (versions 23.09.02–25.06.01)
+- trigger: item, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, itemKeys=['HopeberryIceCream_05'], items=['Sundae'], moment=item discovered (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SE_HopeberryFestival2023 — item discovered: 14319
+### Hopeberry Festival — item discovered: SE_HopeberryFestival2023_HopeberryPie_06
 `SE_HopeberryFestival2023_HopeberryPie_06_Dialogue` · seen 23.09.02–25.06.01
-- trigger: item, event=SE_HopeberryFestival2023, items=['14319'], moment=item discovered (versions 23.09.02–25.06.01)
+- trigger: item, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, itemKeys=['SE_HopeberryFestival2023_HopeberryPie_06'], items=['SE_HopeberryFestival2023_HopeberryPie_06'], moment=item discovered (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SE_HopeberryFestival2023 — item discovered: 8435
+### Hopeberry Festival — item discovered: 8435
 `SE_HopeberryFestival2023_HopeberryScarecrow_06_Dialogue` · seen 23.09.02–25.06.01
-- trigger: item, event=SE_HopeberryFestival2023, items=['8435'], moment=item discovered (versions 23.09.02–25.06.01)
+- trigger: item, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, itemKeys=['8435'], items=['8435'], moment=item discovered (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SE_HopeberryFestival2023 — item discovered: 8164
+### Hopeberry Festival — item discovered: Hopeberry Basket
 `SE_HopeberryFestival2023_Hopeberry_05_Dialogue` · seen 23.09.02–25.06.01
-- trigger: item, event=SE_HopeberryFestival2023, items=['8164'], moment=item discovered (versions 23.09.02–25.06.01)
+- trigger: item, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, itemKeys=['Hopeberry_05'], items=['Hopeberry Basket'], moment=item discovered (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -2629,99 +2613,99 @@ _Referenced by the game, but no lines matched this id._
 - trigger: unknown, hint=Seasonal event (versions None–None)
 
 
-### SE_HopeberryFestival2023 — item discovered: 8520
+### Hopeberry Festival — item discovered: Hopeberry Event Gate
 `SE_HopeberryFestival2023_IntroPart2_Dialogue` · seen 23.09.02–25.06.01
-- trigger: item, event=SE_HopeberryFestival2023, items=['8520'], moment=item discovered (versions 23.09.02–25.06.01)
+- trigger: item, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, itemKeys=['HopeberryEntranceExit_01'], items=['Hopeberry Event Gate'], moment=item discovered (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_05
 `SE_Valentines2023_CupidStatue` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=ValentinesDay2022_Decoration_05, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=ValentinesDay2022_Decoration_05, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration SE_Valentines2023_Decoration_18
 `SE_Valentines2023_DessertCart` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SE_Valentines2023_Decoration_18, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SE_Valentines2023_Decoration_18, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SEValentines2023 — item discovered: 14068
+### SEValentines2023 — item discovered: SEValentines2023EnjoySpa_07
 `SE_Valentines2023_Enjoyspa_07` · seen 23.09.02–25.06.01
-- trigger: item, event=SEValentines2023, items=['14068'], moment=item discovered (versions 23.09.02–25.06.01)
+- trigger: item, event=SEValentines2023, eventKey=SEValentines2023, itemKeys=['SEValentines2023EnjoySpa_07'], items=['SEValentines2023EnjoySpa_07'], moment=item discovered (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_07
 `SE_Valentines2023_GardenDinnerForTwo` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=ValentinesDay2022_Decoration_07, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=ValentinesDay2022_Decoration_07, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_08
 `SE_Valentines2023_GardenGate` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=ValentinesDay2022_Decoration_08, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=ValentinesDay2022_Decoration_08, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_09
 `SE_Valentines2023_HeartBalloons` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=ValentinesDay2022_Decoration_09, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=ValentinesDay2022_Decoration_09, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_14
 `SE_Valentines2023_HeartShapedEntranceGate` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=ValentinesDay2022_Decoration_14, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=ValentinesDay2022_Decoration_14, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_01
 `SE_Valentines2023_HeartShapedFence` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=ValentinesDay2022_Decoration_01, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=ValentinesDay2022_Decoration_01, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_12
 `SE_Valentines2023_HeartwarmingEntrance` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=ValentinesDay2022_Decoration_12, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=ValentinesDay2022_Decoration_12, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_15
 `SE_Valentines2023_IgnatiusStatue` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=ValentinesDay2022_Decoration_15, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=ValentinesDay2022_Decoration_15, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_02
 `SE_Valentines2023_LeftBedOfRoses` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=ValentinesDay2022_Decoration_02, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=ValentinesDay2022_Decoration_02, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration SE_Valentines2023_Decoration_20
 `SE_Valentines2023_LeftHeartFence` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SE_Valentines2023_Decoration_20, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SE_Valentines2023_Decoration_20, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration SE_Valentines2023_Decoration_21
 `SE_Valentines2023_LoverLane` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SE_Valentines2023_Decoration_21, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SE_Valentines2023_Decoration_21, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration SE_Valentines2023_Decoration_22
 `SE_Valentines2023_LyricalPicnic` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SE_Valentines2023_Decoration_22, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SE_Valentines2023_Decoration_22, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SEValentines2023 — item discovered: 14034
+### SEValentines2023 — item discovered: SEValentines2023MakeUpGift_06
 `SE_Valentines2023_Makeupgift_06` · seen 23.09.02–25.06.01
-- trigger: item, event=SEValentines2023, items=['14034'], moment=item discovered (versions 23.09.02–25.06.01)
+- trigger: item, event=SEValentines2023, eventKey=SEValentines2023, itemKeys=['SEValentines2023MakeUpGift_06'], items=['SEValentines2023MakeUpGift_06'], moment=item discovered (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -2737,61 +2721,61 @@ _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration SE_Valentines2023_Decoration_17
 `SE_Valentines2023_PinkCandyTree` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SE_Valentines2023_Decoration_17, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SE_Valentines2023_Decoration_17, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_04
 `SE_Valentines2023_PinkLamps` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=ValentinesDay2022_Decoration_04, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=ValentinesDay2022_Decoration_04, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_10
 `SE_Valentines2023_RightBedOfRoses` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=ValentinesDay2022_Decoration_10, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=ValentinesDay2022_Decoration_10, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration SE_Valentines2023_Decoration_24
 `SE_Valentines2023_RightHeartFence` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SE_Valentines2023_Decoration_24, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SE_Valentines2023_Decoration_24, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration SE_Valentines2023_Decoration_23
 `SE_Valentines2023_RomanticChess` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SE_Valentines2023_Decoration_23, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SE_Valentines2023_Decoration_23, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_13
 `SE_Valentines2023_RomanticMansionFacade` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=ValentinesDay2022_Decoration_13, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=ValentinesDay2022_Decoration_13, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_06
 `SE_Valentines2023_RoundBedOfRoses` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=ValentinesDay2022_Decoration_06, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=ValentinesDay2022_Decoration_06, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SEValentines2023 — item discovered: 14054
+### SEValentines2023 — item discovered: SEValentines2023Shoes_07
 `SE_Valentines2023_Shoes_07` · seen 23.09.02–25.06.01
-- trigger: item, event=SEValentines2023, items=['14054'], moment=item discovered (versions 23.09.02–25.06.01)
+- trigger: item, event=SEValentines2023, eventKey=SEValentines2023, itemKeys=['SEValentines2023Shoes_07'], items=['SEValentines2023Shoes_07'], moment=item discovered (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration SE_Valentines2023_Decoration_19
 `SE_Valentines2023_SpeedDatingTable` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SE_Valentines2023_Decoration_19, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SE_Valentines2023_Decoration_19, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration SE_Valentines2023_Decoration_16
 `SE_Valentines2023_ValentineDinnerTable` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SE_Valentines2023_Decoration_16, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SE_Valentines2023_Decoration_16, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
@@ -2999,44 +2983,44 @@ _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration SP_Valentines2023_Decoration_26
 `SP_Valentines2023_CupidsCove` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SP_Valentines2023_Decoration_26, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SP_Valentines2023_Decoration_26, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
-### SP_Valentines2023_Title — outro
+### Sweethearts' Season — outro
 `SP_Valentines2023_EventEndDialogue` · seen 24.04.01–24.11.02
-- trigger: event, event=SP_Valentines2023_Title, eventId=SP_Valentines2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
+- trigger: event, event=Sweethearts' Season, eventId=SP_Valentines2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SP_Valentines2023 — intro
 `SP_Valentines2023_EventOpeningDialogue` · seen 23.06.02–24.11.02
 - trigger: event, eventId=SP_Valentines2023, eventType=Mystery / Progression, moment=intro (versions 23.06.02–23.06.02)
-- trigger: event, event=SP_Valentines2023_Title, eventId=SP_Valentines2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
+- trigger: event, event=Sweethearts' Season, eventId=SP_Valentines2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration SP_Valentines2023_Decoration_28
 `SP_Valentines2023_KissingPorch` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SP_Valentines2023_Decoration_28, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SP_Valentines2023_Decoration_28, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration SP_Valentines2023_Decoration_27
 `SP_Valentines2023_PinkHeartTree` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SP_Valentines2023_Decoration_27, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SP_Valentines2023_Decoration_27, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration SP_Valentines2023_Decoration_29
 `SP_Valentines2023_RomanticRooftop` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SP_Valentines2023_Decoration_29, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SP_Valentines2023_Decoration_29, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration SP_Valentines2023_Decoration_25
 `SP_Valentines2023_ValentinesLawn` · seen 23.09.02–25.06.01
-- trigger: decoration, decoration=SP_Valentines2023_Decoration_25, event=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
+- trigger: decoration, decoration=SP_Valentines2023_Decoration_25, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
 _Referenced by the game, but no lines matched this id._
 

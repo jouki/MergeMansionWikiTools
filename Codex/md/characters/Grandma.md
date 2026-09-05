@@ -163,20 +163,19 @@ Every story in which Grandma speaks.
 **—**: Two Scissors can be merged into one to stack their charges.
 **GRANDMA** (Joyous): Sometimes you just need to tear things down to build them back up again.
 
-### CBE_AmeliaBoulton2024 — decoration CBE_AmeliaBoulton2024_Decoration_Slot05
+### Legacy Lane — decoration CBE_AmeliaBoulton2024_Decoration_Slot05
 `CBE_AmeliaBoulton2024_Decoration_Slot05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot05, event=CBE_AmeliaBoulton2024, moment=decoration placed (versions 25.05.01–26.07.01)
-- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot05, event=CBE_AmeliaBoulton2024B, moment=decoration placed (versions 26.04.01–26.07.01)
+- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot05, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot05, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, moment=decoration placed (versions 26.04.01–26.07.01)
 
 **MADDIE** (Relaxed): Do you remember all those old racing trophies we found in the attic?
 **MADDIE** (Relaxed): They were all Amelia's! She was a race car driver, and a good one, too.
 **GRANDMA** (Joyous): A race car driver? Now, she is a woman after my own heart.
 
-### CBE_AmeliaBoulton2024 — item discovered: 30128061
+### Legacy Lane — item discovered: Hat
 `CBE_AmeliaBoulton2024_Hat_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['30128061'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_HistoricalCostumes_06'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_HistoricalCostumes_08'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_HistoricalCostumes_06'], items=['Hat'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_HistoricalCostumes_08'], items=['Button-ups'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE** (Relaxed): I don't know anything about Amelia. What was she like? Where did she come from?
 **GRANDMA** (Relaxed): You and your questions! 
@@ -186,7 +185,7 @@ Every story in which Grandma speaks.
 ### Legacy Lane — entering board
 `CBE_AmeliaBoulton2024_IntroDialogue_Dialogue` · seen 25.06.01–26.07.01
 - trigger: event, event=Legacy Lane, eventId=CBE_AmeliaBoulton2024, eventType=Collectible Board Event, moment=entering board (versions 25.06.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_HistoricalCostumes_05'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_HistoricalCostumes_05'], items=['Umbrella'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE** (Calling): Pearl, hi! I'm great. How are you? You sound kinda hyper...
 **MADDIE** (Calling): Amelia Boulton Day? I think I've heard something about that...
@@ -201,11 +200,10 @@ Every story in which Grandma speaks.
 **GRANDMA**: If there is, I do not know it, dearie.
 **GRANDMA**: Amelia was, and still is, something of a mystery!
 
-### CBE_AmeliaBoulton2024 — item discovered: 30128057
+### Legacy Lane — item discovered: Lady About Town
 `CBE_AmeliaBoulton2024_LadyAboutTown_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['30128057'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_HistoricalCostumes_10'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_HistoricalCostumes_10'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_HistoricalCostumes_10'], items=['Lady About Town'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_HistoricalCostumes_10'], items=['Lady About Town'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **GRANDMA** (Thinking): These are some of Amelia's old clothes.
 **GRANDMA** (Thinking): There are plenty of old things up in the attic, but who knows which ones belonged to her!
@@ -227,20 +225,19 @@ Every story in which Grandma speaks.
 **MADDIE** (Thinking): What?
 **GRANDMA** (Joyous): The woman was great at keeping a secret!
 
-### CBE_AmeliaBoulton2024 — item discovered: 71301640
+### Legacy Lane — item discovered: Small Trunk
 `CBE_AmeliaBoulton2024_SmallTrunk_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['71301640'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_AmeliasTrunk_04'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_HistoricalCostumes_06'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_AmeliasTrunk_04'], items=['Small Trunk'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_HistoricalCostumes_06'], items=['Hat'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE** (Thinking): Aren't there any family legends about Amelia?
 **GRANDMA** (Thinking): Apart from the things everyone knows, she was not really spoken about much...
 **GRANDMA** (Thinking): Who knows? Maybe it would be best to leave it alone, dearie.
 **MADDIE** (Relaxed): Why am I not surprised to hear you say that?
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Grandma_07
+### Five-Year Secret Celebration — item discovered: Stack of Volumes
 `CBE_Anniversary2025_Grandma_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Grandma_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Grandma_07'], items=['Stack of Volumes'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA**: My guests, welcome! You have played my game of secrets well, and now it is your turn to ask the questions.
 **GRANDMA**: I will pull them out of the hat, one by one. The first one is...
@@ -252,9 +249,9 @@ Every story in which Grandma speaks.
 **JACKIE** (Doubtful): How about the Mafia? Is there a connection?
 **GRANDMA** (Charming): You have watched too many movies, my dear Jackie.
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Grandma_08
+### Five-Year Secret Celebration — item discovered: Library Cart
 `CBE_Anniversary2025_Grandma_05_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Grandma_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Grandma_08'], items=['Library Cart'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA**: Next question: "What happened to Charlie and where is he now?"
 **GRANDMA** (Thinking): I believe you wrote this one, Maddie.
@@ -262,9 +259,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Discouraged): I wish I could give you a better answer, but your Grandpa has always been a very secretive man.
 **GRANDMA**: Perhaps we will find out one day - I certainly hope so.
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Grandma_09
+### Five-Year Secret Celebration — item discovered: Bookcase
 `CBE_Anniversary2025_Grandma_08_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Grandma_09'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Grandma_09'], items=['Bookcase'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA**: The third question: "Did you dress up as the Ghost on Halloween? If not, do you know who did?"
 **GRANDMA** (Charming): Roddy, I am aware of your feelings towards ghosts, but I did not contrive to give you a fright last Halloween.
@@ -272,9 +269,9 @@ Every story in which Grandma speaks.
 **RODDY** (Surprised): But--
 **GRANDMA** (Doubtful): That is my answer, and I'm sticking to it.
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Grandma_10
+### Five-Year Secret Celebration — item discovered: Moving Bookcases
 `CBE_Anniversary2025_Grandma_10_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Grandma_10'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Grandma_10'], items=['Moving Bookcases'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA**: On to the next one. "Did you ever receive a letter from me about 20 years ago?"
 **GRANDMA** (Surprised): Is this from you, Julius??
@@ -283,9 +280,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Thinking): Not that I remember. Should I have?
 **ANTIQUEDEALER** (Discouraged): Err, I suppose not... Never mind!
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Grandma_11
+### Five-Year Secret Celebration — item discovered: Hidden Safe
 `CBE_Anniversary2025_Grandma_11_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Grandma_11'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Grandma_11'], items=['Hidden Safe'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA**: "Where do babies come from?" Mason, I presume this question is yours.
 **MASON** (Worried): Hah, I was just kidding!
@@ -308,9 +305,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Encouraging): Here's to us and the Mansion, Grandma!
 **GRANDMA** (Joyous): Hear, hear!
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Slides_04
+### Five-Year Secret Celebration — item discovered: Projector
 `CBE_Anniversary2025_Slides_04_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Slides_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Slides_04'], items=['Projector'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA**: Welcome, my dear guests.
 **GRANDMA**: You are probably wondering why I invited you here tonight.
@@ -324,10 +321,9 @@ Every story in which Grandma speaks.
   _earlier:_ ~~Are you ready to play?~~ (until 25.07.01)
 **GRANDMA** (Charming): Are you ready to play?
 
-### CBE_BackyardBash2024 — item discovered: 4625231
+### Spooktacular Backyard Bash — item discovered: Backyard Theater Active
 `CBE_BackyardBash2024_BackyardTheaterActive_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_BackyardBash2024, items=['4625231'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_BackyardBash2024, items=['CBE_BackyardBash2024_BackyardTheaterActive_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, itemKeys=['CBE_BackyardBash2024_BackyardTheaterActive_01'], items=['Backyard Theater Active'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: Welcome to our Halloween movie marathon, everyone!
 **MADDIE** (Encouraging): What great costumes, all around.
@@ -342,10 +338,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Encouraging): Let's get the movies rolling. Find a seat, grab some snacks, and enjoy!
 **MADDIE** (Encouraging): Where did Pearl disappear to?
 
-### CBE_BackyardBash2024 — item discovered: 99249474
+### Spooktacular Backyard Bash — item discovered: Candy Ogre
 `CBE_BackyardBash2024_CandyOgre_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_BackyardBash2024, items=['99249474'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_BackyardBash2024, items=['CBE_BackyardBash2024_CandyMonsters_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, itemKeys=['CBE_BackyardBash2024_CandyMonsters_08'], items=['Candy Ogre'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Joyous): Who's the winner of the costume competition?
 **MADDIE**: I vote for Pearl!
@@ -388,10 +383,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Thinking): What's up with him? You'd almost think he's...
 **GRANDMA** (Doubtful): Afraid of ghosts?
 
-### CBE_BackyardBash2024 — item discovered: 63533881
+### Spooktacular Backyard Bash — item discovered: Trick & Treat Bag
 `CBE_BackyardBash2024_MaddiesHalloweenGetUp_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_BackyardBash2024, items=['63533881'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_BackyardBash2024, items=['CBE_BackyardBash2024_MaddiesCostume_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, itemKeys=['CBE_BackyardBash2024_MaddiesCostume_04'], items=['Trick & Treat Bag'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): My costume could not be more perfect.
 **MADDIE** (Relaxed): I can't wait to see Grandma's face!
@@ -401,9 +395,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Worried): Wha-- Nothing, just looking for... aaaa... scarf.
 **GRANDMA** (Doubtful): I'm onto you, dearie.
 
-### CBE_BackyardBash2024 — decoration CBE_Backyardbash2024_Decoration_Slot04
+### Spooktacular Backyard Bash — decoration CBE_Backyardbash2024_Decoration_Slot04
 `CBE_BackyardBash2024_MonstrousMutt_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_Backyardbash2024_Decoration_Slot04, event=CBE_BackyardBash2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_Backyardbash2024_Decoration_Slot04, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA**: The Mansion has never looked this haunted before. It is almost... ghostly!
 **MADDIE** (Worried): I know. There's something weird in the air this Halloween...
@@ -412,9 +406,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Surprised): MASON!
 **MASON** (Encouraging): Hahahaha! Got you!
 
-### CBE_Easter2023 — decoration CBE_Easter2023_Decoration19
+### Egg Hunt 2023 — decoration CBE_Easter2023_Decoration19
 `CBE_Easter2023_AFluffleOfRabbits` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_Easter2023_Decoration19, event=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_Easter2023_Decoration19, event=Egg Hunt 2023, eventKey=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE**: That's a whole bunch of rabbits.
 **GRANDMA** (Joyous): Fluffle!
@@ -423,9 +417,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Encouraging): Oh, like a school of fish, or pride of lions?
 **GRANDMA** (Relaxed): Or my favorite... A murder of crows.
 
-### CBE_Easter2023 — decoration CBE_Easter2023_Decoration23
+### Egg Hunt 2023 — decoration CBE_Easter2023_Decoration23
 `CBE_Easter2023_EggCart` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_Easter2023_Decoration23, event=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_Easter2023_Decoration23, event=Egg Hunt 2023, eventKey=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE** (Joyous): I've made sure there'll be plenty of eggs to go around!
 **GRANDMA**: I can see that dearie, how did you get so many?
@@ -436,9 +430,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): I know!
 **GRANDMA** (Relaxed): Just making sure...
 
-### CBE_Easter2023 — decoration CBE_Easter2023_Decoration14
+### Egg Hunt 2023 — decoration CBE_Easter2023_Decoration14
 `CBE_Easter2023_SeasonalArchway` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_Easter2023_Decoration14, event=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_Easter2023_Decoration14, event=Egg Hunt 2023, eventKey=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE** (Relaxed): I used to love going on your egg hunts Grandma! You used to hide them so well.
 **GRANDMA** (Charming): Used to? I still do, dearie... You should go find them, before they spoil.
@@ -494,17 +488,17 @@ Every story in which Grandma speaks.
 **MADDIE** (Encouraging): Well, I didn’t want to spoil the surprise - it’s part of the full winter experience package!  
   _earlier:_ ~~Everything was still there, in perfect order. He clearly intended to go back but never did.~~ (until 25.10.01)
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_Points_03
+### Haunted Halloween — item discovered: Wrapped Lollipop
 `CBE_Halloween2025_Points_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_Points_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Points_03'], items=['Wrapped Lollipop'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Frustrated): What are you two up to?
 **GRANDMA** (Frustrated): I happened to look out of the window and saw you creeping in the bushes. For a second, I thought we had burglars!
 **MASON** (Encouraging): We're not creeping. We're ghost hunting!
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_Points_10
+### Haunted Halloween — item discovered: Cauldron of Candy
 `CBE_Halloween2025_Points_10_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_Points_10'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Points_10'], items=['Cauldron of Candy'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA**: Mason, I am sure you know there is no such thing as ghosts.
 **MASON** (Relaxed): That's what Maddie keeps telling me, but she's wrong.
@@ -516,10 +510,10 @@ Every story in which Grandma speaks.
 **MASON** (Surprised): You saw them too?
 **GRANDMA** (Doubtful): I think I did, but it was a long time ago...
 
-### CBE_HolidayWorkshop2024 — item discovered: 16461437
+### Bella's Holiday Workshop — item discovered: Grandma
 `CBE_HolidayWorkshop2024_CharacterGrandma_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['16461437'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_CharacterGrandma_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterGrandma_02'], items=['Grandma'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterGrandma_01'], items=['Grandma'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA**: I dread to ask why the postman keeps delivering boxes to the Mansion.  
   _earlier:_ ~~Season's greetings, Ursula! I have a little holiday surprise for you.~~ (until 25.10.01)
@@ -528,9 +522,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Relaxed): Call it a little holiday surprise!  
   _earlier:_ ~~Oh...~~ (until 25.10.01)
 
-### CBE_JoysOfTheSea2023 — decoration CBE_JoysOfTheSea2023_Decoration_Slot04
+### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot04
 `CBE_JoysOfTheSea2023_Decoration_Slot04_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot04, event=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot04, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **EMILIO** (Doubtful): ...
 **MADDIE**: Emilio? You look worried.
@@ -541,9 +535,9 @@ Every story in which Grandma speaks.
 **EMILIO** (Surprised): Exactly! One of the very reasons I decided to come here and study it!
 **GRANDMA** (Frustrated): Hmmmm...
 
-### CBE_JoysOfTheSea2023 — decoration CBE_JoysOfTheSea2023_Decoration_Slot09
+### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot09
 `CBE_JoysOfTheSea2023_Decoration_Slot09_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot09, event=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot09, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **GRANDMA** (Discouraged): I’m sorry, dearie. I thought it was junk, so I threw it in the trash!
 **EMILIO** (Encouraging): <i>*sigh*</i> I guess it was junk, Mrs. Boulton. We sort of got carried away with the mystery of it all...
@@ -551,19 +545,18 @@ Every story in which Grandma speaks.
 **EMILIO**: Yes... I guess we’ll never know if it contained a map to a treasure of untold riches, Roddy...
 **RODDY**: I guess so, bud...
 
-### CBE_JoysOfTheSea2023 — decoration CBE_JoysOfTheSea2023_Decoration_Slot15
+### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot15
 `CBE_JoysOfTheSea2023_Decoration_Slot15_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot15, event=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot15, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE** (Relaxed): I don’t care what people say... Yellow works on everybody!
 **GRANDMA** (Joyous): Looks like we should start calling him captain now.
 **MADDIE** (Encouraging): Ha ha ha! Captain Boulton...
 **GRANDMA** (Charming): Wouldn’t be the first time, dearie!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300789
+### The Joys of the Sea — item discovered: Humpback Whale
 `CBE_JoysOfTheSea2023_Fish11_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300789'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_Fish_11'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_Fish_11'], items=['Humpback Whale'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: And here we are! The majestic Humpback whales are some of the largest animals in the world!
 **MADDIE** (Encouraging): They're huge!
@@ -571,10 +564,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): Wait until you hear Maddie sing! That'll change your mind!
 **MADDIE** (Surprised): Grandma!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300782
+### The Joys of the Sea — item discovered: Puffer Fish
 `CBE_JoysOfTheSea2023_Fish4_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300782'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_Fish_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_Fish_04'], items=['Puffer Fish'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: The unique defense strategies of puffer fish emphasize the importance of being careful with aquatic life!
 **EMILIO**: While their first line of defense is to inflate into a large and more difficult form to swallow, often with spikes...
@@ -582,10 +574,9 @@ Every story in which Grandma speaks.
 **EMILIO** (Surprised): Th- That's right! You know your fish Mrs. Boulton!
 **GRANDMA** (Charming): Just the <i>interesting</i> ones, dearie.
 
-### CBE_JoysOfTheSea2023 — item discovered: 300785
+### The Joys of the Sea — item discovered: Swordfish
 `CBE_JoysOfTheSea2023_Fish7_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300785'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_Fish_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_Fish_07'], items=['Swordfish'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: Swordfish are incredibly fast and considered one of the fastest fish in the sea!
 **EMILIO**: Some can go up to 60 miles per hour!
@@ -594,10 +585,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Annoyed): ...
 **RODDY**: What?! It's a legitimate question!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300786
+### The Joys of the Sea — item discovered: Dolphin
 `CBE_JoysOfTheSea2023_Fish8_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300786'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_Fish_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_Fish_08'], items=['Dolphin'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: Dolphins are one of the most intelligent animals on the Earth! They have large brains and show complex social behavior.
 **EMILIO**: They also have a remarkable sense called echolocation that helps them navigate and hunt!
@@ -605,10 +595,9 @@ Every story in which Grandma speaks.
 **DEB** (Doubtful): What's that sis?
 **GRANDMA** (Joyous): Nothing, dearie!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300731
+### The Joys of the Sea — item discovered: Grandma's Boathouse
 `CBE_JoysOfTheSea2023_GrandmasBoathouse_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300731'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_GrandmasBoathouse_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_GrandmasBoathouse_04'], items=["Grandma's Boathouse"], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: This is a nice-looking boathouse, Mrs. Boulton!
 **GRANDMA** (Charming): Thank you, dearie! We originally had it for “other” reasons, but now it’ll be used to explore our wonderful seas!
@@ -642,10 +631,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Joyous): Wonderful?!!
 **EMILIO** (Encouraging): Ha ha! Yes. Exactly!
 
-### CBE_LuckyCatch — item discovered: 97054162
+### Lucky Catch — item discovered: Hopewell Pollock
 `CBE_LuckyCatchWinter2023_CommonPollock_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['97054162'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch2023_CommonPollock_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch2023_CommonPollock_01'], items=['Hopewell Pollock'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): You caught a Hopewell Pollock!
 **MADDIE** (Joyous): And a big one, too!
@@ -653,8 +641,7 @@ Every story in which Grandma speaks.
 
 ### Lucky Catch Winter — entering board
 `CBE_LuckyCatchWinter2023_Intro_Dialogue` · seen 24.04.01–26.07.01
-- trigger: event, event=Lucky Catch Winter, eventId=CBE_LuckyCatchWinter2023, eventType=Collectible Board Event, moment=entering board (versions 24.04.01–24.07.01)
-- trigger: event, event=CBE_LuckyCatchWinter2023, eventId=CBE_LuckyCatchWinter2023, eventType=Collectible Board Event, moment=entering board (versions 24.09.02–24.09.03)
+- trigger: event, event=Lucky Catch Winter, eventId=CBE_LuckyCatchWinter2023, eventType=Collectible Board Event, moment=entering board (versions 24.04.01–24.09.03)
 - trigger: event, event=Lucky Catch Winter, eventId=LC_Winter, eventType=Collectible Board Event, moment=entering board (versions 24.11.02–26.05.01)
 - trigger: event, event=Winter Lucky Catch, eventId=LC_Winter, eventType=Collectible Board Event, moment=entering board (versions 26.06.01–26.07.01)
 
@@ -665,10 +652,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Relaxed): I think it was definitely me... I have the photos to prove it!
 **GRANDMA** (Thinking): Hmmm, so it is time for a little re-match!
 
-### CBE_LuckyCatch — item discovered: 61737094
+### Lucky Catch — item discovered: Swordfish
 `CBE_LuckyCatchWinter2023_UltimateSwordfish_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['61737094'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch2023_UltimateSwordfish_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch2023_UltimateSwordfish_01'], items=['Swordfish'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Whooooah, a swordfish! Can you handle it?
 **GRANDMA** (Surprised): Phew! There is still some strength left in this old lady but... nnggh... maybe a bit of help would not hurt!
@@ -677,60 +663,55 @@ Every story in which Grandma speaks.
   _earlier:_ ~~It would make so many tasty pies…~~ (until 25.10.01)
 **MADDIE** (Relaxed): It's time to release it, Grandma!
 
-### CBE_LuckyCatch — item discovered: 82311027
+### Lucky Catch — item discovered: Greater Amberjack
 `CBE_LuckyCatchWinter2023_VeryRareGreaterAmberjack_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['82311027'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch2023_VeryRareGreatAmberjack_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch2023_VeryRareGreatAmberjack_01'], items=['Greater Amberjack'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: I think I caught a Greater Amberjack!
 **GRANDMA**: Did you know that it has also been called a 'donkey fish' and 'sailors choice'?
 **MADDIE** (Thinking): I bet it has a fascinating history.
 **GRANDMA** (Charming): And it props up my position in our little competition nicely!
 
-### CBE_LuckyCatch — item discovered: 300890
+### Lucky Catch — item discovered: Blue Marlin
 `CBE_LuckyCatch_BlueMarlin` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300890'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_UltimateBlueMarlin_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_UltimateBlueMarlin_01'], items=['Blue Marlin'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Charming): What a struggle! She gave me quite a fight!
 **GRANDMA** (Thinking): She? 
 **MADDIE** (Encouraging): Female Blue Marlins are sometimes four times larger than males! 
 **MADDIE** (Relaxed): And this one is HUGE!
 
-### CBE_LuckyCatch — item discovered: 300848
+### Lucky Catch — item discovered: 300848
 `CBE_LuckyCatch_BootsLv1` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300848'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['28381275'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Autumn_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Winter_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Spring_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['300848'], items=['300848'], moment=item discovered (versions 23.09.02–25.06.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['28381275'], items=['28381275'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_FishingClothes_01'], items=['CBE_LuckyCatch_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer_FishingClothes_01'], items=['LC_Summer_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Autumn_FishingClothes_01'], items=['LC_Autumn_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Winter_FishingClothes_01'], items=['LC_Winter_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_FishingClothes_01'], items=['LC_Halloween_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Spring_FishingClothes_01'], items=['LC_Spring_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: What's this?
 **GRANDMA** (Joyous): It's Julius' other boot! He's been looking for that for ages! Don't throw it away!
 **MADDIE** (Surprised): Are we seriously going to keep it?!! This thing belongs in the trash!
 
-### CBE_LuckyCatch — item discovered: 300885
+### Lucky Catch — item discovered: Dorado
 `CBE_LuckyCatch_Dorado` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300885'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_UncommonDorado_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_UncommonDorado_01'], items=['Dorado'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Well done, Grandma! 
 **GRANDMA** (Surprised): I... I wasn't actually expecting to catch anything!
 **GRANDMA** (Surprised): That fish is almost as big as you!
 
-### CBE_LuckyCatch — item discovered: 58894029
+### Lucky Catch — item discovered: The ultimate Fishing Rod
 `CBE_LuckyCatch_EpicGoldenRod` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['58894029'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['14422124'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_GoldenFishingRodEpic_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer_GoldenFishingRodEpic_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Autumn_GoldenFishingRodEpic_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Winter_GoldenFishingRodEpic_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_GoldenFishingRodEpic_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Spring_GoldenFishingRodEpic_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_GoldenFishingRodEpic_01'], items=['The ultimate Fishing Rod'], moment=item discovered (versions 23.09.02–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer_GoldenFishingRodEpic_01'], items=['The ultimate Fishing Rod'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Autumn_GoldenFishingRodEpic_01'], items=['The ultimate Fishing Rod'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Winter_GoldenFishingRodEpic_01'], items=['The ultimate Fishing Rod'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_GoldenFishingRodEpic_01'], items=['The ultimate Fishing Rod'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Spring_GoldenFishingRodEpic_01'], items=['The ultimate Fishing Rod'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: There's no hiding from me now, big fish. This rod has your name on it!
 **GRANDMA**: I remember hearing a story once about a fisher catching something very large and rare with a rod like that...
@@ -743,10 +724,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Surprised): OH! Well, it looks like a piece of old junk. You should throw it in the trash when we get back.
 **MADDIE** (Thinking): Does that look like C.B. to you?
 
-### CBE_LuckyCatch_Name — entering board
+### Lucky Catch — entering board
 `CBE_LuckyCatch_Intro` · seen 24.04.01–26.07.01
-- trigger: event, event=CBE_LuckyCatch_Name, eventId=CBE_LuckyCatch, eventType=Collectible Board Event, moment=entering board (versions 24.04.01–24.05.06)
-- trigger: event, event=Lucky Catch, eventId=CBE_LuckyCatch, eventType=Collectible Board Event, moment=entering board (versions 24.07.01–26.07.01)
+- trigger: event, event=Lucky Catch, eventId=CBE_LuckyCatch, eventType=Collectible Board Event, moment=entering board (versions 24.04.01–26.07.01)
 
 **MADDIE**: Nothing like going out for a relaxing fishing trip, right Grandma?
 **GRANDMA** (Encouraging): That's right dearie. I can't wait to make my scrumptious fish pie!
@@ -755,46 +735,42 @@ Every story in which Grandma speaks.
 **MADDIE** (Encouraging): This time you'll be taking a photo, and then we can frame it. Who knows what we'll catch?!
 **GRANDMA** (Charming): That's true, dearie. The ocean is awfully deep. You never know what secrets you might dredge up...
 
-### CBE_LuckyCatch — item discovered: 300843
+### Lucky Catch — item discovered: Rod, Hook and Line
 `CBE_LuckyCatch_MaxCommonWoodenFishingRod` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300843'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['15570960'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_FishingRodCommon_05'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer_FishingRodCommon_05'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Autumn_FishingRodCommon_05'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Winter_FishingRodCommon_05'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_FishingRodCommon_05'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Spring_FishingRodCommon_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_FishingRodCommon_05'], items=['Rod, Hook and Line'], moment=item discovered (versions 23.09.02–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer_FishingRodCommon_05'], items=['Rod, Hook and Line'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Autumn_FishingRodCommon_05'], items=['Rod, Hook and Line'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Winter_FishingRodCommon_05'], items=['Rod, Hook and Line'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_FishingRodCommon_05'], items=['Rod, Hook and Line'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Spring_FishingRodCommon_05'], items=['Rod, Hook and Line'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): Alright, let's go fishing!
 **GRANDMA** (Relaxed): I'm sure we'll catch something with these... 
 **MADDIE** (Thinking): Hmm, maybe you're right. We should find some better rods!
 
-### CBE_LuckyCatch — item discovered: 300851
+### Lucky Catch — item discovered: 300851
 `CBE_LuckyCatch_MaxFishingClothesAndGoldenRod` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300851'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['28381272'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Autumn_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Winter_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Spring_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['300851'], items=['300851'], moment=item discovered (versions 23.09.02–25.06.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['28381272'], items=['28381272'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_FishingClothes_04'], items=['CBE_LuckyCatch_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer_FishingClothes_04'], items=['LC_Summer_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Autumn_FishingClothes_04'], items=['LC_Autumn_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Winter_FishingClothes_04'], items=['LC_Winter_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_FishingClothes_04'], items=['LC_Halloween_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Spring_FishingClothes_04'], items=['LC_Spring_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Charming): Now nothing can stop us from catching the most epic of fish!
 **GRANDMA** (Surprised): Good grief, dearie! You look like someone out of a fishing magazine.
 **MADDIE** (Joyous): That's right! The title would read, "Maddie Boulton: EPIC Fisher!"
 
-### CBE_LuckyCatch — item discovered: 300838
+### Lucky Catch — item discovered: Large Tackle Box
 `CBE_LuckyCatch_MaxFishingToolBox` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300838'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['87672056'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_FishingToolContainers_10'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer_FishingToolContainers_10'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Autumn_FishingToolContainers_10'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Winter_FishingToolContainers_10'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_FishingToolContainers_10'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Spring_FishingToolContainers_10'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_FishingToolContainers_10'], items=['Large Tackle Box'], moment=item discovered (versions 23.09.02–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer_FishingToolContainers_10'], items=['Large Tackle Box'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Autumn_FishingToolContainers_10'], items=['Large Tackle Box'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Winter_FishingToolContainers_10'], items=['Large Tackle Box'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_FishingToolContainers_10'], items=['Large Tackle Box'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Spring_FishingToolContainers_10'], items=['Large Tackle Box'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Joyous): Everything is ready to catch us some big fish!
 **GRANDMA** (Joyous): Hahaha! You sound like your Grandpa Charlie. 
@@ -817,42 +793,37 @@ Every story in which Grandma speaks.
 **GRANDMA** (Doubtful): I doubt there's anything of worth in there...
 **MADDIE**: Don't be like that! Maybe this has something important inside!
 
-### CBE_LuckyCatch — item discovered: 20117147
+### Lucky Catch — item discovered: Professional Fishing Rod
 `CBE_LuckyCatch_RareCompetitionRod` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['20117147'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['33712582'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_CompetitionFishingRodRare_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer_CompetitionFishingRodRare_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Autumn_CompetitionFishingRodRare_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Winter_CompetitionFishingRodRare_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_CompetitionFishingRodRare_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Spring_CompetitionFishingRodRare_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_CompetitionFishingRodRare_01'], items=['Professional Fishing Rod'], moment=item discovered (versions 23.09.02–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer_CompetitionFishingRodRare_01'], items=['Professional Fishing Rod'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Autumn_CompetitionFishingRodRare_01'], items=['Professional Fishing Rod'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Winter_CompetitionFishingRodRare_01'], items=['Professional Fishing Rod'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_CompetitionFishingRodRare_01'], items=['Professional Fishing Rod'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Spring_CompetitionFishingRodRare_01'], items=['Professional Fishing Rod'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): This'll up our fishing game!
 **GRANDMA** (Thinking): That's a fancy-looking rod you have there. Looks complicated too.
 **MADDIE** (Joyous): The manual was over forty-eight pages long! I loved it!
 
-### CBE_LuckyCatch — item discovered: 300884
+### Lucky Catch — item discovered: Snapper
 `CBE_LuckyCatch_RedSnapper` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300884'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_CommonSnapper_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_CommonSnapper_01'], items=['Snapper'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Joyous): Oooh, a Red Snapper! 
 **GRANDMA** (Encouraging): A very tasty fish! Can't we just keep this one at least? 
 **MADDIE** (Charming): Grab that camera, Grandma. Remember, this is catch and release!
 
-### CBE_LuckyCatch — item discovered: 300886
+### Lucky Catch — item discovered: Roosterfish
 `CBE_LuckyCatch_Roosterfish` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300886'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_RareRoosterfish_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_RareRoosterfish_01'], items=['Roosterfish'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Wowee, those spines look sharp!
 **GRANDMA** (Charming): Quick Maddie, let me take this photo before you pierce yourself!
 
-### CBE_LuckyCatch — item discovered: 300888
+### Lucky Catch — item discovered: Tarpon
 `CBE_LuckyCatch_Tarpon` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300888'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_EpicTarpon_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_EpicTarpon_01'], items=['Tarpon'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Joyous): Look at this fish, Grandma! Isn't it great?!
 **GRANDMA** (Charming): It's magnificent! I guess your fancy gear really helped!
@@ -865,37 +836,33 @@ Every story in which Grandma speaks.
 **MADDIE** (Thinking): Hmm, there's some writing on them, but they're falling apart, fast!
 **GRANDMA** (Charming): Old wet paper tends to do that, dearie!
 
-### CBE_LuckyCatch — item discovered: 300917
+### Lucky Catch — item discovered: Silver Fishing Trophy
 `CBE_LuckyCatch_TrophyLv6` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300917'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_FishingTrophies_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_FishingTrophies_06'], items=['Silver Fishing Trophy'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **GRANDMA** (Encouraging): You must be doing something right to win that!
 **MADDIE** (Encouraging): Thank you, Grandma, but I think this one should go to you!
 **GRANDMA**: How come, dearie?
 **MADDIE** (Charming): It's for the best photograph!
 
-### CBE_LuckyCatch — item discovered: 300918
+### Lucky Catch — item discovered: Gold Fishing Trophy
 `CBE_LuckyCatch_TrophyLv7` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300918'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_FishingTrophies_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_FishingTrophies_07'], items=['Gold Fishing Trophy'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **GRANDMA**: That's impressive. What's it for?
 **MADDIE** (Relaxed): Most prolific fisher! We caught a lot of fish, after all. 
 
-### CBE_LuckyCatch — item discovered: 300919
+### Lucky Catch — item discovered: Gold Fishing Trophy
 `CBE_LuckyCatch_TrophyLv8` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300919'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_FishingTrophies_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_FishingTrophies_08'], items=['Gold Fishing Trophy'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): I don't quite believe it...
 **MADDIE** (Surprised): I won the Master Fisher trophy!
 **GRANDMA** (Encouraging): Congratulations, dearie! You really deserve it!
 
-### CBE_LuckyCatch — item discovered: 300887
+### Lucky Catch — item discovered: Wahoo
 `CBE_LuckyCatch_Wahoo` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300887'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_VeryRareWahoo_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_VeryRareWahoo_01'], items=['Wahoo'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE**: This fish looks really fast! I'm surprised I caught it.
 **GRANDMA** (Worried): Are you sure you can pick it up? Maybe you can sit next to it?
@@ -909,10 +876,9 @@ Every story in which Grandma speaks.
 **MADDIE**: How come?
 **GRANDMA** (Surprised): Well, according to the fish guide, you just beat the world record!
 
-### CBE_LuckyCatch — item discovered: 300889
+### Lucky Catch — item discovered: Yellowfin Tuna
 `CBE_LuckyCatch_YellowfinTuna` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300889'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_LegendaryYellowfinTuna_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_LegendaryYellowfinTuna_01'], items=['Yellowfin Tuna'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Relaxed): This one was quite the battle, but I got it in the end!
 **GRANDMA** (Worried): I swear I almost saw you get pulled off the side twice...
@@ -923,16 +889,16 @@ Every story in which Grandma speaks.
 - trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_Food_02
+### Maddie in Japan — item discovered: Onigiri
 `CBE_MaddieInJapan2025_Food_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_Food_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_Food_02'], items=['Onigiri'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Encouraging): I thought we could have a Japanese dinner before you go away. You know, to help you get used to the local cuisine.
 **MADDIE** (Relaxed): Sounds great!
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_Food_04
+### Maddie in Japan — item discovered: Miso Soup
 `CBE_MaddieInJapan2025_Food_04_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_Food_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_Food_04'], items=['Miso Soup'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): What a feast, Grandma! How did you learn to cook this?
 **GRANDMA** (Charming): I picked up a trick or two while I was traveling.
@@ -942,9 +908,9 @@ Every story in which Grandma speaks.
 - trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_GettingReady_02
+### Maddie in Japan — item discovered: Travel Charger
 `CBE_MaddieInJapan2025_GettingReady_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_GettingReady_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_GettingReady_02'], items=['Travel Charger'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA**: It is a long flight to Japan, dearie. Are you sure you’ve got everything you need?
 **GRANDMA** (Discouraged): Snacks? A warm jumper for the plane? It is always cold on a plane with the over-eager air-conditioning...  
@@ -955,9 +921,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Worried): But you’re going far away, and I just want to make sure you are prepared for everything.
 **MADDIE** (Encouraging): Don’t worry, Grandma. I’ll be OK!
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_GettingReady_10
+### Maddie in Japan — item discovered: Luggage
 `CBE_MaddieInJapan2025_GettingReady_10_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_GettingReady_10'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_GettingReady_10'], items=['Luggage'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Worried): I sometimes have this nightmare where I’m leaving for the airport, and my bags are totally unpacked.
 **MADDIE** (Encouraging): This time I’m so prepared. I’ve got my passport and tickets, a travel pillow for the long flight, and plenty of snacks.
@@ -987,9 +953,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: Some things you have to find out for yourself, dearie.
 **GRANDMA**: But come now. I've made you some sushi, and you can tell me all about your trip!
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_ShibuyaPostcard_F_02
+### Maddie in Japan — item discovered: Postcard from Shibuya Crossing
 `CBE_MaddieInJapan2025_ShibuyaPostcard_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_ShibuyaPostcard_F_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_ShibuyaPostcard_F_02'], items=['Postcard from Shibuya Crossing'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Encouraging): Did Maddie send another postcard? Is she OK?
 **KAZUKO** (Encouraging): She is fine, and she’s enjoying Japan.
@@ -1005,9 +971,9 @@ Every story in which Grandma speaks.
 - trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_Souvenirs_04
+### Maddie in Japan — item discovered: Daruma Doll
 `CBE_MaddieInJapan2025_Souvenirs_04_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_Souvenirs_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_Souvenirs_04'], items=['Daruma Doll'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): Is there something you'd like me to bring for you?
 **GRANDMA** (Encouraging): No, dearie. I've already got everything I need.
@@ -1052,9 +1018,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Surprised): I have?
 **GRANDMA** (Frustrated): You have no idea. Come on - it is time for a cup of tea and some pie.
 
-### CBE_MaddieInParis — decoration CBE_MaddieInParis2026v2_Decoration_Slot16
+### Maddie In Paris — decoration CBE_MaddieInParis2026v2_Decoration_Slot16
 `CBE_MaddieInParis_Slot_16_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=CBE_MaddieInParis2026v2_Decoration_Slot16, event=CBE_MaddieInParis, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=CBE_MaddieInParis2026v2_Decoration_Slot16, event=Maddie In Paris, eventKey=CBE_MaddieInParis, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **PEARL** (Thinking): Is Maddie off on her travels again?
 **GRANDMA**: She is indeed - in Paris.
@@ -1063,9 +1029,9 @@ Every story in which Grandma speaks.
 **PEARL** (Doubtful): Seize the day and all that?
 **GRANDMA** (Relaxed): Precisely.
 
-### CBE_MaddieInParis — decoration CBE_MaddieInParis2026v2_Decoration_Slot19
+### Maddie In Paris — decoration CBE_MaddieInParis2026v2_Decoration_Slot19
 `CBE_MaddieInParis_Slot_19_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=CBE_MaddieInParis2026v2_Decoration_Slot19, event=CBE_MaddieInParis, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=CBE_MaddieInParis2026v2_Decoration_Slot19, event=Maddie In Paris, eventKey=CBE_MaddieInParis, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **RODDY**: When is Maddie coming back from Paris? I’m asking because I, err, had a renovation-related question for her.
 **RODDY**: It seems like she has been having a lot of fun!
@@ -1077,9 +1043,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): She’ll be back in just a couple of days.
 **RODDY** (Charming): Oh, right… Thank you.
 
-### CBE_MaddieInParis — decoration CBE_MaddieInParis2026v2_Decoration_Slot23
+### Maddie In Paris — decoration CBE_MaddieInParis2026v2_Decoration_Slot23
 `CBE_MaddieInParis_Slot_23_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=CBE_MaddieInParis2026v2_Decoration_Slot23, event=CBE_MaddieInParis, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=CBE_MaddieInParis2026v2_Decoration_Slot23, event=Maddie In Paris, eventKey=CBE_MaddieInParis, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **LADY VOYANCE** (Surprised): Ursula, the universe is sending me the strangest vibrations. They’re making me feel QUITE uneasy!
 **LADY VOYANCE** (Thinking): Is Maddie back from Paris yet?
@@ -1087,10 +1053,9 @@ Every story in which Grandma speaks.
 **LADY VOYANCE** (Encouraging): Ah, good, good. It will be nice to have her home. You never know with all the strange food and the… French-ness.
 **GRANDMA** (Charming): No, you never know!
 
-### CBE_MasonsEggHunt2024 — item discovered: 89107184
+### Egg-cellent Adventure — item discovered: Grandma's Good Purse
 `CBE_MasonsEggHunt2024_GrandmasPurse_08_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_MasonsEggHunt2024, items=['89107184'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_MasonsEggHunt2024, items=['CBE_MasonsEggHunt2024_GrandmasPurse_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Egg-cellent Adventure, eventKey=CBE_MasonsEggHunt2024, itemKeys=['CBE_MasonsEggHunt2024_GrandmasPurse_08'], items=["Grandma's Good Purse"], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MASON**: Grandma Ursula is PRETTY sly, but she can't outfox me! I know there's something in this purse I need for my plan...
 **MASON**: A combination lock - typical! It would stop any average person, but not me.
@@ -1098,10 +1063,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Doubtful): What are you doing, Mason?
 **MASON** (Surprised): N-nothing at all, Grandma Ursula! Nothing at all!
 
-### CBE_RecycleRunway2024 — item discovered: 73093570
+### Recycle Runway — item discovered: Main Stage
 `CBE_RecycleRunway2024_MainStage_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['73093570'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_StageDecorations_12'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_StageDecorations_12'], items=['Main Stage'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Encouraging): What a show, dearies! Your couture creations really are impressive.
 **JACKIE**: Thank you!
@@ -1125,9 +1089,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: Don't look so shocked, dearie - not everything has a secret meaning.
 **MADDIE** (Relaxed): Come on, let's celebrate! The first round of Hopeberry juice is on me!
 
-### CBE_SweetMess — item discovered: CBE_SweetMess_Character5_01
+### Sweet Mess Express — item discovered: Grandma
 `CBE_SweetMess_Character_05_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SweetMess, items=['CBE_SweetMess_Character5_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Sweet Mess Express, eventKey=CBE_SweetMess, itemKeys=['CBE_SweetMess_Character5_01'], items=['Grandma'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Frustrated): Is this true what I hear? Did you two break Maddie’s chocolate machine?
 **HANK** (Thinking): Kind of… but we did fix it!
@@ -1386,18 +1350,17 @@ Every story in which Grandma speaks.
 **MADDIE** (Relaxed): Maybe she is right this time.
 **GRANDMA** (Charming): Well, at least 20% right. You never know, Maddie. You never know!
 
-### CBE_VeilOfFate2023 — item discovered: 86958071
+### Veil of Fate — item discovered: Table of Fate
 `CBE_VeilOfFate2023_TableOfDestiny_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['86958071'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_FortuneTelling_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_FortuneTelling_07'], items=['Table of Fate'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE**: I wonder whether Ursula might let me set up shop on her driveway...
 **GRANDMA** (Frustrated): Ehem!
 **LADY VOYANCE**: Well, maybe not!
 
-### CBE_VeilOfFate2024 — decoration CBE_VeilOfFate2023_Decoration_Slot07
+### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot07
 `CBE_VeilOfFate2024_Decoration_Slot07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot07, event=CBE_VeilOfFate2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot07, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: How about you, Ursula? Do you want to peek into the future?
 **GRANDMA** (Charming): The present is just fine for me.
@@ -1873,10 +1836,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Worried): Huh. Grandma's definitely deflecting, and I want to know why!
 **—**: Ever get the feeling Grandma bakes just to avoid difficult questions?
 
-### GoldenWeek2024 — item discovered: 39241102
+### GoldenWeek2024 — item discovered: Green wisdom Pouch
 `GoldenWeek2024_Producer_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=GoldenWeek2024, items=['39241102'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=GoldenWeek2024, items=['GoldenWeek2024_Producer_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=GoldenWeek2024, eventKey=GoldenWeek2024, itemKeys=['GoldenWeek2024_Producer_01'], items=['Green wisdom Pouch'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): ここにはもっと良いリサイクルシステムが必要だわ。100年前のコンポストじゃ全然足りない！
 **GRANDMA** (Charming): 日本に住んでいたときに、いいことを学んだのよ！日本では「知恵袋」と呼ばれるエコな考え方があるんだけど...。
@@ -1983,18 +1945,16 @@ Every story in which Grandma speaks.
 **MADDIE** (Annoyed): Walter and Minnie... The newest additions to the Boulton family recipe for secrets.  
   _earlier:_ ~~Walter and Minnie… The newest additions to the Boulton family recipe for secrets.~~ (until 25.10.01)
 
-### LBE_BushBonanza — item discovered: 18670868
+### The Great Bush Bonanza! — item discovered: Seedling Tray
 `LBE_BushBonanzaSeedlingProducers` · seen 23.09.02–26.07.01
-- trigger: item, event=LBE_BushBonanza, items=['18670868'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LBE_BushBonanza, items=['LBE_BushBonanza_SeedlingProducers_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Great Bush Bonanza!, eventKey=LBE_BushBonanza, itemKeys=['LBE_BushBonanza_SeedlingProducers_06'], items=['Seedling Tray'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Joyous): This’ll definitely help me grow some amazing shrubs!
 **GRANDMA** (Encouraging): I might use this to grow some lovely tomatoes for my pies too!
 
-### LBE_May2023 — item discovered: 300624
+### The Great Bake-off — item discovered: Ice Cream Cake
 `LBE_May2023CakeChain3` · seen 23.09.02–26.07.01
-- trigger: item, event=LBE_May2023, items=['300624'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LBE_May2023, items=['LBE_May2023_Cakes_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Great Bake-off, eventKey=LBE_May2023, itemKeys=['LBE_May2023_Cakes_03'], items=['Ice Cream Cake'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **GRANDMA** (Encouraging): Oh dearie, you're not going to win with something that small!
 **GRANDMA** (Encouraging): If you want to win, you must think big!
@@ -2022,113 +1982,99 @@ Every story in which Grandma speaks.
 **PEARL** (Encouraging): Anyway, let the great bake-off begin!  
   _earlier:_ ~~Anyway, let the great bakeoff begin!~~ (until 24.09.02)
 
-### LBE_Xmas2023 — item discovered: 67000408
+### Gingerbread Jamboree — item discovered: Nice Table
 `LBE_Xmas2023_BetterGingerBreadTable_01_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=LBE_Xmas2023, items=['67000408'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=LBE_Xmas2023, items=['LBE_Xmas2023_BetterGingerBreadTable_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Gingerbread Jamboree, eventKey=LBE_Xmas2023, itemKeys=['LBE_Xmas2023_BetterGingerBreadTable_01'], items=['Nice Table'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **GRANDMA**: Use your creativity and don't spare the icing!
 
-### LBE_Xmas2023 — item discovered: 67494475
+### Gingerbread Jamboree — item discovered: Cold Big Stove
 `LBE_Xmas2023_BigOvenInactive_01_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=LBE_Xmas2023, items=['67494475'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=LBE_Xmas2023, items=['LBE_Xmas2023_BigOvenInactive_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Gingerbread Jamboree, eventKey=LBE_Xmas2023, itemKeys=['LBE_Xmas2023_BigOvenInactive_01'], items=['Cold Big Stove'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **GRANDMA** (Joyous): This is just like my trusted stove!
 **CHERRY**: My great-grandmother had one just like it, too!
 
-### LBE_Xmas2023 — item discovered: 90985883
+### Gingerbread Jamboree — item discovered: Big Stove Baking
 `LBE_Xmas2023_BigOvenProducing_01_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=LBE_Xmas2023, items=['90985883'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=LBE_Xmas2023, items=['LBE_Xmas2023_BigOvenProducing_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Gingerbread Jamboree, eventKey=LBE_Xmas2023, itemKeys=['LBE_Xmas2023_BigOvenProducing_01'], items=['Big Stove Baking'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **GRANDMA** (Charming): The stove is nice and hot - in you go!
 **CHERRY** (Surprised): What?? Oh, you mean the gingerbread...
 
-### LBE_Xmas2023 — item discovered: 48406956
+### Gingerbread Jamboree — item discovered: Burned Piece of Gingerbread
 `LBE_Xmas2023_BurnedGingerbread_01_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=LBE_Xmas2023, items=['48406956'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=LBE_Xmas2023, items=['LBE_Xmas2023_BurnedGingerbread_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Gingerbread Jamboree, eventKey=LBE_Xmas2023, itemKeys=['LBE_Xmas2023_BurnedGingerbread_01'], items=['Burned Piece of Gingerbread'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **CHERRY** (Thinking): I think we left them in the oven for too long...
 **GRANDMA** (Annoyed): You think?
 
-### LBE_Xmas2023 — item discovered: 58337923
+### Gingerbread Jamboree — item discovered: Gingerbread house
 `LBE_Xmas2023_GingerBreadHouse_06_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=LBE_Xmas2023, items=['58337923'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=LBE_Xmas2023, items=['LBE_Xmas2023_GingerBreadHouse_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Gingerbread Jamboree, eventKey=LBE_Xmas2023, itemKeys=['LBE_Xmas2023_GingerBreadHouse_06'], items=['Gingerbread house'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **GRANDMA** (Encouraging): Not bad, Cherry! It just needs a roof and the rest of the walls!
 
-### LBE_Xmas2023 — item discovered: 58337921
+### Gingerbread Jamboree — item discovered: Decorated House
 `LBE_Xmas2023_GingerBreadHouse_08_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=LBE_Xmas2023, items=['58337921'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=LBE_Xmas2023, items=['LBE_Xmas2023_GingerBreadHouse_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Gingerbread Jamboree, eventKey=LBE_Xmas2023, itemKeys=['LBE_Xmas2023_GingerBreadHouse_08'], items=['Decorated House'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **GRANDMA** (Charming): That is a very impressive gingerbread house, Cherry! But it has no chimney...
 
-### LBE_Xmas2023 — item discovered: 58337919
+### Gingerbread Jamboree — item discovered: Fantastic House
 `LBE_Xmas2023_GingerBreadHouse_10_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=LBE_Xmas2023, items=['58337919'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=LBE_Xmas2023, items=['LBE_Xmas2023_GingerBreadHouse_10'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Gingerbread Jamboree, eventKey=LBE_Xmas2023, itemKeys=['LBE_Xmas2023_GingerBreadHouse_10'], items=['Fantastic House'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **CHERRY** (Encouraging): Phew, what a masterpiece - and we did it together!
 **GRANDMA**: Indeed! Just like the recipe said.
 
-### LBE_Xmas2023 — item discovered: 61500296
+### Gingerbread Jamboree — item discovered: Bag of Flour
 `LBE_Xmas2023_GingerbreadDough_01_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=LBE_Xmas2023, items=['61500296'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=LBE_Xmas2023, items=['LBE_Xmas2023_GingerbreadDough_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Gingerbread Jamboree, eventKey=LBE_Xmas2023, itemKeys=['LBE_Xmas2023_GingerbreadDough_01'], items=['Bag of Flour'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **CHERRY** (Surprised): This recipe looks REALLY old! Do you know who could've written it?
 **GRANDMA** (Thinking): No idea... But they clearly knew what they are doing!
 
-### LBE_Xmas2023 — item discovered: 61500292
+### Gingerbread Jamboree — item discovered: Cookie Cutters
 `LBE_Xmas2023_GingerbreadDough_05_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=LBE_Xmas2023, items=['61500292'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=LBE_Xmas2023, items=['LBE_Xmas2023_GingerbreadDough_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Gingerbread Jamboree, eventKey=LBE_Xmas2023, itemKeys=['LBE_Xmas2023_GingerbreadDough_05'], items=['Cookie Cutters'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **GRANDMA**: The dough is ready for baking!
 **CHERRY**: And it looks delicious! What does the book say?
 **GRANDMA** (Doubtful): "Share the dough between bakers and proceed in harmony."
 **CHERRY** (Thinking): Well, if that's what it says...
 
-### LBE_Xmas2023 — item discovered: 86039857
+### Gingerbread Jamboree — item discovered: Little Gingerbread
 `LBE_Xmas2023_GingerbreadPlates_01_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=LBE_Xmas2023, items=['86039857'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=LBE_Xmas2023, items=['LBE_Xmas2023_GingerbreadPlates_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Gingerbread Jamboree, eventKey=LBE_Xmas2023, itemKeys=['LBE_Xmas2023_GingerbreadPlates_01'], items=['Little Gingerbread'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **CHERRY**: Look at all this glorious gingerbread! I can't believe we made it all... together!
 **GRANDMA** (Joyous): Christmas does funny things to people.
 
-### LBE_Xmas2023 — item discovered: 79587463
+### Gingerbread Jamboree — item discovered: Cold Oven
 `LBE_Xmas2023_MediumOvenInactive_01_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=LBE_Xmas2023, items=['79587463'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=LBE_Xmas2023, items=['LBE_Xmas2023_MediumOvenInactive_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Gingerbread Jamboree, eventKey=LBE_Xmas2023, itemKeys=['LBE_Xmas2023_MediumOvenInactive_01'], items=['Cold Oven'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **CHERRY** (Doubtful): Did you plug it in?
 **GRANDMA** (Doubtful): Of course, I did! Try turning the knobs again...
 
-### LBE_Xmas2023 — item discovered: 79721955
+### Gingerbread Jamboree — item discovered: Oven Baking
 `LBE_Xmas2023_MediumOvenProducing_01_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=LBE_Xmas2023, items=['79721955'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=LBE_Xmas2023, items=['LBE_Xmas2023_MediumOvenProducing_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Gingerbread Jamboree, eventKey=LBE_Xmas2023, itemKeys=['LBE_Xmas2023_MediumOvenProducing_01'], items=['Oven Baking'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **CHERRY**: I see a light - in the oven, I mean!
 **GRANDMA** (Relaxed): It's working! I hope this gingerbread does not burn...
 
-### LBE_Xmas2023 — item discovered: 64059845
+### Gingerbread Jamboree — item discovered: Cold Microwave Oven
 `LBE_Xmas2023_SmalIOvenInactive_01_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=LBE_Xmas2023, items=['64059845'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=LBE_Xmas2023, items=['LBE_Xmas2023_SmalIOvenInactive_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Gingerbread Jamboree, eventKey=LBE_Xmas2023, itemKeys=['LBE_Xmas2023_SmalIOvenInactive_01'], items=['Cold Microwave Oven'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **CHERRY** (Doubtful): This thing does not seem to be working.
 **GRANDMA** (Encouraging): Did you try turning it on and off again?
 
-### LBE_Xmas2023 — item discovered: 47852364
+### Gingerbread Jamboree — item discovered: Microwave Oven Baking
 `LBE_Xmas2023_SmalIOvenProducing_01_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=LBE_Xmas2023, items=['47852364'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=LBE_Xmas2023, items=['LBE_Xmas2023_SmalIOvenProducing_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Gingerbread Jamboree, eventKey=LBE_Xmas2023, itemKeys=['LBE_Xmas2023_SmalIOvenProducing_01'], items=['Microwave Oven Baking'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **MADDIE** (Encouraging): There! Now we're in business!
 **GRANDMA** (Encouraging): Let's see if we can bake a batch...
@@ -2145,19 +2091,18 @@ Every story in which Grandma speaks.
 **MADDIE** (Doubtful): You got it. Now can we go?
 **GRANDMA** (Relaxed): Let's do it!
 
-### CBE_LuckyCatch — item discovered: 31951534
+### Lucky Catch — item discovered: Permit
 `LC_CommonPermit_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['31951534'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_CommonPermit_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_CommonPermit_01'], items=['Permit'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): Nice catch, Grandma? Is it a dorado?
 **GRANDMA** (Thinking): No, the color is wrong and fins look different... I think this is a permit.
 **MADDIE** (Thinking): Permit? How on earth did you know that?
 **GRANDMA** (Charming): Always be prepared, dearie, and do your research!
 
-### CBE_LuckyCatch — item discovered: LC_EpicPacificSailfish_01
+### Lucky Catch — item discovered: Pacific Sailfish
 `LC_EpicPacificSailfish_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_EpicPacificSailfish_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_EpicPacificSailfish_01'], items=['Pacific Sailfish'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Surprised): Is that a... shark?
 **GRANDMA**: My dear, that's a Sailfish.
@@ -2167,10 +2112,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Relaxed): I have also been doing some light reading. We go fishing often enough that I want to be well informed.
 **MADDIE** (Relaxed): Very impressive, Grandma!
 
-### CBE_LuckyCatch — item discovered: 5064496
+### Lucky Catch — item discovered: Southern Bluefin Tuna
 `LC_EpicSouthernBluefinTuna_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['5064496'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_EpicSouthernBluefinTuna_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_EpicSouthernBluefinTuna_01'], items=['Southern Bluefin Tuna'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Frustrated): This fish is putting up a fight! Feels like we've been reeling it for a month!
 **GRANDMA** (Thinking): It is coming closer, and I think I just saw a flash of silver!
@@ -2207,10 +2151,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Joyous): Not around here, dearie! That must have been quite a dream.
 **MADDIE** (Hesitant): You have no idea!
 
-### CBE_LuckyCatch — item discovered: 92077087
+### Lucky Catch — item discovered: Grandma Grandma
 `LC_Halloween_ColossalGrandmaGrandma_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['92077087'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_ColossalGrandmaGrandma_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_ColossalGrandmaGrandma_01'], items=['Grandma Grandma'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): WHAT is that in the water?
 **GRANDMA** (Encouraging): I think you just spotted the most elusive fish in the sea...
@@ -2229,19 +2172,18 @@ Every story in which Grandma speaks.
 **GRANDMA** (Encouraging): A Crimson-lipped Batfish! Look at those ears!
 **MADDIE** (Worried): A fish with ears?
 
-### CBE_LuckyCatch — item discovered: 18504775
+### Lucky Catch — item discovered: Mummy Fish
 `LC_Halloween_CommonMummyFish_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['18504775'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_CommonMummyFish_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_CommonMummyFish_01'], items=['Mummy Fish'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Encouraging): Well done, dearie! You caught a big one!
 **MADDIE** (Surprised): Err... What kind of fish is that??
 **GRANDMA** (Thinking): It is a mummyfish! Very rare and interesting.
 **MADDIE** (Thinking): Yeah, of c-course!
 
-### CBE_LuckyCatch — item discovered: LC_Halloween_EpicCountSquidula_01
+### Lucky Catch — item discovered: Count Squidula
 `LC_Halloween_EpicCountSquidula_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_EpicCountSquidula_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_EpicCountSquidula_01'], items=['Count Squidula'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Thinking): The conditions are perfect for catching a Count Squidula.
 **MADDIE** (Frustrated): Wh... You know, I’m not even going to ask.  
@@ -2251,20 +2193,18 @@ Every story in which Grandma speaks.
 **MADDIE** (Discouraged): Are you talking about a squid that looks like a vampire?
 **GRANDMA** (Encouraging): You’re catching on, dearie!
 
-### CBE_LuckyCatch — item discovered: 70518223
+### Lucky Catch — item discovered: Terrafish
 `LC_Halloween_EpicTerrafish_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['70518223'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_EpicTerrafish_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_EpicTerrafish_01'], items=['Terrafish'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): Grandma...!
 **GRANDMA**: Yes, dear?
 **MADDIE** (Surprised): There's a fish in the boat!
 **GRANDMA** (Encouraging): The terrafish is able to crawl as well as swim. It is a real super fish!
 
-### CBE_LuckyCatch — item discovered: 33457861
+### Lucky Catch — item discovered: Dragon Koi
 `LC_Halloween_LegendaryDragonKoi_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['33457861'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_LegendaryDragonKoi_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_LegendaryDragonKoi_01'], items=['Dragon Koi'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Joyous): I think I've got one, Grandma...
 **MADDIE** (Joyous): Yes!
@@ -2272,9 +2212,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Doubtful): Isn't it obvious? It's a dragon koi!
 **GRANDMA** (Doubtful): But don't worry - it does not breathe fire.
 
-### CBE_LuckyCatch — item discovered: LC_Halloween_LegendaryTheBlobFish_01
+### Lucky Catch — item discovered: The Blob Fish
 `LC_Halloween_LegendaryTheBlobFish_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_LegendaryTheBlobFish_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_LegendaryTheBlobFish_01'], items=['The Blob Fish'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Worried): Is it time to go home yet? I’m getting a really spooky feeling out here...  
   _earlier:_ ~~Is it time to go home yet? I’m getting a really spooky feeling out here…~~ (until 25.10.01)
@@ -2284,28 +2224,26 @@ Every story in which Grandma speaks.
 **MADDIE** (Annoyed): In your worst nightmares?
 **GRANDMA** (Charming): Very funny!
 
-### CBE_LuckyCatch — item discovered: 94841660
+### Lucky Catch — item discovered: Cutethulhu
 `LC_Halloween_RareCutethulhu_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['94841660'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_RareCutethulhu_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_RareCutethulhu_01'], items=['Cutethulhu'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): I've never caught an octopus in these waters.
 **MADDIE** (Thinking): How do you catch one with a fishing rod, anyway??
 **GRANDMA** (Encouraging): But it is adorable, isn't it?
 
-### CBE_LuckyCatch — item discovered: 36651142
+### Lucky Catch — item discovered: Reverse Mermaid
 `LC_Halloween_UltimateReverseMermaid_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['36651142'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_UltimateReverseMermaid_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_UltimateReverseMermaid_01'], items=['Reverse Mermaid'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Charming): Do you believe in mermaids, dear?
 **MADDIE** (Worried): I don't think so...
 **GRANDMA** (Joyous): Look what I caught!
 **MADDIE** (Surprised): Aaaaaah!
 
-### CBE_LuckyCatch — item discovered: LC_Halloween_UncommonHobgoblinShark_01
+### Lucky Catch — item discovered: Hobgoblin Shark
 `LC_Halloween_UncommonHobgoblinShark_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_UncommonHobgoblinShark_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_UncommonHobgoblinShark_01'], items=['Hobgoblin Shark'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Thinking): I caught something! I think it looks like some kind of shark.
 **GRANDMA** (Surprised): Don’t give up! Keep reeling it in.
@@ -2313,20 +2251,18 @@ Every story in which Grandma speaks.
 **GRANDMA** (Thinking): No wonder it put up a fight! It’s a Hobgoblin Shark.
 **GRANDMA** (Joyous): The meanest fish in these waters!
 
-### CBE_LuckyCatch — item discovered: 65904000
+### Lucky Catch — item discovered: Jack-O-Angler
 `LC_Halloween_UncommonJackOAngler_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['65904000'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_UncommonJackOAngler_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_UncommonJackOAngler_01'], items=['Jack-O-Angler'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: This one is putting up a REAL fight!
 **MADDIE** (Worried): And it looks REALLY mean!
 **MADDIE** (Worried): B-but... Is that a jack-o'-lantern??
 **GRANDMA** (Charming): Naturally! It is called the jack-o'-angler, after all.
 
-### CBE_LuckyCatch — item discovered: 32668559
+### Lucky Catch — item discovered: Foxy Catfish
 `LC_Halloween_VeryRareSexyCatfish_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['32668559'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_VeryRareSexyCatfish_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_VeryRareSexyCatfish_01'], items=['Foxy Catfish'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Whoooah!
 **MADDIE** (Surprised): I'm... speechless. Is that a... catfish?
@@ -2334,9 +2270,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Thinking): This is getting weirder by the moment...
 **MADDIE** (Thinking): What IS going on??
 
-### CBE_LuckyCatch — item discovered: LC_Halloween_VeryRareWerefish_01
+### Lucky Catch — item discovered: Werefish
 `LC_Halloween_VeryRareWerefish_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_VeryRareWerefish_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_VeryRareWerefish_01'], items=['Werefish'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Worried): Can you hear howling?
 **GRANDMA**: Well, well! There must be a Werefish nearby!
@@ -2347,10 +2283,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Surprised): Ouch!
 **GRANDMA** (Charming): Come on, and catch the Werefish in the net so we can take a photo!
 
-### CBE_LuckyCatch — item discovered: 16991959
+### Lucky Catch — item discovered: Giant Sea Bass
 `LC_LegendaryGiantSeaBass_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['16991959'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_LegendaryGiantSeaBass_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_LegendaryGiantSeaBass_01'], items=['Giant Sea Bass'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): I've got one and it... it's big!
 **GRANDMA** (Worried): Can you reel it in?
@@ -2361,9 +2296,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Relaxed): So your generation, then!
 **GRANDMA** (Doubtful): Very funny.
 
-### CBE_LuckyCatch — item discovered: LC_LegendaryPacificHalibut_01
+### Lucky Catch — item discovered: Pacific Halibut
 `LC_LegendaryPacificHalibut_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_LegendaryPacificHalibut_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_LegendaryPacificHalibut_01'], items=['Pacific Halibut'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Worried): Yikes, what a looker! That has to be a Halibut!
 **MADDIE** (Worried): I just can't get over those weird eyes.
@@ -2371,19 +2306,18 @@ Every story in which Grandma speaks.
 **MADDIE** (Doubtful): Grandma!
 **GRANDMA** (Charming): One day you will let me take one home.
 
-### CBE_LuckyCatch — item discovered: 9963271
+### Lucky Catch — item discovered: Black Drum
 `LC_RareBlackDrum_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['9963271'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_RareBlackDrum_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_RareBlackDrum_01'], items=['Black Drum'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): What a monster! I-is that a black drum?
 **GRANDMA**: I think it is!
 **MADDIE** (Thinking): I thought it was much smaller - like a salmon.
 **GRANDMA** (Thinking): Not quite!
 
-### CBE_LuckyCatch — item discovered: LC_RareCuberaSnapper_01
+### Lucky Catch — item discovered: Cubera Snapper
 `LC_RareCuberaSnapper_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_RareCuberaSnapper_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_RareCuberaSnapper_01'], items=['Cubera Snapper'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Surprised): Dearie, I think I got a big one!
 **MADDIE**: Do you want me to reel it in for you, Grandma?
@@ -2392,9 +2326,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Relaxed): It looks like a huge snapper! Look at those teeth!
 **GRANDMA** (Joyous): Not bad, if I do say so myself.
 
-### CBE_LuckyCatch — item discovered: LC_CommonDogSnapper_01
+### Lucky Catch — item discovered: Dog Snapper
 `LC_Spring_CommonDogSnapper_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_CommonDogSnapper_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_CommonDogSnapper_01'], items=['Dog Snapper'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA**: Oh, my! This is a feisty one… a Dog Snapper, if I'm not mistaken!
 **MADDIE** (Joyous): You're right. Look at those teeth!
@@ -2402,9 +2336,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Annoyed): Grandma! That's not very nice!
 **GRANDMA** (Charming): What? I think it is charming.
 
-### CBE_LuckyCatch — item discovered: LC_EpicPorbeagle_01
+### Lucky Catch — item discovered: Porbeagle
 `LC_Spring_EpicPorbeagle_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_EpicPorbeagle_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_EpicPorbeagle_01'], items=['Porbeagle'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Encouraging): I think we've got a shark on the line.
 **GRANDMA** (Encouraging): And it's a fighter!
@@ -2428,9 +2362,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Encouraging): We're just keeping the tradition alive.
 **GRANDMA** (Joyous): Oh, alright! Let the fishing commence!
 
-### CBE_LuckyCatch — item discovered: LC_LegendaryAtlanticSturgeon_01
+### Lucky Catch — item discovered: Atlantic Sturgeon
 `LC_Spring_LegendaryAtlanticSturgeon_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_LegendaryAtlanticSturgeon_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_LegendaryAtlanticSturgeon_01'], items=['Atlantic Sturgeon'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Encouraging): Aha! I know this one. It is an Atlantic Sturgeon.
 **MADDIE** (Joyous): So it is! Did you know they can live up to sixty years? They're living fossils.
@@ -2440,27 +2374,25 @@ Every story in which Grandma speaks.
 **MADDIE** (Annoyed): Let the sturgeon go, Grandma.
 **GRANDMA** (Annoyed): Oh, fine. Spoilsport.
 
-### CBE_LuckyCatch — item discovered: 11585009
+### Lucky Catch — item discovered: Warsaw Grouper
 `LC_Spring_LegendaryWarsawGrouper_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['11585009'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_LegendaryWarsawGrouper_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_LegendaryWarsawGrouper_01'], items=['Warsaw Grouper'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): Wooooow, is that a fish or a whale??
 **MADDIE** (Relaxed): I think we need a bigger boat!
 **GRANDMA** (Annoyed): ...
 
-### CBE_LuckyCatch — item discovered: 6087763
+### Lucky Catch — item discovered: Conger
 `LC_Spring_RareConger_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['6087763'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_RareConger_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_RareConger_01'], items=['Conger'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): Watch your fingers - that slippery guy bites!
 **MADDIE** (Surprised): And it's putting up a fight, too!
 **MADDIE** (Surprised): Eeeek - he can go back...
 
-### CBE_LuckyCatch — item discovered: LC_RareStripedBass_01
+### Lucky Catch — item discovered: Striped Bass
 `LC_Spring_RareStripedBass_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_RareStripedBass_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_RareStripedBass_01'], items=['Striped Bass'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Thinking): What is this one? It has a striped back…
 **MADDIE** (Encouraging): A Striped Bass! Good catch, Grandma!
@@ -2468,9 +2400,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Joyous): You got it! Nice work.
 **GRANDMA** (Annoyed): Quite the workout! No wonder they call it sport fishing…
 
-### CBE_LuckyCatch — item discovered: LC_UltimateThresherShark_01
+### Lucky Catch — item discovered: Thresher Shark
 `LC_Spring_UltimateThresherShark_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_UltimateThresherShark_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_UltimateThresherShark_01'], items=['Thresher Shark'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Surprised): I think I have something BIG on the line, Maddie.
 **MADDIE** (Encouraging): Gosh, look at that tail! That's a Thresher Shark!
@@ -2479,9 +2411,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Joyous): But they're harmless to humans. We're much too big for them.
 **GRANDMA** (Charming): I think this one might give us a try… watch out!
 
-### CBE_LuckyCatch — item discovered: LC_UncommonPelagicStingray_01
+### Lucky Catch — item discovered: Pelagic Stingray
 `LC_Spring_UncommonPelagicStingray_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_UncommonPelagicStingray_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_UncommonPelagicStingray_01'], items=['Pelagic Stingray'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Worried): My goodness, will you look at that!
 **MADDIE** (Worried): Careful! I can take the picture from here, no need to reel it all the way in!
@@ -2489,10 +2421,9 @@ Every story in which Grandma speaks.
 **MADDIE**: A Stingray! A Pelagic Stingray to be precise. Careful of that tail!
 **GRANDMA** (Charming): Do not worry, dearie. I have dodged worse in my time.
 
-### CBE_LuckyCatch — item discovered: 23289313
+### Lucky Catch — item discovered: Red Drum
 `LC_Spring_UncommonRedDrum_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['23289313'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_UncommonRedDrum_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_UncommonRedDrum_01'], items=['Red Drum'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA**: What an adorable little fish!
 **MADDIE** (Thinking): You don't see that many red fish.
@@ -2500,10 +2431,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Thinking): And the red emperor?
 **MADDIE** (Doubtful): How do you know so much about fish all of a sudden?
 
-### CBE_LuckyCatch — item discovered: 26682829
+### Lucky Catch — item discovered: Atlantic Halibut
 `LC_Spring_VeryRareAtlanticHalibut_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['26682829'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_EpicAtlanticHalibut_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_EpicAtlanticHalibut_01'], items=['Atlantic Halibut'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): I can feel that fish watching us...
 **GRANDMA** (Thinking): It is a curious creature, and no mistake!
@@ -2511,9 +2441,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: The Atlantic halibut is really overfished, so you are right.
 **MADDIE**: Goodbye, big guy!
 
-### CBE_LuckyCatch — item discovered: LC_VeryRareMistyGrouper_01
+### Lucky Catch — item discovered: Misty Grouper
 `LC_Spring_VeryRareMistyGrouper_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_VeryRareMistyGrouper_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_VeryRareMistyGrouper_01'], items=['Misty Grouper'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Surprised): This is a big one. I might need a little help here!
 **MADDIE** (Encouraging): Look at those fins! They're spiky!
@@ -2548,34 +2478,34 @@ Every story in which Grandma speaks.
 - trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
 
 
-### CBE_LuckyCatch — item discovered: LC_Summer2026_FishingClothes_01
+### Lucky Catch — item discovered: LC_Summer2026_FishingClothes_01
 `LC_Summer_2026_BootsLv1` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer2026_FishingClothes_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer2026_FishingClothes_01'], items=['LC_Summer2026_FishingClothes_01'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **EMILIO** (Surprised): Oh, looks like I caught a...boot?
 **GRANDMA** (Encouraging): It's Julius' other boot! He's been looking for that for ages! Don't throw it away!
 **EMILIO** (Encouraging): I'm glad we got it out of the sea. Less trash in our oceans.
 
-### CBE_LuckyCatch — item discovered: LC_Summer2026_ColossalFishingRod_01
+### Lucky Catch — item discovered: Colossal Fishing Rod
 `LC_Summer_2026_ColossalFishingRod` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer2026_ColossalFishingRod_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer2026_ColossalFishingRod_01'], items=['Colossal Fishing Rod'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **EMILIO** (Surprised): Umm. Mrs. Boulton, what... is that?
 **GRANDMA** (Charming): My fishing rod, Emilio. What does it look like?
 **EMILIO** (Doubtful): ...you do know whale-fishing is illegal, right?
 
-### CBE_LuckyCatch — item discovered: LC_Summer_2026_ColossalMolaMola_01
+### Lucky Catch — item discovered: Mola Mola
 `LC_Summer_2026_ColossalMolaMola` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer_2026_ColossalMolaMola_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer_2026_ColossalMolaMola_01'], items=['Mola Mola'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **GRANDMA** (Surprised): WHAT is that?
 **EMILIO** (Encouraging): That is a Mola Mola, also known as an ocean sunfish! Amazing catch!
 **GRANDMA** (Discouraged): Poor little guy! It looks like just a fish head with no tail.
 **EMILIO**: Not so little! They are fascinating fish, even if... a little funny-looking!
 
-### CBE_LuckyCatch — item discovered: LC_Common_GreenMoray_01
+### Lucky Catch — item discovered: Green Moray
 `LC_Summer_2026_CommonGreenMoray_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Common_GreenMoray_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Common_GreenMoray_01'], items=['Green Moray'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **EMILIO** (Joyous): Look at what you've caught! Incredible!
 **GRANDMA** (Frustrated): It is definitely putting up a fight! What is it - an eel?
@@ -2585,16 +2515,16 @@ Every story in which Grandma speaks.
 **GRANDMA**: That doesn't sound very palatable. Back in you go!
 **EMILIO**: Ah. Well. I hope it finds its way back home. Hopewell Bay is not where you belong.
 
-### CBE_LuckyCatch — item discovered: LC_Summer2026_GoldenFishingRodEpic_01
+### Lucky Catch — item discovered: The ultimate Fishing Rod
 `LC_Summer_2026_EpicGoldenRod` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer2026_GoldenFishingRodEpic_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer2026_GoldenFishingRodEpic_01'], items=['The ultimate Fishing Rod'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **EMILIO** (Joyous): This is what I'm talking about! Oh, the specimens we'll be able to catch with this...
 **GRANDMA** (Charming): I remember hearing a story once about a fisherman catching something very large and rare with a rod like that...
 
-### CBE_LuckyCatch — item discovered: LC_Epic_Totoaba_01
+### Lucky Catch — item discovered: Totoaba
 `LC_Summer_2026_EpicTotoaba_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Epic_Totoaba_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Epic_Totoaba_01'], items=['Totoaba'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **EMILIO** (Surprised): Mrs. Boulton! Look at what you've caught! That's a Totoaba!
 **GRANDMA** (Thinking): That's... a really big fish! Are you sure it's not some kind of tuna?
@@ -2618,9 +2548,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Joyous): Oh, nevermind. And call me Grandma. Everyone else does.
 **EMILIO** (Encouraging): Umm, okay then. Let's get going! This is going to be so exciting!
 
-### CBE_LuckyCatch — item discovered: LC_Legendary_SmalltoothSawfish_01
+### Lucky Catch — item discovered: Smalltooth Sawfish
 `LC_Summer_2026_LegendarySmalltoothSawfish_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Legendary_SmalltoothSawfish_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Legendary_SmalltoothSawfish_01'], items=['Smalltooth Sawfish'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **EMILIO** (Joyous): Incredible! Look at that - a Smalltooth Sawfish! How is this possible?!
 **GRANDMA** (Joyous): It's probably not going to be the oddest thing you find here. Look at that sword!
@@ -2631,25 +2561,25 @@ Every story in which Grandma speaks.
 **EMILIO** (Annoyed): Not really - bycatching. Caught accidentally when fishing for other fish. Which is why...
 **EMILIO**: ...we better release this one now. Bye-bye, Mr. Sawfish! Best of luck!
 
-### CBE_LuckyCatch — item discovered: LC_Summer2026_FishingRodCommon_05
+### Lucky Catch — item discovered: Rod, Hook and Line
 `LC_Summer_2026_MaxCommonWoodenFishingRod` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer2026_FishingRodCommon_05'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer2026_FishingRodCommon_05'], items=['Rod, Hook and Line'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **EMILIO** (Encouraging): The humble fishing rod. Just what we need.
 **GRANDMA** (Charming): Humble is the right word.
 **EMILIO** (Doubtful): Hmm, maybe you're right. We should find some better rods!
 
-### CBE_LuckyCatch — item discovered: LC_Summer2026_FishingClothes_04
+### Lucky Catch — item discovered: LC_Summer2026_FishingClothes_04
 `LC_Summer_2026_MaxFishingClothesAndGoldenRod` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer2026_FishingClothes_04'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer2026_FishingClothes_04'], items=['LC_Summer2026_FishingClothes_04'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **GRANDMA** (Encouraging): Well now! No one can say you don't look ready to take on even the biggest fish, Emilio.
 **EMILIO** (Doubtful): I feel like a sports fisherman! Is all of this really necessary?
 **GRANDMA** (Joyous): It suits you. And it's all for the science, right?
 
-### CBE_LuckyCatch — item discovered: LC_Summer2026_FishingToolContainers_10
+### Lucky Catch — item discovered: Large Tackle Box
 `LC_Summer_2026_MaxFishingToolBox` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer2026_FishingToolContainers_10'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer2026_FishingToolContainers_10'], items=['Large Tackle Box'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **EMILIO**: Perfect! With this, our scientific journey of discovery can begin!
 **GRANDMA** (Doubtful): You mean our fishing trip.
@@ -2667,17 +2597,17 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): If you say so! At least I got some thrills. One of these days, I might get a blue whale on the hook!
 **EMILIO** (Surprised): A... wha...?!
 
-### CBE_LuckyCatch — item discovered: LC_Summer2026_CompetitionFishingRodRare_01
+### Lucky Catch — item discovered: Professional Fishing Rod
 `LC_Summer_2026_RareCompetitionRod` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer2026_CompetitionFishingRodRare_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer2026_CompetitionFishingRodRare_01'], items=['Professional Fishing Rod'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **GRANDMA** (Charming): I have something for you, Emilio. A new fishing rod!
 **EMILIO** (Surprised): This looks professional. Where did you get it?
 **GRANDMA** (Charming): Oh, you know. A lady has got to have her secrets.
 
-### CBE_LuckyCatch — item discovered: LC_Rare_EuropeanMonkfish_01
+### Lucky Catch — item discovered: European Monkfish
 `LC_Summer_2026_RareEuropeanMonkfish_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Rare_EuropeanMonkfish_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Rare_EuropeanMonkfish_01'], items=['European Monkfish'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **GRANDMA** (Worried): Huh? Emilio, what's this thing I caught? It is... rather weird.
 **EMILIO** (Encouraging): Oh! That's a European Monkfish, or Lophius piscatorius. A type of angler fish!
@@ -2686,9 +2616,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): I don't know about ancestors, but I know I do... Oh. You let it go.
 **EMILIO** (Joyous): Of course! I got a great picture too! Isn't this fun?
 
-### CBE_LuckyCatch — item discovered: LC_Ultimate_BluntnoseSixgillShark_01
+### Lucky Catch — item discovered: Bluntnose Sixgill Shark
 `LC_Summer_2026_UltimateBluntnoseSixgillShark_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Ultimate_BluntnoseSixgillShark_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Ultimate_BluntnoseSixgillShark_01'], items=['Bluntnose Sixgill Shark'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **GRANDMA** (Surprised): Emiiliooo...! I have got a beast on the line!
 **EMILIO** (Joyous): Oh! Ah-hah! Incredible! You've caught a dinosaur!
@@ -2699,9 +2629,9 @@ Every story in which Grandma speaks.
 **EMILIO** (Surprised): Better be careful. They've been known to attack submarines.
 **GRANDMA** (Encouraging): Back into the water with you! 
 
-### CBE_LuckyCatch — item discovered: LC_Uncommon_GreatBarracuda_01
+### Lucky Catch — item discovered: Great Barracuda
 `LC_Summer_2026_UncommonGreatBarracuda_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Uncommon_GreatBarracuda_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Uncommon_GreatBarracuda_01'], items=['Great Barracuda'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **EMILIO**: Ah! Look at those teeth! Do you know what it is, Mrs. Boulton?
 **GRANDMA** (Thinking): Grandma. That's... a barracuda. And a big one at that!
@@ -2710,9 +2640,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): Lots of muscle on it then, I gather?
 **EMILIO** (Joyous): Oh yes! Ah - there it went! Too bad. I would've liked to measure it... some can be over five feet long!
 
-### CBE_LuckyCatch — item discovered: LC_VeryRare_LemonShark_01
+### Lucky Catch — item discovered: Lemon Shark
 `LC_Summer_2026_VeryRareLemonShark_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_VeryRare_LemonShark_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_VeryRare_LemonShark_01'], items=['Lemon Shark'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **GRANDMA**: Hupp! I got a shark on the line! A very funnily colored shark!
 **EMILIO** (Joyous): Ah! You've caught a Lemon Shark! Quick, let's take a picture and let it return to its friends!
@@ -2720,34 +2650,31 @@ Every story in which Grandma speaks.
 **EMILIO** (Encouraging): Lemon Sharks are very social - although this one is quite far from its habitat. Curious.
 **GRANDMA** (Joyous): Oh-ho, this isn't anything yet. You should see what we've dredged out of the depths here, my dear...
 
-### CBE_LuckyCatch — item discovered: 40697700
+### Lucky Catch — item discovered: Colossal Fishing Rod
 `LC_Summer_ColossalFishingRod_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['40697700'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_ColossalFishingRod_01'], moment=item discovered (versions 26.03.01–26.04.02)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer_ColossalFishingRod_01'], moment=item discovered (versions 26.05.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Autumn_ColossalFishingRod_01'], moment=item discovered (versions 26.05.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Winter_ColossalFishingRod_01'], moment=item discovered (versions 26.05.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_ColossalFishingRod_01'], moment=item discovered (versions 26.05.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Spring_ColossalFishingRod_01'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_ColossalFishingRod_01'], items=['Colossal Fishing Rod'], moment=item discovered (versions 25.05.01–26.04.02)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer_ColossalFishingRod_01'], items=['Colossal Fishing Rod'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Autumn_ColossalFishingRod_01'], items=['Colossal Fishing Rod'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Winter_ColossalFishingRod_01'], items=['Colossal Fishing Rod'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_ColossalFishingRod_01'], items=['Colossal Fishing Rod'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Spring_ColossalFishingRod_01'], items=['Colossal Fishing Rod'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **MADDIE** (Surprised): Where did you get that fishing rod??
 **GRANDMA** (Charming): They say to get the right tools for the job.
 **MADDIE** (Relaxed): What are you hoping to catch - a humpback whale?
 
-### CBE_LuckyCatch — item discovered: 10046170
+### Lucky Catch — item discovered: Mola Mola
 `LC_Summer_ColossalMolaMola_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['10046170'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_ColossalMolaMola_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_ColossalMolaMola_01'], items=['Mola Mola'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): WHAT is that?
 **MADDIE** (Thinking): Let me check the guidebook... I think it is a mola mola!
 **MADDIE** (Thinking): Poor little guy! It looks like just a fish head with no tail. 
 **GRANDMA** (Charming): I bet it would still be tasty!
 
-### CBE_LuckyCatch — item discovered: 71109959
+### Lucky Catch — item discovered: Common Snook
 `LC_Summer_CommonSnook_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['71109959'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_CommonSnook_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_CommonSnook_01'], items=['Common Snook'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): This snook put up quite a fight!
 **GRANDMA** (Surprised): Well done, dearie!
@@ -2770,10 +2697,9 @@ Every story in which Grandma speaks.
 - trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
 
 
-### CBE_LuckyCatch — item discovered: 47072279
+### Lucky Catch — item discovered: Shortfin Mako Shark
 `LC_Summer_UltimateMakoShark_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['47072279'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_UltimateMakoShark_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_UltimateMakoShark_01'], items=['Shortfin Mako Shark'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): I wonder if there are sharks in these wat... WHOA!
 **GRANDMA** (Joyous): Hold on! You caught a big one, dearie!
@@ -2784,10 +2710,9 @@ Every story in which Grandma speaks.
 - trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
 
 
-### CBE_LuckyCatch — item discovered: 32202864
+### Lucky Catch — item discovered: White Marlin
 `LC_Summer_VeryRareWhiteMarlin_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['32202864'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_VeryRareWhiteMarlin_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_VeryRareWhiteMarlin_01'], items=['White Marlin'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Whoa! Look out for that spike!
 **GRANDMA** (Charming): Actually, it is called a "bill."
@@ -2798,10 +2723,9 @@ Every story in which Grandma speaks.
 - trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
 
 
-### CBE_LuckyCatch — item discovered: 22055558
+### Lucky Catch — item discovered: Black Marlin
 `LC_UltimateBlackMarlin_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['22055558'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_UltimateBlackMarlin_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_UltimateBlackMarlin_01'], items=['Black Marlin'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): Is there a fish you've always wanted to catch?
 **GRANDMA** (Relaxed): I've always hoped we might catch a black marlin on one of our fishing trips.
@@ -2809,9 +2733,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Surprised): Huh! I think I've got something pretty big on my hook...
 **MADDIE** (Surprised): Yes, you do! And it's a black marlin!
 
-### CBE_LuckyCatch — item discovered: LC_UncommonAlbacore_01
+### Lucky Catch — item discovered: Albacore
 `LC_UncommonAlbacore_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_UncommonAlbacore_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_UncommonAlbacore_01'], items=['Albacore'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Surprised): Whoa, did you see that silvery fish?? It was fast. And BIG!
 **GRANDMA** (Frustrated): What in the world was it?
@@ -2821,10 +2745,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Joyous): Ha! I got it!
 **GRANDMA** (Joyous): You caught an Albacore, a type of tuna. A very nice catch, indeed!
 
-### CBE_LuckyCatch — item discovered: 93896594
+### Lucky Catch — item discovered: Atlantic Cod
 `LC_UncommonAtlanticCod_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['93896594'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_UncommonAtlanticCod_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_UncommonAtlanticCod_01'], items=['Atlantic Cod'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Joyous): I think I caught a cod!
 **GRANDMA** (Charming): You know, cod is an excellent culinary fish...
@@ -2834,10 +2757,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Encouraging): Catch and release, remember?
 **GRANDMA** (Doubtful): Oh, fine!
 
-### CBE_LuckyCatch — item discovered: 29896142
+### Lucky Catch — item discovered: Atlantic Sailfish
 `LC_VeryRareAtlanticSailfish_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['29896142'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_VeryRareAtlanticSailfish_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_VeryRareAtlanticSailfish_01'], items=['Atlantic Sailfish'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: Did you see that??
 **GRANDMA** (Thinking): I think we've got a sailfish on the hook!
@@ -2893,10 +2815,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Joyous): Ha! I guess it could have been worse!
 **MADDIE** (Thinking): What do you mean by that?
 
-### LDE_GrandmasBirthday2023 — item discovered: 84897276
+### Grandma's Pool Party — item discovered: Recording Equipment
 `LDE_GrandmasBirthday2023_PodcastEquipmentChain_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=LDE_GrandmasBirthday2023, items=['84897276'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LDE_GrandmasBirthday2023, items=['LDE_GrandmasBirthday2023_PodcastEquipment_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Grandma's Pool Party, eventKey=LDE_GrandmasBirthday2023, itemKeys=['LDE_GrandmasBirthday2023_PodcastEquipment_07'], items=['Recording Equipment'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Joyous): Happy Birthday, Grandma!
 **GRANDMA** (Surprised): What’s this dearie?
@@ -2915,9 +2836,9 @@ Every story in which Grandma speaks.
 - trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
 
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_CharacterGrandma_02
+### Green Acres Quest — item discovered: Grandma
 `LDE_GreenAcresQuest_CharacterGrandma_02_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_CharacterGrandma_02'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterGrandma_02'], items=['Grandma'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **GRANDMA** (Surprised): Look at this! You’ve been working hard! This garden already looks so much better.
 **MADDIE** (Encouraging): Thank you! It’s not bad, if I do say so myself.
@@ -2951,19 +2872,17 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): Not bad for a “bit of a mess,” is it?
 **MADDIE** (Relaxed): Not bad at all.
 
-### LDE_HolidayCarols2023 — item discovered: 5606524
+### The Fa-la-la-la Follies — item discovered: On the Twelfth day of Christmas...
 `LDE_HolidayCarols2023_12DaysOfChristmas_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['5606524'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_12DaysOfChristmas_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_12DaysOfChristmas_06'], items=['On the Twelfth day of Christmas...'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA**: You can't beat the classics!
 **MASON** (Relaxed): I bet you were singing these songs when the dinosaurs were around...
 **GRANDMA** (Frustrated): I am not that old, Mason!
 
-### LDE_HolidayCarols2023 — item discovered: 1936170
+### The Fa-la-la-la Follies — item discovered: Hood
 `LDE_HolidayCarols2023_BandCostume_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['1936170'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_BandCostume_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_BandCostume_05'], items=['Hood'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): We really are wrapping up warm.
 **GRANDMA** (Charming): I don't want you to catch a cold. God forbid you all lose your voice!
@@ -2988,18 +2907,16 @@ Every story in which Grandma speaks.
 **MADDIE** (Charming): Just friends like Roddy, Julius, Deb, Mason... Maybe Emilio....
 **GRANDMA** (Charming): Sounds like you'll have a lot of fun!
 
-### LDE_HolidayCarols2023 — item discovered: 96623189
+### The Fa-la-la-la Follies — item discovered: Grandma's Present
 `LDE_HolidayCarols2023_HolidayPresent_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['96623189'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_HolidayPresent_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_HolidayPresent_06'], items=["Grandma's Present"], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Charming): Sharp and pointy...
 **GRANDMA** (Charming): Just the way I like my knives!
 
-### LDE_HolidayCarols2023 — item discovered: 96623185
+### The Fa-la-la-la Follies — item discovered: Mason's Present
 `LDE_HolidayCarols2023_HolidayPresent_10_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['96623185'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_HolidayPresent_10'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_HolidayPresent_10'], items=["Mason's Present"], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Joyous): That looks unmistakeably like a bicycle... I could be wrong!
 **MASON** (Joyous): How did Santa know??
@@ -3023,27 +2940,24 @@ Every story in which Grandma speaks.
 **MASON**: Maddie! And Emilio! KISSING! Yuck!
 **GRANDMA** (Surprised): Well, well, well... The mistletoe worked!
 
-### LDE_HolidayCarols2023 — item discovered: 77115036
+### The Fa-la-la-la Follies — item discovered: Cracker
 `LDE_HolidayCarols2023_ReverseCracker_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['77115036'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_ReverseCracker_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_ReverseCracker_07'], items=['Cracker'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE** (Thinking): How does this open?
 **GRANDMA** (Charming): We both hold one end and... pull!
 
-### LDE_HolidayCarols2023 — item discovered: 99099030
+### The Fa-la-la-la Follies — item discovered: Band Sweater
 `LDE_HolidayCarols2023_SewingSupply_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['99099030'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_SewingSupply_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_SewingSupply_06'], items=['Band Sweater'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): This looks great, Grandma!
 **GRANDMA**: Thank you, dearie.
 **MADDIE** (Relaxed): You could even say you're "sleigh-in’ it."
 
-### LDE_HolidayCarols2023 — item discovered: 49172936
+### The Fa-la-la-la Follies — item discovered: Harp
 `LDE_HolidayCarols2023_StringInstrument_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['49172936'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_StringInstrument_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_StringInstrument_07'], items=['Harp'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA**: I'll take care of the harp, dearie.
 **MADDIE** (Surprised): Wow, sounds good! Can you... play it?
@@ -3063,33 +2977,33 @@ Every story in which Grandma speaks.
 **GRANDMA** (Thinking): This year, I want to give her a chance to have a little break from all of that work. For that, I will need some help - and I know just who to ask.
 **GRANDMA** (Charming): The first stop is the spruce forest!
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_ChristmasTreeB_01
+### Holiday Oddities — item discovered: Decorated Tree
 `LDE_HolidayOddities2025_ChristmasTreeB_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_ChristmasTreeB_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_ChristmasTreeB_01'], items=['Decorated Tree'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Relaxed): Now that we have found the perfect tree, and we have a basket full of materials to make ornaments, we can head back to the Mansion.
 **RODDY** (Relaxed): What’s the next tradition?
 **GRANDMA** (Charming): I will tell you all about it when we get to the shed.
 **MASON** (Thinking): Is there something in the shed that's going to help us create a holiday miracle?
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_ChristmasTreeC_01
+### Holiday Oddities — item discovered: Lit-up Tree
 `LDE_HolidayOddities2025_ChristmasTreeC_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_ChristmasTreeC_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_ChristmasTreeC_01'], items=['Lit-up Tree'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY**: We have the tree, our ornaments and a roaring fire. What’s next?
 **GRANDMA** (Charming): Next, we’re making soup - out of canned food!
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_ChristmasTreeD_01
+### Holiday Oddities — item discovered: Fancy Tree
 `LDE_HolidayOddities2025_ChristmasTreeD_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_ChristmasTreeD_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_ChristmasTreeD_01'], items=['Fancy Tree'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON**: Tell us about the next tradition! Is it baking? LET IT BE BAKING!
 **GRANDMA**: No, the fourth tradition is about knitting.
 **MASON** (Annoyed): K-knitting?
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_ChristmasTreeE_01
+### Holiday Oddities — item discovered: Festive Tree
 `LDE_HolidayOddities2025_ChristmasTreeE_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_ChristmasTreeE_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_ChristmasTreeE_01'], items=['Festive Tree'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Relaxed): It’s starting to look like the holidays here, don’t you think?
 **HANK**: You're right. Maybe there's something to these traditions.
@@ -3099,24 +3013,24 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): With these.
 **MASON** (Thinking): A bunch of clock keys?
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_ChristmasTreeS_01
+### Holiday Oddities — item discovered: Decorated Tree
 `LDE_HolidayOddities2025_ChristmasTreeS_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_ChristmasTreeS_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_ChristmasTreeS_01'], items=['Decorated Tree'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Thinking): Now we’ve turned the clocks, what comes next?
 **GRANDMA**: We finish decorating the tree.
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_ClockATurned_01
+### Holiday Oddities — item discovered: Plain Longcase Clock - Turned
 `LDE_HolidayOddities2025_ClockATurned_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_ClockATurned_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_ClockATurned_01'], items=['Plain Longcase Clock - Turned'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Thinking): It seems to me that this old tradition could cause some chaos.
 **GRANDMA** (Joyous): That is precisely the point, Roddy!
 **GRANDMA** (Joyous): The holidays come when you let go of your schedules.
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_ClockBTurned_01
+### Holiday Oddities — item discovered: Fancy Longcase Clock - Turned
 `LDE_HolidayOddities2025_ClockBTurned_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_ClockBTurned_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_ClockBTurned_01'], items=['Fancy Longcase Clock - Turned'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **HANK**: Did you set that clock forward or back?  
   _earlier:_ ~~Did you turn that clock forward or back?~~ (until 25.10.01)
@@ -3124,9 +3038,9 @@ Every story in which Grandma speaks.
 **MASON** (Relaxed): Right, Grandma?
 **GRANDMA** (Relaxed): That's close enough, Mason.
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_ClockKeys_03
+### Holiday Oddities — item discovered: Assortment of Clock Keys
 `LDE_HolidayOddities2025_ClockKeys_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_ClockKeys_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_ClockKeys_03'], items=['Assortment of Clock Keys'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Thinking): What is this tradition and what are we supposed to do with these clock keys?
 **GRANDMA** (Relaxed): You will use the keys to set all the clocks you can find to show the wrong time.  
@@ -3135,9 +3049,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Thinking): When you cannot trust what a clock shows, you stop caring about it. And when you stop caring about what time it is, you are truly free to enjoy the holidays.
 **HANK** (Encouraging): That’s genius!
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_HotDrinks_02
+### Holiday Oddities — item discovered: Hopeberry Tea
 `LDE_HolidayOddities2025_HotDrinks_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_HotDrinks_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_HotDrinks_02'], items=['Hopeberry Tea'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON**: Where’s Maddie? She’s usually the one who organizes the holiday miracles.
 **RODDY** (Charming): Maybe this year, the holiday miracle is for her?
@@ -3145,18 +3059,18 @@ Every story in which Grandma speaks.
 **GRANDMA**: Roddy is correct. We’re giving Maddie the gift of leisure!
 **MASON** (Annoyed): I wish someone would give me the gift of a nap.
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_HotDrinks_04
+### Holiday Oddities — item discovered: Hot Chocolate
 `LDE_HolidayOddities2025_HotDrinks_04_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_HotDrinks_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_HotDrinks_04'], items=['Hot Chocolate'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Encouraging): The fire is roaring! This household will have all the luck if you keep it going.
 **RODDY** (Relaxed): You bet we will!
 **GRANDMA** (Charming): I think you have all deserved some refreshments. How about a nice cup of hot Hopeberry juice?
 **MASON** (Joyous): My favorite!
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_KitchenUtensils_03
+### Holiday Oddities — item discovered: Soup Pot
 `LDE_HolidayOddities2025_KitchenUtensils_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_KitchenUtensils_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_KitchenUtensils_03'], items=['Soup Pot'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA**: Collect all the cans you can find in the pantry and bring them into the kitchen.
 **GRANDMA** (Relaxed): Then we will do a little bit of mixing and stirring and see what we end up with!
@@ -3167,9 +3081,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Frustrated): What’s that, Mason?
 **MASON** (Surprised): Err, nothing.
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_KitchenUtensils_06
+### Holiday Oddities — item discovered: Simmering Soup
 `LDE_HolidayOddities2025_KitchenUtensils_06_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_KitchenUtensils_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_KitchenUtensils_06'], items=['Simmering Soup'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY**: What’s the tradition behind making soup out of weird canned foods?
 **GRANDMA** (Thinking): In old Hopewell Bay, waste was frowned upon. Every home contributed whatever they could spare to the communal soup, served during the holidays.
@@ -3177,31 +3091,31 @@ Every story in which Grandma speaks.
 **RODDY** (Relaxed): That actually sounds pretty wholesome.
 **HANK** (Encouraging): And I love creamed corn with spaghetti hoops!
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_KnittingNeedlesGR_01
+### Holiday Oddities — item discovered: LDE_HolidayOddities2025_KnittingNeedlesGR_01
 `LDE_HolidayOddities2025_KnittingNeedlesGR_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_KnittingNeedlesGR_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_KnittingNeedlesGR_01'], items=['LDE_HolidayOddities2025_KnittingNeedlesGR_01'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Thinking): It is all about the right grip. Don’t hold the needles too tightly, but not too loosely, either.
 **GRANDMA** (Thinking): Let the yarn run through your fingers, but maintain a good tension.
 **MASON** (Frustrated): That makes no sense!
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_KnittingNeedlesRW_01
+### Holiday Oddities — item discovered: LDE_HolidayOddities2025_KnittingNeedlesRW_01
 `LDE_HolidayOddities2025_KnittingNeedlesRW_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_KnittingNeedlesRW_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_KnittingNeedlesRW_01'], items=['LDE_HolidayOddities2025_KnittingNeedlesRW_01'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Thinking): Ursula, am I doing it right?
 **GRANDMA** (Doubtful): Errr, close enough, Roddy.
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_KnittingNeedlesWG_01
+### Holiday Oddities — item discovered: LDE_HolidayOddities2025_KnittingNeedlesWG_01
 `LDE_HolidayOddities2025_KnittingNeedlesWG_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_KnittingNeedlesWG_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_KnittingNeedlesWG_01'], items=['LDE_HolidayOddities2025_KnittingNeedlesWG_01'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Encouraging): That’s excellent work, Hank! You’re a natural.
 **HANK** (Joyous): This is so much fun!
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_KnittingTools_03
+### Holiday Oddities — item discovered: LDE_HolidayOddities2025_KnittingTools_03
 `LDE_HolidayOddities2025_KnittingTools_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_KnittingTools_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_KnittingTools_03'], items=['LDE_HolidayOddities2025_KnittingTools_03'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Discouraged): I don’t know how to knit.
 **MASON** (Doubtful): Is knitting the thing you do with the hook?
@@ -3210,9 +3124,9 @@ Every story in which Grandma speaks.
 **RODDY** (Doubtful): I’m confused.
 **GRANDMA** (Relaxed): It is not that complicated. You will be using needles to knit odd socks, and I will show you what to do.
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_KnittingTools_06
+### Holiday Oddities — item discovered: LDE_HolidayOddities2025_KnittingTools_06
 `LDE_HolidayOddities2025_KnittingTools_06_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_KnittingTools_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_KnittingTools_06'], items=['LDE_HolidayOddities2025_KnittingTools_06'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Thinking): We’re knitting odd socks?
 **RODDY** (Thinking): I guess that’s where the tradition comes in.
@@ -3220,9 +3134,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Relaxed): Some say it is based on socks’ tendency to lose their pairs, and others blame it on a sock thief that apparently plagued the town in the olden days.
 **HANK** (Encouraging): Makes sense to me! Let’s knit!
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_Logs_03
+### Holiday Oddities — item discovered: Log Rack
 `LDE_HolidayOddities2025_Logs_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_Logs_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_Logs_03'], items=['Log Rack'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Relaxed): I can see you have been working hard!
 **HANK** (Charming): Or hardly working... Roddy used a wood-splitting machine. I bet those early folks in Hopewell Bay didn’t have one.  
@@ -3244,9 +3158,9 @@ Every story in which Grandma speaks.
 **HANK** (Encouraging): Hey, guys? Happy holidays! I’m glad I get to spend them with you.
 **RODDY** (Relaxed): Right back at you!
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_SockWG_01
+### Holiday Oddities — item discovered: White & Green Stripes
 `LDE_HolidayOddities2025_SockWG_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_SockWG_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_SockWG_01'], items=['White & Green Stripes'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Thinking): Good job! We have some great socks and some... well, not so great ones.  
   _earlier:_ ~~Good job! We have some great socks and some… well, not so great ones.~~ (until 25.10.01)
@@ -3255,9 +3169,9 @@ Every story in which Grandma speaks.
 **MASON**: We’re on the home stretch now!
 **MASON** (Doubtful): I mean, we are, right?
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_StickBasket_03
+### Holiday Oddities — item discovered: Bunch of Sticks
 `LDE_HolidayOddities2025_StickBasket_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_StickBasket_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_StickBasket_03'], items=['Bunch of Sticks'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **HANK**: So like why did you ask us to meet you in the forest?
 **GRANDMA**: Well--
@@ -3267,9 +3181,9 @@ Every story in which Grandma speaks.
 **MASON** (Surprised): Oh, WOW! How are we going to organize a holiday miracle??
 **GRANDMA** (Charming): How much do you know about old Hopewell Bay holiday traditions?
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_StickBasket_05
+### Holiday Oddities — item discovered: Basket Base
 `LDE_HolidayOddities2025_StickBasket_05_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_StickBasket_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_StickBasket_05'], items=['Basket Base'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY**: Tell us about these Hopewell Bay holiday traditions!
 **GRANDMA** (Thinking): Well, in the olden days, people had to make do with whatever they could find. It was traditional to collect natural materials to make beautiful ornaments.
@@ -3277,9 +3191,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Frustrated): Well, off you go! We are not getting any younger.
 **MASON** (Encouraging): Hank, you take the basket. After all, you’re the strongest!
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_StickBasket_07
+### Holiday Oddities — item discovered: Full Basket
 `LDE_HolidayOddities2025_StickBasket_07_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_StickBasket_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_StickBasket_07'], items=['Full Basket'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **HANK** (Encouraging): We’ve got acorns...  
   _earlier:_ ~~We’ve got acorns…~~ (until 25.10.01)
@@ -3313,9 +3227,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): Oh, is it? I completely forgot...  
   _earlier:_ ~~Oh, is it? I completely forgot…~~ (until 25.10.01)
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_Timepieces_04
+### Holiday Oddities — item discovered: LDE_HolidayOddities2025_Timepieces_04
 `LDE_HolidayOddities2025_Timepieces_04_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_Timepieces_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_Timepieces_04'], items=['LDE_HolidayOddities2025_Timepieces_04'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON**: I found all kinds of clocks already, but I guess sundials and hourglasses don’t really count, right?
 **MASON**: I did find this old wristwatch, though.
@@ -3323,17 +3237,17 @@ Every story in which Grandma speaks.
 **MASON** (Thinking): Which way?
 **GRANDMA** (Charming): It doesn’t matter, as long as it is not showing the actual time.
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_Timepieces_07
+### Holiday Oddities — item discovered: LDE_HolidayOddities2025_Timepieces_07
 `LDE_HolidayOddities2025_Timepieces_07_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_Timepieces_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_Timepieces_07'], items=['LDE_HolidayOddities2025_Timepieces_07'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON** (Thinking): Will we turn the old longcase clock as well? It feels sort of naughty, like I'm about to get told off...  
   _earlier:_ ~~Will we turn the old longcase clock as well? It feels sort of naughty, like I'm about to get told off…~~ (until 25.10.01)
 **GRANDMA**: I am giving you my permission. We will turn them back after the holidays, anyway.
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_Woodchopping_03
+### Holiday Oddities — item discovered: Hand Saw
 `LDE_HolidayOddities2025_Woodchopping_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_Woodchopping_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_Woodchopping_03'], items=['Hand Saw'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA**: In the early days, it was believed that as long as the holiday fire burned, joy would stay in the home.
 **GRANDMA**: If it went out before dawn, the spirit of winter would sneak in and steal away the household’s luck.
@@ -3342,10 +3256,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Relaxed): First, you need to chop some firewood.
 **GRANDMA** (Relaxed): You will find all the tools here, in the shed.
 
-### LDE_Hopeberry2024 — item discovered: 48612467
+### Love on the Vine — item discovered: Hamper
 `LDE_Hopeberry2024_ArtesanFoods_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['48612467'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_ArtesanFoods_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_ArtesanFoods_07'], items=['Hamper'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Thinking): Is it true Julius set you up with his nephew, Herbert?
 **MADDIE** (Thinking): It is. You could've warned me!!
@@ -3355,10 +3268,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: I think you should swear off romance for a while, dearie.
 **GRANDMA**: There is no use beating a dead horse.
 
-### LDE_Hopeberry2024 — item discovered: 27561736
+### Love on the Vine — item discovered: Cork Backpack
 `LDE_Hopeberry2024_CorkThings_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['27561736'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_CorkThings_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_CorkThings_07'], items=['Cork Backpack'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Doubtful): Deb, have you offered Maddie your match-making services?
 **DEB** (Frustrated): You cannot blame me, Ursula! In my present situation, I need a distraction...
@@ -3376,10 +3288,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): You will, dearie, when the time is right.
 **GRANDMA** (Charming): Trust me!
 
-### LDE_Hopeberry2025 — item discovered: 48612472
+### Love on the Vine — item discovered: Loaf of Bread
 `LDE_Hopeberry2025_ArtesanFoods2_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2025, items=['48612472'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2025, items=['LDE_Hopeberry2024_ArtesanFoods_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2025, itemKeys=['LDE_Hopeberry2024_ArtesanFoods_02'], items=['Loaf of Bread'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): You did such a great job with the jam again, Grandma.
 **GRANDMA** (Encouraging): Thank you, Maddie, but it was all Roddy.
@@ -3387,10 +3298,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: Oh, yes. He made me sit down and took care of everything.
 **MADDIE** (Worried): Wow, I had no idea!
 
-### LDE_Hopeberry2025 — item discovered: 48749097
+### Love on the Vine — item discovered: Small Hopeberry Bush
 `LDE_Hopeberry2025_Hopeberry4_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2025, items=['48749097'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2025, items=['LDE_Hopeberry2024_Hopeberry_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2025, itemKeys=['LDE_Hopeberry2024_Hopeberry_04'], items=['Small Hopeberry Bush'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY**: Ursula, are you OK? Maddie told me you hurt your ankle.
 **GRANDMA** (Frustrated): Oh, I am perfectly fine! She is just fussing. As you can see, I can wal-- OUCH!
@@ -3429,9 +3339,9 @@ Every story in which Grandma speaks.
 **RODDY** (Worried): *Gulp*
 **GRANDMA**: Now help yourselves to some apple pie before it gets cold! I have a phone call to make.
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_Interviews_04
+### Murder at the Mansion — item discovered: Grandma
 `LDE_MurderAtTheMansion_Interviews4_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_Interviews_04'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_Interviews_04'], items=['Grandma'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE**: So, Ursula... What was your relationship with Lady Voyance like?
 **GRANDMA** (Discouraged): She was my dear friend, and you know that I would NEVER have done anything to hurt her.
@@ -3459,9 +3369,9 @@ Every story in which Grandma speaks.
 **RODDY** (Worried): J-jackie, the door is open. Something doesn’t feel right.
 **JACKIE** (Surprised): Lady Voy… Aaah! She’s… dead!
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_SubGoal_MapItem_01
+### Murder at the Mansion — item discovered: Map Fragment
 `LDE_MurderAtTheMansion_SubGoal_MapItem_01_Dialogue` · seen 26.06.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_SubGoal_MapItem_01'], moment=item discovered (versions 26.06.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_SubGoal_MapItem_01'], items=['Map Fragment'], moment=item discovered (versions 26.06.01–26.07.01)
 
 **MADDIE** (Surprised): What's this -- a piece of a map?
 **GRANDMA** (Encouraging): If you keep looking, I bet you will find more pieces.
@@ -3629,10 +3539,9 @@ Every story in which Grandma speaks.
 **MASON** (Joyous): Nnnnggh, that's AMAZING. I think there's something I need to go do... See you later, Grandma Ursula!
 **GRANDMA** (Charming): Happy trails, Mason!
 
-### LDE_Rumors2025 — item discovered: 33623528
+### Circus Caper — item discovered: Escape Vehicle
 `LDE_Rumors2025_HeistPlan_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['33623528'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_HeistPlan_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_HeistPlan_06'], items=['Escape Vehicle'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY**: So are you going to show us how your trick works?  
   _earlier:_ ~~Stop right there, Fiona! I know what you're doing.~~ (until 25.09.01)
@@ -3677,10 +3586,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: Yes. What is it?
 **GRANDMA** (Joyous): No one guessed it right, did they?
 
-### LDE_Rumors2025 — item discovered: 87660234
+### Circus Caper — item discovered: Duffel Bag
 `LDE_Rumors2025_ThiefProps_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['87660234'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_ThiefProps_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_ThiefProps_04'], items=['Duffel Bag'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Surprised): How did you pry open the door of the green caravan so quickly?  
   _earlier:_ ~~I do not want to worry you, dearie, but there has been some weird activity around the Mansion.~~ (until 25.09.01)
@@ -4295,7 +4203,7 @@ Every story in which Grandma speaks.
 
 ### SEChristmas2022 — decoration PE_Christmas2022_Decoration_25
 `PE_Christmas2022Deco_Intro` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=PE_Christmas2022_Decoration_25, event=SEChristmas2022, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=PE_Christmas2022_Decoration_25, event=SEChristmas2022, eventKey=SEChristmas2022, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE** (Thinking): Can I help you decorate the house, Grandma?
 **GRANDMA** (Encouraging): No thank you, dearie. I'd prefer that you just... stay away.
@@ -4306,7 +4214,7 @@ Every story in which Grandma speaks.
 
 ### SEChristmas2022 — decoration PE_Christmas2022_Decoration_29
 `PE_Christmas2022Deco_Outro` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=PE_Christmas2022_Decoration_29, event=SEChristmas2022, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=PE_Christmas2022_Decoration_29, event=SEChristmas2022, eventKey=SEChristmas2022, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **GRANDMA** (Joyous): Thank you for all your help, Julius!
 **ANTIQUEDEALER**: You're most welcome, Ursula.
@@ -5161,9 +5069,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Surprised): How on earth did you set it all up so perfectly, Grandma?
 **GRANDMA** (Charming): I will not tell you all my secrets, Maddie. That is where the real magic is.
 
-### SP_AllHallowsEve2026 — decoration SP_AllHallowsEve2026_Decoration_Slot34
+### All Hallow's Eve — decoration SP_AllHallowsEve2026_Decoration_Slot34
 `SP_AllHallowsEve2026_Decoration_Slot34_Dialogue` · seen 26.07.01–26.07.01
-- trigger: decoration, decoration=SP_AllHallowsEve2026_Decoration_Slot34, event=SP_AllHallowsEve2026, moment=decoration placed (versions 26.07.01–26.07.01)
+- trigger: decoration, decoration=SP_AllHallowsEve2026_Decoration_Slot34, event=All Hallow's Eve, eventKey=SP_AllHallowsEve2026, moment=decoration placed (versions 26.07.01–26.07.01)
 
 **GRANDMA** (Joyous): Hello, dearie! Oh, what a lovely little corner you've made!
 **MADDIE** (Frustrated): Not now, Grandma. I'm looking for pokeweed.
@@ -5172,9 +5080,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): My, that's a very sharp-looking knife you got there. Tell me, what's lost?
 **MADDIE** (Surprised): If I told you that, it would spoil the experiment!
 
-### SP_AllHallowsEve2026 — decoration SP_AllHallowsEve2026_Decoration_Slot35
+### All Hallow's Eve — decoration SP_AllHallowsEve2026_Decoration_Slot35
 `SP_AllHallowsEve2026_Decoration_Slot35_Dialogue` · seen 26.07.01–26.07.01
-- trigger: decoration, decoration=SP_AllHallowsEve2026_Decoration_Slot35, event=SP_AllHallowsEve2026, moment=decoration placed (versions 26.07.01–26.07.01)
+- trigger: decoration, decoration=SP_AllHallowsEve2026_Decoration_Slot35, event=All Hallow's Eve, eventKey=SP_AllHallowsEve2026, moment=decoration placed (versions 26.07.01–26.07.01)
 
 **MADDIE** (Doubtful): Right! This is of course still all nonsense, but...
 **GRANDMA**: ...but what, dearie?
@@ -5183,9 +5091,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Frustrated): Some halloween decorations from last year. I finished the spell, spoke the words, and...poof! There they were.
 **GRANDMA**: Oh, my. Perhaps you really are a witch.  Wouldn't be the first Boulton!
 
-### SP_AllHallowsEve2026 — decoration SP_AllHallowsEve2026_Decoration_Slot36
+### All Hallow's Eve — decoration SP_AllHallowsEve2026_Decoration_Slot36
 `SP_AllHallowsEve2026_Decoration_Slot36_Dialogue` · seen 26.07.01–26.07.01
-- trigger: decoration, decoration=SP_AllHallowsEve2026_Decoration_Slot36, event=SP_AllHallowsEve2026, moment=decoration placed (versions 26.07.01–26.07.01)
+- trigger: decoration, decoration=SP_AllHallowsEve2026_Decoration_Slot36, event=All Hallow's Eve, eventKey=SP_AllHallowsEve2026, moment=decoration placed (versions 26.07.01–26.07.01)
 
 **GRANDMA**: Hello, dearie! How're the preparations coming for the charity shop?
 **MADDIE** (Frustrated): There's something here...a code. References between the books...a secret!
@@ -5194,9 +5102,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Worried): Oh, Maddie, are you sure you want to dabble in dark magic? Especially at a time like this?
 **MADDIE** (Frustrated): I...I have to know! It says it needs to be cast at midnight...
 
-### SP_AllHallowsEve2026 — decoration SP_AllHallowsEve2026_Decoration_Slot37
+### All Hallow's Eve — decoration SP_AllHallowsEve2026_Decoration_Slot37
 `SP_AllHallowsEve2026_Decoration_Slot37_Dialogue` · seen 26.07.01–26.07.01
-- trigger: decoration, decoration=SP_AllHallowsEve2026_Decoration_Slot37, event=SP_AllHallowsEve2026, moment=decoration placed (versions 26.07.01–26.07.01)
+- trigger: decoration, decoration=SP_AllHallowsEve2026_Decoration_Slot37, event=All Hallow's Eve, eventKey=SP_AllHallowsEve2026, moment=decoration placed (versions 26.07.01–26.07.01)
 
 **GRANDMA** (Encouraging): This will do very well for the charity shop Maddie. Good work!
 **MADDIE** (Thinking): What? Oh - these aren't for sale, these are all the things needed for the spell!
@@ -5219,9 +5127,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: Of course not, dearie. But do you mind if I leave them with you, in case you change your mind?
 **MADDIE** (Relaxed): Sure, Grandma. At least they fit the decor!
 
-### SP_AllHallowsEve2026 — item discovered: SP_AllHallowsEve2026_CollectableItems_04
+### All Hallow's Eve — item discovered: Bubbling Cauldron
 `SP_AllHallowsEve2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.07.01–26.07.01
-- trigger: item, event=SP_AllHallowsEve2026, items=['SP_AllHallowsEve2026_CollectableItems_04'], moment=item discovered (versions 26.07.01–26.07.01)
+- trigger: item, event=All Hallow's Eve, eventKey=SP_AllHallowsEve2026, itemKeys=['SP_AllHallowsEve2026_CollectableItems_04'], items=['Bubbling Cauldron'], moment=item discovered (versions 26.07.01–26.07.01)
 
 **MADDIE** (Joyous): Aha! The potion is complete! Whoa. Should it be bubbling like that?
 **GRANDMA**: What have you made there, dearie?
@@ -5244,10 +5152,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Worried): I'll tell you all about it -- but not yet. There is still too much that is uncertain...
 **GRANDMA** (Relaxed): I promise everything will become clear.
 
-### SP_AmyPet2025 — item discovered: 22441629
+### Whiskers & Whispers — item discovered: Mega Basket
 `SP_AmyPet2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_AmyPet2025, items=['22441629'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_AmyPet2025, items=['SP_AmyPet2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Whiskers & Whispers, eventKey=SP_AmyPet2025, itemKeys=['SP_AmyPet2025_CollectableItems_04'], items=['Mega Basket'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): Grandma, what would you say about getting a new pet?
 **GRANDMA** (Frustrated): As long as it's not another overly nosy dog who's always digging up my flowerbeds!
@@ -5268,20 +5175,19 @@ Every story in which Grandma speaks.
 **GRANDMA** (Surprised): Oh, this? I think this phone is acting up, always switching things up...
 **GRANDMA** (Thinking): Here we go. These cat photos will be gold for my followers!
 
-### SP_AmyTheCat2023 — decoration SP_AmyTheCat2023_Decoration_Slot28
+### Amy's Mystery — decoration SP_AmyTheCat2023_Decoration_Slot28
 `SP_AmyTheCat2023_Decoration_Slot28_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot28, event=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot28, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_AmyTheCat2023 — decoration SP_AmyTheCat2023_Decoration_Slot29
+### Amy's Mystery — decoration SP_AmyTheCat2023_Decoration_Slot29
 `SP_AmyTheCat2023_Decoration_Slot29_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot29, event=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot29, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_AmyTheCat2023 — item discovered: 300725
+### Amy's Mystery — item discovered: SP_AmyTheCat2023_CollectableItems_04
 `SP_AmyTheCat2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=SP_AmyTheCat2023, items=['300725'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=SP_AmyTheCat2023, items=['SP_AmyTheCat2023_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, itemKeys=['SP_AmyTheCat2023_CollectableItems_04'], items=['SP_AmyTheCat2023_CollectableItems_04'], moment=item discovered (versions 23.09.02–26.07.01)
 
 
 ### Season Pass - Buzzing with Purpose — outro
@@ -5294,9 +5200,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Encouraging): I love that motto!
 **MADDIE** (Charming): "Greatness, from small beginnings."
 
-### SP_Apiary2026 — decoration SP_Apiary2026_Decoration_Slot25
+### Season Pass - Buzzing with Purpose — decoration SP_Apiary2026_Decoration_Slot25
 `SP_Apiary2026_Decoration_Slot25_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Apiary2026_Decoration_Slot25, event=SP_Apiary2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Apiary2026_Decoration_Slot25, event=Season Pass - Buzzing with Purpose, eventKey=SP_Apiary2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): I hope you don't mind me setting up some flowers on your fence?
 **GRANDMA**: No problem at all, dearie! In fact...
@@ -5306,9 +5212,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Encouraging): Some say it's the color, while others say it's the unique flavor.
 **GRANDMA** (Charming): It also makes a spectacular mead!
 
-### SP_Apiary2026 — decoration SP_Apiary2026_Decoration_Slot28
+### Season Pass - Buzzing with Purpose — decoration SP_Apiary2026_Decoration_Slot28
 `SP_Apiary2026_Decoration_Slot28_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Apiary2026_Decoration_Slot28, event=SP_Apiary2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Apiary2026_Decoration_Slot28, event=Season Pass - Buzzing with Purpose, eventKey=SP_Apiary2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Charming): Aaw, that's a cute bee hive!
 **GRANDMA**: Thank you, dearie.
@@ -5332,9 +5238,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Thinking): Probably something to do with the Hopeberry honey it made...
 **MADDIE** (Surprised): What's special about the Hopeberry honey?
 
-### SP_Apiary2026 — item discovered: SP_Apiary2026_CollectableItems_04
+### Season Pass - Buzzing with Purpose — item discovered: Thriving Beehive
 `SP_Apiary2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_Apiary2026, items=['SP_Apiary2026_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Season Pass - Buzzing with Purpose, eventKey=SP_Apiary2026, itemKeys=['SP_Apiary2026_CollectableItems_04'], items=['Thriving Beehive'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): This is incredible!
 **MADDIE** (Encouraging): Where did you manage to get a queen bee for the hive?
@@ -5358,9 +5264,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): Oh, dearie...
 **GRANDMA** (Joyous): I had no leaves to bury them under!
 
-### SP_CancelledFun2025 — decoration SP_CancelledFun2025_Decoration_Slot33
+### Festive Feast — decoration SP_CancelledFun2025_Decoration_Slot33
 `SP_CancelledFun2025_Decoration_Slot33_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CancelledFun2025_Decoration_Slot33, event=SP_CancelledFun2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CancelledFun2025_Decoration_Slot33, event=Festive Feast, eventKey=SP_CancelledFun2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): Looks like you’re making yourself at home!
 **CHERRY** (Encouraging): Oh, I am! It’s been such a long while since the last time I cooked here, sugar.
@@ -5372,9 +5278,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Surprised): Wait a minute! These “bricks” are filled with money!
 **GRANDMA** (Charming): Fake money, dearie. FAKE money.
 
-### SP_CancelledFun2025 — decoration SP_CancelledFun2025_Decoration_Slot36
+### Festive Feast — decoration SP_CancelledFun2025_Decoration_Slot36
 `SP_CancelledFun2025_Decoration_Slot36_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CancelledFun2025_Decoration_Slot36, event=SP_CancelledFun2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CancelledFun2025_Decoration_Slot36, event=Festive Feast, eventKey=SP_CancelledFun2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): I think we should keep this oven after the festival!
 **MADDIE** (Joyous): I sure do love pizza!
@@ -5385,9 +5291,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Joyous): Just joking, dearie!
 **MADDIE** (Thinking): Was she though?!
 
-### SP_CancelledFun2025 — decoration SP_CancelledFun2025_Decoration_Slot37
+### Festive Feast — decoration SP_CancelledFun2025_Decoration_Slot37
 `SP_CancelledFun2025_Decoration_Slot37_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CancelledFun2025_Decoration_Slot37, event=SP_CancelledFun2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CancelledFun2025_Decoration_Slot37, event=Festive Feast, eventKey=SP_CancelledFun2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): What’s this, Grandma?
 **GRANDMA** (Encouraging): Oh, just a little something I whipped up for everyone who's helped so far!
@@ -5420,9 +5326,9 @@ Every story in which Grandma speaks.
 **CHERRY** (Thinking): We’ll show that mayor that they can't stop us from having fun!  
   _earlier:_ ~~We’ll show that mayor that she can't stop us from having fun!~~ (until 25.10.01)
 
-### SP_CancelledFun2025 — item discovered: SP_CancelledFun2025_CollectableItems_04
+### Festive Feast — item discovered: Cherry's Deluxe Pumpkin Pie
 `SP_CancelledFun2025_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_CancelledFun2025, items=['SP_CancelledFun2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Festive Feast, eventKey=SP_CancelledFun2025, itemKeys=['SP_CancelledFun2025_CollectableItems_04'], items=["Cherry's Deluxe Pumpkin Pie"], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): These pies look absolutely amazing!
 **GRANDMA** (Doubtful): Maybe a bit familiar...
@@ -5434,9 +5340,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Frustrated): ...
 **GRANDMA** (Charming): ...That’s amazing, dearie.
 
-### SP_CherrysMysteryMeat2024 — decoration SP_CherrysMysteryMeat2024_Decoration_Slot32
+### Cherry's Mystery Meat — decoration SP_CherrysMysteryMeat2024_Decoration_Slot32
 `SP_CherrysMysteryMeat2024_Decoration_Slot32_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot32, event=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot32, event=Cherry's Mystery Meat, eventKey=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL** (Thinking): This event will be our best yet - I can feel it in my bones!
 **PEARL** (Thinking): I still need to find someone to man the official Hopewell Bay Centennial merchandise booth... and someone to look after the barbecue.
@@ -5448,9 +5354,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Surprised): No, I did not notice anything at all! Oh, Pearl... I can take care of the barbecue.
 **PEARL** (Encouraging): Done and done!
 
-### SP_CherrysMysteryMeat2024 — decoration SP_CherrysMysteryMeat2024_Decoration_Slot34
+### Cherry's Mystery Meat — decoration SP_CherrysMysteryMeat2024_Decoration_Slot34
 `SP_CherrysMysteryMeat2024_Decoration_Slot34_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot34, event=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot34, event=Cherry's Mystery Meat, eventKey=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **CHERRY** (Annoyed): Baking the biggest pie in the world is a headache! I've got bags and bags of flour, a hundred sticks of butter, and your meat...
 **CHERRY** (Annoyed): But now I need a huge pie dish, and they don't sell those in just any hardware store.
@@ -5458,18 +5364,18 @@ Every story in which Grandma speaks.
 **CHERRY** (Surprised): W-what? You've got a giant pie dish in your basement?
 **GRANDMA** (Joyous): Well, you never know when you need to make a huuuge pie.
 
-### SP_CherrysMysteryMeat2024 — decoration SP_CherrysMysteryMeat2024_Decoration_Slot36
+### Cherry's Mystery Meat — decoration SP_CherrysMysteryMeat2024_Decoration_Slot36
 `SP_CherrysMysteryMeat2024_Decoration_Slot36_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot36, event=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot36, event=Cherry's Mystery Meat, eventKey=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **CHERRY**: Yummm! The founders knew a good pie!
 **MADDIE** (Relaxed): They sure did. What kind of vegan meat is this, Cherry? It's so tasty!
 **CHERRY** (Encouraging): You can thank Ursula for that. But Ursula, where DID you get it?
 **GRANDMA**: Oh, it is just something I had in the freezer. I am glad it made such a scrumptious pie!
 
-### SP_CherrysMysteryMeat2024 — decoration SP_CherrysMysteryMeat2024_Decoration_Slot37
+### Cherry's Mystery Meat — decoration SP_CherrysMysteryMeat2024_Decoration_Slot37
 `SP_CherrysMysteryMeat2024_Decoration_Slot37_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot37, event=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot37, event=Cherry's Mystery Meat, eventKey=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **DEB** (Worried): Maddie, could you do me a favor and put up some of these posters of Hank?
 **MADDIE** (Worried): There's still no sign of him, huh?
@@ -5478,10 +5384,9 @@ Every story in which Grandma speaks.
 **DEB** (Thinking): Mmmm... There is something... strangely familiar about this flavor.
 **MADDIE** (Thinking): That IS strange!
 
-### SP_CherrysMysteryMeat2024 — item discovered: 58491639
+### Cherry's Mystery Meat — item discovered: Big BBQ
 `SP_CherrysMysteryMeat2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_CherrysMysteryMeat2024, items=['58491639'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_CherrysMysteryMeat2024, items=['SP_CherrysMysteryMeat2024_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Cherry's Mystery Meat, eventKey=SP_CherrysMysteryMeat2024, itemKeys=['SP_CherrysMysteryMeat2024_CollectableItems_04'], items=['Big BBQ'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **CHERRY**: Pearl gave me this historic recipe to recreate our founders' favorite pie.
 **CHERRY** (Thinking): I've made some calculations, and I'm going to need about a whole hunk of meat to make it!
@@ -5504,9 +5409,9 @@ Every story in which Grandma speaks.
 **BELLA**: Ha! It's fine. What matters is that I finally got my REVENGE!
 **GRANDMA** (Joyous): Oh! I really do like her!
 
-### SP_CinqoDeMayo2026 — decoration SP_CinqoDeMayo2026_Decoration_Slot33
+### Season Pass - Flavors of Tradition — decoration SP_CinqoDeMayo2026_Decoration_Slot33
 `SP_CinqoDeMayo2026_Decoration_Slot33_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot33, event=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot33, event=Season Pass - Flavors of Tradition, eventKey=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **GRANDMA**: What do you think, dearie?
 **EMILIO** (Joyous): This looks perfect!
@@ -5517,9 +5422,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Joyous): Oh, dearie! This is only half of it!
 **EMILIO** (Surprised): Half?!
 
-### SP_CinqoDeMayo2026 — decoration SP_CinqoDeMayo2026_Decoration_Slot34
+### Season Pass - Flavors of Tradition — decoration SP_CinqoDeMayo2026_Decoration_Slot34
 `SP_CinqoDeMayo2026_Decoration_Slot34_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot34, event=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot34, event=Season Pass - Flavors of Tradition, eventKey=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Surprised): Boy! You weren't kidding!
 **MADDIE** (Encouraging): You're going all out, aren't you?
@@ -5530,9 +5435,9 @@ Every story in which Grandma speaks.
 **EMILIO** (Charming): Nothing at all!  
   _earlier:_ ~~Nothing at all! ~~ (until 26.02.03)
 
-### SP_CinqoDeMayo2026 — decoration SP_CinqoDeMayo2026_Decoration_Slot35
+### Season Pass - Flavors of Tradition — decoration SP_CinqoDeMayo2026_Decoration_Slot35
 `SP_CinqoDeMayo2026_Decoration_Slot35_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot35, event=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot35, event=Season Pass - Flavors of Tradition, eventKey=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): Oooh, nice piñata!
 **BELLA**: Yes! This one is a family heirloom.
@@ -5543,9 +5448,9 @@ Every story in which Grandma speaks.
 **BELLA** (Annoyed): But today... Today is the DAY!
 **GRANDMA** (Charming): Actually dearie, I may have JUST the thing to help you with that!
 
-### SP_CinqoDeMayo2026 — decoration SP_CinqoDeMayo2026_Decoration_Slot36
+### Season Pass - Flavors of Tradition — decoration SP_CinqoDeMayo2026_Decoration_Slot36
 `SP_CinqoDeMayo2026_Decoration_Slot36_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot36, event=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot36, event=Season Pass - Flavors of Tradition, eventKey=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **EMILIO** (Relaxed): Wow! This looks amazing!
 **GRANDMA** (Relaxed): Well, you can thank Maddie for that!
@@ -5566,9 +5471,9 @@ Every story in which Grandma speaks.
 **EMILIO** (Charming): I would love to try them!
 **BELLA** (Doubtful): I guess...
 
-### SP_CinqoDeMayo2026 — item discovered: SP_CinqoDeMayo2026_CollectableItems_04
+### Season Pass - Flavors of Tradition — item discovered: Homestyle Enchiladas
 `SP_CinqoDeMayo2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_CinqoDeMayo2026, items=['SP_CinqoDeMayo2026_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Season Pass - Flavors of Tradition, eventKey=SP_CinqoDeMayo2026, itemKeys=['SP_CinqoDeMayo2026_CollectableItems_04'], items=['Homestyle Enchiladas'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA**: So, dearie? What do you think?
 **EMILIO** (Surprised): These... These are incredible!
@@ -5591,9 +5496,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): She is a dear, dear friend of mine, but do I have to remind you that she predicts the future from a snow globe?
 **MADDIE** (Hesitant): When you put it that way...
 
-### SP_CorpseFlower2025 — decoration SP_CorpseFlower2025_Decoration_Slot27
+### Petals of Tragedy — decoration SP_CorpseFlower2025_Decoration_Slot27
 `SP_CorpseFlower2025_Decoration_Slot27_Dialogue` · seen 25.06.01–26.07.01
-- trigger: decoration, decoration=SP_CorpseFlower2025_Decoration_Slot27, event=SP_CorpseFlower2025, moment=decoration placed (versions 25.06.01–26.07.01)
+- trigger: decoration, decoration=SP_CorpseFlower2025_Decoration_Slot27, event=Petals of Tragedy, eventKey=SP_CorpseFlower2025, moment=decoration placed (versions 25.06.01–26.07.01)
 
 **GRANDMA** (Thinking): What are you doing with Deb? Organizing an early Halloween party?
 **MADDIE** (Worried): A funeral, for her corpse flower. The flower wilted after Pablo the goat took a bite out of it, and Deb's taking the whole thing pretty badly.
@@ -5601,9 +5506,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): I know that plant meant a lot to her, but I cannot say I will miss its scent.
 **MADDIE** (Relaxed): That makes two of us. Just don't tell Deb!
 
-### SP_DebsMystery2023 — decoration SP_DebsMystery2023_Decoration_Slot27
+### Deb’s Mystery — decoration SP_DebsMystery2023_Decoration_Slot27
 `SP_DebsMystery2023Decoration_Slot27` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot27, event=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot27, event=Deb’s Mystery, eventKey=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Wow!
 **MADDIE** (Worried): Boy.... is that... fragrant!
@@ -5611,9 +5516,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Surprised): Oh Deb, I don’t know if I can have that thing stinking up my home.
 **GRANDMA** (Worried): It took over a month to get the smell out when we stashed your IMPROVED hopeberry juice!
 
-### SP_FairToRemember2026 — decoration SP_FairToRemember2026_Decoration_Slot36
+### A Fair to Remember — decoration SP_FairToRemember2026_Decoration_Slot36
 `SP_FairToRemember2026_Decoration_Slot36_Dialogue` · seen 26.06.01–26.07.01
-- trigger: decoration, decoration=SP_FairToRemember2026_Decoration_Slot36, event=SP_FairToRemember2026, moment=decoration placed (versions 26.06.01–26.07.01)
+- trigger: decoration, decoration=SP_FairToRemember2026_Decoration_Slot36, event=A Fair to Remember, eventKey=SP_FairToRemember2026, moment=decoration placed (versions 26.06.01–26.07.01)
 
 **GRANDMA** (Joyous): There is already a line to my pastry stall!
 **ANTIQUEDEALER** (Joyous): No wonder! Those pastries smell delicious.
@@ -5679,9 +5584,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): Come on, let's go and have a cup of tea and some apple pie.
 **MADDIE** (Relaxed): Sounds good. I've had enough drama for one day!
 
-### SP_GrandmasMystery2024 — decoration SP_GrandmasMystery2024_Decoration_Slot36
+### Grandma's Mystery — decoration SP_GrandmasMystery2024_Decoration_Slot36
 `SP_GrandmasMystery2024_Decoration_Slot36_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_GrandmasMystery2024_Decoration_Slot36, event=SP_GrandmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_GrandmasMystery2024_Decoration_Slot36, event=Grandma's Mystery, eventKey=SP_GrandmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): Grandma, I just had a REALLY worrying talk with Sgt. Pepper!
 **GRANDMA** (Charming): The cockatoo?
@@ -5690,9 +5595,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Encouraging): Just spit it out, dearie!
 **MADDIE** (Surprised): Did you kill Hank and let Cherry bake him into a pie?
 
-### SP_GrandmasMystery2024 — decoration SP_GrandmasMystery2024_Decoration_Slot37
+### Grandma's Mystery — decoration SP_GrandmasMystery2024_Decoration_Slot37
 `SP_GrandmasMystery2024_Decoration_Slot37_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_GrandmasMystery2024_Decoration_Slot37, event=SP_GrandmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_GrandmasMystery2024_Decoration_Slot37, event=Grandma's Mystery, eventKey=SP_GrandmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): Would I really kill Hank, my own sister's husband?
 **DEB** (Frustrated): According to what Maddie said, the evidence speaks for itself, Ursula.
@@ -5706,10 +5611,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Thinking): So, where IS Hank?
 **GRANDMA** (Discouraged): That is a more complicated question, dearie...
 
-### SP_GrandmasMystery2024 — item discovered: 10364107
+### Grandma's Mystery — item discovered: Mask of Comedy
 `SP_GrandmasMystery2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_GrandmasMystery2024, items=['10364107'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_GrandmasMystery2024, items=['SP_GrandmasMystery2024_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Grandma's Mystery, eventKey=SP_GrandmasMystery2024, itemKeys=['SP_GrandmasMystery2024_CollectableItems_04'], items=['Mask of Comedy'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA**: Maddie, dearie! There's someone I want you to meet.
 **MADDIE**: Oh?
@@ -5721,9 +5625,9 @@ Every story in which Grandma speaks.
 **KAZUKO** (Joyous): This is my cockatoo, Sgt. Pepper. I'm afraid he is pretty nosey...
 **SGT. PEPPER** (Charming): Aaaall you need is a... CRRRACKER!
 
-### SP_GranniesOfAnarchy2023 — decoration SP_GranniesOfAnarchy2023_Decoration_Slot25
+### Grannies of Anarchy — decoration SP_GranniesOfAnarchy2023_Decoration_Slot25
 `SP_GranniesOfAnarchy2023_Decoration_Slot25_Dialogue` · seen 23.11.02–26.07.01
-- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot25, event=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
+- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot25, event=Grannies of Anarchy, eventKey=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
 
 **GRANDMA** (Charming): Maddie, what on earth are you doing sneaking around?
 **MADDIE** (Encouraging): Err... We were just admiring these impressive motorbikes on your drive.
@@ -5736,9 +5640,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: <b>That </b>was biker slang. This is our biker gang, the Grannies of Anarchy.
 **JACKIE** (Doubtful): Ha! So I was right!
 
-### SP_GranniesOfAnarchy2023 — decoration SP_GranniesOfAnarchy2023_Decoration_Slot26
+### Grannies of Anarchy — decoration SP_GranniesOfAnarchy2023_Decoration_Slot26
 `SP_GranniesOfAnarchy2023_Decoration_Slot26_Dialogue` · seen 23.11.02–26.07.01
-- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot26, event=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
+- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot26, event=Grannies of Anarchy, eventKey=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
 
 **MADDIE**: Tell us more, Grandma! When did you join your biker gang?
 **GRANDMA** (Relaxed): Oh, we've been flying our colors for decades.
@@ -5748,9 +5652,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Joyous): And the knitted decorations on your bikes are really amazing!
 **GRANDMA** (Charming): We do know a thing or two about knitting... and rebellion.
 
-### SP_GranniesOfAnarchy2023 — decoration SP_GranniesOfAnarchy2023_Decoration_Slot27
+### Grannies of Anarchy — decoration SP_GranniesOfAnarchy2023_Decoration_Slot27
 `SP_GranniesOfAnarchy2023_Decoration_Slot27_Dialogue` · seen 23.11.02–26.07.01
-- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot27, event=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
+- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot27, event=Grannies of Anarchy, eventKey=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
 
 **GRANDMA** (Doubtful): When we started our motorcycle club, people just did not take us seriously.
 **GRANDMA** (Doubtful): So, we were forced to break the rules every now and again.
@@ -5761,9 +5665,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Doubtful): Whatever do you mean?
 **MADDIE** (Doubtful): Does your gang dabble with anything... criminal?
 
-### SP_GranniesOfAnarchy2023 — decoration SP_GranniesOfAnarchy2023_Decoration_Slot28
+### Grannies of Anarchy — decoration SP_GranniesOfAnarchy2023_Decoration_Slot28
 `SP_GranniesOfAnarchy2023_Decoration_Slot28_Dialogue` · seen 23.11.02–26.07.01
-- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot28, event=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
+- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot28, event=Grannies of Anarchy, eventKey=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
 
 **GRANDMA** (Joyous): Why on earth do you think our club would be involved in criminal activity?
 **MADDIE** (Worried): We happened to overhear some of your conversation and... it sounded  fishy.
@@ -5776,9 +5680,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Thinking): I guess that could've been it, but...
 **GRANDMA** (Joyous): That's settled then!
 
-### SP_HanksMystery2024 — decoration SP_HanksMystery2024_Decoration_Slot25
+### Proposal Mystery — decoration SP_HanksMystery2024_Decoration_Slot25
 `SP_HanksMystery2024_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot25, event=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot25, event=Proposal Mystery, eventKey=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA**: Maddie... Have you noticed something strange about the front yard?
 **MADDIE** (Surprised): Not really! What is it?
@@ -5787,18 +5691,18 @@ Every story in which Grandma speaks.
 **MADDIE** (Thinking): But WHY are there giant ice creams there?
 **GRANDMA** (Annoyed): I wish I knew, dearie!
 
-### SP_HanksMystery2024 — decoration SP_HanksMystery2024_Decoration_Slot27
+### Proposal Mystery — decoration SP_HanksMystery2024_Decoration_Slot27
 `SP_HanksMystery2024_Decoration_Slot27_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot27, event=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot27, event=Proposal Mystery, eventKey=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Grandma, there's a pink Cadillac in your front yard!
 **GRANDMA** (Annoyed): I know!
 **MADDIE** (Thinking): It's very nice, but isn't it kinda late for someone to be organizing a Valentine's surprise?
 **GRANDMA** (Thinking): Maybe it is not a Valentine's surprise at all...
 
-### SP_HanksMystery2024 — decoration SP_HanksMystery2024_Decoration_Slot28
+### Proposal Mystery — decoration SP_HanksMystery2024_Decoration_Slot28
 `SP_HanksMystery2024_Decoration_Slot28_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot28, event=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot28, event=Proposal Mystery, eventKey=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): This is definitely starting to look like a romantic surprise.
 **MADDIE** (Thinking): And that's the ring we found among the Valentine's presents, on the front step! But who's surprising whom?
@@ -5807,9 +5711,9 @@ Every story in which Grandma speaks.
 **HANK** (Annoyed): It's all here! Wow, this delivery was seriously late.
 **MADDIE** (Surprised): Hank! T-this stuff is yours??
 
-### SP_HanksMystery2024 — decoration SP_HanksMystery2024_Decoration_Slot29
+### Proposal Mystery — decoration SP_HanksMystery2024_Decoration_Slot29
 `SP_HanksMystery2024_Decoration_Slot29_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot29, event=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot29, event=Proposal Mystery, eventKey=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **HANK** (Charming): Yeah, this is all me. Sorry about crowding your front yard, Ursula.
 **GRANDMA**: It is quite alright - I guessed it was you! But tell us, what is all of this for?
@@ -5819,27 +5723,26 @@ Every story in which Grandma speaks.
 **MADDIE** (Surprised): But... is it an engagement ring??
 **HANK** (Charming): Funny you should ask...
 
-### SP_HanksMystery2024 — item discovered: 71182798
+### Proposal Mystery — item discovered: Diamond Ring
 `SP_HanksMystery2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_HanksMystery2024, items=['71182798'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_HanksMystery2024, items=['SP_HanksMystery2024_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Proposal Mystery, eventKey=SP_HanksMystery2024, itemKeys=['SP_HanksMystery2024_CollectableItems_04'], items=['Diamond Ring'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Thinking): I have a feeling that the ring was no coincidence. Someone is planning something big!
 **GRANDMA** (Thinking): And I think I know who it is...
 
-### SP_JuliusMystery2023 — decoration SP_JuliusMystery2023_Decoration_Slot26
+### Julius' Mystery — decoration SP_JuliusMystery2023_Decoration_Slot26
 `SP_JuliusMystery2023_Decoration_Slot26_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_JuliusMystery2023_Decoration_Slot26, event=SP_JuliusMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_JuliusMystery2023_Decoration_Slot26, event=Julius' Mystery, eventKey=SP_JuliusMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_JuliusMystery2023 — decoration SP_JuliusMystery2023_Decoration_Slot28
+### Julius' Mystery — decoration SP_JuliusMystery2023_Decoration_Slot28
 `SP_JuliusMystery2023_Decoration_Slot28_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_JuliusMystery2023_Decoration_Slot28, event=SP_JuliusMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_JuliusMystery2023_Decoration_Slot28, event=Julius' Mystery, eventKey=SP_JuliusMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_JuliusMystery2023 — decoration SP_JuliusMystery2023_Decoration_Slot29
+### Julius' Mystery — decoration SP_JuliusMystery2023_Decoration_Slot29
 `SP_JuliusMystery2023_Decoration_Slot29_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_JuliusMystery2023_Decoration_Slot29, event=SP_JuliusMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_JuliusMystery2023_Decoration_Slot29, event=Julius' Mystery, eventKey=SP_JuliusMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
 ### Lights for the Lost — outro
@@ -5856,9 +5759,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): I have some pictures in the family photo album to show you. And some more funny stories.
 **MADDIE** (Encouraging): That sounds wonderful, Grandma.
 
-### SP_LostLights2026 — decoration SP_LostLights2026_Decoration_Slot25
+### Lights for the Lost — decoration SP_LostLights2026_Decoration_Slot25
 `SP_LostLights2026_Decoration_Slot25_Dialogue` · seen 26.07.01–26.07.01
-- trigger: decoration, decoration=SP_LostLights2026_Decoration_Slot25, event=SP_LostLights2026, moment=decoration placed (versions 26.07.01–26.07.01)
+- trigger: decoration, decoration=SP_LostLights2026_Decoration_Slot25, event=Lights for the Lost, eventKey=SP_LostLights2026, moment=decoration placed (versions 26.07.01–26.07.01)
 
 **MADDIE** (Thinking): Okay! I think I've got most of the supplies! Candles, paper, glue...
 **GRANDMA** (Encouraging): There is still time before evening, dear.
@@ -5868,9 +5771,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Thinking): ...which, by the way, I'm still not sure how it goes..?
 **GRANDMA** (Encouraging): Then let me tell you. It is my favorite part!
 
-### SP_LostLights2026 — decoration SP_LostLights2026_Decoration_Slot26
+### Lights for the Lost — decoration SP_LostLights2026_Decoration_Slot26
 `SP_LostLights2026_Decoration_Slot26_Dialogue` · seen 26.07.01–26.07.01
-- trigger: decoration, decoration=SP_LostLights2026_Decoration_Slot26, event=SP_LostLights2026, moment=decoration placed (versions 26.07.01–26.07.01)
+- trigger: decoration, decoration=SP_LostLights2026_Decoration_Slot26, event=Lights for the Lost, eventKey=SP_LostLights2026, moment=decoration placed (versions 26.07.01–26.07.01)
 
 **GRANDMA** (Encouraging): Where was I? Oh yes - the stories. Usually we start while we fold the boats.
 **ANTIQUEDEALER** (Thinking): Hopewell Bay has a very strong maritime culture, Maddie.
@@ -5882,9 +5785,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Worried): They did not, dear. But looking to the horizon day after day, hoping against hope...that's no way to live.
 **GRANDMA**: Joining the Lights for the Lost festival was a way of saying goodbye.
 
-### SP_LostLights2026 — decoration SP_LostLights2026_Decoration_Slot27
+### Lights for the Lost — decoration SP_LostLights2026_Decoration_Slot27
 `SP_LostLights2026_Decoration_Slot27_Dialogue` · seen 26.07.01–26.07.01
-- trigger: decoration, decoration=SP_LostLights2026_Decoration_Slot27, event=SP_LostLights2026, moment=decoration placed (versions 26.07.01–26.07.01)
+- trigger: decoration, decoration=SP_LostLights2026_Decoration_Slot27, event=Lights for the Lost, eventKey=SP_LostLights2026, moment=decoration placed (versions 26.07.01–26.07.01)
 
 **GRANDMA** (Encouraging): So the people would tell stories about their lost loved ones while making the lanterns.
 **GRANDMA**: And then when they let them go, it was...sort of like a funeral at sea.
@@ -5893,9 +5796,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Encouraging): Yes. These days, we usually remember anyone we've lost, not just sailors.
 **MADDIE** (Joyous): Aww. That's actually really sweet.
 
-### SP_LostLights2026 — decoration SP_LostLights2026_Decoration_Slot28
+### Lights for the Lost — decoration SP_LostLights2026_Decoration_Slot28
 `SP_LostLights2026_Decoration_Slot28_Dialogue` · seen 26.07.01–26.07.01
-- trigger: decoration, decoration=SP_LostLights2026_Decoration_Slot28, event=SP_LostLights2026, moment=decoration placed (versions 26.07.01–26.07.01)
+- trigger: decoration, decoration=SP_LostLights2026_Decoration_Slot28, event=Lights for the Lost, eventKey=SP_LostLights2026, moment=decoration placed (versions 26.07.01–26.07.01)
 
 **GRANDMA** (Encouraging): It's almost time! Does everyone have their lanterns?
 **ANTIQUEDEALER** (Surprised): Yes, yes. I am coming. To the row boat!
@@ -5903,9 +5806,9 @@ Every story in which Grandma speaks.
 **ANTIQUEDEALER** (Encouraging): Indeed. They are catching the ebb tide, making sure the lanterns are carried out to sea.
 **MADDIE** (Joyous): Let's make sure we catch it too! I want to see it from the water.
 
-### SP_LostLights2026 — decoration SP_LostLights2026_Decoration_Slot29
+### Lights for the Lost — decoration SP_LostLights2026_Decoration_Slot29
 `SP_LostLights2026_Decoration_Slot29_Dialogue` · seen 26.07.01–26.07.01
-- trigger: decoration, decoration=SP_LostLights2026_Decoration_Slot29, event=SP_LostLights2026, moment=decoration placed (versions 26.07.01–26.07.01)
+- trigger: decoration, decoration=SP_LostLights2026_Decoration_Slot29, event=Lights for the Lost, eventKey=SP_LostLights2026, moment=decoration placed (versions 26.07.01–26.07.01)
 
 **MADDIE**: This one is for my Dad. Thank you for making me curious.
 **GRANDMA** (Relaxed): Michael definitely was curious. He'd take things apart just to see how they work.
@@ -5944,9 +5847,9 @@ Every story in which Grandma speaks.
 **ANTIQUEDEALER** (Encouraging): Why don’t you join us? I want to tell you the story of the time your grandfather stole a stuffed penguin.
 **GRANDMA** (Joyous): Oh, no! Not that!
 
-### SP_LoveLetter2025 — decoration SP_LoveLetter2025_Decoration_Slot25
+### A Love Letter Lost — decoration SP_LoveLetter2025_Decoration_Slot25
 `SP_LoveLetter2025_Decoration_Slot25_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_LoveLetter2025_Decoration_Slot25, event=SP_LoveLetter2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_LoveLetter2025_Decoration_Slot25, event=A Love Letter Lost, eventKey=SP_LoveLetter2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **ANTIQUEDEALER**: Salutations, Maddie!
 **MADDIE**: Hello, Julius.
@@ -5960,9 +5863,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Hesitant): Er... That pie is very special!
 **ANTIQUEDEALER** (Charming): Marvelous! She can bring it to tea then!
 
-### SP_LoveLetter2025 — decoration SP_LoveLetter2025_Decoration_Slot26
+### A Love Letter Lost — decoration SP_LoveLetter2025_Decoration_Slot26
 `SP_LoveLetter2025_Decoration_Slot26_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_LoveLetter2025_Decoration_Slot26, event=SP_LoveLetter2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_LoveLetter2025_Decoration_Slot26, event=A Love Letter Lost, eventKey=SP_LoveLetter2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Doubtful): Grandma! You shouldn’t have ghosted Julius like that!
 **GRANDMA** (Worried): I’m sorry, dearie! I was just too nervous to face him!
@@ -5974,9 +5877,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Relaxed): Every time you avoid Julius, you’ll see another of my little friends. Cute, aren’t they?
 **GRANDMA** (Annoyed): Good grief...
 
-### SP_LoveLetter2025 — decoration SP_LoveLetter2025_Decoration_Slot27
+### A Love Letter Lost — decoration SP_LoveLetter2025_Decoration_Slot27
 `SP_LoveLetter2025_Decoration_Slot27_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_LoveLetter2025_Decoration_Slot27, event=SP_LoveLetter2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_LoveLetter2025_Decoration_Slot27, event=A Love Letter Lost, eventKey=SP_LoveLetter2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): Isn’t this cozy, Grandma?
 **GRANDMA**: It is, dearie.
@@ -5991,9 +5894,9 @@ Every story in which Grandma speaks.
 **ANTIQUEDEALER** (Discouraged): Oh... Alright then. I apologize for the intrusion.
 **MADDIE** (Annoyed): Grandma!
 
-### SP_LoveLetter2025 — decoration SP_LoveLetter2025_Decoration_Slot29
+### A Love Letter Lost — decoration SP_LoveLetter2025_Decoration_Slot29
 `SP_LoveLetter2025_Decoration_Slot29_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_LoveLetter2025_Decoration_Slot29, event=SP_LoveLetter2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_LoveLetter2025_Decoration_Slot29, event=A Love Letter Lost, eventKey=SP_LoveLetter2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Doubtful): No running off again! Okay, Grandma?
 **GRANDMA** (Worried): Alright dearie. Alright...
@@ -6021,9 +5924,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Worried): I... I think Julius is in love with me!
 **MADDIE** (Surprised): What?!
 
-### SP_LoveLetter2025 — item discovered: SP_LoveLetter2025_CollectableItems_04
+### A Love Letter Lost — item discovered: Eternal Correspondence
 `SP_LoveLetter2025_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_LoveLetter2025, items=['SP_LoveLetter2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=A Love Letter Lost, eventKey=SP_LoveLetter2025, itemKeys=['SP_LoveLetter2025_CollectableItems_04'], items=['Eternal Correspondence'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Worried): Well... I was sorting through some of the festival decorations you left all over the place, and I found this.
 **MADDIE** (Surprised): Oh, this looks like a...
@@ -6038,9 +5941,9 @@ Every story in which Grandma speaks.
 **MADDIE**: No, I mean talk to him. He deserves to know how you feel. Be honest.
 **GRANDMA** (Surprised): Ho- honest?!
 
-### SP_MasonsMystery2023 — decoration SP_MasonsMystery2023_Decoration_Slot25
+### Holiday Mystery — decoration SP_MasonsMystery2023_Decoration_Slot25
 `SP_MasonsMystery2023_Decoration_Slot25_Dialogue` · seen 23.11.02–26.07.01
-- trigger: decoration, decoration=SP_MasonsMystery2023_Decoration_Slot25, event=SP_MasonsMystery2023, moment=decoration placed (versions 23.11.02–26.07.01)
+- trigger: decoration, decoration=SP_MasonsMystery2023_Decoration_Slot25, event=Holiday Mystery, eventKey=SP_MasonsMystery2023, moment=decoration placed (versions 23.11.02–26.07.01)
 
 **MADDIE** (Encouraging): Getting into the holiday spirit, I see!
 **GRANDMA** (Doubtful): Yes... I guess...
@@ -6049,9 +5952,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Worried): I didn’t do it!
 **MADDIE** (Thinking): What? Then... Who did?
 
-### SP_MasonsMystery2023 — decoration SP_MasonsMystery2023_Decoration_Slot26
+### Holiday Mystery — decoration SP_MasonsMystery2023_Decoration_Slot26
 `SP_MasonsMystery2023_Decoration_Slot26_Dialogue` · seen 23.11.02–26.07.01
-- trigger: decoration, decoration=SP_MasonsMystery2023_Decoration_Slot26, event=SP_MasonsMystery2023, moment=decoration placed (versions 23.11.02–26.07.01)
+- trigger: decoration, decoration=SP_MasonsMystery2023_Decoration_Slot26, event=Holiday Mystery, eventKey=SP_MasonsMystery2023, moment=decoration placed (versions 23.11.02–26.07.01)
 
 **DEB** (Encouraging): How pretty, sis!
 **GRANDMA** (Surprised): It wasn’t me! Someone is coming over and decorating my home in secret!
@@ -6059,9 +5962,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: No.... No, I guess not. But I’m wondering who it might be!
 **DEB** (Relaxed): Well... When they’re done, tell them to do my house too.
 
-### SP_MasonsMystery2023 — decoration SP_MasonsMystery2023_Decoration_Slot28
+### Holiday Mystery — decoration SP_MasonsMystery2023_Decoration_Slot28
 `SP_MasonsMystery2023_Decoration_Slot28_Dialogue` · seen 23.11.02–26.07.01
-- trigger: decoration, decoration=SP_MasonsMystery2023_Decoration_Slot28, event=SP_MasonsMystery2023, moment=decoration placed (versions 23.11.02–26.07.01)
+- trigger: decoration, decoration=SP_MasonsMystery2023_Decoration_Slot28, event=Holiday Mystery, eventKey=SP_MasonsMystery2023, moment=decoration placed (versions 23.11.02–26.07.01)
 
 **MADDIE** (Thinking): So, who do you think is behind this?
 **GRANDMA** (Doubtful): I have a theory...
@@ -6073,9 +5976,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Relaxed): You thought it was Julius, didn’t you?
 **GRANDMA** (Annoyed): Yes, I did...
 
-### SP_MasonsMystery2023 — decoration SP_MasonsMystery2023_Decoration_Slot29
+### Holiday Mystery — decoration SP_MasonsMystery2023_Decoration_Slot29
 `SP_MasonsMystery2023_Decoration_Slot29_Dialogue` · seen 23.11.02–26.07.01
-- trigger: decoration, decoration=SP_MasonsMystery2023_Decoration_Slot29, event=SP_MasonsMystery2023, moment=decoration placed (versions 23.11.02–26.07.01)
+- trigger: decoration, decoration=SP_MasonsMystery2023_Decoration_Slot29, event=Holiday Mystery, eventKey=SP_MasonsMystery2023, moment=decoration placed (versions 23.11.02–26.07.01)
 
 **MADDIE** (Encouraging): I heard you figured it out!
 **GRANDMA** (Charming): Yes, dearie... Mason? You can come out from behind the bushes!
@@ -6085,10 +5988,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Relaxed): You bet, Mason! It’s really rare to fool Grandma!
 **MASON** (Joyous): Oh, cool!
 
-### SP_MasonsMystery2023 — item discovered: 2232282
+### Holiday Mystery — item discovered: Holiday Snowflake
 `SP_MasonsMystery2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=SP_MasonsMystery2023, items=['2232282'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=SP_MasonsMystery2023, items=['SP_MasonsMystery2023_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Mystery, eventKey=SP_MasonsMystery2023, itemKeys=['SP_MasonsMystery2023_CollectableItems_04'], items=['Holiday Snowflake'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **MADDIE** (Encouraging): These ornaments will look great on our tree, Grandma!
 **GRANDMA** (Charming): Can’t go wrong with the classics, dearie.
@@ -6110,9 +6012,9 @@ Every story in which Grandma speaks.
 - trigger: unknown, hint=Mystery (Progression event) (versions None–None)
 
 
-### SP_Misery2025 — decoration SP_Misery2025_Decoration_Slot35
+### Something Ours — decoration SP_Misery2025_Decoration_Slot35
 `SP_Misery2025_Decoration_Slot35_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Misery2025_Decoration_Slot35, event=SP_Misery2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Misery2025_Decoration_Slot35, event=Something Ours, eventKey=SP_Misery2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Joyous): At least we won’t get lost, dearie.
 **MASON** (Encouraging): It points to all the most important sites here!
@@ -6123,9 +6025,9 @@ Every story in which Grandma speaks.
 **MASON** (Annoyed): How else would I get dirty?!
 **PEARL** (Thinking): That explains a lot, actually...
 
-### SP_MysteriesUnveiled2024 — decoration SP_MysteriesUnveiled2024_Decoration_Slot28
+### The Mysteries Unveiled — decoration SP_MysteriesUnveiled2024_Decoration_Slot28
 `SP_MysteriesUnveiled2024_Decoration_Slot28_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_MysteriesUnveiled2024_Decoration_Slot28, event=SP_MysteriesUnveiled2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_MysteriesUnveiled2024_Decoration_Slot28, event=The Mysteries Unveiled, eventKey=SP_MysteriesUnveiled2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): Grandma, you need to tell me, is what Jackie wrote the truth?
 **GRANDMA** (Discouraged): I’m sorry, dearie... But yes. Yes, it is.
@@ -6140,9 +6042,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Worried): But, dearie, this was a long time ago. The entire operation was shut down.
 **GRANDMA**: This’ll all blow over soon enough. It always does...
 
-### SP_MysteriesUnveiled2024 — decoration SP_MysteriesUnveiled2024_Decoration_Slot38
+### The Mysteries Unveiled — decoration SP_MysteriesUnveiled2024_Decoration_Slot38
 `SP_MysteriesUnveiled2024_Decoration_Slot38_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_MysteriesUnveiled2024_Decoration_Slot38, event=SP_MysteriesUnveiled2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_MysteriesUnveiled2024_Decoration_Slot38, event=The Mysteries Unveiled, eventKey=SP_MysteriesUnveiled2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Discouraged): Is that supposed to be you, dearie?
 **MADDIE** (Discouraged): Er... Yeah.
@@ -6163,9 +6065,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Encouraging): Good luck, I guess?
 **GRANDMA**: Thank you, dearie!
 
-### SP_Omoide2026 — decoration SP_Omoide2026_Decoration_Slot38
+### Omoide - The Challenge — decoration SP_Omoide2026_Decoration_Slot38
 `SP_Omoide2026_Decoration_Slot38_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Omoide2026_Decoration_Slot38, event=SP_Omoide2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Omoide2026_Decoration_Slot38, event=Omoide - The Challenge, eventKey=SP_Omoide2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE**: Grandma, I found this letter inside the Go board.
 **MADDIE** (Worried): It’s from Sakura.
@@ -6186,9 +6088,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Worried): I... I'm sorry dearie, but I need to check something.
 **MADDIE** (Worried): Grandma?
 
-### SP_Omoide2026 — item discovered: SP_Omoide2026_CollectableItems_04
+### Omoide - The Challenge — item discovered: The Final Match
 `SP_Omoide2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_Omoide2026, items=['SP_Omoide2026_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Omoide - The Challenge, eventKey=SP_Omoide2026, itemKeys=['SP_Omoide2026_CollectableItems_04'], items=['The Final Match'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: That’s it!
 **MADDIE** (Encouraging): Those are all the pieces found for the game.
@@ -6211,9 +6113,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Doubtful): You should be more careful about where you leave it, Grandma.
 **GRANDMA** (Charming): Don't worry -- I won't lose it again.
 
-### SP_Pickleball2025 — decoration SP_Pickleball2025_Decoration_Slot34
+### Smartphone Pickle — decoration SP_Pickleball2025_Decoration_Slot34
 `SP_Pickleball2025_Decoration_Slot34_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Pickleball2025_Decoration_Slot34, event=SP_Pickleball2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Pickleball2025_Decoration_Slot34, event=Smartphone Pickle, eventKey=SP_Pickleball2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA**: That was a good match, dearie! You put up quite a fight.
 **MADDIE** (Relaxed): Thank you, and congratulations! It was a well-deserved victory.
@@ -6222,9 +6124,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Doubtful): How many social media accounts do you have?
 **GRANDMA** (Thinking): What's that, dearie? Smile for the camera!
 
-### SP_Pickleball2025 — decoration SP_Pickleball2025_Decoration_Slot36
+### Smartphone Pickle — decoration SP_Pickleball2025_Decoration_Slot36
 `SP_Pickleball2025_Decoration_Slot36_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Pickleball2025_Decoration_Slot36, event=SP_Pickleball2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Pickleball2025_Decoration_Slot36, event=Smartphone Pickle, eventKey=SP_Pickleball2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Worried): Have you seen my phone, dearie?
 **MADDIE** (Surprised): No. Have you lost it?
@@ -6246,10 +6148,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Relaxed): Yes! Like tennis - but more fun!
 **MADDIE** (Thinking): But does it involve actual pickles?
 
-### SP_Pickleball2025 — item discovered: 90517509
+### Smartphone Pickle — item discovered: Tube of Balls
 `SP_Pickleball2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_Pickleball2025, items=['90517509'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_Pickleball2025, items=['SP_Pickleball2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Smartphone Pickle, eventKey=SP_Pickleball2025, itemKeys=['SP_Pickleball2025_CollectableItems_04'], items=['Tube of Balls'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA**: You might know I was something of a tennis champion in my younger days...
 **GRANDMA**: When I was reading some news on the internet on the handy smartphone you bought me, I saw an article about pickleball and thought it looked fun.
@@ -6259,36 +6160,34 @@ Every story in which Grandma speaks.
 **GRANDMA** (Thinking): So? Will you play with me?
 **MADDIE** (Relaxed): You bet I will. It's a new year, I'm a whole new me, and the new me doesn't shy away from a challenge!
 
-### SP_PieWars2023 — decoration SP_PieWars2023_Decoration_Slot25
+### Pie Wars — decoration SP_PieWars2023_Decoration_Slot25
 `SP_PieWars2023_Decoration_Slot25_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot25, event=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot25, event=Pie Wars, eventKey=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_PieWars2023 — decoration SP_PieWars2023_Decoration_Slot26
+### Pie Wars — decoration SP_PieWars2023_Decoration_Slot26
 `SP_PieWars2023_Decoration_Slot26_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot26, event=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot26, event=Pie Wars, eventKey=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_PieWars2023 — decoration SP_PieWars2023_Decoration_Slot27
+### Pie Wars — decoration SP_PieWars2023_Decoration_Slot27
 `SP_PieWars2023_Decoration_Slot27_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot27, event=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot27, event=Pie Wars, eventKey=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_PieWars2023 — decoration SP_PieWars2023_Decoration_Slot28
+### Pie Wars — decoration SP_PieWars2023_Decoration_Slot28
 `SP_PieWars2023_Decoration_Slot28_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot28, event=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot28, event=Pie Wars, eventKey=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_PieWars2023 — item discovered: 14311
+### Pie Wars — item discovered: SP_PieWars2023_CollectableItems_04
 `SP_PieWars2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=SP_PieWars2023, items=['14311'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=SP_PieWars2023, items=['SP_PieWars2023_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Pie Wars, eventKey=SP_PieWars2023, itemKeys=['SP_PieWars2023_CollectableItems_04'], items=['SP_PieWars2023_CollectableItems_04'], moment=item discovered (versions 23.09.02–26.07.01)
 
 
-### SP_PigPet2025 — item discovered: 90487995
+### A Pig Birthday Surprise — item discovered: Little Piggy
 `SP_PigPet2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_PigPet2025, items=['90487995'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_PigPet2025, items=['SP_PigPet2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=A Pig Birthday Surprise, eventKey=SP_PigPet2025, itemKeys=['SP_PigPet2025_CollectableItems_04'], items=['Little Piggy'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: I don't think I've ever met Mason's other mom, Charlotte. What is she like?
 **GRANDMA**: She has very much taken after her mother.
@@ -6329,9 +6228,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Worried): Grandma, that sounds really serious. Is there anything I can do?
 **GRANDMA**: Just leave it to me for now. All you need to know is that I have taken care of everything.
 
-### SP_Ringmaster2025 — decoration SP_Ringmaster2025_Decoration_Slot33
+### Carousel of Confessions — decoration SP_Ringmaster2025_Decoration_Slot33
 `SP_Ringmaster2025_Decoration_Slot33_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Ringmaster2025_Decoration_Slot33, event=SP_Ringmaster2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Ringmaster2025_Decoration_Slot33, event=Carousel of Confessions, eventKey=SP_Ringmaster2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Why did the ringmaster say that you would know how to put on a circus show?
 **GRANDMA** (Thinking): Fine... once upon a time, a very long time ago, I toured as a member of the troupe.
@@ -6342,9 +6241,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Relaxed): I suppose I can try. But we will need more performers.
 **MADDIE** (Encouraging): I'll get you performers. Thank you, Grandma!
 
-### SP_Ringmaster2025 — decoration SP_Ringmaster2025_Decoration_Slot35
+### Carousel of Confessions — decoration SP_Ringmaster2025_Decoration_Slot35
 `SP_Ringmaster2025_Decoration_Slot35_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Ringmaster2025_Decoration_Slot35, event=SP_Ringmaster2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Ringmaster2025_Decoration_Slot35, event=Carousel of Confessions, eventKey=SP_Ringmaster2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA**: Did you manage to recruit some performers?
 **MADDIE** (Worried): Yep, and everyone is ready for practice. But...
@@ -6357,10 +6256,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Annoyed): *Sigh*
 **GRANDMA** (Annoyed): I suppose you need to know the truth. I promise I will tell you when this circus business is over.
 
-### SP_Ringmaster2025 — item discovered: 36277344
+### Carousel of Confessions — item discovered: Gum Balls
 `SP_Ringmaster2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_Ringmaster2025, items=['36277344'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_Ringmaster2025, items=['SP_Ringmaster2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Carousel of Confessions, eventKey=SP_Ringmaster2025, itemKeys=['SP_Ringmaster2025_CollectableItems_04'], items=['Gum Balls'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): Grandma! We have a serious situation!
 **GRANDMA** (Charming): Are you sure? Last time you said that there was a spider in the bathroom - and not a very big one either.
@@ -6371,14 +6269,14 @@ Every story in which Grandma speaks.
   _earlier:_ ~~The circus ringmaster, Fiona DuVall, said that you would be able to help.~~ (until 25.04.01)
 **MADDIE** (Thinking): What was she talking about?
 
-### SP_RoddysMystery2023 — decoration SP_RoddysMystery2023_Decoration_Slot26
+### Roddy's Mystery — decoration SP_RoddysMystery2023_Decoration_Slot26
 `SP_RoddysMystery2023_Decoration_Slot26_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_RoddysMystery2023_Decoration_Slot26, event=SP_RoddysMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_RoddysMystery2023_Decoration_Slot26, event=Roddy's Mystery, eventKey=SP_RoddysMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_RoddysMystery2023 — decoration SP_RoddysMystery2023_Decoration_Slot29
+### Roddy's Mystery — decoration SP_RoddysMystery2023_Decoration_Slot29
 `SP_RoddysMystery2023_Decoration_Slot29_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_RoddysMystery2023_Decoration_Slot29, event=SP_RoddysMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_RoddysMystery2023_Decoration_Slot29, event=Roddy's Mystery, eventKey=SP_RoddysMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
 ### Rumors in the Ring — outro
@@ -6410,10 +6308,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Hesitant): They have nowhere else to go, and the ringmaster seemed to know you!
 **MADDIE** (Hesitant): Besides, who doesn't love the circus!
 
-### SP_RumorsRing2025 — item discovered: 30458319
+### Rumors in the Ring — item discovered: Cannon of Danger
 `SP_RumorsRing2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_RumorsRing2025, items=['30458319'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_RumorsRing2025, items=['SP_RumorsRing2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Rumors in the Ring, eventKey=SP_RumorsRing2025, itemKeys=['SP_RumorsRing2025_CollectableItems_04'], items=['Cannon of Danger'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: Hey, Grandma. What's so interesting on your phone?
 **GRANDMA** (Relaxed): W-what? Oh, just comparing insurance prices, dearie.
@@ -6444,44 +6341,44 @@ Every story in which Grandma speaks.
 **GRANDMA** (Encouraging): Change is good for the soul, dearie!
 **MADDIE** (Frustrated): Yeah, but not for the back!
 
-### SP_SpringCleaning2026 — decoration SP_SpringCleaning2026_Decoration_Slot25
+### Season Pass - Signs of Spring — decoration SP_SpringCleaning2026_Decoration_Slot25
 `SP_SpringCleaning2026_Decoration_Slot25_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_SpringCleaning2026_Decoration_Slot25, event=SP_SpringCleaning2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_SpringCleaning2026_Decoration_Slot25, event=Season Pass - Signs of Spring, eventKey=SP_SpringCleaning2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): These plants are beautiful, Grandma!
 **GRANDMA** (Charming): Thank you, dearie. I'm sure you didn't mind the yellow!
 **MADDIE** (Thinking): I'm actually still thinking why we need shovels?
 **GRANDMA** (Charming): You wait and see!
 
-### SP_SpringCleaning2026 — decoration SP_SpringCleaning2026_Decoration_Slot27
+### Season Pass - Signs of Spring — decoration SP_SpringCleaning2026_Decoration_Slot27
 `SP_SpringCleaning2026_Decoration_Slot27_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_SpringCleaning2026_Decoration_Slot27, event=SP_SpringCleaning2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_SpringCleaning2026_Decoration_Slot27, event=Season Pass - Signs of Spring, eventKey=SP_SpringCleaning2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Surprised): Wow! I had no idea this was buried under the ground!
 **GRANDMA** (Charming): You'd be surprised what you can dig up around these parts!
 **MADDIE** (Encouraging): At least now I know what we needed the shovels for!
 **GRANDMA** (Joyous): Haha! We're not done yet.
 
-### SP_SpringCleaning2026 — decoration SP_SpringCleaning2026_Decoration_Slot28
+### Season Pass - Signs of Spring — decoration SP_SpringCleaning2026_Decoration_Slot28
 `SP_SpringCleaning2026_Decoration_Slot28_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_SpringCleaning2026_Decoration_Slot28, event=SP_SpringCleaning2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_SpringCleaning2026_Decoration_Slot28, event=Season Pass - Signs of Spring, eventKey=SP_SpringCleaning2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Thinking): Tell me again, why these statues were buried?
 **GRANDMA**: To give them that authentic patina, dearie.
 **MADDIE** (Frustrated): Then why am I breaking a sweat trying to get it off with a toothbrush?
 **GRANDMA** (Discouraged): I didn't say it was a good idea...
 
-### SP_SpringCleaning2026 — decoration SP_SpringCleaning2026_Decoration_Slot29
+### Season Pass - Signs of Spring — decoration SP_SpringCleaning2026_Decoration_Slot29
 `SP_SpringCleaning2026_Decoration_Slot29_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_SpringCleaning2026_Decoration_Slot29, event=SP_SpringCleaning2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_SpringCleaning2026_Decoration_Slot29, event=Season Pass - Signs of Spring, eventKey=SP_SpringCleaning2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): A greenhouse on the roof! That's pretty smart, Grandma.
 **GRANDMA** (Encouraging): I figured it would be the best place to catch the sun.
 **GRANDMA** (Relaxed): And it has a great view!
 
-### SP_SpringCleaning2026 — decoration SP_SpringCleaning2026_Decoration_Slot38
+### Season Pass - Signs of Spring — decoration SP_SpringCleaning2026_Decoration_Slot38
 `SP_SpringCleaning2026_Decoration_Slot38_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_SpringCleaning2026_Decoration_Slot38, event=SP_SpringCleaning2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_SpringCleaning2026_Decoration_Slot38, event=Season Pass - Signs of Spring, eventKey=SP_SpringCleaning2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Surprised): What the...
 **GRANDMA** (Worried): Is everything alright, dearie?
@@ -6499,29 +6396,27 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): I do... Get your shovel!
 **MADDIE** (Surprised): Shovel?!
 
-### SP_SpringCleaning2026 — item discovered: SP_SpringCleaning2026_CollectableItems_04
+### Season Pass - Signs of Spring — item discovered: Glass Cottage
 `SP_SpringCleaning2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_SpringCleaning2026, items=['SP_SpringCleaning2026_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Season Pass - Signs of Spring, eventKey=SP_SpringCleaning2026, itemKeys=['SP_SpringCleaning2026_CollectableItems_04'], items=['Glass Cottage'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): How cute! Tiny greenhouses!
 **MADDIE** (Joyous): I love the snow globe! Ooh, and the lantern too!
 **GRANDMA** (Encouraging): Why thank you, dearie! You use what you have.
 
-### SP_SpringSeason2023 — decoration SP_SpringSeason2023_Decoration_28
+### Spring Season — decoration SP_SpringSeason2023_Decoration_28
 `SP_SpringSeason2023_Decoration_28_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_SpringSeason2023_Decoration_28, event=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_SpringSeason2023_Decoration_28, event=Spring Season, eventKey=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_SpringSeason2023 — item discovered: 14192
+### Spring Season — item discovered: SP_SpringSeason2023_CollectableItems_04
 `SP_SpringSeason2023_EndOfChainDialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=SP_SpringSeason2023, items=['14192'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=SP_SpringSeason2023, items=['SP_SpringSeason2023_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spring Season, eventKey=SP_SpringSeason2023, itemKeys=['SP_SpringSeason2023_CollectableItems_04'], items=['SP_SpringSeason2023_CollectableItems_04'], moment=item discovered (versions 23.09.02–26.07.01)
 
 
-### SP_StrayBonesMystery2024 — item discovered: 34256375
+### Stray Bones Mystery — item discovered: Dog Collar
 `SP_StrayBonesMystery2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_StrayBonesMystery2024, items=['34256375'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_StrayBonesMystery2024, items=['SP_StrayBonesMystery2024_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Stray Bones Mystery, eventKey=SP_StrayBonesMystery2024, itemKeys=['SP_StrayBonesMystery2024_CollectableItems_04'], items=['Dog Collar'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Have you seen Rufus?? It's his dinnertime, but there's no trace of him!
 **MADDIE** (Thinking): He NEVER misses his dinner!
@@ -6543,9 +6438,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Charming): Okay... but I warn you! I’ve been practicing while you were away!
 **GRANDMA** (Charming): That’s good, dearie. I’m always up for a challenge!
 
-### SP_Taikai2026 — decoration SP_Taikai2026_Decoration_Slot33
+### Taikai - The Rematch — decoration SP_Taikai2026_Decoration_Slot33
 `SP_Taikai2026_Decoration_Slot33_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Taikai2026_Decoration_Slot33, event=SP_Taikai2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Taikai2026_Decoration_Slot33, event=Taikai - The Rematch, eventKey=SP_Taikai2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Surprised): Wow! You made this rock garden?
 **GRANDMA** (Encouraging): Yes, I needed somewhere for my thoughts to settle.
@@ -6553,9 +6448,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Charming): Graceful. Like you, Grandma.
 **GRANDMA** (Relaxed): Hmm... Like I’m trying to be.
 
-### SP_Taikai2026 — decoration SP_Taikai2026_Decoration_Slot34
+### Taikai - The Rematch — decoration SP_Taikai2026_Decoration_Slot34
 `SP_Taikai2026_Decoration_Slot34_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Taikai2026_Decoration_Slot34, event=SP_Taikai2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Taikai2026_Decoration_Slot34, event=Taikai - The Rematch, eventKey=SP_Taikai2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): Nice looking bamboo fountain!
 **GRANDMA** (Relaxed): It’s called a shihi-odoshi. It fills, it tips, it knocks.
@@ -6565,9 +6460,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Relaxed): Are you going to tell me what happened in Japan?
 **GRANDMA** (Discouraged): Soon...
 
-### SP_Taikai2026 — decoration SP_Taikai2026_Decoration_Slot35
+### Taikai - The Rematch — decoration SP_Taikai2026_Decoration_Slot35
 `SP_Taikai2026_Decoration_Slot35_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Taikai2026_Decoration_Slot35, event=SP_Taikai2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Taikai2026_Decoration_Slot35, event=Taikai - The Rematch, eventKey=SP_Taikai2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **GRANDMA**: I love the sound of running water!
 **MADDIE** (Encouraging): Wow! This is really impressive! Another memory from Japan?
@@ -6575,9 +6470,9 @@ Every story in which Grandma speaks.
 **MADDIE**: Okay, I admit it is very soothing!
 **GRANDMA** (Relaxed): It is.
 
-### SP_Taikai2026 — decoration SP_Taikai2026_Decoration_Slot36
+### Taikai - The Rematch — decoration SP_Taikai2026_Decoration_Slot36
 `SP_Taikai2026_Decoration_Slot36_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Taikai2026_Decoration_Slot36, event=SP_Taikai2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Taikai2026_Decoration_Slot36, event=Taikai - The Rematch, eventKey=SP_Taikai2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Charming): This is really beautiful, Grandma.
 **GRANDMA** (Relaxed): ...
@@ -6591,9 +6486,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Joyous): Oh, we played. It was a challenge after all.
 **MADDIE** (Surprised): What happened?!
 
-### SP_Taikai2026 — decoration SP_Taikai2026_Decoration_Slot37
+### Taikai - The Rematch — decoration SP_Taikai2026_Decoration_Slot37
 `SP_Taikai2026_Decoration_Slot37_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Taikai2026_Decoration_Slot37, event=SP_Taikai2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Taikai2026_Decoration_Slot37, event=Taikai - The Rematch, eventKey=SP_Taikai2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **GRANDMA**: We had our match. In a room much like this one!
 **GRANDMA**: By the waterfall we had played at so many years ago.
@@ -6619,9 +6514,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): Not right now...
 **GRANDMA** (Encouraging): Maybe later. Over some tea.
 
-### SP_Taikai2026 — item discovered: SP_Taikai2026_CollectableItems_04
+### Taikai - The Rematch — item discovered: Kyusu
 `SP_Taikai2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_Taikai2026, items=['SP_Taikai2026_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Taikai - The Rematch, eventKey=SP_Taikai2026, itemKeys=['SP_Taikai2026_CollectableItems_04'], items=['Kyusu'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Thinking): Hmmm...
 **GRANDMA**: What is it, dearie?
@@ -6633,9 +6528,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Encouraging): Nice. Why haven’t I seen it before?
 **GRANDMA** (Relaxed): Because now I brought it back with me.
 
-### SP_TheWindOfMystery2024 — decoration SP_TheWindOfMystery2024_Decoration_Slot32
+### The Winds of Mystery — decoration SP_TheWindOfMystery2024_Decoration_Slot32
 `SP_TheWindOfMystery2024_Decoration_Slot32_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot32, event=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot32, event=The Winds of Mystery, eventKey=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA**: Getting ready for the pleasant weather, dearie?
 **MADDIE** (Joyous): Yup! I’m gonna make this entire area a veritable relaxation utopia!
@@ -6648,9 +6543,9 @@ Every story in which Grandma speaks.
 **MASON** (Annoyed): She does that a lot?
 **MADDIE** (Doubtful): All the time...
 
-### SP_TheWindOfMystery2024 — decoration SP_TheWindOfMystery2024_Decoration_Slot37
+### The Winds of Mystery — decoration SP_TheWindOfMystery2024_Decoration_Slot37
 `SP_TheWindOfMystery2024_Decoration_Slot37_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot37, event=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot37, event=The Winds of Mystery, eventKey=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): Maddie, dearie! What are you doing?!
 **MADDIE** (Annoyed): I. Am. Enjoying. This. BEAUTIFUL. DAY!
@@ -6661,10 +6556,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Worried): Oh... I didn’t know. I was too busy working on this...
 **GRANDMA** (Frustrated): Come on, Maddie. We need to start working on boarding up the house!
 
-### SP_TheWindOfMystery2024 — item discovered: 87810352
+### The Winds of Mystery — item discovered: A Perfect Moment
 `SP_TheWindOfMystery2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_TheWindOfMystery2024, items=['87810352'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_TheWindOfMystery2024, items=['SP_TheWindOfMystery2024_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Winds of Mystery, eventKey=SP_TheWindOfMystery2024, itemKeys=['SP_TheWindOfMystery2024_CollectableItems_04'], items=['A Perfect Moment'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): Delicious! Nothing like having some fresh lemonade and a good book to read.
 **MADDIE** (Encouraging): Don’t you agree, Grandma?
@@ -6672,15 +6566,14 @@ Every story in which Grandma speaks.
 **MADDIE** (Relaxed): Just a wonderful summer breeze, Grandma! Enjoy it...
 **GRANDMA** (Frustrated): Well, I guess it won’t hurt to rake all these loose leaves away.
 
-### ProgressionEventItems — item discovered: 14096
+### ProgressionEventItems — item discovered: SPValentines2023Roses_04
 `SP_Valentines2023_EndOfChainDialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=ProgressionEventItems, items=['14096'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=ProgressionEventItems, items=['SPValentines2023Roses_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=ProgressionEventItems, eventKey=ProgressionEventItems, itemKeys=['SPValentines2023Roses_04'], items=['SPValentines2023Roses_04'], moment=item discovered (versions 23.09.02–26.07.01)
 
 
-### SP_ValentinesMystery2024 — decoration SP_ValentinesMystery2024_Decoration_Slot25
+### Valentine's Mystery — decoration SP_ValentinesMystery2024_Decoration_Slot25
 `SP_ValentinesMystery2024_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot25, event=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot25, event=Valentine's Mystery, eventKey=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MASON**: You get the first present.
 **GRANDMA**: Why, thank you, Mason!
@@ -6688,9 +6581,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Surprised): This was not a cheap present, my boy.
 **MASON** (Charming): Only the best for you, Grandma Ursula!
 
-### SP_ValentinesMystery2024 — decoration SP_ValentinesMystery2024_Decoration_Slot28
+### Valentine's Mystery — decoration SP_ValentinesMystery2024_Decoration_Slot28
 `SP_ValentinesMystery2024_Decoration_Slot28_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot28, event=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot28, event=Valentine's Mystery, eventKey=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): What's this old burned teddy?
 **MASON** (Surprised): I didn't order that!
@@ -6700,9 +6593,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Worried): S-someone has sent it to me... But who?
 **MADDIE** (Worried): Lady Voyance's snow globe did also show me something weird... I'm sure its just a coincidence...
 
-### SP_ValentinesMystery2024 — decoration SP_ValentinesMystery2024_Decoration_Slot29
+### Valentine's Mystery — decoration SP_ValentinesMystery2024_Decoration_Slot29
 `SP_ValentinesMystery2024_Decoration_Slot29_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot29, event=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot29, event=Valentine's Mystery, eventKey=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): A ring?
 **MASON** (Surprised): I <b>definitely</b> didn't order that!
@@ -6736,9 +6629,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: Maddie invited a group of her friends to come see them in my front yard. You are more than welcome to join us!
 **LADY VOYANCE** (Encouraging): I might just take you up on that! But we might get more than just northern lights...
 
-### SP_WeddingMystery2024 — decoration SP_WeddingMystery2024_Decoration_Slot32
+### The Wedding Mystery — decoration SP_WeddingMystery2024_Decoration_Slot32
 `SP_WeddingMystery2024_Decoration_Slot32_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot32, event=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot32, event=The Wedding Mystery, eventKey=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE**: Hello, Deb. Getting ready for the big day, I see.
 **DEB** (Charming): Yes! Busy, busy!
@@ -6750,9 +6643,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Worried): I... I’m sorry, dearie. I don’t know what came over me. I’ll go see if Maddie needs some help.
 **DEB** (Charming): Good! And don’t worry. I’ll find out what Hank is hiding!
 
-### SP_WeddingMystery2024 — decoration SP_WeddingMystery2024_Decoration_Slot35
+### The Wedding Mystery — decoration SP_WeddingMystery2024_Decoration_Slot35
 `SP_WeddingMystery2024_Decoration_Slot35_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot35, event=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot35, event=The Wedding Mystery, eventKey=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): So! Soon to be Mr and Mrs. Boulton! I’m surprised you took on the Boulton name, Hank!
 **HANK** (Joyous): What, are you kidding? Hank Boulton... Can’t ask for a better name!
@@ -6762,9 +6655,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Joyous): Hahaha! Oh yes, I remember! Nothing like that.
 **GRANDMA** (Charming): Just a little something I need to discuss with him...
 
-### SP_WeddingMystery2024 — decoration SP_WeddingMystery2024_Decoration_Slot37
+### The Wedding Mystery — decoration SP_WeddingMystery2024_Decoration_Slot37
 `SP_WeddingMystery2024_Decoration_Slot37_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot37, event=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot37, event=The Wedding Mystery, eventKey=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **HANK**: What did you want to talk about, Grandma?
 **GRANDMA** (Encouraging): I just wanted to congratulate you on your wonderful wedding!
@@ -6774,10 +6667,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Doubtful): How about I give you a LITTLE reminder!
 **HANK** (Worried): *gulp*
 
-### SP_WeddingMystery2024 — item discovered: 15481549
+### The Wedding Mystery — item discovered: Wedding Arrangement
 `SP_WeddingMystery2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_WeddingMystery2024, items=['15481549'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_WeddingMystery2024, items=['SP_WeddingMystery2024_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Wedding Mystery, eventKey=SP_WeddingMystery2024, itemKeys=['SP_WeddingMystery2024_CollectableItems_04'], items=['Wedding Arrangement'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: I’m so happy you found some more of the vintage Hopeberry juice, Grandma.
 **GRANDMA** (Doubtful): ...
@@ -6786,9 +6678,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Doubtful): Everything will be alright. Everything will be just fiiiine...
 **MADDIE** (Doubtful): Okay...
 
-### SP_WorldCup2026 — decoration SP_WorldCup2026_Decoration_Slot33
+### Season Pass - Soccer Watch Party — decoration SP_WorldCup2026_Decoration_Slot33
 `SP_WorldCup2026_Decoration_Slot33_Dialogue` · seen 26.04.01–26.07.01
-- trigger: decoration, decoration=SP_WorldCup2026_Decoration_Slot33, event=SP_WorldCup2026, moment=decoration placed (versions 26.04.01–26.07.01)
+- trigger: decoration, decoration=SP_WorldCup2026_Decoration_Slot33, event=Season Pass - Soccer Watch Party, eventKey=SP_WorldCup2026, moment=decoration placed (versions 26.04.01–26.07.01)
 
 **MADDIE** (Relaxed): You think it's big enough?
 **GRANDMA** (Surprised): Big enough? Half of Hopewell Bay will be able to see the games now, dearie!
@@ -6796,9 +6688,9 @@ Every story in which Grandma speaks.
 **ANTIQUEDEALER** (Surprised): I don't even need my glasses!
 **MADDIE** (Encouraging): Wait until you hear it...
 
-### SP_WorldCup2026 — decoration SP_WorldCup2026_Decoration_Slot35
+### Season Pass - Soccer Watch Party — decoration SP_WorldCup2026_Decoration_Slot35
 `SP_WorldCup2026_Decoration_Slot35_Dialogue` · seen 26.04.01–26.07.01
-- trigger: decoration, decoration=SP_WorldCup2026_Decoration_Slot35, event=SP_WorldCup2026, moment=decoration placed (versions 26.04.01–26.07.01)
+- trigger: decoration, decoration=SP_WorldCup2026_Decoration_Slot35, event=Season Pass - Soccer Watch Party, eventKey=SP_WorldCup2026, moment=decoration placed (versions 26.04.01–26.07.01)
 
 **MADDIE** (Thinking): Hey, Grandma. I was thinking about that cup you bought in Brazil...
 **GRANDMA**: What about it, dearie?
@@ -6822,9 +6714,9 @@ Every story in which Grandma speaks.
 **BELLA** (Annoyed): And miss the big game?!
 **GRANDMA**: Definitely not, dearie!
 
-### SP_WorldCup2026 — item discovered: SP_WorldCup2026_CollectableItems_04
+### Season Pass - Soccer Watch Party — item discovered: Victory Cup
 `SP_WorldCup2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=SP_WorldCup2026, items=['SP_WorldCup2026_CollectableItems_04'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Season Pass - Soccer Watch Party, eventKey=SP_WorldCup2026, itemKeys=['SP_WorldCup2026_CollectableItems_04'], items=['Victory Cup'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE** (Thinking): Hmm... This cup seems awfully heavy for a replica.
 **RODDY** (Thinking): It's also pretty weathered and has a date here, I can't quite make out... Nineteen eighty-something.
@@ -6844,9 +6736,9 @@ Every story in which Grandma speaks.
 **DEB** (Worried): All I can say is that it has something to do with a person whose initials are CB.
 **GRANDMA** (Surprised): Say what??
 
-### SP_XmasMystery2024 — decoration SP_XmasMystery2024_Decoration_Slot34
+### Holiday Mystery — decoration SP_XmasMystery2024_Decoration_Slot34
 `SP_XmasMystery2024_Decoration_Slot34_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_XmasMystery2024_Decoration_Slot34, event=SP_XmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_XmasMystery2024_Decoration_Slot34, event=Holiday Mystery, eventKey=SP_XmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): This spread is amazing, you guys!
 **CHERRY** (Thinking): Your risotto is... interesting. Did you mean for it to be this "al dente", or did the stove just quit on you?  
@@ -6857,9 +6749,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Surprised): Guys, GUYS!
 **MADDIE** (Frustrated): WHAT is going on here?
 
-### SP_XmasMystery2024 — decoration SP_XmasMystery2024_Decoration_Slot35
+### Holiday Mystery — decoration SP_XmasMystery2024_Decoration_Slot35
 `SP_XmasMystery2024_Decoration_Slot35_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_XmasMystery2024_Decoration_Slot35, event=SP_XmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_XmasMystery2024_Decoration_Slot35, event=Holiday Mystery, eventKey=SP_XmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Frustrated): Why are you so angry with each other?
 **CHERRY** (Doubtful): I would tell you, but Ursula will probably just try to make it all about her.
@@ -6870,9 +6762,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Thinking): Did someone put you up to this?
 **CHERRY** (Surprised): W-what do you mean?
 
-### SP_XmasMystery2024 — decoration SP_XmasMystery2024_Decoration_Slot37
+### Holiday Mystery — decoration SP_XmasMystery2024_Decoration_Slot37
 `SP_XmasMystery2024_Decoration_Slot37_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_XmasMystery2024_Decoration_Slot37, event=SP_XmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_XmasMystery2024_Decoration_Slot37, event=Holiday Mystery, eventKey=SP_XmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Discouraged): Oh, Cherry... I am terribly sorry for stealing your thunder.
 **GRANDMA** (Discouraged): You're an excellent cook and baker -- a real professional! I only dabble.
@@ -6884,10 +6776,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Thinking): First, someone ruined my Halloween ad, then they sent an apple-munching alpaca to wreak havoc, and now this!
 **MADDIE** (Doubtful): This is going too far. I'm going to find out who's setting us against each other.
 
-### SP_XmasMystery2024 — item discovered: 25468349
+### Holiday Mystery — item discovered: Cake Tree
 `SP_XmasMystery2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_XmasMystery2024, items=['25468349'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_XmasMystery2024, items=['SP_XmasMystery2024_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Mystery, eventKey=SP_XmasMystery2024, itemKeys=['SP_XmasMystery2024_CollectableItems_04'], items=['Cake Tree'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: Soooo... What are you up to, Grandma?
 **GRANDMA** (Thinking): Just counting my gingerbread and preparing the icing for the cake...
@@ -6923,9 +6814,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Relaxed): But will you try at least? It's so good for finding your balance.
 **GRANDMA** (Relaxed): I suppose it can't hurt.
 
-### SP_Yoga2025 — decoration SP_Yoga2025_Decoration_Slot26
+### Secrets of Serenity — decoration SP_Yoga2025_Decoration_Slot26
 `SP_Yoga2025_Decoration_Slot26_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot26, event=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot26, event=Secrets of Serenity, eventKey=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE** (Encouraging): Ah, these stretches feel great!
 **MADDIE** (Relaxed): They really do. I never knew what a downward dog was before.
@@ -6938,9 +6829,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Surprised): Fiddlesticks! Your whispering startled me and made me drop my phone.
 **GRANDMA** (Surprised): And now it is broken!
 
-### SP_Yoga2025 — decoration SP_Yoga2025_Decoration_Slot27
+### Secrets of Serenity — decoration SP_Yoga2025_Decoration_Slot27
 `SP_Yoga2025_Decoration_Slot27_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot27, event=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot27, event=Secrets of Serenity, eventKey=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): I'm so sorry about your phone, Grandma. I know you really loved that old thing.
 **GRANDMA** (Annoyed): It was a very reliable device. They just don't make them like that anymore.
@@ -6949,9 +6840,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Relaxed): You can download apps, take photos, find new recipes... it can do pretty much anything.
 **GRANDMA** (Doubtful): Interesting.
 
-### SP_Yoga2025 — decoration SP_Yoga2025_Decoration_Slot28
+### Secrets of Serenity — decoration SP_Yoga2025_Decoration_Slot28
 `SP_Yoga2025_Decoration_Slot28_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot28, event=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot28, event=Secrets of Serenity, eventKey=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE**: How's it going with the new phone, Grandma? Do you need help setting things up?
 **GRANDMA**: Oh, I think I have got it under control.
@@ -6960,9 +6851,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Joyous): You have seen my old phone, haven't you? That thing was only good for texting and calling - and sometimes not even that.
 **MADDIE** (Relaxed): I guess so... Well, good job!
 
-### SP_Yoga2025 — decoration SP_Yoga2025_Decoration_Slot38
+### Secrets of Serenity — decoration SP_Yoga2025_Decoration_Slot38
 `SP_Yoga2025_Decoration_Slot38_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot38, event=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot38, event=Secrets of Serenity, eventKey=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): A-are you taking a selfie, Grandma??
 **GRANDMA**: Yes, I learned it is all the rage!
@@ -6970,10 +6861,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Encouraging): Have you seen how many cat videos there are in the world?
 **MADDIE** (Thinking): Sure, there are a lot. Great to see that you're enjoying the new phone.
 
-### SP_Yoga2025 — item discovered: 68839852
+### Secrets of Serenity — item discovered: Yoga Mat
 `SP_Yoga2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_Yoga2025, items=['68839852'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_Yoga2025, items=['SP_Yoga2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Secrets of Serenity, eventKey=SP_Yoga2025, itemKeys=['SP_Yoga2025_CollectableItems_04'], items=['Yoga Mat'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA**: What are you doing? Daydreaming?
 **MADDIE**: No, I'm meditating.
@@ -7051,10 +6941,10 @@ Every story in which Grandma speaks.
 **MADDIE** (Surprised): ...
 **JACKIE** (Surprised): Your grandma can be scary sometimes...
 
-### CBE_SecondaryGoal2025 — item discovered: SubGoal_MapItem_01
+### Secondary Goal 2025 (unnamed) — item discovered: Map Fragment
 `SubGoal_MapItem_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SecondaryGoal2025, items=['SubGoal_MapItem_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_SubGoal_MapItem_01'], moment=item discovered (versions 26.05.01–26.05.01)
+- trigger: item, event=Secondary Goal 2025 (unnamed), eventKey=CBE_SecondaryGoal2025, itemKeys=['SubGoal_MapItem_01'], items=['Map Fragment'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_SubGoal_MapItem_01'], items=['Map Fragment'], moment=item discovered (versions 26.05.01–26.05.01)
 
 **MADDIE** (Surprised): What's this -- a piece of a map?
 **GRANDMA** (Encouraging): If you keep looking, I bet you will find more pieces.

@@ -1,10 +1,9 @@
 # Hank
 Every story in which Hank speaks.
 
-### CBE_HolidayWorkshop2024 — item discovered: 50058886
+### Bella's Holiday Workshop — item discovered: Hank
 `CBE_HolidayWorkshop2024_CharacterHank_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['50058886'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_CharacterHank_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterHank_02'], items=['Hank'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Doubtful): Uh-oh, Hank - holiday stress hitting you hard?  
   _earlier:_ ~~Hank! I've been trying to find you!~~ (until 25.10.01)
@@ -20,10 +19,9 @@ Every story in which Hank speaks.
   _earlier:_ ~~So, all I really, really want this year is a nice, long nap.~~ (until 25.10.01)
 **HANK** (Encouraging): Tell me more!
 
-### CBE_HolidayWorkshop2024 — item discovered: 94872812
+### Bella's Holiday Workshop — item discovered: Tray of Polvorones
 `CBE_HolidayWorkshop2024_Cookies_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['94872812'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_Cookies_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_Cookies_06'], items=['Tray of Polvorones'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **BELLA** (Doubtful): Did YOU buy all of my crafts, Emilio??  
   _earlier:_ ~~The perfect polvorones!~~ (until 25.10.01)
@@ -38,9 +36,9 @@ Every story in which Hank speaks.
 **BELLA** (Thinking): So... my online store actually was...
 **BELLA** (Relaxed): A huge success!
 
-### CBE_MasonsEggHunt2024 — decoration CBE_MasonsEggHunt2024_Decoration_Slot07
+### Egg-cellent Adventure — decoration CBE_MasonsEggHunt2024_Decoration_Slot07
 `CBE_MasonsEggHunt2024_Decoration_Slot07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_MasonsEggHunt2024_Decoration_Slot07, event=CBE_MasonsEggHunt2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_MasonsEggHunt2024_Decoration_Slot07, event=Egg-cellent Adventure, eventKey=CBE_MasonsEggHunt2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **HANK** (Surprised): I can't believe this! My ring... it's gone!
 **MADDIE**: What's wrong, Hank - have you lost something?
@@ -65,9 +63,9 @@ Every story in which Hank speaks.
 **HANK** (Charming): What a great egg hunt, Mason! It'll be hard for you to outdo it again next year.
 **MASON** (Surprised): N-next year?
 
-### CBE_SweetMess — item discovered: CBE_SweetMess_Decos_01
+### Sweet Mess Express — item discovered: Spring Candle
 `CBE_SweetMess_Character_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SweetMess, items=['CBE_SweetMess_Decos_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Sweet Mess Express, eventKey=CBE_SweetMess, itemKeys=['CBE_SweetMess_Decos_01'], items=['Spring Candle'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **CHERRY**: How’s it going, fellas? I had to come and see the machine in action!
 **RODDY** (Relaxed): Everything is great. We're just refilling the chocolate tank when the machine tells us to and keeping an eye on the pressure.
@@ -75,16 +73,16 @@ Every story in which Hank speaks.
 **CHERRY** (Thinking): Of course I do. You're not worried that you'll accidentally do something to break Maddie's fancy machine?
 **HANK** (Joyous): There's nothing to worry about. We're completely on top of things!
 
-### CBE_SweetMess — item discovered: CBE_SweetMess_Toffee_04
+### Sweet Mess Express — item discovered: Wrapped Toffees
 `CBE_SweetMess_Character_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SweetMess, items=['CBE_SweetMess_Toffee_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Sweet Mess Express, eventKey=CBE_SweetMess, itemKeys=['CBE_SweetMess_Toffee_04'], items=['Wrapped Toffees'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Charming): This toffee is to die for! But my dentist won’t be happy if I have too much… 
 **HANK**: It’s Easter! Live a little!
 
-### CBE_SweetMess — item discovered: CBE_SweetMess_Character5_01
+### Sweet Mess Express — item discovered: Grandma
 `CBE_SweetMess_Character_05_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SweetMess, items=['CBE_SweetMess_Character5_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Sweet Mess Express, eventKey=CBE_SweetMess, itemKeys=['CBE_SweetMess_Character5_01'], items=['Grandma'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Frustrated): Is this true what I hear? Did you two break Maddie’s chocolate machine?
 **HANK** (Thinking): Kind of… but we did fix it!
@@ -99,9 +97,9 @@ Every story in which Hank speaks.
 **RODDY** (Charming): We were just too embarrassed. And a little scared of you. Respectfully.
 **GRANDMA** (Frustrated): Hmph. Next time, ask for help before the place fills up with giant chocolates.
 
-### CBE_SweetMess — item discovered: CBE_SweetMess_ChocoMachine_01
+### Sweet Mess Express — item discovered: Chocolate Machine
 `CBE_SweetMess_ChocoMachineProducing_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SweetMess, items=['CBE_SweetMess_ChocoMachine_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Sweet Mess Express, eventKey=CBE_SweetMess, itemKeys=['CBE_SweetMess_ChocoMachine_01'], items=['Chocolate Machine'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY**: So this part makes chocolates! We put the chocolate here, it melts down in there and moves into the machine to make yummy treats.
 **HANK** (Thinking): What does this pipe do?
@@ -109,25 +107,25 @@ Every story in which Hank speaks.
 **RODDY** (Surprised): ...
 **HANK** (Surprised): Sorry, Roddy...
 
-### CBE_SweetMess — item discovered: CBE_SweetMess_Cupboard_01
+### Sweet Mess Express — item discovered: Cabinet
 `CBE_SweetMess_Cupboard_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SweetMess, items=['CBE_SweetMess_Cupboard_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Sweet Mess Express, eventKey=CBE_SweetMess, itemKeys=['CBE_SweetMess_Cupboard_01'], items=['Cabinet'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **HANK** (Thinking): Whoa… why does this cupboard look like the Easter Bunny’s storage unit?
 **RODDY** (Relaxed): That’s not a cupboard. That’s a full-blown seasonal command center.
 
-### CBE_SweetMess — item discovered: CBE_SweetMess_Decos_03
+### Sweet Mess Express — item discovered: Spring Cushion
 `CBE_SweetMess_EasterDecorations_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SweetMess, items=['CBE_SweetMess_Decos_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Sweet Mess Express, eventKey=CBE_SweetMess, itemKeys=['CBE_SweetMess_Decos_03'], items=['Spring Cushion'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **HANK** (Thinking): But what do we do with all these ornaments? There are garlands, egg wreaths, pastel table runners…
 **RODDY** (Thinking): I think we’re legally obligated to decorate. It's a part of the deal.
 **HANK** (Charming): I don’t remember signing anything about ceramic bunnies, only chocolate ones.
 **RODDY** (Relaxed): We have to wait for the next chocolate refill anyway. Come on, stop slouching and help me with this garland!
 
-### CBE_SweetMess — item discovered: CBE_SweetMess_Decos_06
+### Sweet Mess Express — item discovered: Easter Arrangement
 `CBE_SweetMess_EasterDecorations_06_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SweetMess, items=['CBE_SweetMess_Decos_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Sweet Mess Express, eventKey=CBE_SweetMess, itemKeys=['CBE_SweetMess_Decos_06'], items=['Easter Arrangement'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Thinking): If we put all of these ornaments up, it’s going to look like the rabbits staged a coup.
 **HANK** (Encouraging): I say we just lean into it: Full Easter explosion. When Maddie and Mason get back, it’s like spring attacked the house.
@@ -136,9 +134,9 @@ Every story in which Hank speaks.
 **RODDY** (Surprised): W-what… Don’t throw it, you'll hit the mach...
 **HANK** (Surprised): Yikes!
 
-### CBE_SweetMess — item discovered: CBE_SweetMess_Eggs_05
+### Sweet Mess Express — item discovered: Creative Treats
 `CBE_SweetMess_EasterEggs_05_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SweetMess, items=['CBE_SweetMess_Eggs_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Sweet Mess Express, eventKey=CBE_SweetMess, itemKeys=['CBE_SweetMess_Eggs_05'], items=['Creative Treats'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Surprised): You broke Maddie’s machine with the ceramic bunny!
 **HANK** (Surprised): You didn't catch it even though I gave you a heads-up!
@@ -150,9 +148,9 @@ Every story in which Hank speaks.
 **RODDY** (Worried): You mean tell Ursula that you threw the ceramic bunny that broke the machine?
 **HANK** (Annoyed): We have no choice! The machine is totally kaputt!
 
-### CBE_SweetMess — item discovered: CBE_SweetMess_Eggs_07
+### Sweet Mess Express — item discovered: Bowl of Easter Eggs
 `CBE_SweetMess_EasterEggs_07_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SweetMess, items=['CBE_SweetMess_Eggs_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Sweet Mess Express, eventKey=CBE_SweetMess, itemKeys=['CBE_SweetMess_Eggs_07'], items=['Bowl of Easter Eggs'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **HANK** (Annoyed): Ursula’s house is right there. Just go to the door and knock!
 **RODDY** (Worried): No!
@@ -162,9 +160,9 @@ Every story in which Hank speaks.
 **HANK** (Joyous): Here we go… Yes! You did it!
 **RODDY** (Annoyed): Phew! So far so good...
 
-### CBE_SweetMess — item discovered: CBE_SweetMess_Eggs_09
+### Sweet Mess Express — item discovered: Mega Easter Basket
 `CBE_SweetMess_EasterEggs_10_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SweetMess, items=['CBE_SweetMess_Eggs_09'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Sweet Mess Express, eventKey=CBE_SweetMess, itemKeys=['CBE_SweetMess_Eggs_09'], items=['Mega Easter Basket'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Thinking): Does the machine sound weird to you?
 **HANK** (Thinking): Maybe a little… But it’s definitely working. I can see the chocolate moving.
@@ -184,17 +182,17 @@ Every story in which Hank speaks.
 **MASON** (Thinking): There is just one thing...
 **MASON**: We'll need bigger baskets.
 
-### CBE_SweetMess — item discovered: CBE_SweetMess_PastryMachineProducing_01
+### Sweet Mess Express — item discovered: Pastry Machine Baking
 `CBE_SweetMess_PastryMachineProducing_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SweetMess, items=['CBE_SweetMess_PastryMachineProducing_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Sweet Mess Express, eventKey=CBE_SweetMess, itemKeys=['CBE_SweetMess_PastryMachineProducing_01'], items=['Pastry Machine Baking'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Relaxed): Ah, look at these pastries!
 **RODDY** (Relaxed): So buttery and flaky. YUM!
 **HANK** (Joyous): I can see why Mason's always talking about this machine. It's totally awesome!
 
-### CBE_SweetMess — item discovered: CBE_SweetMess_Assembly_05
+### Sweet Mess Express — item discovered: Complete Mechanism
 `CBE_SweetMess_Peppermint_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SweetMess, items=['CBE_SweetMess_Assembly_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Sweet Mess Express, eventKey=CBE_SweetMess, itemKeys=['CBE_SweetMess_Assembly_05'], items=['Complete Mechanism'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Thinking): Are you sure you're able to look after the chocolate machine?
 **HANK** (Thinking): It's not that complicated, right?
@@ -206,9 +204,9 @@ Every story in which Hank speaks.
 **HANK** (Charming): Let's get to the important stuff. Are we allowed to try some of these treats?
 **MADDIE** (Relaxed): As many as you want!
 
-### CBE_SweetMess — item discovered: CBE_SweetMess_Ingredient_03
+### Sweet Mess Express — item discovered: Melted Sugar
 `CBE_SweetMess_Peppermint_04_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SweetMess, items=['CBE_SweetMess_Ingredient_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Sweet Mess Express, eventKey=CBE_SweetMess, itemKeys=['CBE_SweetMess_Ingredient_03'], items=['Melted Sugar'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: Fill the chocolate tank when the gauge gets low and keep an eye on the pressure valve.
 **MADDIE**: We'll be back in the evening!
@@ -277,9 +275,9 @@ Every story in which Hank speaks.
 **GRANDMA** (Surprised): ...
 **DEB** (Surprised): Oh, isn’t he funny?! Hanky-boo, sweetie? Can I have a moment in private with you?
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_ChristmasTreeE_01
+### Holiday Oddities — item discovered: Festive Tree
 `LDE_HolidayOddities2025_ChristmasTreeE_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_ChristmasTreeE_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_ChristmasTreeE_01'], items=['Festive Tree'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Relaxed): It’s starting to look like the holidays here, don’t you think?
 **HANK**: You're right. Maybe there's something to these traditions.
@@ -289,18 +287,18 @@ Every story in which Hank speaks.
 **GRANDMA** (Charming): With these.
 **MASON** (Thinking): A bunch of clock keys?
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_ChristmasTreeF_01
+### Holiday Oddities — item discovered: Complete Tree
 `LDE_HolidayOddities2025_ChristmasTreeF_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_ChristmasTreeF_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_ChristmasTreeF_01'], items=['Complete Tree'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON** (Joyous): I can’t wait for Maddie to see all of this! She’s going to be SO surprised.
 **RODDY** (Charming): I think we did well here, fellas.
 **HANK** (Charming): And we worked together.
 **MASON**: Ursula was right. This really IS a holiday miracle!
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_ClockBTurned_01
+### Holiday Oddities — item discovered: Fancy Longcase Clock - Turned
 `LDE_HolidayOddities2025_ClockBTurned_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_ClockBTurned_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_ClockBTurned_01'], items=['Fancy Longcase Clock - Turned'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **HANK**: Did you set that clock forward or back?  
   _earlier:_ ~~Did you turn that clock forward or back?~~ (until 25.10.01)
@@ -308,9 +306,9 @@ Every story in which Hank speaks.
 **MASON** (Relaxed): Right, Grandma?
 **GRANDMA** (Relaxed): That's close enough, Mason.
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_ClockKeys_03
+### Holiday Oddities — item discovered: Assortment of Clock Keys
 `LDE_HolidayOddities2025_ClockKeys_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_ClockKeys_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_ClockKeys_03'], items=['Assortment of Clock Keys'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Thinking): What is this tradition and what are we supposed to do with these clock keys?
 **GRANDMA** (Relaxed): You will use the keys to set all the clocks you can find to show the wrong time.  
@@ -319,9 +317,9 @@ Every story in which Hank speaks.
 **GRANDMA** (Thinking): When you cannot trust what a clock shows, you stop caring about it. And when you stop caring about what time it is, you are truly free to enjoy the holidays.
 **HANK** (Encouraging): That’s genius!
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_KitchenUtensils_06
+### Holiday Oddities — item discovered: Simmering Soup
 `LDE_HolidayOddities2025_KitchenUtensils_06_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_KitchenUtensils_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_KitchenUtensils_06'], items=['Simmering Soup'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY**: What’s the tradition behind making soup out of weird canned foods?
 **GRANDMA** (Thinking): In old Hopewell Bay, waste was frowned upon. Every home contributed whatever they could spare to the communal soup, served during the holidays.
@@ -329,16 +327,16 @@ Every story in which Hank speaks.
 **RODDY** (Relaxed): That actually sounds pretty wholesome.
 **HANK** (Encouraging): And I love creamed corn with spaghetti hoops!
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_KnittingNeedlesWG_01
+### Holiday Oddities — item discovered: LDE_HolidayOddities2025_KnittingNeedlesWG_01
 `LDE_HolidayOddities2025_KnittingNeedlesWG_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_KnittingNeedlesWG_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_KnittingNeedlesWG_01'], items=['LDE_HolidayOddities2025_KnittingNeedlesWG_01'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Encouraging): That’s excellent work, Hank! You’re a natural.
 **HANK** (Joyous): This is so much fun!
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_KnittingTools_06
+### Holiday Oddities — item discovered: LDE_HolidayOddities2025_KnittingTools_06
 `LDE_HolidayOddities2025_KnittingTools_06_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_KnittingTools_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_KnittingTools_06'], items=['LDE_HolidayOddities2025_KnittingTools_06'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Thinking): We’re knitting odd socks?
 **RODDY** (Thinking): I guess that’s where the tradition comes in.
@@ -346,9 +344,9 @@ Every story in which Hank speaks.
 **GRANDMA** (Relaxed): Some say it is based on socks’ tendency to lose their pairs, and others blame it on a sock thief that apparently plagued the town in the olden days.
 **HANK** (Encouraging): Makes sense to me! Let’s knit!
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_Logs_03
+### Holiday Oddities — item discovered: Log Rack
 `LDE_HolidayOddities2025_Logs_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_Logs_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_Logs_03'], items=['Log Rack'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Relaxed): I can see you have been working hard!
 **HANK** (Charming): Or hardly working... Roddy used a wood-splitting machine. I bet those early folks in Hopewell Bay didn’t have one.  
@@ -370,9 +368,9 @@ Every story in which Hank speaks.
 **HANK** (Encouraging): Hey, guys? Happy holidays! I’m glad I get to spend them with you.
 **RODDY** (Relaxed): Right back at you!
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_SockRW_01
+### Holiday Oddities — item discovered: Red & White Stripes
 `LDE_HolidayOddities2025_SockRW_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_SockRW_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_SockRW_01'], items=['Red & White Stripes'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY**: I think my sock is ready.
 **HANK** (Joyous): Umm, is that a sock or an oven mitt?
@@ -380,25 +378,25 @@ Every story in which Hank speaks.
 **RODDY** (Doubtful): ...
 **MASON**: What? That was funny!
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_SockGR_01
+### Holiday Oddities — item discovered: Green & Red Stripes
 `LDE_HolidayOddities2025_Sockgr_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_SockGR_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_SockGR_01'], items=['Green & Red Stripes'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **HANK** (Charming): Look at this. Not too bad, even if I do say so myself.
 **MASON** (Encouraging): That sock is perfection, Hank! How did you get so GOOD?
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_SoupAmazing_01
+### Holiday Oddities — item discovered: Surprisingly Good Soup
 `LDE_HolidayOddities2025_SoupAmazing_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_SoupAmazing_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_SoupAmazing_01'], items=['Surprisingly Good Soup'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **HANK** (Joyous): You’re up, little man. Take the spoon and have a taste.
 **MASON** (Doubtful): OK. I’m going in.
 **MASON**: I’ll have another spoonful - this is delicious!
 **MASON** (Joyous): Maddie will love this.
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_SoupGood_01
+### Holiday Oddities — item discovered: Acceptable Soup
 `LDE_HolidayOddities2025_SoupGood_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_SoupGood_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_SoupGood_01'], items=['Acceptable Soup'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **HANK**: I already tried one soup. Someone else can taste this one.
 **RODDY** (Worried): Mason, how about you do it?
@@ -407,9 +405,9 @@ Every story in which Hank speaks.
 **RODDY** (Frustrated): Ugh, fine.
 **RODDY** (Relaxed): Huh! This soup is actually not bad!
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_SoupQuestionable_01
+### Holiday Oddities — item discovered: Questionable Soup
 `LDE_HolidayOddities2025_SoupQuestionable_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_SoupQuestionable_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_SoupQuestionable_01'], items=['Questionable Soup'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **HANK**: Sooo, who’s going to taste this soup first?
 **MASON**: Roddy, you do it.
@@ -418,9 +416,9 @@ Every story in which Hank speaks.
 **HANK** (Thinking): Let me get a big spoonful. Here goes! Mmm... this soup... is HORRIBLE.  
   _earlier:_ ~~Let me get a big spoonful. Here goes! Mmm... this soup… is HORRIBLE.~~ (until 25.10.01)
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_StickBasket_03
+### Holiday Oddities — item discovered: Bunch of Sticks
 `LDE_HolidayOddities2025_StickBasket_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_StickBasket_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_StickBasket_03'], items=['Bunch of Sticks'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **HANK**: So like why did you ask us to meet you in the forest?
 **GRANDMA**: Well--
@@ -430,9 +428,9 @@ Every story in which Hank speaks.
 **MASON** (Surprised): Oh, WOW! How are we going to organize a holiday miracle??
 **GRANDMA** (Charming): How much do you know about old Hopewell Bay holiday traditions?
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_StickBasket_07
+### Holiday Oddities — item discovered: Full Basket
 `LDE_HolidayOddities2025_StickBasket_07_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_StickBasket_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_StickBasket_07'], items=['Full Basket'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **HANK** (Encouraging): We’ve got acorns...  
   _earlier:_ ~~We’ve got acorns…~~ (until 25.10.01)
@@ -455,9 +453,9 @@ Every story in which Hank speaks.
 **MADDIE** (Thinking): B-but, what’s the time? Am I going crazy, or are all the clocks showing a different time?
 **RODDY** (Relaxed): That’s a long story!
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_Woodchopping_03
+### Holiday Oddities — item discovered: Hand Saw
 `LDE_HolidayOddities2025_Woodchopping_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_Woodchopping_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_Woodchopping_03'], items=['Hand Saw'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA**: In the early days, it was believed that as long as the holiday fire burned, joy would stay in the home.
 **GRANDMA**: If it went out before dawn, the spirit of winter would sneak in and steal away the household’s luck.
@@ -466,17 +464,16 @@ Every story in which Hank speaks.
 **GRANDMA** (Relaxed): First, you need to chop some firewood.
 **GRANDMA** (Relaxed): You will find all the tools here, in the shed.
 
-### LDE_HolidayOddities2025 — item discovered: LDE_HolidayOddities2025_Woodchopping_06
+### Holiday Oddities — item discovered: Wood Splitting Machine
 `LDE_HolidayOddities2025_Woodchopping_06_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_HolidayOddities2025, items=['LDE_HolidayOddities2025_Woodchopping_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_Woodchopping_06'], items=['Wood Splitting Machine'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Surprised): Did you not see there’s a wood-splitting machine in the shed? Now we’re talking!
 **HANK** (Annoyed): Hey, that’s cheating!
 
-### LDE_Hopeberry2025 — item discovered: 43191109
+### Love on the Vine — item discovered: Bag of Bottles
 `LDE_Hopeberry2025_ProducedJuice5_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2025, items=['43191109'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2025, items=['LDE_Hopeberry2024_ProducedJuice_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2025, itemKeys=['LDE_Hopeberry2024_ProducedJuice_05'], items=['Bag of Bottles'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **HANK** (Charming): I heard about your and Jackie's break-up. That's tough, man.
 **HANK** (Charming): How are you holding up?
@@ -488,10 +485,9 @@ Every story in which Hank speaks.
 **HANK** (Thinking): And you will drop a dumbbell on your toes sometimes.
 **HANK** (Joyous): But you gotta keep going. Like the ancient wisdom goes: No pain, no gain.
 
-### LDE_Hopeberry2025 — item discovered: 36957428
+### Love on the Vine — item discovered: Spice Shelf
 `LDE_Hopeberry2025_Spices6_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2025, items=['36957428'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2025, items=['LDE_Hopeberry2024_Spices_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2025, itemKeys=['LDE_Hopeberry2024_Spices_06'], items=['Spice Shelf'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **HANK**: Hey! Did you get tricked into helping with the Festival, too?
 **RODDY**: Not tricked, exactly...
@@ -512,9 +508,9 @@ Every story in which Hank speaks.
 **HANK** (Charming): You're a total catch, my friend. It's time you give yourself credit for what a nice guy you are and realize what you DO want.
 **HANK** (Charming): Maybe she's right under your nose.
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_Interviews_06
+### Murder at the Mansion — item discovered: Hank
 `LDE_MurderAtTheMansion_Interviews6_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_Interviews_06'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_Interviews_06'], items=['Hank'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **RODDY**: Hank, how well did you know Lady Voyance?
 **HANK**: We were friends, I guess. I helped her out sometimes - you know, heavy lifting and stuff.
@@ -527,10 +523,9 @@ Every story in which Hank speaks.
 **HANK** (Thinking): I was playing tennis with Deb. It's really fun, but I just can't hit that tiny ball!
 **RODDY** (Thinking): Hmmm... Thank you, Hank.
 
-### LDE_Rumors2025 — item discovered: 71602675
+### Circus Caper — item discovered: Circus Flyer
 `LDE_Rumors2025_Advertising_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['71602675'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_Advertising_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Advertising_01'], items=['Circus Flyer'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RINGLEADER**: OK, here are some of the basics of being a circus performer.  
   _earlier:_ ~~Could you be a darling and hand these flyers out in town? It would be such a big help.~~ (until 25.09.01)
@@ -549,10 +544,9 @@ Every story in which Hank speaks.
 **—**: I know she is impressive, but she has a lot of secrets.
 **MADDIE** (Relaxed): Thanks for the heads up, Grandma, but I think you might just be paranoid!
 
-### LDE_Rumors2025 — item discovered: 90018211
+### Circus Caper — item discovered: Small Circus Program
 `LDE_Rumors2025_Brochures_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['90018211'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_Brochures_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Brochures_03'], items=['Small Circus Program'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Thinking): We need to think of an act that will really stop people in their tracks. Like...  
   _earlier:_ ~~Have you seen Fiona anywhere?~~ (until 25.09.01); ~~We need to think of an act that will really stop people in their tracks. Like…~~ (until 25.10.01)
@@ -564,10 +558,9 @@ Every story in which Hank speaks.
 **MADDIE**: Of course. But I don't want to disturb her...
 **PEARL** (Doubtful): I'm sure she won't mind if you get more brochures from her wagon.
 
-### LDE_Rumors2025 — item discovered: 25128107
+### Circus Caper — item discovered: Shooting Gallery
 `LDE_Rumors2025_CarnivalGames_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['25128107'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_CarnivalGames_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CarnivalGames_03'], items=['Shooting Gallery'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **HANK**: Can you juggle?  
   _earlier:_ ~~I don't want to toot my own horn, but I'm pretty good at throwing.~~ (until 25.09.01)
@@ -581,10 +574,9 @@ Every story in which Hank speaks.
 **MASON** (Encouraging): I’m sure!
 **MASON** (Annoyed): Ouch!
 
-### LDE_Rumors2025 — item discovered: 25128103
+### Circus Caper — item discovered: Prize Stand
 `LDE_Rumors2025_CarnivalGames_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['25128103'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_CarnivalGames_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CarnivalGames_07'], items=['Prize Stand'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Thinking): What are you doing? I don’t think you should be touching the carnival games and the circus equipment...  
   _earlier:_ ~~Everybody knows these things are always rigged!~~ (until 25.09.01); ~~What are you doing? I don’t think you should be touching the carnival games and the circus equipment…~~ (until 25.10.01)
@@ -595,18 +587,17 @@ Every story in which Hank speaks.
 **RODDY** (Charming): She did? Can I try, too?  
   _earlier:_ ~~I beat you both fair and square!~~ (until 25.09.01)
 
-### LDE_Rumors2025 — item discovered: LDE_Rumors2025_Prizes_03
+### Circus Caper — item discovered: Set of Tokens
 `LDE_Rumors2025_CarnivalPrizes_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_Prizes_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Prizes_03'], items=['Set of Tokens'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): Are you planning on joining the Circus?
 **RODDY** (Charming): Haha, probably not... But I'm pretty good at card tricks.
 **HANK** (Joyous): But not so good at juggling, bro!
 
-### LDE_Rumors2025 — item discovered: 35398648
+### Circus Caper — item discovered: Hula Hoop
 `LDE_Rumors2025_CircusProps_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['35398648'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_CircusProps_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CircusProps_01'], items=['Hula Hoop'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **HANK**: Hey, little man! What are you doing poking around back here?  
   _earlier:_ ~~Grandma, did you hear that the circus folks are in Hopewell Bay?~~ (until 25.09.01)
@@ -622,9 +613,9 @@ Every story in which Hank speaks.
 **MASON** (Worried): Uh-oh!
 **HANK** (Annoyed): I thought you said you had permission!
 
-### LDE_Rumors2025 — item discovered: LDE_Rumors2025_CircusProps_06
+### Circus Caper — item discovered: Circus Stand
 `LDE_Rumors2025_CircusProps_06_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_CircusProps_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CircusProps_06'], items=['Circus Stand'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON** (Worried): I’m Mason, and this is Hank.
 **HANK** (Charming): Um, hi...  
@@ -636,10 +627,9 @@ Every story in which Hank speaks.
 **RINGLEADER** (Doubtful): I must warn you - it’s harder than it looks. Our performers are the best in the world, and they work very hard to hone their craft.
 **MASON** (Joyous): We’re ready!
 
-### LDE_Rumors2025 — item discovered: 35398639
+### Circus Caper — item discovered: Hot Air Balloon
 `LDE_Rumors2025_CircusProps_10_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['35398639'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_CircusProps_10'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CircusProps_10'], items=['Hot Air Balloon'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RINGLEADER** (Relaxed): We’re still setting everything up, but you can find all the equipment you need in our caravans.  
   _earlier:_ ~~Ever since I got the letter from Fiona, I've been looking forward to seeing her and the whole troupe.~~ (until 25.09.01)
@@ -650,10 +640,9 @@ Every story in which Hank speaks.
 **HANK** (Surprised): Mason, listen to the lady. We won’t go in the green caravan, promise!
 **RINGLEADER** (Ready): Well, then. Welcome to the Circus!
 
-### LDE_Rumors2025 — item discovered: 52626618
+### Circus Caper — item discovered: Malzar
 `LDE_Rumors2025_Fortunetelling_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['52626618'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_FortuneTelling_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_FortuneTelling_04'], items=['Malzar'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MASON**: A crystal ball! This must be the fortune-teller’s caravan.  
   _earlier:_ ~~Look, it's Malzar!~~ (until 25.09.01)
@@ -665,10 +654,9 @@ Every story in which Hank speaks.
   _earlier:_ ~~<i>What</i> slips away?~~ (until 25.09.01)
 **—**: Pfft, cryptic as always!
 
-### LDE_Rumors2025 — item discovered: 33623531
+### Circus Caper — item discovered: Heist Plan
 `LDE_Rumors2025_HeistPlan_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['33623531'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_HeistPlan_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_HeistPlan_03'], items=['Heist Plan'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MASON**: Look, guys! I designed a trick! I’ve drawn it all out here.  
   _earlier:_ ~~So it was Fiona all along!~~ (until 25.09.01)
@@ -684,10 +672,9 @@ Every story in which Hank speaks.
   _earlier:_ ~~Looks… interesting.~~ (until 25.10.01)
 **HANK** (Thinking): And kinda weird.
 
-### LDE_Rumors2025 — item discovered: 33623528
+### Circus Caper — item discovered: Escape Vehicle
 `LDE_Rumors2025_HeistPlan_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['33623528'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_HeistPlan_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_HeistPlan_06'], items=['Escape Vehicle'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY**: So are you going to show us how your trick works?  
   _earlier:_ ~~Stop right there, Fiona! I know what you're doing.~~ (until 25.09.01)
@@ -709,10 +696,9 @@ Every story in which Hank speaks.
 **RINGLEADER** (Doubtful): You didn't think I want to tour with the Circus for the rest of my life, did you?
 **GRANDMA** (Frustrated): Well, you can think about that for a nice long while - behind bars!
 
-### LDE_Rumors2025 — item discovered: 16374096
+### Circus Caper — item discovered: Magic Hat
 `LDE_Rumors2025_MagicianProps_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['16374096'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_MagicianProps_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_MagicianProps_05'], items=['Magic Hat'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MASON** (Thinking): What’s in the big stripy box?  
   _earlier:_ ~~Can you do any magic tricks?~~ (until 25.09.01)
@@ -745,10 +731,9 @@ Every story in which Hank speaks.
   _earlier:_ ~~No, I still love the circus. But next time they can pitch their tents somewhere else!~~ (until 25.09.01)
 **RINGLEADER** (Relaxed): You would make the perfect clown act!
 
-### LDE_Rumors2025 — item discovered: 25076296
+### Circus Caper — item discovered: Wardrobe
 `LDE_Rumors2025_RingmasterSuit_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['25076296'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_RingmasterSuit_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_RingmasterSuit_05'], items=['Wardrobe'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MASON** (Thinking): Fiona was right. We need to think of an act that makes people so excited that they can’t look away.  
   _earlier:_ ~~It must be so exciting to be a part of the Circus!~~ (until 25.09.01)
@@ -767,10 +752,9 @@ Every story in which Hank speaks.
 **MASON** (Encouraging): Come on, live a little!  
   _earlier:_ ~~You don't have to ask twice!~~ (until 25.09.01)
 
-### LDE_Rumors2025 — item discovered: 734740
+### Circus Caper — item discovered: Boulton Safe Open
 `LDE_Rumors2025_SafeOpen_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['734740'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_SafeOpen_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_SafeOpen_01'], items=['Boulton Safe Open'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **HANK** (Thinking): A safe? Oh, I get it.  
   _earlier:_ ~~Someone's broken into the old safe!!~~ (until 25.09.01)
@@ -782,37 +766,33 @@ Every story in which Hank speaks.
   _earlier:_ ~~They must be after something specific. But what?~~ (until 25.09.01)
 **RODDY** (Doubtful): Absolutely not!
 
-### SLBE_Football — item discovered: 2271926
+### The Hopewell Bay Challengers — item discovered: Merch Stand
 `SLBE_Football_BonusMerchStand_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SLBE_Football, items=['2271926'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SLBE_Football, items=['SLBE_Football_BonusMerchStand_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Hopewell Bay Challengers, eventKey=SLBE_Football, itemKeys=['SLBE_Football_BonusMerchStand_01'], items=['Merch Stand'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **HANK**: Looking to buy something, Roddy?
 **RODDY** (Charming): Er... Yeah, but...
 **RODDY** (Charming): Not for me!
 
-### SLBE_Football — item discovered: 41049452
+### The Hopewell Bay Challengers — item discovered: Substitution Board
 `SLBE_Football_BonusSubBoard_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SLBE_Football, items=['41049452'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SLBE_Football, items=['SLBE_Football_BonusSubBoard_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Hopewell Bay Challengers, eventKey=SLBE_Football, itemKeys=['SLBE_Football_BonusSubBoard_01'], items=['Substitution Board'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **HANK**: Why is this clock broken?
 **RODDY** (Thinking): Hank, that’s a substitution board! You know, to switch players?!
 **HANK** (Charming): Oh yeah... Of course. Pshh. I knew that.
 
-### SLBE_Football — item discovered: 92537824
+### The Hopewell Bay Challengers — item discovered: Sports Van
 `SLBE_Football_BonusVan_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SLBE_Football, items=['92537824'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SLBE_Football, items=['SLBE_Football_BonusVan_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Hopewell Bay Challengers, eventKey=SLBE_Football, itemKeys=['SLBE_Football_BonusVan_01'], items=['Sports Van'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY**: Is this your van, Hank?
 **HANK** (Thinking): Oh, this? No.
 **HANK** (Annoyed): It’s too small.
 
-### SLBE_Football — item discovered: 4600035
+### The Hopewell Bay Challengers — item discovered: Yellow Flag
 `SLBE_Football_BonusYellowFlag_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SLBE_Football, items=['4600035'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SLBE_Football, items=['SLBE_Football_BonusYellowFlag_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Hopewell Bay Challengers, eventKey=SLBE_Football, itemKeys=['SLBE_Football_BonusYellowFlag_01'], items=['Yellow Flag'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **HANK** (Thinking): You think if we steal this...
 **HANK** (Thinking): The ref can’t call penalties anymore?
@@ -829,44 +809,40 @@ Every story in which Hank speaks.
 **RODDY** (Charming): Yeah, it was! See you at the next game?
 **HANK** (Joyous): Of course!
 
-### SLBE_Football — item discovered: 2185950
+### The Hopewell Bay Challengers — item discovered: Team Double Locker
 `SLBE_Football_FansOutfit_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SLBE_Football, items=['2185950'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SLBE_Football, items=['SLBE_Football_FansOutfit_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Hopewell Bay Challengers, eventKey=SLBE_Football, itemKeys=['SLBE_Football_FansOutfit_06'], items=['Team Double Locker'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY**: Nothing like showing your team’s colors at the game!
 **HANK** (Thinking): So why aren’t you wearing them?
 **RODDY** (Worried): Er...
 
-### SLBE_Football — item discovered: 81630749
+### The Hopewell Bay Challengers — item discovered: Score Board
 `SLBE_Football_FootballField_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SLBE_Football, items=['81630749'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SLBE_Football, items=['SLBE_Football_FootballField_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Hopewell Bay Challengers, eventKey=SLBE_Football, itemKeys=['SLBE_Football_FootballField_04'], items=['Score Board'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **HANK**: Aaah... Nothing like the smell of fresh cut grass!
 **RODDY** (Discouraged): It’s... Artificial Hank.
 
-### SLBE_Football — item discovered: 7681177
+### The Hopewell Bay Challengers — item discovered: 7681177
 `SLBE_Football_FootballTrophy_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SLBE_Football, items=['7681177'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=The Hopewell Bay Challengers, eventKey=SLBE_Football, itemKeys=['7681177'], items=['7681177'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **HANK** (Thinking): Wonder why trophies are cups?
 **RODDY** (Encouraging): Well, it comes from ancient Roman times whe-
 **HANK** (Thinking): I mean, they’re huge. Who can drink from that? Hmmm...
 
-### SLBE_Football — item discovered: 47178813
+### The Hopewell Bay Challengers — item discovered: Spare Shoulder Pads
 `SLBE_Football_FootballUniform_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SLBE_Football, items=['47178813'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SLBE_Football, items=['SLBE_Football_FootballUniform_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Hopewell Bay Challengers, eventKey=SLBE_Football, itemKeys=['SLBE_Football_FootballUniform_05'], items=['Spare Shoulder Pads'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **HANK** (Joyous): Ah... These take me back.
 **RODDY** (Thinking): You played football?
 **HANK** (Annoyed): Come on, man... Look at me!
 
-### SLBE_Football — item discovered: 32885072
+### The Hopewell Bay Challengers — item discovered: American Football
 `SLBE_Football_Football_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SLBE_Football, items=['32885072'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SLBE_Football, items=['SLBE_Football_Football_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Hopewell Bay Challengers, eventKey=SLBE_Football, itemKeys=['SLBE_Football_Football_01'], items=['American Football'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **HANK**: Hey, wanna play a game after the match?
 **RODDY** (Thinking): If it’s on a gaming console, sure.
@@ -940,9 +916,9 @@ Every story in which Hank speaks.
 **HANK** (Surprised): This is it!
 **RODDY** (Worried): It’s all or nothing!
 
-### SP_Apiary2026 — decoration SP_Apiary2026_Decoration_Slot29
+### Season Pass - Buzzing with Purpose — decoration SP_Apiary2026_Decoration_Slot29
 `SP_Apiary2026_Decoration_Slot29_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Apiary2026_Decoration_Slot29, event=SP_Apiary2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Apiary2026_Decoration_Slot29, event=Season Pass - Buzzing with Purpose, eventKey=SP_Apiary2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Doubtful): Hank! When I said I wanted a big sign...
 **MADDIE** (Doubtful): I didn't mean one that you could see from space!
@@ -956,9 +932,9 @@ Every story in which Hank speaks.
 **MADDIE** (Charming): Ha! Don't worry Hank. And Cherry, we'll get you all the honey you'll ever need!
 **CHERRY** (Encouraging): Wonderful!
 
-### SP_CorpseFlower2025 — decoration SP_CorpseFlower2025_Decoration_Slot28
+### Petals of Tragedy — decoration SP_CorpseFlower2025_Decoration_Slot28
 `SP_CorpseFlower2025_Decoration_Slot28_Dialogue` · seen 25.06.01–26.07.01
-- trigger: decoration, decoration=SP_CorpseFlower2025_Decoration_Slot28, event=SP_CorpseFlower2025, moment=decoration placed (versions 25.06.01–26.07.01)
+- trigger: decoration, decoration=SP_CorpseFlower2025_Decoration_Slot28, event=Petals of Tragedy, eventKey=SP_CorpseFlower2025, moment=decoration placed (versions 25.06.01–26.07.01)
 
 **DEB**: Thank you everyone for coming today. It is with a heavy heart that I part with my beautiful Titan Arum.
 **DEB**: We've shared so many wonderful years together, and life will not be the same without it.
@@ -967,9 +943,9 @@ Every story in which Hank speaks.
 **HANK** (Thinking): Psst, Maddie! I love Deb so much and I'm so sorry for her terrible loss, but am I the only one who finds this smell overpowering?
 **MADDIE** (Frustrated): Nope. It's definitely overpowering.
 
-### SP_FairToRemember2026 — decoration SP_FairToRemember2026_Decoration_Slot35
+### A Fair to Remember — decoration SP_FairToRemember2026_Decoration_Slot35
 `SP_FairToRemember2026_Decoration_Slot35_Dialogue` · seen 26.06.01–26.07.01
-- trigger: decoration, decoration=SP_FairToRemember2026_Decoration_Slot35, event=SP_FairToRemember2026, moment=decoration placed (versions 26.06.01–26.07.01)
+- trigger: decoration, decoration=SP_FairToRemember2026_Decoration_Slot35, event=A Fair to Remember, eventKey=SP_FairToRemember2026, moment=decoration placed (versions 26.06.01–26.07.01)
 
 **HANK**: The blacksmith demonstration area is ready.
 **ANTIQUEDEALER** (Joyous): Excellent! Nothing brings history to life like seeing a craft in action.
@@ -978,9 +954,9 @@ Every story in which Hank speaks.
 **HANK** (Thinking): And here I thought people just wanted to watch me hit things with a hammer.
 **ANTIQUEDEALER** (Doubtful): Please be careful…
 
-### SP_HanksMystery2024 — decoration SP_HanksMystery2024_Decoration_Slot28
+### Proposal Mystery — decoration SP_HanksMystery2024_Decoration_Slot28
 `SP_HanksMystery2024_Decoration_Slot28_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot28, event=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot28, event=Proposal Mystery, eventKey=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): This is definitely starting to look like a romantic surprise.
 **MADDIE** (Thinking): And that's the ring we found among the Valentine's presents, on the front step! But who's surprising whom?
@@ -989,9 +965,9 @@ Every story in which Hank speaks.
 **HANK** (Annoyed): It's all here! Wow, this delivery was seriously late.
 **MADDIE** (Surprised): Hank! T-this stuff is yours??
 
-### SP_HanksMystery2024 — decoration SP_HanksMystery2024_Decoration_Slot29
+### Proposal Mystery — decoration SP_HanksMystery2024_Decoration_Slot29
 `SP_HanksMystery2024_Decoration_Slot29_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot29, event=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot29, event=Proposal Mystery, eventKey=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **HANK** (Charming): Yeah, this is all me. Sorry about crowding your front yard, Ursula.
 **GRANDMA**: It is quite alright - I guessed it was you! But tell us, what is all of this for?
@@ -1001,9 +977,9 @@ Every story in which Hank speaks.
 **MADDIE** (Surprised): But... is it an engagement ring??
 **HANK** (Charming): Funny you should ask...
 
-### SP_LadyVoyanceMystery2023 — decoration SP_LadyVoyanceMystery2023_Decoration_Slot28
+### Lady Voyance's Mystery — decoration SP_LadyVoyanceMystery2023_Decoration_Slot28
 `SP_LadyVoyanceMystery2023_Decoration_Slot28_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_LadyVoyanceMystery2023_Decoration_Slot28, event=SP_LadyVoyanceMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_LadyVoyanceMystery2023_Decoration_Slot28, event=Lady Voyance's Mystery, eventKey=SP_LadyVoyanceMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **HANK**: Hey! Is-
 **LADY VOYANCE** (Talking): Shhh! You are here to ask me a question!
@@ -1014,10 +990,9 @@ Every story in which Hank speaks.
 **LADY VOYANCE**: I am a medium...
 **HANK** (Charming): Awesome! I’m... XXL myself!
 
-### SP_MiniHorseMystery2024 — item discovered: 95690905
+### Mini Horse Mystery — item discovered: Grooming Bag
 `SP_MiniHorseMystery2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_MiniHorseMystery2024, items=['95690905'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_MiniHorseMystery2024, items=['SP_MiniHorseMystery2024_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Mini Horse Mystery, eventKey=SP_MiniHorseMystery2024, itemKeys=['SP_MiniHorseMystery2024_CollectableItems_04'], items=['Grooming Bag'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **HANK**: So, Deb... Would you make me the happiest man on earth and be my wife?
 **DEB** (Joyous): Of course I will, Hanky-Poo!
@@ -1025,9 +1000,9 @@ Every story in which Hank speaks.
 **DEB** (Charming): How about next month?
 **HANK** (Surprised): Ummm... Whatever you want!
 
-### SP_TheWindOfMystery2024 — decoration SP_TheWindOfMystery2024_Decoration_Slot33
+### The Winds of Mystery — decoration SP_TheWindOfMystery2024_Decoration_Slot33
 `SP_TheWindOfMystery2024_Decoration_Slot33_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot33, event=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot33, event=The Winds of Mystery, eventKey=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE**: Deb! Hank! Nice to see you there!
 **HANK** (Frustrated): ZzzzZZzzz...
@@ -1044,9 +1019,9 @@ Every story in which Hank speaks.
 **MADDIE** (Surprised): What?!
 **DEB** (Frustrated): What? Oh... That? Never mind, I didn’t say anything. C’mon Hank. I really need to go to sleep...
 
-### SP_ValentinesMystery2024 — decoration SP_ValentinesMystery2024_Decoration_Slot29
+### Valentine's Mystery — decoration SP_ValentinesMystery2024_Decoration_Slot29
 `SP_ValentinesMystery2024_Decoration_Slot29_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot29, event=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot29, event=Valentine's Mystery, eventKey=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): A ring?
 **MASON** (Surprised): I <b>definitely</b> didn't order that!
@@ -1057,9 +1032,9 @@ Every story in which Hank speaks.
 **PEARL** (Surprised): He's not wrong. Mason??
 **MASON** (Worried): Yes, Mom?
 
-### SP_WeddingMystery2024 — decoration SP_WeddingMystery2024_Decoration_Slot34
+### The Wedding Mystery — decoration SP_WeddingMystery2024_Decoration_Slot34
 `SP_WeddingMystery2024_Decoration_Slot34_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot34, event=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot34, event=The Wedding Mystery, eventKey=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **HANK** (Worried): So you’re sure the food is vegan, right? I mean, maybe we should hold off until we’re sure, okay?
 **MADDIE** (Frustrated): Hank... CALM DOWN! I know it’s a big day, but you’ll get through it, alright? The food is fine.
@@ -1073,9 +1048,9 @@ Every story in which Hank speaks.
 **MADDIE** (Doubtful): ...
 **RODDY** (Charming): Oh... Sorry.
 
-### SP_WeddingMystery2024 — decoration SP_WeddingMystery2024_Decoration_Slot35
+### The Wedding Mystery — decoration SP_WeddingMystery2024_Decoration_Slot35
 `SP_WeddingMystery2024_Decoration_Slot35_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot35, event=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot35, event=The Wedding Mystery, eventKey=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): So! Soon to be Mr and Mrs. Boulton! I’m surprised you took on the Boulton name, Hank!
 **HANK** (Joyous): What, are you kidding? Hank Boulton... Can’t ask for a better name!
@@ -1085,9 +1060,9 @@ Every story in which Hank speaks.
 **GRANDMA** (Joyous): Hahaha! Oh yes, I remember! Nothing like that.
 **GRANDMA** (Charming): Just a little something I need to discuss with him...
 
-### SP_WeddingMystery2024 — decoration SP_WeddingMystery2024_Decoration_Slot37
+### The Wedding Mystery — decoration SP_WeddingMystery2024_Decoration_Slot37
 `SP_WeddingMystery2024_Decoration_Slot37_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot37, event=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot37, event=The Wedding Mystery, eventKey=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **HANK**: What did you want to talk about, Grandma?
 **GRANDMA** (Encouraging): I just wanted to congratulate you on your wonderful wedding!
@@ -1097,9 +1072,9 @@ Every story in which Hank speaks.
 **GRANDMA** (Doubtful): How about I give you a LITTLE reminder!
 **HANK** (Worried): *gulp*
 
-### SP_WorldCup2026 — decoration SP_WorldCup2026_Decoration_Slot36
+### Season Pass - Soccer Watch Party — decoration SP_WorldCup2026_Decoration_Slot36
 `SP_WorldCup2026_Decoration_Slot36_Dialogue` · seen 26.04.01–26.07.01
-- trigger: decoration, decoration=SP_WorldCup2026_Decoration_Slot36, event=SP_WorldCup2026, moment=decoration placed (versions 26.04.01–26.07.01)
+- trigger: decoration, decoration=SP_WorldCup2026_Decoration_Slot36, event=Season Pass - Soccer Watch Party, eventKey=SP_WorldCup2026, moment=decoration placed (versions 26.04.01–26.07.01)
 
 **RODDY** (Encouraging): Step right up and test your goal scoring skills!
 **MADDIE**: Hey, wow! What a great setup, Roddy.
@@ -1112,9 +1087,9 @@ Every story in which Hank speaks.
 **MADDIE** (Doubtful): Hank... It's SOCCER.
 **HANK** (Thinking): Soccer? Uh-oh.
 
-### SP_WorldCup2026 — decoration SP_WorldCup2026_Decoration_Slot37
+### Season Pass - Soccer Watch Party — decoration SP_WorldCup2026_Decoration_Slot37
 `SP_WorldCup2026_Decoration_Slot37_Dialogue` · seen 26.04.01–26.07.01
-- trigger: decoration, decoration=SP_WorldCup2026_Decoration_Slot37, event=SP_WorldCup2026, moment=decoration placed (versions 26.04.01–26.07.01)
+- trigger: decoration, decoration=SP_WorldCup2026_Decoration_Slot37, event=Season Pass - Soccer Watch Party, eventKey=SP_WorldCup2026, moment=decoration placed (versions 26.04.01–26.07.01)
 
 **MADDIE** (Encouraging): Doing a bit of a light workout there, Hank?
 **HANK** (Encouraging): Yeah! Nothing like doing it outside.

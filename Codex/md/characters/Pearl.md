@@ -1,10 +1,10 @@
 # Pearl
 Every story in which Pearl speaks.
 
-### CBE_AmeliaBoulton2024 — decoration CBE_AmeliaBoulton2024_Decoration_Slot08
+### Legacy Lane — decoration CBE_AmeliaBoulton2024_Decoration_Slot08
 `CBE_AmeliaBoulton2024_Decoration_Slot08_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot08, event=CBE_AmeliaBoulton2024, moment=decoration placed (versions 25.05.01–26.07.01)
-- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot08, event=CBE_AmeliaBoulton2024B, moment=decoration placed (versions 26.04.01–26.07.01)
+- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot08, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot08, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, moment=decoration placed (versions 26.04.01–26.07.01)
 
 **PEARL**: Have I told you Amelia is my hero?
 **MADDIE** (Surprised): She is??
@@ -14,30 +14,28 @@ Every story in which Pearl speaks.
 **PEARL**: Thank you for putting on this exhibition about her, Maddie. I know it came at a short notice, but you really delivered.
 **MADDIE** (Relaxed): You can thank Julius - I couldn't have done any of this without his help!
 
-### CBE_AmeliaBoulton2024 — decoration CBE_AmeliaBoulton2024_Decoration_Slot15
+### Legacy Lane — decoration CBE_AmeliaBoulton2024_Decoration_Slot15
 `CBE_AmeliaBoulton2024_Decoration_Slot15_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot15, event=CBE_AmeliaBoulton2024, moment=decoration placed (versions 25.05.01–26.07.01)
-- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot15, event=CBE_AmeliaBoulton2024B, moment=decoration placed (versions 26.04.01–26.07.01)
+- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot15, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot15, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, moment=decoration placed (versions 26.04.01–26.07.01)
 
 **PEARL**: I love Amelia's old things. Did you find anything in her old trunk?
 **MADDIE**: We found the usual stuff! Bows, shoes, hats... and a secret compartment!
 **PEARL** (Surprised): A secret what-now??
 **MADDIE** (Joyous): It turned out there was a lot more to Amelia than we first thought. She had many sides she never shared with the world.
 
-### CBE_BackyardBash2024 — item discovered: 42186364
+### Spooktacular Backyard Bash — item discovered: Box of Beasts
 `CBE_BackyardBash2024_BoxOfBeasts_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_BackyardBash2024, items=['42186364'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_BackyardBash2024, items=['CBE_BackyardBash2024_ScaryMovies_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, itemKeys=['CBE_BackyardBash2024_ScaryMovies_05'], items=['Box of Beasts'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: What are you dressing up as this Halloween, Pearl?
 **PEARL** (Encouraging): I've got a ghost costume - like a sheet. You know, I love the classics!
 **PEARL** (Encouraging): How about you?
 **MADDIE** (Charming): My costume's top secret! But I promise it will be AMAZING!
 
-### CBE_BackyardBash2024 — item discovered: 99249474
+### Spooktacular Backyard Bash — item discovered: Candy Ogre
 `CBE_BackyardBash2024_CandyOgre_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_BackyardBash2024, items=['99249474'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_BackyardBash2024, items=['CBE_BackyardBash2024_CandyMonsters_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, itemKeys=['CBE_BackyardBash2024_CandyMonsters_08'], items=['Candy Ogre'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Joyous): Who's the winner of the costume competition?
 **MADDIE**: I vote for Pearl!
@@ -51,19 +49,18 @@ Every story in which Pearl speaks.
 **MADDIE**: I didn't get a chance to read it with everything going on...
 **GRANDMA** (Frustrated): So who was it in the ghost costume?
 
-### CBE_BackyardBash2024 — item discovered: 93740790
+### Spooktacular Backyard Bash — item discovered: Cauldron of Candy
 `CBE_BackyardBash2024_CauldronOfCandy_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_BackyardBash2024, items=['93740790'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_BackyardBash2024, items=['CBE_BackyardBash2024_Treats_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, itemKeys=['CBE_BackyardBash2024_Treats_05'], items=['Cauldron of Candy'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Thinking): Where's that movie...?
 **MASON**: Boo!
 **PEARL** (Surprised): Hooooly pumpkin spice!
 **PEARL** (Surprised): Mason! What have I said about sneaking up on people??
 
-### CBE_BackyardBash2024 — decoration CBE_Backyardbash2024_Decoration_Slot15
+### Spooktacular Backyard Bash — decoration CBE_Backyardbash2024_Decoration_Slot15
 `CBE_BackyardBash2024_GhastlyGhost_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_Backyardbash2024_Decoration_Slot15, event=CBE_BackyardBash2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_Backyardbash2024_Decoration_Slot15, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL** (Encouraging): Even Ignatius got a Halloween make-over!
 **PEARL** (Encouraging): He looks pretty convincing, doesn't he?
@@ -71,10 +68,9 @@ Every story in which Pearl speaks.
 **PEARL** (Thinking): Why?
 **MADDIE** (Thinking): Because you can't really know who's really hiding underneath...
 
-### CBE_BackyardBash2024 — item discovered: 55707852
+### Spooktacular Backyard Bash — item discovered: Maddie's Halloween Get-up
 `CBE_BackyardBash2024_MaddiesClothes_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_BackyardBash2024, items=['55707852'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_BackyardBash2024, items=['CBE_BackyardBash2024_MaddiesClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, itemKeys=['CBE_BackyardBash2024_MaddiesClothes_04'], items=["Maddie's Halloween Get-up"], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Halloween is always great, but I'd like to do something extra special this year...
 **PEARL** (Thinking): I get it. Let's give everyone a chance to have a good time.
@@ -87,7 +83,7 @@ Every story in which Pearl speaks.
 ### CBE_Easter2023 — event end
 `CBE_Easter2023_OutroDialogue` · seen 23.06.02–26.07.01
 - trigger: event, eventId=CBE_Easter2023, eventType=Collectible Board Event, moment=event end (versions 23.06.02–23.06.02)
-- trigger: event, event=CBE_Easter2023_Name, eventId=CBE_Easter2023, eventType=Collectible Board Event, moment=event end (versions 24.04.01–26.07.01)
+- trigger: event, event=Egg Hunt 2023, eventId=CBE_Easter2023, eventType=Collectible Board Event, moment=event end (versions 24.04.01–26.07.01)
 
 **MASON** (Joyous): Mom! Look at all the eggs I've found!
 **PEARL** (Encouraging): Oh wow... That's quite a haul you got there!
@@ -95,10 +91,9 @@ Every story in which Pearl speaks.
 **MASON** (Encouraging): I had to sell my school desk to get to some of them!
 **PEARL** (Surprised): You did WHAT?!
 
-### CBE_FrostySecrets2024 — item discovered: 38748320
+### Frosty Secrets — item discovered: Pocket Knife
 `CBE_FrostySecrets2024_BackpackSupplies_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['38748320'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_BackpackSupplies_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_BackpackSupplies_03'], items=['Pocket Knife'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Surprised): Looks like you’re packing that backpack for a zombie apocalypse!  
   _earlier:_ ~~Ah, the perfect tool for tinkering outdoors.~~ (until 25.10.01)
@@ -109,10 +104,9 @@ Every story in which Pearl speaks.
 **PEARL** (Doubtful): In case-- what?
 **MADDIE** (Hesitant): Err... you know, in case the coffee maker at the cabin needs emergency surgery!
 
-### CBE_FrostySecrets2024 — item discovered: 38748316
+### Frosty Secrets — item discovered: Open Thermos Flask
 `CBE_FrostySecrets2024_BackpackSupplies_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['38748316'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_BackpackSupplies_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_BackpackSupplies_07'], items=['Open Thermos Flask'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Thinking): There’s something in this thermos... some rolled-up papers. What are these?  
   _earlier:_ ~~A classic thermos flask. I'll take this, too.~~ (until 25.10.01)
@@ -124,10 +118,9 @@ Every story in which Pearl speaks.
   _earlier:_ ~~Whoever packed this bag, hid these papers in the thermos, too.~~ (until 25.10.01)
 **PEARL**: The Boultons have a secret to hide. What a surprise!
 
-### CBE_FrostySecrets2024 — item discovered: 83181835
+### Frosty Secrets — item discovered: Backpack
 `CBE_FrostySecrets2024_Backpack_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['83181835'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_Backpack_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_Backpack_01'], items=['Backpack'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Encouraging): The first thing we need to do is get our gear together.  
   _earlier:_ ~~An old backpack! Looks like no one's touched it in years.~~ (until 25.10.01)
@@ -138,10 +131,9 @@ Every story in which Pearl speaks.
 **PEARL** (Doubtful): Are we hiking all the way to the North Pole?  
   _earlier:_ ~~I owe them a big thanks, because it has everything I need for a day outdoors.~~ (until 25.10.01)
 
-### CBE_FrostySecrets2024 — item discovered: 27923237
+### Frosty Secrets — item discovered: Cabin Diary
 `CBE_FrostySecrets2024_CabinCodex_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['27923237'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_CabinCodex_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_CabinCodex_03'], items=['Cabin Diary'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: We have our gear...  
   _earlier:_ ~~It's like someone's diary, with so many clippings and notes... and a MAP!~~ (until 25.10.01)
@@ -150,19 +142,18 @@ Every story in which Pearl speaks.
 **MADDIE** (Encouraging): And we’re ready to go!  
   _earlier:_ ~~I can feel an adventure coming on!~~ (until 25.10.01)
 
-### CBE_FrostySecrets2024 — item discovered: CBE_FrostySecrets2024_Charlie_06
+### Frosty Secrets — item discovered: Frozen Code Book
 `CBE_FrostySecrets2024_Charlie_06_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_Charlie_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_Charlie_06'], items=['Frozen Code Book'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **PEARL** (Thinking): Umm, Maddie... I just found a big pile of cash in one of the cabinets.
 **MADDIE** (Thinking): Oh, yeah - you sometimes find that kind of stuff here.
 **PEARL** (Doubtful): ...
 **MADDIE** (Hesitant): Don’t ask.
 
-### CBE_FrostySecrets2024 — item discovered: 96354045
+### Frosty Secrets — item discovered: Chimney Starter
 `CBE_FrostySecrets2024_Fireplace_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['96354045'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_Fireplace_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_Fireplace_01'], items=['Chimney Starter'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL**: Did your Grandpa Charlie build this old cabin?  
   _earlier:_ ~~This cabin is freezing!~~ (until 25.10.01)
@@ -174,10 +165,9 @@ Every story in which Pearl speaks.
 **PEARL** (Doubtful): Isn’t it a little bit too quiet, though?
 **MADDIE** (Relaxed): You get used to it. You’ll see - this place is pretty magical.
 
-### CBE_FrostySecrets2024 — item discovered: 16784719
+### Frosty Secrets — item discovered: Mysterious Mansion
 `CBE_FrostySecrets2024_IceSculptures_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['16784719'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_IceSculptures_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_IceSculptures_05'], items=['Mysterious Mansion'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Doubtful): What’s your ice sculpture supposed to look like?  
   _earlier:_ ~~I can see why Grandpa would've liked this place.~~ (until 25.10.01)
@@ -186,10 +176,9 @@ Every story in which Pearl speaks.
 **PEARL** (Encouraging): Oh, yeah! You’re missing some cobwebs and the overgrown garden, but it’s pretty close.  
   _earlier:_ ~~Sometimes I forget what a crazy adventure I'm on with the Mansion and all of its secrets...~~ (until 25.10.01)
 
-### CBE_FrostySecrets2024 — item discovered: 16784715
+### Frosty Secrets — item discovered: Broken Heart
 `CBE_FrostySecrets2024_IceSculptures_09_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['16784715'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_IceSculptures_09'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_IceSculptures_09'], items=['Broken Heart'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Thinking): Do you think it’s too late for a career pivot?  
   _earlier:_ ~~Finding this place makes me wonder about my parents...~~ (until 25.10.01)
@@ -234,10 +223,10 @@ Every story in which Pearl speaks.
 **MADDIE** (Encouraging): Well, I didn’t want to spoil the surprise - it’s part of the full winter experience package!  
   _earlier:_ ~~Everything was still there, in perfect order. He clearly intended to go back but never did.~~ (until 25.10.01)
 
-### CBE_FrostySecrets2024 — item discovered: 89870203
+### Frosty Secrets — item discovered: Winter Shed
 `CBE_FrostySecrets2024_Shed_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['89870203'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_WinterGear_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_Shed_01'], items=['Winter Shed'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_WinterGear_01'], items=['Single Ski'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **PEARL** (Thinking): How far is this cabin?  
   _earlier:_ ~~*Sneeze!* No one's looked in this dusty place for a LONG time!~~ (until 25.10.01)
@@ -246,10 +235,9 @@ Every story in which Pearl speaks.
 **PEARL** (Surprised): I think I need to get my ears checked. I thought you said a few hours by foot!  
   _earlier:_ ~~I think I'll try some of this stuff out!~~ (until 25.10.01)
 
-### CBE_FrostySecrets2024 — item discovered: 59115737
+### Frosty Secrets — item discovered: Drift of Snowflakes
 `CBE_FrostySecrets2024_Snowflakes_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['59115737'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_Snowflakes_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_Snowflakes_03'], items=['Drift of Snowflakes'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL**: I've got to admit - this place is really stunning and peaceful.  
   _earlier:_ ~~Maybe Grandpa Charlie came here to get away from all the drama at the Mansion... It must have been a crazy place - even back then.~~ (until 25.10.01)
@@ -259,10 +247,9 @@ Every story in which Pearl speaks.
   _earlier:_ ~~The place looks so perfect! I can almost imagine him here.~~ (until 25.10.01)
 **MADDIE** (Thinking): You’re not wrong, there!
 
-### CBE_FrostySecrets2024 — item discovered: 79736846
+### Frosty Secrets — item discovered: Complete Snowman
 `CBE_FrostySecrets2024_Snowman_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['79736846'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_Snowman_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_Snowman_07'], items=['Complete Snowman'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Encouraging): Look at your snowman! You’re a real pro!  
   _earlier:_ ~~I'm so glad I found this place! It's good to get a little bit of distance from everything.~~ (until 25.10.01)
@@ -273,10 +260,9 @@ Every story in which Pearl speaks.
 **MADDIE** (Thinking): We can do ice-sculpting, but that can be pretty heavy work. I have some tools, and...
 **PEARL** (Encouraging): You had me at ice-sculpting!
 
-### CBE_FrostySecrets2024 — item discovered: 8148917
+### Frosty Secrets — item discovered: Box of Macarons
 `CBE_FrostySecrets2024_Teatime_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['8148917'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_Teatime_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_Teatime_05'], items=['Box of Macarons'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: We have cookies, tea, and warm blankets. Is this cozy enough for you?  
   _earlier:_ ~~A hiking trip is only as good as the snacks you pack...~~ (until 25.10.01)
@@ -285,10 +271,9 @@ Every story in which Pearl speaks.
 **PEARL** (Doubtful): But they haven’t been here since your Grandpa Charlie's time, have they?
 **MADDIE** (Relaxed): Nope! They’re fresh from Grandma’s kitchen.
 
-### CBE_FrostySecrets2024 — item discovered: 8148915
+### Frosty Secrets — item discovered: Teapot
 `CBE_FrostySecrets2024_Teatime_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['8148915'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_Teatime_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_Teatime_07'], items=['Teapot'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Thinking): We’re out of hot cocoa. What do we do now?  
   _earlier:_ ~~Hot tea is exactly what I need right now.~~ (until 25.10.01)
@@ -299,10 +284,9 @@ Every story in which Pearl speaks.
 **MADDIE** (Relaxed): Come on, it’ll be fun. I promise!  
   _earlier:_ ~~Not a bad place to spend a day!~~ (until 25.10.01)
 
-### CBE_FrostySecrets2024 — item discovered: 13804016
+### Frosty Secrets — item discovered: Plaid Slippers
 `CBE_FrostySecrets2024_WarmClothes_08_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['13804016'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_WarmClothes_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_WarmClothes_08'], items=['Plaid Slippers'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): If you really want to enjoy a cold winter’s day, you need to wear enough layers.  
   _earlier:_ ~~He clearly loved this place.~~ (until 25.10.01)
@@ -311,10 +295,9 @@ Every story in which Pearl speaks.
 **PEARL** (Encouraging): Gloves, check!  
   _earlier:_ ~~I wish I knew more about him. Finding his things makes him so much more real - not just a ghost always haunting us.~~ (until 25.10.01)
 
-### CBE_FrostySecrets2024 — item discovered: 20334818
+### Frosty Secrets — item discovered: Snowshoes
 `CBE_FrostySecrets2024_WinterGear_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['20334818'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_WinterGear_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_WinterGear_04'], items=['Snowshoes'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL**: Could we drive to the cabin?  
   _earlier:_ ~~I've always wanted to try snowshoes!~~ (until 25.10.01)
@@ -325,10 +308,9 @@ Every story in which Pearl speaks.
 **MADDIE** (Hesitant): Or snowshoes?
 **PEARL** (Thinking): What are snowshoes?
 
-### CBE_FrostySecrets2024 — item discovered: 20334815
+### Frosty Secrets — item discovered: Snow Racer
 `CBE_FrostySecrets2024_WinterGear_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['20334815'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_WinterGear_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_WinterGear_07'], items=['Snow Racer'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL**: A snowmobile -- now we're talking! How fast does this thing go?  
   _earlier:_ ~~Coooool! I bet this thing goes fast.~~ (until 25.10.01)
@@ -337,10 +319,9 @@ Every story in which Pearl speaks.
 **PEARL** (Encouraging): Can I drive?  
   _earlier:_ ~~Buuut... maybe I'll try it out first!~~ (until 25.10.01)
 
-### CBE_FrostySecrets2024 — item discovered: 72889862
+### Frosty Secrets — item discovered: Snow Blower
 `CBE_FrostySecrets2024_WinterTools_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['72889862'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_WinterTools_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_WinterTools_06'], items=['Snow Blower'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Thinking): Uh-oh! I think we’re snowed in! I can barely open the front door.  
   _earlier:_ ~~The weather outside is looking fickle.~~ (until 25.10.01)
@@ -350,9 +331,9 @@ Every story in which Pearl speaks.
 **MADDIE** (Thinking): Well, there is an old snow blower in the shed...
 **PEARL** (Encouraging): That sounds better!
 
-### CBE_MaddieInParis2025 — decoration CBE_MaddieInParis2025_Decoration_Slot22
+### Maddie In Paris — decoration CBE_MaddieInParis2025_Decoration_Slot22
 `CBE_MaddieInParis2025_Slot_22_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_MaddieInParis2025_Decoration_Slot22, event=CBE_MaddieInParis2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_MaddieInParis2025_Decoration_Slot22, event=Maddie In Paris, eventKey=CBE_MaddieInParis2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL** (Surprised): What in the world? The place looks just like Paris!
 **MADDIE** (Relaxed): I felt inspired to bring a little piece of Paris home with me.
@@ -360,9 +341,9 @@ Every story in which Pearl speaks.
 **PEARL** (Thinking): This looks like the perfect setting for a romantic picnic!
 **PEARL** (Thinking): Don't you think?
 
-### CBE_MaddieInParis — decoration CBE_MaddieInParis2026v2_Decoration_Slot16
+### Maddie In Paris — decoration CBE_MaddieInParis2026v2_Decoration_Slot16
 `CBE_MaddieInParis_Slot_16_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=CBE_MaddieInParis2026v2_Decoration_Slot16, event=CBE_MaddieInParis, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=CBE_MaddieInParis2026v2_Decoration_Slot16, event=Maddie In Paris, eventKey=CBE_MaddieInParis, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **PEARL** (Thinking): Is Maddie off on her travels again?
 **GRANDMA**: She is indeed - in Paris.
@@ -371,26 +352,23 @@ Every story in which Pearl speaks.
 **PEARL** (Doubtful): Seize the day and all that?
 **GRANDMA** (Relaxed): Precisely.
 
-### CBE_RecycleRunway2024 — item discovered: 1295215
+### Recycle Runway — item discovered: Assorted Materials
 `CBE_RecycleRunway2024_AssortedMaterials_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['1295215'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_ProjectBoxJewelry_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_ProjectBoxJewelry_01'], items=['Assorted Materials'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Thinking): Someone donated a box of old crafting supplies. What could we do with them?
 **MADDIE** (Encouraging): How about some jewelry?
 
-### CBE_RecycleRunway2024 — item discovered: 73093576
+### Recycle Runway — item discovered: Clothing Rack
 `CBE_RecycleRunway2024_ClothingRack_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['73093576'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_StageDecorations_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_StageDecorations_06'], items=['Clothing Rack'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE** (Doubtful): Who's gonna model all of these outfits in the show? Imagine us on that runway!
 **PEARL** (Encouraging): Well, Julius and Roddy couldn't make it, so...
 
-### CBE_RecycleRunway2024 — item discovered: 83776900
+### Recycle Runway — item discovered: Crafting Desk
 `CBE_RecycleRunway2024_CraftingDesk_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['83776900'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_CraftingTools_09'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_CraftingTools_09'], items=['Crafting Desk'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL**: How's it going with Roddy? Are you two getting serious?
 **JACKIE** (Thinking): I don't know. It's kinda awkward with so much history...
@@ -398,26 +376,26 @@ Every story in which Pearl speaks.
 **PEARL** (Thinking): She's never had the hots for Roddy, has she?
 **JACKIE** (Surprised): I guess not...
 
-### CBE_RecycleRunway2024 — decoration CBE_RecycleRunway2024_Decoration_Slot17
+### Recycle Runway — decoration CBE_RecycleRunway2024_Decoration_Slot17
 `CBE_RecycleRunway2024_Decoration_Slot17_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_RecycleRunway2024_Decoration_Slot17, event=CBE_RecycleRunway2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_RecycleRunway2024_Decoration_Slot17, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): So, I found some wood left over from Mason's pirate ship and put together this... sculpture.
 **MADDIE** (Thinking): What do you think?
 **PEARL** (Encouraging): I think the whole thing should be on national TV!
 **PEARL** (Encouraging): Everything here is recycled and reused - and still fabulous. It really shows how much you can do without buying everything new.
 
-### CBE_RecycleRunway2024 — decoration CBE_RecycleRunway2024_Decoration_Slot18
+### Recycle Runway — decoration CBE_RecycleRunway2024_Decoration_Slot18
 `CBE_RecycleRunway2024_Decoration_Slot18_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_RecycleRunway2024_Decoration_Slot18, event=CBE_RecycleRunway2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_RecycleRunway2024_Decoration_Slot18, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL** (Encouraging): Recycled clothes don't have to look like garbage. It's all in how you set it up.
 **PEARL** (Encouraging): This boutique is so cute! Jackie and Maddie, you've both outdone yourselves.
 **JACKIE** (Encouraging): It doesn't look bad, does it?
 
-### CBE_RecycleRunway2024 — decoration CBE_RecycleRunway2024_Decoration_Slot19
+### Recycle Runway — decoration CBE_RecycleRunway2024_Decoration_Slot19
 `CBE_RecycleRunway2024_Decoration_Slot19_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_RecycleRunway2024_Decoration_Slot19, event=CBE_RecycleRunway2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_RecycleRunway2024_Decoration_Slot19, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE**: What do you think about the stuff we found in the trunk? I'm not sure I'm buying the story about an old Halloween costume.
 **PEARL** (Thinking): When I was a kid, people used to talk about the Boultons and their secret business.
@@ -425,44 +403,41 @@ Every story in which Pearl speaks.
 **JACKIE** (Doubtful): I don't know...
 **PEARL** (Surprised): How do you explain the bullet holes in that old hat?
 
-### CBE_RecycleRunway2024 — decoration CBE_RecycleRunway2024_Decoration_Slot21
+### Recycle Runway — decoration CBE_RecycleRunway2024_Decoration_Slot21
 `CBE_RecycleRunway2024_Decoration_Slot21_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_RecycleRunway2024_Decoration_Slot21, event=CBE_RecycleRunway2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_RecycleRunway2024_Decoration_Slot21, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL**: You've thought of everything, Maddie!
 **MADDIE** (Charming): I thought I was getting a little carried away.
 **PEARL** (Encouraging): No, it's PERFECT.
 
-### CBE_RecycleRunway2024 — decoration CBE_RecycleRunway2024_Decoration_Slot24
+### Recycle Runway — decoration CBE_RecycleRunway2024_Decoration_Slot24
 `CBE_RecycleRunway2024_Decoration_Slot24_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_RecycleRunway2024_Decoration_Slot24, event=CBE_RecycleRunway2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_RecycleRunway2024_Decoration_Slot24, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL**: This skip is a real treasure trove!
 **JACKIE**: Yep. We'll be able to find all kinds of materials in here.
 **PEARL** (Doubtful): But we'll wash them first, right?
 **JACKIE** (Encouraging): Of course!
 
-### CBE_RecycleRunway2024 — item discovered: 22321064
+### Recycle Runway — item discovered: Dressing Table
 `CBE_RecycleRunway2024_DressingTable_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['22321064'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_Clothing_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_Clothing_07'], items=['Dressing Table'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Doubtful): Are you ready to serve some fierce lewks?
 **MADDIE** (Discouraged): Well, I guess it's for a good cause...
 **PEARL** (Encouraging): Let's go!
 
-### CBE_RecycleRunway2024 — item discovered: 64111150
+### Recycle Runway — item discovered: Fashion Magazine
 `CBE_RecycleRunway2024_FashionMagazine_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['64111150'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_Photoshoot_11'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_Photoshoot_11'], items=['Fashion Magazine'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Surprised): Our little project actually made it to the pages of a fashion magazine.
 **JACKIE** (Encouraging): Who knew recycled couture would be such a hit?
 
-### CBE_RecycleRunway2024 — item discovered: 381125
+### Recycle Runway — item discovered: Fashion Materials
 `CBE_RecycleRunway2024_FashionMaterials_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['381125'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_RecyclingMaterials_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_RecyclingMaterials_08'], items=['Fashion Materials'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: A fashion show with recycled clothes is a great idea - but I don't know how to sew! Grandma's the only one in our family with any crafting skills.
 **PEARL**: But you're a good builder... and we need a stage for our runway show.
@@ -471,10 +446,9 @@ Every story in which Pearl speaks.
 **MADDIE** (Joyous): I need to go make some plans... See you later!
 **PEARL** (Encouraging): See? This is exactly what she needed.
 
-### CBE_RecycleRunway2024 — item discovered: 41442276
+### Recycle Runway — item discovered: Hat with Holes
 `CBE_RecycleRunway2024_HatWithHoles_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['41442276'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_MysteryItems_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_MysteryItems_05'], items=['Hat with Holes'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Thinking): That Mansion is full of weird secrets...
 **PEARL** (Thinking): I'm pretty sure Maddie doesn't know half of her family's history.
@@ -497,10 +471,9 @@ Every story in which Pearl speaks.
 **PEARL** (Doubtful): And it would give Maddie something to do about after Emilio left her to go help the fish in Bolivia...
 **JACKIE** (Surprised): What are we waiting for??
 
-### CBE_RecycleRunway2024 — item discovered: 13331058
+### Recycle Runway — item discovered: Jewelry Collection
 `CBE_RecycleRunway2024_JewelryCollection_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['13331058'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_JewelryBundle_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_JewelryBundle_01'], items=['Jewelry Collection'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): Ta-da! A whole collection of bespoke jewelry, all made with recycled materials.
 **PEARL** (Surprised): Wow! You really are a woman of many talents.
@@ -521,46 +494,41 @@ Every story in which Pearl speaks.
 **GRANDMA**: Don't look so shocked, dearie - not everything has a secret meaning.
 **MADDIE** (Relaxed): Come on, let's celebrate! The first round of Hopeberry juice is on me!
 
-### CBE_RecycleRunway2024 — item discovered: 99136322
+### Recycle Runway — item discovered: Recycled Clothes
 `CBE_RecycleRunway2024_RecycledClothes_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['99136322'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_ProjectBoxFabrics_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_ProjectBoxFabrics_01'], items=['Recycled Clothes'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE** (Thinking): People throw away so much cool, usable stuff.
 **PEARL** (Thinking): I had this jumper I used to love... but it had a couple of little holes in it, so I threw it away. I still think about that jumper every day!
 **JACKIE** (Surprised): Every day?
 **PEARL** (Encouraging): Well, maybe not EVERY day, but you get what I mean. Mend, don't spend!
 
-### CBE_RecycleRunway2024 — item discovered: 21071443
+### Recycle Runway — item discovered: Sewing Pattern
 `CBE_RecycleRunway2024_SewingPattern_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['21071443'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_SewingDesigns_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_SewingDesigns_03'], items=['Sewing Pattern'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Thinking): What do you need to turn all this fabric into clothes?
 **JACKIE**: I've drawn some sewing patterns. Now I'll just cut the fabric and start sewing!
 **PEARL** (Surprised): That's it??
 **JACKIE** (Encouraging): It's a lot simpler than you'd think, huh?
 
-### CBE_RecycleRunway2024 — item discovered: 64111154
+### Recycle Runway — item discovered: Social Media Photo
 `CBE_RecycleRunway2024_SocialMediaPhoto_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['64111154'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_Photoshoot_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_Photoshoot_07'], items=['Social Media Photo'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL**: Can I post a photo of you on my social media?
 **JACKIE** (Doubtful): Why not - it's not like this is going viral!
 
-### CBE_RecycleRunway2024 — item discovered: 41442280
+### Recycle Runway — item discovered: Thin Disguise
 `CBE_RecycleRunway2024_SpyNewspaper_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['41442280'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_MysteryItems_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_MysteryItems_01'], items=['Thin Disguise'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Thinking): What's this? An old newspaper?
 **JACKIE** (Thinking): Are those eyeholes?
 
-### CBE_RecycleRunway2024 — item discovered: 41442278
+### Recycle Runway — item discovered: Wig
 `CBE_RecycleRunway2024_Wig_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['41442278'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_MysteryItems_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_MysteryItems_03'], items=['Wig'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE** (Doubtful): A wig? This is starting to look like a collection of disguises...
 **PEARL** (Doubtful): Why would there be a trunk full of old disguises in the Mansion?
@@ -732,18 +700,16 @@ Every story in which Pearl speaks.
 **HEIKKI** (Charming): I guess so... It means hello and goodbye. 
 **PEARL** (Encouraging): Oh! Well then to everyone, Moro!
 
-### LDE_HolidayCarols2023 — item discovered: 27831956
+### The Fa-la-la-la Follies — item discovered: Mulled Hopeberry Juice Mug
 `LDE_HolidayCarols2023_DeckTheHalls_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['27831956'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_DeckTheHalls_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_DeckTheHalls_07'], items=['Mulled Hopeberry Juice Mug'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Doubtful): The stage will need some decorations, too.
 **MADDIE** (Joyous): And plenty of them!
 
-### LDE_HolidayCarols2023 — item discovered: 96623186
+### The Fa-la-la-la Follies — item discovered: Pearl's Present
 `LDE_HolidayCarols2023_HolidayPresent_09_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['96623186'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_HolidayPresent_09'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_HolidayPresent_09'], items=["Pearl's Present"], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: What a weird cup!
 **PEARL** (Thinking): Oh, it's a guksi - a type of duodji used by the Sami people!
@@ -765,10 +731,9 @@ Every story in which Pearl speaks.
 **DEB** (Encouraging): Oh, me too - I have got the perfect match.
 **DEB** (Encouraging): Would you consider going on a blind date?
 
-### LDE_Hopeberry2024 — item discovered: 92022632
+### Love on the Vine — item discovered: Glass Jars
 `LDE_Hopeberry2024_EmptyBottles_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['92022632'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_EmptyBottles_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_EmptyBottles_01'], items=['Glass Jars'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL**: Maddie, are the rumours true?
 **PEARL**: Are you looking for a date for the Hopeberry Festival?
@@ -790,10 +755,9 @@ Every story in which Pearl speaks.
 **RODDY** (Charming): Sure, why not!
 **PEARL** (Encouraging): Thank you, Roddy! You're a darling!
 
-### LDE_Hopeberry2025 — item discovered: 919561
+### Love on the Vine — item discovered: Bouquet of Herbs
 `LDE_Hopeberry2025_Herbs6_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2025, items=['919561'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2025, items=['LDE_Hopeberry2024_Herbs_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2025, itemKeys=['LDE_Hopeberry2024_Herbs_06'], items=['Bouquet of Herbs'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Thinking): Oh, man! I'm still one performer short for the Hopeberry Festival.
 **RODDY**: What kind of performance is it?
@@ -818,10 +782,9 @@ Every story in which Pearl speaks.
 **RODDY** (Hesitant): This break-up has been way worse than I expected...
 **RODDY** (Joyous): A glass of fresh hopeberry juice is just what I need right now. Onwards and upwards!
 
-### LDE_Hopeberry2025 — item discovered: 99151364
+### Love on the Vine — item discovered: Wooden Box
 `LDE_Hopeberry2025_ReusableFurniture1_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2025, items=['99151364'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2025, items=['LDE_Hopeberry2024_ReusableFurniture_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2025, itemKeys=['LDE_Hopeberry2024_ReusableFurniture_01'], items=['Wooden Box'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL**: What did you think about Roddy's stand-up set?
 **MADDIE** (Relaxed): I admit I was nervous for him, but he was actually good!
@@ -831,10 +794,9 @@ Every story in which Pearl speaks.
 **PEARL** (Thinking): He did me a big favor!
 **MADDIE** (Thinking): I think he did a lot more than we realize.
 
-### LDE_Rumors2025 — item discovered: 90018211
+### Circus Caper — item discovered: Small Circus Program
 `LDE_Rumors2025_Brochures_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['90018211'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_Brochures_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Brochures_03'], items=['Small Circus Program'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Thinking): We need to think of an act that will really stop people in their tracks. Like...  
   _earlier:_ ~~Have you seen Fiona anywhere?~~ (until 25.09.01); ~~We need to think of an act that will really stop people in their tracks. Like…~~ (until 25.10.01)
@@ -858,9 +820,9 @@ Every story in which Pearl speaks.
 **GRANDMA**: Yes. What is it?
 **GRANDMA** (Joyous): No one guessed it right, did they?
 
-### SP_CancelledFun2025 — decoration SP_CancelledFun2025_Decoration_Slot35
+### Festive Feast — decoration SP_CancelledFun2025_Decoration_Slot35
 `SP_CancelledFun2025_Decoration_Slot35_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CancelledFun2025_Decoration_Slot35, event=SP_CancelledFun2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CancelledFun2025_Decoration_Slot35, event=Festive Feast, eventKey=SP_CancelledFun2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **PEARL** (Surprised): Mason! Pull your face out of that chocolate fountain this instant!
 **MASON** (Worried): But Moooom! Someone’s gotta do quality control! Who knows if this chocolate is up to standard?
@@ -871,9 +833,9 @@ Every story in which Pearl speaks.
 **MADDIE** (Relaxed): It’s alright, Pearl. He can help as long as he uses a SPOON.
 **MASON** (Encouraging): Mason, official Chocolate quality control officer, reporting for duty, Ma’am!
 
-### SP_CherrysMysteryMeat2024 — decoration SP_CherrysMysteryMeat2024_Decoration_Slot32
+### Cherry's Mystery Meat — decoration SP_CherrysMysteryMeat2024_Decoration_Slot32
 `SP_CherrysMysteryMeat2024_Decoration_Slot32_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot32, event=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot32, event=Cherry's Mystery Meat, eventKey=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL** (Thinking): This event will be our best yet - I can feel it in my bones!
 **PEARL** (Thinking): I still need to find someone to man the official Hopewell Bay Centennial merchandise booth... and someone to look after the barbecue.
@@ -885,9 +847,9 @@ Every story in which Pearl speaks.
 **GRANDMA** (Surprised): No, I did not notice anything at all! Oh, Pearl... I can take care of the barbecue.
 **PEARL** (Encouraging): Done and done!
 
-### SP_CherrysMysteryMeat2024 — decoration SP_CherrysMysteryMeat2024_Decoration_Slot35
+### Cherry's Mystery Meat — decoration SP_CherrysMysteryMeat2024_Decoration_Slot35
 `SP_CherrysMysteryMeat2024_Decoration_Slot35_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot35, event=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot35, event=Cherry's Mystery Meat, eventKey=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL** (Encouraging): Everyone, the pie's almost ready to come out of the oven!
 **JACKIE**: And it looks delicious - seriously!
@@ -921,9 +883,9 @@ Every story in which Pearl speaks.
 **PEARL** (Thinking): Some treasures are valuable because they're rare. Others because they make people curious.
 **MADDIE** (Encouraging): Then I'd call this showcase a success.
 
-### SP_GoodVibrations2026 — decoration SP_GoodVibrations2026_Decoration_Slot26
+### Good Vibrations — decoration SP_GoodVibrations2026_Decoration_Slot26
 `SP_GoodVibrations2026_Decoration_Slot26_Dialogue` · seen 26.06.01–26.07.01
-- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot26, event=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
+- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot26, event=Good Vibrations, eventKey=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
 
 **MADDIE**: The labels on the display tables make such a difference. Visitors can learn what they're looking at.
 **PEARL** (Encouraging): I've added magnifying glasses too. But this sample doesn't match any description we have.
@@ -931,18 +893,18 @@ Every story in which Pearl speaks.
 **PEARL** (Doubtful): Or nobody ever identified it properly.
 **MADDIE**: Hmmm... Very intriguing.
 
-### SP_GoodVibrations2026 — decoration SP_GoodVibrations2026_Decoration_Slot27
+### Good Vibrations — decoration SP_GoodVibrations2026_Decoration_Slot27
 `SP_GoodVibrations2026_Decoration_Slot27_Dialogue` · seen 26.06.01–26.07.01
-- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot27, event=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
+- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot27, event=Good Vibrations, eventKey=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
 
 **PEARL**: Look at those prisms! The sunlight is scattering rainbows everywhere.
 **JACKIE** (Encouraging): And these jars of colorful pebbles are gorgeous.
 **PEARL** (Thinking): But look at this! This stone has a strange shimmer. I wonder if it's rare...
 **JACKIE** (Thinking): Let's just say unusual rocks have a habit of appearing around this family.
 
-### SP_GoodVibrations2026 — decoration SP_GoodVibrations2026_Decoration_Slot28
+### Good Vibrations — decoration SP_GoodVibrations2026_Decoration_Slot28
 `SP_GoodVibrations2026_Decoration_Slot28_Dialogue` · seen 26.06.01–26.07.01
-- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot28, event=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
+- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot28, event=Good Vibrations, eventKey=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
 
 **PEARL**: More people brought collections! Now we have fossils, shells, beach glass...
 **MADDIE** (Encouraging): And every item has a story behind it.
@@ -950,9 +912,9 @@ Every story in which Pearl speaks.
 **PEARL** (Doubtful): And somehow every version is different.
 **JACKIE** (Thinking): That's a mystery worth digging into...
 
-### SP_GoodVibrations2026 — decoration SP_GoodVibrations2026_Decoration_Slot38
+### Good Vibrations — decoration SP_GoodVibrations2026_Decoration_Slot38
 `SP_GoodVibrations2026_Decoration_Slot38_Dialogue` · seen 26.06.01–26.07.01
-- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot38, event=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
+- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot38, event=Good Vibrations, eventKey=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
 
 **MADDIE** (Relaxed): The giant geode is stealing the whole show.
 **PEARL** (Encouraging): That's understandable! Nature doesn't make many treasures like that.
@@ -975,17 +937,17 @@ Every story in which Pearl speaks.
 **JACKIE**: I think these treasures deserve to be shown off to the whole town. How about we put on a little showcase?
 **PEARL**: Maybe we'll find some answers along the way!
 
-### SP_Halloween2024 — decoration SP_Halloween2024_Decoration_Slot25
+### Halloween Mystery — decoration SP_Halloween2024_Decoration_Slot25
 `SP_Halloween2024_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot25, event=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot25, event=Halloween Mystery, eventKey=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL**: Your plan for the tour looks excellent, and the Mansion looks way creepier when you're looking for ghosts!
 **MADDIE** (Thinking): It sure does! But all the spirits here are friendly -- or at least I think so.
 **PEARL** (Encouraging): I'll talk to Cherry about making snacks for the tour, and we're good to go!
 
-### SP_Halloween2024 — decoration SP_Halloween2024_Decoration_Slot27
+### Halloween Mystery — decoration SP_Halloween2024_Decoration_Slot27
 `SP_Halloween2024_Decoration_Slot27_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot27, event=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot27, event=Halloween Mystery, eventKey=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL** (Annoyed): We have a problem.
 **MADDIE** (Surprised): What is it?
@@ -996,9 +958,9 @@ Every story in which Pearl speaks.
 **PEARL** (Thinking): Something is definitely up with her - but let's worry about it later.
 **PEARL** (Thinking): We have a ghost tour to organize!
 
-### SP_Halloween2024 — decoration SP_Halloween2024_Decoration_Slot28
+### Halloween Mystery — decoration SP_Halloween2024_Decoration_Slot28
 `SP_Halloween2024_Decoration_Slot28_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot28, event=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot28, event=Halloween Mystery, eventKey=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL**: Maddie, I love what you've done with the place... but we have another issue.
 **MADDIE** (Discouraged): What now??
@@ -1009,9 +971,9 @@ Every story in which Pearl speaks.
 **MADDIE** (Doubtful): "Step beyond the rotting gates of Beaumont Hall, where whispers and lies linger in the cold night air. The spirits here are not friendly..."
 **MADDIE** (Doubtful): This is NOT what I wrote with Jackie!
 
-### SP_Halloween2024 — decoration SP_Halloween2024_Decoration_Slot29
+### Halloween Mystery — decoration SP_Halloween2024_Decoration_Slot29
 `SP_Halloween2024_Decoration_Slot29_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot29, event=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot29, event=Halloween Mystery, eventKey=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Encouraging): Next, we will head to Frog Pond Falls, where the spirit of Amelia Boulton allegedly often wanders...
 **PEARL**: The tour is going great, Maddie!
@@ -1034,9 +996,9 @@ Every story in which Pearl speaks.
 **PEARL** (Thinking): Careful, Maddie. Next year you might want to take to the stage, too!
 **MADDIE** (Hesitant): Ask me again next summer!
 
-### SP_Hopefest2026 — decoration SP_Hopefest2026_Decoration_Slot26
+### Hopefest Music Festival — decoration SP_Hopefest2026_Decoration_Slot26
 `SP_Hopefest2026_Decoration_Slot26_Dialogue` · seen 26.05.01–26.07.01
-- trigger: decoration, decoration=SP_Hopefest2026_Decoration_Slot26, event=SP_Hopefest2026, moment=decoration placed (versions 26.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Hopefest2026_Decoration_Slot26, event=Hopefest Music Festival, eventKey=SP_Hopefest2026, moment=decoration placed (versions 26.05.01–26.07.01)
 
 **PEARL**: Next on the list: building the backstage area with seating for the performers.
 **MADDIE**: Sounds good! By the way... who will be performing? Has anyone signed up?
@@ -1044,9 +1006,9 @@ Every story in which Pearl speaks.
 **MADDIE** (Hesitant): Me?? Oh, I don't sing. I can barely hold the drumsticks!
 **PEARL** (Thinking): No? Ursula said you absolutely own the shower every morning!
 
-### SP_Hopefest2026 — decoration SP_Hopefest2026_Decoration_Slot27
+### Hopefest Music Festival — decoration SP_Hopefest2026_Decoration_Slot27
 `SP_Hopefest2026_Decoration_Slot27_Dialogue` · seen 26.05.01–26.07.01
-- trigger: decoration, decoration=SP_Hopefest2026_Decoration_Slot27, event=SP_Hopefest2026, moment=decoration placed (versions 26.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Hopefest2026_Decoration_Slot27, event=Hopefest Music Festival, eventKey=SP_Hopefest2026, moment=decoration placed (versions 26.05.01–26.07.01)
 
 **PEARL**: You know what really makes a festival work?
 **MADDIE**: Great music?
@@ -1057,9 +1019,9 @@ Every story in which Pearl speaks.
 **PEARL** (Encouraging): No! Excellent food!
 **MADDIE** (Relaxed): Ahhh... Now you’re talking!
 
-### SP_Hopefest2026 — decoration SP_Hopefest2026_Decoration_Slot28
+### Hopefest Music Festival — decoration SP_Hopefest2026_Decoration_Slot28
 `SP_Hopefest2026_Decoration_Slot28_Dialogue` · seen 26.05.01–26.07.01
-- trigger: decoration, decoration=SP_Hopefest2026_Decoration_Slot28, event=SP_Hopefest2026, moment=decoration placed (versions 26.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Hopefest2026_Decoration_Slot28, event=Hopefest Music Festival, eventKey=SP_Hopefest2026, moment=decoration placed (versions 26.05.01–26.07.01)
 
 **PEARL** (Encouraging): Have you seen the stage lights? It’s finally starting to feel like a real festival.
 **MADDIE** (Encouraging): I know — I can barely sit still. Wait… who’s rehearsing up there?
@@ -1068,9 +1030,9 @@ Every story in which Pearl speaks.
 **PEARL** (Thinking): Right? Quietest guy in town, and suddenly he’s a rock star.
 **MADDIE** (Charming): You don't say...
 
-### SP_Hopefest2026 — decoration SP_Hopefest2026_Decoration_Slot29
+### Hopefest Music Festival — decoration SP_Hopefest2026_Decoration_Slot29
 `SP_Hopefest2026_Decoration_Slot29_Dialogue` · seen 26.05.01–26.07.01
-- trigger: decoration, decoration=SP_Hopefest2026_Decoration_Slot29, event=SP_Hopefest2026, moment=decoration placed (versions 26.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Hopefest2026_Decoration_Slot29, event=Hopefest Music Festival, eventKey=SP_Hopefest2026, moment=decoration placed (versions 26.05.01–26.07.01)
 
 **PEARL**: Everything is ready for the festival to begin!
 **JACKIE** (Thinking): But did we get all the permits approved?
@@ -1127,9 +1089,9 @@ Every story in which Pearl speaks.
 **MASON** (Relaxed): ...
 **MADDIE** (Relaxed): How could you ever say no to that?
 
-### SP_Misery2025 — decoration SP_Misery2025_Decoration_Slot35
+### Something Ours — decoration SP_Misery2025_Decoration_Slot35
 `SP_Misery2025_Decoration_Slot35_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Misery2025_Decoration_Slot35, event=SP_Misery2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Misery2025_Decoration_Slot35, event=Something Ours, eventKey=SP_Misery2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Joyous): At least we won’t get lost, dearie.
 **MASON** (Encouraging): It points to all the most important sites here!
@@ -1164,9 +1126,9 @@ Every story in which Pearl speaks.
 **PEARL** (Surprised): You... You will?!
 **MADDIE** (Encouraging): Of course. What’s family for?!
 
-### SP_NoRest2025 — decoration SP_NoRest2025_Decoration_Slot25
+### No Rest for the Wicked — decoration SP_NoRest2025_Decoration_Slot25
 `SP_NoRest2025_Decoration_Slot25_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_NoRest2025_Decoration_Slot25, event=SP_NoRest2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_NoRest2025_Decoration_Slot25, event=No Rest for the Wicked, eventKey=SP_NoRest2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **PEARL**: Thanks for keeping Mason occupied, Maddie.
 **MADDIE** (Encouraging): It’s alright. He really can’t wait for his mom to come back!
@@ -1178,9 +1140,9 @@ Every story in which Pearl speaks.
 **PEARL** (Surprised): I- I just don’t think she wants to see ME. I chose for us to move here, and she was against it.
 **MADDIE** (Thinking): Against it? Why? Her mom lives here! Hmm... I should talk to Deb.
 
-### SP_NoRest2025 — decoration SP_NoRest2025_Decoration_Slot28
+### No Rest for the Wicked — decoration SP_NoRest2025_Decoration_Slot28
 `SP_NoRest2025_Decoration_Slot28_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_NoRest2025_Decoration_Slot28, event=SP_NoRest2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_NoRest2025_Decoration_Slot28, event=No Rest for the Wicked, eventKey=SP_NoRest2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MASON** (Joyous): Mom! When will she be here?! Do you think she’ll stay now? I can’t wait to show her what I’ve made!
 **MADDIE** (Joyous): Oooh, that’s pretty gnarly!
@@ -1253,9 +1215,9 @@ Every story in which Pearl speaks.
 **PEARL** (Annoyed): And we're NOT supposed to talk about it!
 **MADDIE** (Surprised): I promise I won't tell a soul!
 
-### SP_SplashMystery2025 — decoration SP_SplashMystery2025_Decoration_Slot36
+### Splash of Mystery — decoration SP_SplashMystery2025_Decoration_Slot36
 `SP_SplashMystery2025_Decoration_Slot36_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_SplashMystery2025_Decoration_Slot36, event=SP_SplashMystery2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_SplashMystery2025_Decoration_Slot36, event=Splash of Mystery, eventKey=SP_SplashMystery2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL**: Are you ready to see your party?
 **MASON** (Joyous): You can bet your pool floaties I am!
@@ -1267,10 +1229,9 @@ Every story in which Pearl speaks.
 **MADDIE** (Relaxed): You're welcome.
 **BELLA** (Relaxed): It was our pleasure!
 
-### SP_SplashMystery2025 — item discovered: 17871759
+### Splash of Mystery — item discovered: Kick Board
 `SP_SplashMystery2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_SplashMystery2025, items=['17871759'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_SplashMystery2025, items=['SP_SplashMystery2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Splash of Mystery, eventKey=SP_SplashMystery2025, itemKeys=['SP_SplashMystery2025_CollectableItems_04'], items=['Kick Board'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): What have you got planned for Mason's big party?
 **PEARL** (Doubtful): Pfft, you know what he's like.
@@ -1284,9 +1245,9 @@ Every story in which Pearl speaks.
 **BELLA** (Thinking): Mason's dream birthday party, huh? I bet I can make it even bigger and better.
 **BELLA** (Doubtful): Maddie will have to admit that I am more fun!
 
-### SP_ValentinesMystery2024 — decoration SP_ValentinesMystery2024_Decoration_Slot29
+### Valentine's Mystery — decoration SP_ValentinesMystery2024_Decoration_Slot29
 `SP_ValentinesMystery2024_Decoration_Slot29_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot29, event=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot29, event=Valentine's Mystery, eventKey=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): A ring?
 **MASON** (Surprised): I <b>definitely</b> didn't order that!

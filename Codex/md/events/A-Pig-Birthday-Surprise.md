@@ -16,3 +16,16 @@
 **PET** (Ready): Zzzzzz...
 **MASON** (Charming): I think he's having a nap!
 **PEARL** (Doubtful): I think I need a nap...
+
+### A Pig Birthday Surprise — item discovered: Little Piggy
+`SP_PigPet2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
+- trigger: item, event=A Pig Birthday Surprise, eventKey=SP_PigPet2025, itemKeys=['SP_PigPet2025_CollectableItems_04'], items=['Little Piggy'], moment=item discovered (versions 25.05.01–26.07.01)
+
+**MADDIE**: I don't think I've ever met Mason's other mom, Charlotte. What is she like?
+**GRANDMA**: She has very much taken after her mother.
+**MADDIE** (Thinking): Deb?
+**GRANDMA** (Thinking): Yes. They are both intelligent and sharp-witted.
+**MADDIE**: What does Charlotte do for a living?
+**GRANDMA** (Doubtful): Ah, that I cannot tell you.
+**MADDIE** (Surprised): What do you mean?
+**GRANDMA** (Thinking): You should ask Pearl...

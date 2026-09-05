@@ -1,20 +1,20 @@
 # Emilio
 Every story in which Emilio speaks.
 
-### CBE_HolidayWorkshop2024 — item discovered: 30382250
+### Bella's Holiday Workshop — item discovered: Recipe Book
 `CBE_HolidayWorkshop2024_BakingSupplies_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['30382250'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_XmasPresent_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_BakingSupplies_05'], items=['Recipe Book'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_XmasPresent_08'], items=['Biggest Present'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **EMILIO** (Thinking): There’s one more delivery of Bella’s packages on the way.  
   _earlier:_ ~~How about baking? Is there some treat that makes you feel really happy?~~ (until 25.10.01)
 **RODDY** (Worried): That had better be the last one - we’re running out of space!  
   _earlier:_ ~~There are these cookies my granny used to make...~~ (until 25.10.01)
 
-### CBE_HolidayWorkshop2024 — item discovered: 46528648
+### Bella's Holiday Workshop — item discovered: Baking Equipment
 `CBE_HolidayWorkshop2024_Candles_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['46528648'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_GiftTeapot_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_Candles_05'], items=['Baking Equipment'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_GiftTeapot_01'], items=['Teapot'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Thinking): We could tell her that the server of her website crashed and took the site down, too.  
   _earlier:_ ~~I might not be the best at pottery or knitting, but I'm good at making candles!~~ (until 25.10.01)
@@ -31,10 +31,10 @@ Every story in which Emilio speaks.
 **RODDY** (Relaxed): Think about it. She puts all of her creations up on the website. We register under false names and just buy everything.
 **EMILIO** (Joyous): This plan is water-tight! You’re a genius!
 
-### CBE_HolidayWorkshop2024 — item discovered: 12464466
+### Bella's Holiday Workshop — item discovered: Emilio
 `CBE_HolidayWorkshop2024_CharacterEmilio_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['12464466'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_CharacterEmilio_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterEmilio_02'], items=['Emilio'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterEmilio_04'], items=['Emilio'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **EMILIO** (Encouraging): Another order completed. I know what we’re doing isn’t totally honest, but I want Bella to be happy.  
   _earlier:_ ~~You're doing a great job, Bella!~~ (until 25.10.01)
@@ -43,10 +43,10 @@ Every story in which Emilio speaks.
 **EMILIO** (Thinking): Although I don’t know where she finds the time to produce all of these crafts!  
   _earlier:_ ~~But what are you hoping to get for Xmas?~~ (until 25.10.01)
 
-### CBE_HolidayWorkshop2024 — item discovered: 88167359
+### Bella's Holiday Workshop — item discovered: Jackie
 `CBE_HolidayWorkshop2024_CharacterJackie_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['88167359'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_CharacterJackie_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterJackie_02'], items=['Jackie'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterJackie_01'], items=['Jackie'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **EMILIO** (Encouraging): Jackie! How are you doing with your holiday shopping?  
   _earlier:_ ~~Hello, Jackie!~~ (until 25.10.01)
@@ -65,10 +65,10 @@ Every story in which Emilio speaks.
 **EMILIO** (Relaxed): Bella set up an online store for her terrible crafts, and we need to buy everything to spare her feelings.
 **JACKIE** (Joyous): I guess I could buy a quirky beanie to help out!
 
-### CBE_HolidayWorkshop2024 — item discovered: 3114758
+### Bella's Holiday Workshop — item discovered: Maddie
 `CBE_HolidayWorkshop2024_CharacterMaddie_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['3114758'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_CharacterMaddie_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterMaddie_02'], items=['Maddie'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterMaddie_07'], items=['Maddie'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **EMILIO** (Encouraging): Thank you for helping us with this crazy project, Maddie.  
   _earlier:_ ~~Hi, Maddie! I like your sweater. It's... cute!~~ (until 25.10.01)
@@ -77,10 +77,10 @@ Every story in which Emilio speaks.
 **EMILIO** (Relaxed): Or teapots!  
   _earlier:_ ~~Umm... *sigh*~~ (until 25.10.01)
 
-### CBE_HolidayWorkshop2024 — item discovered: 62974024
+### Bella's Holiday Workshop — item discovered: Roddy
 `CBE_HolidayWorkshop2024_CharacterRoddy_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['62974024'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_GiftGnome_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterRoddy_02'], items=['Roddy'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_GiftGnome_01'], items=['Gnome'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **EMILIO**: How are you doing? I just made another order for socks and scarves.  
   _earlier:_ ~~Hi, Roddy! I bet you love the holidays. ~~ (until 25.10.01)
@@ -91,10 +91,9 @@ Every story in which Emilio speaks.
 **RODDY** (Charming): I wonder if Maddie could spare a shed or a secret room for it all?  
   _earlier:_ ~~I'm speechless! Thank you so much!~~ (until 25.10.01)
 
-### CBE_HolidayWorkshop2024 — item discovered: 94872812
+### Bella's Holiday Workshop — item discovered: Tray of Polvorones
 `CBE_HolidayWorkshop2024_Cookies_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['94872812'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_Cookies_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_Cookies_06'], items=['Tray of Polvorones'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **BELLA** (Doubtful): Did YOU buy all of my crafts, Emilio??  
   _earlier:_ ~~The perfect polvorones!~~ (until 25.10.01)
@@ -109,10 +108,10 @@ Every story in which Emilio speaks.
 **BELLA** (Thinking): So... my online store actually was...
 **BELLA** (Relaxed): A huge success!
 
-### CBE_HolidayWorkshop2024 — item discovered: 86424485
+### Bella's Holiday Workshop — item discovered: 86424485
 `CBE_HolidayWorkshop2024_CraftingTable_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['86424485'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_CraftingSuppliesA_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['86424485'], items=['86424485'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CraftingSuppliesA_06'], items=['CBE_HolidayWorkshop2024_CraftingSuppliesA_06'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **BELLA** (Relaxed): Roddy! Do you know a lot about computers?  
   _earlier:_ ~~So, what kind of presents are you planning to buy?~~ (until 25.10.01)
@@ -163,10 +162,10 @@ Every story in which Emilio speaks.
 **BELLA**: Who could I ask? Ah, I think I know the perfect person for the job!  
   _earlier:_ ~~Maddie and her friends generously welcomed you here in Hopewell Bay, but I'm afraid you didn't make the best impression.~~ (until 25.10.01)
 
-### CBE_HolidayWorkshop2024 — item discovered: 73063105
+### Bella's Holiday Workshop — item discovered: Teapot
 `CBE_HolidayWorkshop2024_Pottery_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['73063105'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_GiftSweater_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_GiftTeapot_01'], items=['Teapot'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_GiftSweater_01'], items=['Cardigan'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Relaxed): Hey, did Bella tell you about her project?  
   _earlier:_ ~~The pottery wheel is officially my enemy.~~ (until 25.10.01)
@@ -181,10 +180,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Thinking): ...are full of holes. I know.
 **RODDY** (Worried): We need to do something. It would be awful if she didn’t sell anything at all!
 
-### CBE_HolidayWorkshop2024 — item discovered: 48359
+### Bella's Holiday Workshop — item discovered: Seasonal Secrets
 `CBE_HolidayWorkshop2024_TinCan_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['48359'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_TinCan_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_TinCan_05'], items=['Seasonal Secrets'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Worried): Emilio, Code Red! Bella is onto us.  
   _earlier:_ ~~Thank you for helping me with the baking stuff, Ursula!~~ (until 25.10.01)
@@ -193,18 +191,17 @@ Every story in which Emilio speaks.
 **RODDY** (Frustrated): I guess my plan wasn’t totally water-tight after all...  
   _earlier:_ ~~You know what I've noticed? In this town, you never know what you'll find in an old tin can!~~ (until 25.10.01)
 
-### CBE_JoysOfTheSea2023 — item discovered: 300753
+### The Joys of the Sea — item discovered: Deluxe Aquarium
 `CBE_JoysOfTheSea2023_Aquarium_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300753'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_Aquarium_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_Aquarium_08'], items=['Deluxe Aquarium'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: Let's get started! First off, aquariums!
 **EMILIO**: One can learn about aquatic life, ecosystems and the delicate balance of nature.
 **EMILIO** (Encouraging): My first aquarium is the very reason I became a marine biologist!
 
-### CBE_JoysOfTheSea2023 — decoration CBE_JoysOfTheSea2023_Decoration_Slot01
+### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot01
 `CBE_JoysOfTheSea2023_Decoration_Slot01_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot01, event=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot01, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE**: I’ve always wanted to put a water feature here!
 **EMILIO** (Thinking): It is quite beautiful, Maddie. Although I don’t think it’ll be suitable for fish...
@@ -216,9 +213,9 @@ Every story in which Emilio speaks.
 **RODDY** (Doubtful): Oh... Uuh, hi. I’m Roddy Took. Architect.
 **EMILIO** (Doubtful): An honor to meet you Roddy! Please! Let me show you around!
 
-### CBE_JoysOfTheSea2023 — decoration CBE_JoysOfTheSea2023_Decoration_Slot02
+### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot02
 `CBE_JoysOfTheSea2023_Decoration_Slot02_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot02, event=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot02, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **EMILIO** (Surprised): That’s- That’s my boat!
 **MADDIE** (Worried): Oh, it is?! I’m sorry, I saw out by the dock and thought I’d use it to spruce up your exhibition!
@@ -227,9 +224,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Encouraging): I may have to keep the flowers when I take it back!
 **MADDIE** (Charming): Deal!
 
-### CBE_JoysOfTheSea2023 — decoration CBE_JoysOfTheSea2023_Decoration_Slot04
+### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot04
 `CBE_JoysOfTheSea2023_Decoration_Slot04_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot04, event=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot04, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **EMILIO** (Doubtful): ...
 **MADDIE**: Emilio? You look worried.
@@ -240,18 +237,18 @@ Every story in which Emilio speaks.
 **EMILIO** (Surprised): Exactly! One of the very reasons I decided to come here and study it!
 **GRANDMA** (Frustrated): Hmmmm...
 
-### CBE_JoysOfTheSea2023 — decoration CBE_JoysOfTheSea2023_Decoration_Slot07
+### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot07
 `CBE_JoysOfTheSea2023_Decoration_Slot07_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot07, event=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot07, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **EMILIO** (Surprised): This is pretty incredible, Maddie! How did you find such a large aquarium?!
 **MADDIE** (Encouraging): Oh... I know a guy who knows a guy!
 **EMILIO** (Doubtful): How did you get all the fish?
 **MADDIE** (Relaxed): I know a cat too.
 
-### CBE_JoysOfTheSea2023 — decoration CBE_JoysOfTheSea2023_Decoration_Slot08
+### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot08
 `CBE_JoysOfTheSea2023_Decoration_Slot08_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot08, event=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot08, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **DEB** (Relaxed): So what made you decide to become a marine biologist, handsome?
 **EMILIO** (Doubtful): Uhm... You can call me Emilio. <b>Please</b>...
@@ -261,9 +258,9 @@ Every story in which Emilio speaks.
 **DEB** (Charming): Deb. But <b>you</b> can call me... Anytime.
 **MADDIE** (Encouraging): Interesting woman, isn’t she?
 
-### CBE_JoysOfTheSea2023 — decoration CBE_JoysOfTheSea2023_Decoration_Slot09
+### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot09
 `CBE_JoysOfTheSea2023_Decoration_Slot09_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot09, event=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot09, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **GRANDMA** (Discouraged): I’m sorry, dearie. I thought it was junk, so I threw it in the trash!
 **EMILIO** (Encouraging): <i>*sigh*</i> I guess it was junk, Mrs. Boulton. We sort of got carried away with the mystery of it all...
@@ -271,9 +268,9 @@ Every story in which Emilio speaks.
 **EMILIO**: Yes... I guess we’ll never know if it contained a map to a treasure of untold riches, Roddy...
 **RODDY**: I guess so, bud...
 
-### CBE_JoysOfTheSea2023 — decoration CBE_JoysOfTheSea2023_Decoration_Slot10
+### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot10
 `CBE_JoysOfTheSea2023_Decoration_Slot10_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot10, event=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot10, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **RODDY** (Thinking): Maybe we can use a bobby pin to open it up?
 **EMILIO** (Thinking): I don’t have any of those, but I have a few old fishing lures?
@@ -282,9 +279,9 @@ Every story in which Emilio speaks.
 **RODDY** (Charming): I offered to help, since I used to pick locks as a kid... As a hobby!
 **MADDIE** (Thinking): Oh really? Hmm, I should remember that...
 
-### CBE_JoysOfTheSea2023 — decoration CBE_JoysOfTheSea2023_Decoration_Slot14
+### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot14
 `CBE_JoysOfTheSea2023_Decoration_Slot14_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot14, event=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot14, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE**: Did you catch that swordfish?
 **EMILIO** (Surprised): Me? Oh no. It isn’t even real!
@@ -293,10 +290,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Encouraging): Well... Not with a rod anyway... I like to use my bare hands.
 **EMILIO** (Encouraging): He sings too, you know!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300788
+### The Joys of the Sea — item discovered: Orca
 `CBE_JoysOfTheSea2023_Fish10_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300788'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_Fish_10'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_Fish_10'], items=['Orca'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: Orcas are not only smart, but they’re at the top of the food chain, making them apex predators!
 **EMILIO**: They live in tight-knit family groups called pods, led by their matriarch, and show highly intricate and sophisticated social structures.
@@ -304,10 +300,9 @@ Every story in which Emilio speaks.
 **MADDIE** (Joyous): And mine are horses! And dogs. AND CATS! and...
 **EMILIO** (Encouraging): Ha ha! I see you like lots of animals! 
 
-### CBE_JoysOfTheSea2023 — item discovered: 300789
+### The Joys of the Sea — item discovered: Humpback Whale
 `CBE_JoysOfTheSea2023_Fish11_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300789'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_Fish_11'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_Fish_11'], items=['Humpback Whale'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: And here we are! The majestic Humpback whales are some of the largest animals in the world!
 **MADDIE** (Encouraging): They're huge!
@@ -315,19 +310,17 @@ Every story in which Emilio speaks.
 **GRANDMA** (Charming): Wait until you hear Maddie sing! That'll change your mind!
 **MADDIE** (Surprised): Grandma!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300779
+### The Joys of the Sea — item discovered: Pupfish
 `CBE_JoysOfTheSea2023_Fish1_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300779'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_Fish_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_Fish_01'], items=['Pupfish'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: Pupfish are incredible survivors!
 **EMILIO**: They’ve even learned to adapt to desert conditions where they live in springs or pools that exceed temperatures of 90°F!
 **MADDIE** (Relaxed): It's so teeny tiny!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300781
+### The Joys of the Sea — item discovered: Catfish
 `CBE_JoysOfTheSea2023_Fish3_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300781'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_Fish_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_Fish_03'], items=['Catfish'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: Catfish are amazing hunters that can detect electric fields! But did you know they make amazing parents as well?
 **EMILIO**: In some species, male catfish take on the responsibility of fanning the eggs to keep them oxygenated and free of germs!
@@ -335,10 +328,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Encouraging): Oh... I'm sorry to hear that Maddie!
 **MADDIE**: It's alright, I have a Grandma Catfish to take care of me instead!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300782
+### The Joys of the Sea — item discovered: Puffer Fish
 `CBE_JoysOfTheSea2023_Fish4_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300782'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_Fish_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_Fish_04'], items=['Puffer Fish'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: The unique defense strategies of puffer fish emphasize the importance of being careful with aquatic life!
 **EMILIO**: While their first line of defense is to inflate into a large and more difficult form to swallow, often with spikes...
@@ -346,20 +338,18 @@ Every story in which Emilio speaks.
 **EMILIO** (Surprised): Th- That's right! You know your fish Mrs. Boulton!
 **GRANDMA** (Charming): Just the <i>interesting</i> ones, dearie.
 
-### CBE_JoysOfTheSea2023 — item discovered: 300784
+### The Joys of the Sea — item discovered: Sunfish
 `CBE_JoysOfTheSea2023_Fish6_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300784'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_Fish_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_Fish_06'], items=['Sunfish'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: Sunfish hold the title of heaviest bony fish in the world!
 **EMILIO**: They can weigh up to 4,800 pounds and grow to 11 feet!
 **RODDY** (Doubtful): What <b>don't</b> you know about fish?
 **EMILIO** (Encouraging): I've always wished I could speak to them, so I know what they're thinking!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300785
+### The Joys of the Sea — item discovered: Swordfish
 `CBE_JoysOfTheSea2023_Fish7_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300785'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_Fish_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_Fish_07'], items=['Swordfish'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: Swordfish are incredibly fast and considered one of the fastest fish in the sea!
 **EMILIO**: Some can go up to 60 miles per hour!
@@ -368,10 +358,9 @@ Every story in which Emilio speaks.
 **GRANDMA** (Annoyed): ...
 **RODDY**: What?! It's a legitimate question!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300786
+### The Joys of the Sea — item discovered: Dolphin
 `CBE_JoysOfTheSea2023_Fish8_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300786'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_Fish_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_Fish_08'], items=['Dolphin'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: Dolphins are one of the most intelligent animals on the Earth! They have large brains and show complex social behavior.
 **EMILIO**: They also have a remarkable sense called echolocation that helps them navigate and hunt!
@@ -379,50 +368,44 @@ Every story in which Emilio speaks.
 **DEB** (Doubtful): What's that sis?
 **GRANDMA** (Joyous): Nothing, dearie!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300808
+### The Joys of the Sea — item discovered: Fishing Boat
 `CBE_JoysOfTheSea2023_FishBoat_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300808'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_FishBoat_10'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_FishBoat_10'], items=['Fishing Boat'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: Remember to always wear your life vests when out on a boat! No matter how small!
 **DEB** (Charming): No need, sweetie. I’ll just count on you to save me!
 **EMILIO** (Surprised): Er...
 
-### CBE_JoysOfTheSea2023 — item discovered: 300759
+### The Joys of the Sea — item discovered: Fish Spawning Kit
 `CBE_JoysOfTheSea2023_FishContainer_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300759'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_FishContainer_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_FishContainer_05'], items=['Fish Spawning Kit'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: Good containers to transport fish for research is paramount.
 **EMILIO**: If you take them out of their habitat for a long time, ensure that you continuously oxygenate the water!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300778
+### The Joys of the Sea — item discovered: Coral Atoll
 `CBE_JoysOfTheSea2023_FishHome_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300778'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_FishHome_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_FishHome_06'], items=['Coral Atoll'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: Coral reefs are often referred to as the "Rainforests of the Sea"!
 **EMILIO**: About a quarter of all sea life live in coral reefs, and some are so large that they can be seen from space!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300772
+### The Joys of the Sea — item discovered: Full Fishing Outfit
 `CBE_JoysOfTheSea2023_FishingClothes_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300772'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_FishingClothes_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_FishingClothes_08'], items=['Full Fishing Outfit'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: While it may not be the most fashionable, fishing gear is extremely functional!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300745
+### The Joys of the Sea — item discovered: Big Fish Minnow
 `CBE_JoysOfTheSea2023_FishingLure_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300745'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_FishingLure_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_FishingLure_05'], items=['Big Fish Minnow'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO** (Encouraging): When picking your lures, make sure they are designed for catch and release!
 **EMILIO** (Encouraging): They can be removed quickly and encourage shallow hooking.
 
-### CBE_JoysOfTheSea2023 — item discovered: 300820
+### The Joys of the Sea — item discovered: Working Fishing Rod
 `CBE_JoysOfTheSea2023_FishingRod_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300820'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_FishingRodProducing_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_FishingRodProducing_01'], items=['Working Fishing Rod'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: Catch and release is a great conservation method!
 **EMILIO** (Thinking): But remember, it’s not enough to just throw them back in the water.
@@ -436,10 +419,9 @@ Every story in which Emilio speaks.
 **EMILIO**: It can also help you maintain sustainable fishing practices when near regulated fishing areas!
 **EMILIO** (Encouraging): And... They’re really cozy!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300731
+### The Joys of the Sea — item discovered: Grandma's Boathouse
 `CBE_JoysOfTheSea2023_GrandmasBoathouse_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300731'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_GrandmasBoathouse_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_GrandmasBoathouse_04'], items=["Grandma's Boathouse"], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: This is a nice-looking boathouse, Mrs. Boulton!
 **GRANDMA** (Charming): Thank you, dearie! We originally had it for “other” reasons, but now it’ll be used to explore our wonderful seas!
@@ -460,10 +442,9 @@ Every story in which Emilio speaks.
 **MADDIE** (Surprised): Exhibition?!
 **GRANDMA**: Oh yes, I totally forgot, dearie! Emilio here is going to show us all the joys of the sea!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300791
+### The Joys of the Sea — item discovered: Trunk Key
 `CBE_JoysOfTheSea2023_Key_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300791'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_Key_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_Key_01'], items=['Trunk Key'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: Now that’s what I call a lucky catch!
 **EMILIO**: I thought I had lost this during the storm. Now I can open my trunk!
@@ -481,18 +462,16 @@ Every story in which Emilio speaks.
 **MADDIE** (Joyous): Wonderful?!!
 **EMILIO** (Encouraging): Ha ha! Yes. Exactly!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300812
+### The Joys of the Sea — item discovered: Kelp Forest
 `CBE_JoysOfTheSea2023_SeaWeed_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300812'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_SeaWeed_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_SeaWeed_04'], items=['Kelp Forest'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: Seaweed is an excellent habitat for fish and other aquatic life.
 **EMILIO** (Encouraging): Not to mention the fact that it’s incredibly healthy too!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300821
+### The Joys of the Sea — item discovered: Unlocked Trunk
 `CBE_JoysOfTheSea2023_Trunk_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300821'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_ScubaTrunkProducing_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_ScubaTrunkProducing_01'], items=['Unlocked Trunk'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: There we go! Good thing I found my key!
 **EMILIO**: Now I can gear up and go deeper into the waters of Hopewell Bay!
@@ -515,32 +494,28 @@ Every story in which Emilio speaks.
 
 **EMILIO** (Encouraging): Better luck next time!
 
-### LBE_Halloween2023 — item discovered: 56162001
+### The Great Pumpkin Palooza — item discovered: Big Jack-o'-lantern
 `LBE_Halloween2023Pumpkin7` · seen 23.09.02–26.07.01
-- trigger: item, event=LBE_Halloween2023, items=['56162001'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LBE_Halloween2023, items=['LBE_Halloween2023_Pumpkin_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Great Pumpkin Palooza, eventKey=LBE_Halloween2023, itemKeys=['LBE_Halloween2023_Pumpkin_07'], items=["Big Jack-o'-lantern"], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: Roddy, your imagination knows no bounds!
 
-### LBE_Halloween2023 — item discovered: 56161999
+### The Great Pumpkin Palooza — item discovered: Pumpkin Dino
 `LBE_Halloween2023Pumpkin9` · seen 23.09.02–26.07.01
-- trigger: item, event=LBE_Halloween2023, items=['56161999'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LBE_Halloween2023, items=['LBE_Halloween2023_Pumpkin_09'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Great Pumpkin Palooza, eventKey=LBE_Halloween2023, itemKeys=['LBE_Halloween2023_Pumpkin_09'], items=['Pumpkin Dino'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO** (Surprised): Wow! That’s amazing!
 
-### LBE_Halloween2023 — item discovered: 42860554
+### The Great Pumpkin Palooza — item discovered: Dirt Pile
 `LBE_Halloween2023PumpkinFarm` · seen 23.09.02–26.07.01
-- trigger: item, event=LBE_Halloween2023, items=['42860554'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LBE_Halloween2023, items=['LBE_Halloween2023_PumpkinFarm_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Great Pumpkin Palooza, eventKey=LBE_Halloween2023, itemKeys=['LBE_Halloween2023_PumpkinFarm_01'], items=['Dirt Pile'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO** (Encouraging): Nothing like growing fresh produce!
 **RODDY** (Relaxed): Especially pumpkins! They’re so versatile.
 
-### LBE_Halloween2023 — item discovered: 73679760
+### The Great Pumpkin Palooza — item discovered: Pumpkin Seeds
 `LBE_Halloween2023PumpkinPlant` · seen 23.09.02–26.07.01
-- trigger: item, event=LBE_Halloween2023, items=['73679760'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LBE_Halloween2023, items=['LBE_Halloween2023_PumpkinPlant_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Great Pumpkin Palooza, eventKey=LBE_Halloween2023, itemKeys=['LBE_Halloween2023_PumpkinPlant_01'], items=['Pumpkin Seeds'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Encouraging): Pumpkin flowers are quite beautiful! I guess I just like the color.
 **EMILIO** (Encouraging): Then, this one is yours...
@@ -571,34 +546,34 @@ Every story in which Emilio speaks.
 - trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
 
 
-### CBE_LuckyCatch — item discovered: LC_Summer2026_FishingClothes_01
+### Lucky Catch — item discovered: LC_Summer2026_FishingClothes_01
 `LC_Summer_2026_BootsLv1` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer2026_FishingClothes_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer2026_FishingClothes_01'], items=['LC_Summer2026_FishingClothes_01'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **EMILIO** (Surprised): Oh, looks like I caught a...boot?
 **GRANDMA** (Encouraging): It's Julius' other boot! He's been looking for that for ages! Don't throw it away!
 **EMILIO** (Encouraging): I'm glad we got it out of the sea. Less trash in our oceans.
 
-### CBE_LuckyCatch — item discovered: LC_Summer2026_ColossalFishingRod_01
+### Lucky Catch — item discovered: Colossal Fishing Rod
 `LC_Summer_2026_ColossalFishingRod` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer2026_ColossalFishingRod_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer2026_ColossalFishingRod_01'], items=['Colossal Fishing Rod'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **EMILIO** (Surprised): Umm. Mrs. Boulton, what... is that?
 **GRANDMA** (Charming): My fishing rod, Emilio. What does it look like?
 **EMILIO** (Doubtful): ...you do know whale-fishing is illegal, right?
 
-### CBE_LuckyCatch — item discovered: LC_Summer_2026_ColossalMolaMola_01
+### Lucky Catch — item discovered: Mola Mola
 `LC_Summer_2026_ColossalMolaMola` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer_2026_ColossalMolaMola_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer_2026_ColossalMolaMola_01'], items=['Mola Mola'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **GRANDMA** (Surprised): WHAT is that?
 **EMILIO** (Encouraging): That is a Mola Mola, also known as an ocean sunfish! Amazing catch!
 **GRANDMA** (Discouraged): Poor little guy! It looks like just a fish head with no tail.
 **EMILIO**: Not so little! They are fascinating fish, even if... a little funny-looking!
 
-### CBE_LuckyCatch — item discovered: LC_Common_GreenMoray_01
+### Lucky Catch — item discovered: Green Moray
 `LC_Summer_2026_CommonGreenMoray_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Common_GreenMoray_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Common_GreenMoray_01'], items=['Green Moray'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **EMILIO** (Joyous): Look at what you've caught! Incredible!
 **GRANDMA** (Frustrated): It is definitely putting up a fight! What is it - an eel?
@@ -608,16 +583,16 @@ Every story in which Emilio speaks.
 **GRANDMA**: That doesn't sound very palatable. Back in you go!
 **EMILIO**: Ah. Well. I hope it finds its way back home. Hopewell Bay is not where you belong.
 
-### CBE_LuckyCatch — item discovered: LC_Summer2026_GoldenFishingRodEpic_01
+### Lucky Catch — item discovered: The ultimate Fishing Rod
 `LC_Summer_2026_EpicGoldenRod` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer2026_GoldenFishingRodEpic_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer2026_GoldenFishingRodEpic_01'], items=['The ultimate Fishing Rod'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **EMILIO** (Joyous): This is what I'm talking about! Oh, the specimens we'll be able to catch with this...
 **GRANDMA** (Charming): I remember hearing a story once about a fisherman catching something very large and rare with a rod like that...
 
-### CBE_LuckyCatch — item discovered: LC_Epic_Totoaba_01
+### Lucky Catch — item discovered: Totoaba
 `LC_Summer_2026_EpicTotoaba_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Epic_Totoaba_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Epic_Totoaba_01'], items=['Totoaba'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **EMILIO** (Surprised): Mrs. Boulton! Look at what you've caught! That's a Totoaba!
 **GRANDMA** (Thinking): That's... a really big fish! Are you sure it's not some kind of tuna?
@@ -641,9 +616,9 @@ Every story in which Emilio speaks.
 **GRANDMA** (Joyous): Oh, nevermind. And call me Grandma. Everyone else does.
 **EMILIO** (Encouraging): Umm, okay then. Let's get going! This is going to be so exciting!
 
-### CBE_LuckyCatch — item discovered: LC_Legendary_SmalltoothSawfish_01
+### Lucky Catch — item discovered: Smalltooth Sawfish
 `LC_Summer_2026_LegendarySmalltoothSawfish_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Legendary_SmalltoothSawfish_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Legendary_SmalltoothSawfish_01'], items=['Smalltooth Sawfish'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **EMILIO** (Joyous): Incredible! Look at that - a Smalltooth Sawfish! How is this possible?!
 **GRANDMA** (Joyous): It's probably not going to be the oddest thing you find here. Look at that sword!
@@ -654,25 +629,25 @@ Every story in which Emilio speaks.
 **EMILIO** (Annoyed): Not really - bycatching. Caught accidentally when fishing for other fish. Which is why...
 **EMILIO**: ...we better release this one now. Bye-bye, Mr. Sawfish! Best of luck!
 
-### CBE_LuckyCatch — item discovered: LC_Summer2026_FishingRodCommon_05
+### Lucky Catch — item discovered: Rod, Hook and Line
 `LC_Summer_2026_MaxCommonWoodenFishingRod` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer2026_FishingRodCommon_05'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer2026_FishingRodCommon_05'], items=['Rod, Hook and Line'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **EMILIO** (Encouraging): The humble fishing rod. Just what we need.
 **GRANDMA** (Charming): Humble is the right word.
 **EMILIO** (Doubtful): Hmm, maybe you're right. We should find some better rods!
 
-### CBE_LuckyCatch — item discovered: LC_Summer2026_FishingClothes_04
+### Lucky Catch — item discovered: LC_Summer2026_FishingClothes_04
 `LC_Summer_2026_MaxFishingClothesAndGoldenRod` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer2026_FishingClothes_04'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer2026_FishingClothes_04'], items=['LC_Summer2026_FishingClothes_04'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **GRANDMA** (Encouraging): Well now! No one can say you don't look ready to take on even the biggest fish, Emilio.
 **EMILIO** (Doubtful): I feel like a sports fisherman! Is all of this really necessary?
 **GRANDMA** (Joyous): It suits you. And it's all for the science, right?
 
-### CBE_LuckyCatch — item discovered: LC_Summer2026_FishingToolContainers_10
+### Lucky Catch — item discovered: Large Tackle Box
 `LC_Summer_2026_MaxFishingToolBox` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer2026_FishingToolContainers_10'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer2026_FishingToolContainers_10'], items=['Large Tackle Box'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **EMILIO**: Perfect! With this, our scientific journey of discovery can begin!
 **GRANDMA** (Doubtful): You mean our fishing trip.
@@ -690,17 +665,17 @@ Every story in which Emilio speaks.
 **GRANDMA** (Charming): If you say so! At least I got some thrills. One of these days, I might get a blue whale on the hook!
 **EMILIO** (Surprised): A... wha...?!
 
-### CBE_LuckyCatch — item discovered: LC_Summer2026_CompetitionFishingRodRare_01
+### Lucky Catch — item discovered: Professional Fishing Rod
 `LC_Summer_2026_RareCompetitionRod` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer2026_CompetitionFishingRodRare_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer2026_CompetitionFishingRodRare_01'], items=['Professional Fishing Rod'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **GRANDMA** (Charming): I have something for you, Emilio. A new fishing rod!
 **EMILIO** (Surprised): This looks professional. Where did you get it?
 **GRANDMA** (Charming): Oh, you know. A lady has got to have her secrets.
 
-### CBE_LuckyCatch — item discovered: LC_Rare_EuropeanMonkfish_01
+### Lucky Catch — item discovered: European Monkfish
 `LC_Summer_2026_RareEuropeanMonkfish_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Rare_EuropeanMonkfish_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Rare_EuropeanMonkfish_01'], items=['European Monkfish'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **GRANDMA** (Worried): Huh? Emilio, what's this thing I caught? It is... rather weird.
 **EMILIO** (Encouraging): Oh! That's a European Monkfish, or Lophius piscatorius. A type of angler fish!
@@ -709,9 +684,9 @@ Every story in which Emilio speaks.
 **GRANDMA** (Charming): I don't know about ancestors, but I know I do... Oh. You let it go.
 **EMILIO** (Joyous): Of course! I got a great picture too! Isn't this fun?
 
-### CBE_LuckyCatch — item discovered: LC_Ultimate_BluntnoseSixgillShark_01
+### Lucky Catch — item discovered: Bluntnose Sixgill Shark
 `LC_Summer_2026_UltimateBluntnoseSixgillShark_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Ultimate_BluntnoseSixgillShark_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Ultimate_BluntnoseSixgillShark_01'], items=['Bluntnose Sixgill Shark'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **GRANDMA** (Surprised): Emiiliooo...! I have got a beast on the line!
 **EMILIO** (Joyous): Oh! Ah-hah! Incredible! You've caught a dinosaur!
@@ -722,9 +697,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Surprised): Better be careful. They've been known to attack submarines.
 **GRANDMA** (Encouraging): Back into the water with you! 
 
-### CBE_LuckyCatch — item discovered: LC_Uncommon_GreatBarracuda_01
+### Lucky Catch — item discovered: Great Barracuda
 `LC_Summer_2026_UncommonGreatBarracuda_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Uncommon_GreatBarracuda_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Uncommon_GreatBarracuda_01'], items=['Great Barracuda'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **EMILIO**: Ah! Look at those teeth! Do you know what it is, Mrs. Boulton?
 **GRANDMA** (Thinking): Grandma. That's... a barracuda. And a big one at that!
@@ -733,9 +708,9 @@ Every story in which Emilio speaks.
 **GRANDMA** (Charming): Lots of muscle on it then, I gather?
 **EMILIO** (Joyous): Oh yes! Ah - there it went! Too bad. I would've liked to measure it... some can be over five feet long!
 
-### CBE_LuckyCatch — item discovered: LC_VeryRare_LemonShark_01
+### Lucky Catch — item discovered: Lemon Shark
 `LC_Summer_2026_VeryRareLemonShark_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_VeryRare_LemonShark_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_VeryRare_LemonShark_01'], items=['Lemon Shark'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **GRANDMA**: Hupp! I got a shark on the line! A very funnily colored shark!
 **EMILIO** (Joyous): Ah! You've caught a Lemon Shark! Quick, let's take a picture and let it return to its friends!
@@ -790,10 +765,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Surprised): I-I did?
 **BELLA** (Relaxed): Yes - I love poppies! Thank you, Emilio. You're the best!
 
-### LDE_HolidayCarols2023 — item discovered: 96623188
+### The Fa-la-la-la Follies — item discovered: Emilio's Present
 `LDE_HolidayCarols2023_HolidayPresent_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['96623188'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_HolidayPresent_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_HolidayPresent_07'], items=["Emilio's Present"], moment=item discovered (versions 25.05.01–26.07.01)
 
 **EMILIO** (Thinking): Ah, a singing fish! How interesting...
 **EMILIO** (Thinking): I get it... It's because I'm a marine biologist.
@@ -807,25 +781,23 @@ Every story in which Emilio speaks.
 **EMILIO** (Surprised): You were?
 **MADDIE** (Charming): Yeah, you'll never believe what Lady Voyance said...
 
-### LDE_HolidayCarols2023 — item discovered: 28035903
+### The Fa-la-la-la Follies — item discovered: Bassoon
 `LDE_HolidayCarols2023_WindInstrument_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['28035903'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_WindInstrument_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_WindInstrument_03'], items=['Bassoon'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MASON** (Thinking): What a weird-looking trumpet!
 **EMILIO** (Doubtful): I think it's a bassoon.
 
-### LDE_HolidayCarols2023 — item discovered: 28035899
+### The Fa-la-la-la Follies — item discovered: Tuba
 `LDE_HolidayCarols2023_WindInstrument_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['28035899'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_WindInstrument_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_WindInstrument_07'], items=['Tuba'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MASON** (Relaxed): This one's been twisted into knots.
 **EMILIO** (Surprised): That's what a tuba is supposed to look like!
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_Interviews_08
+### Murder at the Mansion — item discovered: Emilio
 `LDE_MurderAtTheMansion_Interviews8_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_Interviews_08'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_Interviews_08'], items=['Emilio'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **EMILIO** (Surprised): What is going on? Is it really true that Lady Voyance has... passed away?
 **JACKIE** (Thinking): Unfortunately, yes. Did you happen to visit her house in the afternoon of the killing?
@@ -938,24 +910,22 @@ Every story in which Emilio speaks.
 **EMILIO** (Encouraging): Safe travels, young Mason!
 **MASON** (Relaxed): HARRR! That's Captain Mason, if you don't mind.
 
-### SE_DoubleDateDisaster2024 — item discovered: 48442065
+### Double Date Disaster — item discovered: Baking Pans
 `SE_DoubleDateDisaster2024_Cookware_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['48442065'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['SE_DoubleDateDisaster2024_Cookware_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, itemKeys=['SE_DoubleDateDisaster2024_Cookware_07'], items=['Baking Pans'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **EMILIO**: Here we go; let’s get cooking!
 
-### SE_DoubleDateDisaster2024 — item discovered: 5001265
+### Double Date Disaster — item discovered: Chef Knives
 `SE_DoubleDateDisaster2024_Cutlery_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['5001265'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['SE_DoubleDateDisaster2024_Cutlery_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, itemKeys=['SE_DoubleDateDisaster2024_Cutlery_05'], items=['Chef Knives'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **EMILIO** (Surprised): Wow, these are razor sharp! Where’d you get them?
 **RODDY** (Surprised): Erm... I borrowed them from Grandma!
 
-### SE_DoubleDateDisaster2024 — decoration SE_DoubleDateDisaster2024_Decoration_Slot01
+### Double Date Disaster — decoration SE_DoubleDateDisaster2024_Decoration_Slot01
 `SE_DoubleDateDisaster2024_Decoration_Slot01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot01, event=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot01, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **EMILIO** (Surprised): A mini golf course?!
 **RODDY** (Relaxed): Yeah! She’ll love it! She’s an engineer, after all. And she’s spoken about it before...
@@ -965,9 +935,9 @@ Every story in which Emilio speaks.
 **RODDY** (Surprised): Me?!
 **EMILIO**: Of course. Mini Golf is always better in teams!
 
-### SE_DoubleDateDisaster2024 — decoration SE_DoubleDateDisaster2024_Decoration_Slot03
+### Double Date Disaster — decoration SE_DoubleDateDisaster2024_Decoration_Slot03
 `SE_DoubleDateDisaster2024_Decoration_Slot03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot03, event=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot03, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): What’s all this?!
 **EMILIO** (Encouraging): Surprise! I thought for our first Valentine’s I would do something special!
@@ -975,9 +945,9 @@ Every story in which Emilio speaks.
 **EMILIO**: Oh, the dinner is coming up! And so are the other guests!
 **MADDIE** (Joyous): Yay!
 
-### SE_DoubleDateDisaster2024 — decoration SE_DoubleDateDisaster2024_Decoration_Slot08
+### Double Date Disaster — decoration SE_DoubleDateDisaster2024_Decoration_Slot08
 `SE_DoubleDateDisaster2024_Decoration_Slot08_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot08, event=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot08, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **RODDY** (Relaxed): I think we got a winner here, buddy!
 **EMILIO** (Encouraging): Yes! And I really want to thank you, Roddy. None of this would have been possible without you.
@@ -986,9 +956,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Annoyed): Hmm... Looks like a call from an old college buddy! Would it be okay if I grab this call?
 **RODDY** (Charming): Sure, don’t worry about it! I’ll keep them company!
 
-### SE_DoubleDateDisaster2024 — decoration SE_DoubleDateDisaster2024_Decoration_Slot10
+### Double Date Disaster — decoration SE_DoubleDateDisaster2024_Decoration_Slot10
 `SE_DoubleDateDisaster2024_Decoration_Slot10_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot10, event=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot10, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Charming): I’ve really been enjoying myself!
 **EMILIO** (Doubtful): Yeah... That’s great...
@@ -998,9 +968,9 @@ Every story in which Emilio speaks.
 **MADDIE** (Relaxed): Emilio? Helloo?
 **EMILIO** (Surprised): Oh! Sorry, I... Maddie, something has come up and I... I need to tell you.
 
-### SE_DoubleDateDisaster2024 — decoration SE_DoubleDateDisaster2024_Decoration_Slot14
+### Double Date Disaster — decoration SE_DoubleDateDisaster2024_Decoration_Slot14
 `SE_DoubleDateDisaster2024_Decoration_Slot14_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot14, event=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot14, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Charming): So... What is that you have to tell me?
 **EMILIO** (Surprised): Well... This is pretty hard for me to say...
@@ -1011,9 +981,9 @@ Every story in which Emilio speaks.
 **MADDIE** (Charming): ...Yes?
 **EMILIO** (Encouraging): I... I’m leaving tonight for Bolivia to save the fish.
 
-### SE_DoubleDateDisaster2024 — decoration SE_DoubleDateDisaster2024_Decoration_Slot15
+### Double Date Disaster — decoration SE_DoubleDateDisaster2024_Decoration_Slot15
 `SE_DoubleDateDisaster2024_Decoration_Slot15_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot15, event=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot15, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): You’re leaving?
 **MADDIE** (Annoyed): Tonight?!
@@ -1026,36 +996,32 @@ Every story in which Emilio speaks.
 **MADDIE** (Yelling): Just... Just go, okay?!
 **MADDIE** (Angry): Just go...
 
-### SE_DoubleDateDisaster2024 — item discovered: 46516220
+### Double Date Disaster — item discovered: Putter
 `SE_DoubleDateDisaster2024_GolfClub_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['46516220'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['SE_DoubleDateDisaster2024_GolfClub_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, itemKeys=['SE_DoubleDateDisaster2024_GolfClub_03'], items=['Putter'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **EMILIO** (Doubtful): This one?
 **RODDY**: Yes, just the putters!
 
-### SE_DoubleDateDisaster2024 — item discovered: 43113291
+### Double Date Disaster — item discovered: Prepared Caddie Cart
 `SE_DoubleDateDisaster2024_GolfEquipment_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['43113291'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['SE_DoubleDateDisaster2024_GolfEquipment_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, itemKeys=['SE_DoubleDateDisaster2024_GolfEquipment_05'], items=['Prepared Caddie Cart'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **EMILIO**: I brought the golfing equipment!
 **RODDY** (Frustrated): Emilio... This is mini golf. All we needed were the putters.
 **EMILIO** (Surprised): Oh... Oops.
 
-### SE_DoubleDateDisaster2024 — item discovered: 37684720
+### Double Date Disaster — item discovered: The Green
 `SE_DoubleDateDisaster2024_GolfObstacle_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['37684720'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['SE_DoubleDateDisaster2024_GolfObstacle_10'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, itemKeys=['SE_DoubleDateDisaster2024_GolfObstacle_10'], items=['The Green'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Relaxed): Each hole needs a few obstacles to make it fun and challenging!
 **EMILIO** (Doubtful): Some of these are quite elaborate. How long have you been planning this?
 **RODDY** (Charming): ...
 
-### SE_DoubleDateDisaster2024 — item discovered: 66831992
+### Double Date Disaster — item discovered: Tapas
 `SE_DoubleDateDisaster2024_IngredientProtein_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['66831992'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['SE_DoubleDateDisaster2024_IngredientProtein_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, itemKeys=['SE_DoubleDateDisaster2024_IngredientProtein_05'], items=['Tapas'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Charming): I’m sure we can make something delicious with these!
 **EMILIO** (Encouraging): I got a few tasty recipes.
@@ -1077,57 +1043,50 @@ Every story in which Emilio speaks.
 **RODDY** (Relaxed): What’s up, buddy?
 **EMILIO** (Surprised): I totally forgot it was Valentine’s Day!
 
-### SE_DoubleDateDisaster2024 — item discovered: 9794294
+### Double Date Disaster — item discovered: Amuse-bouche
 `SE_DoubleDateDisaster2024_ValentinesDinner2_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['9794294'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['SE_DoubleDateDisaster2024_ValentinesDinner_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, itemKeys=['SE_DoubleDateDisaster2024_ValentinesDinner_02'], items=['Amuse-bouche'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **EMILIO** (Encouraging): A simple and eloquent dish.
 
-### SE_DoubleDateDisaster2024 — item discovered: 9794289
+### Double Date Disaster — item discovered: Dessert
 `SE_DoubleDateDisaster2024_ValentinesDinner7_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['9794289'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['SE_DoubleDateDisaster2024_ValentinesDinner_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, itemKeys=['SE_DoubleDateDisaster2024_ValentinesDinner_07'], items=['Dessert'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **EMILIO** (Surprised): Wow, Roddy!
 **RODDY** (Relaxed): Time to finish on a high! This is my mother’s recipe, reserved for SPECIAL occasions!
 
-### SE_DoubleDateDisaster2024 — item discovered: 76478238
+### Double Date Disaster — item discovered: Hole Hearted
 `SE_DoubleDateDisaster2024_ValentinesGolf2_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['76478238'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['SE_DoubleDateDisaster2024_ValentinesGolf_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, itemKeys=['SE_DoubleDateDisaster2024_ValentinesGolf_02'], items=['Hole Hearted'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **EMILIO** (Encouraging): I’m impressed, Roddy. These look superb!
 **RODDY** (Relaxed): Thanks, buddy! Mason has been helping out with making them.
 
-### SE_DoubleDateDisaster2024 — item discovered: 76478234
+### Double Date Disaster — item discovered: Fire in the Hole
 `SE_DoubleDateDisaster2024_ValentinesGolf6_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['76478234'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['SE_DoubleDateDisaster2024_ValentinesGolf_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, itemKeys=['SE_DoubleDateDisaster2024_ValentinesGolf_06'], items=['Fire in the Hole'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **EMILIO** (Surprised): Uuuhm.... Why is it on fire?
 **RODDY** (Frustrated): I didn’t... MASON!!!
 
-### SE_DoubleDateDisaster2024 — item discovered: 83312236
+### Double Date Disaster — item discovered: Lollipop
 `SE_DoubleDateDisaster2024_ValentinesSurprise1_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['83312236'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['SE_DoubleDateDisaster2024_ValentinesSurprise_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, itemKeys=['SE_DoubleDateDisaster2024_ValentinesSurprise_01'], items=['Lollipop'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **EMILIO** (Encouraging): I brought lollipops! They’re organic and made of fish gelatin! Delicious!
 
-### SE_DoubleDateDisaster2024 — item discovered: 83312231
+### Double Date Disaster — item discovered: The Love Equation
 `SE_DoubleDateDisaster2024_ValentinesSurprise6_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['83312231'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['SE_DoubleDateDisaster2024_ValentinesSurprise_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, itemKeys=['SE_DoubleDateDisaster2024_ValentinesSurprise_06'], items=['The Love Equation'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **EMILIO** (Doubtful): Roddy... What’s this?
 **RODDY** (Relaxed): Oh, this is the equation of love! It’s a funny architectural and engineering joke I think Maddie would love.
 **EMILIO** (Annoyed): I... I don’t get it.
 
-### SE_DoubleDateDisaster2024 — item discovered: 83312229
+### Double Date Disaster — item discovered: Bobble Head Love Statue
 `SE_DoubleDateDisaster2024_ValentinesSurprise8_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['83312229'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SE_DoubleDateDisaster2024, items=['SE_DoubleDateDisaster2024_ValentinesSurprise_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, itemKeys=['SE_DoubleDateDisaster2024_ValentinesSurprise_08'], items=['Bobble Head Love Statue'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **EMILIO** (Annoyed): Okay, Roddy... I can’t give her this.
 **RODDY** (Thinking): Why not?!
@@ -1150,9 +1109,9 @@ Every story in which Emilio speaks.
 **BELLA**: Ha! It's fine. What matters is that I finally got my REVENGE!
 **GRANDMA** (Joyous): Oh! I really do like her!
 
-### SP_CinqoDeMayo2026 — decoration SP_CinqoDeMayo2026_Decoration_Slot33
+### Season Pass - Flavors of Tradition — decoration SP_CinqoDeMayo2026_Decoration_Slot33
 `SP_CinqoDeMayo2026_Decoration_Slot33_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot33, event=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot33, event=Season Pass - Flavors of Tradition, eventKey=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **GRANDMA**: What do you think, dearie?
 **EMILIO** (Joyous): This looks perfect!
@@ -1163,9 +1122,9 @@ Every story in which Emilio speaks.
 **GRANDMA** (Joyous): Oh, dearie! This is only half of it!
 **EMILIO** (Surprised): Half?!
 
-### SP_CinqoDeMayo2026 — decoration SP_CinqoDeMayo2026_Decoration_Slot34
+### Season Pass - Flavors of Tradition — decoration SP_CinqoDeMayo2026_Decoration_Slot34
 `SP_CinqoDeMayo2026_Decoration_Slot34_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot34, event=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot34, event=Season Pass - Flavors of Tradition, eventKey=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Surprised): Boy! You weren't kidding!
 **MADDIE** (Encouraging): You're going all out, aren't you?
@@ -1176,9 +1135,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Charming): Nothing at all!  
   _earlier:_ ~~Nothing at all! ~~ (until 26.02.03)
 
-### SP_CinqoDeMayo2026 — decoration SP_CinqoDeMayo2026_Decoration_Slot36
+### Season Pass - Flavors of Tradition — decoration SP_CinqoDeMayo2026_Decoration_Slot36
 `SP_CinqoDeMayo2026_Decoration_Slot36_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot36, event=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot36, event=Season Pass - Flavors of Tradition, eventKey=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **EMILIO** (Relaxed): Wow! This looks amazing!
 **GRANDMA** (Relaxed): Well, you can thank Maddie for that!
@@ -1187,9 +1146,9 @@ Every story in which Emilio speaks.
 **BELLA**: You did a great job, though!
 **MADDIE** (Relaxed): Thank you, Bella!
 
-### SP_CinqoDeMayo2026 — decoration SP_CinqoDeMayo2026_Decoration_Slot37
+### Season Pass - Flavors of Tradition — decoration SP_CinqoDeMayo2026_Decoration_Slot37
 `SP_CinqoDeMayo2026_Decoration_Slot37_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot37, event=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot37, event=Season Pass - Flavors of Tradition, eventKey=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Joyous): Oooh! A stage! Are you going to play something for us, Emilio?
 **EMILIO** (Relaxed): Well... I was sort of thinking about it.
@@ -1213,9 +1172,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Charming): I would love to try them!
 **BELLA** (Doubtful): I guess...
 
-### SP_CinqoDeMayo2026 — item discovered: SP_CinqoDeMayo2026_CollectableItems_04
+### Season Pass - Flavors of Tradition — item discovered: Homestyle Enchiladas
 `SP_CinqoDeMayo2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_CinqoDeMayo2026, items=['SP_CinqoDeMayo2026_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Season Pass - Flavors of Tradition, eventKey=SP_CinqoDeMayo2026, itemKeys=['SP_CinqoDeMayo2026_CollectableItems_04'], items=['Homestyle Enchiladas'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA**: So, dearie? What do you think?
 **EMILIO** (Surprised): These... These are incredible!
@@ -1227,9 +1186,9 @@ Every story in which Emilio speaks.
 **BELLA** (Relaxed): Almost as good as my Abuela's!
 **GRANDMA** (Joyous): I'll take it!
 
-### SP_DebsMystery2023 — decoration SP_DebsMystery2023_Decoration_Slot26
+### Deb’s Mystery — decoration SP_DebsMystery2023_Decoration_Slot26
 `SP_DebsMystery2023Decoration_Slot26` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot26, event=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot26, event=Deb’s Mystery, eventKey=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE**: Hi, Emilio! I’m sorry that Deb dragged you into this.  
   _earlier:_ ~~Hi Emilio! I’m sorry that Deb dragged you into this.~~ (until 23.12.01)
@@ -1261,10 +1220,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Doubtful): She has, but...
 **BELLA**: I know you're nervous - I am too! But it'll be great, I promise.
 
-### SP_GoatPet2025 — item discovered: 22197728
+### Secrets at the Altar — item discovered: Draped Dream
 `SP_GoatPet2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_GoatPet2025, items=['22197728'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_GoatPet2025, items=['SP_GoatPet2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Secrets at the Altar, eventKey=SP_GoatPet2025, itemKeys=['SP_GoatPet2025_CollectableItems_04'], items=['Draped Dream'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Relaxed): How are you doing? I can't believe you're getting married!
 **EMILIO** (Thinking): Neither can I. I have to admit that I'm starting to feel some nerves.
@@ -1310,9 +1268,9 @@ Every story in which Emilio speaks.
 **BELLA**: Oh, Emilio! You're the best!
 **RODDY** (Worried): Phew!
 
-### SP_LovePotion2025 — decoration SP_LovePotion2025_Decoration_Slot25
+### Love Potion — decoration SP_LovePotion2025_Decoration_Slot25
 `SP_LovePotion2025_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_LovePotion2025_Decoration_Slot25, event=SP_LovePotion2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_LovePotion2025_Decoration_Slot25, event=Love Potion, eventKey=SP_LovePotion2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): How have you been? How's work?
 **EMILIO**: I've been studying a particular school of herring and their courtship behavior.
@@ -1321,9 +1279,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Encouraging): Ah, if you're really interested!
 **MADDIE** (Hesitant): Totally...
 
-### SP_LovePotion2025 — decoration SP_LovePotion2025_Decoration_Slot29
+### Love Potion — decoration SP_LovePotion2025_Decoration_Slot29
 `SP_LovePotion2025_Decoration_Slot29_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_LovePotion2025_Decoration_Slot29, event=SP_LovePotion2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_LovePotion2025_Decoration_Slot29, event=Love Potion, eventKey=SP_LovePotion2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Hello, dear.
 **EMILIO** (Surprised): Hi, Lady Voyance...
@@ -1336,10 +1294,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Surprised): What worked? What cosmic powers?
 **EMILIO** (Surprised): Voyance?
 
-### SP_LovePotion2025 — item discovered: 96190276
+### Love Potion — item discovered: Moonstring Serum
 `SP_LovePotion2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_LovePotion2025, items=['96190276'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_LovePotion2025, items=['SP_LovePotion2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love Potion, eventKey=SP_LovePotion2025, itemKeys=['SP_LovePotion2025_CollectableItems_04'], items=['Moonstring Serum'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Encouraging): The Hopeberry juice is so delicious this year!
 **MADDIE** (Relaxed): I know! It must be an especially good vintage.
@@ -1354,9 +1311,9 @@ Every story in which Emilio speaks.
 - trigger: unknown, hint=Mystery (Progression event) (versions None–None)
 
 
-### SP_Misery2025 — decoration SP_Misery2025_Decoration_Slot34
+### Something Ours — decoration SP_Misery2025_Decoration_Slot34
 `SP_Misery2025_Decoration_Slot34_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Misery2025_Decoration_Slot34, event=SP_Misery2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Misery2025_Decoration_Slot34, event=Something Ours, eventKey=SP_Misery2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **PET** (Surprised): AwoooOOOooo!
 **MASON** (Joyous): That’s right, Boo!
@@ -1381,9 +1338,9 @@ Every story in which Emilio speaks.
 **EMILIO** (Encouraging): Give her a chance. Underneath all the other stuff, she's great really, I promise.
 **MADDIE** (Worried): I'll do my best, I promise.
 
-### SP_SplashMystery2025 — decoration SP_SplashMystery2025_Decoration_Slot36
+### Splash of Mystery — decoration SP_SplashMystery2025_Decoration_Slot36
 `SP_SplashMystery2025_Decoration_Slot36_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_SplashMystery2025_Decoration_Slot36, event=SP_SplashMystery2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_SplashMystery2025_Decoration_Slot36, event=Splash of Mystery, eventKey=SP_SplashMystery2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL**: Are you ready to see your party?
 **MASON** (Joyous): You can bet your pool floaties I am!
@@ -1409,18 +1366,18 @@ Every story in which Emilio speaks.
 **MASON**: I didn't, and I'm sure you want to tell me more, but right now I would like to concentrate on my party.
 **EMILIO**: I understand. I'll tell you all about coconuts afterward!
 
-### SP_Voyance2025 — decoration SP_Voyance2025_Decoration_Slot26
+### Lady Voyance's Premonition — decoration SP_Voyance2025_Decoration_Slot26
 `SP_Voyance2025_Decoration_Slot26_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Voyance2025_Decoration_Slot26, event=SP_Voyance2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Voyance2025_Decoration_Slot26, event=Lady Voyance's Premonition, eventKey=SP_Voyance2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Did you hear about Voyance's premonition? About the funeral and wedding taking place soon?
 **EMILIO** (Thinking): She is a strange lady. I find it difficult to believe her premonitions. There is no room for such things in science.
 **MADDIE** (Doubtful): Exactly! She's just spinning tales about stars aligning and lunar events.
 **EMILIO** (Relaxed): I wouldn't worry, Maddie. There won't be a funeral - or a wedding!
 
-### SP_Voyance2025 — decoration SP_Voyance2025_Decoration_Slot27
+### Lady Voyance's Premonition — decoration SP_Voyance2025_Decoration_Slot27
 `SP_Voyance2025_Decoration_Slot27_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Voyance2025_Decoration_Slot27, event=SP_Voyance2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Voyance2025_Decoration_Slot27, event=Lady Voyance's Premonition, eventKey=SP_Voyance2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **EMILIO** (Thinking): Lady Voyance is an interesting character, isn't she?
 **RODDY** (Worried): She sure is. It's not very nice - creeping everyone out with a crazy prediction.
@@ -1449,9 +1406,9 @@ Every story in which Emilio speaks.
 **BELLA** (Annoyed): And miss the big game?!
 **GRANDMA**: Definitely not, dearie!
 
-### SP_XmasMystery2024 — decoration SP_XmasMystery2024_Decoration_Slot33
+### Holiday Mystery — decoration SP_XmasMystery2024_Decoration_Slot33
 `SP_XmasMystery2024_Decoration_Slot33_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_XmasMystery2024_Decoration_Slot33, event=SP_XmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_XmasMystery2024_Decoration_Slot33, event=Holiday Mystery, eventKey=SP_XmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **EMILIO** (Encouraging): What a fantastic set-up, Maddie!
 **MADDIE** (Relaxed): Thanks, Emilio! I want it to be extra cozy this year.

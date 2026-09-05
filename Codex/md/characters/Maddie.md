@@ -1212,51 +1212,46 @@ Every story in which Maddie speaks.
 **MADDIE** (Joyous): I'll make this the museum's crown jewel. Imagine kids seeing green energy in action!
 **WINSTON** (Joyous): Agatha would be proud to see her vision getting its due, ma'am.
 
-### CBE_AmeliaBoulton2024 — item discovered: 9557374
+### Legacy Lane — item discovered: Amelia Bust
 `CBE_AmeliaBoulton2024_AmeliaBust_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['9557374'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_AmeliasMemorabilia_11'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_AmeliasMemorabilia_11'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_AmeliasMemorabilia_11'], items=['Amelia Bust'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_AmeliasMemorabilia_11'], items=['Amelia Bust'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **ANTIQUEDEALER**: Only a couple dozen of this bust were ever made. It is the crown jewel of my collection!
 **MADDIE**: She's very impressive, I give you that. Do you think there's a family resemblance?
 **ANTIQUEDEALER** (Thinking): Hmmm... In the mystery department, at least!
 
-### CBE_AmeliaBoulton2024 — item discovered: 9557378
+### Legacy Lane — item discovered: Amelia Medallion
 `CBE_AmeliaBoulton2024_AmeliaMedallion_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['9557378'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_AmeliasMemorabilia_07'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_AmeliasMemorabilia_07'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_AmeliasMemorabilia_07'], items=['Amelia Medallion'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_AmeliasMemorabilia_07'], items=['Amelia Medallion'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE** (Relaxed): I love all this old kitsch! You need to be like a super fan to collect all of these things!
 **ANTIQUEDEALER**: Ahem... This medal is particularly valuable, my dear - VERY sought after by people who know about these things.
 **MADDIE** (Charming): Err... Of course. It's very nice!
 
-### CBE_AmeliaBoulton2024 — item discovered: 32093519
+### Legacy Lane — item discovered: Special Artifacts
 `CBE_AmeliaBoulton2024_Bookcase_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['32093519'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_Books_05'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_Books_05'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_Books_05'], items=['Special Artifacts'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_Books_05'], items=['Special Artifacts'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE** (Thinking): I can see that Amelia did a lot for the town. She founded a hospital, a school, even a shelter for the poor...
 **MADDIE** (Thinking): It seems like she appeared here out of thin air... without a past or a family.
 **MADDIE** (Frustrated): Where did she come from, and what made her do all of that work for the town?
 
-### CBE_AmeliaBoulton2024 — item discovered: 71301637
+### Legacy Lane — item discovered: Closed Trunk
 `CBE_AmeliaBoulton2024_ClosedTrunk_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['71301637'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_AmeliasTrunk_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_AmeliasTrunk_07'], items=['Closed Trunk'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): This little compartment is locked... with a combination lock!
 **MADDIE** (Surprised): It looks old, but I'm sure they didn't exist back in Amelia's day!
 **MADDIE** (Encouraging): Hmm... Someone WAS trying to hide something -- but they weren't expecting to have me on the case!
 **MADDIE** (Encouraging): I'll show this to Julius. He'll be able to help - I know it!
 
-### CBE_AmeliaBoulton2024 — item discovered: 6050998
+### Legacy Lane — item discovered: Complete Camera
 `CBE_AmeliaBoulton2024_CompleteCamera_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['6050998'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_GlassPlateCamera_08'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_GlassPlateCamera_08'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_GlassPlateCamera_08'], items=['Complete Camera'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_GlassPlateCamera_08'], items=['Complete Camera'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE**: There's a whole box of old glass squares, labeled "The Amelia Riot." What are these?
 **ANTIQUEDEALER** (Surprised): Ah! They are dry plate photographs! But these seem to be undeveloped...
@@ -1264,10 +1259,10 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): Is there a way to develop these photographs?? There could be something important in them!
 **ANTIQUEDEALER** (Encouraging): Right you are!
 
-### CBE_AmeliaBoulton2024 — decoration CBE_AmeliaBoulton2024_Decoration_Slot02
+### Legacy Lane — decoration CBE_AmeliaBoulton2024_Decoration_Slot02
 `CBE_AmeliaBoulton2024_Decoration_Slot02_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot02, event=CBE_AmeliaBoulton2024, moment=decoration placed (versions 25.05.01–26.07.01)
-- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot02, event=CBE_AmeliaBoulton2024B, moment=decoration placed (versions 26.04.01–26.07.01)
+- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot02, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot02, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, moment=decoration placed (versions 26.04.01–26.07.01)
 
 **ANTIQUEDEALER** (Thinking): She was well-traveled... later in life, that is. We don't really know anything about her life from before her arrival here in Hopewell Bay.
 **MADDIE** (Surprised): What -- nothing??
@@ -1275,19 +1270,19 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): There must be something at the library - they have a whole section about her!
 **ANTIQUEDEALER** (Encouraging): I am always up for some good old-fashioned detective work. To the library!
 
-### CBE_AmeliaBoulton2024 — decoration CBE_AmeliaBoulton2024_Decoration_Slot05
+### Legacy Lane — decoration CBE_AmeliaBoulton2024_Decoration_Slot05
 `CBE_AmeliaBoulton2024_Decoration_Slot05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot05, event=CBE_AmeliaBoulton2024, moment=decoration placed (versions 25.05.01–26.07.01)
-- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot05, event=CBE_AmeliaBoulton2024B, moment=decoration placed (versions 26.04.01–26.07.01)
+- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot05, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot05, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, moment=decoration placed (versions 26.04.01–26.07.01)
 
 **MADDIE** (Relaxed): Do you remember all those old racing trophies we found in the attic?
 **MADDIE** (Relaxed): They were all Amelia's! She was a race car driver, and a good one, too.
 **GRANDMA** (Joyous): A race car driver? Now, she is a woman after my own heart.
 
-### CBE_AmeliaBoulton2024 — decoration CBE_AmeliaBoulton2024_Decoration_Slot08
+### Legacy Lane — decoration CBE_AmeliaBoulton2024_Decoration_Slot08
 `CBE_AmeliaBoulton2024_Decoration_Slot08_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot08, event=CBE_AmeliaBoulton2024, moment=decoration placed (versions 25.05.01–26.07.01)
-- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot08, event=CBE_AmeliaBoulton2024B, moment=decoration placed (versions 26.04.01–26.07.01)
+- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot08, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot08, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, moment=decoration placed (versions 26.04.01–26.07.01)
 
 **PEARL**: Have I told you Amelia is my hero?
 **MADDIE** (Surprised): She is??
@@ -1297,21 +1292,20 @@ Every story in which Maddie speaks.
 **PEARL**: Thank you for putting on this exhibition about her, Maddie. I know it came at a short notice, but you really delivered.
 **MADDIE** (Relaxed): You can thank Julius - I couldn't have done any of this without his help!
 
-### CBE_AmeliaBoulton2024 — decoration CBE_AmeliaBoulton2024_Decoration_Slot15
+### Legacy Lane — decoration CBE_AmeliaBoulton2024_Decoration_Slot15
 `CBE_AmeliaBoulton2024_Decoration_Slot15_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot15, event=CBE_AmeliaBoulton2024, moment=decoration placed (versions 25.05.01–26.07.01)
-- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot15, event=CBE_AmeliaBoulton2024B, moment=decoration placed (versions 26.04.01–26.07.01)
+- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot15, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_AmeliaBoulton2024_Decoration_Slot15, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, moment=decoration placed (versions 26.04.01–26.07.01)
 
 **PEARL**: I love Amelia's old things. Did you find anything in her old trunk?
 **MADDIE**: We found the usual stuff! Bows, shoes, hats... and a secret compartment!
 **PEARL** (Surprised): A secret what-now??
 **MADDIE** (Joyous): It turned out there was a lot more to Amelia than we first thought. She had many sides she never shared with the world.
 
-### CBE_AmeliaBoulton2024 — item discovered: 76347136
+### Legacy Lane — item discovered: Family Portrait
 `CBE_AmeliaBoulton2024_FamilyPortrait_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['76347136'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_AmeliasSecrets_03'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_AmeliasSecrets_03'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_AmeliasSecrets_03'], items=['Family Portrait'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_AmeliasSecrets_03'], items=['Family Portrait'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE**: That's Amelia in the photo, isn't it?
 **ANTIQUEDEALER** (Encouraging): It most certainly is! The image of the man has been scratched away - on the glass plate itself...
@@ -1319,33 +1313,30 @@ Every story in which Maddie speaks.
 **MADDIE** (Worried): I guess Amelia came here to get away from a bad situation and to build a new life.
 **ANTIQUEDEALER** (Thinking): And we can assume that she managed to escape from this man's clutches... at least for a while.
 
-### CBE_AmeliaBoulton2024 — item discovered: 57180520
+### Legacy Lane — item discovered: Grand Monument
 `CBE_AmeliaBoulton2024_GrandMonument_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['57180520'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_AmeliasMonuments_08'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_AmeliasMonuments_08'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_AmeliasMonuments_08'], items=['Grand Monument'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_AmeliasMonuments_08'], items=['Grand Monument'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE**: I get it now -- you know, why she's so important in this town.
 **MADDIE**: She worked so hard to make it better for everyone...
 **ANTIQUEDEALER** (Thinking): She gave everyone a chance for a new beginning - but she wanted one herself, so she hid her past.
 **ANTIQUEDEALER** (Thinking): And her descendants kept her secret.
 
-### CBE_AmeliaBoulton2024 — item discovered: 30128061
+### Legacy Lane — item discovered: Hat
 `CBE_AmeliaBoulton2024_Hat_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['30128061'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_HistoricalCostumes_06'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_HistoricalCostumes_08'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_HistoricalCostumes_06'], items=['Hat'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_HistoricalCostumes_08'], items=['Button-ups'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE** (Relaxed): I don't know anything about Amelia. What was she like? Where did she come from?
 **GRANDMA** (Relaxed): You and your questions! 
 **GRANDMA** (Encouraging): If you really want to find out more, ask Julius. He can answer all your questions!
 **GRANDMA**: And he has not visited for a while... Maybe you should pay him a visit and make sure he has not expired under a pile of stamps.
 
-### CBE_AmeliaBoulton2024 — item discovered: 19915654
+### Legacy Lane — item discovered: High Tech
 `CBE_AmeliaBoulton2024_HighTech_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['19915654'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_JuliusInternet_07'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_JuliusInternet_07'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_JuliusInternet_07'], items=['High Tech'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_JuliusInternet_07'], items=['High Tech'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE** (Relaxed): This is quite a set-up you've got here, Julius.
 **MADDIE** (Surprised): Are those empty energy drink cans and pizza boxes??
@@ -1356,11 +1347,10 @@ Every story in which Maddie speaks.
 **MADDIE**: And?
 **ANTIQUEDEALER** (Encouraging): I think I have the answer to your problem, my girl.
 
-### CBE_AmeliaBoulton2024 — item discovered: 73803960
+### Legacy Lane — item discovered: Historical Map
 `CBE_AmeliaBoulton2024_HistoricalMap_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['73803960'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_HopewellsHistory_05'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_HopewellsHistory_05'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_HopewellsHistory_05'], items=['Historical Map'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_HopewellsHistory_05'], items=['Historical Map'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE** (Thinking): Wow, this town has some history!
 **MADDIE** (Thinking): Pirates, coal mines, a tin can factory...
@@ -1370,7 +1360,7 @@ Every story in which Maddie speaks.
 ### Legacy Lane — entering board
 `CBE_AmeliaBoulton2024_IntroDialogue_Dialogue` · seen 25.06.01–26.07.01
 - trigger: event, event=Legacy Lane, eventId=CBE_AmeliaBoulton2024, eventType=Collectible Board Event, moment=entering board (versions 25.06.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_HistoricalCostumes_05'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_HistoricalCostumes_05'], items=['Umbrella'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE** (Calling): Pearl, hi! I'm great. How are you? You sound kinda hyper...
 **MADDIE** (Calling): Amelia Boulton Day? I think I've heard something about that...
@@ -1385,11 +1375,10 @@ Every story in which Maddie speaks.
 **GRANDMA**: If there is, I do not know it, dearie.
 **GRANDMA**: Amelia was, and still is, something of a mystery!
 
-### CBE_AmeliaBoulton2024 — item discovered: 92316934
+### Legacy Lane — item discovered: Printer Sheets
 `CBE_AmeliaBoulton2024_JuliusCrazyWall_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['92316934'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_CodeClues_05'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_CodeClues_05'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_CodeClues_05'], items=['Printer Sheets'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_CodeClues_05'], items=['Printer Sheets'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **ANTIQUEDEALER**: I am terribly sorry about my appearance...
 **ANTIQUEDEALER**: You see, my nephew came to visit me for the Hopeberry Harvest Festival.  
@@ -1401,32 +1390,29 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): Do you have ANY idea who set the lock and why... and what's behind it?
 **ANTIQUEDEALER** (Encouraging): Funny you should ask...
 
-### CBE_AmeliaBoulton2024 — item discovered: 30128057
+### Legacy Lane — item discovered: Lady About Town
 `CBE_AmeliaBoulton2024_LadyAboutTown_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['30128057'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_HistoricalCostumes_10'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_HistoricalCostumes_10'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_HistoricalCostumes_10'], items=['Lady About Town'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_HistoricalCostumes_10'], items=['Lady About Town'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **GRANDMA** (Thinking): These are some of Amelia's old clothes.
 **GRANDMA** (Thinking): There are plenty of old things up in the attic, but who knows which ones belonged to her!
 **MADDIE** (Discouraged): I know! There's everything from old racing trophies to piles and piles of dusty, old books!
 **MADDIE** (Discouraged): *Sigh* I guess I'll just start looking...
 
-### CBE_AmeliaBoulton2024 — item discovered: 57180523
+### Legacy Lane — item discovered: Memorial Bench
 `CBE_AmeliaBoulton2024_MemorialClock_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['57180523'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_AmeliasMonuments_05'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_AmeliasMonuments_05'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_AmeliasMonuments_05'], items=['Memorial Bench'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_AmeliasMonuments_05'], items=['Memorial Bench'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE** (Encouraging): Amelia is EVERYWHERE in Hopewell Bay!
 **MADDIE** (Encouraging): She has her own street, park - even a statue - but so little is known about her.
 **ANTIQUEDEALER** (Thinking): *Sigh* Yes... The family secrets started with her and just kept on piling up...
 
-### CBE_AmeliaBoulton2024 — item discovered: 19915657
+### Legacy Lane — item discovered: Modem
 `CBE_AmeliaBoulton2024_Modem_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['19915657'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_JuliusInternet_04'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_JuliusInternet_06'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_JuliusInternet_04'], items=['Modem'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_JuliusInternet_06'], items=['Screen'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **ANTIQUEDEALER**: Maddie, dear girl! What a pleasure. It feels like we have not met for a while...
 **MADDIE** (Surprised): No, it has been a hot minute! I wanted to see you about Amelia Boulton -- but what's happened to you??
@@ -1434,27 +1420,25 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): ??
 **ANTIQUEDEALER** (Encouraging): The World Wide Web, Maddie!
 
-### CBE_AmeliaBoulton2024B — item discovered: CBE_AmeliaBoulton2024_TrunkCode_01
+### Legacy Lane — item discovered: Mystery Lock Code
 `CBE_AmeliaBoulton2024_MysteryLockCodeB_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_TrunkCode_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_TrunkCode_01'], items=['Mystery Lock Code'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE** (Joyous): Could it be the code for the lock?
 **MADDIE** (Joyous): There is only one way to find out!
 
-### CBE_AmeliaBoulton2024 — item discovered: 30402972
+### Legacy Lane — item discovered: Mystery Lock Code
 `CBE_AmeliaBoulton2024_MysteryLockCode_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['30402972'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_TrunkCode_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_TrunkCode_01'], items=['Mystery Lock Code'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **ANTIQUEDEALER**: After much careful research, I ended up with a strange code. I did not know what it was, but...
 **MADDIE** (Joyous): Could it be the code for the lock?
 **ANTIQUEDEALER** (Encouraging): There is only one way to find out!
 
-### CBE_AmeliaBoulton2024 — item discovered: 65497257
+### Legacy Lane — item discovered: Old Letter
 `CBE_AmeliaBoulton2024_OldLetter_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['65497257'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_AmeliasLetters_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_AmeliasLetters_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_AmeliasLetters_01'], items=['Old Letter'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_AmeliasLetters_01'], items=['Old Letter'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE** (Surprised): *Gasp!* The locked compartment contained old letters and postcards, all sent to Amelia from Veilwood and signed "BB."
 **MADDIE** (Worried): One of them says, "You made a timely escape. The situation is dire, and they are looking for you."
@@ -1476,32 +1460,29 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): What?
 **GRANDMA** (Joyous): The woman was great at keeping a secret!
 
-### CBE_AmeliaBoulton2024 — item discovered: 6584475
+### Legacy Lane — item discovered: Racing Car
 `CBE_AmeliaBoulton2024_RacingCar_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['6584475'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_AmeliasHobby_07'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_AmeliasHobby_07'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_AmeliasHobby_07'], items=['Racing Car'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_AmeliasHobby_07'], items=['Racing Car'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE** (Relaxed): Another one of Amelia's secrets is revealed!
 **MADDIE** (Relaxed): She wasn't some meek, little woman. This lady was a racer!
 **MADDIE** (Thinking): Between Amelia's need for speed and Grandma's love of motorbikes and planes, wild hobbies seem to run in the family!
 
-### CBE_AmeliaBoulton2024 — item discovered: 71301640
+### Legacy Lane — item discovered: Small Trunk
 `CBE_AmeliaBoulton2024_SmallTrunk_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['71301640'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_AmeliasTrunk_04'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_HistoricalCostumes_06'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_AmeliasTrunk_04'], items=['Small Trunk'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_HistoricalCostumes_06'], items=['Hat'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE** (Thinking): Aren't there any family legends about Amelia?
 **GRANDMA** (Thinking): Apart from the things everyone knows, she was not really spoken about much...
 **GRANDMA** (Thinking): Who knows? Maybe it would be best to leave it alone, dearie.
 **MADDIE** (Relaxed): Why am I not surprised to hear you say that?
 
-### CBE_AmeliaBoulton2024 — item discovered: 65497254
+### Legacy Lane — item discovered: Stamped Letters
 `CBE_AmeliaBoulton2024_StampedLetters_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['65497254'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_AmeliasLetters_04'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_AmeliasLetters_04'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_AmeliasLetters_04'], items=['Stamped Letters'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_AmeliasLetters_04'], items=['Stamped Letters'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE**: This letter says, "You have completed work on your cottage, but the land behind it stands vacant..."
 **MADDIE** (Thinking): Are they talking about Grandma's cottage? Did Amelia build it?
@@ -1510,20 +1491,19 @@ Every story in which Maddie speaks.
 **ANTIQUEDEALER** (Thinking): These letters do indeed shed light on Amelia's actions, but they seem to raise more questions...
 **ANTIQUEDEALER** (Thinking): Who is the writer referring to with "unwanted attention?" I think I need to return to the Web for more information!
 
-### CBE_AmeliaBoulton2024 — item discovered: 76347133
+### Legacy Lane — item discovered: Turning Point
 `CBE_AmeliaBoulton2024_TurningPoint_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['76347133'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_AmeliaBoulton2024, items=['CBE_AmeliaBoulton2024_AmeliasSecrets_06'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_AmeliaBoulton2024B, items=['CBE_AmeliaBoulton2024_AmeliasSecrets_06'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024, itemKeys=['CBE_AmeliaBoulton2024_AmeliasSecrets_06'], items=['Turning Point'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Legacy Lane, eventKey=CBE_AmeliaBoulton2024B, itemKeys=['CBE_AmeliaBoulton2024_AmeliasSecrets_06'], items=['Turning Point'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE** (Encouraging): Look at these photos! I feel like we're traveling right back in time!!
 **ANTIQUEDEALER**: There was a riot in town... People were so angry about their living conditions and the miserable work in the mines...
 **MADDIE** (Surprised): And Amelia emerged from the crowd to lead the protest!
 **ANTIQUEDEALER** (Encouraging): The Amelia Riot!
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Case_01
+### Five-Year Secret Celebration — item discovered: Suitcase
 `CBE_Anniversary2025_Case_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Case_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Case_01'], items=['Suitcase'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: Mason, your turn.
 **MASON** (Thinking): Okay... So, I found something kinda weird.
@@ -1532,17 +1512,17 @@ Every story in which Maddie speaks.
 **MASON** (Worried): But it's locked! And I know it's important, and it has Charlie's initials on it.
 **MASON** (Thinking): I've kept it a secret, but I figured someone might have the key to open it. Now I think I was right. Julius?
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Furniture_03
+### Five-Year Secret Celebration — item discovered: Chair
 `CBE_Anniversary2025_Furniture_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Furniture_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Furniture_03'], items=['Chair'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Thinking): Wow! I just saw Grandma's polishing all the best dining room furniture.
 **MADDIE** (Surprised): That means we're going to have a REALLY fancy dinner party - just like in the old days!  
   _earlier:_ ~~That means it's going to be a REALLY fancy dinner party - just like in the old days!~~ (until 25.07.01)
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Furniture_07
+### Five-Year Secret Celebration — item discovered: Dinner Table
 `CBE_Anniversary2025_Furniture_07_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Furniture_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Furniture_07'], items=['Dinner Table'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: The extra special table cloth, cleaned, starched and ironed, and the family porcelain all lined up.
 **MADDIE**: Seems like we're invited to one of the Boultons' legendary parties!
@@ -1561,9 +1541,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): I wonder... Could it be for the 5th anniversary?  
   _earlier:_ ~~That would be a first...~~ (until 25.07.01)
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Invitation_03
+### Five-Year Secret Celebration — item discovered: Card
 `CBE_Anniversary2025_Invitation_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Invitation_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Invitation_03'], items=['Card'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Thinking): Did you receive a sealed letter from Ursula?
 **MADDIE**: I did - an invitation to a dinner party! Did you?
@@ -1572,9 +1552,9 @@ Every story in which Maddie speaks.
 **RODDY** (Doubtful): You did? The whole thing seems a bit mysterious to me...
 **MASON** (Relaxed): What's so mysterious about it? She's cooking us a yummy dinner!
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Jackie_03
+### Five-Year Secret Celebration — item discovered: Notebook
 `CBE_Anniversary2025_Jackie_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Jackie_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Jackie_03'], items=['Notebook'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **ANTIQUEDEALER**: Jackie, what is your secret? What dark history are you hiding?
 **JACKIE**: No dark history here, folks. I don't have any secrets, you know that.
@@ -1582,9 +1562,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): True, and you've done a lot of research about it.
 **JACKIE** (Hesitant): So what? I'm telling you - I'm an open book.
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Jackie_07
+### Five-Year Secret Celebration — item discovered: Newspaper
 `CBE_Anniversary2025_Jackie_07_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Jackie_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Jackie_07'], items=['Newspaper'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: What made you want to become a journalist?
 **JACKIE**: I have a hunger for the truth. I wanna believe that good journalism can right wrongs and expose lies.
@@ -1592,9 +1572,9 @@ Every story in which Maddie speaks.
 **JACKIE** (Surprised): Wow, we're really just laying it all out there!
 **MADDIE** (Thinking): That's how the game works...
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Julius_07
+### Five-Year Secret Celebration — item discovered: Key
 `CBE_Anniversary2025_Julius_07_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Julius_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Julius_07'], items=['Key'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Surprised): Julius, did you help Grandpa Charlie disappear?
 **ANTIQUEDEALER** (Discouraged): I-- I did help him ONCE, a long time ago.
@@ -1603,9 +1583,9 @@ Every story in which Maddie speaks.
 **RODDY** (Thinking): I think he already told us one secret.
 **MASON** (Encouraging): And it was juicy, too!
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Maddie_05
+### Five-Year Secret Celebration — item discovered: Wedding Dress
 `CBE_Anniversary2025_Maddie_05_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Maddie_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Maddie_05'], items=['Wedding Dress'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON**: And then it's Maddie's turn. I just can't imagine what secrets you could be hiding!
 **JACKIE**: Come on, tell us!
@@ -1618,9 +1598,9 @@ Every story in which Maddie speaks.
 **MADDIE**: It was awful, but I'm fine now! The Mansion was exactly the distraction I needed to get over everything.
 **MADDIE** (Encouraging): And I've made great friends in the process.
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_MansionMysteries_07
+### Five-Year Secret Celebration — item discovered: Secret Chest
 `CBE_Anniversary2025_MansionMysteries_07_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_MansionMysteries_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_MansionMysteries_07'], items=['Secret Chest'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY**: Maddie, what are you going to ask? You must have so many questions...
 **MADDIE** (Thinking): My Grandma never gives up her secrets - and I mean, NEVER.
@@ -1642,9 +1622,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Encouraging): Here's to us and the Mansion, Grandma!
 **GRANDMA** (Joyous): Hear, hear!
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Puzzle_04
+### Five-Year Secret Celebration — item discovered: Wooden Puzzle
 `CBE_Anniversary2025_Puzzle_04_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Puzzle_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Puzzle_04'], items=['Wooden Puzzle'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY**: Has your Grandma taken up a new hobby?
 **MADDIE** (Thinking): Not that I know of!
@@ -1653,9 +1633,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): I think I need to do some good old-fashioned snooping...  
   _earlier:_ ~~I think I need to do some old-fashioned snooping...~~ (until 25.07.01)
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Puzzle_07
+### Five-Year Secret Celebration — item discovered: Turning Puzzle
 `CBE_Anniversary2025_Puzzle_07_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Puzzle_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Puzzle_07'], items=['Turning Puzzle'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: Have you noticed anything strange about Grandma? Do you think she's been more secretive than usual?
 **ANTIQUEDEALER**: All I know is that whenever Ursula gets very secretive, something is afoot.
@@ -1663,9 +1643,9 @@ Every story in which Maddie speaks.
 **ANTIQUEDEALER** (Doubtful): I have my suspicions, my dear, but I have an inkling we will find out soon enough.  
   _earlier:_ ~~That I could not tell you.~~ (until 25.07.01)
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Questions_03
+### Five-Year Secret Celebration — item discovered: Hidden Questions
 `CBE_Anniversary2025_Questions_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Questions_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Questions_03'], items=['Hidden Questions'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **JACKIE** (Surprised): So we can ask her ANYTHING?
 **RODDY** (Worried): Sounds like it... a-and then we owe her one secret each?
@@ -1675,9 +1655,9 @@ Every story in which Maddie speaks.
 **ANTIQUEDEALER** (Thinking): I suppose so...
 **MASON** (Thinking): This party game is WEIRD.
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Serving_05
+### Five-Year Secret Celebration — item discovered: Cloche
 `CBE_Anniversary2025_Serving_05_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Serving_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Serving_05'], items=['Cloche'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **JACKIE** (Encouraging): Is it your Grandma's birthday? Is that why she's organizing a dinner party?
 **MADDIE** (Thinking): No... and she'd never throw big party for herself anyway.
@@ -1695,9 +1675,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Surprised): What??
 **JACKIE** (Thinking): The party games were pretty legendary, too.
 
-### CBE_Anniversary2025 — item discovered: CBE_Anniversary2025_Slides_02
+### Five-Year Secret Celebration — item discovered: Box of Slides
 `CBE_Anniversary2025_Slides_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Anniversary2025, items=['CBE_Anniversary2025_Slides_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Five-Year Secret Celebration, eventKey=CBE_Anniversary2025, itemKeys=['CBE_Anniversary2025_Slides_02'], items=['Box of Slides'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Thinking): Is it just the five of us?
 **ANTIQUEDEALER**: Looks that way. The table is only set for five people.
@@ -1705,10 +1685,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Doubtful): And why is that projector set up at the top of the table?
 **MASON** (Joyous): Maybe we should switch it on and see what happens?
 
-### CBE_BackyardBash2024 — item discovered: 4625231
+### Spooktacular Backyard Bash — item discovered: Backyard Theater Active
 `CBE_BackyardBash2024_BackyardTheaterActive_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_BackyardBash2024, items=['4625231'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_BackyardBash2024, items=['CBE_BackyardBash2024_BackyardTheaterActive_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, itemKeys=['CBE_BackyardBash2024_BackyardTheaterActive_01'], items=['Backyard Theater Active'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: Welcome to our Halloween movie marathon, everyone!
 **MADDIE** (Encouraging): What great costumes, all around.
@@ -1723,30 +1702,27 @@ Every story in which Maddie speaks.
 **MADDIE** (Encouraging): Let's get the movies rolling. Find a seat, grab some snacks, and enjoy!
 **MADDIE** (Encouraging): Where did Pearl disappear to?
 
-### CBE_BackyardBash2024 — item discovered: 42186364
+### Spooktacular Backyard Bash — item discovered: Box of Beasts
 `CBE_BackyardBash2024_BoxOfBeasts_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_BackyardBash2024, items=['42186364'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_BackyardBash2024, items=['CBE_BackyardBash2024_ScaryMovies_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, itemKeys=['CBE_BackyardBash2024_ScaryMovies_05'], items=['Box of Beasts'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: What are you dressing up as this Halloween, Pearl?
 **PEARL** (Encouraging): I've got a ghost costume - like a sheet. You know, I love the classics!
 **PEARL** (Encouraging): How about you?
 **MADDIE** (Charming): My costume's top secret! But I promise it will be AMAZING!
 
-### CBE_BackyardBash2024 — item discovered: 38117429
+### Spooktacular Backyard Bash — item discovered: Box of Decorations
 `CBE_BackyardBash2024_BoxOfDecorations_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_BackyardBash2024, items=['38117429'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_BackyardBash2024, items=['CBE_BackyardBash2024_CraftMaterials_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, itemKeys=['CBE_BackyardBash2024_CraftMaterials_04'], items=['Box of Decorations'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: Roddy, could you get the candy cauldron?
 **RODDY**: Wazzup...
 **MADDIE** (Relaxed): Seriously?
 **RODDY**: Come on! I couldn't let a good costume go to waste!
 
-### CBE_BackyardBash2024 — item discovered: 99249474
+### Spooktacular Backyard Bash — item discovered: Candy Ogre
 `CBE_BackyardBash2024_CandyOgre_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_BackyardBash2024, items=['99249474'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_BackyardBash2024, items=['CBE_BackyardBash2024_CandyMonsters_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, itemKeys=['CBE_BackyardBash2024_CandyMonsters_08'], items=['Candy Ogre'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Joyous): Who's the winner of the costume competition?
 **MADDIE**: I vote for Pearl!
@@ -1760,36 +1736,33 @@ Every story in which Maddie speaks.
 **MADDIE**: I didn't get a chance to read it with everything going on...
 **GRANDMA** (Frustrated): So who was it in the ghost costume?
 
-### CBE_BackyardBash2024 — item discovered: 19344372
+### Spooktacular Backyard Bash — item discovered: Creepy Crawlies
 `CBE_BackyardBash2024_CreepyCrawlies_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_BackyardBash2024, items=['19344372'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_BackyardBash2024, items=['CBE_BackyardBash2024_HouseDecorations_10'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, itemKeys=['CBE_BackyardBash2024_HouseDecorations_10'], items=['Creepy Crawlies'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Encouraging): Everything is ready for the trick-or-treaters!
 **MADDIE** (Encouraging): Enter the house of horrors at your own risk! Mwahahahahah!
 **MADDIE**: I'm just joking -- it's totally safe.
 
-### CBE_BackyardBash2024 — item discovered: 42493536
+### Spooktacular Backyard Bash — item discovered: Cushioned Chairs
 `CBE_BackyardBash2024_CushionedChairs_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_BackyardBash2024, items=['42493536'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_BackyardBash2024, items=['CBE_BackyardBash2024_BackyardTheater_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, itemKeys=['CBE_BackyardBash2024_BackyardTheater_07'], items=['Cushioned Chairs'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MASON**: What's your favorite horror flick, Maddie?
 **MADDIE** (Thinking): I'm not sure... But nothing that takes place in a haunted mansion, that's for sure!
 
-### CBE_BackyardBash2024 — item discovered: 19344377
+### Spooktacular Backyard Bash — item discovered: Dancing Skeleton
 `CBE_BackyardBash2024_DancingSkeleton_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_BackyardBash2024, items=['19344377'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_BackyardBash2024, items=['CBE_BackyardBash2024_HouseDecorations_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, itemKeys=['CBE_BackyardBash2024_HouseDecorations_05'], items=['Dancing Skeleton'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: So what is it with you and ghosts?
 **RODDY** (Surprised): What do you mean?
 **MADDIE** (Thinking): Why are you scared of ghosts?
 **RODDY** (Charming): But I'm not scared of g-g-ghosts!!
 
-### CBE_BackyardBash2024 — decoration CBE_Backyardbash2024_Decoration_Slot15
+### Spooktacular Backyard Bash — decoration CBE_Backyardbash2024_Decoration_Slot15
 `CBE_BackyardBash2024_GhastlyGhost_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_Backyardbash2024_Decoration_Slot15, event=CBE_BackyardBash2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_Backyardbash2024_Decoration_Slot15, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL** (Encouraging): Even Ignatius got a Halloween make-over!
 **PEARL** (Encouraging): He looks pretty convincing, doesn't he?
@@ -1826,19 +1799,17 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): What's up with him? You'd almost think he's...
 **GRANDMA** (Doubtful): Afraid of ghosts?
 
-### CBE_BackyardBash2024 — item discovered: 97707065
+### Spooktacular Backyard Bash — item discovered: Junk Drawer
 `CBE_BackyardBash2024_JunkDrawer_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_BackyardBash2024, items=['97707065'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_BackyardBash2024, items=['CBE_BackyardBash2024_JunkDrawer_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, itemKeys=['CBE_BackyardBash2024_JunkDrawer_01'], items=['Junk Drawer'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): This will be a Halloween to remember!
 **MADDIE** (Thinking): The backyard theater will need all kinds of things.
 **MADDIE** (Joyous): Seating, a projector... And I can't forget about snacks!
 
-### CBE_BackyardBash2024 — item discovered: 55707852
+### Spooktacular Backyard Bash — item discovered: Maddie's Halloween Get-up
 `CBE_BackyardBash2024_MaddiesClothes_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_BackyardBash2024, items=['55707852'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_BackyardBash2024, items=['CBE_BackyardBash2024_MaddiesClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, itemKeys=['CBE_BackyardBash2024_MaddiesClothes_04'], items=["Maddie's Halloween Get-up"], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Halloween is always great, but I'd like to do something extra special this year...
 **PEARL** (Thinking): I get it. Let's give everyone a chance to have a good time.
@@ -1848,10 +1819,9 @@ Every story in which Maddie speaks.
 **PEARL** (Doubtful): It's pretty scary as it is...
 **MADDIE**: You send the invitations out. I'll get to work on the movie theater!
 
-### CBE_BackyardBash2024 — item discovered: 63533881
+### Spooktacular Backyard Bash — item discovered: Trick & Treat Bag
 `CBE_BackyardBash2024_MaddiesHalloweenGetUp_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_BackyardBash2024, items=['63533881'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_BackyardBash2024, items=['CBE_BackyardBash2024_MaddiesCostume_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, itemKeys=['CBE_BackyardBash2024_MaddiesCostume_04'], items=['Trick & Treat Bag'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): My costume could not be more perfect.
 **MADDIE** (Relaxed): I can't wait to see Grandma's face!
@@ -1861,9 +1831,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Worried): Wha-- Nothing, just looking for... aaaa... scarf.
 **GRANDMA** (Doubtful): I'm onto you, dearie.
 
-### CBE_BackyardBash2024 — decoration CBE_Backyardbash2024_Decoration_Slot04
+### Spooktacular Backyard Bash — decoration CBE_Backyardbash2024_Decoration_Slot04
 `CBE_BackyardBash2024_MonstrousMutt_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_Backyardbash2024_Decoration_Slot04, event=CBE_BackyardBash2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_Backyardbash2024_Decoration_Slot04, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA**: The Mansion has never looked this haunted before. It is almost... ghostly!
 **MADDIE** (Worried): I know. There's something weird in the air this Halloween...
@@ -1872,10 +1842,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Surprised): MASON!
 **MASON** (Encouraging): Hahahaha! Got you!
 
-### CBE_BackyardBash2024 — item discovered: 42493539
+### Spooktacular Backyard Bash — item discovered: Projector
 `CBE_BackyardBash2024_MovieProjector_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_BackyardBash2024, items=['42493539'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_BackyardBash2024, items=['CBE_BackyardBash2024_BackyardTheater_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, itemKeys=['CBE_BackyardBash2024_BackyardTheater_04'], items=['Projector'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): Everything is pretty much ready. It's gonna be so much fun!
 **MADDIE** (Surprised): Pearl, i-is that you?
@@ -1884,19 +1853,18 @@ Every story in which Maddie speaks.
 **MADDIE** (Doubtful): Pearl??
 **MADDIE** (Doubtful): I guess she's really getting into her character...
 
-### CBE_BackyardBash2024 — item discovered: 27816818
+### Spooktacular Backyard Bash — item discovered: Scary Clown
 `CBE_BackyardBash2024_ScaryClown_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_BackyardBash2024, items=['27816818'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_BackyardBash2024, items=['CBE_BackyardBash2024_HalloweenCostumes_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, itemKeys=['CBE_BackyardBash2024_HalloweenCostumes_06'], items=['Scary Clown'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY**: I know it's Halloween, but does it feel... creepier than normal?
 **MADDIE**: Funny you mention it... I've been thinking the same.
 **MADDIE**: I kinda feel like someone is watching us!
 **RODDY** (Discouraged): Maybe we're just paranoid with all these skeletons around.
 
-### CBE_BackyardBash2024 — decoration CBE_Backyardbash2024_Decoration_Slot07
+### Spooktacular Backyard Bash — decoration CBE_Backyardbash2024_Decoration_Slot07
 `CBE_BackyardBash2024_StaircaseOfHorrors_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_Backyardbash2024_Decoration_Slot07, event=CBE_BackyardBash2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_Backyardbash2024_Decoration_Slot07, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE**: Roddy, do you want to tell us why you're so weird about ghosts?
 **RODDY** (Discouraged): Well... OK then.
@@ -1916,28 +1884,26 @@ Every story in which Maddie speaks.
 **MASON** (Relaxed): Cause if you don't have enough treats, you might get a trick!
 **MASON** (Relaxed): I mean, it IS Halloween!
 
-### CBE_BackyardBash2024 — item discovered: 35956590
+### Spooktacular Backyard Bash — item discovered: Toilet Papered House
 `CBE_BackyardBash2024_ToiletPaperedHouse_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_BackyardBash2024, items=['35956590'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_BackyardBash2024, items=['CBE_BackyardBash2024_Tricks_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, itemKeys=['CBE_BackyardBash2024_Tricks_05'], items=['Toilet Papered House'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: Masooooon! Did you toilet paper Grandma's cottage??
 **MASON** (Encouraging): No... It was Roddy!
 **RODDY**: Hey!
 
-### CBE_BackyardBash2024 — item discovered: 302627
+### Spooktacular Backyard Bash — item discovered: Video Store
 `CBE_BackyardBash2024_VideoStore_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_BackyardBash2024, items=['302627'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_BackyardBash2024, items=['CBE_BackyardBash2024_VideoRental_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spooktacular Backyard Bash, eventKey=CBE_BackyardBash2024, itemKeys=['CBE_BackyardBash2024_VideoRental_01'], items=['Video Store'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MASON** (Joyous): I'm SO excited about the Halloween movie marathon!
 **MASON** (Joyous): Please, please pick REALLY scary films!
 **MADDIE** (Relaxed): Aren't you a little bit too young to watch REALLY scary movies?
 **MASON** (Surprised): Not on Halloween!
 
-### CBE_Easter2023 — decoration CBE_Easter2023_Decoration19
+### Egg Hunt 2023 — decoration CBE_Easter2023_Decoration19
 `CBE_Easter2023_AFluffleOfRabbits` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_Easter2023_Decoration19, event=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_Easter2023_Decoration19, event=Egg Hunt 2023, eventKey=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE**: That's a whole bunch of rabbits.
 **GRANDMA** (Joyous): Fluffle!
@@ -1946,9 +1912,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Encouraging): Oh, like a school of fish, or pride of lions?
 **GRANDMA** (Relaxed): Or my favorite... A murder of crows.
 
-### CBE_Easter2023 — decoration CBE_Easter2023_Decoration21
+### Egg Hunt 2023 — decoration CBE_Easter2023_Decoration21
 `CBE_Easter2023_ChocolateAvenue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_Easter2023_Decoration21, event=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_Easter2023_Decoration21, event=Egg Hunt 2023, eventKey=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Oh wow... What a mess!
 **MADDIE** (Discouraged): This'll take forever to get out!
@@ -1956,9 +1922,9 @@ Every story in which Maddie speaks.
 **RODDY** (Worried): Maddie! Good thing I found you! Have you seen Mason? He's been at the chocolate eggs again!
 **MADDIE** (Doubtful): Ah...
 
-### CBE_Easter2023 — decoration CBE_Easter2023_Decoration18
+### Egg Hunt 2023 — decoration CBE_Easter2023_Decoration18
 `CBE_Easter2023_CuteRabbitHole` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_Easter2023_Decoration18, event=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_Easter2023_Decoration18, event=Egg Hunt 2023, eventKey=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE** (Joyous): What a cute little rabbit!
 **MASON** (Frustrated): I'd keep clear of that one, lady; his black beady eyes bode ill intent!
@@ -1980,9 +1946,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Doubtful): That's because I'm not a kid! 
 **MASON** (Annoyed): Obviously!
 
-### CBE_Easter2023 — decoration CBE_Easter2023_Decoration23
+### Egg Hunt 2023 — decoration CBE_Easter2023_Decoration23
 `CBE_Easter2023_EggCart` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_Easter2023_Decoration23, event=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_Easter2023_Decoration23, event=Egg Hunt 2023, eventKey=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE** (Joyous): I've made sure there'll be plenty of eggs to go around!
 **GRANDMA**: I can see that dearie, how did you get so many?
@@ -1993,9 +1959,9 @@ Every story in which Maddie speaks.
 **GRANDMA** (Charming): I know!
 **GRANDMA** (Relaxed): Just making sure...
 
-### CBE_Easter2023 — decoration CBE_Easter2023_Decoration16
+### Egg Hunt 2023 — decoration CBE_Easter2023_Decoration16
 `CBE_Easter2023_EggPaintingStation` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_Easter2023_Decoration16, event=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_Easter2023_Decoration16, event=Egg Hunt 2023, eventKey=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE**: Hi, Roddy! Painting some eggs I see? 
 **RODDY** (Relaxed): Yeah, I'm helping some of the kids out with their eggs.
@@ -2004,9 +1970,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): Oh please, I bet you were born with that safety hat on! But... I do like the color.
 **RODDY** (Charming): ...!
 
-### CBE_Easter2023 — decoration CBE_Easter2023_Decoration20
+### Egg Hunt 2023 — decoration CBE_Easter2023_Decoration20
 `CBE_Easter2023_LeftStoneFence` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_Easter2023_Decoration20, event=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_Easter2023_Decoration20, event=Egg Hunt 2023, eventKey=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE** (Joyous): Aaah, Spring... Everything feels so alive!
 **MADDIE**: Hi, Mason!  
@@ -2017,9 +1983,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Encouraging): I love it! Gonna put it right up here on the wall!
 **MASON** (Worried): No! Please, everyone will see!
 
-### CBE_Easter2023 — decoration CBE_Easter2023_Decoration17
+### Egg Hunt 2023 — decoration CBE_Easter2023_Decoration17
 `CBE_Easter2023_NewIntroDialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_Easter2023_Decoration17, event=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_Easter2023_Decoration17, event=Egg Hunt 2023, eventKey=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MASON**: I wonder if the rabbit stashed some eggs over here at the creepy old mansion!
 **MADDIE** (Worried): Hello? Who is that? I have a rake and, I'm not afraid to use it!
@@ -2029,9 +1995,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Doubtful): It's Maddie. ...and you are?
 **MASON** (Encouraging): Mason... Detective Mason Wu...
 
-### CBE_Easter2023 — decoration CBE_Easter2023_Decoration24
+### Egg Hunt 2023 — decoration CBE_Easter2023_Decoration24
 `CBE_Easter2023_RightStoneFence` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_Easter2023_Decoration24, event=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_Easter2023_Decoration24, event=Egg Hunt 2023, eventKey=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MASON**: Hey, lady, guess what?
 **MADDIE** (Doubtful): It's Maddie, but go on...
@@ -2042,9 +2008,9 @@ Every story in which Maddie speaks.
 **MASON** (Annoyed): Hey! It's still a surprise, right?
 **MADDIE** (Frustrated): Not a pleasant one!
 
-### CBE_Easter2023 — decoration CBE_Easter2023_Decoration22
+### Egg Hunt 2023 — decoration CBE_Easter2023_Decoration22
 `CBE_Easter2023_RufusEasterRetreat` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_Easter2023_Decoration22, event=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_Easter2023_Decoration22, event=Egg Hunt 2023, eventKey=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE** (Encouraging): You like your special doggy house? 
 **DOG** (Joyous): Ruff!
@@ -2055,9 +2021,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): Hey... There should be five of them...
 **MADDIE** (Frustrated): MASON!!!
 
-### CBE_Easter2023 — decoration CBE_Easter2023_Decoration14
+### Egg Hunt 2023 — decoration CBE_Easter2023_Decoration14
 `CBE_Easter2023_SeasonalArchway` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_Easter2023_Decoration14, event=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_Easter2023_Decoration14, event=Egg Hunt 2023, eventKey=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE** (Relaxed): I used to love going on your egg hunts Grandma! You used to hide them so well.
 **GRANDMA** (Charming): Used to? I still do, dearie... You should go find them, before they spoil.
@@ -2066,20 +2032,18 @@ Every story in which Maddie speaks.
 **GRANDMA** (Joyous): Besides, little Mason seems to love it!
 **MADDIE** (Encouraging): He does, doesn't he?
 
-### CBE_Easter2023 — item discovered: 14226
+### Egg Hunt 2023 — item discovered: Muddy Chest
 `CBE_Easter2023_TreasureChest` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_Easter2023, items=['14226'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_Easter2023, items=['CBEEaster2023Dirt_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Egg Hunt 2023, eventKey=CBE_Easter2023, itemKeys=['CBEEaster2023Dirt_07'], items=['Muddy Chest'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MASON** (Surprised): Phew... That was rough!
 **MADDIE** (Surprised): Mason? Why are you digging up my lawn?!!
 **MASON** (Frustrated): Desperate times, call for desperate measures, lady!
 
-### CBE_Flashback2025 — item discovered: 68224865
+### Flashback Rewind — item discovered: Attic Doorway
 `CBE_Flashback2025_Attic_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['68224865'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_Attic_03'], moment=item discovered (versions 26.03.01–26.04.02)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_Attic_04'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_Attic_03'], items=['Attic Doorway'], moment=item discovered (versions 25.05.01–26.04.02)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_Attic_04'], items=['Mansion Attic'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **MADDIE** (Thinking): Why would Julius insist that his story was true?
 **MADDIE** (Thinking): It's so typical of Grandma - not admitting anything, but not offering any kind of explanation either.
@@ -2088,57 +2052,51 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): And that means... a visit to the Mansion attic!
 **MADDIE** (Relaxed): I could get lost up there, among all the boxes full of treasures.
 
-### CBE_Flashback2025 — item discovered: 24716921
+### Flashback Rewind — item discovered: Miniature - Active
 `CBE_Flashback2025_BoardgamesActive_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['24716921'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_BoardgamesActive_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_BoardgamesActive_01'], items=['Miniature - Active'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): I wonder if I can get inside the Mansion and take a look around! Maybe I'll just try the door...
 **MADDIE** (Thinking): It's locked. OF COURSE!
 **MADDIE** (Thinking): Some things don't change, it seems.
 
-### CBE_Flashback2025 — item discovered: 49729735
+### Flashback Rewind — item discovered: Dice
 `CBE_Flashback2025_Boardgames_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['49729735'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_Boardgames_01'], moment=item discovered (versions 26.03.01–26.04.02)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_Boardgames_03'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_Boardgames_01'], items=['Dice'], moment=item discovered (versions 25.05.01–26.04.02)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_Boardgames_03'], items=['Game Character'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **MADDIE** (Thinking): Oh, man! I need to remember that I'm not Maddie here. I won't be born for a long while yet!
 **MADDIE** (Thinking): If Grandma sees me, it could cause some cosmic meltdown of the space-time continuum...
 **MADDIE** (Hesitant): And that would be bad.
 
-### CBE_Flashback2025 — item discovered: 70227337
+### Flashback Rewind — item discovered: Unlabelled Boxes
 `CBE_Flashback2025_Box_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['70227337'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_Box_01'], moment=item discovered (versions 26.03.01–26.04.02)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_Box_06'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_Box_01'], items=['Unlabelled Boxes'], moment=item discovered (versions 25.05.01–26.04.02)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_Box_06'], items=['Mystery Box'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **MADDIE** (Thinking): I wonder what else I might find in these boxes.
 **MADDIE** (Thinking): Grandma's got so many secrets, you never know when you're gonna discover another one!
 
-### CBE_Flashback2025 — item discovered: 70227333
+### Flashback Rewind — item discovered: Attic Loot
 `CBE_Flashback2025_Box_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['70227333'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_Box_05'], moment=item discovered (versions 26.03.01–26.04.02)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_Box_07'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_Box_05'], items=['Attic Loot'], moment=item discovered (versions 25.05.01–26.04.02)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_Box_07'], items=['Open Mystery Box'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **MADDIE** (Thinking): Was Grandma telling me the truth about Julius' story?
 **MADDIE** (Thinking): He was so convinced it really happened. Weird...
 
-### CBE_Flashback2025 — item discovered: 56498173
+### Flashback Rewind — item discovered: Shades
 `CBE_Flashback2025_Clothes_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['56498173'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_Clothes_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_Clothes_03'], items=['Shades'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Joyous): A box of old clothes! But these aren't just any old clothes... These are from the 80s!
 **MADDIE** (Joyous): This is why I love this attic. You can always find something totally unexpected!
 **MADDIE** (Surprised): Cool shades! As if Grandma ever wore these...
 **MADDIE** (Charming): I wonder if I could pull them off?
 
-### CBE_Flashback2025 — item discovered: 56498169
+### Flashback Rewind — item discovered: Jacket
 `CBE_Flashback2025_Clothes_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['56498169'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_Clothes_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_Clothes_07'], items=['Jacket'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): I think I've seen this jacket before. The colors are pretty awesome!
 **MADDIE** (Relaxed): It looks about my size, too...
@@ -2150,10 +2108,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Hesitant): This would make a great outfit for an 80s costume party.
 **MADDIE** (Thinking): I wonder if Pearl would be interested in throwing one?
 
-### CBE_Flashback2025 — item discovered: 72176484
+### Flashback Rewind — item discovered: Pocket Console
 `CBE_Flashback2025_Consoles_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['72176484'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_Consoles_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_Consoles_01'], items=['Pocket Console'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Hey, Julius? Have you seen Charlie anywhere?
 **ANTIQUEDEALER**: He had some business in town. You know he's been talking about getting a COMPUTER.
@@ -2161,10 +2118,9 @@ Every story in which Maddie speaks.
 **ANTIQUEDEALER**: An intricate hi-tech machine you can use to write things and do calculations, maybe even play games!
 **ANTIQUEDEALER** (Surprised): VERY advanced technology.
 
-### CBE_Flashback2025 — item discovered: 72176480
+### Flashback Rewind — item discovered: Retro Console
 `CBE_Flashback2025_Consoles_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['72176480'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_Consoles_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_Consoles_05'], items=['Retro Console'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Remind me - what does Charlie want a computer for again?
 **MADDIE** (Thinking): Is it for his work?
@@ -2172,10 +2128,9 @@ Every story in which Maddie speaks.
 **ANTIQUEDEALER** (Surprised): But you know we don't really talk about that.
 **ANTIQUEDEALER** (Surprised): Plausible deniability, remember?
 
-### CBE_Flashback2025 — item discovered: 83491264
+### Flashback Rewind — item discovered: Light Boxes
 `CBE_Flashback2025_Disco_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['83491264'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_Disco_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_Disco_03'], items=['Light Boxes'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **ANTIQUEDEALER**: You really need to find a better place for the key.
 **MADDIE** (Thinking): Key?
@@ -2186,10 +2141,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Hesitant): Which is where I keep the key. I knew that!
 **MADDIE** (Hesitant): And yes, absolutely, you're totally right. I'll find a better place for the key!
 
-### CBE_Flashback2025 — item discovered: 83491262
+### Flashback Rewind — item discovered: Spinning Disco Ball
 `CBE_Flashback2025_Disco_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['83491262'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_Disco_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_Disco_05'], items=['Spinning Disco Ball'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): It's so strange to see Julius this young... It's like he and Grandma and Charlie all had lives and did cool stuff.
 **MADDIE** (Thinking): I wish I could stay in the 80s for longer and meet Charlie, but I need to find a way back to the present.
@@ -2211,10 +2165,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Doubtful): You promise?
 **GRANDMA**: I promise, dearie. It NEVER happened.
 
-### CBE_Flashback2025 — item discovered: 10823541
+### Flashback Rewind — item discovered: Speakers
 `CBE_Flashback2025_Music_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['10823541'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_Music_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_Music_03'], items=['Speakers'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Do you play the guitar?
 **ANTIQUEDEALER**: Ahem, keytar is my instrument of choice now. I've been practicing a lot, and I think that this time I can hit the right notes.
@@ -2233,10 +2186,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): This time you're off the hook. But let's talk about your old 80s clothes!
 **GRANDMA** (Joyous): Now they are something I have no explanation for!
 
-### CBE_Flashback2025 — item discovered: 21455844
+### Flashback Rewind — item discovered: TV Set - Active
 `CBE_Flashback2025_TV_Active_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['21455844'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_TVActive_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_TVActive_01'], items=['TV Set - Active'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): The picture is so grainy... How did people ever watch this?
 **MADDIE** (Thinking): What's happening on the video? Is that Grandma? Those clothes look familiar...
@@ -2248,10 +2200,9 @@ Every story in which Maddie speaks.
 **MADDIE**: *Bang!*
 **MADDIE** (Surprised): Ouch, my head...
 
-### CBE_Flashback2025 — item discovered: 12822115
+### Flashback Rewind — item discovered: VHS Tape
 `CBE_Flashback2025_Tape_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['12822115'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_Tape_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_Tape_01'], items=['VHS Tape'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): What is this?
 **MADDIE** (Thinking): Looks like an old... what you do you call it... a VHS?
@@ -2259,10 +2210,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): Oh, an old TV! This slot looks about right...
 **MADDIE** (Surprised): Yes! Something's happening!
 
-### CBE_Flashback2025 — item discovered: 92975429
+### Flashback Rewind — item discovered: Jet Morpher
 `CBE_Flashback2025_Toy_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['92975429'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_Toy_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_Toy_03'], items=['Jet Morpher'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Why are you having a yard sale?
 **ANTIQUEDEALER** (Surprised): Ursula, it was all your idea, remember? To raise some money for the repairs the Mansion so desperately needs?
@@ -2271,10 +2221,9 @@ Every story in which Maddie speaks.
 **ANTIQUEDEALER**: Those were your idea, too.
 **MADDIE** (Hesitant): I-I know that! Seems like I have lots of good ideas!
 
-### CBE_Flashback2025 — item discovered: 92975425
+### Flashback Rewind — item discovered: Stratos-Rage
 `CBE_Flashback2025_Toy_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['92975425'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_Toy_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_Toy_07'], items=['Stratos-Rage'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Could you just remind me - what needs to be fixed first in the Mansion?
 **ANTIQUEDEALER**: You name it! The Conservatory roof is leaking, the Maze is totally overgrown, and there's something odd going on at the Lighthouse...
@@ -2283,38 +2232,34 @@ Every story in which Maddie speaks.
 **ANTIQUEDEALER** (Surprised): And what's with the hair? The red does look good on you, but you didn't mention you were going to dye it.
 **MADDIE** (Hesitant): I just wanted a little change, I guess... so surprise!
 
-### CBE_Flashback2025 — item discovered: 8879260
+### Flashback Rewind — item discovered: Fancy Watch
 `CBE_Flashback2025_Watches_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['8879260'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_Watches_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_Watches_03'], items=['Fancy Watch'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): The key to the Mansion! If I find it here in the past, I can hide it somewhere for myself to find in the future!
 **MADDIE** (Surprised): Then I can just get straight into the Mansion. Grandma will never guess how I did it!
 **MADDIE** (Thinking): What a genius plan!
 
-### CBE_Flashback2025 — item discovered: 8879257
+### Flashback Rewind — item discovered: Pro Digital Watch
 `CBE_Flashback2025_Watches_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['8879257'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_Watches_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_Watches_06'], items=['Pro Digital Watch'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): How do I get the key?
 **MADDIE** (Thinking): Julius knows everything around here and he thinks I'm Grandma. How can I get him to tell me everything without raising his suspicions?
 **MADDIE** (Thinking): I have to be careful, or this might end badly.
 
-### CBE_Flashback2025 — item discovered: 8879254
+### Flashback Rewind — item discovered: Luxury Digital Watch
 `CBE_Flashback2025_Watches_09_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['8879254'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_Watches_09'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_Watches_09'], items=['Luxury Digital Watch'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): I'll just have to climb up and get the key from Ignatius' tin can!
 **MADDIE** (Surprised): Whooooah, the statue is much taller than I realized. But I have to try.
 **MADDIE** (Hesitant): I'll just climb onto the statue's shoulders and reach into the tin can. Easy peasy!
 **MADDIE** (Hesitant): Here I go...
 
-### CBE_Flashback2025 — item discovered: 8879251
+### Flashback Rewind — item discovered: Mega Flashback
 `CBE_Flashback2025_Watches_12_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['8879251'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_Watches_12'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_Watches_12'], items=['Mega Flashback'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **ANTIQUEDEALER** (Surprised): What on earth is Ursula doing climbing Ignatius' statue?? Why isn't she using the ladder?
 **ANTIQUEDEALER** (Surprised): The statue can't take her weight... Oh, no - it's falling!
@@ -2329,10 +2274,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): What is it?
 **ANTIQUEDEALER** (Thinking): Nothing... It reminds me of something. Like a strange flashback!
 
-### CBE_Flashback2025 — item discovered: 80112694
+### Flashback Rewind — item discovered: Tennis Rackets
 `CBE_Flashback2025_YardSale_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['80112694'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_YardSale_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_YardSale_04'], items=['Tennis Rackets'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Oh, my head... I need to remember to be less clumsy in the future!
 **MADDIE** (Thinking): Oof... I feel really weird. Like something's different... What's going on?
@@ -2345,11 +2289,10 @@ Every story in which Maddie speaks.
 **MADDIE** (Surprised): He looks like Julius, but just much, MUCH... younger??
 **MADDIE** (Surprised): Hang on... Did I just go BACK IN TIME??
 
-### CBE_Flashback2025 — item discovered: 80112690
+### Flashback Rewind — item discovered: Rollerskate
 `CBE_Flashback2025_YardSale_08_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['80112690'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_YardSale_08'], moment=item discovered (versions 26.03.01–26.04.02)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_YardSale_06'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_YardSale_08'], items=['Rollerskate'], moment=item discovered (versions 25.05.01–26.04.02)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_YardSale_06'], items=['Volleyball'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **ANTIQUEDEALER** (Surprised): Ursula? Is that you? Could you help me with these boxes?
 **ANTIQUEDEALER** (Surprised): What happened to your hair? Oh, never mind! Those sunglasses are EPIC!
@@ -2363,19 +2306,17 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): This is too much... Where am I? Or - WHEN am I?
 **ANTIQUEDEALER** (Surprised): Did you bump your head? You're not making any sense!
 
-### CBE_Flashback2025 — item discovered: 80112687
+### Flashback Rewind — item discovered: Helmet
 `CBE_Flashback2025_YardSale_11_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_Flashback2025, items=['80112687'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_Flashback2025, items=['CBE_Flashback2025_YardSale_11'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Flashback Rewind, eventKey=CBE_Flashback2025, itemKeys=['CBE_Flashback2025_YardSale_11'], items=['Helmet'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): So, Grandma was also fixing the place up. It doesn't look half bad, but it's definitely showing signs of disrepair.
 **MADDIE** (Thinking): Does she live here alone?
 **MADDIE** (Surprised): Hang on... Shouldn't Grandpa Charlie be around?!
 
-### CBE_FrostySecrets2024 — item discovered: 38748320
+### Frosty Secrets — item discovered: Pocket Knife
 `CBE_FrostySecrets2024_BackpackSupplies_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['38748320'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_BackpackSupplies_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_BackpackSupplies_03'], items=['Pocket Knife'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Surprised): Looks like you’re packing that backpack for a zombie apocalypse!  
   _earlier:_ ~~Ah, the perfect tool for tinkering outdoors.~~ (until 25.10.01)
@@ -2386,10 +2327,9 @@ Every story in which Maddie speaks.
 **PEARL** (Doubtful): In case-- what?
 **MADDIE** (Hesitant): Err... you know, in case the coffee maker at the cabin needs emergency surgery!
 
-### CBE_FrostySecrets2024 — item discovered: 38748316
+### Frosty Secrets — item discovered: Open Thermos Flask
 `CBE_FrostySecrets2024_BackpackSupplies_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['38748316'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_BackpackSupplies_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_BackpackSupplies_07'], items=['Open Thermos Flask'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Thinking): There’s something in this thermos... some rolled-up papers. What are these?  
   _earlier:_ ~~A classic thermos flask. I'll take this, too.~~ (until 25.10.01)
@@ -2401,10 +2341,9 @@ Every story in which Maddie speaks.
   _earlier:_ ~~Whoever packed this bag, hid these papers in the thermos, too.~~ (until 25.10.01)
 **PEARL**: The Boultons have a secret to hide. What a surprise!
 
-### CBE_FrostySecrets2024 — item discovered: 83181835
+### Frosty Secrets — item discovered: Backpack
 `CBE_FrostySecrets2024_Backpack_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['83181835'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_Backpack_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_Backpack_01'], items=['Backpack'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Encouraging): The first thing we need to do is get our gear together.  
   _earlier:_ ~~An old backpack! Looks like no one's touched it in years.~~ (until 25.10.01)
@@ -2415,10 +2354,9 @@ Every story in which Maddie speaks.
 **PEARL** (Doubtful): Are we hiking all the way to the North Pole?  
   _earlier:_ ~~I owe them a big thanks, because it has everything I need for a day outdoors.~~ (until 25.10.01)
 
-### CBE_FrostySecrets2024 — item discovered: 27923237
+### Frosty Secrets — item discovered: Cabin Diary
 `CBE_FrostySecrets2024_CabinCodex_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['27923237'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_CabinCodex_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_CabinCodex_03'], items=['Cabin Diary'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: We have our gear...  
   _earlier:_ ~~It's like someone's diary, with so many clippings and notes... and a MAP!~~ (until 25.10.01)
@@ -2427,19 +2365,18 @@ Every story in which Maddie speaks.
 **MADDIE** (Encouraging): And we’re ready to go!  
   _earlier:_ ~~I can feel an adventure coming on!~~ (until 25.10.01)
 
-### CBE_FrostySecrets2024 — item discovered: CBE_FrostySecrets2024_Charlie_06
+### Frosty Secrets — item discovered: Frozen Code Book
 `CBE_FrostySecrets2024_Charlie_06_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_Charlie_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_Charlie_06'], items=['Frozen Code Book'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **PEARL** (Thinking): Umm, Maddie... I just found a big pile of cash in one of the cabinets.
 **MADDIE** (Thinking): Oh, yeah - you sometimes find that kind of stuff here.
 **PEARL** (Doubtful): ...
 **MADDIE** (Hesitant): Don’t ask.
 
-### CBE_FrostySecrets2024 — item discovered: 96354045
+### Frosty Secrets — item discovered: Chimney Starter
 `CBE_FrostySecrets2024_Fireplace_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['96354045'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_Fireplace_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_Fireplace_01'], items=['Chimney Starter'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL**: Did your Grandpa Charlie build this old cabin?  
   _earlier:_ ~~This cabin is freezing!~~ (until 25.10.01)
@@ -2451,10 +2388,9 @@ Every story in which Maddie speaks.
 **PEARL** (Doubtful): Isn’t it a little bit too quiet, though?
 **MADDIE** (Relaxed): You get used to it. You’ll see - this place is pretty magical.
 
-### CBE_FrostySecrets2024 — item discovered: 16784719
+### Frosty Secrets — item discovered: Mysterious Mansion
 `CBE_FrostySecrets2024_IceSculptures_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['16784719'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_IceSculptures_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_IceSculptures_05'], items=['Mysterious Mansion'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Doubtful): What’s your ice sculpture supposed to look like?  
   _earlier:_ ~~I can see why Grandpa would've liked this place.~~ (until 25.10.01)
@@ -2463,10 +2399,9 @@ Every story in which Maddie speaks.
 **PEARL** (Encouraging): Oh, yeah! You’re missing some cobwebs and the overgrown garden, but it’s pretty close.  
   _earlier:_ ~~Sometimes I forget what a crazy adventure I'm on with the Mansion and all of its secrets...~~ (until 25.10.01)
 
-### CBE_FrostySecrets2024 — item discovered: 16784715
+### Frosty Secrets — item discovered: Broken Heart
 `CBE_FrostySecrets2024_IceSculptures_09_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['16784715'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_IceSculptures_09'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_IceSculptures_09'], items=['Broken Heart'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Thinking): Do you think it’s too late for a career pivot?  
   _earlier:_ ~~Finding this place makes me wonder about my parents...~~ (until 25.10.01)
@@ -2516,10 +2451,10 @@ Every story in which Maddie speaks.
 **MADDIE** (Encouraging): Well, I didn’t want to spoil the surprise - it’s part of the full winter experience package!  
   _earlier:_ ~~Everything was still there, in perfect order. He clearly intended to go back but never did.~~ (until 25.10.01)
 
-### CBE_FrostySecrets2024 — item discovered: 89870203
+### Frosty Secrets — item discovered: Winter Shed
 `CBE_FrostySecrets2024_Shed_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['89870203'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_WinterGear_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_Shed_01'], items=['Winter Shed'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_WinterGear_01'], items=['Single Ski'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **PEARL** (Thinking): How far is this cabin?  
   _earlier:_ ~~*Sneeze!* No one's looked in this dusty place for a LONG time!~~ (until 25.10.01)
@@ -2528,10 +2463,9 @@ Every story in which Maddie speaks.
 **PEARL** (Surprised): I think I need to get my ears checked. I thought you said a few hours by foot!  
   _earlier:_ ~~I think I'll try some of this stuff out!~~ (until 25.10.01)
 
-### CBE_FrostySecrets2024 — item discovered: 59115737
+### Frosty Secrets — item discovered: Drift of Snowflakes
 `CBE_FrostySecrets2024_Snowflakes_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['59115737'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_Snowflakes_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_Snowflakes_03'], items=['Drift of Snowflakes'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL**: I've got to admit - this place is really stunning and peaceful.  
   _earlier:_ ~~Maybe Grandpa Charlie came here to get away from all the drama at the Mansion... It must have been a crazy place - even back then.~~ (until 25.10.01)
@@ -2541,10 +2475,9 @@ Every story in which Maddie speaks.
   _earlier:_ ~~The place looks so perfect! I can almost imagine him here.~~ (until 25.10.01)
 **MADDIE** (Thinking): You’re not wrong, there!
 
-### CBE_FrostySecrets2024 — item discovered: 79736846
+### Frosty Secrets — item discovered: Complete Snowman
 `CBE_FrostySecrets2024_Snowman_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['79736846'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_Snowman_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_Snowman_07'], items=['Complete Snowman'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Encouraging): Look at your snowman! You’re a real pro!  
   _earlier:_ ~~I'm so glad I found this place! It's good to get a little bit of distance from everything.~~ (until 25.10.01)
@@ -2555,10 +2488,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): We can do ice-sculpting, but that can be pretty heavy work. I have some tools, and...
 **PEARL** (Encouraging): You had me at ice-sculpting!
 
-### CBE_FrostySecrets2024 — item discovered: 8148917
+### Frosty Secrets — item discovered: Box of Macarons
 `CBE_FrostySecrets2024_Teatime_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['8148917'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_Teatime_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_Teatime_05'], items=['Box of Macarons'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: We have cookies, tea, and warm blankets. Is this cozy enough for you?  
   _earlier:_ ~~A hiking trip is only as good as the snacks you pack...~~ (until 25.10.01)
@@ -2567,10 +2499,9 @@ Every story in which Maddie speaks.
 **PEARL** (Doubtful): But they haven’t been here since your Grandpa Charlie's time, have they?
 **MADDIE** (Relaxed): Nope! They’re fresh from Grandma’s kitchen.
 
-### CBE_FrostySecrets2024 — item discovered: 8148915
+### Frosty Secrets — item discovered: Teapot
 `CBE_FrostySecrets2024_Teatime_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['8148915'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_Teatime_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_Teatime_07'], items=['Teapot'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Thinking): We’re out of hot cocoa. What do we do now?  
   _earlier:_ ~~Hot tea is exactly what I need right now.~~ (until 25.10.01)
@@ -2581,10 +2512,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): Come on, it’ll be fun. I promise!  
   _earlier:_ ~~Not a bad place to spend a day!~~ (until 25.10.01)
 
-### CBE_FrostySecrets2024 — item discovered: 13804016
+### Frosty Secrets — item discovered: Plaid Slippers
 `CBE_FrostySecrets2024_WarmClothes_08_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['13804016'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_WarmClothes_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_WarmClothes_08'], items=['Plaid Slippers'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): If you really want to enjoy a cold winter’s day, you need to wear enough layers.  
   _earlier:_ ~~He clearly loved this place.~~ (until 25.10.01)
@@ -2593,10 +2523,9 @@ Every story in which Maddie speaks.
 **PEARL** (Encouraging): Gloves, check!  
   _earlier:_ ~~I wish I knew more about him. Finding his things makes him so much more real - not just a ghost always haunting us.~~ (until 25.10.01)
 
-### CBE_FrostySecrets2024 — item discovered: 20334818
+### Frosty Secrets — item discovered: Snowshoes
 `CBE_FrostySecrets2024_WinterGear_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['20334818'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_WinterGear_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_WinterGear_04'], items=['Snowshoes'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL**: Could we drive to the cabin?  
   _earlier:_ ~~I've always wanted to try snowshoes!~~ (until 25.10.01)
@@ -2607,10 +2536,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Hesitant): Or snowshoes?
 **PEARL** (Thinking): What are snowshoes?
 
-### CBE_FrostySecrets2024 — item discovered: 20334815
+### Frosty Secrets — item discovered: Snow Racer
 `CBE_FrostySecrets2024_WinterGear_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['20334815'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_WinterGear_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_WinterGear_07'], items=['Snow Racer'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL**: A snowmobile -- now we're talking! How fast does this thing go?  
   _earlier:_ ~~Coooool! I bet this thing goes fast.~~ (until 25.10.01)
@@ -2619,10 +2547,9 @@ Every story in which Maddie speaks.
 **PEARL** (Encouraging): Can I drive?  
   _earlier:_ ~~Buuut... maybe I'll try it out first!~~ (until 25.10.01)
 
-### CBE_FrostySecrets2024 — item discovered: 72889862
+### Frosty Secrets — item discovered: Snow Blower
 `CBE_FrostySecrets2024_WinterTools_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_FrostySecrets2024, items=['72889862'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_FrostySecrets2024, items=['CBE_FrostySecrets2024_WinterTools_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_WinterTools_06'], items=['Snow Blower'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Thinking): Uh-oh! I think we’re snowed in! I can barely open the front door.  
   _earlier:_ ~~The weather outside is looking fickle.~~ (until 25.10.01)
@@ -2632,43 +2559,43 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): Well, there is an old snow blower in the shed...
 **PEARL** (Encouraging): That sounds better!
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_CandleGhost_01
+### Haunted Halloween — item discovered: Possessed Candles
 `CBE_Halloween2025_CandleGhost_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_CandleGhost_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_CandleGhost_01'], items=['Possessed Candles'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON** (Surprised): I think we've just found something. LOOK!
 **MADDIE** (Thinking): The candles are glowing? What is going on??
 **MASON** (Thinking): Do I really need to say it again?
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_Clues_02
+### Haunted Halloween — item discovered: Roll of String
 `CBE_Halloween2025_Clues_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_Clues_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Clues_02'], items=['Roll of String'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON**: I don’t get how you can say there’s no such thing as ghosts. We’ve seen so many of them already!
 **MASON**: If anything, we’ve proved that I’m right and that the Mansion is haunted.
 **MADDIE** (Thinking): There must be more to this...  
   _earlier:_ ~~There must be more to this…~~ (until 25.10.01)
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_Clues_04
+### Haunted Halloween — item discovered: Glowing Paint
 `CBE_Halloween2025_Clues_04_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_Clues_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Clues_04'], items=['Glowing Paint'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON** (Thinking): What is this? Glow-in-the-dark paint?
 **MADDIE** (Joyous): Ha! I was right! There’s someone playing tricks on us - and it’s no ghost.
 **MADDIE** (Joyous): Let’s keep looking for more clues. I think we’re on to something here.
 
-### CBE_Halloween2025 — decoration CBE_Halloween2025_Decoration_Slot18
+### Haunted Halloween — decoration CBE_Halloween2025_Decoration_Slot18
 `CBE_Halloween2025_Decoration_Slot_18_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=CBE_Halloween2025_Decoration_Slot18, event=CBE_Halloween2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=CBE_Halloween2025_Decoration_Slot18, event=Haunted Halloween, eventKey=CBE_Halloween2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Thinking): So, what do we know for sure?
 **MASON**: The Mansion is super haunted.
 **MADDIE** (Relaxed): Well, we don’t know that for sure.
 **MASON** (Thinking): Don’t we, Maddie? DON’T WE?
 
-### CBE_Halloween2025 — decoration CBE_Halloween2025_Decoration_Slot19
+### Haunted Halloween — decoration CBE_Halloween2025_Decoration_Slot19
 `CBE_Halloween2025_Decoration_Slot_19_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=CBE_Halloween2025_Decoration_Slot19, event=CBE_Halloween2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=CBE_Halloween2025_Decoration_Slot19, event=Haunted Halloween, eventKey=CBE_Halloween2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MASON**: I think we should camp out here.
 **MADDIE**: Great idea! Then we’ll hear if there’s anything suspicious going on and check it immediately.
@@ -2679,9 +2606,9 @@ Every story in which Maddie speaks.
 **MASON** (Worried): You go!
 **MADDIE** (Worried): Let’s just stay in the tent.
 
-### CBE_Halloween2025 — decoration CBE_Halloween2025_Decoration_Slot22
+### Haunted Halloween — decoration CBE_Halloween2025_Decoration_Slot22
 `CBE_Halloween2025_Decoration_Slot_22_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=CBE_Halloween2025_Decoration_Slot22, event=CBE_Halloween2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=CBE_Halloween2025_Decoration_Slot22, event=Haunted Halloween, eventKey=CBE_Halloween2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE**: Let's say you're right and the Mansion is haunted. Who do you think is haunting it?
 **MASON** (Thinking): Take your pick! There's Ignatius with his weird machines, Lindsay with her spray cans, Grandpa Charlie who disappeared so mysteriously...  
@@ -2689,25 +2616,25 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): The place does have a LOT of history, but all of those people would be friendly spirits.
 **MADDIE** (Thinking): I’m going to show you, Mason - the Mansion is NOT haunted.
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_Decorations_02
+### Haunted Halloween — item discovered: Witch
 `CBE_Halloween2025_Decorations_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_Decorations_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Decorations_02'], items=['Witch'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Relaxed): The place is looking great, as usual!
 **MADDIE** (Relaxed): Thank you. We’ve been pretty busy with this ghost-hunting quest, but I’m happy with the decorations.
 **RODDY** (Surprised): Ghost-hunting? Is that a new party game or something?
 **MADDIE** (Encouraging): No, I mean actual ghost hunting!
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_Decorations_04
+### Haunted Halloween — item discovered: Zombie
 `CBE_Halloween2025_Decorations_04_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_Decorations_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Decorations_04'], items=['Zombie'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Worried): You and Mason are *gulp* hunting for ghosts?
 **MADDIE**: He is convinced the Mansion is totally haunted, and I want to prove to him that there is no such thing as ghosts.
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_Decorations_07
+### Haunted Halloween — item discovered: Halloween Statue
 `CBE_Halloween2025_Decorations_07_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_Decorations_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Decorations_07'], items=['Halloween Statue'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Thinking): O-oh? So you haven’t seen any ghosts so far?
 **MADDIE** (Thinking): Well...  
@@ -2723,48 +2650,48 @@ Every story in which Maddie speaks.
 **RODDY** (Charming): You’re right... I think I might still avoid the attic and the garden for now.  
   _earlier:_ ~~You’re right… I think I might still avoid the attic and the garden for now.~~ (until 25.10.01)
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_GardenBed_01
+### Haunted Halloween — item discovered: Soil
 `CBE_Halloween2025_GardenBed_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_GardenBed_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_GardenBed_01'], items=['Soil'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON** (Thinking): Let’s check the garden first. Not all ghosts like to live around dusty old dressers and corridors!
 **MADDIE** (Relaxed): Yup, some ghosts enjoy fresh air and nice flower beds.
 **MASON** (Annoyed): Very funny!
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_GardenBed_03
+### Haunted Halloween — item discovered: Big Growing Box
 `CBE_Halloween2025_GardenBed_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_GardenBed_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_GardenBed_03'], items=['Big Growing Box'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): Oh, we can check the pumpkin harvest while we’re here and pick the best ones to carve!
 **MASON** (Thinking): Concentrate, Maddie! We’re looking for ghouls, not gourds!
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_GhostHunting_02
+### Haunted Halloween — item discovered: Twisted Wire
 `CBE_Halloween2025_GhostHunting_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_GhostHunting_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_GhostHunting_02'], items=['Twisted Wire'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON** (Thinking): Is there something we could use to detect paranormal activity?
 **MADDIE** (Thinking): What, like a metal detector for ghosts?
 **MASON** (Joyous): EXACTLY!
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_GhostHunting_04
+### Haunted Halloween — item discovered: Meter
 `CBE_Halloween2025_GhostHunting_04_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_GhostHunting_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_GhostHunting_04'], items=['Meter'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON** (Thinking): This contraption looks convincing, but will it detect and trap ghosts?
 **MADDIE** (Relaxed): Well, it can detect metal, but I’m not so sure about trapping ghosts.
 **MADDIE** (Doubtful): After all, they are not REAL.
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_GhostHunting_06
+### Haunted Halloween — item discovered: Coil
 `CBE_Halloween2025_GhostHunting_06_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_GhostHunting_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_GhostHunting_06'], items=['Coil'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: I think we are ready to catch these ghosts, Mason.
 **MASON**: You’ve got everything we need?
 **MADDIE** (Relaxed): Yes. It’s go-time!
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_Ghost_01
+### Haunted Halloween — item discovered: Halloween Ghost
 `CBE_Halloween2025_Ghost_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_Ghost_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Ghost_01'], items=['Halloween Ghost'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON** (Surprised): Whoooah! Maddie, are you see what I’m seeing?
 **MADDIE** (Surprised): It’s a-- a GHOST!
@@ -2794,25 +2721,25 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): Deal! But don't be too disappointed when I prove you wrong!
 **MASON** (Encouraging): Right back at you.
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_KnifeGhost_01
+### Haunted Halloween — item discovered: Haunted Knife
 `CBE_Halloween2025_KnifeGhost_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_KnifeGhost_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_KnifeGhost_01'], items=['Haunted Knife'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON** (Surprised): Maddie! Is that knife glowing?
 **MADDIE** (Surprised): Y-yes, but-- What is going on here??
 **MASON** (Joyous): Ghosts, Maddie! GHOSTS!
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_Maddie_02
+### Haunted Halloween — item discovered: Spirit Camera
 `CBE_Halloween2025_Maddie_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_Maddie_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Maddie_02'], items=['Spirit Camera'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Thinking): Mason’s being so silly. He’s seen way too many horror movies for his own good!
 **MADDIE** (Thinking): I can see why he would think that there are ghosts at the Mansion, but he’s wrong.
 **MADDIE** (Relaxed): He’ll see!
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_Maddie_04
+### Haunted Halloween — item discovered: Skiing Pants
 `CBE_Halloween2025_Maddie_04_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_Maddie_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Maddie_04'], items=['Skiing Pants'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Thinking): Do I need all this stuff? Am I overprepared?
 **MADDIE** (Thinking): Nah, it’s best to be ready for anything. This quest might get messy!
@@ -2828,9 +2755,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): Just wait until next Halloween, Mason. I won't give up!
 **MASON**: Neither will I, Maddie. Neither will I.
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_PumpkinGhost_01
+### Haunted Halloween — item discovered: Glowing Pumpkin
 `CBE_Halloween2025_PumpkinGhost_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_PumpkinGhost_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_PumpkinGhost_01'], items=['Glowing Pumpkin'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): These jack o’lanterns are looking great.
 **MASON**: Awesome! Let’s go set up the ghost trap in the attic next.
@@ -2838,16 +2765,16 @@ Every story in which Maddie speaks.
   _earlier:_ ~~Hang on… Wh-what is THAT??~~ (until 25.10.01)
 **MASON** (Surprised): A ghost pumpkin! This is it - the hunt is on!
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_Pumpkin_02
+### Haunted Halloween — item discovered: Big Pumpkin
 `CBE_Halloween2025_Pumpkin_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_Pumpkin_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Pumpkin_02'], items=['Big Pumpkin'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): I’ve got to hand it to you - you really are good at carving pumpkins!
 **MASON** (Thinking): Don’t sound so surprised!
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_Pumpkin_04
+### Haunted Halloween — item discovered: Carved Pumpkin
 `CBE_Halloween2025_Pumpkin_04_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_Pumpkin_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Pumpkin_04'], items=['Carved Pumpkin'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Thinking): This is getting kinda eerie... I know I said ghosts aren't real, but there is definitely something going on!  
   _earlier:_ ~~This is getting kinda eerie… I know I said ghosts aren't real, but there is definitely something going on!~~ (until 25.10.01)
@@ -2858,25 +2785,25 @@ Every story in which Maddie speaks.
   _earlier:_ ~~Like… the moonlight hit that pumpkin in a weird way, or maybe Grandma used some special growing agent.~~ (until 25.10.01)
 **MASON** (Thinking): To make it glow in the dark like a menacing veggie monster?
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_ScaryMovies_02
+### Haunted Halloween — item discovered: Haunted Coffin
 `CBE_Halloween2025_ScaryMovies_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_ScaryMovies_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_ScaryMovies_02'], items=['Haunted Coffin'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Thinking): We still have a lot to do to get the backyard movie theater ready.
 **MADDIE**: Do you want to pick the movies?
 **MASON** (Encouraging): Can I? I'll pick all the scariest ones!
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_ScaryMovies_04
+### Haunted Halloween — item discovered: Webbed Monster Hand
 `CBE_Halloween2025_ScaryMovies_04_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_ScaryMovies_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_ScaryMovies_04'], items=['Webbed Monster Hand'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON** (Encouraging): I picked the movies. They have just the right amount of scares and goo.
 **MADDIE** (Thinking): Goo?
 **MASON**: Yeah, a good Halloween movie should have some weird green goo!
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_TapeGhost_01
+### Haunted Halloween — item discovered: Jinxed Halloween Tape
 `CBE_Halloween2025_TapeGhost_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_TapeGhost_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_TapeGhost_01'], items=['Jinxed Halloween Tape'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Surprised): I think your movies have too much goo! Look!!
 **MASON** (Surprised): A haunted movie tape! The ghosts must know what we’re up to.
@@ -2884,17 +2811,17 @@ Every story in which Maddie speaks.
 **MADDIE** (Doubtful): Hmm... There’s something fishy about this!  
   _earlier:_ ~~Hmm… There’s something fishy about this!~~ (until 25.10.01)
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_Theater_03
+### Haunted Halloween — item discovered: Armchair
 `CBE_Halloween2025_Theater_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_Theater_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Theater_03'], items=['Armchair'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON**: There’s nothing better than a Halloween movie marathon with lots of treats!
 **MADDIE** (Charming): That’s true! It’s a shame Roddy got spooked.
 **MASON** (Relaxed): The man just can’t handle Halloween!
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_Theater_05
+### Haunted Halloween — item discovered: Speakers
 `CBE_Halloween2025_Theater_05_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_Theater_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Theater_05'], items=['Speakers'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON**: Thanks for doing all this, Maddie. You're a real pal!
 **MADDIE**: You know I’m always up for a fun project. And Halloween has always been celebrated in a big way at the Mansion.
@@ -2902,27 +2829,27 @@ Every story in which Maddie speaks.
 **MASON** (Thinking): He sounds cool.
 **MADDIE** (Thinking): I think he really was!
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_Theater_07
+### Haunted Halloween — item discovered: VIP Seats
 `CBE_Halloween2025_Theater_07_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_Theater_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Theater_07'], items=['VIP Seats'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON** (Thinking): What kind of pranks did your Grandpa Charlie use to pull?
 **MADDIE**: Julius told me that he always planned them perfectly, and everyone always fell for them.
 **MADDIE** (Relaxed): Once, he dressed up as a mummy and scared the lights out of Deb.
 **MASON** (Joyous): Classic! I wish I could’ve seen it!
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_Tools_03
+### Haunted Halloween — item discovered: Pumpkin Scoop
 `CBE_Halloween2025_Tools_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_Tools_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Tools_03'], items=['Pumpkin Scoop'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: Are you ready to carve some pumpkins? Remember, you promised to help me.
 **MADDIE** (Encouraging): And we can make them extra scary!
 **MASON** (Relaxed): If you want scary, you’re asking the right person.
 **MASON**: Hand me that tool and I’ll show you how it’s done!
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_UnlitCandle_01
+### Haunted Halloween — item discovered: Single Candle
 `CBE_Halloween2025_UnlitCandle_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_UnlitCandle_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_UnlitCandle_01'], items=['Single Candle'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON** (Thinking): The dusty old attic is haunted for sure!
 **MASON** (Thinking): If we’re gonna find ghosts anywhere in this Mansion, it’s there.
@@ -2931,33 +2858,33 @@ Every story in which Maddie speaks.
 **MASON** (Worried): A ghost pirate??
 **MASON** (Joyous): What are we waiting for?
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_UnlitCandle_03
+### Haunted Halloween — item discovered: Double Candle
 `CBE_Halloween2025_UnlitCandle_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_UnlitCandle_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_UnlitCandle_03'], items=['Double Candle'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): See? There’s nothing here. Just old clothes and... old Halloween decorations! Let’s round them up so we can get started on the decorating.  
   _earlier:_ ~~See? There’s nothing here. Just old clothes and… old Halloween decorations! Let’s round them up so we can get started on the decorating.~~ (until 25.10.01)
 **MADDIE** (Annoyed): Rats! The batteries in the flashlight are dead. Let’s find some candles.
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_Unmasking_01
+### Haunted Halloween — item discovered: Footprints
 `CBE_Halloween2025_Unmasking_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_Unmasking_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Unmasking_01'], items=['Footprints'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON** (Surprised): Maddie, I can see some footprints!
 **MADDIE** (Doubtful): You’re right! Hurry - don’t let him get away!
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_Unmasking_03
+### Haunted Halloween — item discovered: Dropped Note
 `CBE_Halloween2025_Unmasking_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_Unmasking_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Unmasking_03'], items=['Dropped Note'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Thinking): What’s this? A sheet?
 **MASON** (Thinking): Looks like... a ghost costume!  
   _earlier:_ ~~Looks like… a ghost costume!~~ (until 25.10.01)
 **MADDIE** (Doubtful): Ha! We are close!
 
-### CBE_Halloween2025 — item discovered: CBE_Halloween2025_Unmasking_05
+### Haunted Halloween — item discovered: Notebook
 `CBE_Halloween2025_Unmasking_05_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_Halloween2025, items=['CBE_Halloween2025_Unmasking_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Unmasking_05'], items=['Notebook'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Thinking): A book full of notes? Who left this here?
 **MASON** (Thinking): Whoever it was, he is bound to come back for it.
@@ -2972,10 +2899,10 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): You sure did!
 **ANTIQUEDEALER** (Charming): Charlie's old pranks never fail!
 
-### CBE_HolidayWorkshop2024 — item discovered: 50994496
+### Bella's Holiday Workshop — item discovered: "The Unicorn"
 `CBE_HolidayWorkshop2024_Art_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['50994496'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_Cookies_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_Art_07'], items=['"The Unicorn"'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_Cookies_04'], items=['Stack of Polvorones'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **BELLA**: Maddie, could I ask for a favor?  
   _earlier:_ ~~These pictures were painted by you?~~ (until 25.10.01)
@@ -2994,10 +2921,10 @@ Every story in which Maddie speaks.
 **MADDIE** (Worried): You could say that...
 **BELLA** (Ready): Hmm... These boxes look kinda familiar!
 
-### CBE_HolidayWorkshop2024 — item discovered: 16461437
+### Bella's Holiday Workshop — item discovered: Grandma
 `CBE_HolidayWorkshop2024_CharacterGrandma_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['16461437'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_CharacterGrandma_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterGrandma_02'], items=['Grandma'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterGrandma_01'], items=['Grandma'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA**: I dread to ask why the postman keeps delivering boxes to the Mansion.  
   _earlier:_ ~~Season's greetings, Ursula! I have a little holiday surprise for you.~~ (until 25.10.01)
@@ -3006,10 +2933,10 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): Call it a little holiday surprise!  
   _earlier:_ ~~Oh...~~ (until 25.10.01)
 
-### CBE_HolidayWorkshop2024 — item discovered: 3114758
+### Bella's Holiday Workshop — item discovered: Maddie
 `CBE_HolidayWorkshop2024_CharacterMaddie_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['3114758'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_CharacterMaddie_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterMaddie_02'], items=['Maddie'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterMaddie_07'], items=['Maddie'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **EMILIO** (Encouraging): Thank you for helping us with this crazy project, Maddie.  
   _earlier:_ ~~Hi, Maddie! I like your sweater. It's... cute!~~ (until 25.10.01)
@@ -3018,10 +2945,9 @@ Every story in which Maddie speaks.
 **EMILIO** (Relaxed): Or teapots!  
   _earlier:_ ~~Umm... *sigh*~~ (until 25.10.01)
 
-### CBE_HolidayWorkshop2024 — item discovered: 94872812
+### Bella's Holiday Workshop — item discovered: Tray of Polvorones
 `CBE_HolidayWorkshop2024_Cookies_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['94872812'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_Cookies_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_Cookies_06'], items=['Tray of Polvorones'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **BELLA** (Doubtful): Did YOU buy all of my crafts, Emilio??  
   _earlier:_ ~~The perfect polvorones!~~ (until 25.10.01)
@@ -3036,10 +2962,10 @@ Every story in which Maddie speaks.
 **BELLA** (Thinking): So... my online store actually was...
 **BELLA** (Relaxed): A huge success!
 
-### CBE_HolidayWorkshop2024 — item discovered: 60658245
+### Bella's Holiday Workshop — item discovered: Photo Album
 `CBE_HolidayWorkshop2024_SocialMedia_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['60658245'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_CharacterMaddie_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_SocialMedia_05'], items=['Photo Album'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_CharacterMaddie_02'], items=['Maddie'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): Bella, are the rumors true? Have you set up an online store for your crafts?  
   _earlier:_ ~~I have to share all these cool new things with my followers on social media...~~ (until 25.10.01)
@@ -3052,10 +2978,10 @@ Every story in which Maddie speaks.
 **MADDIE** (Hesitant): How generous!  
   _earlier:_ ~~But remember to get my good side. And frame it right! Is the light good?~~ (until 25.10.01)
 
-### CBE_HolidayWorkshop2024 — item discovered: 98731852
+### Bella's Holiday Workshop — item discovered: Biggest Present
 `CBE_HolidayWorkshop2024_XmasPresents_08_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['98731852'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_HolidayWorkshop2024, items=['CBE_HolidayWorkshop2024_XmasPresent_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_XmasPresent_08'], items=['Biggest Present'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_XmasPresent_05'], items=['Classic Package'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **BELLA** (Relaxed): Look at all of these glowing reviews I’ve received!  
   _earlier:_ ~~Phew! Everything is finally ready.~~ (until 25.10.01)
@@ -3065,9 +2991,9 @@ Every story in which Maddie speaks.
   _earlier:_ ~~I had no idea I was so good at crafts!~~ (until 25.10.01)
 **MADDIE** (Relaxed): Sounds... promising!
 
-### CBE_JoysOfTheSea2023 — decoration CBE_JoysOfTheSea2023_Decoration_Slot01
+### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot01
 `CBE_JoysOfTheSea2023_Decoration_Slot01_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot01, event=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot01, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE**: I’ve always wanted to put a water feature here!
 **EMILIO** (Thinking): It is quite beautiful, Maddie. Although I don’t think it’ll be suitable for fish...
@@ -3079,9 +3005,9 @@ Every story in which Maddie speaks.
 **RODDY** (Doubtful): Oh... Uuh, hi. I’m Roddy Took. Architect.
 **EMILIO** (Doubtful): An honor to meet you Roddy! Please! Let me show you around!
 
-### CBE_JoysOfTheSea2023 — decoration CBE_JoysOfTheSea2023_Decoration_Slot02
+### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot02
 `CBE_JoysOfTheSea2023_Decoration_Slot02_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot02, event=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot02, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **EMILIO** (Surprised): That’s- That’s my boat!
 **MADDIE** (Worried): Oh, it is?! I’m sorry, I saw out by the dock and thought I’d use it to spruce up your exhibition!
@@ -3090,9 +3016,9 @@ Every story in which Maddie speaks.
 **EMILIO** (Encouraging): I may have to keep the flowers when I take it back!
 **MADDIE** (Charming): Deal!
 
-### CBE_JoysOfTheSea2023 — decoration CBE_JoysOfTheSea2023_Decoration_Slot04
+### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot04
 `CBE_JoysOfTheSea2023_Decoration_Slot04_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot04, event=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot04, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **EMILIO** (Doubtful): ...
 **MADDIE**: Emilio? You look worried.
@@ -3103,9 +3029,9 @@ Every story in which Maddie speaks.
 **EMILIO** (Surprised): Exactly! One of the very reasons I decided to come here and study it!
 **GRANDMA** (Frustrated): Hmmmm...
 
-### CBE_JoysOfTheSea2023 — decoration CBE_JoysOfTheSea2023_Decoration_Slot06
+### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot06
 `CBE_JoysOfTheSea2023_Decoration_Slot06_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot06, event=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot06, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE**: Hi, Roddy!  
   _earlier:_ ~~Hi Roddy!~~ (until 23.12.01)
@@ -3113,18 +3039,18 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): Buster? Who’s he?
 **RODDY** (Relaxed): My singing fish! I got it as a gift a long time ago. He’s seen better days, sure, but I’m sure you can appreciate his uniqueness!
 
-### CBE_JoysOfTheSea2023 — decoration CBE_JoysOfTheSea2023_Decoration_Slot07
+### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot07
 `CBE_JoysOfTheSea2023_Decoration_Slot07_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot07, event=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot07, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **EMILIO** (Surprised): This is pretty incredible, Maddie! How did you find such a large aquarium?!
 **MADDIE** (Encouraging): Oh... I know a guy who knows a guy!
 **EMILIO** (Doubtful): How did you get all the fish?
 **MADDIE** (Relaxed): I know a cat too.
 
-### CBE_JoysOfTheSea2023 — decoration CBE_JoysOfTheSea2023_Decoration_Slot08
+### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot08
 `CBE_JoysOfTheSea2023_Decoration_Slot08_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot08, event=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot08, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **DEB** (Relaxed): So what made you decide to become a marine biologist, handsome?
 **EMILIO** (Doubtful): Uhm... You can call me Emilio. <b>Please</b>...
@@ -3134,9 +3060,9 @@ Every story in which Maddie speaks.
 **DEB** (Charming): Deb. But <b>you</b> can call me... Anytime.
 **MADDIE** (Encouraging): Interesting woman, isn’t she?
 
-### CBE_JoysOfTheSea2023 — decoration CBE_JoysOfTheSea2023_Decoration_Slot09
+### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot09
 `CBE_JoysOfTheSea2023_Decoration_Slot09_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot09, event=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot09, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **GRANDMA** (Discouraged): I’m sorry, dearie. I thought it was junk, so I threw it in the trash!
 **EMILIO** (Encouraging): <i>*sigh*</i> I guess it was junk, Mrs. Boulton. We sort of got carried away with the mystery of it all...
@@ -3144,9 +3070,9 @@ Every story in which Maddie speaks.
 **EMILIO**: Yes... I guess we’ll never know if it contained a map to a treasure of untold riches, Roddy...
 **RODDY**: I guess so, bud...
 
-### CBE_JoysOfTheSea2023 — decoration CBE_JoysOfTheSea2023_Decoration_Slot10
+### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot10
 `CBE_JoysOfTheSea2023_Decoration_Slot10_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot10, event=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot10, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **RODDY** (Thinking): Maybe we can use a bobby pin to open it up?
 **EMILIO** (Thinking): I don’t have any of those, but I have a few old fishing lures?
@@ -3155,9 +3081,9 @@ Every story in which Maddie speaks.
 **RODDY** (Charming): I offered to help, since I used to pick locks as a kid... As a hobby!
 **MADDIE** (Thinking): Oh really? Hmm, I should remember that...
 
-### CBE_JoysOfTheSea2023 — decoration CBE_JoysOfTheSea2023_Decoration_Slot14
+### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot14
 `CBE_JoysOfTheSea2023_Decoration_Slot14_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot14, event=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot14, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE**: Did you catch that swordfish?
 **EMILIO** (Surprised): Me? Oh no. It isn’t even real!
@@ -3166,19 +3092,18 @@ Every story in which Maddie speaks.
 **EMILIO** (Encouraging): Well... Not with a rod anyway... I like to use my bare hands.
 **EMILIO** (Encouraging): He sings too, you know!
 
-### CBE_JoysOfTheSea2023 — decoration CBE_JoysOfTheSea2023_Decoration_Slot15
+### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot15
 `CBE_JoysOfTheSea2023_Decoration_Slot15_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot15, event=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot15, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE** (Relaxed): I don’t care what people say... Yellow works on everybody!
 **GRANDMA** (Joyous): Looks like we should start calling him captain now.
 **MADDIE** (Encouraging): Ha ha ha! Captain Boulton...
 **GRANDMA** (Charming): Wouldn’t be the first time, dearie!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300788
+### The Joys of the Sea — item discovered: Orca
 `CBE_JoysOfTheSea2023_Fish10_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300788'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_Fish_10'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_Fish_10'], items=['Orca'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: Orcas are not only smart, but they’re at the top of the food chain, making them apex predators!
 **EMILIO**: They live in tight-knit family groups called pods, led by their matriarch, and show highly intricate and sophisticated social structures.
@@ -3186,10 +3111,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Joyous): And mine are horses! And dogs. AND CATS! and...
 **EMILIO** (Encouraging): Ha ha! I see you like lots of animals! 
 
-### CBE_JoysOfTheSea2023 — item discovered: 300789
+### The Joys of the Sea — item discovered: Humpback Whale
 `CBE_JoysOfTheSea2023_Fish11_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300789'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_Fish_11'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_Fish_11'], items=['Humpback Whale'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: And here we are! The majestic Humpback whales are some of the largest animals in the world!
 **MADDIE** (Encouraging): They're huge!
@@ -3197,19 +3121,17 @@ Every story in which Maddie speaks.
 **GRANDMA** (Charming): Wait until you hear Maddie sing! That'll change your mind!
 **MADDIE** (Surprised): Grandma!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300779
+### The Joys of the Sea — item discovered: Pupfish
 `CBE_JoysOfTheSea2023_Fish1_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300779'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_Fish_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_Fish_01'], items=['Pupfish'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: Pupfish are incredible survivors!
 **EMILIO**: They’ve even learned to adapt to desert conditions where they live in springs or pools that exceed temperatures of 90°F!
 **MADDIE** (Relaxed): It's so teeny tiny!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300781
+### The Joys of the Sea — item discovered: Catfish
 `CBE_JoysOfTheSea2023_Fish3_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300781'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_Fish_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_Fish_03'], items=['Catfish'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: Catfish are amazing hunters that can detect electric fields! But did you know they make amazing parents as well?
 **EMILIO**: In some species, male catfish take on the responsibility of fanning the eggs to keep them oxygenated and free of germs!
@@ -3217,10 +3139,9 @@ Every story in which Maddie speaks.
 **EMILIO** (Encouraging): Oh... I'm sorry to hear that Maddie!
 **MADDIE**: It's alright, I have a Grandma Catfish to take care of me instead!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300785
+### The Joys of the Sea — item discovered: Swordfish
 `CBE_JoysOfTheSea2023_Fish7_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300785'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_Fish_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_Fish_07'], items=['Swordfish'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: Swordfish are incredibly fast and considered one of the fastest fish in the sea!
 **EMILIO**: Some can go up to 60 miles per hour!
@@ -3257,10 +3178,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Joyous): Wonderful?!!
 **EMILIO** (Encouraging): Ha ha! Yes. Exactly!
 
-### CBE_LuckyCatch — item discovered: 97054162
+### Lucky Catch — item discovered: Hopewell Pollock
 `CBE_LuckyCatchWinter2023_CommonPollock_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['97054162'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch2023_CommonPollock_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch2023_CommonPollock_01'], items=['Hopewell Pollock'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): You caught a Hopewell Pollock!
 **MADDIE** (Joyous): And a big one, too!
@@ -3268,8 +3188,7 @@ Every story in which Maddie speaks.
 
 ### Lucky Catch Winter — entering board
 `CBE_LuckyCatchWinter2023_Intro_Dialogue` · seen 24.04.01–26.07.01
-- trigger: event, event=Lucky Catch Winter, eventId=CBE_LuckyCatchWinter2023, eventType=Collectible Board Event, moment=entering board (versions 24.04.01–24.07.01)
-- trigger: event, event=CBE_LuckyCatchWinter2023, eventId=CBE_LuckyCatchWinter2023, eventType=Collectible Board Event, moment=entering board (versions 24.09.02–24.09.03)
+- trigger: event, event=Lucky Catch Winter, eventId=CBE_LuckyCatchWinter2023, eventType=Collectible Board Event, moment=entering board (versions 24.04.01–24.09.03)
 - trigger: event, event=Lucky Catch Winter, eventId=LC_Winter, eventType=Collectible Board Event, moment=entering board (versions 24.11.02–26.05.01)
 - trigger: event, event=Winter Lucky Catch, eventId=LC_Winter, eventType=Collectible Board Event, moment=entering board (versions 26.06.01–26.07.01)
 
@@ -3280,10 +3199,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): I think it was definitely me... I have the photos to prove it!
 **GRANDMA** (Thinking): Hmmm, so it is time for a little re-match!
 
-### CBE_LuckyCatch — item discovered: 61737094
+### Lucky Catch — item discovered: Swordfish
 `CBE_LuckyCatchWinter2023_UltimateSwordfish_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['61737094'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch2023_UltimateSwordfish_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch2023_UltimateSwordfish_01'], items=['Swordfish'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Whooooah, a swordfish! Can you handle it?
 **GRANDMA** (Surprised): Phew! There is still some strength left in this old lady but... nnggh... maybe a bit of help would not hurt!
@@ -3292,60 +3210,55 @@ Every story in which Maddie speaks.
   _earlier:_ ~~It would make so many tasty pies…~~ (until 25.10.01)
 **MADDIE** (Relaxed): It's time to release it, Grandma!
 
-### CBE_LuckyCatch — item discovered: 82311027
+### Lucky Catch — item discovered: Greater Amberjack
 `CBE_LuckyCatchWinter2023_VeryRareGreaterAmberjack_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['82311027'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch2023_VeryRareGreatAmberjack_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch2023_VeryRareGreatAmberjack_01'], items=['Greater Amberjack'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: I think I caught a Greater Amberjack!
 **GRANDMA**: Did you know that it has also been called a 'donkey fish' and 'sailors choice'?
 **MADDIE** (Thinking): I bet it has a fascinating history.
 **GRANDMA** (Charming): And it props up my position in our little competition nicely!
 
-### CBE_LuckyCatch — item discovered: 300890
+### Lucky Catch — item discovered: Blue Marlin
 `CBE_LuckyCatch_BlueMarlin` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300890'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_UltimateBlueMarlin_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_UltimateBlueMarlin_01'], items=['Blue Marlin'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Charming): What a struggle! She gave me quite a fight!
 **GRANDMA** (Thinking): She? 
 **MADDIE** (Encouraging): Female Blue Marlins are sometimes four times larger than males! 
 **MADDIE** (Relaxed): And this one is HUGE!
 
-### CBE_LuckyCatch — item discovered: 300848
+### Lucky Catch — item discovered: 300848
 `CBE_LuckyCatch_BootsLv1` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300848'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['28381275'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Autumn_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Winter_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Spring_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['300848'], items=['300848'], moment=item discovered (versions 23.09.02–25.06.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['28381275'], items=['28381275'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_FishingClothes_01'], items=['CBE_LuckyCatch_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer_FishingClothes_01'], items=['LC_Summer_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Autumn_FishingClothes_01'], items=['LC_Autumn_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Winter_FishingClothes_01'], items=['LC_Winter_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_FishingClothes_01'], items=['LC_Halloween_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Spring_FishingClothes_01'], items=['LC_Spring_FishingClothes_01'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: What's this?
 **GRANDMA** (Joyous): It's Julius' other boot! He's been looking for that for ages! Don't throw it away!
 **MADDIE** (Surprised): Are we seriously going to keep it?!! This thing belongs in the trash!
 
-### CBE_LuckyCatch — item discovered: 300885
+### Lucky Catch — item discovered: Dorado
 `CBE_LuckyCatch_Dorado` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300885'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_UncommonDorado_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_UncommonDorado_01'], items=['Dorado'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Well done, Grandma! 
 **GRANDMA** (Surprised): I... I wasn't actually expecting to catch anything!
 **GRANDMA** (Surprised): That fish is almost as big as you!
 
-### CBE_LuckyCatch — item discovered: 58894029
+### Lucky Catch — item discovered: The ultimate Fishing Rod
 `CBE_LuckyCatch_EpicGoldenRod` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['58894029'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['14422124'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_GoldenFishingRodEpic_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer_GoldenFishingRodEpic_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Autumn_GoldenFishingRodEpic_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Winter_GoldenFishingRodEpic_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_GoldenFishingRodEpic_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Spring_GoldenFishingRodEpic_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_GoldenFishingRodEpic_01'], items=['The ultimate Fishing Rod'], moment=item discovered (versions 23.09.02–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer_GoldenFishingRodEpic_01'], items=['The ultimate Fishing Rod'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Autumn_GoldenFishingRodEpic_01'], items=['The ultimate Fishing Rod'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Winter_GoldenFishingRodEpic_01'], items=['The ultimate Fishing Rod'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_GoldenFishingRodEpic_01'], items=['The ultimate Fishing Rod'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Spring_GoldenFishingRodEpic_01'], items=['The ultimate Fishing Rod'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: There's no hiding from me now, big fish. This rod has your name on it!
 **GRANDMA**: I remember hearing a story once about a fisher catching something very large and rare with a rod like that...
@@ -3358,10 +3271,9 @@ Every story in which Maddie speaks.
 **GRANDMA** (Surprised): OH! Well, it looks like a piece of old junk. You should throw it in the trash when we get back.
 **MADDIE** (Thinking): Does that look like C.B. to you?
 
-### CBE_LuckyCatch_Name — entering board
+### Lucky Catch — entering board
 `CBE_LuckyCatch_Intro` · seen 24.04.01–26.07.01
-- trigger: event, event=CBE_LuckyCatch_Name, eventId=CBE_LuckyCatch, eventType=Collectible Board Event, moment=entering board (versions 24.04.01–24.05.06)
-- trigger: event, event=Lucky Catch, eventId=CBE_LuckyCatch, eventType=Collectible Board Event, moment=entering board (versions 24.07.01–26.07.01)
+- trigger: event, event=Lucky Catch, eventId=CBE_LuckyCatch, eventType=Collectible Board Event, moment=entering board (versions 24.04.01–26.07.01)
 
 **MADDIE**: Nothing like going out for a relaxing fishing trip, right Grandma?
 **GRANDMA** (Encouraging): That's right dearie. I can't wait to make my scrumptious fish pie!
@@ -3370,46 +3282,42 @@ Every story in which Maddie speaks.
 **MADDIE** (Encouraging): This time you'll be taking a photo, and then we can frame it. Who knows what we'll catch?!
 **GRANDMA** (Charming): That's true, dearie. The ocean is awfully deep. You never know what secrets you might dredge up...
 
-### CBE_LuckyCatch — item discovered: 300843
+### Lucky Catch — item discovered: Rod, Hook and Line
 `CBE_LuckyCatch_MaxCommonWoodenFishingRod` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300843'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['15570960'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_FishingRodCommon_05'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer_FishingRodCommon_05'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Autumn_FishingRodCommon_05'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Winter_FishingRodCommon_05'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_FishingRodCommon_05'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Spring_FishingRodCommon_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_FishingRodCommon_05'], items=['Rod, Hook and Line'], moment=item discovered (versions 23.09.02–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer_FishingRodCommon_05'], items=['Rod, Hook and Line'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Autumn_FishingRodCommon_05'], items=['Rod, Hook and Line'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Winter_FishingRodCommon_05'], items=['Rod, Hook and Line'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_FishingRodCommon_05'], items=['Rod, Hook and Line'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Spring_FishingRodCommon_05'], items=['Rod, Hook and Line'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): Alright, let's go fishing!
 **GRANDMA** (Relaxed): I'm sure we'll catch something with these... 
 **MADDIE** (Thinking): Hmm, maybe you're right. We should find some better rods!
 
-### CBE_LuckyCatch — item discovered: 300851
+### Lucky Catch — item discovered: 300851
 `CBE_LuckyCatch_MaxFishingClothesAndGoldenRod` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300851'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['28381272'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Autumn_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Winter_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Spring_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['300851'], items=['300851'], moment=item discovered (versions 23.09.02–25.06.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['28381272'], items=['28381272'], moment=item discovered (versions 25.05.01–25.06.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_FishingClothes_04'], items=['CBE_LuckyCatch_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer_FishingClothes_04'], items=['LC_Summer_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Autumn_FishingClothes_04'], items=['LC_Autumn_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Winter_FishingClothes_04'], items=['LC_Winter_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_FishingClothes_04'], items=['LC_Halloween_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Spring_FishingClothes_04'], items=['LC_Spring_FishingClothes_04'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Charming): Now nothing can stop us from catching the most epic of fish!
 **GRANDMA** (Surprised): Good grief, dearie! You look like someone out of a fishing magazine.
 **MADDIE** (Joyous): That's right! The title would read, "Maddie Boulton: EPIC Fisher!"
 
-### CBE_LuckyCatch — item discovered: 300838
+### Lucky Catch — item discovered: Large Tackle Box
 `CBE_LuckyCatch_MaxFishingToolBox` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300838'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['87672056'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_FishingToolContainers_10'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer_FishingToolContainers_10'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Autumn_FishingToolContainers_10'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Winter_FishingToolContainers_10'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_FishingToolContainers_10'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Spring_FishingToolContainers_10'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_FishingToolContainers_10'], items=['Large Tackle Box'], moment=item discovered (versions 23.09.02–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer_FishingToolContainers_10'], items=['Large Tackle Box'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Autumn_FishingToolContainers_10'], items=['Large Tackle Box'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Winter_FishingToolContainers_10'], items=['Large Tackle Box'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_FishingToolContainers_10'], items=['Large Tackle Box'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Spring_FishingToolContainers_10'], items=['Large Tackle Box'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Joyous): Everything is ready to catch us some big fish!
 **GRANDMA** (Joyous): Hahaha! You sound like your Grandpa Charlie. 
@@ -3432,42 +3340,37 @@ Every story in which Maddie speaks.
 **GRANDMA** (Doubtful): I doubt there's anything of worth in there...
 **MADDIE**: Don't be like that! Maybe this has something important inside!
 
-### CBE_LuckyCatch — item discovered: 20117147
+### Lucky Catch — item discovered: Professional Fishing Rod
 `CBE_LuckyCatch_RareCompetitionRod` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['20117147'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['33712582'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_CompetitionFishingRodRare_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer_CompetitionFishingRodRare_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Autumn_CompetitionFishingRodRare_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Winter_CompetitionFishingRodRare_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_CompetitionFishingRodRare_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Spring_CompetitionFishingRodRare_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_CompetitionFishingRodRare_01'], items=['Professional Fishing Rod'], moment=item discovered (versions 23.09.02–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer_CompetitionFishingRodRare_01'], items=['Professional Fishing Rod'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Autumn_CompetitionFishingRodRare_01'], items=['Professional Fishing Rod'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Winter_CompetitionFishingRodRare_01'], items=['Professional Fishing Rod'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_CompetitionFishingRodRare_01'], items=['Professional Fishing Rod'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Spring_CompetitionFishingRodRare_01'], items=['Professional Fishing Rod'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): This'll up our fishing game!
 **GRANDMA** (Thinking): That's a fancy-looking rod you have there. Looks complicated too.
 **MADDIE** (Joyous): The manual was over forty-eight pages long! I loved it!
 
-### CBE_LuckyCatch — item discovered: 300884
+### Lucky Catch — item discovered: Snapper
 `CBE_LuckyCatch_RedSnapper` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300884'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_CommonSnapper_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_CommonSnapper_01'], items=['Snapper'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Joyous): Oooh, a Red Snapper! 
 **GRANDMA** (Encouraging): A very tasty fish! Can't we just keep this one at least? 
 **MADDIE** (Charming): Grab that camera, Grandma. Remember, this is catch and release!
 
-### CBE_LuckyCatch — item discovered: 300886
+### Lucky Catch — item discovered: Roosterfish
 `CBE_LuckyCatch_Roosterfish` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300886'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_RareRoosterfish_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_RareRoosterfish_01'], items=['Roosterfish'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Wowee, those spines look sharp!
 **GRANDMA** (Charming): Quick Maddie, let me take this photo before you pierce yourself!
 
-### CBE_LuckyCatch — item discovered: 300888
+### Lucky Catch — item discovered: Tarpon
 `CBE_LuckyCatch_Tarpon` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300888'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_EpicTarpon_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_EpicTarpon_01'], items=['Tarpon'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Joyous): Look at this fish, Grandma! Isn't it great?!
 **GRANDMA** (Charming): It's magnificent! I guess your fancy gear really helped!
@@ -3480,37 +3383,33 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): Hmm, there's some writing on them, but they're falling apart, fast!
 **GRANDMA** (Charming): Old wet paper tends to do that, dearie!
 
-### CBE_LuckyCatch — item discovered: 300917
+### Lucky Catch — item discovered: Silver Fishing Trophy
 `CBE_LuckyCatch_TrophyLv6` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300917'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_FishingTrophies_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_FishingTrophies_06'], items=['Silver Fishing Trophy'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **GRANDMA** (Encouraging): You must be doing something right to win that!
 **MADDIE** (Encouraging): Thank you, Grandma, but I think this one should go to you!
 **GRANDMA**: How come, dearie?
 **MADDIE** (Charming): It's for the best photograph!
 
-### CBE_LuckyCatch — item discovered: 300918
+### Lucky Catch — item discovered: Gold Fishing Trophy
 `CBE_LuckyCatch_TrophyLv7` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300918'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_FishingTrophies_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_FishingTrophies_07'], items=['Gold Fishing Trophy'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **GRANDMA**: That's impressive. What's it for?
 **MADDIE** (Relaxed): Most prolific fisher! We caught a lot of fish, after all. 
 
-### CBE_LuckyCatch — item discovered: 300919
+### Lucky Catch — item discovered: Gold Fishing Trophy
 `CBE_LuckyCatch_TrophyLv8` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300919'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_FishingTrophies_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_FishingTrophies_08'], items=['Gold Fishing Trophy'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): I don't quite believe it...
 **MADDIE** (Surprised): I won the Master Fisher trophy!
 **GRANDMA** (Encouraging): Congratulations, dearie! You really deserve it!
 
-### CBE_LuckyCatch — item discovered: 300887
+### Lucky Catch — item discovered: Wahoo
 `CBE_LuckyCatch_Wahoo` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300887'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_VeryRareWahoo_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_VeryRareWahoo_01'], items=['Wahoo'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE**: This fish looks really fast! I'm surprised I caught it.
 **GRANDMA** (Worried): Are you sure you can pick it up? Maybe you can sit next to it?
@@ -3524,18 +3423,17 @@ Every story in which Maddie speaks.
 **MADDIE**: How come?
 **GRANDMA** (Surprised): Well, according to the fish guide, you just beat the world record!
 
-### CBE_LuckyCatch — item discovered: 300889
+### Lucky Catch — item discovered: Yellowfin Tuna
 `CBE_LuckyCatch_YellowfinTuna` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['300889'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['CBE_LuckyCatch_LegendaryYellowfinTuna_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['CBE_LuckyCatch_LegendaryYellowfinTuna_01'], items=['Yellowfin Tuna'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Relaxed): This one was quite the battle, but I got it in the end!
 **GRANDMA** (Worried): I swear I almost saw you get pulled off the side twice...
 **MADDIE** (Joyous): I almost did! It was so exciting!
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_AkihabaraLandmark_01
+### Maddie in Japan — item discovered: Akihabara
 `CBE_MaddieInJapan2025_AkihabaraLandmark_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_AkihabaraLandmark_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_AkihabaraLandmark_01'], items=['Akihabara'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Joyous): What a place!
 **MADDIE** (Joyous): I wonder what Grandma made of Akihabara. Let’s see what she wrote!
@@ -3543,18 +3441,18 @@ Every story in which Maddie speaks.
   _earlier:_ ~~“I know now that he came here to see the railway station. It must have inspired him to build his own tracks back home…”~~ (until 25.10.01)
 **MADDIE** (Doubtful): A railway? She must be talking about Ignatius!
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_AkihabaraThings_03
+### Maddie in Japan — item discovered: Hopeberry Figurine
 `CBE_MaddieInJapan2025_AkihabaraThings_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_AkihabaraThings_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_AkihabaraThings_03'], items=['Hopeberry Figurine'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Joyous): Akihabara is so full of interesting things that I don’t even know where to begin!
 **MADDIE** (Relaxed): Maybe it’s time I try my luck with the claw machines...  
   _earlier:_ ~~Maybe it’s time I try my luck with the claw machines…~~ (until 25.10.01)
 **MADDIE** (Joyous): Let's see... Where are the best ones?
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_AkihabaraThings_05
+### Maddie in Japan — item discovered: Claw Machine
 `CBE_MaddieInJapan2025_AkihabaraThings_05_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_AkihabaraThings_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_AkihabaraThings_05'], items=['Claw Machine'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): This place has been a complete change of pace from the previous sights I’ve seen, but it’s so full of energy.
 **MADDIE** (Relaxed): I would love to take a piece of Akihabara's magic home with me...  
@@ -3566,32 +3464,32 @@ Every story in which Maddie speaks.
 - trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_Food_02
+### Maddie in Japan — item discovered: Onigiri
 `CBE_MaddieInJapan2025_Food_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_Food_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_Food_02'], items=['Onigiri'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Encouraging): I thought we could have a Japanese dinner before you go away. You know, to help you get used to the local cuisine.
 **MADDIE** (Relaxed): Sounds great!
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_Food_04
+### Maddie in Japan — item discovered: Miso Soup
 `CBE_MaddieInJapan2025_Food_04_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_Food_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_Food_04'], items=['Miso Soup'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): What a feast, Grandma! How did you learn to cook this?
 **GRANDMA** (Charming): I picked up a trick or two while I was traveling.
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_Food_06
+### Maddie in Japan — item discovered: Teishoku
 `CBE_MaddieInJapan2025_Food_06_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_Food_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_Food_06'], items=['Teishoku'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): After this feast, I’ll be ready to start exploring the locations Grandma visited back in the day.
 **MADDIE** (Relaxed): I thought I knew what Japanese food is like, but boy, was I wrong!
 **MADDIE** (Hesitant): I remember when Roddy tried to make sushi once. Those floppy rolls were not anything like this!
 **MADDIE** (Relaxed): Grandma's sushi on the other hand... Now I know where she got her skills.
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_FushimiInariLandmark_01
+### Maddie in Japan — item discovered: Fushimi Inari
 `CBE_MaddieInJapan2025_FushimiInariLandmark_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_FushimiInariLandmark_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_FushimiInariLandmark_01'], items=['Fushimi Inari'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Joyous): Fushimi Inari... What an amazing place!  
   _earlier:_ ~~Fushimi Inari… What an amazing place!~~ (until 25.10.01)
@@ -3603,16 +3501,16 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): “I followed the trail of breadcrumbs to the mountain and found the gate. He was here.”
 **MADDIE** (Worried): Hmm... Who could she be talking about?
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_FushimiInariThings_03
+### Maddie in Japan — item discovered: Kitsune Mask
 `CBE_MaddieInJapan2025_FushimiInariThings_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_FushimiInariThings_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_FushimiInariThings_03'], items=['Kitsune Mask'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): So many different kinds of foxes!
 **MADDIE** (Relaxed): Grandma would love one of these kitsune masks. She has such a strange love for any kind of disguise!
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_FushimiInariThings_05
+### Maddie in Japan — item discovered: Torii
 `CBE_MaddieInJapan2025_FushimiInariThings_05_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_FushimiInariThings_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_FushimiInariThings_05'], items=['Torii'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): It says in my guidebook that these torii gates have been donated by people and companies over the years.
 **MADDIE** (Doubtful): I wonder if Grandma donated one?
@@ -3623,9 +3521,9 @@ Every story in which Maddie speaks.
 - trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_GettingReady_02
+### Maddie in Japan — item discovered: Travel Charger
 `CBE_MaddieInJapan2025_GettingReady_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_GettingReady_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_GettingReady_02'], items=['Travel Charger'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA**: It is a long flight to Japan, dearie. Are you sure you’ve got everything you need?
 **GRANDMA** (Discouraged): Snacks? A warm jumper for the plane? It is always cold on a plane with the over-eager air-conditioning...  
@@ -3641,9 +3539,9 @@ Every story in which Maddie speaks.
 - trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_GettingReady_04
+### Maddie in Japan — item discovered: Travel Pillow
 `CBE_MaddieInJapan2025_GettingReady_04_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_GettingReady_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_GettingReady_04'], items=['Travel Pillow'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): So you and Grandma met in Japan, while she was living there?
 **KAZUKO**: That’s right. She told me about Hopewell Bay, and it sounded so wonderful that I ended up moving here, too.
@@ -3661,9 +3559,9 @@ Every story in which Maddie speaks.
 - trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_GettingReady_06
+### Maddie in Japan — item discovered: Handbag
 `CBE_MaddieInJapan2025_GettingReady_06_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_GettingReady_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_GettingReady_06'], items=['Handbag'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **ANTIQUEDEALER** (Charming): Salutations, Maddie! Are you really traveling to Japan?
 **MADDIE** (Encouraging): I sure am. Kazuko told me about how Grandma used to live there, and I really want to explore some of the places she used to go to.
@@ -3672,9 +3570,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Surprised): Thank you so much, Julius! But where are the other postcards from?
 **ANTIQUEDEALER** (Thinking): We’ll save those for your future travels.
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_GettingReady_10
+### Maddie in Japan — item discovered: Luggage
 `CBE_MaddieInJapan2025_GettingReady_10_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_GettingReady_10'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_GettingReady_10'], items=['Luggage'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Worried): I sometimes have this nightmare where I’m leaving for the airport, and my bags are totally unpacked.
 **MADDIE** (Encouraging): This time I’m so prepared. I’ve got my passport and tickets, a travel pillow for the long flight, and plenty of snacks.
@@ -3701,9 +3599,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): Oh, twist my arm!
 **KAZUKO** (Joyous): It’s settled then. I’ll speak with Ursula and organize everything!
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_JigokudaniLandmark_01
+### Maddie in Japan — item discovered: Jigokudani
 `CBE_MaddieInJapan2025_JigokudaniLandmark_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_JigokudaniLandmark_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_JigokudaniLandmark_01'], items=['Jigokudani'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): Hot springs just for monkeys?
 **MADDIE** (Hesitant): These guys are pretty spoiled, if you ask me.
@@ -3711,18 +3609,18 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): “I was able to find out that he was here, searching for something. I am just not sure, whether he found it - whatever it was.”
 **MADDIE** (Doubtful): She was following in someone’s footsteps...
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_JigokudaniThings_03
+### Maddie in Japan — item discovered: Oke
 `CBE_MaddieInJapan2025_JigokudaniThings_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_JigokudaniThings_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_JigokudaniThings_03'], items=['Oke'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): It would be more than amazing to have a little bath like this at the Mansion.
 **MADDIE** (Relaxed): I can imagine soaking in it after a hard day’s work.
 **MADDIE** (Relaxed): But this holiday is already starting to take effect. I feel more relaxed than in a long time.
 **MADDIE** (Joyous): It’s good to have some time away, and I’m really starting to enjoy solo-travel!
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_JigokudaniThings_05
+### Maddie in Japan — item discovered: Monkey Onsen
 `CBE_MaddieInJapan2025_JigokudaniThings_05_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_JigokudaniThings_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_JigokudaniThings_05'], items=['Monkey Onsen'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Joyous): I have to snap a photo of these monkeys. They are so cute!
 **MADDIE** (Relaxed): Mason won’t believe me when I tell him about this place.
@@ -3744,9 +3642,9 @@ Every story in which Maddie speaks.
 **GRANDMA**: Some things you have to find out for yourself, dearie.
 **GRANDMA**: But come now. I've made you some sushi, and you can tell me all about your trip!
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_ShibuyaLandmark_01
+### Maddie in Japan — item discovered: Shibuya
 `CBE_MaddieInJapan2025_ShibuyaLandmark_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_ShibuyaLandmark_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_ShibuyaLandmark_01'], items=['Shibuya'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Joyous): The famous Shibuya crossing - the busiest pedestrian crossing in the world!
 **MADDIE** (Joyous): It sure is busy here! I’m so used to the quiet small-town life that I forget that there are places like this in the world.
@@ -3756,16 +3654,16 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): I guess we have more in common than I’ve realized...  
   _earlier:_ ~~I guess we have more in common than I’ve realized…~~ (until 25.10.01)
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_ShibuyaThings_03
+### Maddie in Japan — item discovered: Traffic Lights
 `CBE_MaddieInJapan2025_ShibuyaThings_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_ShibuyaThings_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_ShibuyaThings_03'], items=['Traffic Lights'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): I think I understand this place now. At first glance, it seems like total chaos, but it’s not!
 **MADDIE** (Joyous): There’s a structure and a rhythm that make the place work like a well-oiled machine.
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_ShibuyaThings_05
+### Maddie in Japan — item discovered: Hachiko
 `CBE_MaddieInJapan2025_ShibuyaThings_05_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_ShibuyaThings_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_ShibuyaThings_05'], items=['Hachiko'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): Oh, this must be the statue of Hachiko, the dog who waited for his master every day at the station.
 **MADDIE** (Worried): What a good dog... Always waiting for his master, even after he passed away!
@@ -3778,9 +3676,9 @@ Every story in which Maddie speaks.
 - trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_Souvenirs_02
+### Maddie in Japan — item discovered: Chopsticks
 `CBE_MaddieInJapan2025_Souvenirs_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_Souvenirs_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_Souvenirs_02'], items=['Chopsticks'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **KAZUKO** (Encouraging): Do you know the art of origami, Maddie?
 **MADDIE** (Thinking): I know of it, but I can’t say I’m very good at it...  
@@ -3793,18 +3691,18 @@ Every story in which Maddie speaks.
 - trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_Souvenirs_04
+### Maddie in Japan — item discovered: Daruma Doll
 `CBE_MaddieInJapan2025_Souvenirs_04_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_Souvenirs_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_Souvenirs_04'], items=['Daruma Doll'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): Is there something you'd like me to bring for you?
 **GRANDMA** (Encouraging): No, dearie. I've already got everything I need.
 **GRANDMA** (Charming): Although... If you get a chance, you could maybe bring back some of that dried octopus.
 **MADDIE** (Surprised): D-dried octopus?
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_Souvenirs_06
+### Maddie in Japan — item discovered: Maneki Neko
 `CBE_MaddieInJapan2025_Souvenirs_06_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_Souvenirs_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_Souvenirs_06'], items=['Maneki Neko'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Thinking): There will be so many cool souvenirs to get... How will I ever fit it into my luggage?  
   _earlier:_ ~~There will be so many cool souvenirs to get… How will I ever fit it into my luggage?~~ (until 25.10.01)
@@ -3816,17 +3714,17 @@ Every story in which Maddie speaks.
 - trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_Travel_02
+### Maddie in Japan — item discovered: Stamped Ticket
 `CBE_MaddieInJapan2025_Travel_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_Travel_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_Travel_02'], items=['Stamped Ticket'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): I've got my comfy walking shoes on, my camera is fully charged, and I'm ready for an adventure.
 **MADDIE** (Relaxed): Now I just need a travel card.
 **MADDIE** (Hesitant): Easy peasy!
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_Travel_03
+### Maddie in Japan — item discovered: Bicycle
 `CBE_MaddieInJapan2025_Travel_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_Travel_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_Travel_03'], items=['Bicycle'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): A good old-fashioned bicycle is totally the best way to see a new place.
 **MADDIE** (Relaxed): On a bike, I feel like I’m blending in better, and I can see all kinds of places other transport just can’t go.
@@ -3837,9 +3735,9 @@ Every story in which Maddie speaks.
 - trigger: unknown, hint=Collectible Board Event (versions None–None)
 
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_Travel_06
+### Maddie in Japan — item discovered: Train
 `CBE_MaddieInJapan2025_Travel_06_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_Travel_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_Travel_06'], items=['Train'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): I finally know where I am and where I’m going. Now I just need to hop on a train!
 **MADDIE** (Relaxed): These old postcards Julius gave me are full of interesting stuff... but they also form a pretty good list of things to visit.  
@@ -3847,9 +3745,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): It’s gonna be so cool to visit some of the places Grandma loved to visit while she lived here.
 **MADDIE** (Relaxed): And it’ll be interesting to see what might have drawn her to them.
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_YasakaPagodaThings_03
+### Maddie in Japan — item discovered: Ema
 `CBE_MaddieInJapan2025_YasakaPagodaThings_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_YasakaPagodaThings_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_YasakaPagodaThings_03'], items=['Ema'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Joyous): What an amazing structure!
 **MADDIE** (Joyous): It says here that it was originally built in 597! And it is supposed to have been inspired by a dream.
@@ -3859,63 +3757,58 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): “The pagoda stands tall, but no sign of him.”
 **MADDIE** (Doubtful): What does that mean?? Who is she talking about?
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_YasakaPagodaThings_05
+### Maddie in Japan — item discovered: Toro
 `CBE_MaddieInJapan2025_YasakaPagodaThings_05_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_YasakaPagodaThings_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_YasakaPagodaThings_05'], items=['Toro'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): So, Kyoto used to be the capital of Japan.
 **MADDIE** (Relaxed): And it says in my guidebook that Yasaka Pagoda is over a thousand years old!
 **MADDIE** (Joyous): There's so much history on these streets... I can't wait to explore more!
 
-### CBE_MaddieInJapan2025 — item discovered: CBE_MaddieInJapan2025_YenCoins_03
+### Maddie in Japan — item discovered: Three Coins
 `CBE_MaddieInJapan2025_YenCoins_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInJapan2025, items=['CBE_MaddieInJapan2025_YenCoins_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_YenCoins_03'], items=['Three Coins'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Thinking): Kazuko told me to always have some change in my pocket. I wonder why?
 **MADDIE** (Relaxed): I guess she knew I’d get totally hooked on the gachapon machines.
 
-### CBE_MaddieInParis2025 — item discovered: 79811393
+### Maddie In Paris — item discovered: Luxury Handbag
 `CBE_MaddieInParis2025_ArcDeTriomphe_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis2025, items=['79811393'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_MaddieInParis2025, items=['CBE_MaddieInParis2025_ArcDeTriompheItems_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis2025, itemKeys=['CBE_MaddieInParis2025_ArcDeTriompheItems_02'], items=['Luxury Handbag'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): I feel so Parisian!
 **MADDIE** (Relaxed): I've got the beret and the scarf - they won't even recognize me back home!
 **MADDIE** (Relaxed): Maybe I could get myself some perfume as a souvenir.
 **MADDIE**: Cheese and crackers, this place is EXPENSIVE!
 
-### CBE_MaddieInParis2025 — item discovered: 79811390
+### Maddie In Paris — item discovered: Luxury Car
 `CBE_MaddieInParis2025_ArcDeTriomphe_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis2025, items=['79811390'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_MaddieInParis2025, items=['CBE_MaddieInParis2025_ArcDeTriompheItems_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis2025, itemKeys=['CBE_MaddieInParis2025_ArcDeTriompheItems_05'], items=['Luxury Car'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): Is that handsome man trying to offer me a ride in his car? Oh, no...
 **MADDIE** (Worried): But it's a very nice car...
 **MADDIE** (Worried): No, he's a complete stranger!
 **MADDIE**: <i>Non, merci!</i> Err... <i>Je ne veux pas</i>... Sorry - I've got to go!
 
-### CBE_MaddieInParis2025 — item discovered: 74370089
+### Maddie In Paris — item discovered: Beret
 `CBE_MaddieInParis2025_EiffelTower_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis2025, items=['74370089'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_MaddieInParis2025, items=['CBE_MaddieInParis2025_EiffelTowerItems_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis2025, itemKeys=['CBE_MaddieInParis2025_EiffelTowerItems_02'], items=['Beret'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): I wonder if I could pull off wearing a beret?
 **MADDIE** (Relaxed): Well, you know what they say? When in Paris, do as the Parisians do!
 **MADDIE** (Thinking): Do they say that?
 
-### CBE_MaddieInParis2025 — item discovered: 74370086
+### Maddie In Paris — item discovered: Flag of France
 `CBE_MaddieInParis2025_EiffelTower_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis2025, items=['74370086'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_MaddieInParis2025, items=['CBE_MaddieInParis2025_EiffelTowerItems_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis2025, itemKeys=['CBE_MaddieInParis2025_EiffelTowerItems_05'], items=['Flag of France'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): The view from the Eiffel Tower is awesome!
 **MADDIE** (Relaxed): And the parks here are so interesting. 
 **MADDIE** (Relaxed): Maybe I should build a little bit of Paris at the Mansion when I get home.
 
-### CBE_MaddieInParis2025 — item discovered: 9969283
+### Maddie In Paris — item discovered: Sweet Assortment
 `CBE_MaddieInParis2025_Food_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis2025, items=['9969283'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_MaddieInParis2025, items=['CBE_MaddieInParis2025_Food_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis2025, itemKeys=['CBE_MaddieInParis2025_Food_06'], items=['Sweet Assortment'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): How am I supposed to pick just one out of all these yummy treats?
 **MADDIE** (Relaxed): Hang on... I'll take as many as I want!
@@ -3934,36 +3827,32 @@ Every story in which Maddie speaks.
 **ANTIQUEDEALER** (Surprised): Say, have you done something with your hair?
 **MADDIE** (Hesitant): It's just a more elegant, Parisian version of the same old Maddie!
 
-### CBE_MaddieInParis2025 — item discovered: 98521874
+### Maddie In Paris — item discovered: "Venus de Milo"
 `CBE_MaddieInParis2025_Louvre_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis2025, items=['98521874'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_MaddieInParis2025, items=['CBE_MaddieInParis2025_LouvreItems_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis2025, itemKeys=['CBE_MaddieInParis2025_LouvreItems_02'], items=['"Venus de Milo"'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): The Louvre has over 400 rooms!
 **MADDIE** (Worried): Imagine having to renovate this place from ruin...
 **MADDIE** (Hesitant): All of a sudden, the Mansion seems like a breeze!
 
-### CBE_MaddieInParis2025 — item discovered: 98521871
+### Maddie In Paris — item discovered: "Mona Lisa"
 `CBE_MaddieInParis2025_Louvre_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis2025, items=['98521871'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_MaddieInParis2025, items=['CBE_MaddieInParis2025_LouvreItems_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis2025, itemKeys=['CBE_MaddieInParis2025_LouvreItems_05'], items=['"Mona Lisa"'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): Ah, the famous Mona Lisa!
 **MADDIE** (Relaxed): She's smaller than I imagined... but just as beautiful.
 **MADDIE** (Relaxed): Her smile is mysterious, sure, but I know a certain older lady who would outdo her anytime.
 
-### CBE_MaddieInParis2025 — item discovered: 24970666
+### Maddie In Paris — item discovered: Gargoyle
 `CBE_MaddieInParis2025_NotreDame_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis2025, items=['24970666'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_MaddieInParis2025, items=['CBE_MaddieInParis2025_NotreDameItems_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis2025, itemKeys=['CBE_MaddieInParis2025_NotreDameItems_02'], items=['Gargoyle'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): Grandma said that when she visited Paris a long time ago, she had been here for some rendez-vous...
 **MADDIE** (Relaxed): That sounds like such a Parisian thing!
 
-### CBE_MaddieInParis2025 — item discovered: 24970663
+### Maddie In Paris — item discovered: Tourist Boat
 `CBE_MaddieInParis2025_NotreDame_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis2025, items=['24970663'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_MaddieInParis2025, items=['CBE_MaddieInParis2025_NotreDameItems_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis2025, itemKeys=['CBE_MaddieInParis2025_NotreDameItems_05'], items=['Tourist Boat'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): I wonder if Grandma and Grandpa Charlie left a lock here...
 **MADDIE** (Worried): This is such a romantic place... So many people professing their love. I wonder...
@@ -3982,10 +3871,9 @@ Every story in which Maddie speaks.
 **GRANDMA** (Encouraging): But did YOU have any rendez-vous' during your vacation?
 **MADDIE** (Relaxed): No, it was just me - and it was PERFECT!
 
-### CBE_MaddieInParis2025 — item discovered: 28695424
+### Maddie In Paris — item discovered: Cabaret
 `CBE_MaddieInParis2025_SacreCoeur_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis2025, items=['28695424'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_MaddieInParis2025, items=['CBE_MaddieInParis2025_SacreCoeurItems_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis2025, itemKeys=['CBE_MaddieInParis2025_SacreCoeurItems_02'], items=['Cabaret'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): I think I'm lost... The place I'm looking for is S-sacre Coeur.
 **MADDIE** (Worried): Is it that beautiful white building on top of the hill?
@@ -3993,19 +3881,18 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): Well, I can have an ice cream at the top.
 **MADDIE** (Relaxed): I love being on vacation!
 
-### CBE_MaddieInParis2025 — item discovered: 28695421
+### Maddie In Paris — item discovered: Carousel
 `CBE_MaddieInParis2025_SacreCoeur_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis2025, items=['28695421'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_MaddieInParis2025, items=['CBE_MaddieInParis2025_SacreCoeurItems_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis2025, itemKeys=['CBE_MaddieInParis2025_SacreCoeurItems_05'], items=['Carousel'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): It's true what they say about this city.
 **MADDIE** (Relaxed): The food, the music, the sights... It's all just wonderful!
 **MADDIE** (Relaxed): This vacation is just what I needed to unwind.
 **MADDIE** (Relaxed): My resolution to avoid all drama and men has worked so far, but I'm excited to see what the year will bring.
 
-### CBE_MaddieInParis2025 — decoration CBE_MaddieInParis2025_Decoration_Slot14
+### Maddie In Paris — decoration CBE_MaddieInParis2025_Decoration_Slot14
 `CBE_MaddieInParis2025_Slot_14_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_MaddieInParis2025_Decoration_Slot14, event=CBE_MaddieInParis2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_MaddieInParis2025_Decoration_Slot14, event=Maddie In Paris, eventKey=CBE_MaddieInParis2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MASON** (Charming): Wanna hear a joke, Maddie?
 **MADDIE** (Relaxed): Sure. Shoot!
@@ -4013,9 +3900,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): Why?
 **MASON** (Encouraging): Because sometimes it sweeps you off your feet, and other times, you step in something gross.
 
-### CBE_MaddieInParis2025 — decoration CBE_MaddieInParis2025_Decoration_Slot18
+### Maddie In Paris — decoration CBE_MaddieInParis2025_Decoration_Slot18
 `CBE_MaddieInParis2025_Slot_18_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_MaddieInParis2025_Decoration_Slot18, event=CBE_MaddieInParis2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_MaddieInParis2025_Decoration_Slot18, event=Maddie In Paris, eventKey=CBE_MaddieInParis2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE**: What was your favorite thing about Paris, Maddie?
 **MADDIE** (Relaxed): The whole city was just so full of... charm! It was really wonderful.
@@ -4025,9 +3912,9 @@ Every story in which Maddie speaks.
 **JACKIE** (Encouraging): Oh, yeah. Some family recipe. He's very proud of it! Actually, he did this funny thing...
 **MADDIE** (Hesitant): I'd love to hear all about it, but I'm actually in a rush to... a thing with Grandma. See you later!
 
-### CBE_MaddieInParis2025 — decoration CBE_MaddieInParis2025_Decoration_Slot22
+### Maddie In Paris — decoration CBE_MaddieInParis2025_Decoration_Slot22
 `CBE_MaddieInParis2025_Slot_22_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_MaddieInParis2025_Decoration_Slot22, event=CBE_MaddieInParis2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_MaddieInParis2025_Decoration_Slot22, event=Maddie In Paris, eventKey=CBE_MaddieInParis2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL** (Surprised): What in the world? The place looks just like Paris!
 **MADDIE** (Relaxed): I felt inspired to bring a little piece of Paris home with me.
@@ -4035,10 +3922,9 @@ Every story in which Maddie speaks.
 **PEARL** (Thinking): This looks like the perfect setting for a romantic picnic!
 **PEARL** (Thinking): Don't you think?
 
-### CBE_MaddieInParis2025 — item discovered: 13504740
+### Maddie In Paris — item discovered: Tram
 `CBE_MaddieInParis2025_Travel_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis2025, items=['13504740'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_MaddieInParis2025, items=['CBE_MaddieInParis2025_Travel_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis2025, itemKeys=['CBE_MaddieInParis2025_Travel_04'], items=['Tram'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): It's been so long since I travelled anywhere!
 **MADDIE** (Relaxed): The Mansion's been taking up all of my time and effort.
@@ -4047,10 +3933,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): Yup!
 **MADDIE**: Maybe I'll check the passport one more time.
 
-### CBE_MaddieInParis2025 — item discovered: 65624436
+### Maddie In Paris — item discovered: Artichoke Heart
 `CBE_MaddieInParis2025_ValentinesMerch_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis2025, items=['65624436'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_MaddieInParis2025, items=['CBE_MaddieInParis2025_Valentines_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis2025, itemKeys=['CBE_MaddieInParis2025_Valentines_04'], items=['Artichoke Heart'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): The sun is shining and I'm in Paris - life is good!
 **MADDIE** (Relaxed): Maybe it's time for some souvenir shopping!
@@ -4058,42 +3943,41 @@ Every story in which Maddie speaks.
 **MADDIE** (Doubtful): Why does the world seem to think that you can only be happy and fulfilled if you're a couple?
 **MADDIE** (Doubtful): That's it! Let the radical self-love commence!
 
-### CBE_MaddieInParis2025 — item discovered: 65624434
+### Maddie In Paris — item discovered: Cuddly Toy
 `CBE_MaddieInParis2025_ValentinesMerch_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis2025, items=['65624434'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_MaddieInParis2025, items=['CBE_MaddieInParis2025_Valentines_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis2025, itemKeys=['CBE_MaddieInParis2025_Valentines_06'], items=['Cuddly Toy'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Discouraged): Look at this... Another stuffed toy declaring love.
 **MADDIE** (Relaxed): Maybe I'll get it for myself!
 **MADDIE** (Relaxed): Sure, it would be nice to be here with some special person and celebrate love... 
 **MADDIE** (Relaxed): But I can celebrate myself, too!
 
-### CBE_MaddieInParis — item discovered: CBE_MaddieInParis2025_ArcDeTriompheItems_02
+### Maddie In Paris — item discovered: Luxury Handbag
 `CBE_MaddieInParis_ArcDeTriomphe_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis, items=['CBE_MaddieInParis2025_ArcDeTriompheItems_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis, itemKeys=['CBE_MaddieInParis2025_ArcDeTriompheItems_02'], items=['Luxury Handbag'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): This is such a great place for people-watching!
 **MADDIE** (Relaxed): The streets are full of tourists in awe of this wonderful city, and Parisians busy just doing their thing.
 **MADDIE** (Relaxed): It doesn’t matter where you look, there’s always something interesting to see.
 
-### CBE_MaddieInParis — item discovered: CBE_MaddieInParis2025_ArcDeTriompheItems_05
+### Maddie In Paris — item discovered: Luxury Car
 `CBE_MaddieInParis_ArcDeTriomphe_05_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis, items=['CBE_MaddieInParis2025_ArcDeTriompheItems_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis, itemKeys=['CBE_MaddieInParis2025_ArcDeTriompheItems_05'], items=['Luxury Car'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): What a journey this has been!
 **MADDIE** (Relaxed): My “art” is maybe not up to the standard of real artists, but at least I’ve captured this trip on paper and canvas, and I have to say that I’m pretty proud of myself.
 
-### CBE_MaddieInParis — item discovered: CBE_MaddieInParis2025_EiffelTowerItems_02
+### Maddie In Paris — item discovered: Beret
 `CBE_MaddieInParis_EiffelTower_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis, items=['CBE_MaddieInParis2025_EiffelTowerItems_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis, itemKeys=['CBE_MaddieInParis2025_EiffelTowerItems_02'], items=['Beret'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): The engineering of the Eiffel Tower really is impressive. It gets me every time!
 **MADDIE** (Relaxed): Wow, I only just realized how many people have come here just to paint or sketch. Some people have even brought their easels!
 **MADDIE** (Relaxed): Photos never do these sights justice... Maybe I could try to do some drawing too.
 
-### CBE_MaddieInParis — item discovered: CBE_MaddieInParis2025_EiffelTowerItems_05
+### Maddie In Paris — item discovered: Flag of France
 `CBE_MaddieInParis_EiffelTower_05_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis, items=['CBE_MaddieInParis2025_EiffelTowerItems_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis, itemKeys=['CBE_MaddieInParis2025_EiffelTowerItems_05'], items=['Flag of France'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): Here we go!
 **MADDIE** (Relaxed): I have no idea what I'm doing.
@@ -4101,9 +3985,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Discouraged): The curved shape of the Eiffel Tower is beautiful, but my hand wants to map out forces, not feelings.
 **MADDIE** (Discouraged): This is hard. I’m trying to create a sketch, not a blueprint!
 
-### CBE_MaddieInParis — item discovered: CBE_MaddieInParis2025_Food_06
+### Maddie In Paris — item discovered: Sweet Assortment
 `CBE_MaddieInParis_Food_06_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis, items=['CBE_MaddieInParis2025_Food_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis, itemKeys=['CBE_MaddieInParis2025_Food_06'], items=['Sweet Assortment'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): Time for a snack!
 **MADDIE** (Worried): What should I have… There’s so much to choose from.
@@ -4122,9 +4006,9 @@ Every story in which Maddie speaks.
 **GRANDMA** (Charming): Hush! I will be fine - and so will everyone else - so you can go and enjoy yourself.
 **MADDIE** (Joyous): Paris, here I come!
 
-### CBE_MaddieInParis — item discovered: CBE_MaddieInParis2025_LouvreItems_02
+### Maddie In Paris — item discovered: "Venus de Milo"
 `CBE_MaddieInParis_Louvre_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis, items=['CBE_MaddieInParis2025_LouvreItems_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis, itemKeys=['CBE_MaddieInParis2025_LouvreItems_02'], items=['"Venus de Milo"'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): I’ve always loved engineering and building things, because it’s accurate. A structure is either sound or it’s not.
 **MADDIE** (Relaxed): It holds true to the calculations, or it doesn’t.
@@ -4132,9 +4016,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Worried): How do I know if my sketches are any good?
 **MADDIE** (Relaxed): Then again, who cares? I’m drawing for myself - not anyone else.
 
-### CBE_MaddieInParis — item discovered: CBE_MaddieInParis2025_LouvreItems_05
+### Maddie In Paris — item discovered: "Mona Lisa"
 `CBE_MaddieInParis_Louvre_05_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis, items=['CBE_MaddieInParis2025_LouvreItems_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis, itemKeys=['CBE_MaddieInParis2025_LouvreItems_05'], items=['"Mona Lisa"'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): This place needs broad strokes… and more color!
 **MADDIE** (Relaxed): It’s funny to think about these huge old buildings that were built so long ago.
@@ -4142,16 +4026,16 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): I think I need to paint it when I get home again…
 **MADDIE** (Relaxed): Now it's time for a visit to see the Old Masters in the Louvre to fuel my creativity!
 
-### CBE_MaddieInParis — item discovered: CBE_MaddieInParis2025_NotreDameItems_02
+### Maddie In Paris — item discovered: Gargoyle
 `CBE_MaddieInParis_NotreDame_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis, items=['CBE_MaddieInParis2025_NotreDameItems_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis, itemKeys=['CBE_MaddieInParis2025_NotreDameItems_02'], items=['Gargoyle'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): I HAVE to draw the Notre Dame! It’s such an iconic place - and so beautiful.
 **MADDIE** (Discouraged): My sketches are far from perfect… Stop. Breathe. Just draw.
 
-### CBE_MaddieInParis — item discovered: CBE_MaddieInParis2025_NotreDameItems_05
+### Maddie In Paris — item discovered: Tourist Boat
 `CBE_MaddieInParis_NotreDame_05_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis, items=['CBE_MaddieInParis2025_NotreDameItems_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis, itemKeys=['CBE_MaddieInParis2025_NotreDameItems_05'], items=['Tourist Boat'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Worried): This structure is so different from the Eiffel Tower where the bones are visible.
 **MADDIE** (Worried): My brain wants to break it up into parts - flying buttresses, ribbed vaults, load distribution… but then I’ll miss the soul of it.
@@ -4170,9 +4054,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Surprised): I have?
 **GRANDMA** (Frustrated): You have no idea. Come on - it is time for a cup of tea and some pie.
 
-### CBE_MaddieInParis — item discovered: CBE_MaddieInParis2025_SacreCoeurItems_02
+### Maddie In Paris — item discovered: Cabaret
 `CBE_MaddieInParis_SacreCoeur_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis, items=['CBE_MaddieInParis2025_SacreCoeurItems_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis, itemKeys=['CBE_MaddieInParis2025_SacreCoeurItems_02'], items=['Cabaret'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): Montmartre used to be a hub for bohemian artists back in the day, and you can definitely still feel it.
 **MADDIE** (Relaxed): I know I’m not a real artist, but I can’t help but feel like one here.
@@ -4180,16 +4064,16 @@ Every story in which Maddie speaks.
 **MADDIE** (Worried): Why is that old couple looking at me?
 **MADDIE** (Worried): Oh, no! They're coming over!
 
-### CBE_MaddieInParis — item discovered: CBE_MaddieInParis2025_SacreCoeurItems_05
+### Maddie In Paris — item discovered: Carousel
 `CBE_MaddieInParis_SacreCoeur_05_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis, items=['CBE_MaddieInParis2025_SacreCoeurItems_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis, itemKeys=['CBE_MaddieInParis2025_SacreCoeurItems_05'], items=['Carousel'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): Someone just mistook me for a REAL artist!
 **MADDIE** (Relaxed): Maybe it’s the beret…
 
-### CBE_MaddieInParis — item discovered: CBE_MaddieInParis2025_Travel_04
+### Maddie In Paris — item discovered: Tram
 `CBE_MaddieInParis_Travel_04_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis, items=['CBE_MaddieInParis2025_Travel_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis, itemKeys=['CBE_MaddieInParis2025_Travel_04'], items=['Tram'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: It’s so exciting to be in Paris!
 **MADDIE**: I can’t wait to stroll along the streets of Montmartre and do some people-watching at the Louvre.
@@ -4198,17 +4082,17 @@ Every story in which Maddie speaks.
 **MADDIE** (Encouraging): And the finishing touch...
 **MADDIE** (Relaxed): <i>Voilà!</i>
 
-### CBE_MaddieInParis — item discovered: CBE_MaddieInParis2025_Valentines_06
+### Maddie In Paris — item discovered: Cuddly Toy
 `CBE_MaddieInParis_ValentinesMerch_06_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_MaddieInParis, items=['CBE_MaddieInParis2025_Valentines_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Maddie In Paris, eventKey=CBE_MaddieInParis, itemKeys=['CBE_MaddieInParis2025_Valentines_06'], items=['Cuddly Toy'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: I wonder where this trip will take me!
 **MADDIE**: My last trip to Paris taught me that traveling alone can be really great. Then again, spending Valentine's alone can get lonely...
 **MADDIE** (Relaxed): Well, I can't wait to see what will happen!
 
-### CBE_MasonsEggHunt2024 — decoration CBE_MasonsEggHunt2024_Decoration_Slot01
+### Egg-cellent Adventure — decoration CBE_MasonsEggHunt2024_Decoration_Slot01
 `CBE_MasonsEggHunt2024_Decoration_Slot01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_MasonsEggHunt2024_Decoration_Slot01, event=CBE_MasonsEggHunt2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_MasonsEggHunt2024_Decoration_Slot01, event=Egg-cellent Adventure, eventKey=CBE_MasonsEggHunt2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): The place looks wonderful, Mason - great job!
 **MASON**: Thank you! I hope you're ready for the egg hunt to end all egg hunts!
@@ -4219,9 +4103,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): You --
 **MASON** (Thinking): I know, I'm adorable.
 
-### CBE_MasonsEggHunt2024 — decoration CBE_MasonsEggHunt2024_Decoration_Slot07
+### Egg-cellent Adventure — decoration CBE_MasonsEggHunt2024_Decoration_Slot07
 `CBE_MasonsEggHunt2024_Decoration_Slot07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_MasonsEggHunt2024_Decoration_Slot07, event=CBE_MasonsEggHunt2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_MasonsEggHunt2024_Decoration_Slot07, event=Egg-cellent Adventure, eventKey=CBE_MasonsEggHunt2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **HANK** (Surprised): I can't believe this! My ring... it's gone!
 **MADDIE**: What's wrong, Hank - have you lost something?
@@ -4230,9 +4114,9 @@ Every story in which Maddie speaks.
 **HANK** (Charming): Yeah, well... It's not really mine. Or... it wasn't on my finger.
 **MADDIE** (Thinking): OK... It's gotta be around here somewhere. Maybe Mason saw it when he set up the egg hunt!
 
-### CBE_MasonsEggHunt2024 — decoration CBE_MasonsEggHunt2024_Decoration_Slot08
+### Egg-cellent Adventure — decoration CBE_MasonsEggHunt2024_Decoration_Slot08
 `CBE_MasonsEggHunt2024_Decoration_Slot08_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_MasonsEggHunt2024_Decoration_Slot08, event=CBE_MasonsEggHunt2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_MasonsEggHunt2024_Decoration_Slot08, event=Egg-cellent Adventure, eventKey=CBE_MasonsEggHunt2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **ANTIQUEDEALER** (Thinking): Mason, your egg hunt is rather challenging! I have been trying to make sense of your clues, but they are written in some strange code.
 **MASON** (Joyous): This is difficult - even with my extensive knowledge of symbols and codes.
@@ -4240,9 +4124,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): You haven't seen a ring, have you? Hank's lost one, and he's going bananas.
 **MASON** (Worried): A-a ring?
 
-### CBE_MasonsEggHunt2024 — decoration CBE_MasonsEggHunt2024_Decoration_Slot15
+### Egg-cellent Adventure — decoration CBE_MasonsEggHunt2024_Decoration_Slot15
 `CBE_MasonsEggHunt2024_Decoration_Slot15_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_MasonsEggHunt2024_Decoration_Slot15, event=CBE_MasonsEggHunt2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_MasonsEggHunt2024_Decoration_Slot15, event=Egg-cellent Adventure, eventKey=CBE_MasonsEggHunt2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): This egg hunt is not what I expected!
 **JACKIE**: I know! Mason really put us to work this year.
@@ -4267,44 +4151,41 @@ Every story in which Maddie speaks.
 **HANK** (Charming): What a great egg hunt, Mason! It'll be hard for you to outdo it again next year.
 **MASON** (Surprised): N-next year?
 
-### CBE_RecycleRunway2024 — item discovered: 1295215
+### Recycle Runway — item discovered: Assorted Materials
 `CBE_RecycleRunway2024_AssortedMaterials_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['1295215'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_ProjectBoxJewelry_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_ProjectBoxJewelry_01'], items=['Assorted Materials'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Thinking): Someone donated a box of old crafting supplies. What could we do with them?
 **MADDIE** (Encouraging): How about some jewelry?
 
-### CBE_RecycleRunway2024 — decoration CBE_RecycleRunway2024_Decoration_Slot17
+### Recycle Runway — decoration CBE_RecycleRunway2024_Decoration_Slot17
 `CBE_RecycleRunway2024_Decoration_Slot17_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_RecycleRunway2024_Decoration_Slot17, event=CBE_RecycleRunway2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_RecycleRunway2024_Decoration_Slot17, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): So, I found some wood left over from Mason's pirate ship and put together this... sculpture.
 **MADDIE** (Thinking): What do you think?
 **PEARL** (Encouraging): I think the whole thing should be on national TV!
 **PEARL** (Encouraging): Everything here is recycled and reused - and still fabulous. It really shows how much you can do without buying everything new.
 
-### CBE_RecycleRunway2024 — decoration CBE_RecycleRunway2024_Decoration_Slot21
+### Recycle Runway — decoration CBE_RecycleRunway2024_Decoration_Slot21
 `CBE_RecycleRunway2024_Decoration_Slot21_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_RecycleRunway2024_Decoration_Slot21, event=CBE_RecycleRunway2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_RecycleRunway2024_Decoration_Slot21, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL**: You've thought of everything, Maddie!
 **MADDIE** (Charming): I thought I was getting a little carried away.
 **PEARL** (Encouraging): No, it's PERFECT.
 
-### CBE_RecycleRunway2024 — item discovered: 22321064
+### Recycle Runway — item discovered: Dressing Table
 `CBE_RecycleRunway2024_DressingTable_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['22321064'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_Clothing_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_Clothing_07'], items=['Dressing Table'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Doubtful): Are you ready to serve some fierce lewks?
 **MADDIE** (Discouraged): Well, I guess it's for a good cause...
 **PEARL** (Encouraging): Let's go!
 
-### CBE_RecycleRunway2024 — item discovered: 381125
+### Recycle Runway — item discovered: Fashion Materials
 `CBE_RecycleRunway2024_FashionMaterials_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['381125'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_RecyclingMaterials_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_RecyclingMaterials_08'], items=['Fashion Materials'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: A fashion show with recycled clothes is a great idea - but I don't know how to sew! Grandma's the only one in our family with any crafting skills.
 **PEARL**: But you're a good builder... and we need a stage for our runway show.
@@ -4313,45 +4194,40 @@ Every story in which Maddie speaks.
 **MADDIE** (Joyous): I need to go make some plans... See you later!
 **PEARL** (Encouraging): See? This is exactly what she needed.
 
-### CBE_RecycleRunway2024 — item discovered: 88388988
+### Recycle Runway — item discovered: Garden Warrior Couture
 `CBE_RecycleRunway2024_GardenWarriorCouture_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['88388988'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_HauteCouture_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_HauteCouture_08'], items=['Garden Warrior Couture'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE**: So... How are things, you know, since Emilio left?
 **MADDIE** (Surprised): Just fine! I've been concentrating on the Mansion and getting a lot done and... Yeah, it's been great!
 **JACKIE** (Encouraging): Good to hear! You're okay with me seeing Roddy, right? I mean...
 **MADDIE** (Relaxed): W-what -- Of course I am! You guys are so great together. Honestly, don't worry about me!
 
-### CBE_RecycleRunway2024 — item discovered: 13331058
+### Recycle Runway — item discovered: Jewelry Collection
 `CBE_RecycleRunway2024_JewelryCollection_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['13331058'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_JewelryBundle_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_JewelryBundle_01'], items=['Jewelry Collection'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): Ta-da! A whole collection of bespoke jewelry, all made with recycled materials.
 **PEARL** (Surprised): Wow! You really are a woman of many talents.
 
-### CBE_RecycleRunway2024 — item discovered: 88388994
+### Recycle Runway — item discovered: Lightbulb Headpiece
 `CBE_RecycleRunway2024_LightbulbHeadpiece_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['88388994'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_HauteCouture_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_HauteCouture_02'], items=['Lightbulb Headpiece'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Are those lightbulbs in that headpiece?
 **JACKIE** (Encouraging): Yeah, I thought they made a BRIGHT choice.
 
-### CBE_RecycleRunway2024 — item discovered: 72070684
+### Recycle Runway — item discovered: Mixed Materials
 `CBE_RecycleRunway2024_MixedMaterials_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['72070684'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_ProjectBoxDecorations_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_ProjectBoxDecorations_01'], items=['Mixed Materials'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): It feels great to have a little project - to get my mind off my terrible love life and everything else.
 **MADDIE** (Thinking): And there's SO much wood and other material here to reuse and upcycle!
 **MADDIE** (Relaxed): Not to mention all of my old gardening gloves...
 
-### CBE_RecycleRunway2024 — item discovered: 64111152
+### Recycle Runway — item discovered: News Story
 `CBE_RecycleRunway2024_NewsStory_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['64111152'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_Photoshoot_09'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_Photoshoot_09'], items=['News Story'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Did you see that our fashion show's on the NEWS?
 **JACKIE** (Surprised): It must be a slow news day!
@@ -4373,18 +4249,17 @@ Every story in which Maddie speaks.
 **GRANDMA**: Don't look so shocked, dearie - not everything has a secret meaning.
 **MADDIE** (Relaxed): Come on, let's celebrate! The first round of Hopeberry juice is on me!
 
-### CBE_RecycleRunway2024 — item discovered: 46642823
+### Recycle Runway — item discovered: Project Table Empty
 `CBE_RecycleRunway2024_ProjectTable-Empty_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_RecycleRunway2024, items=['46642823'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_RecycleRunway2024, items=['CBE_RecycleRunway2024_ProjectTableEmpty_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Recycle Runway, eventKey=CBE_RecycleRunway2024, itemKeys=['CBE_RecycleRunway2024_ProjectTableEmpty_01'], items=['Project Table Empty'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE**: Is there anything in the Mansion we could repurpose - old clothes, accessories... Anything?
 **MADDIE** (Thinking): As you know, Grandma's weird about me rooting around in the Mansion, but there's this old trunk full of stuff I just found in the basement.
 **JACKIE** (Encouraging): Cool vintage stuff? Sounds perfect.
 
-### CBE_SweetMess — item discovered: CBE_SweetMess_Eggs_10
+### Sweet Mess Express — item discovered: Ultimate Easter Basket
 `CBE_SweetMess_Character_04_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SweetMess, items=['CBE_SweetMess_Eggs_10'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Sweet Mess Express, eventKey=CBE_SweetMess, itemKeys=['CBE_SweetMess_Eggs_10'], items=['Ultimate Easter Basket'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: Hey, Roddy! We just got back with Mason. How's it going?
 **RODDY** (Charming): G-great! Totally awesome! How was the Easter Extravaganza?
@@ -4395,9 +4270,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Doubtful): What did you do?!  
   _earlier:_ ~~What did you do??~~ (until 26.02.03)
 
-### CBE_SweetMess — item discovered: CBE_SweetMess_BoxA_01
+### Sweet Mess Express — item discovered: Small Nut
 `CBE_SweetMess_Intro_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SweetMess, items=['CBE_SweetMess_BoxA_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Sweet Mess Express, eventKey=CBE_SweetMess, itemKeys=['CBE_SweetMess_BoxA_01'], items=['Small Nut'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: Pass me the wrench, Mason. I just need to tighten these screws, and then we’re ready!
 **MADDIE** (Relaxed): There! The chocolate machine is good to go for another Easter. Do you want to do the honors and turn it on?
@@ -4407,9 +4282,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Encouraging): Who else?
 **MASON** (Encouraging): Oh boy, Easter is the BEST!
 
-### CBE_SweetMess — item discovered: CBE_SweetMess_Box_04
+### Sweet Mess Express — item discovered: Pair of Socket Set Screws
 `CBE_SweetMess_Lollipop_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SweetMess, items=['CBE_SweetMess_Box_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Sweet Mess Express, eventKey=CBE_SweetMess, itemKeys=['CBE_SweetMess_Box_04'], items=['Pair of Socket Set Screws'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): Look, kiddo! They're putting on a new Easter event nearby.
 **MASON** (Thinking): I bet it's just a little Easter egg hunt for little kids.
@@ -4422,9 +4297,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Calling): "...and dive into a mountain of marshmallow foam."
 **MASON** (Charming): Please can we go? Please, please, PLEASE?
 
-### CBE_SweetMess — item discovered: CBE_SweetMess_Box_06
+### Sweet Mess Express — item discovered: Small Screw Box
 `CBE_SweetMess_Lollipop_04_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SweetMess, items=['CBE_SweetMess_Box_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Sweet Mess Express, eventKey=CBE_SweetMess, itemKeys=['CBE_SweetMess_Box_06'], items=['Small Screw Box'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Thinking): This Easter Extravaganza looks pretty cool, but what about the chocolate machine?
 **MADDIE** (Thinking): The main tank needs to be refilled regularly, and someone needs to supervise the quality.  
@@ -4446,9 +4321,9 @@ Every story in which Maddie speaks.
 **MASON** (Thinking): There is just one thing...
 **MASON**: We'll need bigger baskets.
 
-### CBE_SweetMess — item discovered: CBE_SweetMess_Assembly_05
+### Sweet Mess Express — item discovered: Complete Mechanism
 `CBE_SweetMess_Peppermint_02_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SweetMess, items=['CBE_SweetMess_Assembly_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Sweet Mess Express, eventKey=CBE_SweetMess, itemKeys=['CBE_SweetMess_Assembly_05'], items=['Complete Mechanism'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Thinking): Are you sure you're able to look after the chocolate machine?
 **HANK** (Thinking): It's not that complicated, right?
@@ -4460,9 +4335,9 @@ Every story in which Maddie speaks.
 **HANK** (Charming): Let's get to the important stuff. Are we allowed to try some of these treats?
 **MADDIE** (Relaxed): As many as you want!
 
-### CBE_SweetMess — item discovered: CBE_SweetMess_Ingredient_03
+### Sweet Mess Express — item discovered: Melted Sugar
 `CBE_SweetMess_Peppermint_04_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SweetMess, items=['CBE_SweetMess_Ingredient_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Sweet Mess Express, eventKey=CBE_SweetMess, itemKeys=['CBE_SweetMess_Ingredient_03'], items=['Melted Sugar'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: Fill the chocolate tank when the gauge gets low and keep an eye on the pressure valve.
 **MADDIE**: We'll be back in the evening!
@@ -4530,26 +4405,23 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): W-what do you see?
 **LADY VOYANCE** (Talking): Patience! I seeee that.... the winter is coming?
 
-### CBE_VeilOfFate2023 — item discovered: 55091931
+### Veil of Fate — item discovered: Open Astrology Book
 `CBE_VeilOfFate2023_BookOfStars_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['55091931'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_Research_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_Research_07'], items=['Open Astrology Book'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE**: This little book tells me which way the STARS are turning!
 **MADDIE** (Surprised): I'm not sure it works like that...
 
-### CBE_VeilOfFate2023 — item discovered: 68982086
+### Veil of Fate — item discovered: Crystal House
 `CBE_VeilOfFate2023_CrystalHouse_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['68982086'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_CrystalBallBuild_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_CrystalBallBuild_08'], items=['Crystal House'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **MADDIE**: The house inside your snow globe is cute!
 **LADY VOYANCE**: Not cute, my child! It is mysterious and enigmatic!
 
-### CBE_VeilOfFate2023 — item discovered: 54770705
+### Veil of Fate — item discovered: Dormant Snow Globe
 `CBE_VeilOfFate2023_InactiveSnowglobe_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['54770705'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_CrystalBall_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_CrystalBall_01'], items=['Dormant Snow Globe'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE**: Everything is ready, but the globe is still silent...
 **MADDIE** (Surprised): Maybe it's broken?
@@ -4570,34 +4442,30 @@ Every story in which Maddie speaks.
 **LADY VOYANCE**: I also offer birth charts and homemade charm bracelets. Pretty AND well priced!
 **MADDIE** (Charming): Sounds great, but first I'd like to hear about my future... And I have some questions!
 
-### CBE_VeilOfFate2023 — item discovered: 77460600
+### Veil of Fate — item discovered: Triple Lit Candle
 `CBE_VeilOfFate2023_LitCandles_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['77460600'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_Candle_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_Candle_04'], items=['Triple Lit Candle'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE**: The flames of my candles shed a light on paths of fate...
 **MADDIE** (Relaxed): And they have a very pleasant scent, too!
 
-### CBE_VeilOfFate2023 — item discovered: 4677677
+### Veil of Fate — item discovered: Crafting Station
 `CBE_VeilOfFate2023_MaddiesCraftingStation_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['4677677'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_MaddiesPast_09'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_MaddiesPast_09'], items=['Crafting Station'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **MADDIE** (Surprised): Wow!! I made everyone's xmas presents on that crafting table! They were... original.
 
-### CBE_VeilOfFate2023 — item discovered: 47787384
+### Veil of Fate — item discovered: Key Charm
 `CBE_VeilOfFate2023_MansionKeyCharm_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['47787384'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_CharmBracelet_11'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_CharmBracelet_11'], items=['Key Charm'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE**: I see a big house... a MANSION even! Does that sound familiar?
 **MADDIE** (Frustrated): Erhm... well, yes. 
 **LADY VOYANCE**: Ah, yes.
 
-### CBE_VeilOfFate2023 — item discovered: 3082150
+### Veil of Fate — item discovered: Motorcycle Key
 `CBE_VeilOfFate2023_MotorcycleKeys_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=CBE_VeilOfFate2023, items=['3082150'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2023, items=['CBE_VeilOfFate2023_Arthur_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, itemKeys=['CBE_VeilOfFate2023_Arthur_07'], items=['Motorcycle Key'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **LADY VOYANCE** (Talking): Your future looks VERY interesting - you may grow a BEARD!
 **MADDIE** (Surprised): I hope not! Is there anything else?
@@ -4622,10 +4490,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): I j-just want to know why this keeps happening to me...
 **LADY VOYANCE** (Talking): A BIG question, Dearest. Let's see where the globe takes us.
 
-### CBE_VeilOfFate2024 — item discovered: 68982086
+### Veil of Fate — item discovered: Crystal House
 `CBE_VeilOfFate2024_CrystalHouse_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['68982086'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_CrystalBallBuild_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_CrystalBallBuild_08'], items=['Crystal House'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Soooo, Maddie, dear. What can I help you with today?
 **MADDIE** (Thinking): I've got some questions about what you told me last time.
@@ -4649,39 +4516,35 @@ Every story in which Maddie speaks.
 **MADDIE** (Doubtful): I guess there's just ONE person who can help me...
 **MADDIE** (Discouraged): Lady Voyance.
 
-### CBE_VeilOfFate2024 — item discovered: 4677677
+### Veil of Fate — item discovered: Crafting Station
 `CBE_VeilOfFate2024_MaddiesCraftingStation_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['4677677'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_MaddiesPast_09'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_MaddiesPast_09'], items=['Crafting Station'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: I've loved making and building things since I was little.
 **MADDIE** (Worried): Maybe that's SOMETHING I got from one of my parents...
 **MADDIE** (Worried): I guess I'll never know.
 **LADY VOYANCE**: I do LOVE making crafts myself!
 
-### CBE_VeilOfFate2024 — item discovered: 4677681
+### Veil of Fate — item discovered: Drawings
 `CBE_VeilOfFate2024_MaddiesDrawings_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['4677681'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_MaddiesPast_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_MaddiesPast_05'], items=['Drawings'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Talking): What do you remember from your childhood, my dear?
 **MADDIE** (Thinking): I... I can't remember almost anything...
 **MADDIE** (Worried): My parents were lovely, and I remember being with them, and then... nothing.
 **LADY VOYANCE**: That is NOT very helpful, my dear.
 
-### CBE_VeilOfFate2024 — item discovered: 47787384
+### Veil of Fate — item discovered: Key Charm
 `CBE_VeilOfFate2024_MansionKeyCharm_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['47787384'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_CharmBracelet_11'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_CharmBracelet_11'], items=['Key Charm'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: The Mansion might hold answers for you, my dear.
 **MADDIE** (Thinking): It just brings up more questions!
 **LADY VOYANCE** (Talking): Look further into the past. Clear away the debris of history to seek the TRUTH!
 
-### CBE_VeilOfFate2024 — item discovered: 3082150
+### Veil of Fate — item discovered: Motorcycle Key
 `CBE_VeilOfFate2024_MotorcycleKeys_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['3082150'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_Arthur_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_Arthur_07'], items=['Motorcycle Key'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): I keep dreaming of keys... like car keys. What could that mean? Is it about my parents' car crash??
 **LADY VOYANCE**: Oh, my dear! It could mean an opportunity or new access - even FREEDOM!
@@ -4702,10 +4565,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Worried): Hmmm, yes. I guess so. But...
 **GRANDMA**: Forget the ifs, ands, or buts, Maddie, dearie. It is time for some classic apple pie!
 
-### CBE_VeilOfFate2024 — item discovered: 22735223
+### Veil of Fate — item discovered: Ball of the Future
 `CBE_VeilOfFate2024_SnowglobeOfTheFuture_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['22735223'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_CrystalBallFuture_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_CrystalBallFuture_01'], items=['Ball of the Future'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Talking): I see that you are about to solve a MYSTERY!
 **MADDIE** (Surprised): A... mystery? About what?
@@ -4713,20 +4575,18 @@ Every story in which Maddie speaks.
 **MADDIE** (Surprised): The mansion and Grandma??
 **LADY VOYANCE** (Talking): The missing rake... It is in the SHED!
 
-### CBE_VeilOfFate2024 — item discovered: 76273052
+### Veil of Fate — item discovered: Ball of the Past
 `CBE_VeilOfFate2024_SnowglobeOfThePast_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['76273052'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_CrystalBallPast_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_CrystalBallPast_01'], items=['Ball of the Past'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Talking): Your parents...
 **MADDIE**: Yeah? Do you see them?
 **LADY VOYANCE** (Talking): You survived that awful car crash that killed them... It must still haunt you.
 **MADDIE** (Surprised): I-I was in the car WITH them??
 
-### CBE_VeilOfFate2024 — item discovered: 45258692
+### Veil of Fate — item discovered: Ball of the Present
 `CBE_VeilOfFate2024_SnowglobeOfThePresent_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['45258692'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_CrystalBallPresent_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_CrystalBallPresent_01'], items=['Ball of the Present'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Talking): I sense some anger in you... A GREAT disturbance!
 **MADDIE** (Annoyed): I AM angry! I finally put myself out there only to be left for some fish!
@@ -4735,10 +4595,9 @@ Every story in which Maddie speaks.
 **LADY VOYANCE**: But... there is no ocean in Bolivia.
 **MADDIE** (Frustrated): I KNOW.
 
-### CBE_VeilOfFate2024 — item discovered: 22036603
+### Veil of Fate — item discovered: "The Chef"
 `CBE_VeilOfFate2024_TheChef_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['22036603'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_Constellation_12'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_Constellation_12'], items=['"The Chef"'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Who is it that sprinkles your life with magic, my dear?
 **MADDIE** (Thinking): I thought it was Emilio... but I couldn't be more wrong.
@@ -4746,19 +4605,17 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): I can't think of anyone...
 **LADY VOYANCE** (Talking): No one??
 
-### CBE_VeilOfFate2024 — item discovered: 9081933
+### Veil of Fate — item discovered: "The Partners"
 `CBE_VeilOfFate2024_ThePartnersTarotCard_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['9081933'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_TarotCard_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_TarotCard_08'], items=['"The Partners"'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: What would you say is your GREATEST goal in life?
 **MADDIE**: Apart from having a day off? I... I just want to find love. You know, a love that lasts.
 **LADY VOYANCE**: It may be closer than you think, my dear.
 
-### CBE_VeilOfFate2024 — item discovered: 3082153
+### Veil of Fate — item discovered: Wallet
 `CBE_VeilOfFate2024_Wallet_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VeilOfFate2024, items=['3082153'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VeilOfFate2024, items=['CBE_VeilOfFate2023_Arthur_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, itemKeys=['CBE_VeilOfFate2023_Arthur_04'], items=['Wallet'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Talking): I think I see a figure EMERGING...
 **MADDIE** (Surprised): W- who is it??
@@ -6399,30 +6256,27 @@ How handy!
 
 ### DiningArea — item discovered: 76987598
 `Dining_Piano_Ftue1` · seen 23.09.02–26.07.01
-- trigger: item, event=DiningArea, items=['76987598'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=DiningArea, items=['DiningPiano_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=DiningArea, eventKey=DiningArea, itemKeys=['76987598'], items=['76987598'], moment=item discovered (versions 23.09.02–25.06.01)
+- trigger: item, event=DiningArea, eventKey=DiningArea, itemKeys=['DiningPiano_01'], items=['DiningPiano_01'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: Hmm, this piano is quite out of tune. Tap on the piano to try and tune it!
 
-### DiningArea — item discovered: 41232590
+### DiningArea — item discovered: Metronome
 `Dining_Piano_Ftue2` · seen 23.09.02–26.07.01
-- trigger: item, event=DiningArea, items=['41232590'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=DiningArea, items=['DiningMetronome_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=DiningArea, eventKey=DiningArea, itemKeys=['DiningMetronome_01'], items=['Metronome'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE**: Drag and drop the Metronome on the piano to activate it!
 
-### DiningArea — item discovered: 77377195
+### DiningArea — item discovered: Playable Broken Piano
 `Dining_Piano_Ftue3` · seen 23.09.02–26.07.01
-- trigger: item, event=DiningArea, items=['77377195'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=DiningArea, items=['DiningPianoMetronome_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=DiningArea, eventKey=DiningArea, itemKeys=['DiningPianoMetronome_01'], items=['Playable Broken Piano'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE**: Tap on the piano to tune it when the pendulum is not at the center to produce pure notes.
 **MADDIE**: Note that if you tap on the piano when the pendulum is at the center, your piano will produce bad notes.
 
-### DiningArea — item discovered: 67565772
+### DiningArea — item discovered: Clean Crotchet
 `Dining_Piano_Ftue5` · seen 23.09.02–26.07.01
-- trigger: item, event=DiningArea, items=['67565772'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=DiningArea, items=['DiningPureNote_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=DiningArea, eventKey=DiningArea, itemKeys=['DiningPureNote_01'], items=['Clean Crotchet'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE**: Fantastic job! You're getting the hang of it!
 
@@ -9062,10 +8916,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Encouraging): Well... I have a golden toilet now.
 **ASH**: May it serve you well.
 
-### GoldenWeek2024 — item discovered: 39241102
+### GoldenWeek2024 — item discovered: Green wisdom Pouch
 `GoldenWeek2024_Producer_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=GoldenWeek2024, items=['39241102'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=GoldenWeek2024, items=['GoldenWeek2024_Producer_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=GoldenWeek2024, eventKey=GoldenWeek2024, itemKeys=['GoldenWeek2024_Producer_01'], items=['Green wisdom Pouch'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): ここにはもっと良いリサイクルシステムが必要だわ。100年前のコンポストじゃ全然足りない！
 **GRANDMA** (Charming): 日本に住んでいたときに、いいことを学んだのよ！日本では「知恵袋」と呼ばれるエコな考え方があるんだけど...。
@@ -10009,35 +9862,31 @@ The door will shift between the lines.'
 **DEB** (Charming): Seems like that competitive blood flows in your veins too, Maddie.
 **MADDIE** (Encouraging): I guess so! I am a Boulton after all; you know!
 
-### LBE_BushBonanza — item discovered: 18670868
+### The Great Bush Bonanza! — item discovered: Seedling Tray
 `LBE_BushBonanzaSeedlingProducers` · seen 23.09.02–26.07.01
-- trigger: item, event=LBE_BushBonanza, items=['18670868'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LBE_BushBonanza, items=['LBE_BushBonanza_SeedlingProducers_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Great Bush Bonanza!, eventKey=LBE_BushBonanza, itemKeys=['LBE_BushBonanza_SeedlingProducers_06'], items=['Seedling Tray'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Joyous): This’ll definitely help me grow some amazing shrubs!
 **GRANDMA** (Encouraging): I might use this to grow some lovely tomatoes for my pies too!
 
-### LBE_BushBonanza — item discovered: 84092701
+### The Great Bush Bonanza! — item discovered: Shrub
 `LBE_BushBonanzaSeedlings` · seen 23.09.02–26.07.01
-- trigger: item, event=LBE_BushBonanza, items=['84092701'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LBE_BushBonanza, items=['LBE_BushBonanza_Seedlings_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Great Bush Bonanza!, eventKey=LBE_BushBonanza, itemKeys=['LBE_BushBonanza_Seedlings_06'], items=['Shrub'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Charming): Sic parvis magna...
 **MADDIE** (Relaxed): “Greatness from small beginnings.”
 
-### LBE_Halloween2023 — item discovered: 73679760
+### The Great Pumpkin Palooza — item discovered: Pumpkin Seeds
 `LBE_Halloween2023PumpkinPlant` · seen 23.09.02–26.07.01
-- trigger: item, event=LBE_Halloween2023, items=['73679760'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LBE_Halloween2023, items=['LBE_Halloween2023_PumpkinPlant_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Great Pumpkin Palooza, eventKey=LBE_Halloween2023, itemKeys=['LBE_Halloween2023_PumpkinPlant_01'], items=['Pumpkin Seeds'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Encouraging): Pumpkin flowers are quite beautiful! I guess I just like the color.
 **EMILIO** (Encouraging): Then, this one is yours...
 **MADDIE** (Charming): Oh!
 
-### LBE_May2023 — item discovered: 300605
+### The Great Bake-off — item discovered: Hatchling
 `LBE_May2023Chicks` · seen 23.09.02–26.07.01
-- trigger: item, event=LBE_May2023, items=['300605'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LBE_May2023, items=['LBE_May2023_Chickens_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Great Bake-off, eventKey=LBE_May2023, itemKeys=['LBE_May2023_Chickens_01'], items=['Hatchling'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Charming): Aww! They're so cute! 
 
@@ -10077,10 +9926,9 @@ The door will shift between the lines.'
 **HEIKKI** (Charming): I guess so... It means hello and goodbye. 
 **PEARL** (Encouraging): Oh! Well then to everyone, Moro!
 
-### LBE_Xmas2023 — item discovered: 47852364
+### Gingerbread Jamboree — item discovered: Microwave Oven Baking
 `LBE_Xmas2023_SmalIOvenProducing_01_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=LBE_Xmas2023, items=['47852364'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=LBE_Xmas2023, items=['LBE_Xmas2023_SmalIOvenProducing_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Gingerbread Jamboree, eventKey=LBE_Xmas2023, itemKeys=['LBE_Xmas2023_SmalIOvenProducing_01'], items=['Microwave Oven Baking'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **MADDIE** (Encouraging): There! Now we're in business!
 **GRANDMA** (Encouraging): Let's see if we can bake a batch...
@@ -10097,19 +9945,18 @@ The door will shift between the lines.'
 **MADDIE** (Doubtful): You got it. Now can we go?
 **GRANDMA** (Relaxed): Let's do it!
 
-### CBE_LuckyCatch — item discovered: 31951534
+### Lucky Catch — item discovered: Permit
 `LC_CommonPermit_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['31951534'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_CommonPermit_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_CommonPermit_01'], items=['Permit'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): Nice catch, Grandma? Is it a dorado?
 **GRANDMA** (Thinking): No, the color is wrong and fins look different... I think this is a permit.
 **MADDIE** (Thinking): Permit? How on earth did you know that?
 **GRANDMA** (Charming): Always be prepared, dearie, and do your research!
 
-### CBE_LuckyCatch — item discovered: LC_EpicPacificSailfish_01
+### Lucky Catch — item discovered: Pacific Sailfish
 `LC_EpicPacificSailfish_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_EpicPacificSailfish_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_EpicPacificSailfish_01'], items=['Pacific Sailfish'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Surprised): Is that a... shark?
 **GRANDMA**: My dear, that's a Sailfish.
@@ -10119,10 +9966,9 @@ The door will shift between the lines.'
 **GRANDMA** (Relaxed): I have also been doing some light reading. We go fishing often enough that I want to be well informed.
 **MADDIE** (Relaxed): Very impressive, Grandma!
 
-### CBE_LuckyCatch — item discovered: 5064496
+### Lucky Catch — item discovered: Southern Bluefin Tuna
 `LC_EpicSouthernBluefinTuna_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['5064496'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_EpicSouthernBluefinTuna_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_EpicSouthernBluefinTuna_01'], items=['Southern Bluefin Tuna'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Frustrated): This fish is putting up a fight! Feels like we've been reeling it for a month!
 **GRANDMA** (Thinking): It is coming closer, and I think I just saw a flash of silver!
@@ -10159,10 +10005,9 @@ The door will shift between the lines.'
 **GRANDMA** (Joyous): Not around here, dearie! That must have been quite a dream.
 **MADDIE** (Hesitant): You have no idea!
 
-### CBE_LuckyCatch — item discovered: 92077087
+### Lucky Catch — item discovered: Grandma Grandma
 `LC_Halloween_ColossalGrandmaGrandma_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['92077087'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_ColossalGrandmaGrandma_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_ColossalGrandmaGrandma_01'], items=['Grandma Grandma'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): WHAT is that in the water?
 **GRANDMA** (Encouraging): I think you just spotted the most elusive fish in the sea...
@@ -10181,19 +10026,18 @@ The door will shift between the lines.'
 **GRANDMA** (Encouraging): A Crimson-lipped Batfish! Look at those ears!
 **MADDIE** (Worried): A fish with ears?
 
-### CBE_LuckyCatch — item discovered: 18504775
+### Lucky Catch — item discovered: Mummy Fish
 `LC_Halloween_CommonMummyFish_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['18504775'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_CommonMummyFish_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_CommonMummyFish_01'], items=['Mummy Fish'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Encouraging): Well done, dearie! You caught a big one!
 **MADDIE** (Surprised): Err... What kind of fish is that??
 **GRANDMA** (Thinking): It is a mummyfish! Very rare and interesting.
 **MADDIE** (Thinking): Yeah, of c-course!
 
-### CBE_LuckyCatch — item discovered: LC_Halloween_EpicCountSquidula_01
+### Lucky Catch — item discovered: Count Squidula
 `LC_Halloween_EpicCountSquidula_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_EpicCountSquidula_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_EpicCountSquidula_01'], items=['Count Squidula'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Thinking): The conditions are perfect for catching a Count Squidula.
 **MADDIE** (Frustrated): Wh... You know, I’m not even going to ask.  
@@ -10203,20 +10047,18 @@ The door will shift between the lines.'
 **MADDIE** (Discouraged): Are you talking about a squid that looks like a vampire?
 **GRANDMA** (Encouraging): You’re catching on, dearie!
 
-### CBE_LuckyCatch — item discovered: 70518223
+### Lucky Catch — item discovered: Terrafish
 `LC_Halloween_EpicTerrafish_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['70518223'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_EpicTerrafish_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_EpicTerrafish_01'], items=['Terrafish'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): Grandma...!
 **GRANDMA**: Yes, dear?
 **MADDIE** (Surprised): There's a fish in the boat!
 **GRANDMA** (Encouraging): The terrafish is able to crawl as well as swim. It is a real super fish!
 
-### CBE_LuckyCatch — item discovered: 33457861
+### Lucky Catch — item discovered: Dragon Koi
 `LC_Halloween_LegendaryDragonKoi_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['33457861'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_LegendaryDragonKoi_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_LegendaryDragonKoi_01'], items=['Dragon Koi'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Joyous): I think I've got one, Grandma...
 **MADDIE** (Joyous): Yes!
@@ -10224,9 +10066,9 @@ The door will shift between the lines.'
 **GRANDMA** (Doubtful): Isn't it obvious? It's a dragon koi!
 **GRANDMA** (Doubtful): But don't worry - it does not breathe fire.
 
-### CBE_LuckyCatch — item discovered: LC_Halloween_LegendaryTheBlobFish_01
+### Lucky Catch — item discovered: The Blob Fish
 `LC_Halloween_LegendaryTheBlobFish_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_LegendaryTheBlobFish_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_LegendaryTheBlobFish_01'], items=['The Blob Fish'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Worried): Is it time to go home yet? I’m getting a really spooky feeling out here...  
   _earlier:_ ~~Is it time to go home yet? I’m getting a really spooky feeling out here…~~ (until 25.10.01)
@@ -10236,28 +10078,26 @@ The door will shift between the lines.'
 **MADDIE** (Annoyed): In your worst nightmares?
 **GRANDMA** (Charming): Very funny!
 
-### CBE_LuckyCatch — item discovered: 94841660
+### Lucky Catch — item discovered: Cutethulhu
 `LC_Halloween_RareCutethulhu_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['94841660'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_RareCutethulhu_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_RareCutethulhu_01'], items=['Cutethulhu'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): I've never caught an octopus in these waters.
 **MADDIE** (Thinking): How do you catch one with a fishing rod, anyway??
 **GRANDMA** (Encouraging): But it is adorable, isn't it?
 
-### CBE_LuckyCatch — item discovered: 36651142
+### Lucky Catch — item discovered: Reverse Mermaid
 `LC_Halloween_UltimateReverseMermaid_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['36651142'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_UltimateReverseMermaid_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_UltimateReverseMermaid_01'], items=['Reverse Mermaid'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Charming): Do you believe in mermaids, dear?
 **MADDIE** (Worried): I don't think so...
 **GRANDMA** (Joyous): Look what I caught!
 **MADDIE** (Surprised): Aaaaaah!
 
-### CBE_LuckyCatch — item discovered: LC_Halloween_UncommonHobgoblinShark_01
+### Lucky Catch — item discovered: Hobgoblin Shark
 `LC_Halloween_UncommonHobgoblinShark_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_UncommonHobgoblinShark_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_UncommonHobgoblinShark_01'], items=['Hobgoblin Shark'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Thinking): I caught something! I think it looks like some kind of shark.
 **GRANDMA** (Surprised): Don’t give up! Keep reeling it in.
@@ -10265,20 +10105,18 @@ The door will shift between the lines.'
 **GRANDMA** (Thinking): No wonder it put up a fight! It’s a Hobgoblin Shark.
 **GRANDMA** (Joyous): The meanest fish in these waters!
 
-### CBE_LuckyCatch — item discovered: 65904000
+### Lucky Catch — item discovered: Jack-O-Angler
 `LC_Halloween_UncommonJackOAngler_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['65904000'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_UncommonJackOAngler_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_UncommonJackOAngler_01'], items=['Jack-O-Angler'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: This one is putting up a REAL fight!
 **MADDIE** (Worried): And it looks REALLY mean!
 **MADDIE** (Worried): B-but... Is that a jack-o'-lantern??
 **GRANDMA** (Charming): Naturally! It is called the jack-o'-angler, after all.
 
-### CBE_LuckyCatch — item discovered: 32668559
+### Lucky Catch — item discovered: Foxy Catfish
 `LC_Halloween_VeryRareSexyCatfish_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['32668559'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_VeryRareSexyCatfish_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_VeryRareSexyCatfish_01'], items=['Foxy Catfish'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Whoooah!
 **MADDIE** (Surprised): I'm... speechless. Is that a... catfish?
@@ -10286,9 +10124,9 @@ The door will shift between the lines.'
 **MADDIE** (Thinking): This is getting weirder by the moment...
 **MADDIE** (Thinking): What IS going on??
 
-### CBE_LuckyCatch — item discovered: LC_Halloween_VeryRareWerefish_01
+### Lucky Catch — item discovered: Werefish
 `LC_Halloween_VeryRareWerefish_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_VeryRareWerefish_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_VeryRareWerefish_01'], items=['Werefish'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Worried): Can you hear howling?
 **GRANDMA**: Well, well! There must be a Werefish nearby!
@@ -10299,10 +10137,9 @@ The door will shift between the lines.'
 **MADDIE** (Surprised): Ouch!
 **GRANDMA** (Charming): Come on, and catch the Werefish in the net so we can take a photo!
 
-### CBE_LuckyCatch — item discovered: 16991959
+### Lucky Catch — item discovered: Giant Sea Bass
 `LC_LegendaryGiantSeaBass_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['16991959'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_LegendaryGiantSeaBass_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_LegendaryGiantSeaBass_01'], items=['Giant Sea Bass'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): I've got one and it... it's big!
 **GRANDMA** (Worried): Can you reel it in?
@@ -10313,9 +10150,9 @@ The door will shift between the lines.'
 **MADDIE** (Relaxed): So your generation, then!
 **GRANDMA** (Doubtful): Very funny.
 
-### CBE_LuckyCatch — item discovered: LC_LegendaryPacificHalibut_01
+### Lucky Catch — item discovered: Pacific Halibut
 `LC_LegendaryPacificHalibut_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_LegendaryPacificHalibut_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_LegendaryPacificHalibut_01'], items=['Pacific Halibut'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Worried): Yikes, what a looker! That has to be a Halibut!
 **MADDIE** (Worried): I just can't get over those weird eyes.
@@ -10323,19 +10160,18 @@ The door will shift between the lines.'
 **MADDIE** (Doubtful): Grandma!
 **GRANDMA** (Charming): One day you will let me take one home.
 
-### CBE_LuckyCatch — item discovered: 9963271
+### Lucky Catch — item discovered: Black Drum
 `LC_RareBlackDrum_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['9963271'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_RareBlackDrum_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_RareBlackDrum_01'], items=['Black Drum'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): What a monster! I-is that a black drum?
 **GRANDMA**: I think it is!
 **MADDIE** (Thinking): I thought it was much smaller - like a salmon.
 **GRANDMA** (Thinking): Not quite!
 
-### CBE_LuckyCatch — item discovered: LC_RareCuberaSnapper_01
+### Lucky Catch — item discovered: Cubera Snapper
 `LC_RareCuberaSnapper_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_RareCuberaSnapper_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_RareCuberaSnapper_01'], items=['Cubera Snapper'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Surprised): Dearie, I think I got a big one!
 **MADDIE**: Do you want me to reel it in for you, Grandma?
@@ -10344,9 +10180,9 @@ The door will shift between the lines.'
 **MADDIE** (Relaxed): It looks like a huge snapper! Look at those teeth!
 **GRANDMA** (Joyous): Not bad, if I do say so myself.
 
-### CBE_LuckyCatch — item discovered: LC_CommonDogSnapper_01
+### Lucky Catch — item discovered: Dog Snapper
 `LC_Spring_CommonDogSnapper_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_CommonDogSnapper_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_CommonDogSnapper_01'], items=['Dog Snapper'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA**: Oh, my! This is a feisty one… a Dog Snapper, if I'm not mistaken!
 **MADDIE** (Joyous): You're right. Look at those teeth!
@@ -10354,9 +10190,9 @@ The door will shift between the lines.'
 **MADDIE** (Annoyed): Grandma! That's not very nice!
 **GRANDMA** (Charming): What? I think it is charming.
 
-### CBE_LuckyCatch — item discovered: LC_EpicPorbeagle_01
+### Lucky Catch — item discovered: Porbeagle
 `LC_Spring_EpicPorbeagle_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_EpicPorbeagle_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_EpicPorbeagle_01'], items=['Porbeagle'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Encouraging): I think we've got a shark on the line.
 **GRANDMA** (Encouraging): And it's a fighter!
@@ -10380,9 +10216,9 @@ The door will shift between the lines.'
 **MADDIE** (Encouraging): We're just keeping the tradition alive.
 **GRANDMA** (Joyous): Oh, alright! Let the fishing commence!
 
-### CBE_LuckyCatch — item discovered: LC_LegendaryAtlanticSturgeon_01
+### Lucky Catch — item discovered: Atlantic Sturgeon
 `LC_Spring_LegendaryAtlanticSturgeon_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_LegendaryAtlanticSturgeon_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_LegendaryAtlanticSturgeon_01'], items=['Atlantic Sturgeon'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Encouraging): Aha! I know this one. It is an Atlantic Sturgeon.
 **MADDIE** (Joyous): So it is! Did you know they can live up to sixty years? They're living fossils.
@@ -10392,27 +10228,25 @@ The door will shift between the lines.'
 **MADDIE** (Annoyed): Let the sturgeon go, Grandma.
 **GRANDMA** (Annoyed): Oh, fine. Spoilsport.
 
-### CBE_LuckyCatch — item discovered: 11585009
+### Lucky Catch — item discovered: Warsaw Grouper
 `LC_Spring_LegendaryWarsawGrouper_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['11585009'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_LegendaryWarsawGrouper_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_LegendaryWarsawGrouper_01'], items=['Warsaw Grouper'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): Wooooow, is that a fish or a whale??
 **MADDIE** (Relaxed): I think we need a bigger boat!
 **GRANDMA** (Annoyed): ...
 
-### CBE_LuckyCatch — item discovered: 6087763
+### Lucky Catch — item discovered: Conger
 `LC_Spring_RareConger_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['6087763'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_RareConger_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_RareConger_01'], items=['Conger'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): Watch your fingers - that slippery guy bites!
 **MADDIE** (Surprised): And it's putting up a fight, too!
 **MADDIE** (Surprised): Eeeek - he can go back...
 
-### CBE_LuckyCatch — item discovered: LC_RareStripedBass_01
+### Lucky Catch — item discovered: Striped Bass
 `LC_Spring_RareStripedBass_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_RareStripedBass_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_RareStripedBass_01'], items=['Striped Bass'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Thinking): What is this one? It has a striped back…
 **MADDIE** (Encouraging): A Striped Bass! Good catch, Grandma!
@@ -10420,9 +10254,9 @@ The door will shift between the lines.'
 **MADDIE** (Joyous): You got it! Nice work.
 **GRANDMA** (Annoyed): Quite the workout! No wonder they call it sport fishing…
 
-### CBE_LuckyCatch — item discovered: LC_UltimateThresherShark_01
+### Lucky Catch — item discovered: Thresher Shark
 `LC_Spring_UltimateThresherShark_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_UltimateThresherShark_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_UltimateThresherShark_01'], items=['Thresher Shark'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Surprised): I think I have something BIG on the line, Maddie.
 **MADDIE** (Encouraging): Gosh, look at that tail! That's a Thresher Shark!
@@ -10431,9 +10265,9 @@ The door will shift between the lines.'
 **MADDIE** (Joyous): But they're harmless to humans. We're much too big for them.
 **GRANDMA** (Charming): I think this one might give us a try… watch out!
 
-### CBE_LuckyCatch — item discovered: LC_UncommonPelagicStingray_01
+### Lucky Catch — item discovered: Pelagic Stingray
 `LC_Spring_UncommonPelagicStingray_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_UncommonPelagicStingray_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_UncommonPelagicStingray_01'], items=['Pelagic Stingray'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Worried): My goodness, will you look at that!
 **MADDIE** (Worried): Careful! I can take the picture from here, no need to reel it all the way in!
@@ -10441,10 +10275,9 @@ The door will shift between the lines.'
 **MADDIE**: A Stingray! A Pelagic Stingray to be precise. Careful of that tail!
 **GRANDMA** (Charming): Do not worry, dearie. I have dodged worse in my time.
 
-### CBE_LuckyCatch — item discovered: 23289313
+### Lucky Catch — item discovered: Red Drum
 `LC_Spring_UncommonRedDrum_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['23289313'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_UncommonRedDrum_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_UncommonRedDrum_01'], items=['Red Drum'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA**: What an adorable little fish!
 **MADDIE** (Thinking): You don't see that many red fish.
@@ -10452,10 +10285,9 @@ The door will shift between the lines.'
 **GRANDMA** (Thinking): And the red emperor?
 **MADDIE** (Doubtful): How do you know so much about fish all of a sudden?
 
-### CBE_LuckyCatch — item discovered: 26682829
+### Lucky Catch — item discovered: Atlantic Halibut
 `LC_Spring_VeryRareAtlanticHalibut_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['26682829'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_EpicAtlanticHalibut_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_EpicAtlanticHalibut_01'], items=['Atlantic Halibut'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): I can feel that fish watching us...
 **GRANDMA** (Thinking): It is a curious creature, and no mistake!
@@ -10463,9 +10295,9 @@ The door will shift between the lines.'
 **GRANDMA**: The Atlantic halibut is really overfished, so you are right.
 **MADDIE**: Goodbye, big guy!
 
-### CBE_LuckyCatch — item discovered: LC_VeryRareMistyGrouper_01
+### Lucky Catch — item discovered: Misty Grouper
 `LC_Spring_VeryRareMistyGrouper_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_VeryRareMistyGrouper_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_VeryRareMistyGrouper_01'], items=['Misty Grouper'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Surprised): This is a big one. I might need a little help here!
 **MADDIE** (Encouraging): Look at those fins! They're spiky!
@@ -10475,34 +10307,31 @@ The door will shift between the lines.'
 **MADDIE** (Annoyed): Grandma!
 **GRANDMA** (Encouraging): Oops. Looks like it escaped!
 
-### CBE_LuckyCatch — item discovered: 40697700
+### Lucky Catch — item discovered: Colossal Fishing Rod
 `LC_Summer_ColossalFishingRod_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['40697700'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_ColossalFishingRod_01'], moment=item discovered (versions 26.03.01–26.04.02)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Summer_ColossalFishingRod_01'], moment=item discovered (versions 26.05.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Autumn_ColossalFishingRod_01'], moment=item discovered (versions 26.05.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Winter_ColossalFishingRod_01'], moment=item discovered (versions 26.05.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Halloween_ColossalFishingRod_01'], moment=item discovered (versions 26.05.01–26.07.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_Spring_ColossalFishingRod_01'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_ColossalFishingRod_01'], items=['Colossal Fishing Rod'], moment=item discovered (versions 25.05.01–26.04.02)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Summer_ColossalFishingRod_01'], items=['Colossal Fishing Rod'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Autumn_ColossalFishingRod_01'], items=['Colossal Fishing Rod'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Winter_ColossalFishingRod_01'], items=['Colossal Fishing Rod'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_ColossalFishingRod_01'], items=['Colossal Fishing Rod'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Spring_ColossalFishingRod_01'], items=['Colossal Fishing Rod'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **MADDIE** (Surprised): Where did you get that fishing rod??
 **GRANDMA** (Charming): They say to get the right tools for the job.
 **MADDIE** (Relaxed): What are you hoping to catch - a humpback whale?
 
-### CBE_LuckyCatch — item discovered: 10046170
+### Lucky Catch — item discovered: Mola Mola
 `LC_Summer_ColossalMolaMola_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['10046170'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_ColossalMolaMola_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_ColossalMolaMola_01'], items=['Mola Mola'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): WHAT is that?
 **MADDIE** (Thinking): Let me check the guidebook... I think it is a mola mola!
 **MADDIE** (Thinking): Poor little guy! It looks like just a fish head with no tail. 
 **GRANDMA** (Charming): I bet it would still be tasty!
 
-### CBE_LuckyCatch — item discovered: 71109959
+### Lucky Catch — item discovered: Common Snook
 `LC_Summer_CommonSnook_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['71109959'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_CommonSnook_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_CommonSnook_01'], items=['Common Snook'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): This snook put up quite a fight!
 **GRANDMA** (Surprised): Well done, dearie!
@@ -10525,10 +10354,9 @@ The door will shift between the lines.'
 - trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
 
 
-### CBE_LuckyCatch — item discovered: 47072279
+### Lucky Catch — item discovered: Shortfin Mako Shark
 `LC_Summer_UltimateMakoShark_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['47072279'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_UltimateMakoShark_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_UltimateMakoShark_01'], items=['Shortfin Mako Shark'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): I wonder if there are sharks in these wat... WHOA!
 **GRANDMA** (Joyous): Hold on! You caught a big one, dearie!
@@ -10539,10 +10367,9 @@ The door will shift between the lines.'
 - trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
 
 
-### CBE_LuckyCatch — item discovered: 32202864
+### Lucky Catch — item discovered: White Marlin
 `LC_Summer_VeryRareWhiteMarlin_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['32202864'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_VeryRareWhiteMarlin_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_VeryRareWhiteMarlin_01'], items=['White Marlin'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Whoa! Look out for that spike!
 **GRANDMA** (Charming): Actually, it is called a "bill."
@@ -10553,10 +10380,9 @@ The door will shift between the lines.'
 - trigger: unknown, hint=Fishing (Lake Catch) event (versions None–None)
 
 
-### CBE_LuckyCatch — item discovered: 22055558
+### Lucky Catch — item discovered: Black Marlin
 `LC_UltimateBlackMarlin_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['22055558'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_UltimateBlackMarlin_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_UltimateBlackMarlin_01'], items=['Black Marlin'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): Is there a fish you've always wanted to catch?
 **GRANDMA** (Relaxed): I've always hoped we might catch a black marlin on one of our fishing trips.
@@ -10564,9 +10390,9 @@ The door will shift between the lines.'
 **GRANDMA** (Surprised): Huh! I think I've got something pretty big on my hook...
 **MADDIE** (Surprised): Yes, you do! And it's a black marlin!
 
-### CBE_LuckyCatch — item discovered: LC_UncommonAlbacore_01
+### Lucky Catch — item discovered: Albacore
 `LC_UncommonAlbacore_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['LC_UncommonAlbacore_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_UncommonAlbacore_01'], items=['Albacore'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Surprised): Whoa, did you see that silvery fish?? It was fast. And BIG!
 **GRANDMA** (Frustrated): What in the world was it?
@@ -10576,10 +10402,9 @@ The door will shift between the lines.'
 **MADDIE** (Joyous): Ha! I got it!
 **GRANDMA** (Joyous): You caught an Albacore, a type of tuna. A very nice catch, indeed!
 
-### CBE_LuckyCatch — item discovered: 93896594
+### Lucky Catch — item discovered: Atlantic Cod
 `LC_UncommonAtlanticCod_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['93896594'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_UncommonAtlanticCod_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_UncommonAtlanticCod_01'], items=['Atlantic Cod'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Joyous): I think I caught a cod!
 **GRANDMA** (Charming): You know, cod is an excellent culinary fish...
@@ -10589,20 +10414,18 @@ The door will shift between the lines.'
 **MADDIE** (Encouraging): Catch and release, remember?
 **GRANDMA** (Doubtful): Oh, fine!
 
-### CBE_LuckyCatch — item discovered: 29896142
+### Lucky Catch — item discovered: Atlantic Sailfish
 `LC_VeryRareAtlanticSailfish_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_LuckyCatch, items=['29896142'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_LuckyCatch, items=['LC_VeryRareAtlanticSailfish_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_VeryRareAtlanticSailfish_01'], items=['Atlantic Sailfish'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: Did you see that??
 **GRANDMA** (Thinking): I think we've got a sailfish on the hook!
 **MADDIE** (Surprised): You mean the fastest fish in the ocean? THAT sailfish?
 **GRANDMA** (Joyous): The very same!
 
-### LDE_GrandmasBirthday2023 — item discovered: 52904299
+### Grandma's Pool Party — item discovered: Analogue Cassettes
 `LDE_GrandmasBirthday2023_AnalogueTapesChain_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=LDE_GrandmasBirthday2023, items=['52904299'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LDE_GrandmasBirthday2023, items=['LDE_GrandmasBirthday2023_PodcastCassette_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Grandma's Pool Party, eventKey=LDE_GrandmasBirthday2023, itemKeys=['LDE_GrandmasBirthday2023_PodcastCassette_01'], items=['Analogue Cassettes'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE**: Done! First podcast episode in the can!
 **MADDIE**: While modern podcasting is purely digital, I guess it doesn’t hurt to go old school...
@@ -10629,10 +10452,9 @@ The door will shift between the lines.'
 **DEB** (Relaxed): That’s the surprise! Tataa, sweetie! I’m off to get “the help”...
 **MADDIE** (Thinking): I wonder what she means by that?
 
-### LDE_GrandmasBirthday2023 — item discovered: 8805208
+### Grandma's Pool Party — item discovered: Inflatable Pool Slide
 `LDE_GrandmasBirthday2023_FloatChain_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=LDE_GrandmasBirthday2023, items=['8805208'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LDE_GrandmasBirthday2023, items=['LDE_GrandmasBirthday2023_Floaties_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Grandma's Pool Party, eventKey=LDE_GrandmasBirthday2023, itemKeys=['LDE_GrandmasBirthday2023_Floaties_07'], items=['Inflatable Pool Slide'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MASON** (Joyous): Hi, Maddie! Look what I got for your grandma!  
   _earlier:_ ~~Hi Maddie! Look what I got for your grandma!~~ (until 23.12.01)
@@ -10715,20 +10537,18 @@ The door will shift between the lines.'
 **GRANDMA** (Joyous): Ha! I guess it could have been worse!
 **MADDIE** (Thinking): What do you mean by that?
 
-### LDE_GrandmasBirthday2023 — item discovered: 79393028
+### Grandma's Pool Party — item discovered: Elegant Perfume
 `LDE_GrandmasBirthday2023_PerfumeChain_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=LDE_GrandmasBirthday2023, items=['79393028'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LDE_GrandmasBirthday2023, items=['LDE_GrandmasBirthday2023_Perfumes_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Grandma's Pool Party, eventKey=LDE_GrandmasBirthday2023, itemKeys=['LDE_GrandmasBirthday2023_Perfumes_05'], items=['Elegant Perfume'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE**: Julius! Did you bring something for Grandma?
 **ANTIQUEDEALER** (Encouraging): Salutations! Yes, in fact, I did!
 **ANTIQUEDEALER** (Charming): Her favorite perfume! They discontinued it a few years back, but I acquired a few bottles for just such an occasion.
 **MADDIE** (Charming): That’s very thoughtful of you.
 
-### LDE_GrandmasBirthday2023 — item discovered: 84897276
+### Grandma's Pool Party — item discovered: Recording Equipment
 `LDE_GrandmasBirthday2023_PodcastEquipmentChain_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=LDE_GrandmasBirthday2023, items=['84897276'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LDE_GrandmasBirthday2023, items=['LDE_GrandmasBirthday2023_PodcastEquipment_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Grandma's Pool Party, eventKey=LDE_GrandmasBirthday2023, itemKeys=['LDE_GrandmasBirthday2023_PodcastEquipment_07'], items=['Recording Equipment'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Joyous): Happy Birthday, Grandma!
 **GRANDMA** (Surprised): What’s this dearie?
@@ -10737,10 +10557,9 @@ The door will shift between the lines.'
 **GRANDMA** (Charming): Or a True Crime podcast!
 **MADDIE** (Surprised): Er... Really?!
 
-### LDE_GrandmasBirthday2023 — item discovered: 11610223
+### Grandma's Pool Party — item discovered: Podcasting Kit
 `LDE_GrandmasBirthday2023_PodcastingKitChain_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=LDE_GrandmasBirthday2023, items=['11610223'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LDE_GrandmasBirthday2023, items=['LDE_GrandmasBirthday2023_BirthdayCake_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Grandma's Pool Party, eventKey=LDE_GrandmasBirthday2023, itemKeys=['LDE_GrandmasBirthday2023_BirthdayCake_08'], items=['Podcasting Kit'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE**: Hi, Jackie! So what was your idea for me to get Grandma?  
   _earlier:_ ~~Hi Jackie! So what was your idea for me to get Grandma?~~ (until 23.12.01)
@@ -10820,9 +10639,9 @@ The door will shift between the lines.'
 **MADDIE** (Encouraging): Well, the rakes are ready, the seedbags lined up, and the beds won't turn themselves.
 **MADDIE** (Joyous): Let's see if I can turn this garden into a little community project!
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_CharacterBella_02
+### Green Acres Quest — item discovered: Bella
 `LDE_GreenAcresQuest_CharacterBella_02_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_CharacterBella_02'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterBella_02'], items=['Bella'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **MADDIE** (Surprised): Hey, Bella! I didn’t expect an audience while I wrestle with weeds.  
   _earlier:_ ~~Hey Bella! I didn’t expect an audience while I wrestle with weeds.~~ (until 26.05.01)
@@ -10833,9 +10652,9 @@ The door will shift between the lines.'
 **BELLA**: Lucky for you, restoring struggling environments is kind of my thing.
 **MADDIE** (Encouraging): Then I’m very glad you just happened to wander by.
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_CharacterCherry_02
+### Green Acres Quest — item discovered: Cherry
 `LDE_GreenAcresQuest_CharacterCherry_02_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_CharacterCherry_02'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterCherry_02'], items=['Cherry'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **MADDIE** (Hesitant): Cherry, I was thinking... would you help me restore the old vegetable garden? At the moment it's a bit of mess.
 **CHERRY** (Encouraging): A mess? It sounds like a goldmine of ingredients just waiting to shine. Of course I’ll help!
@@ -10845,9 +10664,9 @@ The door will shift between the lines.'
 **CHERRY**: Guilty! You bring the garden tools, I'll bring the snacks.
 **MADDIE** (Joyous): Sounds like a plan!
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_CharacterDeb_02
+### Green Acres Quest — item discovered: Deb
 `LDE_GreenAcresQuest_CharacterDeb_02_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_CharacterDeb_02'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterDeb_02'], items=['Deb'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **DEB** (Doubtful): What do we have here? This garden looks severely neglected!
 **MADDIE** (Hesitant): I know, I know. That’s why I called you… I REALLY need your expertise!
@@ -10856,9 +10675,9 @@ The door will shift between the lines.'
 **DEB** (Thinking): Do you have some gardening gloves?
 **MADDIE** (Relaxed): You bet!
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_CharacterGrandma_02
+### Green Acres Quest — item discovered: Grandma
 `LDE_GreenAcresQuest_CharacterGrandma_02_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_CharacterGrandma_02'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterGrandma_02'], items=['Grandma'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **GRANDMA** (Surprised): Look at this! You’ve been working hard! This garden already looks so much better.
 **MADDIE** (Encouraging): Thank you! It’s not bad, if I do say so myself.
@@ -10866,9 +10685,9 @@ The door will shift between the lines.'
 **MADDIE** (Relaxed): I did! Everyone has pitched in. And speaking about helping...
 **GRANDMA** (Charming): I am ready if you need me!
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_CharacterJackie_03
+### Green Acres Quest — item discovered: Jackie
 `LDE_GreenAcresQuest_CharacterJackie_02_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_CharacterJackie_03'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterJackie_03'], items=['Jackie'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE** (Thinking): So, you’re planning to bring back the old vegetable garden?
 **MADDIE** (Relaxed): That’s right!
@@ -10876,18 +10695,18 @@ The door will shift between the lines.'
 **MADDIE** (Encouraging): There is, but together we can make it happen. What do you say - would you help me?
 **JACKIE** (Joyous): You know it! Just tell me what to do.
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_CharacterJulius_02
+### Green Acres Quest — item discovered: Julius
 `LDE_GreenAcresQuest_CharacterJulius_02_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_CharacterJulius_02'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterJulius_02'], items=['Julius'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **ANTIQUEDEALER** (Charming): What a delightful place! I am so glad to hear you intend to restore this little garden.
 **ANTIQUEDEALER** (Discouraged): There has been a terrible decline in pollinators in recent years. This is exactly the kind of place we need more of.
 **ANTIQUEDEALER**: Tell me what I can do to help!
 **MADDIE** (Relaxed): I knew I could count on you, Julius.
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_CharacterMason_02
+### Green Acres Quest — item discovered: Mason
 `LDE_GreenAcresQuest_CharacterMason_02_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_CharacterMason_02'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterMason_02'], items=['Mason'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **MASON**: What’s up? On the phone you told me that you had a “really fun” project for me. What is it?
 **MASON** (Thinking): I hope that spade isn’t a part of it...
@@ -10897,9 +10716,9 @@ The door will shift between the lines.'
 **MADDIE** (Hesitant): Well, would you help me? Please?
 **MASON** (Joyous): You know it, Maddie!
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_CommonFlowerGrowth_05
+### Green Acres Quest — item discovered: Large Wildflower Patch
 `LDE_GreenAcresQuest_CommonFlowerGrowth_01_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_CommonFlowerGrowth_05'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CommonFlowerGrowth_05'], items=['Large Wildflower Patch'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **DEB** (Doubtful): Now, you want to grow a variety of wild flowers in your garden, Maddie. They’re good for the soil and…
 **ANTIQUEDEALER** (Charming): And the pollinators!
@@ -10909,30 +10728,30 @@ The door will shift between the lines.'
 **DEB** (Doubtful): Hrhm, of course. I am sorry, Julius.
 **ANTIQUEDEALER** (Discouraged): I apologize too. Maybe I was a LITTLE bit too eager. What were you saying about the wild flowers, Deb?
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_FlowerCompost_Sink_01
+### Green Acres Quest — item discovered: Flower Compost
 `LDE_GreenAcresQuest_FlowerCompost_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_FlowerCompost_Sink_01'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_FlowerCompost_Sink_01'], items=['Flower Compost'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **MADDIE** (Encouraging): Flower Compost helps you get rid of Flowers you don't need, to get more Soil.
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_Friendship_08
+### Green Acres Quest — item discovered: Friendship Medallion
 `LDE_GreenAcresQuest_Friendship_08_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_Friendship_08'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Friendship_08'], items=['Friendship Medallion'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **RODDY** (Charming): Hey, Maddie! I heard you might need some help fixing up the vegetable garden. Is there something I could do?
 **MADDIE** (Thinking): There’s always something that needs to be done. How do you feel about turning the vegetable compost?
 **RODDY** (Surprised): Errr... amazing!
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_GardenGnomes_07
+### Green Acres Quest — item discovered: Flying Garden Gnome
 `LDE_GreenAcresQuest_GardenGnomes_07_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_GardenGnomes_07'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_GardenGnomes_07'], items=['Flying Garden Gnome'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **MADDIE** (Thinking): Why are there so many garden gnomes here? I seem to find another one behind every leaf pile and every mound.
 **MADDIE** (Worried): I wonder if they just pop out the ground like mushrooms? So creepy...
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_GoodAnimals_05
+### Green Acres Quest — item discovered: Hedgehog
 `LDE_GreenAcresQuest_GoodAnimals_05_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_GoodAnimals_05'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_GoodAnimals_05'], items=['Hedgehog'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **MASON** (Worried): Maddie, don’t look now, but I think that pile of leaves is moving!
 **MADDIE** (Surprised): W-what?
@@ -10966,9 +10785,9 @@ The door will shift between the lines.'
 **GRANDMA** (Charming): Not bad for a “bit of a mess,” is it?
 **MADDIE** (Relaxed): Not bad at all.
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_Pollinator_05
+### Green Acres Quest — item discovered: Hummingbird
 `LDE_GreenAcresQuest_Pollinator_05_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_Pollinator_05'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Pollinator_05'], items=['Hummingbird'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **RODDY** (Relaxed): The vegetable compost is done, same with the flower compost. I never realized just how stinky they are!
 **RODDY** (Surprised): Whoah! This place looks completely transformed!
@@ -10978,9 +10797,9 @@ The door will shift between the lines.'
 **MADDIE** (Surprised): To bees?
 **RODDY** (Worried): O-only if they sting... Maybe I should go.
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_RareFlowerGrowth_05
+### Green Acres Quest — item discovered: Mature Green Hydrangeas
 `LDE_GreenAcresQuest_RareFlowerGrowth_01_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_RareFlowerGrowth_05'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_RareFlowerGrowth_05'], items=['Mature Green Hydrangeas'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **DEB**: Phew! I think our work here is done!
 **MADDIE** (Encouraging): Amazing job, you two! I knew you'd be able to create something amazing if you worked together.
@@ -10989,9 +10808,9 @@ The door will shift between the lines.'
 **ANTIQUEDEALER** (Charming): And your knowledge about variegated cultivar propagation in ornamental topiary is quite unparalleled, Deb!
 **MADDIE** (Frustrated): You've lost me again.
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_UncommonFlowerGrowth_05
+### Green Acres Quest — item discovered: Wildflower Assortment
 `LDE_GreenAcresQuest_UncommonFlowerGrowth_01_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_UncommonFlowerGrowth_05'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_UncommonFlowerGrowth_05'], items=['Wildflower Assortment'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **ANTIQUEDEALER**: The very best flowers for pollinators are native, nectar-rich plants with single-layer petals.
 **DEB**: Like the narrow-leaf mountain mint here?
@@ -11000,15 +10819,15 @@ The door will shift between the lines.'
 **ANTIQUEDEALER** (Joyous): You read my mind, Deb!
 **MADDIE** (Thinking): Are you still talking about flowers?
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_VeggieCompost_Sink_01
+### Green Acres Quest — item discovered: Vegetable Compost
 `LDE_GreenAcresQuest_VeggieCompost_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_VeggieCompost_Sink_01'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_VeggieCompost_Sink_01'], items=['Vegetable Compost'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **MADDIE** (Encouraging): Vegetable Compost decreases the level of any vegetable or chili. Note that the Compost only gives back one lower level item.
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_Veggies_08
+### Green Acres Quest — item discovered: Basket of Vegetables
 `LDE_GreenAcresQuest_Veggies_08_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_Veggies_08'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Veggies_08'], items=['Basket of Vegetables'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **CHERRY**: I’m so happy you asked me to help in the garden. I’ve been so busy lately... I feel like I’ve been the worst friend.
 **MADDIE** (Encouraging): You’re running a whole bakery, Cherry! I get it!
@@ -11018,19 +10837,17 @@ The door will shift between the lines.'
 **MADDIE** (Relaxed): I think it’s just a pinch of Grandma’s magic.
 **CHERRY** (Doubtful): It’s a pinch of something, alright!
 
-### LDE_HolidayCarols2023 — item discovered: 1936172
+### The Fa-la-la-la Follies — item discovered: Elf Hat
 `LDE_HolidayCarols2023_BandCostume_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['1936172'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_BandCostume_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_BandCostume_03'], items=['Elf Hat'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **DEB** (Doubtful): Unfortunately, I can't wear this. It does not go with my colors...
 **MADDIE**: I think green and red are very becoming on you, Deb!
 **DEB** (Joyous): Do you really... Well, if you say so!
 
-### LDE_HolidayCarols2023 — item discovered: 1936170
+### The Fa-la-la-la Follies — item discovered: Hood
 `LDE_HolidayCarols2023_BandCostume_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['1936170'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_BandCostume_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_BandCostume_05'], items=['Hood'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): We really are wrapping up warm.
 **GRANDMA** (Charming): I don't want you to catch a cold. God forbid you all lose your voice!
@@ -11045,38 +10862,34 @@ The door will shift between the lines.'
 **MADDIE** (Thinking): Too much? How about... the Fa-la-la-la Follies?
 **DEB** (Encouraging): That's better!
 
-### LDE_HolidayCarols2023 — item discovered: 62564996
+### The Fa-la-la-la Follies — item discovered: Whole Carol Book
 `LDE_HolidayCarols2023_CarolBook_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['62564996'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_CarolBook_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_CarolBook_05'], items=['Whole Carol Book'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY**: Why don't you join our caroling troupe?
 **MADDIE**: Who else is in it?
 **RODDY** (Encouraging): Everyone! If you join, you'll be paid in gingerbread and good cheer...
 **MADDIE** (Relaxed): You had me at candy cane.
 
-### LDE_HolidayCarols2023 — item discovered: 70253891
+### The Fa-la-la-la Follies — item discovered: Festive Ignatius Boulton
 `LDE_HolidayCarols2023_CarolOfTheBells_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['70253891'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_CarolOfTheBells_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_CarolOfTheBells_06'], items=['Festive Ignatius Boulton'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **DEB** (Relaxed): Can I sing a solo?
 **MADDIE**: Why not... Do you have a lot of singing experience?
 **DEB** (Thinking): Sure! I sing in the shower every day.
 
-### LDE_HolidayCarols2023 — item discovered: 79780891
+### The Fa-la-la-la Follies — item discovered: Caroling Stage - Playing
 `LDE_HolidayCarols2023_CarolStageProducing_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['79780891'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_CarolStageProducing_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_CarolStageProducing_01'], items=['Caroling Stage - Playing'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: This is it! Are you ready to sing?
 **JACKIE** (Encouraging): Gulp! Let's do it!
 **MADDIE**: One, two, three, four...
 
-### LDE_HolidayCarols2023 — item discovered: 27831956
+### The Fa-la-la-la Follies — item discovered: Mulled Hopeberry Juice Mug
 `LDE_HolidayCarols2023_DeckTheHalls_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['27831956'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_DeckTheHalls_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_DeckTheHalls_07'], items=['Mulled Hopeberry Juice Mug'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL** (Doubtful): The stage will need some decorations, too.
 **MADDIE** (Joyous): And plenty of them!
@@ -11101,53 +10914,47 @@ The door will shift between the lines.'
 **MADDIE** (Charming): Just friends like Roddy, Julius, Deb, Mason... Maybe Emilio....
 **GRANDMA** (Charming): Sounds like you'll have a lot of fun!
 
-### LDE_HolidayCarols2023 — item discovered: 81605501
+### The Fa-la-la-la Follies — item discovered: Sleigh Bells
 `LDE_HolidayCarols2023_HandBell_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['81605501'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_HandBell_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_HandBell_03'], items=['Sleigh Bells'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **CHERRY**: How's your rhythm?
 **MADDIE**: Excellent, I assure you.
 **CHERRY** (Doubtful): Then you'll play the tambourine!
 
-### LDE_HolidayCarols2023 — item discovered: 81605499
+### The Fa-la-la-la Follies — item discovered: Hand Bell
 `LDE_HolidayCarols2023_HandBell_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['81605499'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_HandBell_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_HandBell_05'], items=['Hand Bell'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MASON**: How is this played? Like this?
 **MADDIE** (Surprised): Be careful, it can be PRETTY loud...
 
-### LDE_HolidayCarols2023 — item discovered: 96623194
+### The Fa-la-la-la Follies — item discovered: Maddie's Present
 `LDE_HolidayCarols2023_HolidayPresent_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['96623194'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_HolidayPresent_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_HolidayPresent_01'], items=["Maddie's Present"], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): I think I got a pair of gardening gloves!
 **MADDIE** (Relaxed): In this garden, you need them ALL the time - especially when you least expect it.
 
-### LDE_HolidayCarols2023 — item discovered: 96623192
+### The Fa-la-la-la Follies — item discovered: Rufus' Present
 `LDE_HolidayCarols2023_HolidayPresent_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['96623192'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_HolidayPresent_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_HolidayPresent_03'], items=["Rufus' Present"], moment=item discovered (versions 25.05.01–26.07.01)
 
 **DOG** (Encouraging): Snifffff...
 **MADDIE** (Joyous): Looks like Rufus got his wish!
 
-### LDE_HolidayCarols2023 — item discovered: 96623186
+### The Fa-la-la-la Follies — item discovered: Pearl's Present
 `LDE_HolidayCarols2023_HolidayPresent_09_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['96623186'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_HolidayPresent_09'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_HolidayPresent_09'], items=["Pearl's Present"], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: What a weird cup!
 **PEARL** (Thinking): Oh, it's a guksi - a type of duodji used by the Sami people!
 **MADDIE** (Thinking): Right... How do you know that?
 **—**: I love reading encyclopedias!
 
-### LDE_HolidayCarols2023 — item discovered: 10081666
+### The Fa-la-la-la Follies — item discovered: Full Stocking
 `LDE_HolidayCarols2023_HolidayStocking_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['10081666'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_HolidayStocking_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_HolidayStocking_03'], items=['Full Stocking'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): I think we have enough stockings for everyone.
 **MASON** (Charming): Can mine be extra big?
@@ -11215,44 +11022,39 @@ The door will shift between the lines.'
 
 **MADDIE** (Joyous): Good job! Remember, the best way to advance in the event is to <color=#4E8EC8>Create a caroling stage</color>, <color=#4E8EC8>get instruments</color> and <color=#4E8EC8>band outfits</color> and voila, points galore
 
-### LDE_HolidayCarols2023 — item discovered: 77115037
+### The Fa-la-la-la Follies — item discovered: Paper Crown
 `LDE_HolidayCarols2023_ReverseCracker_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['77115037'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_ReverseCracker_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_ReverseCracker_06'], items=['Paper Crown'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Worried): Oh, schnikes! I bet I'll get helmet hair from wearing this crown!
 **MADDIE** (Relaxed): Somehow I think you don't have to worry about that...
 
-### LDE_HolidayCarols2023 — item discovered: 99099032
+### The Fa-la-la-la Follies — item discovered: Fabric
 `LDE_HolidayCarols2023_SewingSupply_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['99099032'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_SewingSupply_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_SewingSupply_04'], items=['Fabric'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: Then a bit of sparkle...
 **DEB** (Charming): You can never have too much!
 
-### LDE_HolidayCarols2023 — item discovered: 99099030
+### The Fa-la-la-la Follies — item discovered: Band Sweater
 `LDE_HolidayCarols2023_SewingSupply_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['99099030'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_SewingSupply_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_SewingSupply_06'], items=['Band Sweater'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): This looks great, Grandma!
 **GRANDMA**: Thank you, dearie.
 **MADDIE** (Relaxed): You could even say you're "sleigh-in’ it."
 
-### LDE_HolidayCarols2023 — item discovered: 49172940
+### The Fa-la-la-la Follies — item discovered: Cello
 `LDE_HolidayCarols2023_StringInstrument_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['49172940'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_StringInstrument_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_StringInstrument_03'], items=['Cello'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: Don't trip over the cello!
 **MASON** (Encouraging): You can trust me, Maddie. I never trip over...
 **MADDIE** (Discouraged): Oops...
 
-### LDE_HolidayCarols2023 — item discovered: 49172936
+### The Fa-la-la-la Follies — item discovered: Harp
 `LDE_HolidayCarols2023_StringInstrument_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['49172936'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_StringInstrument_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_StringInstrument_07'], items=['Harp'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA**: I'll take care of the harp, dearie.
 **MADDIE** (Surprised): Wow, sounds good! Can you... play it?
@@ -11302,10 +11104,9 @@ The door will shift between the lines.'
 **MADDIE** (Thinking): B-but, what’s the time? Am I going crazy, or are all the clocks showing a different time?
 **RODDY** (Relaxed): That’s a long story!
 
-### LDE_Hopeberry2024 — item discovered: 48612467
+### Love on the Vine — item discovered: Hamper
 `LDE_Hopeberry2024_ArtesanFoods_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['48612467'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_ArtesanFoods_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_ArtesanFoods_07'], items=['Hamper'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Thinking): Is it true Julius set you up with his nephew, Herbert?
 **MADDIE** (Thinking): It is. You could've warned me!!
@@ -11315,18 +11116,16 @@ The door will shift between the lines.'
 **GRANDMA**: I think you should swear off romance for a while, dearie.
 **GRANDMA**: There is no use beating a dead horse.
 
-### LDE_Hopeberry2024 — item discovered: 7833493
+### Love on the Vine — item discovered: Emotionally Unavailable
 `LDE_Hopeberry2024_Ash_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['7833493'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_Ash_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_Ash_04'], items=['Emotionally Unavailable'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): I can't be with a man who's flaky or mean... 
 **MADDIE** (Annoyed): And I hate gambling!
 
-### LDE_Hopeberry2024 — item discovered: 7833490
+### Love on the Vine — item discovered: Pride
 `LDE_Hopeberry2024_Ash_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['7833490'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_Ash_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_Ash_07'], items=['Pride'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: The right guy would put me first... and not be deceitful.
 **MADDIE** (Thinking): Where can I find a guy like this??
@@ -11346,10 +11145,9 @@ The door will shift between the lines.'
 **DEB** (Encouraging): Oh, me too - I have got the perfect match.
 **DEB** (Encouraging): Would you consider going on a blind date?
 
-### LDE_Hopeberry2024 — item discovered: 75744459
+### Love on the Vine — item discovered: Glass Powder
 `LDE_Hopeberry2024_CrushedBottle_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['75744459'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_CrushedBottle_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_CrushedBottle_04'], items=['Glass Powder'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE**: So what DO you have on your list?
 **MADDIE**: My list?
@@ -11357,10 +11155,9 @@ The door will shift between the lines.'
 **MADDIE** (Thinking): I'm not sure... Just the usual stuff, I guess?
 **JACKIE** (Doubtful): It's time you figure it out, girl. If you don't even know what you're looking for, how can you find it?
 
-### LDE_Hopeberry2024 — item discovered: 92022632
+### Love on the Vine — item discovered: Glass Jars
 `LDE_Hopeberry2024_EmptyBottles_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['92022632'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_EmptyBottles_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_EmptyBottles_01'], items=['Glass Jars'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL**: Maddie, are the rumours true?
 **PEARL**: Are you looking for a date for the Hopeberry Festival?
@@ -11370,10 +11167,9 @@ The door will shift between the lines.'
 **PEARL** (Thinking): His name's Dwayne. Or Bungle the Clown!
 **PEARL** (Thinking): Shall I set it up?
 
-### LDE_Hopeberry2024 — item discovered: 67054107
+### Love on the Vine — item discovered: Hopeberry Fizz
 `LDE_Hopeberry2024_FestivalJuice_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['67054107'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_FestivalJuice_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_FestivalJuice_05'], items=['Hopeberry Fizz'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **DEB**: I heard you have been on a string of terrible blind dates.
 **MADDIE** (Frustrated): Does EVERYONE know about my love life?
@@ -11388,55 +11184,49 @@ The door will shift between the lines.'
 **MADDIE** (Relaxed): That ACTUALLY doesn't sound too bad.
 **DEB** (Joyous): I would not deceive you, my dear. He is a CATCH.
 
-### LDE_Hopeberry2024 — item discovered: 29296079
+### Love on the Vine — item discovered: Almonds
 `LDE_Hopeberry2024_FreshProduce_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['29296079'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_FreshProduce_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_FreshProduce_05'], items=['Almonds'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): Why am I so unlucky with guys?
 **MADDIE** (Discouraged): I've been dumped at the altar, passed by, left behind...
 **MADDIE** (Discouraged): Am I just choosing all the wrong men?
 **MADDIE** (Thinking): Where am I going wrong?
 
-### LDE_Hopeberry2024 — item discovered: 34225320
+### Love on the Vine — item discovered: Brain
 `LDE_Hopeberry2024_GlassSculpture_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['34225320'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_GlassSculpture_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_GlassSculpture_04'], items=['Brain'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): What kind of a man do I want?
 **MADDIE** (Thinking): He needs to have a brain.
 **MADDIE** (Thinking): And a good sense of style.
 **MADDIE**: And he needs to be reliable. This is a BIG one.
 
-### LDE_Hopeberry2024 — item discovered: 34225316
+### Love on the Vine — item discovered: Sweet Success
 `LDE_Hopeberry2024_GlassSculpture_08_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['34225316'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_GlassSculpture_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_GlassSculpture_08'], items=['Sweet Success'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Do I want a man who's ambitious?
 **MADDIE** (Thinking): Yes! He needs to have goals and direction!
 **MADDIE** (Joyous): AND he should be well groomed.
 
-### LDE_Hopeberry2024 — item discovered: 34225313
+### Love on the Vine — item discovered: My Own Superman
 `LDE_Hopeberry2024_GlassSculpture_11_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['34225313'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_GlassSculpture_11'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_GlassSculpture_11'], items=['My Own Superman'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): I just want a guy who can be nice and reliable, support me and give me freedom.
 **MADDIE** (Relaxed): He needs to like the right movies - and he has to be handy with tools.
 **MADDIE** (Relaxed): I'm not asking for too much, am I??
 
-### LDE_Hopeberry2024 — item discovered: 57083497
+### Love on the Vine — item discovered: Fruit Boxes
 `LDE_Hopeberry2024_HarvestingLoop_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['57083497'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_HarvestingTools_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_HarvestingTools_05'], items=['Fruit Boxes'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Joyous): Rakes can also be produced from this producer. But watch out, if you exhaust it, the item will return to the previous level.
 
-### LDE_Hopeberry2024 — item discovered: 48749097
+### Love on the Vine — item discovered: Small Hopeberry Bush
 `LDE_Hopeberry2024_Hopeberry_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['48749097'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_Hopeberry_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_Hopeberry_04'], items=['Small Hopeberry Bush'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): What's the history of hopeberries, Julius?
 **ANTIQUEDEALER**: Funny you should ask!
@@ -11463,20 +11253,18 @@ The door will shift between the lines.'
 **GRANDMA** (Charming): You will, dearie, when the time is right.
 **GRANDMA** (Charming): Trust me!
 
-### LDE_Hopeberry2024 — item discovered: 43191110
+### Love on the Vine — item discovered: Set of Bottles
 `LDE_Hopeberry2024_ProducedJuice_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['43191110'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_ProducedJuice_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_ProducedJuice_04'], items=['Set of Bottles'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: Jackie...?
 **JACKIE**: What's up?
 **MADDIE** (Doubtful): Did you tell everyone I'm desperate to find a date?
 **JACKIE** (Surprised): I just said that you're not going with anyone...
 
-### LDE_Hopeberry2024 — item discovered: 99151359
+### Love on the Vine — item discovered: Tray
 `LDE_Hopeberry2024_ReusableFurniture_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['99151359'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_ReusableFurniture_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_ReusableFurniture_06'], items=['Tray'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): I hope Hank's brother's got some rizz...
 **MADDIE** (Worried): I don't think I can take another terrible blind date!
@@ -11539,10 +11327,9 @@ The door will shift between the lines.'
 **MADDIE** (Calling): Good luck with your emergency... Bye.
 **MADDIE** (Frustrated): Oh, man!
 
-### LDE_Hopeberry2024 — item discovered: 20499464
+### Love on the Vine — item discovered: Oil & Vinegar
 `LDE_Hopeberry2024_Vinegar_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['20499464'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_Vinegar_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_Vinegar_05'], items=['Oil & Vinegar'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **ANTIQUEDEALER** (Thinking): Maddie, my dear girl. I just heard you're looking for a beau.
 **MADDIE**: You did?
@@ -11552,10 +11339,9 @@ The door will shift between the lines.'
 **MADDIE** (Thinking): I guess I have nothing to lose... Ok - you can set it up.
 **ANTIQUEDEALER** (Encouraging): Excellent!
 
-### LDE_Hopeberry2025 — item discovered: 48612472
+### Love on the Vine — item discovered: Loaf of Bread
 `LDE_Hopeberry2025_ArtesanFoods2_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2025, items=['48612472'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2025, items=['LDE_Hopeberry2024_ArtesanFoods_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2025, itemKeys=['LDE_Hopeberry2024_ArtesanFoods_02'], items=['Loaf of Bread'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): You did such a great job with the jam again, Grandma.
 **GRANDMA** (Encouraging): Thank you, Maddie, but it was all Roddy.
@@ -11563,20 +11349,18 @@ The door will shift between the lines.'
 **GRANDMA**: Oh, yes. He made me sit down and took care of everything.
 **MADDIE** (Worried): Wow, I had no idea!
 
-### LDE_Hopeberry2025 — item discovered: 27561741
+### Love on the Vine — item discovered: Corks
 `LDE_Hopeberry2025_CorkThings2_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2025, items=['27561741'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2025, items=['LDE_Hopeberry2024_CorkThings_02'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2025, itemKeys=['LDE_Hopeberry2024_CorkThings_02'], items=['Corks'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Roddy's been pretty busy - helping everyone with their problems.
 **MADDIE** (Thinking): He and Jackie just broke up, and I know he's been pretty torn up about that, too.
 **MADDIE** (Worried): I always knew he's a good guy, but maybe I didn't really appreciate him enough.
 **MADDIE** (Relaxed): He really is one in a million!
 
-### LDE_Hopeberry2025 — item discovered: 67054111
+### Love on the Vine — item discovered: Hopeberry Tonic
 `LDE_Hopeberry2025_FestivalJuice1_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2025, items=['67054111'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2025, items=['LDE_Hopeberry2024_FestivalJuice_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2025, itemKeys=['LDE_Hopeberry2024_FestivalJuice_01'], items=['Hopeberry Tonic'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: Hey, Julius! You've done a great job with the produce stall this year!
 **ANTIQUEDEALER** (Relaxed): Oh, I cannot take the credit for that. It was Roddy who carried the boxes and set everything up.
@@ -11584,10 +11368,9 @@ The door will shift between the lines.'
 **ANTIQUEDEALER** (Charming): He is a very nice young man, Maddie. Always ready to help!
 **MADDIE** (Thinking): He really is.
 
-### LDE_Hopeberry2025 — item discovered: 57083497
+### Love on the Vine — item discovered: Fruit Boxes
 `LDE_Hopeberry2025_HarvestingTools5_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2025, items=['57083497'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2025, items=['LDE_Hopeberry2024_HarvestingTools_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2025, itemKeys=['LDE_Hopeberry2024_HarvestingTools_05'], items=['Fruit Boxes'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Annoyed): Aargh, stupid harvesting tools!
 **RODDY** (Surprised): Whoa! What's going on?
@@ -11619,10 +11402,9 @@ The door will shift between the lines.'
 **MADDIE** (Relaxed): Well, see you around, I guess.
 **RODDY** (Discouraged): Yeah, see you around.
 
-### LDE_Hopeberry2025 — item discovered: 99151364
+### Love on the Vine — item discovered: Wooden Box
 `LDE_Hopeberry2025_ReusableFurniture1_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2025, items=['99151364'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2025, items=['LDE_Hopeberry2024_ReusableFurniture_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2025, itemKeys=['LDE_Hopeberry2024_ReusableFurniture_01'], items=['Wooden Box'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **PEARL**: What did you think about Roddy's stand-up set?
 **MADDIE** (Relaxed): I admit I was nervous for him, but he was actually good!
@@ -11643,9 +11425,9 @@ The door will shift between the lines.'
 **MADDIE** (Surprised): What do you mean?
 **JACKIE** (Doubtful): Maybe you should ask him.
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_Interviews_10
+### Murder at the Mansion — item discovered: Maddie
 `LDE_MurderAtTheMansion_Interviews10_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_Interviews_10'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_Interviews_10'], items=['Maddie'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE**: So, Maddie. Where were you when you found out about Lady Voyance's death?
 **MADDIE** (Thinking): I was at home, as you know. We were waiting for her to arrive for bridge night, but she was late. That was highly unusual, so I asked you to check on her and...
@@ -11685,9 +11467,9 @@ The door will shift between the lines.'
 **MADDIE** (Encouraging): I have no idea! Maybe I'll let you continue her snow globe business. Seems like you have a talent for the supernatural.
 **RODDY** (Charming): I'm not so sure about that. There will never be anyone like Lady Voyance!
 
-### LDE_MurderAtTheMansion — item discovered: LDE_MurderAtTheMansion_SubGoal_MapItem_01
+### Murder at the Mansion — item discovered: Map Fragment
 `LDE_MurderAtTheMansion_SubGoal_MapItem_01_Dialogue` · seen 26.06.01–26.07.01
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_SubGoal_MapItem_01'], moment=item discovered (versions 26.06.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_SubGoal_MapItem_01'], items=['Map Fragment'], moment=item discovered (versions 26.06.01–26.07.01)
 
 **MADDIE** (Surprised): What's this -- a piece of a map?
 **GRANDMA** (Encouraging): If you keep looking, I bet you will find more pieces.
@@ -11862,10 +11644,9 @@ The door will shift between the lines.'
 **ANTIQUEDEALER** (Charming): Thank you! I found some leftover parade balloons in my shop. 
 **MADDIE** (Thinking): What can't be found in there?
 
-### LDE_PicnicConfusion2024 — item discovered: 72600864
+### Third Wheel Tango — item discovered: Instant Camera
 `LDE_PicnicConfusion2024_Activities_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_PicnicConfusion2024, items=['72600864'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_PicnicConfusion2024, items=['LDE_PicnicConfusion2024_Activities_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Third Wheel Tango, eventKey=LDE_PicnicConfusion2024, itemKeys=['LDE_PicnicConfusion2024_Activities_05'], items=['Instant Camera'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Encouraging): Make sure you have some fun things to do during the picnic!
 **MADDIE** (Doubtful): You don't want Roddy to get bored, do you? ...What do you think she does?
@@ -11882,30 +11663,27 @@ The door will shift between the lines.'
 **JACKIE** (Surprised): Uuh, Maddie, you don't have to-
 **MADDIE** (Joyous): No no, this'll be great! He always tried to surprise me, so let's make one for him! 
 
-### LDE_PicnicConfusion2024 — item discovered: 88996666
+### Third Wheel Tango — item discovered: Picnic Table
 `LDE_PicnicConfusion2024_Clothing_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_PicnicConfusion2024, items=['88996666'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_PicnicConfusion2024, items=['LDE_PicnicConfusion2024_Clothing_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Third Wheel Tango, eventKey=LDE_PicnicConfusion2024, itemKeys=['LDE_PicnicConfusion2024_Clothing_07'], items=['Picnic Table'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Encouraging): Ah perfect, we have a great picnic table ready! 
 **MADDIE** (Relaxed): All it needs now is some good food and some cutlery!
 **MADDIE** (Thinking): ...How do you think he met her?
 **JACKIE** (Surprised): Huh? Who?
 
-### LDE_PicnicConfusion2024 — item discovered: 50190090
+### Third Wheel Tango — item discovered: Fabulous Diamond Necklace
 `LDE_PicnicConfusion2024_Coal_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_PicnicConfusion2024, items=['50190090'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_PicnicConfusion2024, items=['LDE_PicnicConfusion2024_Coal_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Third Wheel Tango, eventKey=LDE_PicnicConfusion2024, itemKeys=['LDE_PicnicConfusion2024_Coal_05'], items=['Fabulous Diamond Necklace'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: Don't forget to save some of the coal. I've seen Roddy do some charcoal sketching every now and then.
 **MADDIE** (Encouraging): Sure, they're not like the stuff you can get in the art store, but it's the thought that counts.
 **JACKIE** (Annoyed): You want me to give him.... Coal?
 **MADDIE** (Relaxed): He'll love it, trust me! 
 
-### LDE_PicnicConfusion2024 — item discovered: 40651168
+### Third Wheel Tango — item discovered: Unlit Campfire
 `LDE_PicnicConfusion2024_FireWood_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_PicnicConfusion2024, items=['40651168'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_PicnicConfusion2024, items=['LDE_PicnicConfusion2024_FireWood_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Third Wheel Tango, eventKey=LDE_PicnicConfusion2024, itemKeys=['LDE_PicnicConfusion2024_FireWood_07'], items=['Unlit Campfire'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Charming): Nothing like a nice romantic fire to liven up the picnic, right?
 **JACKIE** (Encouraging): It is quite romantic!
@@ -11914,10 +11692,9 @@ The door will shift between the lines.'
 **MADDIE** (Charming): He's lit every fire he's set his eyes on!
 **JACKIE** (Doubtful): All but one...
 
-### LDE_PicnicConfusion2024 — item discovered: 29485281
+### Third Wheel Tango — item discovered: Grandmarshmallow
 `LDE_PicnicConfusion2024_Marshmallow_11_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_PicnicConfusion2024, items=['29485281'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_PicnicConfusion2024, items=['LDE_PicnicConfusion2024_Marshmallow_11'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Third Wheel Tango, eventKey=LDE_PicnicConfusion2024, itemKeys=['LDE_PicnicConfusion2024_Marshmallow_11'], items=['Grandmarshmallow'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): ... I mean honestly, he is TOTALLY free to do what he wants. We're both adults after all!
 **MADDIE** (Doubtful): But isn't it just a little weird that he breaks up with me; moves ALL THE WAY over there and then SUDDENLY meets this OTHER woman?
@@ -11940,10 +11717,9 @@ The door will shift between the lines.'
 **JACKIE** (Encouraging): Haha! It's alright Maddie. Just don't get manic again. You scare me when you get... excited.
 **RODDY**: Did I, uuh... Miss something?
 
-### LDE_PicnicConfusion2024 — item discovered: 57139749
+### Third Wheel Tango — item discovered: Social Media Post
 `LDE_PicnicConfusion2024_PhotoAlbum_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_PicnicConfusion2024, items=['57139749'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_PicnicConfusion2024, items=['LDE_PicnicConfusion2024_PhotoAlbum_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Third Wheel Tango, eventKey=LDE_PicnicConfusion2024, itemKeys=['LDE_PicnicConfusion2024_PhotoAlbum_05'], items=['Social Media Post'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE** (Surprised): Maddie, you got to pull yourself together!
 **MADDIE** (Surprised): Whaaat?! What do you mean?
@@ -11954,10 +11730,9 @@ The door will shift between the lines.'
 **MADDIE** (Surprised): Jealous?! Me?! Psshh... Please. 
 **JACKIE** (Thinking): *sigh*
 
-### LDE_PicnicConfusion2024 — item discovered: 38619071
+### Third Wheel Tango — item discovered: Picnic Basket
 `LDE_PicnicConfusion2024_PicnicBasket_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_PicnicConfusion2024, items=['38619071'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_PicnicConfusion2024, items=['LDE_PicnicConfusion2024_PicnicBasket_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Third Wheel Tango, eventKey=LDE_PicnicConfusion2024, itemKeys=['LDE_PicnicConfusion2024_PicnicBasket_04'], items=['Picnic Basket'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): Alright! I'm thinking a surprise picnic for just the two of you would really make his day!
 **JACKIE** (Surprised): Really? I thought that-
@@ -12125,10 +11900,9 @@ The door will shift between the lines.'
 **EMILIO** (Encouraging): Safe travels, young Mason!
 **MASON** (Relaxed): HARRR! That's Captain Mason, if you don't mind.
 
-### LDE_Rumors2025 — item discovered: 71602675
+### Circus Caper — item discovered: Circus Flyer
 `LDE_Rumors2025_Advertising_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['71602675'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_Advertising_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Advertising_01'], items=['Circus Flyer'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RINGLEADER**: OK, here are some of the basics of being a circus performer.  
   _earlier:_ ~~Could you be a darling and hand these flyers out in town? It would be such a big help.~~ (until 25.09.01)
@@ -12147,10 +11921,9 @@ The door will shift between the lines.'
 **—**: I know she is impressive, but she has a lot of secrets.
 **MADDIE** (Relaxed): Thanks for the heads up, Grandma, but I think you might just be paranoid!
 
-### LDE_Rumors2025 — item discovered: 90018211
+### Circus Caper — item discovered: Small Circus Program
 `LDE_Rumors2025_Brochures_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['90018211'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_Brochures_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Brochures_03'], items=['Small Circus Program'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Thinking): We need to think of an act that will really stop people in their tracks. Like...  
   _earlier:_ ~~Have you seen Fiona anywhere?~~ (until 25.09.01); ~~We need to think of an act that will really stop people in their tracks. Like…~~ (until 25.10.01)
@@ -12162,17 +11935,17 @@ The door will shift between the lines.'
 **MADDIE**: Of course. But I don't want to disturb her...
 **PEARL** (Doubtful): I'm sure she won't mind if you get more brochures from her wagon.
 
-### LDE_Rumors2025 — item discovered: LDE_Rumors2025_Prizes_03
+### Circus Caper — item discovered: Set of Tokens
 `LDE_Rumors2025_CarnivalPrizes_03_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_Prizes_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Prizes_03'], items=['Set of Tokens'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): Are you planning on joining the Circus?
 **RODDY** (Charming): Haha, probably not... But I'm pretty good at card tricks.
 **HANK** (Joyous): But not so good at juggling, bro!
 
-### LDE_Rumors2025 — item discovered: LDE_Rumors2025_Prizes_11
+### Circus Caper — item discovered: Stuffed Unicorn
 `LDE_Rumors2025_CarnivalPrizes_11_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_Prizes_11'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Prizes_11'], items=['Stuffed Unicorn'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): Where’s Hank? And Roddy?
 **MASON** (Doubtful): Oh, they... they're coming in a minute. They're just kind of tied up at the moment...  
@@ -12181,10 +11954,9 @@ The door will shift between the lines.'
 **MADDIE** (Thinking): Chains?
 **MASON** (Worried): Never mind.
 
-### LDE_Rumors2025 — item discovered: 90944266
+### Circus Caper — item discovered: Big Top
 `LDE_Rumors2025_CircusTent_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['90944266'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_CircusTent_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CircusTent_04'], items=['Big Top'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): I wasn’t expecting to see you back in Hopewell Bay so soon.  
   _earlier:_ ~~You must be Maddie!~~ (until 25.09.01)
@@ -12204,10 +11976,9 @@ The door will shift between the lines.'
 **MADDIE** (Encouraging): Let me know if there's anything I can do to help you while you're here. I can organize clown noses or hand out flyers.
 **RINGLEADER** (Relaxed): I might just take you up on your offer!
 
-### LDE_Rumors2025 — item discovered: 22238213
+### Circus Caper — item discovered: Circus Wagon
 `LDE_Rumors2025_CircusWagon_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['22238213'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_CircusWagon_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CircusWagon_01'], items=['Circus Wagon'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MASON** (Thinking): Juggling, fortunetelling and simple magic tricks are fun, but we need something more challenging.  
   _earlier:_ ~~Ursula Boulton, as I live and breathe! How long has it been?~~ (until 25.09.01)
@@ -12255,10 +12026,9 @@ The door will shift between the lines.'
 **RINGLEADER** (Doubtful): It's next to your beautiful Mansion, and right by to the road for easy access.
 **RINGLEADER** (Ready): I think it would be perfect!
 
-### LDE_Rumors2025 — item discovered: 41662582
+### Circus Caper — item discovered: Tea & Chat
 `LDE_Rumors2025_TeaGossip_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['41662582'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_TeaGossip_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_TeaGossip_04'], items=['Tea & Chat'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RINGLEADER**: Your friends seem to be excited about the Circus!  
   _earlier:_ ~~I just heard the wildest rumor. Someone said Ursula used to be in the circus!~~ (until 25.09.01)
@@ -12269,10 +12039,9 @@ The door will shift between the lines.'
 **MADDIE** (Surprised): Hank and Roddy? I’ve got to see this!  
   _earlier:_ ~~Why doesn't that surprise me?~~ (until 25.09.01)
 
-### LDE_Rumors2025 — item discovered: 41662579
+### Circus Caper — item discovered: Empty Wallet
 `LDE_Rumors2025_TeaGossip_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['41662579'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_TeaGossip_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_TeaGossip_07'], items=['Empty Wallet'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RINGLEADER** (Doubtful): Let me apologize again for my past indiscretions. I really thought I had no options but to choose a life of crime to save the Circus.  
   _earlier:_ ~~Did you hear that Ursula used to be in the circus?~~ (until 25.09.01)
@@ -12287,10 +12056,9 @@ The door will shift between the lines.'
 **MADDIE**: I get it. It’s tough to keep everything going when the world seems to be against you.
 **MADDIE**: After working at the mansion for this long, I know how that feels.
 
-### LDE_Rumors2025 — item discovered: 87660231
+### Circus Caper — item discovered: Lock Pick Set
 `LDE_Rumors2025_ThiefProps_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Rumors2025, items=['87660231'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Rumors2025, items=['LDE_Rumors2025_ThiefProps_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_ThiefProps_07'], items=['Lock Pick Set'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MASON** (Joyous): These could be perfect for our act!  
   _earlier:_ ~~Is there something hidden in the bushes?~~ (until 25.09.01)
@@ -12404,10 +12172,9 @@ The door will shift between the lines.'
 **ANTIQUEDEALER** (Thinking): Ah, it is the Common Loon.
 **ANTIQUEDEALER** (Relaxed): The eyes are a little eerie, I know.
 
-### LS_Easter — item discovered: 20273265
+### Easter Lucky Snap — item discovered: Tiny Thumper
 `LS_Easter_Common_Bunny_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LS_Easter, items=['20273265'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_Easter, items=['LS_Easter_Common_Bunny_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Easter Lucky Snap, eventKey=LS_Easter, itemKeys=['LS_Easter_Common_Bunny_01'], items=['Tiny Thumper'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Encouraging): Okay, I've got this. I just need to remember the basics.
 **MADDIE** (Relaxed): "Stay quiet and move slowly." No problem there. I'm stealth and stealth is me.
@@ -12432,18 +12199,17 @@ The door will shift between the lines.'
 **MASON** (Joyous): Most exotic creature wins!
 **ANTIQUEDEALER** (Thinking): But what are we competing for? Oh...he is already gone...
 
-### LS_Easter — item discovered: 58374575
+### Easter Lucky Snap — item discovered: Cuddly Kitten
 `LS_Easter_Legendary_Cat_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LS_Easter, items=['58374575'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_Easter, items=['LS_Easter_Legendary_Cat_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Easter Lucky Snap, eventKey=LS_Easter, itemKeys=['LS_Easter_Legendary_Cat_01'], items=['Cuddly Kitten'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): I bet Julius has already spotted a dozen exotic birds...
 **MADDIE** (Encouraging): But I won't give up! I think I can hear something...
 **MADDIE** (Surprised): It almost sounds like a... tiny kitten!
 
-### LS_Easter — item discovered: LS_Easter_Legendary_Ferret_01
+### Easter Lucky Snap — item discovered: Fuzzy Ferret
 `LS_Easter_Legendary_Ferret_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LS_Easter, items=['LS_Easter_Legendary_Ferret_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Easter Lucky Snap, eventKey=LS_Easter, itemKeys=['LS_Easter_Legendary_Ferret_01'], items=['Fuzzy Ferret'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: What's that over there? It's too big to be a mouse, so it must be...
 **MADDIE** (Surprised): A ferret! And just a baby, by the looks of it. Hello, little one!
@@ -12460,10 +12226,9 @@ The door will shift between the lines.'
 **MADDIE** (Charming): I think that means we'd better let Pearl pick the winner. Just in case!
 **MASON** (Discouraged): Noooo!
 
-### LS_Easter — item discovered: 873806
+### Easter Lucky Snap — item discovered: Little Squirrel
 `LS_Easter_Rare_Squirrel_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LS_Easter, items=['873806'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_Easter, items=['LS_Easter_Rare_Squirrel_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Easter Lucky Snap, eventKey=LS_Easter, itemKeys=['LS_Easter_Rare_Squirrel_01'], items=['Little Squirrel'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Ah, I can see movement in a tree over there... but I cannot hear its song.
 **MADDIE** (Thinking): This might be my chance to capture a truly exotic bird.
@@ -12471,10 +12236,9 @@ The door will shift between the lines.'
 **MADDIE** (Doubtful): What am I looking at?
 **MADDIE** (Charming): That is a baby squirrel. And so cute!
 
-### LS_Easter — item discovered: 69958626
+### Easter Lucky Snap — item discovered: Prickly Puff
 `LS_Easter_Uncommon_Hedgehog_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LS_Easter, items=['69958626'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_Easter, items=['LS_Easter_Uncommon_Hedgehog_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Easter Lucky Snap, eventKey=LS_Easter, itemKeys=['LS_Easter_Uncommon_Hedgehog_01'], items=['Prickly Puff'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Encouraging): You may know, Julius, that spring is the best time for bird-watching.
 **ANTIQUEDEALER** (Relaxed): Correct, Maddie. Migratory birds returning to nest offer a veritable cornucopia of avian delights!
@@ -12483,19 +12247,18 @@ The door will shift between the lines.'
 **MADDIE** (Surprised): That's no bird!
 **ANTIQUEDEALER** (Surprised): A baby hedgehog!
 
-### LS_Easter — item discovered: LS_Easter_Uncommon_Puppy_01
+### Easter Lucky Snap — item discovered: Perfect Puppy
 `LS_Easter_Uncommon_Puppy_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LS_Easter, items=['LS_Easter_Uncommon_Puppy_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Easter Lucky Snap, eventKey=LS_Easter, itemKeys=['LS_Easter_Uncommon_Puppy_01'], items=['Perfect Puppy'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): Maybe I will find that Scarlet Tanager still. It's pretty rare, I think.
 **MADDIE** (Thinking): Although... it is fun to look down from the sky once in a while.
 **MADDIE**: You never know what you might find, like...oh my gosh!
 **MADDIE** (Joyous): Isn't that the cutest puppy in the whole world?!
 
-### LS_Easter — item discovered: 75337350
+### Easter Lucky Snap — item discovered: Chonky Cappy
 `LS_Easter_VeryRare_Capybara_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LS_Easter, items=['75337350'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_Easter, items=['LS_Easter_VeryRare_Capybara_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Easter Lucky Snap, eventKey=LS_Easter, itemKeys=['LS_Easter_VeryRare_Capybara_01'], items=['Chonky Cappy'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Many birds love the water. I'm hedging my bets and heading towards the biggest splashes.
 **MADDIE**: There's definitely something over there...
@@ -12512,62 +12275,55 @@ The door will shift between the lines.'
 **ANTIQUEDEALER** (Relaxed): And that Robins are so widespread that there are hundreds of millions of them across the globe?
 **MADDIE** (Relaxed): Way to go, little Robin!
 
-### LS_LuckySnap2024 — item discovered: 79919880
+### Lucky Snap — item discovered: Amateur Camera
 `LS_LuckySnap2024_AmateurCamera_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['79919880'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['67054740'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_LuckySnap2024_HobbyistCamera_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Summer_HobbyistCamera_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Autumn_HobbyistCamera_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Winter_HobbyistCamera_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Spring_HobbyistCamera_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_Easter, items=['LS_Easter_HobbyistCamera_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_LuckySnap2024_HobbyistCamera_01'], items=['Amateur Camera'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Summer_HobbyistCamera_01'], items=['Amateur Camera'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Autumn_HobbyistCamera_01'], items=['Amateur Camera'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Winter_HobbyistCamera_01'], items=['Amateur Camera'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Spring_HobbyistCamera_01'], items=['Amateur Camera'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Easter Lucky Snap, eventKey=LS_Easter, itemKeys=['LS_Easter_HobbyistCamera_01'], items=['Amateur Camera'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: Can't we get closer to get a better photo?
 **ANTIQUEDEALER** (Thinking): Code of birding ethics stipulates that we must always be cautious around bird habitats.
 **MADDIE** (Thinking): Oh, that makes sense. There might be nests there.
 **ANTIQUEDEALER**: Exactly, Maddie. You are a natural birder!
 
-### LS_LuckySnap2024 — item discovered: 84432698
+### Lucky Snap — item discovered: Atlantic Puffin
 `LS_LuckySnap2024_AtlanticPuffin_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['84432698'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_LuckySnap2024_Ultimate_AtlanticPuffin_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_LuckySnap2024_Ultimate_AtlanticPuffin_01'], items=['Atlantic Puffin'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **ANTIQUEDEALER** (Thinking): There is one more bird I wish we could spot - the Atlantic Puffin.
 **MADDIE**: Does it look like penguin with a funny beak?
 **ANTIQUEDEALER** (Surprised): Err-- I suppose it does!
 **MADDIE** (Encouraging): Then I've spotted it - right there on the cliffs!
 
-### LS_LuckySnap2024 — item discovered: 19477555
+### Lucky Snap — item discovered: Bald Eagle
 `LS_LuckySnap2024_BaldEagle_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['19477555'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_LuckySnap2024_Epic_BaldEagle_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_LuckySnap2024_Epic_BaldEagle_01'], items=['Bald Eagle'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): I know that one - it's the bald eagle!
 **ANTIQUEDEALER** (Surprised): Very good, Maddie. It is indeed!
 **MADDIE** (Surprised): I-is it looking straight at us?
 **ANTIQUEDEALER** (Worried): Yes, we better hide...
 
-### LS_LuckySnap2024 — item discovered: 58172290
+### Lucky Snap — item discovered: Barn Swallow
 `LS_LuckySnap2024_BarnSwallow_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['58172290'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_LuckySnap2024_Uncommon_BarnSwallow_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_LuckySnap2024_Uncommon_BarnSwallow_01'], items=['Barn Swallow'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **ANTIQUEDEALER** (Encouraging): Did you spot that barn swallow?
 **MADDIE** (Surprised): Look, one of them has made a nest in the roof of the Mansion!
 **ANTIQUEDEALER** (Charming): How charming!
 **MADDIE** (Worried): Grandma maybe doesn't agree...
 
-### LS_LuckySnap2024 — item discovered: 16277708
+### Lucky Snap — item discovered: Basic Camera
 `LS_LuckySnap2024_BasicCamera_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['16277708'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['23642724'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_LuckySnap2024_BasicCamera_05'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Summer_BasicCamera_05'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Autumn_BasicCamera_05'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Winter_BasicCamera_05'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Spring_BasicCamera_05'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_Easter, items=['LS_Easter_BasicCamera_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_LuckySnap2024_BasicCamera_05'], items=['Basic Camera'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Summer_BasicCamera_05'], items=['Basic Camera'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Autumn_BasicCamera_05'], items=['Basic Camera'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Winter_BasicCamera_05'], items=['Basic Camera'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Spring_BasicCamera_05'], items=['Basic Camera'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Easter Lucky Snap, eventKey=LS_Easter, itemKeys=['LS_Easter_BasicCamera_05'], items=['Basic Camera'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **ANTIQUEDEALER** (Charming): Now we are ready to begin!
 **ANTIQUEDEALER** (Charming): We need to get the perfect photo of each bird for our Life List!
@@ -12576,32 +12332,28 @@ The door will shift between the lines.'
 **MADDIE** (Joyous): That sounds fun! It's like we're collecting birds.
 **ANTIQUEDEALER** (Relaxed): It IS fun! You will be hooked before you even know it!
 
-### LS_LuckySnap2024 — item discovered: 16611689
+### Lucky Snap — item discovered: Camera Cupboard
 `LS_LuckySnap2024_CameraCupboard_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['16611689'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['52291548'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_LuckySnap2024_CameraCupboard_06'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Summer_CameraCupboard_06'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Autumn_CameraCupboard_06'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Winter_CameraCupboard_06'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Spring_CameraCupboard_06'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_Easter, items=['LS_Easter_CameraCupboard_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_LuckySnap2024_CameraCupboard_06'], items=['Camera Cupboard'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Summer_CameraCupboard_06'], items=['Camera Cupboard'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Autumn_CameraCupboard_06'], items=['Camera Cupboard'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Winter_CameraCupboard_06'], items=['Camera Cupboard'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Spring_CameraCupboard_06'], items=['Camera Cupboard'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Easter Lucky Snap, eventKey=LS_Easter, itemKeys=['LS_Easter_CameraCupboard_06'], items=['Camera Cupboard'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **ANTIQUEDEALER**: This is where I keep my BEST cameras and lenses...
 **MADDIE** (Thinking): I still don't understand why you need so many...
 **ANTIQUEDEALER** (Doubtful): To capture the graceful flight of our most beautiful birds, Maddie, you need the very best equipment.
 **MADDIE** (Thinking): In that case, you're ready for anything!
 
-### LS_LuckySnap2024 — item discovered: 1796002
+### Lucky Snap — item discovered: Camo Hat
 `LS_LuckySnap2024_CamoHat_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['1796002'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['64154540'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_LuckySnap2024_MissedBirds_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Summer_MissedBirds_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Autumn_MissedBirds_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Winter_MissedBirds_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Spring_MissedBirds_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_Easter, items=['LS_Easter_MissedBirds_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_LuckySnap2024_MissedBirds_01'], items=['Camo Hat'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Summer_MissedBirds_01'], items=['Camo Hat'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Autumn_MissedBirds_01'], items=['Camo Hat'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Winter_MissedBirds_01'], items=['Camo Hat'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Spring_MissedBirds_01'], items=['Camo Hat'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Easter Lucky Snap, eventKey=LS_Easter, itemKeys=['LS_Easter_MissedBirds_01'], items=['Camo Hat'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): I bet you see all kinds of things while you're bird-watching!
 **ANTIQUEDEALER**: You are right about that! You know, I once saw... Oh, I cannot tell you.
@@ -12611,10 +12363,9 @@ The door will shift between the lines.'
 **MADDIE** (Surprised): Like a... UFO??
 **ANTIQUEDEALER** (Doubtful): I cannot say, Maddie. But it was not a barn owl!
 
-### LS_LuckySnap2024 — item discovered: 33563537
+### Lucky Snap — item discovered: Hummingbird
 `LS_LuckySnap2024_Hummingbird_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['33563537'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_LuckySnap2024_VeryRare_HummingBird_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_LuckySnap2024_VeryRare_HummingBird_01'], items=['Hummingbird'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Joyous): What is that bird?? It's lovely - like a little fairy! I think I could watch it for hours.
 **ANTIQUEDEALER**: It is a hummingbird. I think you found your spark bird!
@@ -12636,49 +12387,43 @@ The door will shift between the lines.'
 **ANTIQUEDEALER** (Charming): There is SO much more to our avian friends - and I can teach you all about it!
 **ANTIQUEDEALER** (Charming): Welcome to the world of birding, Maddie!
 
-### LS_LuckySnap2024 — item discovered: 44660354
+### Lucky Snap — item discovered: Mute Swan
 `LS_LuckySnap2024_MuteSwan_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['44660354'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_LuckySnap2024_Rare_MuteSwan_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_LuckySnap2024_Rare_MuteSwan_01'], items=['Mute Swan'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **ANTIQUEDEALER**: Mute swans mate for life. Their bonds are quite unbreakable!
 **MADDIE** (Annoyed): Of course... Even the birds have a better love life than some people around here...
 
-### LS_LuckySnap2024 — item discovered: 63400838
+### Lucky Snap — item discovered: Pro Camera Bag
 `LS_LuckySnap2024_ProCameraBag_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['63400838'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['32221169'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_LuckySnap2024_BirdingEquipment_10'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Summer_BirdingEquipment_10'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Autumn_BirdingEquipment_10'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Winter_BirdingEquipment_10'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Spring_BirdingEquipment_10'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_Easter, items=['LS_Easter_BirdingEquipment_10'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_LuckySnap2024_BirdingEquipment_10'], items=['Pro Camera Bag'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Summer_BirdingEquipment_10'], items=['Pro Camera Bag'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Autumn_BirdingEquipment_10'], items=['Pro Camera Bag'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Winter_BirdingEquipment_10'], items=['Pro Camera Bag'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Spring_BirdingEquipment_10'], items=['Pro Camera Bag'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Easter Lucky Snap, eventKey=LS_Easter, itemKeys=['LS_Easter_BirdingEquipment_10'], items=['Pro Camera Bag'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Surprised): Do you really need all of this stuff just to watch birds?
 **ANTIQUEDEALER**: You need the right tools for the job, Maddie!
 **MADDIE** (Relaxed): You can't just go winging it!
 **ANTIQUEDEALER** (Charming): Ah, indeed! Very amusing.
 
-### LS_LuckySnap2024 — item discovered: 74248207
+### Lucky Snap — item discovered: Pro Camera
 `LS_LuckySnap2024_ProCamera_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['74248207'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['68597498'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_LuckySnap2024_ProCamera_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Summer_ProCamera_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Autumn_ProCamera_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Winter_ProCamera_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Spring_ProCamera_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LS_Easter, items=['LS_Easter_ProCamera_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_LuckySnap2024_ProCamera_01'], items=['Pro Camera'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Summer_ProCamera_01'], items=['Pro Camera'], moment=item discovered (versions 25.05.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Autumn_ProCamera_01'], items=['Pro Camera'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Winter_ProCamera_01'], items=['Pro Camera'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Spring_ProCamera_01'], items=['Pro Camera'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Easter Lucky Snap, eventKey=LS_Easter, itemKeys=['LS_Easter_ProCamera_01'], items=['Pro Camera'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: So, I just sit here with the camera, keep watching the birds... and then snap photos?
 **ANTIQUEDEALER** (Joyous): Exactly!
 **MADDIE** (Thinking): ...
 
-### LS_LuckySnap2024 — item discovered: 54545551
+### Lucky Snap — item discovered: Rock Dove
 `LS_LuckySnap2024_RockDove_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['54545551'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_LuckySnap2024_Common_RockDove_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_LuckySnap2024_Common_RockDove_01'], items=['Rock Dove'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **ANTIQUEDEALER**: I can see a <i>Columba livia!</i>
 **MADDIE** (Surprised): Really? Where??
@@ -12686,10 +12431,9 @@ The door will shift between the lines.'
 **MADDIE** (Thinking): All I can see is a big pigeon.
 **ANTIQUEDEALER** (Surprised): Correct - and in Latin, it is called <i>Columba livia.</i>
 
-### LS_LuckySnap2024 — item discovered: 15905978
+### Lucky Snap — item discovered: Sage Grouse
 `LS_LuckySnap2024_SageGrouse_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['15905978'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_LuckySnap2024_Legendary_SageGrouse_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_LuckySnap2024_Legendary_SageGrouse_01'], items=['Sage Grouse'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): There's a strange looking bird on the ground... and another one! They look like they're about to have a fight!
 **ANTIQUEDEALER**: Well spotted! You can add sage grouse to your Life List.
@@ -12702,9 +12446,9 @@ The door will shift between the lines.'
 **MADDIE**: Really?
 **ANTIQUEDEALER** (Discouraged): Yes, indeed - but unfortunately they are not known for their beautiful song.
 
-### LS_LuckySnap2024 — item discovered: LS_Common_MourningDove_01
+### Lucky Snap — item discovered: Mourning Dove
 `LS_Spring_CommonMourningDove_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Common_MourningDove_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Common_MourningDove_01'], items=['Mourning Dove'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **ANTIQUEDEALER**: Aha! Do you recognize that bird, Maddie?
 **MADDIE** (Joyous): Of course, I do! It's a Mourning Dove. Also known as a Turtledove!
@@ -12712,9 +12456,9 @@ The door will shift between the lines.'
 **ANTIQUEDEALER** (Relaxed): Do you hear that call? Almost sounds like an owl! A sad one.
 **MADDIE** (Joyous): And if there's one, there's likely to be a lot more. Let's snap that picture!
 
-### LS_LuckySnap2024 — item discovered: LS_Epic_BohemianWaxwing_01
+### Lucky Snap — item discovered: Bohemian Waxwing
 `LS_Spring_EpicBohemianWaxwing_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Epic_BohemianWaxwing_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Epic_BohemianWaxwing_01'], items=['Bohemian Waxwing'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Joyous): What a beauty! Who is this little charmer?
 **ANTIQUEDEALER** (Encouraging): A Bohemian Waxwing. Look at that crest!
@@ -12739,9 +12483,9 @@ The door will shift between the lines.'
 **MADDIE** (Encouraging): And a pair of shorts?
 **ANTIQUEDEALER** (Worried): Well, let's not scare the birds off back to their winter habitat!
 
-### LS_LuckySnap2024 — item discovered: LS_Legendary_WhiteBreastedNuthatch_01
+### Lucky Snap — item discovered: White-breasted Nuthatch
 `LS_Spring_LegendaryWhiteBreastedNuthatch_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Legendary_WhiteBreastedNuthatch_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Legendary_WhiteBreastedNuthatch_01'], items=['White-breasted Nuthatch'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **ANTIQUEDEALER** (Surprised): Oh, my, do you hear that? I think…
 **ANTIQUEDEALER** (Surprised): …that is a White-Breasted Nuthatch!
@@ -12762,9 +12506,9 @@ The door will shift between the lines.'
 **ANTIQUEDEALER** (Relaxed): And I see you have turned into quite an expert.
 **MADDIE** (Relaxed): I have a great teacher, that's all!
 
-### LS_LuckySnap2024 — item discovered: LS_Rare_EurasianCapercaillie_01
+### Lucky Snap — item discovered: Eurasian Capercaillie
 `LS_Spring_RareEurasianCapercaillie_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Rare_EurasianCapercaillie_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Rare_EurasianCapercaillie_01'], items=['Eurasian Capercaillie'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **ANTIQUEDEALER** (Surprised): What in tarnation! Look at that!
 **MADDIE** (Thinking): Ummm. I don't know… some kind of grouse?
@@ -12773,9 +12517,9 @@ The door will shift between the lines.'
 **ANTIQUEDEALER**: It is all a part of its elaborate, and famous, courtship display.
 **MADDIE** (Charming): Beautiful!
 
-### LS_LuckySnap2024 — item discovered: LS_Ultimate_RoseateSpoonbill_01
+### Lucky Snap — item discovered: Roseate Spoonbill
 `LS_Spring_UltimateRoseateSpoonbill_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Ultimate_RoseateSpoonbill_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Ultimate_RoseateSpoonbill_01'], items=['Roseate Spoonbill'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **ANTIQUEDEALER** (Joyous): Look! Look at that beauty in pink!
 **MADDIE** (Doubtful): Is that a flamingo? It can't be a flamingo?
@@ -12783,9 +12527,9 @@ The door will shift between the lines.'
 **MADDIE** (Joyous): Incredible! Does it also get its color from its diet, like the flamingo?
 **ANTIQUEDEALER** (Charming): Right again, my dear. It comes from the crustaceans they eat. Fascinating, is it not?
 
-### LS_LuckySnap2024 — item discovered: LS_Uncommon_RedWingedBlackbird_01
+### Lucky Snap — item discovered: Red Winged Blackbird
 `LS_Spring_UncommonRedWingedBlackbird_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Uncommon_RedWingedBlackbird_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Uncommon_RedWingedBlackbird_01'], items=['Red Winged Blackbird'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Joyous): Look at that beauty! What pretty wings!
 **ANTIQUEDEALER** (Thinking): Ah, yes! A Red-winged Blackbird. Endemic to all of North America.
@@ -12793,9 +12537,9 @@ The door will shift between the lines.'
 **ANTIQUEDEALER** (Encouraging): That is correct, Maddie. Only the males have the distinctive red-and-yellow shoulder patch.
 **MADDIE** (Joyous): Got the shot! Thank you, sir!
 
-### LS_LuckySnap2024 — item discovered: LS_VeryRare_ArcticTern_01
+### Lucky Snap — item discovered: Arctic Tern
 `LS_Spring_VeryRareArcticTern_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['LS_VeryRare_ArcticTern_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_VeryRare_ArcticTern_01'], items=['Arctic Tern'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **ANTIQUEDEALER**: Look Maddie! Do you see that little white bird?
 **MADDIE** (Surprised): I do! I got a picture, too.
@@ -12805,9 +12549,9 @@ The door will shift between the lines.'
 **ANTIQUEDEALER** (Thinking): It flies up to 25 000 miles per year.
 **MADDIE** (Relaxed): Quite the frequent flier!
 
-### LS_LuckySnap2024 — item discovered: LS_Common_HoodedWarbler_01
+### Lucky Snap — item discovered: Hooded Warbler
 `LS_Summer2026_CommonHoodedWarbler_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Common_HoodedWarbler_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Common_HoodedWarbler_01'], items=['Hooded Warbler'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE** (Thinking): Julius, look at that one! That's a Wilson's Warbler, right?
 **ANTIQUEDEALER** (Thinking): Close! It is a Hooded Warbler. Wilson's Warblers only have a small black cap, not a whole hood.
@@ -12816,9 +12560,9 @@ The door will shift between the lines.'
 **ANTIQUEDEALER** (Joyous): You are, Maddie! I just happen to have, ahem, a few more decades of experience!
 **ANTIQUEDEALER**: Give it time.
 
-### LS_LuckySnap2024 — item discovered: LS_Epic_PipingPlover_01
+### Lucky Snap — item discovered: Piping Plover
 `LS_Summer2026_EpicPipingPlover_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Epic_PipingPlover_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Epic_PipingPlover_01'], items=['Piping Plover'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **ANTIQUEDEALER** (Encouraging): Oh! Oh! Maddie, you are getting your wish today! Look at that little fellow!
 **MADDIE** (Thinking): What little fellow? All I see is sand...
@@ -12841,9 +12585,9 @@ The door will shift between the lines.'
 **ANTIQUEDEALER** (Encouraging): Well, that is something I can guarantee. There is a vast world of birds out there waiting for us.
 **MADDIE** (Charming): ...and a few of them are likely to be exotic, right...?
 
-### LS_LuckySnap2024 — item discovered: LS_Legendary_BrownCreeper_01
+### Lucky Snap — item discovered: Brown Creeper
 `LS_Summer2026_LegendaryBrownCreeper_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Legendary_BrownCreeper_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Legendary_BrownCreeper_01'], items=['Brown Creeper'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE** (Frustrated): We've been waiting forever, Julius! Where is this bird of yours?
 **ANTIQUEDEALER**: Patience is a virtue, Maddie. You have been birding long enough to know that.
@@ -12867,9 +12611,9 @@ The door will shift between the lines.'
 **MADDIE**: Maybe! Or maybe we will just keep it as our special thing, eh, Julius?
 **ANTIQUEDEALER** (Joyous): Nothing would delight me more, Maddie.
 
-### LS_LuckySnap2024 — item discovered: LS_Rare_EasternBluebird_01
+### Lucky Snap — item discovered: Eastern Bluebird
 `LS_Summer2026_RareEasternBluebird_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Rare_EasternBluebird_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Rare_EasternBluebird_01'], items=['Eastern Bluebird'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE**: What a beauty - a bluebird, right?
 **ANTIQUEDEALER** (Thinking): Yes, my dear - an Eastern Bluebird, to be precise. Looks like it hasn't molted its bright blue feathers yet!
@@ -12879,9 +12623,9 @@ The door will shift between the lines.'
 **MADDIE** (Joyous): It's funny, lately I've been dreaming of bluebirds. Maybe I predicted getting this shot!
 **ANTIQUEDEALER** (Joyous): I see, I see. That warms my heart, Maddie...
 
-### LS_LuckySnap2024 — item discovered: LS_Ultimate_PaintedBunting_01
+### Lucky Snap — item discovered: Painted Bunting
 `LS_Summer2026_UltimatePaintedBunting_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Ultimate_PaintedBunting_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Ultimate_PaintedBunting_01'], items=['Painted Bunting'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE** (Surprised): Julius! I think I saw a... a parrot?!
 **ANTIQUEDEALER** (Thinking): That can't be right. Unless it's somebody's escaped pet. Let me see...
@@ -12890,9 +12634,9 @@ The door will shift between the lines.'
 **ANTIQUEDEALER** (Joyous): And he sings, too! Beautifully! We got very lucky today, Maddie.
 **MADDIE**: Not luck, my friend, but perseverance and patience.
 
-### LS_LuckySnap2024 — item discovered: LS_Uncommon_Eider_01
+### Lucky Snap — item discovered: Eider
 `LS_Summer2026_UncommonEider_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Uncommon_Eider_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Uncommon_Eider_01'], items=['Eider'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE** (Encouraging): This one I know - that's an eider duck!
 **ANTIQUEDEALER** (Encouraging): Yes, indeed, Maddie. It may look like a common duck, but it is quite famous.
@@ -12902,9 +12646,9 @@ The door will shift between the lines.'
 **ANTIQUEDEALER** (Doubtful): Of course only kings could afford it.
 **MADDIE** (Discouraged): ...I don't think that part's changed very much...I just looked up how much an eiderdown pillow costs!
 
-### LS_LuckySnap2024 — item discovered: LS_VeryRare_BlackbilledMagpie_01
+### Lucky Snap — item discovered: Black-billed Magpie
 `LS_Summer2026_VeryRareBlackbilledMagpie_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['LS_VeryRare_BlackbilledMagpie_01'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_VeryRare_BlackbilledMagpie_01'], items=['Black-billed Magpie'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE** (Joyous): Look at that tail, Julius! It's a little hard to see, but when the sun catches it just right...
 **ANTIQUEDEALER**: A Black-billed Magpie! And yes, that is some impressive tail plumage.
@@ -12981,20 +12725,18 @@ The door will shift between the lines.'
 **ANTIQUEDEALER** (Relaxed): Indeed. And that hole will make a good home for another little animal.
 **MADDIE** (Encouraging): Huh! It must be a good neighbor.
 
-### LS_LuckySnap2024 — item discovered: 67676179
+### Lucky Snap — item discovered: Mallard
 `LS_Winter2024_Common_Mallard_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['67676179'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Winter2024_Common_Mallard_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Winter2024_Common_Mallard_01'], items=['Mallard'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): I think there's a bird upside down in the water!
 **ANTIQUEDEALER** (Surprised): Well spotted, my dear!
 **ANTIQUEDEALER**: That is the Mallard. Birds that tilt upside down in the water to look for food are dabblers.
 **MADDIE** (Relaxed): Dabblers? So they don't take it seriously?
 
-### LS_LuckySnap2024 — item discovered: 79190747
+### Lucky Snap — item discovered: Long-tailed Tit
 `LS_Winter2024_Epic_LongtailedTit_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['79190747'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Winter2024_Epic_LongtailedTit_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Winter2024_Epic_LongtailedTit_01'], items=['Long-tailed Tit'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Why do you love birding so much, Julius?
 **ANTIQUEDEALER** (Charming): It is the best mindfullness practice I know, my dear.
@@ -13015,10 +12757,9 @@ The door will shift between the lines.'
 **ANTIQUEDEALER** (Charming): A flask of hot chocolate is also very important.
 **MADDIE** (Encouraging): If there's hot chocolate involved, I'm there!
 
-### LS_LuckySnap2024 — item discovered: 59606771
+### Lucky Snap — item discovered: Snowy Owl
 `LS_Winter2024_Legendary_SnowyOwl_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['59606771'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Winter2024_Legendary_SnowyOwl_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Winter2024_Legendary_SnowyOwl_01'], items=['Snowy Owl'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **ANTIQUEDEALER**: Be very quiet, Maddie. I just saw a Snowy Owl in a tree over there.
 **MADDIE** (Thinking): Snowy Owl? Aren't owls nocturnal?
@@ -13027,10 +12768,9 @@ The door will shift between the lines.'
 **MADDIE** (Joyous): So cute!!
 **MADDIE** (Joyous): Err-- and majestic, too!
 
-### LS_LuckySnap2024 — item discovered: 62472764
+### Lucky Snap — item discovered: Cardinal
 `LS_Winter2024_VeryRare_Cardinal_01_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LS_LuckySnap2024, items=['62472764'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LS_LuckySnap2024, items=['LS_Winter2024_VeryRare_Cardinal_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lucky Snap, eventKey=LS_LuckySnap2024, itemKeys=['LS_Winter2024_VeryRare_Cardinal_01'], items=['Cardinal'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **ANTIQUEDEALER** (Encouraging): Can you hear that birdsong? That is the Cardinal singing.
 **MADDIE**: Oh... yes, it's lovely!
@@ -15743,7 +15483,7 @@ Let's put it out, quickly!
 
 ### SEChristmas2022 — decoration PE_Christmas2022_Decoration_25
 `PE_Christmas2022Deco_Intro` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=PE_Christmas2022_Decoration_25, event=SEChristmas2022, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=PE_Christmas2022_Decoration_25, event=SEChristmas2022, eventKey=SEChristmas2022, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE** (Thinking): Can I help you decorate the house, Grandma?
 **GRANDMA** (Encouraging): No thank you, dearie. I'd prefer that you just... stay away.
@@ -15754,7 +15494,7 @@ Let's put it out, quickly!
 
 ### SEChristmas2022 — decoration PE_Christmas2022_Decoration_29
 `PE_Christmas2022Deco_Outro` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=PE_Christmas2022_Decoration_29, event=SEChristmas2022, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=PE_Christmas2022_Decoration_29, event=SEChristmas2022, eventKey=SEChristmas2022, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **GRANDMA** (Joyous): Thank you for all your help, Julius!
 **ANTIQUEDEALER**: You're most welcome, Ursula.
@@ -15927,10 +15667,9 @@ Let's put it out, quickly!
 **MADDIE** (Charming): To be honest, I'd rather imagine they really did come from Santa!
 **RODDY**: I - I mean, they - are probably glad the gifts made you smile.
 
-### PE_JamSession2023 — item discovered: 14188
+### Jam Session 2023 — item discovered: PE_JamSession2023_CollectableItems_04
 `PE_JamSession2023_EndOfChainDialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=PE_JamSession2023, items=['14188'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=PE_JamSession2023, items=['PE_JamSession2023_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Jam Session 2023, eventKey=PE_JamSession2023, itemKeys=['PE_JamSession2023_CollectableItems_04'], items=['PE_JamSession2023_CollectableItems_04'], moment=item discovered (versions 23.09.02–26.07.01)
 
 
 ### Hideout: Open lock 1/3
@@ -16869,58 +16608,51 @@ Let's put it out, quickly!
 **MADDIE** (Joyous): You can find your rewards in the Pouch, even when your Board is full.
 <color=#338DFF>Tap</color> it to get your rewards on the Board.
 
-### ProducerBooster — item discovered: 49840131
+### ProducerBooster — item discovered: Producer Booster
 `ProducerFtue` · seen 23.11.02–26.07.01
-- trigger: item, event=ProducerBooster, items=['49840131'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=ProducerBooster, items=['ProducerBoosterActivated_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=ProducerBooster, eventKey=ProducerBooster, itemKeys=['ProducerBoosterActivated_01'], items=['Producer Booster'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **MADDIE**: Look at this! It's a producer booster!
 **MADDIE**: This nifty booster removes all cooldowns from producers next to it for a limited time.
 
-### ProducerItems — item discovered: 1174
+### ProducerItems — item discovered: Cabinet Frame
 `ProducerIntroBroomCabinet5` · seen 23.11.02–26.07.01
-- trigger: item, event=ProducerItems, items=['1174'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=ProducerItems, items=['BroomCabinet_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=ProducerItems, eventKey=ProducerItems, itemKeys=['BroomCabinet_05'], items=['Cabinet Frame'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **MADDIE** (Encouraging): You found a <color=#338DFF>Broom Cabinet</color>!
 Tap to see what it holds.
 
-### ProducerItems — item discovered: 63
+### ProducerItems — item discovered: Drawer Boxes
 `ProducerIntroDrawer4` · seen 23.11.02–26.07.01
-- trigger: item, event=ProducerItems, items=['63'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=ProducerItems, items=['Drawer_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=ProducerItems, eventKey=ProducerItems, itemKeys=['Drawer_04'], items=['Drawer Boxes'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **MADDIE** (Encouraging): You found a <color=#338DFF>Drawer</color>!
 Use the items inside to clear more cobwebs
 
-### ProducerItems — item discovered: 125
+### ProducerItems — item discovered: Polished Flower Pot
 `ProducerIntroFlowerpot6` · seen 23.11.02–26.07.01
-- trigger: item, event=ProducerItems, items=['125'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=ProducerItems, items=['Flowerpot_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=ProducerItems, eventKey=ProducerItems, itemKeys=['Flowerpot_06'], items=['Polished Flower Pot'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **MADDIE** (Encouraging): You found a <color=#338DFF>Flowerpot</color>!
 Tap to see what it holds.
 
-### ProducerItems — item discovered: 184
+### ProducerItems — item discovered: Medium Tool Barrel
 `ProducerIntroGardenTool5` · seen 23.11.02–26.07.01
-- trigger: item, event=ProducerItems, items=['184'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=ProducerItems, items=['GardenToolBarrel_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=ProducerItems, eventKey=ProducerItems, itemKeys=['GardenToolBarrel_05'], items=['Medium Tool Barrel'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **MADDIE** (Relaxed): Merging two producers creates an upgraded producer!
 Your <color=#338DFF>Tool Barrel</color> now produces better items.
 
-### ProducerItems — item discovered: 543
+### ProducerItems — item discovered: Filled Toolbox
 `ProducerIntroToolbox4` · seen 23.11.02–26.07.01
-- trigger: item, event=ProducerItems, items=['543'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=ProducerItems, items=['Toolbox_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=ProducerItems, eventKey=ProducerItems, itemKeys=['Toolbox_04'], items=['Filled Toolbox'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **MADDIE** (Encouraging): You found a <color=#338DFF>Toolbox</color>!
 Tap to see what it holds.
 
-### ProducerItems — item discovered: 574
+### ProducerItems — item discovered: Toy Car Project
 `ProducerIntroToyCar5` · seen 23.11.02–26.07.01
-- trigger: item, event=ProducerItems, items=['574'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=ProducerItems, items=['ToyCar_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=ProducerItems, eventKey=ProducerItems, itemKeys=['ToyCar_05'], items=['Toy Car Project'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **MADDIE** (Encouraging): You found a <color=#338DFF>Toy Car</color>!
 Tap to see what it holds.
@@ -17124,9 +16856,9 @@ Play further to fully unlock it
 **MADDIE**: More pages from Grandma’s journal...
 **MADDIE** (Thinking): I need to find out more!
 
-### SE_DoubleDateDisaster2024 — decoration SE_DoubleDateDisaster2024_Decoration_Slot03
+### Double Date Disaster — decoration SE_DoubleDateDisaster2024_Decoration_Slot03
 `SE_DoubleDateDisaster2024_Decoration_Slot03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot03, event=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot03, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): What’s all this?!
 **EMILIO** (Encouraging): Surprise! I thought for our first Valentine’s I would do something special!
@@ -17134,9 +16866,9 @@ Play further to fully unlock it
 **EMILIO**: Oh, the dinner is coming up! And so are the other guests!
 **MADDIE** (Joyous): Yay!
 
-### SE_DoubleDateDisaster2024 — decoration SE_DoubleDateDisaster2024_Decoration_Slot04
+### Double Date Disaster — decoration SE_DoubleDateDisaster2024_Decoration_Slot04
 `SE_DoubleDateDisaster2024_Decoration_Slot04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot04, event=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot04, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Joyous): Jackie and... Roddy?! Are you the other guests?
 **JACKIE** (Encouraging): Yep! Roddy here asked me out on a date. Can you believe that?
@@ -17145,9 +16877,9 @@ Play further to fully unlock it
 **MADDIE** (Encouraging): Just that under that hard hat lies a pretty great guy!
 **RODDY** (Charming): Re- Really?!
 
-### SE_DoubleDateDisaster2024 — decoration SE_DoubleDateDisaster2024_Decoration_Slot05
+### Double Date Disaster — decoration SE_DoubleDateDisaster2024_Decoration_Slot05
 `SE_DoubleDateDisaster2024_Decoration_Slot05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot05, event=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot05, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE**: Hey, Maddie! Have you seen- RODDY?!
 **RODDY** (Thinking): Hello ladies, fancy a game of golf?
@@ -17155,9 +16887,9 @@ Play further to fully unlock it
 **JACKIE** (Encouraging): Hahaha!
 **RODDY** (Charming): Uuhm... I’ll be right back!
 
-### SE_DoubleDateDisaster2024 — decoration SE_DoubleDateDisaster2024_Decoration_Slot06
+### Double Date Disaster — decoration SE_DoubleDateDisaster2024_Decoration_Slot06
 `SE_DoubleDateDisaster2024_Decoration_Slot06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot06, event=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot06, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): Emilio has really put a lot of effort into this.
 **JACKIE** (Encouraging): Actually, I think it’s mostly been Roddy! I’ve seen him running around and helping Emilio out.
@@ -17166,9 +16898,9 @@ Play further to fully unlock it
 **RODDY** (Worried): Too much?
 **JACKIE** (Doubtful): Too much.
 
-### SE_DoubleDateDisaster2024 — decoration SE_DoubleDateDisaster2024_Decoration_Slot10
+### Double Date Disaster — decoration SE_DoubleDateDisaster2024_Decoration_Slot10
 `SE_DoubleDateDisaster2024_Decoration_Slot10_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot10, event=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot10, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Charming): I’ve really been enjoying myself!
 **EMILIO** (Doubtful): Yeah... That’s great...
@@ -17178,9 +16910,9 @@ Play further to fully unlock it
 **MADDIE** (Relaxed): Emilio? Helloo?
 **EMILIO** (Surprised): Oh! Sorry, I... Maddie, something has come up and I... I need to tell you.
 
-### SE_DoubleDateDisaster2024 — decoration SE_DoubleDateDisaster2024_Decoration_Slot14
+### Double Date Disaster — decoration SE_DoubleDateDisaster2024_Decoration_Slot14
 `SE_DoubleDateDisaster2024_Decoration_Slot14_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot14, event=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot14, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Charming): So... What is that you have to tell me?
 **EMILIO** (Surprised): Well... This is pretty hard for me to say...
@@ -17191,9 +16923,9 @@ Play further to fully unlock it
 **MADDIE** (Charming): ...Yes?
 **EMILIO** (Encouraging): I... I’m leaving tonight for Bolivia to save the fish.
 
-### SE_DoubleDateDisaster2024 — decoration SE_DoubleDateDisaster2024_Decoration_Slot15
+### Double Date Disaster — decoration SE_DoubleDateDisaster2024_Decoration_Slot15
 `SE_DoubleDateDisaster2024_Decoration_Slot15_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot15, event=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SE_DoubleDateDisaster2024_Decoration_Slot15, event=Double Date Disaster, eventKey=SE_DoubleDateDisaster2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): You’re leaving?
 **MADDIE** (Annoyed): Tonight?!
@@ -17381,9 +17113,9 @@ Play further to fully unlock it
 **MADDIE** (Surprised): How on earth did you set it all up so perfectly, Grandma?
 **GRANDMA** (Charming): I will not tell you all my secrets, Maddie. That is where the real magic is.
 
-### SP_AllHallowsEve2026 — decoration SP_AllHallowsEve2026_Decoration_Slot33
+### All Hallow's Eve — decoration SP_AllHallowsEve2026_Decoration_Slot33
 `SP_AllHallowsEve2026_Decoration_Slot33_Dialogue` · seen 26.07.01–26.07.01
-- trigger: decoration, decoration=SP_AllHallowsEve2026_Decoration_Slot33, event=SP_AllHallowsEve2026, moment=decoration placed (versions 26.07.01–26.07.01)
+- trigger: decoration, decoration=SP_AllHallowsEve2026_Decoration_Slot33, event=All Hallow's Eve, eventKey=SP_AllHallowsEve2026, moment=decoration placed (versions 26.07.01–26.07.01)
 
 **MADDIE** (Joyous): Annnnd another pumpkin carved! Phew. This is starting to look very nice!
 **MADDIE** (Thinking): I can't stop thinking about Grandma's spell books though. Maybe...
@@ -17391,9 +17123,9 @@ Play further to fully unlock it
 **MADDIE** (Encouraging): Hah. How appropriate. A potion for sharpening knives!
 **MADDIE** (Thinking): And I've already got all the ingredients here. Hmm...
 
-### SP_AllHallowsEve2026 — decoration SP_AllHallowsEve2026_Decoration_Slot34
+### All Hallow's Eve — decoration SP_AllHallowsEve2026_Decoration_Slot34
 `SP_AllHallowsEve2026_Decoration_Slot34_Dialogue` · seen 26.07.01–26.07.01
-- trigger: decoration, decoration=SP_AllHallowsEve2026_Decoration_Slot34, event=SP_AllHallowsEve2026, moment=decoration placed (versions 26.07.01–26.07.01)
+- trigger: decoration, decoration=SP_AllHallowsEve2026_Decoration_Slot34, event=All Hallow's Eve, eventKey=SP_AllHallowsEve2026, moment=decoration placed (versions 26.07.01–26.07.01)
 
 **GRANDMA** (Joyous): Hello, dearie! Oh, what a lovely little corner you've made!
 **MADDIE** (Frustrated): Not now, Grandma. I'm looking for pokeweed.
@@ -17402,9 +17134,9 @@ Play further to fully unlock it
 **GRANDMA** (Charming): My, that's a very sharp-looking knife you got there. Tell me, what's lost?
 **MADDIE** (Surprised): If I told you that, it would spoil the experiment!
 
-### SP_AllHallowsEve2026 — decoration SP_AllHallowsEve2026_Decoration_Slot35
+### All Hallow's Eve — decoration SP_AllHallowsEve2026_Decoration_Slot35
 `SP_AllHallowsEve2026_Decoration_Slot35_Dialogue` · seen 26.07.01–26.07.01
-- trigger: decoration, decoration=SP_AllHallowsEve2026_Decoration_Slot35, event=SP_AllHallowsEve2026, moment=decoration placed (versions 26.07.01–26.07.01)
+- trigger: decoration, decoration=SP_AllHallowsEve2026_Decoration_Slot35, event=All Hallow's Eve, eventKey=SP_AllHallowsEve2026, moment=decoration placed (versions 26.07.01–26.07.01)
 
 **MADDIE** (Doubtful): Right! This is of course still all nonsense, but...
 **GRANDMA**: ...but what, dearie?
@@ -17413,9 +17145,9 @@ Play further to fully unlock it
 **MADDIE** (Frustrated): Some halloween decorations from last year. I finished the spell, spoke the words, and...poof! There they were.
 **GRANDMA**: Oh, my. Perhaps you really are a witch.  Wouldn't be the first Boulton!
 
-### SP_AllHallowsEve2026 — decoration SP_AllHallowsEve2026_Decoration_Slot36
+### All Hallow's Eve — decoration SP_AllHallowsEve2026_Decoration_Slot36
 `SP_AllHallowsEve2026_Decoration_Slot36_Dialogue` · seen 26.07.01–26.07.01
-- trigger: decoration, decoration=SP_AllHallowsEve2026_Decoration_Slot36, event=SP_AllHallowsEve2026, moment=decoration placed (versions 26.07.01–26.07.01)
+- trigger: decoration, decoration=SP_AllHallowsEve2026_Decoration_Slot36, event=All Hallow's Eve, eventKey=SP_AllHallowsEve2026, moment=decoration placed (versions 26.07.01–26.07.01)
 
 **GRANDMA**: Hello, dearie! How're the preparations coming for the charity shop?
 **MADDIE** (Frustrated): There's something here...a code. References between the books...a secret!
@@ -17424,9 +17156,9 @@ Play further to fully unlock it
 **GRANDMA** (Worried): Oh, Maddie, are you sure you want to dabble in dark magic? Especially at a time like this?
 **MADDIE** (Frustrated): I...I have to know! It says it needs to be cast at midnight...
 
-### SP_AllHallowsEve2026 — decoration SP_AllHallowsEve2026_Decoration_Slot37
+### All Hallow's Eve — decoration SP_AllHallowsEve2026_Decoration_Slot37
 `SP_AllHallowsEve2026_Decoration_Slot37_Dialogue` · seen 26.07.01–26.07.01
-- trigger: decoration, decoration=SP_AllHallowsEve2026_Decoration_Slot37, event=SP_AllHallowsEve2026, moment=decoration placed (versions 26.07.01–26.07.01)
+- trigger: decoration, decoration=SP_AllHallowsEve2026_Decoration_Slot37, event=All Hallow's Eve, eventKey=SP_AllHallowsEve2026, moment=decoration placed (versions 26.07.01–26.07.01)
 
 **GRANDMA** (Encouraging): This will do very well for the charity shop Maddie. Good work!
 **MADDIE** (Thinking): What? Oh - these aren't for sale, these are all the things needed for the spell!
@@ -17449,9 +17181,9 @@ Play further to fully unlock it
 **GRANDMA**: Of course not, dearie. But do you mind if I leave them with you, in case you change your mind?
 **MADDIE** (Relaxed): Sure, Grandma. At least they fit the decor!
 
-### SP_AllHallowsEve2026 — item discovered: SP_AllHallowsEve2026_CollectableItems_04
+### All Hallow's Eve — item discovered: Bubbling Cauldron
 `SP_AllHallowsEve2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.07.01–26.07.01
-- trigger: item, event=SP_AllHallowsEve2026, items=['SP_AllHallowsEve2026_CollectableItems_04'], moment=item discovered (versions 26.07.01–26.07.01)
+- trigger: item, event=All Hallow's Eve, eventKey=SP_AllHallowsEve2026, itemKeys=['SP_AllHallowsEve2026_CollectableItems_04'], items=['Bubbling Cauldron'], moment=item discovered (versions 26.07.01–26.07.01)
 
 **MADDIE** (Joyous): Aha! The potion is complete! Whoa. Should it be bubbling like that?
 **GRANDMA**: What have you made there, dearie?
@@ -17460,10 +17192,9 @@ Play further to fully unlock it
 **MADDIE** (Doubtful): A...are you sure? Some of the ingredients seemed a little sketchy!
 **GRANDMA** (Joyous): Oh, don't worry, I've trained to recognize poisons. And this...is tasty!
 
-### SP_AlpacaPet2024 — item discovered: 1557530
+### Woolly Mystery — item discovered: Crystal Apple
 `SP_AlpacaPet2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_AlpacaPet2024, items=['1557530'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_AlpacaPet2024, items=['SP_AlpacaPet2024_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Woolly Mystery, eventKey=SP_AlpacaPet2024, itemKeys=['SP_AlpacaPet2024_CollectableItems_04'], items=['Crystal Apple'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE**: Maddie, what's up?
 **MADDIE**: Hey. Nothing much... Just getting the gardens ready for fall.
@@ -17519,10 +17250,9 @@ Play further to fully unlock it
 **GRANDMA** (Worried): I'll tell you all about it -- but not yet. There is still too much that is uncertain...
 **GRANDMA** (Relaxed): I promise everything will become clear.
 
-### SP_AmyPet2025 — item discovered: 22441629
+### Whiskers & Whispers — item discovered: Mega Basket
 `SP_AmyPet2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_AmyPet2025, items=['22441629'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_AmyPet2025, items=['SP_AmyPet2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Whiskers & Whispers, eventKey=SP_AmyPet2025, itemKeys=['SP_AmyPet2025_CollectableItems_04'], items=['Mega Basket'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): Grandma, what would you say about getting a new pet?
 **GRANDMA** (Frustrated): As long as it's not another overly nosy dog who's always digging up my flowerbeds!
@@ -17553,35 +17283,34 @@ Play further to fully unlock it
 **GRANDMA** (Surprised): Oh, this? I think this phone is acting up, always switching things up...
 **GRANDMA** (Thinking): Here we go. These cat photos will be gold for my followers!
 
-### SP_AmyTheCat2023 — decoration SP_AmyTheCat2023_Decoration_Slot25
+### Amy's Mystery — decoration SP_AmyTheCat2023_Decoration_Slot25
 `SP_AmyTheCat2023_Decoration_Slot25_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot25, event=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot25, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_AmyTheCat2023 — decoration SP_AmyTheCat2023_Decoration_Slot26
+### Amy's Mystery — decoration SP_AmyTheCat2023_Decoration_Slot26
 `SP_AmyTheCat2023_Decoration_Slot26_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot26, event=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot26, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_AmyTheCat2023 — decoration SP_AmyTheCat2023_Decoration_Slot27
+### Amy's Mystery — decoration SP_AmyTheCat2023_Decoration_Slot27
 `SP_AmyTheCat2023_Decoration_Slot27_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot27, event=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot27, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_AmyTheCat2023 — decoration SP_AmyTheCat2023_Decoration_Slot28
+### Amy's Mystery — decoration SP_AmyTheCat2023_Decoration_Slot28
 `SP_AmyTheCat2023_Decoration_Slot28_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot28, event=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot28, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_AmyTheCat2023 — decoration SP_AmyTheCat2023_Decoration_Slot29
+### Amy's Mystery — decoration SP_AmyTheCat2023_Decoration_Slot29
 `SP_AmyTheCat2023_Decoration_Slot29_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot29, event=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot29, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_AmyTheCat2023 — item discovered: 300725
+### Amy's Mystery — item discovered: SP_AmyTheCat2023_CollectableItems_04
 `SP_AmyTheCat2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=SP_AmyTheCat2023, items=['300725'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=SP_AmyTheCat2023, items=['SP_AmyTheCat2023_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, itemKeys=['SP_AmyTheCat2023_CollectableItems_04'], items=['SP_AmyTheCat2023_CollectableItems_04'], moment=item discovered (versions 23.09.02–26.07.01)
 
 
 ### Season Pass - Buzzing with Purpose — outro
@@ -17594,9 +17323,9 @@ Play further to fully unlock it
 **MADDIE** (Encouraging): I love that motto!
 **MADDIE** (Charming): "Greatness, from small beginnings."
 
-### SP_Apiary2026 — decoration SP_Apiary2026_Decoration_Slot25
+### Season Pass - Buzzing with Purpose — decoration SP_Apiary2026_Decoration_Slot25
 `SP_Apiary2026_Decoration_Slot25_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Apiary2026_Decoration_Slot25, event=SP_Apiary2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Apiary2026_Decoration_Slot25, event=Season Pass - Buzzing with Purpose, eventKey=SP_Apiary2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): I hope you don't mind me setting up some flowers on your fence?
 **GRANDMA**: No problem at all, dearie! In fact...
@@ -17606,9 +17335,9 @@ Play further to fully unlock it
 **GRANDMA** (Encouraging): Some say it's the color, while others say it's the unique flavor.
 **GRANDMA** (Charming): It also makes a spectacular mead!
 
-### SP_Apiary2026 — decoration SP_Apiary2026_Decoration_Slot27
+### Season Pass - Buzzing with Purpose — decoration SP_Apiary2026_Decoration_Slot27
 `SP_Apiary2026_Decoration_Slot27_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Apiary2026_Decoration_Slot27, event=SP_Apiary2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Apiary2026_Decoration_Slot27, event=Season Pass - Buzzing with Purpose, eventKey=SP_Apiary2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): Once we have enough honey, we can start collecting it in here.
 **MADDIE** (Relaxed): Grandma told me that it used to be part of the old apiary.
@@ -17618,9 +17347,9 @@ Play further to fully unlock it
 **MADDIE** (Relaxed): Ha! I love it. Maybe it'll drive up the sales for the honey?
 **JACKIE** (Encouraging): Well, if what your Grandma says is true, I don't think it'll have to!
 
-### SP_Apiary2026 — decoration SP_Apiary2026_Decoration_Slot28
+### Season Pass - Buzzing with Purpose — decoration SP_Apiary2026_Decoration_Slot28
 `SP_Apiary2026_Decoration_Slot28_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Apiary2026_Decoration_Slot28, event=SP_Apiary2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Apiary2026_Decoration_Slot28, event=Season Pass - Buzzing with Purpose, eventKey=SP_Apiary2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Charming): Aaw, that's a cute bee hive!
 **GRANDMA**: Thank you, dearie.
@@ -17630,9 +17359,9 @@ Play further to fully unlock it
 **GRANDMA** (Charming): Exactly! They'll know that a queen already lives here.
 **MADDIE** (Encouraging): Ha! How true.
 
-### SP_Apiary2026 — decoration SP_Apiary2026_Decoration_Slot29
+### Season Pass - Buzzing with Purpose — decoration SP_Apiary2026_Decoration_Slot29
 `SP_Apiary2026_Decoration_Slot29_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Apiary2026_Decoration_Slot29, event=SP_Apiary2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Apiary2026_Decoration_Slot29, event=Season Pass - Buzzing with Purpose, eventKey=SP_Apiary2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Doubtful): Hank! When I said I wanted a big sign...
 **MADDIE** (Doubtful): I didn't mean one that you could see from space!
@@ -17646,9 +17375,9 @@ Play further to fully unlock it
 **MADDIE** (Charming): Ha! Don't worry Hank. And Cherry, we'll get you all the honey you'll ever need!
 **CHERRY** (Encouraging): Wonderful!
 
-### SP_Apiary2026 — decoration SP_Apiary2026_Decoration_Slot38
+### Season Pass - Buzzing with Purpose — decoration SP_Apiary2026_Decoration_Slot38
 `SP_Apiary2026_Decoration_Slot38_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Apiary2026_Decoration_Slot38, event=SP_Apiary2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Apiary2026_Decoration_Slot38, event=Season Pass - Buzzing with Purpose, eventKey=SP_Apiary2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **JACKIE** (Charming): Maddie! How's the hive?
 **MADDIE** (Encouraging): Thriving! They're busy little bees, I'm almost all out of honey jars!
@@ -17671,9 +17400,9 @@ Play further to fully unlock it
 **GRANDMA** (Thinking): Probably something to do with the Hopeberry honey it made...
 **MADDIE** (Surprised): What's special about the Hopeberry honey?
 
-### SP_Apiary2026 — item discovered: SP_Apiary2026_CollectableItems_04
+### Season Pass - Buzzing with Purpose — item discovered: Thriving Beehive
 `SP_Apiary2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_Apiary2026, items=['SP_Apiary2026_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Season Pass - Buzzing with Purpose, eventKey=SP_Apiary2026, itemKeys=['SP_Apiary2026_CollectableItems_04'], items=['Thriving Beehive'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): This is incredible!
 **MADDIE** (Encouraging): Where did you manage to get a queen bee for the hive?
@@ -17710,9 +17439,9 @@ Play further to fully unlock it
 **JACKIE** (Hesitant): Well, the thing is... I can't take care of him. So I was kinda thinking...
 **MADDIE** (Relaxed): Hey, don't worry about it. There's plenty of space for a bunny here...
 
-### SP_BunnyPet2026 — item discovered: SP_BunnyPet2026_CollectableItems_04
+### Season Pass - Fluff Overload — item discovered: Harvest Plate
 `SP_BunnyPet2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_BunnyPet2026, items=['SP_BunnyPet2026_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Season Pass - Fluff Overload, eventKey=SP_BunnyPet2026, itemKeys=['SP_BunnyPet2026_CollectableItems_04'], items=['Harvest Plate'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): That's a lot of carrots!
 **JACKIE** (Hesitant): What can I say? He loves them!
@@ -17777,9 +17506,9 @@ Play further to fully unlock it
 **GRANDMA** (Charming): Oh, dearie...
 **GRANDMA** (Joyous): I had no leaves to bury them under!
 
-### SP_CancelledFun2025 — decoration SP_CancelledFun2025_Decoration_Slot33
+### Festive Feast — decoration SP_CancelledFun2025_Decoration_Slot33
 `SP_CancelledFun2025_Decoration_Slot33_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CancelledFun2025_Decoration_Slot33, event=SP_CancelledFun2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CancelledFun2025_Decoration_Slot33, event=Festive Feast, eventKey=SP_CancelledFun2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): Looks like you’re making yourself at home!
 **CHERRY** (Encouraging): Oh, I am! It’s been such a long while since the last time I cooked here, sugar.
@@ -17791,9 +17520,9 @@ Play further to fully unlock it
 **MADDIE** (Surprised): Wait a minute! These “bricks” are filled with money!
 **GRANDMA** (Charming): Fake money, dearie. FAKE money.
 
-### SP_CancelledFun2025 — decoration SP_CancelledFun2025_Decoration_Slot34
+### Festive Feast — decoration SP_CancelledFun2025_Decoration_Slot34
 `SP_CancelledFun2025_Decoration_Slot34_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CancelledFun2025_Decoration_Slot34, event=SP_CancelledFun2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CancelledFun2025_Decoration_Slot34, event=Festive Feast, eventKey=SP_CancelledFun2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Surprised): Wow, these chairs sure are heavy!
 **ANTIQUEDEALER** (Relaxed): They’re wrought iron, Maddie! What do you expect?
@@ -17806,9 +17535,9 @@ Play further to fully unlock it
 **ANTIQUEDEALER** (Surprised): ...
 **ANTIQUEDEALER** (Charming): Good, let’s get the tables!
 
-### SP_CancelledFun2025 — decoration SP_CancelledFun2025_Decoration_Slot35
+### Festive Feast — decoration SP_CancelledFun2025_Decoration_Slot35
 `SP_CancelledFun2025_Decoration_Slot35_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CancelledFun2025_Decoration_Slot35, event=SP_CancelledFun2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CancelledFun2025_Decoration_Slot35, event=Festive Feast, eventKey=SP_CancelledFun2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **PEARL** (Surprised): Mason! Pull your face out of that chocolate fountain this instant!
 **MASON** (Worried): But Moooom! Someone’s gotta do quality control! Who knows if this chocolate is up to standard?
@@ -17819,9 +17548,9 @@ Play further to fully unlock it
 **MADDIE** (Relaxed): It’s alright, Pearl. He can help as long as he uses a SPOON.
 **MASON** (Encouraging): Mason, official Chocolate quality control officer, reporting for duty, Ma’am!
 
-### SP_CancelledFun2025 — decoration SP_CancelledFun2025_Decoration_Slot36
+### Festive Feast — decoration SP_CancelledFun2025_Decoration_Slot36
 `SP_CancelledFun2025_Decoration_Slot36_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CancelledFun2025_Decoration_Slot36, event=SP_CancelledFun2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CancelledFun2025_Decoration_Slot36, event=Festive Feast, eventKey=SP_CancelledFun2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): I think we should keep this oven after the festival!
 **MADDIE** (Joyous): I sure do love pizza!
@@ -17832,9 +17561,9 @@ Play further to fully unlock it
 **GRANDMA** (Joyous): Just joking, dearie!
 **MADDIE** (Thinking): Was she though?!
 
-### SP_CancelledFun2025 — decoration SP_CancelledFun2025_Decoration_Slot37
+### Festive Feast — decoration SP_CancelledFun2025_Decoration_Slot37
 `SP_CancelledFun2025_Decoration_Slot37_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CancelledFun2025_Decoration_Slot37, event=SP_CancelledFun2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CancelledFun2025_Decoration_Slot37, event=Festive Feast, eventKey=SP_CancelledFun2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): What’s this, Grandma?
 **GRANDMA** (Encouraging): Oh, just a little something I whipped up for everyone who's helped so far!
@@ -17867,9 +17596,9 @@ Play further to fully unlock it
 **CHERRY** (Thinking): We’ll show that mayor that they can't stop us from having fun!  
   _earlier:_ ~~We’ll show that mayor that she can't stop us from having fun!~~ (until 25.10.01)
 
-### SP_CancelledFun2025 — item discovered: SP_CancelledFun2025_CollectableItems_04
+### Festive Feast — item discovered: Cherry's Deluxe Pumpkin Pie
 `SP_CancelledFun2025_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_CancelledFun2025, items=['SP_CancelledFun2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Festive Feast, eventKey=SP_CancelledFun2025, itemKeys=['SP_CancelledFun2025_CollectableItems_04'], items=["Cherry's Deluxe Pumpkin Pie"], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): These pies look absolutely amazing!
 **GRANDMA** (Doubtful): Maybe a bit familiar...
@@ -17881,9 +17610,9 @@ Play further to fully unlock it
 **GRANDMA** (Frustrated): ...
 **GRANDMA** (Charming): ...That’s amazing, dearie.
 
-### SP_CherrysMysteryMeat2024 — decoration SP_CherrysMysteryMeat2024_Decoration_Slot35
+### Cherry's Mystery Meat — decoration SP_CherrysMysteryMeat2024_Decoration_Slot35
 `SP_CherrysMysteryMeat2024_Decoration_Slot35_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot35, event=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot35, event=Cherry's Mystery Meat, eventKey=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL** (Encouraging): Everyone, the pie's almost ready to come out of the oven!
 **JACKIE**: And it looks delicious - seriously!
@@ -17892,18 +17621,18 @@ Play further to fully unlock it
 **JACKIE** (Encouraging): I know - he totally would! He'll be here soon. You wanna join us for a cup of Hopeberry juice?
 **MADDIE** (Surprised): Umm, I promised to help Grandma with the BBQ...
 
-### SP_CherrysMysteryMeat2024 — decoration SP_CherrysMysteryMeat2024_Decoration_Slot36
+### Cherry's Mystery Meat — decoration SP_CherrysMysteryMeat2024_Decoration_Slot36
 `SP_CherrysMysteryMeat2024_Decoration_Slot36_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot36, event=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot36, event=Cherry's Mystery Meat, eventKey=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **CHERRY**: Yummm! The founders knew a good pie!
 **MADDIE** (Relaxed): They sure did. What kind of vegan meat is this, Cherry? It's so tasty!
 **CHERRY** (Encouraging): You can thank Ursula for that. But Ursula, where DID you get it?
 **GRANDMA**: Oh, it is just something I had in the freezer. I am glad it made such a scrumptious pie!
 
-### SP_CherrysMysteryMeat2024 — decoration SP_CherrysMysteryMeat2024_Decoration_Slot37
+### Cherry's Mystery Meat — decoration SP_CherrysMysteryMeat2024_Decoration_Slot37
 `SP_CherrysMysteryMeat2024_Decoration_Slot37_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot37, event=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot37, event=Cherry's Mystery Meat, eventKey=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **DEB** (Worried): Maddie, could you do me a favor and put up some of these posters of Hank?
 **MADDIE** (Worried): There's still no sign of him, huh?
@@ -17927,9 +17656,9 @@ Play further to fully unlock it
 **BELLA**: Ha! It's fine. What matters is that I finally got my REVENGE!
 **GRANDMA** (Joyous): Oh! I really do like her!
 
-### SP_CinqoDeMayo2026 — decoration SP_CinqoDeMayo2026_Decoration_Slot34
+### Season Pass - Flavors of Tradition — decoration SP_CinqoDeMayo2026_Decoration_Slot34
 `SP_CinqoDeMayo2026_Decoration_Slot34_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot34, event=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot34, event=Season Pass - Flavors of Tradition, eventKey=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Surprised): Boy! You weren't kidding!
 **MADDIE** (Encouraging): You're going all out, aren't you?
@@ -17940,9 +17669,9 @@ Play further to fully unlock it
 **EMILIO** (Charming): Nothing at all!  
   _earlier:_ ~~Nothing at all! ~~ (until 26.02.03)
 
-### SP_CinqoDeMayo2026 — decoration SP_CinqoDeMayo2026_Decoration_Slot35
+### Season Pass - Flavors of Tradition — decoration SP_CinqoDeMayo2026_Decoration_Slot35
 `SP_CinqoDeMayo2026_Decoration_Slot35_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot35, event=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot35, event=Season Pass - Flavors of Tradition, eventKey=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): Oooh, nice piñata!
 **BELLA**: Yes! This one is a family heirloom.
@@ -17953,9 +17682,9 @@ Play further to fully unlock it
 **BELLA** (Annoyed): But today... Today is the DAY!
 **GRANDMA** (Charming): Actually dearie, I may have JUST the thing to help you with that!
 
-### SP_CinqoDeMayo2026 — decoration SP_CinqoDeMayo2026_Decoration_Slot36
+### Season Pass - Flavors of Tradition — decoration SP_CinqoDeMayo2026_Decoration_Slot36
 `SP_CinqoDeMayo2026_Decoration_Slot36_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot36, event=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot36, event=Season Pass - Flavors of Tradition, eventKey=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **EMILIO** (Relaxed): Wow! This looks amazing!
 **GRANDMA** (Relaxed): Well, you can thank Maddie for that!
@@ -17964,9 +17693,9 @@ Play further to fully unlock it
 **BELLA**: You did a great job, though!
 **MADDIE** (Relaxed): Thank you, Bella!
 
-### SP_CinqoDeMayo2026 — decoration SP_CinqoDeMayo2026_Decoration_Slot37
+### Season Pass - Flavors of Tradition — decoration SP_CinqoDeMayo2026_Decoration_Slot37
 `SP_CinqoDeMayo2026_Decoration_Slot37_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot37, event=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_CinqoDeMayo2026_Decoration_Slot37, event=Season Pass - Flavors of Tradition, eventKey=SP_CinqoDeMayo2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Joyous): Oooh! A stage! Are you going to play something for us, Emilio?
 **EMILIO** (Relaxed): Well... I was sort of thinking about it.
@@ -17989,9 +17718,9 @@ Play further to fully unlock it
 **GRANDMA** (Charming): She is a dear, dear friend of mine, but do I have to remind you that she predicts the future from a snow globe?
 **MADDIE** (Hesitant): When you put it that way...
 
-### SP_CorpseFlower2025 — decoration SP_CorpseFlower2025_Decoration_Slot25
+### Petals of Tragedy — decoration SP_CorpseFlower2025_Decoration_Slot25
 `SP_CorpseFlower2025_Decoration_Slot25_Dialogue` · seen 25.06.01–26.07.01
-- trigger: decoration, decoration=SP_CorpseFlower2025_Decoration_Slot25, event=SP_CorpseFlower2025, moment=decoration placed (versions 25.06.01–26.07.01)
+- trigger: decoration, decoration=SP_CorpseFlower2025_Decoration_Slot25, event=Petals of Tragedy, eventKey=SP_CorpseFlower2025, moment=decoration placed (versions 25.06.01–26.07.01)
 
 **MADDIE** (Worried): I understand you're upset, but it was only a...
 **DEB** (Worried): Only a what? I grew that flower from a seedling and learned to love its unusual charm over decades!
@@ -18001,18 +17730,18 @@ Play further to fully unlock it
 **DEB** (Thinking): Would you do that, dear? Really?
 **MADDIE** (Relaxed): Absolutely!
 
-### SP_CorpseFlower2025 — decoration SP_CorpseFlower2025_Decoration_Slot26
+### Petals of Tragedy — decoration SP_CorpseFlower2025_Decoration_Slot26
 `SP_CorpseFlower2025_Decoration_Slot26_Dialogue` · seen 25.06.01–26.07.01
-- trigger: decoration, decoration=SP_CorpseFlower2025_Decoration_Slot26, event=SP_CorpseFlower2025, moment=decoration placed (versions 25.06.01–26.07.01)
+- trigger: decoration, decoration=SP_CorpseFlower2025_Decoration_Slot26, event=Petals of Tragedy, eventKey=SP_CorpseFlower2025, moment=decoration placed (versions 25.06.01–26.07.01)
 
 **DEB** (Thinking): Maddie, our discussion gave me a wonderful idea amid this misery.
 **DEB** (Thinking): I want to organize a worthy funeral for my beloved corpse flower.
 **MADDIE** (Surprised): A funeral... for a plant?
 **DEB** (Encouraging): Yes! A magnificent send-off for a magnificent specimen.
 
-### SP_CorpseFlower2025 — decoration SP_CorpseFlower2025_Decoration_Slot27
+### Petals of Tragedy — decoration SP_CorpseFlower2025_Decoration_Slot27
 `SP_CorpseFlower2025_Decoration_Slot27_Dialogue` · seen 25.06.01–26.07.01
-- trigger: decoration, decoration=SP_CorpseFlower2025_Decoration_Slot27, event=SP_CorpseFlower2025, moment=decoration placed (versions 25.06.01–26.07.01)
+- trigger: decoration, decoration=SP_CorpseFlower2025_Decoration_Slot27, event=Petals of Tragedy, eventKey=SP_CorpseFlower2025, moment=decoration placed (versions 25.06.01–26.07.01)
 
 **GRANDMA** (Thinking): What are you doing with Deb? Organizing an early Halloween party?
 **MADDIE** (Worried): A funeral, for her corpse flower. The flower wilted after Pablo the goat took a bite out of it, and Deb's taking the whole thing pretty badly.
@@ -18020,9 +17749,9 @@ Play further to fully unlock it
 **GRANDMA** (Charming): I know that plant meant a lot to her, but I cannot say I will miss its scent.
 **MADDIE** (Relaxed): That makes two of us. Just don't tell Deb!
 
-### SP_CorpseFlower2025 — decoration SP_CorpseFlower2025_Decoration_Slot28
+### Petals of Tragedy — decoration SP_CorpseFlower2025_Decoration_Slot28
 `SP_CorpseFlower2025_Decoration_Slot28_Dialogue` · seen 25.06.01–26.07.01
-- trigger: decoration, decoration=SP_CorpseFlower2025_Decoration_Slot28, event=SP_CorpseFlower2025, moment=decoration placed (versions 25.06.01–26.07.01)
+- trigger: decoration, decoration=SP_CorpseFlower2025_Decoration_Slot28, event=Petals of Tragedy, eventKey=SP_CorpseFlower2025, moment=decoration placed (versions 25.06.01–26.07.01)
 
 **DEB**: Thank you everyone for coming today. It is with a heavy heart that I part with my beautiful Titan Arum.
 **DEB**: We've shared so many wonderful years together, and life will not be the same without it.
@@ -18031,9 +17760,9 @@ Play further to fully unlock it
 **HANK** (Thinking): Psst, Maddie! I love Deb so much and I'm so sorry for her terrible loss, but am I the only one who finds this smell overpowering?
 **MADDIE** (Frustrated): Nope. It's definitely overpowering.
 
-### SP_CorpseFlower2025 — decoration SP_CorpseFlower2025_Decoration_Slot29
+### Petals of Tragedy — decoration SP_CorpseFlower2025_Decoration_Slot29
 `SP_CorpseFlower2025_Decoration_Slot29_Dialogue` · seen 25.06.01–26.07.01
-- trigger: decoration, decoration=SP_CorpseFlower2025_Decoration_Slot29, event=SP_CorpseFlower2025, moment=decoration placed (versions 25.06.01–26.07.01)
+- trigger: decoration, decoration=SP_CorpseFlower2025_Decoration_Slot29, event=Petals of Tragedy, eventKey=SP_CorpseFlower2025, moment=decoration placed (versions 25.06.01–26.07.01)
 
 **DEB**: I know my beautiful lily would want this to be a celebration of life, rather than death, so I have a very special surprise for all of you.
 **MADDIE** (Surprised): R-really? What kind of surprise?
@@ -18051,10 +17780,9 @@ Play further to fully unlock it
 **JACKIE** (Surprised): Maddie... Remember Voyance's premonition? She predicted this!
 **MADDIE** (Thinking): You're right -- first Emilio and Bella's wedding, and now this!
 
-### SP_CorpseFlower2025 — item discovered: 37207756
+### Petals of Tragedy — item discovered: Beloved Corpse Flower
 `SP_CorpseFlower2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.06.01–26.07.01
-- trigger: item, event=SP_CorpseFlower2025, items=['37207756'], moment=item discovered (versions 25.06.01–25.06.01)
-- trigger: item, event=SP_CorpseFlower2025, items=['SP_CorpseFlower2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Petals of Tragedy, eventKey=SP_CorpseFlower2025, itemKeys=['SP_CorpseFlower2025_CollectableItems_04'], items=['Beloved Corpse Flower'], moment=item discovered (versions 25.06.01–26.07.01)
 
 **MADDIE** (Thinking): What happened?? How can the corpse flower be dead?
 **DEB** (Worried): There is a big chunk missing from one of its petals. It almost looks like someone has taken a bite out of it!
@@ -18091,9 +17819,9 @@ Play further to fully unlock it
 **RODDY** (Relaxed): You wouldn’t have space for another pet, would you?
 **MADDIE** (Doubtful): Roddy...
 
-### SP_CowPet2026 — item discovered: SP_CowPet2026_CollectableItems_04
+### Udderly Adorable — item discovered: Princess Bell Collar
 `SP_CowPet2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_CowPet2026, items=['SP_CowPet2026_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Udderly Adorable, eventKey=SP_CowPet2026, itemKeys=['SP_CowPet2026_CollectableItems_04'], items=['Princess Bell Collar'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Encouraging): I mean, it's nothing out of the ordinary, you know?
 **RODDY** (Relaxed): Just your typical farm animal... Well... Almost.
@@ -18149,9 +17877,9 @@ Play further to fully unlock it
 **MADDIE** (Encouraging): With McLeod of course.
 **RODDY** (Encouraging): You got yourself a deal!
 
-### SP_DebsMystery2023 — decoration SP_DebsMystery2023_Decoration_Slot25
+### Deb’s Mystery — decoration SP_DebsMystery2023_Decoration_Slot25
 `SP_DebsMystery2023Decoration_Slot25` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot25, event=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot25, event=Deb’s Mystery, eventKey=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **DEB**: Ah, Maddie! Right on time! I’ve taken it upon myself to get a little assistance for you!
 **MADDIE** (Worried): Er... I’m okay! I don’t think Hank needs to help on this one.
@@ -18162,9 +17890,9 @@ Play further to fully unlock it
 **DEB** (Encouraging): Oh! I got lost in my thoughts! No, I called that handsome marine biologist of yours, Enrique!
 **MADDIE** (Surprised): E- Emilio?! He isn’t mine!
 
-### SP_DebsMystery2023 — decoration SP_DebsMystery2023_Decoration_Slot26
+### Deb’s Mystery — decoration SP_DebsMystery2023_Decoration_Slot26
 `SP_DebsMystery2023Decoration_Slot26` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot26, event=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot26, event=Deb’s Mystery, eventKey=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE**: Hi, Emilio! I’m sorry that Deb dragged you into this.  
   _earlier:_ ~~Hi Emilio! I’m sorry that Deb dragged you into this.~~ (until 23.12.01)
@@ -18181,9 +17909,9 @@ Play further to fully unlock it
 **EMILIO**: Ah! Sorry, no! She switched careers. She pilots commercial airlines now!
 **MADDIE** (Charming): Fascinating...
 
-### SP_DebsMystery2023 — decoration SP_DebsMystery2023_Decoration_Slot27
+### Deb’s Mystery — decoration SP_DebsMystery2023_Decoration_Slot27
 `SP_DebsMystery2023Decoration_Slot27` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot27, event=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot27, event=Deb’s Mystery, eventKey=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Wow!
 **MADDIE** (Worried): Boy.... is that... fragrant!
@@ -18191,9 +17919,9 @@ Play further to fully unlock it
 **GRANDMA** (Surprised): Oh Deb, I don’t know if I can have that thing stinking up my home.
 **GRANDMA** (Worried): It took over a month to get the smell out when we stashed your IMPROVED hopeberry juice!
 
-### SP_DebsMystery2023 — decoration SP_DebsMystery2023_Decoration_Slot28
+### Deb’s Mystery — decoration SP_DebsMystery2023_Decoration_Slot28
 `SP_DebsMystery2023Decoration_Slot28` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot28, event=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot28, event=Deb’s Mystery, eventKey=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE** (Encouraging): Rolled out the red carpet, huh?
 **DEB**: Well, it is a big occasion after all!
@@ -18202,9 +17930,9 @@ Play further to fully unlock it
 **DEB** (Encouraging): For me, it shows that there is beauty in everything. Even in the most unlikely places.
 **DEB** (Relaxed): Besides, doesn’t hurt to make this place look a bit fancy!
 
-### SP_DebsMystery2023 — decoration SP_DebsMystery2023_Decoration_Slot29
+### Deb’s Mystery — decoration SP_DebsMystery2023_Decoration_Slot29
 `SP_DebsMystery2023Decoration_Slot29` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot29, event=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot29, event=Deb’s Mystery, eventKey=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE** (Encouraging): Fleur-de-lis, spikes... I’m sensing a theme here!
 **DEB** (Relaxed): You got me! I ADORE European nobility and their architecture. I spent most of my twenties traveling through Europe, looking for...
@@ -18212,10 +17940,9 @@ Play further to fully unlock it
 **DEB** (Charming): ... What’s that? Oh, LOVE of course!
 **MADDIE** (Doubtful): Of course.
 
-### SP_DebsMystery2023 — item discovered: 69153515
+### Deb’s Mystery — item discovered: Inflorescence
 `SP_DebsMystery2023LastCollectibleItemDiscovered` · seen 23.09.02–26.07.01
-- trigger: item, event=SP_DebsMystery2023, items=['69153515'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=SP_DebsMystery2023, items=['SP_DebsMystery2023_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Deb’s Mystery, eventKey=SP_DebsMystery2023, itemKeys=['SP_DebsMystery2023_CollectableItems_04'], items=['Inflorescence'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Encouraging): I admit, it is quite beautiful.
 **DEB** (Charming): That it is Maddie, sweetie. They can grow tall and strong and live very long lives...
@@ -18238,9 +17965,9 @@ Play further to fully unlock it
 **MADDIE** (Encouraging): Do you think we'll have another Renaissance Faire next year?
 **ANTIQUEDEALER** (Charming): I certainly hope so.
 
-### SP_FairToRemember2026 — decoration SP_FairToRemember2026_Decoration_Slot33
+### A Fair to Remember — decoration SP_FairToRemember2026_Decoration_Slot33
 `SP_FairToRemember2026_Decoration_Slot33_Dialogue` · seen 26.06.01–26.07.01
-- trigger: decoration, decoration=SP_FairToRemember2026_Decoration_Slot33, event=SP_FairToRemember2026, moment=decoration placed (versions 26.06.01–26.07.01)
+- trigger: decoration, decoration=SP_FairToRemember2026_Decoration_Slot33, event=A Fair to Remember, eventKey=SP_FairToRemember2026, moment=decoration placed (versions 26.06.01–26.07.01)
 
 **MADDIE** (Joyous): The stalls are up!
 **ANTIQUEDEALER** (Encouraging): Wonderful. A proper fair needs a proper marketplace.
@@ -18262,9 +17989,9 @@ Play further to fully unlock it
 **ANTIQUEDEALER** (Joyous): It is glorious! I have been dreaming of organizing one for a long time.
 **MADDIE** (Joyous): Then let's make it happen!
 
-### SP_FairToRemember2026 — item discovered: SP_FairToRemember2026_CollectableItems_04
+### A Fair to Remember — item discovered: Ren Faire Lute
 `SP_FairToRemember2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.06.01–26.07.01
-- trigger: item, event=SP_FairToRemember2026, items=['SP_FairToRemember2026_CollectableItems_04'], moment=item discovered (versions 26.06.01–26.07.01)
+- trigger: item, event=A Fair to Remember, eventKey=SP_FairToRemember2026, itemKeys=['SP_FairToRemember2026_CollectableItems_04'], items=['Ren Faire Lute'], moment=item discovered (versions 26.06.01–26.07.01)
 
 **ANTIQUEDEALER** (Joyous): Listen to that music.
 **MADDIE** (Joyous): And listen to that crowd!
@@ -18299,9 +18026,9 @@ Play further to fully unlock it
 **ANTIQUEDEALER** (Frustrated): Oh right! The ferrets, Maddie! They’re back!
 **MADDIE** (Surprised): Ferrets?!
 
-### SP_FerretPet2025 — item discovered: SP_FerretPet2025_CollectableItems_04
+### Ferret Fiasco — item discovered: Noodle Network
 `SP_FerretPet2025_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_FerretPet2025, items=['SP_FerretPet2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Ferret Fiasco, eventKey=SP_FerretPet2025, itemKeys=['SP_FerretPet2025_CollectableItems_04'], items=['Noodle Network'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Doubtful): You sure this will work?
 **ANTIQUEDEALER** (Thinking): Oh yes! This is how we caught them back in ‘82.
@@ -18385,9 +18112,9 @@ Play further to fully unlock it
 **MADDIE** (Joyous): Rufus! Just the dog I was looking for...
 **DOG** (Doubtful): Ruff?
 
-### SP_GhostDog2025 — item discovered: SP_GhostDog2025_CollectableItems_04
+### Halloween Howling — item discovered: Phantom Chow
 `SP_GhostDog2025_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_GhostDog2025, items=['SP_GhostDog2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Halloween Howling, eventKey=SP_GhostDog2025, itemKeys=['SP_GhostDog2025_CollectableItems_04'], items=['Phantom Chow'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): And your frightful feast is ready, Ru- Er... Boo!
 **PET** (Surprised): AwOooooOOOoo...
@@ -18520,9 +18247,9 @@ Play further to fully unlock it
 **PEARL** (Thinking): Some treasures are valuable because they're rare. Others because they make people curious.
 **MADDIE** (Encouraging): Then I'd call this showcase a success.
 
-### SP_GoodVibrations2026 — decoration SP_GoodVibrations2026_Decoration_Slot25
+### Good Vibrations — decoration SP_GoodVibrations2026_Decoration_Slot25
 `SP_GoodVibrations2026_Decoration_Slot25_Dialogue` · seen 26.06.01–26.07.01
-- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot25, event=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
+- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot25, event=Good Vibrations, eventKey=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
 
 **MADDIE** (Thinking): I keep finding more stones tucked into these boxes. Whoever packed this collection was very thorough.
 **MADDIE** (Thinking): Some of these have notes attached. Dates, locations...
@@ -18531,9 +18258,9 @@ Play further to fully unlock it
 **MADDIE** (Encouraging): Good thing, too. Otherwise, we'd never have found any of this.  
   _earlier:_ ~~Good thing, too. Otherwise we'd never have found any of this.~~ (until 26.06.01)
 
-### SP_GoodVibrations2026 — decoration SP_GoodVibrations2026_Decoration_Slot26
+### Good Vibrations — decoration SP_GoodVibrations2026_Decoration_Slot26
 `SP_GoodVibrations2026_Decoration_Slot26_Dialogue` · seen 26.06.01–26.07.01
-- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot26, event=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
+- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot26, event=Good Vibrations, eventKey=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
 
 **MADDIE**: The labels on the display tables make such a difference. Visitors can learn what they're looking at.
 **PEARL** (Encouraging): I've added magnifying glasses too. But this sample doesn't match any description we have.
@@ -18541,9 +18268,9 @@ Play further to fully unlock it
 **PEARL** (Doubtful): Or nobody ever identified it properly.
 **MADDIE**: Hmmm... Very intriguing.
 
-### SP_GoodVibrations2026 — decoration SP_GoodVibrations2026_Decoration_Slot28
+### Good Vibrations — decoration SP_GoodVibrations2026_Decoration_Slot28
 `SP_GoodVibrations2026_Decoration_Slot28_Dialogue` · seen 26.06.01–26.07.01
-- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot28, event=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
+- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot28, event=Good Vibrations, eventKey=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
 
 **PEARL**: More people brought collections! Now we have fossils, shells, beach glass...
 **MADDIE** (Encouraging): And every item has a story behind it.
@@ -18551,9 +18278,9 @@ Play further to fully unlock it
 **PEARL** (Doubtful): And somehow every version is different.
 **JACKIE** (Thinking): That's a mystery worth digging into...
 
-### SP_GoodVibrations2026 — decoration SP_GoodVibrations2026_Decoration_Slot38
+### Good Vibrations — decoration SP_GoodVibrations2026_Decoration_Slot38
 `SP_GoodVibrations2026_Decoration_Slot38_Dialogue` · seen 26.06.01–26.07.01
-- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot38, event=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
+- trigger: decoration, decoration=SP_GoodVibrations2026_Decoration_Slot38, event=Good Vibrations, eventKey=SP_GoodVibrations2026, moment=decoration placed (versions 26.06.01–26.07.01)
 
 **MADDIE** (Relaxed): The giant geode is stealing the whole show.
 **PEARL** (Encouraging): That's understandable! Nature doesn't make many treasures like that.
@@ -18576,9 +18303,9 @@ Play further to fully unlock it
 **JACKIE**: I think these treasures deserve to be shown off to the whole town. How about we put on a little showcase?
 **PEARL**: Maybe we'll find some answers along the way!
 
-### SP_GoodVibrations2026 — item discovered: SP_GoodVibrations2026_CollectableItems_04
+### Good Vibrations — item discovered: Crystal Cluster
 `SP_GoodVibrations2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.06.01–26.07.01
-- trigger: item, event=SP_GoodVibrations2026, items=['SP_GoodVibrations2026_CollectableItems_04'], moment=item discovered (versions 26.06.01–26.07.01)
+- trigger: item, event=Good Vibrations, eventKey=SP_GoodVibrations2026, itemKeys=['SP_GoodVibrations2026_CollectableItems_04'], items=['Crystal Cluster'], moment=item discovered (versions 26.06.01–26.07.01)
 
 **MADDIE**: Here's the last box. Wait... why is it so heavy?
 **JACKIE** (Thinking): There's a huge gray rock inside! Let's handle it carefully. It might be fragile.  
@@ -18590,9 +18317,9 @@ Play further to fully unlock it
 **JACKIE** (Surprised): Wow! Look at those crystals!
 **MADDIE** (Relaxed): Well, we found our centerpiece.
 
-### SP_GrandmasMystery2024 — decoration SP_GrandmasMystery2024_Decoration_Slot33
+### Grandma's Mystery — decoration SP_GrandmasMystery2024_Decoration_Slot33
 `SP_GrandmasMystery2024_Decoration_Slot33_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_GrandmasMystery2024_Decoration_Slot33, event=SP_GrandmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_GrandmasMystery2024_Decoration_Slot33, event=Grandma's Mystery, eventKey=SP_GrandmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **KAZUKO**: Let's set up a seating area here! A bench, some cushions, lights...
 **KAZUKO** (Thinking): I've sensed so much trouble around town after Hank went missing. Maybe this little project can bring some harmony.
@@ -18602,9 +18329,9 @@ Play further to fully unlock it
 **KAZUKO**: She spent so long in Japan and speaks the language fluently... You know, that's not exactly usual!
 **MADDIE** (Surprised): Grandma speaks Japanese??
 
-### SP_GrandmasMystery2024 — decoration SP_GrandmasMystery2024_Decoration_Slot35
+### Grandma's Mystery — decoration SP_GrandmasMystery2024_Decoration_Slot35
 `SP_GrandmasMystery2024_Decoration_Slot35_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_GrandmasMystery2024_Decoration_Slot35, event=SP_GrandmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_GrandmasMystery2024_Decoration_Slot35, event=Grandma's Mystery, eventKey=SP_GrandmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **SGT. PEPPER** (Charming): *Chirrrup!*
 **MADDIE**: I'm sorry, but I don't have any crackers for you... Please don't be offended!
@@ -18616,9 +18343,9 @@ Play further to fully unlock it
 **MADDIE**: If you're saying what I think you're saying, this is really serious...
 **SGT. PEPPER** (Thinking): Crackerrr!
 
-### SP_GrandmasMystery2024 — decoration SP_GrandmasMystery2024_Decoration_Slot36
+### Grandma's Mystery — decoration SP_GrandmasMystery2024_Decoration_Slot36
 `SP_GrandmasMystery2024_Decoration_Slot36_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_GrandmasMystery2024_Decoration_Slot36, event=SP_GrandmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_GrandmasMystery2024_Decoration_Slot36, event=Grandma's Mystery, eventKey=SP_GrandmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): Grandma, I just had a REALLY worrying talk with Sgt. Pepper!
 **GRANDMA** (Charming): The cockatoo?
@@ -18627,9 +18354,9 @@ Play further to fully unlock it
 **GRANDMA** (Encouraging): Just spit it out, dearie!
 **MADDIE** (Surprised): Did you kill Hank and let Cherry bake him into a pie?
 
-### SP_GrandmasMystery2024 — decoration SP_GrandmasMystery2024_Decoration_Slot37
+### Grandma's Mystery — decoration SP_GrandmasMystery2024_Decoration_Slot37
 `SP_GrandmasMystery2024_Decoration_Slot37_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_GrandmasMystery2024_Decoration_Slot37, event=SP_GrandmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_GrandmasMystery2024_Decoration_Slot37, event=Grandma's Mystery, eventKey=SP_GrandmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): Would I really kill Hank, my own sister's husband?
 **DEB** (Frustrated): According to what Maddie said, the evidence speaks for itself, Ursula.
@@ -18643,10 +18370,9 @@ Play further to fully unlock it
 **MADDIE** (Thinking): So, where IS Hank?
 **GRANDMA** (Discouraged): That is a more complicated question, dearie...
 
-### SP_GrandmasMystery2024 — item discovered: 10364107
+### Grandma's Mystery — item discovered: Mask of Comedy
 `SP_GrandmasMystery2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_GrandmasMystery2024, items=['10364107'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_GrandmasMystery2024, items=['SP_GrandmasMystery2024_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Grandma's Mystery, eventKey=SP_GrandmasMystery2024, itemKeys=['SP_GrandmasMystery2024_CollectableItems_04'], items=['Mask of Comedy'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA**: Maddie, dearie! There's someone I want you to meet.
 **MADDIE**: Oh?
@@ -18658,9 +18384,9 @@ Play further to fully unlock it
 **KAZUKO** (Joyous): This is my cockatoo, Sgt. Pepper. I'm afraid he is pretty nosey...
 **SGT. PEPPER** (Charming): Aaaall you need is a... CRRRACKER!
 
-### SP_GranniesOfAnarchy2023 — decoration SP_GranniesOfAnarchy2023_Decoration_Slot25
+### Grannies of Anarchy — decoration SP_GranniesOfAnarchy2023_Decoration_Slot25
 `SP_GranniesOfAnarchy2023_Decoration_Slot25_Dialogue` · seen 23.11.02–26.07.01
-- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot25, event=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
+- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot25, event=Grannies of Anarchy, eventKey=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
 
 **GRANDMA** (Charming): Maddie, what on earth are you doing sneaking around?
 **MADDIE** (Encouraging): Err... We were just admiring these impressive motorbikes on your drive.
@@ -18673,9 +18399,9 @@ Play further to fully unlock it
 **GRANDMA**: <b>That </b>was biker slang. This is our biker gang, the Grannies of Anarchy.
 **JACKIE** (Doubtful): Ha! So I was right!
 
-### SP_GranniesOfAnarchy2023 — decoration SP_GranniesOfAnarchy2023_Decoration_Slot26
+### Grannies of Anarchy — decoration SP_GranniesOfAnarchy2023_Decoration_Slot26
 `SP_GranniesOfAnarchy2023_Decoration_Slot26_Dialogue` · seen 23.11.02–26.07.01
-- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot26, event=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
+- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot26, event=Grannies of Anarchy, eventKey=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
 
 **MADDIE**: Tell us more, Grandma! When did you join your biker gang?
 **GRANDMA** (Relaxed): Oh, we've been flying our colors for decades.
@@ -18685,9 +18411,9 @@ Play further to fully unlock it
 **MADDIE** (Joyous): And the knitted decorations on your bikes are really amazing!
 **GRANDMA** (Charming): We do know a thing or two about knitting... and rebellion.
 
-### SP_GranniesOfAnarchy2023 — decoration SP_GranniesOfAnarchy2023_Decoration_Slot27
+### Grannies of Anarchy — decoration SP_GranniesOfAnarchy2023_Decoration_Slot27
 `SP_GranniesOfAnarchy2023_Decoration_Slot27_Dialogue` · seen 23.11.02–26.07.01
-- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot27, event=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
+- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot27, event=Grannies of Anarchy, eventKey=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
 
 **GRANDMA** (Doubtful): When we started our motorcycle club, people just did not take us seriously.
 **GRANDMA** (Doubtful): So, we were forced to break the rules every now and again.
@@ -18698,9 +18424,9 @@ Play further to fully unlock it
 **GRANDMA** (Doubtful): Whatever do you mean?
 **MADDIE** (Doubtful): Does your gang dabble with anything... criminal?
 
-### SP_GranniesOfAnarchy2023 — decoration SP_GranniesOfAnarchy2023_Decoration_Slot28
+### Grannies of Anarchy — decoration SP_GranniesOfAnarchy2023_Decoration_Slot28
 `SP_GranniesOfAnarchy2023_Decoration_Slot28_Dialogue` · seen 23.11.02–26.07.01
-- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot28, event=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
+- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot28, event=Grannies of Anarchy, eventKey=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
 
 **GRANDMA** (Joyous): Why on earth do you think our club would be involved in criminal activity?
 **MADDIE** (Worried): We happened to overhear some of your conversation and... it sounded  fishy.
@@ -18713,9 +18439,9 @@ Play further to fully unlock it
 **MADDIE** (Thinking): I guess that could've been it, but...
 **GRANDMA** (Joyous): That's settled then!
 
-### SP_GranniesOfAnarchy2023 — decoration SP_GranniesOfAnarchy2023_Decoration_Slot29
+### Grannies of Anarchy — decoration SP_GranniesOfAnarchy2023_Decoration_Slot29
 `SP_GranniesOfAnarchy2023_Decoration_Slot29_Dialogue` · seen 23.11.02–26.07.01
-- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot29, event=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
+- trigger: decoration, decoration=SP_GranniesOfAnarchy2023_Decoration_Slot29, event=Grannies of Anarchy, eventKey=SP_GranniesOfAnarchy2023, moment=decoration placed (versions 23.11.02–26.07.01)
 
 **MADDIE**: What a relief! They're just a group of nice old ladies.
 **MADDIE** (Encouraging): Who happen to ride around on big bikes and wear leather jackets!
@@ -18739,27 +18465,26 @@ Play further to fully unlock it
 **JACKIE** (Encouraging): Eavesdropping on your own Grandma, Maddie? I'm so here for it.
 **MADDIE** (Surprised): Uh-oh... Did you hear that? I'm pretty sure one of them just said something about... a MURDER!
 
-### SP_GranniesOfAnarchy2023 — item discovered: 20492348
+### Grannies of Anarchy — item discovered: Leather Jacket
 `SP_GranniesOfAnarchy2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=SP_GranniesOfAnarchy2023, items=['20492348'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=SP_GranniesOfAnarchy2023, items=['SP_GranniesOfAnarchy2023_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Grannies of Anarchy, eventKey=SP_GranniesOfAnarchy2023, itemKeys=['SP_GranniesOfAnarchy2023_CollectableItems_04'], items=['Leather Jacket'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **MADDIE** (Worried): Did you just hear those ladies whisper something about a murder?
 **JACKIE** (Thinking): They <b>are </b>a biker gang, but murder? Then again, those knitting needles look pretty sharp...
 **JACKIE** (Doubtful): What are they doing - drawing up a biker granny hit list?
 **MADDIE** (Doubtful): I think we need to dig a little deeper. Come on, Jackie. Let's see what these biking buddies are up to!
 
-### SP_Halloween2024 — decoration SP_Halloween2024_Decoration_Slot25
+### Halloween Mystery — decoration SP_Halloween2024_Decoration_Slot25
 `SP_Halloween2024_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot25, event=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot25, event=Halloween Mystery, eventKey=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL**: Your plan for the tour looks excellent, and the Mansion looks way creepier when you're looking for ghosts!
 **MADDIE** (Thinking): It sure does! But all the spirits here are friendly -- or at least I think so.
 **PEARL** (Encouraging): I'll talk to Cherry about making snacks for the tour, and we're good to go!
 
-### SP_Halloween2024 — decoration SP_Halloween2024_Decoration_Slot26
+### Halloween Mystery — decoration SP_Halloween2024_Decoration_Slot26
 `SP_Halloween2024_Decoration_Slot26_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot26, event=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot26, event=Halloween Mystery, eventKey=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE**: OK, let's write this ad. What do you want it to say?
 **MADDIE**: I don't know... I'm not sure there's any point.
@@ -18770,9 +18495,9 @@ Play further to fully unlock it
 **MADDIE** (Relaxed): The ad should be upbeat and fun. Don't you agree?
 **JACKIE**: Yeah, let's try that.
 
-### SP_Halloween2024 — decoration SP_Halloween2024_Decoration_Slot27
+### Halloween Mystery — decoration SP_Halloween2024_Decoration_Slot27
 `SP_Halloween2024_Decoration_Slot27_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot27, event=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot27, event=Halloween Mystery, eventKey=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL** (Annoyed): We have a problem.
 **MADDIE** (Surprised): What is it?
@@ -18783,9 +18508,9 @@ Play further to fully unlock it
 **PEARL** (Thinking): Something is definitely up with her - but let's worry about it later.
 **PEARL** (Thinking): We have a ghost tour to organize!
 
-### SP_Halloween2024 — decoration SP_Halloween2024_Decoration_Slot28
+### Halloween Mystery — decoration SP_Halloween2024_Decoration_Slot28
 `SP_Halloween2024_Decoration_Slot28_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot28, event=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot28, event=Halloween Mystery, eventKey=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL**: Maddie, I love what you've done with the place... but we have another issue.
 **MADDIE** (Discouraged): What now??
@@ -18796,9 +18521,9 @@ Play further to fully unlock it
 **MADDIE** (Doubtful): "Step beyond the rotting gates of Beaumont Hall, where whispers and lies linger in the cold night air. The spirits here are not friendly..."
 **MADDIE** (Doubtful): This is NOT what I wrote with Jackie!
 
-### SP_Halloween2024 — decoration SP_Halloween2024_Decoration_Slot29
+### Halloween Mystery — decoration SP_Halloween2024_Decoration_Slot29
 `SP_Halloween2024_Decoration_Slot29_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot29, event=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot29, event=Halloween Mystery, eventKey=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Encouraging): Next, we will head to Frog Pond Falls, where the spirit of Amelia Boulton allegedly often wanders...
 **PEARL**: The tour is going great, Maddie!
@@ -18808,9 +18533,9 @@ Play further to fully unlock it
 **PEARL** (Encouraging): I'm sure there's an answer for everything... Let's keep going with the tour!
 **MADDIE** (Encouraging): You're right. Follow me, everyone - Lady Amelia awaits!
 
-### SP_Halloween2024 — decoration SP_Halloween2024_Decoration_Slot38
+### Halloween Mystery — decoration SP_Halloween2024_Decoration_Slot38
 `SP_Halloween2024_Decoration_Slot38_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot38, event=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Halloween2024_Decoration_Slot38, event=Halloween Mystery, eventKey=SP_Halloween2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): Care to explain why you decided to change the newspaper ad?
 **MADDIE** (Doubtful): It was supposed to be creepy and funny -- but it was just straight up scary!
@@ -18821,10 +18546,9 @@ Play further to fully unlock it
 **MADDIE** (Surprised): And who??
 **JACKIE** (Thinking): This story has more angles than I ever thought...
 
-### SP_Halloween2024 — item discovered: 22727210
+### Halloween Mystery — item discovered: The Lady
 `SP_Halloween2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_Halloween2024, items=['22727210'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_Halloween2024, items=['SP_Halloween2024_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Halloween Mystery, eventKey=SP_Halloween2024, itemKeys=['SP_Halloween2024_CollectableItems_04'], items=['The Lady'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE**: Hey. Listen, I'm so sorry the exposé about your family... I thought I was just doing my job, but I...
 **JACKIE**: I let my ambition win.
@@ -18836,9 +18560,9 @@ Play further to fully unlock it
 **JACKIE**: You might be wrong about that. We can make the ad funny and inviting.
 **—**: I want to save our friendship. Please, let me try.
 
-### SP_HanksMystery2024 — decoration SP_HanksMystery2024_Decoration_Slot25
+### Proposal Mystery — decoration SP_HanksMystery2024_Decoration_Slot25
 `SP_HanksMystery2024_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot25, event=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot25, event=Proposal Mystery, eventKey=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA**: Maddie... Have you noticed something strange about the front yard?
 **MADDIE** (Surprised): Not really! What is it?
@@ -18847,9 +18571,9 @@ Play further to fully unlock it
 **MADDIE** (Thinking): But WHY are there giant ice creams there?
 **GRANDMA** (Annoyed): I wish I knew, dearie!
 
-### SP_HanksMystery2024 — decoration SP_HanksMystery2024_Decoration_Slot26
+### Proposal Mystery — decoration SP_HanksMystery2024_Decoration_Slot26
 `SP_HanksMystery2024_Decoration_Slot26_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot26, event=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot26, event=Proposal Mystery, eventKey=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **DEB**: Oh, Maddie! How do you young people stand the merciless ebb and flow of romance?
 **MADDIE**: What is it, Deb?
@@ -18858,18 +18582,18 @@ Play further to fully unlock it
 **DEB** (Frustrated): Not a diamond in sight - not even a bouquet of roses!
 **DEB** (Frustrated): I-I think that Hank is going to leave me! I don't know what's going on in that handsome head of his.
 
-### SP_HanksMystery2024 — decoration SP_HanksMystery2024_Decoration_Slot27
+### Proposal Mystery — decoration SP_HanksMystery2024_Decoration_Slot27
 `SP_HanksMystery2024_Decoration_Slot27_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot27, event=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot27, event=Proposal Mystery, eventKey=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Grandma, there's a pink Cadillac in your front yard!
 **GRANDMA** (Annoyed): I know!
 **MADDIE** (Thinking): It's very nice, but isn't it kinda late for someone to be organizing a Valentine's surprise?
 **GRANDMA** (Thinking): Maybe it is not a Valentine's surprise at all...
 
-### SP_HanksMystery2024 — decoration SP_HanksMystery2024_Decoration_Slot28
+### Proposal Mystery — decoration SP_HanksMystery2024_Decoration_Slot28
 `SP_HanksMystery2024_Decoration_Slot28_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot28, event=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot28, event=Proposal Mystery, eventKey=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): This is definitely starting to look like a romantic surprise.
 **MADDIE** (Thinking): And that's the ring we found among the Valentine's presents, on the front step! But who's surprising whom?
@@ -18878,9 +18602,9 @@ Play further to fully unlock it
 **HANK** (Annoyed): It's all here! Wow, this delivery was seriously late.
 **MADDIE** (Surprised): Hank! T-this stuff is yours??
 
-### SP_HanksMystery2024 — decoration SP_HanksMystery2024_Decoration_Slot29
+### Proposal Mystery — decoration SP_HanksMystery2024_Decoration_Slot29
 `SP_HanksMystery2024_Decoration_Slot29_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot29, event=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot29, event=Proposal Mystery, eventKey=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **HANK** (Charming): Yeah, this is all me. Sorry about crowding your front yard, Ursula.
 **GRANDMA**: It is quite alright - I guessed it was you! But tell us, what is all of this for?
@@ -18903,9 +18627,9 @@ Play further to fully unlock it
 **PEARL** (Thinking): Careful, Maddie. Next year you might want to take to the stage, too!
 **MADDIE** (Hesitant): Ask me again next summer!
 
-### SP_Hopefest2026 — decoration SP_Hopefest2026_Decoration_Slot25
+### Hopefest Music Festival — decoration SP_Hopefest2026_Decoration_Slot25
 `SP_Hopefest2026_Decoration_Slot25_Dialogue` · seen 26.05.01–26.07.01
-- trigger: decoration, decoration=SP_Hopefest2026_Decoration_Slot25, event=SP_Hopefest2026, moment=decoration placed (versions 26.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Hopefest2026_Decoration_Slot25, event=Hopefest Music Festival, eventKey=SP_Hopefest2026, moment=decoration placed (versions 26.05.01–26.07.01)
 
 **MADDIE**: I heard Pearl recruited you to design the stage, Roddy. It's looking excellent!
 **RODDY** (Encouraging): Thank you! I've made all the necessary calculations to make sure it's safe and ready for rocking night.
@@ -18914,9 +18638,9 @@ Play further to fully unlock it
 **JACKIE** (Relaxed): Maddie!
 **MADDIE** (Relaxed): Come on, Jackie! If you wanna rock, you gotta break the rules!
 
-### SP_Hopefest2026 — decoration SP_Hopefest2026_Decoration_Slot26
+### Hopefest Music Festival — decoration SP_Hopefest2026_Decoration_Slot26
 `SP_Hopefest2026_Decoration_Slot26_Dialogue` · seen 26.05.01–26.07.01
-- trigger: decoration, decoration=SP_Hopefest2026_Decoration_Slot26, event=SP_Hopefest2026, moment=decoration placed (versions 26.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Hopefest2026_Decoration_Slot26, event=Hopefest Music Festival, eventKey=SP_Hopefest2026, moment=decoration placed (versions 26.05.01–26.07.01)
 
 **PEARL**: Next on the list: building the backstage area with seating for the performers.
 **MADDIE**: Sounds good! By the way... who will be performing? Has anyone signed up?
@@ -18924,9 +18648,9 @@ Play further to fully unlock it
 **MADDIE** (Hesitant): Me?? Oh, I don't sing. I can barely hold the drumsticks!
 **PEARL** (Thinking): No? Ursula said you absolutely own the shower every morning!
 
-### SP_Hopefest2026 — decoration SP_Hopefest2026_Decoration_Slot27
+### Hopefest Music Festival — decoration SP_Hopefest2026_Decoration_Slot27
 `SP_Hopefest2026_Decoration_Slot27_Dialogue` · seen 26.05.01–26.07.01
-- trigger: decoration, decoration=SP_Hopefest2026_Decoration_Slot27, event=SP_Hopefest2026, moment=decoration placed (versions 26.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Hopefest2026_Decoration_Slot27, event=Hopefest Music Festival, eventKey=SP_Hopefest2026, moment=decoration placed (versions 26.05.01–26.07.01)
 
 **PEARL**: You know what really makes a festival work?
 **MADDIE**: Great music?
@@ -18937,9 +18661,9 @@ Play further to fully unlock it
 **PEARL** (Encouraging): No! Excellent food!
 **MADDIE** (Relaxed): Ahhh... Now you’re talking!
 
-### SP_Hopefest2026 — decoration SP_Hopefest2026_Decoration_Slot28
+### Hopefest Music Festival — decoration SP_Hopefest2026_Decoration_Slot28
 `SP_Hopefest2026_Decoration_Slot28_Dialogue` · seen 26.05.01–26.07.01
-- trigger: decoration, decoration=SP_Hopefest2026_Decoration_Slot28, event=SP_Hopefest2026, moment=decoration placed (versions 26.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Hopefest2026_Decoration_Slot28, event=Hopefest Music Festival, eventKey=SP_Hopefest2026, moment=decoration placed (versions 26.05.01–26.07.01)
 
 **PEARL** (Encouraging): Have you seen the stage lights? It’s finally starting to feel like a real festival.
 **MADDIE** (Encouraging): I know — I can barely sit still. Wait… who’s rehearsing up there?
@@ -18976,9 +18700,9 @@ Play further to fully unlock it
 **PEARL** (Encouraging): So that’s a yes?
 **JACKIE** (Encouraging): That’s a “yes, before this turns into complete chaos.”
 
-### SP_Hopefest2026 — item discovered: SP_Hopefest2026_CollectableItems_04
+### Hopefest Music Festival — item discovered: Classic Guitar
 `SP_Hopefest2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=SP_Hopefest2026, items=['SP_Hopefest2026_CollectableItems_04'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Hopefest Music Festival, eventKey=SP_Hopefest2026, itemKeys=['SP_Hopefest2026_CollectableItems_04'], items=['Classic Guitar'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE** (Thinking): This place is gonna need a lot of work before you can call it a festival site!
 **JACKIE** (Thinking): We'll need to clear everything away and build a stage, stalls, a backstage area... And what if no one even shows up??
@@ -19011,9 +18735,9 @@ Play further to fully unlock it
 **JACKIE** (Thinking): Oh, it’s freezing cold! Look how sluggish it is. Poor thing probably took a very wrong turn somewhere.
 **MADDIE** (Doubtful): We can’t leave it out here tonight. We have to warm it up somehow.
 
-### SP_IguanaPet2026 — item discovered: SP_IguanaPet2026_CollectableItems_04
+### Green with Envy — item discovered: Iguana Shirt
 `SP_IguanaPet2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=SP_IguanaPet2026, items=['SP_IguanaPet2026_CollectableItems_04'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green with Envy, eventKey=SP_IguanaPet2026, itemKeys=['SP_IguanaPet2026_CollectableItems_04'], items=['Iguana Shirt'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **MADDIE**: Okay… The final heat lamp is up.
 **JACKIE**: Moment of truth. Look – it’s lifting its head!
@@ -19060,40 +18784,39 @@ Play further to fully unlock it
 **JACKIE** (Thinking): Rascal?
 **MADDIE** (Relaxed): Well, he needed a name!
 
-### SP_JuliusMystery2023 — decoration SP_JuliusMystery2023_Decoration_Slot25
+### Julius' Mystery — decoration SP_JuliusMystery2023_Decoration_Slot25
 `SP_JuliusMystery2023_Decoration_Slot25_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_JuliusMystery2023_Decoration_Slot25, event=SP_JuliusMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_JuliusMystery2023_Decoration_Slot25, event=Julius' Mystery, eventKey=SP_JuliusMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_JuliusMystery2023 — decoration SP_JuliusMystery2023_Decoration_Slot26
+### Julius' Mystery — decoration SP_JuliusMystery2023_Decoration_Slot26
 `SP_JuliusMystery2023_Decoration_Slot26_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_JuliusMystery2023_Decoration_Slot26, event=SP_JuliusMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_JuliusMystery2023_Decoration_Slot26, event=Julius' Mystery, eventKey=SP_JuliusMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_JuliusMystery2023 — decoration SP_JuliusMystery2023_Decoration_Slot27
+### Julius' Mystery — decoration SP_JuliusMystery2023_Decoration_Slot27
 `SP_JuliusMystery2023_Decoration_Slot27_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_JuliusMystery2023_Decoration_Slot27, event=SP_JuliusMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_JuliusMystery2023_Decoration_Slot27, event=Julius' Mystery, eventKey=SP_JuliusMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_JuliusMystery2023 — decoration SP_JuliusMystery2023_Decoration_Slot28
+### Julius' Mystery — decoration SP_JuliusMystery2023_Decoration_Slot28
 `SP_JuliusMystery2023_Decoration_Slot28_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_JuliusMystery2023_Decoration_Slot28, event=SP_JuliusMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_JuliusMystery2023_Decoration_Slot28, event=Julius' Mystery, eventKey=SP_JuliusMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_JuliusMystery2023 — decoration SP_JuliusMystery2023_Decoration_Slot29
+### Julius' Mystery — decoration SP_JuliusMystery2023_Decoration_Slot29
 `SP_JuliusMystery2023_Decoration_Slot29_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_JuliusMystery2023_Decoration_Slot29, event=SP_JuliusMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_JuliusMystery2023_Decoration_Slot29, event=Julius' Mystery, eventKey=SP_JuliusMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_JuliusMystery2023 — item discovered: 43257783
+### Julius' Mystery — item discovered: SP_JuliusMystery2023_CollectableItems_04
 `SP_JuliusMystery2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=SP_JuliusMystery2023, items=['43257783'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=SP_JuliusMystery2023, items=['SP_JuliusMystery2023_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Julius' Mystery, eventKey=SP_JuliusMystery2023, itemKeys=['SP_JuliusMystery2023_CollectableItems_04'], items=['SP_JuliusMystery2023_CollectableItems_04'], moment=item discovered (versions 23.09.02–26.07.01)
 
 
-### SP_LadyVoyanceMystery2023 — decoration SP_LadyVoyanceMystery2023_Decoration_Slot27
+### Lady Voyance's Mystery — decoration SP_LadyVoyanceMystery2023_Decoration_Slot27
 `SP_LadyVoyanceMystery2023_Decoration_Slot27_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_LadyVoyanceMystery2023_Decoration_Slot27, event=SP_LadyVoyanceMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_LadyVoyanceMystery2023_Decoration_Slot27, event=Lady Voyance's Mystery, eventKey=SP_LadyVoyanceMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **LADY VOYANCE**: Ah, Maddie! Please, step inside.
 **MADDIE**: Hello, Lady Voyance! I guess I’m ready for my reading now.
@@ -19109,10 +18832,9 @@ Play further to fully unlock it
 **MADDIE** (Surprised): What?! Who?!
 **LADY VOYANCE** (Talking): I... I’m sorry. The globe has gone silent. But it is close, my child. CLOSE.
 
-### SP_LadyVoyanceMystery2023 — item discovered: 62553792
+### Lady Voyance's Mystery — item discovered: Mystical Snow Globe
 `SP_LadyVoyanceMystery2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=SP_LadyVoyanceMystery2023, items=['62553792'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=SP_LadyVoyanceMystery2023, items=['SP_LadyVoyanceMystery2023_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lady Voyance's Mystery, eventKey=SP_LadyVoyanceMystery2023, itemKeys=['SP_LadyVoyanceMystery2023_CollectableItems_04'], items=['Mystical Snow Globe'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Doubtful): Wait... You read people’s fortunes from...
 **MADDIE** (Surprised): A SNOW GLOBE?!
@@ -19134,9 +18856,9 @@ Play further to fully unlock it
 **GRANDMA** (Charming): I have some pictures in the family photo album to show you. And some more funny stories.
 **MADDIE** (Encouraging): That sounds wonderful, Grandma.
 
-### SP_LostLights2026 — decoration SP_LostLights2026_Decoration_Slot25
+### Lights for the Lost — decoration SP_LostLights2026_Decoration_Slot25
 `SP_LostLights2026_Decoration_Slot25_Dialogue` · seen 26.07.01–26.07.01
-- trigger: decoration, decoration=SP_LostLights2026_Decoration_Slot25, event=SP_LostLights2026, moment=decoration placed (versions 26.07.01–26.07.01)
+- trigger: decoration, decoration=SP_LostLights2026_Decoration_Slot25, event=Lights for the Lost, eventKey=SP_LostLights2026, moment=decoration placed (versions 26.07.01–26.07.01)
 
 **MADDIE** (Thinking): Okay! I think I've got most of the supplies! Candles, paper, glue...
 **GRANDMA** (Encouraging): There is still time before evening, dear.
@@ -19146,9 +18868,9 @@ Play further to fully unlock it
 **MADDIE** (Thinking): ...which, by the way, I'm still not sure how it goes..?
 **GRANDMA** (Encouraging): Then let me tell you. It is my favorite part!
 
-### SP_LostLights2026 — decoration SP_LostLights2026_Decoration_Slot26
+### Lights for the Lost — decoration SP_LostLights2026_Decoration_Slot26
 `SP_LostLights2026_Decoration_Slot26_Dialogue` · seen 26.07.01–26.07.01
-- trigger: decoration, decoration=SP_LostLights2026_Decoration_Slot26, event=SP_LostLights2026, moment=decoration placed (versions 26.07.01–26.07.01)
+- trigger: decoration, decoration=SP_LostLights2026_Decoration_Slot26, event=Lights for the Lost, eventKey=SP_LostLights2026, moment=decoration placed (versions 26.07.01–26.07.01)
 
 **GRANDMA** (Encouraging): Where was I? Oh yes - the stories. Usually we start while we fold the boats.
 **ANTIQUEDEALER** (Thinking): Hopewell Bay has a very strong maritime culture, Maddie.
@@ -19160,9 +18882,9 @@ Play further to fully unlock it
 **GRANDMA** (Worried): They did not, dear. But looking to the horizon day after day, hoping against hope...that's no way to live.
 **GRANDMA**: Joining the Lights for the Lost festival was a way of saying goodbye.
 
-### SP_LostLights2026 — decoration SP_LostLights2026_Decoration_Slot27
+### Lights for the Lost — decoration SP_LostLights2026_Decoration_Slot27
 `SP_LostLights2026_Decoration_Slot27_Dialogue` · seen 26.07.01–26.07.01
-- trigger: decoration, decoration=SP_LostLights2026_Decoration_Slot27, event=SP_LostLights2026, moment=decoration placed (versions 26.07.01–26.07.01)
+- trigger: decoration, decoration=SP_LostLights2026_Decoration_Slot27, event=Lights for the Lost, eventKey=SP_LostLights2026, moment=decoration placed (versions 26.07.01–26.07.01)
 
 **GRANDMA** (Encouraging): So the people would tell stories about their lost loved ones while making the lanterns.
 **GRANDMA**: And then when they let them go, it was...sort of like a funeral at sea.
@@ -19171,9 +18893,9 @@ Play further to fully unlock it
 **GRANDMA** (Encouraging): Yes. These days, we usually remember anyone we've lost, not just sailors.
 **MADDIE** (Joyous): Aww. That's actually really sweet.
 
-### SP_LostLights2026 — decoration SP_LostLights2026_Decoration_Slot28
+### Lights for the Lost — decoration SP_LostLights2026_Decoration_Slot28
 `SP_LostLights2026_Decoration_Slot28_Dialogue` · seen 26.07.01–26.07.01
-- trigger: decoration, decoration=SP_LostLights2026_Decoration_Slot28, event=SP_LostLights2026, moment=decoration placed (versions 26.07.01–26.07.01)
+- trigger: decoration, decoration=SP_LostLights2026_Decoration_Slot28, event=Lights for the Lost, eventKey=SP_LostLights2026, moment=decoration placed (versions 26.07.01–26.07.01)
 
 **GRANDMA** (Encouraging): It's almost time! Does everyone have their lanterns?
 **ANTIQUEDEALER** (Surprised): Yes, yes. I am coming. To the row boat!
@@ -19181,9 +18903,9 @@ Play further to fully unlock it
 **ANTIQUEDEALER** (Encouraging): Indeed. They are catching the ebb tide, making sure the lanterns are carried out to sea.
 **MADDIE** (Joyous): Let's make sure we catch it too! I want to see it from the water.
 
-### SP_LostLights2026 — decoration SP_LostLights2026_Decoration_Slot29
+### Lights for the Lost — decoration SP_LostLights2026_Decoration_Slot29
 `SP_LostLights2026_Decoration_Slot29_Dialogue` · seen 26.07.01–26.07.01
-- trigger: decoration, decoration=SP_LostLights2026_Decoration_Slot29, event=SP_LostLights2026, moment=decoration placed (versions 26.07.01–26.07.01)
+- trigger: decoration, decoration=SP_LostLights2026_Decoration_Slot29, event=Lights for the Lost, eventKey=SP_LostLights2026, moment=decoration placed (versions 26.07.01–26.07.01)
 
 **MADDIE**: This one is for my Dad. Thank you for making me curious.
 **GRANDMA** (Relaxed): Michael definitely was curious. He'd take things apart just to see how they work.
@@ -19206,9 +18928,9 @@ Play further to fully unlock it
 **GRANDMA** (Charming): While telling stories and remembering the lost. Don't forget that, Julius!
 **MADDIE** (Surprised): O...okay! Then I better get working on those lanterns!
 
-### SP_LostLights2026 — item discovered: SP_LostLights2026_CollectableItems_04
+### Lights for the Lost — item discovered: Floating Lantern
 `SP_LostLights2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.07.01–26.07.01
-- trigger: item, event=SP_LostLights2026, items=['SP_LostLights2026_CollectableItems_04'], moment=item discovered (versions 26.07.01–26.07.01)
+- trigger: item, event=Lights for the Lost, eventKey=SP_LostLights2026, itemKeys=['SP_LostLights2026_CollectableItems_04'], items=['Floating Lantern'], moment=item discovered (versions 26.07.01–26.07.01)
 
 **MADDIE** (Joyous): Phew! That wasn't half as hard as I thought it would be.
 **ANTIQUEDEALER** (Joyous): What a beautiful lantern you've made, Maddie!
@@ -19233,9 +18955,9 @@ Play further to fully unlock it
 **ANTIQUEDEALER** (Encouraging): Why don’t you join us? I want to tell you the story of the time your grandfather stole a stuffed penguin.
 **GRANDMA** (Joyous): Oh, no! Not that!
 
-### SP_LoveLetter2025 — decoration SP_LoveLetter2025_Decoration_Slot25
+### A Love Letter Lost — decoration SP_LoveLetter2025_Decoration_Slot25
 `SP_LoveLetter2025_Decoration_Slot25_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_LoveLetter2025_Decoration_Slot25, event=SP_LoveLetter2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_LoveLetter2025_Decoration_Slot25, event=A Love Letter Lost, eventKey=SP_LoveLetter2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **ANTIQUEDEALER**: Salutations, Maddie!
 **MADDIE**: Hello, Julius.
@@ -19249,9 +18971,9 @@ Play further to fully unlock it
 **MADDIE** (Hesitant): Er... That pie is very special!
 **ANTIQUEDEALER** (Charming): Marvelous! She can bring it to tea then!
 
-### SP_LoveLetter2025 — decoration SP_LoveLetter2025_Decoration_Slot26
+### A Love Letter Lost — decoration SP_LoveLetter2025_Decoration_Slot26
 `SP_LoveLetter2025_Decoration_Slot26_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_LoveLetter2025_Decoration_Slot26, event=SP_LoveLetter2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_LoveLetter2025_Decoration_Slot26, event=A Love Letter Lost, eventKey=SP_LoveLetter2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Doubtful): Grandma! You shouldn’t have ghosted Julius like that!
 **GRANDMA** (Worried): I’m sorry, dearie! I was just too nervous to face him!
@@ -19263,9 +18985,9 @@ Play further to fully unlock it
 **MADDIE** (Relaxed): Every time you avoid Julius, you’ll see another of my little friends. Cute, aren’t they?
 **GRANDMA** (Annoyed): Good grief...
 
-### SP_LoveLetter2025 — decoration SP_LoveLetter2025_Decoration_Slot27
+### A Love Letter Lost — decoration SP_LoveLetter2025_Decoration_Slot27
 `SP_LoveLetter2025_Decoration_Slot27_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_LoveLetter2025_Decoration_Slot27, event=SP_LoveLetter2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_LoveLetter2025_Decoration_Slot27, event=A Love Letter Lost, eventKey=SP_LoveLetter2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): Isn’t this cozy, Grandma?
 **GRANDMA**: It is, dearie.
@@ -19280,9 +19002,9 @@ Play further to fully unlock it
 **ANTIQUEDEALER** (Discouraged): Oh... Alright then. I apologize for the intrusion.
 **MADDIE** (Annoyed): Grandma!
 
-### SP_LoveLetter2025 — decoration SP_LoveLetter2025_Decoration_Slot28
+### A Love Letter Lost — decoration SP_LoveLetter2025_Decoration_Slot28
 `SP_LoveLetter2025_Decoration_Slot28_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_LoveLetter2025_Decoration_Slot28, event=SP_LoveLetter2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_LoveLetter2025_Decoration_Slot28, event=A Love Letter Lost, eventKey=SP_LoveLetter2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Worried): Hello, Julius. Is everything alright?
 **ANTIQUEDEALER** (Worried): Quite alright, Maddie. I was just wondering if you could...
@@ -19300,9 +19022,9 @@ Play further to fully unlock it
 **MADDIE** (Frustrated): I’m so confused.
 **ANTIQUEDEALER** (Charming): Ha ha. Let me explain...
 
-### SP_LoveLetter2025 — decoration SP_LoveLetter2025_Decoration_Slot29
+### A Love Letter Lost — decoration SP_LoveLetter2025_Decoration_Slot29
 `SP_LoveLetter2025_Decoration_Slot29_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_LoveLetter2025_Decoration_Slot29, event=SP_LoveLetter2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_LoveLetter2025_Decoration_Slot29, event=A Love Letter Lost, eventKey=SP_LoveLetter2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Doubtful): No running off again! Okay, Grandma?
 **GRANDMA** (Worried): Alright dearie. Alright...
@@ -19330,9 +19052,9 @@ Play further to fully unlock it
 **GRANDMA** (Worried): I... I think Julius is in love with me!
 **MADDIE** (Surprised): What?!
 
-### SP_LoveLetter2025 — item discovered: SP_LoveLetter2025_CollectableItems_04
+### A Love Letter Lost — item discovered: Eternal Correspondence
 `SP_LoveLetter2025_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_LoveLetter2025, items=['SP_LoveLetter2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=A Love Letter Lost, eventKey=SP_LoveLetter2025, itemKeys=['SP_LoveLetter2025_CollectableItems_04'], items=['Eternal Correspondence'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Worried): Well... I was sorting through some of the festival decorations you left all over the place, and I found this.
 **MADDIE** (Surprised): Oh, this looks like a...
@@ -19347,9 +19069,9 @@ Play further to fully unlock it
 **MADDIE**: No, I mean talk to him. He deserves to know how you feel. Be honest.
 **GRANDMA** (Surprised): Ho- honest?!
 
-### SP_LovePotion2025 — decoration SP_LovePotion2025_Decoration_Slot25
+### Love Potion — decoration SP_LovePotion2025_Decoration_Slot25
 `SP_LovePotion2025_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_LovePotion2025_Decoration_Slot25, event=SP_LovePotion2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_LovePotion2025_Decoration_Slot25, event=Love Potion, eventKey=SP_LovePotion2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): How have you been? How's work?
 **EMILIO**: I've been studying a particular school of herring and their courtship behavior.
@@ -19358,9 +19080,9 @@ Play further to fully unlock it
 **EMILIO** (Encouraging): Ah, if you're really interested!
 **MADDIE** (Hesitant): Totally...
 
-### SP_LovePotion2025 — decoration SP_LovePotion2025_Decoration_Slot26
+### Love Potion — decoration SP_LovePotion2025_Decoration_Slot26
 `SP_LovePotion2025_Decoration_Slot26_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_LovePotion2025_Decoration_Slot26, event=SP_LovePotion2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_LovePotion2025_Decoration_Slot26, event=Love Potion, eventKey=SP_LovePotion2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): What do you think about Emilio?
 **JACKIE**: What do you mean?
@@ -19376,9 +19098,9 @@ Play further to fully unlock it
 **MADDIE** (Angry): That Bella... She's so perfect with her hair and her shorts and her... everything.
 **MADDIE** (Angry): But maybe she's not THAT into Emilio... Maybe they're just friends.
 
-### SP_LovePotion2025 — decoration SP_LovePotion2025_Decoration_Slot28
+### Love Potion — decoration SP_LovePotion2025_Decoration_Slot28
 `SP_LovePotion2025_Decoration_Slot28_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_LovePotion2025_Decoration_Slot28, event=SP_LovePotion2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_LovePotion2025_Decoration_Slot28, event=Love Potion, eventKey=SP_LovePotion2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **BELLA**: Hi, Maddie.
 **MADDIE**: Hello, Bella.
@@ -19390,10 +19112,9 @@ Play further to fully unlock it
 **BELLA** (Thinking): I've seen the way you look at him, and I know he can be very charming.
 **BELLA** (Annoyed): But make no mistake - he's mine.
 
-### SP_LovePotion2025 — item discovered: 96190276
+### Love Potion — item discovered: Moonstring Serum
 `SP_LovePotion2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_LovePotion2025, items=['96190276'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_LovePotion2025, items=['SP_LovePotion2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love Potion, eventKey=SP_LovePotion2025, itemKeys=['SP_LovePotion2025_CollectableItems_04'], items=['Moonstring Serum'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Encouraging): The Hopeberry juice is so delicious this year!
 **MADDIE** (Relaxed): I know! It must be an especially good vintage.
@@ -19403,9 +19124,9 @@ Play further to fully unlock it
 **JACKIE** (Encouraging): Oh, yeah! Pour me another one!
 **BELLA** (Relaxed): Me too!
 
-### SP_MasonsMystery2023 — decoration SP_MasonsMystery2023_Decoration_Slot25
+### Holiday Mystery — decoration SP_MasonsMystery2023_Decoration_Slot25
 `SP_MasonsMystery2023_Decoration_Slot25_Dialogue` · seen 23.11.02–26.07.01
-- trigger: decoration, decoration=SP_MasonsMystery2023_Decoration_Slot25, event=SP_MasonsMystery2023, moment=decoration placed (versions 23.11.02–26.07.01)
+- trigger: decoration, decoration=SP_MasonsMystery2023_Decoration_Slot25, event=Holiday Mystery, eventKey=SP_MasonsMystery2023, moment=decoration placed (versions 23.11.02–26.07.01)
 
 **MADDIE** (Encouraging): Getting into the holiday spirit, I see!
 **GRANDMA** (Doubtful): Yes... I guess...
@@ -19414,9 +19135,9 @@ Play further to fully unlock it
 **GRANDMA** (Worried): I didn’t do it!
 **MADDIE** (Thinking): What? Then... Who did?
 
-### SP_MasonsMystery2023 — decoration SP_MasonsMystery2023_Decoration_Slot28
+### Holiday Mystery — decoration SP_MasonsMystery2023_Decoration_Slot28
 `SP_MasonsMystery2023_Decoration_Slot28_Dialogue` · seen 23.11.02–26.07.01
-- trigger: decoration, decoration=SP_MasonsMystery2023_Decoration_Slot28, event=SP_MasonsMystery2023, moment=decoration placed (versions 23.11.02–26.07.01)
+- trigger: decoration, decoration=SP_MasonsMystery2023_Decoration_Slot28, event=Holiday Mystery, eventKey=SP_MasonsMystery2023, moment=decoration placed (versions 23.11.02–26.07.01)
 
 **MADDIE** (Thinking): So, who do you think is behind this?
 **GRANDMA** (Doubtful): I have a theory...
@@ -19428,9 +19149,9 @@ Play further to fully unlock it
 **MADDIE** (Relaxed): You thought it was Julius, didn’t you?
 **GRANDMA** (Annoyed): Yes, I did...
 
-### SP_MasonsMystery2023 — decoration SP_MasonsMystery2023_Decoration_Slot29
+### Holiday Mystery — decoration SP_MasonsMystery2023_Decoration_Slot29
 `SP_MasonsMystery2023_Decoration_Slot29_Dialogue` · seen 23.11.02–26.07.01
-- trigger: decoration, decoration=SP_MasonsMystery2023_Decoration_Slot29, event=SP_MasonsMystery2023, moment=decoration placed (versions 23.11.02–26.07.01)
+- trigger: decoration, decoration=SP_MasonsMystery2023_Decoration_Slot29, event=Holiday Mystery, eventKey=SP_MasonsMystery2023, moment=decoration placed (versions 23.11.02–26.07.01)
 
 **MADDIE** (Encouraging): I heard you figured it out!
 **GRANDMA** (Charming): Yes, dearie... Mason? You can come out from behind the bushes!
@@ -19440,10 +19161,9 @@ Play further to fully unlock it
 **MADDIE** (Relaxed): You bet, Mason! It’s really rare to fool Grandma!
 **MASON** (Joyous): Oh, cool!
 
-### SP_MasonsMystery2023 — item discovered: 2232282
+### Holiday Mystery — item discovered: Holiday Snowflake
 `SP_MasonsMystery2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.11.02–26.07.01
-- trigger: item, event=SP_MasonsMystery2023, items=['2232282'], moment=item discovered (versions 23.11.02–25.06.01)
-- trigger: item, event=SP_MasonsMystery2023, items=['SP_MasonsMystery2023_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Mystery, eventKey=SP_MasonsMystery2023, itemKeys=['SP_MasonsMystery2023_CollectableItems_04'], items=['Holiday Snowflake'], moment=item discovered (versions 23.11.02–26.07.01)
 
 **MADDIE** (Encouraging): These ornaments will look great on our tree, Grandma!
 **GRANDMA** (Charming): Can’t go wrong with the classics, dearie.
@@ -19496,9 +19216,9 @@ Play further to fully unlock it
 - trigger: unknown, hint=Mystery (Progression event) (versions None–None)
 
 
-### SP_Misery2025 — decoration SP_Misery2025_Decoration_Slot33
+### Something Ours — decoration SP_Misery2025_Decoration_Slot33
 `SP_Misery2025_Decoration_Slot33_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Misery2025_Decoration_Slot33, event=SP_Misery2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Misery2025_Decoration_Slot33, event=Something Ours, eventKey=SP_Misery2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): Ain’t this cozy?!
 **RODDY** (Relaxed): A good place to rest while we build the treehouse.
@@ -19518,9 +19238,9 @@ Play further to fully unlock it
 - trigger: unknown, hint=Mystery (Progression event) (versions None–None)
 
 
-### SP_Misery2025 — decoration SP_Misery2025_Decoration_Slot34
+### Something Ours — decoration SP_Misery2025_Decoration_Slot34
 `SP_Misery2025_Decoration_Slot34_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Misery2025_Decoration_Slot34, event=SP_Misery2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Misery2025_Decoration_Slot34, event=Something Ours, eventKey=SP_Misery2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **PET** (Surprised): AwoooOOOooo!
 **MASON** (Joyous): That’s right, Boo!
@@ -19537,9 +19257,9 @@ Play further to fully unlock it
 - trigger: unknown, hint=Mystery (Progression event) (versions None–None)
 
 
-### SP_Misery2025 — decoration SP_Misery2025_Decoration_Slot36
+### Something Ours — decoration SP_Misery2025_Decoration_Slot36
 `SP_Misery2025_Decoration_Slot36_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Misery2025_Decoration_Slot36, event=SP_Misery2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Misery2025_Decoration_Slot36, event=Something Ours, eventKey=SP_Misery2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MASON** (Surprised): It’s...
 **MASON** (Charming): It’s...
@@ -19559,9 +19279,9 @@ Play further to fully unlock it
 - trigger: unknown, hint=Mystery (Progression event) (versions None–None)
 
 
-### SP_Misery2025 — decoration SP_Misery2025_Decoration_Slot37
+### Something Ours — decoration SP_Misery2025_Decoration_Slot37
 `SP_Misery2025_Decoration_Slot37_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Misery2025_Decoration_Slot37, event=SP_Misery2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Misery2025_Decoration_Slot37, event=Something Ours, eventKey=SP_Misery2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MASON** (Joyous): Wohoo! Weee! Yahoo!
 **MADDIE** (Relaxed): That kid’s got a lot of energy...
@@ -19599,9 +19319,9 @@ Play further to fully unlock it
 - trigger: unknown, hint=Mystery (Progression event) (versions None–None)
 
 
-### SP_Misery2025 — item discovered: SP_Misery2025_CollectableItems_04
+### Something Ours — item discovered: Treehouse Ladder
 `SP_Misery2025_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_Misery2025, items=['SP_Misery2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Something Ours, eventKey=SP_Misery2025, itemKeys=['SP_Misery2025_CollectableItems_04'], items=['Treehouse Ladder'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON** (Annoyed): Maddiee... Why are we collecting all this junk?!
 **MADDIE** (Doubtful): Junk?!
@@ -19611,9 +19331,9 @@ Play further to fully unlock it
 **MASON** (Surprised): FORT... MASON!?!
 **MASON** (Joyous): OH BOY!!
 
-### SP_MysteriesUnveiled2024 — decoration SP_MysteriesUnveiled2024_Decoration_Slot25
+### The Mysteries Unveiled — decoration SP_MysteriesUnveiled2024_Decoration_Slot25
 `SP_MysteriesUnveiled2024_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_MysteriesUnveiled2024_Decoration_Slot25, event=SP_MysteriesUnveiled2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_MysteriesUnveiled2024_Decoration_Slot25, event=The Mysteries Unveiled, eventKey=SP_MysteriesUnveiled2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE**: Hi, Maddie...
 **MADDIE** (Annoyed): Jackie.
@@ -19627,9 +19347,9 @@ Play further to fully unlock it
 **JACKIE** (Surprised): I...
 **MADDIE** (Angry): Just go...
 
-### SP_MysteriesUnveiled2024 — decoration SP_MysteriesUnveiled2024_Decoration_Slot26
+### The Mysteries Unveiled — decoration SP_MysteriesUnveiled2024_Decoration_Slot26
 `SP_MysteriesUnveiled2024_Decoration_Slot26_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_MysteriesUnveiled2024_Decoration_Slot26, event=SP_MysteriesUnveiled2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_MysteriesUnveiled2024_Decoration_Slot26, event=The Mysteries Unveiled, eventKey=SP_MysteriesUnveiled2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **RODDY**: Hi, Maddie.
 **MADDIE** (Doubtful): Roddy! If Jackie sent you here to talk, I swear...
@@ -19639,9 +19359,9 @@ Play further to fully unlock it
 **RODDY**: Need some help?
 **MADDIE** (Worried): Thanks, Roddy... I’d like that.
 
-### SP_MysteriesUnveiled2024 — decoration SP_MysteriesUnveiled2024_Decoration_Slot27
+### The Mysteries Unveiled — decoration SP_MysteriesUnveiled2024_Decoration_Slot27
 `SP_MysteriesUnveiled2024_Decoration_Slot27_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_MysteriesUnveiled2024_Decoration_Slot27, event=SP_MysteriesUnveiled2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_MysteriesUnveiled2024_Decoration_Slot27, event=The Mysteries Unveiled, eventKey=SP_MysteriesUnveiled2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MASON**: Wow, neat! You’re really creative, Maddie.
 **MADDIE**: Thanks, Mason.
@@ -19651,9 +19371,9 @@ Play further to fully unlock it
 **MADDIE** (Encouraging): Hey Mason, wanna build a spaceship?!
 **MASON** (Joyous): YEAH!
 
-### SP_MysteriesUnveiled2024 — decoration SP_MysteriesUnveiled2024_Decoration_Slot28
+### The Mysteries Unveiled — decoration SP_MysteriesUnveiled2024_Decoration_Slot28
 `SP_MysteriesUnveiled2024_Decoration_Slot28_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_MysteriesUnveiled2024_Decoration_Slot28, event=SP_MysteriesUnveiled2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_MysteriesUnveiled2024_Decoration_Slot28, event=The Mysteries Unveiled, eventKey=SP_MysteriesUnveiled2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): Grandma, you need to tell me, is what Jackie wrote the truth?
 **GRANDMA** (Discouraged): I’m sorry, dearie... But yes. Yes, it is.
@@ -19668,9 +19388,9 @@ Play further to fully unlock it
 **GRANDMA** (Worried): But, dearie, this was a long time ago. The entire operation was shut down.
 **GRANDMA**: This’ll all blow over soon enough. It always does...
 
-### SP_MysteriesUnveiled2024 — decoration SP_MysteriesUnveiled2024_Decoration_Slot29
+### The Mysteries Unveiled — decoration SP_MysteriesUnveiled2024_Decoration_Slot29
 `SP_MysteriesUnveiled2024_Decoration_Slot29_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_MysteriesUnveiled2024_Decoration_Slot29, event=SP_MysteriesUnveiled2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_MysteriesUnveiled2024_Decoration_Slot29, event=The Mysteries Unveiled, eventKey=SP_MysteriesUnveiled2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MASON**: Tadaa!
 **MADDIE** (Surprised): Holy smokes, you built all that?!
@@ -19682,9 +19402,9 @@ Play further to fully unlock it
 **MASON** (Annoyed): Well, what did you expect? I’m just a kid!
 **MADDIE** (Charming): Haha! You two are cute!
 
-### SP_MysteriesUnveiled2024 — decoration SP_MysteriesUnveiled2024_Decoration_Slot38
+### The Mysteries Unveiled — decoration SP_MysteriesUnveiled2024_Decoration_Slot38
 `SP_MysteriesUnveiled2024_Decoration_Slot38_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_MysteriesUnveiled2024_Decoration_Slot38, event=SP_MysteriesUnveiled2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_MysteriesUnveiled2024_Decoration_Slot38, event=The Mysteries Unveiled, eventKey=SP_MysteriesUnveiled2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Discouraged): Is that supposed to be you, dearie?
 **MADDIE** (Discouraged): Er... Yeah.
@@ -19693,10 +19413,9 @@ Play further to fully unlock it
 **MADDIE** (Surprised): Grandma! What are you doing?
 **GRANDMA**: I’m building myself. We’re in this together, dearie!
 
-### SP_MysteriesUnveiled2024 — item discovered: 26542054
+### The Mysteries Unveiled — item discovered: Recycled Binoculars
 `SP_MysteriesUnveiled2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_MysteriesUnveiled2024, items=['26542054'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_MysteriesUnveiled2024, items=['SP_MysteriesUnveiled2024_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Mysteries Unveiled, eventKey=SP_MysteriesUnveiled2024, itemKeys=['SP_MysteriesUnveiled2024_CollectableItems_04'], items=['Recycled Binoculars'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MASON** (Joyous): Maddie! I made these for you!
 **MADDIE** (Thinking): Binoculars? Why?
@@ -19704,10 +19423,9 @@ Play further to fully unlock it
 **MASON** (Encouraging): And every good spy needs good binoculars.
 **MADDIE** (Frustrated): Good grief...
 
-### SP_MysteriousMaelstrom2024 — item discovered: 47860595
+### The Mysterious Maelstrom — item discovered: Ofuro Tub
 `SP_MysteriousMaelstrom2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_MysteriousMaelstrom2024, items=['47860595'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_MysteriousMaelstrom2024, items=['SP_MysteriousMaelstrom2024_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Mysterious Maelstrom, eventKey=SP_MysteriousMaelstrom2024, itemKeys=['SP_MysteriousMaelstrom2024_CollectableItems_04'], items=['Ofuro Tub'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **KAZUKO**: Hello Maddie-san!
 **MADDIE** (Encouraging): Kazuko-san, how are things at the shop?
@@ -19763,9 +19481,9 @@ Play further to fully unlock it
 **MADDIE** (Doubtful): Maybe.
 **MADDIE** (Worried): Maybe...
 
-### SP_NoRest2025 — decoration SP_NoRest2025_Decoration_Slot25
+### No Rest for the Wicked — decoration SP_NoRest2025_Decoration_Slot25
 `SP_NoRest2025_Decoration_Slot25_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_NoRest2025_Decoration_Slot25, event=SP_NoRest2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_NoRest2025_Decoration_Slot25, event=No Rest for the Wicked, eventKey=SP_NoRest2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **PEARL**: Thanks for keeping Mason occupied, Maddie.
 **MADDIE** (Encouraging): It’s alright. He really can’t wait for his mom to come back!
@@ -19777,9 +19495,9 @@ Play further to fully unlock it
 **PEARL** (Surprised): I- I just don’t think she wants to see ME. I chose for us to move here, and she was against it.
 **MADDIE** (Thinking): Against it? Why? Her mom lives here! Hmm... I should talk to Deb.
 
-### SP_NoRest2025 — decoration SP_NoRest2025_Decoration_Slot26
+### No Rest for the Wicked — decoration SP_NoRest2025_Decoration_Slot26
 `SP_NoRest2025_Decoration_Slot26_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_NoRest2025_Decoration_Slot26, event=SP_NoRest2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_NoRest2025_Decoration_Slot26, event=No Rest for the Wicked, eventKey=SP_NoRest2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **DEB**: Hello, sweetie!
 **MADDIE**: Hi, Deb! Thanks for dropping by. I just wanted to talk about Charlotte-
@@ -19791,9 +19509,9 @@ Play further to fully unlock it
 **DEB** (Frustrated): I don’t believe she thinks she gets to come back from a life like that.
 **MADDIE** (Thinking): What does she do?
 
-### SP_NoRest2025 — decoration SP_NoRest2025_Decoration_Slot27
+### No Rest for the Wicked — decoration SP_NoRest2025_Decoration_Slot27
 `SP_NoRest2025_Decoration_Slot27_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_NoRest2025_Decoration_Slot27, event=SP_NoRest2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_NoRest2025_Decoration_Slot27, event=No Rest for the Wicked, eventKey=SP_NoRest2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Calling): *Ring Ring*
 **MADDIE** (Calling): *Bzzz... 19... 5... 3... 18... 5... 20... 1... Bzzz.*
@@ -19805,9 +19523,9 @@ Play further to fully unlock it
 **MADDIE** (Talking): I tried calling her, but I got some strange garbled message and a series of numbers.
 **JACKIE** (Calling): Sure! I know a guy who might help. Just give me her number and I’ll look into it!
 
-### SP_NoRest2025 — decoration SP_NoRest2025_Decoration_Slot28
+### No Rest for the Wicked — decoration SP_NoRest2025_Decoration_Slot28
 `SP_NoRest2025_Decoration_Slot28_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_NoRest2025_Decoration_Slot28, event=SP_NoRest2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_NoRest2025_Decoration_Slot28, event=No Rest for the Wicked, eventKey=SP_NoRest2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MASON** (Joyous): Mom! When will she be here?! Do you think she’ll stay now? I can’t wait to show her what I’ve made!
 **MADDIE** (Joyous): Oooh, that’s pretty gnarly!
@@ -19819,9 +19537,9 @@ Play further to fully unlock it
 **MADDIE** (Thinking): Yeah... What do they mean?!
 **PEARL** (Doubtful): I don’t know, but I know she’s doing something important...
 
-### SP_NoRest2025 — decoration SP_NoRest2025_Decoration_Slot29
+### No Rest for the Wicked — decoration SP_NoRest2025_Decoration_Slot29
 `SP_NoRest2025_Decoration_Slot29_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_NoRest2025_Decoration_Slot29, event=SP_NoRest2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_NoRest2025_Decoration_Slot29, event=No Rest for the Wicked, eventKey=SP_NoRest2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Talking): Hey, Jackie!
 **JACKIE** (Calling): Maddie! You won’t believe what we found! This’ll make one heck of a story!
@@ -19849,9 +19567,9 @@ Play further to fully unlock it
 **MADDIE** (Encouraging): Hey, I understand. I’ll let Mason help me with some of the decorations. Maybe that’ll keep his mind off things.
 **PEARL** (Encouraging): Okay, thank you Maddie!
 
-### SP_NoRest2025 — item discovered: SP_NoRest2025_CollectableItems_04
+### No Rest for the Wicked — item discovered: Mini Mason
 `SP_NoRest2025_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_NoRest2025, items=['SP_NoRest2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=No Rest for the Wicked, eventKey=SP_NoRest2025, itemKeys=['SP_NoRest2025_CollectableItems_04'], items=['Mini Mason'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON** (Joyous): Maddie! Check it out!
 **MASON** (Encouraging): Cool, huh?
@@ -19875,9 +19593,9 @@ Play further to fully unlock it
 **MADDIE** (Encouraging): Good luck, I guess?
 **GRANDMA**: Thank you, dearie!
 
-### SP_Omoide2026 — decoration SP_Omoide2026_Decoration_Slot25
+### Omoide - The Challenge — decoration SP_Omoide2026_Decoration_Slot25
 `SP_Omoide2026_Decoration_Slot25_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Omoide2026_Decoration_Slot25, event=SP_Omoide2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Omoide2026_Decoration_Slot25, event=Omoide - The Challenge, eventKey=SP_Omoide2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **KAZUKO**: Maddie! So I heard you wanted to learn how to play Go! Wonderful.
 **MADDIE** (Encouraging): Yeah! I found this board in Grandma's attic and-
@@ -19889,9 +19607,9 @@ Play further to fully unlock it
 **KAZUKO** (Worried): It is a sad story.
 **MADDIE** (Worried): Oh...
 
-### SP_Omoide2026 — decoration SP_Omoide2026_Decoration_Slot26
+### Omoide - The Challenge — decoration SP_Omoide2026_Decoration_Slot26
 `SP_Omoide2026_Decoration_Slot26_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Omoide2026_Decoration_Slot26, event=SP_Omoide2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Omoide2026_Decoration_Slot26, event=Omoide - The Challenge, eventKey=SP_Omoide2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **KAZUKO** (Charming): Sakura was a brilliant Go player. The best in the village.
 **KAZUKO**: And she was a wonderful teacher.
@@ -19900,9 +19618,9 @@ Play further to fully unlock it
 **KAZUKO** (Joyous): And very well! She lived with my cousin in Japan for a while. They were like sisters!
 **KAZUKO** (Discouraged): Until they played that one fateful game...
 
-### SP_Omoide2026 — decoration SP_Omoide2026_Decoration_Slot27
+### Omoide - The Challenge — decoration SP_Omoide2026_Decoration_Slot27
 `SP_Omoide2026_Decoration_Slot27_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Omoide2026_Decoration_Slot27, event=SP_Omoide2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Omoide2026_Decoration_Slot27, event=Omoide - The Challenge, eventKey=SP_Omoide2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Worried): So what happened between Grandma and Sakura?
 **KAZUKO** (Thinking): They were playing in the village square. Everyone could watch. Expecting Sakura to win...
@@ -19912,9 +19630,9 @@ Play further to fully unlock it
 **KAZUKO** (Doubtful): Pride and misunderstanding grew between them until your grandmother left Japan. They never spoke again.
 **MADDIE** (Discouraged): How sad.
 
-### SP_Omoide2026 — decoration SP_Omoide2026_Decoration_Slot29
+### Omoide - The Challenge — decoration SP_Omoide2026_Decoration_Slot29
 `SP_Omoide2026_Decoration_Slot29_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Omoide2026_Decoration_Slot29, event=SP_Omoide2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Omoide2026_Decoration_Slot29, event=Omoide - The Challenge, eventKey=SP_Omoide2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Thinking): Hmm... There must be something I can do to cheer Grandma up!
 **MADDIE** (Doubtful): I know Grandma didn't mean to humiliate Sakura.
@@ -19924,9 +19642,9 @@ Play further to fully unlock it
 **MADDIE** (Thinking): "I'll be waiting for our final match. Sakura"
 **MADDIE** (Surprised): I need to show this to Grandma!
 
-### SP_Omoide2026 — decoration SP_Omoide2026_Decoration_Slot38
+### Omoide - The Challenge — decoration SP_Omoide2026_Decoration_Slot38
 `SP_Omoide2026_Decoration_Slot38_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Omoide2026_Decoration_Slot38, event=SP_Omoide2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Omoide2026_Decoration_Slot38, event=Omoide - The Challenge, eventKey=SP_Omoide2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE**: Grandma, I found this letter inside the Go board.
 **MADDIE** (Worried): It’s from Sakura.
@@ -19947,9 +19665,9 @@ Play further to fully unlock it
 **GRANDMA** (Worried): I... I'm sorry dearie, but I need to check something.
 **MADDIE** (Worried): Grandma?
 
-### SP_Omoide2026 — item discovered: SP_Omoide2026_CollectableItems_04
+### Omoide - The Challenge — item discovered: The Final Match
 `SP_Omoide2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_Omoide2026, items=['SP_Omoide2026_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Omoide - The Challenge, eventKey=SP_Omoide2026, itemKeys=['SP_Omoide2026_CollectableItems_04'], items=['The Final Match'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE**: That’s it!
 **MADDIE** (Encouraging): Those are all the pieces found for the game.
@@ -19982,9 +19700,9 @@ Play further to fully unlock it
 **MADDIE** (Thinking): Looks like Deb and Grandma will have a tense match...
 **ANTIQUEDEALER** (Thinking): They have a history of competition, and I doubt it won't be resolved in the pickleball courts.
 
-### SP_Pickleball2025 — decoration SP_Pickleball2025_Decoration_Slot33
+### Smartphone Pickle — decoration SP_Pickleball2025_Decoration_Slot33
 `SP_Pickleball2025_Decoration_Slot33_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Pickleball2025_Decoration_Slot33, event=SP_Pickleball2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Pickleball2025_Decoration_Slot33, event=Smartphone Pickle, eventKey=SP_Pickleball2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): What is Grandma doing with her new smartphone? Is she taking selfies - AGAIN?
 **MADDIE** (Doubtful): And now she's just scrolling and scrolling...
@@ -19993,9 +19711,9 @@ Play further to fully unlock it
   _earlier:_ ~~Jackie said she wouldn't be surprised if Grandma had a secret smartphone for years… Could she be right?~~ (until 25.10.01)
 **MADDIE** (Thinking): I wonder what Grandma is actually doing on her phone...
 
-### SP_Pickleball2025 — decoration SP_Pickleball2025_Decoration_Slot34
+### Smartphone Pickle — decoration SP_Pickleball2025_Decoration_Slot34
 `SP_Pickleball2025_Decoration_Slot34_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Pickleball2025_Decoration_Slot34, event=SP_Pickleball2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Pickleball2025_Decoration_Slot34, event=Smartphone Pickle, eventKey=SP_Pickleball2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA**: That was a good match, dearie! You put up quite a fight.
 **MADDIE** (Relaxed): Thank you, and congratulations! It was a well-deserved victory.
@@ -20004,9 +19722,9 @@ Play further to fully unlock it
 **MADDIE** (Doubtful): How many social media accounts do you have?
 **GRANDMA** (Thinking): What's that, dearie? Smile for the camera!
 
-### SP_Pickleball2025 — decoration SP_Pickleball2025_Decoration_Slot35
+### Smartphone Pickle — decoration SP_Pickleball2025_Decoration_Slot35
 `SP_Pickleball2025_Decoration_Slot35_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Pickleball2025_Decoration_Slot35, event=SP_Pickleball2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Pickleball2025_Decoration_Slot35, event=Smartphone Pickle, eventKey=SP_Pickleball2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): What a game, Deb! It was SO close.
 **DEB** (Doubtful): *Sniffs* Your Grandma cheated again, I am sure of it!
@@ -20015,9 +19733,9 @@ Play further to fully unlock it
 **MADDIE** (Thinking): But maybe she was the better pla--
 **DEB** (Annoyed): Have you still not realized, Maddie? Your Grandma is the master of hoodwinking people.
 
-### SP_Pickleball2025 — decoration SP_Pickleball2025_Decoration_Slot36
+### Smartphone Pickle — decoration SP_Pickleball2025_Decoration_Slot36
 `SP_Pickleball2025_Decoration_Slot36_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Pickleball2025_Decoration_Slot36, event=SP_Pickleball2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Pickleball2025_Decoration_Slot36, event=Smartphone Pickle, eventKey=SP_Pickleball2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Worried): Have you seen my phone, dearie?
 **MADDIE** (Surprised): No. Have you lost it?
@@ -20028,9 +19746,9 @@ Play further to fully unlock it
 **MADDIE** (Doubtful): Just about to what?
 **GRANDMA** (Doubtful): I am going to see if Deb saw it after our match. It HAS to be somewhere... 
 
-### SP_Pickleball2025 — decoration SP_Pickleball2025_Decoration_Slot37
+### Smartphone Pickle — decoration SP_Pickleball2025_Decoration_Slot37
 `SP_Pickleball2025_Decoration_Slot37_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Pickleball2025_Decoration_Slot37, event=SP_Pickleball2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Pickleball2025_Decoration_Slot37, event=Smartphone Pickle, eventKey=SP_Pickleball2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE**: Hey, Jackie! Grandma wanted to invite you to play a game of pickleball.
 **JACKIE** (Thinking): Pickleball? I've never even tried it. Does it involve actual pickles?
@@ -20051,10 +19769,9 @@ Play further to fully unlock it
 **GRANDMA** (Relaxed): Yes! Like tennis - but more fun!
 **MADDIE** (Thinking): But does it involve actual pickles?
 
-### SP_Pickleball2025 — item discovered: 90517509
+### Smartphone Pickle — item discovered: Tube of Balls
 `SP_Pickleball2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_Pickleball2025, items=['90517509'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_Pickleball2025, items=['SP_Pickleball2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Smartphone Pickle, eventKey=SP_Pickleball2025, itemKeys=['SP_Pickleball2025_CollectableItems_04'], items=['Tube of Balls'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA**: You might know I was something of a tennis champion in my younger days...
 **GRANDMA**: When I was reading some news on the internet on the handy smartphone you bought me, I saw an article about pickleball and thought it looked fun.
@@ -20064,35 +19781,34 @@ Play further to fully unlock it
 **GRANDMA** (Thinking): So? Will you play with me?
 **MADDIE** (Relaxed): You bet I will. It's a new year, I'm a whole new me, and the new me doesn't shy away from a challenge!
 
-### SP_PieWars2023 — decoration SP_PieWars2023_Decoration_Slot25
+### Pie Wars — decoration SP_PieWars2023_Decoration_Slot25
 `SP_PieWars2023_Decoration_Slot25_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot25, event=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot25, event=Pie Wars, eventKey=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_PieWars2023 — decoration SP_PieWars2023_Decoration_Slot26
+### Pie Wars — decoration SP_PieWars2023_Decoration_Slot26
 `SP_PieWars2023_Decoration_Slot26_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot26, event=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot26, event=Pie Wars, eventKey=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_PieWars2023 — decoration SP_PieWars2023_Decoration_Slot27
+### Pie Wars — decoration SP_PieWars2023_Decoration_Slot27
 `SP_PieWars2023_Decoration_Slot27_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot27, event=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot27, event=Pie Wars, eventKey=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_PieWars2023 — decoration SP_PieWars2023_Decoration_Slot28
+### Pie Wars — decoration SP_PieWars2023_Decoration_Slot28
 `SP_PieWars2023_Decoration_Slot28_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot28, event=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot28, event=Pie Wars, eventKey=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_PieWars2023 — decoration SP_PieWars2023_Decoration_Slot29
+### Pie Wars — decoration SP_PieWars2023_Decoration_Slot29
 `SP_PieWars2023_Decoration_Slot29_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot29, event=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot29, event=Pie Wars, eventKey=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_PieWars2023 — item discovered: 14311
+### Pie Wars — item discovered: SP_PieWars2023_CollectableItems_04
 `SP_PieWars2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=SP_PieWars2023, items=['14311'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=SP_PieWars2023, items=['SP_PieWars2023_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Pie Wars, eventKey=SP_PieWars2023, itemKeys=['SP_PieWars2023_CollectableItems_04'], items=['SP_PieWars2023_CollectableItems_04'], moment=item discovered (versions 23.09.02–26.07.01)
 
 
 ### A Pig Birthday Surprise — outro
@@ -20111,10 +19827,9 @@ Play further to fully unlock it
 **MASON** (Charming): I think he's having a nap!
 **PEARL** (Doubtful): I think I need a nap...
 
-### SP_PigPet2025 — item discovered: 90487995
+### A Pig Birthday Surprise — item discovered: Little Piggy
 `SP_PigPet2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_PigPet2025, items=['90487995'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_PigPet2025, items=['SP_PigPet2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=A Pig Birthday Surprise, eventKey=SP_PigPet2025, itemKeys=['SP_PigPet2025_CollectableItems_04'], items=['Little Piggy'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: I don't think I've ever met Mason's other mom, Charlotte. What is she like?
 **GRANDMA**: She has very much taken after her mother.
@@ -20166,10 +19881,9 @@ Play further to fully unlock it
 **JACKIE**: Ursula and the Mansion are getting a lot of unwanted attention.
 **JACKIE**: I'm afraid it'll only be a question of time before someone shows up here up to no good.
 
-### SP_RaccoonPet2025 — item discovered: 90821206
+### Raccoon Riddle — item discovered: Watermelon Jackpot
 `SP_RaccoonPet2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_RaccoonPet2025, items=['90821206'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_RaccoonPet2025, items=['SP_RaccoonPet2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Raccoon Riddle, eventKey=SP_RaccoonPet2025, itemKeys=['SP_RaccoonPet2025_CollectableItems_04'], items=['Watermelon Jackpot'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: Thanks for helping me with the boxes and crates. When I let the circus set up at the Mansion, I didn't realize how much stuff they would have.
 **JACKIE** (Hesitant): I hear you. There's a whole box full of red clown noses over there!
@@ -20224,9 +19938,9 @@ Play further to fully unlock it
 **MADDIE** (Worried): Grandma, that sounds really serious. Is there anything I can do?
 **GRANDMA**: Just leave it to me for now. All you need to know is that I have taken care of everything.
 
-### SP_Ringmaster2025 — decoration SP_Ringmaster2025_Decoration_Slot33
+### Carousel of Confessions — decoration SP_Ringmaster2025_Decoration_Slot33
 `SP_Ringmaster2025_Decoration_Slot33_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Ringmaster2025_Decoration_Slot33, event=SP_Ringmaster2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Ringmaster2025_Decoration_Slot33, event=Carousel of Confessions, eventKey=SP_Ringmaster2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Why did the ringmaster say that you would know how to put on a circus show?
 **GRANDMA** (Thinking): Fine... once upon a time, a very long time ago, I toured as a member of the troupe.
@@ -20237,9 +19951,9 @@ Play further to fully unlock it
 **GRANDMA** (Relaxed): I suppose I can try. But we will need more performers.
 **MADDIE** (Encouraging): I'll get you performers. Thank you, Grandma!
 
-### SP_Ringmaster2025 — decoration SP_Ringmaster2025_Decoration_Slot34
+### Carousel of Confessions — decoration SP_Ringmaster2025_Decoration_Slot34
 `SP_Ringmaster2025_Decoration_Slot34_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Ringmaster2025_Decoration_Slot34, event=SP_Ringmaster2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Ringmaster2025_Decoration_Slot34, event=Carousel of Confessions, eventKey=SP_Ringmaster2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Hesitant): Hey! Whatcha doing?
 **RODDY** (Doubtful): Nothing much. What's up? You seem...
@@ -20256,9 +19970,9 @@ Play further to fully unlock it
 **MADDIE** (Charming): ---
 **ANTIQUEDEALER** (Thinking): What?
 
-### SP_Ringmaster2025 — decoration SP_Ringmaster2025_Decoration_Slot35
+### Carousel of Confessions — decoration SP_Ringmaster2025_Decoration_Slot35
 `SP_Ringmaster2025_Decoration_Slot35_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Ringmaster2025_Decoration_Slot35, event=SP_Ringmaster2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Ringmaster2025_Decoration_Slot35, event=Carousel of Confessions, eventKey=SP_Ringmaster2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA**: Did you manage to recruit some performers?
 **MADDIE** (Worried): Yep, and everyone is ready for practice. But...
@@ -20271,9 +19985,9 @@ Play further to fully unlock it
 **GRANDMA** (Annoyed): *Sigh*
 **GRANDMA** (Annoyed): I suppose you need to know the truth. I promise I will tell you when this circus business is over.
 
-### SP_Ringmaster2025 — decoration SP_Ringmaster2025_Decoration_Slot36
+### Carousel of Confessions — decoration SP_Ringmaster2025_Decoration_Slot36
 `SP_Ringmaster2025_Decoration_Slot36_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Ringmaster2025_Decoration_Slot36, event=SP_Ringmaster2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Ringmaster2025_Decoration_Slot36, event=Carousel of Confessions, eventKey=SP_Ringmaster2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE**: Ready for the show?
 **MADDIE**: As ready as I'll ever be. I'm just a little distracted...
@@ -20285,9 +19999,9 @@ Play further to fully unlock it
 **MADDIE** (Surprised): Who would do that?
 **JACKIE**: I don't know, but it almost seems personal.
 
-### SP_Ringmaster2025 — decoration SP_Ringmaster2025_Decoration_Slot37
+### Carousel of Confessions — decoration SP_Ringmaster2025_Decoration_Slot37
 `SP_Ringmaster2025_Decoration_Slot37_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Ringmaster2025_Decoration_Slot37, event=SP_Ringmaster2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Ringmaster2025_Decoration_Slot37, event=Carousel of Confessions, eventKey=SP_Ringmaster2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Joyous): We did it! I can't believe we actually put on a circus performance.
 **RODDY** (Relaxed): Thank god Ursula was there. She was the only one who knew what she was doing.
@@ -20314,10 +20028,9 @@ Play further to fully unlock it
 **MADDIE** (Talking): But I haven't got the first idea about putting on a circus show!
 **RINGLEADER** (Calling): <i>Ask your Grandma. She'll know.</i>
 
-### SP_Ringmaster2025 — item discovered: 36277344
+### Carousel of Confessions — item discovered: Gum Balls
 `SP_Ringmaster2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_Ringmaster2025, items=['36277344'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_Ringmaster2025, items=['SP_Ringmaster2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Carousel of Confessions, eventKey=SP_Ringmaster2025, itemKeys=['SP_Ringmaster2025_CollectableItems_04'], items=['Gum Balls'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): Grandma! We have a serious situation!
 **GRANDMA** (Charming): Are you sure? Last time you said that there was a spider in the bathroom - and not a very big one either.
@@ -20362,9 +20075,9 @@ Play further to fully unlock it
 **MASON** (Charming): Would you?!
 **MADDIE** (Encouraging): Of course! Let's build you a robot!
 
-### SP_RobotPet2026 — item discovered: SP_RobotPet2026_CollectableItems_04
+### Season Pass - A Gear Friend — item discovered: Power Station
 `SP_RobotPet2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=SP_RobotPet2026, items=['SP_RobotPet2026_CollectableItems_04'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Season Pass - A Gear Friend, eventKey=SP_RobotPet2026, itemKeys=['SP_RobotPet2026_CollectableItems_04'], items=['Power Station'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE**: And done... What do you think?
 **MASON** (Thinking): And you're saying this little battery will have enough juice to power it?
@@ -20419,9 +20132,9 @@ Play further to fully unlock it
 **PET** (Joyous): Giiizmo! *Whistle* *Beep*
 **MASON** (Charming): Thanks, Maddie! I'll use that for my presentation!
 
-### SP_RoddysMystery2023 — decoration SP_RoddysMystery2023_Decoration_Slot25
+### Roddy's Mystery — decoration SP_RoddysMystery2023_Decoration_Slot25
 `SP_RoddysMystery2023_Decoration_Slot25_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_RoddysMystery2023_Decoration_Slot25, event=SP_RoddysMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_RoddysMystery2023_Decoration_Slot25, event=Roddy's Mystery, eventKey=SP_RoddysMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
 ### Rumors in the Ring — outro
@@ -20516,10 +20229,9 @@ Play further to fully unlock it
 **MADDIE** (Encouraging): We have plenty of space, and it would be so cool to have the circus here - at the Mansion!
 **DEB** (Thinking): I thought you would say that. You should check this with Ursula, my dear. She might... have some objections.
 
-### SP_RumorsRing2025 — item discovered: 30458319
+### Rumors in the Ring — item discovered: Cannon of Danger
 `SP_RumorsRing2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_RumorsRing2025, items=['30458319'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_RumorsRing2025, items=['SP_RumorsRing2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Rumors in the Ring, eventKey=SP_RumorsRing2025, itemKeys=['SP_RumorsRing2025_CollectableItems_04'], items=['Cannon of Danger'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: Hey, Grandma. What's so interesting on your phone?
 **GRANDMA** (Relaxed): W-what? Oh, just comparing insurance prices, dearie.
@@ -20571,9 +20283,9 @@ Play further to fully unlock it
 - trigger: unknown, hint=Mystery (Progression event) (versions None–None)
 
 
-### SP_SplashMystery2025 — decoration SP_SplashMystery2025_Decoration_Slot34
+### Splash of Mystery — decoration SP_SplashMystery2025_Decoration_Slot34
 `SP_SplashMystery2025_Decoration_Slot34_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_SplashMystery2025_Decoration_Slot34, event=SP_SplashMystery2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_SplashMystery2025_Decoration_Slot34, event=Splash of Mystery, eventKey=SP_SplashMystery2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE**: So, your birthday is soon, isn't it?
 **MASON** (Relaxed): It sure is, and I have a feeling it's gonna be epic.
@@ -20588,16 +20300,16 @@ Play further to fully unlock it
 **MASON** (Thinking): How about a HUUUGE sandcastle?
 **MADDIE** (Encouraging): Consider it done!
 
-### SP_SplashMystery2025 — decoration SP_SplashMystery2025_Decoration_Slot35
+### Splash of Mystery — decoration SP_SplashMystery2025_Decoration_Slot35
 `SP_SplashMystery2025_Decoration_Slot35_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_SplashMystery2025_Decoration_Slot35, event=SP_SplashMystery2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_SplashMystery2025_Decoration_Slot35, event=Splash of Mystery, eventKey=SP_SplashMystery2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Frustrated): I can't believe Bella's trying to outdo me with this party! She doesn't even like Mason!
 **MADDIE** (Annoyed): She's just trying to make herself look good in front of Emilio, but if she thinks she's winning, she can think again.
 
-### SP_SplashMystery2025 — decoration SP_SplashMystery2025_Decoration_Slot36
+### Splash of Mystery — decoration SP_SplashMystery2025_Decoration_Slot36
 `SP_SplashMystery2025_Decoration_Slot36_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_SplashMystery2025_Decoration_Slot36, event=SP_SplashMystery2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_SplashMystery2025_Decoration_Slot36, event=Splash of Mystery, eventKey=SP_SplashMystery2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL**: Are you ready to see your party?
 **MASON** (Joyous): You can bet your pool floaties I am!
@@ -20609,9 +20321,9 @@ Play further to fully unlock it
 **MADDIE** (Relaxed): You're welcome.
 **BELLA** (Relaxed): It was our pleasure!
 
-### SP_SplashMystery2025 — decoration SP_SplashMystery2025_Decoration_Slot37
+### Splash of Mystery — decoration SP_SplashMystery2025_Decoration_Slot37
 `SP_SplashMystery2025_Decoration_Slot37_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_SplashMystery2025_Decoration_Slot37, event=SP_SplashMystery2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_SplashMystery2025_Decoration_Slot37, event=Splash of Mystery, eventKey=SP_SplashMystery2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **BELLA** (Annoyed): What do you think you're doing?
 **MADDIE** (Doubtful): What do you mean? I was just helping my friend organize a birthday party for her son.
@@ -20620,10 +20332,9 @@ Play further to fully unlock it
 **MADDIE** (Annoyed): ...
 **BELLA** (Doubtful): This isn't over.
 
-### SP_SplashMystery2025 — item discovered: 17871759
+### Splash of Mystery — item discovered: Kick Board
 `SP_SplashMystery2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_SplashMystery2025, items=['17871759'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_SplashMystery2025, items=['SP_SplashMystery2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Splash of Mystery, eventKey=SP_SplashMystery2025, itemKeys=['SP_SplashMystery2025_CollectableItems_04'], items=['Kick Board'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): What have you got planned for Mason's big party?
 **PEARL** (Doubtful): Pfft, you know what he's like.
@@ -20649,44 +20360,44 @@ Play further to fully unlock it
 **GRANDMA** (Encouraging): Change is good for the soul, dearie!
 **MADDIE** (Frustrated): Yeah, but not for the back!
 
-### SP_SpringCleaning2026 — decoration SP_SpringCleaning2026_Decoration_Slot25
+### Season Pass - Signs of Spring — decoration SP_SpringCleaning2026_Decoration_Slot25
 `SP_SpringCleaning2026_Decoration_Slot25_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_SpringCleaning2026_Decoration_Slot25, event=SP_SpringCleaning2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_SpringCleaning2026_Decoration_Slot25, event=Season Pass - Signs of Spring, eventKey=SP_SpringCleaning2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): These plants are beautiful, Grandma!
 **GRANDMA** (Charming): Thank you, dearie. I'm sure you didn't mind the yellow!
 **MADDIE** (Thinking): I'm actually still thinking why we need shovels?
 **GRANDMA** (Charming): You wait and see!
 
-### SP_SpringCleaning2026 — decoration SP_SpringCleaning2026_Decoration_Slot27
+### Season Pass - Signs of Spring — decoration SP_SpringCleaning2026_Decoration_Slot27
 `SP_SpringCleaning2026_Decoration_Slot27_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_SpringCleaning2026_Decoration_Slot27, event=SP_SpringCleaning2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_SpringCleaning2026_Decoration_Slot27, event=Season Pass - Signs of Spring, eventKey=SP_SpringCleaning2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Surprised): Wow! I had no idea this was buried under the ground!
 **GRANDMA** (Charming): You'd be surprised what you can dig up around these parts!
 **MADDIE** (Encouraging): At least now I know what we needed the shovels for!
 **GRANDMA** (Joyous): Haha! We're not done yet.
 
-### SP_SpringCleaning2026 — decoration SP_SpringCleaning2026_Decoration_Slot28
+### Season Pass - Signs of Spring — decoration SP_SpringCleaning2026_Decoration_Slot28
 `SP_SpringCleaning2026_Decoration_Slot28_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_SpringCleaning2026_Decoration_Slot28, event=SP_SpringCleaning2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_SpringCleaning2026_Decoration_Slot28, event=Season Pass - Signs of Spring, eventKey=SP_SpringCleaning2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Thinking): Tell me again, why these statues were buried?
 **GRANDMA**: To give them that authentic patina, dearie.
 **MADDIE** (Frustrated): Then why am I breaking a sweat trying to get it off with a toothbrush?
 **GRANDMA** (Discouraged): I didn't say it was a good idea...
 
-### SP_SpringCleaning2026 — decoration SP_SpringCleaning2026_Decoration_Slot29
+### Season Pass - Signs of Spring — decoration SP_SpringCleaning2026_Decoration_Slot29
 `SP_SpringCleaning2026_Decoration_Slot29_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_SpringCleaning2026_Decoration_Slot29, event=SP_SpringCleaning2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_SpringCleaning2026_Decoration_Slot29, event=Season Pass - Signs of Spring, eventKey=SP_SpringCleaning2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): A greenhouse on the roof! That's pretty smart, Grandma.
 **GRANDMA** (Encouraging): I figured it would be the best place to catch the sun.
 **GRANDMA** (Relaxed): And it has a great view!
 
-### SP_SpringCleaning2026 — decoration SP_SpringCleaning2026_Decoration_Slot38
+### Season Pass - Signs of Spring — decoration SP_SpringCleaning2026_Decoration_Slot38
 `SP_SpringCleaning2026_Decoration_Slot38_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_SpringCleaning2026_Decoration_Slot38, event=SP_SpringCleaning2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_SpringCleaning2026_Decoration_Slot38, event=Season Pass - Signs of Spring, eventKey=SP_SpringCleaning2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Surprised): What the...
 **GRANDMA** (Worried): Is everything alright, dearie?
@@ -20704,49 +20415,47 @@ Play further to fully unlock it
 **GRANDMA** (Charming): I do... Get your shovel!
 **MADDIE** (Surprised): Shovel?!
 
-### SP_SpringCleaning2026 — item discovered: SP_SpringCleaning2026_CollectableItems_04
+### Season Pass - Signs of Spring — item discovered: Glass Cottage
 `SP_SpringCleaning2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_SpringCleaning2026, items=['SP_SpringCleaning2026_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Season Pass - Signs of Spring, eventKey=SP_SpringCleaning2026, itemKeys=['SP_SpringCleaning2026_CollectableItems_04'], items=['Glass Cottage'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): How cute! Tiny greenhouses!
 **MADDIE** (Joyous): I love the snow globe! Ooh, and the lantern too!
 **GRANDMA** (Encouraging): Why thank you, dearie! You use what you have.
 
-### SP_SpringSeason2023 — decoration SP_SpringSeason2023_Decoration_25
+### Spring Season — decoration SP_SpringSeason2023_Decoration_25
 `SP_SpringSeason2023_Decoration_25_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_SpringSeason2023_Decoration_25, event=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_SpringSeason2023_Decoration_25, event=Spring Season, eventKey=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_SpringSeason2023 — decoration SP_SpringSeason2023_Decoration_26
+### Spring Season — decoration SP_SpringSeason2023_Decoration_26
 `SP_SpringSeason2023_Decoration_26_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_SpringSeason2023_Decoration_26, event=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_SpringSeason2023_Decoration_26, event=Spring Season, eventKey=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_SpringSeason2023 — decoration SP_SpringSeason2023_Decoration_27
+### Spring Season — decoration SP_SpringSeason2023_Decoration_27
 `SP_SpringSeason2023_Decoration_27_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_SpringSeason2023_Decoration_27, event=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_SpringSeason2023_Decoration_27, event=Spring Season, eventKey=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_SpringSeason2023 — decoration SP_SpringSeason2023_Decoration_28
+### Spring Season — decoration SP_SpringSeason2023_Decoration_28
 `SP_SpringSeason2023_Decoration_28_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_SpringSeason2023_Decoration_28, event=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_SpringSeason2023_Decoration_28, event=Spring Season, eventKey=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_SpringSeason2023 — decoration SP_SpringSeason2023_Decoration_29
+### Spring Season — decoration SP_SpringSeason2023_Decoration_29
 `SP_SpringSeason2023_Decoration_29_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_SpringSeason2023_Decoration_29, event=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_SpringSeason2023_Decoration_29, event=Spring Season, eventKey=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_SpringSeason2023 — item discovered: 14192
+### Spring Season — item discovered: SP_SpringSeason2023_CollectableItems_04
 `SP_SpringSeason2023_EndOfChainDialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=SP_SpringSeason2023, items=['14192'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=SP_SpringSeason2023, items=['SP_SpringSeason2023_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Spring Season, eventKey=SP_SpringSeason2023, itemKeys=['SP_SpringSeason2023_CollectableItems_04'], items=['SP_SpringSeason2023_CollectableItems_04'], moment=item discovered (versions 23.09.02–26.07.01)
 
 
-### SP_StrayBonesMystery2024 — item discovered: 34256375
+### Stray Bones Mystery — item discovered: Dog Collar
 `SP_StrayBonesMystery2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_StrayBonesMystery2024, items=['34256375'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_StrayBonesMystery2024, items=['SP_StrayBonesMystery2024_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Stray Bones Mystery, eventKey=SP_StrayBonesMystery2024, itemKeys=['SP_StrayBonesMystery2024_CollectableItems_04'], items=['Dog Collar'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Have you seen Rufus?? It's his dinnertime, but there's no trace of him!
 **MADDIE** (Thinking): He NEVER misses his dinner!
@@ -20798,9 +20507,9 @@ Play further to fully unlock it
 **MADDIE** (Charming): Okay... but I warn you! I’ve been practicing while you were away!
 **GRANDMA** (Charming): That’s good, dearie. I’m always up for a challenge!
 
-### SP_Taikai2026 — decoration SP_Taikai2026_Decoration_Slot33
+### Taikai - The Rematch — decoration SP_Taikai2026_Decoration_Slot33
 `SP_Taikai2026_Decoration_Slot33_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Taikai2026_Decoration_Slot33, event=SP_Taikai2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Taikai2026_Decoration_Slot33, event=Taikai - The Rematch, eventKey=SP_Taikai2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Surprised): Wow! You made this rock garden?
 **GRANDMA** (Encouraging): Yes, I needed somewhere for my thoughts to settle.
@@ -20808,9 +20517,9 @@ Play further to fully unlock it
 **MADDIE** (Charming): Graceful. Like you, Grandma.
 **GRANDMA** (Relaxed): Hmm... Like I’m trying to be.
 
-### SP_Taikai2026 — decoration SP_Taikai2026_Decoration_Slot34
+### Taikai - The Rematch — decoration SP_Taikai2026_Decoration_Slot34
 `SP_Taikai2026_Decoration_Slot34_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Taikai2026_Decoration_Slot34, event=SP_Taikai2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Taikai2026_Decoration_Slot34, event=Taikai - The Rematch, eventKey=SP_Taikai2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Encouraging): Nice looking bamboo fountain!
 **GRANDMA** (Relaxed): It’s called a shihi-odoshi. It fills, it tips, it knocks.
@@ -20820,9 +20529,9 @@ Play further to fully unlock it
 **MADDIE** (Relaxed): Are you going to tell me what happened in Japan?
 **GRANDMA** (Discouraged): Soon...
 
-### SP_Taikai2026 — decoration SP_Taikai2026_Decoration_Slot35
+### Taikai - The Rematch — decoration SP_Taikai2026_Decoration_Slot35
 `SP_Taikai2026_Decoration_Slot35_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Taikai2026_Decoration_Slot35, event=SP_Taikai2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Taikai2026_Decoration_Slot35, event=Taikai - The Rematch, eventKey=SP_Taikai2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **GRANDMA**: I love the sound of running water!
 **MADDIE** (Encouraging): Wow! This is really impressive! Another memory from Japan?
@@ -20830,9 +20539,9 @@ Play further to fully unlock it
 **MADDIE**: Okay, I admit it is very soothing!
 **GRANDMA** (Relaxed): It is.
 
-### SP_Taikai2026 — decoration SP_Taikai2026_Decoration_Slot36
+### Taikai - The Rematch — decoration SP_Taikai2026_Decoration_Slot36
 `SP_Taikai2026_Decoration_Slot36_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Taikai2026_Decoration_Slot36, event=SP_Taikai2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Taikai2026_Decoration_Slot36, event=Taikai - The Rematch, eventKey=SP_Taikai2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE** (Charming): This is really beautiful, Grandma.
 **GRANDMA** (Relaxed): ...
@@ -20846,9 +20555,9 @@ Play further to fully unlock it
 **GRANDMA** (Joyous): Oh, we played. It was a challenge after all.
 **MADDIE** (Surprised): What happened?!
 
-### SP_Taikai2026 — decoration SP_Taikai2026_Decoration_Slot37
+### Taikai - The Rematch — decoration SP_Taikai2026_Decoration_Slot37
 `SP_Taikai2026_Decoration_Slot37_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_Taikai2026_Decoration_Slot37, event=SP_Taikai2026, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_Taikai2026_Decoration_Slot37, event=Taikai - The Rematch, eventKey=SP_Taikai2026, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **GRANDMA**: We had our match. In a room much like this one!
 **GRANDMA**: By the waterfall we had played at so many years ago.
@@ -20874,9 +20583,9 @@ Play further to fully unlock it
 **GRANDMA** (Charming): Not right now...
 **GRANDMA** (Encouraging): Maybe later. Over some tea.
 
-### SP_Taikai2026 — item discovered: SP_Taikai2026_CollectableItems_04
+### Taikai - The Rematch — item discovered: Kyusu
 `SP_Taikai2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=SP_Taikai2026, items=['SP_Taikai2026_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Taikai - The Rematch, eventKey=SP_Taikai2026, itemKeys=['SP_Taikai2026_CollectableItems_04'], items=['Kyusu'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Thinking): Hmmm...
 **GRANDMA**: What is it, dearie?
@@ -20888,9 +20597,9 @@ Play further to fully unlock it
 **MADDIE** (Encouraging): Nice. Why haven’t I seen it before?
 **GRANDMA** (Relaxed): Because now I brought it back with me.
 
-### SP_TheWindOfMystery2024 — decoration SP_TheWindOfMystery2024_Decoration_Slot32
+### The Winds of Mystery — decoration SP_TheWindOfMystery2024_Decoration_Slot32
 `SP_TheWindOfMystery2024_Decoration_Slot32_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot32, event=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot32, event=The Winds of Mystery, eventKey=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA**: Getting ready for the pleasant weather, dearie?
 **MADDIE** (Joyous): Yup! I’m gonna make this entire area a veritable relaxation utopia!
@@ -20903,9 +20612,9 @@ Play further to fully unlock it
 **MASON** (Annoyed): She does that a lot?
 **MADDIE** (Doubtful): All the time...
 
-### SP_TheWindOfMystery2024 — decoration SP_TheWindOfMystery2024_Decoration_Slot33
+### The Winds of Mystery — decoration SP_TheWindOfMystery2024_Decoration_Slot33
 `SP_TheWindOfMystery2024_Decoration_Slot33_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot33, event=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot33, event=The Winds of Mystery, eventKey=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE**: Deb! Hank! Nice to see you there!
 **HANK** (Frustrated): ZzzzZZzzz...
@@ -20922,9 +20631,9 @@ Play further to fully unlock it
 **MADDIE** (Surprised): What?!
 **DEB** (Frustrated): What? Oh... That? Never mind, I didn’t say anything. C’mon Hank. I really need to go to sleep...
 
-### SP_TheWindOfMystery2024 — decoration SP_TheWindOfMystery2024_Decoration_Slot34
+### The Winds of Mystery — decoration SP_TheWindOfMystery2024_Decoration_Slot34
 `SP_TheWindOfMystery2024_Decoration_Slot34_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot34, event=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot34, event=The Winds of Mystery, eventKey=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **RODDY**: Hey, Maddie!
 **MADDIE** (Encouraging): Hi, Roddy! Just in time; you can help me fertilize these tomatoes!
@@ -20936,9 +20645,9 @@ Play further to fully unlock it
 **RODDY** (Worried): Fast.
 **MADDIE** (Relaxed): I’m sure it’ll be fine!
 
-### SP_TheWindOfMystery2024 — decoration SP_TheWindOfMystery2024_Decoration_Slot35
+### The Winds of Mystery — decoration SP_TheWindOfMystery2024_Decoration_Slot35
 `SP_TheWindOfMystery2024_Decoration_Slot35_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot35, event=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot35, event=The Winds of Mystery, eventKey=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Wow!
 **MADDIE** (Worried): Okay... That was a pretty strong gust of wind...
@@ -20951,9 +20660,9 @@ Play further to fully unlock it
 **MASON** (Doubtful): Bye...
 **MADDIE** (Doubtful): But it won’t rain! The newspaper promised perfect weather!
 
-### SP_TheWindOfMystery2024 — decoration SP_TheWindOfMystery2024_Decoration_Slot36
+### The Winds of Mystery — decoration SP_TheWindOfMystery2024_Decoration_Slot36
 `SP_TheWindOfMystery2024_Decoration_Slot36_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot36, event=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot36, event=The Winds of Mystery, eventKey=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **RODDY**: Ah, great idea, Maddie!
 **MADDIE** (Encouraging): Yeah? I’ve been meaning to get a tool shed for a while too.
@@ -20964,9 +20673,9 @@ Play further to fully unlock it
 **MADDIE** (Annoyed): ...
 **RODDY** (Annoyed): Fine! I’ll get someone who CAN talk some sense into you!
 
-### SP_TheWindOfMystery2024 — decoration SP_TheWindOfMystery2024_Decoration_Slot37
+### The Winds of Mystery — decoration SP_TheWindOfMystery2024_Decoration_Slot37
 `SP_TheWindOfMystery2024_Decoration_Slot37_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot37, event=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot37, event=The Winds of Mystery, eventKey=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): Maddie, dearie! What are you doing?!
 **MADDIE** (Annoyed): I. Am. Enjoying. This. BEAUTIFUL. DAY!
@@ -20977,10 +20686,9 @@ Play further to fully unlock it
 **MADDIE** (Worried): Oh... I didn’t know. I was too busy working on this...
 **GRANDMA** (Frustrated): Come on, Maddie. We need to start working on boarding up the house!
 
-### SP_TheWindOfMystery2024 — item discovered: 87810352
+### The Winds of Mystery — item discovered: A Perfect Moment
 `SP_TheWindOfMystery2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_TheWindOfMystery2024, items=['87810352'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_TheWindOfMystery2024, items=['SP_TheWindOfMystery2024_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Winds of Mystery, eventKey=SP_TheWindOfMystery2024, itemKeys=['SP_TheWindOfMystery2024_CollectableItems_04'], items=['A Perfect Moment'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): Delicious! Nothing like having some fresh lemonade and a good book to read.
 **MADDIE** (Encouraging): Don’t you agree, Grandma?
@@ -20988,24 +20696,23 @@ Play further to fully unlock it
 **MADDIE** (Relaxed): Just a wonderful summer breeze, Grandma! Enjoy it...
 **GRANDMA** (Frustrated): Well, I guess it won’t hurt to rake all these loose leaves away.
 
-### ProgressionEventItems — item discovered: 14096
+### ProgressionEventItems — item discovered: SPValentines2023Roses_04
 `SP_Valentines2023_EndOfChainDialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=ProgressionEventItems, items=['14096'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=ProgressionEventItems, items=['SPValentines2023Roses_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=ProgressionEventItems, eventKey=ProgressionEventItems, itemKeys=['SPValentines2023Roses_04'], items=['SPValentines2023Roses_04'], moment=item discovered (versions 23.09.02–26.07.01)
 
 
-### SP_ValentinesMystery2024 — decoration SP_ValentinesMystery2024_Decoration_Slot26
+### Valentine's Mystery — decoration SP_ValentinesMystery2024_Decoration_Slot26
 `SP_ValentinesMystery2024_Decoration_Slot26_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot26, event=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot26, event=Valentine's Mystery, eventKey=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): Do I get a present too?
 **MASON** (Encouraging): You most definitely do, Maddie!
 **MADDIE** (Surprised): A silk scarf! T-that's... so beautiful. And so expensive!
 **MASON**: Valentine's Day is all about making people feel special, and you deserve it.
 
-### SP_ValentinesMystery2024 — decoration SP_ValentinesMystery2024_Decoration_Slot28
+### Valentine's Mystery — decoration SP_ValentinesMystery2024_Decoration_Slot28
 `SP_ValentinesMystery2024_Decoration_Slot28_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot28, event=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot28, event=Valentine's Mystery, eventKey=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): What's this old burned teddy?
 **MASON** (Surprised): I didn't order that!
@@ -21015,9 +20722,9 @@ Play further to fully unlock it
 **MADDIE** (Worried): S-someone has sent it to me... But who?
 **MADDIE** (Worried): Lady Voyance's snow globe did also show me something weird... I'm sure its just a coincidence...
 
-### SP_ValentinesMystery2024 — decoration SP_ValentinesMystery2024_Decoration_Slot29
+### Valentine's Mystery — decoration SP_ValentinesMystery2024_Decoration_Slot29
 `SP_ValentinesMystery2024_Decoration_Slot29_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot29, event=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_ValentinesMystery2024_Decoration_Slot29, event=Valentine's Mystery, eventKey=SP_ValentinesMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): A ring?
 **MASON** (Surprised): I <b>definitely</b> didn't order that!
@@ -21028,18 +20735,17 @@ Play further to fully unlock it
 **PEARL** (Surprised): He's not wrong. Mason??
 **MASON** (Worried): Yes, Mom?
 
-### SP_ValentinesMystery2024 — item discovered: 86002151
+### Valentine's Mystery — item discovered: Valentine's Surprise
 `SP_ValentinesMystery2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_ValentinesMystery2024, items=['86002151'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_ValentinesMystery2024, items=['SP_ValentinesMystery2024_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Valentine's Mystery, eventKey=SP_ValentinesMystery2024, itemKeys=['SP_ValentinesMystery2024_CollectableItems_04'], items=["Valentine's Surprise"], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): These presents look... suspiciously nice!
 **MASON** (Relaxed): They ARE nice. I chose them myself!
 **MASON**: And I can't wait to see everyone's reactions!
 
-### SP_Voyance2025 — decoration SP_Voyance2025_Decoration_Slot25
+### Lady Voyance's Premonition — decoration SP_Voyance2025_Decoration_Slot25
 `SP_Voyance2025_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Voyance2025_Decoration_Slot25, event=SP_Voyance2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Voyance2025_Decoration_Slot25, event=Lady Voyance's Premonition, eventKey=SP_Voyance2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE** (Thinking): A wedding? So, who's getting married?
 **MADDIE** (Surprised): Don't look at me!
@@ -21048,18 +20754,18 @@ Play further to fully unlock it
 **RODDY** (Worried): Listen, she's just trying to be mysterious... right?
 **MADDIE** (Worried): Right...
 
-### SP_Voyance2025 — decoration SP_Voyance2025_Decoration_Slot26
+### Lady Voyance's Premonition — decoration SP_Voyance2025_Decoration_Slot26
 `SP_Voyance2025_Decoration_Slot26_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Voyance2025_Decoration_Slot26, event=SP_Voyance2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Voyance2025_Decoration_Slot26, event=Lady Voyance's Premonition, eventKey=SP_Voyance2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Did you hear about Voyance's premonition? About the funeral and wedding taking place soon?
 **EMILIO** (Thinking): She is a strange lady. I find it difficult to believe her premonitions. There is no room for such things in science.
 **MADDIE** (Doubtful): Exactly! She's just spinning tales about stars aligning and lunar events.
 **EMILIO** (Relaxed): I wouldn't worry, Maddie. There won't be a funeral - or a wedding!
 
-### SP_Voyance2025 — decoration SP_Voyance2025_Decoration_Slot28
+### Lady Voyance's Premonition — decoration SP_Voyance2025_Decoration_Slot28
 `SP_Voyance2025_Decoration_Slot28_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Voyance2025_Decoration_Slot28, event=SP_Voyance2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Voyance2025_Decoration_Slot28, event=Lady Voyance's Premonition, eventKey=SP_Voyance2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE**: I can't believe that just happened. Bella and Emilio are engaged!
 **JACKIE** (Hesitant): Poor Emilio looked like he was about to pass out when Bella said she wanted to have the wedding immediately!
@@ -21069,19 +20775,18 @@ Play further to fully unlock it
 **JACKIE** (Thinking): OK, but remind me again. Why do you have to organize the whole affair? It's their wedding.
 **MADDIE** (Encouraging): They're our friends, and that's what you do for your friends, right?
 
-### SP_Voyance2025 — decoration SP_Voyance2025_Decoration_Slot29
+### Lady Voyance's Premonition — decoration SP_Voyance2025_Decoration_Slot29
 `SP_Voyance2025_Decoration_Slot29_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Voyance2025_Decoration_Slot29, event=SP_Voyance2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Voyance2025_Decoration_Slot29, event=Lady Voyance's Premonition, eventKey=SP_Voyance2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Lady Voyance said there would be a wedding - and a funeral.
 **RODDY** (Thinking): Now the wedding is actually happening, and half of the premonition has come true, so...
 **MADDIE** (Worried): What about the funeral? Do you think... she could be right?
 **RODDY** (Worried): If she is, whose funeral will it be?
 
-### SP_Voyance2025 — item discovered: 55771547
+### Lady Voyance's Premonition — item discovered: Faces of Fate
 `SP_Voyance2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_Voyance2025, items=['55771547'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_Voyance2025, items=['SP_Voyance2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Lady Voyance's Premonition, eventKey=SP_Voyance2025, itemKeys=['SP_Voyance2025_CollectableItems_04'], items=['Faces of Fate'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): Here we go! We should be seeing something pretty soon.
 **JACKIE** (Joyous): How exciting! I've never seen the northern lights before.
@@ -21093,9 +20798,9 @@ Play further to fully unlock it
 **MADDIE** (Surprised): W-what is she talking about?
 **JACKIE** (Surprised): I think she said there will be a wedding and a funeral.
 
-### SP_WeddingMystery2024 — decoration SP_WeddingMystery2024_Decoration_Slot32
+### The Wedding Mystery — decoration SP_WeddingMystery2024_Decoration_Slot32
 `SP_WeddingMystery2024_Decoration_Slot32_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot32, event=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot32, event=The Wedding Mystery, eventKey=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE**: Hello, Deb. Getting ready for the big day, I see.
 **DEB** (Charming): Yes! Busy, busy!
@@ -21107,9 +20812,9 @@ Play further to fully unlock it
 **GRANDMA** (Worried): I... I’m sorry, dearie. I don’t know what came over me. I’ll go see if Maddie needs some help.
 **DEB** (Charming): Good! And don’t worry. I’ll find out what Hank is hiding!
 
-### SP_WeddingMystery2024 — decoration SP_WeddingMystery2024_Decoration_Slot33
+### The Wedding Mystery — decoration SP_WeddingMystery2024_Decoration_Slot33
 `SP_WeddingMystery2024_Decoration_Slot33_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot33, event=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot33, event=The Wedding Mystery, eventKey=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE**: It’s so nice of you to officiate their wedding, Roddy! I had no idea you could do that!
 **RODDY** (Relaxed): Oh yeah, I officiated at a friend’s wedding after I completed his home.
@@ -21121,9 +20826,9 @@ Play further to fully unlock it
 **JACKIE** (Encouraging): Forgot my dress... What a right pair we make, eh?! Oh, hi Maddie!
 **MADDIE** (Worried): ...Hi.
 
-### SP_WeddingMystery2024 — decoration SP_WeddingMystery2024_Decoration_Slot34
+### The Wedding Mystery — decoration SP_WeddingMystery2024_Decoration_Slot34
 `SP_WeddingMystery2024_Decoration_Slot34_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot34, event=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot34, event=The Wedding Mystery, eventKey=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **HANK** (Worried): So you’re sure the food is vegan, right? I mean, maybe we should hold off until we’re sure, okay?
 **MADDIE** (Frustrated): Hank... CALM DOWN! I know it’s a big day, but you’ll get through it, alright? The food is fine.
@@ -21137,9 +20842,9 @@ Play further to fully unlock it
 **MADDIE** (Doubtful): ...
 **RODDY** (Charming): Oh... Sorry.
 
-### SP_WeddingMystery2024 — decoration SP_WeddingMystery2024_Decoration_Slot35
+### The Wedding Mystery — decoration SP_WeddingMystery2024_Decoration_Slot35
 `SP_WeddingMystery2024_Decoration_Slot35_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot35, event=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot35, event=The Wedding Mystery, eventKey=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): So! Soon to be Mr and Mrs. Boulton! I’m surprised you took on the Boulton name, Hank!
 **HANK** (Joyous): What, are you kidding? Hank Boulton... Can’t ask for a better name!
@@ -21149,10 +20854,9 @@ Play further to fully unlock it
 **GRANDMA** (Joyous): Hahaha! Oh yes, I remember! Nothing like that.
 **GRANDMA** (Charming): Just a little something I need to discuss with him...
 
-### SP_WeddingMystery2024 — item discovered: 15481549
+### The Wedding Mystery — item discovered: Wedding Arrangement
 `SP_WeddingMystery2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_WeddingMystery2024, items=['15481549'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_WeddingMystery2024, items=['SP_WeddingMystery2024_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Wedding Mystery, eventKey=SP_WeddingMystery2024, itemKeys=['SP_WeddingMystery2024_CollectableItems_04'], items=['Wedding Arrangement'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: I’m so happy you found some more of the vintage Hopeberry juice, Grandma.
 **GRANDMA** (Doubtful): ...
@@ -21177,9 +20881,9 @@ Play further to fully unlock it
 **MADDIE** (Thinking): Still...
 **MADDIE** (Doubtful): Hmmm...
 
-### SP_WorldCup2026 — decoration SP_WorldCup2026_Decoration_Slot33
+### Season Pass - Soccer Watch Party — decoration SP_WorldCup2026_Decoration_Slot33
 `SP_WorldCup2026_Decoration_Slot33_Dialogue` · seen 26.04.01–26.07.01
-- trigger: decoration, decoration=SP_WorldCup2026_Decoration_Slot33, event=SP_WorldCup2026, moment=decoration placed (versions 26.04.01–26.07.01)
+- trigger: decoration, decoration=SP_WorldCup2026_Decoration_Slot33, event=Season Pass - Soccer Watch Party, eventKey=SP_WorldCup2026, moment=decoration placed (versions 26.04.01–26.07.01)
 
 **MADDIE** (Relaxed): You think it's big enough?
 **GRANDMA** (Surprised): Big enough? Half of Hopewell Bay will be able to see the games now, dearie!
@@ -21187,9 +20891,9 @@ Play further to fully unlock it
 **ANTIQUEDEALER** (Surprised): I don't even need my glasses!
 **MADDIE** (Encouraging): Wait until you hear it...
 
-### SP_WorldCup2026 — decoration SP_WorldCup2026_Decoration_Slot34
+### Season Pass - Soccer Watch Party — decoration SP_WorldCup2026_Decoration_Slot34
 `SP_WorldCup2026_Decoration_Slot34_Dialogue` · seen 26.04.01–26.07.01
-- trigger: decoration, decoration=SP_WorldCup2026_Decoration_Slot34, event=SP_WorldCup2026, moment=decoration placed (versions 26.04.01–26.07.01)
+- trigger: decoration, decoration=SP_WorldCup2026_Decoration_Slot34, event=Season Pass - Soccer Watch Party, eventKey=SP_WorldCup2026, moment=decoration placed (versions 26.04.01–26.07.01)
 
 **MADDIE**: Thanks for helping out with the food, Cherry.
 **CHERRY** (Encouraging): It's no problem at all, sugar.
@@ -21201,9 +20905,9 @@ Play further to fully unlock it
 **RODDY** (Joyous): You read my mind! Om nom nom...
 **MADDIE** (Doubtful): Hey! Leave some for the rest of us!
 
-### SP_WorldCup2026 — decoration SP_WorldCup2026_Decoration_Slot35
+### Season Pass - Soccer Watch Party — decoration SP_WorldCup2026_Decoration_Slot35
 `SP_WorldCup2026_Decoration_Slot35_Dialogue` · seen 26.04.01–26.07.01
-- trigger: decoration, decoration=SP_WorldCup2026_Decoration_Slot35, event=SP_WorldCup2026, moment=decoration placed (versions 26.04.01–26.07.01)
+- trigger: decoration, decoration=SP_WorldCup2026_Decoration_Slot35, event=Season Pass - Soccer Watch Party, eventKey=SP_WorldCup2026, moment=decoration placed (versions 26.04.01–26.07.01)
 
 **MADDIE** (Thinking): Hey, Grandma. I was thinking about that cup you bought in Brazil...
 **GRANDMA**: What about it, dearie?
@@ -21215,9 +20919,9 @@ Play further to fully unlock it
 **MADDIE** (Doubtful): But why would you buy a championship cup at a market, in Brazil?
 **GRANDMA** (Encouraging): Because it's so delightful, dearie.
 
-### SP_WorldCup2026 — decoration SP_WorldCup2026_Decoration_Slot36
+### Season Pass - Soccer Watch Party — decoration SP_WorldCup2026_Decoration_Slot36
 `SP_WorldCup2026_Decoration_Slot36_Dialogue` · seen 26.04.01–26.07.01
-- trigger: decoration, decoration=SP_WorldCup2026_Decoration_Slot36, event=SP_WorldCup2026, moment=decoration placed (versions 26.04.01–26.07.01)
+- trigger: decoration, decoration=SP_WorldCup2026_Decoration_Slot36, event=Season Pass - Soccer Watch Party, eventKey=SP_WorldCup2026, moment=decoration placed (versions 26.04.01–26.07.01)
 
 **RODDY** (Encouraging): Step right up and test your goal scoring skills!
 **MADDIE**: Hey, wow! What a great setup, Roddy.
@@ -21230,9 +20934,9 @@ Play further to fully unlock it
 **MADDIE** (Doubtful): Hank... It's SOCCER.
 **HANK** (Thinking): Soccer? Uh-oh.
 
-### SP_WorldCup2026 — decoration SP_WorldCup2026_Decoration_Slot37
+### Season Pass - Soccer Watch Party — decoration SP_WorldCup2026_Decoration_Slot37
 `SP_WorldCup2026_Decoration_Slot37_Dialogue` · seen 26.04.01–26.07.01
-- trigger: decoration, decoration=SP_WorldCup2026_Decoration_Slot37, event=SP_WorldCup2026, moment=decoration placed (versions 26.04.01–26.07.01)
+- trigger: decoration, decoration=SP_WorldCup2026_Decoration_Slot37, event=Season Pass - Soccer Watch Party, eventKey=SP_WorldCup2026, moment=decoration placed (versions 26.04.01–26.07.01)
 
 **MADDIE** (Encouraging): Doing a bit of a light workout there, Hank?
 **HANK** (Encouraging): Yeah! Nothing like doing it outside.
@@ -21256,9 +20960,9 @@ Play further to fully unlock it
 **BELLA** (Annoyed): And miss the big game?!
 **GRANDMA**: Definitely not, dearie!
 
-### SP_WorldCup2026 — item discovered: SP_WorldCup2026_CollectableItems_04
+### Season Pass - Soccer Watch Party — item discovered: Victory Cup
 `SP_WorldCup2026_LastCollectibleItemDiscovered_Dialogue` · seen 26.04.01–26.07.01
-- trigger: item, event=SP_WorldCup2026, items=['SP_WorldCup2026_CollectableItems_04'], moment=item discovered (versions 26.04.01–26.07.01)
+- trigger: item, event=Season Pass - Soccer Watch Party, eventKey=SP_WorldCup2026, itemKeys=['SP_WorldCup2026_CollectableItems_04'], items=['Victory Cup'], moment=item discovered (versions 26.04.01–26.07.01)
 
 **MADDIE** (Thinking): Hmm... This cup seems awfully heavy for a replica.
 **RODDY** (Thinking): It's also pretty weathered and has a date here, I can't quite make out... Nineteen eighty-something.
@@ -21266,18 +20970,18 @@ Play further to fully unlock it
 **GRANDMA** (Joyous): Oh, that old thing? I found it at a street shop in Brazil.
 **GRANDMA** (Charming): Got it for a good price too, dearie.
 
-### SP_XmasMystery2024 — decoration SP_XmasMystery2024_Decoration_Slot32
+### Holiday Mystery — decoration SP_XmasMystery2024_Decoration_Slot32
 `SP_XmasMystery2024_Decoration_Slot32_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_XmasMystery2024_Decoration_Slot32, event=SP_XmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_XmasMystery2024_Decoration_Slot32, event=Holiday Mystery, eventKey=SP_XmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **RODDY** (Relaxed): I can't wait for tonight! The Dinner Under the Stars is one my favorite events of the year!
 **MADDIE** (Thinking): I know! It's going to be fantastic - if only Cherry and Grandma would get along...
 **RODDY** (Surprised): What do you mean? They always work together on this - even if it does turn into a friendly competition!
 **MADDIE** (Thinking): Maybe not that friendly this year.
 
-### SP_XmasMystery2024 — decoration SP_XmasMystery2024_Decoration_Slot33
+### Holiday Mystery — decoration SP_XmasMystery2024_Decoration_Slot33
 `SP_XmasMystery2024_Decoration_Slot33_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_XmasMystery2024_Decoration_Slot33, event=SP_XmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_XmasMystery2024_Decoration_Slot33, event=Holiday Mystery, eventKey=SP_XmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **EMILIO** (Encouraging): What a fantastic set-up, Maddie!
 **MADDIE** (Relaxed): Thanks, Emilio! I want it to be extra cozy this year.
@@ -21286,9 +20990,9 @@ Play further to fully unlock it
 **EMILIO** (Thinking): I heard her muttering something about your Grandma.
 **EMILIO** (Surprised): Wait-- maybe I misheard her. The evening will be a success, I just KNOW it!
 
-### SP_XmasMystery2024 — decoration SP_XmasMystery2024_Decoration_Slot34
+### Holiday Mystery — decoration SP_XmasMystery2024_Decoration_Slot34
 `SP_XmasMystery2024_Decoration_Slot34_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_XmasMystery2024_Decoration_Slot34, event=SP_XmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_XmasMystery2024_Decoration_Slot34, event=Holiday Mystery, eventKey=SP_XmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): This spread is amazing, you guys!
 **CHERRY** (Thinking): Your risotto is... interesting. Did you mean for it to be this "al dente", or did the stove just quit on you?  
@@ -21299,9 +21003,9 @@ Play further to fully unlock it
 **MADDIE** (Surprised): Guys, GUYS!
 **MADDIE** (Frustrated): WHAT is going on here?
 
-### SP_XmasMystery2024 — decoration SP_XmasMystery2024_Decoration_Slot35
+### Holiday Mystery — decoration SP_XmasMystery2024_Decoration_Slot35
 `SP_XmasMystery2024_Decoration_Slot35_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_XmasMystery2024_Decoration_Slot35, event=SP_XmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_XmasMystery2024_Decoration_Slot35, event=Holiday Mystery, eventKey=SP_XmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Frustrated): Why are you so angry with each other?
 **CHERRY** (Doubtful): I would tell you, but Ursula will probably just try to make it all about her.
@@ -21312,9 +21016,9 @@ Play further to fully unlock it
 **MADDIE** (Thinking): Did someone put you up to this?
 **CHERRY** (Surprised): W-what do you mean?
 
-### SP_XmasMystery2024 — decoration SP_XmasMystery2024_Decoration_Slot36
+### Holiday Mystery — decoration SP_XmasMystery2024_Decoration_Slot36
 `SP_XmasMystery2024_Decoration_Slot36_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_XmasMystery2024_Decoration_Slot36, event=SP_XmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_XmasMystery2024_Decoration_Slot36, event=Holiday Mystery, eventKey=SP_XmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): You didn't get a weird letter? Or a phone call from someone you didn't know?
 **CHERRY** (Annoyed): W-well, I-- There was an anonymous phone call, and I couldn't recognize their voice...
@@ -21325,9 +21029,9 @@ Play further to fully unlock it
 **CHERRY** (Annoyed): Even when I was baking the record-breaking pie last summer, she still overshadowed it with her mystery meat...
 **CHERRY** (Annoyed): So the caller just said that I shouldn't stand for it anymore. And I won't!
 
-### SP_XmasMystery2024 — decoration SP_XmasMystery2024_Decoration_Slot37
+### Holiday Mystery — decoration SP_XmasMystery2024_Decoration_Slot37
 `SP_XmasMystery2024_Decoration_Slot37_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_XmasMystery2024_Decoration_Slot37, event=SP_XmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_XmasMystery2024_Decoration_Slot37, event=Holiday Mystery, eventKey=SP_XmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Discouraged): Oh, Cherry... I am terribly sorry for stealing your thunder.
 **GRANDMA** (Discouraged): You're an excellent cook and baker -- a real professional! I only dabble.
@@ -21356,10 +21060,9 @@ Play further to fully unlock it
 **CHERRY**: *Sigh* Good. See you later, Maddie!
 **MADDIE** (Thinking): I wonder what that was about...
 
-### SP_XmasMystery2024 — item discovered: 25468349
+### Holiday Mystery — item discovered: Cake Tree
 `SP_XmasMystery2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_XmasMystery2024, items=['25468349'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_XmasMystery2024, items=['SP_XmasMystery2024_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Holiday Mystery, eventKey=SP_XmasMystery2024, itemKeys=['SP_XmasMystery2024_CollectableItems_04'], items=['Cake Tree'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: Soooo... What are you up to, Grandma?
 **GRANDMA** (Thinking): Just counting my gingerbread and preparing the icing for the cake...
@@ -21395,9 +21098,9 @@ Play further to fully unlock it
 **MADDIE** (Relaxed): But will you try at least? It's so good for finding your balance.
 **GRANDMA** (Relaxed): I suppose it can't hurt.
 
-### SP_Yoga2025 — decoration SP_Yoga2025_Decoration_Slot26
+### Secrets of Serenity — decoration SP_Yoga2025_Decoration_Slot26
 `SP_Yoga2025_Decoration_Slot26_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot26, event=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot26, event=Secrets of Serenity, eventKey=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE** (Encouraging): Ah, these stretches feel great!
 **MADDIE** (Relaxed): They really do. I never knew what a downward dog was before.
@@ -21410,9 +21113,9 @@ Play further to fully unlock it
 **GRANDMA** (Surprised): Fiddlesticks! Your whispering startled me and made me drop my phone.
 **GRANDMA** (Surprised): And now it is broken!
 
-### SP_Yoga2025 — decoration SP_Yoga2025_Decoration_Slot27
+### Secrets of Serenity — decoration SP_Yoga2025_Decoration_Slot27
 `SP_Yoga2025_Decoration_Slot27_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot27, event=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot27, event=Secrets of Serenity, eventKey=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): I'm so sorry about your phone, Grandma. I know you really loved that old thing.
 **GRANDMA** (Annoyed): It was a very reliable device. They just don't make them like that anymore.
@@ -21421,9 +21124,9 @@ Play further to fully unlock it
 **MADDIE** (Relaxed): You can download apps, take photos, find new recipes... it can do pretty much anything.
 **GRANDMA** (Doubtful): Interesting.
 
-### SP_Yoga2025 — decoration SP_Yoga2025_Decoration_Slot28
+### Secrets of Serenity — decoration SP_Yoga2025_Decoration_Slot28
 `SP_Yoga2025_Decoration_Slot28_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot28, event=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot28, event=Secrets of Serenity, eventKey=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE**: How's it going with the new phone, Grandma? Do you need help setting things up?
 **GRANDMA**: Oh, I think I have got it under control.
@@ -21432,9 +21135,9 @@ Play further to fully unlock it
 **GRANDMA** (Joyous): You have seen my old phone, haven't you? That thing was only good for texting and calling - and sometimes not even that.
 **MADDIE** (Relaxed): I guess so... Well, good job!
 
-### SP_Yoga2025 — decoration SP_Yoga2025_Decoration_Slot29
+### Secrets of Serenity — decoration SP_Yoga2025_Decoration_Slot29
 `SP_Yoga2025_Decoration_Slot29_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot29, event=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot29, event=Secrets of Serenity, eventKey=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **JACKIE**: How is Ursula doing with the new phone? Did you have to do everything for her?
 **MADDIE** (Thinking): Actually, she managed to set the whole thing up herself.
@@ -21442,9 +21145,9 @@ Play further to fully unlock it
 **MADDIE** (Worried): Right...
 **JACKIE** (Encouraging): Come on, the yoga class is starting and I want the best spots!
 
-### SP_Yoga2025 — decoration SP_Yoga2025_Decoration_Slot38
+### Secrets of Serenity — decoration SP_Yoga2025_Decoration_Slot38
 `SP_Yoga2025_Decoration_Slot38_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot38, event=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Yoga2025_Decoration_Slot38, event=Secrets of Serenity, eventKey=SP_Yoga2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): A-are you taking a selfie, Grandma??
 **GRANDMA**: Yes, I learned it is all the rage!
@@ -21463,10 +21166,9 @@ Play further to fully unlock it
 **MADDIE**: This year will be all about finding harmony and joy.
 **MADDIE** (Encouraging): And it starts right now.
 
-### SP_Yoga2025 — item discovered: 68839852
+### Secrets of Serenity — item discovered: Yoga Mat
 `SP_Yoga2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_Yoga2025, items=['68839852'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_Yoga2025, items=['SP_Yoga2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Secrets of Serenity, eventKey=SP_Yoga2025, itemKeys=['SP_Yoga2025_CollectableItems_04'], items=['Yoga Mat'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA**: What are you doing? Daydreaming?
 **MADDIE**: No, I'm meditating.
@@ -23672,19 +23374,19 @@ Play further to fully unlock it
 **MADDIE** (Thinking): On top of each other and...
 **MADDIE** (Frustrated): Presto! ... half a password. I think... Great.
 
-### CBE_SecondaryGoal2025 — item discovered: SubGoal_MapItem_01
+### Secondary Goal 2025 (unnamed) — item discovered: Map Fragment
 `SubGoal_MapItem_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SecondaryGoal2025, items=['SubGoal_MapItem_01'], moment=item discovered (versions 26.03.01–26.07.01)
-- trigger: item, event=LDE_MurderAtTheMansion, items=['LDE_MurderAtTheMansion_SubGoal_MapItem_01'], moment=item discovered (versions 26.05.01–26.05.01)
+- trigger: item, event=Secondary Goal 2025 (unnamed), eventKey=CBE_SecondaryGoal2025, itemKeys=['SubGoal_MapItem_01'], items=['Map Fragment'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_SubGoal_MapItem_01'], items=['Map Fragment'], moment=item discovered (versions 26.05.01–26.05.01)
 
 **MADDIE** (Surprised): What's this -- a piece of a map?
 **GRANDMA** (Encouraging): If you keep looking, I bet you will find more pieces.
 **MADDIE** (Thinking): So I need to collect the map pieces. But what happens then?
 **GRANDMA** (Charming): You get a reward for each piece, and if you follow the map, you might just solve the whole mystery!
 
-### CBE_SecondaryGoal2025 — item discovered: SubGoal_RewardChest_Closed_01
+### Secondary Goal 2025 (unnamed) — item discovered: Small Chest
 `SubGoal_RewardChest_Closed_01_Dialogue` · seen 26.03.01–26.07.01
-- trigger: item, event=CBE_SecondaryGoal2025, items=['SubGoal_RewardChest_Closed_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Secondary Goal 2025 (unnamed), eventKey=CBE_SecondaryGoal2025, itemKeys=['SubGoal_RewardChest_Closed_01'], items=['Small Chest'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Joyous): The mystery is solved! I found the final piece of the map - and a treasure.
 

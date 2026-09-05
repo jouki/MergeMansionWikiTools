@@ -270,9 +270,9 @@ Every story in which Victoria speaks.
 **MADDIE** (Relaxed): Okay, bye.
 **VICTORIA** (Worried): I'LL BE BACK!
 
-### SP_LadyVoyanceMystery2023 — decoration SP_LadyVoyanceMystery2023_Decoration_Slot29
+### Lady Voyance's Mystery — decoration SP_LadyVoyanceMystery2023_Decoration_Slot29
 `SP_LadyVoyanceMystery2023_Decoration_Slot29_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_LadyVoyanceMystery2023_Decoration_Slot29, event=SP_LadyVoyanceMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_LadyVoyanceMystery2023_Decoration_Slot29, event=Lady Voyance's Mystery, eventKey=SP_LadyVoyanceMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **VICTORIA** (Discouraged): Lady Voyance... I see that you’ve moved your shady operation to this ramshackle hole...
 **VICTORIA** (Doubtful): How fitting!
@@ -283,17 +283,17 @@ Every story in which Victoria speaks.
 **VICTORIA** (Joyous): Hahahahahahahaha!!!!
 **VICTORIA** (Relaxed): It is quite entertaining. I’ll give you that!
 
-### SP_PieWars2023 — decoration SP_PieWars2023_Decoration_Slot25
+### Pie Wars — decoration SP_PieWars2023_Decoration_Slot25
 `SP_PieWars2023_Decoration_Slot25_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot25, event=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot25, event=Pie Wars, eventKey=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_PieWars2023 — decoration SP_PieWars2023_Decoration_Slot26
+### Pie Wars — decoration SP_PieWars2023_Decoration_Slot26
 `SP_PieWars2023_Decoration_Slot26_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot26, event=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot26, event=Pie Wars, eventKey=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_PieWars2023 — decoration SP_PieWars2023_Decoration_Slot29
+### Pie Wars — decoration SP_PieWars2023_Decoration_Slot29
 `SP_PieWars2023_Decoration_Slot29_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot29, event=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot29, event=Pie Wars, eventKey=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
 

@@ -1,9 +1,9 @@
 # Dog
 Every story in which Dog speaks.
 
-### CBE_Easter2023 — decoration CBE_Easter2023_Decoration22
+### Egg Hunt 2023 — decoration CBE_Easter2023_Decoration22
 `CBE_Easter2023_RufusEasterRetreat` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_Easter2023_Decoration22, event=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_Easter2023_Decoration22, event=Egg Hunt 2023, eventKey=CBE_Easter2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE** (Encouraging): You like your special doggy house? 
 **DOG** (Joyous): Ruff!
@@ -58,10 +58,9 @@ Every story in which Dog speaks.
 **MADDIE** (Encouraging): Thank you table saw! This would have been so much harder without you.
 **MADDIE** (Joyous): We came, we saw, we helped a dog!
 
-### LDE_HolidayCarols2023 — item discovered: 96623192
+### The Fa-la-la-la Follies — item discovered: Rufus' Present
 `LDE_HolidayCarols2023_HolidayPresent_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['96623192'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_HolidayPresent_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_HolidayPresent_03'], items=["Rufus' Present"], moment=item discovered (versions 25.05.01–26.07.01)
 
 **DOG** (Encouraging): Snifffff...
 **MADDIE** (Joyous): Looks like Rufus got his wish!

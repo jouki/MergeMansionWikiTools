@@ -1,9 +1,9 @@
 # Deb
 Every story in which Deb speaks.
 
-### CBE_JoysOfTheSea2023 — decoration CBE_JoysOfTheSea2023_Decoration_Slot08
+### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot08
 `CBE_JoysOfTheSea2023_Decoration_Slot08_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot08, event=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot08, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **DEB** (Relaxed): So what made you decide to become a marine biologist, handsome?
 **EMILIO** (Doubtful): Uhm... You can call me Emilio. <b>Please</b>...
@@ -13,10 +13,9 @@ Every story in which Deb speaks.
 **DEB** (Charming): Deb. But <b>you</b> can call me... Anytime.
 **MADDIE** (Encouraging): Interesting woman, isn’t she?
 
-### CBE_JoysOfTheSea2023 — item discovered: 300786
+### The Joys of the Sea — item discovered: Dolphin
 `CBE_JoysOfTheSea2023_Fish8_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300786'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_Fish_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_Fish_08'], items=['Dolphin'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: Dolphins are one of the most intelligent animals on the Earth! They have large brains and show complex social behavior.
 **EMILIO**: They also have a remarkable sense called echolocation that helps them navigate and hunt!
@@ -24,18 +23,17 @@ Every story in which Deb speaks.
 **DEB** (Doubtful): What's that sis?
 **GRANDMA** (Joyous): Nothing, dearie!
 
-### CBE_JoysOfTheSea2023 — item discovered: 300808
+### The Joys of the Sea — item discovered: Fishing Boat
 `CBE_JoysOfTheSea2023_FishBoat_Dialogue` · seen 23.09.02–26.07.01
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['300808'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=CBE_JoysOfTheSea2023, items=['CBE_JoysOfTheSea2023_FishBoat_10'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, itemKeys=['CBE_JoysOfTheSea2023_FishBoat_10'], items=['Fishing Boat'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **EMILIO**: Remember to always wear your life vests when out on a boat! No matter how small!
 **DEB** (Charming): No need, sweetie. I’ll just count on you to save me!
 **EMILIO** (Surprised): Er...
 
-### CBE_VeilOfFate2024 — decoration CBE_VeilOfFate2023_Decoration_Slot08
+### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot08
 `CBE_VeilOfFate2024_Decoration_Slot08_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot08, event=CBE_VeilOfFate2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot08, event=Veil of Fate, eventKey=CBE_VeilOfFate2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Deb! You too?
 **DEB** (Doubtful): There's a lot going on, so I thought I might seek some...
@@ -45,10 +43,9 @@ Every story in which Deb speaks.
 **DEB** (Surprised): Excuse me??
 **LADY VOYANCE** (Talking): Worry not. Lady Voyance never tells.
 
-### CBE_VoyancesVisions — item discovered: 69725280
+### Voyance's Visions — item discovered: Dumbbell
 `CBE_VoyancesVisions_CharacterItems_05C_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VoyancesVisions, items=['69725280'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VoyancesVisions, items=['CBE_VoyancesVisions_CharacterItems_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['CBE_VoyancesVisions_CharacterItems_05'], items=['Dumbbell'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Oh, spirits of the sky, speak to meeee!
 **LADY VOYANCE** (Surprised): I am getting something...
@@ -59,10 +56,9 @@ Every story in which Deb speaks.
 **LADY VOYANCE** (Thinking): Isn't she your daughter's partner?
 **DEB** (Encouraging): She is... So there's the cosmic connection, isn't it? Nothing more to it, I am sure.
 
-### CBE_VoyancesVisions — item discovered: 69725276
+### Voyance's Visions — item discovered: Helmet
 `CBE_VoyancesVisions_CharacterItems_09C_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VoyancesVisions, items=['69725276'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VoyancesVisions, items=['CBE_VoyancesVisions_CharacterItems_09'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['CBE_VoyancesVisions_CharacterItems_09'], items=['Helmet'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Surprised): Hmmmmmm... Powers of the past, present and future... SPEAK!
 **LADY VOYANCE** (Surprised): A strange picture is forming... of Mason and Pearl, your family, the Boultons, and something else...
@@ -72,10 +68,9 @@ Every story in which Deb speaks.
 **DEB** (Worried): All those odd things - the strange phone calls to Cherry - no one could explain...
 **LADY VOYANCE** (Thinking): You forget - the stars see everything!
 
-### CBE_VoyancesVisions — item discovered: 80336061
+### Voyance's Visions — item discovered: Malzar - First Answer
 `CBE_VoyancesVisions_MalzarAActiveC_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VoyancesVisions, items=['80336061'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VoyancesVisions, items=['CBE_VoyancesVisions_MalzarAActive_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['CBE_VoyancesVisions_MalzarAActive_01'], items=['Malzar - First Answer'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MALZAR**: </i>Through tangled roots of kin we tread, unveiling truths long left unsaid.</i>
 **LADY VOYANCE** (Thinking): Does that make sense to you? Sounds like family secrets...
@@ -84,10 +79,9 @@ Every story in which Deb speaks.
 **DEB** (Worried): I fear it may have been discovered...
 **LADY VOYANCE** (Doubtful): Excuse me, but I am the one who should sound cryptic here!
 
-### CBE_VoyancesVisions — item discovered: 19906385
+### Voyance's Visions — item discovered: Malzar - Third Answer
 `CBE_VoyancesVisions_MalzarCActiveC_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VoyancesVisions, items=['19906385'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VoyancesVisions, items=['CBE_VoyancesVisions_MalzarCActive_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['CBE_VoyancesVisions_MalzarCActive_01'], items=['Malzar - Third Answer'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **DEB** (Doubtful): How reliable is Malzar?
 **LADY VOYANCE** (Encouraging): Extremely reliable! You cannot really measure his reliability in absolute terms, of course.
@@ -96,10 +90,9 @@ Every story in which Deb speaks.
 **DEB** (Thinking): I suppose I am.
 **LADY VOYANCE** (Charming): </i>A secret spilled, a fortune lost, a girl’s fate sealed at such a cost.</i>
 
-### CBE_VoyancesVisions — item discovered: 29785786
+### Voyance's Visions — item discovered: Pregnancy Test
 `CBE_VoyancesVisions_OminousSecrets_05C_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VoyancesVisions, items=['29785786'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VoyancesVisions, items=['CBE_VoyancesVisions_PossibleEvidence_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['CBE_VoyancesVisions_PossibleEvidence_05'], items=['Pregnancy Test'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Surprised): I seeee... something. Something that tells me your troubles involve a child.
 **DEB** (Surprised): But whose child?
@@ -107,10 +100,9 @@ Every story in which Deb speaks.
 **DEB** (Frustrated): Do you mean your peculiar mascot?
 **LADY VOYANCE** (Surprised): He is not a mascot! He is... MALZAR!
 
-### CBE_VoyancesVisions — item discovered: 29785785
+### Voyance's Visions — item discovered: Paper Shredder
 `CBE_VoyancesVisions_OminousSecrets_06C_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VoyancesVisions, items=['29785785'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VoyancesVisions, items=['CBE_VoyancesVisions_PossibleEvidence_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['CBE_VoyancesVisions_PossibleEvidence_06'], items=['Paper Shredder'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Surprised): Mmmm.... MMMMHH...
 **DEB** (Doubtful): Voyance? Are you quite alright?
@@ -119,10 +111,9 @@ Every story in which Deb speaks.
 **LADY VOYANCE** (Surprised): They linger... Linger... W-what was I saying?
 **LADY VOYANCE** (Thinking): Did I just fall asleep for a second?
 
-### CBE_VoyancesVisions — item discovered: 22815197
+### Voyance's Visions — item discovered: Premium Tarot Table
 `CBE_VoyancesVisions_TarotTableActiveC_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VoyancesVisions, items=['22815197'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VoyancesVisions, items=['CBE_VoyancesVisions_TarotTable_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['CBE_VoyancesVisions_TarotTable_06'], items=['Premium Tarot Table'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE** (Surprised): Deb! It is you!
 **DEB** (Doubtful): Err... Yes, it's me.
@@ -355,38 +346,33 @@ Every story in which Deb speaks.
 **MADDIE** (Encouraging): That's amazing! I wonder what they talked about, over dinner, that night?
 **DEB** (Charming): We'll never know, but it's nice to imagine!
 
-### LBE_BushBonanza — item discovered: 42186215
+### The Great Bush Bonanza! — item discovered: Cubed Topiary
 `LBE_BushBonanzaBushChain1` · seen 23.09.02–26.07.01
-- trigger: item, event=LBE_BushBonanza, items=['42186215'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LBE_BushBonanza, items=['LBE_BushBonanza_Bushes_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Great Bush Bonanza!, eventKey=LBE_BushBonanza, itemKeys=['LBE_BushBonanza_Bushes_01'], items=['Cubed Topiary'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **DEB**: A simple box won’t be enough to beat me, sweetie!
 
-### LBE_BushBonanza — item discovered: 42186206
+### The Great Bush Bonanza! — item discovered: Elephant Topiary
 `LBE_BushBonanzaBushChain10` · seen 23.09.02–26.07.01
-- trigger: item, event=LBE_BushBonanza, items=['42186206'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LBE_BushBonanza, items=['LBE_BushBonanza_Bushes_10'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Great Bush Bonanza!, eventKey=LBE_BushBonanza, itemKeys=['LBE_BushBonanza_Bushes_10'], items=['Elephant Topiary'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **DEB** (Surprised): How did you...? That’s not possible!
 
-### LBE_BushBonanza — item discovered: 42186213
+### The Great Bush Bonanza! — item discovered: Cone Topiary
 `LBE_BushBonanzaBushChain3` · seen 23.09.02–26.07.01
-- trigger: item, event=LBE_BushBonanza, items=['42186213'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LBE_BushBonanza, items=['LBE_BushBonanza_Bushes_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Great Bush Bonanza!, eventKey=LBE_BushBonanza, itemKeys=['LBE_BushBonanza_Bushes_03'], items=['Cone Topiary'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **DEB** (Thinking): I’m sure that will make a fine Christmas shrub!
 
-### LBE_BushBonanza — item discovered: 42186211
+### The Great Bush Bonanza! — item discovered: Duck Topiary
 `LBE_BushBonanzaBushChain5` · seen 23.09.02–26.07.01
-- trigger: item, event=LBE_BushBonanza, items=['42186211'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LBE_BushBonanza, items=['LBE_BushBonanza_Bushes_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Great Bush Bonanza!, eventKey=LBE_BushBonanza, itemKeys=['LBE_BushBonanza_Bushes_05'], items=['Duck Topiary'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **DEB** (Relaxed): Alright, looks like I may have some competition after all!
 
-### LBE_BushBonanza — item discovered: 42186208
+### The Great Bush Bonanza! — item discovered: Dolphin Topiary
 `LBE_BushBonanzaBushChain8` · seen 23.09.02–26.07.01
-- trigger: item, event=LBE_BushBonanza, items=['42186208'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=LBE_BushBonanza, items=['LBE_BushBonanza_Bushes_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Great Bush Bonanza!, eventKey=LBE_BushBonanza, itemKeys=['LBE_BushBonanza_Bushes_08'], items=['Dolphin Topiary'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **DEB** (Discouraged): I... Uh... Wow!
 
@@ -418,33 +404,29 @@ Every story in which Deb speaks.
 **DEB** (Charming): Seems like that competitive blood flows in your veins too, Maddie.
 **MADDIE** (Encouraging): I guess so! I am a Boulton after all; you know!
 
-### LBE_Valentines2024 — item discovered: 86035662
+### Floral Frenzy — item discovered: Exotic Bouquet
 `LBE_Valentines2024_Bouquet_08_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LBE_Valentines2024, items=['86035662'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LBE_Valentines2024, items=['LBE_Valentines2024_Bouquet_08'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Floral Frenzy, eventKey=LBE_Valentines2024, itemKeys=['LBE_Valentines2024_Bouquet_08'], items=['Exotic Bouquet'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **DEB** (Thinking): What bold use of color and shape. You have outdone yourself, Julius!
 
-### LBE_Valentines2024 — item discovered: 86035661
+### Floral Frenzy — item discovered: Grand Bouquet
 `LBE_Valentines2024_Bouquet_09_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LBE_Valentines2024, items=['86035661'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LBE_Valentines2024, items=['LBE_Valentines2024_Bouquet_09'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Floral Frenzy, eventKey=LBE_Valentines2024, itemKeys=['LBE_Valentines2024_Bouquet_09'], items=['Grand Bouquet'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **JACKIE** (Surprised): You're certainly not holding back. This bouquet is gorgeous!
 **DEB** (Encouraging): Why thank you, Jackie. It's all about confidence!
 
-### LBE_Valentines2024 — item discovered: 86035660
+### Floral Frenzy — item discovered: Celebration Bouquet
 `LBE_Valentines2024_Bouquet_10_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LBE_Valentines2024, items=['86035660'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LBE_Valentines2024, items=['LBE_Valentines2024_Bouquet_10'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Floral Frenzy, eventKey=LBE_Valentines2024, itemKeys=['LBE_Valentines2024_Bouquet_10'], items=['Celebration Bouquet'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **DEB** (Surprised): Are you sure you've never tried flower arranging before, Jackie? You're a natural!
 **JACKIE** (Encouraging): I'm confident I've found a new passion!
 
-### LBE_Valentines2024 — item discovered: 50848714
+### Floral Frenzy — item discovered: Blooming Flowerpot
 `LBE_Valentines2024_Flowerbed_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LBE_Valentines2024, items=['50848714'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LBE_Valentines2024, items=['LBE_Valentines2024_FlowerBed_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Floral Frenzy, eventKey=LBE_Valentines2024, itemKeys=['LBE_Valentines2024_FlowerBed_06'], items=['Blooming Flowerpot'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **DEB**: Growing the right flowers is actually quite tricky. My corpse flower takes four to five years to bloom!
 **ANTIQUEDEALER**: It's probably not ideal for floral arrangements, either...
@@ -512,9 +494,9 @@ Every story in which Deb speaks.
 **GRANDMA** (Surprised): ...
 **DEB** (Surprised): Oh, isn’t he funny?! Hanky-boo, sweetie? Can I have a moment in private with you?
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_CharacterDeb_02
+### Green Acres Quest — item discovered: Deb
 `LDE_GreenAcresQuest_CharacterDeb_02_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_CharacterDeb_02'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterDeb_02'], items=['Deb'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **DEB** (Doubtful): What do we have here? This garden looks severely neglected!
 **MADDIE** (Hesitant): I know, I know. That’s why I called you… I REALLY need your expertise!
@@ -523,9 +505,9 @@ Every story in which Deb speaks.
 **DEB** (Thinking): Do you have some gardening gloves?
 **MADDIE** (Relaxed): You bet!
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_CommonFlowerGrowth_05
+### Green Acres Quest — item discovered: Large Wildflower Patch
 `LDE_GreenAcresQuest_CommonFlowerGrowth_01_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_CommonFlowerGrowth_05'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CommonFlowerGrowth_05'], items=['Large Wildflower Patch'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **DEB** (Doubtful): Now, you want to grow a variety of wild flowers in your garden, Maddie. They’re good for the soil and…
 **ANTIQUEDEALER** (Charming): And the pollinators!
@@ -535,9 +517,9 @@ Every story in which Deb speaks.
 **DEB** (Doubtful): Hrhm, of course. I am sorry, Julius.
 **ANTIQUEDEALER** (Discouraged): I apologize too. Maybe I was a LITTLE bit too eager. What were you saying about the wild flowers, Deb?
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_RareFlowerGrowth_05
+### Green Acres Quest — item discovered: Mature Green Hydrangeas
 `LDE_GreenAcresQuest_RareFlowerGrowth_01_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_RareFlowerGrowth_05'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_RareFlowerGrowth_05'], items=['Mature Green Hydrangeas'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **DEB**: Phew! I think our work here is done!
 **MADDIE** (Encouraging): Amazing job, you two! I knew you'd be able to create something amazing if you worked together.
@@ -546,9 +528,9 @@ Every story in which Deb speaks.
 **ANTIQUEDEALER** (Charming): And your knowledge about variegated cultivar propagation in ornamental topiary is quite unparalleled, Deb!
 **MADDIE** (Frustrated): You've lost me again.
 
-### LDE_GreenAcresQuest2024 — item discovered: LDE_GreenAcresQuest2024_UncommonFlowerGrowth_05
+### Green Acres Quest — item discovered: Wildflower Assortment
 `LDE_GreenAcresQuest_UncommonFlowerGrowth_01_Dialogue` · seen 26.05.01–26.07.01
-- trigger: item, event=LDE_GreenAcresQuest2024, items=['LDE_GreenAcresQuest2024_UncommonFlowerGrowth_05'], moment=item discovered (versions 26.05.01–26.07.01)
+- trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_UncommonFlowerGrowth_05'], items=['Wildflower Assortment'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **ANTIQUEDEALER**: The very best flowers for pollinators are native, nectar-rich plants with single-layer petals.
 **DEB**: Like the narrow-leaf mountain mint here?
@@ -557,10 +539,9 @@ Every story in which Deb speaks.
 **ANTIQUEDEALER** (Joyous): You read my mind, Deb!
 **MADDIE** (Thinking): Are you still talking about flowers?
 
-### LDE_HolidayCarols2023 — item discovered: 1936172
+### The Fa-la-la-la Follies — item discovered: Elf Hat
 `LDE_HolidayCarols2023_BandCostume_03_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['1936172'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_BandCostume_03'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_BandCostume_03'], items=['Elf Hat'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **DEB** (Doubtful): Unfortunately, I can't wear this. It does not go with my colors...
 **MADDIE**: I think green and red are very becoming on you, Deb!
@@ -576,27 +557,24 @@ Every story in which Deb speaks.
 **MADDIE** (Thinking): Too much? How about... the Fa-la-la-la Follies?
 **DEB** (Encouraging): That's better!
 
-### LDE_HolidayCarols2023 — item discovered: 70253891
+### The Fa-la-la-la Follies — item discovered: Festive Ignatius Boulton
 `LDE_HolidayCarols2023_CarolOfTheBells_06_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['70253891'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_CarolOfTheBells_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_CarolOfTheBells_06'], items=['Festive Ignatius Boulton'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **DEB** (Relaxed): Can I sing a solo?
 **MADDIE**: Why not... Do you have a lot of singing experience?
 **DEB** (Thinking): Sure! I sing in the shower every day.
 
-### LDE_HolidayCarols2023 — item discovered: 96623190
+### The Fa-la-la-la Follies — item discovered: Deb's Present
 `LDE_HolidayCarols2023_HolidayPresent_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['96623190'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_HolidayPresent_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_HolidayPresent_05'], items=["Deb's Present"], moment=item discovered (versions 25.05.01–26.07.01)
 
 **DEB** (Encouraging): Someone knows me well.
 **DEB** (Encouraging): Nice pearls go with any outfit, I always say!
 
-### LDE_HolidayCarols2023 — item discovered: 99099032
+### The Fa-la-la-la Follies — item discovered: Fabric
 `LDE_HolidayCarols2023_SewingSupply_04_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_HolidayCarols2023, items=['99099032'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_HolidayCarols2023, items=['LDE_HolidayCarols2023_SewingSupply_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=The Fa-la-la-la Follies, eventKey=LDE_HolidayCarols2023, itemKeys=['LDE_HolidayCarols2023_SewingSupply_04'], items=['Fabric'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE**: Then a bit of sparkle...
 **DEB** (Charming): You can never have too much!
@@ -616,10 +594,9 @@ Every story in which Deb speaks.
 **DEB** (Encouraging): Oh, me too - I have got the perfect match.
 **DEB** (Encouraging): Would you consider going on a blind date?
 
-### LDE_Hopeberry2024 — item discovered: 27561736
+### Love on the Vine — item discovered: Cork Backpack
 `LDE_Hopeberry2024_CorkThings_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['27561736'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_CorkThings_07'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_CorkThings_07'], items=['Cork Backpack'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Doubtful): Deb, have you offered Maddie your match-making services?
 **DEB** (Frustrated): You cannot blame me, Ursula! In my present situation, I need a distraction...
@@ -628,10 +605,9 @@ Every story in which Deb speaks.
 **DEB** (Doubtful): Don't you want Maddie to find love?
 **GRANDMA**: Of course I do! But unfortunately, she is not the best judge of character...
 
-### LDE_Hopeberry2024 — item discovered: 67054107
+### Love on the Vine — item discovered: Hopeberry Fizz
 `LDE_Hopeberry2024_FestivalJuice_05_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['67054107'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_FestivalJuice_05'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_FestivalJuice_05'], items=['Hopeberry Fizz'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **DEB**: I heard you have been on a string of terrible blind dates.
 **MADDIE** (Frustrated): Does EVERYONE know about my love life?
@@ -646,10 +622,9 @@ Every story in which Deb speaks.
 **MADDIE** (Relaxed): That ACTUALLY doesn't sound too bad.
 **DEB** (Joyous): I would not deceive you, my dear. He is a CATCH.
 
-### LDE_Hopeberry2024 — item discovered: 99151359
+### Love on the Vine — item discovered: Tray
 `LDE_Hopeberry2024_ReusableFurniture_07_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=LDE_Hopeberry2024, items=['99151359'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=LDE_Hopeberry2024, items=['LDE_Hopeberry2024_ReusableFurniture_06'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Love on the Vine, eventKey=LDE_Hopeberry2024, itemKeys=['LDE_Hopeberry2024_ReusableFurniture_06'], items=['Tray'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): I hope Hank's brother's got some rizz...
 **MADDIE** (Worried): I don't think I can take another terrible blind date!
@@ -767,19 +742,19 @@ Every story in which Deb speaks.
 **GRANDMA** (Surprised): Oh, this? I think this phone is acting up, always switching things up...
 **GRANDMA** (Thinking): Here we go. These cat photos will be gold for my followers!
 
-### SP_AmyTheCat2023 — decoration SP_AmyTheCat2023_Decoration_Slot26
+### Amy's Mystery — decoration SP_AmyTheCat2023_Decoration_Slot26
 `SP_AmyTheCat2023_Decoration_Slot26_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot26, event=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot26, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_AmyTheCat2023 — decoration SP_AmyTheCat2023_Decoration_Slot28
+### Amy's Mystery — decoration SP_AmyTheCat2023_Decoration_Slot28
 `SP_AmyTheCat2023_Decoration_Slot28_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot28, event=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot28, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_CherrysMysteryMeat2024 — decoration SP_CherrysMysteryMeat2024_Decoration_Slot32
+### Cherry's Mystery Meat — decoration SP_CherrysMysteryMeat2024_Decoration_Slot32
 `SP_CherrysMysteryMeat2024_Decoration_Slot32_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot32, event=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot32, event=Cherry's Mystery Meat, eventKey=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **PEARL** (Thinking): This event will be our best yet - I can feel it in my bones!
 **PEARL** (Thinking): I still need to find someone to man the official Hopewell Bay Centennial merchandise booth... and someone to look after the barbecue.
@@ -791,9 +766,9 @@ Every story in which Deb speaks.
 **GRANDMA** (Surprised): No, I did not notice anything at all! Oh, Pearl... I can take care of the barbecue.
 **PEARL** (Encouraging): Done and done!
 
-### SP_CherrysMysteryMeat2024 — decoration SP_CherrysMysteryMeat2024_Decoration_Slot37
+### Cherry's Mystery Meat — decoration SP_CherrysMysteryMeat2024_Decoration_Slot37
 `SP_CherrysMysteryMeat2024_Decoration_Slot37_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot37, event=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_CherrysMysteryMeat2024_Decoration_Slot37, event=Cherry's Mystery Meat, eventKey=SP_CherrysMysteryMeat2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **DEB** (Worried): Maddie, could you do me a favor and put up some of these posters of Hank?
 **MADDIE** (Worried): There's still no sign of him, huh?
@@ -802,9 +777,9 @@ Every story in which Deb speaks.
 **DEB** (Thinking): Mmmm... There is something... strangely familiar about this flavor.
 **MADDIE** (Thinking): That IS strange!
 
-### SP_CorpseFlower2025 — decoration SP_CorpseFlower2025_Decoration_Slot25
+### Petals of Tragedy — decoration SP_CorpseFlower2025_Decoration_Slot25
 `SP_CorpseFlower2025_Decoration_Slot25_Dialogue` · seen 25.06.01–26.07.01
-- trigger: decoration, decoration=SP_CorpseFlower2025_Decoration_Slot25, event=SP_CorpseFlower2025, moment=decoration placed (versions 25.06.01–26.07.01)
+- trigger: decoration, decoration=SP_CorpseFlower2025_Decoration_Slot25, event=Petals of Tragedy, eventKey=SP_CorpseFlower2025, moment=decoration placed (versions 25.06.01–26.07.01)
 
 **MADDIE** (Worried): I understand you're upset, but it was only a...
 **DEB** (Worried): Only a what? I grew that flower from a seedling and learned to love its unusual charm over decades!
@@ -814,18 +789,18 @@ Every story in which Deb speaks.
 **DEB** (Thinking): Would you do that, dear? Really?
 **MADDIE** (Relaxed): Absolutely!
 
-### SP_CorpseFlower2025 — decoration SP_CorpseFlower2025_Decoration_Slot26
+### Petals of Tragedy — decoration SP_CorpseFlower2025_Decoration_Slot26
 `SP_CorpseFlower2025_Decoration_Slot26_Dialogue` · seen 25.06.01–26.07.01
-- trigger: decoration, decoration=SP_CorpseFlower2025_Decoration_Slot26, event=SP_CorpseFlower2025, moment=decoration placed (versions 25.06.01–26.07.01)
+- trigger: decoration, decoration=SP_CorpseFlower2025_Decoration_Slot26, event=Petals of Tragedy, eventKey=SP_CorpseFlower2025, moment=decoration placed (versions 25.06.01–26.07.01)
 
 **DEB** (Thinking): Maddie, our discussion gave me a wonderful idea amid this misery.
 **DEB** (Thinking): I want to organize a worthy funeral for my beloved corpse flower.
 **MADDIE** (Surprised): A funeral... for a plant?
 **DEB** (Encouraging): Yes! A magnificent send-off for a magnificent specimen.
 
-### SP_CorpseFlower2025 — decoration SP_CorpseFlower2025_Decoration_Slot28
+### Petals of Tragedy — decoration SP_CorpseFlower2025_Decoration_Slot28
 `SP_CorpseFlower2025_Decoration_Slot28_Dialogue` · seen 25.06.01–26.07.01
-- trigger: decoration, decoration=SP_CorpseFlower2025_Decoration_Slot28, event=SP_CorpseFlower2025, moment=decoration placed (versions 25.06.01–26.07.01)
+- trigger: decoration, decoration=SP_CorpseFlower2025_Decoration_Slot28, event=Petals of Tragedy, eventKey=SP_CorpseFlower2025, moment=decoration placed (versions 25.06.01–26.07.01)
 
 **DEB**: Thank you everyone for coming today. It is with a heavy heart that I part with my beautiful Titan Arum.
 **DEB**: We've shared so many wonderful years together, and life will not be the same without it.
@@ -834,9 +809,9 @@ Every story in which Deb speaks.
 **HANK** (Thinking): Psst, Maddie! I love Deb so much and I'm so sorry for her terrible loss, but am I the only one who finds this smell overpowering?
 **MADDIE** (Frustrated): Nope. It's definitely overpowering.
 
-### SP_CorpseFlower2025 — decoration SP_CorpseFlower2025_Decoration_Slot29
+### Petals of Tragedy — decoration SP_CorpseFlower2025_Decoration_Slot29
 `SP_CorpseFlower2025_Decoration_Slot29_Dialogue` · seen 25.06.01–26.07.01
-- trigger: decoration, decoration=SP_CorpseFlower2025_Decoration_Slot29, event=SP_CorpseFlower2025, moment=decoration placed (versions 25.06.01–26.07.01)
+- trigger: decoration, decoration=SP_CorpseFlower2025_Decoration_Slot29, event=Petals of Tragedy, eventKey=SP_CorpseFlower2025, moment=decoration placed (versions 25.06.01–26.07.01)
 
 **DEB**: I know my beautiful lily would want this to be a celebration of life, rather than death, so I have a very special surprise for all of you.
 **MADDIE** (Surprised): R-really? What kind of surprise?
@@ -854,10 +829,9 @@ Every story in which Deb speaks.
 **JACKIE** (Surprised): Maddie... Remember Voyance's premonition? She predicted this!
 **MADDIE** (Thinking): You're right -- first Emilio and Bella's wedding, and now this!
 
-### SP_CorpseFlower2025 — item discovered: 37207756
+### Petals of Tragedy — item discovered: Beloved Corpse Flower
 `SP_CorpseFlower2025_LastCollectibleItemDiscovered_Dialogue` · seen 25.06.01–26.07.01
-- trigger: item, event=SP_CorpseFlower2025, items=['37207756'], moment=item discovered (versions 25.06.01–25.06.01)
-- trigger: item, event=SP_CorpseFlower2025, items=['SP_CorpseFlower2025_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Petals of Tragedy, eventKey=SP_CorpseFlower2025, itemKeys=['SP_CorpseFlower2025_CollectableItems_04'], items=['Beloved Corpse Flower'], moment=item discovered (versions 25.06.01–26.07.01)
 
 **MADDIE** (Thinking): What happened?? How can the corpse flower be dead?
 **DEB** (Worried): There is a big chunk missing from one of its petals. It almost looks like someone has taken a bite out of it!
@@ -867,9 +841,9 @@ Every story in which Deb speaks.
 **MADDIE** (Discouraged): But I don't think he enjoyed his mouthful too much...
 **DEB** (Discouraged): This is a dark day, my dear.
 
-### SP_DebsMystery2023 — decoration SP_DebsMystery2023_Decoration_Slot25
+### Deb’s Mystery — decoration SP_DebsMystery2023_Decoration_Slot25
 `SP_DebsMystery2023Decoration_Slot25` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot25, event=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot25, event=Deb’s Mystery, eventKey=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **DEB**: Ah, Maddie! Right on time! I’ve taken it upon myself to get a little assistance for you!
 **MADDIE** (Worried): Er... I’m okay! I don’t think Hank needs to help on this one.
@@ -880,9 +854,9 @@ Every story in which Deb speaks.
 **DEB** (Encouraging): Oh! I got lost in my thoughts! No, I called that handsome marine biologist of yours, Enrique!
 **MADDIE** (Surprised): E- Emilio?! He isn’t mine!
 
-### SP_DebsMystery2023 — decoration SP_DebsMystery2023_Decoration_Slot26
+### Deb’s Mystery — decoration SP_DebsMystery2023_Decoration_Slot26
 `SP_DebsMystery2023Decoration_Slot26` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot26, event=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot26, event=Deb’s Mystery, eventKey=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE**: Hi, Emilio! I’m sorry that Deb dragged you into this.  
   _earlier:_ ~~Hi Emilio! I’m sorry that Deb dragged you into this.~~ (until 23.12.01)
@@ -899,9 +873,9 @@ Every story in which Deb speaks.
 **EMILIO**: Ah! Sorry, no! She switched careers. She pilots commercial airlines now!
 **MADDIE** (Charming): Fascinating...
 
-### SP_DebsMystery2023 — decoration SP_DebsMystery2023_Decoration_Slot27
+### Deb’s Mystery — decoration SP_DebsMystery2023_Decoration_Slot27
 `SP_DebsMystery2023Decoration_Slot27` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot27, event=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot27, event=Deb’s Mystery, eventKey=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Wow!
 **MADDIE** (Worried): Boy.... is that... fragrant!
@@ -909,9 +883,9 @@ Every story in which Deb speaks.
 **GRANDMA** (Surprised): Oh Deb, I don’t know if I can have that thing stinking up my home.
 **GRANDMA** (Worried): It took over a month to get the smell out when we stashed your IMPROVED hopeberry juice!
 
-### SP_DebsMystery2023 — decoration SP_DebsMystery2023_Decoration_Slot28
+### Deb’s Mystery — decoration SP_DebsMystery2023_Decoration_Slot28
 `SP_DebsMystery2023Decoration_Slot28` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot28, event=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot28, event=Deb’s Mystery, eventKey=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE** (Encouraging): Rolled out the red carpet, huh?
 **DEB**: Well, it is a big occasion after all!
@@ -920,9 +894,9 @@ Every story in which Deb speaks.
 **DEB** (Encouraging): For me, it shows that there is beauty in everything. Even in the most unlikely places.
 **DEB** (Relaxed): Besides, doesn’t hurt to make this place look a bit fancy!
 
-### SP_DebsMystery2023 — decoration SP_DebsMystery2023_Decoration_Slot29
+### Deb’s Mystery — decoration SP_DebsMystery2023_Decoration_Slot29
 `SP_DebsMystery2023Decoration_Slot29` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot29, event=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot29, event=Deb’s Mystery, eventKey=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE** (Encouraging): Fleur-de-lis, spikes... I’m sensing a theme here!
 **DEB** (Relaxed): You got me! I ADORE European nobility and their architecture. I spent most of my twenties traveling through Europe, looking for...
@@ -930,10 +904,9 @@ Every story in which Deb speaks.
 **DEB** (Charming): ... What’s that? Oh, LOVE of course!
 **MADDIE** (Doubtful): Of course.
 
-### SP_DebsMystery2023 — item discovered: 69153515
+### Deb’s Mystery — item discovered: Inflorescence
 `SP_DebsMystery2023LastCollectibleItemDiscovered` · seen 23.09.02–26.07.01
-- trigger: item, event=SP_DebsMystery2023, items=['69153515'], moment=item discovered (versions 23.09.02–25.06.01)
-- trigger: item, event=SP_DebsMystery2023, items=['SP_DebsMystery2023_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Deb’s Mystery, eventKey=SP_DebsMystery2023, itemKeys=['SP_DebsMystery2023_CollectableItems_04'], items=['Inflorescence'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE** (Encouraging): I admit, it is quite beautiful.
 **DEB** (Charming): That it is Maddie, sweetie. They can grow tall and strong and live very long lives...
@@ -944,9 +917,9 @@ Every story in which Deb speaks.
 **DEB** (Discouraged): Even if we sometimes wish they did.
 **MADDIE** (Thinking): I wonder what she meant by that? Doesn’t she like her name?
 
-### SP_GrandmasMystery2024 — decoration SP_GrandmasMystery2024_Decoration_Slot37
+### Grandma's Mystery — decoration SP_GrandmasMystery2024_Decoration_Slot37
 `SP_GrandmasMystery2024_Decoration_Slot37_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_GrandmasMystery2024_Decoration_Slot37, event=SP_GrandmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_GrandmasMystery2024_Decoration_Slot37, event=Grandma's Mystery, eventKey=SP_GrandmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): Would I really kill Hank, my own sister's husband?
 **DEB** (Frustrated): According to what Maddie said, the evidence speaks for itself, Ursula.
@@ -960,9 +933,9 @@ Every story in which Deb speaks.
 **MADDIE** (Thinking): So, where IS Hank?
 **GRANDMA** (Discouraged): That is a more complicated question, dearie...
 
-### SP_HanksMystery2024 — decoration SP_HanksMystery2024_Decoration_Slot26
+### Proposal Mystery — decoration SP_HanksMystery2024_Decoration_Slot26
 `SP_HanksMystery2024_Decoration_Slot26_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot26, event=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_HanksMystery2024_Decoration_Slot26, event=Proposal Mystery, eventKey=SP_HanksMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **DEB**: Oh, Maddie! How do you young people stand the merciless ebb and flow of romance?
 **MADDIE**: What is it, Deb?
@@ -971,9 +944,9 @@ Every story in which Deb speaks.
 **DEB** (Frustrated): Not a diamond in sight - not even a bouquet of roses!
 **DEB** (Frustrated): I-I think that Hank is going to leave me! I don't know what's going on in that handsome head of his.
 
-### SP_MasonsMystery2023 — decoration SP_MasonsMystery2023_Decoration_Slot26
+### Holiday Mystery — decoration SP_MasonsMystery2023_Decoration_Slot26
 `SP_MasonsMystery2023_Decoration_Slot26_Dialogue` · seen 23.11.02–26.07.01
-- trigger: decoration, decoration=SP_MasonsMystery2023_Decoration_Slot26, event=SP_MasonsMystery2023, moment=decoration placed (versions 23.11.02–26.07.01)
+- trigger: decoration, decoration=SP_MasonsMystery2023_Decoration_Slot26, event=Holiday Mystery, eventKey=SP_MasonsMystery2023, moment=decoration placed (versions 23.11.02–26.07.01)
 
 **DEB** (Encouraging): How pretty, sis!
 **GRANDMA** (Surprised): It wasn’t me! Someone is coming over and decorating my home in secret!
@@ -981,10 +954,9 @@ Every story in which Deb speaks.
 **GRANDMA**: No.... No, I guess not. But I’m wondering who it might be!
 **DEB** (Relaxed): Well... When they’re done, tell them to do my house too.
 
-### SP_MiniHorseMystery2024 — item discovered: 95690905
+### Mini Horse Mystery — item discovered: Grooming Bag
 `SP_MiniHorseMystery2024_LastCollectibleItemDiscovered_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=SP_MiniHorseMystery2024, items=['95690905'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=SP_MiniHorseMystery2024, items=['SP_MiniHorseMystery2024_CollectableItems_04'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Mini Horse Mystery, eventKey=SP_MiniHorseMystery2024, itemKeys=['SP_MiniHorseMystery2024_CollectableItems_04'], items=['Grooming Bag'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **HANK**: So, Deb... Would you make me the happiest man on earth and be my wife?
 **DEB** (Joyous): Of course I will, Hanky-Poo!
@@ -1014,9 +986,9 @@ Every story in which Deb speaks.
 **DEB** (Doubtful): No, Little Reginald. The HORSE.
 **MADDIE** (Relaxed): Aaaah, right.
 
-### SP_NoRest2025 — decoration SP_NoRest2025_Decoration_Slot26
+### No Rest for the Wicked — decoration SP_NoRest2025_Decoration_Slot26
 `SP_NoRest2025_Decoration_Slot26_Dialogue` · seen 26.03.01–26.07.01
-- trigger: decoration, decoration=SP_NoRest2025_Decoration_Slot26, event=SP_NoRest2025, moment=decoration placed (versions 26.03.01–26.07.01)
+- trigger: decoration, decoration=SP_NoRest2025_Decoration_Slot26, event=No Rest for the Wicked, eventKey=SP_NoRest2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **DEB**: Hello, sweetie!
 **MADDIE**: Hi, Deb! Thanks for dropping by. I just wanted to talk about Charlotte-
@@ -1038,9 +1010,9 @@ Every story in which Deb speaks.
 **MADDIE** (Thinking): Looks like Deb and Grandma will have a tense match...
 **ANTIQUEDEALER** (Thinking): They have a history of competition, and I doubt it won't be resolved in the pickleball courts.
 
-### SP_Pickleball2025 — decoration SP_Pickleball2025_Decoration_Slot35
+### Smartphone Pickle — decoration SP_Pickleball2025_Decoration_Slot35
 `SP_Pickleball2025_Decoration_Slot35_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_Pickleball2025_Decoration_Slot35, event=SP_Pickleball2025, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_Pickleball2025_Decoration_Slot35, event=Smartphone Pickle, eventKey=SP_Pickleball2025, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): What a game, Deb! It was SO close.
 **DEB** (Doubtful): *Sniffs* Your Grandma cheated again, I am sure of it!
@@ -1063,14 +1035,14 @@ Every story in which Deb speaks.
 **MADDIE** (Encouraging): We have plenty of space, and it would be so cool to have the circus here - at the Mansion!
 **DEB** (Thinking): I thought you would say that. You should check this with Ursula, my dear. She might... have some objections.
 
-### SP_SpringSeason2023 — decoration SP_SpringSeason2023_Decoration_29
+### Spring Season — decoration SP_SpringSeason2023_Decoration_29
 `SP_SpringSeason2023_Decoration_29_Dialogue` · seen 23.09.02–26.07.01
-- trigger: decoration, decoration=SP_SpringSeason2023_Decoration_29, event=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
+- trigger: decoration, decoration=SP_SpringSeason2023_Decoration_29, event=Spring Season, eventKey=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 
-### SP_TheWindOfMystery2024 — decoration SP_TheWindOfMystery2024_Decoration_Slot33
+### The Winds of Mystery — decoration SP_TheWindOfMystery2024_Decoration_Slot33
 `SP_TheWindOfMystery2024_Decoration_Slot33_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot33, event=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot33, event=The Winds of Mystery, eventKey=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE**: Deb! Hank! Nice to see you there!
 **HANK** (Frustrated): ZzzzZZzzz...
@@ -1087,9 +1059,9 @@ Every story in which Deb speaks.
 **MADDIE** (Surprised): What?!
 **DEB** (Frustrated): What? Oh... That? Never mind, I didn’t say anything. C’mon Hank. I really need to go to sleep...
 
-### SP_TheWindOfMystery2024 — decoration SP_TheWindOfMystery2024_Decoration_Slot34
+### The Winds of Mystery — decoration SP_TheWindOfMystery2024_Decoration_Slot34
 `SP_TheWindOfMystery2024_Decoration_Slot34_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot34, event=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_TheWindOfMystery2024_Decoration_Slot34, event=The Winds of Mystery, eventKey=SP_TheWindOfMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **RODDY**: Hey, Maddie!
 **MADDIE** (Encouraging): Hi, Roddy! Just in time; you can help me fertilize these tomatoes!
@@ -1101,9 +1073,9 @@ Every story in which Deb speaks.
 **RODDY** (Worried): Fast.
 **MADDIE** (Relaxed): I’m sure it’ll be fine!
 
-### SP_WeddingMystery2024 — decoration SP_WeddingMystery2024_Decoration_Slot32
+### The Wedding Mystery — decoration SP_WeddingMystery2024_Decoration_Slot32
 `SP_WeddingMystery2024_Decoration_Slot32_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot32, event=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot32, event=The Wedding Mystery, eventKey=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE**: Hello, Deb. Getting ready for the big day, I see.
 **DEB** (Charming): Yes! Busy, busy!
@@ -1115,9 +1087,9 @@ Every story in which Deb speaks.
 **GRANDMA** (Worried): I... I’m sorry, dearie. I don’t know what came over me. I’ll go see if Maddie needs some help.
 **DEB** (Charming): Good! And don’t worry. I’ll find out what Hank is hiding!
 
-### SP_WeddingMystery2024 — decoration SP_WeddingMystery2024_Decoration_Slot35
+### The Wedding Mystery — decoration SP_WeddingMystery2024_Decoration_Slot35
 `SP_WeddingMystery2024_Decoration_Slot35_Dialogue` · seen 25.05.01–26.07.01
-- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot35, event=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
+- trigger: decoration, decoration=SP_WeddingMystery2024_Decoration_Slot35, event=The Wedding Mystery, eventKey=SP_WeddingMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): So! Soon to be Mr and Mrs. Boulton! I’m surprised you took on the Boulton name, Hank!
 **HANK** (Joyous): What, are you kidding? Hank Boulton... Can’t ask for a better name!

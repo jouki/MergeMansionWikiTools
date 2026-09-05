@@ -1,10 +1,9 @@
 # Malzar
 Every story in which Malzar speaks.
 
-### CBE_VoyancesVisions — item discovered: 80336061
+### Voyance's Visions — item discovered: Malzar - First Answer
 `CBE_VoyancesVisions_MalzarAActiveC_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VoyancesVisions, items=['80336061'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VoyancesVisions, items=['CBE_VoyancesVisions_MalzarAActive_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['CBE_VoyancesVisions_MalzarAActive_01'], items=['Malzar - First Answer'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **MALZAR**: </i>Through tangled roots of kin we tread, unveiling truths long left unsaid.</i>
 **LADY VOYANCE** (Thinking): Does that make sense to you? Sounds like family secrets...
@@ -31,10 +30,9 @@ Every story in which Malzar speaks.
 **JACKIE** (Thinking): What does that mean??
 **LADY VOYANCE** (Thinking): Patience! Let's see what else he has to say...
 
-### CBE_VoyancesVisions — item discovered: 14237226
+### Voyance's Visions — item discovered: Malzar - Second Answer
 `CBE_VoyancesVisions_MalzarBActiveC_Dialogue` · seen 25.05.01–26.07.01
-- trigger: item, event=CBE_VoyancesVisions, items=['14237226'], moment=item discovered (versions 25.05.01–25.06.01)
-- trigger: item, event=CBE_VoyancesVisions, items=['CBE_VoyancesVisions_MalzarBActive_01'], moment=item discovered (versions 26.03.01–26.07.01)
+- trigger: item, event=Voyance's Visions, eventKey=CBE_VoyancesVisions, itemKeys=['CBE_VoyancesVisions_MalzarBActive_01'], items=['Malzar - Second Answer'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **LADY VOYANCE**: Let's hear it, Malzar - what is your cosmic message?
 **MALZAR**: </i>Buried deep, the ties that bind, a truth the bloodline must not find.</i>
