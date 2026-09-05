@@ -702,8 +702,9 @@ Every story in which Jackie speaks.
 **GRANDMA**: What is it, dearie?
 **MADDIE** (Thinking): I wonder what else is down there...
 
-### FirstFloorPantry 05
+### Pantry: FirstFloorPantry_05
 `FirstFloorPantry_05` · seen 26.07.01–26.07.01
+- trigger: area, area=Pantry, areaId=FirstFloorPantry, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Frustrated): Ugh. To think I almost felt sorry for Arthur...
 **JACKIE**: Maddie!
@@ -718,8 +719,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Frustrated): Aren't you hearing me? The crimes - they're the same crimes she was convicted of!
 **JACKIE** (Annoyed): They made her the fall-gal for their own crimes!
 
-### FirstFloorPantry 06
+### Pantry: FirstFloorPantry_06
 `FirstFloorPantry_06` · seen 26.07.01–26.07.01
+- trigger: area, area=Pantry, areaId=FirstFloorPantry, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Surprised): That's an amazing find Jackie. Did you bring this to the police?
 **JACKIE** (Charming): No. Not yet. I have to figure out who she was actually investigating. And this draft isn't proof enough.
@@ -2979,8 +2981,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Charming): Sure is!
 **JACKIE** (Frustrated): Well, let's give it a try because I can't stand this smell much longer!
 
-### Secretsociety 02.1
+### Secret Society: Secretsociety_02.1
 `Secretsociety_02.1` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **JACKIE** (Annoyed): Maddie, you're brilliant! I can finally breathe in here.
 **MADDIE** (Thinking): Yeah, but what on earth are those numbers?
@@ -3040,8 +3043,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Surprised): Oh! That’s right! It’s so out of place too!
 **JACKIE** (Thinking): Hmm... I wonder what caused them to shut it down?
 
-### Secretsociety 06.1
+### Secret Society: Secretsociety_06.1
 `Secretsociety_06.1` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **JACKIE** (Doubtful): Are you actually planning to stand on this bridge?
 **MADDIE** (Doubtful): How else am I supposed to fix it?
@@ -3049,8 +3053,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Thinking): I know, I know. What if I just place one foot on it like so...
 **JACKIE** (Surprised): Wait, do you hear rumbling? Step back, Maddie!
 
-### Secretsociety 06.2
+### Secret Society: Secretsociety_06.2
 `Secretsociety_06.2` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Discouraged): Phew! That was close... Thanks, Jackie.
 **JACKIE**: I might have to add "saving lives" to my professional profile!
@@ -3058,8 +3063,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Encouraging): I trust you can build a much sturdier bridge?
 **MADDIE** (Charming): Absolutely!
 
-### Secretsociety 07
+### Secret Society: Secretsociety_07
 `Secretsociety_07` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **JACKIE** (Relaxed): That was a solid bridge, Maddie! I'm sorry if I was still hesitant to cross it.
 **MADDIE**: I don't blame you after the events we've seen down here...
@@ -3083,16 +3089,18 @@ Every story in which Jackie speaks.
 **MADDIE** (Thinking): Do you think presidents have been here?
 **JACKIE**: I wouldn't be surprised. These societies were known to host a few presidents over the years...
 
-### Secretsociety 09
+### Secret Society: Secretsociety_09
 `Secretsociety_09` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Look! It's the same numbers that were in the pool!
 **JACKIE** (Thinking): Wow, guess it does have a purpose. Do you think it's some sort of puzzle?
 **MADDIE** (Encouraging): It has to be! 
 **JACKIE**: Ooh, I bet if we solve this, we might unearth some more secrets... 
 
-### Secretsociety 10
+### Secret Society: Secretsociety_10
 `Secretsociety_10` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Frustrated): Hmm, I just have to put the last piece of this puzzle together.
 **MADDIE** (Frustrated): If this goes here, then... Hmmm I almost have it...
@@ -3107,12 +3115,14 @@ Every story in which Jackie speaks.
 **MADDIE** (Surprised): And it's bouncing off the fire bowl...
 **JACKIE** (Joyous): I'm sure this light reflection puzzle unlocks something... Let's polish the bowl and see where it leads!
 
-### Secretsociety 12
+### Secret Society: Secretsociety_12
 `Secretsociety_12` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 
-### Secretsociety 12.1
+### Secret Society: Secretsociety_12.1
 `Secretsociety_12.1` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **JACKIE** (Surprised): I thought I heard a faint ringing, and I was right! What's a telephone doing here?
 **MADDIE** (Thinking): Let's find out! It's a bit muffled...
@@ -3129,8 +3139,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Charming): Can you believe we actually solved one of the Fellowship's puzzles?!
 **MADDIE** (Joyous): Based on that message, there might be more around the mansion. I can't wait!
 
-### Secretsociety Intro
+### Secret Society: Secretsociety_Intro
 `Secretsociety_Intro` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Wow! I can’t believe this was under the conservatory all this time!
 **JACKIE** (Thinking): How did you know it was here?
@@ -3145,8 +3156,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Doubtful): Ugh... That’s not the only thing you’re probably smelling... Look at that water!
 **JACKIE** (Doubtful): You know, you should really get your plumbing fixed.
 
-### Secretsociety Unlock
+### Secret Society: Secretsociety_Unlock
 `Secretsociety_Unlock` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **JACKIE**: Hey, Maddie! There you are! I have something to ask-
 **MADDIE** (Joyous): Jackie! I was right, the very same blue gem I discovered is right here at the conservatory!
@@ -3257,16 +3269,18 @@ Every story in which Jackie speaks.
 **JACKIE** (Thinking): I hope so. I grabbed a bunch of files that looked important, but I'll have to go over it back at the office!
 **JACKIE** (Joyous): Thanks for all your help, Maddie! I'll keep you updated.
 
-### Study01Intro
+### Study: Study01Intro
 `Study01Intro` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **JACKIE** (Surprised): Wow! This place is more trashed than the hallway!
 **JACKIE** (Thinking): Is this an office?
 **MADDIE** (Doubtful): It’s a study... But whose?
 **MADDIE** (Thinking): There must be something in here that could help Grandma!
 
-### Study02
+### Study: Study02
 `Study02` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **HOLDEN** (Joyous): A ha! The scene of the crime...
 **JACKIE** (Surprised): Hey, you’re not allowed to be in here!
@@ -3274,8 +3288,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Annoyed): Great... Now I got two reporters hounding me.
 **JACKIE** (Doubtful): Hey!
 
-### Study03
+### Study: Study03
 `Study03` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Hey, what’s this?!
 **JACKIE**: It looks like a ledger of some sort? But for what?
@@ -3288,8 +3303,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Surprised): I know... It’s almost as if she was a-
 **HOLDEN** (Joyous): Bootlegger!
 
-### Study04
+### Study: Study04
 `Study04` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **JACKIE** (Annoyed): Holden! I thought I told you to back off!
 **MADDIE** (Discouraged): This can’t be right...
@@ -3302,8 +3318,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Worried): If this news was to get out... Jackie, I know you’re a reporter, but-
 **JACKIE**: Maddie... Don’t worry. I’m not like that dimwit, Holden. Besides, we’re friends now.
 
-### Study05
+### Study: Study05
 `Study05` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE**: Thanks Jackie! It’s kinda cool to have a reporter as a friend.
 **JACKIE** (Encouraging): I’ll be honest though, all this would make for one heck of a story!
@@ -3315,8 +3332,9 @@ Every story in which Jackie speaks.
 **JACKIE**: Ahem. Let’s keep looking around, shall we?
 **GRANDMA**: What have you got there, dearie?
 
-### Study06
+### Study: Study06
 `Study06` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Grandma!
 **JACKIE** (Encouraging): Oh, it’s nothing, Ms. Boulton. We were just looking around an-
@@ -3327,8 +3345,9 @@ Every story in which Jackie speaks.
 **GRANDMA** (Joyous): Oh, that old thing?! Ha! Haven’t seen that in ages! Never was much of a bookie, but it turned a tidy little profit.
 **MADDIE** (Surprised): You admit it?!
 
-### Study07
+### Study: Study07
 `Study07` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Worried): Grandma, why did you do it?
 **GRANDMA** (Frustrated): I did what I had to dearie. For the family. Just like what you’re doing now.
@@ -3340,8 +3359,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Surprised): ...
 **JACKIE** (Surprised): Your grandma can be scary sometimes...
 
-### Study08
+### Study: Study08
 `Study08` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Thinking): She... Wants me to burn it?
 **JACKIE** (Thinking): That’s what she said. I guess she doesn’t want people to know either.
@@ -3436,8 +3456,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Surprised): You know a wizard?
 **MADDIE** (Relaxed): Yeah! Heikki, the lighthouse keeper. He’s a wizard... erm... Well... Sort of.
 
-### WalkInCloset 02
+### Walk-in Closet: WalkInCloset_02
 `WalkInCloset_02` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **JACKIE** (Doubtful): Maddie! You never did respond to my text!
 **MADDIE** (Surprised): Huh? Oh, hey Jackie! What are you doing here?
@@ -3449,8 +3470,9 @@ Every story in which Jackie speaks.
 **JACKIE** (Thinking): Are you going to go on another one?
 **MADDIE** (Worried): Arthur did ask, but I'm not quite sure. All of it just feels... Wrong.
 
-### WalkInCloset 03
+### Walk-in Closet: WalkInCloset_03
 `WalkInCloset_03` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): Well, these clothes are definitely owned by Grandma.
 **JACKIE** (Joyous): Your grandmother does have a particular vintage style!
@@ -3476,8 +3498,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Surprised): There! It clicked. The wing made a sound when I turned it. This is a mechanism, Jackie!
 **JACKIE**: ...Okay, a mysterious click wins. For now. But we are still debriefing Arthur later.
 
-### WalkInCloset 09
+### Walk-in Closet: WalkInCloset_09
 `WalkInCloset_09` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: Grandpa Charlie's old wardrobe... Let's see what I can find in here.
 **JACKIE** (Surprised): Tailored suits, cashmere peacoats, even his handkerchiefs were monogrammed. Wow, Maddie, he was into this!

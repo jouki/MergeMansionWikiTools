@@ -1,6 +1,11 @@
 # Grandma's Room
 
 
+### Grandma's Room: GrandmaRoom_01
+`GrandmaRoom_01` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+
 ### Grandma's Room: Remove clutter
 `GrandmaRoom_02` · seen 25.10.01–26.07.01
 - trigger: area, area=Grandma's Room, areaId=GrandmaRoom, hotspotId=GrandmaRoomSewingCornerRemoveClutter, phase=task appears, task=Remove clutter (versions 25.10.01–26.07.01)
@@ -20,6 +25,26 @@
 **MADDIE** (Joyous): That has to be it. Clothes as a communication tactic!? That's genius!
 **MADDIE** (Thinking): There's no decoder here, but it does beg the question, what exactly needed to be communicated?
 **MADDIE** (Doubtful): I wonder if this is connected to the Secret Society or something deeper?
+
+### Grandma's Room: GrandmaRoom_04
+`GrandmaRoom_04` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+
+### Grandma's Room: GrandmaRoom_05
+`GrandmaRoom_05` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+
+### Grandma's Room: GrandmaRoom_06
+`GrandmaRoom_06` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+
+### Grandma's Room: GrandmaRoom_07
+`GrandmaRoom_07` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
 
 ### Grandma's Room: Repair bedframe
 `GrandmaRoom_08` · seen 25.10.01–26.07.01
@@ -61,6 +86,21 @@
 **MADDIE** (Thinking): The bedposts triggered the bed to move forward and opened this 'door'!
 **MADDIE** (Doubtful): Grandma really is always two steps ahead of me!
 
+### Grandma's Room: GrandmaRoom_11
+`GrandmaRoom_11` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+
+### Grandma's Room: GrandmaRoom_12
+`GrandmaRoom_12` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+
+### Grandma's Room: GrandmaRoom_13
+`GrandmaRoom_13` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+
 ### Grandma's Room: Clean shelf
 `GrandmaRoom_14` · seen 25.10.01–26.07.01
 - trigger: area, area=Grandma's Room, areaId=GrandmaRoom, hotspotId=GrandmaRoomSecurityWallCleanShelf, phase=task completed, task=Clean shelf (versions 25.10.01–26.07.01)
@@ -73,6 +113,24 @@
 **MADDIE** (Worried): It's just a walk on the beach.
 **ARTHUR** (Talking): Alright, alright. I'll take what I can get! A walk it is. See you soon, Mads!
 **MADDIE** (Frustrated): What did I just do?
+
+### Grandma's Room: GrandmaRoom_15
+`GrandmaRoom_15` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+
+### Grandma's Room: GrandmaRoom_16
+`GrandmaRoom_16` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+
+### Grandma's Room: GrandmaRoom_17_after
+`GrandmaRoom_17_after` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Encouraging): It worked!
+**MADDIE** (Encouraging): This wardrobe was the door in question! Who would have thought!
+**MADDIE** (Encouraging): I can't wait to see what's been kept hidden behind these doors!
 
 ### Grandma's Room: Give Heikki a chair to rest
 `GrandmaRoom_CharacterTask1` · seen 25.10.01–26.07.01
@@ -126,6 +184,11 @@
 **HEIKKI** (Joyous): It felt good. To have the pieces on the board game. Thank you, Maddie. For all of this.
 **MADDIE** (Joyous): That's what friends are for. I have a great feeling about the Hopewell Bay's Gaming Guild.
 **HEIKKI** (Joyous): As do I. A new adventure begins!
+
+### Grandma's Room: GrandmaRoom_Intro
+`GrandmaRoom_Intro` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
 
 ### Grandma's Room: Fix bookends
 `GrandmaRoom_POI_Bookends` · seen 25.10.01–26.07.01

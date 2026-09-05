@@ -1158,94 +1158,107 @@ Every story in which Grandma speaks.
 **RODDY** (Charming): We were just too embarrassed. And a little scared of you. Respectfully.
 **GRANDMA** (Frustrated): Hmph. Next time, ask for help before the place fills up with giant chocolates.
 
-### CBE TheGreatEscapeA CleanerCart1 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeA_CleanerCart1_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeA, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Hmm... I’ll use this to get around and “clean up”.
 **GRANDMA**: You never know what useful things people throw away.
 **GRANDMA** (Charming): One person’s trash is another person’s treasure!
 
-### CBE TheGreatEscapeA GrandmasCell Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeA_GrandmasCell_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeA, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA** (Charming): Finally! The last bar is off. Time to go!
 **GRANDMA**: Good thing I found these Bolt Cutters! 
 **GRANDMA**: But I should hide them in case I end up in here again.
 
-### CBE TheGreatEscapeA Intro Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeA_Intro_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeA, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA** (Calling): Well, that was easy enough!
 **GRANDMA** (Calling): I still need to earn my fellow inmate’s trust and I heard this place has been having trouble with their mail...
 **GRANDMA** (Charming): I know! I'll charm them with my baking skills and make sure their letters get sent properly.
 
-### CBE TheGreatEscapeA PaperAndPen3 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeA_PaperAndPen3_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeA, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Hmm... Looks like some of the girls have been writing letters.
 **GRANDMA**: I shouldn’t open them now.
 **GRANDMA**: However...
 **GRANDMA** (Charming): I can give Maddie a call and ask her to do it!
 
-### CBE TheGreatEscapeA PostBox Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeA_PostBox_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeA, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **MADDIE** (Calling): You want me to go through the mail?!
 **GRANDMA** (Calling): Yes, dearie.
 **MADDIE** (Calling): I don’t know how comfortable I feel about this...
 **GRANDMA** (Calling): The mailman owes me a few favors, so you won’t get in any trouble.
 
-### CBE TheGreatEscapeA Socks05 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeA_Socks05_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeA, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Ah, perfect!
 **GRANDMA**: These jail outfits should contain the ID badges I need to get into the other rooms.
 **GRANDMA** (Charming): But I’ll need to get rid of the evidence!
 
-### CBE TheGreatEscapeA StampThirdClass1 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeA_StampThirdClass1_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeA, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA** (Charming): Let’s make sure these letters make their way to their destination.
 **GRANDMA**: Oh... These remind me of Maddie’s stamp collection!
 **GRANDMA**: She was really into them, too. I should probably save a few for her...
 
-### CBE TheGreatEscapeA Tools1 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeA_Tools1_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeA, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Hmm... I’m quite surprised to find these tools!
 **GRANDMA**: Then again, it was so messy, you could hide an elephant in here...
 **GRANDMA** (Charming): Well, I’m sure they won’t mind if I borrow them for a while.
 
-### CBE TheGreatEscapeA Tools5 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeA_Tools5_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeA, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Finally, some proper tools!
 **GRANDMA**: These Bolt Cutters should do the trick.
 **GRANDMA** (Charming): Nothing like a little upper body workout in jail...
 
-### CBE TheGreatEscapeA WardenSafe3 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeA_WardenSafe3_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeA, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA** (Charming): Excellent!
 **GRANDMA**: This should help me get some leverage in here.
 **GRANDMA**: Hmm... Perhaps I should send some of this to Maddie?
 
-### CBE TheGreatEscapeB CleanerCart1 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeB_CleanerCart1_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeB, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Hmm... I’ll use this to get around and “clean up”.
 **GRANDMA**: You never know what useful things people throw away.
 **GRANDMA** (Charming): One person’s trash is another person’s treasure!
 
-### CBE TheGreatEscapeB GrandmasCell Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeB_GrandmasCell_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeB, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA** (Charming): Finally! The last bar is off. Time to go!
 **GRANDMA**: Good thing I found these Bolt Cutters! 
 **GRANDMA**: But I should hide them in case I end up in here again.
 
-### CBE TheGreatEscapeB Intro Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeB_Intro_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeB, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **MADDIE** (Calling): Grandma?! Are you okay?
 **MADDIE** (Calling): When they took you away, I was so worried!
@@ -1254,52 +1267,59 @@ Every story in which Grandma speaks.
 **GRANDMA** (Calling): I’m in a bit of a bind right now...
 **GRANDMA** (Calling): Would you be a dear and help me out?
 
-### CBE TheGreatEscapeB PaperAndPen3 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeB_PaperAndPen3_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeB, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Hmm... Looks like some of the girls have been writing letters.
 **GRANDMA**: I shouldn’t open them now.
 **GRANDMA**: However...
 **GRANDMA** (Charming): I can give Maddie a call and ask her to do it!
 
-### CBE TheGreatEscapeB PostBox Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeB_PostBox_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeB, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **MADDIE** (Calling): You want me to go through the mail?!
 **GRANDMA** (Calling): Yes, dearie.
 **MADDIE** (Calling): I don’t know how comfortable I feel about this...
 **GRANDMA** (Calling): The mailman owes me a few favors, so you won’t get in any trouble.
 
-### CBE TheGreatEscapeB Socks05 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeB_Socks05_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeB, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Ah, perfect!
 **GRANDMA**: These jail outfits should contain the ID badges I need to get into the other rooms.
 **GRANDMA** (Charming): But I’ll need to get rid of the evidence!
 
-### CBE TheGreatEscapeB StampThirdClass1 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeB_StampThirdClass1_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeB, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA** (Charming): Let’s make sure these letters make their way to their destination.
 **GRANDMA**: Oh... These remind me of Maddie’s stamp collection!
 **GRANDMA**: She was really into them, too. I should probably save a few for her...
 
-### CBE TheGreatEscapeB Tools1 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeB_Tools1_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeB, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Hmm... I’m quite surprised to find these tools!
 **GRANDMA**: Then again, it was so messy, you could hide an elephant in here...
 **GRANDMA** (Charming): Well, I’m sure they won’t mind if I borrow them for a while.
 
-### CBE TheGreatEscapeB Tools5 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeB_Tools5_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeB, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Finally, some proper tools!
 **GRANDMA**: These Bolt Cutters should do the trick.
 **GRANDMA** (Charming): Nothing like a little upper body workout in jail...
 
-### CBE TheGreatEscapeB WardenSafe3 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeB_WardenSafe3_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeB, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA** (Charming): Excellent!
 **GRANDMA**: This should help me get some leverage in here.
@@ -1573,8 +1593,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: What is it, dearie?
 **MADDIE** (Thinking): I wonder what else is down there...
 
-### Dancefloor 05
+### Dancefloor: Dancefloor_05
 `Dancefloor_05` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **SULLIVAN** (Charming): Criminals? Of course not. Not yet, at least...
 **SULLIVAN** (Relaxed): Innocent until proven guilty and all that.
@@ -1586,8 +1607,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Frustrated): Right. But you can expect to see me again... With friends.
 **GRANDMA** (Frustrated): And Soon...
 
-### Dancefloor 07
+### Dancefloor: Dancefloor_07
 `Dancefloor_07` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): Grandma, what was she talking about? A second watch? I've only seen one...
 **GRANDMA** (Frustrated): Winston, we need to check all the windows and doors. Make sure all the locks are still in good condition.
@@ -1600,8 +1622,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Surprised): R-Really?!
 **GRANDMA** (Frustrated): It’s time you learned the truth...
 
-### Dancefloor 08
+### Dancefloor: Dancefloor_08
 `Dancefloor_08` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): I know I've been a bit coy with you, dearie, but now you must listen carefully...  
   _earlier:_ ~~Hmm, I think it's time to go meet Grandma and find out what she has to say...~~ (until 25.02.02)
@@ -1628,8 +1651,9 @@ Every story in which Grandma speaks.
   _earlier:_ ~~Thank you for telling me, Grandma. I'll head back inside now.~~ (until 25.02.02)
 **MADDIE** (Worried): I have to be more vigilant. I'm not letting people threaten us any longer, and I won't let them take Grandma away again!
 
-### Dancefloor Intro
+### Dancefloor: Dancefloor_Intro
 `Dancefloor_Intro` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **SULLIVAN** (Encouraging): ...and I know that YOU have something to do with it!
 **GRANDMA** (Annoyed): You’re dangerously close to crossing a line, detective...
@@ -1641,8 +1665,9 @@ Every story in which Grandma speaks.
 **WINSTON** (Frustrated): I think not, Ma’am...
 **MADDIE** (Annoyed): How dare you enter my home without a warrant? What kind of detective are you?!
 
-### DiningRoom03
+### Dining Room: DiningRoom03
 `DiningRoom03` · seen 23.09.02–26.07.01
+- trigger: area, area=Dining Room, areaId=DiningRoom, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **WINSTON** (Thinking): Deb...
 **DEB** (Annoyed): Winston.
@@ -1746,8 +1771,9 @@ Every story in which Grandma speaks.
 
 **GRANDMA**: Knitting is a great hobby to have! For example, one can knit open the lock... like this!
 
-### FirstFloorHallway 02
+### The Hallway of Curiosities: FirstFloorHallway_02
 `FirstFloorHallway_02` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): This ship is really impressive!
 **GRANDMA** (Encouraging): Ah yes, The SS Auralis. Clara built this with her father, Ignatius.
@@ -1763,8 +1789,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Annoyed): Hmph! That's not fair.
 **GRANDMA** (Discouraged): No... It wasn't.
 
-### FirstFloorHallway 03
+### The Hallway of Curiosities: FirstFloorHallway_03
 `FirstFloorHallway_03` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Doubtful): I'm surprised that Agatha was so hard on her!
 **GRANDMA** (Thinking): To be fair, she was only looking out for her best interests...
@@ -1791,8 +1818,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Encouraging): I'm sure he would have loved that.
 **MADDIE** (Charming): Yeah... I definitely would have. 
 
-### FirstFloorHallway 05
+### The Hallway of Curiosities: FirstFloorHallway_05
 `FirstFloorHallway_05` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: Well... This little reading nook came out really nice!
 **GRANDMA** (Encouraging): It really did, dearie! It's just like I remember it!
@@ -1807,8 +1835,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): So she had a lot of practice.
 **MADDIE** (Relaxed): I bet she would have made an amazing marine biologist!
 
-### FirstFloorHallway 06
+### The Hallway of Curiosities: FirstFloorHallway_06
 `FirstFloorHallway_06` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Doubtful): Hmmm...
 **GRANDMA**: What is it, dearie?
@@ -1823,8 +1852,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): But I'll be around.
 **MADDIE**: That's okay, Grandma. I'll continue here!
 
-### FirstFloorHallway Intro
+### The Hallway of Curiosities: FirstFloorHallway_Intro
 `FirstFloorHallway_Intro` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Joyous): Yes! A whole new floor to explore and restore!
 **—**: I'll be the first to admit it, dearie. You've done an amazing job so far.
@@ -1836,8 +1866,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Encouraging): Then I won't let either of you down!  
   _(1 cosmetic edit not shown)_
 
-### FirstFloorKitchen 06
+### Kitchen: FirstFloorKitchen_06
 `FirstFloorKitchen_06` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **GRANDMA**: Hello, dearie.
 **MADDIE** (Surprised): Grandma!
@@ -1850,8 +1881,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Surprised): What is it?!
 **GRANDMA** (Encouraging): The Boulton family pie recipe!
 
-### FirstFloorKitchen 07
+### Kitchen: FirstFloorKitchen_07
 `FirstFloorKitchen_07` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): You know, it's quite nice to do something as a family again, for a change!
 **GRANDMA** (Relaxed): You're right dearie. We really don't spend enough time together, do we?
@@ -1922,8 +1954,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Charming): Oh yes, dearie. That’s the old tunnel that lead to the Boulton tin mine!
 **GRANDMA** (Charming): Why don’t you read Ignatius’s journal about it? It tells about the mines “interesting” history!
 
-### Gallery08
+### Gallery: Gallery08
 `Gallery08` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Discouraged): This has to be some sort of twisted joke.
 **MADDIE** (Discouraged): I have so many questions and I'm scared to find out what the answers are.
@@ -1936,8 +1969,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Doubtful): There are portraits and photographs all over this mansion, dearie.
 **MADDIE** (Frustrated): I think you know which one I mean. A certain wedding picture...
 
-### Gallery08.2
+### Gallery: Gallery08.2
 `Gallery08.2` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Discouraged): That picture is... not what you think it is.
 **MADDIE** (Annoyed): It looks to me like you're married to a mob boss. Quite happily married.
@@ -3883,8 +3917,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: Yes. What is it?
 **GRANDMA** (Joyous): No one guessed it right, did they?
 
-### Library08
+### Library: Library08
 `Library08` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Frustrated): Wha... Wha...
 **RODDY** (Doubtful): Excuse me, but who are you?
@@ -3898,8 +3933,9 @@ Every story in which Grandma speaks.
 **ARTHUR**: Mads, it was Ursula who-
 **GRANDMA** (Frustrated): Arthur? I thought I got rid of you...
 
-### Library09
+### Library: Library09
 `Library09` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Is that true Grandma?!
 **GRANDMA** (Annoyed): Yes... It’s true.
@@ -3914,8 +3950,9 @@ Every story in which Grandma speaks.
 **RODDY** (Annoyed): No... You need time with your “fiancé”.
 **MADDIE** (Frustrated): Roddy!
 
-### Library10
+### Library: Library10
 `Library10` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **ARTHUR** (Charming): Mads...
 **MADDIE** (Doubtful): You left me, Arthur. I can’t just forget that.
@@ -3929,8 +3966,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Annoyed): What I really want is for everyone to just leave.
 **MADDIE** (Frustrated): I... I need to think.
 
-### Lounge04
+### Lounge: Lounge04
 `Lounge04` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Worried): Maddie, dearie.
 **MADDIE** (Doubtful): Grandma.
@@ -3943,8 +3981,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Discouraged): But the answers you are seeking are just... too difficult to explain.
 **MADDIE** (Thinking): How so?
 
-### Lounge05
+### Lounge: Lounge05
 `Lounge05` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Worried): That picture, that day, was not one I take lightly.
 **MADDIE** (Thinking): Were you actually married to someone else? Are you both... still married?
@@ -3953,8 +3992,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Discouraged): My first husband was a mob boss. 
 **MADDIE** (Surprised): Grandma!
 
-### Lounge06
+### Lounge: Lounge06
 `Lounge06` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA**: It was a few years before I met your Grandpa Charlie.
 **GRANDMA**: This family, we were in a lot of financial trouble.
@@ -3965,8 +4005,9 @@ Every story in which Grandma speaks.
 **GRANDMA**: He's had a target on our backs ever since...
 **MADDIE** (Frustrated): Grandma... I don't know what to say...
 
-### Lounge07
+### Lounge: Lounge07
 `Lounge07` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Discouraged): I'm sorry I wasn't more understanding before. I feel terrible!
 **GRANDMA** (Relaxed): Our past is what makes us who we are, dearie. And maybe it's good for you to know.
@@ -4195,8 +4236,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Encouraging): I think you've managed to prod the old inventory and order system back to life.
 **GRANDMA** (Encouraging): Maybe you should see if you can make some use of it, dearie?
 
-### Maddieroom 02
+### Maddie's Room: Maddieroom_02
 `Maddieroom_02` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: Victoria! What do you want?
 **MADDIE**: It's over!
@@ -4209,8 +4251,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Worried): *Gulp*
 **GRANDMA**: Who was that, dearie? I could hear their voice in the hallway!
 
-### Maddieroom 03
+### Maddie's Room: Maddieroom_03
 `Maddieroom_03` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): It was Victoria... She's basically vowed revenge upon us. 
 **GRANDMA** (Frustrated): Don't worry about her, dearie. She's had it out for our family for a long time...
@@ -4225,8 +4268,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Charming): Ha... I don't really remember that.
 **GRANDMA** (Charming): You were only four at the time... I'm sure as you fix up the place, some memories will come back to you.
 
-### Maddieroom 04
+### Maddie's Room: Maddieroom_04
 `Maddieroom_04` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): Huh... I remember these toys! 
 **MADDIE** (Encouraging): And over there I would build a huge pillow fort with...
@@ -4240,8 +4284,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Thinking): But... I don't know anything about them. You never...
 **GRANDMA** (Discouraged): Alright, dearie... Alright.
 
-### Maddieroom 05
+### Maddie's Room: Maddieroom_05
 `Maddieroom_05` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA**: Michael and Rebecca were the most loving parents you could ever hope for.
 **GRANDMA** (Encouraging): Everything they did was for you Maddie, all their decisions... 
@@ -4258,8 +4303,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Worried): I want to know about the night my parents...
 **GRANDMA** (Worried): Oh Maddie...
 
-### Maddieroom 06
+### Maddie's Room: Maddieroom_06
 `Maddieroom_06` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): Please Grandma... 
 **MADDIE** (Thinking): I sometimes have strange dreams, like I was right there...
@@ -4274,8 +4320,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Discouraged): And...
 **GRANDMA** (Discouraged): So was I.
 
-### Maddieroom 07
+### Maddie's Room: Maddieroom_07
 `Maddieroom_07` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): WE were there?!
 **GRANDMA** (Annoyed): Maddie, you must understand...
@@ -4286,8 +4333,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Discouraged): A car on fire.
 **MADDIE**: Fire?! So... I didn't just dream it...
 
-### Maddieroom 08
+### Maddie's Room: Maddieroom_08
 `Maddieroom_08` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Annoyed): I had a sinking feeling... 
 **GRANDMA** (Discouraged): I stopped and ran out...
@@ -4300,8 +4348,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Discouraged): But you still feel guilty for having the fight.
 **GRANDMA** (Worried): Yes.
 
-### Maddieroom 09
+### Maddie's Room: Maddieroom_09
 `Maddieroom_09` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Worried): If we wouldn't have had that fight, Michael would not have charged off.
 **GRANDMA** (Worried): Maybe he would have...
@@ -4313,8 +4362,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Surprised): ...
 **GRANDMA** (Discouraged): Thank you, dearie!
 
-### Maddieroom 10
+### Maddie's Room: Maddieroom_10
 `Maddieroom_10` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Worried): Do you hear that? I think it's Winston...
 **MADDIE** (Thinking): Yes, sounds like it's something urgent-
@@ -4520,8 +4570,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Annoyed): I don't know, and I don't want to know!
 **MADDIE** (Thinking): Hmm. Sorry Grandma, but this is too important! I'm going to find out what's in this maze.
 
-### Musicianroom08
+### Music Studio: Musicianroom08
 `Musicianroom08` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=Musicianroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): Dearie, who are all these people outside in hard hats?
 **GRANDMA** (Charming): For a moment, I thought we were being ambushed by an army of Roddys.
@@ -4534,8 +4585,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Encouraging): He says the mansion was declared a heritage site, but he needs to find the documents to prove it. 
 **GRANDMA** (Joyous): I always knew that boy was bright!
 
-### Musicianroom10
+### Music Studio: Musicianroom10
 `Musicianroom10` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=Musicianroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Discouraged): Is everything alright with you, dearie? You look like you’ve seen a ghost!
 **MADDIE** (Worried): You could say that. I just received a text from Arthur!
@@ -4554,8 +4606,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Encouraging): Charlie and I were happy to help. We have plenty of rooms!
 **GRANDMA** (Joyous): We never really saw much of him, though. But we did hear plenty of music!
 
-### Musicianroom12
+### Music Studio: Musicianroom12
 `Musicianroom12` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=Musicianroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): But what happened to him, Grandma? Does he still make music?
 **GRANDMA** (Discouraged): Oh, I don't think so, dearie. It's not a pleasant story...
@@ -4569,8 +4622,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Discouraged): After that, he left and never made music again.
 **MADDIE** (Worried): Oh my...
 
-### Musicianroom13
+### Music Studio: Musicianroom13
 `Musicianroom13` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=Musicianroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Annoyed): So if Eddie hadn't signed with that record label, he might still be making music today...
 **MADDIE** (Worried): I-I can't help but sympathize with him. After all, I am in a similar situation.
@@ -4595,8 +4649,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Worried): No, no. Just take my advice. You should throw it in the garbage and forget about it.
 **MADDIE** (Thinking): She's definitely up to something. It makes me even more determined to find out who the watch belongs to!
 
-### OldWell Rescue
+### The Old Well: OldWell_Rescue
 `OldWell_Rescue` · seen 22.02.06–26.07.01
+- trigger: area, area=The Old Well, areaId=OldWell, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE** (Joyous): Yay, you're free!
 **MADDIE** (Thinking): Hello boy! Do you have a name? I don't see a collar or tag on you.  
@@ -4728,8 +4783,9 @@ Every story in which Grandma speaks.
   _earlier:_ ~~He just came in and swept her off her feet.~~ (until 23.09.02)
 **ANTIQUEDEALER** (Thinking): But the truth is, I never stopped loving her...
 
-### PoolHouse Outro
+### The Pool House: PoolHouse_Outro
 `PoolHouse_Outro` · seen 22.02.06–22.02.06
+- trigger: area, area=The Pool House, areaId=PoolHouse, phase=area story (exact task not dumped) (versions 22.02.06–22.02.06)
 
 **GRANDMA** (Encouraging): So, what's been going on here?  
   _earlier:_ ~~...Wow!~~ (until 23.09.02)
@@ -8069,8 +8125,9 @@ Every story in which Grandma speaks.
   _(1 cosmetic edit not shown)_
 **MADDIE** (Worried): Raking?!
 
-### Study05
+### Study: Study05
 `Study05` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE**: Thanks Jackie! It’s kinda cool to have a reporter as a friend.
 **JACKIE** (Encouraging): I’ll be honest though, all this would make for one heck of a story!
@@ -8082,8 +8139,9 @@ Every story in which Grandma speaks.
 **JACKIE**: Ahem. Let’s keep looking around, shall we?
 **GRANDMA**: What have you got there, dearie?
 
-### Study06
+### Study: Study06
 `Study06` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Grandma!
 **JACKIE** (Encouraging): Oh, it’s nothing, Ms. Boulton. We were just looking around an-
@@ -8094,8 +8152,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Joyous): Oh, that old thing?! Ha! Haven’t seen that in ages! Never was much of a bookie, but it turned a tidy little profit.
 **MADDIE** (Surprised): You admit it?!
 
-### Study07
+### Study: Study07
 `Study07` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Worried): Grandma, why did you do it?
 **GRANDMA** (Frustrated): I did what I had to dearie. For the family. Just like what you’re doing now.
@@ -8163,8 +8222,9 @@ Every story in which Grandma speaks.
 **DEB** (Charming): You'll find everything you need to work your way into another family secret!
 **MADDIE** (Frustrated): Why is everyone talking in riddles and no one's telling me the truth!
 
-### Tomb03
+### The Tomb: Tomb03
 `Tomb03` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA**: I see you've found the family tomb, dearie...
 **MADDIE** (Surprised): Grandma! You gave me a fright!
@@ -8176,8 +8236,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Encouraging): Would you like me to tell you about them? Each one has quite the history.
 **MADDIE** (Relaxed): I'd love that, Grandma!
 
-### Tomb04
+### The Tomb: Tomb04
 `Tomb04` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA**: This brave young man was Sergeant John Boulton!
 **GRANDMA**: He was the first of the Boultons to fight for the country at the age of eighteen.
@@ -8225,8 +8286,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Relaxed): Yes, well. We've all had that one person who wasn't right for us.
 **MADDIE** (Discouraged): Tell me about it!
 
-### Tomb08
+### The Tomb: Tomb08
 `Tomb08` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Oh my... This is beautiful! 
 **GRANDMA** (Surprised): Incredible! I... I remember hearing about the "Family Tree" but I never realized it was an actual tree!
@@ -8256,8 +8318,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Encouraging): To declare their love for each other, they had a vow renewal ceremony. I think we're looking at it.
 **MADDIE** (Charming): Beautiful. A love set in stone...
 
-### Tomb11
+### The Tomb: Tomb11
 `Tomb11` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Wait... This one is different!
 **GRANDMA** (Discouraged): I... Think I know what this represents...
@@ -8316,8 +8379,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Surprised): Don't you know? They went on a maritime expedition one day, and were never seen again.
 **MADDIE** (Surprised): That's terrible...
 
-### Tomb16
+### The Tomb: Tomb16
 `Tomb16` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Thinking): Dearie, I'm afraid I'll have to let you continue on your own.
 **GRANDMA** (Thinking): My book club starts soon...

@@ -131,6 +131,34 @@ def main():
     index.append("\n## Misc")
     index.append(f"- [Stories without a known trigger](misc/unknown-trigger.md) ({len(unknown)})")
     write("misc/unknown-trigger.md", "Stories without a known trigger", unknown, "Trigger hints are prefix guesses — see build/prefixes.json.")
+    # stories without any area/event, grouped by id prefix, with their opening lines — the review list for hand placement
+    unassigned = collections.defaultdict(list)
+    for sid in unknown + removed:
+        s = codex["stories"][sid]
+        if any(t.get("area") or t.get("event") for t in s["triggers"]):
+            continue
+        m = re.match(r"^([A-Za-z]+?)(?:_|\d|$)", sid)
+        unassigned[m.group(1) if m else sid].append(sid)
+    ua = ["# Unassigned stories — needs a human call", "",
+          "Stories the config defines that no dumped trigger, area id or hand rule places. Grouped by id prefix; each shows its first spoken lines. "
+          "To place one, add `\"<id>\"` or `\"<prefix>*\"` to `build/story_assignments.json` with `{\"area\": \"…\"}` or `{\"event\": \"…\"}` and rebuild.", ""]
+    for pref, sids in sorted(unassigned.items(), key=lambda kv: (-len(kv[1]), kv[0])):
+        ua.append(f"## {pref} ({len(sids)})")
+        for sid in sorted(sids):
+            st = codex["stories"][sid]
+            first = []
+            for lid in (latest(st["lines"]) or [])[:3]:
+                l = codex["lines"].get(lid) or {}
+                t = latest(l.get("text") or [])
+                if t:
+                    sp = latest(l.get("speaker") or [])
+                    first.append(f"{(codex['characters'].get(sp, {}).get('name', sp) if sp else '—')}: {t[:110]}")
+            seen = st.get("seen") or {}
+            ua.append(f"- `{sid}` ({seen.get('first')}–{seen.get('last')}): " + (" / ".join(first) if first else "_no text_"))
+        ua.append("")
+    with open(os.path.join(md_root, "misc", "unassigned.md"), "w", encoding="utf-8", newline="\n") as f:
+        f.write("\n".join(ua))
+    index.append(f"- [Unassigned stories — needs your call](misc/unassigned.md) ({sum(len(v) for v in unassigned.values())})")
     index.append(f"- [Removed from the game](misc/removed.md) ({len(removed)})")
     write("misc/removed.md", "Stories removed from the game", removed, "Present in an older version, absent from the current one.")
     # event reruns (families with several runs, verdict per story pair, hand-written notes) — same code as reruns.py

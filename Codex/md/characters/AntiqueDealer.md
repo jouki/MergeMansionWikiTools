@@ -771,8 +771,9 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Encouraging): Ooh! A complete set of tools! This will definitely do the trick!
 **ANTIQUEDEALER** (Charming): Yessiree, these will definitely help break the ground over the dig site!
 
-### FactoryFloor 02
+### Factory Floor: FactoryFloor_02
 `FactoryFloor_02` · seen 26.07.01–26.07.01
+- trigger: area, area=Factory Floor, areaId=FactoryFloor, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Doubtful): Hmmm...  
   _earlier:_ ~~Look!~~ (until 26.02.03)
@@ -789,8 +790,9 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Thinking): Maybe there's more to it than meets the eye.  
   _(1 cosmetic edit not shown)_
 
-### FactoryFloor 04
+### Factory Floor: FactoryFloor_04
 `FactoryFloor_04` · seen 26.07.01–26.07.01
+- trigger: area, area=Factory Floor, areaId=FactoryFloor, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: Hey! I think I found the clock hands for the steam clock!  
   _earlier:_ ~~Hey! I think I found a missing gear for the clock!~~ (until 26.02.03)
@@ -805,8 +807,9 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Surprised): Up and running?!
 **MADDIE** (Charming): As part of the museum, of course. It'll be a great display of Boulton ingenuity.
 
-### FactoryFloor 05
+### Factory Floor: FactoryFloor_05
 `FactoryFloor_05` · seen 26.07.01–26.07.01
+- trigger: area, area=Factory Floor, areaId=FactoryFloor, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: Ooh! I think I found the missing time zones part for the steam clock under this machine...  
   _earlier:_ ~~Ooh! I think I found another gear under this machine...~~ (until 26.02.03)
@@ -824,8 +827,9 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Worried): I think that other design in the trademark, belonged to Victoria's family!
 **MADDIE** (Surprised): VICTORIA'S?!!
 
-### FactoryFloor 06
+### Factory Floor: FactoryFloor_06
 `FactoryFloor_06` · seen 26.07.01–26.07.01
+- trigger: area, area=Factory Floor, areaId=FactoryFloor, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **ANTIQUEDEALER** (Doubtful): Ooh, I think I found a clock part, but I'm not quite sure...  
   _earlier:_ ~~Ooh, I think I found a clock gear?~~ (until 26.02.03)
@@ -840,8 +844,9 @@ Every story in which AntiqueDealer speaks.
   _(1 cosmetic edit not shown)_
 **ANTIQUEDEALER** (Charming): Never put it past a Boulton to surprise you.
 
-### FactoryFloor 08
+### Factory Floor: FactoryFloor_08
 `FactoryFloor_08` · seen 26.07.01–26.07.01
+- trigger: area, area=Factory Floor, areaId=FactoryFloor, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): Look! I think I found an employee worksheet. Lots of women worked here!  
   _earlier:_ ~~Hey, check out these posters!~~ (until 26.02.03)  
@@ -864,8 +869,9 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Thinking): Then again, it is a steam clock. 
 **MADDIE** (Thinking): But I wonder if something else is going on here?
 
-### FactoryFloor 09
+### Factory Floor: FactoryFloor_09
 `FactoryFloor_09` · seen 26.07.01–26.07.01
+- trigger: area, area=Factory Floor, areaId=FactoryFloor, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): I think I found the last clock piece, Julius!
 **MADDIE** (Thinking): But...
@@ -879,8 +885,9 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Surprised): It almost works like...
 **MADDIE** (Surprised): A key!
 
-### FactoryFloor 10
+### Factory Floor: FactoryFloor_10
 `FactoryFloor_10` · seen 26.07.01–26.07.01
+- trigger: area, area=Factory Floor, areaId=FactoryFloor, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Thinking): If it truly IS a key, I wonder what will happen if I move this piece so that the arrow points to the mansion?
 **ANTIQUEDEALER** (Surprised): Oh! Did a secret compartment just open?!
@@ -913,8 +920,9 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Charming): I love meatloaf!
 **MADDIE** (Encouraging): Ha! That's what the message says. Aaaw, how sweet!
 
-### FactoryFloor 12
+### Factory Floor: FactoryFloor_12
 `FactoryFloor_12` · seen 26.07.01–26.07.01
+- trigger: area, area=Factory Floor, areaId=FactoryFloor, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Joyous): It's ALIVE!
 **ANTIQUEDEALER** (Joyous): Well done, Maddie!
@@ -924,8 +932,9 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Encouraging): Almost as if it was designed to be future-proof. Really ahead of its time.  
   _(1 cosmetic edit not shown)_
 
-### FactoryFloor 13
+### Factory Floor: FactoryFloor_13
 `FactoryFloor_13` · seen 26.07.01–26.07.01
+- trigger: area, area=Factory Floor, areaId=FactoryFloor, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **ANTIQUEDEALER** (Encouraging): This must be the door to the office! Quite imposing.
 **ANTIQUEDEALER** (Relaxed): Want to find out what's inside?
@@ -972,8 +981,9 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Surprised): Truckload?! How are we ever going to pick a winner?
 **ANTIQUEDEALER** (Relaxed): Don't worry. If there is a will. There is a way.
 
-### FactoryFloor Intro
+### Factory Floor: FactoryFloor_Intro
 `FactoryFloor_Intro` · seen 26.07.01–26.07.01
+- trigger: area, area=Factory Floor, areaId=FactoryFloor, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Surprised): Wow! This must be the factory floor.
 **MADDIE** (Encouraging): There's some really impressive machinery in here!
@@ -985,8 +995,9 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Thinking): It's probably still connected to the old steam line. Perhaps there was still some pressure in there?
 **MADDIE** (Doubtful): Hmm... Good point. Maybe the heart of the factory is still beating?
 
-### FactoryGiftShop 02
+### Gift Shop: FactoryGiftShop_02
 `FactoryGiftShop_02` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: So, how do you know about fixing stained-glass windows?
 **ANTIQUEDEALER**: Well... a long time ago I did an antique apprenticeship in Florence, Italy.  
@@ -1000,8 +1011,9 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Relaxed): Gift shop! Is that your plan for this space? What an excellent idea!  
   _earlier:_ ~~Gift shop! What an excellent idea!~~ (until 26.02.02)
 
-### FactoryGiftShop 03
+### Gift Shop: FactoryGiftShop_03
 `FactoryGiftShop_03` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Relaxed): So this is our Point of Sale system. Also known as the POS.
 **ANTIQUEDEALER** (Annoyed): How appropriate.
@@ -1014,8 +1026,9 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Frustrated): Oh, alright... How do I turn it on?
 **MADDIE** (Hesitant): It's already on!
 
-### FactoryGiftShop 04
+### Gift Shop: FactoryGiftShop_04
 `FactoryGiftShop_04` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Charming): Could you tell me more about your time in Florence, Julius?
 **ANTIQUEDEALER**: Oh, Maddie, it was beautiful!
@@ -1027,8 +1040,9 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Charming): Oooh, who was she?
 **ANTIQUEDEALER** (Charming): My first love.
 
-### FactoryGiftShop 05
+### Gift Shop: FactoryGiftShop_05
 `FactoryGiftShop_05` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: Tell me about Sofia!
 **ANTIQUEDEALER** (Charming): She was amazing! Senza confronto.
@@ -1042,8 +1056,9 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Charming): She would say, "Julius, there is beauty in the broken."
 **MADDIE** (Encouraging): I believe that too. 
 
-### FactoryGiftShop 06
+### Gift Shop: FactoryGiftShop_06
 `FactoryGiftShop_06` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: So, what happened with Sofia?
 **ANTIQUEDEALER**: Well, I was young and only on an apprenticeship.
@@ -1056,8 +1071,9 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Annoyed): Yes.
 **ANTIQUEDEALER** (Worried): From what I've heard of him, maybe that's something not worth fixing...
 
-### FactoryGiftShop 07
+### Gift Shop: FactoryGiftShop_07
 `FactoryGiftShop_07` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Joyous): I just got an idea!
 **MADDIE** (Encouraging): Let's set up an interactive experience where guests get to make new works of art with old scraps we find here?
@@ -1067,8 +1083,9 @@ Every story in which AntiqueDealer speaks.
   _earlier:_ ~~Your story about Sofia inspired me.~~ (until 26.02.02)
 **ANTIQUEDEALER** (Charming): I'm glad to hear it.
 
-### FactoryGiftShop 08
+### Gift Shop: FactoryGiftShop_08
 `FactoryGiftShop_08` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Thinking): Hmmm...
 **MADDIE** (Thinking): We have a lot of empty cans here...
@@ -1079,8 +1096,9 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Relaxed): Flattened of course.
 **MADDIE** (Relaxed): Brilliant!
 
-### FactoryGiftShop 09
+### Gift Shop: FactoryGiftShop_09
 `FactoryGiftShop_09` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: You're really getting into the vibe of things, Julius!
 **MADDIE**: Maybe renovation is in your blood!
@@ -1090,8 +1108,9 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Encouraging): If you ever need a hand...
 **ANTIQUEDEALER** (Encouraging): I'll know exactly who to call!
 
-### FactoryGiftShop 10
+### Gift Shop: FactoryGiftShop_10
 `FactoryGiftShop_10` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): We should all take a selfie together in the large can display!  
   _(1 cosmetic edit not shown)_
@@ -1102,8 +1121,9 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Worried): Ooh... Now I know what a sardine feels like.
 **MADDIE** (Charming): Say cheese!
 
-### FactoryGiftShop 11
+### Gift Shop: FactoryGiftShop_11
 `FactoryGiftShop_11` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Surprised): Ah! What was that sound?!
 **ANTIQUEDEALER** (Thinking): Hmm... Sounded like an old steam whistle!
@@ -1113,8 +1133,9 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Charming): I'll come with you!  
   _earlier:_ ~~Alright. I'll stay and watch over the shop.~~ (until 26.02.02)
 
-### FactoryGiftShop Intro
+### Gift Shop: FactoryGiftShop_Intro
 `FactoryGiftShop_Intro` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: Helloo? Julius?
 **MADDIE** (Worried): Are you in here?
@@ -1209,8 +1230,9 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Thinking): Hmmm... Maybe I was.
 **ANTIQUEDEALER** (Relaxed): Working on all of these really lit the artist in me again.
 
-### FactoryReception 10
+### The Reception: FactoryReception_10
 `FactoryReception_10` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Thinking): What is this thing... an antique can opener?
 **ANTIQUEDEALER**: Not just antique, Maddie. I believe that is the very first can opener prototype!
@@ -1238,8 +1260,9 @@ Every story in which AntiqueDealer speaks.
 **MADDIE**: Thank you for the support, Julius. It means a lot.
 **ANTIQUEDEALER** (Charming): You're doing a great service to the town's history, Maddie.
 
-### FactoryReception 13
+### The Reception: FactoryReception_13
 `FactoryReception_13` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Relaxed): That's the reception sorted. Floors waxed, displays up, and we even have a brand new ticket dispenser!
 **CB-01** (Joyous): *Beep Bop*

@@ -25,7 +25,7 @@ New stories in the later run (18): `CBE_MaddieInParis_ArcDeTriomphe_02_Dialogue`
 Stories not carried over (19): `CBE_MaddieInParis2025_ArcDeTriomphe_01_Dialogue`, `CBE_MaddieInParis2025_ArcDeTriomphe_05_Dialogue`, `CBE_MaddieInParis2025_EiffelTower_01_Dialogue`, `CBE_MaddieInParis2025_EiffelTower_05_Dialogue`, `CBE_MaddieInParis2025_Food_06_Dialogue`, `CBE_MaddieInParis2025_Intro_Dialogue`, `CBE_MaddieInParis2025_Louvre_01_Dialogue`, `CBE_MaddieInParis2025_Louvre_05_Dialogue`, `CBE_MaddieInParis2025_NotreDame_01_Dialogue`, `CBE_MaddieInParis2025_NotreDame_05_Dialogue`, `CBE_MaddieInParis2025_Outro_Dialogue`, `CBE_MaddieInParis2025_SacreCoeur_01_Dialogue`, `CBE_MaddieInParis2025_SacreCoeur_05_Dialogue`, `CBE_MaddieInParis2025_Slot_14_Dialogue`, `CBE_MaddieInParis2025_Slot_18_Dialogue` …
 
 ### CBE_TheGreatEscape
-CBE_TheGreatEscape (The Great Escape, 24.11.02–25.10.01, 11 stories) → CBE_TheGreatEscapeB (?, 25.05.01–25.06.01, 10 stories)  
+CBE_TheGreatEscape (The Great Escape, 24.11.02–25.10.01, 11 stories) → CBE_TheGreatEscapeB (The Great Escape, 25.05.01–25.06.01, 10 stories)  
 Pairs: identical 8, dropped 3, new 2
 
 > **Note:** variant — run B (25.05–25.06) keeps 8 of the stories word for word, replaces 3 with 2 new ones (Maddie meeting Grandma after the arrest). Same plot, restructured opening; treat as one story with two openings.

@@ -78,8 +78,9 @@ Every story in which Dog speaks.
 **MADDIE**: Rufus, if you're coming to find out how I'm getting on with Grandpa's design, then the answer is badly!
 **MADDIE** (Thinking): I don't even understand what it is. I'm going to keep trying to make it, though, and exploring this maze!
 
-### OldWell Rescue
+### The Old Well: OldWell_Rescue
 `OldWell_Rescue` · seen 22.02.06–26.07.01
+- trigger: area, area=The Old Well, areaId=OldWell, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE** (Joyous): Yay, you're free!
 **MADDIE** (Thinking): Hello boy! Do you have a name? I don't see a collar or tag on you.  

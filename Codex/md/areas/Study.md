@@ -1,6 +1,111 @@
 # Study
 
 
+### Study: Study01Intro
+`Study01Intro` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**JACKIE** (Surprised): Wow! This place is more trashed than the hallway!
+**JACKIE** (Thinking): Is this an office?
+**MADDIE** (Doubtful): It’s a study... But whose?
+**MADDIE** (Thinking): There must be something in here that could help Grandma!
+
+### Study: Study02
+`Study02` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**HOLDEN** (Joyous): A ha! The scene of the crime...
+**JACKIE** (Surprised): Hey, you’re not allowed to be in here!
+**HOLDEN** (Encouraging): The front door was open, so I assumed it was okay to enter... Besides, Victoria said I should take pictures.
+**MADDIE** (Annoyed): Great... Now I got two reporters hounding me.
+**JACKIE** (Doubtful): Hey!
+
+### Study: Study03
+`Study03` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE** (Surprised): Hey, what’s this?!
+**JACKIE**: It looks like a ledger of some sort? But for what?
+**MADDIE**: It’s Grandma’s handwriting... Hmm, something about Hopeberries and barrel orders.
+**JACKIE** (Annoyed): Hey, back off Holden!
+**HOLDEN** (Encouraging): Oh, sorry... I was just trying to take a photo of this nice desk!
+**JACKIE** (Doubtful): Sure you were...
+**MADDIE** (Thinking): That’s strange... These are orders for Hopeberry juice to be delivered to various locations in the city.
+**JACKIE** (Surprised): That’s a lot of money, but wait... These orders were made after your uncle squandered the family fortune!
+**MADDIE** (Surprised): I know... It’s almost as if she was a-
+**HOLDEN** (Joyous): Bootlegger!
+
+### Study: Study04
+`Study04` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**JACKIE** (Annoyed): Holden! I thought I told you to back off!
+**MADDIE** (Discouraged): This can’t be right...
+**HOLDEN** (Annoyed): I’m only doing my job! You can’t cover up the truth!
+**JACKIE** (Annoyed): Holden. Out. Now!
+**HOLDEN** (Surprised): Okay! Okay....
+**MADDIE** (Doubtful): I don’t believe it... Did Grandma really run an underground bootlegging operation?!
+**JACKIE** (Thinking): It looks like she was only trying to make back the money your uncle lost.
+**MADDIE** (Discouraged): Yes, but this isn’t helping her case! If anything, it’s making matters worse!
+**MADDIE** (Worried): If this news was to get out... Jackie, I know you’re a reporter, but-
+**JACKIE**: Maddie... Don’t worry. I’m not like that dimwit, Holden. Besides, we’re friends now.
+
+### Study: Study05
+`Study05` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE**: Thanks Jackie! It’s kinda cool to have a reporter as a friend.
+**JACKIE** (Encouraging): I’ll be honest though, all this would make for one heck of a story!
+**MADDIE** (Thinking): Do you think this is the reason Grandma didn’t want me to get into the mansion?
+**JACKIE** (Thinking): Maybe... But then, why leave it out?!
+**MADDIE** (Thinking): Perhaps someone else wanted me to find it?
+**JACKIE** (Encouraging): Are you saying The Butler did it?
+**MADDIE** (Doubtful): ...
+**JACKIE**: Ahem. Let’s keep looking around, shall we?
+**GRANDMA**: What have you got there, dearie?
+
+### Study: Study06
+`Study06` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE** (Surprised): Grandma!
+**JACKIE** (Encouraging): Oh, it’s nothing, Ms. Boulton. We were just looking around an-
+**GRANDMA** (Charming): Please, call me Grandma, dearie! Everyone else does!
+**JACKIE** (Surprised): Er... Okay.
+**GRANDMA** (Relaxed): Now, what is it you have there, Maddie?
+**MADDIE** (Annoyed): It’s your ledger...
+**GRANDMA** (Joyous): Oh, that old thing?! Ha! Haven’t seen that in ages! Never was much of a bookie, but it turned a tidy little profit.
+**MADDIE** (Surprised): You admit it?!
+
+### Study: Study07
+`Study07` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE** (Worried): Grandma, why did you do it?
+**GRANDMA** (Frustrated): I did what I had to dearie. For the family. Just like what you’re doing now.
+**MADDIE** (Doubtful): But, bootlegging?!
+**GRANDMA** (Doubtful): Sometimes, you have to break a few eggs to bake a pie!
+**MADDIE** (Discouraged): You’re not making it easy for me to clear your name...
+**GRANDMA** (Annoyed): Then let me give you some advice, dearie. Take that book-
+**GRANDMA** (Frustrated): ...and burn it.
+**MADDIE** (Surprised): ...
+**JACKIE** (Surprised): Your grandma can be scary sometimes...
+
+### Study: Study08
+`Study08` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE** (Thinking): She... Wants me to burn it?
+**JACKIE** (Thinking): That’s what she said. I guess she doesn’t want people to know either.
+**MADDIE** (Doubtful): Yes, but why burn the book?
+**JACKIE** (Doubtful): I don’t know what you’re getting at?
+**MADDIE** (Annoyed): Jackie, she openly admitted to me she was bootlegging! In front of you! She didn’t care about that! But why then tell me to burn the book?
+**MADDIE** (Thinking): There’s something else hidden in this ledger she doesn’t want me to find out!
+**JACKIE** (Surprised): Well, open it up!
+**MADDIE**: Hmm... Most of it looks pretty legit. Well, as far as bootlegging goes, I guess.
+**JACKIE** (Thinking): What’s all that around the edges?
+**MADDIE** (Thinking): That’s strange! Some sort of code?
+
 ### Study: Remove jammed globe cover
 `StudyChessGlobe` · seen 23.09.02–26.07.01
 - trigger: area, area=Study, areaId=Study, hotspotId=StudyRemoveStudyGlobeLidDownD10, phase=task completed, task=Remove jammed globe cover (versions 24.04.01–26.07.01)

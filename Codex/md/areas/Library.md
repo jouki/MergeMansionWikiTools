@@ -1,6 +1,155 @@
 # Library
 
 
+### Library: Library01_Intro
+`Library01_Intro` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+
+### Library: Library02
+`Library02` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE**: *Ring Ring*
+**MADDIE** (Doubtful): Huh... It’s Leonard. What does HE want?!
+**MADDIE**: Hello?
+**LEONARD** (Annoyed): You no-good scheming nobody... I don’t know how you pulled this off, but mark my words...
+**MADDIE**: Excuse me! What are you talking about?!
+**LEONARD** (Doubtful): Don’t play coy with me, little girl! Now it makes total sense why you came back!
+**LEONARD** (Annoyed): You thought you could take MY mansion away from me?!
+**LEONARD**: I was about to sign the deed away when it was suddenly discovered that ownership was transferred to YOU!
+**MADDIE**: What?!
+**LEONARD** (Encouraging): Oh, don’t worry. Bruno is on his way now to have you sign it away. You’ve only delayed the inevitable! *Click!*
+**MADDIE** (Surprised): How did I become the sole owner of the estate?!
+
+### Library: Library03
+`Library03` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**BRUNO**: Maddie.
+**MADDIE** (Annoyed): Bruno.
+**BRUNO** (Charming): I think you know why I’m here.
+**MADDIE** (Annoyed): Yes. Leonard kindly informed me. And no, I won’t be signing anything today!
+**BRUNO** (Annoyed): Oh, my dear Maddie... I don’t think you understand the grave situation you are in at the moment.
+**BRUNO** (Annoyed): If you do not sign away this mansion to me, you and your grandmother will go to jail for a very long time.
+**MADDIE** (Surprised): You can’t do that.
+**BRUNO** (Encouraging): Oh, but I can. I can do whatever I want. And I WANT this mansion.
+**BRUNO** (Charming): Now...
+**BRUNO** (Joyous): SIGN IT!
+
+### Library: Library04
+`Library04` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**BRUNO** (Frustrated): Look... I’m running out of patience here, so I’ll do you a favor.
+**BRUNO** (Annoyed): I’ll offer you one last time the chance to sign it, and I’ll make sure your grandmother’s investigation will end.
+**BRUNO** (Relaxed): I’ll even offer a share of the profits so that you and your grandmother can move away and live comfortably.
+**BRUNO** (Joyous): Honestly, it’s a win-win scenario. You get to start over, your grandmother goes free...
+**MADDIE** (Doubtful): And you get the mansion.
+**BRUNO** (Doubtful): That’s right. Everybody wins. No more police, no more investigation, no more renovating a dilapidated ruin, day after day...
+**MADDIE** (Worried): But... This is our home. I’ve learnt so much about my family here.
+**MADDIE** (Discouraged): And there’s still so much left...
+**BRUNO** (Frustrated): Is it truly worth putting your grandmother and yourself in jail?
+**BRUNO** (Doubtful): Just sign the paper and all of this goes away...
+**MADDIE** (Worried): I...
+**RODDY** (Surprised): STOP! DON’T SIGN IT!
+**BRUNO** (Surprised): What?!
+
+### Library: Library05
+`Library05` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**RODDY** (Surprised): Don’t sign, Maddie! I found it! I found the proof!
+**BRUNO** (Surprised): What are you talking about?!
+**RODDY**: This mansion is protected as a heritage site! I found these documents to prove it.
+**BRUNO** (Discouraged): Impossible.
+**RODDY** (Annoyed): You would know, wouldn’t you? You tried to hide them! I had to pull a few favors, but found them in the end.
+**RODDY** (Doubtful): Mayor Bruno had these documents removed from the archives and deleted from the system on purpose so that he could start his little project!
+**BRUNO** (Joyous): Hah, you can’t prove any of that. In fact, I think you just lost your job! Now, if we could-
+**BRUNO** (Surprised): *Ring Ring*
+**BRUNO**: Victoria? Baby, I’m in the middle of something...
+**BRUNO**: Slow down, slow down... What?! The police are there?! Well, don’t let them in!
+**BRUNO**: They have a warrant?... Embezzlement and corruption? Just... Just don’t let them in the office!
+**BRUNO**: Look, I’ll call the lawyer and I’ll be right there. *Click*
+**BRUNO** (Annoyed): You... You did this!
+
+### Library: Library06
+`Library06` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**BRUNO** (Annoyed): This isn’t over... I’ll make sure all of you go to prison for this!
+**RODDY** (Relaxed): I think you might have that a bit backwards, Mayor.
+**BRUNO** (Annoyed): Hmph!
+**MADDIE** (Surprised): Roddy, what just happened?
+**RODDY** (Charming): I might have called a friend at the police. Looks like they were investigating him for a long time.
+**RODDY** (Thinking): What I discovered was exactly the evidence they needed to make a move on him.
+**MADDIE** (Surprised): Does this mean the mansion is safe?
+**RODDY** (Thinking): Not entirely. As a heritage site, the council could potentially take it away from you... 
+**RODDY** (Encouraging): but at least it won't be turning into a casino!
+**MADDIE** (Charming): I... I don’t believe it.
+**MADDIE** (Joyous): You... You did it, Roddy!
+**RODDY** (Charming): Well... I...
+
+### Library: Library07
+`Library07` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Charming): Roddy...
+**RODDY** (Charming): Y- Yes?
+**MADDIE** (Charming): I feel like...
+**RODDY** (Charming): M-Me too, Maddie...
+**MADDIE** (Surprised): !!!
+**ARTHUR**: Hello, Mads...
+
+### Library: Library08
+`Library08` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Frustrated): Wha... Wha...
+**RODDY** (Doubtful): Excuse me, but who are you?
+**ARTHUR** (Doubtful): Er, I’m her fiancé. Who are YOU?
+**RODDY** (Annoyed): Ee- I'm her architect! 
+**MADDIE** (Annoyed): EX-Fiancé, Arthur!
+**ARTHUR**: Mads, I had no choice...
+**MADDIE** (Doubtful): No choice?! You left me at the altar!
+**ARTHUR**: Do you understand how hard that was for me to do? What it took for me to leave the love of my life?
+**MADDIE** (Annoyed): Stop it! You can’t just walk back as if nothing happened. I’ve moved on. Grandma was right about you.
+**ARTHUR**: Mads, it was Ursula who-
+**GRANDMA** (Frustrated): Arthur? I thought I got rid of you...
+
+### Library: Library09
+`Library09` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Surprised): Is that true Grandma?!
+**GRANDMA** (Annoyed): Yes... It’s true.
+**GRANDMA** (Discouraged): But believe me, it was for a VERY good reason!
+**GRANDMA** (Frustrated): You have no idea what kind of man he is...
+**MADDIE** (Annoyed): It’s not up to you to decide what’s best for me, Grandma!
+**GRANDMA** (Surprised): I...
+**ARTHUR** (Charming): Mads, don’t be angry at her. She was only looking out for you...
+**GRANDMA** (Doubtful): I don’t need YOUR endorsement, Arthur...
+**RODDY** (Discouraged): Um... I should go.
+**MADDIE** (Discouraged): No wait, Roddy!
+**RODDY** (Annoyed): No... You need time with your “fiancé”.
+**MADDIE** (Frustrated): Roddy!
+
+### Library: Library10
+`Library10` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**ARTHUR** (Charming): Mads...
+**MADDIE** (Doubtful): You left me, Arthur. I can’t just forget that.
+**ARTHUR**: I understand... but please believe me, I never stopped loving you.
+**MADDIE** (Discouraged): Arthur, I... I don’t know what to say... Or feel.
+**ARTHUR**: I’ll give you time... I’ll be staying in Hopewell Bay for a while. I want to...
+**ARTHUR** (Charming): I want us to work this out, Mads.
+**ARTHUR** (Charming): I want you to trust me again...
+**GRANDMA** (Annoyed): That’s enough, Arthur. You need to leave. Now.
+**ARTHUR** (Annoyed): If that’s what Mads wants...
+**MADDIE** (Annoyed): What I really want is for everyone to just leave.
+**MADDIE** (Frustrated): I... I need to think.
+
 ### Library: See what's behind the picture
 `Library11` · seen 24.11.02–26.07.01
 - trigger: area, area=Library, areaId=Library, hotspotId=LibraryRemovePortraitCompartmentRundownGa3, phase=task completed, task=See what's behind the picture (versions 24.11.02–26.07.01)
@@ -146,6 +295,17 @@
 **JACKIE**: I'm sorry Maddie, but I don't think the article will do much good now...
 **MADDIE**: It's alright... To be honest, I'm somewhat relieved. I really didn't want to stoop to their level.
 **JACKIE** (Doubtful): Hmph... It was a good article too...
+
+### Library: Library_Intro
+`Library_Intro` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE**: Alright... Let’s see what this room has to offer.
+**MADDIE** (Thinking): Hmm... plenty of books, a fireplace... run down couch...
+**MADDIE** (Encouraging): If I’d have to guess, I would say this place was some sort of library.
+**MADDIE**: A cozy one too!
+**MADDIE**: I should take the time one day to go through all these books. Looks like some are based on the Boulton family...
+**MADDIE** (Thinking): Perhaps there’ll be something in them that could shed more light on my family history.
 
 ### Library: Polish the ladder
 `Library_Ladder` · seen 24.11.02–26.07.01

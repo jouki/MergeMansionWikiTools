@@ -16,6 +16,22 @@
 **MADDIE** (Discouraged): Oh dear... Must have been bad. The knife is at least two inches deep!
 **MADDIE** (Thinking): I wonder if I can find out who the Blackwoods were?
 
+### Kitchen: FirstFloorKitchen_03
+`FirstFloorKitchen_03` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**ARTHUR**: Hello Mads...
+**MADDIE** (Surprised): Arthur! You surprised me!
+**MADDIE** (Doubtful): What are you doing here?
+**ARTHUR** (Surprised): I... I came to say sorry!
+**ARTHUR** (Thinking): I guess our last date didn't go so well since you haven't called me much after...
+**MADDIE** (Doubtful): It wasn't a date.
+**MADDIE** (Annoyed): But I admit, I'm surprised you even realized that "it" went poorly.
+**ARTHUR** (Charming): Mads...
+**ARTHUR**: I'm so sorry. Please. Let me make it up to you. I promised a meal, after all?
+**MADDIE** (Doubtful): Look, I'm really busy here.
+**ARTHUR** (Doubtful): Really?
+
 ### Kitchen: Wipe the cabinet top
 `FirstFloorKitchen_04` · seen 26.06.01–26.07.01
 - trigger: area, area=Kitchen, areaId=FirstFloorKitchen, hotspotId=FirstFloorKitchenFridgeCabinetCleanTop, phase=task completed, task=Wipe the cabinet top (versions 26.06.01–26.07.01)
@@ -32,6 +48,167 @@
 **ARTHUR** (Frustrated): I'm only looking out for your best interests... Unlike your friend, Roddy.
 **MADDIE** (Annoyed): What has Roddy got to do with any of this?
 **MADDIE** (Annoyed): Besides... He'd never say the things you do.
+
+### Kitchen: FirstFloorKitchen_05
+`FirstFloorKitchen_05` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Annoyed): Arthur, I'm really busy and-
+**ARTHUR** (Frustrated): Hold that thought. Someone's calling!
+**ARTHUR** (Calling): Arthur, here... Yep... Uh-huh, estimates?
+**MADDIE** (Annoyed): Arthur...
+**ARTHUR** (Calling): Mhhhh hmmm... Right, got a ballpark figure?
+**MADDIE** (Annoyed): ...
+**ARTHUR** (Talking): No kiddin'?
+**MADDIE** (Annoyed): ARTHUR!
+**ARTHUR** (Charming): I'm sorry Mads, this is important. I'll need to take this outside.
+**ARTHUR** (Charming): But I'll run by the store as well, to get us something to cook. I promised a meal after all.
+**MADDIE** (Annoyed): Seriously?!
+
+### Kitchen: FirstFloorKitchen_06
+`FirstFloorKitchen_06` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**GRANDMA**: Hello, dearie.
+**MADDIE** (Surprised): Grandma!
+**GRANDMA** (Doubtful): Why are you always so surprised to see me in my own house?
+**MADDIE** (Surprised): I... Er... You didn't happen to bump into anyone on the way here, did you?
+**GRANDMA** (Encouraging): No. Should I have?
+**MADDIE** (Worried): No.
+**GRANDMA**: Alright. It's actually quite appropriate that you've started working on the kitchen now!
+**GRANDMA** (Doubtful): Because I think it is finally time to reveal my biggest secret.
+**MADDIE** (Surprised): What is it?!
+**GRANDMA** (Encouraging): The Boulton family pie recipe!
+
+### Kitchen: FirstFloorKitchen_07
+`FirstFloorKitchen_07` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Encouraging): You know, it's quite nice to do something as a family again, for a change!
+**GRANDMA** (Relaxed): You're right dearie. We really don't spend enough time together, do we?
+**MADDIE** (Charming): Mmm... The smell of baking pies and...
+**MADDIE** (Surprised): Wait a minute! This smell, this... Place?!
+**GRANDMA** (Encouraging): Oh, dearie. When you were a just a little baby, your mother would often take you down here to the kitchen.  
+  _(1 cosmetic edit not shown)_
+**GRANDMA** (Encouraging): One could call you a regular!
+**MADDIE** (Charming): I remember!
+**GRANDMA** (Relaxed): Well, look at all the pies we made!
+**GRANDMA** (Encouraging): How about I take few to the biker club?
+**MADDIE** (Encouraging): I'm sure they'd appreciate it!
+
+### Kitchen: FirstFloorKitchen_08
+`FirstFloorKitchen_08` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**RODDY**: Hi, Maddie! I couldn't help but notice a wonderful smell coming from here and-
+**MADDIE** (Joyous): Roddy! You gotta see this!
+**RODDY** (Surprised): Wow! What is it?!
+**MADDIE** (Relaxed): Check it out!
+**RODDY** (Relaxed): Hey, cool! Is this the dumbwaiter from the dining room?
+**MADDIE** (Encouraging): It is!
+**RODDY** (Thinking): I think with a bit of engineering, we could get it up and running again!
+**MADDIE** (Relaxed): Good thing there's an engineer present.
+**RODDY** (Joyous): That's right!
+
+### Kitchen: FirstFloorKitchen_09
+`FirstFloorKitchen_09` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Relaxed): Maybe we can install an ordering system?
+**RODDY** (Relaxed): Planning on opening a restaurant, Maddie?
+**MADDIE** (Relaxed): Haha. Of course not!
+**ARTHUR** (Annoyed): Am I interupting something?
+**MADDIE** (Encouraging): No. I was just admiring the dumbwaiter.
+**ARTHUR** (Doubtful): Ah, that's his profession.
+**RODDY** (Annoyed): Arthur.
+**ARTHUR** (Relaxed): Roddy.
+**MADDIE** (Annoyed): Behave...
+**ARTHUR** (Relaxed): Of course, baby. After all, I promised to make dinner, didn't I?
+**RODDY** (Doubtful): Dinner?
+**ARTHUR** (Doubtful): Yeah. Dinner. For two...
+**ARTHUR** (Doubtful): So be a good dumb waiter and fetch me some butter, will you?
+
+### Kitchen: FirstFloorKitchen_10
+`FirstFloorKitchen_10` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**RODDY** (Annoyed): It's dumbwaiter, not DUMB WAITER.
+**ARTHUR** (Frustrated): Well, whatever you call yourself, if you're not going to do your job, then you can go.
+**RODDY** (Frustrated): I'm an architect!
+**MADDIE** (Doubtful): Just ignore him Roddy.
+**ARTHUR** (Charming): Hey! Did I ever get to show you my INSANE knife skills?
+**ARTHUR** (Charming): I was personally trained by a three-star chef, you know...  
+  _(1 cosmetic edit not shown)_
+**ARTHUR** (Thinking): Some of the techniques have been kept secret since the Middle Ages!  
+  _(2 cosmetic edits not shown)_
+**RODDY** (Doubtful): Oh, please...  
+  _earlier:_ ~~Okay... I admit, you've learned some new skills!~~ (until 26.05.01)  
+  _(1 cosmetic edit not shown)_
+**ARTHUR** (Doubtful): Behold the ignorance of jealousy, Mads.  
+  _earlier:_ ~~Oh please... He's holding the knife all wrong!~~ (until 26.05.01)
+**RODDY** (Annoyed): Ignorance?! I WAS trained in a family-owned restaurant!  
+  _earlier:_ ~~Behold the ignorance of jealousy, Mads.~~ (until 26.05.01)  
+  _(1 cosmetic edit not shown)_
+**ARTHUR** (Frustrated): Pssh... More like a family-owned hot dog stand.  
+  _earlier:_ ~~Ignorance?! I WAS trained in a Family owned restaurant!~~ (until 26.05.01)  
+  _(1 cosmetic edit not shown)_
+**MADDIE** (Doubtful): Boys...  
+  _earlier:_ ~~Pssh... More like a family owned hot dog stand.~~ (until 26.05.01)
+**—**: Boys...
+
+### Kitchen: FirstFloorKitchen_11
+`FirstFloorKitchen_11` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**ARTHUR** (Doubtful): Alright, hotshot. Prove it.
+**ARTHUR** (Doubtful): Show me your UH-MAAZING skills...
+**RODDY** (Doubtful): I will!
+**MADDIE** (Doubtful): Is this really necessary?
+**RODDY** (Doubtful): YES!
+**ARTHUR** (Annoyed): YES!
+**MADDIE** (Discouraged): Oh boy...
+**RODDY** (Relaxed): Alright, Maddie. Prepare to be amazed! I shall start by juggling these knives!  
+  _(1 cosmetic edit not shown)_
+**MADDIE** (Worried): Roddy, be careful!
+**RODDY** (Relaxed): Don't worry! I've done this many times!
+**ARTHUR** (Relaxed): ...
+**RODDY** (Surprised): Wow! What are you! OH NO!
+**ARTHUR** (Surprised): !!!
+**MADDIE** (Surprised): Arthur!!!
+
+### Kitchen: FirstFloorKitchen_12
+`FirstFloorKitchen_12` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**ARTHUR** (Surprised): Ow... OW! No, don't touch it, DON'T TOUCH IT!!!  
+  _earlier:_ ~~Aaaargh!!~~ (until 26.05.01)
+**MADDIE** (Surprised): Roddy, what did you do?!
+**RODDY** (Surprised): I... I... He...
+**ARTHUR** (Surprised): He tried to kill me! YOU SAW IT, MADS! Oh sweet baby J-
+**MADDIE** (Frustrated): Roddy, you have to get him to the hospital! Maybe it isn't so bad!
+**ARTHUR** (Surprised): Bad?! IT went through my foot!
+**MADDIE** (Frustrated): RODDY!
+**RODDY** (Surprised): Uh... Uh... YES, of- Of course! C'mon, I'll take you in my car!
+**ARTHUR** (Surprised): Aaaargh! Mads! MAAAADS! OW, don't step on it Roddy!!
+**RODDY** (Surprised): So- Sorry!
+**MADDIE** (Frustrated): ...
+**MADDIE** (Frustrated): Why, me?
+
+### Kitchen: FirstFloorKitchen_13
+`FirstFloorKitchen_13` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Discouraged): *sigh*
+**MADDIE** (Discouraged): What a mess...
+**MADDIE** (Doubtful): Once again, cleaning up after Arthur. Like usual.
+**MADDIE** (Thinking): Although this time, it was Roddy's fault, for trying to show off.
+**MADDIE** (Annoyed): Sometimes I just don't understand men.
+**MADDIE** (Doubtful): Well... I ain't letting this fish go to waste, so I'll might as well eat it myself.
+**MADDIE** (Thinking): All I need is some lemon pepper and-
+**MADDIE** (Surprised): Eeek! THE RAT! Winston! Catch it!
+**WINSTON** (Doubtful): My apologies, Ma'am, but I do believe it has managed to scurry off into the pantry before I could!  
+  _(1 cosmetic edit not shown)_
+**MADDIE** (Doubtful): Alright, little guy... Your scurrying days are numbered! I'll find you in the pantry!
 
 ### Kitchen: Start with the utensils. Go on.
 `FirstFloorKitchen_CharacterTask1` · seen 26.06.01–26.07.01
@@ -128,6 +305,18 @@
 **MADDIE** (Doubtful): But that is not my story to tell. Please excuse me, Ms.Boulton. Thank you for your help.
 **MADDIE** (Doubtful): Let me guess... Grandma would know more. *sigh*   
   _(1 cosmetic edit not shown)_
+
+### Kitchen: FirstFloorKitchen_Intro
+`FirstFloorKitchen_Intro` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Doubtful): Ha! It scurried in here!
+**MADDIE** (Surprised): Wait! Where did it go?
+**MADDIE** (Doubtful): Hmph! Hopefully Winston can deal with it soon...
+**MADDIE** (Thinking): Hey... This must be the kitchen! Probably the one the dumbwaiter is connected to!
+**MADDIE** (Encouraging): No surprise it came in here, then.
+**MADDIE** (Relaxed): I always believed that the kitchen was the heart of the house.
+**MADDIE** (Relaxed): So, I guess it's time to get it pumping again!
 
 ### Kitchen: Place the cooking rack
 `FirstFloorKitchen_POI_CastIronArea` · seen 26.06.01–26.07.01

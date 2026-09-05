@@ -15,8 +15,9 @@ Every story in which Winston speaks.
 **WINSTON** (Worried): May I recommend that you call a plumber instead, ma'am?
 **MADDIE** (Worried): *Sigh* I think you're right...
 
-### BoultonBoulevard 04
+### Boulton Boulevard: BoultonBoulevard_04
 `BoultonBoulevard_04` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Thinking): Hmm... I don’t know much about this place!
 **MADDIE** (Thinking): Apart from what I’ve read, of course.
@@ -30,8 +31,9 @@ Every story in which Winston speaks.
 **WINSTON** (Thinking): Is everything alright, Ma’am?
 **MADDIE** (Talking): Yes, of course! I was wondering if you could join me at the tin can factory?
 
-### BoultonBoulevard 05
+### Boulton Boulevard: BoultonBoulevard_05
 `BoultonBoulevard_05` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **WINSTON**: How may I be of service, Ma’am?
 **MADDIE** (Encouraging): I’ve decided to fix up the old factory! And was wondering if you could tell me a little about it?
@@ -61,8 +63,9 @@ Every story in which Winston speaks.
 **WINSTON** (Charming): Very prudent, Ma'am. Given your history with the council.  
   _(1 cosmetic edit not shown)_
 
-### BoultonBoulevard 07
+### Boulton Boulevard: BoultonBoulevard_07
 `BoultonBoulevard_07` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Surprised): Hey! There seems to be a plaque hidden under these bushes!
 **WINSTON** (Encouraging): Well spotted, Ma’am. That would be their time capsule.
@@ -76,8 +79,9 @@ Every story in which Winston speaks.
 **MADDIE** (Relaxed): Alright, alright, I get the point.
 **MADDIE** (Joyous): Let’s find out what’s inside!
 
-### BoultonBoulevard 08
+### Boulton Boulevard: BoultonBoulevard_08
 `BoultonBoulevard_08` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Joyous): Oh wow! There’s so much stuff in here!
 **MADDIE**: Old tin cans, newspaper clippings, even letters from residents! This is incredible!
@@ -92,8 +96,9 @@ Every story in which Winston speaks.
 **WINSTON** (Joyous): And rob you of all the fun, Ma’am?
 **MADDIE** (Doubtful): Oh, ha ha.
 
-### BoultonBoulevard 09
+### Boulton Boulevard: BoultonBoulevard_09
 `BoultonBoulevard_09` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Doubtful): Hmmm.. Looks like the remains of a bell.
 **WINSTON** (Charming): Indeed, Ma’am. That was Agatha’s. She cast it herself, you know? Pure tin, and it rang twice a day.  
@@ -119,8 +124,9 @@ Every story in which Winston speaks.
 **MADDIE** (Encouraging): This will be the museum's café! I'm sure guests will love the outdoor seating.
 **MADDIE** (Joyous): And enjoying the boulevard at their own leisure.
 
-### BoultonBoulevard 11
+### Boulton Boulevard: BoultonBoulevard_11
 `BoultonBoulevard_11` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Doubtful): The water wheel’s completely jammed. It’s just packed with leaves and debris.
 **WINSTON** (Discouraged): It is quite unfortunate. That wheel used to power a third of the machinery inside.
@@ -135,8 +141,9 @@ Every story in which Winston speaks.
 **MADDIE** (Encouraging): Not to mention being a great teaching tool about renewable energies.
 **WINSTON** (Joyous): A wonderful idea, Ma’am.
 
-### BoultonBoulevard 12
+### Boulton Boulevard: BoultonBoulevard_12
 `BoultonBoulevard_12` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Joyous): An old fire truck!  
   _(1 cosmetic edit not shown)_
@@ -148,8 +155,9 @@ Every story in which Winston speaks.
 **WINSTON**: That banner was indeed lucky to survive. It was raised every morning. Flying bright over every shift change.
 **MADDIE** (Relaxed): It’s going up again. A great reminder of the history of this place.
 
-### BoultonBoulevard 13
+### Boulton Boulevard: BoultonBoulevard_13
 `BoultonBoulevard_13` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: I knew this place mattered, but I didn’t realize how much until now.
 **WINSTON** (Thinking): Most things don’t reveal their value until someone bothers to look closely, Ma’am.
@@ -459,8 +467,9 @@ Every story in which Winston speaks.
 **WINSTON** (Discouraged): *Huff*...*huff*
 **MADDIE** (Worried): Okay, you sit down, I’ll give it a look!
 
-### Dancefloor 07
+### Dancefloor: Dancefloor_07
 `Dancefloor_07` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): Grandma, what was she talking about? A second watch? I've only seen one...
 **GRANDMA** (Frustrated): Winston, we need to check all the windows and doors. Make sure all the locks are still in good condition.
@@ -473,8 +482,9 @@ Every story in which Winston speaks.
 **MADDIE** (Surprised): R-Really?!
 **GRANDMA** (Frustrated): It’s time you learned the truth...
 
-### Dancefloor Intro
+### Dancefloor: Dancefloor_Intro
 `Dancefloor_Intro` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **SULLIVAN** (Encouraging): ...and I know that YOU have something to do with it!
 **GRANDMA** (Annoyed): You’re dangerously close to crossing a line, detective...
@@ -486,8 +496,9 @@ Every story in which Winston speaks.
 **WINSTON** (Frustrated): I think not, Ma’am...
 **MADDIE** (Annoyed): How dare you enter my home without a warrant? What kind of detective are you?!
 
-### DiningRoom02
+### Dining Room: DiningRoom02
 `DiningRoom02` · seen 23.09.02–26.07.01
+- trigger: area, area=Dining Room, areaId=DiningRoom, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **WINSTON**: I see your endeavors to reclaim the grandeur of your past home have come to a head, Ma'am. 
 **WINSTON** (Doubtful): While your efforts in restoring the other rooms are admirable, I honestly believe that this room is a lost cause...
@@ -496,8 +507,9 @@ Every story in which Winston speaks.
 **DEB** (Frustrated): He means, the wonderful old days of this mansion holding amazing dinner parties are over.
 **MADDIE** (Thinking): Dinner parties?
 
-### DiningRoom03
+### Dining Room: DiningRoom03
 `DiningRoom03` · seen 23.09.02–26.07.01
+- trigger: area, area=Dining Room, areaId=DiningRoom, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **WINSTON** (Thinking): Deb...
 **DEB** (Annoyed): Winston.
@@ -513,8 +525,9 @@ Every story in which Winston speaks.
 **MADDIE** (Surprised): Grandma!
 **WINSTON** (Surprised): My apologies Ma'am. I let my emotions get the better of me. Please, if you'd excuse me...
 
-### FactoryReception 02
+### The Reception: FactoryReception_02
 `FactoryReception_02` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Discouraged): Oof... This is A LOT of junk mail!
 **MADDIE**: Hmm... What’s this?
@@ -528,8 +541,9 @@ Every story in which Winston speaks.
 **WINSTON** (Discouraged): As you can see, not his brightest idea.
 **MADDIE** (Discouraged): Oh Leonard...
 
-### FactoryReception 04
+### The Reception: FactoryReception_04
 `FactoryReception_04` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): Oh, cool! An old employee time clock!
 **WINSTON**: This one is quite unique, actually. Ignatius designed it himself. Supposedly, it kept perfect time.
@@ -542,8 +556,9 @@ Every story in which Winston speaks.
 **MADDIE** (Encouraging): It'll make the experience of coming to the factory even more immersive!
 **WINSTON** (Relaxed): Ah, indeed!
 
-### FactoryReception 05
+### The Reception: FactoryReception_05
 `FactoryReception_05` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Thinking): These photos must have been from the factory’s grand opening and ribbon-cutting ceremony.
 **WINSTON** (Thinking): It was a grand day, Ma’am. Everyone from Hopewell Bay was there.
@@ -554,8 +569,9 @@ Every story in which Winston speaks.
 **MADDIE**: Thank you.
 **WINSTON** (Charming): But of course, Ma’am.
 
-### FactoryReception Intro
+### The Reception: FactoryReception_Intro
 `FactoryReception_Intro` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **WINSTON** (Charming): ...And here we go, Ma’am.
 **WINSTON** (Encouraging): The reception of the Boulton Tin Can Factory!
@@ -591,8 +607,9 @@ Every story in which Winston speaks.
 **MADDIE** (Encouraging): It'll be memorable! People love quirky, interactive things.
 **WINSTON**: As you say, ma'am. I'll prepare for the inevitable queue of overtime claims.
 
-### FirstFloorKitchen 13
+### Kitchen: FirstFloorKitchen_13
 `FirstFloorKitchen_13` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Discouraged): *sigh*
 **MADDIE** (Discouraged): What a mess...
@@ -669,8 +686,9 @@ Every story in which Winston speaks.
 **WINSTON** (Thinking): Tell me!
 **WINSTON** (Worried): Let me just polish this first to calm my nerves...
 
-### FirstFloorPantry 13
+### Pantry: FirstFloorPantry_13
 `FirstFloorPantry_13` · seen 26.07.01–26.07.01
+- trigger: area, area=Pantry, areaId=FirstFloorPantry, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Doubtful): Victoria's finally gone...she got very worked up. I wonder...
 **MADDIE** (Doubtful): Is anything she said true?
@@ -731,8 +749,9 @@ Every story in which Winston speaks.
 **WINSTON** (Encouraging): All I know is that sometimes statues hold secrets, just as people do.
 **RODDY** (Surprised): That's it! I knew that glowing, green monster was hiding something!
 
-### Gallery09
+### Gallery: Gallery09
 `Gallery09` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Frustrated): Arrgh! I am beyond mad! How could she?!
 **MADDIE** (Frustrated): I don't deserve to be treated like a child!
@@ -827,8 +846,9 @@ Every story in which Winston speaks.
 
 **WINSTON**: Roosters must have an <b>infinite</b> amount of patience to keep the chickens in line! Or a bunch of <b>hourglasses</b>...
 
-### Lounge16
+### Lounge: Lounge16
 `Lounge16` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **WINSTON**: Ma'am... It seems I found the intruder that was munching on all the foliage...
 **MADDIE**: Brilliant! So what was it?
@@ -934,8 +954,9 @@ Every story in which Winston speaks.
 **MADDIE** (Thinking): That's a person who studies moths and butterflies, right?
 **WINSTON** (Encouraging): That's correct, ma'am.
 
-### Musicianroom02
+### Music Studio: Musicianroom02
 `Musicianroom02` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=Musicianroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **WINSTON** (Relaxed): You called, ma’am? I assume this has something to do with the construction workers outside...
 **MADDIE** (Doubtful): Yes! Winston, do you think you can deal with the mayor's cronies and tell me what they’re up to?
@@ -1024,8 +1045,9 @@ Every story in which Winston speaks.
 **WINSTON** (Charming): You truly are a Boulton worthy of their name.
 **MADDIE** (Charming): Anytime, Winston!
 
-### Perfumery06
+### The Perfumery: Perfumery06
 `Perfumery06` · seen 25.06.01–26.07.01
+- trigger: area, area=The Perfumery, areaId=Perfumery, phase=area story (exact task not dumped) (versions 25.06.01–26.07.01)
 
 **WINSTON**: Is everything alright, Ma’am?
 **MADDIE** (Worried): Oh, Winston... It’s alright. Just Leonard.
@@ -1036,8 +1058,9 @@ Every story in which Winston speaks.
 **WINSTON** (Discouraged): It truly is a pity how her life became so tragic because of her decisions.
 **MADDIE** (Worried): Do you know what really happened to her?
 
-### Perfumery07
+### The Perfumery: Perfumery07
 `Perfumery07` · seen 25.06.01–26.07.01
+- trigger: area, area=The Perfumery, areaId=Perfumery, phase=area story (exact task not dumped) (versions 25.06.01–26.07.01)
 
 **WINSTON** (Discouraged): It is a sad story, but yes, I know it.
 **MADDIE**: Tell me, please.

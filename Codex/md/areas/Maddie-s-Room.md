@@ -1,6 +1,156 @@
 # Maddie's Room
 
 
+### Maddie's Room: Maddieroom_02
+`Maddieroom_02` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE**: Victoria! What do you want?
+**MADDIE**: It's over!
+**VICTORIA** (Frustrated): Over? OVER?! It isn't over until I DECIDE it is! Do you hear me?! 
+**VICTORIA** (Worried): Because of YOU, my precious Bruno is now rotting in a jail cell! 
+**MADDIE**: Good! He deserves to-
+**VICTORIA** (Doubtful): You have no idea who and what you're dealing with, Maddie! 
+**VICTORIA** (Frustrated): But I'll make sure you and your grandmother learn by the end of it... Oh, I'll make sure!
+**VICTORIA** (Frustrated): *Click*
+**MADDIE** (Worried): *Gulp*
+**GRANDMA**: Who was that, dearie? I could hear their voice in the hallway!
+
+### Maddie's Room: Maddieroom_03
+`Maddieroom_03` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Worried): It was Victoria... She's basically vowed revenge upon us. 
+**GRANDMA** (Frustrated): Don't worry about her, dearie. She's had it out for our family for a long time...
+**MADDIE** (Thinking): I wonder what brought that on...
+**GRANDMA** (Thinking): Victoria's family and ours have a... history.
+**GRANDMA** (Charming): It's just a part of life in small towns like Hopewell Bay.
+**MADDIE**: I guess you're right... 
+**GRANDMA** (Encouraging): Looks like you finally decided to visit your old room.
+**MADDIE**: It took some courage...
+**GRANDMA** (Joyous): I remember how you'd play for hours in here! 
+**GRANDMA**: You'd gather up all your toys for elaborate tea parties on that little table. 
+**MADDIE** (Charming): Ha... I don't really remember that.
+**GRANDMA** (Charming): You were only four at the time... I'm sure as you fix up the place, some memories will come back to you.
+
+### Maddie's Room: Maddieroom_04
+`Maddieroom_04` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Relaxed): Huh... I remember these toys! 
+**MADDIE** (Encouraging): And over there I would build a huge pillow fort with...
+**MADDIE** (Discouraged): Dad...
+**GRANDMA** (Encouraging): Ah, yes. Michael really liked building things with you.
+**GRANDMA** (Relaxed): He sort of hoped you'd get into engineering... I guess he was right. 
+**MADDIE** (Worried): Grandma? 
+**GRANDMA**: Yes, dearie?
+**MADDIE** (Worried): Can you tell me about them? About my parents? 
+**MADDIE** (Thinking): I... I have glimpses of them. Short snapshots of their faces, being happy.
+**MADDIE** (Thinking): But... I don't know anything about them. You never...
+**GRANDMA** (Discouraged): Alright, dearie... Alright.
+
+### Maddie's Room: Maddieroom_05
+`Maddieroom_05` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**GRANDMA**: Michael and Rebecca were the most loving parents you could ever hope for.
+**GRANDMA** (Encouraging): Everything they did was for you Maddie, all their decisions... 
+**GRANDMA** (Doubtful): Even the ones I... I didn't approve of.
+**MADDIE** (Doubtful): Approve of?
+**GRANDMA** (Annoyed): Please, don't let me go into that. I'll tell you another time...
+**MADDIE**: Okay... What else can you tell me about them?
+**GRANDMA**: They were very creative! When they put their heads together, they could do just about anything.
+**GRANDMA** (Charming): I see a lot of that creativity in you, Maddie. 
+**GRANDMA** (Encouraging): And they always saw the best in people!
+**MADDIE** (Discouraged): They sound lovely, exactly as I imagined....
+**GRANDMA** (Discouraged): What is it, dearie?
+**MADDIE** (Worried): I... I want to know about the accident.
+**MADDIE** (Worried): I want to know about the night my parents...
+**GRANDMA** (Worried): Oh Maddie...
+
+### Maddie's Room: Maddieroom_06
+`Maddieroom_06` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Worried): Please Grandma... 
+**MADDIE** (Thinking): I sometimes have strange dreams, like I was right there...
+**MADDIE** (Thinking): I see a fire... I try reaching out, my eyes stinging.
+**MADDIE** (Thinking): I'm just about to reach them when...
+**MADDIE** (Thinking): Someone pulls me away.
+**MADDIE** (Discouraged): But I know that's silly and-
+**GRANDMA** (Worried): No Maddie... It's not silly at all.
+**GRANDMA** (Worried): You WERE there.
+**MADDIE** (Surprised): WHAT?!
+**GRANDMA** (Discouraged): You were there the night Michael and Rebecca died...
+**GRANDMA** (Discouraged): And...
+**GRANDMA** (Discouraged): So was I.
+
+### Maddie's Room: Maddieroom_07
+`Maddieroom_07` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Worried): WE were there?!
+**GRANDMA** (Annoyed): Maddie, you must understand...
+**GRANDMA** (Worried): There was an awful fight between your father and I.
+**GRANDMA** (Worried): By the end of it, he stormed out and drove you and your mother home. 
+**GRANDMA** (Worried): I felt guilty and didn't want to leave it there, so I took my car to follow him back.
+**GRANDMA** (Discouraged): That's when I saw... 
+**GRANDMA** (Discouraged): A car on fire.
+**MADDIE**: Fire?! So... I didn't just dream it...
+
+### Maddie's Room: Maddieroom_08
+`Maddieroom_08` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**GRANDMA** (Annoyed): I had a sinking feeling... 
+**GRANDMA** (Discouraged): I stopped and ran out...
+**GRANDMA** (Discouraged): And that's when I heard you crying! You were in the back seat. 
+**GRANDMA** (Discouraged): I pulled you out before the fire engulfed the whole car...
+**GRANDMA** (Discouraged): And after that... there was nothing more I could do...
+**MADDIE** (Discouraged): Oh, grandma...
+**GRANDMA** (Worried): It's alright, dearie. I've had a lot of time to think about it.
+**GRANDMA** (Worried): I know I did the right thing in saving you first. But...
+**MADDIE** (Discouraged): But you still feel guilty for having the fight.
+**GRANDMA** (Worried): Yes.
+
+### Maddie's Room: Maddieroom_09
+`Maddieroom_09` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**GRANDMA** (Worried): If we wouldn't have had that fight, Michael would not have charged off.
+**GRANDMA** (Worried): Maybe he would have...
+**MADDIE** (Worried): Grandma, it's okay. It wasn't your fault.
+**GRANDMA** (Discouraged): But it was... I'm consumed by guilt.
+**MADDIE** (Worried): Grandma, I don't blame you.
+**GRANDMA** (Surprised): You... You don't?
+**MADDIE** (Relaxed): No, Grandma. You saved me! How could I blame you for that?
+**GRANDMA** (Surprised): ...
+**GRANDMA** (Discouraged): Thank you, dearie!
+
+### Maddie's Room: Maddieroom_10
+`Maddieroom_10` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**GRANDMA** (Worried): Do you hear that? I think it's Winston...
+**MADDIE** (Thinking): Yes, sounds like it's something urgent-
+**GRANDMA**: I'll take care of it, dearie. I'll give you some space to process your feelings...
+**GRANDMA** (Encouraging): Alright, Winston, I'll be right with you!
+**GRANDMA** (Charming): Maddie, I am so proud of you. You are so much like your parents!
+**GRANDMA** (Charming): Headstrong and brilliant. Just don't let the past hold you back. 
+**MADDIE** (Relaxed): T-thank you, Grandma.
+
+### Maddie's Room: Maddieroom_11
+`Maddieroom_11` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE**: What a beautiful music box!
+**MADDIE** (Thinking): It looks like something I know...
+**MADDIE** (Thinking): I think I've had dreams about this-
+**MADDIE** (Surprised): Wait! That's it. I remember Mom playing this before bedtime!
+**MADDIE** (Worried): I hope it works...
+**MADDIE** (Encouraging): It's just like I remember it...
+**MADDIE** (Encouraging): The most soothing notes!
+
 ### Maddie's Room: Play with building blocks
 `Maddieroom_12` · seen 24.11.02–26.07.01
 - trigger: area, area=Maddie's Room, areaId=MaddieRoom, hotspotId=MaddieRoomSwapLetterBlocksK5, phase=task completed, task=Play with building blocks (versions 24.11.02–26.07.01)
@@ -91,6 +241,19 @@
 **MADDIE** (Relaxed): Good old-fashioned hopscotch!
 **MADDIE** (Encouraging): I bet I made quite the racket to whomever was below...
 **MADDIE** (Thinking): Hmm... Maybe I should give it a go again?!
+
+### Maddie's Room: Maddieroom_Intro
+`Maddieroom_Intro` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Frustrated): I guess I've avoided this room long enough...
+**MADDIE** (Worried): *Sigh*
+**MADDIE** (Worried): What a mess...
+**MADDIE** (Worried): It figures, in a way... my old room is a mess...
+**MADDIE** (Discouraged): Just like my life.
+**MADDIE** (Surprised): *Ring Ring*
+**MADDIE**: Hello?
+**VICTORIA** (Worried): Maddie. I will make you pay, if it's the last thing I do!
 
 ### Maddie's Room: Add new filling
 `Maddieroom_Lumpybear` · seen 24.11.02–26.07.01

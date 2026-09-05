@@ -1,8 +1,9 @@
 # Arthur
 Every story in which Arthur speaks.
 
-### Cinema02
+### Cinema: Cinema02
 `Cinema02` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=Cinema, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Hey... this is a cinema!
 **MADDIE** (Doubtful): Or... a stage?
@@ -12,8 +13,9 @@ Every story in which Arthur speaks.
 **MADDIE** (Surprised): Ahhh! Arthur?! What are you doing back here?
 **ARTHUR** (Charming): Hey there, Mads...
 
-### Cinema03
+### Cinema: Cinema03
 `Cinema03` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=Cinema, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **ARTHUR**: I’m sorry, Mads. I just had to come back and see you again.
 **ARTHUR** (Surprised): Your butler let me in.
@@ -29,8 +31,9 @@ Every story in which Arthur speaks.
 **ARTHUR** (Doubtful): I never said I was a “good” cook...
 **MADDIE** (Charming): Haha... no. You didn’t. And... they weren’t half bad!
 
-### Cinema04
+### Cinema: Cinema04
 `Cinema04` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=Cinema, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **ARTHUR** (Charming): See? This is what I’m talking about! You and me! Us. I miss... THIS!
 **MADDIE** (Worried): Arthur... I...
@@ -42,8 +45,9 @@ Every story in which Arthur speaks.
 **MADDIE** (Doubtful): Of course! Let me ju-
 **ARTHUR** (Doubtful): She ain’t going anywhere alone with you, buddy. Whatever you need to say, you can say in front of me.
 
-### Cinema05
+### Cinema: Cinema05
 `Cinema05` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=Cinema, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Annoyed): Hey! I can make my own decisions!
 **RODDY** (Doubtful): Yeah, buzz off.
@@ -56,8 +60,9 @@ Every story in which Arthur speaks.
 **MADDIE** (Surprised): Arthur!
 **ARTHUR** (Annoyed): No, I’m serious! This guy is BAD news!
 
-### Cinema06
+### Cinema: Cinema06
 `Cinema06` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=Cinema, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **ARTHUR** (Doubtful): I’m telling you Mads, you shouldn’t trust him.
 **RODDY** (Annoyed): Trust me? What about you?! Quite convenient for you to turn up again, right?...
@@ -68,8 +73,9 @@ Every story in which Arthur speaks.
 **RODDY** (Worried): ...
 **ARTHUR** (Doubtful): See? I know who he is... And where he’s from.
 
-### Cinema07
+### Cinema: Cinema07
 `Cinema07` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=Cinema, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): I don’t understand, what are you saying?
 **RODDY** (Worried): Maddie, don’t listen to him. He’s obviously trying to manipulate you.
@@ -85,8 +91,9 @@ Every story in which Arthur speaks.
 **RODDY** (Worried): Yeah... Let’s.
 **MADDIE** (Frustrated): Ugh. Men.
 
-### FirstFloorKitchen 03
+### Kitchen: FirstFloorKitchen_03
 `FirstFloorKitchen_03` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **ARTHUR**: Hello Mads...
 **MADDIE** (Surprised): Arthur! You surprised me!
@@ -117,8 +124,9 @@ Every story in which Arthur speaks.
 **MADDIE** (Annoyed): What has Roddy got to do with any of this?
 **MADDIE** (Annoyed): Besides... He'd never say the things you do.
 
-### FirstFloorKitchen 05
+### Kitchen: FirstFloorKitchen_05
 `FirstFloorKitchen_05` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Annoyed): Arthur, I'm really busy and-
 **ARTHUR** (Frustrated): Hold that thought. Someone's calling!
@@ -132,8 +140,9 @@ Every story in which Arthur speaks.
 **ARTHUR** (Charming): But I'll run by the store as well, to get us something to cook. I promised a meal after all.
 **MADDIE** (Annoyed): Seriously?!
 
-### FirstFloorKitchen 09
+### Kitchen: FirstFloorKitchen_09
 `FirstFloorKitchen_09` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Relaxed): Maybe we can install an ordering system?
 **RODDY** (Relaxed): Planning on opening a restaurant, Maddie?
@@ -149,8 +158,9 @@ Every story in which Arthur speaks.
 **ARTHUR** (Doubtful): Yeah. Dinner. For two...
 **ARTHUR** (Doubtful): So be a good dumb waiter and fetch me some butter, will you?
 
-### FirstFloorKitchen 10
+### Kitchen: FirstFloorKitchen_10
 `FirstFloorKitchen_10` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY** (Annoyed): It's dumbwaiter, not DUMB WAITER.
 **ARTHUR** (Frustrated): Well, whatever you call yourself, if you're not going to do your job, then you can go.
@@ -176,8 +186,9 @@ Every story in which Arthur speaks.
   _earlier:_ ~~Pssh... More like a family owned hot dog stand.~~ (until 26.05.01)
 **—**: Boys...
 
-### FirstFloorKitchen 11
+### Kitchen: FirstFloorKitchen_11
 `FirstFloorKitchen_11` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **ARTHUR** (Doubtful): Alright, hotshot. Prove it.
 **ARTHUR** (Doubtful): Show me your UH-MAAZING skills...
@@ -195,8 +206,9 @@ Every story in which Arthur speaks.
 **ARTHUR** (Surprised): !!!
 **MADDIE** (Surprised): Arthur!!!
 
-### FirstFloorKitchen 12
+### Kitchen: FirstFloorKitchen_12
 `FirstFloorKitchen_12` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **ARTHUR** (Surprised): Ow... OW! No, don't touch it, DON'T TOUCH IT!!!  
   _earlier:_ ~~Aaaargh!!~~ (until 26.05.01)
@@ -234,20 +246,24 @@ Every story in which Arthur speaks.
 **MADDIE** (Talking): Good lu...*click*
 **MADDIE** (Worried): Poor Arthur.
 
-### GrandmaRoom 01
+### Grandma's Room: GrandmaRoom_01
 `GrandmaRoom_01` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 
-### GrandmaRoom 05
+### Grandma's Room: GrandmaRoom_05
 `GrandmaRoom_05` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 
-### GrandmaRoom 06
+### Grandma's Room: GrandmaRoom_06
 `GrandmaRoom_06` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 
-### GrandmaRoom 13
+### Grandma's Room: GrandmaRoom_13
 `GrandmaRoom_13` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Grandma's Room: Clean shelf
@@ -263,8 +279,9 @@ Every story in which Arthur speaks.
 **ARTHUR** (Talking): Alright, alright. I'll take what I can get! A walk it is. See you soon, Mads!
 **MADDIE** (Frustrated): What did I just do?
 
-### Library07
+### Library: Library07
 `Library07` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Charming): Roddy...
 **RODDY** (Charming): Y- Yes?
@@ -273,8 +290,9 @@ Every story in which Arthur speaks.
 **MADDIE** (Surprised): !!!
 **ARTHUR**: Hello, Mads...
 
-### Library08
+### Library: Library08
 `Library08` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Frustrated): Wha... Wha...
 **RODDY** (Doubtful): Excuse me, but who are you?
@@ -288,8 +306,9 @@ Every story in which Arthur speaks.
 **ARTHUR**: Mads, it was Ursula who-
 **GRANDMA** (Frustrated): Arthur? I thought I got rid of you...
 
-### Library09
+### Library: Library09
 `Library09` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Is that true Grandma?!
 **GRANDMA** (Annoyed): Yes... It’s true.
@@ -304,8 +323,9 @@ Every story in which Arthur speaks.
 **RODDY** (Annoyed): No... You need time with your “fiancé”.
 **MADDIE** (Frustrated): Roddy!
 
-### Library10
+### Library: Library10
 `Library10` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **ARTHUR** (Charming): Mads...
 **MADDIE** (Doubtful): You left me, Arthur. I can’t just forget that.
@@ -319,8 +339,9 @@ Every story in which Arthur speaks.
 **MADDIE** (Annoyed): What I really want is for everyone to just leave.
 **MADDIE** (Frustrated): I... I need to think.
 
-### SpyRoom 08
+### Spy Room: SpyRoom_08
 `SpyRoom_08` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Talking): Arthur! Hey, I’m sort of busy right now and-
 **ARTHUR** (Charming): Mads! I had SUCH A GREAT TIME at the beach!

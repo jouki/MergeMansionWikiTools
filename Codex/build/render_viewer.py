@@ -2,6 +2,7 @@
 """codex.json -> Codex/_cache/viewer.html (single-file browser; gitignored). Run: python Codex/build/render_viewer.py"""
 import json
 import os
+import re
 import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
@@ -40,6 +41,11 @@ def adapt(codex):
                 if t["kind"] == "itemDiscovered":
                     t.update({"kind": "item", "event": t.get("chain"), "items": [t.get("itemName") or t.get("item")]})
             stories.append({"id": sid, "triggers": trig, "lines": lines, "firstSeen": (s.get("seen") or {}).get("first")})
+    # stories with no area/event: expose them as an "Unassigned: <id prefix>" group so a human can place them
+    for s in stories + removed:
+        if not any(t.get("area") or t.get("event") for t in s["triggers"]):
+            m = re.match(r"^([A-Za-z]+?)(?:_|\d|$)", s["id"])
+            s["unassigned"] = m.group(1) if m else s["id"]
     n_lines = sum(1 for l in codex["lines"].values() if l["seen"] and l["seen"]["last"] == cur)
     summary = {"version": cur, "historyVersions": codex["versions"], "lines": n_lines, "stories": len(stories),
                "characters": len(chars), "unmatchedGroups": len(codex["gaps"]["unknownTriggerStories"]), "removedStories": len(removed)}

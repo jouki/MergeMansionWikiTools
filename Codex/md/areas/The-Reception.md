@@ -1,6 +1,60 @@
 # The Reception
 
 
+### The Reception: FactoryReception_02
+`FactoryReception_02` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Discouraged): Oof... This is A LOT of junk mail!
+**MADDIE**: Hmm... What’s this?
+**MADDIE**: Foreclosure notices addressed to Leonard?
+**MADDIE** (Surprised): Did he run the factory for a while?!
+**WINSTON** (Charming): Why yes, he did, Ma’am. For about 2 months.
+**MADDIE**: 2 months? I guess it didn’t go too well...
+**WINSTON** (Discouraged): It did not.
+**MADDIE**: What’s this? An advertisement for...
+**MADDIE** (Surprised): T-shirts in a... Can?!
+**WINSTON** (Discouraged): As you can see, not his brightest idea.
+**MADDIE** (Discouraged): Oh Leonard...
+
+### The Reception: FactoryReception_03
+`FactoryReception_03` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE**: Phew, that’s all cleared up!
+**MADDIE** (Encouraging): Oooh, the factory logo!
+**MADDIE** (Encouraging): Winston told me it was Ignatius' design, but Agatha made sure it went on every single can. No exceptions.
+**MADDIE** (Relaxed): No wonder they had such an impact. They weren't just making cans, they made standards. 
+**MADDIE** (Relaxed): Pioneers. Right down to the stamp on the tin.
+
+### The Reception: FactoryReception_04
+`FactoryReception_04` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Encouraging): Oh, cool! An old employee time clock!
+**WINSTON**: This one is quite unique, actually. Ignatius designed it himself. Supposedly, it kept perfect time.
+**MADDIE**: We do like our clocks in the family.
+**WINSTON** (Thinking): Ignatius always said, “Time is money.” With this, he meant it literally. He liked orderly paychecks.
+**MADDIE** (Joyous): Hey! Let’s use this on the guests!
+**WINSTON** (Doubtful): I beg your pardon?!
+**MADDIE** (Encouraging): I mean when guests come in, they can clock in their ticket!
+**MADDIE** (Encouraging): Then, when they leave, they can clock out!
+**MADDIE** (Encouraging): It'll make the experience of coming to the factory even more immersive!
+**WINSTON** (Relaxed): Ah, indeed!
+
+### The Reception: FactoryReception_05
+`FactoryReception_05` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Thinking): These photos must have been from the factory’s grand opening and ribbon-cutting ceremony.
+**WINSTON** (Thinking): It was a grand day, Ma’am. Everyone from Hopewell Bay was there.
+**MADDIE** (Relaxed): I guess it was an important day for them.
+**WINSTON**: It indeed was, Ma’am. I often wish I could have seen it myself!
+**WINSTON**: Pardon me, but if you won’t be needing me anymore, I’ll be heading back to the Mansion.
+**MADDIE**: Ah yes, of course, Winston! You’ve really been a big help.
+**MADDIE**: Thank you.
+**WINSTON** (Charming): But of course, Ma’am.
+
 ### The Reception: Fix the table leg
 `FactoryReception_06` · seen 25.09.01–26.07.01
 - trigger: area, area=The Reception, areaId=FactoryReception, hotspotId=FactoryReceptionTableRemoveDamage_1, phase=task completed, task=Fix the table leg (versions 25.09.01–26.07.01)
@@ -22,6 +76,59 @@
 **MADDIE** (Encouraging): So, it’ll be nice for the guests to lounge on the same furniture.
 **MADDIE** (Encouraging): Almost like being there!
 
+### The Reception: FactoryReception_08
+`FactoryReception_08` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE**: *Beep*
+**MADDIE** (Thinking): So, what do we have here...
+**MADDIE** (Thinking): *Bop*
+**MADDIE** (Surprised): No way! A CB-01? I thought there was only one of these left.
+**MADDIE**: How are you holding up, buddy?
+**CB-01** (Discouraged): *Beep*
+**MADDIE** (Worried): In rough shape, huh? That beep sounded more like a cough.
+**MADDIE** (Encouraging): Don't worry, I'll have you fixed up in no time!
+
+### The Reception: FactoryReception_09
+`FactoryReception_09` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE**: First, let's bypass the damaged circuits... then I'll reroute power through the secondary panel...
+**CB-01** (Discouraged): *Buzz*
+**MADDIE** (Relaxed): That's an improvement! It's missing the gemstone sensors, but the printer mechanism is intact.
+**MADDIE**: I'll give you a new life and a new job, you'll be our new ticket master.
+**CB-01** (Surprised): *Brrrr*
+**MADDIE** (Joyous): It's printing! Those four years of engineering school sure came in handy.
+**MADDIE** (Joyous): A fresh polish and a system upgrade, you're gonna charm every museum visitor.
+
+### The Reception: FactoryReception_10
+`FactoryReception_10` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Thinking): What is this thing... an antique can opener?
+**ANTIQUEDEALER**: Not just antique, Maddie. I believe that is the very first can opener prototype!
+**ANTIQUEDEALER** (Charming): Julius?! I didn't hear you come in. Did you finish inspecting the grounds?
+**ANTIQUEDEALER** (Charming): Just did! And I'm ready to start working on the museum permits.
+**ANTIQUEDEALER**: Thanks for your help with this, Julius.
+**MADDIE**: But, the first prototype, huh? Makes sense that Ignatius would've thought of it.
+**ANTIQUEDEALER** (Thinking): The grooves, the angle... This was the blueprint for everything that came after.
+**MADDIE**: It's a bit clunky by today's standards. Definitely fits better on a display counter than in the kitchen.
+**ANTIQUEDEALER** (Annoyed): Kitchen? Nonsense, this is the star of your museum!
+**MADDIE** (Encouraging): We'll need a plaque for our VIP: Very Important Prototype.
+
+### The Reception: FactoryReception_11
+`FactoryReception_11` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE**: A great museum starts with a great introduction. Let's give guests the full story right here in the reception.
+**MADDIE**: An infographic focusing on the history of the factory.
+**MADDIE** (Encouraging): Let's start bold: "The First Tin Can Factory in History!" in big letters. That'll catch their attention.
+**MADDIE** (Encouraging): Then the evolution: from Ignatius' very first tin cans, to Lindsay's spray cans, to... 
+**MADDIE** (Relaxed): ...uhm, Leonard's t-shirts in a can... We'll tuck that one in the corner.
+**MADDIE** (Relaxed): And done! A timeline of how the Boultons packaged innovation, one can at a time.
+**MADDIE** (Worried): Wish I had one of these growing up. So much history even I don't know.
+**MADDIE** (Encouraging): But I'll start with what we can show.
+
 ### The Reception: Repair the coat hanger
 `FactoryReception_12` · seen 25.09.01–26.07.01
 - trigger: area, area=The Reception, areaId=FactoryReception, hotspotId=FactoryReceptionWallSwapCoatHangers, phase=task completed, task=Repair the coat hanger (versions 25.09.01–26.07.01)
@@ -36,6 +143,21 @@
 **ANTIQUEDEALER** (Relaxed): Well, it won't be run-down for much longer if you keep at this pace!
 **MADDIE**: Thank you for the support, Julius. It means a lot.
 **ANTIQUEDEALER** (Charming): You're doing a great service to the town's history, Maddie.
+
+### The Reception: FactoryReception_13
+`FactoryReception_13` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Relaxed): That's the reception sorted. Floors waxed, displays up, and we even have a brand new ticket dispenser!
+**CB-01** (Joyous): *Beep Bop*
+**ANTIQUEDEALER** (Joyous): It's remarkable, Ignatius would've been proud!
+**MADDIE**: Wait until you see what comes next! The factory floor has... potential.
+**ANTIQUEDEALER** (Thinking): Now, that's intriguing. Anything you'd like to share?
+**MADDIE** (Relaxed): Not just yet, I wanna keep the mystery alive a little longer.
+**ANTIQUEDEALER**: Ah, yes, the good old Boulton secrecy. I'll hold down the fort here, then.
+**MADDIE** (Encouraging): Just don't get too comfortable! The best is yet to come.
+**ANTIQUEDEALER**: I'd expect nothing less from a Boulton project.
+**MADDIE**: But that's enough digging here for now. I think it's time I paid Grandma a visit.
 
 ### The Reception: FactoryReception_CharacterTask01
 `FactoryReception_CharacterTask01` · seen 25.09.01–26.07.01
@@ -101,6 +223,22 @@
 **ANTIQUEDEALER** (Relaxed): Quite the opposite! I'd like to volunteer at the reception, if you'll let me.
 **MADDIE**: Julius, are you actually offering to work for free?
 **ANTIQUEDEALER** (Charming): Consider it my donation to history.
+
+### The Reception: FactoryReception_Intro
+`FactoryReception_Intro` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**WINSTON** (Charming): ...And here we go, Ma’am.
+**WINSTON** (Encouraging): The reception of the Boulton Tin Can Factory!
+**MADDIE** (Thinking): Winston...
+**MADDIE** (Doubtful): Do you actually have a key to everything?
+**WINSTON** (Doubtful): Why, of course I do, Ma’am! What kind of butler do you take me for?!
+**MADDIE**: Alright, alright!
+**WINSTON** (Discouraged): Anyway, my apologies for the dire state of this place.
+**WINSTON** (Discouraged): But I’m sure you’re accustomed to this sort of thing by now.
+**MADDIE** (Relaxed): Don’t worry about it, Winston!
+**MADDIE**: It’s actually in better shape than I had hoped.
+**MADDIE** (Joyous): Let’s get cracking!
 
 ### The Reception: Add a descriptive sign
 `FactoryReception_POI_CanOpener` · seen 25.09.01–26.07.01

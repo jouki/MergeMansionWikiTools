@@ -369,10 +369,42 @@ def build():
             name = event_display.get(run_key) or event_display.get(run_key + "_Name")
             if not name:
                 name = resolve_event_name(run_key)
+            if name == run_key and re.search(r"[a-z\d][A-Z]$", run_key):     # A/B variant suffix: CBE_TheGreatEscapeA
+                base_key = run_key[:-1]
+                cand = event_display.get(base_key) or resolve_event_name(base_key)
+                if cand != base_key:
+                    name = cand
             if name != run_key:
                 st["triggers"] = [{"kind": "event", "eventType": "event story", "event": name, "eventId": run_key,
                                    "moment": "part of the event (exact trigger not dumped)",
                                    "from": (st.get("seen") or {}).get("first"), "to": (st.get("seen") or {}).get("last")}]
+    # …and to their AREA when the id starts with an area id (Lounge_…, ParentsRoom_…, SpyRoom_…: POI / room stories)
+    area_by_lower = {aid.lower(): name for aid, name in area_name.items()}
+    area_by_lower.update({name.replace(" ", "").replace("'", "").lower(): name for name in area_name.values()})
+    for sid, st in stories.items():
+        if st["triggers"]:
+            continue
+        m = re.match(r"^([A-Za-z]+?)(?:_|\d|$)", sid)
+        hit = area_by_lower.get(m.group(1).lower()) if m else None
+        if hit:
+            st["triggers"] = [{"kind": "area", "area": hit, "areaId": m.group(1), "task": None, "hotspotId": None,
+                               "phase": "area story (exact task not dumped)",
+                               "from": (st.get("seen") or {}).get("first"), "to": (st.get("seen") or {}).get("last")}]
+    # …and finally by hand (Codex/build/story_assignments.json: exact id or "prefix*" -> area / event)
+    manual_path = os.path.join(os.path.dirname(__file__), "story_assignments.json")
+    manual = {k: v for k, v in common.read_json(manual_path).items() if not k.startswith("_")} if os.path.exists(manual_path) else {}
+    for sid, st in stories.items():
+        if st["triggers"]:
+            continue
+        rule = manual.get(sid) or next((v for k, v in manual.items() if k.endswith("*") and sid.startswith(k[:-1])), None)
+        if rule:
+            seen = st.get("seen") or {}
+            if rule.get("area"):
+                st["triggers"] = [{"kind": "area", "area": rule["area"], "areaId": None, "task": None, "hotspotId": None,
+                                   "phase": "placed by hand" + (f": {rule['note']}" if rule.get("note") else ""), "from": seen.get("first"), "to": seen.get("last")}]
+            elif rule.get("event"):
+                st["triggers"] = [{"kind": "event", "eventType": "event story", "event": rule["event"], "eventId": None,
+                                   "moment": "placed by hand" + (f": {rule['note']}" if rule.get("note") else ""), "from": seen.get("first"), "to": seen.get("last")}]
     for g, ids in groups.items():
         if g in stories or any(i in covered for i in ids):
             continue

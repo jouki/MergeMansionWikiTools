@@ -58,8 +58,9 @@ Every story in which Victoria speaks.
 **MADDIE** (Talking): *Click*
 **MADDIE** (Doubtful): Huh... She hung up!
 
-### FirstFloorPantry 09
+### Pantry: FirstFloorPantry_09
 `FirstFloorPantry_09` · seen 26.07.01–26.07.01
+- trigger: area, area=Pantry, areaId=FirstFloorPantry, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: *Ring ring*
 **MADDIE** (Talking): Aren't I popular today! Hello?
@@ -80,8 +81,9 @@ Every story in which Victoria speaks.
 **MADDIE** (Calling): You... *click*
 **MADDIE** (Thinking): Interesting. So it's not news to her, it seems...
 
-### FirstFloorPantry 10
+### Pantry: FirstFloorPantry_10
 `FirstFloorPantry_10` · seen 26.07.01–26.07.01
+- trigger: area, area=Pantry, areaId=FirstFloorPantry, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **VICTORIA**: I had almost forgotten what a horrible, run-down dump this place is.
 **MADDIE** (Doubtful): Victoria.
@@ -98,8 +100,9 @@ Every story in which Victoria speaks.
   _(1 cosmetic edit not shown)_
 **VICTORIA** (Encouraging): Well, I won't spare you. Get ready for some truly horrifying revelations about your family...
 
-### FirstFloorPantry 11
+### Pantry: FirstFloorPantry_11
 `FirstFloorPantry_11` · seen 26.07.01–26.07.01
+- trigger: area, area=Pantry, areaId=FirstFloorPantry, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **VICTORIA** (Charming): My great-grandmother, Christine Blackwood, was the true inventor of the tin can.
 **MADDIE** (Surprised): What?!
@@ -111,8 +114,9 @@ Every story in which Victoria speaks.
 **VICTORIA**: Wouldn't you know it - the very next day, a new patent was submitted - and the rest is history.
 **MADDIE** (Worried): I can't believe it...
 
-### FirstFloorPantry 12
+### Pantry: FirstFloorPantry_12
 `FirstFloorPantry_12` · seen 26.07.01–26.07.01
+- trigger: area, area=Pantry, areaId=FirstFloorPantry, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Annoyed): No! Agatha wouldn't do something like that!
 **MADDIE**: And they kept making jam together even after Ignatius started tin can production.
@@ -166,8 +170,9 @@ Every story in which Victoria speaks.
 **VICTORIA** (Doubtful): And I'm very confident you'll do the same. You are a Boulton after all. 
 **VICTORIA** (Relaxed): And when you do... I'll be here. Claiming it for the council. Expect to see Holden a bit more from now on! Ciao!
 
-### Lounge02
+### Lounge: Lounge02
 `Lounge02` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **VICTORIA** (Annoyed): Well, well, well... It looks like Holden was right.
 **MADDIE** (Surprised): Wha-? Victoria!
@@ -178,8 +183,9 @@ Every story in which Victoria speaks.
 **VICTORIA** (Worried): Poor little Maddie, ever so clueless. Anyway, I'm off to tell Bruno.
 **VICTORIA** (Worried): Victoria, wait. Be careful, the staircase isn't finished...
 
-### Lounge03
+### Lounge: Lounge03
 `Lounge03` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): AHHH! My foot! My foot is stuck in the stairs!!
 **VICTORIA** (Worried): Oh no! Victoria, stay calm and stay still. You might injure yourself...
@@ -194,8 +200,9 @@ Every story in which Victoria speaks.
 **VICTORIA**: Plans? What plans?!
 **VICTORIA**: And just so you know, these shoes are vintage Manuelo's! Expect a bill.
 
-### Maddieroom 02
+### Maddie's Room: Maddieroom_02
 `Maddieroom_02` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: Victoria! What do you want?
 **MADDIE**: It's over!
@@ -208,8 +215,9 @@ Every story in which Victoria speaks.
 **MADDIE** (Worried): *Gulp*
 **GRANDMA**: Who was that, dearie? I could hear their voice in the hallway!
 
-### Maddieroom Intro
+### Maddie's Room: Maddieroom_Intro
 `Maddieroom_Intro` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Frustrated): I guess I've avoided this room long enough...
 **MADDIE** (Worried): *Sigh*

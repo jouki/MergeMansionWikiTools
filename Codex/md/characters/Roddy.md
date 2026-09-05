@@ -928,8 +928,9 @@ Every story in which Roddy speaks.
 **RODDY** (Thinking): But if it is, who called you, and who sent you on this quest?!
 **MADDIE** (Thinking): This is so confusing. I'd better get Grandma back around here to talk.
 
-### Cinema04
+### Cinema: Cinema04
 `Cinema04` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=Cinema, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **ARTHUR** (Charming): See? This is what I’m talking about! You and me! Us. I miss... THIS!
 **MADDIE** (Worried): Arthur... I...
@@ -941,8 +942,9 @@ Every story in which Roddy speaks.
 **MADDIE** (Doubtful): Of course! Let me ju-
 **ARTHUR** (Doubtful): She ain’t going anywhere alone with you, buddy. Whatever you need to say, you can say in front of me.
 
-### Cinema05
+### Cinema: Cinema05
 `Cinema05` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=Cinema, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Annoyed): Hey! I can make my own decisions!
 **RODDY** (Doubtful): Yeah, buzz off.
@@ -955,8 +957,9 @@ Every story in which Roddy speaks.
 **MADDIE** (Surprised): Arthur!
 **ARTHUR** (Annoyed): No, I’m serious! This guy is BAD news!
 
-### Cinema06
+### Cinema: Cinema06
 `Cinema06` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=Cinema, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **ARTHUR** (Doubtful): I’m telling you Mads, you shouldn’t trust him.
 **RODDY** (Annoyed): Trust me? What about you?! Quite convenient for you to turn up again, right?...
@@ -967,8 +970,9 @@ Every story in which Roddy speaks.
 **RODDY** (Worried): ...
 **ARTHUR** (Doubtful): See? I know who he is... And where he’s from.
 
-### Cinema07
+### Cinema: Cinema07
 `Cinema07` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=Cinema, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): I don’t understand, what are you saying?
 **RODDY** (Worried): Maddie, don’t listen to him. He’s obviously trying to manipulate you.
@@ -984,8 +988,9 @@ Every story in which Roddy speaks.
 **RODDY** (Worried): Yeah... Let’s.
 **MADDIE** (Frustrated): Ugh. Men.
 
-### Dancefloor 12
+### Dancefloor: Dancefloor_12
 `Dancefloor_12` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY**: Hey, Maddie, how's it go-
 **MADDIE** (Frustrated): Roddy, hey. You caught me at a bad time...
@@ -994,8 +999,9 @@ Every story in which Roddy speaks.
 **RODDY** (Thinking): Isn't it through that door over there?
 **MADDIE** (Frustrated): Nope, tried that. How am I supposed to move forward if there's no door?!
 
-### Dancefloor 13
+### Dancefloor: Dancefloor_13
 `Dancefloor_13` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Encouraging): You know, Maddie. Life isn't always about moving forward...
 **RODDY** (Encouraging): Sometimes you have to stay in the moment and enjoy it.
@@ -1003,8 +1009,9 @@ Every story in which Roddy speaks.
 **RODDY** (Joyous): You know what, I have just the remedy!
 **RODDY** (Joyous): Why don't I put on one of these vintage records?
 
-### Dancefloor 13.1
+### Dancefloor: Dancefloor_13.1
 `Dancefloor_13.1` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Charming): May I have this dance, my dear....
 **MADDIE** (Doubtful): Roddy, I don't really have the time-
@@ -1016,8 +1023,9 @@ Every story in which Roddy speaks.
 **RODDY** (Thinking): Yeah, I think it happened when I stepped on that funny tile!
 **MADDIE** (Thinking): It definitely unlocked something! Let's go check it out...
 
-### Dancefloor 14
+### Dancefloor: Dancefloor_14
 `Dancefloor_14` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY**: It's a door! Roddy, you're a genius! 
 **MADDIE** (Doubtful): I-I am?
@@ -1039,8 +1047,9 @@ Every story in which Roddy speaks.
 **MADDIE**: Haha! Oh, Roddy!! Thank you, but I don't think our secrets can even compare.
 **RODDY** (Discouraged): ... You'd be surprised.
 
-### DiningRoom07
+### Dining Room: DiningRoom07
 `DiningRoom07` · seen 23.09.02–26.07.01
+- trigger: area, area=Dining Room, areaId=DiningRoom, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **RODDY** (Doubtful): Oh my goodness!
 **MADDIE** (Surprised): It's a knife! And there's something on it!
@@ -1057,8 +1066,9 @@ Every story in which Roddy speaks.
 **RODDY** (Thinking): Surprisingly modern, considering when it was installed.
 **MADDIE** (Relaxed): Well, Leonard was quite the visionary.
 
-### FirstFloorKitchen 08
+### Kitchen: FirstFloorKitchen_08
 `FirstFloorKitchen_08` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY**: Hi, Maddie! I couldn't help but notice a wonderful smell coming from here and-
 **MADDIE** (Joyous): Roddy! You gotta see this!
@@ -1070,8 +1080,9 @@ Every story in which Roddy speaks.
 **MADDIE** (Relaxed): Good thing there's an engineer present.
 **RODDY** (Joyous): That's right!
 
-### FirstFloorKitchen 09
+### Kitchen: FirstFloorKitchen_09
 `FirstFloorKitchen_09` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Relaxed): Maybe we can install an ordering system?
 **RODDY** (Relaxed): Planning on opening a restaurant, Maddie?
@@ -1087,8 +1098,9 @@ Every story in which Roddy speaks.
 **ARTHUR** (Doubtful): Yeah. Dinner. For two...
 **ARTHUR** (Doubtful): So be a good dumb waiter and fetch me some butter, will you?
 
-### FirstFloorKitchen 10
+### Kitchen: FirstFloorKitchen_10
 `FirstFloorKitchen_10` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY** (Annoyed): It's dumbwaiter, not DUMB WAITER.
 **ARTHUR** (Frustrated): Well, whatever you call yourself, if you're not going to do your job, then you can go.
@@ -1114,8 +1126,9 @@ Every story in which Roddy speaks.
   _earlier:_ ~~Pssh... More like a family owned hot dog stand.~~ (until 26.05.01)
 **—**: Boys...
 
-### FirstFloorKitchen 11
+### Kitchen: FirstFloorKitchen_11
 `FirstFloorKitchen_11` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **ARTHUR** (Doubtful): Alright, hotshot. Prove it.
 **ARTHUR** (Doubtful): Show me your UH-MAAZING skills...
@@ -1133,8 +1146,9 @@ Every story in which Roddy speaks.
 **ARTHUR** (Surprised): !!!
 **MADDIE** (Surprised): Arthur!!!
 
-### FirstFloorKitchen 12
+### Kitchen: FirstFloorKitchen_12
 `FirstFloorKitchen_12` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **ARTHUR** (Surprised): Ow... OW! No, don't touch it, DON'T TOUCH IT!!!  
   _earlier:_ ~~Aaaargh!!~~ (until 26.05.01)
@@ -1168,8 +1182,9 @@ Every story in which Roddy speaks.
 **RODDY** (Worried): O...ok.
 **MADDIE** (Talking): But thank you for telling me.
 
-### Gallery02
+### Gallery: Gallery02
 `Gallery02` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Joyous): There you are, Maddie! Ooh, what is that cool, glowing statue, and why is it missing a head?
 **MADDIE** (Thinking): I'm not sure. I'm wondering if it's something evil that Lindsay brought back from the depths of the ocean.
@@ -1196,8 +1211,9 @@ Every story in which Roddy speaks.
 **WINSTON** (Encouraging): All I know is that sometimes statues hold secrets, just as people do.
 **RODDY** (Surprised): That's it! I knew that glowing, green monster was hiding something!
 
-### Gallery07
+### Gallery: Gallery07
 `Gallery07` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Encouraging): Do you see a button anywhere, Maddie?
 **MADDIE** (Frustrated): Ugh no, I don't see anything!
@@ -1205,8 +1221,9 @@ Every story in which Roddy speaks.
 **MADDIE** (Surprised): *Click*
 **MADDIE** (Surprised): Did you hear that?! It worked! And there's something inside!
 
-### Gallery07.2
+### Gallery: Gallery07.2
 `Gallery07.2` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): It looks like a folder. Let's check what's inside!
 **MADDIE** (Thinking): A photograph! A wedding photograph... of Grandma!
@@ -2842,8 +2859,9 @@ Every story in which Roddy speaks.
   _earlier:_ ~~Maybe Grandma wasn't just being paranoid... Maybe there IS something going on.~~ (until 25.09.01)
 **RODDY** (Encouraging): Fiona!
 
-### Library04
+### Library: Library04
 `Library04` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **BRUNO** (Frustrated): Look... I’m running out of patience here, so I’ll do you a favor.
 **BRUNO** (Annoyed): I’ll offer you one last time the chance to sign it, and I’ll make sure your grandmother’s investigation will end.
@@ -2859,8 +2877,9 @@ Every story in which Roddy speaks.
 **RODDY** (Surprised): STOP! DON’T SIGN IT!
 **BRUNO** (Surprised): What?!
 
-### Library05
+### Library: Library05
 `Library05` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Surprised): Don’t sign, Maddie! I found it! I found the proof!
 **BRUNO** (Surprised): What are you talking about?!
@@ -2876,8 +2895,9 @@ Every story in which Roddy speaks.
 **BRUNO**: Look, I’ll call the lawyer and I’ll be right there. *Click*
 **BRUNO** (Annoyed): You... You did this!
 
-### Library06
+### Library: Library06
 `Library06` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **BRUNO** (Annoyed): This isn’t over... I’ll make sure all of you go to prison for this!
 **RODDY** (Relaxed): I think you might have that a bit backwards, Mayor.
@@ -2892,8 +2912,9 @@ Every story in which Roddy speaks.
 **MADDIE** (Joyous): You... You did it, Roddy!
 **RODDY** (Charming): Well... I...
 
-### Library07
+### Library: Library07
 `Library07` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Charming): Roddy...
 **RODDY** (Charming): Y- Yes?
@@ -2902,8 +2923,9 @@ Every story in which Roddy speaks.
 **MADDIE** (Surprised): !!!
 **ARTHUR**: Hello, Mads...
 
-### Library08
+### Library: Library08
 `Library08` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Frustrated): Wha... Wha...
 **RODDY** (Doubtful): Excuse me, but who are you?
@@ -2917,8 +2939,9 @@ Every story in which Roddy speaks.
 **ARTHUR**: Mads, it was Ursula who-
 **GRANDMA** (Frustrated): Arthur? I thought I got rid of you...
 
-### Library09
+### Library: Library09
 `Library09` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Is that true Grandma?!
 **GRANDMA** (Annoyed): Yes... It’s true.
@@ -2933,8 +2956,9 @@ Every story in which Roddy speaks.
 **RODDY** (Annoyed): No... You need time with your “fiancé”.
 **MADDIE** (Frustrated): Roddy!
 
-### Lounge08
+### Lounge: Lounge08
 `Lounge08` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Worried): Hey, Maddie! Sorry about our earlier encounter. I had a... um important meeting to get to.
 **MADDIE** (Thinking): It's okay, Roddy, but you did seem a bit freaked out when you saw the photo of Grandma and that man...
@@ -2943,8 +2967,9 @@ Every story in which Roddy speaks.
 **RODDY** (Charming): Well, you know her...
 **MADDIE** (Worried): That's the thing... Do I?
 
-### Lounge09
+### Lounge: Lounge09
 `Lounge09` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Wow! Look at all this cash! 
 **MADDIE** (Thinking): But why is it burnt? 
@@ -3071,8 +3096,9 @@ Every story in which Roddy speaks.
 **RODDY** (Discouraged): I’m doing my best to check, but a lot of the archived files have been thrown into the basement.
 **RODDY** (Worried): And it’s dark down there...
 
-### Musicianroom02
+### Music Studio: Musicianroom02
 `Musicianroom02` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=Musicianroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **WINSTON** (Relaxed): You called, ma’am? I assume this has something to do with the construction workers outside...
 **MADDIE** (Doubtful): Yes! Winston, do you think you can deal with the mayor's cronies and tell me what they’re up to?
@@ -3087,8 +3113,9 @@ Every story in which Roddy speaks.
 **MADDIE** (Charming): You’ve always been around to help me, never doubted me... You’ve been the best!
 **RODDY** (Worried): Well, er... I...
 
-### Musicianroom03
+### Music Studio: Musicianroom03
 `Musicianroom03` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=Musicianroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Worried): The thing is, Maddie... I - I think you're an amazing person.
 **MADDIE**: Aw shucks, Roddy! You're amazing too...
@@ -3097,8 +3124,9 @@ Every story in which Roddy speaks.
 **MADDIE** (Surprised): *beep beep*
 **MADDIE** (Surprised): What the- a message from ARTHUR?!
 
-### Musicianroom04
+### Music Studio: Musicianroom04
 `Musicianroom04` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=Musicianroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): “Hey, Mads...
 **MADDIE** (Doubtful): I know you’re still upset... You have every right to be, but you must believe me when I say that I had no choice.
@@ -3113,8 +3141,9 @@ Every story in which Roddy speaks.
 **RODDY** (Discouraged): That I... I got to get back to the office.
 **MADDIE** (Worried): Oh... Okay. See you, Roddy...
 
-### Musicianroom Intro
+### Music Studio: Musicianroom_Intro
 `Musicianroom_Intro` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=Musicianroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Wow... Who would hide a room like this behind a fridge?
 **RODDY** (Surprised): Maddie, there you are! Wait, did I just walk through a fridge- Wow!
@@ -3130,8 +3159,9 @@ Every story in which Roddy speaks.
 **MADDIE** (Annoyed): Bruno...
 **RODDY**: Yeah... I’m pulling some strings to see if I can scrounge them up.
 
-### Office08
+### The Office: Office08
 `Office08` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Worried): Uhm... Maddie? Could I speak to you for a sec?
 **MADDIE** (Annoyed): Roddy...
@@ -3142,8 +3172,9 @@ Every story in which Roddy speaks.
 **MADDIE** (Annoyed): I thought you were smarter than that.
 **RODDY** (Discouraged): I...
 
-### Office09
+### The Office: Office09
 `Office09` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): No. You tell me right now why I should accept your apology.
 **MADDIE** (Frustrated): Tell me what is going on with you!
@@ -3154,8 +3185,9 @@ Every story in which Roddy speaks.
 **SULLIVAN** (Annoyed): I know your family is up to something, but breaking into the precinct and stealing evidence?!
 **SULLIVAN** (Surprised): That’s a new low. Even for you!
 
-### Office10
+### The Office: Office10
 `Office10` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): Stealing evidence? Why would I ever want to incriminate myself like that?
 **SULLIVAN** (Encouraging): Obviously not! That’s why you had your criminal grandmother steal it for you!
@@ -3165,8 +3197,9 @@ Every story in which Roddy speaks.
 **SULLIVAN** (Frustrated): Oh, is it Roddy? Would make sense that YOU’d be in on this, too.
 **RODDY** (Annoyed): Kate!
 
-### Office11
+### The Office: Office11
 `Office11` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **SULLIVAN** (Charming): What is it, Roddy?
 **SULLIVAN** (Doubtful): Afraid you’ll disappoint little Maddie over there?
@@ -3178,8 +3211,9 @@ Every story in which Roddy speaks.
 **SULLIVAN** (Encouraging): You know what? You’re absolutely right.
 **SULLIVAN**: Roddy Took, you’re under arrest!
 
-### Office15
+### The Office: Office15
 `Office15` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Worried): Maddie, what she said about criminals is right, but...
 **MADDIE** (Doubtful): What?! Was she telling the truth? Is this what Arthur was-
@@ -3318,8 +3352,9 @@ Every story in which Roddy speaks.
 **JACKIE** (Thinking): Sure, but it wasn't until Queen Victoria was drawn with a Christmas tree that they <i>really</i> got popular.
 **RODDY** (Charming): Looks like we need to figure out who's right here. What's the origin of the Christmas tree?
 
-### ParentsRoom03
+### Parents' Room: ParentsRoom03
 `ParentsRoom03` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): This is a really nice layout!
 **MADDIE** (Relaxed): Cozy, cool and comfortable!
@@ -3330,8 +3365,9 @@ Every story in which Roddy speaks.
 **RODDY** (Doubtful): Mezzanine... Mezzanine? Sounds kinda funny after a while...
 **MADDIE** (Doubtful): I know, right?
 
-### ParentsRoom04
+### Parents' Room: ParentsRoom04
 `ParentsRoom04` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: So, Roddy... Ready to tell me what’s really going on with you?
 **RODDY** (Worried): Yeah... I guess my past eventually caught up with me.
@@ -3341,8 +3377,9 @@ Every story in which Roddy speaks.
 **RODDY** (Discouraged): *Sigh*
 **RODDY** (Thinking): Okay... I guess I should start at the beginning.
 
-### ParentsRoom05
+### Parents' Room: ParentsRoom05
 `ParentsRoom05` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY** (Discouraged): I grew up in a bad part of town. My family had little to no money and my parents took on various jobs.
 **RODDY** (Worried): Things were pretty much like that until my 8th birthday, when it miraculously took a turn for the better!
@@ -3355,8 +3392,9 @@ Every story in which Roddy speaks.
 **RODDY** (Frustrated): A crime boss.
 **MADDIE** (Worried): Oh...
 
-### ParentsRoom06
+### Parents' Room: ParentsRoom06
 `ParentsRoom06` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY**: I’ll be honest. I grew up thinking this sort of life was normal.
 **RODDY**: Dad never really spoke about work, but we were still invited to many parties.
@@ -3368,8 +3406,9 @@ Every story in which Roddy speaks.
 **MADDIE** (Thinking): How come?
 **RODDY** (Charming): I had to study a lot of blueprints and floor plans for my... “job”.
 
-### ParentsRoom07
+### Parents' Room: ParentsRoom07
 `ParentsRoom07` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Worried): I don’t mean to pry, but...
 **MADDIE** (Doubtful): If you were in that sort of life, how did you ever get married to Detective Sullivan?!
@@ -3384,8 +3423,9 @@ Every story in which Roddy speaks.
 **MADDIE** (Worried): Oh, um...
 **RODDY** (Annoyed): Yeah... It wasn’t a family emergency.
 
-### ParentsRoom08
+### Parents' Room: ParentsRoom08
 `ParentsRoom08` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY** (Discouraged): It was the night of my first job and we got busted. And guess who was leading the charge?
 **MADDIE** (Annoyed): Sullivan.
@@ -3397,8 +3437,9 @@ Every story in which Roddy speaks.
 **RODDY** (Frustrated): And since I married a cop, I wasn’t really welcomed at home anymore, either.
 **RODDY** (Discouraged): So I took up architecture and moved here. FAR AWAY from everything.
 
-### ParentsRoom09
+### Parents' Room: ParentsRoom09
 `ParentsRoom09` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Worried): Roddy... I...
 **RODDY** (Discouraged): It’s okay Maddie. I know it’s a lot.
@@ -4747,8 +4788,9 @@ Every story in which Roddy speaks.
 **MADDIE** (Joyous): Of course I am! And I know exactly where his clue is going to lead next.
 **RODDY** (Charming): I'd like nothing more than to stay and help, but I should get back to work. Good luck, Maddie!
 
-### Speakeasy01 Intro
+### Speakeasy: Speakeasy01_Intro
 `Speakeasy01_Intro` · seen 25.05.01–26.07.01
+- trigger: area, area=Speakeasy, areaId=Speakeasy, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): Huh... I have to admit, I’m slightly disappointed.
 **MADDIE** (Doubtful): Just another storage room.
@@ -4764,8 +4806,9 @@ Every story in which Roddy speaks.
 **MADDIE** (Doubtful): Roddy!
 **MADDIE** (Frustrated): Hmph... There he goes... Why can’t anyone ever give me a straight answer?
 
-### SpyRoom 02
+### Spy Room: SpyRoom_02
 `SpyRoom_02` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY** (Thinking): Huh... Not exactly what I was expecting.
 **MADDIE** (Doubtful): You and me both!
@@ -4777,8 +4820,9 @@ Every story in which Roddy speaks.
 **MADDIE** (Doubtful): Okay, that tracks. But why the elaborate doorway? I don’t know...
 **MADDIE** (Encouraging): I think there’s more to this room!
 
-### SpyRoom 03
+### Spy Room: SpyRoom_03
 `SpyRoom_03` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Relaxed): How adorable!
 **RODDY** (Thinking): What? The random portraits with targets drawn on them?
@@ -4804,8 +4848,9 @@ Every story in which Roddy speaks.
 **RODDY** (Thinking): Who do you think "they" refers to?
 **MADDIE** (Thinking): I don't know, but I hope I find out. It could help me get one step closer to seeing Grandpa Charlie again.
 
-### SpyRoom 05
+### Spy Room: SpyRoom_05
 `SpyRoom_05` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Thinking): Hmm... Looks like they were researching this plant.
 **RODDY** (Surprised): And extracting something!
@@ -4828,8 +4873,9 @@ Every story in which Roddy speaks.
 **RODDY**: Wow, sounds like it can be pretty powerful!
 **MADDIE** (Doubtful): For sure. I wonder if it powers anything in here...
 
-### SpyRoom 07
+### Spy Room: SpyRoom_07
 `SpyRoom_07` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY** (Relaxed): You know... I think we’d make pretty excellent spies!
 **MADDIE** (Encouraging): Haha! And what would be your codename? Double oh negative?
@@ -4844,8 +4890,9 @@ Every story in which Roddy speaks.
 **MADDIE** (Worried): Could you... Just give me a sec?
 **RODDY** (Annoyed): Sure... go right ahead.
 
-### SpyRoom 08
+### Spy Room: SpyRoom_08
 `SpyRoom_08` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Talking): Arthur! Hey, I’m sort of busy right now and-
 **ARTHUR** (Charming): Mads! I had SUCH A GREAT TIME at the beach!
@@ -4866,8 +4913,9 @@ Every story in which Roddy speaks.
 **MADDIE** (Talking): Arthur?! Oh, sorry. I’m... Look, can I call you back? Now’s not a great time.
 **ARTHUR** (Charming): No problem! Talk to you soon!
 
-### SpyRoom 09
+### Spy Room: SpyRoom_09
 `SpyRoom_09` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): Oh look! It’s beautiful!
 **RODDY** (Relaxed): Yeah... it really is.
@@ -4893,8 +4941,9 @@ Every story in which Roddy speaks.
 **MADDIE** (Thinking): Yeah, some of those locations correspond to the pictures I've seen of them in the walk-in closet.
 **MADDIE** (Doubtful): Now it makes sense why they were dressed in trench coats and hats...
 
-### SpyRoom 11
+### Spy Room: SpyRoom_11
 `SpyRoom_11` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Surprised): I... I can’t believe it.
 **RODDY** (Thinking): Yeah... This sort of settles it, doesn’t it?
@@ -4906,8 +4955,9 @@ Every story in which Roddy speaks.
 **MADDIE** (Worried): Yeah?
 **RODDY** (Surprised): The pillar? It seems to be moving!
 
-### SpyRoom 12
+### Spy Room: SpyRoom_12
 `SpyRoom_12` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY** (Relaxed): Gotta admit, your grandparents had some style!
 **MADDIE** (Doubtful): This mansion sure loves its hidden doors...  
@@ -4918,8 +4968,9 @@ Every story in which Roddy speaks.
 **MADDIE** (Encouraging): Shaken, not stirred?
 **RODDY** (Relaxed): Is there any other way?
 
-### SpyRoom 13
+### Spy Room: SpyRoom_13
 `SpyRoom_13` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Surprised): Wow! Look at all of this stuff!
 **MADDIE** (Surprised): You got gold bars, passports. Even license plates!
@@ -4943,8 +4994,9 @@ Every story in which Roddy speaks.
 **RODDY** (Charming): Yeah, I think your grandparents were tracking a criminal network!
 **MADDIE** (Surprised): Wow, that means that they were studying them to create antidotes and protect potential victims!
 
-### SpyRoom 15
+### Spy Room: SpyRoom_15
 `SpyRoom_15` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY** (Thinking): Hmmm...
 **MADDIE** (Worried): What is it, Roddy?
@@ -4959,8 +5011,9 @@ Every story in which Roddy speaks.
 **RODDY** (Charming): I’m sure it’ll be fine.
 **MADDIE** (Worried): Well... here goes nothing!
 
-### SpyRoom 16
+### Spy Room: SpyRoom_16
 `SpyRoom_16` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY** (Relaxed): Now, THAT is impressive!
 **MADDIE** (Surprised): Wow, these are absolutely stunning!
@@ -4972,8 +5025,9 @@ Every story in which Roddy speaks.
 **RODDY** (Worried): Hmm... Probably smart not to touch anything, just in case.
 **MADDIE** (Worried): Yeah, good idea...
 
-### SpyRoom 17
+### Spy Room: SpyRoom_17
 `SpyRoom_17` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): Well, that’s it. Yet I can’t help but feel like I’m left with even more questions!
 **RODDY** (Thinking): You mean who your grandparents were working for and what their mission was?
@@ -4993,8 +5047,9 @@ Every story in which Roddy speaks.
 **RODDY** (Thinking): Maybe it’s time to check out the hidden floor we discovered on the blueprints.
 **MADDIE** (Doubtful): Good idea! And we should check up on Julius and see how he’s holding up.
 
-### SpyRoom Intro
+### Spy Room: SpyRoom_Intro
 `SpyRoom_Intro` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY** (Thinking): Maddie, remember the other time we discovered a secret room together?  
   _earlier:_ ~~I wonder what’s inside...~~ (until 26.02.01)
@@ -5094,8 +5149,9 @@ Every story in which Roddy speaks.
 **MADDIE**: Well, I’ll go check on grandma. See you around!
 **RODDY** (Frustrated): Damn! I really messed that one up, didn’t I…
 
-### WalkInCloset 14
+### Walk-in Closet: WalkInCloset_14
 `WalkInCloset_14` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY** (Doubtful): That looks like a hidden drawer, below the mirror, Maddie. There's probably a key or hatch somewhere around it.
 **MADDIE** (Surprised): Roddy! I didn't hear you come in.
@@ -5139,8 +5195,9 @@ Every story in which Roddy speaks.
 **RODDY** (Thinking): Your grandparents really didn't want anyone finding this.
 **MADDIE** (Charming): Which is exactly why I have to see what's inside.
 
-### WalkInCloset 17
+### Walk-in Closet: WalkInCloset_17
 `WalkInCloset_17` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Surprised): So... how do we open this glass door, another mechanism?
 **RODDY** (Thinking): I'm looking for something, anything! But I can't see any other keys or hatches to open it.
@@ -5152,8 +5209,9 @@ Every story in which Roddy speaks.
 **RODDY** (Ready): Maddie, are you sure I should be here for this? I know this is your family's business.
 **MADDIE** (Charming): Don't worry about it, Roddy. It's only fair, we've opened this door together, after all.
 
-### WalkInCloset POI HiddenBook
+### Walk-in Closet: WalkInCloset_POI_HiddenBook
 `WalkInCloset_POI_HiddenBook` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Surprised): Huh, there's a book hidden in this drawer...
 **MADDIE** (Frustrated): That's it? I was hoping to find something a bit more helpful.

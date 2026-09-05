@@ -249,8 +249,9 @@ Every story in which Holden speaks.
 **HOLDEN** (Relaxed): Oh, come on... You won’t even notice me.
 **MADDIE** (Frustrated): Ugh...
 
-### Office12
+### The Office: Office12
 `Office12` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): What?! Y-you can’t do that!
 **SULLIVAN** (Joyous): Oh Maddie...
@@ -258,8 +259,9 @@ Every story in which Holden speaks.
 **HOLDEN** (Joyous): *Flash*
 **HOLDEN** (Joyous): Finally, an arrest!! This’ll do wonders for my paper!
 
-### Office13
+### The Office: Office13
 `Office13` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **HOLDEN** (Encouraging): Hey, can you say that again? I’ll take another photo from a different angle!
 **SULLIVAN** (Surprised): Who... Who are you?!
@@ -274,8 +276,9 @@ Every story in which Holden speaks.
 **SULLIVAN** (Doubtful): Fine! I’m letting you go, but I’ll be back! And that's a warning...
 **HOLDEN** (Relaxed): That, I can quote!
 
-### Office14
+### The Office: Office14
 `Office14` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Encouraging): Holden! I can’t believe I’m happy to see you!
 **MADDIE** (Doubtful): But... Why are you here?
@@ -287,8 +290,9 @@ Every story in which Holden speaks.
 **MADDIE** (Discouraged): Oh, no...
 **HOLDEN** (Relaxed): That’s right. I can write about whoever I want now!
 
-### Office15
+### The Office: Office15
 `Office15` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Worried): Maddie, what she said about criminals is right, but...
 **MADDIE** (Doubtful): What?! Was she telling the truth? Is this what Arthur was-
@@ -330,8 +334,9 @@ Every story in which Holden speaks.
 **JACKIE** (Thinking): So you found the letters 'R4U5L' - will they work as the code?
 **JACKIE** (Surprised): Uh, nope, that didn't work. It could be... oh! I know what it is - R5UL4! Ursula!
 
-### Study02
+### Study: Study02
 `Study02` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **HOLDEN** (Joyous): A ha! The scene of the crime...
 **JACKIE** (Surprised): Hey, you’re not allowed to be in here!
@@ -339,8 +344,9 @@ Every story in which Holden speaks.
 **MADDIE** (Annoyed): Great... Now I got two reporters hounding me.
 **JACKIE** (Doubtful): Hey!
 
-### Study03
+### Study: Study03
 `Study03` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Hey, what’s this?!
 **JACKIE**: It looks like a ledger of some sort? But for what?
@@ -353,8 +359,9 @@ Every story in which Holden speaks.
 **MADDIE** (Surprised): I know... It’s almost as if she was a-
 **HOLDEN** (Joyous): Bootlegger!
 
-### Study04
+### Study: Study04
 `Study04` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **JACKIE** (Annoyed): Holden! I thought I told you to back off!
 **MADDIE** (Discouraged): This can’t be right...

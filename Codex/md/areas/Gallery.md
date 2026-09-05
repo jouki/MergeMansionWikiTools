@@ -28,6 +28,66 @@
 **MADDIE** (Surprised): Wow, really?! She sounds like the very definition of a pioneer. I can't wait to discover more!
 **WINSTON** (Worried): I'm sure there will be no dearth of secrets, ma'am...
 
+### Gallery: Gallery02
+`Gallery02` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**RODDY** (Joyous): There you are, Maddie! Ooh, what is that cool, glowing statue, and why is it missing a head?
+**MADDIE** (Thinking): I'm not sure. I'm wondering if it's something evil that Lindsay brought back from the depths of the ocean.
+**RODDY** (Thinking): I wonder if it's a fascinating monster from literature! I've read about something like this...
+**MADDIE** (Doubtful): You're right, it does look like a monster, even without a head...
+**RODDY** (Thinking): But it seems like it was placed here for a reason. Could it be protecting something?
+**SULLIVAN** (Charming): You know, in my line of work, I've discovered that evil and monsters are man-made.
+**RODDY** (Charming): K-kate?!
+
+### Gallery: Gallery03
+`Gallery03` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**SULLIVAN** (Annoyed): Roddy, it's been a while. I see you continue to fraternize with the wrong crowd...
+**MADDIE** (Frustrated): W-who are you? What's going on?
+**SULLIVAN**: Detective Sullivan, Veilwood P.D. I'll be asking the questions around here.
+**SULLIVAN**: You must be Maddie. Quite a mansion you have here!
+**MADDIE** (Annoyed): May I ask what brings you here, detective?
+**SULLIVAN** (Encouraging): There's been new developments regarding your grandmother's case, and I've taken it upon myself to reopen it.
+**MADDIE** (Worried): W-what do you mean? What kind of developments?
+**SULLIVAN**: Evidence tampering. Do you remember a particular gold watch?
+**MADDIE** (Frustrated): Not this again! My grandmother is innocent! She's probably being framed...
+**SULLIVAN** (Annoyed): Oh, the number of times I've heard that one before.
+
+### Gallery: Gallery04
+`Gallery04` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**SULLIVAN**: Ever heard of Tim Rockford?  
+  _earlier:_ ~~Do you remember Detective Rockford?~~ (until 24.09.02)
+**MADDIE** (Annoyed): I-I think he was that detective involved in Grandma's arrest...  
+  _earlier:_ ~~How could I forget.~~ (until 24.09.02)
+**SULLIVAN** (Joyous): Bingo. Well, Tim and I met at the academy, and we were partners for a while. Best partner I ever had!  
+  _(1 cosmetic edit not shown)_
+**SULLIVAN** (Discouraged): He had to move on to bigger things and he urged me to take his place.
+**SULLIVAN** (Thinking): This case of his, it intrigued me. Once I got my hands on it, it just got stranger and stranger.
+**SULLIVAN** (Thinking): So many loose ends and endless questions...
+**SULLIVAN** (Encouraging): But I believe that the answers are right in front of you, if only you know where to look.
+**SULLIVAN** (Charming): So, what IS Grandma hiding, Maddie?
+**MADDIE** (Frustrated): I'm telling you, you have the wrong idea and you don't want to go down this path...
+**SULLIVAN** (Frustrated): Is that a threat?
+
+### Gallery: Gallery05
+`Gallery05` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Discouraged): Kate, are you sure this isn't some kind of mistake? 
+**SULLIVAN** (Annoyed): That's Detective Sullivan to you, and I don't make mistakes, Roddy. You're well aware.
+**MADDIE** (Doubtful): Do you two know each other?
+**SULLIVAN** (Worried): Maddie, you seem like a smart girl, so I'm only going to say this once - you need to stop protecting your grandmother.
+**SULLIVAN** (Worried): There's a lot you don't know about her.
+**SULLIVAN** (Worried): Are you aware that you could go behind bars for refusing to cooperate?
+**MADDIE** (Surprised): W-what? Me? Listen- 
+**SULLIVAN** (Annoyed): Don't stand in the way of justice because of mere attachments, Maddie!
+**MADDIE** (Annoyed): Detective, I think you should leave. I won't say another word without a lawyer.
+**SULLIVAN**: So be it, but don't be surprised if there's another arrest made soon.
+
 ### Gallery: Glue the statue in place
 `Gallery06` · seen 24.04.01–26.07.01
 - trigger: area, area=Gallery, areaId=Gallery, hotspotId=GalleryPlaceCthulhuStatueStage1F3, phase=task completed, task=Glue the statue in place (versions 24.04.01–26.07.01)
@@ -44,6 +104,78 @@
 **MADDIE** (Doubtful): Yes! I-I think. Winston, what aren't you telling me?
 **WINSTON** (Encouraging): All I know is that sometimes statues hold secrets, just as people do.
 **RODDY** (Surprised): That's it! I knew that glowing, green monster was hiding something!
+
+### Gallery: Gallery07
+`Gallery07` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**RODDY** (Encouraging): Do you see a button anywhere, Maddie?
+**MADDIE** (Frustrated): Ugh no, I don't see anything!
+**MADDIE** (Joyous): Hold on, there's a piece of the wood that's loose here!
+**MADDIE** (Surprised): *Click*
+**MADDIE** (Surprised): Did you hear that?! It worked! And there's something inside!
+
+### Gallery: Gallery07.2
+`Gallery07.2` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Thinking): It looks like a folder. Let's check what's inside!
+**MADDIE** (Thinking): A photograph! A wedding photograph... of Grandma!
+**MADDIE** (Surprised): But wait, that's not Grandpa Charlie! Oh my goodness!
+**RODDY** (Worried): W-why does that guy look like Crutchley...
+**MADDIE** (Surprised): Who? 
+**RODDY** (Worried): The mob boss!
+**MADDIE** (Worried): No... It can't be! Are you certain?!
+**RODDY** (Worried): It's hard to forget that face...
+**RODDY** (Surprised): Wait a minute, does that mean that you're part of... you're connected to...
+**RODDY** (Worried): I-I have to go.
+**MADDIE** (Surprised): Roddy! Wait!
+
+### Gallery: Gallery08
+`Gallery08` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Discouraged): This has to be some sort of twisted joke.
+**MADDIE** (Discouraged): I have so many questions and I'm scared to find out what the answers are.
+**GRANDMA** (Charming): Hello, dearie.
+**MADDIE** (Annoyed): Grandma! Speak of the devil...
+**GRANDMA** (Worried): You look a bit pale, Maddie. You really should step outside more often.
+**MADDIE** (Annoyed): Well, Grandma, I've had a terrible day and as of a few minutes ago, it just got worse.
+**GRANDMA** (Worried): What do you mean, dearie?
+**MADDIE** (Annoyed): I found something interesting... A photograph of you.
+**GRANDMA** (Doubtful): There are portraits and photographs all over this mansion, dearie.
+**MADDIE** (Frustrated): I think you know which one I mean. A certain wedding picture...
+
+### Gallery: Gallery08.2
+`Gallery08.2` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**GRANDMA** (Discouraged): That picture is... not what you think it is.
+**MADDIE** (Annoyed): It looks to me like you're married to a mob boss. Quite happily married.
+**MADDIE** (Frustrated): How could you do this to Grandpa Charlie?
+**GRANDMA** (Annoyed): Maddie, there were things I had to do to keep this family safe. You wouldn't understand.
+**MADDIE** (Frustrated): Maybe I would if you actually told me anything at all!
+**MADDIE** (Frustrated): All I've ever done is defend you and for what?!
+**GRANDMA** (Frustrated): And all I've ever done is protect you to the best of my abilities!
+**GRANDMA** (Annoyed): I've had enough of this insolence! I'm putting an end to your renovation and meddling!
+**GRANDMA** (Annoyed): There! I've locked the door to the next room. This ends here.
+**MADDIE** (Surprised): Grandma! No! You can't do this!
+**GRANDMA** (Annoyed): Oh, I can Maddie. I most definitely can.
+
+### Gallery: Gallery09
+`Gallery09` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Frustrated): Arrgh! I am beyond mad! How could she?!
+**MADDIE** (Frustrated): I don't deserve to be treated like a child!
+**MADDIE** (Thinking): I won't let this stop me. Maybe I can break the door down?
+**MADDIE** (Thinking): Winston could help...
+**WINSTON**: You called, ma'am?
+**MADDIE** (Joyous): Winston! Am I glad to see you! I need you to help me get this door open.
+**MADDIE** (Encouraging): On the count of three, both of us will run at it with full force!
+**WINSTON** (Thinking): There's no need for all that, ma'am. There's a spare key hidden behind that painting there.
+**MADDIE** (Surprised): Oh, that makes things easier. Thanks, Winston!
+**MADDIE** (Surprised): Nothing can hold me back from discovering the truth now!
 
 ### Gallery: Brighten the photo
 `IgnatiusDodoTalk` · seen 24.04.01–26.07.01

@@ -39,8 +39,9 @@ Every story in which Ash speaks.
 **MADDIE**: Alright. But, only because you're injured!
 **ASH** (Joyous): You're the best! I guarantee that it'll be worth it!
 
-### Bathroom02
+### Bathroom: Bathroom02
 `Bathroom02` · seen 23.11.02–26.07.01
+- trigger: area, area=Bathroom, areaId=Bathroom, phase=area story (exact task not dumped) (versions 23.11.02–26.07.01)
 
 **ASH** (Surprised): Boy, you weren't kiddin'! You got a gusher here!
 **MADDIE** (Worried): I know! You must be Ash. Is there anything you can do?
@@ -48,8 +49,9 @@ Every story in which Ash speaks.
 **ASH** (Encouraging): Now, let's take a closer look!
 **ASH** (Worried): ...Oww! I'm okay, I'm okay! But, just in case, could you call an ambulance?
 
-### Bathroom03
+### Bathroom: Bathroom03
 `Bathroom03` · seen 23.11.02–26.07.01
+- trigger: area, area=Bathroom, areaId=Bathroom, phase=area story (exact task not dumped) (versions 23.11.02–26.07.01)
 
 **ASH** (Joyous): So! Where were we?
 **MADDIE**: Are you sure you're alright? That fall looked painful. And your leg...
@@ -57,8 +59,9 @@ Every story in which Ash speaks.
 **MADDIE** (Surprised): R-Really? Is plumbing that dangerous?
 **ASH** (Thinking): Come to think of it, not really, no. Funny that! Aaanyhoo, let's get to work!
 
-### Bathroom04
+### Bathroom: Bathroom04
 `Bathroom04` · seen 23.11.02–26.07.01
+- trigger: area, area=Bathroom, areaId=Bathroom, phase=area story (exact task not dumped) (versions 23.11.02–26.07.01)
 
 **MADDIE** (Doubtful): Oh no! Another leak! But, explain to me again why I'm doing all the work?
 **ASH** (Annoyed): It's like this, see... I offer a different type of service. While other plumbers FIX your problem, I do something far more valuable. 
@@ -134,8 +137,9 @@ Every story in which Ash speaks.
 **ASH** (Thinking): Yeah, but it'll take some time. Come back in a few hours!
 **MADDIE** (Thinking): Hmmm. Wonder what it is?!
 
-### Bathroom10Outro
+### Bathroom: Bathroom10Outro
 `Bathroom10Outro` · seen 23.11.02–26.07.01
+- trigger: area, area=Bathroom, areaId=Bathroom, phase=area story (exact task not dumped) (versions 23.11.02–26.07.01)
 
 **ASH** (Joyous): Tadaa!
 **MADDIE** (Joyous): Is that a jacuzzi?! 
@@ -155,8 +159,9 @@ Every story in which Ash speaks.
 **MADDIE** (Relaxed): The floor was pretty cold, but nothing a nice warm rug can't fix!
 **ASH**: Ooh, that's very comfy...
 
-### FactoryGiftShop 10
+### Gift Shop: FactoryGiftShop_10
 `FactoryGiftShop_10` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): We should all take a selfie together in the large can display!  
   _(1 cosmetic edit not shown)_

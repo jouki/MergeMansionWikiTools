@@ -46,6 +46,38 @@
 **MADDIE**: Alright. But, only because you're injured!
 **ASH** (Joyous): You're the best! I guarantee that it'll be worth it!
 
+### Bathroom: Bathroom02
+`Bathroom02` · seen 23.11.02–26.07.01
+- trigger: area, area=Bathroom, areaId=Bathroom, phase=area story (exact task not dumped) (versions 23.11.02–26.07.01)
+
+**ASH** (Surprised): Boy, you weren't kiddin'! You got a gusher here!
+**MADDIE** (Worried): I know! You must be Ash. Is there anything you can do?
+**ASH** (Encouraging): Of course there is! They don't call me The Plumber for nuthin'!
+**ASH** (Encouraging): Now, let's take a closer look!
+**ASH** (Worried): ...Oww! I'm okay, I'm okay! But, just in case, could you call an ambulance?
+
+### Bathroom: Bathroom03
+`Bathroom03` · seen 23.11.02–26.07.01
+- trigger: area, area=Bathroom, areaId=Bathroom, phase=area story (exact task not dumped) (versions 23.11.02–26.07.01)
+
+**ASH** (Joyous): So! Where were we?
+**MADDIE**: Are you sure you're alright? That fall looked painful. And your leg...
+**ASH**: Oh this? Pfff... This always happens! There ain't a bone in my body I haven't sacrificed for the line of duty!
+**MADDIE** (Surprised): R-Really? Is plumbing that dangerous?
+**ASH** (Thinking): Come to think of it, not really, no. Funny that! Aaanyhoo, let's get to work!
+
+### Bathroom: Bathroom04
+`Bathroom04` · seen 23.11.02–26.07.01
+- trigger: area, area=Bathroom, areaId=Bathroom, phase=area story (exact task not dumped) (versions 23.11.02–26.07.01)
+
+**MADDIE** (Doubtful): Oh no! Another leak! But, explain to me again why I'm doing all the work?
+**ASH** (Annoyed): It's like this, see... I offer a different type of service. While other plumbers FIX your problem, I do something far more valuable. 
+**ASH** (Encouraging): Offer knowledge! While we, meaning you, fix the problem, you will learn at the same time how to fix future problems. It's my guarantee!
+**MADDIE** (Encouraging): I see... So, if this springs a leak again, I'll be able to fix it on my own?
+**ASH** (Joyous): Exactly! Of course, I'll send you a small bill afterward, for using the knowledge I've given you...
+**MADDIE** (Surprised): What?!
+**ASH**: Ha! Just kidding! Pass me the wrench, will ya? Let me help you out a bit...
+
 ### Bathroom: Fix the leak
 `Bathroom05` · seen 23.11.02–26.07.01
 - trigger: area, area=Bathroom, areaId=Bathroom, hotspotId=BathroomSwapLeakBi4, phase=task completed, task=Fix the leak (versions 24.04.01–26.07.01)
@@ -111,6 +143,21 @@
 **MADDIE** (Surprised): A surprise?!
 **ASH** (Thinking): Yeah, but it'll take some time. Come back in a few hours!
 **MADDIE** (Thinking): Hmmm. Wonder what it is?!
+
+### Bathroom: Bathroom10Outro
+`Bathroom10Outro` · seen 23.11.02–26.07.01
+- trigger: area, area=Bathroom, areaId=Bathroom, phase=area story (exact task not dumped) (versions 23.11.02–26.07.01)
+
+**ASH** (Joyous): Tadaa!
+**MADDIE** (Joyous): Is that a jacuzzi?! 
+**ASH** (Encouraging): Sure is, luxury model of my own design! Just like the one Victoria has... Er- had.
+**MADDIE** (Encouraging): You designed this yourself?
+**ASH**: Yep, and remember when I said she overspent the credit card? Well, her payment bounced and she owed me.
+**ASH** (Encouraging): My finest work and I wasn't going to be paid?! I went over there to get what was lawfully mine. Which in turn is now...
+**ASH**: Yours. Couldn't think of a more deserving person!
+**MADDIE** (Charming): So this was what you were working on! I'm guessing there was no aunt? Ash! I... I don't know what to say?!
+**ASH** (Encouraging): Haha! A thank you will do for now, but just don't forget to pay the bill!
+**ASH** (Encouraging): *Wink*
 
 ### Bathroom: Place fixed rug
 `BlueRug` · seen 23.11.02–26.07.01

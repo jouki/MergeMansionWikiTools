@@ -1,8 +1,9 @@
 # Sullivan
 Every story in which Sullivan speaks.
 
-### Dancefloor 03
+### Dancefloor: Dancefloor_03
 `Dancefloor_03` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **SULLIVAN** (Charming): Ha! You think I’M the one breaking the law? Look at this place...
 **SULLIVAN** (Annoyed): An illegal casino operation if I ever saw one. And I’ve seen many!
@@ -13,8 +14,9 @@ Every story in which Sullivan speaks.
 **SULLIVAN** (Charming): For a bunch of criminal masterminds, you all aren’t too bright.
 **MADDIE** (Frustrated): We’re not criminals!
 
-### Dancefloor 05
+### Dancefloor: Dancefloor_05
 `Dancefloor_05` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **SULLIVAN** (Charming): Criminals? Of course not. Not yet, at least...
 **SULLIVAN** (Relaxed): Innocent until proven guilty and all that.
@@ -26,8 +28,9 @@ Every story in which Sullivan speaks.
 **GRANDMA** (Frustrated): Right. But you can expect to see me again... With friends.
 **GRANDMA** (Frustrated): And Soon...
 
-### Dancefloor Intro
+### Dancefloor: Dancefloor_Intro
 `Dancefloor_Intro` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **SULLIVAN** (Encouraging): ...and I know that YOU have something to do with it!
 **GRANDMA** (Annoyed): You’re dangerously close to crossing a line, detective...
@@ -39,8 +42,9 @@ Every story in which Sullivan speaks.
 **WINSTON** (Frustrated): I think not, Ma’am...
 **MADDIE** (Annoyed): How dare you enter my home without a warrant? What kind of detective are you?!
 
-### Gallery02
+### Gallery: Gallery02
 `Gallery02` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Joyous): There you are, Maddie! Ooh, what is that cool, glowing statue, and why is it missing a head?
 **MADDIE** (Thinking): I'm not sure. I'm wondering if it's something evil that Lindsay brought back from the depths of the ocean.
@@ -50,8 +54,9 @@ Every story in which Sullivan speaks.
 **SULLIVAN** (Charming): You know, in my line of work, I've discovered that evil and monsters are man-made.
 **RODDY** (Charming): K-kate?!
 
-### Gallery03
+### Gallery: Gallery03
 `Gallery03` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **SULLIVAN** (Annoyed): Roddy, it's been a while. I see you continue to fraternize with the wrong crowd...
 **MADDIE** (Frustrated): W-who are you? What's going on?
@@ -64,8 +69,9 @@ Every story in which Sullivan speaks.
 **MADDIE** (Frustrated): Not this again! My grandmother is innocent! She's probably being framed...
 **SULLIVAN** (Annoyed): Oh, the number of times I've heard that one before.
 
-### Gallery04
+### Gallery: Gallery04
 `Gallery04` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **SULLIVAN**: Ever heard of Tim Rockford?  
   _earlier:_ ~~Do you remember Detective Rockford?~~ (until 24.09.02)
@@ -81,8 +87,9 @@ Every story in which Sullivan speaks.
 **MADDIE** (Frustrated): I'm telling you, you have the wrong idea and you don't want to go down this path...
 **SULLIVAN** (Frustrated): Is that a threat?
 
-### Gallery05
+### Gallery: Gallery05
 `Gallery05` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Discouraged): Kate, are you sure this isn't some kind of mistake? 
 **SULLIVAN** (Annoyed): That's Detective Sullivan to you, and I don't make mistakes, Roddy. You're well aware.
@@ -95,8 +102,9 @@ Every story in which Sullivan speaks.
 **MADDIE** (Annoyed): Detective, I think you should leave. I won't say another word without a lawyer.
 **SULLIVAN**: So be it, but don't be surprised if there's another arrest made soon.
 
-### Office09
+### The Office: Office09
 `Office09` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): No. You tell me right now why I should accept your apology.
 **MADDIE** (Frustrated): Tell me what is going on with you!
@@ -107,8 +115,9 @@ Every story in which Sullivan speaks.
 **SULLIVAN** (Annoyed): I know your family is up to something, but breaking into the precinct and stealing evidence?!
 **SULLIVAN** (Surprised): That’s a new low. Even for you!
 
-### Office10
+### The Office: Office10
 `Office10` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): Stealing evidence? Why would I ever want to incriminate myself like that?
 **SULLIVAN** (Encouraging): Obviously not! That’s why you had your criminal grandmother steal it for you!
@@ -118,8 +127,9 @@ Every story in which Sullivan speaks.
 **SULLIVAN** (Frustrated): Oh, is it Roddy? Would make sense that YOU’d be in on this, too.
 **RODDY** (Annoyed): Kate!
 
-### Office11
+### The Office: Office11
 `Office11` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **SULLIVAN** (Charming): What is it, Roddy?
 **SULLIVAN** (Doubtful): Afraid you’ll disappoint little Maddie over there?
@@ -131,8 +141,9 @@ Every story in which Sullivan speaks.
 **SULLIVAN** (Encouraging): You know what? You’re absolutely right.
 **SULLIVAN**: Roddy Took, you’re under arrest!
 
-### Office12
+### The Office: Office12
 `Office12` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): What?! Y-you can’t do that!
 **SULLIVAN** (Joyous): Oh Maddie...
@@ -140,8 +151,9 @@ Every story in which Sullivan speaks.
 **HOLDEN** (Joyous): *Flash*
 **HOLDEN** (Joyous): Finally, an arrest!! This’ll do wonders for my paper!
 
-### Office13
+### The Office: Office13
 `Office13` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **HOLDEN** (Encouraging): Hey, can you say that again? I’ll take another photo from a different angle!
 **SULLIVAN** (Surprised): Who... Who are you?!

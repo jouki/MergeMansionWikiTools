@@ -1,6 +1,42 @@
 # The Hallway of Curiosities
 
 
+### The Hallway of Curiosities: FirstFloorHallway_02
+`FirstFloorHallway_02` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Encouraging): This ship is really impressive!
+**GRANDMA** (Encouraging): Ah yes, The SS Auralis. Clara built this with her father, Ignatius.
+**GRANDMA** (Encouraging): They were very close, those two. Encouraging her to follow her dreams...  
+  _(1 cosmetic edit not shown)_
+**GRANDMA** (Joyous): This ship's joined the famed 1773 expedition into the arctic. It was always a source of inspiration for her.
+**MADDIE** (Encouraging): That doesn't sound too bad, sharing some time with your daughter?
+**GRANDMA** (Relaxed): No, not at all. I sometimes wished I had a similar relationship with my father.
+**MADDIE** (Encouraging): I'm sure Agatha was very proud of her as well!
+**GRANDMA** (Worried): Actually, quite the opposite!
+**MADDIE** (Surprised): Really?
+**GRANDMA** (Annoyed): She thought this sort of "adventurous" life was beneath a Boulton Woman.
+**MADDIE** (Annoyed): Hmph! That's not fair.
+**GRANDMA** (Discouraged): No... It wasn't.
+
+### The Hallway of Curiosities: FirstFloorHallway_03
+`FirstFloorHallway_03` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Doubtful): I'm surprised that Agatha was so hard on her!
+**GRANDMA** (Thinking): To be fair, she was only looking out for her best interests...
+**MADDIE** (Doubtful): According to her.
+**GRANDMA** (Worried): Yes... Sometimes, people make mistakes.
+**MADDIE** (Discouraged): I... Guess so.
+**GRANDMA** (Worried): In fact... I don't think she ever forgave herself after Clara's passing.
+**MADDIE** (Surprised): But that wasn't her fault!
+**GRANDMA** (Worried): Oh, Maddie...
+**GRANDMA** (Worried): When a parent loses a child...
+**MADDIE** (Worried): ...
+**GRANDMA** (Discouraged): When Michael... Your father...
+**MADDIE** (Worried): It's alright. I know... I don't blame you.
+**GRANDMA** (Discouraged): ...
+
 ### The Hallway of Curiosities: Fix stool
 `FirstFloorHallway_04` · seen 26.05.01–26.07.01
 - trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, hotspotId=FirstFloorHallwayReadingNookFixStool, phase=task completed, task=Fix stool (versions 26.05.01–26.07.01)
@@ -11,6 +47,40 @@
 **MADDIE** (Relaxed): Perhaps build one of his model airplanes, together?
 **GRANDMA** (Encouraging): I'm sure he would have loved that.
 **MADDIE** (Charming): Yeah... I definitely would have. 
+
+### The Hallway of Curiosities: FirstFloorHallway_05
+`FirstFloorHallway_05` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE**: Well... This little reading nook came out really nice!
+**GRANDMA** (Encouraging): It really did, dearie! It's just like I remember it!
+**MADDIE** (Thinking): Hey... What's this? 
+**MADDIE** (Thinking): Looks like a sketch of a sailor.
+**MADDIE** (Surprised): This must be him! Clara's love! The one who ran away!
+**GRANDMA** (Thinking): Yes, I believe so. I also believe she drew that!
+**MADDIE** (Thinking): Hmmm. Edward... That's the name at the bottom of the sketch.
+**MADDIE** (Encouraging): She must have really loved him, to make such an intricate drawing.
+**GRANDMA** (Encouraging): Actually, she was an incredibly talented artist!
+**GRANDMA** (Encouraging): Being a marine biologist meant taking lots of sketches of your specimens.
+**GRANDMA** (Charming): So she had a lot of practice.
+**MADDIE** (Relaxed): I bet she would have made an amazing marine biologist!
+
+### The Hallway of Curiosities: FirstFloorHallway_06
+`FirstFloorHallway_06` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Doubtful): Hmmm...
+**GRANDMA**: What is it, dearie?
+**MADDIE** (Annoyed): Just thinking about how that sailor, Edward, could just up and leave Clara like that.
+**GRANDMA** (Doubtful): Sometimes you just don't know people...
+**MADDIE** (Worried): Yes, of course. But...
+**MADDIE** (Worried): I'm reading some of their correspondence I found here and I can't help but feel like he was truly in love with her.
+**MADDIE** (Thinking): Truly, DEEPLY in love with her! The things he writes... What he hopes for them. For HER!
+**MADDIE** (Doubtful): It's just weird that someone who writes like that would just leave without a word!  
+  _(1 cosmetic edit not shown)_
+**GRANDMA** (Worried): I know, dearie. In fact, I need to leave as well.
+**GRANDMA** (Charming): But I'll be around.
+**MADDIE**: That's okay, Grandma. I'll continue here!
 
 ### The Hallway of Curiosities: Place cushions
 `FirstFloorHallway_07` · seen 26.05.01–26.07.01
@@ -27,6 +97,22 @@
 **MADDIE** (Discouraged): Maybe there's something deeper after all...
 **MADDIE** (Doubtful): Come on, Maddie. Pull yourself together!
 
+### The Hallway of Curiosities: FirstFloorHallway_08
+`FirstFloorHallway_08` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Thinking): Hmmmm...
+**MADDIE** (Thinking): I'm quite surprised to find these tarot cards among Clara's things.
+**MADDIE** (Encouraging): As a woman of science, I would have thought she didn't believe in it.
+**MADDIE** (Relaxed): Actually... They're probably here just for fun. I might as well give them a go, then.
+**MADDIE** (Doubtful): So, cards... What do you have in store for me? What should I do with Arthur?
+**MADDIE** (Doubtful): ...
+**MADDIE** (Surprised): The Devil and The Magician cards!
+**MADDIE** (Worried): I don't know what that exactly means, but it can't be good. Maybe I should look this up?
+**MADDIE** (Annoyed): Nah. I don't believe in this sort of stuff.
+**MADDIE** (Annoyed): Cards don't decide my fate.
+**MADDIE**: I do!
+
 ### The Hallway of Curiosities: Repair statue
 `FirstFloorHallway_09` · seen 26.05.01–26.07.01
 - trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, hotspotId=FirstFloorHallwayFountainAreaFixStatue, phase=task completed, task=Repair statue (versions 26.05.01–26.07.01)
@@ -40,6 +126,69 @@
 **MADDIE** (Surprised): Oh!
 **MADDIE** (Worried): I think she saw herself as the mermaid...
 **MADDIE** (Worried): Oh, Clara.
+
+### The Hallway of Curiosities: FirstFloorHallway_10
+`FirstFloorHallway_10` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Relaxed): There we go!
+**MADDIE** (Encouraging): I managed to put together this tower, using Clara's amazing notes.
+**MADDIE** (Surprised): Never knew that coral made their own skeletons using limestone!
+**MADDIE** (Thinking): Or that they get their color from algae!
+**MADDIE** (Encouraging): Using her notes, I'm pretty sure I got their colors accurate as well.
+**MADDIE** (Charming): She really was a great marine biologist.
+
+### The Hallway of Curiosities: FirstFloorHallway_11
+`FirstFloorHallway_11` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Charming): Wow! This turned out great!
+**MADDIE** (Encouraging): It almost looks alive!
+**MADDIE** (Thinking): Hey... What's this?
+**MADDIE** (Thinking): A plaque with what looks like latin on it...
+**MADDIE** (Doubtful): "Mare Liberum"
+**MADDIE**: Let's see what this means...
+**MADDIE**: "Freedom of the Sea"
+**MADDIE** (Thinking): I guess this was to display the unlimited potential of the sea?
+**MADDIE**: Or maybe something simpler...
+**MADDIE** (Charming): The freedom to be whoever you want to be.
+**MADDIE** (Thinking): Maybe Clara didn't want to be just another socialite.
+**MADDIE** (Doubtful): Just like Lindsay, she chose her love over what was pre-decided for her!
+**MADDIE** (Worried): *sigh* I just wish it would have had a happy ending...
+
+### The Hallway of Curiosities: FirstFloorHallway_12
+`FirstFloorHallway_12` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE**: Another ship in a bottle. 
+**MADDIE**: I wonder if-
+**MADDIE** (Surprised): What's this! Looks like a hidden compartment.
+**MADDIE** (Thinking): A letter! Unopened...
+**MADDIE** (Worried): It's from Edward to Clara! She... She never received it!
+**MADDIE** (Discouraged): Oh, he confesses everything here! It was Agatha! She sent him away!
+**MADDIE** (Worried): She believed Edward was not the right man for her, that Clara needed a high society man.
+**MADDIE** (Worried): So she paid him off and sent him away. But he couldn't do it without telling Clara the truth!
+**MADDIE** (Worried): He must have left this for Agatha to give to Clara... But she never did!  
+  _(1 cosmetic edit not shown)_
+**MADDIE** (Discouraged): How tragic! She never knew!
+
+### The Hallway of Curiosities: FirstFloorHallway_13
+`FirstFloorHallway_13` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Thinking): Hmmm... I still don't buy it.
+**MADDIE** (Thinking): Even though he sent that last message to her that she never got, I feel like something is missing.
+**MADDIE** (Doubtful): I just refuse to believe he'd just leave! Maybe there's something in the files that Holden found...
+**MADDIE** (Doubtful): Let's see here... Some receipts, ship logs, transfer requests... 
+**MADDIE** (Surprised): Hold on!
+**MADDIE** (Surprised): Transfer requests?! It says here that there was a high level request to transfer Edward back to Hopewell Bay!
+**MADDIE** (Surprised): BY AGATHA!
+**MADDIE** (Worried): She must have had second thoughts and asked for him back! But...
+**MADDIE** (Surprised): The ship that was bringing him back was the one that sunk!
+**MADDIE** (Discouraged): It really was a tragedy... 
+**MADDIE** (Worried): I should tell Grandma and-
+**MADDIE** (Surprised): AH! That rat from the dining room! It's back!
+**MADDIE** (Doubtful): I should follow it! Maybe I could find its nest!
 
 ### The Hallway of Curiosities: Check on Holden
 `FirstFloorHallway_CharacterTask1` · seen 26.05.01–26.07.01
@@ -100,6 +249,20 @@
 **MADDIE** (Frustrated): I....don't....uh. Great. He's gone. Now what am I supposed to do with all of this stuff...
 **MADDIE** (Encouraging): Hmm. Well, this is solid research, despite everything. Maybe there really is something here about Edward?
 **MADDIE** (Joyous): Once I'm done with the rest of the room, I'll take a second look!
+
+### The Hallway of Curiosities: FirstFloorHallway_Intro
+`FirstFloorHallway_Intro` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Joyous): Yes! A whole new floor to explore and restore!
+**—**: I'll be the first to admit it, dearie. You've done an amazing job so far.
+**GRANDMA** (Encouraging): That's why I'm looking forward to what you do here!
+**MADDIE** (Thinking): What is this place? Almost looks like a nautical museum...
+**MADDIE** (Relaxed): I wonder if Clara had anything to do with it?
+**GRANDMA** (Encouraging): She did! This was her favorite room...
+**GRANDMA** (Charming): and one of mine, too!
+**MADDIE** (Encouraging): Then I won't let either of you down!  
+  _(1 cosmetic edit not shown)_
 
 ### The Hallway of Curiosities: Fix trophy
 `FirstFloorHallway_POI_AnglerFish` · seen 26.05.01–26.07.01

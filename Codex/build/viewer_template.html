@@ -132,6 +132,7 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
     s.kind = s.triggers[0].kind;
     s.hay = (s.id+' '+s.lines.map(l=>(l.speakerName||'')+' '+l.text).join(' ')+' '+s.triggers.map(t=>[t.area,t.task,t.event,t.eventType,t.items&&t.items.join(' '),t.decoration].filter(Boolean).join(' ')).join(' ')).toLowerCase();
     s.scopes = new Set(); s.triggers.forEach(t => { if (t.area) s.scopes.add('A:'+t.area); if (t.event) s.scopes.add('E:'+t.event); });
+    if (s.unassigned) s.scopes.add('U:'+s.unassigned);
     s.chars = new Set(s.lines.map(l=>l.speaker).filter(Boolean));
     s.hasRewrite = s.lines.some(l => (l.changes||[]).some(c => c.kind !== 'cosmetic'));
     s.hasChange = s.lines.some(l => l.changes && l.changes.length);
@@ -182,7 +183,10 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
   const og1=document.createElement('optgroup'); og1.label='Areas (progression order)';
   areas.forEach(k=>{const o=document.createElement('option');o.value=k;const idx=order[k.slice(2)];o.textContent=`${idx===undefined?'':'#'+Math.round(idx)+' '}${k.slice(2)} (${scopeCount[k]})`;og1.appendChild(o);});
   const og2=document.createElement('optgroup'); og2.label='Events'; evs.forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=`${k.slice(2)} (${scopeCount[k]})`;og2.appendChild(o);});
-  scopeSel.appendChild(og1); scopeSel.appendChild(og2);
+  const uns = Object.keys(scopeCount).filter(k=>k.startsWith('U:')).sort((a,b)=>scopeCount[b]-scopeCount[a]||a.localeCompare(b));
+  const og3=document.createElement('optgroup'); og3.label=`Unassigned — needs your call (${uns.reduce((n,k)=>n+scopeCount[k],0)} stories)`;
+  uns.forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=`${k.slice(2)}… (${scopeCount[k]})`;og3.appendChild(o);});
+  scopeSel.appendChild(og1); scopeSel.appendChild(og2); scopeSel.appendChild(og3);
 
   document.getElementById('legend').innerHTML =
     `History covers dumps <code>${S.historyVersions[0]}</code> → <code>${S.historyVersions[S.historyVersions.length-1]}</code> (${S.historyVersions.length} versions). ` +

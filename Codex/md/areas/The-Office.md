@@ -47,6 +47,124 @@
 **MADDIE** (Relaxed): Now that it’s complete, I still can’t quite recognize what type of clock it is...
 **MADDIE** (Joyous): But it sure is beautiful!
 
+### The Office: Office07
+`Office07` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Encouraging): Hmm... this looks like Charlie's trophy shelf...
+**MADDIE** (Thinking): Wait a minute... I know just what to place here!
+**MADDIE** (Thinking): I’ve never really had my own trophy shelf, but I've been meaning to celebrate fixing up the Mansion.
+**MADDIE** (Charming): I've come so far and it only feels right to commemorate my journey!
+**MADDIE** (Joyous): And here... here feels just right! I'm sure Charlie would approve too!
+
+### The Office: Office08
+`Office08` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**RODDY** (Worried): Uhm... Maddie? Could I speak to you for a sec?
+**MADDIE** (Annoyed): Roddy...
+**RODDY** (Frustrated): Look, I’m sorry for what happened. I... I don’t know what got into me!
+**MADDIE** (Annoyed): Roddy, I’m not in the mood to hear apologies right now, alright?
+**RODDY** (Surprised): Maddie!
+**MADDIE** (Worried): No, seriously! You, of all people! Getting into a fight?!
+**MADDIE** (Annoyed): I thought you were smarter than that.
+**RODDY** (Discouraged): I...
+
+### The Office: Office09
+`Office09` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Doubtful): No. You tell me right now why I should accept your apology.
+**MADDIE** (Frustrated): Tell me what is going on with you!
+**RODDY** (Discouraged): Alright!
+**RODDY** (Worried): Alright... I’ll tell you.
+**RODDY** (Worried): Maddie, I have a feel-
+**SULLIVAN** (Frustrated): Oooh, you’re in big trouble now!
+**SULLIVAN** (Annoyed): I know your family is up to something, but breaking into the precinct and stealing evidence?!
+**SULLIVAN** (Surprised): That’s a new low. Even for you!
+
+### The Office: Office10
+`Office10` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Doubtful): Stealing evidence? Why would I ever want to incriminate myself like that?
+**SULLIVAN** (Encouraging): Obviously not! That’s why you had your criminal grandmother steal it for you!
+**MADDIE** (Frustrated): Steal what?!
+**SULLIVAN** (Surprised): The gold watch, of course! The audacity too! I guess I was getting too close, right? Was I?
+**RODDY** (Doubtful): Kate, that’s enough!
+**SULLIVAN** (Frustrated): Oh, is it Roddy? Would make sense that YOU’d be in on this, too.
+**RODDY** (Annoyed): Kate!
+
+### The Office: Office11
+`Office11` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**SULLIVAN** (Charming): What is it, Roddy?
+**SULLIVAN** (Doubtful): Afraid you’ll disappoint little Maddie over there?
+**SULLIVAN** (Encouraging): Then again, you always were comfortable around criminals, weren’t you?
+**RODDY** (Worried): Don't go there, Kate.
+**RODDY** (Discouraged): If I recall correctly, you were the one who was comfortable around criminals.
+**RODDY** (Annoyed): That’s why you always put your work before relationships, correct?
+**SULLIVAN** (Surprised): The audacity...
+**SULLIVAN** (Encouraging): You know what? You’re absolutely right.
+**SULLIVAN**: Roddy Took, you’re under arrest!
+
+### The Office: Office12
+`Office12` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Surprised): What?! Y-you can’t do that!
+**SULLIVAN** (Joyous): Oh Maddie...
+**SULLIVAN** (Joyous): I’m a detective. I can do whatever I want!
+**HOLDEN** (Joyous): *Flash*
+**HOLDEN** (Joyous): Finally, an arrest!! This’ll do wonders for my paper!
+
+### The Office: Office13
+`Office13` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**HOLDEN** (Encouraging): Hey, can you say that again? I’ll take another photo from a different angle!
+**SULLIVAN** (Surprised): Who... Who are you?!
+**HOLDEN** (Joyous): Thomas Holden, for the Holden Howler at your service.
+**HOLDEN** (Encouraging): Would it be alright if I ask you for a quote on the reasons for Roddy’s arrest?
+**HOLDEN** (Joyous): And try to make it juicy.
+**SULLIVAN** (Joyous): I... Er...
+**MADDIE** (Doubtful): Yes, do it, DETECTIVE Sullivan...
+**MADDIE** (Annoyed): Tell him EXACTLY WHY he is being arrested.
+**SULLIVAN** (Frustrated): Grrr!
+**HOLDEN** (Annoyed): I can’t quote that!
+**SULLIVAN** (Doubtful): Fine! I’m letting you go, but I’ll be back! And that's a warning...
+**HOLDEN** (Relaxed): That, I can quote!
+
+### The Office: Office14
+`Office14` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Encouraging): Holden! I can’t believe I’m happy to see you!
+**MADDIE** (Doubtful): But... Why are you here?
+**HOLDEN** (Joyous): Well, I need a good front-page story for my paper, don’t I?
+**MADDIE** (Annoyed): Is Victoria still at it?!
+**HOLDEN** (Annoyed): Please... I quit working for her. She was too corrupt and overbearing.
+**HOLDEN** (Annoyed): And I couldn’t write about it! So I’ve started my own paper!
+**HOLDEN** (Encouraging): The Holden Howler, “Your proper source for JUICY news!”
+**MADDIE** (Discouraged): Oh, no...
+**HOLDEN** (Relaxed): That’s right. I can write about whoever I want now!
+
+### The Office: Office15
+`Office15` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**RODDY** (Worried): Maddie, what she said about criminals is right, but...
+**MADDIE** (Doubtful): What?! Was she telling the truth? Is this what Arthur was-
+**RODDY** (Discouraged): Maddie, I promise I'll tell you everything, I swear. But not with HIM here.
+**HOLDEN** (Joyous): Oh, don’t mind me, I’ll just stay here out of earshot.
+**MADDIE** (Annoyed): But you just heard us.
+**HOLDEN** (Relaxed): Oh, alright... But I too... “WILL BE BACK!”
+**RODDY** (Discouraged): Sometimes I think he was dropped on the head as a child.
+**MADDIE** (Annoyed): Roddy... I think it might be best if you tell me later. I've had enough surprises today.
+**RODDY** (Worried): Ah, right... I’ll... I’ll get back to you. I promise.
+**MADDIE** (Annoyed): Uh, huh...
+
 ### The Office: Let’s tidy up and get started.
 `OfficeCharacterTask1` · seen 25.04.02–26.07.01
 - trigger: area, area=The Office, areaId=Office, hotspotId=OfficeCharacterTask1, phase=task appears, task=Let’s tidy up and get started. (versions 25.04.02–26.07.01)

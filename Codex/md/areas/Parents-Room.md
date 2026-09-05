@@ -1,6 +1,121 @@
 # Parents' Room
 
 
+### Parents' Room: ParentsRoom01
+`ParentsRoom01` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+
+### Parents' Room: ParentsRoom02
+`ParentsRoom02` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Relaxed): There we go!
+**MADDIE** (Encouraging): That piece of wood blocking the staircase is finally out of the way!
+**MADDIE** (Thinking): I wonder why it was boarded up like that?
+**MADDIE**: Well, at least now I have access upstairs to the mezzanine floor!
+**MADDIE** (Thinking): Mezzanine... Mezzanine.
+**MADDIE** (Doubtful): Yup. That word has lost all meaning to me now.
+
+### Parents' Room: ParentsRoom03
+`ParentsRoom03` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Encouraging): This is a really nice layout!
+**MADDIE** (Relaxed): Cozy, cool and comfortable!
+**MADDIE** (Relaxed): My parents really knew how to live it up.
+**RODDY**: Hey Maddie!
+**MADDIE** (Encouraging): Roddy! Check it out! Pretty cool, huh?
+**RODDY** (Relaxed): Wow, a mezzanine floor!
+**RODDY** (Doubtful): Mezzanine... Mezzanine? Sounds kinda funny after a while...
+**MADDIE** (Doubtful): I know, right?
+
+### Parents' Room: ParentsRoom04
+`ParentsRoom04` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE**: So, Roddy... Ready to tell me what’s really going on with you?
+**RODDY** (Worried): Yeah... I guess my past eventually caught up with me.
+**RODDY** (Discouraged): Wouldn’t be fair if you got mixed up in it and had no idea what was going on.
+**RODDY** (Discouraged): But just know that I’m still ME. I’m not lying to you. I’ve never lied to you.
+**MADDIE**: Okay, Roddy. I believe you.
+**RODDY** (Discouraged): *Sigh*
+**RODDY** (Thinking): Okay... I guess I should start at the beginning.
+
+### Parents' Room: ParentsRoom05
+`ParentsRoom05` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**RODDY** (Discouraged): I grew up in a bad part of town. My family had little to no money and my parents took on various jobs.
+**RODDY** (Worried): Things were pretty much like that until my 8th birthday, when it miraculously took a turn for the better!
+**RODDY**: Suddenly, my dad had a new job, and we moved into a fancy house in an upscale neighborhood!
+**RODDY** (Encouraging): It was great! I even got to go to a private school!
+**RODDY** (Doubtful): So you can imagine my surprise when I later found out what my dad did...
+**MADDIE**: What did he do?
+**RODDY** (Worried): Well, my dad was always good with numbers and accounting. I guess he impressed someone.
+**MADDIE** (Discouraged): Oh? That doesn’t sound so bad. Who was it?
+**RODDY** (Frustrated): A crime boss.
+**MADDIE** (Worried): Oh...
+
+### Parents' Room: ParentsRoom06
+`ParentsRoom06` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**RODDY**: I’ll be honest. I grew up thinking this sort of life was normal.
+**RODDY**: Dad never really spoke about work, but we were still invited to many parties.
+**RODDY** (Thinking): I got to hang out with quite a few “colorful” people.
+**RODDY** (Charming): They even started teaching me a few tricks on how to pick locks!
+**RODDY** (Worried): I ended up being quite good at it, too! I just didn’t realize I was being manipulated...  
+  _(1 cosmetic edit not shown)_
+**RODDY** (Thinking): But if it wasn’t for that, I wouldn’t have found my love of architecture.
+**MADDIE** (Thinking): How come?
+**RODDY** (Charming): I had to study a lot of blueprints and floor plans for my... “job”.
+
+### Parents' Room: ParentsRoom07
+`ParentsRoom07` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Worried): I don’t mean to pry, but...
+**MADDIE** (Doubtful): If you were in that sort of life, how did you ever get married to Detective Sullivan?!
+**RODDY** (Charming): Ah... Well, you see, I met her one day, quite suddenly, at a late-night diner!
+**RODDY** (Relaxed): We hit it off right away. It was like she knew everything about me! She even liked architecture.
+**RODDY**: We would hang out, go out to town, and I’d tell her fun facts about the buildings.
+**RODDY** (Charming): As you would guess, we quickly fell in love. And as the young idiots we were, we secretly got married.
+**RODDY** (Frustrated): We rushed into it. We weren’t thinking, but it was great for a while. I had this exciting life, and she was a huge part of it.
+**MADDIE** (Thinking): So, what happened?
+**RODDY**: A couple of months later, she had a sudden family emergency and had to leave for a while.
+**RODDY**: Which was lucky for me, because my big job was essentially the following week.
+**MADDIE** (Worried): Oh, um...
+**RODDY** (Annoyed): Yeah... It wasn’t a family emergency.
+
+### Parents' Room: ParentsRoom08
+`ParentsRoom08` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**RODDY** (Discouraged): It was the night of my first job and we got busted. And guess who was leading the charge?
+**MADDIE** (Annoyed): Sullivan.
+**RODDY** (Annoyed): Yeah. She was undercover. Her FIRST job. And I was the mark. She lied about everything.
+**RODDY** (Annoyed): Even the wedding was a sham.
+**MADDIE** (Surprised): How could she do that?!
+**RODDY** (Doubtful): I asked her. She claimed the love was real, and she did everything she could to help me.
+**RODDY** (Discouraged): Thankfully, my charges were dropped, and we never saw each other again.
+**RODDY** (Frustrated): And since I married a cop, I wasn’t really welcomed at home anymore, either.
+**RODDY** (Discouraged): So I took up architecture and moved here. FAR AWAY from everything.
+
+### Parents' Room: ParentsRoom09
+`ParentsRoom09` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Worried): Roddy... I...
+**RODDY** (Discouraged): It’s okay Maddie. I know it’s a lot.
+**RODDY**: I just hope you know how much you mean to me... Really.
+**RODDY** (Worried): I’m... I’m sorry.
+**MADDIE** (Surprised): For what?
+**RODDY** (Discouraged): For disappointing you.
+**MADDIE**: Roddy... I’m not disappointed.
+**MADDIE**: Thank you for telling me.
+**RODDY** (Worried): Okay... I... Uhm... I gotta go. You know... Get some fresh air.
+
 ### Parents' Room: Place photo
 `ParentsRoom10` · seen 25.07.01–26.07.01
 - trigger: area, area=Parents' Room, areaId=ParentsRoom, hotspotId=ParentsRoomUpperWallSwapPhotos2, phase=task completed, task=Place photo (versions 25.07.01–26.07.01)
@@ -37,6 +152,21 @@
 **MADDIE**: I can...
 **MADDIE**: I can almost FEEL them in here.
 
+### Parents' Room: ParentsRoom13
+`ParentsRoom13` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Joyous): This must have been Mom’s art corner!
+**MADDIE** (Encouraging): Wow, she was so talented as well. So many styles and experiments.
+**MADDIE** (Relaxed): I guess my creativity comes from her.  
+  _earlier:_ ~~I guess my style comes from her.~~ (until 25.07.01)
+**MADDIE** (Thinking): Hey... What’s this?
+**MADDIE** (Surprised): Oh! It’s a family portrait of Mom, Dad and me at sunset...  
+  _earlier:_ ~~Oh!~~ (until 25.07.01)
+**MADDIE**: And another adorable one of mom holding me tight!  
+  _earlier:_ ~~It’s a family portrait of Mom, Dad and me at sunset...~~ (until 25.07.01)
+**MADDIE** (Angry): Oh, Mom...
+
 ### Parents' Room: Clean out footprints
 `ParentsRoom14` · seen 25.07.01–26.07.01
 - trigger: area, area=Parents' Room, areaId=ParentsRoom, hotspotId=ParentsRoomLivingRoomCleanCarpet1, phase=task completed, task=Clean out footprints (versions 25.07.01–26.07.01)
@@ -58,6 +188,38 @@
 **MADDIE** (Surprised): This is a replica of John Boulton’s fighter plane! Of course!
 **MADDIE** (Encouraging): John really inspired Dad in many ways!
 **MADDIE** (Relaxed): I guess aviation runs in the family!
+
+### Parents' Room: ParentsRoom16
+`ParentsRoom16` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Encouraging): This must be Dad’s desk! Look at all this aviation stuff!
+**MADDIE** (Charming): Manuals, technical specs, sketches and there's even model airplanes!  
+  _earlier:_ ~~Manuals, technical specs and drawing. Model airplanes!~~ (until 25.07.01)
+**MADDIE** (Relaxed): Even some of his own design sketches! He really was an engineer at heart.
+**MADDIE** (Surprised): Actually... Some of these designs are good. REALLY GOOD.
+
+### Parents' Room: ParentsRoom17
+`ParentsRoom17` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Doubtful): What’s this? These aren’t engineering plans...
+**MADDIE** (Surprised): They’re police reports! On a crime family!
+**MADDIE** (Thinking): But why was Dad looking into this? Wait...
+**MADDIE** (Thinking): Some of these notes were dated on the day he...
+**MADDIE** (Surprised): Died!
+**MADDIE** (Surprised): Was dad mixed up with criminals too?!
+
+### Parents' Room: ParentsRoom18
+`ParentsRoom18` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Surprised): There are also some blueprints on the old tin can factory!
+**MADDIE** (Doubtful): And it looks like my dad knew about what was really going on there.
+**MADDIE** (Doubtful): They were using the cans to transport secret information, sometimes blackmail, across the country.
+**MADDIE** (Doubtful): But...
+**MADDIE** (Thinking): How does this connect with the crime family?
+**MADDIE** (Surprised): And what has this got to do with my dad?!
 
 ### Parents' Room: Attach mobile
 `ParentsRoom19` · seen 25.07.01–26.07.01

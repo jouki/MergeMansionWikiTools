@@ -77,8 +77,9 @@ Every story in which Bruno speaks.
 **BRUNO** (Joyous): By all means. I have to take this call, it's the wife. When you’ve made your decision, don’t hesitate to reach out.
 **BRUNO** (Encouraging): I have big plans for Hopewell Bay. Huge! And they could include you and your family as well!
 
-### Library03
+### Library: Library03
 `Library03` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **BRUNO**: Maddie.
 **MADDIE** (Annoyed): Bruno.
@@ -91,8 +92,9 @@ Every story in which Bruno speaks.
 **BRUNO** (Charming): Now...
 **BRUNO** (Joyous): SIGN IT!
 
-### Library04
+### Library: Library04
 `Library04` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **BRUNO** (Frustrated): Look... I’m running out of patience here, so I’ll do you a favor.
 **BRUNO** (Annoyed): I’ll offer you one last time the chance to sign it, and I’ll make sure your grandmother’s investigation will end.
@@ -108,8 +110,9 @@ Every story in which Bruno speaks.
 **RODDY** (Surprised): STOP! DON’T SIGN IT!
 **BRUNO** (Surprised): What?!
 
-### Library05
+### Library: Library05
 `Library05` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Surprised): Don’t sign, Maddie! I found it! I found the proof!
 **BRUNO** (Surprised): What are you talking about?!
@@ -125,8 +128,9 @@ Every story in which Bruno speaks.
 **BRUNO**: Look, I’ll call the lawyer and I’ll be right there. *Click*
 **BRUNO** (Annoyed): You... You did this!
 
-### Library06
+### Library: Library06
 `Library06` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **BRUNO** (Annoyed): This isn’t over... I’ll make sure all of you go to prison for this!
 **RODDY** (Relaxed): I think you might have that a bit backwards, Mayor.
@@ -141,8 +145,9 @@ Every story in which Bruno speaks.
 **MADDIE** (Joyous): You... You did it, Roddy!
 **RODDY** (Charming): Well... I...
 
-### Lounge12
+### Lounge: Lounge12
 `Lounge12` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **BRUNO** (Relaxed): Ah, Maddie! Good to see you!
 **MADDIE** (Annoyed): ...
@@ -156,8 +161,9 @@ Every story in which Bruno speaks.
 **BRUNO** (Annoyed): Because if it were personal... this would be a different conversation.
 **MADDIE** (Annoyed): You don't scare me, mayor.
 
-### Lounge13
+### Lounge: Lounge13
 `Lounge13` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **BRUNO** (Doubtful): You'd be smart to be afraid of me. You don't know the kind of friends I have.
 **MADDIE** (Annoyed): The answer is NO, Mayor. I'm not selling.
@@ -166,8 +172,9 @@ Every story in which Bruno speaks.
 **BRUNO** (Charming): It doesn't matter how many coats of paint you put on these walls, Maddie.
 **BRUNO**: It won't cover up the truth that the Boultons were failures. Brought down by greed and hubris.
 
-### Lounge14
+### Lounge: Lounge14
 `Lounge14` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **BRUNO** (Doubtful): I'm tired of playing games, Maddie. So I'll make this simple.
 **BRUNO** (Charming): Give me Beaumont Hall and maybe I'll leave you with just enough to hire a semi-competent lawyer.
@@ -177,8 +184,9 @@ Every story in which Bruno speaks.
 **MADDIE** (Annoyed): Get out. Now!
 **BRUNO** (Charming): Alright, alright. But, just so you know, your fate is sealed.
 
-### Speakeasy16
+### Speakeasy: Speakeasy16
 `Speakeasy16` · seen 25.05.01–26.07.01
+- trigger: area, area=Speakeasy, areaId=Speakeasy, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): What!! That's amazing! The fridge is finally open!
 **MADDIE** (Surprised): And it's the path to another room? Who would've thought!

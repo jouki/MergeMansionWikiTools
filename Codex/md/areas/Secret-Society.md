@@ -68,6 +68,17 @@
 **MADDIE** (Charming): Sure is!
 **JACKIE** (Frustrated): Well, let's give it a try because I can't stand this smell much longer!
 
+### Secret Society: Secretsociety_02.1
+`Secretsociety_02.1` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**JACKIE** (Annoyed): Maddie, you're brilliant! I can finally breathe in here.
+**MADDIE** (Thinking): Yeah, but what on earth are those numbers?
+**JACKIE** (Thinking): Hmm, maybe it's just a pattern?
+**MADDIE** (Doubtful): Knowing this mansion, nothing is ever what it seems...
+**JACKIE** (Surprised): Um, Maddie... Don't freak out, but I think I see a rat...
+**MADDIE** (Frustrated): Ewwww! Not again!
+
 ### Secret Society: Study what the items are
 `Secretsociety_03` · seen 24.04.01–26.07.01
 - trigger: area, area=Secret Society, areaId=SecretSociety, hotspotId=SecretSocietySwapSSArtifactBoxAa3, phase=task completed, task=Study what the items are (versions 24.04.01–26.07.01)
@@ -119,6 +130,41 @@
 **MADDIE** (Surprised): Oh! That’s right! It’s so out of place too!
 **JACKIE** (Thinking): Hmm... I wonder what caused them to shut it down?
 
+### Secret Society: Secretsociety_06.1
+`Secretsociety_06.1` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**JACKIE** (Doubtful): Are you actually planning to stand on this bridge?
+**MADDIE** (Doubtful): How else am I supposed to fix it?
+**JACKIE** (Worried): I don't know, Maddie. This place feels like it's full of traps. The lamp-
+**MADDIE** (Thinking): I know, I know. What if I just place one foot on it like so...
+**JACKIE** (Surprised): Wait, do you hear rumbling? Step back, Maddie!
+
+### Secret Society: Secretsociety_06.2
+`Secretsociety_06.2` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Discouraged): Phew! That was close... Thanks, Jackie.
+**JACKIE**: I might have to add "saving lives" to my professional profile!
+**MADDIE**: Haha, hopefully this bridge is the last of the traps.
+**JACKIE** (Encouraging): I trust you can build a much sturdier bridge?
+**MADDIE** (Charming): Absolutely!
+
+### Secret Society: Secretsociety_07
+`Secretsociety_07` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**JACKIE** (Relaxed): That was a solid bridge, Maddie! I'm sorry if I was still hesitant to cross it.
+**MADDIE**: I don't blame you after the events we've seen down here...
+**MADDIE** (Thinking): I wonder why they didn't want anyone to get to this side?
+**JACKIE** (Thinking): Hmm... might have something to do with all these blueprints.
+**MADDIE** (Doubtful): You could be right. But what were they building?
+**JACKIE** (Thinking): Mostly harmless stuff, from the looks of it.
+**MADDIE** (Surprised): Invisibility machine? Early Navigation System? Anti-Distraction Hat?
+**JACKIE** (Charming): Maddie... These folks had some far out ideas...
+**MADDIE**: This must be their intellectual corner.... The very spot where ideas came to life!
+**JACKIE** (Joyous): How exciting!
+
 ### Secret Society: Put the lectern up
 `Secretsociety_08` · seen 24.04.01–26.07.01
 - trigger: area, area=Secret Society, areaId=SecretSociety, hotspotId=SecretSocietySwapFallenLecternRundownI4, phase=task completed, task=Put the lectern up (versions 24.04.01–26.07.01)
@@ -130,6 +176,23 @@
 **MADDIE** (Thinking): Do you think presidents have been here?
 **JACKIE**: I wouldn't be surprised. These societies were known to host a few presidents over the years...
 
+### Secret Society: Secretsociety_09
+`Secretsociety_09` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Surprised): Look! It's the same numbers that were in the pool!
+**JACKIE** (Thinking): Wow, guess it does have a purpose. Do you think it's some sort of puzzle?
+**MADDIE** (Encouraging): It has to be! 
+**JACKIE**: Ooh, I bet if we solve this, we might unearth some more secrets... 
+
+### Secret Society: Secretsociety_10
+`Secretsociety_10` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Frustrated): Hmm, I just have to put the last piece of this puzzle together.
+**MADDIE** (Frustrated): If this goes here, then... Hmmm I almost have it...
+**JACKIE** (Encouraging): You can do it, Maddie!
+
 ### Secret Society: Reorder the combination!
 `Secretsociety_11` · seen 24.04.01–26.07.01
 - trigger: area, area=Secret Society, areaId=SecretSociety, hotspotId=SecretSocietySwapAnimationBeamWrongNumberPuzzleJ3, phase=task completed, task=Reorder the combination! (versions 24.04.01–26.07.01)
@@ -138,6 +201,59 @@
 **MADDIE** (Surprised): Oh my goodness, it worked! There's a beam of light!
 **MADDIE** (Surprised): And it's bouncing off the fire bowl...
 **JACKIE** (Joyous): I'm sure this light reflection puzzle unlocks something... Let's polish the bowl and see where it leads!
+
+### Secret Society: Secretsociety_12
+`Secretsociety_12` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+
+### Secret Society: Secretsociety_12.1
+`Secretsociety_12.1` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**JACKIE** (Surprised): I thought I heard a faint ringing, and I was right! What's a telephone doing here?
+**MADDIE** (Thinking): Let's find out! It's a bit muffled...
+**JACKIE** (Thinking): "Greetings... curious one..."
+**JACKIE** (Thinking): "I applaud you for coming this far... not an easy task...."
+**JACKIE** (Thinking): "We are the Curiosity Fellowship. We honor... loyalty... truth and-
+**JACKIE** (Thinking): What was that last bit?
+**MADDIE** (Frustrated): Shh, Jackie!
+**JACKIE** (Thinking): "We are not easy to find... hidden among you... in plain sight"
+**MADDIE** (Doubtful): I wonder if we've already met a society member. Could be anyone!
+**JACKIE** (Thinking): "This is not the end. Tell... no one..."
+**JACKIE** (Thinking): *Click*
+**JACKIE** (Thinking): Is it just me or did that sound like a threat?
+**MADDIE** (Charming): Can you believe we actually solved one of the Fellowship's puzzles?!
+**MADDIE** (Joyous): Based on that message, there might be more around the mansion. I can't wait!
+
+### Secret Society: Secretsociety_Intro
+`Secretsociety_Intro` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Surprised): Wow! I can’t believe this was under the conservatory all this time!
+**JACKIE** (Thinking): How did you know it was here?
+**MADDIE** (Thinking): There were clues hidden in the mosaic and-
+**JACKIE** (Surprised): LOOK OUT!
+**MADDIE** (Surprised): Ungh!
+**JACKIE** (Surprised): Are you okay?!
+**MADDIE** (Worried): Yeah... wow, that was close!
+**JACKIE**: Maybe we should stick together for this one. Just in case...
+**MADDIE**: That sounds like a good idea.
+**JACKIE** (Encouraging): Besides, I smell a good story in this room!
+**MADDIE** (Doubtful): Ugh... That’s not the only thing you’re probably smelling... Look at that water!
+**JACKIE** (Doubtful): You know, you should really get your plumbing fixed.
+
+### Secret Society: Secretsociety_Unlock
+`Secretsociety_Unlock` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**JACKIE**: Hey, Maddie! There you are! I have something to ask-
+**MADDIE** (Joyous): Jackie! I was right, the very same blue gem I discovered is right here at the conservatory!
+**JACKIE** (Doubtful): The what?
+**MADDIE** (Thinking): The gem from the cryptex! And it looks like one of the gem slots here is actually hollow!
+**MADDIE** (Thinking): Maybe I just need to place the gem here and see what happens...
+**JACKIE** (Doubtful): I have so many questions...
+**JACKIE** (Surprised): W-wait a second, I think the stone is moving!
 
 ### Secret Society: Garden decor is my specialty!
 `Secretsocietycharactertask2` · seen 24.04.01–26.07.01

@@ -152,8 +152,9 @@ Every story in which Maddie speaks.
 **MADDIE**: Alright. But, only because you're injured!
 **ASH** (Joyous): You're the best! I guarantee that it'll be worth it!
 
-### Attic01
+### Attic: Attic01
 `Attic01` · seen 25.05.01–26.07.01
+- trigger: area, area=Attic, areaId=Attic, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Encouraging): Well, this place is rather obviously an attic!
 **MADDIE** (Thinking): But why was the entrance hidden like that?
@@ -162,8 +163,9 @@ Every story in which Maddie speaks.
 **MADDIE**: I’ll look around and see what I can discover.
 **MADDIE** (Thinking): Grandpa wanted Grandma to come up here, after all!
 
-### Attic04
+### Attic: Attic04
 `Attic04` · seen 25.05.01–26.07.01
+- trigger: area, area=Attic, areaId=Attic, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: What attic wouldn’t be complete without an old TV...  
   _(1 cosmetic edit not shown)_
@@ -174,8 +176,9 @@ Every story in which Maddie speaks.
   _(1 cosmetic edit not shown)_
 **MADDIE** (Thinking): I should hang on to these, perhaps they’re worth something!
 
-### Attic06
+### Attic: Attic06
 `Attic06` · seen 25.05.01–26.07.01
+- trigger: area, area=Attic, areaId=Attic, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): It’s... stunning! Timeless, classic...  
   _(1 cosmetic edit not shown)_
@@ -186,8 +189,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Doubtful): Then again, he came back.
 **MADDIE** (Thinking): Maybe I should listen to him...
 
-### Attic07
+### Attic: Attic07
 `Attic07` · seen 25.05.01–26.07.01
+- trigger: area, area=Attic, areaId=Attic, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Hmm... That safe was really old and tricky to open.  
   _earlier:_ ~~Hmm... This safe looks really old, but in good condition.~~ (until 25.03.01)
@@ -200,8 +204,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Frustrated): What does this mean?! Was he switched at birth? Ugh... keep it together, Maddie!  
   _(1 cosmetic edit not shown)_
 
-### Attic08
+### Attic: Attic08
 `Attic08` · seen 25.05.01–26.07.01
+- trigger: area, area=Attic, areaId=Attic, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: Hey... A writing desk. Perhaps I can find more answers here.
 **MADDIE** (Doubtful): A letter! But... Wait a minute. This doesn’t make sense!
@@ -213,8 +218,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Surprised): This... doesn’t sound like Grandpa! But... who else could it be?!  
   _(1 cosmetic edit not shown)_
 
-### Attic11
+### Attic: Attic11
 `Attic11` · seen 25.05.01–26.07.01
+- trigger: area, area=Attic, areaId=Attic, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Hmm... an old vinyl. Wait... something is written on it.  
   _earlier:_ ~~Hmm... An old cassette tape. Wait... Something is written on it.~~ (until 25.03.01)
@@ -227,8 +233,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Joyous): I see some cassettes as well. I've got to find a cassette player!  
   _earlier:_ ~~I got to find a cassette player!~~ (until 25.03.01)
 
-### Attic12
+### Attic: Attic12
 `Attic12` · seen 25.05.01–26.07.01
+- trigger: area, area=Attic, areaId=Attic, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Encouraging): Ah good, a player, and it even has batteries!
 **MADDIE** (Joyous): Here we go! Mom. Dad. Don’t let me down!
@@ -238,8 +245,9 @@ Every story in which Maddie speaks.
   _(1 cosmetic edit not shown)_
 **MADDIE**: This is wonderful!
 
-### Attic14
+### Attic: Attic14
 `Attic14` · seen 25.05.01–26.07.01
+- trigger: area, area=Attic, areaId=Attic, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Hmm... It looks like it needs a numeric key code.
 **MADDIE**: Most of the things up here are about mom and dad. Their music, the wedding dress...  
@@ -248,16 +256,18 @@ Every story in which Maddie speaks.
 **MADDIE** (Encouraging): It worked, and it looks like it held a key!  
   _earlier:_ ~~It worked, and it looks like it held a key. Now... Let’s open this door.~~ (until 25.04.01)
 
-### Attic14.2
+### Attic: Attic14.2
 `Attic14.2` · seen 25.05.01–26.07.01
+- trigger: area, area=Attic, areaId=Attic, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **—** (Thinking): Now... let’s open this door.  
   _earlier:_ ~~It worked, and it looks like it held a key. Now... let’s open this door.~~ (until 25.04.01)
 **MADDIE** (Surprised): Oh, wow! It looks like an elevator!
 **MADDIE** (Doubtful): Behind a wardrobe?!
 
-### Attic15
+### Attic: Attic15
 `Attic15` · seen 25.05.01–26.07.01
+- trigger: area, area=Attic, areaId=Attic, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: I guess it’s convenient to have an elevator up here, but it sure is odd.  
   _earlier:_ ~~I guess it’s convenient to have an elevator up here, but it sure is odd to have one lead to the attic.~~ (until 25.03.01)
@@ -265,8 +275,9 @@ Every story in which Maddie speaks.
   _(1 cosmetic edit not shown)_
 **MADDIE** (Encouraging): Maybe I can find out where it leads and see what it was truly used for...
 
-### Attic16
+### Attic: Attic16
 `Attic16` · seen 25.05.01–26.07.01
+- trigger: area, area=Attic, areaId=Attic, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): Well... that’s the attic, done and dusted.  
   _(1 cosmetic edit not shown)_
@@ -425,8 +436,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): Judging from the instruments, I think they used to play jazz.
 **MADDIE** (Charming): I wish I could have been a fly on the wall.
 
-### Bathroom02
+### Bathroom: Bathroom02
 `Bathroom02` · seen 23.11.02–26.07.01
+- trigger: area, area=Bathroom, areaId=Bathroom, phase=area story (exact task not dumped) (versions 23.11.02–26.07.01)
 
 **ASH** (Surprised): Boy, you weren't kiddin'! You got a gusher here!
 **MADDIE** (Worried): I know! You must be Ash. Is there anything you can do?
@@ -434,8 +446,9 @@ Every story in which Maddie speaks.
 **ASH** (Encouraging): Now, let's take a closer look!
 **ASH** (Worried): ...Oww! I'm okay, I'm okay! But, just in case, could you call an ambulance?
 
-### Bathroom03
+### Bathroom: Bathroom03
 `Bathroom03` · seen 23.11.02–26.07.01
+- trigger: area, area=Bathroom, areaId=Bathroom, phase=area story (exact task not dumped) (versions 23.11.02–26.07.01)
 
 **ASH** (Joyous): So! Where were we?
 **MADDIE**: Are you sure you're alright? That fall looked painful. And your leg...
@@ -443,8 +456,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Surprised): R-Really? Is plumbing that dangerous?
 **ASH** (Thinking): Come to think of it, not really, no. Funny that! Aaanyhoo, let's get to work!
 
-### Bathroom04
+### Bathroom: Bathroom04
 `Bathroom04` · seen 23.11.02–26.07.01
+- trigger: area, area=Bathroom, areaId=Bathroom, phase=area story (exact task not dumped) (versions 23.11.02–26.07.01)
 
 **MADDIE** (Doubtful): Oh no! Another leak! But, explain to me again why I'm doing all the work?
 **ASH** (Annoyed): It's like this, see... I offer a different type of service. While other plumbers FIX your problem, I do something far more valuable. 
@@ -520,8 +534,9 @@ Every story in which Maddie speaks.
 **ASH** (Thinking): Yeah, but it'll take some time. Come back in a few hours!
 **MADDIE** (Thinking): Hmmm. Wonder what it is?!
 
-### Bathroom10Outro
+### Bathroom: Bathroom10Outro
 `Bathroom10Outro` · seen 23.11.02–26.07.01
+- trigger: area, area=Bathroom, areaId=Bathroom, phase=area story (exact task not dumped) (versions 23.11.02–26.07.01)
 
 **ASH** (Joyous): Tadaa!
 **MADDIE** (Joyous): Is that a jacuzzi?! 
@@ -817,8 +832,9 @@ Every story in which Maddie speaks.
 **MADDIE**: You think it is a fair representation of a Boulton Blue?
 **BABYLON** (Relaxed): *Neigh!*
 
-### BoultonBoulevard 02
+### Boulton Boulevard: BoultonBoulevard_02
 `BoultonBoulevard_02` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: Well, this sign had seen better days, but now it’s as good as new!
 **MADDIE** (Encouraging): And if anything would confirm that I’m in the right place, it would be a sign that says,
@@ -839,8 +855,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): I bet some of those secrets are still hiding in the overgrowth.
 **MADDIE** (Encouraging): Good thing I'm here to uncover them!
 
-### BoultonBoulevard 04
+### Boulton Boulevard: BoultonBoulevard_04
 `BoultonBoulevard_04` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Thinking): Hmm... I don’t know much about this place!
 **MADDIE** (Thinking): Apart from what I’ve read, of course.
@@ -854,8 +871,9 @@ Every story in which Maddie speaks.
 **WINSTON** (Thinking): Is everything alright, Ma’am?
 **MADDIE** (Talking): Yes, of course! I was wondering if you could join me at the tin can factory?
 
-### BoultonBoulevard 05
+### Boulton Boulevard: BoultonBoulevard_05
 `BoultonBoulevard_05` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **WINSTON**: How may I be of service, Ma’am?
 **MADDIE** (Encouraging): I’ve decided to fix up the old factory! And was wondering if you could tell me a little about it?
@@ -885,8 +903,9 @@ Every story in which Maddie speaks.
 **WINSTON** (Charming): Very prudent, Ma'am. Given your history with the council.  
   _(1 cosmetic edit not shown)_
 
-### BoultonBoulevard 07
+### Boulton Boulevard: BoultonBoulevard_07
 `BoultonBoulevard_07` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Surprised): Hey! There seems to be a plaque hidden under these bushes!
 **WINSTON** (Encouraging): Well spotted, Ma’am. That would be their time capsule.
@@ -900,8 +919,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): Alright, alright, I get the point.
 **MADDIE** (Joyous): Let’s find out what’s inside!
 
-### BoultonBoulevard 08
+### Boulton Boulevard: BoultonBoulevard_08
 `BoultonBoulevard_08` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Joyous): Oh wow! There’s so much stuff in here!
 **MADDIE**: Old tin cans, newspaper clippings, even letters from residents! This is incredible!
@@ -916,8 +936,9 @@ Every story in which Maddie speaks.
 **WINSTON** (Joyous): And rob you of all the fun, Ma’am?
 **MADDIE** (Doubtful): Oh, ha ha.
 
-### BoultonBoulevard 09
+### Boulton Boulevard: BoultonBoulevard_09
 `BoultonBoulevard_09` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Doubtful): Hmmm.. Looks like the remains of a bell.
 **WINSTON** (Charming): Indeed, Ma’am. That was Agatha’s. She cast it herself, you know? Pure tin, and it rang twice a day.  
@@ -943,8 +964,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Encouraging): This will be the museum's café! I'm sure guests will love the outdoor seating.
 **MADDIE** (Joyous): And enjoying the boulevard at their own leisure.
 
-### BoultonBoulevard 11
+### Boulton Boulevard: BoultonBoulevard_11
 `BoultonBoulevard_11` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Doubtful): The water wheel’s completely jammed. It’s just packed with leaves and debris.
 **WINSTON** (Discouraged): It is quite unfortunate. That wheel used to power a third of the machinery inside.
@@ -959,8 +981,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Encouraging): Not to mention being a great teaching tool about renewable energies.
 **WINSTON** (Joyous): A wonderful idea, Ma’am.
 
-### BoultonBoulevard 12
+### Boulton Boulevard: BoultonBoulevard_12
 `BoultonBoulevard_12` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Joyous): An old fire truck!  
   _(1 cosmetic edit not shown)_
@@ -972,8 +995,9 @@ Every story in which Maddie speaks.
 **WINSTON**: That banner was indeed lucky to survive. It was raised every morning. Flying bright over every shift change.
 **MADDIE** (Relaxed): It’s going up again. A great reminder of the history of this place.
 
-### BoultonBoulevard 13
+### Boulton Boulevard: BoultonBoulevard_13
 `BoultonBoulevard_13` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: I knew this place mattered, but I didn’t realize how much until now.
 **WINSTON** (Thinking): Most things don’t reveal their value until someone bothers to look closely, Ma’am.
@@ -1067,8 +1091,9 @@ Every story in which Maddie speaks.
 **MADDIE**: Thank you too, Holden. I'm sure your article will bring more visitors to the museum.
 **HOLDEN** (Joyous): And even more sales to the Howler!
 
-### BoultonBoulevard Intro
+### Boulton Boulevard: BoultonBoulevard_Intro
 `BoultonBoulevard_Intro` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Joyous): Alright! Here we are at last!
 **MADDIE** (Encouraging): These two lions are familiar, so this place belongs to the Boultons, alright!  
@@ -4635,16 +4660,18 @@ Every story in which Maddie speaks.
 **RODDY** (Relaxed): Right. Have a great time at the Easter Extravaganza and bring back some marshmallow foam!
 **MADDIE** (Relaxed): OK, if you say so. Thanks for your help, guys!
 
-### CBE TheGreatEscapeA PostBox Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeA_PostBox_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeA, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **MADDIE** (Calling): You want me to go through the mail?!
 **GRANDMA** (Calling): Yes, dearie.
 **MADDIE** (Calling): I don’t know how comfortable I feel about this...
 **GRANDMA** (Calling): The mailman owes me a few favors, so you won’t get in any trouble.
 
-### CBE TheGreatEscapeB Intro Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeB_Intro_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeB, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **MADDIE** (Calling): Grandma?! Are you okay?
 **MADDIE** (Calling): When they took you away, I was so worried!
@@ -4653,8 +4680,9 @@ Every story in which Maddie speaks.
 **GRANDMA** (Calling): I’m in a bit of a bind right now...
 **GRANDMA** (Calling): Would you be a dear and help me out?
 
-### CBE TheGreatEscapeB PostBox Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeB_PostBox_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeB, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **MADDIE** (Calling): You want me to go through the mail?!
 **GRANDMA** (Calling): Yes, dearie.
@@ -5173,8 +5201,9 @@ Every story in which Maddie speaks.
 **GRANDMA** (Frustrated): Now, what else should we do here?
 **MADDIE** (Worried): Ugh, Grandma! 
 
-### Cinema01
+### Cinema: Cinema01
 `Cinema01` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=Cinema, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Hmm... Grandpa Charlie’s journal seems to describe this area in the Mansion.
 **MADDIE** (Doubtful): As far as I can tell, there seems to be something connected to it!
@@ -5182,8 +5211,9 @@ Every story in which Maddie speaks.
 **MADDIE**: That is where I discovered all the strange spy stuff. Maybe there's another hidden secret in here somewhere?
 **MADDIE** (Encouraging): Let's sort this place out and find out!
 
-### Cinema02
+### Cinema: Cinema02
 `Cinema02` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=Cinema, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Hey... this is a cinema!
 **MADDIE** (Doubtful): Or... a stage?
@@ -5193,8 +5223,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Surprised): Ahhh! Arthur?! What are you doing back here?
 **ARTHUR** (Charming): Hey there, Mads...
 
-### Cinema03
+### Cinema: Cinema03
 `Cinema03` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=Cinema, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **ARTHUR**: I’m sorry, Mads. I just had to come back and see you again.
 **ARTHUR** (Surprised): Your butler let me in.
@@ -5210,8 +5241,9 @@ Every story in which Maddie speaks.
 **ARTHUR** (Doubtful): I never said I was a “good” cook...
 **MADDIE** (Charming): Haha... no. You didn’t. And... they weren’t half bad!
 
-### Cinema04
+### Cinema: Cinema04
 `Cinema04` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=Cinema, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **ARTHUR** (Charming): See? This is what I’m talking about! You and me! Us. I miss... THIS!
 **MADDIE** (Worried): Arthur... I...
@@ -5223,8 +5255,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Doubtful): Of course! Let me ju-
 **ARTHUR** (Doubtful): She ain’t going anywhere alone with you, buddy. Whatever you need to say, you can say in front of me.
 
-### Cinema05
+### Cinema: Cinema05
 `Cinema05` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=Cinema, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Annoyed): Hey! I can make my own decisions!
 **RODDY** (Doubtful): Yeah, buzz off.
@@ -5237,8 +5270,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Surprised): Arthur!
 **ARTHUR** (Annoyed): No, I’m serious! This guy is BAD news!
 
-### Cinema06
+### Cinema: Cinema06
 `Cinema06` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=Cinema, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **ARTHUR** (Doubtful): I’m telling you Mads, you shouldn’t trust him.
 **RODDY** (Annoyed): Trust me? What about you?! Quite convenient for you to turn up again, right?...
@@ -5249,8 +5283,9 @@ Every story in which Maddie speaks.
 **RODDY** (Worried): ...
 **ARTHUR** (Doubtful): See? I know who he is... And where he’s from.
 
-### Cinema07
+### Cinema: Cinema07
 `Cinema07` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=Cinema, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): I don’t understand, what are you saying?
 **RODDY** (Worried): Maddie, don’t listen to him. He’s obviously trying to manipulate you.
@@ -5276,8 +5311,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Discouraged): Okay... Get a grip, Maddie. You need to talk to them and get to the bottom of things. 
 **MADDIE** (Discouraged): For now, I need a break. And restoring the cinema is just what the doctor ordered!
 
-### Cinema09
+### Cinema: Cinema09
 `Cinema09` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=Cinema, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Hmm, this projector is quite old but luckily I learned how to fix these on the dance floor!
 **MADDIE** (Doubtful): Just got to adjust this wiring and voilà!
@@ -5286,8 +5322,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): It almost seems like a phone number that could be important.
 **MADDIE** (Charming): Good thing I have a photographic memory and managed to memorize all of that!
 
-### Cinema10
+### Cinema: Cinema10
 `Cinema10` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=Cinema, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Interesting, I wonder why there's a phone in here...
 **MADDIE** (Thinking): Is this more like an intercom for the actors?
@@ -5304,8 +5341,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Encouraging): This Fellowship seems to have left quite a trail of breadcrumbs for curious minds like mine.
 **MADDIE**: I should keep an eye out for any more gems or symbols...
 
-### Cinema11
+### Cinema: Cinema11
 `Cinema11` · seen 25.05.01–26.07.01
+- trigger: area, area=Cinema, areaId=Cinema, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: Hmm... I thought I was done renovating this room but...
 **MADDIE**: There seems to be more behind this wall!
@@ -5986,8 +6024,9 @@ But I'm sure this thing will come in handy!
 **MADDIE** (Encouraging): They must have had one heck of a party.
 **MADDIE** (Thinking): I wonder what they were celebrating?
 
-### Dancefloor 03
+### Dancefloor: Dancefloor_03
 `Dancefloor_03` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **SULLIVAN** (Charming): Ha! You think I’M the one breaking the law? Look at this place...
 **SULLIVAN** (Annoyed): An illegal casino operation if I ever saw one. And I’ve seen many!
@@ -6009,8 +6048,9 @@ But I'm sure this thing will come in handy!
 **MADDIE** (Thinking): ...And inside a box?
 **MADDIE** (Doubtful): Maybe there’s a lot more to this place than I originally thought...
 
-### Dancefloor 05
+### Dancefloor: Dancefloor_05
 `Dancefloor_05` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **SULLIVAN** (Charming): Criminals? Of course not. Not yet, at least...
 **SULLIVAN** (Relaxed): Innocent until proven guilty and all that.
@@ -6033,8 +6073,9 @@ But I'm sure this thing will come in handy!
 **MADDIE** (Thinking): Hmm... Their positioning is still a bit off.
 **MADDIE** (Thinking): It almost looks like they were made to interact with each other.
 
-### Dancefloor 07
+### Dancefloor: Dancefloor_07
 `Dancefloor_07` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): Grandma, what was she talking about? A second watch? I've only seen one...
 **GRANDMA** (Frustrated): Winston, we need to check all the windows and doors. Make sure all the locks are still in good condition.
@@ -6047,8 +6088,9 @@ But I'm sure this thing will come in handy!
 **MADDIE** (Surprised): R-Really?!
 **GRANDMA** (Frustrated): It’s time you learned the truth...
 
-### Dancefloor 08
+### Dancefloor: Dancefloor_08
 `Dancefloor_08` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): I know I've been a bit coy with you, dearie, but now you must listen carefully...  
   _earlier:_ ~~Hmm, I think it's time to go meet Grandma and find out what she has to say...~~ (until 25.02.02)
@@ -6100,8 +6142,9 @@ But I'm sure this thing will come in handy!
 **MADDIE** (Thinking): The projector casts a shadow from the mannequins that need to match with the painting behind it.
 **MADDIE** (Thinking): I just have to get them in the correct dance position!
 
-### Dancefloor 12
+### Dancefloor: Dancefloor_12
 `Dancefloor_12` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY**: Hey, Maddie, how's it go-
 **MADDIE** (Frustrated): Roddy, hey. You caught me at a bad time...
@@ -6110,8 +6153,9 @@ But I'm sure this thing will come in handy!
 **RODDY** (Thinking): Isn't it through that door over there?
 **MADDIE** (Frustrated): Nope, tried that. How am I supposed to move forward if there's no door?!
 
-### Dancefloor 13
+### Dancefloor: Dancefloor_13
 `Dancefloor_13` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Encouraging): You know, Maddie. Life isn't always about moving forward...
 **RODDY** (Encouraging): Sometimes you have to stay in the moment and enjoy it.
@@ -6119,8 +6163,9 @@ But I'm sure this thing will come in handy!
 **RODDY** (Joyous): You know what, I have just the remedy!
 **RODDY** (Joyous): Why don't I put on one of these vintage records?
 
-### Dancefloor 13.1
+### Dancefloor: Dancefloor_13.1
 `Dancefloor_13.1` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Charming): May I have this dance, my dear....
 **MADDIE** (Doubtful): Roddy, I don't really have the time-
@@ -6132,8 +6177,9 @@ But I'm sure this thing will come in handy!
 **RODDY** (Thinking): Yeah, I think it happened when I stepped on that funny tile!
 **MADDIE** (Thinking): It definitely unlocked something! Let's go check it out...
 
-### Dancefloor 14
+### Dancefloor: Dancefloor_14
 `Dancefloor_14` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY**: It's a door! Roddy, you're a genius! 
 **MADDIE** (Doubtful): I-I am?
@@ -6179,8 +6225,9 @@ But I'm sure this thing will come in handy!
 **MADDIE** (Surprised): Wait a minute, there's writing on them...
 **MADDIE** (Thinking): Lionheart?
 
-### Dancefloor Intro
+### Dancefloor: Dancefloor_Intro
 `Dancefloor_Intro` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **SULLIVAN** (Encouraging): ...and I know that YOU have something to do with it!
 **GRANDMA** (Annoyed): You’re dangerously close to crossing a line, detective...
@@ -6208,8 +6255,9 @@ But I'm sure this thing will come in handy!
 **MADDIE** (Thinking): Who knew it required so many different, and intricate, tools...
 **MADDIE** (Encouraging): One thing's for sure though, this has inspired me to take up painting again!
 
-### Dancefloor Partyhat
+### Dancefloor: Dancefloor_Partyhat
 `Dancefloor_Partyhat` · seen 25.05.01–26.07.01
+- trigger: area, area=Dancefloor, areaId=Dancefloor, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): This party hat is pretty tacky.
 **MADDIE** (Doubtful): Like something one would wear during New Year's Eve...
@@ -6258,12 +6306,14 @@ But I'm sure this thing will come in handy!
 **MADDIE** (Doubtful): Wait...
 **MADDIE** (Surprised): Is that someone sitting on the floor?! It's too dark to tell...
 
-### DebsRoom01
+### Deb's Room: DebsRoom01
 `DebsRoom01` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 
-### DebsRoom02
+### Deb's Room: DebsRoom02
 `DebsRoom02` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **DEB** (Doubtful): Well... My therapist INSISTED I do an exercise where I “face my past”.
 **DEB**: So what better place than my old room, right?
@@ -6273,8 +6323,9 @@ But I'm sure this thing will come in handy!
 **DEB** (Worried): My therapist says it has something to do with my abandonment issues.
 **DEB** (Worried): And HOW I was adopted.
 
-### DebsRoom03
+### Deb's Room: DebsRoom03
 `DebsRoom03` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): I guess, I sort of understand how you feel...
 **DEB** (Worried): I suppose you do, sweetie. A bit tragic, don’t you think?
@@ -6284,8 +6335,9 @@ But I'm sure this thing will come in handy!
 **MADDIE** (Relaxed): Trust me! I did it in my room, and it was quite cathartic.
 **MADDIE** (Relaxed): Come on, let’s get to it!
 
-### DebsRoom04
+### Deb's Room: DebsRoom04
 `DebsRoom04` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **DEB** (Worried): *sigh* All this is really bringing back the memories. I won’t lie.
 **DEB** (Annoyed): But I’m surprised at how angry most of it is making me feel...
@@ -6296,8 +6348,9 @@ But I'm sure this thing will come in handy!
 **DEB** (Worried): No, it’s alright sweetie. I’m not angry at you.
 **DEB** (Frustrated): I’m just angry that for so long, no one ever told me why.
 
-### DebsRoom05
+### Deb's Room: DebsRoom05
 `DebsRoom05` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Do you think our family knew why?
 **DEB** (Frustrated): ...
@@ -6312,8 +6365,9 @@ But I'm sure this thing will come in handy!
 **MADDIE** (Worried): How... How awful!
 **DEB** (Thinking): No... It was perhaps the best present I ever got.
 
-### DebsRoom06
+### Deb's Room: DebsRoom06
 `DebsRoom06` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): Weren’t you upset?
 **DEB** (Annoyed): Yes, of course. But at my parents for never telling me.
@@ -6323,8 +6377,9 @@ But I'm sure this thing will come in handy!
 **DEB** (Frustrated): Your grandmother said it’s one reason for my “rebellious nature”.
 **DEB** (Frustrated): But maybe it’s just a Boulton trait...
 
-### DebsRoom07
+### Deb's Room: DebsRoom07
 `DebsRoom07` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **DEB** (Doubtful): I got teased for it in school, you know.  
   _(1 cosmetic edit not shown)_
@@ -6337,8 +6392,9 @@ But I'm sure this thing will come in handy!
 **DEB** (Thinking): You should probably give him a break, you know. He might be bad with money...
 **DEB** (Thinking): But his heart is still in the right place.
 
-### DebsRoom08
+### Deb's Room: DebsRoom08
 `DebsRoom08` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **DEB** (Thinking): As I grew older, I knew there was more behind me being adopted than I was told.
 **DEB** (Thinking): Leonard helped me gather a few clues that led to Europe. So I began sending out letters.
@@ -6349,8 +6405,9 @@ But I'm sure this thing will come in handy!
 **MADDIE** (Surprised): Did you?!
 **DEB** (Charming): Yes... I did.
 
-### DebsRoom09
+### Deb's Room: DebsRoom09
 `DebsRoom09` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **DEB**: I went to Europe, but what I found there...
 **DEB** (Discouraged): Was not what I was expecting.
@@ -6360,8 +6417,9 @@ But I'm sure this thing will come in handy!
 **DEB** (Annoyed): Are you sure you WANT to find what you’re looking for?
 **MADDIE** (Worried): I...
 
-### DebsRoom10
+### Deb's Room: DebsRoom10
 `DebsRoom10` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: I’m sure Deb. I want to know the whole truth.
 **DEB** (Doubtful): Oh, I know that, sweetie. Everyone does. But are you willing to accept the cost?
@@ -6371,8 +6429,9 @@ But I'm sure this thing will come in handy!
 **DEB** (Surprised): I...
 **DEB** (Relaxed): Yes... I suppose you’re right.
 
-### DebsRoom11 Outro
+### Deb's Room: DebsRoom11_Outro
 `DebsRoom11_Outro` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **DEB** (Relaxed): Thank you, Maddie. I guess going through these things and sorting through my past helped.
 **DEB** (Charming): Even if only a little.
@@ -6544,8 +6603,9 @@ But I'm sure this thing will come in handy!
 **MADDIE** (Encouraging): Custom made in Italy and EXTREMELY expensive.
 **MADDIE** (Thinking): I wonder if these could cover my costs of renovating the mansion?
 
-### DiningRoom02
+### Dining Room: DiningRoom02
 `DiningRoom02` · seen 23.09.02–26.07.01
+- trigger: area, area=Dining Room, areaId=DiningRoom, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **WINSTON**: I see your endeavors to reclaim the grandeur of your past home have come to a head, Ma'am. 
 **WINSTON** (Doubtful): While your efforts in restoring the other rooms are admirable, I honestly believe that this room is a lost cause...
@@ -6554,8 +6614,9 @@ But I'm sure this thing will come in handy!
 **DEB** (Frustrated): He means, the wonderful old days of this mansion holding amazing dinner parties are over.
 **MADDIE** (Thinking): Dinner parties?
 
-### DiningRoom03
+### Dining Room: DiningRoom03
 `DiningRoom03` · seen 23.09.02–26.07.01
+- trigger: area, area=Dining Room, areaId=DiningRoom, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **WINSTON** (Thinking): Deb...
 **DEB** (Annoyed): Winston.
@@ -6609,8 +6670,9 @@ But I'm sure this thing will come in handy!
 **MADDIE** (Encouraging): That's amazing! I wonder what they talked about, over dinner, that night?
 **DEB** (Charming): We'll never know, but it's nice to imagine!
 
-### DiningRoom07
+### Dining Room: DiningRoom07
 `DiningRoom07` · seen 23.09.02–26.07.01
+- trigger: area, area=Dining Room, areaId=DiningRoom, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **RODDY** (Doubtful): Oh my goodness!
 **MADDIE** (Surprised): It's a knife! And there's something on it!
@@ -6838,15 +6900,17 @@ How handy!
 **MADDIE**: You can also see and <color=#338DFF>complete tasks</color> here, from your garage or the mansion grounds.  
   _earlier:_ ~~You can see all the tasks here!~~ (until 23.11.02)
 
-### FactoryBoulevard Travel
+### Boulton Boulevard: FactoryBoulevard_Travel
 `FactoryBoulevard_Travel` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=FactoryBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Charming): Aha! My trusty, true blue, scooter! It's been a while.
 **MADDIE** (Thinking): I should really maintain it more often...
 **MADDIE** (Thinking): But luckily, I think it has just enough fuel to get me to the tin can factory!
 
-### FactoryFloor 02
+### Factory Floor: FactoryFloor_02
 `FactoryFloor_02` · seen 26.07.01–26.07.01
+- trigger: area, area=Factory Floor, areaId=FactoryFloor, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Doubtful): Hmmm...  
   _earlier:_ ~~Look!~~ (until 26.02.03)
@@ -6884,8 +6948,9 @@ How handy!
 **MADDIE** (Doubtful): *Click*
 **MADDIE** (Doubtful): Nope. Not doing that today.
 
-### FactoryFloor 04
+### Factory Floor: FactoryFloor_04
 `FactoryFloor_04` · seen 26.07.01–26.07.01
+- trigger: area, area=Factory Floor, areaId=FactoryFloor, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: Hey! I think I found the clock hands for the steam clock!  
   _earlier:_ ~~Hey! I think I found a missing gear for the clock!~~ (until 26.02.03)
@@ -6900,8 +6965,9 @@ How handy!
 **ANTIQUEDEALER** (Surprised): Up and running?!
 **MADDIE** (Charming): As part of the museum, of course. It'll be a great display of Boulton ingenuity.
 
-### FactoryFloor 05
+### Factory Floor: FactoryFloor_05
 `FactoryFloor_05` · seen 26.07.01–26.07.01
+- trigger: area, area=Factory Floor, areaId=FactoryFloor, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: Ooh! I think I found the missing time zones part for the steam clock under this machine...  
   _earlier:_ ~~Ooh! I think I found another gear under this machine...~~ (until 26.02.03)
@@ -6919,8 +6985,9 @@ How handy!
 **ANTIQUEDEALER** (Worried): I think that other design in the trademark, belonged to Victoria's family!
 **MADDIE** (Surprised): VICTORIA'S?!!
 
-### FactoryFloor 06
+### Factory Floor: FactoryFloor_06
 `FactoryFloor_06` · seen 26.07.01–26.07.01
+- trigger: area, area=Factory Floor, areaId=FactoryFloor, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **ANTIQUEDEALER** (Doubtful): Ooh, I think I found a clock part, but I'm not quite sure...  
   _earlier:_ ~~Ooh, I think I found a clock gear?~~ (until 26.02.03)
@@ -6956,8 +7023,9 @@ How handy!
 **MADDIE** (Talking): *Click*
 **MADDIE** (Doubtful): Huh... She hung up!
 
-### FactoryFloor 08
+### Factory Floor: FactoryFloor_08
 `FactoryFloor_08` · seen 26.07.01–26.07.01
+- trigger: area, area=Factory Floor, areaId=FactoryFloor, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): Look! I think I found an employee worksheet. Lots of women worked here!  
   _earlier:_ ~~Hey, check out these posters!~~ (until 26.02.03)  
@@ -6980,8 +7048,9 @@ How handy!
 **MADDIE** (Thinking): Then again, it is a steam clock. 
 **MADDIE** (Thinking): But I wonder if something else is going on here?
 
-### FactoryFloor 09
+### Factory Floor: FactoryFloor_09
 `FactoryFloor_09` · seen 26.07.01–26.07.01
+- trigger: area, area=Factory Floor, areaId=FactoryFloor, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): I think I found the last clock piece, Julius!
 **MADDIE** (Thinking): But...
@@ -6995,8 +7064,9 @@ How handy!
 **ANTIQUEDEALER** (Surprised): It almost works like...
 **MADDIE** (Surprised): A key!
 
-### FactoryFloor 10
+### Factory Floor: FactoryFloor_10
 `FactoryFloor_10` · seen 26.07.01–26.07.01
+- trigger: area, area=Factory Floor, areaId=FactoryFloor, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Thinking): If it truly IS a key, I wonder what will happen if I move this piece so that the arrow points to the mansion?
 **ANTIQUEDEALER** (Surprised): Oh! Did a secret compartment just open?!
@@ -7029,8 +7099,9 @@ How handy!
 **ANTIQUEDEALER** (Charming): I love meatloaf!
 **MADDIE** (Encouraging): Ha! That's what the message says. Aaaw, how sweet!
 
-### FactoryFloor 12
+### Factory Floor: FactoryFloor_12
 `FactoryFloor_12` · seen 26.07.01–26.07.01
+- trigger: area, area=Factory Floor, areaId=FactoryFloor, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Joyous): It's ALIVE!
 **ANTIQUEDEALER** (Joyous): Well done, Maddie!
@@ -7040,8 +7111,9 @@ How handy!
 **MADDIE** (Encouraging): Almost as if it was designed to be future-proof. Really ahead of its time.  
   _(1 cosmetic edit not shown)_
 
-### FactoryFloor 13
+### Factory Floor: FactoryFloor_13
 `FactoryFloor_13` · seen 26.07.01–26.07.01
+- trigger: area, area=Factory Floor, areaId=FactoryFloor, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **ANTIQUEDEALER** (Encouraging): This must be the door to the office! Quite imposing.
 **ANTIQUEDEALER** (Relaxed): Want to find out what's inside?
@@ -7114,8 +7186,9 @@ How handy!
 **MADDIE**: After all... It belongs to everyone.
 **MADDIE**: I'm sure Ignatius and Agatha would be proud.
 
-### FactoryFloor Intro
+### Factory Floor: FactoryFloor_Intro
 `FactoryFloor_Intro` · seen 26.07.01–26.07.01
+- trigger: area, area=Factory Floor, areaId=FactoryFloor, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Surprised): Wow! This must be the factory floor.
 **MADDIE** (Encouraging): There's some really impressive machinery in here!
@@ -7216,8 +7289,9 @@ How handy!
 **MADDIE** (Encouraging): Julius even found this old funny safety poster from the factory!
 **MADDIE** (Relaxed): Thankfully guests don't have to be worried about getting caught in the machinery!
 
-### FactoryGiftShop 02
+### Gift Shop: FactoryGiftShop_02
 `FactoryGiftShop_02` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: So, how do you know about fixing stained-glass windows?
 **ANTIQUEDEALER**: Well... a long time ago I did an antique apprenticeship in Florence, Italy.  
@@ -7231,8 +7305,9 @@ How handy!
 **ANTIQUEDEALER** (Relaxed): Gift shop! Is that your plan for this space? What an excellent idea!  
   _earlier:_ ~~Gift shop! What an excellent idea!~~ (until 26.02.02)
 
-### FactoryGiftShop 03
+### Gift Shop: FactoryGiftShop_03
 `FactoryGiftShop_03` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Relaxed): So this is our Point of Sale system. Also known as the POS.
 **ANTIQUEDEALER** (Annoyed): How appropriate.
@@ -7245,8 +7320,9 @@ How handy!
 **ANTIQUEDEALER** (Frustrated): Oh, alright... How do I turn it on?
 **MADDIE** (Hesitant): It's already on!
 
-### FactoryGiftShop 04
+### Gift Shop: FactoryGiftShop_04
 `FactoryGiftShop_04` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Charming): Could you tell me more about your time in Florence, Julius?
 **ANTIQUEDEALER**: Oh, Maddie, it was beautiful!
@@ -7258,8 +7334,9 @@ How handy!
 **MADDIE** (Charming): Oooh, who was she?
 **ANTIQUEDEALER** (Charming): My first love.
 
-### FactoryGiftShop 05
+### Gift Shop: FactoryGiftShop_05
 `FactoryGiftShop_05` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: Tell me about Sofia!
 **ANTIQUEDEALER** (Charming): She was amazing! Senza confronto.
@@ -7273,8 +7350,9 @@ How handy!
 **ANTIQUEDEALER** (Charming): She would say, "Julius, there is beauty in the broken."
 **MADDIE** (Encouraging): I believe that too. 
 
-### FactoryGiftShop 06
+### Gift Shop: FactoryGiftShop_06
 `FactoryGiftShop_06` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: So, what happened with Sofia?
 **ANTIQUEDEALER**: Well, I was young and only on an apprenticeship.
@@ -7287,8 +7365,9 @@ How handy!
 **MADDIE** (Annoyed): Yes.
 **ANTIQUEDEALER** (Worried): From what I've heard of him, maybe that's something not worth fixing...
 
-### FactoryGiftShop 07
+### Gift Shop: FactoryGiftShop_07
 `FactoryGiftShop_07` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Joyous): I just got an idea!
 **MADDIE** (Encouraging): Let's set up an interactive experience where guests get to make new works of art with old scraps we find here?
@@ -7298,8 +7377,9 @@ How handy!
   _earlier:_ ~~Your story about Sofia inspired me.~~ (until 26.02.02)
 **ANTIQUEDEALER** (Charming): I'm glad to hear it.
 
-### FactoryGiftShop 08
+### Gift Shop: FactoryGiftShop_08
 `FactoryGiftShop_08` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Thinking): Hmmm...
 **MADDIE** (Thinking): We have a lot of empty cans here...
@@ -7310,8 +7390,9 @@ How handy!
 **ANTIQUEDEALER** (Relaxed): Flattened of course.
 **MADDIE** (Relaxed): Brilliant!
 
-### FactoryGiftShop 09
+### Gift Shop: FactoryGiftShop_09
 `FactoryGiftShop_09` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: You're really getting into the vibe of things, Julius!
 **MADDIE**: Maybe renovation is in your blood!
@@ -7321,8 +7402,9 @@ How handy!
 **MADDIE** (Encouraging): If you ever need a hand...
 **ANTIQUEDEALER** (Encouraging): I'll know exactly who to call!
 
-### FactoryGiftShop 10
+### Gift Shop: FactoryGiftShop_10
 `FactoryGiftShop_10` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): We should all take a selfie together in the large can display!  
   _(1 cosmetic edit not shown)_
@@ -7333,8 +7415,9 @@ How handy!
 **ANTIQUEDEALER** (Worried): Ooh... Now I know what a sardine feels like.
 **MADDIE** (Charming): Say cheese!
 
-### FactoryGiftShop 11
+### Gift Shop: FactoryGiftShop_11
 `FactoryGiftShop_11` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Surprised): Ah! What was that sound?!
 **ANTIQUEDEALER** (Thinking): Hmm... Sounded like an old steam whistle!
@@ -7418,8 +7501,9 @@ How handy!
 **ASH** (Encouraging): Why, I see the entire town of Hopewell Bay will soon be wearing tin can factory jewelry!
 **MADDIE** (Charming): Hahaha!
 
-### FactoryGiftShop Intro
+### Gift Shop: FactoryGiftShop_Intro
 `FactoryGiftShop_Intro` · seen 26.07.01–26.07.01
+- trigger: area, area=Gift Shop, areaId=FactoryGiftShop, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: Helloo? Julius?
 **MADDIE** (Worried): Are you in here?
@@ -7514,8 +7598,9 @@ How handy!
 **ANTIQUEDEALER** (Thinking): Hmmm... Maybe I was.
 **ANTIQUEDEALER** (Relaxed): Working on all of these really lit the artist in me again.
 
-### FactoryReception 02
+### The Reception: FactoryReception_02
 `FactoryReception_02` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Discouraged): Oof... This is A LOT of junk mail!
 **MADDIE**: Hmm... What’s this?
@@ -7529,8 +7614,9 @@ How handy!
 **WINSTON** (Discouraged): As you can see, not his brightest idea.
 **MADDIE** (Discouraged): Oh Leonard...
 
-### FactoryReception 03
+### The Reception: FactoryReception_03
 `FactoryReception_03` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: Phew, that’s all cleared up!
 **MADDIE** (Encouraging): Oooh, the factory logo!
@@ -7538,8 +7624,9 @@ How handy!
 **MADDIE** (Relaxed): No wonder they had such an impact. They weren't just making cans, they made standards. 
 **MADDIE** (Relaxed): Pioneers. Right down to the stamp on the tin.
 
-### FactoryReception 04
+### The Reception: FactoryReception_04
 `FactoryReception_04` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): Oh, cool! An old employee time clock!
 **WINSTON**: This one is quite unique, actually. Ignatius designed it himself. Supposedly, it kept perfect time.
@@ -7552,8 +7639,9 @@ How handy!
 **MADDIE** (Encouraging): It'll make the experience of coming to the factory even more immersive!
 **WINSTON** (Relaxed): Ah, indeed!
 
-### FactoryReception 05
+### The Reception: FactoryReception_05
 `FactoryReception_05` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Thinking): These photos must have been from the factory’s grand opening and ribbon-cutting ceremony.
 **WINSTON** (Thinking): It was a grand day, Ma’am. Everyone from Hopewell Bay was there.
@@ -7585,8 +7673,9 @@ How handy!
 **MADDIE** (Encouraging): So, it’ll be nice for the guests to lounge on the same furniture.
 **MADDIE** (Encouraging): Almost like being there!
 
-### FactoryReception 08
+### The Reception: FactoryReception_08
 `FactoryReception_08` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: *Beep*
 **MADDIE** (Thinking): So, what do we have here...
@@ -7597,8 +7686,9 @@ How handy!
 **MADDIE** (Worried): In rough shape, huh? That beep sounded more like a cough.
 **MADDIE** (Encouraging): Don't worry, I'll have you fixed up in no time!
 
-### FactoryReception 09
+### The Reception: FactoryReception_09
 `FactoryReception_09` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: First, let's bypass the damaged circuits... then I'll reroute power through the secondary panel...
 **CB-01** (Discouraged): *Buzz*
@@ -7608,8 +7698,9 @@ How handy!
 **MADDIE** (Joyous): It's printing! Those four years of engineering school sure came in handy.
 **MADDIE** (Joyous): A fresh polish and a system upgrade, you're gonna charm every museum visitor.
 
-### FactoryReception 10
+### The Reception: FactoryReception_10
 `FactoryReception_10` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Thinking): What is this thing... an antique can opener?
 **ANTIQUEDEALER**: Not just antique, Maddie. I believe that is the very first can opener prototype!
@@ -7622,8 +7713,9 @@ How handy!
 **ANTIQUEDEALER** (Annoyed): Kitchen? Nonsense, this is the star of your museum!
 **MADDIE** (Encouraging): We'll need a plaque for our VIP: Very Important Prototype.
 
-### FactoryReception 11
+### The Reception: FactoryReception_11
 `FactoryReception_11` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: A great museum starts with a great introduction. Let's give guests the full story right here in the reception.
 **MADDIE**: An infographic focusing on the history of the factory.
@@ -7649,8 +7741,9 @@ How handy!
 **MADDIE**: Thank you for the support, Julius. It means a lot.
 **ANTIQUEDEALER** (Charming): You're doing a great service to the town's history, Maddie.
 
-### FactoryReception 13
+### The Reception: FactoryReception_13
 `FactoryReception_13` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Relaxed): That's the reception sorted. Floors waxed, displays up, and we even have a brand new ticket dispenser!
 **CB-01** (Joyous): *Beep Bop*
@@ -7728,8 +7821,9 @@ How handy!
 **MADDIE**: Julius, are you actually offering to work for free?
 **ANTIQUEDEALER** (Charming): Consider it my donation to history.
 
-### FactoryReception Intro
+### The Reception: FactoryReception_Intro
 `FactoryReception_Intro` · seen 26.07.01–26.07.01
+- trigger: area, area=The Reception, areaId=FactoryReception, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **WINSTON** (Charming): ...And here we go, Ma’am.
 **WINSTON** (Encouraging): The reception of the Boulton Tin Can Factory!
@@ -7852,8 +7946,9 @@ Let's try it out on the Garage Board.
 **RODDY** (Thinking): Surprisingly modern, considering when it was installed.
 **MADDIE** (Relaxed): Well, Leonard was quite the visionary.
 
-### FirstFloorHallway 02
+### The Hallway of Curiosities: FirstFloorHallway_02
 `FirstFloorHallway_02` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): This ship is really impressive!
 **GRANDMA** (Encouraging): Ah yes, The SS Auralis. Clara built this with her father, Ignatius.
@@ -7869,8 +7964,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Annoyed): Hmph! That's not fair.
 **GRANDMA** (Discouraged): No... It wasn't.
 
-### FirstFloorHallway 03
+### The Hallway of Curiosities: FirstFloorHallway_03
 `FirstFloorHallway_03` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Doubtful): I'm surprised that Agatha was so hard on her!
 **GRANDMA** (Thinking): To be fair, she was only looking out for her best interests...
@@ -7897,8 +7993,9 @@ Let's try it out on the Garage Board.
 **GRANDMA** (Encouraging): I'm sure he would have loved that.
 **MADDIE** (Charming): Yeah... I definitely would have. 
 
-### FirstFloorHallway 05
+### The Hallway of Curiosities: FirstFloorHallway_05
 `FirstFloorHallway_05` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: Well... This little reading nook came out really nice!
 **GRANDMA** (Encouraging): It really did, dearie! It's just like I remember it!
@@ -7913,8 +8010,9 @@ Let's try it out on the Garage Board.
 **GRANDMA** (Charming): So she had a lot of practice.
 **MADDIE** (Relaxed): I bet she would have made an amazing marine biologist!
 
-### FirstFloorHallway 06
+### The Hallway of Curiosities: FirstFloorHallway_06
 `FirstFloorHallway_06` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Doubtful): Hmmm...
 **GRANDMA**: What is it, dearie?
@@ -7944,8 +8042,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Discouraged): Maybe there's something deeper after all...
 **MADDIE** (Doubtful): Come on, Maddie. Pull yourself together!
 
-### FirstFloorHallway 08
+### The Hallway of Curiosities: FirstFloorHallway_08
 `FirstFloorHallway_08` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Thinking): Hmmmm...
 **MADDIE** (Thinking): I'm quite surprised to find these tarot cards among Clara's things.
@@ -7973,8 +8072,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Worried): I think she saw herself as the mermaid...
 **MADDIE** (Worried): Oh, Clara.
 
-### FirstFloorHallway 10
+### The Hallway of Curiosities: FirstFloorHallway_10
 `FirstFloorHallway_10` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Relaxed): There we go!
 **MADDIE** (Encouraging): I managed to put together this tower, using Clara's amazing notes.
@@ -7983,8 +8083,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Encouraging): Using her notes, I'm pretty sure I got their colors accurate as well.
 **MADDIE** (Charming): She really was a great marine biologist.
 
-### FirstFloorHallway 11
+### The Hallway of Curiosities: FirstFloorHallway_11
 `FirstFloorHallway_11` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Charming): Wow! This turned out great!
 **MADDIE** (Encouraging): It almost looks alive!
@@ -8000,8 +8101,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Doubtful): Just like Lindsay, she chose her love over what was pre-decided for her!
 **MADDIE** (Worried): *sigh* I just wish it would have had a happy ending...
 
-### FirstFloorHallway 12
+### The Hallway of Curiosities: FirstFloorHallway_12
 `FirstFloorHallway_12` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: Another ship in a bottle. 
 **MADDIE**: I wonder if-
@@ -8015,8 +8117,9 @@ Let's try it out on the Garage Board.
   _(1 cosmetic edit not shown)_
 **MADDIE** (Discouraged): How tragic! She never knew!
 
-### FirstFloorHallway 13
+### The Hallway of Curiosities: FirstFloorHallway_13
 `FirstFloorHallway_13` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Thinking): Hmmm... I still don't buy it.
 **MADDIE** (Thinking): Even though he sent that last message to her that she never got, I feel like something is missing.
@@ -8092,8 +8195,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Encouraging): Hmm. Well, this is solid research, despite everything. Maybe there really is something here about Edward?
 **MADDIE** (Joyous): Once I'm done with the rest of the room, I'll take a second look!
 
-### FirstFloorHallway Intro
+### The Hallway of Curiosities: FirstFloorHallway_Intro
 `FirstFloorHallway_Intro` · seen 26.07.01–26.07.01
+- trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Joyous): Yes! A whole new floor to explore and restore!
 **—**: I'll be the first to admit it, dearie. You've done an amazing job so far.
@@ -8198,8 +8302,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Discouraged): Oh dear... Must have been bad. The knife is at least two inches deep!
 **MADDIE** (Thinking): I wonder if I can find out who the Blackwoods were?
 
-### FirstFloorKitchen 03
+### Kitchen: FirstFloorKitchen_03
 `FirstFloorKitchen_03` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **ARTHUR**: Hello Mads...
 **MADDIE** (Surprised): Arthur! You surprised me!
@@ -8230,8 +8335,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Annoyed): What has Roddy got to do with any of this?
 **MADDIE** (Annoyed): Besides... He'd never say the things you do.
 
-### FirstFloorKitchen 05
+### Kitchen: FirstFloorKitchen_05
 `FirstFloorKitchen_05` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Annoyed): Arthur, I'm really busy and-
 **ARTHUR** (Frustrated): Hold that thought. Someone's calling!
@@ -8245,8 +8351,9 @@ Let's try it out on the Garage Board.
 **ARTHUR** (Charming): But I'll run by the store as well, to get us something to cook. I promised a meal after all.
 **MADDIE** (Annoyed): Seriously?!
 
-### FirstFloorKitchen 06
+### Kitchen: FirstFloorKitchen_06
 `FirstFloorKitchen_06` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **GRANDMA**: Hello, dearie.
 **MADDIE** (Surprised): Grandma!
@@ -8259,8 +8366,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Surprised): What is it?!
 **GRANDMA** (Encouraging): The Boulton family pie recipe!
 
-### FirstFloorKitchen 07
+### Kitchen: FirstFloorKitchen_07
 `FirstFloorKitchen_07` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): You know, it's quite nice to do something as a family again, for a change!
 **GRANDMA** (Relaxed): You're right dearie. We really don't spend enough time together, do we?
@@ -8274,8 +8382,9 @@ Let's try it out on the Garage Board.
 **GRANDMA** (Encouraging): How about I take few to the biker club?
 **MADDIE** (Encouraging): I'm sure they'd appreciate it!
 
-### FirstFloorKitchen 08
+### Kitchen: FirstFloorKitchen_08
 `FirstFloorKitchen_08` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY**: Hi, Maddie! I couldn't help but notice a wonderful smell coming from here and-
 **MADDIE** (Joyous): Roddy! You gotta see this!
@@ -8287,8 +8396,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Relaxed): Good thing there's an engineer present.
 **RODDY** (Joyous): That's right!
 
-### FirstFloorKitchen 09
+### Kitchen: FirstFloorKitchen_09
 `FirstFloorKitchen_09` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Relaxed): Maybe we can install an ordering system?
 **RODDY** (Relaxed): Planning on opening a restaurant, Maddie?
@@ -8304,8 +8414,9 @@ Let's try it out on the Garage Board.
 **ARTHUR** (Doubtful): Yeah. Dinner. For two...
 **ARTHUR** (Doubtful): So be a good dumb waiter and fetch me some butter, will you?
 
-### FirstFloorKitchen 10
+### Kitchen: FirstFloorKitchen_10
 `FirstFloorKitchen_10` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY** (Annoyed): It's dumbwaiter, not DUMB WAITER.
 **ARTHUR** (Frustrated): Well, whatever you call yourself, if you're not going to do your job, then you can go.
@@ -8331,8 +8442,9 @@ Let's try it out on the Garage Board.
   _earlier:_ ~~Pssh... More like a family owned hot dog stand.~~ (until 26.05.01)
 **—**: Boys...
 
-### FirstFloorKitchen 11
+### Kitchen: FirstFloorKitchen_11
 `FirstFloorKitchen_11` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **ARTHUR** (Doubtful): Alright, hotshot. Prove it.
 **ARTHUR** (Doubtful): Show me your UH-MAAZING skills...
@@ -8350,8 +8462,9 @@ Let's try it out on the Garage Board.
 **ARTHUR** (Surprised): !!!
 **MADDIE** (Surprised): Arthur!!!
 
-### FirstFloorKitchen 12
+### Kitchen: FirstFloorKitchen_12
 `FirstFloorKitchen_12` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **ARTHUR** (Surprised): Ow... OW! No, don't touch it, DON'T TOUCH IT!!!  
   _earlier:_ ~~Aaaargh!!~~ (until 26.05.01)
@@ -8367,8 +8480,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Frustrated): ...
 **MADDIE** (Frustrated): Why, me?
 
-### FirstFloorKitchen 13
+### Kitchen: FirstFloorKitchen_13
 `FirstFloorKitchen_13` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Discouraged): *sigh*
 **MADDIE** (Discouraged): What a mess...
@@ -8478,8 +8592,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Doubtful): Let me guess... Grandma would know more. *sigh*   
   _(1 cosmetic edit not shown)_
 
-### FirstFloorKitchen Intro
+### Kitchen: FirstFloorKitchen_Intro
 `FirstFloorKitchen_Intro` · seen 26.07.01–26.07.01
+- trigger: area, area=Kitchen, areaId=FirstFloorKitchen, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Doubtful): Ha! It scurried in here!
 **MADDIE** (Surprised): Wait! Where did it go?
@@ -8605,8 +8720,9 @@ Let's try it out on the Garage Board.
 **RODDY** (Worried): O...ok.
 **MADDIE** (Talking): But thank you for telling me.
 
-### FirstFloorPantry 05
+### Pantry: FirstFloorPantry_05
 `FirstFloorPantry_05` · seen 26.07.01–26.07.01
+- trigger: area, area=Pantry, areaId=FirstFloorPantry, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Frustrated): Ugh. To think I almost felt sorry for Arthur...
 **JACKIE**: Maddie!
@@ -8621,8 +8737,9 @@ Let's try it out on the Garage Board.
 **JACKIE** (Frustrated): Aren't you hearing me? The crimes - they're the same crimes she was convicted of!
 **JACKIE** (Annoyed): They made her the fall-gal for their own crimes!
 
-### FirstFloorPantry 06
+### Pantry: FirstFloorPantry_06
 `FirstFloorPantry_06` · seen 26.07.01–26.07.01
+- trigger: area, area=Pantry, areaId=FirstFloorPantry, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Surprised): That's an amazing find Jackie. Did you bring this to the police?
 **JACKIE** (Charming): No. Not yet. I have to figure out who she was actually investigating. And this draft isn't proof enough.
@@ -8640,8 +8757,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Frustrated): No, Jackie, that's not what I...and she's gone.
 **MADDIE** (Discouraged): Ugh. Could this day get any worse?
 
-### FirstFloorPantry 07
+### Pantry: FirstFloorPantry_07
 `FirstFloorPantry_07` · seen 26.07.01–26.07.01
+- trigger: area, area=Pantry, areaId=FirstFloorPantry, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Thinking): All of these jars...they're labelled. Professionally.
 **MADDIE** (Thinking): This logo looks sort of like a butterfly. Two Bs, facing away from each other. Hmm.
@@ -8665,8 +8783,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Joyous): Nothing like a solid bit of engineering to remind me to keep things in perspective.
 **MADDIE**: These tomatoes help, too...
 
-### FirstFloorPantry 09
+### Pantry: FirstFloorPantry_09
 `FirstFloorPantry_09` · seen 26.07.01–26.07.01
+- trigger: area, area=Pantry, areaId=FirstFloorPantry, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: *Ring ring*
 **MADDIE** (Talking): Aren't I popular today! Hello?
@@ -8687,8 +8806,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Calling): You... *click*
 **MADDIE** (Thinking): Interesting. So it's not news to her, it seems...
 
-### FirstFloorPantry 10
+### Pantry: FirstFloorPantry_10
 `FirstFloorPantry_10` · seen 26.07.01–26.07.01
+- trigger: area, area=Pantry, areaId=FirstFloorPantry, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **VICTORIA**: I had almost forgotten what a horrible, run-down dump this place is.
 **MADDIE** (Doubtful): Victoria.
@@ -8705,8 +8825,9 @@ Let's try it out on the Garage Board.
   _(1 cosmetic edit not shown)_
 **VICTORIA** (Encouraging): Well, I won't spare you. Get ready for some truly horrifying revelations about your family...
 
-### FirstFloorPantry 11
+### Pantry: FirstFloorPantry_11
 `FirstFloorPantry_11` · seen 26.07.01–26.07.01
+- trigger: area, area=Pantry, areaId=FirstFloorPantry, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **VICTORIA** (Charming): My great-grandmother, Christine Blackwood, was the true inventor of the tin can.
 **MADDIE** (Surprised): What?!
@@ -8718,8 +8839,9 @@ Let's try it out on the Garage Board.
 **VICTORIA**: Wouldn't you know it - the very next day, a new patent was submitted - and the rest is history.
 **MADDIE** (Worried): I can't believe it...
 
-### FirstFloorPantry 12
+### Pantry: FirstFloorPantry_12
 `FirstFloorPantry_12` · seen 26.07.01–26.07.01
+- trigger: area, area=Pantry, areaId=FirstFloorPantry, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Annoyed): No! Agatha wouldn't do something like that!
 **MADDIE**: And they kept making jam together even after Ignatius started tin can production.
@@ -8734,8 +8856,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Annoyed): And what about the Blackwood wealth? Where is that, Mrs. Telemarketer?
 **VICTORIA** (Annoyed): Pah! Your family stole my family's future. And as long as I am a Blackwood, I will make sure the Boultons pay!
 
-### FirstFloorPantry 13
+### Pantry: FirstFloorPantry_13
 `FirstFloorPantry_13` · seen 26.07.01–26.07.01
+- trigger: area, area=Pantry, areaId=FirstFloorPantry, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Doubtful): Victoria's finally gone...she got very worked up. I wonder...
 **MADDIE** (Doubtful): Is anything she said true?
@@ -8767,8 +8890,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Frustrated): ...unless you're just full of potatoes. Which would be a first...  
   _earlier:_ ~~I'm on the way!~~ (until 26.06.01)
 
-### FirstFloorPantry Butterchurner POI
+### Pantry: FirstFloorPantry_Butterchurner_POI
 `FirstFloorPantry_Butterchurner_POI` · seen 26.07.01–26.07.01
+- trigger: area, area=Pantry, areaId=FirstFloorPantry, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): Hello again...Ratthew? Ratthew sounds right.
 **MADDIE** (Charming): If Victoria saw you now she'd blow a gasket. But I think you're rather cute, actually.
@@ -8849,8 +8973,9 @@ Let's try it out on the Garage Board.
 **MADDIE**: I wish I could stay and try a few more...but maybe later!
 **MADDIE** (Encouraging): Sure, Cherry! Thanks for all the help!
 
-### FirstFloorPantry Intro
+### Pantry: FirstFloorPantry_Intro
 `FirstFloorPantry_Intro` · seen 26.07.01–26.07.01
+- trigger: area, area=Pantry, areaId=FirstFloorPantry, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Frustrated): And you're gone again, little rat, lost in the mess. *sigh*
 **MADDIE** (Charming): If I didn't know any better, I'd think you're trying to show me the next mess for me to clean up!  
@@ -9080,8 +9205,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Surprised): Wow, really?! She sounds like the very definition of a pioneer. I can't wait to discover more!
 **WINSTON** (Worried): I'm sure there will be no dearth of secrets, ma'am...
 
-### Gallery02
+### Gallery: Gallery02
 `Gallery02` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Joyous): There you are, Maddie! Ooh, what is that cool, glowing statue, and why is it missing a head?
 **MADDIE** (Thinking): I'm not sure. I'm wondering if it's something evil that Lindsay brought back from the depths of the ocean.
@@ -9091,8 +9217,9 @@ Let's try it out on the Garage Board.
 **SULLIVAN** (Charming): You know, in my line of work, I've discovered that evil and monsters are man-made.
 **RODDY** (Charming): K-kate?!
 
-### Gallery03
+### Gallery: Gallery03
 `Gallery03` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **SULLIVAN** (Annoyed): Roddy, it's been a while. I see you continue to fraternize with the wrong crowd...
 **MADDIE** (Frustrated): W-who are you? What's going on?
@@ -9105,8 +9232,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Frustrated): Not this again! My grandmother is innocent! She's probably being framed...
 **SULLIVAN** (Annoyed): Oh, the number of times I've heard that one before.
 
-### Gallery04
+### Gallery: Gallery04
 `Gallery04` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **SULLIVAN**: Ever heard of Tim Rockford?  
   _earlier:_ ~~Do you remember Detective Rockford?~~ (until 24.09.02)
@@ -9122,8 +9250,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Frustrated): I'm telling you, you have the wrong idea and you don't want to go down this path...
 **SULLIVAN** (Frustrated): Is that a threat?
 
-### Gallery05
+### Gallery: Gallery05
 `Gallery05` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Discouraged): Kate, are you sure this isn't some kind of mistake? 
 **SULLIVAN** (Annoyed): That's Detective Sullivan to you, and I don't make mistakes, Roddy. You're well aware.
@@ -9153,8 +9282,9 @@ Let's try it out on the Garage Board.
 **WINSTON** (Encouraging): All I know is that sometimes statues hold secrets, just as people do.
 **RODDY** (Surprised): That's it! I knew that glowing, green monster was hiding something!
 
-### Gallery07
+### Gallery: Gallery07
 `Gallery07` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Encouraging): Do you see a button anywhere, Maddie?
 **MADDIE** (Frustrated): Ugh no, I don't see anything!
@@ -9162,8 +9292,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Surprised): *Click*
 **MADDIE** (Surprised): Did you hear that?! It worked! And there's something inside!
 
-### Gallery07.2
+### Gallery: Gallery07.2
 `Gallery07.2` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): It looks like a folder. Let's check what's inside!
 **MADDIE** (Thinking): A photograph! A wedding photograph... of Grandma!
@@ -9177,8 +9308,9 @@ Let's try it out on the Garage Board.
 **RODDY** (Worried): I-I have to go.
 **MADDIE** (Surprised): Roddy! Wait!
 
-### Gallery08
+### Gallery: Gallery08
 `Gallery08` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Discouraged): This has to be some sort of twisted joke.
 **MADDIE** (Discouraged): I have so many questions and I'm scared to find out what the answers are.
@@ -9191,8 +9323,9 @@ Let's try it out on the Garage Board.
 **GRANDMA** (Doubtful): There are portraits and photographs all over this mansion, dearie.
 **MADDIE** (Frustrated): I think you know which one I mean. A certain wedding picture...
 
-### Gallery08.2
+### Gallery: Gallery08.2
 `Gallery08.2` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Discouraged): That picture is... not what you think it is.
 **MADDIE** (Annoyed): It looks to me like you're married to a mob boss. Quite happily married.
@@ -9206,8 +9339,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Surprised): Grandma! No! You can't do this!
 **GRANDMA** (Annoyed): Oh, I can Maddie. I most definitely can.
 
-### Gallery09
+### Gallery: Gallery09
 `Gallery09` · seen 25.05.01–26.07.01
+- trigger: area, area=Gallery, areaId=Gallery, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Frustrated): Arrgh! I am beyond mad! How could she?!
 **MADDIE** (Frustrated): I don't deserve to be treated like a child!
@@ -9424,8 +9558,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Surprised): Ooh, this chair looks fancy. Did Grandpa Charlie sit here?
 **GRANDMA** (Charming): Of course not, Dear! This was my chair. I am the head of the family, after all!
 
-### GrandmaRoom 01
+### Grandma's Room: GrandmaRoom_01
 `GrandmaRoom_01` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Grandma's Room: Remove clutter
@@ -9448,20 +9583,24 @@ Let's try it out on the Garage Board.
 **MADDIE** (Thinking): There's no decoder here, but it does beg the question, what exactly needed to be communicated?
 **MADDIE** (Doubtful): I wonder if this is connected to the Secret Society or something deeper?
 
-### GrandmaRoom 04
+### Grandma's Room: GrandmaRoom_04
 `GrandmaRoom_04` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 
-### GrandmaRoom 05
+### Grandma's Room: GrandmaRoom_05
 `GrandmaRoom_05` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 
-### GrandmaRoom 06
+### Grandma's Room: GrandmaRoom_06
 `GrandmaRoom_06` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 
-### GrandmaRoom 07
+### Grandma's Room: GrandmaRoom_07
 `GrandmaRoom_07` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Grandma's Room: Repair bedframe
@@ -9504,16 +9643,19 @@ Let's try it out on the Garage Board.
 **MADDIE** (Thinking): The bedposts triggered the bed to move forward and opened this 'door'!
 **MADDIE** (Doubtful): Grandma really is always two steps ahead of me!
 
-### GrandmaRoom 11
+### Grandma's Room: GrandmaRoom_11
 `GrandmaRoom_11` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 
-### GrandmaRoom 12
+### Grandma's Room: GrandmaRoom_12
 `GrandmaRoom_12` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 
-### GrandmaRoom 13
+### Grandma's Room: GrandmaRoom_13
 `GrandmaRoom_13` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Grandma's Room: Clean shelf
@@ -9529,16 +9671,19 @@ Let's try it out on the Garage Board.
 **ARTHUR** (Talking): Alright, alright. I'll take what I can get! A walk it is. See you soon, Mads!
 **MADDIE** (Frustrated): What did I just do?
 
-### GrandmaRoom 15
+### Grandma's Room: GrandmaRoom_15
 `GrandmaRoom_15` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 
-### GrandmaRoom 16
+### Grandma's Room: GrandmaRoom_16
 `GrandmaRoom_16` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 
-### GrandmaRoom 17 after
+### Grandma's Room: GrandmaRoom_17_after
 `GrandmaRoom_17_after` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): It worked!
 **MADDIE** (Encouraging): This wardrobe was the door in question! Who would have thought!
@@ -9597,8 +9742,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Joyous): That's what friends are for. I have a great feeling about the Hopewell Bay's Gaming Guild.
 **HEIKKI** (Joyous): As do I. A new adventure begins!
 
-### GrandmaRoom Intro
+### Grandma's Room: GrandmaRoom_Intro
 `GrandmaRoom_Intro` · seen 26.07.01–26.07.01
+- trigger: area, area=Grandma's Room, areaId=GrandmaRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 
 ### Grandma's Room: Fix bookends
@@ -9760,8 +9906,9 @@ The door will shift between the lines.'
 **GRANDMA** (Joyous): I put up lots of decorations! Christmas, Halloween, Thanksgiving, you name it. Really tacky ones too.
 **MADDIE** (Relaxed): I'm glad he liked it in the end. Hopefully he'd like what I'm doing with it now!
 
-### Greathall07 Key
+### Great Hall: Greathall07_Key
 `Greathall07_Key` · seen 23.09.02–26.07.01
+- trigger: area, area=Great Hall, areaId=Greathall, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE**: What's this? A key! I guess it's for one these doors.
 
@@ -9993,8 +10140,9 @@ The door will shift between the lines.'
 `HandPrints` · seen 23.11.02–26.07.01
 
 
-### Hideout02
+### Hideout: Hideout02
 `Hideout02` · seen 23.09.02–26.07.01
+- trigger: area, area=Hideout, areaId=Hideout, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): What is this place?!
 **MADDIE** (Thinking): It’s almost like a secret office, but some of the things in here don’t make any sense...
@@ -10002,32 +10150,36 @@ The door will shift between the lines.'
 **MADDIE** (Thinking): I should ask Grandma about that...
 **MADDIE** (Frustrated): But she’ll most likely run off to a tree combing class or something.
 
-### Hideout03
+### Hideout: Hideout03
 `Hideout03` · seen 23.09.02–26.07.01
+- trigger: area, area=Hideout, areaId=Hideout, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Thinking): Interesting, those footprints look just like the ones we found in the study...
 **MADDIE** (Thinking): Has someone been living here all this time?
 **MADDIE** (Thinking): I never thought of that! But why hide down here?
 **MADDIE** (Worried): What kind of underhanded business was this person involved in?
 
-### Hideout04
+### Hideout: Hideout04
 `Hideout04` · seen 23.09.02–26.07.01
+- trigger: area, area=Hideout, areaId=Hideout, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Relaxed): This room doesn't seem as dusty as the others.
 **MADDIE** (Thinking): Still a mess, but this is just another sign that it was in use recently.
 **MADDIE**: Ooh! This dresser is filled to the brim with cool trinkets...
 **MADDIE**: I even found a vintage pin with the Boulton family crest!
 
-### Hideout05
+### Hideout: Hideout05
 `Hideout05` · seen 23.09.02–26.07.01
+- trigger: area, area=Hideout, areaId=Hideout, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Encouraging): Just a stack of crumpled-up paper, but let’s take a closer look...
 **MADDIE** (Thinking): Huh, not just rubbish it would seem.
 **MADDIE** (Worried): It looks like there were plenty of corner stores that were hand-in-hand with Grandma’s bootlegging plans.
 **MADDIE** (Worried): Just when I thought this bootlegging thing couldn’t get any worse!
 
-### Hideout06
+### Hideout: Hideout06
 `Hideout06` · seen 23.09.02–26.07.01
+- trigger: area, area=Hideout, areaId=Hideout, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Thinking): Swords and now throwing stars? These certainly don’t look like props.
 **MADDIE** (Thinking): I bet the owner of this room had some military training.
@@ -10035,16 +10187,18 @@ The door will shift between the lines.'
 **MADDIE**: Aha! A map of Hopewell Bay! With an area marked out. And there’s some writing here...
 **MADDIE** (Surprised): Victory Park and... lemonade? No, Leonard! Wait, how’s Leonard involved in all of this?!
 
-### Hideout07
+### Hideout: Hideout07
 `Hideout07` · seen 23.09.02–26.07.01
+- trigger: area, area=Hideout, areaId=Hideout, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Worried): I can’t believe it! Grandpa Charlie could be an actual spy, and this is where he’s been hiding all along?
 **MADDIE** (Worried): Right under our noses?
 **MADDIE** (Doubtful): I have to tell Grandma! Unless, she already knows. Hold on! There's something shiny in the dresser.
 **MADDIE** (Surprised): It's another key! 
 
-### Hideout08
+### Hideout: Hideout08
 `Hideout08` · seen 23.09.02–26.07.01
+- trigger: area, area=Hideout, areaId=Hideout, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Thinking): What’s that? Is that piano music? Sounds like it’s coming from upstairs... 
 **MADDIE** (Thinking): Grandma mentioned that there's a piano in the dining room. Guess I'll have to investigate that later. One mystery at a time, Maddie!
@@ -13699,12 +13853,14 @@ The door will shift between the lines.'
 **MADDIE** (Discouraged): *Sigh* Sometimes I think my family is a little TOO into theatrics. 
 **MADDIE** (Discouraged): I hope it's only theatrics though...
 
-### Library01 Intro
+### Library: Library01_Intro
 `Library01_Intro` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 
-### Library02
+### Library: Library02
 `Library02` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: *Ring Ring*
 **MADDIE** (Doubtful): Huh... It’s Leonard. What does HE want?!
@@ -13718,8 +13874,9 @@ The door will shift between the lines.'
 **LEONARD** (Encouraging): Oh, don’t worry. Bruno is on his way now to have you sign it away. You’ve only delayed the inevitable! *Click!*
 **MADDIE** (Surprised): How did I become the sole owner of the estate?!
 
-### Library03
+### Library: Library03
 `Library03` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **BRUNO**: Maddie.
 **MADDIE** (Annoyed): Bruno.
@@ -13732,8 +13889,9 @@ The door will shift between the lines.'
 **BRUNO** (Charming): Now...
 **BRUNO** (Joyous): SIGN IT!
 
-### Library04
+### Library: Library04
 `Library04` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **BRUNO** (Frustrated): Look... I’m running out of patience here, so I’ll do you a favor.
 **BRUNO** (Annoyed): I’ll offer you one last time the chance to sign it, and I’ll make sure your grandmother’s investigation will end.
@@ -13749,8 +13907,9 @@ The door will shift between the lines.'
 **RODDY** (Surprised): STOP! DON’T SIGN IT!
 **BRUNO** (Surprised): What?!
 
-### Library06
+### Library: Library06
 `Library06` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **BRUNO** (Annoyed): This isn’t over... I’ll make sure all of you go to prison for this!
 **RODDY** (Relaxed): I think you might have that a bit backwards, Mayor.
@@ -13765,8 +13924,9 @@ The door will shift between the lines.'
 **MADDIE** (Joyous): You... You did it, Roddy!
 **RODDY** (Charming): Well... I...
 
-### Library07
+### Library: Library07
 `Library07` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Charming): Roddy...
 **RODDY** (Charming): Y- Yes?
@@ -13775,8 +13935,9 @@ The door will shift between the lines.'
 **MADDIE** (Surprised): !!!
 **ARTHUR**: Hello, Mads...
 
-### Library08
+### Library: Library08
 `Library08` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Frustrated): Wha... Wha...
 **RODDY** (Doubtful): Excuse me, but who are you?
@@ -13790,8 +13951,9 @@ The door will shift between the lines.'
 **ARTHUR**: Mads, it was Ursula who-
 **GRANDMA** (Frustrated): Arthur? I thought I got rid of you...
 
-### Library09
+### Library: Library09
 `Library09` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Is that true Grandma?!
 **GRANDMA** (Annoyed): Yes... It’s true.
@@ -13806,8 +13968,9 @@ The door will shift between the lines.'
 **RODDY** (Annoyed): No... You need time with your “fiancé”.
 **MADDIE** (Frustrated): Roddy!
 
-### Library10
+### Library: Library10
 `Library10` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **ARTHUR** (Charming): Mads...
 **MADDIE** (Doubtful): You left me, Arthur. I can’t just forget that.
@@ -13967,8 +14130,9 @@ The door will shift between the lines.'
 **MADDIE**: It's alright... To be honest, I'm somewhat relieved. I really didn't want to stoop to their level.
 **JACKIE** (Doubtful): Hmph... It was a good article too...
 
-### Library Intro
+### Library: Library_Intro
 `Library_Intro` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: Alright... Let’s see what this room has to offer.
 **MADDIE** (Thinking): Hmm... plenty of books, a fireplace... run down couch...
@@ -14204,8 +14368,9 @@ You will find one hidden beneath me.”
 **MADDIE** (Surprised): Just like those spy movies I would watch when I was younger!
 **MADDIE** (Worried): This is creepy. Suddenly, I don’t feel all that safe here...
 
-### Lounge02
+### Lounge: Lounge02
 `Lounge02` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **VICTORIA** (Annoyed): Well, well, well... It looks like Holden was right.
 **MADDIE** (Surprised): Wha-? Victoria!
@@ -14216,8 +14381,9 @@ You will find one hidden beneath me.”
 **VICTORIA** (Worried): Poor little Maddie, ever so clueless. Anyway, I'm off to tell Bruno.
 **VICTORIA** (Worried): Victoria, wait. Be careful, the staircase isn't finished...
 
-### Lounge03
+### Lounge: Lounge03
 `Lounge03` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): AHHH! My foot! My foot is stuck in the stairs!!
 **VICTORIA** (Worried): Oh no! Victoria, stay calm and stay still. You might injure yourself...
@@ -14232,8 +14398,9 @@ You will find one hidden beneath me.”
 **VICTORIA**: Plans? What plans?!
 **VICTORIA**: And just so you know, these shoes are vintage Manuelo's! Expect a bill.
 
-### Lounge04
+### Lounge: Lounge04
 `Lounge04` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Worried): Maddie, dearie.
 **MADDIE** (Doubtful): Grandma.
@@ -14246,8 +14413,9 @@ You will find one hidden beneath me.”
 **GRANDMA** (Discouraged): But the answers you are seeking are just... too difficult to explain.
 **MADDIE** (Thinking): How so?
 
-### Lounge05
+### Lounge: Lounge05
 `Lounge05` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Worried): That picture, that day, was not one I take lightly.
 **MADDIE** (Thinking): Were you actually married to someone else? Are you both... still married?
@@ -14256,8 +14424,9 @@ You will find one hidden beneath me.”
 **GRANDMA** (Discouraged): My first husband was a mob boss. 
 **MADDIE** (Surprised): Grandma!
 
-### Lounge06
+### Lounge: Lounge06
 `Lounge06` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA**: It was a few years before I met your Grandpa Charlie.
 **GRANDMA**: This family, we were in a lot of financial trouble.
@@ -14268,8 +14437,9 @@ You will find one hidden beneath me.”
 **GRANDMA**: He's had a target on our backs ever since...
 **MADDIE** (Frustrated): Grandma... I don't know what to say...
 
-### Lounge07
+### Lounge: Lounge07
 `Lounge07` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Discouraged): I'm sorry I wasn't more understanding before. I feel terrible!
 **GRANDMA** (Relaxed): Our past is what makes us who we are, dearie. And maybe it's good for you to know.
@@ -14279,8 +14449,9 @@ You will find one hidden beneath me.”
 **MADDIE**: I'm glad we reconciled, Grandma. I hope we can continue to be more open with each other.
 **MADDIE**: I hope so too, dearie.
 
-### Lounge08
+### Lounge: Lounge08
 `Lounge08` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Worried): Hey, Maddie! Sorry about our earlier encounter. I had a... um important meeting to get to.
 **MADDIE** (Thinking): It's okay, Roddy, but you did seem a bit freaked out when you saw the photo of Grandma and that man...
@@ -14289,8 +14460,9 @@ You will find one hidden beneath me.”
 **RODDY** (Charming): Well, you know her...
 **MADDIE** (Worried): That's the thing... Do I?
 
-### Lounge09
+### Lounge: Lounge09
 `Lounge09` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Wow! Look at all this cash! 
 **MADDIE** (Thinking): But why is it burnt? 
@@ -14313,15 +14485,17 @@ You will find one hidden beneath me.”
 **RODDY** (Discouraged): This doesn't look good for your family, Maddie.
 **MADDIE** (Doubtful): I know... But there must be more to the story. I'll get to the bottom of it!
 
-### Lounge11
+### Lounge: Lounge11
 `Lounge11` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Joyous): Now, time to put my card skills to the test!
 **MADDIE** (Joyous): Oof, it feels good to finally sit down and get my mind off of things.
 **MADDIE** (Encouraging): Let's begin!
 
-### Lounge11.2
+### Lounge: Lounge11.2
 `Lounge11.2` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **—** (Annoyed): My... that was riveting...
 **MADDIE** (Relaxed): Roddy, I didn't know you were still around...
@@ -14332,8 +14506,9 @@ You will find one hidden beneath me.”
 **MADDIE** (Doubtful): Roddy, I was just distracted-
 **—** (Annoyed): Hmph...
 
-### Lounge12
+### Lounge: Lounge12
 `Lounge12` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **BRUNO** (Relaxed): Ah, Maddie! Good to see you!
 **MADDIE** (Annoyed): ...
@@ -14347,8 +14522,9 @@ You will find one hidden beneath me.”
 **BRUNO** (Annoyed): Because if it were personal... this would be a different conversation.
 **MADDIE** (Annoyed): You don't scare me, mayor.
 
-### Lounge13
+### Lounge: Lounge13
 `Lounge13` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **BRUNO** (Doubtful): You'd be smart to be afraid of me. You don't know the kind of friends I have.
 **MADDIE** (Annoyed): The answer is NO, Mayor. I'm not selling.
@@ -14357,8 +14533,9 @@ You will find one hidden beneath me.”
 **BRUNO** (Charming): It doesn't matter how many coats of paint you put on these walls, Maddie.
 **BRUNO**: It won't cover up the truth that the Boultons were failures. Brought down by greed and hubris.
 
-### Lounge14
+### Lounge: Lounge14
 `Lounge14` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **BRUNO** (Doubtful): I'm tired of playing games, Maddie. So I'll make this simple.
 **BRUNO** (Charming): Give me Beaumont Hall and maybe I'll leave you with just enough to hire a semi-competent lawyer.
@@ -14368,14 +14545,16 @@ You will find one hidden beneath me.”
 **MADDIE** (Annoyed): Get out. Now!
 **BRUNO** (Charming): Alright, alright. But, just so you know, your fate is sealed.
 
-### Lounge15
+### Lounge: Lounge15
 `Lounge15` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Wow! A fortune telling machine...
 **MADDIE** (Surprised): This looks vintage. I've never seen one of these up close. I wonder if I can fix it up...
 
-### Lounge16
+### Lounge: Lounge16
 `Lounge16` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **WINSTON**: Ma'am... It seems I found the intruder that was munching on all the foliage...
 **MADDIE**: Brilliant! So what was it?
@@ -14388,8 +14567,9 @@ You will find one hidden beneath me.”
 **MADDIE** (Surprised): We have a ranch? This keeps getting more and more shocking...
 **MADDIE** (Encouraging): Don't worry, Winston, I'm on it!
 
-### Lounge17
+### Lounge: Lounge17
 `Lounge17` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Hmm... I was about to throw this piece of paper out, but it looks important.
 **MADDIE** (Thinking): Let's see...
@@ -14407,14 +14587,16 @@ You will find one hidden beneath me.”
 **MADDIE** (Thinking): And why was the entrance cordoned off with tape? Was there an official investigation, perhaps?
 **MADDIE** (Doubtful): Hmm, let's find out...
 
-### Lounge Cards Ftue2 01
+### Lounge: Lounge_Cards_Ftue2_01
 `Lounge_Cards_Ftue2_01` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: Alright, let's suit up and get ready to play! Use your card deck and merge matching suits to make higher value cards.
 **MADDIE** (Encouraging): Play matching cards to remove them and move up in the pyramid.
 
-### Lounge Cards Ftue3 01
+### Lounge: Lounge_Cards_Ftue3_01
 `Lounge_Cards_Ftue3_01` · seen 25.05.01–26.07.01
+- trigger: area, area=Lounge, areaId=Lounge, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Joyous): Remove all the cards to win a prize!
 
@@ -14779,8 +14961,9 @@ Let's put it out, quickly!
 **RODDY**: That’s about the size of it, yes.
 **MADDIE**: You heard the man – let’s get to work!
 
-### Maddieroom 02
+### Maddie's Room: Maddieroom_02
 `Maddieroom_02` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: Victoria! What do you want?
 **MADDIE**: It's over!
@@ -14793,8 +14976,9 @@ Let's put it out, quickly!
 **MADDIE** (Worried): *Gulp*
 **GRANDMA**: Who was that, dearie? I could hear their voice in the hallway!
 
-### Maddieroom 03
+### Maddie's Room: Maddieroom_03
 `Maddieroom_03` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): It was Victoria... She's basically vowed revenge upon us. 
 **GRANDMA** (Frustrated): Don't worry about her, dearie. She's had it out for our family for a long time...
@@ -14809,8 +14993,9 @@ Let's put it out, quickly!
 **MADDIE** (Charming): Ha... I don't really remember that.
 **GRANDMA** (Charming): You were only four at the time... I'm sure as you fix up the place, some memories will come back to you.
 
-### Maddieroom 04
+### Maddie's Room: Maddieroom_04
 `Maddieroom_04` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): Huh... I remember these toys! 
 **MADDIE** (Encouraging): And over there I would build a huge pillow fort with...
@@ -14824,8 +15009,9 @@ Let's put it out, quickly!
 **MADDIE** (Thinking): But... I don't know anything about them. You never...
 **GRANDMA** (Discouraged): Alright, dearie... Alright.
 
-### Maddieroom 05
+### Maddie's Room: Maddieroom_05
 `Maddieroom_05` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA**: Michael and Rebecca were the most loving parents you could ever hope for.
 **GRANDMA** (Encouraging): Everything they did was for you Maddie, all their decisions... 
@@ -14842,8 +15028,9 @@ Let's put it out, quickly!
 **MADDIE** (Worried): I want to know about the night my parents...
 **GRANDMA** (Worried): Oh Maddie...
 
-### Maddieroom 06
+### Maddie's Room: Maddieroom_06
 `Maddieroom_06` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): Please Grandma... 
 **MADDIE** (Thinking): I sometimes have strange dreams, like I was right there...
@@ -14858,8 +15045,9 @@ Let's put it out, quickly!
 **GRANDMA** (Discouraged): And...
 **GRANDMA** (Discouraged): So was I.
 
-### Maddieroom 07
+### Maddie's Room: Maddieroom_07
 `Maddieroom_07` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): WE were there?!
 **GRANDMA** (Annoyed): Maddie, you must understand...
@@ -14870,8 +15058,9 @@ Let's put it out, quickly!
 **GRANDMA** (Discouraged): A car on fire.
 **MADDIE**: Fire?! So... I didn't just dream it...
 
-### Maddieroom 08
+### Maddie's Room: Maddieroom_08
 `Maddieroom_08` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Annoyed): I had a sinking feeling... 
 **GRANDMA** (Discouraged): I stopped and ran out...
@@ -14884,8 +15073,9 @@ Let's put it out, quickly!
 **MADDIE** (Discouraged): But you still feel guilty for having the fight.
 **GRANDMA** (Worried): Yes.
 
-### Maddieroom 09
+### Maddie's Room: Maddieroom_09
 `Maddieroom_09` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Worried): If we wouldn't have had that fight, Michael would not have charged off.
 **GRANDMA** (Worried): Maybe he would have...
@@ -14897,8 +15087,9 @@ Let's put it out, quickly!
 **GRANDMA** (Surprised): ...
 **GRANDMA** (Discouraged): Thank you, dearie!
 
-### Maddieroom 10
+### Maddie's Room: Maddieroom_10
 `Maddieroom_10` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Worried): Do you hear that? I think it's Winston...
 **MADDIE** (Thinking): Yes, sounds like it's something urgent-
@@ -14908,8 +15099,9 @@ Let's put it out, quickly!
 **GRANDMA** (Charming): Headstrong and brilliant. Just don't let the past hold you back. 
 **MADDIE** (Relaxed): T-thank you, Grandma.
 
-### Maddieroom 11
+### Maddie's Room: Maddieroom_11
 `Maddieroom_11` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: What a beautiful music box!
 **MADDIE** (Thinking): It looks like something I know...
@@ -15010,8 +15202,9 @@ Let's put it out, quickly!
 **MADDIE** (Encouraging): I bet I made quite the racket to whomever was below...
 **MADDIE** (Thinking): Hmm... Maybe I should give it a go again?!
 
-### Maddieroom Intro
+### Maddie's Room: Maddieroom_Intro
 `Maddieroom_Intro` · seen 25.05.01–26.07.01
+- trigger: area, area=Maddie's Room, areaId=Maddieroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Frustrated): I guess I've avoided this room long enough...
 **MADDIE** (Worried): *Sigh*
@@ -15757,8 +15950,9 @@ Let's put it out, quickly!
 **MADDIE**: That’s a fancy-looking speaker...
 **MADDIE** (Thinking): As an audiophile myself, I reckon it has a real rich sound.
 
-### Musicianroom02
+### Music Studio: Musicianroom02
 `Musicianroom02` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=Musicianroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **WINSTON** (Relaxed): You called, ma’am? I assume this has something to do with the construction workers outside...
 **MADDIE** (Doubtful): Yes! Winston, do you think you can deal with the mayor's cronies and tell me what they’re up to?
@@ -15773,8 +15967,9 @@ Let's put it out, quickly!
 **MADDIE** (Charming): You’ve always been around to help me, never doubted me... You’ve been the best!
 **RODDY** (Worried): Well, er... I...
 
-### Musicianroom03
+### Music Studio: Musicianroom03
 `Musicianroom03` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=Musicianroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Worried): The thing is, Maddie... I - I think you're an amazing person.
 **MADDIE**: Aw shucks, Roddy! You're amazing too...
@@ -15783,8 +15978,9 @@ Let's put it out, quickly!
 **MADDIE** (Surprised): *beep beep*
 **MADDIE** (Surprised): What the- a message from ARTHUR?!
 
-### Musicianroom04
+### Music Studio: Musicianroom04
 `Musicianroom04` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=Musicianroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): “Hey, Mads...
 **MADDIE** (Doubtful): I know you’re still upset... You have every right to be, but you must believe me when I say that I had no choice.
@@ -15818,8 +16014,9 @@ Let's put it out, quickly!
 **MADDIE** (Thinking): Hmmm, I should ring Julius.
 **MADDIE** (Thinking): He’d have a field day in here!
 
-### Musicianroom08
+### Music Studio: Musicianroom08
 `Musicianroom08` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=Musicianroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Surprised): Dearie, who are all these people outside in hard hats?
 **GRANDMA** (Charming): For a moment, I thought we were being ambushed by an army of Roddys.
@@ -15832,8 +16029,9 @@ Let's put it out, quickly!
 **MADDIE** (Encouraging): He says the mansion was declared a heritage site, but he needs to find the documents to prove it. 
 **GRANDMA** (Joyous): I always knew that boy was bright!
 
-### Musicianroom10
+### Music Studio: Musicianroom10
 `Musicianroom10` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=Musicianroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Discouraged): Is everything alright with you, dearie? You look like you’ve seen a ghost!
 **MADDIE** (Worried): You could say that. I just received a text from Arthur!
@@ -15852,8 +16050,9 @@ Let's put it out, quickly!
 **GRANDMA** (Encouraging): Charlie and I were happy to help. We have plenty of rooms!
 **GRANDMA** (Joyous): We never really saw much of him, though. But we did hear plenty of music!
 
-### Musicianroom12
+### Music Studio: Musicianroom12
 `Musicianroom12` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=Musicianroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): But what happened to him, Grandma? Does he still make music?
 **GRANDMA** (Discouraged): Oh, I don't think so, dearie. It's not a pleasant story...
@@ -15867,8 +16066,9 @@ Let's put it out, quickly!
 **GRANDMA** (Discouraged): After that, he left and never made music again.
 **MADDIE** (Worried): Oh my...
 
-### Musicianroom13
+### Music Studio: Musicianroom13
 `Musicianroom13` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=Musicianroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Annoyed): So if Eddie hadn't signed with that record label, he might still be making music today...
 **MADDIE** (Worried): I-I can't help but sympathize with him. After all, I am in a similar situation.
@@ -15878,8 +16078,9 @@ Let's put it out, quickly!
 **GRANDMA** (Charming): Never ever give away your power, my dear.
 **MADDIE** (Encouraging): You're right. Thanks, Grandma! I needed to hear this.
 
-### Musicianroom14
+### Music Studio: Musicianroom14
 `Musicianroom14` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=Musicianroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: Phew! That's the last of the music sheets!
 **MADDIE** (Discouraged): I have a better understanding of Eddie's rage and why these sheets were scattered around now.
@@ -15890,8 +16091,9 @@ Let's put it out, quickly!
 **MADDIE** (Doubtful): Hey, wait, there's a section here that requires an electric guitar!
 **MADDIE** (Joyous): That's all the motivation I need to try out that fancy guitar next!
 
-### Musicianroom15
+### Music Studio: Musicianroom15
 `Musicianroom15` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=Musicianroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): The guitar isn't even plugged in, and wow... it feels powerful.
 **MADDIE** (Surprised): Is this how musicians feel onstage? How thrilling!
@@ -15901,8 +16103,9 @@ Let's put it out, quickly!
 **MADDIE** (Worried): W-what just happened.... I-I'm shaking... And covered in dust!
 **MADDIE** (Surprised): Wait, that door! It has to be the way to the next room!
 
-### Musicianroom16
+### Music Studio: Musicianroom16
 `Musicianroom16` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=Musicianroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): Well, that was certainly one of the more interesting ways of finding an exit...
 **MADDIE** (Discouraged): I'm still a bit shaken up. The amplifier was way more powerful than I thought.
@@ -15910,8 +16113,9 @@ Let's put it out, quickly!
 **MADDIE**: Well, I'm glad Eddie isn't around to see the mess I created.
 **MADDIE**: I should get all of this cleaned up!
 
-### Musicianroom18
+### Music Studio: Musicianroom18
 `Musicianroom18` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=Musicianroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: Phew, that was some heavy lifting. Now, to see what's behind this door...
 **MADDIE** (Thinking): *Ring Ring*
@@ -15931,8 +16135,9 @@ Let's put it out, quickly!
 **MADDIE** (Thinking): I think this part goes here?
 **MADDIE** (Doubtful): I hope this actually works...
 
-### Musicianroom Intro
+### Music Studio: Musicianroom_Intro
 `Musicianroom_Intro` · seen 25.05.01–26.07.01
+- trigger: area, area=Music Studio, areaId=Musicianroom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Wow... Who would hide a room like this behind a fridge?
 **RODDY** (Surprised): Maddie, there you are! Wait, did I just walk through a fridge- Wow!
@@ -16001,8 +16206,9 @@ Let's put it out, quickly!
 **MADDIE** (Relaxed): Now that it’s complete, I still can’t quite recognize what type of clock it is...
 **MADDIE** (Joyous): But it sure is beautiful!
 
-### Office07
+### The Office: Office07
 `Office07` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Encouraging): Hmm... this looks like Charlie's trophy shelf...
 **MADDIE** (Thinking): Wait a minute... I know just what to place here!
@@ -16010,8 +16216,9 @@ Let's put it out, quickly!
 **MADDIE** (Charming): I've come so far and it only feels right to commemorate my journey!
 **MADDIE** (Joyous): And here... here feels just right! I'm sure Charlie would approve too!
 
-### Office08
+### The Office: Office08
 `Office08` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Worried): Uhm... Maddie? Could I speak to you for a sec?
 **MADDIE** (Annoyed): Roddy...
@@ -16022,8 +16229,9 @@ Let's put it out, quickly!
 **MADDIE** (Annoyed): I thought you were smarter than that.
 **RODDY** (Discouraged): I...
 
-### Office09
+### The Office: Office09
 `Office09` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): No. You tell me right now why I should accept your apology.
 **MADDIE** (Frustrated): Tell me what is going on with you!
@@ -16034,8 +16242,9 @@ Let's put it out, quickly!
 **SULLIVAN** (Annoyed): I know your family is up to something, but breaking into the precinct and stealing evidence?!
 **SULLIVAN** (Surprised): That’s a new low. Even for you!
 
-### Office10
+### The Office: Office10
 `Office10` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): Stealing evidence? Why would I ever want to incriminate myself like that?
 **SULLIVAN** (Encouraging): Obviously not! That’s why you had your criminal grandmother steal it for you!
@@ -16045,8 +16254,9 @@ Let's put it out, quickly!
 **SULLIVAN** (Frustrated): Oh, is it Roddy? Would make sense that YOU’d be in on this, too.
 **RODDY** (Annoyed): Kate!
 
-### Office12
+### The Office: Office12
 `Office12` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): What?! Y-you can’t do that!
 **SULLIVAN** (Joyous): Oh Maddie...
@@ -16054,8 +16264,9 @@ Let's put it out, quickly!
 **HOLDEN** (Joyous): *Flash*
 **HOLDEN** (Joyous): Finally, an arrest!! This’ll do wonders for my paper!
 
-### Office13
+### The Office: Office13
 `Office13` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **HOLDEN** (Encouraging): Hey, can you say that again? I’ll take another photo from a different angle!
 **SULLIVAN** (Surprised): Who... Who are you?!
@@ -16070,8 +16281,9 @@ Let's put it out, quickly!
 **SULLIVAN** (Doubtful): Fine! I’m letting you go, but I’ll be back! And that's a warning...
 **HOLDEN** (Relaxed): That, I can quote!
 
-### Office14
+### The Office: Office14
 `Office14` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Encouraging): Holden! I can’t believe I’m happy to see you!
 **MADDIE** (Doubtful): But... Why are you here?
@@ -16083,8 +16295,9 @@ Let's put it out, quickly!
 **MADDIE** (Discouraged): Oh, no...
 **HOLDEN** (Relaxed): That’s right. I can write about whoever I want now!
 
-### Office15
+### The Office: Office15
 `Office15` · seen 25.05.01–26.07.01
+- trigger: area, area=The Office, areaId=Office, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **RODDY** (Worried): Maddie, what she said about criminals is right, but...
 **MADDIE** (Doubtful): What?! Was she telling the truth? Is this what Arthur was-
@@ -16246,8 +16459,9 @@ Let's put it out, quickly!
 
 **MADDIE** (Thinking): Looks like I should investigate this area next after I'm ready with the Garage.
 
-### OldWell Discovery
+### The Old Well: OldWell_Discovery
 `OldWell_Discovery` · seen 22.02.06–26.07.01
+- trigger: area, area=The Old Well, areaId=OldWell, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE** (Doubtful): It's definitely a dog - and it's coming from this old well! I'd better help the poor thing out.  
   _earlier:_ ~~It seems to be coming from here... Oh, no! The dog's stuck in the well!~~ (until 23.09.02)
@@ -16267,14 +16481,16 @@ Let's put it out, quickly!
 **GRANDMA** (Worried): No, no. Just take my advice. You should throw it in the garbage and forget about it.
 **MADDIE** (Thinking): She's definitely up to something. It makes me even more determined to find out who the watch belongs to!
 
-### OldWell Intro
+### The Old Well: OldWell_Intro
 `OldWell_Intro` · seen 22.02.06–26.07.01
+- trigger: area, area=The Old Well, areaId=OldWell, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE** (Surprised): What's that noise? It sounds like a dog - but I can't see one around. I'd better investigate.  
   _earlier:_ ~~Why do I hear barking? We don't have a dog... And this one sounds like it's in a tunnel!~~ (until 23.09.02)
 
-### OldWell Rescue
+### The Old Well: OldWell_Rescue
 `OldWell_Rescue` · seen 22.02.06–26.07.01
+- trigger: area, area=The Old Well, areaId=OldWell, phase=area story (exact task not dumped) (versions 22.02.06–26.07.01)
 
 **MADDIE** (Joyous): Yay, you're free!
 **MADDIE** (Thinking): Hello boy! Do you have a name? I don't see a collar or tag on you.  
@@ -16488,12 +16704,14 @@ Let's put it out, quickly!
 **MADDIE** (Frustrated): Phew! Locks everywhere! Whoever this room belonged to certainly didn’t want anyone snooping around...
 **MADDIE** (Relaxed): I never thought lock picking would be a skill I’d need, but it sure is handy!
 
-### ParentsRoom01
+### Parents' Room: ParentsRoom01
 `ParentsRoom01` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 
-### ParentsRoom02
+### Parents' Room: ParentsRoom02
 `ParentsRoom02` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Relaxed): There we go!
 **MADDIE** (Encouraging): That piece of wood blocking the staircase is finally out of the way!
@@ -16502,8 +16720,9 @@ Let's put it out, quickly!
 **MADDIE** (Thinking): Mezzanine... Mezzanine.
 **MADDIE** (Doubtful): Yup. That word has lost all meaning to me now.
 
-### ParentsRoom03
+### Parents' Room: ParentsRoom03
 `ParentsRoom03` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): This is a really nice layout!
 **MADDIE** (Relaxed): Cozy, cool and comfortable!
@@ -16514,8 +16733,9 @@ Let's put it out, quickly!
 **RODDY** (Doubtful): Mezzanine... Mezzanine? Sounds kinda funny after a while...
 **MADDIE** (Doubtful): I know, right?
 
-### ParentsRoom04
+### Parents' Room: ParentsRoom04
 `ParentsRoom04` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: So, Roddy... Ready to tell me what’s really going on with you?
 **RODDY** (Worried): Yeah... I guess my past eventually caught up with me.
@@ -16525,8 +16745,9 @@ Let's put it out, quickly!
 **RODDY** (Discouraged): *Sigh*
 **RODDY** (Thinking): Okay... I guess I should start at the beginning.
 
-### ParentsRoom05
+### Parents' Room: ParentsRoom05
 `ParentsRoom05` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY** (Discouraged): I grew up in a bad part of town. My family had little to no money and my parents took on various jobs.
 **RODDY** (Worried): Things were pretty much like that until my 8th birthday, when it miraculously took a turn for the better!
@@ -16539,8 +16760,9 @@ Let's put it out, quickly!
 **RODDY** (Frustrated): A crime boss.
 **MADDIE** (Worried): Oh...
 
-### ParentsRoom06
+### Parents' Room: ParentsRoom06
 `ParentsRoom06` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY**: I’ll be honest. I grew up thinking this sort of life was normal.
 **RODDY**: Dad never really spoke about work, but we were still invited to many parties.
@@ -16552,8 +16774,9 @@ Let's put it out, quickly!
 **MADDIE** (Thinking): How come?
 **RODDY** (Charming): I had to study a lot of blueprints and floor plans for my... “job”.
 
-### ParentsRoom07
+### Parents' Room: ParentsRoom07
 `ParentsRoom07` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Worried): I don’t mean to pry, but...
 **MADDIE** (Doubtful): If you were in that sort of life, how did you ever get married to Detective Sullivan?!
@@ -16568,8 +16791,9 @@ Let's put it out, quickly!
 **MADDIE** (Worried): Oh, um...
 **RODDY** (Annoyed): Yeah... It wasn’t a family emergency.
 
-### ParentsRoom08
+### Parents' Room: ParentsRoom08
 `ParentsRoom08` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY** (Discouraged): It was the night of my first job and we got busted. And guess who was leading the charge?
 **MADDIE** (Annoyed): Sullivan.
@@ -16581,8 +16805,9 @@ Let's put it out, quickly!
 **RODDY** (Frustrated): And since I married a cop, I wasn’t really welcomed at home anymore, either.
 **RODDY** (Discouraged): So I took up architecture and moved here. FAR AWAY from everything.
 
-### ParentsRoom09
+### Parents' Room: ParentsRoom09
 `ParentsRoom09` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Worried): Roddy... I...
 **RODDY** (Discouraged): It’s okay Maddie. I know it’s a lot.
@@ -16630,8 +16855,9 @@ Let's put it out, quickly!
 **MADDIE**: I can...
 **MADDIE**: I can almost FEEL them in here.
 
-### ParentsRoom13
+### Parents' Room: ParentsRoom13
 `ParentsRoom13` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Joyous): This must have been Mom’s art corner!
 **MADDIE** (Encouraging): Wow, she was so talented as well. So many styles and experiments.
@@ -16666,8 +16892,9 @@ Let's put it out, quickly!
 **MADDIE** (Encouraging): John really inspired Dad in many ways!
 **MADDIE** (Relaxed): I guess aviation runs in the family!
 
-### ParentsRoom16
+### Parents' Room: ParentsRoom16
 `ParentsRoom16` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): This must be Dad’s desk! Look at all this aviation stuff!
 **MADDIE** (Charming): Manuals, technical specs, sketches and there's even model airplanes!  
@@ -16675,8 +16902,9 @@ Let's put it out, quickly!
 **MADDIE** (Relaxed): Even some of his own design sketches! He really was an engineer at heart.
 **MADDIE** (Surprised): Actually... Some of these designs are good. REALLY GOOD.
 
-### ParentsRoom17
+### Parents' Room: ParentsRoom17
 `ParentsRoom17` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Doubtful): What’s this? These aren’t engineering plans...
 **MADDIE** (Surprised): They’re police reports! On a crime family!
@@ -16685,8 +16913,9 @@ Let's put it out, quickly!
 **MADDIE** (Surprised): Died!
 **MADDIE** (Surprised): Was dad mixed up with criminals too?!
 
-### ParentsRoom18
+### Parents' Room: ParentsRoom18
 `ParentsRoom18` · seen 26.07.01–26.07.01
+- trigger: area, area=Parents' Room, areaId=ParentsRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Surprised): There are also some blueprints on the old tin can factory!
 **MADDIE** (Doubtful): And it looks like my dad knew about what was really going on there.
@@ -16867,8 +17096,9 @@ Let's put it out, quickly!
 **MADDIE** (Surprised): And these photos, they’re all of him in various meticulous disguises!
 **MADDIE** (Surprised): This confirms my suspicions. This has to be Grandpa Charlie’s hideout and I think... I think he was... a spy!
 
-### Perfumery01 Intro
+### The Perfumery: Perfumery01_Intro
 `Perfumery01_Intro` · seen 25.06.01–26.07.01
+- trigger: area, area=The Perfumery, areaId=Perfumery, phase=area story (exact task not dumped) (versions 25.06.01–26.07.01)
 
 **MADDIE**: Deb said I should check this room out next, because it was interesting.
 **MADDIE** (Doubtful): That’s a bit of an understatement if you ask me!
@@ -16876,8 +17106,9 @@ Let's put it out, quickly!
 **MADDIE** (Surprised): Or laboratory!
 **MADDIE** (Surprised): But for what?!
 
-### Perfumery02
+### The Perfumery: Perfumery02
 `Perfumery02` · seen 25.06.01–26.07.01
+- trigger: area, area=The Perfumery, areaId=Perfumery, phase=area story (exact task not dumped) (versions 25.06.01–26.07.01)
 
 **LEONARD**: Ah... I see you’ve found Lindsay's Perfumery.  
   _earlier:_ ~~Ah... I see you’ve found the Perfumery.~~ (until 25.06.01)
@@ -16888,8 +17119,9 @@ Let's put it out, quickly!
 **LEONARD**: Hmph...
 **MADDIE** (Doubtful): Why are you still around? It’s obvious you don’t enjoy being here!
 
-### Perfumery03
+### The Perfumery: Perfumery03
 `Perfumery03` · seen 25.06.01–26.07.01
+- trigger: area, area=The Perfumery, areaId=Perfumery, phase=area story (exact task not dumped) (versions 25.06.01–26.07.01)
 
 **LEONARD** (Thinking): Well, girl. I won’t be around for much longer, thanks to you.
 **LEONARD** (Annoyed): I’m collecting my things, because YOU have thrown me out of my home.
@@ -16900,8 +17132,9 @@ Let's put it out, quickly!
 **MADDIE** (Annoyed): Selling your ancestral home is never a good plan, Leonard. It’s wrong.
 **LEONARD** (Thinking): Don’t be too quick to judge, Maddie.
 
-### Perfumery04
+### The Perfumery: Perfumery04
 `Perfumery04` · seen 25.06.01–26.07.01
+- trigger: area, area=The Perfumery, areaId=Perfumery, phase=area story (exact task not dumped) (versions 25.06.01–26.07.01)
 
 **MADDIE** (Doubtful): You were selling out your family, Leonard! You didn’t want to save this place!
 **MADDIE** (Annoyed): You wanted to sell it to make a quick buck!
@@ -16915,8 +17148,9 @@ Let's put it out, quickly!
 **LEONARD** (Encouraging): You are not as smart as you think you are...
 **LEONARD** (Thinking): Sometimes it’s best to not know everything.
 
-### Perfumery05
+### The Perfumery: Perfumery05
 `Perfumery05` · seen 25.06.01–26.07.01
+- trigger: area, area=The Perfumery, areaId=Perfumery, phase=area story (exact task not dumped) (versions 25.06.01–26.07.01)
 
 **MADDIE** (Annoyed): Oh? I guess you didn’t heed your own advice when you told Deb she was adopted!
 **LEONARD**: ...
@@ -16932,8 +17166,9 @@ Let's put it out, quickly!
   _earlier:_ ~~Oh, I’m sorry Dearie... I need to go for my manicure.~~ (until 25.06.01)
 **MADDIE** (Frustrated): Leonard!
 
-### Perfumery06
+### The Perfumery: Perfumery06
 `Perfumery06` · seen 25.06.01–26.07.01
+- trigger: area, area=The Perfumery, areaId=Perfumery, phase=area story (exact task not dumped) (versions 25.06.01–26.07.01)
 
 **WINSTON**: Is everything alright, Ma’am?
 **MADDIE** (Worried): Oh, Winston... It’s alright. Just Leonard.
@@ -16944,8 +17179,9 @@ Let's put it out, quickly!
 **WINSTON** (Discouraged): It truly is a pity how her life became so tragic because of her decisions.
 **MADDIE** (Worried): Do you know what really happened to her?
 
-### Perfumery07
+### The Perfumery: Perfumery07
 `Perfumery07` · seen 25.06.01–26.07.01
+- trigger: area, area=The Perfumery, areaId=Perfumery, phase=area story (exact task not dumped) (versions 25.06.01–26.07.01)
 
 **WINSTON** (Discouraged): It is a sad story, but yes, I know it.
 **MADDIE**: Tell me, please.
@@ -16963,8 +17199,9 @@ Let's put it out, quickly!
 **WINSTON** (Discouraged): We will never know, I’m afraid.
 **MADDIE** (Discouraged): Poor Lindsay...
 
-### Perfumery08
+### The Perfumery: Perfumery08
 `Perfumery08` · seen 25.06.01–26.07.01
+- trigger: area, area=The Perfumery, areaId=Perfumery, phase=area story (exact task not dumped) (versions 25.06.01–26.07.01)
 
 **MADDIE** (Encouraging): This looks like New York. I guess this was to showcase what a trailblazer she was when she joined Wall Street!  
   _earlier:_ ~~This looks like New York. I guess this was to show her fortitude at inventing things!~~ (until 25.06.01)
@@ -16974,8 +17211,9 @@ Let's put it out, quickly!
   _earlier:_ ~~I remember she worked at Wall Street and was a very shrewd business woman in New York.~~ (until 25.06.01)
 **MADDIE** (Thinking): She made a fortune until the Crash.
 
-### Perfumery09
+### The Perfumery: Perfumery09
 `Perfumery09` · seen 25.06.01–26.07.01
+- trigger: area, area=The Perfumery, areaId=Perfumery, phase=area story (exact task not dumped) (versions 25.06.01–26.07.01)
 
 **MADDIE** (Joyous): Ah, her love of exploration. I remember seeing a photo of her in the Gallery as well!  
   _(1 cosmetic edit not shown)_
@@ -16985,16 +17223,18 @@ Let's put it out, quickly!
 **MADDIE** (Thinking): What a life she must have had... I must admit, I am envious.
 **MADDIE** (Charming): To chase your dreams, no matter what. Never knowing what the next day will bring!
 
-### Perfumery10
+### The Perfumery: Perfumery10
 `Perfumery10` · seen 25.06.01–26.07.01
+- trigger: area, area=The Perfumery, areaId=Perfumery, phase=area story (exact task not dumped) (versions 25.06.01–26.07.01)
 
 **MADDIE** (Encouraging): This is about the Beaumont Blossom! Her first invention that saved the family!
 **MADDIE** (Encouraging): She based the fragrance on the Hopeberry and it became a sensational hit!
 **MADDIE** (Relaxed): I bet this was a catalyst that led her down a path of science, innovation, and perfumes.
 **MADDIE** (Relaxed): This being the centerpiece, I bet that fragrance was her most treasured creation.
 
-### Perfumery11
+### The Perfumery: Perfumery11
 `Perfumery11` · seen 25.06.01–26.07.01
+- trigger: area, area=The Perfumery, areaId=Perfumery, phase=area story (exact task not dumped) (versions 25.06.01–26.07.01)
 
 **MADDIE** (Doubtful): What’s this?
 **MADDIE** (Thinking): A plaque in front of the stained glass. It has an inscription.  
@@ -17027,8 +17267,9 @@ Let's put it out, quickly!
 **MADDIE** (Relaxed): But good thing I LOVE puzzles!
 **MADDIE** (Encouraging): Let's put it back together!
 
-### Perfumery13Outro
+### The Perfumery: Perfumery13Outro
 `Perfumery13Outro` · seen 25.06.01–26.07.01
+- trigger: area, area=The Perfumery, areaId=Perfumery, phase=area story (exact task not dumped) (versions 25.06.01–26.07.01)
 
 **MADDIE** (Relaxed): There! The Beaumont Blossom once again recreated!
 **MADDIE** (Encouraging): Quite fitting, actually. For the first and last time in the same room.
@@ -17360,8 +17601,9 @@ Let's put it out, quickly!
 **ANTIQUEDEALER**: I'll go and make the call right now.
 **MADDIE** (Doubtful): I'm sensing that Julius too has some dark secrets in his past... 
 
-### PoolHouse Outro
+### The Pool House: PoolHouse_Outro
 `PoolHouse_Outro` · seen 22.02.06–22.02.06
+- trigger: area, area=The Pool House, areaId=PoolHouse, phase=area story (exact task not dumped) (versions 22.02.06–22.02.06)
 
 **GRANDMA** (Encouraging): So, what's been going on here?  
   _earlier:_ ~~...Wow!~~ (until 23.09.02)
@@ -23211,8 +23453,9 @@ Play further to fully unlock it
 **MADDIE** (Charming): Sure is!
 **JACKIE** (Frustrated): Well, let's give it a try because I can't stand this smell much longer!
 
-### Secretsociety 02.1
+### Secret Society: Secretsociety_02.1
 `Secretsociety_02.1` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **JACKIE** (Annoyed): Maddie, you're brilliant! I can finally breathe in here.
 **MADDIE** (Thinking): Yeah, but what on earth are those numbers?
@@ -23272,8 +23515,9 @@ Play further to fully unlock it
 **MADDIE** (Surprised): Oh! That’s right! It’s so out of place too!
 **JACKIE** (Thinking): Hmm... I wonder what caused them to shut it down?
 
-### Secretsociety 06.1
+### Secret Society: Secretsociety_06.1
 `Secretsociety_06.1` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **JACKIE** (Doubtful): Are you actually planning to stand on this bridge?
 **MADDIE** (Doubtful): How else am I supposed to fix it?
@@ -23281,8 +23525,9 @@ Play further to fully unlock it
 **MADDIE** (Thinking): I know, I know. What if I just place one foot on it like so...
 **JACKIE** (Surprised): Wait, do you hear rumbling? Step back, Maddie!
 
-### Secretsociety 06.2
+### Secret Society: Secretsociety_06.2
 `Secretsociety_06.2` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Discouraged): Phew! That was close... Thanks, Jackie.
 **JACKIE**: I might have to add "saving lives" to my professional profile!
@@ -23290,8 +23535,9 @@ Play further to fully unlock it
 **JACKIE** (Encouraging): I trust you can build a much sturdier bridge?
 **MADDIE** (Charming): Absolutely!
 
-### Secretsociety 07
+### Secret Society: Secretsociety_07
 `Secretsociety_07` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **JACKIE** (Relaxed): That was a solid bridge, Maddie! I'm sorry if I was still hesitant to cross it.
 **MADDIE**: I don't blame you after the events we've seen down here...
@@ -23315,16 +23561,18 @@ Play further to fully unlock it
 **MADDIE** (Thinking): Do you think presidents have been here?
 **JACKIE**: I wouldn't be surprised. These societies were known to host a few presidents over the years...
 
-### Secretsociety 09
+### Secret Society: Secretsociety_09
 `Secretsociety_09` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Look! It's the same numbers that were in the pool!
 **JACKIE** (Thinking): Wow, guess it does have a purpose. Do you think it's some sort of puzzle?
 **MADDIE** (Encouraging): It has to be! 
 **JACKIE**: Ooh, I bet if we solve this, we might unearth some more secrets... 
 
-### Secretsociety 10
+### Secret Society: Secretsociety_10
 `Secretsociety_10` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Frustrated): Hmm, I just have to put the last piece of this puzzle together.
 **MADDIE** (Frustrated): If this goes here, then... Hmmm I almost have it...
@@ -23339,12 +23587,14 @@ Play further to fully unlock it
 **MADDIE** (Surprised): And it's bouncing off the fire bowl...
 **JACKIE** (Joyous): I'm sure this light reflection puzzle unlocks something... Let's polish the bowl and see where it leads!
 
-### Secretsociety 12
+### Secret Society: Secretsociety_12
 `Secretsociety_12` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 
-### Secretsociety 12.1
+### Secret Society: Secretsociety_12.1
 `Secretsociety_12.1` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **JACKIE** (Surprised): I thought I heard a faint ringing, and I was right! What's a telephone doing here?
 **MADDIE** (Thinking): Let's find out! It's a bit muffled...
@@ -23361,8 +23611,9 @@ Play further to fully unlock it
 **MADDIE** (Charming): Can you believe we actually solved one of the Fellowship's puzzles?!
 **MADDIE** (Joyous): Based on that message, there might be more around the mansion. I can't wait!
 
-### Secretsociety Intro
+### Secret Society: Secretsociety_Intro
 `Secretsociety_Intro` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Wow! I can’t believe this was under the conservatory all this time!
 **JACKIE** (Thinking): How did you know it was here?
@@ -23377,8 +23628,9 @@ Play further to fully unlock it
 **MADDIE** (Doubtful): Ugh... That’s not the only thing you’re probably smelling... Look at that water!
 **JACKIE** (Doubtful): You know, you should really get your plumbing fixed.
 
-### Secretsociety Unlock
+### Secret Society: Secretsociety_Unlock
 `Secretsociety_Unlock` · seen 25.05.01–26.07.01
+- trigger: area, area=Secret Society, areaId=Secretsociety, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **JACKIE**: Hey, Maddie! There you are! I have something to ask-
 **MADDIE** (Joyous): Jackie! I was right, the very same blue gem I discovered is right here at the conservatory!
@@ -23464,8 +23716,9 @@ Play further to fully unlock it
 **MADDIE** (Encouraging): I even avoided mixing up the different colored pipes this time! 
 **ASH** (Joyous): See? You're learning!
 
-### Speakeasy01 Intro
+### Speakeasy: Speakeasy01_Intro
 `Speakeasy01_Intro` · seen 25.05.01–26.07.01
+- trigger: area, area=Speakeasy, areaId=Speakeasy, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): Huh... I have to admit, I’m slightly disappointed.
 **MADDIE** (Doubtful): Just another storage room.
@@ -23481,16 +23734,18 @@ Play further to fully unlock it
 **MADDIE** (Doubtful): Roddy!
 **MADDIE** (Frustrated): Hmph... There he goes... Why can’t anyone ever give me a straight answer?
 
-### Speakeasy02
+### Speakeasy: Speakeasy02
 `Speakeasy02` · seen 25.05.01–26.07.01
+- trigger: area, area=Speakeasy, areaId=Speakeasy, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: Well, well, well... look what we have here. More money!
 **MADDIE** (Frustrated): And just like the notes in the Lounge, they're counterfeit.
 **MADDIE** (Frustrated): Why am I not surprised.
 **MADDIE** (Annoyed): I'm sure this room has something to do with Leonard and his shady business!
 
-### Speakeasy03
+### Speakeasy: Speakeasy03
 `Speakeasy03` · seen 25.05.01–26.07.01
+- trigger: area, area=Speakeasy, areaId=Speakeasy, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Doubtful): I wonder what this fuse box connects to?
 **MADDIE** (Frustrated): Hmm... all the fuses are missing. I should look around and see if I can find them.
@@ -23507,8 +23762,9 @@ Play further to fully unlock it
 **MADDIE**: And I’m assuming the other one is L. L for Lionheart? That doesn't sound like an actual name...
 **MADDIE** (Surprised): They have to represent the couple with the secret relationship!
 
-### Speakeasy05
+### Speakeasy: Speakeasy05
 `Speakeasy05` · seen 25.05.01–26.07.01
+- trigger: area, area=Speakeasy, areaId=Speakeasy, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Wow!
 **MADDIE** (Surprised): Putting that first fuse in place, activated the-
@@ -23518,8 +23774,9 @@ Play further to fully unlock it
 **LEONARD** (Encouraging): Finally... I’ve been asking Winnie to fix that thing for ages. Good job.
 **MADDIE** (Surprised): You! You're from the painting in the Lounge! You're Leonard!
 
-### Speakeasy06
+### Speakeasy: Speakeasy06
 `Speakeasy06` · seen 25.05.01–26.07.01
+- trigger: area, area=Speakeasy, areaId=Speakeasy, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **LEONARD** (Thinking): Right you are. You must be Maddie. I've heard that you're the one to save us all... Ha!
 **MADDIE** (Surprised): Leonard. What are you doing here?
@@ -23528,8 +23785,9 @@ Play further to fully unlock it
 **LEONARD** (Doubtful): I belong here more than you do, little girl.
 **MADDIE** (Annoyed): Oh really? Then I should thank you for keeping it in such good shape!
 
-### Speakeasy07
+### Speakeasy: Speakeasy07
 `Speakeasy07` · seen 25.05.01–26.07.01
+- trigger: area, area=Speakeasy, areaId=Speakeasy, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **LEONARD** (Encouraging): Aaah. The refreshing taste of Hopeberries. I knew Winnie would stash a box in here.
 **LEONARD** (Thinking): Good thing I found it before they tear this wretched place down...
@@ -23543,8 +23801,9 @@ Play further to fully unlock it
 **LEONARD** (Annoyed): Better get used to it, little girl. Your grandmother is the very reason we’re in this mess.
 **LEONARD** (Doubtful): But don’t worry... I’ve finally come up with a plan that’ll save this ungrateful family.
 
-### Speakeasy08
+### Speakeasy: Speakeasy08
 `Speakeasy08` · seen 25.05.01–26.07.01
+- trigger: area, area=Speakeasy, areaId=Speakeasy, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Annoyed): A plan? From what I’ve seen and heard, each and every harebrained plan of yours has failed!
 **MADDIE** (Doubtful): I guess this little “establishment” of yours was also one of your “great ideas.”
@@ -23559,8 +23818,9 @@ Play further to fully unlock it
 **MADDIE** (Surprised): Wait a minute! You’re Lionheart?
 **LEONARD** (Surprised): Whe- Where’d you hear that name?!
 
-### Speakeasy09
+### Speakeasy: Speakeasy09
 `Speakeasy09` · seen 25.05.01–26.07.01
+- trigger: area, area=Speakeasy, areaId=Speakeasy, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): You and Winston! You’re the ones in those letters by the swing! W+L!
 **LEONARD** (Annoyed): Those were PRIVATE! How dare-
@@ -23571,8 +23831,9 @@ Play further to fully unlock it
 **MADDIE** (Discouraged): Is that why you want to get rid of this place? To get rid of those hurtful memories?
 **LEONARD** (Annoyed): Enough!
 
-### Speakeasy10
+### Speakeasy: Speakeasy10
 `Speakeasy10` · seen 25.05.01–26.07.01
+- trigger: area, area=Speakeasy, areaId=Speakeasy, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **LEONARD** (Doubtful): Not quite the conversation I was expecting to have with my grandniece! I knew you would only cause problems.
 **LEONARD** (Annoyed): In fact, I’m quite inclined to end it right now. You bore me...
@@ -23651,8 +23912,9 @@ Play further to fully unlock it
 **MADDIE** (Thinking): I wonder... could this be a clue?
 **MADDIE** (Surprised): I-I think I should probably check the jukebox again. It's the only music related thing in the room.
 
-### Speakeasy15.2
+### Speakeasy: Speakeasy15.2
 `Speakeasy15.2` · seen 25.05.01–26.07.01
+- trigger: area, area=Speakeasy, areaId=Speakeasy, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): I think this jukebox was upgraded to act like a password input device...
 **MADDIE** (Thinking): But what could it be?
@@ -23665,8 +23927,9 @@ Play further to fully unlock it
 **MADDIE** (Encouraging): Hmm, I'm just going to add them in the same order I fixed them.
 **MADDIE** (Encouraging): So... 2, 4 and finally 8!
 
-### Speakeasy16
+### Speakeasy: Speakeasy16
 `Speakeasy16` · seen 25.05.01–26.07.01
+- trigger: area, area=Speakeasy, areaId=Speakeasy, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): What!! That's amazing! The fridge is finally open!
 **MADDIE** (Surprised): And it's the path to another room? Who would've thought!
@@ -23755,8 +24018,9 @@ Play further to fully unlock it
 **MADDIE** (Thinking): Huh. Seems like they were awarded to a Lenny, and they all took place at a local Hopewell Bay restaurant.
 **MADDIE** (Doubtful): I suppose these are Leonard's. But why would this have such sentimental value?
 
-### Speakeasy Wall
+### Speakeasy: Speakeasy_Wall
 `Speakeasy_Wall` · seen 25.05.01–26.07.01
+- trigger: area, area=Speakeasy, areaId=Speakeasy, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: Hmm... Under all this junk, the room itself seems to have a lot of nice trimmings.
 **MADDIE** (Thinking): I would almost say fancy.
@@ -23812,8 +24076,9 @@ Play further to fully unlock it
 **JACKIE** (Thinking): I hope so. I grabbed a bunch of files that looked important, but I'll have to go over it back at the office!
 **JACKIE** (Joyous): Thanks for all your help, Maddie! I'll keep you updated.
 
-### SpyRoom 02
+### Spy Room: SpyRoom_02
 `SpyRoom_02` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY** (Thinking): Huh... Not exactly what I was expecting.
 **MADDIE** (Doubtful): You and me both!
@@ -23825,8 +24090,9 @@ Play further to fully unlock it
 **MADDIE** (Doubtful): Okay, that tracks. But why the elaborate doorway? I don’t know...
 **MADDIE** (Encouraging): I think there’s more to this room!
 
-### SpyRoom 03
+### Spy Room: SpyRoom_03
 `SpyRoom_03` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Relaxed): How adorable!
 **RODDY** (Thinking): What? The random portraits with targets drawn on them?
@@ -23852,8 +24118,9 @@ Play further to fully unlock it
 **RODDY** (Thinking): Who do you think "they" refers to?
 **MADDIE** (Thinking): I don't know, but I hope I find out. It could help me get one step closer to seeing Grandpa Charlie again.
 
-### SpyRoom 05
+### Spy Room: SpyRoom_05
 `SpyRoom_05` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Thinking): Hmm... Looks like they were researching this plant.
 **RODDY** (Surprised): And extracting something!
@@ -23876,8 +24143,9 @@ Play further to fully unlock it
 **RODDY**: Wow, sounds like it can be pretty powerful!
 **MADDIE** (Doubtful): For sure. I wonder if it powers anything in here...
 
-### SpyRoom 07
+### Spy Room: SpyRoom_07
 `SpyRoom_07` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY** (Relaxed): You know... I think we’d make pretty excellent spies!
 **MADDIE** (Encouraging): Haha! And what would be your codename? Double oh negative?
@@ -23892,8 +24160,9 @@ Play further to fully unlock it
 **MADDIE** (Worried): Could you... Just give me a sec?
 **RODDY** (Annoyed): Sure... go right ahead.
 
-### SpyRoom 08
+### Spy Room: SpyRoom_08
 `SpyRoom_08` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Talking): Arthur! Hey, I’m sort of busy right now and-
 **ARTHUR** (Charming): Mads! I had SUCH A GREAT TIME at the beach!
@@ -23914,8 +24183,9 @@ Play further to fully unlock it
 **MADDIE** (Talking): Arthur?! Oh, sorry. I’m... Look, can I call you back? Now’s not a great time.
 **ARTHUR** (Charming): No problem! Talk to you soon!
 
-### SpyRoom 09
+### Spy Room: SpyRoom_09
 `SpyRoom_09` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): Oh look! It’s beautiful!
 **RODDY** (Relaxed): Yeah... it really is.
@@ -23941,8 +24211,9 @@ Play further to fully unlock it
 **MADDIE** (Thinking): Yeah, some of those locations correspond to the pictures I've seen of them in the walk-in closet.
 **MADDIE** (Doubtful): Now it makes sense why they were dressed in trench coats and hats...
 
-### SpyRoom 11
+### Spy Room: SpyRoom_11
 `SpyRoom_11` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Surprised): I... I can’t believe it.
 **RODDY** (Thinking): Yeah... This sort of settles it, doesn’t it?
@@ -23954,8 +24225,9 @@ Play further to fully unlock it
 **MADDIE** (Worried): Yeah?
 **RODDY** (Surprised): The pillar? It seems to be moving!
 
-### SpyRoom 12
+### Spy Room: SpyRoom_12
 `SpyRoom_12` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY** (Relaxed): Gotta admit, your grandparents had some style!
 **MADDIE** (Doubtful): This mansion sure loves its hidden doors...  
@@ -23966,8 +24238,9 @@ Play further to fully unlock it
 **MADDIE** (Encouraging): Shaken, not stirred?
 **RODDY** (Relaxed): Is there any other way?
 
-### SpyRoom 13
+### Spy Room: SpyRoom_13
 `SpyRoom_13` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Surprised): Wow! Look at all of this stuff!
 **MADDIE** (Surprised): You got gold bars, passports. Even license plates!
@@ -23991,8 +24264,9 @@ Play further to fully unlock it
 **RODDY** (Charming): Yeah, I think your grandparents were tracking a criminal network!
 **MADDIE** (Surprised): Wow, that means that they were studying them to create antidotes and protect potential victims!
 
-### SpyRoom 15
+### Spy Room: SpyRoom_15
 `SpyRoom_15` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY** (Thinking): Hmmm...
 **MADDIE** (Worried): What is it, Roddy?
@@ -24007,8 +24281,9 @@ Play further to fully unlock it
 **RODDY** (Charming): I’m sure it’ll be fine.
 **MADDIE** (Worried): Well... here goes nothing!
 
-### SpyRoom 16
+### Spy Room: SpyRoom_16
 `SpyRoom_16` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY** (Relaxed): Now, THAT is impressive!
 **MADDIE** (Surprised): Wow, these are absolutely stunning!
@@ -24020,8 +24295,9 @@ Play further to fully unlock it
 **RODDY** (Worried): Hmm... Probably smart not to touch anything, just in case.
 **MADDIE** (Worried): Yeah, good idea...
 
-### SpyRoom 17
+### Spy Room: SpyRoom_17
 `SpyRoom_17` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): Well, that’s it. Yet I can’t help but feel like I’m left with even more questions!
 **RODDY** (Thinking): You mean who your grandparents were working for and what their mission was?
@@ -24097,8 +24373,9 @@ Play further to fully unlock it
 **MADDIE** (Encouraging): That's the spirit. Now go and have a nice time!
 **WINSTON** (Joyous): I shall endeavor to do so. Good evening, Madam.
 
-### SpyRoom Intro
+### Spy Room: SpyRoom_Intro
 `SpyRoom_Intro` · seen 26.07.01–26.07.01
+- trigger: area, area=Spy Room, areaId=SpyRoom, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY** (Thinking): Maddie, remember the other time we discovered a secret room together?  
   _earlier:_ ~~I wonder what’s inside...~~ (until 26.02.01)
@@ -24820,16 +25097,18 @@ Play further to fully unlock it
 **MADDIE** (Thinking): But these look well-designed, almost immaculate, like they’re not costumes and more like...
 **MADDIE** (Surprised): Disguises!
 
-### Study01Intro
+### Study: Study01Intro
 `Study01Intro` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **JACKIE** (Surprised): Wow! This place is more trashed than the hallway!
 **JACKIE** (Thinking): Is this an office?
 **MADDIE** (Doubtful): It’s a study... But whose?
 **MADDIE** (Thinking): There must be something in here that could help Grandma!
 
-### Study02
+### Study: Study02
 `Study02` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **HOLDEN** (Joyous): A ha! The scene of the crime...
 **JACKIE** (Surprised): Hey, you’re not allowed to be in here!
@@ -24837,8 +25116,9 @@ Play further to fully unlock it
 **MADDIE** (Annoyed): Great... Now I got two reporters hounding me.
 **JACKIE** (Doubtful): Hey!
 
-### Study03
+### Study: Study03
 `Study03` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Hey, what’s this?!
 **JACKIE**: It looks like a ledger of some sort? But for what?
@@ -24851,8 +25131,9 @@ Play further to fully unlock it
 **MADDIE** (Surprised): I know... It’s almost as if she was a-
 **HOLDEN** (Joyous): Bootlegger!
 
-### Study04
+### Study: Study04
 `Study04` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **JACKIE** (Annoyed): Holden! I thought I told you to back off!
 **MADDIE** (Discouraged): This can’t be right...
@@ -24865,8 +25146,9 @@ Play further to fully unlock it
 **MADDIE** (Worried): If this news was to get out... Jackie, I know you’re a reporter, but-
 **JACKIE**: Maddie... Don’t worry. I’m not like that dimwit, Holden. Besides, we’re friends now.
 
-### Study05
+### Study: Study05
 `Study05` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE**: Thanks Jackie! It’s kinda cool to have a reporter as a friend.
 **JACKIE** (Encouraging): I’ll be honest though, all this would make for one heck of a story!
@@ -24878,8 +25160,9 @@ Play further to fully unlock it
 **JACKIE**: Ahem. Let’s keep looking around, shall we?
 **GRANDMA**: What have you got there, dearie?
 
-### Study06
+### Study: Study06
 `Study06` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Surprised): Grandma!
 **JACKIE** (Encouraging): Oh, it’s nothing, Ms. Boulton. We were just looking around an-
@@ -24890,8 +25173,9 @@ Play further to fully unlock it
 **GRANDMA** (Joyous): Oh, that old thing?! Ha! Haven’t seen that in ages! Never was much of a bookie, but it turned a tidy little profit.
 **MADDIE** (Surprised): You admit it?!
 
-### Study07
+### Study: Study07
 `Study07` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Worried): Grandma, why did you do it?
 **GRANDMA** (Frustrated): I did what I had to dearie. For the family. Just like what you’re doing now.
@@ -24903,8 +25187,9 @@ Play further to fully unlock it
 **MADDIE** (Surprised): ...
 **JACKIE** (Surprised): Your grandma can be scary sometimes...
 
-### Study08
+### Study: Study08
 `Study08` · seen 23.09.02–26.07.01
+- trigger: area, area=Study, areaId=Study, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **MADDIE** (Thinking): She... Wants me to burn it?
 **JACKIE** (Thinking): That’s what she said. I guess she doesn’t want people to know either.
@@ -25179,8 +25464,9 @@ Play further to fully unlock it
 
 **MADDIE**: Drag this Number on top of the Wood Chipper to start production.
 
-### Tomb01
+### The Tomb: Tomb01
 `Tomb01` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Hmm, I remember hearing about some sort of tomb on the mansion grounds...
 **MADDIE** (Thinking): I can only think of it being here at the Cemetery.
@@ -25189,8 +25475,9 @@ Play further to fully unlock it
 **MADDIE** (Worried): Something's happening! Oof, that's a lot of dust...
 **MADDIE** (Surprised): I- I think I see a staircase!
 
-### Tomb02
+### The Tomb: Tomb02
 `Tomb02` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Did I just discover the elusive family tomb?! Wow, this place looks like it's been here for ages!
 **MADDIE** (Surprised): How could I have missed it?!
@@ -25200,8 +25487,9 @@ Play further to fully unlock it
 **MADDIE**: Well, I'll have to change that and restore this place to its former glory!
 **MADDIE**: There must be quite a story behind this place...
 
-### Tomb03
+### The Tomb: Tomb03
 `Tomb03` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA**: I see you've found the family tomb, dearie...
 **MADDIE** (Surprised): Grandma! You gave me a fright!
@@ -25213,8 +25501,9 @@ Play further to fully unlock it
 **GRANDMA** (Encouraging): Would you like me to tell you about them? Each one has quite the history.
 **MADDIE** (Relaxed): I'd love that, Grandma!
 
-### Tomb04
+### The Tomb: Tomb04
 `Tomb04` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA**: This brave young man was Sergeant John Boulton!
 **GRANDMA**: He was the first of the Boultons to fight for the country at the age of eighteen.
@@ -25262,8 +25551,9 @@ Play further to fully unlock it
 **GRANDMA** (Relaxed): Yes, well. We've all had that one person who wasn't right for us.
 **MADDIE** (Discouraged): Tell me about it!
 
-### Tomb08
+### The Tomb: Tomb08
 `Tomb08` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Oh my... This is beautiful! 
 **GRANDMA** (Surprised): Incredible! I... I remember hearing about the "Family Tree" but I never realized it was an actual tree!
@@ -25293,8 +25583,9 @@ Play further to fully unlock it
 **GRANDMA** (Encouraging): To declare their love for each other, they had a vow renewal ceremony. I think we're looking at it.
 **MADDIE** (Charming): Beautiful. A love set in stone...
 
-### Tomb11
+### The Tomb: Tomb11
 `Tomb11` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Wait... This one is different!
 **GRANDMA** (Discouraged): I... Think I know what this represents...
@@ -25353,16 +25644,18 @@ Play further to fully unlock it
 **GRANDMA** (Surprised): Don't you know? They went on a maritime expedition one day, and were never seen again.
 **MADDIE** (Surprised): That's terrible...
 
-### Tomb16
+### The Tomb: Tomb16
 `Tomb16` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **GRANDMA** (Thinking): Dearie, I'm afraid I'll have to let you continue on your own.
 **GRANDMA** (Thinking): My book club starts soon...
 **MADDIE** (Doubtful): This is starting to sound a lot like the early days but I'll give you the benefit of doubt.
 **GRANDMA** (Joyous): Oh don't be silly, dearie! Toodles!
 
-### Tomb17
+### The Tomb: Tomb17
 `Tomb17` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Well, I've nearly finished renovating but...
 **MADDIE** (Thinking): I can't seem to figure out how to get to that island in the center!
@@ -25376,8 +25669,9 @@ Play further to fully unlock it
 **MADDIE** (Doubtful): Stepping stones!
 **MADDIE** (Doubtful): I can finally get to the island!
 
-### Tomb18
+### The Tomb: Tomb18
 `Tomb18` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): M-mom?
 **MADDIE** (Surprised): Dad?
@@ -25811,8 +26105,9 @@ Play further to fully unlock it
 **MADDIE**: This section looks like a VIP area.
 **MADDIE** (Thinking): I'm absolutely certain that there were a lot of shady deals made here...
 
-### WalkInCloset 02
+### Walk-in Closet: WalkInCloset_02
 `WalkInCloset_02` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **JACKIE** (Doubtful): Maddie! You never did respond to my text!
 **MADDIE** (Surprised): Huh? Oh, hey Jackie! What are you doing here?
@@ -25824,8 +26119,9 @@ Play further to fully unlock it
 **JACKIE** (Thinking): Are you going to go on another one?
 **MADDIE** (Worried): Arthur did ask, but I'm not quite sure. All of it just feels... Wrong.
 
-### WalkInCloset 03
+### Walk-in Closet: WalkInCloset_03
 `WalkInCloset_03` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Encouraging): Well, these clothes are definitely owned by Grandma.
 **JACKIE** (Joyous): Your grandmother does have a particular vintage style!
@@ -25851,8 +26147,9 @@ Play further to fully unlock it
 **MADDIE** (Surprised): There! It clicked. The wing made a sound when I turned it. This is a mechanism, Jackie!
 **JACKIE**: ...Okay, a mysterious click wins. For now. But we are still debriefing Arthur later.
 
-### WalkInCloset 05
+### Walk-in Closet: WalkInCloset_05
 `WalkInCloset_05` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Surprised): Incredible! There's a hidden mechanism in the pouf!
 **—**: Looking at how it works, I can definitely recognize who built this...
@@ -25875,8 +26172,9 @@ Play further to fully unlock it
 **MADDIE** (Thinking): This reminds me of the Hideout where I found Grandpa Charlie's similar setup.
 **MADDIE** (Thinking): Why would Grandma have something like this in her walk-in closet?
 
-### WalkInCloset 08
+### Walk-in Closet: WalkInCloset_08
 `WalkInCloset_08` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Joyous): Oh, look! Lindsay's perfume! It makes sense that Grandma would support a family-owned business!
 **MADDIE** (Relaxed): Grandma has a really fascinating set of perfumes. Like this one with lily and bergamot!
@@ -25886,8 +26184,9 @@ Play further to fully unlock it
 **MADDIE** (Thinking): "Where petals fade, and reflections stay, seek the bloom that shows the way."
 **MADDIE** (Thinking): Hmm petals and reflections? What could that mean? I'm sure this will come in handy sooner rather than later.
 
-### WalkInCloset 09
+### Walk-in Closet: WalkInCloset_09
 `WalkInCloset_09` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: Grandpa Charlie's old wardrobe... Let's see what I can find in here.
 **JACKIE** (Surprised): Tailored suits, cashmere peacoats, even his handkerchiefs were monogrammed. Wow, Maddie, he was into this!
@@ -25919,8 +26218,9 @@ Play further to fully unlock it
 **MADDIE** (Encouraging): And here's yet another pocket watch. 
 **MADDIE** (Joyous): If that's even what this is. It's probably a death ray or something.
 
-### WalkInCloset 12
+### Walk-in Closet: WalkInCloset_12
 `WalkInCloset_12` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE**: Okay! Time to take a break. That window seat looks particularly inviting!
 **MADDIE** (Discouraged): Oof. Sometimes I feel like all I do is renovate this mansion without a break in sight...
@@ -25945,8 +26245,9 @@ Play further to fully unlock it
 **MADDIE** (Frustrated): There must be a reason, they never do anything without a purpose.
 **MADDIE** (Doubtful): And things in this house have a history of being more than they seem.
 
-### WalkInCloset 14
+### Walk-in Closet: WalkInCloset_14
 `WalkInCloset_14` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **RODDY** (Doubtful): That looks like a hidden drawer, below the mirror, Maddie. There's probably a key or hatch somewhere around it.
 **MADDIE** (Surprised): Roddy! I didn't hear you come in.
@@ -25990,8 +26291,9 @@ Play further to fully unlock it
 **RODDY** (Thinking): Your grandparents really didn't want anyone finding this.
 **MADDIE** (Charming): Which is exactly why I have to see what's inside.
 
-### WalkInCloset 17
+### Walk-in Closet: WalkInCloset_17
 `WalkInCloset_17` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Surprised): So... how do we open this glass door, another mechanism?
 **RODDY** (Thinking): I'm looking for something, anything! But I can't see any other keys or hatches to open it.
@@ -26064,8 +26366,9 @@ Play further to fully unlock it
 **MADDIE**: So you're sure?
 **JACKIE**: I'm certain. My sister was framed. And now we have to prove it.
 
-### WalkInCloset Intro
+### Walk-in Closet: WalkInCloset_Intro
 `WalkInCloset_Intro` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Thinking): Hmm... A walk-in closet!
 **MADDIE** (Doubtful): I’ve got to say, this is not what I pictured for Grandma!
@@ -26087,8 +26390,9 @@ Play further to fully unlock it
 **MADDIE** (Encouraging): I bet this was Grandpa Charlie's!
 **MADDIE** (Relaxed): I wonder if he was as inspired by Da Vinci as I was in university?
 
-### WalkInCloset POI HiddenBook
+### Walk-in Closet: WalkInCloset_POI_HiddenBook
 `WalkInCloset_POI_HiddenBook` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
 
 **MADDIE** (Surprised): Huh, there's a book hidden in this drawer...
 **MADDIE** (Frustrated): That's it? I was hoping to find something a bit more helpful.

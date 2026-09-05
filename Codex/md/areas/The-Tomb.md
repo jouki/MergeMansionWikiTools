@@ -1,6 +1,58 @@
 # The Tomb
 
 
+### The Tomb: Tomb01
+`Tomb01` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Thinking): Hmm, I remember hearing about some sort of tomb on the mansion grounds...
+**MADDIE** (Thinking): I can only think of it being here at the Cemetery.
+**MADDIE** (Frustrated): Perhaps this mausoleum is hiding something. I never could figure out how to enter without a key back in the day.
+**MADDIE** (Surprised): Wait! This gate feels a little loose... maybe if I just push it in...
+**MADDIE** (Worried): Something's happening! Oof, that's a lot of dust...
+**MADDIE** (Surprised): I- I think I see a staircase!
+
+### The Tomb: Tomb02
+`Tomb02` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Surprised): Did I just discover the elusive family tomb?! Wow, this place looks like it's been here for ages!
+**MADDIE** (Surprised): How could I have missed it?!
+**MADDIE** (Thinking): It seems like it's been overtaken by the elements though...
+**MADDIE** (Thinking): There's so much foliage and even some water damage.
+**MADDIE** (Discouraged): I suppose there aren't a lot of visitors paying their respects.
+**MADDIE**: Well, I'll have to change that and restore this place to its former glory!
+**MADDIE**: There must be quite a story behind this place...
+
+### The Tomb: Tomb03
+`Tomb03` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**GRANDMA**: I see you've found the family tomb, dearie...
+**MADDIE** (Surprised): Grandma! You gave me a fright!
+**MADDIE** (Doubtful): You know this place?
+**GRANDMA** (Charming): Of course, dearie. I know everything there is to know about the mansion.
+**MADDIE** (Thinking): Are there people buried here? Like the Cemetery?
+**GRANDMA**: Not at all, dearie. This place is more like a memorial.
+**GRANDMA**: You'll find statues of all your ancestors here...
+**GRANDMA** (Encouraging): Would you like me to tell you about them? Each one has quite the history.
+**MADDIE** (Relaxed): I'd love that, Grandma!
+
+### The Tomb: Tomb04
+`Tomb04` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**GRANDMA**: This brave young man was Sergeant John Boulton!
+**GRANDMA**: He was the first of the Boultons to fight for the country at the age of eighteen.
+**MADDIE** (Surprised): Oh wow, Ignatius had a brother?
+**GRANDMA** (Encouraging): Yes, a brother he adored, but, John's first love was airplanes.
+**GRANDMA** (Encouraging): He joined the air force right out of university, and quickly climbed the ranks!
+**GRANDMA** (Worried): Unfortunately, on one of his missions, John’s plane was shot down.
+**GRANDMA** (Worried): He was laid to rest at the age of 26.
+**GRANDMA** (Worried): Ignatius was heartbroken and created a memorial for him...
+**GRANDMA**: Which now serves as a place to remember other past family members as well.
+**MADDIE** (Surprised): Wow, a true war hero!
+
 ### The Tomb: Repair cracks
 `Tomb05` · seen 25.01.03–26.07.01
 - trigger: area, area=The Tomb, areaId=Tomb, hotspotId=TombRemoveDirtCracksAmeliaD5A1, phase=task appears, task=Repair cracks (versions 25.01.03–26.07.01)
@@ -36,6 +88,17 @@
 **GRANDMA** (Relaxed): Yes, well. We've all had that one person who wasn't right for us.
 **MADDIE** (Discouraged): Tell me about it!
 
+### The Tomb: Tomb08
+`Tomb08` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Surprised): Oh my... This is beautiful! 
+**GRANDMA** (Surprised): Incredible! I... I remember hearing about the "Family Tree" but I never realized it was an actual tree!
+**MADDIE** (Encouraging): These must be Ignatius and Agatha! They look so happy.
+**GRANDMA** (Encouraging): Yes, they were really in love. She was brilliant, a natural born inventor and managed to steal his heart.
+**GRANDMA** (Relaxed): If it wasn't for a small accident, Ignatius would have never asked to stay the night in her family's barn.
+**GRANDMA** (Relaxed): Nor would he have ever met her. Funny how little things can have such a big impact.
+
 ### The Tomb: Clear moss from stained glass
 `Tomb09` · seen 25.01.03–26.07.01
 - trigger: area, area=The Tomb, areaId=Tomb, hotspotId=TombRemoveMossStairsCenterG3, phase=task completed, task=Clear moss from stained glass (versions 25.01.03–26.07.01)
@@ -56,6 +119,20 @@
 **MADDIE** (Surprised): What?!
 **GRANDMA** (Encouraging): To declare their love for each other, they had a vow renewal ceremony. I think we're looking at it.
 **MADDIE** (Charming): Beautiful. A love set in stone...
+
+### The Tomb: Tomb11
+`Tomb11` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Surprised): Wait... This one is different!
+**GRANDMA** (Discouraged): I... Think I know what this represents...
+**GRANDMA** (Discouraged): Charlie.
+**MADDIE** (Surprised): What?! How can that be?
+**GRANDMA** (Doubtful): He must have known about this place and hoped we would find it so he left us a message.
+**GRANDMA** (Doubtful): It's an hourglass, meaning he's still alive. But I think he's also saying that time is running out. 
+**MADDIE** (Doubtful): I guess the snakes mean we're in danger? 
+**GRANDMA** (Frustrated): Perhaps... It could also mean eternal life. But that doesn't make sense.
+**MADDIE** (Worried): Grandpa... What are you trying to say?
 
 ### The Tomb: Install basin
 `Tomb12` · seen 25.01.03–26.07.01
@@ -103,6 +180,48 @@
 **MADDIE** (Thinking): Why do you say that?
 **GRANDMA** (Surprised): Don't you know? They went on a maritime expedition one day, and were never seen again.
 **MADDIE** (Surprised): That's terrible...
+
+### The Tomb: Tomb16
+`Tomb16` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**GRANDMA** (Thinking): Dearie, I'm afraid I'll have to let you continue on your own.
+**GRANDMA** (Thinking): My book club starts soon...
+**MADDIE** (Doubtful): This is starting to sound a lot like the early days but I'll give you the benefit of doubt.
+**GRANDMA** (Joyous): Oh don't be silly, dearie! Toodles!
+
+### The Tomb: Tomb17
+`Tomb17` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Thinking): Well, I've nearly finished renovating but...
+**MADDIE** (Thinking): I can't seem to figure out how to get to that island in the center!
+**MADDIE** (Frustrated): There's no path anywhere. And what exactly is under those vines?
+**MADDIE** (Doubtful): Ugh, and what about that frog tile? It stands out and looks like it's slightly elevated.
+**MADDIE** (Doubtful): Hey, wait a minute! If there's one thing I learnt from the Landing, it's that tiles can reveal paths.
+**MADDIE** (Doubtful): Let's see if it works here too...
+**MADDIE** (Doubtful): 3,2,1 and jump!
+**MADDIE** (Doubtful): *Click*
+**MADDIE** (Doubtful): Hooray! Just as I expected! And what's that in the water?
+**MADDIE** (Doubtful): Stepping stones!
+**MADDIE** (Doubtful): I can finally get to the island!
+
+### The Tomb: Tomb18
+`Tomb18` · seen 25.05.01–26.07.01
+- trigger: area, area=The Tomb, areaId=Tomb, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Surprised): M-mom?
+**MADDIE** (Surprised): Dad?
+**MADDIE** (Discouraged): It's really them.
+**MADDIE** (Discouraged): I- I need a moment...
+**MADDIE** (Discouraged): It feels so strange to see them like this. Almost life-like.
+**MADDIE**: Dad's sparkly eyes, Mom's warm smile - just like in the photos I have of them.
+**MADDIE**: These statues capture their essence so perfectly...
+**MADDIE** (Worried): It's almost as if they could step down from their pedestals and wrap me in their arms.
+**MADDIE** (Thinking): Wait a minute, these flowers. They couldn't have been left by Grandma, she said she hasn't been here in a while.
+**MADDIE** (Thinking): Lilies. Grandma once said Charlie used to call her Lily. Could there be a message for her?
+**MADDIE** (Surprised): Could he have been here?!
+**MADDIE** (Frustrated): That inscription on Charlie's memorial... I have a nagging feeling that I should take another look.
 
 ### The Tomb: Clean dirty rails
 `Tomb19` · seen 25.01.03–26.07.01

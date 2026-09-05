@@ -1,8 +1,9 @@
 # Leonard
 Every story in which Leonard speaks.
 
-### Library02
+### Library: Library02
 `Library02` · seen 25.05.01–26.07.01
+- trigger: area, area=Library, areaId=Library, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: *Ring Ring*
 **MADDIE** (Doubtful): Huh... It’s Leonard. What does HE want?!
@@ -16,8 +17,9 @@ Every story in which Leonard speaks.
 **LEONARD** (Encouraging): Oh, don’t worry. Bruno is on his way now to have you sign it away. You’ve only delayed the inevitable! *Click!*
 **MADDIE** (Surprised): How did I become the sole owner of the estate?!
 
-### Perfumery02
+### The Perfumery: Perfumery02
 `Perfumery02` · seen 25.06.01–26.07.01
+- trigger: area, area=The Perfumery, areaId=Perfumery, phase=area story (exact task not dumped) (versions 25.06.01–26.07.01)
 
 **LEONARD**: Ah... I see you’ve found Lindsay's Perfumery.  
   _earlier:_ ~~Ah... I see you’ve found the Perfumery.~~ (until 25.06.01)
@@ -28,8 +30,9 @@ Every story in which Leonard speaks.
 **LEONARD**: Hmph...
 **MADDIE** (Doubtful): Why are you still around? It’s obvious you don’t enjoy being here!
 
-### Perfumery03
+### The Perfumery: Perfumery03
 `Perfumery03` · seen 25.06.01–26.07.01
+- trigger: area, area=The Perfumery, areaId=Perfumery, phase=area story (exact task not dumped) (versions 25.06.01–26.07.01)
 
 **LEONARD** (Thinking): Well, girl. I won’t be around for much longer, thanks to you.
 **LEONARD** (Annoyed): I’m collecting my things, because YOU have thrown me out of my home.
@@ -40,8 +43,9 @@ Every story in which Leonard speaks.
 **MADDIE** (Annoyed): Selling your ancestral home is never a good plan, Leonard. It’s wrong.
 **LEONARD** (Thinking): Don’t be too quick to judge, Maddie.
 
-### Perfumery04
+### The Perfumery: Perfumery04
 `Perfumery04` · seen 25.06.01–26.07.01
+- trigger: area, area=The Perfumery, areaId=Perfumery, phase=area story (exact task not dumped) (versions 25.06.01–26.07.01)
 
 **MADDIE** (Doubtful): You were selling out your family, Leonard! You didn’t want to save this place!
 **MADDIE** (Annoyed): You wanted to sell it to make a quick buck!
@@ -55,8 +59,9 @@ Every story in which Leonard speaks.
 **LEONARD** (Encouraging): You are not as smart as you think you are...
 **LEONARD** (Thinking): Sometimes it’s best to not know everything.
 
-### Perfumery05
+### The Perfumery: Perfumery05
 `Perfumery05` · seen 25.06.01–26.07.01
+- trigger: area, area=The Perfumery, areaId=Perfumery, phase=area story (exact task not dumped) (versions 25.06.01–26.07.01)
 
 **MADDIE** (Annoyed): Oh? I guess you didn’t heed your own advice when you told Deb she was adopted!
 **LEONARD**: ...
@@ -72,8 +77,9 @@ Every story in which Leonard speaks.
   _earlier:_ ~~Oh, I’m sorry Dearie... I need to go for my manicure.~~ (until 25.06.01)
 **MADDIE** (Frustrated): Leonard!
 
-### Speakeasy05
+### Speakeasy: Speakeasy05
 `Speakeasy05` · seen 25.05.01–26.07.01
+- trigger: area, area=Speakeasy, areaId=Speakeasy, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): Wow!
 **MADDIE** (Surprised): Putting that first fuse in place, activated the-
@@ -83,8 +89,9 @@ Every story in which Leonard speaks.
 **LEONARD** (Encouraging): Finally... I’ve been asking Winnie to fix that thing for ages. Good job.
 **MADDIE** (Surprised): You! You're from the painting in the Lounge! You're Leonard!
 
-### Speakeasy06
+### Speakeasy: Speakeasy06
 `Speakeasy06` · seen 25.05.01–26.07.01
+- trigger: area, area=Speakeasy, areaId=Speakeasy, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **LEONARD** (Thinking): Right you are. You must be Maddie. I've heard that you're the one to save us all... Ha!
 **MADDIE** (Surprised): Leonard. What are you doing here?
@@ -93,8 +100,9 @@ Every story in which Leonard speaks.
 **LEONARD** (Doubtful): I belong here more than you do, little girl.
 **MADDIE** (Annoyed): Oh really? Then I should thank you for keeping it in such good shape!
 
-### Speakeasy07
+### Speakeasy: Speakeasy07
 `Speakeasy07` · seen 25.05.01–26.07.01
+- trigger: area, area=Speakeasy, areaId=Speakeasy, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **LEONARD** (Encouraging): Aaah. The refreshing taste of Hopeberries. I knew Winnie would stash a box in here.
 **LEONARD** (Thinking): Good thing I found it before they tear this wretched place down...
@@ -108,8 +116,9 @@ Every story in which Leonard speaks.
 **LEONARD** (Annoyed): Better get used to it, little girl. Your grandmother is the very reason we’re in this mess.
 **LEONARD** (Doubtful): But don’t worry... I’ve finally come up with a plan that’ll save this ungrateful family.
 
-### Speakeasy08
+### Speakeasy: Speakeasy08
 `Speakeasy08` · seen 25.05.01–26.07.01
+- trigger: area, area=Speakeasy, areaId=Speakeasy, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Annoyed): A plan? From what I’ve seen and heard, each and every harebrained plan of yours has failed!
 **MADDIE** (Doubtful): I guess this little “establishment” of yours was also one of your “great ideas.”
@@ -124,8 +133,9 @@ Every story in which Leonard speaks.
 **MADDIE** (Surprised): Wait a minute! You’re Lionheart?
 **LEONARD** (Surprised): Whe- Where’d you hear that name?!
 
-### Speakeasy09
+### Speakeasy: Speakeasy09
 `Speakeasy09` · seen 25.05.01–26.07.01
+- trigger: area, area=Speakeasy, areaId=Speakeasy, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Surprised): You and Winston! You’re the ones in those letters by the swing! W+L!
 **LEONARD** (Annoyed): Those were PRIVATE! How dare-
@@ -136,8 +146,9 @@ Every story in which Leonard speaks.
 **MADDIE** (Discouraged): Is that why you want to get rid of this place? To get rid of those hurtful memories?
 **LEONARD** (Annoyed): Enough!
 
-### Speakeasy10
+### Speakeasy: Speakeasy10
 `Speakeasy10` · seen 25.05.01–26.07.01
+- trigger: area, area=Speakeasy, areaId=Speakeasy, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **LEONARD** (Doubtful): Not quite the conversation I was expecting to have with my grandniece! I knew you would only cause problems.
 **LEONARD** (Annoyed): In fact, I’m quite inclined to end it right now. You bore me...

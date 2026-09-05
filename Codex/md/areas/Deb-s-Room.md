@@ -11,6 +11,141 @@
 **MADDIE** (Doubtful): Wait...
 **MADDIE** (Surprised): Is that someone sitting on the floor?! It's too dark to tell...
 
+### Deb's Room: DebsRoom01
+`DebsRoom01` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+
+### Deb's Room: DebsRoom02
+`DebsRoom02` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**DEB** (Doubtful): Well... My therapist INSISTED I do an exercise where I “face my past”.
+**DEB**: So what better place than my old room, right?
+**MADDIE** (Surprised): THIS was your old room?!
+**DEB** (Frustrated): Obviously, it didn’t look like this when I was still living here!
+**DEB** (Discouraged): But I guess that’s the problem as well. I’ve been avoiding this place.
+**DEB** (Worried): My therapist says it has something to do with my abandonment issues.
+**DEB** (Worried): And HOW I was adopted.
+
+### Deb's Room: DebsRoom03
+`DebsRoom03` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Worried): I guess, I sort of understand how you feel...
+**DEB** (Worried): I suppose you do, sweetie. A bit tragic, don’t you think?
+**DEB** (Worried): Us Boulton women, constantly being abandoned, one way or another?
+**MADDIE** (Encouraging): Oh, don’t be like that! Maybe if I help you sort this place out, it’ll give you a chance to reflect on things?
+**DEB** (Thinking): I guess I would need a hand cleaning up this mess...
+**MADDIE** (Relaxed): Trust me! I did it in my room, and it was quite cathartic.
+**MADDIE** (Relaxed): Come on, let’s get to it!
+
+### Deb's Room: DebsRoom04
+`DebsRoom04` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**DEB** (Worried): *sigh* All this is really bringing back the memories. I won’t lie.
+**DEB** (Annoyed): But I’m surprised at how angry most of it is making me feel...
+**MADDIE** (Thinking): Why is that?
+**DEB** (Discouraged): Well... You know I was adopted, but did you know I was actually left here?
+**DEB** (Annoyed): ...On the porch. Discarded like some unwanted pet on the sidewalk!
+**MADDIE** (Worried): Deb...
+**DEB** (Worried): No, it’s alright sweetie. I’m not angry at you.
+**DEB** (Frustrated): I’m just angry that for so long, no one ever told me why.
+
+### Deb's Room: DebsRoom05
+`DebsRoom05` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Thinking): Do you think our family knew why?
+**DEB** (Frustrated): ...
+**MADDIE** (Worried): Okay, point taken.
+**DEB** (Discouraged): *sigh* Mom and Dad were great, though. They loved me like their own.
+**DEB** (Discouraged): In fact, I didn’t know I was adopted until my 9th birthday. It was a fluke, really.
+**MADDIE** (Thinking): How’d you find out?!
+**DEB** (Thinking): Leonard told me.
+**MADDIE** (Surprised): WHAT?!
+**DEB** (Doubtful): Yeah, he found the adoption papers one day in Dad’s office.
+**DEB** (Doubtful): Thought it would be funny to tell me on my birthday.
+**MADDIE** (Worried): How... How awful!
+**DEB** (Thinking): No... It was perhaps the best present I ever got.
+
+### Deb's Room: DebsRoom06
+`DebsRoom06` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE** (Worried): Weren’t you upset?
+**DEB** (Annoyed): Yes, of course. But at my parents for never telling me.
+**DEB** (Annoyed): And even more so for doing their best to dissuade me from finding out more.
+**DEB** (Doubtful): I’m sure you can understand the need to learn about your family history, Maddie.
+**MADDIE** (Doubtful): Yes... I do.
+**DEB** (Frustrated): Your grandmother said it’s one reason for my “rebellious nature”.
+**DEB** (Frustrated): But maybe it’s just a Boulton trait...
+
+### Deb's Room: DebsRoom07
+`DebsRoom07` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**DEB** (Doubtful): I got teased for it in school, you know.  
+  _(1 cosmetic edit not shown)_
+**DEB** (Discouraged): They’d call me “Donor Deb” among other more colorful names.
+**MADDIE** (Annoyed): That’s so cruel...
+**DEB** (Thinking): Kids will be kids... But thankfully Leonard was around to have my back.
+**MADDIE** (Surprised): Leonard?!
+**DEB** (Frustrated): Yes, of course. He’s my big brother, after all. He made sure to remind people of that.
+**MADDIE** (Thinking): I... I didn’t think he would care.
+**DEB** (Thinking): You should probably give him a break, you know. He might be bad with money...
+**DEB** (Thinking): But his heart is still in the right place.
+
+### Deb's Room: DebsRoom08
+`DebsRoom08` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**DEB** (Thinking): As I grew older, I knew there was more behind me being adopted than I was told.
+**DEB** (Thinking): Leonard helped me gather a few clues that led to Europe. So I began sending out letters.
+**MADDIE** (Charming): How many did you send out?
+**DEB**: Oh, I lost count. Sometimes even a dozen a day!
+**DEB** (Encouraging): But one day... I got an odd reply from a small city state between France and Italy called Monte Brava.
+**DEB** (Joyous): I promised myself, when I was old enough, that I’d head there to discover the truth!
+**MADDIE** (Surprised): Did you?!
+**DEB** (Charming): Yes... I did.
+
+### Deb's Room: DebsRoom09
+`DebsRoom09` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**DEB**: I went to Europe, but what I found there...
+**DEB** (Discouraged): Was not what I was expecting.
+**MADDIE** (Surprised): What did you find?!
+**DEB** (Doubtful): Disappointment.
+**DEB** (Doubtful): Tell me, Maddie. You spend most of your time fixing up this old place, digging up the past.
+**DEB** (Annoyed): Are you sure you WANT to find what you’re looking for?
+**MADDIE** (Worried): I...
+
+### Deb's Room: DebsRoom10
+`DebsRoom10` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**MADDIE**: I’m sure Deb. I want to know the whole truth.
+**DEB** (Doubtful): Oh, I know that, sweetie. Everyone does. But are you willing to accept the cost?
+**DEB** (Annoyed): The cost of risking everything. Possibly destroying everything...
+**DEB** (Worried): I mean, look how I turned out when I finally discovered the truth.
+**MADDIE** (Relaxed): A strong, no nonsense woman, who knows exactly what she wants and takes care of those she loves?
+**DEB** (Surprised): I...
+**DEB** (Relaxed): Yes... I suppose you’re right.
+
+### Deb's Room: DebsRoom11_Outro
+`DebsRoom11_Outro` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
+
+**DEB** (Relaxed): Thank you, Maddie. I guess going through these things and sorting through my past helped.
+**DEB** (Charming): Even if only a little.
+**MADDIE** (Relaxed): There you go! But, really. What did you discover during your time over there?
+**DEB** (Thinking): ...
+**DEB**: You should look into the room across the hall. You might find it interesting.
+**MADDIE** (Surprised): Wow! You sound just as cryptic as Grandma!
+**DEB** (Charming): Well... We ARE sisters, after all.
+
 ### Deb's Room: Ah, did I leave this piece unfinished?
 `DebsRoomCharacterTask1` · seen 25.05.01–26.07.01
 - trigger: area, area=Deb's Room, areaId=DebRoom, hotspotId=DebRoomCharacterTask1, phase=task completed, task=Ah, did I leave this piece unfinished? (versions 25.05.01–26.07.01)

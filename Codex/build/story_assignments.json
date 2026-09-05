@@ -1,0 +1,4 @@
+{
+  "_comment": "Hand-made placement of stories nothing we dump triggers. Key = exact story id, or a prefix ending with '*'. Value = {\"area\": \"<area name as in the codex>\"} or {\"event\": \"<event display name>\"}, optional \"note\". Applied by build_codex after the automatic rule (story id prefix == area id). Review candidates in md/misc/unassigned.md or the viewer's 'Unassigned' group. Nothing is guessed here — entries are added only when the placement is known.",
+  "_example": {"MapFirstView*": {"area": "The Grand Drive", "note": "opening scene at the gate"}}
+}

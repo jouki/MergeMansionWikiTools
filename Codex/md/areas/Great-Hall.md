@@ -79,6 +79,12 @@
 **GRANDMA** (Joyous): I put up lots of decorations! Christmas, Halloween, Thanksgiving, you name it. Really tacky ones too.
 **MADDIE** (Relaxed): I'm glad he liked it in the end. Hopefully he'd like what I'm doing with it now!
 
+### Great Hall: Greathall07_Key
+`Greathall07_Key` · seen 23.09.02–26.07.01
+- trigger: area, area=Great Hall, areaId=Greathall, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**MADDIE**: What's this? A key! I guess it's for one these doors.
+
 ### Great Hall: Dust and remove old desk
 `Greathall08_Missing_Letter` · seen 23.09.02–26.07.01
 - trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemoveOldDeskA5, phase=task appears, task=Dust and remove old desk (versions 24.04.01–26.07.01)

@@ -395,94 +395,107 @@ Present in an older version, absent from the current one.
 **RODDY** (Relaxed): You do have a lot of shopping bags! Are they full of holiday surprises?
 **BELLA** (Relaxed): They might just be!
 
-### CBE TheGreatEscapeA CleanerCart1 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeA_CleanerCart1_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeA, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Hmm... I’ll use this to get around and “clean up”.
 **GRANDMA**: You never know what useful things people throw away.
 **GRANDMA** (Charming): One person’s trash is another person’s treasure!
 
-### CBE TheGreatEscapeA GrandmasCell Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeA_GrandmasCell_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeA, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA** (Charming): Finally! The last bar is off. Time to go!
 **GRANDMA**: Good thing I found these Bolt Cutters! 
 **GRANDMA**: But I should hide them in case I end up in here again.
 
-### CBE TheGreatEscapeA Intro Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeA_Intro_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeA, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA** (Calling): Well, that was easy enough!
 **GRANDMA** (Calling): I still need to earn my fellow inmate’s trust and I heard this place has been having trouble with their mail...
 **GRANDMA** (Charming): I know! I'll charm them with my baking skills and make sure their letters get sent properly.
 
-### CBE TheGreatEscapeA PaperAndPen3 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeA_PaperAndPen3_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeA, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Hmm... Looks like some of the girls have been writing letters.
 **GRANDMA**: I shouldn’t open them now.
 **GRANDMA**: However...
 **GRANDMA** (Charming): I can give Maddie a call and ask her to do it!
 
-### CBE TheGreatEscapeA PostBox Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeA_PostBox_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeA, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **MADDIE** (Calling): You want me to go through the mail?!
 **GRANDMA** (Calling): Yes, dearie.
 **MADDIE** (Calling): I don’t know how comfortable I feel about this...
 **GRANDMA** (Calling): The mailman owes me a few favors, so you won’t get in any trouble.
 
-### CBE TheGreatEscapeA Socks05 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeA_Socks05_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeA, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Ah, perfect!
 **GRANDMA**: These jail outfits should contain the ID badges I need to get into the other rooms.
 **GRANDMA** (Charming): But I’ll need to get rid of the evidence!
 
-### CBE TheGreatEscapeA StampThirdClass1 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeA_StampThirdClass1_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeA, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA** (Charming): Let’s make sure these letters make their way to their destination.
 **GRANDMA**: Oh... These remind me of Maddie’s stamp collection!
 **GRANDMA**: She was really into them, too. I should probably save a few for her...
 
-### CBE TheGreatEscapeA Tools1 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeA_Tools1_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeA, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Hmm... I’m quite surprised to find these tools!
 **GRANDMA**: Then again, it was so messy, you could hide an elephant in here...
 **GRANDMA** (Charming): Well, I’m sure they won’t mind if I borrow them for a while.
 
-### CBE TheGreatEscapeA Tools5 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeA_Tools5_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeA, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Finally, some proper tools!
 **GRANDMA**: These Bolt Cutters should do the trick.
 **GRANDMA** (Charming): Nothing like a little upper body workout in jail...
 
-### CBE TheGreatEscapeA WardenSafe3 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeA_WardenSafe3_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeA, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA** (Charming): Excellent!
 **GRANDMA**: This should help me get some leverage in here.
 **GRANDMA**: Hmm... Perhaps I should send some of this to Maddie?
 
-### CBE TheGreatEscapeB CleanerCart1 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeB_CleanerCart1_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeB, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Hmm... I’ll use this to get around and “clean up”.
 **GRANDMA**: You never know what useful things people throw away.
 **GRANDMA** (Charming): One person’s trash is another person’s treasure!
 
-### CBE TheGreatEscapeB GrandmasCell Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeB_GrandmasCell_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeB, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA** (Charming): Finally! The last bar is off. Time to go!
 **GRANDMA**: Good thing I found these Bolt Cutters! 
 **GRANDMA**: But I should hide them in case I end up in here again.
 
-### CBE TheGreatEscapeB Intro Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeB_Intro_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeB, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **MADDIE** (Calling): Grandma?! Are you okay?
 **MADDIE** (Calling): When they took you away, I was so worried!
@@ -491,52 +504,59 @@ Present in an older version, absent from the current one.
 **GRANDMA** (Calling): I’m in a bit of a bind right now...
 **GRANDMA** (Calling): Would you be a dear and help me out?
 
-### CBE TheGreatEscapeB PaperAndPen3 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeB_PaperAndPen3_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeB, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Hmm... Looks like some of the girls have been writing letters.
 **GRANDMA**: I shouldn’t open them now.
 **GRANDMA**: However...
 **GRANDMA** (Charming): I can give Maddie a call and ask her to do it!
 
-### CBE TheGreatEscapeB PostBox Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeB_PostBox_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeB, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **MADDIE** (Calling): You want me to go through the mail?!
 **GRANDMA** (Calling): Yes, dearie.
 **MADDIE** (Calling): I don’t know how comfortable I feel about this...
 **GRANDMA** (Calling): The mailman owes me a few favors, so you won’t get in any trouble.
 
-### CBE TheGreatEscapeB Socks05 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeB_Socks05_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeB, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Ah, perfect!
 **GRANDMA**: These jail outfits should contain the ID badges I need to get into the other rooms.
 **GRANDMA** (Charming): But I’ll need to get rid of the evidence!
 
-### CBE TheGreatEscapeB StampThirdClass1 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeB_StampThirdClass1_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeB, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA** (Charming): Let’s make sure these letters make their way to their destination.
 **GRANDMA**: Oh... These remind me of Maddie’s stamp collection!
 **GRANDMA**: She was really into them, too. I should probably save a few for her...
 
-### CBE TheGreatEscapeB Tools1 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeB_Tools1_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeB, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Hmm... I’m quite surprised to find these tools!
 **GRANDMA**: Then again, it was so messy, you could hide an elephant in here...
 **GRANDMA** (Charming): Well, I’m sure they won’t mind if I borrow them for a while.
 
-### CBE TheGreatEscapeB Tools5 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeB_Tools5_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeB, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA**: Finally, some proper tools!
 **GRANDMA**: These Bolt Cutters should do the trick.
 **GRANDMA** (Charming): Nothing like a little upper body workout in jail...
 
-### CBE TheGreatEscapeB WardenSafe3 Dialogue
+### The Great Escape — part of the event (exact trigger not dumped)
 `CBE_TheGreatEscapeB_WardenSafe3_Dialogue` · seen 25.05.01–25.06.01
+- trigger: event, eventType=event story, event=The Great Escape, eventId=CBE_TheGreatEscapeB, moment=part of the event (exact trigger not dumped) (versions 25.05.01–25.06.01)
 
 **GRANDMA** (Charming): Excellent!
 **GRANDMA**: This should help me get some leverage in here.
@@ -2018,8 +2038,9 @@ Present in an older version, absent from the current one.
 **GRANDMA**: There's ornaments, tinsel, the star... Looking good to me!
 **MADDIE** (Encouraging): But this is just the start. I'm curious to see what else we'll find...
 
-### PoolHouse Outro
+### The Pool House: PoolHouse_Outro
 `PoolHouse_Outro` · seen 22.02.06–22.02.06
+- trigger: area, area=The Pool House, areaId=PoolHouse, phase=area story (exact task not dumped) (versions 22.02.06–22.02.06)
 
 **GRANDMA** (Encouraging): So, what's been going on here?  
   _earlier:_ ~~...Wow!~~ (until 23.09.02)

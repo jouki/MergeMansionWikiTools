@@ -156,12 +156,14 @@ Every story in which Deb speaks.
 **LADY VOYANCE** (Encouraging): Of course - I am bound by the cosmic law. Nothing you say here will be revealed to anyone!
 **DEB**: Good. Let's start!
 
-### DebsRoom01
+### Deb's Room: DebsRoom01
 `DebsRoom01` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 
-### DebsRoom02
+### Deb's Room: DebsRoom02
 `DebsRoom02` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **DEB** (Doubtful): Well... My therapist INSISTED I do an exercise where I “face my past”.
 **DEB**: So what better place than my old room, right?
@@ -171,8 +173,9 @@ Every story in which Deb speaks.
 **DEB** (Worried): My therapist says it has something to do with my abandonment issues.
 **DEB** (Worried): And HOW I was adopted.
 
-### DebsRoom03
+### Deb's Room: DebsRoom03
 `DebsRoom03` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): I guess, I sort of understand how you feel...
 **DEB** (Worried): I suppose you do, sweetie. A bit tragic, don’t you think?
@@ -182,8 +185,9 @@ Every story in which Deb speaks.
 **MADDIE** (Relaxed): Trust me! I did it in my room, and it was quite cathartic.
 **MADDIE** (Relaxed): Come on, let’s get to it!
 
-### DebsRoom04
+### Deb's Room: DebsRoom04
 `DebsRoom04` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **DEB** (Worried): *sigh* All this is really bringing back the memories. I won’t lie.
 **DEB** (Annoyed): But I’m surprised at how angry most of it is making me feel...
@@ -194,8 +198,9 @@ Every story in which Deb speaks.
 **DEB** (Worried): No, it’s alright sweetie. I’m not angry at you.
 **DEB** (Frustrated): I’m just angry that for so long, no one ever told me why.
 
-### DebsRoom05
+### Deb's Room: DebsRoom05
 `DebsRoom05` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Thinking): Do you think our family knew why?
 **DEB** (Frustrated): ...
@@ -210,8 +215,9 @@ Every story in which Deb speaks.
 **MADDIE** (Worried): How... How awful!
 **DEB** (Thinking): No... It was perhaps the best present I ever got.
 
-### DebsRoom06
+### Deb's Room: DebsRoom06
 `DebsRoom06` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE** (Worried): Weren’t you upset?
 **DEB** (Annoyed): Yes, of course. But at my parents for never telling me.
@@ -221,8 +227,9 @@ Every story in which Deb speaks.
 **DEB** (Frustrated): Your grandmother said it’s one reason for my “rebellious nature”.
 **DEB** (Frustrated): But maybe it’s just a Boulton trait...
 
-### DebsRoom07
+### Deb's Room: DebsRoom07
 `DebsRoom07` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **DEB** (Doubtful): I got teased for it in school, you know.  
   _(1 cosmetic edit not shown)_
@@ -235,8 +242,9 @@ Every story in which Deb speaks.
 **DEB** (Thinking): You should probably give him a break, you know. He might be bad with money...
 **DEB** (Thinking): But his heart is still in the right place.
 
-### DebsRoom08
+### Deb's Room: DebsRoom08
 `DebsRoom08` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **DEB** (Thinking): As I grew older, I knew there was more behind me being adopted than I was told.
 **DEB** (Thinking): Leonard helped me gather a few clues that led to Europe. So I began sending out letters.
@@ -247,8 +255,9 @@ Every story in which Deb speaks.
 **MADDIE** (Surprised): Did you?!
 **DEB** (Charming): Yes... I did.
 
-### DebsRoom09
+### Deb's Room: DebsRoom09
 `DebsRoom09` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **DEB**: I went to Europe, but what I found there...
 **DEB** (Discouraged): Was not what I was expecting.
@@ -258,8 +267,9 @@ Every story in which Deb speaks.
 **DEB** (Annoyed): Are you sure you WANT to find what you’re looking for?
 **MADDIE** (Worried): I...
 
-### DebsRoom10
+### Deb's Room: DebsRoom10
 `DebsRoom10` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **MADDIE**: I’m sure Deb. I want to know the whole truth.
 **DEB** (Doubtful): Oh, I know that, sweetie. Everyone does. But are you willing to accept the cost?
@@ -269,8 +279,9 @@ Every story in which Deb speaks.
 **DEB** (Surprised): I...
 **DEB** (Relaxed): Yes... I suppose you’re right.
 
-### DebsRoom11 Outro
+### Deb's Room: DebsRoom11_Outro
 `DebsRoom11_Outro` · seen 25.05.01–26.07.01
+- trigger: area, area=Deb's Room, areaId=DebsRoom, phase=area story (exact task not dumped) (versions 25.05.01–26.07.01)
 
 **DEB** (Relaxed): Thank you, Maddie. I guess going through these things and sorting through my past helped.
 **DEB** (Charming): Even if only a little.
@@ -329,8 +340,9 @@ Every story in which Deb speaks.
 **DEB**: Sweetie... You made it, it’s yours.
 **MADDIE** (Joyous): Th- Thank you!
 
-### DiningRoom02
+### Dining Room: DiningRoom02
 `DiningRoom02` · seen 23.09.02–26.07.01
+- trigger: area, area=Dining Room, areaId=DiningRoom, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **WINSTON**: I see your endeavors to reclaim the grandeur of your past home have come to a head, Ma'am. 
 **WINSTON** (Doubtful): While your efforts in restoring the other rooms are admirable, I honestly believe that this room is a lost cause...
@@ -339,8 +351,9 @@ Every story in which Deb speaks.
 **DEB** (Frustrated): He means, the wonderful old days of this mansion holding amazing dinner parties are over.
 **MADDIE** (Thinking): Dinner parties?
 
-### DiningRoom03
+### Dining Room: DiningRoom03
 `DiningRoom03` · seen 23.09.02–26.07.01
+- trigger: area, area=Dining Room, areaId=DiningRoom, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
 
 **WINSTON** (Thinking): Deb...
 **DEB** (Annoyed): Winston.

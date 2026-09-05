@@ -9,6 +9,35 @@
 **GRANDMA** (Encouraging): Don't you remember, dearie? This was yours when you were little.
 **MADDIE** (Surprised): No way! But, come to think of it, I do have some vague memories of this room...
 
+### Dining Room: DiningRoom02
+`DiningRoom02` · seen 23.09.02–26.07.01
+- trigger: area, area=Dining Room, areaId=DiningRoom, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**WINSTON**: I see your endeavors to reclaim the grandeur of your past home have come to a head, Ma'am. 
+**WINSTON** (Doubtful): While your efforts in restoring the other rooms are admirable, I honestly believe that this room is a lost cause...
+**WINSTON** (Discouraged): No one will EVER be visiting Beaumont Hall again!
+**MADDIE** (Surprised): What do you mean? 
+**DEB** (Frustrated): He means, the wonderful old days of this mansion holding amazing dinner parties are over.
+**MADDIE** (Thinking): Dinner parties?
+
+### Dining Room: DiningRoom03
+`DiningRoom03` · seen 23.09.02–26.07.01
+- trigger: area, area=Dining Room, areaId=DiningRoom, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**WINSTON** (Thinking): Deb...
+**DEB** (Annoyed): Winston.
+**MADDIE**: Tell me more about these dinner parties.
+**DEB** (Encouraging): Oh, sweetie! Some of the most influential people used to dine within these very walls!
+**WINSTON** (Thinking): "USED TO", being the operative phrase.
+**DEB** (Relaxed): Hmph! Ignore the old buffoon, Maddie. He's just bitter he can't serve the president like he used to.
+**MADDIE** (Surprised): P- President?! 
+**DEB**: Oh yes, sweetie! I'm sure you'll find some trinkets from then amongst this trash. It seems as if Winston here hasn't bothered to clean up.
+**WINSTON** (Doubtful): I beg your pardon, Debbie, but while you were gallivanting across Europe and who knows where...
+**WINSTON** (Doubtful): I have been doing MY best to take care of "YOUR" legacy! 
+**GRANDMA** (Annoyed): That's enough, Mr. Winston!
+**MADDIE** (Surprised): Grandma!
+**WINSTON** (Surprised): My apologies Ma'am. I let my emotions get the better of me. Please, if you'd excuse me...
+
 ### Dining Room: Clean and collect fallen things
 `DiningRoom04` · seen 23.09.02–26.07.01
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomRemoveFallenTableItemsB2, phase=task completed, task=Clean and collect fallen things (versions 24.04.01–26.07.01)
@@ -46,6 +75,17 @@
 **DEB** (Encouraging): The Boultons entertained him for an evening, and he even stayed in this house overnight!
 **MADDIE** (Encouraging): That's amazing! I wonder what they talked about, over dinner, that night?
 **DEB** (Charming): We'll never know, but it's nice to imagine!
+
+### Dining Room: DiningRoom07
+`DiningRoom07` · seen 23.09.02–26.07.01
+- trigger: area, area=Dining Room, areaId=DiningRoom, phase=area story (exact task not dumped) (versions 23.09.02–26.07.01)
+
+**RODDY** (Doubtful): Oh my goodness!
+**MADDIE** (Surprised): It's a knife! And there's something on it!
+**MADDIE** (Worried): Is that blood?!
+**MADDIE** (Doubtful): Or jelly?
+**RODDY** (Thinking): Knowing your Grandma, it's probably jelly or berries!
+**MADDIE** (Discouraged): I hope so! Because if not, this could be more evidence against her...
 
 ### Dining Room: Clean the family photo
 `FamilyPicture` · seen 23.09.02–26.07.01

@@ -1,6 +1,33 @@
 # Walk-in Closet
 
 
+### Walk-in Closet: WalkInCloset_02
+`WalkInCloset_02` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**JACKIE** (Doubtful): Maddie! You never did respond to my text!
+**MADDIE** (Surprised): Huh? Oh, hey Jackie! What are you doing here?
+**JACKIE**: I had to come over to find out how your date with Arthur went!
+**MADDIE** (Discouraged): Oh that. Well, it definitely wasn't anything to write home about!
+**MADDIE** (Frustrated): It started well, he even brought me flowers. But, he just had to complain about everything on this beach date!
+**MADDIE** (Frustrated): The wind messing up his hair, the sand getting in his shoes. Who wears boots on the beach?
+**JACKIE** (Annoyed): Ugh it looks like it went just the way I expected. He's never not been full of himself.
+**JACKIE** (Thinking): Are you going to go on another one?
+**MADDIE** (Worried): Arthur did ask, but I'm not quite sure. All of it just feels... Wrong.
+
+### Walk-in Closet: WalkInCloset_03
+`WalkInCloset_03` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Encouraging): Well, these clothes are definitely owned by Grandma.
+**JACKIE** (Joyous): Your grandmother does have a particular vintage style!
+**JACKIE** (Thinking): However...
+**JACKIE** (Thinking): Some of these outfits don't really look like your normal evening wear.
+**MADDIE** (Surprised): In fact, some of these look like prison outfits! That's a bit concerning!
+**JACKIE** (Worried): Why would Grandma keep something like this?
+**MADDIE** (Surprised): Aha! And these dresses here have the same coded patterns I found in Grandma's sewing corner!
+**JACKIE** (Thinking): The plot thickens...
+
 ### Walk-in Closet: WalkInCloset_04
 `WalkInCloset_04` · seen 25.10.03–26.07.01
 - trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16749, phase=task appears (versions 25.10.03–25.10.03)
@@ -16,6 +43,18 @@
 **MADDIE** (Surprised): There! It clicked. The wing made a sound when I turned it. This is a mechanism, Jackie!
 **JACKIE**: ...Okay, a mysterious click wins. For now. But we are still debriefing Arthur later.
 
+### Walk-in Closet: WalkInCloset_05
+`WalkInCloset_05` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Surprised): Incredible! There's a hidden mechanism in the pouf!
+**—**: Looking at how it works, I can definitely recognize who built this...
+**MADDIE** (Relaxed): Grandpa Charlie, you really are a genius when it comes to hidden contraptions!
+**MADDIE** (Surprised): Wait... This jewelry is exquisite! But... Looks like something is missing.
+**MADDIE** (Thinking): Judging by the shape of the indentation, I think it might be a jewel of some kind.
+**MADDIE**: Big though...
+**MADDIE** (Surprised): And those footsteps were around this area... I wonder if whoever it was, took it?!
+
 ### Walk-in Closet: WalkInCloset_07
 `WalkInCloset_07` · seen 25.10.03–26.07.01
 - trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16835, phase=task completed (versions 25.10.03–25.10.03)
@@ -28,6 +67,30 @@
 **MADDIE** (Doubtful): Actually...
 **MADDIE** (Thinking): This reminds me of the Hideout where I found Grandpa Charlie's similar setup.
 **MADDIE** (Thinking): Why would Grandma have something like this in her walk-in closet?
+
+### Walk-in Closet: WalkInCloset_08
+`WalkInCloset_08` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Joyous): Oh, look! Lindsay's perfume! It makes sense that Grandma would support a family-owned business!
+**MADDIE** (Relaxed): Grandma has a really fascinating set of perfumes. Like this one with lily and bergamot!
+**MADDIE** (Charming): I would say I'm quite the connoisseur now, after my work in the Perfumery!
+**MADDIE** (Relaxed): Wow, this smells just like freshly cut flowers - the top notes of the lily really come through!
+**MADDIE** (Surprised): Wait a minute! What's that on the mirror? It looks like the perfume mist unveiled a message!
+**MADDIE** (Thinking): "Where petals fade, and reflections stay, seek the bloom that shows the way."
+**MADDIE** (Thinking): Hmm petals and reflections? What could that mean? I'm sure this will come in handy sooner rather than later.
+
+### Walk-in Closet: WalkInCloset_09
+`WalkInCloset_09` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE**: Grandpa Charlie's old wardrobe... Let's see what I can find in here.
+**JACKIE** (Surprised): Tailored suits, cashmere peacoats, even his handkerchiefs were monogrammed. Wow, Maddie, he was into this!
+**MADDIE** (Charming): Well, Grandma's always dressed up to the nines. Guess he had to keep up.
+**JACKIE** (Doubtful): Hang on, that's way too many pockets on this jacket, Maddie. Why did he need all of these?
+**MADDIE** (Doubtful): The whole wardrobe is over-engineered. These seams don't line up. It's like a puzzle box!
+**JACKIE** (Thinking): And this wooden hand? It's a ring display with no rings on. Interesting choice...
+**MADDIE**: Nope, can't be a coincidence. This wardrobe has a secret. I just know it.
 
 ### Walk-in Closet: WalkInCloset_10
 `WalkInCloset_10` · seen 25.10.03–26.07.01
@@ -51,6 +114,22 @@
 **MADDIE** (Encouraging): And here's yet another pocket watch. 
 **MADDIE** (Joyous): If that's even what this is. It's probably a death ray or something.
 
+### Walk-in Closet: WalkInCloset_12
+`WalkInCloset_12` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE**: Okay! Time to take a break. That window seat looks particularly inviting!
+**MADDIE** (Discouraged): Oof. Sometimes I feel like all I do is renovate this mansion without a break in sight...
+**MADDIE** (Doubtful): While also trying to figure out mysteries galore!
+**MADDIE** (Frustrated): Speaking of mysteries though, there are things that are starting to come together...
+**MADDIE** (Annoyed): Most items and hidden mechanisms here point to something a bit larger. This isn’t just some secret group. This could be intelligence work!  
+  _earlier:_ ~~Most of the items and hidden mechanisms in here all point to something a bit larger than the Secret Society.~~ (until 26.02.03)
+**MADDIE** (Doubtful): I-I have this sneaking suspicion that my dear grandparents could have been part of a spy organization.
+**MADDIE** (Encouraging): I know, it sounds crazy to think it! But there were clues in Grandma's room as well that connect here.
+**MADDIE** (Doubtful): The codes on the clothes she stitched? The book on poisonous plants?
+**MADDIE** (Doubtful): I have to say, with all their skills, they would make great spies!
+**MADDIE** (Encouraging): I need more concrete evidence, though. I don't think I'm quite there yet. Onwards!
+
 ### Walk-in Closet: WalkInCloset_13
 `WalkInCloset_13` · seen 25.10.03–26.07.01
 - trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16845, phase=task completed (versions 25.10.03–25.10.03)
@@ -61,6 +140,18 @@
 **MADDIE** (Thinking): And why did Grandma and Charlie need a pedestal in front of the mirror?
 **MADDIE** (Frustrated): There must be a reason, they never do anything without a purpose.
 **MADDIE** (Doubtful): And things in this house have a history of being more than they seem.
+
+### Walk-in Closet: WalkInCloset_14
+`WalkInCloset_14` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**RODDY** (Doubtful): That looks like a hidden drawer, below the mirror, Maddie. There's probably a key or hatch somewhere around it.
+**MADDIE** (Surprised): Roddy! I didn't hear you come in.
+**RODDY** (Hesitant): Oh, I'm sorry. The door was open, I swear. I just wanted to talk...
+**RODDY** (Ready): You know I'd only ever use my lock picking skills to help you, right?
+**MADDIE** (Thinking): Right... I guess Jackie left it open. She's been rushing in and out all day.
+**MADDIE**: Anyway, those lock picking skills might come in handy now. Let's see if you're right.
+**RODDY**: I'm always happy to help you, Maddie. Have you looked behind that flower pot yet?
 
 ### Walk-in Closet: WalkInCloset_15
 `WalkInCloset_15` · seen 25.10.03–26.07.01
@@ -95,6 +186,20 @@
 **MADDIE** (Doubtful): And it looks like there's a whole hidden room on the other side of the mirror.
 **RODDY** (Thinking): Your grandparents really didn't want anyone finding this.
 **MADDIE** (Charming): Which is exactly why I have to see what's inside.
+
+### Walk-in Closet: WalkInCloset_17
+`WalkInCloset_17` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Surprised): So... how do we open this glass door, another mechanism?
+**RODDY** (Thinking): I'm looking for something, anything! But I can't see any other keys or hatches to open it.
+**MADDIE** (Thinking): No, this lock is different. Do you see those footprints, Roddy? Maybe if I...
+**MADDIE** (Joyous): We did it, Roddy! But how did the mirror just dissolve?
+**RODDY** (Relaxed): I think that was a trick of the light. And really, it was mostly you, Maddie. You're amazing.
+**MADDIE** (Relaxed): I did do pretty well, huh? Grandma's skills are starting to rub off on me.
+**MADDIE**: But now, it's time to finally learn what Grandma's been hiding this whole time.
+**RODDY** (Ready): Maddie, are you sure I should be here for this? I know this is your family's business.
+**MADDIE** (Charming): Don't worry about it, Roddy. It's only fair, we've opened this door together, after all.
 
 ### Walk-in Closet: WalkInCloset_CharacterTask1
 `WalkInCloset_CharacterTask1` · seen 25.10.03–26.07.01
@@ -157,6 +262,20 @@
 **MADDIE**: So you're sure?
 **JACKIE**: I'm certain. My sister was framed. And now we have to prove it.
 
+### Walk-in Closet: WalkInCloset_Intro
+`WalkInCloset_Intro` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Thinking): Hmm... A walk-in closet!
+**MADDIE** (Doubtful): I’ve got to say, this is not what I pictured for Grandma!
+**MADDIE** (Doubtful): Deb would totally have one of these - color-coded racks, fragrance diffusers, the whole nine yards.
+**MADDIE** (Doubtful): But Grandma? Unexpected.
+**MADDIE** (Surprised): Hey! These footsteps look somewhat fresh!
+**MADDIE** (Thinking): Which is weird, because Grandma hasn’t been here in years. And they’re not hers. Too big.
+**MADDIE** (Thinking): Maybe this closet holds something beyond old, moth-eaten coats.
+**MADDIE**: THAT is more of a Grandma thing.
+**MADDIE** (Encouraging): So, how about we find out what it is?
+
 ### Walk-in Closet: WalkInCloset_POI_AerialScrew
 `WalkInCloset_POI_AerialScrew` · seen 25.10.03–26.07.01
 - trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16759, phase=task completed (versions 25.10.03–25.10.03)
@@ -166,6 +285,17 @@
 **MADDIE** (Charming): I used to pore over his old designs at the library. Elegant and beautiful.
 **MADDIE** (Encouraging): I bet this was Grandpa Charlie's!
 **MADDIE** (Relaxed): I wonder if he was as inspired by Da Vinci as I was in university?
+
+### Walk-in Closet: WalkInCloset_POI_HiddenBook
+`WalkInCloset_POI_HiddenBook` · seen 26.07.01–26.07.01
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Surprised): Huh, there's a book hidden in this drawer...
+**MADDIE** (Frustrated): That's it? I was hoping to find something a bit more helpful.
+**RODDY** (Thinking): Maybe there's a clue inside?
+**MADDIE**: Let's see...
+**MADDIE** (Encouraging): You're right! There's a sketch of the large flowers on either side of the mirror - the lily and the florian.
+**MADDIE** (Surprised): Hmm... I think I figured it out!
 
 ### Walk-in Closet: WalkInCloset_POI_Lily
 `WalkInCloset_POI_Lily` · seen 25.10.03–26.07.01

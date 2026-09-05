@@ -1,6 +1,18 @@
 # Boulton Boulevard
 
 
+### Boulton Boulevard: BoultonBoulevard_02
+`BoultonBoulevard_02` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE**: Well, this sign had seen better days, but now it’s as good as new!
+**MADDIE** (Encouraging): And if anything would confirm that I’m in the right place, it would be a sign that says,
+**MADDIE** (Relaxed): “Boulton Tin Can Factory,”
+**MADDIE** (Thinking): I should probably amend this sign a little after I’m done with the place.
+**MADDIE** (Thinking): It’s not really going to be a working factory anymore...
+**MADDIE** (Relaxed): It’s going to be something MUCH better.
+**MADDIE** (Joyous): And grander!
+
 ### Boulton Boulevard: Dig out object
 `BoultonBoulevard_03` · seen 25.08.01–26.07.01
 - trigger: area, area=Boulton Boulevard, areaId=FactoryBoulevard, hotspotId=FactoryBoulevardGardenCenterRemoveCapsule, phase=task appears, task=Dig out object (versions 25.08.01–26.01.02)
@@ -11,6 +23,38 @@
 **MADDIE** (Thinking): And gathering secrets from any visitors.
 **MADDIE** (Thinking): I bet some of those secrets are still hiding in the overgrowth.
 **MADDIE** (Encouraging): Good thing I'm here to uncover them!
+
+### Boulton Boulevard: BoultonBoulevard_04
+`BoultonBoulevard_04` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Thinking): Hmm... I don’t know much about this place!
+**MADDIE** (Thinking): Apart from what I’ve read, of course.
+**MADDIE** (Doubtful): And that whole tin can chaos during the storm revealed that this place was collecting people’s secrets.  
+  _(1 cosmetic edit not shown)_
+**MADDIE** (Frustrated): But surely there’s more to it than just that! This place wasn’t just a cover!
+**MADDIE** (Thinking): I should give Winston a call. If anyone knows our family history the best, it would be him!
+**MADDIE** (Doubtful): Also, he’s the only one I trust to give me a somewhat straight answer.
+**MADDIE** (Calling): *Ring Ring*
+**MADDIE** (Talking): Hello, Winston?
+**WINSTON** (Thinking): Is everything alright, Ma’am?
+**MADDIE** (Talking): Yes, of course! I was wondering if you could join me at the tin can factory?
+
+### Boulton Boulevard: BoultonBoulevard_05
+`BoultonBoulevard_05` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**WINSTON**: How may I be of service, Ma’am?
+**MADDIE** (Encouraging): I’ve decided to fix up the old factory! And was wondering if you could tell me a little about it?
+**MADDIE** (Thinking): It’s more rust than roof right now, but there’s something about this place. It feels... Proud.
+**WINSTON** (Encouraging): Ah. That pride comes from Agatha. Ignatius may have built this factory, but she gave it soul.
+**MADDIE** (Relaxed): I’ll admit, this place isn’t like your typical smoke and noise factory...
+**WINSTON** (Thinking): Not at all, Ma’am. Ignatius believed that function didn’t exclude beauty.
+**WINSTON** (Thinking): Every brick here is intentional.
+**MADDIE**: And the garden?
+**WINSTON** (Relaxed): That was Agatha’s domain. She inspected it daily, I believe. Not a hedge dared grow wild under her watch.
+**MADDIE** (Charming): Sounds like the factory ran on more than just steam.
+**WINSTON** (Charming): Despite its dubious history, Ma’am, it ran on the passion of two very powerful people in love.
 
 ### Boulton Boulevard: Recycle the tin cans
 `BoultonBoulevard_06` · seen 25.08.01–26.07.01
@@ -28,6 +72,52 @@
 **WINSTON** (Charming): Very prudent, Ma'am. Given your history with the council.  
   _(1 cosmetic edit not shown)_
 
+### Boulton Boulevard: BoultonBoulevard_07
+`BoultonBoulevard_07` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Surprised): Hey! There seems to be a plaque hidden under these bushes!
+**WINSTON** (Encouraging): Well spotted, Ma’am. That would be their time capsule.
+**MADDIE** (Joyous): Oh, cool! I wonder what will be inside? I guess there’s no harm in trying to dig it out!
+**MADDIE** (Doubtful): Ungh! Gaaah! Grrrrrr....
+**MADDIE** (Frustrated): Ugh... Nothing’s working! That thing is never coming out!
+**WINSTON** (Doubtful): Have you tried the secret latch on the side, Ma’am?
+**MADDIE** (Surprised): What secret- Oh! Hey! It came loose! How’d you know that would be there?!
+**WINSTON** (Thinking): I didn’t. But I assumed that there’d be one. With this family, there’s always a secret latch, door...
+**WINSTON** (Thinking): ...hatch, lever, tomb-
+**MADDIE** (Relaxed): Alright, alright, I get the point.
+**MADDIE** (Joyous): Let’s find out what’s inside!
+
+### Boulton Boulevard: BoultonBoulevard_08
+`BoultonBoulevard_08` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Joyous): Oh wow! There’s so much stuff in here!
+**MADDIE**: Old tin cans, newspaper clippings, even letters from residents! This is incredible!
+**MADDIE** (Thinking): I should give Jackie a call. This would make a great story.
+**WINSTON** (Thinking): It would indeed, Ma’am. This time capsule was placed here by the mayor, if I recall.
+**WINSTON** (Charming): A great honor bestowed upon the Boultons for its 20th anniversary.
+**MADDIE** (Encouraging): Ooh, there’s even a letter addressed to the future mayor and a... Wait, is this... Code?
+**WINSTON** (Doubtful): It would seem so. Unsurprising if you ask me! Ignatius was always into secret codes.
+**MADDIE** (Thinking): Perhaps it has something to do with what the factory was REALLY about?
+**WINSTON**: Indeed.
+**MADDIE** (Encouraging): Can you decipher it, Winston?
+**WINSTON** (Joyous): And rob you of all the fun, Ma’am?
+**MADDIE** (Doubtful): Oh, ha ha.
+
+### Boulton Boulevard: BoultonBoulevard_09
+`BoultonBoulevard_09` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Doubtful): Hmmm.. Looks like the remains of a bell.
+**WINSTON** (Charming): Indeed, Ma’am. That was Agatha’s. She cast it herself, you know? Pure tin, and it rang twice a day.  
+  _(1 cosmetic edit not shown)_
+**MADDIE** (Encouraging): Lunch and end of day?
+**WINSTON** (Thinking): Precisely. She believed in structure. A well-run garden, a well-run household...
+**WINSTON** (Thinking): Naturally, then, a well-run factory.
+**WINSTON** (Relaxed): It was said she treated the workers like family and always cared for them like a mother.
+**MADDIE** (Charming): Then let’s make sure it will ring again in her memory!
+
 ### Boulton Boulevard: BoultonBoulevard_10
 `BoultonBoulevard_10` · seen 25.08.01–26.07.01
 - trigger: area, area=Boulton Boulevard, areaId=FactoryBoulevard, hotspotId=14111, phase=task completed (versions 25.08.01–26.01.02)
@@ -42,6 +132,50 @@
 **WINSTON** (Charming): Luckily, the Boulton matriarch owned a rather large bell.
 **MADDIE** (Encouraging): This will be the museum's café! I'm sure guests will love the outdoor seating.
 **MADDIE** (Joyous): And enjoying the boulevard at their own leisure.
+
+### Boulton Boulevard: BoultonBoulevard_11
+`BoultonBoulevard_11` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Doubtful): The water wheel’s completely jammed. It’s just packed with leaves and debris.
+**WINSTON** (Discouraged): It is quite unfortunate. That wheel used to power a third of the machinery inside.
+**MADDIE** (Surprised): I thought it was just for show!
+**WINSTON** (Thinking): No Ma’am. Agatha designed it herself. While coal was all the rage, she was very adamant about using the river.
+**WINSTON** (Encouraging): Not only did it give power, but it was quiet, efficient, and self-sustaining.
+**WINSTON** (Relaxed): Made for a more comfortable and productive work environment.
+**MADDIE** (Encouraging): Not to mention eco-friendlier!
+**WINSTON** (Charming): Agatha was quite ahead of her time. She believed beauty should be useful and not destructive.
+**MADDIE**: I want to get it working again. Not just for display. I mean REALLY working.
+**MADDIE** (Relaxed): I want it to run the museum and have it showcase the factory’s innovative spirit!
+**MADDIE** (Encouraging): Not to mention being a great teaching tool about renewable energies.
+**WINSTON** (Joyous): A wonderful idea, Ma’am.
+
+### Boulton Boulevard: BoultonBoulevard_12
+`BoultonBoulevard_12` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Joyous): An old fire truck!  
+  _(1 cosmetic edit not shown)_
+**WINSTON** (Thinking): Ah yes. This was donated to the factory after the fire in ‘24. A freak lightning strike, if I recall.
+**WINSTON** (Thinking): It had taken out half the eastern wall before they got the fire under control.
+**WINSTON** (Thinking): This fire truck was the one that answered the call. Afterward, it remained here. Ever vigilant.  
+  _(1 cosmetic edit not shown)_
+**MADDIE** (Encouraging): Well, at least the fire didn’t take out this flag.
+**WINSTON**: That banner was indeed lucky to survive. It was raised every morning. Flying bright over every shift change.
+**MADDIE** (Relaxed): It’s going up again. A great reminder of the history of this place.
+
+### Boulton Boulevard: BoultonBoulevard_13
+`BoultonBoulevard_13` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE**: I knew this place mattered, but I didn’t realize how much until now.
+**WINSTON** (Thinking): Most things don’t reveal their value until someone bothers to look closely, Ma’am.
+**MADDIE** (Charming): Well, I’m looking and I’m not stopping. This museum is going to tell the entire story!
+**MADDIE** (Relaxed): The people. The work. The legacy.  
+  _(1 cosmetic edit not shown)_
+**MADDIE** (Relaxed): The outside is ready. Time to see what’s been waiting inside all these years.
+**WINSTON** (Encouraging): Shall I bring the keys, Ma’am?
+**MADDIE**: Bring everything. I’ve got secrets to uncover!
 
 ### Boulton Boulevard: BoultonBoulevard_14
 `BoultonBoulevard_14` · seen 25.08.01–26.07.01
@@ -126,6 +260,25 @@
 **MADDIE**: Thank you too, Holden. I'm sure your article will bring more visitors to the museum.
 **HOLDEN** (Joyous): And even more sales to the Howler!
 
+### Boulton Boulevard: BoultonBoulevard_Intro
+`BoultonBoulevard_Intro` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=BoultonBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Joyous): Alright! Here we are at last!
+**MADDIE** (Encouraging): These two lions are familiar, so this place belongs to the Boultons, alright!  
+  _(1 cosmetic edit not shown)_
+**MADDIE**: The infamous tin can factory. The heart of the Boulton Family fortune.
+**MADDIE** (Doubtful): And some might even say its downfall.  
+  _(1 cosmetic edit not shown)_
+**MADDIE** (Encouraging): But, how about we change that, huh?
+**MADDIE** (Relaxed): I have plans for you, factory...
+**MADDIE** (Relaxed): BIG plans.
+**MADDIE** (Thinking): And while I’m doing that, I’ll snoop around a little and learn all your dirty secrets.
+**MADDIE** (Thinking): I’m sure to find more answers here about Dad and that criminal organization.
+**MADDIE**: Well...
+**MADDIE** (Encouraging): No time like the present!
+**MADDIE** (Encouraging): Let’s get to work!
+
 ### Boulton Boulevard: BoultonBoulevard_POI_Dock
 `BoultonBoulevard_POI_Dock` · seen 25.08.01–26.07.01
 - trigger: area, area=Boulton Boulevard, areaId=FactoryBoulevard, hotspotId=FactoryBoulevardPathRemoveCracks1, phase=task appears (versions 25.08.01–25.08.01)
@@ -209,3 +362,11 @@
 **MADDIE** (Discouraged): Some things never change...
 **MADDIE** (Joyous): I'll make this the museum's crown jewel. Imagine kids seeing green energy in action!
 **WINSTON** (Joyous): Agatha would be proud to see her vision getting its due, ma'am.
+
+### Boulton Boulevard: FactoryBoulevard_Travel
+`FactoryBoulevard_Travel` · seen 26.07.01–26.07.01
+- trigger: area, area=Boulton Boulevard, areaId=FactoryBoulevard, phase=area story (exact task not dumped) (versions 26.07.01–26.07.01)
+
+**MADDIE** (Charming): Aha! My trusty, true blue, scooter! It's been a while.
+**MADDIE** (Thinking): I should really maintain it more often...
+**MADDIE** (Thinking): But luckily, I think it has just enough fuel to get me to the tin can factory!

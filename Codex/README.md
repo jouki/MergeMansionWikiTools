@@ -103,6 +103,10 @@ Families = same event type + core name with the run tag stripped (`CBE_MaddieInP
 
 **StoryElements are exported** (`DumpHarness --dump-stories`, 2026-09-05): story membership and line order come straight from the config for 22.02.06, 23.09.02, 23.11.02, 25.05.01, 25.06.01 and the live 26.07.01 (2 849 stories). That closed the naming gap (Jailbreak: `SBE_Jailbreak_BookCartFull` → lines `SBE_Jailbreak_1StCartIsFull_01…`; the event now has 95 stories / 405 lines) and cut `unknownTriggerStories` from 982 to 22 and `referencedWithoutLines` from 44 to 3. Stories the config defines but nothing we dump triggers are attributed to their event by id prefix (`kind: event, moment: part of the event`); 665 stories remain without an area/event (main story and tutorial started client-side).
 
+## Placing stories nothing triggers (`md/misc/unassigned.md`, viewer group "Unassigned")
+
+Stories the config defines but nothing we dump triggers are placed in this order: (1) event by id prefix (`SBE_Jailbreak_…`, A/B variant suffix stripped), (2) **area by id prefix** when it equals an area id or name (`Lounge_…`, `ParentsRoom_…`, `SpyRoom_…` → room / POI stories, 303 placed this way), (3) **by hand** from `build/story_assignments.json` (`"<id>"` or `"<prefix>*"` → `{"area": …}` or `{"event": …}`, optional note). What is still unplaced shows up in the viewer's "Area or event" dropdown under **Unassigned — needs your call**, grouped by id prefix (`CBE…`, `XMas…`, `FTUE…`, `Item…`), and in `md/misc/unassigned.md` with the first spoken lines of every story so a human can decide. Nothing in `story_assignments.json` is guessed; add entries only when the placement is known and rebuild.
+
 ## Discord screenshots (OCR) — second, lower-trust source
 
 The wiki team's Discord channel `wiki-content-discussion` (id `783385526387998743`) holds 188 threads (2022-08 … 2026-08) of player screenshots: event tasks, items, and dialogues. It is the **only source for 2022 event dialogues** (Ursula's Birthday, Romantic Spot, Halloween/Thanksgiving/Xmas 2022, Pearl of the Ball 2023, …) that never made it into any config we own.
