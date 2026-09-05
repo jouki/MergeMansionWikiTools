@@ -84,7 +84,7 @@
 - trigger: area, area=Scavenger Hunt, areaId=ScavengerHunt, hotspotId=ScavengerHuntOldWellInspectWater, phase=task completed, task=Search the pond (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Nothing here it seems... except so many knives at the bottom of that pond.
-**NOCHANGE**: That's a bit weird.
+**—**: That's a bit weird.
 
 ### Scavenger Hunt: Open the safe with the code
 `ScavengerHunt_Poolhouse` · seen 24.04.01–26.07.01

@@ -1,9 +1,9 @@
 # Jackie
 Every story in which Jackie speaks.
 
-### HotspotTitle_LandingRoom: Fix the crack
+### Landing Room: Fix the crack
 `AquariumsFixed` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingRoomRemoveCrackAndWater02DD3, phase=task completed, task=Fix the crack (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingRoomRemoveCrackAndWater02DD3, phase=task completed, task=Fix the crack (versions 24.04.01–26.07.01)
 
 **MADDIE** (Charming): There! The glass is as good as new!
 **JACKIE** (Doubtful): Hmm, I suppose the only way to truly know if the glass is fixed is if you try and move the compass again.
@@ -1547,9 +1547,9 @@ Every story in which Jackie speaks.
 **MADDIE** (Joyous): Haha, I know how it sounds. Trust me, this room isn't like the others. Everything is interconnected!
 **JACKIE** (Thinking): I'll have to see it to believe it!
 
-### HotspotTitle_LandingRoom: Fix the crack
+### Landing Room: Fix the crack
 `LandingAquariums` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingRoomRemoveCrackAndWater01DD2, phase=task completed, task=Fix the crack (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingRoomRemoveCrackAndWater01DD2, phase=task completed, task=Fix the crack (versions 24.04.01–26.07.01)
 
 **JACKIE** (Thinking): It must be quite tricky to fix those leaks...
 **MADDIE** (Frustrated): I have to admit, I've never had to fix an aquarium before.
@@ -2178,7 +2178,7 @@ Every story in which Jackie speaks.
 **JACKIE** (Encouraging): Let me publish an ad for it in the paper. I know it doesn't make up for anything, but let me help. Please?
 **MADDIE** (Thinking): Whatever, it's not like anyone's coming anyway.
 **JACKIE**: You might be wrong about that. We can make the ad funny and inviting.
-**NOCHANGE**: I want to save our friendship. Please, let me try.
+**—**: I want to save our friendship. Please, let me try.
 
 ### Hopefest Music Festival — outro
 `SP_Hopefest2026_AllRewardsCompleted_Dialogue` · seen 26.05.01–26.07.01
@@ -3277,10 +3277,10 @@ Every story in which Jackie speaks.
 **MADDIE** (Surprised): Aha! And these dresses here have the same coded patterns I found in Grandma's sewing corner!
 **JACKIE** (Thinking): The plot thickens...
 
-###  Walk-in Closet: WalkInCloset_04
+### Walk-in Closet: WalkInCloset_04
 `WalkInCloset_04` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16749, phase=task appears (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCentralPuffPlaceWing, phase=task appears, task=Attach wing (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16749, phase=task appears (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCentralPuffPlaceWing, phase=task appears, task=Attach wing (versions 26.01.02–26.07.01)
 
 **JACKIE** (Doubtful): Maybe you're just looking at this the wrong way, Maddie. There must be one good thing about your beach date.
 **MADDIE** (Worried): The water was a nice blue? Hey, would you look at this swan sculpture with me?
@@ -3304,10 +3304,10 @@ Every story in which Jackie speaks.
 **JACKIE** (Thinking): And this wooden hand? It's a ring display with no rings on. Interesting choice...
 **MADDIE**: Nope, can't be a coincidence. This wardrobe has a secret. I just know it.
 
-###  Walk-in Closet: WalkInCloset_CharacterTask1
+### Walk-in Closet: WalkInCloset_CharacterTask1
 `WalkInCloset_CharacterTask1` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16911, phase=task appears (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharacterTask1, phase=task appears, task=Gather thoughts (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16911, phase=task appears (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharacterTask1, phase=task appears, task=Gather thoughts (versions 26.01.02–26.07.01)
 
 **MADDIE**: You're suddenly quiet, Jackie. What's on your mind?
 **JACKIE** (Thinking): It's my sister, Grace. She's in jail, you know.
@@ -3319,10 +3319,10 @@ Every story in which Jackie speaks.
 **JACKIE**: I want to investigate it. Town hall, then the police station. But I need not to look like myself.
 **MADDIE** (Relaxed): Then look around, Jackie. The closet is filled with tools and costumes, everything you need to be unseen.
 
-###  Walk-in Closet: WalkInCloset_CharacterTask2
+### Walk-in Closet: WalkInCloset_CharacterTask2
 `WalkInCloset_CharacterTask2` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16926, phase=task completed (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharacterTask16, phase=task completed, task=Discuss progress (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16926, phase=task completed (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharacterTask16, phase=task completed, task=Discuss progress (versions 26.01.02–26.07.01)
 
 **JACKIE**: I've sorted through all the charges against Grace.
 **MADDIE**: And?
@@ -3330,10 +3330,10 @@ Every story in which Jackie speaks.
 **JACKIE** (Thinking): I'm decided. I'm putting together a costume. Town hall first, then the police station.
 **MADDIE** (Encouraging): Then let's check Grandma's closet. I have the perfect wig for you.
 
-###  Walk-in Closet: WalkInCloset_CharacterTask3
+### Walk-in Closet: WalkInCloset_CharacterTask3
 `WalkInCloset_CharacterTask3` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16948, phase=task completed (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharacterTask38, phase=task completed, task=Update on the progress (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16948, phase=task completed (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharacterTask38, phase=task completed, task=Update on the progress (versions 26.01.02–26.07.01)
 
 **JACKIE**: Costume's a go. Had to get my wig back from your chaos-goblin of a dog, though.
 **MADDIE** (Discouraged): Rufus? Ugh, he thinks everything fluffy is a gift for him.
@@ -3341,10 +3341,10 @@ Every story in which Jackie speaks.
 **JACKIE** (Hesitant): But before I go full secret agent. Can I have one last peek at Charlie's spy gear? For vibes.
 **MADDIE** (Relaxed): For vibes? You're using my missing grandfather's secrets for aesthetic inspiration. I respect that.
 
-###  Walk-in Closet: WalkInCloset_CharacterTask4
+### Walk-in Closet: WalkInCloset_CharacterTask4
 `WalkInCloset_CharacterTask4` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16960, phase=task completed (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharacterTask50, phase=task completed, task=Combine the hints (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16960, phase=task completed (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharacterTask50, phase=task completed, task=Combine the hints (versions 26.01.02–26.07.01)
 
 **JACKIE**: Town hall was a bust. But the police station... I sweet-talked my way into the old evidence locker.
 **MADDIE** (Surprised): You what? How?
@@ -3353,10 +3353,10 @@ Every story in which Jackie speaks.
 **MADDIE** (Worried): That doesn't sound like an accident, Jackie.
 **JACKIE**: It's not. It's incredibly damning. I need some time to put all these hints together.
 
-###  Walk-in Closet: WalkInCloset_CharacterTask5
+### Walk-in Closet: WalkInCloset_CharacterTask5
 `WalkInCloset_CharacterTask5` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16970, phase=task completed (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharacterTask60, phase=task completed, task=Piece everything together (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16970, phase=task completed (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharacterTask60, phase=task completed, task=Piece everything together (versions 26.01.02–26.07.01)
 
 **JACKIE**: I'm back, and I brought your grandpa's fancy coat.
 **MADDIE**: And? Did you figure it out?

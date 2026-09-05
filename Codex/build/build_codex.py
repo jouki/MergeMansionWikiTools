@@ -114,10 +114,13 @@ def triggers_from_mapping(dialogues):
     return out
 
 
+NOT_A_SPEAKER = {None, "", "NoChange", "None", "Empty"}     # marker values of DialogCharacterType, not characters
+
+
 def speaker_of(line):
-    if line.get("LeftSpeaks"):
+    if line.get("LeftSpeaks") and line.get("LeftCharacter") not in NOT_A_SPEAKER:
         return line.get("LeftCharacter"), line.get("LeftCharacterState")
-    if line.get("RightSpeaks"):
+    if line.get("RightSpeaks") and line.get("RightCharacter") not in NOT_A_SPEAKER:
         return line.get("RightCharacter"), line.get("RightCharacterState")
     return None, None
 
@@ -227,11 +230,36 @@ def build():
         }
 
     # 3) stories — ordered ids per version (explicit defs, else naming convention) + triggers per version
+    # Old dumps carry unlocalised area names ("HotspotTitle_LandingRoom"): map every areaId to its newest
+    # localised name so one area does not split into several trigger runs / filter entries.
+    order_path = os.path.join(os.path.dirname(__file__), "area_order.json")
+    wiki_area_order = common.read_json(order_path)["order"] if os.path.exists(order_path) else {}
+    area_name = {}
+    for v in vers:
+        for area in per[v]["areas"] or []:
+            if not (isinstance(area, dict) and area.get("AreaId") and area.get("Name")):
+                continue
+            name = area["Name"].strip()
+            if "_" in name:                      # unlocalised in every dump: the Name IS the localisation key
+                runs_ = strings.get(name) or []
+                loc_name = next((r["value"] for r in reversed(runs_) if r["value"]), None)
+                if not loc_name:                 # no such key either: split the AreaId ("LandingRoom" -> "Landing Room")
+                    guess = re.sub(r"(?<=[a-z])(?=[A-Z])", " ", area["AreaId"])
+                    loc_name = guess if guess in wiki_area_order else None
+                if not loc_name:
+                    continue
+                name = loc_name.strip()
+            area_name[area["AreaId"]] = name
     trig_by_ver = {}
     all_sids = set()
     for v in vers:
         t = triggers_from_areas(per[v]["areas"]) + triggers_from_events(per[v]["events"]) \
             + triggers_from_items(per[v]["chains"]) + triggers_from_mapping(per[v]["dialogues"])
+        for _, tr in t:
+            if tr.get("areaId") in area_name:
+                tr["area"] = area_name[tr["areaId"]]
+            elif tr.get("area"):
+                tr["area"] = tr["area"].strip()
         trig_by_ver[v] = t
         all_sids.update(sid for sid, _ in t)
         all_sids.update(story_defs_by_ver[v])

@@ -190,7 +190,7 @@ Trigger hints are prefix guesses — see build/prefixes.json.
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Thinking): Hmm... It looks like it needs a numeric key code.
-**NOCHANGE**: Most of the things up here are about mom and dad. Their music, the wedding dress...  
+**—**: Most of the things up here are about mom and dad. Their music, the wedding dress...  
   _earlier:_ ~~Most of the things up here are about mom and dad. Their music, the wedding dress, and the other thing...~~ (until 25.03.01)
 **MADDIE** (Encouraging): I’ll try their anniversary date!
 **—**: It worked, and it looks like it held a key!  
@@ -200,10 +200,10 @@ Trigger hints are prefix guesses — see build/prefixes.json.
 `Attic14.2` · seen 25.05.01–26.07.01
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
-**NOCHANGE** (Thinking): Now... let’s open this door.  
+**—**: Now... let’s open this door.  
   _earlier:_ ~~It worked, and it looks like it held a key. Now... let’s open this door.~~ (until 25.04.01)
 **MADDIE** (Surprised): Oh, wow! It looks like an elevator!
-**NOCHANGE** (Doubtful): Behind a wardrobe?!
+**—**: Behind a wardrobe?!
 
 ### Attic15
 `Attic15` · seen 25.05.01–26.07.01
@@ -339,9 +339,9 @@ Trigger hints are prefix guesses — see build/prefixes.json.
 
 **MADDIE** (Joyous): I got this as a present for my birthday. I was told to only use it for emergencies.
 **MADDIE**: I think fixing up this mansion qualifies as an emergency!
-**NOCHANGE**: Try dragging it onto any item with a lightning symbol on it.
-**NOCHANGE**: That will increase the item’s level.
-**NOCHANGE**: Two Lightning Cards can be stacked together to combine their charges.
+**—**: Try dragging it onto any item with a lightning symbol on it.
+**—**: That will increase the item’s level.
+**—**: Two Lightning Cards can be stacked together to combine their charges.
 **GRANDMA** (Worried): Where did I put my Lightning Card? Or did I loan it to someone?
 
 ### Bonus BlueCard
@@ -351,9 +351,9 @@ Trigger hints are prefix guesses — see build/prefixes.json.
 **GRANDMA** (Joyous): I really do like the color blue...the color of the bright sky!
 **MADDIE** (Joyous): I prefer orange.
 **GRANDMA** (Doubtful): You do? How about after trying this?
-**NOCHANGE**: Try dragging it onto any item without a lightning symbol.
-**NOCHANGE**: That will increase the item’s level.
-**NOCHANGE**: Two Blue Cards can be stacked together to combine their charges.
+**—**: Try dragging it onto any item without a lightning symbol.
+**—**: That will increase the item’s level.
+**—**: Two Blue Cards can be stacked together to combine their charges.
 **MADDIE** (Charming): That's nice but I still prefer orange.
 **GRANDMA** (Encouraging): Darling, you will learn to appreciate blue in time.
 
@@ -363,17 +363,17 @@ Trigger hints are prefix guesses — see build/prefixes.json.
 
 **MADDIE** (Surprised): Ooh what's this?!? Scissors!
 **MADDIE**: Rumor has it that this will give its owner good fortune. 
-**NOCHANGE**: You can drag these scissors onto any item to split it into the two previous level items in the Merge chain.  
+**—**: You can drag these scissors onto any item to split it into the two previous level items in the Merge chain.  
   _earlier:_ ~~You can drag these scissors onto any item to split it into the two previous level items in the merge chain.~~ (until 23.12.01)
-**NOCHANGE**: Two Scissors can be merged into one to stack their charges.
+**—**: Two Scissors can be merged into one to stack their charges.
 **GRANDMA** (Joyous): Sometimes you just need to tear things down to build them back up again.
 
 ### Bonus Unlimited Energy
 `Bonus_Unlimited_Energy` · seen 23.09.02–26.07.01
 - trigger: unknown, hint=Bonus reward dialogue (versions None–None)
 
-**NOCHANGE**: Double tap on the Unlimited Energy item to activate it.
-**NOCHANGE**: While Unlimited Energy is active, your energy will never run out! 
+**—**: Double tap on the Unlimited Energy item to activate it.
+**—**: While Unlimited Energy is active, your energy will never run out! 
 
 ### BoultonBoulevard 02
 `BoultonBoulevard_02` · seen 26.02.01–26.07.01
@@ -1798,7 +1798,7 @@ How handy!
 
 **GRANDMA**: Hmm, something smells tasty in here... What could it be?
 **GRANDMA**: Oh my, a pie!
-**NOCHANGE**: Note: Here is the pie that you ordered. Enjoy.
+**—**: Note: Here is the pie that you ordered. Enjoy.
 
 ### EP1 IzzyEscapesDialogue
 `EP1_IzzyEscapesDialogue` · seen 25.05.01–26.07.01
@@ -2511,7 +2511,7 @@ Let's try it out on the Garage Board.
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Joyous): Yes! A whole new floor to explore and restore!
-**NONE**: I'll be the first to admit it, dearie. You've done an amazing job so far.
+**—**: I'll be the first to admit it, dearie. You've done an amazing job so far.
 **GRANDMA** (Encouraging): That's why I'm looking forward to what you do here!
 **MADDIE** (Thinking): What is this place? Almost looks like a nautical museum...
 **MADDIE** (Relaxed): I wonder if Clara had anything to do with it?
@@ -4708,13 +4708,13 @@ Let's try it out on the Garage Board.
 **MADDIE**: *Ring Ring*
 **MADDIE** (Doubtful): Huh... It’s Leonard. What does HE want?!
 **MADDIE**: Hello?
-**NOCHANGE** (Annoyed): You no-good scheming nobody... I don’t know how you pulled this off, but mark my words...
+**—**: You no-good scheming nobody... I don’t know how you pulled this off, but mark my words...
 **MADDIE**: Excuse me! What are you talking about?!
-**NOCHANGE** (Doubtful): Don’t play coy with me, little girl! Now it makes total sense why you came back!
-**NOCHANGE** (Annoyed): You thought you could take MY mansion away from me?!
-**NOCHANGE**: I was about to sign the deed away when it was suddenly discovered that ownership was transferred to YOU!
+**—**: Don’t play coy with me, little girl! Now it makes total sense why you came back!
+**—**: You thought you could take MY mansion away from me?!
+**—**: I was about to sign the deed away when it was suddenly discovered that ownership was transferred to YOU!
 **MADDIE**: What?!
-**NOCHANGE** (Encouraging): Oh, don’t worry. Bruno is on his way now to have you sign it away. You’ve only delayed the inevitable! *Click!*
+**—**: Oh, don’t worry. Bruno is on his way now to have you sign it away. You’ve only delayed the inevitable! *Click!*
 **MADDIE** (Surprised): How did I become the sole owner of the estate?!
 
 ### Library03
@@ -4790,10 +4790,10 @@ Let's try it out on the Garage Board.
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Charming): Roddy...
-**NOCHANGE** (Charming): Y- Yes?
-**NOCHANGE** (Charming): I feel like...
-**NOCHANGE** (Charming): M-Me too, Maddie...
-**NOCHANGE** (Surprised): !!!
+**—**: Y- Yes?
+**—**: I feel like...
+**—**: M-Me too, Maddie...
+**—**: !!!
 **ARTHUR**: Hello, Mads...
 
 ### Library08
@@ -4985,14 +4985,14 @@ Let's try it out on the Garage Board.
 `Lounge11.2` · seen 25.05.01–26.07.01
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
-**NONE** (Annoyed): My... that was riveting...
+**—**: My... that was riveting...
 **MADDIE** (Relaxed): Roddy, I didn't know you were still around...
-**NONE** (Doubtful): Ouch.
-**NONE** (Doubtful): Well, it looks like you got things handled here, so I'll head back to the office.
+**—**: Ouch.
+**—**: Well, it looks like you got things handled here, so I'll head back to the office.
 **MADDIE** (Encouraging): Oh Roddy, calm down.
-**NONE** (Annoyed): No no... maybe I'm just not good company.
+**—**: No no... maybe I'm just not good company.
 **MADDIE** (Doubtful): Roddy, I was just distracted-
-**NONE** (Annoyed): Hmph...
+**—**: Hmph...
 
 ### Lounge12
 `Lounge12` · seen 25.05.01–26.07.01
@@ -5291,12 +5291,12 @@ Let's put it out, quickly!
 
 **MADDIE**: Victoria! What do you want?
 **MADDIE**: It's over!
-**NOCHANGE** (Frustrated): Over? OVER?! It isn't over until I DECIDE it is! Do you hear me?! 
-**NOCHANGE** (Worried): Because of YOU, my precious Bruno is now rotting in a jail cell! 
+**—**: Over? OVER?! It isn't over until I DECIDE it is! Do you hear me?! 
+**—**: Because of YOU, my precious Bruno is now rotting in a jail cell! 
 **MADDIE**: Good! He deserves to-
-**NOCHANGE** (Doubtful): You have no idea who and what you're dealing with, Maddie! 
-**NOCHANGE** (Frustrated): But I'll make sure you and your grandmother learn by the end of it... Oh, I'll make sure!
-**NOCHANGE** (Frustrated): *Click*
+**—**: You have no idea who and what you're dealing with, Maddie! 
+**—**: But I'll make sure you and your grandmother learn by the end of it... Oh, I'll make sure!
+**—**: *Click*
 **MADDIE** (Worried): *Gulp*
 **GRANDMA**: Who was that, dearie? I could hear their voice in the hallway!
 
@@ -5529,9 +5529,9 @@ Let's put it out, quickly!
 
 **MADDIE** (Annoyed): Ew, those webs are so sticky!
 **ANTIQUEDEALER** (Frustrated): Never mind the webs! Is that a... spider? They're, um, really not my thing.
-**NOCHANGE**: I guess that's why you've been more of an <i>observer</i> on this set of tasks.
+**—**: I guess that's why you've been more of an <i>observer</i> on this set of tasks.
 **ANTIQUEDEALER** (Encouraging): I prefer to think of it as <i>advisor</i>. But... I have an appointment to get to. I'll see you later!
-**NOCHANGE** (Thinking): Appointment... Right. 
+**—**: Appointment... Right. 
 
 ### Maze Unlock
 `Maze_Unlock` · seen 23.09.02–26.07.01
@@ -5977,7 +5977,7 @@ Let's put it out, quickly!
   _earlier:_ ~~I don't think dogs eat pies, Grandma.~~ (until 23.09.02)
 **MADDIE** (Doubtful): He won't do that, Grandma.  
   _earlier:_ ~~Yeah, well, guilty until proven innocent, if you ask me.~~ (until 23.09.02)
-**NOCHANGE** (Doubtful): I hope not. He's cute, but I don't want him... disturbing anything.  
+**—**: I hope not. He's cute, but I don't want him... disturbing anything.  
   _earlier:_ ~~Ruff, ruff!~~ (until 23.09.02)
 **DOG** (Joyous): Ruff, ruff!
 
@@ -6641,15 +6641,15 @@ Play further to fully unlock it
 `RoddyAndMaddieThirdConversation` · seen 22.02.06–26.07.01
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
-**NOCHANGE**: There's someone in the driveway. I think I know who...
+**—**: There's someone in the driveway. I think I know who...
 **RODDY** (Worried): I can see you’ve been very busy! But the more you clear, the more I can see that this place is enormous! Have you thought about calling in some help?
-**NOCHANGE** (Discouraged): It's, well, it's because of Ursula. My friend said people there are talking about her 'dangerous past' - and her arrest.
-**NOCHANGE** (Worried): Now that you mention it... That's a good idea. It has been a lot of work!
-**NOCHANGE** (Doubtful): Yeah, about the arrest - who exactly did you show the photo of the gold watch to?
-**NOCHANGE** (Worried): Uh, just people around town, like you asked me to! Maybe, you know, the police, in case it was missing.
-**NOCHANGE** (Annoyed): I see. That gold watch was the reason she was arrested, Roddy. 
-**NOCHANGE** (Surprised): Oh no! Maddie, you must know I never meant anything bad to happen to her.
-**NOCHANGE** (Doubtful): Dress to impress, right? Let's get to it, then!
+**—**: It's, well, it's because of Ursula. My friend said people there are talking about her 'dangerous past' - and her arrest.
+**—**: Now that you mention it... That's a good idea. It has been a lot of work!
+**—**: Yeah, about the arrest - who exactly did you show the photo of the gold watch to?
+**—**: Uh, just people around town, like you asked me to! Maybe, you know, the police, in case it was missing.
+**—**: I see. That gold watch was the reason she was arrested, Roddy. 
+**—**: Oh no! Maddie, you must know I never meant anything bad to happen to her.
+**—**: Dress to impress, right? Let's get to it, then!
 
 ### RomanticSpotCarWithFlowers
 `RomanticSpotCarWithFlowers` · seen 23.09.02–26.07.01
@@ -9044,7 +9044,7 @@ Play further to fully unlock it
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): Incredible! There's a hidden mechanism in the pouf!
-**NONE**: Looking at how it works, I can definitely recognize who built this...
+**—**: Looking at how it works, I can definitely recognize who built this...
 **MADDIE** (Relaxed): Grandpa Charlie, you really are a genius when it comes to hidden contraptions!
 **—**: Wait... This jewelry is exquisite! But... Looks like something is missing.
 **MADDIE** (Thinking): Judging by the shape of the indentation, I think it might be a jewel of some kind.

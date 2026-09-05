@@ -94,7 +94,7 @@ Every story in which Dog speaks.
   _earlier:_ ~~I don't think dogs eat pies, Grandma.~~ (until 23.09.02)
 **MADDIE** (Doubtful): He won't do that, Grandma.  
   _earlier:_ ~~Yeah, well, guilty until proven innocent, if you ask me.~~ (until 23.09.02)
-**NOCHANGE** (Doubtful): I hope not. He's cute, but I don't want him... disturbing anything.  
+**—**: I hope not. He's cute, but I don't want him... disturbing anything.  
   _earlier:_ ~~Ruff, ruff!~~ (until 23.09.02)
 **DOG** (Joyous): Ruff, ruff!
 

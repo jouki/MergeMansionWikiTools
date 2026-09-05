@@ -96,7 +96,8 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
   <aside>
     <div class="fld"><label for="q">Search text, speaker, story id, area, event</label><input id="q" type="search" placeholder="e.g. Grandma bail, Pool House, CBE_Easter…" autocomplete="off"></div>
     <div class="fld"><label>Source of the dialogue</label><div class="chips" id="kinds"></div></div>
-    <div class="fld"><label for="char">Character speaking</label><select id="char"><option value="">Any character</option></select></div>
+    <div class="fld"><label for="char">Character speaking</label><select id="char"><option value="">Any character</option></select>
+      <div class="chips" style="margin-top:6px"><button type="button" class="chip on" id="charSortLines">by lines</button><button type="button" class="chip" id="charSortAz">A–Z</button></div></div>
     <div class="fld"><label for="scope">Area or event</label><select id="scope"><option value="">Anywhere</option></select></div>
     <label class="toggle"><input type="checkbox" id="onlyChanged"> Only lines whose text changed between game versions</label>
     <label class="toggle"><input type="checkbox" id="showEmpty" checked> Show silent lines (no text, camera/animation beats)</label>
@@ -143,12 +144,31 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
     el.onclick = () => { if (active.has(k)) active.delete(k); else active.add(k); el.classList.toggle('on', active.has(k)); render(); };
     kinds.appendChild(el);
   });
+  // characters: only those that actually speak in a story of this page; sortable by line count or name
   const charSel = document.getElementById('char');
-  D.characters.forEach(c => { const o=document.createElement('option'); o.value=c.id; o.textContent=`${c.name} — ${c.lines.toLocaleString('en-US')} lines, ${c.stories} stories`; charSel.appendChild(o); });
+  const present = new Set(); all.forEach(s => s.chars.forEach(c => present.add(c)));
+  const charList = D.characters.filter(c => present.has(c.id));
+  function fillChars(mode) {
+    const keep = charSel.value;
+    const sorted = charList.slice().sort(mode === 'az' ? (a, b) => a.name.localeCompare(b.name, 'en') : (a, b) => b.lines - a.lines);
+    charSel.innerHTML = '<option value="">Any character</option>';
+    sorted.forEach(c => { const o=document.createElement('option'); o.value=c.id; o.textContent=`${c.name} — ${c.lines.toLocaleString('en-US')} lines, ${c.stories} stories`; charSel.appendChild(o); });
+    charSel.value = keep;
+    document.getElementById('charSortLines').classList.toggle('on', mode !== 'az');
+    document.getElementById('charSortAz').classList.toggle('on', mode === 'az');
+  }
+  fillChars('lines');
+  document.getElementById('charSortLines').onclick = () => fillChars('lines');
+  document.getElementById('charSortAz').onclick = () => fillChars('az');
+  // areas in game progression order (wiki orderingIndex from Module:Datatable/Areas/Mapping), unknown ones last
   const scopeSel = document.getElementById('scope');
   const scopeCount = {}; all.forEach(s => s.scopes.forEach(sc => scopeCount[sc]=(scopeCount[sc]||0)+1));
-  const areas = Object.keys(scopeCount).filter(k=>k.startsWith('A:')).sort(), evs = Object.keys(scopeCount).filter(k=>k.startsWith('E:')).sort();
-  const og1=document.createElement('optgroup'); og1.label='Areas'; areas.forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=`${k.slice(2)} (${scopeCount[k]})`;og1.appendChild(o);});
+  const order = D.areaOrder || {};
+  const areaKey = k => [order[k.slice(2)] === undefined ? 1e6 : order[k.slice(2)], k];
+  const areas = Object.keys(scopeCount).filter(k=>k.startsWith('A:')).sort((a, b) => { const [x, y] = [areaKey(a), areaKey(b)]; return x[0] - y[0] || x[1].localeCompare(y[1]); });
+  const evs = Object.keys(scopeCount).filter(k=>k.startsWith('E:')).sort();
+  const og1=document.createElement('optgroup'); og1.label='Areas (progression order)';
+  areas.forEach(k=>{const o=document.createElement('option');o.value=k;const idx=order[k.slice(2)];o.textContent=`${idx===undefined?'':'#'+Math.round(idx)+' '}${k.slice(2)} (${scopeCount[k]})`;og1.appendChild(o);});
   const og2=document.createElement('optgroup'); og2.label='Events'; evs.forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=`${k.slice(2)} (${scopeCount[k]})`;og2.appendChild(o);});
   scopeSel.appendChild(og1); scopeSel.appendChild(og2);
 

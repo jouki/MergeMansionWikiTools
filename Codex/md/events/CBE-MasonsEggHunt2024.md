@@ -39,7 +39,7 @@
 **MADDIE** (Relaxed): The place looks wonderful, Mason - great job!
 **MASON**: Thank you! I hope you're ready for the egg hunt to end all egg hunts!
 **MADDIE** (Doubtful): Mason? Where did you go?
-**NOCHANGE**: Mason??
+**—**: Mason??
 **MASON**: This Easter egg hunt will not be like any you've done before...
 **MASON**: Seek high and low, turn every stone and use your wits to decode the CLUES I've left you!
 **MADDIE** (Relaxed): You --

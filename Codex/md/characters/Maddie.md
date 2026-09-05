@@ -82,9 +82,9 @@ Every story in which Maddie speaks.
 **RODDY**: Would you like to get a cup of-
 **MADDIE** (Surprised): What was that noise?!
 
-### HotspotTitle_LandingRoom: Place the Anubis
+### Landing Room: Place the Anubis
 `Anubis` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingRoomPlaceLandingAnubisF6, phase=task completed, task=Place the Anubis (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingRoomPlaceLandingAnubisF6, phase=task completed, task=Place the Anubis (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Hold on! I know this one! Anubis! God of the underworld?
 **MADDIE** (Encouraging): That's right! He's the one to guide the souls in the afterlife and protect their tombs.
@@ -99,9 +99,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): I wonder if they were planted here as treats for the horses?
 **MADDIE**: *Crunch* Mmmmm... So delicious!
 
-### HotspotTitle_LandingRoom: Fix the crack
+### Landing Room: Fix the crack
 `AquariumsFixed` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingRoomRemoveCrackAndWater02DD3, phase=task completed, task=Fix the crack (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingRoomRemoveCrackAndWater02DD3, phase=task completed, task=Fix the crack (versions 24.04.01–26.07.01)
 
 **MADDIE** (Charming): There! The glass is as good as new!
 **JACKIE** (Doubtful): Hmm, I suppose the only way to truly know if the glass is fixed is if you try and move the compass again.
@@ -109,9 +109,9 @@ Every story in which Maddie speaks.
 **JACKIE** (Encouraging): Haha, sorry, Maddie. Unfortunately, I can't hang around to witness this next attempt. Duty calls!
 **JACKIE** (Worried): And be careful, this room looks like it was made to be hidden...
 
-### HotspotTitle_LandingRoom: Drain the water
+### Landing Room: Drain the water
 `AquariumsMess` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingRoomRemoveLandingAquariumDirtWaterCB3, phase=task completed, task=Drain the water (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingRoomRemoveLandingAquariumDirtWaterCB3, phase=task completed, task=Drain the water (versions 24.04.01–26.07.01)
 
 **MADDIE** (Worried): Eeeeeeeeew!!!
 **MADDIE** (Worried): These aquariums are filthy!
@@ -262,7 +262,7 @@ Every story in which Maddie speaks.
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Thinking): Hmm... It looks like it needs a numeric key code.
-**NOCHANGE**: Most of the things up here are about mom and dad. Their music, the wedding dress...  
+**—**: Most of the things up here are about mom and dad. Their music, the wedding dress...  
   _earlier:_ ~~Most of the things up here are about mom and dad. Their music, the wedding dress, and the other thing...~~ (until 25.03.01)
 **MADDIE** (Encouraging): I’ll try their anniversary date!
 **—**: It worked, and it looks like it held a key!  
@@ -272,10 +272,10 @@ Every story in which Maddie speaks.
 `Attic14.2` · seen 25.05.01–26.07.01
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
-**NOCHANGE** (Thinking): Now... let’s open this door.  
+**—**: Now... let’s open this door.  
   _earlier:_ ~~It worked, and it looks like it held a key. Now... let’s open this door.~~ (until 25.04.01)
 **MADDIE** (Surprised): Oh, wow! It looks like an elevator!
-**NOCHANGE** (Doubtful): Behind a wardrobe?!
+**—**: Behind a wardrobe?!
 
 ### Attic15
 `Attic15` · seen 25.05.01–26.07.01
@@ -790,9 +790,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): Hmmm... That could actually be the case, come to think of it.
 **MADDIE**: Well... I’m sure after I clean this place up, I’ll learn more about Casey and Skatie.
 
-### HotspotTitle_LandingRoom: Clean the birdcage
+### Landing Room: Clean the birdcage
 `Birdcage` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingRoomSwapLandingBirdcageRundownA3, phase=task completed, task=Clean the birdcage (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingRoomSwapLandingBirdcageRundownA3, phase=task completed, task=Clean the birdcage (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): That's a big birdcage!
 **MADDIE** (Thinking): Must have been a big bird.
@@ -813,9 +813,9 @@ Every story in which Maddie speaks.
 
 **MADDIE** (Joyous): I got this as a present for my birthday. I was told to only use it for emergencies.
 **MADDIE**: I think fixing up this mansion qualifies as an emergency!
-**NOCHANGE**: Try dragging it onto any item with a lightning symbol on it.
-**NOCHANGE**: That will increase the item’s level.
-**NOCHANGE**: Two Lightning Cards can be stacked together to combine their charges.
+**—**: Try dragging it onto any item with a lightning symbol on it.
+**—**: That will increase the item’s level.
+**—**: Two Lightning Cards can be stacked together to combine their charges.
 **GRANDMA** (Worried): Where did I put my Lightning Card? Or did I loan it to someone?
 
 ### Bonus BlueCard
@@ -825,9 +825,9 @@ Every story in which Maddie speaks.
 **GRANDMA** (Joyous): I really do like the color blue...the color of the bright sky!
 **MADDIE** (Joyous): I prefer orange.
 **GRANDMA** (Doubtful): You do? How about after trying this?
-**NOCHANGE**: Try dragging it onto any item without a lightning symbol.
-**NOCHANGE**: That will increase the item’s level.
-**NOCHANGE**: Two Blue Cards can be stacked together to combine their charges.
+**—**: Try dragging it onto any item without a lightning symbol.
+**—**: That will increase the item’s level.
+**—**: Two Blue Cards can be stacked together to combine their charges.
 **MADDIE** (Charming): That's nice but I still prefer orange.
 **GRANDMA** (Encouraging): Darling, you will learn to appreciate blue in time.
 
@@ -837,9 +837,9 @@ Every story in which Maddie speaks.
 
 **MADDIE** (Surprised): Ooh what's this?!? Scissors!
 **MADDIE**: Rumor has it that this will give its owner good fortune. 
-**NOCHANGE**: You can drag these scissors onto any item to split it into the two previous level items in the Merge chain.  
+**—**: You can drag these scissors onto any item to split it into the two previous level items in the Merge chain.  
   _earlier:_ ~~You can drag these scissors onto any item to split it into the two previous level items in the merge chain.~~ (until 23.12.01)
-**NOCHANGE**: Two Scissors can be merged into one to stack their charges.
+**—**: Two Scissors can be merged into one to stack their charges.
 **GRANDMA** (Joyous): Sometimes you just need to tear things down to build them back up again.
 
 ### The Ranch: Remove dirt from the notice board
@@ -4213,7 +4213,7 @@ Every story in which Maddie speaks.
 **MADDIE** (Relaxed): The place looks wonderful, Mason - great job!
 **MASON**: Thank you! I hope you're ready for the egg hunt to end all egg hunts!
 **MADDIE** (Doubtful): Mason? Where did you go?
-**NOCHANGE**: Mason??
+**—**: Mason??
 **MASON**: This Easter egg hunt will not be like any you've done before...
 **MASON**: Seek high and low, turn every stone and use your wits to decode the CLUES I've left you!
 **MADDIE** (Relaxed): You --
@@ -4888,9 +4888,9 @@ Every story in which Maddie speaks.
 **MADDIE** (Thinking): Maybe Leonard liked those movies too... Or... maybe this is closer to real life?
 **MADDIE** (Worried): *gulp*
 
-### HotspotTitle_LandingRoom: Remove the crate
+### Landing Room: Remove the crate
 `CatBox` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingRoomRemoveLandingCatStatueBoxedB1, phase=task completed, task=Remove the crate (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingRoomRemoveLandingCatStatueBoxedB1, phase=task completed, task=Remove the crate (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): What's in the box? More unique decor?
 **MADDIE** (Surprised): Well, some of that, but there's tools!
@@ -5004,8 +5004,8 @@ Every story in which Maddie speaks.
 
 **MADDIE** (Thinking): Uh, Grandma - I got a phone call earlier from someone claiming that they were Grandpa Charlie...
 **MADDIE** (Worried): Do you know who that could be?
-**NOCHANGE** (Frustrated): I don't want to talk about it, Maddie!
-**NOCHANGE** (Frustrated): Now, what else should we do here?
+**—**: I don't want to talk about it, Maddie!
+**—**: Now, what else should we do here?
 **MADDIE** (Worried): Ugh, Grandma! 
 
 ### Cinema01
@@ -6500,9 +6500,9 @@ How handy!
 **MADDIE** (Encouraging): Like straight out of a crime movie...
 **MADDIE** (Joyous): Unlike my relatives, I don't think I have much use for it.
 
-### HotspotTitle_LandingRoom: Place the cat statue
+### Landing Room: Place the cat statue
 `EgyptianCat` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingRoomPlaceLandingCatStatueB15, phase=task completed, task=Place the cat statue (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingRoomPlaceLandingCatStatueB15, phase=task completed, task=Place the cat statue (versions 24.04.01–26.07.01)
 
 **MADDIE**: Wow... This is beautiful! Maybe this should belong in the gallery?
 **MADDIE** (Thinking): But, I don't think she'd like that...
@@ -7848,7 +7848,7 @@ Let's try it out on the Garage Board.
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Joyous): Yes! A whole new floor to explore and restore!
-**NONE**: I'll be the first to admit it, dearie. You've done an amazing job so far.
+**—**: I'll be the first to admit it, dearie. You've done an amazing job so far.
 **GRANDMA** (Encouraging): That's why I'm looking forward to what you do here!
 **MADDIE** (Thinking): What is this place? Almost looks like a nautical museum...
 **MADDIE** (Relaxed): I wonder if Clara had anything to do with it?
@@ -8633,9 +8633,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Doubtful): 1963. That can't have been the last time this pantry was used, can it?
 **MADDIE** (Thinking): Maybe it was. They probably closed off some parts of the mansion earlier than others...
 
-### HotspotTitle_LandingRoom: Fix the tiling
+### Landing Room: Fix the tiling
 `FloorCompass` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingRoomRemoveLandingCrackedTilesACA1, phase=task completed, task=Fix the tiling (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingRoomRemoveLandingCrackedTilesACA1, phase=task completed, task=Fix the tiling (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Interesting, the north node on this compass seems to be glowing.
 **MADDIE** (Thinking): The funny thing is, it's not pointing north at all...
@@ -8681,9 +8681,9 @@ Let's try it out on the Garage Board.
 **MADDIE** (Thinking): It would be great to play a couple games with it once I restore this section.
 **MADDIE** (Thinking): I think I still remember a few fun card games...
 
-### HotspotTitle_LandingRoom: Cut off and replace the arrowhead
+### Landing Room: Cut off and replace the arrowhead
 `Fountain` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingRoomSwapDirtyArrowheadCA6, phase=task appears, task=Cut off and replace the arrowhead (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingRoomSwapDirtyArrowheadCA6, phase=task appears, task=Cut off and replace the arrowhead (versions 24.04.01–26.07.01)
 
 **MADDIE**: This fountain is a work of art! Look at the details! Too bad it's all dried up.
 **MADDIE** (Encouraging): I'm not sure if I can get it to work, but at least I can make sure it isn't a mess!
@@ -8911,9 +8911,9 @@ Let's try it out on the Garage Board.
 
 **GRANDMA**: I know this old car is a beauty, but there's something missing. Can you spot it?
 **MADDIE** (Thinking): Huh... no! What is it?
-**NOCHANGE**: I'll give you a clue - look at the car hood!
-**NOCHANGE** (Thinking): Car hood? Can't you just tell me what it is I’m looking for?
-**NOCHANGE**: I'm sure you'll figure it out, dear!
+**—**: I'll give you a clue - look at the car hood!
+**—**: Car hood? Can't you just tell me what it is I’m looking for?
+**—**: I'm sure you'll figure it out, dear!
 
 ### GarageTraderTableRevealed
 `GarageTraderTableRevealed` · seen 22.02.06–26.07.01
@@ -9357,9 +9357,9 @@ The door will shift between the lines.'
 **MADDIE** (Thinking): Well, this here is a hand. I thought it was just eccentric decor, but perhaps I should place the watch here.  
   _earlier:_ ~~I wonder where it leads?~~ (until 25.10.01)
 
-### HotspotTitle_GreatHall: Search for the key
+### Great Hall: Search for the key
 `Greathall01_Frontdoor` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallKeyTask, phase=task completed, task=Search for the key (versions 24.04.01–26.07.01)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallKeyTask, phase=task completed, task=Search for the key (versions 24.04.01–26.07.01)
 
 **MADDIE** (Frustrated): I can't believe the key was under the mat this whole time!
 **MADDIE** (Thinking): I'm pretty sure I checked under there and I didn't find anything...
@@ -9369,10 +9369,10 @@ The door will shift between the lines.'
 **GRANDMA** (Worried): Dearie... If you keep digging up the past, all you get is dirty!
 **MADDIE** (Thinking): ...
 
-### HotspotTitle_GreatHall: Open the door
+### Great Hall: Open the door
 `Greathall02_Inside` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallOpenMansionA0, phase=task completed, task=Open the door (versions 24.04.01–25.01.03)
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallRemovestepdebrisA1, phase=task completed, task=Remove step debris (versions 25.02.01–26.07.01)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallOpenMansionA0, phase=task completed, task=Open the door (versions 24.04.01–25.01.03)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemovestepdebrisA1, phase=task completed, task=Remove step debris (versions 25.02.01–26.07.01)
 
 **MADDIE** (Joyous): I can't believe it! I'm in the Boulton family Mansion!
 **MADDIE** (Thinking): I didn't even <b>know</b> there was a mansion, until I accidently saw Grandma's notice...
@@ -9381,10 +9381,10 @@ The door will shift between the lines.'
 **VICTORIA** (Thinking): So, you finally did it. You finally got inside this crumbling heap...
 **MADDIE** (Surprised): Huh?! Who are you?!
 
-### HotspotTitle_GreatHall: Remove step debris
+### Great Hall: Remove step debris
 `Greathall03_Continues` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallRemovestepdebrisA1, phase=task completed, task=Remove step debris (versions 24.04.01–25.01.03)
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallRemoveDustSheetA2, phase=task completed, task=Remove dust sheet (versions 25.02.01–26.07.01)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemovestepdebrisA1, phase=task completed, task=Remove step debris (versions 24.04.01–25.01.03)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemoveDustSheetA2, phase=task completed, task=Remove dust sheet (versions 25.02.01–26.07.01)
 
 **MADDIE**: Well? Who are you, and what are you doing in my Mansion?
 **VICTORIA** (Discouraged): Oh please... This Mansion belongs to the Hopewell Bay town council! Or at least, it soon will, even in this sorry state...
@@ -9395,10 +9395,10 @@ The door will shift between the lines.'
 **VICTORIA** (Thinking): That's right! But then I thought... <i>Victoria, why don't you see it for yourself?</i>
 **VICTORIA** (Doubtful): And missy... I ain't happy with what I'm seeing!
 
-### HotspotTitle_GreatHall: Remove dust sheet
+### Great Hall: Remove dust sheet
 `Greathall04_Continues` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallRemoveDustSheetA2, phase=task completed, task=Remove dust sheet (versions 24.04.01–25.01.03)
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallRemovedebristopofstepsA3, phase=task completed, task=Remove debris at the top of the steps (versions 25.02.01–26.07.01)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemoveDustSheetA2, phase=task completed, task=Remove dust sheet (versions 24.04.01–25.01.03)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemovedebristopofstepsA3, phase=task completed, task=Remove debris at the top of the steps (versions 25.02.01–26.07.01)
 
 **VICTORIA** (Annoyed): I'll be straight with you... You'll need to do more! A lot more, if you even want to consider keeping the mansion.
 **MADDIE** (Discouraged): I only just got inside! I don't even have access to all the rooms yet!
@@ -9408,10 +9408,10 @@ The door will shift between the lines.'
 **VICTORIA** (Doubtful): And I'm very confident you'll do the same. You are a Boulton after all. 
 **VICTORIA** (Relaxed): And when you do... I'll be here. Claiming it for the council. Expect to see Holden a bit more from now on! Ciao!
 
-### HotspotTitle_GreatHall: Remove debris at the top of the steps
+### Great Hall: Remove debris at the top of the steps
 `Greathall05_Upset` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallRemovedebristopofstepsA3, phase=task completed, task=Remove debris at the top of the steps (versions 24.04.01–25.01.03)
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallPlacerestoreddeskA7, phase=task completed, task=Place restored desk (versions 25.02.01–26.07.01)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemovedebristopofstepsA3, phase=task completed, task=Remove debris at the top of the steps (versions 24.04.01–25.01.03)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallPlacerestoreddeskA7, phase=task completed, task=Place restored desk (versions 25.02.01–26.07.01)
 
 **GRANDMA** (Worried): Are you alright, Maddie? You look upset.
 **MADDIE**: Grandma? I'm... fine. I wasn't expecting to see you in here, though.
@@ -9423,9 +9423,9 @@ The door will shift between the lines.'
 **GRANDMA** (Doubtful): ...
 **GRANDMA** (Charming): ...I do have another story I can tell you about the great hall!
 
-### HotspotTitle_GreatHall: Fix and place the red hat back
+### Great Hall: Fix and place the red hat back
 `Greathall06_Charlie` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallPlaceGHallHatRedBc6, phase=task completed, task=Fix and place the red hat back (versions 24.04.01–26.07.01)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallPlaceGHallHatRedBc6, phase=task completed, task=Fix and place the red hat back (versions 24.04.01–26.07.01)
 
 **GRANDMA** (Encouraging): Your Grandpa Charlie never liked this room when we first got married.
 **MADDIE** (Relaxed): He didn't? But it's so grand and beautiful! Especially now that I've restored it.
@@ -9441,48 +9441,48 @@ The door will shift between the lines.'
 
 **MADDIE**: What's this? A key! I guess it's for one these doors.
 
-### HotspotTitle_GreatHall: Dust and remove old desk
+### Great Hall: Dust and remove old desk
 `Greathall08_Missing_Letter` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallRemoveOldDeskA5, phase=task appears, task=Dust and remove old desk (versions 24.04.01–26.07.01)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemoveOldDeskA5, phase=task appears, task=Dust and remove old desk (versions 24.04.01–26.07.01)
 
 **MADDIE** (Doubtful): That's strange...
 **MADDIE** (Surprised): Everything is covered in dust, except for this one spot!
 **MADDIE** (Thinking): Hmm, could it have been a letter?
 
-### HotspotTitle_GreatHall: Clean and remove coat stand
+### Great Hall: Clean and remove coat stand
 `Greathall09_Footprints` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallRemoveCoatStandB4, phase=task appears, task=Clean and remove coat stand (versions 24.04.01–26.07.01)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemoveCoatStandB4, phase=task appears, task=Clean and remove coat stand (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): There's footprints in the dust!
 **MADDIE** (Surprised): Has someone been here all this time?!
 **MADDIE** (Thinking): Maybe I should keep an eye out, just in case...
 
-### HotspotTitle_GreatHall: Clean the dust and the cobwebs
+### Great Hall: Clean the dust and the cobwebs
 `Greathall10_Grandfather_Clock` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallRemoveDustCobwebsClockDa1, phase=task completed, task=Clean the dust and the cobwebs (versions 24.04.01–26.07.01)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemoveDustCobwebsClockDa1, phase=task completed, task=Clean the dust and the cobwebs (versions 24.04.01–26.07.01)
 
 **MADDIE**: This grandfather clock looks like it's in pretty bad shape...
 **MADDIE** (Thinking): Hmm... Grandfather clock... Charlie Clock?
 **MADDIE** (Discouraged): Maddie... you're starting to lose it...
 
-### HotspotTitle_GreatHall: Clean and place the old painting back
+### Great Hall: Clean and place the old painting back
 `Greathall11_Old_Painting` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallPlaceGHallPortraitBf3, phase=task completed, task=Clean and place the old painting back (versions 24.04.01–26.07.01)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallPlaceGHallPortraitBf3, phase=task completed, task=Clean and place the old painting back (versions 24.04.01–26.07.01)
 
 **MADDIE**: Ignatius and Agatha Boulton...
 **MADDIE** (Relaxed): They looked very happy together.
 
-### HotspotTitle_GreatHall: Fix and place the old intercom back
+### Great Hall: Fix and place the old intercom back
 `Greathall12_Intercom` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallPlaceGHallIntercomBh5, phase=task appears, task=Fix and place the old intercom back (versions 24.04.01–26.07.01)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallPlaceGHallIntercomBh5, phase=task appears, task=Fix and place the old intercom back (versions 24.04.01–26.07.01)
 
 **MADDIE** (Joyous): Oh wow! An old B3 Intercom system from the 1920's!
 **MADDIE** (Relaxed): Grandma used to read me the manual as a kid, to get me to sleep.
 **MADDIE**: Little did she know, it sparked my love for engineering and invention!
 
-### HotspotTitle_GreatHall: Polish the knight armor
+### Great Hall: Polish the knight armor
 `Greathall13_Armor` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallPlaceGHallArmourLeftPolishedD6, phase=task completed, task=Polish the knight armor (versions 24.04.01–26.07.01)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallPlaceGHallArmourLeftPolishedD6, phase=task completed, task=Polish the knight armor (versions 24.04.01–26.07.01)
 
 **MADDIE**: This armor looks old...
 **MADDIE** (Thinking): Were the Boultons from an old family of knights?!
@@ -9495,9 +9495,9 @@ The door will shift between the lines.'
 **MADDIE**: It's locked! I wonder what's in there?
 **MADDIE** (Thinking): Maybe there's something to help me keep Victoria off my back?!
 
-### HotspotTitle_GreatHall: Search the Clock
+### Great Hall: Search the Clock
 `GreathallOutro_Key_Found` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallCorridorKeyTask, phase=task completed, task=Search the Clock (versions 24.04.01–26.07.01)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallCorridorKeyTask, phase=task completed, task=Search the Clock (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Hmmm... I wonder if this key fits that door upstairs?
 **MADDIE** (Joyous): But in any case, this place is done! 
@@ -9732,9 +9732,9 @@ The door will shift between the lines.'
 **MADDIE** (Frustrated): Get it together, Maddie. You got this!
 **MADDIE** (Worried): Okay! Down we go!
 
-### HotspotTitle_LandingRoom: Discourage Holden
+### Landing Room: Discourage Holden
 `Holdencharactertask1` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingCharacterTaskH9, phase=task completed, task=Discourage Holden (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingCharacterTaskH9, phase=task completed, task=Discourage Holden (versions 24.04.01–26.07.01)
 
 **HOLDEN** (Worried): Maddie, I have some concerns about your house...
 **MADDIE** (Annoyed): Oh? Like what?
@@ -9742,9 +9742,9 @@ The door will shift between the lines.'
 **MADDIE** (Encouraging): Oh... Maybe you should just leave, then?
 **HOLDEN** (Annoyed): Hmph...
 
-### HotspotTitle_LandingRoom: Discourage Holden
+### Landing Room: Discourage Holden
 `Holdencharactertask2` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingCharacterTaskH19, phase=task completed, task=Discourage Holden (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingCharacterTaskH19, phase=task completed, task=Discourage Holden (versions 24.04.01–26.07.01)
 
 **MADDIE**: What's wrong, Holden?
 **HOLDEN** (Frustrated): I guess I was expecting to find something juicy. It all seems to be hidden away...
@@ -9752,9 +9752,9 @@ The door will shift between the lines.'
 **MADDIE** (Encouraging): Checked under your shoe lately? 
 **HOLDEN** (Surprised): Oh, gross!
 
-### HotspotTitle_LandingRoom: Discourage Holden
+### Landing Room: Discourage Holden
 `Holdencharactertaskintro` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingCharacterTaskH1, phase=task appears, task=Discourage Holden (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingCharacterTaskH1, phase=task appears, task=Discourage Holden (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Holden! What are you doing here?!
 **MADDIE** (Annoyed): Let me guess... Doing Victoria's dirty work again?
@@ -9765,9 +9765,9 @@ The door will shift between the lines.'
 **HOLDEN**: I'm not at liberty to say. But don't mind me, continue as you were...
 **MADDIE** (Encouraging): Yeah right, I'm not letting him get what he wants. I'm going to make things as difficult as possible for him!
 
-### HotspotTitle_LandingRoom: Discourage Holden
+### Landing Room: Discourage Holden
 `Holdencharactertaskoutro` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingCharacterTaskH25, phase=task completed, task=Discourage Holden (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingCharacterTaskH25, phase=task completed, task=Discourage Holden (versions 24.04.01–26.07.01)
 
 **HOLDEN** (Discouraged): Alright, I'm done here... Might go out and take some shots of the exterior of the house again...
 **MADDIE** (Relaxed): You seem upset...
@@ -13141,9 +13141,9 @@ The door will shift between the lines.'
 **MADDIE** (Joyous): Haha, I know how it sounds. Trust me, this room isn't like the others. Everything is interconnected!
 **JACKIE** (Thinking): I'll have to see it to believe it!
 
-### HotspotTitle_LandingRoom: Fix the crack
+### Landing Room: Fix the crack
 `LandingAquariums` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingRoomRemoveCrackAndWater01DD2, phase=task completed, task=Fix the crack (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingRoomRemoveCrackAndWater01DD2, phase=task completed, task=Fix the crack (versions 24.04.01–26.07.01)
 
 **JACKIE** (Thinking): It must be quite tricky to fix those leaks...
 **MADDIE** (Frustrated): I have to admit, I've never had to fix an aquarium before.
@@ -13178,9 +13178,9 @@ The door will shift between the lines.'
 **MADDIE** (Joyous): I have never seen anything like this in the mansion before!
 **MADDIE** (Joyous): I feel like I'm in one of those video games that Mason always plays!
 
-### HotspotTitle_LandingRoom: Press the tile
+### Landing Room: Press the tile
 `LandingTiles3` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingRoomSwapLandingFloorTileRaisedDC1, phase=task completed, task=Press the tile (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingRoomSwapLandingFloorTileRaisedDC1, phase=task completed, task=Press the tile (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Hmm, well the compass didn't move this time, but all of its grooves are now filled with water too.
 **MADDIE**: I think I'm on the right track!
@@ -13233,13 +13233,13 @@ The door will shift between the lines.'
 **MADDIE**: *Ring Ring*
 **MADDIE** (Doubtful): Huh... It’s Leonard. What does HE want?!
 **MADDIE**: Hello?
-**NOCHANGE** (Annoyed): You no-good scheming nobody... I don’t know how you pulled this off, but mark my words...
+**—**: You no-good scheming nobody... I don’t know how you pulled this off, but mark my words...
 **MADDIE**: Excuse me! What are you talking about?!
-**NOCHANGE** (Doubtful): Don’t play coy with me, little girl! Now it makes total sense why you came back!
-**NOCHANGE** (Annoyed): You thought you could take MY mansion away from me?!
-**NOCHANGE**: I was about to sign the deed away when it was suddenly discovered that ownership was transferred to YOU!
+**—**: Don’t play coy with me, little girl! Now it makes total sense why you came back!
+**—**: You thought you could take MY mansion away from me?!
+**—**: I was about to sign the deed away when it was suddenly discovered that ownership was transferred to YOU!
 **MADDIE**: What?!
-**NOCHANGE** (Encouraging): Oh, don’t worry. Bruno is on his way now to have you sign it away. You’ve only delayed the inevitable! *Click!*
+**—**: Oh, don’t worry. Bruno is on his way now to have you sign it away. You’ve only delayed the inevitable! *Click!*
 **MADDIE** (Surprised): How did I become the sole owner of the estate?!
 
 ### Library03
@@ -13297,10 +13297,10 @@ The door will shift between the lines.'
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Charming): Roddy...
-**NOCHANGE** (Charming): Y- Yes?
-**NOCHANGE** (Charming): I feel like...
-**NOCHANGE** (Charming): M-Me too, Maddie...
-**NOCHANGE** (Surprised): !!!
+**—**: Y- Yes?
+**—**: I feel like...
+**—**: M-Me too, Maddie...
+**—**: !!!
 **ARTHUR**: Hello, Mads...
 
 ### Library08
@@ -13858,14 +13858,14 @@ You will find one hidden beneath me.”
 `Lounge11.2` · seen 25.05.01–26.07.01
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
-**NONE** (Annoyed): My... that was riveting...
+**—**: My... that was riveting...
 **MADDIE** (Relaxed): Roddy, I didn't know you were still around...
-**NONE** (Doubtful): Ouch.
-**NONE** (Doubtful): Well, it looks like you got things handled here, so I'll head back to the office.
+**—**: Ouch.
+**—**: Well, it looks like you got things handled here, so I'll head back to the office.
 **MADDIE** (Encouraging): Oh Roddy, calm down.
-**NONE** (Annoyed): No no... maybe I'm just not good company.
+**—**: No no... maybe I'm just not good company.
 **MADDIE** (Doubtful): Roddy, I was just distracted-
-**NONE** (Annoyed): Hmph...
+**—**: Hmph...
 
 ### Lounge12
 `Lounge12` · seen 25.05.01–26.07.01
@@ -14160,12 +14160,12 @@ Let's put it out, quickly!
 
 **MADDIE**: Victoria! What do you want?
 **MADDIE**: It's over!
-**NOCHANGE** (Frustrated): Over? OVER?! It isn't over until I DECIDE it is! Do you hear me?! 
-**NOCHANGE** (Worried): Because of YOU, my precious Bruno is now rotting in a jail cell! 
+**—**: Over? OVER?! It isn't over until I DECIDE it is! Do you hear me?! 
+**—**: Because of YOU, my precious Bruno is now rotting in a jail cell! 
 **MADDIE**: Good! He deserves to-
-**NOCHANGE** (Doubtful): You have no idea who and what you're dealing with, Maddie! 
-**NOCHANGE** (Frustrated): But I'll make sure you and your grandmother learn by the end of it... Oh, I'll make sure!
-**NOCHANGE** (Frustrated): *Click*
+**—**: You have no idea who and what you're dealing with, Maddie! 
+**—**: But I'll make sure you and your grandmother learn by the end of it... Oh, I'll make sure!
+**—**: *Click*
 **MADDIE** (Worried): *Gulp*
 **GRANDMA**: Who was that, dearie? I could hear their voice in the hallway!
 
@@ -14689,7 +14689,7 @@ Let's put it out, quickly!
 **MADDIE** (Doubtful): There's so much history here, and I don't know any of it!
 **GRANDMA**: Don't worry about his history right now - worry about his stone can! It's missing!
 **MADDIE** (Joyous): If he's missing a stone can, I should look for it! But why does he have one?
-**NOCHANGE**: Find it and I'll tell you, dearie.
+**—**: Find it and I'll tell you, dearie.
 
 ### MansionRightFillerPoolFinished
 `MansionRightFillerPoolFinished` · seen 22.02.06–26.07.01
@@ -14900,9 +14900,9 @@ Let's put it out, quickly!
 
 **MADDIE** (Annoyed): Ew, those webs are so sticky!
 **ANTIQUEDEALER** (Frustrated): Never mind the webs! Is that a... spider? They're, um, really not my thing.
-**NOCHANGE**: I guess that's why you've been more of an <i>observer</i> on this set of tasks.
+**—**: I guess that's why you've been more of an <i>observer</i> on this set of tasks.
 **ANTIQUEDEALER** (Encouraging): I prefer to think of it as <i>advisor</i>. But... I have an appointment to get to. I'll see you later!
-**NOCHANGE** (Thinking): Appointment... Right. 
+**—**: Appointment... Right. 
 
 ### Maze Unlock
 `Maze_Unlock` · seen 23.09.02–26.07.01
@@ -15727,7 +15727,7 @@ Let's put it out, quickly!
   _earlier:_ ~~I don't think dogs eat pies, Grandma.~~ (until 23.09.02)
 **MADDIE** (Doubtful): He won't do that, Grandma.  
   _earlier:_ ~~Yeah, well, guilty until proven innocent, if you ask me.~~ (until 23.09.02)
-**NOCHANGE** (Doubtful): I hope not. He's cute, but I don't want him... disturbing anything.  
+**—**: I hope not. He's cute, but I don't want him... disturbing anything.  
   _earlier:_ ~~Ruff, ruff!~~ (until 23.09.02)
 **DOG** (Joyous): Ruff, ruff!
 
@@ -16749,9 +16749,9 @@ Let's put it out, quickly!
 **DOG**: Ruff!
 **MADDIE**: I'll take that as encouragement! Okay, Rufus, let's help Grandma - whether she wants us to, or not.
 
-### HotspotTitle_LandingRoom: Remove the poisonous plant
+### Landing Room: Remove the poisonous plant
 `PoisonousVines` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingRoomRemoveLandingBerryCluster01B12, phase=task appears, task=Remove the poisonous plant (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingRoomRemoveLandingBerryCluster01B12, phase=task appears, task=Remove the poisonous plant (versions 24.04.01–26.07.01)
 
 **MADDIE**: I almost didn't notice that skull and cross bones sign!
 **MADDIE** (Doubtful): These vines must be poisonous and I'll need to be extra careful.
@@ -16808,7 +16808,7 @@ Let's put it out, quickly!
   _earlier:_ ~~You know, Roddy? You're right––I probably should have a heart-to-heart with her.~~ (until 23.09.02)
 **RODDY** (Relaxed): I don't know why she's kept secrets from you, Maddie, but it's obvious that she loves you.  
   _earlier:_ ~~Sounds like a plan. I've got to get back to work, but good luck with Ursula, Maddie.~~ (until 23.09.02)
-**NOCHANGE** (Encouraging): I'm sure if you talk to her she'll open up - and maybe even serve you some of that delicious pie of hers!  
+**—**: I'm sure if you talk to her she'll open up - and maybe even serve you some of that delicious pie of hers!  
   _earlier:_ ~~Thanks, Roddy. I'll need it!~~ (until 23.09.02)
 **MADDIE**: I can only hope! Thanks, Roddy. You've inspired me.  
   _earlier:_ ~~Now is as good a time as any. I need to find my grandmother so we can have a talk...~~ (until 23.09.02)
@@ -16964,9 +16964,9 @@ Play further to fully unlock it
 **MADDIE**: Merging gives you more XP. Always Merge if you can!  
   _earlier:_ ~~Merging gives you more XP. Always merge if you can!~~ (until 23.12.01)
 
-### HotspotTitle_LandingRoom: Repair the cracked tiles
+### Landing Room: Repair the cracked tiles
 `Returnbox` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingRoomRemoveLandingCrackedTilesBF5, phase=task completed, task=Repair the cracked tiles (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingRoomRemoveLandingCrackedTilesBF5, phase=task completed, task=Repair the cracked tiles (versions 24.04.01–26.07.01)
 
 **MADDIE**: Well, I think that's the last bit of tile that needed fixing!
 **MADDIE**: I should put this box back where I found it, now that I don't need it anymore.
@@ -18834,7 +18834,7 @@ Play further to fully unlock it
 **JACKIE** (Encouraging): Let me publish an ad for it in the paper. I know it doesn't make up for anything, but let me help. Please?
 **MADDIE** (Thinking): Whatever, it's not like anyone's coming anyway.
 **JACKIE**: You might be wrong about that. We can make the ad funny and inviting.
-**NOCHANGE**: I want to save our friendship. Please, let me try.
+**—**: I want to save our friendship. Please, let me try.
 
 ### SP_HanksMystery2024 — decoration SP_HanksMystery2024_Decoration_Slot25
 `SP_HanksMystery2024_Decoration_Slot25_Dialogue` · seen 25.05.01–26.07.01
@@ -21685,7 +21685,7 @@ Play further to fully unlock it
 - trigger: area, area=Scavenger Hunt, areaId=ScavengerHunt, hotspotId=ScavengerHuntOldWellInspectWater, phase=task completed, task=Search the pond (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Nothing here it seems... except so many knives at the bottom of that pond.
-**NOCHANGE**: That's a bit weird.
+**—**: That's a bit weird.
 
 ### Scavenger Hunt: Open the safe with the code
 `ScavengerHunt_Poolhouse` · seen 24.04.01–26.07.01
@@ -24413,10 +24413,10 @@ Play further to fully unlock it
 **MADDIE** (Surprised): Aha! And these dresses here have the same coded patterns I found in Grandma's sewing corner!
 **JACKIE** (Thinking): The plot thickens...
 
-###  Walk-in Closet: WalkInCloset_04
+### Walk-in Closet: WalkInCloset_04
 `WalkInCloset_04` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16749, phase=task appears (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCentralPuffPlaceWing, phase=task appears, task=Attach wing (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16749, phase=task appears (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCentralPuffPlaceWing, phase=task appears, task=Attach wing (versions 26.01.02–26.07.01)
 
 **JACKIE** (Doubtful): Maybe you're just looking at this the wrong way, Maddie. There must be one good thing about your beach date.
 **MADDIE** (Worried): The water was a nice blue? Hey, would you look at this swan sculpture with me?
@@ -24433,17 +24433,17 @@ Play further to fully unlock it
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Surprised): Incredible! There's a hidden mechanism in the pouf!
-**NONE**: Looking at how it works, I can definitely recognize who built this...
+**—**: Looking at how it works, I can definitely recognize who built this...
 **MADDIE** (Relaxed): Grandpa Charlie, you really are a genius when it comes to hidden contraptions!
 **—**: Wait... This jewelry is exquisite! But... Looks like something is missing.
 **MADDIE** (Thinking): Judging by the shape of the indentation, I think it might be a jewel of some kind.
 **MADDIE**: Big though...
 **MADDIE** (Surprised): And those footsteps were around this area... I wonder if whoever it was, took it?!
 
-###  Walk-in Closet: WalkInCloset_07
+### Walk-in Closet: WalkInCloset_07
 `WalkInCloset_07` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16835, phase=task completed (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetVanityFixDrawers, phase=task completed, task=Repair drawers (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16835, phase=task completed (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetVanityFixDrawers, phase=task completed, task=Repair drawers (versions 26.01.02–26.07.01)
 
 **MADDIE** (Surprised): Wow! This vanity chest is very...
 **MADDIE** (Surprised): Comprehensive!
@@ -24477,10 +24477,10 @@ Play further to fully unlock it
 **JACKIE** (Thinking): And this wooden hand? It's a ring display with no rings on. Interesting choice...
 **MADDIE**: Nope, can't be a coincidence. This wardrobe has a secret. I just know it.
 
-###  Walk-in Closet: WalkInCloset_10
+### Walk-in Closet: WalkInCloset_10
 `WalkInCloset_10` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16825, phase=task appears (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharlieWardrobePlaceRing, phase=task appears, task=Place ring (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16825, phase=task appears (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharlieWardrobePlaceRing, phase=task appears, task=Place ring (versions 26.01.02–26.07.01)
 
 **MADDIE** (Surprised): This sapphire ring. It definitely looks like some sort of signet or initiation ring. I remember this blue stone from the Cinema.  
   _earlier:_ ~~This sapphire ring. It's from the secret society.~~ (until 26.02.03)
@@ -24488,10 +24488,10 @@ Play further to fully unlock it
 **MADDIE** (Doubtful): Wait, the ring display in the wardrobe is missing any rings.
 **MADDIE** (Thinking): I wonder if this ring belongs there...
 
-###  Walk-in Closet: WalkInCloset_11
+### Walk-in Closet: WalkInCloset_11
 `WalkInCloset_11` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16825, phase=task completed (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharlieWardrobePlaceRing, phase=task completed, task=Place ring (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16825, phase=task completed (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharlieWardrobePlaceRing, phase=task completed, task=Place ring (versions 26.01.02–26.07.01)
 
 **MADDIE** (Surprised): Whoa! Okay. That's... not handkerchiefs.
 **MADDIE** (Thinking): I mean. A monocle camera? Cipher wheels? What is all this?
@@ -24515,10 +24515,10 @@ Play further to fully unlock it
 **MADDIE** (Doubtful): I have to say, with all their skills, they would make great spies!
 **MADDIE** (Encouraging): I need more concrete evidence, though. I don't think I'm quite there yet. Onwards!
 
-###  Walk-in Closet: WalkInCloset_13
+### Walk-in Closet: WalkInCloset_13
 `WalkInCloset_13` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16845, phase=task completed (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetMirrorFixMirror1, phase=task completed, task=Refine pedestal (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16845, phase=task completed (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetMirrorFixMirror1, phase=task completed, task=Refine pedestal (versions 26.01.02–26.07.01)
 
 **MADDIE** (Surprised): This mirror is a piece of art. These golden flowers on the frame... the craftsmanship is stunning.
 **MADDIE** (Thinking): But it's also so bulky. Is it anchored to the floor? Why?
@@ -24538,10 +24538,10 @@ Play further to fully unlock it
 **MADDIE**: Anyway, those lock picking skills might come in handy now. Let's see if you're right.
 **RODDY**: I'm always happy to help you, Maddie. Have you looked behind that flower pot yet?
 
-###  Walk-in Closet: WalkInCloset_15
+### Walk-in Closet: WalkInCloset_15
 `WalkInCloset_15` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16971, phase=task completed (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetMirrorSwapCompartmentHidden, phase=task completed, task=Clean the drawer (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16971, phase=task completed (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetMirrorSwapCompartmentHidden, phase=task completed, task=Clean the drawer (versions 26.01.02–26.07.01)
 
 **RODDY** (Worried): Maddie, I have to ask you something...
 **MADDIE** (Thinking): What is it?
@@ -24557,10 +24557,10 @@ Play further to fully unlock it
 **RODDY**: Know that I'm always on your side, Maddie.
 **MADDIE** (Worried): I- Alright, Roddy.
 
-###  Walk-in Closet: WalkInCloset_16
+### Walk-in Closet: WalkInCloset_16
 `WalkInCloset_16` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16857, phase=task completed (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetMirrorPlaceDecoration, phase=task completed, task=Check the crooked lilly (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16857, phase=task completed (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetMirrorPlaceDecoration, phase=task completed, task=Check the crooked lilly (versions 26.01.02–26.07.01)
 
 **MADDIE** (Surprised): Wow! Placing the lily ornament made the mirror turn see-through. It's a sheet of clear glass now!
 **MADDIE** (Joyous): This had to be 'The bloom that shows the way'!
@@ -24586,10 +24586,10 @@ Play further to fully unlock it
 **RODDY** (Ready): Maddie, are you sure I should be here for this? I know this is your family's business.
 **MADDIE** (Charming): Don't worry about it, Roddy. It's only fair, we've opened this door together, after all.
 
-###  Walk-in Closet: WalkInCloset_CharacterTask1
+### Walk-in Closet: WalkInCloset_CharacterTask1
 `WalkInCloset_CharacterTask1` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16911, phase=task appears (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharacterTask1, phase=task appears, task=Gather thoughts (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16911, phase=task appears (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharacterTask1, phase=task appears, task=Gather thoughts (versions 26.01.02–26.07.01)
 
 **MADDIE**: You're suddenly quiet, Jackie. What's on your mind?
 **JACKIE** (Thinking): It's my sister, Grace. She's in jail, you know.
@@ -24601,10 +24601,10 @@ Play further to fully unlock it
 **JACKIE**: I want to investigate it. Town hall, then the police station. But I need not to look like myself.
 **MADDIE** (Relaxed): Then look around, Jackie. The closet is filled with tools and costumes, everything you need to be unseen.
 
-###  Walk-in Closet: WalkInCloset_CharacterTask2
+### Walk-in Closet: WalkInCloset_CharacterTask2
 `WalkInCloset_CharacterTask2` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16926, phase=task completed (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharacterTask16, phase=task completed, task=Discuss progress (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16926, phase=task completed (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharacterTask16, phase=task completed, task=Discuss progress (versions 26.01.02–26.07.01)
 
 **JACKIE**: I've sorted through all the charges against Grace.
 **MADDIE**: And?
@@ -24612,10 +24612,10 @@ Play further to fully unlock it
 **JACKIE** (Thinking): I'm decided. I'm putting together a costume. Town hall first, then the police station.
 **MADDIE** (Encouraging): Then let's check Grandma's closet. I have the perfect wig for you.
 
-###  Walk-in Closet: WalkInCloset_CharacterTask3
+### Walk-in Closet: WalkInCloset_CharacterTask3
 `WalkInCloset_CharacterTask3` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16948, phase=task completed (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharacterTask38, phase=task completed, task=Update on the progress (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16948, phase=task completed (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharacterTask38, phase=task completed, task=Update on the progress (versions 26.01.02–26.07.01)
 
 **JACKIE**: Costume's a go. Had to get my wig back from your chaos-goblin of a dog, though.
 **MADDIE** (Discouraged): Rufus? Ugh, he thinks everything fluffy is a gift for him.
@@ -24623,10 +24623,10 @@ Play further to fully unlock it
 **JACKIE** (Hesitant): But before I go full secret agent. Can I have one last peek at Charlie's spy gear? For vibes.
 **MADDIE** (Relaxed): For vibes? You're using my missing grandfather's secrets for aesthetic inspiration. I respect that.
 
-###  Walk-in Closet: WalkInCloset_CharacterTask4
+### Walk-in Closet: WalkInCloset_CharacterTask4
 `WalkInCloset_CharacterTask4` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16960, phase=task completed (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharacterTask50, phase=task completed, task=Combine the hints (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16960, phase=task completed (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharacterTask50, phase=task completed, task=Combine the hints (versions 26.01.02–26.07.01)
 
 **JACKIE**: Town hall was a bust. But the police station... I sweet-talked my way into the old evidence locker.
 **MADDIE** (Surprised): You what? How?
@@ -24635,10 +24635,10 @@ Play further to fully unlock it
 **MADDIE** (Worried): That doesn't sound like an accident, Jackie.
 **JACKIE**: It's not. It's incredibly damning. I need some time to put all these hints together.
 
-###  Walk-in Closet: WalkInCloset_CharacterTask5
+### Walk-in Closet: WalkInCloset_CharacterTask5
 `WalkInCloset_CharacterTask5` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16970, phase=task completed (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharacterTask60, phase=task completed, task=Piece everything together (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16970, phase=task completed (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetCharacterTask60, phase=task completed, task=Piece everything together (versions 26.01.02–26.07.01)
 
 **JACKIE**: I'm back, and I brought your grandpa's fancy coat.
 **MADDIE**: And? Did you figure it out?
@@ -24661,10 +24661,10 @@ Play further to fully unlock it
 **MADDIE**: THAT is more of a Grandma thing.
 **MADDIE** (Encouraging): So, how about we find out what it is?
 
-###  Walk-in Closet: WalkInCloset_POI_AerialScrew
+### Walk-in Closet: WalkInCloset_POI_AerialScrew
 `WalkInCloset_POI_AerialScrew` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16759, phase=task completed (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetJewelryStandFixJewelryStand2, phase=task completed, task=Polish jewelry stand (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16759, phase=task completed (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetJewelryStandFixJewelryStand2, phase=task completed, task=Polish jewelry stand (versions 26.01.02–26.07.01)
 
 **MADDIE** (Relaxed): This model of Da Vinci's aerial screw looks like the real deal!
 **MADDIE** (Charming): I used to pore over his old designs at the library. Elegant and beautiful.
@@ -24682,10 +24682,10 @@ Play further to fully unlock it
 **MADDIE** (Encouraging): You're right! There's a sketch of the large flowers on either side of the mirror - the lily and the florian.
 **MADDIE** (Surprised): Hmm... I think I figured it out!
 
-###  Walk-in Closet: WalkInCloset_POI_Lily
+### Walk-in Closet: WalkInCloset_POI_Lily
 `WalkInCloset_POI_Lily` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16891, phase=task completed (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetWindowFixWallpaper_1, phase=task completed, task=Repair wallpaper patch (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16891, phase=task completed (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetWindowFixWallpaper_1, phase=task completed, task=Repair wallpaper patch (versions 26.01.02–26.07.01)
 
 **MADDIE**: The Lily connection is getting stronger...
 **MADDIE** (Thinking): Grandma seems to have quite the obsession with lilies.
@@ -24693,28 +24693,28 @@ Play further to fully unlock it
 **MADDIE** (Discouraged): Hold on, even the wallpaper in here has lilies! I feel like I'm soon going to start dreaming of lilies.
 **MADDIE** (Doubtful): I'm definitely onto something though...
 
-###  Walk-in Closet: WalkInCloset_POI_Portraits
+### Walk-in Closet: WalkInCloset_POI_Portraits
 `WalkInCloset_POI_Portraits` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16850, phase=task appears (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetMirrorCleanPictures, phase=task appears, task=Clean pictures (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16850, phase=task appears (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetMirrorCleanPictures, phase=task appears, task=Clean pictures (versions 26.01.02–26.07.01)
 
 **MADDIE** (Joyous): These portraits are... interesting!
 **MADDIE** (Joyous): They're all of Grandma and Charlie at various landmarks around the world.
 **MADDIE** (Joyous): But, they seem to be wearing trench coats, hats, and sunglasses! You can barely tell it's them!
 
-###  Walk-in Closet: WalkInCloset_POI_Vanity
+### Walk-in Closet: WalkInCloset_POI_Vanity
 `WalkInCloset_POI_Vanity` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16827, phase=task completed (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetVanityPlaceDecoration, phase=task completed, task=Place handle (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16827, phase=task completed (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetVanityPlaceDecoration, phase=task completed, task=Place handle (versions 26.01.02–26.07.01)
 
 **MADDIE** (Surprised): Wow! That little handle acted like a key to open up this vanity!
 **MADDIE** (Thinking): I've heard about pieces like this that were crafted by an exclusive designer in the 70s!
 **MADDIE** (Joyous): Grandma's taste in everything from clothes to decor is exceptional!
 
-###  Walk-in Closet: WalkInCloset_POI_Veil
+### Walk-in Closet: WalkInCloset_POI_Veil
 `WalkInCloset_POI_Veil` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16774, phase=task completed (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetSlimShelfFixVeil, phase=task completed, task=Repair veil (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16774, phase=task completed (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetSlimShelfFixVeil, phase=task completed, task=Repair veil (versions 26.01.02–26.07.01)
 
 **MADDIE** (Encouraging): Oh! Grandma's wedding veil!
 **MADDIE** (Charming): I bet she looked so beautiful on her wedding day to Grandpa Charlie.
@@ -24889,9 +24889,9 @@ Play further to fully unlock it
 **MADDIE** (Frustrated): Oh...
 **WINSTON** (Thinking): I shall take the weekend to fix my folly, ma'am. Sincerest apologies...
 
-### HotspotTitle_LandingRoom: Wash the window
+### Landing Room: Wash the window
 `WrongDoor` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingRoomRemoveFixBrokenGlassEB5, phase=task completed, task=Wash the window (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingRoomRemoveFixBrokenGlassEB5, phase=task completed, task=Wash the window (versions 24.04.01–26.07.01)
 
 **MADDIE** (Worried): Hold on, I thought this was the exit...
 **MADDIE** (Worried): It certainly looked like it, but it's just a large window. 

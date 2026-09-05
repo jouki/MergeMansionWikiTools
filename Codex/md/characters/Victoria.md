@@ -131,10 +131,10 @@ Every story in which Victoria speaks.
 **MADDIE** (Annoyed): And what about the Blackwood wealth? Where is that, Mrs. Telemarketer?
 **VICTORIA** (Annoyed): Pah! Your family stole my family's future. And as long as I am a Blackwood, I will make sure the Boultons pay!
 
-### HotspotTitle_GreatHall: Open the door
+### Great Hall: Open the door
 `Greathall02_Inside` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallOpenMansionA0, phase=task completed, task=Open the door (versions 24.04.01–25.01.03)
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallRemovestepdebrisA1, phase=task completed, task=Remove step debris (versions 25.02.01–26.07.01)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallOpenMansionA0, phase=task completed, task=Open the door (versions 24.04.01–25.01.03)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemovestepdebrisA1, phase=task completed, task=Remove step debris (versions 25.02.01–26.07.01)
 
 **MADDIE** (Joyous): I can't believe it! I'm in the Boulton family Mansion!
 **MADDIE** (Thinking): I didn't even <b>know</b> there was a mansion, until I accidently saw Grandma's notice...
@@ -143,10 +143,10 @@ Every story in which Victoria speaks.
 **VICTORIA** (Thinking): So, you finally did it. You finally got inside this crumbling heap...
 **MADDIE** (Surprised): Huh?! Who are you?!
 
-### HotspotTitle_GreatHall: Remove step debris
+### Great Hall: Remove step debris
 `Greathall03_Continues` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallRemovestepdebrisA1, phase=task completed, task=Remove step debris (versions 24.04.01–25.01.03)
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallRemoveDustSheetA2, phase=task completed, task=Remove dust sheet (versions 25.02.01–26.07.01)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemovestepdebrisA1, phase=task completed, task=Remove step debris (versions 24.04.01–25.01.03)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemoveDustSheetA2, phase=task completed, task=Remove dust sheet (versions 25.02.01–26.07.01)
 
 **MADDIE**: Well? Who are you, and what are you doing in my Mansion?
 **VICTORIA** (Discouraged): Oh please... This Mansion belongs to the Hopewell Bay town council! Or at least, it soon will, even in this sorry state...
@@ -157,10 +157,10 @@ Every story in which Victoria speaks.
 **VICTORIA** (Thinking): That's right! But then I thought... <i>Victoria, why don't you see it for yourself?</i>
 **VICTORIA** (Doubtful): And missy... I ain't happy with what I'm seeing!
 
-### HotspotTitle_GreatHall: Remove dust sheet
+### Great Hall: Remove dust sheet
 `Greathall04_Continues` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallRemoveDustSheetA2, phase=task completed, task=Remove dust sheet (versions 24.04.01–25.01.03)
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallRemovedebristopofstepsA3, phase=task completed, task=Remove debris at the top of the steps (versions 25.02.01–26.07.01)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemoveDustSheetA2, phase=task completed, task=Remove dust sheet (versions 24.04.01–25.01.03)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemovedebristopofstepsA3, phase=task completed, task=Remove debris at the top of the steps (versions 25.02.01–26.07.01)
 
 **VICTORIA** (Annoyed): I'll be straight with you... You'll need to do more! A lot more, if you even want to consider keeping the mansion.
 **MADDIE** (Discouraged): I only just got inside! I don't even have access to all the rooms yet!

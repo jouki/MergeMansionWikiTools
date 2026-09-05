@@ -134,9 +134,9 @@ Every story in which Grandma speaks.
 
 **MADDIE** (Joyous): I got this as a present for my birthday. I was told to only use it for emergencies.
 **MADDIE**: I think fixing up this mansion qualifies as an emergency!
-**NOCHANGE**: Try dragging it onto any item with a lightning symbol on it.
-**NOCHANGE**: That will increase the item’s level.
-**NOCHANGE**: Two Lightning Cards can be stacked together to combine their charges.
+**—**: Try dragging it onto any item with a lightning symbol on it.
+**—**: That will increase the item’s level.
+**—**: Two Lightning Cards can be stacked together to combine their charges.
 **GRANDMA** (Worried): Where did I put my Lightning Card? Or did I loan it to someone?
 
 ### Bonus BlueCard
@@ -146,9 +146,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Joyous): I really do like the color blue...the color of the bright sky!
 **MADDIE** (Joyous): I prefer orange.
 **GRANDMA** (Doubtful): You do? How about after trying this?
-**NOCHANGE**: Try dragging it onto any item without a lightning symbol.
-**NOCHANGE**: That will increase the item’s level.
-**NOCHANGE**: Two Blue Cards can be stacked together to combine their charges.
+**—**: Try dragging it onto any item without a lightning symbol.
+**—**: That will increase the item’s level.
+**—**: Two Blue Cards can be stacked together to combine their charges.
 **MADDIE** (Charming): That's nice but I still prefer orange.
 **GRANDMA** (Encouraging): Darling, you will learn to appreciate blue in time.
 
@@ -158,9 +158,9 @@ Every story in which Grandma speaks.
 
 **MADDIE** (Surprised): Ooh what's this?!? Scissors!
 **MADDIE**: Rumor has it that this will give its owner good fortune. 
-**NOCHANGE**: You can drag these scissors onto any item to split it into the two previous level items in the Merge chain.  
+**—**: You can drag these scissors onto any item to split it into the two previous level items in the Merge chain.  
   _earlier:_ ~~You can drag these scissors onto any item to split it into the two previous level items in the merge chain.~~ (until 23.12.01)
-**NOCHANGE**: Two Scissors can be merged into one to stack their charges.
+**—**: Two Scissors can be merged into one to stack their charges.
 **GRANDMA** (Joyous): Sometimes you just need to tear things down to build them back up again.
 
 ### CBE_AmeliaBoulton2024 — decoration CBE_AmeliaBoulton2024_Decoration_Slot05
@@ -1630,7 +1630,7 @@ Every story in which Grandma speaks.
 
 **GRANDMA**: Hmm, something smells tasty in here... What could it be?
 **GRANDMA**: Oh my, a pie!
-**NOCHANGE**: Note: Here is the pie that you ordered. Enjoy.
+**—**: Note: Here is the pie that you ordered. Enjoy.
 
 ### EP1 IzzyEscapesDialogue
 `EP1_IzzyEscapesDialogue` · seen 25.05.01–26.07.01
@@ -1730,7 +1730,7 @@ Every story in which Grandma speaks.
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Joyous): Yes! A whole new floor to explore and restore!
-**NONE**: I'll be the first to admit it, dearie. You've done an amazing job so far.
+**—**: I'll be the first to admit it, dearie. You've done an amazing job so far.
 **GRANDMA** (Encouraging): That's why I'm looking forward to what you do here!
 **MADDIE** (Thinking): What is this place? Almost looks like a nautical museum...
 **MADDIE** (Relaxed): I wonder if Clara had anything to do with it?
@@ -1834,9 +1834,9 @@ Every story in which Grandma speaks.
 
 **GRANDMA**: I know this old car is a beauty, but there's something missing. Can you spot it?
 **MADDIE** (Thinking): Huh... no! What is it?
-**NOCHANGE**: I'll give you a clue - look at the car hood!
-**NOCHANGE** (Thinking): Car hood? Can't you just tell me what it is I’m looking for?
-**NOCHANGE**: I'm sure you'll figure it out, dear!
+**—**: I'll give you a clue - look at the car hood!
+**—**: Car hood? Can't you just tell me what it is I’m looking for?
+**—**: I'm sure you'll figure it out, dear!
 
 ### GarageTraderTableRevealed
 `GarageTraderTableRevealed` · seen 22.02.06–26.07.01
@@ -1890,9 +1890,9 @@ Every story in which Grandma speaks.
 **MADDIE** (Surprised): Ooh, this chair looks fancy. Did Grandpa Charlie sit here?
 **GRANDMA** (Charming): Of course not, Dear! This was my chair. I am the head of the family, after all!
 
-### HotspotTitle_GreatHall: Search for the key
+### Great Hall: Search for the key
 `Greathall01_Frontdoor` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallKeyTask, phase=task completed, task=Search for the key (versions 24.04.01–26.07.01)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallKeyTask, phase=task completed, task=Search for the key (versions 24.04.01–26.07.01)
 
 **MADDIE** (Frustrated): I can't believe the key was under the mat this whole time!
 **MADDIE** (Thinking): I'm pretty sure I checked under there and I didn't find anything...
@@ -1902,10 +1902,10 @@ Every story in which Grandma speaks.
 **GRANDMA** (Worried): Dearie... If you keep digging up the past, all you get is dirty!
 **MADDIE** (Thinking): ...
 
-### HotspotTitle_GreatHall: Remove debris at the top of the steps
+### Great Hall: Remove debris at the top of the steps
 `Greathall05_Upset` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallRemovedebristopofstepsA3, phase=task completed, task=Remove debris at the top of the steps (versions 24.04.01–25.01.03)
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallPlacerestoreddeskA7, phase=task completed, task=Place restored desk (versions 25.02.01–26.07.01)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallRemovedebristopofstepsA3, phase=task completed, task=Remove debris at the top of the steps (versions 24.04.01–25.01.03)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallPlacerestoreddeskA7, phase=task completed, task=Place restored desk (versions 25.02.01–26.07.01)
 
 **GRANDMA** (Worried): Are you alright, Maddie? You look upset.
 **MADDIE**: Grandma? I'm... fine. I wasn't expecting to see you in here, though.
@@ -1917,9 +1917,9 @@ Every story in which Grandma speaks.
 **GRANDMA** (Doubtful): ...
 **GRANDMA** (Charming): ...I do have another story I can tell you about the great hall!
 
-### HotspotTitle_GreatHall: Fix and place the red hat back
+### Great Hall: Fix and place the red hat back
 `Greathall06_Charlie` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_GreatHall, areaId=GreatHall, hotspotId=GrandHallPlaceGHallHatRedBc6, phase=task completed, task=Fix and place the red hat back (versions 24.04.01–26.07.01)
+- trigger: area, area=Great Hall, areaId=GreatHall, hotspotId=GrandHallPlaceGHallHatRedBc6, phase=task completed, task=Fix and place the red hat back (versions 24.04.01–26.07.01)
 
 **GRANDMA** (Encouraging): Your Grandpa Charlie never liked this room when we first got married.
 **MADDIE** (Relaxed): He didn't? But it's so grand and beautiful! Especially now that I've restored it.
@@ -3861,12 +3861,12 @@ Every story in which Grandma speaks.
 
 **MADDIE**: Victoria! What do you want?
 **MADDIE**: It's over!
-**NOCHANGE** (Frustrated): Over? OVER?! It isn't over until I DECIDE it is! Do you hear me?! 
-**NOCHANGE** (Worried): Because of YOU, my precious Bruno is now rotting in a jail cell! 
+**—**: Over? OVER?! It isn't over until I DECIDE it is! Do you hear me?! 
+**—**: Because of YOU, my precious Bruno is now rotting in a jail cell! 
 **MADDIE**: Good! He deserves to-
-**NOCHANGE** (Doubtful): You have no idea who and what you're dealing with, Maddie! 
-**NOCHANGE** (Frustrated): But I'll make sure you and your grandmother learn by the end of it... Oh, I'll make sure!
-**NOCHANGE** (Frustrated): *Click*
+**—**: You have no idea who and what you're dealing with, Maddie! 
+**—**: But I'll make sure you and your grandmother learn by the end of it... Oh, I'll make sure!
+**—**: *Click*
 **MADDIE** (Worried): *Gulp*
 **GRANDMA**: Who was that, dearie? I could hear their voice in the hallway!
 
@@ -4100,7 +4100,7 @@ Every story in which Grandma speaks.
 **MADDIE** (Doubtful): There's so much history here, and I don't know any of it!
 **GRANDMA**: Don't worry about his history right now - worry about his stone can! It's missing!
 **MADDIE** (Joyous): If he's missing a stone can, I should look for it! But why does he have one?
-**NOCHANGE**: Find it and I'll tell you, dearie.
+**—**: Find it and I'll tell you, dearie.
 
 ### MansionRightFillerPoolFinished
 `MansionRightFillerPoolFinished` · seen 22.02.06–26.07.01
@@ -4289,7 +4289,7 @@ Every story in which Grandma speaks.
   _earlier:_ ~~I don't think dogs eat pies, Grandma.~~ (until 23.09.02)
 **MADDIE** (Doubtful): He won't do that, Grandma.  
   _earlier:_ ~~Yeah, well, guilty until proven innocent, if you ask me.~~ (until 23.09.02)
-**NOCHANGE** (Doubtful): I hope not. He's cute, but I don't want him... disturbing anything.  
+**—**: I hope not. He's cute, but I don't want him... disturbing anything.  
   _earlier:_ ~~Ruff, ruff!~~ (until 23.09.02)
 **DOG** (Joyous): Ruff, ruff!
 
@@ -4404,9 +4404,9 @@ Every story in which Grandma speaks.
 
 **GRANDMA** (Encouraging): So, what's been going on here?  
   _earlier:_ ~~...Wow!~~ (until 23.09.02)
-**NOCHANGE** (Annoyed): What do you mean? What's going on?! Grandma, I just had to bail you out of jail!  
+**—**: What do you mean? What's going on?! Grandma, I just had to bail you out of jail!  
   _earlier:_ ~~Maddie's really outdone herself here!~~ (until 23.09.02); ~~What do you mean, what's been going on?! Grandma, I just had to bail you out of the police station!~~ (until 23.12.01)
-**NOCHANGE** (Doubtful): What happened? Why were you arrested?!  
+**—**: What happened? Why were you arrested?!  
   _earlier:_ ~~Seeing the place restored to its former glory really takes me back...~~ (until 23.09.02)
 **GRANDMA** (Discouraged): I don't want to talk about it.   
   _earlier:_ ~~I was sure I would be the one to woo Ursula, but that Charlie...~~ (until 23.09.02)

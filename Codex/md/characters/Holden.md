@@ -132,9 +132,9 @@ Every story in which Holden speaks.
 **MADDIE** (Encouraging): Hmm. Well, this is solid research, despite everything. Maybe there really is something here about Edward?
 **—**: Once I'm done with the rest of the room, I'll take a second look!
 
-### HotspotTitle_LandingRoom: Discourage Holden
+### Landing Room: Discourage Holden
 `Holdencharactertask1` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingCharacterTaskH9, phase=task completed, task=Discourage Holden (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingCharacterTaskH9, phase=task completed, task=Discourage Holden (versions 24.04.01–26.07.01)
 
 **HOLDEN** (Worried): Maddie, I have some concerns about your house...
 **MADDIE** (Annoyed): Oh? Like what?
@@ -142,9 +142,9 @@ Every story in which Holden speaks.
 **MADDIE** (Encouraging): Oh... Maybe you should just leave, then?
 **HOLDEN** (Annoyed): Hmph...
 
-### HotspotTitle_LandingRoom: Discourage Holden
+### Landing Room: Discourage Holden
 `Holdencharactertask2` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingCharacterTaskH19, phase=task completed, task=Discourage Holden (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingCharacterTaskH19, phase=task completed, task=Discourage Holden (versions 24.04.01–26.07.01)
 
 **MADDIE**: What's wrong, Holden?
 **HOLDEN** (Frustrated): I guess I was expecting to find something juicy. It all seems to be hidden away...
@@ -152,9 +152,9 @@ Every story in which Holden speaks.
 **MADDIE** (Encouraging): Checked under your shoe lately? 
 **HOLDEN** (Surprised): Oh, gross!
 
-### HotspotTitle_LandingRoom: Discourage Holden
+### Landing Room: Discourage Holden
 `Holdencharactertaskintro` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingCharacterTaskH1, phase=task appears, task=Discourage Holden (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingCharacterTaskH1, phase=task appears, task=Discourage Holden (versions 24.04.01–26.07.01)
 
 **MADDIE** (Surprised): Holden! What are you doing here?!
 **MADDIE** (Annoyed): Let me guess... Doing Victoria's dirty work again?
@@ -165,9 +165,9 @@ Every story in which Holden speaks.
 **HOLDEN**: I'm not at liberty to say. But don't mind me, continue as you were...
 **MADDIE** (Encouraging): Yeah right, I'm not letting him get what he wants. I'm going to make things as difficult as possible for him!
 
-### HotspotTitle_LandingRoom: Discourage Holden
+### Landing Room: Discourage Holden
 `Holdencharactertaskoutro` · seen 24.04.01–26.07.01
-- trigger: area, area=HotspotTitle_LandingRoom, areaId=LandingRoom, hotspotId=LandingCharacterTaskH25, phase=task completed, task=Discourage Holden (versions 24.04.01–26.07.01)
+- trigger: area, area=Landing Room, areaId=LandingRoom, hotspotId=LandingCharacterTaskH25, phase=task completed, task=Discourage Holden (versions 24.04.01–26.07.01)
 
 **HOLDEN** (Discouraged): Alright, I'm done here... Might go out and take some shots of the exterior of the house again...
 **MADDIE** (Relaxed): You seem upset...

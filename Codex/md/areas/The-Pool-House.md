@@ -27,9 +27,9 @@
 
 **GRANDMA** (Encouraging): So, what's been going on here?  
   _earlier:_ ~~...Wow!~~ (until 23.09.02)
-**NOCHANGE** (Annoyed): What do you mean? What's going on?! Grandma, I just had to bail you out of jail!  
+**—**: What do you mean? What's going on?! Grandma, I just had to bail you out of jail!  
   _earlier:_ ~~Maddie's really outdone herself here!~~ (until 23.09.02); ~~What do you mean, what's been going on?! Grandma, I just had to bail you out of the police station!~~ (until 23.12.01)
-**NOCHANGE** (Doubtful): What happened? Why were you arrested?!  
+**—**: What happened? Why were you arrested?!  
   _earlier:_ ~~Seeing the place restored to its former glory really takes me back...~~ (until 23.09.02)
 **GRANDMA** (Discouraged): I don't want to talk about it.   
   _earlier:_ ~~I was sure I would be the one to woo Ursula, but that Charlie...~~ (until 23.09.02)
@@ -54,7 +54,7 @@
   _earlier:_ ~~You know, Roddy? You're right––I probably should have a heart-to-heart with her.~~ (until 23.09.02)
 **RODDY** (Relaxed): I don't know why she's kept secrets from you, Maddie, but it's obvious that she loves you.  
   _earlier:_ ~~Sounds like a plan. I've got to get back to work, but good luck with Ursula, Maddie.~~ (until 23.09.02)
-**NOCHANGE** (Encouraging): I'm sure if you talk to her she'll open up - and maybe even serve you some of that delicious pie of hers!  
+**—**: I'm sure if you talk to her she'll open up - and maybe even serve you some of that delicious pie of hers!  
   _earlier:_ ~~Thanks, Roddy. I'll need it!~~ (until 23.09.02)
 **MADDIE**: I can only hope! Thanks, Roddy. You've inspired me.  
   _earlier:_ ~~Now is as good a time as any. I need to find my grandmother so we can have a talk...~~ (until 23.09.02)

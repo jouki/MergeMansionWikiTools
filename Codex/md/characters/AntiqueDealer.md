@@ -2296,9 +2296,9 @@ Every story in which AntiqueDealer speaks.
 
 **MADDIE** (Annoyed): Ew, those webs are so sticky!
 **ANTIQUEDEALER** (Frustrated): Never mind the webs! Is that a... spider? They're, um, really not my thing.
-**NOCHANGE**: I guess that's why you've been more of an <i>observer</i> on this set of tasks.
+**—**: I guess that's why you've been more of an <i>observer</i> on this set of tasks.
 **ANTIQUEDEALER** (Encouraging): I prefer to think of it as <i>advisor</i>. But... I have an appointment to get to. I'll see you later!
-**NOCHANGE** (Thinking): Appointment... Right. 
+**—**: Appointment... Right. 
 
 ### SEChristmas2022 — decoration PE_Christmas2022_Decoration_25
 `PE_Christmas2022Deco_Intro` · seen 23.09.02–26.07.01

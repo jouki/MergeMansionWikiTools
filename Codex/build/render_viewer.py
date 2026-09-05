@@ -26,7 +26,7 @@ def adapt(codex):
                           "state": st if st and st not in ("Default", "NoChange") else None, "text": render_md.latest(l.get("text") or []) or "",
                           "changes": changes, "firstSeen": (l.get("seen") or {}).get("first")})
         if s.get("seen") and s["seen"]["last"] != cur:
-            removed.append({"id": sid, "lastSeen": s["seen"]["last"], "lines": [{"id": x["id"], "text": x["text"]} for x in lines]})
+            removed.append({"id": sid, "lastSeen": s["seen"]["last"], "lines": lines})   # keep speakers: the character filter must still work
         else:
             trig = [dict(t) for t in s["triggers"]] or [{"kind": "unknown", "hint": "?"}]
             for t in trig:
@@ -38,8 +38,10 @@ def adapt(codex):
                "characters": len(chars), "unmatchedGroups": len(codex["gaps"]["unknownTriggerStories"]), "removedStories": len(removed)}
     characters = sorted(({"id": c, "name": d["name"], "lines": d["linesTotal"], "stories": len(d["stories"])} for c, d in chars.items()),
                         key=lambda x: -x["lines"])
+    order_path = os.path.join(os.path.dirname(__file__), "area_order.json")
+    area_order = common.read_json(order_path)["order"] if os.path.exists(order_path) else {}
     return {"summary": summary, "characters": characters, "characterNames": {c: d["name"] for c, d in chars.items()},
-            "stories": stories, "removedStories": removed}
+            "stories": stories, "removedStories": removed, "areaOrder": area_order}
 
 
 def main():

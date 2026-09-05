@@ -19,8 +19,8 @@
 
 **MADDIE** (Thinking): Uh, Grandma - I got a phone call earlier from someone claiming that they were Grandpa Charlie...
 **MADDIE** (Worried): Do you know who that could be?
-**NOCHANGE** (Frustrated): I don't want to talk about it, Maddie!
-**NOCHANGE** (Frustrated): Now, what else should we do here?
+**—**: I don't want to talk about it, Maddie!
+**—**: Now, what else should we do here?
 **MADDIE** (Worried): Ugh, Grandma! 
 
 ### Pier: Add flying flag

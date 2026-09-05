@@ -3430,7 +3430,7 @@ Every story in which Roddy speaks.
   _earlier:_ ~~You know, Roddy? You're right––I probably should have a heart-to-heart with her.~~ (until 23.09.02)
 **RODDY** (Relaxed): I don't know why she's kept secrets from you, Maddie, but it's obvious that she loves you.  
   _earlier:_ ~~Sounds like a plan. I've got to get back to work, but good luck with Ursula, Maddie.~~ (until 23.09.02)
-**NOCHANGE** (Encouraging): I'm sure if you talk to her she'll open up - and maybe even serve you some of that delicious pie of hers!  
+**—**: I'm sure if you talk to her she'll open up - and maybe even serve you some of that delicious pie of hers!  
   _earlier:_ ~~Thanks, Roddy. I'll need it!~~ (until 23.09.02)
 **MADDIE**: I can only hope! Thanks, Roddy. You've inspired me.  
   _earlier:_ ~~Now is as good a time as any. I need to find my grandmother so we can have a talk...~~ (until 23.09.02)
@@ -3501,15 +3501,15 @@ Every story in which Roddy speaks.
 `RoddyAndMaddieThirdConversation` · seen 22.02.06–26.07.01
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
-**NOCHANGE**: There's someone in the driveway. I think I know who...
+**—**: There's someone in the driveway. I think I know who...
 **RODDY** (Worried): I can see you’ve been very busy! But the more you clear, the more I can see that this place is enormous! Have you thought about calling in some help?
-**NOCHANGE** (Discouraged): It's, well, it's because of Ursula. My friend said people there are talking about her 'dangerous past' - and her arrest.
-**NOCHANGE** (Worried): Now that you mention it... That's a good idea. It has been a lot of work!
-**NOCHANGE** (Doubtful): Yeah, about the arrest - who exactly did you show the photo of the gold watch to?
-**NOCHANGE** (Worried): Uh, just people around town, like you asked me to! Maybe, you know, the police, in case it was missing.
-**NOCHANGE** (Annoyed): I see. That gold watch was the reason she was arrested, Roddy. 
-**NOCHANGE** (Surprised): Oh no! Maddie, you must know I never meant anything bad to happen to her.
-**NOCHANGE** (Doubtful): Dress to impress, right? Let's get to it, then!
+**—**: It's, well, it's because of Ursula. My friend said people there are talking about her 'dangerous past' - and her arrest.
+**—**: Now that you mention it... That's a good idea. It has been a lot of work!
+**—**: Yeah, about the arrest - who exactly did you show the photo of the gold watch to?
+**—**: Uh, just people around town, like you asked me to! Maybe, you know, the police, in case it was missing.
+**—**: I see. That gold watch was the reason she was arrested, Roddy. 
+**—**: Oh no! Maddie, you must know I never meant anything bad to happen to her.
+**—**: Dress to impress, right? Let's get to it, then!
 
 ### SE_DoubleDateDisaster2024 — item discovered: 5001265
 `SE_DoubleDateDisaster2024_Cutlery_Dialogue` · seen 25.05.01–26.07.01
@@ -4869,10 +4869,10 @@ Every story in which Roddy speaks.
 **MADDIE**: Anyway, those lock picking skills might come in handy now. Let's see if you're right.
 **RODDY**: I'm always happy to help you, Maddie. Have you looked behind that flower pot yet?
 
-###  Walk-in Closet: WalkInCloset_15
+### Walk-in Closet: WalkInCloset_15
 `WalkInCloset_15` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16971, phase=task completed (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetMirrorSwapCompartmentHidden, phase=task completed, task=Clean the drawer (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16971, phase=task completed (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetMirrorSwapCompartmentHidden, phase=task completed, task=Clean the drawer (versions 26.01.02–26.07.01)
 
 **RODDY** (Worried): Maddie, I have to ask you something...
 **MADDIE** (Thinking): What is it?
@@ -4888,10 +4888,10 @@ Every story in which Roddy speaks.
 **RODDY**: Know that I'm always on your side, Maddie.
 **MADDIE** (Worried): I- Alright, Roddy.
 
-###  Walk-in Closet: WalkInCloset_16
+### Walk-in Closet: WalkInCloset_16
 `WalkInCloset_16` · seen 25.10.03–26.07.01
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=16857, phase=task completed (versions 25.10.03–25.10.03)
-- trigger: area, area= Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetMirrorPlaceDecoration, phase=task completed, task=Check the crooked lilly (versions 26.01.02–26.07.01)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=16857, phase=task completed (versions 25.10.03–25.10.03)
+- trigger: area, area=Walk-in Closet, areaId=WalkInCloset, hotspotId=WalkInClosetMirrorPlaceDecoration, phase=task completed, task=Check the crooked lilly (versions 26.01.02–26.07.01)
 
 **MADDIE** (Surprised): Wow! Placing the lily ornament made the mirror turn see-through. It's a sheet of clear glass now!
 **MADDIE** (Joyous): This had to be 'The bloom that shows the way'!

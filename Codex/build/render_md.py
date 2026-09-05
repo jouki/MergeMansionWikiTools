@@ -94,9 +94,14 @@ def main():
             f.write("\n".join(body))
         return rel
 
-    index = ["# Dialogue Codex — index", f"Versions: {', '.join(codex['versions'])}", "", "## Areas"]
-    for area, sids in sorted(by_area.items()):
-        index.append(f"- [{area}](areas/{slug(area)}.md) ({len(sids)} stories)")
+    order_path = os.path.join(os.path.dirname(__file__), "area_order.json")
+    area_order = common.read_json(order_path)["order"] if os.path.exists(order_path) else {}
+    index = ["# Dialogue Codex — index", f"Versions: {', '.join(codex['versions'])}", "",
+             "## Areas (progression order = wiki orderingIndex)"]
+    for area, sids in sorted(by_area.items(), key=lambda kv: (area_order.get(kv[0], 10 ** 6), kv[0])):
+        idx = area_order.get(area)
+        prefix = f"#{int(idx)} " if idx is not None else ""
+        index.append(f"- {prefix}[{area}](areas/{slug(area)}.md) ({len(sids)} stories)")
         write(f"areas/{slug(area)}.md", area, sids)
     index.append("\n## Events")
     for ev, sids in sorted(by_event.items()):
