@@ -94,7 +94,7 @@
 **RINGLEADER** (Calling): *Ringggg!*
 **MADDIE** (Calling): Hello?
 **RINGLEADER** (Calling): <i>This is Fiona DuVal, ringmaster of the circus.</i>  
-  _earlier:_ ~~<i>This is Fiona DuVall, ringmaster of the circus.</i>~~ (until 25.04.01)
+  _(1 cosmetic edit not shown)_
 **RINGLEADER** (Calling): <i>I'm calling to thank you for all of your help... and to let you know that unfortunately there is a TEENY problem.</i>
 **MADDIE** (Talking): Phew, at least it's not a BIG problem.
 **RINGLEADER** (Calling): <i>Actually, it is.</i>
@@ -115,5 +115,5 @@
 **MADDIE**: They won't be able to make here in time to perform, so we have to put on a show.
 **GRANDMA** (Surprised): Hmm... That IS a big problem.
 **MADDIE** (Thinking): The circus ringmaster, Fiona DuVal, said that you would be able to help.  
-  _earlier:_ ~~The circus ringmaster, Fiona DuVall, said that you would be able to help.~~ (until 25.04.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Thinking): What was she talking about?

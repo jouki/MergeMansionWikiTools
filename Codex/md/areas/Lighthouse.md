@@ -6,7 +6,7 @@
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthouseSwapMagPieNestC22, phase=task completed, task=Move the nest back to its old location (versions 24.04.01–26.07.01)
 
 **MADDIE**: How did the riddle go? The one Grandpa Charlie made you memorize?   
-  _earlier:_ ~~How did the riddle go? The one Granpa Charlie made you memorize? ~~ (until 25.03.01)
+  _(1 cosmetic edit not shown)_
 **HEIKKI** (Thinking): “Seldom noticed, often seen,
 Come rain or shine, I keep you clean."
 **HEIKKI** (Thinking): "I am first to greet you to the chateaux,
@@ -92,24 +92,19 @@ You will find one hidden beneath me.”
 `Lighthouse5_Birds` · seen 24.04.01–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthouseRemoveReedShoreC12, phase=task completed, task=Remove reeds (versions 24.04.01–26.07.01)
 
-**MADDIE**: About the birds...  
-  _earlier:_ ~~About the birds…~~ (until 25.10.01)
+**MADDIE**: About the birds...
 **HEIKKI** (Joyous): Yes! My wonderful little friends!
 **MADDIE**: I didn't know magpies were local to this area.
-**HEIKKI** (Charming): These aren't any old magpies you know... They're Finnish Magpies!  
-  _earlier:_ ~~These aren't any old magpies you know… They're Finnish Magpies!~~ (until 25.10.01)
+**HEIKKI** (Charming): These aren't any old magpies you know... They're Finnish Magpies!
 **MADDIE** (Surprised): What?!
-**MADDIE** (Thinking): Hope wildlife services don't find out...  
-  _earlier:_ ~~Hope wildlife services don't find out…~~ (until 25.10.01)
+**MADDIE** (Thinking): Hope wildlife services don't find out...
 **HEIKKI**: Yeah. A little piece of home!
 **MADDIE**: You know that abandoned nest by the beach? It's filled with shiny objects!
 **HEIKKI** (Joyous): They're amazing collectors aren't they?
-**MADDIE** (Doubtful): More like amazing thieves...  
-  _earlier:_ ~~More like amazing thieves…~~ (until 25.10.01)
+**MADDIE** (Doubtful): More like amazing thieves...
 **HEIKKI** (Charming): One's own home is worth gold!
 **MADDIE** (Joyous): Hey! I understood that one!
-**MADDIE** (Thinking): Hmmm. Maybe if I fix up the old nest...  
-  _earlier:_ ~~Hmmm. Maybe if I fix up the old nest…~~ (until 25.10.01)
+**MADDIE** (Thinking): Hmmm. Maybe if I fix up the old nest...
 
 ### Lighthouse: Place lifebuoy
 `Lighthouse6_Atfireplace` · seen 24.04.01–26.07.01

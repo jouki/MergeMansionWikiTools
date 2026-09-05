@@ -8,7 +8,7 @@ Every story in which Deb speaks.
 **DEB** (Relaxed): So what made you decide to become a marine biologist, handsome?
 **EMILIO** (Doubtful): Uhm... You can call me Emilio. <b>Please</b>...
 **MADDIE**: Hi, Emilio!  
-  _earlier:_ ~~Hi Emilio!~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **EMILIO** (Surprised): MADDIE! Hi! I was just uuh, showing- uuh, telling your aunt... uuh, what’s her name?!
 **DEB** (Charming): Deb. But <b>you</b> can call me... Anytime.
 **MADDIE** (Encouraging): Interesting woman, isn’t she?
@@ -198,7 +198,7 @@ Every story in which Deb speaks.
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **DEB** (Doubtful): I got teased for it in school, you know.  
-  _earlier:_ ~~I got teased for it in school; you know.~~ (until 25.05.01)
+  _(1 cosmetic edit not shown)_
 **DEB** (Discouraged): They’d call me “Donor Deb” among other more colorful names.
 **MADDIE** (Annoyed): That’s so cruel...
 **DEB** (Thinking): Kids will be kids... But thankfully Leonard was around to have my back.
@@ -386,7 +386,7 @@ Every story in which Deb speaks.
 **MADDIE** (Doubtful): ... What’s a topiary?
 **DEB** (Encouraging): Sweetie, why it’s the age old tradition of shaping and trimming shrubs into wonderful pieces of art!
 **MADDIE** (Joyous): Really?! I’m great at that! I’ve had A LOT of practice on the Mansion grounds.  
-  _earlier:_ ~~Really?! I’m great at that! I’ve had A LOT practice on the Mansion grounds.~~ (until 25.10.01)
+  _(1 cosmetic edit not shown)_
 **DEB** (Annoyed): Sweetie, it takes years of practice to become a topiary artist!
 **MADDIE** (Thinking): Doesn’t seem that hard to me.
 **DEB** (Doubtful): Oh really? How about a friendly competition then?
@@ -658,7 +658,7 @@ Every story in which Deb speaks.
 **DEB** (Charming): I'm here to look after my sister, of course. I read all about her thrilling brush with the law.
 **DEB** (Charming): And Julius, so good to see you. But you're so happy to see me that you're crying? Delightful.
 **ANTIQUEDEALER** (Surprised): It's my ACHOO allergies! And I really must be going. Goodbye, Deborah.
-**—**: He always was a sensitive one. Just us girls now, huh Maddie? You can catch me up on things.
+**ANTIQUEDEALER** (Surprised): He always was a sensitive one. Just us girls now, huh Maddie? You can catch me up on things.
 **DEB**: He always was a sensitive one. Just us girls now, huh Maddie? You can catch me up on things.
 **MADDIE**: Uh, okay! I'm just going around the maze. You can join me if you like.
 
@@ -704,6 +704,11 @@ Every story in which Deb speaks.
 `SE_HopeberryFestival2023_IntroPart1_Dialogue` · seen 23.09.02–25.06.01
 - trigger: unknown, hint=Seasonal event (versions None–None)
 
+**DEB** (Joyous): Well sis, it's that time of year again!
+**GRANDMA** (Thinking): What time is that, Deb?
+**DEB**: Hopeberry Festival of course! The only time this drab little place has a bit of color!
+**GRANDMA** (Surprised): Oh my! I totally forgot! So much has happened, I didn't even remember to get the juice ready! 
+**DEB** (Encouraging): Never fear, Deb is here! Let me do it, sis! I've always wanted to give it a go, and as you know, I am a connoisseur of fine beverages...
 
 ### SE Valentines2023 Opening Dialogue
 `SE_Valentines2023_Opening_Dialogue` · seen 23.09.02–25.06.01
@@ -746,11 +751,27 @@ Every story in which Deb speaks.
 `SP_AmyTheCat2023_Decoration_Slot26_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot26, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MADDIE**: There! I dare any cat to ignore the majesty of...
+**MADDIE** (Joyous): <b>KITTY CASTLE!</b>
+**AMY**: Meow...
+**MADDIE**: A ha! Never in doubt. Now, little Amy, let’s see who your owner is, shall we?
+**DEB**: Looks like the cat dropped something.
+**AMY** (Surprised): !!!!
+**MADDIE**: There she goes again! Let's see… Another exotic fish!
+**DEB** (Encouraging): You know you can go to the pet shop for those, right?
+**MADDIE** (Thinking): That’s what I’m afraid of. This cat has been bringing me some really strange fish! I wonder who she belongs to...
+**DEB** (Thinking): A lot of people own cats in Hopewell Bay, but there’s a handsome marine biologist who may help you figure out the fish?
 
 ### Amy's Mystery — decoration SP_AmyTheCat2023_Decoration_Slot28
 `SP_AmyTheCat2023_Decoration_Slot28_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot28, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**DEB**: Oh Maddie! Good thing I found you! Have you seen my sis Ursula around?
+**MADDIE**: Hi Deb, no... I haven’t, actually!
+**GRANDMA** (Joyous): Whoose a good kitty? You are! Yes, you are!
+**MADDIE** (Encouraging): Ah, there she is! I guess she found Amy. That cat is a bit of a mystery. I’ve been trying to figure out who she belongs to.
+**GRANDMA** (Relaxed): Is that your name? What a pretty pretty name!
+**AMY** (Relaxed): Purr... Purr...
 
 ### Cherry's Mystery Meat — decoration SP_CherrysMysteryMeat2024_Decoration_Slot32
 `SP_CherrysMysteryMeat2024_Decoration_Slot32_Dialogue` · seen 25.05.01–26.07.01
@@ -859,7 +880,7 @@ Every story in which Deb speaks.
 - trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot26, event=Deb’s Mystery, eventKey=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE**: Hi, Emilio! I’m sorry that Deb dragged you into this.  
-  _earlier:_ ~~Hi Emilio! I’m sorry that Deb dragged you into this.~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **EMILIO** (Encouraging): Don’t worry about it, Maddie. It sounded like she really needed some help.
 **DEB** (Joyous): Wonderful, you’re here! Now, sit down, you two, and I’ll bring you some afternoon tea.
 **MADDIE** (Doubtful): Er- Deb... What are you doing?
@@ -1039,6 +1060,14 @@ Every story in which Deb speaks.
 `SP_SpringSeason2023_Decoration_29_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_SpringSeason2023_Decoration_29, event=Spring Season, eventKey=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MADDIE** (Doubtful): Wow Aunt Deb... That's not ostentatious at all!
+**DEB** (Worried): Too much?
+**MADDIE** (Worried): No, of course not! No no no... No.
+**MADDIE** (Surprised): Great! Send my love to your Grandma, Tataa!
+**MADDIE** (Thinking): I wonder what she'll think when sees that flying over her bedroom...
+**MADDIE** (Encouraging): Jackie! How's the kite coming along?
+**JACKIE** (Doubtful): ...
+**MADDIE** (Discouraged): That well, huh?
 
 ### The Winds of Mystery — decoration SP_TheWindOfMystery2024_Decoration_Slot33
 `SP_TheWindOfMystery2024_Decoration_Slot33_Dialogue` · seen 25.05.01–26.07.01
@@ -1051,8 +1080,7 @@ Every story in which Deb speaks.
 **DEB**: Your turn to hold the baby...
 **HANK** (Frustrated): Okay...
 **MADDIE** (Worried): I guess you’re both still adjusting to this... change.
-**DEB** (Frustrated): No, it’s not that... It’s the “OTHER” child that has been a bit of a problem...  
-  _earlier:_ ~~No, it’s not that… It’s the “OTHER” child that has been a bit of a problem...~~ (until 25.10.01)
+**DEB** (Frustrated): No, it’s not that... It’s the “OTHER” child that has been a bit of a problem...
 **HANK**: Yeah... *yawn*, Mason was running around our house, banging cans, and that woke the little legend up.
 **MADDIE** (Discouraged): Oh, Mason...
 **DEB** (Frustrated): I guess I knew those cans would get dug up eventually. Especially when they were the reason the Cannery shut down and all.

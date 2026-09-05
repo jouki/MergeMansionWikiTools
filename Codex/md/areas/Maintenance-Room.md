@@ -68,13 +68,11 @@
 `MaintenanceRoom_MaddieOpensTheTrunk` · seen 24.04.01–26.07.01
 - trigger: area, area=Maintenance Room, areaId=MaintenanceRoom, hotspotId=ButlersRemoveButlersChestB2, phase=task completed, task=Force open the trunk (versions 24.04.01–26.07.01)
 
-**MADDIE** (Joyous): Let's see what's inside this trunk. Whoa! It's filled with valuable items...  
-  _earlier:_ ~~Let's see what's inside this trunk. Whoa! It's filled with valuable items…~~ (until 25.10.01)
+**MADDIE** (Joyous): Let's see what's inside this trunk. Whoa! It's filled with valuable items...
 **MADDIE** (Surprised): Hey! These must all be something Mr. Winston stole from the Mansion!
 **MADDIE** (Frustrated): I cannot believe it!
 **MADDIE** (Doubtful): I should put everything back where it belongs.
-**MADDIE** (Encouraging): Well... I’m not sure where exactly everything belongs... but I’m sure going to try!  
-  _earlier:_ ~~Well… I’m not sure where exactly everything belongs… but I’m sure going to try!~~ (until 25.10.01)
+**MADDIE** (Encouraging): Well... I’m not sure where exactly everything belongs... but I’m sure going to try!
 
 ### Maintenance Room: Unlock the Maintenance Room
 `MaintenanceRoom_MaintenanceRoomIntro` · seen 24.04.01–26.07.01

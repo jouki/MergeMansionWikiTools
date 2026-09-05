@@ -40,6 +40,7 @@
   _earlier:_ ~~There's a lot of good stuff here... I wonder who packed this bag?~~ (until 25.10.01)
 **PEARL** (Doubtful): Are we hiking all the way to the North Pole?  
   _earlier:_ ~~I owe them a big thanks, because it has everything I need for a day outdoors.~~ (until 25.10.01)
+**MADDIE** (Relaxed): The only thing that's missing is the snacks!
 
 ### Frosty Secrets — item discovered: Cabin Diary
 `CBE_FrostySecrets2024_CabinCodex_03_Dialogue` · seen 25.05.01–26.07.01
@@ -85,6 +86,7 @@
   _earlier:_ ~~It's so quiet and peaceful!~~ (until 25.10.01)
 **PEARL** (Encouraging): Oh, yeah! You’re missing some cobwebs and the overgrown garden, but it’s pretty close.  
   _earlier:_ ~~Sometimes I forget what a crazy adventure I'm on with the Mansion and all of its secrets...~~ (until 25.10.01)
+**MADDIE** (Relaxed): It wasn't in my original five-year plan, that's for sure!
 
 ### Frosty Secrets — item discovered: Broken Heart
 `CBE_FrostySecrets2024_IceSculptures_09_Dialogue` · seen 25.05.01–26.07.01
@@ -132,6 +134,8 @@
   _earlier:_ ~~I never went there with him. I don't even know its exact location.~~ (until 25.10.01)
 **MADDIE** (Encouraging): Well, I didn’t want to spoil the surprise - it’s part of the full winter experience package!  
   _earlier:_ ~~Everything was still there, in perfect order. He clearly intended to go back but never did.~~ (until 25.10.01)
+**MADDIE** (Doubtful): What happened to him, Grandma?
+**GRANDMA** (Relaxed): That's enough secrets for one day, dearie. I... I will tell you one day, but let's try that apple pie.
 
 ### Frosty Secrets — item discovered: Winter Shed
 `CBE_FrostySecrets2024_Shed_Dialogue` · seen 25.05.01–26.07.01

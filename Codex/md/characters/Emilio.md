@@ -10,6 +10,9 @@ Every story in which Emilio speaks.
   _earlier:_ ~~How about baking? Is there some treat that makes you feel really happy?~~ (until 25.10.01)
 **RODDY** (Worried): That had better be the last one - we’re running out of space!  
   _earlier:_ ~~There are these cookies my granny used to make...~~ (until 25.10.01)
+**KAZUKO**: What did they taste like?
+**BELLA** (Relaxed): Oh, they tasted good!
+**KAZUKO** (Thinking): Hmm... I think we'll need a little bit of help from someone who knows a thing or two about baking.
 
 ### Bella's Holiday Workshop — item discovered: Baking Equipment
 `CBE_HolidayWorkshop2024_Candles_05_Dialogue` · seen 25.05.01–26.07.01
@@ -42,6 +45,8 @@ Every story in which Emilio speaks.
   _earlier:_ ~~I am? I guess I've been working pretty hard.~~ (until 25.10.01)
 **EMILIO** (Thinking): Although I don’t know where she finds the time to produce all of these crafts!  
   _earlier:_ ~~But what are you hoping to get for Xmas?~~ (until 25.10.01)
+**EMILIO** (Encouraging): Just peace on earth and joy to all the animals.
+**BELLA** (Doubtful): Ugh... of course you do.
 
 ### Bella's Holiday Workshop — item discovered: Jackie
 `CBE_HolidayWorkshop2024_CharacterJackie_01_Dialogue` · seen 25.05.01–26.07.01
@@ -76,6 +81,14 @@ Every story in which Emilio speaks.
   _earlier:_ ~~Thanks -- I guess. What's up, Bella?~~ (until 25.10.01)
 **EMILIO** (Relaxed): Or teapots!  
   _earlier:_ ~~Umm... *sigh*~~ (until 25.10.01)
+**BELLA** (Thinking): Thank you for welcoming me here in Hopewell Bay.
+**BELLA** (Doubtful): You've all been so great, but I guess I haven't been as nice as I could've been.  
+  _(1 cosmetic edit not shown)_
+**BELLA** (Doubtful): Now I just want to spread holiday cheer to everyone in Hopewell Bay... as a way to apologize.
+**BELLA**: Your little town is so sweet, and your projects are really quirky.
+**BELLA**: I know Emilio cares about you a lot, and I want him to be happy, so...
+**MADDIE** (Surprised): O-oh, sure. I-- I mean WE all care about Emilio, too.
+**BELLA** (Relaxed): Of course you do.
 
 ### Bella's Holiday Workshop — item discovered: Roddy
 `CBE_HolidayWorkshop2024_CharacterRoddy_01_Dialogue` · seen 25.05.01–26.07.01
@@ -90,6 +103,9 @@ Every story in which Emilio speaks.
   _earlier:_ ~~Great! I've made everyone some presents and, well, I've got one for you, too.~~ (until 25.10.01)
 **RODDY** (Charming): I wonder if Maddie could spare a shed or a secret room for it all?  
   _earlier:_ ~~I'm speechless! Thank you so much!~~ (until 25.10.01)
+**BELLA**: It's a surprise, so you'll have to open it. Oh, I'll just tell you what it is!
+**BELLA** (Relaxed): It's a scarf!
+**RODDY** (Worried): Well that is thoughtful. And what a b-beautiful scarf it is!
 
 ### Bella's Holiday Workshop — item discovered: Tray of Polvorones
 `CBE_HolidayWorkshop2024_Cookies_06_Dialogue` · seen 25.05.01–26.07.01
@@ -127,6 +143,9 @@ Every story in which Emilio speaks.
   _earlier:_ ~~What are you making?~~ (until 25.10.01)
 **BELLA** (Relaxed): I knew I could rely on you!  
   _earlier:_ ~~Pottery, knitted hats, scarves, and socks, and scented candles!~~ (until 25.10.01)
+**EMILIO** (Surprised): And you know how to make them?
+**BELLA**: I will learn, and Kazuko promised to help.
+**EMILIO** (Thinking): Right...
 
 ### Bella's Holiday Workshop — event end
 `CBE_HolidayWorkshop2024_EventOutro_Dialogue` · seen 24.11.02–26.07.01
@@ -140,6 +159,10 @@ Every story in which Emilio speaks.
   _earlier:_ ~~I'm so happy you think so. They are all important to you, I know that, and I want them to like me, too.~~ (until 25.10.01)
 **RODDY** (Relaxed): The holidays are never not chaotic around here, but at least they're always memorable.  
   _earlier:_ ~~How could they not like you?~~ (until 25.10.01)
+**BELLA** (Relaxed): I know!
+**BELLA** (Thinking): It's kinda sweet how Maddie has a crush on you, though!
+**EMILIO** (Surprised): Wh-what do you mean?
+**BELLA** (Relaxed): Don't worry - I won't tell anyone!
 
 ### Bella's Holiday Workshop — entering board
 `CBE_HolidayWorkshop2024_Intro_Dialogue` · seen 25.10.01–26.07.01
@@ -161,6 +184,10 @@ Every story in which Emilio speaks.
   _earlier:_ ~~Oh?~~ (until 25.10.01)
 **BELLA**: Who could I ask? Ah, I think I know the perfect person for the job!  
   _earlier:_ ~~Maddie and her friends generously welcomed you here in Hopewell Bay, but I'm afraid you didn't make the best impression.~~ (until 25.10.01)
+**BELLA** (Doubtful): I know, but I was sooo jetlagged from the flight and...
+**EMILIO** (Encouraging): Bella...
+**BELLA** (Thinking): Fine. Maybe I could try to repay their hospitality somehow...
+**EMILIO** (Encouraging): That sounds like a wonderful idea!
 
 ### Bella's Holiday Workshop — item discovered: Teapot
 `CBE_HolidayWorkshop2024_Pottery_05_Dialogue` · seen 25.05.01–26.07.01
@@ -190,6 +217,8 @@ Every story in which Emilio speaks.
   _earlier:_ ~~It's my pleasure, Bella!~~ (until 25.10.01)
 **RODDY** (Frustrated): I guess my plan wasn’t totally water-tight after all...  
   _earlier:_ ~~You know what I've noticed? In this town, you never know what you'll find in an old tin can!~~ (until 25.10.01)
+**BELLA** (Relaxed): See! This one says "syrup", but it's an old recipe!
+**BELLA** (Thinking): "The secret to the perfect polvorones!"
 
 ### The Joys of the Sea — item discovered: Deluxe Aquarium
 `CBE_JoysOfTheSea2023_Aquarium_Dialogue` · seen 23.09.02–26.07.01
@@ -253,7 +282,7 @@ Every story in which Emilio speaks.
 **DEB** (Relaxed): So what made you decide to become a marine biologist, handsome?
 **EMILIO** (Doubtful): Uhm... You can call me Emilio. <b>Please</b>...
 **MADDIE**: Hi, Emilio!  
-  _earlier:_ ~~Hi Emilio!~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **EMILIO** (Surprised): MADDIE! Hi! I was just uuh, showing- uuh, telling your aunt... uuh, what’s her name?!
 **DEB** (Charming): Deb. But <b>you</b> can call me... Anytime.
 **MADDIE** (Encouraging): Interesting woman, isn’t she?
@@ -481,8 +510,7 @@ Every story in which Emilio speaks.
 - trigger: unknown, hint=Core Support Event (versions None–None)
 
 **MADDIE** (Joyous): Today is the day, Roddy! We're going to sail for the Horizon Cup!
-**RODDY** (Annoyed): Never been much of a sailor myself, but your enthusiasm is inspiring.  
-  _earlier:_ ~~Never been much of a sailor myself, but your enthusiasm is inspiring. ~~ (until 25.05.01)
+**RODDY** (Annoyed): Never been much of a sailor myself, but your enthusiasm is inspiring.
 **MADDIE** (Encouraging): Come on, Roddy! This'll be fun! The Boultons will sail the high seas again!
 **EMILIO**: Just watch out for the strong current! It'll drag you out to sea...
 **EMILIO** (Encouraging): ...Or help me win!
@@ -722,11 +750,36 @@ Every story in which Emilio speaks.
 `LDE_GreenAcresQuest2024_Intro_Dialogue` · seen 25.05.01–26.04.02
 - trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
 
+**GRANDMA**: Hello, dearie! What are you up to?
+**MADDIE**: With everything that’s happened so far, I think it’s time we give a little back to people of Hopewell Bay.
+**GRANDMA** (Relaxed): Really? How do we do that?
+**MADDIE** (Encouraging): By building a biodiverse community garden! Not only will it allow people to grow their own produce, it’ll be helpful for the environment.
+**EMILIO** (Encouraging): That sounds like a wonderful idea, Maddie!
+**MADDIE** (Surprised): E- EMILIO?!!
+**EMILIO** (Surprised): Maddie, you seemed surprised?
+**MADDIE** (Annoyed): Of course I’m surprised! What are you doing back?!
+**EMILIO** (Surprised): Didn’t your Grandma-
+**MADDIE** (Annoyed): Grandma?!
+**GRANDMA** (Doubtful): Oh riiiight... Ooops.
+**EMILIO**: Uhm... Anyway, can I introduce you to Isabella Cruz?
+**BELLA** (Relaxed): Hello Maddie! I’ve heard so MUCH about you! You’re much cuter in person! But shorter than I expected.
+**MADDIE** (Doubtful): Nice to meet you! You’re exactly what I expected!
 
 ### LDE GreenAcresQuest2024 TA1 Dialogue
 `LDE_GreenAcresQuest2024_TA1_Dialogue` · seen 25.05.01–26.04.02
 - trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
 
+**EMILIO**: Maddie?
+**MADDIE** (Surprised): Oh... Hi.
+**EMILIO**: Look... I understand you’re still angry with me. I’m so sorry about what happened between us...
+**EMILIO** (Thinking): But, I hope you understand that my work over there was really important! I had to go.
+**MADDIE** (Annoyed): Did you HAVE to bring her back with you?
+**EMILIO** (Surprised): Bella? Well... Yes. She’s my partner.
+**MADDIE** (Doubtful): Partner?
+**EMILIO** (Encouraging): Work partner! I’ve known her since University, Maddie. When she called me to ask for-
+**MADDIE** (Annoyed): She called you?!
+**EMILIO** (Surprised): We’re just friends!
+**MADDIE** (Frustrated): Ugh... I’m sorry Emilio, I don’t have time for this.
 
 ### LDE GreenAcresQuest2024 v2 TA1 Dialogue
 `LDE_GreenAcresQuest2024_v2_TA1_Dialogue` · seen 26.02.01–26.04.02
@@ -975,7 +1028,7 @@ Every story in which Emilio speaks.
 **MADDIE** (Charming): So... What is that you have to tell me?
 **EMILIO** (Surprised): Well... This is pretty hard for me to say...
 **EMILIO** (Surprised): I’ve known you for almost a year now, and I’ve never had a connection with anyone else, like the one I’ve had with you.  
-  _earlier:_ ~~I’ve known you for a year now, and I’ve never had a connection with anyone else, like the one I’ve had with you.~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 **MADDIE**: Emilio... I... I feel the same way!
 **EMILIO** (Thinking): I... I know... I think I know... No, I know. So that’s why I have to tell you this now... I...
 **MADDIE** (Charming): ...Yes?
@@ -1101,11 +1154,10 @@ Every story in which Emilio speaks.
 **MADDIE** (Relaxed): You sure know how to throw a great party, Grandma!
 **GRANDMA**: Oh, dearie, it was nothing.
 **GRANDMA** (Encouraging): Bella and Emilio are wonderful organizers. All I did was supply the location.  
-  _earlier:_ ~~Bella and Emilio a wonderful organizers. All I did was supply the location.~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **EMILIO** (Joyous): And the delicious enchiladas!
 **BELLA** (Annoyed): And the steel baseball bat! It really did the trick on the ol' piñata!
-**MADDIE** (Encouraging): Too bad the candy inside had gotten old.  
-  _earlier:_ ~~Too bad the candy inside had gotten old. ~~ (until 26.02.03)
+**MADDIE** (Encouraging): Too bad the candy inside had gotten old.
 **BELLA**: Ha! It's fine. What matters is that I finally got my REVENGE!
 **GRANDMA** (Joyous): Oh! I really do like her!
 
@@ -1117,7 +1169,7 @@ Every story in which Emilio speaks.
 **EMILIO** (Joyous): This looks perfect!
 **GRANDMA** (Charming): Excellent!
 **BELLA** (Relaxed): Ooh, Hopeberry Juice! My favorite!  
-  _earlier:_ ~~Ooh, Hopeberry Juice! My favourite!~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **EMILIO** (Encouraging): This should be plenty for everyone!
 **GRANDMA** (Joyous): Oh, dearie! This is only half of it!
 **EMILIO** (Surprised): Half?!
@@ -1132,8 +1184,7 @@ Every story in which Emilio speaks.
 **GRANDMA** (Charming): We've used this area for everything from festivals, weddings and funerals.
 **GRANDMA** (Charming): Why not also throw a few parties here?
 **MADDIE** (Relaxed): Nothing wrong with that!
-**EMILIO** (Charming): Nothing at all!  
-  _earlier:_ ~~Nothing at all! ~~ (until 26.02.03)
+**EMILIO** (Charming): Nothing at all!
 
 ### Season Pass - Flavors of Tradition — decoration SP_CinqoDeMayo2026_Decoration_Slot36
 `SP_CinqoDeMayo2026_Decoration_Slot36_Dialogue` · seen 26.03.01–26.07.01
@@ -1191,7 +1242,7 @@ Every story in which Emilio speaks.
 - trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot26, event=Deb’s Mystery, eventKey=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE**: Hi, Emilio! I’m sorry that Deb dragged you into this.  
-  _earlier:_ ~~Hi Emilio! I’m sorry that Deb dragged you into this.~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **EMILIO** (Encouraging): Don’t worry about it, Maddie. It sounded like she really needed some help.
 **DEB** (Joyous): Wonderful, you’re here! Now, sit down, you two, and I’ll bring you some afternoon tea.
 **MADDIE** (Doubtful): Er- Deb... What are you doing?

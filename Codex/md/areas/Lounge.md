@@ -167,7 +167,7 @@
 **WINSTON** (Frustrated): Well, we seem to have an intruder in our midst!
 **MADDIE** (Surprised): Intruder?!
 **WINSTON** (Thinking): Yes, a rather guileful and sneaky one too. If it weren't for my predilection for perfection, I may have missed them entirely.  
-  _earlier:_ ~~Yes, a rather guile and sneaky one too. If it weren't for my predilection for perfection, I may have missed them entirely.~~ (until 25.10.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Worried): What did they do?
 **WINSTON** (Doubtful): They seem to have eaten your grandmother's petunias, ma'am.
 **MADDIE** (Doubtful): What?

@@ -59,12 +59,12 @@
 - trigger: area, area=Factory Floor, areaId=FactoryFloor, hotspotId=FactoryFloorStairsDoorCleanDoor, phase=task completed, task=Clean the door (versions 26.04.01–26.07.01)
 
 **MADDIE** (Thinking): I wonder if the canister in here is the same one I saw in the bathroom.  
-  _earlier:_ ~~I wonder if the canister in here is the same one I saw at the bathroom.~~ (until 26.04.01)
+  _(1 cosmetic edit not shown)_
 **ANTIQUEDEALER** (Thinking): I still don't understand WHY you saw it in there?!  
-  _earlier:_ ~~I still understand WHY you saw it in there?!~~ (until 26.04.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Encouraging): There was a water accident, we thought it was used for plumbing. I saw this message stuck there.
 **MADDIE** (Encouraging): Once we got it working, the message went off to its final destination. HERE!  
-  _earlier:_ ~~Once we got it working, the message went off to it's final destination. HERE!~~ (until 26.04.01)
+  _(1 cosmetic edit not shown)_
 **ANTIQUEDEALER** (Encouraging): Well? Let's find out what's in it!
 **MADDIE** (Relaxed): My thoughts exactly!
 **MADDIE** (Thinking): Let's see. We got two messages. One seems encrypted, but something I'll be able to break when I got a bit of time.
@@ -113,27 +113,27 @@
 `FactoryFloor_CharacterTask4` · seen 26.04.01–26.07.01
 - trigger: area, area=Factory Floor, areaId=FactoryFloor, hotspotId=FactoryFloorCharacterTask46, phase=task completed, task=Make space for submissions (versions 26.04.01–26.07.01)
 
-**—**: Hmm...
-**—**: Hmmm...
-**—**: Julius, this is SO difficult!
-**—**: How are we supposed choose from all these amazing pieces of art?!
-**—**: We should judge them on a strict criteria, I believe.
-**—**: Creativity, structure and how best it reflects the heritage of the factory.
-**—**: Hey! That could work! We give points for each, and the one with the highest is the winner!
-**—**: Then let's get to it!
+**MADDIE** (Thinking): Hmm...
+**MADDIE** (Thinking): Hmmm...
+**MADDIE** (Discouraged): Julius, this is SO difficult!
+**MADDIE** (Worried): How are we supposed choose from all these amazing pieces of art?!
+**MADDIE** (Worried): We should judge them on a strict criteria, I believe.
+**MADDIE** (Worried): Creativity, structure and how best it reflects the heritage of the factory.
+**MADDIE** (Thinking): Hey! That could work! We give points for each, and the one with the highest is the winner!
+**MADDIE** (Thinking): Then let's get to it!
 
 ### Factory Floor: Deliver the great news
 `FactoryFloor_CharacterTask5` · seen 26.04.01–26.07.01
 - trigger: area, area=Factory Floor, areaId=FactoryFloor, hotspotId=FactoryFloorCharacterTask60, phase=task completed, task=Deliver the great news (versions 26.04.01–26.07.01)
 
-**—**: So, did you tell them?!
-**—**: Yes, the students at Hopewell High were over the moon to find out that they had won!
-**—**: Hopewell High was founded by Amelia Boulton, wasn't it?
-**—**: Yes indeed, Maddie, which is why their contribution so perfectly fits all the criteria.
-**—**: Now all we have to do is install it in the factory floor.
-**—**: Where it'll have a place of honor, tying together the community and the heritage of the factory.
-**—**: After all... It belongs to everyone.
-**—**: I'm sure Ignatius and Agatha would be proud.
+**MADDIE** (Relaxed): So, did you tell them?!
+**MADDIE** (Relaxed): Yes, the students at Hopewell High were over the moon to find out that they had won!
+**MADDIE** (Thinking): Hopewell High was founded by Amelia Boulton, wasn't it?
+**MADDIE** (Thinking): Yes indeed, Maddie, which is why their contribution so perfectly fits all the criteria.
+**MADDIE** (Encouraging): Now all we have to do is install it in the factory floor.
+**MADDIE** (Charming): Where it'll have a place of honor, tying together the community and the heritage of the factory.
+**MADDIE**: After all... It belongs to everyone.
+**MADDIE**: I'm sure Ignatius and Agatha would be proud.
 
 ### Factory Floor: Turn on automaton
 `FactoryFloor_POI_Automata` · seen 26.04.01–26.07.01

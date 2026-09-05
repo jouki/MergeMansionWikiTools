@@ -7,9 +7,9 @@
 
 **GRANDMA**: I know this old car is a beauty, but there's something missing. Can you spot it?
 **MADDIE** (Thinking): Huh... no! What is it?
-**—**: I'll give you a clue - look at the car hood!
-**—**: Car hood? Can't you just tell me what it is I’m looking for?
-**—**: I'm sure you'll figure it out, dear!
+**GRANDMA**: I'll give you a clue - look at the car hood!
+**MADDIE** (Thinking): Car hood? Can't you just tell me what it is I’m looking for?
+**GRANDMA**: I'm sure you'll figure it out, dear!
 
 ### Garage: GarageUnlock
 `GarageUnlock` · seen 24.04.01–26.07.01

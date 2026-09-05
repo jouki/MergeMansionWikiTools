@@ -36,7 +36,7 @@ Every story in which Grace speaks.
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **GRANDMA**: Wonderful, the cell is nice and clean for the day!  
-  _earlier:_ ~~Wonderful, our cell is nice and clean for the day!~~ (until 24.01.01)
+  _(1 cosmetic edit not shown)_
 **GRACE**: You know, I’ve never seen it like this before. It’s down right homely!
 **GRANDMA**: Thank you dearie!
 
@@ -71,7 +71,7 @@ Every story in which Grace speaks.
 **GRANDMA**: I just wanted to apologize for my recent behavior. I’m usually quite social, you know!
 **GRACE**: First time, huh? I get it. Don’t worry about it.
 **GRANDMA**: Please! Let me make it right, dearie. I see you all day cleaning our cell, and the others, all by yourself.  
-  _earlier:_ ~~Please! Let me make it right, dearie. I see you all day cleaning our cell and the others all by yourself.~~ (until 24.01.01)
+  _(1 cosmetic edit not shown)_
 **GRANDMA**: Let me help you!
 **GRACE**: Alright then... try to keep up!
 

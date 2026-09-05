@@ -141,7 +141,7 @@
 - trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_Interviews_03'], items=['Recorder'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE** (Thinking): Next we need to talk with everyone who saw her on that last day.  
-  _earlier:_ ~~Next we need to talk everyone who saw her on that last day.~~ (until 26.06.01)
+  _(1 cosmetic edit not shown)_
 **RODDY** (Doubtful): Do you think they will talk?
 **JACKIE** (Thinking): It’s unlikely we’ll get a confession, but someone will slip.
 **JACKIE**: They always do…
@@ -300,7 +300,7 @@
 **JACKIE**: We follow up on everything and rule out the wrong options until we have the answer.
 **RODDY** (Discouraged): I’m not sure that kind of investigation alone is going to get us closer to the answer.
 **JACKIE** (Doubtful): What are you talking about?  
-  _earlier:_ ~~What do you talking about?~~ (until 26.06.01)
+  _(1 cosmetic edit not shown)_
 **RODDY** (Hesitant): I’m talking about the COSMIC investigation.
 
 ### Murder at the Mansion — item discovered: Board of Fate
@@ -324,7 +324,7 @@
 **JACKIE** (Surprised): That sounds like... Bella!
 **RODDY** (Thinking): There's more: “The universe advises that your great love dreams not of escape, but of breathing room.”
 **JACKIE** (Doubtful): Uh-huh, that's Bella alright. She would not have been happy to read this.  
-  _earlier:_ ~~Uh-uh, that's Bella alright. She would not have been happy to read this.~~ (until 26.06.01)
+  _(1 cosmetic edit not shown)_
 
 ### Murder at the Mansion — item discovered: Map Fragment
 `LDE_MurderAtTheMansion_SubGoal_MapItem_01_Dialogue` · seen 26.06.01–26.07.01

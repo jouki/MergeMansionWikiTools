@@ -78,7 +78,7 @@ Every story in which Sullivan speaks.
 **MADDIE** (Annoyed): I-I think he was that detective involved in Grandma's arrest...  
   _earlier:_ ~~How could I forget.~~ (until 24.09.02)
 **SULLIVAN** (Joyous): Bingo. Well, Tim and I met at the academy, and we were partners for a while. Best partner I ever had!  
-  _earlier:_ ~~Well, Tim and I met at the academy and we were partners for a while. Best partner I ever had!~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 **SULLIVAN** (Discouraged): He had to move on to bigger things and he urged me to take his place.
 **SULLIVAN** (Thinking): This case of his, it intrigued me. Once I got my hands on it, it just got stranger and stranger.
 **SULLIVAN** (Thinking): So many loose ends and endless questions...

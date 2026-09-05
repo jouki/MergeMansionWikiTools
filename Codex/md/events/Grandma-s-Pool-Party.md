@@ -35,7 +35,7 @@
 - trigger: item, event=Grandma's Pool Party, eventKey=LDE_GrandmasBirthday2023, itemKeys=['LDE_GrandmasBirthday2023_Floaties_07'], items=['Inflatable Pool Slide'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MASON** (Joyous): Hi, Maddie! Look what I got for your grandma!  
-  _earlier:_ ~~Hi Maddie! Look what I got for your grandma!~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Surprised): Oh, wow... Do you think that’ll even fit into the pool?!
 **MASON** (Annoyed): How small a pool we talking here, lady?
 **MADDIE** (Surprised): Well, er...
@@ -65,7 +65,7 @@
 - trigger: item, event=Grandma's Pool Party, eventKey=LDE_GrandmasBirthday2023, itemKeys=['LDE_GrandmasBirthday2023_BirthdayCake_08'], items=['Podcasting Kit'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE**: Hi, Jackie! So what was your idea for me to get Grandma?  
-  _earlier:_ ~~Hi Jackie! So what was your idea for me to get Grandma?~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **JACKIE** (Encouraging): Podcasting equipment! For Ursula to start her own podcast about Hopewell Bay!
 **JACKIE** (Encouraging): I’m sure she has plenty of interesting stories to tell. And besides...
 **JACKIE**: We weren’t using any of this old equipment back at the Bugle, anyway.

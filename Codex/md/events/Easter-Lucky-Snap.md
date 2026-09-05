@@ -10,8 +10,7 @@
 **MADDIE** (Thinking): "Listen before looking." Hmmm, I can definitely hear something close by.
 **MADDIE**: "Blend in." Outfit check, done.
 **MADDIE** (Surprised): Now, what's that behind that tree?
-**MADDIE** (Charming): Well, that bird forgot its wings... and grew extra cute!  
-  _earlier:_ ~~Well, that bird forgot its wings… and grew extra cute!~~ (until 25.10.01)
+**MADDIE** (Charming): Well, that bird forgot its wings... and grew extra cute!
 
 ### Easter Lucky Snap — item discovered: Adorable Lamb
 `LS_Easter_Common_Lamb_Dialogue` · seen 26.03.01–26.07.01

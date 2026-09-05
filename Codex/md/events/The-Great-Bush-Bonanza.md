@@ -41,7 +41,7 @@
 **MADDIE** (Doubtful): ... What’s a topiary?
 **DEB** (Encouraging): Sweetie, why it’s the age old tradition of shaping and trimming shrubs into wonderful pieces of art!
 **MADDIE** (Joyous): Really?! I’m great at that! I’ve had A LOT of practice on the Mansion grounds.  
-  _earlier:_ ~~Really?! I’m great at that! I’ve had A LOT practice on the Mansion grounds.~~ (until 25.10.01)
+  _(1 cosmetic edit not shown)_
 **DEB** (Annoyed): Sweetie, it takes years of practice to become a topiary artist!
 **MADDIE** (Thinking): Doesn’t seem that hard to me.
 **DEB** (Doubtful): Oh really? How about a friendly competition then?

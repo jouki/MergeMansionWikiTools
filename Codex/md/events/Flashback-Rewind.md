@@ -63,7 +63,7 @@
 **MADDIE** (Relaxed): It looks about my size, too...
 **MADDIE** (Thinking): No one's around, so maybe I could try some of this stuff on.
 **MADDIE** (Thinking): Let's see...
-**MADDIE**: Hnnng! This is... tighter... than I expected... 
+**MADDIE** (Thinking): Hnnng! This is... tighter... than I expected... 
 **MADDIE** (Surprised): Oh, WOW! What a blast from the past!
 **MADDIE** (Hesitant): Do I look totally ridiculous?
 **MADDIE** (Hesitant): This would make a great outfit for an 80s costume party.
@@ -158,7 +158,7 @@
 **MADDIE** (Thinking): Well, well, well! Julius' story was true after all.
 **MADDIE** (Thinking): Grandma had better have an explanation for this.
 **MADDIE** (Surprised): I'm gonna go get her right n-oo-ooowww... WHOAH!
-**MADDIE**: *Bang!*
+**MADDIE** (Surprised): *Bang!*
 **MADDIE** (Surprised): Ouch, my head...
 
 ### Flashback Rewind — item discovered: VHS Tape

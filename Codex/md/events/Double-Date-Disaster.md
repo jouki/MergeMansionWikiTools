@@ -123,7 +123,7 @@
 **MADDIE** (Charming): So... What is that you have to tell me?
 **EMILIO** (Surprised): Well... This is pretty hard for me to say...
 **EMILIO** (Surprised): I’ve known you for almost a year now, and I’ve never had a connection with anyone else, like the one I’ve had with you.  
-  _earlier:_ ~~I’ve known you for a year now, and I’ve never had a connection with anyone else, like the one I’ve had with you.~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 **MADDIE**: Emilio... I... I feel the same way!
 **EMILIO** (Thinking): I... I know... I think I know... No, I know. So that’s why I have to tell you this now... I...
 **MADDIE** (Charming): ...Yes?

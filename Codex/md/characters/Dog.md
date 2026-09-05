@@ -93,7 +93,7 @@ Every story in which Dog speaks.
   _earlier:_ ~~I don't think dogs eat pies, Grandma.~~ (until 23.09.02)
 **MADDIE** (Doubtful): He won't do that, Grandma.  
   _earlier:_ ~~Yeah, well, guilty until proven innocent, if you ask me.~~ (until 23.09.02)
-**—**: I hope not. He's cute, but I don't want him... disturbing anything.  
+**GRANDMA** (Doubtful): I hope not. He's cute, but I don't want him... disturbing anything.  
   _earlier:_ ~~Ruff, ruff!~~ (until 23.09.02)
 **DOG** (Joyous): Ruff, ruff!
 
@@ -130,7 +130,7 @@ Every story in which Dog speaks.
 - trigger: unknown, hint=Pet event (versions None–None)
 
 **RODDY**: Hi, Maddie! What, uh, do you have there?  
-  _earlier:_ ~~Hi Maddie! What, uh, do you have there?~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE**: Someone left me a gift. I was about to open it.
 **MADDIE** (Surprised): It's a Christmas tree ornament! Looks like a... swan?
 **RODDY** (Charming): That's a dove. I mean, I think that's a dove.
@@ -189,8 +189,20 @@ Every story in which Dog speaks.
 `Valentine2022Decoration8` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE** (Doubtful): There’s some kind of a package at the gate…
+**MADDIE** (Joyous): Oooh!! It's a beautiful bouquet of flowers and chocolates! 
+**MADDIE** (Thinking): Who is it from? There’s no card to go with it…
+**DOG** (Charming): Woof woof!
+**MADDIE** (Surprised): Rufus! Did you just eat my Valentine’s card?
+**DOG** (Joyous): Woooof!
+**MADDIE** (Frustrated): I guess my secret admirer will remain a secret for a while…
 
 ### Xmas2021Decoration8
 `Xmas2021Decoration8` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**DOG**: Ruff ruff!
+**MADDIE**: What is it, Rufus? Don’t you like reindeers?
+**DOG** (Discouraged): Woof…
+**MADDIE** (Charming): Don’t worry! You will always be my favorite pet <3
+**DOG** (Joyous): WOOOOF!! <3

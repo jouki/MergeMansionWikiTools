@@ -23,7 +23,7 @@ Every story in which Winston speaks.
 **MADDIE** (Thinking): Hmm... I don’t know much about this place!
 **MADDIE** (Thinking): Apart from what I’ve read, of course.
 **MADDIE** (Doubtful): And that whole tin can chaos during the storm revealed that this place was collecting people’s secrets.  
-  _earlier:_ ~~And that whole tin can chaos during the storm that revealed that this place was collecting people’s secrets.~~ (until 25.08.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Frustrated): But surely there’s more to it than just that! This place wasn’t just a cover!
 **MADDIE** (Thinking): I should give Winston a call. If anyone knows our family history the best, it would be him!
 **MADDIE** (Doubtful): Also, he’s the only one I trust to give me a somewhat straight answer.
@@ -56,13 +56,13 @@ Every story in which Winston speaks.
 **MADDIE** (Thinking): Agatha's pristine garden, Ignatius' meticulous brickwork, the factory crafting the family's inventions...
 **MADDIE** (Thinking): Our history feels as close here as in the old mansion.
 **WINSTON** (Relaxed): Not just the Boulton's history, Ma'am. This factory brought prosperity like Hopewell Bay had never seen.  
-  _earlier:_ ~~Not just the Boultons' history, Ma'am. This factory brought prosperity like Hopewell Bay had never seen.~~ (until 25.08.01)
+  _(1 cosmetic edit not shown)_
 **WINSTON** (Relaxed): I believe that most residents can still name a relative or two who used to work on these grounds.
 **MADDIE** (Joyous): I've decided, we're turning the factory into a museum! This history deserves to be shared.
 **WINSTON** (Encouraging): Not only fixing a factory, but rebuilding a legacy. You're a Boulton, through and through.
 **MADDIE** (Thinking): No pressure... I'll call Julius, he can help me get on top of the permits from the start.
 **WINSTON** (Charming): Very prudent, Ma'am. Given your history with the council.  
-  _earlier:_ ~~Very prudent, ma'am. Given your history with the council.~~ (until 25.08.01)
+  _(1 cosmetic edit not shown)_
 
 ### BoultonBoulevard 07
 `BoultonBoulevard_07` · seen 26.02.01–26.07.01
@@ -103,7 +103,7 @@ Every story in which Winston speaks.
 
 **MADDIE** (Doubtful): Hmmm.. Looks like the remains of a bell.
 **WINSTON** (Charming): Indeed, Ma’am. That was Agatha’s. She cast it herself, you know? Pure tin, and it rang twice a day.  
-  _earlier:_ ~~Indeed, Ma’am. That was Agatha’s. She cast it herself, you know? Pure tin and it rang twice a day.~~ (until 25.08.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Encouraging): Lunch and end of day?
 **WINSTON** (Thinking): Precisely. She believed in structure. A well-run garden, a well-run household...
 **WINSTON** (Thinking): Naturally, then, a well-run factory.
@@ -118,7 +118,7 @@ Every story in which Winston speaks.
 **MADDIE**: What a cute little kiosk. Was this also part of the factory?
 **WINSTON** (Thinking): Indeed, Ma'am. This used to be the worker's café, it was run by your cousin Cherry's great-grandmother.
 **MADDIE**: I need to invite her here. Cooking must run in their side of the family!  
-  _earlier:_ ~~I need to invite her here. Cooking must run on their side of the family!~~ (until 25.08.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Relaxed): What a lovely spot for a quick lunch break, right by the river.
 **MADDIE** (Relaxed): I wouldn't blame the workers for getting lost in time before rushing back in to finish their shifts.
 **WINSTON** (Charming): Luckily, the Boulton matriarch owned a rather large bell.
@@ -147,11 +147,11 @@ Every story in which Winston speaks.
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Joyous): An old fire truck!  
-  _earlier:_ ~~An old firetruck!~~ (until 25.08.01)
+  _(1 cosmetic edit not shown)_
 **WINSTON** (Thinking): Ah yes. This was donated to the factory after the fire in ‘24. A freak lightning strike, if I recall.
 **WINSTON** (Thinking): It had taken out half the eastern wall before they got the fire under control.
 **WINSTON** (Thinking): This fire truck was the one that answered the call. Afterward, it remained here. Ever vigilant.  
-  _earlier:_ ~~This firetruck was the one that answered the call. Afterwards, it remained here. Ever vigilant.~~ (until 25.08.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Encouraging): Well, at least the fire didn’t take out this flag.
 **WINSTON**: That banner was indeed lucky to survive. It was raised every morning. Flying bright over every shift change.
 **MADDIE** (Relaxed): It’s going up again. A great reminder of the history of this place.
@@ -164,7 +164,7 @@ Every story in which Winston speaks.
 **WINSTON** (Thinking): Most things don’t reveal their value until someone bothers to look closely, Ma’am.
 **MADDIE** (Charming): Well, I’m looking and I’m not stopping. This museum is going to tell the entire story!
 **MADDIE** (Relaxed): The people. The work. The legacy.  
-  _earlier:_ ~~The people. The Work. The legacy.~~ (until 25.08.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Relaxed): The outside is ready. Time to see what’s been waiting inside all these years.
 **WINSTON** (Encouraging): Shall I bring the keys, Ma’am?
 **MADDIE**: Bring everything. I’ve got secrets to uncover!
@@ -313,22 +313,22 @@ Every story in which Winston speaks.
 **WINSTON** (Surprised): Argh! Get back, you fiend, or you'll feel the cold steel of my candlestick! I - oh!
 **MADDIE** (Worried): Winston? Winston the butler?! What are you doing here?
 **MADDIE** (Annoyed): If you're here to steal something for my great-uncle Leonard, then think again!  
-  _earlier:_ ~~If you're here to steal something for my Uncle Leonard, then think again!~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 **WINSTON** (Worried): I'm not! I shall tell you, Miss Boulton, but you may not like the answer.  
-  _earlier:_ ~~I'm not! I shall tell you, Mistress Boulton, but you may not like the answer.~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 
 ### Conservatory: Remove dirt
 `ConservatoryArea_Scene1` · seen 24.04.01–26.07.01
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryRemoveDirtAA2, phase=task completed, task=Remove dirt (versions 24.04.01–26.07.01)
 
 **MADDIE** (Doubtful): Well? Why are you here, Winston, if it's not for great-uncle Leonard?  
-  _earlier:_ ~~Well? Why are you here, Winston, if it's not for Uncle Leonard?~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 **WINSTON** (Discouraged): I can promise you that I'm not here for him. Master Leonard and I have... parted ways.
 **MADDIE** (Surprised): You have? What happened?
 **WINSTON** (Discouraged): Master Leonard finally pushed me too far. I now find myself with no job, and no home.
 **MADDIE** (Thinking): What did he ask you to do?
 **WINSTON** (Thinking): Ah, Miss Boulton, that remains between myself and Master Leonard.  
-  _earlier:_ ~~Ah, Mistress Boulton, that remains between myself and Master Leonard.~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 
 ### Conservatory: Clean snail statue
 `ConservatoryArea_Scene2` · seen 24.04.01–26.07.01
@@ -339,7 +339,7 @@ Every story in which Winston speaks.
 **MADDIE**: Oh! I guess I can understand that since they are so lovely. 
 **MADDIE** (Worried): But umm... There's something other than the Lilies smelling here. Something... Well, not very good, to be honest.
 **WINSTON** (Discouraged): I think I know what you mean, Miss Boulton.  
-  _earlier:_ ~~I think I know what you mean, Mistress Boulton.~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 
 ### Conservatory: Remove broken glass
 `ConservatoryArea_Scene3` · seen 24.04.01–26.07.01
@@ -349,12 +349,12 @@ Every story in which Winston speaks.
 **WINSTON** (Discouraged): I'm afraid so... That's a very special flower with a dark story.
 **MADDIE** (Joyous): Oh? What is it? 
 **WINSTON** (Frustrated): Telling you this makes my heart heavy, Miss Boulton. But this flower is not a typical flower.  
-  _earlier:_ ~~Telling this makes my heart heavy, Mistress Boulton. But this flower is not a typical flower.  ~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 **WINSTON**: It's usually referred by its latin name Rafflesia, but I've grown to know it as a "corpse flower".
 **MADDIE** (Thinking): A corpse flower? That's not a pretty name for a flower. But... it explains the smell though. 
 **WINSTON** (Worried): It's a very unusual one and very hard to grow outside of wilderness. In fact, it takes great dedication and care to keep one alive. 
 **WINSTON** (Thinking): ...and, of course, these seeds. I believe these belong to you, Miss Boulton.    
-  _earlier:_ ~~...and, of course, these seeds. I believe these belong to you, Mistress Boulton.  ~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 
 ### Conservatory: Place soil
 `ConservatoryArea_Scene4` · seen 24.04.01–26.07.01
@@ -364,7 +364,7 @@ Every story in which Winston speaks.
 **WINSTON** (Worried): Take these seeds and seedling kit. However, I have my doubts as to whether you will be able to grow the corpse flower as successfully as your - oh, I've said too much. 
 **MADDIE** (Doubtful): My who?! Who managed to grow them? And why?!
 **WINSTON**: That's a story for another time, Miss Boulton. Like I said, I'm here for the Boulton Lilies.  
-  _earlier:_ ~~That's a story for another time, Mistress Boulton. Like I said, I'm here for the Boulton Lilies.~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 
 ### Conservatory: Place pots
 `ConservatoryArea_Scene5` · seen 24.04.01–26.07.01
@@ -372,7 +372,7 @@ Every story in which Winston speaks.
 
 **MADDIE**: Sounds... dark. But fine! We'll get back to this later! Meanwhile, can you please tell me something Winston: Did you ever speak to my grandpa Charlie?
 **WINSTON**: Of course, Miss Boulton. In fact, I would say that we became rather good friends.  
-  _earlier:_ ~~Of course, Mistress Boulton. In fact, I would say that we became rather good friends.~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Joyous): Then you'll be pleased to hear that he's still alive! He called me recently.
 **WINSTON** (Joyous): He's alive?! I knew it!
 
@@ -621,7 +621,7 @@ Every story in which Winston speaks.
 **MADDIE** (Thinking): All I need is some lemon pepper and-
 **MADDIE** (Surprised): Eeek! THE RAT! Winston! Catch it!
 **WINSTON** (Doubtful): My apologies, Ma'am, but I do believe it has managed to scurry off into the pantry before I could!  
-  _earlier:_ ~~My apologies Ma'am, but I do believe it has managed to scurry off into the pantry before I could!~~ (until 26.06.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Doubtful): Alright, little guy... Your scurrying days are numbered! I'll find you in the pantry!
 
 ### Kitchen: Start with the utensils. Go on.
@@ -632,7 +632,7 @@ Every story in which Winston speaks.
 **MADDIE** (Encouraging): Somebody's gotta do it, Winston. Say, I was wondering...
 **WINSTON** (Encouraging): We truly have let this place go to ruin. Oh, you should have seen it in its heyday...
 **WINSTON** (Encouraging): ...busboys, kitchen maids, cooks, and, of course...  
-  _earlier:_ ~~...busboys, kitchen maids, cooks and, of course...~~ (until 26.06.01)
+  _(1 cosmetic edit not shown)_
 **WINSTON** (Discouraged): ...the Kitchen Manager.
 **MADDIE** (Surprised): Uh, why did you make that sound like a villain out of a horror story?
 **MADDIE** (Thinking): And anyway, I just wanted to know about this knife-in-the-fridge thing!
@@ -684,8 +684,8 @@ Every story in which Winston speaks.
 **WINSTON**: And the two families were long-time rivals. A tradition that continues until this very day.
 **MADDIE** (Thinking): The note said they had gone to work for the Blackwoods, now that I think about it.
 **WINSTON** (Thinking): That is right. Oh, I remember the evening he quit...
-**—**: Tell me!
-**—**: Let me just polish this first to calm my nerves...
+**WINSTON** (Thinking): Tell me!
+**WINSTON** (Worried): Let me just polish this first to calm my nerves...
 
 ### FirstFloorPantry 13
 `FirstFloorPantry_13` · seen 26.07.01–26.07.01
@@ -698,20 +698,22 @@ Every story in which Winston speaks.
 **MADDIE**: There must be more to this story. Maybe Grandma knows...
 **MADDIE** (Thinking): Seems like this hatch is locked. I wonder...Winston?
 **WINSTON**: Yes, ma'am?  
-  _earlier:_ ~~Yes, m'am?~~ (until 26.07.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Thinking): Do you have the key to this hatch? I would like to see what's below.
 **WINSTON** (Worried): Below? Oh. There's nothing below. It's a...fake hatch.
 **MADDIE** (Doubtful): Winston...
 **WINSTON**: The key may be with the key to the parlor, ma'am. I can take a look.  
-  _earlier:_ ~~The key may be with the key to the parlor, m'am. I can take a look.~~ (until 26.07.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Surprised): The parlor? We have a parlor?  
   _earlier:_ ~~The parlor? We have a...~~ (until 26.06.01)
 **WINSTON**: Yes ma'am. Just across the hall, ma'am.  
-  _earlier:_ ~~*ring ring*~~ (until 26.06.01); ~~Yes m'am. Just across the hall, m'am.~~ (until 26.07.01)
+  _earlier:_ ~~*ring ring*~~ (until 26.06.01)  
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Thinking): Are you just trying to distract me from this hatch, Winston?  
   _earlier:_ ~~Hold on, I'm getting a call. Hello? Julius?~~ (until 26.06.01)
 **WINSTON** (Worried): No ma'am. I will go look for the keys right away.  
-  _earlier:_ ~~Maddie! You have to come to the factory at once! It's an emergency!~~ (until 26.06.01); ~~No m'am. I will go look for the keys right away.~~ (until 26.07.01)
+  _earlier:_ ~~Maddie! You have to come to the factory at once! It's an emergency!~~ (until 26.06.01)  
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Doubtful): Hmmm. Okay. I'll meet you there, I guess.  
   _earlier:_ ~~Whoa, Julius, slow down. What's happening?~~ (until 26.06.01)
 **MADDIE** (Charming): All right, mysterious hatch. I'll see you later.  
@@ -761,7 +763,7 @@ Every story in which Winston speaks.
 **MADDIE** (Encouraging): On the count of three, both of us will run at it with full force!
 **WINSTON** (Thinking): There's no need for all that, ma'am. There's a spare key hidden behind that painting there.
 **MADDIE** (Surprised): Oh, that makes things easier. Thanks, Winston!
-**—**: Nothing can hold me back from discovering the truth now!
+**MADDIE** (Surprised): Nothing can hold me back from discovering the truth now!
 
 ### GalleryIntro
 `GalleryIntro` · seen 25.05.01–26.07.01
@@ -810,7 +812,7 @@ Every story in which Winston speaks.
 - trigger: event, event=The Great Bake-off, eventId=LBE_May2023, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–26.07.01)
 
 **PEARL** (Encouraging): Welcome, everyone, to Hopewell Bay's great bake-off! Let's meet our contestants!   
-  _earlier:_ ~~Welcome, everyone, to Hopewell Bay's great bakeoff! Let's meet our contestants! ~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 **PEARL** (Encouraging): First off, we have Jackie, our resident reporter for the Boulton Bugle.
 **JACKIE** (Encouraging): Thank you, Pearl, for planning this event again! May the best baker win!
 **PEARL** (Encouraging): Next, we have Maddie, who's been busy renovating the mansion!
@@ -825,7 +827,7 @@ Every story in which Winston speaks.
 **HEIKKI** (Joyous): Hello! Huh, sorry for being late! I had to use my head as a third leg!
 **PEARL** (Thinking): Wh- What? 
 **PEARL** (Encouraging): Anyway, let the great bake-off begin!  
-  _earlier:_ ~~Anyway, let the great bakeoff begin!~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 
 ### The Great Bake-off — event end
 `LBE_May2023Outro` · seen 24.04.01–26.07.01
@@ -1265,6 +1267,11 @@ Every story in which Winston speaks.
 `WinstonCharacterTask2` · seen 25.05.01–26.07.01
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE**: Oh, my... This stain will not come off!
+**WINSTON** (Thinking): Hmm, I don’t think we will have enough time before the guests arrive. We need to paint over it.
+**MADDIE** (Surprised): Paint over it?!!
+**WINSTON** (Doubtful): Do you have a better plan, ma’am?
+**MADDIE** (Doubtful): *Sigh* Fine. I’ll get the paint.
 
 ### Gallery: Assisting Winston
 `WinstonCharacterTask8` · seen 24.04.01–26.07.01
@@ -1333,7 +1340,7 @@ Every story in which Winston speaks.
 **WINSTON** (Frustrated): Well, we seem to have an intruder in our midst!
 **MADDIE** (Surprised): Intruder?!
 **WINSTON** (Thinking): Yes, a rather guileful and sneaky one too. If it weren't for my predilection for perfection, I may have missed them entirely.  
-  _earlier:_ ~~Yes, a rather guile and sneaky one too. If it weren't for my predilection for perfection, I may have missed them entirely.~~ (until 25.10.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Worried): What did they do?
 **WINSTON** (Doubtful): They seem to have eaten your grandmother's petunias, ma'am.
 **MADDIE** (Doubtful): What?

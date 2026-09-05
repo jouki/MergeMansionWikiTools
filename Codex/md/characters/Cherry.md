@@ -49,8 +49,8 @@ Every story in which Cherry speaks.
 **MADDIE**: Everyone knows there's a secret Hopewell Bay Hopeberry Jam recipe. I thought this was it, but...nope!
 **CHERRY**: You mean Grandma's recipe? I'm pretty sure these are older than her.
 **MADDIE**: Exactly! No, I've only tasted it in jam from old jars with a special butterfly logo on them!
-**—**: I see...
-**—**: Anyway, let's continue restocking these shelves!
+**MADDIE** (Thinking): I see...
+**MADDIE**: Anyway, let's continue restocking these shelves!
 
 ### Gingerbread Jamboree — item discovered: Fancy Table
 `LBE_Xmas2023_BestGingerBreadTable_01_Dialogue` · seen 23.11.02–26.07.01
@@ -268,7 +268,7 @@ Every story in which Cherry speaks.
 **MADDIE** (Surprised): Hey... Is that Cherry? She looks... Very UPSET!
 **CHERRY** (Annoyed): You’re right, I’m upset! The mayor just cancelled the Festival Feast!
 **CHERRY** (Doubtful): Might as well cancel all the fun while they're at it... What am I supposed to do now?  
-  _earlier:_ ~~Might as well cancel all the fun while she’s at it... What am I supposed to do now?~~ (until 25.10.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Thinking): Sounds like you had a lot riding on it.
 **CHERRY** (Doubtful): You’re darned tootin’ I did! I’ve ordered enough food to feed the whole town! 
 **CHERRY** (Surprised): Without the festival, I’ll go bust!
@@ -278,7 +278,7 @@ Every story in which Cherry speaks.
 **GRANDMA** (Relaxed): None at all, dearie.
 **CHERRY** (Encouraging): Amazing! Thank you!
 **CHERRY** (Thinking): We’ll show that mayor that they can't stop us from having fun!  
-  _earlier:_ ~~We’ll show that mayor that she can't stop us from having fun!~~ (until 25.10.01)
+  _(1 cosmetic edit not shown)_
 
 ### Festive Feast — item discovered: Cherry's Deluxe Pumpkin Pie
 `SP_CancelledFun2025_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01
@@ -338,16 +338,40 @@ Every story in which Cherry speaks.
 `SP_PieWars2023_Decoration_Slot26_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot26, event=Pie Wars, eventKey=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MADDIE** (Charming): Mmm... That smells delicious! Hoping to lure more people in?
+**GRANDMA** (Charming): Hoping? I may need to move inside! I'm having trouble handling the demand!
+**MADDIE** (Doubtful): Only you'd get upset when things go well, Grandma!
+**CHERRY** (Doubtful): Hey! I could smell that all the way in my bakery! Do you really think that's fair?
+**GRANDMA** (Thinking): All's fair in pies and war, dearie...
+**CHERRY** (Annoyed): Oh I see... It's war then. 
+**VICTORIA** (Thinking): ...
+**VICTORIA** (Charming): Interesting... Looks like Ursula and Cherry are having a bit of a competition...
 
 ### Pie Wars — decoration SP_PieWars2023_Decoration_Slot28
 `SP_PieWars2023_Decoration_Slot28_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot28, event=Pie Wars, eventKey=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MADDIE** (Surprised): Cherry?! Is everything alright?
+**CHERRY** (Annoyed): Where is your grandmother?! I have a bone to pick with her!
+**MADDIE** (Doubtful): Hey, wow! Hold your horses, what's going on?!
+**CHERRY** (Doubtful): She switched the labels of my salt and sugar jars!
+**GRANDMA** (Frustrated): I did no such thing! You sabotaged my oven!
+**CHERRY** (Annoyed): No I didn't!
+**MADDIE** (Thinking): What's going on here?
 
 ### Pie Wars — item discovered: SP_PieWars2023_CollectableItems_04
 `SP_PieWars2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.09.02–26.07.01
 - trigger: item, event=Pie Wars, eventKey=SP_PieWars2023, itemKeys=['SP_PieWars2023_CollectableItems_04'], items=['SP_PieWars2023_CollectableItems_04'], moment=item discovered (versions 23.09.02–26.07.01)
 
+**MADDIE** (Encouraging): I've got to say, Grandma, you sure know how to make a pie!
+**GRANDMA** (Relaxed): Nothing like a bit of competition to get the old baking juices flowing, dearie.
+**CHERRY**: Hello!
+**MADDIE**: Cherry! What's up?
+**CHERRY** (Encouraging): I couldn't help but come over and see how my competition is doing!
+**GRANDMA** (Doubtful): Or learn my secret...
+**CHERRY** (Encouraging): Oh please, I don't need your secrets to win!
+**GRANDMA** (Encouraging): You can certainly try, dearie.
+**CHERRY** (Joyous): You're so feisty, sugar!
 
 ### Season Pass - Soccer Watch Party — decoration SP_WorldCup2026_Decoration_Slot34
 `SP_WorldCup2026_Decoration_Slot34_Dialogue` · seen 26.04.01–26.07.01
@@ -368,8 +392,7 @@ Every story in which Cherry speaks.
 - trigger: decoration, decoration=SP_XmasMystery2024_Decoration_Slot34, event=Holiday Mystery, eventKey=SP_XmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): This spread is amazing, you guys!
-**CHERRY** (Thinking): Your risotto is... interesting. Did you mean for it to be this "al dente", or did the stove just quit on you?  
-  _earlier:_ ~~Your risotto is… interesting. Did you mean for it to be this "al dente", or did the stove just quit on you?~~ (until 25.10.01)
+**CHERRY** (Thinking): Your risotto is... interesting. Did you mean for it to be this "al dente", or did the stove just quit on you?
 **GRANDMA** (Doubtful): It’s called “texture.” Not everything needs to be boiled into submission like your very ambitious soufflé.
 **CHERRY** (Annoyed): You mean the soufflé that’s actually risen? I wasn’t sure if the “decadent” dessert you're serving is meant to look like a pancake.
 **GRANDMA** (Frustrated): At least one of us is serving something memorable tonight...

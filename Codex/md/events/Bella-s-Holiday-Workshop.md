@@ -32,6 +32,9 @@
   _earlier:_ ~~How about baking? Is there some treat that makes you feel really happy?~~ (until 25.10.01)
 **RODDY** (Worried): That had better be the last one - we’re running out of space!  
   _earlier:_ ~~There are these cookies my granny used to make...~~ (until 25.10.01)
+**KAZUKO**: What did they taste like?
+**BELLA** (Relaxed): Oh, they tasted good!
+**KAZUKO** (Thinking): Hmm... I think we'll need a little bit of help from someone who knows a thing or two about baking.
 
 ### Bella's Holiday Workshop — item discovered: 80387529
 `CBE_HolidayWorkshop2024_CandleTable_01_Dialogue` · seen 25.05.01–26.07.01
@@ -82,6 +85,8 @@
   _earlier:_ ~~I am? I guess I've been working pretty hard.~~ (until 25.10.01)
 **EMILIO** (Thinking): Although I don’t know where she finds the time to produce all of these crafts!  
   _earlier:_ ~~But what are you hoping to get for Xmas?~~ (until 25.10.01)
+**EMILIO** (Encouraging): Just peace on earth and joy to all the animals.
+**BELLA** (Doubtful): Ugh... of course you do.
 
 ### Bella's Holiday Workshop — item discovered: Grandma
 `CBE_HolidayWorkshop2024_CharacterGrandma_01_Dialogue` · seen 25.05.01–26.07.01
@@ -146,6 +151,14 @@
   _earlier:_ ~~Thanks -- I guess. What's up, Bella?~~ (until 25.10.01)
 **EMILIO** (Relaxed): Or teapots!  
   _earlier:_ ~~Umm... *sigh*~~ (until 25.10.01)
+**BELLA** (Thinking): Thank you for welcoming me here in Hopewell Bay.
+**BELLA** (Doubtful): You've all been so great, but I guess I haven't been as nice as I could've been.  
+  _(1 cosmetic edit not shown)_
+**BELLA** (Doubtful): Now I just want to spread holiday cheer to everyone in Hopewell Bay... as a way to apologize.
+**BELLA**: Your little town is so sweet, and your projects are really quirky.
+**BELLA**: I know Emilio cares about you a lot, and I want him to be happy, so...
+**MADDIE** (Surprised): O-oh, sure. I-- I mean WE all care about Emilio, too.
+**BELLA** (Relaxed): Of course you do.
 
 ### Bella's Holiday Workshop — item discovered: Mason
 `CBE_HolidayWorkshop2024_CharacterMason_01_Dialogue` · seen 25.05.01–26.07.01
@@ -163,6 +176,9 @@
   _earlier:_ ~~Is there anything I could help Santa with?~~ (until 25.10.01)
 **RODDY** (Charming): Let me ask you first: are you interested in some less-than-premium holiday crafts?  
   _earlier:_ ~~Sure... Hold on. You don't mean your homemade pottery?~~ (until 25.10.01)
+**BELLA** (Doubtful): Maybe, maybe not. It's not very nice to make fun of other people's work, you know.
+**MASON** (Joyous): *Sigh* You're right. I would love a teapot for Xmas.
+**BELLA** (Thinking): Hmmm...
 
 ### Bella's Holiday Workshop — item discovered: Roddy
 `CBE_HolidayWorkshop2024_CharacterRoddy_01_Dialogue` · seen 25.05.01–26.07.01
@@ -177,6 +193,9 @@
   _earlier:_ ~~Great! I've made everyone some presents and, well, I've got one for you, too.~~ (until 25.10.01)
 **RODDY** (Charming): I wonder if Maddie could spare a shed or a secret room for it all?  
   _earlier:_ ~~I'm speechless! Thank you so much!~~ (until 25.10.01)
+**BELLA**: It's a surprise, so you'll have to open it. Oh, I'll just tell you what it is!
+**BELLA** (Relaxed): It's a scarf!
+**RODDY** (Worried): Well that is thoughtful. And what a b-beautiful scarf it is!
 
 ### Bella's Holiday Workshop — item discovered: Tray of Polvorones
 `CBE_HolidayWorkshop2024_Cookies_06_Dialogue` · seen 25.05.01–26.07.01
@@ -214,6 +233,9 @@
   _earlier:_ ~~What are you making?~~ (until 25.10.01)
 **BELLA** (Relaxed): I knew I could rely on you!  
   _earlier:_ ~~Pottery, knitted hats, scarves, and socks, and scented candles!~~ (until 25.10.01)
+**EMILIO** (Surprised): And you know how to make them?
+**BELLA**: I will learn, and Kazuko promised to help.
+**EMILIO** (Thinking): Right...
 
 ### Bella's Holiday Workshop — event end
 `CBE_HolidayWorkshop2024_EventOutro_Dialogue` · seen 24.11.02–26.07.01
@@ -227,6 +249,10 @@
   _earlier:_ ~~I'm so happy you think so. They are all important to you, I know that, and I want them to like me, too.~~ (until 25.10.01)
 **RODDY** (Relaxed): The holidays are never not chaotic around here, but at least they're always memorable.  
   _earlier:_ ~~How could they not like you?~~ (until 25.10.01)
+**BELLA** (Relaxed): I know!
+**BELLA** (Thinking): It's kinda sweet how Maddie has a crush on you, though!
+**EMILIO** (Surprised): Wh-what do you mean?
+**BELLA** (Relaxed): Don't worry - I won't tell anyone!
 
 ### Bella's Holiday Workshop — entering board
 `CBE_HolidayWorkshop2024_Intro_Dialogue` · seen 25.10.01–26.07.01
@@ -248,6 +274,10 @@
   _earlier:_ ~~Oh?~~ (until 25.10.01)
 **BELLA**: Who could I ask? Ah, I think I know the perfect person for the job!  
   _earlier:_ ~~Maddie and her friends generously welcomed you here in Hopewell Bay, but I'm afraid you didn't make the best impression.~~ (until 25.10.01)
+**BELLA** (Doubtful): I know, but I was sooo jetlagged from the flight and...
+**EMILIO** (Encouraging): Bella...
+**BELLA** (Thinking): Fine. Maybe I could try to repay their hospitality somehow...
+**EMILIO** (Encouraging): That sounds like a wonderful idea!
 
 ### Bella's Holiday Workshop — item discovered: Beanie
 `CBE_HolidayWorkshop2024_Knitting_05_Dialogue` · seen 25.05.01–26.07.01
@@ -277,6 +307,7 @@
   _earlier:_ ~~Are you going to make something cool out of that lump of clay?~~ (until 25.10.01)
 **BELLA** (Relaxed): That won’t be a problem! If you could just set up the website, I’ll do the rest!  
   _earlier:_ ~~That's a teapot I just made.~~ (until 25.10.01)
+**MASON** (Worried): Oooh... It's really cool!
 
 ### Bella's Holiday Workshop — item discovered: Teapot
 `CBE_HolidayWorkshop2024_Pottery_05_Dialogue` · seen 25.05.01–26.07.01
@@ -325,9 +356,12 @@
 **MADDIE** (Surprised): R-really? I mean, congratulations! That’s wonderful.  
   _earlier:_ ~~Umm, sure! What do I need to do?~~ (until 25.10.01)
 **BELLA**: Thank you. If you’re looking for the perfect presents for the holidays, there’s a 3% discount with the code PERFECTBELLA.  
-  _earlier:_ ~~Just snap a bunch a photos while I wrap these presents.~~ (until 24.10.01); ~~Just snap a bunch of photos while I wrap these presents.~~ (until 25.10.01)
+  _earlier:_ ~~Just snap a bunch of photos while I wrap these presents.~~ (until 25.10.01)  
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Hesitant): How generous!  
   _earlier:_ ~~But remember to get my good side. And frame it right! Is the light good?~~ (until 25.10.01)
+**EMILIO** (Thinking): I'm not sure...
+**BELLA** (Doubtful): It'll be a long evening!
 
 ### Bella's Holiday Workshop — item discovered: Seasonal Secrets
 `CBE_HolidayWorkshop2024_TinCan_05_Dialogue` · seen 25.05.01–26.07.01
@@ -339,6 +373,8 @@
   _earlier:_ ~~It's my pleasure, Bella!~~ (until 25.10.01)
 **RODDY** (Frustrated): I guess my plan wasn’t totally water-tight after all...  
   _earlier:_ ~~You know what I've noticed? In this town, you never know what you'll find in an old tin can!~~ (until 25.10.01)
+**BELLA** (Relaxed): See! This one says "syrup", but it's an old recipe!
+**BELLA** (Thinking): "The secret to the perfect polvorones!"
 
 ### Bella's Holiday Workshop — item discovered: Biggest Present
 `CBE_HolidayWorkshop2024_XmasPresents_08_Dialogue` · seen 25.05.01–26.07.01

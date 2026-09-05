@@ -116,7 +116,7 @@
 **MASON**: Wow... I didn't know I'd get so much for my school desk. I'm sure the teacher won't notice!
 **MASON**: Hold on... My mom is calling.
 **MASON** (Calling): Hi, Mom! Yeah, it's going great! No, I haven't done anything embarrassing yet...  
-  _earlier:_ ~~Hi Mom! Yeah, it's going great! No, I haven't done anything embarrasing yet...~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 
 ### Egg Hunt 2023 — item discovered: Toad Terrarium
 `CBE_Easter2023_Frog` · seen 23.09.02–26.07.01
@@ -147,7 +147,7 @@
 
 **MADDIE** (Joyous): Aaah, Spring... Everything feels so alive!
 **MADDIE**: Hi, Mason!  
-  _earlier:_ ~~Hi Mason!~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **MASON** (Doubtful): I brought you something... Mom said I had to.
 **MADDIE** (Surprised): Oh wow... Did you make this?
 **MASON** (Discouraged): Yeah... I just... If you don't like it, you can throw it away.

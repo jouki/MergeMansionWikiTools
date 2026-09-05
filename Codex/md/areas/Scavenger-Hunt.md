@@ -29,7 +29,7 @@
 **JACKIE** (Thinking): Hey Maddie. Just wondering how things are going here. Any updates on your grandma's case?
 **MADDIE** (Discouraged): Jackie, I'm not going to talk about that with you, so you might as well leave.
 **JACKIE** (Doubtful): I... Sorry. I understand. Mind if I hang out a while?  
-  _earlier:_ ~~I... Sorry. I understand. Mind if I hang out awhile?~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Thinking): I guess so! I'm on a scavenger hunt that, uh, someone set up for me.
 **JACKIE** (Encouraging): Can I help? I love things like this. My idea of heaven is an escape room with a ten minute timer.
 **MADDIE** (Relaxed): Really?! Umm.. Sure! Let's go take a look around the plaza and the old well.
@@ -70,7 +70,7 @@
 **JACKIE** (Annoyed): Ugh. Ignore him! I think you found the last clue, so it's time to go back to the pool house.
 **MADDIE**: Okay, here we are! We have all the letters in Grandpa's code, and we're at the right place - the pool house. Let's try and see if that code opens the safe.
 **JACKIE** (Thinking): So you found the letters 'R4U5L' - will they work as the code?
-**—**: Uh, nope, that didn't work. It could be... oh! I know what it is - R5UL4! Ursula!
+**JACKIE** (Surprised): Uh, nope, that didn't work. It could be... oh! I know what it is - R5UL4! Ursula!
 
 ### Scavenger Hunt: Dig and search the ground
 `ScavengerHunt_OldwellEmpty` · seen 24.04.01–26.07.01
@@ -84,7 +84,7 @@
 - trigger: area, area=Scavenger Hunt, areaId=ScavengerHunt, hotspotId=ScavengerHuntOldWellInspectWater, phase=task completed, task=Search the pond (versions 24.04.01–26.07.01)
 
 **MADDIE** (Thinking): Nothing here it seems... except so many knives at the bottom of that pond.
-**—**: That's a bit weird.
+**JACKIE** (Thinking): That's a bit weird.
 
 ### Scavenger Hunt: Open the safe with the code
 `ScavengerHunt_Poolhouse` · seen 24.04.01–26.07.01

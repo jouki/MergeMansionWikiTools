@@ -19,7 +19,7 @@
 - trigger: decoration, decoration=SP_DebsMystery2023_Decoration_Slot26, event=Deb’s Mystery, eventKey=SP_DebsMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE**: Hi, Emilio! I’m sorry that Deb dragged you into this.  
-  _earlier:_ ~~Hi Emilio! I’m sorry that Deb dragged you into this.~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **EMILIO** (Encouraging): Don’t worry about it, Maddie. It sounded like she really needed some help.
 **DEB** (Joyous): Wonderful, you’re here! Now, sit down, you two, and I’ll bring you some afternoon tea.
 **MADDIE** (Doubtful): Er- Deb... What are you doing?

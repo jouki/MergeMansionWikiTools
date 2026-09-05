@@ -1,0 +1,3570 @@
+[
+ {
+  "family": "CBE_Easter",
+  "verdict": "rewritten",
+  "counts": {
+   "dropped": 32,
+   "new": 21
+  },
+  "runs": [
+   {
+    "eventKey": "CBE_Easter2023",
+    "name": "Egg Hunt 2023",
+    "stories": 32,
+    "first": "23.06.02",
+    "last": "26.07.01"
+   },
+   {
+    "eventKey": "CBE_Easter2025",
+    "name": "Easter 2025",
+    "stories": 21,
+    "first": "25.04.02",
+    "last": "26.03.01"
+   }
+  ],
+  "pairs": [
+   {
+    "a": "CBE_Easter2023_AFluffleOfRabbits",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_Bike",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_BubbleGum",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_Cbeeaster2023Toys",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_ChocolateAvenue",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_ChocolateEggs",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_ChocolateEggsLvl1",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_Closet",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_CuteRabbitHole",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_EasterEgg",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_EggCart",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_EggPaintingStation",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_FleaMarket",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_Frog",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_GoldenEgg",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_IntroDialogue",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_LaundryBasket",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_LeftStoneFence",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_NewIntroDialogue",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_OutroDialogue",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_Plushies",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_RightStoneFence",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_RufusEasterRetreat",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_SchoolDesk",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_SeasonalArchway",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_TheKey",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_ToyCupboard",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_TreasureChest",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_TreeHouse",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_UltimateEggTree",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_MasonPlaceholder",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_Easter2023_DecoratedTree",
+    "b": null,
+    "verdict": "dropped in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_Easter2025_BrokenMachine_05_Dialogue",
+    "verdict": "new in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_Easter2025_Can_01_Dialogue",
+    "verdict": "new in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_Easter2025_CandyMachineProducing_01_Dialogue",
+    "verdict": "new in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_Easter2025_Character_01_Dialogue",
+    "verdict": "new in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_Easter2025_Character_02_Dialogue",
+    "verdict": "new in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_Easter2025_Character_03_Dialogue",
+    "verdict": "new in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_Easter2025_Character_04_Dialogue",
+    "verdict": "new in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_Easter2025_Character_05_Dialogue",
+    "verdict": "new in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_Easter2025_ChocoMachineProducing_Dialogue",
+    "verdict": "new in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_Easter2025_Cupboard_01_Dialogue",
+    "verdict": "new in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_Easter2025_Decoration_Slot07_Dialogue",
+    "verdict": "new in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_Easter2025_Decoration_Slot10_Dialogue",
+    "verdict": "new in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_Easter2025_Decoration_Slot14_Dialogue",
+    "verdict": "new in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_Easter2025_EasterDecorations_04_Dialogue",
+    "verdict": "new in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_Easter2025_EasterDecorations_06_Dialogue",
+    "verdict": "new in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_Easter2025_EasterEggs_05_Dialogue",
+    "verdict": "new in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_Easter2025_EasterEggs_07_Dialogue",
+    "verdict": "new in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_Easter2025_EasterEggs_10_Dialogue",
+    "verdict": "new in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_Easter2025_Intro_Dialogue",
+    "verdict": "new in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_Easter2025_Outro_Dialogue",
+    "verdict": "new in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_Easter2025_PastryMachineProducing_Dialogue",
+    "verdict": "new in CBE_Easter2025",
+    "similarity": null,
+    "diff": []
+   }
+  ],
+  "note": "sequel — 2023 'Egg Hunt' (Detective Mason vs. the rabbit) → 2025 (Mason excited about Maddie's bigger-than-ever egg hunt). Same theme, entirely new script; no line reused."
+ },
+ {
+  "family": "CBE_MaddieInParis",
+  "verdict": "rewritten",
+  "counts": {
+   "dropped": 19,
+   "new": 18
+  },
+  "runs": [
+   {
+    "eventKey": "CBE_MaddieInParis2025",
+    "name": "Maddie In Paris",
+    "stories": 19,
+    "first": "25.01.03",
+    "last": "26.07.01"
+   },
+   {
+    "eventKey": "CBE_MaddieInParis",
+    "name": "Maddie In Paris",
+    "stories": 18,
+    "first": "26.01.02",
+    "last": "26.07.01"
+   }
+  ],
+  "pairs": [
+   {
+    "a": "CBE_MaddieInParis2025_ArcDeTriomphe_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_MaddieInParis2025_ArcDeTriomphe_05_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_MaddieInParis2025_EiffelTower_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_MaddieInParis2025_EiffelTower_05_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_MaddieInParis2025_Food_06_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_MaddieInParis2025_Intro_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_MaddieInParis2025_Louvre_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_MaddieInParis2025_Louvre_05_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_MaddieInParis2025_NotreDame_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_MaddieInParis2025_NotreDame_05_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_MaddieInParis2025_Outro_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_MaddieInParis2025_SacreCoeur_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_MaddieInParis2025_SacreCoeur_05_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_MaddieInParis2025_Slot_14_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_MaddieInParis2025_Slot_18_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_MaddieInParis2025_Slot_22_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_MaddieInParis2025_Travel_04_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_MaddieInParis2025_ValentinesMerch_04_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_MaddieInParis2025_ValentinesMerch_06_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_MaddieInParis_ArcDeTriomphe_02_Dialogue",
+    "verdict": "new in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_MaddieInParis_ArcDeTriomphe_05_Dialogue",
+    "verdict": "new in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_MaddieInParis_EiffelTower_02_Dialogue",
+    "verdict": "new in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_MaddieInParis_EiffelTower_05_Dialogue",
+    "verdict": "new in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_MaddieInParis_Food_06_Dialogue",
+    "verdict": "new in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_MaddieInParis_Intro_Dialogue",
+    "verdict": "new in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_MaddieInParis_Louvre_02_Dialogue",
+    "verdict": "new in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_MaddieInParis_Louvre_05_Dialogue",
+    "verdict": "new in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_MaddieInParis_NotreDame_02_Dialogue",
+    "verdict": "new in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_MaddieInParis_NotreDame_05_Dialogue",
+    "verdict": "new in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_MaddieInParis_Outro_Dialogue",
+    "verdict": "new in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_MaddieInParis_SacreCoeur_02_Dialogue",
+    "verdict": "new in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_MaddieInParis_SacreCoeur_05_Dialogue",
+    "verdict": "new in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_MaddieInParis_Slot_16_Dialogue",
+    "verdict": "new in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_MaddieInParis_Slot_19_Dialogue",
+    "verdict": "new in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_MaddieInParis_Slot_23_Dialogue",
+    "verdict": "new in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_MaddieInParis_Travel_04_Dialogue",
+    "verdict": "new in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_MaddieInParis_ValentinesMerch_06_Dialogue",
+    "verdict": "new in CBE_MaddieInParis",
+    "similarity": null,
+    "diff": []
+   }
+  ],
+  "note": "sequel — 2025 run is Maddie BACK from Paris telling Julius about it; the 2026 rerun stages the trip again from the departure (packing, Grandma offers to come along). No line reused; both runs are story-relevant."
+ },
+ {
+  "family": "CBE_TheGreatEscape",
+  "verdict": "rewritten",
+  "counts": {
+   "identical": 8,
+   "dropped": 3,
+   "new": 2
+  },
+  "runs": [
+   {
+    "eventKey": "CBE_TheGreatEscape",
+    "name": "The Great Escape",
+    "stories": 11,
+    "first": "24.11.02",
+    "last": "25.10.01"
+   },
+   {
+    "eventKey": "CBE_TheGreatEscapeB",
+    "name": null,
+    "stories": 10,
+    "first": "25.05.01",
+    "last": "25.06.01"
+   }
+  ],
+  "pairs": [
+   {
+    "a": "CBE_TheGreatEscape_WardenSafe3_Dialogue",
+    "b": "CBE_TheGreatEscapeB_WardenSafe3_Dialogue",
+    "verdict": "identical",
+    "similarity": 1.0,
+    "diff": []
+   },
+   {
+    "a": "CBE_TheGreatEscape_Tools5_Dialogue",
+    "b": "CBE_TheGreatEscapeB_Tools5_Dialogue",
+    "verdict": "identical",
+    "similarity": 1.0,
+    "diff": []
+   },
+   {
+    "a": "CBE_TheGreatEscape_Tools1_Dialogue",
+    "b": "CBE_TheGreatEscapeB_Tools1_Dialogue",
+    "verdict": "identical",
+    "similarity": 1.0,
+    "diff": []
+   },
+   {
+    "a": "CBE_TheGreatEscape_StampThirdClass1_Dialogue",
+    "b": "CBE_TheGreatEscapeB_StampThirdClass1_Dialogue",
+    "verdict": "identical",
+    "similarity": 1.0,
+    "diff": []
+   },
+   {
+    "a": "CBE_TheGreatEscape_Socks05_Dialogue",
+    "b": "CBE_TheGreatEscapeB_Socks05_Dialogue",
+    "verdict": "identical",
+    "similarity": 1.0,
+    "diff": []
+   },
+   {
+    "a": "CBE_TheGreatEscape_PostBox_Dialogue",
+    "b": "CBE_TheGreatEscapeB_PostBox_Dialogue",
+    "verdict": "identical",
+    "similarity": 1.0,
+    "diff": []
+   },
+   {
+    "a": "CBE_TheGreatEscape_PaperAndPen3_Dialogue",
+    "b": "CBE_TheGreatEscapeB_PaperAndPen3_Dialogue",
+    "verdict": "identical",
+    "similarity": 1.0,
+    "diff": []
+   },
+   {
+    "a": "CBE_TheGreatEscape_GrandmasCell_Dialogue",
+    "b": "CBE_TheGreatEscapeB_GrandmasCell_Dialogue",
+    "verdict": "identical",
+    "similarity": 1.0,
+    "diff": []
+   },
+   {
+    "a": "CBE_TheGreatEscape_CleanCell1_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_TheGreatEscapeB",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_TheGreatEscape_CleanerCart1_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_TheGreatEscapeB",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_TheGreatEscape_Intro_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_TheGreatEscapeB",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_TheGreatEscapeB_Intro_Dialogue",
+    "verdict": "new in CBE_TheGreatEscapeB",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_TheGreatEscapeB_CleanerCart1_Dialogue",
+    "verdict": "new in CBE_TheGreatEscapeB",
+    "similarity": null,
+    "diff": []
+   }
+  ],
+  "note": "variant — run B (25.05–25.06) keeps 8 of the stories word for word, replaces 3 with 2 new ones (Maddie meeting Grandma after the arrest). Same plot, restructured opening; treat as one story with two openings."
+ },
+ {
+  "family": "CBE_VeilOfFate",
+  "verdict": "rewritten",
+  "counts": {
+   "dropped": 25,
+   "new": 24
+  },
+  "runs": [
+   {
+    "eventKey": "CBE_VeilOfFate2023",
+    "name": "Veil of Fate",
+    "stories": 25,
+    "first": "23.11.02",
+    "last": "26.07.01"
+   },
+   {
+    "eventKey": "CBE_VeilOfFate2024",
+    "name": "Veil of Fate",
+    "stories": 24,
+    "first": "24.04.01",
+    "last": "26.07.01"
+   }
+  ],
+  "pairs": [
+   {
+    "a": "CBE_VeilOfFate2023_ArmCast_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_BookOfStars_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_CrystalHouse_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_Decoration_Slot01_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_Decoration_Slot04_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_Decoration_Slot06_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_Decoration_Slot07_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_Decoration_Slot08_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_InactiveSnowglobe_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_IntroDialogue_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_LitCandles_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_MaddiesCraftingStation_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_MaddiesDrawings_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_MansionKeyCharm_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_MeltedCandles_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_MotorcycleKeys_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_OutroDialogue_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_SnowglobeOfTheFuture_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_SnowglobeOfThePast_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_SnowglobeOfThePresent_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_TableOfDestiny_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_TheChef_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_TheLittleSister_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_ThePartnersTarotCard_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "CBE_VeilOfFate2023_ActiveSnowglobe_Dialogue",
+    "b": null,
+    "verdict": "dropped in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_BookOfStars_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_CrystalHouse_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_Decoration_Slot01_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_Decoration_Slot04_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_Decoration_Slot06_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_Decoration_Slot07_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_Decoration_Slot08_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_IntroDialogue_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_LitCandles_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_MaddiesCraftingStation_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_MaddiesDrawings_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_MansionKeyCharm_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_MeltedCandles_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_MotorcycleKeys_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_OutroDialogue_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_SnowglobeOfTheFuture_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_SnowglobeOfThePast_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_SnowglobeOfThePresent_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_TableOfDestiny_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_TheChef_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_TheLittleSister_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_ThePartnersTarotCard_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_Wallet_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "CBE_VeilOfFate2024_ActiveSnowglobe_Dialogue",
+    "verdict": "new in CBE_VeilOfFate2024",
+    "similarity": null,
+    "diff": []
+   }
+  ],
+  "note": "sequel — 2023 (Grandma and Lady Voyance, the snow globe vibrating) → 2024 (Maddie alone again after Emilio left, consulting the veil). Continuation of Maddie's love-life arc; nothing reused."
+ },
+ {
+  "family": "LC_Halloween",
+  "verdict": "rewritten",
+  "counts": {
+   "dropped": 16,
+   "new": 2
+  },
+  "runs": [
+   {
+    "eventKey": "LC_Halloween",
+    "name": "Lucky Catch",
+    "stories": 16,
+    "first": "24.09.02",
+    "last": "26.07.01"
+   },
+   {
+    "eventKey": "LC_Halloween2025",
+    "name": "Halloween Lucky Catch",
+    "stories": 2,
+    "first": "25.09.01",
+    "last": "26.07.01"
+   }
+  ],
+  "pairs": [
+   {
+    "a": "LC_Halloween_ColossalGrandmaGrandma_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Halloween2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Halloween_CommonCrimsonLippedBatfish_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Halloween2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Halloween_CommonMummyFish_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Halloween2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Halloween_EpicCountSquidula_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Halloween2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Halloween_EpicTerrafish_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Halloween2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Halloween_Intro_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Halloween2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Halloween_LegendaryDragonKoi_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Halloween2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Halloween_LegendaryTheBlobFish_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Halloween2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Halloween_Outro_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Halloween2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Halloween_RareCutethulhu_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Halloween2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Halloween_UltimateReverseMermaid_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Halloween2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Halloween_UncommonHobgoblinShark_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Halloween2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Halloween_UncommonJackOAngler_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Halloween2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Halloween_VeryRareSexyCatfish_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Halloween2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Halloween_VeryRareWerefish_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Halloween2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Halloween_CommonCrimson-LippedBatfish_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Halloween2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LC_Halloween2025_Intro_Dialogue",
+    "verdict": "new in LC_Halloween2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LC_Halloween2025_Outro_Dialogue",
+    "verdict": "new in LC_Halloween2025",
+    "similarity": null,
+    "diff": []
+   }
+  ],
+  "note": "sequel (short) — 2025 fishing rerun keeps only 2 stories with a new intro ('Rise and shine, dearie!'); the 16 item dialogues of the first run were not carried over."
+ },
+ {
+  "family": "LC_Summer",
+  "verdict": "rewritten",
+  "counts": {
+   "dropped": 28,
+   "new": 5
+  },
+  "runs": [
+   {
+    "eventKey": "LC_Summer",
+    "name": "Lucky Catch",
+    "stories": 28,
+    "first": "24.04.01",
+    "last": "26.07.01"
+   },
+   {
+    "eventKey": "LC_Summer2026",
+    "name": null,
+    "stories": 5,
+    "first": "26.04.01",
+    "last": "26.07.01"
+   }
+  ],
+  "pairs": [
+   {
+    "a": "LC_Summer_2026_BootsLv1",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_2026_ColossalFishingRod",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_2026_ColossalMolaMola",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_2026_CommonGreenMoray_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_2026_EpicGoldenRod",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_2026_EpicTotoaba_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_2026_Intro_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_2026_LegendarySmalltoothSawfish_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_2026_MaxCommonWoodenFishingRod",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_2026_MaxFishingClothesAndGoldenRod",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_2026_MaxFishingToolBox",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_2026_Outro_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_2026_RareCompetitionRod",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_2026_RareEuropeanMonkfish_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_2026_UltimateBluntnoseSixgillShark_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_2026_UncommonGreatBarracuda_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_2026_VeryRareLemonShark_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_ColossalFishingRod_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_ColossalMolaMola_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_CommonSnook_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_Intro_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_UltimateMakoShark_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_VeryRareWhiteMarlin_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_MolaMola_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_MakoShark_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_Snook_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_WhiteMarlin_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LC_Summer_UltimateMolaMola_Dialogue",
+    "b": null,
+    "verdict": "dropped in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LC_Summer2026_FishingToolContainers_Dialogue",
+    "verdict": "new in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LC_Summer2026_FishingRodCommon_Dialogue",
+    "verdict": "new in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LC_Summer2026_FishingClothes_Dialogue",
+    "verdict": "new in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LC_Summer2026_GoldenFishingRodEpic_Dialogue",
+    "verdict": "new in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LC_Summer2026_CompetitionFishingRodRare_Dialogue",
+    "verdict": "new in LC_Summer2026",
+    "similarity": null,
+    "diff": []
+   }
+  ],
+  "note": "rerun with new script — 2026 run has 5 stories but their texts are not in any localization we own (empty in the codex); first run = Emilio takes Grandma fishing."
+ },
+ {
+  "family": "LDE_GreenAcresQuest",
+  "verdict": "rewritten",
+  "counts": {
+   "identical": 2,
+   "dropped": 52,
+   "new": 19
+  },
+  "runs": [
+   {
+    "eventKey": "LDE_GreenAcresQuest2024",
+    "name": "Green Acres Quest",
+    "stories": 54,
+    "first": "24.07.01",
+    "last": "26.04.02"
+   },
+   {
+    "eventKey": "LDE_GreenAcresQuest",
+    "name": "Green Acres Quest",
+    "stories": 21,
+    "first": "26.05.01",
+    "last": "26.07.01"
+   }
+  ],
+  "pairs": [
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_VeggieCompost_Dialogue",
+    "b": "LDE_GreenAcresQuest_VeggieCompost_Dialogue",
+    "verdict": "identical",
+    "similarity": 1.0,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_FlowerCompost_Dialogue",
+    "b": "LDE_GreenAcresQuest_FlowerCompost_Dialogue",
+    "verdict": "identical",
+    "similarity": 1.0,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_BoardIntro_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_CharacterBella_02_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_CharacterCherry_02_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_CharacterDeb_02_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_CharacterGrandma_02_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_CharacterJackie_02_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_CharacterJulius_02_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_CharacterMason_02_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_CommonFlowerD_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_Friendship_08_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_GardenGnomes_07_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_GoodAnimals_05_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_GreenhouseChilis_06_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_Outro_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_Pollinator_05_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_RareFlowerA_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_RareFlowerB_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_UncommonFlowerA_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_Veggies_08_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_BoardIntro_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_CharacterBella_02_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_CharacterCherry_02_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_CharacterDeb_02_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_CharacterGrandma_02_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_CharacterJackie_02_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_CharacterJulius_02_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_CharacterMason_02_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_CommonFlowerD_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_Friendship_08_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_GardenGnomes_07_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_GoodAnimals_05_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_GreenhouseChilis_06_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_Intro_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_Outro_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_Pollinator_05_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_RareFlowerA_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_RareFlowerB_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_UncommonFlowerA_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_Veggies_08_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_Intro_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_TA1_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_TA4_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_TA7_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_TC1_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_TC3_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_FlowerCompost_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_VeggieCompost_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_TA1_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_TA4_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_TA7_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_TC1_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_GreenAcresQuest2024_v2_TC3_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_GreenAcresQuest_BoardIntro_Dialogue",
+    "verdict": "new in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_GreenAcresQuest_CharacterBella_02_Dialogue",
+    "verdict": "new in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_GreenAcresQuest_CharacterCherry_02_Dialogue",
+    "verdict": "new in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_GreenAcresQuest_CharacterDeb_02_Dialogue",
+    "verdict": "new in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_GreenAcresQuest_CharacterGrandma_02_Dialogue",
+    "verdict": "new in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_GreenAcresQuest_CharacterJackie_02_Dialogue",
+    "verdict": "new in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_GreenAcresQuest_CharacterJulius_02_Dialogue",
+    "verdict": "new in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_GreenAcresQuest_CharacterMason_02_Dialogue",
+    "verdict": "new in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_GreenAcresQuest_CommonFlowerGrowth_01_Dialogue",
+    "verdict": "new in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_GreenAcresQuest_Friendship_08_Dialogue",
+    "verdict": "new in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_GreenAcresQuest_GardenGnomes_07_Dialogue",
+    "verdict": "new in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_GreenAcresQuest_GoodAnimals_05_Dialogue",
+    "verdict": "new in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_GreenAcresQuest_GreenhouseChilis_06_Dialogue",
+    "verdict": "new in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_GreenAcresQuest_Intro_Dialogue",
+    "verdict": "new in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_GreenAcresQuest_Outro_Dialogue",
+    "verdict": "new in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_GreenAcresQuest_Pollinator_05_Dialogue",
+    "verdict": "new in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_GreenAcresQuest_RareFlowerGrowth_01_Dialogue",
+    "verdict": "new in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_GreenAcresQuest_UncommonFlowerGrowth_01_Dialogue",
+    "verdict": "new in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_GreenAcresQuest_Veggies_08_Dialogue",
+    "verdict": "new in LDE_GreenAcresQuest",
+    "similarity": null,
+    "diff": []
+   }
+  ],
+  "note": "sequel — 2024 (Emilio is back with 'her', Maddie stays cool) → 2026 (Maddie proud of the finished community garden). Two stories identical, the rest new."
+ },
+ {
+  "family": "LDE_Hopeberry",
+  "verdict": "rewritten",
+  "counts": {
+   "dropped": 26,
+   "new": 26
+  },
+  "runs": [
+   {
+    "eventKey": "LDE_Hopeberry2024",
+    "name": "Love on the Vine",
+    "stories": 26,
+    "first": "24.04.01",
+    "last": "26.07.01"
+   },
+   {
+    "eventKey": "LDE_Hopeberry2025",
+    "name": "Love on the Vine",
+    "stories": 26,
+    "first": "25.04.02",
+    "last": "26.07.01"
+   }
+  ],
+  "pairs": [
+   {
+    "a": "LDE_Hopeberry2024_ArtesanFoods_07_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_Ash_04_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_Ash_07_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_BoardIntro_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_CorkThings_07_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_CrushedBottle_04_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_EmptyBottles_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_FestivalJuice_05_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_FreshProduce_05_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_GlassSculpture_04_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_GlassSculpture_08_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_GlassSculpture_11_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_HarvestingLoop_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_Herbs_05_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_Hopeberry_04_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_Intro_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_Outro_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_ProducedJuice_04_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_ReusableFurniture_07_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_Spices_05_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_Vinegar_05_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_TA5_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_TC1_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_TC3_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_TA1_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_Hopeberry2024_TA3_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_ArtesanFoods2_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_Ash3_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_Ash7_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_BoardIntro_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_CorkThings2_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_CrushedBottles5_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_FestivalJuice1_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_FreshProduce6_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_GlassSculpture11_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_GlassSculpture3_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_GlassSculpture8_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_HarvestingTools5_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_Herbs6_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_Hopeberry4_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_Intro_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_Outro_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_ProducedJuice5_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_ReusableFurniture1_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_Spices6_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_Vinegar5_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_HarvestingTools6_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_Hopeberry5_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_Vinegar6_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_GlassSculptures11_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_TA1_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_Hopeberry2025_TC1_Dialogue",
+    "verdict": "new in LDE_Hopeberry2025",
+    "similarity": null,
+    "diff": []
+   }
+  ],
+  "note": "sequel — 2024 (Deb and Pearl grill Maddie about her love life) → 2025 (Roddy after the break-up with Jackie). Same festival, next year's plot; nothing reused."
+ },
+ {
+  "family": "LDE_PicnicConfusion",
+  "verdict": "rewritten",
+  "counts": {
+   "rewritten": 1,
+   "dropped": 21,
+   "new": 24
+  },
+  "runs": [
+   {
+    "eventKey": "LDE_PicnicConfusion2023",
+    "name": "Picnic Confusion!",
+    "stories": 22,
+    "first": "23.06.02",
+    "last": "26.07.01"
+   },
+   {
+    "eventKey": "LDE_PicnicConfusion2024",
+    "name": "Third Wheel Tango",
+    "stories": 25,
+    "first": "24.04.01",
+    "last": "26.07.01"
+   }
+  ],
+  "pairs": [
+   {
+    "a": "LDE_PicnicConfusion2023_Layerdecoration_14_Dialogue",
+    "b": "LDE_PicnicConfusion2024_TC1_Dialogue",
+    "verdict": "rewritten",
+    "similarity": 0.524,
+    "diff": [
+     {
+      "op": "replace",
+      "a": [
+       "Maddie: Wow! Who did the decal work?",
+       "Grandma: Julius! He's a wonder with a paintbrush!",
+       "Maddie: I'm impressed!"
+      ],
+      "b": [
+       "Maddie: I'm terrible at decal work...",
+       "Maddie: But good thing I got Julius to do it for me!",
+       "Maddie: He's a master with a paintbrush."
+      ]
+     }
+    ]
+   },
+   {
+    "a": "LDE_PicnicConfusion2023_Activitieschain_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PicnicConfusion2023_Boardintro_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PicnicConfusion2023_Clothingchain_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PicnicConfusion2023_Coalchain_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PicnicConfusion2023_EventIntro_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PicnicConfusion2023_Firewoodchain_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PicnicConfusion2023_AllRewardsCompleted_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PicnicConfusion2023_Layerdecoration_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PicnicConfusion2023_Layerdecoration_02_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PicnicConfusion2023_Layerdecoration_03_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PicnicConfusion2023_Layerdecoration_04_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PicnicConfusion2023_Layerdecoration_05_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PicnicConfusion2023_Layerdecoration_06_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PicnicConfusion2023_Layerdecoration_07_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PicnicConfusion2023_Layerdecoration_08_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PicnicConfusion2023_Layerdecoration_09_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PicnicConfusion2023_Layerdecoration_10_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PicnicConfusion2023_Layerdecoration_11_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PicnicConfusion2023_Layerdecoration_12_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PicnicConfusion2023_Layerdecoration_15_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PicnicConfusion2023_Layerdecoration_13_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_Activities_05_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_BoardIntro_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_Clothing_07_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_Coal_05_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_FireWood_07_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_Marshmallow_11_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_Outro_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_PhotoAlbum_05_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_PicnicBasket_04_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TC2_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TB1_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TA2_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TA6_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TC3_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TB3_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TB2_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TB4_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TA4_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TA3_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TA7_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TA1_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TB5_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TA5_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PicnicConfusion2024_TA0_Dialogue",
+    "verdict": "new in LDE_PicnicConfusion2024",
+    "similarity": null,
+    "diff": []
+   }
+  ],
+  "note": "sequel — 2023 (the rusty truck, the big picnic) → 2024 (Jackie and Roddy's relationship). One story rewritten, the rest new."
+ },
+ {
+  "family": "LDE_PiratesOfHopewellBay",
+  "verdict": "rewritten",
+  "counts": {
+   "dropped": 35,
+   "new": 29
+  },
+  "runs": [
+   {
+    "eventKey": "LDE_PiratesOfHopewellBay2023",
+    "name": "Pirates of Hopewell Bay",
+    "stories": 35,
+    "first": "23.11.02",
+    "last": "26.07.01"
+   },
+   {
+    "eventKey": "LDE_PiratesOfHopewellBay2024",
+    "name": "Pirates of Hopewell Bay",
+    "stories": 29,
+    "first": "24.07.01",
+    "last": "26.07.01"
+   }
+  ],
+  "pairs": [
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_AntiqueFurniture_10_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_Battery_05_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_BoardIntro_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_BoultonAttic_04_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_CouponStore_05_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_EventIntro_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_MasonQuest_02_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_MasonQuest_03_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_MasonQuest_04_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_MasonQuest_05_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_MasonQuest_06_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_MetalDetector_08_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_MysteriousChestProducing_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_MysteriousChest_07_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_PirateClothes_08_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_PirateCoins_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_PirateCoins_04_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_PirateCoins_06_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_PirateCoins_07_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_PirateCoins_08_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_PirateCoins_09_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_PirateCoins_10_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_PirateCoins_11_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_PirateKey_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_PirateRegalia_04_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_PreparingAdventure_08_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_SeafaringEquipment_05_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_Watches_04_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_LayerDecoration_01_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_LayerDecoration_03_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_LayerDecoration_05_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_LayerDecoration_07_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_LayerDecoration_10_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_LayerDecoration_13_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LDE_PiratesOfHopewellBay2023_LayerDecoration_15_Dialogue",
+    "b": null,
+    "verdict": "dropped in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_AntiqueFurniture_10_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_Battery_05_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_BoardIntro_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_BoultonAttic_04_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_BoultonGarage_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_CouponStore_05_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_EventIntro_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_MasonQuest_02_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_MasonQuest_04_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_MasonQuest_06_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_MetalDetector_08_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_MysteriousChest_07_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_PirateClothes_08_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_PirateCoins_01_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_PirateCoins_05_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_PirateCoins_11_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_PirateKey_01_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_PirateRegalia_04_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_PreparingAdventure_08_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_SeafaringEquipment_05_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_Watches_04_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_LayerDecoration_10_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_LayerDecoration_01_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_LayerDecoration_15_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_LayerDecoration_13_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_LayerDecoration_03_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_LayerDecoration_07_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024_LayerDecoration_05_Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LDE_PiratesOfHopewellBay2024__Dialogue",
+    "verdict": "new in LDE_PiratesOfHopewellBay2024",
+    "similarity": null,
+    "diff": []
+   }
+  ],
+  "note": "sequel — 2023 (Mason hunts treasure maps in the attic) → 2024 (Grandma tells the family pirate story). Nothing reused."
+ },
+ {
+  "family": "LS_Summer",
+  "verdict": "rewritten",
+  "counts": {
+   "dropped": 8,
+   "new": 9
+  },
+  "runs": [
+   {
+    "eventKey": "LS_Summer",
+    "name": "Summer Lucky Snap",
+    "stories": 8,
+    "first": "25.05.01",
+    "last": "26.07.01"
+   },
+   {
+    "eventKey": "LS_Summer2026",
+    "name": "Lucky Snap",
+    "stories": 9,
+    "first": "26.04.01",
+    "last": "26.07.01"
+   }
+  ],
+  "pairs": [
+   {
+    "a": "LS_Summer_Intro_Dialogue",
+    "b": null,
+    "verdict": "dropped in LS_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LS_Summer_HerringGull_Dialogue",
+    "b": null,
+    "verdict": "dropped in LS_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LS_Summer_BlueJay_Dialogue",
+    "b": null,
+    "verdict": "dropped in LS_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LS_Summer_PileatedWoodpecker_Dialogue",
+    "b": null,
+    "verdict": "dropped in LS_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LS_Summer_PeregrineFalcon_Dialogue",
+    "b": null,
+    "verdict": "dropped in LS_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LS_Summer_Long-EaredOwl_Dialogue",
+    "b": null,
+    "verdict": "dropped in LS_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LS_Summer_Kingfisher_Dialogue",
+    "b": null,
+    "verdict": "dropped in LS_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": "LS_Summer_Crescent-CapedLophora_Dialogue",
+    "b": null,
+    "verdict": "dropped in LS_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LS_Summer2026_CommonHoodedWarbler_Dialogue",
+    "verdict": "new in LS_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LS_Summer2026_EpicPipingPlover_Dialogue",
+    "verdict": "new in LS_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LS_Summer2026_Intro_Dialogue",
+    "verdict": "new in LS_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LS_Summer2026_LegendaryBrownCreeper_Dialogue",
+    "verdict": "new in LS_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LS_Summer2026_Outro_Dialogue",
+    "verdict": "new in LS_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LS_Summer2026_RareEasternBluebird_Dialogue",
+    "verdict": "new in LS_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LS_Summer2026_UltimatePaintedBunting_Dialogue",
+    "verdict": "new in LS_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LS_Summer2026_UncommonEider_Dialogue",
+    "verdict": "new in LS_Summer2026",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LS_Summer2026_VeryRareBlackbilledMagpie_Dialogue",
+    "verdict": "new in LS_Summer2026",
+    "similarity": null,
+    "diff": []
+   }
+  ],
+  "note": "sequel — 2025 (Julius: binoculars at the ready) → 2026 (new summer birding season, camera bag and foldable chair). Nothing reused."
+ },
+ {
+  "family": "LS_Winter",
+  "verdict": "rewritten",
+  "counts": {
+   "dropped": 1,
+   "new": 5
+  },
+  "runs": [
+   {
+    "eventKey": "LS_Winter",
+    "name": "Winter Lucky Snap",
+    "stories": 1,
+    "first": null,
+    "last": null
+   },
+   {
+    "eventKey": "LS_Winter2024",
+    "name": "Lucky Snap",
+    "stories": 5,
+    "first": "24.11.02",
+    "last": "26.07.01"
+   }
+  ],
+  "pairs": [
+   {
+    "a": "LS_Winter_Intro_Dialogue",
+    "b": null,
+    "verdict": "dropped in LS_Winter2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LS_Winter2024_Common_Mallard_01_Dialogue",
+    "verdict": "new in LS_Winter2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LS_Winter2024_Epic_LongtailedTit_01_Dialogue",
+    "verdict": "new in LS_Winter2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LS_Winter2024_Intro_Dialogue",
+    "verdict": "new in LS_Winter2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LS_Winter2024_Legendary_SnowyOwl_01_Dialogue",
+    "verdict": "new in LS_Winter2024",
+    "similarity": null,
+    "diff": []
+   },
+   {
+    "a": null,
+    "b": "LS_Winter2024_VeryRare_Cardinal_01_Dialogue",
+    "verdict": "new in LS_Winter2024",
+    "similarity": null,
+    "diff": []
+   }
+  ],
+  "note": "first run (LS_Winter) has a single story without text in our sources; the 2024 run is the real script (Julius: 'Have you wrapped up warm?')."
+ }
+]

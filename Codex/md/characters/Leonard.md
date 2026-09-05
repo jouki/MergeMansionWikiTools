@@ -1,6 +1,22 @@
 # Leonard
 Every story in which Leonard speaks.
 
+### Library02
+`Library02` · seen 25.05.01–26.07.01
+- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+
+**MADDIE**: *Ring Ring*
+**MADDIE** (Doubtful): Huh... It’s Leonard. What does HE want?!
+**MADDIE**: Hello?
+**LEONARD** (Annoyed): You no-good scheming nobody... I don’t know how you pulled this off, but mark my words...
+**MADDIE**: Excuse me! What are you talking about?!
+**LEONARD** (Doubtful): Don’t play coy with me, little girl! Now it makes total sense why you came back!
+**LEONARD** (Annoyed): You thought you could take MY mansion away from me?!
+**LEONARD**: I was about to sign the deed away when it was suddenly discovered that ownership was transferred to YOU!
+**MADDIE**: What?!
+**LEONARD** (Encouraging): Oh, don’t worry. Bruno is on his way now to have you sign it away. You’ve only delayed the inevitable! *Click!*
+**MADDIE** (Surprised): How did I become the sole owner of the estate?!
+
 ### Perfumery02
 `Perfumery02` · seen 25.06.01–26.07.01
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
@@ -34,7 +50,7 @@ Every story in which Leonard speaks.
 **MADDIE** (Doubtful): You were selling out your family, Leonard! You didn’t want to save this place!
 **MADDIE** (Annoyed): You wanted to sell it to make a quick buck!
 **LEONARD** (Encouraging): Ha! So young, thinking that you know EVERYTHING. The naïveté of youth, I suppose.  
-  _earlier:_ ~~Ha! So young, thinking that you know EVERYTHING. The naivete of youth, I suppose.~~ (until 25.06.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Annoyed): Oh, stop it with the over-bloated rhetoric. You’re a greedy old man who was only looking out for number one.
 **LEONARD** (Annoyed): I’ll have you know, little girl, that I made sure there would have been enough money for everyone.
 **LEONARD** (Doubtful): Cover all our family debts, and even get Ursula off the hook!
@@ -50,7 +66,7 @@ Every story in which Leonard speaks.
 **MADDIE** (Annoyed): Oh? I guess you didn’t heed your own advice when you told Deb she was adopted!
 **LEONARD**: ...
 **LEONARD**: How do you think I learnt that lesson?  
-  _earlier:_ ~~How do you think I learned that lesson?~~ (until 25.06.01)
+  _(1 cosmetic edit not shown)_
 **LEONARD** (Thinking): I saw how it ate her up inside. How it led her to go searching for the truth. How it hurt her in the end.
 **LEONARD**: I couldn’t stand seeing her so hurt after she came back.
 **LEONARD** (Doubtful): You see, Maddie... All this family has is pain and debt.

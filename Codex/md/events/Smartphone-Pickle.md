@@ -21,8 +21,7 @@
 **MADDIE** (Doubtful): What is Grandma doing with her new smartphone? Is she taking selfies - AGAIN?
 **MADDIE** (Doubtful): And now she's just scrolling and scrolling...
 **MADDIE** (Worried): Oh, no... Have I created a monster??
-**MADDIE** (Worried): Jackie said she wouldn't be surprised if Grandma had a secret smartphone for years... Could she be right?  
-  _earlier:_ ~~Jackie said she wouldn't be surprised if Grandma had a secret smartphone for years… Could she be right?~~ (until 25.10.01)
+**MADDIE** (Worried): Jackie said she wouldn't be surprised if Grandma had a secret smartphone for years... Could she be right?
 **MADDIE** (Thinking): I wonder what Grandma is actually doing on her phone...
 
 ### Smartphone Pickle — decoration SP_Pickleball2025_Decoration_Slot34

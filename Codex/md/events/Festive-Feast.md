@@ -95,7 +95,7 @@
 **MADDIE** (Surprised): Hey... Is that Cherry? She looks... Very UPSET!
 **CHERRY** (Annoyed): You’re right, I’m upset! The mayor just cancelled the Festival Feast!
 **CHERRY** (Doubtful): Might as well cancel all the fun while they're at it... What am I supposed to do now?  
-  _earlier:_ ~~Might as well cancel all the fun while she’s at it... What am I supposed to do now?~~ (until 25.10.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Thinking): Sounds like you had a lot riding on it.
 **CHERRY** (Doubtful): You’re darned tootin’ I did! I’ve ordered enough food to feed the whole town! 
 **CHERRY** (Surprised): Without the festival, I’ll go bust!
@@ -105,7 +105,7 @@
 **GRANDMA** (Relaxed): None at all, dearie.
 **CHERRY** (Encouraging): Amazing! Thank you!
 **CHERRY** (Thinking): We’ll show that mayor that they can't stop us from having fun!  
-  _earlier:_ ~~We’ll show that mayor that she can't stop us from having fun!~~ (until 25.10.01)
+  _(1 cosmetic edit not shown)_
 
 ### Festive Feast — item discovered: Cherry's Deluxe Pumpkin Pie
 `SP_CancelledFun2025_LastCollectibleItemDiscovered_Dialogue` · seen 26.03.01–26.07.01

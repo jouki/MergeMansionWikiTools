@@ -15,10 +15,8 @@
 
 **GRANDMA** (Encouraging): What a beautiful winter evening! Maddie has done a magnificent job in the Mansion.
 **GRANDMA** (Encouraging): She really has worked so hard. I’m not surprised she was out like a light tonight.
-**GRANDMA**: Knowing her, next she will work herself ragged to get everything ready for the holidays - and there is a lot to do...  
-  _earlier:_ ~~Knowing her, next she will work herself ragged to get everything ready for the holidays - and there is a lot to do…~~ (until 25.10.01)
-**GRANDMA**: We need to find the perfect tree, bake, cook, decorate...  
-  _earlier:_ ~~We need to find the perfect tree, bake, cook, decorate…~~ (until 25.10.01)
+**GRANDMA**: Knowing her, next she will work herself ragged to get everything ready for the holidays - and there is a lot to do...
+**GRANDMA**: We need to find the perfect tree, bake, cook, decorate...
 **GRANDMA** (Thinking): This year, I want to give her a chance to have a little break from all of that work. For that, I will need some help - and I know just who to ask.
 **GRANDMA** (Charming): The first stop is the spruce forest!
 
@@ -87,7 +85,7 @@
 - trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_ClockBTurned_01'], items=['Fancy Longcase Clock - Turned'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **HANK**: Did you set that clock forward or back?  
-  _earlier:_ ~~Did you turn that clock forward or back?~~ (until 25.10.01)
+  _(1 cosmetic edit not shown)_
 **MASON** (Relaxed): Who cares? It's the holidays, and we're making more time for opening presents and eating gingerbread.
 **MASON** (Relaxed): Right, Grandma?
 **GRANDMA** (Relaxed): That's close enough, Mason.
@@ -96,8 +94,7 @@
 `LDE_HolidayOddities2025_ClockCTurned_01_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_ClockCTurned_01'], items=['Royal Longcase Clock - Turned'], moment=item discovered (versions 26.03.01–26.07.01)
 
-**RODDY** (Thinking): This is the last clock. Maybe we should leave one to show the real time, though. You know, just in case...  
-  _earlier:_ ~~This is the last clock. Maybe we should leave one to show the real time, though. You know, just in case…~~ (until 25.10.01)
+**RODDY** (Thinking): This is the last clock. Maybe we should leave one to show the real time, though. You know, just in case...
 **MASON** (Relaxed): Traditions are traditions, Roddy. Change the time!  
   _earlier:_ ~~Traditions are traditions, Roddy. Turn the clock!~~ (until 25.10.01)
 **RODDY** (Worried): But--
@@ -111,7 +108,7 @@
 
 **RODDY** (Thinking): What is this tradition and what are we supposed to do with these clock keys?
 **GRANDMA** (Relaxed): You will use the keys to set all the clocks you can find to show the wrong time.  
-  _earlier:_ ~~You will use the keys to turn all the clocks you can find to show the wrong time.~~ (until 25.10.01)
+  _(1 cosmetic edit not shown)_
 **HANK** (Annoyed): W-why? Then I won’t know when I need to have my protein shakes.
 **GRANDMA** (Thinking): When you cannot trust what a clock shows, you stop caring about it. And when you stop caring about what time it is, you are truly free to enjoy the holidays.
 **HANK** (Encouraging): That’s genius!
@@ -206,8 +203,7 @@
 - trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_Logs_03'], items=['Log Rack'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Relaxed): I can see you have been working hard!
-**HANK** (Charming): Or hardly working... Roddy used a wood-splitting machine. I bet those early folks in Hopewell Bay didn’t have one.  
-  _earlier:_ ~~Or hardly working… Roddy used a wood-splitting machine. I bet those early folks in Hopewell Bay didn’t have one.~~ (until 25.10.01)
+**HANK** (Charming): Or hardly working... Roddy used a wood-splitting machine. I bet those early folks in Hopewell Bay didn’t have one.
 **RODDY** (Encouraging): Work smart, not hard, Hank!
 
 ### Holiday Oddities — event end
@@ -218,8 +214,7 @@
 **GRANDMA** (Encouraging): I could not have done this on my own. The Mansion looks wonderful, and everything is ready for a celebration.
 **MASON** (Encouraging): It’s what friends are for. And we all love Maddie - she’s the best! Right, guys?
 **HANK**: Totally! The pleasure was ours.
-**RODDY** (Charming): Y-yeah, we love Maddie...  
-  _earlier:_ ~~Y-yeah, we love Maddie…~~ (until 25.10.01)
+**RODDY** (Charming): Y-yeah, we love Maddie...
 **MASON** (Relaxed): Don’t make this weird, Roddy. Come on, hot chocolates are on me!
 **RODDY** (Relaxed): Sounds good.
 **HANK** (Encouraging): Hey, guys? Happy holidays! I’m glad I get to spend them with you.
@@ -239,8 +234,7 @@
 `LDE_HolidayOddities2025_SockWG_01_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_SockWG_01'], items=['White & Green Stripes'], moment=item discovered (versions 26.03.01–26.07.01)
 
-**GRANDMA** (Thinking): Good job! We have some great socks and some... well, not so great ones.  
-  _earlier:_ ~~Good job! We have some great socks and some… well, not so great ones.~~ (until 25.10.01)
+**GRANDMA** (Thinking): Good job! We have some great socks and some... well, not so great ones.
 **RODDY** (Surprised): Hey!
 **GRANDMA** (Encouraging): I do appreciate your effort, of course. Now they just need to be wrapped and placed under the tree.
 **MASON**: We’re on the home stretch now!
@@ -268,8 +262,7 @@
 
 **HANK**: I already tried one soup. Someone else can taste this one.
 **RODDY** (Worried): Mason, how about you do it?
-**MASON** (Charming): But I’m only a child...  
-  _earlier:_ ~~But I’m only a child…~~ (until 25.10.01)
+**MASON** (Charming): But I’m only a child...
 **RODDY** (Frustrated): Ugh, fine.
 **RODDY** (Relaxed): Huh! This soup is actually not bad!
 
@@ -281,8 +274,7 @@
 **MASON**: Roddy, you do it.
 **RODDY** (Charming): I think Hank has the best palate.
 **HANK** (Joyous): It's true. My palette has all the colors!
-**HANK** (Thinking): Let me get a big spoonful. Here goes! Mmm... this soup... is HORRIBLE.  
-  _earlier:_ ~~Let me get a big spoonful. Here goes! Mmm... this soup… is HORRIBLE.~~ (until 25.10.01)
+**HANK** (Thinking): Let me get a big spoonful. Here goes! Mmm... this soup... is HORRIBLE.
 
 ### Holiday Oddities — item discovered: Bunch of Sticks
 `LDE_HolidayOddities2025_StickBasket_03_Dialogue` · seen 26.03.01–26.07.01
@@ -310,8 +302,7 @@
 `LDE_HolidayOddities2025_StickBasket_07_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_StickBasket_07'], items=['Full Basket'], moment=item discovered (versions 26.03.01–26.07.01)
 
-**HANK** (Encouraging): We’ve got acorns...  
-  _earlier:_ ~~We’ve got acorns…~~ (until 25.10.01)
+**HANK** (Encouraging): We’ve got acorns...
 **MASON**: And pinecones and walnuts!
 **GRANDMA** (Encouraging): Wonderful! Now we just need to find the perfect tree!
 
@@ -329,8 +320,7 @@
 `LDE_HolidayOddities2025_Timepieces_07_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_Timepieces_07'], items=['LDE_HolidayOddities2025_Timepieces_07'], moment=item discovered (versions 26.03.01–26.07.01)
 
-**MASON** (Thinking): Will we turn the old longcase clock as well? It feels sort of naughty, like I'm about to get told off...  
-  _earlier:_ ~~Will we turn the old longcase clock as well? It feels sort of naughty, like I'm about to get told off…~~ (until 25.10.01)
+**MASON** (Thinking): Will we turn the old longcase clock as well? It feels sort of naughty, like I'm about to get told off...
 **GRANDMA**: I am giving you my permission. We will turn them back after the holidays, anyway.
 
 ### Holiday Oddities — item discovered: Hand Saw

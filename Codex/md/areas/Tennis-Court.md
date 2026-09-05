@@ -6,7 +6,7 @@
 - trigger: area, area=Tennis Court, areaId=TennisCourt, hotspotId=TennisCourtTopRightWallRemoveWeedsC11, phase=task completed, task=Remove weeds (versions 24.04.01–26.07.01)
 
 **MADDIE**: Hi, Julius! What brings you round?  
-  _earlier:_ ~~Hi Julius! What brings you round?~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **ANTIQUEDEALER**: In truth, I was taking a little tour of the grounds. I didn't expect anyone to be up here.
 **ANTIQUEDEALER** (Doubtful): I thought that this area of the estate was well and truly closed.
 **ANTIQUEDEALER** (Thinking): Were you about to play a game?

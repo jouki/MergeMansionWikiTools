@@ -52,7 +52,7 @@
 - trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot06, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE**: Hi, Roddy!  
-  _earlier:_ ~~Hi Roddy!~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **RODDY**: Hey, Maddie! I thought I’d bring old Buster along to help with the exhibition.
 **MADDIE** (Thinking): Buster? Who’s he?
 **RODDY** (Relaxed): My singing fish! I got it as a gift a long time ago. He’s seen better days, sure, but I’m sure you can appreciate his uniqueness!
@@ -73,7 +73,7 @@
 **DEB** (Relaxed): So what made you decide to become a marine biologist, handsome?
 **EMILIO** (Doubtful): Uhm... You can call me Emilio. <b>Please</b>...
 **MADDIE**: Hi, Emilio!  
-  _earlier:_ ~~Hi Emilio!~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **EMILIO** (Surprised): MADDIE! Hi! I was just uuh, showing- uuh, telling your aunt... uuh, what’s her name?!
 **DEB** (Charming): Deb. But <b>you</b> can call me... Anytime.
 **MADDIE** (Encouraging): Interesting woman, isn’t she?

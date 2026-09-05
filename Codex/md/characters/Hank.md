@@ -141,7 +141,7 @@ Every story in which Hank speaks.
 **RODDY** (Surprised): You broke Maddie’s machine with the ceramic bunny!
 **HANK** (Surprised): You didn't catch it even though I gave you a heads-up!
 **RODDY** (Discouraged): It doesn't matter who broke the machine. The question is: What do we do now?!  
-  _earlier:_ ~~It doesn't matter who broke the machine. The question is: What do we do now??~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **HANK** (Thinking): You want to go ask Ursula for help?
 **RODDY** (Worried): Errr...
 **HANK** (Thinking): Maddie said to tell her if anything happens.
@@ -301,7 +301,7 @@ Every story in which Hank speaks.
 - trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_ClockBTurned_01'], items=['Fancy Longcase Clock - Turned'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **HANK**: Did you set that clock forward or back?  
-  _earlier:_ ~~Did you turn that clock forward or back?~~ (until 25.10.01)
+  _(1 cosmetic edit not shown)_
 **MASON** (Relaxed): Who cares? It's the holidays, and we're making more time for opening presents and eating gingerbread.
 **MASON** (Relaxed): Right, Grandma?
 **GRANDMA** (Relaxed): That's close enough, Mason.
@@ -312,7 +312,7 @@ Every story in which Hank speaks.
 
 **RODDY** (Thinking): What is this tradition and what are we supposed to do with these clock keys?
 **GRANDMA** (Relaxed): You will use the keys to set all the clocks you can find to show the wrong time.  
-  _earlier:_ ~~You will use the keys to turn all the clocks you can find to show the wrong time.~~ (until 25.10.01)
+  _(1 cosmetic edit not shown)_
 **HANK** (Annoyed): W-why? Then I won’t know when I need to have my protein shakes.
 **GRANDMA** (Thinking): When you cannot trust what a clock shows, you stop caring about it. And when you stop caring about what time it is, you are truly free to enjoy the holidays.
 **HANK** (Encouraging): That’s genius!
@@ -349,8 +349,7 @@ Every story in which Hank speaks.
 - trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_Logs_03'], items=['Log Rack'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Relaxed): I can see you have been working hard!
-**HANK** (Charming): Or hardly working... Roddy used a wood-splitting machine. I bet those early folks in Hopewell Bay didn’t have one.  
-  _earlier:_ ~~Or hardly working… Roddy used a wood-splitting machine. I bet those early folks in Hopewell Bay didn’t have one.~~ (until 25.10.01)
+**HANK** (Charming): Or hardly working... Roddy used a wood-splitting machine. I bet those early folks in Hopewell Bay didn’t have one.
 **RODDY** (Encouraging): Work smart, not hard, Hank!
 
 ### Holiday Oddities — event end
@@ -361,8 +360,7 @@ Every story in which Hank speaks.
 **GRANDMA** (Encouraging): I could not have done this on my own. The Mansion looks wonderful, and everything is ready for a celebration.
 **MASON** (Encouraging): It’s what friends are for. And we all love Maddie - she’s the best! Right, guys?
 **HANK**: Totally! The pleasure was ours.
-**RODDY** (Charming): Y-yeah, we love Maddie...  
-  _earlier:_ ~~Y-yeah, we love Maddie…~~ (until 25.10.01)
+**RODDY** (Charming): Y-yeah, we love Maddie...
 **MASON** (Relaxed): Don’t make this weird, Roddy. Come on, hot chocolates are on me!
 **RODDY** (Relaxed): Sounds good.
 **HANK** (Encouraging): Hey, guys? Happy holidays! I’m glad I get to spend them with you.
@@ -400,8 +398,7 @@ Every story in which Hank speaks.
 
 **HANK**: I already tried one soup. Someone else can taste this one.
 **RODDY** (Worried): Mason, how about you do it?
-**MASON** (Charming): But I’m only a child...  
-  _earlier:_ ~~But I’m only a child…~~ (until 25.10.01)
+**MASON** (Charming): But I’m only a child...
 **RODDY** (Frustrated): Ugh, fine.
 **RODDY** (Relaxed): Huh! This soup is actually not bad!
 
@@ -413,8 +410,7 @@ Every story in which Hank speaks.
 **MASON**: Roddy, you do it.
 **RODDY** (Charming): I think Hank has the best palate.
 **HANK** (Joyous): It's true. My palette has all the colors!
-**HANK** (Thinking): Let me get a big spoonful. Here goes! Mmm... this soup... is HORRIBLE.  
-  _earlier:_ ~~Let me get a big spoonful. Here goes! Mmm... this soup… is HORRIBLE.~~ (until 25.10.01)
+**HANK** (Thinking): Let me get a big spoonful. Here goes! Mmm... this soup... is HORRIBLE.
 
 ### Holiday Oddities — item discovered: Bunch of Sticks
 `LDE_HolidayOddities2025_StickBasket_03_Dialogue` · seen 26.03.01–26.07.01
@@ -432,8 +428,7 @@ Every story in which Hank speaks.
 `LDE_HolidayOddities2025_StickBasket_07_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_StickBasket_07'], items=['Full Basket'], moment=item discovered (versions 26.03.01–26.07.01)
 
-**HANK** (Encouraging): We’ve got acorns...  
-  _earlier:_ ~~We’ve got acorns…~~ (until 25.10.01)
+**HANK** (Encouraging): We’ve got acorns...
 **MASON**: And pinecones and walnuts!
 **GRANDMA** (Encouraging): Wonderful! Now we just need to find the perfect tree!
 
@@ -441,10 +436,8 @@ Every story in which Hank speaks.
 `LDE_HolidayOddities2025_TC3_Dialogue` · seen 26.02.01–26.07.01
 - trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
 
-**MADDIE** (Surprised): What is this?? The tree is up and decorated, there are presents, and there’s even some... Is that soup?  
-  _earlier:_ ~~What is this?? The tree is up and decorated, there are presents, and there’s even some… Is that soup?~~ (until 25.10.01)
-**MADDIE** (Relaxed): It’s like a...  
-  _earlier:_ ~~It’s like a…~~ (until 25.10.01)
+**MADDIE** (Surprised): What is this?? The tree is up and decorated, there are presents, and there’s even some... Is that soup?
+**MADDIE** (Relaxed): It’s like a...
 **MASON** (Relaxed): Holiday miracle?
 **MADDIE** (Encouraging): Exactly. Did you do all of this?
 **HANK**: We did!
@@ -541,7 +534,7 @@ Every story in which Hank speaks.
   _earlier:_ ~~Why? I thought you were friends.~~ (until 25.09.01)
 **MASON** (Thinking): Guys, we can do better!  
   _earlier:_ ~~We are, dearie, but I know her better than you think.~~ (until 25.09.01)
-**—**: I know she is impressive, but she has a lot of secrets.
+**MASON** (Thinking): I know she is impressive, but she has a lot of secrets.
 **MADDIE** (Relaxed): Thanks for the heads up, Grandma, but I think you might just be paranoid!
 
 ### Circus Caper — item discovered: Small Circus Program
@@ -549,12 +542,12 @@ Every story in which Hank speaks.
 - trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Brochures_03'], items=['Small Circus Program'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Thinking): We need to think of an act that will really stop people in their tracks. Like...  
-  _earlier:_ ~~Have you seen Fiona anywhere?~~ (until 25.09.01); ~~We need to think of an act that will really stop people in their tracks. Like…~~ (until 25.10.01)
+  _earlier:_ ~~Have you seen Fiona anywhere?~~ (until 25.09.01)
 **MASON** (Joyous): A knife wheel!  
   _earlier:_ ~~She said she was going to the dress rehearsal, but I can't find her anywhere.~~ (until 25.09.01)
 **HANK** (Thinking): That sounds... dangerous.  
-  _earlier:_ ~~I ran out of circus brochures, but I know I saw more of them somewhere.~~ (until 25.09.01); ~~That sounds… dangerous.~~ (until 25.10.01)
-**—**: No, haven't seen her... She's probably just getting ready for the show.
+  _earlier:_ ~~I ran out of circus brochures, but I know I saw more of them somewhere.~~ (until 25.09.01)
+**HANK** (Thinking): No, haven't seen her... She's probably just getting ready for the show.
 **MADDIE**: Of course. But I don't want to disturb her...
 **PEARL** (Doubtful): I'm sure she won't mind if you get more brochures from her wagon.
 
@@ -565,9 +558,9 @@ Every story in which Hank speaks.
 **HANK**: Can you juggle?  
   _earlier:_ ~~I don't want to toot my own horn, but I'm pretty good at throwing.~~ (until 25.09.01)
 **MASON** (Thinking): Not yet. Let me try...  
-  _earlier:_ ~~You don't say!~~ (until 25.09.01); ~~Not yet. Let me try…~~ (until 25.10.01)
+  _earlier:_ ~~You don't say!~~ (until 25.09.01)
 **HANK** (Thinking): Be careful, those balls look kinda heavy...  
-  _earlier:_ ~~I could probably win you the main prize, if you wanted.~~ (until 25.09.01); ~~Be careful, those balls look kinda heavy…~~ (until 25.10.01)
+  _earlier:_ ~~I could probably win you the main prize, if you wanted.~~ (until 25.09.01)
 **MASON**: I can handle them! Give me another one!  
   _earlier:_ ~~Aww, thanks little guy... Maybe I'll win it for you first.~~ (until 25.09.01)
 **HANK** (Encouraging): OK, if you’re sure.
@@ -579,7 +572,7 @@ Every story in which Hank speaks.
 - trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CarnivalGames_07'], items=['Prize Stand'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Thinking): What are you doing? I don’t think you should be touching the carnival games and the circus equipment...  
-  _earlier:_ ~~Everybody knows these things are always rigged!~~ (until 25.09.01); ~~What are you doing? I don’t think you should be touching the carnival games and the circus equipment…~~ (until 25.10.01)
+  _earlier:_ ~~Everybody knows these things are always rigged!~~ (until 25.09.01)
 **MASON** (Surprised): We have permission!  
   _earlier:_ ~~I know - totally rigged!~~ (until 25.09.01)
 **HANK**: He’s telling the truth. The ringmaster told us we could totally try stuff out.  
@@ -618,8 +611,7 @@ Every story in which Hank speaks.
 - trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CircusProps_06'], items=['Circus Stand'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON** (Worried): I’m Mason, and this is Hank.
-**HANK** (Charming): Um, hi...  
-  _earlier:_ ~~Um, hi…~~ (until 25.10.01)
+**HANK** (Charming): Um, hi...
 **MASON** (Charming): We were just admiring all of your circus equipment! It’s SO cool!
 **RINGLEADER**: So you’re Mason! Maddie told me you wanted to learn about the Circus.
 **MASON**: See, Hank! I DO have permission. Where can I start?
@@ -652,7 +644,7 @@ Every story in which Hank speaks.
   _earlier:_ ~~<i>With sleight of hand, it slips away, vanishing in the light of day.</i>~~ (until 25.09.01)
 **HANK** (Annoyed): S-seriously?  
   _earlier:_ ~~<i>What</i> slips away?~~ (until 25.09.01)
-**—**: Pfft, cryptic as always!
+**HANK** (Annoyed): Pfft, cryptic as always!
 
 ### Circus Caper — item discovered: Heist Plan
 `LDE_Rumors2025_HeistPlan_03_Dialogue` · seen 25.05.01–26.07.01
@@ -668,8 +660,7 @@ Every story in which Hank speaks.
   _earlier:_ ~~She completely took advantage of me!~~ (until 25.09.01)
 **MASON** (Encouraging): Right again!  
   _earlier:_ ~~The perfect sleight of hand, indeed.~~ (until 25.09.01)
-**RODDY** (Worried): Looks... interesting.  
-  _earlier:_ ~~Looks… interesting.~~ (until 25.10.01)
+**RODDY** (Worried): Looks... interesting.
 **HANK** (Thinking): And kinda weird.
 
 ### Circus Caper — item discovered: Escape Vehicle
@@ -687,10 +678,11 @@ Every story in which Hank speaks.
 **HANK** (Charming): Umm, is your trick safe?  
   _earlier:_ ~~I almost pulled it off, too!~~ (until 25.09.01)
 **MASON**: TOTALLY safe.  
-  _earlier:_ ~~I'd be only my jolly way by now if it wasn't for your meddling granddaughter!~~ (until 25.03.01); ~~I'd be on my jolly way by now if it weren't for your meddling granddaughter!~~ (until 25.09.01)
+  _earlier:_ ~~I'd be on my jolly way by now if it weren't for your meddling granddaughter!~~ (until 25.09.01)  
+  _(1 cosmetic edit not shown)_
 **HANK** (Joyous): OK, then. Just don’t lose the key, little guy!  
   _earlier:_ ~~Just tell me, where is it?~~ (until 25.09.01)
-**—**: What?
+**HANK** (Joyous): What?
 **RINGLEADER** (Surprised): The damned Boultonite!
 **GRANDMA** (Surprised): So that's what you were after...
 **RINGLEADER** (Doubtful): You didn't think I want to tour with the Circus for the rest of my life, did you?
@@ -1011,8 +1003,7 @@ Every story in which Hank speaks.
 **DEB**: Your turn to hold the baby...
 **HANK** (Frustrated): Okay...
 **MADDIE** (Worried): I guess you’re both still adjusting to this... change.
-**DEB** (Frustrated): No, it’s not that... It’s the “OTHER” child that has been a bit of a problem...  
-  _earlier:_ ~~No, it’s not that… It’s the “OTHER” child that has been a bit of a problem...~~ (until 25.10.01)
+**DEB** (Frustrated): No, it’s not that... It’s the “OTHER” child that has been a bit of a problem...
 **HANK**: Yeah... *yawn*, Mason was running around our house, banging cans, and that woke the little legend up.
 **MADDIE** (Discouraged): Oh, Mason...
 **DEB** (Frustrated): I guess I knew those cans would get dug up eventually. Especially when they were the reason the Cannery shut down and all.

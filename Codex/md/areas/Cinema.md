@@ -158,7 +158,7 @@
   _earlier:_ ~~Don't think it'll hurt to open it up... Oh wow! It's from the secret society!~~ (until 26.02.03)
 **MADDIE** (Thinking): Hmm... Interesting! Looks like instructions on how to use the seats!
 **MADDIE** (Encouraging): It seems like they used this cinema as a way to pass on coded messages, and the seating order was important!  
-  _earlier:_ ~~It seems like they used this cinema as a way to pass on secret messages, and the seating order was important!~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Relaxed): They passed messages either via the films themselves or the actors! Quite cunning...
 
 ### Cinema: Clear film cans

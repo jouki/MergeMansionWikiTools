@@ -5,9 +5,9 @@ Every story in which Roddy speaks.
 `AntiqueDealerDriveOffStep` · seen 22.02.06–26.07.01
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
-**ANTIQUEDEALER**: Thank you for your help.
+**ANTIQUEDEALER** (Thinking): Thank you for your help.
 **MADDIE**: I just wanted to restore the family estate to its former glory!
-**ANTIQUEDEALER**: I should be going.
+**ANTIQUEDEALER** (Worried): I should be going.
 **RODDY**: Make sure your gear is not in reverse. 
 **ANTIQUEDEALER**: Point taken.
 **RODDY** (Thinking): What do you mean by that?!
@@ -19,7 +19,7 @@ Every story in which Roddy speaks.
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE**: This looks great. Thank you!
-**RODDY**: It’s not a big deal. Buildings that are in bad shape are my area of expertise.
+**RODDY** (Thinking): It’s not a big deal. Buildings that are in bad shape are my area of expertise.
 **RODDY**: Would you like to get a cup of-
 **MADDIE** (Surprised): What was that noise?!
 
@@ -108,7 +108,7 @@ Every story in which Roddy speaks.
 **RODDY** (Thinking): I saw her tinkering with an old movie projector. She had a big pile of old slides and film.
 **MADDIE** (Doubtful): Old slides and film? What is she up to??
 **MADDIE** (Relaxed): I think I need to do some good old-fashioned snooping...  
-  _earlier:_ ~~I think I need to do some old-fashioned snooping...~~ (until 25.07.01)
+  _(1 cosmetic edit not shown)_
 
 ### Five-Year Secret Celebration — item discovered: Hidden Questions
 `CBE_Anniversary2025_Questions_03_Dialogue` · seen 26.03.01–26.07.01
@@ -280,18 +280,13 @@ Every story in which Roddy speaks.
 - trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Decorations_07'], items=['Halloween Statue'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Thinking): O-oh? So you haven’t seen any ghosts so far?
-**MADDIE** (Thinking): Well...  
-  _earlier:_ ~~Well…~~ (until 25.10.01)
+**MADDIE** (Thinking): Well...
 **RODDY** (Surprised): What??
-**MADDIE** (Thinking): We did see something kinda odd... Things glowing in the dark, moving on their own.  
-  _earlier:_ ~~We did see something kinda odd… Things glowing in the dark, moving on their own.~~ (until 25.10.01)
+**MADDIE** (Thinking): We did see something kinda odd... Things glowing in the dark, moving on their own.
 **MADDIE** (Hesitant): But that’s just weird lighting and the drafty old house playing its tricks on us.
-**RODDY** (Worried): A-absolutely! Where did you see these... glowing things?  
-  _earlier:_ ~~A-absolutely! Where did you see these… glowing things?~~ (until 25.10.01)
-**MADDIE** (Relaxed): All over! The attic and the garden... But they aren’t ghosts. There is no such thing as ghosts!  
-  _earlier:_ ~~All over! The attic and the garden… But they aren’t ghosts. There is no such thing as ghosts!~~ (until 25.10.01)
-**RODDY** (Charming): You’re right... I think I might still avoid the attic and the garden for now.  
-  _earlier:_ ~~You’re right… I think I might still avoid the attic and the garden for now.~~ (until 25.10.01)
+**RODDY** (Worried): A-absolutely! Where did you see these... glowing things?
+**MADDIE** (Relaxed): All over! The attic and the garden... But they aren’t ghosts. There is no such thing as ghosts!
+**RODDY** (Charming): You’re right... I think I might still avoid the attic and the garden for now.
 
 ### Bella's Holiday Workshop — item discovered: Recipe Book
 `CBE_HolidayWorkshop2024_BakingSupplies_05_Dialogue` · seen 25.05.01–26.07.01
@@ -302,6 +297,9 @@ Every story in which Roddy speaks.
   _earlier:_ ~~How about baking? Is there some treat that makes you feel really happy?~~ (until 25.10.01)
 **RODDY** (Worried): That had better be the last one - we’re running out of space!  
   _earlier:_ ~~There are these cookies my granny used to make...~~ (until 25.10.01)
+**KAZUKO**: What did they taste like?
+**BELLA** (Relaxed): Oh, they tasted good!
+**KAZUKO** (Thinking): Hmm... I think we'll need a little bit of help from someone who knows a thing or two about baking.
 
 ### Bella's Holiday Workshop — item discovered: 80387529
 `CBE_HolidayWorkshop2024_CandleTable_01_Dialogue` · seen 25.05.01–26.07.01
@@ -375,6 +373,9 @@ Every story in which Roddy speaks.
   _earlier:_ ~~Is there anything I could help Santa with?~~ (until 25.10.01)
 **RODDY** (Charming): Let me ask you first: are you interested in some less-than-premium holiday crafts?  
   _earlier:_ ~~Sure... Hold on. You don't mean your homemade pottery?~~ (until 25.10.01)
+**BELLA** (Doubtful): Maybe, maybe not. It's not very nice to make fun of other people's work, you know.
+**MASON** (Joyous): *Sigh* You're right. I would love a teapot for Xmas.
+**BELLA** (Thinking): Hmmm...
 
 ### Bella's Holiday Workshop — item discovered: Roddy
 `CBE_HolidayWorkshop2024_CharacterRoddy_01_Dialogue` · seen 25.05.01–26.07.01
@@ -389,6 +390,9 @@ Every story in which Roddy speaks.
   _earlier:_ ~~Great! I've made everyone some presents and, well, I've got one for you, too.~~ (until 25.10.01)
 **RODDY** (Charming): I wonder if Maddie could spare a shed or a secret room for it all?  
   _earlier:_ ~~I'm speechless! Thank you so much!~~ (until 25.10.01)
+**BELLA**: It's a surprise, so you'll have to open it. Oh, I'll just tell you what it is!
+**BELLA** (Relaxed): It's a scarf!
+**RODDY** (Worried): Well that is thoughtful. And what a b-beautiful scarf it is!
 
 ### Bella's Holiday Workshop — item discovered: Tray of Polvorones
 `CBE_HolidayWorkshop2024_Cookies_06_Dialogue` · seen 25.05.01–26.07.01
@@ -426,6 +430,9 @@ Every story in which Roddy speaks.
   _earlier:_ ~~What are you making?~~ (until 25.10.01)
 **BELLA** (Relaxed): I knew I could rely on you!  
   _earlier:_ ~~Pottery, knitted hats, scarves, and socks, and scented candles!~~ (until 25.10.01)
+**EMILIO** (Surprised): And you know how to make them?
+**BELLA**: I will learn, and Kazuko promised to help.
+**EMILIO** (Thinking): Right...
 
 ### Bella's Holiday Workshop — event end
 `CBE_HolidayWorkshop2024_EventOutro_Dialogue` · seen 24.11.02–26.07.01
@@ -439,6 +446,10 @@ Every story in which Roddy speaks.
   _earlier:_ ~~I'm so happy you think so. They are all important to you, I know that, and I want them to like me, too.~~ (until 25.10.01)
 **RODDY** (Relaxed): The holidays are never not chaotic around here, but at least they're always memorable.  
   _earlier:_ ~~How could they not like you?~~ (until 25.10.01)
+**BELLA** (Relaxed): I know!
+**BELLA** (Thinking): It's kinda sweet how Maddie has a crush on you, though!
+**EMILIO** (Surprised): Wh-what do you mean?
+**BELLA** (Relaxed): Don't worry - I won't tell anyone!
 
 ### Bella's Holiday Workshop — item discovered: Beanie
 `CBE_HolidayWorkshop2024_Knitting_05_Dialogue` · seen 25.05.01–26.07.01
@@ -468,6 +479,7 @@ Every story in which Roddy speaks.
   _earlier:_ ~~Are you going to make something cool out of that lump of clay?~~ (until 25.10.01)
 **BELLA** (Relaxed): That won’t be a problem! If you could just set up the website, I’ll do the rest!  
   _earlier:_ ~~That's a teapot I just made.~~ (until 25.10.01)
+**MASON** (Worried): Oooh... It's really cool!
 
 ### Bella's Holiday Workshop — item discovered: Teapot
 `CBE_HolidayWorkshop2024_Pottery_05_Dialogue` · seen 25.05.01–26.07.01
@@ -514,6 +526,8 @@ Every story in which Roddy speaks.
   _earlier:_ ~~It's my pleasure, Bella!~~ (until 25.10.01)
 **RODDY** (Frustrated): I guess my plan wasn’t totally water-tight after all...  
   _earlier:_ ~~You know what I've noticed? In this town, you never know what you'll find in an old tin can!~~ (until 25.10.01)
+**BELLA** (Relaxed): See! This one says "syrup", but it's an old recipe!
+**BELLA** (Thinking): "The secret to the perfect polvorones!"
 
 ### The Joys of the Sea — decoration CBE_JoysOfTheSea2023_Decoration_Slot01
 `CBE_JoysOfTheSea2023_Decoration_Slot01_Dialogue` · seen 23.09.02–26.07.01
@@ -534,7 +548,7 @@ Every story in which Roddy speaks.
 - trigger: decoration, decoration=CBE_JoysOfTheSea2023_Decoration_Slot06, event=The Joys of the Sea, eventKey=CBE_JoysOfTheSea2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
 **MADDIE**: Hi, Roddy!  
-  _earlier:_ ~~Hi Roddy!~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **RODDY**: Hey, Maddie! I thought I’d bring old Buster along to help with the exhibition.
 **MADDIE** (Thinking): Buster? Who’s he?
 **RODDY** (Relaxed): My singing fish! I got it as a gift a long time ago. He’s seen better days, sure, but I’m sure you can appreciate his uniqueness!
@@ -645,7 +659,7 @@ Every story in which Roddy speaks.
 **RODDY** (Discouraged): Well... you could say we did have one TEENY little mishap…
 **MADDIE** (Surprised): A teeny mishap? These chocolates are HUGE!
 **MADDIE** (Doubtful): What did you do?!  
-  _earlier:_ ~~What did you do??~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 
 ### Sweet Mess Express — item discovered: Grandma
 `CBE_SweetMess_Character_05_Dialogue` · seen 26.03.01–26.07.01
@@ -708,7 +722,7 @@ Every story in which Roddy speaks.
 **RODDY** (Surprised): You broke Maddie’s machine with the ceramic bunny!
 **HANK** (Surprised): You didn't catch it even though I gave you a heads-up!
 **RODDY** (Discouraged): It doesn't matter who broke the machine. The question is: What do we do now?!  
-  _earlier:_ ~~It doesn't matter who broke the machine. The question is: What do we do now??~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **HANK** (Thinking): You want to go ask Ursula for help?
 **RODDY** (Worried): Errr...
 **HANK** (Thinking): Maddie said to tell her if anything happens.
@@ -811,8 +825,7 @@ Every story in which Roddy speaks.
 - trigger: unknown, hint=Core Support Event (versions None–None)
 
 **MADDIE** (Joyous): Today is the day, Roddy! We're going to sail for the Horizon Cup!
-**RODDY** (Annoyed): Never been much of a sailor myself, but your enthusiasm is inspiring.  
-  _earlier:_ ~~Never been much of a sailor myself, but your enthusiasm is inspiring. ~~ (until 25.05.01)
+**RODDY** (Annoyed): Never been much of a sailor myself, but your enthusiasm is inspiring.
 **MADDIE** (Encouraging): Come on, Roddy! This'll be fun! The Boultons will sail the high seas again!
 **EMILIO**: Just watch out for the strong current! It'll drag you out to sea...
 **EMILIO** (Encouraging): ...Or help me win!
@@ -822,11 +835,11 @@ Every story in which Roddy speaks.
 `CSE_Classic_RacesOutro` · seen 25.05.01–26.07.01
 - trigger: unknown, hint=Core Support Event (versions None–None)
 
-**MADDIE** (Joyous): Wow! What a race! Didn't I tell you it would be fun?!  
-  _earlier:_ ~~Wow! What a race! Didn't I tell you it would be fun?! ~~ (until 25.05.01)
+**MADDIE** (Joyous): Wow! What a race! Didn't I tell you it would be fun?!
 **RODDY** (Relaxed): Yeah! That was pretty awesome! However...
 **RODDY** (Charming): I should probably wear something other than my work clothes, next time.  
-  _earlier:_ ~~I should probably wear something else than a suit, next time. ~~ (until 25.05.01); ~~I should probably wear something other than a suit, next time.~~ (until 26.04.01)
+  _earlier:_ ~~I should probably wear something other than a suit, next time.~~ (until 26.04.01)  
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Encouraging): Well, at least your hard hat will make it easy for us to find you if you ever go overboard!
 **RODDY** (Surprised): Overboard?!!
 
@@ -847,7 +860,7 @@ Every story in which Roddy speaks.
 - trigger: area, area=Cemetery, areaId=Cemetery, hotspotId=CemeteryRemoveEmblemCoverL1, phase=task completed, task=Uncover stone emblem (versions 24.04.01–26.07.01)
 
 **MADDIE** (Charming): Hi, Roddy! Sorry you caught me in the cemetery.  
-  _earlier:_ ~~Hi Roddy! Sorry you caught me in the cemetery.~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **RODDY** (Charming): Don't be! I think cemeteries are kind of... romantic.
 **RODDY** (Worried): Well, uh, I'm here because I heard a rumor that the local council are really out to get you now.
 **MADDIE** (Annoyed): I know! They sent around a photographer, Holden, to check up on me.
@@ -967,7 +980,7 @@ Every story in which Roddy speaks.
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomPlaceChairB5, phase=task completed, task=Polish and place the chair back (versions 24.04.01–26.07.01)
 
 **RODDY**: Hi, Maddie, Winston let me in and... wait, is everything okay? You look upset.  
-  _earlier:_ ~~Hi Maddie, Winston let me in and... Wait, is everything okay? You look upset.~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Worried): Hi, Roddy. I... I guess not. 
 **MADDIE** (Frustrated): It's this Mansion. Ever since I've opened it, in hopes to clear Grandma's name, I've been learning... things.
 **RODDY** (Thinking): What kind of things? 
@@ -1037,19 +1050,23 @@ Every story in which Roddy speaks.
 **MADDIE** (Doubtful): Just ignore him Roddy.
 **ARTHUR** (Charming): Hey! Did I ever get to show you my INSANE knife skills?
 **ARTHUR** (Charming): I was personally trained by a three-star chef, you know...  
-  _earlier:_ ~~I was personally trained by a three star chef, you know...~~ (until 26.06.01)
+  _(1 cosmetic edit not shown)_
 **ARTHUR** (Thinking): Some of the techniques have been kept secret since the Middle Ages!  
-  _earlier:_ ~~Some of these techniques have been kept secret since the middle ages!~~ (until 26.05.01); ~~Some of the techniques have been kept secret since the middle ages!~~ (until 26.06.01)
+  _(2 cosmetic edits not shown)_
 **RODDY** (Doubtful): Oh, please...  
-  _earlier:_ ~~Okay... I admit, you've learned some new skills!~~ (until 26.05.01); ~~Oh please...~~ (until 26.06.01)
+  _earlier:_ ~~Okay... I admit, you've learned some new skills!~~ (until 26.05.01)  
+  _(1 cosmetic edit not shown)_
 **ARTHUR** (Doubtful): Behold the ignorance of jealousy, Mads.  
   _earlier:_ ~~Oh please... He's holding the knife all wrong!~~ (until 26.05.01)
 **RODDY** (Annoyed): Ignorance?! I WAS trained in a family-owned restaurant!  
-  _earlier:_ ~~Behold the ignorance of jealousy, Mads.~~ (until 26.05.01); ~~Ignorance?! I WAS trained in a Family owned restaurant!~~ (until 26.06.01)
+  _earlier:_ ~~Behold the ignorance of jealousy, Mads.~~ (until 26.05.01)  
+  _(1 cosmetic edit not shown)_
 **ARTHUR** (Frustrated): Pssh... More like a family-owned hot dog stand.  
-  _earlier:_ ~~Ignorance?! I WAS trained in a Family owned restaurant!~~ (until 26.05.01); ~~Pssh... More like a family owned hot dog stand.~~ (until 26.06.01)
+  _earlier:_ ~~Ignorance?! I WAS trained in a Family owned restaurant!~~ (until 26.05.01)  
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Doubtful): Boys...  
   _earlier:_ ~~Pssh... More like a family owned hot dog stand.~~ (until 26.05.01)
+**—**: Boys...
 
 ### FirstFloorKitchen 11
 `FirstFloorKitchen_11` · seen 26.06.01–26.07.01
@@ -1057,14 +1074,13 @@ Every story in which Roddy speaks.
 
 **ARTHUR** (Doubtful): Alright, hotshot. Prove it.
 **ARTHUR** (Doubtful): Show me your UH-MAAZING skills...
-**RODDY** (Doubtful): I will!  
-  _earlier:_ ~~I will! ~~ (until 26.06.01)
+**RODDY** (Doubtful): I will!
 **MADDIE** (Doubtful): Is this really necessary?
 **RODDY** (Doubtful): YES!
 **ARTHUR** (Annoyed): YES!
 **MADDIE** (Discouraged): Oh boy...
 **RODDY** (Relaxed): Alright, Maddie. Prepare to be amazed! I shall start by juggling these knives!  
-  _earlier:_ ~~Alright, Maddie. Prepare to be amazed! I shall start by juggling these two knives!~~ (until 26.04.02)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Worried): Roddy, be careful!
 **RODDY** (Relaxed): Don't worry! I've done this many times!
 **ARTHUR** (Relaxed): ...
@@ -1088,8 +1104,7 @@ Every story in which Roddy speaks.
 **ARTHUR** (Surprised): Aaaargh! Mads! MAAAADS! OW, don't step on it Roddy!!
 **RODDY** (Surprised): So- Sorry!
 **MADDIE** (Frustrated): ...
-**MADDIE** (Frustrated): Why, me?  
-  _earlier:_ ~~Why, me? ~~ (until 26.06.01)
+**MADDIE** (Frustrated): Why, me?
 
 ### Pantry: Plant new plants
 `FirstFloorPantry_04` · seen 26.07.01–26.07.01
@@ -1168,6 +1183,13 @@ Every story in which Roddy speaks.
 `Halloween2021IntroRoddyAndMeddie` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE**: Who's there?
+**RODDY**: Did you hear that the city is organising a Halloween challenge?
+**MADDIE** (Joyous): I did! I’m going to win that one!
+**RODDY** (Thinking): City officials will do some evaluation rounds as part of that and --
+**MADDIE** (Thinking): And do you think they’ll also evaluate my progress with the mansion renovation?
+**RODDY**: Exactly. Better clean things up a bit.
+**RODDY** (Doubtful): At least those spider webs should go.
 
 ### HandPrints
 `HandPrints` · seen 23.11.02–26.07.01
@@ -1217,7 +1239,7 @@ Every story in which Roddy speaks.
 - trigger: event, event=The Great Bake-off, eventId=LBE_May2023, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–26.07.01)
 
 **PEARL** (Encouraging): Welcome, everyone, to Hopewell Bay's great bake-off! Let's meet our contestants!   
-  _earlier:_ ~~Welcome, everyone, to Hopewell Bay's great bakeoff! Let's meet our contestants! ~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 **PEARL** (Encouraging): First off, we have Jackie, our resident reporter for the Boulton Bugle.
 **JACKIE** (Encouraging): Thank you, Pearl, for planning this event again! May the best baker win!
 **PEARL** (Encouraging): Next, we have Maddie, who's been busy renovating the mansion!
@@ -1232,12 +1254,16 @@ Every story in which Roddy speaks.
 **HEIKKI** (Joyous): Hello! Huh, sorry for being late! I had to use my head as a third leg!
 **PEARL** (Thinking): Wh- What? 
 **PEARL** (Encouraging): Anyway, let the great bake-off begin!  
-  _earlier:_ ~~Anyway, let the great bakeoff begin!~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 
 ### LDE GreenAcresQuest2024 TC3 Dialogue
 `LDE_GreenAcresQuest2024_TC3_Dialogue` · seen 25.05.01–26.04.02
 - trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
 
+**RODDY**: Wow! You really went all out on this community garden!
+**MADDIE** (Charming): Thanks Roddy! I hope everyone will like it.
+**RODDY** (Encouraging): Oh, they really do!
+**RODDY** (Relaxed): Not bad, Maddie... Not bad at all!
 
 ### LDE GreenAcresQuest2024 v2 TA1 Dialogue
 `LDE_GreenAcresQuest2024_v2_TA1_Dialogue` · seen 26.02.01–26.04.02
@@ -1378,8 +1404,7 @@ Every story in which Roddy speaks.
 `LDE_HolidayOddities2025_ClockCTurned_01_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_ClockCTurned_01'], items=['Royal Longcase Clock - Turned'], moment=item discovered (versions 26.03.01–26.07.01)
 
-**RODDY** (Thinking): This is the last clock. Maybe we should leave one to show the real time, though. You know, just in case...  
-  _earlier:_ ~~This is the last clock. Maybe we should leave one to show the real time, though. You know, just in case…~~ (until 25.10.01)
+**RODDY** (Thinking): This is the last clock. Maybe we should leave one to show the real time, though. You know, just in case...
 **MASON** (Relaxed): Traditions are traditions, Roddy. Change the time!  
   _earlier:_ ~~Traditions are traditions, Roddy. Turn the clock!~~ (until 25.10.01)
 **RODDY** (Worried): But--
@@ -1393,7 +1418,7 @@ Every story in which Roddy speaks.
 
 **RODDY** (Thinking): What is this tradition and what are we supposed to do with these clock keys?
 **GRANDMA** (Relaxed): You will use the keys to set all the clocks you can find to show the wrong time.  
-  _earlier:_ ~~You will use the keys to turn all the clocks you can find to show the wrong time.~~ (until 25.10.01)
+  _(1 cosmetic edit not shown)_
 **HANK** (Annoyed): W-why? Then I won’t know when I need to have my protein shakes.
 **GRANDMA** (Thinking): When you cannot trust what a clock shows, you stop caring about it. And when you stop caring about what time it is, you are truly free to enjoy the holidays.
 **HANK** (Encouraging): That’s genius!
@@ -1473,8 +1498,7 @@ Every story in which Roddy speaks.
 - trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_Logs_03'], items=['Log Rack'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Relaxed): I can see you have been working hard!
-**HANK** (Charming): Or hardly working... Roddy used a wood-splitting machine. I bet those early folks in Hopewell Bay didn’t have one.  
-  _earlier:_ ~~Or hardly working… Roddy used a wood-splitting machine. I bet those early folks in Hopewell Bay didn’t have one.~~ (until 25.10.01)
+**HANK** (Charming): Or hardly working... Roddy used a wood-splitting machine. I bet those early folks in Hopewell Bay didn’t have one.
 **RODDY** (Encouraging): Work smart, not hard, Hank!
 
 ### Holiday Oddities — event end
@@ -1485,8 +1509,7 @@ Every story in which Roddy speaks.
 **GRANDMA** (Encouraging): I could not have done this on my own. The Mansion looks wonderful, and everything is ready for a celebration.
 **MASON** (Encouraging): It’s what friends are for. And we all love Maddie - she’s the best! Right, guys?
 **HANK**: Totally! The pleasure was ours.
-**RODDY** (Charming): Y-yeah, we love Maddie...  
-  _earlier:_ ~~Y-yeah, we love Maddie…~~ (until 25.10.01)
+**RODDY** (Charming): Y-yeah, we love Maddie...
 **MASON** (Relaxed): Don’t make this weird, Roddy. Come on, hot chocolates are on me!
 **RODDY** (Relaxed): Sounds good.
 **HANK** (Encouraging): Hey, guys? Happy holidays! I’m glad I get to spend them with you.
@@ -1506,8 +1529,7 @@ Every story in which Roddy speaks.
 `LDE_HolidayOddities2025_SockWG_01_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_SockWG_01'], items=['White & Green Stripes'], moment=item discovered (versions 26.03.01–26.07.01)
 
-**GRANDMA** (Thinking): Good job! We have some great socks and some... well, not so great ones.  
-  _earlier:_ ~~Good job! We have some great socks and some… well, not so great ones.~~ (until 25.10.01)
+**GRANDMA** (Thinking): Good job! We have some great socks and some... well, not so great ones.
 **RODDY** (Surprised): Hey!
 **GRANDMA** (Encouraging): I do appreciate your effort, of course. Now they just need to be wrapped and placed under the tree.
 **MASON**: We’re on the home stretch now!
@@ -1519,8 +1541,7 @@ Every story in which Roddy speaks.
 
 **HANK**: I already tried one soup. Someone else can taste this one.
 **RODDY** (Worried): Mason, how about you do it?
-**MASON** (Charming): But I’m only a child...  
-  _earlier:_ ~~But I’m only a child…~~ (until 25.10.01)
+**MASON** (Charming): But I’m only a child...
 **RODDY** (Frustrated): Ugh, fine.
 **RODDY** (Relaxed): Huh! This soup is actually not bad!
 
@@ -1532,8 +1553,7 @@ Every story in which Roddy speaks.
 **MASON**: Roddy, you do it.
 **RODDY** (Charming): I think Hank has the best palate.
 **HANK** (Joyous): It's true. My palette has all the colors!
-**HANK** (Thinking): Let me get a big spoonful. Here goes! Mmm... this soup... is HORRIBLE.  
-  _earlier:_ ~~Let me get a big spoonful. Here goes! Mmm... this soup… is HORRIBLE.~~ (until 25.10.01)
+**HANK** (Thinking): Let me get a big spoonful. Here goes! Mmm... this soup... is HORRIBLE.
 
 ### Holiday Oddities — item discovered: Bunch of Sticks
 `LDE_HolidayOddities2025_StickBasket_03_Dialogue` · seen 26.03.01–26.07.01
@@ -1561,10 +1581,8 @@ Every story in which Roddy speaks.
 `LDE_HolidayOddities2025_TC3_Dialogue` · seen 26.02.01–26.07.01
 - trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
 
-**MADDIE** (Surprised): What is this?? The tree is up and decorated, there are presents, and there’s even some... Is that soup?  
-  _earlier:_ ~~What is this?? The tree is up and decorated, there are presents, and there’s even some… Is that soup?~~ (until 25.10.01)
-**MADDIE** (Relaxed): It’s like a...  
-  _earlier:_ ~~It’s like a…~~ (until 25.10.01)
+**MADDIE** (Surprised): What is this?? The tree is up and decorated, there are presents, and there’s even some... Is that soup?
+**MADDIE** (Relaxed): It’s like a...
 **MASON** (Relaxed): Holiday miracle?
 **MADDIE** (Encouraging): Exactly. Did you do all of this?
 **HANK**: We did!
@@ -1987,7 +2005,7 @@ Every story in which Roddy speaks.
 - trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_Interviews_03'], items=['Recorder'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE** (Thinking): Next we need to talk with everyone who saw her on that last day.  
-  _earlier:_ ~~Next we need to talk everyone who saw her on that last day.~~ (until 26.06.01)
+  _(1 cosmetic edit not shown)_
 **RODDY** (Doubtful): Do you think they will talk?
 **JACKIE** (Thinking): It’s unlikely we’ll get a confession, but someone will slip.
 **JACKIE**: They always do…
@@ -2120,7 +2138,7 @@ Every story in which Roddy speaks.
 **JACKIE**: We follow up on everything and rule out the wrong options until we have the answer.
 **RODDY** (Discouraged): I’m not sure that kind of investigation alone is going to get us closer to the answer.
 **JACKIE** (Doubtful): What are you talking about?  
-  _earlier:_ ~~What do you talking about?~~ (until 26.06.01)
+  _(1 cosmetic edit not shown)_
 **RODDY** (Hesitant): I’m talking about the COSMIC investigation.
 
 ### Murder at the Mansion — item discovered: Board of Fate
@@ -2144,7 +2162,7 @@ Every story in which Roddy speaks.
 **JACKIE** (Surprised): That sounds like... Bella!
 **RODDY** (Thinking): There's more: “The universe advises that your great love dreams not of escape, but of breathing room.”
 **JACKIE** (Doubtful): Uh-huh, that's Bella alright. She would not have been happy to read this.  
-  _earlier:_ ~~Uh-uh, that's Bella alright. She would not have been happy to read this.~~ (until 26.06.01)
+  _(1 cosmetic edit not shown)_
 
 ### LDE MurderAtTheMansion TA1 Dialogue
 `LDE_MurderAtTheMansion_TA1_Dialogue` · seen 26.05.01–26.07.01
@@ -2566,7 +2584,7 @@ Every story in which Roddy speaks.
   _earlier:_ ~~Why? I thought you were friends.~~ (until 25.09.01)
 **MASON** (Thinking): Guys, we can do better!  
   _earlier:_ ~~We are, dearie, but I know her better than you think.~~ (until 25.09.01)
-**—**: I know she is impressive, but she has a lot of secrets.
+**MASON** (Thinking): I know she is impressive, but she has a lot of secrets.
 **MADDIE** (Relaxed): Thanks for the heads up, Grandma, but I think you might just be paranoid!
 
 ### Circus Caper — item discovered: Small Circus Program
@@ -2574,12 +2592,12 @@ Every story in which Roddy speaks.
 - trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Brochures_03'], items=['Small Circus Program'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Thinking): We need to think of an act that will really stop people in their tracks. Like...  
-  _earlier:_ ~~Have you seen Fiona anywhere?~~ (until 25.09.01); ~~We need to think of an act that will really stop people in their tracks. Like…~~ (until 25.10.01)
+  _earlier:_ ~~Have you seen Fiona anywhere?~~ (until 25.09.01)
 **MASON** (Joyous): A knife wheel!  
   _earlier:_ ~~She said she was going to the dress rehearsal, but I can't find her anywhere.~~ (until 25.09.01)
 **HANK** (Thinking): That sounds... dangerous.  
-  _earlier:_ ~~I ran out of circus brochures, but I know I saw more of them somewhere.~~ (until 25.09.01); ~~That sounds… dangerous.~~ (until 25.10.01)
-**—**: No, haven't seen her... She's probably just getting ready for the show.
+  _earlier:_ ~~I ran out of circus brochures, but I know I saw more of them somewhere.~~ (until 25.09.01)
+**HANK** (Thinking): No, haven't seen her... She's probably just getting ready for the show.
 **MADDIE**: Of course. But I don't want to disturb her...
 **PEARL** (Doubtful): I'm sure she won't mind if you get more brochures from her wagon.
 
@@ -2588,7 +2606,7 @@ Every story in which Roddy speaks.
 - trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CarnivalGames_07'], items=['Prize Stand'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Thinking): What are you doing? I don’t think you should be touching the carnival games and the circus equipment...  
-  _earlier:_ ~~Everybody knows these things are always rigged!~~ (until 25.09.01); ~~What are you doing? I don’t think you should be touching the carnival games and the circus equipment…~~ (until 25.10.01)
+  _earlier:_ ~~Everybody knows these things are always rigged!~~ (until 25.09.01)
 **MASON** (Surprised): We have permission!  
   _earlier:_ ~~I know - totally rigged!~~ (until 25.09.01)
 **HANK**: He’s telling the truth. The ringmaster told us we could totally try stuff out.  
@@ -2614,7 +2632,7 @@ Every story in which Roddy speaks.
   _earlier:_ ~~Too long to remember. It is nice to see you again, Fiona.~~ (until 25.09.01)
 **MASON** (Joyous): Like tightrope-walking!  
   _earlier:_ ~~You look well. Still traveling and performing, I see.~~ (until 25.09.01)
-**—**: You two know each other??
+**MASON** (Joyous): You two know each other??
 **RINGLEADER** (Relaxed): Oh, yes. We go WAY back. Don't we, Ursula?
 **RINGLEADER** (Relaxed): We slept in the same wagon back in the day. We trained together and shared so many stories.
 **RINGLEADER** (Relaxed): About this place too!
@@ -2634,7 +2652,7 @@ Every story in which Roddy speaks.
   _earlier:_ ~~<i>With sleight of hand, it slips away, vanishing in the light of day.</i>~~ (until 25.09.01)
 **HANK** (Annoyed): S-seriously?  
   _earlier:_ ~~<i>What</i> slips away?~~ (until 25.09.01)
-**—**: Pfft, cryptic as always!
+**HANK** (Annoyed): Pfft, cryptic as always!
 
 ### Circus Caper — item discovered: Heist Plan
 `LDE_Rumors2025_HeistPlan_03_Dialogue` · seen 25.05.01–26.07.01
@@ -2650,8 +2668,7 @@ Every story in which Roddy speaks.
   _earlier:_ ~~She completely took advantage of me!~~ (until 25.09.01)
 **MASON** (Encouraging): Right again!  
   _earlier:_ ~~The perfect sleight of hand, indeed.~~ (until 25.09.01)
-**RODDY** (Worried): Looks... interesting.  
-  _earlier:_ ~~Looks… interesting.~~ (until 25.10.01)
+**RODDY** (Worried): Looks... interesting.
 **HANK** (Thinking): And kinda weird.
 
 ### Circus Caper — item discovered: Escape Vehicle
@@ -2669,10 +2686,11 @@ Every story in which Roddy speaks.
 **HANK** (Charming): Umm, is your trick safe?  
   _earlier:_ ~~I almost pulled it off, too!~~ (until 25.09.01)
 **MASON**: TOTALLY safe.  
-  _earlier:_ ~~I'd be only my jolly way by now if it wasn't for your meddling granddaughter!~~ (until 25.03.01); ~~I'd be on my jolly way by now if it weren't for your meddling granddaughter!~~ (until 25.09.01)
+  _earlier:_ ~~I'd be on my jolly way by now if it weren't for your meddling granddaughter!~~ (until 25.09.01)  
+  _(1 cosmetic edit not shown)_
 **HANK** (Joyous): OK, then. Just don’t lose the key, little guy!  
   _earlier:_ ~~Just tell me, where is it?~~ (until 25.09.01)
-**—**: What?
+**HANK** (Joyous): What?
 **RINGLEADER** (Surprised): The damned Boultonite!
 **GRANDMA** (Surprised): So that's what you were after...
 **RINGLEADER** (Doubtful): You didn't think I want to tour with the Circus for the rest of my life, did you?
@@ -2701,8 +2719,8 @@ Every story in which Roddy speaks.
 **MASON** (Thinking): Could we shoot Roddy out of a cannon? You’ve done it once, haven’t you?  
   _earlier:_ ~~These scraps are starting to look kinda suspicious.~~ (until 25.09.01)
 **RODDY** (Surprised): Y-yes, but maybe we could do something less... explosive?  
-  _earlier:_ ~~There's a list of things in the Mansion, but some of them have been crossed out.~~ (until 25.09.01); ~~Y-yes, but maybe we could do something less… explosive?~~ (until 25.10.01)
-**—**: It's almost like some kind of... shopping list for a thief!
+  _earlier:_ ~~There's a list of things in the Mansion, but some of them have been crossed out.~~ (until 25.09.01)
+**RODDY** (Surprised): It's almost like some kind of... shopping list for a thief!
 
 ### Circus Caper — item discovered: Wardrobe
 `LDE_Rumors2025_RingmasterSuit_05_Dialogue` · seen 25.05.01–26.07.01
@@ -2751,7 +2769,7 @@ Every story in which Roddy speaks.
   _earlier:_ ~~No, but I wouldn't be surprised if they had something to do with it.~~ (until 25.09.01)
 **MASON** (Thinking): It sure looks that way!  
   _earlier:_ ~~I am serious, dear. Things have been moved around, but nothing seems to be missing.~~ (until 25.09.01)
-**—**: See? You're just being paranoid.
+**MASON** (Thinking): See? You're just being paranoid.
 **GRANDMA** (Annoyed): Let's hope so...
 
 ### Circus Caper — item discovered: Lock Pick Set
@@ -2764,7 +2782,7 @@ Every story in which Roddy speaks.
   _earlier:_ ~~A set of lock picks!~~ (until 25.09.01)
 **RODDY** (Encouraging): What kind of a trick could they be used for?  
   _earlier:_ ~~Maybe Grandma wasn't just being paranoid... Maybe there IS something going on.~~ (until 25.09.01)
-**—**: Fiona!
+**RODDY** (Encouraging): Fiona!
 **MADDIE** (Thinking): Look what I found.
 **RINGLEADER** (Surprised): Lock-picks? Where did you find those?
 **MADDIE** (Thinking): They were hidden in some bushes right next to the Mansion.
@@ -2824,6 +2842,17 @@ Every story in which Roddy speaks.
 **MADDIE** (Charming): I... I don’t believe it.
 **MADDIE** (Joyous): You... You did it, Roddy!
 **RODDY** (Charming): Well... I...
+
+### Library07
+`Library07` · seen 25.05.01–26.07.01
+- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+
+**MADDIE** (Charming): Roddy...
+**RODDY** (Charming): Y- Yes?
+**MADDIE** (Charming): I feel like...
+**RODDY** (Charming): M-Me too, Maddie...
+**MADDIE** (Surprised): !!!
+**ARTHUR**: Hello, Mads...
 
 ### Library08
 `Library08` · seen 25.05.01–26.07.01
@@ -2900,7 +2929,7 @@ Every story in which Roddy speaks.
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeFountainGatePlaceGrowVine_B5, phase=task completed, task=Plant vines (versions 25.04.03–26.07.01)
 
 **RODDY** (Charming): Hi, Maddie! Nice maze. Looks like a good place to, uh, spend some time getting lost together...  
-  _earlier:_ ~~Hi Maddie! Nice maze. Looks like a good place to, uh, spend some time getting lost together...~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Discouraged): Huh? I guess so, but I'm here to figure out what this new quest my grandpa sent me on is!
 **RODDY** (Thinking): New quest? What do you mean?
 **MADDIE** (Surprised): I found a notebook at the end of my grandpa's scavenger hunt, and now I'm trying to decode what it all means.
@@ -3133,7 +3162,7 @@ Every story in which Roddy speaks.
 - trigger: unknown, hint=Pet event (versions None–None)
 
 **MADDIE** (Relaxed): Hi, Roddy. How are you doing today?  
-  _earlier:_ ~~Hi Roddy. How are you doing today?~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **RODDY** (Charming): Great. You? You look very nice.
 **MADDIE** (Surprised): Pardon? Oh, I'm alright. Wondering where today's "gift" is.
 **RODDY** (Encouraging): I have it here, actually. I, uh, found it outside.
@@ -3194,7 +3223,7 @@ Every story in which Roddy speaks.
 - trigger: unknown, hint=Pet event (versions None–None)
 
 **RODDY**: Hi, Maddie! What, uh, do you have there?  
-  _earlier:_ ~~Hi Maddie! What, uh, do you have there?~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE**: Someone left me a gift. I was about to open it.
 **MADDIE** (Surprised): It's a Christmas tree ornament! Looks like a... swan?
 **RODDY** (Charming): That's a dove. I mean, I think that's a dove.
@@ -3233,7 +3262,7 @@ Every story in which Roddy speaks.
 - trigger: unknown, hint=Pet event (versions None–None)
 
 **RODDY** (Charming): Hi, Maddie! I found another gift for you.  
-  _earlier:_ ~~Hi Maddie! I found another gift for you.~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **GRANDMA** (Doubtful): You "found" that, did you?
 **RODDY**: Uh, yes. Anyway, here it is!
 **MADDIE** (Encouraging): Today we have... a drum kit?!
@@ -3294,7 +3323,7 @@ Every story in which Roddy speaks.
 **RODDY** (Thinking): I got to hang out with quite a few “colorful” people.
 **RODDY** (Charming): They even started teaching me a few tricks on how to pick locks!
 **RODDY** (Worried): I ended up being quite good at it, too! I just didn’t realize I was being manipulated...  
-  _earlier:_ ~~I ended up being quite good at it, too! I just didn’t realize I was being groomed...~~ (until 25.07.01)
+  _(1 cosmetic edit not shown)_
 **RODDY** (Thinking): But if it wasn’t for that, I wouldn’t have found my love of architecture.
 **MADDIE** (Thinking): How come?
 **RODDY** (Charming): I had to study a lot of blueprints and floor plans for my... “job”.
@@ -3357,12 +3386,12 @@ Every story in which Roddy speaks.
 **MADDIE** (Thinking): She kept this place a secret for so long, and although she agreed to stay here with me, she doesn't seem happy about it.  
   _earlier:_ ~~I wish Grandma hadn't kept this whole place a secret so long. And I wish she'd open it up now.~~ (until 23.09.02)
 **RODDY** (Thinking): Have you tried telling her what you told me, about feeling lonely as a child? She might understand.  
-  _earlier:_ ~~Have you tried telling her what you told me, about feeling lonely as a child? She might understand...~~ (until 23.09.02)
+  _(1 cosmetic edit not shown)_
 **MADDIE**: Do you think so? We've never really had a heart-to-heart, Grandma and I...  
   _earlier:_ ~~You know, Roddy? You're right––I probably should have a heart-to-heart with her.~~ (until 23.09.02)
 **RODDY** (Relaxed): I don't know why she's kept secrets from you, Maddie, but it's obvious that she loves you.  
   _earlier:_ ~~Sounds like a plan. I've got to get back to work, but good luck with Ursula, Maddie.~~ (until 23.09.02)
-**—**: I'm sure if you talk to her she'll open up - and maybe even serve you some of that delicious pie of hers!  
+**RODDY** (Encouraging): I'm sure if you talk to her she'll open up - and maybe even serve you some of that delicious pie of hers!  
   _earlier:_ ~~Thanks, Roddy. I'll need it!~~ (until 23.09.02)
 **MADDIE**: I can only hope! Thanks, Roddy. You've inspired me.  
   _earlier:_ ~~Now is as good a time as any. I need to find my grandmother so we can have a talk...~~ (until 23.09.02)
@@ -3433,15 +3462,15 @@ Every story in which Roddy speaks.
 `RoddyAndMaddieThirdConversation` · seen 22.02.06–26.07.01
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
-**—**: There's someone in the driveway. I think I know who...
+**MADDIE** (Worried): There's someone in the driveway. I think I know who...
 **RODDY** (Worried): I can see you’ve been very busy! But the more you clear, the more I can see that this place is enormous! Have you thought about calling in some help?
-**—**: It's, well, it's because of Ursula. My friend said people there are talking about her 'dangerous past' - and her arrest.
-**—**: Now that you mention it... That's a good idea. It has been a lot of work!
-**—**: Yeah, about the arrest - who exactly did you show the photo of the gold watch to?
-**—**: Uh, just people around town, like you asked me to! Maybe, you know, the police, in case it was missing.
-**—**: I see. That gold watch was the reason she was arrested, Roddy. 
-**—**: Oh no! Maddie, you must know I never meant anything bad to happen to her.
-**—**: Dress to impress, right? Let's get to it, then!
+**RODDY** (Discouraged): It's, well, it's because of Ursula. My friend said people there are talking about her 'dangerous past' - and her arrest.
+**RODDY** (Worried): Now that you mention it... That's a good idea. It has been a lot of work!
+**MADDIE** (Doubtful): Yeah, about the arrest - who exactly did you show the photo of the gold watch to?
+**RODDY** (Worried): Uh, just people around town, like you asked me to! Maybe, you know, the police, in case it was missing.
+**MADDIE** (Annoyed): I see. That gold watch was the reason she was arrested, Roddy. 
+**RODDY** (Surprised): Oh no! Maddie, you must know I never meant anything bad to happen to her.
+**MADDIE** (Doubtful): Dress to impress, right? Let's get to it, then!
 
 ### Double Date Disaster — item discovered: Chef Knives
 `SE_DoubleDateDisaster2024_Cutlery_Dialogue` · seen 25.05.01–26.07.01
@@ -3848,11 +3877,26 @@ Every story in which Roddy speaks.
 `SP_AmyTheCat2023_Decoration_Slot25_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot25, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**AMY**: Meow...
+**MADDIE** (Frustrated): Amy! No wait! Come back!
+**MADDIE** (Surprised): Aww shucks, off she goes again. Wait! Did she drop something? A goldfish?!
+**RODDY** (Surprised): Actually, that looks like a Betta Fish.
+**MADDIE** (Doubtful): Hi Roddy! Is that what it is? Well, I hope Amy hasn’t fished it out of someone’s aquarium...
+**RODDY** (Doubtful): Amy?
+**MADDIE** (Thinking): This cat I’ve seen around lately... You wouldn’t happen to know who owns her?
+**RODDY** (Thinking): Hmmm... Not really no. Maybe she’s a stray from out of town?
+**MADDIE**: Alright... Well, I gotta find this little fish a new home, fast!
 
 ### Amy's Mystery — decoration SP_AmyTheCat2023_Decoration_Slot27
 `SP_AmyTheCat2023_Decoration_Slot27_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot27, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MADDIE** (Joyous): There you go, little guy, a new home for you and your friends!
+**RODDY** (Relaxed): That’s a nice fish pond you have there, Maddie.
+**MADDIE** (Relaxed): Thanks Roddy! I’m surprised at how delicate Amy is with the fish she brings me.
+**MADDIE** (Thinking): But I’m still curious where she’s getting them from?
+**RODDY** (Thinking): Maybe she’s just a good fisher?
+**MADDIE** (Charming): Ha! No doubts there!
 
 ### Season Pass - Fluff Overload — outro
 `SP_BunnyPet2026_AllRewardsCompleted_Dialogue` · seen 26.02.01–26.07.01
@@ -4158,41 +4202,101 @@ Every story in which Roddy speaks.
 `SP_RoddysMystery2023_Decoration_Slot25_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_RoddysMystery2023_Decoration_Slot25, event=Roddy's Mystery, eventKey=SP_RoddysMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MADDIE**: Hello Roddy!
+**RODDY** (Relaxed): Oh, hi Maddie! Come to check out "Camp Wilderness"?
+**MADDIE** (Relaxed): Actually, yes! I heard you were running summer camp here this summer, and I didn't quite believe it.
+**RODDY**: Yeah, I usually run summer camp out of state, but some kids couldn't make it this year.
+**RODDY** (Thinking): So I thought, <i>Why not bring summer camp home?</i> So I uhh.. So I did! Your grandma was very generous to let me use her yard!
+**MADDIE** (Charming): That's so sweet of you!
+**RODDY** (Worried): Really? I wasn't trying to impress you or-
+**MADDIE** (Encouraging): Ha ha! It's a compliment, Roddy! 
+**RODDY** (Joyous): Oh! Ha ha! Thanks Maddie!
 
 ### Roddy's Mystery — decoration SP_RoddysMystery2023_Decoration_Slot26
 `SP_RoddysMystery2023_Decoration_Slot26_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_RoddysMystery2023_Decoration_Slot26, event=Roddy's Mystery, eventKey=SP_RoddysMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**RODDY** (Encouraging): Do you want to go canoeing, Mason?
+**MASON** (Thinking): No, not really. Unless...
+**RODDY** (Doubtful): Unless what?
+**MASON** (Joyous): Unless there's some old cursed ghost out at sea, waiting to pull us into the dark depths of the abyss!
+**RODDY** (Surprised): Gosh, I hope not! I was thinking more about seeing the wildlife and taking in the Bay view!
+**MASON** (Annoyed): Ugh, how boooring!
+**GRANDMA** (Surprised): Roddy... <b>WHERE ARE MY ROSES?!</b>
+**RODDY** (Worried): Oh, uhm.. We needed space for the canoe and... I asked the kids to move them!
 
 ### Roddy's Mystery — decoration SP_RoddysMystery2023_Decoration_Slot27
 `SP_RoddysMystery2023_Decoration_Slot27_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_RoddysMystery2023_Decoration_Slot27, event=Roddy's Mystery, eventKey=SP_RoddysMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**RODDY** (Encouraging): Isn't this fun?!
+**MASON** (Thinking): Yeah... I guess it's alright. I haven't seen any ghosts yet, though.
+**RODDY** (Charming): Oh, well, how about I tell you a spooky campfire story?
+**MASON** (Encouraging): Yeah, alright! 
+**RODDY** (Doubtful): Okay... Not so long ago, around these parts liv- wait... Did you see that?!
+**MASON** (Doubtful): See what?
+**RODDY** (Worried): Th- That! A- A GHOST!
+**MASON** (Worried): WHAT?! 
+**RODDY** (Surprised): Aaaaiiieeee!
+**MASON** (Surprised): Aaaaiiieeee!
 
 ### Roddy's Mystery — decoration SP_RoddysMystery2023_Decoration_Slot28
 `SP_RoddysMystery2023_Decoration_Slot28_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_RoddysMystery2023_Decoration_Slot28, event=Roddy's Mystery, eventKey=SP_RoddysMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MASON**: C'mon Roddy! In order to catch a ghost, we need to improve our aim!
+**RODDY** (Worried): I... I don't know about this Mason. Who is that ghost, and why are they h-haunting ME?!
+**MASON** (Frustrated): Restless spirits care not for the will of the living! We must be prepared!
+**RODDY**: ...
+**RODDY**: You're a weird kid.
 
 ### Roddy's Mystery — decoration SP_RoddysMystery2023_Decoration_Slot29
 `SP_RoddysMystery2023_Decoration_Slot29_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_RoddysMystery2023_Decoration_Slot29, event=Roddy's Mystery, eventKey=SP_RoddysMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MASON** (Encouraging): From what I've read, ghosts LOVE the attic! So if we climb in from both sides, I'm sure we can catch it!
+**RODDY** (Worried): Catch it?! No! I want it out of here!
+**GRANDMA**: Out of my home, dearie? 
+**RODDY** (Surprised): Mrs. Boulton! wh- What are you doing here?
+**GRANDMA** (Worried): I'm sorry, dearie, I believe my joke has gone a little too far!
+**RODDY** (Doubtful): JOKE?!
 
 ### Roddy's Mystery — item discovered: SP_RoddysMystery2023_CollectableItems_04
 `SP_RoddysMystery2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.09.02–26.07.01
 - trigger: item, event=Roddy's Mystery, eventKey=SP_RoddysMystery2023, itemKeys=['SP_RoddysMystery2023_CollectableItems_04'], items=['SP_RoddysMystery2023_CollectableItems_04'], moment=item discovered (versions 23.09.02–26.07.01)
 
+**RODDY** (Relaxed): Well done, Mason! You've gotten almost all the merit badges!
+**RODDY**: Although... I don't quite recognize this last one...
+**MASON** (Encouraging): Oh that? It's my own design! For ghost hunting!
+**RODDY** (Worried): Gh- Ghosts? What are you talking about? 
+**MASON** (Surprised): Don't you know? They say the Mansion is haunted! 
+**MASON** (Joyous): And I'm here to catch some ghosts!
 
 ### Spring Season — decoration SP_SpringSeason2023_Decoration_25
 `SP_SpringSeason2023_Decoration_25_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_SpringSeason2023_Decoration_25, event=Spring Season, eventKey=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MADDIE** (Relaxed): These kites are really beautiful and creative!
+**MADDIE** (Relaxed): Is that a pie?! Who knew pies could fly?
+**RODDY** (Relaxed): Actually, a pie tin was used to make the first-
+**JACKIE** (Annoyed): Roddy!? RODDY!? Are you hiding from me again? We need to work on this kite!
+**RODDY** (Surprised): Oh no, she found me! You've got to help me... She's crazy! I've drawn up four different schematics already!
+**MADDIE** (Encouraging): Oh, come on Roddy, give her a chance! I'm sure you two will get along eventually?
+**JACKIE** (Annoyed): There you are! Roddy, we need to work together! Nothing will get done if you stroll about in the yard!
+**MADDIE** (Discouraged): ...Or not.
 
 ### Spring Season — decoration SP_SpringSeason2023_Decoration_26
 `SP_SpringSeason2023_Decoration_26_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_SpringSeason2023_Decoration_26, event=Spring Season, eventKey=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**JACKIE** (Thinking): I think the length of the tail should be longer.
+**RODDY** (Thinking): Wouldn't be realistic, what if we make the supports wider?
+**JACKIE** (Encouraging): Good idea!
+**MADDIE** (Charming): Aaaw, look at you two getting along!
+**MASON** (Doubtful): They're not...
+**MADDIE** (Surprised): Mason?!
+**MASON** (Encouraging): Yep. I'm actually building the kite for the both of them. They refuse to talk to each other.
+**MADDIE** (Annoyed): At least that's something they have in common...
 
 ### SP StrayBonesMystery2024 LayerDecoration 01 Dialogue
 `SP_StrayBonesMystery2024_LayerDecoration_01_Dialogue` · seen 25.05.01–26.07.01
@@ -4494,7 +4598,7 @@ Every story in which Roddy speaks.
 **MADDIE** (Worried): You think they were trying to protect themselves?
 **RODDY** (Relaxed): Probably... Hopefully.
 **MADDIE** (Discouraged): This must be the stuff in the “antidote” vials in the medicine cabinet, right? Don’t worry.
-**—**: Yeah... Okay.
+**MADDIE** (Discouraged): Yeah... Okay.
 
 ### Spy Room: Remove sheet
 `SpyRoom_06` · seen 26.02.01–26.07.01
@@ -4515,7 +4619,7 @@ Every story in which Roddy speaks.
 **MADDIE** (Encouraging): Haha! And what would be your codename? Double oh negative?
 **RODDY** (Frustrated): It’s double oh -oh nevermind!
 **MADDIE** (Relaxed): I’m just teasing, Roddy! So, super spy, what are our codenames?  
-  _earlier:_ ~~I’m just teasing Roddy! So, super spy, what’s our codenames?~~ (until 26.02.01)
+  _(1 cosmetic edit not shown)_
 **RODDY** (Encouraging): Well, I was thinking... “The Architect” and you could be-
 **MADDIE**: *Ring Ring*
 **MADDIE** (Calling): Hold on a sec, someone’s calling.
@@ -4533,7 +4637,7 @@ Every story in which Roddy speaks.
 **ARTHUR** (Relaxed): It was just like old times, remember?
 **MADDIE** (Talking): Yeah... I do!
 **ARTHUR** (Charming): Right? That’s why I was thinking we should do it again! I’ll let you pick the spot this time!  
-  _earlier:_ ~~Riight? That’s why I was thinking we should do it again! I’ll let you pick the spot this time!~~ (until 26.02.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Talking): Arthur, I-
 **ARTHUR**: No, just kidding! I booked us a table at that nice little fusion restaurant that you loved!
 **MADDIE** (Talking): Arthur! That’s out of state! I-
@@ -4597,7 +4701,7 @@ Every story in which Roddy speaks.
 **MADDIE** (Doubtful): This mansion sure loves its hidden doors...  
   _earlier:_ ~~This mansion sure loves its secret bars...~~ (until 26.02.01)
 **RODDY** (Charming): Want a drink? I know a fitting mocktail!  
-  _earlier:_ ~~Want a drink? I know a fitting cocktail?~~ (until 26.02.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Relaxed): Let me guess...
 **MADDIE** (Encouraging): Shaken, not stirred?
 **RODDY** (Relaxed): Is there any other way?
@@ -4667,12 +4771,12 @@ Every story in which Roddy speaks.
 **RODDY** (Thinking): You mean who your grandparents were working for and what their mission was?
 **MADDIE** (Doubtful): Yeah, and I’m pretty sure if I’d asked Grandma about it, she probably would have denied it.
 **RODDY** (Charming): She wouldn’t be a good spy if she didn’t!  
-  _earlier:_ ~~She wouldn’t be a good spy if she wouldn’t!~~ (until 26.02.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Thinking): Good point! Wait...
 **MADDIE** (Surprised): Do you think she’s STILL working as a spy?
 **RODDY** (Thinking): I... I don’t know. That research on the antidote looked somewhat fresh.
 **MADDIE** (Thinking): True... But at least it’s an antidote and not a poison. I just need to trust her on this.  
-  _earlier:_ ~~True... But at least it’s an antidote and not a poison. I just need to trust her in this.~~ (until 26.02.01)
+  _(1 cosmetic edit not shown)_
 **RODDY** (Discouraged): ...
 **RODDY** (Doubtful): Maddie. I couldn't help but overhear a bit of your conversation with Arthur.
 **RODDY** (Annoyed): And... You shouldn’t trust him. He’s bad news. You know this.
@@ -4696,9 +4800,9 @@ Every story in which Roddy speaks.
 **MADDIE** (Relaxed): That lily ornament we used to enter, I'm more convinced now that it could be Grandma's alias!  
   _earlier:_ ~~That’s Grandma’s favourite flower! Something Grandpa always gave her.~~ (until 26.02.01)
 **RODDY** (Thinking): Then I guess this other flower would represent your grandfather?  
-  _earlier:_ ~~Then I guess this other one would represent your grandfather?~~ (until 26.02.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE**: I... I think so! I guess it means that whatever is in here was important to both of them.  
-  _earlier:_ ~~I... I think so! I guess it means that whatever is in there was important to both of them.~~ (until 26.02.01)
+  _(1 cosmetic edit not shown)_
 **RODDY** (Relaxed): Let's take a closer look...  
   _earlier:_ ~~Wanna go find out?~~ (until 26.02.01)
 
@@ -4744,21 +4848,48 @@ Every story in which Roddy speaks.
 `Valentine2022Decoration1` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**RODDY** (Relaxed): Your decorations make me wish every day was Valentine’s Day!
+**MADDIE**: Thanks! Maybe your wish will come true when you find a valentine for life!
+**RODDY** (Charming): I think I have found her, Maddie…
+**MADDIE** (Charming): That’s lovely! Do I know the lucky girl?
+**RODDY** (Encouraging): Oh, haha! Yes, you do! You know her very well, because she--
+**MADDIE** (Surprised): Sorry Roddy, but WHAT is grandma doing THERE?! I gotta go!!
 
 ### Valentine2022Decoration10
 `Valentine2022Decoration10` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**RODDY** (Charming): Roses are red, violets are blue…
+**MADDIE**: …flowers are sweet and they brighten up my mood!
+**RODDY** (Encouraging): That’s… a great version too!
+**MADDIE** (Joyous): I’m not sure if I love anything more than flowers!
+**RODDY** (Charming): Maybe one day!
 
 ### Valentine2022Decoration14
 `Valentine2022Decoration14` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**RODDY**: Hi Maddie! I would need some directions…
+**MADDIE** (Thinking): Directions? To where?
+**RODDY** (Encouraging): To your heart!
+**MADDIE** (Surprised): WHAT??
+**RODDY** (Charming): JOKING! I was joking, of course… Sorry!
+**MADDIE** (Thinking): Oh, I thought you would really--
+**MADDIE**: Well, I’ll go check on grandma. See you around!
+**RODDY** (Frustrated): Damn! I really messed that one up, didn’t I…
 
 ### Valentine2022Decoration9
 `Valentine2022Decoration9` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE** (Joyous): Love is in the air!
+**RODDY** (Relaxed): Wow! Beautiful heart-shaped balloons, Maddie!
+**MADDIE**: Thank you! Do you want one?
+**RODDY** (Encouraging): Oh, I didn’t expect to find my way to your heart like this!
+**MADDIE** (Surprised): WHAT??
+**RODDY** (Surprised): Oh, I meant---
+**RODDY** (Charming): I meant I gladly accept one balloon from you, my friend and friend only.
+**MADDIE** (Thinking): Sometimes you’re hard to read, Roddy…
 
 ### WalkInCloset 14
 `WalkInCloset_14` · seen 26.02.01–26.07.01
@@ -4835,13 +4966,30 @@ Every story in which Roddy speaks.
 `Xmas2021Decoration1` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**RODDY** (Relaxed): Who’s this fella, Maddie? Your new boyfriend?
+**MADDIE** (Thinking): Roddy, you know I’m still dating Mr. A.
+**RODDY** (Surprised): Mr. A? Who... I didn’t know that you--
+**MADDIE** (Charming): Just kidding!! I’ve always preferred cool guys like... these two.
+**RODDY** (Charming): Haha… Ok, well I'd better go build one for myself too!
 
 ### Xmas2021Decoration4
 `Xmas2021Decoration4` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE** (Joyous): Christmas lights, Christmas vibes!
+**RODDY** (Relaxed): Those lanterns also make a nice runway for Santa’s sleigh.
+**MADDIE**: That’s true! Did you wish for something special from Santa this year?
+**RODDY** (Charming): I guess my only wish is an impossible one. Even for Santa.
+**MADDIE** (Thinking): Really? What can be so hard to get?
 
 ### Xmas2021Decoration7
 `Xmas2021Decoration7` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**RODDY** (Relaxed): Impressive Christmas tree decorations, Maddie!
+**MADDIE** (Charming): Thank you! Do you already have a Christmas tree at your place?
+**RODDY** (Encouraging): Not yet! But I definitely should get one!
+**RODDY** (Charming): Although I have no one to dance around it with...
+**MADDIE**: I’m sure you’ll find a dancing partner before Christmas!
+**RODDY** (Charming): Yes, well… I was thinking that maybe--
+**MADDIE** (Frustrated): Oh I forgot to water the spruce! Where was that watering can again...

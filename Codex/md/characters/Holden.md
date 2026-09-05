@@ -78,12 +78,12 @@ Every story in which Holden speaks.
 
 **MADDIE** (Surprised): Holden? What are you doing up here?
 **HOLDEN** (Worried): Oh... Maddie. I thought you were still busy renovating the factory.  
-  _earlier:_ ~~Oh...Maddie. I thought you were still busy renovating the factory.~~ (until 26.05.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE**: Nope, I came up here to see to the first floor. The factory can wait.
 **HOLDEN**: Hmm. Well. The article was a great success. Now my readers are ravenous for more salacious Boulton secrets.
 **MADDIE** (Annoyed): Wait - what? I thought you were just covering the renovation! What secrets?
 **HOLDEN** (Charming): I'm a journalist! I have integrity! I had to include a bit of background. Such as... who their daughter was.  
-  _earlier:_ ~~I'm a journalist! I have integrity! I had to include a bit of background. Such as...who their daughter was.~~ (until 26.05.01)
+  _(1 cosmetic edit not shown)_
 
 ### The Hallway of Curiosities: Share tools
 `FirstFloorHallway_CharacterTask2` · seen 26.05.01–26.07.01
@@ -130,7 +130,7 @@ Every story in which Holden speaks.
 **HOLDEN** (Charming): Freelance, of course. If you think you can find something in all of this, get in touch. You have my number.
 **MADDIE** (Frustrated): I....don't....uh. Great. He's gone. Now what am I supposed to do with all of this stuff...
 **MADDIE** (Encouraging): Hmm. Well, this is solid research, despite everything. Maybe there really is something here about Edward?
-**—**: Once I'm done with the rest of the room, I'll take a second look!
+**MADDIE** (Joyous): Once I'm done with the rest of the room, I'll take a second look!
 
 ### Landing Room: Discourage Holden
 `Holdencharactertask1` · seen 24.04.01–26.07.01
@@ -332,7 +332,7 @@ Every story in which Holden speaks.
 **JACKIE** (Annoyed): Ugh. Ignore him! I think you found the last clue, so it's time to go back to the pool house.
 **MADDIE**: Okay, here we are! We have all the letters in Grandpa's code, and we're at the right place - the pool house. Let's try and see if that code opens the safe.
 **JACKIE** (Thinking): So you found the letters 'R4U5L' - will they work as the code?
-**—**: Uh, nope, that didn't work. It could be... oh! I know what it is - R5UL4! Ursula!
+**JACKIE** (Surprised): Uh, nope, that didn't work. It could be... oh! I know what it is - R5UL4! Ursula!
 
 ### Study02
 `Study02` · seen 23.09.02–26.07.01

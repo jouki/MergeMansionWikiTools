@@ -130,6 +130,7 @@ Every story in which Pearl speaks.
   _earlier:_ ~~There's a lot of good stuff here... I wonder who packed this bag?~~ (until 25.10.01)
 **PEARL** (Doubtful): Are we hiking all the way to the North Pole?  
   _earlier:_ ~~I owe them a big thanks, because it has everything I need for a day outdoors.~~ (until 25.10.01)
+**MADDIE** (Relaxed): The only thing that's missing is the snacks!
 
 ### Frosty Secrets — item discovered: Cabin Diary
 `CBE_FrostySecrets2024_CabinCodex_03_Dialogue` · seen 25.05.01–26.07.01
@@ -175,6 +176,7 @@ Every story in which Pearl speaks.
   _earlier:_ ~~It's so quiet and peaceful!~~ (until 25.10.01)
 **PEARL** (Encouraging): Oh, yeah! You’re missing some cobwebs and the overgrown garden, but it’s pretty close.  
   _earlier:_ ~~Sometimes I forget what a crazy adventure I'm on with the Mansion and all of its secrets...~~ (until 25.10.01)
+**MADDIE** (Relaxed): It wasn't in my original five-year plan, that's for sure!
 
 ### Frosty Secrets — item discovered: Broken Heart
 `CBE_FrostySecrets2024_IceSculptures_09_Dialogue` · seen 25.05.01–26.07.01
@@ -222,6 +224,8 @@ Every story in which Pearl speaks.
   _earlier:_ ~~I never went there with him. I don't even know its exact location.~~ (until 25.10.01)
 **MADDIE** (Encouraging): Well, I didn’t want to spoil the surprise - it’s part of the full winter experience package!  
   _earlier:_ ~~Everything was still there, in perfect order. He clearly intended to go back but never did.~~ (until 25.10.01)
+**MADDIE** (Doubtful): What happened to him, Grandma?
+**GRANDMA** (Relaxed): That's enough secrets for one day, dearie. I... I will tell you one day, but let's try that apple pie.
 
 ### Frosty Secrets — item discovered: Winter Shed
 `CBE_FrostySecrets2024_Shed_Dialogue` · seen 25.05.01–26.07.01
@@ -656,7 +660,7 @@ Every story in which Pearl speaks.
 **MADDIE** (Doubtful): ... What’s a topiary?
 **DEB** (Encouraging): Sweetie, why it’s the age old tradition of shaping and trimming shrubs into wonderful pieces of art!
 **MADDIE** (Joyous): Really?! I’m great at that! I’ve had A LOT of practice on the Mansion grounds.  
-  _earlier:_ ~~Really?! I’m great at that! I’ve had A LOT practice on the Mansion grounds.~~ (until 25.10.01)
+  _(1 cosmetic edit not shown)_
 **DEB** (Annoyed): Sweetie, it takes years of practice to become a topiary artist!
 **MADDIE** (Thinking): Doesn’t seem that hard to me.
 **DEB** (Doubtful): Oh really? How about a friendly competition then?
@@ -670,7 +674,7 @@ Every story in which Pearl speaks.
 - trigger: event, event=The Great Bake-off, eventId=LBE_May2023, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–26.07.01)
 
 **PEARL** (Encouraging): Welcome, everyone, to Hopewell Bay's great bake-off! Let's meet our contestants!   
-  _earlier:_ ~~Welcome, everyone, to Hopewell Bay's great bakeoff! Let's meet our contestants! ~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 **PEARL** (Encouraging): First off, we have Jackie, our resident reporter for the Boulton Bugle.
 **JACKIE** (Encouraging): Thank you, Pearl, for planning this event again! May the best baker win!
 **PEARL** (Encouraging): Next, we have Maddie, who's been busy renovating the mansion!
@@ -685,7 +689,7 @@ Every story in which Pearl speaks.
 **HEIKKI** (Joyous): Hello! Huh, sorry for being late! I had to use my head as a third leg!
 **PEARL** (Thinking): Wh- What? 
 **PEARL** (Encouraging): Anyway, let the great bake-off begin!  
-  _earlier:_ ~~Anyway, let the great bakeoff begin!~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 
 ### The Great Bake-off — event end
 `LBE_May2023Outro` · seen 24.04.01–26.07.01
@@ -714,7 +718,7 @@ Every story in which Pearl speaks.
 **MADDIE**: What a weird cup!
 **PEARL** (Thinking): Oh, it's a guksi - a type of duodji used by the Sami people!
 **MADDIE** (Thinking): Right... How do you know that?
-**—**: I love reading encyclopedias!
+**MADDIE** (Thinking): I love reading encyclopedias!
 
 ### Love on the Vine — entering board
 `LDE_Hopeberry2024_BoardIntro_Dialogue` · seen 24.04.01–26.07.01
@@ -799,12 +803,12 @@ Every story in which Pearl speaks.
 - trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Brochures_03'], items=['Small Circus Program'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Thinking): We need to think of an act that will really stop people in their tracks. Like...  
-  _earlier:_ ~~Have you seen Fiona anywhere?~~ (until 25.09.01); ~~We need to think of an act that will really stop people in their tracks. Like…~~ (until 25.10.01)
+  _earlier:_ ~~Have you seen Fiona anywhere?~~ (until 25.09.01)
 **MASON** (Joyous): A knife wheel!  
   _earlier:_ ~~She said she was going to the dress rehearsal, but I can't find her anywhere.~~ (until 25.09.01)
 **HANK** (Thinking): That sounds... dangerous.  
-  _earlier:_ ~~I ran out of circus brochures, but I know I saw more of them somewhere.~~ (until 25.09.01); ~~That sounds… dangerous.~~ (until 25.10.01)
-**—**: No, haven't seen her... She's probably just getting ready for the show.
+  _earlier:_ ~~I ran out of circus brochures, but I know I saw more of them somewhere.~~ (until 25.09.01)
+**HANK** (Thinking): No, haven't seen her... She's probably just getting ready for the show.
 **MADDIE**: Of course. But I don't want to disturb her...
 **PEARL** (Doubtful): I'm sure she won't mind if you get more brochures from her wagon.
 
@@ -1080,7 +1084,7 @@ Every story in which Pearl speaks.
 **PEARL** (Doubtful): Hello, mom.
 **MADDIE** (Hesitant): Eeh, so you heard, huh?
 **PEARL** (Annoyed): To be brutally honest, you’ve been more of a mom to him than Charlotte lately.  
-  _earlier:_ ~~To be brutally honest, you’ve been more of a mom to her than Charlotte lately.~~ (until 25.10.01)
+  _(1 cosmetic edit not shown)_
 **PEARL** (Encouraging): So I’ll let it pass.
 **MADDIE** (Encouraging): Pearl, you shouldn’t be too hard on her.
 **MADDIE** (Thinking): While I don’t know her, I can’t help but feel she has a very good reason she couldn’t make it.

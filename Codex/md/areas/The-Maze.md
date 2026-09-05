@@ -58,7 +58,7 @@
 **DEB** (Charming): I'm here to look after my sister, of course. I read all about her thrilling brush with the law.
 **DEB** (Charming): And Julius, so good to see you. But you're so happy to see me that you're crying? Delightful.
 **ANTIQUEDEALER** (Surprised): It's my ACHOO allergies! And I really must be going. Goodbye, Deborah.
-**—**: He always was a sensitive one. Just us girls now, huh Maddie? You can catch me up on things.
+**ANTIQUEDEALER** (Surprised): He always was a sensitive one. Just us girls now, huh Maddie? You can catch me up on things.
 **DEB**: He always was a sensitive one. Just us girls now, huh Maddie? You can catch me up on things.
 **MADDIE**: Uh, okay! I'm just going around the maze. You can join me if you like.
 
@@ -106,7 +106,7 @@
 - trigger: area, area=The Maze, areaId=Maze, hotspotId=MazeFountainGatePlaceGrowVine_B5, phase=task completed, task=Plant vines (versions 25.04.03–26.07.01)
 
 **RODDY** (Charming): Hi, Maddie! Nice maze. Looks like a good place to, uh, spend some time getting lost together...  
-  _earlier:_ ~~Hi Maddie! Nice maze. Looks like a good place to, uh, spend some time getting lost together...~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Discouraged): Huh? I guess so, but I'm here to figure out what this new quest my grandpa sent me on is!
 **RODDY** (Thinking): New quest? What do you mean?
 **MADDIE** (Surprised): I found a notebook at the end of my grandpa's scavenger hunt, and now I'm trying to decode what it all means.

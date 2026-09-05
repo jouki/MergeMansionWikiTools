@@ -7,6 +7,7 @@ import sys
 sys.path.insert(0, os.path.dirname(__file__))
 import common  # noqa: E402
 import render_md  # noqa: E402
+import reruns  # noqa: E402
 
 
 def adapt(codex):
@@ -21,7 +22,9 @@ def adapt(codex):
             sp = render_md.latest(l.get("speaker") or [])
             st = render_md.latest(l.get("state") or [])
             texts = [r for r in (l.get("text") or []) if r["value"] not in (None, "")]
-            changes = [{"version": q["from"], "from": p["value"], "to": q["value"]} for p, q in zip(texts[:-1], texts[1:])]
+            # each rewording is classified: cosmetic (typo/punctuation/markup, >= 90 % similar) or rewritten
+            changes = [{"version": q["from"], "from": p["value"], "to": q["value"], "kind": reruns.classify_change(p["value"], q["value"])}
+                       for p, q in zip(texts[:-1], texts[1:]) if reruns.norm(p["value"]) != reruns.norm(q["value"])]
             lines.append({"id": lid, "speaker": sp, "speakerName": chars.get(sp, {}).get("name", sp) if sp else None,
                           "state": st if st and st not in ("Default", "NoChange") else None, "text": render_md.latest(l.get("text") or []) or "",
                           "changes": changes, "firstSeen": (l.get("seen") or {}).get("first")})

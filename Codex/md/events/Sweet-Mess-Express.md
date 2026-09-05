@@ -45,7 +45,7 @@
 **RODDY** (Discouraged): Well... you could say we did have one TEENY little mishap…
 **MADDIE** (Surprised): A teeny mishap? These chocolates are HUGE!
 **MADDIE** (Doubtful): What did you do?!  
-  _earlier:_ ~~What did you do??~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 
 ### Sweet Mess Express — item discovered: Grandma
 `CBE_SweetMess_Character_05_Dialogue` · seen 26.03.01–26.07.01
@@ -108,7 +108,7 @@
 **RODDY** (Surprised): You broke Maddie’s machine with the ceramic bunny!
 **HANK** (Surprised): You didn't catch it even though I gave you a heads-up!
 **RODDY** (Discouraged): It doesn't matter who broke the machine. The question is: What do we do now?!  
-  _earlier:_ ~~It doesn't matter who broke the machine. The question is: What do we do now??~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **HANK** (Thinking): You want to go ask Ursula for help?
 **RODDY** (Worried): Errr...
 **HANK** (Thinking): Maddie said to tell her if anything happens.
@@ -169,7 +169,7 @@
 
 **MADDIE** (Thinking): This Easter Extravaganza looks pretty cool, but what about the chocolate machine?
 **MADDIE** (Thinking): The main tank needs to be refilled regularly, and someone needs to supervise the quality.  
-  _earlier:_ ~~The main tank needs to refilled regularly, and someone needs to supervise the quality.~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **MASON** (Thinking): Easy! We can ask Roddy and Hank to babysit.
 **MADDIE** (Worried): Hmmm, I don't know about that...
 **MASON** (Encouraging): They might be hopeless with buttons, but they’re grown-ups, they mean well, and between the two of them they can at least keep the chocolate inside the machine.

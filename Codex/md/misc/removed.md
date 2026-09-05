@@ -5,189 +5,355 @@ Present in an older version, absent from the current one.
 `CBE_Easter2025_BrokenMachine_05_Dialogue` · seen 25.05.01–26.03.01
 - trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_BrokenMachine_05'], items=['Spilled Chocolate'], moment=item discovered (versions 25.05.01–26.03.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE**: Roddy, do you have a second?
+**RODDY** (Ready): Sure! How can I help?
+**MADDIE** (Thinking): A flux anomaly in the cocoa particle suspension matrix disrupts the harmonic shear resonance of the tempering coils, causing unpredictable high-velocity chocolate ejection events.
+**RODDY** (Thinking): S-say what?
+**MADDIE** (Relaxed): I think I know how to fix it. Can you just hold a couple of things for a minute?
+**MADDIE** (Relaxed): It shouldn't take long, just a little twist and a minor push...
+**MADDIE** (Surprised): Whoooops!
+**MADDIE** (Hesitant): Roddy! Are you OK?
+**RODDY** (Surprised): W-what happened?
+**MASON** (Joyous): Cool! A chocolate Roddy!
 
 ### Easter 2025 — item discovered: Tin Can
 `CBE_Easter2025_Can_01_Dialogue` · seen 25.05.01–26.03.01
 - trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Can_01'], items=['Tin Can'], moment=item discovered (versions 25.05.01–26.03.01)
 
-_Referenced by the game, but no lines matched this id._
+**MASON** (Charming): Did you make this lollipop? Did you REALLY?
+**MADDIE** (Encouraging): Yep! With the brand new candy machine I just built!
+**MASON** (Surprised): You BUILT a candy machine?! That's my greatest dream!
+**MADDIE** (Relaxed): I used Ignatius Boulton's old drawings - remember, the ones found in the old tin can factory?
+**MASON** (Thinking): Oh yeah! I found more of those in some of the tin cans left lying around.
+**MADDIE** (Surprised): Do you still have them?
+**MASON** (Joyous): Of course! I'll get them for you right now! Maybe you can build even more cool machines.
+**MASON** (Joyous): Maybe a toffee machine! Ooh, or a cake machine!
+**MADDIE** (Encouraging): I'll see what I can do.
 
 ### Easter 2025 — item discovered: Candy Machine Turning
 `CBE_Easter2025_CandyMachineProducing_01_Dialogue` · seen 25.05.01–26.03.01
 - trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_CandyMachineProducing_01'], items=['Candy Machine Turning'], moment=item discovered (versions 25.05.01–26.03.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Relaxed): My candy machine is ready! I wonder what Ignatius would think about it.
+**MADDIE** (Relaxed): His blueprints were so detailed and full of cool little innovations. He was really ahead of his time.
+**MADDIE** (Encouraging): I guess inventing really does run in the family!
+**MADDIE** (Thinking): Let's see if this little gizmo does what it's supposed to.
+**MADDIE** (Thinking): First, I just need to add the sugar syrup and hope for the best.
 
 ### Easter 2025 — item discovered: Mason
 `CBE_Easter2025_Character_01_Dialogue` · seen 25.05.01–26.03.01
 - trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Character1_01'], items=['Mason'], moment=item discovered (versions 25.05.01–26.03.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Thinking): Mason, you know how I promised you chocolates?
+**MASON** (Charming): Yeah?
+**MADDIE** (Relaxed): What do you think about lollipops?
+**MASON** (Joyous): I LOVE lollipops!
+**MADDIE** (Relaxed): That's what I thought.
 
 ### Easter 2025 — item discovered: Cherry
 `CBE_Easter2025_Character_02_Dialogue` · seen 25.05.01–26.03.01
 - trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Character2_01'], items=['Cherry'], moment=item discovered (versions 25.05.01–26.03.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Joyous): Cherry, you're just the person I was looking for!
+**CHERRY**: What I can do for you, Maddie?
+**CHERRY** (Encouraging): Are you looking for a delicious dessert or maybe some advice? Are you baking something?
+**MADDIE** (Thinking): I'm trying to get everything ready for the big egg hunt. I just don't have all the ingredients I think I need.
+**MADDIE** (Thinking): Could I maybe borrow a cup - or ten - of sugar?
+**CHERRY** (Thinking): Sure thing!
+**CHERRY**: What are you making anyway?
+**MADDIE** (Hesitant): Just candy, chocolates and cakes.
+**CHERRY** (Surprised): Then you'll need more than just sugar!
 
 ### Easter 2025 — item discovered: Roddy
 `CBE_Easter2025_Character_03_Dialogue` · seen 25.05.01–26.03.01
 - trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Character3_01'], items=['Roddy'], moment=item discovered (versions 25.05.01–26.03.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Discouraged): Roddy, I totally forgot about the epic egg hunt I promised to organize for Mason!
+**RODDY** (Surprised): Oh, crud! He's been talking about it non-stop for weeks.
+**MADDIE** (Frustrated): I know! I had an idea to build a machine to make chocolates and other treats.
+**MADDIE** (Frustrated): I've got some old blueprints and a lot of parts, but there's so much to do.
+**RODDY** (Thinking): Wow! Is there anything I can do to help?
+**RODDY** (Charming): I know I'm not exactly an engineer, but I'm pretty good at reading blueprints.
+**MADDIE** (Worried): Would you really help?
+**RODDY** (Relaxed): On one condition - I want my share of the chocolates.
+**MADDIE** (Relaxed): Deal!
 
 ### Easter 2025 — item discovered: Grandma
 `CBE_Easter2025_Character_04_Dialogue` · seen 25.05.01–26.03.01
 - trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Character5_01'], items=['Grandma'], moment=item discovered (versions 25.05.01–26.03.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: Are your chocolates ready?
+**MADDIE**: Almost! I developed an auxiliary system for the glazing and it's turning out great stuff.
+**GRANDMA** (Charming): I suppose you will build a cake machine next!
+**MADDIE** (Thinking): Hmmm...
+**GRANDMA** (Surprised): I was only joking, dearie!
+**MADDIE** (Encouraging): Why not? I already built a candy machine AND a chocolate machine, so why not a cake machine, too?
 
 ### Easter 2025 — item discovered: Maddie
 `CBE_Easter2025_Character_05_Dialogue` · seen 25.05.01–26.03.01
 - trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Character4_01'], items=['Maddie'], moment=item discovered (versions 25.05.01–26.03.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Frustrated): Phew, inventing is hard work, and there are so many little details to take care of!
+**MADDIE** (Worried): Looking at Ignatius' blueprints and notes, it looks like he always worked alone.
+**MADDIE** (Worried): He was successful and made a lot of money, but I guess he must have been pretty lonely...
+**MADDIE** (Relaxed): I'm so glad I've got friends I can ask for help.
+**MADDIE** (Relaxed): This whole egg hunt is the perfect way to say thank you!
 
 ### Easter 2025 — item discovered: Chocolate Machine Melting
 `CBE_Easter2025_ChocoMachineProducing_Dialogue` · seen 25.05.01–26.03.01
 - trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_ChocoMachineProducing_01'], items=['Chocolate Machine Melting'], moment=item discovered (versions 25.05.01–26.03.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Joyous): We're in business!
+**GRANDMA** (Charming): What an impressive contraption! A chocolate machine, I presume?
+**MADDIE** (Relaxed): You presume correctly. What do you think?
+**GRANDMA** (Thinking): Are those parts from Ignatius' old machine?
+**MADDIE** (Thinking): Yes... I did borrow a couple of nuts and bolts... and hoses and levers... but it all runs great, I guarantee it.
+**GRANDMA** (Relaxed): I am sure! So, what recipe are you going to use for the chocolates?
+**MADDIE** (Surprised): Recipe?
+**GRANDMA** (Joyous): You need a recipe to make chocolates, dearie.
+**MADDIE** (Thinking): That does make sense...
+**GRANDMA**: I think I can help. Let's get the old family recipe book.
+**GRANDMA**: If I remember correctly, Agatha - that's Ignatius's wife - had a good recipe for chocolates.
+**GRANDMA** (Charming): It was quite... special!
 
 ### Easter 2025 — item discovered: Cabinet
 `CBE_Easter2025_Cupboard_01_Dialogue` · seen 25.05.01–26.03.01
 - trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Cupboard_01'], items=['Cabinet'], moment=item discovered (versions 25.05.01–26.03.01)
 
-_Referenced by the game, but no lines matched this id._
+**MASON** (Encouraging): I can't believe you built these machines to make candy and chocolates and... all kinds of treats!
+**MASON** (Encouraging): I couldn't imagine anything better, honestly!
+**MASON** (Charming): Is there anything I can do to repay you? I'll do anything!
+**MADDIE** (Charming): Anything?
+**MASON**: Anything!
+**MADDIE** (Relaxed): There is one thing...
+**MASON**: What?
+**MASON** (Worried): You don't mean...
+**MADDIE** (Joyous): Can you wear your bunny costume?
+**MASON** (Annoyed): *Sigh*
+**MASON** (Annoyed): Okay, I'll wear it.
 
 ### Easter 2025 — decoration CBE_Easter2025_Decoration_Slot07
 `CBE_Easter2025_Decoration_Slot07_Dialogue` · seen 25.05.01–26.03.01
 - trigger: decoration, decoration=CBE_Easter2025_Decoration_Slot07, event=Easter 2025, eventKey=CBE_Easter2025, moment=decoration placed (versions 25.05.01–26.03.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Thinking): I wonder what else Ignatius' old blueprints could build.
+**MADDIE** (Thinking): His inventions were so progressive, and I sense he never got quite as far as he wanted.
+**MADDIE** (Thinking): There's still something more to discover and invent...
+**MADDIE** (Relaxed): Well, at least the egg hunt was saved and Mason is happy!
 
 ### Easter 2025 — decoration CBE_Easter2025_Decoration_Slot10
 `CBE_Easter2025_Decoration_Slot10_Dialogue` · seen 25.05.01–26.03.01
 - trigger: decoration, decoration=CBE_Easter2025_Decoration_Slot10, event=Easter 2025, eventKey=CBE_Easter2025, moment=decoration placed (versions 25.05.01–26.03.01)
 
-_Referenced by the game, but no lines matched this id._
+**MASON** (Annoyed): I can't believe I had to put this costume on again...
+**MASON** (Annoyed): Next year, someone else can wear it, because I'm not dressing up like a bunny AGAIN! I'm just too old and cool...
+**MASON** (Annoyed): And no one else has to get dressed up for the egg hunt!
+**MASON** (Thinking): Oh, I was wrong!
+**MASON** (Thinking): Your costume is WAY better than mine!
 
 ### Easter 2025 — decoration CBE_Easter2025_Decoration_Slot14
 `CBE_Easter2025_Decoration_Slot14_Dialogue` · seen 25.05.01–26.03.01
 - trigger: decoration, decoration=CBE_Easter2025_Decoration_Slot14, event=Easter 2025, eventKey=CBE_Easter2025, moment=decoration placed (versions 25.05.01–26.03.01)
 
-_Referenced by the game, but no lines matched this id._
+**ANTIQUEDEALER**: You know, Agatha and Ignatius always organized an annual egg hunt on the Mansion grounds.
+**MADDIE** (Surprised): Did they? I never knew that!
+**ANTIQUEDEALER** (Charming): Oh, yes! It is written into the annals of the Boultons' history.
+**ANTIQUEDEALER** (Charming): Agatha had a particular recipe for her chocolate treats, that was very popular! All the children from the town would come and have a great time.
+**MADDIE** (Relaxed): Did you ever go, Julius?
+**ANTIQUEDEALER** (Annoyed): Ha-ha, very funny. I am not quite that old, my dear!
 
 ### Easter 2025 — item discovered: Garden Bunny
 `CBE_Easter2025_EasterDecorations_04_Dialogue` · seen 25.05.01–26.03.01
 - trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Decos_04'], items=['Garden Bunny'], moment=item discovered (versions 25.05.01–26.03.01)
 
-_Referenced by the game, but no lines matched this id._
+**PEARL**: Mason?
+**PEARL** (Doubtful): Come out already. We have to take a photo of you in your costume!
+**MASON** (Annoyed): I'd prefer it if you didn't.
+**PEARL** (Encouraging): Please? Pleeeeeease?
+**MASON** (Thinking): Fine. I can't help my cuteness!
 
 ### Easter 2025 — item discovered: Easter Arrangement
 `CBE_Easter2025_EasterDecorations_06_Dialogue` · seen 25.05.01–26.03.01
 - trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Decos_06'], items=['Easter Arrangement'], moment=item discovered (versions 25.05.01–26.03.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Thinking): I think everything is finally ready for the egg hunt!
+**MADDIE** (Thinking): We have candy, we have chocolates, we have cakes, we have...
+**MADDIE** (Surprised): Painted eggs! I knew I'd forgotten something!
 
 ### Easter 2025 — item discovered: Creative Treats
 `CBE_Easter2025_EasterEggs_05_Dialogue` · seen 25.05.01–26.03.01
 - trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Eggs_05'], items=['Creative Treats'], moment=item discovered (versions 25.05.01–26.03.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Worried): Grandma, I need you!
+**GRANDMA** (Surprised): What is it, dearie? The chocolate machine didn't blow up, did it?
+**MADDIE** (Thinking): No... the chocolate machine is fine, but I'm in serious trouble. I forgot to paint the eggs for the egg hunt!
+**MADDIE** (Thinking): Could you help me? I got so carried away with the old blueprints and the machines.
+**MADDIE** (Frustrated): I still need to wrap the lollipops and fix a cylinder on the candy machine and...
+**GRANDMA** (Encouraging): Don't worry about the eggs. I will take care of everything!
 
 ### Easter 2025 — item discovered: Bowl of Easter Eggs
 `CBE_Easter2025_EasterEggs_07_Dialogue` · seen 25.05.01–26.03.01
 - trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Eggs_07'], items=['Bowl of Easter Eggs'], moment=item discovered (versions 25.05.01–26.03.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: Julius, you have to hurry up. We still have dozens of eggs to paint.
+**ANTIQUEDEALER** (Frustrated): You invited me over for some apple pie. I did not sign up for all of this painting!
+**ANTIQUEDEALER** (Surprised): How many eggs do we really need for this egg hunt, Ursula?
+**GRANDMA** (Annoyed): Just keep painting!
+**DEB** (Surprised): What is going on, Ursula? I got your message and rushed right over.
+**GRANDMA** (Encouraging): Deb! At the nick of time, too! Here is a brush and some paints, and there are your eggs.
+**DEB** (Frustrated): What is the meaning of this?
+**GRANDMA** (Encouraging): We are in a hurry, Deb. The sooner you start painting, the sooner we are ready for the egg hunt!
 
 ### Easter 2025 — item discovered: Ultimate Easter Basket
 `CBE_Easter2025_EasterEggs_10_Dialogue` · seen 25.05.01–26.03.01
 - trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_Eggs_10'], items=['Ultimate Easter Basket'], moment=item discovered (versions 25.05.01–26.03.01)
 
-_Referenced by the game, but no lines matched this id._
+**ANTIQUEDEALER** (Annoyed): That HAS to be it. I simply cannot paint another egg!
+**GRANDMA** (Relaxed): I think we are done! Thank you both!
+**DEB** (Annoyed): I think I was promised pie in return for my help!
+**ANTIQUEDEALER** (Worried): I think my rheumatism is flaring up...
 
 ### Sweet Mess Express — entering board
 `CBE_Easter2025_Intro_Dialogue` · seen 25.04.02–26.03.01
 - trigger: event, event=Sweet Mess Express, eventId=CBE_Easter2025, eventType=Collectible Board Event, moment=entering board (versions 25.04.02–26.02.03)
 - trigger: event, event=Easter 2025, eventId=CBE_Easter2025, eventType=Collectible Board Event, moment=entering board (versions 26.03.01–26.03.01)
 
-_Referenced by the game, but no lines matched this id._
+**MASON** (Joyous): I'm SO excited!
+**MADDIE** (Relaxed): What are you SO excited about?
+**MASON** (Relaxed): D'uh! Your egg hunt, of course! And you promised to make it bigger and better than EVER before!
+**MADDIE** (Surprised): My egg hunt... of course!
+**MASON** (Charming): I bet you've got all kinds of surprises ready, right?
+**MADDIE** (Hesitant): Right...
+**MASON** (Encouraging): Maybe I'll finally get my dream - an egg hunt with not just chocolate but candy and amazing cakes, too!
+**MASON** (Encouraging): Well, I'll let you back to it!
+**MADDIE** (Discouraged): Oh, no... I completely forgot about the egg hunt!
+**MADDIE** (Discouraged): It's way too late to get everything done now! Unless...
+**MADDIE** (Thinking): I have a whole stack of Ignatius' old blueprints. Maybe I could tweak them and build something.
+**MADDIE** (Joyous): A chocolate-candy-pastry machine!
 
 ### Sweet Mess Express — event end
 `CBE_Easter2025_Outro_Dialogue` · seen 25.04.02–26.03.01
 - trigger: event, event=Sweet Mess Express, eventId=CBE_Easter2025, eventType=Collectible Board Event, moment=event end (versions 25.04.02–26.02.03)
 - trigger: event, event=Easter 2025, eventId=CBE_Easter2025, eventType=Collectible Board Event, moment=event end (versions 26.03.01–26.03.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE**: How was your egg hunt? Did you get all the chocolate you wanted?
+**MASON** (Joyous): Oh, I did! Your chocolates were just out of this world!
+**MASON** (Joyous): Your machines were amazing - and you were like some mad chocolate scientist!
+**MASON** (Relaxed): By the way... what are you gonna do with the machines?
+**MADDIE** (Thinking): Why do you ask?
+**MASON** (Thinking): Well, I could take them out of your hands, if you wanted.
+**MADDIE** (Thinking): Maybe that's not safe, considering what happened to Roddy. The machines are just prototypes with a lot of kinks!
+**MADDIE** (Relaxed): He got covered in chocolate! That's a happy accident, if you ask me...
 
 ### Easter 2025 — item discovered: Pastry Machine Baking
 `CBE_Easter2025_PastryMachineProducing_Dialogue` · seen 25.05.01–26.03.01
 - trigger: item, event=Easter 2025, eventKey=CBE_Easter2025, itemKeys=['CBE_Easter2025_PastryMachineProducing_01'], items=['Pastry Machine Baking'], moment=item discovered (versions 25.05.01–26.03.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: You know this whole thing started with an egg hunt, right?
+**MADDIE** (Encouraging): Yeah, but who am I to stand in the way of progress? It's been a long time since I got to build something really exciting.
+**MADDIE** (Encouraging): Come on, you have to admit - a cake baking machine is a pretty nifty little invention.
+**GRANDMA** (Relaxed): It is very impressive, dearie.
+**GRANDMA** (Thinking): But are you sure the pressurized extrusion manifold won't destabilize the flow equilibrium?
+**MADDIE** (Surprised): That's actually a good question... H-how did you...
+**GRANDMA** (Charming): Anyone can see that the nozzle array is not quite right. Let me show you...
 
 ### Flashback Rewind — decoration CBE_Flashback2025_Decoration_Slot16
 `CBE_Flashback2025_Slot_16_Dialogue` · seen 25.05.01–26.04.02
 - trigger: decoration, decoration=CBE_Flashback2025_Decoration_Slot16, event=Flashback Rewind, eventKey=CBE_Flashback2025, moment=decoration placed (versions 25.05.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Thinking): What's with the bandstand and the game zone?
+**ANTIQUEDEALER** (Surprised): Jeepers, Ursula. You really aren't yourself today, are you?
+**ANTIQUEDEALER**: You wanted to put on a show to draw more people to the yard sale.
+**MADDIE** (Hesitant): I don't know what's with me today... Who's going to be performing?
+**ANTIQUEDEALER**: Well, Charlie skipped our last band rehearsal, but I think we can do it.
+**ANTIQUEDEALER**: I have also prepared a comedy show as a little back-up plan. I have some terrific jokes ready to go!
+**MADDIE** (Hesitant): What a relief!
 
 ### Flashback Rewind — decoration CBE_Flashback2025_Decoration_Slot19
 `CBE_Flashback2025_Slot_19_Dialogue` · seen 25.05.01–26.04.02
 - trigger: decoration, decoration=CBE_Flashback2025_Decoration_Slot19, event=Flashback Rewind, eventKey=CBE_Flashback2025, moment=decoration placed (versions 25.05.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Surprised): What a cool arcade game! Grandma always says she used to be really good at these. I mean...
+**ANTIQUEDEALER**: Your Grandma played arcade games? She must be an impressive lady!
+**ANTIQUEDEALER**: Actually... I just managed to beat your high score.
+**ANTIQUEDEALER**: It only took 5 hours, and I got blisters on four fingers, but I did it!
+**ANTIQUEDEALER**: Victory sure tastes sweet.
+**ANTIQUEDEALER** (Surprised): Please don't beat it again!
+**MADDIE** (Hesitant): I can't promise anything...
 
 ### Flashback Rewind — decoration CBE_Flashback2025_Decoration_Slot23
 `CBE_Flashback2025_Slot_23_Dialogue` · seen 25.05.01–26.04.02
 - trigger: decoration, decoration=CBE_Flashback2025_Decoration_Slot23, event=Flashback Rewind, eventKey=CBE_Flashback2025, moment=decoration placed (versions 25.05.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Surprised): Rollerskate ramp? This is by far the best yard sale I've ever seen!
+**ANTIQUEDEALER**: That was the goal, and I have to admit it did turn out pretty well.
+**ANTIQUEDEALER** (Surprised): Let's hope we get a good turnout. You really do need some cash to bring this Mansion back up to code.
+**ANTIQUEDEALER** (Surprised): The council have been too harsh to you, in my opinion. How is one person expected to fix up a place this size on their own?
+**MADDIE** (Surprised): Tell me about it...
 
 ### Frosty Secrets — item discovered: Charlie's Paper
 `CBE_FrostySecrets2024_Charlie_02_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_Charlie_02'], items=["Charlie's Paper"], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Surprised): This might just prove it - paper monogrammed with "CB"!
+**MADDIE** (Thinking): The place is cozy and peaceful, but it's also out of the way.
+**MADDIE** (Thinking): And all of these old papers with coded writing...
+**MADDIE** (Worried): I think Grandpa was doing more here than just chopping wood and roasting marshmallows.
 
 ### Frosty Secrets — item discovered: Gold Watch
 `CBE_FrostySecrets2024_Charlie_04_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_Charlie_04'], items=['Gold Watch'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Surprised): A Swiss gold watch!
+**MADDIE** (Thinking): Grandma has never wanted to talk too much about Grandpa Charlie, but she said he loved clocks and watches. He'd even studied them in Switzerland.
+**MADDIE** (Thinking): It's not the first time I've found an old watch of Charlie's...
 
 ### Frosty Secrets — item discovered: Frozen Photo
 `CBE_FrostySecrets2024_Charlie_07_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_Charlie_07'], items=['Frozen Photo'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE**: I wonder when he was last here?
+**MADDIE**: Everything has been left as if he could come back at any time, but... he's gone.
+**MADDIE** (Worried): I wish I knew what happened to him.
+**MADDIE** (Worried): He must have gotten mixed up with something bad.
 
 ### Frosty Secrets — decoration CBE_FrostySecrets2024_Decoration_Slot01
 `CBE_FrostySecrets2024_DecoSlot_01_Dialogue` · seen 25.05.01–25.06.01
 - trigger: decoration, decoration=CBE_FrostySecrets2024_Decoration_Slot01, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, moment=decoration placed (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MASON** (Surprised): Wow! Did you make these, Maddie??
+**MADDIE**: Yeah, I wanted to try something new. And the Grand Drive was crying for some winter magic!
+**MASON** (Thinking): Is ice sculpting hard?
+**MADDIE** (Relaxed): You'd be surprised!
+**MASON** (Charming): Can I try? Please? Pretty please? It looks SO fun!
+**MADDIE** (Doubtful): Why not. But careful with the tools, Mason!
 
 ### Frosty Secrets — decoration CBE_FrostySecrets2024_Decoration_Slot07
 `CBE_FrostySecrets2024_DecoSlot_07_Dialogue` · seen 25.05.01–25.06.01
 - trigger: decoration, decoration=CBE_FrostySecrets2024_Decoration_Slot07, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, moment=decoration placed (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**RODDY** (Thinking): Planning a camping trip, Maddie?
+**MADDIE** (Relaxed): What makes you think so?
 
 ### Frosty Secrets — decoration CBE_FrostySecrets2024_Decoration_Slot10
 `CBE_FrostySecrets2024_DecoSlot_10_Dialogue` · seen 25.05.01–25.06.01
 - trigger: decoration, decoration=CBE_FrostySecrets2024_Decoration_Slot10, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, moment=decoration placed (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Encouraging): What do you think? It's supposed to be a carving of you.
+**GRANDMA** (Charming): It is... very artistic! Lovely work, Maddie. I didn't know you were so handy with a saw.
+**MADDIE** (Relaxed): I guess I've picked up some skills while renovating the Mansion.
 
 ### Frosty Secrets — decoration CBE_FrostySecrets2024_Decoration_Slot15
 `CBE_FrostySecrets2024_DecoSlot_15_Dialogue` · seen 25.05.01–25.06.01
 - trigger: decoration, decoration=CBE_FrostySecrets2024_Decoration_Slot15, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, moment=decoration placed (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**DEB** (Encouraging): What beautiful ice sculptures! What brought on this bout of artistic expression, Maddie?
+**MADDIE**: I've been doing a little bit of hiking...
+**DEB** (Doubtful): Hiking?
+**MADDIE** (Encouraging): Yeah, in the mountains. I discovered something and... well, it was kinda eye-opening.
+**DEB** (Thinking): Is that so? Remember to be careful when you head up there...
+**MADDIE** (Relaxed): I know - there are bears and mountain lions. But don't worry! I'm always careful.
+**DEB** (Surprised): Right, bears and mountain lions...
 
 ### CBE FrostySecrets2024 IceSculptures 11 Dialogue
 `CBE_FrostySecrets2024_IceSculptures_11_Dialogue` · seen 25.05.01–25.06.01
@@ -198,37 +364,70 @@ _Referenced by the game, but no lines matched this id._
 `CBE_FrostySecrets2024_IceSculptures_12_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_IceSculptures_12'], items=['The Destiny'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Thinking): What a year it's been...
+**MADDIE** (Thinking): Maybe next year will bring new perspectives and opportunities.
+**MADDIE** (Encouraging): I don't know but I have a good feeling about it!
 
 ### Frosty Secrets — item discovered: Pair of Wooly Socks
 `CBE_FrostySecrets2024_WarmClothes_02_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_WarmClothes_02'], items=['Pair of Wooly Socks'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Doubtful): So whose cabin is this??
+**MADDIE** (Thinking): Let's see... it could be Grandma's, but no one has clearly been here for a long time.
+**MADDIE** (Thinking): Deb is not one for hiking... or cabins in the mountains.
+**MADDIE** (Surprised): Could this be... Grandpa Charlie's hide-out from years ago?
 
 ### Frosty Secrets — item discovered: Warm Cardigan
 `CBE_FrostySecrets2024_WarmClothes_10_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Frosty Secrets, eventKey=CBE_FrostySecrets2024, itemKeys=['CBE_FrostySecrets2024_WarmClothes_10'], items=['Warm Cardigan'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Worried): Brrr! An extra layer would be perfect right about now.
+**MADDIE** (Worried): I think I saw a big old cardigan in the closet... 
+**MADDIE** (Surprised): "CB" - it has his initials on the label!
 
 ### Bella's Holiday Workshop — item discovered: Old Box
 `CBE_HolidayWorkshop2024_BedAndBrerekfast_01_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, itemKeys=['CBE_HolidayWorkshop2024_RandomPile_02'], items=['Old Box'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**KAZUKO**: Greetings, Bella! I hope you've been happy with everything at my Bed & Breakfast.
+**KAZUKO**: It's not very luxurious, but I try to make my guests as comfortable as possible.
+**BELLA**: It's been fabulous, Kazuko. 
+**BELLA** (Thinking): I've enjoyed myself in Hopewell Bay. Even if...
+**KAZUKO** (Worried): What's wrong? You look upset.
+**BELLA** (Thinking): I'm afraid I've made a really bad impression on everyone.
+**BELLA** (Thinking): Meeting new people can be scary, and I wanted everyone to like me, but I've just made a big mess.
+**KAZUKO** (Thinking): Maybe you can return their kindness by gifting them something -- something you've made yourself.
+**BELLA**: Err... I don't know about that...
+**KAZUKO** (Joyous): Don't worry! I will help you. And if your intentions are good, so will the outcome be.
 
 ### Bella's Holiday Workshop — decoration CBE_HolidayWorkshop2024_Decoration_Slot14
 `CBE_HolidayWorkshop2024_Decoration_Slot_14_Dialogue` · seen 25.05.01–25.06.01
 - trigger: decoration, decoration=CBE_HolidayWorkshop2024_Decoration_Slot14, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, moment=decoration placed (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**EMILIO**: Maddie, I'm glad I caught you!
+**MADDIE** (Doubtful): Really? I thought you're busy with your fish and your research and... Bella.
+**EMILIO** (Doubtful): What...?
+**MADDIE** (Thinking): And I've been tied up as well!
+**MADDIE** (Thinking): The Mansion keeps me so busy, even at this time of year.
+**EMILIO** (Encouraging): Maybe you've misunderstood mine and Bella's relationship...
+**BELLA**: Hey, guys! 
+**BELLA**: I've just delivered all of my presents. I think everyone really LOVED them!
+**BELLA** (Doubtful): Come on, Emilio -- you promised to help me with that thing.
+**EMILIO** (Doubtful): What thing?
+**BELLA** (Doubtful): That THING I told you about. Remember??
+**EMILIO** (Surprised): Ummm, right. See you around, Maddie!
+**MADDIE** (Discouraged): See you.
 
 ### Bella's Holiday Workshop — decoration CBE_HolidayWorkshop2024_Decoration_Slot21
 `CBE_HolidayWorkshop2024_Decoration_Slot_21_Dialogue` · seen 25.05.01–25.06.01
 - trigger: decoration, decoration=CBE_HolidayWorkshop2024_Decoration_Slot21, event=Bella's Holiday Workshop, eventKey=CBE_HolidayWorkshop2024, moment=decoration placed (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**BELLA** (Relaxed): What a coincidence, Roddy!
+**BELLA** (Relaxed): I was just looking for a strong guy to help me with all of my shopping bags.
+**BELLA**: You wouldn't happen to have five minutes, would you?
+**RODDY** (Charming): O-oh, sure thing.
+**RODDY** (Relaxed): You do have a lot of shopping bags! Are they full of holiday surprises?
+**BELLA** (Relaxed): They might just be!
 
 ### CBE TheGreatEscapeA CleanerCart1 Dialogue
 `CBE_TheGreatEscapeA_CleanerCart1_Dialogue` · seen 25.05.01–25.06.01
@@ -404,13 +603,17 @@ _Referenced by the game, but no lines matched this id._
 `CBE_TheGreatEscape_CleanCell1_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape, eventKey=CBE_TheGreatEscape, itemKeys=['CBE_TheGreatEscape_CleanCell_01'], items=['Clean Cell'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA** (Calling): Now that I’ve gained everyone’s trust, it’ll be a lot easier for me to get out of here.
+**GRANDMA** (Calling): My baking skills have led me to the kitchen, where I’m sure I’ll be able to impress the right people.
+**GRANDMA** (Charming): And they’ll hopefully help me get the right “tools” for my ultimate escape!
 
 ### The Great Escape — item discovered: Cleaning Cart
 `CBE_TheGreatEscape_CleanerCart1_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape, eventKey=CBE_TheGreatEscape, itemKeys=['CBE_TheGreatEscape_CleanerCart_01'], items=['Cleaning Cart'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA** (Calling): Well, that was easy enough!
+**GRANDMA** (Calling): I still need to earn my fellow inmate’s trust and I heard this place has been having trouble with their mail...
+**GRANDMA** (Charming): I know! I'll charm them with my baking skills and make sure their letters get sent properly.
 
 ### CBE TheGreatEscape GrandmasCell Dialogue
 `CBE_TheGreatEscape_GrandmasCell_Dialogue` · seen 25.05.01–25.06.01
@@ -425,7 +628,12 @@ _Referenced by the game, but no lines matched this id._
 - trigger: event, event=The Great Escape, eventId=CBE_TheGreatEscape, eventType=Collectible Board Event, moment=entering board (versions 24.11.02–25.10.01)
 - trigger: event, event=The Great Escape, eventId=CBE_TheGreatEscape_02, eventType=Collectible Board Event, moment=entering board (versions 25.04.02–25.04.03)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA** (Calling): Oh dear, back again I see...
+**GRANDMA** (Calling): I guess my last attempt didn’t go as well as I’ve hoped!
+**GRANDMA** (Calling): But no matter...
+**GRANDMA** (Charming): This time, I promise I’ll have a better plan!
+**GRANDMA**: First, I need to get a little collateral in this dreadful place. Nothing a case of money couldn't solve...
+**GRANDMA**: Maybe I should make a name for myself by helping around and earn a little on the side...
 
 ### CBE TheGreatEscape PaperAndPen3 Dialogue
 `CBE_TheGreatEscape_PaperAndPen3_Dialogue` · seen 25.05.01–25.06.01
@@ -449,7 +657,9 @@ _Referenced by the game, but no lines matched this id._
 `CBE_TheGreatEscape_Socks05_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape, eventKey=CBE_TheGreatEscape, itemKeys=['CBE_TheGreatEscape_Socks_05'], items=['Jail Outfit'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: Ah, perfect!
+**GRANDMA**: These jail outfits should contain the ID badges I need to get into the other rooms.
+**GRANDMA** (Charming): But I’ll need to get rid of the evidence!
 
 ### CBE TheGreatEscape StampThirdClass1 Dialogue
 `CBE_TheGreatEscape_StampThirdClass1_Dialogue` · seen 25.05.01–25.06.01
@@ -471,7 +681,9 @@ _Referenced by the game, but no lines matched this id._
 `CBE_TheGreatEscape_Tools5_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape, eventKey=CBE_TheGreatEscape, itemKeys=['CBE_TheGreatEscape_Tools_05'], items=['Bolt Cutters'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: Finally, some proper tools!
+**GRANDMA**: These Bolt Cutters should do the trick.
+**GRANDMA** (Charming): Nothing like a little upper body workout in jail...
 
 ### CBE TheGreatEscape WardenSafe3 Dialogue
 `CBE_TheGreatEscape_WardenSafe3_Dialogue` · seen 25.05.01–25.06.01
@@ -485,128 +697,197 @@ _Referenced by the game, but no lines matched this id._
 `CBE_VeilOfFate2023_Decoration_Slot01_Dialogue` · seen 23.11.02–23.11.02
 - trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot01, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**RODDY** (Relaxed): Is it true? Is Lady Voyance back to divine our futures?
+**MADDIE**: Hey, Roddy! She is indeed. Are you going to ask her to tell your fortune?
+**RODDY** (Charming): She predicted something pretty interesting for me last time - maybe something romantic.
+**RODDY** (Charming): I just wonder if she meant what I THOUGHT she meant... Do you think...
+**MADDIE** (Encouraging): Maybe you'll find someone who shares your love of hard hats and architecture!
+**RODDY** (Surprised): Oh, yeah! Maybe...
+**MADDIE** (Relaxed): She really is a character, isn't she!
+**RODDY** (Discouraged): She sure is.
 
 ### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot04
 `CBE_VeilOfFate2023_Decoration_Slot04_Dialogue` · seen 23.11.02–23.11.02
 - trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot04, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**RODDY** (Relaxed): Do you have time for another client, Lady Voyance?
+**LADY VOYANCE**: Of course! I am here to help ALL who want a glimpse of their fate!
+**RODDY** (Charming): Great! You told my fortune last time you were here and...
+**LADY VOYANCE**: And WHAT, my boy?
+**RODDY** (Charming): You said that I've waited for a long time and that my wait would be over soon?
+**LADY VOYANCE** (Talking): Did I really? Let's see what the globe conveys...
+**LADY VOYANCE** (Talking): Mmmm... Ooohhh... Nnnghhh...
+**LADY VOYANCE**: No. I think I must have read the globe upside down - it happens!
+**RODDY** (Surprised): Are you sure? Could you double-check?
+**LADY VOYANCE** (Talking): Hmm... I see SOMETHING powerful headed your way... Possibly indigestion...
+**LADY VOYANCE** (Talking): Something to look forward to, anyway!
 
 ### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot06
 `CBE_VeilOfFate2023_Decoration_Slot06_Dialogue` · seen 23.11.02–23.11.02
 - trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot06, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**LADY VOYANCE**: So, Maddie... You've come to hear what the snowglobe knows?
+**MADDIE** (Charming): I guess I have...
+**MADDIE** (Charming): Last time you mentioned that you sensed love in my future...
+**LADY VOYANCE**: I only interpret the signs in the globe... What it is telling me this time?
 
 ### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot07
 `CBE_VeilOfFate2023_Decoration_Slot07_Dialogue` · seen 23.11.02–23.11.02
 - trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot07, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**LADY VOYANCE**: So you want to know about love! Let's me see...
+**LADY VOYANCE** (Talking): Oh, sands past, present and future - show me what AWAITS my young friend!
+**LADY VOYANCE** (Talking): I see... someone tall, dark and HANDSOME... and his name is ummm...
+**MADDIE** (Surprised): Umm... Emilio??
+**LADY VOYANCE**: O-oh yes, it IS Emilio!
+**LADY VOYANCE**: Do you KNOW someone called Emilio?
+**MADDIE** (Charming): Yeah, kind of... But now what should I do?
 
 ### Veil of Fate — decoration CBE_VeilOfFate2023_Decoration_Slot08
 `CBE_VeilOfFate2023_Decoration_Slot08_Dialogue` · seen 23.11.02–23.11.02
 - trigger: decoration, decoration=CBE_VeilOfFate2023_Decoration_Slot08, event=Veil of Fate, eventKey=CBE_VeilOfFate2023, moment=decoration placed (versions 23.11.02–23.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**LADY VOYANCE** (Talking): ALAS, the sands of the globe have seized!
+**MADDIE**: Thank you, Lady Voyance! I think I got what I wanted.
+**LADY VOYANCE**: The pleasure is ALL mine, my child! Go forth and seek your happiness with Emilio!
+**MADDIE** (Relaxed): Thanks, Lady Voyance!
+**LADY VOYANCE** (Thinking): Oh, what is this? The sands are stirring, forming a name... Arthur? It is probably nothing.
 
 ### Cinema: Hang photo
 `Cinema12` · seen 25.02.01–25.04.03
 - trigger: area, area=Cinema, areaId=Cinema, hotspotId=CinemaPlacePhotoSecretSocietyIa15, phase=task completed, task=Hang photo (versions 25.02.01–25.04.03)
 - trigger: area, area=Cinema, areaId=Cinema, hotspotId=CinemaPlacePhotoSecretSocietyIa15, phase=task appears, task=Hang photo (versions 25.04.02–25.04.03)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE**: This place is scattered with items from the Curiosity Fellowship!
+**MADDIE**: There's the same masks and even some theater costumes!
+**MADDIE**: Oh, look! A photo!
+**MADDIE**: I was hoping to get some answers...
+**MADDIE**: But, everyone in it is wearing these masks.... Creepy.
+**MADDIE**: These must be super important Fellowship members.
+**MADDIE**: They really take secrecy to a whole new level, don't they?
 
 ### Maddie's Re-Archaeology — entering board
 `DE_Intro_Dialogue` · seen 25.02.01–25.02.03
 - trigger: event, event=Maddie's Re-Archaeology, eventId=DE_Jan2024, eventType=Collectible Board Event, moment=entering board (versions 25.02.01–25.02.03)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Encouraging): Hey, guys! Wh- What’s going on?!
+**JACKIE** (Encouraging): Hey, Maddie! Didn’t you read the newspaper? I wrote an entire article about it...
+**MADDIE** (Worried): Oh... Er. I must have missed it.
+**JACKIE** (Doubtful): We’re digging up the old Hopewell Bay Archaeological Museum!
+**MADDIE** (Surprised): Museum?! I didn’t know we had a museum!
+**ANTIQUEDEALER** (Relaxed): We did, but it collapsed on its grand opening many years ago.
+**ANTIQUEDEALER** (Thinking): Something about illegal mineshafts below the town...
+**GRANDMA** (Worried): ...
+**GRANDMA** (Frustrated): Oh... Well, surely you won’t find anything of worth anymore, dearie.
+**ANTIQUEDEALER** (Joyous): We’ve already found many! Many pieces are still in great shape.
+**JACKIE** (Encouraging): And the best part is that we’re going to be sending them back to their rightful homes!
+**MADDIE** (Joyous): Oooh, awesome! Let’s help, Grandma!
+**GRANDMA** (Annoyed): Oh alright, dearie...
 
 ### Maddie's Re-Archaeology — event end
 `DE_SendingAway_Dialogue` · seen 25.02.01–25.02.03
 - trigger: event, event=Maddie's Re-Archaeology, eventId=DE_Jan2024, eventType=Collectible Board Event, moment=event end (versions 25.02.01–25.02.03)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Encouraging): Well, stick a fork in us. We’re done!
+**JACKIE** (Encouraging): Everything has been carefully packed and shipped off to the museum!
+**MADDIE** (Thinking): Hmm...
+**GRANDMA**: What is it, dearie?
+**MADDIE** (Thinking): I wonder what else is down there...
 
 ### The Great Escape (Jailbreak) — item discovered: Knitting Needle
 `EP1_GrandmaGetTheKnittingNeedle` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_KnittingNeedle_01'], items=['Knitting Needle'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: This will come in handy.
 
 ### The Great Escape (Jailbreak) — item discovered: Knitting Kit
 `EP1_GrandmaStartsKnitting` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_KnittingInProgress_01'], items=['Knitting Kit'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: Knitting always calms me down, even in jail.
+**GRANDMA**: What should I make? Some socks? Or a scarf, perhaps?
+**GRANDMA**: Or... maybe something really special...
 
 ### The Great Escape (Jailbreak) — item discovered: Safe
 `EP1_IzzyHelpGrandmaToOpenSafeCode` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_WardenSafe_02'], items=['Safe'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IZZY**: While being locked in my solitary cell, I saw some weird number repeated many times in the corner.
+**IZZY**: I always wondered if they were numbers to a safe!
+**IZZY**: Gotcha! There you go, Grandma.
 
 ### The Great Escape (Jailbreak) — item discovered: Warden's Office
 `EP1_KnittingNeedleToOpenWardenOffice` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_WardenOffice_03'], items=["Warden's Office"], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: Knitting is a great hobby to have! For example, one can knit open the lock... like this!
 
 ### The Lost Gemstones: Arctic Expedition — item discovered: Star Map
 `GM_Arctic2025_Hero1_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Arctic Expedition, eventKey=GM_Arctic2025, itemKeys=['GM_Arctic2025_Story_01'], items=['Star Map'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: Just this morning, I read in the newspaper about a fascinating case - a meteorite of some size that landed in the far north.
+**IGNATIUS**: This land is largely uncharted and very dangerous, but the meteorite could yield great resources.
+**IGNATIUS** (Thinking): I am in the process of putting together a crew to travel to the north and search for the meteorite, but I truly do not know what awaits us...
 
 ### The Lost Gemstones: Arctic Expedition — item discovered: Coat
 `GM_Arctic2025_Hero2_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Arctic Expedition, eventKey=GM_Arctic2025, itemKeys=['GM_Arctic2025_Story_02'], items=['Coat'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Surprised): Our expedition has taken off at such speed that, since my last entry, we have already set out and reached the colder climes.
+**IGNATIUS** (Surprised): I feel as though we are at the end of the earth. The sea is vast, with only some birds to keep us company.
+**IGNATIUS** (Thinking): Our ship is strong against the wind and tides, but there is a trepidation among our crew. There are many dangers ahead.
 
 ### The Lost Gemstones: Arctic Expedition — item discovered: Small Boat
 `GM_Arctic2025_Hero3_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Arctic Expedition, eventKey=GM_Arctic2025, itemKeys=['GM_Arctic2025_Story_03'], items=['Small Boat'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Relaxed): We are keeping warm as best we can, but I admit, I cannot wait to finally reach our destination.
+**IGNATIUS** (Relaxed): The long journey has allowed me to make plans and calculations. The meteorite's celestial origins promise a great deal of possibilities.
 
 ### The Lost Gemstones: Arctic Expedition — item discovered: Iceberg
 `GM_Arctic2025_Hero4_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Arctic Expedition, eventKey=GM_Arctic2025, itemKeys=['GM_Arctic2025_Story_04'], items=['Iceberg'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Thinking): We are drawing closer to the ice pack. We were forewarned about the dangers lurking here, but we must forge ahead.
+**IGNATIUS**: Members of my brave crew are conducting scientific study of the area, which I predict will prove to be very useful indeed - as long as we do not become trapped by the ice...
 
 ### The Lost Gemstones: Arctic Expedition — item discovered: Tent
 `GM_Arctic2025_Hero5_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Arctic Expedition, eventKey=GM_Arctic2025, itemKeys=['GM_Arctic2025_Story_05'], items=['Tent'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: Yesterday, we reached land. We disembarked, formed two smaller groups and set out with some basic supplies to explore further.
+**IGNATIUS** (Relaxed): Our tents are woefully weak against the elements here, but our spirits are high. According to my calculations, the meteorite is close!
 
 ### The Lost Gemstones: Arctic Expedition — item discovered: Sleigh
 `GM_Arctic2025_Hero6_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Arctic Expedition, eventKey=GM_Arctic2025, itemKeys=['GM_Arctic2025_Story_06'], items=['Sleigh'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Doubtful): Alas, we have had to abandon our initial plan. The pack ice is threatening to trap our ship, if the worst happens, we will be confined in this frozen realm for a considerable time.
+**IGNATIUS** (Doubtful): We are not out of danger, but the safety of the crew must come first.
 
 ### The Lost Gemstones: Arctic Expedition — item discovered: Meteorite
 `GM_Arctic2025_Hero7_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Arctic Expedition, eventKey=GM_Arctic2025, itemKeys=['GM_Arctic2025_Story_07'], items=['Meteorite'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: We must be close to land - and the meteorite! If my calculations hold true, the movements of the ice have been most fortuitous.
+**IGNATIUS**: A small group I dispatched to scout the area returned and confirmed what I so hoped for: The meteorite is here!
 
 ### The Lost Gemstones: Arctic Expedition — item discovered: Frozen Pickaxe
 `GM_Arctic2025_Hero8_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Arctic Expedition, eventKey=GM_Arctic2025, itemKeys=['GM_Arctic2025_Story_08'], items=['Frozen Pickaxe'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: Yesterday, we set out before first light, and sure enough - we found a sizeable crater. What I found there quite astounded me.
+**IGNATIUS**: A blue gem, light and luminescent in quality, and abundant in the crater. I want to return to the site to collect all the material, but the ice encroaches upon our ship once more.
+**IGNATIUS** (Thinking): There is still time...
 
 ### The Lost Gemstones: Arctic Expedition — item discovered: Oven
 `GM_Arctic2025_Hero9_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Arctic Expedition, eventKey=GM_Arctic2025, itemKeys=['GM_Arctic2025_Story_09'], items=['Oven'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Doubtful): My enthusiasm was premature. We are imprisoned by the ice once more - this time without any recourse.
+**IGNATIUS** (Doubtful): We have no choice but to wait until the winter eases, but that is many months from now. While we wait, I will begin my experiments with the new gem.
+**IGNATIUS**: Unique and exceptionally beautiful - it must be worth this pain.
 
 ### The Lost Gemstones: Arctic Expedition — entering board
 `GM_Arctic2025_Intro_Dialogue` · seen 25.04.02–26.01.02
@@ -614,206 +895,298 @@ _Referenced by the game, but no lines matched this id._
 - trigger: event, event=The Lost Gemstones: Arctic Expedition, eventId=GM_Arctic2025_02, eventType=Collectible Board Event, moment=entering board (versions 25.04.02–25.04.03)
 - trigger: event, event=The Lost Gemstones: Arctic Expedition, eventId=GM_Arctic2025_03, eventType=Collectible Board Event, moment=entering board (versions 25.04.02–25.06.02)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: Is that Ignatius' old journal?
+**MADDIE** (Relaxed): It is! I just can't put it down. The world was so different then - everything still there to be explored and discovered.
+**GRANDMA** (Relaxed): Which part are you reading now?
+**MADDIE** (Thinking): He's writing about a news story he read about a meteorite that supposedly landed somewhere in the Arctic...
+**MADDIE** (Surprised): He didn't really travel there, too, did he?
+**GRANDMA** (Charming): Keep reading! It is a good story.
 
 ### The Lost Gemstones: Mystery of the Machine — item discovered: Travel Case
 `GM_MysteryMachine2025Hero1` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Mystery of the Machine, eventKey=GM_MysteryMachine2025, itemKeys=['GM_MysteryMachine2025_Story_01'], items=['Travel Case'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: I have continued my studies on the mysterious properties of Boultonite.
+**IGNATIUS** (Surprised): Its potential is staggering, yet I find myself hard-pressed to find any practical use for it!
+**IGNATIUS** (Thinking): I have decided to head to the World Fair in search of the brightest minds that could help me solve this riddle.
 
 ### The Lost Gemstones: Mystery of the Machine — item discovered: Perfect Red Boultonite
 `GM_MysteryMachine2025Hero10` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Mystery of the Machine, eventKey=GM_MysteryMachine2025, itemKeys=['CBE_GemMine_HeroGemCut_01'], items=['Perfect Red Boultonite'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: Boultonite has proven to be an exceptional material for my engineering research!
+**IGNATIUS** (Thinking): It now powers the heart of my latest creation, CB-01. However...
+**IGNATIUS** (Doubtful): I am left with a curious thought. What OTHER uses may it have?!
 
 ### The Lost Gemstones: Mystery of the Machine — item discovered: World Fair Globe
 `GM_MysteryMachine2025Hero2` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Mystery of the Machine, eventKey=GM_MysteryMachine2025, itemKeys=['GM_MysteryMachine2025_Story_02'], items=['World Fair Globe'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Relaxed): Ah, the World Fair! An astounding exhibition of culture and science.
+**IGNATIUS** (Relaxed): Hopefully, I’ll find someone here who can help me harness the potential of Boultonite!
+**IGNATIUS** (Surprised): Who knows... I may be perhaps attending next year with my own inventions, powered by Boultonite.
 
 ### The Lost Gemstones: Mystery of the Machine — item discovered: Cogs of Science
 `GM_MysteryMachine2025Hero3` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Mystery of the Machine, eventKey=GM_MysteryMachine2025, itemKeys=['GM_MysteryMachine2025_Story_03'], items=['Cogs of Science'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Relaxed): Success! I have encountered a mathematical genius showing off his new computational machine.
+**IGNATIUS** (Relaxed): We had a very productive meeting, as I showed him a small sample of Boultonite. He was astounded!
+**IGNATIUS** (Relaxed): He believes Boultonite could power a very similar machine that could be ten times more powerful!
 
 ### The Lost Gemstones: Mystery of the Machine — item discovered: Mark I Prototype
 `GM_MysteryMachine2025Hero4` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Mystery of the Machine, eventKey=GM_MysteryMachine2025, itemKeys=['GM_MysteryMachine2025_Story_04'], items=['Mark I Prototype'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Relaxed): At last! After months of designing and tinkering, my Mark I prototype is ready for testing!
+**IGNATIUS** (Thinking): If my calculations are correct, my new Boultonite-powered machine will revolutionize the world.
+**IGNATIUS** (Encouraging): And put the Boulton name firmly on the map!
 
 ### The Lost Gemstones: Mystery of the Machine — item discovered: First Test
 `GM_MysteryMachine2025Hero5` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Mystery of the Machine, eventKey=GM_MysteryMachine2025, itemKeys=['GM_MysteryMachine2025_Story_05'], items=['First Test'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Doubtful): Failure! Soon after starting the prototype, it overheated! Try as I may, there was nothing I could do.
+**IGNATIUS** (Doubtful): A chain reaction began that resulted in the destruction of the prototype and a better part of my workshop.
+**IGNATIUS**: Regardless, I have gathered plenty of data from this and have begun working on a new Mark II design.
 
 ### The Lost Gemstones: Mystery of the Machine — item discovered: Mark II Prototype
 `GM_MysteryMachine2025Hero6` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Mystery of the Machine, eventKey=GM_MysteryMachine2025, itemKeys=['GM_MysteryMachine2025_Story_06'], items=['Mark II Prototype'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: My Mark II design is complete! I discovered that there was inadequate shielding for the Boultonite core.
+**IGNATIUS** (Encouraging): This time around, I have reinforced the housing and increased the power output, ten fold!
+**IGNATIUS** (Thinking): If anything, it is safer and more powerful than before! I have also added some new “intelligent” functionality.
 
 ### The Lost Gemstones: Mystery of the Machine — item discovered: Explosive Results
 `GM_MysteryMachine2025Hero7` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Mystery of the Machine, eventKey=GM_MysteryMachine2025, itemKeys=['GM_MysteryMachine2025_Story_07'], items=['Explosive Results'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Surprised): I have moved to my secondary workshop. Testing my Mark II model seems to have given explosive results.
+**IGNATIUS** (Thinking): While the shielding held, the Mark II prototype became... uncontrollable. I cannot quite grasp what happened.
+**IGNATIUS** (Thinking): It almost seemed alive! In fear, I had to disable it, which led to the inevitable destruction of my workshop.
 
 ### The Lost Gemstones: Mystery of the Machine — item discovered: Boultonite Heart
 `GM_MysteryMachine2025Hero8` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Mystery of the Machine, eventKey=GM_MysteryMachine2025, itemKeys=['GM_MysteryMachine2025_Story_08'], items=['Boultonite Heart'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Relaxed): Eureka! I have solved it! I do not know how, but... I have solved it!
+**IGNATIUS** (Thinking): It came to me in a dream and the moment I woke; I drew up the designs for a Boultonite Heart!
+**IGNATIUS** (Encouraging): Testing it has resulted in a stable output of unfathomable power. THIS will power my Mark III!
 
 ### The Lost Gemstones: Mystery of the Machine — item discovered: Computational Boss 01
 `GM_MysteryMachine2025Hero9` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Mystery of the Machine, eventKey=GM_MysteryMachine2025, itemKeys=['GM_MysteryMachine2025_Story_09'], items=['Computational Boss 01'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Relaxed): At last, it is complete! My Mark III prototype. But I shall call it the Computational Boss. CB-01 for short.
+**IGNATIUS** (Relaxed): It will definitely be of help in my factory plans and will be the model for all future automation!
+**IGNATIUS** (Thinking): However, it still seems to have a few intricacies that need ironing out...
+**IGNATIUS** (Doubtful): I don’t know if it was the long night, but I swear... It feels like it has an attitude all of its own.
 
 ### The Lost Gemstones: Mystery of the Machine — entering board
 `GM_MysteryMachine2025Intro` · seen 25.02.01–26.01.02
 - trigger: event, event=The Lost Gemstones: Mystery of the Machine, eventId=GM_MysteryMachine2025, eventType=Collectible Board Event, moment=entering board (versions 25.02.01–26.01.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Joyous): Grandma! This journal... is something else!
+**MADDIE** (Encouraging): I didn’t know that Boultonite was so powerful.
+**GRANDMA** (Doubtful): Yes, it is. Almost TOO powerful...
+**MADDIE** (Thinking): What do you mean by that?
+**GRANDMA** (Thinking): Hmm...
+**GRANDMA** (Frustrated): I suggest you read up on Ignatius’s experiments with it...
+**GRANDMA** (Frustrated): VERY interesting stuff, dearie.
 
 ### The Lost Gemstones: Seas of Adventure — item discovered: Perfect Red Boultonite
 `GM_SeaAdventure2025_Hero10_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Seas of Adventure, eventKey=GM_SeaAdventure2025, itemKeys=['CBE_GemMine_HeroGemCut_01'], items=['Perfect Red Boultonite'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Surprised): A Colossal Boultonite jewel, radiant and untouched, a crowning jewel to a lost dynasty.
+**IGNATIUS**: Now, as I sail home and the jewel gleaming in the sun, I am struck with a thought.
+**IGNATIUS** (Thinking): What became of the crew of that ship? And...
+**IGNATIUS** (Surprised): What if this jewel had something to do with it?!
 
 ### The Lost Gemstones: Seas of Adventure — item discovered: A Mysterious Key
 `GM_SeaAdventure2025_Hero1_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Seas of Adventure, eventKey=GM_SeaAdventure2025, itemKeys=['GM_SeaAdventure2025_Story_01'], items=['A Mysterious Key'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: Today, a curious letter arrived, accompanied by an old key.
+**IGNATIUS** (Surprised): It spoke of a legendary sunken treasure and a crown jewel, with eerie and peculiar properties.
+**IGNATIUS** (Doubtful): From its description, I theorize it may in fact be a piece of Boultonite! Could it be true?
 
 ### The Lost Gemstones: Seas of Adventure — item discovered: The Archives
 `GM_SeaAdventure2025_Hero2_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Seas of Adventure, eventKey=GM_SeaAdventure2025, itemKeys=['GM_SeaAdventure2025_Story_02'], items=['The Archives'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Doubtful): The key that came with the letter led me to the archives where it unlocked an old dusty chest.
+**IGNATIUS** (Relaxed): Filled with dusty records, the chest contained clues that will hopefully lead me to the treasure’s location.
+**IGNATIUS** (Thinking): I should take time to study these clues, if I’m to seek this treasure.
 
 ### The Lost Gemstones: Seas of Adventure — item discovered: Cartography
 `GM_SeaAdventure2025_Hero3_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Seas of Adventure, eventKey=GM_SeaAdventure2025, itemKeys=['GM_SeaAdventure2025_Story_03'], items=['Cartography'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Thinking): I’ve spent many nights poring over the various documents and old maps the chest contained.
+**IGNATIUS** (Relaxed): But I believe I have finally discovered the location of the last known location of the sunken ship!
+**IGNATIUS** (Relaxed): A chain of uncharted islands off the coast may hold the fortune that I am seeking!
 
 ### The Lost Gemstones: Seas of Adventure — item discovered: The SS Boulton
 `GM_SeaAdventure2025_Hero4_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Seas of Adventure, eventKey=GM_SeaAdventure2025, itemKeys=['GM_SeaAdventure2025_Story_04'], items=['The SS Boulton'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Relaxed): Preparations are underway!
+**IGNATIUS**: I’ve chartered a power steam ship and assembled a capable crew.
+**IGNATIUS**: The promise of fortune and discovery fills their hearts and my own. The adventure is about to begin!
 
 ### The Lost Gemstones: Seas of Adventure — item discovered: The Forgotten Island
 `GM_SeaAdventure2025_Hero5_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Seas of Adventure, eventKey=GM_SeaAdventure2025, itemKeys=['GM_SeaAdventure2025_Story_05'], items=['The Forgotten Island'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: After months at sea, we have finally arrived near an uncharted island!
+**IGNATIUS** (Surprised): Its rocky silhouette that looms against the horizon is almost exactly described in the clues I uncovered!
+**IGNATIUS**: A massive cave entrance beckons us, emanating a ghostly sound, whispering secrets of what lies within.
 
 ### The Lost Gemstones: Seas of Adventure — item discovered: A Lost Ship
 `GM_SeaAdventure2025_Hero6_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Seas of Adventure, eventKey=GM_SeaAdventure2025, itemKeys=['GM_SeaAdventure2025_Story_06'], items=['A Lost Ship'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Surprised): Incredible! Our exploration of the cavern’s depths has revealed a wrecked ship!
+**IGNATIUS** (Surprised): To our astonishment, the ship hadn’t sunk at all but was left derelict within this cave...
+**IGNATIUS** (Doubtful): But a disturbing question remains... Why?
 
 ### The Lost Gemstones: Seas of Adventure — item discovered: Diving Equipment
 `GM_SeaAdventure2025_Hero7_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Seas of Adventure, eventKey=GM_SeaAdventure2025, itemKeys=['GM_SeaAdventure2025_Story_07'], items=['Diving Equipment'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Doubtful): Exploring the ship has frustratingly not revealed any answers why the ship was hidden here.
+**IGNATIUS** (Doubtful): Furthermore, the main hold of the ship has flooded, halting our exploration.
+**IGNATIUS** (Thinking): We must proceed with our diving equipment if we are to reach the treasure hold!
 
 ### The Lost Gemstones: Seas of Adventure — item discovered: Let's Dive!
 `GM_SeaAdventure2025_Hero8_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Seas of Adventure, eventKey=GM_SeaAdventure2025, itemKeys=['GM_SeaAdventure2025_Story_08'], items=["Let's Dive!"], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Relaxed): With diving equipment secured, we descended into the watery depths...
+**IGNATIUS** (Doubtful): After struggling to remove some rotten wood and debris, we have finally arrived at the main treasure hold.
+**IGNATIUS**: We must rest now and continue in the morning. After all this time, the treasure is finally within reach!
 
 ### The Lost Gemstones: Seas of Adventure — item discovered: Treasure Hoard
 `GM_SeaAdventure2025_Hero9_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Lost Gemstones: Seas of Adventure, eventKey=GM_SeaAdventure2025, itemKeys=['GM_SeaAdventure2025_Story_09'], items=['Treasure Hoard'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: With excitement, we finally opened the treasure hold, revealing its wonders!
+**IGNATIUS** (Surprised): Golden artifacts, ancient trinkets and unbelievable hoards of riches greeted us.
+**IGNATIUS** (Relaxed): And there, amidst this hoard of a century, I finally saw it!
 
 ### The Lost Gemstones: Seas of Adventure — entering board
 `GM_SeaAdventure2025_Intro_Dialogue` · seen 25.01.03–26.01.02
 - trigger: event, event=The Lost Gemstones: Seas of Adventure, eventId=GM_SeaAdventure2025, eventType=Collectible Board Event, moment=entering board (versions 25.01.03–26.01.02)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA** (Joyous): Maddie, dearie. Are you still reading that old journal?
+**MADDIE** (Encouraging): Yes! It’s really fascinating!
+**MADDIE** (Encouraging): I didn’t know that Ignatius Boulton was so...
+**GRANDMA** (Charming): Adventurous?
+**MADDIE** (Relaxed): Yes! I’ve just started reading about his account of finding a supposed sunken treasure!
+**GRANDMA** (Encouraging): Oh, that one! Yes. That’s one of my favorites.
+**GRANDMA**: I can promise you...
+**GRANDMA** (Charming): It only gets better!
 
 ### Lost Gemstones — item discovered: Perfect Red Boultonite
 `GM_Shared_Dialogues_Hero10_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Lost Gemstones, eventKey=CBE_GemMine, itemKeys=['CBE_GemMine_HeroGemCut_01'], items=['Perfect Red Boultonite'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Relaxed): With our scientists encouragement, we’ve successfully used Boultonite to power a prototype machine that automatically sorts cans and their contents.
+**IGNATIUS** (Relaxed): The machine operates with incredible precision, far beyond anything we’ve achieved before.
+**IGNATIUS**: This breakthrough not only showcases Boultonite’s potential but also promises to revolutionize our tin can production process.
 
 ### Lost Gemstones — item discovered: The Meteor
 `GM_Shared_Dialogues_Hero1_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Lost Gemstones, eventKey=CBE_GemMine, itemKeys=['CBE_GemMine_HeroGem_01'], items=['The Meteor'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: Today, I’ve opened the Boulton Mine in the old meteor crater, and the first samples of tin are promising.
+**IGNATIUS**: The miners are in high spirits as they uncover vein after vein of pure tin ore.
+**IGNATIUS**: I foresee great things for the factory with this new supply.
 
 ### Lost Gemstones — item discovered: Impact
 `GM_Shared_Dialogues_Hero2_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Lost Gemstones, eventKey=CBE_GemMine, itemKeys=['CBE_GemMine_HeroGem_02'], items=['Impact'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Surprised): Weeks have passed, and we continue to extract an abundance of tin, but strange red gems have begun to appear among the deposits.
+**IGNATIUS** (Doubtful): They are unlike anything I’ve seen before, shimmering with an inner light that seems almost alive.
+**IGNATIUS** (Thinking): I’ve decided to name the gems Boultonite after myself.
 
 ### Lost Gemstones — item discovered: Hopewell Bay
 `GM_Shared_Dialogues_Hero3_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Lost Gemstones, eventKey=CBE_GemMine, itemKeys=['CBE_GemMine_HeroGem_03'], items=['Hopewell Bay'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Surprised): The deeper we dig, the more gems we find! Amethysts, Topaz, even Lapis Lazuli! All in the same mine!
+**IGNATIUS** (Relaxed): This is truly a rare, if unique, find! Among the other precious stones, we still find Boultonite.
+**IGNATIUS** (Relaxed): I have contacted some scientist acquaintances to come and investigate...
 
 ### Lost Gemstones — item discovered: Mine Map
 `GM_Shared_Dialogues_Hero4_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Lost Gemstones, eventKey=CBE_GemMine, itemKeys=['CBE_GemMine_HeroGem_04'], items=['Mine Map'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Thinking): Edison arrived today and immediately took an interest in the electrical properties of Boultonite.
+**IGNATIUS** (Thinking): He believes this gem could hold the key to a new form of energy, one that could revolutionize the world.
+**IGNATIUS** (Relaxed): I’m eager to see what he and the others can uncover.
 
 ### Lost Gemstones — item discovered: Boulton Tin Mine
 `GM_Shared_Dialogues_Hero5_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Lost Gemstones, eventKey=CBE_GemMine, itemKeys=['CBE_GemMine_HeroGem_05'], items=['Boulton Tin Mine'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Relaxed): More scientists have joined our efforts, and their experiments with Boultonite have yielded astonishing results.
+**IGNATIUS**: They claim the gem can generate a magnetic field more powerful than anything they have encountered.
+**IGNATIUS**: I begin to wonder if this discovery is bigger than any of us anticipated...
 
 ### Lost Gemstones — item discovered: Tin Ore
 `GM_Shared_Dialogues_Hero6_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Lost Gemstones, eventKey=CBE_GemMine, itemKeys=['CBE_GemMine_HeroGem_06'], items=['Tin Ore'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Surprised): After months of research, the scientists are unanimous: Boultonite is no ordinary gem.
+**IGNATIUS** (Surprised): The potential applications are staggering...
+**IGNATIUS** (Relaxed): Boultonite promises unimaginable wealth!
 
 ### Lost Gemstones — item discovered: EXTRA! EXTRA!
 `GM_Shared_Dialogues_Hero7_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Lost Gemstones, eventKey=CBE_GemMine, itemKeys=['CBE_GemMine_HeroGem_07'], items=['EXTRA! EXTRA!'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Doubtful): The workers are curious, and their excitement mirrors my own as we uncover more of these fascinating gems.
+**IGNATIUS** (Relaxed): I’m confident that Boultonite will bring us unprecedented success and recognition.
+**IGNATIUS** (Thinking): My scientists wish to do more experiments on the Boultonite.
 
 ### Lost Gemstones — item discovered: Gemstones
 `GM_Shared_Dialogues_Hero8_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Lost Gemstones, eventKey=CBE_GemMine, itemKeys=['CBE_GemMine_HeroGem_08'], items=['Gemstones'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: News of our discovery has spread, and inquiries are pouring in from around the country.
+**IGNATIUS**: Investors and scientists alike are eager to learn more about Boultonite, and the excitement is palpable.
+**IGNATIUS** (Relaxed): I’m thrilled that our work is gaining the recognition it deserves.
 
 ### Lost Gemstones — item discovered: Boultonite Ore
 `GM_Shared_Dialogues_Hero9_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Lost Gemstones, eventKey=CBE_GemMine, itemKeys=['CBE_GemMine_HeroGem_09'], items=['Boultonite Ore'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Surprised): Today, as we examined the mine’s location within the ancient impact crater, it dawned on us that Boultonite might have come from space.
+**IGNATIUS** (Thinking): The unique properties of the gem suggest an extraterrestrial origin, possibly brought here by the meteor millions of years ago.
+**IGNATIUS** (Doubtful): This revelation has added a new layer of intrigue to our discovery, fueling our determination to unlock its secrets.
 
 ### Lost Gemstones — entering board
 `GM_Shared_Dialogues_Intro_Dialogue` · seen 24.07.01–26.01.02
 - trigger: event, event=Lost Gemstones, eventId=CBE_GemMine, eventType=Collectible Board Event, moment=entering board (versions 24.07.01–26.01.02)
 - trigger: event, event=Lost Gemstones, eventId=GM_Generic, eventType=Collectible Board Event, moment=entering board (versions 25.08.01–26.01.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE**: Grandma, do we have more of Ignatius' old diaries left?  
+  _earlier:_ ~~Grandma!~~ (until 25.07.01)
+**MADDIE** (Relaxed): I need to find out what happens next in his story. I'm TOTALLY hooked!  
+  _earlier:_ ~~What is it, dearie?~~ (until 25.07.01)
+**GRANDMA** (Joyous): There are still plenty more volumes left in the library. The man loved an adventure!  
+  _earlier:_ ~~You won’t believe what I found in the cellar! An old tunnel with tracks! It’s huge!~~ (until 25.07.01)
+**MADDIE** (Thinking): But every page I read, I find more questions than answers. Like, what happened to his collection of gems?  
+  _earlier:_ ~~Oh, that!~~ (until 25.07.01)  
+  _(1 cosmetic edit not shown)_
+**GRANDMA** (Charming): Just keep reading. Maybe you will find the answers in those diaries...  
+  _earlier:_ ~~That?! You know about it?~~ (until 25.07.01)
+**GRANDMA** (Charming): Oh yes, dearie. That’s the old tunnel that lead to the Boulton tin mine!
+**GRANDMA** (Charming): Why don’t you read Ignatius’s journal about it? It tells about the mines “interesting” history!
 
 ### GM Underwater Hero10 Dialogue
 `GM_Underwater_Hero10_Dialogue` · seen 25.06.01–26.02.03
@@ -869,144 +1242,195 @@ _Referenced by the game, but no lines matched this id._
 `GM_Underwater_Intro_Dialogue` · seen 25.06.01–26.01.02
 - trigger: event, event=Underwater Adventure, eventId=GM_Underwater, eventType=Collectible Board Event, moment=entering board (versions 25.06.01–26.01.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Thinking): You know a lot about the Boulton family history, don't you, Julius?
+**ANTIQUEDEALER** (Charming): You could say that. I have conducted research into your family's heraldry, and let me tell you - it is fascinating!
+**MADDIE** (Relaxed): No doubt... but would you happen to know anything about Ignatius?
+**ANTIQUEDEALER** (Thinking): Are you interested in his travels?
+**MADDIE** (Charming): I can't help it - I'm totally hooked!
+**ANTIQUEDEALER** (Relaxed): I am not surprised. Have you read about how he ended up shipwrecked on a desert island in the middle of the ocean?
+**MADDIE** (Surprised): No! He didn't!
+**ANTIQUEDEALER** (Relaxed): He did, and made it all the way back home.
 
 ### Underwater Adventure — item discovered: Ancient Oil Painting
 `GM_Underwater_Story_01_Dialogue` · seen 25.06.01–25.06.01
 - trigger: item, event=Underwater Adventure, eventKey=GM_Underwater, itemKeys=['GM_Underwater_Story_01'], items=['Ancient Oil Painting'], moment=item discovered (versions 25.06.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: Mrs Boulton, my wife, recently came into possession of an old oil painting.
+**IGNATIUS**: A trifling image in itself, it concealed an altogether greater enigma.
+**IGNATIUS** (Surprised): Pictured in the portrait is a lady wearing a necklace with an astoundingly beautiful, iridescent pearl!
+**IGNATIUS** (Surprised): I am captivated by it, and desperate to find out more about its history and present.
 
 ### Underwater Adventure — item discovered: Ancient Pearl Necklace
 `GM_Underwater_Story_02_Dialogue` · seen 25.06.01–25.06.01
 - trigger: item, event=Underwater Adventure, eventKey=GM_Underwater, itemKeys=['GM_Underwater_Story_02'], items=['Ancient Pearl Necklace'], moment=item discovered (versions 25.06.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Thinking): Alas, the magnificent necklace is lost to history, but I have managed to find some information about it.
+**IGNATIUS** (Thinking): The story of the Pearl is both exciting and tragic, and it seems it has claimed countless poor souls.
+**IGNATIUS** (Doubtful): However, I find myself conflicted.
+**IGNATIUS** (Doubtful): The journey to the origin of the Pearl is full of dangers, but it will not leave me alone. It occupies my mind, day and night.
 
 ### Underwater Adventure — item discovered: Oceanic Encyclopedia
 `GM_Underwater_Story_03_Dialogue` · seen 25.06.01–25.06.01
 - trigger: item, event=Underwater Adventure, eventKey=GM_Underwater, itemKeys=['GM_Underwater_Story_03'], items=['Oceanic Encyclopedia'], moment=item discovered (versions 25.06.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: I am resolved to find this Pearl, but my research has yielded little in the way of directions.
+**IGNATIUS** (Thinking): The ocean is vast, and I am unsure how to continue. This uncertainty plagues me.
+**IGNATIUS** (Thinking): I must find a way forward.
 
 ### Underwater Adventure — item discovered: Correspondence
 `GM_Underwater_Story_04_Dialogue` · seen 25.06.01–25.06.01
 - trigger: item, event=Underwater Adventure, eventKey=GM_Underwater, itemKeys=['GM_Underwater_Story_04'], items=['Correspondence'], moment=item discovered (versions 25.06.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Relaxed): I have corresponded with a distant associate, located on a faraway continent, and he has been able to tell me more about these legendary pearls.
+**IGNATIUS** (Relaxed): They are formed inside large shells, called conchs, found in shallow waters around certain tropical islands.
+**IGNATIUS**: I have my directions and I have my mission.
 
 ### Underwater Adventure — item discovered: Sea Map
 `GM_Underwater_Story_05_Dialogue` · seen 25.06.01–25.06.01
 - trigger: item, event=Underwater Adventure, eventKey=GM_Underwater, itemKeys=['GM_Underwater_Story_05'], items=['Sea Map'], moment=item discovered (versions 25.06.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Relaxed): Our journey to the tropics is under way. I have an able crew, and the winds are fair - not storm in sight!
+**IGNATIUS** (Relaxed): We have been very lucky. I expect to be home to Agatha earlier than I expected.
 
 ### Underwater Adventure — item discovered: Wooden Dinghy
 `GM_Underwater_Story_06_Dialogue` · seen 25.06.01–25.06.01
 - trigger: item, event=Underwater Adventure, eventKey=GM_Underwater, itemKeys=['GM_Underwater_Story_06'], items=['Wooden Dinghy'], moment=item discovered (versions 25.06.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Thinking): The winds are picking up, and the waves are gathering strength. My crew fears a storm is rising.
+**IGNATIUS**: I am still confident we can circle around the foul weather and arrive on schedule.
+**IGNATIUS**: We must, for my plans for the Pearl are coming along. I see great business potential! This Pearl is exactly what I have been looking for...
 
 ### Underwater Adventure — item discovered: Life Preserver
 `GM_Underwater_Story_07_Dialogue` · seen 25.06.01–25.06.01
 - trigger: item, event=Underwater Adventure, eventKey=GM_Underwater, itemKeys=['GM_Underwater_Story_07'], items=['Life Preserver'], moment=item discovered (versions 25.06.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Doubtful): Our plan to steer clear of the weather has failed. With storm fronts approaching from multiple directions, we have found ourselves in a perilous position.
+**IGNATIUS** (Doubtful): Our ship creaks with each crashing wave. It was not built for such battles, nor was I!
+**IGNATIUS** (Doubtful): The hope of finding the pearl gives me courage, but for how long can we keep going?
 
 ### Underwater Adventure — item discovered: White Flag
 `GM_Underwater_Story_08_Dialogue` · seen 25.06.01–25.06.01
 - trigger: item, event=Underwater Adventure, eventKey=GM_Underwater, itemKeys=['GM_Underwater_Story_08'], items=['White Flag'], moment=item discovered (versions 25.06.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Doubtful): The very worst has come to pass. A mighty storm caused our ship to run aground, leaving us shipwrecked on a remote island.
+**IGNATIUS** (Doubtful): With little hope of finding rescue - or indeed, the pearl - we are faced with certain doom.
 
 ### Underwater Adventure — item discovered: Grand Conch
 `GM_Underwater_Story_09_Dialogue` · seen 25.06.01–25.06.01
 - trigger: item, event=Underwater Adventure, eventKey=GM_Underwater, itemKeys=['GM_Underwater_Story_09'], items=['Grand Conch'], moment=item discovered (versions 25.06.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS** (Surprised): The most incredible thing has happened! A large sailing vessel, attempting the fastest circumnavigation of the globe, happened upon us.
+**IGNATIUS** (Surprised): We have been saved!
+**IGNATIUS** (Relaxed): Not only that, but our defeated days on the desert island turned victorious when we discovered the fabled conchs in the shallow waters around it.
+**IGNATIUS** (Relaxed): We are lucky, indeed. And soon... rich!
 
 ### Underwater Adventure — item discovered: Grand Pearl
 `GM_Underwater_Story_10_Dialogue` · seen 25.06.01–25.06.01
 - trigger: item, event=Underwater Adventure, eventKey=GM_Underwater, itemKeys=['GM_Underwater_HeroGemCut_01'], items=['Grand Pearl'], moment=item discovered (versions 25.06.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: We have returned home at last, weathered and alive.
+**IGNATIUS** (Surprised): The pearl rests now in my study, glowing faintly even in darkness, as though it holds a light all its own.
+**IGNATIUS** (Surprised): What began as an enigma in a painting became a journey of a lifetime.
+**IGNATIUS** (Thinking): Yet, as I gaze upon the pearl, I wonder... Did we truly find it? Or did it find us?!
 
 ### Hidden Holiday Gems — item discovered: A Cozy Home
 `GM_Xmas2024_Hero1_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Hidden Holiday Gems, eventKey=GM_Xmas2024, itemKeys=['GM_Xmas2024_XmasStory_01'], items=['A Cozy Home'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: T'was the night before Christmas, when all through the house
+**IGNATIUS**: Not a creature was stirring, not even a mouse
 
 ### Hidden Holiday Gems — item discovered: Festive Fireplace
 `GM_Xmas2024_Hero2_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Hidden Holiday Gems, eventKey=GM_Xmas2024, itemKeys=['GM_Xmas2024_XmasStory_02'], items=['Festive Fireplace'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: The stockings were hung by the chimney with care,
+**IGNATIUS**: In hopes that St. Nicholas soon would be there
 
 ### Hidden Holiday Gems — item discovered: Restfull Sleep
 `GM_Xmas2024_Hero3_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Hidden Holiday Gems, eventKey=GM_Xmas2024, itemKeys=['GM_Xmas2024_XmasStory_03'], items=['Restfull Sleep'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: The children were nestled all snug in their beds,
+**IGNATIUS**: While visions of sugar-plums danced in their heads
 
 ### Hidden Holiday Gems — item discovered: A Snowy Night
 `GM_Xmas2024_Hero4_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Hidden Holiday Gems, eventKey=GM_Xmas2024, itemKeys=['GM_Xmas2024_XmasStory_04'], items=['A Snowy Night'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: When out on the lawn there arose such a clatter,
+**IGNATIUS**: I sprang from the bed to see what was the matter.
 
 ### Hidden Holiday Gems — item discovered: St. Ignatius
 `GM_Xmas2024_Hero5_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Hidden Holiday Gems, eventKey=GM_Xmas2024, itemKeys=['GM_Xmas2024_XmasStory_05'], items=['St. Ignatius'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: He was chubby and plump, a right jolly old elf,
+**IGNATIUS**: And I laughed when I saw him, in spite of myself
 
 ### Hidden Holiday Gems — item discovered: Sackful of Gifts
 `GM_Xmas2024_Hero6_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Hidden Holiday Gems, eventKey=GM_Xmas2024, itemKeys=['GM_Xmas2024_XmasStory_06'], items=['Sackful of Gifts'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: A bundle of Toys he had flung on his back,
+**IGNATIUS**: And he look'd like a pedlar just opening his pack.
 
 ### Hidden Holiday Gems — item discovered: Filled Stockings
 `GM_Xmas2024_Hero7_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Hidden Holiday Gems, eventKey=GM_Xmas2024, itemKeys=['GM_Xmas2024_XmasStory_07'], items=['Filled Stockings'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: He spoke not a word, but went straight to his work,
+**IGNATIUS**: And fill'd all the stockings; then turned with a jerk
 
 ### Hidden Holiday Gems — item discovered: Season Greetings
 `GM_Xmas2024_Hero8_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Hidden Holiday Gems, eventKey=GM_Xmas2024, itemKeys=['GM_Xmas2024_XmasStory_08'], items=['Season Greetings'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: But I heard him exclaim, ere he drove out of sight,
+**IGNATIUS**: "Happy Holidays to all, and to all a good night."
 
 ### Hidden Holiday Gems — item discovered: One Last Surprise
 `GM_Xmas2024_Hero9_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Hidden Holiday Gems, eventKey=GM_Xmas2024, itemKeys=['GM_Xmas2024_XmasStory_09'], items=['One Last Surprise'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IGNATIUS**: It seems Santa has saved the best for the last; 
+**IGNATIUS**: Rewarding himself for good deeds of the past
 
 ### Hidden Holiday Gems — entering board
 `GM_Xmas2024_Intro_Dialogue` · seen 24.11.02–26.01.02
 - trigger: event, event=Hidden Holiday Gems, eventId=GM_Xmas2024, eventType=Collectible Board Event, moment=entering board (versions 24.11.02–26.01.02)
 
-_Referenced by the game, but no lines matched this id._
+**MASON**: Maddie! Maddie!
+**MADDIE** (Surprised): Wow, calm down Mason. What's got you so excited?
+**MASON** (Joyous): I- I just heard there are mines under Hopewell Bay, FILLED with treasure and and...
+**MASON** (Relaxed): And jewels and all sorts of cool stuff! Maybe I could ask Santa for some of them!
+**MADDIE** (Thinking): You know, I did find something in Ignatius's journal on the mines about the holiday season.
+**MADDIE** (Encouraging): He loved reading it to his children. Do you want to hear it?
+**MASON** (Encouraging): Yeah!
 
 ### Halloween2021IntroRoddyAndMeddie
 `Halloween2021IntroRoddyAndMeddie` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE**: Who's there?
+**RODDY**: Did you hear that the city is organising a Halloween challenge?
+**MADDIE** (Joyous): I did! I’m going to win that one!
+**RODDY** (Thinking): City officials will do some evaluation rounds as part of that and --
+**MADDIE** (Thinking): And do you think they’ll also evaluate my progress with the mansion renovation?
+**RODDY**: Exactly. Better clean things up a bit.
+**RODDY** (Doubtful): At least those spider webs should go.
 
 ### Halloween2021StairsTutorial1
 `Halloween2021StairsTutorial1` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE**: A hidden staircase?! Wonder where it leads...
 
 ### Hopeberry2022DoorTutorial
 `Hopeberry2022DoorTutorial` · seen 23.09.02–25.06.01
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
-**MADDIE** (Surprised): Wow?! This must be...  
-  _earlier:_ ~~Wow?! This must be…~~ (until 25.10.01)
+**MADDIE** (Surprised): Wow?! This must be...
 
 ### Hopeberry2022Intro
 `Hopeberry2022Intro` · seen 23.09.02–25.06.01
@@ -1022,71 +1446,122 @@ _Referenced by the game, but no lines matched this id._
 `Hopeberry2022IntroPart2` · seen 23.09.02–25.06.01
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
-**MADDIE** (Surprised): ...the place where all those Hopeberry Festival gear was being stored all these years!!  
-  _earlier:_ ~~…the place where all those Hopeberry Festival gear was being stored all these years!!~~ (until 25.10.01)
+**MADDIE** (Surprised): ...the place where all those Hopeberry Festival gear was being stored all these years!!
 **GRANDMA**: And everything has remained spick and span!
 **MADDIE** (Doubtful): How come you’re so excited but have never mentioned a thing about this festival?
 **GRANDMA**: By the time you came along the berries were long gone, no thanks to Walter.
 **MADDIE** (Surprised): Walter?? Who’s that? Why did he destroy the berries?
 **GRANDMA**: That’s all in the past dear. Now I must go find grandma Minnie’s Hopeberry pie recipe.
-**MADDIE** (Annoyed): Walter and Minnie... The newest additions to the Boulton family recipe for secrets.  
-  _earlier:_ ~~Walter and Minnie… The newest additions to the Boulton family recipe for secrets.~~ (until 25.10.01)
+**MADDIE** (Annoyed): Walter and Minnie... The newest additions to the Boulton family recipe for secrets.
 
 ### The Great Pumpkin Palooza — entering board
 `LBE_Halloween2023Intro` · seen 24.04.01–26.01.02
 - trigger: event, event=The Great Pumpkin Palooza, eventId=LBE_Halloween2023, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–26.01.02)
 
-_Referenced by the game, but no lines matched this id._
+**PEARL**: Welcome everyone to the Great Pumpkin Palooza! Hopewell Bay’s spooky jack o’lantern event!
+**PEARL**: It’s time to get creative and see what types of ghoulish masterpieces you can create!
+**EMILIO**: Pumpkin carving? Ha, haven’t done that in ages! Hopewell Bay sure does like keeping to traditions.
+**RODDY** (Relaxed): Definitely! And it’s a fun way to have a bit of friendly sport. Want to join in?
+**EMILIO** (Thinking): I- I don’t know... Last time I carved a pumpkin was with my mother... When I was seven.
+**RODDY** (Encouraging): PERFECT! Here, grab a knife and start carving!
+**RODDY** (Encouraging): May the best jack o’lantern win!
+**PEARL**: Wonderful! Let’s get this spooky Palooza started!
 
 ### The Great Pumpkin Palooza — event end
 `LBE_Halloween2023Outro` · seen 24.04.01–26.01.02
 - trigger: event, event=The Great Pumpkin Palooza, eventId=LBE_Halloween2023, eventType=Leaderboard Event, moment=event end (versions 24.04.01–26.01.02)
 
-_Referenced by the game, but no lines matched this id._
+**EMILIO**: That was fun! Amy is going to love these!
+**RODDY** (Doubtful): I thought you said the last time you carved a pumpkin was when you were seven?!
+**EMILIO** (Encouraging): It’s true, but I do ice sculpting as a pastime.
+**RODDY** (Discouraged): Geeze... What don’t you do?
+**EMILIO**: Don’t worry about it, buddy! I’m sure you’ll win next time.
+**RODDY**: Gosh... Thanks.
 
 ### The Great Bake-off — item discovered: Chicken Nest
 `LBE_May2023EggNest` · seen 23.09.02–23.11.02
 - trigger: item, event=The Great Bake-off, eventKey=LBE_May2023, itemKeys=['LBE_May2023_Nest_01'], items=['Chicken Nest'], moment=item discovered (versions 23.09.02–23.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**JACKIE** (Surprised): A nest? What am I supposed to do with this?!
+**GRANDMA** (Thinking): Hmm... It is a bake-off after all, so I'll probably need a lot of eggs.  
+  _(1 cosmetic edit not shown)_
+**HEIKKI** (Joyous): I might need a chicken coop...
 
 ### Floral Frenzy — entering board
 `LBE_Valentines2024_Intro_Dialogue` · seen 24.04.01–26.01.02
 - trigger: event, event=Floral Frenzy, eventId=LBE_Valentines2024, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–26.01.02)
 
-_Referenced by the game, but no lines matched this id._
+**PEARL**: Welcome to Floral Frenzy, a competition where we find out who makes the most magnificent flower arrangements in Hopewell Bay!
+**PEARL**: Our contenders are Deb, a lover of the more exotic flowers...
+**DEB** (Charming): I do have a penchant for the unusual.
+**PEARL** (Encouraging): Err, yes. And Julius who specializes in the gentle Japanese art of Ikebana. I can't wait to see what kind of creations you will produce!
+**ANTIQUEDEALER** (Charming): Salutations! Did you know that the history of Ikebana reaches back over 600 years?
+**PEARL**: Very interesting, indeed! And our last contender is... Jackie!
+**JACKIE** (Doubtful): Pearl, I told you I'm too busy to take part in a silly competition. I've never even tried flower arranging before!
+**PEARL** (Thinking): Haha, you're so funny!
+**PEARL** (Encouraging): Let's get to it, people. The competition is officially on - may the best amateur florist win!
 
 ### Floral Frenzy — event end
 `LBE_Valentines2024_Outro_Dialogue` · seen 24.04.01–26.01.02
 - trigger: event, event=Floral Frenzy, eventId=LBE_Valentines2024, eventType=Leaderboard Event, moment=event end (versions 24.04.01–26.01.02)
 
-_Referenced by the game, but no lines matched this id._
+**PEARL** (Surprised): What a competition we've had! I had no idea we have such flower arranging talent in our little town.
+**PEARL** (Encouraging): Aaand the winner is... Jackie!
+**JACKIE** (Surprised): W-what?? I really didn't expect this...
+**JACKIE** (Encouraging): I'd like to thank my fellow contenders for educating and inspiring me. I never knew I had it in me to get excited about flower arranging!
+**DEB** (Doubtful): Next time, we can see if it was just beginner's luck... but congratulations, Jackie. You did well!
+**JACKIE** (Doubtful): Thank you, Deb!
 
 ### Gingerbread Jamboree — entering board
 `LBE_Xmas2023_IntroDialogue_Dialogue` · seen 24.04.01–26.01.02
 - trigger: event, event=Gingerbread Jamboree, eventId=LBE_Xmas2023, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–24.09.03)
 - trigger: event, event=Gingerbread Jamboree, eventId=LBE_Xmas2024, eventType=Leaderboard Event, moment=entering board (versions 24.11.02–26.01.02)
 
-_Referenced by the game, but no lines matched this id._
+**CHERRY**: It's the season of good cheer... and gingerbread! But who makes it the most scrumptious? Let's find out!
+**CHERRY**: Although everyone knows my gingerbread is the tastiest...
+**GRANDMA** (Frustrated): Maybe we'll let the people decide, Cherry? Besides, mine has been a firm favorite for decades.
+**MADDIE** (Encouraging): Look! I found something interesting in the Boulton attic! It looks like a really old recipe book.
+**GRANDMA** (Surprised): What does it say here? "The Best Gingerbread Recipe Ever Written?"
+**CHERRY** (Doubtful): Someone has scribbled stuff around it... "Add a pinch of magic and stir through"?
+**CHERRY** (Doubtful): What do you say if we skip the competition this year and bake together with this recipe instead?
+**GRANDMA** (Encouraging): I suppose it is the season for peace and goodwill to all bakers... Why not?
 
 ### Gingerbread Jamboree — event end
 `LBE_Xmas2023_OutroDialogue_Dialogue` · seen 24.04.01–26.01.02
 - trigger: event, event=Gingerbread Jamboree, eventId=LBE_Xmas2023, eventType=Leaderboard Event, moment=event end (versions 24.04.01–24.09.03)
 - trigger: event, event=Gingerbread Jamboree, eventId=LBE_Xmas2024, eventType=Leaderboard Event, moment=event end (versions 24.11.02–26.01.02)
 
-_Referenced by the game, but no lines matched this id._
+**CHERRY**: The book might just be right. This gingerbread is GREAT!
+**GRANDMA** (Doubtful): Hmm, you are right. It is making me feel... all warm and fuzzy inside.
+**CHERRY** (Encouraging): Maybe there really is a pinch of magic in there...
+**GRANDMA** (Joyous): Ha-ha! Maybe there is!
+**CHERRY** (Thinking): But next year, I will show you the best gingerbread recipe...
+**GRANDMA**: Just have another gingerbread and enjoy the moment, will you!
 
 ### Halloween Lucky Catch — entering board
 `LC_Halloween_Intro_Dialogue` · seen 24.09.02–25.08.02
 - trigger: event, event=Halloween Lucky Catch, eventId=LC_Halloween, eventType=Collectible Board Event, moment=entering board (versions 24.09.02–25.08.02)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: You guessed it -- it's time to...
+**MADDIE** (Worried): ...t-to go fishing?
+**GRANDMA** (Thinking): Are you feeling alright, dearie?
+**MADDIE** (Discouraged): Yeah, just a bit light-headed... Like something seems a bit off somehow...
+**GRANDMA**: We should really get going. There is plenty of fish to catch and release!
+**MADDIE** (Worried): Y-yes, just snap a photo and let them go!
+**GRANDMA** (Encouraging): Are you ready?
+**MADDIE** (Thinking): Err... Let's fish!
 
 ### Halloween Lucky Catch — event end
 `LC_Halloween_Outro_Dialogue` · seen 24.09.02–25.08.02
 - trigger: event, event=Halloween Lucky Catch, eventId=LC_Halloween, eventType=Collectible Board Event, moment=event end (versions 24.09.02–25.08.02)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA** (Encouraging): Good morning, Maddie!
+**GRANDMA** (Encouraging): You guessed it - it's time to go f---
+**GRANDMA** (Thinking): Are you feeling alright?
+**MADDIE** (Worried): I'm not feeling up for fishing today...
+**MADDIE** (Doubtful): I just had the weirdest dream full of the weirdest fish.
+**MADDIE** (Doubtful): It was so vivid!
+**GRANDMA** (Charming): Sounds like Halloween is playing tricks on you, dearie!
 
 ### Summer Lucky Catch — entering board
 `LC_Summer_Intro_Dialogue` · seen 24.04.01–26.03.01
@@ -1097,275 +1572,421 @@ _Referenced by the game, but no lines matched this id._
 - trigger: event, event=Summer Lucky Catch, eventId=LC_Summer_05, eventType=Collectible Board Event, moment=entering board (versions 25.06.02–25.06.02)
 - trigger: event, event=Summer Lucky Catch, eventId=LC_Summer_06, eventType=Collectible Board Event, moment=entering board (versions 25.06.02–25.06.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Encouraging): You guessed it - it's time to go fishing!
+**MADDIE** (Encouraging): Hopewell Bay is full of amazing fish, and this is your chance to reel in some big ones.
+**GRANDMA** (Charming): How big?
+**MADDIE** (Relaxed): You might be surprised!
+**MADDIE**: All you need to do is catch as many different fish as you can, snap a photo and let them go - it's that simple!
+**GRANDMA** (Relaxed): If you say so!
+**MADDIE** (Relaxed): Are you ready?
+**GRANDMA** (Joyous): Let's fish!
 
 ### Green Acres Quest — entering board
 `LDE_GreenAcresQuest2024_BoardIntro_Dialogue` · seen 24.07.01–25.07.01
 - trigger: event, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, eventType=Collectible Board Event, moment=entering board (versions 24.07.01–25.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Frustrated): Alright, Maddie... Stay cool.
+**MADDIE** (Frustrated): Emilio is back. He’s brought “her” along, and it changes nothing!
+**MADDIE**: Just focus on making the best community garden, ever!
+**MADDIE** (Encouraging): Yeah!
+**MADDIE** (Thinking): Hmm...
+**MADDIE** (Doubtful): Why do I keep talking to myself?
 
 ### Green Acres Quest — item discovered: Bella
 `LDE_GreenAcresQuest2024_CharacterBella_02_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterBella_02'], items=['Bella'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**BELLA** (Annoyed): Look at you, being all busy! So cute!
+**MADDIE** (Doubtful): Oh... Hi. Did you need anything?
 
 ### Green Acres Quest — item discovered: Cherry
 `LDE_GreenAcresQuest2024_CharacterCherry_02_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterCherry_02'], items=['Cherry'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**CHERRY**: Hey there! Could you help an old girl out?
+**MADDIE** (Encouraging): No problem, Cherry!
 
 ### Green Acres Quest — item discovered: Deb
 `LDE_GreenAcresQuest2024_CharacterDeb_02_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterDeb_02'], items=['Deb'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**DEB**: Sweetie! I need your help for a moment!
+**MADDIE** (Encouraging): Of course!
 
 ### Green Acres Quest — item discovered: Grandma
 `LDE_GreenAcresQuest2024_CharacterGrandma_02_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterGrandma_02'], items=['Grandma'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: Hello, dearie. Could you help me?
+**MADDIE** (Encouraging): Of course, Grandma.
 
 ### Green Acres Quest — item discovered: 79979616
 `LDE_GreenAcresQuest2024_CharacterJackie_02_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['79979616'], items=['79979616'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**JACKIE**: Hey, Maddie! Could you help me out for a sec?
+**MADDIE** (Encouraging): Sure thing!
 
 ### Green Acres Quest — item discovered: Julius
 `LDE_GreenAcresQuest2024_CharacterJulius_02_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterJulius_02'], items=['Julius'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**ANTIQUEDEALER**: Salutations, Maddie! Might I bother you for a second?
+**MADDIE** (Encouraging): Why not?
 
 ### Green Acres Quest — item discovered: Mason
 `LDE_GreenAcresQuest2024_CharacterMason_02_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterMason_02'], items=['Mason'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MASON**: Maddie, Maddie! I don’t know what I’m doing...
+**MADDIE** (Encouraging): Don’t worry, I’ll help you out.
 
 ### Green Acres Quest — item discovered: Poppy
 `LDE_GreenAcresQuest2024_CommonFlowerD_01_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CommonFlowerD_01'], items=['Poppy'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Relaxed): Poppies are so beautiful!
+**GRANDMA** (Charming): And “versatile” too.
+**MADDIE** (Thinking): What do you mean by that?
 
 ### LDE GreenAcresQuest2024 FlowerCompost Dialogue
 `LDE_GreenAcresQuest2024_FlowerCompost_Dialogue` · seen 25.05.01–26.04.02
 - trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
 
+**MADDIE** (Joyous): Flower Compost helps you get rid of Flowers you don't need, to get more Soil.
 
 ### Green Acres Quest — item discovered: Friendship Medallion
 `LDE_GreenAcresQuest2024_Friendship_08_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Friendship_08'], items=['Friendship Medallion'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**BELLA** (Doubtful): Hello... What do you want?
+**MASON** (Charming): Hi, my name is Mason and I... I made this medallion for you.
+**BELLA** (Doubtful): Oh... Thanks.
+**MASON** (Discouraged): Just a little 'Welcome to Hopewell Bay' gift for you!
 
 ### Green Acres Quest — item discovered: Flying Garden Gnome
 `LDE_GreenAcresQuest2024_GardenGnomes_07_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_GardenGnomes_07'], items=['Flying Garden Gnome'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Charming): Hey there, little guy!
+**MADDIE** (Encouraging): Are you busy keeping my garden safe?
 
 ### Green Acres Quest — item discovered: Hedgehog
 `LDE_GreenAcresQuest2024_GoodAnimals_05_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_GoodAnimals_05'], items=['Hedgehog'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MASON** (Frustrated): Hmph...
+**MADDIE** (Doubtful): What’s wrong, Mason?
+**MASON** (Annoyed): I thought hedgehogs were fast...
 
 ### Green Acres Quest — item discovered: Extra Hot Chilies
 `LDE_GreenAcresQuest2024_GreenhouseChilis_06_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_GreenhouseChilis_06'], items=['Extra Hot Chilies'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Encouraging): What have you got there, Grandma?
+**GRANDMA** (Encouraging): Oh this, dearie? Why, it’s a classic Boulton Hot Sauce!
+**GRANDMA** (Charming): I’ve had the recipe for YEARS, but never had the chance to make it. Here, have a taste!
+**MADDIE** (Surprised): Oka---aAAYYA WOW! That's SPICY!
+**GRANDMA** (Joyous): Good!
 
 ### LDE GreenAcresQuest2024 Intro Dialogue
 `LDE_GreenAcresQuest2024_Intro_Dialogue` · seen 25.05.01–26.04.02
 - trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
 
+**GRANDMA**: Hello, dearie! What are you up to?
+**MADDIE**: With everything that’s happened so far, I think it’s time we give a little back to people of Hopewell Bay.
+**GRANDMA** (Relaxed): Really? How do we do that?
+**MADDIE** (Encouraging): By building a biodiverse community garden! Not only will it allow people to grow their own produce, it’ll be helpful for the environment.
+**EMILIO** (Encouraging): That sounds like a wonderful idea, Maddie!
+**MADDIE** (Surprised): E- EMILIO?!!
+**EMILIO** (Surprised): Maddie, you seemed surprised?
+**MADDIE** (Annoyed): Of course I’m surprised! What are you doing back?!
+**EMILIO** (Surprised): Didn’t your Grandma-
+**MADDIE** (Annoyed): Grandma?!
+**GRANDMA** (Doubtful): Oh riiiight... Ooops.
+**EMILIO**: Uhm... Anyway, can I introduce you to Isabella Cruz?
+**BELLA** (Relaxed): Hello Maddie! I’ve heard so MUCH about you! You’re much cuter in person! But shorter than I expected.
+**MADDIE** (Doubtful): Nice to meet you! You’re exactly what I expected!
 
 ### Green Acres Quest — event end
 `LDE_GreenAcresQuest2024_Outro_Dialogue` · seen 24.07.01–25.07.01
 - trigger: event, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, eventType=Collectible Board Event, moment=event end (versions 24.07.01–25.07.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA** (Encouraging): I would call this a success, dearie!
+**MADDIE** (Discouraged): Thanks Grandma...
+**GRANDMA** (Discouraged): What is it, dearie?
+**MADDIE** (Angry): It’s...
+**GRANDMA** (Worried): Emilio?
+**MADDIE** (Discouraged): Yeah. I thought I was getting over our breakup, but with him coming back...
+**GRANDMA** (Frustrated): Look dearie, I wouldn’t worry about him... Or her.
+**GRANDMA** (Frustrated): You’re much too good for them.
+**MADDIE** (Angry): But it still hurts, Grandma.
+**GRANDMA** (Discouraged): I know... I know...
 
 ### Green Acres Quest — item discovered: Hummingbird
 `LDE_GreenAcresQuest2024_Pollinator_05_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Pollinator_05'], items=['Hummingbird'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**ANTIQUEDEALER** (Encouraging): Oh wow, a hummingbird!
+**ANTIQUEDEALER** (Encouraging): I haven’t seen those around these parts in a long time.
+**MADDIE** (Encouraging): Really?
+**ANTIQUEDEALER** (Joyous): Looks like your garden is bringing back the old residence!
 
 ### Green Acres Quest — item discovered: Magenta Marigold
 `LDE_GreenAcresQuest2024_RareFlowerA_01_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_RareFlowerA_01'], items=['Magenta Marigold'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Relaxed): This garden is really working out!
+**MADDIE** (Thinking): Maybe I should sell some of these flowers at the flower market?
 
 ### Green Acres Quest — item discovered: Purple Hydrangea
 `LDE_GreenAcresQuest2024_RareFlowerB_01_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_RareFlowerB_01'], items=['Purple Hydrangea'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA** (Encouraging): How beautiful, Maddie!
+**GRANDMA** (Charming): And my favourite color too.
 
 ### LDE GreenAcresQuest2024 TA1 Dialogue
 `LDE_GreenAcresQuest2024_TA1_Dialogue` · seen 25.05.01–26.04.02
 - trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
 
+**EMILIO**: Maddie?
+**MADDIE** (Surprised): Oh... Hi.
+**EMILIO**: Look... I understand you’re still angry with me. I’m so sorry about what happened between us...
+**EMILIO** (Thinking): But, I hope you understand that my work over there was really important! I had to go.
+**MADDIE** (Annoyed): Did you HAVE to bring her back with you?
+**EMILIO** (Surprised): Bella? Well... Yes. She’s my partner.
+**MADDIE** (Doubtful): Partner?
+**EMILIO** (Encouraging): Work partner! I’ve known her since University, Maddie. When she called me to ask for-
+**MADDIE** (Annoyed): She called you?!
+**EMILIO** (Surprised): We’re just friends!
+**MADDIE** (Frustrated): Ugh... I’m sorry Emilio, I don’t have time for this.
 
 ### LDE GreenAcresQuest2024 TA4 Dialogue
 `LDE_GreenAcresQuest2024_TA4_Dialogue` · seen 25.05.01–26.04.02
 - trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
 
+**JACKIE** (Surprised): Maddie! You won’t believe who I just saw!
+**MADDIE** (Frustrated): Emilio? Yeah... He dropped by earlier with her.
+**JACKIE** (Annoyed): Her?! You mean she’s here?
+**MADDIE** (Doubtful): Yep! Just a perfect ray of sunshine, that one.
+**JACKIE**: Eeh... This must be really awkward for you.
+**MADDIE** (Annoyed): Oh no, it’s totally fine. Bella and Emilio are “just friends...”
+**JACKIE** (Doubtful): Oh boy... I know that look.
 
 ### LDE GreenAcresQuest2024 TA7 Dialogue
 `LDE_GreenAcresQuest2024_TA7_Dialogue` · seen 25.05.01–26.04.02
 - trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
 
+**BELLA**: Hello Maddie!
+**MADDIE** (Surprised): Oh! Um, hi!
+**BELLA** (Relaxed): What a wonderful little garden you’ve made here!
+**BELLA** (Thinking): Reminds me of those little gardens that my kindergarteners used to make! So colorful and disorganized!
+**MADDIE** (Doubtful): Uhm... Thank you?
+**BELLA** (Relaxed): Oh, don’t mention it! If you need any HELP at all, you know who to call! I used to run a holistic horticulture center in Europe for a couple of years. We won quite a few awards for it.
+**MADDIE** (Annoyed): Thanks... I’ll keep that in mind.
+**BELLA** (Annoyed): And I LOOVE that yellow on you! Few can rock that color. You go, little girl!
 
 ### LDE GreenAcresQuest2024 TC1 Dialogue
 `LDE_GreenAcresQuest2024_TC1_Dialogue` · seen 25.05.01–26.04.02
 - trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
 
+**MADDIE** (Frustrated): Ugh...
+**GRANDMA** (Worried): What’s wrong?
+**MADDIE** (Discouraged): This weed is pretty tough! It has really thick roots.
+**GRANDMA**: Ah, be careful with that. It’s Mandragora.
+**MADDIE** (Surprised): Man- Mandrake? It's poisonous?
+**GRANDMA**: Yes, dearie.
+**MADDIE** (Thinking): Really? Hmm...
 
 ### LDE GreenAcresQuest2024 TC3 Dialogue
 `LDE_GreenAcresQuest2024_TC3_Dialogue` · seen 25.05.01–26.04.02
 - trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
 
+**RODDY**: Wow! You really went all out on this community garden!
+**MADDIE** (Charming): Thanks Roddy! I hope everyone will like it.
+**RODDY** (Encouraging): Oh, they really do!
+**RODDY** (Relaxed): Not bad, Maddie... Not bad at all!
 
 ### Green Acres Quest — item discovered: Calla Lily
 `LDE_GreenAcresQuest2024_UncommonFlowerA_01_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_UncommonFlowerA_01'], items=['Calla Lily'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Charming): These lilies will really give the garden an elegant look!
+**MADDIE** (Encouraging): And I think Deb will love them.
 
 ### LDE GreenAcresQuest2024 VeggieCompost Dialogue
 `LDE_GreenAcresQuest2024_VeggieCompost_Dialogue` · seen 25.05.01–26.04.02
 - trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
 
+**MADDIE** (Joyous): Vegetable Compost decreases the level of any vegetable or chili. Note that the Compost only gives back one lower level item.
 
 ### Green Acres Quest — item discovered: Basket of Vegetables
 `LDE_GreenAcresQuest2024_Veggies_08_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Veggies_08'], items=['Basket of Vegetables'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**CHERRY** (Joyous): You got some fantastic vegetables growing here, Maddie!
+**MADDIE** (Encouraging): Take as many as you wish! This is a community garden.
+**CHERRY** (Encouraging): Alright, veggies. You’re coming with me!
 
 ### Green Acres Quest — entering board
 `LDE_GreenAcresQuest2024_v2_BoardIntro_Dialogue` · seen 25.08.01–26.04.02
 - trigger: event, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, eventType=Collectible Board Event, moment=entering board (versions 25.08.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**EMILIO**: OK, I've got the plans Maddie drew for the garden, and all the equipment I need.
+**EMILIO** (Thinking): Gardening can't be that hard... Can it?
+**EMILIO** (Thinking): It's just a little biodiverse green space with a variety of fruit and vegetables.
+**EMILIO** (Doubtful): Buck up, Emilio. You can build a pirate ship, and you've swum with sharks. You won't back down from a challenge!
+**EMILIO** (Annoyed): *Sigh* Why do I keep talking to myself?
 
 ### Green Acres Quest — item discovered: Bella
 `LDE_GreenAcresQuest2024_v2_CharacterBella_02_Dialogue` · seen 26.03.01–26.04.02
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterBella_02'], items=['Bella'], moment=item discovered (versions 26.03.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**BELLA**: You're helping at the garden, too? This community really pulls together...
+**MASON** (Surprised): That's how we roll!
 
 ### Green Acres Quest — item discovered: Cherry
 `LDE_GreenAcresQuest2024_v2_CharacterCherry_02_Dialogue` · seen 26.03.01–26.04.02
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterCherry_02'], items=['Cherry'], moment=item discovered (versions 26.03.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**EMILIO** (Surprised): Cherry, I'm desperate. Could you help me with this garden?
+**CHERRY** (Doubtful): Wow! I can try, but I'm not much of a gardener.
 
 ### Green Acres Quest — item discovered: Deb
 `LDE_GreenAcresQuest2024_v2_CharacterDeb_02_Dialogue` · seen 26.03.01–26.04.02
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterDeb_02'], items=['Deb'], moment=item discovered (versions 26.03.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**DEB**: You look like you need some help, my dear!
+**EMILIO** (Surprised): How did you know?
 
 ### Green Acres Quest — item discovered: Grandma
 `LDE_GreenAcresQuest2024_v2_CharacterGrandma_02_Dialogue` · seen 26.03.01–26.04.02
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterGrandma_02'], items=['Grandma'], moment=item discovered (versions 26.03.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA** (Thinking): Hmmm... You do not know much about gardening, do you?
+**EMILIO** (Thinking): Not really...
+**GRANDMA** (Charming): I guessed as much. Let me show you!
 
 ### Green Acres Quest — item discovered: Jackie
 `LDE_GreenAcresQuest2024_v2_CharacterJackie_02_Dialogue` · seen 26.03.01–26.04.02
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterJackie_03'], items=['Jackie'], moment=item discovered (versions 26.03.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**EMILIO**: Jackie, would you have a moment to help me?
+**JACKIE** (Hesitant): Sure thing - but I don't know much about gardening!
 
 ### Green Acres Quest — item discovered: Julius
 `LDE_GreenAcresQuest2024_v2_CharacterJulius_02_Dialogue` · seen 26.03.01–26.04.02
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterJulius_02'], items=['Julius'], moment=item discovered (versions 26.03.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**EMILIO** (Thinking): Julius, do you know anything about gardening?
+**ANTIQUEDEALER** (Thinking): Well, I have read several books about it. Does that help?
 
 ### Green Acres Quest — item discovered: Mason
 `LDE_GreenAcresQuest2024_v2_CharacterMason_02_Dialogue` · seen 26.03.01–26.04.02
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterMason_02'], items=['Mason'], moment=item discovered (versions 26.03.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**MASON**: Are you building a garden?
+**EMILIO** (Encouraging): I'm trying... I couldn't tempt you to help, could I?
+**MASON** (Encouraging): I guess I owe you one. Hand me a rake!
 
 ### Green Acres Quest — item discovered: Poppy
 `LDE_GreenAcresQuest2024_v2_CommonFlowerD_01_Dialogue` · seen 26.03.01–26.04.02
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CommonFlowerD_01'], items=['Poppy'], moment=item discovered (versions 26.03.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Encouraging): If you want to attract pollinators, your garden needs flowers, too!
+**MADDIE** (Encouraging): What's Bella's favorite flower?
+**EMILIO** (Doubtful): I have no idea... That's bad, isn't it?
 
 ### Green Acres Quest — item discovered: Flower Compost
 `LDE_GreenAcresQuest2024_v2_FlowerCompost_Dialogue` · seen 26.03.01–26.04.02
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_FlowerCompost_Sink_01'], items=['Flower Compost'], moment=item discovered (versions 26.03.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Encouraging): Flower Compost helps you get rid of Flowers you don't need, to get more Soil.
 
 ### Green Acres Quest — item discovered: Friendship Medallion
 `LDE_GreenAcresQuest2024_v2_Friendship_08_Dialogue` · seen 26.03.01–26.04.02
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Friendship_08'], items=['Friendship Medallion'], moment=item discovered (versions 26.03.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**BELLA**: I've been looking for you, Emilio! I have a surprise for you - a little wedding present.
+**BELLA**: We didn't get a chance to get each other anything before, but I wanted to give you something special.
+**EMILIO** (Surprised): What a great little bracelet! And you made it yourself?
+**BELLA** (Relaxed): I did... Do you like it?
+**EMILIO** (Encouraging): I LOVE it.
 
 ### Green Acres Quest — item discovered: Flying Garden Gnome
 `LDE_GreenAcresQuest2024_v2_GardenGnomes_07_Dialogue` · seen 26.03.01–26.04.02
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_GardenGnomes_07'], items=['Flying Garden Gnome'], moment=item discovered (versions 26.03.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**ANTIQUEDEALER**: Don't forget to add some garden gnomes!
+**EMILIO** (Doubtful): Do I really need garden gnomes? Do you think Bella would like them?
+**ANTIQUEDEALER** (Relaxed): Of course! Everyone likes garden gnomes.
+**EMILIO** (Relaxed): I guess we'll have garden gnomes!
 
 ### Green Acres Quest — item discovered: Hedgehog
 `LDE_GreenAcresQuest2024_v2_GoodAnimals_05_Dialogue` · seen 26.03.01–26.04.02
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_GoodAnimals_05'], items=['Hedgehog'], moment=item discovered (versions 26.03.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**EMILIO** (Encouraging): Is that a... hedgehog?? It's so adorable!
+**EMILIO** (Encouraging): Welcome to Bella's community garden, little guy.
 
 ### Green Acres Quest — item discovered: Extra Hot Chilies
 `LDE_GreenAcresQuest2024_v2_GreenhouseChilis_06_Dialogue` · seen 26.03.01–26.04.02
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_GreenhouseChilis_06'], items=['Extra Hot Chilies'], moment=item discovered (versions 26.03.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**EMILIO** (Thinking): Bella will definitely want some chilies. The hotter, the better!
+**MASON**: What are these? Can I taste them?
+**EMILIO** (Surprised): W-wait! They're...
+**MASON** (Worried): HOLY MOTHER OF LAVA! These are h-h-hot!
 
 ### Green Acres Quest — event start
 `LDE_GreenAcresQuest2024_v2_Intro_Dialogue` · seen 26.04.02–26.04.02
 - trigger: event, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, eventType=Collectible Board Event, moment=event start (versions 26.04.02–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**EMILIO**: Maddie, I was wondering if you could lend me a hand...
+**MADDIE** (Relaxed): Of course! What's up?
+**EMILIO** (Thinking): Married life with Bella has been wonderful, but our wedding happened so unexpectedly that I never got to give her a proper wedding gift.
+**EMILIO** (Thinking): I've been thinking about building her a little garden, as her works concentrate on biodiversity.
+**EMILIO** (Relaxed): The problem is, I know nothing about gardening.
+**EMILIO** (Encouraging): I know you've got a green thumb, so... could you help me? I know it's a lot to ask.
+**MADDIE** (Encouraging): It sounds like a great idea. I'm a bit busy around the Mansion, but I can give you some guidance.
+**MADDIE** (Encouraging): And I know quite a few people who can help with the rest!
 
 ### Green Acres Quest — event end
 `LDE_GreenAcresQuest2024_v2_Outro_Dialogue` · seen 25.08.01–26.04.02
 - trigger: event, event=Green Acres Quest, eventId=LDE_GreenAcresQuest2024, eventType=Collectible Board Event, moment=event end (versions 25.08.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**EMILIO**: Phew, that was a lot of work! I have a new appreciation for all the work you've done in the Mansion gardens.
+**EMILIO** (Relaxed): With the composts and the pollinators, there's so much to think about!
+**MADDIE** (Relaxed): And Bella seemed pretty happy with her wedding gift.
+**EMILIO** (Thinking): She did, didn't she? But how can I ever beat this gift?
+**MADDIE** (Encouraging): Next year you can build her an aquarium!
+**EMILIO** (Doubtful): That's a great idea! Do you think you could--
+**MADDIE** (Hesitant): Oh, man! I think I can hear Grandma calling me. Sorry, but I have to run!
 
 ### Green Acres Quest — item discovered: Hummingbird
 `LDE_GreenAcresQuest2024_v2_Pollinator_05_Dialogue` · seen 26.03.01–26.04.02
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Pollinator_05'], items=['Hummingbird'], moment=item discovered (versions 26.03.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**EMILIO** (Surprised): Is that a hummingbird?
+**MADDIE** (Relaxed): Your garden is already attracting wildlife!
+**EMILIO** (Relaxed): It's working! The garden is really working!
 
 ### Green Acres Quest — item discovered: Magenta Marigold
 `LDE_GreenAcresQuest2024_v2_RareFlowerA_01_Dialogue` · seen 26.03.01–26.04.02
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_RareFlowerA_01'], items=['Magenta Marigold'], moment=item discovered (versions 26.03.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**EMILIO**: I can't believe how many people have helped me build this garden!
+**EMILIO** (Encouraging): With so many beautiful flowers, everyone can enjoy it.
+**EMILIO** (Thinking): I just hope Bella finds her favorite among them...
 
 ### Green Acres Quest — item discovered: Purple Hydrangea
 `LDE_GreenAcresQuest2024_v2_RareFlowerB_01_Dialogue` · seen 26.03.01–26.04.02
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_RareFlowerB_01'], items=['Purple Hydrangea'], moment=item discovered (versions 26.03.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: What is Bella's favorite flower? Could it be the rose? Or tulip?
+**GRANDMA** (Thinking): Maybe the forget-me-not?
+**EMILIO** (Thinking): I still don't know. I feel totally hopeless!
 
 ### LDE GreenAcresQuest2024 v2 TA1 Dialogue
 `LDE_GreenAcresQuest2024_v2_TA1_Dialogue` · seen 26.02.01–26.04.02
@@ -1419,55 +2040,80 @@ _Referenced by the game, but no lines matched this id._
 `LDE_GreenAcresQuest2024_v2_UncommonFlowerA_01_Dialogue` · seen 26.03.01–26.04.02
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_UncommonFlowerA_01'], items=['Calla Lily'], moment=item discovered (versions 26.03.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**DEB** (Encouraging): I have a wonderful idea for your garden -- something Bella would love!
+**EMILIO** (Surprised): A corpse flower?
+**DEB** (Thinking): How did you know??
 
 ### Green Acres Quest — item discovered: Vegetable Compost
 `LDE_GreenAcresQuest2024_v2_VeggieCompost_Dialogue` · seen 26.03.01–26.04.02
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_VeggieCompost_Sink_01'], items=['Vegetable Compost'], moment=item discovered (versions 26.03.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE**: Vegetable Compost decreases the level of any vegetable or chili. Note that the Compost only gives back one lower level item.
 
 ### Green Acres Quest — item discovered: Basket of Vegetables
 `LDE_GreenAcresQuest2024_v2_Veggies_08_Dialogue` · seen 26.03.01–26.04.02
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_Veggies_08'], items=['Basket of Vegetables'], moment=item discovered (versions 26.03.01–26.04.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Joyous): You've done a fantastic job, Emilio!
+**EMILIO** (Relaxed): I think I'm starting to get the hang of this. Gardening is fun!
 
 ### Circus Caper — item discovered: Unicycle
 `LDE_Rumors2025_CircusProps_07_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CircusProps_07'], items=['Unicycle'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MASON**: You were right! The circus is in town!
+**MASON** (Joyous): I saw them setting up the big top right in front of the Mansion.
+**MADDIE** (Relaxed): It's pretty cool, isn't it?
+**MASON** (Thinking): It sure is. But I just have one question.
+**MASON** (Thinking): How in tarnation do you ride a bike with just one wheel?
 
 ### Circus Caper — item discovered: Mini Raffle Ticket
 `LDE_Rumors2025_Lottery_01_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Lottery_01'], items=['Mini Raffle Ticket'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**ANTIQUEDEALER** (Charming): I bought lots of raffle tickets to make sure I win the biggest prize!
+**ANTIQUEDEALER** (Discouraged): My ticket has never won, but this time the prize will be mine!
+**DEB** (Joyous): Ah, the excitement! I think I will get some raffle tickets, too.
+**ANTIQUEDEALER** (Relaxed): What is it, Ursula? Are you not going to buy a couple of raffle tickets?
+**GRANDMA** (Doubtful): I know this crowd... At the circus, the house always wins.
 
 ### Circus Caper — item discovered: Small Scrap
 `LDE_Rumors2025_PaperScraps_01_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_PaperScraps_01'], items=['Small Scrap'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Surprised): What are these scraps of paper in the dumpster?
+**MADDIE** (Thinking): There's some writing on them, but I can't make it out...
+**MADDIE** (Thinking): This one says something about the Mansion!
+**MADDIE** (Thinking): I wonder if I could put them together with some tape.
 
 ### Circus Caper — item discovered: Set of Tokens
 `LDE_Rumors2025_Prizes_03_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Prizes_03'], items=['Set of Tokens'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE**: Are you going to the circus?
+**HANK** (Joyous): You bet I am!
+**HANK** (Charming): But I don't want to see any clowns...
+**HANK** (Charming): Nothing scarier than a clown.
 
 ### Circus Caper — item discovered: Stuffed Bunny
 `LDE_Rumors2025_Prizes_07_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Prizes_07'], items=['Stuffed Bunny'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**RODDY** (Thinking): The circus would be a great cover for a criminal enterprise, don't you think?
+**MADDIE** (Thinking): Why? I don't think there's a more colorful and conspicuous group.
+**RODDY** (Relaxed): I know! They're hiding in plain sight.
+**RODDY** (Relaxed): It's the perfect sleight of hand.
 
 ### Circus Caper — item discovered: Stuffed Unicorn
 `LDE_Rumors2025_Prizes_11_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Prizes_11'], items=['Stuffed Unicorn'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Encouraging): What a show that was!
+**MASON** (Thinking): I really didn't expect the magician to pull a raccoon out of his hat.
+**MADDIE**: What did you think, Julius?
+**ANTIQUEDEALER** (Discouraged): I'm a little bit disappointed.
+**MADDIE** (Surprised): Why?
+**ANTIQUEDEALER** (Frustrated): Deb won the biggest prize in the raffle - and she had only bought one ticket!
 
 ### LDE Rumors2025 TA3 Dialogue
 `LDE_Rumors2025_TA3_Dialogue` · seen 25.05.01–25.06.01
@@ -1506,14 +2152,32 @@ _Referenced by the game, but no lines matched this id._
 - trigger: event, event=Lucky Snap Spring, eventId=LS_Easter, eventType=Collectible Board Event, moment=entering board (versions 25.04.02–26.01.02)
 - trigger: event, event=Easter Lucky Snap, eventId=LS_Easter, eventType=Collectible Board Event, moment=entering board (versions 26.02.01–26.02.03)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Joyous): I've done some studying since our last bird-watching trip, and I can't wait to get out there!
+**ANTIQUEDEALER** (Charming): How marvelous! The weather looks most promising, too.
+**MASON** (Charming): Greetings, old people!  
+  _earlier:_ ~~Hello, old people!~~ (until 25.04.01)
+**MADDIE** (Doubtful): We're not that old!
+**MASON** (Thinking): Are you planning for a *bird-watching* day?
+**MADDIE** (Doubtful): Well, yes...
+**MASON** (Relaxed): I rest my case.
+**MASON**: How about you make it more interesting?
+**MADDIE** (Thinking): What do you mean?
+**MASON** (Joyous): Let's see which one of you can spot the most exotic creature.
+**ANTIQUEDEALER** (Thinking): Hmmm... I feel I have an unfair advantage, as I have been bird-watching for much longer.
+**MADDIE** (Encouraging): You might be surprised by how much I've learned. I've had an excellent teacher, after all!
+**ANTIQUEDEALER** (Joyous): Flattery will get you everywhere. Let's do it!
 
 ### Lucky Snap Spring — event end
 `LS_Easter_Outro_Dialogue` · seen 25.04.02–26.02.03
 - trigger: event, event=Lucky Snap Spring, eventId=LS_Easter, eventType=Collectible Board Event, moment=event end (versions 25.04.02–26.01.02)
 - trigger: event, event=Easter Lucky Snap, eventId=LS_Easter, eventType=Collectible Board Event, moment=event end (versions 26.02.01–26.02.03)
 
-_Referenced by the game, but no lines matched this id._
+**MASON**: Let's hear it! Which one of you spotted the most exotic bird?
+**MADDIE** (Encouraging): I only spotted adorable baby animals, but I'm not complaining!
+**ANTIQUEDEALER** (Thinking): I am not sure about birds, but I did spot something that took me quite by surprise.
+**MADDIE** (Surprised): What was it?
+**ANTIQUEDEALER** (Relaxed): A rare winged wonder - Mason!
+**MASON** (Encouraging): What can I say? I photograph really well.
 
 ### Summer Lucky Snap — entering board
 `LS_Summer_Intro_Dialogue` · seen 25.05.01–26.03.01
@@ -1523,61 +2187,99 @@ _Referenced by the game, but no lines matched this id._
 - trigger: event, event=Summer Lucky Snap, eventId=LS_Summer_04, eventType=Collectible Board Event, moment=entering board (versions 25.05.01–25.06.01)
 - trigger: event, event=Summer Lucky Snap, eventId=LS_Summer_05, eventType=Collectible Board Event, moment=entering board (versions 25.06.02–25.06.02)
 
-_Referenced by the game, but no lines matched this id._
+**ANTIQUEDEALER** (Charming): Binoculars at the ready, Maddie. Let's go birding!
+**MADDIE** (Worried): I'm not sure there's any point...
+**ANTIQUEDEALER** (Worried): What on earth do you mean?
+**MADDIE** (Thinking): Well, it's like all the birds have disappeared!
+**ANTIQUEDEALER** (Relaxed): Oh, no, my dear! They haven't disappeared... but they are laying low.
+**ANTIQUEDEALER** (Relaxed): You see, they did the hard work of migrating back and then formed families.
+**ANTIQUEDEALER**: Now they are molting...
+**MADDIE** (Thinking): Molting? Losing their feathers?
+**ANTIQUEDEALER** (Charming): Exactly! And they will emerge looking quite different.
+**ANTIQUEDEALER** (Charming): You just need to know where to look!
+**MADDIE** (Charming): So it's like we're levelling up?
+**ANTIQUEDEALER** (Thinking): I'm not sure what you mean, but let's say yes!
 
 ### Lighthouse: Place new bridge board
 `Lighthouse2_Attheentrance` · seen 24.04.01–25.02.03
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthousePlaceBridgedeckingBoardA22, phase=task completed, task=Place new bridge board (versions 24.04.01–25.02.03)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Encouraging): Alright, Maddie, you can do this! You're about to finally meet your grandpa!
+**MADDIE** (Joyous): Hello? Helloooo? Is anyone there?
+**HEIKKI** (Doubtful): Moro! And you are?
+**MADDIE** (Joyous): It's, well, it's Maddie! Your granddaughter.
+**HEIKKI**: Maddie? I'm not your grandfather, I'm Heikki! But we should lift the cat onto the table together.
+**MADDIE** (Discouraged): Huh?! Who?! What does that mean?
+**HEIKKI** (Joyous): It is a saying in my birth country, Finland! It means we need to talk, so follow me.
+**MADDIE** (Thinking): I'm not sure I should be following a weird stranger, but I really need to find out more!
 
 ### Deck the Halls, Clear the Webs — item discovered: Bike Helmet
 `MBE_DeckTheHalls2023_BirthdayGrandmaAccessories_07_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_BirthdayGrandmaAccessories_07'], items=['Bike Helmet'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA** (Charming): They say that fashion comes back in cycles.
+**MADDIE** (Relaxed): Then this stuff should be pretty trendy soon!
+**GRANDMA** (Encouraging): You can't beat the classics, dearie!
 
 ### Deck the Halls, Clear the Webs — item discovered: Ring Box
 `MBE_DeckTheHalls2023_BirthdayJewelry_02_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_BirthdayJewelry_02'], items=['Ring Box'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Thinking): What's this... Looks liks something's fallen behind the boxes...
+**MADDIE** (Thinking): Got it! This doesn't look like it belongs in a dusty basement...
+**GRANDMA** (Surprised): What is it?
+**GRANDMA** (Surprised): I've been looking for this everywhere!!
 
 ### Deck the Halls, Clear the Webs — item discovered: Wristwatch Box
 `MBE_DeckTheHalls2023_BirthdayJewelry_05_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_BirthdayJewelry_05'], items=['Wristwatch Box'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Joyous): Look what I found in a box with all the bags and hats! What a beautiful watch.
+**GRANDMA** (Thinking): I remember that one! If I remember correctly, you can dive to 100 meters while wearing it!
+**MADDIE** (Relaxed): Maybe someone has more use for it than you, Grandma...
 
 ### Deck the Halls, Clear the Webs — item discovered: Mysterious Basement Door
 `MBE_DeckTheHalls2023_EntranceNext_03_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_EntranceNext_03'], items=['Mysterious Basement Door'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Surprised): Another door!
+**MADDIE** (Surprised): Do you have the key to open it, Grandma?
+**GRANDMA** (Joyous): Of course I do, dearie.
+**MADDIE** (Thinking): I wonder what's on the other side! Family secrets, lost treasures...
+**GRANDMA** (Doubtful): Apart from all the dust and cobwebs?
 
 ### Deck the Halls, Clear the Webs — item discovered: Fancy Cabinet
 `MBE_DeckTheHalls2023_FancyCabinet_01_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_FancyCabinet_01'], items=['Fancy Cabinet'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Surprised): Wow! This room is FULL of stuff.
+**GRANDMA** (Thinking): I think it's time we clear some space in here.
+**MADDIE** (Thinking): But all of this stuff is perfectly good... Do we have to give it away?
+**GRANDMA** (Charming): Reduce, reuse, recycle, Maddie!
 
 ### Deck the Halls, Clear the Webs — item discovered: Inflatable Pool Slide
 `MBE_DeckTheHalls2023_Floaties_07_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_Floaties_07'], items=['Inflatable Pool Slide'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Joyous): Do you remember what a great time we had at your birthday party?
+**GRANDMA**: Mmm, yes. Even though I said I didn't really need a party...
+**MADDIE** (Relaxed): You had a great time, I know it!
+**GRANDMA** (Charming): I admit, I have had worse!
 
 ### Deck the Halls, Clear the Webs — item discovered: Xmas Gift
 `MBE_DeckTheHalls2023_GiftBox_03_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_GiftBox_03'], items=['Xmas Gift'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE**: Oh, boy. There's a lot to wrap!
+**GRANDMA** (Encouraging): But we did find a LOT of treasures to give away. Now they can be treasured by someone else!
 
 ### Deck the Halls, Clear the Webs — item discovered: Santa’s House
 `MBE_DeckTheHalls2023_House_01_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_House_01'], items=['Santa’s House'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Surprised): Another door!! This place IS like a maze!
+**GRANDMA** (Surprised): A house like this doesn't give up its secrets easily. You should know that, dearie!
+**MADDIE** (Thinking): Well, the only way is forward.
 
 ### MBE DeckTheHalls2023 Intro
 `MBE_DeckTheHalls2023_Intro` · seen 25.05.01–25.06.01
@@ -1596,98 +2298,129 @@ _Referenced by the game, but no lines matched this id._
 `MBE_DeckTheHalls2023_PackingSack_04_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_PackingSackProducing_01'], items=['Half-wrapped Gift'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Joyous): Tape, ribbon, paper... Here's everything we need to wrap the presents.
+**GRANDMA** (Charming): You know, I am excellent at wrapping presents. Do you want to have a little wrapping race?
+**MADDIE**: I don't think that's in the spirit of the season, Grandma!
 
 ### Deck the Halls, Clear the Webs — item discovered: Elegant Perfume
 `MBE_DeckTheHalls2023_Perfumes_05_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_Perfumes_05'], items=['Elegant Perfume'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Surprised): What an elegant bottle! Wasn't this a birthday present from Julius?
+**GRANDMA**: It was! He does have impeccable taste.
+**MADDIE** (Joyous): Someone is going to be so happy to have this!
 
 ### Deck the Halls, Clear the Webs — item discovered: Mr. Antlers
 `MBE_DeckTheHalls2023_Plushies_06_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_Plushies_06'], items=['Mr. Antlers'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Surprised): Look at all of these old toys!
+**GRANDMA** (Encouraging): I've got an idea! Why don't we wrap these up and give them to Mason's class? That nice boy deserves a little holiday surprise!
+**GRANDMA**: Let's do it!
 
 ### Deck the Halls, Clear the Webs — item discovered: Recording Equipment
 `MBE_DeckTheHalls2023_PodcastEquipment_07_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_PodcastEquipment_07'], items=['Recording Equipment'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE**: I think 'podcaster' is the number one dream profession among 12-year-olds today.
+**GRANDMA** (Surprised): Is it really??
+**MADDIE** (Relaxed): Well, maybe not. But hopefully someone will get some use out of this stuff!
 
 ### Deck the Halls, Clear the Webs — item discovered: Santa’s Sleigh Full
 `MBE_DeckTheHalls2023_Sleigh_02_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_Sleigh_02'], items=['Santa’s Sleigh Full'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Relaxed): All done!
+**MADDIE** (Relaxed): The basement is a little bit neater, we've got plenty of great presents all wrapped up, and we found the decorations.
+**GRANDMA** (Relaxed): Not bad, I have to admit.
 
 ### Deck the Halls, Clear the Webs — item discovered: Elf Puppet
 `MBE_DeckTheHalls2023_Toys_06_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_Toys_06'], items=['Elf Puppet'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Joyous): Spinning tops, toy trains, puppets... This basement is like Santa's workshop.
+**GRANDMA** (Relaxed): It does seem like it!
+**MADDIE**: Let's wrap it all up for a holiday delivery!
 
 ### Deck the Halls, Clear the Webs — item discovered: Eggnog
 `MBE_DeckTheHalls2023_Treats_01_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_Treats_01'], items=['Eggnog'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Relaxed): You know what would be perfect right now?
+**GRANDMA** (Charming): A mug of eggnog?
+**MADDIE** (Joyous): Yes, with an extra candy cane!
+**MADDIE** (Joyous): This really is the best holiday. Even the treats are better!
+**GRANDMA** (Encouraging): I completely agree. Here's to the holidays, Maddie!
+**MADDIE**: Let's make it the best yet!
 
 ### Deck the Halls, Clear the Webs — item discovered: Ready for the North
 `MBE_DeckTheHalls2023_XmasClothes_09_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_XmasClothes_09'], items=['Ready for the North'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: People complain about winter being cold...
+**MADDIE**: But?
+**GRANDMA** (Joyous): They are just not dressed approriately!
 
 ### Deck the Halls, Clear the Webs — item discovered: All the Trimmings
 `MBE_DeckTheHalls2023_XmasPostcard_07_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_XmasPostcard_07'], items=['All the Trimmings'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE**: We have a whole bunch of lovely holiday cards, too.
+**MADDIE**: There's enough here to send a greeting to all of our friends.
+**GRANDMA** (Charming): Let's send them. After all, good friends are card to find!
 
 ### Deck the Halls, Clear the Webs — item discovered: Young Evergreen
 `MBE_DeckTheHalls2023_XmasTree_03_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_XmasTree_03'], items=['Young Evergreen'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Joyous): Here we go!
+**GRANDMA** (Charming): That tree looks awfully small...
+**MADDIE** (Encouraging): Well, yes, but we're on the right track.
+**MADDIE** (Encouraging): Let's just keep looking!
 
 ### Deck the Halls, Clear the Webs — item discovered: Christmas Tree
 `MBE_DeckTheHalls2023_XmasTree_05_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_XmasTree_05'], items=['Christmas Tree'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE**: This one seems more promising!
+**GRANDMA** (Encouraging): I knew we had a bigger tree! It's better to have a tree you can use year after year, you know, instead of cutting down a brand-new tree every year.
+**MADDIE** (Relaxed): You've got that right, Grandma!
 
 ### Deck the Halls, Clear the Webs — item discovered: Classy Christmas Tree
 `MBE_DeckTheHalls2023_XmasTree_07_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_XmasTree_07'], items=['Classy Christmas Tree'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA** (Thinking): Very nice, indeed! I just think...
+**MADDIE** (Thinking): That it needs more ornaments?
+**GRANDMA** (Charming): Exactly!
 
 ### Deck the Halls, Clear the Webs — item discovered: Fabulous Christmas Tree
 `MBE_DeckTheHalls2023_XmasTree_09_Dialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=Deck the Halls, Clear the Webs, eventKey=MBE_DeckTheHalls2023, itemKeys=['MBE_DeckTheHalls2023_XmasTree_09'], items=['Fabulous Christmas Tree'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Relaxed): I think we have everything we need for the tree.
+**GRANDMA**: There's ornaments, tinsel, the star... Looking good to me!
+**MADDIE** (Encouraging): But this is just the start. I'm curious to see what else we'll find...
 
 ### Jam Session 2023 — outro
 `PE_JamSession2023_DialogueForCompletingAllTheMainRewards` · seen 24.04.01–24.11.02
 - trigger: event, event=Jam Session 2023, eventId=PE_JamSession2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
 
 ### PE_JamSession2023 — intro
 `PE_JamSession2023_InitialDialogue` · seen 23.06.02–24.11.02
 - trigger: event, eventId=PE_JamSession2023, eventType=Mystery / Progression, moment=intro (versions 23.06.02–23.06.02)
 - trigger: event, event=Jam Session 2023, eventId=PE_JamSession2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
 
 ### The Great Escape (Jailbreak) — item discovered: Stocked up Storage
 `SBE_Jailbreak_1StActivationOfTheStorageRoom` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_FullStorage_01'], items=['Stocked up Storage'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**OFF. HILL**: Hold it! I thought I told you that you couldn’t-
+**GRANDMA**: Come in without a cart? I know that, dearie, so here it is! All ready for the Storage Room!
+**OFF. HILL**: Oh... Uuuh, okay then. Go on in then!
+**GRANDMA**: Thank you.
 
 ### SBE Jailbreak 1StCartFromTasks
 `SBE_Jailbreak_1StCartFromTasks` · seen 25.05.01–25.06.01
@@ -1703,25 +2436,31 @@ _Referenced by the game, but no lines matched this id._
 `SBE_Jailbreak_1StCartIsFull` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_CleanerCartFull_01'], items=['Full Cleaner Cart'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: It’s all filled up now.
 
 ### The Great Escape (Jailbreak) — item discovered: Ursula "Grandma" Boulton
 `SBE_Jailbreak_1StContrabandBurnerPhoneAppears` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_Prisoner0_02'], items=['Ursula "Grandma" Boulton'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: Well well well...
+**GRANDMA**: A burner phone! Wait, what’s this? It has a note on it saying, “Call me.”
+**GRANDMA**: Curious...
 
 ### The Great Escape (Jailbreak) — item discovered: Tired Grace
 `SBE_Jailbreak_1StTimeGraceIsTired` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_Prisoner1_01'], items=['Tired Grace'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRACE**: *Yaaaawn...*
+**GRACE**: Oooh boy, I’m calling it a night, Grandma!
+**GRACE**: I’ll head back to my cell...  
+  _(1 cosmetic edit not shown)_
 
 ### The Great Escape (Jailbreak) — item discovered: Tired Grandma
 `SBE_Jailbreak_1StTimeGrandmaIsTired` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_Prisoner0_01'], items=['Tired Grandma'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: Oh, dearie me... It’s been a very long day!
+**GRANDMA**: I think it’s time for me to get a little shuteye in my cell...
 
 ### SBE Jailbreak AdamsTalks
 `SBE_Jailbreak_AdamsTalks` · seen 25.05.01–25.06.01
@@ -1740,37 +2479,41 @@ _Referenced by the game, but no lines matched this id._
 `SBE_Jailbreak_BluetoothIsTired` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_Prisoner4_01'], items=['Tired Bluetooth'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**BLUETOOTH**: All done for the day! See you in the morning.
 
 ### The Great Escape (Jailbreak) — item discovered: Operational Factory
 `SBE_Jailbreak_BluetoothOpensTheFactory` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_FactoryOn_02'], items=['Operational Factory'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**BLUETOOTH**: I’ll make sure you’ll get exactly what you need!
 
 ### The Great Escape (Jailbreak) — item discovered: Empty Cafeteria
 `SBE_Jailbreak_Cafeteria` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_EmptyCafeteria_01'], items=['Empty Cafeteria'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: Eerily quiet... But I should still be able to avoid the guards for now...
+**GRANDMA**: I’m sure a lot of food would liven up the place, however!
 
 ### The Great Escape (Jailbreak) — item discovered: Tired C.J.
 `SBE_Jailbreak_CjIsTired` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_Prisoner5_01'], items=['Tired C.J.'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**C.J.**: A library never sleeps, but unfortunately I do...
 
 ### The Great Escape (Jailbreak) — item discovered: Open Library
 `SBE_Jailbreak_CjOpensTheLibrary` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_LibraryOn_02'], items=['Open Library'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**C.J.**: Hey Grandma! You won’t believe what I just found out. Have a look!
 
 ### The Great Escape (Jailbreak) — item discovered: Read Jail Journal
 `SBE_Jailbreak_DiscoveryOfJournal` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_JailJournal_Enter_01'], items=['Read Jail Journal'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE**: What’s this?!
+**MADDIE**: This looks like Grandma’s journal! Hmm... Some pages seem to be ripped out...
+**MADDIE** (Doubtful): Wait...
+**MADDIE** (Surprised): This is from her time in... JAIL!!
 
 ### SBE Jailbreak DiscoveryOfPages
 `SBE_Jailbreak_DiscoveryOfPages` · seen 25.05.01–25.06.01
@@ -1783,19 +2526,35 @@ _Referenced by the game, but no lines matched this id._
 `SBE_Jailbreak_DropingGraceIdOnTrashBag` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['77591440'], items=['77591440'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRACE**: Grandma c’mere. I think I trust you enough to show you something.
+**GRANDMA**: Alright dearie, hold your horses!
+**GRACE**: Shhh... Okay, you know these trash bags we collect? Well, they serve another purpose.
+**GRACE**: The Warden is a tough brute, and he doesn’t allow almost anything in here. So we’ve taken it upon ourselves to bring in some more...
+**GRACE**: Favourable items. Here! Have these.
+**GRANDMA**: Thank you, dearie! These will really come in handy!
 
 ### The Great Escape (Jailbreak) — item discovered: 21093171
 `SBE_Jailbreak_DroppingGrandmaIdOnPhone` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['21093171'], items=['21093171'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: Hello? You asked me to call you.
+**? ? ?**: Ah, good. You received the phone. It’s very hard to keep things undercover here...
+**GRANDMA**: Undercover?! Who are you?
+**? ? ?**: Executive Correctional Officer Kimberly Adams. This isn’t usually the way I speak with our inmates, but matters have escalated... Look.
+**? ? ?**: You and I both want something and we can help each other. I can get you what you need to leave this place. But in return...
+**? ? ?**: I need you to do something for me.
+**GRANDMA**: Well dearie, it all depends on what that something is. I’m also slightly concerned for you, because you don’t seem to know EXACTLY who you’re talking to...
+**? ? ?**: Why, THE Ursula Boulton, of course. I know ALL about YOU! Help me out with this little thing, and who knows? I may be even generous enough to help you...
+**? ? ?**: Get out of jail.
+**GRANDMA**: ...
+**GRANDMA**: I see.
+**? ? ?**: I’ll be in contact.
 
 ### The Great Escape (Jailbreak) — item discovered: Shut Down Factory
 `SBE_Jailbreak_Factory` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_FactoryOff_01'], items=['Shut Down Factory'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: I’m sure this place will be busy when they have some scrap metal to work with.
 
 ### SBE Jailbreak FinalWardenConfrontrationIntro
 `SBE_Jailbreak_FinalWardenConfrontrationIntro` · seen 25.05.01–25.06.01
@@ -1842,7 +2601,7 @@ _Referenced by the game, but no lines matched this id._
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **GRANDMA**: Wonderful, the cell is nice and clean for the day!  
-  _earlier:_ ~~Wonderful, our cell is nice and clean for the day!~~ (until 24.01.01)
+  _(1 cosmetic edit not shown)_
 **GRACE**: You know, I’ve never seen it like this before. It’s down right homely!
 **GRANDMA**: Thank you dearie!
 
@@ -1850,7 +2609,13 @@ _Referenced by the game, but no lines matched this id._
 `SBE_Jailbreak_GrandmaDecoyAndChooseWhoGetsToEscape` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_Decoy_01'], items=['Woolen Decoy Grandma'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: Finally... My decoy is ready.
+**GRANDMA**: In the morning, when the guards come and find my cell empty, apart from my decoy. They’ll think I’ve escaped.
+**GRANDMA**: What they won’t know is, I’ll be hiding in the decoy! So when they throw the decoy out in the trash, that’ll be my escape.
+**GRANDMA**: Good thing I sabotaged the trash compactor... But...
+**GRANDMA**: What about Grace, Izzy and Bluetooth? They deserve to escape as much as I do!
+**GRANDMA**: I could tell them about my escape plan. But only one of them could hide in the decoy...
+**GRANDMA**: So I need to be sure about this... Do I go... Or do I give my spot to someone else? Who do I pick?!
 
 ### SBE Jailbreak GrandmaTalksToAdamsAboutEscapePlan
 `SBE_Jailbreak_GrandmaTalksToAdamsAboutEscapePlan` · seen 25.05.01–25.06.01
@@ -1870,7 +2635,7 @@ _Referenced by the game, but no lines matched this id._
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **GRANDMA**: I guess it all started when they threw me in jail after the police believed that the gold watch Maddie found linked me to the death of Charlie!  
-  _earlier:_ ~~I guess it all started when they threw me in jail after the police believed that the gold watch Maddie found linked me to the disappearance of Charlie!~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 
 ### SBE Jailbreak Grandmatask2
 `SBE_Jailbreak_Grandmatask2` · seen 25.05.01–25.06.01
@@ -1885,7 +2650,7 @@ _Referenced by the game, but no lines matched this id._
 **GRANDMA**: Being in jail wasn’t so bad. So in order to pass the time, I took up a job as a cleaner. These messy cells don’t clean themselves.
 **GRANDMA**: Seemed oddly appropriate, since I had to sort out the mess that got me thrown me in jail as well. Thankfully, Julius was there to help me on that front.
 **GRANDMA**: So, while I waited, I thought it best to make as many friends as possible. And that is when I met Grace...
-**—**: Step 3. Create a decoy. With the items I can get from each location and with the help of my allies, I’ll make a convincing decoy of myself.
+**GRANDMA**: Step 3. Create a decoy. With the items I can get from each location and with the help of my allies, I’ll make a convincing decoy of myself.
 
 ### SBE Jailbreak Guard2Intro
 `SBE_Jailbreak_Guard2Intro` · seen 25.05.01–25.06.01
@@ -1990,49 +2755,54 @@ _Referenced by the game, but no lines matched this id._
 `SBE_Jailbreak_IzzyIsTired` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_Prisoner6_01'], items=['Tired Izzy'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IZZY**: I don’t think I should be around this much, so I’ll be heading back to my cell.
 
 ### The Great Escape (Jailbreak) — item discovered: Warden's Office
 `SBE_Jailbreak_IzzyOpensTheWardensOffice` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_WardenOffice_03'], items=["Warden's Office"], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**IZZY**: Don’t worry Grandma! I can open this door for you. All I need is a hairpin and... Presto!
 
 ### The Great Escape (Jailbreak) — item discovered: Jail Bell
 `SBE_Jailbreak_JailboardIntro` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_MorningBell_03'], items=['Jail Bell'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: *Writing in journal*
+**GRANDMA**: Dear Journal,
+**GRANDMA**: I’ve decided to write an account of my short time in jail.
+**GRANDMA**: I must admit that it was a strange time, and I met a lot of interesting people.
+**GRANDMA**: However, I didn’t quite expect it to end the way it did! But perhaps it would be best if I start at the beginning...
+**GRANDMA**: <i>No matter how lovely things are in here, I have to leave. I need to get back to Maddie before she gets herself into trouble! </i>
 
 ### The Great Escape (Jailbreak) — item discovered: Tired Kitty
 `SBE_Jailbreak_KittyIsTired` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_Prisoner2_01'], items=['Tired Kitty'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**KITTY**: Time to head back to my cell. I’m beat!
 
 ### The Great Escape (Jailbreak) — item discovered: Stocked up Storage
 `SBE_Jailbreak_KittyOpensStorageRoom` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_FullStorage_02'], items=['Stocked up Storage'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**KITTY**: Don’t worry about it Grandma, I got this for you!
 
 ### The Great Escape (Jailbreak) — item discovered: Closed Library
 `SBE_Jailbreak_Library` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_LibraryOff_01'], items=['Closed Library'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: Never underestimate a good library. They often contain more information than just books...
 
 ### The Great Escape (Jailbreak) — item discovered: Tired Mama
 `SBE_Jailbreak_MamaIsTired` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_Prisoner3_01'], items=['Tired Mama'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MAMA**: This ol’ gal needs to rest her eyes for a second...
 
 ### The Great Escape (Jailbreak) — item discovered: Busy Cafeteria
 `SBE_Jailbreak_MamaOpenTheCafeteria` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_EatingCafeteria_02'], items=['Busy Cafeteria'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MAMA**: C’mon darlin’, you know Ol’ Mama wouldn’t let you do it by yerself!
 
 ### SBE Jailbreak MergingLocationDialogue
 `SBE_Jailbreak_MergingLocationDialogue` · seen 25.05.01–25.06.01
@@ -2045,7 +2815,8 @@ _Referenced by the game, but no lines matched this id._
 `SBE_Jailbreak_MoneybagDialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_SpecialSecret_01'], items=['Evidence of Corruption'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: This is it! Proof that the Warden is taking bribes to keep people in jail illegally!
+**GRANDMA**: Let’s show him that his time is up.
 
 ### SBE Jailbreak P1Complete
 `SBE_Jailbreak_P1Complete` · seen 25.05.01–25.06.01
@@ -2080,7 +2851,7 @@ _Referenced by the game, but no lines matched this id._
 **GRANDMA**: I just wanted to apologize for my recent behavior. I’m usually quite social, you know!
 **GRACE**: First time, huh? I get it. Don’t worry about it.
 **GRANDMA**: Please! Let me make it right, dearie. I see you all day cleaning our cell, and the others, all by yourself.  
-  _earlier:_ ~~Please! Let me make it right, dearie. I see you all day cleaning our cell and the others all by yourself.~~ (until 24.01.01)
+  _(1 cosmetic edit not shown)_
 **GRANDMA**: Let me help you!
 **GRACE**: Alright then... try to keep up!
 
@@ -2258,7 +3029,7 @@ _Referenced by the game, but no lines matched this id._
 **BLUETOOTH**: So, Ursula, do you have any technical skills? Do you know how to run any sort of industrial machinery?
 **GRANDMA**: I once operated the bodymaker at the family can plant.
 **BLUETOOTH**: Okay, I can work with that!
-**—**: Welcome to the recycling factory.
+**BLUETOOTH**: Welcome to the recycling factory.
 
 ### SBE Jailbreak P4TaskA
 `SBE_Jailbreak_P4TaskA` · seen 25.05.01–25.06.01
@@ -2278,7 +3049,7 @@ _Referenced by the game, but no lines matched this id._
 **BLUETOOTH**: Well, one day I was in this government system and I found some stuff. Real shady too! I made a copy and sent it to a journalist friend of mine and-
 **GRANDMA**: You sent it to Grace!
 **BLUETOOTH**: Shhh! These walls have ears, you know. Yes, Grace. That’s probably why she’s in here. Because of me. I broke into the system, but she only got the data I stole.
-**—**: But I tell you... What I saw in that data? Those people should be in here, instead of us!
+**BLUETOOTH**: But I tell you... What I saw in that data? Those people should be in here, instead of us!
 
 ### SBE Jailbreak P5Complete
 `SBE_Jailbreak_P5Complete` · seen 25.05.01–25.06.01
@@ -2288,7 +3059,7 @@ _Referenced by the game, but no lines matched this id._
 **C.J.**: I’m happy to help, Grandma!
 **GRANDMA**: That’s very kind of you, dearie. Hopefully, once I’m done with this mess, I can do something about our situation here.
 **C.J.**: Let’s just make sure none of that then leads back to me, okay?
-**—**: Wh- What do you mean by that?
+**C.J.**: Wh- What do you mean by that?
 
 ### SBE Jailbreak P5GangUnlock
 `SBE_Jailbreak_P5GangUnlock` · seen 25.05.01–25.06.01
@@ -2298,7 +3069,7 @@ _Referenced by the game, but no lines matched this id._
 **GRANDMA**: I have my methods, dearie. Besides, I may need their cooperation for what I have in mind...
 **? ? ?**: I’ll be surprised if you can get the guards to turn on the Warden...
 **? ? ?**: But if you want to go down that route, then I suggest you talk to Iseul Park...
-**—**: But for now, I believe I have enough access to the jail in order to advance my escape plans.
+**? ? ?**: But for now, I believe I have enough access to the jail in order to advance my escape plans.
 
 ### SBE Jailbreak P5Intro
 `SBE_Jailbreak_P5Intro` · seen 25.05.01–25.06.01
@@ -2398,19 +3169,24 @@ _Referenced by the game, but no lines matched this id._
 `SBE_Jailbreak_SafeboxDialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_WardenSafe_01'], items=['Safe'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: Hmm... Whatever secrets he’s hiding must be in there!
+**GRANDMA**: All I need to do now is get inside.
 
 ### The Great Escape (Jailbreak) — item discovered: Blackmail
 `SBE_Jailbreak_SpecialLetterDialogue` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_SecretFiles_01'], items=['Blackmail'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: I should have enough evidence here to “persuade” some of the guards now.
+**GRANDMA**: I should have enough evidence here to “persuade” some of the guards now.
 
 ### The Great Escape (Jailbreak) — item discovered: Empty Storage
 `SBE_Jailbreak_Storage` · seen 25.05.01–25.06.01
 - trigger: item, event=The Great Escape (Jailbreak), eventKey=SBE_Jailbreak, itemKeys=['SBE_Jailbreak_EmptyStorage_01'], items=['Empty Storage'], moment=item discovered (versions 25.05.01–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: Hmm... Looks like a useful location, but I might-
+**OFF. HILL**: Hey! You can’t be in here unless you work here or you’re bringing in a cart!
+**GRANDMA**: Oh dearie me, I’m dreadfully sorry...
+**GRANDMA**: Hmm... A cart, you say...
 
 ### SBE Jailbreak WardenChat1
 `SBE_Jailbreak_WardenChat1` · seen 25.05.01–25.06.01
@@ -2468,246 +3244,340 @@ _Referenced by the game, but no lines matched this id._
 **GRANDMA**: To be honest, dearie, it wasn’t that difficult. Corruption usually leaves a mess behind it. I just happen to be a good cleaner.
 **XO ADAMS**: That you are. Now with this information, we should have enough to take on the Warden!
 **GRANDMA**: Not yet. I need to find more pieces of vital evidence before we can take him down.  
-  _earlier:_ ~~Not yet. I need to find a find more pieces of vital evidence before we can take him down.~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 
 ### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot01
 `SE_HopeberryFestival2023_Decoration_Slot01_Dialogue` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot01, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MASON** (Joyous): Wow! Look at the size of those berries!
+**MADDIE** (Encouraging): They're just Hopeberries Mason.
+**MASON** (Annoyed): I know that, lady! 
+**MADDIE** (Annoyed): It's Maddie!
+**MASON** (Annoyed): I know that too!
 
 ### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot02
 `SE_HopeberryFestival2023_Decoration_Slot02_Dialogue` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot02, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**JACKIE** (Surprised): Are these actual hopeberry bushes?
+**DEB** (Charming): Yes! Like any proper vineyard, one has to show where their product comes from.
+**JACKIE** (Thinking): Vineyard?
 
 ### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot05
 `SE_HopeberryFestival2023_Decoration_Slot05_Dialogue` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot05, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**DEB** (Joyous): May I introduce you to the Hopeberry Juice Woman!
+**DEB** (Encouraging): The new face to the new and <b>improved</b> hopeberry juice! Go on... Have a taste.
+**MADDIE** (Worried): *sip* Oh! Eehh... That's... different.
+**GRANDMA** (Worried): My gosh, Deb... What did you put in this?! This isn't my recipe!
+**DEB** (Doubtful): It isn't sis, you write recipes like a mad scientist. I'm an artist!
+**GRANDMA** (Surprised): I mean... It isn't bad! It just has a-
+**DEB** (Relaxed): A wonderful bouquet? <b>That</b> is the secret ingredient! 
 
 ### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot06
 `SE_HopeberryFestival2023_Decoration_Slot06_Dialogue` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot06, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE**: That's a fancy looking statue! Er... What is it?
+**DEB**: It's the hopeberry of course!
+**MADDIE** (Encouraging): Oh! Okay! If I... squint my eyes and...
+**DEB** (Relaxed): Aaanyway, it was custom made by a <b>dashing</b> young artist new to town. I think his name was Hank?
+**MADDIE** (Relaxed): You're going to ask him out, aren't you...
+**DEB** (Charming): Oh please, sweetie... I already have!
 
 ### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot07
 `SE_HopeberryFestival2023_Decoration_Slot07_Dialogue` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot07, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**DEB**: Having fun there, Mason?
+**MASON** (Joyous): Yeah! This is great! 
+**DEB** (Encouraging): This is how they used to make juice in the old days. With their bare feet!
+**MASON** (Worried): Cool! I guess I should take my socks off then? 
 
 ### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot08
 `SE_HopeberryFestival2023_Decoration_Slot08_Dialogue` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot08, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**DEB**: My improved juice is excellent as a frozen slushy, smoothie mix or just as a classic refreshing drink! 
+**ANTIQUEDEALER** (Thinking): Mmm! I gotta say, these are all quite delicious, but honestly... What is that smell?!
+**DEB** (Charming): Oh that?! That is what gives my drink its uniqueness. My secret ingredient...
+**ANTIQUEDEALER** (Worried): Unique is an understatement... It almost smells like someone died!
+**DEB** (Frustrated): I see... Well, if you cannot <b>appreciate</b> my exceptional beverage, then I wish you good day.
+**ANTIQUEDEALER** (Discouraged): Oh.. I'm sorry, I didn't mea-
+**DEB** (Annoyed): I said <b>good day!</b>
 
 ### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot09
 `SE_HopeberryFestival2023_Decoration_Slot09_Dialogue` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot09, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Worried): Eeeh... It's the corpse flower from the conservatory.
+**RODDY** (Thinking): I guess it's better to have it outside than in there, stinking up the place.
+**MADDIE** (Thinking): Actually, this smells an awful lot like her new juice! You don't think she...
+**RODDY** (Worried): ...
+**MADDIE** (Doubtful): Naaah!
 
 ### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot14
 `SE_HopeberryFestival2023_Decoration_Slot14_Dialogue` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot14, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**DEB** (Joyous): Come one, come all to the new Hopeberry Festival!
+**DEB** (Joyous): Don't forget to taste my wonderful new hopeberry juice! It's to die for!
+**ANTIQUEDEALER** (Annoyed): You can say that again! It smells like a dead body. 
+**MASON** (Joyous): Reeeeeeeally?!
+**MADDIE** (Doubtful): Good job, Julius...
+**ANTIQUEDEALER** (Doubtful): Why is everyone angry at me today?
 
 ### Hopeberry Festival — decoration SE_HopeberryFestival2023_Decoration_Slot15
 `SE_HopeberryFestival2023_Decoration_Slot15_Dialogue` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SE_HopeberryFestival2023_Decoration_Slot15, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA** (Joyous): I'm proud of you Deb... You may not be the best juice maker, but you sure do know how to throw a festival!
+**DEB** (Worried): Really?
+**GRANDMA** (Relaxed): Yes, really. It's nice to see so many happy faces here again! It almost makes one forget the...
+**DEB** (Relaxed): *sigh* It does... But, do you know what the best part of all of this was?
+**GRANDMA** (Charming): ...
+**DEB** (Charming): Doing something with my sister again!
+**GRANDMA** (Relaxed): Yes... It is nice, isn't it?
 
 ### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_16
 `SE_HopeberryFestival2023_Decoration_Slot16_Dialogue` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=HopeberryFestival2022_Decoration_16, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE**: Hi Deb! I heard you wanted to run the Hopeberry Festival this year! 
+**MADDIE**: I was wondering if you needed any help? 
+**DEB**: No need, sweetie, no need! I have it all under control! This wheel will help me find the right flavors.
+**MADDIE** (Charming): Sounds more like <b>luck</b> to me!
+**DEB** (Surprised): No such thing as luck sweetie. It is destiny! My psychic, Lady Voyance, said so... 
+**DEB** (Thinking): All I have to do is spin this wheel and I'll know <b>exactly</b> what ingredients I need.
+**MADDIE** (Encouraging): Okay... Good luck with that.
+**DEB** (Thinking): Thank y- Hey!
 
 ### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_17
 `SE_HopeberryFestival2023_Decoration_Slot17_Dialogue` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=HopeberryFestival2022_Decoration_17, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**DEB** (Charming): I really appreciate you helping out, Roddy!
+**RODDY** (Relaxed): No problem, ma'am! I'm always happy to help.
+**DEB** (Relaxed): I know... I guess I'm always in need of strapping young lads, like yourself.
+**RODDY** (Worried): Oh... Erm... Okay.
+**MADDIE** (Doubtful): Hey! I thought you said you didn't need any help!
+**DEB** (Encouraging): Maddie! Sweetie... Of course I need help, but only in the more <b>physical</b> sense. Ha ha!
+**MADDIE** (Annoyed): Right... Anyway, I'll stick around to help you get everything set up...
+**DEB** (Relaxed): Well, Roddy... I think I saw a bit of jealousy in her eyes!
+**RODDY** (Charming): Re- Really?!
 
 ### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_18
 `SE_HopeberryFestival2023_Decoration_Slot18_Dialogue` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=HopeberryFestival2022_Decoration_18, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA** (Relaxed): I'm impressed Deb! Didn't expect you to nail the recipe! This tastes just like it!
+**DEB** (Worried): ...
+**GRANDMA** (Annoyed): It's not your recipe, is it?
+**DEB** (Discouraged): No, it isn't! I found some frozen concentrate from last year...
+**DEB** (Discouraged): Oh, sis... I really need your help! This is a lot harder than I thought it would be.
+**GRANDMA** (Encouraging): It's alright, dearie. I have the recipe right here. Just follow it closely and you can't go wrong!
+**DEB** (Joyous): You're an angel, sis!
+**GRANDMA** (Encouraging): It's nice to hear that someone thinks so!
 
 ### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_19
 `SE_HopeberryFestival2023_Decoration_Slot19_Dialogue` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=HopeberryFestival2022_Decoration_19, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MASON**: Hopeberry jam! I love this stuff! 
+**CHERRY**: Have a jar, sugar. On the house!
+**MASON** (Joyous): Awesome! 
+**MADDIE**: Hello, Cherry! Ooh! Is this the jam I helped you make?
+**CHERRY** (Encouraging): Er... Yes! Yes it is!
+**MADDIE** (Encouraging): Mmmm! I don't remember it tasting this delicious.
+**CHERRY** (Encouraging): Sometimes things improve over time.
 
 ### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_20
 `SE_HopeberryFestival2023_Decoration_Slot20_Dialogue` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=HopeberryFestival2022_Decoration_20, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE**: How's the hopeberry juice coming along? 
+**DEB** (Worried): Well... It is quite interesting. The recipe isn't the easiest to follow, you know.
+**MADDIE** (Doubtful): What do you mean? 
+**DEB** (Doubtful): Well, there are so many steps and ingredients and it's... <b>Boring.</b>
+**MADDIE** (Thinking): Boring? It's a recipe, Deb. It's supposed to be boring.
+**DEB** (Thinking): Take a look for yourself then...
+**MADDIE** (Surprised): "Bring your solution to the point of ebullition and let it reach congealment, then dilute your gel in a mixture of citric acid and dihydrogen monoxide..."
+**MADDIE** (Doubtful): Boy, Deb... You weren't kidding! 
+**DEB** (Frustrated): All she had to say was "Boil your mixture until it thickens and add some lemon juice and water." 
 
 ### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_21
 `SE_HopeberryFestival2023_Decoration_Slot21_Dialogue` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=HopeberryFestival2022_Decoration_21, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**VICTORIA** (Thinking): I honestly don't see what all the fuss is about...
+**DEB** (Doubtful): Come now, Victoria. You're the new head of city council! You should know all about the Hopeberry Festival!
+**VICTORIA** (Doubtful): It's just some silly event celebrating a shrub. Who cares?
+**DEB** (Encouraging): The people care, Victoria. Besides, this "shrub" is the only one of its kind in the world!
+**VICTORIA** (Thinking): I doubt that, Deb.
+**DEB** (Frustrated): I now see why my sister speaks so "highly" of you...
 
 ### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_22
 `SE_HopeberryFestival2023_Decoration_Slot22_Dialogue` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=HopeberryFestival2022_Decoration_22, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**DEB** (Thinking): This thing has always given me the creeps...
+**WINSTON**: Then it is doing its job, ma'am.
+**DEB** (Relaxed): Come to think of it, it <b>does</b> resemble Mr. Winston, doesn't it?!
+**GRANDMA** (Encouraging): Ha ha!
+**WINSTON** (Doubtful): Hmph!
 
 ### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_23
 `SE_HopeberryFestival2023_Decoration_Slot23_Dialogue` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=HopeberryFestival2022_Decoration_23, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE**: I brought some flowers for you, Deb!
+**DEB** (Joyous): Oooh, daffodils! These will be great for the festival.
+**MADDIE** (Encouraging): I thought so too. I really like daffodils!
+**DEB** (Relaxed): Let me guess... It's the color? 
+**MADDIE** (Surprised): Ye...Yes! How'd you know?!
 
 ### Hopeberry Festival — decoration HopeberryFestival2022_Decoration_24
 `SE_HopeberryFestival2023_Decoration_Slot24_Dialogue` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=HopeberryFestival2022_Decoration_24, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Joyous): Hopeberry Juice Man! I love this guy!
+**DEB** (Relaxed): He is charming but nothing like his girlfriend...
+**MADDIE** (Surprised): Girlfriend? What are you talking about? 
+**DEB** (Charming): I may have ordered a custom made Hopeberry Juice Woman...
+**MADDIE** (Relaxed): But... I don't see it anywhere...
+**DEB** (Relaxed): Honey... You ain't seen nothing yet!
 
 ### Hopeberry Festival — item discovered: Hopeberry Event Gate
 `SE_HopeberryFestival2023_DoorTutorial_Dialogue` · seen 23.09.02–25.06.01
 - trigger: item, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, itemKeys=['HopeberryEntranceEnter_01'], items=['Hopeberry Event Gate'], moment=item discovered (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA** (Worried): Really?! It isn't the easiest recipe you know...
 
 ### Hopeberry Festival — item discovered: Sundae
 `SE_HopeberryFestival2023_HopeberryIceCream_05_Dialogue` · seen 23.09.02–25.06.01
 - trigger: item, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, itemKeys=['HopeberryIceCream_05'], items=['Sundae'], moment=item discovered (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**DEB** (Charming): I'd say you outdid yourself on this one, Cherry!
+**CHERRY** (Encouraging): Why thank you, sugar!
 
 ### Hopeberry Festival — item discovered: SE_HopeberryFestival2023_HopeberryPie_06
 `SE_HopeberryFestival2023_HopeberryPie_06_Dialogue` · seen 23.09.02–25.06.01
 - trigger: item, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, itemKeys=['SE_HopeberryFestival2023_HopeberryPie_06'], items=['SE_HopeberryFestival2023_HopeberryPie_06'], moment=item discovered (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**DEB**: Thank you for letting me have some of your pies, sis!
+**GRANDMA** (Relaxed): It's no problem, dearie! I'm always happy to have an excuse to bake more pies.
 
 ### Hopeberry Festival — item discovered: 8435
 `SE_HopeberryFestival2023_HopeberryScarecrow_06_Dialogue` · seen 23.09.02–25.06.01
 - trigger: item, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, itemKeys=['8435'], items=['8435'], moment=item discovered (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**DEB** (Doubtful): Why can't these things be more cheerful? Or... handsome?
+**MADDIE** (Thinking): I don't think their job is to attract anyone, Deb...
+**DEB**: You can say that again! It sure does keep the birds away from these bushes, though. I've never seen them so full of berries!
 
 ### Hopeberry Festival — item discovered: Hopeberry Basket
 `SE_HopeberryFestival2023_Hopeberry_05_Dialogue` · seen 23.09.02–25.06.01
 - trigger: item, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, itemKeys=['Hopeberry_05'], items=['Hopeberry Basket'], moment=item discovered (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**DEB**: There! This should be enough hopeberries for now! 
+**MADDIE** (Surprised): Wow, Deb! How'd you manage to pick so many?!
+**DEB** (Relaxed): Cultivation, Maddie. And... I got Roddy to do most of the work. He's such a gentleman, isn't he?
 
 ### SE HopeberryFestival2023 IntroPart1 Dialogue
 `SE_HopeberryFestival2023_IntroPart1_Dialogue` · seen 23.09.02–25.06.01
 - trigger: unknown, hint=Seasonal event (versions None–None)
 
+**DEB** (Joyous): Well sis, it's that time of year again!
+**GRANDMA** (Thinking): What time is that, Deb?
+**DEB**: Hopeberry Festival of course! The only time this drab little place has a bit of color!
+**GRANDMA** (Surprised): Oh my! I totally forgot! So much has happened, I didn't even remember to get the juice ready! 
+**DEB** (Encouraging): Never fear, Deb is here! Let me do it, sis! I've always wanted to give it a go, and as you know, I am a connoisseur of fine beverages...
 
 ### Hopeberry Festival — item discovered: Hopeberry Event Gate
 `SE_HopeberryFestival2023_IntroPart2_Dialogue` · seen 23.09.02–25.06.01
 - trigger: item, event=Hopeberry Festival, eventKey=SE_HopeberryFestival2023, itemKeys=['HopeberryEntranceExit_01'], items=['Hopeberry Event Gate'], moment=item discovered (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**DEB** (Charming): How hard can it be? Squeeze a few berries, collect the juice, bottle it and Bob's your uncle!
+**GRANDMA** (Doubtful): Well... A little more than that, dearie. It has thirty two flavors after all. Maybe I should get the recipe for you just in case...
+**DEB** (Annoyed): No, no... I insist on doing it my own way!
+**GRANDMA** (Worried): If you insist...
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_05
 `SE_Valentines2023_CupidStatue` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=ValentinesDay2022_Decoration_05, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration SE_Valentines2023_Decoration_18
 `SE_Valentines2023_DessertCart` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SE_Valentines2023_Decoration_18, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — item discovered: SEValentines2023EnjoySpa_07
 `SE_Valentines2023_Enjoyspa_07` · seen 23.09.02–25.06.01
 - trigger: item, event=SEValentines2023, eventKey=SEValentines2023, itemKeys=['SEValentines2023EnjoySpa_07'], items=['SEValentines2023EnjoySpa_07'], moment=item discovered (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_07
 `SE_Valentines2023_GardenDinnerForTwo` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=ValentinesDay2022_Decoration_07, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_08
 `SE_Valentines2023_GardenGate` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=ValentinesDay2022_Decoration_08, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_09
 `SE_Valentines2023_HeartBalloons` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=ValentinesDay2022_Decoration_09, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_14
 `SE_Valentines2023_HeartShapedEntranceGate` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=ValentinesDay2022_Decoration_14, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_01
 `SE_Valentines2023_HeartShapedFence` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=ValentinesDay2022_Decoration_01, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_12
 `SE_Valentines2023_HeartwarmingEntrance` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=ValentinesDay2022_Decoration_12, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_15
 `SE_Valentines2023_IgnatiusStatue` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=ValentinesDay2022_Decoration_15, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_02
 `SE_Valentines2023_LeftBedOfRoses` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=ValentinesDay2022_Decoration_02, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration SE_Valentines2023_Decoration_20
 `SE_Valentines2023_LeftHeartFence` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SE_Valentines2023_Decoration_20, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration SE_Valentines2023_Decoration_21
 `SE_Valentines2023_LoverLane` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SE_Valentines2023_Decoration_21, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration SE_Valentines2023_Decoration_22
 `SE_Valentines2023_LyricalPicnic` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SE_Valentines2023_Decoration_22, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — item discovered: SEValentines2023MakeUpGift_06
 `SE_Valentines2023_Makeupgift_06` · seen 23.09.02–25.06.01
 - trigger: item, event=SEValentines2023, eventKey=SEValentines2023, itemKeys=['SEValentines2023MakeUpGift_06'], items=['SEValentines2023MakeUpGift_06'], moment=item discovered (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SE Valentines2023 Opening Dialogue
 `SE_Valentines2023_Opening_Dialogue` · seen 23.09.02–25.06.01
@@ -2723,486 +3593,1004 @@ _Referenced by the game, but no lines matched this id._
 `SE_Valentines2023_PinkCandyTree` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SE_Valentines2023_Decoration_17, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_04
 `SE_Valentines2023_PinkLamps` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=ValentinesDay2022_Decoration_04, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_10
 `SE_Valentines2023_RightBedOfRoses` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=ValentinesDay2022_Decoration_10, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration SE_Valentines2023_Decoration_24
 `SE_Valentines2023_RightHeartFence` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SE_Valentines2023_Decoration_24, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration SE_Valentines2023_Decoration_23
 `SE_Valentines2023_RomanticChess` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SE_Valentines2023_Decoration_23, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_13
 `SE_Valentines2023_RomanticMansionFacade` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=ValentinesDay2022_Decoration_13, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration ValentinesDay2022_Decoration_06
 `SE_Valentines2023_RoundBedOfRoses` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=ValentinesDay2022_Decoration_06, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — item discovered: SEValentines2023Shoes_07
 `SE_Valentines2023_Shoes_07` · seen 23.09.02–25.06.01
 - trigger: item, event=SEValentines2023, eventKey=SEValentines2023, itemKeys=['SEValentines2023Shoes_07'], items=['SEValentines2023Shoes_07'], moment=item discovered (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration SE_Valentines2023_Decoration_19
 `SE_Valentines2023_SpeedDatingTable` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SE_Valentines2023_Decoration_19, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### SEValentines2023 — decoration SE_Valentines2023_Decoration_16
 `SE_Valentines2023_ValentineDinnerTable` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SE_Valentines2023_Decoration_16, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
 
 ### Woolly Mystery — outro
 `SP_AlpacaPet2024_AllRewardsCompleted_Dialogue` · seen 24.09.02–24.11.02
 - trigger: event, event=Woolly Mystery, eventId=SP_AlpacaPet2024, eventType=Mystery / Progression, moment=outro (versions 24.09.02–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Thinking): There's something fishy going on, Buddy!
+**PET**: *Snort!*
+**MADDIE** (Doubtful): First SOMEONE changed the newspaper ad for my ghost tour at Halloween.
+**MADDIE** (Doubtful): Did someone leave Buddy at Cherry's house on purpose - knowing it would cause trouble?
+**PET** (Thinking): *Hummm*
+**MADDIE** (Frustrated): That's so far-fetched it just might be likely...
+**MADDIE** (Frustrated): Everyone is still so on edge from the storm and the secrets in the tin cans, that it's TOO easy to rile everyone up.
+**MADDIE** (Relaxed): Thanks for listening, Buddy.
+**PET** (Relaxed): *Snort!*
+**MADDIE** (Thinking): I need to find out what's going on in this town.
 
 ### Amy's Mystery — outro
 `SP_AmyTheCat2023_AllRewardsCompleted_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=Amy's Mystery, eventId=SP_AmyTheCat2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE**: <i>*knock knock*</i>
+**MADDIE**: Hello, can I help you?
+**EMILIO**: Hi, I’m Emilio Costa, a marine biologist. You called about some expatriated fish?
+**MADDIE** (Surprised): ...
+**EMILIO** (Encouraging): Ma’am?
+**MADDIE** (Relaxed): Oh, oh yes! Of course, let me show you. There’s been this cat and she’s been-
+**EMILIO** (Surprised): Amy!
+**AMY** (Relaxed): Meow! Purr... Purr...
+**MADDIE** (Encouraging): Ah, she's <b>your</b> cat! That must explain the fish then!
+**EMILIO**: Here they are! Amy... Have you been bringing this beautiful lady my fish?
+**MADDIE** (Charming): Oh! Erhm...
+**EMILIO** (Encouraging): My deepest apologies. She tends to do this with people she likes. You must be a good person at heart.
+**MADDIE** (Relaxed): Oh, you know! It’s nothing. Just happy she’s found her family again.
+**EMILIO**: Thank you, Miss...?
+**MADDIE** (Charming): Maddie! My name is... Maddie.
 
 ### SP_AmyTheCat2023 — intro
 `SP_AmyTheCat2023_Intro_Dialogue` · seen 23.06.02–24.11.02
 - trigger: event, eventId=SP_AmyTheCat2023, eventType=Mystery / Progression, moment=intro (versions 23.06.02–23.06.02)
 - trigger: event, event=Amy's Mystery, eventId=SP_AmyTheCat2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**AMY**: Meow...
+**MADDIE** (Surprised): Huh?!
+**AMY** (Relaxed): Purr... Purr...
+**MADDIE** (Charming): Oh! Hello there! What’s your name? Let’s find your name tag...
+**MADDIE** (Charming): Amy! What a beautiful name!
+**DOG** (Frustrated): Ruff! Ruff! Ruff!
+**AMY** (Surprised): !!!!!
+**MADDIE** (Surprised): No wait! Oh Rufus... You scared her away!
+**GRANDMA**: Is everything alright, dearie?
+**MADDIE** (Thinking): I found a cat, but Rufus scared her away. Say...
+**MADDIE** (Thinking): You wouldn’t happen to have a secret kitty cat, would you?
+**GRANDMA** (Encouraging): Hahaha! ...not anymore.
 
 ### Cherry's Mystery Meat — outro
 `SP_CherrysMysteryMeat2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=Cherry's Mystery Meat, eventId=SP_CherrysMysteryMeat2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**JACKIE**: Listen... Do you think there's something weird about this mystery meat business?
+**JACKIE**: Your grandma just happened to have a fridge full of meat...
+**MADDIE** (Worried): Vegan meat!
+**JACKIE** (Doubtful): ...AND a huge pie dish?
+**MADDIE** (Worried): You don't think...
+**JACKIE** (Thinking): I'm just putting two and two together here. There's no smoke without fire - especially at a BBQ.
+**MADDIE** (Surprised): C-could it be HANK in that pie??
 
 ### Cherry's Mystery Meat — intro
 `SP_CherrysMysteryMeat2024_Intro_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=Cherry's Mystery Meat, eventId=SP_CherrysMysteryMeat2024, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: Pearl! What brings you here?
+**PEARL** (Encouraging): Official party organizing committee business, of course, Ursula.
+**PEARL** (Encouraging): Hopewell Bay's 100th anniversary is coming, and it deserves a BIG celebration.
+**PEARL** (Doubtful): Now, I understand that, err... with Hank gone it's not quite the festive atmosphere we wanted, but maybe this can help get our minds off that for a while.
+**GRANDMA** (Doubtful): I could not agree more. Besides, I am sure Hank is fine. Maybe he just got cold feet!
+**PEARL** (Thinking): A-after the wedding ceremony?
+**GRANDMA** (Charming): Who knows! But what have you got planned for the town centennial?
+**PEARL** (Encouraging): We're going to bake the world's biggest meat pie, based on a recipe from the town's founders.
+**PEARL** (Encouraging): Cherry will do the baking, but could we organize the celebration in your backyard? The mansion would make such a wonderful backdrop.
+**GRANDMA** (Thinking): The world's biggest meat pie, you say?
+**GRANDMA** (Thinking): Sounds perfect!
 
 ### Deb’s Mystery — outro
 `SP_DebsMystery2023AllRewardsCompleted` · seen 24.04.01–24.11.02
 - trigger: event, event=Deb’s Mystery, eventId=SP_DebsMystery2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**DEB** (Discouraged): Well... That’s it. Guess we have to wait another 10 years for the next one.
+**MADDIE** (Encouraging): But good things come to those who wait, right?
+**DEB** (Doubtful): If I were you, sweetie... I wouldn’t be waiting too long, though.
+**MADDIE** (Surprised): Wh- What do you mean by that?
+**DEB** (Annoyed): The Titan Arum may only bloom every 10 years, but when it does, it’s only for a few precious days.
+**DEB** (Annoyed): It doesn’t dwell on the past and wait for a better time. It takes those rare days and makes them hers!
+**MADDIE** (Charming): Huh... Carpe diem?
+**DEB**: Precisely, sweetie. Precisely.
 
 ### Deb’s Mystery — intro
 `SP_DebsMystery2023Intro` · seen 24.04.01–24.11.02
 - trigger: event, event=Deb’s Mystery, eventId=SP_DebsMystery2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**DEB**: Maddie, sweetie! So good of you to join me in this little endeavor.
+**MADDIE** (Encouraging): It’s no problem aunt Deb, anything to help!
+**DEB** (Joyous): That’s wonderful, because something amazing is about to happen!
+**MADDIE**: Oh?
+**DEB** (Charming): Yes, my Titan Arum is blooming!
+**MADDIE** (Doubtful): Er... What?
+**DEB** (Joyous): My corpse flower! She’s blooming! Hasn’t done that in 10 years! We need to show the WORLD!
+**MADDIE** (Surprised): CORPSE FLOWER?!
 
 ### Grandma's Mystery — outro
 `SP_GrandmasMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=Grandma's Mystery, eventId=SP_GrandmasMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA** (Frustrated): I assure you, I did NOT kill poor Hank.
+**GRANDMA** (Frustrated): I did speak to him before he left, but he is still in one piece, as far as I know.
+**DEB** (Frustrated): So where is my Hank?? 
+**HANK** (Charming): Hello, Deb.
+**DEB** (Surprised): HANK?? Is that a baby you have with you?
+**HANK** (Thinking): You must be totally confused about what happened to me!
+**HANK** (Thinking): See, Ursula found out that my ex-girlfriend had had a baby and sent me to make things right... I asked her not to tell you, 'cos I was wanted to get everything in order first.
+**HANK** (Encouraging): So here I am! It's your baby, Deb.
+**DEB** (Thinking): I don't think that's how it works, Hank...
+**GRANDMA** (Thinking): I learned about this child through Reginald's letter and told Hank. He begged me to keep his secret, so I did.
+**GRANDMA** (Encouraging): Hank is a gentleman at his core, so I knew that he would do what was right.
+**MADDIE** (Surprised): My head is spinning.
+**MADDIE** (Surprised): So... everyone's alive, Hank's back, and everything's fine?
+**GRANDMA** (Joyous): Looks like it!
 
 ### Grandma's Mystery — intro
 `SP_GrandmasMystery2024_IntroDialogue_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=Grandma's Mystery, eventId=SP_GrandmasMystery2024, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**JACKIE**: Are we gonna talk about the bone?
+**MADDIE** (Thinking): The bone Goldie dug up in Grandma's yard? Yeah, that was creepy!
+**JACKIE** (Thinking): First Ursula comes up with all that vegan meat for Cherry's pie, and then Goldie digs up something that looks like a human bone...
+**JACKIE** (Thinking): On top of that, Ursula was the last one seen talking to Hank!
+**JACKIE**: And you need to tell Deb -- she's worried sick about Hank!
+**MADDIE** (Worried): *Gulp* I guess it's the only way...
 
 ### Grannies of Anarchy — outro
 `SP_GranniesOfAnarchy2023_AllRewardsCompleted_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=Grannies of Anarchy, eventId=SP_GranniesOfAnarchy2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA** (Charming): It's time for us to get our domes on and grab a handful.
+**MADDIE** (Thinking): ...
+**GRANDMA** (Joyous): That means that we are going take off for a drive, dearie.
+**MADDIE** (Relaxed): I gathered that, Grandma. You and your friends are quite an impressive bunch!
+**GRANDMA** (Relaxed): Thank you! You can forget about any crimes. The Grannies of Anarchy always ride on the right side of the law.
+**MADDIE** (Doubtful): I still feel like you're not telling me everything. There's more to your skillfully knitted patches than you let on...
+**GRANDMA** (Joyous): Some of us were just born to be wild, Maddie, dearest.
 
 ### Halloween Mystery — outro
 `SP_Halloween2024_AllRewardsCompleted_Dialogue` · seen 24.07.01–24.11.02
 - trigger: event, event=Halloween Mystery, eventId=SP_Halloween2024, eventType=Mystery / Progression, moment=outro (versions 24.07.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA** (Doubtful): That was a strange business about the newspaper ad, wasn't it?
+**DEB** (Doubtful): It certainly was.
+**GRANDMA** (Annoyed): I was hoping to put all of the commotion behind us and start clearing the Boulton name, but someone seems intent on causing trouble.
+**DEB** (Thinking): I'm sure it was an honest mistake!
+**GRANDMA** (Thinking): A very strange mistake, I would say, and I do intend to look into it.
+**GRANDMA** (Thinking): Now I have to run, or my apple pie will burn in the oven. See you later!
+**DEB** (Worried): I have a terrible feeling...
+**DEB** (Worried): ...that I might know who is behind this.
 
 ### Halloween Mystery — intro
 `SP_Halloween2024_IntroDialogue_Dialogue` · seen 24.07.01–24.11.02
 - trigger: event, event=Halloween Mystery, eventId=SP_Halloween2024, eventType=Mystery / Progression, moment=intro (versions 24.07.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Frustrated): Oh, man...
+**GRANDMA**: What is it, dearie?
+**MADDIE** (Discouraged): I just realized that I'd promised to organize a ghost tour at the Mansion for Halloween.
+**MADDIE** (Discouraged): You know, before the storm and the cans full of secrets...
+**GRANDMA** (Thinking): Maybe it is not such a bad idea.
+**MADDIE** (Worried): I'm not sure how many people would want to come...
+**MADDIE** (Worried): And I'm not sure I really want to see anyone, either!
+**MADDIE** (Thinking): I'm still upset with Jackie for writing in the newspaper about our family. Now everyone's got it in for us!
+**GRANDMA** (Charming): The first step out of any mess is to make amends, Maddie dear. Maybe this is just the thing!
+**GRANDMA** (Charming): Let's get all the skeletons out of the closet!
 
 ### Proposal Mystery — outro
 `SP_HanksMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=Proposal Mystery, eventId=SP_HanksMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA** (Relaxed): Deb, there is something you should see...
+**DEB** (Surprised): What's all this in your front yard? If this is your idea of a joke, Ursula, I swear...
+**HANK** (Charming): No, Deb - this is all for you.
+**DEB** (Surprised): Hank?? You did all of this... for me?
+**DEB** (Worried): But why? I thought you were gearing up to leave Hopewell Bay - and me.
+**HANK** (Surprised): Leave you, Deb? Never!
+**HANK**: Actually, there's something I want to ask...
+**HANK**: Would you make me the happiest man in the world and be my wife?
 
 ### Proposal Mystery — intro
 `SP_HanksMystery2024_Intro_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=Proposal Mystery, eventId=SP_HanksMystery2024, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: What a Valentine's Day we had!
+**MADDIE** (Discouraged): No kidding...
+**MADDIE** (Doubtful): But don't you think that there's been some weird stuff going on lately?
+**GRANDMA** (Thinking): Hmm, you mean the burned teddy? That certainly was odd...
+**MADDIE** (Thinking): Yeah - and the diamond ring found among the Valentine's presents Mason bought for all of us.
+**GRANDMA** (Doubtful): Valentine's does make people act funny, but now that you mention it...
+**GRANDMA** (Doubtful): There is certainly something odd about all of this!
 
 ### Julius' Mystery — outro
 `SP_JuliusMystery2023_AllRewardsCompleted_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=Julius' Mystery, eventId=SP_JuliusMystery2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA** (Surprised): Even I didn’t know my family did so much traveling! They hardly ever spoke about such things...
+**MADDIE** (Annoyed): Annoying, isn’t it?
+**GRANDMA** (Charming): Oh, dearie, I tell you things all the time! You just have to ask the right questions...
+**MADDIE** (Doubtful): Riiight...
+**GRANDMA**: Julius, dearie. I just wanted to thank you for the wonderful gift. I may have been a bit snappy with you earlier, but...
+**ANTIQUEDEALER** (Thinking): But the conversation we had made it utterly clear why it's duck soup, Ursula.
+**GRANDMA** (Encouraging): And the NEW coat of arms is simply lovely!
+**ANTIQUEDEALER** (Joyous): Capital it is!
 
 ### Julius' Mystery — intro
 `SP_JuliusMystery2023_Intro_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=Julius' Mystery, eventId=SP_JuliusMystery2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**ANTIQUEDEALER**: Salutations, Maddie!
+**MADDIE**: Hi, Julius. Quiet day at the antique store?
+**ANTIQUEDEALER** (Encouraging): Quite the contrary, my dear! I came across a wonderful find. Behold; an unpublished journal of the Boulton Family's travels!
+**MADDIE** (Encouraging): How interesting! How did you come across that?
+**ANTIQUEDEALER**: I’ve been doing some research on your family history and came across it in the library...
+**MADDIE** (Thinking): You’re doing research on my family? What for?
+**ANTIQUEDEALER** (Thinking): Well... It’s more of a hobby, actually. I love history, and your family seems to have a fascinating one.
+**MADDIE** (Doubtful): You can say that again! I wish I knew more...
+**ANTIQUEDEALER** (Relaxed): Well, if I find anything interesting, I’ll let you know!
+**MADDIE**: Great!
 
 ### Lady Voyance's Mystery — outro
 `SP_LadyVoyanceMystery2023_AllRewardsCompleted_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=Lady Voyance's Mystery, eventId=SP_LadyVoyanceMystery2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Encouraging): That Lady Voyance sure is a character!
+**GRANDMA**: Yes, she is, dearie. Did she give you a reading?
+**MADDIE**: Yes! She said I was about to find love! Or it... Me? I couldn’t quite understand what she meant.
+**GRANDMA** (Joyous): Yes, she can be very confusing sometimes. I guess it has something to do with her 20% accuracy rate.
+**MADDIE** (Surprised): 20%?!
+**GRANDMA** (Charming): Yes, but in that 20%, she’s right all the time.
+**MADDIE** (Doubtful): I don’t think that’s how it works, Grandma.
+**GRANDMA**: Shh... Don’t tell her that!
 
 ### Lady Voyance's Mystery — intro
 `SP_LadyVoyanceMystery2023_Intro_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=Lady Voyance's Mystery, eventId=SP_LadyVoyanceMystery2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE**: Hello, can I help you?
+**LADY VOYANCE** (Talking): No, my child... It is I who has come to help... YOU!
+**MADDIE** (Surprised): Oh... Kay...
+**GRANDMA**: Maddie, dearie! I see you have met my old friend, Lady Voyance.
+**GRANDMA** (Charming): She’s a psychic, you know!
+**MADDIE** (Joyous): Really? How interesting! Came here to give Grandma a reading?
+**LADY VOYANCE** (Talking): For heaven’s sake, no! I have come to help all of Hopewell Bay! I sense a great change in the future!
+**LADY VOYANCE**: Ursula has graciously let me set up my services temporarily, so that I may help everyone in need.
+**LADY VOYANCE** (Talking): ... Especially you, Maddie. I can sense that something amazing is in store for you.
+**MADDIE** (Surprised): Really?!
+**LADY VOYANCE** (Talking): Yes, my child! Love is in the air!
 
 ### Holiday Mystery — outro
 `SP_MasonsMystery2023_AllRewardsCompleted_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=Holiday Mystery, eventId=SP_MasonsMystery2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA**: Oh Mason...
+**GRANDMA** (Relaxed): Why would you go through all this trouble, dearie?
+**MASON** (Relaxed): Well... You know... I’ve had so much fun around here in the past year... The spooky summer camp, the swimming pool.
+**MASON** (Encouraging): Not to mention the awesome pirate ship! I just...
+**MASON** (Doubtful): I just wanted to give something back.
+**GRANDMA** (Encouraging): Well, I love it! Thank you.
+**MASON** (Encouraging): Happy holidays, Grandma!
+**GRANDMA** (Joyous): Happy holidays, Mason!
 
 ### Holiday Mystery — intro
 `SP_MasonsMystery2023_Intro_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=Holiday Mystery, eventId=SP_MasonsMystery2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Relaxed): Looks like it’s the holiday season again, Grandma!
+**GRANDMA** (Encouraging): Yes, dearie! I can’t wait to make my special holiday pie!
+**MADDIE** (Surprised): Ooh! Is it the one with cinnamon, hopeberries and oranges?!
+**GRANDMA** (Charming): That’s the one! I know little Mason has always wanted to try it, so I thought I’d surprise him.
+**MADDIE** (Charming): That’s sweet.
+**GRANDMA** (Joyous): Not as sweet as my pie, dearie!
+**GRANDMA** (Relaxed): Brrr... It’s getting cold, let’s head inside...
+**MASON** (Doubtful): Oh, man... Grandma has been so awesome this year! And now she’s making me pie?!
+**MASON** (Thinking): I wonder what she would want for this holiday season?
+**MASON** (Thinking): Hmm....
 
 ### Mini Horse Mystery — outro
 `SP_MiniHorseMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=Mini Horse Mystery, eventId=SP_MiniHorseMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**DEB** (Frustrated): Hank?
+**HANK**: Yeah, Debby-poo?
+**DEB** (Doubtful): Is there anything you would like to tell me - before we tie the knot?
+**HANK** (Thinking): Ummm... No?
+**DEB** (Frustrated): My ex-husband Reginald thinks otherwise! "Your husband-to-be is hiding something from you..."
+**HANK** (Surprised): I-I don't know what he's talking about. Honest! He must be jealous of our love!
+**DEB** (Thinking): Hrrrmm, maybe. I think the seating chart requires my attention... But this conversation is not over!
+**HANK** (Thinking): OK, my sweet corpse flower.
+**GRANDMA** (Frustrated): Hank, may I steal you for a minute?
+**HANK**: Sure, Ursula. What's up?
+**GRANDMA** (Thinking): Come with me...
 
 ### The Mysteries Unveiled — outro
 `SP_MysteriesUnveiled2024_AllRewardsCompleted_Dialogue` · seen 24.07.01–24.11.02
 - trigger: event, event=The Mysteries Unveiled, eventId=SP_MysteriesUnveiled2024, eventType=Mystery / Progression, moment=outro (versions 24.07.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**RODDY** (Relaxed): Well... At least all the cans are gone. Feel any better?
+**MADDIE**: Yeah... A little. I just needed to let out some frustration.
+**MADDIE** (Encouraging): What better way than to use all these cans for some art!
+**RODDY** (Thinking): Art?
+**MADDIE** (Annoyed): Hey...
+**RODDY** (Charming): Just kidding!
+**MADDIE** (Charming): Boy... What a year, right?
+**RODDY** (Thinking): Something tells me it’ll only get crazier...
 
 ### The Mysterious Maelstrom — outro
 `SP_MysteriousMaelstrom2024_AllRewardsCompleted_Dialogue` · seen 24.07.01–24.11.02
 - trigger: event, event=The Mysterious Maelstrom, eventId=SP_MysteriousMaelstrom2024, eventType=Mystery / Progression, moment=outro (versions 24.07.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**KAZUKO** (Discouraged): Oh, Maddie-san...
+**MADDIE** (Surprised): Wh- What is it, Kazuko-san?
+**KAZUKO** (Surprised): Have you not read the latest news? My dear Maddie-san, you should really keep up-to-date.
+**KAZUKO** (Worried): *sigh* There is an article just released about the tin can factory and possibly the truth behind it!
+**MADDIE** (Doubtful): Truth? What truth?
+**KAZUKO** (Annoyed): I knew I should not have sold everyone those can openers...
+**MADDIE** (Worried): Kazuko-san, what is going on?!
+**KAZUKO** (Frustrated): Maddie-san, your ancestor Ignatius Boulton was not a good man! They said that he ran the tin can factory as cover to sell secrets!
+**KAZUKO** (Discouraged): Other people's secrets! That’s what’s in the cans, Maddie-san.
+**KAZUKO** (Worried): Everyone’s secrets... And now they know about it.
+**—**: Other people's secrets! That’s what’s in the cans, Maddie-san.
 
 ### New Year's Resolutions — outro
 `SP_NewYearsResolutions2023_AllRewardsCompleted_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=New Year's Resolutions, eventId=SP_NewYearsResolutions2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**JACKIE**: Hey, Maddie! Have you seen Roddy around?
+**MADDIE** (Thinking): No! I think he's been really busy.
+**JACKIE** (Encouraging): Yeah, busy working out!
+**MADDIE** (Surprised): What? I haven't noticed!
+**JACKIE**: Of course you haven't. You're all about Emilio now!
+**MADDIE** (Charming): It is going really well. I think next year is gonna be the best ever!
+**JACKIE** (Thinking): You... wouldn't happen to have Roddy's number?
+**MADDIE** (Encouraging): Did you know that Emilio climbed Mount Everest?
+**JACKIE** (Annoyed): Of course he did...
 
 ### New Year's Resolutions — intro
 `SP_NewYearsResolutions2023_Intro_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=New Year's Resolutions, eventId=SP_NewYearsResolutions2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**RODDY** (Thinking): This is it! I'm gonna do it and knock on that door.
+**RODDY** (Thinking): I'm gonna be honest and say how I feel.
+**RODDY**: I'm gonna do it...
+**RODDY**: I'm gonna do it!
+**RODDY** (Worried): ... I'm not gonna do it.
+**RODDY** (Discouraged): Great. Another year, and I still can't speak my mind.
+**RODDY** (Discouraged): Something's gotta change.
+**RODDY** (Thinking): Next year is going to be different. I'm going to be different.
+**RODDY** (Thinking): I need to make some resolutions. NOW.  
+  _(1 cosmetic edit not shown)_
 
 ### Pie Wars — outro
 `SP_PieWars2023_AllRewardsCompleted_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=Pie Wars, eventId=SP_PieWars2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Joyous): The votes are in... Who wants to do the honors?
+**GRANDMA**: You do it, dearie.
+**CHERRY**: It would only be fair!
+**MADDIE**: *Opens envelope* 
+**MADDIE**: It's close, but the winner is...
+**MADDIE** (Joyous): Grandma! Congratulations!
+**CHERRY** (Encouraging): Congratulations, sugar! I guess I still have a lot to learn...
+**GRANDMA** (Relaxed): Not too much, dearie. You can bake with the best of them, but sometimes you just can't beat the classics!
 
 ### SP_PieWars2023 — intro
 `SP_PieWars2023_Intro_Dialogue` · seen 23.06.02–24.11.02
 - trigger: event, eventId=SP_PieWars2023, eventType=Mystery / Progression, moment=intro (versions 23.06.02–23.06.02)
 - trigger: event, event=Pie Wars, eventId=SP_PieWars2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE**: Hi Cherry! Need more help making jam for your bakery?
+**CHERRY** (Encouraging): Oh, sugar... Something better! I brought you my new and improved Hopeberry pie! Have a taste...
+**MADDIE** (Joyous): ...Oh my gosh, that's amazing! That's the best thing I've ever tasted!
+**GRANDMA**: What is, dearie?
+**MADDIE** (Encouraging): Oh, Grandma, you have to taste this! It's phenomenal. 
+**GRANDMA** (Worried): Really? You've always said my pies were the best...
+**CHERRY**: Looks like you've got a bit of competition, sugar!
+**GRANDMA** (Frustrated): How about we make it official then, dearie?
+**CHERRY** (Annoyed): Alright, you're on! Let the people decide. The best tasting pie wins! 
 
 ### Roddy's Mystery — outro
 `SP_RoddysMystery2023_AllRewardsCompleted_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=Roddy's Mystery, eventId=SP_RoddysMystery2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA** (Discouraged): I'm sorry Roddy. All I wanted to do was bring a little fun to your summer camp...
+**RODDY** (Doubtful): Fun?! You scared me half to death! 
+**GRANDMA** (Doubtful): Well, I wasn't expecting you to have a crippling fear of ghosts!
+**RODDY** (Charming): I guess I wanted to keep that secret. It's a bit embarrassing.
+**GRANDMA** (Charming): How about you, Mason, dearie? Did you have fun?
+**MASON** (Joyous): BEST. SUMMER CAMP. EVER!!! It had everything: camping, marshmallows, GHOSTS!
+**RODDY** (Relaxed): Well... There you go then!
 
 ### SP_RoddysMystery2023 — intro
 `SP_RoddysMystery2023_Intro_Dialogue` · seen 23.06.02–24.11.02
 - trigger: event, eventId=SP_RoddysMystery2023, eventType=Mystery / Progression, moment=intro (versions 23.06.02–23.06.02)
 - trigger: event, event=Roddy's Mystery, eventId=SP_RoddysMystery2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**RODDY** (Relaxed): Thanks again for letting me run summer camp at your cottage, Mrs. Boulton.
+**GRANDMA**: Not a problem, dearie! I think it's really important that our younger generation still learns wilderness skills!
+**RODDY** (Encouraging): I couldn't agree more! Ah! Here comes our newest camper!
+**RODDY** (Relaxed): Hello Mason!
+**MASON** (Discouraged): Hi...
+**RODDY**: Cheer up, Mason! I promise, you'll be having so much fun that by the time it ends, you won't want to leave!
+**MASON** (Doubtful): I guess...
+**RODDY** (Thinking): Huh... I wonder what's gotten him so down? 
+**GRANDMA** (Relaxed): Well, let me know if I can help, dearie.
 
 ### Spring Season — outro
 `SP_SpringSeason2023_EventEndDialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=Spring Season, eventId=SP_SpringSeason2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**RODDY** (Charming): Tah-daa!
+**MADDIE** (Worried): That's... That's horrifying!
+**JACKIE** (Frustrated): It's his fault! He kept going on about structural integrity this, aerodynamics that...
+**RODDY** (Frustrated): She wanted to make a kite that looked like a pig!
+**JACKIE** (Annoyed): Yes! "When pigs fly..." Don't you get it?!
+**RODDY** (Annoyed): But they don't fly!!
+**JACKIE** (Annoyed): THATS THE POINT!
+**MADDIE** (Doubtful): Cheer up, you two. At least you won first place in the Kids Favorite category!
+**RODDY** (Charming): I was sort of hoping to win something else instead...
 
 ### SP_SpringSeason2023 — intro
 `SP_SpringSeason2023_EventOpeningDialogue` · seen 23.06.02–24.11.02
 - trigger: event, eventId=SP_SpringSeason2023, eventType=Mystery / Progression, moment=intro (versions 23.06.02–23.06.02)
 - trigger: event, event=Spring Season, eventId=SP_SpringSeason2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Joyous): A kite festival! How wonderful!
+**GRANDMA** (Relaxed): Not only a festival, dear but remember, a competition as well! I'm sure we'll win it this year, you'll see!
+**JACKIE**: Would make for a nice story too!
+**MADDIE** (Surprised): Roddy! You're here for the kite festival as well?
+**RODDY** (Charming): Yeah! I- Uuh... I was thinking we could team up?
+**JACKIE** (Surprised): Actually, I was thinking WE could team up!
+**MADDIE** (Worried): Oh no! I'm sorry, but I already promised to help Grandma!
+**JACKIE** (Doubtful): Oh...
+**RODDY** (Annoyed): Great...
+**GRANDMA** (Charming): Oh, it's alright dear, I'm sure I can handle this alone. Why don't you and Roddy-
+**MADDIE** (Joyous): Heeeey! I got a great idea! Why don't YOU TWO team up?!
+**MADDIE** (Encouraging): I'm sure you have a lot in common and would make a great kite together!
+**JACKIE** (Annoyed): Are you kidding?! He can barely build a house, let alone a kite!
+**RODDY** (Annoyed): Hey!
+**MADDIE** (Relaxed): They look cute together, don't you think Grandma?
+**GRANDMA** (Annoyed): Sometimes, I think you need thicker glasses than me, sweetie...
 
 ### Stray Bones Mystery — outro
 `SP_StrayBonesMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=Stray Bones Mystery, eventId=SP_StrayBonesMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE**: What's that Goldie's got in her mouth?
+**JACKIE** (Thinking): Looks like a big juicy bone.
+**MADDIE** (Thinking): A b-bone?
+**MADDIE** (Thinking): A HUMAN bone?
+**JACKIE** (Surprised): I-it's HANK!!
 
 ### The Winds of Mystery — outro
 `SP_TheWindOfMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=The Winds of Mystery, eventId=SP_TheWindOfMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**LADY VOYANCE** (Talking): Maddie! I have grave news for you!
+**MADDIE** (Surprised): Lady Voyance! What are you doing here?
+**LADY VOYANCE** (Talking): Maddie, I come with bad tidings! I was doing my usual reading, when I was struck with a VISION!
+**LADY VOYANCE** (Calling): A storm is coming!
+**MADDIE** (Doubtful): Yes, I know! I know! I’m packing everything up and heading inside. You’re the third per-
+**LADY VOYANCE** (Talking): No, Maddie! That’s not the storm I’m talking about!
 
 ### SEValentines2023 — decoration SP_Valentines2023_Decoration_26
 `SP_Valentines2023_CupidsCove` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SP_Valentines2023_Decoration_26, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Charming): Ooh… I could snuggle up here until Xmas!
+**GRANDMA** (Joyous): I must admit Maddie, you’ve really outdone yourself with the decorations.
+**MADDIE** (Encouraging): How about another story from your infamous dating life?
+**GRANDMA**: I did meet this feller on a singles site and I was sure he’s the one--
+**GRANDMA** (Discouraged): --until I realized he was easily scared.
+**GRANDMA** (Annoyed): He wasn’t up for pranks, stayed in during Halloween and hated scary movies.
+**GRANDMA**: Naturally, I had to stay away from him.
+**MADDIE** (Joyous): I think we can cross him out from your list of secret admirers.
 
 ### Sweethearts' Season — outro
 `SP_Valentines2023_EventEndDialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=Sweethearts' Season, eventId=SP_Valentines2023, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Joyous): Ooh, Grandma! Doesn’t this place look like the sweetest–pink–candy floss dream?
+**GRANDMA** (Encouraging): Hahaha! Seems like you’re fully in the spirit of Valentine’s.
+**MADDIE** (Charming): Team Cupid all the way! Now, let’s find out who your mystery beau is--
+**GRANDMA**: --Or we could look into a certain building inspector who clearly has eyes for you.
+**MADDIE** (Surprised): Grandma!
 
 ### SP_Valentines2023 — intro
 `SP_Valentines2023_EventOpeningDialogue` · seen 23.06.02–24.11.02
 - trigger: event, eventId=SP_Valentines2023, eventType=Mystery / Progression, moment=intro (versions 23.06.02–23.06.02)
 - trigger: event, event=Sweethearts' Season, eventId=SP_Valentines2023, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Relaxed): What have you got there Grandma?
+**GRANDMA** (Charming): It’s… a Valentine’s Bouquet! For me!
+**GRANDMA** (Joyous): I haven't had one of these since Charlie was around.
+**MADDIE** (Relaxed): Let's see, the card says: "Lillies for my Lily".
+**GRANDMA** (Joyous): But these are roses, not lilies! How strange!
+**MADDIE** (Encouraging): Who are they from? Grandma, do you have a secret admirer?!
+**GRANDMA** (Relaxed): Perhaps a gentleman I went on a date with, and before you ask--
+**GRANDMA**: --I’ll dish a story or two if you help me decorate for Valentine’s Day!
+**MADDIE** (Joyous): Deal!
 
 ### SEValentines2023 — decoration SP_Valentines2023_Decoration_28
 `SP_Valentines2023_KissingPorch` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SP_Valentines2023_Decoration_28, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Charming): I can almost picture it… sharing a good night kiss under the porch after a romantic date.
+**GRANDMA** (Joyous): Brings back memories of all the great times I had with your Grandpa Charlie.
+**GRANDMA**: Come to think of it, this is the second time I got a bouquet of flowers with no name.
+**MADDIE** (Thinking): Wasn’t it from Grandpa Charlie?
+**GRANDMA**: Maybe… or it might have been Julius. Speak of the devil--
+**GRANDMA** (Charming): Julius dear, did you send me a Valentine’s bouquet all those years ago?
+**GRANDMA**: Deb spilled the beans about a little crush you might have had.
+**ANTIQUEDEALER** (Discouraged): Uh.. well… haha… you sister did have a wild imagination. I must run, ladies!
 
 ### SEValentines2023 — decoration SP_Valentines2023_Decoration_27
 `SP_Valentines2023_PinkHeartTree` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SP_Valentines2023_Decoration_27, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**GRANDMA** (Joyous): My, this tree looks like it's made of pink candy! How on earth did you pull that off dearie?
+**MADDIE** (Charming): Inspired by my love for love, Grandma.
+**MADDIE** (Encouraging): I think I’ve earned another juicy dating story--
+**GRANDMA**: Let me have a think… well, Deb once set me up on a blind date.
+**GRANDMA** (Relaxed): I met him down at the little tea shop in Hopewell Bay and all was going really well--
+**MADDIE** (Encouraging): --‘Cause a sister knows best, right?
+**GRANDMA** (Worried): You’d think so. But then he told me the most terrible thing--
+**MADDIE** (Surprised): What did he say?!
+**GRANDMA** (Discouraged): That he doesn’t like pies, at all. The nerve! That was that.
 
 ### SEValentines2023 — decoration SP_Valentines2023_Decoration_29
 `SP_Valentines2023_RomanticRooftop` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SP_Valentines2023_Decoration_29, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**ANTIQUEDEALER** (Encouraging): All set for spotting eligible suitors, I see?
+**GRANDMA** (Encouraging): Hahaha! We do love how this romantic little watchtower turned out.
+**MADDIE** (Encouraging): Maybe now we’ll catch a glimpse of the mysterious flower bouquet sender.
+**ANTIQUEDEALER** (Surprised): Anonymous flower deliveries? Humph! What’s next, chocolate via mail?
+**ANTIQUEDEALER** (Annoyed): We hardly talk about the sacrifice of St. Valentine–
+**ANTIQUEDEALER**: --In fact, Valentine’s Day goes back to ancient Rome and has a rather dark origin.
+**GRANDMA** (Charming): How fascinating! You’re always full of the most interesting facts, Julius.
+**MADDIE** (Thinking): Wish I could hear more but there’s quite a bit of decorating to do. Bye now.
 
 ### SEValentines2023 — decoration SP_Valentines2023_Decoration_25
 `SP_Valentines2023_ValentinesLawn` · seen 23.09.02–25.06.01
 - trigger: decoration, decoration=SP_Valentines2023_Decoration_25, event=SEValentines2023, eventKey=SEValentines2023, moment=decoration placed (versions 23.09.02–25.06.01)
 
-_Referenced by the game, but no lines matched this id._
+**RODDY** (Encouraging): Woah Maddie, you seem to be giving Cupid a run for his money!
+**RODDY** (Relaxed): Do you have any grand Valentine’s day plans lined up?
+**MADDIE**: To be honest Roddy, I’m way too caught up with Grandma’s secret admirer shenanigans.
+**RODDY** (Charming): Really? Maybe a nice dinner out is just what the doctor ordered?
+**MADDIE** (Thinking): I’d be too distracted making plans to track down florists and trail suspicious visitors.
+**RODDY** (Relaxed): How about a heart-shaped box of peanut chocolates to fuel your detective work?
+**MADDIE** (Relaxed): That would have been amazing, except for the small fact that I’m allergic to peanuts.
+**RODDY** (Worried): Oh? I have to run…uh… Those buildings won't inspect themselves. Good luck with the mystery!
 
 ### Valentine's Mystery — outro
 `SP_ValentinesMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=Valentine's Mystery, eventId=SP_ValentinesMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**PEARL** (Surprised): Mason?? How much did you spend on all these presents?
+**MASON** (Discouraged): Some... but YOU told me to get something "special" for everyone. And I didn't get a sports car or exotic animals!
+**MASON** (Discouraged): And I was really tempted...
+**PEARL** (Annoyed): The thought is lovely, but it's all just WAY too much. We'll have to return them...
+**RODDY** (Relaxed): But your friendship is enough for us, Mason. It doesn't cost anything, but it's more valuable than any fancy present.
+**MASON** (Charming): Aww, shucks! Thanks, guys. I guess Valentine's Day doesn't have to be about just yucky love or expensive gifts.
+**MASON** (Relaxed): It's great to have friends!
+**MADDIE** (Relaxed): It is! But seriously, though...
+**MADDIE** (Thinking): Was that diamond ring actually Hank's? What's he planning??
 
 ### Valentine's Mystery — intro
 `SP_ValentinesMystery2024_Intro_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=Valentine's Mystery, eventId=SP_ValentinesMystery2024, eventType=Mystery / Progression, moment=intro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**PEARL**: Maaaason?
+**MASON** (Thinking): Yes, Mom? You sound like you're about to ask me to do something boring.
+**PEARL** (Encouraging): I promised to organize a little Valentine's party at Grandma Ursula's place, but there's so much to do. Could you help me?
+**MASON** (Annoyed): A Valentine's party? I knew it!
+**PEARL** (Doubtful): Please? I need to get a little present for everyone. Could you pick them and order them on my credit card?
+**MASON**: So I would get to choose a present for everyone?
+**PEARL** (Thinking): Yes, something special to each of our friends - but within reason! No sports cars or exotic animals.
+**MASON** (Encouraging): So, no frilly hearts and the rest of that romantic stuff? I guess I can do that.
+**PEARL** (Relaxed): Great! I'll get everything else ready. I think this will be fun!
+**MASON** (Joyous): Yes, it will...
 
 ### The Wedding Mystery — outro
 `SP_WeddingMystery2024_AllRewardsCompleted_Dialogue` · seen 24.04.01–24.11.02
 - trigger: event, event=The Wedding Mystery, eventId=SP_WeddingMystery2024, eventType=Mystery / Progression, moment=outro (versions 24.04.01–24.11.02)
 
-_Referenced by the game, but no lines matched this id._
+**MADDIE** (Encouraging): Well, I would call that a very successful wedding!
+**JACKIE** (Encouraging): You did great out there, baby.
+**RODDY** (Relaxed): Thanks, Jackie.
+**MADDIE**: Well, I uuh... Should start clean-
+**DEB** (Worried): Have any of you seen Hank?!
+**MADDIE** (Relaxed): Yeah, sure! He was just here a minute ago.
+**DEB** (Worried): No, he wasn’t... I’ve looked everywhere! Haaank!
+**MADDIE** (Worried): Deb, Deb... Calm down, I’m sure he’s just inside, doing his hair or lifting weights or something...
+**DEB** (Worried): No, his hair is fine and today is leg day. He isn’t answering his phone; I can’t find him, Maddie! HAANK!
+**JACKIE** (Thinking): Wasn’t.... Wasn’t Grandma the last person to speak to him?
+**RODDY** (Worried): I think so...
+**DEB** (Worried): HAAANK!!! Where are you?!
 
 ### Valentine2022Decoration1
 `Valentine2022Decoration1` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**RODDY** (Relaxed): Your decorations make me wish every day was Valentine’s Day!
+**MADDIE**: Thanks! Maybe your wish will come true when you find a valentine for life!
+**RODDY** (Charming): I think I have found her, Maddie…
+**MADDIE** (Charming): That’s lovely! Do I know the lucky girl?
+**RODDY** (Encouraging): Oh, haha! Yes, you do! You know her very well, because she--
+**MADDIE** (Surprised): Sorry Roddy, but WHAT is grandma doing THERE?! I gotta go!!
 
 ### Valentine2022Decoration10
 `Valentine2022Decoration10` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**RODDY** (Charming): Roses are red, violets are blue…
+**MADDIE**: …flowers are sweet and they brighten up my mood!
+**RODDY** (Encouraging): That’s… a great version too!
+**MADDIE** (Joyous): I’m not sure if I love anything more than flowers!
+**RODDY** (Charming): Maybe one day!
 
 ### Valentine2022Decoration12
 `Valentine2022Decoration12` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE** (Joyous): Pink pink pink! Pink is the new black!
+**MADDIE**: It’s my favourite colour for one day every year
+**MADDIE** (Charming): And for the remaining 364 days, I’ll go for yellow, of course!
 
 ### Valentine2022Decoration13
 `Valentine2022Decoration13` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE** (Joyous): Hearts here, hearts there, hearts everywhere!
+**ANTIQUEDEALER** (Surprised): Well, that’s an impressive confession of love!
+**ANTIQUEDEALER**: Who’s the lucky one?
+**MADDIE** (Charming): Oh, no one special! Just spreading happiness around the neighbourhood!
+**ANTIQUEDEALER** (Encouraging): Apologies! Ursula just said you were dating some handsome buil–
+**MADDIE** (Frustrated): Building inspector! Of course, she said that!
+**MADDIE** (Thinking): I’m almost starting to think she knows something that I don’t…
+**ANTIQUEDEALER** (Doubtful): Well, it wouldn't be the first time, right?
 
 ### Valentine2022Decoration14
 `Valentine2022Decoration14` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**RODDY**: Hi Maddie! I would need some directions…
+**MADDIE** (Thinking): Directions? To where?
+**RODDY** (Encouraging): To your heart!
+**MADDIE** (Surprised): WHAT??
+**RODDY** (Charming): JOKING! I was joking, of course… Sorry!
+**MADDIE** (Thinking): Oh, I thought you would really--
+**MADDIE**: Well, I’ll go check on grandma. See you around!
+**RODDY** (Frustrated): Damn! I really messed that one up, didn’t I…
 
 ### Valentine2022Decoration15
 `Valentine2022Decoration15` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE** (Joyous): A statue with a chocolate box in its hand – I’m a genius!
+**GRANDMA**: Just be careful that no one steals it!
+**MADDIE** (Thinking): What? Why would someone steal chocolate?
+**GRANDMA** (Doubtful): It’s not the chocolate I’m worried about but the di–
+**GRANDMA** (Encouraging): Oh well, maybe I’m worrying for nothing!
+**MADDIE** (Surprised): Dinner? Diary? Diapers?? What were you about to say, grandma…
 
 ### Valentine2022Decoration2
 `Valentine2022Decoration2` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE** (Charming): On days like these, life’s like a bed of roses!
+**MADDIE** (Surprised): Speaking of which… Some of my roses have been plucked!
+**MADDIE** (Doubtful): Either grandma has her heritage vase filled with them…
+**MADDIE** (Thinking): …Or then someone else is preparing for Valentine's Day! Who could it be?
 
 ### Valentine2022Decoration4
 `Valentine2022Decoration4` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE** (Joyous): I love these lamps! I can already feel the romance in the air!
+**GRANDMA**: Are you planning on romancing that good looking building inspector?
+**MADDIE** (Charming): Grandma! I told you we’re just friends…
+**GRANDMA** (Joyous): If you don’t make a move on him, maybe I will!
+**MADDIE** (Frustrated): No! No! No no no! Please grandma, don’t spur my imagination like that!!
 
 ### Valentine2022Decoration5
 `Valentine2022Decoration5` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE** (Charming): Maybe I’ll get struck by Cupid’s arrow this Valentine’s da--
+**MADDIE** (Surprised): OUCH!!! What was that?
+**GRANDMA** (Joyous): HAHAHAHA!
+**MADDIE** (Annoyed): Grandma! I didn’t mean it THAT literally…
+**GRANDMA** (Joyous): Haha! Don’t worry, it was just a toy arrow this time! Hope it makes you lucky in love!
 
 ### Valentine2022Decoration6
 `Valentine2022Decoration6` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**ANTIQUEDEALER** (Surprised): Are those Ursula’s roses?
+**MADDIE**: I guess they are! I planted them for Valentine’s Day!
+**ANTIQUEDEALER** (Frustrated): Valentine's Day! Of course! I totally forgot to get flowers for your grandma…
+**MADDIE** (Charming): You can pick a few from here if you like!
+**ANTIQUEDEALER** (Encouraging): Oh wow! Thanks, but I’ll pass… These roses might remind her of those stormy times with--
+**ANTIQUEDEALER**: Oh my, I really shouldn’t talk about that. See you around!
+**MADDIE** (Surprised): Wait!! Grandma had stormy times with who?!
 
 ### Valentine2022Decoration7
 `Valentine2022Decoration7` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**GRANDMA** (Joyous): Wow, you’re going all-in with Valentine’s Day decorations!
+**MADDIE** (Charming): Thank you! I’m trying my bes--
+**GRANDMA** (Encouraging): The handsome inspector gentleman will be amazed by your dinner setting!
+**MADDIE** (Frustrated): Grandma!! I’ve told you many times that we--
+**GRANDMA** (Joyous): I know, I know, you’re taking it slow.
+**GRANDMA**: Just don’t let him slip away…
 
 ### Valentine2022Decoration8
 `Valentine2022Decoration8` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE** (Doubtful): There’s some kind of a package at the gate…
+**MADDIE** (Joyous): Oooh!! It's a beautiful bouquet of flowers and chocolates! 
+**MADDIE** (Thinking): Who is it from? There’s no card to go with it…
+**DOG** (Charming): Woof woof!
+**MADDIE** (Surprised): Rufus! Did you just eat my Valentine’s card?
+**DOG** (Joyous): Woooof!
+**MADDIE** (Frustrated): I guess my secret admirer will remain a secret for a while…
 
 ### Valentine2022Decoration9
 `Valentine2022Decoration9` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE** (Joyous): Love is in the air!
+**RODDY** (Relaxed): Wow! Beautiful heart-shaped balloons, Maddie!
+**MADDIE**: Thank you! Do you want one?
+**RODDY** (Encouraging): Oh, I didn’t expect to find my way to your heart like this!
+**MADDIE** (Surprised): WHAT??
+**RODDY** (Surprised): Oh, I meant---
+**RODDY** (Charming): I meant I gladly accept one balloon from you, my friend and friend only.
+**MADDIE** (Thinking): Sometimes you’re hard to read, Roddy…
 
 ### Valentine2022DoorTutorial1
 `Valentine2022DoorTutorial1` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE**: Wow, this is not an ordinary gate! What’s behind it…
 
 ### Valentine2022IntroPart2UrsulaAndMaddie
 `Valentine2022IntroPart2UrsulaAndMaddie` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE** (Surprised): Whose love nest is this, grandma??
+**GRANDMA** (Encouraging): Oh me and… well you know, those are such good memories!
+**MADDIE** (Doubtful): I know? Does that mean it used to be yours and grandpa Char--
+**GRANDMA**: I’m sorry, I really need to check on those cookies now.
+**MADDIE** (Frustrated): Cookies!! Well of course!
+**MADDIE** (Doubtful): Not the first time I smell a mystery…
+**MADDIE** (Charming): And roses! Let's check if there are any romantic garden decorations for Valentine's Day!
 
 ### Valentine2022IntroUrsulaAndMaddie
 `Valentine2022IntroUrsulaAndMaddie` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE** (Joyous): Valentine’s Day! Yay! Another good reason for garden decorations!
+**GRANDMA**: That’s right, sweetheart. But work before play!
+**GRANDMA** (Encouraging): The garden would look so beautiful if the side gate would be polished.
+**GRANDMA** (Worried): But I’m already a bent, old woman…
+**MADDIE**: Don’t worry, grandma! I can clean the gate!
 
 ### Xmas2021Decoration1
 `Xmas2021Decoration1` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**RODDY** (Relaxed): Who’s this fella, Maddie? Your new boyfriend?
+**MADDIE** (Thinking): Roddy, you know I’m still dating Mr. A.
+**RODDY** (Surprised): Mr. A? Who... I didn’t know that you--
+**MADDIE** (Charming): Just kidding!! I’ve always preferred cool guys like... these two.
+**RODDY** (Charming): Haha… Ok, well I'd better go build one for myself too!
 
 ### Xmas2021Decoration10
 `Xmas2021Decoration10` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE** (Charming): Wooow… A White Christmas would be so magical to experience…
+**GRANDMA** (Encouraging): That’s true! It’s so romantic when the snow falls quietly.
+**GRANDMA**: When we had to escape to the North for a while, snow was actually pretty comforting.
+**MADDIE** (Surprised): You escaped to the North? When, why??
+**GRANDMA** (Worried): Oh, I mean… We paid a little visit there, yes.
+**GRANDMA**: Now I’ll pay a little visit to our neighbors, to borrow some sugar.
+**MADDIE** (Annoyed): Grandma!! You can’t run away from these questions forever...
 
 ### Xmas2021Decoration11
 `Xmas2021Decoration11` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**GRANDMA** (Joyous): “Jingle bells, jingle bells, jingle all the way!” 
+**MADDIE** (Joyous): “Oh what fun it is to ride, in a one-horse open sleigh--”
+**MADDIE** (Surprised): Hey?! These bells have old carvings… It says trait-- traitor??
+**GRANDMA** (Worried): Oh... those carvings are--
+**GRANDMA** (Joyous): ...Probably just some joke by the locals! Haha!
+**MADDIE** (Doubtful): Locals had a weird sense of humour, if that’s true...
 
 ### Xmas2021Decoration12
 `Xmas2021Decoration12` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**GRANDMA** (Joyous): Knock knock!
+**MADDIE**: Who’s there?
+**GRANDMA** (Joyous): Oh, Chris!
+**MADDIE**: Oh, Chris who?
+**GRANDMA** (Joyous): “O Christmas tree! O Christmas tree! How lovely are thy branches!"
+**MADDIE** (Discouraged): “O Grandma jokes, o grandma jokes, how passé are they every year… "
 
 ### Xmas2021Decoration13
 `Xmas2021Decoration13` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**GRANDMA** (Encouraging): Oh, did you hang that mistletoe for someone special?
+**MADDIE** (Charming): Mistletoe? What? No no no...
+**GRANDMA**: That inspector gentleman is very handsome indeed.
+**MADDIE** (Thinking): You mean Roddie? What are you saying grandma…
+**GRANDMA** (Joyous): I’ll leave you to it! Just keep on decorating with love!
+**MADDIE** (Frustrated): Grandma!!
 
 ### Xmas2021Decoration14
 `Xmas2021Decoration14` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**ANTIQUEDEALER** (Surprised): Wow… I can’t believe that’s the same gate I ran over with my car!
+**MADDIE**: I’m glad you like it! Are you here to see grandma?
+**ANTIQUEDEALER** (Doubtful): Oh, Ursula? Yes, but just stopping by to wish her a merry Christmas!
+**MADDIE** (Thinking): Hmm… Could that explain why she was so excited this morning?
+**ANTIQUEDEALER** (Encouraging): Well, it’s exciting to meet a good friend, right? I'd better go now.
 
 ### Xmas2021Decoration15
 `Xmas2021Decoration15` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**GRANDMA** (Joyous): Where did you find grandpa Charlie’s Christmas sweater?
+**MADDIE**: It was tossed in with the decorations. Is it really grandpa Charlie’s?
+**GRANDMA** (Encouraging): Yes, we had similar ones. We used to wear them every Christmas until…
+**MADDIE** (Doubtful): Until? Until what?
+**GRANDMA**: I must go check on the turkey in the oven.
+**MADDIE** (Frustrated): You always leave me hanging!
 
 ### Xmas2021Decoration2
 `Xmas2021Decoration2` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**GRANDMA**: So, how did my gingerbread cookies do?
+**MADDIE** (Joyous): I have never seen a gingerbread house this big!!
+**GRANDMA** (Joyous): It would be even bigger if you didn’t eat most of the cookie dough!
+**MADDIE** (Charming): Grandma! You know cookie dough is my guilty Christmas pleasure!
 
 ### Xmas2021Decoration4
 `Xmas2021Decoration4` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE** (Joyous): Christmas lights, Christmas vibes!
+**RODDY** (Relaxed): Those lanterns also make a nice runway for Santa’s sleigh.
+**MADDIE**: That’s true! Did you wish for something special from Santa this year?
+**RODDY** (Charming): I guess my only wish is an impossible one. Even for Santa.
+**MADDIE** (Thinking): Really? What can be so hard to get?
 
 ### Xmas2021Decoration5
 `Xmas2021Decoration5` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**GRANDMA** (Encouraging): Oh that penguin and I go a loooong way…
+**MADDIE**: I think it makes a nice decoration!
+**GRANDMA** (Joyous): It does! Although we originally used it for smuggling… candy.
+**GRANDMA**: Speaking of which, I'd better go and make sure we have some for Christmas.
+**MADDIE** (Doubtful): Smuggling candy? Inside a penguin? There’s something fishy here…
 
 ### Xmas2021Decoration6
 `Xmas2021Decoration6` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE**: These decorations will make the postman happy!
+**MADDIE** (Charming): Oh there are already some Christmas postcards for me!
+**MADDIE** (Surprised): And dozens for grandma?! Who would send so many postcards to her?
+**MADDIE** (Doubtful): And why did they put a ‘Confidential’ stamp on each of them...
 
 ### Xmas2021Decoration7
 `Xmas2021Decoration7` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**RODDY** (Relaxed): Impressive Christmas tree decorations, Maddie!
+**MADDIE** (Charming): Thank you! Do you already have a Christmas tree at your place?
+**RODDY** (Encouraging): Not yet! But I definitely should get one!
+**RODDY** (Charming): Although I have no one to dance around it with...
+**MADDIE**: I’m sure you’ll find a dancing partner before Christmas!
+**RODDY** (Charming): Yes, well… I was thinking that maybe--
+**MADDIE** (Frustrated): Oh I forgot to water the spruce! Where was that watering can again...
 
 ### Xmas2021Decoration8
 `Xmas2021Decoration8` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**DOG**: Ruff ruff!
+**MADDIE**: What is it, Rufus? Don’t you like reindeers?
+**DOG** (Discouraged): Woof…
+**MADDIE** (Charming): Don’t worry! You will always be my favorite pet <3
+**DOG** (Joyous): WOOOOF!! <3
 
 ### Xmas2021Decoration9
 `Xmas2021Decoration9` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE** (Joyous): Gifts are the best thing about Christmas!
+**MADDIE** (Thinking): Or maybe it’s food. Or snow.
+**MADDIE** (Surprised): Speaking of which… Whose footsteps are in the snow?
+**MADDIE** (Doubtful): Either grandma’s new shoes are way too big, or someone’s playing a trick on me...
 
 ### Xmas2021IntroPart2UrsulaAndMaddie
 `Xmas2021IntroPart2UrsulaAndMaddie` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE** (Surprised): This garage has an attic!!!
+**GRANDMA**: I can’t remember the last time I climbed up here. It must--
+**MADDIE** (Doubtful): Wasn’t your back sore, grandma?
+**GRANDMA** (Encouraging): ...It must have been Christmas 1979, when we organised the Holiday Ball for the last time.
+**MADDIE** (Thinking): Holiday Ball? Was that the Boulton’s Christmas tradition you have talked about?
+**GRANDMA**: Yes, the whole village came over. The decorated mansion was like a palace from a storybook!
+**MADDIE** (Joyous): Wow!! Maybe your decorations are still here – let’s look around!
 
 ### Xmas2021IntroUrsulaAndMaddie
 `Xmas2021IntroUrsulaAndMaddie` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE** (Joyous): Time for Winter Holiday decorations, grandma!
+**GRANDMA**: Work before play, Maddie. Our garage could use some cleaning.
+**GRANDMA** (Worried): But my old back is so sore today…
+**MADDIE**: Don’t worry! I can do the cleaning!
+**GRANDMA** (Encouraging): Ah, I knew I could trust you! Have fun!
+**MADDIE** (Doubtful): Pretty quick exit for someone with a sore back!
+**MADDIE**: Well, let’s start with those dusty curtains!
 
 ### Xmas2021LadderTutorial1
 `Xmas2021LadderTutorial1` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE**: A Ladder?! Where do those lead...

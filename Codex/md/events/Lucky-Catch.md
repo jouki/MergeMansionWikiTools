@@ -16,8 +16,7 @@
 **MADDIE** (Surprised): Whooooah, a swordfish! Can you handle it?
 **GRANDMA** (Surprised): Phew! There is still some strength left in this old lady but... nnggh... maybe a bit of help would not hurt!
 **MADDIE** (Thinking): What a specimen! You definitely take the lead with that whopper.
-**GRANDMA** (Thinking): It would make so many tasty pies...  
-  _earlier:_ ~~It would make so many tasty pies…~~ (until 25.10.01)
+**GRANDMA** (Thinking): It would make so many tasty pies...
 **MADDIE** (Relaxed): It's time to release it, Grandma!
 
 ### Lucky Catch — item discovered: Greater Amberjack
@@ -261,10 +260,8 @@ _Referenced by the game, but no lines matched this id._
 - trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_EpicCountSquidula_01'], items=['Count Squidula'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA** (Thinking): The conditions are perfect for catching a Count Squidula.
-**MADDIE** (Frustrated): Wh... You know, I’m not even going to ask.  
-  _earlier:_ ~~Wh… You know, I’m not even going to ask.~~ (until 25.10.01)
-**MADDIE** (Frustrated): ...  
-  _earlier:_ ~~…~~ (until 25.10.01)
+**MADDIE** (Frustrated): Wh... You know, I’m not even going to ask.
+**MADDIE** (Frustrated): ...
 **MADDIE** (Discouraged): Are you talking about a squid that looks like a vampire?
 **GRANDMA** (Encouraging): You’re catching on, dearie!
 
@@ -291,11 +288,9 @@ _Referenced by the game, but no lines matched this id._
 `LC_Halloween_LegendaryTheBlobFish_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Lucky Catch, eventKey=CBE_LuckyCatch, itemKeys=['LC_Halloween_LegendaryTheBlobFish_01'], items=['The Blob Fish'], moment=item discovered (versions 26.03.01–26.07.01)
 
-**MADDIE** (Worried): Is it time to go home yet? I’m getting a really spooky feeling out here...  
-  _earlier:_ ~~Is it time to go home yet? I’m getting a really spooky feeling out here…~~ (until 25.10.01)
+**MADDIE** (Worried): Is it time to go home yet? I’m getting a really spooky feeling out here...
 **MADDIE** (Surprised): AAAH! What’s that weird blob floating in the water? A j-jellyfish?
-**GRANDMA** (Thinking): A Blob Fish, dearie! We’re lucky to catch one. Usually they’re only seen...  
-  _earlier:_ ~~A Blob Fish, dearie! We’re lucky to catch one. Usually they’re only seen…~~ (until 25.10.01)
+**GRANDMA** (Thinking): A Blob Fish, dearie! We’re lucky to catch one. Usually they’re only seen...
 **MADDIE** (Annoyed): In your worst nightmares?
 **GRANDMA** (Charming): Very funny!
 
@@ -352,8 +347,7 @@ _Referenced by the game, but no lines matched this id._
 **MADDIE** (Worried): Can you hear howling?
 **GRANDMA**: Well, well! There must be a Werefish nearby!
 **MADDIE** (Surprised): What?? There is no such thing as a Werefish! And fish can’t howl!
-**MADDIE** (Discouraged): This must be a weird dream or something...  
-  _earlier:_ ~~This must be a weird dream or something…~~ (until 25.10.01)
+**MADDIE** (Discouraged): This must be a weird dream or something...
 **GRANDMA** (Charming): If this were a dream, could I pinch you?
 **MADDIE** (Surprised): Ouch!
 **GRANDMA** (Charming): Come on, and catch the Werefish in the net so we can take a photo!

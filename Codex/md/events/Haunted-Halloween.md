@@ -15,8 +15,7 @@
 
 **MASON**: I don’t get how you can say there’s no such thing as ghosts. We’ve seen so many of them already!
 **MASON**: If anything, we’ve proved that I’m right and that the Mansion is haunted.
-**MADDIE** (Thinking): There must be more to this...  
-  _earlier:_ ~~There must be more to this…~~ (until 25.10.01)
+**MADDIE** (Thinking): There must be more to this...
 
 ### Haunted Halloween — item discovered: Glowing Paint
 `CBE_Halloween2025_Clues_04_Dialogue` · seen 26.03.01–26.07.01
@@ -53,8 +52,7 @@
 - trigger: decoration, decoration=CBE_Halloween2025_Decoration_Slot22, event=Haunted Halloween, eventKey=CBE_Halloween2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE**: Let's say you're right and the Mansion is haunted. Who do you think is haunting it?
-**MASON** (Thinking): Take your pick! There's Ignatius with his weird machines, Lindsay with her spray cans, Grandpa Charlie who disappeared so mysteriously...  
-  _earlier:_ ~~Take your pick! There’s Ignatius with his weird machines, Lindsay with her spray cans, Grandpa Charlie who disappeared so mysteriously…~~ (until 25.10.01)
+**MASON** (Thinking): Take your pick! There's Ignatius with his weird machines, Lindsay with her spray cans, Grandpa Charlie who disappeared so mysteriously...
 **MADDIE** (Thinking): The place does have a LOT of history, but all of those people would be friendly spirits.
 **MADDIE** (Thinking): I’m going to show you, Mason - the Mansion is NOT haunted.
 
@@ -79,18 +77,13 @@
 - trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Decorations_07'], items=['Halloween Statue'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **RODDY** (Thinking): O-oh? So you haven’t seen any ghosts so far?
-**MADDIE** (Thinking): Well...  
-  _earlier:_ ~~Well…~~ (until 25.10.01)
+**MADDIE** (Thinking): Well...
 **RODDY** (Surprised): What??
-**MADDIE** (Thinking): We did see something kinda odd... Things glowing in the dark, moving on their own.  
-  _earlier:_ ~~We did see something kinda odd… Things glowing in the dark, moving on their own.~~ (until 25.10.01)
+**MADDIE** (Thinking): We did see something kinda odd... Things glowing in the dark, moving on their own.
 **MADDIE** (Hesitant): But that’s just weird lighting and the drafty old house playing its tricks on us.
-**RODDY** (Worried): A-absolutely! Where did you see these... glowing things?  
-  _earlier:_ ~~A-absolutely! Where did you see these… glowing things?~~ (until 25.10.01)
-**MADDIE** (Relaxed): All over! The attic and the garden... But they aren’t ghosts. There is no such thing as ghosts!  
-  _earlier:_ ~~All over! The attic and the garden… But they aren’t ghosts. There is no such thing as ghosts!~~ (until 25.10.01)
-**RODDY** (Charming): You’re right... I think I might still avoid the attic and the garden for now.  
-  _earlier:_ ~~You’re right… I think I might still avoid the attic and the garden for now.~~ (until 25.10.01)
+**RODDY** (Worried): A-absolutely! Where did you see these... glowing things?
+**MADDIE** (Relaxed): All over! The attic and the garden... But they aren’t ghosts. There is no such thing as ghosts!
+**RODDY** (Charming): You’re right... I think I might still avoid the attic and the garden for now.
 
 ### Haunted Halloween — item discovered: Soil
 `CBE_Halloween2025_GardenBed_01_Dialogue` · seen 26.03.01–26.07.01
@@ -242,8 +235,7 @@
 
 **MADDIE** (Encouraging): These jack o’lanterns are looking great.
 **MASON**: Awesome! Let’s go set up the ghost trap in the attic next.
-**MADDIE** (Surprised): Hang on... Wh-what is THAT??  
-  _earlier:_ ~~Hang on… Wh-what is THAT??~~ (until 25.10.01)
+**MADDIE** (Surprised): Hang on... Wh-what is THAT??
 **MASON** (Surprised): A ghost pumpkin! This is it - the hunt is on!
 
 ### Haunted Halloween — item discovered: Big Pumpkin
@@ -257,13 +249,11 @@
 `CBE_Halloween2025_Pumpkin_04_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Pumpkin_04'], items=['Carved Pumpkin'], moment=item discovered (versions 26.03.01–26.07.01)
 
-**MADDIE** (Thinking): This is getting kinda eerie... I know I said ghosts aren't real, but there is definitely something going on!  
-  _earlier:_ ~~This is getting kinda eerie… I know I said ghosts aren't real, but there is definitely something going on!~~ (until 25.10.01)
+**MADDIE** (Thinking): This is getting kinda eerie... I know I said ghosts aren't real, but there is definitely something going on!
 **MASON**: I told you!
 **MADDIE** (Thinking): But there must be a reasonable explanation.
 **MASON** (Thinking): Like what?
-**MADDIE** (Hesitant): Like... the moonlight hit that pumpkin in a weird way, or maybe Grandma used some special growing agent.  
-  _earlier:_ ~~Like… the moonlight hit that pumpkin in a weird way, or maybe Grandma used some special growing agent.~~ (until 25.10.01)
+**MADDIE** (Hesitant): Like... the moonlight hit that pumpkin in a weird way, or maybe Grandma used some special growing agent.
 **MASON** (Thinking): To make it glow in the dark like a menacing veggie monster?
 
 ### Haunted Halloween — item discovered: Haunted Coffin
@@ -289,8 +279,7 @@
 **MADDIE** (Surprised): I think your movies have too much goo! Look!!
 **MASON** (Surprised): A haunted movie tape! The ghosts must know what we’re up to.
 **MADDIE** (Thinking): That’s true. They’ve been following us all night.
-**MADDIE** (Doubtful): Hmm... There’s something fishy about this!  
-  _earlier:_ ~~Hmm… There’s something fishy about this!~~ (until 25.10.01)
+**MADDIE** (Doubtful): Hmm... There’s something fishy about this!
 
 ### Haunted Halloween — item discovered: Armchair
 `CBE_Halloween2025_Theater_03_Dialogue` · seen 26.03.01–26.07.01
@@ -343,8 +332,7 @@
 `CBE_Halloween2025_UnlitCandle_03_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_UnlitCandle_03'], items=['Double Candle'], moment=item discovered (versions 26.03.01–26.07.01)
 
-**MADDIE** (Encouraging): See? There’s nothing here. Just old clothes and... old Halloween decorations! Let’s round them up so we can get started on the decorating.  
-  _earlier:_ ~~See? There’s nothing here. Just old clothes and… old Halloween decorations! Let’s round them up so we can get started on the decorating.~~ (until 25.10.01)
+**MADDIE** (Encouraging): See? There’s nothing here. Just old clothes and... old Halloween decorations! Let’s round them up so we can get started on the decorating.
 **MADDIE** (Annoyed): Rats! The batteries in the flashlight are dead. Let’s find some candles.
 
 ### Haunted Halloween — item discovered: Footprints
@@ -359,8 +347,7 @@
 - trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Unmasking_03'], items=['Dropped Note'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Thinking): What’s this? A sheet?
-**MASON** (Thinking): Looks like... a ghost costume!  
-  _earlier:_ ~~Looks like… a ghost costume!~~ (until 25.10.01)
+**MASON** (Thinking): Looks like... a ghost costume!
 **MADDIE** (Doubtful): Ha! We are close!
 
 ### Haunted Halloween — item discovered: Notebook

@@ -56,7 +56,7 @@ Every story in which Bluetooth speaks.
 **BLUETOOTH**: So, Ursula, do you have any technical skills? Do you know how to run any sort of industrial machinery?
 **GRANDMA**: I once operated the bodymaker at the family can plant.
 **BLUETOOTH**: Okay, I can work with that!
-**—**: Welcome to the recycling factory.
+**BLUETOOTH**: Welcome to the recycling factory.
 
 ### SBE Jailbreak P4TaskA
 `SBE_Jailbreak_P4TaskA` · seen 25.05.01–25.06.01
@@ -76,4 +76,4 @@ Every story in which Bluetooth speaks.
 **BLUETOOTH**: Well, one day I was in this government system and I found some stuff. Real shady too! I made a copy and sent it to a journalist friend of mine and-
 **GRANDMA**: You sent it to Grace!
 **BLUETOOTH**: Shhh! These walls have ears, you know. Yes, Grace. That’s probably why she’s in here. Because of me. I broke into the system, but she only got the data I stole.
-**—**: But I tell you... What I saw in that data? Those people should be in here, instead of us!
+**BLUETOOTH**: But I tell you... What I saw in that data? Those people should be in here, instead of us!

@@ -55,7 +55,7 @@
 - trigger: event, event=The Great Bake-off, eventId=LBE_May2023, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–26.07.01)
 
 **PEARL** (Encouraging): Welcome, everyone, to Hopewell Bay's great bake-off! Let's meet our contestants!   
-  _earlier:_ ~~Welcome, everyone, to Hopewell Bay's great bakeoff! Let's meet our contestants! ~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 **PEARL** (Encouraging): First off, we have Jackie, our resident reporter for the Boulton Bugle.
 **JACKIE** (Encouraging): Thank you, Pearl, for planning this event again! May the best baker win!
 **PEARL** (Encouraging): Next, we have Maddie, who's been busy renovating the mansion!
@@ -70,7 +70,7 @@
 **HEIKKI** (Joyous): Hello! Huh, sorry for being late! I had to use my head as a third leg!
 **PEARL** (Thinking): Wh- What? 
 **PEARL** (Encouraging): Anyway, let the great bake-off begin!  
-  _earlier:_ ~~Anyway, let the great bakeoff begin!~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 
 ### LDE_PicnicConfusion2023 — entering board
 `LDE_PicnicConfusion2023_Boardintro_Dialogue` · seen 23.06.02–26.07.01

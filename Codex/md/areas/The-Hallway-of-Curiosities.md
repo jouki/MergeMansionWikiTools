@@ -34,7 +34,7 @@
 **MADDIE** (Encouraging): Clara was REALLY into mermaids!
 **MADDIE** (Thinking): But I wonder why?
 **MADDIE**: She really was into marine biology, but mermaids aren't real.  
-  _earlier:_ ~~She really was into marine biology, but mermaids weren't real.~~ (until 26.05.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE**: Actually, this sort of reminds me of the story of The Little Mermaid.
 **MADDIE**: How she fell in love with a prince and-
 **MADDIE** (Surprised): Oh!
@@ -47,12 +47,12 @@
 
 **MADDIE** (Surprised): Holden? What are you doing up here?
 **HOLDEN** (Worried): Oh... Maddie. I thought you were still busy renovating the factory.  
-  _earlier:_ ~~Oh...Maddie. I thought you were still busy renovating the factory.~~ (until 26.05.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE**: Nope, I came up here to see to the first floor. The factory can wait.
 **HOLDEN**: Hmm. Well. The article was a great success. Now my readers are ravenous for more salacious Boulton secrets.
 **MADDIE** (Annoyed): Wait - what? I thought you were just covering the renovation! What secrets?
 **HOLDEN** (Charming): I'm a journalist! I have integrity! I had to include a bit of background. Such as... who their daughter was.  
-  _earlier:_ ~~I'm a journalist! I have integrity! I had to include a bit of background. Such as...who their daughter was.~~ (until 26.05.01)
+  _(1 cosmetic edit not shown)_
 
 ### The Hallway of Curiosities: Share tools
 `FirstFloorHallway_CharacterTask2` · seen 26.05.01–26.07.01
@@ -99,7 +99,7 @@
 **HOLDEN** (Charming): Freelance, of course. If you think you can find something in all of this, get in touch. You have my number.
 **MADDIE** (Frustrated): I....don't....uh. Great. He's gone. Now what am I supposed to do with all of this stuff...
 **MADDIE** (Encouraging): Hmm. Well, this is solid research, despite everything. Maybe there really is something here about Edward?
-**—**: Once I'm done with the rest of the room, I'll take a second look!
+**MADDIE** (Joyous): Once I'm done with the rest of the room, I'll take a second look!
 
 ### The Hallway of Curiosities: Fix trophy
 `FirstFloorHallway_POI_AnglerFish` · seen 26.05.01–26.07.01
@@ -108,7 +108,7 @@
 **MADDIE** (Joyous): Aren't you a scary pair of specimens? I wonder how Clara got a hold of anglerfish skeletons?
 **MADDIE** (Encouraging): Ah! Says here they were found off the coast of Greenland in the 1800s. They were a great mystery to science.
 **MADDIE** (Thinking): To think it was another century before angler fish like these were observed in their natural habitat...  
-  _earlier:_ ~~To think it was another century before anglerfish like these were observed in their actual habitat...~~ (until 26.05.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Encouraging): Hmm. Maybe I can borrow them next Halloween? They do make for spooky decorations.
 
 ### The Hallway of Curiosities: Arrange butterfly set
@@ -141,17 +141,17 @@
 
 **MADDIE** (Surprised): What a statement piece - a perpetual calendar. This must have cost an arm and a leg.
 **MADDIE** (Thinking): I wonder if it's still accurate.... let's see....  
-  _earlier:_ ~~I wonder if it's still accurate....let's see....~~ (until 26.05.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Thinking): Ach, doesn't look like it. But I think I can adjust it... there!
 **MADDIE** (Joyous): Now it should be good until about... 2100 or so!  
-  _earlier:_ ~~Now it should be good until about...2100 or so!~~ (until 26.05.01)
+  _(1 cosmetic edit not shown)_
 
 ### The Hallway of Curiosities: Clear debris
 `FirstFloorHallway_POI_LogArea` · seen 26.05.01–26.07.01
 - trigger: area, area=The Hallway of Curiosities, areaId=FirstFloorHallway, hotspotId=FirstFloorHallwayLogAreaRemoveDebris, phase=task completed, task=Clear debris (versions 26.05.01–26.07.01)
 
 **MADDIE**: What's this? A log of some kind? That seems odd. Are those... glass coral replicas?  
-  _earlier:_ ~~What's this? A log of some kind? That seems odd. Are those...glass coral replicas?~~ (until 26.05.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Thinking): She must have read about the mapping of the Great Barrier Reef and been inspired!
 **MADDIE** (Joyous): Too bad she never did visit it. But I suppose this is as close as she could get.
 

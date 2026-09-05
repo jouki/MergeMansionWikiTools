@@ -19,7 +19,7 @@ Every story in which Ringleader speaks.
   _earlier:_ ~~Why? I thought you were friends.~~ (until 25.09.01)
 **MASON** (Thinking): Guys, we can do better!  
   _earlier:_ ~~We are, dearie, but I know her better than you think.~~ (until 25.09.01)
-**—**: I know she is impressive, but she has a lot of secrets.
+**MASON** (Thinking): I know she is impressive, but she has a lot of secrets.
 **MADDIE** (Relaxed): Thanks for the heads up, Grandma, but I think you might just be paranoid!
 
 ### Circus Caper — item discovered: Crumpled Programs
@@ -32,7 +32,7 @@ Every story in which Ringleader speaks.
   _earlier:_ ~~This wagon is a mess!~~ (until 25.09.01)
 **MASON** (Annoyed): FOAM knives? Those are for babies!  
   _earlier:_ ~~I guess people who work in the circus are pretty bohemian, but maybe I could help Fiona and straighten the place out.~~ (until 25.09.01)
-**—**: These old crumpled leaflets can probably go in the dumpster.
+**MASON** (Annoyed): These old crumpled leaflets can probably go in the dumpster.
 
 ### Circus Caper — item discovered: Stuffed Bunny
 `LDE_Rumors2025_CarnivalPrizes_07_Dialogue` · seen 26.03.01–26.07.01
@@ -68,8 +68,7 @@ Every story in which Ringleader speaks.
 - trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CircusProps_06'], items=['Circus Stand'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON** (Worried): I’m Mason, and this is Hank.
-**HANK** (Charming): Um, hi...  
-  _earlier:_ ~~Um, hi…~~ (until 25.10.01)
+**HANK** (Charming): Um, hi...
 **MASON** (Charming): We were just admiring all of your circus equipment! It’s SO cool!
 **RINGLEADER**: So you’re Mason! Maddie told me you wanted to learn about the Circus.
 **MASON**: See, Hank! I DO have permission. Where can I start?
@@ -97,7 +96,7 @@ Every story in which Ringleader speaks.
 **MADDIE** (Doubtful): I wasn’t expecting to see you back in Hopewell Bay so soon.  
   _earlier:_ ~~You must be Maddie!~~ (until 25.09.01)
 **RINGLEADER** (Doubtful): I agree that the circumstances of our last visit were... regrettable, but I hope we can put it behind us.  
-  _earlier:_ ~~I am, and you must be Fiona DuVal!~~ (until 25.09.01); ~~I agree that the circumstances of our last visit were… regrettable, but I hope we can put it behind us.~~ (until 25.10.01)
+  _earlier:_ ~~I am, and you must be Fiona DuVal!~~ (until 25.09.01)
 **RINGLEADER** (Doubtful): No charges were pressed, and the show must go on, as they say.  
   _earlier:_ ~~That's right! Thank you again for letting us come to the Mansion.~~ (until 25.09.01)
 **MADDIE** (Thinking): So you’re back on the road with the Circus?  
@@ -106,9 +105,9 @@ Every story in which Ringleader speaks.
   _earlier:_ ~~You're a real lifesaver.~~ (until 25.09.01)
 **MADDIE**: You know, there’s someone I know - a boy called Mason - who would love to learn all about the Circus. Could you show him the ropes?  
   _earlier:_ ~~The pleasure is all mine. I'm just so happy to finally meet you!~~ (until 25.09.01)
-**RINGLEADER**: It would be my pleasure!  
+**RINGLEADER** (Relaxed): It would be my pleasure!  
   _earlier:_ ~~I've read so much about your circus.~~ (until 25.09.01)
-**—**: Thank you, Maddie. You're so kind!
+**RINGLEADER** (Relaxed): Thank you, Maddie. You're so kind!
 **MADDIE** (Encouraging): Let me know if there's anything I can do to help you while you're here. I can organize clown noses or hand out flyers.
 **RINGLEADER** (Relaxed): I might just take you up on your offer!
 
@@ -122,7 +121,7 @@ Every story in which Ringleader speaks.
   _earlier:_ ~~Too long to remember. It is nice to see you again, Fiona.~~ (until 25.09.01)
 **MASON** (Joyous): Like tightrope-walking!  
   _earlier:_ ~~You look well. Still traveling and performing, I see.~~ (until 25.09.01)
-**—**: You two know each other??
+**MASON** (Joyous): You two know each other??
 **RINGLEADER** (Relaxed): Oh, yes. We go WAY back. Don't we, Ursula?
 **RINGLEADER** (Relaxed): We slept in the same wagon back in the day. We trained together and shared so many stories.
 **RINGLEADER** (Relaxed): About this place too!
@@ -145,10 +144,11 @@ Every story in which Ringleader speaks.
 **HANK** (Charming): Umm, is your trick safe?  
   _earlier:_ ~~I almost pulled it off, too!~~ (until 25.09.01)
 **MASON**: TOTALLY safe.  
-  _earlier:_ ~~I'd be only my jolly way by now if it wasn't for your meddling granddaughter!~~ (until 25.03.01); ~~I'd be on my jolly way by now if it weren't for your meddling granddaughter!~~ (until 25.09.01)
+  _earlier:_ ~~I'd be on my jolly way by now if it weren't for your meddling granddaughter!~~ (until 25.09.01)  
+  _(1 cosmetic edit not shown)_
 **HANK** (Joyous): OK, then. Just don’t lose the key, little guy!  
   _earlier:_ ~~Just tell me, where is it?~~ (until 25.09.01)
-**—**: What?
+**HANK** (Joyous): What?
 **RINGLEADER** (Surprised): The damned Boultonite!
 **GRANDMA** (Surprised): So that's what you were after...
 **RINGLEADER** (Doubtful): You didn't think I want to tour with the Circus for the rest of my life, did you?
@@ -219,7 +219,7 @@ Every story in which Ringleader speaks.
   _earlier:_ ~~A set of lock picks!~~ (until 25.09.01)
 **RODDY** (Encouraging): What kind of a trick could they be used for?  
   _earlier:_ ~~Maybe Grandma wasn't just being paranoid... Maybe there IS something going on.~~ (until 25.09.01)
-**—**: Fiona!
+**RODDY** (Encouraging): Fiona!
 **MADDIE** (Thinking): Look what I found.
 **RINGLEADER** (Surprised): Lock-picks? Where did you find those?
 **MADDIE** (Thinking): They were hidden in some bushes right next to the Mansion.
@@ -234,7 +234,7 @@ Every story in which Ringleader speaks.
 **RINGLEADER** (Calling): *Ringggg!*
 **MADDIE** (Calling): Hello?
 **RINGLEADER** (Calling): <i>This is Fiona DuVal, ringmaster of the circus.</i>  
-  _earlier:_ ~~<i>This is Fiona DuVall, ringmaster of the circus.</i>~~ (until 25.04.01)
+  _(1 cosmetic edit not shown)_
 **RINGLEADER** (Calling): <i>I'm calling to thank you for all of your help... and to let you know that unfortunately there is a TEENY problem.</i>
 **MADDIE** (Talking): Phew, at least it's not a BIG problem.
 **RINGLEADER** (Calling): <i>Actually, it is.</i>

@@ -20,13 +20,13 @@
 **MADDIE** (Thinking): Agatha's pristine garden, Ignatius' meticulous brickwork, the factory crafting the family's inventions...
 **MADDIE** (Thinking): Our history feels as close here as in the old mansion.
 **WINSTON** (Relaxed): Not just the Boulton's history, Ma'am. This factory brought prosperity like Hopewell Bay had never seen.  
-  _earlier:_ ~~Not just the Boultons' history, Ma'am. This factory brought prosperity like Hopewell Bay had never seen.~~ (until 25.08.01)
+  _(1 cosmetic edit not shown)_
 **WINSTON** (Relaxed): I believe that most residents can still name a relative or two who used to work on these grounds.
 **MADDIE** (Joyous): I've decided, we're turning the factory into a museum! This history deserves to be shared.
 **WINSTON** (Encouraging): Not only fixing a factory, but rebuilding a legacy. You're a Boulton, through and through.
 **MADDIE** (Thinking): No pressure... I'll call Julius, he can help me get on top of the permits from the start.
 **WINSTON** (Charming): Very prudent, Ma'am. Given your history with the council.  
-  _earlier:_ ~~Very prudent, ma'am. Given your history with the council.~~ (until 25.08.01)
+  _(1 cosmetic edit not shown)_
 
 ### Boulton Boulevard: BoultonBoulevard_10
 `BoultonBoulevard_10` · seen 25.08.01–26.07.01
@@ -36,7 +36,7 @@
 **MADDIE**: What a cute little kiosk. Was this also part of the factory?
 **WINSTON** (Thinking): Indeed, Ma'am. This used to be the worker's café, it was run by your cousin Cherry's great-grandmother.
 **MADDIE**: I need to invite her here. Cooking must run in their side of the family!  
-  _earlier:_ ~~I need to invite her here. Cooking must run on their side of the family!~~ (until 25.08.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Relaxed): What a lovely spot for a quick lunch break, right by the river.
 **MADDIE** (Relaxed): I wouldn't blame the workers for getting lost in time before rushing back in to finish their shifts.
 **WINSTON** (Charming): Luckily, the Boulton matriarch owned a rather large bell.

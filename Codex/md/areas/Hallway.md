@@ -117,7 +117,7 @@
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayPlaceFixedShipE13, phase=task completed, task=Place the ship (versions 24.04.01–26.07.01)
 
 **JACKIE**: This is a nice model! I guess boats have been in your family since the beginning.  
-  _earlier:_ ~~This is a nice model! I guess boats have been in your family since the beggining.~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 **MADDIE**: It's a barque, actually. 
 **JACKIE** (Encouraging): My apologies, Captain!
 **MADDIE** (Encouraging): Ha! At ease... I learned a few terms while fixing the yacht outside.

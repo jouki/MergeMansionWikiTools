@@ -75,13 +75,10 @@
 **MADDIE** (Encouraging): I can't help it! It's the snow, the atmosphere, the...
 **GRANDMA** (Joyous): Mulled Hopeberry juice?
 **MADDIE** (Relaxed): Ha! I really want to spread the happiness.
-**GRANDMA** (Charming): That sounds like a delightful idea! And you look like you already have a plan...  
-  _earlier:_ ~~That sounds like a delightful idea! And you look like you already have a plan…~~ (until 25.10.01)
-**MADDIE** (Encouraging): Well... you're right! Julius told me that there used to be a caroling troupe in Hopewell Bay.  
-  _earlier:_ ~~Well… you're right! Julius told me that there used to be a caroling troupe in Hopewell Bay.~~ (until 25.10.01)
+**GRANDMA** (Charming): That sounds like a delightful idea! And you look like you already have a plan...
+**MADDIE** (Encouraging): Well... you're right! Julius told me that there used to be a caroling troupe in Hopewell Bay.
 **MADDIE** (Encouraging): They were just a bunch of folks from all kinds of backgrounds who wanted to promote the holiday spirit.
-**GRANDMA** (Relaxed): Oh, I remember them! They played all kinds of instruments and sang... sometimes a bit too long for my liking!  
-  _earlier:_ ~~Oh, I remember them! They played all kinds of instruments and sang… sometimes a bit too long for my liking!~~ (until 25.10.01)
+**GRANDMA** (Relaxed): Oh, I remember them! They played all kinds of instruments and sang... sometimes a bit too long for my liking!
 **GRANDMA** (Relaxed): Who will you ask to join you?
 **MADDIE** (Charming): Just friends like Roddy, Julius, Deb, Mason... Maybe Emilio....
 **GRANDMA** (Charming): Sounds like you'll have a lot of fun!
@@ -164,7 +161,7 @@
 **MADDIE**: What a weird cup!
 **PEARL** (Thinking): Oh, it's a guksi - a type of duodji used by the Sami people!
 **MADDIE** (Thinking): Right... How do you know that?
-**—**: I love reading encyclopedias!
+**MADDIE** (Thinking): I love reading encyclopedias!
 
 ### The Fa-la-la-la Follies — item discovered: Mason's Present
 `LDE_HolidayCarols2023_HolidayPresent_10_Dialogue` · seen 25.05.01–26.07.01

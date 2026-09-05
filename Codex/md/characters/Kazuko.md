@@ -10,6 +10,9 @@ Every story in which Kazuko speaks.
   _earlier:_ ~~How about baking? Is there some treat that makes you feel really happy?~~ (until 25.10.01)
 **RODDY** (Worried): That had better be the last one - we’re running out of space!  
   _earlier:_ ~~There are these cookies my granny used to make...~~ (until 25.10.01)
+**KAZUKO**: What did they taste like?
+**BELLA** (Relaxed): Oh, they tasted good!
+**KAZUKO** (Thinking): Hmm... I think we'll need a little bit of help from someone who knows a thing or two about baking.
 
 ### Maddie in Japan — item discovered: Postcard from Akihabara
 `CBE_MaddieInJapan2025_AkihabaraPostcard_01_Dialogue` · seen 26.03.01–26.07.01
@@ -35,8 +38,7 @@ Every story in which Kazuko speaks.
 **KAZUKO** (Thinking): All the time! But I still visit from time to time, and I can always reminisce with your Grandma.
 **MADDIE** (Thinking): I’ve never been able to figure out what Grandma did in Japan. Did she work?
 **KAZUKO** (Relaxed): Yes, she worked in a number of places, from a small ramen shop to a fish vendor, and for a time, she was an English tutor.
-**KAZUKO** (Doubtful): However, I always got the feeling she was actually searching for something there. Something she had to keep secret...  
-  _earlier:_ ~~However, I always got the feeling she was actually searching for something there. Something she had to keep secret…~~ (until 25.10.01)
+**KAZUKO** (Doubtful): However, I always got the feeling she was actually searching for something there. Something she had to keep secret...
 **MADDIE** (Surprised): What?
 **KAZUKO** (Relaxed): She never told me, and I never asked!
 
@@ -76,8 +78,7 @@ Every story in which Kazuko speaks.
 **GRANDMA** (Surprised): You have kept them all these years?
 **ANTIQUEDEALER** (Charming): Of course! And it seems Maddie has figured out what you were doing in Japan.
 **GRANDMA** (Charming): Well, she is a bright girl. What does she write?
-**GRANDMA** (Relaxed): Let’s see... “Finally in Shibuya. I've found what I was looking for - complete holiday mood. Grandma’s postcards make sense now.”  
-  _earlier:_ ~~Let’s see… “Finally in Shibuya. I've found what I was looking for - complete holiday mood. Grandma’s postcards make sense now.”~~ (until 25.10.01)
+**GRANDMA** (Relaxed): Let’s see... “Finally in Shibuya. I've found what I was looking for - complete holiday mood. Grandma’s postcards make sense now.”
 
 ### CBE MaddieInJapan2025 Souvenirs 01 Dialogue
 `CBE_MaddieInJapan2025_Souvenirs_01_Dialogue` · seen 26.02.01–26.07.01
@@ -89,8 +90,7 @@ Every story in which Kazuko speaks.
 - trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_Souvenirs_02'], items=['Chopsticks'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **KAZUKO** (Encouraging): Do you know the art of origami, Maddie?
-**MADDIE** (Thinking): I know of it, but I can’t say I’m very good at it...  
-  _earlier:_ ~~I know of it, but I can’t say I’m very good at it…~~ (until 25.10.01)
+**MADDIE** (Thinking): I know of it, but I can’t say I’m very good at it...
 **KAZUKO** (Relaxed): Let me show you. It is a great practice of patience and of how to calm the mind.
 **MADDIE** (Doubtful): What are you saying?
 

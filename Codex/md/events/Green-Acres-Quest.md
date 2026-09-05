@@ -19,7 +19,7 @@
 - trigger: item, event=Green Acres Quest, eventKey=LDE_GreenAcresQuest2024, itemKeys=['LDE_GreenAcresQuest2024_CharacterBella_02'], items=['Bella'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **MADDIE** (Surprised): Hey, Bella! I didn’t expect an audience while I wrestle with weeds.  
-  _earlier:_ ~~Hey Bella! I didn’t expect an audience while I wrestle with weeds.~~ (until 26.05.01)
+  _(1 cosmetic edit not shown)_
 **BELLA** (Relaxed): Not an audience, more like… a concerned expert witnessing ecological distress.
 **MADDIE** (Worried): Is it that bad?
 **BELLA** (Thinking): Let’s just say this garden has potential, but it’s currently in survival mode.

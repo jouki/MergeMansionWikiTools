@@ -26,12 +26,11 @@
 **MADDIE** (Encouraging): All I see is potential!
 **ARTHUR** (Relaxed): Potential to make a lot of cash...
 **ARTHUR** (Relaxed): Consider it Mads... If you sell this place, the lump sum you'd get would be-  
-  _earlier:_ ~~Consider it Mads... If you sell this place, the lumpsum you'd get would be-~~ (until 26.05.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Annoyed): You think I'd sell this place after everything I've done to keep it?!
 **MADDIE** (Annoyed): You have no idea what this place is worth, do you?
 **ARTHUR** (Frustrated): I'm only looking out for your best interests... Unlike your friend, Roddy.
-**MADDIE** (Annoyed): What has Roddy got to do with any of this?  
-  _earlier:_ ~~What has Roddy got to do with any of this? ~~ (until 26.06.01)
+**MADDIE** (Annoyed): What has Roddy got to do with any of this?
 **MADDIE** (Annoyed): Besides... He'd never say the things you do.
 
 ### Kitchen: Start with the utensils. Go on.
@@ -42,7 +41,7 @@
 **MADDIE** (Encouraging): Somebody's gotta do it, Winston. Say, I was wondering...
 **WINSTON** (Encouraging): We truly have let this place go to ruin. Oh, you should have seen it in its heyday...
 **WINSTON** (Encouraging): ...busboys, kitchen maids, cooks, and, of course...  
-  _earlier:_ ~~...busboys, kitchen maids, cooks and, of course...~~ (until 26.06.01)
+  _(1 cosmetic edit not shown)_
 **WINSTON** (Discouraged): ...the Kitchen Manager.
 **MADDIE** (Surprised): Uh, why did you make that sound like a villain out of a horror story?
 **MADDIE** (Thinking): And anyway, I just wanted to know about this knife-in-the-fridge thing!
@@ -94,47 +93,48 @@
 **WINSTON**: And the two families were long-time rivals. A tradition that continues until this very day.
 **MADDIE** (Thinking): The note said they had gone to work for the Blackwoods, now that I think about it.
 **WINSTON** (Thinking): That is right. Oh, I remember the evening he quit...
-**—**: Tell me!
-**—**: Let me just polish this first to calm my nerves...
+**WINSTON** (Thinking): Tell me!
+**WINSTON** (Worried): Let me just polish this first to calm my nerves...
 
 ### Kitchen: That lamp is leaning… set it properly
 `FirstFloorKitchen_CharacterTask5` · seen 26.06.01–26.07.01
 - trigger: area, area=Kitchen, areaId=FirstFloorKitchen, hotspotId=FirstFloorKitchenCharacterTask33, phase=task completed, task=That lamp is leaning… set it properly (versions 26.06.01–26.07.01)
 
-**—**: Phew. I think I know what a sous chef felt like working for Gamsey now.
-**—**: Not even close, Ms. Boulton. But let me tell you about this knife.
-**—**: Please.
-**—**: Beaumont Hall had been chosen to host a state banquet, an incredible honor.  
-  _earlier:_ ~~Beaumount Hall had been chosen to host a state banquet, an incredible honor.~~ (until 26.06.01)
-**—**: Everyone who was anyone in Hopewell Bay and beyond was attending. The pressure was on.
-**—**: Gamsey pushed everyone harder than ever. Tensions were mounting. He had planned it for months.
-**—**: And everything was going perfectly! All he had to deliver was his magnum opus - the perfect dish.
-**—**: It was never served. The cooks swore it was finished. The butlers swore they never saw it.
-**—**: The entire kitchen erupted in shouts, accusations, and chaos, as years of tensions boiled over.
-**—**: And then: thwack! Total silence. Gamsey had pinned his resignation into the fridge with his own sharpened knife!
-**—**: Whoa. And they just left it there?
-**—**: ...well...that was the last state dinner the Boultons ever arranged. The knife stayed, as a reminder.
+**MADDIE** (Discouraged): Phew. I think I know what a sous chef felt like working for Gamsey now.
+**MADDIE** (Discouraged): Not even close, Ms. Boulton. But let me tell you about this knife.
+**MADDIE**: Please.
+**MADDIE**: Beaumont Hall had been chosen to host a state banquet, an incredible honor.  
+  _(1 cosmetic edit not shown)_
+**MADDIE** (Charming): Everyone who was anyone in Hopewell Bay and beyond was attending. The pressure was on.
+**MADDIE** (Thinking): Gamsey pushed everyone harder than ever. Tensions were mounting. He had planned it for months.
+**MADDIE** (Thinking): And everything was going perfectly! All he had to deliver was his magnum opus - the perfect dish.
+**MADDIE** (Surprised): It was never served. The cooks swore it was finished. The butlers swore they never saw it.
+**MADDIE** (Surprised): The entire kitchen erupted in shouts, accusations, and chaos, as years of tensions boiled over.
+**MADDIE** (Surprised): And then: thwack! Total silence. Gamsey had pinned his resignation into the fridge with his own sharpened knife!
+**MADDIE** (Doubtful): Whoa. And they just left it there?
+**MADDIE** (Doubtful): ...well...that was the last state dinner the Boultons ever arranged. The knife stayed, as a reminder.
+**—**: Do you know what happened to Gamsey?
 
 ### Kitchen: …yes. That will do
 `FirstFloorKitchen_CharacterTask6` · seen 26.06.01–26.07.01
 - trigger: area, area=Kitchen, areaId=FirstFloorKitchen, hotspotId=FirstFloorKitchenCharacterTask40, phase=task completed, task=…yes. That will do (versions 26.06.01–26.07.01)
 
-**—**: Do you know what happened to Gamsey?
-**—**: I know he went to work for the Blackwoods - who were oddly pleased with how everything had turned out...
-**—**: What are you implying?
-**—**: Nothing, Ms. Boulton. Merely that the feud between the Blackwoods and the Boultons is well founded.
-**—**: As Victoria has proved, time and again... but that shouldn't be a reason to continue it!
-**—**: If you should try to mend the relationship, know it wouldn't be the first attempt.
-**—**: But that is not my story to tell. Please excuse me, Ms.Boulton. Thank you for your help.
-**—**: Let me guess... Grandma would know more. *sigh*   
-  _earlier:_ ~~Let me guess...Grandma would know more. *sigh* ~~ (until 26.06.01)
+**MADDIE** (Thinking): Do you know what happened to Gamsey?
+**MADDIE** (Thinking): I know he went to work for the Blackwoods - who were oddly pleased with how everything had turned out...
+**MADDIE** (Thinking): What are you implying?
+**MADDIE** (Thinking): Nothing, Ms. Boulton. Merely that the feud between the Blackwoods and the Boultons is well founded.
+**MADDIE** (Frustrated): As Victoria has proved, time and again... but that shouldn't be a reason to continue it!
+**MADDIE** (Doubtful): If you should try to mend the relationship, know it wouldn't be the first attempt.
+**MADDIE** (Doubtful): But that is not my story to tell. Please excuse me, Ms.Boulton. Thank you for your help.
+**MADDIE** (Doubtful): Let me guess... Grandma would know more. *sigh*   
+  _(1 cosmetic edit not shown)_
 
 ### Kitchen: Place the cooking rack
 `FirstFloorKitchen_POI_CastIronArea` · seen 26.06.01–26.07.01
 - trigger: area, area=Kitchen, areaId=FirstFloorKitchen, hotspotId=FirstFloorKitchenIronCastLeftStovePlaceRack, phase=task completed, task=Place the cooking rack (versions 26.06.01–26.07.01)
 
 **MADDIE** (Frustrated): Phew, that was an awful lot of scrubbing. Cast iron does not clean easily!  
-  _earlier:_ ~~Phew, that was an awful lot of scrubbing. Cast iron does not clean easy!~~ (until 26.06.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Encouraging): Buuut, the benefit of making something in cast iron is that it will survive anything!
 **MADDIE** (Joyous): Soon, this whole kitchen will smell of pies baking again...aah.
 
@@ -145,7 +145,7 @@
 **MADDIE**: Phew! That does it for all the dishes from our pie-baking.
 **MADDIE** (Discouraged): I do wonder if it would break the rustic spirit of this place to install a modern dishwasher...
 **MADDIE** (Discouraged): *sigh* Probably would, wouldn't it? Oh, well.   
-  _earlier:_ ~~*sigh* Probably would, wouldn't it? Oh well. ~~ (until 26.06.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE**: At least doing dishes is kind of soothing. Gives you time to think...
 
 ### Kitchen: Remove the old carpet

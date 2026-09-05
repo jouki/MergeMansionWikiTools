@@ -164,7 +164,7 @@ Every story in which Ash speaks.
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Encouraging): We should all take a selfie together in the large can display!  
-  _earlier:_ ~~We should all take a selfie together in the large can!~~ (until 26.02.02)
+  _(1 cosmetic edit not shown)_
 **ASH** (Encouraging): Yeah! That's a great idea!
 **MADDIE** (Joyous): Come on Julius! Squeeze in here!
 **ANTIQUEDEALER** (Discouraged): Oh I don't know...
@@ -179,11 +179,11 @@ Every story in which Ash speaks.
 
 **MADDIE**: Ash! I'm so glad you could make it!
 **ASH** (Encouraging): No, problem! Now, point me to the leak and I'll get to work!  
-  _earlier:_ ~~No, problem! Now, point me at the leak and I'll get to work!~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Encouraging): Actually, I was wondering if you could help out with something else?
 **ASH** (Thinking): Oh?
 **MADDIE** (Relaxed): You have a great eye for finding "treasure" where others see junk.  
-  _earlier:_ ~~You have a great eye for seeing "treasure" where others see junk.~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Relaxed): I want to set up a fun DIY station in this gift shop where guests can build their own treasure from old stuff!
 **ASH** (Joyous): Say no more, say no more!
 **ASH**: But I'll need to have a look around for... Inspiration!
@@ -214,7 +214,7 @@ Every story in which Ash speaks.
 **MADDIE** (Doubtful): Sad?
 **ASH** (Thinking): When pipes are sad, Maddie, they cry.
 **MADDIE** (Doubtful): You mean... leak.  
-  _earlier:_ ~~You mean... Leak.~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **ASH** (Annoyed): And you wouldn't be sad, living in a rundown factory at the edge of town?!
 **MADDIE** (Worried): Er... Good point.
 
@@ -229,7 +229,7 @@ Every story in which Ash speaks.
 **ASH** (Thinking): I am an artist after all...
 **MADDIE** (Relaxed): You are!
 **ASH** (Encouraging): I'm off to get the bracelet back!  
-  _earlier:_ ~~I'm off to take the bracelet back!~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Encouraging): Good luck!
 
 ### Gift Shop: FactoryGiftShop_CharacterTask5

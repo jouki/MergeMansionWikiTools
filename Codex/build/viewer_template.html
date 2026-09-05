@@ -99,7 +99,8 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
     <div class="fld"><label for="char">Character speaking</label><select id="char"><option value="">Any character</option></select>
       <div class="chips" style="margin-top:6px"><button type="button" class="chip on" id="charSortLines">by lines</button><button type="button" class="chip" id="charSortAz">A–Z</button></div></div>
     <div class="fld"><label for="scope">Area or event</label><select id="scope"><option value="">Anywhere</option></select></div>
-    <label class="toggle"><input type="checkbox" id="onlyChanged"> Only lines whose text changed between game versions</label>
+    <label class="toggle"><input type="checkbox" id="onlyChanged"> Only lines whose text was rewritten between game versions</label>
+    <label class="toggle"><input type="checkbox" id="showCosmetic"> Also show cosmetic edits (typos, punctuation, markup)</label>
     <label class="toggle"><input type="checkbox" id="showEmpty" checked> Show silent lines (no text, camera/animation beats)</label>
     <label class="toggle"><input type="checkbox" id="showRemoved" checked> Include stories removed from the game since 26.02.01</label>
     <div class="note" id="legend"></div>
@@ -132,6 +133,7 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
     s.hay = (s.id+' '+s.lines.map(l=>(l.speakerName||'')+' '+l.text).join(' ')+' '+s.triggers.map(t=>[t.area,t.task,t.event,t.eventType,t.items&&t.items.join(' '),t.decoration].filter(Boolean).join(' ')).join(' ')).toLowerCase();
     s.scopes = new Set(); s.triggers.forEach(t => { if (t.area) s.scopes.add('A:'+t.area); if (t.event) s.scopes.add('E:'+t.event); });
     s.chars = new Set(s.lines.map(l=>l.speaker).filter(Boolean));
+    s.hasRewrite = s.lines.some(l => (l.changes||[]).some(c => c.kind !== 'cosmetic'));
     s.hasChange = s.lines.some(l => l.changes && l.changes.length);
   });
   const kindCount = {}; all.forEach(s => kindCount[s.kind] = (kindCount[s.kind]||0)+1);
@@ -210,11 +212,12 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
   const list = document.getElementById('list'), bar = document.getElementById('resultbar');
   const PAGE = 60;
   let shown = PAGE, current = [];
-  function storyHtml(s, q, showEmpty, onlyChanged) {
-    const lines = s.lines.filter(l => (showEmpty || l.text) && (!onlyChanged || (l.changes&&l.changes.length)));
+  function storyHtml(s, q, showEmpty, onlyChanged, showCosmetic) {
+    const visChanges = l => (l.changes||[]).filter(c => showCosmetic || c.kind !== 'cosmetic');
+    const lines = s.lines.filter(l => (showEmpty || l.text) && (!onlyChanged || visChanges(l).length));
     const body = lines.map(l => {
       const who = l.speaker ? `${esc(l.speakerName||l.speaker)}${l.state&&l.state!=='Default'?`<small>${esc(l.state)}</small>`:''}` : `<small>${l.text?'narration / no speaker':'beat'}</small>`;
-      const chg = (l.changes||[]).map(c => `<span class="chg">${esc(c.version)}: <s>${esc(c.from||'∅')}</s></span>`).join('');
+      const chg = visChanges(l).map(c => `<span class="chg">${esc(c.version)}${c.kind==='cosmetic'?' (cosmetic)':''}: <s>${esc(c.from||'∅')}</s></span>`).join('');
       return `<div class="ln ${l.text?'':'empty'} ${l.speaker?'':'narr'}"><div class="who">${who}</div><div class="txt">${l.text?hl(l.text,q):esc(l.id)}${chg}</div></div>`;
     }).join('');
     const ver = s.removedStory ? '' : (s.firstSeen ? `<span class="ver">since ${esc(s.firstSeen)}</span>` : '');
@@ -224,15 +227,15 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
     if (reset!==false) shown = PAGE;
     const q = document.getElementById('q').value.trim().toLowerCase();
     const ch = charSel.value, sc = scopeSel.value;
-    const onlyChanged = document.getElementById('onlyChanged').checked, showEmpty = document.getElementById('showEmpty').checked, showRemoved = document.getElementById('showRemoved').checked;
-    current = all.filter(s => active.has(s.kind) && (showRemoved || !s.removedStory) && (!ch || s.chars.has(ch)) && (!sc || s.scopes.has(sc)) && (!onlyChanged || s.hasChange) && (!q || s.hay.includes(q)));
+    const onlyChanged = document.getElementById('onlyChanged').checked, showEmpty = document.getElementById('showEmpty').checked, showRemoved = document.getElementById('showRemoved').checked, showCosmetic = document.getElementById('showCosmetic').checked;
+    current = all.filter(s => active.has(s.kind) && (showRemoved || !s.removedStory) && (!ch || s.chars.has(ch)) && (!sc || s.scopes.has(sc)) && (!onlyChanged || (showCosmetic ? s.hasChange : s.hasRewrite)) && (!q || s.hay.includes(q)));
     const nLines = current.reduce((a,s)=>a+s.lines.filter(l=>l.text).length,0);
     bar.innerHTML = `<b>${current.length.toLocaleString('en-US')}</b> stories · <b>${nLines.toLocaleString('en-US')}</b> spoken lines${q?` · matching “${esc(q)}”`:''}`;
-    list.innerHTML = current.slice(0, shown).map(s => storyHtml(s, q, showEmpty, onlyChanged)).join('') || '<div class="empty">Nothing matches these filters.</div>';
+    list.innerHTML = current.slice(0, shown).map(s => storyHtml(s, q, showEmpty, onlyChanged, showCosmetic)).join('') || '<div class="empty">Nothing matches these filters.</div>';
     if (current.length > shown) { const b=document.createElement('button'); b.className='more'; b.textContent=`Show ${Math.min(PAGE,current.length-shown)} more of ${(current.length-shown).toLocaleString('en-US')} remaining`; b.onclick=()=>{shown+=PAGE;render(false);}; list.appendChild(b); }
   }
   let t; document.getElementById('q').addEventListener('input', () => { clearTimeout(t); t=setTimeout(render,180); });
-  ['char','onlyChanged','showEmpty'].forEach(id => document.getElementById(id).addEventListener('change', () => render()));
+  ['char','onlyChanged','showEmpty','showCosmetic'].forEach(id => document.getElementById(id).addEventListener('change', () => render()));
   ['scope','showRemoved'].forEach(id => document.getElementById(id).addEventListener('change', () => { fillChars(); render(); }));
   fillChars();
   render();

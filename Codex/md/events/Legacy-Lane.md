@@ -130,7 +130,7 @@
 **MADDIE** (Relaxed): This is quite a set-up you've got here, Julius.
 **MADDIE** (Surprised): Are those empty energy drink cans and pizza boxes??
 **ANTIQUEDEALER**: Errr, my nephew instructed me that they provide the best nutrition while surfing the old Web.  
-  _earlier:_ ~~Errr, Herbert instructed me that they provide the best nutrition while surfing the old Web.~~ (until 26.04.01)
+  _(1 cosmetic edit not shown)_
 **ANTIQUEDEALER** (Thinking): But to get back to Amelia, she has always piqued my interest. Famous, yet so mysterious.
 **ANTIQUEDEALER** (Thinking): I found some brand-new information that seemed questionable at first, but I cross-referenced everything and...
 **MADDIE**: And?

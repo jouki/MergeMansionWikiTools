@@ -139,7 +139,7 @@
 - trigger: area, area=The Reception, areaId=FactoryReception, hotspotId=FactoryReceptionCouchTableSwapDamaged, phase=task completed, task=Repair the table surface (versions 25.09.01–26.07.01)
 
 **MADDIE**: I knew our family was ahead of the times, but the CB-01 is truly an amazing piece of engineering.  
-  _earlier:_ ~~I knew our family was ahead of the times, but the CB-01is truly an amazing piece of engineering.~~ (until 25.10.03)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Thinking): I wonder when it was first installed here.
 **MADDIE** (Relaxed): It must've been a hit with the workers!
 **CB-01** (Joyous): *Beep* *Bzzzz*

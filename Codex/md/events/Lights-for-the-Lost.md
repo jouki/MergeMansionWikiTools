@@ -11,7 +11,7 @@
 **ANTIQUEDEALER** (Encouraging): I am glad you could finally participate, Maddie.
 **ANTIQUEDEALER**: It is quite the spectacle, even if you do not have anyone you are saying goodbye to.
 **GRANDMA** (Relaxed): What do both of you say to some mulled wine to warm us up after that boat ride?  
-  _earlier:_ ~~What do both you say to some mulled wine to warm us up after that boat ride?~~ (until 26.07.01)
+  _(1 cosmetic edit not shown)_
 **GRANDMA** (Charming): I have some pictures in the family photo album to show you. And some more funny stories.
 **MADDIE** (Encouraging): That sounds wonderful, Grandma.
 

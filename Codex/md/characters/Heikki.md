@@ -75,7 +75,7 @@ Every story in which Heikki speaks.
 - trigger: event, event=The Great Bake-off, eventId=LBE_May2023, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–26.07.01)
 
 **PEARL** (Encouraging): Welcome, everyone, to Hopewell Bay's great bake-off! Let's meet our contestants!   
-  _earlier:_ ~~Welcome, everyone, to Hopewell Bay's great bakeoff! Let's meet our contestants! ~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 **PEARL** (Encouraging): First off, we have Jackie, our resident reporter for the Boulton Bugle.
 **JACKIE** (Encouraging): Thank you, Pearl, for planning this event again! May the best baker win!
 **PEARL** (Encouraging): Next, we have Maddie, who's been busy renovating the mansion!
@@ -90,7 +90,7 @@ Every story in which Heikki speaks.
 **HEIKKI** (Joyous): Hello! Huh, sorry for being late! I had to use my head as a third leg!
 **PEARL** (Thinking): Wh- What? 
 **PEARL** (Encouraging): Anyway, let the great bake-off begin!  
-  _earlier:_ ~~Anyway, let the great bakeoff begin!~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 
 ### The Great Bake-off — event end
 `LBE_May2023Outro` · seen 24.04.01–26.07.01
@@ -110,7 +110,7 @@ Every story in which Heikki speaks.
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthouseSwapMagPieNestC22, phase=task completed, task=Move the nest back to its old location (versions 24.04.01–26.07.01)
 
 **MADDIE**: How did the riddle go? The one Grandpa Charlie made you memorize?   
-  _earlier:_ ~~How did the riddle go? The one Granpa Charlie made you memorize? ~~ (until 25.03.01)
+  _(1 cosmetic edit not shown)_
 **HEIKKI** (Thinking): “Seldom noticed, often seen,
 Come rain or shine, I keep you clean."
 **HEIKKI** (Thinking): "I am first to greet you to the chateaux,
@@ -184,24 +184,19 @@ You will find one hidden beneath me.”
 `Lighthouse5_Birds` · seen 24.04.01–26.07.01
 - trigger: area, area=Lighthouse, areaId=Lighthouse, hotspotId=LighthouseRemoveReedShoreC12, phase=task completed, task=Remove reeds (versions 24.04.01–26.07.01)
 
-**MADDIE**: About the birds...  
-  _earlier:_ ~~About the birds…~~ (until 25.10.01)
+**MADDIE**: About the birds...
 **HEIKKI** (Joyous): Yes! My wonderful little friends!
 **MADDIE**: I didn't know magpies were local to this area.
-**HEIKKI** (Charming): These aren't any old magpies you know... They're Finnish Magpies!  
-  _earlier:_ ~~These aren't any old magpies you know… They're Finnish Magpies!~~ (until 25.10.01)
+**HEIKKI** (Charming): These aren't any old magpies you know... They're Finnish Magpies!
 **MADDIE** (Surprised): What?!
-**MADDIE** (Thinking): Hope wildlife services don't find out...  
-  _earlier:_ ~~Hope wildlife services don't find out…~~ (until 25.10.01)
+**MADDIE** (Thinking): Hope wildlife services don't find out...
 **HEIKKI**: Yeah. A little piece of home!
 **MADDIE**: You know that abandoned nest by the beach? It's filled with shiny objects!
 **HEIKKI** (Joyous): They're amazing collectors aren't they?
-**MADDIE** (Doubtful): More like amazing thieves...  
-  _earlier:_ ~~More like amazing thieves…~~ (until 25.10.01)
+**MADDIE** (Doubtful): More like amazing thieves...
 **HEIKKI** (Charming): One's own home is worth gold!
 **MADDIE** (Joyous): Hey! I understood that one!
-**MADDIE** (Thinking): Hmmm. Maybe if I fix up the old nest...  
-  _earlier:_ ~~Hmmm. Maybe if I fix up the old nest…~~ (until 25.10.01)
+**MADDIE** (Thinking): Hmmm. Maybe if I fix up the old nest...
 
 ### Lighthouse: Place lifebuoy
 `Lighthouse6_Atfireplace` · seen 24.04.01–26.07.01
@@ -303,7 +298,7 @@ You will find one hidden beneath me.”
 **HEIKKI** (Joyous): I tried to blow it out with my towel, but that caught fire too!
 **MADDIE** (Worried): Oh, no...  Wait... Did you say you were only wearing towels?
 **HEIKKI** (Charming): So there we were as if in the resin, two old men in our birthday suits, staring at our sauna burning down!  
-  _earlier:_ ~~So there we were in the resin, two old men in our birthday suits, staring at our sauna burning down!~~ (until 23.11.02)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Frustrated): Please let me forget that mental image...
 **HEIKKI** (Charming): *sigh* Time makes memories golden...
 **MADDIE** (Thinking): Not that one at least... But why would Grandpa have lock picks?

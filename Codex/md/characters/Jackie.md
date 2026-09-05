@@ -53,7 +53,7 @@ Every story in which Jackie speaks.
 **MADDIE** (Doubtful): But she was rummaging around in the closets, going through the old table linens and porcelain.
 **MADDIE** (Doubtful): I think I even saw her shining the silver cutlery!
 **JACKIE** (Thinking): Hmmm... Maybe she's planning a dinner party.  
-  _earlier:_ ~~Hmmm... Maybe she's planning a dinner party!~~ (until 25.07.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Thinking): I wonder... Could it be for the 5th anniversary?  
   _earlier:_ ~~That would be a first...~~ (until 25.07.01)
 
@@ -634,7 +634,7 @@ Every story in which Jackie speaks.
 
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Stone Age collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted various European museums and they’d be thrilled to house this collection!  
-  _earlier:_ ~~I’ve already contactacted various European museums and they’d be thrilled to house this collection!~~ (until 26.01.02)
+  _(1 cosmetic edit not shown)_
 
 ### DE FirstCollectionItem Dialogue Vikings
 `DE_FirstCollectionItem_Dialogue_Vikings` · seen 26.02.01–26.07.01
@@ -684,7 +684,7 @@ Every story in which Jackie speaks.
 **JACKIE** (Thinking): What?
 **MADDIE** (Frustrated): Why are you so calm about this? You don't know who these people are! You could be in danger!
 **JACKIE** (Annoyed): So what? I'm trying to save my family, Maddie. You, more than anyone, should understand that!  
-  _earlier:_ ~~So what? I'm trying to save my family, Maddie. You if anyone should understand that!~~ (until 26.06.02)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Thinking): I...I do, but this is irresponsible. You have to tell the police!
 **JACKIE** (Surprised): As if the police in this town have ever been anything but useless!
 **JACKIE** (Annoyed): Oh, I see: you're probably afraid they've followed me here. I'll get out of your hair.
@@ -761,7 +761,7 @@ Every story in which Jackie speaks.
 - trigger: area, area=Hallway, areaId=Corridor, hotspotId=HallwayPlaceFixedShipE13, phase=task completed, task=Place the ship (versions 24.04.01–26.07.01)
 
 **JACKIE**: This is a nice model! I guess boats have been in your family since the beginning.  
-  _earlier:_ ~~This is a nice model! I guess boats have been in your family since the beggining.~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 **MADDIE**: It's a barque, actually. 
 **JACKIE** (Encouraging): My apologies, Captain!
 **MADDIE** (Encouraging): Ha! At ease... I learned a few terms while fixing the yacht outside.
@@ -837,7 +837,7 @@ Every story in which Jackie speaks.
 - trigger: event, event=The Great Bake-off, eventId=LBE_May2023, eventType=Leaderboard Event, moment=entering board (versions 24.04.01–26.07.01)
 
 **PEARL** (Encouraging): Welcome, everyone, to Hopewell Bay's great bake-off! Let's meet our contestants!   
-  _earlier:_ ~~Welcome, everyone, to Hopewell Bay's great bakeoff! Let's meet our contestants! ~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 **PEARL** (Encouraging): First off, we have Jackie, our resident reporter for the Boulton Bugle.
 **JACKIE** (Encouraging): Thank you, Pearl, for planning this event again! May the best baker win!
 **PEARL** (Encouraging): Next, we have Maddie, who's been busy renovating the mansion!
@@ -852,7 +852,7 @@ Every story in which Jackie speaks.
 **HEIKKI** (Joyous): Hello! Huh, sorry for being late! I had to use my head as a third leg!
 **PEARL** (Thinking): Wh- What? 
 **PEARL** (Encouraging): Anyway, let the great bake-off begin!  
-  _earlier:_ ~~Anyway, let the great bakeoff begin!~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_
 
 ### The Great Bake-off — event end
 `LBE_May2023Outro` · seen 24.04.01–26.07.01
@@ -902,7 +902,7 @@ Every story in which Jackie speaks.
 - trigger: item, event=Grandma's Pool Party, eventKey=LDE_GrandmasBirthday2023, itemKeys=['LDE_GrandmasBirthday2023_BirthdayCake_08'], items=['Podcasting Kit'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MADDIE**: Hi, Jackie! So what was your idea for me to get Grandma?  
-  _earlier:_ ~~Hi Jackie! So what was your idea for me to get Grandma?~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **JACKIE** (Encouraging): Podcasting equipment! For Ursula to start her own podcast about Hopewell Bay!
 **JACKIE** (Encouraging): I’m sure she has plenty of interesting stories to tell. And besides...
 **JACKIE**: We weren’t using any of this old equipment back at the Bugle, anyway.
@@ -912,6 +912,13 @@ Every story in which Jackie speaks.
 `LDE_GreenAcresQuest2024_TA4_Dialogue` · seen 25.05.01–26.04.02
 - trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
 
+**JACKIE** (Surprised): Maddie! You won’t believe who I just saw!
+**MADDIE** (Frustrated): Emilio? Yeah... He dropped by earlier with her.
+**JACKIE** (Annoyed): Her?! You mean she’s here?
+**MADDIE** (Doubtful): Yep! Just a perfect ray of sunshine, that one.
+**JACKIE**: Eeh... This must be really awkward for you.
+**MADDIE** (Annoyed): Oh no, it’s totally fine. Bella and Emilio are “just friends...”
+**JACKIE** (Doubtful): Oh boy... I know that look.
 
 ### Green Acres Quest — item discovered: Jackie
 `LDE_GreenAcresQuest_CharacterJackie_02_Dialogue` · seen 26.05.01–26.07.01
@@ -1220,7 +1227,7 @@ Every story in which Jackie speaks.
 - trigger: item, event=Murder at the Mansion, eventKey=LDE_MurderAtTheMansion, itemKeys=['LDE_MurderAtTheMansion_Interviews_03'], items=['Recorder'], moment=item discovered (versions 26.05.01–26.07.01)
 
 **JACKIE** (Thinking): Next we need to talk with everyone who saw her on that last day.  
-  _earlier:_ ~~Next we need to talk everyone who saw her on that last day.~~ (until 26.06.01)
+  _(1 cosmetic edit not shown)_
 **RODDY** (Doubtful): Do you think they will talk?
 **JACKIE** (Thinking): It’s unlikely we’ll get a confession, but someone will slip.
 **JACKIE**: They always do…
@@ -1344,7 +1351,7 @@ Every story in which Jackie speaks.
 **JACKIE**: We follow up on everything and rule out the wrong options until we have the answer.
 **RODDY** (Discouraged): I’m not sure that kind of investigation alone is going to get us closer to the answer.
 **JACKIE** (Doubtful): What are you talking about?  
-  _earlier:_ ~~What do you talking about?~~ (until 26.06.01)
+  _(1 cosmetic edit not shown)_
 **RODDY** (Hesitant): I’m talking about the COSMIC investigation.
 
 ### Murder at the Mansion — item discovered: Board of Fate
@@ -1368,7 +1375,7 @@ Every story in which Jackie speaks.
 **JACKIE** (Surprised): That sounds like... Bella!
 **RODDY** (Thinking): There's more: “The universe advises that your great love dreams not of escape, but of breathing room.”
 **JACKIE** (Doubtful): Uh-huh, that's Bella alright. She would not have been happy to read this.  
-  _earlier:_ ~~Uh-uh, that's Bella alright. She would not have been happy to read this.~~ (until 26.06.01)
+  _(1 cosmetic edit not shown)_
 
 ### LDE MurderAtTheMansion TA1 Dialogue
 `LDE_MurderAtTheMansion_TA1_Dialogue` · seen 26.05.01–26.07.01
@@ -1654,7 +1661,7 @@ Every story in which Jackie speaks.
 **JACKIE** (Surprised): Do you smell that? Is something on fire?!
 **MADDIE** (Surprised): I'm dreadfully sorry to bother you Miss Boulton but...  
   _earlier:_ ~~Oh no, look outside! I think it’s the lighthouse!~~ (until 25.02.02)
-**—**: It appears that the lighthouse is on fire.
+**MADDIE** (Surprised): It appears that the lighthouse is on fire.
 
 ### PE Christmas2022EndOfChainDialogue
 `PE_Christmas2022EndOfChainDialogue` · seen 23.09.02–26.07.01
@@ -1981,7 +1988,7 @@ Every story in which Jackie speaks.
 **MADDIE** (Thinking): "Found along the northern cliffs, 1968." That's pretty specific. Imagine how many hands these passed through before ending up here.
 **JACKIE** (Encouraging): The Boultons never threw away an interesting rock.
 **MADDIE** (Encouraging): Good thing, too. Otherwise, we'd never have found any of this.  
-  _earlier:_ ~~Good thing, too. Otherwise we'd never have found any of this.~~ (until 26.06.01)
+  _(1 cosmetic edit not shown)_
 
 ### Good Vibrations — decoration SP_GoodVibrations2026_Decoration_Slot27
 `SP_GoodVibrations2026_Decoration_Slot27_Dialogue` · seen 26.06.01–26.07.01
@@ -2033,7 +2040,7 @@ Every story in which Jackie speaks.
 
 **MADDIE**: Here's the last box. Wait... why is it so heavy?
 **JACKIE** (Thinking): There's a huge gray rock inside! Let's handle it carefully. It might be fragile.  
-  _earlier:_ ~~There's a huge grey rock inside! Let's handle it carefully. It might be fragile.~~ (until 26.06.01)
+  _(1 cosmetic edit not shown)_
 **JACKIE**: Carefully now... Don't trip over those box--
 **MADDIE** (Surprised): Whooooah!
 **JACKIE** (Surprised): Maddie, are you okay??
@@ -2141,7 +2148,7 @@ Every story in which Jackie speaks.
 **JACKIE** (Encouraging): Let me publish an ad for it in the paper. I know it doesn't make up for anything, but let me help. Please?
 **MADDIE** (Thinking): Whatever, it's not like anyone's coming anyway.
 **JACKIE**: You might be wrong about that. We can make the ad funny and inviting.
-**—**: I want to save our friendship. Please, let me try.
+**JACKIE**: I want to save our friendship. Please, let me try.
 
 ### Hopefest Music Festival — outro
 `SP_Hopefest2026_AllRewardsCompleted_Dialogue` · seen 26.05.01–26.07.01
@@ -2544,16 +2551,40 @@ Every story in which Jackie speaks.
 `SP_SpringSeason2023_Decoration_25_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_SpringSeason2023_Decoration_25, event=Spring Season, eventKey=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MADDIE** (Relaxed): These kites are really beautiful and creative!
+**MADDIE** (Relaxed): Is that a pie?! Who knew pies could fly?
+**RODDY** (Relaxed): Actually, a pie tin was used to make the first-
+**JACKIE** (Annoyed): Roddy!? RODDY!? Are you hiding from me again? We need to work on this kite!
+**RODDY** (Surprised): Oh no, she found me! You've got to help me... She's crazy! I've drawn up four different schematics already!
+**MADDIE** (Encouraging): Oh, come on Roddy, give her a chance! I'm sure you two will get along eventually?
+**JACKIE** (Annoyed): There you are! Roddy, we need to work together! Nothing will get done if you stroll about in the yard!
+**MADDIE** (Discouraged): ...Or not.
 
 ### Spring Season — decoration SP_SpringSeason2023_Decoration_26
 `SP_SpringSeason2023_Decoration_26_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_SpringSeason2023_Decoration_26, event=Spring Season, eventKey=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**JACKIE** (Thinking): I think the length of the tail should be longer.
+**RODDY** (Thinking): Wouldn't be realistic, what if we make the supports wider?
+**JACKIE** (Encouraging): Good idea!
+**MADDIE** (Charming): Aaaw, look at you two getting along!
+**MASON** (Doubtful): They're not...
+**MADDIE** (Surprised): Mason?!
+**MASON** (Encouraging): Yep. I'm actually building the kite for the both of them. They refuse to talk to each other.
+**MADDIE** (Annoyed): At least that's something they have in common...
 
 ### Spring Season — decoration SP_SpringSeason2023_Decoration_29
 `SP_SpringSeason2023_Decoration_29_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_SpringSeason2023_Decoration_29, event=Spring Season, eventKey=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MADDIE** (Doubtful): Wow Aunt Deb... That's not ostentatious at all!
+**DEB** (Worried): Too much?
+**MADDIE** (Worried): No, of course not! No no no... No.
+**MADDIE** (Surprised): Great! Send my love to your Grandma, Tataa!
+**MADDIE** (Thinking): I wonder what she'll think when sees that flying over her bedroom...
+**MADDIE** (Encouraging): Jackie! How's the kite coming along?
+**JACKIE** (Doubtful): ...
+**MADDIE** (Discouraged): That well, huh?
 
 ### SP StrayBonesMystery2024 LayerDecoration 02 Dialogue
 `SP_StrayBonesMystery2024_LayerDecoration_02_Dialogue` · seen 25.05.01–26.07.01
@@ -2657,7 +2688,7 @@ Every story in which Jackie speaks.
 **JACKIE** (Thinking): Hey Maddie. Just wondering how things are going here. Any updates on your grandma's case?
 **MADDIE** (Discouraged): Jackie, I'm not going to talk about that with you, so you might as well leave.
 **JACKIE** (Doubtful): I... Sorry. I understand. Mind if I hang out a while?  
-  _earlier:_ ~~I... Sorry. I understand. Mind if I hang out awhile?~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Thinking): I guess so! I'm on a scavenger hunt that, uh, someone set up for me.
 **JACKIE** (Encouraging): Can I help? I love things like this. My idea of heaven is an escape room with a ten minute timer.
 **MADDIE** (Relaxed): Really?! Umm.. Sure! Let's go take a look around the plaza and the old well.
@@ -2677,7 +2708,7 @@ Every story in which Jackie speaks.
 **JACKIE** (Annoyed): Ugh. Ignore him! I think you found the last clue, so it's time to go back to the pool house.
 **MADDIE**: Okay, here we are! We have all the letters in Grandpa's code, and we're at the right place - the pool house. Let's try and see if that code opens the safe.
 **JACKIE** (Thinking): So you found the letters 'R4U5L' - will they work as the code?
-**—**: Uh, nope, that didn't work. It could be... oh! I know what it is - R5UL4! Ursula!
+**JACKIE** (Surprised): Uh, nope, that didn't work. It could be... oh! I know what it is - R5UL4! Ursula!
 
 ### Scavenger Hunt: Dig and search the ground
 `ScavengerHunt_OldwellEmpty` · seen 24.04.01–26.07.01
@@ -2685,6 +2716,13 @@ Every story in which Jackie speaks.
 
 **MADDIE** (Thinking): I don't think there is anything here...
 **JACKIE** (Thinking): Let's try a different spot.
+
+### Scavenger Hunt: Search the pond
+`ScavengerHunt_OldwellEmpty2` · seen 24.04.01–26.07.01
+- trigger: area, area=Scavenger Hunt, areaId=ScavengerHunt, hotspotId=ScavengerHuntOldWellInspectWater, phase=task completed, task=Search the pond (versions 24.04.01–26.07.01)
+
+**MADDIE** (Thinking): Nothing here it seems... except so many knives at the bottom of that pond.
+**JACKIE** (Thinking): That's a bit weird.
 
 ### Scavenger Hunt: Open the safe with the code
 `ScavengerHunt_Poolhouse` · seen 24.04.01–26.07.01

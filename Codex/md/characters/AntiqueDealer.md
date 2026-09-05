@@ -6,12 +6,12 @@ Every story in which AntiqueDealer speaks.
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **ANTIQUEDEALER** (Surprised): I’m sorry I didn’t know the gear was in reverse.
-**MADDIE**: Are you ok?
-**ANTIQUEDEALER**: I think so.
-**MADDIE**: Better make sure. My Grandma lives right around the corner.
-**ANTIQUEDEALER**: I know, that’s where I came from.
-**MADDIE**: What?
-**ANTIQUEDEALER**: I mean that is the direction I came from.
+**MADDIE** (Worried): Are you ok?
+**ANTIQUEDEALER** (Thinking): I think so.
+**MADDIE** (Thinking): Better make sure. My Grandma lives right around the corner.
+**ANTIQUEDEALER** (Encouraging): I know, that’s where I came from.
+**MADDIE** (Worried): What?
+**ANTIQUEDEALER** (Relaxed): I mean that is the direction I came from.
 **ANTIQUEDEALER**: I’m sorry. Now the gate is damaged and the car is broken.
 **MADDIE**: Maybe my friend Roddy can help with that while I take you to grandma’s.
 
@@ -19,9 +19,9 @@ Every story in which AntiqueDealer speaks.
 `AntiqueDealerDriveOffStep` · seen 22.02.06–26.07.01
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
-**ANTIQUEDEALER**: Thank you for your help.
+**ANTIQUEDEALER** (Thinking): Thank you for your help.
 **MADDIE**: I just wanted to restore the family estate to its former glory!
-**ANTIQUEDEALER**: I should be going.
+**ANTIQUEDEALER** (Worried): I should be going.
 **RODDY**: Make sure your gear is not in reverse. 
 **ANTIQUEDEALER**: Point taken.
 **RODDY** (Thinking): What do you mean by that?!
@@ -109,7 +109,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Relaxed): This is quite a set-up you've got here, Julius.
 **MADDIE** (Surprised): Are those empty energy drink cans and pizza boxes??
 **ANTIQUEDEALER**: Errr, my nephew instructed me that they provide the best nutrition while surfing the old Web.  
-  _earlier:_ ~~Errr, Herbert instructed me that they provide the best nutrition while surfing the old Web.~~ (until 26.04.01)
+  _(1 cosmetic edit not shown)_
 **ANTIQUEDEALER** (Thinking): But to get back to Amelia, she has always piqued my interest. Famous, yet so mysterious.
 **ANTIQUEDEALER** (Thinking): I found some brand-new information that seemed questionable at first, but I cross-referenced everything and...
 **MADDIE**: And?
@@ -277,6 +277,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Thinking): Like what?
 **ANTIQUEDEALER** (Doubtful): I have my suspicions, my dear, but I have an inkling we will find out soon enough.  
   _earlier:_ ~~That I could not tell you.~~ (until 25.07.01)
+**—**: But I have an inkling we will find out soon enough.
 
 ### Five-Year Secret Celebration — item discovered: Hidden Questions
 `CBE_Anniversary2025_Questions_03_Dialogue` · seen 26.03.01–26.07.01
@@ -451,8 +452,7 @@ Every story in which AntiqueDealer speaks.
 - trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_FushimiInariPostcard_F_02'], items=['Postcard from Fushimi Inari'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **ANTIQUEDEALER** (Charming): Maddie writes from Fushimi Inari in Kyoto! She really is following in Ursula’s footsteps.
-**ANTIQUEDEALER** (Thinking): But will she figure out what her Grandma was up to, I wonder...  
-  _earlier:_ ~~But will she figure out what her Grandma was up to, I wonder…~~ (until 25.10.01)
+**ANTIQUEDEALER** (Thinking): But will she figure out what her Grandma was up to, I wonder...
 **ANTIQUEDEALER** (Thinking): She writes: “I walked through a thousand torii gates, but couldn’t find the one Grandma was looking for.”
 
 ### CBE MaddieInJapan2025 GettingReady 05 Dialogue
@@ -493,8 +493,7 @@ Every story in which AntiqueDealer speaks.
 **GRANDMA** (Surprised): You have kept them all these years?
 **ANTIQUEDEALER** (Charming): Of course! And it seems Maddie has figured out what you were doing in Japan.
 **GRANDMA** (Charming): Well, she is a bright girl. What does she write?
-**GRANDMA** (Relaxed): Let’s see... “Finally in Shibuya. I've found what I was looking for - complete holiday mood. Grandma’s postcards make sense now.”  
-  _earlier:_ ~~Let’s see… “Finally in Shibuya. I've found what I was looking for - complete holiday mood. Grandma’s postcards make sense now.”~~ (until 25.10.01)
+**GRANDMA** (Relaxed): Let’s see... “Finally in Shibuya. I've found what I was looking for - complete holiday mood. Grandma’s postcards make sense now.”
 
 ### CBE MaddieInJapan2025 YasakaPagodaPostcard 01 Dialogue
 `CBE_MaddieInJapan2025_YasakaPagodaPostcard_01_Dialogue` · seen 26.02.01–26.07.01
@@ -529,7 +528,7 @@ Every story in which AntiqueDealer speaks.
 - trigger: area, area=Conservatory, areaId=Conservatory, hotspotId=ConservatoryPlaceHalfBarrelSoilBA8, phase=task completed, task=Reuse soil from old flowers (versions 24.04.01–26.07.01)
 
 **MADDIE**: Hi, Julius! This is good timing. I was just about to read this old letter that I found...  
-  _earlier:_ ~~Hi Julius! This is good timing. I was just about to read this old letter that I found...~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Thinking): "To whom it may concern. I, Charles Boulton, am alive and well."
 **MADDIE** (Thinking): "If you are reading this, then it means my wife Ursula has been framed for my murder!"
 **MADDIE** (Thinking): "I hereby state that Ursula is innocent, and all the proof you require can be found in the Boulton Mansion."
@@ -633,7 +632,7 @@ Every story in which AntiqueDealer speaks.
 
 **ANTIQUEDEALER**: No, it’s not. We’re currently excavating where the Stone Age collection was housed.
 **JACKIE** (Encouraging): I’ve already contacted various European museums and they’d be thrilled to house this collection!  
-  _earlier:_ ~~I’ve already contactacted various European museums and they’d be thrilled to house this collection!~~ (until 26.01.02)
+  _(1 cosmetic edit not shown)_
 
 ### DE FirstCollectionItem Dialogue Vikings
 `DE_FirstCollectionItem_Dialogue_Vikings` · seen 26.02.01–26.07.01
@@ -647,7 +646,7 @@ Every story in which AntiqueDealer speaks.
 - trigger: unknown, hint=Dig Event (versions None–None)
 
 **MADDIE** (Encouraging): Ooh, Shiny! This item looks really special!  
-  _earlier:_ ~~Ooh, Shiny! This item look really special!~~ (until 25.03.01)
+  _(1 cosmetic edit not shown)_
 **ANTIQUEDEALER** (Surprised): Ah, yes. It’s especially well preserved! Priceless, really.
 **MADDIE** (Encouraging): Then let’s hope we can find more of these!
 
@@ -680,13 +679,13 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Thinking): Find something interesting?  
   _earlier:_ ~~You think someone broke in? Why?~~ (until 26.02.03)
 **MADDIE** (Thinking): Hmm... Looking closer at this steam clock, I can see that some of the parts are missing!  
-  _earlier:_ ~~Hmm... Looking closer at this steam clock, I can see that some of the gears are missing!~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Doubtful): Carefully removed... Like they were stolen!  
   _earlier:_ ~~Carefully removed...~~ (until 26.02.03)
 **ANTIQUEDEALER** (Doubtful): Who breaks into a factory to steal parts from an old steam clock?  
-  _earlier:_ ~~Who breaks into a factory to steal gears from an old steam clock?~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Thinking): Maybe there's more to it than meets the eye.  
-  _earlier:_ ~~Maybe there's more to it, than meets the eye.~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 
 ### FactoryFloor 04
 `FactoryFloor_04` · seen 26.04.01–26.07.01
@@ -696,7 +695,7 @@ Every story in which AntiqueDealer speaks.
   _earlier:_ ~~Hey! I think I found a missing gear for the clock!~~ (until 26.02.03)
 **ANTIQUEDEALER** (Thinking): Hmm... Maybe they weren't stolen after all?
 **MADDIE** (Thinking): I guess not. Perhaps I can find the other parts around here?  
-  _earlier:_ ~~I guess not. Perhaps I can find the others around here?~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **ANTIQUEDEALER** (Encouraging): Good luck! This place is in shambles. I'm surprised you could recognize that it belonged to a clock.
 **MADDIE** (Encouraging): Well... I'm an engineer after all, so I can pretty much identify every nut and bolt in here.
 **ANTIQUEDEALER** (Charming): I don't doubt it.
@@ -712,7 +711,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE**: Ooh! I think I found the missing time zones part for the steam clock under this machine...  
   _earlier:_ ~~Ooh! I think I found another gear under this machine...~~ (until 26.02.03)
 **MADDIE** (Thinking): Hold on, what's that?!  
-  _earlier:_ ~~Hold on, what's that?~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **ANTIQUEDEALER** (Thinking): What's what?  
   _earlier:_ ~~What is it?~~ (until 26.02.03)
 **MADDIE** (Doubtful): Looks like some sort of personal trademark or monogram etched into the side of the machine.
@@ -732,14 +731,14 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Doubtful): Ooh, I think I found a clock part, but I'm not quite sure...  
   _earlier:_ ~~Ooh, I think I found a clock gear?~~ (until 26.02.03)
 **MADDIE**: Well done, Julius! That's the cuckoo bird that pops out! You've got sharp eyes.   
-  _earlier:_ ~~Well done, Julius! You got sharp eyes. ~~ (until 26.02.03); ~~Well done, Julius! That's the cuckoo bird that pops out! You got sharp eyes. ~~ (until 26.04.01)
+  _earlier:_ ~~Well done, Julius! You got sharp eyes. ~~ (until 26.02.03)  
+  _(1 cosmetic edit not shown)_
 **ANTIQUEDEALER** (Surprised): I'm not quite sure about that...
 **MADDIE** (Encouraging): Ha! Part of me thinks these are almost meant to be found.
 **ANTIQUEDEALER** (Thinking): Why do you think that?
-**MADDIE** (Thinking): Well... They're all next to important parts of the factory. I'm getting a clear picture on how it all operates.  
-  _earlier:_ ~~Well... They're all next to important parts of the factory. I'm getting a  clear picture on how it all operates.~~ (until 26.04.01)
+**MADDIE** (Thinking): Well... They're all next to important parts of the factory. I'm getting a clear picture on how it all operates.
 **MADDIE** (Thinking): I'm seeing automation that is way ahead of its time. For a cannery, it's incredible.  
-  _earlier:_ ~~I'm seeing automation that is way ahead of it's time. For a cannery, it's incredible.~~ (until 26.04.01)
+  _(1 cosmetic edit not shown)_
 **ANTIQUEDEALER** (Charming): Never put it past a Boulton to surprise you.
 
 ### FactoryFloor 08
@@ -747,7 +746,8 @@ Every story in which AntiqueDealer speaks.
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Encouraging): Look! I think I found an employee worksheet. Lots of women worked here!  
-  _earlier:_ ~~Hey, check out these posters!~~ (until 26.02.03); ~~Look! I think I found an employee worksheet. Lot's of women worked here!~~ (until 26.04.01)
+  _earlier:_ ~~Hey, check out these posters!~~ (until 26.02.03)  
+  _(1 cosmetic edit not shown)_
 **ANTIQUEDEALER**: Ah, yes. Agatha was very focused on hiring women into the workforce.
 **ANTIQUEDEALER** (Encouraging): She was a strong advocate for equal opportunity employment.
 **MADDIE** (Thinking): Good for her! I wonder if not being able to "own" your own inventions was a part of it.
@@ -778,7 +778,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Thinking): I wonder...
 **ANTIQUEDEALER**: That there's more to it?
 **MADDIE** (Encouraging): Exactly! This piece doesn't spin as part of the main mechanism, see?  
-  _earlier:_ ~~Exactly! This piece doesn't spink as part of the main mechanism, see?~~ (until 26.04.01)
+  _(1 cosmetic edit not shown)_
 **ANTIQUEDEALER** (Surprised): It almost works like...
 **MADDIE** (Surprised): A key!
 
@@ -803,12 +803,12 @@ Every story in which AntiqueDealer speaks.
 - trigger: area, area=Factory Floor, areaId=FactoryFloor, hotspotId=FactoryFloorStairsDoorCleanDoor, phase=task completed, task=Clean the door (versions 26.04.01–26.07.01)
 
 **MADDIE** (Thinking): I wonder if the canister in here is the same one I saw in the bathroom.  
-  _earlier:_ ~~I wonder if the canister in here is the same one I saw at the bathroom.~~ (until 26.04.01)
+  _(1 cosmetic edit not shown)_
 **ANTIQUEDEALER** (Thinking): I still don't understand WHY you saw it in there?!  
-  _earlier:_ ~~I still understand WHY you saw it in there?!~~ (until 26.04.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Encouraging): There was a water accident, we thought it was used for plumbing. I saw this message stuck there.
 **MADDIE** (Encouraging): Once we got it working, the message went off to its final destination. HERE!  
-  _earlier:_ ~~Once we got it working, the message went off to it's final destination. HERE!~~ (until 26.04.01)
+  _(1 cosmetic edit not shown)_
 **ANTIQUEDEALER** (Encouraging): Well? Let's find out what's in it!
 **MADDIE** (Relaxed): My thoughts exactly!
 **MADDIE** (Thinking): Let's see. We got two messages. One seems encrypted, but something I'll be able to break when I got a bit of time.
@@ -827,7 +827,7 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Relaxed): Boulton ingenuity, my dear Julius.
 **MADDIE** (Relaxed): This place works just as I envisioned, yet the original design was incredibly intuitive to follow and expand upon. 
 **MADDIE** (Encouraging): Almost as if it was designed to be future-proof. Really ahead of its time.  
-  _earlier:_ ~~Almost as if it was designed to be future proof. Really ahead of its time.~~ (until 26.04.01)
+  _(1 cosmetic edit not shown)_
 
 ### FactoryFloor 13
 `FactoryFloor_13` · seen 26.04.01–26.07.01
@@ -898,7 +898,7 @@ Every story in which AntiqueDealer speaks.
 
 **MADDIE**: So, how do you know about fixing stained-glass windows?
 **ANTIQUEDEALER**: Well... a long time ago I did an antique apprenticeship in Florence, Italy.  
-  _earlier:_ ~~Well... A long time ago I did an antique apprenticeship in Florence, Italy.~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **ANTIQUEDEALER** (Charming): I learned quite a lot there. Mainly restoration work.
 **MADDIE** (Encouraging): Which included stained-glass windows?
 **ANTIQUEDEALER** (Encouraging): Exactly!
@@ -918,7 +918,7 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Frustrated): Maddie! What's wrong with an old fashioned cash register?
 **ANTIQUEDEALER** (Doubtful): They work when the power is out, and if it's stuck, a bit of grease fixes it!
 **MADDIE** (Doubtful): I understand your aversion to modern technology, but I need you to learn how to use this.  
-  _earlier:_ ~~I understand your aversion to modern technology, but I need you to learn this.~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Charming): Please?
 **ANTIQUEDEALER** (Frustrated): Oh, alright... How do I turn it on?
 **MADDIE** (Hesitant): It's already on!
@@ -945,7 +945,7 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Charming): She was amazing! Senza confronto.
 **ANTIQUEDEALER** (Encouraging): She worked in a pottery and glass workshop.
 **ANTIQUEDEALER** (Encouraging): Which supplied me with the stained-glass I needed for the window repairs I did.  
-  _earlier:_ ~~Which supplied me with the stained glass I needed for the window repairs I did.~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **ANTIQUEDEALER** (Encouraging): She was a master, Maddie. She never threw anything away!
 **ANTIQUEDEALER** (Relaxed): Reusing the broken pieces to make something even more beautiful.
 **MADDIE**: Kind of like the art of kintsugi!
@@ -1010,7 +1010,7 @@ Every story in which AntiqueDealer speaks.
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Encouraging): We should all take a selfie together in the large can display!  
-  _earlier:_ ~~We should all take a selfie together in the large can!~~ (until 26.02.02)
+  _(1 cosmetic edit not shown)_
 **ASH** (Encouraging): Yeah! That's a great idea!
 **MADDIE** (Joyous): Come on Julius! Squeeze in here!
 **ANTIQUEDEALER** (Discouraged): Oh I don't know...
@@ -1040,13 +1040,13 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Surprised): Ah! You frightened me!
 **ANTIQUEDEALER** (Annoyed): Where have you been?!
 **MADDIE** (Surprised): Well... there was a lot to do at the mansion and-  
-  _earlier:_ ~~Well... There was a lot to do at the mansion and-~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **ANTIQUEDEALER** (Annoyed): ...
 **MADDIE** (Worried): I'm sorry.
 **ANTIQUEDEALER** (Charming): Totally all right, my dear.  
-  _earlier:_ ~~Totally alright, my dear.~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **ANTIQUEDEALER**: Now, would you need some help fixing that stained-glass window?  
-  _earlier:_ ~~Now. Would need some help fixing that stain-glassed window?~~ (until 26.02.02)
+  _(1 cosmetic edit not shown)_
 **ANTIQUEDEALER**: I might know a thing or two about those!
 
 ### Gift Shop: Hang Ignatius' poster
@@ -1526,14 +1526,11 @@ Every story in which AntiqueDealer speaks.
 **MADDIE** (Joyous): I can see an owl!
 **MADDIE** (Relaxed): Awww, it’s so cute!
 **ANTIQUEDEALER** (Thinking): What kind of an owl is it?
-**MADDIE** (Thinking): Err... I’m not sure. It’s brown with white spots. It’s not too big.  
-  _earlier:_ ~~Err… I’m not sure. It’s brown with white spots. It’s not too big.~~ (until 25.10.01)
+**MADDIE** (Thinking): Err... I’m not sure. It’s brown with white spots. It’s not too big.
 **ANTIQUEDEALER** (Doubtful): That sounds like a Burrowing Owl.
-**MADDIE** (Surprised): Burrowing? Does that mean it lives... underground??  
-  _earlier:_ ~~Burrowing? Does that mean it lives… underground??~~ (until 25.10.01)
+**MADDIE** (Surprised): Burrowing? Does that mean it lives... underground??
 **ANTIQUEDEALER** (Relaxed): It does, indeed!
-**MADDIE** (Thinking): The more you know...  
-  _earlier:_ ~~The more you know…~~ (until 25.10.01)
+**MADDIE** (Thinking): The more you know...
 
 ### LS Autumn CanadaGoose Dialogue
 `LS_Autumn_CanadaGoose_Dialogue` · seen 26.02.01–26.07.01
@@ -2226,7 +2223,7 @@ Every story in which AntiqueDealer speaks.
 **DEB** (Charming): I'm here to look after my sister, of course. I read all about her thrilling brush with the law.
 **DEB** (Charming): And Julius, so good to see you. But you're so happy to see me that you're crying? Delightful.
 **ANTIQUEDEALER** (Surprised): It's my ACHOO allergies! And I really must be going. Goodbye, Deborah.
-**—**: He always was a sensitive one. Just us girls now, huh Maddie? You can catch me up on things.
+**ANTIQUEDEALER** (Surprised): He always was a sensitive one. Just us girls now, huh Maddie? You can catch me up on things.
 **DEB**: He always was a sensitive one. Just us girls now, huh Maddie? You can catch me up on things.
 **MADDIE**: Uh, okay! I'm just going around the maze. You can join me if you like.
 
@@ -2236,9 +2233,9 @@ Every story in which AntiqueDealer speaks.
 
 **MADDIE** (Annoyed): Ew, those webs are so sticky!
 **ANTIQUEDEALER** (Frustrated): Never mind the webs! Is that a... spider? They're, um, really not my thing.
-**—**: I guess that's why you've been more of an <i>observer</i> on this set of tasks.
+**MADDIE** (Annoyed): I guess that's why you've been more of an <i>observer</i> on this set of tasks.
 **ANTIQUEDEALER** (Encouraging): I prefer to think of it as <i>advisor</i>. But... I have an appointment to get to. I'll see you later!
-**—**: Appointment... Right. 
+**MADDIE** (Thinking): Appointment... Right. 
 
 ### SEChristmas2022 — decoration PE_Christmas2022_Decoration_25
 `PE_Christmas2022Deco_Intro` · seen 23.09.02–26.07.01
@@ -2492,26 +2489,58 @@ Every story in which AntiqueDealer speaks.
 `SP_JuliusMystery2023_Decoration_Slot25_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_JuliusMystery2023_Decoration_Slot25, event=Julius' Mystery, eventKey=SP_JuliusMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MADDIE** (Joyous): What a cute train set!
+**ANTIQUEDEALER** (Frustrated): Cute?! This is a highly detailed reproduction of the railway locomotive your great-great-grandfather used to travel in.
+**MADDIE** (Relaxed): Yes. A USRA 0-6-0 coal powered locomotive with two cylinders, 62-inch drive diameter and a tractive force of over 17,000 kg.
+**ANTIQUEDEALER** (Surprised): Er... Yes... Exactly.
+**MADDIE** (Doubtful): And it’s cute.
+**ANTIQUEDEALER** (Charming): Yes ma’am!
 
 ### Julius' Mystery — decoration SP_JuliusMystery2023_Decoration_Slot26
 `SP_JuliusMystery2023_Decoration_Slot26_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_JuliusMystery2023_Decoration_Slot26, event=Julius' Mystery, eventKey=SP_JuliusMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MADDIE** (Encouraging): It’s wonderful! Can you explain what it all means?
+**ANTIQUEDEALER**: But, of course! The can represents your family’s ingenuity and successes, the anchor represents their travels.
+**ANTIQUEDEALER** (Relaxed): The frog represents new beginnings. Finally, the Hopeberry represents the land you are on.
+**MADDIE**: What does “Sic Possum” mean?
+**ANTIQUEDEALER** (Charming): It’s Latin for “Yes, I can.” An excellent motto. And...
+**MADDIE** (Charming): Oh, I get it! CAN... Haha!
+**GRANDMA** (Frustrated): Well... I think it’s silly!
+**MADDIE** (Surprised): Grandma!
 
 ### Julius' Mystery — decoration SP_JuliusMystery2023_Decoration_Slot27
 `SP_JuliusMystery2023_Decoration_Slot27_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_JuliusMystery2023_Decoration_Slot27, event=Julius' Mystery, eventKey=SP_JuliusMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MADDIE** (Encouraging): Did my family travel in these too?
+**ANTIQUEDEALER** (Thinking): That’s the curious thing. It seems like a lot of information has gone missing!
+**ANTIQUEDEALER** (Thinking): Every time I seem to get close to an answer, I come to a dead end.
+**MADDIE**: Trust me... I know the feeling.
+**ANTIQUEDEALER** (Doubtful): Why would someone want to keep information about balloons secret?
 
 ### Julius' Mystery — decoration SP_JuliusMystery2023_Decoration_Slot28
 `SP_JuliusMystery2023_Decoration_Slot28_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_JuliusMystery2023_Decoration_Slot28, event=Julius' Mystery, eventKey=SP_JuliusMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MADDIE**: This is some very interesting stuff! You connected all this to my family?
+**ANTIQUEDEALER** (Doubtful): It looks like a lot of my collection at the shop previously belonged to them.
+**MADDIE** (Surprised): How interesting! Wait... is this a pirate coat?!
+**GRANDMA** (Annoyed): Seriously, Julius. Don’t you have anything better to do than dig up my family history?!
+**ANTIQUEDEALER** (Worried): But- But you asked me to-
+**MASON** (Joyous): Did someone say PIRATES?!
 
 ### Julius' Mystery — item discovered: SP_JuliusMystery2023_CollectableItems_04
 `SP_JuliusMystery2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.09.02–26.07.01
 - trigger: item, event=Julius' Mystery, eventKey=SP_JuliusMystery2023, itemKeys=['SP_JuliusMystery2023_CollectableItems_04'], items=['SP_JuliusMystery2023_CollectableItems_04'], moment=item discovered (versions 23.09.02–26.07.01)
 
+**ANTIQUEDEALER**: Maddie, can I show you something?
+**MADDIE** (Encouraging): Sure! What is it?
+**ANTIQUEDEALER** (Thinking): My research still has some holes in it, especially concerning your family lineage...
+**ANTIQUEDEALER** (Doubtful): But it looks like your family has heraldic origins, but for the life of me, I can’t find any coat of arms!
+**ANTIQUEDEALER** (Discouraged): It’s as if someone has removed it from history! So I...
+**ANTIQUEDEALER** (Worried): I made you a new one based on your family’s latest history and achievements.
+**MADDIE** (Charming): Oh Julius... It’s beautiful!
 
 ### Lights for the Lost — outro
 `SP_LostLights2026_AllRewardsCompleted_Dialogue` · seen 26.07.01–26.07.01
@@ -2523,7 +2552,7 @@ Every story in which AntiqueDealer speaks.
 **ANTIQUEDEALER** (Encouraging): I am glad you could finally participate, Maddie.
 **ANTIQUEDEALER**: It is quite the spectacle, even if you do not have anyone you are saying goodbye to.
 **GRANDMA** (Relaxed): What do both of you say to some mulled wine to warm us up after that boat ride?  
-  _earlier:_ ~~What do both you say to some mulled wine to warm us up after that boat ride?~~ (until 26.07.01)
+  _(1 cosmetic edit not shown)_
 **GRANDMA** (Charming): I have some pictures in the family photo album to show you. And some more funny stories.
 **MADDIE** (Encouraging): That sounds wonderful, Grandma.
 
@@ -2732,6 +2761,14 @@ Every story in which AntiqueDealer speaks.
 `SP_SpringSeason2023_Decoration_27_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_SpringSeason2023_Decoration_27, event=Spring Season, eventKey=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MADDIE** (Joyous): Heey, I remember this guy, Hopeberry Juice Man! This festival sure brings back some memories!
+**ANTIQUEDEALER** (Relaxed): That it does! Did you know that the Kite Festival goes all the way back to the foundation of Hopewell Bay?
+**MADDIE** (Relaxed): No! It's that old?!
+**ANTIQUEDEALER** (Charming): Yesiree. Benjamin Franklin himself would often visit the festival!
+**MADDIE** (Surprised): Really?!
+**ANTIQUEDEALER** (Relaxed): That's what they say. Ha! That's how he got his idea for the kite expirement!
+**MADDIE** (Doubtful): Oh come on, Julius. You expect me to believe that?!
+**ANTIQUEDEALER** (Relaxed): Well... It's a reasonable assumption!
 
 ### Season Pass - Soccer Watch Party — decoration SP_WorldCup2026_Decoration_Slot33
 `SP_WorldCup2026_Decoration_Slot33_Dialogue` · seen 26.04.01–26.07.01
@@ -2748,7 +2785,7 @@ Every story in which AntiqueDealer speaks.
 - trigger: area, area=Tennis Court, areaId=TennisCourt, hotspotId=TennisCourtTopRightWallRemoveWeedsC11, phase=task completed, task=Remove weeds (versions 24.04.01–26.07.01)
 
 **MADDIE**: Hi, Julius! What brings you round?  
-  _earlier:_ ~~Hi Julius! What brings you round?~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **ANTIQUEDEALER**: In truth, I was taking a little tour of the grounds. I didn't expect anyone to be up here.
 **ANTIQUEDEALER** (Doubtful): I thought that this area of the estate was well and truly closed.
 **ANTIQUEDEALER** (Thinking): Were you about to play a game?
@@ -2762,13 +2799,33 @@ Every story in which AntiqueDealer speaks.
 `Valentine2022Decoration13` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**MADDIE** (Joyous): Hearts here, hearts there, hearts everywhere!
+**ANTIQUEDEALER** (Surprised): Well, that’s an impressive confession of love!
+**ANTIQUEDEALER**: Who’s the lucky one?
+**MADDIE** (Charming): Oh, no one special! Just spreading happiness around the neighbourhood!
+**ANTIQUEDEALER** (Encouraging): Apologies! Ursula just said you were dating some handsome buil–
+**MADDIE** (Frustrated): Building inspector! Of course, she said that!
+**MADDIE** (Thinking): I’m almost starting to think she knows something that I don’t…
+**ANTIQUEDEALER** (Doubtful): Well, it wouldn't be the first time, right?
 
 ### Valentine2022Decoration6
 `Valentine2022Decoration6` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**ANTIQUEDEALER** (Surprised): Are those Ursula’s roses?
+**MADDIE**: I guess they are! I planted them for Valentine’s Day!
+**ANTIQUEDEALER** (Frustrated): Valentine's Day! Of course! I totally forgot to get flowers for your grandma…
+**MADDIE** (Charming): You can pick a few from here if you like!
+**ANTIQUEDEALER** (Encouraging): Oh wow! Thanks, but I’ll pass… These roses might remind her of those stormy times with--
+**ANTIQUEDEALER**: Oh my, I really shouldn’t talk about that. See you around!
+**MADDIE** (Surprised): Wait!! Grandma had stormy times with who?!
 
 ### Xmas2021Decoration14
 `Xmas2021Decoration14` · seen 22.02.06–22.02.06
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
+**ANTIQUEDEALER** (Surprised): Wow… I can’t believe that’s the same gate I ran over with my car!
+**MADDIE**: I’m glad you like it! Are you here to see grandma?
+**ANTIQUEDEALER** (Doubtful): Oh, Ursula? Yes, but just stopping by to wish her a merry Christmas!
+**MADDIE** (Thinking): Hmm… Could that explain why she was so excited this morning?
+**ANTIQUEDEALER** (Encouraging): Well, it’s exciting to meet a good friend, right? I'd better go now.

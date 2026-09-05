@@ -8,11 +8,10 @@
 **MADDIE** (Relaxed): You sure know how to throw a great party, Grandma!
 **GRANDMA**: Oh, dearie, it was nothing.
 **GRANDMA** (Encouraging): Bella and Emilio are wonderful organizers. All I did was supply the location.  
-  _earlier:_ ~~Bella and Emilio a wonderful organizers. All I did was supply the location.~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **EMILIO** (Joyous): And the delicious enchiladas!
 **BELLA** (Annoyed): And the steel baseball bat! It really did the trick on the ol' piñata!
-**MADDIE** (Encouraging): Too bad the candy inside had gotten old.  
-  _earlier:_ ~~Too bad the candy inside had gotten old. ~~ (until 26.02.03)
+**MADDIE** (Encouraging): Too bad the candy inside had gotten old.
 **BELLA**: Ha! It's fine. What matters is that I finally got my REVENGE!
 **GRANDMA** (Joyous): Oh! I really do like her!
 
@@ -24,7 +23,7 @@
 **EMILIO** (Joyous): This looks perfect!
 **GRANDMA** (Charming): Excellent!
 **BELLA** (Relaxed): Ooh, Hopeberry Juice! My favorite!  
-  _earlier:_ ~~Ooh, Hopeberry Juice! My favourite!~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **EMILIO** (Encouraging): This should be plenty for everyone!
 **GRANDMA** (Joyous): Oh, dearie! This is only half of it!
 **EMILIO** (Surprised): Half?!
@@ -39,8 +38,7 @@
 **GRANDMA** (Charming): We've used this area for everything from festivals, weddings and funerals.
 **GRANDMA** (Charming): Why not also throw a few parties here?
 **MADDIE** (Relaxed): Nothing wrong with that!
-**EMILIO** (Charming): Nothing at all!  
-  _earlier:_ ~~Nothing at all! ~~ (until 26.02.03)
+**EMILIO** (Charming): Nothing at all!
 
 ### Season Pass - Flavors of Tradition — decoration SP_CinqoDeMayo2026_Decoration_Slot35
 `SP_CinqoDeMayo2026_Decoration_Slot35_Dialogue` · seen 26.03.01–26.07.01

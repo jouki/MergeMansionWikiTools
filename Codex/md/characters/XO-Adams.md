@@ -35,4 +35,4 @@ Every story in which XO Adams speaks.
 **GRANDMA**: To be honest, dearie, it wasn’t that difficult. Corruption usually leaves a mess behind it. I just happen to be a good cleaner.
 **XO ADAMS**: That you are. Now with this information, we should have enough to take on the Warden!
 **GRANDMA**: Not yet. I need to find more pieces of vital evidence before we can take him down.  
-  _earlier:_ ~~Not yet. I need to find a find more pieces of vital evidence before we can take him down.~~ (until 24.09.02)
+  _(1 cosmetic edit not shown)_

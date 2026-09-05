@@ -57,7 +57,7 @@
 
 **MADDIE** (Surprised): W-what! My head is spinning! This painting was a door the whole time?!
 **MADDIE** (Thinking): And now that conveyor belt under the bed makes sense!  
-  _earlier:_ ~~And now that conveyor belt under the bad makes sense!~~ (until 26.04.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Thinking): The bedposts triggered the bed to move forward and opened this 'door'!
 **MADDIE** (Doubtful): Grandma really is always two steps ahead of me!
 
@@ -206,3 +206,4 @@ The door will shift between the lines.'
   _earlier:_ ~~Well, I wouldn’t put it past Grandma to have one more hidden passage up her sleeve.~~ (until 25.10.01)
 **MADDIE** (Thinking): Well, this here is a hand. I thought it was just eccentric decor, but perhaps I should place the watch here.  
   _earlier:_ ~~I wonder where it leads?~~ (until 25.10.01)
+**—**: Probably something important if it was hidden like this.

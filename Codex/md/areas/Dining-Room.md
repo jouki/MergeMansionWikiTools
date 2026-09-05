@@ -27,7 +27,7 @@
 - trigger: area, area=Dining Room, areaId=DiningRoom, hotspotId=DiningRoomPlaceChairB5, phase=task completed, task=Polish and place the chair back (versions 24.04.01–26.07.01)
 
 **RODDY**: Hi, Maddie, Winston let me in and... wait, is everything okay? You look upset.  
-  _earlier:_ ~~Hi Maddie, Winston let me in and... Wait, is everything okay? You look upset.~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Worried): Hi, Roddy. I... I guess not. 
 **MADDIE** (Frustrated): It's this Mansion. Ever since I've opened it, in hopes to clear Grandma's name, I've been learning... things.
 **RODDY** (Thinking): What kind of things? 

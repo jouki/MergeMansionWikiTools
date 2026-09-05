@@ -77,7 +77,7 @@ Every story in which Victoria speaks.
 **VICTORIA** (Calling): ...
 **MADDIE** (Talking): I mean - there's a jar here with the Blackwood and the Boulton name on it.
 **VICTORIA** (Talking): I know what you meant. But I'm not talking about it over the phone. I'm coming over.  
-  _earlier:_ ~~I know what you meant. But I'm not talking about it over the phone. I'm coming there.~~ (until 26.06.02)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Calling): You... *click*
 **MADDIE** (Thinking): Interesting. So it's not news to her, it seems...
 
@@ -97,7 +97,7 @@ Every story in which Victoria speaks.
 **MADDIE** (Discouraged): Victoria, I didn't even know the Blackwoods existed before I came here!
 **MADDIE** (Worried): I have no quarrel with your family - yet you seem to hate us just for existing.
 **VICTORIA** (Relaxed): How surprising. Yet another thing your dear Grandma decided to keep from you.  
-  _earlier:_ ~~How surprising. Yet another thing your dear grandma decided to keep from you.~~ (until 26.06.02)
+  _(1 cosmetic edit not shown)_
 **VICTORIA** (Encouraging): Well, I won't spare you. Get ready for some truly horrifying revelations about your family...
 
 ### FirstFloorPantry 11
@@ -198,7 +198,22 @@ Every story in which Victoria speaks.
 **VICTORIA** (Discouraged): Pfft! Excuses again. I should have torn down this monstrosity when I had the chance!
 **MADDIE** (Frustrated): You'll be hearing from my husband soon enough. He'll take you through the plans.
 **VICTORIA**: Plans? What plans?!
-**—**: And just so you know, these shoes are vintage Manuelo's! Expect a bill.
+**VICTORIA**: And just so you know, these shoes are vintage Manuelo's! Expect a bill.
+
+### Maddieroom 02
+`Maddieroom_02` · seen 25.05.01–26.07.01
+- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+
+**MADDIE**: Victoria! What do you want?
+**MADDIE**: It's over!
+**VICTORIA** (Frustrated): Over? OVER?! It isn't over until I DECIDE it is! Do you hear me?! 
+**VICTORIA** (Worried): Because of YOU, my precious Bruno is now rotting in a jail cell! 
+**MADDIE**: Good! He deserves to-
+**VICTORIA** (Doubtful): You have no idea who and what you're dealing with, Maddie! 
+**VICTORIA** (Frustrated): But I'll make sure you and your grandmother learn by the end of it... Oh, I'll make sure!
+**VICTORIA** (Frustrated): *Click*
+**MADDIE** (Worried): *Gulp*
+**GRANDMA**: Who was that, dearie? I could hear their voice in the hallway!
 
 ### Maddieroom Intro
 `Maddieroom_Intro` · seen 25.05.01–26.07.01
@@ -287,13 +302,34 @@ Every story in which Victoria speaks.
 `SP_PieWars2023_Decoration_Slot25_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot25, event=Pie Wars, eventKey=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MADDIE** (Surprised): You're not fooling around, Grandma!
+**GRANDMA**: Just a bit of promotion, dearie. 
+**MADDIE** (Annoyed): It looks like you're running for office! Mind you, the head of City Council could do with a change...
+**VICTORIA** (Thinking): I see we have an unsanctioned bake sale. No matter... It won't save your mansion. You'd need to bake a lot of pies to do that.
+**GRANDMA** (Relaxed): Ah Victoria, speak of the devil. I see that you're still rocking those horns! Good for you! 
+**VICTORIA** (Frustrated): How dare- Hmph!
+**MADDIE** (Surprised): Remind me to never be on your bad side...
 
 ### Pie Wars — decoration SP_PieWars2023_Decoration_Slot26
 `SP_PieWars2023_Decoration_Slot26_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot26, event=Pie Wars, eventKey=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MADDIE** (Charming): Mmm... That smells delicious! Hoping to lure more people in?
+**GRANDMA** (Charming): Hoping? I may need to move inside! I'm having trouble handling the demand!
+**MADDIE** (Doubtful): Only you'd get upset when things go well, Grandma!
+**CHERRY** (Doubtful): Hey! I could smell that all the way in my bakery! Do you really think that's fair?
+**GRANDMA** (Thinking): All's fair in pies and war, dearie...
+**CHERRY** (Annoyed): Oh I see... It's war then. 
+**VICTORIA** (Thinking): ...
+**VICTORIA** (Charming): Interesting... Looks like Ursula and Cherry are having a bit of a competition...
 
 ### Pie Wars — decoration SP_PieWars2023_Decoration_Slot29
 `SP_PieWars2023_Decoration_Slot29_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_PieWars2023_Decoration_Slot29, event=Pie Wars, eventKey=SP_PieWars2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MADDIE** (Doubtful): Victoria! What are you trying to do to that balloon?
+**VICTORIA** (Annoyed): Er... Do you have a license for this? Unsanctioned balloons may pose a flight risk! 
+**MADDIE** (Annoyed): Hey, wait a minute! You're behind all the trouble with Cherry and Grandma, aren't you?!
+**VICTORIA** (Frustrated): How dare you! I've never been so insulted in my life! 
+**MADDIE** (Annoyed): Uh huh, sure... You should leave, before Grandma finds you!
+**VICTORIA** (Doubtful): Hmph!

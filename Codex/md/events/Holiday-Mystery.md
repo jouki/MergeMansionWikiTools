@@ -105,8 +105,7 @@
 - trigger: decoration, decoration=SP_XmasMystery2024_Decoration_Slot34, event=Holiday Mystery, eventKey=SP_XmasMystery2024, moment=decoration placed (versions 25.05.01–26.07.01)
 
 **MADDIE** (Relaxed): This spread is amazing, you guys!
-**CHERRY** (Thinking): Your risotto is... interesting. Did you mean for it to be this "al dente", or did the stove just quit on you?  
-  _earlier:_ ~~Your risotto is… interesting. Did you mean for it to be this "al dente", or did the stove just quit on you?~~ (until 25.10.01)
+**CHERRY** (Thinking): Your risotto is... interesting. Did you mean for it to be this "al dente", or did the stove just quit on you?
 **GRANDMA** (Doubtful): It’s called “texture.” Not everything needs to be boiled into submission like your very ambitious soufflé.
 **CHERRY** (Annoyed): You mean the soufflé that’s actually risen? I wasn’t sure if the “decadent” dessert you're serving is meant to look like a pancake.
 **GRANDMA** (Frustrated): At least one of us is serving something memorable tonight...

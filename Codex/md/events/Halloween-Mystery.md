@@ -85,4 +85,4 @@
 **JACKIE** (Encouraging): Let me publish an ad for it in the paper. I know it doesn't make up for anything, but let me help. Please?
 **MADDIE** (Thinking): Whatever, it's not like anyone's coming anyway.
 **JACKIE**: You might be wrong about that. We can make the ad funny and inviting.
-**—**: I want to save our friendship. Please, let me try.
+**JACKIE**: I want to save our friendship. Please, let me try.

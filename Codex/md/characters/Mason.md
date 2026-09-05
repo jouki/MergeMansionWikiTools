@@ -334,7 +334,7 @@ Every story in which Mason speaks.
 **MASON**: Wow... I didn't know I'd get so much for my school desk. I'm sure the teacher won't notice!
 **MASON**: Hold on... My mom is calling.
 **MASON** (Calling): Hi, Mom! Yeah, it's going great! No, I haven't done anything embarrassing yet...  
-  _earlier:_ ~~Hi Mom! Yeah, it's going great! No, I haven't done anything embarrasing yet...~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 
 ### Egg Hunt 2023 — item discovered: Toad Terrarium
 `CBE_Easter2023_Frog` · seen 23.09.02–26.07.01
@@ -374,7 +374,7 @@ Every story in which Mason speaks.
 
 **MADDIE** (Joyous): Aaah, Spring... Everything feels so alive!
 **MADDIE**: Hi, Mason!  
-  _earlier:_ ~~Hi Mason!~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **MASON** (Doubtful): I brought you something... Mom said I had to.
 **MADDIE** (Surprised): Oh wow... Did you make this?
 **MASON** (Discouraged): Yeah... I just... If you don't like it, you can throw it away.
@@ -492,8 +492,7 @@ Every story in which Mason speaks.
 
 **MASON**: I don’t get how you can say there’s no such thing as ghosts. We’ve seen so many of them already!
 **MASON**: If anything, we’ve proved that I’m right and that the Mansion is haunted.
-**MADDIE** (Thinking): There must be more to this...  
-  _earlier:_ ~~There must be more to this…~~ (until 25.10.01)
+**MADDIE** (Thinking): There must be more to this...
 
 ### Haunted Halloween — item discovered: Glowing Paint
 `CBE_Halloween2025_Clues_04_Dialogue` · seen 26.03.01–26.07.01
@@ -530,8 +529,7 @@ Every story in which Mason speaks.
 - trigger: decoration, decoration=CBE_Halloween2025_Decoration_Slot22, event=Haunted Halloween, eventKey=CBE_Halloween2025, moment=decoration placed (versions 26.03.01–26.07.01)
 
 **MADDIE**: Let's say you're right and the Mansion is haunted. Who do you think is haunting it?
-**MASON** (Thinking): Take your pick! There's Ignatius with his weird machines, Lindsay with her spray cans, Grandpa Charlie who disappeared so mysteriously...  
-  _earlier:_ ~~Take your pick! There’s Ignatius with his weird machines, Lindsay with her spray cans, Grandpa Charlie who disappeared so mysteriously…~~ (until 25.10.01)
+**MASON** (Thinking): Take your pick! There's Ignatius with his weird machines, Lindsay with her spray cans, Grandpa Charlie who disappeared so mysteriously...
 **MADDIE** (Thinking): The place does have a LOT of history, but all of those people would be friendly spirits.
 **MADDIE** (Thinking): I’m going to show you, Mason - the Mansion is NOT haunted.
 
@@ -670,8 +668,7 @@ Every story in which Mason speaks.
 
 **MADDIE** (Encouraging): These jack o’lanterns are looking great.
 **MASON**: Awesome! Let’s go set up the ghost trap in the attic next.
-**MADDIE** (Surprised): Hang on... Wh-what is THAT??  
-  _earlier:_ ~~Hang on… Wh-what is THAT??~~ (until 25.10.01)
+**MADDIE** (Surprised): Hang on... Wh-what is THAT??
 **MASON** (Surprised): A ghost pumpkin! This is it - the hunt is on!
 
 ### Haunted Halloween — item discovered: Big Pumpkin
@@ -685,13 +682,11 @@ Every story in which Mason speaks.
 `CBE_Halloween2025_Pumpkin_04_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Pumpkin_04'], items=['Carved Pumpkin'], moment=item discovered (versions 26.03.01–26.07.01)
 
-**MADDIE** (Thinking): This is getting kinda eerie... I know I said ghosts aren't real, but there is definitely something going on!  
-  _earlier:_ ~~This is getting kinda eerie… I know I said ghosts aren't real, but there is definitely something going on!~~ (until 25.10.01)
+**MADDIE** (Thinking): This is getting kinda eerie... I know I said ghosts aren't real, but there is definitely something going on!
 **MASON**: I told you!
 **MADDIE** (Thinking): But there must be a reasonable explanation.
 **MASON** (Thinking): Like what?
-**MADDIE** (Hesitant): Like... the moonlight hit that pumpkin in a weird way, or maybe Grandma used some special growing agent.  
-  _earlier:_ ~~Like… the moonlight hit that pumpkin in a weird way, or maybe Grandma used some special growing agent.~~ (until 25.10.01)
+**MADDIE** (Hesitant): Like... the moonlight hit that pumpkin in a weird way, or maybe Grandma used some special growing agent.
 **MASON** (Thinking): To make it glow in the dark like a menacing veggie monster?
 
 ### Haunted Halloween — item discovered: Haunted Coffin
@@ -717,8 +712,7 @@ Every story in which Mason speaks.
 **MADDIE** (Surprised): I think your movies have too much goo! Look!!
 **MASON** (Surprised): A haunted movie tape! The ghosts must know what we’re up to.
 **MADDIE** (Thinking): That’s true. They’ve been following us all night.
-**MADDIE** (Doubtful): Hmm... There’s something fishy about this!  
-  _earlier:_ ~~Hmm… There’s something fishy about this!~~ (until 25.10.01)
+**MADDIE** (Doubtful): Hmm... There’s something fishy about this!
 
 ### Haunted Halloween — item discovered: Armchair
 `CBE_Halloween2025_Theater_03_Dialogue` · seen 26.03.01–26.07.01
@@ -779,8 +773,7 @@ Every story in which Mason speaks.
 - trigger: item, event=Haunted Halloween, eventKey=CBE_Halloween2025, itemKeys=['CBE_Halloween2025_Unmasking_03'], items=['Dropped Note'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Thinking): What’s this? A sheet?
-**MASON** (Thinking): Looks like... a ghost costume!  
-  _earlier:_ ~~Looks like… a ghost costume!~~ (until 25.10.01)
+**MASON** (Thinking): Looks like... a ghost costume!
 **MADDIE** (Doubtful): Ha! We are close!
 
 ### Haunted Halloween — item discovered: Notebook
@@ -816,6 +809,9 @@ Every story in which Mason speaks.
   _earlier:_ ~~Is there anything I could help Santa with?~~ (until 25.10.01)
 **RODDY** (Charming): Let me ask you first: are you interested in some less-than-premium holiday crafts?  
   _earlier:_ ~~Sure... Hold on. You don't mean your homemade pottery?~~ (until 25.10.01)
+**BELLA** (Doubtful): Maybe, maybe not. It's not very nice to make fun of other people's work, you know.
+**MASON** (Joyous): *Sigh* You're right. I would love a teapot for Xmas.
+**BELLA** (Thinking): Hmmm...
 
 ### Maddie In Paris — decoration CBE_MaddieInParis2025_Decoration_Slot14
 `CBE_MaddieInParis2025_Slot_14_Dialogue` · seen 25.05.01–26.07.01
@@ -863,7 +859,7 @@ Every story in which Mason speaks.
 **MADDIE** (Relaxed): The place looks wonderful, Mason - great job!
 **MASON**: Thank you! I hope you're ready for the egg hunt to end all egg hunts!
 **MADDIE** (Doubtful): Mason? Where did you go?
-**—**: Mason??
+**MASON**: Mason??
 **MASON**: This Easter egg hunt will not be like any you've done before...
 **MASON**: Seek high and low, turn every stone and use your wits to decode the CLUES I've left you!
 **MADDIE** (Relaxed): You --
@@ -1064,7 +1060,7 @@ Every story in which Mason speaks.
 
 **MADDIE** (Thinking): This Easter Extravaganza looks pretty cool, but what about the chocolate machine?
 **MADDIE** (Thinking): The main tank needs to be refilled regularly, and someone needs to supervise the quality.  
-  _earlier:_ ~~The main tank needs to refilled regularly, and someone needs to supervise the quality.~~ (until 26.02.03)
+  _(1 cosmetic edit not shown)_
 **MASON** (Thinking): Easy! We can ask Roddy and Hank to babysit.
 **MADDIE** (Worried): Hmmm, I don't know about that...
 **MASON** (Encouraging): They might be hopeless with buttons, but they’re grown-ups, they mean well, and between the two of them they can at least keep the chocolate inside the machine.
@@ -1087,7 +1083,7 @@ Every story in which Mason speaks.
 - trigger: item, event=Grandma's Pool Party, eventKey=LDE_GrandmasBirthday2023, itemKeys=['LDE_GrandmasBirthday2023_Floaties_07'], items=['Inflatable Pool Slide'], moment=item discovered (versions 23.09.02–26.07.01)
 
 **MASON** (Joyous): Hi, Maddie! Look what I got for your grandma!  
-  _earlier:_ ~~Hi Maddie! Look what I got for your grandma!~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Surprised): Oh, wow... Do you think that’ll even fit into the pool?!
 **MASON** (Annoyed): How small a pool we talking here, lady?
 **MADDIE** (Surprised): Well, er...
@@ -1259,7 +1255,7 @@ Every story in which Mason speaks.
 - trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_ClockBTurned_01'], items=['Fancy Longcase Clock - Turned'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **HANK**: Did you set that clock forward or back?  
-  _earlier:_ ~~Did you turn that clock forward or back?~~ (until 25.10.01)
+  _(1 cosmetic edit not shown)_
 **MASON** (Relaxed): Who cares? It's the holidays, and we're making more time for opening presents and eating gingerbread.
 **MASON** (Relaxed): Right, Grandma?
 **GRANDMA** (Relaxed): That's close enough, Mason.
@@ -1268,8 +1264,7 @@ Every story in which Mason speaks.
 `LDE_HolidayOddities2025_ClockCTurned_01_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_ClockCTurned_01'], items=['Royal Longcase Clock - Turned'], moment=item discovered (versions 26.03.01–26.07.01)
 
-**RODDY** (Thinking): This is the last clock. Maybe we should leave one to show the real time, though. You know, just in case...  
-  _earlier:_ ~~This is the last clock. Maybe we should leave one to show the real time, though. You know, just in case…~~ (until 25.10.01)
+**RODDY** (Thinking): This is the last clock. Maybe we should leave one to show the real time, though. You know, just in case...
 **MASON** (Relaxed): Traditions are traditions, Roddy. Change the time!  
   _earlier:_ ~~Traditions are traditions, Roddy. Turn the clock!~~ (until 25.10.01)
 **RODDY** (Worried): But--
@@ -1336,8 +1331,7 @@ Every story in which Mason speaks.
 **GRANDMA** (Encouraging): I could not have done this on my own. The Mansion looks wonderful, and everything is ready for a celebration.
 **MASON** (Encouraging): It’s what friends are for. And we all love Maddie - she’s the best! Right, guys?
 **HANK**: Totally! The pleasure was ours.
-**RODDY** (Charming): Y-yeah, we love Maddie...  
-  _earlier:_ ~~Y-yeah, we love Maddie…~~ (until 25.10.01)
+**RODDY** (Charming): Y-yeah, we love Maddie...
 **MASON** (Relaxed): Don’t make this weird, Roddy. Come on, hot chocolates are on me!
 **RODDY** (Relaxed): Sounds good.
 **HANK** (Encouraging): Hey, guys? Happy holidays! I’m glad I get to spend them with you.
@@ -1357,8 +1351,7 @@ Every story in which Mason speaks.
 `LDE_HolidayOddities2025_SockWG_01_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_SockWG_01'], items=['White & Green Stripes'], moment=item discovered (versions 26.03.01–26.07.01)
 
-**GRANDMA** (Thinking): Good job! We have some great socks and some... well, not so great ones.  
-  _earlier:_ ~~Good job! We have some great socks and some… well, not so great ones.~~ (until 25.10.01)
+**GRANDMA** (Thinking): Good job! We have some great socks and some... well, not so great ones.
 **RODDY** (Surprised): Hey!
 **GRANDMA** (Encouraging): I do appreciate your effort, of course. Now they just need to be wrapped and placed under the tree.
 **MASON**: We’re on the home stretch now!
@@ -1386,8 +1379,7 @@ Every story in which Mason speaks.
 
 **HANK**: I already tried one soup. Someone else can taste this one.
 **RODDY** (Worried): Mason, how about you do it?
-**MASON** (Charming): But I’m only a child...  
-  _earlier:_ ~~But I’m only a child…~~ (until 25.10.01)
+**MASON** (Charming): But I’m only a child...
 **RODDY** (Frustrated): Ugh, fine.
 **RODDY** (Relaxed): Huh! This soup is actually not bad!
 
@@ -1399,8 +1391,7 @@ Every story in which Mason speaks.
 **MASON**: Roddy, you do it.
 **RODDY** (Charming): I think Hank has the best palate.
 **HANK** (Joyous): It's true. My palette has all the colors!
-**HANK** (Thinking): Let me get a big spoonful. Here goes! Mmm... this soup... is HORRIBLE.  
-  _earlier:_ ~~Let me get a big spoonful. Here goes! Mmm... this soup… is HORRIBLE.~~ (until 25.10.01)
+**HANK** (Thinking): Let me get a big spoonful. Here goes! Mmm... this soup... is HORRIBLE.
 
 ### Holiday Oddities — item discovered: Bunch of Sticks
 `LDE_HolidayOddities2025_StickBasket_03_Dialogue` · seen 26.03.01–26.07.01
@@ -1428,8 +1419,7 @@ Every story in which Mason speaks.
 `LDE_HolidayOddities2025_StickBasket_07_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_StickBasket_07'], items=['Full Basket'], moment=item discovered (versions 26.03.01–26.07.01)
 
-**HANK** (Encouraging): We’ve got acorns...  
-  _earlier:_ ~~We’ve got acorns…~~ (until 25.10.01)
+**HANK** (Encouraging): We’ve got acorns...
 **MASON**: And pinecones and walnuts!
 **GRANDMA** (Encouraging): Wonderful! Now we just need to find the perfect tree!
 
@@ -1437,10 +1427,8 @@ Every story in which Mason speaks.
 `LDE_HolidayOddities2025_TC3_Dialogue` · seen 26.02.01–26.07.01
 - trigger: unknown, hint=Leaderboard Decoration Event (versions None–None)
 
-**MADDIE** (Surprised): What is this?? The tree is up and decorated, there are presents, and there’s even some... Is that soup?  
-  _earlier:_ ~~What is this?? The tree is up and decorated, there are presents, and there’s even some… Is that soup?~~ (until 25.10.01)
-**MADDIE** (Relaxed): It’s like a...  
-  _earlier:_ ~~It’s like a…~~ (until 25.10.01)
+**MADDIE** (Surprised): What is this?? The tree is up and decorated, there are presents, and there’s even some... Is that soup?
+**MADDIE** (Relaxed): It’s like a...
 **MASON** (Relaxed): Holiday miracle?
 **MADDIE** (Encouraging): Exactly. Did you do all of this?
 **HANK**: We did!
@@ -1463,8 +1451,7 @@ Every story in which Mason speaks.
 `LDE_HolidayOddities2025_Timepieces_07_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Holiday Oddities, eventKey=LDE_HolidayOddities2025, itemKeys=['LDE_HolidayOddities2025_Timepieces_07'], items=['LDE_HolidayOddities2025_Timepieces_07'], moment=item discovered (versions 26.03.01–26.07.01)
 
-**MASON** (Thinking): Will we turn the old longcase clock as well? It feels sort of naughty, like I'm about to get told off...  
-  _earlier:_ ~~Will we turn the old longcase clock as well? It feels sort of naughty, like I'm about to get told off…~~ (until 25.10.01)
+**MASON** (Thinking): Will we turn the old longcase clock as well? It feels sort of naughty, like I'm about to get told off...
 **GRANDMA**: I am giving you my permission. We will turn them back after the holidays, anyway.
 
 ### Holiday Oddities — item discovered: Hand Saw
@@ -2110,7 +2097,7 @@ Every story in which Mason speaks.
   _earlier:_ ~~Why? I thought you were friends.~~ (until 25.09.01)
 **MASON** (Thinking): Guys, we can do better!  
   _earlier:_ ~~We are, dearie, but I know her better than you think.~~ (until 25.09.01)
-**—**: I know she is impressive, but she has a lot of secrets.
+**MASON** (Thinking): I know she is impressive, but she has a lot of secrets.
 **MADDIE** (Relaxed): Thanks for the heads up, Grandma, but I think you might just be paranoid!
 
 ### Circus Caper — item discovered: Small Circus Program
@@ -2118,12 +2105,12 @@ Every story in which Mason speaks.
 - trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Brochures_03'], items=['Small Circus Program'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Thinking): We need to think of an act that will really stop people in their tracks. Like...  
-  _earlier:_ ~~Have you seen Fiona anywhere?~~ (until 25.09.01); ~~We need to think of an act that will really stop people in their tracks. Like…~~ (until 25.10.01)
+  _earlier:_ ~~Have you seen Fiona anywhere?~~ (until 25.09.01)
 **MASON** (Joyous): A knife wheel!  
   _earlier:_ ~~She said she was going to the dress rehearsal, but I can't find her anywhere.~~ (until 25.09.01)
 **HANK** (Thinking): That sounds... dangerous.  
-  _earlier:_ ~~I ran out of circus brochures, but I know I saw more of them somewhere.~~ (until 25.09.01); ~~That sounds… dangerous.~~ (until 25.10.01)
-**—**: No, haven't seen her... She's probably just getting ready for the show.
+  _earlier:_ ~~I ran out of circus brochures, but I know I saw more of them somewhere.~~ (until 25.09.01)
+**HANK** (Thinking): No, haven't seen her... She's probably just getting ready for the show.
 **MADDIE**: Of course. But I don't want to disturb her...
 **PEARL** (Doubtful): I'm sure she won't mind if you get more brochures from her wagon.
 
@@ -2137,7 +2124,7 @@ Every story in which Mason speaks.
   _earlier:_ ~~This wagon is a mess!~~ (until 25.09.01)
 **MASON** (Annoyed): FOAM knives? Those are for babies!  
   _earlier:_ ~~I guess people who work in the circus are pretty bohemian, but maybe I could help Fiona and straighten the place out.~~ (until 25.09.01)
-**—**: These old crumpled leaflets can probably go in the dumpster.
+**MASON** (Annoyed): These old crumpled leaflets can probably go in the dumpster.
 
 ### Circus Caper — item discovered: Shooting Gallery
 `LDE_Rumors2025_CarnivalGames_03_Dialogue` · seen 25.05.01–26.07.01
@@ -2146,9 +2133,9 @@ Every story in which Mason speaks.
 **HANK**: Can you juggle?  
   _earlier:_ ~~I don't want to toot my own horn, but I'm pretty good at throwing.~~ (until 25.09.01)
 **MASON** (Thinking): Not yet. Let me try...  
-  _earlier:_ ~~You don't say!~~ (until 25.09.01); ~~Not yet. Let me try…~~ (until 25.10.01)
+  _earlier:_ ~~You don't say!~~ (until 25.09.01)
 **HANK** (Thinking): Be careful, those balls look kinda heavy...  
-  _earlier:_ ~~I could probably win you the main prize, if you wanted.~~ (until 25.09.01); ~~Be careful, those balls look kinda heavy…~~ (until 25.10.01)
+  _earlier:_ ~~I could probably win you the main prize, if you wanted.~~ (until 25.09.01)
 **MASON**: I can handle them! Give me another one!  
   _earlier:_ ~~Aww, thanks little guy... Maybe I'll win it for you first.~~ (until 25.09.01)
 **HANK** (Encouraging): OK, if you’re sure.
@@ -2160,7 +2147,7 @@ Every story in which Mason speaks.
 - trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CarnivalGames_07'], items=['Prize Stand'], moment=item discovered (versions 25.05.01–26.07.01)
 
 **RODDY** (Thinking): What are you doing? I don’t think you should be touching the carnival games and the circus equipment...  
-  _earlier:_ ~~Everybody knows these things are always rigged!~~ (until 25.09.01); ~~What are you doing? I don’t think you should be touching the carnival games and the circus equipment…~~ (until 25.10.01)
+  _earlier:_ ~~Everybody knows these things are always rigged!~~ (until 25.09.01)
 **MASON** (Surprised): We have permission!  
   _earlier:_ ~~I know - totally rigged!~~ (until 25.09.01)
 **HANK**: He’s telling the truth. The ringmaster told us we could totally try stuff out.  
@@ -2184,8 +2171,7 @@ Every story in which Mason speaks.
 - trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_Prizes_11'], items=['Stuffed Unicorn'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): Where’s Hank? And Roddy?
-**MASON** (Doubtful): Oh, they... they're coming in a minute. They're just kind of tied up at the moment...  
-  _earlier:_ ~~Oh, they… they're coming in a minute. They're just kind of tied up at the moment…~~ (until 25.10.01)
+**MASON** (Doubtful): Oh, they... they're coming in a minute. They're just kind of tied up at the moment...
 **MASON** (Doubtful): Actually, I have to go find the key for some chains.
 **MADDIE** (Thinking): Chains?
 **MASON** (Worried): Never mind.
@@ -2213,8 +2199,7 @@ Every story in which Mason speaks.
 - trigger: item, event=Circus Caper, eventKey=LDE_Rumors2025, itemKeys=['LDE_Rumors2025_CircusProps_06'], items=['Circus Stand'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MASON** (Worried): I’m Mason, and this is Hank.
-**HANK** (Charming): Um, hi...  
-  _earlier:_ ~~Um, hi…~~ (until 25.10.01)
+**HANK** (Charming): Um, hi...
 **MASON** (Charming): We were just admiring all of your circus equipment! It’s SO cool!
 **RINGLEADER**: So you’re Mason! Maddie told me you wanted to learn about the Circus.
 **MASON**: See, Hank! I DO have permission. Where can I start?
@@ -2245,7 +2230,7 @@ Every story in which Mason speaks.
   _earlier:_ ~~Too long to remember. It is nice to see you again, Fiona.~~ (until 25.09.01)
 **MASON** (Joyous): Like tightrope-walking!  
   _earlier:_ ~~You look well. Still traveling and performing, I see.~~ (until 25.09.01)
-**—**: You two know each other??
+**MASON** (Joyous): You two know each other??
 **RINGLEADER** (Relaxed): Oh, yes. We go WAY back. Don't we, Ursula?
 **RINGLEADER** (Relaxed): We slept in the same wagon back in the day. We trained together and shared so many stories.
 **RINGLEADER** (Relaxed): About this place too!
@@ -2265,7 +2250,7 @@ Every story in which Mason speaks.
   _earlier:_ ~~<i>With sleight of hand, it slips away, vanishing in the light of day.</i>~~ (until 25.09.01)
 **HANK** (Annoyed): S-seriously?  
   _earlier:_ ~~<i>What</i> slips away?~~ (until 25.09.01)
-**—**: Pfft, cryptic as always!
+**HANK** (Annoyed): Pfft, cryptic as always!
 
 ### Circus Caper — item discovered: Heist Plan
 `LDE_Rumors2025_HeistPlan_03_Dialogue` · seen 25.05.01–26.07.01
@@ -2281,8 +2266,7 @@ Every story in which Mason speaks.
   _earlier:_ ~~She completely took advantage of me!~~ (until 25.09.01)
 **MASON** (Encouraging): Right again!  
   _earlier:_ ~~The perfect sleight of hand, indeed.~~ (until 25.09.01)
-**RODDY** (Worried): Looks... interesting.  
-  _earlier:_ ~~Looks… interesting.~~ (until 25.10.01)
+**RODDY** (Worried): Looks... interesting.
 **HANK** (Thinking): And kinda weird.
 
 ### Circus Caper — item discovered: Escape Vehicle
@@ -2300,10 +2284,11 @@ Every story in which Mason speaks.
 **HANK** (Charming): Umm, is your trick safe?  
   _earlier:_ ~~I almost pulled it off, too!~~ (until 25.09.01)
 **MASON**: TOTALLY safe.  
-  _earlier:_ ~~I'd be only my jolly way by now if it wasn't for your meddling granddaughter!~~ (until 25.03.01); ~~I'd be on my jolly way by now if it weren't for your meddling granddaughter!~~ (until 25.09.01)
+  _earlier:_ ~~I'd be on my jolly way by now if it weren't for your meddling granddaughter!~~ (until 25.09.01)  
+  _(1 cosmetic edit not shown)_
 **HANK** (Joyous): OK, then. Just don’t lose the key, little guy!  
   _earlier:_ ~~Just tell me, where is it?~~ (until 25.09.01)
-**—**: What?
+**HANK** (Joyous): What?
 **RINGLEADER** (Surprised): The damned Boultonite!
 **GRANDMA** (Surprised): So that's what you were after...
 **RINGLEADER** (Doubtful): You didn't think I want to tour with the Circus for the rest of my life, did you?
@@ -2374,8 +2359,8 @@ Every story in which Mason speaks.
 **MASON** (Thinking): Could we shoot Roddy out of a cannon? You’ve done it once, haven’t you?  
   _earlier:_ ~~These scraps are starting to look kinda suspicious.~~ (until 25.09.01)
 **RODDY** (Surprised): Y-yes, but maybe we could do something less... explosive?  
-  _earlier:_ ~~There's a list of things in the Mansion, but some of them have been crossed out.~~ (until 25.09.01); ~~Y-yes, but maybe we could do something less… explosive?~~ (until 25.10.01)
-**—**: It's almost like some kind of... shopping list for a thief!
+  _earlier:_ ~~There's a list of things in the Mansion, but some of them have been crossed out.~~ (until 25.09.01)
+**RODDY** (Surprised): It's almost like some kind of... shopping list for a thief!
 
 ### Circus Caper — item discovered: Wardrobe
 `LDE_Rumors2025_RingmasterSuit_05_Dialogue` · seen 25.05.01–26.07.01
@@ -2435,7 +2420,7 @@ Every story in which Mason speaks.
   _earlier:_ ~~No, but I wouldn't be surprised if they had something to do with it.~~ (until 25.09.01)
 **MASON** (Thinking): It sure looks that way!  
   _earlier:_ ~~I am serious, dear. Things have been moved around, but nothing seems to be missing.~~ (until 25.09.01)
-**—**: See? You're just being paranoid.
+**MASON** (Thinking): See? You're just being paranoid.
 **GRANDMA** (Annoyed): Let's hope so...
 
 ### Circus Caper — item discovered: Lock Pick Set
@@ -2448,7 +2433,7 @@ Every story in which Mason speaks.
   _earlier:_ ~~A set of lock picks!~~ (until 25.09.01)
 **RODDY** (Encouraging): What kind of a trick could they be used for?  
   _earlier:_ ~~Maybe Grandma wasn't just being paranoid... Maybe there IS something going on.~~ (until 25.09.01)
-**—**: Fiona!
+**RODDY** (Encouraging): Fiona!
 **MADDIE** (Thinking): Look what I found.
 **RINGLEADER** (Surprised): Lock-picks? Where did you find those?
 **MADDIE** (Thinking): They were hidden in some bushes right next to the Mansion.
@@ -2617,6 +2602,12 @@ Every story in which Mason speaks.
 `SP_JuliusMystery2023_Decoration_Slot28_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_JuliusMystery2023_Decoration_Slot28, event=Julius' Mystery, eventKey=SP_JuliusMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MADDIE**: This is some very interesting stuff! You connected all this to my family?
+**ANTIQUEDEALER** (Doubtful): It looks like a lot of my collection at the shop previously belonged to them.
+**MADDIE** (Surprised): How interesting! Wait... is this a pirate coat?!
+**GRANDMA** (Annoyed): Seriously, Julius. Don’t you have anything better to do than dig up my family history?!
+**ANTIQUEDEALER** (Worried): But- But you asked me to-
+**MASON** (Joyous): Did someone say PIRATES?!
 
 ### Holiday Mystery — decoration SP_MasonsMystery2023_Decoration_Slot29
 `SP_MasonsMystery2023_Decoration_Slot29_Dialogue` · seen 23.11.02–26.07.01
@@ -2642,7 +2633,7 @@ Every story in which Mason speaks.
 **PEARL** (Doubtful): Hello, mom.
 **MADDIE** (Hesitant): Eeh, so you heard, huh?
 **PEARL** (Annoyed): To be brutally honest, you’ve been more of a mom to him than Charlotte lately.  
-  _earlier:_ ~~To be brutally honest, you’ve been more of a mom to her than Charlotte lately.~~ (until 25.10.01)
+  _(1 cosmetic edit not shown)_
 **PEARL** (Encouraging): So I’ll let it pass.
 **MADDIE** (Encouraging): Pearl, you shouldn’t be too hard on her.
 **MADDIE** (Thinking): While I don’t know her, I can’t help but feel she has a very good reason she couldn’t make it.
@@ -2985,26 +2976,61 @@ Every story in which Mason speaks.
 `SP_RoddysMystery2023_Decoration_Slot26_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_RoddysMystery2023_Decoration_Slot26, event=Roddy's Mystery, eventKey=SP_RoddysMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**RODDY** (Encouraging): Do you want to go canoeing, Mason?
+**MASON** (Thinking): No, not really. Unless...
+**RODDY** (Doubtful): Unless what?
+**MASON** (Joyous): Unless there's some old cursed ghost out at sea, waiting to pull us into the dark depths of the abyss!
+**RODDY** (Surprised): Gosh, I hope not! I was thinking more about seeing the wildlife and taking in the Bay view!
+**MASON** (Annoyed): Ugh, how boooring!
+**GRANDMA** (Surprised): Roddy... <b>WHERE ARE MY ROSES?!</b>
+**RODDY** (Worried): Oh, uhm.. We needed space for the canoe and... I asked the kids to move them!
 
 ### Roddy's Mystery — decoration SP_RoddysMystery2023_Decoration_Slot27
 `SP_RoddysMystery2023_Decoration_Slot27_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_RoddysMystery2023_Decoration_Slot27, event=Roddy's Mystery, eventKey=SP_RoddysMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**RODDY** (Encouraging): Isn't this fun?!
+**MASON** (Thinking): Yeah... I guess it's alright. I haven't seen any ghosts yet, though.
+**RODDY** (Charming): Oh, well, how about I tell you a spooky campfire story?
+**MASON** (Encouraging): Yeah, alright! 
+**RODDY** (Doubtful): Okay... Not so long ago, around these parts liv- wait... Did you see that?!
+**MASON** (Doubtful): See what?
+**RODDY** (Worried): Th- That! A- A GHOST!
+**MASON** (Worried): WHAT?! 
+**RODDY** (Surprised): Aaaaiiieeee!
+**MASON** (Surprised): Aaaaiiieeee!
 
 ### Roddy's Mystery — decoration SP_RoddysMystery2023_Decoration_Slot28
 `SP_RoddysMystery2023_Decoration_Slot28_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_RoddysMystery2023_Decoration_Slot28, event=Roddy's Mystery, eventKey=SP_RoddysMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MASON**: C'mon Roddy! In order to catch a ghost, we need to improve our aim!
+**RODDY** (Worried): I... I don't know about this Mason. Who is that ghost, and why are they h-haunting ME?!
+**MASON** (Frustrated): Restless spirits care not for the will of the living! We must be prepared!
+**RODDY**: ...
+**RODDY**: You're a weird kid.
 
 ### Roddy's Mystery — decoration SP_RoddysMystery2023_Decoration_Slot29
 `SP_RoddysMystery2023_Decoration_Slot29_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_RoddysMystery2023_Decoration_Slot29, event=Roddy's Mystery, eventKey=SP_RoddysMystery2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MASON** (Encouraging): From what I've read, ghosts LOVE the attic! So if we climb in from both sides, I'm sure we can catch it!
+**RODDY** (Worried): Catch it?! No! I want it out of here!
+**GRANDMA**: Out of my home, dearie? 
+**RODDY** (Surprised): Mrs. Boulton! wh- What are you doing here?
+**GRANDMA** (Worried): I'm sorry, dearie, I believe my joke has gone a little too far!
+**RODDY** (Doubtful): JOKE?!
 
 ### Roddy's Mystery — item discovered: SP_RoddysMystery2023_CollectableItems_04
 `SP_RoddysMystery2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.09.02–26.07.01
 - trigger: item, event=Roddy's Mystery, eventKey=SP_RoddysMystery2023, itemKeys=['SP_RoddysMystery2023_CollectableItems_04'], items=['SP_RoddysMystery2023_CollectableItems_04'], moment=item discovered (versions 23.09.02–26.07.01)
 
+**RODDY** (Relaxed): Well done, Mason! You've gotten almost all the merit badges!
+**RODDY**: Although... I don't quite recognize this last one...
+**MASON** (Encouraging): Oh that? It's my own design! For ghost hunting!
+**RODDY** (Worried): Gh- Ghosts? What are you talking about? 
+**MASON** (Surprised): Don't you know? They say the Mansion is haunted! 
+**MASON** (Joyous): And I'm here to catch some ghosts!
 
 ### Splash of Mystery — decoration SP_SplashMystery2025_Decoration_Slot33
 `SP_SplashMystery2025_Decoration_Slot33_Dialogue` · seen 25.05.01–26.07.01
@@ -3071,6 +3097,14 @@ Every story in which Mason speaks.
 `SP_SpringSeason2023_Decoration_26_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_SpringSeason2023_Decoration_26, event=Spring Season, eventKey=SP_SpringSeason2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**JACKIE** (Thinking): I think the length of the tail should be longer.
+**RODDY** (Thinking): Wouldn't be realistic, what if we make the supports wider?
+**JACKIE** (Encouraging): Good idea!
+**MADDIE** (Charming): Aaaw, look at you two getting along!
+**MASON** (Doubtful): They're not...
+**MADDIE** (Surprised): Mason?!
+**MASON** (Encouraging): Yep. I'm actually building the kite for the both of them. They refuse to talk to each other.
+**MADDIE** (Annoyed): At least that's something they have in common...
 
 ### The Winds of Mystery — decoration SP_TheWindOfMystery2024_Decoration_Slot32
 `SP_TheWindOfMystery2024_Decoration_Slot32_Dialogue` · seen 25.05.01–26.07.01

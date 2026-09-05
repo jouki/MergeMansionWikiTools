@@ -8,7 +8,7 @@
 **PEARL** (Doubtful): Hello, mom.
 **MADDIE** (Hesitant): Eeh, so you heard, huh?
 **PEARL** (Annoyed): To be brutally honest, you’ve been more of a mom to him than Charlotte lately.  
-  _earlier:_ ~~To be brutally honest, you’ve been more of a mom to her than Charlotte lately.~~ (until 25.10.01)
+  _(1 cosmetic edit not shown)_
 **PEARL** (Encouraging): So I’ll let it pass.
 **MADDIE** (Encouraging): Pearl, you shouldn’t be too hard on her.
 **MADDIE** (Thinking): While I don’t know her, I can’t help but feel she has a very good reason she couldn’t make it.

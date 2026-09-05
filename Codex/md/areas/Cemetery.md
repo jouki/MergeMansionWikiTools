@@ -18,7 +18,7 @@
 - trigger: area, area=Cemetery, areaId=Cemetery, hotspotId=CemeteryRemoveEmblemCoverL1, phase=task completed, task=Uncover stone emblem (versions 24.04.01–26.07.01)
 
 **MADDIE** (Charming): Hi, Roddy! Sorry you caught me in the cemetery.  
-  _earlier:_ ~~Hi Roddy! Sorry you caught me in the cemetery.~~ (until 23.12.01)
+  _(1 cosmetic edit not shown)_
 **RODDY** (Charming): Don't be! I think cemeteries are kind of... romantic.
 **RODDY** (Worried): Well, uh, I'm here because I heard a rumor that the local council are really out to get you now.
 **MADDIE** (Annoyed): I know! They sent around a photographer, Holden, to check up on me.

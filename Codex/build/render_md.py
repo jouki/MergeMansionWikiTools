@@ -3,10 +3,12 @@
 import collections
 import os
 import re
+import shutil
 import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 import common  # noqa: E402
+import reruns  # noqa: E402
 
 
 def slug(name):
@@ -14,7 +16,12 @@ def slug(name):
 
 
 def latest(run_list):
-    return run_list[-1]["value"] if run_list else None
+    """Last NON-EMPTY value. Content removed from the game vanishes from newer localizations, so the last run of
+    a removed line is None while its real text (and speaker) sits one run earlier."""
+    for r in reversed(run_list or []):
+        if r["value"] not in (None, "", []):
+            return r["value"]
+    return None
 
 
 def story_title(sid, story):
@@ -60,8 +67,15 @@ def story_md(sid, story, codex):
         line = f"**{who}**" + (f" ({st})" if st and st not in ("Default", "NoChange") else "") + f": {text}"
         prev = [r for r in l["text"] if r["value"] not in (None, "")]
         if len(prev) > 1:
-            hist = "; ".join(f'~~{p["value"]}~~ (until {q["from"]})' for p, q in zip(prev[:-1], prev[1:]))
-            line += f"  \n  _earlier:_ {hist}"
+            # only real rewrites are shown as earlier wording; typo/punctuation/markup fixes are counted, not listed
+            edits = [(p, q, reruns.classify_change(p["value"], q["value"])) for p, q in zip(prev[:-1], prev[1:])
+                     if reruns.norm(p["value"]) != reruns.norm(q["value"])]
+            rewrites = [(p, q) for p, q, k in edits if k == "rewritten"]
+            cosmetic = len(edits) - len(rewrites)
+            if rewrites:
+                line += "  \n  _earlier:_ " + "; ".join(f'~~{p["value"]}~~ (until {q["from"]})' for p, q in rewrites)
+            if cosmetic:
+                line += f"  \n  _({cosmetic} cosmetic edit{'s' if cosmetic > 1 else ''} not shown)_"
         out.append(line)
     out.append("")
     return "\n".join(out)
@@ -70,6 +84,8 @@ def story_md(sid, story, codex):
 def main():
     codex = common.read_json(os.path.join(common.CODEX, "codex.json"))
     md_root = os.path.join(common.CODEX, "md")
+    for sub in ("areas", "events", "characters", "discord", "misc"):     # stale files from earlier renders must not linger
+        shutil.rmtree(os.path.join(md_root, sub), ignore_errors=True)
     by_area, by_event, unknown, removed = collections.defaultdict(list), collections.defaultdict(list), [], []
     cur = codex["versions"][-1]
     for sid, s in sorted(codex["stories"].items()):
@@ -117,6 +133,12 @@ def main():
     write("misc/unknown-trigger.md", "Stories without a known trigger", unknown, "Trigger hints are prefix guesses — see build/prefixes.json.")
     index.append(f"- [Removed from the game](misc/removed.md) ({len(removed)})")
     write("misc/removed.md", "Stories removed from the game", removed, "Present in an older version, absent from the current one.")
+    # event reruns (families with several runs, verdict per story pair, hand-written notes) — same code as reruns.py
+    fams = reruns.build(codex)
+    common.write_json(os.path.join(common.CODEX, "reruns.json"), fams)
+    with open(os.path.join(md_root, "misc", "reruns.md"), "w", encoding="utf-8", newline="\n") as f:
+        f.write(reruns.render_md(fams))
+    index.append(f"- [Event reruns](misc/reruns.md) ({len(fams)} families)")
     # Discord screenshots (OCR) — lower-trust source, kept apart from game-data stories
     dd_path = os.path.join(common.CODEX, "discord_dialogues.json")
     if os.path.exists(dd_path):

@@ -9,7 +9,7 @@
 **MADDIE**: Old recipes can be such a lovely glimpse into the past.
 **MADDIE** (Frustrated): Even if sometimes the recipes can be...interesting.
 **MADDIE** (Frustrated): Let's hope the gelatin-based ones are in a minority...  
-  _earlier:_ ~~Let's hope the gelatin based ones are in a minority...~~ (until 26.06.02)
+  _(1 cosmetic edit not shown)_
 **MADDIE**: Looks like a bunch of recipes for jam! Guess it's always run in the family...
 **MADDIE** (Thinking): ...except this one says 'Blackwood'. Looks like a family recipe.
 **MADDIE** (Thinking): Blackwood. Why does that name seem so familiar?
@@ -26,7 +26,7 @@
 **MADDIE** (Talking): Arthur! Oh my gosh - are you okay?
 **ARTHUR** (Talking): The doctors said I should call...my loved ones...before my surgery.
 **MADDIE** (Talking): What?! Your surgery?!  
-  _earlier:_ ~~What?! Your surgery!?~~ (until 26.06.02)
+  _(1 cosmetic edit not shown)_
 **ARTHUR** (Talking): Don't worry about me...Mads...or do...a little bit.
 **MADDIE** (Talking): You don't sound so good. Do you need me to come to the hospital?
 **ARTHUR** (Talking): Oh! Um. No. *cough* Better not. I am...contagious.
@@ -107,39 +107,39 @@
 **MADDIE**: Everyone knows there's a secret Hopewell Bay Hopeberry Jam recipe. I thought this was it, but...nope!
 **CHERRY**: You mean Grandma's recipe? I'm pretty sure these are older than her.
 **MADDIE**: Exactly! No, I've only tasted it in jam from old jars with a special butterfly logo on them!
-**—**: I see...
-**—**: Anyway, let's continue restocking these shelves!
+**MADDIE** (Thinking): I see...
+**MADDIE**: Anyway, let's continue restocking these shelves!
 
 ### Pantry: Add more flowers
 `FirstFloorPantry_CharacterTask4` · seen 26.07.01–26.07.01
 - trigger: area, area=Pantry, areaId=FirstFloorPantry, hotspotId=FirstFloorPantryCharacterTask42, phase=task completed, task=Add more flowers (versions 26.07.01–26.07.01)
 
-**—**: Looks like we've got everything back to its old glory, more or less!
-**—**: You know my mother used to come here every week with fresh produce for the kitchen.
-**—**: Of course that all stopped when they shut it all down.
-**—**: So I'm glad I can pick up the tradition again!
-**—**: I mean - I don't know if we're going to need to fire up the WHOLE kitchen again...
-**—**: It's quite a lot for just Grandma and me...
-**—**: We can use it! With all the events, parties and gatherings you've hosted here since you started renovations...
-**—**: ...no dust will gather in this kitchen again! I promise you that!
-**—**: Aww. That'd be nice. Speaking of dust...
-**—**: We better clean up a little, yes!
+**MADDIE** (Encouraging): Looks like we've got everything back to its old glory, more or less!
+**MADDIE** (Encouraging): You know my mother used to come here every week with fresh produce for the kitchen.
+**MADDIE**: Of course that all stopped when they shut it all down.
+**MADDIE**: So I'm glad I can pick up the tradition again!
+**MADDIE** (Doubtful): I mean - I don't know if we're going to need to fire up the WHOLE kitchen again...
+**MADDIE** (Doubtful): It's quite a lot for just Grandma and me...
+**MADDIE** (Surprised): We can use it! With all the events, parties and gatherings you've hosted here since you started renovations...
+**MADDIE** (Surprised): ...no dust will gather in this kitchen again! I promise you that!
+**MADDIE** (Encouraging): Aww. That'd be nice. Speaking of dust...
+**MADDIE** (Charming): We better clean up a little, yes!
 
 ### Pantry: Tape the recipe cards together
 `FirstFloorPantry_CharacterTask5` · seen 26.07.01–26.07.01
 - trigger: area, area=Pantry, areaId=FirstFloorPantry, hotspotId=FirstFloorPantryCharacterTask60, phase=task completed, task=Tape the recipe cards together (versions 26.07.01–26.07.01)
 
-**—**: So, Cherry, before you go - I found this jar when I was cleaning.
-**—**: Is that...that's the logo! The butterfly logo!
-**—**: Actually, that's a double B-logo. Boulton and....Blackwood.
-**—**: Blackwood? What have they got to do with this?
-**—**: It looks like my great-grandmother, Agatha, was friends with Christine Blackwood.  
-  _earlier:_ ~~It looks like my great-grandmother Agatha was friends with Christine Blackwood.~~ (until 26.06.02)
-**—**: They developed the recipe for this jam together.
-**—**: Well, isn't that surprising! Did you find the recipe too?
-**—**: Uhh, maybe. I have a lot of old recipe cards here! One of them is probably it!
-**—**: I wish I could stay and try a few more...but maybe later!
-**—**: Sure, Cherry! Thanks for all the help!
+**MADDIE**: So, Cherry, before you go - I found this jar when I was cleaning.
+**MADDIE**: Is that...that's the logo! The butterfly logo!
+**MADDIE**: Actually, that's a double B-logo. Boulton and....Blackwood.
+**MADDIE** (Thinking): Blackwood? What have they got to do with this?
+**MADDIE**: It looks like my great-grandmother, Agatha, was friends with Christine Blackwood.  
+  _(1 cosmetic edit not shown)_
+**MADDIE**: They developed the recipe for this jam together.
+**MADDIE**: Well, isn't that surprising! Did you find the recipe too?
+**MADDIE** (Thinking): Uhh, maybe. I have a lot of old recipe cards here! One of them is probably it!
+**MADDIE**: I wish I could stay and try a few more...but maybe later!
+**MADDIE** (Encouraging): Sure, Cherry! Thanks for all the help!
 
 ### Pantry: Clean the table
 `FirstFloorPantry_POI_CentralTable` · seen 26.07.01–26.07.01

@@ -20,7 +20,7 @@
 **MADDIE** (Thinking): "Found along the northern cliffs, 1968." That's pretty specific. Imagine how many hands these passed through before ending up here.
 **JACKIE** (Encouraging): The Boultons never threw away an interesting rock.
 **MADDIE** (Encouraging): Good thing, too. Otherwise, we'd never have found any of this.  
-  _earlier:_ ~~Good thing, too. Otherwise we'd never have found any of this.~~ (until 26.06.01)
+  _(1 cosmetic edit not shown)_
 
 ### Good Vibrations — decoration SP_GoodVibrations2026_Decoration_Slot26
 `SP_GoodVibrations2026_Decoration_Slot26_Dialogue` · seen 26.06.01–26.07.01
@@ -82,7 +82,7 @@
 
 **MADDIE**: Here's the last box. Wait... why is it so heavy?
 **JACKIE** (Thinking): There's a huge gray rock inside! Let's handle it carefully. It might be fragile.  
-  _earlier:_ ~~There's a huge grey rock inside! Let's handle it carefully. It might be fragile.~~ (until 26.06.01)
+  _(1 cosmetic edit not shown)_
 **JACKIE**: Carefully now... Don't trip over those box--
 **MADDIE** (Surprised): Whooooah!
 **JACKIE** (Surprised): Maddie, are you okay??

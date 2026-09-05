@@ -182,7 +182,8 @@ def build():
         char_names.update(dl.get("CharacterNames") or {})
         for d in dl.get("Dialogues") or []:
             sp, st = speaker_of(d)
-            line_meta[d["DialogItemId"]][v] = (sp, st, d.get("LeftCharacter"), d.get("RightCharacter"), d.get("LocalizationId"), d.get("Text"))
+            line_meta[d["DialogItemId"]][v] = (sp, st, d.get("LeftCharacter"), d.get("RightCharacter"), d.get("LocalizationId"), d.get("Text"),
+                                               bool(d.get("LeftSpeaks")), bool(d.get("RightSpeaks")), d.get("LeftCharacterState"), d.get("RightCharacterState"))
     story_defs_by_ver = {}
     for v in vers:
         defs = {}
@@ -336,7 +337,7 @@ def build():
         trig_sids_here = {v: {s for s, _ in trig_by_ver[v]} for v in vers}
         order_pairs = []
         for v in vers:
-            ids = story_defs_by_ver[v].get(sid)
+            ids = story_defs_by_ver[v].get(sid) or None      # an empty DialogItems list in an old dump = unknown
             if ids is None and sid in trig_sids_here[v]:
                 ids = lines_by_convention(sid)
             order_pairs.append((v, ids if ids else None))
@@ -358,6 +359,43 @@ def build():
         stories[g] = {"lines": [{"from": seen[0] if seen else vers[0], "value": ids}],
                       "triggers": [{"kind": "unknown", "hint": classify_prefix(g, prefixes)}],
                       "seen": {"first": seen[0], "last": seen[-1]} if seen else None}
+
+    # 3b) "NoChange" on a side = the character who stood on that side in the previous line of the same story
+    #     (same for the state). Walk every story in its per-version order and rewrite speaker/state runs.
+    resolved = {}
+    for sid, st in stories.items():
+        for v in vers:
+            ids = common.value_at(st["lines"], v, vers) or []
+            cur = {"L": None, "R": None, "LS": None, "RS": None}
+            last = None                                   # who spoke last: a line with neither flag continues them
+            for lid in ids:
+                m = line_meta.get(lid, {}).get(v)
+                if not m or len(m) < 10:
+                    continue
+                left, right, lspeaks, rspeaks, lstate, rstate = m[2], m[3], m[6], m[7], m[8], m[9]
+                if left not in NOT_A_SPEAKER:
+                    cur["L"] = left
+                if right not in NOT_A_SPEAKER:
+                    cur["R"] = right
+                if lstate and lstate != "NoChange":
+                    cur["LS"] = lstate
+                if rstate and rstate != "NoChange":
+                    cur["RS"] = rstate
+                if lspeaks:
+                    resolved[(lid, v)] = (cur["L"], cur["LS"])
+                elif rspeaks:
+                    resolved[(lid, v)] = (cur["R"], cur["RS"])
+                elif m[5] or common.value_at(lines[lid]["text"], v, vers):   # spoken text, no flag: continuation of the last speaker
+                    who = last[0] if last else cur["L"]
+                    resolved[(lid, v)] = (who, cur["LS"] if who == cur["L"] else cur["RS"])
+                if (lid, v) in resolved and resolved[(lid, v)][0]:
+                    last = resolved[(lid, v)]
+    for lid, line in lines.items():
+        meta = line_meta.get(lid, {})
+        if not meta:
+            continue
+        line["speaker"] = common.runs([(v, resolved.get((lid, v), (meta[v][0], meta[v][1]))[0]) for v in vers if v in meta])
+        line["state"] = common.runs([(v, resolved.get((lid, v), (meta[v][0], meta[v][1]))[1]) for v in vers if v in meta])
 
     # 4) items / tasks / events text runs
     items, tasks, events_out = {}, {}, {}

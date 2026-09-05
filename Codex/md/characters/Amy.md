@@ -5,18 +5,51 @@ Every story in which Amy speaks.
 `SP_AmyTheCat2023_Decoration_Slot25_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot25, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**AMY**: Meow...
+**MADDIE** (Frustrated): Amy! No wait! Come back!
+**MADDIE** (Surprised): Aww shucks, off she goes again. Wait! Did she drop something? A goldfish?!
+**RODDY** (Surprised): Actually, that looks like a Betta Fish.
+**MADDIE** (Doubtful): Hi Roddy! Is that what it is? Well, I hope Amy hasn’t fished it out of someone’s aquarium...
+**RODDY** (Doubtful): Amy?
+**MADDIE** (Thinking): This cat I’ve seen around lately... You wouldn’t happen to know who owns her?
+**RODDY** (Thinking): Hmmm... Not really no. Maybe she’s a stray from out of town?
+**MADDIE**: Alright... Well, I gotta find this little fish a new home, fast!
 
 ### Amy's Mystery — decoration SP_AmyTheCat2023_Decoration_Slot26
 `SP_AmyTheCat2023_Decoration_Slot26_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot26, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**MADDIE**: There! I dare any cat to ignore the majesty of...
+**MADDIE** (Joyous): <b>KITTY CASTLE!</b>
+**AMY**: Meow...
+**MADDIE**: A ha! Never in doubt. Now, little Amy, let’s see who your owner is, shall we?
+**DEB**: Looks like the cat dropped something.
+**AMY** (Surprised): !!!!
+**MADDIE**: There she goes again! Let's see… Another exotic fish!
+**DEB** (Encouraging): You know you can go to the pet shop for those, right?
+**MADDIE** (Thinking): That’s what I’m afraid of. This cat has been bringing me some really strange fish! I wonder who she belongs to...
+**DEB** (Thinking): A lot of people own cats in Hopewell Bay, but there’s a handsome marine biologist who may help you figure out the fish?
 
 ### Amy's Mystery — decoration SP_AmyTheCat2023_Decoration_Slot28
 `SP_AmyTheCat2023_Decoration_Slot28_Dialogue` · seen 23.09.02–26.07.01
 - trigger: decoration, decoration=SP_AmyTheCat2023_Decoration_Slot28, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, moment=decoration placed (versions 23.09.02–26.07.01)
 
+**DEB**: Oh Maddie! Good thing I found you! Have you seen my sis Ursula around?
+**MADDIE**: Hi Deb, no... I haven’t, actually!
+**GRANDMA** (Joyous): Whoose a good kitty? You are! Yes, you are!
+**MADDIE** (Encouraging): Ah, there she is! I guess she found Amy. That cat is a bit of a mystery. I’ve been trying to figure out who she belongs to.
+**GRANDMA** (Relaxed): Is that your name? What a pretty pretty name!
+**AMY** (Relaxed): Purr... Purr...
 
 ### Amy's Mystery — item discovered: SP_AmyTheCat2023_CollectableItems_04
 `SP_AmyTheCat2023_LastCollectibleItemDiscovered_Dialogue` · seen 23.09.02–26.07.01
 - trigger: item, event=Amy's Mystery, eventKey=SP_AmyTheCat2023, itemKeys=['SP_AmyTheCat2023_CollectableItems_04'], items=['SP_AmyTheCat2023_CollectableItems_04'], moment=item discovered (versions 23.09.02–26.07.01)
 
+**GRANDMA**: Don’t worry little Amy, if we don’t find your owner, you’ll have a nice home right here!
+**AMY** (Relaxed): Purr... Purr...
+**MADDIE** (Joyous): I guess she’ll have plenty of fish friends too! Look at all of them!
+**GRANDMA** (Relaxed): That’s the spirit, dearie!
+**MADDIE**: Well, until I find her owner, I guess there’s no harm in keeping Amy here.
+**MADDIE** (Thinking): But these fish, however... Some of them seem very exotic for our little pond.
+**GRANDMA**: That’s alright, I called the marine biologist from the Aquarium to come and have a look!
+**MADDIE** (Joyous): Great!

@@ -47,7 +47,7 @@
 **MADDIE** (Thinking): Who would want to come in here?!
 **MADDIE** (Thinking): And rummage around Dad’s old stuff?
 **MADDIE** (Doubtful): It looks like they turned the place over, pretty good as well...
-**—**: I wonder what they were looking for?
+**MADDIE** (Doubtful): I wonder what they were looking for?
 
 ### Parents' Room: Place plane model
 `ParentsRoom15` · seen 25.07.01–26.07.01

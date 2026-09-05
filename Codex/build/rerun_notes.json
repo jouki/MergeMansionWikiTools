@@ -1,0 +1,15 @@
+{
+  "_comment": "Hand-written reading of each rerun family (Codex/reruns.json). 'sequel' = the later run stages the event as happening again with a NEW script (story-relevant); 'variant' = same script with small restructuring; 'identical' = same script. Reviewed 2026-09-05 from the intro dialogues of each run.",
+  "CBE_Easter": "sequel — 2023 'Egg Hunt' (Detective Mason vs. the rabbit) → 2025 (Mason excited about Maddie's bigger-than-ever egg hunt). Same theme, entirely new script; no line reused.",
+  "CBE_MaddieInParis": "sequel — 2025 run is Maddie BACK from Paris telling Julius about it; the 2026 rerun stages the trip again from the departure (packing, Grandma offers to come along). No line reused; both runs are story-relevant.",
+  "CBE_TheGreatEscape": "variant — run B (25.05–25.06) keeps 8 of the stories word for word, replaces 3 with 2 new ones (Maddie meeting Grandma after the arrest). Same plot, restructured opening; treat as one story with two openings.",
+  "CBE_VeilOfFate": "sequel — 2023 (Grandma and Lady Voyance, the snow globe vibrating) → 2024 (Maddie alone again after Emilio left, consulting the veil). Continuation of Maddie's love-life arc; nothing reused.",
+  "LC_Halloween": "sequel (short) — 2025 fishing rerun keeps only 2 stories with a new intro ('Rise and shine, dearie!'); the 16 item dialogues of the first run were not carried over.",
+  "LC_Summer": "rerun with new script — 2026 run has 5 stories but their texts are not in any localization we own (empty in the codex); first run = Emilio takes Grandma fishing.",
+  "LDE_GreenAcresQuest": "sequel — 2024 (Emilio is back with 'her', Maddie stays cool) → 2026 (Maddie proud of the finished community garden). Two stories identical, the rest new.",
+  "LDE_Hopeberry": "sequel — 2024 (Deb and Pearl grill Maddie about her love life) → 2025 (Roddy after the break-up with Jackie). Same festival, next year's plot; nothing reused.",
+  "LDE_PicnicConfusion": "sequel — 2023 (the rusty truck, the big picnic) → 2024 (Jackie and Roddy's relationship). One story rewritten, the rest new.",
+  "LDE_PiratesOfHopewellBay": "sequel — 2023 (Mason hunts treasure maps in the attic) → 2024 (Grandma tells the family pirate story). Nothing reused.",
+  "LS_Summer": "sequel — 2025 (Julius: binoculars at the ready) → 2026 (new summer birding season, camera bag and foldable chair). Nothing reused.",
+  "LS_Winter": "first run (LS_Winter) has a single story without text in our sources; the 2024 run is the real script (Julius: 'Have you wrapped up warm?')."
+}

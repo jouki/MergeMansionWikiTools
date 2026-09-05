@@ -102,8 +102,7 @@ Every story in which Arthur speaks.
 **ARTHUR** (Thinking): I guess our last date didn't go so well since you haven't called me much after...
 **MADDIE** (Doubtful): It wasn't a date.
 **MADDIE** (Annoyed): But I admit, I'm surprised you even realized that "it" went poorly.
-**ARTHUR** (Charming): Mads...  
-  _earlier:_ ~~Mads... ~~ (until 26.06.01)
+**ARTHUR** (Charming): Mads...
 **ARTHUR**: I'm so sorry. Please. Let me make it up to you. I promised a meal, after all?
 **MADDIE** (Doubtful): Look, I'm really busy here.
 **ARTHUR** (Doubtful): Really?
@@ -118,12 +117,11 @@ Every story in which Arthur speaks.
 **MADDIE** (Encouraging): All I see is potential!
 **ARTHUR** (Relaxed): Potential to make a lot of cash...
 **ARTHUR** (Relaxed): Consider it Mads... If you sell this place, the lump sum you'd get would be-  
-  _earlier:_ ~~Consider it Mads... If you sell this place, the lumpsum you'd get would be-~~ (until 26.05.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Annoyed): You think I'd sell this place after everything I've done to keep it?!
 **MADDIE** (Annoyed): You have no idea what this place is worth, do you?
 **ARTHUR** (Frustrated): I'm only looking out for your best interests... Unlike your friend, Roddy.
-**MADDIE** (Annoyed): What has Roddy got to do with any of this?  
-  _earlier:_ ~~What has Roddy got to do with any of this? ~~ (until 26.06.01)
+**MADDIE** (Annoyed): What has Roddy got to do with any of this?
 **MADDIE** (Annoyed): Besides... He'd never say the things you do.
 
 ### FirstFloorKitchen 05
@@ -170,19 +168,23 @@ Every story in which Arthur speaks.
 **MADDIE** (Doubtful): Just ignore him Roddy.
 **ARTHUR** (Charming): Hey! Did I ever get to show you my INSANE knife skills?
 **ARTHUR** (Charming): I was personally trained by a three-star chef, you know...  
-  _earlier:_ ~~I was personally trained by a three star chef, you know...~~ (until 26.06.01)
+  _(1 cosmetic edit not shown)_
 **ARTHUR** (Thinking): Some of the techniques have been kept secret since the Middle Ages!  
-  _earlier:_ ~~Some of these techniques have been kept secret since the middle ages!~~ (until 26.05.01); ~~Some of the techniques have been kept secret since the middle ages!~~ (until 26.06.01)
+  _(2 cosmetic edits not shown)_
 **RODDY** (Doubtful): Oh, please...  
-  _earlier:_ ~~Okay... I admit, you've learned some new skills!~~ (until 26.05.01); ~~Oh please...~~ (until 26.06.01)
+  _earlier:_ ~~Okay... I admit, you've learned some new skills!~~ (until 26.05.01)  
+  _(1 cosmetic edit not shown)_
 **ARTHUR** (Doubtful): Behold the ignorance of jealousy, Mads.  
   _earlier:_ ~~Oh please... He's holding the knife all wrong!~~ (until 26.05.01)
 **RODDY** (Annoyed): Ignorance?! I WAS trained in a family-owned restaurant!  
-  _earlier:_ ~~Behold the ignorance of jealousy, Mads.~~ (until 26.05.01); ~~Ignorance?! I WAS trained in a Family owned restaurant!~~ (until 26.06.01)
+  _earlier:_ ~~Behold the ignorance of jealousy, Mads.~~ (until 26.05.01)  
+  _(1 cosmetic edit not shown)_
 **ARTHUR** (Frustrated): Pssh... More like a family-owned hot dog stand.  
-  _earlier:_ ~~Ignorance?! I WAS trained in a Family owned restaurant!~~ (until 26.05.01); ~~Pssh... More like a family owned hot dog stand.~~ (until 26.06.01)
+  _earlier:_ ~~Ignorance?! I WAS trained in a Family owned restaurant!~~ (until 26.05.01)  
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Doubtful): Boys...  
   _earlier:_ ~~Pssh... More like a family owned hot dog stand.~~ (until 26.05.01)
+**—**: Boys...
 
 ### FirstFloorKitchen 11
 `FirstFloorKitchen_11` · seen 26.06.01–26.07.01
@@ -190,14 +192,13 @@ Every story in which Arthur speaks.
 
 **ARTHUR** (Doubtful): Alright, hotshot. Prove it.
 **ARTHUR** (Doubtful): Show me your UH-MAAZING skills...
-**RODDY** (Doubtful): I will!  
-  _earlier:_ ~~I will! ~~ (until 26.06.01)
+**RODDY** (Doubtful): I will!
 **MADDIE** (Doubtful): Is this really necessary?
 **RODDY** (Doubtful): YES!
 **ARTHUR** (Annoyed): YES!
 **MADDIE** (Discouraged): Oh boy...
 **RODDY** (Relaxed): Alright, Maddie. Prepare to be amazed! I shall start by juggling these knives!  
-  _earlier:_ ~~Alright, Maddie. Prepare to be amazed! I shall start by juggling these two knives!~~ (until 26.04.02)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Worried): Roddy, be careful!
 **RODDY** (Relaxed): Don't worry! I've done this many times!
 **ARTHUR** (Relaxed): ...
@@ -221,8 +222,7 @@ Every story in which Arthur speaks.
 **ARTHUR** (Surprised): Aaaargh! Mads! MAAAADS! OW, don't step on it Roddy!!
 **RODDY** (Surprised): So- Sorry!
 **MADDIE** (Frustrated): ...
-**MADDIE** (Frustrated): Why, me?  
-  _earlier:_ ~~Why, me? ~~ (until 26.06.01)
+**MADDIE** (Frustrated): Why, me?
 
 ### Pantry: Place the rest of the recipe cards
 `FirstFloorPantry_03` · seen 26.07.01–26.07.01
@@ -234,7 +234,7 @@ Every story in which Arthur speaks.
 **MADDIE** (Talking): Arthur! Oh my gosh - are you okay?
 **ARTHUR** (Talking): The doctors said I should call...my loved ones...before my surgery.
 **MADDIE** (Talking): What?! Your surgery?!  
-  _earlier:_ ~~What?! Your surgery!?~~ (until 26.06.02)
+  _(1 cosmetic edit not shown)_
 **ARTHUR** (Talking): Don't worry about me...Mads...or do...a little bit.
 **MADDIE** (Talking): You don't sound so good. Do you need me to come to the hospital?
 **ARTHUR** (Talking): Oh! Um. No. *cough* Better not. I am...contagious.
@@ -261,6 +261,11 @@ Every story in which Arthur speaks.
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 
+### GrandmaRoom 13
+`GrandmaRoom_13` · seen 26.02.01–26.07.01
+- trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
+
+
 ### Grandma's Room: Clean shelf
 `GrandmaRoom_14` · seen 25.10.01–26.07.01
 - trigger: area, area=Grandma's Room, areaId=GrandmaRoom, hotspotId=GrandmaRoomSecurityWallCleanShelf, phase=task completed, task=Clean shelf (versions 25.10.01–26.07.01)
@@ -279,10 +284,10 @@ Every story in which Arthur speaks.
 - trigger: unknown, hint=main story / tutorial / misc (client-side trigger) (versions None–None)
 
 **MADDIE** (Charming): Roddy...
-**—**: Y- Yes?
-**—**: I feel like...
-**—**: M-Me too, Maddie...
-**—**: !!!
+**RODDY** (Charming): Y- Yes?
+**MADDIE** (Charming): I feel like...
+**RODDY** (Charming): M-Me too, Maddie...
+**MADDIE** (Surprised): !!!
 **ARTHUR**: Hello, Mads...
 
 ### Library08
@@ -343,7 +348,7 @@ Every story in which Arthur speaks.
 **ARTHUR** (Relaxed): It was just like old times, remember?
 **MADDIE** (Talking): Yeah... I do!
 **ARTHUR** (Charming): Right? That’s why I was thinking we should do it again! I’ll let you pick the spot this time!  
-  _earlier:_ ~~Riight? That’s why I was thinking we should do it again! I’ll let you pick the spot this time!~~ (until 26.02.01)
+  _(1 cosmetic edit not shown)_
 **MADDIE** (Talking): Arthur, I-
 **ARTHUR**: No, just kidding! I booked us a table at that nice little fusion restaurant that you loved!
 **MADDIE** (Talking): Arthur! That’s out of state! I-

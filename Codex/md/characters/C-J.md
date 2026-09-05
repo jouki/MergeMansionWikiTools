@@ -9,7 +9,7 @@ Every story in which C.J. speaks.
 **C.J.**: I’m happy to help, Grandma!
 **GRANDMA**: That’s very kind of you, dearie. Hopefully, once I’m done with this mess, I can do something about our situation here.
 **C.J.**: Let’s just make sure none of that then leads back to me, okay?
-**—**: Wh- What do you mean by that?
+**C.J.**: Wh- What do you mean by that?
 
 ### SBE Jailbreak P5Intro
 `SBE_Jailbreak_P5Intro` · seen 25.05.01–25.06.01

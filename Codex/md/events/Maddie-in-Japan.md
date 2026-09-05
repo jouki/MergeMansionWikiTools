@@ -7,8 +7,7 @@
 
 **MADDIE** (Joyous): What a place!
 **MADDIE** (Joyous): I wonder what Grandma made of Akihabara. Let’s see what she wrote!
-**MADDIE** (Relaxed): “I know now that he came here to see the railway station. It must have inspired him to build his own tracks back home...”  
-  _earlier:_ ~~“I know now that he came here to see the railway station. It must have inspired him to build his own tracks back home…”~~ (until 25.10.01)
+**MADDIE** (Relaxed): “I know now that he came here to see the railway station. It must have inspired him to build his own tracks back home...”
 **MADDIE** (Doubtful): A railway? She must be talking about Ignatius!
 
 ### Maddie in Japan — item discovered: Postcard from Akihabara
@@ -25,8 +24,7 @@
 - trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_AkihabaraThings_03'], items=['Hopeberry Figurine'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Joyous): Akihabara is so full of interesting things that I don’t even know where to begin!
-**MADDIE** (Relaxed): Maybe it’s time I try my luck with the claw machines...  
-  _earlier:_ ~~Maybe it’s time I try my luck with the claw machines…~~ (until 25.10.01)
+**MADDIE** (Relaxed): Maybe it’s time I try my luck with the claw machines...
 **MADDIE** (Joyous): Let's see... Where are the best ones?
 
 ### Maddie in Japan — item discovered: Claw Machine
@@ -34,8 +32,7 @@
 - trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_AkihabaraThings_05'], items=['Claw Machine'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): This place has been a complete change of pace from the previous sights I’ve seen, but it’s so full of energy.
-**MADDIE** (Relaxed): I would love to take a piece of Akihabara's magic home with me...  
-  _earlier:_ ~~I would love to take a piece of Akihabara's magic home with me…~~ (until 25.10.01)
+**MADDIE** (Relaxed): I would love to take a piece of Akihabara's magic home with me...
 **MADDIE** (Relaxed): Maybe I could build something similar at the Mansion!
 
 ### Maddie in Japan — item discovered: Onigiri
@@ -65,13 +62,10 @@
 `CBE_MaddieInJapan2025_FushimiInariLandmark_01_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_FushimiInariLandmark_01'], items=['Fushimi Inari'], moment=item discovered (versions 26.03.01–26.07.01)
 
-**MADDIE** (Joyous): Fushimi Inari... What an amazing place!  
-  _earlier:_ ~~Fushimi Inari… What an amazing place!~~ (until 25.10.01)
+**MADDIE** (Joyous): Fushimi Inari... What an amazing place!
 **MADDIE** (Joyous): The Japanese really seem to have a gift for slowing down and staying in the moment.
-**MADDIE** (Joyous): I wonder how many of these torii gates there are along the paths... I bet there’s at least a thousand!  
-  _earlier:_ ~~I wonder how many of these torii gates there are along the paths… I bet there’s at least a thousand!~~ (until 25.10.01)
-**MADDIE** (Relaxed): Let’s see what Grandma’s postcard says about this place...  
-  _earlier:_ ~~Let’s see what Grandma’s postcard says about this place…~~ (until 25.10.01)
+**MADDIE** (Joyous): I wonder how many of these torii gates there are along the paths... I bet there’s at least a thousand!
+**MADDIE** (Relaxed): Let’s see what Grandma’s postcard says about this place...
 **MADDIE** (Relaxed): “I followed the trail of breadcrumbs to the mountain and found the gate. He was here.”
 **MADDIE** (Worried): Hmm... Who could she be talking about?
 
@@ -80,8 +74,7 @@
 - trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_FushimiInariPostcard_F_02'], items=['Postcard from Fushimi Inari'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **ANTIQUEDEALER** (Charming): Maddie writes from Fushimi Inari in Kyoto! She really is following in Ursula’s footsteps.
-**ANTIQUEDEALER** (Thinking): But will she figure out what her Grandma was up to, I wonder...  
-  _earlier:_ ~~But will she figure out what her Grandma was up to, I wonder…~~ (until 25.10.01)
+**ANTIQUEDEALER** (Thinking): But will she figure out what her Grandma was up to, I wonder...
 **ANTIQUEDEALER** (Thinking): She writes: “I walked through a thousand torii gates, but couldn’t find the one Grandma was looking for.”
 
 ### Maddie in Japan — item discovered: Kitsune Mask
@@ -104,10 +97,8 @@
 - trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_GettingReady_02'], items=['Travel Charger'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **GRANDMA**: It is a long flight to Japan, dearie. Are you sure you’ve got everything you need?
-**GRANDMA** (Discouraged): Snacks? A warm jumper for the plane? It is always cold on a plane with the over-eager air-conditioning...  
-  _earlier:_ ~~Snacks? A warm jumper for the plane? It is always cold on a plane with the over-eager air-conditioning…~~ (until 25.10.01)
-**MADDIE** (Relaxed): I’ve got everything, but are you... fussing?  
-  _earlier:_ ~~I’ve got everything, but are you… fussing?~~ (until 25.10.01)
+**GRANDMA** (Discouraged): Snacks? A warm jumper for the plane? It is always cold on a plane with the over-eager air-conditioning...
+**MADDIE** (Relaxed): I’ve got everything, but are you... fussing?
 **GRANDMA** (Frustrated): I never fuss!
 **GRANDMA** (Worried): But you’re going far away, and I just want to make sure you are prepared for everything.
 **MADDIE** (Encouraging): Don’t worry, Grandma. I’ll be OK!
@@ -122,8 +113,7 @@
 **KAZUKO** (Thinking): All the time! But I still visit from time to time, and I can always reminisce with your Grandma.
 **MADDIE** (Thinking): I’ve never been able to figure out what Grandma did in Japan. Did she work?
 **KAZUKO** (Relaxed): Yes, she worked in a number of places, from a small ramen shop to a fish vendor, and for a time, she was an English tutor.
-**KAZUKO** (Doubtful): However, I always got the feeling she was actually searching for something there. Something she had to keep secret...  
-  _earlier:_ ~~However, I always got the feeling she was actually searching for something there. Something she had to keep secret…~~ (until 25.10.01)
+**KAZUKO** (Doubtful): However, I always got the feeling she was actually searching for something there. Something she had to keep secret...
 **MADDIE** (Surprised): What?
 **KAZUKO** (Relaxed): She never told me, and I never asked!
 
@@ -150,8 +140,7 @@
 **MADDIE** (Relaxed): Yes!
 **GRANDMA** (Thinking): A wig?
 **MADDIE** (Surprised): W-will I need one?
-**GRANDMA** (Charming): You never know when you might need a good disguise, dearie...  
-  _earlier:_ ~~You never know when you might need a good disguise, dearie…~~ (until 25.10.01)
+**GRANDMA** (Charming): You never know when you might need a good disguise, dearie...
 
 ### Maddie in Japan — entering board
 `CBE_MaddieInJapan2025_Intro_Dialogue` · seen 25.08.01–26.07.01
@@ -214,8 +203,7 @@
 **MADDIE** (Encouraging): I loved it. From the Yasaka Pagoda to the Shibuya Crossing, I learned so much - also about you!
 **GRANDMA** (Surprised): Oh?
 **MADDIE** (Thinking): Did you travel to Japan to find out something about Ignatius’ past?
-**GRANDMA** (Thinking): It was so long ago, but... yes, I did. You see, the mystery of our family is a little bit like an onion.  
-  _earlier:_ ~~It was so long ago, but… yes, I did. You see, the mystery of our family is a little bit like an onion.~~ (until 25.10.01)
+**GRANDMA** (Thinking): It was so long ago, but... yes, I did. You see, the mystery of our family is a little bit like an onion.
 **MADDIE** (Doubtful): An onion?
 **GRANDMA** (Charming): There are many layers, and we have all had to peel them back, one by one. That goes for me, too.
 **MADDIE** (Thinking): So why don’t you just tell me about them?
@@ -231,8 +219,7 @@
 **MADDIE** (Relaxed): It’s time to read the last one of Grandma’s postcards.
 **MADDIE** (Relaxed): “I think I now have the full story. It has taken a lot of time and effort to put the pieces together, but I will crack this mystery.”
 **MADDIE** (Doubtful): So she was following in Ignatius’ footsteps, trying to solve his mysteries!
-**MADDIE** (Relaxed): I guess we have more in common than I’ve realized...  
-  _earlier:_ ~~I guess we have more in common than I’ve realized…~~ (until 25.10.01)
+**MADDIE** (Relaxed): I guess we have more in common than I’ve realized...
 
 ### Maddie in Japan — item discovered: Postcard from Shibuya Crossing
 `CBE_MaddieInJapan2025_ShibuyaPostcard_01_Dialogue` · seen 26.03.01–26.07.01
@@ -244,8 +231,7 @@
 **GRANDMA** (Surprised): You have kept them all these years?
 **ANTIQUEDEALER** (Charming): Of course! And it seems Maddie has figured out what you were doing in Japan.
 **GRANDMA** (Charming): Well, she is a bright girl. What does she write?
-**GRANDMA** (Relaxed): Let’s see... “Finally in Shibuya. I've found what I was looking for - complete holiday mood. Grandma’s postcards make sense now.”  
-  _earlier:_ ~~Let’s see… “Finally in Shibuya. I've found what I was looking for - complete holiday mood. Grandma’s postcards make sense now.”~~ (until 25.10.01)
+**GRANDMA** (Relaxed): Let’s see... “Finally in Shibuya. I've found what I was looking for - complete holiday mood. Grandma’s postcards make sense now.”
 
 ### Maddie in Japan — item discovered: Traffic Lights
 `CBE_MaddieInJapan2025_ShibuyaThings_03_Dialogue` · seen 26.03.01–26.07.01
@@ -260,8 +246,7 @@
 
 **MADDIE** (Relaxed): Oh, this must be the statue of Hachiko, the dog who waited for his master every day at the station.
 **MADDIE** (Worried): What a good dog... Always waiting for his master, even after he passed away!
-**MADDIE** (Worried): I... miss Rufus!  
-  _earlier:_ ~~I… miss Rufus!~~ (until 25.10.01)
+**MADDIE** (Worried): I... miss Rufus!
 **MADDIE** (Worried): I think I’m starting to get a little bit homesick.
 
 ### Maddie in Japan — item discovered: Chopsticks
@@ -269,8 +254,7 @@
 - trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_Souvenirs_02'], items=['Chopsticks'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **KAZUKO** (Encouraging): Do you know the art of origami, Maddie?
-**MADDIE** (Thinking): I know of it, but I can’t say I’m very good at it...  
-  _earlier:_ ~~I know of it, but I can’t say I’m very good at it…~~ (until 25.10.01)
+**MADDIE** (Thinking): I know of it, but I can’t say I’m very good at it...
 **KAZUKO** (Relaxed): Let me show you. It is a great practice of patience and of how to calm the mind.
 **MADDIE** (Doubtful): What are you saying?
 
@@ -287,8 +271,7 @@
 `CBE_MaddieInJapan2025_Souvenirs_06_Dialogue` · seen 26.03.01–26.07.01
 - trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_Souvenirs_06'], items=['Maneki Neko'], moment=item discovered (versions 26.03.01–26.07.01)
 
-**MADDIE** (Thinking): There will be so many cool souvenirs to get... How will I ever fit it into my luggage?  
-  _earlier:_ ~~There will be so many cool souvenirs to get… How will I ever fit it into my luggage?~~ (until 25.10.01)
+**MADDIE** (Thinking): There will be so many cool souvenirs to get... How will I ever fit it into my luggage?
 **MADDIE** (Thinking): And I need to take something for my friends, too.
 **MADDIE** (Encouraging): Maybe I should buy an extra suitcase just for the souvenirs!
 
@@ -313,8 +296,7 @@
 - trigger: item, event=Maddie in Japan, eventKey=CBE_MaddieInJapan2025, itemKeys=['CBE_MaddieInJapan2025_Travel_06'], items=['Train'], moment=item discovered (versions 26.03.01–26.07.01)
 
 **MADDIE** (Relaxed): I finally know where I am and where I’m going. Now I just need to hop on a train!
-**MADDIE** (Relaxed): These old postcards Julius gave me are full of interesting stuff... but they also form a pretty good list of things to visit.  
-  _earlier:_ ~~These old postcards Julius gave me are full of interesting stuff… but they also form a pretty good list of things to visit.~~ (until 25.10.01)
+**MADDIE** (Relaxed): These old postcards Julius gave me are full of interesting stuff... but they also form a pretty good list of things to visit.
 **MADDIE** (Relaxed): It’s gonna be so cool to visit some of the places Grandma loved to visit while she lived here.
 **MADDIE** (Relaxed): And it’ll be interesting to see what might have drawn her to them.
 
@@ -325,8 +307,7 @@
 **MADDIE** (Joyous): What an amazing structure!
 **MADDIE** (Joyous): It says here that it was originally built in 597! And it is supposed to have been inspired by a dream.
 **MADDIE** (Relaxed): I can see why they say that!
-**MADDIE** (Relaxed): What does Grandma’s postcard say about this place...  
-  _earlier:_ ~~What does Grandma’s postcard say about this place…~~ (until 25.10.01)
+**MADDIE** (Relaxed): What does Grandma’s postcard say about this place...
 **MADDIE** (Relaxed): “The pagoda stands tall, but no sign of him.”
 **MADDIE** (Doubtful): What does that mean?? Who is she talking about?
 
