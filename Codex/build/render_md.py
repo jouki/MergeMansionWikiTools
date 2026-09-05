@@ -112,6 +112,33 @@ def main():
     write("misc/unknown-trigger.md", "Stories without a known trigger", unknown, "Trigger hints are prefix guesses — see build/prefixes.json.")
     index.append(f"- [Removed from the game](misc/removed.md) ({len(removed)})")
     write("misc/removed.md", "Stories removed from the game", removed, "Present in an older version, absent from the current one.")
+    # Discord screenshots (OCR) — lower-trust source, kept apart from game-data stories
+    dd_path = os.path.join(common.CODEX, "discord_dialogues.json")
+    if os.path.exists(dd_path):
+        dd = common.read_json(dd_path)
+        index.append("\n## Discord screenshots (OCR, lower trust)")
+        for th in dd["threads"]:
+            if not th["lines"]:
+                continue
+            name = th.get("name") or th["id"]
+            rel = f"discord/{slug(name)}.md"
+            p = os.path.join(md_root, rel)
+            os.makedirs(os.path.dirname(p), exist_ok=True)
+            body = [f"# {name}", f"Discord thread `{th['id']}`, {len(th['lines'])} dialogue screenshots in message order. "
+                    "Text is Windows OCR of player screenshots: speaker plates are reliable, wording may carry OCR slips.", ""]
+            last_day = None
+            for ln in th["lines"]:
+                day = (ln.get("timestamp") or "")[:10]
+                if day != last_day:
+                    body.append(f"\n### {day} (posted by {ln.get('author')})\n")
+                    last_day = day
+                who = codex["characters"].get(ln["speaker"], {}).get("name", ln["speaker"])
+                body.append(f"**{str(who).upper()}**: {ln['text']}")
+            with open(p, "w", encoding="utf-8", newline="\n") as f:
+                f.write("\n".join(body) + "\n")
+            index.append(f"- [{name}]({rel}) ({len(th['lines'])} lines)")
+        if dd.get("unknownSpeakersToReview"):
+            index.append("- Unknown speaker plates to review: " + ", ".join(f"{u['name']} ({u['count']})" for u in dd["unknownSpeakersToReview"][:30]))
     with open(os.path.join(md_root, "INDEX.md"), "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(index) + "\n")
     print(f"md: {len(by_area)} areas, {len(by_event)} events, {len(codex['characters'])} characters, {len(unknown)} unknown, {len(removed)} removed")

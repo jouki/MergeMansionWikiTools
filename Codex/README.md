@@ -88,5 +88,21 @@ Build summary: 44 versions · 64 296 strings · 21 180 lines (18 965 alive in 26
 | item hashes | — | dumps produced from old configs leave `ItemTypes` in `CollectibleDialogueMapping` as integer hashes (e.g. `8920249`) — shows up in some `misc/removed.md` titles |
 | cutscenes | — | `Cutscenes` config carries only ids and locations; their spoken lines are ordinary DialogItems (`LDE_…_CutsceneDialogue1_Dialogue_01`) and are in `lines`; `slides` holds the remaining slide/cutscene-looking keys that no line references |
 
+## Discord screenshots (OCR) — second, lower-trust source
+
+The wiki team's Discord channel `wiki-content-discussion` (id `783385526387998743`) holds 188 threads (2022-08 … 2026-08) of player screenshots: event tasks, items, and dialogues. It is the **only source for 2022 event dialogues** (Ursula's Birthday, Romantic Spot, Halloween/Thanksgiving/Xmas 2022, Pearl of the Ball 2023, …) that never made it into any config we own.
+
+| Step | Script / tool | Output |
+|---|---|---|
+| inventory of threads | `python Codex/build/discord_inventory.py <channelId> [--messages]` | `_cache/discord/<id>/threads.json`, `messages/<thread>.json` (attachment URLs are signed and expire after ~24 h) |
+| download images (standalone, resumable, refreshes expired URLs) | `python Codex/build/discord_download.py <channelId> --workers 6` | `_cache/discord/<id>/images/<thread>/<msg>_<n>_<file>` + `images_index.json` (27 572 files, 47.8 GB, 1 h) |
+| raw OCR (Windows OCR, resumable) | `%TEMP%\mmwt_ocrharness\OcrHarness.exe <imagesDir> <ocr.jsonl> --workers 6` (build: `dotnet build _OcrHarness -o %TEMP%\mmwt_ocrharness`) | `_cache/discord/<id>/ocr.jsonl` — every text line with its box (≈600 images/min) |
+| dialogue extraction | `python Codex/build/discord_ocr.py <channelId>` | `Codex/discord_dialogues.json` (committed) + `_cache/…/ocr_classified.json` (audit of every image) |
+| render | `python Codex/build/render_md.py` | `md/discord/<thread>.md`, listed at the end of `md/INDEX.md` |
+
+**How a dialogue is recognised** (`discord_ocr.classify`): a short capitalised name plate followed, within 10 plate-heights, by sentence text, stopping at UI words (Continue/Skip/…); the lowest such pair on the screen wins. Works for full screenshots (plate at ~77 % of the height, text at ~85 %) and for cropped strips (plate on top). Plates carry in-game names → aliases (`Ursula`→`Grandma`, `Julius`→`AntiqueDealer`) plus plates absent from the codex characters (`Butler`, `Fiona DuVal`, pets). Unknown plates with sentence text are kept in `unknownSpeakersToReview` (mostly area/item headings — reviewed once, real characters moved into `EXTRA_SPEAKERS`). The trailing fragment of the Continue button OCR glues to the last line is stripped; identical (speaker, text) pairs within a thread are collapsed (several players post the same screenshot).
+
+Result (2026-09-05): 27 572 images → 12 956 dialogue screenshots → **12 706 unique lines in 146 threads** (Maddie 5 876, Grandma 1 567, Roddy 749, Mason 748, Jackie 633, Julius 518, Deb 392, Emilio 301, Lady Voyance 249, Pearl 247, Ignatius 164, Bella 157, Butler 138, …), 606 task lists, 8 915 other (items, HUD, shop), 5 095 unknown-plate candidates. Wording may carry OCR slips (`Of__`, `iten`); speaker plates are reliable. Order = message order in the thread, which usually follows the in-game order but is not guaranteed.
+
 ## Not in scope (yet)
 Other languages, the WPF app, a wiki module, character story assembly (sub-project 2).
