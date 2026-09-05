@@ -1,0 +1,82 @@
+# Flashback Rewind — dialogue timeline (event)
+`event:CBE_Flashback2025` · versions 25.05.01–26.07.01 (21)
+
+## Order in 26.07.01
+- **  2 %** · intro · `CBE_Flashback2025_Intro_Dialogue` — entering the board
+    - Maddie: Hey, Grandma! Julius just told me a hilarious story about you knocking over Ignatius' statue when you were younger.
+    - Grandma: Is that so? Which story was it? Not the one about Ignatius' statue again...
+- ** 10 %** · early · `CBE_Flashback2025_Attic_03_Dialogue` — item 'Attic Doorway': chain 'The Attic' 2/31, item level 3/4 (estimate)
+    - Maddie: Why would Julius insist that his story was true?
+    - Maddie: It's so typical of Grandma - not admitting anything, but not offering any kind of explanation either.
+- ** 12 %** · early · `CBE_Flashback2025_Clothes_03_Dialogue` — item 'Shades': chain '80's Clothes' 3/31, item level 3/8 (estimate)
+    - Maddie: A box of old clothes! But these aren't just any old clothes... These are from the 80s!
+    - Maddie: This is why I love this attic. You can always find something totally unexpected!
+- ** 13 %** · early · `CBE_Flashback2025_Clothes_07_Dialogue` — item 'Jacket': chain '80's Clothes' 3/31, item level 7/8 (estimate)
+    - Maddie: I think I've seen this jacket before. The colors are pretty awesome!
+    - Maddie: It looks about my size, too...
+- ** 17 %** · early · `CBE_Flashback2025_Tape_01_Dialogue` — item 'VHS Tape': chain 'VHS Tape' 4/31, item level 1/1 (estimate)
+    - Maddie: What is this?
+    - Maddie: Looks like an old... what you do you call it... a VHS?
+- ** 22 %** · early · `CBE_Flashback2025_TV_Active_01_Dialogue` — item 'TV Set - Active': chain 'TV - Active' 6/31, item level 1/1 (estimate)
+    - Maddie: The picture is so grainy... How did people ever watch this?
+    - Maddie: What's happening on the video? Is that Grandma? Those clothes look familiar...
+- ** 36 %** · mid   · `CBE_Flashback2025_Box_05_Dialogue` — item 'Attic Loot': chain 'Boxes' 11/31, item level 4/6 (estimate)
+    - Maddie: Was Grandma telling me the truth about Julius' story?
+    - Maddie: He was so convinced it really happened. Weird...
+- ** 40 %** · mid   · `CBE_Flashback2025_Consoles_01_Dialogue` — item 'Pocket Console': chain 'Game Consoles' 13/31, item level 1/8 (estimate)
+    - Maddie: Hey, Julius? Have you seen Charlie anywhere?
+    - AntiqueDealer: He had some business in town. You know he's been talking about getting a COMPUTER.
+- ** 42 %** · mid   · `CBE_Flashback2025_Consoles_05_Dialogue` — item 'Retro Console': chain 'Game Consoles' 13/31, item level 5/8 (estimate)
+    - Maddie: Remind me - what does Charlie want a computer for again?
+    - Maddie: Is it for his work?
+- ** 61 %** · mid   · `CBE_Flashback2025_Boardgames_01_Dialogue` — item 'Dice': chain 'Board Games' 20/31, item level 1/6 (estimate)
+    - Maddie: Oh, man! I need to remember that I'm not Maddie here. I won't be born for a long while yet!
+    - Maddie: If Grandma sees me, it could cause some cosmic meltdown of the space-time continuum...
+- ** 66 %** · late  · `CBE_Flashback2025_BoardgamesActive_01_Dialogue` — item 'Miniature - Active': chain 'Board Games - Active' 21/31, item level 1/1 (estimate)
+    - Maddie: I wonder if I can get inside the Mansion and take a look around! Maybe I'll just try the door...
+    - Maddie: It's locked. OF COURSE!
+- ** 70 %** · late  · `CBE_Flashback2025_YardSale_04_Dialogue` — item 'Tennis Rackets': chain 'Yard Sale' 23/31, item level 4/12 (estimate)
+    - Maddie: Oh, my head... I need to remember to be less clumsy in the future!
+    - Maddie: Oof... I feel really weird. Like something's different... What's going on?
+- ** 71 %** · late  · `CBE_Flashback2025_YardSale_08_Dialogue` — item 'Rollerskate': chain 'Yard Sale' 23/31, item level 8/12 (estimate)
+    - AntiqueDealer: Ursula? Is that you? Could you help me with these boxes?
+    - AntiqueDealer: What happened to your hair? Oh, never mind! Those sunglasses are EPIC!
+- ** 72 %** · late  · `CBE_Flashback2025_YardSale_11_Dialogue` — item 'Helmet': chain 'Yard Sale' 23/31, item level 11/12 (estimate)
+    - Maddie: So, Grandma was also fixing the place up. It doesn't look half bad, but it's definitely showing signs of disrepair.
+    - Maddie: Does she live here alone?
+- ** 73 %** · late  · `CBE_Flashback2025_Disco_03_Dialogue` — item 'Light Boxes': chain 'Disco Lights' 24/31, item level 3/7 (estimate)
+    - AntiqueDealer: You really need to find a better place for the key.
+    - Maddie: Key?
+- ** 74 %** · late  · `CBE_Flashback2025_Disco_05_Dialogue` — item 'Spinning Disco Ball': chain 'Disco Lights' 24/31, item level 5/7 (estimate)
+    - Maddie: It's so strange to see Julius this young... It's like he and Grandma and Charlie all had lives and did cool stuff.
+    - Maddie: I wish I could stay in the 80s for longer and meet Charlie, but I need to find a way back to the present.
+- ** 87 %** · late  · `CBE_Flashback2025_Music_03_Dialogue` — item 'Speakers': chain 'The Band' 29/31, item level 3/8 (estimate)
+    - Maddie: Do you play the guitar?
+    - AntiqueDealer: Ahem, keytar is my instrument of choice now. I've been practicing a lot, and I think that this time I can hit the right notes.
+- ** 90 %** · late  · `CBE_Flashback2025_Toy_03_Dialogue` — item 'Jet Morpher': chain 'Toys' 30/31, item level 3/7 (estimate)
+    - Maddie: Why are you having a yard sale?
+    - AntiqueDealer: Ursula, it was all your idea, remember? To raise some money for the repairs the Mansion so desperately needs?
+- ** 92 %** · late  · `CBE_Flashback2025_Toy_07_Dialogue` — item 'Stratos-Rage': chain 'Toys' 30/31, item level 7/7 (estimate)
+    - Maddie: Could you just remind me - what needs to be fixed first in the Mansion?
+    - AntiqueDealer: You name it! The Conservatory roof is leaking, the Maze is totally overgrown, and there's something odd going on at the Lighthouse...
+- ** 93 %** · late  · `CBE_Flashback2025_Watches_03_Dialogue` — item 'Fancy Watch': chain 'Watches' 31/31, item level 3/12 (estimate)
+    - Maddie: The key to the Mansion! If I find it here in the past, I can hide it somewhere for myself to find in the future!
+    - Maddie: Then I can just get straight into the Mansion. Grandma will never guess how I did it!
+- ** 94 %** · late  · `CBE_Flashback2025_Watches_06_Dialogue` — item 'Pro Digital Watch': chain 'Watches' 31/31, item level 6/12 (estimate)
+    - Maddie: How do I get the key?
+    - Maddie: Julius knows everything around here and he thinks I'm Grandma. How can I get him to tell me everything without raising his suspicions?
+- ** 94 %** · late  · `CBE_Flashback2025_Watches_09_Dialogue` — item 'Luxury Digital Watch': chain 'Watches' 31/31, item level 9/12 (estimate)
+    - Maddie: I'll just have to climb up and get the key from Ignatius' tin can!
+    - Maddie: Whooooah, the statue is much taller than I realized. But I have to try.
+- ** 95 %** · outro · `CBE_Flashback2025_Watches_12_Dialogue` — item 'Mega Flashback': chain 'Watches' 31/31, item level 12/12 (estimate)
+    - AntiqueDealer: What on earth is Ursula doing climbing Ignatius' statue?? Why isn't she using the ladder?
+    - AntiqueDealer: The statue can't take her weight... Oh, no - it's falling!
+- **100 %** · outro · `CBE_Flashback2025_Outro_Dialogue` — event end
+    - Grandma: Maddie, I think I owe you an explanation for before.
+    - Grandma: I am talking about Julius's story. You see, he has always insisted that I was the one who climbed...
+
+Not placeable in 26.07.01 (4): `CBE_Flashback2025_Box_01_Dialogue`, `CBE_Flashback2025_Slot_16_Dialogue`, `CBE_Flashback2025_Slot_19_Dialogue`, `CBE_Flashback2025_Slot_23_Dialogue`
+
+## Changes across versions
+- **26.04.01 → 26.04.02**: removed 3 (`CBE_Flashback2025_Slot_16_Dialogue`, `CBE_Flashback2025_Slot_19_Dialogue`, `CBE_Flashback2025_Slot_23_Dialogue`)
+- **26.04.02 → 26.05.01**: removed 1 (`CBE_Flashback2025_Box_01_Dialogue`)

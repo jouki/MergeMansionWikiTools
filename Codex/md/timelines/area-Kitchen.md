@@ -1,0 +1,49 @@
+# Kitchen — dialogue timeline (area)
+`area:Kitchen` · versions 26.06.01–26.07.01 (3)
+
+## Order in 26.07.01
+- **  2 %** · intro · `FirstFloorKitchen_02` — task 4/227 'Remove the note from the fridge' task appears; after 'Clean up the trash on the floor'
+    - Maddie: Why is a knife stuck in the fridge?
+    - Maddie: Hold on, there's a message! A bit excessive to use a KNIFE as a pin, if you ask me.
+- **  3 %** · intro · `FirstFloorKitchen_CharacterTask1` — task 8/227 'Start with the utensils. Go on.' task appears; after 'Clear away the vases'
+    - Winston: Ah, Ms. Boulton! I see you have taken on the kitchen - how splendid.
+    - Maddie: Somebody's gotta do it, Winston. Say, I was wondering...
+- ** 10 %** · early · `FirstFloorKitchen_04` — task 22/227 'Wipe the cabinet top' task completed; after 'Clean the cabinet glass'
+    - Arthur: Look at this place, Maddie.
+    - Arthur: It's a dump!
+- ** 17 %** · early · `FirstFloorKitchen_CharacterTask2` — task 38/227 'We’ll cook something proper' task completed; after 'You spilled soap on the flowers, tsk'
+    - Maddie: Phew. I had no idea you could be such a taskmaster, Winston. I mean... it gets results! But still.
+    - Winston: I do apologize, Ms. Boulton. But just thinking about Gamsey makes me want to make sure everything is spic and span!
+- ** 30 %** · early · `FirstFloorKitchen_CharacterTask3` — task 69/227 'This level of residue is not acceptable.' task completed; after 'One last thing and we are done.'
+    - Maddie: That turned out very good! Didn't it? Winston?
+    - Winston: *Sigh* I am afraid he would have thrown this straight into the bin, Ms. Boulton.
+- ** 33 %** · early · `FirstFloorKitchen_POI_CastIronArea` — task 74/227 'Place the cooking rack' task completed; after 'Clean the stove top'
+    - Maddie: Phew, that was an awful lot of scrubbing. Cast iron does not clean easily!
+    - Maddie: Buuut, the benefit of making something in cast iron is that it will survive anything!
+- ** 38 %** · mid   · `FirstFloorKitchen_CharacterTask4` — task 87/227 'This surface is worn. It needs a fresh coat.' task completed; after 'Fix this loose panel'
+    - Maddie: You were saying...about the Blackwoods? Who were they?
+    - Winston: Ms. Boulton, you know very well who the Blackwoods are.
+- ** 40 %** · mid   · `FirstFloorKitchen_POI_PieTableStart` — task 92/227 'Clear items from the floor' task completed; after 'Place a teapot on the stove'
+    - Maddie: Hmm. This table looks like it was used primarily for baking.
+    - Maddie: They probably split baking tasks and food preparation tasks to different tables.
+- ** 46 %** · mid   · `FirstFloorKitchen_CharacterTask5` — task 105/227 'That lamp is leaning… set it properly' task completed; after 'For sure we can find a better chair. '
+    - Maddie: Phew. I think I know what a sous chef felt like working for Gamsey now.
+    - Maddie: Not even close, Ms. Boulton. But let me tell you about this knife.
+- ** 51 %** · mid   · `FirstFloorKitchen_POI_Ingredients` — task 115/227 'Clean the lower cabinet' task completed; after 'Repair the lower cabinet'
+    - Maddie: So this was where they stored their ingredients, was it?
+    - Maddie: Oh - wow. This cookbook looks very vintage. Looks like there's a dog-eared page here...
+- ** 56 %** · mid   · `FirstFloorKitchen_CharacterTask6` — task 126/227 '…yes. That will do' task completed; after 'Let's clear this place, we deserve a rest.'
+    - Maddie: Do you know what happened to Gamsey?
+    - Maddie: I know he went to work for the Blackwoods - who were oddly pleased with how everything had turned out...
+- ** 66 %** · late  · `FirstFloorKitchen_POI_PlatesArea` — task 151/227 'Place pots on the lower shelf' task completed; after 'Clean the lower shelf'
+    - Maddie: I am glad I managed to restore so many of these Boulton-design plates.
+    - Maddie: I doubt we'll be making any more of them any time soon. They seem very expensive.
+- ** 68 %** · late  · `FirstFloorKitchen_POI_DumbWaiterStart` — task 154/227 'Remove the old carpet' task completed; after 'Bake the pie'
+    - Maddie: Is this...yes it is! A dumbwaiter!
+    - Maddie: This must have gone up to the dining room!
+- ** 76 %** · late  · `FirstFloorKitchen_POI_FishTableStart` — task 172/227 'Remove items from the floor' task completed; after 'Brush dust off the carpet'
+    - Maddie: And this must be the table used to prepare the food.
+    - Maddie: That is an awful lot of knives. I wouldn't want to cut myself and get tetanus.
+- **100 %** · outro · `FirstFloorKitchen_POI_DishWasher` — task 226/227 'Clean the carpet' task completed; after 'Repair the carpet'
+    - Maddie: Phew! That does it for all the dishes from our pie-baking.
+    - Maddie: I do wonder if it would break the rustic spirit of this place to install a modern dishwasher...

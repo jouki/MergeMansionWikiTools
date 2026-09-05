@@ -1,0 +1,55 @@
+# Landing Room — dialogue timeline (area)
+`area:Landing Room` · versions 24.04.01–26.07.01 (32)
+
+## Order in 26.07.01
+- **  3 %** · intro · `Birdcage` — task 4/140 'Clean the birdcage' task completed; after 'Cut away the cover'
+    - Maddie: That's a big birdcage!
+    - Maddie: Must have been a big bird.
+- **  7 %** · early · `CatBox` — task 10/140 'Remove the crate' task completed; after 'Grow new ivy'
+    - Maddie: What's in the box? More unique decor?
+    - Maddie: Well, some of that, but there's tools!
+- ** 11 %** · early · `AquariumsMess` — task 15/140 'Drain the water' task completed; after 'Fix the cracks'
+    - Maddie: Eeeeeeeeew!!!
+    - Maddie: These aquariums are filthy!
+- ** 26 %** · early · `PoisonousVines` — task 37/140 'Remove the poisonous plant' task appears; after 'Turn it on'
+    - Maddie: I almost didn't notice that skull and cross bones sign!
+    - Maddie: These vines must be poisonous and I'll need to be extra careful.
+- ** 29 %** · early · `EgyptianCat` — task 41/140 'Place the cat statue' task completed; after 'Plant the flower'
+    - Maddie: Wow... This is beautiful! Maybe this should belong in the gallery?
+    - Maddie: But, I don't think she'd like that...
+- ** 31 %** · early · `FloorCompass` — task 43/140 'Fix the tiling' task completed; after 'Place some fish', 'Grow new ivy', 'Fix the tiling'
+    - Maddie: Interesting, the north node on this compass seems to be glowing.
+    - Maddie: The funny thing is, it's not pointing north at all...
+- ** 31 %** · early · `Holdencharactertaskintro` — task 44/140 'Discourage Holden' task appears; after 'Clean the floor'
+    - Maddie: Holden! What are you doing here?!
+    - Maddie: Let me guess... Doing Victoria's dirty work again?
+- ** 38 %** · mid   · `Fountain` — task 54/140 'Cut off and replace the arrowhead' task appears; after 'Fix the north tile'
+    - Maddie: This fountain is a work of art! Look at the details! Too bad it's all dried up.
+    - Maddie: I'm not sure if I can get it to work, but at least I can make sure it isn't a mess!
+- ** 44 %** · mid   · `Holdencharactertask1` — task 62/140 'Discourage Holden' task completed; after 'Discourage Holden'
+    - Holden: Maddie, I have some concerns about your house...
+    - Maddie: Oh? Like what?
+- ** 59 %** · mid   · `Holdencharactertask2` — task 82/140 'Discourage Holden' task completed; after 'Discourage Holden'
+    - Maddie: What's wrong, Holden?
+    - Holden: I guess I was expecting to find something juicy. It all seems to be hidden away...
+- ** 67 %** · late  · `Holdencharactertaskoutro` — task 94/140 'Discourage Holden' task completed; after 'Discourage Holden'
+    - Holden: Alright, I'm done here... Might go out and take some shots of the exterior of the house again...
+    - Maddie: You seem upset...
+- ** 74 %** · late  · `LandingTiles3` — task 104/140 'Press the tile' task completed; after 'Turn on the lamp', 'Fix the tile', 'Place Lotus Flower'
+    - Maddie: Hmm, well the compass didn't move this time, but all of its grooves are now filled with water too.
+    - Maddie: I think I'm on the right track!
+- ** 76 %** · late  · `LandingAquariums` — task 106/140 'Fix the crack' task completed; after 'Turn the compass'
+    - Jackie: It must be quite tricky to fix those leaks...
+    - Maddie: I have to admit, I've never had to fix an aquarium before.
+- ** 76 %** · late  · `AquariumsFixed` — task 107/140 'Fix the crack' task completed; after 'Fix the crack'
+    - Maddie: There! The glass is as good as new!
+    - Jackie: Hmm, I suppose the only way to truly know if the glass is fixed is if you try and move the compass again.
+- ** 92 %** · late  · `WrongDoor` — task 129/140 'Wash the window' task completed; after 'Remove the planks'
+    - Maddie: Hold on, I thought this was the exit...
+    - Maddie: It certainly looked like it, but it's just a large window. 
+- ** 98 %** · outro · `Returnbox` — task 137/140 'Repair the cracked tiles' task completed; after 'Remove the planks', 'Clean the glass', 'Place a starfish'
+    - Maddie: Well, I think that's the last bit of tile that needed fixing!
+    - Maddie: I should put this box back where I found it, now that I don't need it anymore.
+- ** 99 %** · outro · `Anubis` — task 138/140 'Place the Anubis' task completed; after 'Repair the cracked tiles'
+    - Maddie: Hold on! I know this one! Anubis! God of the underworld?
+    - Maddie: That's right! He's the one to guide the souls in the afterlife and protect their tombs.

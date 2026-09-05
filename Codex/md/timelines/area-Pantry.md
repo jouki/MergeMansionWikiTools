@@ -1,0 +1,52 @@
+# Pantry — dialogue timeline (area)
+`area:Pantry` · versions 26.07.01–26.07.01 (1)
+
+## Order in 26.07.01
+- **  2 %** · intro · `FirstFloorPantry_02` — task 6/282 'Remove recipe cards' task completed; after 'Fix the rug'
+    - Maddie: Oh, these recipe cards are really quite charming.
+    - Maddie: Old recipes can be such a lovely glimpse into the past.
+- **  5 %** · intro · `FirstFloorPantry_CharacterTask1` — task 14/282 'Restock the kitchen' task appears; after 'Fix the rest of the floor'
+    - Cherry: So it's true! The pantry is back up and running again!
+    - Maddie: Oh, Cherry! You found your way here! Welcome! Uh - what's all this?
+- ** 15 %** · early · `FirstFloorPantry_POI_WallCalendar` — task 42/282 'Finish cleaning the order board' task completed; after 'Clean the order board'
+    - Maddie: Wow, this calendar is so out of date.
+    - Maddie: 1963. That can't have been the last time this pantry was used, can it?
+- ** 19 %** · early · `FirstFloorPantry_CharacterTask2` — task 53/282 'Wash up the mess' task completed; after 'Tidy the rest of the tools'
+    - Maddie: So, Cherry, I found these old recipe cards when I was cleaning.
+    - Cherry: Vintage recipe cards? My, oh my, let me take a look at those!
+- ** 28 %** · early · `FirstFloorPantry_POI_CentralTable` — task 80/282 'Clean the table' task completed; after 'Wipe the table surface'
+    - Maddie: Hm! Looks like this was supposed to spin around. But I don't think it's worth fixing it.
+    - Maddie: I guess they must have used this when they were making their jam - must've saved quite a bit of time too!
+- ** 29 %** · early · `FirstFloorPantry_03` — task 82/282 'Place the rest of the recipe cards' task completed; after 'Place recipe cards'
+    - Maddie: I can't make sense of these recipe cards, I wonder...
+    - Maddie: *Ring ring*
+- ** 29 %** · early · `FirstFloorPantry_POI_HoosierCabinets` — task 83/282 'Place the flour' task completed; after 'Remove the rest of the stuff'
+    - Maddie: This turned out really nice! This cabinet has...everything!
+    - Maddie: It's probably over a hundred years old. I bet it used to be in the kitchen until they moved it here.
+- ** 38 %** · mid   · `FirstFloorPantry_04` — task 107/282 'Plant new plants' task completed; after 'Compost dead plant'
+    - Maddie: I have to call Roddy about Arthur.
+    - Maddie: Roddy? Hello?
+- ** 40 %** · mid   · `FirstFloorPantry_CharacterTask3` — task 113/282 'Taste the jam' task completed; after 'Make jam toppers'
+    - Cherry: Mmmm! Delicious! Absolutely delicious!
+    - Maddie: It is! So what did you mean with 'the' recipe?
+- ** 52 %** · mid   · `FirstFloorPantry_POI_Start_GreenRoom` — task 148/282 'Remove the rest of the cobwebs' task completed; after 'Remove the cobwebs'
+    - Maddie: What've we got back here...? *cough cough*
+    - Maddie: Judging by all the dead plants...it was some kind of...greenhouse?
+- ** 57 %** · mid   · `FirstFloorPantry_POI_JamNook` — task 160/282 'Clean the side shelf' task completed; after 'Plant some mushrooms'
+    - Maddie: You know what? It's not enough that I restore all of this...I should make use of it!
+    - Maddie: Heck, I should try making this mystery jam I got off the recipe card.
+- ** 61 %** · mid   · `FirstFloorPantry_CharacterTask4` — task 173/282 'Add more flowers' task completed; after 'Store fruit'
+    - Maddie: Looks like we've got everything back to its old glory, more or less!
+    - Maddie: You know my mother used to come here every week with fresh produce for the kitchen.
+- ** 75 %** · late  · `FirstFloorPantry_POI_Start_ToolStorage` — task 212/282 'Fix the curtain hooks' task completed; after 'Add the lightbulb'
+    - Maddie: This place definitely has a lot of nooks. Hmm. Wonder what this was for?
+    - Maddie: Tools of the trade, looks like...always good to have a place to put your stuff.
+- ** 76 %** · late  · `FirstFloorPantry_08` — task 214/282 'Add more pots' task completed; after 'Place pots'
+    - Maddie: Okay, Maddie. This you know.
+    - Maddie: It's kind of like a garden, really. Just indoors.
+- ** 88 %** · late  · `FirstFloorPantry_CharacterTask5` — task 248/282 'Tape the recipe cards together' task completed; after 'Cover the stains with paint'
+    - Maddie: So, Cherry, before you go - I found this jar when I was cleaning.
+    - Maddie: Is that...that's the logo! The butterfly logo!
+- ** 95 %** · outro · `FirstFloorPantry_POI_SpiceShelves` — task 269/282 'Clean the copper pot' task completed; after 'Add hopberries'
+    - Maddie: Finally - my very own spice shelf. Let's see...I've got...rosemary, thyme, sage...
+    - Maddie: Parsley, of course. But then the fun stuff. Bergamot. Chamomile. And mint!

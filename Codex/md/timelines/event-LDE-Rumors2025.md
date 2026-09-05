@@ -1,0 +1,106 @@
+# Circus Caper — dialogue timeline (event)
+`event:LDE_Rumors2025` · versions 25.02.01–26.07.01 (25)
+
+## Order in 26.07.01
+- **  0 %** · intro · `LDE_Rumors2025_Intro_Dialogue` — event start
+    - Mason: Does the name Fiona DuVal ring a bell?
+    - Maddie: You mean the scheming Circus ringmaster who tried to pull a heist at the Mansion - but was stopped right at the last minute?
+- ** 13 %** · early · `LDE_Rumors2025_CircusWagon_01_Dialogue` — item 'Circus Wagon': chain 'Circus Wagon' 2/23, item level 1/1 (estimate)
+    - Mason: Juggling, fortunetelling and simple magic tricks are fun, but we need something more challenging.
+    - Roddy: Like what?
+- ** 13 %** · early · `LDE_Rumors2025_CircusProps_01_Dialogue` — item 'Hula Hoop': chain 'Circus Equipment' 3/23, item level 1/10 (estimate)
+    - Hank: Hey, little man! What are you doing poking around back here?
+    - Hank: Looks like the kind of stuff they don’t just let anybody mess with.
+- ** 15 %** · early · `LDE_Rumors2025_CircusProps_06_Dialogue` — item 'Circus Stand': chain 'Circus Equipment' 3/23, item level 6/10 (estimate)
+    - Mason: I’m Mason, and this is Hank.
+    - Hank: Um, hi...
+- ** 16 %** · early · `LDE_Rumors2025_CircusProps_07_Dialogue` — item 'Unicycle': chain 'Circus Equipment' 3/23, item level 7/10 (estimate)
+    - Mason: You were right! The circus is in town!
+    - Mason: I saw them setting up the big top right in front of the Mansion.
+- ** 17 %** · early · `LDE_Rumors2025_CircusProps_10_Dialogue` — item 'Hot Air Balloon': chain 'Circus Equipment' 3/23, item level 10/10 (estimate)
+    - Ringleader: We’re still setting everything up, but you can find all the equipment you need in our caravans.
+    - Ringleader: Feel free to try things out, but please stay out of the green caravan.
+- ** 20 %** · early · `LDE_Rumors2025_MagicianProps_05_Dialogue` — item 'Magic Hat': chain 'Magic Accessories' 4/23, item level 5/7 (estimate)
+    - Mason: What’s in the big stripy box?
+    - Hank: White gloves, top hats and a LOT of scarves. I guess... magician’s props!
+- ** 26 %** · early · `LDE_Rumors2025_CarnivalGames_03_Dialogue` — item 'Shooting Gallery': chain 'Carnival Games' 6/23, item level 3/7 (estimate)
+    - Hank: Can you juggle?
+    - Mason: Not yet. Let me try...
+- ** 28 %** · early · `LDE_Rumors2025_CarnivalGames_07_Dialogue` — item 'Prize Stand': chain 'Carnival Games' 6/23, item level 7/7 (estimate)
+    - Roddy: What are you doing? I don’t think you should be touching the carnival games and the circus equipment...
+    - Mason: We have permission!
+- ** 29 %** · early · `LDE_Rumors2025_Lottery_01_Dialogue` — item 'Mini Raffle Ticket': chain 'Raffle Tickets' 7/23, item level 1/5 (estimate)
+    - AntiqueDealer: I bought lots of raffle tickets to make sure I win the biggest prize!
+    - AntiqueDealer: My ticket has never won, but this time the prize will be mine!
+- ** 35 %** · early · `LDE_Rumors2025_TeaGossip_04_Dialogue` — item 'Tea & Chat': chain 'Afternoon Tea' 8/23, item level 4/7 (estimate)
+    - Ringleader: Your friends seem to be excited about the Circus!
+    - Maddie: Friends? I thought it was just Mason who wanted to learn the tricks of the trade.
+- ** 36 %** · mid   · `LDE_Rumors2025_TeaGossip_07_Dialogue` — item 'Empty Wallet': chain 'Afternoon Tea' 8/23, item level 7/7 (estimate)
+    - Ringleader: Let me apologize again for my past indiscretions. I really thought I had no options but to choose a life of crime to save the Circus.
+    - Ringleader: And your Grandma always made it sound like the place was vacant. It seemed like the best way out.
+- ** 48 %** · mid   · `LDE_Rumors2025_Fortunetelling_04_Dialogue` — item 'Malzar': chain 'Fortune Teller's Tent' 11/23, item level 4/4 (estimate)
+    - Mason: A crystal ball! This must be the fortune-teller’s caravan.
+    - Roddy: Look at me, I’m like Lady Voyance!
+- ** 49 %** · mid   · `LDE_Rumors2025_Advertising_01_Dialogue` — item 'Circus Flyer': chain 'Circus Ads' 12/23, item level 1/5 (estimate)
+    - Ringleader: OK, here are some of the basics of being a circus performer.
+    - Ringleader: If you want to succeed, you need a solid act. Something that will truly captivate the audience.
+- ** 54 %** · mid   · `LDE_Rumors2025_Brochures_03_Dialogue` — item 'Small Circus Program': chain 'Brochures & Programs' 13/23, item level 3/7 (estimate)
+    - Roddy: We need to think of an act that will really stop people in their tracks. Like...
+    - Mason: A knife wheel!
+- ** 56 %** · mid   · `LDE_Rumors2025_Brochures_07_Dialogue` — item 'Crumpled Programs': chain 'Brochures & Programs' 13/23, item level 7/7 (estimate)
+    - Ringleader: I’m afraid you’re not quite far enough to touch the real knives.
+    - Ringleader: We have some foam knives you can practice with!
+- ** 61 %** · mid   · `LDE_Rumors2025_PaperScraps_01_Dialogue` — item 'Small Scrap': chain 'Paper Scraps' 15/23, item level 1/4 (estimate)
+    - Maddie: What are these scraps of paper in the dumpster?
+    - Maddie: There's some writing on them, but I can't make it out...
+- ** 63 %** · mid   · `LDE_Rumors2025_PaperScraps_03_Dialogue` — item 'Glued-up Sheet': chain 'Paper Scraps' 15/23, item level 3/4 (estimate)
+    - Mason: Could we shoot Roddy out of a cannon? You’ve done it once, haven’t you?
+    - Roddy: Y-yes, but maybe we could do something less... explosive?
+- ** 66 %** · late  · `LDE_Rumors2025_HeistPlan_03_Dialogue` — item 'Heist Plan': chain 'Heist Plan' 16/23, item level 3/6 (estimate)
+    - Mason: Look, guys! I designed a trick! I’ve drawn it all out here.
+    - Roddy: Are those chains?
+- ** 68 %** · late  · `LDE_Rumors2025_HeistPlan_06_Dialogue` — item 'Escape Vehicle': chain 'Heist Plan' 16/23, item level 6/6 (estimate)
+    - Roddy: So are you going to show us how your trick works?
+    - Mason: Actually, the trick is for you two!
+- ** 72 %** · late  · `LDE_Rumors2025_RingmasterSuit_05_Dialogue` — item 'Wardrobe': chain 'Ringmaster's Wardrobe' 17/23, item level 5/5 (estimate)
+    - Mason: Fiona was right. We need to think of an act that makes people so excited that they can’t look away.
+    - Roddy: That’s easier said than done.
+- ** 74 %** · late  · `LDE_Rumors2025_ThiefProps_04_Dialogue` — item 'Duffel Bag': chain 'Thief's Essentials' 18/23, item level 4/7 (estimate)
+    - Roddy: How did you pry open the door of the green caravan so quickly?
+    - Mason: I have many skills. Let’s see what’s in these boxes.
+- ** 75 %** · late  · `LDE_Rumors2025_ThiefProps_07_Dialogue` — item 'Lock Pick Set': chain 'Thief's Essentials' 18/23, item level 7/7 (estimate)
+    - Mason: These could be perfect for our act!
+    - Roddy: It’s a shame the costume is about five sizes too small for Hank, and ten sizes too big for me.
+- ** 83 %** · late  · `LDE_Rumors2025_SafeOpen_01_Dialogue` — item 'Boulton Safe Open': chain 'Boulton Safe Open' 20/23, item level 1/1 (estimate)
+    - Hank: A safe? Oh, I get it.
+    - Mason: This stuff is meant for a spectacular escape act. Like Harry Houdini!
+- ** 84 %** · late  · `LDE_Rumors2025_CarnivalPrizes_03_Dialogue` — item 'Set of Tokens': chain 'Carnival Prizes' 21/23, item level 3/11 (estimate)
+    - Maddie: Are you planning on joining the Circus?
+    - Roddy: Haha, probably not... But I'm pretty good at card tricks.
+- ** 84 %** · late  · `LDE_Rumors2025_Prizes_03_Dialogue` — item 'Set of Tokens': chain 'Carnival Prizes' 21/23, item level 3/11 (estimate)
+    - Maddie: Are you going to the circus?
+    - Hank: You bet I am!
+- ** 86 %** · late  · `LDE_Rumors2025_CarnivalPrizes_07_Dialogue` — item 'Stuffed Bunny': chain 'Carnival Prizes' 21/23, item level 7/11 (estimate)
+    - Ringleader: What do you think about what it is we do here in the circus?
+    - Mason: It's all super interesting, but I think I'm ready for more challenging stuff.
+- ** 86 %** · late  · `LDE_Rumors2025_Prizes_07_Dialogue` — item 'Stuffed Bunny': chain 'Carnival Prizes' 21/23, item level 7/11 (estimate)
+    - Roddy: The circus would be a great cover for a criminal enterprise, don't you think?
+    - Maddie: Why? I don't think there's a more colorful and conspicuous group.
+- ** 87 %** · late  · `LDE_Rumors2025_CarnivalPrizes_11_Dialogue` — item 'Stuffed Unicorn': chain 'Carnival Prizes' 21/23, item level 11/11 (estimate)
+    - Maddie: Where’s Hank? And Roddy?
+    - Mason: Oh, they... they're coming in a minute. They're just kind of tied up at the moment...
+- ** 87 %** · late  · `LDE_Rumors2025_Prizes_11_Dialogue` — item 'Stuffed Unicorn': chain 'Carnival Prizes' 21/23, item level 11/11 (estimate)
+    - Maddie: What a show that was!
+    - Mason: I really didn't expect the magician to pull a raccoon out of his hat.
+- ** 95 %** · outro · `LDE_Rumors2025_CircusTent_01_Dialogue` — item 'Big Top': chain 'Circus Tent' 23/23, item level 4/4 (estimate)
+    - Maddie: I wasn’t expecting to see you back in Hopewell Bay so soon.
+    - Ringleader: I agree that the circumstances of our last visit were... regrettable, but I hope we can put it behind us.
+- **100 %** · outro · `LDE_Rumors2025_Outro_Dialogue` — event end
+    - Mason: Thank you so much for letting us try everything! I especially loved the tightrope walking and the knives.
+    - Hank: The strongman suit felt like a great fit for me.
+
+Not placeable in 26.07.01 (3): `LDE_Rumors2025_TA3_Dialogue`, `LDE_Rumors2025_TA5_Dialogue`, `LDE_Rumors2025_TC1_Dialogue`
+
+## Changes across versions
+- **25.08.02 → 25.09.01**: moved 1
+- **26.04.01 → 26.04.02**: added 1 (`LDE_Rumors2025_Intro_Dialogue`)

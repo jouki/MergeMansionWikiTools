@@ -1,0 +1,63 @@
+# Sweet Mess Express — dialogue timeline (event)
+`event:CBE_SweetMess` · versions 26.03.01–26.07.01 (7)
+
+## Order in 26.07.01
+- **  8 %** · early · `CBE_SweetMess_Lollipop_02_Dialogue` — item 'Pair of Socket Set Screws': chain 'Nuts & Screws' 3/68, item level 4/10 (estimate)
+    - Maddie: Look, kiddo! They're putting on a new Easter event nearby.
+    - Mason: I bet it's just a little Easter egg hunt for little kids.
+- **  8 %** · early · `CBE_SweetMess_Lollipop_04_Dialogue` — item 'Small Screw Box': chain 'Nuts & Screws' 3/68, item level 6/10 (estimate)
+    - Maddie: This Easter Extravaganza looks pretty cool, but what about the chocolate machine?
+    - Maddie: The main tank needs to be refilled regularly, and someone needs to supervise the quality.
+- ** 10 %** · early · `CBE_SweetMess_Character_01_Dialogue` — item 'Small Belt Drive': chain 'Machine Assembly' 4/68, item level 3/5 (estimate)
+    - Mason: See, all you need to do is just keep the machine going with the ingredients. That’s all!
+    - Roddy: But the machine is pretty complicated. What if something happens?
+- ** 10 %** · early · `CBE_SweetMess_Peppermint_02_Dialogue` — item 'Complete Mechanism': chain 'Machine Assembly' 4/68, item level 5/5 (estimate)
+    - Maddie: Are you sure you're able to look after the chocolate machine?
+    - Hank: It's not that complicated, right?
+- ** 13 %** · early · `CBE_SweetMess_ChocoMachineProducing_Dialogue` — item 'Chocolate Machine': chain 'Chocolate Machine' 6/68, item level 1/1 (estimate)
+    - Roddy: So this part makes chocolates! We put the chocolate here, it melts down in there and moves into the machine to make yummy treats.
+    - Hank: What does this pipe do?
+- ** 18 %** · early · `CBE_SweetMess_PastryMachineProducing_Dialogue` — item 'Pastry Machine Baking': chain 'Pastry Machine - Producing' 10/68, item level 1/1 (estimate)
+    - Roddy: Ah, look at these pastries!
+    - Roddy: So buttery and flaky. YUM!
+- ** 22 %** · early · `CBE_SweetMess_Character_03_Dialogue` — item 'Wrapped Toffees': chain 'Toffees' 13/68, item level 4/4 (estimate)
+    - Roddy: This toffee is to die for! But my dentist won’t be happy if I have too much… 
+    - Hank: It’s Easter! Live a little!
+- ** 28 %** · early · `CBE_SweetMess_Peppermint_04_Dialogue` — item 'Melted Sugar': chain 'Ingredients' 18/68, item level 3/5 (estimate)
+    - Maddie: Fill the chocolate tank when the gauge gets low and keep an eye on the pressure valve.
+    - Maddie: We'll be back in the evening!
+- ** 30 %** · early · `CBE_SweetMess_Cupboard_01_Dialogue` — item 'Cabinet': chain 'Cabinet' 19/68, item level 1/1 (estimate)
+    - Hank: Whoa… why does this cupboard look like the Easter Bunny’s storage unit?
+    - Roddy: That’s not a cupboard. That’s a full-blown seasonal command center.
+- ** 30 %** · early · `CBE_SweetMess_Character_02_Dialogue` — item 'Spring Candle': chain 'Decorations' 20/68, item level 1/6 (estimate)
+    - Cherry: How’s it going, fellas? I had to come and see the machine in action!
+    - Roddy: Everything is great. We're just refilling the chocolate tank when the machine tells us to and keeping an eye on the pressure.
+- ** 31 %** · early · `CBE_SweetMess_EasterDecorations_03_Dialogue` — item 'Spring Cushion': chain 'Decorations' 20/68, item level 3/6 (estimate)
+    - Hank: But what do we do with all these ornaments? There are garlands, egg wreaths, pastel table runners…
+    - Roddy: I think we’re legally obligated to decorate. It's a part of the deal.
+- ** 32 %** · early · `CBE_SweetMess_EasterDecorations_06_Dialogue` — item 'Easter Arrangement': chain 'Decorations' 20/68, item level 6/6 (estimate)
+    - Roddy: If we put all of these ornaments up, it’s going to look like the rabbits staged a coup.
+    - Hank: I say we just lean into it: Full Easter explosion. When Maddie and Mason get back, it’s like spring attacked the house.
+- ** 32 %** · early · `CBE_SweetMess_EasterEggs_05_Dialogue` — item 'Creative Treats': chain 'Painted Eggs' 21/68, item level 5/10 (estimate)
+    - Roddy: You broke Maddie’s machine with the ceramic bunny!
+    - Hank: You didn't catch it even though I gave you a heads-up!
+- ** 32 %** · early · `CBE_SweetMess_EasterEggs_07_Dialogue` — item 'Bowl of Easter Eggs': chain 'Painted Eggs' 21/68, item level 7/10 (estimate)
+    - Hank: Ursula’s house is right there. Just go to the door and knock!
+    - Roddy: No!
+- ** 33 %** · early · `CBE_SweetMess_EasterEggs_10_Dialogue` — item 'Mega Easter Basket': chain 'Painted Eggs' 21/68, item level 9/10 (estimate)
+    - Roddy: Does the machine sound weird to you?
+    - Hank: Maybe a little… But it’s definitely working. I can see the chocolate moving.
+- ** 33 %** · early · `CBE_SweetMess_Character_04_Dialogue` — item 'Ultimate Easter Basket': chain 'Painted Eggs' 21/68, item level 10/10 (estimate)
+    - Maddie: Hey, Roddy! We just got back with Mason. How's it going?
+    - Roddy: G-great! Totally awesome! How was the Easter Extravaganza?
+- ** 34 %** · early · `CBE_SweetMess_Box_05_Dialogue` — item 'Mason': chain 'CBE_SweetMess_Character11' 22/68, item level 1/1 (estimate)
+    - Mason: The lollipops pass my quality check with flying colors. Let’s crank up the machine so others can try some too!
+- ** 65 %** · mid   · `CBE_SweetMess_Character_05_Dialogue` — item 'Grandma': chain 'CBE_SweetMess_Character51' 45/68, item level 1/1 (estimate)
+    - Grandma: Is this true what I hear? Did you two break Maddie’s chocolate machine?
+    - Hank: Kind of… but we did fix it!
+- ** 95 %** · outro · `CBE_SweetMess_Intro_Dialogue` — item 'Small Nut': chain 'Nuts & Screws' 68/68, item level 1/1 (estimate)
+    - Maddie: Pass me the wrench, Mason. I just need to tighten these screws, and then we’re ready!
+    - Maddie: There! The chocolate machine is good to go for another Easter. Do you want to do the honors and turn it on?
+- **100 %** · outro · `CBE_SweetMess_Outro_Dialogue` — event end
+    - Roddy: We're so sorry about the machine, Maddie. You entrusted it to us, and we failed you completely.
+    - Maddie: Don't be so hard on yourself, Roddy. You did fix it!

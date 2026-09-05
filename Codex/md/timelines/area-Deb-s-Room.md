@@ -1,0 +1,67 @@
+# Deb's Room — dialogue timeline (area)
+`area:Deb's Room` · versions 25.05.01–26.07.01 (21)
+
+## Order in 26.07.01
+- **  0 %** · intro · `DebsRoom00_Intro` — task 1/201 'Unlock Deb's Room' task completed; after start of the area
+    - Maddie: I think the sound was coming from in here!
+    - Maddie: Wow! This place is a mess! 
+- ** 10 %** · early · `DebsRoomCharacterTask1` — task 21/201 'Ah, did I leave this piece unfinished?' task completed; after 'Clean table'
+    - Maddie: Hey, what’s this?!
+    - Deb: Oh! I thought I lost these! It's some jewelry I was working on in my younger years...
+- ** 14 %** · early · `DebsRoomPOI_ParisianRoom` — task 29/201 'Patch up carpet' task completed; after 'Fix carpet'
+    - Maddie: This entire room is definitely giving off a Parisian vibe.
+    - Maddie: I guess Deb’s travels in Europe left a big impression.
+- ** 17 %** · early · `DebsRoomPOI_WeddingShoes` — task 34/201 'Clean display stand' task appears; after 'Dust perfume'
+    - Maddie: Ah, Deb’s shoes from her first wedding!
+    - Maddie: Custom made in Italy and EXTREMELY expensive.
+- ** 17 %** · early · `DebsRoomPOI_Letters` — task 35/201 'Pick up letters' task completed; after 'Pick up books'
+    - Maddie: Interesting... This letter is addressed to “My Little Blossom”.
+    - Maddie: What’s strange is that Deb did not write this!
+- ** 19 %** · early · `DebsRoomCharacterTask2` — task 39/201 'Just as I imagined it!' task completed; after 'Let's make it shine!'
+    - Deb: Not bad, Maddie! You really have an eye for this!
+    - Maddie: I’m surprised myself, to be honest.
+- ** 22 %** · early · `DebsRoomPOI_Hat` — task 44/201 'Hang hat' task completed; after 'Wipe glass'
+    - Maddie: Deb’s signature hat!
+    - Maddie: Really stylish... I wonder if it would fit me?
+- ** 28 %** · early · `DebsRoomPOI_Desk` — task 57/201 'Add some varnish' task completed; after 'Clear clutter'
+    - Maddie: I wonder how many hours she spent sitting in front of this desk?
+    - Maddie: Er... I didn’t mean to make her sound vain or anything.
+- ** 29 %** · early · `DebsRoomCharacterTask3` — task 59/201 'Emerald was her favorite stone.' task completed; after 'It has lost it's stone. The prongs got bent.'
+    - Deb: Ah, this piece. This one is VERY special.
+    - Deb: I dedicated it to Lindsay...
+- ** 34 %** · early · `DebsRoomPOI_Portrait` — task 69/201 'Hang portrait' task completed; after 'Fix torn wallpaper'
+    - Maddie: Wow! Deb hasn’t lost her touch with fashion, that’s for sure.
+    - Maddie: She’s as stunning now as she was back then.
+- ** 36 %** · mid   · `DebsRoomPOI_FancyClothes` — task 73/201 'Hang more clothes' task completed; after 'Add more clothing'
+    - Maddie: I bet these clothes could go for a lot of money at the auction.
+    - Maddie: But I know Deb...
+- ** 44 %** · mid   · `DebsRoomPOI_HorsePhoto` — task 88/201 'Hang picture' task completed; after 'Repair column'
+    - Maddie: This must have been Deb’s horse!
+    - Maddie: The frame has a name... Biscuit.
+- ** 44 %** · mid   · `DebsRoomPOI_BirdCage` — task 89/201 'Fix cage' task appears; after 'Clean table'
+    - Maddie: Hmm... Looks like a cockatoo cage.
+    - Maddie: I wouldn’t have thought Deb owned a pet...
+- ** 52 %** · mid   · `DebsRoomPOI_Ribbons` — task 104/201 'Dust ribbons' task completed; after 'Clean trimming'
+    - Maddie: Deb was quite the rider!
+    - Maddie: These award ribbons really prove it, too!
+- ** 54 %** · mid   · `DebsRoomPOI_EiffelTower` — task 108/201 'Place trinket' task completed; after 'Repair tablecloth'
+    - Maddie: Even though it’s only a scale model, the engineering is still impressive!
+    - Maddie: Can’t believe it was almost sold off as scrap metal by a con artist...
+- ** 54 %** · mid   · `DebsRoomCharacterTask4` — task 109/201 'Hmm... Maybe some more gems.' task completed; after 'And then to add this grand sapphire.'
+    - Deb: No, sweetie. Use the opal on that one.
+    - Maddie: But I really think citrine is the better choice!
+- ** 68 %** · late  · `DebsRoomPOI_AlcoveBed` — task 137/201 'Clean sheets' task completed; after 'Repair sheets'
+    - Maddie: Ooh, this is so cozy!
+    - Maddie: And fancy too! Reminds me of something I’d read in a fairytale.
+- ** 70 %** · late  · `DebsRoomCharacterTask5` — task 140/201 'Stunning work!' task completed; after 'How about an appropriate box.'
+    - Deb: Alright, I admit it...
+    - Deb: It looks stunning!
+- ** 80 %** · late  · `DebsRoomPOI_Bathtub` — task 161/201 'Fill holder' task completed; after 'Place towel'
+    - Maddie: This bathtub is pure luxury and decadence!
+    - Maddie: I can only imagine sunbathing in the window's light while soaking in a warm bubble bath!
+- ** 92 %** · late  · `DebsRoomPOI_Soaps` — task 185/201 'Place toiletries' task appears; after 'Add flowers'
+    - Maddie: “Lavande Royale”. Sounds fancy.
+    - Maddie: I don’t think Deb will mind if I give it a whiff...
+
+## Changes across versions
+- **25.09.02 → 25.10.01**: moved 2

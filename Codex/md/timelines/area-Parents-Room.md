@@ -1,0 +1,61 @@
+# Parents' Room — dialogue timeline (area)
+`area:Parents' Room` · versions 25.07.01–26.07.01 (18)
+
+## Order in 26.07.01
+- ** 15 %** · early · `ParentsRoomCharacterTask01` — task 39/251 'Burn Leonard’s thinking bench' task appears; after 'Renew floor'
+    - Maddie: Hello, Winston!
+    - Winston: Ma’am.
+- ** 19 %** · early · `ParentsRoomPOI_Dreamcatcher` — task 47/251 'Hang dreamcatchers' task completed; after 'Fix wall'
+    - Maddie: What intricate dreamcatchers! Mom must've made these as well.
+    - Maddie: Dreamcatchers are supposed to protect people from bad dreams.
+- ** 25 %** · early · `ParentsRoom11` — task 62/251 'Place pillows' task completed; after 'Clean blanket'
+    - Maddie: Looks like Mom took some notes from Grandma!
+    - Maddie: She really knew how to make this place a home.
+- ** 28 %** · early · `ParentsRoomCharacterTask02` — task 70/251 'Toss supplies Leonard never used' task completed; after 'Don't get cut from all the broken pieces'
+    - Maddie: Uhm, Winston?
+    - Winston: Yes, Ma’am.
+- ** 33 %** · early · `ParentsRoomPOI_MediaNook` — task 82/251 'Clear floor' task completed; after 'Place teddy', 'Place tray'
+    - Maddie: This is where they kept their media collection.
+    - Maddie: Depeche Mode and aviation magazines? Oh, Dad...
+- ** 38 %** · mid   · `ParentsRoom12` — task 96/251 'Repaint table' task completed; after 'Clean table'
+    - Maddie: I must admit, this room is so different from the other ones!
+    - Maddie: Even the smallest corner in here is set up to be cozy and inviting.
+- ** 39 %** · mid   · `ParentsRoomCharacterTask03` — task 97/251 'Relocate Bartholomew, the house moth' task completed; after 'Water the badly neglected flower'
+    - Maddie: So tell me, Winston...
+    - Maddie: What’s the story with the moth?
+- ** 45 %** · mid   · `ParentsRoom14` — task 114/251 'Clean out footprints' task completed; after 'Clean floor'
+    - Maddie: Hey! What’s this?!
+    - Maddie: Someone else has been in here and left a trail of painted footprints!
+- ** 55 %** · mid   · `ParentsRoomCharacterTask04` — task 139/251 'Load up on past regrets' task completed; after 'Hide the heartbreak supplies'
+    - Winston: Ah, the vase Leonard broke during one of our fights.
+    - Maddie: You really want this fixed?
+- ** 57 %** · mid   · `ParentsRoomPOI_TrolleyFridge` — task 142/251 'Clean drink tray' task completed; after 'Fix drink tray wheels'
+    - Maddie: Did Dad convert an airline trolley into a mini-fridge?
+    - Maddie: He really was an excellent inventor!
+- ** 65 %** · mid   · `ParentsRoomCharacterTask05` — task 163/251 'Label the empty seed bag “hope”' task completed; after 'Maintain a sense of decency'
+    - Maddie: I see one of these seed bags was labeled ‘hope’?
+    - Winston: Yes... I made it for Leonard to cheer him up. He’s a very practical man.
+- ** 68 %** · late  · `ParentsRoom10` — task 170/251 'Place photo' task completed; after 'Hang photo'
+    - Maddie: Mom... Dad...
+    - Maddie: It's so unfair!
+- ** 74 %** · late  · `ParentsRoom15` — task 186/251 'Place plane model' task completed; after 'Place grass mat'
+    - Maddie: I figured Dad would be into model airplanes...
+    - Maddie: But- Hey wait a minute!
+- ** 78 %** · late  · `ParentsRoomPOI_DepartureBoard` — task 197/251 'Fix departures table' task completed; after 'Place tools'
+    - Maddie: Interesting! This looks like a flight departure board...
+    - Maddie: Paris, Tokyo, Rome... But, why do they have years next to them?
+- ** 83 %** · late  · `ParentsRoomTeaser` — task 209/251 'Place blueprint' task appears; after 'Position pilot hat'
+    - Maddie: There’s something about the tin can factory that keeps bugging me.
+    - Maddie: There has to be something important there that Dad was investigating...
+- ** 84 %** · late  · `ParentsRoomPOI_InstrumentsFramed` — task 212/251 'Polish guitar' task completed; after 'Repair guitar'
+    - Maddie: They framed their guitars together, that's so romantic!
+    - Maddie: Oh, look! There's also their song sheets from their band days.
+- ** 89 %** · late  · `ParentsRoomPOI_ChangingStation` — task 223/251 'Place changing station' task completed; after 'Clean changing station'
+    - Maddie: This is my old changing station!
+    - Maddie: It still smells like baby powder and that perfume Mom always wore.
+- ** 92 %** · late  · `ParentsRoomPOI_BabyMobile` — task 232/251 'Clean teddy' task completed; after 'Replace plant'
+    - Maddie: This handmade baby mobile has Mom written all over it.
+    - Maddie: And it even has little airplanes for Dad.
+- ** 93 %** · late  · `ParentsRoom19` — task 233/251 'Attach mobile' task completed; after 'Clean teddy'
+    - Maddie: Aww. What an adorable crib!
+    - Maddie: And this armchair is really comfy too...

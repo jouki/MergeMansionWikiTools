@@ -1,0 +1,61 @@
+# Music Studio — dialogue timeline (area)
+`area:Music Studio` · versions 24.07.01–26.07.01 (30)
+
+## Order in 26.07.01
+- **  1 %** · intro · `Musicianroom06` — task 1/178 'Unlock the Music Studio' task completed; after start of the area
+    - Maddie: Hmm... This place looks more like a music studio than anything else!
+    - Maddie: I wonder what type of music was made in here?
+- **  7 %** · early · `MusicianCharacterTaskIntro` — task 12/178 'I need to go through these old files in the dark?' task completed; after 'Wipe the pillows'
+    - Maddie: Roddy, you’re back so soon! Did you find the documents?
+    - Roddy: No... Not yet. A lot of the files for the older buildings in Hopewell Bay are disorganized.
+- **  9 %** · early · `MusicianRoomOldWalkman` — task 16/178 'Clean the Portable Cassette Player' task completed; after 'Remove the batteries'
+    - Maddie: Oh, sweet! An old portable cassette player!
+    - Maddie: I remember fixing Grandma’s old one many times!
+- ** 15 %** · early · `MusicianCharacterTask1` — task 27/178 'Time to help around the house!' task appears; after 'Hmm, I need to wipe off these files...'
+    - Roddy: Maddie! I found out that family members of people who built this mansion are still alive.
+    - Roddy: They might know something, but they said I need to help them with some errands first.
+- ** 18 %** · early · `MusicianRoomBubbleChair` — task 32/178 'Clean the fabric' task completed; after 'Dust the chair'
+    - Maddie: I’ve seen some of these designer chairs around... I think they were really popular in the 70s.
+    - Maddie: Maybe not exactly to my taste, but somehow it really ties this room together!
+- ** 25 %** · early · `MusicianRoomYellowSpeaker` — task 45/178 'Rebuild the speaker' task completed; after 'Reinstall the speaker wiring'
+    - Maddie: That’s a fancy-looking speaker...
+    - Maddie: As an audiophile myself, I reckon it has a real rich sound.
+- ** 29 %** · early · `MusicianRoomMixTapes` — task 51/178 'Open the box' task completed; after 'Paint the box'
+    - Maddie: These must be all his mixtapes!
+    - Maddie: I... don’t recognize any of the songs...
+- ** 35 %** · early · `MusicianRoomAwards` — task 62/178 'Place the trophies' task completed; after 'Place the trophies'
+    - Maddie: For such a recluse, they sure won a lot of awards...
+    - Maddie: Hey, wait a minute!
+- ** 36 %** · mid   · `Musicianroom07` — task 65/178 'Place compact discs' task completed; after 'Place compact discs'
+    - Maddie: Look at all this amazing vintage stuff!
+    - Maddie: Holy smokes, some of this is even signed by the original musician!
+- ** 38 %** · mid   · `MusicianCharacterTask2` — task 68/178 'I have to find the cat in the... Attic?!' task completed; after 'Sure... I'll repaint the walls too!'
+    - Maddie: How’s it going, Roddy?
+    - Roddy: It took a bit of work, but I think I found something!
+- ** 42 %** · mid   · `MusicianCharacterTask3` — task 74/178 '"Fix" the streetlights...' task completed; after 'Never thought I'd put these gloves on again...'
+    - Roddy: Bad news, Maddie...
+    - Maddie: Wh- What is it?!
+- ** 45 %** · mid   · `MusicianRoomFramedJacket` — task 81/178 'Fix the jacket display' task appears; after 'Remove some plaster'
+    - Maddie: This varsity jacket has been framed and signed!
+    - Maddie: I can’t figure out the name, but this must be someone the musician admired!
+- ** 51 %** · mid   · `MusicianRoomFloor` — task 91/178 'Vacuum the remaining dirt' task completed; after 'Brush the floor'
+    - Maddie: Ugh... Linoleum... If there’s anything I hate, it’s linoleum.
+    - Maddie: A mansion is no place for such... tackiness. As Winston would say.
+- ** 59 %** · mid   · `MusicianRoomTinCanLight` — task 105/178 'Install the tin lamp' task completed; after 'Paint the can'
+    - Maddie: How cool! A light fashioned out of tin!
+    - Maddie: And it looks just like the Boulton cans...
+- ** 66 %** · late  · `MusicianCharacterOutro` — task 118/178 'Nail everything shut. ' task completed; after 'Bag and tape the leftovers.'
+    - Roddy: Maddie! I found them!
+    - Maddie: You did?!
+- ** 77 %** · late  · `MusicianRoomGoldRecord` — task 138/178 'Clean the golden record' task appears; after 'Turn on the lights'
+    - Maddie: “Homegrown in Hopewell Bay”... Oh wow! This must be the gold record for the hit!
+    - Maddie: The name is a bit faded, but I can make out an E... for Eddie!
+- ** 80 %** · late  · `MusicianroomAmplifier2` — task 142/178 'Install the mesh' task completed; after 'Take the box away', 'Take the cloth away'
+    - Maddie: Hmmm, I don't know too much about amplifiers but...
+    - Maddie: I think this part goes here?
+- ** 88 %** · late  · `MusicianRoomElectricGuitar` — task 156/178 'Remove the guitar case' task completed; after 'Wash the rug'
+    - Maddie: Oh, cool! A Steely 86’ Rocker!
+    - Maddie: Mint condition, too!
+- ** 89 %** · late  · `MusicianRoomStudioSection` — task 159/178 'Remove the dust' task completed; after 'Cut up the sheet'
+    - Maddie: This studio has some impressive equipment!
+    - Maddie: But many almost look like they’re prototypes...

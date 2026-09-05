@@ -1,0 +1,61 @@
+# Lounge — dialogue timeline (area)
+`area:Lounge` · versions 24.04.01–26.07.01 (32)
+
+## Order in 26.07.01
+- **  8 %** · early · `Casino` — task 17/219 'Turn the lamp on' task completed; after 'Install the lamp'
+    - Maddie: I know some of the rooms I've worked on are rather gaudy, but this?
+    - Maddie: I can't help but think of mob movies with secret gambling dens during the prohibition... Hmm.
+- ** 10 %** · early · `VipSection` — task 21/219 'Cut the tape' task completed; after 'Place a new plant'
+    - Maddie: Hmm...
+    - Maddie: This section looks like a VIP area.
+- ** 10 %** · early · `Winstoncharactertaskintro` — task 23/219 'Some strange tracks here and there... right on the grass!' task appears; after 'Cut the tape'
+    - Winston: Pardon me, ma'am, but I come with a peculiar predicament.
+    - Maddie: What is it, Winston?
+- ** 13 %** · early · `CardMachine` — task 29/219 'Remove the sheet' task completed; after 'Wash the wall'
+    - Maddie: Ooh, a card pack dispenser! 
+    - Maddie: Wow... Some of these look like they're in mint condition. 
+- ** 16 %** · early · `Winstoncharactertask1` — task 36/219 'What can eat a lawn like this?!' task completed; after 'And some of the flowers, too!'
+    - Maddie: Winston... I don't have time for this.
+    - Winston: But ma'am, this is a matter of utmost urgency! 
+- ** 26 %** · early · `DuffelBag` — task 57/219 'Put the duffel bag away' task completed; after 'Place the money in the bag'
+    - Maddie: A duffel bag full of fake cash.
+    - Maddie: Like straight out of a crime movie...
+- ** 33 %** · early · `Winstoncharactertask2` — task 73/219 'I need to fix the table, as well.' task completed; after 'I need to remove the broken chairs.'
+    - Maddie: Any update on Gopherzilla?
+    - Winston: Well, it does have a penchant for eating flowers and grazing the lawn. 
+- ** 35 %** · early · `Lounge10` — task 76/219 'Place the parts' task completed; after 'Remove the wheel'
+    - Roddy: Are these slot machines?!
+    - Maddie: Sure do look like slot machines... But wasn't gambling illegal in Hopewell Bay until recently?
+- ** 47 %** · mid   · `Winstoncharactertask3` — task 102/219 'It ate all of Grandma's knitting thread!' task completed; after 'Need to vacuum all these strange hairs...'
+    - Maddie: So, what do you think it is? 
+    - Winston: Well... so far, I have deduced that it is a beast of great size.
+- ** 49 %** · mid   · `CardGameMotivation` — task 107/219 'Play cards!' task completed; after 'Play cards!'
+    - Maddie: I'm really getting the hang of this!
+    - Maddie: Well, I can't stop now! Another round!
+- ** 58 %** · mid   · `CardDeco` — task 127/219 'Place the cards' task completed; after 'Clean the Fireplace'
+    - Maddie: How neat!
+    - Maddie: These large playing cards look like they're made out of real poker card stock!
+- ** 63 %** · mid   · `Fireplace` — task 137/219 'Insert logs' task completed; after 'Turn on the lamp'
+    - Maddie: Now that all the burnt cash has been taken out, this fireplace is actually quite lovely.
+    - Roddy: Surprisingly modern, considering when it was installed.
+- ** 64 %** · mid   · `Winstoncharactertask4` — task 140/219 'Some flowerpots seemed to be broken! ' task completed; after 'And we are back on track! A well brushed track.'
+    - Winston: Ma'am, I have put a plan in place that will catch our destructive interloper!
+    - Maddie: Wow. I've never seen you so excited before, Winston. What is it? 
+- ** 71 %** · late  · `LeonardPoster` — task 156/219 'Remove the sheet' task completed; after 'Cut the warning tape'
+    - Maddie: Is that... Leonard?!
+    - Maddie: Why is he painted up like some sort of mob boss?
+- ** 72 %** · late  · `Winstoncharactertaskoutro` — task 157/219 'I almost see it, but it's just too dark!' task completed; after 'Let's climb over the fence!'
+    - Maddie: Winston! How did it go? 
+    - Maddie: Oh no... What is it?!
+- ** 72 %** · late  · `LadyvPoster` — task 158/219 'Fix the picture' task completed; after 'Paint the slot machine'
+    - Maddie: "Claire Voyance. Mystic Medium and Lady Seer..."
+    - Maddie: "Get your fortune told! 10 percent off your first reading!"
+- ** 90 %** · late  · `Band` — task 198/219 'Place the cymbal' task completed; after 'Unpack the drums'
+    - Maddie: Wow! This stage looks great!
+    - Maddie: Judging from the instruments, I think they used to play jazz.
+- ** 93 %** · late  · `CarpetRestoration` — task 204/219 'Repair the carpet' task completed; after 'Place the lamp'
+    - Maddie: Restoring this carpet is hard work, but I can see why...
+    - Maddie: It looks like it has a high knot count, and it was probably made especially for this room.
+- ** 94 %** · late  · `Backgammon` — task 207/219 'Clean the backgammon table' task completed; after 'Remove the sheet'
+    - Maddie: Backgammon? This seems a bit out of place...
+    - Maddie: But then again, I've seen people gamble over a game of backgammon in the movies...

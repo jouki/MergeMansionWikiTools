@@ -1,0 +1,43 @@
+# Dining Room — dialogue timeline (area)
+`area:Dining Room` · versions 24.04.01–26.07.01 (32)
+
+## Order in 26.07.01
+- **  8 %** · early · `DiningRoom04` — task 13/171 'Clean and collect fallen things' task completed; after 'Clean and move the chair'
+    - Maddie: What was all that about, Grandma? Why were those two fighting?
+    - Grandma: Oh, you know my sister can be a bit "much" sometimes!
+- ** 10 %** · early · `PianoTuningIntro` — task 17/171 'Fix the stool' task appears; after 'Clean and place the stool back'
+    - Maddie: This grand piano certainly isn't "grand", anymore but a little love and a lot of tuning can do wonders!
+- ** 13 %** · early · `DiningRoom05` — task 22/171 'Polish and place the chair back' task completed; after 'Fix the holes '
+    - Roddy: Hi, Maddie, Winston let me in and... wait, is everything okay? You look upset.
+    - Maddie: Hi, Roddy. I... I guess not. 
+- ** 13 %** · early · `PianoBroken1` — task 23/171 'Another try' task appears; after 'Try playing the piano'
+    - Maddie: Oof! That note sounds pretty bad, I think it needs a little more tuning!
+- ** 18 %** · early · `DiningRoom06` — task 31/171 'Restock the old trolley' task completed; after 'Restore the old trolley'
+    - Maddie: I find it hard to believe that a president was within these very walls!
+    - Deb: Not just any president; Abraham Lincoln was here!
+- ** 19 %** · early · `PianoBroken4` — task 32/171 'Test the piano' task completed; after 'Tune the piano'
+    - Maddie: Erm, that note was way off-key!
+- ** 21 %** · early · `FamilyPicture` — task 36/171 'Clean the family photo' task completed; after 'Polish and move the chair'
+    - Maddie: Aww! The whole family together. There's grandpa and Leonard and... wait!
+    - Maddie: Deb's missing! That's quite strange. Was it deliberate?
+- ** 26 %** · early · `PianoBroken3` — task 44/171 'How does it sound now?' task completed; after 'Tune it a bit more'
+    - Maddie: Nearly there! I can hear a slight improvement. The notes and tones sound so much richer!
+- ** 34 %** · early · `PianoBroken5` — task 59/171 'More tuning' task completed; after 'Polish rust and collect old notes'
+    - Maddie: The notes sound so much smoother now!
+- ** 38 %** · mid   · `PianoBroken2` — task 65/171 'Play some more' task appears; after 'Play it again'
+    - Maddie: Hmm... not quite there yet, the notes still sound a bit muffled.
+- ** 56 %** · mid   · `BabyChair` — task 95/171 'Restore the old baby chair' task completed; after 'Vacuum dust'
+    - Maddie: Grandma, why is there a baby chair here?
+    - Grandma: Don't you remember, dearie? This was yours when you were little.
+- ** 59 %** · mid   · `PetBed` — task 101/171 'Clean and place the old dog bed back' task completed; after 'Fix the old dog bed'
+    - Maddie: Now that I've restored this pet bed to its original fluffy state, I'm sure Rufus would love to use it!
+    - Maddie: He does like to be on the lookout for food scraps, so I can see this being his new favorite spot!
+- ** 63 %** · mid   · `Trophy` — task 107/171 'Polish the trophy' task completed; after 'Remove cabinet door'
+    - Maddie: Ooh, there's a trophy on display here!
+    - Maddie: I can just about make out your name here, Deb!
+- ** 70 %** · late  · `GrandmaChair` — task 119/171 'Clean dirt from the chair' task completed; after 'Add the missing light', 'Polish and place cutlery'
+    - Maddie: Ooh, this chair looks fancy. Did Grandpa Charlie sit here?
+    - Grandma: Of course not, Dear! This was my chair. I am the head of the family, after all!
+- ** 87 %** · late  · `Urn` — task 149/171 'Carefully lift and clean the urn' task completed; after 'Install restored mirror'
+    - Maddie: I wonder whose ashes are in here...
+    - Maddie: Oh wait, there's a plaque and it says Mingus. Aww, Grandma's beloved old cat!

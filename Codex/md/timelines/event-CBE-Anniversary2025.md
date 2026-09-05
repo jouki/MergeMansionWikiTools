@@ -1,0 +1,88 @@
+# Five-Year Secret Celebration — dialogue timeline (event)
+`event:CBE_Anniversary2025` · versions 25.07.01–26.07.01 (18)
+
+## Order in 26.07.01
+- **  2 %** · intro · `CBE_Anniversary2025_Intro_Dialogue` — entering the board
+    - Maddie: I've noticed that Grandma's acting a bit weird. I mean, weirder than usual!
+    - Jackie: Honestly, Maddie - that just sounds like Ursula being Ursula.
+- ** 14 %** · early · `CBE_Anniversary2025_Case_01_Dialogue` — item 'Suitcase': chain 'Suitcase' 2/21, item level 1/1 (estimate)
+    - Maddie: Mason, your turn.
+    - Mason: Okay... So, I found something kinda weird.
+- ** 18 %** · early · `CBE_Anniversary2025_CaseOpen_01_Dialogue` — item 'Open Suitcase': chain 'Open Suitcase' 3/21, item level 1/1 (estimate)
+    - AntiqueDealer: I cannot believe you found Charlie's old suitcase! I was certain it was lost forever!
+    - AntiqueDealer: But how did you guess I had the key??
+- ** 21 %** · early · `CBE_Anniversary2025_Clippings_03_Dialogue` — item 'Set of Clippings': chain 'Newspaper Clippings' 4/21, item level 3/4 (estimate)
+    - Jackie: Fine, I'll tell you a secret.
+    - Mason: Yesss! And remember, it has to be juicy - like the one Julius told us!
+- ** 37 %** · mid   · `CBE_Anniversary2025_Furniture_03_Dialogue` — item 'Chair': chain 'Dining Furniture' 8/21, item level 3/7 (estimate)
+    - Maddie: Wow! I just saw Grandma's polishing all the best dining room furniture.
+    - Maddie: That means we're going to have a REALLY fancy dinner party - just like in the old days!
+- ** 39 %** · mid   · `CBE_Anniversary2025_Furniture_07_Dialogue` — item 'Dinner Table': chain 'Dining Furniture' 8/21, item level 7/7 (estimate)
+    - Maddie: The extra special table cloth, cleaned, starched and ironed, and the family porcelain all lined up.
+    - Maddie: Seems like we're invited to one of the Boultons' legendary parties!
+- ** 46 %** · mid   · `CBE_Anniversary2025_Grandma_02_Dialogue` — item 'Stack of Volumes': chain 'Grandma's Secrets' 10/21, item level 7/11 (estimate)
+    - Grandma: My guests, welcome! You have played my game of secrets well, and now it is your turn to ask the questions.
+    - Grandma: I will pull them out of the hat, one by one. The first one is...
+- ** 47 %** · mid   · `CBE_Anniversary2025_Grandma_05_Dialogue` — item 'Library Cart': chain 'Grandma's Secrets' 10/21, item level 8/11 (estimate)
+    - Grandma: Next question: "What happened to Charlie and where is he now?"
+    - Grandma: I believe you wrote this one, Maddie.
+- ** 47 %** · mid   · `CBE_Anniversary2025_Grandma_08_Dialogue` — item 'Bookcase': chain 'Grandma's Secrets' 10/21, item level 9/11 (estimate)
+    - Grandma: The third question: "Did you dress up as the Ghost on Halloween? If not, do you know who did?"
+    - Grandma: Roddy, I am aware of your feelings towards ghosts, but I did not contrive to give you a fright last Halloween.
+- ** 48 %** · mid   · `CBE_Anniversary2025_Grandma_10_Dialogue` — item 'Moving Bookcases': chain 'Grandma's Secrets' 10/21, item level 10/11 (estimate)
+    - Grandma: On to the next one. "Did you ever receive a letter from me about 20 years ago?"
+    - Grandma: Is this from you, Julius??
+- ** 48 %** · mid   · `CBE_Anniversary2025_Grandma_11_Dialogue` — item 'Hidden Safe': chain 'Grandma's Secrets' 10/21, item level 11/11 (estimate)
+    - Grandma: "Where do babies come from?" Mason, I presume this question is yours.
+    - Mason: Hah, I was just kidding!
+- ** 50 %** · mid   · `CBE_Anniversary2025_Invitation_03_Dialogue` — item 'Card': chain 'Dinner Invitation' 11/21, item level 3/7 (estimate)
+    - Roddy: Did you receive a sealed letter from Ursula?
+    - Maddie: I did - an invitation to a dinner party! Did you?
+- ** 52 %** · mid   · `CBE_Anniversary2025_Invitation_07_Dialogue` — item 'Dinner Invitation': chain 'Dinner Invitation' 11/21, item level 7/7 (estimate)
+    - Roddy: But listen to this part: "The evening will include some entertainment - a traditional Boulton party game."
+    - Roddy: "This one time, you are allowed to ask me anything at all, and I will answer any question."
+- ** 54 %** · mid   · `CBE_Anniversary2025_Jackie_03_Dialogue` — item 'Notebook': chain 'Jackie's Secret' 12/21, item level 3/8 (estimate)
+    - AntiqueDealer: Jackie, what is your secret? What dark history are you hiding?
+    - Jackie: No dark history here, folks. I don't have any secrets, you know that.
+- ** 56 %** · mid   · `CBE_Anniversary2025_Jackie_07_Dialogue` — item 'Newspaper': chain 'Jackie's Secret' 12/21, item level 7/8 (estimate)
+    - Maddie: What made you want to become a journalist?
+    - Jackie: I have a hunger for the truth. I wanna believe that good journalism can right wrongs and expose lies.
+- ** 58 %** · mid   · `CBE_Anniversary2025_Julius_02_Dialogue` — item 'Fake Moustache': chain 'Julius' Secret' 13/21, item level 2/7 (estimate)
+    - Jackie: Julius, you're up!
+    - AntiqueDealer: O-oh, right. My secret is... that I really hate peas.
+- ** 61 %** · mid   · `CBE_Anniversary2025_Julius_07_Dialogue` — item 'Key': chain 'Julius' Secret' 13/21, item level 7/7 (estimate)
+    - Maddie: Julius, did you help Grandpa Charlie disappear?
+    - AntiqueDealer: I-- I did help him ONCE, a long time ago.
+- ** 69 %** · late  · `CBE_Anniversary2025_Maddie_05_Dialogue` — item 'Wedding Dress': chain 'Maddie's Secret' 15/21, item level 5/6 (estimate)
+    - Mason: And then it's Maddie's turn. I just can't imagine what secrets you could be hiding!
+    - Jackie: Come on, tell us!
+- ** 72 %** · late  · `CBE_Anniversary2025_MansionMysteries_05_Dialogue` — item 'Shield': chain 'Mansion Mysteries' 16/21, item level 5/7 (estimate)
+    - Mason: What are you going to ask her, Jackie? Are your reporter's senses tingling?
+    - Jackie: I don't even know where to begin! I have about a million questions.
+- ** 74 %** · late  · `CBE_Anniversary2025_MansionMysteries_07_Dialogue` — item 'Secret Chest': chain 'Mansion Mysteries' 16/21, item level 7/7 (estimate)
+    - Roddy: Maddie, what are you going to ask? You must have so many questions...
+    - Maddie: My Grandma never gives up her secrets - and I mean, NEVER.
+- ** 75 %** · late  · `CBE_Anniversary2025_Puzzle_04_Dialogue` — item 'Wooden Puzzle': chain 'Puzzle Box' 17/21, item level 4/10 (estimate)
+    - Roddy: Has your Grandma taken up a new hobby?
+    - Maddie: Not that I know of!
+- ** 77 %** · late  · `CBE_Anniversary2025_Puzzle_07_Dialogue` — item 'Turning Puzzle': chain 'Puzzle Box' 17/21, item level 7/10 (estimate)
+    - Maddie: Have you noticed anything strange about Grandma? Do you think she's been more secretive than usual?
+    - AntiqueDealer: All I know is that whenever Ursula gets very secretive, something is afoot.
+- ** 81 %** · late  · `CBE_Anniversary2025_Questions_03_Dialogue` — item 'Hidden Questions': chain 'Questions' 18/21, item level 3/4 (estimate)
+    - Jackie: So we can ask her ANYTHING?
+    - Roddy: Sounds like it... a-and then we owe her one secret each?
+- ** 86 %** · late  · `CBE_Anniversary2025_Roddy_05_Dialogue` — item 'Garden Tools': chain 'Roddy's Secret' 19/21, item level 5/5 (estimate)
+    - Mason: Looks like you're going to start, Roddy! What's your secret?
+    - Roddy: M-my secret? Do I really need to tell one?
+- ** 91 %** · late  · `CBE_Anniversary2025_Serving_05_Dialogue` — item 'Cloche': chain 'Place Settings' 20/21, item level 5/5 (estimate)
+    - Jackie: Is it your Grandma's birthday? Is that why she's organizing a dinner party?
+    - Maddie: No... and she'd never throw big party for herself anyway.
+- ** 92 %** · late  · `CBE_Anniversary2025_Slides_02_Dialogue` — item 'Box of Slides': chain 'Projector' 21/21, item level 2/5 (estimate)
+    - Roddy: Is it just the five of us?
+    - AntiqueDealer: Looks that way. The table is only set for five people.
+- ** 94 %** · late  · `CBE_Anniversary2025_Slides_04_Dialogue` — item 'Projector': chain 'Projector' 21/21, item level 4/5 (estimate)
+    - Grandma: Welcome, my dear guests.
+    - Grandma: You are probably wondering why I invited you here tonight.
+- **100 %** · outro · `CBE_Anniversary2025_Outro_Dialogue` — event end
+    - Maddie: Is the game of secrets really a Boulton tradition?
+    - Grandma: It is, indeed. Our ancestors were masters at keeping secrets, but they also knew how to have a good time.

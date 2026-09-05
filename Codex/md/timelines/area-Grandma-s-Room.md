@@ -1,0 +1,68 @@
+# Grandma's Room — dialogue timeline (area)
+`area:Grandma's Room` · versions 25.10.01–26.07.01 (13)
+
+## Order in 26.07.01
+- **  7 %** · early · `GrandmaRoom_02` — task 19/272 'Remove clutter' task appears; after 'Clean closet', 'Fix floor'
+    - Maddie: Huh, that was odd. I would have noticed if Grandma had walked right by me.
+    - Maddie: Or was I just that engrossed in my own thoughts?
+- **  8 %** · early · `GrandmaRoom_CharacterTask1` — task 21/272 'Give Heikki a chair to rest' task appears; after 'Remove clutter'
+    - Maddie: Whoa. Grandpa Charlie had such a large game collection. It's like a time capsule in here.
+    - Heikki: Your grandfather had a good eye for strategy games, Maddie. The rare ones.
+- ** 16 %** · early · `GrandmaRoom_CharacterTask2` — task 45/272 'Bring more seats' task appears; after 'Contribute some practical additions'
+    - Maddie: So, Heikki. How's the club room in the library?
+    - Heikki: It's... functional.  Four walls and table, but a large one. Sits twelve, if you don't mind standing.
+- ** 22 %** · early · `GrandmaRoom_CharacterTask3` — task 59/272 'Help Heikki remember the game' task appears; after 'Make sure there is sufficient lighting'
+    - Heikki: Your grandfather and I had a favorite game. It had a lot of small pieces. But I can't remember the name.
+    - Maddie: Small pieces? Let me see... Gnomish Goldmine... Laundry Day Simulator... Or maybe Espionage: Vienna?
+- ** 30 %** · early · `GrandmaRoom_03` — task 81/272 'Stack fabric rolls' task completed; after 'Arrange tools'
+    - Maddie: Hmm, there's certainly more than meets the eye with Grandma's quaint sewing corner...
+    - Maddie: Secrets all around, like these fabrics! At first glance, they seem pretty normal, but when the light hits it at a certain angle-
+- ** 32 %** · early · `GrandmaRoom_POI_RockingChair` — task 87/272 'Remove letter' task completed; after 'Fix mannequin'
+    - Maddie: Woah! This chair has a cool hidden compartment!
+    - Maddie: And there's something in here - a letter!
+- ** 34 %** · early · `GrandmaRoom_CharacterTask4` — task 93/272 'Encourage Heikki to invite people to the club' task appears; after 'Add a rare game to the collection'
+    - Maddie: Heikki. You should write some invitations for the board game club. Call it the "Hopewell Bay's Gaming Guild".
+    - Heikki: "Gaming Guild"? That sounds... official. But what would I even write?
+- ** 48 %** · mid   · `GrandmaRoom_POI_TableFlip` — task 131/272 'Repair table joints' task completed; after 'Adjust table mechanism'
+    - Maddie: Another hidden mechanism! This room is full of surprises!
+    - Maddie: This must be more one of Grandpa's clever inventions!
+- ** 49 %** · mid   · `GrandmaRoom_POI_FunnyBooks` — task 133/272 'Clean books' task completed; after 'Dust games'
+    - Maddie: Grandma's taste in books is fascinating to say the least!
+    - Maddie: 'Apple Pies and Alibis'
+- ** 51 %** · mid   · `GrandmaRoom_POI_Bookends` — task 139/272 'Fix bookends' task completed; after 'Arrange books'
+    - Maddie: Hmm, these bookends are two completely different flowers.
+    - Maddie: One's definitely a lily, but I can't quite figure out what the other one is.
+- ** 53 %** · mid   · `GrandmaRoom_POI_PoisonBook` — task 143/272 'Place books' task completed; after 'Remove books'
+    - Maddie: Hmm, a book on poisonous plants and their properties?
+    - Maddie: Not really light bedtime reading, but to each their own, I suppose!
+- ** 65 %** · mid   · `GrandmaRoom_POI_WatchCollection` — task 176/272 'Wipe display box' task completed; after 'Clean floor'
+    - Maddie: Ooh! Grandpa Charlie's watch collection!
+    - Maddie: There are some real vintage pieces here.
+- ** 66 %** · late  · `GrandmaRoom_CharacterTask5` — task 181/272 'Assure Heikki that it will go well' task completed; after 'Celebrate the new club'
+    - Maddie: That was fun! See? You ran that whole game yourself.
+    - Heikki: It has been many years. I was afraid I had forgotten how.
+- ** 68 %** · late  · `GrandmaRoom_08` — task 186/272 'Repair bedframe' task completed; after 'Fix bed'
+    - Maddie: Hmm, what IS this sticking out from under the bed?
+    - Maddie: It almost looks like the bed is propped up on something...
+- ** 71 %** · late  · `GrandmaRoom_09` — task 193/272 'Fix left post' task appears; after 'Polish mural'
+    - Maddie: These bedposts are interesting to say the least.
+    - Maddie: I like how they're both representative of Grandma's knitting skills and Charlie's clock-making expertise!
+- ** 71 %** · late  · `GrandmaRoom_10` — task 194/272 'Repair right post' task appears; after 'Fix left post'
+    - Maddie: Just as I suspected! The top of this bedpost is loose, too.
+    - Maddie: And significantly tougher to put back in place!
+- ** 71 %** · late  · `GrandmaRoom_10_After` — task 194/272 'Repair right post' task completed; after 'Fix left post'
+    - Maddie: W-what! My head is spinning! This painting was a door the whole time?!
+    - Maddie: And now that conveyor belt under the bed makes sense!
+- ** 88 %** · late  · `GrandmaRoom_POI_KnittingBasket` — task 240/272 'Fix basket' task completed; after 'Arrange books'
+    - Maddie: Ha! This knitting basket has to be proof that Grandma was in this security room recently.
+    - Maddie: It's almost funny how it's sitting so bright and unassumingly in this particularly dinghy room.
+- ** 92 %** · late  · `GrandmaRoom_14` — task 249/272 'Clean shelf' task completed; after 'Repair shelf'
+    - Maddie: Arthur? I-It's Maddie.
+    - Arthur: Maddie? You finally called!
+- ** 98 %** · outro · `GrandmaRoom_POI_PocketWatch` — task 266/272 'Take watch' task completed; after 'Fix clock'
+    - Maddie: Huh, this pocket watch has an interesting inscription at the back.
+    - Maddie: 'When the hand that holds the time aligns,
+The door will shift between the lines.'
+- **100 %** · outro · `GrandmasRoom_17` — task 272/272 'Place watch' task appears; after 'Dust decoration'
+    - Maddie: Hmm, that inscription I read earlier - the hand that holds the time...
+    - Maddie: Well, this here is a hand. I thought it was just eccentric decor, but perhaps I should place the watch here.

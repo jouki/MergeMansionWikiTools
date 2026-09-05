@@ -1,0 +1,58 @@
+# Library — dialogue timeline (area)
+`area:Library` · versions 24.11.02–26.07.01 (27)
+
+## Order in 26.07.01
+- **  2 %** · intro · `Library_Ladder` — task 4/207 'Polish the ladder' task completed; after 'Remove the books'
+    - Maddie: Ooh! A rolling library ladder!
+    - Maddie: You know you’re in a fancy library when they have one of these...
+- **  3 %** · intro · `Library_Bookpyramid` — task 6/207 'Cut and bag the sheet' task completed; after 'Reinstall the ladder'
+    - Maddie: What an interesting er... Pyramid?
+    - Maddie: I guess it’s for reading books, but I can’t help but feel like this belongs to...
+- ** 21 %** · early · `Library_Charactertask1` — task 44/207 'Time to get the scoop!' task appears; after 'Clean the top of the shelf'
+    - Maddie: Jackie?
+    - Jackie: Maddie, I came as soon as I heard what's going on, they can't do that!
+- ** 29 %** · early · `Libraryminigameintro` — task 61/207 'Remove books' task appears; after 'Fix the book case'
+    - Maddie: These library books sure are disorganized!
+    - Maddie: None of them are even in the right sections.
+- ** 37 %** · mid   · `Library_Charactertask2` — task 76/207 'And the flowers too' task completed; after 'Ahh, I messed the curtain up'
+    - Maddie: What did you find out? 
+    - Jackie: I've been going through some old articles and discovered that Leonard was connected to some shady deals that went bad.
+- ** 38 %** · mid   · `Library12` — task 78/207 'Open the compartment' task completed; after 'Wax the clock'
+    - Maddie: Huh, a hidden book, And it's inside a grandfather clock?
+    - Maddie: An odd placement for sure.
+- ** 48 %** · mid   · `Library_Charactertask3` — task 100/207 'Time to properly study the article' task completed; after 'Let's avoid paper cuts'
+    - Jackie: I won't sugar coat it for you, Maddie. 
+    - Jackie: What I found out is pretty damning stuff. This'll be a hit piece, pure and simple.
+- ** 54 %** · mid   · `Library_Mingus` — task 112/207 'Repair the wallpaper' task completed; after 'Remove the webs'
+    - Maddie: This must be Grandma’s first cat... Mingus.
+    - Maddie: Or, as Julius would sometimes call it, Mingus the Merciless.
+- ** 65 %** · late  · `Library11` — task 135/207 'See what's behind the picture' task completed; after 'Attach cat picture'
+    - Maddie: Hey, looks like there's something behind this portrait...
+    - Maddie: A book! Well that's not as surprising considering this is a library.
+- ** 66 %** · late  · `Library_Charactertask4` — task 137/207 'Hey, what's this?' task completed; after 'All this for a statement...'
+    - Jackie: I've spoken to the people that were involved with the incident, and they've agreed to make a statement.
+    - Jackie: I'm heading over to the Bugle now to get the article ready for the editor. 
+- ** 76 %** · late  · `Library_Charactertask5` — task 158/207 'My article is on the last page?!' task completed; after 'The Bugle needs a new coat of paint'
+    - Jackie: Maddie...
+    - Maddie: What's wrong, Jackie?
+- ** 84 %** · late  · `Library_Bust` — task 175/207 'Clean a bust' task completed; after 'Place a vase'
+    - Maddie: Hmm this bust is a bit odd, why does it have a crack at the top?
+    - Maddie: It almost looks like it's been stabbed...
+- ** 93 %** · late  · `Library_Chainedbook` — task 193/207 'Try the drill' task appears; after 'Place some books'
+    - Maddie: A book with chains? That's excessive!
+    - Maddie: Hmm, could this be some sort of banned book?
+- ** 96 %** · outro · `Library13` — task 199/207 'Remove a knife' task completed; after 'Place some books'
+    - Maddie: Wha- a knife? That's the last thing I expected to find in this book!
+    - Maddie: What is one supposed to do with this in a library?
+- ** 97 %** · outro · `Library14` — task 200/207 'Find the mechanism' task completed; after 'Remove a knife'
+    - Maddie: I-it worked! Who would have thought?
+    - Maddie: Let's see what kind of book this fireplace was hiding...
+- ** 98 %** · outro · `Library_Bookwheel` — task 204/207 'Fix some screws' task appears; after 'Remove webs'
+    - Maddie: Wow! A book wheel!
+    - Maddie: Some consider this thing as the first search engine, which allowed easy cross-referencing of books.
+- **100 %** · outro · `Library15` — task 207/207 'Place a book' task appears; after 'Clean the book wheel', 'My article is on the last page?!'
+    - Maddie: Well, this library certainly served as a good distraction from my predicament!
+    - Maddie: I might have read through a couple of books while I was renovating...
+- **100 %** · outro · `Libraryminigameoutro` — task 207/207 'Place a book' task completed; after 'Clean the book wheel', 'My article is on the last page?!'
+    - Maddie: Phew! That was hard work but someone had to do it!
+    - Maddie: I can rest easy now that these books are well organized.

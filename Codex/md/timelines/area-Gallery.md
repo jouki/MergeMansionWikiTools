@@ -1,0 +1,46 @@
+# Gallery — dialogue timeline (area)
+`area:Gallery` · versions 24.04.01–26.07.01 (32)
+
+## Order in 26.07.01
+- **  2 %** · intro · `MapDiscovery` — task 3/186 'Fix the parquet' task completed; after 'Dust the floor'
+    - Maddie: Hey, what's this? There's an old map buried under all the debris here.
+    - Maddie: Ooh, it looks like Lindsay's adventure map!
+- **  2 %** · intro · `Gallery01` — task 4/186 'Sew the carpet' task completed; after 'Fix the parquet'
+    - Maddie: Tell me more about this gallery, Winston. Is it a museum of sorts?
+    - Winston: Oh, it's more than just that, ma'am. In here, you'll find Lindsay Boulton's heart and soul.
+- **  3 %** · intro · `Suitcase` — task 5/186 'Clean the chair' task completed; after 'Sew the carpet'
+    - Maddie: Hmm, this suitcase looks quite out of place here.
+    - Maddie: I wonder whose it is and whether I can open it...
+- **  4 %** · intro · `WinstonCharacterIntro` — task 8/186 'Assisting Winston' task appears; after 'Remove the sheet'
+    - Maddie: What’s wrong, Winston? You look a bit flustered?
+    - Winston: It’s nothing, ma’am. Just a little trifle of a matter... However...
+- ** 13 %** · early · `PiranhaDialogue` — task 24/186 'Dust the cobwebs' task completed; after 'Remove the dust cover'
+    - Maddie: What on earth is that? Some kind of ancient sea creature?
+    - Maddie: Why does it look like it's following my every move...
+- ** 16 %** · early · `WinstonCharacterTask8` — task 30/186 'Assisting Winston' task appears; after 'Assisting Winston'
+    - Maddie: Looks like some of these benches need new covers.
+    - Winston: Oh, dear... I only know how to patch a hole in clothes!
+- ** 21 %** · early · `CameraTalk` — task 39/186 'Remove the sheet' task completed; after 'Fix the damaged chair'
+    - Maddie: A vintage camera! I've always wanted to try one of these...
+    - Maddie: This has to be the camera Lindsay used on her adventures!
+- ** 24 %** · early · `FossilTalk` — task 45/186 'Place the fossil' task completed; after 'Straighten the plaque'
+    - Maddie: Ooh, these tracks are interesting!
+    - Maddie: Says here on the plaque that these belonged to a predator hunting its pray.
+- ** 33 %** · early · `Moths` — task 61/186 'Display the moth' task completed; after 'Clean the frame'
+    - Maddie: Ooh, what an interesting collection! Was this Lindsay's?
+    - Winston: Indeed, ma'am. Lindsay Boulton was a lepidopterist!
+- ** 40 %** · mid   · `TigerTalk` — task 75/186 'Polish the statue' task completed; after 'Place the statue head'
+    - Maddie: That's a big kitty.
+    - Maddie: It reads here that this statue is dedicated to "Our friend..." 
+- ** 56 %** · mid   · `ToucanTalk` — task 104/186 'Place the toucan' task completed; after 'Install new glass', 'Take the statue out'
+    - Maddie: The toucan! One of my favorite birds.
+    - Maddie: I've always wished to see them in their natural habitat...
+- ** 59 %** · mid   · `Gallery06` — task 110/186 'Glue the statue in place' task completed; after 'Take the statue out', 'Straighten the info stand', 'Cut and bag the dead plant'
+    - Maddie: My head is spinning, Roddy. The case has been reopened? And how do you know Sullivan?
+    - Roddy: W-well, um, Kate's my ex-wife...
+- ** 74 %** · late  · `IgnatiusDodoTalk` — task 137/186 'Brighten the photo' task completed; after 'Dust the frame'
+    - Maddie: Good ol' Ignatius Boulton, out adventuring and...
+    - Maddie: Wait a minute... Is that a live dodo?!
+- ** 99 %** · outro · `WinstonCharacterOutro` — task 184/186 'Assisting Winston' task completed; after 'Assisting Winston', 'Place the piranha', 'Place the toucan'
+    - Winston: I am forever indebted to you, ma’am! You have helped me save face and allowed me to host the banquet!
+    - Maddie: No problem, Winston. I can see this means a lot to you.

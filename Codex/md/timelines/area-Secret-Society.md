@@ -1,0 +1,69 @@
+# Secret Society — dialogue timeline (area)
+`area:Secret Society` · versions 24.04.01–26.07.01 (32)
+
+## Order in 26.07.01
+- **  6 %** · early · `Secretsociety_02` — task 12/194 'Pull the switch' task appears; after 'Use the mop as a switch'
+    - Maddie: I have a feeling that this lever will help with the bad smell in here...
+    - Jackie: How do you reckon?
+- ** 10 %** · early · `Secretsocietycharactertaskintro` — task 19/194 'Let's start with useful garden tools!' task appears; after 'Cut away the tarp'
+    - Jackie: Maddie, I completely forgot to mention what I actually came over here for!
+    - Jackie: Your article!
+- ** 10 %** · early · `SecretsocietyAncientScroll` — task 20/194 'Clean the glass' task completed; after 'Paint the case'
+    - Jackie: Hey! This scroll seems to have the tenets of the Fellowship written on it!
+    - Maddie: Ooh! What does it say?
+- ** 11 %** · early · `Secretsociety_03` — task 21/194 'Study what the items are' task completed; after 'Dust the case'
+    - Jackie: Look at all of this stuff! What do you think happened down here?
+    - Maddie: Strange... It sort of reminds me of the gallery. But some of these things...
+- ** 12 %** · early · `SecretsocietyArtifactDisplay` — task 24/194 'Drill the glass into place' task completed; after 'Study what the items are'
+    - Jackie: These things look really old...
+    - Jackie: And expensive.
+- ** 13 %** · early · `Secretsocietycharactertask2` — task 26/194 'Garden decor is my specialty!' task appears; after 'Check out this chainsaw!'
+    - Jackie: So, Maddie, do you have any tips on garden decor?
+    - Maddie: Ooh, I have plenty!
+- ** 16 %** · early · `SecretsocietyMedallion` — task 30/194 'Replace the calendar' task completed; after 'Attach a new fabric'
+    - Jackie: I know what this is! It’s an ancient Mayan calendar!
+    - Maddie: How do you know that?
+- ** 18 %** · early · `Secretsociety_04` — task 35/194 'Clean the knight' task completed; after 'Cut the cover'
+    - Jackie: The Curiosity Fellowship, that’s right!
+    - Jackie: I remember it from my university days, talk about a strange secret society for inventors, adventurers and explorers.
+- ** 19 %** · early · `Secretsociety_06` — task 36/194 'Polish the fire bowl' task completed; after 'Make sure its fully unlit', 'Study what the items are', 'Clean the knight'
+    - Maddie: I remember hearing a story about how to become a member of the Fellowship.
+    - Jackie: Oh? I didn’t hear that one.
+- ** 21 %** · early · `Secretsociety_05` — task 41/194 'Place the shield' task completed; after 'Polish the shield'
+    - Maddie: Wait... You think this is the secret sanctum of the Curiosity Fellowship?!
+    - Jackie: Yeah! What else could it be?
+- ** 24 %** · early · `SecretsocietyShoes` — task 46/194 'Place the shoes back' task completed; after 'Fix the hanger'
+    - Jackie: I just noticed that one of these shoes belongs to a woman!
+    - Jackie: Oh! Do you think it could be Lindsay?
+- ** 26 %** · early · `SecretsocietyRobes` — task 50/194 'Darn the robes' task completed; after 'Iron the robes'
+    - Maddie: Ooh, these must be the robes they would wear on initiation days?
+    - Jackie: Yeah, or formal events...
+- ** 30 %** · early · `SecretsocietyMasks` — task 58/194 'Study the cat mask' task completed; after 'Study the owl mask'
+    - Jackie: Yeah, okay... I’m officially creeped out.
+    - Maddie: What, why? These artifacts are beautiful and mysterious!
+- ** 30 %** · early · `Secretsocietycharactertask3` — task 59/194 'A stitch in time...' task appears; after 'Always iron your curtains!'
+    - Jackie: Maddie, our readers want to know ALL about upholstery!
+    - Maddie: Well, having a sewing kit can be handy, but make sure to have plenty of fabric!
+- ** 36 %** · mid   · `SecretsocietyAstrologyGlobe` — task 69/194 'Add some detergent' task completed; after 'Polish the armillary sphere', 'Clean the mess'
+    - Jackie: That thing looks complicated!
+    - Maddie: Looks like some sort of orrery... But for astrology!
+- ** 46 %** · mid   · `Secretsocietycharactertask4` — task 90/194 'Dust bunnies, be gone!' task appears; after 'Trolleys will save your back!'
+    - Jackie: How do you keep dust away in indoor spaces?
+    - Maddie: A good, fluffy duster does wonders!
+- ** 61 %** · mid   · `Secretsocietyextcharactertask6` — task 118/194 'Remember to wax your floors!' task completed; after 'Good lighting makes all the difference!'
+    - Jackie: You know, now that Victoria has an eye on you, maybe this article could help!
+    - Maddie: How so?
+- ** 79 %** · late  · `Secretsociety_08` — task 153/194 'Put the lectern up' task completed; after 'Remove the debris'
+    - Maddie: Check out this podium and all these seats, Jackie!
+    - Maddie: Can you imagine all the amazing speakers they had here?
+- ** 88 %** · late  · `Secretsocietycharactertaskoutro` — task 170/194 'Lastly, always clean as you go!' task completed; after 'Make sure to measure for new furniture!'
+    - Jackie: Thanks for the interview, Maddie. You were a natural!
+    - Maddie: Aw, shucks. This was fun!
+- ** 98 %** · outro · `Secretsociety_11` — task 191/194 'Reorder the combination!' task completed; after 'Clean the puzzle'
+    - Jackie: M-maddie, the lion head!
+    - Maddie: Oh my goodness, it worked! There's a beam of light!
+
+## Changes across versions
+- **24.05.06 → 24.07.01**: moved 1
+- **25.01.03 → 25.02.01**: moved 18
+- **25.08.02 → 25.09.01**: moved 18

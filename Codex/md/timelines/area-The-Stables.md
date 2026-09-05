@@ -1,0 +1,70 @@
+# The Stables — dialogue timeline (area)
+`area:The Stables` · versions 24.09.02–26.07.01 (29)
+
+## Order in 26.07.01
+- **  5 %** · early · `Stablesinterior07` — task 13/253 'Repair the wall' task completed; after 'Fix the wall'
+    - Maddie: Sorry you got caught up in that mess, girl. Are you alright?
+    - Babylon: *Neighh...*
+- **  7 %** · early · `Stablesinterior09` — task 18/253 'Construct a chest' task completed; after 'Remove cardboard'
+    - Maddie: I might be quite the expert on repairing things at this point, but I have no idea about this equipment...
+    - Maddie: What even is this thingamajig?
+- ** 14 %** · early · `Stablesinterior11` — task 36/253 'Turn on the mill' task appears; after 'Place some grains'
+    - Maddie: I'm guessing this is some kind of grinder?
+    - Deb: It's a feed mill dear.
+- ** 19 %** · early · `Stablesinteriorcharactertaskintro` — task 48/253 'Place harnesses' task completed; after 'Place feedbags'
+    - Deb: Now Maddie, if we are to reopen these stables...
+    - Deb: You need to know how to properly run it and how to take care of horses!
+- ** 22 %** · early · `Stablesinterior_Saddle` — task 57/253 'Fix the saddle' task completed; after 'Place the saddle pad'
+    - Deb: Ah! I loved this saddle!
+    - Maddie: Oh, this one is yours?
+- ** 24 %** · early · `Stablesinteriorcharactertask2` — task 62/253 'Tidying up whatever was left from the pasture' task completed; after 'Clean for surprise guests'
+    - Maddie: I’ve been working out in the field for quite some time, now...
+    - Maddie: Are you sure this is necessary?!
+- ** 28 %** · early · `Stablesinterior_Groomingkit` — task 72/253 'Fill the toolbox' task completed; after 'Place toolbox'
+    - Maddie: Ooh, this kit looks fancy!
+    - Deb: It sure is and it has all the grooming and equipment you'll need to fix up the stables!
+- ** 32 %** · early · `Stablesinteriorcharactertask3` — task 82/253 'Next up, we must care for her coat and hooves.' task completed; after 'And water the lawn!'
+    - Deb: In order for us to have a champion, we need to make sure they’re properly taken care of, Maddie.
+    - Maddie: You mean, pampered?
+- ** 36 %** · mid   · `Stablesinteriorcharactertask4` — task 92/253 'While the horse rests a bit, let’s construct a dressage arena' task appears; after 'Let’s wash and dry her up!'
+    - Deb: Is the practice dressage arena ready?
+    - Maddie: The what?
+- ** 39 %** · mid   · `Stablesinterior_Bellows` — task 99/253 'Place bellows' task completed; after 'Place a rope'
+    - Deb: You know... These bellows remind me a bit of Leonard.
+    - Maddie: How so?
+- ** 44 %** · mid   · `Stablesinteriorcharactertask5` — task 112/253 'Attach the lunge line first' task appears; after 'Now, we dress her up'
+    - Deb: Did you bring the saddle?
+    - Maddie: Huh? What for?
+- ** 47 %** · mid   · `Stablesinterior14` — task 119/253 'Fix the workbench' task completed; after 'Scatter hay'
+    - Maddie: What is this workbench doing in the middle of the stables?
+    - Deb: Well, back in time, we had a farrier who would visit the stables.
+- ** 51 %** · mid   · `Stablesinterior_Toolbox` — task 128/253 'Place tools' task completed; after 'Place a stool'
+    - Maddie: You know... I’ve gotten pretty good at recognizing tools...
+    - Maddie: But these?
+- ** 59 %** · mid   · `Stablesinterior_Furnace` — task 149/253 'Find the metal' task completed; after 'Put the chimney together'
+    - Maddie: There we go... Nice and toasty!
+    - Maddie: I guess it gets pretty cold in here, doesn’t it, Babylon?
+- ** 62 %** · mid   · `Stablesinterior_Workbench` — task 157/253 'Fetch the anvil' task completed; after 'Place a hammer'
+    - Maddie: Shoeing a horse looks like a tough job.
+    - Deb: It’s not a walk in the park, sweetie, but someone’s got to do it.
+- ** 64 %** · mid   · `Stablesinterior13` — task 161/253 'Clean up the hay' task appears; after 'Take the arc away'
+    - Maddie: Did you have to train your own horse, Deb?
+    - Deb: Most definitely! And it wasn't easy!
+- ** 74 %** · late  · `Stablesinterior08` — task 188/253 'Cut and bag the cloth' task completed; after 'Remove the shelf'
+    - Maddie: Hmm... I know you don't like a lot of change, Babylon, but this place will be good for you!
+    - Babylon: *Neighh?*
+- ** 77 %** · late  · `Stablesinterior12` — task 195/253 'Place trophies' task completed; after 'Install a shelf'
+    - Maddie: Ooh, look at all these shiny trophies!
+    - Deb: Ah yes, I believe you'll find that most of those are mine.
+- ** 79 %** · late  · `Stablesinterior_Riderequipment` — task 199/253 'Place boots' task completed; after 'Place a green rug'
+    - Maddie: Ooh, these riding boots look expensive!
+    - Deb: By the finest boot-makers in Europe... I had mine tailor-made.
+- ** 79 %** · late  · `Stablesinterior_Maddiemomtrophy` — task 201/253 'Place trophies' task completed; after 'Place boots'
+    - Maddie: Wait, a minute... Rebecca Boulton! MOM!
+    - Maddie: Did Mom ride horses?!
+- ** 82 %** · late  · `Stablesinteriorcharactertask6` — task 208/253 'Let’s leave the toolbox here. You won’t need it.' task completed; after 'Let’s dry her well afterward so she won’t get cold.', 'Place harnesses', 'Place helmets'
+    - Deb: Hmph... I really wish you'd give horse riding a go. It could be in your blood!
+    - Maddie: Deb, please don’t start.
+- ** 96 %** · outro · `Stablesinterior_Horsestalls` — task 242/253 'Install new doors' task appears; after 'Insert a new door', 'Insert a new door'
+    - Maddie: Pretty comfy looking stalls, don’t you think, Babylon?
+    - Babylon: *Harrumph*

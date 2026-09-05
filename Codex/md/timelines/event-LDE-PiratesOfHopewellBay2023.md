@@ -1,0 +1,93 @@
+# Pirates of Hopewell Bay — dialogue timeline (event)
+`event:LDE_PiratesOfHopewellBay2023` · versions 24.04.01–26.07.01 (32)
+
+## Order in 26.07.01
+- **  0 %** · intro · `LDE_PiratesOfHopewellBay2023_EventIntro_Dialogue` — event start
+    - Mason: Trim the sails and batten down the hatches because adventure awaits!
+    - Emilio: Whoa! What an adorable little pirate ship!
+- **  2 %** · intro · `LDE_PiratesOfHopewellBay2023_BoardIntro_Dialogue` — entering the board
+    - Mason: I bet the Boulton attic is super old and dusty. Which means that it's FULL of cool old stuff...
+    - Mason: Like treasure maps!!
+- ** 10 %** · early · `LDE_PiratesOfHopewellBay2023_BoultonAttic_04_Dialogue` — item 'Boulton Attic': chain 'Boulton Attic' 1/18, item level 4/4 (estimate)
+    - Mason: Where should I begin? The place is full of old junk!
+    - Mason: Maddie mentioned old papers... Could there be a map, too?
+- ** 15 %** · early · `LDE_PiratesOfHopewellBay2023_PirateCoins_01_Dialogue` — item 'Pirate Captain's Outfit': chain 'LDE_PiratesOfHopewellBay2023_PirateRegalia' 2/18, item level 7/7 (estimate)
+    - Mason: Another little coin...
+    - Mason: So there is a treasure SOMEWHERE!
+- ** 15 %** · early · `LDE_PiratesOfHopewellBay2023_PirateRegalia_04_Dialogue` — item 'Pirate Captain's Outfit': chain 'LDE_PiratesOfHopewellBay2023_PirateRegalia' 2/18, item level 7/7 (estimate)
+    - Mason: A red coat, a gold chain and a big hat... NOW we're talking!
+    - Mason: Who would dare to cross Captain Mason?
+- ** 20 %** · early · `LDE_PiratesOfHopewellBay2023_SeafaringEquipment_05_Dialogue` — item 'Seafaring Supplies': chain 'Seafaring Supplies' 3/18, item level 5/5 (estimate)
+    - Mason: Hmm... What DOES a sailor need?
+    - Mason: Some rope. And a compass!
+- ** 30 %** · early · `LDE_PiratesOfHopewellBay2023_AntiqueFurniture_10_Dialogue` — item 'Antique Desk': chain 'Antique Furniture' 5/18, item level 10/10 (estimate)
+    - Mason: Blistering barnacles! This desk is FULL of stuff!
+    - Mason: Parchment, sailor thingies... and COINS!
+- ** 32 %** · early · `LDE_PiratesOfHopewellBay2023_MasonQuest_02_Dialogue` — item 'Lighthouse Ruins': chain 'Ultimate Pirate Treasure' 6/18, item level 2/6 (estimate)
+    - Mason: Hmmmm... The lighthouse is in the wrong place on the map.
+    - Mason: It looks like the Hopewell Bay lighthouse, but ISN'T!
+- ** 32 %** · early · `LDE_PiratesOfHopewellBay2023_MasonQuest_03_Dialogue` — item 'Pier & Boat': chain 'Ultimate Pirate Treasure' 6/18, item level 3/6 (estimate)
+    - Mason: The map tells me to out to sea... But HOW?
+    - Mason: The rowing boat by the pier! I hope it's not booby-trapped...
+- ** 33 %** · early · `LDE_PiratesOfHopewellBay2023_MasonQuest_04_Dialogue` — item 'Pirate Island & Cave': chain 'Ultimate Pirate Treasure' 6/18, item level 4/6 (estimate)
+    - Mason: I see something on the horizon... A desert island!!
+    - Mason: This is where I'd hide a treasure...
+- ** 34 %** · early · `LDE_PiratesOfHopewellBay2023_MasonQuest_05_Dialogue` — item 'Wrecked Pirate Ship': chain 'Ultimate Pirate Treasure' 6/18, item level 5/6 (estimate)
+    - Mason: The pirates got caught in a storm... and shipwrecked here!
+    - Mason: The crew was saved, but the treasure...
+- ** 35 %** · mid   · `LDE_PiratesOfHopewellBay2023_MasonQuest_06_Dialogue` — item 'Ultimate Pirate Treasure': chain 'Ultimate Pirate Treasure' 6/18, item level 6/6 (estimate)
+    - Mason: So the stories of pirates in the Boulton family are true...
+    - Mason: And I found their ULTIMATE pirate treasure!!
+- ** 40 %** · mid   · `LDE_PiratesOfHopewellBay2023_MetalDetector_08_Dialogue` — item 'Metal Detector': chain 'Metal Detector' 7/18, item level 8/8 (estimate)
+    - Mason: HARRR! The metal detector is ready to go!
+    - Mason: Sink me - it has no BATTERIES!
+- ** 45 %** · mid   · `LDE_PiratesOfHopewellBay2023_PirateClothes_08_Dialogue` — item 'Pirate Outfit': chain 'LDE_PiratesOfHopewellBay2023_PirateClothes' 8/18, item level 8/8 (estimate)
+    - Mason: Now I just need the right get-up.
+    - Mason: The stuff every decent pirate needs...
+- ** 55 %** · mid   · `LDE_PiratesOfHopewellBay2023_PreparingAdventure_08_Dialogue` — item 'Treasure Map': chain 'LDE_PiratesOfHopewellBay2023_PreparingAdventure' 10/18, item level 8/8 (estimate)
+    - Mason: I did it! I finally found the MAP!!
+    - Mason: This is it - my final quest!
+- ** 60 %** · mid   · `LDE_PiratesOfHopewellBay2023_PirateKey_01_Dialogue` — item 'Mysterious Key': chain 'Mysterious Key' 11/18, item level 1/1 (estimate)
+    - Mason: I found the KEY!!
+    - Mason: Now I can open the mysterious chest and get my hands on the treasure!
+- ** 65 %** · late  · `LDE_PiratesOfHopewellBay2023_MysteriousChest_07_Dialogue` — item 'Fancy Chest': chain 'Mysterious Chest' 12/18, item level 7/7 (estimate)
+    - Mason: Oh, WOW! What's going on here?
+    - Mason: This old chest has to be filled with treasure!
+- ** 75 %** · late  · `LDE_PiratesOfHopewellBay2023_MysteriousChestProducing_01_Dialogue` — item 'Mysterious Chest': chain 'Mysterious Chest' 14/18, item level 1/1 (estimate)
+    - Mason: Jackpot! Is this the treasure I'm looking for?
+    - Mason: This old coffer is full of pirate booty, but I think there's an even bigger treasure somewhere...
+- ** 80 %** · late  · `LDE_PiratesOfHopewellBay2023_Battery_05_Dialogue` — item 'Battery Pack': chain 'Battery Pack' 15/18, item level 5/5 (estimate)
+    - Mason: Extra powerful batteries to find a buried key - CHECK!
+    - Mason: Now I just need to put these in the metal detector, and we're in business.
+- ** 85 %** · late  · `LDE_PiratesOfHopewellBay2023_CouponStore_05_Dialogue` — item 'Costume Store': chain 'LDE_PiratesOfHopewellBay2023_CouponStore' 16/18, item level 5/5 (estimate)
+    - Mason: I wish I had some pirate clothes.
+    - Mason: A-HA! The costume store! I hope they have eye patches...
+- ** 87 %** · late  · `LDE_PiratesOfHopewellBay2023_PirateCoins_04_Dialogue` — item 'Pound Coin': chain 'LDE_PiratesOfHopewellBay2023_PirateCoins' 17/18, item level 4/11 (estimate)
+    - Mason: What a dusty coin! It looks really old and kinda valuable...
+    - Mason: Nah! I think I'll keep looking for something better!
+- ** 88 %** · late  · `LDE_PiratesOfHopewellBay2023_PirateCoins_06_Dialogue` — item 'Pieces of Eight': chain 'LDE_PiratesOfHopewellBay2023_PirateCoins' 17/18, item level 6/11 (estimate)
+    - Mason: Oooh, my pirate senses are tingling!
+    - Mason: Now where would a pirate hide the rest of his booty?
+- ** 88 %** · late  · `LDE_PiratesOfHopewellBay2023_PirateCoins_07_Dialogue` — item 'Doubloon': chain 'LDE_PiratesOfHopewellBay2023_PirateCoins' 17/18, item level 7/11 (estimate)
+    - Mason: A real gold DOUBLOON!
+    - Mason: It's straight from a pirate's coffer... But there has to be more!
+- ** 89 %** · late  · `LDE_PiratesOfHopewellBay2023_PirateCoins_08_Dialogue` — item 'Doubloon Stack': chain 'LDE_PiratesOfHopewellBay2023_PirateCoins' 17/18, item level 8/11 (estimate)
+    - Mason: One, two, three, four... and these look like gold!
+    - Mason: I think I'm getting closer!
+- ** 89 %** · late  · `LDE_PiratesOfHopewellBay2023_PirateCoins_09_Dialogue` — item 'Doubloon Bag': chain 'LDE_PiratesOfHopewellBay2023_PirateCoins' 17/18, item level 9/11 (estimate)
+    - Mason: To sail the Seven Seas and plunder for riches...
+    - Mason: This is a whole BAG of gold doubloons!
+- ** 90 %** · late  · `LDE_PiratesOfHopewellBay2023_PirateCoins_10_Dialogue` — item 'Small Fortune': chain 'LDE_PiratesOfHopewellBay2023_PirateCoins' 17/18, item level 10/11 (estimate)
+    - Mason: More treasure from the briny deep!
+    - Mason: This coin has a 'B' stamped on it. Does that stand for... Boulton??
+- ** 90 %** · late  · `LDE_PiratesOfHopewellBay2023_PirateCoins_11_Dialogue` — item 'Treasure Chest': chain 'LDE_PiratesOfHopewellBay2023_PirateCoins' 17/18, item level 11/11 (estimate)
+    - Mason: Blow me down! A whole chest full of gold!
+    - Mason: And the chest has the same 'B' as the doubloons...
+- ** 95 %** · outro · `LDE_PiratesOfHopewellBay2023_Watches_04_Dialogue` — item 'Gilded Clock': chain 'LDE_PiratesOfHopewellBay2023_Watches' 18/18, item level 4/4 (estimate)
+    - Mason: I knew that old pirate captain had something up his sleeve.
+    - Mason: This is just a taste of the REAL treasure!
+
+Not placeable in 26.07.01 (7): `LDE_PiratesOfHopewellBay2023_LayerDecoration_01_Dialogue`, `LDE_PiratesOfHopewellBay2023_LayerDecoration_03_Dialogue`, `LDE_PiratesOfHopewellBay2023_LayerDecoration_05_Dialogue`, `LDE_PiratesOfHopewellBay2023_LayerDecoration_07_Dialogue`, `LDE_PiratesOfHopewellBay2023_LayerDecoration_10_Dialogue`, `LDE_PiratesOfHopewellBay2023_LayerDecoration_13_Dialogue`, `LDE_PiratesOfHopewellBay2023_LayerDecoration_15_Dialogue`
+
+## Changes across versions
+- **26.04.01 → 26.04.02**: added 1 (`LDE_PiratesOfHopewellBay2023_EventIntro_Dialogue`)

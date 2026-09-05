@@ -103,6 +103,19 @@ Families = same event type + core name with the run tag stripped (`CBE_MaddieInP
 
 **StoryElements are exported** (`DumpHarness --dump-stories`, 2026-09-05): story membership and line order come straight from the config for 22.02.06, 23.09.02, 23.11.02, 25.05.01, 25.06.01 and the live 26.07.01 (2 849 stories). That closed the naming gap (Jailbreak: `SBE_Jailbreak_BookCartFull` → lines `SBE_Jailbreak_1StCartIsFull_01…`; the event now has 95 stories / 405 lines) and cut `unknownTriggerStories` from 982 to 22 and `referencedWithoutLines` from 44 to 3. Stories the config defines but nothing we dump triggers are attributed to their event by id prefix (`kind: event, moment: part of the event`); 665 stories remain without an area/event (main story and tutorial started client-side).
 
+## Dialogue timelines (`timelines.json`, `md/timelines/`, viewer ⏱ chip)
+
+Where on the player's progress axis (0 = start, 1 = end) each story of an area or event fires, **per game version**, with the evidence on every line (`build/timelines.py`, design `_CONTEXT/_plans/2026-09-05-dialogue-timelines-design.md`).
+
+| Scope | Clock | Precision |
+|---|---|---|
+| areas | hotspot unlock tree (`UnlockingParentRefs`) + `Order` → topological rank; dialogue on appear / completion / finalization of the task | exact order |
+| events: start / enter board / end | `StartDialogueRef`, `IntroDialogue`, `EnterBoardDialogue`, `EndDialogue` | fixed 0 / 0.02 / 1 |
+| events: decoration dialogues | decoration slot → reward level that grants it → `RequiredPoints / max points` | exact level |
+| events: item dialogues | item → chain index in the event's chain list + item level in the chain (`0.05 + 0.9·(chain + level/max)/chains`); stories without a mapping row are inferred from the id (`…_Tools1_Dialogue` → chain Tools, level 1) | estimate, marked as such |
+
+Build 2026-09-05: 200 scopes (58 areas, 142 events), 1 733 stories placed in the newest version of their scope, 101 change sets between versions (e.g. The Great Escape 24.11 → 25.10). Markdown per scope: newest version as an ordered script with evidence, then "Changes across versions" (added / removed / moved ≥ 5 %). The viewer sorts stories by chronology once an area or event is selected; the ⏱ chip shows position and phase, its tooltip the evidence. Not placeable: stories with no signal (listed per scope), chain unlock order inside an event (config does not carry it in the dump), cutscenes.
+
 ## Placing stories nothing triggers (`md/misc/unassigned.md`, viewer group "Unassigned")
 
 Stories the config defines but nothing we dump triggers are placed in this order: (1) event by id prefix (`SBE_Jailbreak_…`, A/B variant suffix stripped), (2) **area by id prefix** when it equals an area id or name (`Lounge_…`, `ParentsRoom_…`, `SpyRoom_…` → room / POI stories, 303 placed this way), (3) **by hand** from `build/story_assignments.json` (`"<id>"` or `"<prefix>*"` → `{"area": …}` or `{"event": …}`, optional note). What is still unplaced shows up in the viewer's "Area or event" dropdown under **Unassigned — needs your call**, grouped by id prefix (`CBE…`, `XMas…`, `FTUE…`, `Item…`), and in `md/misc/unassigned.md` with the first spoken lines of every story so a human can decide. Nothing in `story_assignments.json` is guessed; add entries only when the placement is known and rebuild.

@@ -1,0 +1,93 @@
+# The Tomb — dialogue timeline (area)
+`area:The Tomb` · versions 25.01.03–26.07.01 (26)
+
+## Order in 26.07.01
+- ** 15 %** · early · `TombCharacterTask1` — task 39/257 'Install basin' task completed; after 'Remove candles'
+    - Maddie: Oh no! There are leaks everywhere!
+    - Maddie: I should give Ash a call!
+- ** 16 %** · early · `TombPOI1` — task 42/257 'Install lights' task completed; after 'Place stained glass'
+    - Maddie: This stained glass depicts a flower...
+    - Grandma: Yes. Do you know why, dearie?
+- ** 19 %** · early · `Tomb05` — task 49/257 'Repair cracks' task appears; after 'Remove moss'
+    - Maddie: Amelia Boulton!
+    - Grandma: Celebrated philanthropist and co-founder of Hopewell Bay.
+- ** 22 %** · early · `TombPOI2` — task 56/257 'Install lights' task completed; after 'Place stained glass'
+    - Maddie: A wreath... A sign of honor and victory!
+    - Grandma: She was revolutionary, Maddie. Brilliant and full of knowledge.
+- ** 24 %** · early · `Tomb06` — task 63/257 'Fix cracks' task completed; after 'Remove moss'
+    - Maddie: Clara Boulton...
+    - Grandma: Yes... Amelia's sister.
+- ** 25 %** · early · `Tomb07` — task 65/257 'Remove candles' task completed; after 'Swap candles'
+    - Maddie: He stole from her?!
+    - Grandma: Yes, dearie. They said he was a sailor, but I think "pirate" would be a better moniker.
+- ** 27 %** · early · `TombPOI3` — task 69/257 'Install lights' task completed; after 'Place stained glass'
+    - Grandma: Ah, a butterfly... How sadly fitting.
+    - Maddie: It makes sense...
+- ** 32 %** · early · `TombPOI4` — task 82/257 'Place mirror' task completed; after 'Fix cracks'
+    - Maddie: Can't get more obvious than a tin can.
+    - Grandma: He was always a very blunt man...
+- ** 34 %** · early · `Tomb09` — task 88/257 'Clear moss from stained glass' task completed; after 'Clear moss from step '
+    - Maddie: You mentioned that Agatha was an inventor?
+    - Grandma: Oh yes, very prolific. She had a brilliant mind and practically ran the tin can operations!
+- ** 39 %** · mid   · `TombPOI11` — task 101/257 'Polish mirror' task completed; after 'Swap stained glass', 'Remove vines from stair edges'
+    - Maddie: Grandma, look!
+    - Maddie: The light from above is reflecting on Agatha's mirror and-
+- ** 40 %** · mid   · `Tomb10` — task 102/257 'Remove loose stone from wall' task completed; after 'Polish mirror'
+    - Maddie: It's a heart! And it looks like it was fashioned out of tin!
+    - Grandma: Oh! I understand it now!
+- ** 55 %** · mid   · `Tomb15` — task 142/257 'Install basin' task appears; after 'Remove old candles'
+    - Maddie: I know these two! Katie and Casey! 
+    - Grandma: Hah, yes. Those two were real rascals and surprisingly adventurous. 
+- ** 56 %** · mid   · `TombPOI5` — task 145/257 'Turn on light' task completed; after 'Place stained glass'
+    - Maddie: A dolphin!
+    - Maddie: To represent a free spirit of the ocean, adventurous and playful!
+- ** 61 %** · mid   · `TombPOI6` — task 157/257 'Install stained glass' task completed; after 'Install lightbulb'
+    - Maddie: A torch for the trailblazer, Lindsay!
+    - Grandma: She will forever be the explorer. 
+- ** 61 %** · mid   · `Tomb14` — task 158/257 'Swap candles' task appears; after 'Install stained glass'
+    - Maddie: Oooh! Lindsay Boulton! 
+    - Maddie: She's my favorite.
+- ** 65 %** · mid   · `Tomb12` — task 166/257 'Install basin' task completed; after 'Remove candles'
+    - Grandma: Sometimes, Charlie's a bit too secretive. But he clearly has a plan for us.
+    - Maddie: No offense, Grandma, but I don't like being pulled around like a puppet on a string. 
+- ** 65 %** · late  · `TombPOI7` — task 168/257 'Install stained glass' task appears; after 'Install lightbulb'
+    - Maddie: A snake eating its own tail?
+    - Grandma: An ouroboros. Symbol of infinity and the cycle of creation and destruction.
+- ** 65 %** · late  · `Tomb13` — task 168/257 'Install stained glass' task completed; after 'Install lightbulb'
+    - Maddie: I wish we knew more. We could help him!
+    - Maddie: Bring him back, perhaps!
+- ** 66 %** · late  · `TombPOI10` — task 170/257 'Replace candles' task appears; after 'Turn on light'
+    - Maddie: "Where lilies bloom in shadow's grace,
+    - Maddie: The serpent's eyes embrace,
+- ** 67 %** · late  · `Tomb19` — task 173/257 'Clean dirty rails' task completed; after 'Remove moss from rails'
+    - Maddie: Grandma, how come you haven't visited the tomb?
+    - Grandma: Oh, I did, dearie. I was here all the time when I discovered it.
+- ** 70 %** · late  · `Tomb21` — task 180/257 'Inspect the tile' task completed; after 'Remove moss'
+    - Maddie: Hmm, there's some sort of special tile here...
+    - Maddie: A frog tile is a bit strange when it comes to decor but...
+- ** 76 %** · late  · `TombPOI9` — task 196/257 'Cut vines' task appears; after 'Remove clovers from stepping stones '
+    - Maddie: Hmm.. that's odd.
+    - Maddie: There are fresh flowers here...
+- ** 77 %** · late  · `TombPOI8` — task 199/257 'Remove vines from frog statue' task appears; after 'Clean frog statue'
+    - Maddie: How cute! 
+    - Maddie: This frog here reminds me of dad.
+- ** 80 %** · late  · `TombCharacterTask2` — task 207/257 'My leg itches, got some cutters?' task appears; after 'Replace candles '
+    - Maddie: I can’t believe you broke your leg... Again!
+    - Ash: What can I say... Plumbing is a dangerous business.
+- ** 87 %** · late  · `TombCharacterTask3` — task 224/257 'Another heirloom!' task completed; after 'Where else could this smell be?'
+    - Ash: I must admit, Maddie. There’s some INTERESTING stuff down here!
+    - Maddie: You can say that again. I didn’t even know it existed until a little while ago.
+- ** 91 %** · late  · `TombCharacterTask4` — task 233/257 'Just one more thing to seal the pipe.' task completed; after 'This pipe’s a dead end. Let’s seal it.'
+    - Ash: So, you like the hot tub?
+    - Maddie: The what now?!
+- ** 94 %** · late  · `TombCharacterTask5` — task 242/257 'The smell’s worse now.' task completed; after 'The map points to this stained glass.'
+    - Maddie: Ooof! What is that smell?!
+    - Ash: Ah... I'm familiar with this...
+- **100 %** · outro · `TombCharacterTask6` — task 256/257 'Last one and we are all done!' task completed; after 'And another one.'
+    - Ash: Well... We’re about done!
+    - Ash: Another job well done for Ash and Co!
+
+## Changes across versions
+- **25.01.03 → 25.02.01**: added 1 (`Tomb21`)
+- **25.02.03 → 25.04.02**: moved 1
+- **26.01.02 → 26.02.01**: moved 22

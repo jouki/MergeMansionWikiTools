@@ -1,0 +1,86 @@
+# Frosty Secrets — dialogue timeline (event)
+`event:CBE_FrostySecrets2024` · versions 24.11.02–26.07.01 (27)
+
+## Order in 26.07.01
+- **  2 %** · intro · `CBE_FrostySecrets2024_Intro_Dialogue` — entering the board
+    - Maddie: What an amazing day! Don’t you just love winter?
+    - Maddie: You get to wrap up warm and enjoy the snow and the crisp weather...
+- ** 13 %** · early · `CBE_FrostySecrets2024_Shed_Dialogue` — item 'Winter Shed': chain 'Winter Shed' 2/23, item level 1/1 (estimate)
+    - Pearl: How far is this cabin?
+    - Maddie: Not too far. Just a few hours by foot.
+- ** 15 %** · early · `CBE_FrostySecrets2024_WinterGear_04_Dialogue` — item 'Snowshoes': chain 'Winter Gear' 3/23, item level 4/8 (estimate)
+    - Pearl: Could we drive to the cabin?
+    - Maddie: Not quite, but I’ve got some skis...
+- ** 16 %** · early · `CBE_FrostySecrets2024_WinterGear_07_Dialogue` — item 'Snow Racer': chain 'Winter Gear' 3/23, item level 7/8 (estimate)
+    - Pearl: A snowmobile -- now we're talking! How fast does this thing go?
+    - Maddie: It’s pretty fast!
+- ** 40 %** · mid   · `CBE_FrostySecrets2024_Backpack_Dialogue` — item 'Backpack': chain 'Backpack' 9/23, item level 1/1 (estimate)
+    - Maddie: The first thing we need to do is get our gear together.
+    - Pearl: Gear? Like hats and gloves?
+- ** 42 %** · mid   · `CBE_FrostySecrets2024_BackpackSupplies_03_Dialogue` — item 'Pocket Knife': chain 'Hiking Essentials' 10/23, item level 3/7 (estimate)
+    - Pearl: Looks like you’re packing that backpack for a zombie apocalypse!
+    - Pearl: Will we really need a multi-tool?
+- ** 44 %** · mid   · `CBE_FrostySecrets2024_BackpackSupplies_07_Dialogue` — item 'Open Thermos Flask': chain 'Hiking Essentials' 10/23, item level 7/7 (estimate)
+    - Pearl: There’s something in this thermos... some rolled-up papers. What are these?
+    - Maddie: Oh, that’s my Grandpa Charlie’s old map.
+- ** 48 %** · mid   · `CBE_FrostySecrets2024_CabinCodex_03_Dialogue` — item 'Cabin Diary': chain 'Cabin Files' 11/23, item level 3/3 (estimate)
+    - Maddie: We have our gear...
+    - Pearl: And our hot cocoa.
+- ** 50 %** · mid   · `CBE_FrostySecrets2024_Teatime_05_Dialogue` — item 'Box of Macarons': chain 'Cozy Teatime' 12/23, item level 5/9 (estimate)
+    - Maddie: We have cookies, tea, and warm blankets. Is this cozy enough for you?
+    - Pearl: These cookies are scrumptious!
+- ** 51 %** · mid   · `CBE_FrostySecrets2024_Teatime_07_Dialogue` — item 'Teapot': chain 'Cozy Teatime' 12/23, item level 7/9 (estimate)
+    - Pearl: We’re out of hot cocoa. What do we do now?
+    - Maddie: We go outside and make a snowman!
+- ** 61 %** · mid   · `CBE_FrostySecrets2024_Fireplace_01_Dialogue` — item 'Chimney Starter': chain 'Fireplace' 15/23, item level 1/4 (estimate)
+    - Pearl: Did your Grandpa Charlie build this old cabin?
+    - Maddie: Yes, and I found it by coincidence by following his old notes and maps.
+- ** 68 %** · late  · `CBE_FrostySecrets2024_WarmClothes_02_Dialogue` — item 'Pair of Wooly Socks': chain 'Warm Clothes' 17/23, item level 2/12 (estimate)
+    - Maddie: So whose cabin is this??
+    - Maddie: Let's see... it could be Grandma's, but no one has clearly been here for a long time.
+- ** 70 %** · late  · `CBE_FrostySecrets2024_WarmClothes_08_Dialogue` — item 'Plaid Slippers': chain 'Warm Clothes' 17/23, item level 8/12 (estimate)
+    - Maddie: If you really want to enjoy a cold winter’s day, you need to wear enough layers.
+    - Maddie: And you can’t make a good snowman without some decent gloves.
+- ** 71 %** · late  · `CBE_FrostySecrets2024_WarmClothes_10_Dialogue` — item 'Warm Cardigan': chain 'Warm Clothes' 17/23, item level 10/12 (estimate)
+    - Maddie: Brrr! An extra layer would be perfect right about now.
+    - Maddie: I think I saw a big old cardigan in the closet... 
+- ** 75 %** · late  · `CBE_FrostySecrets2024_WinterTools_06_Dialogue` — item 'Snow Blower': chain 'Snow Tools' 18/23, item level 6/7 (estimate)
+    - Pearl: Uh-oh! I think we’re snowed in! I can barely open the front door.
+    - Maddie: Yeah, that does happen up here. We just need to get the snow shovels out and start digging.
+- ** 83 %** · late  · `CBE_FrostySecrets2024_Snowflakes_03_Dialogue` — item 'Drift of Snowflakes': chain 'Snowflakes' 20/23, item level 3/3 (estimate)
+    - Pearl: I've got to admit - this place is really stunning and peaceful.
+    - Maddie: Mason would really love it here too, don't you think?
+- ** 87 %** · late  · `CBE_FrostySecrets2024_Snowman_07_Dialogue` — item 'Complete Snowman': chain 'Snowman' 21/23, item level 7/8 (estimate)
+    - Maddie: Look at your snowman! You’re a real pro!
+    - Pearl: It’s not bad, is it? I’ve been so busy lately that I’ve just run out of inspiration.
+- ** 88 %** · late  · `CBE_FrostySecrets2024_Charlie_02_Dialogue` — item 'Charlie's Paper': chain 'Forgotten Secrets' 22/23, item level 2/7 (estimate)
+    - Maddie: This might just prove it - paper monogrammed with "CB"!
+    - Maddie: The place is cozy and peaceful, but it's also out of the way.
+- ** 89 %** · late  · `CBE_FrostySecrets2024_Charlie_04_Dialogue` — item 'Gold Watch': chain 'Forgotten Secrets' 22/23, item level 4/7 (estimate)
+    - Maddie: A Swiss gold watch!
+    - Maddie: Grandma has never wanted to talk too much about Grandpa Charlie, but she said he loved clocks and watches. He'd even studied them in Switzerland.
+- ** 90 %** · late  · `CBE_FrostySecrets2024_Charlie_06_Dialogue` — item 'Frozen Code Book': chain 'Forgotten Secrets' 22/23, item level 6/7 (estimate)
+    - Pearl: Umm, Maddie... I just found a big pile of cash in one of the cabinets.
+    - Maddie: Oh, yeah - you sometimes find that kind of stuff here.
+- ** 91 %** · late  · `CBE_FrostySecrets2024_Charlie_07_Dialogue` — item 'Frozen Photo': chain 'Forgotten Secrets' 22/23, item level 7/7 (estimate)
+    - Maddie: I wonder when he was last here?
+    - Maddie: Everything has been left as if he could come back at any time, but... he's gone.
+- ** 93 %** · late  · `CBE_FrostySecrets2024_IceSculptures_05_Dialogue` — item 'Mysterious Mansion': chain 'Ice Sculptures' 23/23, item level 5/12 (estimate)
+    - Pearl: What’s your ice sculpture supposed to look like?
+    - Maddie: Can’t you see? It’s the Mansion.
+- ** 94 %** · late  · `CBE_FrostySecrets2024_IceSculptures_09_Dialogue` — item 'Broken Heart': chain 'Ice Sculptures' 23/23, item level 9/12 (estimate)
+    - Pearl: Do you think it’s too late for a career pivot?
+    - Pearl: I could get used to sculpting ice up in the mountains.
+- ** 95 %** · outro · `CBE_FrostySecrets2024_IceSculptures_12_Dialogue` — item 'The Destiny': chain 'Ice Sculptures' 23/23, item level 12/12 (estimate)
+    - Maddie: What a year it's been...
+    - Maddie: Maybe next year will bring new perspectives and opportunities.
+- **100 %** · outro · `CBE_FrostySecrets2024_Outro_Dialogue` — event end
+    - Pearl: Thank you for this little trip. Being up in the mountains wasn't anything like I thought!
+    - Maddie: But have you changed your mind about the winter?
+
+Not placeable in 26.07.01 (5): `CBE_FrostySecrets2024_DecoSlot_01_Dialogue`, `CBE_FrostySecrets2024_DecoSlot_07_Dialogue`, `CBE_FrostySecrets2024_DecoSlot_10_Dialogue`, `CBE_FrostySecrets2024_DecoSlot_15_Dialogue`, `CBE_FrostySecrets2024_IceSculptures_11_Dialogue`
+
+## Changes across versions
+- **25.08.02 → 25.09.01**: moved 2
+- **25.09.02 → 25.10.01**: added 1 (`CBE_FrostySecrets2024_Intro_Dialogue`)
+- **26.04.01 → 26.04.02**: removed 4 (`CBE_FrostySecrets2024_DecoSlot_01_Dialogue`, `CBE_FrostySecrets2024_DecoSlot_07_Dialogue`, `CBE_FrostySecrets2024_DecoSlot_10_Dialogue`, `CBE_FrostySecrets2024_DecoSlot_15_Dialogue`)

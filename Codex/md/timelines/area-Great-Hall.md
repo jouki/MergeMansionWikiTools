@@ -1,0 +1,43 @@
+# Great Hall — dialogue timeline (area)
+`area:Great Hall` · versions 24.04.01–26.07.01 (32)
+
+## Order in 26.07.01
+- **  1 %** · intro · `Greathall01_Frontdoor` — task 2/190 'Search for the key' task completed; after 'Unlock'
+    - Maddie: I can't believe the key was under the mat this whole time!
+    - Maddie: I'm pretty sure I checked under there and I didn't find anything...
+- **  2 %** · intro · `Greathall02_Inside` — task 4/190 'Remove step debris' task completed; after 'Open the door'
+    - Maddie: I can't believe it! I'm in the Boulton family Mansion!
+    - Maddie: I didn't even <b>know</b> there was a mansion, until I accidently saw Grandma's notice...
+- **  3 %** · intro · `Greathall03_Continues` — task 5/190 'Remove dust sheet' task completed; after 'Remove step debris'
+    - Maddie: Well? Who are you, and what are you doing in my Mansion?
+    - Victoria: Oh please... This Mansion belongs to the Hopewell Bay town council! Or at least, it soon will, even in this sorry state...
+- **  3 %** · intro · `Greathall04_Continues` — task 6/190 'Remove debris at the top of the steps' task completed; after 'Remove dust sheet'
+    - Victoria: I'll be straight with you... You'll need to do more! A lot more, if you even want to consider keeping the mansion.
+    - Maddie: I only just got inside! I don't even have access to all the rooms yet!
+- **  4 %** · intro · `Greathall08_Missing_Letter` — task 8/190 'Dust and remove old desk' task appears; after 'Remove and clean old rolled rug'
+    - Maddie: That's strange...
+    - Maddie: Everything is covered in dust, except for this one spot!
+- **  5 %** · early · `Greathall05_Upset` — task 10/190 'Place restored desk' task completed; after 'Fix the floor'
+    - Grandma: Are you alright, Maddie? You look upset.
+    - Maddie: Grandma? I'm... fine. I wasn't expecting to see you in here, though.
+- ** 10 %** · early · `Greathall09_Footprints` — task 20/190 'Clean and remove coat stand' task appears; after 'Remove rust from the canes'
+    - Maddie: There's footprints in the dust!
+    - Maddie: Has someone been here all this time?!
+- ** 15 %** · early · `Greathall13_Armor` — task 28/190 'Polish the knight armor' task completed; after 'Attach the missing armor pieces'
+    - Maddie: This armor looks old...
+    - Maddie: Were the Boultons from an old family of knights?!
+- ** 24 %** · early · `Greathall10_Grandfather_Clock` — task 46/190 'Clean the dust and the cobwebs' task completed; after 'Polish the knight armor'
+    - Maddie: This grandfather clock looks like it's in pretty bad shape...
+    - Maddie: Hmm... Grandfather clock... Charlie Clock?
+- ** 54 %** · mid   · `Greathall06_Charlie` — task 102/190 'Fix and place the red hat back' task completed; after 'Place the lamp and add batteries back'
+    - Grandma: Your Grandpa Charlie never liked this room when we first got married.
+    - Maddie: He didn't? But it's so grand and beautiful! Especially now that I've restored it.
+- ** 76 %** · late  · `Greathall11_Old_Painting` — task 145/190 'Clean and place the old painting back' task completed; after 'Fix the wall plaster damage'
+    - Maddie: Ignatius and Agatha Boulton...
+    - Maddie: They looked very happy together.
+- ** 91 %** · late  · `Greathall12_Intercom` — task 173/190 'Fix and place the old intercom back' task appears; after 'Remove the old intercom'
+    - Maddie: Oh wow! An old B3 Intercom system from the 1920's!
+    - Maddie: Grandma used to read me the manual as a kid, to get me to sleep.
+- **100 %** · outro · `GreathallOutro_Key_Found` — task 190/190 'Search the Clock' task completed; after 'Fix the holes'
+    - Maddie: Hmmm... I wonder if this key fits that door upstairs?
+    - Maddie: But in any case, this place is done! 

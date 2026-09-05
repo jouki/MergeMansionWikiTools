@@ -1,0 +1,73 @@
+# Speakeasy — dialogue timeline (area)
+`area:Speakeasy` · versions 24.07.01–26.07.01 (30)
+
+## Order in 26.07.01
+- **  3 %** · intro · `Speakeasy_Trophies` — task 5/180 'Remove the trophies' task completed; after 'Polish the trophy'
+    - Maddie: These trophies look quite cheap, and they're all for trivia quizzes?
+    - Maddie: Huh. Seems like they were awarded to a Lenny, and they all took place at a local Hopewell Bay restaurant.
+- **  4 %** · intro · `SpeakeasyChestFound` — task 7/180 'Break down the crates' task completed; after 'Remove the trophies'
+    - Maddie: Aha! A fully stocked bucket of beverages and garnishes!
+    - Maddie: I've always wanted to try my hand at crafting custom beverages!
+- **  5 %** · early · `Speakeasy_Easel` — task 9/180 'Take the easel away' task completed; after 'Break down the crates'
+    - Maddie: An easel. Blank though.
+    - Maddie: Looks like someone had painter's block!
+- ** 12 %** · early · `Speakeasy_Fuses` — task 21/180 'Discard the newspapers and boxes' task completed; after 'Break down the boxes'
+    - Maddie: Here we are! There's a couple of fuses here!
+    - Maddie: And they're all a different color!
+- ** 15 %** · early · `Speakeasycharactertaskintro` — task 28/180 'First, a disguise to get around. Plumber, maybe?' task appears; after 'Take off the fridge cover'
+    - Jackie: Maddie! You won't believe it! I finally got assigned to something big!
+    - Maddie: Ooh! What is it?
+- ** 25 %** · early · `Speakeasycharactertask1` — task 46/180 'I'll need a gardener disguise!' task appears; after 'So much dust!'
+    - Jackie: I'm heading to the garden next.
+    - Maddie: The gardener probably sees everything that goes on around here!
+- ** 36 %** · mid   · `Speakeasycharactertask2` — task 66/180 'A gala! I can go as a bartender...' task appears; after 'I should clean the mess before the gardener returns.'
+    - Jackie: I didn't learn as much as I wanted on that mission...
+    - Jackie: But I did hear that there's a gala at the town hall today!
+- ** 42 %** · mid   · `Speakeasycharactertask3` — task 76/180 'Last one and then I can slip away...' task completed; after 'More beverages? Come on!'
+    - Jackie: Everyone's busy at the gala, so I can finally slip away.
+    - Jackie: I'm sure I can get into Bruno's office!
+- ** 49 %** · mid   · `Speakeasy04` — task 89/180 'Place the red fuse' task completed; after 'Vacuum the fuse box'
+    - Maddie: There’s a lot of strange stuff in here...
+    - Maddie: Quite similar in a way to the dance floor, actually.
+- ** 50 %** · mid   · `Speakeasycharactertaskoutro` — task 90/180 'Lastly, I'll need to wipe down fingerprints!' task completed; after 'Found some important files; lend me a bag!'
+    - Jackie: Phew! That was close...
+    - Jackie: The security guard almost discovered me, but I managed to escape.
+- ** 75 %** · late  · `Speakeasy12` — task 135/180 'Take the wooden cover away' task completed; after 'Install the pink fuse'
+    - Maddie: WOW! Wh-what is this? It looks like a crystal ball... 
+    - Maddie: Even underneath all the dust, it's so ornate!
+- ** 80 %** · late  · `Speakeasy12.2` — task 145/180 'Open the sphere' task appears; after 'Fix the rug'
+    - Maddie: Well, I managed to get it all shiny again, but it's probably just a very unique disco ball?
+    - Maddie: I mean, considering the context of this room and the previous one...
+- ** 81 %** · late  · `Speakeasy12.3` — task 145/180 'Open the sphere' task completed; after 'Fix the rug'
+    - Maddie: Oh my! I did not expect it to open up...
+    - Maddie: And there's a beautiful crystal heart inside!
+- ** 81 %** · late  · `SpeakeasyMarbleTable` — task 146/180 'Clean the table' task completed; after 'Remove the crate'
+    - Maddie: This marble table has an interesting pattern...
+    - Maddie: It almost looks like an infinity sign!
+- ** 84 %** · late  · `Speakeasy14` — task 152/180 'Reupholster the chair' task completed; after 'Sew it together', 'Open the sphere'
+    - Maddie: Another room without an exit in sight!
+    - Maddie: Roddy was right though...
+- ** 85 %** · late  · `SpeakeasyMiniGameIntro` — task 154/180 'Play cards' task appears; after 'Reupholster the chair'
+    - Maddie: Oh, look! Another set of cards!
+    - Maddie: Hmm, it wouldn't hurt to take a little break and indulge in a game.
+- ** 88 %** · late  · `SpeakeasyMiniGameOutro` — task 158/180 'Play cards' task completed; after 'Play cards'
+    - Maddie: Looks like I still got it!
+    - Maddie: Now, let's get back to fixing up this room...
+- ** 94 %** · late  · `Speakeasy11` — task 169/180 'Install the blue fuse' task completed; after 'Place the flowers'
+    - Maddie: Let's see what this next fuse does...
+    - Maddie: This room is so unexpected; I can't even predict what it could be!
+- ** 94 %** · late  · `Speakeasy13` — task 170/180 'Remove the wooden cover' task completed; after 'Install the blue fuse'
+    - Maddie: Sweet! A jukebox!
+    - Maddie: I'm starting to get used to things popping out of the ground...
+- ** 96 %** · outro · `SpeakeasyJukebox` — task 173/180 'Pull out the jukebox screen' task completed; after 'Power up the jukebox'
+    - Maddie: Hmm... this jukebox is pretty custom.
+    - Maddie: There's an assortment of parts that you wouldn't normally find here...
+- ** 97 %** · outro · `Speakeasy13.1` — task 175/180 'Install the display' task appears; after 'Take the old buttons out'
+    - Maddie: Ah! It looks like the jukebox screen has been updated to a modern one.
+    - Maddie: It's possible that it broke, and they couldn't find the original parts anymore...
+- ** 98 %** · outro · `Speakeasy15` — task 177/180 'Paint the fridge' task completed; after 'Polish the fridge surface'
+    - Maddie: I just noticed this paper on the fridge.
+    - Maddie: It looks like music sheets...
+- ** 99 %** · outro · `SpeakeasyFridge` — task 178/180 'Dust the fridge' task completed; after 'Paint the fridge'
+    - Maddie: Here's another thing that doesn't quite seem to fit in...
+    - Maddie: This fridge feels a lot more modern than the rest of the room. Kind of like the jukebox.

@@ -1,0 +1,93 @@
+# Holiday Oddities — dialogue timeline (event)
+`event:LDE_HolidayOddities2025` · versions 25.10.01–26.07.01 (13)
+
+## Order in 26.07.01
+- **  2 %** · intro · `LDE_HolidayOddities2025_BoardIntro_Dialogue` — entering the board
+    - Grandma: What a beautiful winter evening! Maddie has done a magnificent job in the Mansion.
+    - Grandma: She really has worked so hard. I’m not surprised she was out like a light tonight.
+- **  9 %** · early · `LDE_HolidayOddities2025_StickBasket_03_Dialogue` — item 'Bunch of Sticks': chain 'Weaved Basket' 3/55, item level 3/7 (estimate)
+    - Hank: So like why did you ask us to meet you in the forest?
+    - Grandma: Well--
+- **  9 %** · early · `LDE_HolidayOddities2025_StickBasket_05_Dialogue` — item 'Basket Base': chain 'Weaved Basket' 3/55, item level 5/7 (estimate)
+    - Roddy: Tell us about these Hopewell Bay holiday traditions!
+    - Grandma: Well, in the olden days, people had to make do with whatever they could find. It was traditional to collect natural materials to make beautiful ornaments.
+- ** 10 %** · early · `LDE_HolidayOddities2025_StickBasket_07_Dialogue` — item 'Full Basket': chain 'Weaved Basket' 3/55, item level 7/7 (estimate)
+    - Hank: We’ve got acorns...
+    - Mason: And pinecones and walnuts!
+- ** 17 %** · early · `LDE_HolidayOddities2025_Woodchopping_03_Dialogue` — item 'Hand Saw': chain 'Wood Cutting Tools' 8/55, item level 3/6 (estimate)
+    - Grandma: In the early days, it was believed that as long as the holiday fire burned, joy would stay in the home.
+    - Grandma: If it went out before dawn, the spirit of winter would sneak in and steal away the household’s luck.
+- ** 18 %** · early · `LDE_HolidayOddities2025_Woodchopping_06_Dialogue` — item 'Wood Splitting Machine': chain 'Wood Cutting Tools' 8/55, item level 6/6 (estimate)
+    - Roddy: Did you not see there’s a wood-splitting machine in the shed? Now we’re talking!
+    - Hank: Hey, that’s cheating!
+- ** 20 %** · early · `LDE_HolidayOddities2025_Bellow_03_Dialogue` — item 'Big Antique Bellows': chain 'Bellows' 9/55, item level 3/3 (estimate)
+    - Mason: If you want to build a good fire, you need bellows. I learned that in scouts!
+    - Roddy: You’re right. A fire needs air to breathe.
+- ** 21 %** · early · `LDE_HolidayOddities2025_Logs_03_Dialogue` — item 'Log Rack': chain 'Logs' 10/55, item level 3/3 (estimate)
+    - Grandma: I can see you have been working hard!
+    - Hank: Or hardly working... Roddy used a wood-splitting machine. I bet those early folks in Hopewell Bay didn’t have one.
+- ** 29 %** · early · `LDE_HolidayOddities2025_HotDrinks_02_Dialogue` — item 'Hopeberry Tea': chain 'Hot Drinks' 15/55, item level 2/5 (estimate)
+    - Mason: Where’s Maddie? She’s usually the one who organizes the holiday miracles.
+    - Roddy: Maybe this year, the holiday miracle is for her?
+- ** 29 %** · early · `LDE_HolidayOddities2025_HotDrinks_04_Dialogue` — item 'Hot Chocolate': chain 'Hot Drinks' 15/55, item level 4/5 (estimate)
+    - Grandma: The fire is roaring! This household will have all the luck if you keep it going.
+    - Roddy: You bet we will!
+- ** 38 %** · mid   · `LDE_HolidayOddities2025_KitchenUtensils_03_Dialogue` — item 'Soup Pot': chain 'Kitchen Tools' 21/55, item level 3/6 (estimate)
+    - Grandma: Collect all the cans you can find in the pantry and bring them into the kitchen.
+    - Grandma: Then we will do a little bit of mixing and stirring and see what we end up with!
+- ** 39 %** · mid   · `LDE_HolidayOddities2025_KitchenUtensils_06_Dialogue` — item 'Simmering Soup': chain 'Kitchen Tools' 21/55, item level 6/6 (estimate)
+    - Roddy: What’s the tradition behind making soup out of weird canned foods?
+    - Grandma: In old Hopewell Bay, waste was frowned upon. Every home contributed whatever they could spare to the communal soup, served during the holidays.
+- ** 48 %** · mid   · `LDE_HolidayOddities2025_Sockgr_01_Dialogue` — item 'Green & Red Stripes': chain 'Green & Red Stripes' 26/55, item level 1/1 (estimate)
+    - Hank: Look at this. Not too bad, even if I do say so myself.
+    - Mason: That sock is perfection, Hank! How did you get so GOOD?
+- ** 49 %** · mid   · `LDE_HolidayOddities2025_SockRW_01_Dialogue` — item 'Red & White Stripes': chain 'Red & White Stripes' 27/55, item level 1/1 (estimate)
+    - Roddy: I think my sock is ready.
+    - Hank: Umm, is that a sock or an oven mitt?
+- ** 51 %** · mid   · `LDE_HolidayOddities2025_SockWG_01_Dialogue` — item 'White & Green Stripes': chain 'White & Green Stripes' 28/55, item level 1/1 (estimate)
+    - Grandma: Good job! We have some great socks and some... well, not so great ones.
+    - Roddy: Hey!
+- ** 54 %** · mid   · `LDE_HolidayOddities2025_ClockKeys_03_Dialogue` — item 'Assortment of Clock Keys': chain 'Clock Keys' 30/55, item level 3/3 (estimate)
+    - Roddy: What is this tradition and what are we supposed to do with these clock keys?
+    - Grandma: You will use the keys to set all the clocks you can find to show the wrong time.
+- ** 56 %** · mid   · `LDE_HolidayOddities2025_ClockATurned_01_Dialogue` — item 'Plain Longcase Clock - Turned': chain 'Plain Longcase Clock - Turned' 31/55, item level 1/1 (estimate)
+    - Roddy: It seems to me that this old tradition could cause some chaos.
+    - Grandma: That is precisely the point, Roddy!
+- ** 57 %** · mid   · `LDE_HolidayOddities2025_ClockBTurned_01_Dialogue` — item 'Fancy Longcase Clock - Turned': chain 'Fancy Longcase Clock - Turned' 32/55, item level 1/1 (estimate)
+    - Hank: Did you set that clock forward or back?
+    - Mason: Who cares? It's the holidays, and we're making more time for opening presents and eating gingerbread.
+- ** 59 %** · mid   · `LDE_HolidayOddities2025_ClockCTurned_01_Dialogue` — item 'Royal Longcase Clock - Turned': chain 'Royal Longcase Clock - Turned' 33/55, item level 1/1 (estimate)
+    - Roddy: This is the last clock. Maybe we should leave one to show the real time, though. You know, just in case...
+    - Mason: Traditions are traditions, Roddy. Change the time!
+- ** 70 %** · late  · `LDE_HolidayOddities2025_ChristmasTreeB_01_Dialogue` — item 'Decorated Tree': chain 'Decorated Tree' 40/55, item level 1/1 (estimate)
+    - Grandma: Now that we have found the perfect tree, and we have a basket full of materials to make ornaments, we can head back to the Mansion.
+    - Roddy: What’s the next tradition?
+- ** 72 %** · late  · `LDE_HolidayOddities2025_ChristmasTreeC_01_Dialogue` — item 'Lit-up Tree': chain 'Lit-up Tree' 41/55, item level 1/1 (estimate)
+    - Roddy: We have the tree, our ornaments and a roaring fire. What’s next?
+    - Grandma: Next, we’re making soup - out of canned food!
+- ** 74 %** · late  · `LDE_HolidayOddities2025_ChristmasTreeD_01_Dialogue` — item 'Fancy Tree': chain 'Fancy Tree' 42/55, item level 1/1 (estimate)
+    - Mason: Tell us about the next tradition! Is it baking? LET IT BE BAKING!
+    - Grandma: No, the fourth tradition is about knitting.
+- ** 75 %** · late  · `LDE_HolidayOddities2025_ChristmasTreeE_01_Dialogue` — item 'Festive Tree': chain 'Festive Tree' 43/55, item level 1/1 (estimate)
+    - Roddy: It’s starting to look like the holidays here, don’t you think?
+    - Hank: You're right. Maybe there's something to these traditions.
+- ** 77 %** · late  · `LDE_HolidayOddities2025_ChristmasTreeF_01_Dialogue` — item 'Complete Tree': chain 'Complete Tree' 44/55, item level 1/1 (estimate)
+    - Mason: I can’t wait for Maddie to see all of this! She’s going to be SO surprised.
+    - Roddy: I think we did well here, fellas.
+- ** 93 %** · late  · `LDE_HolidayOddities2025_ChristmasTreeS_01_Dialogue` — item 'Decorated Tree': chain 'LDE_HolidayOddities2025_ChristmasTreeS' 54/55, item level 1/1 (estimate)
+    - Roddy: Now we’ve turned the clocks, what comes next?
+    - Grandma: We finish decorating the tree.
+- ** 94 %** · late  · `LDE_HolidayOddities2025_SoupQuestionable_01_Dialogue` — item 'Questionable Soup': chain 'LDE_HolidayOddities2025_Soups' 55/55, item level 1/3 (estimate)
+    - Hank: Sooo, who’s going to taste this soup first?
+    - Mason: Roddy, you do it.
+- ** 94 %** · late  · `LDE_HolidayOddities2025_SoupGood_01_Dialogue` — item 'Acceptable Soup': chain 'LDE_HolidayOddities2025_Soups' 55/55, item level 2/3 (estimate)
+    - Hank: I already tried one soup. Someone else can taste this one.
+    - Roddy: Mason, how about you do it?
+- ** 95 %** · outro · `LDE_HolidayOddities2025_SoupAmazing_01_Dialogue` — item 'Surprisingly Good Soup': chain 'LDE_HolidayOddities2025_Soups' 55/55, item level 3/3 (estimate)
+    - Hank: You’re up, little man. Take the spoon and have a taste.
+    - Mason: OK. I’m going in.
+- **100 %** · outro · `LDE_HolidayOddities2025_Outro_Dialogue` — event end
+    - Grandma: I cannot thank you enough. You really went above and beyond to give Maddie the most relaxing holiday in years.
+    - Grandma: I could not have done this on my own. The Mansion looks wonderful, and everything is ready for a celebration.
+
+Not placeable in 26.07.01 (10): `LDE_HolidayOddities2025_KnittingNeedlesGR_01_Dialogue`, `LDE_HolidayOddities2025_KnittingNeedlesRW_01_Dialogue`, `LDE_HolidayOddities2025_KnittingNeedlesWG_01_Dialogue`, `LDE_HolidayOddities2025_KnittingTools_03_Dialogue`, `LDE_HolidayOddities2025_KnittingTools_06_Dialogue`, `LDE_HolidayOddities2025_TA2_Dialogue`, `LDE_HolidayOddities2025_TC1_Dialogue`, `LDE_HolidayOddities2025_TC3_Dialogue`, `LDE_HolidayOddities2025_Timepieces_04_Dialogue`, `LDE_HolidayOddities2025_Timepieces_07_Dialogue`

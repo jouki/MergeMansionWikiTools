@@ -1,0 +1,178 @@
+# Green Acres Quest — dialogue timeline (event)
+`event:LDE_GreenAcresQuest2024` · versions 24.07.01–26.07.01 (30)
+
+## Order in 26.07.01
+- **  0 %** · intro · `LDE_GreenAcresQuest_Intro_Dialogue` — event start
+    - Maddie: Remember the vegetable garden we built some time ago? You know, in front of the Mansion?
+    - Grandma: Of course! It was delightful!
+- **  2 %** · intro · `LDE_GreenAcresQuest_BoardIntro_Dialogue` — entering the board
+    - Maddie: This little garden is incredible! I really thought of everything…
+    - Maddie: There are flowers, veggies and plenty of other things to attract pollinators and animals. There are even garden gnomes!
+- **  8 %** · early · `LDE_GreenAcresQuest2024_Veggies_08_Dialogue` — item 'Basket of Vegetables': chain 'Vegetables' 2/53, item level 8/8 (estimate)
+    - Cherry: You got some fantastic vegetables growing here, Maddie!
+    - Maddie: Take as many as you wish! This is a community garden.
+- **  8 %** · early · `LDE_GreenAcresQuest2024_v2_Veggies_08_Dialogue` — item 'Basket of Vegetables': chain 'Vegetables' 2/53, item level 8/8 (estimate)
+    - Maddie: You've done a fantastic job, Emilio!
+    - Emilio: I think I'm starting to get the hang of this. Gardening is fun!
+- **  8 %** · early · `LDE_GreenAcresQuest_Veggies_08_Dialogue` — item 'Basket of Vegetables': chain 'Vegetables' 2/53, item level 8/8 (estimate)
+    - Cherry: I’m so happy you asked me to help in the garden. I’ve been so busy lately... I feel like I’ve been the worst friend.
+    - Maddie: You’re running a whole bakery, Cherry! I get it!
+- ** 10 %** · early · `LDE_GreenAcresQuest2024_CharacterCherry_02_Dialogue` — item 'Cherry': chain 'Cherry' 3/53, item level 2/2 (estimate)
+    - Cherry: Hey there! Could you help an old girl out?
+    - Maddie: No problem, Cherry!
+- ** 10 %** · early · `LDE_GreenAcresQuest2024_v2_CharacterCherry_02_Dialogue` — item 'Cherry': chain 'Cherry' 3/53, item level 2/2 (estimate)
+    - Emilio: Cherry, I'm desperate. Could you help me with this garden?
+    - Cherry: Wow! I can try, but I'm not much of a gardener.
+- ** 10 %** · early · `LDE_GreenAcresQuest_CharacterCherry_02_Dialogue` — item 'Cherry': chain 'Cherry' 3/53, item level 2/2 (estimate)
+    - Maddie: Cherry, I was thinking... would you help me restore the old vegetable garden? At the moment it's a bit of mess.
+    - Cherry: A mess? It sounds like a goldmine of ingredients just waiting to shine. Of course I’ll help!
+- ** 14 %** · early · `LDE_GreenAcresQuest2024_RareFlowerA_01_Dialogue` — item 'Magenta Marigold': chain 'Magenta Marigold' 5/53, item level 1/1 (estimate)
+    - Maddie: This garden is really working out!
+    - Maddie: Maybe I should sell some of these flowers at the flower market?
+- ** 14 %** · early · `LDE_GreenAcresQuest2024_v2_RareFlowerA_01_Dialogue` — item 'Magenta Marigold': chain 'Magenta Marigold' 5/53, item level 1/1 (estimate)
+    - Emilio: I can't believe how many people have helped me build this garden!
+    - Emilio: With so many beautiful flowers, everyone can enjoy it.
+- ** 15 %** · early · `LDE_GreenAcresQuest2024_Pollinator_05_Dialogue` — item 'Hummingbird': chain 'Common Pollinators' 6/53, item level 5/5 (estimate)
+    - AntiqueDealer: Oh wow, a hummingbird!
+    - AntiqueDealer: I haven’t seen those around these parts in a long time.
+- ** 15 %** · early · `LDE_GreenAcresQuest2024_v2_Pollinator_05_Dialogue` — item 'Hummingbird': chain 'Common Pollinators' 6/53, item level 5/5 (estimate)
+    - Emilio: Is that a hummingbird?
+    - Maddie: Your garden is already attracting wildlife!
+- ** 15 %** · early · `LDE_GreenAcresQuest_Pollinator_05_Dialogue` — item 'Hummingbird': chain 'Common Pollinators' 6/53, item level 5/5 (estimate)
+    - Roddy: The vegetable compost is done, same with the flower compost. I never realized just how stinky they are!
+    - Roddy: Whoah! This place looks completely transformed!
+- ** 17 %** · early · `LDE_GreenAcresQuest2024_CharacterMason_02_Dialogue` — item 'Mason': chain 'Mason' 7/53, item level 2/2 (estimate)
+    - Mason: Maddie, Maddie! I don’t know what I’m doing...
+    - Maddie: Don’t worry, I’ll help you out.
+- ** 17 %** · early · `LDE_GreenAcresQuest2024_v2_CharacterMason_02_Dialogue` — item 'Mason': chain 'Mason' 7/53, item level 2/2 (estimate)
+    - Mason: Are you building a garden?
+    - Emilio: I'm trying... I couldn't tempt you to help, could I?
+- ** 17 %** · early · `LDE_GreenAcresQuest_CharacterMason_02_Dialogue` — item 'Mason': chain 'Mason' 7/53, item level 2/2 (estimate)
+    - Mason: What’s up? On the phone you told me that you had a “really fun” project for me. What is it?
+    - Mason: I hope that spade isn’t a part of it...
+- ** 20 %** · early · `LDE_GreenAcresQuest_RareFlowerGrowth_01_Dialogue` — item 'Mature Green Hydrangeas': chain 'Rare Wild Flowers' 9/53, item level 5/5 (estimate)
+    - Deb: Phew! I think our work here is done!
+    - Maddie: Amazing job, you two! I knew you'd be able to create something amazing if you worked together.
+- ** 25 %** · early · `LDE_GreenAcresQuest2024_FlowerCompost_Dialogue` — chain 'Flower Compost' 12/53, level 1/1 — inferred from the story id (estimate)
+    - Maddie: Flower Compost helps you get rid of Flowers you don't need, to get more Soil.
+- ** 25 %** · early · `LDE_GreenAcresQuest2024_v2_FlowerCompost_Dialogue` — item 'Flower Compost': chain 'Flower Compost' 12/53, item level 1/1 (estimate)
+    - Maddie: Flower Compost helps you get rid of Flowers you don't need, to get more Soil.
+- ** 25 %** · early · `LDE_GreenAcresQuest_FlowerCompost_Dialogue` — item 'Flower Compost': chain 'Flower Compost' 12/53, item level 1/1 (estimate)
+    - Maddie: Flower Compost helps you get rid of Flowers you don't need, to get more Soil.
+- ** 32 %** · early · `LDE_GreenAcresQuest2024_CharacterJulius_02_Dialogue` — item 'Julius': chain 'Julius' 16/53, item level 2/2 (estimate)
+    - AntiqueDealer: Salutations, Maddie! Might I bother you for a second?
+    - Maddie: Why not?
+- ** 32 %** · early · `LDE_GreenAcresQuest2024_v2_CharacterJulius_02_Dialogue` — item 'Julius': chain 'Julius' 16/53, item level 2/2 (estimate)
+    - Emilio: Julius, do you know anything about gardening?
+    - AntiqueDealer: Well, I have read several books about it. Does that help?
+- ** 32 %** · early · `LDE_GreenAcresQuest_CharacterJulius_02_Dialogue` — item 'Julius': chain 'Julius' 16/53, item level 2/2 (estimate)
+    - AntiqueDealer: What a delightful place! I am so glad to hear you intend to restore this little garden.
+    - AntiqueDealer: There has been a terrible decline in pollinators in recent years. This is exactly the kind of place we need more of.
+- ** 34 %** · early · `LDE_GreenAcresQuest2024_GreenhouseChilis_06_Dialogue` — item 'Extra Hot Chilies': chain 'Greenhouse Chilies' 17/53, item level 6/6 (estimate)
+    - Maddie: What have you got there, Grandma?
+    - Grandma: Oh this, dearie? Why, it’s a classic Boulton Hot Sauce!
+- ** 34 %** · early · `LDE_GreenAcresQuest2024_v2_GreenhouseChilis_06_Dialogue` — item 'Extra Hot Chilies': chain 'Greenhouse Chilies' 17/53, item level 6/6 (estimate)
+    - Emilio: Bella will definitely want some chilies. The hotter, the better!
+    - Mason: What are these? Can I taste them?
+- ** 34 %** · early · `LDE_GreenAcresQuest_GreenhouseChilis_06_Dialogue` — item 'Extra Hot Chilies': chain 'Greenhouse Chilies' 17/53, item level 6/6 (estimate)
+    - Mason: Hey, Roddy! I bet you can’t eat one of these chilies.
+    - Roddy: I I COULD, but I choose not to. Be careful with them - they’re so hot they’ll make your eyes water.
+- ** 36 %** · mid   · `LDE_GreenAcresQuest2024_GoodAnimals_05_Dialogue` — item 'Hedgehog': chain 'Uncommon Pollinators' 18/53, item level 5/5 (estimate)
+    - Mason: Hmph...
+    - Maddie: What’s wrong, Mason?
+- ** 36 %** · mid   · `LDE_GreenAcresQuest2024_v2_GoodAnimals_05_Dialogue` — item 'Hedgehog': chain 'Uncommon Pollinators' 18/53, item level 5/5 (estimate)
+    - Emilio: Is that a... hedgehog?? It's so adorable!
+    - Emilio: Welcome to Bella's community garden, little guy.
+- ** 36 %** · mid   · `LDE_GreenAcresQuest_GoodAnimals_05_Dialogue` — item 'Hedgehog': chain 'Uncommon Pollinators' 18/53, item level 5/5 (estimate)
+    - Mason: Maddie, don’t look now, but I think that pile of leaves is moving!
+    - Maddie: W-what?
+- ** 37 %** · mid   · `LDE_GreenAcresQuest2024_CommonFlowerD_01_Dialogue` — item 'Poppy': chain 'Common Flower' 19/53, item level 1/1 (estimate)
+    - Maddie: Poppies are so beautiful!
+    - Grandma: And “versatile” too.
+- ** 37 %** · mid   · `LDE_GreenAcresQuest2024_v2_CommonFlowerD_01_Dialogue` — item 'Poppy': chain 'Common Flower' 19/53, item level 1/1 (estimate)
+    - Maddie: If you want to attract pollinators, your garden needs flowers, too!
+    - Maddie: What's Bella's favorite flower?
+- ** 46 %** · mid   · `LDE_GreenAcresQuest_UncommonFlowerGrowth_01_Dialogue` — item 'Wildflower Assortment': chain 'Wild Flowers' 24/53, item level 5/5 (estimate)
+    - AntiqueDealer: The very best flowers for pollinators are native, nectar-rich plants with single-layer petals.
+    - Deb: Like the narrow-leaf mountain mint here?
+- ** 49 %** · mid   · `LDE_GreenAcresQuest2024_CharacterGrandma_02_Dialogue` — item 'Grandma': chain 'Grandma' 26/53, item level 2/2 (estimate)
+    - Grandma: Hello, dearie. Could you help me?
+    - Maddie: Of course, Grandma.
+- ** 49 %** · mid   · `LDE_GreenAcresQuest2024_v2_CharacterGrandma_02_Dialogue` — item 'Grandma': chain 'Grandma' 26/53, item level 2/2 (estimate)
+    - Grandma: Hmmm... You do not know much about gardening, do you?
+    - Emilio: Not really...
+- ** 49 %** · mid   · `LDE_GreenAcresQuest_CharacterGrandma_02_Dialogue` — item 'Grandma': chain 'Grandma' 26/53, item level 2/2 (estimate)
+    - Grandma: Look at this! You’ve been working hard! This garden already looks so much better.
+    - Maddie: Thank you! It’s not bad, if I do say so myself.
+- ** 52 %** · mid   · `LDE_GreenAcresQuest2024_RareFlowerB_01_Dialogue` — item 'Purple Hydrangea': chain 'Rare Flower' 28/53, item level 1/1 (estimate)
+    - Grandma: How beautiful, Maddie!
+    - Grandma: And my favourite color too.
+- ** 52 %** · mid   · `LDE_GreenAcresQuest2024_v2_RareFlowerB_01_Dialogue` — item 'Purple Hydrangea': chain 'Rare Flower' 28/53, item level 1/1 (estimate)
+    - Grandma: What is Bella's favorite flower? Could it be the rose? Or tulip?
+    - Grandma: Maybe the forget-me-not?
+- ** 59 %** · mid   · `LDE_GreenAcresQuest2024_GardenGnomes_07_Dialogue` — item 'Flying Garden Gnome': chain 'Garden Gnomes' 32/53, item level 7/7 (estimate)
+    - Maddie: Hey there, little guy!
+    - Maddie: Are you busy keeping my garden safe?
+- ** 59 %** · mid   · `LDE_GreenAcresQuest2024_v2_GardenGnomes_07_Dialogue` — item 'Flying Garden Gnome': chain 'Garden Gnomes' 32/53, item level 7/7 (estimate)
+    - AntiqueDealer: Don't forget to add some garden gnomes!
+    - Emilio: Do I really need garden gnomes? Do you think Bella would like them?
+- ** 59 %** · mid   · `LDE_GreenAcresQuest_GardenGnomes_07_Dialogue` — item 'Flying Garden Gnome': chain 'Garden Gnomes' 32/53, item level 7/7 (estimate)
+    - Maddie: Why are there so many garden gnomes here? I seem to find another one behind every leaf pile and every mound.
+    - Maddie: I wonder if they just pop out the ground like mushrooms? So creepy...
+- ** 66 %** · late  · `LDE_GreenAcresQuest2024_Friendship_08_Dialogue` — item 'Friendship Medallion': chain 'Mark of Friendship' 36/53, item level 8/8 (estimate)
+    - Bella: Hello... What do you want?
+    - Mason: Hi, my name is Mason and I... I made this medallion for you.
+- ** 66 %** · late  · `LDE_GreenAcresQuest2024_v2_Friendship_08_Dialogue` — item 'Friendship Medallion': chain 'Mark of Friendship' 36/53, item level 8/8 (estimate)
+    - Bella: I've been looking for you, Emilio! I have a surprise for you - a little wedding present.
+    - Bella: We didn't get a chance to get each other anything before, but I wanted to give you something special.
+- ** 66 %** · late  · `LDE_GreenAcresQuest_Friendship_08_Dialogue` — item 'Friendship Medallion': chain 'Mark of Friendship' 36/53, item level 8/8 (estimate)
+    - Roddy: Hey, Maddie! I heard you might need some help fixing up the vegetable garden. Is there something I could do?
+    - Maddie: There’s always something that needs to be done. How do you feel about turning the vegetable compost?
+- ** 70 %** · late  · `LDE_GreenAcresQuest2024_v2_VeggieCompost_Dialogue` — item 'Vegetable Compost': chain 'Vegetable Compost' 38/53, item level 1/1 (estimate)
+    - Maddie: Vegetable Compost decreases the level of any vegetable or chili. Note that the Compost only gives back one lower level item.
+- ** 70 %** · late  · `LDE_GreenAcresQuest_VeggieCompost_Dialogue` — item 'Vegetable Compost': chain 'Vegetable Compost' 38/53, item level 1/1 (estimate)
+    - Maddie: Vegetable Compost decreases the level of any vegetable or chili. Note that the Compost only gives back one lower level item.
+- ** 71 %** · late  · `LDE_GreenAcresQuest2024_CharacterBella_02_Dialogue` — item 'Bella': chain 'Bella' 39/53, item level 2/2 (estimate)
+    - Bella: Look at you, being all busy! So cute!
+    - Maddie: Oh... Hi. Did you need anything?
+- ** 71 %** · late  · `LDE_GreenAcresQuest2024_v2_CharacterBella_02_Dialogue` — item 'Bella': chain 'Bella' 39/53, item level 2/2 (estimate)
+    - Bella: You're helping at the garden, too? This community really pulls together...
+    - Mason: That's how we roll!
+- ** 71 %** · late  · `LDE_GreenAcresQuest_CharacterBella_02_Dialogue` — item 'Bella': chain 'Bella' 39/53, item level 2/2 (estimate)
+    - Maddie: Hey, Bella! I didn’t expect an audience while I wrestle with weeds.
+    - Bella: Not an audience, more like… a concerned expert witnessing ecological distress.
+- ** 73 %** · late  · `LDE_GreenAcresQuest2024_UncommonFlowerA_01_Dialogue` — item 'Calla Lily': chain 'Uncommon Flower' 40/53, item level 1/1 (estimate)
+    - Maddie: These lilies will really give the garden an elegant look!
+    - Maddie: And I think Deb will love them.
+- ** 73 %** · late  · `LDE_GreenAcresQuest2024_v2_UncommonFlowerA_01_Dialogue` — item 'Calla Lily': chain 'Uncommon Flower' 40/53, item level 1/1 (estimate)
+    - Deb: I have a wonderful idea for your garden -- something Bella would love!
+    - Emilio: A corpse flower?
+- ** 75 %** · late  · `LDE_GreenAcresQuest2024_CharacterDeb_02_Dialogue` — item 'Deb': chain 'Deb' 41/53, item level 2/2 (estimate)
+    - Deb: Sweetie! I need your help for a moment!
+    - Maddie: Of course!
+- ** 75 %** · late  · `LDE_GreenAcresQuest2024_v2_CharacterDeb_02_Dialogue` — item 'Deb': chain 'Deb' 41/53, item level 2/2 (estimate)
+    - Deb: You look like you need some help, my dear!
+    - Emilio: How did you know?
+- ** 75 %** · late  · `LDE_GreenAcresQuest_CharacterDeb_02_Dialogue` — item 'Deb': chain 'Deb' 41/53, item level 2/2 (estimate)
+    - Deb: What do we have here? This garden looks severely neglected!
+    - Maddie: I know, I know. That’s why I called you… I REALLY need your expertise!
+- ** 76 %** · late  · `LDE_GreenAcresQuest_CommonFlowerGrowth_01_Dialogue` — item 'Large Wildflower Patch': chain 'Common Wild Flowers' 42/53, item level 5/5 (estimate)
+    - Deb: Now, you want to grow a variety of wild flowers in your garden, Maddie. They’re good for the soil and…
+    - AntiqueDealer: And the pollinators!
+- ** 83 %** · late  · `LDE_GreenAcresQuest2024_v2_CharacterJackie_02_Dialogue` — item 'Jackie': chain 'Jackie' 46/53, item level 3/3 (estimate)
+    - Emilio: Jackie, would you have a moment to help me?
+    - Jackie: Sure thing - but I don't know much about gardening!
+- ** 83 %** · late  · `LDE_GreenAcresQuest_CharacterJackie_02_Dialogue` — item 'Jackie': chain 'Jackie' 46/53, item level 3/3 (estimate)
+    - Jackie: So, you’re planning to bring back the old vegetable garden?
+    - Maddie: That’s right!
+- **100 %** · outro · `LDE_GreenAcresQuest_Outro_Dialogue` — event end
+    - Maddie: I can’t believe it... the garden’s finally done. I never could’ve done this on my own.
+    - Cherry: And just look at it! Fresh ingredients everywhere - this might be my favorite place in town now.
+
+Not placeable in 26.07.01 (13): `LDE_GreenAcresQuest2024_BoardIntro_Dialogue`, `LDE_GreenAcresQuest2024_CharacterJackie_02_Dialogue`, `LDE_GreenAcresQuest2024_Intro_Dialogue`, `LDE_GreenAcresQuest2024_Outro_Dialogue`, `LDE_GreenAcresQuest2024_TA1_Dialogue`, `LDE_GreenAcresQuest2024_TA4_Dialogue`, `LDE_GreenAcresQuest2024_TA7_Dialogue`, `LDE_GreenAcresQuest2024_TC1_Dialogue`, `LDE_GreenAcresQuest2024_TC3_Dialogue`, `LDE_GreenAcresQuest2024_VeggieCompost_Dialogue`, `LDE_GreenAcresQuest2024_v2_BoardIntro_Dialogue`, `LDE_GreenAcresQuest2024_v2_Intro_Dialogue`, `LDE_GreenAcresQuest2024_v2_Outro_Dialogue`
+
+## Changes across versions
+- **25.07.01 → 25.08.01**: added 2 (`LDE_GreenAcresQuest2024_v2_BoardIntro_Dialogue`, `LDE_GreenAcresQuest2024_v2_Outro_Dialogue`); removed 2 (`LDE_GreenAcresQuest2024_BoardIntro_Dialogue`, `LDE_GreenAcresQuest2024_Outro_Dialogue`)
+- **26.01.02 → 26.02.01**: added 1 (`LDE_GreenAcresQuest2024_FlowerCompost_Dialogue`)
+- **26.04.01 → 26.04.02**: added 1 (`LDE_GreenAcresQuest2024_v2_Intro_Dialogue`)
+- **26.04.02 → 26.05.01**: added 3 (`LDE_GreenAcresQuest_BoardIntro_Dialogue`, `LDE_GreenAcresQuest_Intro_Dialogue`, `LDE_GreenAcresQuest_Outro_Dialogue`); removed 3 (`LDE_GreenAcresQuest2024_v2_BoardIntro_Dialogue`, `LDE_GreenAcresQuest2024_v2_Intro_Dialogue`, `LDE_GreenAcresQuest2024_v2_Outro_Dialogue`)

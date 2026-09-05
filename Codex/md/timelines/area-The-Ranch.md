@@ -1,0 +1,64 @@
+# The Ranch — dialogue timeline (area)
+`area:The Ranch` · versions 24.04.01–26.07.01 (32)
+
+## Order in 26.07.01
+- **  0 %** · intro · `Stablesextranchreached` — task 1/205 'The Ranch' task completed; after start of the area
+    - Maddie: Wow, so this is the family ranch! I'm impressed!
+    - Maddie: Needs a little love and care, of course. But, I'm up for the challenge!
+- **  1 %** · intro · `StablesextRanchbag` — task 2/205 'Rake the leaves' task completed; after 'The Ranch'
+    - Maddie: Ah, perfect!
+    - Maddie: This should be enough mulch to grow some trees!
+- **  5 %** · early · `Stablesext_02` — task 11/205 'Place bushes' task completed; after 'Install a lamp'
+    - Winston: She's a Boulton Blue, after all.
+    - Maddie: A what?
+- ** 20 %** · early · `Stablesext_06` — task 40/205 'Place more plants' task completed; after 'Place flowers'
+    - Maddie: You know, Babylon. I, too, found my way back here, to the mansion.
+    - Maddie: You and me have a lot more in common than you think...
+- ** 20 %** · early · `AppleOrchard` — task 41/205 'Grow the tree' task completed; after 'Grow the tree'
+    - Maddie: Ooh, these look delicious! 
+    - Maddie: I wonder if they were planted here as treats for the horses?
+- ** 25 %** · early · `Stablesextcharactertask1` — task 51/205 'Scratch the horse' task completed; after 'Place more plants', 'Pick some apples', 'Place Stones'
+    - Maddie: I should warn you, I may be good at renovating, but I'm a terrible cook!
+    - Babylon: *Gulp!*
+- ** 30 %** · early · `Stablesextranchbag2` — task 62/205 'Replace the watering can' task completed; after 'Place mulch'
+    - Maddie: Hmm I can use this mulch for much more!
+    - Maddie: Maybe some veggies. Carrots and tomatoes would thrive here!
+- ** 31 %** · early · `VeggieGarden` — task 63/205 'Plant some carrots' task completed; after 'Replace the watering can'
+    - Maddie: Such a cute little vegetable garden! 
+    - Maddie: I bet Babylon will love all these fresh veggies I'm growing for her!
+- ** 50 %** · mid   · `WaterTrough` — task 102/205 'Cut the wood away' task completed; after 'Swap the wheelbarrow'
+    - Maddie: I always wanted to jump into one of these as a kid...
+    - Maddie: But Grandma talked me out of it.
+- ** 54 %** · mid   · `Stablesextcharactertask2` — task 110/205 'Maybe some brushing?' task completed; after 'Lets try a carrot!'
+    - Maddie: Hmm... It looks like your braids are all tangled up. Let's fix those!
+    - Babylon: *Neigh*
+- ** 65 %** · late  · `Stablesextcharactertask4` — task 134/205 'Practice leading.' task completed; after 'Let's give her some carrots'
+    - Maddie: Let's see what you got, girl! 
+    - Maddie: C'mon!
+- ** 70 %** · late  · `HorseTrailer` — task 143/205 'Paint the trailer' task completed; after 'The trailer is almost finished'
+    - Maddie: I guess, when we eventually go on the road, I'll need to put Babylon in this thing!
+    - Babylon: *Neigh!*
+- ** 71 %** · late  · `Stablesextcharactertask3` — task 145/205 'Let's brush her again' task completed; after 'Haul the leaves away', 'How about some more apples?'
+    - Maddie: Geez, you're like a magnet for dust! 
+    - Babylon: Looks like I'll be brushing you a lot.
+- ** 73 %** · late  · `Stablesextcharactertask7` — task 149/205 'Let's feed her another apple' task completed; after 'Let's wipe her clean.'
+    - Maddie: You know what they say, girl? An apple a day keeps the doctor away...
+    - Babylon: *Neigh?*
+- ** 82 %** · late  · `Stablesextcharactertask5` — task 169/205 'Feed her a carrot' task completed; after 'Add some flowers', 'Let's feed her another apple'
+    - Maddie: Phew! I kid you not...
+    - Maddie: You collect A LOT of dust and hay.
+- ** 87 %** · late  · `BoultonBluePoster` — task 178/205 'Remove dirt from the notice board' task completed; after 'Fix the fence'
+    - Maddie: What do you think of the poster, Babylon?
+    - Maddie: You think it is a fair representation of a Boulton Blue?
+- ** 89 %** · late  · `Stablesext_12` — task 182/205 'Dig some stuff' task completed; after 'Haul some dirt away'
+    - Maddie: Here we are! The training ground. 
+    - Maddie: Any of this look familiar, Babylon? 
+- ** 92 %** · late  · `Stablesextcharactertask6` — task 189/205 'Play with her a little more.' task completed; after 'Evening scrub down.'
+    - Maddie: *Yaaawn!* Alrighty, I guess we can start calling it a day.
+    - Babylon: *Neigh! Neigh!*
+- ** 97 %** · outro · `ShowJumpPoles` — task 199/205 'Place some training poles' task completed; after 'Sew a ball'
+    - Maddie: I used to love watching equestrian sports on TV! 
+    - Maddie: The riders and horses were so elegant.
+- ** 99 %** · outro · `NoticeBoard` — task 203/205 'Install it' task completed; after 'Paint a picture'
+    - Maddie: Well, can't get clearer than this.
+    - Maddie: The Boulton Stables are back in action!

@@ -69,6 +69,7 @@ main{overflow:auto;padding:18px 26px 60px}
 .trig.area{background:var(--accent-soft);color:var(--accent)} .trig.area b{color:var(--accent)}
 .trig.unknown{background:var(--amber-soft);color:var(--amber)} .trig.unknown b{color:var(--amber)}
 .trig.removed{background:var(--brick-soft);color:var(--brick)} .trig.removed b{color:var(--brick)}
+.trig.chrono{font-variant-numeric:tabular-nums;cursor:help}
 .ver{font-family:var(--mono);font-size:11px;color:var(--faint)}
 .script{padding:12px 18px 14px;font-family:var(--mono);font-size:13.5px;line-height:1.5}
 .ln{display:grid;grid-template-columns:150px 1fr;gap:0 14px;padding:3px 0;align-items:baseline}
@@ -191,7 +192,7 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
   document.getElementById('legend').innerHTML =
     `History covers dumps <code>${S.historyVersions[0]}</code> → <code>${S.historyVersions[S.historyVersions.length-1]}</code> (${S.historyVersions.length} versions). ` +
     `A version tag on a story is the first dump it appears in; lines with a changed text show the previous wording struck through. ` +
-    `Data: dialogues.json + areas.json + events.json of each dump, nothing hand-edited.`;
+    `Data: dialogues.json + areas.json + events.json of each dump, nothing hand-edited. With an area or event selected, stories are sorted by chronology (⏱ position on the progress axis; hover for the evidence).`;
 
   // ---- render
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -225,7 +226,8 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
       return `<div class="ln ${l.text?'':'empty'} ${l.speaker?'':'narr'}"><div class="who">${who}</div><div class="txt">${l.text?hl(l.text,q):esc(l.id)}${chg}</div></div>`;
     }).join('');
     const ver = s.removedStory ? '' : (s.firstSeen ? `<span class="ver">since ${esc(s.firstSeen)}</span>` : '');
-    return `<article class="story ${s.removedStory?'removed':''}"><div class="shead"><h2>${hl(title(s),q)}</h2>${s.triggers.map(trig).join('')}${ver}<span class="sid">${esc(s.id)}</span></div><div class="script">${body||'<div class="empty">Referenced by the game, but no lines matched this id.</div>'}</div></article>`;
+    const chrono = s.chrono ? `<span class="trig chrono" title="${esc(s.chrono.evidence)} (${esc(s.chrono.version)})">⏱ ${Math.round(s.chrono.pos*100)} % · ${esc(s.chrono.phase)}</span>` : '';
+    return `<article class="story ${s.removedStory?'removed':''}"><div class="shead"><h2>${hl(title(s),q)}</h2>${s.triggers.map(trig).join('')}${chrono}${ver}<span class="sid">${esc(s.id)}</span></div><div class="script">${body||'<div class="empty">Referenced by the game, but no lines matched this id.</div>'}</div></article>`;
   }
   function render(reset) {
     if (reset!==false) shown = PAGE;
@@ -233,6 +235,7 @@ h3.sect{font-family:var(--serif);font-weight:400;font-size:18px;margin:26px 0 10
     const ch = charSel.value, sc = scopeSel.value;
     const onlyChanged = document.getElementById('onlyChanged').checked, showEmpty = document.getElementById('showEmpty').checked, showRemoved = document.getElementById('showRemoved').checked, showCosmetic = document.getElementById('showCosmetic').checked;
     current = all.filter(s => active.has(s.kind) && (showRemoved || !s.removedStory) && (!ch || s.chars.has(ch)) && (!sc || s.scopes.has(sc)) && (!onlyChanged || (showCosmetic ? s.hasChange : s.hasRewrite)) && (!q || s.hay.includes(q)));
+    if (sc) current.sort((a, b) => ((a.chrono ? a.chrono.pos : 2) - (b.chrono ? b.chrono.pos : 2)) || a.id.localeCompare(b.id));
     const nLines = current.reduce((a,s)=>a+s.lines.filter(l=>l.text).length,0);
     bar.innerHTML = `<b>${current.length.toLocaleString('en-US')}</b> stories · <b>${nLines.toLocaleString('en-US')}</b> spoken lines${q?` · matching “${esc(q)}”`:''}`;
     list.innerHTML = current.slice(0, shown).map(s => storyHtml(s, q, showEmpty, onlyChanged, showCosmetic)).join('') || '<div class="empty">Nothing matches these filters.</div>';

@@ -1,0 +1,64 @@
+# Cinema — dialogue timeline (area)
+`area:Cinema` · versions 25.02.01–26.07.01 (25)
+
+## Order in 26.07.01
+- **  6 %** · early · `Cinema08` — task 13/235 'Install spotlights' task completed; after 'Install spotlights'
+    - Maddie: *Sigh* Why did Arthur have to come back, NOW?!
+    - Maddie: And I’ve never seen Roddy like that before!
+- **  8 %** · early · `CinemaCharacterTaskIntro` — task 19/235 'The peonies were the first casualty' task appears; after 'Remove sheet'
+    - Winston: Pardon me, Ma’am, but I would like to turn your attention to a rather surprising development.
+    - Maddie: Oh? What’s going on?
+- ** 14 %** · early · `CinemaPOIMasks` — task 33/235 'Cut leaves' task completed; after 'Cut leaves'
+    - Maddie: Ah... Comedy and Tragedy. The foundations of theater.
+    - Maddie: And ironically, my life...
+- ** 15 %** · early · `CinemaCharacterTask02` — task 35/235 'How'd they reach the chandelier? It's ruined!' task appears; after 'This poor vase was used as a weapon.'
+    - Maddie: Don’t tell me...
+    - Winston: Yes, they are still at it. I must inform you that the chandeliers have unfortunately become casualties.
+- ** 20 %** · early · `CinemaPOIMutoscope` — task 48/235 'Fix lights' task completed; after 'Clean mutoscope'
+    - Maddie: Wow! I know what this is...
+    - Maddie: It’s a mutoscope! Coin-operated too!
+- ** 22 %** · early · `CinemaPOIBlueStones` — task 52/235 'Insert blue gems' task completed; after 'Fix carpet'
+    - Maddie: These stones look familiar...
+    - Maddie: I'm pretty sure I've seen them around...
+- ** 23 %** · early · `CinemaPOIChairs` — task 53/235 'Place popcorn box' task completed; after 'Place tray'
+    - Maddie: These chairs look... Different.
+    - Maddie: Almost regal and not really something you’d see in a cinema.
+- ** 25 %** · early · `CinemaPOIPopcorn` — task 59/235 'Replace parts' task completed; after 'Remove sheet'
+    - Maddie: Nothing like the smell of fresh popcorn in the cinema!
+    - Maddie: Just something so magical and special about it that it makes you forget how easily it gets stuck in your teeth.
+- ** 32 %** · early · `CinemaCharacterTask03` — task 75/235 'The couch reeks of spilled drinks. A complete disaster.' task completed; after 'They flipped over the chairs. Why do this?'
+    - Winston: I must admit... Roddy is quite strong for his stature.
+    - Maddie: What makes you say that?!
+- ** 41 %** · mid   · `CinemaPOIIndyStatue` — task 97/235 'Attach head' task completed; after 'Place scepter'
+    - Maddie: Ah! This character is familiar...
+    - Maddie: I loved these movies, and they made me want to become an archaeologist as a kid!
+- ** 45 %** · mid   · `CinemaCharacterTask04` — task 105/235 'Cushions, torn apart. No respect at all.' task completed; after 'They broke another vase. Of course they did.'
+    - Winston: I have good news, Ma’am!
+    - Maddie: They’ve stopped! Finally...
+- ** 45 %** · mid   · `CinemaPOIStage` — task 106/235 'Clear film cans' task completed; after 'Organize film reels'
+    - Maddie: There's an inscription on the stage floor - “All the world’s a stage...”
+    - Maddie: Hmm... I wonder if they ever performed Shakespeare here.
+- ** 54 %** · mid   · `CinemaPOIFilmReels` — task 126/235 'Clear film rolls' task completed; after 'Arrange film reels'
+    - Maddie: Looks like an interesting collection of film reels...
+    - Maddie: Although, I've never even heard of most of these! Hey... What's this?
+- ** 65 %** · mid   · `CinemaPOISpyDocuments` — task 152/235 'Search seats' task completed; after 'Remove chair's backrest'
+    - Maddie: Heyy... What’s this? Documents between the seats?
+    - Maddie: These look old... But important. Assuming that the label “Top Secret” in big red letters is to be believed.
+- ** 68 %** · late  · `CinemaPOIProjector` — task 159/235 'Remove spiderweb' task completed; after 'Install lights'
+    - Maddie: This film projector is old but...
+    - Maddie: It seems to have some unique features to it. Almost like it got an upgrade...
+- ** 70 %** · late  · `CinemaPOISymbolChart` — task 164/235 'Place new chair' task completed; after 'Remove base'
+    - Maddie: Wait, a minute... These symbols look familiar!
+    - Maddie: They’re the same as the ones behind the old seats! But... that’s not all!
+- ** 77 %** · late  · `CinemaPOIControlPanel` — task 181/235 'Find control panel' task completed; after 'Fold curtains'
+    - Maddie: Whoa! That control panel was for this screen!
+    - Maddie: How cool! And... strangely modern for this place...
+- ** 77 %** · late  · `CinemaCharacterTask05` — task 182/235 'The last mess to fix. Finally.' task completed; after 'A broken bench. Another casualty.'
+    - Maddie: No! I've had enough!
+    - Maddie: You go out there and tell them to stop, or so help me...
+- ** 81 %** · late  · `CinemaPOIJournalPage` — task 190/235 'Remove film reel' task completed; after 'Clean hat stand'
+    - Maddie: Hmm... I still can't figure out the encryption in this journal! If only there were instructions an-
+    - Maddie: Wait a minute! The mutoscope! The instructional video seemed to focus on symbols!
+
+## Changes across versions
+- **25.04.03 → 25.05.01**: removed 1 (`Cinema12`)

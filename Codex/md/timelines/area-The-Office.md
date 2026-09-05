@@ -1,0 +1,61 @@
+# The Office — dialogue timeline (area)
+`area:The Office` · versions 25.04.02–26.07.01 (23)
+
+## Order in 26.07.01
+- **  0 %** · intro · `OfficeIntro` — task 1/191 'Unlock The Office' task completed; after start of the area
+    - Maddie: Cutting these vines was like going through a jungle!
+    - Maddie: But worth it!
+- **  2 %** · intro · `OfficePOI_FakeBonsai` — task 3/191 'Clear vase piece' task completed; after 'Remove broken vase'
+    - Maddie: Well, this thing shouldn't be in a terrarium!
+    - Maddie: Let me just... Hey! It's fake!
+- **  8 %** · early · `Office02` — task 15/191 'Remove broken typewriter' task appears; after 'Clean dirt from floor'
+    - Maddie: Hmm, an old mechanical typewriter.
+    - Maddie: Shame, I don’t think I can fix this one. I don’t think they even make the parts anymore.
+- ** 10 %** · early · `OfficeCharacterTask1` — task 20/191 'Let’s tidy up and get started.' task appears; after 'Remove old rug'
+    - Maddie: Hey Jackie!
+    - Maddie: What... What’s wrong?
+- ** 12 %** · early · `OfficePOI_GossipBench` — task 23/191 'Remove books from the chair' task appears; after 'Clear webs from the chair'
+    - Maddie: Ooh, a classic gossip bench!
+    - Maddie: I bet people used to lounge around and talk for hours on this.
+- ** 16 %** · early · `Office05` — task 30/191 'Remove the sheet' task completed; after 'Remove wires from the sheet'
+    - Maddie: These are very intricate designs!
+    - Maddie: And very... modern. Actually, there’s some real genius in them!
+- ** 22 %** · early · `Office03` — task 41/191 'Polish old desk' task completed; after 'Clean old desk'
+    - Maddie: There we go. All fixed up.
+    - Maddie: This desk will see new days again!
+- ** 29 %** · early · `OfficeCharacterTask2` — task 56/191 'Where did the last piece go?' task completed; after 'Just a few more pieces...'
+    - Jackie: Sigh! I know how Holden is, but, I’m working on a new story... Something big!
+    - Jackie: But, I know Holden is working on it, too! Can you help me get it done before he ruins it?
+- ** 34 %** · early · `OfficePOI_OpenBook` — task 65/191 'Clear books and gears' task completed; after 'Replace the footstool'
+    - Maddie: Hmmm.. What an interesting old book.
+    - Maddie: I don't understand what language it is written in, but it really is quite pretty.
+- ** 35 %** · mid   · `OfficePOI_PaperieBox` — task 67/191 'Fix the red box' task completed; after 'Place flowers atop the round table'
+    - Maddie: You know...
+    - Maddie: Even though everything has gone digital these days,
+- ** 50 %** · mid   · `OfficeCharacterTask3` — task 96/191 'Remind me to drink, okay?' task completed; after 'Got it. Onto the board it goes.'
+    - Maddie: Hey Jackie, how’s the exposé going?
+    - Jackie: I admit, Holden may be right... I’ve uncovered a complex web of neglected properties, questionable permits...
+- ** 56 %** · mid   · `OfficePOI_MansionPlans` — task 106/191 'Pin schematics to the pin board' task completed; after 'Clean the pin board'
+    - Maddie: I know Roddy found the old blueprints to the mansion at the archives...
+    - Maddie: But I think these are earlier drafts! 
+- ** 57 %** · mid   · `OfficePOI_Portrait` — task 109/191 'Restore the picture' task completed; after 'Place plant in the vase'
+    - Maddie: Grandpa Charlie and Dad...
+    - Maddie: Grandpa must have been so proud of him.
+- ** 65 %** · late  · `Office04` — task 125/191 'Clean the door' task appears; after 'Fix the wall lamp'
+    - Maddie: I remember this door!
+    - Maddie: I... I thought it was just a dream, but it’s real!
+- ** 66 %** · late  · `OfficePOI_Terrariums` — task 127/191 'Remove broken glass from terrarium' task completed; after 'Fix the pin board lamp'
+    - Maddie: These terrariums are really interesting!
+    - Maddie: Actually... I think each one has a different self sustaining ecosystem!
+- ** 70 %** · late  · `OfficeCharacterTask4` — task 134/191 'Final piece in the board.' task completed; after 'Alright let's mark them!'
+    - Jackie: Maddie... I don’t know what to do...
+    - Maddie: What’s going on?
+- ** 83 %** · late  · `OfficeCharacterTask5` — task 158/191 'All we need now is a proper cover!' task completed; after 'One last look over the report...'
+    - Jackie: Well... It’s out.
+    - Maddie: What did you choose?
+- ** 96 %** · outro · `OfficePOI_VintageInstruments` — task 184/191 'Clean the boxes' task completed; after 'Arrange parts'
+    - Maddie: These instruments look old. Almost vintage.
+    - Maddie: I guess if they still do the job, why change them?
+- ** 99 %** · outro · `Office06` — task 189/191 'Unlock the box' task completed; after 'Finish the invention'
+    - Maddie: Ah! Good thing I didn’t have to start from scratch!
+    - Maddie: This must have been the prototype Grandpa was working on in his designs.

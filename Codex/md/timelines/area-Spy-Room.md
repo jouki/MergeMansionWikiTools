@@ -1,0 +1,43 @@
+# Spy Room — dialogue timeline (area)
+`area:Spy Room` · versions 26.02.01–26.07.01 (10)
+
+## Order in 26.07.01
+- **  9 %** · early · `SpyRoom_CharacterTask1` — task 20/221 'Get things ready' task appears; after 'Clean dirty benches'
+    - Maddie: Winston?! What are you doing... Wait. You don't look surprised at all! Did you know about this room already?
+    - Winston: What can I say, ma'am. I didn't know about it, but it falls squarely within my expectations for your family.
+- ** 27 %** · early · `SpyRoom_CharacterTask2` — task 59/221 'Go through outfits' task completed; after 'Decide which topics to avoid'
+    - Winston: There is a more practical dilemma left. My wardrobe. It is... very functional.
+    - Maddie: We can fix it. Let's find you something that says "charming date", not "on duty".
+- ** 57 %** · mid   · `SpyRoom_10` — task 126/221 'Fix switch mechanism ' task completed; after 'Loosen hidden switch'
+    - Roddy: This is so cool! A simple mural hiding a whole world map?
+    - Roddy: Check out these pins on the map, what could they mean?
+- ** 57 %** · mid   · `SpyRoom_POI_Blueprint` — task 127/221 'Dust off listening devices' task completed; after 'Clean listening devices'
+    - Maddie: Roddy, look at this. It's a blueprint of the Tin Can Factory!
+    - Roddy: The structural detailing is excellent. But... this doesn't match the public records.
+- ** 61 %** · mid   · `SpyRoom_CharacterTask3` — task 135/221 'Get inspired' task completed; after 'Think of a romantic gift'
+    - Maddie: Done! You'll look great. Now, we need a small gift. A token. To show you thought of them.
+    - Winston: A token... I suppose flowers are the standard.
+- ** 70 %** · late  · `SpyRoom_04` — task 154/221 'Clean dusty typewriter' task completed; after 'Finalize setup'
+    - Roddy: There are tons of notes here! Maybe we can find out something about their organization?
+    - Maddie: I'm not entirely sure because they're all in code.
+- ** 71 %** · late  · `SpyRoom_06` — task 156/221 'Remove sheet' task completed; after 'Clean dusty typewriter'
+    - Roddy: That looks like one expensive diamond! How did they get their hands on this?
+    - Maddie: Hmm, on closer inspection, I don't think it's a diamond. It looks more like Boultonite!
+- ** 76 %** · late  · `SpyRoom_CharacterTask4` — task 169/221 'Do an everything shower' task completed; after 'Give another pep talk'
+    - Winston: The gifts are ready. And yet, my nerves persist. I feel... exposed.
+    - Maddie: First-date jitters. That's totally normal, we need a confidence boost.
+- ** 77 %** · late  · `SpyRoom_POI_Briefcase` — task 171/221 'Reveal secret' task completed; after 'Trigger hidden release'
+    - Roddy: Hmm, it's interesting that this briefcase was hidden away when it looks so... normal?
+    - Maddie: Yeah, it looks like something my professor in university would use.
+- ** 80 %** · late  · `SpyRoom_14` — task 178/221 'Clean dirty pedestal' task completed; after 'Remove cover'
+    - Roddy: You know, Maddie, there was something in those folders earlier that is still on my mind...
+    - Maddie: What do you mean?
+- ** 83 %** · late  · `SpyRoom_POI_FloorLights` — task 184/221 'Power mechanism' task completed; after 'Fix mechanism'
+    - Roddy: Whoa! The entire floor just lit up!
+    - Maddie: Grandma and Grandpa really were serving style decades before it was cool!
+- ** 91 %** · late  · `SpyRoom_CharacterTask5` — task 202/221 'Final pep talk' task completed; after 'Finish drink'
+    - Winston: I must admit, I feel... noticeably improved. Lighter, somehow. Thank you, ma'am.
+    - Maddie: You look fantastic. Seriously. You're going to be wonderful.
+- ** 96 %** · outro · `SpyRoom_POI_RobotFish` — task 212/221 'Place items' task completed; after 'Clean items'
+    - Maddie: Is that a... fish? With a camera lens for an eye?
+    - Roddy: An aquatic surveillance drone. It's built to look like a local species.

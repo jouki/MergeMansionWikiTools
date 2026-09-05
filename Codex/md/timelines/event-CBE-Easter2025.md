@@ -1,0 +1,67 @@
+# Easter 2025 — dialogue timeline (event)
+`event:CBE_Easter2025` · versions 25.04.02–26.03.01 (17)
+
+## Order in 26.03.01
+- **  2 %** · intro · `CBE_Easter2025_Intro_Dialogue` — entering the board
+    - Mason: I'm SO excited!
+    - Maddie: What are you SO excited about?
+- **  6 %** · early · `CBE_Easter2025_Decoration_Slot14_Dialogue` — decoration Slot14 = reward level 1/36 (30/2500 points)
+    - AntiqueDealer: You know, Agatha and Ignatius always organized an annual egg hunt on the Mansion grounds.
+    - Maddie: Did they? I never knew that!
+- **  8 %** · early · `CBE_Easter2025_Can_01_Dialogue` — item 'Tin Can': chain 'CBE_Easter2025_Can' 2/57, item level 1/1 (estimate)
+    - Mason: Did you make this lollipop? Did you REALLY?
+    - Maddie: Yep! With the brand new candy machine I just built!
+- ** 18 %** · early · `CBE_Easter2025_CandyMachineProducing_01_Dialogue` — item 'Candy Machine Turning': chain 'CBE_Easter2025_CandyMachineProducing' 8/57, item level 1/1 (estimate)
+    - Maddie: My candy machine is ready! I wonder what Ignatius would think about it.
+    - Maddie: His blueprints were so detailed and full of cool little innovations. He was really ahead of his time.
+- ** 19 %** · early · `CBE_Easter2025_ChocoMachineProducing_Dialogue` — item 'Chocolate Machine Melting': chain 'CBE_Easter2025_ChocoMachineProducing' 9/57, item level 1/1 (estimate)
+    - Maddie: We're in business!
+    - Grandma: What an impressive contraption! A chocolate machine, I presume?
+- ** 21 %** · early · `CBE_Easter2025_PastryMachineProducing_Dialogue` — item 'Pastry Machine Baking': chain 'CBE_Easter2025_PastryMachineProducing' 10/57, item level 1/1 (estimate)
+    - Grandma: You know this whole thing started with an egg hunt, right?
+    - Maddie: Yeah, but who am I to stand in the way of progress? It's been a long time since I got to build something really exciting.
+- ** 32 %** · early · `CBE_Easter2025_BrokenMachine_05_Dialogue` — item 'Spilled Chocolate': chain 'CBE_Easter2025_BrokenMachine' 17/57, item level 5/5 (estimate)
+    - Maddie: Roddy, do you have a second?
+    - Roddy: Sure! How can I help?
+- ** 35 %** · mid   · `CBE_Easter2025_Cupboard_01_Dialogue` — item 'Cabinet': chain 'CBE_Easter2025_Cupboard' 19/57, item level 1/1 (estimate)
+    - Mason: I can't believe you built these machines to make candy and chocolates and... all kinds of treats!
+    - Mason: I couldn't imagine anything better, honestly!
+- ** 36 %** · mid   · `CBE_Easter2025_EasterDecorations_04_Dialogue` — item 'Garden Bunny': chain 'CBE_Easter2025_Decos' 20/57, item level 4/6 (estimate)
+    - Pearl: Mason?
+    - Pearl: Come out already. We have to take a photo of you in your costume!
+- ** 37 %** · mid   · `CBE_Easter2025_EasterDecorations_06_Dialogue` — item 'Easter Arrangement': chain 'CBE_Easter2025_Decos' 20/57, item level 6/6 (estimate)
+    - Maddie: I think everything is finally ready for the egg hunt!
+    - Maddie: We have candy, we have chocolates, we have cakes, we have...
+- ** 37 %** · mid   · `CBE_Easter2025_EasterEggs_05_Dialogue` — item 'Creative Treats': chain 'CBE_Easter2025_Eggs' 21/57, item level 5/10 (estimate)
+    - Maddie: Grandma, I need you!
+    - Grandma: What is it, dearie? The chocolate machine didn't blow up, did it?
+- ** 38 %** · mid   · `CBE_Easter2025_EasterEggs_07_Dialogue` — item 'Bowl of Easter Eggs': chain 'CBE_Easter2025_Eggs' 21/57, item level 7/10 (estimate)
+    - Grandma: Julius, you have to hurry up. We still have dozens of eggs to paint.
+    - AntiqueDealer: You invited me over for some apple pie. I did not sign up for all of this painting!
+- ** 38 %** · mid   · `CBE_Easter2025_EasterEggs_10_Dialogue` — item 'Ultimate Easter Basket': chain 'CBE_Easter2025_Eggs' 21/57, item level 10/10 (estimate)
+    - AntiqueDealer: That HAS to be it. I simply cannot paint another egg!
+    - Grandma: I think we are done! Thank you both!
+- ** 40 %** · mid   · `CBE_Easter2025_Character_01_Dialogue` — item 'Mason': chain 'CBE_Easter2025_Character11' 22/57, item level 1/1 (estimate)
+    - Maddie: Mason, you know how I promised you chocolates?
+    - Mason: Yeah?
+- ** 44 %** · mid   · `CBE_Easter2025_Character_02_Dialogue` — item 'Cherry': chain 'CBE_Easter2025_Character21' 25/57, item level 1/1 (estimate)
+    - Maddie: Cherry, you're just the person I was looking for!
+    - Cherry: What I can do for you, Maddie?
+- ** 48 %** · mid   · `CBE_Easter2025_Decoration_Slot10_Dialogue` — decoration Slot10 = reward level 27/36 (1200/2500 points)
+    - Mason: I can't believe I had to put this costume on again...
+    - Mason: Next year, someone else can wear it, because I'm not dressing up like a bunny AGAIN! I'm just too old and cool...
+- ** 49 %** · mid   · `CBE_Easter2025_Character_03_Dialogue` — item 'Roddy': chain 'CBE_Easter2025_Character31' 28/57, item level 1/1 (estimate)
+    - Maddie: Roddy, I totally forgot about the epic egg hunt I promised to organize for Mason!
+    - Roddy: Oh, crud! He's been talking about it non-stop for weeks.
+- ** 52 %** · mid   · `CBE_Easter2025_Character_05_Dialogue` — item 'Maddie': chain 'CBE_Easter2025_Character41' 30/57, item level 1/1 (estimate)
+    - Maddie: Phew, inventing is hard work, and there are so many little details to take care of!
+    - Maddie: Looking at Ignatius' blueprints and notes, it looks like he always worked alone.
+- ** 59 %** · mid   · `CBE_Easter2025_Character_04_Dialogue` — item 'Grandma': chain 'CBE_Easter2025_Character51' 34/57, item level 1/1 (estimate)
+    - Grandma: Are your chocolates ready?
+    - Maddie: Almost! I developed an auxiliary system for the glazing and it's turning out great stuff.
+- ** 95 %** · outro · `CBE_Easter2025_Decoration_Slot07_Dialogue` — decoration Slot07 = reward level 36/36 (2500/2500 points)
+    - Maddie: I wonder what else Ignatius' old blueprints could build.
+    - Maddie: His inventions were so progressive, and I sense he never got quite as far as he wanted.
+- **100 %** · outro · `CBE_Easter2025_Outro_Dialogue` — event end
+    - Maddie: How was your egg hunt? Did you get all the chocolate you wanted?
+    - Mason: Oh, I did! Your chocolates were just out of this world!

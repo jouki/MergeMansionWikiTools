@@ -1,0 +1,108 @@
+# Maddie in Japan — dialogue timeline (event)
+`event:CBE_MaddieInJapan2025` · versions 25.08.01–26.07.01 (17)
+
+## Order in 26.07.01
+- **  2 %** · intro · `CBE_MaddieInJapan2025_Intro_Dialogue` — entering the board
+    - Maddie: Pheeew, I really need a holiday!
+    - Maddie: I’ve been raking, digging, dusting and polishing for so long that I can’t even see straight.
+- **  6 %** · early · `CBE_MaddieInJapan2025_GettingReady_02_Dialogue` — item 'Travel Charger': chain 'CBE_MaddieInJapan2025_GettingReady' 2/212, item level 2/10 (estimate)
+    - Grandma: It is a long flight to Japan, dearie. Are you sure you’ve got everything you need?
+    - Grandma: Snacks? A warm jumper for the plane? It is always cold on a plane with the over-eager air-conditioning...
+- **  6 %** · early · `CBE_MaddieInJapan2025_GettingReady_04_Dialogue` — item 'Travel Pillow': chain 'CBE_MaddieInJapan2025_GettingReady' 2/212, item level 4/10 (estimate)
+    - Maddie: So you and Grandma met in Japan, while she was living there?
+    - Kazuko: That’s right. She told me about Hopewell Bay, and it sounded so wonderful that I ended up moving here, too.
+- **  6 %** · early · `CBE_MaddieInJapan2025_GettingReady_06_Dialogue` — item 'Handbag': chain 'CBE_MaddieInJapan2025_GettingReady' 2/212, item level 6/10 (estimate)
+    - AntiqueDealer: Salutations, Maddie! Are you really traveling to Japan?
+    - Maddie: I sure am. Kazuko told me about how Grandma used to live there, and I really want to explore some of the places she used to go to.
+- **  6 %** · early · `CBE_MaddieInJapan2025_GettingReady_10_Dialogue` — item 'Luggage': chain 'CBE_MaddieInJapan2025_GettingReady' 2/212, item level 10/10 (estimate)
+    - Maddie: I sometimes have this nightmare where I’m leaving for the airport, and my bags are totally unpacked.
+    - Maddie: This time I’m so prepared. I’ve got my passport and tickets, a travel pillow for the long flight, and plenty of snacks.
+- **  6 %** · early · `CBE_MaddieInJapan2025_Souvenirs_02_Dialogue` — item 'Chopsticks': chain 'CBE_MaddieInJapan2025_Souvenirs' 3/212, item level 2/7 (estimate)
+    - Kazuko: Do you know the art of origami, Maddie?
+    - Maddie: I know of it, but I can’t say I’m very good at it...
+- **  6 %** · early · `CBE_MaddieInJapan2025_Souvenirs_04_Dialogue` — item 'Daruma Doll': chain 'CBE_MaddieInJapan2025_Souvenirs' 3/212, item level 4/7 (estimate)
+    - Maddie: Is there something you'd like me to bring for you?
+    - Grandma: No, dearie. I've already got everything I need.
+- **  6 %** · early · `CBE_MaddieInJapan2025_Souvenirs_06_Dialogue` — item 'Maneki Neko': chain 'CBE_MaddieInJapan2025_Souvenirs' 3/212, item level 6/7 (estimate)
+    - Maddie: There will be so many cool souvenirs to get... How will I ever fit it into my luggage?
+    - Maddie: And I need to take something for my friends, too.
+- **  7 %** · early · `CBE_MaddieInJapan2025_Travel_02_Dialogue` — item 'Stamped Ticket': chain 'CBE_MaddieInJapan2025_Travel' 5/212, item level 2/6 (estimate)
+    - Maddie: I've got my comfy walking shoes on, my camera is fully charged, and I'm ready for an adventure.
+    - Maddie: Now I just need a travel card.
+- **  7 %** · early · `CBE_MaddieInJapan2025_Travel_03_Dialogue` — item 'Bicycle': chain 'CBE_MaddieInJapan2025_Travel' 5/212, item level 3/6 (estimate)
+    - Maddie: A good old-fashioned bicycle is totally the best way to see a new place.
+    - Maddie: On a bike, I feel like I’m blending in better, and I can see all kinds of places other transport just can’t go.
+- **  7 %** · early · `CBE_MaddieInJapan2025_Travel_06_Dialogue` — item 'Train': chain 'CBE_MaddieInJapan2025_Travel' 5/212, item level 6/6 (estimate)
+    - Maddie: I finally know where I am and where I’m going. Now I just need to hop on a train!
+    - Maddie: These old postcards Julius gave me are full of interesting stuff... but they also form a pretty good list of things to visit.
+- **  7 %** · early · `CBE_MaddieInJapan2025_Food_02_Dialogue` — item 'Onigiri': chain 'CBE_MaddieInJapan2025_Food' 6/212, item level 2/6 (estimate)
+    - Grandma: I thought we could have a Japanese dinner before you go away. You know, to help you get used to the local cuisine.
+    - Maddie: Sounds great!
+- **  7 %** · early · `CBE_MaddieInJapan2025_Food_04_Dialogue` — item 'Miso Soup': chain 'CBE_MaddieInJapan2025_Food' 6/212, item level 4/6 (estimate)
+    - Maddie: What a feast, Grandma! How did you learn to cook this?
+    - Grandma: I picked up a trick or two while I was traveling.
+- **  8 %** · early · `CBE_MaddieInJapan2025_Food_06_Dialogue` — item 'Teishoku': chain 'CBE_MaddieInJapan2025_Food' 6/212, item level 6/6 (estimate)
+    - Maddie: After this feast, I’ll be ready to start exploring the locations Grandma visited back in the day.
+    - Maddie: I thought I knew what Japanese food is like, but boy, was I wrong!
+- **  8 %** · early · `CBE_MaddieInJapan2025_YasakaPagodaThings_03_Dialogue` — item 'Ema': chain 'CBE_MaddieInJapan2025_YasakaPagodaThings' 8/212, item level 3/5 (estimate)
+    - Maddie: What an amazing structure!
+    - Maddie: It says here that it was originally built in 597! And it is supposed to have been inspired by a dream.
+- **  8 %** · early · `CBE_MaddieInJapan2025_YasakaPagodaThings_05_Dialogue` — item 'Toro': chain 'CBE_MaddieInJapan2025_YasakaPagodaThings' 8/212, item level 5/5 (estimate)
+    - Maddie: So, Kyoto used to be the capital of Japan.
+    - Maddie: And it says in my guidebook that Yasaka Pagoda is over a thousand years old!
+- **  9 %** · early · `CBE_MaddieInJapan2025_FushimiInariLandmark_01_Dialogue` — item 'Fushimi Inari': chain 'CBE_MaddieInJapan2025_FushimiInariLandmark' 9/212, item level 1/1 (estimate)
+    - Maddie: Fushimi Inari... What an amazing place!
+    - Maddie: The Japanese really seem to have a gift for slowing down and staying in the moment.
+- **  9 %** · early · `CBE_MaddieInJapan2025_FushimiInariThings_03_Dialogue` — item 'Kitsune Mask': chain 'CBE_MaddieInJapan2025_FushimiInariThings' 10/212, item level 3/5 (estimate)
+    - Maddie: So many different kinds of foxes!
+    - Maddie: Grandma would love one of these kitsune masks. She has such a strange love for any kind of disguise!
+- **  9 %** · early · `CBE_MaddieInJapan2025_FushimiInariThings_05_Dialogue` — item 'Torii': chain 'CBE_MaddieInJapan2025_FushimiInariThings' 10/212, item level 5/5 (estimate)
+    - Maddie: It says in my guidebook that these torii gates have been donated by people and companies over the years.
+    - Maddie: I wonder if Grandma donated one?
+- ** 10 %** · early · `CBE_MaddieInJapan2025_JigokudaniLandmark_01_Dialogue` — item 'Jigokudani': chain 'CBE_MaddieInJapan2025_JigokudaniLandmark' 11/212, item level 1/1 (estimate)
+    - Maddie: Hot springs just for monkeys?
+    - Maddie: These guys are pretty spoiled, if you ask me.
+- ** 10 %** · early · `CBE_MaddieInJapan2025_JigokudaniThings_03_Dialogue` — item 'Oke': chain 'CBE_MaddieInJapan2025_JigokudaniThings' 12/212, item level 3/5 (estimate)
+    - Maddie: It would be more than amazing to have a little bath like this at the Mansion.
+    - Maddie: I can imagine soaking in it after a hard day’s work.
+- ** 10 %** · early · `CBE_MaddieInJapan2025_JigokudaniThings_05_Dialogue` — item 'Monkey Onsen': chain 'CBE_MaddieInJapan2025_JigokudaniThings' 12/212, item level 5/5 (estimate)
+    - Maddie: I have to snap a photo of these monkeys. They are so cute!
+    - Maddie: Mason won’t believe me when I tell him about this place.
+- ** 10 %** · early · `CBE_MaddieInJapan2025_AkihabaraLandmark_01_Dialogue` — item 'Akihabara': chain 'CBE_MaddieInJapan2025_AkihabaraLandmark' 13/212, item level 1/1 (estimate)
+    - Maddie: What a place!
+    - Maddie: I wonder what Grandma made of Akihabara. Let’s see what she wrote!
+- ** 11 %** · early · `CBE_MaddieInJapan2025_AkihabaraThings_03_Dialogue` — item 'Hopeberry Figurine': chain 'CBE_MaddieInJapan2025_AkihabaraThings' 14/212, item level 3/5 (estimate)
+    - Maddie: Akihabara is so full of interesting things that I don’t even know where to begin!
+    - Maddie: Maybe it’s time I try my luck with the claw machines...
+- ** 11 %** · early · `CBE_MaddieInJapan2025_AkihabaraThings_05_Dialogue` — item 'Claw Machine': chain 'CBE_MaddieInJapan2025_AkihabaraThings' 14/212, item level 5/5 (estimate)
+    - Maddie: This place has been a complete change of pace from the previous sights I’ve seen, but it’s so full of energy.
+    - Maddie: I would love to take a piece of Akihabara's magic home with me...
+- ** 11 %** · early · `CBE_MaddieInJapan2025_ShibuyaLandmark_01_Dialogue` — item 'Shibuya': chain 'CBE_MaddieInJapan2025_ShibuyaLandmark' 15/212, item level 1/1 (estimate)
+    - Maddie: The famous Shibuya crossing - the busiest pedestrian crossing in the world!
+    - Maddie: It sure is busy here! I’m so used to the quiet small-town life that I forget that there are places like this in the world.
+- ** 12 %** · early · `CBE_MaddieInJapan2025_ShibuyaThings_03_Dialogue` — item 'Traffic Lights': chain 'CBE_MaddieInJapan2025_ShibuyaThings' 16/212, item level 3/5 (estimate)
+    - Maddie: I think I understand this place now. At first glance, it seems like total chaos, but it’s not!
+    - Maddie: There’s a structure and a rhythm that make the place work like a well-oiled machine.
+- ** 12 %** · early · `CBE_MaddieInJapan2025_ShibuyaThings_05_Dialogue` — item 'Hachiko': chain 'CBE_MaddieInJapan2025_ShibuyaThings' 16/212, item level 5/5 (estimate)
+    - Maddie: Oh, this must be the statue of Hachiko, the dog who waited for his master every day at the station.
+    - Maddie: What a good dog... Always waiting for his master, even after he passed away!
+- ** 17 %** · early · `CBE_MaddieInJapan2025_YenCoins_03_Dialogue` — item 'Three Coins': chain 'CBE_MaddieInJapan2025_YenCoins' 28/212, item level 3/3 (estimate)
+    - Maddie: Kazuko told me to always have some change in my pocket. I wonder why?
+    - Maddie: I guess she knew I’d get totally hooked on the gachapon machines.
+- ** 54 %** · mid   · `CBE_MaddieInJapan2025_FushimiInariPostcard_01_Dialogue` — item 'Postcard from Fushimi Inari': chain 'CBE_MaddieInJapan2025_FushimiInariPostcardF02' 116/212, item level 1/1 (estimate)
+    - AntiqueDealer: Maddie writes from Fushimi Inari in Kyoto! She really is following in Ursula’s footsteps.
+    - AntiqueDealer: But will she figure out what her Grandma was up to, I wonder...
+- ** 61 %** · mid   · `CBE_MaddieInJapan2025_JigokudaniPostcard_01_Dialogue` — item 'Postcard from Jigokudani': chain 'CBE_MaddieInJapan2025_JigokudaniPostcardF02' 131/212, item level 1/1 (estimate)
+    - AntiqueDealer: A postcard from Jigokudani!
+    - Kazuko: Is it from Maddie? How wonderful!
+- ** 67 %** · late  · `CBE_MaddieInJapan2025_AkihabaraPostcard_01_Dialogue` — item 'Postcard from Akihabara': chain 'CBE_MaddieInJapan2025_AkihabaraPostcardF02' 146/212, item level 1/1 (estimate)
+    - Kazuko: Is that another postcard from Maddie?
+    - Kazuko: May I read it?
+- ** 73 %** · late  · `CBE_MaddieInJapan2025_ShibuyaPostcard_01_Dialogue` — item 'Postcard from Shibuya Crossing': chain 'CBE_MaddieInJapan2025_ShibuyaPostcardF02' 161/212, item level 1/1 (estimate)
+    - Grandma: Did Maddie send another postcard? Is she OK?
+    - Kazuko: She is fine, and she’s enjoying Japan.
+- **100 %** · outro · `CBE_MaddieInJapan2025_Outro_Dialogue` — event end
+    - Maddie: It’s so good to be home!
+    - Grandma: But did you enjoy your trip?
+
+Not placeable in 26.07.01 (9): `CBE_MaddieInJapan2025_Food_01_Dialogue`, `CBE_MaddieInJapan2025_GettingReady_01_Dialogue`, `CBE_MaddieInJapan2025_GettingReady_03_Dialogue`, `CBE_MaddieInJapan2025_GettingReady_05_Dialogue`, `CBE_MaddieInJapan2025_Souvenirs_01_Dialogue`, `CBE_MaddieInJapan2025_Souvenirs_03_Dialogue`, `CBE_MaddieInJapan2025_Travel_01_Dialogue`, `CBE_MaddieInJapan2025_Travel_05_Dialogue`, `CBE_MaddieInJapan2025_YasakaPagodaPostcard_01_Dialogue`

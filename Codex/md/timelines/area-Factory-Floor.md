@@ -1,0 +1,58 @@
+# Factory Floor — dialogue timeline (area)
+`area:Factory Floor` · versions 26.04.01–26.07.01 (6)
+
+## Order in 26.07.01
+- **  5 %** · intro · `FactoryFloor_CharacterTask1` — task 14/279 'Unpack boxes full of tin cans' task appears; after 'Open boxes'
+    - AntiqueDealer: Maddie! I have just had the grandest idea!
+    - Maddie: What is it?
+- ** 18 %** · early · `FactoryFloor_CharacterTask2` — task 49/279 'List all partakers' task completed; after 'Contact education center'
+    - Maddie: How's the competition coming along?
+    - AntiqueDealer: Grand! Just grand!
+- ** 19 %** · early · `FactoryFloor_03` — task 54/279 'Remove stubborn stains' task completed; after 'Clean the window'
+    - Maddie: *Ring Ring*
+    - Maddie: Hmmm... Unknown number.
+- ** 33 %** · early · `FactoryFloor_POI_FireSafety` — task 91/279 'Repair emergency glass' task completed; after 'Update fire extinguisher'
+    - Maddie: There! Fire safety operational!
+    - Maddie: While it may look old, it's a very modern system. 
+- ** 36 %** · mid   · `FactoryFloor_CharacterTask3` — task 99/279 'Carry submission' task completed; after 'Take a picture'
+    - Maddie: Wow!
+    - AntiqueDealer: I guess you've seen some of the submissions already?
+- ** 42 %** · mid   · `FactoryFloor_POI_EmpowerPosters` — task 118/279 'Hang cleaned-up metal signs' task completed; after 'Touch up metal sign'
+    - Maddie: I've always loved these posters!
+    - Maddie: The women on them look so strong and powerful!
+- ** 45 %** · mid   · `FactoryFloor_POI_Automata` — task 126/279 'Turn on automaton' task completed; after 'Prepare for work'
+    - Maddie: Wow! These automatons came out great! They're almost lifelike! But not in a creepy way.
+    - Maddie: It's always great when I get to apply my engineering skills.
+- ** 46 %** · mid   · `FactoryFloor_POI_SafetyGear` — task 129/279 'Arrange cleaning supplies' task completed; after 'Replace rusty buckets'
+    - Maddie: Okie dokie!
+    - Maddie: Era correct safety gear set up for display!
+- ** 56 %** · mid   · `FactoryFloor_CharacterTask4` — task 157/279 'Make space for submissions' task completed; after 'Prepare judgment criteria'
+    - Maddie: Hmm...
+    - Maddie: Hmmm...
+- ** 58 %** · mid   · `FactoryFloor_POI_InterestingMachine` — task 161/279 'Fix hand grip' task completed; after 'Repair engine'
+    - Maddie: Wow... These hydraulics are really interesting!
+    - Maddie: Way ahead of their time.
+- ** 61 %** · mid   · `FactoryFloor_POI_ControlStation` — task 170/279 'Place sign' task appears; after 'Place box with tin cans', 'Turn on machine!'
+    - Maddie: The control station!
+    - Maddie: From here I can operate and automate the entire factory line display!
+- ** 63 %** · mid   · `FactoryFloor_POI_ProductDisplay` — task 175/279 'Fix missing pieces' task completed; after 'Install descriptive sign'
+    - Maddie: There! A perfect display that shows all the types of tin cans this factory has ever made.
+    - Maddie: On a cute little conveyor belt, I may add!
+- ** 74 %** · late  · `FactoryFloor_CharacterTask5` — task 205/279 'Deliver the great news' task completed; after 'Agree on winning Canstruction'
+    - Maddie: So, did you tell them?!
+    - Maddie: Yes, the students at Hopewell High were over the moon to find out that they had won!
+- ** 78 %** · late  · `FactoryFloor_07` — task 217/279 'Update pipes' task completed; after 'Fix lamp'
+    - Maddie: *Ring Ring*
+    - Maddie: Oh no...
+- ** 81 %** · late  · `FactoryFloor_POI_MetalSheets` — task 225/279 'Turn on machine part' task completed; after 'Fix machine interface'
+    - Maddie: I'm so happy we managed to salvage some of these rolls of tin sheets!
+    - Maddie: They were really well preserved! They knew their stuff back then.
+- ** 89 %** · late  · `FactoryFloor_08b` — task 249/279 'Check functionality' task completed; after 'Assemble pieces'
+    - Maddie: Ooh, another clock piece!
+    - AntiqueDealer: What did you find? 
+- ** 92 %** · late  · `FactoryFloor_POI_InfoPlaque` — task 257/279 'Place the last sign' task appears; after 'Place another sign', 'Turn on machine!'
+    - Maddie: Plaque in place!
+    - Maddie: Not only will it commemorate the factory floor, but it'll convey a little history as well!
+- ** 98 %** · outro · `FactoryFloor_11` — task 274/279 'Clean the door' task completed; after 'Remove spiderwebs'
+    - Maddie: I wonder if the canister in here is the same one I saw in the bathroom.
+    - AntiqueDealer: I still don't understand WHY you saw it in there?!

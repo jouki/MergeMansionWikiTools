@@ -1,0 +1,55 @@
+# The Hallway of Curiosities — dialogue timeline (area)
+`area:The Hallway of Curiosities` · versions 26.05.01–26.07.01 (4)
+
+## Order in 26.07.01
+- **  2 %** · intro · `FirstFloorHallway_CharacterTask1` — task 6/280 'Check on Holden' task appears; after 'Replace cracked glass'
+    - Maddie: Holden? What are you doing up here?
+    - Holden: Oh... Maddie. I thought you were still busy renovating the factory.
+- **  9 %** · early · `FirstFloorHallway_CharacterTask2` — task 25/280 'Share tools' task completed; after 'Share findings'
+    - Holden: The Plunderer of Hearts'. Hmm. 'Left at the Dock: An exposé of Clara Boulton's secret lover'...
+    - Maddie: What are you doing, Holden?
+- ** 10 %** · early · `FirstFloorHallway_POI_SmallerShip` — task 28/280 'Fix the model ship' task completed; after 'Repair the model ship'
+    - Maddie: You're coming along nicely. Let's see who you are, mystery ship...
+    - Maddie: You are...the SS Altum! You were one of two ships sent on an expedition to the North Pole in 1773, it seems.
+- ** 24 %** · early · `FirstFloorHallway_POI_ButterflyDisplay` — task 66/280 'Arrange butterfly set' task completed; after 'Attach specimens'
+    - Maddie: I now know more about butterfly taxonomies than I ever thought I would have to.
+    - Maddie: Looks like Lindsay was not the only one in the family fascinated by butterflies.
+- ** 28 %** · early · `FirstFloorHallway_CharacterTask3` — task 77/280 'Check behind a statue' task completed; after 'Lighten the mood'
+    - Holden: I've been looking into some old records, and you wouldn't believe what I've found!
+    - Maddie: What? You've been doing actual research?
+- ** 48 %** · mid   · `FirstFloorHallway_POI_SeashellArea` — task 134/280 'Mend cracked glass' task completed; after 'Restore stool'
+    - Maddie: Look at this thing - it's enormous! And I think it might be real, too.
+    - Maddie: I had no idea clams could grow this big. 'Sumatra, 1817' it says on the plaque.
+- ** 49 %** · mid   · `FirstFloorHallway_CharacterTask4` — task 138/280 'Confirm suspicions' task completed; after 'Cross-reference the log'
+    - Holden: Well, well, well, Maddie. Looks like I was right all along. Look what I found.
+    - Maddie: I'm not going to fall for that trick twice, Holden. Did you actually find something?
+- ** 50 %** · mid   · `FirstFloorHallway_04` — task 139/280 'Fix stool' task completed; after 'Repair carpet'
+    - Maddie: *Sigh* You know, after you told me about Clara building that ship with her dad...
+    - Maddie: I guess I'm envious too.
+- ** 58 %** · mid   · `FirstFloorHallway_CharacterTask5` — task 163/280 'Wrap things up' task completed; after 'Piece things together'
+    - Holden: Ugh. This is the last time I do actual research - all that work, for nothing!
+    - Maddie: Don't say that, Holden. You did good work digging up this Ed Deepdale. Even if he is not Clara's Edward.
+- ** 60 %** · mid   · `FirstFloorHallway_POI_SeashellSeat` — task 167/280 'Repair sofa frame' task completed; after 'Shine gemstones'
+    - Maddie: Imagine if this folded together like a real seashell?
+    - Maddie: Would've made for a good place to hide from the world.
+- ** 61 %** · mid   · `FirstFloorHallway_07` — task 172/280 'Place cushions' task completed; after 'Fix base of the sofa'
+    - Maddie: Poor Clara, being ghosted like that!
+    - Maddie: I guess I can relate as well, being ghosted at the altar no less!
+- ** 66 %** · late  · `FirstFloorHallway_POI_LogArea` — task 186/280 'Clear debris' task completed; after 'Clean floor'
+    - Maddie: What's this? A log of some kind? That seems odd. Are those... glass coral replicas?
+    - Maddie: She must have read about the mapping of the Great Barrier Reef and been inspired!
+- ** 68 %** · late  · `FirstFloorHallway_POI_CoralTowerSketches` — task 191/280 'Scrub exhibit floor' task completed; after 'Sweep floor'
+    - Maddie: Aha! I think I've figured it out! 
+    - Maddie: All these notes - they're for a tower displaying all kinds of corals!
+- ** 73 %** · late  · `FirstFloorHallway_09` — task 205/280 'Repair statue' task completed; after 'Fix statue'
+    - Maddie: Clara was REALLY into mermaids!
+    - Maddie: But I wonder why?
+- ** 91 %** · late  · `FirstFloorHallway_POI_CurioArea` — task 256/280 'Repair dial' task completed; after 'Adjust mechanism'
+    - Maddie: What a statement piece - a perpetual calendar. This must have cost an arm and a leg.
+    - Maddie: I wonder if it's still accurate.... let's see....
+- ** 94 %** · late  · `FirstFloorHallway_POI_CupidStatue` — task 263/280 'Leave mementos' task completed; after 'Repair figure'
+    - Maddie: Cupid! Why am I not surprised to see you again?
+    - Maddie: I wonder if things would have been better, had your arrows hit some handsome Polar-exploring nobleman...
+- ** 96 %** · outro · `FirstFloorHallway_POI_AnglerFish` — task 270/280 'Fix trophy' task completed; after 'Restore trophy '
+    - Maddie: Aren't you a scary pair of specimens? I wonder how Clara got a hold of anglerfish skeletons?
+    - Maddie: Ah! Says here they were found off the coast of Greenland in the 1800s. They were a great mystery to science.

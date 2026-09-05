@@ -1,0 +1,117 @@
+# Murder at the Mansion — dialogue timeline (event)
+`event:LDE_MurderAtTheMansion` · versions 26.05.01–26.07.01 (4)
+
+## Order in 26.07.01
+- **  0 %** · intro · `LDE_MurderAtTheMansion_Intro_C_Dialogue` — event start
+    - Grandma: The cards are shuffled and the snacks are ready. When can we start our bridge night? Is everyone here?
+    - Deb: Jackie said she was running late, and we seem to be missing Lady Voyance.
+- **  2 %** · intro · `LDE_MurderAtTheMansion_BoardIntro_Dialogue` — entering the board
+    - Jackie: What on earth has happened here?
+    - Roddy: Do you think she had some terrible accident? Maybe she got knocked out by her snow globe or something?
+- **  7 %** · early · `LDE_MurderAtTheMansion_DetectiveTools5_Dialogue` — item 'Camera': chain 'Detective Tools' 3/121, item level 5/5 (estimate)
+    - Jackie: I’m used to digging around for the truth, but this is a whole different ball game. We need to make a note of every detail.
+    - Jackie: Anything here could tell us something about what happened and why. We need to find the murder weapon and even the tiniest clues about who has been here - even a possible motive!
+- **  8 %** · early · `LDE_MurderAtTheMansion_SeanceTools3_Dialogue` — item 'Tea Leaves': chain 'Seance Tools' 4/121, item level 3/5 (estimate)
+    - Roddy: Something fishy definitely happened here, but how are we ever going to find out what? We have so many clues and so much potential evidence.
+    - Jackie: We follow up on everything and rule out the wrong options until we have the answer.
+- **  8 %** · early · `LDE_MurderAtTheMansion_SeanceTools5_Dialogue` — item 'Board of Fate': chain 'Seance Tools' 4/121, item level 5/5 (estimate)
+    - Roddy: You know, a lot of investigators use psychics to break difficult cases.
+    - Jackie: You do know that you're not a psychic, Roddy?
+- ** 68 %** · late  · `LDE_MurderAtTheMansion_GardenPlants4_Dialogue` — item 'Sunflower': chain 'Garden Plants' 85/121, item level 4/5 (estimate)
+    - Roddy: There could be clues in the garden, too. The killer had to pass through it at some point.
+    - Jackie: It would be the perfect place if you wanted to hide something...
+- ** 69 %** · late  · `LDE_MurderAtTheMansion_DirtPatch4_Dialogue` — item 'Exposed Chest': chain 'Flower Bed' 86/121, item level 4/5 (estimate)
+    - Roddy: Jackie! There is something buried in here!
+    - Jackie: An old chest... Seems like this town has old chests buried all over the place.
+- ** 70 %** · late  · `LDE_MurderAtTheMansion_OpenBriefcase1_Dialogue` — item 'Open Briefcase': chain 'Open Briefcase' 88/121, item level 1/1 (estimate)
+    - Roddy: The briefcase is finally open. What's this...? Voyance's Last Will and Testament!
+    - Roddy: She had way more assets than I ever realized - a house, a caravan, her snow globe business...
+- ** 71 %** · late  · `LDE_MurderAtTheMansion_GardenTools3_Dialogue` — item 'Bag of Seeds': chain 'Garden Tools' 89/121, item level 3/4 (estimate)
+    - Roddy: OK, here we go. I guess I just... Hmmm...
+    - Roddy: How DO you consult the universe? Do I just ask a question? Or look for the vibes?
+- ** 72 %** · late  · `LDE_MurderAtTheMansion_StarCharts3_Dialogue` — item 'Birth Chart': chain 'Star Charts' 91/121, item level 3/4 (estimate)
+    - Roddy: Hmm... I think I found something, Jackie. A bunched-up paper with writing and some drawings on it.
+    - Roddy: It's a star chart!
+- ** 74 %** · late  · `LDE_MurderAtTheMansion_VoyancesBelongings3_Dialogue` — item 'Pieces': chain 'Voyance's Belongings' 93/121, item level 3/5 (estimate)
+    - Roddy: She sure was a strange lady.
+    - Jackie: I can't say I ever believed any of her "predictions", but I know other people did.
+- ** 76 %** · late  · `LDE_MurderAtTheMansion_Knife1_Dialogue` — item 'Murder Weapon #1': chain 'Murder Weapon # 1' 95/121, item level 1/1 (estimate)
+    - Roddy: Ummm... Jackie?
+    - Roddy: I think someone has been here. There's a knife hidden in the flowerbed!
+- ** 76 %** · late  · `LDE_MurderAtTheMansion_MWCandlestick1_Dialogue` — item 'Murder Weapon #2': chain 'Murder Weapon #2' 96/121, item level 1/1 (estimate)
+    - Jackie: Look what I found under the sofa! This thing has red paint all over it.
+    - Roddy: There's a label at the bottom. It's from Julius' antique store!
+- ** 77 %** · late  · `LDE_MurderAtTheMansion_MWYarn1_Dialogue` — item 'Murder Weapon #3': chain 'Murder Weapon #3' 97/121, item level 1/1 (estimate)
+    - Roddy: How did this yarn end up here, all unraveled?
+    - Jackie: Someone could have used it as a murder weapon.
+- ** 78 %** · late  · `LDE_MurderAtTheMansion_IncriminatingEvidence5_Dialogue` — item 'Map & Instructions': chain 'Incriminating Evidence' 98/121, item level 5/8 (estimate)
+    - Jackie: Lady Voyance had strong ties to the Boultons and the Mansion.
+    - Jackie: She probably knew more than most about what REALLY went on there.
+- ** 78 %** · late  · `LDE_MurderAtTheMansion_IncriminatingEvidence8_Dialogue` — item 'Empty Investigation Board': chain 'Incriminating Evidence' 98/121, item level 8/8 (estimate)
+    - Jackie: Looks like Voyance had a very clear idea of who should get all of her wealth and fortune.
+    - Jackie: And that someone is... Maddie Boulton!
+- ** 79 %** · late  · `LDE_MurderAtTheMansion_DNAKit4_Dialogue` — item 'Fan': chain 'DNA Samples' 100/121, item level 4/8 (estimate)
+    - Jackie: Voyance's house is full of weird stuff.
+    - Jackie: It'll be hard to tell what has meaning here and what doesn't.
+- ** 79 %** · late  · `LDE_MurderAtTheMansion_DNAKit7_Dialogue` — item 'Love Potion': chain 'DNA Samples' 100/121, item level 7/8 (estimate)
+    - Jackie: She had a lot of visitors who came to have their fortunes told.
+    - Roddy: Therefore there must be a lot of fingerprints, too!
+- ** 80 %** · late  · `LDE_MurderAtTheMansion_DNAKitActive1_Dialogue` — item 'DNA Samples': chain 'DNA Samples Collected' 101/121, item level 1/1 (estimate)
+    - Jackie: The results of the DNA tests will be coming in soon. Modern forensic science is amazing!
+    - Roddy: I wonder if we can see something the police missed?
+- ** 80 %** · late  · `LDE_MurderAtTheMansion_UnfortunateEvents5_Dialogue` — item 'Broken Mirror': chain 'Unfortunate Events' 102/121, item level 5/9 (estimate)
+    - Roddy: Nnngh, I will look behind the veil of fate. What will the stars tell meeeee?
+    - Roddy: Tell me something, stars! What happened at this house?
+- ** 81 %** · late  · `LDE_MurderAtTheMansion_UnfortunateEvents8_Dialogue` — item 'Red Paint': chain 'Unfortunate Events' 102/121, item level 8/9 (estimate)
+    - Roddy: Spilled paint next to a step ladder? She didn't walk under the ladder, did she?
+    - Roddy: The stars tell me that it would've been most unfortunate.
+- ** 81 %** · late  · `LDE_MurderAtTheMansion_DNAEvidence2_Dialogue` — item 'Glass': chain 'DNA Evidence' 103/121, item level 2/6 (estimate)
+    - Jackie: It would seem that Lady Voyance had a lot of visitors lately.
+    - Jackie: There are fingerprints from eight different individuals, including the two of us. The killer must be among them.
+- ** 82 %** · late  · `LDE_MurderAtTheMansion_DNAEvidence6_Dialogue` — item 'Cat Nest': chain 'DNA Evidence' 103/121, item level 6/6 (estimate)
+    - Roddy: There's one inconclusive print. What IS that??
+    - Jackie: Wait, that looks like a paw print.
+- ** 84 %** · late  · `LDE_MurderAtTheMansion_CatClues3_Dialogue` — item 'Cat Trail': chain 'Cat Clues' 107/121, item level 3/5 (estimate)
+    - Jackie: Hang on... There are paw prints everywhere.
+    - Roddy: Of course! Voyance's cat saw everything! What is it trying to show us?
+- ** 85 %** · late  · `LDE_MurderAtTheMansion_CatClues5_Dialogue` — item 'Cat Treats': chain 'Cat Clues' 107/121, item level 5/5 (estimate)
+    - Jackie: Take a look at this fish treats. They were made in Bolivia.
+    - Roddy: Well, that would point to... Emilio!
+- ** 85 %** · late  · `LDE_MurderAtTheMansion_Interviews3_Dialogue` — item 'Recorder': chain 'Suspect Interviews' 108/121, item level 3/10 (estimate)
+    - Jackie: Next we need to talk with everyone who saw her on that last day.
+    - Roddy: Do you think they will talk?
+- ** 85 %** · late  · `LDE_MurderAtTheMansion_Interviews4_Dialogue` — item 'Grandma': chain 'Suspect Interviews' 108/121, item level 4/10 (estimate)
+    - Jackie: So, Ursula... What was your relationship with Lady Voyance like?
+    - Grandma: She was my dear friend, and you know that I would NEVER have done anything to hurt her.
+- ** 85 %** · late  · `LDE_MurderAtTheMansion_Interviews5_Dialogue` — item 'Bella': chain 'Suspect Interviews' 108/121, item level 5/10 (estimate)
+    - Roddy: Bella, did you ever happen to visit Lady Voyance for... a reading or to hear your fortune?
+    - Bella: Pfft, I visited her ONCE - just this week - but her prediction was nonsense! She implied that I have a habit of suffocating... Whatever.
+- ** 85 %** · late  · `LDE_MurderAtTheMansion_Interviews6_Dialogue` — item 'Hank': chain 'Suspect Interviews' 108/121, item level 6/10 (estimate)
+    - Roddy: Hank, how well did you know Lady Voyance?
+    - Hank: We were friends, I guess. I helped her out sometimes - you know, heavy lifting and stuff.
+- ** 85 %** · late  · `LDE_MurderAtTheMansion_Interviews7_Dialogue` — item 'Julius': chain 'Suspect Interviews' 108/121, item level 7/10 (estimate)
+    - Roddy: Can you confirm that this candlestick is from your antique shop, Julius?
+    - AntiqueDealer: Oh, yes! A lovely piece, too. Lady Voyance ordered it for her study.
+- ** 85 %** · late  · `LDE_MurderAtTheMansion_Interviews8_Dialogue` — item 'Emilio': chain 'Suspect Interviews' 108/121, item level 8/10 (estimate)
+    - Emilio: What is going on? Is it really true that Lady Voyance has... passed away?
+    - Jackie: Unfortunately, yes. Did you happen to visit her house in the afternoon of the killing?
+- ** 85 %** · late  · `LDE_MurderAtTheMansion_Interviews10_Dialogue` — item 'Maddie': chain 'Suspect Interviews' 108/121, item level 10/10 (estimate)
+    - Jackie: So, Maddie. Where were you when you found out about Lady Voyance's death?
+    - Maddie: I was at home, as you know. We were waiting for her to arrive for bridge night, but she was late. That was highly unusual, so I asked you to check on her and...
+- ** 85 %** · late  · `LDE_MurderAtTheMansion_Interviews9_Dialogue` — item 'The Cat': chain 'Suspect Interviews' 108/121, item level 9/10 (estimate)
+    - Roddy: I think we can rule out Lady Voyance's cat as a suspect. Clearly the cat knows what happened, but she loved Voyance.
+    - Jackie: You're probably right. Let's take a closer look at everything she's tried to show us. I've got a feeling we might find something there...
+- ** 89 %** · late  · `LDE_MurderAtTheMansion_SubGoal_MapItem_01_Dialogue` — item 'Map Fragment': chain 'Old Map' 113/121, item level 1/1 (estimate)
+    - Maddie: What's this -- a piece of a map?
+    - Grandma: If you keep looking, I bet you will find more pieces.
+- ** 89 %** · late  · `SubGoal_MapItem_01_Dialogue` — item 'Map Fragment': chain 'Old Map' 113/121, item level 1/1 (estimate)
+    - Maddie: What's this -- a piece of a map?
+    - Grandma: If you keep looking, I bet you will find more pieces.
+- ** 93 %** · late  · `LDE_MurderAtTheMansion_MWPoison1_Dialogue` — item 'Murder Weapon #4': chain 'Murder Weapon #4' 118/121, item level 1/1 (estimate)
+    - Jackie: Roddy, look at this! The label reads pretty ominous to me.
+    - Roddy: Voyance was known for making potions, but she wouldn't have used poison.
+- **100 %** · outro · `LDE_MurderAtTheMansion_Outro_Dialogue` — event end
+    - Maddie: So who killed Lady Voyance?
+    - Roddy: An international assassin who bears a grudge against Ursula.
+
+Not placeable in 26.07.01 (3): `LDE_MurderAtTheMansion_B2_C_Dialogue`, `LDE_MurderAtTheMansion_C3_Dialogue`, `LDE_MurderAtTheMansion_TA1_Dialogue`

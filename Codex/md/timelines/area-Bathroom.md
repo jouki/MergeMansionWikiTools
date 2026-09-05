@@ -1,0 +1,46 @@
+# Bathroom — dialogue timeline (area)
+`area:Bathroom` · versions 24.04.01–26.07.01 (32)
+
+## Order in 26.07.01
+- **  4 %** · intro · `AshAmbulance` — task 6/137 'Dry the floor' task completed; after 'Fix the leak'
+    - Maddie: Hmm, I might as well start fixing a few things here before Ash returns!
+    - Maddie: It shouldn't be too hard, right? I've got this!
+- ** 20 %** · early · `GoldenToilet` — task 28/137 'Fix the toilet seat' task completed; after 'Fix the wall'
+    - Maddie: Well... I have a golden toilet now.
+    - Ash: May it serve you well.
+- ** 21 %** · early · `AshCharacterTasksIntro` — task 29/137 'Assisting Ash' task completed; after 'Remove damp floor tiles'
+    - Ash: Maddie, I have a bit of a favor to ask you. 
+    - Maddie: What kind of favor?
+- ** 31 %** · early · `AshCharacterTasks1` — task 42/137 'Assisting Ash' task completed; after 'Assisting Ash'
+    - Maddie: What do you need wax for?
+    - Ash: Oh, it's for my aunt's um... garden shed?
+- ** 39 %** · mid   · `SinkAndMirror` — task 54/137 'Place fixed sink pipes' task completed; after 'Fix wall damage'
+    - Maddie: Phew! That was a lot more complicated than I thought!
+    - Ash: But you did good, Maddie! Real good. 
+- ** 43 %** · mid   · `AshCharacterTasks2` — task 59/137 'Assisting Ash' task completed; after 'Assisting Ash'
+    - Maddie: A tape measure? Are you installing something?
+    - Ash: Y-yes?
+- ** 59 %** · mid   · `Statue` — task 81/137 'Make it shine' task completed; after 'Polish the whole statue'
+    - Ash: Wow! What a bombshell! 
+    - Maddie: She is quite beautiful. 
+- ** 80 %** · late  · `Bathroom05` — task 109/137 'Fix the leak' task completed; after 'Remove one more floor plank'
+    - Ash: You know... I'm a HUGE fan of Skatie Katie!
+    - Maddie: Oh? 
+- ** 80 %** · late  · `AshCharacterFinalTask` — task 110/137 'Assisting Ash' task completed; after 'Assisting Ash'
+    - Ash: Thanks for all the hard work, Maddie!
+    - Ash: I'm sure you- I mean my aunt will appreciate it!
+- ** 81 %** · late  · `Bathroom06` — task 111/137 'Dry the water' task completed; after 'Fix the leak'
+    - Maddie: *Ring Ring*
+    - Maddie: Hello?
+- ** 85 %** · late  · `Bathroom07` — task 116/137 'Screw the floor planks back' task completed; after 'Add the floor tiles back'
+    - Maddie: What do you know about Victoria?
+    - Ash: This must have been about two-three months ago, right? I was at their place, installing a new guest jacuzzi and-
+- ** 86 %** · late  · `Bathroom08` — task 118/137 'Add the floor tiles back' task completed; after 'Screw the floor planks back'
+    - Maddie: Did the fight get worse?
+    - Ash: Well, Victoria got REAL angry, started throwing stuff around. Almost hit me in the head with a cue ball!
+- ** 93 %** · late  · `BlueRug` — task 128/137 'Place fixed rug' task completed; after 'Add missing light bulb'
+    - Maddie: The floor was pretty cold, but nothing a nice warm rug can't fix!
+    - Ash: Ooh, that's very comfy...
+- ** 99 %** · outro · `Bathroom09` — task 136/137 'Plant a new plant' task completed; after 'Fix the vase', 'Place fixed floor'
+    - Ash: Alright! Almost done. Just one last thing left!
+    - Maddie: What do you mean?

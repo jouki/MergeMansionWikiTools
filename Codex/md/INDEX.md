@@ -234,6 +234,7 @@ Versions: 22.02.06, 23.06.02, 23.09.02, 23.11.02, 23.12.01, 24.01.01, 24.04.01, 
 - [Unassigned stories — needs your call](misc/unassigned.md) (342)
 - [Removed from the game](misc/removed.md) (407)
 - [Event reruns](misc/reruns.md) (12 families)
+- [Dialogue timelines](timelines/INDEX.md) (200 areas + events, per game version)
 
 ## Discord screenshots (OCR, lower trust)
 - [Tennis Court Tasks and Dialogues 🎾](discord/Tennis-Court-Tasks-and-Dialogues.md) (37 lines)

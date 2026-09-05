@@ -1,0 +1,57 @@
+# Gingerbread Jamboree — dialogue timeline (event)
+`event:LBE_Xmas2023` · versions 24.04.01–24.09.03 (5)
+
+## Order in 24.09.03
+- **  2 %** · intro · `LBE_Xmas2023_IntroDialogue_Dialogue` — entering the board
+    - Cherry: It's the season of good cheer... and gingerbread! But who makes it the most scrumptious? Let's find out!
+    - Cherry: Although everyone knows my gingerbread is the tastiest...
+- ** 11 %** · early · `LBE_Xmas2023_GingerbreadDough_01_Dialogue` — item 'Bag of Flour': chain 'Gingerbread Dough' 2/17, item level 1/5 (estimate)
+    - Cherry: This recipe looks REALLY old! Do you know who could've written it?
+    - Grandma: No idea... But they clearly knew what they are doing!
+- ** 16 %** · early · `LBE_Xmas2023_GingerbreadDough_05_Dialogue` — item 'Cookie Cutters': chain 'Gingerbread Dough' 2/17, item level 5/5 (estimate)
+    - Grandma: The dough is ready for baking!
+    - Cherry: And it looks delicious! What does the book say?
+- ** 21 %** · early · `LBE_Xmas2023_SmalIOvenInactive_01_Dialogue` — item 'Cold Microwave Oven': chain 'Cold Microwave Oven' 3/17, item level 1/1 (estimate)
+    - Cherry: This thing does not seem to be working.
+    - Grandma: Did you try turning it on and off again?
+- ** 26 %** · early · `LBE_Xmas2023_BigOvenInactive_01_Dialogue` — item 'Cold Big Stove': chain 'Cold Big Stove' 4/17, item level 1/1 (estimate)
+    - Grandma: This is just like my trusted stove!
+    - Cherry: My great-grandmother had one just like it, too!
+- ** 32 %** · early · `LBE_Xmas2023_MediumOvenInactive_01_Dialogue` — item 'Cold Oven': chain 'Cold Oven' 5/17, item level 1/1 (estimate)
+    - Cherry: Did you plug it in?
+    - Grandma: Of course, I did! Try turning the knobs again...
+- ** 35 %** · early · `LBE_Xmas2023_GingerBreadHouse_06_Dialogue` — item 'Gingerbread house': chain 'Gingerbread House' 6/17, item level 6/10 (estimate)
+    - Grandma: Not bad, Cherry! It just needs a roof and the rest of the walls!
+- ** 35 %** · mid   · `LBE_Xmas2023_GingerBreadHouse_07_Dialogue` — item 'Small House': chain 'Gingerbread House' 6/17, item level 7/10 (estimate)
+    - Cherry: Ursula, what an adorable little house! I would add just a SMIDGE more icing...
+- ** 36 %** · mid   · `LBE_Xmas2023_GingerBreadHouse_08_Dialogue` — item 'Decorated House': chain 'Gingerbread House' 6/17, item level 8/10 (estimate)
+    - Grandma: That is a very impressive gingerbread house, Cherry! But it has no chimney...
+- ** 36 %** · mid   · `LBE_Xmas2023_GingerBreadHouse_09_Dialogue` — item 'Fancy House': chain 'Gingerbread House' 6/17, item level 9/10 (estimate)
+    - Cherry: Wow, you've truly outdone yourself, Ursula! This could be difficult to beat.
+- ** 37 %** · mid   · `LBE_Xmas2023_GingerBreadHouse_10_Dialogue` — item 'Fantastic House': chain 'Gingerbread House' 6/17, item level 10/10 (estimate)
+    - Cherry: Phew, what a masterpiece - and we did it together!
+    - Grandma: Indeed! Just like the recipe said.
+- ** 42 %** · mid   · `LBE_Xmas2023_BetterGingerBreadTable_01_Dialogue` — item 'Nice Table': chain 'Nice Table' 7/17, item level 1/1 (estimate)
+    - Grandma: Use your creativity and don't spare the icing!
+- ** 47 %** · mid   · `LBE_Xmas2023_NormalGingerBreadTable_01_Dialogue` — item 'Decorating Table': chain 'Decorating Table' 8/17, item level 1/1 (estimate)
+    - Cherry: When it comes to decorating gingerbread, less is definitely NOT more!
+- ** 58 %** · mid   · `LBE_Xmas2023_BestGingerBreadTable_01_Dialogue` — item 'Fancy Table': chain 'Fancy Table' 10/17, item level 1/1 (estimate)
+    - Cherry: Remember to add candy cane and lots of sprinkles!
+- ** 59 %** · mid   · `LBE_Xmas2023_GingerbreadPlates_01_Dialogue` — item 'Little Gingerbread': chain 'Pans of Gingerbread' 11/17, item level 1/6 (estimate)
+    - Cherry: Look at all this glorious gingerbread! I can't believe we made it all... together!
+    - Grandma: Christmas does funny things to people.
+- ** 68 %** · late  · `LBE_Xmas2023_MediumOvenProducing_01_Dialogue` — item 'Oven Baking': chain 'Oven Baking' 12/17, item level 1/1 (estimate)
+    - Cherry: I see a light - in the oven, I mean!
+    - Grandma: It's working! I hope this gingerbread does not burn...
+- ** 79 %** · late  · `LBE_Xmas2023_SmalIOvenProducing_01_Dialogue` — item 'Microwave Oven Baking': chain 'Microwave Oven Baking' 14/17, item level 1/1 (estimate)
+    - Maddie: There! Now we're in business!
+    - Grandma: Let's see if we can bake a batch...
+- ** 86 %** · late  · `LBE_Xmas2023_BurnedGingerbread_01_Dialogue` — item 'Burned Piece of Gingerbread': chain 'Burned Gingerbread' 16/17, item level 1/4 (estimate)
+    - Cherry: I think we left them in the oven for too long...
+    - Grandma: You think?
+- ** 95 %** · outro · `LBE_Xmas2023_BigOvenProducing_01_Dialogue` — item 'Big Stove Baking': chain 'Big Stove Baking' 17/17, item level 1/1 (estimate)
+    - Grandma: The stove is nice and hot - in you go!
+    - Cherry: What?? Oh, you mean the gingerbread...
+- **100 %** · outro · `LBE_Xmas2023_OutroDialogue_Dialogue` — event end
+    - Cherry: The book might just be right. This gingerbread is GREAT!
+    - Grandma: Hmm, you are right. It is making me feel... all warm and fuzzy inside.

@@ -1,0 +1,69 @@
+# Deck the Halls, Clear the Webs — dialogue timeline (event)
+`event:MBE_DeckTheHalls2023` · versions 24.04.01–25.10.01 (20)
+
+## Order in 25.10.01
+- ** 14 %** · early · `MBE_DeckTheHalls2023_FancyCabinet_01_Dialogue` — item 'Fancy Cabinet': chain 'Fancy Cabinet' 3/29, item level 1/1 (estimate)
+    - Maddie: Wow! This room is FULL of stuff.
+    - Grandma: I think it's time we clear some space in here.
+- ** 17 %** · early · `MBE_DeckTheHalls2023_EntranceNext_03_Dialogue` — item 'Mysterious Basement Door': chain 'Basement Door' 4/29, item level 3/3 (estimate)
+    - Maddie: Another door!
+    - Maddie: Do you have the key to open it, Grandma?
+- ** 18 %** · early · `MBE_DeckTheHalls2023_XmasTree_03_Dialogue` — item 'Young Evergreen': chain 'Christmas Tree' 5/29, item level 3/9 (estimate)
+    - Maddie: Here we go!
+    - Grandma: That tree looks awfully small...
+- ** 19 %** · early · `MBE_DeckTheHalls2023_XmasTree_05_Dialogue` — item 'Christmas Tree': chain 'Christmas Tree' 5/29, item level 5/9 (estimate)
+    - Maddie: This one seems more promising!
+    - Grandma: I knew we had a bigger tree! It's better to have a tree you can use year after year, you know, instead of cutting down a brand-new tree every year.
+- ** 20 %** · early · `MBE_DeckTheHalls2023_XmasTree_07_Dialogue` — item 'Classy Christmas Tree': chain 'Christmas Tree' 5/29, item level 7/9 (estimate)
+    - Grandma: Very nice, indeed! I just think...
+    - Maddie: That it needs more ornaments?
+- ** 20 %** · early · `MBE_DeckTheHalls2023_XmasTree_09_Dialogue` — item 'Fabulous Christmas Tree': chain 'Christmas Tree' 5/29, item level 9/9 (estimate)
+    - Maddie: I think we have everything we need for the tree.
+    - Grandma: There's ornaments, tinsel, the star... Looking good to me!
+- ** 27 %** · early · `MBE_DeckTheHalls2023_House_01_Dialogue` — item 'Santa’s House': chain 'MBE_DeckTheHalls2023_House' 7/29, item level 1/1 (estimate)
+    - Maddie: Another door!! This place IS like a maze!
+    - Grandma: A house like this doesn't give up its secrets easily. You should know that, dearie!
+- ** 30 %** · early · `MBE_DeckTheHalls2023_XmasPostcard_07_Dialogue` — item 'All the Trimmings': chain 'Xmas Postcards' 8/29, item level 7/7 (estimate)
+    - Maddie: We have a whole bunch of lovely holiday cards, too.
+    - Maddie: There's enough here to send a greeting to all of our friends.
+- ** 36 %** · mid   · `MBE_DeckTheHalls2023_XmasClothes_09_Dialogue` — item 'Ready for the North': chain 'Xmas Clothes' 10/29, item level 9/9 (estimate)
+    - Grandma: People complain about winter being cold...
+    - Maddie: But?
+- ** 39 %** · mid   · `MBE_DeckTheHalls2023_Perfumes_05_Dialogue` — item 'Elegant Perfume': chain 'Perfumes' 11/29, item level 5/5 (estimate)
+    - Maddie: What an elegant bottle! Wasn't this a birthday present from Julius?
+    - Grandma: It was! He does have impeccable taste.
+- ** 45 %** · mid   · `MBE_DeckTheHalls2023_BirthdayGrandmaAccessories_07_Dialogue` — item 'Bike Helmet': chain 'Young Ursula’s Swag' 13/29, item level 7/7 (estimate)
+    - Grandma: They say that fashion comes back in cycles.
+    - Maddie: Then this stuff should be pretty trendy soon!
+- ** 47 %** · mid   · `MBE_DeckTheHalls2023_GiftBox_03_Dialogue` — item 'Xmas Gift': chain 'MBE_DeckTheHalls2023_GiftBox' 14/29, item level 3/5 (estimate)
+    - Maddie: Oh, boy. There's a lot to wrap!
+    - Grandma: But we did find a LOT of treasures to give away. Now they can be treasured by someone else!
+- ** 53 %** · mid   · `MBE_DeckTheHalls2023_BirthdayJewelry_02_Dialogue` — item 'Ring Box': chain 'Jewelry Gift' 16/29, item level 2/5 (estimate)
+    - Maddie: What's this... Looks liks something's fallen behind the boxes...
+    - Maddie: Got it! This doesn't look like it belongs in a dusty basement...
+- ** 55 %** · mid   · `MBE_DeckTheHalls2023_BirthdayJewelry_05_Dialogue` — item 'Wristwatch Box': chain 'Jewelry Gift' 16/29, item level 5/5 (estimate)
+    - Maddie: Look what I found in a box with all the bags and hats! What a beautiful watch.
+    - Grandma: I remember that one! If I remember correctly, you can dive to 100 meters while wearing it!
+- ** 58 %** · mid   · `MBE_DeckTheHalls2023_PodcastEquipment_07_Dialogue` — item 'Recording Equipment': chain 'Podcast Equipment' 17/29, item level 7/7 (estimate)
+    - Maddie: I think 'podcaster' is the number one dream profession among 12-year-olds today.
+    - Grandma: Is it really??
+- ** 61 %** · mid   · `MBE_DeckTheHalls2023_Floaties_07_Dialogue` — item 'Inflatable Pool Slide': chain 'Pool Floats' 18/29, item level 7/7 (estimate)
+    - Maddie: Do you remember what a great time we had at your birthday party?
+    - Grandma: Mmm, yes. Even though I said I didn't really need a party...
+- ** 64 %** · mid   · `MBE_DeckTheHalls2023_Plushies_06_Dialogue` — item 'Mr. Antlers': chain 'MBE_DeckTheHalls2023_Plushies' 19/29, item level 6/6 (estimate)
+    - Maddie: Look at all of these old toys!
+    - Grandma: I've got an idea! Why don't we wrap these up and give them to Mason's class? That nice boy deserves a little holiday surprise!
+- ** 70 %** · late  · `MBE_DeckTheHalls2023_Toys_06_Dialogue` — item 'Elf Puppet': chain 'MBE_DeckTheHalls2023_Toys' 21/29, item level 6/6 (estimate)
+    - Maddie: Spinning tops, toy trains, puppets... This basement is like Santa's workshop.
+    - Grandma: It does seem like it!
+- ** 80 %** · late  · `MBE_DeckTheHalls2023_PackingSack_04_Dialogue` — item 'Half-wrapped Gift': chain 'MBE_DeckTheHalls2023_PackingSackProducing' 24/29, item level 4/4 (estimate)
+    - Maddie: Tape, ribbon, paper... Here's everything we need to wrap the presents.
+    - Grandma: You know, I am excellent at wrapping presents. Do you want to have a little wrapping race?
+- ** 81 %** · late  · `MBE_DeckTheHalls2023_Treats_01_Dialogue` — item 'Eggnog': chain 'Holiday Treats' 25/29, item level 1/2 (estimate)
+    - Maddie: You know what would be perfect right now?
+    - Grandma: A mug of eggnog?
+- ** 95 %** · outro · `MBE_DeckTheHalls2023_Sleigh_02_Dialogue` — item 'Santa’s Sleigh Full': chain 'MBE_DeckTheHalls2023_Sleigh' 29/29, item level 2/2 (estimate)
+    - Maddie: All done!
+    - Maddie: The basement is a little bit neater, we've got plenty of great presents all wrapped up, and we found the decorations.
+
+Not placeable in 25.10.01 (1): `MBE_DeckTheHalls2023_Intro`

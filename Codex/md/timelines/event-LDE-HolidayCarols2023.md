@@ -1,0 +1,99 @@
+# The Fa-la-la-la Follies — dialogue timeline (event)
+`event:LDE_HolidayCarols2023` · versions 24.04.01–26.07.01 (32)
+
+## Order in 26.07.01
+- **  0 %** · intro · `LDE_HolidayCarols2023_EventIntro_Dialogue` — event start
+    - Maddie: Dashing through the snow, do-do-doo-bee-doo...
+    - Grandma: You seem to be full of the season's cheer, dearie!
+- **  2 %** · intro · `LDE_HolidayCarols2023_BoardIntro_Dialogue` — entering the board
+    - Deb: What's the name of our group?
+    - Maddie: Sleigh Bell Serenaders!
+- **  7 %** · early · `LDE_HolidayCarols2023_WindInstrument_03_Dialogue` — item 'Bassoon': chain 'LDE_HolidayCarols2023_WindInstrument' 1/20, item level 3/7 (estimate)
+    - Mason: What a weird-looking trumpet!
+    - Emilio: I think it's a bassoon.
+- ** 10 %** · early · `LDE_HolidayCarols2023_WindInstrument_07_Dialogue` — item 'Tuba': chain 'LDE_HolidayCarols2023_WindInstrument' 1/20, item level 7/7 (estimate)
+    - Mason: This one's been twisted into knots.
+    - Emilio: That's what a tuba is supposed to look like!
+- ** 14 %** · early · `LDE_HolidayCarols2023_CarolOfTheBells_06_Dialogue` — item 'Festive Ignatius Boulton': chain '"Carol of the Bells"' 2/20, item level 6/6 (estimate)
+    - Deb: Can I sing a solo?
+    - Maddie: Why not... Do you have a lot of singing experience?
+- ** 20 %** · early · `LDE_HolidayCarols2023_StringInstrument_03_Dialogue` — item 'Cello': chain 'String Instruments' 4/20, item level 3/7 (estimate)
+    - Maddie: Don't trip over the cello!
+    - Mason: You can trust me, Maddie. I never trip over...
+- ** 23 %** · early · `LDE_HolidayCarols2023_StringInstrument_07_Dialogue` — item 'Harp': chain 'String Instruments' 4/20, item level 7/7 (estimate)
+    - Grandma: I'll take care of the harp, dearie.
+    - Maddie: Wow, sounds good! Can you... play it?
+- ** 27 %** · early · `LDE_HolidayCarols2023_ReverseCracker_06_Dialogue` — item 'Paper Crown': chain 'Holiday Cracker' 5/20, item level 6/7 (estimate)
+    - Roddy: Oh, schnikes! I bet I'll get helmet hair from wearing this crown!
+    - Maddie: Somehow I think you don't have to worry about that...
+- ** 28 %** · early · `LDE_HolidayCarols2023_ReverseCracker_07_Dialogue` — item 'Cracker': chain 'Holiday Cracker' 5/20, item level 7/7 (estimate)
+    - Jackie: How does this open?
+    - Grandma: We both hold one end and... pull!
+- ** 28 %** · early · `LDE_HolidayCarols2023_HolidayPresent_01_Dialogue` — item 'Maddie's Present': chain 'Presents' 6/20, item level 1/11 (estimate)
+    - Maddie: I think I got a pair of gardening gloves!
+    - Maddie: In this garden, you need them ALL the time - especially when you least expect it.
+- ** 28 %** · early · `LDE_HolidayCarols2023_HolidayPresent_02_Dialogue` — item 'Roddy's Present': chain 'Presents' 6/20, item level 2/11 (estimate)
+    - Roddy: What an unexpected present...
+    - Roddy: Well, you always need socks!
+- ** 29 %** · early · `LDE_HolidayCarols2023_HolidayPresent_03_Dialogue` — item 'Rufus' Present': chain 'Presents' 6/20, item level 3/11 (estimate)
+    - Dog: Snifffff...
+    - Maddie: Looks like Rufus got his wish!
+- ** 29 %** · early · `LDE_HolidayCarols2023_HolidayPresent_04_Dialogue` — item 'Cherry's Present': chain 'Presents' 6/20, item level 4/11 (estimate)
+    - Cherry: Now this is a pen!
+    - Cherry: It's perfect for writing the best recipes!
+- ** 30 %** · early · `LDE_HolidayCarols2023_HolidayPresent_05_Dialogue` — item 'Deb's Present': chain 'Presents' 6/20, item level 5/11 (estimate)
+    - Deb: Someone knows me well.
+    - Deb: Nice pearls go with any outfit, I always say!
+- ** 30 %** · early · `LDE_HolidayCarols2023_HolidayPresent_06_Dialogue` — item 'Grandma's Present': chain 'Presents' 6/20, item level 6/11 (estimate)
+    - Grandma: Sharp and pointy...
+    - Grandma: Just the way I like my knives!
+- ** 30 %** · early · `LDE_HolidayCarols2023_HolidayPresent_07_Dialogue` — item 'Emilio's Present': chain 'Presents' 6/20, item level 7/11 (estimate)
+    - Emilio: Ah, a singing fish! How interesting...
+    - Emilio: I get it... It's because I'm a marine biologist.
+- ** 31 %** · early · `LDE_HolidayCarols2023_HolidayPresent_08_Dialogue` — item 'Jackie's Present': chain 'Presents' 6/20, item level 8/11 (estimate)
+    - Jackie: You can never have too many tape recorders!
+    - Jackie: I wonder if Santa would give me an exclusive interview...
+- ** 31 %** · early · `LDE_HolidayCarols2023_HolidayPresent_09_Dialogue` — item 'Pearl's Present': chain 'Presents' 6/20, item level 9/11 (estimate)
+    - Maddie: What a weird cup!
+    - Pearl: Oh, it's a guksi - a type of duodji used by the Sami people!
+- ** 32 %** · early · `LDE_HolidayCarols2023_HolidayPresent_10_Dialogue` — item 'Mason's Present': chain 'Presents' 6/20, item level 10/11 (estimate)
+    - Grandma: That looks unmistakeably like a bicycle... I could be wrong!
+    - Mason: How did Santa know??
+- ** 36 %** · mid   · `LDE_HolidayCarols2023_12DaysOfChristmas_06_Dialogue` — item 'On the Twelfth day of Christmas...': chain '"Twelve Days of Christmas"' 7/20, item level 6/6 (estimate)
+    - Grandma: You can't beat the classics!
+    - Mason: I bet you were singing these songs when the dinosaurs were around...
+- ** 48 %** · mid   · `LDE_HolidayCarols2023_SewingSupply_04_Dialogue` — item 'Fabric': chain 'Sewing Supplies' 10/20, item level 4/6 (estimate)
+    - Maddie: Then a bit of sparkle...
+    - Deb: You can never have too much!
+- ** 50 %** · mid   · `LDE_HolidayCarols2023_SewingSupply_06_Dialogue` — item 'Band Sweater': chain 'Sewing Supplies' 10/20, item level 6/6 (estimate)
+    - Maddie: This looks great, Grandma!
+    - Grandma: Thank you, dearie.
+- ** 64 %** · mid   · `LDE_HolidayCarols2023_DeckTheHalls_07_Dialogue` — item 'Mulled Hopeberry Juice Mug': chain '"Deck the Halls"' 13/20, item level 7/7 (estimate)
+    - Pearl: The stage will need some decorations, too.
+    - Maddie: And plenty of them!
+- ** 68 %** · late  · `LDE_HolidayCarols2023_CarolStageProducing_01_Dialogue` — item 'Caroling Stage - Playing': chain 'Caroling Stage - Performing' 14/20, item level 1/1 (estimate)
+    - Maddie: This is it! Are you ready to sing?
+    - Jackie: Gulp! Let's do it!
+- ** 71 %** · late  · `LDE_HolidayCarols2023_HandBell_03_Dialogue` — item 'Sleigh Bells': chain 'Hand Bells' 15/20, item level 3/5 (estimate)
+    - Cherry: How's your rhythm?
+    - Maddie: Excellent, I assure you.
+- ** 72 %** · late  · `LDE_HolidayCarols2023_HandBell_05_Dialogue` — item 'Hand Bell': chain 'Hand Bells' 15/20, item level 5/5 (estimate)
+    - Mason: How is this played? Like this?
+    - Maddie: Be careful, it can be PRETTY loud...
+- ** 82 %** · late  · `LDE_HolidayCarols2023_HolidayStocking_03_Dialogue` — item 'Full Stocking': chain 'Holiday Stocking' 17/20, item level 3/3 (estimate)
+    - Maddie: I think we have enough stockings for everyone.
+    - Mason: Can mine be extra big?
+- ** 86 %** · late  · `LDE_HolidayCarols2023_CarolBook_05_Dialogue` — item 'Whole Carol Book': chain 'Carol Book' 18/20, item level 5/5 (estimate)
+    - Roddy: Why don't you join our caroling troupe?
+    - Maddie: Who else is in it?
+- ** 89 %** · late  · `LDE_HolidayCarols2023_BandCostume_03_Dialogue` — item 'Elf Hat': chain 'Caroling Costume' 19/20, item level 3/5 (estimate)
+    - Deb: Unfortunately, I can't wear this. It does not go with my colors...
+    - Maddie: I think green and red are very becoming on you, Deb!
+- ** 90 %** · late  · `LDE_HolidayCarols2023_BandCostume_05_Dialogue` — item 'Hood': chain 'Caroling Costume' 19/20, item level 5/5 (estimate)
+    - Maddie: We really are wrapping up warm.
+    - Grandma: I don't want you to catch a cold. God forbid you all lose your voice!
+
+Not placeable in 26.07.01 (8): `LDE_HolidayCarols2023_LayerDecoration_01_Dialogue`, `LDE_HolidayCarols2023_LayerDecoration_03_Dialogue`, `LDE_HolidayCarols2023_LayerDecoration_05_Dialogue`, `LDE_HolidayCarols2023_LayerDecoration_07_Dialogue`, `LDE_HolidayCarols2023_LayerDecoration_10_Dialogue`, `LDE_HolidayCarols2023_LayerDecoration_13_Dialogue`, `LDE_HolidayCarols2023_LayerDecoration_15_Dialogue`, `LDE_HolidayCarols2023_LoopExplainer_Dialogue`
+
+## Changes across versions
+- **26.04.01 → 26.04.02**: added 1 (`LDE_HolidayCarols2023_EventIntro_Dialogue`)

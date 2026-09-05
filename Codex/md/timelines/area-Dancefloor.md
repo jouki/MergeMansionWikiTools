@@ -1,0 +1,77 @@
+# Dancefloor — dialogue timeline (area)
+`area:Dancefloor` · versions 24.05.06–26.07.01 (31)
+
+## Order in 26.07.01
+- **  7 %** · early · `Dancefloor_02` — task 12/180 'Remove the confetti' task completed; after 'Remove the confetti'
+    - Maddie: Wow, this is an awful lot of confetti for such a small room...
+    - Maddie: And it’s... everywhere!
+- **  7 %** · early · `Dancefloor_Crates` — task 13/180 'Break the crate down' task completed; after 'Remove the confetti'
+    - Maddie: These crates are filled with some unusual stuff...
+    - Maddie: But then again, what isn’t unusual in this mansion?!
+- **  8 %** · early · `Dancefloor_Confetti2` — task 14/180 'Break the box down' task completed; after 'Break the crate down'
+    - Maddie: Is it just me or is this an absurd amount of confetti?
+    - Maddie: Perhaps this was a new year's party...
+- ** 10 %** · early · `DancefloorCharacterTask1` — task 18/180 'Installing lamps should make it easier to see' task completed; after 'Clean the confetti'
+    - Winston: Ah, good that you’re still here, ma'am! I’m going to need your help.
+    - Maddie: What's going on, Winston?
+- ** 13 %** · early · `Dancefloor_Heartballoon` — task 24/180 'Pop the balloon' task appears; after 'Clean the confetti'
+    - Maddie: How sweet! I’ve always loved shiny heart-shaped balloons.
+    - Maddie: Wait a minute, there's writing on them...
+- ** 15 %** · early · `DancefloorCharacterTask5` — task 27/180 'Check the sofa for microphones!' task completed; after 'And then we can dig a moat'
+    - Maddie: Winston! Did you drag that sofa chair up here all by yourself?!
+    - Winston: *Huff huff* Why- *gulp* yes! I need you to check it for microphones!
+- ** 23 %** · early · `DancefloorCharacterTask10` — task 42/180 'Looks like we need to fix the walls' task completed; after 'Check behind the walls for cameras'
+    - Winston: Ma’am, would you happen to know anything about fixing holes in walls?
+    - Maddie: Sure, I know how to spackle a wall.
+- ** 26 %** · early · `Dancefloor_Gramophone` — task 46/180 'Fix the inner working' task completed; after 'Paint the gramophone'
+    - Maddie: Wow, this thing is an antique!
+    - Maddie: But the needle looks good and the turntable still spins.
+- ** 31 %** · early · `Dancefloor_Records` — task 56/180 'Collect records' task completed; after 'Install the gramophone lid'
+    - Maddie: Oooh, there are some classics in here!
+    - Maddie: Actually... I think one of these is another demo record from Hopewell Bay’s one hit wonder?
+- ** 35 %** · mid   · `DancefloorCharacterTask16` — task 63/180 'Put some glue on the windowsill' task completed; after 'Plant them back!'
+    - Maddie: Winston, why do you need all this glue?
+    - Winston: Ah, about that, Ma’am. Master Mason told me he is quite the expert in keeping out infiltrators.
+- ** 36 %** · mid   · `Dancefloor_Confetti3` — task 64/180 'Rake the last trash' task completed; after 'Clean the confetti'
+    - Maddie: Well... that does it.
+    - Maddie: I never want to see confetti for a while after this!
+- ** 46 %** · mid   · `DancefloorCharacterTask20` — task 82/180 'Check for gaps' task completed; after 'Rebuild the cabinets'
+    - Maddie: How is securing the mansion coming along, Winston?
+    - Winston: Splendid, Ma’am!
+- ** 47 %** · mid   · `Dancefloor_Mannequin` — task 84/180 'Trash the sheet' task completed; after 'Install a lamp'
+    - Maddie: These mannequins look sort of familiar.
+    - Maddie: They're all holding trays...
+- ** 49 %** · mid   · `Dancefloor_Pattern` — task 89/180 'Fix the tile damage' task completed; after 'Remove the dirt'
+    - Maddie: This stone floor definitely has a luxurious pattern.
+    - Maddie: Kind of like a dance floor?
+- ** 52 %** · mid   · `Dancefloor_Wrongdoor` — task 94/180 'Tie the curtain' task completed; after 'Roll the confetti'
+    - Maddie: A door! This has to be the exit, right?
+    - Maddie: Ugh, no. Locked.
+- ** 62 %** · mid   · `DancefloorCharacterTask30` — task 111/180 'Let's check the floor for any footprints' task completed; after 'Lots of dust after all this work! '
+    - Winston: Ma’am, I do believe we are now done, and the mansion is secure.
+    - Maddie: Great! Found anything interesting?
+- ** 64 %** · mid   · `Dancefloor_04` — task 116/180 'Remove the lid' task completed; after 'Take the torso'
+    - Maddie: Aaah!! Is that-?
+    - Maddie: Oh! Phew...
+- ** 67 %** · late  · `Dancefloor_09` — task 121/180 'Clean the mysterious painting...' task appears; after 'Clean the mirror'
+    - Maddie: This painting is so detailed but it's quite worn out...
+    - Maddie: I'm not much of an artist but I'm pretty sure I can restore it!
+- ** 67 %** · late  · `Dancefloor_Minigameoutro` — task 121/180 'Clean the mysterious painting...' task completed; after 'Clean the mirror'
+    - Maddie: Wow! I think I can safely add art restorer to my profile now!
+    - Maddie: Who knew it required so many different, and intricate, tools...
+- ** 86 %** · late  · `Dancefloor_06` — task 155/180 'Tailor some clothing' task completed; after 'Screw the head on'
+    - Maddie: There we go! All dressed up.
+    - Maddie: Say... I'm starting to get a clearer picture...
+- ** 93 %** · late  · `Dancefloor_Projector` — task 167/180 'Attach the reel' task completed; after 'Attach the arms'
+    - Maddie: An old 16mm film projector...
+    - Maddie: Was this place also used as a cinema?
+- ** 95 %** · outro · `Dancefloor_11` — task 171/180 'Install a lamp' task completed; after 'Swap the stool'
+    - Maddie: Hmm... I get it now!
+    - Maddie: The mannequin pose is the key element here...
+- ** 97 %** · outro · `Dancefloor_10` — task 174/180 'Change the battery' task completed; after 'Change the pose'
+    - Maddie: Wait the lamps that the butlers are holding just flashed red...
+    - Maddie: That has to confirm that this mannequin pose is wrong.
+
+## Changes across versions
+- **24.05.06 → 24.07.01**: added 1 (`Dancefloor_Minigameoutro`)
+- **25.08.02 → 25.09.01**: moved 20

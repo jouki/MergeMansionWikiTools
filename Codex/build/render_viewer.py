@@ -46,6 +46,17 @@ def adapt(codex):
         if not any(t.get("area") or t.get("event") for t in s["triggers"]):
             m = re.match(r"^([A-Za-z]+?)(?:_|\d|$)", s["id"])
             s["unassigned"] = m.group(1) if m else s["id"]
+    # chronology: position (0..1) + evidence from the newest timeline of the story's area / event
+    tl_path = os.path.join(common.CODEX, "timelines.json")
+    if os.path.exists(tl_path):
+        pos = {}
+        for key, sc in common.read_json(tl_path).items():
+            vers = sorted(sc["versions"])
+            for e in sc["versions"][vers[-1]]:
+                pos.setdefault(e["story"], {"pos": e["position"], "phase": e["phase"], "evidence": e["evidence"], "scope": sc["name"], "version": vers[-1]})
+        for s in stories + removed:
+            if s["id"] in pos:
+                s["chrono"] = pos[s["id"]]
     n_lines = sum(1 for l in codex["lines"].values() if l["seen"] and l["seen"]["last"] == cur)
     summary = {"version": cur, "historyVersions": codex["versions"], "lines": n_lines, "stories": len(stories),
                "characters": len(chars), "unmatchedGroups": len(codex["gaps"]["unknownTriggerStories"]), "removedStories": len(removed)}

@@ -1,0 +1,70 @@
+# Maddie's Room — dialogue timeline (area)
+`area:Maddie's Room` · versions 24.11.02–26.07.01 (27)
+
+## Order in 26.07.01
+- **  6 %** · early · `Maddieroom_Minigameintro` — task 12/192 'Build the precious dollhouse' task appears; after 'Fluff the pillows'
+    - Maddie: Stepping into my own childhood room has surely awakened my inner child!
+    - Maddie: This doll house is so adorable! It’s a miniature Beaumont Hall! 
+- **  6 %** · early · `Maddieroom_Minigameoutro` — task 12/192 'Build the precious dollhouse' task completed; after 'Fluff the pillows'
+    - Maddie: That was incredibly fun!
+    - Maddie: And I even managed to restore this vintage dollhouse in the process.
+- ** 17 %** · early · `Maddieroom_Charactertaskintro` — task 33/192 'Hide Holden behind flowers' task appears; after 'Add some headlights'
+    - Maddie: Holden?!
+    - Maddie: What are you doing in here?!
+- ** 23 %** · early · `Maddieroom_Toyplane` — task 44/192 'Brush all the dust off' task completed; after 'Re-stuff the pillow'
+    - Maddie: I sure had a lot of toys!
+    - Maddie: Especially mechanical ones, like this plane.
+- ** 23 %** · early · `Maddieroom_Charactertask2` — task 45/192 'Ignore Holden' task completed; after 'Distract Holden'
+    - Maddie: Shouldn’t you be outside, taking pictures of the mansion or...
+    - Maddie: BE BACK AT YOUR DESK?!
+- ** 37 %** · mid   · `Maddieroom_Charactertask3` — task 71/192 'Ask Holden to hold this' task appears; after 'Hope Holden gets the hint'
+    - Maddie: Well, if you insist on being in here, documenting every little thing...
+    - Maddie: You might as well help.
+- ** 40 %** · mid   · `Maddieroom_Portraitparents` — task 77/192 'Hang the picture' task completed; after 'Fix and restore the portrait'
+    - Maddie: Aaw... I must have made this when I was in daycare.
+    - Maddie: Mom and Dad, and me in the middle.
+- ** 44 %** · mid   · `Maddieroom_Yellowarmchair` — task 84/192 'Choose the perfect spot' task completed; after 'Mend the holes'
+    - Maddie: I remember waking up some nights from nightmares...
+    - Maddie: And Mom would soothe me back to sleep, holding me in this chair.
+- ** 52 %** · mid   · `Maddieroom_Teddybears` — task 99/192 'Beautify the teddy' task completed; after 'Recolor the blocks'
+    - Maddie: How odd...
+    - Maddie: These bears look pristine!
+- ** 53 %** · mid   · `Maddieroom_Lumpybear` — task 102/192 'Add new filling' task appears; after 'Beautify the teddy'
+    - Maddie: Oh, dear... This teddy seems to have had a rough time.
+    - Maddie: Are those... chew marks?
+- ** 54 %** · mid   · `Maddieroom_Wallpaper` — task 103/192 'Add new wallpaper' task completed; after 'Fill holes in the wall'
+    - Maddie: Amazing! This color really livens up the place!
+    - Maddie: And I have flashes of this room having yellow wallpaper.
+- ** 62 %** · mid   · `Maddieroom_Blanket` — task 118/192 'Wash the bedding' task completed; after 'Make a new fixture'
+    - Maddie: I... I know this blanket!
+    - Maddie: I remember how cozy it felt when Mom and Dad tucked me in.
+- ** 66 %** · late  · `Maddieroom_Smudgedphoto` — task 126/192 'Improve the photo' task appears; after 'Carry all the books'
+    - Maddie: Hey! A photo of my parents!
+    - Maddie: But... Why are the faces smudged with paint?
+- ** 66 %** · late  · `Maddieroom_Charactertask4` — task 128/192 'Make him prune the flower' task appears; after 'Pester Holden'
+    - Holden: Seriously Maddie, I got to get back to taking pho-
+    - Maddie: These flowers need pruning!
+- ** 74 %** · late  · `Maddieroom_Thesock` — task 142/192 'Iron the baby sock' task completed; after 'Return the washed bedding'
+    - Maddie: Oh... This must be mine.
+    - Maddie: My feet were so tiny!
+- ** 76 %** · late  · `Maddieroom_Toytrunk` — task 146/192 'Wash the piggy' task completed; after 'Iron the baby sock'
+    - Maddie: Wow, looking at all these toys, I'm sure now that I must have been pretty loved...
+    - Maddie: It looks like dear Mom and Dad bought me the whole store!
+- ** 83 %** · late  · `Maddieroom_Musings` — task 160/192 'Secure the crockery set' task completed; after 'Polish the wood'
+    - Maddie: This room sure is bringing back a lot of memories...
+    - Maddie: But more like... flashes.
+- ** 87 %** · late  · `Maddieroom_Charactertask5` — task 167/192 'Try to make Holden leave' task completed; after 'Obstruct Holden'
+    - Holden: Fine! You win! I’m heading back to my desk.
+    - Maddie: Good.
+- ** 97 %** · outro · `Maddieroom_Hopscotch` — task 187/192 'Flatten the carpet' task completed; after 'Get rid of excess water'
+    - Maddie: Good old-fashioned hopscotch!
+    - Maddie: I bet I made quite the racket to whomever was below...
+- ** 99 %** · outro · `Maddieroom_Frogplush` — task 190/192 'Measure head circumference' task completed; after 'Replace the wadding', 'Varnish the floorboards'
+    - Maddie: Wait a minute! This is... This is...
+    - Maddie: Princey! I loved this froggy!
+- **100 %** · outro · `Maddieroom_12` — task 192/192 'Play with building blocks' task completed; after 'Varnish the rocking horse', 'Add some plants', 'Build the precious dollhouse'
+    - Maddie: I didn't expect to feel this many emotions before I entered my old room...
+    - Maddie: Grief is a funny thing. It really creeps up on you sometimes.
+
+## Changes across versions
+- **25.08.02 → 25.09.01**: moved 5

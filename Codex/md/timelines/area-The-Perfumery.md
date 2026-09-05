@@ -1,0 +1,52 @@
+# The Perfumery — dialogue timeline (area)
+`area:The Perfumery` · versions 25.06.01–26.07.01 (20)
+
+## Order in 26.07.01
+- **  3 %** · intro · `Perfumery12` — task 8/243 'Clean the mirror' task completed; after 'Dust off mirror'
+    - Maddie: Every great lab needs a sink. Even one as fancy as this!
+    - Maddie: Hey... These look like some unique handmade soaps and they smell wonderful!
+- **  6 %** · early · `PerfumeryCharacterTask01` — task 15/243 'Find where Victoria went' task appears; after 'Place products on the shelf'
+    - Victoria: Maddie Boulton. Still rummaging around in junk, I see.
+    - Maddie: Victoria?! Who let you inside?!
+- **  9 %** · early · `Perfumery13` — task 22/243 'Remove the sheet' task completed; after 'Fix the floor cracks'
+    - Maddie: Hmm... This stained glass mural is in really bad shape.
+    - Maddie: Can't even figure out what it's about!
+- ** 11 %** · early · `Perfumery14` — task 26/243 'Fix the glass damage' task completed; after 'Remove the sheet'
+    - Maddie: Last piece, aaaand.... Done.
+    - Maddie: Oh wow, she's so prestigious!
+- ** 14 %** · early · `PerfumeryPOI_PerfumeJournal` — task 34/243 'Clean the lower part of the workbench' task completed; after 'Clean the middle part of the workbench'
+    - Maddie: This is Lindsay's perfume journal!
+    - Maddie: It contains all her experimental notes, recipes and even...
+- ** 21 %** · early · `PerfumeryCharacterTask02` — task 51/243 'Spy on Victoria spying on you' task completed; after 'Clean the paint Victoria spilled'
+    - Maddie: Victoria! 
+    - Victoria: Maddie!
+- ** 30 %** · early · `PerfumeryPOI_SciencePortrait` — task 74/243 'Restore the colors of the painting' task completed; after 'Fix painting damage'
+    - Maddie: Making perfume is a science, and Lindsay was a true scientist. One of the pioneers!
+    - Maddie: Especially her work with the Hopeberry flower.
+- ** 37 %** · mid   · `PerfumeryCharacterTask03` — task 91/243 'Fix the window Victoria broke' task completed; after 'Fix the sign Victoria flipped around'
+    - Maddie: Hey! I thought I threw you out?!
+    - Victoria: Like a sieve Maddie!
+- ** 44 %** · mid   · `PerfumeryCharacterTask04` — task 107/243 'Play Victoria’s most hated song' task completed; after 'Replace the flowers Victoria stomped on'
+    - Victoria: Aaargh! Make it stop! I hate this song!
+    - Maddie: Ha! I knew it! I'll make it stop if you leave my home!
+- ** 54 %** · mid   · `PerfumeryPOI_SteamDistiller` — task 130/243 'Remove the webs' task completed; after 'Light the stained glass'
+    - Maddie: A vintage perfume distillery!
+    - Maddie: These are used to extract essential oils from fragrant plants.
+- ** 68 %** · late  · `PerfumeryCharacterTask05` — task 165/243 'Victoria-proof the mansion for good' task completed; after 'Prevent the sauna from burning down (again)'
+    - Maddie: That's it. The place is sealed shut.
+    - Victoria: Oh you think you can lock me out, do you?!
+- ** 74 %** · late  · `PerfumeryPOI_PerfumePlants` — task 180/243 'Place new planter' task completed; after 'Remove the old planter'
+    - Maddie: What a wonderful collection of fragrant plants!
+    - Maddie: Bonsai Lemon, Lavender, Neroli, Rose... They smell amazing!
+- ** 83 %** · late  · `PerfumeryPOI_PetalJars` — task 202/243 'Place the new ingredient jar' task completed; after 'Remove the broken ingredient jar', 'Place a fresh plant'
+    - Maddie: Not only are they fragrant. But they look great too! 
+    - Maddie: Hmm...
+- ** 94 %** · late  · `PerfumeryPOI_ScentFunnel` — task 229/243 'Shine and install the funnels' task completed; after 'Fix the funnels'
+    - Maddie: These scent funnels are fascinating!
+    - Maddie: I looked it up and this apparatus is designed to help direct vapors from a perfume toward the nose!
+- ** 98 %** · outro · `PerfumeryPOI_PerfumeDispensers` — task 238/243 'Place the perfume holder' task completed; after 'Place packages on the left table'
+    - Maddie: Looks like Lindsay had a little production line going here!
+    - Maddie: Wow. Even the boxes were handmade. She really was a Do-it-Yourself type of gal.
+- ** 99 %** · outro · `PerfumeryPOI_PackagingPreOutro` — task 240/243 'Place even more perfumes' task completed; after 'Place the finished perfumes'
+    - Maddie: Well, now that I know how to make Beaumont Blossom, I might as well package them.
+    - Maddie: It would be a shame to leave all these boxes empty...

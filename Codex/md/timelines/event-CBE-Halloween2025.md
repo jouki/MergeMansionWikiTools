@@ -1,0 +1,117 @@
+# Haunted Halloween — dialogue timeline (event)
+`event:CBE_Halloween2025` · versions 25.09.01–26.07.01 (15)
+
+## Order in 26.07.01
+- **  2 %** · intro · `CBE_Halloween2025_Intro_Dialogue` — entering the board
+    - Mason: Hey, Maddie! Do you have a minute?
+    - Maddie: Sure, but only a minute. I've got so much to do before the trick-or-treaters come. Even the pumpkins still need to be carved!
+- ** 12 %** · early · `CBE_Halloween2025_Mason_02_Dialogue` — item 'Ghoul Gloves': chain 'Mason's Costume' 3/32, item level 2/5 (estimate)
+    - Mason: You can’t go ghost hunting without the right equipment.
+    - Mason: Goggles and gloves are essential, since you never know what you might encounter.
+- ** 13 %** · early · `CBE_Halloween2025_Mason_04_Dialogue` — item 'Horrid Helmet': chain 'Mason's Costume' 3/32, item level 4/5 (estimate)
+    - Mason: I think I’m ready. It’s already getting dark outside, and there’s definitely a weird chill in the air.
+    - Mason: I know Maddie wants to prove to me that ghosts aren’t real, but I think she’s the one who will be in for a surprise!
+- ** 15 %** · early · `CBE_Halloween2025_Maddie_02_Dialogue` — item 'Spirit Camera': chain 'Maddie's Costume' 4/32, item level 2/5 (estimate)
+    - Maddie: Mason’s being so silly. He’s seen way too many horror movies for his own good!
+    - Maddie: I can see why he would think that there are ghosts at the Mansion, but he’s wrong.
+- ** 16 %** · early · `CBE_Halloween2025_Maddie_04_Dialogue` — item 'Skiing Pants': chain 'Maddie's Costume' 4/32, item level 4/5 (estimate)
+    - Maddie: Do I need all this stuff? Am I overprepared?
+    - Maddie: Nah, it’s best to be ready for anything. This quest might get messy!
+- ** 28 %** · early · `CBE_Halloween2025_GardenBed_01_Dialogue` — item 'Soil': chain 'Pumpkin Patch' 9/32, item level 1/5 (estimate)
+    - Mason: Let’s check the garden first. Not all ghosts like to live around dusty old dressers and corridors!
+    - Maddie: Yup, some ghosts enjoy fresh air and nice flower beds.
+- ** 29 %** · early · `CBE_Halloween2025_GardenBed_03_Dialogue` — item 'Big Growing Box': chain 'Pumpkin Patch' 9/32, item level 3/5 (estimate)
+    - Maddie: Oh, we can check the pumpkin harvest while we’re here and pick the best ones to carve!
+    - Mason: Concentrate, Maddie! We’re looking for ghouls, not gourds!
+- ** 31 %** · early · `CBE_Halloween2025_Pumpkin_02_Dialogue` — item 'Big Pumpkin': chain 'Jack O' Lantern' 10/32, item level 2/5 (estimate)
+    - Maddie: I’ve got to hand it to you - you really are good at carving pumpkins!
+    - Mason: Don’t sound so surprised!
+- ** 33 %** · early · `CBE_Halloween2025_Pumpkin_04_Dialogue` — item 'Carved Pumpkin': chain 'Jack O' Lantern' 10/32, item level 4/5 (estimate)
+    - Maddie: This is getting kinda eerie... I know I said ghosts aren't real, but there is definitely something going on!
+    - Mason: I told you!
+- ** 38 %** · mid   · `CBE_Halloween2025_Tools_03_Dialogue` — item 'Pumpkin Scoop': chain 'Carving Tools' 12/32, item level 3/4 (estimate)
+    - Maddie: Are you ready to carve some pumpkins? Remember, you promised to help me.
+    - Maddie: And we can make them extra scary!
+- ** 42 %** · mid   · `CBE_Halloween2025_UnlitCandle_01_Dialogue` — item 'Single Candle': chain 'Unlit Candle' 14/32, item level 1/4 (estimate)
+    - Mason: The dusty old attic is haunted for sure!
+    - Mason: If we’re gonna find ghosts anywhere in this Mansion, it’s there.
+- ** 44 %** · mid   · `CBE_Halloween2025_UnlitCandle_03_Dialogue` — item 'Double Candle': chain 'Unlit Candle' 14/32, item level 3/4 (estimate)
+    - Maddie: See? There’s nothing here. Just old clothes and... old Halloween decorations! Let’s round them up so we can get started on the decorating.
+    - Maddie: Rats! The batteries in the flashlight are dead. Let’s find some candles.
+- ** 48 %** · mid   · `CBE_Halloween2025_ScaryMovies_02_Dialogue` — item 'Haunted Coffin': chain 'Scary Movies' 16/32, item level 2/5 (estimate)
+    - Maddie: We still have a lot to do to get the backyard movie theater ready.
+    - Maddie: Do you want to pick the movies?
+- ** 49 %** · mid   · `CBE_Halloween2025_ScaryMovies_04_Dialogue` — item 'Webbed Monster Hand': chain 'Scary Movies' 16/32, item level 4/5 (estimate)
+    - Mason: I picked the movies. They have just the right amount of scares and goo.
+    - Maddie: Goo?
+- ** 56 %** · mid   · `CBE_Halloween2025_PumpkinGhost_01_Dialogue` — item 'Glowing Pumpkin': chain 'Glowing Pumpkin' 18/32, item level 1/1 (estimate)
+    - Maddie: These jack o’lanterns are looking great.
+    - Mason: Awesome! Let’s go set up the ghost trap in the attic next.
+- ** 58 %** · mid   · `CBE_Halloween2025_KnifeGhost_01_Dialogue` — item 'Haunted Knife': chain 'Glowing Knife' 19/32, item level 1/1 (estimate)
+    - Mason: Maddie! Is that knife glowing?
+    - Maddie: Y-yes, but-- What is going on here??
+- ** 61 %** · mid   · `CBE_Halloween2025_CandleGhost_01_Dialogue` — item 'Possessed Candles': chain 'Glowing Candle' 20/32, item level 1/1 (estimate)
+    - Mason: I think we've just found something. LOOK!
+    - Maddie: The candles are glowing? What is going on??
+- ** 64 %** · mid   · `CBE_Halloween2025_TapeGhost_01_Dialogue` — item 'Jinxed Halloween Tape': chain 'Glowing Videotape' 21/32, item level 1/1 (estimate)
+    - Maddie: I think your movies have too much goo! Look!!
+    - Mason: A haunted movie tape! The ghosts must know what we’re up to.
+- ** 65 %** · late  · `CBE_Halloween2025_Theater_03_Dialogue` — item 'Armchair': chain 'Backyard Movie Theater' 22/32, item level 3/8 (estimate)
+    - Mason: There’s nothing better than a Halloween movie marathon with lots of treats!
+    - Maddie: That’s true! It’s a shame Roddy got spooked.
+- ** 66 %** · late  · `CBE_Halloween2025_Theater_05_Dialogue` — item 'Speakers': chain 'Backyard Movie Theater' 22/32, item level 5/8 (estimate)
+    - Mason: Thanks for doing all this, Maddie. You're a real pal!
+    - Maddie: You know I’m always up for a fun project. And Halloween has always been celebrated in a big way at the Mansion.
+- ** 66 %** · late  · `CBE_Halloween2025_Theater_07_Dialogue` — item 'VIP Seats': chain 'Backyard Movie Theater' 22/32, item level 7/8 (estimate)
+    - Mason: What kind of pranks did your Grandpa Charlie use to pull?
+    - Maddie: Julius told me that he always planned them perfectly, and everyone always fell for them.
+- ** 70 %** · late  · `CBE_Halloween2025_GhostHunting_02_Dialogue` — item 'Twisted Wire': chain 'Ghost Hunting' 24/32, item level 2/8 (estimate)
+    - Mason: Is there something we could use to detect paranormal activity?
+    - Maddie: What, like a metal detector for ghosts?
+- ** 71 %** · late  · `CBE_Halloween2025_GhostHunting_04_Dialogue` — item 'Meter': chain 'Ghost Hunting' 24/32, item level 4/8 (estimate)
+    - Mason: This contraption looks convincing, but will it detect and trap ghosts?
+    - Maddie: Well, it can detect metal, but I’m not so sure about trapping ghosts.
+- ** 72 %** · late  · `CBE_Halloween2025_GhostHunting_06_Dialogue` — item 'Coil': chain 'Ghost Hunting' 24/32, item level 6/8 (estimate)
+    - Maddie: I think we are ready to catch these ghosts, Mason.
+    - Mason: You’ve got everything we need?
+- ** 76 %** · late  · `CBE_Halloween2025_Decorations_02_Dialogue` — item 'Witch': chain 'Halloween Decorations' 26/32, item level 2/9 (estimate)
+    - Roddy: The place is looking great, as usual!
+    - Maddie: Thank you. We’ve been pretty busy with this ghost-hunting quest, but I’m happy with the decorations.
+- ** 77 %** · late  · `CBE_Halloween2025_Decorations_04_Dialogue` — item 'Zombie': chain 'Halloween Decorations' 26/32, item level 4/9 (estimate)
+    - Roddy: You and Mason are *gulp* hunting for ghosts?
+    - Maddie: He is convinced the Mansion is totally haunted, and I want to prove to him that there is no such thing as ghosts.
+- ** 78 %** · late  · `CBE_Halloween2025_Decorations_07_Dialogue` — item 'Halloween Statue': chain 'Halloween Decorations' 26/32, item level 7/9 (estimate)
+    - Roddy: O-oh? So you haven’t seen any ghosts so far?
+    - Maddie: Well...
+- ** 79 %** · late  · `CBE_Halloween2025_Clues_02_Dialogue` — item 'Roll of String': chain 'Clues' 27/32, item level 2/6 (estimate)
+    - Mason: I don’t get how you can say there’s no such thing as ghosts. We’ve seen so many of them already!
+    - Mason: If anything, we’ve proved that I’m right and that the Mansion is haunted.
+- ** 80 %** · late  · `CBE_Halloween2025_Clues_04_Dialogue` — item 'Glowing Paint': chain 'Clues' 27/32, item level 4/6 (estimate)
+    - Mason: What is this? Glow-in-the-dark paint?
+    - Maddie: Ha! I was right! There’s someone playing tricks on us - and it’s no ghost.
+- ** 84 %** · late  · `CBE_Halloween2025_Ghost_01_Dialogue` — item 'Halloween Ghost': chain 'Ghost' 28/32, item level 1/1 (estimate)
+    - Mason: Whoooah! Maddie, are you see what I’m seeing?
+    - Maddie: It’s a-- a GHOST!
+- ** 87 %** · late  · `CBE_Halloween2025_Unmasking_01_Dialogue` — item 'Footprints': chain 'Unmasking' 30/32, item level 1/5 (estimate)
+    - Mason: Maddie, I can see some footprints!
+    - Maddie: You’re right! Hurry - don’t let him get away!
+- ** 88 %** · late  · `CBE_Halloween2025_Unmasking_03_Dialogue` — item 'Dropped Note': chain 'Unmasking' 30/32, item level 3/5 (estimate)
+    - Maddie: What’s this? A sheet?
+    - Mason: Looks like... a ghost costume!
+- ** 89 %** · late  · `CBE_Halloween2025_Unmasking_05_Dialogue` — item 'Notebook': chain 'Unmasking' 30/32, item level 5/5 (estimate)
+    - Maddie: A book full of notes? Who left this here?
+    - Mason: Whoever it was, he is bound to come back for it.
+- ** 90 %** · late  · `CBE_Halloween2025_Points_03_Dialogue` — item 'Wrapped Lollipop': chain 'Trick or Treat?' 31/32, item level 3/10 (estimate)
+    - Grandma: What are you two up to?
+    - Grandma: I happened to look out of the window and saw you creeping in the bushes. For a second, I thought we had burglars!
+- ** 92 %** · late  · `CBE_Halloween2025_Points_10_Dialogue` — item 'Cauldron of Candy': chain 'Trick or Treat?' 31/32, item level 10/10 (estimate)
+    - Grandma: Mason, I am sure you know there is no such thing as ghosts.
+    - Mason: That's what Maddie keeps telling me, but she's wrong.
+- **100 %** · outro · `CBE_Halloween2025_Outro_Dialogue` — event end
+    - Maddie: So? Are you convinced?
+    - Mason: About what? Ghosts not being real?
+
+Not placeable in 26.07.01 (3): `CBE_Halloween2025_Decoration_Slot_18_Dialogue`, `CBE_Halloween2025_Decoration_Slot_19_Dialogue`, `CBE_Halloween2025_Decoration_Slot_22_Dialogue`
+
+## Changes across versions
+- **26.04.01 → 26.04.02**: removed 3 (`CBE_Halloween2025_Decoration_Slot_18_Dialogue`, `CBE_Halloween2025_Decoration_Slot_19_Dialogue`, `CBE_Halloween2025_Decoration_Slot_22_Dialogue`)

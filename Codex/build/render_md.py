@@ -9,6 +9,7 @@ import sys
 sys.path.insert(0, os.path.dirname(__file__))
 import common  # noqa: E402
 import reruns  # noqa: E402
+import timelines  # noqa: E402
 
 
 def slug(name):
@@ -167,6 +168,10 @@ def main():
     with open(os.path.join(md_root, "misc", "reruns.md"), "w", encoding="utf-8", newline="\n") as f:
         f.write(reruns.render_md(fams))
     index.append(f"- [Event reruns](misc/reruns.md) ({len(fams)} families)")
+    # dialogue timelines per area / event / version (same code as timelines.py)
+    shutil.rmtree(os.path.join(md_root, "timelines"), ignore_errors=True)
+    n_scopes = timelines.write(timelines.build(codex), codex, md_root)
+    index.append(f"- [Dialogue timelines](timelines/INDEX.md) ({n_scopes} areas + events, per game version)")
     # Discord screenshots (OCR) — lower-trust source, kept apart from game-data stories
     dd_path = os.path.join(common.CODEX, "discord_dialogues.json")
     if os.path.exists(dd_path):
