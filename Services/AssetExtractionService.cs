@@ -88,7 +88,17 @@ internal static class AssetExtractionService
     public record AtlasData(
         List<SpriteInfo> Sprites,
         List<SkinMapping> SkinMappings,
-        Dictionary<string, string>? PoolTagMapping = null);
+        Dictionary<string, string>? PoolTagMapping = null,
+        /// <summary>
+        /// Prefab name → Spine skeleton name, read from the prefab's SkeletonGraphic /
+        /// SkeletonAnimation component. PoolTagMapping resolves a PoolTag to a PREFAB, but
+        /// SkinMappings are keyed by SKELETON, and the two names differ for ~22 pool tags —
+        /// sometimes wildly (ItemPlayerLevelChest → DailyBox), sometimes through a typo in the
+        /// asset itself (ItemSkyscraper → ItemScyscraper). Name matching cannot recover those,
+        /// so the link is taken straight from the prefab.
+        /// Only consulted when the prefab name resolves to nothing on its own.
+        /// </summary>
+        Dictionary<string, string>? PrefabSkeletonMap = null);
 
     private static readonly HttpClient _http = HttpClients.Default;
     private static readonly object _fileLock = new();
@@ -880,6 +890,127 @@ internal static class AssetExtractionService
     /// PoolTag → prefab/skeleton name (e.g. "MaintenanceTools" → "Mansion2023_Tools").
     /// Returns the mapping dictionary to be included in image_atlas_data.json.
     /// </summary>
+    /// <summary>
+    /// Drops the visual-only UI suffix from a prefab name: "-UI" (ItemMakeupTools-UI) or a bare
+    /// "UI" after a lowercase letter (ItemGardenToolsUI → ItemGardenTools).
+    ///
+    /// This is the exact rule <see cref="SpriteMetadataService.ResolveSkeletonForPoolTag"/> applies
+    /// when turning a prefab name into a skeleton name; it lives here so the extractor can index
+    /// the prefab→skeleton map under the same form the resolver will look up. (Note the separate,
+    /// deliberately different rule inside ExtractPoolTagMapping, which strips only after an
+    /// uppercase letter — changing that one would alter what PoolConfig extraction stores.)
+    /// </summary>
+    public static string StripUiSuffix(string name)
+    {
+        if (string.IsNullOrEmpty(name)) return name;
+        if (name.EndsWith("-UI", StringComparison.OrdinalIgnoreCase))
+            return name[..^3];
+        if (name.Length > 2 && name.EndsWith("UI", StringComparison.Ordinal) && char.IsLower(name[^3]))
+            return name[..^2];
+        return name;
+    }
+
+    /// <summary>
+    /// Prefab name → Spine skeleton name, read the way the game resolves it at runtime:
+    /// GameObject → SkeletonGraphic/SkeletonAnimation component → skeletonDataAsset →
+    /// skeletonJSON TextAsset, whose name is the key SkinMappings use.
+    ///
+    /// Needed because PoolTagMapping only yields the PREFAB name and for ~22 pool tags that is not
+    /// the skeleton name (ItemPlayerLevelChest's skeleton is DailyBox; ItemSkyscraper's is
+    /// ItemScyscraper — a typo in the asset). Everything else keeps matching by name.
+    /// </summary>
+    public static Dictionary<string, string> ExtractPrefabSkeletonMap(string bundleDir, string tpkPath)
+    {
+        var map = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        if (!Directory.Exists(bundleDir))
+            return map;
+
+        var bundles = Directory.GetFiles(bundleDir, "*.bundle");
+        int scanned = 0;
+        foreach (var bundlePath in bundles)
+        {
+            var am = new AssetsManager();
+            try
+            {
+                am.LoadClassPackage(tpkPath);
+                var bun = am.LoadBundleFile(bundlePath, unpackIfPacked: true);
+                var dirInfos = bun.file.BlockAndDirInfo.DirectoryInfos;
+
+                for (int fi = 0; fi < dirInfos.Count; fi++)
+                {
+                    AssetsFileInstance? inst;
+                    try { inst = am.LoadAssetsFileFromBundle(bun, fi); }
+                    catch { continue; }
+                    if (inst?.file == null) continue;
+
+                    try { am.LoadClassDatabaseFromPackage(inst.file.Metadata.UnityVersion); }
+                    catch { continue; }
+
+                    List<AssetFileInfo> gameObjects;
+                    try { gameObjects = inst.file.GetAssetsOfType(AssetClassID.GameObject); }
+                    catch { continue; }
+
+                    foreach (var goInfo in gameObjects)
+                    {
+                        AssetTypeValueField go;
+                        try { go = am.GetBaseField(inst, goInfo); }
+                        catch { continue; }
+
+                        var goName = go["m_Name"]?.AsString;
+                        if (string.IsNullOrEmpty(goName) || map.ContainsKey(goName)) continue;
+
+                        var comps = go["m_Component.Array"];
+                        if (comps.IsDummy) continue;
+
+                        foreach (var c in comps.Children)
+                        {
+                            var ptr = c["component"].IsDummy ? c : c["component"];
+                            AssetTypeValueField? compBase;
+                            try { compBase = am.GetExtAsset(inst, ptr).baseField; }
+                            catch { continue; }
+                            if (compBase == null) continue;
+
+                            var sda = compBase["skeletonDataAsset"];
+                            if (sda.IsDummy) continue;
+
+                            try
+                            {
+                                var sdaExt = am.GetExtAsset(inst, sda);
+                                if (sdaExt.baseField == null) continue;
+                                var json = sdaExt.baseField["skeletonJSON"];
+                                if (json.IsDummy) continue;
+                                var skelName = am.GetExtAsset(sdaExt.file, json).baseField?["m_Name"]?.AsString;
+                                if (!string.IsNullOrEmpty(skelName))
+                                {
+                                    map[goName] = skelName;
+                                    // PoolConfig stores some prefabs with the UI suffix already
+                                    // stripped (SkyscraperItem → "ItemSkyscraper", GameObject
+                                    // "ItemSkyscraper-UI"), so index the stripped form too.
+                                    var stripped = StripUiSuffix(goName);
+                                    if (!string.Equals(stripped, goName, StringComparison.Ordinal))
+                                        map.TryAdd(stripped, skelName);
+                                    break;                       // first Spine component wins
+                                }
+                            }
+                            catch { /* unreadable component — skip */ }
+                        }
+                    }
+                }
+                scanned++;
+            }
+            catch (Exception ex)
+            {
+                AppLogger.Info($"[PREFAB-SKEL] {Path.GetFileName(bundlePath)}: {ex.GetType().Name}: {ex.Message}");
+            }
+            finally { try { am.UnloadAll(); } catch { } }
+        }
+
+        int renamed = map.Count(kv => !string.Equals(kv.Key, kv.Value, StringComparison.OrdinalIgnoreCase));
+        AppLogger.Info($"[PREFAB-SKEL] {map.Count} prefab→skeleton links from {scanned}/{bundles.Length} bundles "
+            + $"({renamed} where the names differ)");
+        return map;
+    }
+
     public static Dictionary<string, string> ExtractPoolTagMapping(string bundleDir, string tpkPath, string outputDir)
     {
         // The PoolConfig MonoBehaviour lives in startup_scenes_all.bundle.
@@ -1180,6 +1311,9 @@ internal static class AssetExtractionService
         // Extract GameObjectPoolConfig (PoolTag → prefab name) — done once, not per-bundle
         var poolTagMapping = ExtractPoolTagMapping(bundleDir, tpkPath, outputDir);
 
+        // Prefab → skeleton, for the pool tags whose prefab name is not the skeleton name
+        var prefabSkeletonMap = ExtractPrefabSkeletonMap(bundleDir, tpkPath);
+
         // Post-process: fix inconsistent naming where first file has no suffix but duplicates do
         // e.g., Popup_Shared_Art.png + Popup_Shared_Art_SP_FerretPet2025.png → rename first to include suffix
         var fileRenames = FixInconsistentDuplicateNames(outputDir, globalTextureMap);
@@ -1283,19 +1417,32 @@ internal static class AssetExtractionService
                                 foreach (var kv in existing.PoolTagMapping)
                                     poolTagMapping.TryAdd(kv.Key, kv.Value);
                             }
+
+                            // Same rule for prefab→skeleton: fresh wins, existing fills the gaps,
+                            // and an extraction that found none must not wipe what is already there.
+                            if (existing.PrefabSkeletonMap != null && prefabSkeletonMap.Count == 0)
+                                prefabSkeletonMap = new Dictionary<string, string>(existing.PrefabSkeletonMap, StringComparer.OrdinalIgnoreCase);
+                            else if (existing.PrefabSkeletonMap != null)
+                            {
+                                foreach (var kv in existing.PrefabSkeletonMap)
+                                    prefabSkeletonMap.TryAdd(kv.Key, kv.Value);
+                            }
                         }
                     }
                     catch { /* Corrupt existing file — overwrite */ }
                 }
 
-                var atlasData = new AtlasData(spriteList, skinMapList, poolTagMapping.Count > 0 ? poolTagMapping : null);
+                var atlasData = new AtlasData(spriteList, skinMapList,
+                    poolTagMapping.Count > 0 ? poolTagMapping : null,
+                    prefabSkeletonMap.Count > 0 ? prefabSkeletonMap : null);
                 var json = JsonSerializer.Serialize(atlasData, new JsonSerializerOptions
                 {
                     WriteIndented = true,
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
                 await File.WriteAllTextAsync(atlasDataPath, json, ct);
-                AppLogger.Info($"Saved image_atlas_data.json ({spriteList.Count} sprites, {skinMapList.Count} skin mappings, {poolTagMapping.Count} pool tags) to {atlasDataPath}");
+                AppLogger.Info($"Saved image_atlas_data.json ({spriteList.Count} sprites, {skinMapList.Count} skin mappings, "
+                    + $"{poolTagMapping.Count} pool tags, {prefabSkeletonMap.Count} prefab→skeleton links) to {atlasDataPath}");
             }
             finally
             {

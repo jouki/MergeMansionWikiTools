@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Text.Json;
 using MergeMansionWikiTools.Models;
 using static MergeMansionWikiTools.Services.AssetExtractionService;
@@ -157,6 +157,8 @@ internal static class SpriteMetadataService
     {
         _cache = null;
         _cachePath = null;
+        _knownNames = null;
+        _knownNamesPath = null;
     }
 
     /// <summary>
@@ -269,7 +271,9 @@ internal static class SpriteMetadataService
 
             var current = JsonSerializer.Deserialize<AtlasData>(File.ReadAllText(atlasPath), _jsonOpts)
                 ?? new AtlasData(new List<SpriteInfo>(), new List<SkinMapping>());
-            var repaired = new AtlasData(current.Sprites, current.SkinMappings, mapping);
+            // keep the prefab→skeleton map: this repair only re-runs the PoolConfig step
+            var repaired = new AtlasData(current.Sprites, current.SkinMappings, mapping,
+                current.PrefabSkeletonMap);
             File.WriteAllText(atlasPath, JsonSerializer.Serialize(repaired, _jsonOpts));
             _cache = repaired;
             _cachePath = atlasPath;
@@ -281,6 +285,31 @@ internal static class SpriteMetadataService
             AppLogger.Error("[POOL] pool tag mapping repair failed", ex);
             return null;
         }
+    }
+
+    private static string? _knownNamesPath;
+    private static HashSet<string>? _knownNames;
+
+    /// <summary>
+    /// True when <paramref name="name"/> names something the atlas actually has — a Spine skeleton
+    /// or a texture. Used to decide whether a resolved prefab name is usable as-is; the set is
+    /// built once per atlas file because SkinMappings/Sprites run to tens of thousands of entries.
+    /// </summary>
+    private static bool IsKnownSkeletonOrTexture(string exportDir, string name)
+    {
+        if (string.IsNullOrEmpty(name)) return false;
+
+        var path = GetAtlasDataPath(exportDir);
+        if (_knownNames == null || _knownNamesPath != path)
+        {
+            var data = LoadAtlasData(exportDir);
+            var set = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var m in data.SkinMappings) set.Add(m.SkeletonName);
+            foreach (var s in data.Sprites) set.Add(s.TextureName);
+            _knownNames = set;
+            _knownNamesPath = path;
+        }
+        return _knownNames.Contains(name);
     }
 
     /// <summary>
@@ -296,14 +325,27 @@ internal static class SpriteMetadataService
         var mapping = LoadPoolTagMapping(exportDir);
         if (mapping.TryGetValue(poolTag, out var prefabName))
         {
-            // Strip UI suffix variants: "-UI" (e.g. ItemMakeupTools-UI) or "UI" (e.g. ItemGardenToolsUI)
-            var textureName = prefabName;
-            if (textureName.EndsWith("-UI", StringComparison.OrdinalIgnoreCase))
-                textureName = textureName[..^3];
-            else if (textureName.Length > 2
-                && textureName.EndsWith("UI", StringComparison.Ordinal)
-                && char.IsLower(textureName[^3]))
-                textureName = textureName[..^2];
+            // Strip UI suffix variants: "-UI" (e.g. ItemMakeupTools-UI) or "UI" (e.g. ItemGardenToolsUI).
+            // Shared with the extractor so the prefab→skeleton map is indexed under the same form.
+            var textureName = AssetExtractionService.StripUiSuffix(prefabName);
+            // The prefab name is usually also the skeleton/texture name — but for ~22 pool tags it
+            // is not (ItemPlayerLevelChest's skeleton is DailyBox; ItemSkyscraper's is
+            // ItemScyscraper, a typo in the asset), and those chains resolved to nothing at all.
+            // Consult the prefab→skeleton map ONLY in that case, so every tag that resolves today
+            // keeps resolving to exactly the same name.
+            if (!IsKnownSkeletonOrTexture(exportDir, textureName))
+            {
+                var prefabMap = LoadAtlasData(exportDir).PrefabSkeletonMap;
+                if (prefabMap != null
+                    && (prefabMap.TryGetValue(prefabName, out var mapped)
+                        || prefabMap.TryGetValue(textureName, out mapped))
+                    && !string.IsNullOrEmpty(mapped))
+                {
+                    AppLogger.Info($"PoolTag '{poolTag}' → '{mapped}' [prefab skeleton map; prefab '{prefabName}' is not a skeleton]");
+                    return mapped;
+                }
+            }
+
             AppLogger.Info($"PoolTag '{poolTag}' → '{textureName}' [PoolConfig]");
             return textureName;
         }

@@ -5,7 +5,8 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using merge_mansion_dumper.Dumper;
+using MergeMansionWikiTools.Dumper;
+using MergeMansionWikiTools.Services.Dumping;
 using MergeMansionWikiTools.Models;
 using MergeMansionWikiTools.Services;
 using Microsoft.Win32;
@@ -900,6 +901,7 @@ public partial class GameDataDumperPage : UserControl
                 GetPathText(txtPatchPath),
                 GetPathText(txtLanguagePath),
                 outputPath,
+                DumpEngineFactory.Create(_main.Settings.DumperEngine, m => ((IProgress<string>)progress).Report(m)),
                 mode,
                 GetSelectedEventFilters(),
                 _main.Settings.DumpIncludeStaleBranches,

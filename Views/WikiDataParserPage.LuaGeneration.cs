@@ -312,10 +312,12 @@ public partial class WikiDataParserPage
                     var changes = gcService.Detect(combined, liveVarious, existing);
                     var rewardCount = rewards.Count;
 
-                    // GC airings merge: reconstruct from live → add active dump airings (ADD-ONLY, §2.9).
+                    // GC airings merge: reconstruct from live → add active dump airings (§2.9: aired runs are
+                    // never touched; a not-yet-started parent-run group is rescheduled from the dump).
                     var existingAirings = GarageCleanupGridService.ReconstructAirings(liveVarious, existing ?? "");
-                    var active = gcService.CollectActiveAirings(data, DateTime.UtcNow);
-                    var merged = gcService.MergeAirings(existingAirings, active, nonGcLua);
+                    var nowUtc = DateTime.UtcNow;
+                    var active = gcService.CollectActiveAirings(data, nowUtc);
+                    var merged = gcService.MergeAirings(existingAirings, active, nonGcLua, nowUtc);
                     var gcWritten = merged.Sum(kv => kv.Value.Count) - existingAirings.Sum(kv => kv.Value.Count);
 
                     // Append GC groups (A3c: GC run history lives in Datatable/Events).

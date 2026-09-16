@@ -82,6 +82,48 @@ public class DailyScoopWeekTypeTests : IDisposable
         Assert.DoesNotContain(svc.Groups, g => g.Name.Contains("DailyTasks"));
     }
 
+    /// <summary>Regression (2026-09-15): config 26.07.01 re-cut the whole Daily Scoop week set and
+    /// renamed every MinigameId with a revision suffix (HardWeek → HardWeek_v2, live from the 2026-08-31
+    /// week). The exact-match mapping then yielded null, so every run from 2026-08-31 on lost its
+    /// weekType and the wiki page stopped marking which difficulty the current week is. The suffix marks
+    /// a new task line-up, not a new difficulty, so it must be stripped before mapping.</summary>
+    [Fact]
+    public async Task VersionSuffixedMinigameId_stillMapsToWeekType()
+    {
+        var path = WriteDumpJson(
+            ("DailyChallenges_19", "SuperWeek_v2", new DateTime(2026, 8, 31, 8, 5, 0, DateTimeKind.Utc)),
+            ("DailyChallenges_21", "HardWeek_v2", new DateTime(2026, 9, 14, 8, 5, 0, DateTimeKind.Utc)),
+            ("DailyChallenges_22", "EasyWeek_v2", new DateTime(2026, 9, 21, 8, 5, 0, DateTimeKind.Utc)),
+            ("DailyChallenges_20", "MedWeek_v3", new DateTime(2026, 9, 7, 8, 5, 0, DateTimeKind.Utc)));
+        var svc = new EventScheduleService();
+
+        await svc.LoadAsync(path, null);
+
+        var scoop = svc.Groups.Single(g => g.Name == "The Daily Scoop");
+        Assert.Equal("Super", scoop.Runs.Single(r => r.Start.Month == 8).WeekType);
+        Assert.Equal("Hard", scoop.Runs.Single(r => r.Start.Day == 14).WeekType);
+        Assert.Equal("Easy", scoop.Runs.Single(r => r.Start.Day == 21).WeekType);
+        Assert.Equal("Medium", scoop.Runs.Single(r => r.Start.Day == 7).WeekType);   // future _v3 too
+        Assert.DoesNotContain(svc.Notes, n => n.Contains("week type", StringComparison.OrdinalIgnoreCase));
+    }
+
+    /// <summary>A MinigameId that is genuinely unrecognisable must be REPORTED, not silently dropped —
+    /// the silent null is what let the _v2 rename go unnoticed for three weeks.</summary>
+    [Fact]
+    public async Task UnknownMinigameId_isReportedInNotes()
+    {
+        var path = WriteDumpJson(
+            ("DailyChallenges_30", "MysteryWeek", new DateTime(2026, 10, 5, 8, 5, 0, DateTimeKind.Utc)));
+        var svc = new EventScheduleService();
+
+        await svc.LoadAsync(path, null);
+
+        var run = svc.Groups.Single(g => g.Name == "The Daily Scoop").Runs.Single();
+        Assert.Null(run.WeekType);
+        var note = Assert.Single(svc.Notes, n => n.Contains("MysteryWeek", StringComparison.Ordinal));
+        Assert.Contains("DailyChallenges_30", note, StringComparison.Ordinal);
+    }
+
     // ── merge-preserve ──────────────────────────────────────────────────────────
 
     [Fact]

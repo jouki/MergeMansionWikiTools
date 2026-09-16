@@ -292,13 +292,145 @@ public class GarageCleanupGridServiceTests
             "{ start = { year = 2026, month = 5, day = 29 }, durationDays = 5 }," +
             "} } } }";
 
-        var merged = svc.MergeAirings(existing, active, events);
+        var merged = svc.MergeAirings(existing, active, events, new System.DateTime(2030, 1, 1));
         var m = merged["X Garage Cleanup"];
 
         Assert.Equal(3, m.Count);                                              // 2024 + 2025 + new 2026
         Assert.Contains(m, x => x.Start == System.DateTime.Parse("2026-05-31"));
         var a25 = m.First(x => x.Start == System.DateTime.Parse("2025-08-03"));
         Assert.Equal("g25", a25.Grid[0].Chains[0]);                           // kept original, NOT overridden
+    }
+
+    /// <summary>Regression for "Murder at the Mansion Garage Cleanup" (2026-09): the wiki held a FUTURE
+    /// airing 09-17 (from an older dump), the devs moved it to 09-20 and both dates fall into the same
+    /// parent run (LDE 09-17 + 6d). ADD-ONLY identity = parent-run, so the dump's 09-20 was dropped
+    /// forever. A not-yet-started airing is a plan, not history → the dump's plan replaces it.</summary>
+    [Fact]
+    public void MergeAirings_FutureAiringInSameParentRun_IsRescheduledFromDump()
+    {
+        var svc = MakeService();
+        var existing = new Dictionary<string, List<GarageCleanupGridService.GcAiring>>
+        {
+            ["Murder at the Mansion Garage Cleanup"] = new()
+            {
+                new(System.DateTime.Parse("2026-09-17T08:00:00"), 3, false, Grid("old")),
+            }
+        };
+        var active = new Dictionary<string, List<GarageCleanupGridService.GcAiring>>
+        {
+            ["Murder at the Mansion Garage Cleanup"] = new()
+            {
+                new(System.DateTime.Parse("2026-09-20T08:00:00"), 3, false, Grid("new")),
+            }
+        };
+        var events = "return { events = { { name = \"Murder at the Mansion\", runs = {" +
+            "{ start = { year = 2026, month = 9, day = 17, hour = 8 }, durationDays = 6 }," +
+            "} } } }";
+
+        var merged = svc.MergeAirings(existing, active, events, System.DateTime.Parse("2026-09-15T10:00:00"));
+        var m = merged["Murder at the Mansion Garage Cleanup"];
+
+        Assert.Single(m);
+        Assert.Equal(System.DateTime.Parse("2026-09-20T08:00:00"), m[0].Start);
+        Assert.Equal("new", m[0].Grid[0].Chains[0]);
+    }
+
+    /// <summary>The counterpart guard: an airing that ALREADY started per the DUMP's dates is history/running
+    /// and must stay exactly as the wiki has it, even when the wiki's start differs.</summary>
+    [Fact]
+    public void MergeAirings_StartedAiringInSameParentRun_IsKept()
+    {
+        var svc = MakeService();
+        var existing = new Dictionary<string, List<GarageCleanupGridService.GcAiring>>
+        {
+            ["Murder at the Mansion Garage Cleanup"] = new()
+            {
+                new(System.DateTime.Parse("2026-09-17T08:00:00"), 3, false, Grid("old")),
+            }
+        };
+        var active = new Dictionary<string, List<GarageCleanupGridService.GcAiring>>
+        {
+            ["Murder at the Mansion Garage Cleanup"] = new()
+            {
+                new(System.DateTime.Parse("2026-09-16T08:00:00"), 3, false, Grid("new")),
+            }
+        };
+        var events = "return { events = { { name = \"Murder at the Mansion\", runs = {" +
+            "{ start = { year = 2026, month = 9, day = 17, hour = 8 }, durationDays = 6 }," +
+            "} } } }";
+
+        var merged = svc.MergeAirings(existing, active, events, System.DateTime.Parse("2026-09-18T10:00:00"));
+        var m = merged["Murder at the Mansion Garage Cleanup"];
+
+        Assert.Single(m);
+        Assert.Equal(System.DateTime.Parse("2026-09-17T08:00:00"), m[0].Start);
+        Assert.Equal("old", m[0].Grid[0].Chains[0]);
+    }
+
+    /// <summary>"Not started" is judged by the dump, not the wiki: when the stale wiki date (09-17) has
+    /// already passed but the dump says the airing starts later (09-20), it is still a plan → rescheduled.
+    /// Otherwise an Update Wiki run after the stale date would freeze the wrong date forever.</summary>
+    [Fact]
+    public void MergeAirings_StaleWikiDateAlreadyPassed_StillRescheduledWhenDumpIsFuture()
+    {
+        var svc = MakeService();
+        var existing = new Dictionary<string, List<GarageCleanupGridService.GcAiring>>
+        {
+            ["Murder at the Mansion Garage Cleanup"] = new()
+            {
+                new(System.DateTime.Parse("2026-09-17T08:00:00"), 3, false, Grid("old")),
+            }
+        };
+        var active = new Dictionary<string, List<GarageCleanupGridService.GcAiring>>
+        {
+            ["Murder at the Mansion Garage Cleanup"] = new()
+            {
+                new(System.DateTime.Parse("2026-09-20T08:00:00"), 3, false, Grid("new")),
+            }
+        };
+        var events = "return { events = { { name = \"Murder at the Mansion\", runs = {" +
+            "{ start = { year = 2026, month = 9, day = 17, hour = 8 }, durationDays = 6 }," +
+            "} } } }";
+
+        var merged = svc.MergeAirings(existing, active, events, System.DateTime.Parse("2026-09-18T10:00:00"));
+        var m = merged["Murder at the Mansion Garage Cleanup"];
+
+        Assert.Single(m);
+        Assert.Equal(System.DateTime.Parse("2026-09-20T08:00:00"), m[0].Start);
+        Assert.Equal("new", m[0].Grid[0].Chains[0]);
+    }
+
+    /// <summary>Multi-round parent run: a future airing group is replaced as a WHOLE by the dump's rounds
+    /// for that parent run (never a mix of old and new rounds).</summary>
+    [Fact]
+    public void MergeAirings_FutureRounds_ReplacedAsWholeGroup()
+    {
+        var svc = MakeService();
+        var existing = new Dictionary<string, List<GarageCleanupGridService.GcAiring>>
+        {
+            ["X Garage Cleanup"] = new()
+            {
+                new(System.DateTime.Parse("2026-10-02T08:00:00"), 3, false, Grid("r1old")),
+                new(System.DateTime.Parse("2026-10-06T08:00:00"), 3, false, Grid("r2old")),
+            }
+        };
+        var active = new Dictionary<string, List<GarageCleanupGridService.GcAiring>>
+        {
+            ["X Garage Cleanup"] = new()
+            {
+                new(System.DateTime.Parse("2026-10-03T08:00:00"), 3, false, Grid("r1new")),
+            }
+        };
+        var events = "return { events = { { name = \"X\", runs = {" +
+            "{ start = { year = 2026, month = 10, day = 1, hour = 8 }, durationDays = 10 }," +
+            "} } } }";
+
+        var merged = svc.MergeAirings(existing, active, events, System.DateTime.Parse("2026-09-15T10:00:00"));
+        var m = merged["X Garage Cleanup"];
+
+        Assert.Single(m);
+        Assert.Equal(System.DateTime.Parse("2026-10-03T08:00:00"), m[0].Start);
+        Assert.Equal("r1new", m[0].Grid[0].Chains[0]);
     }
 
     [Fact]
@@ -338,6 +470,37 @@ public class GarageCleanupGridServiceTests
         // strongest check: compose → reconstruct → compose is byte-stable (faithful inverse)
         var various2 = svc.ComposeGarageCleanup(recon);
         Assert.Equal(various, various2);
+    }
+
+    /// <summary>Regression (2026-09-15): live runs start at 08:00 and an identicalTo re-air points at its holder
+    /// by DATE ("31.05.2026"). The reconstruct matched the parsed date (midnight) against the holder's full
+    /// start (08:00) → every identicalTo run was silently dropped, and once the dump moved on to the next
+    /// airing the run vanished from the wiki (Legacy Lane 27.06 + 26.07, Green Acres Quest 06.07 + 08.08 2026).</summary>
+    [Fact]
+    public void ReconstructAirings_IdenticalToRun_WithNonMidnightStart_IsReconstructed()
+    {
+        var svc = MakeService();
+        var g26 = Grid("G26");
+        var byBase = new Dictionary<string, List<GarageCleanupGridService.GcAiring>>
+        {
+            ["Legacy Lane Garage Cleanup"] = new()
+            {
+                new(System.DateTime.Parse("2025-08-03T08:00:00"), 3, false, Grid("G25")),
+                new(System.DateTime.Parse("2026-05-31T08:00:00"), 3, false, g26),
+                new(System.DateTime.Parse("2026-06-27T08:00:00"), 3, false, g26),   // identicalTo = "31.05.2026"
+            }
+        };
+        var various = svc.ComposeGarageCleanup(byBase);
+        var eventsLua = new LuaGeneratorService().GenerateEventScheduleLua(svc.BuildGcEventGroups(byBase), null);
+        Assert.Contains("identicalTo = \"31.05.2026\"", eventsLua);
+
+        var recon = GarageCleanupGridService.ReconstructAirings(various, eventsLua);
+
+        var a = recon["Legacy Lane Garage Cleanup"];
+        Assert.Equal(3, a.Count);
+        var a0627 = a.First(x => x.Start == System.DateTime.Parse("2026-06-27T08:00:00"));
+        Assert.Null(GarageCleanupGridService.FirstDifferenceForTest(a0627.Grid, g26));
+        Assert.Equal(various, svc.ComposeGarageCleanup(recon));
     }
 
     [Fact]

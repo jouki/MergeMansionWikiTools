@@ -1,8 +1,8 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Text;
 using GameLogic.Config;
-using merge_mansion_dumper.Dumper;
+using MergeMansionWikiTools.Dumper;
 using Metaplay.Core;
 using Metaplay.Core.Config;
 using Metaplay.Core.Localization;
@@ -144,6 +144,7 @@ internal static class DumperService
         string? patchPath,
         string? languagePath,
         string outputDir,
+        IDumpEngine engine,
         DumpMode mode = DumpMode.All,
         EventFilters eventFilters = EventFilters.All,
         bool includeStaleBranches = true,
@@ -191,7 +192,8 @@ internal static class DumperService
                 var sw = Stopwatch.StartNew();
                 string T() => $"[{sw.ElapsedMilliseconds}ms]";
 
-                AppLogger.Info($"=== Dump started: mode={mode}, config={configPath} ===");
+                AppLogger.Info($"=== Dump started: mode={mode}, engine={engine.Kind}, config={configPath} ===");
+                progress?.Report($"[INFO] Dumper engine: {engine.Kind}");
 
                 // 1. Initialize MetaplayCore (once)
                 progress?.Report("Initializing MetaplayCore...");
@@ -495,7 +497,7 @@ internal static class DumperService
                         var p = Path.Combine(outputDir, "chain_item_odds.json");
                         try
                         {
-                            baselineChains = new MergeChainDumper(true).WriteJson(p, masterConfig);
+                            baselineChains = engine.DumpChains(masterConfig, p).Json;
                             var size = new FileInfo(p).Length / 1024;
                             progress?.Report($"{T()} chain_item_odds.json written ({size} KB)");
                             AppLogger.Info($"{T()} chain_item_odds.json: {size} KB");
@@ -510,7 +512,7 @@ internal static class DumperService
                         var p = Path.Combine(outputDir, "areas.json");
                         try
                         {
-                            baselineAreas = new AreaDumper().WriteJson(p, masterConfig);
+                            baselineAreas = engine.DumpAreas(masterConfig, p).Json;
                             var size = new FileInfo(p).Length / 1024;
                             progress?.Report($"{T()} areas.json written ({size} KB)");
                             AppLogger.Info($"{T()} areas.json: {size} KB");
@@ -525,7 +527,7 @@ internal static class DumperService
                         var p = Path.Combine(outputDir, "events.json");
                         try
                         {
-                            baselineEvents = new EventDumper(eventFilters).WriteJson(p, masterConfig);
+                            baselineEvents = engine.DumpEvents(masterConfig, p, eventFilters).Json;
                             var size = new FileInfo(p).Length / 1024;
                             progress?.Report($"{T()} events.json written ({size} KB)");
                             AppLogger.Info($"{T()} events.json: {size} KB");
@@ -540,7 +542,7 @@ internal static class DumperService
                         var p = Path.Combine(outputDir, "card_collection.json");
                         try
                         {
-                            new CardCollectionDumper().WriteJson(p, masterConfig);
+                            engine.DumpCardCollection(masterConfig, p);
                             var size = new FileInfo(p).Length / 1024;
                             progress?.Report($"{T()} card_collection.json written ({size} KB)");
                             AppLogger.Info($"{T()} card_collection.json: {size} KB");
@@ -555,7 +557,7 @@ internal static class DumperService
                         var p = Path.Combine(outputDir, "dialogues.json");
                         try
                         {
-                            new DialogueDumper().WriteJson(p, masterConfig);
+                            engine.DumpDialogues(masterConfig, p);
                             var size = new FileInfo(p).Length / 1024;
                             progress?.Report($"{T()} dialogues.json written ({size} KB)");
                             AppLogger.Info($"{T()} dialogues.json: {size} KB");
@@ -570,7 +572,7 @@ internal static class DumperService
                         var p = Path.Combine(outputDir, "Pets.json");
                         try
                         {
-                            ExperimentalDumper.WritePetsJson(p, masterConfig);
+                            engine.DumpPets(masterConfig, p);
                             var size = new FileInfo(p).Length / 1024;
                             progress?.Report($"{T()} Pets.json written ({size} KB)");
                             AppLogger.Info($"{T()} Pets.json: {size} KB");
@@ -590,7 +592,7 @@ internal static class DumperService
                         var expDir = Path.Combine(outputDir, "Experimental");
                         try
                         {
-                            var written = new ExperimentalDumper().WriteIndividualFiles(expDir, masterConfig);
+                            var written = engine.DumpExperimental(masterConfig, expDir);
                             foreach (var (section, filePath) in written)
                             {
                                 var size = new FileInfo(filePath).Length / 1024;
@@ -635,17 +637,17 @@ internal static class DumperService
 
                             if (mode.HasFlag(DumpMode.Chains))
                             {
-                                try { RecordResult("chain_item_odds.json", new MergeChainDumper(true).WriteJsonIfDifferent(Path.Combine(patchDir, "chain_item_odds.json"), patchConfig, baselineChains)); }
+                                try { RecordResult("chain_item_odds.json", engine.DumpChains(patchConfig, Path.Combine(patchDir, "chain_item_odds.json"), true, baselineChains).Written); }
                                 catch (Exception ex) { Log("WARN", $"Patch {patchLabel} chains: {ex.Message}", ex); }
                             }
                             if (mode.HasFlag(DumpMode.Areas))
                             {
-                                try { RecordResult("areas.json", new AreaDumper().WriteJsonIfDifferent(Path.Combine(patchDir, "areas.json"), patchConfig, baselineAreas)); }
+                                try { RecordResult("areas.json", engine.DumpAreas(patchConfig, Path.Combine(patchDir, "areas.json"), baselineAreas).Written); }
                                 catch (Exception ex) { Log("WARN", $"Patch {patchLabel} areas: {ex.Message}", ex); }
                             }
                             if (mode.HasFlag(DumpMode.Events))
                             {
-                                try { RecordResult("events.json", new EventDumper(eventFilters).WriteJsonIfDifferent(Path.Combine(patchDir, "events.json"), patchConfig, baselineEvents)); }
+                                try { RecordResult("events.json", engine.DumpEvents(patchConfig, Path.Combine(patchDir, "events.json"), eventFilters, baselineEvents).Written); }
                                 catch (Exception ex) { Log("WARN", $"Patch {patchLabel} events: {ex.Message}", ex); }
                             }
 
@@ -694,7 +696,7 @@ internal static class DumperService
                     var unityVersion = AbGroupsService.ReadValueFile(
                         AbGroupsService.ResolveDataFile(configPath, PhoneDetectionService.UnityVersionFileName));
                     var metaPath = Path.Combine(outputDir, AbGroupsService.OutputFileName);
-                    AbGroupsService.Write(metaPath, createdAt, gameVersion, unityVersion, memberships, catalog);
+                    AbGroupsService.Write(metaPath, createdAt, gameVersion, unityVersion, memberships, catalog, engine.Kind.ToString());
                     var memCount = memberships?.Count ?? 0;
                     progress?.Report($"{T()} {AbGroupsService.OutputFileName} written (game {gameVersion ?? "?"}, {memCount} memberships, {catalog.Select(c => c.Item1).Distinct().Count()} catalog experiments)");
                     AppLogger.Info($"{T()} {AbGroupsService.OutputFileName}: createdAt={createdAt ?? "?"}, game={gameVersion ?? "?"}, unity={unityVersion ?? "?"}, {memCount} memberships, {catalog.Count} catalog entries (dat: {(datPath != null && File.Exists(datPath) ? "found" : "missing")})");

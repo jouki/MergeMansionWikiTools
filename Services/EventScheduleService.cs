@@ -133,7 +133,7 @@ public class EventScheduleService
     /// The game's MinigameId (EasyWeek/MedWeek/HardWeek/SuperWeek) determines the milestone
     /// ladder, final reward and task composition of the week — see Game/DailyScoop.md.
     /// </summary>
-    private static string? WeekTypeFromMinigame(string? minigameId) => minigameId switch
+    private static string? WeekTypeFromMinigame(string? minigameId) => StripRevisionSuffix(minigameId) switch
     {
         "EasyWeek" => "Easy",
         "MedWeek" => "Medium",
@@ -141,6 +141,24 @@ public class EventScheduleService
         "SuperWeek" => "Super",
         _ => null,
     };
+
+    /// <summary>
+    /// Strips a trailing <c>_v&lt;N&gt;</c> revision suffix from a config id.
+    /// When the game re-cuts a whole Daily Scoop week set it keeps the difficulty but bumps every id
+    /// (<c>HardWeek</c> to <c>HardWeek_v2</c>, live from the 2026-08-31 week; the task line-up changed,
+    /// the difficulty did not). Exact-match mapping silently returned null for those, so every run from
+    /// that week on lost its <c>weekType</c> and the wiki stopped marking the current week's difficulty
+    /// (fixed v0.24.67). Only a suffix of <c>_v</c> + digits is stripped, so unrelated ids are untouched.
+    /// </summary>
+    internal static string StripRevisionSuffix(string? id)
+    {
+        if (string.IsNullOrEmpty(id)) return "";
+        var i = id.LastIndexOf("_v", StringComparison.OrdinalIgnoreCase);
+        if (i <= 0 || i + 2 >= id.Length) return id;
+        for (var j = i + 2; j < id.Length; j++)
+            if (!char.IsAsciiDigit(id[j])) return id;
+        return id[..i];
+    }
 
     /// <summary>
     /// Display-name corrections (the dump's DisplayName is wrong/internal for these).
@@ -211,6 +229,7 @@ public class EventScheduleService
         var disabledFuture = new List<string>();
         var disabledPastKept = 0;
         var unlocalized = new List<string>();
+        var unknownWeekTypes = new List<string>();
         var recurringEntries = 0;
         var now = DateTime.UtcNow;
 
@@ -298,7 +317,16 @@ public class EventScheduleService
                 // its MinigameId (EasyWeek/MedWeek/HardWeek/SuperWeek) gives the week type. DisplayName is
                 // None in the dump, so the name is forced below.
                 bool isDailyScoop = id.StartsWith("DailyChallenges", StringComparison.OrdinalIgnoreCase);
-                string? dailyScoopWeekType = isDailyScoop ? WeekTypeFromMinigame(GetString(e, "MinigameId")) : null;
+                var dailyScoopMinigame = isDailyScoop ? GetString(e, "MinigameId") : "";
+                string? dailyScoopWeekType = isDailyScoop ? WeekTypeFromMinigame(dailyScoopMinigame) : null;
+                // An id we cannot map is REPORTED, never silently dropped: the silent null is exactly what
+                // let the _v2 rename pass unnoticed for three weeks (the wiki lost the week's difficulty
+                // marker and nothing in the app said so).
+                if (isDailyScoop && dailyScoopWeekType == null && !string.IsNullOrEmpty(dailyScoopMinigame))
+                {
+                    unknownWeekTypes.Add($"{id} ({dailyScoopMinigame})");
+                    AppLogger.Debug($"[Events] Daily Scoop run {id}: unrecognised MinigameId '{dailyScoopMinigame}' - weekType not emitted");
+                }
 
                 // Disabled entries (IsEnabled = false) are ALL kept and flagged `disabled` so the
                 // wiki can filter them with |hideDisabled=true|. Past = already-aired history;
@@ -379,6 +407,10 @@ public class EventScheduleService
             Notes.Add($"{disabledFuture.Count} disabled future/ongoing run(s) kept & flagged (unconfirmed; hide on wiki with hideDisabled=true): {string.Join(", ", disabledFuture)}");
         if (unlocalized.Count > 0)
             Notes.Add($"{unlocalized.Count} unlocalized name(s) kept as-is: {string.Join("; ", unlocalized)}");
+        if (unknownWeekTypes.Count > 0)
+            Notes.Add($"\u26a0 {unknownWeekTypes.Count} Daily Scoop run(s) with an unrecognised week type - "
+                    + "the wiki page cannot mark the week's difficulty until the mapping is extended: "
+                    + string.Join(", ", unknownWeekTypes));
 
         // 2) Drop placeholder runs: Jan 1 08:00 UTC start shared by 2+ entries of the same name
         //    (template slots for not-yet-scheduled rounds — observed on DE_* Re-Archeology)

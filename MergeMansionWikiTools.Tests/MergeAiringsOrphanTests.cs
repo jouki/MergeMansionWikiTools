@@ -67,7 +67,7 @@ public class MergeAiringsOrphanTests
             "{ start = { year = 2026, month = 6, day = 25, hour = 8 }, durationDays = 5 }," +
             "} } } }";
 
-        var merged = svc.MergeAirings(existing, active, events);
+        var merged = svc.MergeAirings(existing, active, events, new System.DateTime(2030, 1, 1));
         var m = merged["Legacy Lane Garage Cleanup"];
 
         // 2024-07-12 is inside 2024-07-02 + 13d (ends 07-15) + 1d tolerance → kept
@@ -113,7 +113,7 @@ public class MergeAiringsOrphanTests
             "{ start = { year = 2024, month = 3, day = 1 }, durationDays = 10 }," +
             "} } } }";
 
-        var merged = svc.MergeAirings(existing, active, events);
+        var merged = svc.MergeAirings(existing, active, events, new System.DateTime(2030, 1, 1));
 
         // No parent runs → all airings are dropped. The key should be present but map to an empty list,
         // or be absent from the dict entirely (depending on how the merge dict is built).
@@ -164,7 +164,7 @@ public class MergeAiringsOrphanTests
             "{ start = { year = 2026, month = 9, day = 5 }, durationDays = 14 }," +
             "} } } }";
 
-        var merged = svc.MergeAirings(existing, active, events);
+        var merged = svc.MergeAirings(existing, active, events, new System.DateTime(2030, 1, 1));
         var m = merged["Green Acres Garage Cleanup"];
 
         // All three airings are bracketed → kept + new one added.

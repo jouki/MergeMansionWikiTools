@@ -10,7 +10,7 @@ using SixLabors.ImageSharp.Processing;
 using GameLogic.Config;
 using GameLogic.Hotspots.CardStack;
 using Code.GameLogic.Hotspots;
-using merge_mansion_dumper.Dumper;
+using MergeMansionWikiTools.Dumper;
 using Metaplay.Core;
 using Metaplay.Core.Config;
 using Metaplay.Core.Localization;
@@ -22,8 +22,27 @@ namespace DumpHarness;
 // Used to validate SharedGlobals serialization diagnostics without booting the WPF app.
 internal static class Program
 {
+    /// <summary>Dump engine used by every dump sub-command; selected with the global --engine flag.</summary>
+    private static IDumpEngine Engine = new LegacyDumpEngineHarness();
+
     public static int Main(string[] args)
     {
+        // Global option: --engine legacy|native (default legacy). Parsed and removed from args
+        // before any sub-command dispatch so positional arguments keep their existing indices.
+        int engIdx = Array.IndexOf(args, "--engine");
+        if (engIdx >= 0)
+        {
+            var engValue = engIdx + 1 < args.Length ? args[engIdx + 1] : null;
+            if (engValue != null && engValue.Equals("native", StringComparison.OrdinalIgnoreCase))
+                Engine = new NativeDumpEngine();
+            else if (engValue == null || !engValue.Equals("legacy", StringComparison.OrdinalIgnoreCase))
+                Console.WriteLine("[WARN] --engine expects legacy|native, using Legacy");
+            // Drop the flag (and its value, when one was given) so positional indices stay intact.
+            var engLast = engValue != null ? engIdx + 1 : engIdx;
+            args = args.Where((_, i) => i < engIdx || i > engLast).ToArray();
+            Console.WriteLine($"[engine] {Engine.Kind}");
+        }
+
         // Sub-command: probe Unity bundles for minigame icon assets
         if (args.Length >= 2 && args[0] == "--probe-minigame-bundles")
         {
@@ -161,6 +180,25 @@ internal static class Program
             }
             catch (Exception ex) { Console.Error.WriteLine($"FATAL: {ex.Message}"); return 1; }
         }
+        if (args.Length >= 3 && args[0] == "--compare-engines")
+        {
+            // --compare-engines <outDir> live|newest|all|<ver> [--filters] [--only <filePrefix>]
+            // Runs the Legacy and the Native dump engine over the same config(s) and byte-compares
+            // every produced file. _DATA is taken from MMWT_DATA when set. Exit code 0 only when
+            // every row is IDENTICAL.
+            // "newest" = only the newest-CreatedAt archive in _DATA/C (with all its patches) —
+            // a fast single-archive loop for iterating on one dumper.
+            // --only <filePrefix> restricts the compared files to those whose name starts with the
+            // prefix (patch rows included), e.g. "--only chain".
+            var onlyIdx = Array.IndexOf(args, "--only");
+            if (onlyIdx >= 0 && onlyIdx + 1 >= args.Length)
+            {
+                Console.Error.WriteLine("ERROR: --only matched no files (no prefix given)");
+                return 2;
+            }
+            var only = onlyIdx >= 0 ? args[onlyIdx + 1] : null;
+            return CompareEngines(args[1], args[2], args.Contains("--filters"), only);
+        }
         if (args.Length >= 5 && args[0] == "--dump-full-patched")
         {
             // --dump-full-patched <configPath> <patchPath> <languagePath> <outputDir>
@@ -191,6 +229,31 @@ internal static class Program
             // Used to diagnose tasks with missing Description in areas.json.
             return ProbeHotspot(args[1], args[2], args[3]);
         }
+        if (args.Length >= 4 && args[0] == "--probe-prefab-skeleton")
+        {
+            // --probe-prefab-skeleton <bundlePath> <tpkPath> <prefabNameFilter>
+            return ProbePrefabSkeleton(args[1], args[2], args[3]);
+        }
+        if (args.Length >= 3 && args[0] == "--probe-bundle-skeletons")
+        {
+            // --probe-bundle-skeletons <bundleDir> <tpkPath> [nameFilter]
+            return ProbeBundleSkeletons(args[1], args[2], args.Length >= 4 ? args[3] : "",
+                args.Length >= 5 ? args[4] : "");
+        }
+        if (args.Length >= 4 && args[0] == "--dump-config-library")
+        {
+            // --dump-config-library <configPath> <languagePath> <libraryName> [keyFilter]
+            return DumpConfigLibrary(args[1], args[2], args[3], args.Length >= 5 ? args[4] : "",
+                args.Length >= 6 ? args[5] : "", args.Length >= 7 ? args[6] : "");
+        }
+        if (args.Length >= 4 && args[0] == "--find-config-refs")
+        {
+            // --find-config-refs <configPath> <languagePath> <needle>
+            // Reports every place in EVERY config library that references the needle
+            // (ItemType, ConfigKey, MetaRef key or plain string).
+            return FindConfigRefs(args[1], args[2], args[3],
+                args.Length >= 5 ? args[4] : "", args.Length >= 6 ? args[5] : "");
+        }
         if (args.Length >= 3 && args[0] == "--probe-player-levels")
         {
             // --probe-player-levels <configPath> <languagePath>
@@ -218,6 +281,18 @@ internal static class Program
             // Downloads a single file from the game package over MTP, path relative to the
             // package root (e.g. "cache/Metaplay_LastSessionGameConfig.dat" or "files/il2cpp/unity.ver").
             return PullPhoneFile(args[1], args[2]);
+        }
+        if (args.Length >= 2 && args[0] == "--list-phone-dir")
+        {
+            // --list-phone-dir <relPath under storage root, "" = list roots> [nameFilter] [limit]
+            return ListPhoneDir(args[1], args.Length >= 3 ? args[2] : "",
+                args.Length >= 4 && int.TryParse(args[3], out var lim) ? lim : 30);
+        }
+        if (args.Length >= 3 && args[0] == "--pull-phone-dir")
+        {
+            // --pull-phone-dir <relPath> <localOut> [nameFilter] [sinceDate yyyy-MM-dd]
+            return PullPhoneDir(args[1], args[2], args.Length >= 4 ? args[3] : "",
+                args.Length >= 5 ? args[4] : "");
         }
         if (args[0] == "--probe-phone-tree")
         {
@@ -259,6 +334,16 @@ internal static class Program
             return ProbeSchedule(args[1], args[2]);
         }
 
+        if (args.Length >= 5 && args[0] == "--probe-meta-members")
+        {
+            // --probe-meta-members <configPath> <languagePath> <libraryName> <keyFilter>
+            // Prints every [MetaMember] of the matching library entries the way the native dumpers
+            // see them: TagId, declaring visibility, runtime type, and — for a MetaRef — whether it
+            // is resolved and what its key renders as. Written for the events dump, where golden
+            // keeps some empty-key references as null and drops others, and the only way to tell
+            // which rule separates them is to look at the actual member state.
+            return ProbeMetaMembers(args[1], args[2], args[3], args[4]);
+        }
         if (args.Length >= 3 && args[0] == "--probe-daily-challenges")
         {
             // --probe-daily-challenges <configPath> <patchPath (dir/file) or "-"> [<patchLabelFilter>]
@@ -362,14 +447,14 @@ internal static class Program
             ClientGlobal.SharedGameConfig = gameConfig;
 
             Console.WriteLine("[4/4] Running ExperimentalDumper...");
-            var written = new ExperimentalDumper().WriteIndividualFiles(outputDir, gameConfig);
+            var written = Engine.DumpExperimental(gameConfig, outputDir);
             foreach (var (section, path) in written)
                 Console.WriteLine($"        -> {section}.json ({new FileInfo(path).Length / 1024} KB)");
 
             // Also dump areas.json so we can verify Theme field for IllustrationTask/CardStack hotspots.
             Console.WriteLine("[4b/4] Running AreaDumper...");
             var areasPath = Path.Combine(outputDir, "areas.json");
-            new AreaDumper().WriteJson(areasPath, gameConfig);
+            Engine.DumpAreas(gameConfig, areasPath);
             Console.WriteLine($"        -> areas.json ({new FileInfo(areasPath).Length / 1024} KB)");
 
             Console.WriteLine();
@@ -601,60 +686,15 @@ internal static class Program
 
             Console.WriteLine("[4] Dumping base events.json...");
             var basePath = Path.Combine(outputDir, "events.json");
-            new EventDumper().WriteJson(basePath, masterConfig);
+            Engine.DumpEvents(masterConfig, basePath, EventFilters.All);
             Console.WriteLine($"        -> events.json ({new FileInfo(basePath).Length / 1024} KB)");
 
             if (!string.IsNullOrEmpty(patchPath))
             {
-                // Support both file mode (legacy) and directory mode (union across all snapshots).
-                var patchFiles = new List<string>();
-                if (Directory.Exists(patchPath))
-                    patchFiles.AddRange(Directory.GetFiles(patchPath).OrderBy(File.GetLastWriteTimeUtc));
-                else if (File.Exists(patchPath))
-                    patchFiles.Add(patchPath);
+                Console.WriteLine("[5] Loading patches...");
+                var configPatches = LoadDistinctPatches(patchPath);
 
-                Console.WriteLine($"[5] Loading {patchFiles.Count} patch file(s)...");
-                // Keep EVERY distinct-content version of each label (2026-06-26, mirrors DumperService fix).
-                // Dedup key = (label, SHA-256 of raw bytes) — byte-identical copies across snapshots collapse.
-                // The same label can appear in multiple snapshots with DIFFERENT content; the old
-                // "richer payload wins" heuristic silently dropped the smaller version even when it was the
-                // only one changing a specific event. Now all distinct versions survive with unique subfolders:
-                // primary (largest raw size) → bare label; extras → label__v2, label__v3, …
-                var distinctPatches = new Dictionary<string, (Metaplay.Core.Player.PlayerExperimentId ExpId, Metaplay.Core.Player.ExperimentVariantId VarId, byte[] RawBytes, Metaplay.Core.Config.GameConfigPatchEnvelope Envelope, int RawSize)>(StringComparer.Ordinal);
-                foreach (var pf in patchFiles)
-                {
-                    var specPatches = Metaplay.Core.Config.GameConfigSpecializationPatches.FromBytes(File.ReadAllBytes(pf));
-                    foreach (var (expId, vs) in specPatches.Patches)
-                        foreach (var (varId, bytes) in vs)
-                        {
-                            var label = $"{expId}_{varId}";
-                            var actualBytes = bytes ?? Array.Empty<byte>();
-                            var hashHex = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(actualBytes));
-                            var dedupKey = $"{label}\0{hashHex}";
-                            if (!distinctPatches.ContainsKey(dedupKey))
-                            {
-                                distinctPatches[dedupKey] = (expId, varId, actualBytes, Metaplay.Core.Config.GameConfigPatchEnvelope.Deserialize(actualBytes), actualBytes.Length);
-                                Console.WriteLine($"        [distinct] {label}: {actualBytes.Length} B [{hashHex[..8]}] from {Path.GetFileName(pf)}");
-                            }
-                        }
-                }
-
-                // Group per label, assign folder names.
-                var byLabel = distinctPatches.Values
-                    .GroupBy(v => $"{v.ExpId}_{v.VarId}", StringComparer.Ordinal)
-                    .ToDictionary(g => g.Key, g => g.OrderByDescending(v => v.RawSize).ToList(), StringComparer.Ordinal);
-
-                int totalDistinct = byLabel.Values.Sum(v => v.Count);
-                Console.WriteLine($"        Found {totalDistinct} distinct patch version(s), {byLabel.Count} unique label(s) across {patchFiles.Count} file(s)");
-                foreach (var (lbl, vs) in byLabel.Where(kv => kv.Value.Count > 1))
-                    Console.WriteLine($"        [multi-version] {lbl}: {vs.Count} versions — folders: {lbl}, {string.Join(", ", Enumerable.Range(2, vs.Count - 1).Select(i => $"{lbl}__v{i}"))}");
-
-                // Build flat list with folder labels assigned.
-                var configPatches = byLabel
-                    .SelectMany(kv => kv.Value.Select((v, i) => (ExpId: v.ExpId, VarId: v.VarId, Env: v.Envelope, FolderLabel: i == 0 ? kv.Key : $"{kv.Key}__v{i + 1}")))
-                    .ToArray();
-
-                foreach (var (expId, varId, env, folderLabel) in configPatches)
+                foreach (var (expId, varId, rawBytes, env, folderLabel) in configPatches)
                 {
                     var entries = env.EntryNames.ToArray();
                     Console.WriteLine($"  Patch {folderLabel}: entries=[{string.Join(",", entries)}]");
@@ -666,7 +706,7 @@ internal static class Program
                         var subDir = Path.Combine(outputDir, folderLabel);
                         Directory.CreateDirectory(subDir);
                         var subPath = Path.Combine(subDir, "events.json");
-                        new EventDumper().WriteJson(subPath, patchedConfig);
+                        Engine.DumpEvents(patchedConfig, subPath, EventFilters.All);
                         var size = new FileInfo(subPath).Length / 1024;
                         Console.WriteLine($"     -> {folderLabel}/events.json OK ({size} KB)");
                     }
@@ -691,7 +731,7 @@ internal static class Program
                         // Also probe whether ContractResolver actually marks Decoration as Ignored
                         try
                         {
-                            var resolver = new merge_mansion_dumper.Dumper.Base.IgnoreDataMemberContractResolver();
+                            var resolver = new MergeMansionWikiTools.Dumper.Core.IgnoreDataMemberContractResolver();
                             var contract = resolver.ResolveContract(typeof(GameLogic.Player.Rewards.RewardDecoration))
                                 as Newtonsoft.Json.Serialization.JsonObjectContract;
                             if (contract != null)
@@ -728,6 +768,108 @@ internal static class Program
     // Finds where the active experiment patch is stored on the device. The standard pull only
     // reads cache\SharedGameConfig, \SharedGameConfigPatches, \Localizations (non-recursive).
     // If a Testing-phase tester patch lives elsewhere (subfolder, session/player blob), it shows here.
+    /// <summary>
+    /// Lists a directory anywhere on the phone (not just the game package) over MTP, newest first.
+    /// Used to find screenshot folders — the existing --probe-phone-tree is hard-wired to
+    /// Android/data/&lt;package&gt;.
+    /// </summary>
+    private static int ListPhoneDir(string relPath, string nameFilter, int limit)
+    {
+        var devices = MediaDevices.MediaDevice.GetDevices().ToList();
+        if (devices.Count == 0) { Console.WriteLine("No MTP devices."); return 2; }
+        foreach (var device in devices)
+        {
+            Console.WriteLine($"=== {device.FriendlyName} ===");
+            try { device.Connect(); } catch (Exception ex) { Console.WriteLine($"  connect failed: {ex.Message}"); continue; }
+            try
+            {
+                foreach (var root in device.GetDirectories("\\"))
+                {
+                    var path = string.IsNullOrEmpty(relPath) ? root : root + "\\" + relPath.Trim('\\');
+                    if (!SafeDirExists(device, path))
+                    {
+                        if (string.IsNullOrEmpty(relPath))
+                            Console.WriteLine($"  [root] {root}");
+                        continue;
+                    }
+                    Console.WriteLine($"  {path}");
+                    try
+                    {
+                        foreach (var sub in device.GetDirectories(path))
+                            Console.WriteLine($"    [dir] {Path.GetFileName(sub)}");
+                    }
+                    catch { }
+
+                    List<string> files;
+                    try { files = device.GetFiles(path).ToList(); }
+                    catch (Exception ex) { Console.WriteLine($"    list files failed: {ex.Message}"); continue; }
+
+                    // Names only: GetFileInfo is a per-file MTP round trip and takes minutes over
+                    // a few thousand files. Screenshot names already carry the timestamp.
+                    var names = files.Select(Path.GetFileName)
+                        .Where(n => MatchesAny(n, nameFilter))
+                        .OrderBy(n => n, StringComparer.Ordinal)
+                        .ToList();
+                    Console.WriteLine($"    files: {names.Count}"
+                        + (string.IsNullOrEmpty(nameFilter) ? "" : $" matching '{nameFilter}'"));
+                    foreach (var n in names.Take(limit)) Console.WriteLine($"      {n}");
+                }
+            }
+            finally { try { device.Disconnect(); } catch { } }
+        }
+        return 0;
+    }
+
+    /// <summary>Copies files from a phone directory whose name matches a filter, optionally only those newer than a date.</summary>
+    private static int PullPhoneDir(string relPath, string localOut, string nameFilter, string sinceDate)
+    {
+        DateTime? since = DateTime.TryParse(sinceDate, out var sd) ? sd : null;
+        Directory.CreateDirectory(localOut);
+        var devices = MediaDevices.MediaDevice.GetDevices().ToList();
+        if (devices.Count == 0) { Console.WriteLine("No MTP devices."); return 2; }
+        int copied = 0, skipped = 0;
+        foreach (var device in devices)
+        {
+            try { device.Connect(); } catch { continue; }
+            try
+            {
+                foreach (var root in device.GetDirectories("\\"))
+                {
+                    var path = root + "\\" + relPath.Trim('\\');
+                    if (!SafeDirExists(device, path)) continue;
+                    Console.WriteLine($"pulling from {path}");
+                    foreach (var f in device.GetFiles(path))
+                    {
+                        var name = Path.GetFileName(f);
+                        if (!MatchesAny(name, nameFilter)) { skipped++; continue; }
+                        var dest = Path.Combine(localOut, name);
+                        if (File.Exists(dest)) { skipped++; continue; }
+                        try
+                        {
+                            using var fs = File.Create(dest);
+                            device.DownloadFile(f, fs);
+                            copied++;
+                            if (copied % 25 == 0) Console.WriteLine($"  … {copied} copied");
+                        }
+                        catch (Exception ex) { Console.WriteLine($"  {name}: {ex.Message}"); }
+                    }
+                }
+            }
+            finally { try { device.Disconnect(); } catch { } }
+        }
+        Console.WriteLine($"copied {copied}, skipped {skipped} → {localOut}");
+        return 0;
+    }
+
+    /// <summary>Comma-separated substring filter; empty matches everything.</summary>
+    private static bool MatchesAny(string name, string filter)
+    {
+        if (string.IsNullOrEmpty(filter)) return true;
+        foreach (var part in filter.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+            if (name.Contains(part, StringComparison.OrdinalIgnoreCase)) return true;
+        return false;
+    }
+
     private static int ProbePhoneTree(int maxDepth)
     {
         string[] knownPackages = { "com.everywear.game5" };
@@ -886,6 +1028,410 @@ internal static class Program
         }
     }
 
+    // ── Shared A/B patch loading (single source of truth for every *-patched sub-command) ──
+    /// <summary>
+    /// Load every distinct-content specialization patch from a patch snapshot file or a directory of
+    /// snapshots, and assign each one the output folder label the dump sub-commands use.
+    ///
+    /// Dedup key = (label, SHA-256 of the raw envelope bytes): byte-identical copies of the same label
+    /// across snapshots collapse into one, but the SAME label carrying DIFFERENT content survives as a
+    /// separate version. (The old "richer payload wins" heuristic silently dropped the smaller version
+    /// even when it was the only one changing a specific event — 2026-06-26 fix, mirrors DumperService.)
+    ///
+    /// Folder naming per label: primary (largest raw size) keeps the bare label, extras become
+    /// label__v2, label__v3, … Ordering inside a label is descending RawSize; LINQ's OrderByDescending
+    /// is stable, so equal-size versions keep their discovery order, i.e. the patch files' order
+    /// (ascending last-write time, and ascending file name for equal timestamps).
+    /// </summary>
+    private static List<(Metaplay.Core.Player.PlayerExperimentId ExpId, Metaplay.Core.Player.ExperimentVariantId VarId, byte[] RawBytes, Metaplay.Core.Config.GameConfigPatchEnvelope Envelope, string Label)> LoadDistinctPatches(string patchDirOrFile)
+    {
+        var result = new List<(Metaplay.Core.Player.PlayerExperimentId ExpId, Metaplay.Core.Player.ExperimentVariantId VarId, byte[] RawBytes, Metaplay.Core.Config.GameConfigPatchEnvelope Envelope, string Label)>();
+        if (string.IsNullOrEmpty(patchDirOrFile)) return result;
+
+        // Support both file mode (single snapshot) and directory mode (union across all snapshots).
+        var patchFiles = new List<string>();
+        if (Directory.Exists(patchDirOrFile))
+            patchFiles.AddRange(Directory.GetFiles(patchDirOrFile).OrderBy(File.GetLastWriteTimeUtc));
+        else if (File.Exists(patchDirOrFile))
+            patchFiles.Add(patchDirOrFile);
+
+        Console.WriteLine($"        Loading {patchFiles.Count} patch file(s)...");
+        var distinctPatches = new Dictionary<string, (Metaplay.Core.Player.PlayerExperimentId ExpId, Metaplay.Core.Player.ExperimentVariantId VarId, byte[] RawBytes, Metaplay.Core.Config.GameConfigPatchEnvelope Envelope, int RawSize)>(StringComparer.Ordinal);
+        foreach (var pf in patchFiles)
+        {
+            var specPatches = Metaplay.Core.Config.GameConfigSpecializationPatches.FromBytes(File.ReadAllBytes(pf));
+            foreach (var (expId, vs) in specPatches.Patches)
+                foreach (var (varId, bytes) in vs)
+                {
+                    var label = $"{expId}_{varId}";
+                    var actualBytes = bytes ?? Array.Empty<byte>();
+                    var hashHex = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(actualBytes));
+                    var dedupKey = $"{label}\0{hashHex}";
+                    if (distinctPatches.ContainsKey(dedupKey)) continue;
+                    distinctPatches[dedupKey] = (expId, varId, actualBytes, Metaplay.Core.Config.GameConfigPatchEnvelope.Deserialize(actualBytes), actualBytes.Length);
+                    Console.WriteLine($"        [distinct] {label}: {actualBytes.Length} B [{hashHex[..8]}] from {Path.GetFileName(pf)}");
+                }
+        }
+
+        // Group per label, then assign folder names.
+        var byLabel = distinctPatches.Values
+            .GroupBy(v => $"{v.ExpId}_{v.VarId}", StringComparer.Ordinal)
+            .ToDictionary(g => g.Key, g => g.OrderByDescending(v => v.RawSize).ToList(), StringComparer.Ordinal);
+
+        Console.WriteLine($"        Found {byLabel.Values.Sum(v => v.Count)} distinct patch version(s), {byLabel.Count} unique label(s) across {patchFiles.Count} file(s)");
+        foreach (var (lbl, vs) in byLabel.Where(kv => kv.Value.Count > 1))
+            Console.WriteLine($"        [multi-version] {lbl}: {vs.Count} versions — folders: {lbl}, {string.Join(", ", Enumerable.Range(2, vs.Count - 1).Select(i => $"{lbl}__v{i}"))}");
+
+        foreach (var kv in byLabel)
+            for (int i = 0; i < kv.Value.Count; i++)
+            {
+                var v = kv.Value[i];
+                result.Add((v.ExpId, v.VarId, v.RawBytes, v.Envelope, i == 0 ? kv.Key : $"{kv.Key}__v{i + 1}"));
+            }
+        return result;
+    }
+
+    // ── --compare-engines: run Legacy and Native over identical inputs and byte-compare the output ──
+    // Two locations live outside the repo on this machine. _DATA is normally found relative to the
+    // harness binary, but the harness is built into %TEMP% during development, so the relative guess
+    // is unreliable: MMWT_DATA overrides it and this constant is the last-resort fallback.
+    private const string FallbackDataDir = @"D:\_BACKUP_2.0\Code Projects\MergeMansionWikiTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\_DATA";
+    private const string ApkRoot = @"D:\_BACKUP_2.0\Adobe Photoshop - Savy\Merge Mansion\APKs";
+
+    /// <summary>
+    /// Dump the same config with both engines and compare the produced files byte for byte.
+    /// Exit code is 0 only when every row is IDENTICAL.
+    /// </summary>
+    private static int CompareEngines(string outDir, string selector, bool filterMatrix, string onlyPrefix = null)
+    {
+        Console.WriteLine("=== DumpHarness --compare-engines ===");
+        var dataDir = ResolveDataDir();
+        Console.WriteLine($"Data:     {dataDir}");
+        Console.WriteLine($"Selector: {selector}{(filterMatrix ? "  (+ EventFilters matrix)" : "")}");
+        if (onlyPrefix != null) Console.WriteLine($"Only:     files starting with '{onlyPrefix}'");
+        Console.WriteLine($"Output:   {outDir}\n");
+
+        bool Wanted(string file) => onlyPrefix == null || file.StartsWith(onlyPrefix, StringComparison.OrdinalIgnoreCase);
+
+        // A prefix that matches nothing would otherwise "succeed" with an empty table and exit 0,
+        // which reads exactly like "everything is identical". Fail loudly instead.
+        if (onlyPrefix != null && !Runs(filterMatrix).Select(r => r.File).Append("Experimental/").Any(Wanted))
+        {
+            Console.Error.WriteLine($"ERROR: --only matched no files (prefix '{onlyPrefix}')");
+            return 2;
+        }
+
+        // 1. Resolve inputs. "live" = every archive in _DATA/C (with _DATA/P patches and _DATA/L
+        //    language), "newest" = only the newest-CreatedAt one of those; anything else comes from
+        //    Codex/sources.json and has no patches/language.
+        var inputs = new List<(string Name, string ConfigPath, string PatchDir, string LangPath)>();
+        bool live = string.Equals(selector, "live", StringComparison.OrdinalIgnoreCase);
+        bool newest = string.Equals(selector, "newest", StringComparison.OrdinalIgnoreCase);
+        if (live || newest)
+        {
+            var cDir = Path.Combine(dataDir, "C");
+            if (!Directory.Exists(cDir)) { Console.Error.WriteLine($"No config directory at {cDir}"); return 2; }
+            var pDir = Path.Combine(dataDir, "P");
+            var lang = FirstFileOrNull(Path.Combine(dataDir, "L"));
+            var archives = Directory.GetFiles(cDir).OrderBy(f => f, StringComparer.Ordinal).ToList();
+            if (newest)
+            {
+                // Same CreatedAt source as --probe-createdat: the archive header, readable without
+                // MetaplayCore.Initialize. Unreadable archives sort last (MinValue) and are dropped.
+                var pick = archives
+                    .Select(f => (File: f, CreatedAt: TryReadArchiveCreatedAt(f)))
+                    .OrderByDescending(x => x.CreatedAt)
+                    .FirstOrDefault();
+                if (pick.File == null || pick.CreatedAt == DateTimeOffset.MinValue)
+                { Console.Error.WriteLine($"No readable config archive in {cDir}"); return 2; }
+                Console.WriteLine($"Newest archive: {Path.GetFileName(pick.File)}  CreatedAt={pick.CreatedAt:yyyy-MM-dd HH:mm:ss}Z\n");
+                archives = new List<string> { pick.File };
+            }
+            foreach (var c in archives)
+                inputs.Add((Path.GetFileName(c), c, Directory.Exists(pDir) ? pDir : null, lang));
+        }
+        else
+        {
+            foreach (var (ver, cfg) in ReadSourcesJson(dataDir, selector))
+                inputs.Add((ver, cfg, null, null));
+        }
+        if (inputs.Count == 0) { Console.Error.WriteLine($"Selector '{selector}' matched no input"); return 2; }
+
+        try { MetaplayCore.Initialize(); }
+        catch (Exception ex) { Console.Error.WriteLine($"FATAL: {DescribeError(ex)}"); return 1; }
+
+        // 2. Run both engines over every input. The engines are created here on purpose: --compare-engines
+        //    always runs BOTH regardless of the global --engine flag.
+        IDumpEngine legacy = new LegacyDumpEngineHarness(), native = new NativeDumpEngine();
+        var rows = new List<(string Input, string File, string Result)>();
+        foreach (var inp in inputs)
+        {
+            Console.WriteLine($"--- {inp.Name} ---");
+            if (inp.ConfigPath == null) { rows.Add((inp.Name, "-", "SKIP (no config)")); Console.WriteLine("    SKIP (no config)"); continue; }
+
+            var lDir = Path.Combine(outDir, inp.Name, "legacy");
+            var nDir = Path.Combine(outDir, inp.Name, "native");
+            ConfigArchive archive;
+            SharedGameConfig master;
+            try
+            {
+                if (inp.LangPath != null)
+                    MetaplaySDK.ActiveLanguage = LocalizationLanguage.ImportBinary(ContentHash.ParseString(Path.GetFileName(inp.LangPath)), File.ReadAllBytes(inp.LangPath));
+                archive = ConfigArchive.FromBytes(File.ReadAllBytes(inp.ConfigPath));
+                master = (SharedGameConfig)GameConfigFactory.Instance.ImportSharedGameConfig(PatchedConfigArchive.WithNoPatches(archive));
+                ClientGlobal.SharedGameConfig = master;
+            }
+            catch (Exception ex)
+            {
+                rows.Add((inp.Name, "(import)", $"ERROR (input: {DescribeError(ex)})"));
+                Console.WriteLine($"    (import) ERROR (input: {DescribeError(ex)})");
+                continue;
+            }
+
+            // 2a. The plain one-file-per-call dumps (+ the optional EventFilters matrix).
+            foreach (var (file, run) in Runs(filterMatrix))
+            {
+                if (!Wanted(file)) continue;
+                var res = CompareOne(() => run(legacy, master, lDir), () => run(native, master, nDir),
+                                     Path.Combine(lDir, file), Path.Combine(nDir, file));
+                rows.Add((inp.Name, file, res));
+                Console.WriteLine($"    {file,-28} {res}");
+            }
+
+            // 2b. Experimental: one call per engine writes N section files, so it needs its own loop.
+            if (Wanted("Experimental/"))
+            {
+                var expRows = CompareExperimental(legacy, native, master, Path.Combine(lDir, "Experimental"), Path.Combine(nDir, "Experimental"));
+                foreach (var (file, res) in expRows)
+                {
+                    rows.Add((inp.Name, file, res));
+                    Console.WriteLine($"    {file,-28} {res}");
+                }
+            }
+
+            // 2c. A/B patches: the three sections a patch can realistically change.
+            var patchFiles = new[] { "chain_item_odds.json", "areas.json", "events.json" }.Where(Wanted).ToArray();
+            if (patchFiles.Length > 0 && inp.PatchDir != null && Directory.Exists(inp.PatchDir))
+            {
+                foreach (var p in LoadDistinctPatches(inp.PatchDir))
+                {
+                    SharedGameConfig patched;
+                    try
+                    {
+                        var pa = new PatchedConfigArchive(archive, new[] { p.Envelope });
+                        patched = SharedGameConfig.ImportPatchedFrom(master, pa, p.Envelope.EntryNames.ToArray());
+                    }
+                    catch (Exception ex)
+                    {
+                        rows.Add(($"{inp.Name}/{p.Label}", "(patch import)", $"ERROR (input: {DescribeError(ex)})"));
+                        Console.WriteLine($"    {p.Label} (patch import) ERROR (input: {DescribeError(ex)})");
+                        continue;
+                    }
+
+                    // ClientGlobal deliberately stays on MASTER here. DumperService's phase B dumps
+                    // every patch from a Parallel.Invoke while the global keeps pointing at the
+                    // master config (one shared static cannot be per-patch anyway), passing the
+                    // patched config explicitly instead. Pointing it at `patched` would verify a
+                    // state the app never reaches — and it is exactly the state that hides whether
+                    // an engine secretly reads the global (the API's PredefinedSequenceProducer /
+                    // ControlledRandomProducer TimeSkipPriceGems do).
+                    foreach (var file in patchFiles)
+                    {
+                        var lp = Path.Combine(lDir, p.Label, file);
+                        var np = Path.Combine(nDir, p.Label, file);
+                        // baseline stays null so the file is ALWAYS written and can be byte-compared.
+                        var res = CompareOne(() => RunPatch(legacy, patched, lp, file), () => RunPatch(native, patched, np, file), lp, np);
+                        rows.Add(($"{inp.Name}/{p.Label}", file, res));
+                        Console.WriteLine($"    {p.Label}/{file,-28} {res}");
+                    }
+                }
+            }
+        }
+
+        // 3. Report.
+        Console.WriteLine("\n=== compare-engines report ===");
+        foreach (var r in rows) Console.WriteLine($"{r.Input,-40} {r.File,-28} {r.Result}");
+        int bad = rows.Count(r => r.Result != "IDENTICAL");
+        Console.WriteLine($"\n{rows.Count - bad}/{rows.Count} IDENTICAL");
+        return bad == 0 ? 0 : 1;
+    }
+
+    /// <summary>_DATA location: MMWT_DATA wins, then the path relative to the binary, then the fallback.</summary>
+    private static string ResolveDataDir()
+    {
+        var env = Environment.GetEnvironmentVariable("MMWT_DATA");
+        if (!string.IsNullOrEmpty(env)) return env;
+        var guess = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "bin", "Debug", "net9.0-windows10.0.19041.0", "win-x64", "_DATA"));
+        return Directory.Exists(Path.Combine(guess, "C")) ? guess : FallbackDataDir;
+    }
+
+    /// <summary>
+    /// Archive header CreatedAt, read the same way --probe-createdat does (no MetaplayCore.Initialize
+    /// needed). Returns <see cref="DateTimeOffset.MinValue"/> for anything that fails to parse, so an
+    /// unreadable archive can never win a "newest" selection.
+    /// </summary>
+    private static DateTimeOffset TryReadArchiveCreatedAt(string path)
+    {
+        try
+        {
+            var a = ConfigArchive.FromBytes(File.ReadAllBytes(path));
+            return DateTimeOffset.FromUnixTimeMilliseconds(a.CreatedAt.MillisecondsSinceEpoch);
+        }
+        catch { return DateTimeOffset.MinValue; }
+    }
+
+    private static string FirstFileOrNull(string dir)
+        => Directory.Exists(dir) ? Directory.GetFiles(dir).OrderBy(f => f, StringComparer.Ordinal).FirstOrDefault() : null;
+
+    /// <summary>
+    /// Historical inputs from Codex/sources.json: versions[ver].configArchives holds absolute archive
+    /// paths, and embeddedConfig versions keep their archive as a *.mpa inside the APK folder.
+    /// ConfigPath is null when neither exists — the caller turns that into a SKIP row.
+    /// </summary>
+    private static List<(string Ver, string ConfigPath)> ReadSourcesJson(string dataDir, string selector)
+    {
+        var result = new List<(string, string)>();
+        // dataDir is <repo>\bin\Debug\<tfm>\win-x64\_DATA, so the repo root is five levels up; the
+        // current directory is tried first because it is the reliable one when running from the repo.
+        string repoRoot = null;
+        for (var d = new DirectoryInfo(Environment.CurrentDirectory); d != null && repoRoot == null; d = d.Parent)
+            if (File.Exists(Path.Combine(d.FullName, "Codex", "sources.json"))) repoRoot = d.FullName;
+        repoRoot ??= Path.GetFullPath(Path.Combine(dataDir, "..", "..", "..", "..", ".."));
+
+        var sourcesPath = Path.Combine(repoRoot, "Codex", "sources.json");
+        if (!File.Exists(sourcesPath)) { Console.Error.WriteLine($"sources.json not found at {sourcesPath}"); return result; }
+
+        var root = Newtonsoft.Json.Linq.JObject.Parse(File.ReadAllText(sourcesPath));
+        var versions = root["versions"] as Newtonsoft.Json.Linq.JObject;
+        if (versions == null) { Console.Error.WriteLine("sources.json has no 'versions' object"); return result; }
+
+        bool all = string.Equals(selector, "all", StringComparison.OrdinalIgnoreCase);
+        foreach (var prop in versions.Properties())
+        {
+            if (!all && !string.Equals(prop.Name, selector, StringComparison.OrdinalIgnoreCase)) continue;
+            var v = (Newtonsoft.Json.Linq.JObject)prop.Value;
+
+            var archives = v["configArchives"] as Newtonsoft.Json.Linq.JArray;
+            var cfg = archives?.Select(t => (string)t).FirstOrDefault(File.Exists);
+            if (cfg == null && (bool?)v["embeddedConfig"] == true)
+            {
+                // The embedded archive lives next to the APK; prefer the folder the APK itself is in.
+                var apk = (string)v["apk"];
+                var dir = !string.IsNullOrEmpty(apk) ? Path.GetDirectoryName(apk) : Path.Combine(ApkRoot, prop.Name);
+                if (Directory.Exists(dir))
+                    cfg = Directory.GetFiles(dir, "*.mpa", SearchOption.AllDirectories).OrderBy(f => f, StringComparer.Ordinal).FirstOrDefault();
+            }
+            result.Add((prop.Name, cfg));
+        }
+        if (result.Count == 0) Console.Error.WriteLine($"sources.json has no version '{selector}'");
+        return result;
+    }
+
+    /// <summary>The dump calls compared per input: the six main files, plus one per EventFilters flag.</summary>
+    private static List<(string File, Action<IDumpEngine, SharedGameConfig, string> Run)> Runs(bool filterMatrix)
+    {
+        var runs = new List<(string, Action<IDumpEngine, SharedGameConfig, string>)>
+        {
+            ("chain_item_odds.json", (e, c, d) => e.DumpChains(c, Path.Combine(d, "chain_item_odds.json"))),
+            ("areas.json",           (e, c, d) => e.DumpAreas(c, Path.Combine(d, "areas.json"))),
+            ("events.json",          (e, c, d) => e.DumpEvents(c, Path.Combine(d, "events.json"), EventFilters.All)),
+            ("card_collection.json", (e, c, d) => e.DumpCardCollection(c, Path.Combine(d, "card_collection.json"))),
+            ("dialogues.json",       (e, c, d) => e.DumpDialogues(c, Path.Combine(d, "dialogues.json"))),
+            ("Pets.json",            (e, c, d) => e.DumpPets(c, Path.Combine(d, "Pets.json"))),
+        };
+        if (filterMatrix)
+            foreach (EventFilters f in Enum.GetValues(typeof(EventFilters)))
+            {
+                // All is already covered by the plain events.json row above. None is NOT skipped:
+                // it is the "every checkbox unchecked" state the dump page can actually produce,
+                // and it is the one case where the two engines could disagree about what an empty
+                // filter set means (everything vs nothing).
+                if (f == EventFilters.All) continue;
+                var flag = f;
+                var name = $"events[{flag}].json";
+                runs.Add((name, (e, c, d) => e.DumpEvents(c, Path.Combine(d, name), flag)));
+            }
+        return runs;
+    }
+
+    /// <summary>The three sections a specialization patch can change, dumped with no baseline.</summary>
+    private static void RunPatch(IDumpEngine engine, SharedGameConfig cfg, string path, string file)
+    {
+        Directory.CreateDirectory(Path.GetDirectoryName(path));
+        switch (file)
+        {
+            case "chain_item_odds.json": engine.DumpChains(cfg, path); break;
+            case "areas.json":           engine.DumpAreas(cfg, path); break;
+            case "events.json":          engine.DumpEvents(cfg, path, EventFilters.All); break;
+            default: throw new ArgumentOutOfRangeException(nameof(file), file, "unsupported patch dump file");
+        }
+    }
+
+    /// <summary>
+    /// DumpExperimental writes a whole set of section files per call, so both engines run once and
+    /// every section file returned by either of them becomes its own row. When one engine throws, the
+    /// rows still come from the other engine's section list so the table keeps its per-section shape;
+    /// only a double failure collapses into a single Experimental/* row.
+    /// </summary>
+    private static List<(string File, string Result)> CompareExperimental(IDumpEngine legacy, IDumpEngine native, SharedGameConfig cfg, string lDir, string nDir)
+    {
+        var rows = new List<(string, string)>();
+        IReadOnlyList<(string Section, string Path)> lExp = null, nExp = null;
+        string lErr = null, nErr = null;
+        try { Directory.CreateDirectory(lDir); lExp = legacy.DumpExperimental(cfg, lDir); }
+        catch (Exception ex) { lErr = $"ERROR (legacy: {DescribeError(ex)})"; }
+        try { Directory.CreateDirectory(nDir); nExp = native.DumpExperimental(cfg, nDir); }
+        catch (Exception ex) { nErr = $"ERROR (native: {DescribeError(ex)})"; }
+
+        var names = (lExp ?? Array.Empty<(string, string)>()).Select(x => Path.GetFileName(x.Path))
+            .Union((nExp ?? Array.Empty<(string, string)>()).Select(x => Path.GetFileName(x.Path)), StringComparer.Ordinal)
+            .OrderBy(x => x, StringComparer.Ordinal)
+            .ToList();
+        if (names.Count == 0) { rows.Add(("Experimental/*", lErr ?? nErr ?? "ERROR (no sections written)")); return rows; }
+
+        foreach (var name in names)
+            rows.Add(($"Experimental/{name}", lErr ?? nErr ?? CompareFiles(Path.Combine(lDir, name), Path.Combine(nDir, name))));
+        return rows;
+    }
+
+    /// <summary>Run both engines, then byte-compare the two files they were supposed to produce.</summary>
+    private static string CompareOne(Action runLegacy, Action runNative, string lPath, string nPath)
+    {
+        try { Directory.CreateDirectory(Path.GetDirectoryName(lPath)); runLegacy(); }
+        catch (Exception ex) { return $"ERROR (legacy: {DescribeError(ex)})"; }
+        try { Directory.CreateDirectory(Path.GetDirectoryName(nPath)); runNative(); }
+        catch (Exception ex) { return $"ERROR (native: {DescribeError(ex)})"; }
+        return CompareFiles(lPath, nPath);
+    }
+
+    /// <summary>Raw byte comparison (a BOM difference counts); on mismatch, locate the first differing line.</summary>
+    private static string CompareFiles(string lPath, string nPath)
+    {
+        if (!File.Exists(lPath)) return "ERROR (legacy: file not written)";
+        if (!File.Exists(nPath)) return "ERROR (native: file not written)";
+        var lb = File.ReadAllBytes(lPath);
+        var nb = File.ReadAllBytes(nPath);
+        if (lb.AsSpan().SequenceEqual(nb)) return "IDENTICAL";
+
+        // Decode without stripping the BOM so a BOM-only difference still shows up on line 1.
+        var ll = System.Text.Encoding.UTF8.GetString(lb).Split('\n');
+        var nl = System.Text.Encoding.UTF8.GetString(nb).Split('\n');
+        for (int i = 0; i < Math.Min(ll.Length, nl.Length); i++)
+            if (!string.Equals(ll[i], nl[i], StringComparison.Ordinal))
+                return $"DIFF line {i + 1} | legacy: {Clip(ll[i])} | native: {Clip(nl[i])}";
+        return $"DIFF length (legacy {ll.Length} lines, native {nl.Length} lines)";
+    }
+
+    private static string Clip(string s)
+    {
+        s = (s ?? "").TrimEnd('\r');
+        return s.Length <= 120 ? s : s.Substring(0, 120);
+    }
+
+    /// <summary>Exception type + first line of the message — enough to identify the failure in a table row.</summary>
+    private static string DescribeError(Exception ex)
+        => $"{ex.GetType().Name}: {(ex.Message ?? "").Split('\n')[0].TrimEnd('\r').Trim()}";
+
     // ── --dump-full-patched: FULL per-patch dump (all sections), base + per-patch subfolders ──
     private static int DumpFullPatched(string configPath, string patchPath, string languagePath, string outputDir)
     {
@@ -898,12 +1444,12 @@ internal static class Program
             Directory.CreateDirectory(dir);
             ClientGlobal.SharedGameConfig = cfg;
             void Try(string name, Action a) { try { a(); } catch (Exception ex) { Console.WriteLine($"       [{Path.GetFileName(dir)}] {name} FAILED: {ex.GetType().Name}: {ex.Message}"); } }
-            Try("chain_item_odds.json", () => new MergeChainDumper(dropsAsPercent: true).WriteJson(Path.Combine(dir, "chain_item_odds.json"), cfg));
-            Try("areas.json",           () => new AreaDumper().WriteJson(Path.Combine(dir, "areas.json"), cfg));
-            Try("events.json",          () => new EventDumper().WriteJson(Path.Combine(dir, "events.json"), cfg));
-            Try("card_collection.json", () => new CardCollectionDumper().WriteJson(Path.Combine(dir, "card_collection.json"), cfg));
-            Try("dialogues.json",       () => new DialogueDumper().WriteJson(Path.Combine(dir, "dialogues.json"), cfg));
-            Try("Pets.json",            () => ExperimentalDumper.WritePetsJson(Path.Combine(dir, "Pets.json"), cfg));
+            Try("chain_item_odds.json", () => Engine.DumpChains(cfg, Path.Combine(dir, "chain_item_odds.json")));
+            Try("areas.json",           () => Engine.DumpAreas(cfg, Path.Combine(dir, "areas.json")));
+            Try("events.json",          () => Engine.DumpEvents(cfg, Path.Combine(dir, "events.json"), EventFilters.All));
+            Try("card_collection.json", () => Engine.DumpCardCollection(cfg, Path.Combine(dir, "card_collection.json")));
+            Try("dialogues.json",       () => Engine.DumpDialogues(cfg, Path.Combine(dir, "dialogues.json")));
+            Try("Pets.json",            () => Engine.DumpPets(cfg, Path.Combine(dir, "Pets.json")));
         }
 
         try
@@ -922,31 +1468,10 @@ internal static class Program
 
             if (!string.IsNullOrEmpty(patchPath))
             {
-                var patchFiles = new List<string>();
-                if (Directory.Exists(patchPath)) patchFiles.AddRange(Directory.GetFiles(patchPath).OrderBy(File.GetLastWriteTimeUtc));
-                else if (File.Exists(patchPath)) patchFiles.Add(patchPath);
+                var configPatches = LoadDistinctPatches(patchPath);
+                Console.WriteLine($"[patches] {configPatches.Count} patch version(s)");
 
-                var distinctPatches = new Dictionary<string, (Metaplay.Core.Player.PlayerExperimentId ExpId, Metaplay.Core.Player.ExperimentVariantId VarId, Metaplay.Core.Config.GameConfigPatchEnvelope Envelope, int RawSize)>(StringComparer.Ordinal);
-                foreach (var pf in patchFiles)
-                {
-                    var specPatches = Metaplay.Core.Config.GameConfigSpecializationPatches.FromBytes(File.ReadAllBytes(pf));
-                    foreach (var (expId, vs) in specPatches.Patches)
-                        foreach (var (varId, bytes) in vs)
-                        {
-                            var label = $"{expId}_{varId}";
-                            var actualBytes = bytes ?? Array.Empty<byte>();
-                            var hashHex = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(actualBytes));
-                            var dedupKey = $"{label}\0{hashHex}";
-                            if (!distinctPatches.ContainsKey(dedupKey))
-                                distinctPatches[dedupKey] = (expId, varId, Metaplay.Core.Config.GameConfigPatchEnvelope.Deserialize(actualBytes), actualBytes.Length);
-                        }
-                }
-                var byLabel = distinctPatches.Values.GroupBy(v => $"{v.ExpId}_{v.VarId}", StringComparer.Ordinal)
-                    .ToDictionary(g => g.Key, g => g.OrderByDescending(v => v.RawSize).ToList(), StringComparer.Ordinal);
-                var configPatches = byLabel.SelectMany(kv => kv.Value.Select((v, i) => (v.ExpId, v.VarId, v.Envelope, FolderLabel: i == 0 ? kv.Key : $"{kv.Key}__v{i + 1}"))).ToArray();
-                Console.WriteLine($"[patches] {configPatches.Length} patch version(s) from {patchFiles.Count} file(s)");
-
-                foreach (var (expId, varId, env, folderLabel) in configPatches)
+                foreach (var (expId, varId, rawBytes, env, folderLabel) in configPatches)
                 {
                     var entries = env.EntryNames.ToArray();
                     Console.WriteLine($"  Patch {folderLabel}: entries=[{string.Join(",", entries)}]");
@@ -982,35 +1507,14 @@ internal static class Program
             var archive = ConfigArchive.FromBytes(File.ReadAllBytes(configPath));
             var masterConfig = (SharedGameConfig)GameConfigFactory.Instance.ImportSharedGameConfig(PatchedConfigArchive.WithNoPatches(archive));
             ClientGlobal.SharedGameConfig = masterConfig;
-            new AreaDumper().WriteJson(Path.Combine(outputDir, "areas.json"), masterConfig);
+            Engine.DumpAreas(masterConfig, Path.Combine(outputDir, "areas.json"));
             Console.WriteLine("        -> areas.json (base)");
 
             if (!string.IsNullOrEmpty(patchPath))
             {
-                var patchFiles = new List<string>();
-                if (Directory.Exists(patchPath)) patchFiles.AddRange(Directory.GetFiles(patchPath).OrderBy(File.GetLastWriteTimeUtc));
-                else if (File.Exists(patchPath)) patchFiles.Add(patchPath);
+                var configPatches = LoadDistinctPatches(patchPath);
 
-                var distinctPatches = new Dictionary<string, (Metaplay.Core.Player.PlayerExperimentId ExpId, Metaplay.Core.Player.ExperimentVariantId VarId, byte[] RawBytes, Metaplay.Core.Config.GameConfigPatchEnvelope Envelope, int RawSize)>(StringComparer.Ordinal);
-                foreach (var pf in patchFiles)
-                {
-                    var specPatches = Metaplay.Core.Config.GameConfigSpecializationPatches.FromBytes(File.ReadAllBytes(pf));
-                    foreach (var (expId, vs) in specPatches.Patches)
-                        foreach (var (varId, bytes) in vs)
-                        {
-                            var label = $"{expId}_{varId}";
-                            var actualBytes = bytes ?? Array.Empty<byte>();
-                            var hashHex = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(actualBytes));
-                            var dedupKey = $"{label}\0{hashHex}";
-                            if (!distinctPatches.ContainsKey(dedupKey))
-                                distinctPatches[dedupKey] = (expId, varId, actualBytes, Metaplay.Core.Config.GameConfigPatchEnvelope.Deserialize(actualBytes), actualBytes.Length);
-                        }
-                }
-                var byLabel = distinctPatches.Values.GroupBy(v => $"{v.ExpId}_{v.VarId}", StringComparer.Ordinal)
-                    .ToDictionary(g => g.Key, g => g.OrderByDescending(v => v.RawSize).ToList(), StringComparer.Ordinal);
-                var configPatches = byLabel.SelectMany(kv => kv.Value.Select((v, i) => (v.ExpId, v.VarId, v.Envelope, FolderLabel: i == 0 ? kv.Key : $"{kv.Key}__v{i + 1}"))).ToArray();
-
-                foreach (var (expId, varId, env, folderLabel) in configPatches)
+                foreach (var (expId, varId, rawBytes, env, folderLabel) in configPatches)
                 {
                     var entries = env.EntryNames.ToArray();
                     bool touchesAreas = entries.Any(e => e == "Areas" || e == "HotspotDefinitions" || e == "Items" || e == "MergeChains");
@@ -1022,7 +1526,7 @@ internal static class Program
                         ClientGlobal.SharedGameConfig = patchedConfig;
                         var subDir = Path.Combine(outputDir, folderLabel);
                         Directory.CreateDirectory(subDir);
-                        new AreaDumper().WriteJson(Path.Combine(subDir, "areas.json"), patchedConfig);
+                        Engine.DumpAreas(patchedConfig, Path.Combine(subDir, "areas.json"));
                         Console.WriteLine($"     -> {folderLabel}/areas.json OK");
                     }
                     catch (Exception ex) { Console.WriteLine($"     !! {folderLabel} FAILED: {ex.GetType().Name}: {ex.Message}"); }
@@ -1069,50 +1573,15 @@ internal static class Program
 
             Console.WriteLine("[4] Dumping base chain_item_odds.json...");
             var basePath = Path.Combine(outputDir, "chain_item_odds.json");
-            new MergeChainDumper(dropsAsPercent: true).WriteJson(basePath, masterConfig);
+            Engine.DumpChains(masterConfig, basePath);
             Console.WriteLine($"        -> chain_item_odds.json ({new FileInfo(basePath).Length / 1024} KB)");
 
             if (!string.IsNullOrEmpty(patchPath))
             {
-                var patchFiles = new List<string>();
-                if (Directory.Exists(patchPath))
-                    patchFiles.AddRange(Directory.GetFiles(patchPath).OrderBy(File.GetLastWriteTimeUtc));
-                else if (File.Exists(patchPath))
-                    patchFiles.Add(patchPath);
+                Console.WriteLine("[5] Loading patches...");
+                var configPatches = LoadDistinctPatches(patchPath);
 
-                Console.WriteLine($"[5] Loading {patchFiles.Count} patch file(s)...");
-                // Distinct-content dedup (mirrors DumperService): keep every distinct version of each label.
-                var distinctPatches = new Dictionary<string, (Metaplay.Core.Player.PlayerExperimentId ExpId, Metaplay.Core.Player.ExperimentVariantId VarId, byte[] RawBytes, Metaplay.Core.Config.GameConfigPatchEnvelope Envelope, int RawSize)>(StringComparer.Ordinal);
-                foreach (var pf in patchFiles)
-                {
-                    var specPatches = Metaplay.Core.Config.GameConfigSpecializationPatches.FromBytes(File.ReadAllBytes(pf));
-                    foreach (var (expId, vs) in specPatches.Patches)
-                        foreach (var (varId, bytes) in vs)
-                        {
-                            var label = $"{expId}_{varId}";
-                            var actualBytes = bytes ?? Array.Empty<byte>();
-                            var hashHex = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(actualBytes));
-                            var dedupKey = $"{label}\0{hashHex}";
-                            if (!distinctPatches.ContainsKey(dedupKey))
-                            {
-                                distinctPatches[dedupKey] = (expId, varId, actualBytes, Metaplay.Core.Config.GameConfigPatchEnvelope.Deserialize(actualBytes), actualBytes.Length);
-                                Console.WriteLine($"        [distinct] {label}: {actualBytes.Length} B [{hashHex[..8]}] from {Path.GetFileName(pf)}");
-                            }
-                        }
-                }
-
-                var byLabel = distinctPatches.Values
-                    .GroupBy(v => $"{v.ExpId}_{v.VarId}", StringComparer.Ordinal)
-                    .ToDictionary(g => g.Key, g => g.OrderByDescending(v => v.RawSize).ToList(), StringComparer.Ordinal);
-
-                int totalDistinct = byLabel.Values.Sum(v => v.Count);
-                Console.WriteLine($"        Found {totalDistinct} distinct patch version(s), {byLabel.Count} unique label(s) across {patchFiles.Count} file(s)");
-
-                var configPatches = byLabel
-                    .SelectMany(kv => kv.Value.Select((v, i) => (ExpId: v.ExpId, VarId: v.VarId, Env: v.Envelope, FolderLabel: i == 0 ? kv.Key : $"{kv.Key}__v{i + 1}")))
-                    .ToArray();
-
-                foreach (var (expId, varId, env, folderLabel) in configPatches)
+                foreach (var (expId, varId, rawBytes, env, folderLabel) in configPatches)
                 {
                     var entries = env.EntryNames.ToArray();
                     // Only patches touching Items/MergeChains can change chain_item_odds.json.
@@ -1127,7 +1596,7 @@ internal static class Program
                         var subDir = Path.Combine(outputDir, folderLabel);
                         Directory.CreateDirectory(subDir);
                         var subPath = Path.Combine(subDir, "chain_item_odds.json");
-                        new MergeChainDumper(dropsAsPercent: true).WriteJson(subPath, patchedConfig);
+                        Engine.DumpChains(patchedConfig, subPath);
                         var size = new FileInfo(subPath).Length / 1024;
                         Console.WriteLine($"     -> {folderLabel}/chain_item_odds.json OK ({size} KB)");
                     }
@@ -2648,6 +3117,17 @@ internal static class Program
                 Console.WriteLine($"--- {id}");
                 Console.WriteLine($"    DescriptionLocalizationId: '{def.DescriptionLocalizationId}'");
                 Console.WriteLine($"    MultistepGroupId:          '{def.MultistepGroupId}'");
+                // MetaRef state per member: whether the wrapper itself is null, whether its key is
+                // null / renders empty, and whether it resolves. areas.json writes some of these as
+                // JSON null and omits others, and only these three flags tell them apart.
+                foreach (var (memberName, _, get) in MergeMansionWikiTools.Dumper.Core.MetaObjectWriter.Members(def))
+                {
+                    object value;
+                    try { value = get(); } catch (Exception ex) { Console.WriteLine($"    ref {memberName}: THREW {ex.GetType().Name}"); continue; }
+                    if (value is not Metaplay.Core.IMetaRef metaRef) continue;
+                    var key = metaRef.KeyObject;
+                    Console.WriteLine($"    ref {memberName}: keyNull={key is null} keyText='{key?.ToString() ?? "<null>"}' resolved={metaRef.IsResolved}");
+                }
                 string prefixed = $"HotspotDescription_{id}";
                 Console.WriteLine($"    key '{prefixed}': {(LocMan.HasString(prefixed) ? "'" + LocMan.Get(prefixed) + "'" : "MISSING")}");
                 Console.WriteLine($"    key '{id}' (bare): {(LocMan.HasString(id) ? "'" + LocMan.Get(id) + "'" : "MISSING")}");
@@ -2817,13 +3297,555 @@ internal static class Program
         }
     }
 
+    /// <summary>
+    /// Resolves prefab → Spine skeleton the way the game itself does: the prefab's SkeletonGraphic
+    /// (or SkeletonAnimation) component points at a SkeletonDataAsset, which points at the skeleton
+    /// TextAsset whose NAME is what skinMappings are keyed by.
+    ///
+    /// This is the link that name-matching cannot recover: ItemPlayerLevelChest's skeleton is
+    /// called RewardChests.
+    /// </summary>
+    private static int ProbePrefabSkeleton(string bundlePath, string tpkPath, string prefabFilter)
+    {
+        Console.WriteLine("=== ProbePrefabSkeleton ===");
+        var am = new AssetsManager();
+        try
+        {
+            am.LoadClassPackage(tpkPath);
+            var bun = am.LoadBundleFile(bundlePath, unpackIfPacked: true);
+            var dirInfos = bun.file.BlockAndDirInfo.DirectoryInfos;
+
+            for (int fi = 0; fi < dirInfos.Count; fi++)
+            {
+                AssetsFileInstance? inst;
+                try { inst = am.LoadAssetsFileFromBundle(bun, fi); } catch { continue; }
+                if (inst?.file == null) continue;
+                am.LoadClassDatabaseFromPackage(inst.file.Metadata.UnityVersion);
+
+                foreach (var goInfo in inst.file.GetAssetsOfType(AssetClassID.GameObject))
+                {
+                    AssetTypeValueField go;
+                    try { go = am.GetBaseField(inst, goInfo); } catch { continue; }
+                    var goName = go["m_Name"]?.AsString ?? "";
+                    if (string.IsNullOrEmpty(goName)) continue;
+                    if (!string.IsNullOrEmpty(prefabFilter)
+                        && !goName.Contains(prefabFilter, StringComparison.OrdinalIgnoreCase)) continue;
+
+                    var comps = go["m_Component.Array"];
+                    if (comps.IsDummy) continue;
+
+                    foreach (var c in comps.Children)
+                    {
+                        // each entry is a PPtr to a Component
+                        var ptr = c["component"].IsDummy ? c : c["component"];
+                        AssetTypeValueField compBase;
+                        try
+                        {
+                            var ext = am.GetExtAsset(inst, ptr);
+                            if (ext.baseField == null) continue;
+                            compBase = ext.baseField;
+                        }
+                        catch { continue; }
+
+                        var sda = compBase["skeletonDataAsset"];
+                        if (sda.IsDummy) continue;
+
+                        try
+                        {
+                            var sdaExt = am.GetExtAsset(inst, sda);
+                            if (sdaExt.baseField == null) continue;
+                            var json = sdaExt.baseField["skeletonJSON"];
+                            var sdaName = sdaExt.baseField["m_Name"]?.AsString ?? "?";
+                            string skelName = "?";
+                            if (!json.IsDummy)
+                            {
+                                var jsonExt = am.GetExtAsset(sdaExt.file, json);
+                                skelName = jsonExt.baseField?["m_Name"]?.AsString ?? "?";
+                            }
+                            Console.WriteLine($"{goName}  →  SkeletonDataAsset '{sdaName}'  →  skeleton '{skelName}'");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"{goName}: skeletonDataAsset unreadable ({ex.GetType().Name})");
+                        }
+                    }
+                }
+            }
+            return 0;
+        }
+        catch (Exception ex) { Console.WriteLine($"FAILED {ex.GetType().Name}: {ex.Message}"); return 1; }
+        finally { try { am.UnloadAll(); } catch { } }
+    }
+
+    /// <summary>
+    /// For each bundle: the prefabs it ships (from the AssetBundle m_Container paths) and the
+    /// Spine skeleton TextAssets inside it.
+    ///
+    /// Why: poolTagMapping resolves a PoolTag to a PREFAB name, while skinMappings are keyed by
+    /// the SKELETON name, and for 37 pool tags those differ (PlayerLevelChestItem →
+    /// ItemPlayerLevelChest, but the skeleton is RewardChests). This shows whether "prefab and
+    /// skeleton live in the same bundle" is a sound basis for aliasing the two.
+    /// </summary>
+    private static int ProbeBundleSkeletons(string bundleDir, string tpkPath, string filter, string needle = "")
+    {
+        Console.WriteLine("=== ProbeBundleSkeletons ===");
+        var files = Directory.GetFiles(bundleDir, "*.bundle")
+            .Where(f => string.IsNullOrEmpty(filter)
+                || Path.GetFileName(f).Contains(filter, StringComparison.OrdinalIgnoreCase))
+            .OrderBy(f => f).ToList();
+        Console.WriteLine($"{files.Count} bundle(s) matching '{filter}'\n");
+
+        foreach (var path in files)
+        {
+            var am = new AssetsManager();
+            try
+            {
+                am.LoadClassPackage(tpkPath);
+                var bun = am.LoadBundleFile(path, unpackIfPacked: true);
+                var containers = new List<string>();
+                var gameObjects = new List<string>();
+                var skeletons = new List<string>();
+
+                var dirInfos = bun.file.BlockAndDirInfo.DirectoryInfos;
+                for (int fi = 0; fi < dirInfos.Count; fi++)
+                {
+                    AssetsFileInstance? inst;
+                    try { inst = am.LoadAssetsFileFromBundle(bun, fi); } catch { continue; }
+                    if (inst?.file == null) continue;
+                    am.LoadClassDatabaseFromPackage(inst.file.Metadata.UnityVersion);
+
+                    // what the bundle advertises under addressable keys
+                    foreach (var abInfo in inst.file.GetAssetsOfType(AssetClassID.AssetBundle))
+                    {
+                        AssetTypeValueField ab;
+                        try { ab = am.GetBaseField(inst, abInfo); } catch { continue; }
+                        var container = ab["m_Container.Array"];
+                        if (container.IsDummy) continue;
+                        foreach (var pair in container.Children)
+                        {
+                            var cpath = pair[0].AsString ?? "";
+                            if (!string.IsNullOrEmpty(cpath)) containers.Add(cpath);
+                        }
+                    }
+
+                    // the prefab roots themselves
+                    foreach (var goInfo in inst.file.GetAssetsOfType(AssetClassID.GameObject))
+                    {
+                        AssetTypeValueField go;
+                        try { go = am.GetBaseField(inst, goInfo); } catch { continue; }
+                        var n = go["m_Name"]?.AsString;
+                        if (!string.IsNullOrEmpty(n)) gameObjects.Add(n);
+                    }
+
+                    // skeletons: Spine skeleton JSON text assets
+                    foreach (var taInfo in inst.file.GetAssetsOfType(AssetClassID.TextAsset))
+                    {
+                        AssetTypeValueField ta;
+                        try { ta = am.GetBaseField(inst, taInfo); } catch { continue; }
+                        var name = ta["m_Name"]?.AsString ?? "";
+                        var script = ta["m_Script"]?.AsString ?? "";
+                        if (script.Contains("\"skins\"") || script.Contains("\"bones\""))
+                            skeletons.Add(name);
+                    }
+                }
+                // With a needle: report only bundles that mention it, and always show what
+                // skeletons sit next to it — that is the prefab→skeleton link we are after.
+                if (!string.IsNullOrEmpty(needle))
+                {
+                    bool Match(IEnumerable<string> xs) =>
+                        xs.Any(x => x.Contains(needle, StringComparison.OrdinalIgnoreCase));
+                    if (!Match(containers) && !Match(gameObjects) && !Match(skeletons)) continue;
+                    Console.WriteLine($"{Path.GetFileName(path)}   *** contains '{needle}' ***");
+                    foreach (var c in containers.Distinct().Where(c => c.Contains(needle, StringComparison.OrdinalIgnoreCase)))
+                        Console.WriteLine($"   container   {c}");
+                    foreach (var g in gameObjects.Distinct().Where(g => g.Contains(needle, StringComparison.OrdinalIgnoreCase)))
+                        Console.WriteLine($"   gameObject  {g}");
+                    Console.WriteLine($"   skeletons in this bundle ({skeletons.Distinct().Count()}): "
+                        + string.Join(", ", skeletons.Distinct().Take(12)));
+                    Console.Out.Flush();
+                    continue;
+                }
+
+                Console.WriteLine($"{Path.GetFileName(path)}");
+                Console.WriteLine($"   containers ({containers.Distinct().Count()}): {string.Join(", ", containers.Distinct().Take(10))}");
+                Console.WriteLine($"   gameObjects ({gameObjects.Distinct().Count()}): {string.Join(", ", gameObjects.Distinct().Take(10))}");
+                Console.WriteLine($"   skeletons ({skeletons.Distinct().Count()}): {string.Join(", ", skeletons.Distinct().Take(12))}");
+                Console.Out.Flush();
+            }
+            catch (Exception ex) { Console.WriteLine($"{Path.GetFileName(path)}: FAILED {ex.GetType().Name}: {ex.Message}"); }
+            finally { try { am.UnloadAll(); } catch { } }
+        }
+        return 0;
+    }
+
+    /// <summary>
+    /// Dumps the [MetaMember] state of config entries exactly as the native dumpers observe it:
+    /// TagId, visibility, runtime type, and MetaRef resolution/key — including the private and
+    /// base-class members --dump-config-library cannot see, since it reads public properties only.
+    /// See --probe-meta-members.
+    /// </summary>
+    private static int ProbeMetaMembers(string configPath, string languagePath, string libraryName, string keyFilter)
+    {
+        Console.WriteLine($"=== ProbeMetaMembers: {libraryName} (filter '{keyFilter}') ===");
+        try
+        {
+            MetaplayCore.Initialize();
+            if (!string.IsNullOrEmpty(languagePath) && File.Exists(languagePath))
+                MetaplaySDK.ActiveLanguage = LocalizationLanguage.ImportBinary(
+                    ContentHash.ParseString(Path.GetFileName(languagePath)), File.ReadAllBytes(languagePath));
+            var archive = ConfigArchive.FromBytes(File.ReadAllBytes(configPath));
+            var cfg = (SharedGameConfig)GameConfigFactory.Instance.ImportSharedGameConfig(PatchedConfigArchive.WithNoPatches(archive));
+            ClientGlobal.SharedGameConfig = cfg;
+
+            var prop = cfg.GetType().GetProperty(libraryName);
+            if (prop == null) { Console.WriteLine($"No such library: {libraryName}"); return 1; }
+            var lib = prop.GetValue(cfg);
+            var entries = (System.Collections.IEnumerable)lib!.GetType().GetMethod("EnumerateAll")!.Invoke(lib, null)!;
+            const System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.Instance
+                | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic
+                | System.Reflection.BindingFlags.DeclaredOnly;
+
+            foreach (var kv in entries)
+            {
+                var kvt = kv.GetType();
+                var key = kvt.GetProperty("Key")?.GetValue(kv)?.ToString() ?? "?";
+                if (!string.IsNullOrEmpty(keyFilter) && !key.Contains(keyFilter, StringComparison.OrdinalIgnoreCase)) continue;
+                var val = kvt.GetProperty("Value")?.GetValue(kv);
+                if (val == null) continue;
+                Console.WriteLine();
+                Console.WriteLine($"[{key}] ({val.GetType().Name})");
+                for (var t = val.GetType(); t != null && t != typeof(object); t = t.BaseType)
+                {
+                    foreach (var m in t.GetFields(flags).Cast<System.Reflection.MemberInfo>().Concat(t.GetProperties(flags)))
+                    {
+                        var a = m.GetCustomAttributes(typeof(Metaplay.Core.Model.MetaMemberAttribute), false)
+                            .Cast<Metaplay.Core.Model.MetaMemberAttribute>().FirstOrDefault();
+                        if (a == null) continue;
+                        object? v = null;
+                        var isPublic = m is System.Reflection.FieldInfo fi0
+                            ? fi0.IsPublic
+                            : ((System.Reflection.PropertyInfo)m).GetMethod?.IsPublic == true;
+                        try { v = m is System.Reflection.FieldInfo fi ? fi.GetValue(val) : ((System.Reflection.PropertyInfo)m).GetValue(val); }
+                        catch (Exception ex) { Console.WriteLine($"   {a.TagId,3} {m.Name,-38} THROWS {ex.GetType().Name}"); continue; }
+                        var extra = v is Metaplay.Core.IMetaRef mr
+                            ? $"  ref resolved={mr.IsResolved} keyNull={mr.KeyObject == null} keyText='{mr.KeyObject?.ToString() ?? "<null>"}'"
+                            : "";
+                        Console.WriteLine($"   {a.TagId,3} {(isPublic ? "pub " : "priv")} {m.Name,-38} {(v == null ? "<C# null>" : v.GetType().Name)}{extra}");
+                    }
+                }
+            }
+            return 0;
+        }
+        catch (Exception ex) { Console.WriteLine($"FAILED: {ex.GetType().Name}: {ex.Message}"); return 1; }
+    }
+
+    /// <summary>
+    /// Prints the entries of one GameConfigLibrary — keys, and for a filtered key the whole entry
+    /// expanded one level deep. Companion to --find-config-refs: that one answers "who references
+    /// X", this one answers "what does X actually say".
+    /// </summary>
+    private static int DumpConfigLibrary(string configPath, string languagePath, string libraryName,
+        string keyFilter, string patchPath = "", string branchFilter = "")
+    {
+        Console.WriteLine($"=== DumpConfigLibrary: {libraryName} (filter '{keyFilter}') ===");
+        try
+        {
+            MetaplayCore.Initialize();
+            if (!string.IsNullOrEmpty(languagePath) && File.Exists(languagePath))
+            {
+                var langHash = ContentHash.ParseString(Path.GetFileName(languagePath));
+                MetaplaySDK.ActiveLanguage = LocalizationLanguage.ImportBinary(langHash, File.ReadAllBytes(languagePath));
+            }
+            var archive = ConfigArchive.FromBytes(File.ReadAllBytes(configPath));
+            var baseConfig = (SharedGameConfig)GameConfigFactory.Instance
+                .ImportSharedGameConfig(PatchedConfigArchive.WithNoPatches(archive));
+            var gameConfig = baseConfig;
+            ClientGlobal.SharedGameConfig = gameConfig;
+
+            if (!string.IsNullOrEmpty(patchPath))
+            {
+                var files = Directory.Exists(patchPath)
+                    ? Directory.GetFiles(patchPath).OrderBy(File.GetLastWriteTimeUtc).ToList()
+                    : new List<string> { patchPath };
+                foreach (var pf in files)
+                {
+                    var sp = Metaplay.Core.Config.GameConfigSpecializationPatches.FromBytes(File.ReadAllBytes(pf));
+                    var done = false;
+                    foreach (var (expId, vs) in sp.Patches)
+                    {
+                        foreach (var (varId, bytes) in vs)
+                        {
+                            var label = $"{expId}_{varId}";
+                            if (!label.Contains(branchFilter, StringComparison.OrdinalIgnoreCase)) continue;
+                            var env = Metaplay.Core.Config.GameConfigPatchEnvelope.Deserialize(bytes ?? Array.Empty<byte>());
+                            Console.WriteLine($"Branch: {label} (entries: {string.Join(",", env.EntryNames)})");
+                            gameConfig = SharedGameConfig.ImportPatchedFrom(baseConfig,
+                                new PatchedConfigArchive(archive, new[] { env }), env.EntryNames.ToArray());
+                            ClientGlobal.SharedGameConfig = gameConfig;
+                            done = true; break;
+                        }
+                        if (done) break;
+                    }
+                    if (done) break;
+                }
+            }
+
+            var prop = gameConfig.GetType().GetProperties()
+                .FirstOrDefault(p => string.Equals(p.Name, libraryName, StringComparison.OrdinalIgnoreCase));
+            if (prop == null)
+            {
+                Console.WriteLine("Library not found. Available:");
+                foreach (var p in gameConfig.GetType().GetProperties())
+                    if (p.PropertyType.GetMethod("EnumerateAll") != null) Console.WriteLine("   " + p.Name);
+                return 1;
+            }
+
+            var lib = prop.GetValue(gameConfig);
+            var entries = (System.Collections.IEnumerable)lib!.GetType().GetMethod("EnumerateAll")!.Invoke(lib, null)!;
+            int n = 0;
+            foreach (var kv in entries)
+            {
+                var kvType = kv.GetType();
+                var key = kvType.GetProperty("Key")?.GetValue(kv)?.ToString() ?? "?";
+                var val = kvType.GetProperty("Value")?.GetValue(kv);
+                n++;
+                if (!string.IsNullOrEmpty(keyFilter)
+                    && !key.Contains(keyFilter, StringComparison.OrdinalIgnoreCase)) continue;
+
+                Console.WriteLine($"\n[{key}]  ({val?.GetType().Name})");
+                if (val == null) continue;
+                foreach (var p in val.GetType().GetProperties())
+                {
+                    object? v;
+                    try { v = p.GetValue(val); } catch { continue; }
+                    if (v == null) { Console.WriteLine($"    {p.Name,-34} = (null)"); continue; }
+                    string text;
+                    if (v is System.Collections.IEnumerable seq && v is not string)
+                    {
+                        var parts = new List<string>();
+                        foreach (var item in seq) parts.Add(DescribeReward(item));
+                        text = parts.Count == 0 ? "[]" : "[" + string.Join(", ", parts) + "]";
+                    }
+                    else text = v.ToString() ?? "";
+                    if (text.Length > 400) text = text[..400] + "…";
+                    Console.WriteLine($"    {p.Name,-34} = {text}");
+                }
+            }
+            Console.WriteLine($"\n({n} entries in {libraryName})");
+            return 0;
+        }
+        catch (Exception ex) { Console.WriteLine($"FAILED: {ex.GetType().Name}: {ex.Message}"); return 1; }
+    }
+
+    /// <summary>
+    /// Walks EVERY GameConfigLibrary in SharedGameConfig and reports each place a needle string
+    /// occurs — as an ItemType/ConfigKey, a MetaRef key, or any plain string field.
+    ///
+    /// Why this exists: when an item shows up in the game (or in the Album) but appears in none of
+    /// the JSON dumps, the question "which config actually references it?" cannot be answered from
+    /// the dumps — they only cover the libraries the dumpers were written for. This walks the
+    /// imported config itself, so a hit proves the reference exists and a clean run proves it does
+    /// not (rather than proving only that no dumper looked).
+    ///
+    /// Traversal is reflection over public properties + IEnumerable, with a reference-identity
+    /// visited set (the config graph is cyclic through MetaRefs) and a depth cap.
+    /// </summary>
+    private static int FindConfigRefs(string configPath, string languagePath, string needle,
+        string patchPath = "", string branchFilter = "")
+    {
+        Console.WriteLine("=== FindConfigRefs ===");
+        Console.WriteLine($"Config:   {configPath}");
+        Console.WriteLine($"Needle:   {needle}");
+
+        try
+        {
+            MetaplayCore.Initialize();
+            if (!string.IsNullOrEmpty(languagePath) && File.Exists(languagePath))
+            {
+                var langHash = ContentHash.ParseString(Path.GetFileName(languagePath));
+                MetaplaySDK.ActiveLanguage = LocalizationLanguage.ImportBinary(langHash, File.ReadAllBytes(languagePath));
+            }
+            var archive = ConfigArchive.FromBytes(File.ReadAllBytes(configPath));
+            var baseConfig = (SharedGameConfig)GameConfigFactory.Instance
+                .ImportSharedGameConfig(PatchedConfigArchive.WithNoPatches(archive));
+            var gameConfig = baseConfig;
+            ClientGlobal.SharedGameConfig = gameConfig;
+
+            // Optional A/B branch: rewards that only exist inside an experiment (IdealFTUEPhase1_B…)
+            // are invisible in the baseline archive, so scanning without the patch proves nothing.
+            if (!string.IsNullOrEmpty(patchPath))
+            {
+                var patchFiles = Directory.Exists(patchPath)
+                    ? Directory.GetFiles(patchPath).OrderBy(File.GetLastWriteTimeUtc).ToList()
+                    : new List<string> { patchPath };
+                var picked = new List<(string Label, Metaplay.Core.Config.GameConfigPatchEnvelope Env)>();
+                foreach (var pf in patchFiles)
+                {
+                    var sp = Metaplay.Core.Config.GameConfigSpecializationPatches.FromBytes(File.ReadAllBytes(pf));
+                    foreach (var (expId, vs) in sp.Patches)
+                        foreach (var (varId, bytes) in vs)
+                        {
+                            var label = $"{expId}_{varId}";
+                            if (!string.IsNullOrEmpty(branchFilter)
+                                && !label.Contains(branchFilter, StringComparison.OrdinalIgnoreCase)) continue;
+                            if (picked.Any(x => x.Label == label)) continue;
+                            picked.Add((label, Metaplay.Core.Config.GameConfigPatchEnvelope
+                                .Deserialize(bytes ?? Array.Empty<byte>())));
+                        }
+                }
+                if (picked.Count == 0) { Console.WriteLine($"No patch branch matching '{branchFilter}'"); return 1; }
+                var (lbl, env) = picked[0];
+                Console.WriteLine($"Branch:   {lbl}  (entries: {string.Join(",", env.EntryNames)})");
+                gameConfig = SharedGameConfig.ImportPatchedFrom(baseConfig,
+                    new PatchedConfigArchive(archive, new[] { env }), env.EntryNames.ToArray());
+                ClientGlobal.SharedGameConfig = gameConfig;
+            }
+
+            int hits = 0, libs = 0;
+            foreach (var prop in gameConfig.GetType().GetProperties())
+            {
+                object libValue;
+                try { libValue = prop.GetValue(gameConfig); }
+                catch { continue; }
+                if (libValue == null) continue;
+
+                var enumerateAll = libValue.GetType().GetMethod("EnumerateAll");
+                if (enumerateAll == null) continue;          // not a GameConfigLibrary
+                libs++;
+
+                System.Collections.IEnumerable entries;
+                try { entries = (System.Collections.IEnumerable)enumerateAll.Invoke(libValue, null); }
+                catch { continue; }
+
+                int libHits = 0, entryCount = 0;
+                foreach (var kv in entries)
+                {
+                    var kvType = kv.GetType();
+                    var key = kvType.GetProperty("Key")?.GetValue(kv);
+                    var val = kvType.GetProperty("Value")?.GetValue(kv);
+                    if (val == null) continue;
+                    entryCount++;
+
+                    var visited = new HashSet<object>(ReferenceEqualityComparer.Instance);
+                    foreach (var path in SearchObject(val, needle, "", visited, 0))
+                    {
+                        Console.WriteLine($"HIT  {prop.Name}[{key}]{path}");
+                        hits++; libHits++;
+                    }
+                }
+                Console.WriteLine($"  [{libs,3}] {prop.Name,-42} {entryCount,6} entries"
+                    + (libHits > 0 ? $"  ← {libHits} hit(s)" : ""));
+                Console.Out.Flush();
+            }
+            Console.WriteLine($"\nScanned {libs} libraries — {hits} hit(s) for '{needle}'.");
+            return 0;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"FAILED: {ex.GetType().Name}: {ex.Message}");
+            return 1;
+        }
+    }
+
+    /// <summary>Yields a path for every field under <paramref name="obj"/> whose text contains the needle.</summary>
+    private static IEnumerable<string> SearchObject(object obj, string needle, string path,
+        HashSet<object> visited, int depth)
+    {
+        if (obj == null || depth > 6) yield break;
+
+        var type = obj.GetType();
+
+        // Leaf: anything whose text form carries the needle. Covers strings, StringId keys,
+        // ItemType enums and MetaRef keys alike — they all render the item name in ToString().
+        if (type.IsPrimitive || obj is string || type.IsEnum || type.Namespace == "System")
+        {
+            var s = obj.ToString();
+            if (!string.IsNullOrEmpty(s) && s.Contains(needle, StringComparison.OrdinalIgnoreCase))
+                yield return $"{path} = {s}";
+            yield break;
+        }
+
+        if (!visited.Add(obj)) yield break;
+
+        // A MetaRef points at an entry of ANOTHER library. Compare its key and STOP — following it
+        // would re-walk the whole (cyclic) config graph once per entry, which is what made the
+        // first version of this scan never finish.
+        if (obj is Metaplay.Core.IMetaRef mref)
+        {
+            var k = mref.KeyObject?.ToString();
+            if (!string.IsNullOrEmpty(k) && k.Contains(needle, StringComparison.OrdinalIgnoreCase))
+                yield return $"{path} -> {k}";
+            yield break;
+        }
+
+        // ItemDef is a numeric handle; it only names the item once resolved against the config.
+        if (obj is GameLogic.Config.ItemDef idef)
+        {
+            string? itemName = null;
+            try { itemName = idef.GetDef(ClientGlobal.SharedGameConfig)?.ItemType?.ToString(); } catch { }
+            if (!string.IsNullOrEmpty(itemName) && itemName.Contains(needle, StringComparison.OrdinalIgnoreCase))
+                yield return $"{path} -> {itemName}";
+            yield break;
+        }
+
+        // Another library's entry reached BY REFERENCE — identify it and stop.
+        // depth > 0 is essential: the entry we were asked to scan is itself IGameConfigData, and
+        // stopping on it would mean never looking at its fields (PlayerLevelData.Rewards was
+        // silently skipped this way, making "not referenced anywhere" a false negative).
+        if (depth > 0 && obj is IGameConfigData)
+        {
+            foreach (var idProp in new[] { "ItemType", "ConfigKey", "Id", "Name" })
+            {
+                string? v = null;
+                try { v = type.GetProperty(idProp)?.GetValue(obj)?.ToString(); } catch { }
+                if (!string.IsNullOrEmpty(v) && v.Contains(needle, StringComparison.OrdinalIgnoreCase))
+                {
+                    yield return $"{path} -> {v}";
+                    break;
+                }
+            }
+            yield break;
+        }
+
+        // StringId / ItemType-like config keys render their name straight from ToString()
+        var text = obj.ToString();
+        if (!string.IsNullOrEmpty(text) && text.Contains(needle, StringComparison.OrdinalIgnoreCase)
+            && !text.StartsWith(type.FullName ?? "\0"))
+        {
+            yield return $"{path} = {text}";
+            yield break;
+        }
+
+        if (obj is System.Collections.IEnumerable seq && obj is not string)
+        {
+            int i = 0;
+            foreach (var item in seq)
+            {
+                foreach (var r in SearchObject(item, needle, $"{path}[{i}]", visited, depth + 1))
+                    yield return r;
+                if (++i > 512) break;                        // runaway guard
+            }
+            yield break;
+        }
+
+        foreach (var p in type.GetProperties())
+        {
+            if (p.GetIndexParameters().Length > 0) continue;
+            object child;
+            try { child = p.GetValue(obj); }
+            catch { continue; }
+            foreach (var r in SearchObject(child, needle, $"{path}.{p.Name}", visited, depth + 1))
+                yield return r;
+        }
+    }
+
     private static string DescribeReward(object reward)
     {
         if (reward == null)
             return "null";
         var type = reward.GetType();
         var parts = new List<string>();
-        foreach (var propName in new[] { "Amount", "ItemDef", "EnergyType", "Progress", "CardCollectionPackId", "CardId" })
+        foreach (var propName in new[] { "Amount", "ItemDef", "EnergyType", "Progress", "CardCollectionPackId", "CardId", "Level", "RequiredLevel", "AreaId", "TaskId", "Value", "HotspotId" })
         {
             var prop = type.GetProperty(propName);
             if (prop == null) continue;
@@ -2837,6 +3859,15 @@ internal static class Program
                 continue;
             }
             parts.Add($"{propName}={val}");
+        }
+        // Metaplay config classes often expose values as public FIELDS (PlayerLevelRequirement.Min/Max),
+        // which GetProperty misses entirely — that made requirements print as a bare type name.
+        foreach (var f in type.GetFields())
+        {
+            object val;
+            try { val = f.GetValue(reward); } catch { continue; }
+            if (val == null) continue;
+            parts.Add($"{f.Name}={val}");
         }
         return parts.Count > 0 ? $"{type.Name}({string.Join(",", parts)})" : type.Name;
     }
@@ -3022,7 +4053,7 @@ internal static class Program
             ClientGlobal.SharedGameConfig = gameConfig;
 
             var outPath = Path.Combine(outputDir, "chain_item_odds.json");
-            new MergeChainDumper(dropsAsPercent: true).WriteJson(outPath, gameConfig);
+            Engine.DumpChains(gameConfig, outPath);
             Console.WriteLine($"-> {outPath} ({new FileInfo(outPath).Length / 1024} KB)");
             return 0;
         }

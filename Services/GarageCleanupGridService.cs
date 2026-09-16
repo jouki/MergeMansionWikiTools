@@ -953,9 +953,30 @@ public sealed class GarageCleanupGridService
             var airings = new List<GcAiring>();
             foreach (var r in parsed)
             {
-                var gridStart = r.IdenticalTo ?? r.Start;   // identicalTo → use the holder run's grid
+                // identicalTo → use the holder run's grid. The pointer is a DATE ("31.05.2026", parsed as
+                // midnight) while run starts carry the hour (08:00), so resolve it to the holder run by
+                // calendar day — never by exact instant (v0.24.66: the exact match silently dropped every
+                // identicalTo run, and once the dump moved on the run vanished from the wiki).
+                var gridStart = r.Start;
+                if (r.IdenticalTo is { } idDate)
+                {
+                    GcEventRun? holder = null;
+                    foreach (var h in parsed)
+                        if (h.IdenticalTo == null && h.Start.Date == idDate.Date) { holder = h; break; }
+                    if (holder == null)
+                        foreach (var h in parsed)
+                            if (h.Start.Date == idDate.Date) { holder = h; break; }
+                    if (holder == null)
+                    {
+                        AppLogger.Debug($"[GC.Reconstruct] '{baseName}' run {r.Start:yyyy-MM-dd HH:mm}: identicalTo {idDate:dd.MM.yyyy} has no holder run — skipped");
+                        continue;
+                    }
+                    gridStart = holder.Value.Start;
+                }
                 if (nameByStart.TryGetValue(gridStart, out var vn) && grids.TryGetValue(vn, out var g))
                     airings.Add(new GcAiring(r.Start, r.DurationDays, r.Disabled, g));
+                else
+                    AppLogger.Debug($"[GC.Reconstruct] '{baseName}' run {r.Start:yyyy-MM-dd HH:mm}: no grid for variant '{(nameByStart.TryGetValue(gridStart, out var vn2) ? vn2 : "?")}' — skipped");
             }
             if (airings.Count > 0) result[baseName] = airings;
         }
@@ -1020,12 +1041,22 @@ public sealed class GarageCleanupGridService
         return result;
     }
 
-    /// <summary>Mode B (§3.5/§2.9): ADD-ONLY merge of the active dump's airings into the existing wiki
-    /// history. An active airing is identified by its (baseName, parent-run); if that parent-run is NOT
-    /// already present for the base name it is added (all its rounds together); existing airings are NEVER
-    /// removed or overwritten. This satisfies the integrity rules by construction — no deletion, no
-    /// overwrite of older runs, no round loss when a dump only carries part of an old airing. (Retro
-    /// rebalanc-update of a changed existing airing is a deliberate later refinement.)
+    /// <summary>Mode B (§3.5/§2.9): merge of the active dump's airings into the existing wiki history.
+    /// An active airing is identified by its (baseName, parent-run). If that parent-run is NOT already
+    /// present for the base name it is added (all its rounds together). Airings that already STARTED
+    /// (by <paramref name="now"/>) are history and are NEVER removed or overwritten — no deletion, no
+    /// overwrite of aired runs, no round loss when a dump only carries part of an old airing.
+    ///
+    /// Reschedule (v0.24.65): a parent-run whose airing has NOT started yet is only a plan, and the devs
+    /// do move plans within the same parent run (Murder at the Mansion GC: 09-17 in 26.06.02 → 09-20 in
+    /// 26.07.01, both bracketed by the LDE 09-17 + 6d run). Because identity is the parent-run, the old
+    /// ADD-ONLY rule kept the stale 09-17 on every Update Wiki. Now, when EVERY round the dump carries for
+    /// that parent-run starts after <paramref name="now"/>, the wiki's group is replaced as a WHOLE
+    /// (start, duration, disabled, grid — all rounds) by the dump's group. "Not started" is judged by the
+    /// DUMP's dates (the game's current truth), not by the wiki's — a stale wiki date that has already
+    /// passed must not masquerade as history. Rounds of one airing coexist in one dump (§2.8), so the
+    /// dump's group is complete for the current parent-run and no round is lost. If any dump round has
+    /// started, the group is history/running and stays untouched.
     ///
     /// Orphan cleanup: after the add step, any merged airing whose start is not bracketed by ANY
     /// present parent run for that base name is dropped (its parent run was superseded). If the
@@ -1033,7 +1064,8 @@ public sealed class GarageCleanupGridService
     public Dictionary<string, List<GcAiring>> MergeAirings(
         Dictionary<string, List<GcAiring>> existing,
         Dictionary<string, List<GcAiring>> active,
-        string liveEventsLua)
+        string liveEventsLua,
+        DateTime now)
     {
         var parentRuns = ParseEventRuns(liveEventsLua);
 
@@ -1064,11 +1096,36 @@ public sealed class GarageCleanupGridService
                 pr != null && GarageCleanupHistory.MatchParentRun(s, pr) is { } m ? m.Start : new DateTime(s.Year, 1, 1);
 
             if (!merged.TryGetValue(baseName, out var list)) merged[baseName] = list = new();
-            var existingPRs = new HashSet<DateTime>(list.Select(a => PR(a.Start)));
+            var existingByPR = list.GroupBy(a => PR(a.Start)).ToDictionary(g => g.Key, g => g.ToList());
 
             foreach (var prGroup in activeAirings.GroupBy(a => PR(a.Start)))
-                if (existingPRs.Add(prGroup.Key))     // new parent-run → add all its rounds; existing untouched
-                    list.AddRange(prGroup);
+            {
+                var dumpRounds = prGroup.ToList();
+                if (!existingByPR.TryGetValue(prGroup.Key, out var held))
+                {
+                    list.AddRange(dumpRounds);        // new parent-run → add all its rounds
+                    AppLogger.Debug($"[GC.Merge] '{baseName}' parent-run {prGroup.Key:yyyy-MM-dd}: ADDED {dumpRounds.Count} round(s) " +
+                                    $"({string.Join(", ", dumpRounds.Select(a => a.Start.ToString("yyyy-MM-dd HH:mm")))})");
+                    continue;
+                }
+                if (dumpRounds.Any(a => a.Start <= now))
+                {
+                    // Airing (or aired) per the game's current dates → history, never touched, even if the
+                    // wiki's dates differ.
+                    AppLogger.Debug($"[GC.Merge] '{baseName}' parent-run {prGroup.Key:yyyy-MM-dd}: KEPT (started per dump) " +
+                                    $"wiki=[{string.Join(", ", held.Select(a => a.Start.ToString("yyyy-MM-dd HH:mm")))}] " +
+                                    $"dump=[{string.Join(", ", dumpRounds.Select(a => a.Start.ToString("yyyy-MM-dd HH:mm")))}]");
+                    continue;
+                }
+                // Not started yet per the dump → the wiki holds a PLAN; the dump's plan for this parent-run
+                // supersedes it whole (identical plan → identical output).
+                var heldStarts = string.Join(", ", held.Select(a => a.Start.ToString("yyyy-MM-dd HH:mm")));
+                var dumpStarts = string.Join(", ", dumpRounds.Select(a => a.Start.ToString("yyyy-MM-dd HH:mm")));
+                list.RemoveAll(a => PR(a.Start) == prGroup.Key);
+                list.AddRange(dumpRounds);
+                AppLogger.Debug($"[GC.Merge] '{baseName}' parent-run {prGroup.Key:yyyy-MM-dd}: RESCHEDULED (not started, now={now:yyyy-MM-dd HH:mm}) " +
+                                $"wiki=[{heldStarts}] → dump=[{dumpStarts}]");
+            }
         }
 
         return merged;

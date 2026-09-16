@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -9,7 +9,7 @@
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <SelfContained>true</SelfContained>
     <ApplicationIcon>Assets\AppLogo.ico</ApplicationIcon>
-    <DefaultItemExcludes>$(DefaultItemExcludes);External\**;Tests\**;_DumpHarness\**;_CONTEXT\**;MergeMansionWikiTools.Tests\**</DefaultItemExcludes>
+    <DefaultItemExcludes>$(DefaultItemExcludes);External\**;Tests\**;_DumpHarness\**;_OcrHarness\**;_CONTEXT\**;Codex\**;MergeMansionWikiTools.Tests\**;MMWT.Dumper\**</DefaultItemExcludes>
     <InformationalVersion>0.21.0+$([System.DateTime]::UtcNow.ToString("yyyyMMdd-HHmm"))</InformationalVersion>
   </PropertyGroup>
 
@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="External\merge-mansion-dumper\merge-mansion-dumper.csproj" />
+    <ProjectReference Include="MMWT.Dumper\MMWT.Dumper.csproj" />
   </ItemGroup>
 
   <!-- Expose internal helpers (e.g. GarageCleanupGridService.RewardsBodyLua) to the unit test project. -->

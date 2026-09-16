@@ -1,7 +1,7 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using GameLogic;
-using merge_mansion_dumper.Dumper.Json;
+using MergeMansionWikiTools.Dumper.Core;
 using Newtonsoft.Json;
 using Xunit;
 
@@ -11,9 +11,11 @@ namespace MergeMansionWikiTools.Tests;
 /// The runtime HotspotId name map must make values the compiled enum doesn't know (new game
 /// version) behave like defined members everywhere the dumper looks: IsKnown, Resolve and the
 /// JSON converter that writes task "Id" fields. Tests run sequentially within the class since
-/// the registry is static.
+/// the registry is static — and in the shared "GlobalGameState" collection (see
+/// <see cref="NativeDumper.GlobalGameStateCollection"/>) so they also do not race the dumper tests
+/// that read the same static registry.
 /// </summary>
-[Collection("HotspotIdNames")]
+[Collection(NativeDumper.GlobalGameStateCollection.Name)]
 public class HotspotIdNamesTests
 {
     private const int UnknownValue = 987654321; // not a compiled enum member

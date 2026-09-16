@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\External\merge-mansion-dumper\merge-mansion-dumper.csproj" />
     <ProjectReference Include="..\External\merge-mansion-api\merge-mansion-api.csproj" />
+    <ProjectReference Include="..\MMWT.Dumper\MMWT.Dumper.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AssetsTools.NET.Addressables" Version="3.0.2" />

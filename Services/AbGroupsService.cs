@@ -114,12 +114,16 @@ internal static class AbGroupsService
         string? gameVersion,
         string? unityVersion,
         List<(string Experiment, string Variant)>? memberships,
-        IEnumerable<(string Experiment, string Variant)> catalog)
+        IEnumerable<(string Experiment, string Variant)> catalog,
+        string? dumperEngine = null)
     {
         var sb = new StringBuilder();
         sb.AppendLine($"Created At: {createdAt ?? "(unknown)"}");
         sb.AppendLine($"Game Version: {gameVersion ?? "(unknown)"}");
         sb.AppendLine($"Unity Version: {unityVersion ?? "(unknown)"}");
+        // Which dump engine produced these files (Legacy = upstream dumper, Native = in-house).
+        if (!string.IsNullOrEmpty(dumperEngine))
+            sb.AppendLine($"Dumper Engine: {dumperEngine}");
         sb.AppendLine();
 
         sb.AppendLine("== Account memberships (from Metaplay_LastSessionGameConfig.dat) ==");
