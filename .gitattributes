@@ -71,3 +71,5 @@
 _CONTEXT/** filter=git-crypt diff=git-crypt
 # Pracovni data (pomucka k vyvoji, ne produkt) - stejne jako _CONTEXT jen jako sifrovane bloby.
 Codex/** filter=git-crypt diff=git-crypt
+# Prazdne Python package markery: sifrovat neni co a git-crypt u nich hlasi vecny rozdil.
+Codex/**/__init__.py !filter !diff
