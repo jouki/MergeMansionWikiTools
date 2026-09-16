@@ -69,3 +69,5 @@
 # nečitelná pro veřejnost.
 ###############################################################################
 _CONTEXT/** filter=git-crypt diff=git-crypt
+# Pracovni data (pomucka k vyvoji, ne produkt) - stejne jako _CONTEXT jen jako sifrovane bloby.
+Codex/** filter=git-crypt diff=git-crypt

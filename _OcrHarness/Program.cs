@@ -1,4 +1,4 @@
-// OcrHarness — raw Windows OCR over a folder of screenshots, one JSON line per image.
+﻿// OcrHarness — raw Windows OCR over a folder of screenshots, one JSON line per image.
 //   OcrHarness.exe <imagesRoot> <out.jsonl> [--workers N]
 // Output line: {"file": "<relative path>", "w": W, "h": H, "lines": [{"t": text, "x": X, "y": Y, "w": W, "h": H}, ...]}
 // Resumable: files already present in out.jsonl are skipped. Images larger than the engine's
