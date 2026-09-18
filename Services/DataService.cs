@@ -537,6 +537,32 @@ public class DataService
                 pi.FishingDropletCountMax = dmax.GetInt32();
         }
 
+        // ── Event points (Points Item) ──
+        // Two separate numbers, both per item: creating it by merging pays
+        // Rewards[].RewardCollectibleBoardEventProgress.Amount, tapping it pays
+        // CollectableFeatures.CollectAction.Progress. Verified row by row against the hand-written
+        // Amelia Boulton Memorabilia table (2026-09-18), where create = half of tap.
+        if (item.TryGetProperty("CollectableFeatures", out var collect)
+            && collect.TryGetProperty("CollectAction", out var collectAction)
+            && collectAction.TryGetProperty("Progress", out var progress)
+            && progress.ValueKind == JsonValueKind.Number)
+        {
+            pi.EventPointsOnTap = progress.GetInt32();
+        }
+        if (item.TryGetProperty("Rewards", out var itemRewards) && itemRewards.ValueKind == JsonValueKind.Array)
+        {
+            foreach (var reward in itemRewards.EnumerateArray())
+            {
+                if (reward.TryGetProperty("RewardCollectibleBoardEventProgress", out var boardProgress)
+                    && boardProgress.TryGetProperty("Amount", out var amount)
+                    && amount.ValueKind == JsonValueKind.Number)
+                {
+                    pi.EventPointsOnCreate = amount.GetInt32();
+                    break;
+                }
+            }
+        }
+
         // ── SinkFeatures (Transformative Item) ──
         if (item.TryGetProperty("SinkFeatures", out var sink) && GetBool(sink, "IsSink"))
         {

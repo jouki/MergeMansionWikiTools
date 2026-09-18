@@ -62,6 +62,10 @@ public class WikiTableGenerator
                              || allItems.Any(i => i.IsSpawner && i.SpawnDelayMs >= 1000);
         bool showChargeTime = allItems.Any(i => i.IsGenerator && i.FirstCycleStartDelayMs >= 5000);
         bool showSpeedUpCost = showRechargeTime || showChargeTime;
+        // Event points: two separate numbers per item — creating it by merging pays one amount,
+        // tapping it pays another (see ParsedItem.EventPointsOnCreate/OnTap). Rendered as the last
+        // two columns, matching the hand-written Amelia Boulton Memorabilia table.
+        bool showEventPoints = allItems.Any(i => i.EventPointsOnCreate > 0 || i.EventPointsOnTap > 0);
         bool showDecaysInto = allItems.Any(i =>
             !string.IsNullOrEmpty(i.SpawnDecayIntoItemType)
             || !string.IsNullOrEmpty(i.DecayAfterLastCycleItemType)
@@ -341,6 +345,12 @@ public class WikiTableGenerator
         if (showSpeedUpCost)
             sb.AppendLine($"{hp}Speed Up Cost");
 
+        if (showEventPoints)
+        {
+            sb.AppendLine($"{hp}Create to Collect");
+            sb.AppendLine($"{hp}Tap to Collect");
+        }
+
         // Sub-header row for normal (non-nested) Decay Odds expansion
         if (hasAnyNonNestedDecayExpansion)
         {
@@ -595,6 +605,12 @@ public class WikiTableGenerator
                         sb.AppendLine("| {{Gems}} {{#Invoke:Items|GetItemSkipPriceFromChainName|{{#var:Level}}}}");
                     else
                         sb.AppendLine("| {{Dash}}");
+                }
+
+                if (showEventPoints)
+                {
+                    sb.AppendLine($"| {BuildEventPointsCell(levelItems, p => p.EventPointsOnCreate)}");
+                    sb.AppendLine($"| {BuildEventPointsCell(levelItems, p => p.EventPointsOnTap)}");
                 }
             }
         }
@@ -884,6 +900,21 @@ public class WikiTableGenerator
         if (parts.Count == 0) Collect(levelItems.Where(i => i.IsAlias && !i.IsFtue));
 
         return parts.Count > 0 ? string.Join("<br>", parts) : "{{Dash}}";
+    }
+
+    /// <summary>
+    /// One event-points cell. FTUE copies are skipped like everywhere else; the first item at the
+    /// level that carries a value wins, so aliases of one row cannot contradict each other.
+    /// </summary>
+    private static string BuildEventPointsCell(List<ParsedItem> levelItems, Func<ParsedItem, int?> pick)
+    {
+        foreach (var item in levelItems)
+        {
+            if (item.IsFtue) continue;
+            if (pick(item) is { } points && points > 0)
+                return $"{{{{Green Coins}}}} {points}";
+        }
+        return "{{Dash}}";
     }
 
     /// <summary>Aggregates drops from all items at a level (incl. aliases).

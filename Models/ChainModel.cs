@@ -468,6 +468,20 @@ public class ParsedItem
     public bool IsFtue { get; set; }
 
     /// <summary>
+    /// Event points awarded when this item is CREATED by merging
+    /// (<c>Rewards[].RewardCollectibleBoardEventProgress.Amount</c>). Null when the item gives none.
+    /// </summary>
+    public int? EventPointsOnCreate { get; set; }
+
+    /// <summary>
+    /// Event points awarded when this item is TAPPED
+    /// (<c>CollectableFeatures.CollectAction.Progress</c>). Usually the larger of the two: Amelia
+    /// Boulton Memorabilia pays half for creating and full for tapping, while Suspect Interviews
+    /// pays the same either way.
+    /// </summary>
+    public int? EventPointsOnTap { get; set; }
+
+    /// <summary>
     /// Whether this item is an explicit display VARIANT (e.g. the A/B/C generator outcomes of a
     /// branching merge). Like alias, it suppresses the same-level collision warning; unlike alias it
     /// is meant to be SHOWN as a variant sub-row. Set from the mapping flag <c>isVariant = true</c>.

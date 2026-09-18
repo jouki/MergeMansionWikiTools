@@ -308,7 +308,10 @@ public class InfoboxGeneratorService
                 && i.OrderRequiredItems.Keys.Any(k => myItemTypes.Contains(k)));
         if (isFuelBySink || isFuelByOrder) types.Add("Fuel Item");
 
-        if (opts.IsPoints) types.Add("Points Item");
+        // Points Item — auto-detected from the event-points fields; the checkbox stays an override
+        // for chains whose points the dump does not carry.
+        if (opts.IsPoints || chain.Items.Any(i => i.EventPointsOnTap > 0 || i.EventPointsOnCreate > 0))
+            types.Add("Points Item");
 
         return types;
     }
