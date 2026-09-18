@@ -150,7 +150,12 @@ public static class LocMan
     {
         if (!string.IsNullOrEmpty(fullOverrideKey))
         {
-            var fullId = $"Item_{fullOverrideKey}_Description";
+            // fullOverrideKey is a COMPLETE localization key, not a fragment — the game's
+            // GetDescriptionId(def) is literally Concat(GetItemNameKey(def), "_Description"), and
+            // GetItemNameKey returns the override verbatim (see GetItemName below). Prepending
+            // "Item_" here never matched: of the 21 distinct override keys in config 26.07.01, all
+            // 21 resolve as-is and none resolves with an extra prefix.
+            var fullId = $"{fullOverrideKey}_Description";
             if (HasString(fullId)) return Get(fullId);
         }
         if (!string.IsNullOrEmpty(overrideKey))
@@ -230,8 +235,18 @@ public static class LocMan
     {
         if (!string.IsNullOrEmpty(fullOverrideKey))
         {
-            var fullId = $"Item_{fullOverrideKey}";
-            if (HasString(fullId)) return Get(fullId);
+            // "Full" override = the whole key, used verbatim. In the binary (ISIL of
+            // LocMan.GetItemNameKey) the non-empty branch jumps straight to the return with the
+            // member's value untouched; the "Item_" prefix is concatenated only in the fallback
+            // branch below. The data agrees: all 242 override keys in config 26.07.01 exist in the
+            // language file exactly as written, none of them with an extra "Item_" in front, and
+            // they carry no common prefix at all (Item_…, SP_…, TCE_…, ItemCategory_…).
+            //
+            // The HasString guard is ours, not the game's — the game returns the key and lets Get()
+            // echo it back when the translation is missing. It is kept because it cannot change the
+            // outcome on live data (every key resolves) and it keeps a raw key out of the dump if a
+            // future config ever ships one.
+            if (HasString(fullOverrideKey)) return Get(fullOverrideKey);
         }
 
         var lastIndex = itemType.LastIndexOf('_');

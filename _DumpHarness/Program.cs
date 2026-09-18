@@ -11,6 +11,7 @@ using GameLogic.Config;
 using GameLogic.Hotspots.CardStack;
 using Code.GameLogic.Hotspots;
 using MergeMansionWikiTools.Dumper;
+using MergeMansionWikiTools.Dumper.Core;
 using Metaplay.Core;
 using Metaplay.Core.Config;
 using Metaplay.Core.Localization;
@@ -22,25 +23,22 @@ namespace DumpHarness;
 // Used to validate SharedGlobals serialization diagnostics without booting the WPF app.
 internal static class Program
 {
-    /// <summary>Dump engine used by every dump sub-command; selected with the global --engine flag.</summary>
-    private static IDumpEngine Engine = new LegacyDumpEngineHarness();
+    /// <summary>Dump engine used by every dump sub-command. Native is the only engine since v0.24.73.</summary>
+    private static readonly IDumpEngine Engine = new NativeDumpEngine();
 
     public static int Main(string[] args)
     {
-        // Global option: --engine legacy|native (default legacy). Parsed and removed from args
-        // before any sub-command dispatch so positional arguments keep their existing indices.
+        // Legacy option: --engine legacy|native. The Legacy engine is gone (v0.24.73), so the flag
+        // only gets stripped here — silently for "native", with a warning for anything else — to keep
+        // the positional indices of older invocations intact.
         int engIdx = Array.IndexOf(args, "--engine");
         if (engIdx >= 0)
         {
             var engValue = engIdx + 1 < args.Length ? args[engIdx + 1] : null;
-            if (engValue != null && engValue.Equals("native", StringComparison.OrdinalIgnoreCase))
-                Engine = new NativeDumpEngine();
-            else if (engValue == null || !engValue.Equals("legacy", StringComparison.OrdinalIgnoreCase))
-                Console.WriteLine("[WARN] --engine expects legacy|native, using Legacy");
-            // Drop the flag (and its value, when one was given) so positional indices stay intact.
+            if (engValue == null || !engValue.Equals("native", StringComparison.OrdinalIgnoreCase))
+                Console.WriteLine("[WARN] --engine is obsolete; the Native engine is the only one left");
             var engLast = engValue != null ? engIdx + 1 : engIdx;
             args = args.Where((_, i) => i < engIdx || i > engLast).ToArray();
-            Console.WriteLine($"[engine] {Engine.Kind}");
         }
 
         // Sub-command: probe Unity bundles for minigame icon assets
@@ -180,25 +178,6 @@ internal static class Program
             }
             catch (Exception ex) { Console.Error.WriteLine($"FATAL: {ex.Message}"); return 1; }
         }
-        if (args.Length >= 3 && args[0] == "--compare-engines")
-        {
-            // --compare-engines <outDir> live|newest|all|<ver> [--filters] [--only <filePrefix>]
-            // Runs the Legacy and the Native dump engine over the same config(s) and byte-compares
-            // every produced file. _DATA is taken from MMWT_DATA when set. Exit code 0 only when
-            // every row is IDENTICAL.
-            // "newest" = only the newest-CreatedAt archive in _DATA/C (with all its patches) —
-            // a fast single-archive loop for iterating on one dumper.
-            // --only <filePrefix> restricts the compared files to those whose name starts with the
-            // prefix (patch rows included), e.g. "--only chain".
-            var onlyIdx = Array.IndexOf(args, "--only");
-            if (onlyIdx >= 0 && onlyIdx + 1 >= args.Length)
-            {
-                Console.Error.WriteLine("ERROR: --only matched no files (no prefix given)");
-                return 2;
-            }
-            var only = onlyIdx >= 0 ? args[onlyIdx + 1] : null;
-            return CompareEngines(args[1], args[2], args.Contains("--filters"), only);
-        }
         if (args.Length >= 5 && args[0] == "--dump-full-patched")
         {
             // --dump-full-patched <configPath> <patchPath> <languagePath> <outputDir>
@@ -239,6 +218,19 @@ internal static class Program
             // --probe-bundle-skeletons <bundleDir> <tpkPath> [nameFilter]
             return ProbeBundleSkeletons(args[1], args[2], args.Length >= 4 ? args[3] : "",
                 args.Length >= 5 ? args[4] : "");
+        }
+        if (args.Length >= 3 && args[0] == "--probe-flash-sales")
+        {
+            // --probe-flash-sales <configPath> <languagePath> [filter]
+            // The six rotating coin/gem shop slots: groups, candidates, costs, rewards, refresh cost.
+            return ProbeFlashSales(args[1], args[2], args.Length >= 4 ? args[3] : "");
+        }
+        if (args.Length >= 3 && args[0] == "--probe-shop-items")
+        {
+            // --probe-shop-items <configPath> <languagePath> [filter]
+            // ShopItems library (coin/gem shops), grouped by board — the Garage Shop / event shop
+            // tables that no dump file carries.
+            return ProbeShopItems(args[1], args[2], args.Length >= 4 ? args[3] : "");
         }
         if (args.Length >= 4 && args[0] == "--dump-config-library")
         {
@@ -1089,343 +1081,6 @@ internal static class Program
                 result.Add((v.ExpId, v.VarId, v.RawBytes, v.Envelope, i == 0 ? kv.Key : $"{kv.Key}__v{i + 1}"));
             }
         return result;
-    }
-
-    // ── --compare-engines: run Legacy and Native over identical inputs and byte-compare the output ──
-    // Two locations live outside the repo on this machine. _DATA is normally found relative to the
-    // harness binary, but the harness is built into %TEMP% during development, so the relative guess
-    // is unreliable: MMWT_DATA overrides it and this constant is the last-resort fallback.
-    private const string FallbackDataDir = @"D:\_BACKUP_2.0\Code Projects\MergeMansionWikiTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\_DATA";
-    private const string ApkRoot = @"D:\_BACKUP_2.0\Adobe Photoshop - Savy\Merge Mansion\APKs";
-
-    /// <summary>
-    /// Dump the same config with both engines and compare the produced files byte for byte.
-    /// Exit code is 0 only when every row is IDENTICAL.
-    /// </summary>
-    private static int CompareEngines(string outDir, string selector, bool filterMatrix, string onlyPrefix = null)
-    {
-        Console.WriteLine("=== DumpHarness --compare-engines ===");
-        var dataDir = ResolveDataDir();
-        Console.WriteLine($"Data:     {dataDir}");
-        Console.WriteLine($"Selector: {selector}{(filterMatrix ? "  (+ EventFilters matrix)" : "")}");
-        if (onlyPrefix != null) Console.WriteLine($"Only:     files starting with '{onlyPrefix}'");
-        Console.WriteLine($"Output:   {outDir}\n");
-
-        bool Wanted(string file) => onlyPrefix == null || file.StartsWith(onlyPrefix, StringComparison.OrdinalIgnoreCase);
-
-        // A prefix that matches nothing would otherwise "succeed" with an empty table and exit 0,
-        // which reads exactly like "everything is identical". Fail loudly instead.
-        if (onlyPrefix != null && !Runs(filterMatrix).Select(r => r.File).Append("Experimental/").Any(Wanted))
-        {
-            Console.Error.WriteLine($"ERROR: --only matched no files (prefix '{onlyPrefix}')");
-            return 2;
-        }
-
-        // 1. Resolve inputs. "live" = every archive in _DATA/C (with _DATA/P patches and _DATA/L
-        //    language), "newest" = only the newest-CreatedAt one of those; anything else comes from
-        //    Codex/sources.json and has no patches/language.
-        var inputs = new List<(string Name, string ConfigPath, string PatchDir, string LangPath)>();
-        bool live = string.Equals(selector, "live", StringComparison.OrdinalIgnoreCase);
-        bool newest = string.Equals(selector, "newest", StringComparison.OrdinalIgnoreCase);
-        if (live || newest)
-        {
-            var cDir = Path.Combine(dataDir, "C");
-            if (!Directory.Exists(cDir)) { Console.Error.WriteLine($"No config directory at {cDir}"); return 2; }
-            var pDir = Path.Combine(dataDir, "P");
-            var lang = FirstFileOrNull(Path.Combine(dataDir, "L"));
-            var archives = Directory.GetFiles(cDir).OrderBy(f => f, StringComparer.Ordinal).ToList();
-            if (newest)
-            {
-                // Same CreatedAt source as --probe-createdat: the archive header, readable without
-                // MetaplayCore.Initialize. Unreadable archives sort last (MinValue) and are dropped.
-                var pick = archives
-                    .Select(f => (File: f, CreatedAt: TryReadArchiveCreatedAt(f)))
-                    .OrderByDescending(x => x.CreatedAt)
-                    .FirstOrDefault();
-                if (pick.File == null || pick.CreatedAt == DateTimeOffset.MinValue)
-                { Console.Error.WriteLine($"No readable config archive in {cDir}"); return 2; }
-                Console.WriteLine($"Newest archive: {Path.GetFileName(pick.File)}  CreatedAt={pick.CreatedAt:yyyy-MM-dd HH:mm:ss}Z\n");
-                archives = new List<string> { pick.File };
-            }
-            foreach (var c in archives)
-                inputs.Add((Path.GetFileName(c), c, Directory.Exists(pDir) ? pDir : null, lang));
-        }
-        else
-        {
-            foreach (var (ver, cfg) in ReadSourcesJson(dataDir, selector))
-                inputs.Add((ver, cfg, null, null));
-        }
-        if (inputs.Count == 0) { Console.Error.WriteLine($"Selector '{selector}' matched no input"); return 2; }
-
-        try { MetaplayCore.Initialize(); }
-        catch (Exception ex) { Console.Error.WriteLine($"FATAL: {DescribeError(ex)}"); return 1; }
-
-        // 2. Run both engines over every input. The engines are created here on purpose: --compare-engines
-        //    always runs BOTH regardless of the global --engine flag.
-        IDumpEngine legacy = new LegacyDumpEngineHarness(), native = new NativeDumpEngine();
-        var rows = new List<(string Input, string File, string Result)>();
-        foreach (var inp in inputs)
-        {
-            Console.WriteLine($"--- {inp.Name} ---");
-            if (inp.ConfigPath == null) { rows.Add((inp.Name, "-", "SKIP (no config)")); Console.WriteLine("    SKIP (no config)"); continue; }
-
-            var lDir = Path.Combine(outDir, inp.Name, "legacy");
-            var nDir = Path.Combine(outDir, inp.Name, "native");
-            ConfigArchive archive;
-            SharedGameConfig master;
-            try
-            {
-                if (inp.LangPath != null)
-                    MetaplaySDK.ActiveLanguage = LocalizationLanguage.ImportBinary(ContentHash.ParseString(Path.GetFileName(inp.LangPath)), File.ReadAllBytes(inp.LangPath));
-                archive = ConfigArchive.FromBytes(File.ReadAllBytes(inp.ConfigPath));
-                master = (SharedGameConfig)GameConfigFactory.Instance.ImportSharedGameConfig(PatchedConfigArchive.WithNoPatches(archive));
-                ClientGlobal.SharedGameConfig = master;
-            }
-            catch (Exception ex)
-            {
-                rows.Add((inp.Name, "(import)", $"ERROR (input: {DescribeError(ex)})"));
-                Console.WriteLine($"    (import) ERROR (input: {DescribeError(ex)})");
-                continue;
-            }
-
-            // 2a. The plain one-file-per-call dumps (+ the optional EventFilters matrix).
-            foreach (var (file, run) in Runs(filterMatrix))
-            {
-                if (!Wanted(file)) continue;
-                var res = CompareOne(() => run(legacy, master, lDir), () => run(native, master, nDir),
-                                     Path.Combine(lDir, file), Path.Combine(nDir, file));
-                rows.Add((inp.Name, file, res));
-                Console.WriteLine($"    {file,-28} {res}");
-            }
-
-            // 2b. Experimental: one call per engine writes N section files, so it needs its own loop.
-            if (Wanted("Experimental/"))
-            {
-                var expRows = CompareExperimental(legacy, native, master, Path.Combine(lDir, "Experimental"), Path.Combine(nDir, "Experimental"));
-                foreach (var (file, res) in expRows)
-                {
-                    rows.Add((inp.Name, file, res));
-                    Console.WriteLine($"    {file,-28} {res}");
-                }
-            }
-
-            // 2c. A/B patches: the three sections a patch can realistically change.
-            var patchFiles = new[] { "chain_item_odds.json", "areas.json", "events.json" }.Where(Wanted).ToArray();
-            if (patchFiles.Length > 0 && inp.PatchDir != null && Directory.Exists(inp.PatchDir))
-            {
-                foreach (var p in LoadDistinctPatches(inp.PatchDir))
-                {
-                    SharedGameConfig patched;
-                    try
-                    {
-                        var pa = new PatchedConfigArchive(archive, new[] { p.Envelope });
-                        patched = SharedGameConfig.ImportPatchedFrom(master, pa, p.Envelope.EntryNames.ToArray());
-                    }
-                    catch (Exception ex)
-                    {
-                        rows.Add(($"{inp.Name}/{p.Label}", "(patch import)", $"ERROR (input: {DescribeError(ex)})"));
-                        Console.WriteLine($"    {p.Label} (patch import) ERROR (input: {DescribeError(ex)})");
-                        continue;
-                    }
-
-                    // ClientGlobal deliberately stays on MASTER here. DumperService's phase B dumps
-                    // every patch from a Parallel.Invoke while the global keeps pointing at the
-                    // master config (one shared static cannot be per-patch anyway), passing the
-                    // patched config explicitly instead. Pointing it at `patched` would verify a
-                    // state the app never reaches — and it is exactly the state that hides whether
-                    // an engine secretly reads the global (the API's PredefinedSequenceProducer /
-                    // ControlledRandomProducer TimeSkipPriceGems do).
-                    foreach (var file in patchFiles)
-                    {
-                        var lp = Path.Combine(lDir, p.Label, file);
-                        var np = Path.Combine(nDir, p.Label, file);
-                        // baseline stays null so the file is ALWAYS written and can be byte-compared.
-                        var res = CompareOne(() => RunPatch(legacy, patched, lp, file), () => RunPatch(native, patched, np, file), lp, np);
-                        rows.Add(($"{inp.Name}/{p.Label}", file, res));
-                        Console.WriteLine($"    {p.Label}/{file,-28} {res}");
-                    }
-                }
-            }
-        }
-
-        // 3. Report.
-        Console.WriteLine("\n=== compare-engines report ===");
-        foreach (var r in rows) Console.WriteLine($"{r.Input,-40} {r.File,-28} {r.Result}");
-        int bad = rows.Count(r => r.Result != "IDENTICAL");
-        Console.WriteLine($"\n{rows.Count - bad}/{rows.Count} IDENTICAL");
-        return bad == 0 ? 0 : 1;
-    }
-
-    /// <summary>_DATA location: MMWT_DATA wins, then the path relative to the binary, then the fallback.</summary>
-    private static string ResolveDataDir()
-    {
-        var env = Environment.GetEnvironmentVariable("MMWT_DATA");
-        if (!string.IsNullOrEmpty(env)) return env;
-        var guess = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "bin", "Debug", "net9.0-windows10.0.19041.0", "win-x64", "_DATA"));
-        return Directory.Exists(Path.Combine(guess, "C")) ? guess : FallbackDataDir;
-    }
-
-    /// <summary>
-    /// Archive header CreatedAt, read the same way --probe-createdat does (no MetaplayCore.Initialize
-    /// needed). Returns <see cref="DateTimeOffset.MinValue"/> for anything that fails to parse, so an
-    /// unreadable archive can never win a "newest" selection.
-    /// </summary>
-    private static DateTimeOffset TryReadArchiveCreatedAt(string path)
-    {
-        try
-        {
-            var a = ConfigArchive.FromBytes(File.ReadAllBytes(path));
-            return DateTimeOffset.FromUnixTimeMilliseconds(a.CreatedAt.MillisecondsSinceEpoch);
-        }
-        catch { return DateTimeOffset.MinValue; }
-    }
-
-    private static string FirstFileOrNull(string dir)
-        => Directory.Exists(dir) ? Directory.GetFiles(dir).OrderBy(f => f, StringComparer.Ordinal).FirstOrDefault() : null;
-
-    /// <summary>
-    /// Historical inputs from Codex/sources.json: versions[ver].configArchives holds absolute archive
-    /// paths, and embeddedConfig versions keep their archive as a *.mpa inside the APK folder.
-    /// ConfigPath is null when neither exists — the caller turns that into a SKIP row.
-    /// </summary>
-    private static List<(string Ver, string ConfigPath)> ReadSourcesJson(string dataDir, string selector)
-    {
-        var result = new List<(string, string)>();
-        // dataDir is <repo>\bin\Debug\<tfm>\win-x64\_DATA, so the repo root is five levels up; the
-        // current directory is tried first because it is the reliable one when running from the repo.
-        string repoRoot = null;
-        for (var d = new DirectoryInfo(Environment.CurrentDirectory); d != null && repoRoot == null; d = d.Parent)
-            if (File.Exists(Path.Combine(d.FullName, "Codex", "sources.json"))) repoRoot = d.FullName;
-        repoRoot ??= Path.GetFullPath(Path.Combine(dataDir, "..", "..", "..", "..", ".."));
-
-        var sourcesPath = Path.Combine(repoRoot, "Codex", "sources.json");
-        if (!File.Exists(sourcesPath)) { Console.Error.WriteLine($"sources.json not found at {sourcesPath}"); return result; }
-
-        var root = Newtonsoft.Json.Linq.JObject.Parse(File.ReadAllText(sourcesPath));
-        var versions = root["versions"] as Newtonsoft.Json.Linq.JObject;
-        if (versions == null) { Console.Error.WriteLine("sources.json has no 'versions' object"); return result; }
-
-        bool all = string.Equals(selector, "all", StringComparison.OrdinalIgnoreCase);
-        foreach (var prop in versions.Properties())
-        {
-            if (!all && !string.Equals(prop.Name, selector, StringComparison.OrdinalIgnoreCase)) continue;
-            var v = (Newtonsoft.Json.Linq.JObject)prop.Value;
-
-            var archives = v["configArchives"] as Newtonsoft.Json.Linq.JArray;
-            var cfg = archives?.Select(t => (string)t).FirstOrDefault(File.Exists);
-            if (cfg == null && (bool?)v["embeddedConfig"] == true)
-            {
-                // The embedded archive lives next to the APK; prefer the folder the APK itself is in.
-                var apk = (string)v["apk"];
-                var dir = !string.IsNullOrEmpty(apk) ? Path.GetDirectoryName(apk) : Path.Combine(ApkRoot, prop.Name);
-                if (Directory.Exists(dir))
-                    cfg = Directory.GetFiles(dir, "*.mpa", SearchOption.AllDirectories).OrderBy(f => f, StringComparer.Ordinal).FirstOrDefault();
-            }
-            result.Add((prop.Name, cfg));
-        }
-        if (result.Count == 0) Console.Error.WriteLine($"sources.json has no version '{selector}'");
-        return result;
-    }
-
-    /// <summary>The dump calls compared per input: the six main files, plus one per EventFilters flag.</summary>
-    private static List<(string File, Action<IDumpEngine, SharedGameConfig, string> Run)> Runs(bool filterMatrix)
-    {
-        var runs = new List<(string, Action<IDumpEngine, SharedGameConfig, string>)>
-        {
-            ("chain_item_odds.json", (e, c, d) => e.DumpChains(c, Path.Combine(d, "chain_item_odds.json"))),
-            ("areas.json",           (e, c, d) => e.DumpAreas(c, Path.Combine(d, "areas.json"))),
-            ("events.json",          (e, c, d) => e.DumpEvents(c, Path.Combine(d, "events.json"), EventFilters.All)),
-            ("card_collection.json", (e, c, d) => e.DumpCardCollection(c, Path.Combine(d, "card_collection.json"))),
-            ("dialogues.json",       (e, c, d) => e.DumpDialogues(c, Path.Combine(d, "dialogues.json"))),
-            ("Pets.json",            (e, c, d) => e.DumpPets(c, Path.Combine(d, "Pets.json"))),
-        };
-        if (filterMatrix)
-            foreach (EventFilters f in Enum.GetValues(typeof(EventFilters)))
-            {
-                // All is already covered by the plain events.json row above. None is NOT skipped:
-                // it is the "every checkbox unchecked" state the dump page can actually produce,
-                // and it is the one case where the two engines could disagree about what an empty
-                // filter set means (everything vs nothing).
-                if (f == EventFilters.All) continue;
-                var flag = f;
-                var name = $"events[{flag}].json";
-                runs.Add((name, (e, c, d) => e.DumpEvents(c, Path.Combine(d, name), flag)));
-            }
-        return runs;
-    }
-
-    /// <summary>The three sections a specialization patch can change, dumped with no baseline.</summary>
-    private static void RunPatch(IDumpEngine engine, SharedGameConfig cfg, string path, string file)
-    {
-        Directory.CreateDirectory(Path.GetDirectoryName(path));
-        switch (file)
-        {
-            case "chain_item_odds.json": engine.DumpChains(cfg, path); break;
-            case "areas.json":           engine.DumpAreas(cfg, path); break;
-            case "events.json":          engine.DumpEvents(cfg, path, EventFilters.All); break;
-            default: throw new ArgumentOutOfRangeException(nameof(file), file, "unsupported patch dump file");
-        }
-    }
-
-    /// <summary>
-    /// DumpExperimental writes a whole set of section files per call, so both engines run once and
-    /// every section file returned by either of them becomes its own row. When one engine throws, the
-    /// rows still come from the other engine's section list so the table keeps its per-section shape;
-    /// only a double failure collapses into a single Experimental/* row.
-    /// </summary>
-    private static List<(string File, string Result)> CompareExperimental(IDumpEngine legacy, IDumpEngine native, SharedGameConfig cfg, string lDir, string nDir)
-    {
-        var rows = new List<(string, string)>();
-        IReadOnlyList<(string Section, string Path)> lExp = null, nExp = null;
-        string lErr = null, nErr = null;
-        try { Directory.CreateDirectory(lDir); lExp = legacy.DumpExperimental(cfg, lDir); }
-        catch (Exception ex) { lErr = $"ERROR (legacy: {DescribeError(ex)})"; }
-        try { Directory.CreateDirectory(nDir); nExp = native.DumpExperimental(cfg, nDir); }
-        catch (Exception ex) { nErr = $"ERROR (native: {DescribeError(ex)})"; }
-
-        var names = (lExp ?? Array.Empty<(string, string)>()).Select(x => Path.GetFileName(x.Path))
-            .Union((nExp ?? Array.Empty<(string, string)>()).Select(x => Path.GetFileName(x.Path)), StringComparer.Ordinal)
-            .OrderBy(x => x, StringComparer.Ordinal)
-            .ToList();
-        if (names.Count == 0) { rows.Add(("Experimental/*", lErr ?? nErr ?? "ERROR (no sections written)")); return rows; }
-
-        foreach (var name in names)
-            rows.Add(($"Experimental/{name}", lErr ?? nErr ?? CompareFiles(Path.Combine(lDir, name), Path.Combine(nDir, name))));
-        return rows;
-    }
-
-    /// <summary>Run both engines, then byte-compare the two files they were supposed to produce.</summary>
-    private static string CompareOne(Action runLegacy, Action runNative, string lPath, string nPath)
-    {
-        try { Directory.CreateDirectory(Path.GetDirectoryName(lPath)); runLegacy(); }
-        catch (Exception ex) { return $"ERROR (legacy: {DescribeError(ex)})"; }
-        try { Directory.CreateDirectory(Path.GetDirectoryName(nPath)); runNative(); }
-        catch (Exception ex) { return $"ERROR (native: {DescribeError(ex)})"; }
-        return CompareFiles(lPath, nPath);
-    }
-
-    /// <summary>Raw byte comparison (a BOM difference counts); on mismatch, locate the first differing line.</summary>
-    private static string CompareFiles(string lPath, string nPath)
-    {
-        if (!File.Exists(lPath)) return "ERROR (legacy: file not written)";
-        if (!File.Exists(nPath)) return "ERROR (native: file not written)";
-        var lb = File.ReadAllBytes(lPath);
-        var nb = File.ReadAllBytes(nPath);
-        if (lb.AsSpan().SequenceEqual(nb)) return "IDENTICAL";
-
-        // Decode without stripping the BOM so a BOM-only difference still shows up on line 1.
-        var ll = System.Text.Encoding.UTF8.GetString(lb).Split('\n');
-        var nl = System.Text.Encoding.UTF8.GetString(nb).Split('\n');
-        for (int i = 0; i < Math.Min(ll.Length, nl.Length); i++)
-            if (!string.Equals(ll[i], nl[i], StringComparison.Ordinal))
-                return $"DIFF line {i + 1} | legacy: {Clip(ll[i])} | native: {Clip(nl[i])}";
-        return $"DIFF length (legacy {ll.Length} lines, native {nl.Length} lines)";
-    }
-
-    private static string Clip(string s)
-    {
-        s = (s ?? "").TrimEnd('\r');
-        return s.Length <= 120 ? s : s.Substring(0, 120);
     }
 
     /// <summary>Exception type + first line of the message — enough to identify the failure in a table row.</summary>
@@ -3538,6 +3193,217 @@ internal static class Program
         }
         catch (Exception ex) { Console.WriteLine($"FAILED: {ex.GetType().Name}: {ex.Message}"); return 1; }
     }
+
+    /// <summary>
+    /// Prints the Flash Sale tables — the six rotating coin/gem slots in the Shop ("10 Left",
+    /// "Refresh in 3h", "Refresh now: 20 gems"), for both the garage shop and the event shop.
+    ///
+    /// These are NOT ShopItems/BoardShopItem: a flash sale slot is rolled at runtime from a weighted
+    /// group (FlashSaleGroupDefinition.OfferRefs) and each candidate (FlashSaleDefinition) carries
+    /// its own ItemCosts (a private [MetaMember], hence this probe rather than
+    /// --dump-config-library) plus the reward it hands over. FlashSaleShopSettings holds the active
+    /// slots and the refresh price ladder.
+    ///
+    /// --probe-flash-sales &lt;configPath&gt; &lt;languagePath&gt; [filter]
+    /// The filter matches the offer/group id or the rewarded item's ItemType.
+    /// </summary>
+    private static int ProbeFlashSales(string configPath, string languagePath, string filter)
+    {
+        Console.WriteLine($"=== ProbeFlashSales (filter '{filter}') ===");
+        try
+        {
+            var config = LoadSharedConfig(configPath, languagePath);
+
+            Console.WriteLine("\n--- FlashSaleShopSettings ---");
+            if (config.FlashSaleShopSettings == null) Console.WriteLine("  (library missing)");
+            else foreach (var kv in config.FlashSaleShopSettings.EnumerateAll())
+            {
+                var s = kv.Value;
+                Console.WriteLine($"  [{kv.Key}] slots={Describe(MetaObjectWriter.GetMember(s, "ActiveFlashSaleSlots", ConsoleDumpLog.Instance), config, 1)} " +
+                    $"resetCurrency={Flat(MetaObjectWriter.GetMember(s, "FlashResetCurrency", ConsoleDumpLog.Instance))} " +
+                    $"resetCosts={Describe(MetaObjectWriter.GetMember(s, "FlashResetCosts", ConsoleDumpLog.Instance), config, 1)} " +
+                    $"placement={Flat(MetaObjectWriter.GetMember(s, "PlacementId", ConsoleDumpLog.Instance))} " +
+                    $"refreshDisabled={Flat(MetaObjectWriter.GetMember(s, "RefreshDisabled", ConsoleDumpLog.Instance))}");
+            }
+
+            foreach (var (label, groupsObj, offersObj) in new[]
+                     {
+                         ("GARAGE", (object)config.GarageFlashSaleGroups, (object)config.GarageFlashSales),
+                         ("EVENT", config.EventFlashSaleGroups, config.EventFlashSales),
+                     })
+            {
+                Console.WriteLine($"\n--- {label} flash sales ---");
+                if (groupsObj == null) { Console.WriteLine("  (groups library missing)"); }
+                else
+                {
+                    var groups = (System.Collections.IEnumerable)groupsObj.GetType().GetMethod("EnumerateAll").Invoke(groupsObj, null);
+                    int gn = 0;
+                    foreach (var kv in groups)
+                    {
+                        gn++;
+                        var g = kv.GetType().GetProperty("Value").GetValue(kv);
+                        var key = kv.GetType().GetProperty("Key").GetValue(kv)?.ToString() ?? "?";
+                        var offers = MetaObjectWriter.GetMember(g, "OfferRefs", ConsoleDumpLog.Instance) as System.Collections.IEnumerable;
+                        var names = new List<string>();
+                        if (offers != null) foreach (var o in offers) names.Add(Flat(o));
+                        if (!string.IsNullOrEmpty(filter)
+                            && !key.Contains(filter, StringComparison.OrdinalIgnoreCase)
+                            && !names.Any(n => n.Contains(filter, StringComparison.OrdinalIgnoreCase))) continue;
+                        Console.WriteLine($"  [{key}] slot={Flat(MetaObjectWriter.GetMember(g, "SlotId", ConsoleDumpLog.Instance))} " +
+                            $"weight={Flat(MetaObjectWriter.GetMember(g, "Weight", ConsoleDumpLog.Instance))} " +
+                            $"placement={Flat(MetaObjectWriter.GetMember(g, "PlacementId", ConsoleDumpLog.Instance))} " +
+                            $"ignoreRoll={Flat(MetaObjectWriter.GetMember(g, "IgnoreRoll", ConsoleDumpLog.Instance))} " +
+                            $"candidates=[{string.Join(", ", names)}]");
+                    }
+                    Console.WriteLine($"  ({gn} group(s))");
+                }
+
+                if (offersObj == null) { Console.WriteLine("  (offers library missing)"); continue; }
+                var lib = (System.Collections.IEnumerable)offersObj.GetType().GetMethod("EnumerateAll").Invoke(offersObj, null);
+                int n = 0, shown = 0;
+                foreach (var kv in lib)
+                {
+                    n++;
+                    var d = kv.GetType().GetProperty("Value").GetValue(kv);
+                    var key = kv.GetType().GetProperty("Key").GetValue(kv)?.ToString() ?? "?";
+                    var reward = Describe(MetaObjectWriter.GetMember(d, "Reward", ConsoleDumpLog.Instance), config, 1);
+                    if (!string.IsNullOrEmpty(filter)
+                        && !key.Contains(filter, StringComparison.OrdinalIgnoreCase)
+                        && !reward.Contains(filter, StringComparison.OrdinalIgnoreCase)) continue;
+                    shown++;
+                    Console.WriteLine($"    {key,-40} qty={Flat(MetaObjectWriter.GetMember(d, "Quantity", ConsoleDumpLog.Instance)),-4} " +
+                        $"weight={Flat(MetaObjectWriter.GetMember(d, "Weight", ConsoleDumpLog.Instance)),-5} " +
+                        $"cost={Describe(MetaObjectWriter.GetMember(d, "ItemCosts", ConsoleDumpLog.Instance), config, 1)} " +
+                        $"reward={reward} " +
+                        $"req={Describe(MetaObjectWriter.GetMember(d, "PlayerRequirements", ConsoleDumpLog.Instance), config, 1)} " +
+                        $"seg={Describe(MetaObjectWriter.GetMember(d, "Segments", ConsoleDumpLog.Instance), config, 1)}");
+                }
+                Console.WriteLine($"  ({n} offer(s), {shown} shown)");
+            }
+            return 0;
+        }
+        catch (Exception ex) { Console.WriteLine($"FAILED: {ex.GetType().Name}: {ex.Message}\n{ex.StackTrace}"); return 1; }
+    }
+
+    /// <summary>MetaplayCore + language + config archive import, shared by the config probes.</summary>
+    private static SharedGameConfig LoadSharedConfig(string configPath, string languagePath)
+    {
+        MetaplayCore.Initialize();
+        if (!string.IsNullOrEmpty(languagePath) && File.Exists(languagePath))
+        {
+            var langHash = ContentHash.ParseString(Path.GetFileName(languagePath));
+            MetaplaySDK.ActiveLanguage = LocalizationLanguage.ImportBinary(langHash, File.ReadAllBytes(languagePath));
+        }
+        var archive = ConfigArchive.FromBytes(File.ReadAllBytes(configPath));
+        var config = (SharedGameConfig)GameConfigFactory.Instance
+            .ImportSharedGameConfig(PatchedConfigArchive.WithNoPatches(archive));
+        ClientGlobal.SharedGameConfig = config;
+        return config;
+    }
+
+    /// <summary>
+    /// Prints the ShopItems library — the coin/gem shop tables (main Shop, Garage Shop and the
+    /// per-event board shops). No dumper exports this library: the Events dump's "Shops" section is
+    /// config.ShopEvents (the IAP event shops), which the 26.07.01 archive does not even contain.
+    ///
+    /// Why this is not --dump-config-library: that one reflects over PUBLIC properties, and every
+    /// interesting member here is a PRIVATE [MetaMember] — BoardShopItem.BoardId/PriceCurve/
+    /// PurchaseLimiter, ConstantPriceCurve.Currency/Price, LifetimeLimitPurchaseLimiter.MaxPurchases
+    /// — so the generic dump prints "ActualItem = BoardShopItem" and stops. This walks [MetaMember]s
+    /// through MetaObjectWriter.Members, the same reflection the dumpers use.
+    ///
+    /// --probe-shop-items &lt;configPath&gt; &lt;languagePath&gt; [filter]
+    /// The filter matches the shop item id, the board id or the sold item's ItemType.
+    /// </summary>
+    private static int ProbeShopItems(string configPath, string languagePath, string filter)
+    {
+        Console.WriteLine($"=== ProbeShopItems (filter '{filter}') ===");
+        try
+        {
+            var config = LoadSharedConfig(configPath, languagePath);
+
+            if (config.ShopItems == null) { Console.WriteLine("ShopItems library is null (not in archive)."); return 1; }
+
+            var byBoard = new SortedDictionary<string, List<string>>(StringComparer.Ordinal);
+            var byItemKind = new SortedDictionary<string, int>(StringComparer.Ordinal);
+            int total = 0, shown = 0;
+
+            foreach (var kv in config.ShopItems.EnumerateAll())
+            {
+                total++;
+                var info = kv.Value;
+                var actual = MetaObjectWriter.GetMember(info, "ActualItem", ConsoleDumpLog.Instance);
+                var kind = actual?.GetType().Name ?? "(null)";
+                byItemKind.TryGetValue(kind, out var c); byItemKind[kind] = c + 1;
+
+                var board = Flat(actual == null ? null : MetaObjectWriter.GetMember(actual, "BoardId", ConsoleDumpLog.Instance));
+                var itemName = ItemTypeOf(actual == null ? null : MetaObjectWriter.GetMember(actual, "ItemDef", ConsoleDumpLog.Instance), config);
+                var key = kv.Key?.ToString() ?? "?";
+
+                if (!string.IsNullOrEmpty(filter)
+                    && !key.Contains(filter, StringComparison.OrdinalIgnoreCase)
+                    && !board.Contains(filter, StringComparison.OrdinalIgnoreCase)
+                    && !itemName.Contains(filter, StringComparison.OrdinalIgnoreCase)) continue;
+
+                shown++;
+                var line =
+                    $"    {key,-42} item={itemName,-28} " +
+                    $"price={Describe(actual == null ? null : MetaObjectWriter.GetMember(actual, "PriceCurve", ConsoleDumpLog.Instance), config, 0)} " +
+                    $"limit={Describe(actual == null ? null : MetaObjectWriter.GetMember(actual, "PurchaseLimiter", ConsoleDumpLog.Instance), config, 0)} " +
+                    $"cat={Flat(MetaObjectWriter.GetMember(info, "ShopCategory", ConsoleDumpLog.Instance))} " +
+                    $"disabled={Flat(MetaObjectWriter.GetMember(info, "Disabled", ConsoleDumpLog.Instance))} " +
+                    $"underMore={Flat(MetaObjectWriter.GetMember(info, "IsUnderMore", ConsoleDumpLog.Instance))}";
+                var groupKey = string.IsNullOrEmpty(board) ? $"({kind})" : board;
+                if (!byBoard.TryGetValue(groupKey, out var list)) byBoard[groupKey] = list = new List<string>();
+                list.Add(line);
+            }
+
+            foreach (var pair in byBoard)
+            {
+                Console.WriteLine($"\n[{pair.Key}]  ({pair.Value.Count} item(s))");
+                foreach (var l in pair.Value) Console.WriteLine(l);
+            }
+
+            Console.WriteLine($"\n({total} entries in ShopItems, {shown} shown)");
+            Console.WriteLine("ActualItem kinds: " + string.Join(", ", byItemKind.Select(p => $"{p.Key} x{p.Value}")));
+            return 0;
+        }
+        catch (Exception ex) { Console.WriteLine($"FAILED: {ex.GetType().Name}: {ex.Message}"); return 1; }
+    }
+
+    /// <summary>ItemDef -> the ItemType string the wiki knows the item by ("" when unresolvable).</summary>
+    private static string ItemTypeOf(object itemDef, SharedGameConfig config)
+    {
+        if (!(itemDef is ItemDef def) || config.Items == null) return "";
+        return config.Items.TryGetValue(def.ConfigKey, out var d) && d?.ItemType != null ? d.ItemType : $"#{def.ConfigKey}";
+    }
+
+    /// <summary>One-line "TypeName(member=value, …)" over [MetaMember]s, recursive up to depth 3.</summary>
+    private static string Describe(object node, SharedGameConfig config, int depth)
+    {
+        if (node == null) return "(null)";
+        if (node is ItemDef) return ItemTypeOf(node, config);
+        var t = node.GetType();
+        if (depth > 3 || t.IsPrimitive || t.IsEnum || node is string) return Flat(node);
+        if (node is System.Collections.IEnumerable seq)
+        {
+            var items = new List<string>();
+            foreach (var x in seq) items.Add(Describe(x, config, depth + 1));
+            return "[" + string.Join(", ", items) + "]";
+        }
+        var parts = new List<string>();
+        foreach (var m in MetaObjectWriter.Members(node))
+        {
+            object v = null;
+            try { v = m.Get(); } catch { continue; }
+            parts.Add($"{m.Name}={Describe(v, config, depth + 1)}");
+        }
+        return parts.Count == 0 ? Flat(node) : $"{t.Name}({string.Join(", ", parts)})";
+    }
+
+    /// <summary>ToString, except a MetaRef prints the key it points at (its ToString is the type name).</summary>
+    private static string Flat(object v) =>
+        v is Metaplay.Core.IMetaRef r ? r.KeyObject?.ToString() ?? "" : v?.ToString() ?? "";
 
     /// <summary>
     /// Prints the entries of one GameConfigLibrary — keys, and for a filtered key the whole entry

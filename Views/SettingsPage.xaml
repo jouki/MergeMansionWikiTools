@@ -1,4 +1,4 @@
-<UserControl x:Class="MergeMansionWikiTools.Views.SettingsPage"
+﻿<UserControl x:Class="MergeMansionWikiTools.Views.SettingsPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
@@ -698,27 +698,6 @@
                                                  Unchecked="ToggleDumpAutoNewFolder_Changed" />
                             </Grid>
 
-                            <Grid Margin="0,12,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                                    <TextBlock Text="Dumper engine (experimental)" FontSize="13" FontWeight="SemiBold"
-                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                               Margin="0,0,0,4" />
-                                    <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"
-                                               TextWrapping="Wrap">
-                                        <Run Text="Native is the in-house reimplementation. Outputs are byte-identical when validated; switch back to Legacy if a dump fails." />
-                                    </TextBlock>
-                                </StackPanel>
-                                <ComboBox x:Name="cmbDumperEngine" Grid.Column="1" Width="200"
-                                          VerticalAlignment="Center" Margin="16,0,0,0"
-                                          SelectionChanged="CmbDumperEngine_SelectionChanged">
-                                    <ComboBoxItem Content="Legacy (upstream)" />
-                                    <ComboBoxItem Content="Native" />
-                                </ComboBox>
-                            </Grid>
                         </StackPanel>
                     </Border>
 

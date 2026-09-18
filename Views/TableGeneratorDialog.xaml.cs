@@ -794,7 +794,10 @@ public partial class TableGeneratorDialog : FluentWindow
         if (t == "== Statistics ==") return SectionKey.MergeStages;
         if (t == "=== Tasks ===") return SectionKey.Tasks;
         if (t == "=== Drop Odds ===") return SectionKey.DropOdds;
-        if (t == "=== Decay Odds ===") return SectionKey.DecayOdds;
+        // Same section, two headings: the generator calls it "Transform Odds" when the roll sits
+        // on a transient stage (see WikiTableGenerator.GenerateDecayOddsSection). Both must map
+        // here or a user edit to that section would not be tracked as an override.
+        if (t == "=== Decay Odds ===" || t == "=== Transform Odds ===") return SectionKey.DecayOdds;
         if (t == "=== [[Double Bubble]]s ===") return SectionKey.DoubleBubbles;
         if (t == "== Uses ==") return SectionKey.Uses;
         return null;

@@ -125,8 +125,10 @@ public sealed partial class EventSerializer
 
     /// <summary>
     /// The event item's merge-CHAIN name (its item category), not the level-1 item name: the
-    /// chain's own <c>ItemCategory_&lt;key&gt;</c>, then the item's pool tag, then its
-    /// <c>OverrideLocalizationItemCategory</c> used as a whole key.
+    /// chain's own <c>ItemCategory_&lt;key&gt;</c>, then its <c>OverrideLocalizationItemCategory</c>
+    /// used as a whole key, then the item's pool tag — the same order as
+    /// <c>ChainSerializer.TryGetChainName</c>, so an event item and its chain cannot end up with
+    /// different names (see that method for why the override outranks the pool tag).
     /// </summary>
     private string? ResolveEventItemChainName(int eventItem)
     {
@@ -135,9 +137,9 @@ public sealed partial class EventSerializer
 
         var chainKey = item.MergeChainDef?.ConfigKey?.Value;
         if (!string.IsNullOrEmpty(chainKey) && TryLoc($"ItemCategory_{chainKey}", out var byChain)) return byChain;
-        if (!string.IsNullOrEmpty(item.PoolTag) && TryLoc($"ItemCategory_{item.PoolTag}", out var byPool)) return byPool;
         if (!string.IsNullOrEmpty(item.OverrideLocalizationItemCategory)
             && TryLoc(item.OverrideLocalizationItemCategory, out var byOverride)) return byOverride;
+        if (!string.IsNullOrEmpty(item.PoolTag) && TryLoc($"ItemCategory_{item.PoolTag}", out var byPool)) return byPool;
         return null;
     }
 

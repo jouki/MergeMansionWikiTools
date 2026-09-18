@@ -1,4 +1,4 @@
-using MergeMansionWikiTools.Views;
+﻿using MergeMansionWikiTools.Views;
 using Xunit;
 
 namespace MergeMansionWikiTools.Tests;
@@ -190,5 +190,34 @@ public class MappingFlagToggleTests
         var lua = Module("\t[\"Y_01\"] = {chainName = \"Y\"},");
         var result = ChainBrowserPage.SetVariantField(lua, "X_01", "groupOdds", "true");
         Assert.Contains("[\"X_01\"] = {groupOdds = true}", result);
+    }
+
+    /// <summary>
+    /// The transient flag (v0.24.80) rides the SAME generic toggle as alias/variant — this is the
+    /// regression guard that it keeps doing so, since the Set as Transient button has no code of its
+    /// own beyond passing the flag name.
+    /// </summary>
+    [Fact]
+    public void TransientFlag_setAndRemove_goThroughTheSharedToggle()
+    {
+        var lua = Module("\t[\"X_01\"] = {chainName = \"X\"},");
+
+        var set = ChainBrowserPage.ApplyFlagToggle(lua, "X_01", "isTransient", remove: false);
+        Assert.Contains("chainName = \"X\", isTransient = true", set);
+
+        var removed = ChainBrowserPage.ApplyFlagToggle(set, "X_01", "isTransient", remove: true);
+        Assert.DoesNotContain("isTransient", removed);
+        Assert.Contains("chainName = \"X\"", removed);
+    }
+
+    [Fact]
+    public void TransientFlag_onAnItemWithNoEntry_createsOne()
+    {
+        var lua = Module("\t[\"Other_01\"] = {isAlias = true},");
+
+        var result = ChainBrowserPage.ApplyFlagToggle(lua, "New_01", "isTransient", remove: false);
+
+        Assert.Contains("[\"New_01\"] = {isTransient = true},", result);
+        Assert.Contains("Other_01", result);
     }
 }

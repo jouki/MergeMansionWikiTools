@@ -1,4 +1,4 @@
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace MergeMansionWikiTools.Models;
 
@@ -262,6 +262,23 @@ public class ParsedItem
     public int HowManyGeneratedInCycle { get; set; } = 1;
     public int ActivationHowManyCycles { get; set; } = -1;
     public int StorageMax { get; set; }
+
+    /// <summary>
+    /// True when the item's mini-charge fields carry the game's <b>9999 sentinel</b> rather than real
+    /// numbers. 9999 in <see cref="ActivationAmountInCycle"/> (<c>MiniChargesInSingleCharge</c>) or
+    /// <see cref="HowManyGeneratedInCycle"/> (<c>DropsInSingleMiniCharge</c>) marks a stateful
+    /// event/minigame item that produces indefinitely — it is NOT a droppable producer with a finite
+    /// charge budget (Piano metronomes, the Hopeberry furnace, the Sweet Mess chocolate machine, the
+    /// Football storage, the Murder at the Mansion detective pair). Multiplying those out yields
+    /// nonsense like <c>99980001</c> drops.
+    /// <para>
+    /// Every consumer that turns charges into numbers must skip these: the Lua emitter leaves the
+    /// drop fields out, and the table generator must not open a Drops Values column that can only
+    /// ever be dashes. Rule + affected items: <c>_CONTEXT/Game/Mechaniky.md</c> → "Sentinel hodnoty
+    /// 9999/9999".
+    /// </para>
+    /// </summary>
+    public bool IsActivationSentinel => ActivationAmountInCycle >= 9999 || HowManyGeneratedInCycle >= 9999;
     public int MaxCharges { get; set; }
     /// <summary>
     /// True when item starts with a pre-filled storage. Determines how to interpret
@@ -438,6 +455,17 @@ public class ParsedItem
 
     /// <summary>Whether this item is an alias (secondary) in a wiki merge group.</summary>
     public bool IsAlias { get; set; }
+
+    /// <summary>
+    /// A pass-through stage: the item appears and within seconds turns into something else, so
+    /// the wiki never links to it — a transform or decay that lands here is folded through to
+    /// whatever it becomes, carrying the odds of that roll. Set from the mapping flag
+    /// <c>isTransient = true</c>. See <c>_CONTEXT/Game/Eventy.md</c> (Voyance's House loop).
+    /// </summary>
+    public bool IsTransient { get; set; }
+
+    /// <summary>First-playthrough-only copy (mapping <c>isFtue</c>) — excluded from aggregated cells.</summary>
+    public bool IsFtue { get; set; }
 
     /// <summary>
     /// Whether this item is an explicit display VARIANT (e.g. the A/B/C generator outcomes of a

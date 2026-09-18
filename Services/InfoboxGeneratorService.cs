@@ -1,4 +1,4 @@
-using System.Text;
+﻿using System.Text;
 using MergeMansionWikiTools.Models;
 
 namespace MergeMansionWikiTools.Services;
@@ -511,6 +511,7 @@ public class InfoboxGeneratorService
 
         foreach (var item in chain.Items)
         {
+            if (item.IsFtue) continue;   // first-playthrough-only copy -> Gameplay Tips, not the infobox
             var allOdds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             if (item.DropOdds != null)  foreach (var k in item.DropOdds.Keys)  allOdds.Add(k);
             if (item.SpawnOdds != null) foreach (var k in item.SpawnOdds.Keys) allOdds.Add(k);
@@ -586,48 +587,67 @@ public class InfoboxGeneratorService
         ParsedChain chain, IReadOnlyList<ParsedChain> allChains, Dictionary<string, string> itemNames)
     {
         var itemTypeToChain = BuildItemTypeToChain(allChains);
+        var decayLookup = ItemLookup(allChains);
 
         // Group decay targets by chainName, collecting all decay levels per chain
         var byChain = new Dictionary<string, (ParsedChain Chain, SortedSet<int> Levels)>(StringComparer.OrdinalIgnoreCase);
         var unmatchedNames = new List<string>();
 
-        foreach (var item in chain.Items)
+        // Primaries answer first; aliases only fill in when that produced nothing. An item decays
+        // into exactly ONE thing, and aliases that disagree would list a second target with no odds
+        // — Investigation: The Mansion decays into the opened location every cycle, while its FTUE
+        // copy drops back to the locked one once ever (user report, 2026-09-18). Mirrors
+        // WikiTableGenerator.BuildDecaysIntoCellAggregated; the fallback keeps Scarab Box, whose
+        // primary only points at its own row, from losing its one real target.
+        void Collect(IEnumerable<ParsedItem> from)
         {
-            var decayTypes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
-            if (!string.IsNullOrEmpty(item.DecayIntoItemType))
-                decayTypes.Add(item.DecayIntoItemType);
-            if (!string.IsNullOrEmpty(item.SpawnDecayIntoItemType))
-                decayTypes.Add(item.SpawnDecayIntoItemType);
-            if (!string.IsNullOrEmpty(item.DecayAfterLastCycleItemType))
-                decayTypes.Add(item.DecayAfterLastCycleItemType);
-            if (item.DecayAfterLastCycleOdds != null)
-                foreach (var key in item.DecayAfterLastCycleOdds.Keys)
-                    decayTypes.Add(key);
-
-            foreach (var decayType in decayTypes)
+            foreach (var item in from)
             {
-                if (itemTypeToChain.TryGetValue(decayType, out var decayChain))
-                {
-                    var matchingItem = decayChain.Items
-                        .FirstOrDefault(i => string.Equals(i.ItemType, decayType, StringComparison.OrdinalIgnoreCase));
-                    int lvl = ResolveLevel(decayType, matchingItem);
-                    var chainName = ResolveChainName(decayChain, decayType);
+                var decayTypes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-                    if (!byChain.TryGetValue(chainName, out var entry))
-                    {
-                        entry = (decayChain, new SortedSet<int>());
-                        byChain[chainName] = entry;
-                    }
-                    entry.Levels.Add(lvl);
-                }
-                else if (itemNames.TryGetValue(decayType, out var name))
+                if (!string.IsNullOrEmpty(item.DecayIntoItemType))
+                    decayTypes.Add(item.DecayIntoItemType);
+                if (!string.IsNullOrEmpty(item.SpawnDecayIntoItemType))
+                    decayTypes.Add(item.SpawnDecayIntoItemType);
+                if (!string.IsNullOrEmpty(item.DecayAfterLastCycleItemType))
+                    decayTypes.Add(item.DecayAfterLastCycleItemType);
+                if (item.DecayAfterLastCycleOdds != null)
+                    foreach (var key in item.DecayAfterLastCycleOdds.Keys)
+                        decayTypes.Add(key);
+
+                foreach (var rawDecayType in decayTypes)
+                foreach (var (decayType, decayOdds) in TransientFold.Resolve(rawDecayType, decayLookup))
                 {
-                    if (!unmatchedNames.Contains(name))
-                        unmatchedNames.Add(name);
+                    if (itemTypeToChain.TryGetValue(decayType, out var decayChain))
+                    {
+                        var matchingItem = decayChain.Items
+                            .FirstOrDefault(i => string.Equals(i.ItemType, decayType, StringComparison.OrdinalIgnoreCase));
+                        int lvl = ResolveLevel(decayType, matchingItem);
+                        var chainName = ResolveChainName(decayChain, decayType);
+
+                        // Same guard as transforms_to: an alias decaying into another alias of the SAME
+                        // wiki item is an under-the-hood swap the player never sees (Lady Voyance's House
+                        // decayed "into itself" because alias MGSpB rolls into alias LockedB).
+                        if (IsSelfReference(chain, item, chainName, lvl)) continue;
+
+                        if (!byChain.TryGetValue(chainName, out var entry))
+                        {
+                            entry = (decayChain, new SortedSet<int>());
+                            byChain[chainName] = entry;
+                        }
+                        entry.Levels.Add(lvl);
+                    }
+                    else if (itemNames.TryGetValue(decayType, out var name))
+                    {
+                        if (!unmatchedNames.Contains(name))
+                            unmatchedNames.Add(name);
+                    }
                 }
             }
         }
+
+        Collect(chain.Items.Where(i => !i.IsAlias && !i.IsFtue));
+        if (byChain.Count == 0 && unmatchedNames.Count == 0) Collect(chain.Items.Where(i => i.IsAlias && !i.IsFtue));
 
         var parts = new List<string>();
         foreach (var (chainName, (dChain, levels)) in byChain)
@@ -657,23 +677,32 @@ public class InfoboxGeneratorService
         ParsedChain chain, IReadOnlyList<ParsedChain> allChains)
     {
         var itemTypeToChain = BuildItemTypeToChain(allChains);
+        var lookup = ItemLookup(allChains);
         var seen = new HashSet<(string Name, int Level)>();
         var result = new List<string>();
 
         foreach (var item in chain.Items)
         {
+            if (item.IsFtue) continue;   // first-playthrough-only copy -> Gameplay Tips, not the infobox
             // Sink reward (Transformative Item — e.g. Distillation Apparatus output)
             if (item.IsSink && !string.IsNullOrEmpty(item.SinkRewardItemType) && !IsSinkSuppressed(item))
             {
-                if (itemTypeToChain.TryGetValue(item.SinkRewardItemType, out var rewardChain))
+                // Fold a transient stage away — the reader wants what it becomes, with odds.
+                foreach (var (resolvedType, odds) in TransientFold.Resolve(item.SinkRewardItemType, lookup))
                 {
-                    var rewardItem = rewardChain.Items
-                        .FirstOrDefault(i => string.Equals(i.ItemType, item.SinkRewardItemType, StringComparison.OrdinalIgnoreCase));
-                    int lvl = ResolveLevel(item.SinkRewardItemType, rewardItem);
-                    var chainName = ResolveChainName(rewardChain, item.SinkRewardItemType);
+                    if (!itemTypeToChain.TryGetValue(resolvedType, out var rewardChain)) continue;
 
+                    var rewardItem = rewardChain.Items
+                        .FirstOrDefault(i => string.Equals(i.ItemType, resolvedType, StringComparison.OrdinalIgnoreCase));
+                    int lvl = ResolveLevel(resolvedType, rewardItem);
+                    var chainName = ResolveChainName(rewardChain, resolvedType);
+
+                    if (IsSelfReference(chain, item, chainName, lvl)) continue;
                     if (seen.Add((chainName, lvl)))
-                        result.Add($"{{{{Item|{chainName}|{lvl}}}}}");
+                        // No percentage here on purpose: the infobox is a summary, and the odds
+                        // already have their own section plus the Merge Stages cell. Repeating
+                        // them a third time is clutter (user, 2026-09-18).
+                        result.Add(TransientFold.Format(chainName, lvl, null));
                 }
             }
 
@@ -689,12 +718,49 @@ public class InfoboxGeneratorService
                 int lvl = ResolveLevel(item.MergeResultItemType, mergeItem);
                 var chainName = ResolveChainName(mergeChain, item.MergeResultItemType);
 
+                if (IsSelfReference(chain, item, chainName, lvl)) continue;
                 if (seen.Add((chainName, lvl)))
                     result.Add($"{{{{Item|{chainName}|{lvl}}}}}");
             }
         }
 
         return result;
+    }
+
+    /// <summary>
+    /// True when a transform/decay target resolves to the very item it came from — same wiki chain
+    /// AND same level. Nothing turns into itself, so such a row is always wrong.
+    /// <para>
+    /// <b>The normal source is an FTUE alias, and that is not a data defect.</b> The game scripts the
+    /// opening of an event with its own FTUE item types and swaps them for the ordinary ones once the
+    /// real mechanics start; to the player it is one and the same item throughout, which is exactly
+    /// why those types are mapped as aliases with NO <c>level</c> of their own. Both sides of an FTUE
+    /// sink→reward pair therefore fall back to the level in their item id (<c>…_01</c> = 1), while
+    /// the non-FTUE twins are mapped 1 → 2 — so the alias pair looks like a transform onto itself.
+    /// Dropping the row silently is the correct outcome; giving aliases levels would invent
+    /// pseudo-items the wiki does not want (user decision, 2026-09-18).
+    /// </para>
+    /// <para>
+    /// A NON-alias hitting this is different — there the levels really are wrong — so that one is
+    /// reported. Reported on Seance: Lady Voyance's House, whose infobox listed "transforms to
+    /// Seance: Lady Voyance's House (L1)" beside the correct (L2).
+    /// </para>
+    /// </summary>
+    private bool IsSelfReference(ParsedChain chain, ParsedItem source, string targetChainName, int targetLevel)
+    {
+        int sourceLevel = ResolveLevel(source.ItemType, source);
+        var sourceChainName = ResolveChainName(chain, source.ItemType);
+        if (sourceLevel != targetLevel
+            || !string.Equals(sourceChainName, targetChainName, StringComparison.Ordinal))
+            return false;
+
+        if (source.IsAlias)
+            AppLogger.Debug($"[Infobox] {source.ItemType}: alias transform resolves onto itself "
+                + $"({targetChainName} L{targetLevel}) - row skipped (expected for FTUE aliases)");
+        else
+            Warnings.Add($"⚠ {source.ItemType} would transform into itself ({targetChainName} L{targetLevel}) "
+                + "— row skipped. Check the level overrides of this chain in Items/Mapping.");
+        return true;
     }
 
     // ── Used In (this chain's items are sink requirements elsewhere) ──
@@ -846,6 +912,17 @@ public class InfoboxGeneratorService
                 if (!string.IsNullOrEmpty(item.NumericConfigKey))
                     dict.TryAdd(item.NumericConfigKey, new ConfigKeyMatch(chain, item));
         return dict;
+    }
+
+    /// <summary>Item lookup across all chains — the resolver <see cref="TransientFold"/> needs.</summary>
+    private static Func<string, ParsedItem?> ItemLookup(IReadOnlyList<ParsedChain> allChains)
+    {
+        var dict = new Dictionary<string, ParsedItem>(StringComparer.OrdinalIgnoreCase);
+        foreach (var chain in allChains)
+            foreach (var item in chain.Items)
+                if (!string.IsNullOrEmpty(item.ItemType))
+                    dict.TryAdd(item.ItemType, item);
+        return t => dict.TryGetValue(t, out var i) ? i : null;
     }
 
     private static Dictionary<string, ParsedChain> BuildItemTypeToChain(IReadOnlyList<ParsedChain> allChains)

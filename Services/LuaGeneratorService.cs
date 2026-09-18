@@ -27,6 +27,28 @@ public class LuaGeneratorService
         return sb.ToString();
     }
 
+    /// <summary>
+    /// Public access to <see cref="BuildLuaHeader"/> for generators that live in their own service
+    /// (Module:Datatable/DailyScoop) but must carry the same createdAt/mmwtVersion/gameVersion
+    /// preamble every generated module starts with — the wiki-merge readers parse it from line 1.
+    /// </summary>
+    public static string BuildHeader(string? createdAt, string? gameVersion = null)
+        => BuildLuaHeader(createdAt, gameVersion);
+
+    /// <summary>
+    /// The multi-target decay roll of an item, whichever mechanic carries it: a lifetime decay
+    /// (<c>DecayFeatures.ItemProducer</c>) or the roll a spent generator makes after its last cycle
+    /// (<c>ActivationFeatures.DecayAfterLastCycleProducer</c>). Both mean the same thing to a reader
+    /// — "this turns into one of these, with these odds" — and both must reach <c>decayInto</c> in
+    /// Module:Datatable/Items, or the Decay Odds section has nothing to render. Only the first was
+    /// emitted, so Unfortunate Events L9 (60% Voyance's Black Cat / 40% Murder Weapon) never showed
+    /// up on the wiki even after the parser learned to read it (v0.24.85).
+    /// </summary>
+    private static Dictionary<string, double>? DecayRollOf(ParsedItem item) =>
+        item.DecayIntoOdds is { Count: > 0 } ? item.DecayIntoOdds
+        : item.DecayAfterLastCycleOdds is { Count: > 1 } ? item.DecayAfterLastCycleOdds
+        : null;
+
     // ── Area Lua ──────────────────────────────────────────────────────
 
     /// <summary>
@@ -732,7 +754,7 @@ public class LuaGeneratorService
                 // Aliases are normally skipped, but a decay "roller" (alias carrying multi-target
                 // decay odds) must survive so the Decay Odds section can read its decayInto.
                 if (string.IsNullOrEmpty(item.ItemType) || item.IsTestTag) continue;
-                if (item.IsAlias && item.DecayIntoOdds == null) continue;
+                if (item.IsAlias && DecayRollOf(item) == null) continue;
                 // Resolve generator fields — primary (ActivationFeatures) or secondary (SpawnFeatures)
                 int? skipPrice = null;
                 long rechargeTime = 0;
@@ -749,10 +771,8 @@ public class LuaGeneratorService
                     // These are stateful event/minigame items, NOT real droppable generators.
                     // Skip drops accounting (charges/dropsPerCharge/rechargeTime stay 0 → not emitted to Lua)
                     // — wiki preserves dash output. Item still added to items table for chain navigation.
-                    // See memory/game-mechanic-rules.md.
-                    bool isSentinel = item.ActivationAmountInCycle >= 9999
-                                   || item.HowManyGeneratedInCycle >= 9999;
-                    if (!isSentinel)
+                    // Rule + affected items: _CONTEXT/Game/Mechaniky.md → "Sentinel hodnoty 9999/9999".
+                    if (!item.IsActivationSentinel)
                     {
                         skipPrice = item.SpeedUpCostGems;
                         rechargeTime = item.RechargeTimeMs;
@@ -945,7 +965,7 @@ public class LuaGeneratorService
                     mergeResult,
                     item.DecayAfterLastCycleOdds,
                     cycles,
-                    item.DecayIntoOdds,
+                    DecayRollOf(item),
                     item.IsChest,
                     item.ChestRollCount,
                     // constant boxes also carry synthesized 100% odds — suppress those in favour of the ordered payload

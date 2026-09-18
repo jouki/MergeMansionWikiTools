@@ -901,7 +901,7 @@ public partial class GameDataDumperPage : UserControl
                 GetPathText(txtPatchPath),
                 GetPathText(txtLanguagePath),
                 outputPath,
-                DumpEngineFactory.Create(_main.Settings.DumperEngine, m => ((IProgress<string>)progress).Report(m)),
+                DumpEngineFactory.Create(m => ((IProgress<string>)progress).Report(m)),
                 mode,
                 GetSelectedEventFilters(),
                 _main.Settings.DumpIncludeStaleBranches,

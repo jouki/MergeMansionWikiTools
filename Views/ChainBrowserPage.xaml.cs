@@ -1,4 +1,4 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -281,6 +281,8 @@ public class ItemViewModel : INotifyPropertyChanged
     public bool IsColliding => Source.IsColliding;
     public bool IsAlias => Source.IsAlias;
     public bool IsVariant => Source.IsVariant;
+    /// <summary>Pass-through stage — generators fold it away and link to what it becomes.</summary>
+    public bool IsTransient => Source.IsTransient;
     public string? VariantLabel => Source.VariantLabel;
 
     /// <summary>Inline-editable variant label (isVariant = "Spring"). Defaults to the live mapping
@@ -922,9 +924,10 @@ public partial class ChainBrowserPage : UserControl
             {
                 if (btn.Content is string content)
                 {
-                    if (content == "Set Level")
+                    if (content is "Set Level" or "Set Levels")
                     {
-                        btn.Visibility = count == 1 ? Visibility.Visible : Visibility.Collapsed;
+                        btn.Visibility = count >= 1 ? Visibility.Visible : Visibility.Collapsed;
+                        btn.Content = count > 1 ? "Set Levels" : "Set Level";
                         btn.IsEnabled = wikiVerified;
                         btn.ToolTip = wikiVerified ? null : "Wiki connection required";
                     }
@@ -960,6 +963,17 @@ public partial class ChainBrowserPage : UserControl
                         var checkedItems = chainVm.Items.Where(i => i.IsChecked).ToList();
                         bool allVariant = checkedItems.Count > 0 && checkedItems.All(i => i.IsVariant);
                         btn.Content = allVariant ? "Remove Variant" : "Set as Variant";
+                    }
+                    else if (content is "Set as Transient" or "Remove Transient")
+                    {
+                        btn.Visibility = count >= 1 ? Visibility.Visible : Visibility.Collapsed;
+                        btn.IsEnabled = wikiVerified;
+                        btn.ToolTip = wikiVerified
+                            ? "Pass-through stage: pages link to what it becomes (with odds), not to it"
+                            : "Wiki connection required";
+                        var checkedItems = chainVm.Items.Where(i => i.IsChecked).ToList();
+                        bool allTransient = checkedItems.Count > 0 && checkedItems.All(i => i.IsTransient);
+                        btn.Content = allTransient ? "Remove Transient" : "Set as Transient";
                     }
                 }
             }
@@ -1319,31 +1333,81 @@ public partial class ChainBrowserPage : UserControl
         }
     }
 
-    private void BtnSetLevel_Click(object sender, RoutedEventArgs e)
+    /// <summary>
+    /// Bulk level editor for the checked items. Works for any selection size (it used to be
+    /// single-item only, which is why the button hid as soon as a second item was ticked): the
+    /// dialog collects a level per item, this method turns the result into a real mapping diff and
+    /// hands it to the shared confirm-and-publish path.
+    /// </summary>
+    private async void BtnSetLevel_Click(object sender, RoutedEventArgs e)
     {
         var chainVm = GetChainVmFromButton(sender);
         if (chainVm == null) return;
 
         var checkedItems = chainVm.Items.Where(i => i.IsChecked).ToList();
-        if (checkedItems.Count != 1) return;
+        if (checkedItems.Count == 0) return;
 
-        var dialog = new MoveItemsDialog(
-            _main, chainVm.Source,
-            checkedItems.Select(i => i.Source).ToList(),
-            singleItemMode: true);
-        dialog.Owner = Window.GetWindow(this);
-
-        if (dialog.ShowDialog() == true)
+        var dialog = new SetLevelsDialog(chainVm.Source.DisplayName, checkedItems.Select(i => i.Source).ToList())
         {
-            _ = RefreshAfterWikiChange();
+            Owner = Window.GetWindow(this)
+        };
+        if (dialog.ShowDialog() != true || dialog.Result.Count == 0) return;
+
+        string lua;
+        try
+        {
+            lua = await MysteryWikiService.FetchPageContentAsync("Module:Datatable/Items/Mapping");
+            if (string.IsNullOrEmpty(lua)) throw new Exception("Could not fetch Items/Mapping module.");
         }
+        catch (Exception ex)
+        {
+            await new Wpf.Ui.Controls.MessageBox
+            {
+                Title = "Error",
+                Content = $"Failed to fetch mapping: {ex.Message}",
+                CloseButtonText = "OK"
+            }.ShowDialogAsync();
+            return;
+        }
+
+        // Each pass reuses the updated text so a freshly-inserted entry is matched, not duplicated.
+        var newLua = lua;
+        foreach (var (item, level) in dialog.Result)
+            newLua = ApplyLevel(newLua, item.ItemType, level, GameLevelOf(item));
+
+        var touched = dialog.Result
+            .Select(r => checkedItems.First(vm => ReferenceEquals(vm.Source, r.Item)))
+            .ToList();
+        string action = touched.Count == 1 ? "Set level" : "Set levels";
+
+        await ConfirmAndPublishMappingAsync(action, chainVm.Source.DisplayName, touched, lua, newLua);
     }
+
+    /// <summary>
+    /// The level the GAME data gives an item, i.e. what <c>ParsedItem.Level</c> would be with no
+    /// mapping override. Used to decide whether a wanted level needs an override written at all.
+    /// Falls back to the item's current level when the raw table has no entry, which makes the
+    /// override unconditional rather than guessing.
+    /// </summary>
+    private int GameLevelOf(ParsedItem item)
+        => _main.DataService != null && _main.DataService.ItemLevels.TryGetValue(item.ItemType, out var lv)
+            ? lv
+            : -1;
 
     private async void BtnToggleAlias_Click(object sender, RoutedEventArgs e)
         => await ToggleMappingFlagAsync(GetChainVmFromButton(sender), "isAlias", "alias", i => i.IsAlias);
 
     private async void BtnToggleVariant_Click(object sender, RoutedEventArgs e)
         => await ToggleMappingFlagAsync(GetChainVmFromButton(sender), "isVariant", "variant", i => i.IsVariant);
+
+    /// <summary>
+    /// Marks the checked items as a pass-through stage (<c>isTransient</c>): something that exists
+    /// for seconds and immediately rolls on, so the wiki links to what it BECOMES instead — with the
+    /// odds of that roll. See <c>Services/TransientFold.cs</c> and the Voyance's House loop in
+    /// <c>_CONTEXT/Game/Eventy.md</c>.
+    /// </summary>
+    private async void BtnToggleTransient_Click(object sender, RoutedEventArgs e)
+        => await ToggleMappingFlagAsync(GetChainVmFromButton(sender), "isTransient", "transient", i => i.IsTransient);
 
     /// <summary>
     /// Shared toggle for a boolean mapping flag (isAlias / isVariant) over the checked items: fetch
@@ -1386,12 +1450,25 @@ public partial class ChainBrowserPage : UserControl
         foreach (var vm in checkedItems)
             newLua = ApplyFlagToggle(newLua, vm.Source.ItemType, flagName, remove);
 
+        await ConfirmAndPublishMappingAsync(action, chainName, checkedItems, lua, newLua);
+    }
+
+    /// <summary>
+    /// The confirm-then-publish half every Items/Mapping edit from this page shares: a real
+    /// before/after diff of each touched entry (read out of the fetched and the computed Lua, so the
+    /// preview cannot drift from what gets written), a confirmation box, the push, and the data
+    /// refresh. Extracted from the alias/variant toggle when bulk level editing needed the same
+    /// thing — the diff is the only safety net before an irreversible module edit.
+    /// </summary>
+    private async Task ConfirmAndPublishMappingAsync(
+        string action, string chainName, IReadOnlyList<ItemViewModel> items, string lua, string newLua)
+    {
         var panel = new StackPanel();
         panel.Children.Add(new TextBlock
         {
-            Text = checkedItems.Count == 1
-                ? $"{action} for \"{checkedItems[0].Source.Name}\" ({checkedItems[0].Source.ItemType})"
-                : $"{action} for {checkedItems.Count} items in \"{chainName}\"",
+            Text = items.Count == 1
+                ? $"{action} for \"{items[0].Source.Name}\" ({items[0].Source.ItemType})"
+                : $"{action} for {items.Count} items in \"{chainName}\"",
             TextWrapping = TextWrapping.Wrap,
             Margin = new Thickness(0, 0, 0, 8)
         });
@@ -1405,7 +1482,7 @@ public partial class ChainBrowserPage : UserControl
 
         // One real before→after diff pair per item, read straight from the fetched/computed Lua.
         var diffPanel = new StackPanel();
-        foreach (var vm in checkedItems)
+        foreach (var vm in items)
         {
             string before = ExtractEntryLine(lua, vm.Source.ItemType) ?? "(not in mapping table)";
             string after = ExtractEntryLine(newLua, vm.Source.ItemType) ?? "(no entry — nothing written)";
@@ -1430,7 +1507,7 @@ public partial class ChainBrowserPage : UserControl
                 Background = new SolidColorBrush(Color.FromArgb(0x25, 0x30, 0xC0, 0x30)),
                 CornerRadius = new CornerRadius(4),
                 Padding = new Thickness(8, 6, 8, 6),
-                Margin = new Thickness(0, 0, 0, checkedItems.Count > 1 ? 8 : 0),
+                Margin = new Thickness(0, 0, 0, items.Count > 1 ? 8 : 0),
                 Child = new TextBlock
                 {
                     Text = "+ " + after,
@@ -1442,7 +1519,7 @@ public partial class ChainBrowserPage : UserControl
             });
         }
 
-        if (checkedItems.Count > 4)
+        if (items.Count > 4)
             panel.Children.Add(new ScrollViewer
             {
                 Content = diffPanel,
@@ -1463,9 +1540,9 @@ public partial class ChainBrowserPage : UserControl
 
         try
         {
-            string summary = checkedItems.Count == 1
-                ? $"{action} for {checkedItems[0].Source.ItemType} (via MergeMansionWikiTools)"
-                : $"{action} for {checkedItems.Count} items in {chainName} (via MergeMansionWikiTools)";
+            string summary = items.Count == 1
+                ? $"{action} for {items[0].Source.ItemType} (via MergeMansionWikiTools)"
+                : $"{action} for {items.Count} items in {chainName} (via MergeMansionWikiTools)";
 
             await MysteryWikiService.PublishPageAsync(
                 _main.Settings.WikiUsername, _main.Settings.WikiPassword,
@@ -1561,7 +1638,70 @@ public partial class ChainBrowserPage : UserControl
         if (remove)
         {
             var emptyEntryRegex = new System.Text.RegularExpressions.Regex(
-                @"[ \t]*\[""" + escapedType + @"""\]\s*=\s*\{\s*\},?\r?\n");
+                "[ \\t]*\\[\"" + escapedType + "\"\\]\\s*=\\s*\\{\\s*\\},?\\r?\\n");
+            lua = emptyEntryRegex.Replace(lua, "");
+        }
+        return lua;
+    }
+
+    /// <summary>
+    /// Writes one item's merge <c>level</c> into the Items/Mapping Lua. The mapping level is an
+    /// OVERRIDE of the level the game data implies (<c>DataService.ResolveLevel</c>: mapping wins,
+    /// then the JSON level), so when the wanted level is the one the game already gives,
+    /// <paramref name="gameLevel"/>, the field is REMOVED instead of written — a redundant override
+    /// would silently pin the item if the game ever renumbers the chain, and Items/Mapping is big
+    /// enough that dead fields cost real Lua memory (Wiki/PerfPlaybook.md).
+    /// <list type="bullet">
+    /// <item><description>entry missing + level needed → create <c>{level = N}</c></description></item>
+    /// <item><description>entry exists → replace or append <c>level = N</c>, other fields untouched</description></item>
+    /// <item><description>level == gameLevel → strip the field; drop the whole entry if that empties it</description></item>
+    /// </list>
+    /// Like <see cref="ApplyFlagToggle"/> it NEVER writes <c>chainName</c> — the chain comes from the
+    /// game data, and moving an item between chains is what Move Items is for.
+    /// </summary>
+    internal static string ApplyLevel(string lua, string itemType, int level, int gameLevel)
+    {
+        var escapedType = System.Text.RegularExpressions.Regex.Escape(itemType);
+        var entryRegex = new System.Text.RegularExpressions.Regex(
+            @"(\[""" + escapedType + @"""\]\s*=\s*\{)([^}]*)(})");
+        var levelRegex = new System.Text.RegularExpressions.Regex(@",?\s*level\s*=\s*-?\d+");
+        bool redundant = level == gameLevel;
+
+        if (!entryRegex.IsMatch(lua))
+        {
+            if (redundant) return lua;   // nothing to override, nothing to write
+            int insertPos = lua.LastIndexOf("\n}", StringComparison.Ordinal);
+            if (insertPos < 0) throw new Exception("Could not find insertion point.");
+            string luaEntry = $"\t[\"{itemType}\"] = {{level = {level}}},\n";
+            return lua[..(insertPos + 1)] + luaEntry + lua[(insertPos + 1)..];
+        }
+
+        lua = entryRegex.Replace(lua, m =>
+        {
+            var prefix = m.Groups[1].Value;
+            var body = m.Groups[2].Value;
+            var suffix = m.Groups[3].Value;
+
+            if (redundant)
+                body = levelRegex.Replace(body, "");
+            else if (levelRegex.IsMatch(body))
+                body = levelRegex.Replace(body, $", level = {level}");
+            else if (body.Trim().Length == 0)
+                body = $"level = {level}";        // empty entry → bare field, no leading comma
+            else
+                body += $", level = {level}";
+
+            // The level regex only consumes a PRECEDING comma, so removing/replacing a level that was
+            // the entry's FIRST field leaves the body starting with the next field's comma
+            // ("{, chainName = ...} " = invalid Lua). Same fix as ApplyFlagToggle.
+            body = System.Text.RegularExpressions.Regex.Replace(body, @"^\s*,\s*", "");
+            return prefix + body + suffix;
+        });
+
+        if (redundant)
+        {
+            var emptyEntryRegex = new System.Text.RegularExpressions.Regex(
+                "[ \\t]*\\[\"" + escapedType + "\"\\]\\s*=\\s*\\{\\s*\\},?\\r?\\n");
             lua = emptyEntryRegex.Replace(lua, "");
         }
         return lua;

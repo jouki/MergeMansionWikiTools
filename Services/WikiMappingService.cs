@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -21,6 +21,21 @@ public class WikiMappingEntry
     public bool Fueled => GetBool("fueled");
     public bool IgnoreInTask => GetBool("ignoreInTask");
     public bool IsAlias => GetBool("isAlias");
+    /// <summary>
+    /// <c>isTransient = true</c> — the item is a pass-through the player barely sees: it exists
+    /// for a moment and immediately rolls on into something else (Voyance's House Unlocked lives
+    /// 3 s, then splits 50/50 into the Investigation or the Seance). Generators do not link to it;
+    /// they fold it away and show WHAT IT BECOMES, odds included.
+    /// </summary>
+    public bool IsTransient => GetBool("isTransient");
+    /// <summary>
+    /// <c>isFtue = true</c> — a scripted copy the game swaps in for the FIRST playthrough only
+    /// (Murder at the Mansion keeps an <c>…ActiveIFTUE</c> next to every <c>…ActiveIA/IB</c>). It is
+    /// still an alias of the same row, but its values are not what the page describes: the tutorial
+    /// copy hands out an extra Magnifying Glass and decays somewhere else, once, ever. Aggregated
+    /// cells skip it; the difference belongs in Gameplay Tips, in prose.
+    /// </summary>
+    public bool IsFtue => GetBool("isFtue");
     // isVariant is bool OR string: `true` = unlabelled variant (wiki shows A/B/C), a string
     // (e.g. "Spring") = a named variant — truthy AND carries its display label.
     public bool IsVariant => GetBool("isVariant") || !string.IsNullOrEmpty(GetString("isVariant"));

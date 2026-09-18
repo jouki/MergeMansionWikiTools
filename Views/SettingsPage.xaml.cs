@@ -55,7 +55,6 @@ public partial class SettingsPage : UserControl
 
         // Dumper settings
         toggleDumpAutoNewFolder.IsChecked = _main.Settings.DumpAutoNewFolder;
-        cmbDumperEngine.SelectedIndex = _main.Settings.DumperEngine == "Native" ? 1 : 0;
 
         AppLogger.Info("[Settings] Checkboxes done");
         // Wiki mapping status + bot credentials
@@ -552,13 +551,6 @@ public partial class SettingsPage : UserControl
     {
         if (!IsLoaded) return;
         _main.Settings.DumpAutoNewFolder = toggleDumpAutoNewFolder.IsChecked == true;
-        _main.SaveSettings();
-    }
-
-    private void CmbDumperEngine_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        if (!IsLoaded) return; // skip during constructor init
-        _main.Settings.DumperEngine = cmbDumperEngine.SelectedIndex == 1 ? "Native" : "Legacy";
         _main.SaveSettings();
     }
 

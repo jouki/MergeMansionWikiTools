@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -242,6 +242,11 @@ public partial class WikiDataParserPage
         _lastGcChanges = null;
         _lastEventsChanges = null;
         _lastGcRewardCount = 0;
+        _lastDailyScoopLua = null;
+        _pendingDailyScoopExisting = null;
+        _pendingDailyScoopBaseTs = null;
+        _lastDailyScoopSummary = null;
+        _lastEventsNotes = null;
 
         try
         {
@@ -254,6 +259,10 @@ public partial class WikiDataParserPage
             var (liveVarious, liveVariousTs) = _main.DataService != null
                 ? await WikiMappingService.FetchModuleWithTimestampAsync("Module:Datatable/Various")
                 : (null, null);
+            //   - Module:Datatable/DailyScoop — regenerated wholesale (there is no history to merge),
+            //     but the timestamp still guards the push against a concurrent edit.
+            var (liveDailyScoop, liveDailyScoopTs) =
+                await WikiMappingService.FetchModuleWithTimestampAsync(DailyScoopDatatableService.ModuleTitle);
 
             SetRowBusy(eventsIdle, eventsBusy, txtEventsBusy, true, "Generating schedule…");
 
@@ -379,6 +388,30 @@ public partial class WikiDataParserPage
                 }
             });
 
+            // Step 5: The Daily Scoop task lists. Their source (daily_scoop.json) is written by the
+            // dumper next to events.json; a dump taken before v0.24.68 does not have it, and the
+            // module is then left untouched rather than republished from stale data.
+            var dailyScoopPath = Path.Combine(Path.GetDirectoryName(eventsPath) ?? "", DailyScoopExtractor.FileName);
+            var dailyScoopDump = DailyScoopDatatableService.Load(dailyScoopPath);
+            if (dailyScoopDump == null)
+            {
+                schedule.Notes.Add($"Daily Scoop task lists SKIPPED — {DailyScoopExtractor.FileName} not found next to events.json. Re-run the dump to refresh them.");
+                AppLogger.Debug($"[DailyScoop] {dailyScoopPath} missing - task lists not regenerated");
+            }
+            else
+            {
+                var dsSvc = new DailyScoopDatatableService();
+                _lastDailyScoopLua = dsSvc.Build(dailyScoopDump, LuaGeneratorService.BuildHeader(schedule.CreatedAt, PhoneDetectionService.ReadPulledGameVersion()));
+                _pendingDailyScoopExisting = liveDailyScoop;
+                _pendingDailyScoopBaseTs = liveDailyScoopTs;
+                var setLabel = dailyScoopDump.Revision.Length == 0 ? "original" : dailyScoopDump.Revision;
+                _lastDailyScoopSummary = $"Week set {setLabel} ({dailyScoopDump.SelectedFrom}) — {dsSvc.TaskCount} tasks + {dsSvc.FallbackCount} fallbacks";
+                bool unchanged = string.Equals(_lastDailyScoopLua, liveDailyScoop, StringComparison.Ordinal);
+                schedule.Notes.Add($"Daily Scoop task lists: week set {setLabel} ({dailyScoopDump.SelectedFrom}), "
+                    + $"{dsSvc.TaskCount} tasks + {dsSvc.FallbackCount} fallbacks{(unchanged ? " — unchanged." : ".")}");
+                foreach (var w in dsSvc.Warnings) schedule.Notes.Add($"⚠ Daily Scoop: {w}");
+            }
+
             var lua = gcResult.Lua;
             _lastEventsLua = lua;
             // Semantic diff old (live) vs new — powers the Events review in the Update dialog.
@@ -406,8 +439,12 @@ public partial class WikiDataParserPage
             txtEventsCardLabel.Text =
                 $"Module:Datatable/Events — {lineCount} lines • {FormatSize(bytes)}";
 
-            // Notes are surfaced in the Update dialog's "Data changes" section (like Areas/Items),
-            // not in the main card — keep the card a clean summary.
+            // Notes are surfaced in the Update dialog (like Areas/Items) rather than in the card —
+            // they are decisions the user should read right before the push, not a permanent label.
+            // Capturing them here is what makes that happen: until v0.24.68 nothing read this list,
+            // so every note ever added to it (including v0.24.67's unrecognised-week-type warning)
+            // was written and dropped.
+            _lastEventsNotes = schedule.Notes.Count > 0 ? new List<string>(schedule.Notes) : null;
             txtEventsNotes.Visibility = Visibility.Collapsed;
 
             eventsSection.Visibility = Visibility.Visible;

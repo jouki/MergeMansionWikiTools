@@ -4,7 +4,7 @@ namespace MergeMansionWikiTools.Models;
 
 public static class AppVersion
 {
-    public const string Version = "v0.24.67";
+    public const string Version = "v0.24.91";
 
     // Full version with build timestamp, e.g. "v0.18.7 (build 20260322-1200)"
     public static string Build { get; } = GetBuild();
@@ -121,8 +121,6 @@ public class AppSettings
     // account's LastSessionGameConfig memberships). When true: export ALL cached branches, including
     // stale ones from older _DATA/P snapshots (e.g. NewSegments_01 superseded by _02).
     public bool DumpIncludeStaleBranches { get; set; } = false;
-    // Which dump engine to use: "Legacy" (upstream dumper) or "Native" (in-house reimplementation).
-    public string DumperEngine { get; set; } = "Legacy";
 
     // Event filters
     public bool EventMixABooster { get; set; } = true;

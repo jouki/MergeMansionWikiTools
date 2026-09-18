@@ -107,6 +107,27 @@ public class DailyScoopWeekTypeTests : IDisposable
         Assert.DoesNotContain(svc.Notes, n => n.Contains("week type", StringComparison.OrdinalIgnoreCase));
     }
 
+    /// <summary>
+    /// The suffix half of the same split, which DailyScoopExtractor uses to pick the week SET whose
+    /// task lists get published. Stripping it is not enough there: publishing the original set while
+    /// the game serves _v2 is exactly the bug that feeds (v0.24.68).
+    /// </summary>
+    [Theory]
+    [InlineData("HardWeek_v2", "HardWeek", "_v2")]
+    [InlineData("MedWeek_v13", "MedWeek", "_v13")]
+    [InlineData("EasyWeek", "EasyWeek", "")]
+    [InlineData("SuperWeek_vX", "SuperWeek_vX", "")]      // not digits -> not a revision
+    [InlineData("SuperWeek_v", "SuperWeek_v", "")]        // nothing after _v -> not a revision
+    [InlineData("_v2", "_v2", "")]                        // nothing before _v -> not a revision
+    [InlineData(null, "", "")]
+    public void SplitRevision_separatesTheWeekSetSuffixFromTheBaseId(string? id, string expectedBase, string expectedSuffix)
+    {
+        var (baseId, suffix) = EventScheduleService.SplitRevision(id);
+        Assert.Equal(expectedBase, baseId);
+        Assert.Equal(expectedSuffix, suffix);
+        Assert.Equal(expectedBase, EventScheduleService.StripRevisionSuffix(id));
+    }
+
     /// <summary>A MinigameId that is genuinely unrecognisable must be REPORTED, not silently dropped —
     /// the silent null is what let the _v2 rename go unnoticed for three weeks.</summary>
     [Fact]

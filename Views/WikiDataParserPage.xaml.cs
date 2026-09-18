@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -57,6 +57,11 @@ public partial class WikiDataParserPage : UserControl
     // Null means Generate Events has not been run (or was aborted), which blocks Update Wiki.
     private string? _pendingEventsExisting;       // live Module:Datatable/Events content at generate time (null = not found)
     private string? _pendingVariousContent;       // spliced Module:Datatable/Various to push (null = no GC changes)
+    private List<string>? _lastEventsNotes;       // EventScheduleService notes from the last Generate Events, shown in the push dialog
+    private string? _lastDailyScoopLua;           // generated Module:Datatable/DailyScoop (null = dump has no daily_scoop.json)
+    private string? _pendingDailyScoopExisting;   // live Module:Datatable/DailyScoop at generate time (null = page absent)
+    private string? _pendingDailyScoopBaseTs;     // its revision timestamp, passed as basetimestamp on push
+    private string? _lastDailyScoopSummary;       // which week set was rendered + its size, for the push dialog card
     private string? _pendingEventsBaseTs;         // revision timestamp of fetched Events (basetimestamp conflict guard)
     private string? _pendingVariousBaseTs;        // revision timestamp of fetched Various (basetimestamp conflict guard)
     private List<string>? _pendingGcChangedBases; // GC bases whose grid keys changed → auto-update their event pages

@@ -25,7 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="External\merge-mansion-dumper\merge-mansion-dumper.csproj" />
     <ProjectReference Include="MMWT.Dumper\MMWT.Dumper.csproj" />
   </ItemGroup>
 

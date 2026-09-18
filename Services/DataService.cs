@@ -309,11 +309,23 @@ public class DataService
                 {
                     dapConst = GetConstantFirst(dap);
 
-                    // ControlledRandom odds (multiple decay targets with probabilities)
-                    if (dap.TryGetProperty("ControlledRandom", out var dapCr)
-                        && dapCr.TryGetProperty("Odds", out var dapOdds)
-                        && dapOdds.ValueKind == JsonValueKind.Object)
-                        pi.DecayAfterLastCycleOdds = ParseOddsDictionary(dapOdds);
+                    // Randomized odds (multiple decay targets with probabilities). All three wrapper
+                    // spellings must be read — every other odds reader in this file already does.
+                    // Only ControlledRandom was handled here, so a ControlledRandomSequence decay
+                    // was silently dropped: Unfortunate Events L9 rolls 60% Voyance's Black Cat /
+                    // 40% Poison after its last cycle, and because that never parsed, the cat's page
+                    // had NO source at all — its only listed origin was the Cat Clues it produces
+                    // itself (user report, 2026-09-18).
+                    foreach (var producerKey in new[] { "ControlledRandom", "ControlledRandomSequence", "Random" })
+                    {
+                        if (dap.TryGetProperty(producerKey, out var dapCr)
+                            && dapCr.TryGetProperty("Odds", out var dapOdds)
+                            && dapOdds.ValueKind == JsonValueKind.Object)
+                        {
+                            pi.DecayAfterLastCycleOdds = ParseOddsDictionary(dapOdds);
+                            break;
+                        }
+                    }
                 }
 
                 if (!string.IsNullOrEmpty(dapConst) && dapConst != "Empty")

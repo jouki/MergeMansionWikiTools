@@ -1,4 +1,4 @@
-using GameLogic.Config;
+﻿using GameLogic.Config;
 using GameLogic.Merge;
 using GameLogic.MergeChains;
 using GameLogic.Player.Items;
@@ -111,8 +111,8 @@ public sealed partial class ChainSerializer : JsonConverter
     /// <para>
     /// The chain's display name is the localized item CATEGORY of its first item. Three keys are
     /// tried, in this order, and the first one the active language actually has wins:
-    /// <c>ItemCategory_&lt;chainId&gt;</c>, <c>ItemCategory_&lt;first item's pool tag&gt;</c>, and
-    /// finally the item's <c>OverrideLocalizationItemCategory</c> used as a whole key. Chains that
+    /// <c>ItemCategory_&lt;chainId&gt;</c>, the item's <c>OverrideLocalizationItemCategory</c> used
+    /// as a whole key, and finally <c>ItemCategory_&lt;first item's pool tag&gt;</c>. Chains that
     /// match none of the three are written without a <c>Name</c>.
     /// </para>
     /// <para>
@@ -121,6 +121,16 @@ public sealed partial class ChainSerializer : JsonConverter
     /// has no chain key and falls through to the <c>TimeSkipBoosterItem</c> pool tag ("Time Skip
     /// Booster"); <c>TCE_WildCardSpecial</c> has neither and only the override
     /// (<c>TCE_Generic_InformantTip_Special</c>) resolves it.
+    /// </para>
+    /// <para>
+    /// <b>Override before pool tag (v0.24.73).</b> The game reads the override first and only falls
+    /// back to <c>Concat("ItemCategory_", PoolTag)</c> when it is empty — the ISIL of
+    /// <c>LocMan.GetItemCategoryName(IItemDefinition)</c> jumps straight to the return on a non-empty
+    /// override. Having it last cost 171 chains their name, most visibly the 155 Season Pass chests
+    /// that share the pool tag <c>MysteryPassChest</c>: five of them per pass collapsed onto
+    /// "Mystery Streak Chest" instead of "Challenge Chest 1"…"5". The chain-id key stays ahead of
+    /// both because it belongs to the game's other resolution path, the one keyed by
+    /// <c>MergeChainId</c>.
     /// </para>
     /// <para>
     /// <b>Empirical, mechanism unverified:</b> a chain whose first item is tagged <c>Test</c> or
@@ -140,10 +150,10 @@ public sealed partial class ChainSerializer : JsonConverter
 
         if (chain.ConfigKey?.Value is { Length: > 0 } chainKey
             && LocMan.TryGet($"ItemCategory_{chainKey}", out name)) return true;
-        if (first.PoolTag is { Length: > 0 } poolTag
-            && LocMan.TryGet($"ItemCategory_{poolTag}", out name)) return true;
-        return first.OverrideLocalizationItemCategory is { Length: > 0 } overrideKey
-            && LocMan.TryGet(overrideKey, out name);
+        if (first.OverrideLocalizationItemCategory is { Length: > 0 } overrideKey
+            && LocMan.TryGet(overrideKey, out name)) return true;
+        return first.PoolTag is { Length: > 0 } poolTag
+            && LocMan.TryGet($"ItemCategory_{poolTag}", out name);
     }
 
     /// <summary>Item tags that mark dev-only content and suppress the chain name (see <see cref="TryGetChainName"/>).</summary>

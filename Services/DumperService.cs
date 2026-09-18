@@ -534,6 +534,40 @@ internal static class DumperService
                             eventsPath = p;
                         }
                         catch (Exception ex) { Log("ERROR", $"Events dump failed: {ex.Message}", ex); }
+
+                        // The Daily Scoop task ladder rides along with the Events dump but is NOT
+                        // produced by the dump engine: the per-task event gate it needs is a
+                        // requirement kind the golden dumper writes as {}, so emitting it through an
+                        // engine would break Legacy/Native byte parity. Read straight off the config
+                        // instead — same output under either engine. See DailyScoopExtractor.
+                        try
+                        {
+                            var dsPath = Path.Combine(outputDir, DailyScoopExtractor.FileName);
+                            DailyScoopExtractor.Write(masterConfig, dsPath, DateTime.UtcNow);
+                            var dsSize = new FileInfo(dsPath).Length / 1024;
+                            progress?.Report($"{T()} {DailyScoopExtractor.FileName} written ({dsSize} KB)");
+                            AppLogger.Info($"{T()} {DailyScoopExtractor.FileName}: {dsSize} KB");
+                        }
+                        catch (Exception ex) { Log("WARN", $"Daily Scoop extraction failed: {ex.Message}", ex); }
+
+                        // What the "Shops" event filter actually delivers. The filter's own events.json
+                        // section is config.ShopEvents (the IAP event shops), a library the game has
+                        // stopped serving — it wrote a bare "Shops": [] and nothing else. The shops a
+                        // reader wants are the Coins/Gems ones: every event's rotating flash sale plus
+                        // the garage shop, which live in libraries no engine dumps. Same reasoning as
+                        // Daily Scoop above: extracted off the config, so engine parity is untouched.
+                        if (eventFilters.HasFlag(EventFilters.Shops))
+                        {
+                            try
+                            {
+                                var shopPath = Path.Combine(outputDir, ShopExtractor.FileName);
+                                ShopExtractor.Write(masterConfig, shopPath);
+                                var shopSize = new FileInfo(shopPath).Length / 1024;
+                                progress?.Report($"{T()} {ShopExtractor.FileName} written ({shopSize} KB)");
+                                AppLogger.Info($"{T()} {ShopExtractor.FileName}: {shopSize} KB");
+                            }
+                            catch (Exception ex) { Log("WARN", $"Shop extraction failed: {ex.Message}", ex); }
+                        }
                     });
 
                 if (mode.HasFlag(DumpMode.CardCollection))

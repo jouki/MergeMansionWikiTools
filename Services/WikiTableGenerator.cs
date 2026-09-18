@@ -1,4 +1,4 @@
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 using MergeMansionWikiTools.Models;
@@ -52,8 +52,11 @@ public class WikiTableGenerator
         bool suppressSellsFor = isOneLevel && dontSellOneOrHighest;
         bool showSellsFor = sellsForInvoke != null || (allItems.Any(i => !i.Unsellable) && !suppressSellsFor);
         bool showDrops = allItems.Any(i => HasDrops(i));
+        // Sentinel producers are excluded: their 9999 mini-charge fields are a marker, not a count,
+        // so LuaGeneratorService emits no drop data for them and every cell of this column would be
+        // a dash (user report: Jackie & Roddy). See ParsedItem.IsActivationSentinel.
         bool showDropValues = allItems.Any(i =>
-            (i.IsGenerator && i.ActivationAmountInCycle > 0)
+            (i.IsGenerator && i.ActivationAmountInCycle > 0 && !i.IsActivationSentinel)
             || (i.IsSpawner && i.SpawnStorageMax > 0));
         bool showRechargeTime = allItems.Any(i => i.IsGenerator && i.RechargeTimeMs >= 1000)
                              || allItems.Any(i => i.IsSpawner && i.SpawnDelayMs >= 1000);
@@ -94,8 +97,22 @@ public class WikiTableGenerator
                    string.Equals(ci.ItemType, it.MergeResultItemType, StringComparison.OrdinalIgnoreCase))) is { } target
             && target != chain;
 
+        // A transform that resolves back onto the item itself is filtered out of the cell (see
+        // IsSelfReference), so counting it here would open a column that can only ever be a dash —
+        // the "phantom column" Voyance's Black Cat produced.
+        bool HasVisibleSinkTransform(ParsedItem i)
+        {
+            if (!i.IsSink || string.IsNullOrEmpty(i.SinkRewardItemType) || IsSinkSuppressed(i)) return false;
+            var owner = _data.Chains.FirstOrDefault(c => c.Items.Any(ci =>
+                string.Equals(ci.ItemType, i.SinkRewardItemType, StringComparison.OrdinalIgnoreCase)));
+            if (owner == null) return true;   // unresolvable target — keep the column, the cell decides
+            var target = owner.Items.First(ci =>
+                string.Equals(ci.ItemType, i.SinkRewardItemType, StringComparison.OrdinalIgnoreCase));
+            return !IsSelfReference(i, chain, owner.DisplayName, target.Level);
+        }
+
         bool showTransformsTo =
-            allItems.Any(i => i.IsSink && !string.IsNullOrEmpty(i.SinkRewardItemType) && !IsSinkSuppressed(i))
+            allItems.Any(HasVisibleSinkTransform)
             || allItems.Any(HasCrossChainMergeTarget);
 
         // Transforms To Variant — separate column when transform targets have variants
@@ -171,7 +188,13 @@ public class WikiTableGenerator
             foreach (var lvlItems in itemsByLevel.Values)
             {
                 var groups = GetDecayChainGroups(lvlItems);
-                if (groups.Count > 1)
+                // The in-table expansion (a Variant + Odds pair under a "Decay Odds" super-header)
+                // only means anything when the roll picks between VARIANTS of one item. A roll
+                // between different items — Unfortunate Events L9 goes 60% Voyance's Black Cat /
+                // 40% Murder Weapon — has nothing to put in a Variant column, so it produced a
+                // column of dashes (user report, 2026-09-18). Those odds belong in the
+                // === Decay Odds === section instead, where the Lua renders a column per target.
+                if (groups.Count > 1 && groups.Any(g => g.TargetVariantCount > 1))
                 {
                     if (groups.Any(g => g.TargetVariantCount > 1 && g.Levels.Count == 1))
                         hasAnyNestedDecayTable = true;
@@ -407,7 +430,7 @@ public class WikiTableGenerator
                             if (showOrderFuel)
                                 sb.AppendLine($"| rowspan = {totalRows} | {BuildOrderFuelCell(item)}");
                             if (showTransformsTo)
-                                sb.AppendLine($"| rowspan = {totalRows} | {BuildTransformsToCellAggregated(levelItems, chain)}");
+                                sb.AppendLine($"| rowspan = {totalRows} | {BuildTransformsToCellAggregated(allLevelItems, chain)}");
                         }
                         else
                         {
@@ -418,7 +441,7 @@ public class WikiTableGenerator
                         if (showTransformsToVariant)
                             sb.AppendLine($"| {GetTransformsToVariantLabel(vi, chain) ?? "{{Dash}}"}");
 
-                        EmitSplitColumns(sb, v, vc, vi, item, levelItems, diff,
+                        EmitSplitColumns(sb, v, vc, vi, item, levelItems, allLevelItems, chain, diff,
                             showDrops, showDropValues, showFuelFor, showDecaysInto,
                             showDecayOdds, showChargeTime, showRechargeTime, showSpeedUpCost,
                             hasVariants, firstSplitCol, fuelForMap,
@@ -467,7 +490,7 @@ public class WikiTableGenerator
                                 if (showFuel)
                                     sb.AppendLine($"| rowspan = {totalRows} | {BuildFuelCell(item, fuelMap)}");
                                 if (showTransformsTo)
-                                    sb.AppendLine($"| rowspan = {totalRows} | {BuildTransformsToCellAggregated(levelItems, chain)}");
+                                    sb.AppendLine($"| rowspan = {totalRows} | {BuildTransformsToCellAggregated(allLevelItems, chain)}");
                             }
                             else
                             {
@@ -478,7 +501,7 @@ public class WikiTableGenerator
                             if (showTransformsToVariant)
                                 sb.AppendLine($"| {GetTransformsToVariantLabel(vi, chain) ?? "{{Dash}}"}");
 
-                            EmitSplitColumns(sb, v, vc, vi, item, levelItems, diff,
+                            EmitSplitColumns(sb, v, vc, vi, item, levelItems, allLevelItems, chain, diff,
                                 showDrops, showDropValues, showFuelFor, showDecaysInto,
                                 showDecayOdds, showChargeTime, showRechargeTime, showSpeedUpCost,
                                 hasVariants, firstSplitCol, fuelForMap,
@@ -521,14 +544,14 @@ public class WikiTableGenerator
                 if (showOrderFuel)
                     sb.AppendLine($"| {BuildOrderFuelCell(item)}");
                 if (showTransformsTo)
-                    sb.AppendLine($"| {BuildTransformsToCellAggregated(levelItems, chain)}");
+                    sb.AppendLine($"| {BuildTransformsToCellAggregated(allLevelItems, chain)}");
                 if (showTransformsToVariant)
                     sb.AppendLine($"| {GetTransformsToVariantLabel(item, chain) ?? "{{Dash}}"}");
 
                 // Variant column = Dash for levels without variants
                 if (hasVariants && firstSplitCol == "Drops") sb.AppendLine("| {{Dash}}");
                 if (showDrops)
-                    sb.AppendLine($"| {BuildDropsCellAggregated(levelItems)}");
+                    sb.AppendLine($"| {BuildDropsCellAggregated(allLevelItems)}");
                 if (showOrderDrops)
                     sb.AppendLine($"| {BuildOrderDropsCell(item)}");
                 if (showDropsPerTask)
@@ -545,15 +568,15 @@ public class WikiTableGenerator
                 {
                     if (hasVariants && firstSplitCol == "DecaysInto") sb.AppendLine("| {{Dash}}");
                     if (showDecaysInto)
-                        sb.AppendLine($"| {BuildDecaysIntoCellAggregated(levelItems)}");
+                        sb.AppendLine($"| {BuildDecaysIntoCellAggregated(allLevelItems, chain)}");
 
                     if (hasVariants && firstSplitCol == "DecayOdds") sb.AppendLine("| {{Dash}}");
                     if (showDecayOdds)
                     {
                         if (hasDecayExpansionColumns)
-                            sb.AppendLine($"| colspan = 2 | {BuildDecayOddsCellAggregated(levelItems)}");
+                            sb.AppendLine($"| colspan = 2 | {BuildDecayOddsCellAggregated(allLevelItems)}");
                         else
-                            sb.AppendLine($"| {BuildDecayOddsCellAggregated(levelItems)}");
+                            sb.AppendLine($"| {BuildDecayOddsCellAggregated(allLevelItems)}");
                     }
                 }
 
@@ -709,7 +732,9 @@ public class WikiTableGenerator
 
     private string BuildDropValuesCell(ParsedItem item)
     {
-        if (item.IsGenerator && item.ActivationAmountInCycle > 0)
+        // A sentinel item keeps its dash even when a real producer elsewhere in the chain earned the
+        // column — the invoke has no data to return for it.
+        if (item.IsGenerator && item.ActivationAmountInCycle > 0 && !item.IsActivationSentinel)
             return "{{#Invoke:Items|GetItemDropValuesFromChainName|{{#var:Level}}}}";
 
         // Spawner drop values: 1 drop per charge, StorageMax charges
@@ -783,7 +808,7 @@ public class WikiTableGenerator
     // ── Aggregated cells (combine data from all items at the same level) ──
 
     /// <summary>Aggregates decay targets from all items at a level (incl. aliases).</summary>
-    private string BuildDecaysIntoCellAggregated(List<ParsedItem> levelItems)
+    private string BuildDecaysIntoCellAggregated(List<ParsedItem> levelItems, ParsedChain currentChain)
     {
         var seen = new HashSet<(string Name, int Level)>();
         var parts = new List<string>();
@@ -795,49 +820,80 @@ public class WikiTableGenerator
                 if (!string.IsNullOrEmpty(ci.ItemType))
                     itemTypeToChain.TryAdd(ci.ItemType, (chain, ci));
 
-        foreach (var item in levelItems)
+        // An item decays into exactly ONE thing (a roll with odds goes to its own section), so two
+        // targets side by side with no percentages read as a choice the game never offers. That is
+        // what aliases produce when they disagree: Investigation: The Mansion L2 decays into the
+        // opened location (L2) on every normal cycle, while its scripted FTUE copy drops straight
+        // back to the locked one (L1) — once, ever (user report, 2026-09-18).
+        //
+        // So the primary items answer first and the aliases are consulted only if that produced
+        // NOTHING. The test has to be the rendered result, not "does the primary have a decay
+        // field": Scarab Box L7 holds a primary that decays into its own row (filtered as a
+        // self-reference) next to the alias carrying the real target, and gating on the field alone
+        // emptied that cell.
+        void Collect(IEnumerable<ParsedItem> from)
         {
-            var decayTypes = new List<string?> {
-                item.DecayAfterLastCycleItemType,
-                item.SpawnDecayIntoItemType,
-                item.HasDecay ? item.DecayIntoItemType : null
-            };
-
-            // DecayAfterLastCycleOdds — multiple decay targets
-            if (item.DecayAfterLastCycleOdds != null)
-                decayTypes.AddRange(item.DecayAfterLastCycleOdds.Keys);
-
-            foreach (var decayType in decayTypes)
+            foreach (var item in from)
             {
-                if (string.IsNullOrEmpty(decayType)) continue;
+                var decayTypes = new List<string?> {
+                    item.DecayAfterLastCycleItemType,
+                    item.SpawnDecayIntoItemType,
+                    item.HasDecay ? item.DecayIntoItemType : null
+                };
 
-                if (itemTypeToChain.TryGetValue(decayType, out var match))
-                {
-                    if (seen.Add((match.Chain.DisplayName, match.Item.Level)))
-                        parts.Add($"{{{{Item|{match.Chain.DisplayName}|{match.Item.Level}}}}}");
-                }
-                else
-                {
-                    // Fallback to ResolveChainName for non-item-type keys
-                    var name = ResolveChainName(decayType);
-                    var level = _data.ResolveLevel(decayType, _wikiMapping);
-                    if (seen.Add((name, level)))
-                        parts.Add($"{{{{Item|{name}|{level}}}}}");
-                }
-            }
+                // DecayAfterLastCycleOdds — multiple decay targets
+                if (item.DecayAfterLastCycleOdds != null)
+                    decayTypes.AddRange(item.DecayAfterLastCycleOdds.Keys);
 
-            // Warning for suspicious finite spawner
-            if (item.IsSpawner && item.SpawnHowManyCycles > 0
-                && string.IsNullOrEmpty(item.SpawnDecayIntoItemType))
-            {
-                Warnings.Add($"Level {item.Level} ({item.Name}): Finite spawn cycles but no DecayProducer — item may vanish from board.");
+                foreach (var decayType in decayTypes)
+                {
+                    if (string.IsNullOrEmpty(decayType)) continue;
+
+                    // Fold a transient stage away, exactly as the transform column does.
+                    foreach (var (resolvedType, odds) in TransientFold.Resolve(decayType, FindItem))
+                    {
+                        if (itemTypeToChain.TryGetValue(resolvedType, out var match))
+                        {
+                            if (IsSelfReference(item, currentChain, match.Chain.DisplayName, match.Item.Level)) continue;
+                            if (seen.Add((match.Chain.DisplayName, match.Item.Level)))
+                                parts.Add(TransientFold.Format(match.Chain.DisplayName, match.Item.Level, odds,
+                                    null, item.Level));
+                        }
+                        else
+                        {
+                            // Fallback to ResolveChainName for non-item-type keys
+                            var name = ResolveChainName(resolvedType);
+                            var level = _data.ResolveLevel(resolvedType, _wikiMapping);
+                            if (IsSelfReference(item, currentChain, name, level)) continue;
+                            if (seen.Add((name, level)))
+                                parts.Add(TransientFold.Format(name, level, odds, null, item.Level));
+                        }
+                    }
+                }
+
+                // Warning for suspicious finite spawner
+                if (item.IsSpawner && item.SpawnHowManyCycles > 0
+                    && string.IsNullOrEmpty(item.SpawnDecayIntoItemType))
+                {
+                    Warnings.Add($"Level {item.Level} ({item.Name}): Finite spawn cycles but no DecayProducer — item may vanish from board.");
+                }
             }
         }
+
+        Collect(levelItems.Where(i => !i.IsAlias && !i.IsFtue));
+        if (parts.Count == 0) Collect(levelItems.Where(i => i.IsAlias && !i.IsFtue));
 
         return parts.Count > 0 ? string.Join("<br>", parts) : "{{Dash}}";
     }
 
-    /// <summary>Aggregates drops from all items at a level (incl. aliases).</summary>
+    /// <summary>Aggregates drops from all items at a level (incl. aliases).
+    /// <para>
+    /// Deduplicates ENTRY BY ENTRY, not whole cells. Aliases of one row usually share most of their
+    /// drops and differ in a few: Investigation: The Mansion L2 has three aliases, the A/B pair
+    /// dropping Incriminating Evidence and the FTUE one dropping that plus a Magnifying Glass and
+    /// Jackie &amp; Roddy. Comparing the joined cells found the A/B pair identical but the FTUE cell
+    /// different as a whole, so Incriminating Evidence was listed twice (user report, 2026-09-18).
+    /// </para></summary>
     private string BuildDropsCellAggregated(List<ParsedItem> levelItems)
     {
         var parts = new List<string>();
@@ -845,9 +901,16 @@ public class WikiTableGenerator
 
         foreach (var item in levelItems)
         {
-            var cellParts = BuildDropsCell(item);
-            if (cellParts != "{{Dash}}" && seen.Add(cellParts))
-                parts.Add(cellParts);
+            if (item.IsFtue) continue;   // first-playthrough-only copy -> Gameplay Tips, not the table
+            var cell = BuildDropsCell(item);
+            if (cell == "{{Dash}}" || string.IsNullOrEmpty(cell)) continue;
+
+            foreach (var entry in cell.Split("<br>", StringSplitOptions.RemoveEmptyEntries))
+            {
+                var trimmed = entry.Trim();
+                if (trimmed.Length > 0 && seen.Add(trimmed))
+                    parts.Add(trimmed);
+            }
         }
 
         return parts.Count > 0 ? string.Join("<br>", parts) : "{{Dash}}";
@@ -862,30 +925,73 @@ public class WikiTableGenerator
         var seen = new HashSet<(string, int)>();
         var parts = new List<string>();
 
-        void AddTarget(string targetItemType, bool requireDifferentChain)
-        {
-            foreach (var chain in _data.Chains)
-            {
-                if (requireDifferentChain && chain == currentChain) continue;
+        // A row holding a transient is the one that TRANSFORMS into something else, and what it turns
+        // into always starts at level 1 — an empty state drawn with the sprite the player is looking
+        // at already. Show the target's top level in the icon (label keeps the real level) so the
+        // three stages of a Murder at the Mansion location are told apart.
+        bool viaTransform = levelItems.Any(i => i.IsTransient);
 
-                foreach (var ci in chain.Items)
-                    if (string.Equals(ci.ItemType, targetItemType, StringComparison.OrdinalIgnoreCase))
-                        if (seen.Add((chain.DisplayName, ci.Level)))
-                            parts.Add($"{{{{Item|{chain.DisplayName}|{ci.Level}}}}}");
+        void AddTarget(ParsedItem source, string targetItemType, bool requireDifferentChain)
+        {
+            // A transient target is folded away first: the reader gets what it becomes (with odds),
+            // not a stage that lasts seconds. See TransientFold.
+            foreach (var (resolvedType, odds) in TransientFold.Resolve(targetItemType, FindItem))
+            {
+                foreach (var chain in _data.Chains)
+                {
+                    if (requireDifferentChain && chain == currentChain) continue;
+
+                    foreach (var ci in chain.Items)
+                        if (string.Equals(ci.ItemType, resolvedType, StringComparison.OrdinalIgnoreCase))
+                        {
+                            if (IsSelfReference(source, currentChain, chain.DisplayName, ci.Level)) continue;
+                            int? iconLevel = viaTransform && chain.Items.Count > 0
+                                ? chain.Items.Max(i => i.Level)
+                                : null;
+                            if (seen.Add((chain.DisplayName, ci.Level)))
+                                parts.Add(TransientFold.Format(chain.DisplayName, ci.Level, odds, iconLevel, source.Level));
+                        }
+                }
             }
         }
 
         foreach (var item in levelItems)
         {
+            if (item.IsFtue) continue;   // first-playthrough-only copy -> Gameplay Tips, not the table
             if (item.IsSink && !string.IsNullOrEmpty(item.SinkRewardItemType) && !IsSinkSuppressed(item))
-                AddTarget(item.SinkRewardItemType!, requireDifferentChain: false);
+                AddTarget(item, item.SinkRewardItemType!, requireDifferentChain: false);
 
             if (!string.IsNullOrEmpty(item.MergeResultItemType))
-                AddTarget(item.MergeResultItemType!, requireDifferentChain: true);
+                AddTarget(item, item.MergeResultItemType!, requireDifferentChain: true);
         }
 
         return parts.Count > 0 ? string.Join("<br>", parts) : "{{Dash}}";
     }
+
+    /// <summary>
+    /// True when a transform/decay target is the SOURCE ITEM ITSELF — same wiki page and same level.
+    /// <para>
+    /// This only becomes reachable once alias values feed cell aggregation (they must, so the page
+    /// reads as one item): an alias is a second ItemType for a row that already exists, so its swap
+    /// into another alias of the same row is an under-the-hood step the player never sees. Voyance's
+    /// Black Cat is the canonical case — alias <c>Cat_01</c> "transforms into" <c>CatActive_01</c>,
+    /// both level 1 of the same page.
+    /// </para>
+    /// <para>
+    /// VARIANTS are exempt: an explicit A/B/C variant is rendered as its own sub-row, so a transition
+    /// between variants is something the reader can actually follow (user decision, 2026-09-18).
+    /// </para>
+    /// </summary>
+    private static bool IsSelfReference(ParsedItem source, ParsedChain currentChain, string targetChainName, int targetLevel) =>
+        !source.IsVariant
+        && targetLevel == source.Level
+        && string.Equals(targetChainName, currentChain.DisplayName, StringComparison.Ordinal);
+
+    /// <summary>Item lookup across all loaded chains — the resolver <see cref="TransientFold"/> needs.</summary>
+    private ParsedItem? FindItem(string itemType) =>
+        _data.Chains
+            .SelectMany(c => c.Items)
+            .FirstOrDefault(i => string.Equals(i.ItemType, itemType, StringComparison.OrdinalIgnoreCase));
 
     // ── Fuel (what sink items in this chain require) ──────────────────
 
@@ -1319,7 +1425,7 @@ public class WikiTableGenerator
 
     /// <summary>Emit columns from Drops onwards for a variant sub-row, handling Variant insertion, rowspan, and decay expansion.</summary>
     private void EmitSplitColumns(StringBuilder sb, int v, int vc, ParsedItem vi, ParsedItem primary,
-        List<ParsedItem> levelItems, HashSet<string> diff,
+        List<ParsedItem> levelItems, List<ParsedItem> allLevelItems, ParsedChain chain, HashSet<string> diff,
         bool showDrops, bool showDropValues, bool showFuelFor, bool showDecaysInto,
         bool showDecayOdds, bool showChargeTime, bool showRechargeTime, bool showSpeedUpCost,
         bool hasVariants, string? firstSplitCol,
@@ -1341,7 +1447,7 @@ public class WikiTableGenerator
             if (diff.Contains("Drops"))
                 sb.AppendLine($"| {BuildDropsCellWithMerge(vi)}");
             else if (isFirstRow)
-                sb.AppendLine($"| rowspan = {totalRows} | {BuildDropsCellAggregated(levelItems)}");
+                sb.AppendLine($"| rowspan = {totalRows} | {BuildDropsCellAggregated(allLevelItems)}");
         }
 
         // OrderFeatures Drops + Drops per Task (always rowspan — same across variants)
@@ -1398,7 +1504,7 @@ public class WikiTableGenerator
                 else if (diff.Contains("DecaysInto"))
                     sb.AppendLine($"| {BuildDecaysIntoCell(vi)}");
                 else if (isFirstRow)
-                    sb.AppendLine($"| rowspan = {totalRows} | {BuildDecaysIntoCellAggregated(levelItems)}");
+                    sb.AppendLine($"| rowspan = {totalRows} | {BuildDecaysIntoCellAggregated(allLevelItems, chain)}");
             }
 
             // Decay Odds (2 sub-columns when hasAnyDecayExpansion: Variant + Odds)
@@ -1431,14 +1537,14 @@ public class WikiTableGenerator
                     if (diff.Contains("DecayOdds"))
                         sb.AppendLine($"| colspan = 2 | {BuildDecayOddsCell(vi)}");
                     else if (isFirstRow)
-                        sb.AppendLine($"| colspan = 2 rowspan = {totalRows} | {BuildDecayOddsCellAggregated(levelItems)}");
+                        sb.AppendLine($"| colspan = 2 rowspan = {totalRows} | {BuildDecayOddsCellAggregated(allLevelItems)}");
                 }
                 else
                 {
                     if (diff.Contains("DecayOdds"))
                         sb.AppendLine($"| {BuildDecayOddsCell(vi)}");
                     else if (isFirstRow)
-                        sb.AppendLine($"| rowspan = {totalRows} | {BuildDecayOddsCellAggregated(levelItems)}");
+                        sb.AppendLine($"| rowspan = {totalRows} | {BuildDecayOddsCellAggregated(allLevelItems)}");
                 }
             }
         }
@@ -1486,7 +1592,10 @@ public class WikiTableGenerator
     /// </remarks>
     private bool IsSingleCharge(ParsedItem item)
     {
-        if (!item.IsGenerator || item.StorageMax <= 0 || item.ActivationAmountInCycle <= 0)
+        // 9999 × anything trivially clears StorageMax, which would merge the sentinel marker into the
+        // Drops cell as an absurd "9999× Item".
+        if (!item.IsGenerator || item.StorageMax <= 0 || item.ActivationAmountInCycle <= 0
+            || item.IsActivationSentinel)
             return false;
         int dropsPerCharge = item.ActivationAmountInCycle * item.HowManyGeneratedInCycle;
         return dropsPerCharge >= item.StorageMax;
@@ -2046,10 +2155,19 @@ public class WikiTableGenerator
         // Only when a producer has REAL variance (non-constant controller). A pure ConstantProducer
         // yields a single 100% DropOdds entry — nothing to present, so it must NOT trigger the section.
         // SpawnOdds / DecayAfterLastCycleOdds are only ever populated from randomized producers.
-        bool hasRandomOdds = chain.Items.Any(i =>
-            i.HasRandomDrop ||
-            (i.SpawnOdds != null && i.SpawnOdds.Count > 0) ||
-            (i.DecayAfterLastCycleOdds != null && i.DecayAfterLastCycleOdds.Count > 0));
+        // …and only when there is actually something to compare. A randomized producer with ONE
+        // outcome is deterministic in practice — DNA Samples Collected uses a ControlledRandomSequence
+        // holding a single entry at 100%, and its four aliases all drop the same thing, so the table
+        // came out as one column of "100 %" (user report, 2026-09-18). Counting distinct outcomes
+        // across the chain keeps the informative cases: two levels dropping different items still
+        // differ, even though neither rolls.
+        var randomTargets = chain.Items
+            .SelectMany(i => (i.HasRandomDrop && i.DropOdds != null ? i.DropOdds.Keys : Enumerable.Empty<string>())
+                .Concat(i.SpawnOdds?.Keys ?? Enumerable.Empty<string>())
+                .Concat(i.DecayAfterLastCycleOdds?.Keys ?? Enumerable.Empty<string>()))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .Count();
+        bool hasRandomOdds = randomTargets >= 2;
         bool hasChestLoot = chain.Items.Any(i =>
             i.IsChest &&
             (i.ChestRewardOdds is { Count: > 0 } || i.ChestRewardItems is { Count: > 0 }));
@@ -2073,15 +2191,32 @@ public class WikiTableGenerator
     /// </summary>
     public string? GenerateDecayOddsSection(ParsedChain chain, string? hardcodedName = null)
     {
-        bool hasVariantRoller = chain.Items.Any(i =>
-            i.DecayIntoOdds is { Count: > 0 } odds &&
-            odds.Keys.Any(t =>
-                _wikiMapping?.Mappings.TryGetValue(t, out var e) == true && e.IsVariant));
-        if (!hasVariantRoller) return null;
+        // The targets must also be variants OF EACH OTHER, i.e. all land on ONE wiki page — that is
+        // what a column-per-variant table means (Flower Bed L6 → A/B/C, all "Flower Bed (Green Acres
+        // Quest)"). A roll spread over SEVERAL pages is an ordinary cross-item decay, not a variant
+        // set: Lady Voyance's House rolled 50/50 into Investigation: … and Seance: …, and because
+        // only one of the two happens to be flagged isVariant in ITS OWN chain, the table rendered a
+        // single lonely "50 %" column pointing at the page itself (user report, 2026-09-18).
+        // Any roll with SEVERAL outcomes earns the section — the Lua renders variant sets as A/B/C
+        // columns and cross-item rolls as one column per target. The v0.24.77 restriction to
+        // single-page variant sets was a workaround for the Lua only knowing the variant layout;
+        // that layout gap is fixed in Module:Items, so the restriction goes.
+        bool IsRoller(ParsedItem i) => i.DecayIntoOdds is { Count: > 1 }
+                                    || i.DecayAfterLastCycleOdds is { Count: > 1 };
+        var rollers = chain.Items.Where(IsRoller).ToList();
+        if (rollers.Count == 0) return null;
+
+        // "Decay Odds" only reads right when the item the PLAYER holds is the one decaying. When the
+        // roll sits on a transient stage, what the player does is transform one item into another —
+        // the decay is under-the-hood plumbing that exists for a few seconds. Murder at the Mansion:
+        // fuelling the locked location turns it into the Investigation or the Seance, 50/50; calling
+        // that "Decay Odds" describes the mechanism, not the move (user report, 2026-09-18).
+        bool viaTransform = rollers.All(i => i.IsTransient);
+        string heading = viaTransform ? "Transform Odds" : "Decay Odds";
 
         string arg = hardcodedName != null ? $"|{hardcodedName}" : "";
         var sb = new StringBuilder();
-        sb.AppendLine("=== Decay Odds ===");
+        sb.AppendLine($"=== {heading} ===");
         sb.AppendLine($"{{{{#Invoke:Items|GetItemDecayOddsTableFromChainName{arg}}}}}");
         return sb.ToString();
     }

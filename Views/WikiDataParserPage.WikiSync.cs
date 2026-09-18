@@ -1,4 +1,4 @@
-using System.Globalization;
+﻿using System.Globalization;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -554,6 +554,9 @@ public partial class WikiDataParserPage
         var gcChangedBases = _pendingGcChangedBases;
         var gcGroupCount = _pendingGcGroupCount;
         var gcWritten = _pendingGcWritten;
+        var dailyScoopLua = _lastDailyScoopLua;
+        var dailyScoopExisting = _pendingDailyScoopExisting;
+        var dailyScoopBaseTs = _pendingDailyScoopBaseTs;
 
         btnUpdateEventsWiki.IsEnabled = false;
         SetGenerateButtonsEnabled(false);
@@ -614,6 +617,21 @@ public partial class WikiDataParserPage
                 gcVariousWritten = true;
             }
 
+            // The Daily Scoop task lists. Regenerated wholesale from the dump (nothing on the page is
+            // hand-maintained), so it is pushed only when it actually differs — an identical push
+            // would just add noise to the module history. Skipped entirely when the dump carried no
+            // daily_scoop.json, so an old dump can never blank the page.
+            bool dailyScoopWritten = false;
+            if (!string.IsNullOrEmpty(dailyScoopLua) && !string.Equals(dailyScoopLua, dailyScoopExisting, StringComparison.Ordinal))
+            {
+                var dsAction = dailyScoopExisting != null ? "Update" : "Create";
+                ShowInfo($"{dsAction} {DailyScoopDatatableService.ModuleTitle} (task lists)…", InfoBarSeverity.Informational);
+                await WikiMappingService.EditModuleAsync(client, csrfToken, DailyScoopDatatableService.ModuleTitle, dailyScoopLua,
+                    $"{dsAction} Daily Scoop task lists (via MergeMansionWikiTools)",
+                    baseTimestamp: dailyScoopBaseTs);
+                dailyScoopWritten = true;
+            }
+
             // (2b page-edit) Auto-refresh the == Garage Cleanup == section of event pages whose grid
             // KEYS changed — those pages embed the keys in invokes, so a renamed/added variant would
             // otherwise leave them calling a key that no longer exists (Lua error). Page missing →
@@ -632,6 +650,7 @@ public partial class WikiDataParserPage
             ShowInfo($"Wiki updated — {EventsModuleTitle} ({lineCount} lines"
                 + (gcGroupCount > 0 ? $", {gcGroupCount} GC group(s)" : "") + ")"
                 + (gcVariousWritten ? $" + Datatable/Various (grids, +{gcWritten} GC airing(s))." : ".")
+                + (dailyScoopWritten ? $" + {DailyScoopDatatableService.ModuleTitle} (task lists)." : "")
                 + gcPagesSummary,
                 InfoBarSeverity.Success);
             _autoRefreshAfterPush = true;   // re-generate below so the changelog reflects the pushed state
@@ -649,6 +668,9 @@ public partial class WikiDataParserPage
             _pendingEventsBaseTs = null;
             _pendingVariousBaseTs = null;
             _pendingGcChangedBases = null;
+            _lastDailyScoopLua = null;
+            _pendingDailyScoopExisting = null;
+            _pendingDailyScoopBaseTs = null;
         }
         catch (Exception ex)
         {
@@ -775,7 +797,11 @@ public partial class WikiDataParserPage
         int gcData = gcNew + gcSplit;
         bool gcRewards = _lastGcRewardCount > 0;
         bool hasVarious = _pendingVariousContent != null;
-        int moduleCount = 1 + (hasVarious ? 1 : 0);
+        // Daily Scoop task lists are pushed only when they differ from live (they are regenerated
+        // wholesale, so an identical push would be pure history noise).
+        bool hasDailyScoop = !string.IsNullOrEmpty(_lastDailyScoopLua)
+            && !string.Equals(_lastDailyScoopLua, _pendingDailyScoopExisting, StringComparison.Ordinal);
+        int moduleCount = 1 + (hasVarious ? 1 : 0) + (hasDailyScoop ? 1 : 0);
 
         root.Children.Add(new WpfTextBlock
         {
@@ -818,6 +844,36 @@ public partial class WikiDataParserPage
                 gcNote > 0 ? $"{gcNote} re-air identical to an older year (page note only)" : null,
                 "https://merge-mansion.fandom.com/wiki/Module:Datatable/Various");
         }
+
+        if (hasDailyScoop)
+        {
+            var dsLines = _lastDailyScoopLua!.Count(c => c == '\n') + 1;
+            AddDialogStepCard(root,
+                _pendingDailyScoopExisting != null ? "📝" : "➕",
+                $"{(_pendingDailyScoopExisting != null ? "Update" : "Create")} {DailyScoopDatatableService.ModuleTitle}",
+                $"{dsLines} lines · {FormatSize(Encoding.UTF8.GetByteCount(_lastDailyScoopLua))}",
+                _lastDailyScoopSummary ?? "Daily Scoop task lists — regenerated in full from the live week set",
+                "https://merge-mansion.fandom.com/wiki/" + DailyScoopDatatableService.ModuleTitle);
+        }
+
+        // Generation notes. Almost all of them are the same per-run statistics every time (recurring
+        // events expanded, disabled entries kept, historical runs preserved, the 39 events that live
+        // only on the wiki) — a wall of text right above the Update button, which is where the eye
+        // should find the one line that actually needs a decision. So only notes that report
+        // something missing or unrecognised stay inline; the rest go behind a fold further down.
+        static bool NeedsAttention(string n) =>
+            n.StartsWith("⚠", StringComparison.Ordinal) || n.Contains("SKIPPED", StringComparison.Ordinal);
+
+        var attentionNotes = _lastEventsNotes?.Where(NeedsAttention).ToList() ?? new List<string>();
+        var routineNotes = _lastEventsNotes?.Where(n => !NeedsAttention(n)).ToList() ?? new List<string>();
+
+        foreach (var note in attentionNotes)
+            root.Children.Add(new WpfTextBlock
+            {
+                Text = note.StartsWith("⚠", StringComparison.Ordinal) ? note : "⚠ " + note,
+                FontSize = 12, FontWeight = FontWeights.SemiBold, Foreground = gold,
+                TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 10, 0, 2)
+            });
 
         var changeParts = new List<string>();
         if (evHasChanges)
@@ -940,6 +996,18 @@ public partial class WikiDataParserPage
             AddCollapsibleSection(root,
                 $"⚠ Needs manual attention — {gcSkipped} GC grid(s) not written (year unresolved)",
                 new SolidColorBrush(Color.FromRgb(0xC9, 0x8A, 0x2B)), secondary, skipContent);
+        }
+
+        if (routineNotes.Count > 0)
+        {
+            var notesContent = new StackPanel { Margin = new Thickness(18, 2, 0, 4) };
+            foreach (var note in routineNotes)
+                notesContent.Children.Add(new WpfTextBlock
+                {
+                    Text = "• " + note, FontSize = 11, Foreground = tertiary,
+                    TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 1, 0, 1)
+                });
+            AddCollapsibleSection(root, $"Generation notes ({routineNotes.Count})", gold, secondary, notesContent);
         }
 
         // Scroll the whole preview so a long change list (e.g. many GC parents set) can't hide behind

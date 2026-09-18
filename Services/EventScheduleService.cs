@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Text.Json;
 
@@ -150,14 +150,23 @@ public class EventScheduleService
     /// that week on lost its <c>weekType</c> and the wiki stopped marking the current week's difficulty
     /// (fixed v0.24.67). Only a suffix of <c>_v</c> + digits is stripped, so unrelated ids are untouched.
     /// </summary>
-    internal static string StripRevisionSuffix(string? id)
+    internal static string StripRevisionSuffix(string? id) => SplitRevision(id).BaseId;
+
+    /// <summary>
+    /// Splits a config id into its base id and its trailing <c>_v&lt;N&gt;</c> revision suffix
+    /// (<c>"HardWeek_v2"</c> to <c>("HardWeek", "_v2")</c>; no suffix gives <c>("HardWeek", "")</c>).
+    /// The suffix half is what <see cref="DailyScoopExtractor"/> needs: it identifies the week SET
+    /// the live schedule points at, so the extracted task lists come from the same generation the
+    /// game serves. Only <c>_v</c> + digits counts, so unrelated ids are returned untouched.
+    /// </summary>
+    internal static (string BaseId, string Suffix) SplitRevision(string? id)
     {
-        if (string.IsNullOrEmpty(id)) return "";
+        if (string.IsNullOrEmpty(id)) return ("", "");
         var i = id.LastIndexOf("_v", StringComparison.OrdinalIgnoreCase);
-        if (i <= 0 || i + 2 >= id.Length) return id;
+        if (i <= 0 || i + 2 >= id.Length) return (id, "");
         for (var j = i + 2; j < id.Length; j++)
-            if (!char.IsAsciiDigit(id[j])) return id;
-        return id[..i];
+            if (!char.IsAsciiDigit(id[j])) return (id, "");
+        return (id[..i], id[i..]);
     }
 
     /// <summary>

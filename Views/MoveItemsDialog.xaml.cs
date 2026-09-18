@@ -1,4 +1,4 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Windows;
@@ -553,32 +553,59 @@ public partial class MoveItemsDialog : FluentWindow
             return;
         }
 
-        // Check for level collision (exclude the item being moved)
-        var collision = targetChain.Items.FirstOrDefault(i =>
-            i.Level == desiredLevel && i != _selectedItems[0]);
-
-        if (collision != null)
+        var verdict = EvaluateLevelCollision(targetChain.Items, _selectedItems[0], desiredLevel, _setAsAlias);
+        if (verdict.Collision != null)
         {
-            // Aliases on either side never block — same-level alias is legitimate coexistence.
-            bool sourceIsAlias = _setAsAlias;
-            bool targetIsAlias = collision.IsAlias;
-            if (sourceIsAlias || targetIsAlias)
-            {
-                _hasLevelCollision = false;
-                string reason = sourceIsAlias && targetIsAlias
-                    ? "both are aliases"
-                    : sourceIsAlias ? "moving as alias" : "existing item is alias";
-                txtLevelWarning.Text = $"Level {desiredLevel} already has \"{collision.Name}\" — allowed ({reason}).";
-            }
-            else
-            {
-                _hasLevelCollision = true;
-                txtLevelWarning.Text = $"Level {desiredLevel} is already taken by \"{collision.Name}\"";
-            }
+            _hasLevelCollision = verdict.Blocks;
+            txtLevelWarning.Text = verdict.Blocks
+                ? $"Level {desiredLevel} is already taken by \"{verdict.Collision.Name}\""
+                : $"Level {desiredLevel} already has \"{verdict.Collision.Name}\" — allowed ({verdict.Reason}).";
             levelWarning.Visibility = Visibility.Visible;
         }
 
         UpdateConfirmEnabled();
+    }
+
+    /// <summary>
+    /// Decides whether putting <paramref name="moving"/> on <paramref name="desiredLevel"/> clashes
+    /// with something already there.
+    /// <para>
+    /// Aliases AND variants coexist on one level by design — both are parallel forms of the same
+    /// merge stage (the A/B/C generator outcomes, a merged-in duplicate chain), which is why
+    /// <see cref="ParsedItem.IsVariant"/> is documented as suppressing this warning exactly like
+    /// <see cref="ParsedItem.IsAlias"/>. Either side being exempt is enough. The variant half was
+    /// missing here, so moving a variant onto a level another variant held was refused outright.
+    /// </para>
+    /// <para>
+    /// When several items share the level, a BLOCKING one wins the verdict: reporting whichever came
+    /// first would hide a real clash behind a benign variant.
+    /// </para>
+    /// </summary>
+    internal static (bool Blocks, ParsedItem? Collision, string? Reason) EvaluateLevelCollision(
+        IEnumerable<ParsedItem> chainItems, ParsedItem moving, int desiredLevel, bool movingAsAlias)
+    {
+        static bool Exempt(ParsedItem i) => i.IsAlias || i.IsVariant || i.IsTransient;
+
+        var sameLevel = chainItems
+            .Where(i => i.Level == desiredLevel && !ReferenceEquals(i, moving))
+            .ToList();
+        if (sameLevel.Count == 0) return (false, null, null);
+
+        bool sourceExempt = movingAsAlias || moving.IsVariant || moving.IsTransient;
+        var blocking = sourceExempt ? null : sameLevel.FirstOrDefault(i => !Exempt(i));
+        if (blocking != null) return (true, blocking, null);
+
+        var collision = sameLevel[0];
+        string sourceWhy = movingAsAlias ? "moving as alias"
+            : moving.IsVariant ? "moving item is a variant"
+            : "moving item is a transient stage";
+        string reason = sourceExempt && Exempt(collision)
+            ? "both are aliases/variants/transients"
+            : sourceExempt ? sourceWhy
+            : collision.IsAlias ? "existing item is an alias"
+            : collision.IsVariant ? "existing item is a variant"
+            : "existing item is a transient stage";
+        return (false, collision, reason);
     }
 
     private void UpdateConfirmEnabled()
