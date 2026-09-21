@@ -14,6 +14,34 @@ public class LuaArea
     public string AreaId { get; set; } = "";
     public string? ReleaseDate { get; set; }
     public List<LuaTask> Tasks { get; set; } = new();
+    /// <summary>UnlockRequirements — when the area can really be opened (null = no gate, e.g. The Grand Drive).</summary>
+    public AreaGate? Unlock { get; set; }
+    /// <summary>TeaseRequirements — when the lock icon appears on the map (null = no gate).</summary>
+    public AreaGate? Tease { get; set; }
+}
+
+/// <summary>
+/// One requirement list of an area (UnlockRequirements or TeaseRequirements) flattened to the
+/// shapes the game actually uses (areas.json 26.07.01: AreaCompleted, HotspotCompleted, TimeNeeded,
+/// LevelNeeded, ItemNeededAndConsumed, ItemSeen, literal "Impossible"). Raw ids stay as parsed;
+/// <see cref="AreaCompleted"/>, <see cref="HotspotArea"/> and <see cref="HotspotTask"/> are filled by
+/// <see cref="AreasService.ResolveGateLinks"/> once every area is known.
+/// </summary>
+public class AreaGate
+{
+    public string? AreaCompletedId { get; set; }   // game AreaId of the parent area
+    public string? AreaCompleted { get; set; }     // resolved display name of that area
+    public int? Level { get; set; }                // LevelNeeded.Min (player level)
+    public string? Item { get; set; }              // ItemNeededAndConsumed (item id, e.g. CorridorKey_01)
+    public string? ItemSeen { get; set; }          // ItemSeen.ItemRef (first merge of …)
+    public string? Hotspot { get; set; }           // HotspotCompleted (task id in some other area)
+    public string? HotspotArea { get; set; }       // resolved: display name of the area owning that task
+    public int? HotspotTask { get; set; }          // resolved: that task's index (wiki anchor #T<index>)
+    public string? Date { get; set; }              // TimeNeeded.StartInclusive as dd.MM.yyyy
+    public bool Impossible { get; set; }           // literal "Impossible" — in-prep area
+
+    public bool IsEmpty => AreaCompletedId == null && Level == null && Item == null && ItemSeen == null
+                           && Hotspot == null && Date == null && !Impossible;
 }
 
 public class LuaTask
@@ -139,6 +167,10 @@ public class AreasService
             var area = ParseArea(areaEl, globalHotspots);
             if (area != null) Areas.Add(area);
         }
+
+        // Pass 3: unlock/tease gates point at other areas (AreaCompleted) and at tasks that live
+        // in other areas (HotspotCompleted) — resolvable only once every area is parsed.
+        ResolveGateLinks(Areas);
     }
 
     // ── Area parsing ─────────────────────────────────────────────────
@@ -169,8 +201,89 @@ public class AreasService
             DisplayName = BuildDisplayName(name),
             AreaId = areaId,
             ReleaseDate = releaseDate,
-            Tasks = tasks
+            Tasks = tasks,
+            Unlock = ParseGate(el, "UnlockRequirements"),
+            Tease = ParseGate(el, "TeaseRequirements")
         };
+    }
+
+    // ── Area gates (unlock / tease) ──────────────────────────────────
+
+    /// <summary>
+    /// Flattens one requirement list into an <see cref="AreaGate"/>. Handles both JSON shapes the
+    /// dump uses for in-prep areas: the whole property being the string "Impossible" and the string
+    /// sitting inside the array. Returns null when the list is missing or carries nothing.
+    /// </summary>
+    public static AreaGate? ParseGate(JsonElement el, string listProp)
+    {
+        if (!el.TryGetProperty(listProp, out var list)) return null;
+        var gate = new AreaGate { Date = ParseTimeNeeded(el, listProp) };
+
+        if (list.ValueKind == JsonValueKind.String)
+        {
+            gate.Impossible = list.GetString() == "Impossible";
+            return gate.IsEmpty ? null : gate;
+        }
+        if (list.ValueKind != JsonValueKind.Array) return null;
+
+        foreach (var req in list.EnumerateArray())
+        {
+            if (req.ValueKind == JsonValueKind.String)
+            {
+                if (req.GetString() == "Impossible") gate.Impossible = true;
+                continue;
+            }
+            if (req.ValueKind != JsonValueKind.Object) continue;
+
+            if (req.TryGetProperty("AreaCompleted", out var ac) && ac.ValueKind == JsonValueKind.String)
+                gate.AreaCompletedId ??= ac.GetString();
+            if (req.TryGetProperty("HotspotCompleted", out var hc) && hc.ValueKind == JsonValueKind.String)
+                gate.Hotspot ??= hc.GetString();
+            if (req.TryGetProperty("ItemNeededAndConsumed", out var inc) && inc.ValueKind == JsonValueKind.String)
+                gate.Item ??= inc.GetString();
+            if (req.TryGetProperty("LevelNeeded", out var ln) && ln.TryGetProperty("Min", out var min) &&
+                min.ValueKind == JsonValueKind.Number)
+                gate.Level ??= min.GetInt32();
+            if (req.TryGetProperty("ItemSeen", out var seen) && seen.TryGetProperty("ItemRef", out var iref) &&
+                iref.ValueKind == JsonValueKind.String)
+                gate.ItemSeen ??= iref.GetString();
+        }
+        return gate.IsEmpty ? null : gate;
+    }
+
+    /// <summary>
+    /// Second pass over fully parsed areas: AreaCompleted ids become display names and every
+    /// HotspotCompleted id is located in the area that owns the task, so Lua can link
+    /// <c>[[Owner#T&lt;index&gt;]]</c> without scanning all tasks. Unknown ids stay unresolved
+    /// (the raw id is still emitted, so nothing is silently lost).
+    /// </summary>
+    public static void ResolveGateLinks(List<LuaArea> areas)
+    {
+        var nameByAreaId = new Dictionary<string, string>(StringComparer.Ordinal);
+        var taskOwner = new Dictionary<string, (string Area, int Index)>(StringComparer.Ordinal);
+        foreach (var a in areas)
+        {
+            nameByAreaId.TryAdd(a.AreaId, a.DisplayName);
+            foreach (var t in a.Tasks)
+                taskOwner.TryAdd(t.Id, (a.DisplayName, t.Index));
+        }
+
+        foreach (var a in areas)
+        {
+            foreach (var g in new[] { a.Unlock, a.Tease })
+            {
+                if (g == null) continue;
+                if (g.AreaCompletedId != null && nameByAreaId.TryGetValue(g.AreaCompletedId, out var areaName))
+                    g.AreaCompleted = areaName;
+                if (g.Hotspot != null && taskOwner.TryGetValue(g.Hotspot, out var owner))
+                {
+                    g.HotspotArea = owner.Area;
+                    g.HotspotTask = owner.Index;
+                }
+                if (g.Hotspot != null && g.HotspotArea == null)
+                    AppLogger.Warn($"[AREA-GATE] {a.DisplayName}: hotspot '{g.Hotspot}' not found in any area's tasks");
+            }
+        }
     }
 
     private static string BuildDisplayName(string name)

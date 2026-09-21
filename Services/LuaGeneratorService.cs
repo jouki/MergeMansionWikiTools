@@ -119,22 +119,18 @@ public class LuaGeneratorService
         {
             var area = areas[startIdx + i];
             var comma = i < count - 1 ? "," : "";
-            var tasks = BuildTasksTable(area.Tasks, 3);
-
-            sb.Append($"\n\t[\"{Esc(area.DisplayName)}\"] = {{\n");
-            sb.Append($"\t\tname = \"{Esc(area.DisplayName)}\",\n");
-            sb.Append($"\t\tingameName = \"{Esc(area.InternalName)}\",\n");
-            if (!string.IsNullOrEmpty(area.ReleaseDate))
-                sb.Append($"\t\trelease = \"{Esc(area.ReleaseDate)}\",\n");
-            sb.Append($"\t\ttasks = {tasks}\n");
-            sb.Append($"\t}}{comma}");
+            sb.Append(GenerateSingleAreaEntry(area, comma == ""));
         }
 
         sb.Append("\n}\n\nreturn p");
         return sb.ToString();
     }
 
-    /// <summary>Generates the Lua entry for a single area (without wrapper).</summary>
+    /// <summary>
+    /// Generates the Lua entry for a single area (without wrapper) — the ONE place that knows the
+    /// area header fields (name, ingameName, release, unlock, tease, tasks); chunked and single
+    /// emission both go through here.
+    /// </summary>
     private static string GenerateSingleAreaEntry(LuaArea area, bool isLast)
     {
         var sb = new StringBuilder();
@@ -145,9 +141,35 @@ public class LuaGeneratorService
         sb.Append($"\t\tingameName = \"{Esc(area.InternalName)}\",\n");
         if (!string.IsNullOrEmpty(area.ReleaseDate))
             sb.Append($"\t\trelease = \"{Esc(area.ReleaseDate)}\",\n");
+        AppendGate(sb, "unlock", area.Unlock);
+        AppendGate(sb, "tease", area.Tease);
         sb.Append($"\t\ttasks = {tasks}\n");
         sb.Append($"\t}}{comma}");
         return sb.ToString();
+    }
+
+    /// <summary>
+    /// Emits <c>unlock = {…}</c> / <c>tease = {…}</c> with only the fields that exist, in a fixed
+    /// order so the module diff stays readable: area, level, task, item, itemSeen, hotspot, date,
+    /// impossible. Consumed by Module:Areas.GetAreasTable ([[Areas]] overview). <c>area</c> is the
+    /// resolved display name (AreaCompleted for unlock, owner of the hotspot for tease); the raw
+    /// hotspot id is kept so an unresolved tease still says what the game points at.
+    /// </summary>
+    private static void AppendGate(StringBuilder sb, string key, AreaGate? gate)
+    {
+        if (gate == null || gate.IsEmpty) return;
+        var parts = new List<string>();
+        var areaName = gate.AreaCompleted ?? gate.HotspotArea;
+        if (areaName != null) parts.Add($"area = \"{Esc(areaName)}\"");
+        if (gate.Level != null) parts.Add($"level = {gate.Level}");
+        if (gate.HotspotTask != null) parts.Add($"task = {gate.HotspotTask}");
+        if (gate.Item != null) parts.Add($"item = \"{Esc(gate.Item)}\"");
+        if (gate.ItemSeen != null) parts.Add($"itemSeen = \"{Esc(gate.ItemSeen)}\"");
+        if (gate.Hotspot != null) parts.Add($"hotspot = \"{Esc(gate.Hotspot)}\"");
+        if (gate.Date != null) parts.Add($"date = \"{Esc(gate.Date)}\"");
+        if (gate.Impossible) parts.Add("impossible = true");
+        if (parts.Count == 0) return;
+        sb.Append($"\t\t{key} = {{{string.Join(", ", parts)}}},\n");
     }
 
     /// <summary>Builds the area Lua wrapper (header + footer) with empty content, for size measurement.</summary>
@@ -1079,6 +1101,13 @@ public class LuaGeneratorService
             }
 
             // odds
+            //
+            // Emitted most-likely-first. This is a STORAGE order, not a display order:
+            // the Drop Odds / chest / decay tables in Module:Items regroup the columns by
+            // chain and sort them by level (orderOddsColumns) before rendering. Reading this
+            // array straight into columns is what put "L2 | L4 | L3 | L5" on Cat Clues
+            // (reported 2026-09-21). Descending by value is kept because it makes the
+            // generated module readable by hand and nothing consumes the order.
             if (it.Odds?.Count > 0)
             {
                 var ordered = it.Odds
@@ -1305,6 +1334,14 @@ public class LuaGeneratorService
         sb.AppendLine("--   weekType    -- (Daily Scoop runs only) week type Easy/Medium/Hard/Super, from the");
         sb.AppendLine("--                  game MinigameId. Module:Events derives the reward icon and");
         sb.AppendLine("--                  Module:DailyScoop its labels/tabs from it.");
+        sb.AppendLine("--   subGoal     -- (optional) true when the event runs the Old Map sub-goal track");
+        sb.AppendLine("--                  (six extra rewards, unlocked by collecting Old Map fragments");
+        sb.AppendLine("--                  off the event board). Detected from the dump's");
+        sb.AppendLine("--                  <eventId>_SubGoalLevel<NN> entries; Module:Events lists the");
+        sb.AppendLine("--                  flagged events on the Old Map page. Preserved by regeneration.");
+        sb.AppendLine("--   subGoalRewards -- (optional) wikitext of that track's rewards, in order. Hand-");
+        sb.AppendLine("--                  maintained (the app has no reward-to-wikitext renderer) and");
+        sb.AppendLine("--                  PRESERVED by regeneration, like onFireVariant.");
         sb.AppendLine("--   runs        -- list of scheduled runs. A run is either:");
         sb.AppendLine("--                  * a single occurrence:");
         sb.AppendLine("--                      { start = {year=, month=, day=, hour=, min=}, durationDays = N }");
@@ -1345,6 +1382,16 @@ public class LuaGeneratorService
                 sb.AppendLine($"\t\t\tparent = \"{Esc(g.Parent)}\",");
             if (!string.IsNullOrEmpty(g.Prefix))
                 sb.AppendLine($"\t\t\tprefix = \"{Esc(g.Prefix)}\",");
+            // Old Map sub-goal track. Only emitted when true — an absent field reads as false in Lua.
+            if (g.SubGoal)
+                sb.AppendLine("\t\t\tsubGoal = true,");
+            if (g.SubGoalRewards.Count > 0)
+            {
+                sb.AppendLine("\t\t\tsubGoalRewards = {");
+                foreach (var reward in g.SubGoalRewards)
+                    sb.AppendLine($"\t\t\t\t\"{Esc(reward)}\",");
+                sb.AppendLine("\t\t\t},");
+            }
             sb.AppendLine("\t\t\truns = {");
 
             // Column alignment within this event's run list: pad month/day/hour/min so the

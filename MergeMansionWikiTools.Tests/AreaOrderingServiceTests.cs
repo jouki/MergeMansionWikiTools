@@ -299,4 +299,39 @@ public class AreaOrderingServiceTests
         Assert.True(diff.IndexOf(addedParlor) < diff.IndexOf(atelier));
         Assert.True(diff.IndexOf(atelier) < diff.IndexOf(darkroom));
     }
+
+    // ── FindOrderingAnomalies (integers-only convention, 2026-09-21) ──
+
+    [Fact]
+    public void Anomalies_reports_fractional_index_by_name()
+    {
+        var active = new Dictionary<string, double> { ["Side Entrance"] = 8, ["Rufus' Park"] = 8.5, ["Maintenance Room"] = 9 };
+
+        var found = AreaOrderingService.FindOrderingAnomalies(active, new List<RemovedCommentedEntry>());
+
+        var msg = Assert.Single(found);
+        Assert.Contains("Rufus' Park", msg);
+        Assert.Contains("8.5", msg);
+    }
+
+    [Fact]
+    public void Anomalies_reports_gap_between_active_and_commented_rows()
+    {
+        var active = new Dictionary<string, double> { ["Pantry"] = 60, ["Parlor"] = 62 };
+        var commented = new List<RemovedCommentedEntry> { new("Factory Office", 63) };
+
+        var found = AreaOrderingService.FindOrderingAnomalies(active, commented);
+
+        var msg = Assert.Single(found);
+        Assert.Contains("61", msg);
+    }
+
+    [Fact]
+    public void Anomalies_none_for_contiguous_integers()
+    {
+        var active = new Dictionary<string, double> { ["Story Event"] = 0, ["The Grand Drive"] = 1, ["Tranquility Terrace"] = 2 };
+        var commented = new List<RemovedCommentedEntry> { new("Atelier", 3) };
+
+        Assert.Empty(AreaOrderingService.FindOrderingAnomalies(active, commented));
+    }
 }

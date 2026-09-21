@@ -288,6 +288,8 @@ public partial class WikiDataParserPage
             parts.Add("Modules page updated");
 
             // 10. Check for areas missing from ordering mapping + stale/renamed mapping rows
+            // Integers-only convention (2026-09-21): fractional/gapped orderingIndex is reported, not fixed.
+            var orderingAnomalies = new List<string>();
             if (_areaOrdering != null)
             {
                 var allLocalKeys = new HashSet<string>();
@@ -318,6 +320,9 @@ public partial class WikiDataParserPage
                         : new List<RemovedCommentedEntry>();
                     (renames, staleDeletes) = AreaOrderingService.DetectStaleEntries(
                         allAreasProbe, _areaOrdering, existingCommented);
+                    orderingAnomalies = AreaOrderingService.FindOrderingAnomalies(_areaOrdering, existingCommented);
+                    foreach (var anomaly in orderingAnomalies)
+                        AppLogger.Warn($"[AREA-ORDERING] Module:Datatable/Areas/Mapping: {anomaly}");
                 }
                 catch (Exception ex)
                 {
@@ -326,7 +331,10 @@ public partial class WikiDataParserPage
 
                 if (unmapped.Count > 0 || renames.Count > 0 || staleDeletes.Count > 0)
                 {
-                    ShowInfo($"Wiki updated — {string.Join(", ", parts)}.", InfoBarSeverity.Success);
+                    ShowInfo(orderingAnomalies.Count == 0
+                ? $"Wiki updated — {string.Join(", ", parts)}."
+                : $"Wiki updated — {string.Join(", ", parts)}. ⚠ Areas/Mapping: {string.Join("; ", orderingAnomalies)}",
+                orderingAnomalies.Count == 0 ? InfoBarSeverity.Success : InfoBarSeverity.Warning);
 
                     // Load area unlock info and deduce ordering indices
                     List<AreaUnlockInfo> allAreas;
@@ -406,7 +414,10 @@ public partial class WikiDataParserPage
                 }
             }
 
-            ShowInfo($"Wiki updated — {string.Join(", ", parts)}.", InfoBarSeverity.Success);
+            ShowInfo(orderingAnomalies.Count == 0
+                ? $"Wiki updated — {string.Join(", ", parts)}."
+                : $"Wiki updated — {string.Join(", ", parts)}. ⚠ Areas/Mapping: {string.Join("; ", orderingAnomalies)}",
+                orderingAnomalies.Count == 0 ? InfoBarSeverity.Success : InfoBarSeverity.Warning);
 
             // Index = f(Items, Areas) — regenerate after an Areas push, then re-check freshness so the
             // warning icon updates (or hides once everything is back in sync).

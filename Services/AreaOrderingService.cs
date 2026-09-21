@@ -85,8 +85,11 @@ public static class AreaOrderingService
     /// Mirrors AreasService.BuildDisplayName so the Name field matches the Lua mapping key.
     /// "HotspotTitle_FirstFloorKitchen" → "First Floor Kitchen" (when LocMan can't resolve).
     /// "Factory Floor" (already resolved) → unchanged.
+    /// Internal (not private): reused by <see cref="DialogueTriggerResolver"/> so an area's dialogue
+    /// pages get the same display name as the Lua mapping — a raw "HotspotTitle_GreatHall" or a
+    /// leading-space " Walk-in Closet" must not leak onto a wiki page or its title.
     /// </summary>
-    private static string BuildDisplayName(string name)
+    internal static string BuildDisplayName(string name)
     {
         if (name.Contains('_'))
         {
@@ -483,6 +486,33 @@ public static class AreaOrderingService
         }
 
         return string.Join(newline, lines);
+    }
+
+    /// <summary>
+    /// Convention since 2026-09-21: orderingIndex is a contiguous run of INTEGERS (side areas such
+    /// as Rufus' Park get a whole slot and everything after them shifts, never 8.5). This reports
+    /// every violation in the live module — a fractional index (by name) or a missing integer between
+    /// the lowest and highest index over active AND in-prep rows — so a regression surfaces in the
+    /// Wiki Data Parser instead of silently living in the module for months (the 61 gap did).
+    /// </summary>
+    public static List<string> FindOrderingAnomalies(
+        IReadOnlyDictionary<string, double> activeOrdering,
+        IReadOnlyList<RemovedCommentedEntry> commentedEntries)
+    {
+        var result = new List<string>();
+        var all = activeOrdering.Select(kv => (kv.Key, kv.Value))
+            .Concat(commentedEntries.Select(c => (c.Name, c.OrderingIndex)))
+            .ToList();
+        if (all.Count == 0) return result;
+
+        foreach (var (name, idx) in all.Where(x => x.Item2 != Math.Floor(x.Item2)).OrderBy(x => x.Item2))
+            result.Add($"fractional orderingIndex {idx.ToString(System.Globalization.CultureInfo.InvariantCulture)} at \"{name}\" (integers only — renumber the followers)");
+
+        var ints = new HashSet<int>(all.Where(x => x.Item2 == Math.Floor(x.Item2)).Select(x => (int)x.Item2));
+        var missing = Enumerable.Range(ints.Min(), ints.Max() - ints.Min() + 1).Where(i => !ints.Contains(i)).ToList();
+        if (missing.Count > 0)
+            result.Add($"gap in orderingIndex: missing {string.Join(", ", missing)}");
+        return result;
     }
 
     // ── Helpers ──────────────────────────────────────────────────────
