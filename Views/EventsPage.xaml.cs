@@ -495,13 +495,7 @@ public partial class EventsPage : UserControl
     }
 
     private string? ResolveExportDir()
-    {
-        var basePath = _main.Settings.ImageExporterBasePath;
-        var version = _main.Settings.SelectedApkVersion;
-        if (string.IsNullOrEmpty(basePath) || string.IsNullOrEmpty(version)) return null;
-        var dir = Path.Combine(basePath, version, "Export - PNGs");
-        return Directory.Exists(dir) ? dir : null;
-    }
+        => ImageExportPathService.Resolve(_main.Settings.ImageExporterBasePath, _main.Settings.SelectedApkVersion);
 
     private void BtnSaveSvg_Click(object sender, RoutedEventArgs e)
     {

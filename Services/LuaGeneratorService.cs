@@ -273,6 +273,17 @@ public class LuaGeneratorService
     private const long ChunkThreshold = (long)(0.9 * 2 * 1024 * 1024); // 90% of 2 MB = 1,843,200 bytes
 
     /// <summary>
+    /// Soft TARGET chunk size for dialogue modules (see <see cref="GenerateDialogueChunks"/>) — a design
+    /// choice, not the wiki page limit. <see cref="ChunkThreshold"/> above is the hard MediaWiki save-size
+    /// cap every chunker must respect; this constant is deliberately much smaller than it. A dialogue chunk
+    /// boundary can only fall between whole areas/events (a group is never split mid-area/mid-event), so
+    /// packing were it aimed as close to ChunkThreshold as the Items chunker does, one oversized area/event
+    /// landing right at the target would have no room left and could tip the actual chunk over the hard cap.
+    /// Aiming well below it instead leaves headroom for that overshoot.
+    /// </summary>
+    private const long DialogueChunkTargetBytes = 400_000;
+
+    /// <summary>
     /// Generates the combined items + chainNames Lua module.
     /// Uses chain.DisplayName (may include wiki mapping / custom names).
     /// Output: local str = require('Module:Strings') / local p = {} / p.items = {...} / p.chainNames = {...} / return p
@@ -1478,6 +1489,135 @@ public class LuaGeneratorService
         if (d.Hours != 0) expr += $" + {d.Hours}/24";
         if (d.Minutes != 0) expr += $" + {d.Minutes}/1440";
         return expr;
+    }
+
+    // ── Dialogue Lua (Module:Datatable/Dialogues) ─────────────────────
+
+    public record DialogueChunksResult(
+        List<(string Label, string Lua)> MainChunks,
+        List<(string Label, string Lua)> EventChunks,
+        List<(string Label, string Lua)> UnassignedChunks);
+
+    /// <summary>
+    /// Dialogue into Lua chunks. Main story and events go to separate modules (the Items pattern); a chunk
+    /// boundary never cuts through an area or an event, so a page always loads from a single module. A
+    /// scene with neither Area nor Event (should not happen out of a healthy trigger match, but a bad one
+    /// could produce it) goes into its own "Unassigned" module set instead of silently disappearing —
+    /// packed the same greedy way as Areas/Events (one scene per group, so any two orphan scenes may end
+    /// up in different chunks; there is no grouping invariant to protect for scenes that belong nowhere).
+    /// </summary>
+    public DialogueChunksResult GenerateDialogueChunks(List<DialogueScene> scenes, string? createdAt)
+    {
+        var main = scenes.Where(s => s.IsAreaStory)
+            .GroupBy(s => s.Area!, StringComparer.Ordinal)
+            .OrderBy(g => g.Key, StringComparer.Ordinal);
+        var events = scenes.Where(s => !s.IsAreaStory && s.IsEventStory)
+            .GroupBy(s => s.Event!, StringComparer.Ordinal)
+            .OrderBy(g => g.Key, StringComparer.Ordinal);
+        var orphans = scenes.Where(s => !s.IsAreaStory && !s.IsEventStory)
+            .GroupBy(s => s.Id, StringComparer.Ordinal)
+            .OrderBy(g => g.Key, StringComparer.Ordinal);
+
+        return new DialogueChunksResult(
+            PackDialogueScenes(main, "Areas", createdAt),
+            PackDialogueScenes(events, "Events", createdAt),
+            PackDialogueScenes(orphans, "Unassigned", createdAt));
+    }
+
+    /// <summary>
+    /// Greedily packs whole area/event groups into chunks under <see cref="DialogueChunkTargetBytes"/>.
+    /// A group is never split — the boundary always falls between groups — so a single pathologically
+    /// large area/event still becomes its own (oversized) chunk; the caller of
+    /// <see cref="GenerateDialogueChunks"/> is expected to check real output against
+    /// <see cref="ChunkThreshold"/>, the hard save-size cap.
+    /// </summary>
+    private static List<(string, string)> PackDialogueScenes(
+        IEnumerable<IGrouping<string, DialogueScene>> groups, string kind, string? createdAt)
+    {
+        var chunks = new List<(string, string)>();
+        var buffer = new List<string>();
+        long size = 0;
+        var index = 1;
+
+        void Flush()
+        {
+            if (buffer.Count == 0) return;
+            chunks.Add(($"{kind} {index}", RenderDialogueModule(buffer, $"{kind} part {index}", createdAt)));
+            buffer = new List<string>();
+            size = 0;
+            index++;
+        }
+
+        foreach (var group in groups)
+        {
+            var rendered = string.Join("", group.OrderBy(s => s.Id, StringComparer.Ordinal).Select(RenderDialogueScene));
+            var renderedBytes = (long)Encoding.UTF8.GetByteCount(rendered);
+            if (size > 0 && size + renderedBytes > DialogueChunkTargetBytes) Flush();
+            buffer.Add(rendered);
+            size += renderedBytes;
+        }
+        Flush();
+        return chunks;
+    }
+
+    /// <summary>
+    /// One scene entry: <c>["SceneId"] = { area = ..., event = ..., trigger = ..., task = ...,
+    /// hotspot = ..., lines = { {...}, ... } }</c>. Only fields the scene actually carries are emitted.
+    /// </summary>
+    private static string RenderDialogueScene(DialogueScene s)
+    {
+        var sb = new StringBuilder();
+        sb.Append($"\t[\"{Esc(s.Id)}\"] = {{ ");
+        if (!string.IsNullOrEmpty(s.Area)) sb.Append($"area = \"{Esc(s.Area)}\", ");
+        if (!string.IsNullOrEmpty(s.Event)) sb.Append($"event = \"{Esc(s.Event)}\", ");
+        if (!string.IsNullOrEmpty(s.Trigger)) sb.Append($"trigger = \"{Esc(s.Trigger)}\", ");
+        if (!string.IsNullOrEmpty(s.Task)) sb.Append($"task = \"{Esc(s.Task)}\", ");
+        if (!string.IsNullOrEmpty(s.Hotspot)) sb.Append($"hotspot = \"{Esc(s.Hotspot)}\", ");
+        sb.Append("lines = {\n");
+        foreach (var l in s.Lines)
+        {
+            sb.Append("\t\t{ ");
+            sb.Append($"id = \"{Esc(l.Id)}\", ");
+            if (!string.IsNullOrEmpty(l.Speaker)) sb.Append($"speaker = \"{Esc(l.Speaker)}\", ");
+            sb.Append($"side = \"{(l.Side == DialogueSide.Right ? "R" : l.Side == DialogueSide.Left ? "L" : "-")}\", ");
+            if (!string.IsNullOrEmpty(l.Left)) sb.Append($"left = \"{Esc(l.Left)}\", ");
+            if (!string.IsNullOrEmpty(l.Right)) sb.Append($"right = \"{Esc(l.Right)}\", ");
+            sb.Append($"expr = \"{Esc(l.Expression)}\", variant = \"{Esc(l.Variant)}\", ");
+            sb.Append($"text = \"{EscDialogueText(l.Text)}\" }},\n");
+        }
+        sb.Append("\t} },\n");
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Escapes one line of dialogue for a Lua double-quoted string literal. Rich-text/typography
+    /// normalization already happened via <see cref="DialogueWikiText.ToWikitext"/> upstream — this only
+    /// makes the result syntactically valid Lua: quotes/backslashes through the shared <see cref="Esc"/>,
+    /// plus real line breaks (dialogue text does contain them — see the comment on
+    /// <see cref="DialogueWikiText.ForTemplateParameter"/>) turned into the literal `\n` escape, because an
+    /// unescaped newline inside a Lua double-quoted string is a syntax error, not a rendering nuance.
+    /// </summary>
+    private static string EscDialogueText(string? text)
+    {
+        var escaped = Esc(DialogueWikiText.ToWikitext(text));
+        // poradi zalezi: "\r\n" musi jit prvni, jinak by osamocene "\r"/"\n" po nem zbyle vyrobily
+        // dve escape sekvence misto jedne
+        return escaped.Replace("\r\n", "\\n").Replace("\n", "\\n").Replace("\r", "\\n");
+    }
+
+    /// <summary>
+    /// Wraps rendered scene entries into one Lua module: the standard createdAt/mmwtVersion header line 1
+    /// (parsed by WikiMappingService on the next merge) followed by a short doc comment and the scene map.
+    /// </summary>
+    private static string RenderDialogueModule(IEnumerable<string> sceneEntries, string label, string? createdAt)
+    {
+        var sb = new StringBuilder();
+        sb.Append(BuildLuaHeader(createdAt));
+        sb.AppendLine($"-- Module:Datatable/Dialogues ({label}). Generated by MergeMansionWikiTools; do not edit by hand.");
+        sb.AppendLine("return {");
+        foreach (var entry in sceneEntries) sb.Append(entry);
+        sb.AppendLine("}");
+        return sb.ToString();
     }
 
     // ── Lua helpers ────────────────────────────────────────────────────

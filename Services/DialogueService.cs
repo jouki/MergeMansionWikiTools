@@ -17,6 +17,10 @@ public class DialogueService
     private string? _loadedPath;
     private string? _currentPetDisplayName;
 
+    /// <summary>Dump's <c>CreatedAt</c> header, set by <see cref="BuildScenes"/> (mirrors
+    /// <c>AreasService.CreatedAt</c>) — the wiki updater stamps generated Dialogues modules with it.</summary>
+    public string CreatedAt { get; private set; } = "";
+
     /// <summary>
     /// Loads dialogues.json from the given path. Caches result — subsequent calls
     /// with the same path return immediately.
@@ -70,17 +74,9 @@ public class DialogueService
         }
 
         // Load CharacterNames mapping (Dialog_Title_ localization, exported by dumper)
-        _characterNames = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-        if (root.TryGetProperty("CharacterNames", out var charNames) && charNames.ValueKind == JsonValueKind.Object)
-        {
-            foreach (var prop in charNames.EnumerateObject())
-            {
-                var displayName = prop.Value.GetString();
-                if (!string.IsNullOrEmpty(displayName))
-                    _characterNames[prop.Name] = displayName;
-            }
+        _characterNames = ParseCharacterNames(root);
+        if (_characterNames.Count > 0)
             AppLogger.Info($"DialogueService: loaded {_characterNames.Count} character name mappings");
-        }
 
         _loadedPath = filePath;
         AppLogger.Info($"DialogueService: loaded {_dialoguesByGroup.Count} dialogue groups");
@@ -119,6 +115,150 @@ public class DialogueService
         var prefix = ResolvePrefix(progressionEventId);
         return _dialoguesByGroup.Keys.Any(k =>
             k.StartsWith(prefix, StringComparison.OrdinalIgnoreCase));
+    }
+
+    /// <summary>Per-line JSON fields not modeled on <see cref="DialogueLineInfo"/> itself, needed only
+    /// while resolving speakers in <see cref="BuildScenes"/>: the per-entry localized display name
+    /// (tier 1 of the name cascade, see <see cref="ResolveFromDump"/>) and the right-side character
+    /// state (state inheritance mirrors <see cref="DialogueLineInfo.Expression"/>, but only the left
+    /// side has a model field for it).</summary>
+    private readonly record struct RawLineExtras(string? LeftDisplay, string? RightDisplay, string? RightState);
+
+    /// <summary>
+    /// Builds scenes for the wiki updater. Unlike <see cref="GetMysteryDialogues"/> it also carries the
+    /// side, expression and order, because {Area}/Story pages render the dialogue the way the game does.
+    /// </summary>
+    public List<DialogueScene> BuildScenes(string dialoguesJsonPath)
+    {
+        using var doc = JsonDocument.Parse(File.ReadAllText(dialoguesJsonPath));
+        var root = doc.RootElement;
+        if (root.TryGetProperty("CreatedAt", out var ca)) CreatedAt = ca.GetString() ?? "";
+        if (root.TryGetProperty("Data", out var data)) root = data;
+        if (!root.TryGetProperty("Dialogues", out var arr)) return new List<DialogueScene>();
+
+        // BuildScenes cte svuj vlastni dump primo (viz testy volajici ji bez predchoziho LoadAsync),
+        // takze tabulku jmen z dumpu parsuje lokalne misto spolehnuti na instancni _characterNames
+        var characterNames = ParseCharacterNames(root);
+
+        // lokální, ne instanční — DialogueService je cachovaná (AsyncDataCache), instanční slovník by rostl navždy
+        var extrasByLineId = new Dictionary<string, RawLineExtras>(StringComparer.Ordinal);
+
+        var scenes = new Dictionary<string, DialogueScene>(StringComparer.Ordinal);
+        foreach (var e in arr.EnumerateArray())
+        {
+            var id = GetString(e, "DialogItemId");
+            if (string.IsNullOrEmpty(id)) continue;
+            var sceneId = ExtractGroupKey(id);
+            if (!scenes.TryGetValue(sceneId, out var scene))
+                scenes[sceneId] = scene = new DialogueScene { Id = sceneId };
+
+            scene.Lines.Add(new DialogueLineInfo
+            {
+                Id = id,
+                Text = GetString(e, "Text") ?? "",
+                // syrove (neprelozene) identifikatory - preklad kaskadou (dump -> hardcoded mapa)
+                // se deje az v ResolveSpeakers, kde uz je k dispozici i per-entry DisplayName
+                Left = Normalize(GetString(e, "LeftCharacter")),
+                Right = Normalize(GetString(e, "RightCharacter")),
+                Expression = GetString(e, "LeftCharacterState") ?? "NoChange",
+                Order = ParseOrder(id),
+                // dočasně: skutečná strana a výraz se dopočítají níž
+                Side = GetBool(e, "LeftSpeaks") ? DialogueSide.Left
+                     : GetBool(e, "RightSpeaks") ? DialogueSide.Right : DialogueSide.None,
+            });
+            extrasByLineId[id] = new RawLineExtras(
+                GetString(e, "LeftCharacterDisplayName"), GetString(e, "RightCharacterDisplayName"),
+                GetString(e, "RightCharacterState") ?? "NoChange");
+        }
+
+        foreach (var scene in scenes.Values)
+        {
+            // List<T>.Sort je nestabilní a ParseOrder vrací 0 pro id bez číselné přípony ⇒ tie-breaker
+            // na pořadí ze vstupního JSONu, aby stejný Order nikdy nepřeházel repliky.
+            scene.Lines = scene.Lines
+                .Select((line, idx) => (line, idx))
+                .OrderBy(t => t.line.Order)
+                .ThenBy(t => t.idx)
+                .Select(t => t.line)
+                .ToList();
+            ResolveSpeakers(scene, extrasByLineId, characterNames);
+        }
+        return scenes.Values.ToList();
+    }
+
+    /// <summary>`NoChange` inherits both character and expression from the previous line; opening lines
+    /// with no speaker belong to the first concrete speaker that follows. Alongside the resolved
+    /// display name it tracks the same thing for the raw (untranslated) character id, into
+    /// <see cref="DialogueLineInfo.SpeakerId"/>. Name resolution uses the exact same cascade as the
+    /// mystery-page path's <see cref="ResolveSpeaker"/> — per-entry dump DisplayName, then the dump's
+    /// CharacterNames table, then the hardcoded fallback map — so a character is never named two
+    /// different ways on two different kinds of pages.</summary>
+    private void ResolveSpeakers(DialogueScene scene, Dictionary<string, RawLineExtras> extrasByLineId,
+        Dictionary<string, string> characterNames)
+    {
+        string? left = null, right = null, leftId = null, rightId = null;
+        string? leftState = null, rightState = null, last = null, lastId = null;
+        var pending = new List<DialogueLineInfo>();
+
+        foreach (var line in scene.Lines)
+        {
+            var extras = extrasByLineId.TryGetValue(line.Id, out var ex) ? ex : default;
+
+            if (!IsPlaceholder(line.Left))
+            {
+                leftId = line.Left;
+                left = ResolveFromDump(leftId!, extras.LeftDisplay, characterNames) ?? FormatCharacterName(leftId!);
+            }
+            if (!IsPlaceholder(line.Right))
+            {
+                rightId = line.Right;
+                right = ResolveFromDump(rightId!, extras.RightDisplay, characterNames) ?? FormatCharacterName(rightId!);
+            }
+
+            var ls = line.Expression;
+            var rs = extras.RightState ?? "NoChange";
+            if (ls != "NoChange") leftState = ls;
+            if (rs != "NoChange") rightState = rs;
+
+            line.Left = left; line.Right = right;
+
+            if (line.Side == DialogueSide.Left) { line.Speaker = left; line.SpeakerId = leftId; line.Expression = leftState ?? "Default"; }
+            else if (line.Side == DialogueSide.Right) { line.Speaker = right; line.SpeakerId = rightId; line.Expression = rightState ?? "Default"; }
+            else if (!string.IsNullOrEmpty(line.Text))
+            {
+                line.Speaker = last ?? left;                       // pokračování posledního mluvčího
+                line.SpeakerId = last != null ? lastId : leftId;   // stejna volba jako u Speaker, jen syrove id
+                // speaker == null (nikdo zatím nemluvil a `left` není znám) musí zůstat None,
+                // jinak by "null == null" spadlo do Right a odporovalo kontraktu DialogueSide
+                line.Side = line.Speaker == null ? DialogueSide.None
+                          : line.Speaker == right ? DialogueSide.Right : DialogueSide.Left;
+                line.Expression = (line.Speaker == right ? rightState : leftState) ?? "Default";
+            }
+            else line.Expression = "Default";
+
+            if (line.Speaker == null && !string.IsNullOrEmpty(line.Text)) pending.Add(line);
+            else if (line.Speaker != null)
+            {
+                foreach (var p in pending) { p.Speaker = line.Speaker; p.SpeakerId = line.SpeakerId; p.Side = line.Side; }
+                pending.Clear();
+                last = line.Speaker;
+                lastId = line.SpeakerId;
+            }
+        }
+    }
+
+    private static bool IsPlaceholder(string? v) =>
+        string.IsNullOrEmpty(v) || v is "NoChange" or "None" or "Empty";
+
+    /// <summary>Placeholder identifiers collapse to null; everything else passes through as the raw
+    /// game id — <see cref="ResolveSpeakers"/> translates it once it also has that line's per-entry
+    /// DisplayName available, so the translation uses the full cascade, not just the hardcoded map.</summary>
+    private static string? Normalize(string? v) => IsPlaceholder(v) ? null : v;
+
+    private static int ParseOrder(string id)
+    {
+        var m = Regex.Match(id, @"_(\d+)$");
+        return m.Success ? int.Parse(m.Groups[1].Value) : 0;
     }
 
     /// <summary>
@@ -312,21 +452,14 @@ public class DialogueService
     /// 3) For Pet: CharacterConfigId → Pets.json display name,
     /// 4) For Pet: _currentPetDisplayName (from mystery.PetName),
     /// 5) CharacterDisplayNames fallback (for characters missing from localization entirely).
+    /// Tiers 1–2 are shared with <see cref="BuildScenes"/> via <see cref="ResolveFromDump"/>, so an
+    /// {Area}/Story page and a Mystery page never disagree on what a character is called.
     /// </summary>
     private string ResolveSpeaker(RawDialogueEntry entry, string characterType)
     {
-        // 1. Per-entry localized display name (resolved at dump time from Dialog_Title_{type})
-        //    Skip if value equals the enum name (localization just echoes it — e.g. Dog→"Dog", not useful)
         var displayName = entry.LeftSpeaks ? entry.LeftCharacterDisplayName : entry.RightCharacterDisplayName;
-        if (!string.IsNullOrEmpty(displayName)
-            && !string.Equals(displayName, characterType, StringComparison.OrdinalIgnoreCase))
-            return displayName;
-
-        // 2. CharacterNames table from dialogues.json (covers all known Dialog_Title_ entries)
-        //    Skip if value equals the enum name (no useful mapping — e.g. Dog→"Dog")
-        if (_characterNames != null && _characterNames.TryGetValue(characterType, out var charName)
-            && !string.Equals(charName, characterType, StringComparison.OrdinalIgnoreCase))
-            return charName;
+        var fromDump = ResolveFromDump(characterType, displayName, _characterNames);
+        if (fromDump != null) return fromDump;
 
         // 2. For Pet character: resolve via CharacterConfigId → Pets.json
         if (characterType == "Pet")
@@ -398,13 +531,8 @@ public class DialogueService
             for (int j = 0; j < group.Lines.Count; j++)
             {
                 var line = group.Lines[j];
-                // Normalize curly/typographic characters to ASCII
-                var text = line.Text
-                    .Replace('\u2019', '\'').Replace('\u2018', '\'')  // curly apostrophes
-                    .Replace('\u201C', '"').Replace('\u201D', '"')    // curly quotes
-                    .Replace("\u2026", "...")                          // ellipsis → three dots
-                    .Replace("\u2013", "-").Replace("\u2014", "-");   // en/em dash → hyphen
-                text = Regex.Replace(text, "<i>(.*?)</i>", "''$1''", RegexOptions.IgnoreCase);
+                // Sdilena normalizace typografie a rich textu (Task 8) - drive kopie stejne logiky zde
+                var text = DialogueWikiText.ToWikitext(line.Text);
                 sb.AppendLine($"'''{line.Speaker}''': {text}");
 
                 // Empty line between replies (but not after the last one)
@@ -462,6 +590,45 @@ public class DialogueService
         ["Pet"] = "Pet",
         ["Empty"] = "",
     };
+
+    /// <summary>Parses the dump's `CharacterNames` table (localized `Dialog_Title_` entries), shared by
+    /// <see cref="LoadAsync"/> (cached on the instance for the mystery-page path) and
+    /// <see cref="BuildScenes"/> (which reads its own dump file directly and must not depend on
+    /// <see cref="LoadAsync"/> having run first — existing callers/tests invoke it standalone).</summary>
+    private static Dictionary<string, string> ParseCharacterNames(JsonElement root)
+    {
+        var result = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        if (root.TryGetProperty("CharacterNames", out var charNames) && charNames.ValueKind == JsonValueKind.Object)
+        {
+            foreach (var prop in charNames.EnumerateObject())
+            {
+                var displayName = prop.Value.GetString();
+                if (!string.IsNullOrEmpty(displayName))
+                    result[prop.Name] = displayName;
+            }
+        }
+        return result;
+    }
+
+    /// <summary>Tiers 1–2 of character-name resolution, shared by both dialogue paths: a per-entry
+    /// localized display name from the dump, then the dump's CharacterNames table — both skipped when
+    /// they just echo the raw id back (e.g. Dog→"Dog", Mystery Machine→"???"/"CB-01" is NOT skipped,
+    /// it genuinely differs from the id, so it wins over the hardcoded map even though it reads oddly —
+    /// consistency between the two dialogue paths matters more here than a friendlier fallback name).
+    /// Returns null when neither tier applies, so the caller falls through to its own remaining tiers
+    /// (mystery-page path: Pet resolution; both paths: <see cref="FormatCharacterName"/>).</summary>
+    private static string? ResolveFromDump(string characterType, string? perEntryDisplayName, Dictionary<string, string>? characterNames)
+    {
+        if (!string.IsNullOrEmpty(perEntryDisplayName)
+            && !string.Equals(perEntryDisplayName, characterType, StringComparison.OrdinalIgnoreCase))
+            return perEntryDisplayName;
+
+        if (characterNames != null && characterNames.TryGetValue(characterType, out var charName)
+            && !string.Equals(charName, characterType, StringComparison.OrdinalIgnoreCase))
+            return charName;
+
+        return null;
+    }
 
     /// <summary>Public accessor for character name formatting (used by MysteryWikiService for pet names).</summary>
     public static string FormatCharacterNamePublic(string name) => FormatCharacterName(name);

@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
+using MergeMansionWikiTools.Models;
 using MergeMansionWikiTools.Services;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
@@ -1136,5 +1137,235 @@ public partial class WikiDataParserPage
             App.NativeSetClipboardText(all);
             ShowInfo($"All {_lastItemChunks.Count} item chunks copied to clipboard.", InfoBarSeverity.Success);
         }
+    }
+
+    // ── Generate Dialogues ──────────────────────────────────────────────
+
+    /// <summary>Directory with exported PNGs for the selected APK version, or null when it is not set up.
+    /// Same lookup as EventsPage/ClueCollectionPage — shared via <see cref="ImageExportPathService"/>
+    /// instead of a third copy-paste (see that service's doc comment).</summary>
+    private string? ResolveDialogueExportDir()
+        => ImageExportPathService.Resolve(_main.Settings.ImageExporterBasePath, _main.Settings.SelectedApkVersion);
+
+    private async void BtnGenerateDialogues_Click(object sender, RoutedEventArgs e)
+    {
+        var dialoguesPath = _main.Settings.DialoguesJsonPath;
+        if (string.IsNullOrEmpty(dialoguesPath) || !File.Exists(dialoguesPath))
+        {
+            ShowInfo("Dialogues file not configured or not found. Set it in Settings.", InfoBarSeverity.Error);
+            return;
+        }
+
+        SetGenerateButtonsEnabled(false);
+        SetRowBusy(dialoguesIdle, dialoguesBusy, txtDialoguesBusy, true, "Generating dialogues…");
+        ShowInfo("Loading dialogues...", InfoBarSeverity.Informational);
+
+        try
+        {
+            var dialogueService = new DialogueService();
+            var (chunks, scenes) = await Task.Run(() =>
+            {
+                using var _t = AppLogger.Timed("GenerateDialogueChunks");
+                var built = dialogueService.BuildScenes(dialoguesPath);
+                DialogueTriggerResolver.Apply(built, _main.Settings.AreasJsonPath, _main.Settings.EventsJsonPath);
+
+                // varianta outfitu neni v configu, plyne z atlasu; bez exportu PNG zustanou repliky na "Default"
+                var exportDir = ResolveDialogueExportDir();
+                if (exportDir != null)
+                    PortraitVariantResolver.Apply(built, exportDir);
+                else
+                    AppLogger.Info("[DIALOGUES] Export - PNGs nenalezen, varianty outfitu zustavaji Default");
+
+                return (_luaGen.GenerateDialogueChunks(built, dialogueService.CreatedAt), built);
+            });
+
+            _lastDialogueChunks = chunks;
+            _lastDialogueScenes = scenes;
+            _dialoguesCreatedAt = dialogueService.CreatedAt;
+
+            var areas = scenes.Count(s => s.IsAreaStory);
+            var events = scenes.Count(s => s.IsEventStory);
+            var unassigned = scenes.Count - areas - events;
+            txtDialoguesHeader.Text =
+                $"Dialogues — {areas} area scenes · {events} event scenes · "
+                + $"{chunks.MainChunks.Count + chunks.EventChunks.Count} chunk(s) to push"
+                + (unassigned > 0 ? $" · {unassigned} unassigned (not pushed)" : "");
+
+            BuildDialogueChunkCards(chunks);
+
+            dialoguesSection.Visibility = Visibility.Visible;
+            if (_dialoguesCollapsed)
+            {
+                dialoguesContent.Visibility = Visibility.Visible;
+                iconCollapseDialogues.Symbol = Wpf.Ui.Controls.SymbolRegular.ChevronUp24;
+                _dialoguesCollapsed = false;
+            }
+
+            UpdateDialoguesWikiButtonState();
+            ShowInfo($"Dialogues generated — {scenes.Count} scene(s), {areas + events} placed"
+                + (unassigned > 0 ? $", {unassigned} unassigned." : "."), InfoBarSeverity.Success);
+        }
+        catch (Exception ex)
+        {
+            ShowInfo($"Error: {ex.Message}", InfoBarSeverity.Error);
+        }
+        finally
+        {
+            SetRowBusy(dialoguesIdle, dialoguesBusy, txtDialoguesBusy, false);
+            SetGenerateButtonsEnabled(true);
+        }
+    }
+
+    // ── Dialogues chunk cards ────────────────────────────────────────────
+
+    /// <summary>Renders one Lua preview card per Main/Events chunk (+ Unassigned, review-only) into the
+    /// Dialogues section. Same card look as Areas/Items (<see cref="BuildAreaChunkCard"/>), one dedicated
+    /// builder rather than generalizing the three — they already don't share one (see that method's
+    /// sibling <see cref="BuildItemChunkCard"/>/<see cref="BuildUsesIndexCard"/>).</summary>
+    private void BuildDialogueChunkCards(LuaGeneratorService.DialogueChunksResult chunks)
+    {
+        dialoguesMainChunksContainer.Children.Clear();
+        dialoguesEventChunksContainer.Children.Clear();
+        dialoguesUnassignedChunksContainer.Children.Clear();
+        _dialogueChunkCardData.Clear();
+
+        _dialogueChunkLoadCts?.Cancel(); _dialogueChunkLoadCts?.Dispose();
+        _dialogueChunkLoadCts = new CancellationTokenSource();
+
+        for (int i = 0; i < chunks.MainChunks.Count; i++)
+        {
+            var (label, lua) = chunks.MainChunks[i];
+            var card = BuildDialogueChunkCard(label, $"Module:Datatable/Dialogues/{i + 1}", lua);
+            card.Margin = new Thickness(0, 0, 0, 8);
+            dialoguesMainChunksContainer.Children.Add(card);
+        }
+
+        for (int i = 0; i < chunks.EventChunks.Count; i++)
+        {
+            var (label, lua) = chunks.EventChunks[i];
+            var card = BuildDialogueChunkCard(label, $"Module:Datatable/Dialogues/Events/{i + 1}", lua);
+            card.Margin = new Thickness(0, 0, 0, 8);
+            dialoguesEventChunksContainer.Children.Add(card);
+        }
+
+        // Scenes with neither an area nor an event: shown for review (a bad trigger match should be
+        // visible, not silently dropped) but never pushed — no page lists them (design doc §Chybové stavy).
+        txtDialoguesUnassignedHeader.Visibility = chunks.UnassignedChunks.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+        if (chunks.UnassignedChunks.Count > 0)
+            txtDialoguesUnassignedHeader.Text = $"Unassigned — {chunks.UnassignedChunks.Count} chunk(s), NOT pushed to the wiki";
+        for (int i = 0; i < chunks.UnassignedChunks.Count; i++)
+        {
+            var (label, lua) = chunks.UnassignedChunks[i];
+            var card = BuildDialogueChunkCard(label, "not pushed", lua);
+            card.Margin = new Thickness(0, 0, 0, 8);
+            dialoguesUnassignedChunksContainer.Children.Add(card);
+        }
+    }
+
+    private FrameworkElement BuildDialogueChunkCard(string label, string moduleTitle, string lua)
+    {
+        var border = new Border
+        {
+            Background = (Brush)FindResource("CardBackgroundFillColorDefaultBrush"),
+            CornerRadius = new CornerRadius(8),
+            BorderBrush = (Brush)FindResource("CardStrokeColorDefaultBrush"),
+            BorderThickness = new Thickness(1)
+        };
+        var sp = new StackPanel();
+
+        var headerGrid = new Grid { Margin = new Thickness(14, 10, 10, 10) };
+        headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+        headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+        headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+
+        var lineCount = lua.Count(c => c == '\n') + 1;
+        var sizeStr = FormatSize(Encoding.UTF8.GetByteCount(lua));
+        var lbl = new WpfTextBlock
+        {
+            Text = $"{label} ({moduleTitle}) — {lineCount} lines • {sizeStr}",
+            FontSize = 13,
+            FontWeight = FontWeights.SemiBold,
+            Foreground = (Brush)FindResource("TextFillColorPrimaryBrush"),
+            VerticalAlignment = VerticalAlignment.Center
+        };
+        Grid.SetColumn(lbl, 0);
+
+        var miniLoading = new StackPanel
+        {
+            Orientation = Orientation.Horizontal,
+            VerticalAlignment = VerticalAlignment.Center,
+            Margin = new Thickness(0, 0, 8, 0)
+        };
+        miniLoading.Children.Add(new WpfTextBlock
+        {
+            Text = "Loading...", FontSize = 11,
+            Foreground = (Brush)FindResource("TextFillColorTertiaryBrush"),
+            VerticalAlignment = VerticalAlignment.Center
+        });
+        miniLoading.Children.Add(new Wpf.Ui.Controls.ProgressRing
+        {
+            Width = 12, Height = 12, IsIndeterminate = true,
+            Margin = new Thickness(4, 0, 0, 0)
+        });
+        Grid.SetColumn(miniLoading, 1);
+
+        var copyBtn = new Wpf.Ui.Controls.Button
+        {
+            Content = "Copy",
+            Appearance = ControlAppearance.Secondary,
+            Height = 32,
+            Padding = new Thickness(16, 0, 16, 0)
+        };
+        string capturedLua = lua;
+        string capturedLabel = label;
+        copyBtn.Click += (_, _) =>
+        {
+            App.NativeSetClipboardText(capturedLua);
+            ShowInfo($"{capturedLabel} copied to clipboard.", InfoBarSeverity.Success);
+        };
+        Grid.SetColumn(copyBtn, 2);
+
+        headerGrid.Children.Add(lbl);
+        headerGrid.Children.Add(miniLoading);
+        headerGrid.Children.Add(copyBtn);
+        sp.Children.Add(headerGrid);
+
+        var warnPanel = new StackPanel
+        {
+            Visibility = Visibility.Collapsed,
+            Orientation = Orientation.Horizontal,
+            Margin = new Thickness(14, 0, 14, 8)
+        };
+        var warnText = new WpfTextBlock { FontSize = 12, TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center };
+        try { warnText.Foreground = (Brush)FindResource("SystemFillColorCautionBrush"); }
+        catch { warnText.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0xF9, 0xA8, 0x25)); }
+        warnPanel.Children.Add(warnText);
+        sp.Children.Add(warnPanel);
+
+        var separator = new Separator { Opacity = 0.15, Margin = new Thickness(0) };
+        var tb = new WpfTextBox
+        {
+            IsReadOnly = true,
+            TextWrapping = TextWrapping.NoWrap,
+            Height = 220,
+            FontFamily = new FontFamily("Consolas"),
+            FontSize = 11,
+            Background = Brushes.Transparent,
+            BorderThickness = new Thickness(0),
+            Padding = new Thickness(12),
+            VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+            HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
+            Text = SplitForPreview(lua).Preview
+        };
+        sp.Children.Add(separator);
+        sp.Children.Add(tb);
+        border.Child = sp;
+
+        _dialogueChunkCardData.Add(new ChunkCardData(tb, miniLoading, warnPanel, warnText));
+
+        _ = LazySetChunkFullTextAsync(tb, lua, miniLoading, warnPanel, warnText, label,
+            _dialogueChunkLoadCts?.Token ?? CancellationToken.None);
+
+        return border;
     }
 }

@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
+using MergeMansionWikiTools.Models;
 using MergeMansionWikiTools.Services;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
@@ -532,6 +533,14 @@ public partial class WikiDataParserPage
         var hasData = !string.IsNullOrEmpty(_lastEventsLua);
         btnUpdateEventsWiki.IsEnabled = _main.Settings.WikiVerified && hasData;
         UpdateButtonTooltip(btnUpdateEventsWiki, hasData);
+    }
+
+    private void UpdateDialoguesWikiButtonState()
+    {
+        var hasData = _lastDialogueChunks != null
+            && (_lastDialogueChunks.MainChunks.Count > 0 || _lastDialogueChunks.EventChunks.Count > 0);
+        btnUpdateDialoguesWiki.IsEnabled = _main.Settings.WikiVerified && hasData;
+        UpdateButtonTooltip(btnUpdateDialoguesWiki, hasData);
     }
 
     /// <summary>
@@ -1852,6 +1861,270 @@ public partial class WikiDataParserPage
 
         // Changelog fills remaining space
         root.Children.Add(BuildChangelogElement(_itemsChangelog, "item", primary, secondary, tertiary));
+
+        return root;
+    }
+
+    // ── Update Dialogues Wiki ─────────────────────────────────────────
+
+    /// <summary>Merges rewritten wordings into the archive module. Returns null when the archive is
+    /// unreadable (hand-edited/corrupted) — the caller must then skip pushing the archive entirely
+    /// rather than write a thinner one over it, which would silently erase wiki history.</summary>
+    private string? BuildDialogueArchive(List<DialogueScene> scenes, string? liveArchiveLua,
+                                         IReadOnlyDictionary<string, string> liveTextsBefore, string gameVersion)
+    {
+        Dictionary<string, List<ArchivedLine>> existing;
+        try
+        {
+            existing = DialogueArchiveService.ParseArchive(liveArchiveLua);
+        }
+        catch (InvalidOperationException ex)
+        {
+            // POZOR: nikdy nepokracovat prazdnym archivem - prepsalo by to celou historii na wiki
+            AppLogger.Error($"[DIALOGUES] Archiv nelze precist, push se preskakuje: {ex.Message}");
+            return null;
+        }
+
+        var diff = DialogueArchiveService.Compute(existing, liveTextsBefore, scenes, gameVersion);
+        AppLogger.Info($"[DIALOGUES] Archiv: +{diff.Added.Count} prepsanych, {diff.CosmeticSkipped} kosmetickych zahozeno, "
+                       + $"{diff.Carried.Count} neseno dal");
+        return DialogueArchiveService.RenderArchive(diff.FinalArchive);
+    }
+
+    /// <summary>
+    /// Pushes the pre-generated dialogue chunks + archive + dispatcher + {Area}/Story pages.
+    /// Order is load-bearing (brief §Krok 3): Archive first (so a rewritten wording is never lost if a
+    /// later step in this same push fails), then the main-story chunks, then the event chunks, then the
+    /// dispatcher that requires them all, and finally the per-area pages. Every write re-fetches the live
+    /// content right before overwriting it and passes that revision's <c>basetimestamp</c>, so a
+    /// concurrent edit is rejected (<see cref="WikiEditConflictException"/>) instead of clobbered.
+    /// </summary>
+    private async void BtnUpdateDialoguesWiki_Click(object sender, RoutedEventArgs e)
+    {
+        using var _t = AppLogger.Timed("UpdateDialoguesWiki");
+        if (!_main.Settings.WikiVerified)
+        {
+            ShowInfo("Wiki bot not verified. Configure credentials in Settings first.", InfoBarSeverity.Warning);
+            return;
+        }
+
+        if (_lastDialogueChunks == null || _lastDialogueScenes == null
+            || (_lastDialogueChunks.MainChunks.Count == 0 && _lastDialogueChunks.EventChunks.Count == 0))
+        {
+            ShowInfo("No dialogue chunks generated. Generate dialogues first.", InfoBarSeverity.Warning);
+            return;
+        }
+
+        var chunks = _lastDialogueChunks;
+        var scenes = _lastDialogueScenes;
+
+        btnUpdateDialoguesWiki.IsEnabled = false;
+        SetGenerateButtonsEnabled(false);
+        SetRowBusy(dialoguesIdle, dialoguesBusy, txtDialoguesBusy, true, "Preparing push…");
+
+        try
+        {
+            // 1. Existing chunk numbers on wiki — decides create vs. update, and whether a shrunk chunk
+            // count leaves stale extra modules that need blanking (Areas/Items precedent).
+            ShowInfo("Querying existing Dialogues modules on wiki...", InfoBarSeverity.Informational);
+            var (existingMain, existingEvents) = await WikiMappingService.QueryExistingDialogueModulesAsync();
+
+            var localMainCount = chunks.MainChunks.Count;
+            var localEventCount = chunks.EventChunks.Count;
+            var mainToBlank = existingMain.Where(i => i > localMainCount).ToList();
+            var eventsToBlank = existingEvents.Where(i => i > localEventCount).ToList();
+
+            // 2. Live content + revision timestamp of every module this push is about to overwrite —
+            // fetched fresh right here (not cached from Generate), per the brief's re-fetch requirement.
+            ShowInfo("Fetching live Dialogues modules...", InfoBarSeverity.Informational);
+            var mainLive = new (string? Content, string? Timestamp)[localMainCount];
+            for (int i = 0; i < localMainCount; i++)
+                mainLive[i] = await WikiMappingService.FetchModuleWithTimestampAsync($"Module:Datatable/Dialogues/{i + 1}");
+            var eventsLive = new (string? Content, string? Timestamp)[localEventCount];
+            for (int i = 0; i < localEventCount; i++)
+                eventsLive[i] = await WikiMappingService.FetchModuleWithTimestampAsync($"Module:Datatable/Dialogues/Events/{i + 1}");
+
+            var (liveArchive, liveArchiveTs) = await WikiMappingService.FetchModuleWithTimestampAsync(DialogueArchiveService.ArchiveModuleTitle);
+            var (_, liveDispatcherTs) = await WikiMappingService.FetchModuleWithTimestampAsync("Module:Datatable/Dialogues");
+
+            // 3. Archive: what every line said on the wiki right before this push — the union of every
+            // live chunk about to be overwritten, since that's the only place the "before" wording exists.
+            var liveTextsBefore = new Dictionary<string, string>(StringComparer.Ordinal);
+            foreach (var (content, _) in mainLive)
+                foreach (var kv in DialogueArchiveService.ExtractLiveLineTexts(content)) liveTextsBefore.TryAdd(kv.Key, kv.Value);
+            foreach (var (content, _) in eventsLive)
+                foreach (var kv in DialogueArchiveService.ExtractLiveLineTexts(content)) liveTextsBefore.TryAdd(kv.Key, kv.Value);
+
+            var gameVersion = PhoneDetectionService.ReadPulledGameVersion() ?? _dialoguesCreatedAt ?? "";
+            var archiveLua = BuildDialogueArchive(scenes, liveArchive, liveTextsBefore, gameVersion);
+            // BuildDialogueArchive returns null only when a live archive EXISTS but could not be parsed —
+            // pushing nothing beats pushing a thinner archive that erases history (brief: hard rule).
+            var archiveUnreadable = archiveLua == null && !string.IsNullOrWhiteSpace(liveArchive);
+
+            // 4. {Area}/Story pages this push will (re)write.
+            var storyPages = scenes.Where(s => s.IsAreaStory)
+                .GroupBy(s => s.Area!, StringComparer.Ordinal)
+                .OrderBy(g => g.Key, StringComparer.Ordinal)
+                .ToDictionary(
+                    g => g.Key,
+                    g => DialogueStoryPageBuilder.Build(g.Key, g.OrderBy(s => s.Id, StringComparer.Ordinal).ToList()),
+                    StringComparer.Ordinal);
+
+            // 5. Preview confirmation.
+            var previewBox = CreatePreviewDialog(
+                "Update Dialogues Data on Wiki",
+                BuildDialoguesUpdatePreview(localMainCount, localEventCount, mainToBlank.Count, eventsToBlank.Count,
+                    archiveLua != null, archiveUnreadable, storyPages.Count),
+                "Update");
+
+            if (await previewBox.ShowDialogAsync() != WpfMessageBoxResult.Primary)
+            {
+                infoBar.IsOpen = false;
+                return;
+            }
+
+            ShowInfo("Authenticating with wiki...", InfoBarSeverity.Informational);
+            using var client = await WikiMappingService.CreateAuthenticatedClientAsync(
+                _main.Settings.WikiUsername, _main.Settings.WikiPassword);
+            var csrfToken = await WikiMappingService.GetCsrfTokenAsync(client);
+
+            const string blankContent = "-- This module is no longer in use\nreturn {}";
+            var totalActions = localMainCount + localEventCount + mainToBlank.Count + eventsToBlank.Count
+                + (archiveLua != null ? 1 : 0) + 1 /* dispatcher */ + storyPages.Count;
+            int done = 0;
+
+            // 6. Archive FIRST (mandatory order — see method doc comment).
+            if (archiveLua != null)
+            {
+                ShowInfo($"[{++done}/{totalActions}] Updating {DialogueArchiveService.ArchiveModuleTitle}...", InfoBarSeverity.Informational);
+                await WikiMappingService.EditModuleAsync(
+                    client, csrfToken, DialogueArchiveService.ArchiveModuleTitle, archiveLua,
+                    "Update rewritten dialogue wordings (via MergeMansionWikiTools)", baseTimestamp: liveArchiveTs);
+            }
+
+            // 7. Main story chunks.
+            for (int i = 0; i < localMainCount; i++)
+            {
+                var title = $"Module:Datatable/Dialogues/{i + 1}";
+                var isNew = mainLive[i].Content == null;
+                ShowInfo($"[{++done}/{totalActions}] {(isNew ? "Create" : "Update")} {title}...", InfoBarSeverity.Informational);
+                await WikiMappingService.EditModuleAsync(
+                    client, csrfToken, title, chunks.MainChunks[i].Lua,
+                    $"{(isNew ? "Create" : "Update")} main story dialogue chunk {i + 1} (via MergeMansionWikiTools)",
+                    baseTimestamp: mainLive[i].Timestamp);
+            }
+
+            // 8. Event chunks.
+            for (int i = 0; i < localEventCount; i++)
+            {
+                var title = $"Module:Datatable/Dialogues/Events/{i + 1}";
+                var isNew = eventsLive[i].Content == null;
+                ShowInfo($"[{++done}/{totalActions}] {(isNew ? "Create" : "Update")} {title}...", InfoBarSeverity.Informational);
+                await WikiMappingService.EditModuleAsync(
+                    client, csrfToken, title, chunks.EventChunks[i].Lua,
+                    $"{(isNew ? "Create" : "Update")} event dialogue chunk {i + 1} (via MergeMansionWikiTools)",
+                    baseTimestamp: eventsLive[i].Timestamp);
+            }
+
+            // 9. Blank excess chunks left over from a shrunk chunk count.
+            foreach (var i in mainToBlank)
+            {
+                var title = $"Module:Datatable/Dialogues/{i}";
+                ShowInfo($"[{++done}/{totalActions}] Blanking {title}...", InfoBarSeverity.Informational);
+                await WikiMappingService.EditModuleAsync(client, csrfToken, title, blankContent,
+                    $"Blank unused main story dialogue chunk {i} (via MergeMansionWikiTools)");
+            }
+            foreach (var i in eventsToBlank)
+            {
+                var title = $"Module:Datatable/Dialogues/Events/{i}";
+                ShowInfo($"[{++done}/{totalActions}] Blanking {title}...", InfoBarSeverity.Informational);
+                await WikiMappingService.EditModuleAsync(client, csrfToken, title, blankContent,
+                    $"Blank unused event dialogue chunk {i} (via MergeMansionWikiTools)");
+            }
+
+            // 10. Dispatcher — after every chunk it requires already exists on the wiki.
+            ShowInfo($"[{++done}/{totalActions}] Updating Module:Datatable/Dialogues (dispatcher)...", InfoBarSeverity.Informational);
+            var dispatcherLua = WikiMappingService.GenerateDialoguesArbiterLua(localMainCount, localEventCount, _dialoguesCreatedAt);
+            await WikiMappingService.EditModuleAsync(
+                client, csrfToken, "Module:Datatable/Dialogues", dispatcherLua,
+                $"Update dialogues dispatcher ({localMainCount} main + {localEventCount} event chunk(s)) (via MergeMansionWikiTools)",
+                baseTimestamp: liveDispatcherTs);
+
+            // 11. {Area}/Story pages — re-fetch the live page right before each write (brief: mandatory);
+            // skipped when the freshly-built wikitext is already byte-identical to what's live.
+            int pagesUpdated = 0, pagesSkipped = 0;
+            foreach (var (areaName, wikitext) in storyPages)
+            {
+                var pageTitle = $"{areaName}/Story";
+                done++;
+                ShowInfo($"[{done}/{totalActions}] Checking \"{pageTitle}\"...", InfoBarSeverity.Informational);
+                var (liveContent, liveTs) = await WikiMappingService.FetchModuleWithTimestampAsync(pageTitle);
+                if (liveContent != null && liveContent.TrimEnd() == wikitext.TrimEnd()) { pagesSkipped++; continue; }
+
+                ShowInfo($"[{done}/{totalActions}] {(liveContent == null ? "Create" : "Update")} \"{pageTitle}\"...", InfoBarSeverity.Informational);
+                await WikiMappingService.EditModuleAsync(
+                    client, csrfToken, pageTitle, wikitext,
+                    $"{(liveContent == null ? "Create" : "Update")} dialogue from {areaName} (via MergeMansionWikiTools)",
+                    baseTimestamp: liveTs);
+                pagesUpdated++;
+            }
+
+            var summary = $"Wiki updated — {localMainCount} main + {localEventCount} event chunk(s)"
+                + (archiveLua != null ? ", archive updated" : archiveUnreadable ? ", ⚠ archive SKIPPED (unreadable — see log)" : "")
+                + $", dispatcher updated, {pagesUpdated} Story page(s) updated"
+                + (pagesSkipped > 0 ? $" ({pagesSkipped} unchanged)" : "") + ".";
+            ShowInfo(summary, archiveUnreadable ? InfoBarSeverity.Warning : InfoBarSeverity.Success);
+        }
+        catch (WikiEditConflictException ex)
+        {
+            AppLogger.Error("UpdateDialoguesWiki edit conflict", ex);
+            ShowInfo($"⚠ {ex.Message}", InfoBarSeverity.Warning);
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Error("UpdateDialoguesWiki failed", ex);
+            ShowInfo($"Error: {ex.Message}", InfoBarSeverity.Error);
+        }
+        finally
+        {
+            SetRowBusy(dialoguesIdle, dialoguesBusy, txtDialoguesBusy, false);
+            SetGenerateButtonsEnabled(true);
+            UpdateDialoguesWikiButtonState();
+        }
+    }
+
+    private UIElement BuildDialoguesUpdatePreview(int mainCount, int eventCount, int mainBlank, int eventBlank,
+        bool archiveWillPush, bool archiveUnreadable, int storyPageCount)
+    {
+        var secondary = (Brush)FindResource("TextFillColorSecondaryBrush");
+
+        var root = new StackPanel { Margin = new Thickness(0, 0, 0, 4) };
+
+        var totalModules = mainCount + eventCount + mainBlank + eventBlank + (archiveWillPush ? 1 : 0) + 1;
+        root.Children.Add(new WpfTextBlock
+        {
+            Text = $"{totalModules} module(s) + up to {storyPageCount} Story page(s) will be edited",
+            FontSize = 13, Foreground = secondary, Margin = new Thickness(0, 0, 0, 4)
+        });
+        root.Children.Add(new Border
+        {
+            Height = 1, Margin = new Thickness(0, 4, 0, 10),
+            Background = (Brush)FindResource("ControlStrokeColorDefaultBrush")
+        });
+
+        if (archiveUnreadable)
+            AddDialogStepCard(root, "⚠", "Archive SKIPPED", null,
+                "The live archive module could not be parsed — pushing would erase its history, so it is left untouched.");
+        else if (archiveWillPush)
+            AddDialogStepCard(root, "📝", DialogueArchiveService.ArchiveModuleTitle, "Rewritten line wordings archived");
+
+        AddDialogStepCard(root, "📝", "Main story chunks",
+            $"{mainCount} chunk(s)" + (mainBlank > 0 ? $", {mainBlank} blanked" : ""));
+        AddDialogStepCard(root, "📝", "Event chunks",
+            $"{eventCount} chunk(s)" + (eventBlank > 0 ? $", {eventBlank} blanked" : ""));
+        AddDialogStepCard(root, "📝", "Module:Datatable/Dialogues", "Dispatcher — merges the chunks above");
+        AddDialogStepCard(root, "📝", "{Area}/Story pages",
+            $"up to {storyPageCount} page(s) — only those that actually changed are written");
 
         return root;
     }

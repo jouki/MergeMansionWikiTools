@@ -1050,14 +1050,8 @@ public partial class ClueCollectionPage : UserControl
     }
 
     private string? ResolveExportDir()
-    {
-        if (!string.IsNullOrEmpty(_overrideExportDir)) return _overrideExportDir;
-        var basePath = _main.Settings.ImageExporterBasePath;
-        var version = _main.Settings.SelectedApkVersion;
-        if (string.IsNullOrEmpty(basePath) || string.IsNullOrEmpty(version)) return null;
-        var dir = Path.Combine(basePath, version, "Export - PNGs");
-        return Directory.Exists(dir) ? dir : null;
-    }
+        => _overrideExportDir
+           ?? ImageExportPathService.Resolve(_main.Settings.ImageExporterBasePath, _main.Settings.SelectedApkVersion);
 
     // ── Ad-hoc resolution check ────────────────────────────────────
 

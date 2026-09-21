@@ -207,6 +207,35 @@
                                        Click="BtnGenerateEvents_Click" />
                         </Grid>
 
+                        <Separator Opacity="0.15" Margin="0" />
+
+                        <!-- Dialogues row -->
+                        <Grid Margin="16,10,16,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" VerticalAlignment="Center" Margin="0,0,16,0">
+                                <StackPanel x:Name="dialoguesIdle">
+                                    <TextBlock Text="Dialogues: story scenes from the dump, with speakers/triggers/outfits resolved"
+                                               FontSize="13"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                </StackPanel>
+                                <StackPanel x:Name="dialoguesBusy" Orientation="Horizontal"
+                                            Visibility="Collapsed" VerticalAlignment="Center">
+                                    <ui:ProgressRing Width="16" Height="16" IsIndeterminate="True" />
+                                    <TextBlock x:Name="txtDialoguesBusy" Margin="10,0,0,0" FontSize="13"
+                                               VerticalAlignment="Center"
+                                               Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                                </StackPanel>
+                            </Grid>
+                            <ui:Button x:Name="btnGenerateDialogues" Grid.Column="1"
+                                       Content="Generate Dialogues"
+                                       Appearance="Primary"
+                                       Height="38" MinWidth="190" Padding="16,0"
+                                       Click="BtnGenerateDialogues_Click" />
+                        </Grid>
+
                     </StackPanel>
                 </Border>
 
@@ -524,6 +553,70 @@
                                          HorizontalScrollBarVisibility="Auto" />
                             </StackPanel>
                         </Border>
+                    </StackPanel>
+
+                </StackPanel>
+
+                <!-- ── Dialogues section ─────────────────────────────────── -->
+                <StackPanel x:Name="dialoguesSection" Visibility="Collapsed">
+
+                    <!-- Section header -->
+                    <Grid Margin="4,16,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="txtDialoguesHeader" Grid.Column="0"
+                                   FontSize="16" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                   VerticalAlignment="Center" />
+                        <ui:Button x:Name="btnUpdateDialoguesWiki" Grid.Column="1"
+                                   Appearance="Primary"
+                                   Height="32" Padding="12,0"
+                                   Click="BtnUpdateDialoguesWiki_Click"
+                                   VerticalAlignment="Center" Margin="8,0,0,0"
+                                   ToolTipService.InitialShowDelay="0"
+                                   ToolTipService.ShowOnDisabled="True">
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Symbol="ArrowUpload24" FontSize="14" Margin="0,0,6,0"
+                                              Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}" />
+                                <TextBlock Text="Update Wiki" VerticalAlignment="Center"
+                                           Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}" />
+                            </StackPanel>
+                        </ui:Button>
+                        <Button x:Name="btnCollapseDialogues" Grid.Column="2"
+                                Style="{StaticResource IconButtonStyle}"
+                                Click="BtnCollapseDialogues_Click"
+                                VerticalAlignment="Center" Margin="8,0,0,0">
+                            <ui:SymbolIcon x:Name="iconCollapseDialogues" Symbol="ChevronUp24" FontSize="16"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                        </Button>
+                    </Grid>
+
+                    <!-- Collapsible content: one card group per module subtree (main story / events),
+                         same look as the Areas/Items chunk cards. Unassigned scenes are shown too (never
+                         pushed to the wiki — see DialogueStoryPageBuilder design notes) so a bad trigger
+                         match is visible instead of silently dropped. -->
+                    <StackPanel x:Name="dialoguesContent">
+                        <TextBlock Text="Main story"
+                                   FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                   Margin="4,0,0,8" />
+                        <StackPanel x:Name="dialoguesMainChunksContainer" />
+
+                        <TextBlock Text="Events"
+                                   FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                   Margin="4,16,0,8" />
+                        <StackPanel x:Name="dialoguesEventChunksContainer" />
+
+                        <TextBlock x:Name="txtDialoguesUnassignedHeader"
+                                   Visibility="Collapsed"
+                                   FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                   Margin="4,16,0,8" />
+                        <StackPanel x:Name="dialoguesUnassignedChunksContainer" />
                     </StackPanel>
 
                 </StackPanel>

@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
+using MergeMansionWikiTools.Models;
 using MergeMansionWikiTools.Services;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
@@ -71,6 +72,13 @@ public partial class WikiDataParserPage : UserControl
     // CreatedAt from JSON sources
     private string? _areasCreatedAt;
     private string? _itemsCreatedAt;
+    private string? _dialoguesCreatedAt;
+
+    // Dialogues chunking state (Task 11 — Wiki Data Parser section)
+    private LuaGeneratorService.DialogueChunksResult? _lastDialogueChunks;
+    private List<DialogueScene>? _lastDialogueScenes;
+    private CancellationTokenSource? _dialogueChunkLoadCts;
+    private List<ChunkCardData> _dialogueChunkCardData = new();
 
     // Changelog data (local vs wiki comparison)
     private sealed record ModifiedEntry(string Key, string WikiValue, string LocalValue);
@@ -101,6 +109,7 @@ public partial class WikiDataParserPage : UserControl
     private bool _areasCollapsed;
     private bool _itemsCollapsed;
     private bool _eventsCollapsed;
+    private bool _dialoguesCollapsed;
 
     // Cancellation for ongoing chunked text loads
     private CancellationTokenSource? _chunkLoadCts;
@@ -119,6 +128,7 @@ public partial class WikiDataParserPage : UserControl
         UpdateWikiButtonState();
         UpdateItemsWikiButtonState();
         UpdateEventsWikiButtonState();
+        UpdateDialoguesWikiButtonState();
         _main.WikiVerifiedChanged += OnWikiVerifiedChanged;
     }
 
@@ -127,6 +137,7 @@ public partial class WikiDataParserPage : UserControl
         UpdateWikiButtonState();
         UpdateItemsWikiButtonState();
         UpdateEventsWikiButtonState();
+        UpdateDialoguesWikiButtonState();
     }
 
     // ── Status ──────────────────────────────────────────────────────
@@ -236,6 +247,7 @@ public partial class WikiDataParserPage : UserControl
         btnGenerateAreas.IsEnabled = enabled;
         btnGenerateItems.IsEnabled = enabled;
         btnGenerateEvents.IsEnabled = enabled;
+        btnGenerateDialogues.IsEnabled = enabled;
     }
 
     private static int? TryCountAreas(string path)
@@ -282,6 +294,8 @@ public partial class WikiDataParserPage : UserControl
         _chunkLoadCts = new CancellationTokenSource();
         _combinedLoadCts?.Cancel(); _combinedLoadCts?.Dispose();
         _combinedLoadCts = new CancellationTokenSource();
+        _dialogueChunkLoadCts?.Cancel(); _dialogueChunkLoadCts?.Dispose();
+        _dialogueChunkLoadCts = new CancellationTokenSource();
 
         // Area chunks
         for (int i = 0; i < _chunkCardData.Count && i < _lastChunks.Count; i++)
@@ -313,6 +327,15 @@ public partial class WikiDataParserPage : UserControl
             var (preview, remaining) = SplitForPreview(_lastEventsLua);
             txtEvents.Text = preview;
             eventsMiniLoading.Visibility = remaining != null ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        // Dialogues chunks (main + events + unassigned, in that card order)
+        var dialogueChunks = AllDialogueChunks().ToList();
+        for (int i = 0; i < _dialogueChunkCardData.Count && i < dialogueChunks.Count; i++)
+        {
+            var (preview, remaining) = SplitForPreview(dialogueChunks[i].Lua);
+            _dialogueChunkCardData[i].TextBox.Text = preview;
+            _dialogueChunkCardData[i].MiniLoading.Visibility = remaining != null ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 
@@ -349,6 +372,16 @@ public partial class WikiDataParserPage : UserControl
         // Events schedule
         if (!string.IsNullOrEmpty(_lastEventsLua))
             _ = LazySetEventsFullTextAsync(_lastEventsLua, combinedCt);
+
+        // Dialogues chunks (main + events + unassigned, in that card order)
+        var dialogueChunkCt = _dialogueChunkLoadCts?.Token ?? CancellationToken.None;
+        var dialogueChunks = AllDialogueChunks().ToList();
+        for (int i = 0; i < _dialogueChunkCardData.Count && i < dialogueChunks.Count; i++)
+        {
+            var card = _dialogueChunkCardData[i];
+            _ = LazySetChunkFullTextAsync(card.TextBox, dialogueChunks[i].Lua,
+                card.MiniLoading, card.WarnPanel, card.WarnText, dialogueChunks[i].Label, dialogueChunkCt);
+        }
     }
 
     // ── Collapse / expand ────────────────────────────────────────────
@@ -379,6 +412,25 @@ public partial class WikiDataParserPage : UserControl
             ? Wpf.Ui.Controls.SymbolRegular.ChevronDown24
             : Wpf.Ui.Controls.SymbolRegular.ChevronUp24;
     }
+
+    private void BtnCollapseDialogues_Click(object sender, RoutedEventArgs e)
+    {
+        _dialoguesCollapsed = !_dialoguesCollapsed;
+        dialoguesContent.Visibility = _dialoguesCollapsed ? Visibility.Collapsed : Visibility.Visible;
+        iconCollapseDialogues.Symbol = _dialoguesCollapsed
+            ? Wpf.Ui.Controls.SymbolRegular.ChevronDown24
+            : Wpf.Ui.Controls.SymbolRegular.ChevronUp24;
+    }
+
+    /// <summary>All generated dialogue chunks in the same order <see cref="BuildDialogueChunkCards"/>
+    /// adds their cards (main, then events, then unassigned) — keeps <see cref="_dialogueChunkCardData"/>
+    /// index-aligned with the chunk it was built from, for <see cref="PrepareForShow"/>/<see cref="OnPageShown"/>.</summary>
+    private IEnumerable<(string Label, string Lua)> AllDialogueChunks()
+        => _lastDialogueChunks == null
+            ? Enumerable.Empty<(string, string)>()
+            : _lastDialogueChunks.MainChunks
+                .Concat(_lastDialogueChunks.EventChunks)
+                .Concat(_lastDialogueChunks.UnassignedChunks);
 
     private async Task LazySetEventsFullTextAsync(string lua, CancellationToken ct)
     {
