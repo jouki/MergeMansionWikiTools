@@ -75,10 +75,7 @@ public sealed partial class ChainSerializer : JsonConverter
             case TransformCollectAction transform: WriteTransformCollectAction(writer, transform, serializer); return;
             case SimpleSinkStateFactory simple: WriteSinkFactory(writer, serializer, simple.Scores, simple.ScoreTarget, simple.RewardDef); return;
             case SingleTargetSinkStateFactory single: WriteSinkFactory(writer, serializer, single.Scores, single.ScoreTarget, single.RewardDef); return;
-            // Tag-based sinks declare Tag/InputCount/RewardTagName as private fields, which default
-            // reflection would drop entirely (the golden object has all three), so they go through
-            // the MetaMember writer instead.
-            case TagSinkStateFactory tag: MetaObjectWriter.WriteObject(writer, tag, serializer, _log); return;
+            case TagSinkStateFactory tag: WriteTagSinkFactory(writer, tag, serializer); return;
             case IItemProducer or IOrderProducer: WriteProducer(writer, value, serializer); return;
             // Only reachable if a future game version adds another IActivationCycle implementation;
             // the TagId-ordered member dump is a better guess than silence.
@@ -465,6 +462,198 @@ public sealed partial class ChainSerializer : JsonConverter
             s.Serialize(w, Resolve(rewardDef));
         }
         w.WriteEndObject();
+    }
+
+    /// <summary>
+    /// A tag sink, plus the two tables needed to read it — a deliberate divergence from golden.
+    /// <para>
+    /// Tag/InputCount/RewardTagName are private fields, which default reflection would drop, so
+    /// they go through the MetaMember writer (that part matches golden). What golden does NOT have
+    /// is any way to answer "which fuel gives which reward": the factory only names a
+    /// <c>RewardTagName</c>, and the game resolves the result from the <b>summed SinkPoints</b> of
+    /// what was consumed, against the <c>TagRewards</c> library. Nothing else in any dump file
+    /// carries that library, so the reward of a tag sink used to be underivable — visible on the
+    /// wiki as a DNA Kit page that said nothing about Murder Weapons and hardcoded one drop count,
+    /// although the four weapons give runs of 8, 10, 12 and 20.
+    /// </para>
+    /// <para>
+    /// Two extra keys therefore follow, both resolved to item types:
+    /// <list type="bullet">
+    /// <item><c>TagFuel</c> — every item carrying this <c>Tag</c>, with the <c>SinkPoints</c> it
+    /// contributes.</item>
+    /// <item><c>TagRewards</c> — point total to the items produced at that total.</item>
+    /// </list>
+    /// They are kept as two tables rather than one joined list because the join is only trivial at
+    /// <c>InputCount == 1</c>; at 3 (Tarot Table, Kitchen Tools) a total is a sum over three items.
+    /// </para>
+    /// <para>
+    /// Byte parity with Legacy stopped being a criterion in v0.24.73, and this is the second
+    /// recorded deliberate divergence — see <c>Dumper/NativeDumperRules.md</c>.
+    /// </para>
+    /// </summary>
+    private void WriteTagSinkFactory(JsonWriter w, TagSinkStateFactory factory, JsonSerializer s)
+    {
+        w.WriteStartObject();
+
+        // The three private [MetaMember]s, in TagId order, exactly as golden has them. The hook
+        // only observes; returning false leaves the writing to WriteMembers.
+        string? tag = null, rewardTagName = null;
+        MetaObjectWriter.WriteMembers(w, factory, s, _log, (name, value) =>
+        {
+            if (name == "Tag") tag = value as string;
+            else if (name == "RewardTagName") rewardTagName = value as string;
+            return false;
+        });
+
+        List<ItemDefinition?> fuel = new();
+        if (!string.IsNullOrEmpty(tag) && _config.Items != null)
+        {
+            // EnumerateAll() is the untyped IGameConfigLibrary view, hence the cast.
+            fuel = _config.Items.EnumerateAll()
+                .Select(kv => kv.Value as ItemDefinition)
+                .Where(i => i != null && string.Equals(i.SinkTag, tag, StringComparison.Ordinal))
+                .OrderBy(i => i!.SinkPoints)
+                .ThenBy(i => i!.ItemType, StringComparer.Ordinal)
+                .ToList();
+            if (fuel.Count > 0)
+            {
+                w.WritePropertyName("TagFuel");
+                w.WriteStartArray();
+                foreach (var item in fuel)
+                {
+                    w.WriteStartObject();
+                    w.WritePropertyName("Item");
+                    w.WriteValue(item!.ItemType);
+                    w.WritePropertyName("SinkPoints");
+                    w.WriteValue(item.SinkPoints);
+                    w.WriteEndObject();
+                }
+                w.WriteEndArray();
+            }
+        }
+
+        if (!string.IsNullOrEmpty(rewardTagName) && _config.TagRewards != null)
+        {
+            var rewards = _config.TagRewards.EnumerateAll()
+                .Select(kv => kv.Value as TagRewardsInfo)
+                .Where(r => r != null && string.Equals(r.RewardTagName, rewardTagName, StringComparison.Ordinal))
+                .OrderBy(r => r!.TotalPoints)
+                .ToList();
+            if (rewards.Count > 0)
+            {
+                w.WritePropertyName("TagRewards");
+                w.WriteStartArray();
+                foreach (var reward in rewards)
+                {
+                    w.WriteStartObject();
+                    w.WritePropertyName("TotalPoints");
+                    w.WriteValue(reward!.TotalPoints);
+
+                    // TotalPoints is the SUM of the SinkPoints of everything consumed, so at
+                    // InputCount 1 it is just the one item's SinkPoints and the row can name the
+                    // fuel outright — no cross-referencing TagFuel by hand. Above 1 a total is a
+                    // sum over several items (3 Tarot Cards make totals 3-9) and no single fuel
+                    // owns the row, so the key is left out rather than guessed at.
+                    var inputCount = InputCountOf(factory);
+                    if (inputCount == 1)
+                    {
+                        var owners = fuel.Where(i => i!.SinkPoints == reward.TotalPoints).ToList();
+                        if (owners.Count > 0)
+                        {
+                            w.WritePropertyName("Fuel");
+                            w.WriteStartArray();
+                            foreach (var owner in owners) w.WriteValue(owner!.ItemType);
+                            w.WriteEndArray();
+                        }
+                    }
+
+                    w.WritePropertyName("Produces");
+                    w.WriteStartArray();
+                    foreach (var itemType in RewardItemTypes(reward))
+                    {
+                        w.WriteStartObject();
+                        w.WritePropertyName("Item");
+                        w.WriteValue(itemType);
+                        WriteProducedDetail(w, s, itemType);
+                        w.WriteEndObject();
+                    }
+                    w.WriteEndArray();
+                    w.WriteEndObject();
+                }
+                w.WriteEndArray();
+            }
+        }
+
+        w.WriteEndObject();
+    }
+
+    /// <summary>
+    /// The produced item's own drop count and spawn table, written into the TagRewards row itself.
+    /// The spawn goes in unconditionally: a consumer needs to know WHAT is dropped, not only how
+    /// many, and a single-outcome run (the DNA Kit's) would otherwise carry no item at all.
+    /// <para>
+    /// Not redundant with the item reference next to it: <b>23 of the 40 tag-reward targets in
+    /// 26.07.01 are not in chain_item_odds.json at all</b> (every compost and donation-box
+    /// producer, the kitchen-utensil decays), because they belong to no PrimaryChain. For those the
+    /// reference is a dangling id and this is the only place the numbers appear.
+    /// </para>
+    /// <para>
+    /// There is deliberately no "points to drops" factor anywhere: the relation is a lookup table,
+    /// not a multiplier (MaaTM runs 1 to 8, 2 to 10, 3 to 12, 4 to 20 drops).
+    /// </para>
+    /// </summary>
+    private void WriteProducedDetail(JsonWriter w, JsonSerializer s, string itemType)
+    {
+        var produced = _config.Items?.EnumerateAll()
+            .Select(kv => kv.Value as ItemDefinition)
+            .FirstOrDefault(i => i != null && string.Equals(i.ItemType, itemType, StringComparison.Ordinal));
+        if (produced?.ActivationFeatures is not ActivationFeatures af) return;
+
+        // An endless producer's storage is a sentinel (9999), not a drop count.
+        var cycles = (af.ActivationCycle as ActivationCycle)?.HowManyCycles;
+        if (cycles != -1)
+        {
+            var (_, storageMax) = ChargeMath(af);
+            if (storageMax > 0)
+            {
+                w.WritePropertyName("Drops");
+                w.WriteValue(storageMax);
+            }
+        }
+
+        if (af.ActivationSpawn != null)
+        {
+            w.WritePropertyName("DropOdds");
+            s.Serialize(w, af.ActivationSpawn);
+        }
+    }
+
+    /// <summary><c>InputCount</c> is a private [MetaMember], so it is read the same way.</summary>
+    private int InputCountOf(TagSinkStateFactory factory)
+    {
+        foreach (var (name, _, get) in MetaObjectWriter.Members(factory))
+            if (name == "InputCount")
+                return get() is int count ? count : 1;
+        return 1;
+    }
+
+    /// <summary>
+    /// Distinct item types a TagRewards row can produce. The same target is normally listed twice
+    /// with equal weight; the Tarot Table is the one place where a total really can roll two
+    /// different results, so this de-duplicates rather than taking the first.
+    /// </summary>
+    private IEnumerable<string> RewardItemTypes(TagRewardsInfo reward)
+    {
+        var seen = new List<string>();
+        if (reward.ItemProducer is not ControlledRandomProducer producer || producer.GenerationOdds == null)
+            return seen;
+        foreach (var odds in producer.GenerationOdds)
+        {
+            var itemType = ItemTypeOf(odds?.Type);
+            if (itemType != null && !seen.Contains(itemType, StringComparer.Ordinal))
+                seen.Add(itemType);
+        }
+        return seen;
     }
 
     /// <summary>

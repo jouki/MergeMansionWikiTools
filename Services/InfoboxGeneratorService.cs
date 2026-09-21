@@ -308,10 +308,18 @@ public class InfoboxGeneratorService
                 && i.OrderRequiredItems.Keys.Any(k => myItemTypes.Contains(k)));
         if (isFuelBySink || isFuelByOrder) types.Add("Fuel Item");
 
-        // Points Item — auto-detected from the event-points fields; the checkbox stays an override
-        // for chains whose points the dump does not carry.
-        if (opts.IsPoints || chain.Items.Any(i => i.EventPointsOnTap > 0 || i.EventPointsOnCreate > 0))
+        // Points Item — auto-detected from the event-points reward; the checkbox stays an override
+        // for chains whose points the dump does not carry. Same gate as the table columns: the tap
+        // value alone is generic collect progress and would also catch Season Pass collectibles,
+        // leaderboard items and subgoal fragments.
+        if (opts.IsPoints || chain.Items.Any(i => i.EventPointsOnCreate > 0))
             types.Add("Points Item");
+
+        // Collectible Item — tapping it feeds a named side track instead of the event score
+        // (CollectAction.TrackId). The Old Map is the only one so far: six of them unlock the six
+        // sub-goal rewards that sit next to an event's main level track.
+        if (chain.Items.Any(i => !string.IsNullOrEmpty(i.CollectTrackId)))
+            types.Add("Collectible Item");
 
         return types;
     }
@@ -825,6 +833,28 @@ public class InfoboxGeneratorService
         int insertCounter = 0;
 
         var itemTypeToChain = BuildItemTypeToChain(allChains);
+
+        // Tag sinks first: their requirement list is an OR, so it renders as one collapsed entry
+        // rather than one line per item. Marking the keys seen keeps the AND loop below off them.
+        var anyOfNeeds = new List<string>();
+        foreach (var item in chain.Items)
+        {
+            if (!item.SinkIsAnyOf || item.SinkRequirementConfigKeys == null || IsSinkSuppressed(item))
+                continue;
+
+            var resolved = new List<(ParsedChain Chain, ParsedItem Item)>();
+            foreach (var reqKey in item.SinkRequirementConfigKeys)
+            {
+                if (!seen.Add(reqKey)) continue;
+                if (configKeyToChain.TryGetValue(reqKey, out var match))
+                    resolved.Add((match.Chain, match.Item));
+            }
+
+            var line = SinkFuelFormatter.Format(resolved, Math.Max(1, item.SinkInputCount),
+                (c, i) => (ResolveChainName(c, i.ItemType), ResolveLevel(i.ItemType, i)));
+            if (line.Length > 0) anyOfNeeds.Add(line);
+        }
+
         foreach (var item in chain.Items)
         {
             // Sink requirements (NumericConfigKey-based)
@@ -880,7 +910,7 @@ public class InfoboxGeneratorService
             }
         }
 
-        var result = new List<string>();
+        var result = new List<string>(anyOfNeeds);
 
         foreach (var (_, (needChain, items, _, _)) in byChain.OrderBy(kv => kv.Value.SortKey).ThenBy(kv => kv.Value.InsertOrder))
         {

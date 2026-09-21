@@ -105,4 +105,39 @@ public class EventPointsTests
         }
         finally { File.Delete(path); }
     }
+
+    [Fact]
+    public async Task ATapOnlyCollectible_isNotAPointsItem()
+    {
+        // Season Pass collectibles, leaderboard trophies and the subgoal Old Map all carry
+        // CollectAction.Progress, but it counts toward a different track. Without
+        // RewardCollectibleBoardEventProgress they are not event points (found while propagating the
+        // columns to the other points pages, 2026-09-18 — the Old Map had been mislabelled).
+        var json = """
+        { "CreatedAt": "2026-09-18T00:00:00", "Data": [ { "Name": "Collectible", "ConfigKey": "Collectible",
+          "PrimaryChain": [ { "Item": { "Name": "Petal", "ItemType": "Petal_01", "ConfigKey": 1,
+          "LevelNumber": 1, "Description": "d",
+          "CollectableFeatures": { "Collectable": true, "CollectAction": { "Progress": 20 } } } } ] } ] }
+        """;
+        var path = Path.Combine(Path.GetTempPath(), $"mmwt-taponly-{System.Guid.NewGuid():N}.json");
+        await File.WriteAllTextAsync(path, json);
+        try
+        {
+            var data = new DataService(new ChainNameService());
+            await data.LoadAsync(path);
+            var chain = data.Chains[0];
+
+            Assert.Equal(20, chain.Items[0].EventPointsOnTap);
+            Assert.Null(chain.Items[0].EventPointsOnCreate);
+
+            var table = new WikiTableGenerator(data, new WikiMappingCache())
+                .Generate(chain, "Collectible", lowPrices: true);
+            var infobox = new InfoboxGeneratorService(data, new WikiMappingCache())
+                .Generate(chain, data.Chains, data.ItemNames, new InfoboxGeneratorOptions(), new string[0]);
+
+            Assert.DoesNotContain("Collect", table);
+            Assert.DoesNotContain("Points Item", infobox);
+        }
+        finally { File.Delete(path); }
+    }
 }

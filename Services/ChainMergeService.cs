@@ -126,6 +126,8 @@ public static class ChainMergeService
 
                     item.MappingVariantLabel = entry.VariantLabel; // isVariant = "Spring" → "Spring"
 
+                    item.MappingVariantItemType = entry.VariantItemType;
+
                     item.MappingVariantOrder = entry.VariantOrder;
 
                     item.MappingGroupOdds = entry.GroupOdds;

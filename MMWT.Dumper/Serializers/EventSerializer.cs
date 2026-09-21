@@ -110,6 +110,19 @@ public sealed partial class EventSerializer : JsonConverter
             // of the runtime state (--probe-meta-members) shows all of them in the same state, so
             // this is a per-member rule, not a value rule. Writing it here, ahead of the reference
             // rule below, is what keeps the member.
+            // The decoration a board upgrades: written as usual, then followed by the
+            // resolved detail the raw key cannot carry (see EventSerializer.Decorations.cs).
+            // Only when the key is non-empty, so the MetaRefSkip.EmptyKey rule below keeps
+            // deciding which boards show the member at all.
+            if (member == nameof(CollectibleBoardEventInfo.ActiveDecoration) + "Ref")
+            {
+                var detail = ResolveActiveDecoration(evt, value!);
+                if (detail == null) return false;
+                w.WritePropertyName(member);
+                s.Serialize(w, value);
+                WriteActiveDecoration(w, detail);
+                return true;
+            }
             if (member != AlwaysWrittenReference) return false;
             w.WritePropertyName(member);
             s.Serialize(w, value);

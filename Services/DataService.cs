@@ -75,6 +75,102 @@ public class DataService
 
         // Second pass: parse chains
         ParseChains(dataArray);
+
+        // Third pass: tag-based sinks. Needs every chain parsed, because the fuel is "any item
+        // carrying tag X" and the reward is keyed by the points those items are worth.
+        ResolveTagSinks();
+    }
+
+    /// <summary>
+    /// Turns tag-based sinks into the same shape a ScoreTargets sink has, so the Lua/table/infobox
+    /// generators need no separate code path.
+    /// <para>
+    /// A ScoreTargets sink says "consume 1x item #15209374". A tag sink says "consume
+    /// <c>InputCount</c> items carrying tag <c>MurderWeapons</c>, then look the result up in
+    /// <c>RewardTagName</c> by the points those items were worth". This fills
+    /// <see cref="ParsedItem.SinkRequirementConfigKeys"/>/<see cref="ParsedItem.SinkRequirementAmounts"/>
+    /// with every item that carries the tag and marks the list
+    /// <see cref="ParsedItem.SinkIsAnyOf"/> so consumers render it as "or" instead of "and".
+    /// </para>
+    /// <para>
+    /// Both tables come resolved from the dump (<c>Factory.TagFuel</c> / <c>Factory.TagRewards</c>,
+    /// v0.24.95). A dump older than that has neither, so the fuel falls back to scanning
+    /// <c>SinkTag</c> across the chains and the result to "the producer that decays back into this
+    /// sink" — which covers the DNA Kit and Ghost Hunting, and warns for the rest.
+    /// </para>
+    /// </summary>
+    internal void ResolveTagSinks()
+    {
+        var tagSinks = Chains
+            .SelectMany(c => c.Items, (c, i) => i)
+            .Where(i => !string.IsNullOrEmpty(i.SinkTagName))
+            .ToList();
+        if (tagSinks.Count == 0) return;
+
+        // tag -> the items that can be fed into it
+        var fuelsByTag = Chains
+            .SelectMany(c => c.Items)
+            .Where(i => !string.IsNullOrEmpty(i.SinkTag) && !string.IsNullOrEmpty(i.NumericConfigKey))
+            .GroupBy(i => i.SinkTag!, StringComparer.Ordinal)
+            .ToDictionary(g => g.Key, g => g.ToList(), StringComparer.Ordinal);
+
+        var byItemType = Chains
+            .SelectMany(c => c.Items)
+            .Where(i => !string.IsNullOrEmpty(i.ItemType))
+            .GroupBy(i => i.ItemType, StringComparer.Ordinal)
+            .ToDictionary(g => g.Key, g => g.First(), StringComparer.Ordinal);
+
+        // Fallback for dumps predating the resolved tables: a producer whose decay puts the sink
+        // item back on the board is that sink's own fueled result.
+        var decaysBackTo = Chains
+            .SelectMany(c => c.Items)
+            .Where(i => !string.IsNullOrEmpty(i.DecayIntoItemType))
+            .GroupBy(i => i.DecayIntoItemType!, StringComparer.Ordinal)
+            .ToDictionary(g => g.Key, g => g.Select(i => i.ItemType).ToList(), StringComparer.Ordinal);
+
+        foreach (var sink in tagSinks)
+        {
+            var tag = sink.SinkTagName!;
+            var count = Math.Max(1, sink.SinkInputCount);
+
+            // The dumper already listed the fuel; the tag scan is only the fallback.
+            var fuels = sink.SinkTagFuel is { Count: > 0 }
+                ? sink.SinkTagFuel
+                    .Select(f => byItemType.TryGetValue(f.ItemType, out var m) ? m : null)
+                    .Where(m => m != null && !string.IsNullOrEmpty(m.NumericConfigKey))
+                    .Select(m => m!)
+                    .ToList()
+                : fuelsByTag.TryGetValue(tag, out var scanned) ? scanned : null;
+
+            if (fuels is { Count: > 0 })
+            {
+                sink.SinkIsAnyOf = true;
+                sink.SinkRequirementConfigKeys = fuels.Select(f => f.NumericConfigKey).Distinct().ToList();
+                sink.SinkRequirementAmounts = sink.SinkRequirementConfigKeys
+                    .ToDictionary(k => k, _ => count, StringComparer.Ordinal);
+            }
+            else
+            {
+                Warnings.Add($"Sink '{sink.ItemType}' wants tag '{tag}' but no item carries it.");
+            }
+
+            if (!string.IsNullOrEmpty(sink.SinkRewardItemType)) continue;
+
+            // The lowest point total is the baseline result; the whole ladder stays on the item
+            // for anything that wants to show every variant.
+            var fromDump = sink.SinkTagRewards?
+                .OrderBy(r => r.TotalPoints)
+                .SelectMany(r => r.Produces)
+                .Select(p => p.ItemType)
+                .FirstOrDefault();
+
+            sink.SinkRewardItemType = fromDump
+                ?? (decaysBackTo.TryGetValue(sink.ItemType, out var back) ? back.FirstOrDefault() : null);
+
+            if (string.IsNullOrEmpty(sink.SinkRewardItemType))
+                Warnings.Add($"Sink '{sink.ItemType}' has reward tag '{sink.SinkRewardTagName}' but the dump " +
+                             "carries no Factory.TagRewards - re-run the dump to fill Transforms To.");
+        }
     }
 
     private void BuildItemNames(JsonElement dataArray)
@@ -548,6 +644,8 @@ public class DataService
             && progress.ValueKind == JsonValueKind.Number)
         {
             pi.EventPointsOnTap = progress.GetInt32();
+            if (collectAction.TryGetProperty("TrackId", out var trackId) && trackId.ValueKind == JsonValueKind.String)
+                pi.CollectTrackId = trackId.GetString();
         }
         if (item.TryGetProperty("Rewards", out var itemRewards) && itemRewards.ValueKind == JsonValueKind.Array)
         {
@@ -564,10 +662,40 @@ public class DataService
         }
 
         // ── SinkFeatures (Transformative Item) ──
+        pi.SinkTag = GetString(item, "SinkTag") is { Length: > 0 } itemSinkTag ? itemSinkTag : null;
+        pi.SinkPoints = GetInt(item, "SinkPoints");
+
         if (item.TryGetProperty("SinkFeatures", out var sink) && GetBool(sink, "IsSink"))
         {
             pi.IsSink = true;
-            if (sink.TryGetProperty("Factory", out var factory) &&
+            var hasFactory = sink.TryGetProperty("Factory", out var factory);
+            // Tag-based sink: neither the fuel items nor the reward are named here. Both are
+            // resolved once every chain is parsed, in ResolveTagSinks.
+            if (hasFactory && factory.TryGetProperty("Tag", out var sinkTagEl) &&
+                sinkTagEl.ValueKind == JsonValueKind.String)
+            {
+                pi.SinkTagName = sinkTagEl.GetString();
+                pi.SinkInputCount = Math.Max(1, GetInt(factory, "InputCount", 1));
+                pi.SinkRewardTagName = GetString(factory, "RewardTagName") is { Length: > 0 } rtn ? rtn : null;
+
+                // Both tables are resolved by the dumper (v0.24.95) — dumps older than that have
+                // neither, and ResolveTagSinks falls back to scanning SinkTag across the chains.
+                if (factory.TryGetProperty("TagFuel", out var tagFuel) && tagFuel.ValueKind == JsonValueKind.Array)
+                {
+                    pi.SinkTagFuel = tagFuel.EnumerateArray()
+                        .Select(f => (ItemType: GetString(f, "Item"), SinkPoints: GetInt(f, "SinkPoints")))
+                        .Where(f => f.ItemType.Length > 0)
+                        .ToList();
+                }
+                if (factory.TryGetProperty("TagRewards", out var tagRewards) && tagRewards.ValueKind == JsonValueKind.Array)
+                {
+                    pi.SinkTagRewards = tagRewards.EnumerateArray()
+                        .Select(ParseTagReward)
+                        .Where(r => r.Produces.Count > 0)
+                        .ToList();
+                }
+            }
+            if (hasFactory &&
                 factory.TryGetProperty("ScoreTargets", out var targets) &&
                 targets.ValueKind == JsonValueKind.Object)
             {
@@ -579,9 +707,9 @@ public class DataService
                     .Where(p => !string.IsNullOrEmpty(p.Name))
                     .ToDictionary(p => p.Name, p => p.Value.ValueKind == JsonValueKind.Number ? p.Value.GetInt32() : 1);
             }
-            if (factory.TryGetProperty("RewardDef", out var rewardDef) && rewardDef.ValueKind == JsonValueKind.String)
+            if (hasFactory && factory.TryGetProperty("RewardDef", out var rewardDef) && rewardDef.ValueKind == JsonValueKind.String)
                 pi.SinkRewardItemType = rewardDef.GetString();
-            else if (factory.TryGetProperty("Reward", out var rewardOld) && rewardOld.ValueKind == JsonValueKind.String)
+            else if (hasFactory && factory.TryGetProperty("Reward", out var rewardOld) && rewardOld.ValueKind == JsonValueKind.String)
                 pi.SinkRewardItemType = rewardOld.GetString(); // older dump format
         }
 
@@ -740,8 +868,28 @@ public class DataService
     {
         nonConstant = false;
 
-        if (!af.TryGetProperty("ActivationSpawn", out var asp))
-            goto fallback;
+        if (af.TryGetProperty("ActivationSpawn", out var spawn))
+        {
+            var fromSpawn = ExtractOddsFromSpawn(spawn, out nonConstant);
+            if (fromSpawn != null) return fromSpawn;
+        }
+
+        // Path 2: Direct Odds on ActivationFeatures (fallback) — randomized.
+        if (af.TryGetProperty("Odds", out var directOdds) && directOdds.ValueKind == JsonValueKind.Object)
+        { nonConstant = true; return ParseOddsDictionary(directOdds); }
+
+        return null;
+    }
+
+    /// <summary>
+    /// The producer half of <see cref="ExtractOdds(JsonElement, out bool)"/>, taking the
+    /// <c>ActivationSpawn</c> value itself. Split out because a tag sink's
+    /// <c>Factory.TagRewards[].Produces[].DropOdds</c> carries exactly that object for an item that
+    /// may not be in the chain dump at all, and it must be read by the same rules.
+    /// </summary>
+    internal Dictionary<string, double>? ExtractOddsFromSpawn(JsonElement asp, out bool nonConstant)
+    {
+        nonConstant = false;
 
         // ActivationSpawn can be a plain string (e.g. "GarageCleanupEvent") — deterministic.
         if (asp.ValueKind == JsonValueKind.String)
@@ -751,7 +899,7 @@ public class DataService
         }
 
         if (asp.ValueKind != JsonValueKind.Object)
-            goto fallback;
+            return null;
 
         // Path 1a: ActivationSpawn → ControlledRandom → Odds (direct)
         if (asp.TryGetProperty("ControlledRandom", out var directCr))
@@ -814,12 +962,31 @@ public class DataService
             { nonConstant = true; return ParseOddsDictionary(odds); }
         }
 
-        fallback:
-        // Path 2: Direct Odds on ActivationFeatures (fallback) — randomized.
-        if (af.TryGetProperty("Odds", out var directOdds) && directOdds.ValueKind == JsonValueKind.Object)
-        { nonConstant = true; return ParseOddsDictionary(directOdds); }
-
         return null;
+    }
+
+    /// <summary>One <c>Factory.TagRewards</c> row, including each target's own drop count and,
+    /// when it rolls several outcomes, its spawn table.</summary>
+    private ParsedItem.SinkTagReward ParseTagReward(JsonElement row)
+    {
+        var fuel = row.TryGetProperty("Fuel", out var f) && f.ValueKind == JsonValueKind.Array
+            ? f.EnumerateArray().Select(x => x.GetString() ?? "").Where(x => x.Length > 0).ToList()
+            : new List<string>();
+
+        var produces = new List<ParsedItem.SinkTagProduct>();
+        if (row.TryGetProperty("Produces", out var p) && p.ValueKind == JsonValueKind.Array)
+        {
+            foreach (var entry in p.EnumerateArray())
+            {
+                var itemType = GetString(entry, "Item");
+                if (itemType.Length == 0) continue;
+                Dictionary<string, double>? odds = null;
+                if (entry.TryGetProperty("DropOdds", out var dropOdds))
+                    odds = ExtractOddsFromSpawn(dropOdds, out _);
+                produces.Add(new ParsedItem.SinkTagProduct(itemType, GetInt(entry, "Drops"), odds));
+            }
+        }
+        return new ParsedItem.SinkTagReward(GetInt(row, "TotalPoints"), fuel, produces);
     }
 
     internal static Dictionary<string, double> ParseOddsDictionary(JsonElement el)

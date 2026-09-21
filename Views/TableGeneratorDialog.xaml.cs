@@ -41,13 +41,14 @@ public partial class TableGeneratorDialog : FluentWindow
         Tasks,             // === Tasks === (subsection of Statistics)
         DropOdds,          // === Drop Odds === (subsection of Statistics)
         DecayOdds,         // === Decay Odds === (subsection of Statistics)
+        FuelRewards,       // === Fuel Rewards === (subsection of Statistics)
         DoubleBubbles,     // === [[Double Bubble]]s === (subsection of Statistics)
         Uses,              // == Uses ==
     }
     private static readonly SectionKey[] SectionOrder = {
         SectionKey.InfoboxSection, SectionKey.GameplayTips, SectionKey.ItemDescriptions,
         SectionKey.MergeStages, SectionKey.Tasks, SectionKey.DropOdds, SectionKey.DecayOdds,
-        SectionKey.DoubleBubbles, SectionKey.Uses,
+        SectionKey.FuelRewards, SectionKey.DoubleBubbles, SectionKey.Uses,
     };
     private readonly Dictionary<SectionKey, string?> _generated = new();
     private readonly Dictionary<SectionKey, string?> _userOverride = new();
@@ -111,6 +112,9 @@ public partial class TableGeneratorDialog : FluentWindow
         chkIncludeDropOdds.IsChecked = hasDropOdds && main.Settings.TableGeneratorIncludeDropOdds;
         gridDecayOdds.Visibility = hasDecayOdds ? Visibility.Visible : Visibility.Collapsed;
         chkIncludeDecayOdds.IsChecked = hasDecayOdds && main.Settings.TableGeneratorIncludeDecayOdds;
+        bool hasFuelRewards = probeGenerator.GenerateFuelRewardsSection(chain) != null;
+        gridFuelRewards.Visibility = hasFuelRewards ? Visibility.Visible : Visibility.Collapsed;
+        chkIncludeFuelRewards.IsChecked = hasFuelRewards && main.Settings.TableGeneratorIncludeFuelRewards;
         gridDoubleBubbles.Visibility = hasDoubleBubbles ? Visibility.Visible : Visibility.Collapsed;
         chkIncludeDoubleBubbles.IsChecked = hasDoubleBubbles && main.Settings.TableGeneratorIncludeDoubleBubbles;
         gridUses.Visibility = hasUses ? Visibility.Visible : Visibility.Collapsed;
@@ -480,6 +484,10 @@ public partial class TableGeneratorDialog : FluentWindow
         HandleSectionCheckboxToggle(chkIncludeDecayOdds, SectionKey.DecayOdds, "Decay Odds",
             v => _main.Settings.TableGeneratorIncludeDecayOdds = v);
 
+    private void ChkIncludeFuelRewards_Changed(object sender, RoutedEventArgs e) =>
+        HandleSectionCheckboxToggle(chkIncludeFuelRewards, SectionKey.FuelRewards, "Fuel Rewards",
+            v => _main.Settings.TableGeneratorIncludeFuelRewards = v);
+
     private void ChkIncludeDoubleBubbles_Changed(object sender, RoutedEventArgs e) =>
         HandleSectionCheckboxToggle(chkIncludeDoubleBubbles, SectionKey.DoubleBubbles, "Double Bubbles",
             v => _main.Settings.TableGeneratorIncludeDoubleBubbles = v);
@@ -532,6 +540,7 @@ public partial class TableGeneratorDialog : FluentWindow
             _generated[SectionKey.Tasks] = BuildTasksSection(generator);
             _generated[SectionKey.DropOdds] = generator.GenerateDropOddsSection(_effectiveChain, hardcodedName);
             _generated[SectionKey.DecayOdds] = generator.GenerateDecayOddsSection(_effectiveChain, hardcodedName);
+            _generated[SectionKey.FuelRewards] = generator.GenerateFuelRewardsSection(_effectiveChain, hardcodedName);
             _generated[SectionKey.DoubleBubbles] = generator.GenerateDoubleBubblesSection(_effectiveChain, hardcodedName);
             _generated[SectionKey.Uses] = generator.GenerateUsesSection(_effectiveChain, _main.DataService!.Chains, _areas, hardcodedName);
 
@@ -698,6 +707,7 @@ public partial class TableGeneratorDialog : FluentWindow
         SectionKey.Tasks => chkIncludeTasks.IsChecked == true,
         SectionKey.DropOdds => chkIncludeDropOdds.IsChecked == true,
         SectionKey.DecayOdds => chkIncludeDecayOdds.IsChecked == true,
+        SectionKey.FuelRewards => chkIncludeFuelRewards.IsChecked == true,
         SectionKey.DoubleBubbles => chkIncludeDoubleBubbles.IsChecked == true,
         SectionKey.Uses => chkIncludeUses.IsChecked == true,
         _ => false,
@@ -798,6 +808,7 @@ public partial class TableGeneratorDialog : FluentWindow
         // on a transient stage (see WikiTableGenerator.GenerateDecayOddsSection). Both must map
         // here or a user edit to that section would not be tracked as an override.
         if (t == "=== Decay Odds ===" || t == "=== Transform Odds ===") return SectionKey.DecayOdds;
+        if (t == "=== Fuel Rewards ===") return SectionKey.FuelRewards;
         if (t == "=== [[Double Bubble]]s ===") return SectionKey.DoubleBubbles;
         if (t == "== Uses ==") return SectionKey.Uses;
         return null;
@@ -821,6 +832,7 @@ public partial class TableGeneratorDialog : FluentWindow
         SetRefreshVisible(btnRefreshTasks, _userOverride.ContainsKey(SectionKey.Tasks));
         SetRefreshVisible(btnRefreshDropOdds, _userOverride.ContainsKey(SectionKey.DropOdds));
         SetRefreshVisible(btnRefreshDecayOdds, _userOverride.ContainsKey(SectionKey.DecayOdds));
+        SetRefreshVisible(btnRefreshFuelRewards, _userOverride.ContainsKey(SectionKey.FuelRewards));
         SetRefreshVisible(btnRefreshDoubleBubbles, _userOverride.ContainsKey(SectionKey.DoubleBubbles));
         SetRefreshVisible(btnRefreshUses, _userOverride.ContainsKey(SectionKey.Uses));
     }
@@ -877,6 +889,7 @@ public partial class TableGeneratorDialog : FluentWindow
     private void BtnRefreshTasks_Click(object sender, RoutedEventArgs e) => ResetSection(SectionKey.Tasks);
     private void BtnRefreshDropOdds_Click(object sender, RoutedEventArgs e) => ResetSection(SectionKey.DropOdds);
     private void BtnRefreshDecayOdds_Click(object sender, RoutedEventArgs e) => ResetSection(SectionKey.DecayOdds);
+    private void BtnRefreshFuelRewards_Click(object sender, RoutedEventArgs e) => ResetSection(SectionKey.FuelRewards);
     private void BtnRefreshDoubleBubbles_Click(object sender, RoutedEventArgs e) => ResetSection(SectionKey.DoubleBubbles);
     private void BtnRefreshUses_Click(object sender, RoutedEventArgs e) => ResetSection(SectionKey.Uses);
 

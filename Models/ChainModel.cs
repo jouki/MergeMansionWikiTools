@@ -373,6 +373,54 @@ public class ParsedItem
     public string? SinkRewardItemType { get; set; }
 
     /// <summary>
+    /// Tag-based sink: the fuel is not one named item but <b>any one item carrying this tag</b>
+    /// (<c>SinkFeatures.Factory.Tag</c>, e.g. <c>MurderWeapons</c> for the Murder at the Mansion
+    /// DNA Kit). <see cref="DataService.ResolveTagSinks"/> resolves it into the same
+    /// <see cref="SinkRequirementConfigKeys"/>/<see cref="SinkRequirementAmounts"/>/
+    /// <see cref="SinkRewardItemType"/> the ScoreTargets form uses, so every downstream generator
+    /// keeps working unchanged; <see cref="SinkIsAnyOf"/> is what tells them the list is an OR.
+    /// </summary>
+    public string? SinkTagName { get; set; }
+
+    /// <summary>How many tagged items one activation consumes (<c>Factory.InputCount</c>).</summary>
+    public int SinkInputCount { get; set; }
+
+    /// <summary>Lookup key into the TagRewards table (<c>Factory.RewardTagName</c>).</summary>
+    public string? SinkRewardTagName { get; set; }
+
+    /// <summary>
+    /// <c>Factory.TagFuel</c>: every item that carries this sink's tag, with the
+    /// <see cref="ParsedItem.SinkPoints"/> it contributes. Resolved by the dumper, because the
+    /// point total is what decides which reward comes back.
+    /// </summary>
+    public List<(string ItemType, int SinkPoints)>? SinkTagFuel { get; set; }
+
+    /// <summary>
+    /// <c>Factory.TagRewards</c>: point total to what is produced at that total. For the DNA Kit
+    /// this is what says that Murder Weapon #1 gives an 8-drop run and #4 a 20-drop one.
+    /// </summary>
+    public List<SinkTagReward>? SinkTagRewards { get; set; }
+
+    /// <summary>
+    /// True when the requirement list means "any ONE of these" rather than "all of these".
+    /// Only tag sinks set it; ScoreTargets sinks stay AND, which is what they have always been.
+    /// </summary>
+    public bool SinkIsAnyOf { get; set; }
+
+    /// <summary>
+    /// The tag under which THIS item can be fed into a tag sink (<c>Item.SinkTag</c>) - the
+    /// counterpart of <see cref="SinkTagName"/>.
+    /// </summary>
+    public string? SinkTag { get; set; }
+
+    /// <summary>
+    /// Weight this item contributes when sunk (<c>Item.SinkPoints</c>). The game looks the reward
+    /// up by the total points of what was consumed, which is how the four Murder Weapons produce
+    /// four different DNA Kit runs (points 1-4 give 8/10/12/20 drops).
+    /// </summary>
+    public int SinkPoints { get; set; }
+
+    /// <summary>
     /// Merge result ItemType from MergeFeatures.Mechanic.ResultProducer.Constant.
     /// For normal merges this points to L+1 of the same chain; for cross-chain merges
     /// (e.g. Bigger Pile of Seed Bags L4 → Golden Seed L1) this points to a different chain.
@@ -407,6 +455,23 @@ public class ParsedItem
     /// </summary>
     public string OrderProducerKind { get; set; } = "";
 
+    /// <summary>One <c>Factory.TagRewards</c> row: a point total and what it hands back.</summary>
+    /// <param name="TotalPoints">Summed <c>SinkPoints</c> of everything consumed.</param>
+    /// <param name="FuelItemTypes">
+    /// The items this row belongs to — only filled at <c>InputCount == 1</c>, where the total is
+    /// one item's points. Above that a total is a sum and no single fuel owns the row.
+    /// </param>
+    public sealed record SinkTagReward(int TotalPoints, List<string> FuelItemTypes, List<SinkTagProduct> Produces);
+
+    /// <summary>What one <c>TagRewards</c> row produces, with the numbers read off the target.</summary>
+    /// <param name="Drops">
+    /// Total drops of the produced item (0 when endless or unknown). Carried here rather than
+    /// looked up, because 23 of the 40 tag-reward targets are in no PrimaryChain and therefore
+    /// absent from the chain dump entirely.
+    /// </param>
+    /// <param name="Odds">Its spawn table, only when it rolls more than one outcome.</param>
+    public sealed record SinkTagProduct(string ItemType, int Drops, Dictionary<string, double>? Odds);
+
     /// <summary>Numeric ConfigKey from JSON item (used by SinkFeatures ScoreTargets)</summary>
     public string NumericConfigKey { get; set; } = "";
 
@@ -434,6 +499,12 @@ public class ParsedItem
     /// <see cref="VariantLabel"/> (data-derived area label for decay/transform variants).
     /// </summary>
     public string? MappingVariantLabel { get; set; }
+
+    /// <summary>
+    /// ItemType from the mapping's <c>variantItem</c>. When set, the Variant column shows that item
+    /// (icon + link, resolved through the mapping) instead of <see cref="MappingVariantLabel"/>.
+    /// </summary>
+    public string? MappingVariantItemType { get; set; }
 
     /// <summary>Explicit display order among the chain's variants (wiki mapping <c>variantOrder = N</c>).
     /// Null = unset; renderer falls back to legacy level/name ordering.</summary>
@@ -480,6 +551,14 @@ public class ParsedItem
     /// pays the same either way.
     /// </summary>
     public int? EventPointsOnTap { get; set; }
+
+    /// <summary>
+    /// Id of the side track this item feeds when tapped (<c>CollectableFeatures.CollectAction.TrackId</c>),
+    /// e.g. <c>LDE_MurderAtTheMansion_SubGoal</c> for the Old Map. A track id means the item's
+    /// <see cref="EventPointsOnTap"/> is progress on that track, NOT event points — which is why the
+    /// Points Item type and the points columns gate on <see cref="EventPointsOnCreate"/> instead.
+    /// </summary>
+    public string? CollectTrackId { get; set; }
 
     /// <summary>
     /// Whether this item is an explicit display VARIANT (e.g. the A/B/C generator outcomes of a

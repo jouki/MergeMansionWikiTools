@@ -42,6 +42,14 @@ public class WikiMappingEntry
     /// <summary>The label from <c>isVariant = "Spring"</c>; null when the flag is a plain bool.</summary>
     public string? VariantLabel => GetString("isVariant");
 
+    /// <summary>
+    /// <c>variantItem = "&lt;ItemType&gt;"</c> — label this variant with that item instead of a bare
+    /// string, so the Variant column renders an icon and a link. Resolved through the mapping like
+    /// any other reference, which matters because the item it names is usually itself remapped
+    /// (the DNA Kit runs are labelled by Murder Weapons, four game chains merged into levels 1-4).
+    /// </summary>
+    public string? VariantItemType => GetString("variantItem");
+
     /// <summary>Explicit display order of this variant among its chain's variants (1-based).
     /// Null when unset — the renderer falls back to legacy level/name ordering.</summary>
     public int? VariantOrder => GetDouble("variantOrder") is double d ? (int)d : null;

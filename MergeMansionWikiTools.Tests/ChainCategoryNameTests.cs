@@ -82,44 +82,6 @@ public class ChainCategoryNameTests
         return JObject.Parse(JsonConvert.SerializeObject(chain, settings));
     }
 
-    private static SharedGameConfig? LoadNewestConfig()
-    {
-        var data = DataDir();
-        if (data == null) return null;
-
-        var configPath = DumperService.SelectNewestConfigArchive(Path.Combine(data, "C"));
-        if (configPath == null) return null;
-
-        MetaplayCore.Initialize();
-        var langPath = FirstFileOrNull(Path.Combine(data, "L"));
-        if (langPath == null) return null; // category names come from the language file
-        MetaplaySDK.ActiveLanguage = LocalizationLanguage.ImportBinary(
-            ContentHash.ParseString(Path.GetFileName(langPath)), File.ReadAllBytes(langPath));
-
-        var archive = ConfigArchive.FromBytes(File.ReadAllBytes(configPath));
-        var config = (SharedGameConfig)GameConfigFactory.Instance.ImportSharedGameConfig(PatchedConfigArchive.WithNoPatches(archive));
-        ClientGlobal.SharedGameConfig = config;
-        return config;
-    }
-
-    private static string? DataDir()
-    {
-        var env = Environment.GetEnvironmentVariable("MMWT_DATA");
-        if (!string.IsNullOrEmpty(env) && Directory.Exists(Path.Combine(env, "C"))) return env;
-
-        var repoRoot = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(ThisFile())!, ".."));
-        var binDebug = Path.Combine(repoRoot, "bin", "Debug");
-        if (!Directory.Exists(binDebug)) return null;
-        foreach (var tfm in Directory.GetDirectories(binDebug))
-        {
-            var candidate = Path.Combine(tfm, "win-x64", "_DATA");
-            if (Directory.Exists(Path.Combine(candidate, "C"))) return candidate;
-        }
-        return null;
-    }
-
-    private static string ThisFile([CallerFilePath] string path = "") => path;
-
-    private static string? FirstFileOrNull(string dir)
-        => Directory.Exists(dir) ? Directory.GetFiles(dir).FirstOrDefault() : null;
+    /// <summary>The newest local config; null when there is no <c>_DATA</c> pull.</summary>
+    private static SharedGameConfig? LoadNewestConfig() => LiveConfig.Load();
 }

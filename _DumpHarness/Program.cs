@@ -232,6 +232,14 @@ internal static class Program
             // tables that no dump file carries.
             return ProbeShopItems(args[1], args[2], args.Length >= 4 ? args[3] : "");
         }
+        if (args.Length >= 3 && args[0] == "--probe-tag-rewards")
+        {
+            // --probe-tag-rewards <configPath> <languagePath> [rewardTagFilter]
+            // TagRewards library: which producer a TAG-based sink hands back for a given
+            // TotalPoints (= sum of the SinkPoints of the consumed items). No dump file
+            // carries it, so the fueled result of a tag sink is otherwise unknowable.
+            return ProbeTagRewards(args[1], args[2], args.Length >= 4 ? args[3] : "");
+        }
         if (args.Length >= 4 && args[0] == "--dump-config-library")
         {
             // --dump-config-library <configPath> <languagePath> <libraryName> [keyFilter]
@@ -3702,6 +3710,60 @@ internal static class Program
             catch { continue; }
             foreach (var r in SearchObject(child, needle, $"{path}.{p.Name}", visited, depth + 1))
                 yield return r;
+        }
+    }
+
+    /// <summary>
+    /// Prints the TagRewards library. A TAG-based sink (SinkFeatures.Factory.Tag, e.g. the
+    /// Murder at the Mansion DNA Kit) does not name its reward item: it names a RewardTagName,
+    /// and the game looks the result up by the TotalPoints of whatever was sunk in — which is the
+    /// SinkPoints of the fuel item. That lookup table lives ONLY here; no dump file exports it,
+    /// so without this probe the fueled result of a tag sink cannot be derived at all.
+    ///
+    /// Why this is not --dump-config-library: TotalPoints / RewardTagName / ItemProducer are
+    /// public FIELDS, and that command reflects over public PROPERTIES, so it prints ConfigKey
+    /// and nothing else.
+    /// </summary>
+    private static int ProbeTagRewards(string configPath, string languagePath, string filter)
+    {
+        Console.WriteLine($"=== ProbeTagRewards (filter '{filter}') ===");
+        try
+        {
+            var config = LoadSharedConfig(configPath, languagePath);
+            if (config.TagRewards == null)
+            {
+                Console.WriteLine("  (TagRewards library missing from this archive)");
+                return 1;
+            }
+
+            var rows = new List<(string Tag, int Points, string Key, string Producer)>();
+            foreach (var kv in config.TagRewards.EnumerateAll())
+            {
+                var info = kv.Value;
+                var tag = Flat(MetaObjectWriter.GetMember(info, "RewardTagName", ConsoleDumpLog.Instance));
+                if (!string.IsNullOrEmpty(filter) &&
+                    tag?.IndexOf(filter, StringComparison.OrdinalIgnoreCase) < 0 &&
+                    kv.Key.ToString().IndexOf(filter, StringComparison.OrdinalIgnoreCase) < 0)
+                    continue;
+                var pts = MetaObjectWriter.GetMember(info, "TotalPoints", ConsoleDumpLog.Instance);
+                var prod = MetaObjectWriter.GetMember(info, "ItemProducer", ConsoleDumpLog.Instance);
+                rows.Add((tag ?? "?", pts is int i ? i : -1, kv.Key.ToString(),
+                    Describe(prod, config, 1)));
+            }
+
+            foreach (var group in rows.GroupBy(r => r.Tag).OrderBy(g => g.Key))
+            {
+                Console.WriteLine($"\n--- {group.Key} ---");
+                foreach (var r in group.OrderBy(r => r.Points))
+                    Console.WriteLine($"  points={r.Points,-4} [{r.Key}] -> {r.Producer}");
+            }
+            Console.WriteLine($"\n({rows.Count} entries)");
+            return 0;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("[ERROR] " + DescribeError(ex));
+            return 1;
         }
     }
 

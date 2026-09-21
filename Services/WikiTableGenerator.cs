@@ -65,7 +65,12 @@ public class WikiTableGenerator
         // Event points: two separate numbers per item — creating it by merging pays one amount,
         // tapping it pays another (see ParsedItem.EventPointsOnCreate/OnTap). Rendered as the last
         // two columns, matching the hand-written Amelia Boulton Memorabilia table.
-        bool showEventPoints = allItems.Any(i => i.EventPointsOnCreate > 0 || i.EventPointsOnTap > 0);
+        // ⚠ Gate on the CREATE amount, not on the tap value. CollectAction.Progress is generic
+        // "collect progress" and Season Pass collectibles (Rose Petals), leaderboard items
+        // (Trophies) and subgoal items (the Old Map fragment) carry it too — for them it counts
+        // toward a different track, not the event's points, and labelling it "Collect" would be a
+        // lie. Only RewardCollectibleBoardEventProgress makes it event points.
+        bool showEventPoints = allItems.Any(i => i.EventPointsOnCreate > 0);
         bool showDecaysInto = allItems.Any(i =>
             !string.IsNullOrEmpty(i.SpawnDecayIntoItemType)
             || !string.IsNullOrEmpty(i.DecayAfterLastCycleItemType)
@@ -147,7 +152,12 @@ public class WikiTableGenerator
             var targetItemTypes = new List<string>();
             foreach (var it in allItems)
             {
-                if (it.IsSink && !string.IsNullOrEmpty(it.SinkRewardItemType) && !IsSinkSuppressed(it))
+                // A tag sink whose reward depends on WHICH fuel went in has no single transform
+                // variant — SinkRewardItemType is only the lowest-point baseline, so the column
+                // would state "Murder Weapon #1" as if the DNA Kit always produced that run. The
+                // Fuel Rewards section states the whole mapping instead.
+                if (it.IsSink && !string.IsNullOrEmpty(it.SinkRewardItemType) && !IsSinkSuppressed(it)
+                    && !HasFuelDependentReward(it))
                     targetItemTypes.Add(it.SinkRewardItemType!);
                 if (HasCrossChainMergeTarget(it))
                     targetItemTypes.Add(it.MergeResultItemType!);
@@ -1066,6 +1076,17 @@ public class WikiTableGenerator
     {
         if (!fuelMap.TryGetValue(item.Level, out var requirements)) return "{{Dash}}";
 
+        // A tag sink takes any ONE of its tagged items, not all of them, so the list is collapsed
+        // per chain and joined with "/" instead of being printed one requirement per line.
+        if (item.SinkIsAnyOf)
+        {
+            var anyOf = SinkFuelFormatter.Format(
+                requirements.Select(r => (r.Chain, r.Item)),
+                Math.Max(1, item.SinkInputCount),
+                ResolveFuelItem);
+            return anyOf.Length > 0 ? anyOf : "{{Dash}}";
+        }
+
         var parts = new List<string>();
         foreach (var (reqChain, reqItem, amount) in requirements)
         {
@@ -1201,12 +1222,26 @@ public class WikiTableGenerator
     /// directly keeps callers that only have (index, list) and those that already hold
     /// the item on one path.
     /// </summary>
-    private static string VariantColLabel(int index, IReadOnlyList<ParsedItem> variantItems)
+    /// <summary>
+    /// The Variant column's label: the item named by the mapping's <c>variantItem</c> when there is
+    /// one (rendered as a template, so it carries an icon and a link), else the plain
+    /// <c>isVariant</c> string, else A/B/C.
+    /// </summary>
+    internal string VariantColLabel(int index, IReadOnlyList<ParsedItem> variantItems)
     {
         if (index >= 0 && index < variantItems.Count)
         {
-            var lbl = variantItems[index].MappingVariantLabel;
-            if (!string.IsNullOrWhiteSpace(lbl)) return lbl!;
+            var item = variantItems[index];
+            if (!string.IsNullOrWhiteSpace(item.MappingVariantItemType))
+            {
+                // Through the mapping, never the raw chain: the labelling items are themselves
+                // remapped (four one-level Murder Weapon chains become one chain of levels 1-4).
+                var name = _data.ResolveChainDisplayNameFromItemType(item.MappingVariantItemType!, _wikiMapping);
+                var level = _data.ResolveLevel(item.MappingVariantItemType!, _wikiMapping);
+                if (!string.IsNullOrEmpty(name))
+                    return level > 0 ? $"{{{{Item|{name}|{level}}}}}" : $"{{{{Item/nolevel|{name}|1}}}}";
+            }
+            if (!string.IsNullOrWhiteSpace(item.MappingVariantLabel)) return item.MappingVariantLabel!;
         }
         return ((char)('A' + index)).ToString();
     }
@@ -1236,6 +1271,16 @@ public class WikiTableGenerator
     /// <item>Alias-only level → the aliases themselves, so the level still renders a row.</item>
     /// </list>
     /// </summary>
+    /// <summary>
+    /// True when this sink hands back something different depending on which tagged item was sunk,
+    /// so no single reward item represents it.
+    /// </summary>
+    internal static bool HasFuelDependentReward(ParsedItem item)
+        => item.SinkIsAnyOf
+           && item.SinkTagRewards is { Count: > 1 }
+           && item.SinkTagRewards.SelectMany(r => r.Produces).Select(p => p.ItemType)
+               .Distinct(StringComparer.OrdinalIgnoreCase).Count() > 1;
+
     internal static List<ParsedItem> VariantSetForLevel(List<ParsedItem> levelItems)
     {
         var explicitVariants = levelItems.Where(i => i.IsVariant).ToList();
@@ -2220,6 +2265,145 @@ public class WikiTableGenerator
     /// classification lives in the mapping; the data only carries the raw decayInto odds. The Lua
     /// (GetItemDecayOddsTableFromChainName) renders one row per level, a column per variant target.
     /// </summary>
+    /// <summary>
+    /// <c>=== Fuel Rewards ===</c> for a tag sink whose reward depends on WHICH fuel went in.
+    /// <para>
+    /// A tag sink takes any one item carrying its tag, but the items are not interchangeable: the
+    /// game resolves the result from their <c>SinkPoints</c>, so the DNA Kit turns into an 8-drop
+    /// run for Murder Weapon #1 and a 20-drop one for #4. Nothing on the page said so and the
+    /// Merge Stages table showed a single hardcoded drop count (user report, 2026-09-21).
+    /// </para>
+    /// <para>
+    /// This is a dedicated section rather than extra columns in Merge Stages, for the same reason
+    /// drop odds are: the main table stays a plain per-level overview.
+    /// </para>
+    /// <para>
+    /// Only emitted when the choice actually matters — one input, and at least two point totals
+    /// with different results. At <c>InputCount &gt; 1</c> a total is a sum over several items
+    /// (3 Tarot Cards make totals 3-9), so no single fuel maps to a row and the section is skipped.
+    /// </para>
+    /// </summary>
+    public string? GenerateFuelRewardsSection(ParsedChain chain, string? hardcodedName = null)
+    {
+        var sink = chain.Items.FirstOrDefault(i =>
+            i.SinkIsAnyOf && i.SinkInputCount == 1
+            && i.SinkTagRewards is { Count: > 1 }
+            && i.SinkTagFuel is { Count: > 0 }
+            && !IsSinkSuppressed(i));
+        if (sink == null) return null;
+
+        var rows = new List<(string Fuel, string Produces, string Drops, string Total)>();
+
+        var byItemType = new Dictionary<string, (ParsedChain Chain, ParsedItem Item)>(StringComparer.OrdinalIgnoreCase);
+        foreach (var c in _data.Chains)
+            foreach (var i in c.Items)
+                if (!string.IsNullOrEmpty(i.ItemType))
+                    byItemType.TryAdd(i.ItemType, (c, i));
+
+        // Nothing worth a section when every fuel lands on the same thing.
+        var distinctResults = sink.SinkTagRewards!
+            .SelectMany(r => r.Produces).Select(p => p.ItemType).Distinct().Count();
+        if (distinctResults < 2) return null;
+
+        foreach (var reward in sink.SinkTagRewards!.OrderBy(r => r.TotalPoints))
+        {
+            var fuelCells = reward.FuelItemTypes
+                .Where(byItemType.ContainsKey)
+                .Select(f => ItemTemplate(byItemType[f]))
+                .ToList();
+            if (fuelCells.Count == 0) continue;
+
+            var results = new List<string>();
+            var drops = new List<string>();
+            var totals = new List<string>();
+            foreach (var product in reward.Produces)
+            {
+                // The target is often in no PrimaryChain (every compost producer, for one), so
+                // fall back to its raw id rather than dropping the row.
+                var known = byItemType.TryGetValue(product.ItemType, out var match);
+                results.Add(known ? ItemTemplate(match) : product.ItemType);
+
+                // The row's own numbers win — they are the only ones a target outside the chain
+                // dump has. When the row carries none (a dump older than v0.24.101 wrote no
+                // DropOdds for a single-outcome run), read them off the target item instead, so
+                // the column is not a dash until the next dump.
+                var odds = product.Odds is { Count: > 0 } ? product.Odds : known ? match.Item.DropOdds : null;
+                var total = product.Drops > 0 ? product.Drops : known ? match.Item.StorageMax : 0;
+
+                drops.Add(FormatSpawnOdds(odds, byItemType));
+                totals.Add(total > 0 ? total.ToString() : "{{Dash}}");
+            }
+            if (results.Count == 0) continue;
+
+            rows.Add((string.Join("<br>", fuelCells), string.Join("<br>", results),
+                      string.Join("<br>", drops), string.Join("<br>", totals)));
+        }
+        if (rows.Count == 0) return null;
+
+        var title = hardcodedName ?? GetWikiChainName(chain);
+        var sb = new StringBuilder();
+        sb.Append("=== Fuel Rewards ===\n");
+        sb.Append("{| class = \"article-table\"\n");
+        sb.Append($"|+ <u>{title}</u>\n");
+        sb.Append("! Fuel\n! Produces\n! Drops\n! Total Drops\n");
+        foreach (var (fuel, produces, drops, total) in rows)
+        {
+            sb.Append("|-\n");
+            sb.Append($"| {fuel}\n| {produces}\n| {drops}\n| {total}\n");
+        }
+        sb.Append("|}");
+        return sb.ToString();
+    }
+
+    /// <summary><c>{{Item|Chain|Level}}</c> for a resolved (chain, item) pair.</summary>
+    private string ItemTemplate((ParsedChain Chain, ParsedItem Item) match)
+    {
+        var (name, level) = ResolveFuelItem(match.Chain, match.Item);
+        return $"{{{{Item|{name}|{level}}}}}";
+    }
+
+    /// <summary>
+    /// An item's wiki name and level, both through the mapping module — the four Murder Weapons are
+    /// four one-level game chains that the mapping merges into "Murder Weapon" levels 1-4, so the
+    /// raw ParsedChain/ParsedItem values would render them as four identical entries.
+    /// </summary>
+    private (string Name, int Level) ResolveFuelItem(ParsedChain chain, ParsedItem item)
+    {
+        if (string.IsNullOrEmpty(item.ItemType))
+            return (GetWikiChainName(chain), item.Level);
+
+        var name = _data.ResolveChainDisplayNameFromItemType(item.ItemType, _wikiMapping);
+        // ResolveLevel answers 0 for an item it has no level for; the parsed level is still better
+        // than emitting {{Item|X|0}}.
+        var level = _data.ResolveLevel(item.ItemType, _wikiMapping);
+        return (name, level > 0 ? level : item.Level);
+    }
+
+    /// <summary>
+    /// What a producer drops: the item alone when it is certain, item plus percentage when the
+    /// spawn rolls several — so one column answers both "what" and "how likely".
+    /// </summary>
+    private string FormatSpawnOdds(
+        Dictionary<string, double>? odds,
+        Dictionary<string, (ParsedChain Chain, ParsedItem Item)> byItemType)
+    {
+        if (odds is not { Count: > 0 }) return "{{Dash}}";
+        if (odds.Count == 1)
+        {
+            var only = odds.Keys.First();
+            return byItemType.TryGetValue(only, out var single) ? ItemTemplate(single) : only;
+        }
+        var total = odds.Values.Sum();
+        if (total <= 0) return "{{Dash}}";
+        return string.Join("<br>", odds
+            .OrderByDescending(kv => kv.Value)
+            .Select(kv =>
+            {
+                var name = byItemType.TryGetValue(kv.Key, out var m) ? ItemTemplate(m) : kv.Key;
+                return $"{name} {kv.Value / total * 100:0.##} %";
+            }));
+    }
+
     public string? GenerateDecayOddsSection(ParsedChain chain, string? hardcodedName = null)
     {
         // The targets must also be variants OF EACH OTHER, i.e. all land on ONE wiki page — that is
